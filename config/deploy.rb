@@ -12,7 +12,7 @@ set :application, "metadata"
 set :domain, 'houghton.kbs.msu.edu'
 set :user, "deploy"
 set :use_sudo, false
-set :repository, "https://oshtemo.kbs.msu.edu/repos/lter/#{application}/trunk"
+set :repository, "http://kf8a.textdriven.com/svn/lter/#{application}/trunk"
 set :rails_env, "production"
 
 set :checkout, "export" 
