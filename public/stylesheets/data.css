@@ -15,6 +15,21 @@
 	color: #FFFFFF;
 	font-size: 90%;
 }
+#branding form p {
+	display: inline;	/* to suppress the line feed */
+}
+
+#branding a {
+	color: white;
+}
+
+#branding a:link {
+	text-decoration: none;
+}
+
+#branding a:hover {
+	text-decoration: underline;
+}
 #branding h2 {
 	font-family: Arial, Helvetica, sans-serif;
 	padding-left: 1em;
