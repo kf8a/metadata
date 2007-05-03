@@ -26,6 +26,8 @@ class MeetingsController < ApplicationController
 
   def new
     @meeting = Meeting.new
+    @venues = VenueType.find(:all).collect {|x| [x.name, x.id]}
+
   end
   
   def edit

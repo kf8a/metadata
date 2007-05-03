@@ -11,6 +11,9 @@
 	<%= f.date_select :date_to %>
 </p>
 <p>
+	<%= f.select :venue_type_id, @venues %>
+</p>
+<p>
 	<label for='meeting_announcement'>Announcement</label>
 	<%= textile_editor 'meeting', :announcement, :size => '60x20'%>
 </p>
