@@ -1,3 +1,39 @@
+#topcoloredbar {
+	width:700px;
+	margin-bottom:0.3em;
+	text-align:left;
+	padding:0;
+	border-collapse: collapse;
+	border: 0;
+	background-color: #006633;
+}
+#topcoloredbar a {
+	color:#FFFFFF;
+}
+#topcoloredbar td {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #FFFFFF;
+	font-size: 90%;
+}
+#branding h2 {
+	font-family: Arial, Helvetica, sans-serif;
+	padding-left: 1em;
+	color: #FFFFFF;
+	font-size: 1em;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	font-weight: normal;
+}
+
+#topcoloredbar a:hover {
+	color:#000000;
+	text-decoration:underline;
+	background-color:#FFFFCC;
+}
+#searchform input {
+	margin-right:0.05em;
+	color:#CCCCCC;
+}
 #content h3 {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 1.2em;
