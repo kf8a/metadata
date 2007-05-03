@@ -114,8 +114,10 @@ a:hover.edit {
 #bottomlinks a {
 	color: #006633;
 }
-#copyright a {
-	color: #006633;
+#copyright {
+	font-family: Times New Roman, Times, serif;
+	font-size: 10px;
+	width: 700px;
 }
 
 /*#content  ul li {
