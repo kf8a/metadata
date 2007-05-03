@@ -1,0 +1,12 @@
+<h1>Editing weather_data</h1>
+
+<%= error_messages_for :weather_data %>
+
+<% form_for(:weather_data, :url => weather_data_path(@weather_data), :html => { :method => :put }) do |f| %>
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', weather_data_path(@weather_data) %> |
+<%= link_to 'Back', weather_datas_path %>

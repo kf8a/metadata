@@ -1,0 +1,2 @@
+module MeetingAbstractsHelper
+end

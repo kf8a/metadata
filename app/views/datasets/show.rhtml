@@ -1,0 +1,37 @@
+<h1><%= @dataset.title %></h1>
+<p>
+	<%= textilize @dataset.abstract %>
+</p>
+<ul>
+	<li>Status: <%= @dataset.status %></li>
+	<li>Date Initiated: <%= @dataset.initiated %></li>
+	<li>Date Completed: <%= @dataset.completed %></li>
+</ul>
+<h2>Tables</h2>
+<dl>
+	<% @dataset.datatables.each do |datatable| %>
+		<dt><%= link_to datatable.name, datatable_path(datatable) %> <%= datatable.title %></dt>
+		<dd><%= truncate(datatable.description,100) %></dd>
+	<% end %>
+</dl>
+<h2>Protocols</h2>
+<ul>
+	<% @dataset.methocols.each do |methocol| -%>
+	<li><%= link_to "#{methocol.name} #{methocol.version}", methocol_path(methocol) %> <%= methocol.title %></li>
+	<% end -%>
+</ul>
+<h2>Personel</h2>
+<ul>
+	<% @roles.each do |role| %>
+	<li> <%= role.name.capitalize.pluralize %>
+		<ul>
+	<% @dataset.affiliations.each do |affiliation| -%>
+	<li><%= link_to "#{affiliation.person.full_name}", person_path(affiliation.person.id) if affiliation.role = role%>
+	</li>
+	<% end -%>
+		</ul>
+	</li>
+	<% end -%>
+</ul>
+<%= link_to 'Edit', edit_dataset_path(@dataset) if logged_in?%> |
+<%= link_to 'Back', datasets_path %>

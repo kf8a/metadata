@@ -1,0 +1,28 @@
+<h1><%= @datatable.title %></h1>
+<p>
+	<%= @datatable.description %>
+</p>
+<%= link_to 'Data', @datatable.data_url %> (on a different page)
+<h3>Variates</h3>
+<table>
+	<tr>
+		<th>Variate</th>
+		<th>Description</th>
+		<th>Units</th>
+	</tr>
+	<% @datatable.variates.each do |variate| -%>
+		<tr class="<%= cycle('even','odd') -%>">
+			<td>
+				<%= variate.name %>
+			</td>
+			<td>
+				<%= variate.description %>
+			</td>
+			<td>
+				<%= variate.unit.name if variate.unit %>
+			</td>
+		</tr>
+	<% end -%>
+</table>
+<%= link_to 'Edit', edit_datatable_path(@datatable) if logged_in? %> |
+<%= link_to 'Back', dataset_path(@dataset) %>

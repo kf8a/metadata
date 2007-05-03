@@ -1,0 +1,11 @@
+<h1>New datatable</h1>
+
+<%= error_messages_for :datatable %>
+
+<% form_for(:datatable, :url => datatables_path) do |f| %>
+  <p>
+    <%= submit_tag "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', datatables_path %>

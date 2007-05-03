@@ -1,0 +1,12 @@
+<h1><%= link_to "#{@methocol.dataset.dataset}", dataset_path(@methocol.dataset) %>: <%= @methocol.title %></h1>
+<p>
+	In use from <%= @methocol.in_use_from %> to <%= @methocol.in_use_to %>
+</p>
+<p>
+	<%= textilize(@methocol.description) %>
+</p>
+<p>
+	Author: <%= @methocol.person.full_name %>
+</p>
+<%= link_to 'Edit', edit_methocol_path(@methocol) %> |
+<%= link_to 'Back', methocols_path %>

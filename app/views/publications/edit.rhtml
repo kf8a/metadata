@@ -1,0 +1,14 @@
+<h1>Editing publications</h1>
+
+<%= error_messages_for :publications %>
+
+<% form_for(:publications, :url => publication_path(@publications), :html => { :method => :put }) do |f| %>
+	<%= render :partial => 'form', :locals => {:f => f} %>
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', publication_path(@publications) %> |
+<%= link_to 'Back', publication_path %> | 
+<%= link_to 'log out', sessions_path(), :method => 'delete' %>

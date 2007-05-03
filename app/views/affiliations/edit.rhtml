@@ -1,0 +1,12 @@
+<h1>Editing affiliation</h1>
+
+<%= error_messages_for :affiliation %>
+
+<% form_for(:affiliation, :url => affiliation_path(@affiliation), :html => { :method => :put }) do |f| %>
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', affiliation_path(@affiliation) %> |
+<%= link_to 'Back', affiliations_path %>

@@ -1,0 +1,34 @@
+<ul>
+	<li><%= @person.title %> <%= @person.full_name %></li>
+<li><%= @person.organization%> <%=@person.sub_organization %></li>
+<li><%= @person.street_address %></li>
+<li><%= @person.city %> <%= @person.locale %>
+	<% if @person.postal_code %>, <%= @person.postal_code %><% end %>
+</li>
+<% if @person.phone %>
+<li>Phone: <%= @person.phone %></li>
+<% end %>
+<% if @person.fax %>
+<li>Fax: <%= @person.fax %></li>
+<% end %>
+<% if @person.email -%>
+<li>Email: <%= @person.email.gsub(/@/,' at ') %></li>
+<% end -%>
+<% if @person.url %>
+<li>Web page: <%= link_to "#{@person.url}", @person.url %></li>
+<% end %>
+
+</ul>
+
+<% if @person.datasets.size > 0 %>
+Datasets:
+<ul>
+	<% @person.datasets.each do |dataset| %>
+		<li><%= link_to "#{dataset.dataset}", dataset_path(dataset) %> <%= dataset.title %></li>
+	<% end %>
+</ul>
+<% end %>
+
+<%= link_to 'Edit', edit_person_path(@person) if logged_in? %> |
+<%= link_to 'Delete', person_path(@person), :method => 'post', :confirm => 'Are you sure?' if logged_in? %>
+<%= link_to 'Back', people_path %>

@@ -1,0 +1,22 @@
+--- 
+roles_004: 
+  name: original investigator
+  id: "5"
+roles_005: 
+  name: data manager
+  id: "6"
+roles_006: 
+  name: lead investigator
+  id: "7"
+roles_007: 
+  name: principal contact
+  id: "8"
+roles_001: 
+  name: technician
+  id: "2"
+roles_002: 
+  name: administrator
+  id: "1"
+roles_003: 
+  name: investigator
+  id: "4"

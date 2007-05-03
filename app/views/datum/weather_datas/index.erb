@@ -1,0 +1,18 @@
+<h1>Listing weather_datas</h1>
+
+<table>
+  <tr>
+  </tr>
+  
+<% for weather_data in @weather_datas %>
+  <tr>
+    <td><%= link_to 'Show', weather_data_path(weather_data) %></td>
+    <td><%= link_to 'Edit', edit_weather_data_path(weather_data) %></td>
+    <td><%= link_to 'Destroy', weather_data_path(weather_data), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New weather_data', new_weather_data_path %>

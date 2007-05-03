@@ -1,0 +1,13 @@
+<p><%= link_to  'categorical', {:action => :index}%> alphabetical</p>
+<ul class='multicolumn'>
+<% for person in @people %>
+  <li><%= link_to "#{person.full_name}", person_path(person) %>
+	<%= link_to 'Edit', edit_person_path(person), {:class => 'edit'} if logged_in? %>
+	<%= link_to_remote image_tag("trash.gif"), :url => person_path(person), :method => 'post', :confirm => 'Are you sure?' if logged_in?%>
+  </li>
+<% end %>
+</ul>
+
+<br />
+
+<%= link_to 'New person', new_person_path if logged_in?%>

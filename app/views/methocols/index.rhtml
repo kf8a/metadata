@@ -1,0 +1,15 @@
+<% @themes.each do |theme| -%>
+	<h2><%= theme.title %></h2>
+		<ul>
+		<% theme.datasets.each do |dataset| -%>
+		<% next unless dataset.on_web %>
+		<% dataset.methocols.each do |methocol| -%>
+		<li><%= link_to "#{methocol.name}", methocol_path(dataset) %> <%= methocol.title %> <%= link_to  'Edit', edit_dataset_path(dataset), {:class => 'edit'} if logged_in? %></li>
+		<% end -%>
+		<% end -%>
+		</ul>
+<% end -%>
+
+<br />
+
+<%= link_to 'New methocol', new_methocol_path %>

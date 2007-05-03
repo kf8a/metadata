@@ -1,0 +1,10 @@
+<h1><%= @venue.name.capitalize %> Meetings</h1>
+<p>The KBS LTER Program hosts annual all scientist meetings at which LTER investigators present on-going research and discuss research findings.  The next meeting is scheduled for May 14, 2007 at KBS.  Please register for the meeting <a href="http://lter.kbs.msu.edu/meetings/2007ASM">here.</a></p>
+<p>Abstracts from past meetings are available below:</p>
+<ul>
+<% @meetings.each do |meeting| %>
+	<li><%= link_to "#{meeting.title}", meeting_path(meeting) %> <%= meeting.date.to_s(:long) %> <%= link_to 'edit', edit_meeting_path(meeting), {:class => 'edit'} if logged_in? %></li>
+<% end %>
+</ul>
+
+<%= link_to 'new meeting', new_meeting_path() if logged_in? %>

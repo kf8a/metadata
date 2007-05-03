@@ -1,0 +1,217 @@
+/* @override http://houghton.kbs.msu.edu/css/kbs.css */
+
+/* @override http://houghton.kbs.msu.edu/css/kbs.css */
+
+#content {
+	width: 550px;		/* content width */
+	float: right;		/* content on the right */
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: .8em;
+	padding-left: 15px;
+}
+
+#content ul {
+	list-style: none;
+	margin-left: 0;
+	padding-left: 0;
+}
+#wrapper {
+	width: 700px;
+}
+
+#footer {
+	clear: both;
+	width: 700px;
+}
+
+img {
+	border: none;
+}
+
+#topcoloredbar {
+	color: #FFFFFF;
+	background-color: #063;
+	width:700px;
+	padding-top: .3em;
+	padding-bottom: .5em;
+}
+
+#topcoloredbar h2 {
+	font-size: 1em;
+	font-weight: normal;
+	padding-left: 1em;
+	display: inline;
+	line-height: 1.5em;
+}
+
+.citation {
+	text-indent: -2em;
+	padding-left: 4em;
+}
+
+#branding img {
+}
+
+#lter_kbs {
+	margin: 0;
+	padding: 0;
+	height: 40px;
+	text-indent: -5000px;
+	background: url(/images/common/title.jpg) no-repeat;
+}
+
+#search form {
+	display: inline;
+	padding-left: 1em;
+}
+
+#search {
+	float: right;
+	margin-right: 5px;
+}
+
+#branding a {
+	color: white;
+}
+
+a:link {
+	color:blue;
+	text-decoration: none;
+}
+
+a:link:hover {
+	text-decoration: underline;
+	background-color: white;;
+}
+
+#branding a:hover {
+	background-color: #c9e5ff;
+}
+
+#search a:hover {
+	background-color: #063
+}
+
+#msu_logo {
+	margin-top: 6px;
+	float: right;
+}
+
+#gallery {
+	height: 176px;	/* make the gallery a little taller to eliminate the white line before the menu */
+}
+
+#navigation {
+	width: 132px;
+	float: left;
+	font: 0.75em Arial, Helvetica, Geneva, sans-serif;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+#navigation b{
+}
+.rtop, .rbottom{display:block; 
+	background: #FFFFF none repeat}
+.rtop *, .rbottom *{display:block;height: 1px;
+    overflow: hidden;
+	background-color: #ccc;
+}
+.r1{margin: 0 5px;
+	background: #ccc;}
+.r2{margin: 0 3px;
+	background: #ccc;}
+.r3{margin: 0 2px;
+	background: #ccc;}
+.r4 {
+	margin: 0 1px; 
+	height: 2px;
+	background: #ccc;
+}
+
+ul.makeMenu, ul.makeMenu ul {
+	/* put rounded bottoms on the menu */
+	/*-moz-border-radius-bottomleft:10px;
+	-moz-border-radius-bottomright:10px;*/
+	
+
+  width: 132px;
+  height: 20em;			/* make the main menu a little taller so the child menus stay on the page */
+  background-color: #ccc;     /* a bg-color MUST be included for IE to work properly! */
+  padding-left: 0;           /* stops the usual indent from ul */
+  margin: 0;
+  cursor: default;             /* gives an arrow cursor */
+  margin-left: 0px;
+  margin-top: 0px;
+}
+ul.makeMenu li {
+	list-style-type: none;       /* removes the bullet points */
+	margin: 0px;                 /* Opera 7 puts large spacings between li elements */
+	position: relative;          /* makes the menu blocks be positioned relative to their parent menu item */
+	padding: 5px;
+	text-align: center;			/* center the text */
+	font-weight: normal;
+	color: #006633;
+}
+ul.makeMenu li > ul {          /* using the > selector prevents many lesser browsers (and IE - see below) hiding child ULs */
+  display: none;               /* hides child menu blocks - one of the most important declarations */
+  position: absolute;     /* make child blocks hover without leaving space for them */
+  top: 2px;               /* position slightly lower than the parent menu item */
+  left: 130px;	/* move it right almost the width of the menu */
+  height: auto;    /* don't make the child menus taller than necessary */
+  -moz-border-radius-topleft:10px;   /* round the top corners of the child menus */
+  -moz-border-radius-topright:10px;
+  /* put rounded bottoms on the menu */
+	-moz-border-radius-bottomleft:10px;
+	-moz-border-radius-bottomright:10px;
+	background-color: #e1e1e1; /* make the child menus a lighter color */
+	border-style: solid;
+	border-color: #a3a3a3;
+
+}
+ul.makeMenu li:hover, ul.makeMenu li.CSStoHighlight {
+  background-color: #ffa;      /* gives the active menu a yellow background */
+  color: #000;                 /* makes the active menu item text black */ 
+}
+ul.makeMenu ul.CSStoShow {     /* must not be combined with the next rule or IE gets confused */
+  display: block;              /* specially to go with the className changes in the behaviour file */
+}
+ul.makeMenu li:hover > ul {    /* one of the most important declarations - the browser must detect hovering over arbitrary elements
+                                  the > targets only the child ul, not any child uls of that child ul */
+  display: block;              /* makes the child block visible - one of the most important declarations */
+}
+/* and some link styles */
+ul.makeMenu li a { color: #063; display: block; width: 95%; text-decoration: none;
+	
+}
+ul.makeMenu li a:hover, ul.makeMenu li a.CSStoHighLink { color: #000; }
+ul.makeMenu li:hover > a { color: #000; } /* supports links in branch headings - should not be display: block; */
+
+#breadcrumbs {
+	width="700px"
+	}
+#searchform input {
+	color:#CCCCCC;
+	}
+#content h3 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #006633;
+}
+
+#content h1 {
+		font-family: Arial, Helvetica, sans-serif;
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #006633;
+}
+
+.even {
+	background-color: #f8ffd6;
+}
+p {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+	margin-top: 5px;
+}

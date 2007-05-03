@@ -1,0 +1,11 @@
+<h1>Unit: <%= @unit.name %></h1>
+
+<dl>
+	<dt>Name:</dt><dd><%= @unit.name %></dd>
+	<dt>Description:</dt><dd><%= @unit.description %></dd>
+	<% unless @unit.in_eml -%>
+		<dt>Definition:</dt><dd><%= @unit.definition %></dd>
+	<% end %>
+</dl>
+
+<%= link_to 'Back', units_path() %>

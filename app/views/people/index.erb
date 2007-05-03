@@ -1,0 +1,18 @@
+<p>categorical <%= link_to 'alphabetical', {:action => :alphabetical} %></p>
+
+	<% @roles.each do |role| -%>
+	<h2><%= role.name %></h2>
+	<% role.people.sort! {|a,b| a.sur_name <=> b.sur_name } %>
+	<ul class='multicolumn'>
+	<% role.people.each do |person| -%>
+  	<li><%= link_to "#{person.full_name}", person_path(person) %>
+			<%= link_to 'Edit', edit_person_path(person), {:class => 'edit'} if logged_in? %>
+			<%= link_to_remote image_tag("trash.gif"), :url => person_path(person), :method => 'delete', :confirm => 'Are you sure?' if logged_in?%>
+  	</li>
+	<% end %>
+	</ul>
+	<% end %>
+
+<br />
+
+<%= link_to 'New person', new_person_path if logged_in?%>

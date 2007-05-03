@@ -1,0 +1,14 @@
+<h1>Edit units</h1>
+
+<%= error_messages_for :unit %>
+
+<% form_for(:unit, :url => unit_path(@unit), :html => { :method => :put }) do |f| %>
+	<%= render :partial => 'form', :locals => {:f => f} %>
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', unit_path(@unit) %> |
+<%= link_to 'Back', unit_path %> | 
+<%= link_to 'log out', sessions_path(), :method => 'delete' %>

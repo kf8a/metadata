@@ -1,0 +1,25 @@
+<h1>Publications <%= @decoration %>: <%=h @pub_type%> </h1>
+<% year = 0 -%>
+<% for publication in @publications %>
+	<% if year != publication.year -%>
+		<% year = publication.year -%>
+		<% unless @alphabetical -%>
+			<p class='years'><%= year %></p>
+		<% end  -%>
+	<% end  -%>
+	<div class='citation'>
+			<%= textilize(publication.citation) %>
+			<% if  publication.abstract  -%>
+				<a href="<%= url_for publication_path(publication) %>">
+					abstract&nbsp;&hellip;</a>
+			<% end -%>
+			<%= link_to 'edit', edit_publication_path(publication), {:class=>'edit'} if logged_in? %>
+	</div>
+<% end %>
+<p><% if logged_in? -%>
+	<%= link_to 'logout' %>
+	<% else -%>
+	<%= link_to 'login', new_sessions_path %>
+	<% end -%>
+</p>
+

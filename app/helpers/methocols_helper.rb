@@ -1,0 +1,2 @@
+module MethocolsHelper
+end

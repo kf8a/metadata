@@ -1,0 +1,5 @@
+
+== Feb 5, 2007
+
+* Enhanced all methods to take an array instead of requiring you to use *array
+* bar_graph() normalizes the data when rendering to make it usable for many values.

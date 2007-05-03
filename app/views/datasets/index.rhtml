@@ -1,0 +1,13 @@
+<% @themes.each do |theme| -%>
+	<h2><%= theme.title %></h2>
+		<ul>
+		<% theme.datasets.each do |dataset| -%>
+		<% next unless dataset.on_web %>
+		<li><%= link_to dataset.dataset, dataset_path(dataset) %> <%= truncate(dataset.title,47) %> <%= link_to 'eml', formatted_dataset_path(dataset, :eml) %> <%= link_to  'Edit', edit_dataset_path(dataset), {:class => 'edit'} if logged_in? %></li>
+		<% end -%>
+		</ul>
+<% end -%>
+
+		
+<%= link_to 'New dataset', new_dataset_path %> | 
+<%= link_to 'login', new_sessions_path %>

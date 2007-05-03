@@ -1,0 +1,8 @@
+<p class='citation'>
+	<%= @publication.citation %>
+</p>
+<div class='abstract'>
+	<%= textilize(@publication.abstract) %>
+</div>
+<%= link_to 'Edit', edit_publication_path(@publication) if logged_in? %> | 
+<%= link_to 'Back', publications_path %>

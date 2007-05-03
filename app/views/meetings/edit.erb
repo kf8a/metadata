@@ -1,0 +1,13 @@
+<h1>Edit Meeting</h1>
+
+<%= error_messages_for :meeting %>
+
+<% form_for(:meeting, :url => meeting_path(@meeting)) do |f| %>
+	<%= render :partial=>"form" , :locals=>{:f =>  f}%>
+  <p>
+    <%= submit_tag "update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', meeting_path(@meeting) %>
+<%= link_to 'Back', meetings_path %>

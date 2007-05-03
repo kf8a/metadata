@@ -1,0 +1,9 @@
+<p>
+	<label for='publication_citation'>Citation</label>
+	<%= f.text_area :citation , :size => '50x5'%>
+</p>
+<p>
+	<label for='publication_abstract'>Abstract</label>
+	<%= textile_editor 'publications', :abstract, :size => '60x20'%>
+</p>
+<%= textile_editor_initialize -%>

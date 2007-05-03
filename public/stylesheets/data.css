@@ -1,0 +1,88 @@
+#content h3 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #006633;
+}
+
+#content h1 {
+		font-family: Arial, Helvetica, sans-serif;
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #006633;
+}
+
+#content h2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+	font-weight: bold;
+	color: #006633;
+	clear: both;
+	padding-top: 1em;
+}
+
+.even {
+	background-color: #f8ffd6;
+}
+
+.citation p {
+	display: inline;
+}
+
+.citation {
+	margin-bottom: 1en;
+}
+
+label {
+	display: block;
+}
+
+#content ul.multicolumn {
+	-moz-column-width: 12em;
+}
+
+#content .twocolumn {
+	-moz-column-width: 20em;
+}
+
+#content .edit {
+	font-size: 90%;
+}
+a:link.edit{
+	color: #7f7f7f;
+}
+
+a:visited.edit {
+	color: #bfbfbf;
+	text-decoration: none;
+}
+a:hover.edit {
+	text-decoration: underline;
+}
+
+#bottomlinks a:hover {
+	font-family: Arial, Helvetica, sans-serif;
+	text-decoration: underline;
+	background-color: #CCFFFF;
+}
+
+#bottomlinks {
+	margin-top:0em;
+	font-family:sans-serif;
+	font-size: 80%;
+	border-top: 1px solid green;
+	border-bottom: 1px solid green;
+	text-align: center;
+}
+#bottomlinks a {
+	color: #006633;
+}
+#copyright a {
+	color: #006633;
+}
+
+/*#content  ul li {
+	float: left;
+	width: 10em;
+}
+*/

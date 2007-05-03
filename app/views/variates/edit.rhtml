@@ -1,0 +1,12 @@
+<h1>Editing variate</h1>
+
+<%= error_messages_for :variate %>
+
+<% form_for(:variate, :url => variate_path(@variate), :html => { :method => :put }) do |f| %>
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', variate_path(@variate) %> |
+<%= link_to 'Back', variates_path %>
