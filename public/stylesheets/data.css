@@ -1,26 +1,12 @@
-#topcoloredbar {
-	width:700px;
-	margin-bottom:0.3em;
-	text-align:left;
-	padding:0;
-	border-collapse: collapse;
-	border: 0;
-	background-color: #006633;
-}
-#topcoloredbar a {
-	color:#FFFFFF;
-}
-#topcoloredbar td {
-	font-family: Arial, Helvetica, sans-serif;
-	color: #FFFFFF;
-	font-size: 90%;
-}
+
 #branding form p {
 	display: inline;	/* to suppress the line feed */
+	width: 167px;
 }
 
 #branding a {
 	color: white;
+	text-decoration: none;
 }
 
 #branding a:link {

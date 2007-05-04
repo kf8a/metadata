@@ -22,15 +22,19 @@
 					<a href="/dynamic/people">People</a>
 
 					<form action="http://www.google.com/u/ltersearch" method='get' id="searchform">
-						<input type='text' name='q' maxlength='255' size='15' value="Search KBS LTER" onfocus="if(this.value==defaultValue) this.value=''" onblur="if(this.value=='') this.value=defaultValue" />
+						<input type='text' name='q' maxlength='255' size='20' value="Search KBS LTER" onfocus="if(this.value==defaultValue) this.value=''" onblur="if(this.value=='') this.value=defaultValue" />
 					</form>
 				</div>
-				<h2>Long-term Ecological Research in Row Crop Agriculture</h2>
+				<h2><a href='/'>The KBS LTER Site</a></h2>
 			</div>
 
 		</div>
 		<div id='content'>
-			<p style="color: green"><%= flash[:notice] %></p>		
+			<p style="color: green"><%= flash[:notice] %></p>
+			<ul id=crumbs>
+				<li><a href='/'>Home</a> > </li>
+				<li><%= controller.controller_name.humanize %></li>
+			</ul>
 			<%= yield  %>
 		</div>
 		<div id='navigation'>
