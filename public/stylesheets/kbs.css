@@ -67,6 +67,13 @@ img {
 #branding img {
 }
 
+#branding h1 {
+	color:#006633;
+	font-family:Verdana,Arial,Helvetica,sans-serif;
+	font-size:30px;
+	font-weight: normal;
+}
+
 #lter_kbs {
 	margin: 0;
 	padding: 0;
