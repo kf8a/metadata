@@ -32,6 +32,7 @@ class MeetingsController < ApplicationController
   
   def edit
     @meeting = Meeting.find(params[:id])
+    @venues = VenueType.find(:all).collect {|x| [x.name, x.id]}
   end
   
   def create
