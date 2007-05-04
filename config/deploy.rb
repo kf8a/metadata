@@ -58,10 +58,10 @@ set :deploy_to,  "/var/u/apps/#{application}"
 # narrow the set of servers to a subset of a role by specifying options, which
 # must match the options given for the servers to select (like :primary => true)
 
-desc "Run cleanup after deploy"
-task :after_deploy do
-  cleanup
-end
+# desc "Run cleanup after deploy"
+# task :after_deploy do
+#   cleanup
+# end
 
 desc <<DESC
 An imaginary backup task. (Execute the 'show_tasks' task to display all

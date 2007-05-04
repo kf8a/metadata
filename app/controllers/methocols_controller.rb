@@ -1,4 +1,6 @@
 class MethocolsController < ApplicationController
+  
+  before_filter :set_title
   # GET /methocols
   # GET /methocols.xml
   def index
@@ -76,5 +78,10 @@ class MethocolsController < ApplicationController
       format.html { redirect_to methocols_url }
       format.xml  { head :ok }
     end
+  end
+  
+  private
+  def set_title
+    @title = 'Protocols'
   end
 end

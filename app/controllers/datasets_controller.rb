@@ -1,6 +1,7 @@
 
 class DatasetsController < ApplicationController
       
+  before_filter :set_title
   # POST /dataset
   def upload
     file = params[:file]
@@ -85,5 +86,10 @@ class DatasetsController < ApplicationController
       format.html { redirect_to datasets_url }
       format.xml  { head :ok }
     end
+  end
+  
+  private
+  def set_title
+    @title  = 'LTER Datasets'
   end
 end

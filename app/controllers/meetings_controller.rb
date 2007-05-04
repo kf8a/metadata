@@ -6,7 +6,7 @@ class MeetingsController < ApplicationController
     
     @venue = VenueType.find(venue)
     @meetings = @venue.meetings
-    
+    @title = @venue.name.humanize + "  Meetings"
     respond_to do |format|
       format.html { render :template => 'meetings/index'}
       format.xml { render :xml => @meetings.to_xml}
