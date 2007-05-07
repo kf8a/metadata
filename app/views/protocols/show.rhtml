@@ -1,6 +1,7 @@
 <h1><%= link_to "#{@protocol.dataset.dataset}", dataset_path(@protocol.dataset) %>: <%= @protocol.title %></h1>
 <p>
-	In use from <%= @protocol.in_use_from %> to <%= @protocol.in_use_to %>
+	In use from <%= @protocol.in_use_from.nil? ? 'sometime' : @protocol.in_use_from %> 
+	<%= " to " unless @protocol.in_use_to.nil? %><%= @protocol.in_use_to %>
 </p>
 <p>
 	<%= textilize(@protocol.description) %>
