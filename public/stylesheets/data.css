@@ -1,4 +1,6 @@
-
+.bulleted {
+	list-style-type: disc;
+}
 #branding form p {
 	display: inline;	/* to suppress the line feed */
 	width: 167px;
@@ -105,7 +107,7 @@ a:hover.edit {
 }
 
 #bottomlinks {
-	margin-top:0em;
+	margin-top:.5em;
 	font-family:sans-serif;
 	font-size: 80%;
 	border-top: 1px solid green;
