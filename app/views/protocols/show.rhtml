@@ -4,10 +4,13 @@
 	<%= " to " unless @protocol.in_use_to.nil? %><%= @protocol.in_use_to %>
 </p>
 <p>
-	<%= textilize(@protocol.description) %>
+	<%= textilize(@protocol.description) if @protocol.description %>
 </p>
 <p>
-	<%= textilize(@protocol.body) %>
+	<%= textilize(@protocol.abstract) if @protocol.abstract%>
+</p>
+<p>
+	<%= textilize(@protocol.body) if @protocol.body %>
 </p>
 <p>
 	Author: <%= @protocol.person.full_name %>

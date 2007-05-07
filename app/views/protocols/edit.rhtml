@@ -11,11 +11,14 @@
 		<label for='protocol_version'>version</label>
 		<%= f.text_field :version %>
 		<label for='protocol_in_use_from'>In use from</label>
-		<%= f.date_select :in_use_from, :start_year => 1982 %>
+		<%= f.date_select :in_use_from, :start_year => 1982, :include_blank=>true %>
 		<label for='protocol_in_use_to'>to</label>
 		<%= f.date_select :in_use_to , :include_blank=>true%>
 		<label for='protocol_description'>Description</label>
 		<%= f.text_area :description, :size=>'60x10' %>
+		<label for='protocol_abstract'>Abstract</label>
+		<%= f.text_area :abstract, :size=>'60x10' %>
+		
 		</p>
 		<p>
 		<label for="protocol_body">Body</label>
