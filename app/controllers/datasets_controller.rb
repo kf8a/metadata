@@ -23,6 +23,7 @@ class DatasetsController < ApplicationController
   # GET /dataset/1.eml
   def show
     @dataset = Dataset.find(params[:id])
+    @title = @dataset.title
     @roles = @dataset.roles
 
     respond_to do |format|

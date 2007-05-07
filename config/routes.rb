@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'people/alphabetical', :controller => 'people', :action => 'alphabetical', :requirements => { :method => :get }
   map.resources :people
 
-  map.resources :methocols
+  map.resources :protocols
 
   map.resources :datasets
 

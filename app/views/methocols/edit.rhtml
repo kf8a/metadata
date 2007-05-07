@@ -1,37 +1,37 @@
-<h1>Editing methocol</h1>
+<h1>Editing protocol</h1>
 
-<%= error_messages_for :methocol %>
+<%= error_messages_for :protocol %>
 
-<% form_for(:methocol, :url => methocol_path(@methocol), :html => { :method => :put }) do |f| %>
+<% form_for(:protocol, :url => protocol_path(@protocol), :html => { :method => :put }) do |f| %>
 	<p>
-		<label for='methocol_name'>Name</label>
+		<label for='protocol_name'>Name</label>
 		<%= f.text_field :name %>
-		<label for='methocol_title'>Title</label>
+		<label for='protocol_title'>Title</label>
 		<%= f.text_field :title %>
-		<label for='methocol_version'>version</label>
+		<label for='protocol_version'>version</label>
 		<%= f.text_field :version %>
-		<label for='methocol_in_use_from'>In use from</label>
+		<label for='protocol_in_use_from'>In use from</label>
 		<%= f.date_select :in_use_from %>
-		<label for='methocol_in_use_to'>to</label>
+		<label for='protocol_in_use_to'>to</label>
 		<%= f.date_select :in_use_to %>
-		<label for='methocol_description'>Description</label>
+		<label for='protocol_description'>Description</label>
 		<%= f.text_area :description %>
 		</p>
 		<p>
-		<label for="methocol_body">Body</label>
+		<label for="protocol_body">Body</label>
 		<%= f.text_area :body %>
 		</p>
 		<p>
-		<label for='methocol_person_id'>Author</label>
+		<label for='protocol_person_id'>Author</label>
 		<% @people = Person.find(:all).map {|x| [x.full_name, x.id]} %>
 		<%= f.select :person_id, @people  %>
 	</p>
 	<p>
-		<label for='methocol_change_summary'>Change summary</label>
+		<label for='protocol_change_summary'>Change summary</label>
 		<%= f.text_area :change_summary %>
 	</p>
 	<p>
-		<label for='methocol_dataset'>Dataset</label>
+		<label for='protocol_dataset'>Dataset</label>
 		<% @datasets = Dataset.find(:all).map {|x| [x.dataset, x.id]} %>
 		<%= f.select :dataset_id, @datasets %>
 	</p>
@@ -40,5 +40,5 @@
   </p>
 <% end %>
 
-<%= link_to 'Show', methocol_path(@methocol) %> |
-<%= link_to 'Back', methocols_path %>
+<%= link_to 'Show', protocol_path(@protocol) %> |
+<%= link_to 'Back', protocols_path %>

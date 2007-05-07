@@ -1,11 +1,11 @@
 require File.dirname(__FILE__) + '/../test_helper'
-require 'methocols_controller'
+require 'protocols_controller'
 
 # Re-raise errors caught by the controller.
 class MethocolsController; def rescue_action(e) raise e end; end
 
 class MethocolsControllerTest < Test::Unit::TestCase
-  fixtures :methocols
+  fixtures :protocols
 
   def setup
     @controller = MethocolsController.new
@@ -16,7 +16,7 @@ class MethocolsControllerTest < Test::Unit::TestCase
   def test_should_get_index
     get :index
     assert_response :success
-    assert assigns(:methocols)
+    assert assigns(:protocols)
   end
 
   def test_should_get_new
@@ -24,15 +24,15 @@ class MethocolsControllerTest < Test::Unit::TestCase
     assert_response :success
   end
   
-  def test_should_create_methocol
+  def test_should_create_protocol
     old_count = Methocol.count
-    post :create, :methocol => { }
+    post :create, :protocol => { }
     assert_equal old_count+1, Methocol.count
     
-    assert_redirected_to methocol_path(assigns(:methocol))
+    assert_redirected_to protocol_path(assigns(:protocol))
   end
 
-  def test_should_show_methocol
+  def test_should_show_protocol
     get :show, :id => 1
     assert_response :success
   end
@@ -42,16 +42,16 @@ class MethocolsControllerTest < Test::Unit::TestCase
     assert_response :success
   end
   
-  def test_should_update_methocol
-    put :update, :id => 1, :methocol => { }
-    assert_redirected_to methocol_path(assigns(:methocol))
+  def test_should_update_protocol
+    put :update, :id => 1, :protocol => { }
+    assert_redirected_to protocol_path(assigns(:protocol))
   end
   
-  def test_should_destroy_methocol
+  def test_should_destroy_protocol
     old_count = Methocol.count
     delete :destroy, :id => 1
     assert_equal old_count-1, Methocol.count
     
-    assert_redirected_to methocols_path
+    assert_redirected_to protocols_path
   end
 end

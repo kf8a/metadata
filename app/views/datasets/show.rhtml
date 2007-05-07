@@ -16,8 +16,8 @@
 </dl>
 <h2>Protocols</h2>
 <ul>
-	<% @dataset.methocols.each do |methocol| -%>
-	<li><%= link_to "#{methocol.name} #{methocol.version}", methocol_path(methocol) %> <%= methocol.title %></li>
+	<% @dataset.protocols.each do |protocol| -%>
+	<li><%= link_to "#{protocol.name} #{protocol.version}", protocol_path(protocol) %> <%= protocol.title %></li>
 	<% end -%>
 </ul>
 <h2>Personel</h2>

@@ -3,8 +3,8 @@
 		<ul>
 		<% theme.datasets.each do |dataset| -%>
 		<% next unless dataset.on_web %>
-		<% dataset.methocols.each do |methocol| -%>
-		<li><%= link_to "#{methocol.name}", methocol_path(dataset) %> <%= methocol.title %> <%= link_to  'Edit', edit_dataset_path(dataset), {:class => 'edit'} if logged_in? %></li>
+		<% dataset.protocols.each do |protocol| -%>
+		<li><%= link_to "#{protocol.name}", protocol_path(protocol) %> <%= protocol.title %> <%= link_to  'Edit', edit_dataset_path(dataset), {:class => 'edit'} if logged_in? %></li>
 		<% end -%>
 		<% end -%>
 		</ul>
@@ -12,4 +12,4 @@
 
 <br />
 
-<%= link_to 'New methocol', new_methocol_path %>
+<%= link_to 'New protocol', new_protocol_path %>

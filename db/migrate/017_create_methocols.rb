@@ -1,6 +1,6 @@
 class CreateMethocols < ActiveRecord::Migration
   def self.up
-    create_table :methocols do |t|
+    create_table :protocols do |t|
       t.column :name, :string
       t.column :title, :string
       t.column :version, :int
@@ -18,6 +18,6 @@ class CreateMethocols < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :methocols
+    drop_table :protocols
   end
 end

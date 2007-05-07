@@ -1,81 +1,81 @@
 class MethocolsController < ApplicationController
   
   before_filter :set_title
-  # GET /methocols
-  # GET /methocols.xml
+  # GET /protocols
+  # GET /protocols.xml
   def index
     @themes = Theme.find(:all)
-    @methocols = Methocol.find(:all)
+    @protocols = Methocol.find(:all)
 
     respond_to do |format|
       format.html # index.rhtml
-      format.xml  { render :xml => @methocols.to_xml }
+      format.xml  { render :xml => @protocols.to_xml }
     end
   end
 
-  # GET /methocols/1
-  # GET /methocols/1.xml
+  # GET /protocols/1
+  # GET /protocols/1.xml
   def show
-    @methocol = Methocol.find(params[:id])
+    @protocol = Methocol.find(params[:id])
 
     respond_to do |format|
       format.html # show.rhtml
-      format.xml  { render :xml => @methocol.to_xml }
+      format.xml  { render :xml => @protocol.to_xml }
     end
   end
 
-  # GET /methocols/new
+  # GET /protocols/new
   def new
-    @methocol = Methocol.new
+    @protocol = Methocol.new
   end
 
-  # GET /methocols/1;edit
+  # GET /protocols/1;edit
   def edit
-    @methocol = Methocol.find(params[:id])
+    @protocol = Methocol.find(params[:id])
   end
 
-  # POST /methocols
-  # POST /methocols.xml
+  # POST /protocols
+  # POST /protocols.xml
   def create
-    @methocol = Methocol.new(params[:methocol])
+    @protocol = Methocol.new(params[:protocol])
 
     respond_to do |format|
-      if @methocol.save
+      if @protocol.save
         flash[:notice] = 'Methocol was successfully created.'
-        format.html { redirect_to methocol_url(@methocol) }
-        format.xml  { head :created, :location => methocol_url(@methocol) }
+        format.html { redirect_to protocol_url(@protocol) }
+        format.xml  { head :created, :location => protocol_url(@protocol) }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @methocol.errors.to_xml }
+        format.xml  { render :xml => @protocol.errors.to_xml }
       end
     end
   end
 
-  # PUT /methocols/1
-  # PUT /methocols/1.xml
+  # PUT /protocols/1
+  # PUT /protocols/1.xml
   def update
-    @methocol = Methocol.find(params[:id])
+    @protocol = Methocol.find(params[:id])
 
     respond_to do |format|
-      if @methocol.update_attributes(params[:methocol])
+      if @protocol.update_attributes(params[:protocol])
         flash[:notice] = 'Methocol was successfully updated.'
-        format.html { redirect_to methocol_url(@methocol) }
+        format.html { redirect_to protocol_url(@protocol) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @methocol.errors.to_xml }
+        format.xml  { render :xml => @protocol.errors.to_xml }
       end
     end
   end
 
-  # DELETE /methocols/1
-  # DELETE /methocols/1.xml
+  # DELETE /protocols/1
+  # DELETE /protocols/1.xml
   def destroy
-    @methocol = Methocol.find(params[:id])
-    @methocol.destroy
+    @protocol = Methocol.find(params[:id])
+    @protocol.destroy
 
     respond_to do |format|
-      format.html { redirect_to methocols_url }
+      format.html { redirect_to protocols_url }
       format.xml  { head :ok }
     end
   end

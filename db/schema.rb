@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(:version => 28) do
     t.column "date_to",       :date
   end
 
-  create_table "methocols", :force => true do |t|
+  create_table "protocols", :force => true do |t|
     t.column "name",           :string
     t.column "title",          :string
     t.column "version",        :integer
