@@ -1,11 +1,11 @@
-class MethocolsController < ApplicationController
+class ProtocolsController < ApplicationController
   
   before_filter :set_title
   # GET /protocols
   # GET /protocols.xml
   def index
     @themes = Theme.find(:all)
-    @protocols = Methocol.find(:all)
+    @protocols = Protocol.find(:all)
 
     respond_to do |format|
       format.html # index.rhtml
@@ -16,7 +16,7 @@ class MethocolsController < ApplicationController
   # GET /protocols/1
   # GET /protocols/1.xml
   def show
-    @protocol = Methocol.find(params[:id])
+    @protocol = Protocol.find(params[:id])
 
     respond_to do |format|
       format.html # show.rhtml
@@ -26,22 +26,22 @@ class MethocolsController < ApplicationController
 
   # GET /protocols/new
   def new
-    @protocol = Methocol.new
+    @protocol = Protocol.new
   end
 
   # GET /protocols/1;edit
   def edit
-    @protocol = Methocol.find(params[:id])
+    @protocol = Protocol.find(params[:id])
   end
 
   # POST /protocols
   # POST /protocols.xml
   def create
-    @protocol = Methocol.new(params[:protocol])
+    @protocol = Protocol.new(params[:protocol])
 
     respond_to do |format|
       if @protocol.save
-        flash[:notice] = 'Methocol was successfully created.'
+        flash[:notice] = 'Protocol was successfully created.'
         format.html { redirect_to protocol_url(@protocol) }
         format.xml  { head :created, :location => protocol_url(@protocol) }
       else
@@ -54,11 +54,11 @@ class MethocolsController < ApplicationController
   # PUT /protocols/1
   # PUT /protocols/1.xml
   def update
-    @protocol = Methocol.find(params[:id])
+    @protocol = Protocol.find(params[:id])
 
     respond_to do |format|
       if @protocol.update_attributes(params[:protocol])
-        flash[:notice] = 'Methocol was successfully updated.'
+        flash[:notice] = 'Protocol was successfully updated.'
         format.html { redirect_to protocol_url(@protocol) }
         format.xml  { head :ok }
       else
@@ -71,7 +71,7 @@ class MethocolsController < ApplicationController
   # DELETE /protocols/1
   # DELETE /protocols/1.xml
   def destroy
-    @protocol = Methocol.find(params[:id])
+    @protocol = Protocol.find(params[:id])
     @protocol.destroy
 
     respond_to do |format|
