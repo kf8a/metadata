@@ -7,6 +7,9 @@
 	<%= textilize(@protocol.description) %>
 </p>
 <p>
+	<%= textilize(@protocol.body) %>
+</p>
+<p>
 	Author: <%= @protocol.person.full_name %>
 </p>
 <%= link_to 'Edit', edit_protocol_path(@protocol) %> |
