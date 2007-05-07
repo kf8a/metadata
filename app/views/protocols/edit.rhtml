@@ -15,11 +15,11 @@
 		<label for='protocol_in_use_to'>to</label>
 		<%= f.date_select :in_use_to %>
 		<label for='protocol_description'>Description</label>
-		<%= f.text_area :description %>
+		<%= f.text_area :description, :size=>'60x10' %>
 		</p>
 		<p>
 		<label for="protocol_body">Body</label>
-		<%= f.text_area :body %>
+		<%= f.text_area :body, :size=>'60x40'%>
 		</p>
 		<p>
 		<label for='protocol_person_id'>Author</label>
