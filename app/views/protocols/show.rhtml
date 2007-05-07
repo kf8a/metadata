@@ -6,9 +6,11 @@
 <p>
 	<%= textilize(@protocol.description) if @protocol.description %>
 </p>
+<h2>Abstract</h2>
 <p>
 	<%= textilize(@protocol.abstract) if @protocol.abstract%>
 </p>
+<h2>Protocol</h2>
 <p>
 	<%= textilize(@protocol.body) if @protocol.body %>
 </p>
