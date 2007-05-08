@@ -95,4 +95,10 @@ class PublicationsController < ApplicationController
         format.xml  { head :ok }
       end
     end
+    
+    private
+    
+    def set_title
+      @title = 'Publications'
+    end
   end
