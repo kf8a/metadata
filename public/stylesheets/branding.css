@@ -1,0 +1,116 @@
+#branding form p {
+	display: inline;	/* to suppress the line feed */
+	width: 167px;
+}
+
+#branding a {
+	color: white;
+	text-decoration: none;
+}
+
+#branding a:link {
+	text-decoration: none;
+}
+
+#branding a:hover {
+	text-decoration: underline;
+}
+
+#branding h2 {
+	font-family: Arial, Helvetica, sans-serif;
+	padding-left: 1em;
+	color: #FFFFFF;
+	font-size: 1em;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	font-weight: normal;
+}
+
+#topcoloredbar a:hover {
+	color:#000000;
+	text-decoration:underline;
+	background-color:#FFFFCC;
+}
+
+#branding {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#branding img {
+}
+
+#branding h1 {
+	color:#006633;
+	font-family:Verdana,Arial,Helvetica,sans-serif;
+	font-size:30px;
+	font-weight: normal;
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+#lter_kbs {
+	margin: 0;
+	padding: 0;
+	height: 40px;
+	text-indent: -5000px;
+	background: url(/images/common/title.jpg) no-repeat;
+}
+
+#search form {
+	display: inline;
+	padding-left: 1em;
+}
+
+#search {
+	float: right;
+	margin-right: 5px;
+	height:20px;
+}
+
+#branding a {
+	color: white;
+}
+
+#branding a:hover {
+	background-color: #c9e5ff;
+}
+
+#search a:hover {
+	background-color: #063
+}
+
+#msu_logo {
+	margin-top: 6px;
+	float: right;
+}
+
+#gallery {
+	height: 176px;	/* make the gallery a little taller to eliminate the white line before the menu */
+}
+
+#topcoloredbar {
+	color: #FFFFFF;
+	width:700px;
+	padding-top: 0.1em;
+	padding-bottom: .2em;
+	line-height: 1.5em;
+	margin-bottom:0.3em;
+	text-align:left;
+	background-color: #006633;	
+}
+
+#topcoloredbar h2 {
+
+	font-weight: normal;
+	padding-left: 1em;
+	display: inline;
+}
+
+#topcoloredbar a {
+	color:#FFFFFF;
+	font-size: .9em;
+}
+
+#searchform input {
+	color:#CCCCCC;
+	}

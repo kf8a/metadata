@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 28) do
+ActiveRecord::Schema.define(:version => 29) do
 
   create_table "affiliations", :force => true do |t|
     t.column "person_id",  :integer
@@ -61,22 +61,6 @@ ActiveRecord::Schema.define(:version => 28) do
     t.column "date_to",       :date
   end
 
-  create_table "protocols", :force => true do |t|
-    t.column "name",           :string
-    t.column "title",          :string
-    t.column "version",        :integer
-    t.column "in_use_from",    :date
-    t.column "in_use_to",      :date
-    t.column "description",    :text
-    t.column "abstract",       :text
-    t.column "body",           :text
-    t.column "person_id",      :integer
-    t.column "created_on",     :date
-    t.column "updated_on",     :date
-    t.column "change_summary", :text
-    t.column "dataset_id",     :integer
-  end
-
   create_table "open_id_associations", :force => true do |t|
     t.column "server_url", :binary
     t.column "handle",     :string
@@ -116,6 +100,23 @@ ActiveRecord::Schema.define(:version => 28) do
     t.column "url",              :string
     t.column "deceased",         :boolean
     t.column "open_id",          :string
+  end
+
+  create_table "protocols", :force => true do |t|
+    t.column "name",           :string
+    t.column "title",          :string
+    t.column "version",        :integer
+    t.column "in_use_from",    :date
+    t.column "in_use_to",      :date
+    t.column "description",    :text
+    t.column "abstract",       :text
+    t.column "body",           :text
+    t.column "person_id",      :integer
+    t.column "created_on",     :date
+    t.column "updated_on",     :date
+    t.column "change_summary", :text
+    t.column "dataset_id",     :integer
+    t.column "active",         :boolean, :default => true
   end
 
   create_table "publication_types", :force => true do |t|
