@@ -15,7 +15,7 @@
 	<%= textilize(@protocol.body) if @protocol.body %>
 </p>
 <p>
-	Author: <%= @protocol.person.full_name %>
+	Author: <%= link_to  "#{@protocol.person.full_name}", person_path(@protocol.person) %>
 </p>
 <%= link_to 'Edit', edit_protocol_path(@protocol) %> |
 <%= link_to 'Back', protocols_path %>
