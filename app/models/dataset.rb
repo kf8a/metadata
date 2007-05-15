@@ -1,7 +1,7 @@
 require 'rexml/document'
 include REXML
 class Dataset < ActiveRecord::Base
-  has_many :datatables
+  has_many :datatables, :order => 'name'
   has_many :protocols, :conditions => 'active is true'
   has_many :people, :through => :affiliations
   has_many :affiliations, :order => 'seniority'
