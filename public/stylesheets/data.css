@@ -103,7 +103,7 @@ a:hover.edit {
 */
 
 .core_dataset {
-	font-weight: bold;
+	background: url(../images/core.png) no-repeat right top;
 }
 
 .no_data {
