@@ -5,6 +5,8 @@
 		<% next unless dataset.on_web %>
 		<% if dataset.core_dataset %>
 			<li class='core_dataset'>
+		<% elsif dataset.datatables.size == 0 %>
+			<li class='no_data'>
 		<% else %>
 			<li>
 		<% end %>

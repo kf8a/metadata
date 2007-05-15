@@ -105,3 +105,7 @@ a:hover.edit {
 .core_dataset {
 	font-weight: bold;
 }
+
+.no_data {
+	color: #939393;
+}
