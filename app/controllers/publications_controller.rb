@@ -4,6 +4,7 @@ class PublicationsController < ApplicationController
   # GET /publications
   # GET /publications.xml
   def index
+    @crumbs = []
     @pub_type = params[:type]
     publication_types  = PublicationType.find_all_by_name(@pub_type)
     if publication_types.empty?
@@ -100,5 +101,12 @@ class PublicationsController < ApplicationController
     
     def set_title
       @title = 'Publications'
+    end
+    def set_crumbs
+      crumb = Struct::Crumb.new
+      @crumbs = []
+      crumb.url = publications_path
+      crumb.name = 'Publications'
+      @crumbs << crumb
     end
   end

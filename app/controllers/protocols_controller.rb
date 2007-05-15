@@ -84,4 +84,12 @@ class ProtocolsController < ApplicationController
   def set_title
     @title = 'Protocols'
   end
+  def set_crumbs
+    crumb = Struct::Crumb.new
+    @crumbs = []
+    return unless params[:id]
+    crumb.url = protocols_path
+    crumb.name = 'Data Catalog: Protocols'
+    @crumbs << crumb
+  end
 end

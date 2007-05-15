@@ -11,8 +11,7 @@
 
 ul.makeMenu, ul.makeMenu ul {
 	/* put rounded bottoms on the menu */
-	/*-moz-border-radius-bottomleft:10px;
-	-moz-border-radius-bottomright:10px;*/
+	-moz-border-radius: 10px;
 	
 
   width: 132px;

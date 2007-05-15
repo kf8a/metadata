@@ -1,7 +1,8 @@
 
 class DatasetsController < ApplicationController
       
-  before_filter :set_title
+  before_filter :set_title, :allow_on_web
+  
   # POST /dataset
   def upload
     file = params[:file]
@@ -12,6 +13,7 @@ class DatasetsController < ApplicationController
   # GET /datasets.xml
   def index
     @themes = Theme.find(:all, :order => :priority)
+    @crumbs = []
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @datasets.to_xml }
@@ -92,5 +94,19 @@ class DatasetsController < ApplicationController
   private
   def set_title
     @title  = 'LTER Datasets'
+  end
+
+  def set_crumbs
+    crumb = Struct::Crumb.new
+    @crumbs = []
+    crumb.url = datasets_path
+    crumb.name = 'Data Catalog: Datasets'
+    @crumbs << crumb
+  end
+  
+  def allow_on_web
+    return unless params[:id]
+    dataset = Dataset.find(params[:id])
+    dataset.on_web
   end
 end

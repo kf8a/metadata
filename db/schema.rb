@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 29) do
+ActiveRecord::Schema.define(:version => 30) do
 
   create_table "affiliations", :force => true do |t|
     t.column "person_id",  :integer
@@ -12,16 +12,17 @@ ActiveRecord::Schema.define(:version => 29) do
   end
 
   create_table "datasets", :force => true do |t|
-    t.column "dataset",   :string
-    t.column "title",     :string
-    t.column "abstract",  :text
-    t.column "keywords",  :string
-    t.column "status",    :string
-    t.column "initiated", :date
-    t.column "completed", :date
-    t.column "released",  :date
-    t.column "on_web",    :boolean, :default => true
-    t.column "version",   :integer
+    t.column "dataset",      :string
+    t.column "title",        :string
+    t.column "abstract",     :text
+    t.column "keywords",     :string
+    t.column "status",       :string
+    t.column "initiated",    :date
+    t.column "completed",    :date
+    t.column "released",     :date
+    t.column "on_web",       :boolean, :default => true
+    t.column "version",      :integer
+    t.column "core_dataset", :boolean, :default => false
   end
 
   create_table "datasets_themes", :id => false, :force => true do |t|

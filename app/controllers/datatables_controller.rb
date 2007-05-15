@@ -78,4 +78,21 @@ class DatatablesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  private
+  def set_crumbs
+    crumb = Struct::Crumb.new
+    @crumbs = []
+    return unless params[:id]
+    crumb.url = '/datasets/'
+    crumb.name = 'Data Catalog: Datasets'
+    @crumbs << crumb
+    crumb = Struct::Crumb.new
+    
+    datatable  = Datatable.find(params[:id])
+    crumb.url =  dataset_path(datatable.dataset)
+    crumb.name = datatable.dataset.title
+    @crumbs << crumb
+  
+  end
 end

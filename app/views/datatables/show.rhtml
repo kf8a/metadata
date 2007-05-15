@@ -1,4 +1,4 @@
-<h1><%= @datatable.title %></h1>
+<h1><%= link_to "#{@dataset.dataset}", dataset_path(@dataset) %>:<%= @datatable.title %></h1>
 <p>
 	<%= @datatable.description %>
 </p>

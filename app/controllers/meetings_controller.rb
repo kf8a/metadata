@@ -64,5 +64,16 @@ class MeetingsController < ApplicationController
      end
   end
   
-  
+  private
+  def set_crumbs
+    crumb = Struct::Crumb.new
+    @crumbs = []
+    return unless params[:id]
+    meeting = Meeting.find(params[:id])
+    venue = meeting.venue_type
+    
+    crumb.url = url_for(:controller => 'meetings', :location  => venue.name)
+    crumb.name = venue.name.capitalize + ' Meeting'
+    @crumbs << crumb
+  end
 end

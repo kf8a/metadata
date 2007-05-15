@@ -3,7 +3,14 @@
 		<ul>
 		<% theme.datasets.each do |dataset| -%>
 		<% next unless dataset.on_web %>
-		<li><%= link_to dataset.dataset, dataset_path(dataset) %> <%= truncate(dataset.title,47) %> <%= link_to 'eml', formatted_dataset_path(dataset, :eml) %> <%= link_to  'Edit', edit_dataset_path(dataset), {:class => 'edit'} if logged_in? %></li>
+		<% if dataset.core_dataset %>
+			<li class='core_dataset'>
+		<% else %>
+			<li>
+		<% end %>
+		<%= link_to dataset.dataset, dataset_path(dataset) %> <%= truncate(dataset.title,47) %> 
+		<%= link_to 'eml', formatted_dataset_path(dataset, :eml) %> 
+		<%= link_to  'Edit', edit_dataset_path(dataset), {:class => 'edit'} if logged_in? %></li>
 		<% end -%>
 		</ul>
 <% end -%>
