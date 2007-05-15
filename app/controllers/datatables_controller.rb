@@ -3,7 +3,8 @@ class DatatablesController < ApplicationController
   # GET /datatables
   # GET /datatables.xml
   def index
-    @datatables = Datatable.find(:all)
+
+    @datatables = [] # Datatable.find(:all)
 
     respond_to do |format|
       format.html # index.rhtml

@@ -64,6 +64,10 @@ a:visited.edit {
 	color: #bfbfbf;
 	text-decoration: none;
 }
+
+a:visited {
+	text-decoration: none;
+}
 a:hover.edit {
 	text-decoration: underline;
 }
