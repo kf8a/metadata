@@ -1,4 +1,5 @@
-<h1><%= @dataset.title %></h1>
+<h1><%= @dataset.title %> 
+</h1>
 <p>
 	<%= textilize @dataset.abstract %>
 </p>
@@ -33,5 +34,6 @@
 	</li>
 	<% end -%>
 </ul>
+<%= link_to 'eml', formatted_dataset_path(@dataset, :eml) %> |
 <%= link_to 'Edit', edit_dataset_path(@dataset) if logged_in?%> |
 <%= link_to 'Back', datasets_path %>

@@ -24,5 +24,6 @@
 		</tr>
 	<% end -%>
 </table>
+<%= link_to 'eml', formatted_dataset_path(@dataset, :eml) %> |
 <%= link_to 'Edit', edit_datatable_path(@datatable) if logged_in? %> |
 <%= link_to 'Back', dataset_path(@dataset) %>
