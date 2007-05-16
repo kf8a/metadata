@@ -3,6 +3,38 @@
 <%= error_messages_for :protocol %>
 
 <% form_for(:protocol, :url => protocols_path) do |f| %>
+	<p>
+		<label for='protocol_name'>Name:</label>
+		<%= f.text_field :name %>
+			<label for='protocol_title'>Title:</label>
+		<%= f.text_field :title %>
+			<label for='protocol_version'>Version:</label>
+		<%= f.text_field :version %>
+	
+		<label for='protocol_in_use_from'>In use from</label>
+		<%= f.date_select :in_use_from, :include_blank=>true %>
+		<label for='protocol_in_use_to'>to</label>
+		<%= f.date_select :in_use_to , :include_blank=>true%>
+		
+		<label for='protocol_abstract'>Abstract</label>
+		<%= f.text_area :abstract, :size=>'60x10' %>
+		
+		</p>
+		<p>
+		<label for="protocol_body">Body</label>
+		<%= f.text_area :body, :size=>'60x40'%>
+		</p>
+		<p>
+		<label for='protocol_person_id'>Author</label>
+		<% @people = Person.find(:all).map {|x| [x.full_name, x.id]} %>
+		<%= f.select :person_id, @people  %>
+	</p>
+	<p>
+		<label for='protocol_dataset'>Dataset</label>
+		<% @datasets = Dataset.find(:all).map {|x| [x.dataset, x.id]} %>
+		<%= f.select :dataset_id, @datasets %>
+	</p>
+	
   <p>
     <%= submit_tag "Create" %>
   </p>
