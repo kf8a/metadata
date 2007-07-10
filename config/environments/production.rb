@@ -19,4 +19,4 @@ config.action_controller.asset_host                  = "http://lter.kbs.msu.edu/
 
 #ActionController::AbstractRequest.relative_url_root = "/dynamic"
 
-ExceptionNotifier.exception_recipients = %w(bohms@msu.edu)
+#ExceptionNotifier.exception_recipients = %w(bohms@msu.edu)

@@ -1,7 +1,7 @@
 class CreatePublications < ActiveRecord::Migration
   def self.up
     create_table :publications do |t|
-      t.column :publication_type_id, :int
+      t.column :publication_type_id, :integer
       t.column :citation, :text
       t.column :abstract, :text
       t.column :year, :int

@@ -6,4 +6,10 @@
 	<label for='publication_abstract'>Abstract</label>
 	<%= textile_editor 'publications', :abstract, :size => '60x20'%>
 </p>
+<p>
+	Treatment associations:
+	<% @treatments.each do |treatment| -%>
+		<%= treatment.name %><%= check_box_tag 'publications[treatment_ids][]', treatment.id, @publications.treatments.include?(treatment) %>
+	<% end -%>
+</p>
 <%= textile_editor_initialize -%>

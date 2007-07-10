@@ -20,7 +20,7 @@ class PublicationsController < ApplicationController
       order = 'citation'
       @decoration = 'by Author'
     end
-  
+    
     @publications = Publication.find(:all, :order => order, 
       :conditions => [conditions, publication_types])
 
@@ -28,6 +28,10 @@ class PublicationsController < ApplicationController
       format.html # index.rhtml
       format.xml  { render :xml => @publications.to_xml }
     end
+  end
+  
+  def index_by_treatment
+    
   end
     
   # GET /publications/1
@@ -49,6 +53,7 @@ class PublicationsController < ApplicationController
   # GET /publications/1;edit
   def edit
     @publications = Publication.find(params[:id])
+    @treatments =  Treatment.find(:all)
   end
 
   # POST /publications
