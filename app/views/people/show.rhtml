@@ -3,15 +3,17 @@
 	<% if @person.email -%>
 	<li><label>Email:</label> <%= @person.email.gsub(/@/,' at ') %></li>
 	<% end -%>
-	<% if @person.phone %>
+	<% if @person.phone -%>
 	<li><label>Phone:</label> <%= @person.phone %></li>
-	<% end %>
-	<% if @person.url %>
+	<% end -%>
+	<% if @person.url -%>
 	<li><label>Web page:</label> <%= link_to "#{@person.url}", @person.url %></li>
-	<% end %>
+	<% end -%>
 	<li><label>Dept.:</label> <%= @person.sub_organization %></li>
 	<li><label>Institution:</label> <%= @person.organization%></li>
+	<% if @person.title -%>
 	<li><label>Title:</label> <%= @person.title %></li>
+	<% end -%>
 	<li><label>Project Role:</label> <%= @person.lter_roles[0].name %></li>
 	<li><label>Address:</label> <%= @person.street_address %>&nbsp;<%= @person.city %>&nbsp;<%= @person.locale %>
 	<% if @person.postal_code %>, <%= @person.postal_code %><% end %>

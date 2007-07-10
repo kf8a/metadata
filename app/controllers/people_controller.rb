@@ -6,7 +6,7 @@ class PeopleController < ApplicationController
   # GET /people.xml
   def index
     @people = Person.find(:all, :order => 'sur_name', :order => 'sur_name')
-    @title = 'LTER People'
+    @title = 'KBS LTER Directory'
     @roles = RoleType.find_by_name('lter').roles.find(:all, :order => :seniority)
     respond_to do |format|
       format.html # index.rhtml
@@ -16,7 +16,7 @@ class PeopleController < ApplicationController
   
   def alphabetical
     @people = Person.find(:all, :order => 'sur_name')
-    @title = 'LTER People (alphabetical)'
+    @title = 'KBS LTER Directory (alphabetical)'
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @people.to_xml }
@@ -28,7 +28,7 @@ class PeopleController < ApplicationController
   # GET /people/1.xml
   def show
     @person = Person.find(params[:id])
-    @title = @person.full_name
+    @title = 'KBS LTER directory'
     respond_to do |format|
       format.html # show.rhtml
       format.xml  { render :xml => @person.to_xml }
