@@ -5,7 +5,6 @@ class CreateTreatments < ActiveRecord::Migration
       t.column :description, :text
       t.column :study_id, :integer
     end
-    add_column "areas", "treatment_id", :integer
     
     create_table :publications_treatments, :id => false do |t|
       t.column :treatment_id, :integer
@@ -26,7 +25,6 @@ class CreateTreatments < ActiveRecord::Migration
 
   def self.down
     drop_table :publications_treatments
-    remove_column "areas", "treatment_id"
     drop_table :treatments
   end
 end
