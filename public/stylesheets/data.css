@@ -29,6 +29,16 @@
 	margin-bottom: 0px;
 }
 
+#content ul label {
+	display: inline;
+	font-weight: bold;
+}
+
+.person_name {
+	color: #006633;
+	font-size: 1.4em;
+}
+
 .even {
 	background-color: #f8ffd6;
 }
@@ -46,6 +56,7 @@ label {
 }
 
 #content ul.multicolumn {
+	margin: 0.1em;
 	-moz-column-width: 17em;
 }
 
@@ -90,6 +101,7 @@ a:hover.edit {
 	color: #006633;
 	font-size: 80%;
 }
+
 #copyright {
 	font-family: Times New Roman, Times, serif;
 	font-size: 10px;

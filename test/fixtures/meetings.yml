@@ -1,5 +1,85 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-one:
-  id: 1
-two:
-  id: 2
+--- 
+meetings_002: 
+  announcement: 
+  date_to: 
+  title: ASM at Estes Park
+  date: "2006-08-01"
+  venue_type_id: "2"
+  id: "2"
+meetings_003: 
+  announcement: 
+  date_to: 
+  title: All Scientist Meeting
+  date: "2004-10-08"
+  venue_type_id: "1"
+  id: "3"
+meetings_004: 
+  announcement: 
+  date_to: 
+  title: All Scientist Meeting
+  date: "2003-09-12"
+  venue_type_id: "1"
+  id: "4"
+meetings_005: 
+  announcement: 
+  date_to: 
+  title: All Scientist Meeting
+  date: "2002-10-04"
+  venue_type_id: "1"
+  id: "5"
+meetings_006: 
+  announcement: 
+  date_to: 
+  title: All Scientist Meeting in Seattle
+  date: "2003-09-18"
+  venue_type_id: "2"
+  id: "7"
+meetings_007: 
+  announcement: 
+  date_to: 
+  title: All Scientist Meeting at Snowbird
+  date: "2000-08-05"
+  venue_type_id: "2"
+  id: "8"
+meetings_008: 
+  announcement: 
+  date_to: "1996-07-17"
+  title: All Scientist Meeting
+  date: "1996-07-16"
+  venue_type_id: "1"
+  id: "11"
+meetings_009: 
+  announcement: 
+  date_to: "1998-07-22"
+  title: All Scientist Meeting
+  date: "1998-07-21"
+  venue_type_id: "1"
+  id: "10"
+meetings_010: 
+  announcement: 
+  date_to: "1999-07-21"
+  title: All Scientist Meeting
+  date: "1999-07-20"
+  venue_type_id: "1"
+  id: "9"
+meetings_011: 
+  announcement: " Symposium in Celebration of the First 12 years of Long-Term Ecological      Research at MSU and in Honor of the Contributions of Eldor A.Paul and      Richard R. Harwood"
+  date_to: 
+  title: Campus Symposium
+  date: "2001-04-19"
+  venue_type_id: "1"
+  id: "6"
+meetings_012: 
+  announcement: ""
+  date_to: "2007-05-03"
+  title: test
+  date: "2007-05-03"
+  venue_type_id: "1"
+  id: "12"
+meetings_001: 
+  announcement: 
+  date_to: 
+  title: All Scientist Meeting
+  date: "2006-05-09"
+  venue_type_id: "1"
+  id: "1"

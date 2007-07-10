@@ -5,7 +5,7 @@ include REXML
 class Datatable < ActiveRecord::Base
   belongs_to :dataset
   has_many :variates, :order => :position
-  
+    
   def to_eml
     eml = Element.new('datatable')
     eml.add_attribute('id',name)

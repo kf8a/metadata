@@ -1,10 +1,16 @@
 --- 
 publication_types_001: 
-  name: thesis
-  id: "2"
+  name: meeting_abstract
+  id: "6"
 publication_types_002: 
-  name: book
-  id: "3"
-publication_types_003: 
-  name: journal
+  name: journal_Article
   id: "1"
+publication_types_003: 
+  name: theses_and_Dissertation
+  id: "2"
+publication_types_004: 
+  name: Occasional_report
+  id: "5"
+publication_types_005: 
+  name: books_and_Book_Chapter
+  id: "3"

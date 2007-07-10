@@ -5,8 +5,8 @@ require 'people_controller'
 class PeopleController; def rescue_action(e) raise e end; end
 
 class PeopleControllerTest < Test::Unit::TestCase
-  fixtures :people
-
+  fixtures :people, :role_types, :roles,  :affiliations
+  
   def setup
     @controller = PeopleController.new
     @request    = ActionController::TestRequest.new
@@ -38,12 +38,12 @@ class PeopleControllerTest < Test::Unit::TestCase
   end
 
   def test_should_get_edit
-    get :edit, :id => 1
+    get :edit, :id => 107
     assert_response :success
   end
   
   def test_should_update_person
-    put :update, :id => 1, :person => { }
+    put :update, :id => '107', :person=>{"city"=>"Hickory Corners", "postal_code"=>"49060", "title"=>"", "lter_role_ids"=>["15"], "country"=>"USA", "sur_name"=>"Grillo (REU)", "url"=>"", "street_address"=>"", "given_name"=>"Michael", "sub_organization"=>"Kellogg Biological Station", "fax"=>"", "phone"=>"", "organization"=>"Michigan State University", "locale"=>"MI", "friendly_name"=>"Mike", "middle_name"=>"", "email"=>"grillom1@msu.edu"}
     assert_redirected_to person_path(assigns(:person))
   end
   

@@ -1,1499 +1,277 @@
 --- 
 datatables_117: 
-  name: KBS046-005
-  metadata_url: LTER_Metadata.jsp?Table=KBS046-005
+  name: KBS046-003
+  metadata_url: LTER_Metadata.jsp?Table=KBS046-003
   dataset_id: "49"
   comments: 
-  title: Methane consumption in forest soils by depth
+  title: Methane consumption in forest soils (fertilization)
+  is_sql: 
   connection_url: jdbc:odbc:KBS046-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS046-005
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS046-003
+  last_updated_on: 
   is_restricted: f
-  id: "117"
-  description: <kbsml_text><p>Methane consumption and nitrification in forest soils taken from different depths</p></kbsml_text>
+  id: "115"
+  description: <kbsml_text><p>Methane consumption in fertilized forest soils</p></kbsml_text>
+  update_frequency_years: 
   driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS046_005
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
 datatables_060: 
-  name: KBS022-004
-  metadata_url: LTER_Metadata.jsp?Table=KBS022-004
-  dataset_id: "25"
-  comments: 
-  title: Fish Species List
-  connection_url: jdbc:odbc:KBS022
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS022-004
-  is_restricted: f
-  id: "60"
-  description: <kbsml_text><p>A list of fish occuring in water bodies on or near the W. K. Kellogg Biological Station.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS022-004
-datatables_032: 
-  name: KBS017-002
-  metadata_url: LTER_Metadata.jsp?Table=KBS017-002
-  dataset_id: "20"
-  comments: 
-  title: NWS Data without Comments (temporary)
-  connection_url: jdbc:odbc:nws
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS017-002&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "32"
-  description: <kbsml_text><p>A version of the NWS data without comments, until we can produce better csv data</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS017-002
-datatables_003: 
-  name: KBS_calendar
-  metadata_url: LTER_Metadata.jsp?Table=KBS_calendar
-  dataset_id: "3"
-  comments: 
-  title: KBS Calendar
-  connection_url: jdbc:odbc:Administration
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS_calendar
-  is_restricted: f
-  id: "3"
-  description: <kbsml_text><p>Public calendar of KBS LTER events.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS_calendar
-datatables_118: 
-  name: KBS046-006
-  metadata_url: LTER_Metadata.jsp?Table=KBS046-006
-  dataset_id: "49"
-  comments: 
-  title: Methane consumption on LFL soils by depth
-  connection_url: jdbc:odbc:KBS046-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS046-006
-  is_restricted: f
-  id: "118"
-  description: <kbsml_text><p>Methane consumption on soils from the Living Field Lab, assayed by depth</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS046_006
-datatables_061: 
-  name: KBS022-005
-  metadata_url: LTER_Metadata.jsp?Table=KBS022-005
-  dataset_id: "25"
-  comments: 
-  title: Fungi Species List
-  connection_url: jdbc:odbc:KBS022
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS022-005
-  is_restricted: f
-  id: "61"
-  description: <kbsml_text><p>A list of fungi occuring on or near the W. K. Kellogg Biological Station.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS022-005
-datatables_004: 
-  name: KBS000-001
-  metadata_url: /LTER_Intranet/DataManagement/LTER_UnpublishedMetadata.jsp?Table=KBS000-001
-  dataset_id: "3"
-  comments: 
-  title: Standardized codes for identifying plant species
-  connection_url: jdbc:odbc:plants
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS000-001&amp;tools=show&amp;limitBy=Family&amp;order=asc
-  is_restricted: f
-  id: "4"
-  description: <kbsml_text><p>Researchers on various projects record identities of plant species as short semi-descriptive sequences of  letters, which are interpreted for end-users by means of an authoritative list.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS000-001
-datatables_119: 
-  name: KBS048-001
-  metadata_url: 
-  dataset_id: "51"
-  comments: 
-  title: Real time data
-  connection_url: 
-  data_url: http://aeronet.gsfc.nasa.gov/cgi-bin/type_one_station_new3?site=Kellogg_LTER&amp;nachal=2&amp;level=1&amp;place_code=10
-  is_restricted: f
-  id: "119"
-  description: <kbsml_text><p>Real time data from the sensor. These data are unscreen and may not have the final calibration applied </p></kbsml_text>
-  driver: 
-  object: 
-datatables_062: 
-  name: KBS022-006
-  metadata_url: LTER_Metadata.jsp?Table=KBS022-006
-  dataset_id: "25"
-  comments: 
-  title: Insects Species List
-  connection_url: jdbc:odbc:KBS022
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS022-006
-  is_restricted: f
-  id: "62"
-  description: <kbsml_text><p>A list of insects occuring on or near the W. K. Kellogg Biological Station.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS022-006
-datatables_033: 
-  name: KBS018-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS018-001
-  dataset_id: "21"
-  comments: 
-  title: KBS Herbarium Image Archive
-  connection_url: jdbc:odbc:herb
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS018-001&amp;format=record
-  is_restricted: f
-  id: "33"
-  description: <kbsml_text><p>These are images collecte in support of the KBS Herbarium</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS018-001
-datatables_005: 
-  name: KBS000-002
-  metadata_url: LTER_Metadata.jsp?Table=KBS000-002
-  dataset_id: "3"
-  comments: 
-  title: Publications for each treatment
-  connection_url: jdbc:odbc:Administration
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS000-002
-  is_restricted: f
-  id: "5"
-  description: <kbsml_text><p>The publication list sorted by treatment</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS000-002
-datatables_090: 
-  name: KBS042-003
-  metadata_url: LTER_Metadata.jsp?Table=KBS042-003
-  dataset_id: "45"
-  comments: 
-  title: Texture
-  connection_url: jdbc:odbc:KBS042-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS042-003
-  is_restricted: f
-  id: "90"
-  description: <kbsml_text><p></p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS042_003
-datatables_063: 
-  name: KBS022-007
-  metadata_url: LTER_Metadata.jsp?Table=KBS022-007
-  dataset_id: "25"
-  comments: 
-  title: Mammals Species List
-  connection_url: jdbc:odbc:KBS022
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS022-007
-  is_restricted: f
-  id: "63"
-  description: <kbsml_text><p>A list of mammals occuring on or near the W. K. Kellogg Biological Station.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS022-007
-datatables_034: 
-  name: KBS018-002
-  metadata_url: LTER_Metadata.jsp?Table=KBS018-002
-  dataset_id: "21"
-  comments: 
-  title: KBS Herbarium Specimens
-  connection_url: jdbc:odbc:herb
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS018-002&amp;format=record&amp;limitBy=Family
-  is_restricted: f
-  id: "34"
-  description: <kbsml_text><p>A database of specimens stored in the KBS Herbarium.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS018-002
-datatables_006: 
-  name: KBS001-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS001-003
-  dataset_id: "4"
-  comments: 
-  title: Field Instrument Status
-  connection_url: jdbc:odbc:wthr
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS002-003&amp;limitBy=Location&amp;containing=Pondlab&amp;format=record
-  is_restricted: f
-  id: "6"
-  description: <kbsml_text><p>This data table gives the most recent information for each participating field instrument, especially weather sensors.  It accesses the same data as KBS002-003, but with a different default view.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS002-003
-datatables_091: 
-  name: KBS042-004
-  metadata_url: LTER_Metadata.jsp?Table=KBS042-004
-  dataset_id: "45"
-  comments: 
-  title: Texture Descriptions
-  connection_url: jdbc:odbc:KBS042-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS042-004
-  is_restricted: f
-  id: "91"
-  description: <kbsml_text><p></p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS042_004
-datatables_064: 
-  name: KBS022-008
-  metadata_url: LTER_Metadata.jsp?Table=KBS022-008
-  dataset_id: "25"
-  comments: 
-  title: Protozoa Species List
-  connection_url: jdbc:odbc:KBS022
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS022-008
-  is_restricted: f
-  id: "64"
-  description: <kbsml_text><p>A list of protozoa occuring on or near the W. K. Kellogg Biological Station.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS022-008
-datatables_035: 
-  name: KBS019_explore
-  metadata_url: LTER_Metadata.jsp?Table=KBS019_explore
-  dataset_id: "3"
-  comments: 
-  title: Preview of ANPP data
-  connection_url: jdbc:odbc:ANPP
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS019_explore&amp;limitBy=Year&amp;tools=show&amp;stylesheet=KBS019.xsl&amp;order=asc
-  is_restricted: t
-  id: "35"
-  description: <kbsml_text><p></p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: BiomassPoplarCopicedTrees
-datatables_007: 
-  name: KBS002-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS002-001
-  dataset_id: "5"
-  comments: 
-  title: LTER Daily Precipitation and Air Temperature
-  connection_url: jdbc:odbc:wthr-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS002-001&amp;limitBy=Year&amp;order=desc&amp;orderby=date
-  is_restricted: f
-  id: "7"
-  description: <kbsml_text><p>A synthetic weather record drawn largely from the LTER Weather station but supplemented with data from nearby stations for completeness.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS002_001
-datatables_092: 
-  name: KBS042-005
-  metadata_url: LTER_Metadata.jsp?Table=KBS042-005
-  dataset_id: "45"
-  comments: 
-  title: Tillage
-  connection_url: jdbc:odbc:KBS042-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS042-005&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "92"
-  description: <kbsml_text><p>Tillage consists of chisel plow, field cultivate, row cultivate, and rotary hoe on various plots.  All equipment provided by KBS. </p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS042_005
-datatables_120: 
-  name: KBS048-002
-  metadata_url: 
-  dataset_id: "51"
-  comments: 
-  title: Cloud corrected data
-  connection_url: 
-  data_url: http://aeronet.gsfc.nasa.gov/cgi-bin/type_one_station_new3?site=Kellogg_LTER&amp;nachal=2&amp;level=2&amp;place_code=10
-  is_restricted: f
-  id: "120"
-  description: <kbsml_text><p>Cloud correction applied to data. Final calibration might be missing</p></kbsml_text>
-  driver: 
-  object: 
-datatables_065: 
-  name: KBS022-009
-  metadata_url: LTER_Metadata.jsp?Table=KBS022-009
-  dataset_id: "25"
-  comments: 
-  title: Reptiles Species List
-  connection_url: jdbc:odbc:KBS022
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS022-009
-  is_restricted: f
-  id: "65"
-  description: <kbsml_text><p>A list of reptiles occuring on or near the W. K. Kellogg Biological Station.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS022-009
-datatables_036: 
-  name: KBS019-000
-  metadata_url: /LTER_Intranet/DataManagement/LTER_Metadata.jsp?Table=KBS000-001
-  dataset_id: "22"
-  comments: 
-  title: Standardized codes for identifying plant species
-  connection_url: jdbc:odbc:plants
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS000-001&amp;tools=show&amp;limitBy=Family&amp;order=asc
-  is_restricted: f
-  id: "36"
-  description: <kbsml_text><p>Researchers on various projects record identities of plant species as short semi-descriptive sequences of  letters, which are interpreted for end-users by means of an authoritative list.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS000-001
-datatables_008: 
-  name: KBS002-002
-  metadata_url: LTER_Metadata.jsp?Table=KBS002-002
-  dataset_id: "5"
-  comments: 
-  title: Log of weather station management
-  connection_url: jdbc:odbc:wthr
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS002-002&amp;limitBy=Year&amp;order=desc&amp;format=record
-  is_restricted: f
-  id: "8"
-  description: <kbsml_text><p>Field notes related to the management of the weather stations LTERWS or Pondlab, especially the former.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS002-002
-datatables_093: 
-  name: KBS042-006
-  metadata_url: LTER_Metadata.jsp?Table=KBS042-006
-  dataset_id: "45"
-  comments: 
-  title: Planting
-  connection_url: jdbc:odbc:KBS042-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS042-006&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "93"
-  description: <kbsml_text><p>Corn and soybeans are planted at a 30 inch row spacing and wheat drilled at a 7 inch spacing.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS042_006
-datatables_037: 
-  name: KBS019-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS019-001
-  dataset_id: "22"
-  comments: 
-  title: Non-dominant Biomass
-  connection_url: jdbc:odbc:NPP
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS019-001&amp;limitBy=Year&amp;order=desc
-  is_restricted: t
-  id: "37"
-  description: <kbsml_text><p>This data set contains information about above ground net primary productivity (ANPP) for all main site cropping systems as well as for the forested sites added in 1993. Main site cropping systems include all treatments as described in the data set descriptor for the main cropping system study . ANPP is measured as peak biomass for a given cropping system; in some systems with complex communities peaks occur at different times of year and measurements are taken at multiple times as described in the ANPP protocol.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS019-001
-datatables_009: 
-  name: KBS002-003
-  metadata_url: LTER_Metadata.jsp?Table=KBS002-003
-  dataset_id: "5"
-  comments: 
-  title: Field Instrument Status
-  connection_url: jdbc:odbc:wthr
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS002-003&amp;limitBy=Location&amp;containing=LTERWS&amp;format=record
-  is_restricted: f
-  id: "9"
-  description: <kbsml_text><p>  This data table gives the most recent information for each participating field instrument, especially weather sensors.  It is essentially a subset of KBS002-004 Field Instrument History.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS002-003
-datatables_094: 
-  name: KBS042-007
-  metadata_url: LTER_Metadata.jsp?Table=KBS042-007
-  dataset_id: "45"
-  comments: 
-  title: Cover Crops
-  connection_url: jdbc:odbc:KBS042-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS042-007&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "94"
-  description: "<kbsml_text>\r\n\
-    <p>All cover crops are purchased from Michigan State Seed\r\n\
-    (Grand Ledge, MI).  Cover crops are planted on the west half of each plot\r\n\
-    in 1st year corn, 2nd year corn, and wheat (except for the conventional\r\n\
-    management plots).\r\n\
-    </p>\r\n\
-    <p>\r\n\
-    \r\n\
-    The different varieties used included:\r\n\
-    <ol>\r\n\
-    <li><p>Annual ryegrass (Lolium multiflorum Lam.)</p></li>\r\n\
-    <li><p>Hairy vetch (Vicia villosa Roth)</p></li>\r\n\
-    <li><p>Red clover \x96 Michigan mammoth (Trifolium pratense L.)</p></li>\r\n\
-    <li><p>Crimson clover </p></li>\r\n\
-    </ol>\r\n\
-    </p>\r\n\
-    </kbsml_text>"
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS042_007
-datatables_121: 
-  name: KBS048-003
-  metadata_url: 
-  dataset_id: "51"
-  comments: 
-  title: Corrected data
-  connection_url: 
-  data_url: http://aeronet.gsfc.nasa.gov/cgi-bin/type_one_station_new3?site=Kellogg_LTER&amp;nachal=2&amp;level=3&amp;place_code=10
-  is_restricted: f
-  id: "121"
-  description: <kbsml_text><p>Screened data</p></kbsml_text>
-  driver: 
-  object: 
-datatables_038: 
-  name: KBS019-002
-  metadata_url: LTER_Metadata.jsp?Table=KBS019-001
-  dataset_id: "22"
-  comments: 
-  title: Non-dominant Biomass for T7, T8, SF
-  connection_url: jdbc:odbc:NPP
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS019-002&amp;limitBy=Year&amp;order=desc
-  is_restricted: t
-  id: "38"
-  description: <kbsml_text><p>This data set contains information about above ground net primary productivity (ANPP) for all main site cropping systems as well as for the forested sites added in 1993. Main site cropping systems include all treatments as described in the data set descriptor for the main cropping system study . ANPP is measured as peak biomass for a given cropping system; in some systems with complex communities peaks occur at different times of year and measurements are taken at multiple times as described in the ANPP protocol.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS019-002
-datatables_095: 
-  name: KBS042-008
-  metadata_url: LTER_Metadata.jsp?Table=KBS042-008
-  dataset_id: "45"
-  comments: 
-  title: Fertilizer
-  connection_url: jdbc:odbc:KBS042-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS042-008&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "95"
-  description: |-
-    <kbsml_text><p>
-    Starter fertilizer was applied to corn when planted; nitrogen applied after PSNT (pre sidedress nitrate test) in June.  No fertilizer was applied to soybeans.  Fertilizer was applied to wheat in early spring; applied in fall at planting through 1994.  Lime was applied to all plots on 9/29/1992 at a rate of 2T/a.</p>
-    </kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS042_008
-datatables_066: 
-  name: KBS022-010
-  metadata_url: LTER_Metadata.jsp?Table=KBS022-010
-  dataset_id: "25"
-  comments: 
-  title: Fish spotted in the last 2 years
-  connection_url: jdbc:odbc:KBS022
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS022-010
-  is_restricted: f
-  id: "66"
-  description: <kbsml_text><p>This dataset contains fish that were seen in the last 2 years</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS022-010
-datatables_122: 
-  name: KBS049-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS049-001
-  dataset_id: "52"
-  comments: 
-  title: Number of Aphids captured
-  connection_url: jdbc:odbc:kbs049
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS049_001
-  is_restricted: f
-  id: "122"
-  description: <kbsml_text><p>Number of aphids captured during each sample period</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS049_001
-datatables_039: 
-  name: KBS019-003
-  metadata_url: LTER_Metadata.jsp?Table=KBS019-003
-  dataset_id: "22"
-  comments: <kbsml_text><p></p></kbsml_text>
-  title: Crops
-  connection_url: jdbc:odbc:ANPP
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS019-003&amp;tools=show&amp;limitBy=Year&amp;order=asc
-  is_restricted: f
-  id: "39"
-  description: <kbsml_text><p>Productivity data for main crops</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS019-003
-datatables_096: 
-  name: KBS042-009
-  metadata_url: LTER_Metadata.jsp?Table=KBS042-009
-  dataset_id: "45"
-  comments: 
-  title: Compost
-  connection_url: jdbc:odbc:KBS042-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS042-009&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "96"
-  description: <kbsml_text><p>Compost is applied to the organic and compost management treatments and is the only nutrient source of these plots.  Composted dairy manure is used and is obtained from various sources. The application rate takes into account the %Moisture and the total %N present in the compost.  It is applied on the basis of estimated nitrogen, phosphorus and potassium requirements.  It is applied on a dry weight basis.  In 1995 the application rate was determined after correction for sand content.   This method continues to present.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS042_009
-datatables_067: 
-  name: KBS023-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS023-001
-  dataset_id: "26"
-  comments: 
-  title: Insect Trapping Survey
-  connection_url: jdbc:odbc:KBS023-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS023-001&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "67"
-  description: <kbsml_text><p>Plant dwelling insect occurrence in the main site cropping system of the KBS-LTER has been recorded since 1989. The effort has focused on characterizing the temporal and spatial abundance and diversity of set of insects representative of a higher order insect trophic level, the herbivore predators. The insect database contains more than 27300 records and consists of counts of adult insects of fourteen species of Coccinellidae, one species of Chrysopidae, and one species of Lampyridae from 30 sample sites in each of the seven treatments in the Main Site Cropping System. The standard method used to measure these organisms is a yellow sticky trap. Sampling is conducted weekly during the growing season as described in the sampling protocol.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS023-001
-datatables_123: 
-  name: KBS051-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS051-001
-  dataset_id: "54"
-  comments: 
-  title: Ameriflux dataset
-  connection_url: jdbc:odbc:wthr-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS051-001&amp;limitBy=doy&amp;orderby=datetime&amp;order=desc
-  is_restricted: f
-  id: "123"
-  description: <kbsml_text><p>Flux from the micromet tower</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS051_001
-datatables_097: 
-  name: KBS042-010
-  metadata_url: LTER_Metadata.jsp?Table=KBS042-010
-  dataset_id: "45"
-  comments: 
-  title: Herbicides and Pesticides
-  connection_url: jdbc:odbc:KBS042-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS042-010&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "97"
-  description: <kbsml_text><p>Herbicides and pesticides were applied in spring prior to planting; banded herbicides in the fertilizer treatments and broadcast herbicides in the conventional treatments.  Applied as needed any time thereafter.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS042_010
-datatables_010: 
-  name: KBS002-004
-  metadata_url: LTER_Metadata.jsp?Table=KBS002-004
-  dataset_id: "5"
-  comments: 
-  title: Field Instrument History
-  connection_url: jdbc:odbc:wthr
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS002-004&amp;limitBy=Instrument&amp;format=record
-  is_restricted: f
-  id: "10"
-  description: <kbsml_text><p>Field instruments, especially weather sensors, may be deployed, serviced, relocated, retired, etc.  This table combines inventories and field notes to give a (partial) representation of the history of each instrument.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS002-004
-datatables_068: 
-  name: KBS024-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS024-001
-  dataset_id: "27"
-  comments: 
-  title: C/N data for KBS soil
-  connection_url: jdbc:odbc:Soil
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS024-001&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "68"
-  description: |-
-    <kbsml_text><p>This data set contains information about soil total Carbon, total Nitrogen, and C:N ratios for all main site cropping system soils as well as the forested sites added in 1993. Main site cropping systems include all treatments as described in the data set descriptor for the main cropping system study (KBS004). Soil carbon and nitrogen are presented as % elemental carbon and nitrogen (g C or N / 100 g soil)   for the sampling depth of the specific sampling date unless indicated otherwise. Samples were taken with either a 2.5 cm diameter soil corer (sampling by soil depth) or a 10 cm diameter Giddings probe (sampling by soil profile). For general sampling information, see <a href="/LTER_Metadata.jsp/Dataset/KBS004">Baseline Soil Sampling Protocol</a>.  For specific sampling details for a particular date, see Soil Sampling Field Log.  Soil samples are sieved to 4mm and composited by plot.  Soil % elemental carbon and nitrogen values are determined by sample combustion and subsequent TCD gas chromatography, using a Carlo Erba automated CHN analyzer.
-    described in the sampling protocol.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS024-001
-datatables_124: 
-  name: KBS051-002
-  metadata_url: LTER_Metadata.jsp?Table=KBS051-002
-  dataset_id: "54"
-  comments: 
-  title: Raw Flux dataset
-  connection_url: jdbc:odbc:wthr-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS051-002&amp;limitBy=date&amp;order=desc&amp;orderby=Time
-  is_restricted: f
-  id: "124"
-  description: <kbsml_text><p>The FLUX.DAT data from the micromet tower</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS051_002
-datatables_098: 
-  name: KBS042-011
-  metadata_url: LTER_Metadata.jsp?Table=KBS042-011
-  dataset_id: "45"
-  comments: 
-  title: Herbicide and Pesticide Composition
-  connection_url: jdbc:odbc:KBS042-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS042-011
-  is_restricted: f
-  id: "98"
-  description: <kbsml_text><p></p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS042_011
-datatables_069: 
-  name: KBS025-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS025-001
-  dataset_id: "28"
-  comments: 
-  title: Insect Collection
-  connection_url: jdbc:odbc:Insects
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS025-001&amp;limitBy=Family&amp;format=record
-  is_restricted: f
-  id: "69"
-  description: <kbsml_text><p>Periodically, researchers trap, preserve, and identify insects on or near the KBS LTER main site.  The insects are then stored as part of a permanent collection.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS025-001
-datatables_125: 
-  name: KBS051-003
-  metadata_url: LTER_Metadata.jsp?Table=KBS051-003
-  dataset_id: "54"
-  comments: 
-  title: Raw Met dataset
-  connection_url: jdbc:odbc:wthr-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS051-003&amp;limitBy=date&amp;order=desc&amp;orderby=Time
-  is_restricted: f
-  id: "125"
-  description: <kbsml_text><p>The MET.DAT data from the micromet tower</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS051_003
-datatables_040: 
-  name: KBS019-004
-  metadata_url: LTER_Metadata.jsp?Table=KBS019-004
-  dataset_id: "22"
-  comments: |-
-    <kbsml_text>
-    <ul>
-    <li><p>In 1998, plants were only sorted to functional group rather than species.  See relevant code descriptions.</p></li>
-    <li><p>The category "SDEAD" (standing dead plants of indeterminate speces) is included only in certain years.</p></li>
-    <li><p>The category "SURFL" (surface litter) is included in certain years, and may or may not be desired in summaries.</p></li><li><p>8-2-2004 SB. Linked in the genus and species name instead of the code.</p></li>
-    </ul>
-    </kbsml_text>
-  title: Non-crop Biomass
-  connection_url: jdbc:odbc:ANPP
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS019-004&amp;tools=show&amp;limitBy=Year&amp;order=asc
-  is_restricted: f
-  id: "40"
-  description: <kbsml_text><p>Productivity data for plants other than target crops</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS019-004
-datatables_011: 
-  name: KBS002-005
-  metadata_url: LTER_Metadata.jsp?Table=KBS002-005
-  dataset_id: "5"
-  comments: 
-  title: Weather Station VaxNotes
-  connection_url: jdbc:odbc:wthr
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS002-005&amp;limitBy=Year&amp;order=desc&amp;format=record
-  is_restricted: f
-  id: "11"
-  description: <kbsml_text><p>Weather station management notes originally created with the VaxNotes system.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS002-005
-datatables_126: 
-  name: KBS051-004
-  metadata_url: LTER_Metadata.jsp?Table=KBS051-004
-  dataset_id: "54"
-  comments: 
-  title: Raw Time series dataset
-  connection_url: jdbc:odbc:wthr-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS051-004&amp;limitBy=date&amp;order=desc&amp;orderby=record
-  is_restricted: f
-  id: "126"
-  description: <kbsml_text><p>The ts_data.dat data from the micromet tower</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS051_004
-datatables_041: 
-  name: KBS019-005
-  metadata_url: LTER_Metadata.jsp?Table=KBS019-005
-  dataset_id: "22"
-  comments: <kbsml_text><p>Cover crops such as vetch and clover are planted after a row crop, such as wheat or corn, and are left on the field over winter.  Usually they are plowed down the following spring.  Their productivity represents parts of two growing seasons in different calendar years.  Thus, assignment to a calendar year is somewhat ambiguous.  Fescue in T5, while technically a cover crop, is not plowed down.</p><p>In 2002 the cover crops were mistakenly plowed in before a biomass sample could be taken. So there is no cover crop biomass data available for 2002.</p></kbsml_text>
-  title: Cover Crops
-  connection_url: jdbc:odbc:ANPP
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS019-005&amp;tools=show&amp;limitBy=Year&amp;order=asc
-  is_restricted: f
-  id: "41"
-  description: <kbsml_text><p>Productivity data for cover crops in LTER main site treatments</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS019-005
-datatables_099: 
-  name: KBS042-012
-  metadata_url: LTER_Metadata.jsp?Table=KBS042-012
-  dataset_id: "45"
-  comments: 
-  title: Harvest
-  connection_url: jdbc:odbc:KBS042-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS042-012&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "99"
-  description: <kbsml_text><p></p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS042_012
-datatables_012: 
-  name: KBS002-006
-  metadata_url: LTER_Metadata.jsp?Table=KBS002-006
-  dataset_id: "5"
-  comments: 
-  title: LTER Daily Weather
-  connection_url: jdbc:odbc:wthr-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS002-006&amp;limitBy=Year&amp;order=desc&amp;orderby=date
-  is_restricted: f
-  id: "12"
-  description: <kbsml_text><p>A synthetic weather record drawn largely from the LTER Weather station but supplemented with data from nearby stations for completeness.  KBS002-006 is a superset of KBS002-001.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS002_006
-datatables_127: 
-  name: KBS052-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS052-001
-  dataset_id: "55"
-  comments: 
-  title: Plant Archive
-  connection_url: jdbc:odbc:kbs052
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS052-001
-  is_restricted: f
-  id: "127"
-  description: <kbsml_text><p>Archived Plant Material</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: PLANT_ARCHIVES_IMPORT
-datatables_042: 
-  name: KBS019-006
-  metadata_url: LTER_Metadata.jsp?Table=KBS019-006
-  dataset_id: "22"
-  comments: <kbsml_text><p>7-1-2003 Tim Bergsma.  There is a problem with the file 1999_NPP.xls.  Leaf litter for 1999 is not represented yet.</p></kbsml_text>
-  title: Litter Trap Biomass
-  connection_url: jdbc:odbc:ANPP
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS019-006&amp;tools=show&amp;limitBy=Year&amp;order=asc
-  is_restricted: f
-  id: "42"
-  description: <kbsml_text><p>Leaf litter collected from traps under poplars, etc.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS019-006
-datatables_013: 
-  name: KBS002-007
-  metadata_url: LTER_Metadata.jsp?Table=KBS002-007
-  dataset_id: "5"
-  comments: 
-  title: Hourly weather
-  connection_url: jdbc:odbc:wthr
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS002-007&amp;limitBy=Date&amp;order=desc
-  is_restricted: f
-  id: "13"
-  description: <kbsml_text><p>Raw hourly observations from the LTER weather station. These data are not checked.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS002-007_cache
-datatables_070: 
-  name: KBS025-002
-  metadata_url: LTER_Metadata.jsp?Table=KBS025-002
-  dataset_id: "28"
-  comments: 
-  title: Insect Photo Archive
-  connection_url: jdbc:odbc:Insects
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS025-002&amp;limitBy=Family&amp;format=record
-  is_restricted: f
-  id: "70"
-  description: "<kbsml_text><p>Periodically, researchers photograph insects in natural settings on or around the KBS LTER site.  The specimen may also be collected:  see KBS025-001.</p></kbsml_text>"
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS025-002
-datatables_128: 
-  name: KBS053-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS053_001
-  dataset_id: "56"
-  comments: 
-  title: Population by county
-  connection_url: jdbc:odbc:kbs053
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS053-001
-  is_restricted: f
-  id: "128"
-  description: <kbsml_text><p>Human population by county and year for the counties surrounding KBS. These numbers are extracted from the US census data as presented by the michigan.gov website</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS053_001
-datatables_043: 
-  name: KBS019-007
-  metadata_url: LTER_Metadata.jsp?Table=KBS019-007
-  dataset_id: "22"
-  comments: <kbsml_text><p>Variates other than diameter were occasionally taken.</p></kbsml_text>
-  title: Poplar Measurement
-  connection_url: jdbc:odbc:ANPP
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS019-007&amp;tools=show&amp;limitBy=Year&amp;order=asc
-  is_restricted: f
-  id: "43"
-  description: <kbsml_text><p>Poplars are measured to develop relationships between biomass and allometric values, or to estimate biomass from such relationships.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS019-007
-datatables_014: 
-  name: KBS003-001
-  metadata_url: 
-  dataset_id: "6"
-  comments: 
-  title: Baseline Soil Physical Properties
-  connection_url: 
-  data_url: http://lter.kbs.msu.edu/spatial/Texture_basedata.html
-  is_restricted: f
-  id: "14"
-  description: <kbsml_text><p>Baseline soil physical properties were analyzed for an array of sample points prior to the start of the main site experiment.</p></kbsml_text>
-  driver: 
-  object: 
-datatables_071: 
-  name: KBS026-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS026-001
-  dataset_id: "29"
-  comments: <kbsml_text><p>6-12-2003 Tim Bergsma.  Protocol mentions 1988, 1991, 1996, and 1999.  Table currently provides only 1995 and 1996.</p></kbsml_text>
-  title: Soil Bulk Density
-  connection_url: jdbc:odbc:Soil
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS026-001&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "71"
-  description: <kbsml_text><p>Soil bulk density is evaluated every few years for the main site treatments.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS026-001
-datatables_129: 
-  name: Log_DatabaseManagement
-  metadata_url: LTER_Metadata.jsp?Table=Log_DatabaseManagement
-  dataset_id: "3"
-  comments: 
-  title: Log of database management
-  connection_url: jdbc:odbc:Administration
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=Log_DatabaseManagement&amp;limitBy=Year&amp;order=desc&amp;format=record
-  is_restricted: f
-  id: "129"
-  description: <kbsml_text><p>Management notes concerning the existence, location, structure, and content of KBS LTER databases.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: JSP_Editor_Log_DatabaseManagement
-datatables_015: 
-  name: KBS003-002
-  metadata_url: 
-  dataset_id: "6"
-  comments: 
-  title: Baseline Soil Chemical Properties
-  connection_url: 
-  data_url: http://lter.kbs.msu.edu/spatial/Soilchem_basedata.html
-  is_restricted: f
-  id: "15"
-  description: <kbsml_text><p>Baseline soil chemical properties were analyzed for an array of sample points prior to the start of the main site experiment.</p></kbsml_text>
-  driver: 
-  object: 
-datatables_072: 
-  name: KBS028-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS028-001
-  dataset_id: "31"
-  comments: <kbsml_text><p>Occasionally, blank entries identified as 'cup c' appear.  Their significance is being researched.  5-13-2002 T.T.B.</p></kbsml_text>
-  title: Soil pH
-  connection_url: jdbc:odbc:Soil
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS028-001&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "72"
-  description: <kbsml_text><p>Soil pH by treatment, replicate, and analytical replicate</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS028-001
-datatables_016: 
-  name: KBS004-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS004-001
-  dataset_id: "7"
-  comments: 
-  title: Agronomic Field Log
-  connection_url: jdbc:odbc:Ag
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS004-001&amp;limitBy=Year&amp;order=desc&amp;format=record
-  is_restricted: f
-  id: "16"
-  description: <kbsml_text><p>This is a log of agronomic activity on the LTER site.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS004-001
-datatables_073: 
-  name: KBS029-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS029-001
-  dataset_id: "32"
-  comments: 
-  title: C/N data for KBS plants
-  connection_url: jdbc:odbc:plants
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS029-001&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "73"
-  description: <kbsml_text><p>This data set contains information about soil total Carbon, total Nitrogen, and C:N ratios for crop and non-crop plants in the KBS main site treatments.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS029-001
-datatables_044: 
-  name: KBS019-008
-  metadata_url: LTER_Metadata.jsp?Table=KBS019-008
-  dataset_id: "22"
-  comments: |-
-    <kbsml_text><p>Biomass is standing crop, or production since last clearcut, in g/m2, based on 9088 m2.  However, poplar density is not constant across the plots.
-    </p></kbsml_text>
-  title: Poplar Biomass at Clearcut
-  connection_url: jdbc:odbc:ANPP
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS019-008&amp;tools=show&amp;limitBy=Year&amp;order=asc
-  is_restricted: f
-  id: "44"
-  description: <kbsml_text><p>Poplar plots are clearcut and biomass is measured directly.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS019-008
-datatables_100: 
-  name: KBS042-013
-  metadata_url: LTER_Metadata.jsp?Table=KBS042-013
-  dataset_id: "45"
-  comments: 
-  title: Carbon Mineralization
-  connection_url: jdbc:odbc:KBS042-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS042-013&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "100"
-  description: |-
-    <kbsml_text>
-    <div>
-    <h2>Sampling</h2>
-    <p>
-    Soil cores are taken at 10 areas per plot at a depth of 10 cm usually after tillage.  One step forward is taken in the row and the core is sampled from the resulting footprint.   Five soil cores (1.9 cm diameter cylinder wet tip hand probe) are taken in a zigzag pattern up between rows 2 &amp; 3 and five soil cores are taken in a zigzag pattern down between rows 4 &amp; 5 using the footprint method.  The cores are taken on either side of the row.  The cores are placed directly into a plastic zip lock bag and placed on ice in a cooler.
-    </p><p>
-    The soils are immediately taken to the laboratory and placed in a cooler at 4 d&#176; C until analysis can be performed.
-    </p>
-    </div>
-    <div>
-    <h2>Laboratory Analysis</h2>
-    <p>
-    The composite soil samples are mixed, sieved through a 6 mm sieve and sub-sampled for carbon mineralization determination.   The sub-samples are allowed to air dry and then placed in a plastic bag for further analysis and/or storage.
-    </p><p>
-    For carbon incubations, 50 g are weighed into a plastic specimen cup and adjusted to 70% water holding capacity.  The cups are placed in quart size wide mouth canning jars, 10 ml of water added to the bottom of the jars (to maintain humidity) and then sealed with the accompanying ring/lid.  The lid has a holed drilled in the center and a septa placed in the hole to accommodate gas sampling.
-    </p><p>
-    The jars are pre-incubated in a darkened controlled temperature room at 25 &#176; C for 5-7 days.  The CO<sub>2</sub> content in the headspace of each jar is measured at various timed intervals using an infrared gas analyzer.  The jars are flushed with CO<sub>2</sub>-free air when CO<sub>2</sub> concentrations are expected to exceed 6% prior to the next sampling.
-    </p><p>
-    Reference:  Assessment Methods for Soil Carbon.  2001.  Chapter 14.  Lal, R., Kimble, J. and Follett, R. (eds).  CRC Press Boca Tatton, FL.</p>
-    </div>
-    </kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS042_013
-datatables_017: 
-  name: KBS004-002
-  metadata_url: LTER_Metadata.jsp?Table=KBS004-002
-  dataset_id: "7"
-  comments: <kbsml_text><p>Clover didn't grow very well in 1999, so a second cover crop, rye, was planted.</p></kbsml_text>
-  title: Main Site Planting Details by Year and Treatment
-  connection_url: jdbc:odbc:Ag
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS004-002
-  is_restricted: f
-  id: "17"
-  description: <kbsml_text><p>Crops are rotated each year for the main agronomic treatments of the LTER main site experiment(s).  This is a record of planting details.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS004-002
-datatables_074: 
-  name: KBS030-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS030-001
-  dataset_id: "33"
-  comments: 
-  title: Main Plot Stand counts
-  connection_url: jdbc:odbc:KBS030
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS030-001&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "74"
-  description: <kbsml_text><p>Stand counts from the main KBS-LTER site. All plots were planted with the same density, but due to events and competition during the season the final stand counts can be different</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS030-001
-datatables_045: 
-  name: KBS019-009
-  metadata_url: LTER_Metadata.jsp?Table=KBS019-009
-  dataset_id: "22"
-  comments: <kbsml_text><p>Biomass is standing crop, not annual increment, on a square meter basis</p></kbsml_text>
-  title: Poplar Biomass
-  connection_url: jdbc:odbc:ANPP
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS019-009&amp;tools=show&amp;limitBy=Year&amp;order=asc
-  is_restricted: f
-  id: "45"
-  description: <kbsml_text><p>Poplars are destructively sampled to estimate biomass.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS019-009
-datatables_130: 
-  name: Log_GPRNETManagement
-  metadata_url: LTER_Metadata.jsp?Table=Log_GPRNETManagement
-  dataset_id: "3"
-  comments: 
-  title: Log of GPRNET management
-  connection_url: jdbc:odbc:Administration
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=Log_GPRNETManagement&amp;limitBy=Year&amp;order=desc&amp;format=record
-  is_restricted: f
-  id: "130"
-  description: <kbsml_text><p>Management notes concerning the Windows NT workstation network GPRNET, servicing LTER staff and infrastructure.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: JSP_Editor_Log_GPRNETManagement
-datatables_018: 
-  name: KBS004-003
-  metadata_url: LTER_Metadata.jsp?Table=KBS004-003
-  dataset_id: "7"
-  comments: 
-  title: Project Manager's Log
-  connection_url: jdbc:odbc:ProjectLog
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS004-003&amp;limitBy=Year&amp;order=desc&amp;format=record
-  is_restricted: f
-  id: "18"
-  description: <kbsml_text><p>This is a log of research activity on the LTER site.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS004-003
-datatables_075: 
-  name: KBS032-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS032-001
-  dataset_id: "35"
-  comments: 
-  title: Agronomic Yields from the Biodiversity Study
-  connection_url: jdbc:odbc:KBS032
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS032-001&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "75"
-  description: <kbsml_text><p>Agronomic Yields measured before the regular harvest by harvesting a subplot with a plot combine</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS032-001
-datatables_046: 
-  name: KBS019-010
-  metadata_url: LTER_Metadata.jsp?Table=KBS019-010
-  dataset_id: "22"
-  comments: 
-  title: Scope of Non-crop Biomass
-  connection_url: jdbc:odbc:ANPP
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS019-010
-  is_restricted: f
-  id: "46"
-  description: <kbsml_text><p>Summary of sampling effort represented in the Non-crop Biomass table, by Treatment, Replicate, Station, etc.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS019-010
-datatables_101: 
-  name: KBS042-014
-  metadata_url: LTER_Metadata.jsp?Table=KBS042-014
-  dataset_id: "45"
-  comments: 
-  title: Nitrogen Mineralization
-  connection_url: jdbc:odbc:KBS042-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS042-014&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "101"
-  description: |-
-    <kbsml_text>
-    <div>
-    <h2>Sampling</h2>
-    <p>
-    Soil cores are taken at 10 areas per plot at a depth of 10 cm usually after tillage.  One step forward is taken in the row and the core is sampled from the resulting footprint.   Five soil cores (1.9 cm diameter cylinder wet tip hand probe) are taken in a zigzag pattern up between rows 2 &amp; 3 and five soil cores are taken in a zigzag pattern down between rows 4 &amp; 5 using the footprint method.  The cores are taken on either side of the row.  The cores are placed directly into a plastic zip lock bag and placed on ice in a cooler.
-    </p><p>
-    The soils are immediately taken to the laboratory and placed in a cooler at 4 &#176; C until analysis can be performed.
-    </p></div><div><h2>
-    Laboratory Analysis</h2>
-    <p>
-    The composite soil samples are mixed, sieved through a 6 mm sieve and sub-sampled for moisture determination.   For each composite soil four 20 g dry weight equivalent  aliquots are weighed into 100 ml plastic specimen cups and brought to 50% water holding capacity.  
-    </p><p>
-    One cup/soil is immediately extracted (0 day) with 100 ml of 1N KCL and inorganic N (N-NO<sub>3</sub><sup>-</sup> and N-NH<sub>4</sub><sup>+</sup>) concentrations are analyzed using a Lachat automated colorimetric analyzer.
-    </p><p>
-    The other three cups are placed in plastic storage containers (containing a thin layer of water on the bottom to maintain humidity), loosely capped and incubated in a darkened controlled temperature room at 25 &#176; C.  At each interval (30, 70,150 day) one cup/soil is removed and extracted with 100 ml of 1N KCL. Inorganic N (N-NO<sub>3</sub><sup>-</sup> and N-NH<sub>4</sub><sup>+</sup>) concentrations are analyzed using a Lachat automated colorimetric analyzer.  (See <em>Soil Nitrates</em> for more information on extraction procedure).
-    </p></div></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS042_014
-datatables_131: 
-  name: Log_LTERWebManagement
-  metadata_url: LTER_Metadata.jsp?Table=Log_LTERWebManagement
-  dataset_id: "3"
-  comments: 
-  title: Log of LTER Web management
-  connection_url: jdbc:odbc:Administration
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=Log_LTERWebManagement&amp;limitBy=Year&amp;order=desc&amp;format=record
-  is_restricted: f
-  id: "131"
-  description: <kbsml_text><p>Management notes concerning the website lter.kbs.msu.edu.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: JSP_Editor_Log_LTERWebManagement
-datatables_019: 
-  name: KBS004-004
-  metadata_url: LTER_Metadata.jsp?Table=KBS004-004
-  dataset_id: "7"
-  comments: 
-  title: Soil Sampling Log
-  connection_url: jdbc:odbc:Soil
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS004-004&amp;limitBy=Year&amp;order=desc&amp;format=record
-  is_restricted: f
-  id: "19"
-  description: <kbsml_text><p>This is a log of the soil sampling done as part of the baseline data collection. </p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS004-004
-datatables_076: 
-  name: KBS032-002
-  metadata_url: LTER_Metadata.jsp?Table=KBS032-002
-  dataset_id: "35"
-  comments: 
-  title: Fall 2001 Soil Moisture
-  connection_url: jdbc:odbc:KBS032
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS032-002
-  is_restricted: f
-  id: "76"
-  description: <kbsml_text><p>Initial Soil Moisture done as part of the baseline sampling</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS032-002
-datatables_047: 
-  name: KBS019-011
-  metadata_url: LTER_Metadata.jsp?Table=KBS019-011
-  dataset_id: "22"
-  comments: <kbsml_text><p>Unlike KBS019-009, Biomass in this table is stored as grams per tree, not grams per square meter.  There are multiple stems per tree, analyzed separately, whereas branches (KBS019-012) are aggregated on a per tree basis.</p></kbsml_text>
-  title: Coppice Poplar Stems
-  connection_url: jdbc:odbc:ANPP
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS019-011&amp;tools=show&amp;limitBy=Year&amp;order=asc
-  is_restricted: f
-  id: "47"
-  description: <kbsml_text><p>The original LTER poplars were copiced in 1999.  This table tracks regrowth.  Details of stems stored separately from branches (KBS019-012).</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS019-011
-datatables_102: 
-  name: KBS042-015
-  metadata_url: LTER_Metadata.jsp?Table=KBS042-015
-  dataset_id: "45"
-  comments: 
-  title: C and N Content
-  connection_url: jdbc:odbc:KBS042-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS042-015&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "102"
-  description: |-
-    <kbsml_text>
-    <div>
-    <h2>Sampling</h2>
-    <p>Sampling is conducted by one of two methods</p>
-    <div><h3>Method 1</h3>
-    <p>Soil cores are taken at 5 areas per plot at a depth of 25 cm.  Three soil cores (1.9 cm diameter cylinder wet tip hand probe) are taken in a zigzag pattern up between rows 2 &amp; 3 and two soil cores are taken in a zigzag pattern between down rows 4 &amp; 5.  The cores are taken on either side of the row.  The cores are combined in a pail, hand crumbled, hand mixed and put into a cardboard soil box.  Any remaining soil is placed backed into the plot.  The boxes are then placed (within 2-3 hrs of sampling) into the soils dryer (low temperature convection oven) at 110-140 &#176; F until dry (at least 48 hrs).  After removal from the dryer, the soils are then ground using a Hammermill Grinder through a 2 mm sieve and placed back into the box. The soils are then taken to the laboratory for analysis. (See <em>Deep Core Nitrates</em> for sampling protocol for sampling of deep cores).</p>
-    </div>
-    <div>
-    <h3>Method 2</h3>
-    <p>
-    Soil cores are taken at 10 areas per plot at a depth of 10 cm usually after tillage.  One step forward is taken in the row and the core is sampled from the resulting footprint.   Five soil cores (1.9 cm diameter cylinder wet tip hand probe) are taken in a zigzag pattern up between rows 2 &amp; 3 and five soil cores are taken in a zigzag pattern down between rows 4 &amp; 5 using the footprint method.  The cores are taken on either side of the row.  The cores are placed directly into a plastic zip lock bag and placed on ice in a cooler. The soils are immediately taken to the laboratory and placed in a cooler at 4 &#176; C until analysis can be performed.</p>
-    </div>
-    </div>
-    <div><h2>Laboratory analysis</h2>
-    <p>Analysis corresponds to choice of method.</p>
-    <div><h3>Method 1</h3>
-    <p>Sub-samples are placed in a Qorpak jar containing several metal rods, capped, and placed on a rotary grinder overnight.  The ground soil is then placed in plastic vials for future analysis/storage.</p>
-    </div>
-    <div><h3>Method 2</h3>
-    <p>
-    The composite soil samples are mixed and sieved through a 6 mm sieve.  Sub-samples are removed and allowed to air dry.   These samples are ground with a mortar and pestle and placed in plastic vials for future analysis/storage.  If mortar and pestle is insufficient, the soil is placed in a Qorpak jar containing several metal rods, capped, and placed on a rotary grinder overnight.  The ground soil is then placed in plastic vials for future analysis/storage.</p>
-    <p>
-    The dried, ground soils are weighed on a microbalance into tin capsules for analysis on a Carlo Erba CHN analyzer for % Total Carbon and Nitrogen.</p>
-    </div></div>
-    </kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS042_015
-datatables_048: 
-  name: KBS019-012
-  metadata_url: LTER_Metadata.jsp?Table=KBS019-012
-  dataset_id: "22"
-  comments: <kbsml_text><p>Data for poplars sampled since 1999.  Branches are weighed collectively for a given tree.  Units are grams per tree, not grams per square meter.</p></kbsml_text>
-  title: Coppice Poplar Branches
-  connection_url: jdbc:odbc:ANPP
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS019-012&amp;tools=show&amp;limitBy=Year&amp;order=asc
-  is_restricted: f
-  id: "48"
-  description: <kbsml_text><p>Masses on a per tree basis for branches from sampled poplars.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS019-012
-datatables_103: 
-  name: KBS042-016
-  metadata_url: LTER_Metadata.jsp?Table=KBS042-016
-  dataset_id: "45"
-  comments: 
-  title: Nitrates
-  connection_url: jdbc:odbc:KBS042-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS042-016&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "103"
-  description: "<kbsml_text>\r\n\
-    <div><h2>Sampling</h2>\r\n\
-    <p>\r\n\
-    Soil Nitrate is sampled approximately every 2 weeks through growing season (April \x96 \r\n\
-    October) through 1999; not all years were sampled every 2 weeks    \r\n\
-    depending on ground conditions; only spring and fall sampling from \r\n\
-    2000 on.</p><p>\r\n\
-    \r\n\
-    Soil cores are taken at 5 areas per plot at a depth of 25 cm.  Three soil cores (1.9 cm diameter cylinder wet tip hand probe) are taken in a zigzag pattern up between rows 2 &amp; 3 and two soil cores are taken in a zigzag pattern between down rows 4 &amp; 5.  The cores are taken on either side of the row.  The cores are combined in a pail, hand crumbled, hand mixed and put into a cardboard soil box.  Any remaining soil is placed backed into the plot.\r\n\
-    </p><p>\r\n\
-    The boxes are then placed (within 2-3 hrs of sampling) into the soils dryer (low temperature convection oven) at 110-140 &#176; F until dry (at least 48 hrs).\r\n\
-    </p><p>\r\n\
-    After removal from the dryer, the soils are then ground using a Hammermill Grinder through a 2 mm sieve and placed back into the box.\r\n\
-    </p><p>\r\n\
-    The soils are then taken to the laboratory for analysis.\r\n\
-    </p></div><div><h2>\r\n\
-    Laboratory analysis</h2><p>\r\n\
-    \r\n\
-    A 10 g sub-sample is weighed into a 100 ml plastic specimen cup and 50 ml of 1N KCl is added.  The cup is shaken for 30 minutes on a reciprocal shaker (approx. 180 strokes per minute).  The cup is removed from the shaker and allowed to stand for 15 minutes.  The supernatant is then filtered through a Whatman No. 1 filter paper and collected into a small plastic vial.  The samples are then analyzed for inorganic N (N-NO<sub>3</sub><sup>-</sup> and N-NH<sub>4</sub><sup>+</sup>) concentrations using a Lachat automated colorimetric analyzer. If analysis cannot be preformed immediately, the vials can be frozen until they can be analyzed. \r\n\
-    </p>\r\n\
-    </div>\r\n\
-    </kbsml_text>"
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS042_016
-datatables_132: 
-  name: Log_ServerManagement
-  metadata_url: LTER_Metadata.jsp?Table=Log_ServerManagement
-  dataset_id: "3"
-  comments: 
-  title: Log of LTER Server management
-  connection_url: jdbc:odbc:Administration
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=Log_ServerManagement&amp;limitBy=Year&amp;order=desc&amp;format=record
-  is_restricted: f
-  id: "132"
-  description: <kbsml_text><p>Management notes concerning the servers LTERNT2 and LTERNT.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: JSP_Editor_Log_ServerManagement
-datatables_077: 
-  name: KBS033-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS033-001
-  dataset_id: "36"
-  comments: 
-  title: Rainfed Grain Yields (kg/ha)
-  connection_url: jdbc:odbc:KBS033-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS033-001&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "77"
-  description: <kbsml_text><p>Grain yields (at 15% moisture) in kg/ha</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS033_001
-datatables_049: 
-  name: KBS019-013
-  metadata_url: LTER_Metadata.jsp?Table=KBS019-013
-  dataset_id: "22"
-  comments: <kbsml_text><p>Please note that branch biomass and stem biomass are given in grams per tree, but their sum (woody biomass) is given on areal basis (g/m2) assuming one tree per 2 square meters.</p></kbsml_text>
-  title: Coppice Poplars
-  connection_url: jdbc:odbc:ANPP
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS019-013&amp;tools=show&amp;limitBy=Year&amp;order=asc
-  is_restricted: f
-  id: "49"
-  description: <kbsml_text><p>Poplars were clearcut in 1999.  Since then, several trees per plot per year have been destructively sampled.  This table integrates stem and branch data (KBS019-011 and KBS019-012).</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS019-013
-datatables_104: 
-  name: KBS042-017
-  metadata_url: LTER_Metadata.jsp?Table=KBS042-017
-  dataset_id: "45"
-  comments: 
-  title: Deep Nitrate
-  connection_url: jdbc:odbc:KBS042-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS042-017&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "104"
-  description: "<kbsml_text>\r\n\
-    <p>Three soil cores are taken down the center of the plot at the north end, south end and middle of plot.  A 1 1/4 inch diameter core cylinder (using the probe truck) is pushed down to approximately 3 1/2  feet.  If there is no soil compression, any soil beyond 3 ft. is discarded.  If there is soil compression, all of the soil beyond 2 ft. is considered the 3 ft. sample.  \r\n\
-    </p><p>\r\n\
-    The probe is marked for each of the depths \x96 1 ft., 2 ft., and 3 ft.  The probe is removed from the ground and inverted.  A large screwdriver (or other implement to separate the depths) is used to cut off the 0-1 ft. and put into a pail.  The 1-2 ft. is separated and put into another pail.  The 2-3 ft. (or 2 ft. to the end) is placed into a 3<sup>rd</sup> pail.\r\n\
-    </p><p>\r\n\
-    The cores from each site in the plot are combined in a pail, hand crumbled, run through a &#188; inch  screen (to remove rocks) and put into a cardboard soil box.  The boxes are labeled with the plot ID, depth and date sampled.\r\n\
-    </p><p>\r\n\
-    The boxes are then placed (within 2-3 hrs of sampling) into the soils dryer (low temperature convection oven) at 110-140 &#176; F until dry (at least 48 hrs).\r\n\
-    </p><p>\r\n\
-    After removal from the dryer, the soils are then ground using a Hammermill Grinder through a 2 mm sieve and placed back into the box.\r\n\
-    </p><p>\r\n\
-    The soils are then taken to the laboratory for analysis.\r\n\
-    </p><p>\r\n\
-    Laboratory analysis.  \r\n\
-    Inorganic N (see<em>Soil Nitrates</em>), Total C and N (see <em>Total CN</em>), and Macro and Micro nutrients (analyzed in Soil &amp; Plant Nutrient Laboratory, A-81 PSSB, MSU) may be analyzed as determined by the LFL manager.  \r\n\
-    </p>\r\n\
-    </kbsml_text>"
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS042_017
-datatables_133: 
-  name: View_SiteUseRequests
-  metadata_url: LTER_Metadata.jsp?Table=View_SiteUseRequests
-  dataset_id: "7"
-  comments: 
-  title: Approved Site Use Requests (SURFs)
-  connection_url: jdbc:odbc:Administration
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=View_SiteUseRequests&amp;limitBy=Year&amp;order=desc&amp;format=record
-  is_restricted: f
-  id: "133"
-  description: <kbsml_text><p>Site Use Request Forms are filled out by investigators wishing to conduct sampling on LTER properties.  When approved, the request is listed on the web.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: View_SiteUseRequests
-datatables_020: 
-  name: KBS004-005
-  metadata_url: LTER_Metadata.jsp?Table=KBS004-005
-  dataset_id: "7"
-  comments: 
-  title: Treatment Descriptions
-  connection_url: jdbc:odbc:Ag
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS004-005
-  is_restricted: f
-  id: "20"
-  description: <kbsml_text><p>Main site treatments for the KBS LTER experiment are briefly described.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS004-005
-datatables_078: 
-  name: KBS033-002
-  metadata_url: LTER_Metadata.jsp?Table=KBS033-002
-  dataset_id: "36"
-  comments: 
-  title: Irrigated Grain Yields (kg/ha)
-  connection_url: jdbc:odbc:KBS033-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS033-002&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "78"
-  description: <kbsml_text><p>Grain yields (at 15% moisture) in kg/ha for the irrigated study</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS033_002
-datatables_105: 
-  name: KBS042-018
-  metadata_url: LTER_Metadata.jsp?Table=KBS042-018
-  dataset_id: "45"
-  comments: 
-  title: Lysimeters
-  connection_url: jdbc:odbc:KBS042-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS042-018&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "105"
-  description: <kbsml_text><p></p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS042_018
-datatables_021: 
-  name: KBS004-006
-  metadata_url: LTER_Metadata.jsp?Table=KBS004-006
-  dataset_id: "7"
-  comments: 
-  title: Agronomic Field Log by Study
-  connection_url: jdbc:odbc:Ag
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS004-006&amp;limitBy=Study&amp;from=Main+site&amp;to=Main+site&amp;order=desc&amp;format=record&amp;tools=show
-  is_restricted: f
-  id: "21"
-  description: <kbsml_text><p>This is a log of agronomic activity on the LTER site, with entries grouped according to the study or experiment to which they refer.  KBS004-006 is an augmented subset of KBS004-001.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS004-006
-datatables_079: 
-  name: KBS034-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS034-001
-  dataset_id: "37"
-  comments: 
-  title: Agronomic Yields
-  connection_url: jdbc:odbc:KBS034
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS034-001&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "79"
-  description: <kbsml_text><p>Corn grain yields from the ECB study</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS034-001
-datatables_106: 
-  name: KBS042-019
-  metadata_url: LTER_Metadata.jsp?Table=KBS042-019
-  dataset_id: "45"
-  comments: <kbsml_text><p>9/20/2001- big lysimeters no longer sampled from this date forward.</p></kbsml_text>
-  title: Big Lysimeters
-  connection_url: jdbc:odbc:KBS042-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS042-019
-  is_restricted: f
-  id: "106"
-  description: <kbsml_text><p></p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS042_019
-datatables_107: 
-  name: KBS042-020
-  metadata_url: LTER_Metadata.jsp?Table=KBS042-020
-  dataset_id: "45"
-  comments: 
-  title: Nutrients
-  connection_url: jdbc:odbc:KBS042-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS042-020
-  is_restricted: f
-  id: "107"
-  description: <kbsml_text><p></p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS042_020
-datatables_050: 
-  name: KBS019-014
-  metadata_url: LTER_Metadata.jsp?Table=KBS019-14
-  dataset_id: "22"
-  comments: 
-  title: Non Crop Species richness
-  connection_url: jdbc:odbc:ANPP
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS019-014
-  is_restricted: f
-  id: "50"
-  description: <kbsml_text><p>Average species richness as computer by the Shannon-Weaver H index based on the biomass of each species</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS019-014
-datatables_022: 
-  name: KBS004-007
-  metadata_url: LTER_Metadata.jsp?Table=KBS004-007
-  dataset_id: "7"
-  comments: 
-  title: Field Activity Classification
-  connection_url: jdbc:odbc:Ag
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS004-007&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "22"
-  description: "<kbsml_text><p>A compliation of all of the field activites that occurred on the main site</p><p>WARNING: This is produced by coding the Agronomic Log (KBS004-001). Not every record in KBS004-001 may be included here. The definitve guide is the Agronomic Log.</p> </kbsml_text>"
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS004-007
-datatables_108: 
-  name: KBS042-021
-  metadata_url: LTER_Metadata.jsp?Table=KBS042-021
-  dataset_id: "45"
-  comments: 
-  title: Yields
-  connection_url: jdbc:odbc:KBS042-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS042-021
-  is_restricted: f
-  id: "108"
-  description: <kbsml_text><p></p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS042_021
-datatables_051: 
-  name: KBS020-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS020-001
-  dataset_id: "23"
-  comments: <kbsml_text><p>2003-12-18 Sven Bohm. From 2001 to present corn yield is based on 15% moisture rather than 15.5%</p><p>2004-1-13 Sven Bohm. Yield data from 2003 from treatments 3 and 4 were corrected for the presence of weed seeds, since there were more than the usual amount of weed seeds in the harvested grain</p></kbsml_text>
-  title: Agronomic Yields
-  connection_url: jdbc:odbc:Ag
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS020-001&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "51"
-  description: <kbsml_text><p>Harvest data from the KBS LTER main site study..</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS020-001
-datatables_080: 
-  name: KBS037-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS037-001
-  dataset_id: "40"
-  comments: <kbsml_text><p>Default data requests may exceed the memory capacity of the server.  Contact the LTER information manager for assistance.</p></kbsml_text>
-  title: Monitored Yield
-  connection_url: jdbc:odbc:HiResYield2
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS037-001&amp;limitBy=Year&amp;order=desc&amp;format=csv
-  is_restricted: f
-  id: "80"
-  description: <kbsml_text><p>High resolution geo-referenced grain flow rate data from the GPS yield monitor on the LTER combine.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS037-001
-datatables_109: 
-  name: KBS043-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS043-001
-  dataset_id: "46"
-  comments: <kbsml_text><p>This table was created 9-9-2002 by TTB as a replacement for an html version.</p></kbsml_text>
-  title: 1994 Earthworm Survey
-  connection_url: jdbc:odbc:KBS022
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS043-001
-  is_restricted: f
-  id: "109"
-  description: <kbsml_text><p>This file contains station tallies and averages of identified and unidentified earthworm species found in treatments 1, 7, SF, DF on 12-13 July 1994.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS043-001
-datatables_052: 
-  name: KBS020-002
-  metadata_url: LTER_Metadata.jsp?Table=KBS020-002
-  dataset_id: "23"
-  comments: 
-  title: Agronomic Soil Samples
-  connection_url: jdbc:odbc:Ag
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS020-002&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "52"
-  description: <kbsml_text><p>Soil samples taken for fertilizer recommendations. These are usually taken in the fall, and analysed by the <a href="http://www.css.msu.edu/SoilTesting/">Michigan State University Soils Laboratory</a>.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS020-002
-datatables_023: 
-  name: KBS006-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS006-001
-  dataset_id: "9"
-  comments: 
-  title: Seed bank by direct germination
-  connection_url: jdbc:odbc:kbs006-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS006-001&amp;limitBy=year&amp;order=desc
-  is_restricted: f
-  id: "23"
-  description: <kbsml_text><p>Seed bank data estimated by direct germination</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS006_001
-datatables_081: 
-  name: KBS038-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS038-001
-  dataset_id: "41"
-  comments: 
-  title: Modeled Soil Moisture and Temperature
-  connection_url: jdbc:odbc:Soil
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS038-001&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "81"
-  description: <kbsml_text><p>Simulated soil moisture and temperature for treatments 1, 2, 4, 6, 7, and 8.  Simulations were performed using the SALUS crop model.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS038-001
-datatables_053: 
   name: KBS021-001
   metadata_url: LTER_Metadata.jsp?Table=KBS021-001
   dataset_id: "24"
   comments: 
   title: Soil Inorganic N by Treatment
+  is_sql: 
   connection_url: jdbc:odbc:InorgN
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS021-001&amp;limitBy=Year&amp;order=desc
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS021-001&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
   is_restricted: t
   id: "53"
   description: <kbsml_text><p>Soil inorganic nitrogen values by treatment</p></kbsml_text>
+  update_frequency_years: 
   driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS021-001
-datatables_024: 
-  name: KBS006-002
-  metadata_url: LTER_Metadata.jsp?Table=KBS006-002
-  dataset_id: "9"
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_032: 
+  name: KBS004-007
+  metadata_url: LTER_Metadata.jsp?Table=KBS004-007
+  dataset_id: "7"
   comments: 
-  title: Seedbank by elutrication
-  connection_url: jdbc:odbc:kbs006-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS006-002&amp;limitBy=year&amp;order=desc
+  title: Field Activity Classification
+  is_sql: 
+  connection_url: jdbc:odbc:Ag
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS004-007&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
   is_restricted: f
-  id: "24"
-  description: <kbsml_text><p>Seed numbers determined by elutrication of soil</p></kbsml_text>
+  id: "22"
+  description: "<kbsml_text><p>A compliation of all of the field activites that occurred on the main site</p><p>WARNING: This is produced by coding the Agronomic Log (KBS004-001). Not every record in KBS004-001 may be included here. The definitve guide is the Agronomic Log.</p> </kbsml_text>"
+  update_frequency_years: 
   driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS006_002
-datatables_082: 
-  name: KBS039-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS039-001
-  dataset_id: "42"
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_003: 
+  name: KBS013_003
+  metadata_url: LTER_Metadata.jsp?Table=KBS013_003
+  dataset_id: "16"
   comments: 
-  title: Log of GPS usage and comments
-  connection_url: jdbc:odbc:GPS
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS039-001&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "82"
-  description: <kbsml_text><p>Usage of GPS systems at KBS for official LTER surveys normally follows a written protocol.  This log is a repository for comments on the use of a protocol, and any other notes that seem relevant for the interpretation of the resulting data.</p></kbsml_text>
+  title: LTER Trace Gas Data from 2000
+  is_sql: 
+  connection_url: jdbc:odbc:Gas
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS013_003
+  last_updated_on: 
+  is_restricted: t
+  id: "27"
+  description: <kbsml_text></kbsml_text>
+  update_frequency_years: 
   driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS039-001
-datatables_054: 
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_118: 
+  name: KBS046-004
+  metadata_url: LTER_Metadata.jsp?Table=KBS046-004
+  dataset_id: "49"
+  comments: 
+  title: Methane consumption in continous corn
+  is_sql: 
+  connection_url: jdbc:odbc:KBS046-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS046-004
+  last_updated_on: 
+  is_restricted: f
+  id: "116"
+  description: <kbsml_text><p>Methane consumption in continous corn as influenced by fertilization</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_061: 
   name: KBS021-002
   metadata_url: LTER_Metadata.jsp?Table=KBS021-001
   dataset_id: "24"
   comments: 
   title: Soil Inorganic N by Plot
+  is_sql: 
   connection_url: jdbc:odbc:InorgN
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS021-002&amp;limitBy=Year&amp;order=desc
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS021-002&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
   is_restricted: t
   id: "54"
   description: <kbsml_text><p>Soil inorganic nitrogen values by treatment and replicate</p></kbsml_text>
+  update_frequency_years: 
   driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS021-002
-datatables_025: 
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_004: 
+  name: KBS018-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS018-001
+  dataset_id: "21"
+  comments: 
+  title: KBS Herbarium Image Archive
+  is_sql: 
+  connection_url: jdbc:odbc:herb
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS018-001&amp;format=record
+  last_updated_on: 
+  is_restricted: f
+  id: "33"
+  description: <kbsml_text><p>These are images collecte in support of the KBS Herbarium</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_119: 
+  name: KBS046-005
+  metadata_url: LTER_Metadata.jsp?Table=KBS046-005
+  dataset_id: "49"
+  comments: 
+  title: Methane consumption in forest soils by depth
+  is_sql: 
+  connection_url: jdbc:odbc:KBS046-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS046-005
+  last_updated_on: 
+  is_restricted: f
+  id: "117"
+  description: <kbsml_text><p>Methane consumption and nitrification in forest soils taken from different depths</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_062: 
+  name: KBS021-003
+  metadata_url: LTER_Metadata.jsp?Table=KBS021-003
+  dataset_id: "24"
+  comments: <kbsml_text><p>Analytical details (outliers, standard deviation, etc.) may be available on request.</p></kbsml_text>
+  title: Soil Inorganic N by Plot
+  is_sql: 
+  connection_url: jdbc:odbc:InorgN
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS021-003&amp;tools=show&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "55"
+  description: <kbsml_text><p>Soil inorganic nitrogen values by treatment and replicate</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_033: 
+  name: KBS006-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS006-001
+  dataset_id: "9"
+  comments: 
+  title: Seed bank by direct germination
+  is_sql: 
+  connection_url: jdbc:odbc:kbs006-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS006-001&amp;limitBy=year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "23"
+  description: <kbsml_text><p>Seed bank data estimated by direct germination</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_005: 
+  name: KBS022-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS022-001
+  dataset_id: "25"
+  comments: 
+  title: Amphibians Species List
+  is_sql: 
+  connection_url: jdbc:odbc:KBS022
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS022-001
+  last_updated_on: 
+  is_restricted: f
+  id: "57"
+  description: <kbsml_text><p>A list of amphibians occuring on or near the W. K. Kellogg Biological Station.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_090: 
+  name: KBS039-003
+  metadata_url: LTER_Metadata.jsp?Table=KBS039-003
+  dataset_id: "42"
+  comments: 
+  title: Naviational GPS Points (Expanded)
+  is_sql: 
+  connection_url: jdbc:odbc:GPS
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS039-003
+  last_updated_on: 
+  is_restricted: f
+  id: "84"
+  description: <kbsml_text><p>An expanded view of the navigational points</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_063: 
+  name: KBS021-004
+  metadata_url: LTER_Metadata.jsp?Table=KBS021-004
+  dataset_id: "24"
+  comments: 
+  title: Soil potential N mineralization rates by plot
+  is_sql: 
+  connection_url: jdbc:odbc:InorgN
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS021-004&amp;tools=show&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "56"
+  description: <kbsml_text><p>Periodically, sub-samples from a soil sampling campaign are reburied in porous bags.  After about 21 days, they are recovered and analyzed for N content.  This table represents change in soil nitrate (plus nitrite) and ammonium over the incubation period.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_034: 
+  name: KBS006-002
+  metadata_url: LTER_Metadata.jsp?Table=KBS006-002
+  dataset_id: "9"
+  comments: 
+  title: Seedbank by elutrication
+  is_sql: 
+  connection_url: jdbc:odbc:kbs006-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS006-002&amp;limitBy=year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "24"
+  description: <kbsml_text><p>Seed numbers determined by elutrication of soil</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_006: 
+  name: KBS041-002
+  metadata_url: 
+  dataset_id: "44"
+  comments: 
+  title: 1997 Low-level, Black and White Survey
+  is_sql: 
+  connection_url: 
+  data_url: http://lternt2.kbs.msu.edu/Data
+  last_updated_on: 
+  is_restricted: f
+  id: "87"
+  description: <kbsml_text><p>In 1997 a Low-level flight was done while the leaves were off. This survey was done in black and white only</p></kbsml_text>
+  update_frequency_years: 
+  driver: 
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_091: 
+  name: KBS040-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS040-001
+  dataset_id: "43"
+  comments: 
+  title: County, State, and Regional Yields
+  is_sql: 
+  connection_url: jdbc:odbc:KBS040-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS040-001&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "85"
+  description: <kbsml_text><p>County, state, and regional yields are downloaded from http://www.usda.gov/nass/ and formatted for display.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_064: 
+  name: KBS022-002
+  metadata_url: LTER_Metadata.jsp?Table=KBS022-002
+  dataset_id: "25"
+  comments: 
+  title: Birds Species List
+  is_sql: 
+  connection_url: jdbc:odbc:KBS022
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS022-002
+  last_updated_on: 
+  is_restricted: f
+  id: "58"
+  description: <kbsml_text><p>A list of birds occuring on or near the W. K. Kellogg Biological Station.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_035: 
   name: KBS011-001
   metadata_url: LTER_Metadata.jsp?Table=KBS011-001
   dataset_id: "14"
@@ -1542,27 +320,81 @@ datatables_025:
   title: |-
     Chloroform Fumigation-Incubation: 
     Soil Microbial Biomass Carbon and Nitrogen
+  is_sql: 
   connection_url: jdbc:odbc:KBS011-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS011-001&amp;limitBy=Year&amp;order=desc
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS011-001&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
   is_restricted: f
   id: "25"
   description: <kbsml_text><p>Soil microbial biomass carbon and nitrogen as determined by chloroform fumigation - incubation.</p></kbsml_text>
+  update_frequency_years: 
   driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS011_001
-datatables_083: 
-  name: KBS039-002
-  metadata_url: LTER_Metadata.jsp?Table=KBS039-002
-  dataset_id: "42"
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_007: 
+  name: KBS042-012
+  metadata_url: LTER_Metadata.jsp?Table=KBS042-012
+  dataset_id: "45"
   comments: 
-  title: Navigational GPS Points
-  connection_url: jdbc:odbc:GPS
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS039-002
+  title: Harvest
+  is_sql: 
+  connection_url: jdbc:odbc:KBS042-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS042-012&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
   is_restricted: f
-  id: "83"
-  description: <kbsml_text><p>A test database to experiment with the retieval of points for navigation p</p></kbsml_text>
+  id: "99"
+  description: <kbsml_text><p></p></kbsml_text>
+  update_frequency_years: 
   driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS039-002
-datatables_026: 
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_092: 
+  name: KBS041-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS041-001
+  dataset_id: "44"
+  comments: 
+  title: Annual Color Infrared Aerial Photographs
+  is_sql: 
+  connection_url: jdbc:odbc:GIS
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS041-001
+  last_updated_on: 
+  is_restricted: f
+  id: "86"
+  description: <kbsml_text><p>From 1993 until the present the KBS LTER has be supporting yearly acquisition of color infrared aerial photography of KBS properties. Annual flight dates coincide with vegetative peak biomass and serve to document trends and changes in the landscape</p><p>From 1993-1997 the KBS Main site (including the LTER), Lux Arbor Reserve and the Kellogg Forest were each photographed at 1:36,000. From 1997 onward the LTER has be photographed at 1:6000 with 80% overlap between photos and the KBS Main Site, Lux Arbor Reserve, and the Kellogg Forest continue to be photographed at 1:36,000 without overlaps</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_120: 
+  name: KBS049-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS049-001
+  dataset_id: "52"
+  comments: 
+  title: Number of Aphids captured
+  is_sql: 
+  connection_url: jdbc:odbc:kbs049
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS049_001
+  last_updated_on: 
+  is_restricted: f
+  id: "122"
+  description: <kbsml_text><p>Number of aphids captured during each sample period</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_065: 
+  name: KBS022-003
+  metadata_url: LTER_Metadata.jsp?Table=KBS022-003
+  dataset_id: "25"
+  comments: 
+  title: Bryophytes Species List
+  is_sql: 
+  connection_url: jdbc:odbc:KBS022
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS022-003
+  last_updated_on: 
+  is_restricted: f
+  id: "59"
+  description: <kbsml_text><p>A list of mosses and liverworts occuring on or near the W. K. Kellogg Biological Station.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_036: 
   name: KBS011-002
   metadata_url: LTER_Metadata.jsp?Table=KBS011-002
   dataset_id: "14"
@@ -1585,335 +417,1902 @@ datatables_026:
   title: |-
     Epifluorescence Microscopy:
     Soil Microbial Biovolume and Carbon
+  is_sql: 
   connection_url: jdbc:odbc:KBS011-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS011-002&amp;limitBy=Year&amp;order=desc
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS011-002&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
   is_restricted: f
   id: "26"
   description: <kbsml_text><p>Soil biovolume and carbon as determined by epifluorescence microscopy.</p></kbsml_text>
+  update_frequency_years: 
   driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS011_002
-datatables_084: 
-  name: KBS039-003
-  metadata_url: LTER_Metadata.jsp?Table=KBS039-003
-  dataset_id: "42"
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_008: 
+  name: KBS042-018
+  metadata_url: LTER_Metadata.jsp?Table=KBS042-018
+  dataset_id: "45"
   comments: 
-  title: Naviational GPS Points (Expanded)
-  connection_url: jdbc:odbc:GPS
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS039-003
+  title: Lysimeters
+  is_sql: 
+  connection_url: jdbc:odbc:KBS042-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS042-018&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
   is_restricted: f
-  id: "84"
-  description: <kbsml_text><p>An expanded view of the navigational points</p></kbsml_text>
+  id: "105"
+  description: <kbsml_text><p></p></kbsml_text>
+  update_frequency_years: 
   driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS039-003
-datatables_055: 
-  name: KBS021-003
-  metadata_url: LTER_Metadata.jsp?Table=KBS021-003
-  dataset_id: "24"
-  comments: <kbsml_text><p>Analytical details (outliers, standard deviation, etc.) may be available on request.</p></kbsml_text>
-  title: Soil Inorganic N by Plot
-  connection_url: jdbc:odbc:InorgN
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS021-003&amp;tools=show&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "55"
-  description: <kbsml_text><p>Soil inorganic nitrogen values by treatment and replicate</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS021-003
-datatables_110: 
-  name: KBS045-Diameters
-  metadata_url: LTER_Metadata.jsp?Table=KBS045-Diameters
-  dataset_id: "48"
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_093: 
+  name: KBS042-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS042-001
+  dataset_id: "45"
   comments: 
-  title: Diameters
-  connection_url: jdbc:odbc:Trees
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS045-Diameters
+  title: Soil Classification
+  is_sql: 
+  connection_url: jdbc:odbc:KBS042-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS042-001
+  last_updated_on: 
   is_restricted: f
-  id: "110"
-  description: <kbsml_text><p>Diameters of trees, at fixed positions on the trunk.</p></kbsml_text>
+  id: "88"
+  description: <kbsml_text><p>In 1992 the Living Field Laboratory site was mapped for soil texture, horizon identification, and soil classification on the plots that were selected for lysimeter installation.  These plots were mapped prior to the installation of the lysimeters.  The remaining plots were mapped in the spring of 1993.</p></kbsml_text>
+  update_frequency_years: 
   driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: DiametersTest
-datatables_027: 
-  name: KBS013_003
-  metadata_url: LTER_Metadata.jsp?Table=KBS013_003
-  dataset_id: "16"
-  comments: 
-  title: LTER Trace Gas Data from 2000
-  connection_url: jdbc:odbc:Gas
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS013_003
-  is_restricted: t
-  id: "27"
-  description: <kbsml_text></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS013-003
-datatables_085: 
-  name: KBS040-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS040-001
-  dataset_id: "43"
-  comments: 
-  title: County, State, and Regional Yields
-  connection_url: jdbc:odbc:KBS040-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS040-001&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "85"
-  description: <kbsml_text><p>County, state, and regional yields are downloaded from http://www.usda.gov/nass/ and formatted for display.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS040_001
-datatables_056: 
-  name: KBS021-004
-  metadata_url: LTER_Metadata.jsp?Table=KBS021-004
-  dataset_id: "24"
-  comments: 
-  title: Soil potential N mineralization rates by plot
-  connection_url: jdbc:odbc:InorgN
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS021-004&amp;tools=show&amp;limitBy=Year&amp;order=desc
-  is_restricted: f
-  id: "56"
-  description: <kbsml_text><p>Periodically, sub-samples from a soil sampling campaign are reburied in porous bags.  After about 21 days, they are recovered and analyzed for N content.  This table represents change in soil nitrate (plus nitrite) and ammonium over the incubation period.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS021-004
-datatables_111: 
-  name: KBS045-TreeMasses
-  metadata_url: LTER_Metadata.jsp?Table=KBS045-TreeMasses
-  dataset_id: "48"
-  comments: 
-  title: Tree Masses
-  connection_url: jdbc:odbc:Trees
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS045-TreeMasses
-  is_restricted: f
-  id: "111"
-  description: <kbsml_text><p>Masses of trees, by year, calculated from representative equations.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: TreeMasses
-datatables_028: 
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_037: 
   name: KBS013-001
   metadata_url: LTER_Metadata.jsp?Table=KBS013-001
   dataset_id: "16"
   comments: <kbsml_text><p>8-21-2003 Tim Bergsma.  Recently, the units for CO<sub>2</sub> fluxes have been challenged.  The issue is under review.<br></br> 10-1-2003 Sven Bohm. Unit problems resoved. CO<sub>2</sub> units changed from g C/ha/day to kg C/ha/day <br></br>12-16-2004 Sven Bohm. A reminder note that the gas samples in 1995 were only run for CH4 due to the long storage times between sampling and analysis as well as the discovery that the rubber seals used tended to leak quite rapidly</p><p>4-11-2006 Sven Bohm. Prior to 2000 two repliate chambers were used in the forested treatments, they were reported as reps 1 through 6. They map on the current sampling scheme as rep 1-2 is R1, rep 3-4 is R2 and rep 5-6 is R3</p></kbsml_text>
   title: Trace Gas Data
+  is_sql: 
   connection_url: jdbc:odbc:Gas
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS013-001&amp;limitBy=Year&amp;order=desc
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS013-001&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
   is_restricted: f
   id: "28"
   description: <kbsml_text><p>Fluxes of atmospheric trace gases CO2, N2O, and CH4 are monitored periodically for most KBS LTER main site treatments.</p></kbsml_text>
+  update_frequency_years: 
   driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS013-001
-datatables_086: 
-  name: KBS041-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS041-001
-  dataset_id: "44"
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_009: 
+  name: KBS048-001
+  metadata_url: 
+  dataset_id: "51"
   comments: 
-  title: Annual Color Infrared Aerial Photographs
-  connection_url: jdbc:odbc:GIS
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS041-001
+  title: Real time data
+  is_sql: 
+  connection_url: 
+  data_url: http://aeronet.gsfc.nasa.gov/cgi-bin/type_one_station_new3?site=Kellogg_LTER&amp;nachal=2&amp;level=1&amp;place_code=10
+  last_updated_on: 
   is_restricted: f
-  id: "86"
-  description: <kbsml_text><p>From 1993 until the present the KBS LTER has be supporting yearly acquisition of color infrared aerial photography of KBS properties. Annual flight dates coincide with vegetative peak biomass and serve to document trends and changes in the landscape</p><p>From 1993-1997 the KBS Main site (including the LTER), Lux Arbor Reserve and the Kellogg Forest were each photographed at 1:36,000. From 1997 onward the LTER has be photographed at 1:6000 with 80% overlap between photos and the KBS Main Site, Lux Arbor Reserve, and the Kellogg Forest continue to be photographed at 1:36,000 without overlaps</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS041-001
-datatables_057: 
-  name: KBS022-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS022-001
-  dataset_id: "25"
+  id: "119"
+  description: <kbsml_text><p>Real time data from the sensor. These data are unscreen and may not have the final calibration applied </p></kbsml_text>
+  update_frequency_years: 
+  driver: 
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_094: 
+  name: KBS042-002
+  metadata_url: LTER_Metadata.jsp?Table=KBS042-002
+  dataset_id: "45"
   comments: 
-  title: Amphibians Species List
-  connection_url: jdbc:odbc:KBS022
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS022-001
+  title: Soil Class Descriptions
+  is_sql: 
+  connection_url: jdbc:odbc:KBS042-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS042-002
+  last_updated_on: 
   is_restricted: f
-  id: "57"
-  description: <kbsml_text><p>A list of amphibians occuring on or near the W. K. Kellogg Biological Station.</p></kbsml_text>
+  id: "89"
+  description: <kbsml_text><p></p></kbsml_text>
+  update_frequency_years: 
   driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS022-001
-datatables_112: 
-  name: KBS045-Trees
-  metadata_url: LTER_Metadata.jsp?Table=KBS045-Trees
-  dataset_id: "48"
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_121: 
+  name: KBS051-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS051-001
+  dataset_id: "54"
   comments: 
-  title: Trees
-  connection_url: jdbc:odbc:Trees
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS045-Trees
+  title: Ameriflux dataset
+  is_sql: 
+  connection_url: jdbc:odbc:wthr-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS051-001&amp;limitBy=doy&amp;orderby=datetime&amp;order=desc
+  last_updated_on: 
   is_restricted: f
-  id: "112"
-  description: <kbsml_text><p>Uniquely identified trees.</p></kbsml_text>
+  id: "123"
+  description: <kbsml_text><p>Flux from the micromet tower</p></kbsml_text>
+  update_frequency_years: 
   driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: Trees
-datatables_029: 
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_038: 
   name: KBS013-002
   metadata_url: LTER_Metadata.jsp?Table=KBS013-002
   dataset_id: "16"
   comments: 
   title: Log of KBS LTER Trace Gas Data Management
+  is_sql: 
   connection_url: jdbc:odbc:Gas
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS013-002&amp;limitBy=Year&amp;order=desc&amp;format=record
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS013-002&amp;limitBy=Year&amp;order=desc&amp;format=record
+  last_updated_on: 
   is_restricted: t
   id: "29"
   description: <kbsml_text><p>Repository of observations and comments related to the collection and management of KBS LTER trace gas data.</p></kbsml_text>
+  update_frequency_years: 
   driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS013-002
-datatables_058: 
-  name: KBS022-002
-  metadata_url: LTER_Metadata.jsp?Table=KBS022-002
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_095: 
+  name: KBS042-003
+  metadata_url: LTER_Metadata.jsp?Table=KBS042-003
+  dataset_id: "45"
+  comments: 
+  title: Texture
+  is_sql: 
+  connection_url: jdbc:odbc:KBS042-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS042-003
+  last_updated_on: 
+  is_restricted: f
+  id: "90"
+  description: <kbsml_text><p></p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_066: 
+  name: KBS022-004
+  metadata_url: LTER_Metadata.jsp?Table=KBS022-004
   dataset_id: "25"
   comments: 
-  title: Birds Species List
+  title: Fish Species List
+  is_sql: 
   connection_url: jdbc:odbc:KBS022
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS022-002
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS022-004
+  last_updated_on: 
   is_restricted: f
-  id: "58"
-  description: <kbsml_text><p>A list of birds occuring on or near the W. K. Kellogg Biological Station.</p></kbsml_text>
+  id: "60"
+  description: <kbsml_text><p>A list of fish occuring in water bodies on or near the W. K. Kellogg Biological Station.</p></kbsml_text>
+  update_frequency_years: 
   driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS022-002
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_122: 
+  name: KBS051-002
+  metadata_url: LTER_Metadata.jsp?Table=KBS051-002
+  dataset_id: "54"
+  comments: 
+  title: Raw Flux dataset
+  is_sql: 
+  connection_url: jdbc:odbc:wthr-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS051-002&amp;limitBy=date&amp;order=desc&amp;orderby=Time
+  last_updated_on: 
+  is_restricted: f
+  id: "124"
+  description: <kbsml_text><p>The FLUX.DAT data from the micromet tower</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_039: 
+  name: KBS017-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS017-001
+  dataset_id: "20"
+  comments: 
+  title: KBS National Weather Service Record
+  is_sql: 
+  connection_url: jdbc:odbc:NWS
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS017-001&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "31"
+  description: <kbsml_text><p>This data set contains information collected from the Gull Lake Biological Station COOP (#203504) weather observatory. Data is also archived at the <a href="http://www4.ncdc.noaa.gov/cgi-win/wwcgi.dll?wwDI~StnSrch~StnID~20010024">national weather service</a>. The station is located at the 42 degrees 24 minutes north and 85 degrees 23 minutes west at an elevation of 277.4 meters. Observations began on Jan 1 1948. </p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_096: 
+  name: KBS042-004
+  metadata_url: LTER_Metadata.jsp?Table=KBS042-004
+  dataset_id: "45"
+  comments: 
+  title: Texture Descriptions
+  is_sql: 
+  connection_url: jdbc:odbc:KBS042-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS042-004
+  last_updated_on: 
+  is_restricted: f
+  id: "91"
+  description: <kbsml_text><p></p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_067: 
+  name: KBS022-005
+  metadata_url: LTER_Metadata.jsp?Table=KBS022-005
+  dataset_id: "25"
+  comments: 
+  title: Fungi Species List
+  is_sql: 
+  connection_url: jdbc:odbc:KBS022
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS022-005
+  last_updated_on: 
+  is_restricted: f
+  id: "61"
+  description: <kbsml_text><p>A list of fungi occuring on or near the W. K. Kellogg Biological Station.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_123: 
+  name: KBS051-003
+  metadata_url: LTER_Metadata.jsp?Table=KBS051-003
+  dataset_id: "54"
+  comments: 
+  title: Raw Met dataset
+  is_sql: 
+  connection_url: jdbc:odbc:wthr-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS051-003&amp;limitBy=date&amp;order=desc&amp;orderby=Time
+  last_updated_on: 
+  is_restricted: f
+  id: "125"
+  description: <kbsml_text><p>The MET.DAT data from the micromet tower</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_097: 
+  name: KBS042-005
+  metadata_url: LTER_Metadata.jsp?Table=KBS042-005
+  dataset_id: "45"
+  comments: 
+  title: Tillage
+  is_sql: 
+  connection_url: jdbc:odbc:KBS042-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS042-005&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "92"
+  description: <kbsml_text><p>Tillage consists of chisel plow, field cultivate, row cultivate, and rotary hoe on various plots.  All equipment provided by KBS. </p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_010: 
+  name: KBS048-002
+  metadata_url: 
+  dataset_id: "51"
+  comments: 
+  title: Cloud corrected data
+  is_sql: 
+  connection_url: 
+  data_url: http://aeronet.gsfc.nasa.gov/cgi-bin/type_one_station_new3?site=Kellogg_LTER&amp;nachal=2&amp;level=2&amp;place_code=10
+  last_updated_on: 
+  is_restricted: f
+  id: "120"
+  description: <kbsml_text><p>Cloud correction applied to data. Final calibration might be missing</p></kbsml_text>
+  update_frequency_years: 
+  driver: 
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_068: 
+  name: KBS022-006
+  metadata_url: LTER_Metadata.jsp?Table=KBS022-006
+  dataset_id: "25"
+  comments: 
+  title: Insects Species List
+  is_sql: 
+  connection_url: jdbc:odbc:KBS022
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS022-006
+  last_updated_on: 
+  is_restricted: f
+  id: "62"
+  description: <kbsml_text><p>A list of insects occuring on or near the W. K. Kellogg Biological Station.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_124: 
+  name: KBS051-004
+  metadata_url: LTER_Metadata.jsp?Table=KBS051-004
+  dataset_id: "54"
+  comments: 
+  title: Raw Time series dataset
+  is_sql: 
+  connection_url: jdbc:odbc:wthr-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS051-004&amp;limitBy=date&amp;order=desc&amp;orderby=record
+  last_updated_on: 
+  is_restricted: f
+  id: "126"
+  description: <kbsml_text><p>The ts_data.dat data from the micromet tower</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_098: 
+  name: KBS042-006
+  metadata_url: LTER_Metadata.jsp?Table=KBS042-006
+  dataset_id: "45"
+  comments: 
+  title: Planting
+  is_sql: 
+  connection_url: jdbc:odbc:KBS042-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS042-006&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "93"
+  description: <kbsml_text><p>Corn and soybeans are planted at a 30 inch row spacing and wheat drilled at a 7 inch spacing.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_069: 
+  name: KBS022-007
+  metadata_url: LTER_Metadata.jsp?Table=KBS022-007
+  dataset_id: "25"
+  comments: 
+  title: Mammals Species List
+  is_sql: 
+  connection_url: jdbc:odbc:KBS022
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS022-007
+  last_updated_on: 
+  is_restricted: f
+  id: "63"
+  description: <kbsml_text><p>A list of mammals occuring on or near the W. K. Kellogg Biological Station.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_125: 
+  name: KBS052-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS052-001
+  dataset_id: "55"
+  comments: 
+  title: Plant Archive
+  is_sql: 
+  connection_url: jdbc:odbc:kbs052
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS052-001
+  last_updated_on: 
+  is_restricted: f
+  id: "127"
+  description: <kbsml_text><p>Archived Plant Material</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_040: 
+  name: KBS017-002
+  metadata_url: LTER_Metadata.jsp?Table=KBS017-002
+  dataset_id: "20"
+  comments: 
+  title: NWS Data without Comments (temporary)
+  is_sql: 
+  connection_url: jdbc:odbc:nws
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS017-002&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "32"
+  description: <kbsml_text><p>A version of the NWS data without comments, until we can produce better csv data</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_011: 
+  name: KBS048-003
+  metadata_url: 
+  dataset_id: "51"
+  comments: 
+  title: Corrected data
+  is_sql: 
+  connection_url: 
+  data_url: http://aeronet.gsfc.nasa.gov/cgi-bin/type_one_station_new3?site=Kellogg_LTER&amp;nachal=2&amp;level=3&amp;place_code=10
+  last_updated_on: 
+  is_restricted: f
+  id: "121"
+  description: <kbsml_text><p>Screened data</p></kbsml_text>
+  update_frequency_years: 
+  driver: 
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_126: 
+  name: KBS053-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS053_001
+  dataset_id: "56"
+  comments: 
+  title: Population by county
+  is_sql: 
+  connection_url: jdbc:odbc:kbs053
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS053-001
+  last_updated_on: 
+  is_restricted: f
+  id: "128"
+  description: <kbsml_text><p>Human population by county and year for the counties surrounding KBS. These numbers are extracted from the US census data as presented by the michigan.gov website</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_041: 
+  name: KBS018-002
+  metadata_url: LTER_Metadata.jsp?Table=KBS018-002
+  dataset_id: "21"
+  comments: 
+  title: KBS Herbarium Specimens
+  is_sql: 
+  connection_url: jdbc:odbc:herb
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS018-002&amp;format=record&amp;limitBy=Family
+  last_updated_on: 
+  is_restricted: f
+  id: "34"
+  description: <kbsml_text><p>A database of specimens stored in the KBS Herbarium.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_099: 
+  name: KBS042-007
+  metadata_url: LTER_Metadata.jsp?Table=KBS042-007
+  dataset_id: "45"
+  comments: 
+  title: Cover Crops
+  is_sql: 
+  connection_url: jdbc:odbc:KBS042-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS042-007&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "94"
+  description: "<kbsml_text>\r\n\
+    <p>All cover crops are purchased from Michigan State Seed\r\n\
+    (Grand Ledge, MI).  Cover crops are planted on the west half of each plot\r\n\
+    in 1st year corn, 2nd year corn, and wheat (except for the conventional\r\n\
+    management plots).\r\n\
+    </p>\r\n\
+    <p>\r\n\
+    \r\n\
+    The different varieties used included:\r\n\
+    <ol>\r\n\
+    <li><p>Annual ryegrass (Lolium multiflorum Lam.)</p></li>\r\n\
+    <li><p>Hairy vetch (Vicia villosa Roth)</p></li>\r\n\
+    <li><p>Red clover \x96 Michigan mammoth (Trifolium pratense L.)</p></li>\r\n\
+    <li><p>Crimson clover </p></li>\r\n\
+    </ol>\r\n\
+    </p>\r\n\
+    </kbsml_text>"
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_012: 
+  name: KBS046-006
+  metadata_url: LTER_Metadata.jsp?Table=KBS046-006
+  dataset_id: "49"
+  comments: 
+  title: Methane consumption on LFL soils by depth
+  is_sql: 
+  connection_url: jdbc:odbc:KBS046-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS046-006
+  last_updated_on: 
+  is_restricted: f
+  id: "118"
+  description: <kbsml_text><p>Methane consumption on soils from the Living Field Lab, assayed by depth</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_127: 
+  name: Log_DatabaseManagement
+  metadata_url: LTER_Metadata.jsp?Table=Log_DatabaseManagement
+  dataset_id: "3"
+  comments: 
+  title: Log of database management
+  is_sql: 
+  connection_url: jdbc:odbc:Administration
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=Log_DatabaseManagement&amp;limitBy=Year&amp;order=desc&amp;format=record
+  last_updated_on: 
+  is_restricted: f
+  id: "129"
+  description: <kbsml_text><p>Management notes concerning the existence, location, structure, and content of KBS LTER databases.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_042: 
+  name: KBS019_explore
+  metadata_url: LTER_Metadata.jsp?Table=KBS019_explore
+  dataset_id: "3"
+  comments: 
+  title: Preview of ANPP data
+  is_sql: 
+  connection_url: jdbc:odbc:ANPP
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS019_explore&amp;limitBy=Year&amp;tools=show&amp;stylesheet=KBS019.xsl&amp;order=asc
+  last_updated_on: 
+  is_restricted: t
+  id: "35"
+  description: <kbsml_text><p></p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_013: 
+  name: KBS042-011
+  metadata_url: LTER_Metadata.jsp?Table=KBS042-011
+  dataset_id: "45"
+  comments: 
+  title: Herbicide and Pesticide Composition
+  is_sql: 
+  connection_url: jdbc:odbc:KBS042-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS042-011
+  last_updated_on: 
+  is_restricted: f
+  id: "98"
+  description: <kbsml_text><p></p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_070: 
+  name: KBS022-008
+  metadata_url: LTER_Metadata.jsp?Table=KBS022-008
+  dataset_id: "25"
+  comments: 
+  title: Protozoa Species List
+  is_sql: 
+  connection_url: jdbc:odbc:KBS022
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS022-008
+  last_updated_on: 
+  is_restricted: f
+  id: "64"
+  description: <kbsml_text><p>A list of protozoa occuring on or near the W. K. Kellogg Biological Station.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_128: 
+  name: Log_GPRNETManagement
+  metadata_url: LTER_Metadata.jsp?Table=Log_GPRNETManagement
+  dataset_id: "3"
+  comments: 
+  title: Log of GPRNET management
+  is_sql: 
+  connection_url: jdbc:odbc:Administration
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=Log_GPRNETManagement&amp;limitBy=Year&amp;order=desc&amp;format=record
+  last_updated_on: 
+  is_restricted: f
+  id: "130"
+  description: <kbsml_text><p>Management notes concerning the Windows NT workstation network GPRNET, servicing LTER staff and infrastructure.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_043: 
+  name: KBS019-000
+  metadata_url: /LTER_Intranet/DataManagement/LTER_Metadata.jsp?Table=KBS000-001
+  dataset_id: "22"
+  comments: 
+  title: Standardized codes for identifying plant species
+  is_sql: 
+  connection_url: jdbc:odbc:plants
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS000-001&amp;tools=show&amp;limitBy=Family&amp;order=asc
+  last_updated_on: 
+  is_restricted: f
+  id: "36"
+  description: <kbsml_text><p>Researchers on various projects record identities of plant species as short semi-descriptive sequences of  letters, which are interpreted for end-users by means of an authoritative list.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_014: 
+  name: KBS_calendar
+  metadata_url: LTER_Metadata.jsp?Table=KBS_calendar
+  dataset_id: "3"
+  comments: 
+  title: KBS Calendar
+  is_sql: 
+  connection_url: jdbc:odbc:Administration
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS_calendar
+  last_updated_on: 
+  is_restricted: f
+  id: "3"
+  description: <kbsml_text><p>Public calendar of KBS LTER events.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_071: 
+  name: KBS022-009
+  metadata_url: LTER_Metadata.jsp?Table=KBS022-009
+  dataset_id: "25"
+  comments: 
+  title: Reptiles Species List
+  is_sql: 
+  connection_url: jdbc:odbc:KBS022
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS022-009
+  last_updated_on: 
+  is_restricted: f
+  id: "65"
+  description: <kbsml_text><p>A list of reptiles occuring on or near the W. K. Kellogg Biological Station.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_129: 
+  name: Log_LTERWebManagement
+  metadata_url: LTER_Metadata.jsp?Table=Log_LTERWebManagement
+  dataset_id: "3"
+  comments: 
+  title: Log of LTER Web management
+  is_sql: 
+  connection_url: jdbc:odbc:Administration
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=Log_LTERWebManagement&amp;limitBy=Year&amp;order=desc&amp;format=record
+  last_updated_on: 
+  is_restricted: f
+  id: "131"
+  description: <kbsml_text><p>Management notes concerning the website lter.kbs.msu.edu.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_015: 
+  name: KBS000-001
+  metadata_url: /LTER_Intranet/DataManagement/LTER_UnpublishedMetadata.jsp?Table=KBS000-001
+  dataset_id: "3"
+  comments: 
+  title: Standardized codes for identifying plant species
+  is_sql: 
+  connection_url: jdbc:odbc:plants
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS000-001&amp;tools=show&amp;limitBy=Family&amp;order=asc
+  last_updated_on: 
+  is_restricted: f
+  id: "4"
+  description: <kbsml_text><p>Researchers on various projects record identities of plant species as short semi-descriptive sequences of  letters, which are interpreted for end-users by means of an authoritative list.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_072: 
+  name: KBS022-010
+  metadata_url: LTER_Metadata.jsp?Table=KBS022-010
+  dataset_id: "25"
+  comments: 
+  title: Fish spotted in the last 2 years
+  is_sql: 
+  connection_url: jdbc:odbc:KBS022
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS022-010
+  last_updated_on: 
+  is_restricted: f
+  id: "66"
+  description: <kbsml_text><p>This dataset contains fish that were seen in the last 2 years</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_016: 
+  name: KBS000-002
+  metadata_url: LTER_Metadata.jsp?Table=KBS000-002
+  dataset_id: "3"
+  comments: 
+  title: Publications for each treatment
+  is_sql: 
+  connection_url: jdbc:odbc:Administration
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS000-002
+  last_updated_on: 
+  is_restricted: f
+  id: "5"
+  description: <kbsml_text><p>The publication list sorted by treatment</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_073: 
+  name: KBS023-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS023-001
+  dataset_id: "26"
+  comments: 
+  title: Insect Trapping Survey
+  is_sql: 
+  connection_url: jdbc:odbc:KBS023-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS023-001&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "67"
+  description: <kbsml_text><p>Plant dwelling insect occurrence in the main site cropping system of the KBS-LTER has been recorded since 1989. The effort has focused on characterizing the temporal and spatial abundance and diversity of set of insects representative of a higher order insect trophic level, the herbivore predators. The insect database contains more than 27300 records and consists of counts of adult insects of fourteen species of Coccinellidae, one species of Chrysopidae, and one species of Lampyridae from 30 sample sites in each of the seven treatments in the Main Site Cropping System. The standard method used to measure these organisms is a yellow sticky trap. Sampling is conducted weekly during the growing season as described in the sampling protocol.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_044: 
+  name: KBS019-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS019-001
+  dataset_id: "22"
+  comments: 
+  title: Non-dominant Biomass
+  is_sql: 
+  connection_url: jdbc:odbc:NPP
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS019-001&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: t
+  id: "37"
+  description: <kbsml_text><p>This data set contains information about above ground net primary productivity (ANPP) for all main site cropping systems as well as for the forested sites added in 1993. Main site cropping systems include all treatments as described in the data set descriptor for the main cropping system study . ANPP is measured as peak biomass for a given cropping system; in some systems with complex communities peaks occur at different times of year and measurements are taken at multiple times as described in the ANPP protocol.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_100: 
+  name: KBS042-008
+  metadata_url: LTER_Metadata.jsp?Table=KBS042-008
+  dataset_id: "45"
+  comments: 
+  title: Fertilizer
+  is_sql: 
+  connection_url: jdbc:odbc:KBS042-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS042-008&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "95"
+  description: |-
+    <kbsml_text><p>
+    Starter fertilizer was applied to corn when planted; nitrogen applied after PSNT (pre sidedress nitrate test) in June.  No fertilizer was applied to soybeans.  Fertilizer was applied to wheat in early spring; applied in fall at planting through 1994.  Lime was applied to all plots on 9/29/1992 at a rate of 2T/a.</p>
+    </kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_017: 
+  name: KBS001-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS001-003
+  dataset_id: "4"
+  comments: 
+  title: Field Instrument Status
+  is_sql: 
+  connection_url: jdbc:odbc:wthr
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS002-003&amp;limitBy=Location&amp;containing=Pondlab&amp;format=record
+  last_updated_on: 
+  is_restricted: f
+  id: "6"
+  description: <kbsml_text><p>This data table gives the most recent information for each participating field instrument, especially weather sensors.  It accesses the same data as KBS002-003, but with a different default view.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_074: 
+  name: KBS024-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS024-001
+  dataset_id: "27"
+  comments: 
+  title: C/N data for KBS soil
+  is_sql: 
+  connection_url: jdbc:odbc:Soil
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS024-001&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "68"
+  description: |-
+    <kbsml_text><p>This data set contains information about soil total Carbon, total Nitrogen, and C:N ratios for all main site cropping system soils as well as the forested sites added in 1993. Main site cropping systems include all treatments as described in the data set descriptor for the main cropping system study (KBS004). Soil carbon and nitrogen are presented as % elemental carbon and nitrogen (g C or N / 100 g soil)   for the sampling depth of the specific sampling date unless indicated otherwise. Samples were taken with either a 2.5 cm diameter soil corer (sampling by soil depth) or a 10 cm diameter Giddings probe (sampling by soil profile). For general sampling information, see <a href="/LTER_Metadata.jsp/Dataset/KBS004">Baseline Soil Sampling Protocol</a>.  For specific sampling details for a particular date, see Soil Sampling Field Log.  Soil samples are sieved to 4mm and composited by plot.  Soil % elemental carbon and nitrogen values are determined by sample combustion and subsequent TCD gas chromatography, using a Carlo Erba automated CHN analyzer.
+    described in the sampling protocol.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_045: 
+  name: KBS019-002
+  metadata_url: LTER_Metadata.jsp?Table=KBS019-001
+  dataset_id: "22"
+  comments: 
+  title: Non-dominant Biomass for T7, T8, SF
+  is_sql: 
+  connection_url: jdbc:odbc:NPP
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS019-002&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: t
+  id: "38"
+  description: <kbsml_text><p>This data set contains information about above ground net primary productivity (ANPP) for all main site cropping systems as well as for the forested sites added in 1993. Main site cropping systems include all treatments as described in the data set descriptor for the main cropping system study . ANPP is measured as peak biomass for a given cropping system; in some systems with complex communities peaks occur at different times of year and measurements are taken at multiple times as described in the ANPP protocol.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_130: 
+  name: Log_ServerManagement
+  metadata_url: LTER_Metadata.jsp?Table=Log_ServerManagement
+  dataset_id: "3"
+  comments: 
+  title: Log of LTER Server management
+  is_sql: 
+  connection_url: jdbc:odbc:Administration
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=Log_ServerManagement&amp;limitBy=Year&amp;order=desc&amp;format=record
+  last_updated_on: 
+  is_restricted: f
+  id: "132"
+  description: <kbsml_text><p>Management notes concerning the servers LTERNT2 and LTERNT.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_018: 
+  name: KBS002-002
+  metadata_url: LTER_Metadata.jsp?Table=KBS002-002
+  dataset_id: "5"
+  comments: 
+  title: Log of weather station management
+  is_sql: 
+  connection_url: jdbc:odbc:wthr
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS002-002&amp;limitBy=Year&amp;order=desc&amp;format=record
+  last_updated_on: 
+  is_restricted: f
+  id: "8"
+  description: <kbsml_text><p>Field notes related to the management of the weather stations LTERWS or Pondlab, especially the former.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_075: 
+  name: KBS025-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS025-001
+  dataset_id: "28"
+  comments: 
+  title: Insect Collection
+  is_sql: 
+  connection_url: jdbc:odbc:Insects
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS025-001&amp;limitBy=Family&amp;format=record
+  last_updated_on: 
+  is_restricted: f
+  id: "69"
+  description: <kbsml_text><p>Periodically, researchers trap, preserve, and identify insects on or near the KBS LTER main site.  The insects are then stored as part of a permanent collection.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_046: 
+  name: KBS019-003
+  metadata_url: LTER_Metadata.jsp?Table=KBS019-003
+  dataset_id: "22"
+  comments: <kbsml_text><p></p></kbsml_text>
+  title: Crops
+  is_sql: 
+  connection_url: jdbc:odbc:ANPP
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS019-003&amp;tools=show&amp;limitBy=Year&amp;order=asc
+  last_updated_on: 
+  is_restricted: f
+  id: "39"
+  description: <kbsml_text><p>Productivity data for main crops</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_101: 
+  name: KBS042-009
+  metadata_url: LTER_Metadata.jsp?Table=KBS042-009
+  dataset_id: "45"
+  comments: 
+  title: Compost
+  is_sql: 
+  connection_url: jdbc:odbc:KBS042-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS042-009&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "96"
+  description: <kbsml_text><p>Compost is applied to the organic and compost management treatments and is the only nutrient source of these plots.  Composted dairy manure is used and is obtained from various sources. The application rate takes into account the %Moisture and the total %N present in the compost.  It is applied on the basis of estimated nitrogen, phosphorus and potassium requirements.  It is applied on a dry weight basis.  In 1995 the application rate was determined after correction for sand content.   This method continues to present.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_131: 
+  name: View_SiteUseRequests
+  metadata_url: LTER_Metadata.jsp?Table=View_SiteUseRequests
+  dataset_id: "7"
+  comments: 
+  title: Approved Site Use Requests (SURFs)
+  is_sql: 
+  connection_url: jdbc:odbc:Administration
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=View_SiteUseRequests&amp;limitBy=Year&amp;order=desc&amp;format=record
+  last_updated_on: 
+  is_restricted: f
+  id: "133"
+  description: <kbsml_text><p>Site Use Request Forms are filled out by investigators wishing to conduct sampling on LTER properties.  When approved, the request is listed on the web.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_019: 
+  name: KBS002-003
+  metadata_url: LTER_Metadata.jsp?Table=KBS002-003
+  dataset_id: "5"
+  comments: 
+  title: Field Instrument Status
+  is_sql: 
+  connection_url: jdbc:odbc:wthr
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS002-003&amp;limitBy=Location&amp;containing=LTERWS&amp;format=record
+  last_updated_on: 
+  is_restricted: f
+  id: "9"
+  description: <kbsml_text><p>  This data table gives the most recent information for each participating field instrument, especially weather sensors.  It is essentially a subset of KBS002-004 Field Instrument History.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_076: 
+  name: KBS025-002
+  metadata_url: LTER_Metadata.jsp?Table=KBS025-002
+  dataset_id: "28"
+  comments: 
+  title: Insect Photo Archive
+  is_sql: 
+  connection_url: jdbc:odbc:Insects
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS025-002&amp;limitBy=Family&amp;format=record
+  last_updated_on: 
+  is_restricted: f
+  id: "70"
+  description: "<kbsml_text><p>Periodically, researchers photograph insects in natural settings on or around the KBS LTER site.  The specimen may also be collected:  see KBS025-001.</p></kbsml_text>"
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_047: 
+  name: KBS019-004
+  metadata_url: LTER_Metadata.jsp?Table=KBS019-004
+  dataset_id: "22"
+  comments: |-
+    <kbsml_text>
+    <ul>
+    <li><p>In 1998, plants were only sorted to functional group rather than species.  See relevant code descriptions.</p></li>
+    <li><p>The category "SDEAD" (standing dead plants of indeterminate speces) is included only in certain years.</p></li>
+    <li><p>The category "SURFL" (surface litter) is included in certain years, and may or may not be desired in summaries.</p></li><li><p>8-2-2004 SB. Linked in the genus and species name instead of the code.</p></li>
+    </ul>
+    </kbsml_text>
+  title: Non-crop Biomass
+  is_sql: 
+  connection_url: jdbc:odbc:ANPP
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS019-004&amp;tools=show&amp;limitBy=Year&amp;order=asc
+  last_updated_on: 
+  is_restricted: f
+  id: "40"
+  description: <kbsml_text><p>Productivity data for plants other than target crops</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_102: 
+  name: KBS042-010
+  metadata_url: LTER_Metadata.jsp?Table=KBS042-010
+  dataset_id: "45"
+  comments: 
+  title: Herbicides and Pesticides
+  is_sql: 
+  connection_url: jdbc:odbc:KBS042-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS042-010&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "97"
+  description: <kbsml_text><p>Herbicides and pesticides were applied in spring prior to planting; banded herbicides in the fertilizer treatments and broadcast herbicides in the conventional treatments.  Applied as needed any time thereafter.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_048: 
+  name: KBS019-005
+  metadata_url: LTER_Metadata.jsp?Table=KBS019-005
+  dataset_id: "22"
+  comments: <kbsml_text><p>Cover crops such as vetch and clover are planted after a row crop, such as wheat or corn, and are left on the field over winter.  Usually they are plowed down the following spring.  Their productivity represents parts of two growing seasons in different calendar years.  Thus, assignment to a calendar year is somewhat ambiguous.  Fescue in T5, while technically a cover crop, is not plowed down.</p><p>In 2002 the cover crops were mistakenly plowed in before a biomass sample could be taken. So there is no cover crop biomass data available for 2002.</p></kbsml_text>
+  title: Cover Crops
+  is_sql: 
+  connection_url: jdbc:odbc:ANPP
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS019-005&amp;tools=show&amp;limitBy=Year&amp;order=asc
+  last_updated_on: 
+  is_restricted: f
+  id: "41"
+  description: <kbsml_text><p>Productivity data for cover crops in LTER main site treatments</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_103: 
+  name: KBS042-013
+  metadata_url: LTER_Metadata.jsp?Table=KBS042-013
+  dataset_id: "45"
+  comments: 
+  title: Carbon Mineralization
+  is_sql: 
+  connection_url: jdbc:odbc:KBS042-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS042-013&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "100"
+  description: |-
+    <kbsml_text>
+    <div>
+    <h2>Sampling</h2>
+    <p>
+    Soil cores are taken at 10 areas per plot at a depth of 10 cm usually after tillage.  One step forward is taken in the row and the core is sampled from the resulting footprint.   Five soil cores (1.9 cm diameter cylinder wet tip hand probe) are taken in a zigzag pattern up between rows 2 &amp; 3 and five soil cores are taken in a zigzag pattern down between rows 4 &amp; 5 using the footprint method.  The cores are taken on either side of the row.  The cores are placed directly into a plastic zip lock bag and placed on ice in a cooler.
+    </p><p>
+    The soils are immediately taken to the laboratory and placed in a cooler at 4 d&#176; C until analysis can be performed.
+    </p>
+    </div>
+    <div>
+    <h2>Laboratory Analysis</h2>
+    <p>
+    The composite soil samples are mixed, sieved through a 6 mm sieve and sub-sampled for carbon mineralization determination.   The sub-samples are allowed to air dry and then placed in a plastic bag for further analysis and/or storage.
+    </p><p>
+    For carbon incubations, 50 g are weighed into a plastic specimen cup and adjusted to 70% water holding capacity.  The cups are placed in quart size wide mouth canning jars, 10 ml of water added to the bottom of the jars (to maintain humidity) and then sealed with the accompanying ring/lid.  The lid has a holed drilled in the center and a septa placed in the hole to accommodate gas sampling.
+    </p><p>
+    The jars are pre-incubated in a darkened controlled temperature room at 25 &#176; C for 5-7 days.  The CO<sub>2</sub> content in the headspace of each jar is measured at various timed intervals using an infrared gas analyzer.  The jars are flushed with CO<sub>2</sub>-free air when CO<sub>2</sub> concentrations are expected to exceed 6% prior to the next sampling.
+    </p><p>
+    Reference:  Assessment Methods for Soil Carbon.  2001.  Chapter 14.  Lal, R., Kimble, J. and Follett, R. (eds).  CRC Press Boca Tatton, FL.</p>
+    </div>
+    </kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_132: 
+  name: KBS015-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS015-001
+  dataset_id: "18"
+  comments: ""
+  title: Soil Moisture
+  is_sql: 
+  connection_url: jdbc:odbc:KBS015-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS015-001&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "30"
+  description: Soil moisture content data was collected from baseline soil samplings.  The % gravimetric moisture content is calculated on a dry weight basis.  The protocol used for moisture analysis can be found in the sampling protocols. See the descriptor (KBS004) for treatment descriptions.
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_077: 
+  name: KBS026-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS026-001
+  dataset_id: "29"
+  comments: <kbsml_text><p>6-12-2003 Tim Bergsma.  Protocol mentions 1988, 1991, 1996, and 1999.  Table currently provides only 1995 and 1996.</p></kbsml_text>
+  title: Soil Bulk Density
+  is_sql: 
+  connection_url: jdbc:odbc:Soil
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS026-001&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "71"
+  description: <kbsml_text><p>Soil bulk density is evaluated every few years for the main site treatments.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_049: 
+  name: KBS019-006
+  metadata_url: LTER_Metadata.jsp?Table=KBS019-006
+  dataset_id: "22"
+  comments: <kbsml_text><p>7-1-2003 Tim Bergsma.  There is a problem with the file 1999_NPP.xls.  Leaf litter for 1999 is not represented yet.</p></kbsml_text>
+  title: Litter Trap Biomass
+  is_sql: 
+  connection_url: jdbc:odbc:ANPP
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS019-006&amp;tools=show&amp;limitBy=Year&amp;order=asc
+  last_updated_on: 
+  is_restricted: f
+  id: "42"
+  description: <kbsml_text><p>Leaf litter collected from traps under poplars, etc.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_104: 
+  name: KBS042-014
+  metadata_url: LTER_Metadata.jsp?Table=KBS042-014
+  dataset_id: "45"
+  comments: 
+  title: Nitrogen Mineralization
+  is_sql: 
+  connection_url: jdbc:odbc:KBS042-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS042-014&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "101"
+  description: |-
+    <kbsml_text>
+    <div>
+    <h2>Sampling</h2>
+    <p>
+    Soil cores are taken at 10 areas per plot at a depth of 10 cm usually after tillage.  One step forward is taken in the row and the core is sampled from the resulting footprint.   Five soil cores (1.9 cm diameter cylinder wet tip hand probe) are taken in a zigzag pattern up between rows 2 &amp; 3 and five soil cores are taken in a zigzag pattern down between rows 4 &amp; 5 using the footprint method.  The cores are taken on either side of the row.  The cores are placed directly into a plastic zip lock bag and placed on ice in a cooler.
+    </p><p>
+    The soils are immediately taken to the laboratory and placed in a cooler at 4 &#176; C until analysis can be performed.
+    </p></div><div><h2>
+    Laboratory Analysis</h2>
+    <p>
+    The composite soil samples are mixed, sieved through a 6 mm sieve and sub-sampled for moisture determination.   For each composite soil four 20 g dry weight equivalent  aliquots are weighed into 100 ml plastic specimen cups and brought to 50% water holding capacity.  
+    </p><p>
+    One cup/soil is immediately extracted (0 day) with 100 ml of 1N KCL and inorganic N (N-NO<sub>3</sub><sup>-</sup> and N-NH<sub>4</sub><sup>+</sup>) concentrations are analyzed using a Lachat automated colorimetric analyzer.
+    </p><p>
+    The other three cups are placed in plastic storage containers (containing a thin layer of water on the bottom to maintain humidity), loosely capped and incubated in a darkened controlled temperature room at 25 &#176; C.  At each interval (30, 70,150 day) one cup/soil is removed and extracted with 100 ml of 1N KCL. Inorganic N (N-NO<sub>3</sub><sup>-</sup> and N-NH<sub>4</sub><sup>+</sup>) concentrations are analyzed using a Lachat automated colorimetric analyzer.  (See <em>Soil Nitrates</em> for more information on extraction procedure).
+    </p></div></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_133: 
+  name: KBS002-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS002-001
+  dataset_id: "5"
+  comments: ""
+  title: LTER Daily Precipitation and Air Temperature
+  is_sql: t
+  connection_url: jdbc:odbc:wthr-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS002-001&amp;limitBy=Year&amp;order=desc&amp;orderby=date
+  last_updated_on: 
+  is_restricted: f
+  id: "7"
+  description: A synthetic weather record drawn largely from the LTER Weather station but supplemented with data from nearby stations for completeness.
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache order by date desc limit 100
+datatables_020: 
+  name: KBS002-004
+  metadata_url: LTER_Metadata.jsp?Table=KBS002-004
+  dataset_id: "5"
+  comments: 
+  title: Field Instrument History
+  is_sql: 
+  connection_url: jdbc:odbc:wthr
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS002-004&amp;limitBy=Instrument&amp;format=record
+  last_updated_on: 
+  is_restricted: f
+  id: "10"
+  description: <kbsml_text><p>Field instruments, especially weather sensors, may be deployed, serviced, relocated, retired, etc.  This table combines inventories and field notes to give a (partial) representation of the history of each instrument.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_078: 
+  name: KBS028-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS028-001
+  dataset_id: "31"
+  comments: <kbsml_text><p>Occasionally, blank entries identified as 'cup c' appear.  Their significance is being researched.  5-13-2002 T.T.B.</p></kbsml_text>
+  title: Soil pH
+  is_sql: 
+  connection_url: jdbc:odbc:Soil
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS028-001&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "72"
+  description: <kbsml_text><p>Soil pH by treatment, replicate, and analytical replicate</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_105: 
+  name: KBS042-015
+  metadata_url: LTER_Metadata.jsp?Table=KBS042-015
+  dataset_id: "45"
+  comments: 
+  title: C and N Content
+  is_sql: 
+  connection_url: jdbc:odbc:KBS042-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS042-015&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "102"
+  description: |-
+    <kbsml_text>
+    <div>
+    <h2>Sampling</h2>
+    <p>Sampling is conducted by one of two methods</p>
+    <div><h3>Method 1</h3>
+    <p>Soil cores are taken at 5 areas per plot at a depth of 25 cm.  Three soil cores (1.9 cm diameter cylinder wet tip hand probe) are taken in a zigzag pattern up between rows 2 &amp; 3 and two soil cores are taken in a zigzag pattern between down rows 4 &amp; 5.  The cores are taken on either side of the row.  The cores are combined in a pail, hand crumbled, hand mixed and put into a cardboard soil box.  Any remaining soil is placed backed into the plot.  The boxes are then placed (within 2-3 hrs of sampling) into the soils dryer (low temperature convection oven) at 110-140 &#176; F until dry (at least 48 hrs).  After removal from the dryer, the soils are then ground using a Hammermill Grinder through a 2 mm sieve and placed back into the box. The soils are then taken to the laboratory for analysis. (See <em>Deep Core Nitrates</em> for sampling protocol for sampling of deep cores).</p>
+    </div>
+    <div>
+    <h3>Method 2</h3>
+    <p>
+    Soil cores are taken at 10 areas per plot at a depth of 10 cm usually after tillage.  One step forward is taken in the row and the core is sampled from the resulting footprint.   Five soil cores (1.9 cm diameter cylinder wet tip hand probe) are taken in a zigzag pattern up between rows 2 &amp; 3 and five soil cores are taken in a zigzag pattern down between rows 4 &amp; 5 using the footprint method.  The cores are taken on either side of the row.  The cores are placed directly into a plastic zip lock bag and placed on ice in a cooler. The soils are immediately taken to the laboratory and placed in a cooler at 4 &#176; C until analysis can be performed.</p>
+    </div>
+    </div>
+    <div><h2>Laboratory analysis</h2>
+    <p>Analysis corresponds to choice of method.</p>
+    <div><h3>Method 1</h3>
+    <p>Sub-samples are placed in a Qorpak jar containing several metal rods, capped, and placed on a rotary grinder overnight.  The ground soil is then placed in plastic vials for future analysis/storage.</p>
+    </div>
+    <div><h3>Method 2</h3>
+    <p>
+    The composite soil samples are mixed and sieved through a 6 mm sieve.  Sub-samples are removed and allowed to air dry.   These samples are ground with a mortar and pestle and placed in plastic vials for future analysis/storage.  If mortar and pestle is insufficient, the soil is placed in a Qorpak jar containing several metal rods, capped, and placed on a rotary grinder overnight.  The ground soil is then placed in plastic vials for future analysis/storage.</p>
+    <p>
+    The dried, ground soils are weighed on a microbalance into tin capsules for analysis on a Carlo Erba CHN analyzer for % Total Carbon and Nitrogen.</p>
+    </div></div>
+    </kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_021: 
+  name: KBS002-005
+  metadata_url: LTER_Metadata.jsp?Table=KBS002-005
+  dataset_id: "5"
+  comments: 
+  title: Weather Station VaxNotes
+  is_sql: 
+  connection_url: jdbc:odbc:wthr
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS002-005&amp;limitBy=Year&amp;order=desc&amp;format=record
+  last_updated_on: 
+  is_restricted: f
+  id: "11"
+  description: <kbsml_text><p>Weather station management notes originally created with the VaxNotes system.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_079: 
+  name: KBS029-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS029-001
+  dataset_id: "32"
+  comments: 
+  title: C/N data for KBS plants
+  is_sql: 
+  connection_url: jdbc:odbc:plants
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS029-001&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "73"
+  description: <kbsml_text><p>This data set contains information about soil total Carbon, total Nitrogen, and C:N ratios for crop and non-crop plants in the KBS main site treatments.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_106: 
+  name: KBS042-016
+  metadata_url: LTER_Metadata.jsp?Table=KBS042-016
+  dataset_id: "45"
+  comments: 
+  title: Nitrates
+  is_sql: 
+  connection_url: jdbc:odbc:KBS042-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS042-016&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "103"
+  description: "<kbsml_text>\r\n\
+    <div><h2>Sampling</h2>\r\n\
+    <p>\r\n\
+    Soil Nitrate is sampled approximately every 2 weeks through growing season (April \x96 \r\n\
+    October) through 1999; not all years were sampled every 2 weeks    \r\n\
+    depending on ground conditions; only spring and fall sampling from \r\n\
+    2000 on.</p><p>\r\n\
+    \r\n\
+    Soil cores are taken at 5 areas per plot at a depth of 25 cm.  Three soil cores (1.9 cm diameter cylinder wet tip hand probe) are taken in a zigzag pattern up between rows 2 &amp; 3 and two soil cores are taken in a zigzag pattern between down rows 4 &amp; 5.  The cores are taken on either side of the row.  The cores are combined in a pail, hand crumbled, hand mixed and put into a cardboard soil box.  Any remaining soil is placed backed into the plot.\r\n\
+    </p><p>\r\n\
+    The boxes are then placed (within 2-3 hrs of sampling) into the soils dryer (low temperature convection oven) at 110-140 &#176; F until dry (at least 48 hrs).\r\n\
+    </p><p>\r\n\
+    After removal from the dryer, the soils are then ground using a Hammermill Grinder through a 2 mm sieve and placed back into the box.\r\n\
+    </p><p>\r\n\
+    The soils are then taken to the laboratory for analysis.\r\n\
+    </p></div><div><h2>\r\n\
+    Laboratory analysis</h2><p>\r\n\
+    \r\n\
+    A 10 g sub-sample is weighed into a 100 ml plastic specimen cup and 50 ml of 1N KCl is added.  The cup is shaken for 30 minutes on a reciprocal shaker (approx. 180 strokes per minute).  The cup is removed from the shaker and allowed to stand for 15 minutes.  The supernatant is then filtered through a Whatman No. 1 filter paper and collected into a small plastic vial.  The samples are then analyzed for inorganic N (N-NO<sub>3</sub><sup>-</sup> and N-NH<sub>4</sub><sup>+</sup>) concentrations using a Lachat automated colorimetric analyzer. If analysis cannot be preformed immediately, the vials can be frozen until they can be analyzed. \r\n\
+    </p>\r\n\
+    </div>\r\n\
+    </kbsml_text>"
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_107: 
+  name: KBS042-017
+  metadata_url: LTER_Metadata.jsp?Table=KBS042-017
+  dataset_id: "45"
+  comments: 
+  title: Deep Nitrate
+  is_sql: 
+  connection_url: jdbc:odbc:KBS042-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS042-017&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "104"
+  description: "<kbsml_text>\r\n\
+    <p>Three soil cores are taken down the center of the plot at the north end, south end and middle of plot.  A 1 1/4 inch diameter core cylinder (using the probe truck) is pushed down to approximately 3 1/2  feet.  If there is no soil compression, any soil beyond 3 ft. is discarded.  If there is soil compression, all of the soil beyond 2 ft. is considered the 3 ft. sample.  \r\n\
+    </p><p>\r\n\
+    The probe is marked for each of the depths \x96 1 ft., 2 ft., and 3 ft.  The probe is removed from the ground and inverted.  A large screwdriver (or other implement to separate the depths) is used to cut off the 0-1 ft. and put into a pail.  The 1-2 ft. is separated and put into another pail.  The 2-3 ft. (or 2 ft. to the end) is placed into a 3<sup>rd</sup> pail.\r\n\
+    </p><p>\r\n\
+    The cores from each site in the plot are combined in a pail, hand crumbled, run through a &#188; inch  screen (to remove rocks) and put into a cardboard soil box.  The boxes are labeled with the plot ID, depth and date sampled.\r\n\
+    </p><p>\r\n\
+    The boxes are then placed (within 2-3 hrs of sampling) into the soils dryer (low temperature convection oven) at 110-140 &#176; F until dry (at least 48 hrs).\r\n\
+    </p><p>\r\n\
+    After removal from the dryer, the soils are then ground using a Hammermill Grinder through a 2 mm sieve and placed back into the box.\r\n\
+    </p><p>\r\n\
+    The soils are then taken to the laboratory for analysis.\r\n\
+    </p><p>\r\n\
+    Laboratory analysis.  \r\n\
+    Inorganic N (see<em>Soil Nitrates</em>), Total C and N (see <em>Total CN</em>), and Macro and Micro nutrients (analyzed in Soil &amp; Plant Nutrient Laboratory, A-81 PSSB, MSU) may be analyzed as determined by the LFL manager.  \r\n\
+    </p>\r\n\
+    </kbsml_text>"
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_050: 
+  name: KBS019-007
+  metadata_url: LTER_Metadata.jsp?Table=KBS019-007
+  dataset_id: "22"
+  comments: <kbsml_text><p>Variates other than diameter were occasionally taken.</p></kbsml_text>
+  title: Poplar Measurement
+  is_sql: 
+  connection_url: jdbc:odbc:ANPP
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS019-007&amp;tools=show&amp;limitBy=Year&amp;order=asc
+  last_updated_on: 
+  is_restricted: f
+  id: "43"
+  description: <kbsml_text><p>Poplars are measured to develop relationships between biomass and allometric values, or to estimate biomass from such relationships.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_022: 
+  name: KBS002-006
+  metadata_url: LTER_Metadata.jsp?Table=KBS002-006
+  dataset_id: "5"
+  comments: 
+  title: LTER Daily Weather
+  is_sql: 
+  connection_url: jdbc:odbc:wthr-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS002-006&amp;limitBy=Year&amp;order=desc&amp;orderby=date
+  last_updated_on: 
+  is_restricted: f
+  id: "12"
+  description: <kbsml_text><p>A synthetic weather record drawn largely from the LTER Weather station but supplemented with data from nearby stations for completeness.  KBS002-006 is a superset of KBS002-001.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_108: 
+  name: KBS042-019
+  metadata_url: LTER_Metadata.jsp?Table=KBS042-019
+  dataset_id: "45"
+  comments: <kbsml_text><p>9/20/2001- big lysimeters no longer sampled from this date forward.</p></kbsml_text>
+  title: Big Lysimeters
+  is_sql: 
+  connection_url: jdbc:odbc:KBS042-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS042-019
+  last_updated_on: 
+  is_restricted: f
+  id: "106"
+  description: <kbsml_text><p></p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_051: 
+  name: KBS019-008
+  metadata_url: LTER_Metadata.jsp?Table=KBS019-008
+  dataset_id: "22"
+  comments: |-
+    <kbsml_text><p>Biomass is standing crop, or production since last clearcut, in g/m2, based on 9088 m2.  However, poplar density is not constant across the plots.
+    </p></kbsml_text>
+  title: Poplar Biomass at Clearcut
+  is_sql: 
+  connection_url: jdbc:odbc:ANPP
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS019-008&amp;tools=show&amp;limitBy=Year&amp;order=asc
+  last_updated_on: 
+  is_restricted: f
+  id: "44"
+  description: <kbsml_text><p>Poplar plots are clearcut and biomass is measured directly.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_080: 
+  name: KBS030-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS030-001
+  dataset_id: "33"
+  comments: 
+  title: Main Plot Stand counts
+  is_sql: 
+  connection_url: jdbc:odbc:KBS030
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS030-001&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "74"
+  description: <kbsml_text><p>Stand counts from the main KBS-LTER site. All plots were planted with the same density, but due to events and competition during the season the final stand counts can be different</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_109: 
+  name: KBS042-020
+  metadata_url: LTER_Metadata.jsp?Table=KBS042-020
+  dataset_id: "45"
+  comments: 
+  title: Nutrients
+  is_sql: 
+  connection_url: jdbc:odbc:KBS042-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS042-020
+  last_updated_on: 
+  is_restricted: f
+  id: "107"
+  description: <kbsml_text><p></p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_052: 
+  name: KBS019-009
+  metadata_url: LTER_Metadata.jsp?Table=KBS019-009
+  dataset_id: "22"
+  comments: <kbsml_text><p>Biomass is standing crop, not annual increment, on a square meter basis</p></kbsml_text>
+  title: Poplar Biomass
+  is_sql: 
+  connection_url: jdbc:odbc:ANPP
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS019-009&amp;tools=show&amp;limitBy=Year&amp;order=asc
+  last_updated_on: 
+  is_restricted: f
+  id: "45"
+  description: <kbsml_text><p>Poplars are destructively sampled to estimate biomass.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_023: 
+  name: KBS002-007
+  metadata_url: LTER_Metadata.jsp?Table=KBS002-007
+  dataset_id: "5"
+  comments: 
+  title: Hourly weather
+  is_sql: 
+  connection_url: jdbc:odbc:wthr
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS002-007&amp;limitBy=Date&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "13"
+  description: <kbsml_text><p>Raw hourly observations from the LTER weather station. These data are not checked.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_081: 
+  name: KBS032-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS032-001
+  dataset_id: "35"
+  comments: 
+  title: Agronomic Yields from the Biodiversity Study
+  is_sql: 
+  connection_url: jdbc:odbc:KBS032
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS032-001&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "75"
+  description: <kbsml_text><p>Agronomic Yields measured before the regular harvest by harvesting a subplot with a plot combine</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_053: 
+  name: KBS019-010
+  metadata_url: LTER_Metadata.jsp?Table=KBS019-010
+  dataset_id: "22"
+  comments: 
+  title: Scope of Non-crop Biomass
+  is_sql: 
+  connection_url: jdbc:odbc:ANPP
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS019-010
+  last_updated_on: 
+  is_restricted: f
+  id: "46"
+  description: <kbsml_text><p>Summary of sampling effort represented in the Non-crop Biomass table, by Treatment, Replicate, Station, etc.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_024: 
+  name: KBS003-001
+  metadata_url: 
+  dataset_id: "6"
+  comments: 
+  title: Baseline Soil Physical Properties
+  is_sql: 
+  connection_url: 
+  data_url: http://lternt2.kbs.msu.edu/spatial/Texture_basedata.html
+  last_updated_on: 
+  is_restricted: f
+  id: "14"
+  description: <kbsml_text><p>Baseline soil physical properties were analyzed for an array of sample points prior to the start of the main site experiment.</p></kbsml_text>
+  update_frequency_years: 
+  driver: 
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_082: 
+  name: KBS032-002
+  metadata_url: LTER_Metadata.jsp?Table=KBS032-002
+  dataset_id: "35"
+  comments: 
+  title: Fall 2001 Soil Moisture
+  is_sql: 
+  connection_url: jdbc:odbc:KBS032
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS032-002
+  last_updated_on: 
+  is_restricted: f
+  id: "76"
+  description: <kbsml_text><p>Initial Soil Moisture done as part of the baseline sampling</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_054: 
+  name: KBS019-011
+  metadata_url: LTER_Metadata.jsp?Table=KBS019-011
+  dataset_id: "22"
+  comments: <kbsml_text><p>Unlike KBS019-009, Biomass in this table is stored as grams per tree, not grams per square meter.  There are multiple stems per tree, analyzed separately, whereas branches (KBS019-012) are aggregated on a per tree basis.</p></kbsml_text>
+  title: Coppice Poplar Stems
+  is_sql: 
+  connection_url: jdbc:odbc:ANPP
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS019-011&amp;tools=show&amp;limitBy=Year&amp;order=asc
+  last_updated_on: 
+  is_restricted: f
+  id: "47"
+  description: <kbsml_text><p>The original LTER poplars were copiced in 1999.  This table tracks regrowth.  Details of stems stored separately from branches (KBS019-012).</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_025: 
+  name: KBS003-002
+  metadata_url: 
+  dataset_id: "6"
+  comments: 
+  title: Baseline Soil Chemical Properties
+  is_sql: 
+  connection_url: 
+  data_url: http://lternt2.kbs.msu.edu/spatial/Soilchem_basedata.html
+  last_updated_on: 
+  is_restricted: f
+  id: "15"
+  description: <kbsml_text><p>Baseline soil chemical properties were analyzed for an array of sample points prior to the start of the main site experiment.</p></kbsml_text>
+  update_frequency_years: 
+  driver: 
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_083: 
+  name: KBS033-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS033-001
+  dataset_id: "36"
+  comments: 
+  title: Rainfed Grain Yields (kg/ha)
+  is_sql: 
+  connection_url: jdbc:odbc:KBS033-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS033-001&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "77"
+  description: <kbsml_text><p>Grain yields (at 15% moisture) in kg/ha</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_026: 
+  name: KBS004-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS004-001
+  dataset_id: "7"
+  comments: 
+  title: Agronomic Field Log
+  is_sql: 
+  connection_url: jdbc:odbc:Ag
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS004-001&amp;limitBy=Year&amp;order=desc&amp;format=record
+  last_updated_on: 
+  is_restricted: f
+  id: "16"
+  description: <kbsml_text><p>This is a log of agronomic activity on the LTER site.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_084: 
+  name: KBS033-002
+  metadata_url: LTER_Metadata.jsp?Table=KBS033-002
+  dataset_id: "36"
+  comments: 
+  title: Irrigated Grain Yields (kg/ha)
+  is_sql: 
+  connection_url: jdbc:odbc:KBS033-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS033-002&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "78"
+  description: <kbsml_text><p>Grain yields (at 15% moisture) in kg/ha for the irrigated study</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_055: 
+  name: KBS019-012
+  metadata_url: LTER_Metadata.jsp?Table=KBS019-012
+  dataset_id: "22"
+  comments: <kbsml_text><p>Data for poplars sampled since 1999.  Branches are weighed collectively for a given tree.  Units are grams per tree, not grams per square meter.</p></kbsml_text>
+  title: Coppice Poplar Branches
+  is_sql: 
+  connection_url: jdbc:odbc:ANPP
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS019-012&amp;tools=show&amp;limitBy=Year&amp;order=asc
+  last_updated_on: 
+  is_restricted: f
+  id: "48"
+  description: <kbsml_text><p>Masses on a per tree basis for branches from sampled poplars.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_110: 
+  name: KBS042-021
+  metadata_url: LTER_Metadata.jsp?Table=KBS042-021
+  dataset_id: "45"
+  comments: 
+  title: Yields
+  is_sql: 
+  connection_url: jdbc:odbc:KBS042-sql
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS042-021
+  last_updated_on: 
+  is_restricted: f
+  id: "108"
+  description: <kbsml_text><p></p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_027: 
+  name: KBS004-002
+  metadata_url: LTER_Metadata.jsp?Table=KBS004-002
+  dataset_id: "7"
+  comments: <kbsml_text><p>Clover didn't grow very well in 1999, so a second cover crop, rye, was planted.</p></kbsml_text>
+  title: Main Site Planting Details by Year and Treatment
+  is_sql: 
+  connection_url: jdbc:odbc:Ag
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS004-002
+  last_updated_on: 
+  is_restricted: f
+  id: "17"
+  description: <kbsml_text><p>Crops are rotated each year for the main agronomic treatments of the LTER main site experiment(s).  This is a record of planting details.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_085: 
+  name: KBS034-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS034-001
+  dataset_id: "37"
+  comments: 
+  title: Agronomic Yields
+  is_sql: 
+  connection_url: jdbc:odbc:KBS034
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS034-001&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "79"
+  description: <kbsml_text><p>Corn grain yields from the ECB study</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_056: 
+  name: KBS019-013
+  metadata_url: LTER_Metadata.jsp?Table=KBS019-013
+  dataset_id: "22"
+  comments: <kbsml_text><p>Please note that branch biomass and stem biomass are given in grams per tree, but their sum (woody biomass) is given on areal basis (g/m2) assuming one tree per 2 square meters.</p></kbsml_text>
+  title: Coppice Poplars
+  is_sql: 
+  connection_url: jdbc:odbc:ANPP
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS019-013&amp;tools=show&amp;limitBy=Year&amp;order=asc
+  last_updated_on: 
+  is_restricted: f
+  id: "49"
+  description: <kbsml_text><p>Poplars were clearcut in 1999.  Since then, several trees per plot per year have been destructively sampled.  This table integrates stem and branch data (KBS019-011 and KBS019-012).</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_111: 
+  name: KBS043-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS043-001
+  dataset_id: "46"
+  comments: <kbsml_text><p>This table was created 9-9-2002 by TTB as a replacement for an html version.</p></kbsml_text>
+  title: 1994 Earthworm Survey
+  is_sql: 
+  connection_url: jdbc:odbc:KBS022
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS043-001
+  last_updated_on: 
+  is_restricted: f
+  id: "109"
+  description: <kbsml_text><p>This file contains station tallies and averages of identified and unidentified earthworm species found in treatments 1, 7, SF, DF on 12-13 July 1994.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_028: 
+  name: KBS004-003
+  metadata_url: LTER_Metadata.jsp?Table=KBS004-003
+  dataset_id: "7"
+  comments: 
+  title: Project Manager's Log
+  is_sql: 
+  connection_url: jdbc:odbc:ProjectLog
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS004-003&amp;limitBy=Year&amp;order=desc&amp;format=record
+  last_updated_on: 
+  is_restricted: f
+  id: "18"
+  description: <kbsml_text><p>This is a log of research activity on the LTER site.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_086: 
+  name: KBS037-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS037-001
+  dataset_id: "40"
+  comments: <kbsml_text><p>Default data requests may exceed the memory capacity of the server.  Contact the LTER information manager for assistance.</p></kbsml_text>
+  title: Monitored Yield
+  is_sql: 
+  connection_url: jdbc:odbc:HiResYield2
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS037-001&amp;limitBy=Year&amp;order=desc&amp;format=csv
+  last_updated_on: 
+  is_restricted: f
+  id: "80"
+  description: <kbsml_text><p>High resolution geo-referenced grain flow rate data from the GPS yield monitor on the LTER combine.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_057: 
+  name: KBS019-014
+  metadata_url: LTER_Metadata.jsp?Table=KBS019-14
+  dataset_id: "22"
+  comments: 
+  title: Non Crop Species richness
+  is_sql: 
+  connection_url: jdbc:odbc:ANPP
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS019-014
+  last_updated_on: 
+  is_restricted: f
+  id: "50"
+  description: <kbsml_text><p>Average species richness as computer by the Shannon-Weaver H index based on the biomass of each species</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_112: 
+  name: KBS045-Diameters
+  metadata_url: LTER_Metadata.jsp?Table=KBS045-Diameters
+  dataset_id: "48"
+  comments: 
+  title: Diameters
+  is_sql: 
+  connection_url: jdbc:odbc:Trees
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS045-Diameters
+  last_updated_on: 
+  is_restricted: f
+  id: "110"
+  description: <kbsml_text><p>Diameters of trees, at fixed positions on the trunk.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_029: 
+  name: KBS004-004
+  metadata_url: LTER_Metadata.jsp?Table=KBS004-004
+  dataset_id: "7"
+  comments: 
+  title: Soil Sampling Log
+  is_sql: 
+  connection_url: jdbc:odbc:Soil
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS004-004&amp;limitBy=Year&amp;order=desc&amp;format=record
+  last_updated_on: 
+  is_restricted: f
+  id: "19"
+  description: <kbsml_text><p>This is a log of the soil sampling done as part of the baseline data collection. </p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_058: 
+  name: KBS020-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS020-001
+  dataset_id: "23"
+  comments: <kbsml_text><p>2003-12-18 Sven Bohm. From 2001 to present corn yield is based on 15% moisture rather than 15.5%</p><p>2004-1-13 Sven Bohm. Yield data from 2003 from treatments 3 and 4 were corrected for the presence of weed seeds, since there were more than the usual amount of weed seeds in the harvested grain</p></kbsml_text>
+  title: Agronomic Yields
+  is_sql: 
+  connection_url: jdbc:odbc:Ag
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS020-001&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "51"
+  description: <kbsml_text><p>Harvest data from the KBS LTER main site study..</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
 datatables_113: 
+  name: KBS045-TreeMasses
+  metadata_url: LTER_Metadata.jsp?Table=KBS045-TreeMasses
+  dataset_id: "48"
+  comments: 
+  title: Tree Masses
+  is_sql: 
+  connection_url: jdbc:odbc:Trees
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS045-TreeMasses
+  last_updated_on: 
+  is_restricted: f
+  id: "111"
+  description: <kbsml_text><p>Masses of trees, by year, calculated from representative equations.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_087: 
+  name: KBS038-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS038-001
+  dataset_id: "41"
+  comments: 
+  title: Modeled Soil Moisture and Temperature
+  is_sql: 
+  connection_url: jdbc:odbc:Soil
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS038-001&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "81"
+  description: <kbsml_text><p>Simulated soil moisture and temperature for treatments 1, 2, 4, 6, 7, and 8.  Simulations were performed using the SALUS crop model.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_059: 
+  name: KBS020-002
+  metadata_url: LTER_Metadata.jsp?Table=KBS020-002
+  dataset_id: "23"
+  comments: 
+  title: Agronomic Soil Samples
+  is_sql: 
+  connection_url: jdbc:odbc:Ag
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS020-002&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
+  is_restricted: f
+  id: "52"
+  description: <kbsml_text><p>Soil samples taken for fertilizer recommendations. These are usually taken in the fall, and analysed by the <a href="http://www.css.msu.edu/SoilTesting/">Michigan State University Soils Laboratory</a>.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_114: 
+  name: KBS045-Trees
+  metadata_url: LTER_Metadata.jsp?Table=KBS045-Trees
+  dataset_id: "48"
+  comments: 
+  title: Trees
+  is_sql: 
+  connection_url: jdbc:odbc:Trees
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS045-Trees
+  last_updated_on: 
+  is_restricted: f
+  id: "112"
+  description: <kbsml_text><p>Uniquely identified trees.</p></kbsml_text>
+  update_frequency_years: 
+  driver: sun.jdbc.odbc.JdbcOdbcDriver
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
+datatables_115: 
   name: KBS046-001
   metadata_url: LTER_Metadata.jsp?Table=KBS046-001
   dataset_id: "49"
   comments: <kbsml_text><p>Curation in progress</p></kbsml_text>
   title: Methane consumption on the LFL
+  is_sql: 
   connection_url: jdbc:odbc:KBS046-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS046-001
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS046-001
+  last_updated_on: 
   is_restricted: f
   id: "113"
   description: <kbsml_text></kbsml_text>
+  update_frequency_years: 
   driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS046_001
-datatables_087: 
-  name: KBS041-002
-  metadata_url: 
-  dataset_id: "44"
-  comments: 
-  title: 1997 Low-level, Black and White Survey
-  connection_url: 
-  data_url: http://lter.kbs.msu.edu/Data
-  is_restricted: f
-  id: "87"
-  description: <kbsml_text><p>In 1997 a Low-level flight was done while the leaves were off. This survey was done in black and white only</p></kbsml_text>
-  driver: 
-  object: 
-datatables_059: 
-  name: KBS022-003
-  metadata_url: LTER_Metadata.jsp?Table=KBS022-003
-  dataset_id: "25"
-  comments: 
-  title: Bryophytes Species List
-  connection_url: jdbc:odbc:KBS022
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS022-003
-  is_restricted: f
-  id: "59"
-  description: <kbsml_text><p>A list of mosses and liverworts occuring on or near the W. K. Kellogg Biological Station.</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS022-003
-datatables_114: 
-  name: KBS046-002
-  metadata_url: LTER_Metadata.jsp?Table=KBS046-002
-  dataset_id: "49"
-  comments: 
-  title: Methane consumption in forest soils (disturbance)
-  connection_url: jdbc:odbc:KBS046-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS046-002
-  is_restricted: f
-  id: "114"
-  description: <kbsml_text><p>Methane consumption in tilled and fertilized forest soils</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS046_002
-datatables_115: 
-  name: KBS046-003
-  metadata_url: LTER_Metadata.jsp?Table=KBS046-003
-  dataset_id: "49"
-  comments: 
-  title: Methane consumption in forest soils (fertilization)
-  connection_url: jdbc:odbc:KBS046-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS046-003
-  is_restricted: f
-  id: "115"
-  description: <kbsml_text><p>Methane consumption in fertilized forest soils</p></kbsml_text>
-  driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS046_003
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
 datatables_001: 
   name: 
   metadata_url: 
   dataset_id: 
   comments: 
   title: 
+  is_sql: 
   connection_url: 
   data_url: 
+  last_updated_on: 
   is_restricted: 
   id: "2"
   description: 
+  update_frequency_years: 
   driver: 
-  object: 
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
 datatables_030: 
-  name: KBS015-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS015-001
-  dataset_id: "18"
+  name: KBS004-005
+  metadata_url: LTER_Metadata.jsp?Table=KBS004-005
+  dataset_id: "7"
   comments: 
-  title: Soil Moisture
-  connection_url: jdbc:odbc:KBS015-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS015-001&amp;limitBy=Year&amp;order=desc
+  title: Treatment Descriptions
+  is_sql: 
+  connection_url: jdbc:odbc:Ag
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS004-005
+  last_updated_on: 
   is_restricted: f
-  id: "30"
-  description: <kbsml_text><p>Soil moisture content data was collected from baseline soil samplings.  The % gravimetric moisture content is calculated on a dry weight basis.  The protocol used for moisture analysis can be found in the sampling protocols. See the descriptor (KBS004) for treatment descriptions.</p></kbsml_text>
+  id: "20"
+  description: <kbsml_text><p>Main site treatments for the KBS LTER experiment are briefly described.</p></kbsml_text>
+  update_frequency_years: 
   driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS015_001
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
 datatables_088: 
-  name: KBS042-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS042-001
-  dataset_id: "45"
+  name: KBS039-001
+  metadata_url: LTER_Metadata.jsp?Table=KBS039-001
+  dataset_id: "42"
   comments: 
-  title: Soil Classification
-  connection_url: jdbc:odbc:KBS042-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS042-001
+  title: Log of GPS usage and comments
+  is_sql: 
+  connection_url: jdbc:odbc:GPS
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS039-001&amp;limitBy=Year&amp;order=desc
+  last_updated_on: 
   is_restricted: f
-  id: "88"
-  description: <kbsml_text><p>In 1992 the Living Field Laboratory site was mapped for soil texture, horizon identification, and soil classification on the plots that were selected for lysimeter installation.  These plots were mapped prior to the installation of the lysimeters.  The remaining plots were mapped in the spring of 1993.</p></kbsml_text>
+  id: "82"
+  description: <kbsml_text><p>Usage of GPS systems at KBS for official LTER surveys normally follows a written protocol.  This log is a repository for comments on the use of a protocol, and any other notes that seem relevant for the interpretation of the resulting data.</p></kbsml_text>
+  update_frequency_years: 
   driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS042_001
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
 datatables_116: 
-  name: KBS046-004
-  metadata_url: LTER_Metadata.jsp?Table=KBS046-004
+  name: KBS046-002
+  metadata_url: LTER_Metadata.jsp?Table=KBS046-002
   dataset_id: "49"
   comments: 
-  title: Methane consumption in continous corn
+  title: Methane consumption in forest soils (disturbance)
+  is_sql: 
   connection_url: jdbc:odbc:KBS046-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS046-004
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS046-002
+  last_updated_on: 
   is_restricted: f
-  id: "116"
-  description: <kbsml_text><p>Methane consumption in continous corn as influenced by fertilization</p></kbsml_text>
+  id: "114"
+  description: <kbsml_text><p>Methane consumption in tilled and fertilized forest soils</p></kbsml_text>
+  update_frequency_years: 
   driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS046_004
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
 datatables_031: 
-  name: KBS017-001
-  metadata_url: LTER_Metadata.jsp?Table=KBS017-001
-  dataset_id: "20"
+  name: KBS004-006
+  metadata_url: LTER_Metadata.jsp?Table=KBS004-006
+  dataset_id: "7"
   comments: 
-  title: KBS National Weather Service Record
-  connection_url: jdbc:odbc:NWS
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS017-001&amp;limitBy=Year&amp;order=desc
+  title: Agronomic Field Log by Study
+  is_sql: 
+  connection_url: jdbc:odbc:Ag
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS004-006&amp;limitBy=Study&amp;from=Main+site&amp;to=Main+site&amp;order=desc&amp;format=record&amp;tools=show
+  last_updated_on: 
   is_restricted: f
-  id: "31"
-  description: <kbsml_text><p>This data set contains information collected from the Gull Lake Biological Station COOP (#203504) weather observatory. Data is also archived at the <a href="http://www4.ncdc.noaa.gov/cgi-win/wwcgi.dll?wwDI~StnSrch~StnID~20010024">national weather service</a>. The station is located at the 42 degrees 24 minutes north and 85 degrees 23 minutes west at an elevation of 277.4 meters. Observations began on Jan 1 1948. </p></kbsml_text>
+  id: "21"
+  description: <kbsml_text><p>This is a log of agronomic activity on the LTER site, with entries grouped according to the study or experiment to which they refer.  KBS004-006 is an augmented subset of KBS004-001.</p></kbsml_text>
+  update_frequency_years: 
   driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS017-001
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
 datatables_089: 
-  name: KBS042-002
-  metadata_url: LTER_Metadata.jsp?Table=KBS042-002
-  dataset_id: "45"
+  name: KBS039-002
+  metadata_url: LTER_Metadata.jsp?Table=KBS039-002
+  dataset_id: "42"
   comments: 
-  title: Soil Class Descriptions
-  connection_url: jdbc:odbc:KBS042-sql
-  data_url: http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS042-002
+  title: Navigational GPS Points
+  is_sql: 
+  connection_url: jdbc:odbc:GPS
+  data_url: http://lternt2.kbs.msu.edu/Data/table.jsp?Product=KBS039-002
+  last_updated_on: 
   is_restricted: f
-  id: "89"
-  description: <kbsml_text><p></p></kbsml_text>
+  id: "83"
+  description: <kbsml_text><p>A test database to experiment with the retieval of points for navigation p</p></kbsml_text>
+  update_frequency_years: 
   driver: sun.jdbc.odbc.JdbcOdbcDriver
-  object: KBS042_002
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100
 datatables_002: 
   name: 
   metadata_url: 
   dataset_id: 
   comments: 
   title: 
+  is_sql: 
   connection_url: 
   data_url: 
+  last_updated_on: 
   is_restricted: 
   id: "1"
   description: 
+  update_frequency_years: 
   driver: 
-  object: 
+  object: select * from weather.kbs002_001_cache where id=7 order by date desc limit 100

@@ -1,2 +1,4630 @@
---- {}
-
+--- 
+protocols_050: 
+  created_on: 
+  name: KBS039-prot01
+  dataset_id: "42"
+  body: 
+  abstract: |-
+    <kbsml_text><p>The
+    LTER GPS units are used for recording the locations of microplots, experiments,
+    instrumentation, plot corners, sampling sites, events and many other LTER
+    features that need to be mapped in the LTER GIS.
+    They are also used to navigate back to these locations.</p>
+    
+    <p>When
+    using the Trimble XRS Pro GPS with the Omnistar real-time correction service,
+    we can expect submeter accuracy (<u>+</u> 70 cm or better). </p></kbsml_text>
+  in_use_to: 
+  title: GPS Protocol for the LTER Laboratory
+  updated_on: 
+  change_summary: Rewrite to improve and document operating practices. The cooordinate system was changed and the database section added.
+  id: "48"
+  description: |-
+    <kbsml_text><h2>KBS LTER GPS Protocol</h2>
+    
+      <h2>Materials</h2>
+    
+      <h3>Hardware</h3>
+    
+      <p>The KBS LTER has two identical Trimble GPS units. "GPS I" is
+      to be used exclusively by the KBS LTER staff. "GPS II" can be
+      loaned to others with permission by the LTER Project Manager.</p>
+    
+      <p>Two components make up each GPS unit: the Trimble Data logger
+      type TSCe with touch screen, and the Trimble Receiver Type Pro
+      XRS model 33302-51.</p>
+    
+      <p>The GPS can be used in temperatures from -4 F to 140 F. The
+      logger is designed to withstand accidental immersion so it should
+      be fine to use it in the rain.</p>
+    
+      <p>The data logger is set to power off after 10 minutes of
+      inactivity to conserve the batteries.</p>
+    
+      <p>Start, Settings, Control Panel, Power Off tab, &lt;On
+      Batteries suspend after: 10 minutes&gt;</p>
+    
+      <h3>Software</h3>
+    
+      <ol>
+        <li>TerraSync - Used for collecting and updating GPS data on
+        the Trimble data logger.</li>
+    
+        <li>Trimble GPS Pathfinder Office (Version 2.9)- Used to manage
+        and process GPS data on the PC.</li>
+    
+        <li>Microsoft Active Sync 3.1.0.9558 - Used to connect your PC
+        to the Trimble Data Logger in order to transfer data.</li>
+    
+        <li>Omnistar is a GPS service that gives real-time
+        differential correction. The Omnistar service will be
+        maintained on "LTER GPS I", if funding allows. Omnistar service
+        will not be purchased for LTER GPS II unless another user
+        requests to borrow the unit and pays for the Omnistar service.
+        See the Appendix for service details.</li>
+      </ol>
+    
+      <h2>Set Up</h2>
+    
+      <h3>GPS Mission Planning</h3>
+    
+      <p>GPS mission planning allows you to determine what time of day
+      the satellites are in suboptimum position so that you can avoid
+      collecting GPS data during these times. Mission planning is
+      critical when collecting GPS data in forested areas or other
+      challenging sites (see "Collecting Data in Trees or near
+      Obstructions" in the Appendix).</p>
+    
+      <ol>
+        <li>The Planning Software should be installed on the two
+        computer's in the Robertson Lab that have Trimble's GPS
+        Pathfinder Office software, however, if it is not installed
+        then do the following.
+    
+        <ol>
+          <li>Go to Trimble website: <a href=
+          "http://www.trimble.com/">http://www.trimble.com</a>.</li>
+          
+          <li>Click on: &lt;Support and Training&gt;</li>
+          
+          <li>Scroll down and click on: &lt;Planning Software&gt;</li>
+          
+          <li>Click on: &lt;Downloads&gt;</li>
+          
+          <li>Download: Trimble Planning Software</li>
+        </ol></li>
+        <li>Update the ephemeris file if it has been more than one week
+        since it was last updated.
+        
+        <ol>
+          <li>Go to Trimble website: <a href=
+          "http://www.trimble.com/">http://www.trimble.com</a></li>
+          
+          <li>Click on: &lt;Support and Training&gt;</li>
+          
+          <li>Scroll to and click on: &lt;Planning Software&gt;</li>
+          
+          <li>Click on: &lt;Downloads&gt;</li>
+          
+          <li>Download: &lt;Ephemeris File&gt; Save it to D:\Program
+          Files\Common Files\Trimble\Almanacs\current.ssf.</li>
+        </ol></li>
+        
+        <li>Open GPS Pathfinder Office.</li>
+        
+        <li>If the &lt;Select Project&gt; window appears, deselect
+        "Display this dialog at start-up".</li>
+    
+        <li>Click &lt;Utilities&gt; on the Tool Bar.</li>
+    
+        <li>Scroll down to &lt;Quick Plan&gt;.</li>
+        
+        <li>&lt;Select Date&gt; window appears. Choose the date of
+        interest, and click OK.</li>
+    
+        <li>&lt;Edit Point&gt; window appears.</li>
+    
+        <li>Choose &lt;City&gt; and select Battle Creek, MI</li>
+    
+        <li>The Status window opens.
+    
+        <ol>
+          <li>Choose &lt;Options&gt; on the Tool Bar and scroll to
+          &lt;Elevation Mask&gt;, enter 10 degrees.</li>
+        </ol></li>
+        
+        <li>To view the PDOP status
+    
+        <ol>
+          <li>Click &lt;Graphs&gt; on the Tool Bar, and scroll down to
+          PDOP. A graph of PDOP over time will be displayed.  You should
+          plan to do your GPS data c
+  in_use_from: 
+  version: "2"
+  person_id: "21"
+  active: f
+protocols_039: 
+  created_on: 
+  name: KBS029-prot01
+  dataset_id: "32"
+  body: 
+  abstract: "<kbsml_text><p>Sampling Frequency: Annually </p> <p>Total carbon and nitrogen contents of plant materials from each plot is measured on vegetation collected for primary productivity sampling with the use of an automated CHN analyzer  .  After drying at 60 degrees C for 48 h, plant materials are ground to pass through a 0.4 mm mesh using a Wiley Mill and Tecator Impact Pulverizer.  Duplicate subsamples (5.0 mg) of the sample are weighed with an electronic microbalance,packed into tin containers, and combusted at 1050  degrees C in an O <sub>2 </sub>-enriched atmosphere .  Combustion gases are analyzed for C and N with a thermal conductivity detector after separation on a Porapak Q column .  Standards compounds includecyclohexanone-2,4-dinitrophenylhydrazone (1990 and prior), acetanilide (1991 to 1997) andphenacetin (1997+)  .</p></kbsml_text>"
+  in_use_to: 
+  title: Plant C, N, and P
+  updated_on: 
+  change_summary: ""
+  id: "40"
+  description: <kbsml_text><p>see KBS024-prot01.</p></kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_028: 
+  created_on: 
+  name: KBS015-prot02
+  dataset_id: "18"
+  body: 
+  abstract: "<kbsml_text><p>Sampling Frequency: Precipitation-Event Basis (1989 to 1994); hourly 1996 to present </p> <p>Soil moisture analysis is measured at soil depths of 15 cm and 50 cm using Time Domain Reflectometry (TDR) (Topp 1987) .  Three pairs of stainless steel rods either 17 cm or 52 cmin length are embedded vertically into the soil (to 15 or 50 cm) in each main site plot at sampling station 3 .  One pair of stainless steel rods placed 5 cm apart comprises one sampling unit .  At each sampling station a pair of rods are placed within the agricultural crop row, 1/4 of the distance between the crop rows, and midway between the crop row.  Within the Native successional plots, rods are placed at 0, 7.5 and 15 inches (same distances as rods in corn/soybean plots) .  Weekly measurements are made with a Tektronix Metallic Time Domain Reflectometer .  Determination of soil water content over the depth of rod placement, 15 cm and 50 cm, is calculated using the following equation developed by Topp et al .  (1980) calibrated for our soils:  </p>     <p>Ov = -0.053 + 0.029 * Ka - 5.5 x 10-4 Ka2 + 4.3 * 10 x 10-6 Ka3 .  </p><p>    where Ov = water content and Ka = (Ct/L)2 </p><p>    C = propagation velocity of an electromagnetic </p><p>    wave in free spaces, 3 x 10-10ms-1 </p><p>    t = signal travel time measured by the Tektronix TDR </p><p>    L = the length of the transmission line  .</p></kbsml_text>"
+  in_use_to: 
+  title: Soil Moisture by Time Domain Reflectometry
+  updated_on: 
+  change_summary: ""
+  id: "25"
+  description: <kbsml_text><p>See abstract.</p></kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_017: 
+  created_on: 
+  name: KBS002-prot03
+  dataset_id: "5"
+  body: 
+  abstract: |-
+    <kbsml_text>
+    <p>Sampling Frequency: Hourly </p> <p>Soil temperature data is collected automatically using Campbell Scientific and Onset dataloggers .  Soil temperature readings are collected at the LTER weather station using a CR10datalogger with cs107b temperature sensors .  The sensors are placed horizontally at1, 4.5, and 11 cm below the surface under bare soil and alfalfa cover .  Soil temperature within the plots and at remote locations are measured with Onset Stowaway and Hobo dataloggers using external sensors placed vertically at 4.5 cm from the surface  .</p>
+    </kbsml_text>
+  in_use_to: 
+  title: "Soil Temperature: Onset Dataloggers"
+  updated_on: 
+  change_summary: ""
+  id: "9"
+  description: |-
+    <kbsml_text>
+    <p><em>Overview</em></p>
+    <p>Dataloggers from the Onset computer corporation are used for remote soil temperature data collection.  Dataloggers are housed in weather proof PVC tubing containers with an external thermistor installed vertically in the soil at a depth of 4.5 cm.  The data is collected hourly and reported as a daily average.</p>
+    <p><em>Devices:</em></p>
+    <ul>
+    <li><p>StowAway XTI:  Internal/External Temperature datalogger</p></li>
+    <li><p>HOBO:  Internal/External Temperature datalogger</p></li>
+    <li><p>HOBO shuttle:  Data transfer from multiple HOBO dataloggers to PC</p></li>
+    <li><p>TMC6-HA:  External thermistor for HOBO dataloggers</p></li>
+    </ul>
+    
+    <p><em>Locations:</em></p>
+    <ul>
+    
+    <li><p>2 HOBO in Treatment 6 Replicate 2</p></li>
+    <li><p>2 HOBO in Treatment 1 Replicate 2</p></li>
+    <li><p>1 HOBO in Treatment 7 Replicate 3</p></li>
+    <li><p>1 HOBO in Treatment DF Replicate 1</p></li>
+    </ul>
+    </kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_006: 
+  created_on: 
+  name: KBS002-prot04
+  dataset_id: "5"
+  body: 
+  abstract: |-
+    <kbsml_text>
+    <p>In addition to weekly maintenance, certain additional tasks must be performed on a yearly basis, such as replacing/recalibrating sensors.
+    </p>
+    </kbsml_text>
+  in_use_to: 
+  title: LTER Weather Station Annual Maintenance
+  updated_on: 
+  change_summary: This is the first version of this document.
+  id: "10"
+  description: |-
+    <kbsml_text>
+    <p> 
+    LTER Weather Station Annual Maintenance
+    </p>
+    <p>
+    In addition to weekly maintenance, annual maintenance may be required for certain instruments.  <a href = "http://lter.kbs.msu.edu/Data/table.jsp?Product=KBS002-003&amp;limitBy=Location&amp;containing=LTERWS&amp;format=record">KBS002-003</a> lists the instruments currently deployed at the weather station.  Check the serial numbers in the field to verify that the list is correct.  Determine how long the device has been deployed by looking up its serial number in <a href = "http://lter.kbs.msu.edu/Data/table.jsp?tools=show&amp;Product=KBS002-004&amp;limitBy=Instrument&amp;format=record">KBS002-004</a>.  Service or replace the instrument as appropriate, referring to the instrument manual on file with the LTER Information manager (summary provided below).  Light, wind, and humidity sensors are typically rotated, i.e.,  swapped for freshly calibrated instruments of the same type, and sent to the manufacturer for recalibration.  Any time an instrument is removed or placed, the event should be reported to the information manager and logged in the instrument tracking system (KBS002-004).  All instruments should be monitored throughout the year, and replaced/serviced if suspect. </p>
+    <p>Most instruments can be serviced from the ground, or by climbing a short distance up the tower.  To service wind instruments, a crew of four people can "drop" the tower.  Attach a rope halfway up the tower and have one person handle the rope to control descent.  Carefully remove the retaining bolts on the southwest leg, and lower bolts on the other two legs.  Tower will pivot on remaing bolts.  Slowly lower the tower toward the northeast, using remaining personnel.  Support lowered tower on saw horses to prevent damage to wind instruments or instrument enclosure.  Caution!  Tower is heavy.  Do not attempt this operation without sufficient help.
+    </p>
+    <p>Instrument-specific comments</p>
+    <ul>
+    <li><p>Belfort weighing bucket precipitation gauge:  manual specifies annual cleaning.  Check calibration annually:  1.0 L of water added to the bucket should cause a pen displacement of 24.4 chart units (1.22 inches).  Report the results.</p></li>
+    <li><p>HMP45C Temperature and Relative Humidity Probe:  rotate annually.</p></li>
+    <li><p>LI200X Pyranometer:  rotate every two years.</p></li>
+    <li><p>LI190SB Quantum Sensor:  (Manual does not specify recalibration interval.)  rotate every two years.</p></li>
+    <li><p>107 Temperature Probe.  No recalibration or replacement interval is recommended.  Check recent data to see that HMP45C and 107 agree.</p></li>
+    <li><p>014A Wind Speed Sensor.  rotate annually (send to Met-One).</p></li>
+    <li><p>024A Wind Direction Sensor.  rotate annually (send to Met-One).</p></li>
+    </ul>
+    </kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_051: 
+  created_on: "2007-05-16"
+  name: KBS004-prot04
+  dataset_id: "7"
+  body: ""
+  abstract: The planned agronomic protocol. This plan may be modified during the season as conditions change, the authoritative source for what was done is the "Aglog".  The current plan can be downloaded "here":http://houghton.kbs.msu.edu/data/agronomic_protocol/2007.pdf
+  in_use_to: 
+  title: Agronomic Protocol
+  updated_on: "2007-05-16"
+  change_summary: 
+  id: "101"
+  description: 
+  in_use_from: "2007-01-01"
+  version: "0"
+  person_id: "259"
+  active: t
+protocols_040: 
+  created_on: 
+  name: KBS031-prot01
+  dataset_id: "34"
+  body: 
+  abstract: "<kbsml_text><p>Sampling Frequency: bimonthly 1996 to present</p><p>Soil leachate samples are collected from low-tension quartz-lysimeters on a bimonthly basis from early March to December.  Precipitation and soil frost levels dictate the timeframe and frequency of collection.  Three lysimeters are installed in the C horizon approximately 1 to 1.2 m deep under an undisturbed soil profile in three replicate blocks of each of the KBS LTER treatments.  Suction (-0.5 atm) is applied to each lysimeter and the resulting leachate collected in Erlenmeyer flasks after a 24 h period.  Soil leachate samples are filtered with glass fiber filters (pore size &lt; 0.4 um) and immediately frozen.  Samples are thawed and analyzed with flow spectrophotometry for inorganic N and dissolved organic N.</p></kbsml_text>"
+  in_use_to: 
+  title: Soil Leachate - Inorganic and Dissolved Organic Nitrogen
+  updated_on: 
+  change_summary: ""
+  id: "41"
+  description: |-
+    <kbsml_text>
+    <div>
+    <h2>Overview</h2>
+    <p>The quartz lysimeters are designed to pull soil solution at low suction (-0.5 atm or 38 cm Hg).  The soil
+    solution (leachate) is harvested by attaching a sealed and evacuated flask to a small diameter sample line
+    connected to the lysimeter.  Over a period of 24 h, the pressure differential between the soil solution and
+    leachate collected within the flask reaches a state of equilibrium.  Flasks containing leachate are transferred
+      to the laboratory.  The leachate is filtered with glass fiber filters, stored in polyethelene vials, and
+    frozen  until analyzed for inorganic N and dissolved organic N using flow spectrophotometry.
+    </p>
+    </div><div><h2>Materials</h2>
+    
+    <ul>
+    <li><p>Site maps
+    </p></li>
+    <li><p>Avery 5160 Laser labels
+    </p></li>
+    <li><p>500 mL flasks
+    </p></li>
+    <li><p>hand pump
+    </p></li>
+    <li><p>parafilm squares
+    </p></li>
+    <li><p>20 mL scintillation vials
+    </p></li>
+    </ul>
+    
+    </div><div><h2>Procedure</h2>
+    
+    <ol>
+    <li><p>Cover lysimeter flasks with parafilm to reduce particulate contamination during transport to field.
+    </p></li>
+    <li><p>Place flasks in boxes and transport to field.  The center flasks will need to be inverted in order to fit 6
+      flasks in a box.  Each lysimeter will have specific flask to be used for leachate collection.
+    </p></li>
+    <li><p>Place stopper assembly in flask.  Connect hand pump to tygon tubing.
+    </p></li>
+    <li><p>Create a vacuum of 38 cm Hg with hand pump.
+    </p></li>
+    <li><p>Fold tygon tubing and place binder clip on tube to keep air tight seal.
+    </p></li>
+    <li><p>Record time and date of evacuation.
+    </p></li>
+    <li><p>After 24 hours collect flasks in same order as evacuated.
+    </p></li>
+    <li><p>Attach hand pump to tygon tubing.
+    </p></li>
+    <li><p>Release binder clip and record vacuum remaining in flask.
+    </p></li>
+    <li><p>Remove stopper and place parafilm over flask opening.  Place flasks in boxes right side up for transport
+    back to lab.
+    </p></li>
+    <li><p>Weigh flasks in order to estimate the amount of leachate.
+    </p></li>
+    <li><p>Filter leachate into 20 ml plastic scintilation vials.
+    </p></li>
+    <li><p>Freeze leachate samples until analysis can be run.
+    </p></li>
+    </ol>
+    
+    <p>During freezing temperatures, the leachate in the Erlenmeyer flasks may freeze and crack the glass flasks.
+     This may be avoided by tilting the flasks in the cooler so the leachate can freeze and expand across the
+    length   of the flask.
+    </p>
+    </div><div><h2>Time required to complete sampling of all 90 KBS LTER quartz lysimeters</h2>
+    
+    <ul>
+    <li><p>Prep: 1.5 h
+    </p></li>
+    <li><p>Field placement: 4 h
+    </p></li>
+    <li><p>Field collection: 4.5 h
+    </p></li>
+    <li><p>Weigh leachate volumes in lab: 1 h
+    </p></li>
+    <li><p>Filter:2.5 h
+    </p></li>
+    <li><p>Wash flasks: 3 h
+    </p></li>
+    </ul>
+    
+    </div>
+    </kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_029: 
+  created_on: 
+  name: KBS019-prot01
+  dataset_id: "22"
+  body: 
+  abstract: |-
+    <kbsml_text><p>Sampling Frequency: minimum of once during each growing season </p> <p>Ecosystem net primary production is estimated by annual maximum plant biomass accumulation .  Plant biomass is measured in the growing season (May-October) by quantifying the peak dry mass of plants per unit area in each plot   .</p> <p>Multiple sampling stations in each plot are sampled for plant biomass (only one station per plot sampled prior to 1990) .  Plant biomass is quantified by clipping at each sample date (crop and/or weeds) or via allometric measurements (poplar trees) within a 1 m2 area .  At clipping, all plants within the sampling area are cut at ground level and placed in labeled paper bags .  Plants are identified to species based on Gleason and Cronquist(1963), Fernald (1950), and Voss (1972 and 1985) .  The Kellogg Biological Station plant reference collection is also used for species identification .  Plant biomass is dried at 60 &#176; C for 48 h and weighed .  Forest system biomass is measured using dendrometers and allometric equations .  Litterfall is recorded from poplar and forest systems   .</p>
+    </kbsml_text>
+  in_use_to: 
+  title: Aboveground Net Primary Productivity Protocol
+  updated_on: 
+  change_summary: ""
+  id: "26"
+  description: |-
+    <kbsml_text>
+    <div>
+    <h2>Overview
+    </h2>
+    <p>Above ground net primary productivity (ANPP) is measured at the KBS
+    LTER in habitats ranging from annual cropping systems to deciduous
+    forests. The diverse plant communities in these habitats require
+    different harvest and/or sampling methods. All measurements are taken
+    pre-harvest at peak annual biomass for major community
+    components. This generally means physiological maturity for annuals
+    and pre-senescence for perennials; most treatments are thus sampled at
+    least twice per year depending on the life history of community
+    components (e.g. corn vs. winter annuals in Treatment 1) and on
+    agronomic harvest frequency (e.g. 3-4 times per year for alfalfa). If
+    possible, biomass samples are taken from each of the five sampling
+    stations within a plot, although labor, weather, and time constraints
+    may alter the number of sampling stations for a given harvest.
+    </p>
+    <p>For Treatments 1, 2, 3, 4, 6, 7 and SF (successional field) ANPP is
+    assessed by harvesting all the above ground portion of plants that are
+    rooted within the bounds of the harvest quadrat. The quadrat size
+    totals 1 m <sup>2 </sup> but the dimensions vary depending on the crop
+    row spacing in the annual systems (T1-4) and are described in Table
+    1. The quadrat size for T5-SF is 0.5 by 2.0 m (1m <sup>2
+    </sup>). Quadrats are oriented with the long side in an east - west
+    direction. This direction is perpendicular to the crop rows (in
+    planted systems) and allows for assessment of both the row and
+    interrow plant communities. All plants within the quadrat are clipped
+    at ground level, bagged, and stored at 4 degrees C until botanical
+    separations are performed. Harvested plants are separated by species
+    and identified using the five-letter Bayer code system (Weed Science,
+    1984). Six letter codes are used for woody species, using the first
+    three letters of both genus and species to create the code. In some
+    cases plants are composited into crop and non dominant plant
+    component. Crops are further separated into seed and stover. Plants
+    are dried at 60 degrees C for a minimum of 48 hours and dry weights
+    recorded along with the date of harvest, field replicate, treatment,
+    sampling station and species code.
+    </p>
+    <p>In Treatment 5 (poplar plantation) biomass estimates are derived
+    from measurements of basal diameter using an allometric relationship
+    between diameter and biomass determined from a subset of trees
+    harvested prior to leaf drop. In the DF (deciduous forest) and CF
+    (conifer forest) wood annual growth is estimated by changes in stem
+    diameter using an allometric equation available in Tritton and
+    Hornbeck (1982). Leaf production in sites with trees is estimated with
+    two 0.8 x 1.2 m litter traps placed on the forest floor of each site.
+    </p>
+    <p>Details for the ANPP estimates for all treatments are provided below.
+    </p>
+    </div>
+    <div>
+    <h2>Treatment 1: Conventional tillage
+    </h2>
+    <p>Corn / Soybean / Wheat rotation.
+    </p>
+    <div>
+    <h3>Crop
+    </h3>
+    <p>plants are hand harvested using a 1 m <sup>2 </sup> quadrat (see
+    Table 1) at each of the five sampling stations at physiological
+    maturity of the crop:</p>
+    <ul>
+    <li>
+    <p>Corn : black layer (early September).
+    </p>
+    </li>
+    <li>
+    <p>Soybeans : pre-leaf drop (early September).
+    </p>
+    </li>
+    <li>
+    <p>Wheat: kernel entering dough stage (mid-July).
+    </p>
+    </li>
+    </ul>
+    
+    <p>Plant tissue is dried and the total biomass of the plot is
+    recorded. The tissue is then threshed (Almaco corn or small grain
+    thresher) to separate the seed from stover. Seed biomass is recorded
+    and moisture sub samples are taken using a Burrows Digital Moisture
+    Computer 700. Seed and stover tissue sub samples are collected,
+    combined by tissue type over stations, and archived for further
+    analysis.
+    </p>
+    <ul>
+    <li>
+    <p>
+    <em>Calculate
+    </em> the mean total, seed and stover biomass per plot on a dry weight basis.
+    </p>
+    </li>
+    <li>
+    <p>
+    <em>Report
+    </em> for ANPP: mean total biomass (g/m2 /y) and standard error (SE) with n=6 reps (blocks).
+    </p>
+    </li>
+    </ul>
+    
+    </div>
+    <div>
+    <h3>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_018: 
+  created_on: 
+  name: KBS004-prot02
+  dataset_id: "7"
+  body: 
+  abstract: |-
+    <kbsml_text>
+    <p/>
+    </kbsml_text>
+  in_use_to: 
+  title: Roller Mill
+  updated_on: 
+  change_summary: ""
+  id: "12"
+  description: |-
+    <kbsml_text>
+    <p>Impact Roller Mill
+    </p>
+    <p>The Impact Roller Mill is used for pulverizing soils and small volume plant material.  Glass jars are filled  
+    &lt; 1/3 full with material to be ground. Three 3/8&quot; by 2 &quot; stainless steel rods are placed into a jar 
+     covered with duct tape and the cap is tightly sealed.  Jars are placed on the conveyor belt.  Motor is set to a  
+    speed of 60.  Jars are left on the roller mill for 12-24 h.  Care must be taken in labeling the jars since the  
+    abrasion in the rolling process causes labels and pen markings to disintegrate from outer surfaces of the jars.
+    </p>
+    <p>Sparks Dura Drive conveyor belt driven with a Sparks Belting Company KVFR Transistor Inverter (Model   
+    KVFR204ES).  Sparks Belting Company, 3800 Stahl Dr., PO 2647, Grand Rapids, MI 49501.  616-949-2750
+    </p>
+    </kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_007: 
+  created_on: 
+  name: KBS021-prot02
+  dataset_id: "24"
+  body: 
+  abstract: <kbsml_text><p>Instructions for mixing and handling various Alpkem reagents.</p></kbsml_text>
+  in_use_to: 
+  title: Alpkem Recipes
+  updated_on: 
+  change_summary: "'Ammonium' was changed to 'Nitrate' or 'Nitrite' in two places."
+  id: "32"
+  description: |-
+    <kbsml_text>
+    <p>
+    <em>Follow all lab safety protocols when handling chemicals, including protective eye and skin wear and appropriate lab clothing.</em></p>
+    <div>
+    <h2>Ammonium Reagents</h2>
+    <div>
+    <h3>Citrate Complexing Reagent (4L)</h3>
+    <p>Sodium Citrate 112g</p>
+    <p>Sodium Hydroxide 4 g</p>
+    <p>Nanopure Water 4L</p>
+    <p>Brij 35 (30%) 20 ml</p>
+    <p>Partially fill a 4L Erlenmeyer flask with nanopure water. Add dry chemicals, stir until dissolved then bring to volume (4L) with nanopure water. Filter reagent then add 20 ml 30% Brij 35 (5 ml / L). This may be stored at room temperature or be refrigerated.</p></div>
+    <div>
+    <h3>Alkaline Phenol</h3>
+    <p>Sodium Hydroxide (10N or 40% w/v) 80 ml</p>
+    <p>Liquid Phenol (88%) 94 ml</p>
+    <p>Nanopure Water 1 L</p>
+    <p>Partially fill a 1L volumetric flask with nanopure water. Place in ice bath and stir while slowly adding sodium hydroxide first, then liquid phenol. Dilute to volume (1 L) with nanopure water and filter. Store refrigerated in light resistant container.</p>
+    <p>
+    <em>NOTE:</em> This reagent is hazardous waste! Any glassware, paper towels, gloves, filter paper, etc used/contaminated during this process must be treated or disposed of as hazardous waste.</p></div>
+    <div>
+    <h3>Sodium Nitroferricyanide (1L)</h3>
+    <p>Sodium Nitroferricyanide 0.5 g</p>
+    <p>Nanopure Water 1L</p>
+    <p>Partially fill a 1L volumetric flask with nanopure water. Carefully measure sodium nitroferricyanide and add to nanopure water. Dilute to volume (1L) with nanopure water and filter. Store refrigerated in light resistant container.</p>
+    <p>
+    <em>NOTE:</em> This reagent is hazardous waste! Any glassware, paper towels, gloves, filter paper, etc used/contaminated during this process must be treated or disposed of as hazardous waste.</p></div>
+    <div>
+    <h3>10N Sodium Hydroxide (1L)</h3>
+    <p>Sodium Hydroxide 400g</p>
+    <p>Nanopure Water 1L</p>
+    <p>Partially fill a 1L volumetric flask with nanopure water and place in ice bath. SLOWLY add sodium hydroxide while stirring to dissolve. This produces an exothermic reaction. Allow solution to cool to room temperature and bring to volume (1L) with nanopure water.</p>
+    <p>
+    <em>NOTE:</em> This is REALLY messy, nasty stuff to work with so my advice is to buy it already made up.</p></div></div>
+    <div>
+    <h2>Nitrate/Nitrite Reagents</h2>
+    <div>
+    <h3>Ammonium Chloride EDTA Buffer (4L)</h3>
+    <p>Ammonium Chloride 340 g</p>
+    <p>EDTA 0.4 g</p>
+    <p>10N Sodium Hydroxide 26+ ml</p>
+    <p>Nanopure Water 4L</p>
+    <p>Brij 35 (30%) 8ml</p>
+    <p>Partially fill a 4L Erlenmeyer flask with nanopure water. Add ammonium chloride and EDTA and stir until dissolved. Adjust buffer solution using 10 N sodium hydroxide (start with 26 ml and add from there as needed) to pH 8.50. Dilute to volume (4 L) with nanopure water and filter. Add 8 ml 30% Brij 35 (2 ml / L). Store refrigerated.</p>
+    <p>
+    <em>NOTE:</em> Keep some of the buffer on hand that does not have Brij 35 added to it. The buffer without Brij is needed to rinse and store the cadmium reduction coil after use. Routinely 1L of the ammonium chloride EDTA buffer is set aside in a separate 1L bottle and 6 ml of Brij 35 is added to the other 3L. Brij can always be added previous to use if necessary but the cadmium coil should not be stored in buffer that has Brij in it.</p></div>
+    <div>
+    <h3>Color Reagent (1L)</h3>
+    <p>Phosphoric Acid (85%) 100 ml</p>
+    <p>Sulfanilimide 40 g</p>
+    <p>N-1-Naphthylethylenediamine dihydrochloride 2g</p>
+    <p>Nanopure Water 1 L</p>
+    <p>Brij 35 (30%) 2 ml</p>
+    <p>Partially fill a 1 L volumetric flask with nanopure water. On stir plate, add phosphoric acid then dry chemicals. Stir until dry chemicals are dissolved. This can take several hours of stirring. Bring to volume (1L) with nanopure water and filter. Add 2ml (2 ml / L) of 30% Brij 35. Store refrigerated in light resistant container.</p></div></div>
+    <div>
+    <h2>Cadmium Coil Reactivation Reagents</h2>
+    <p>(see page 16 of The Flow Solution Nitrate/Nitrite Methodology)</p>
+    <p>Note: DO NOT use HCl acid every time you recharge.  This causes excessive damage to the
+  in_use_from: 
+  version: "2"
+  person_id: "21"
+  active: t
+protocols_041: 
+  created_on: 
+  name: KBS033-prot01
+  dataset_id: "36"
+  body: 
+  abstract: ""
+  in_use_to: 
+  title: N rate study
+  updated_on: 
+  change_summary: ""
+  id: "44"
+  description: <kbsml_text><h3>Protocol for the N rate study</h3></kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_030: 
+  created_on: 
+  name: KBS019-prot03
+  dataset_id: "22"
+  body: 
+  abstract: |-
+    <kbsml_text><p>Sampling Frequency: annually </p> <p>Leaves that drop during the season are collected in 0.8 m * 1.2 m wooden litter trap frames (frames were designed to fit between the poplar rows) .  Two traps are installed in each plot of the coniferous, deciduous and poplar treatments following leaf emergence in late May .  Leaves within the traps are collected throughout the season, dried, weighed, and archived for tissue analysis  .</p>
+    </kbsml_text>
+  in_use_to: 
+  title: Plant Litter
+  updated_on: 
+  change_summary: ""
+  id: "28"
+  description: <kbsml_text><p>See abstract.</p></kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_019: 
+  created_on: 
+  name: KBS006-prot01
+  dataset_id: "9"
+  body: 
+  abstract: "<kbsml_text><p>Sampling Frequency: Every third year initially; every sixth year currently [amended 5-17-2002 TTB]</p> <p>The soil seed bank is sampled triannually by elutriating soil samples (Gross and Renner 1990) from each plot .  Soil cores are collected from 0-5 and5-15 cm depth increments  .</p></kbsml_text>"
+  in_use_to: 
+  title: Seed Bank Composition
+  updated_on: 
+  change_summary: ""
+  id: "14"
+  description: |-
+    <kbsml_text>
+      <p>Samples are taken from each of the 5 sampling stations in each treatment replicate in
+      the LTER main site (7 trts * 6 reps; in 1994 the forested sites were added to the sampling
+      regime). The sampling location is 1 m to the southwest of the sampling flag; 10 cores (1
+      inch diameter) to a depth of 15 cm are taken from a quadrat area of 25*25 cm. Cores are
+      uniformly distributed in the quadrat.</p>
+      <p>Each core is divided into 2 depth intervals: 0-5 cm and 5-15 cm. The 10 cores from each
+      quadrat are composited and placed in separately labeled paper bags. Each bag is labeled
+      with the trt/rep/sample location and depth. The 2 bags from each sample location are
+      placed in a ziplock bag. Samples are stored in the dark at 5 degrees C until elutriated
+      following methods in Gross and Renner (1989). Storing the samples at cool temperatures
+      should prevent germination and facilitate elutriation as the samples will not form &quot;
+      peds&quot; as a consequence of drying.</p>
+    
+    
+    <p><em>Microplots:</em></p>
+    
+    
+      <p>A single location is sampled from the center of each of the 4 microplots (+/-
+      fertilizer; +/- herbicide) at 30&quot; row spacing in all reps of trts 1 and 2
+      (conventional and notill). In the no fertilizer treatments, the samples are taken from the
+      middle of the first 6 rows to avoid areas that were accidentally fertilized in 1989. All
+      other samples are taken form the center of the 12 row microplot. </p>
+    
+    
+    <p><em>Comments:</em></p>
+    
+    
+      <p>Treatment 8 was not sampled. Treatment 1 (conventional till) will be resampled after it
+      is plowed to determine how tillage effects the distribution and viability of seeds in the
+      seed bank. If these samples are taken more than 2 weeks after the main site sampling was
+      done, the no-till plots will be resampled f or a comparison of time effects. </p>
+    
+    
+    <p><em>References:</em></p>
+    
+    
+      <p>Gross, K.L. and K.A. Renner. 1989. A new method for estimating seed
+      numbers in the soil. <em>Weed Science</em> 37:836-839.</p>
+    
+    </kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_008: 
+  created_on: 
+  name: KBS000-prot05
+  dataset_id: "3"
+  body: 
+  abstract: <kbsml_text><p>This document describes information management practices for the KBS LTER, with a special focus on the KBS Information Management System.  </p></kbsml_text>
+  in_use_to: 
+  title: KBS LTER Information Management Guide
+  updated_on: 
+  change_summary: This is the first version of this document.
+  id: "5"
+  description: |-
+    <kbsml_text>
+    <div>
+    <h2>KBS Information Management Guide</h2>
+    <p>7-1-2003  Tim Bergsma</p>
+    </div>
+    
+    <div><h2>Outline</h2>
+    <p>1  <a href='#1'>Overview</a></p>
+    <p>2  <a href='#2'>Business Continuity Plan </a></p>
+    <p>3  <a href='#3'>Server Administration</a></p>
+    <p>4  <a href='#4'>Web Administration</a></p>
+    <p>5  <a href='#5'>Information Management System</a></p>
+    <p>5.1  <a href='#5.1'>Overview</a></p>
+    <p>5.2  <a href='#5.2'>Resources</a></p>
+    <p>5.2.1  <a href='#5.2.1'>Critical Literature</a></p>
+    <p>5.2.2  <a href='#5.2.2'>Critical Technologies</a></p>
+    <p>5.2.2.1  <a href='#5.2.2.1'>Apache/Tomcat</a></p>
+    <p>5.2.2.2  <a href='#5.2.2.2'>Microsoft Access</a></p>
+    <p>5.2.2.3  <a href='#5.2.2.3'>Microsoft SQL Server</a></p>
+    <p>5.2.2.4  <a href='#5.2.2.4'>ODBC</a></p>
+    <p>5.2.2 5  <a href='#5.2.2.5'>JSP</a></p>
+    <p>5.2.2.6  <a href='#5.2.2.6'>XML/XSLT</a></p>
+    <p>5.2.3  <a href='#5.2.3'>Email</a></p>
+    <p>5.2.4  <a href='#5.2.4'>Logs</a></p>
+    <p>5.2.5  <a href='#5.2.5'>Paper Files</a></p>
+    <p>5.2.6  <a href='#5.2.6'>Keys</a></p>
+    <p>5.3  <a href='#5.3'>Functions</a></p>
+    <p>5.3.1  <a href='#5.3.1'>Storage</a></p>
+    <p>5.3.1.1  <a href='#5.3.1.1'>Directory Organization and Priorites</a></p>
+    <p>5.3.1.2  <a href='#5.3.1.2'>Internal Workflow Model</a></p>
+    <p>5.3.2  <a href='#5.3.2'>Backup</a></p>
+    <p>5.3.3  <a href='#5.3.3'>Archive</a></p>
+    <p>5.3.4  <a href='#5.3.4'>Input</a></p>
+    <p>5.3.4.1  <a href='#5.3.4.1'>Data Submission Guidelines</a></p>
+    <p>5.3.5  <a href='#5.3.5'>Output</a></p>
+    <p>5.4  <a href='#5.4'>Integration</a></p>
+    <p>5.4.1  <a href='#5.4.1'>The LTER Dataset Registry</a></p>
+    <p>5.4.1.1  <a href='#5.4.1.1'>kbsml_text</a></p>
+    <p>5.4.1.2  <a href='#5.4.1.2'>KBS000</a></p>
+    <p>5.4.1.3  <a href='#5.4.1.3'>Supported Object Types</a></p>
+    <p>5.4.2  <a href='#5.4.2'>IMS Web Pages Manifest</a></p>
+    <p>5.4.3  <a href='#5.4.3'>LTER Databases Manifest</a></p>
+    <p>6  <a href='#6'>Weather Station Management</a></p>
+    <p>6.1  <a href='#6.1'>Maintenance</a></p>
+    <p>6.2  <a href='#6.2'>Communications</a></p>
+    <p>6.3  <a href='#6.3'>Downloads and Uploads</a></p>
+    <p>7  <a href='#7'>Collaborations</a></p>
+    <p>7.1  <a href='#7.1'>DTOC</a></p>
+    <p>7.2  <a href='#7.2'>ClimDB</a></p>
+    <p>7.3  <a href='#7.3'>EML</a></p>
+    </div>
+    <div>
+    <h2><a name="1">1 Overview</a></h2>
+    
+    <p>This document describes information management practices for the KBS LTER, with a special focus on the KBS Information Management System.  Currently, the primary tasks of the KBS LTER information manager include administration of the LTER server (shared with the LTER secretary), administration of the LTER web site (shared with the LTER secretary, special focus on data pages), administration of the KBS LTER Information Management System, and adminstration of the KBS LTER Weather Station.  Some guidance is given regarding network level collaborations in which KBS participates.
+    
+    </p></div>
+    <div>
+    <h2><a name="2">2  Business Continuity Plan </a></h2>
+    
+    <p>In the event of a major unforseen disruption of operations, steps may be taken subsequently to recover investment in data management.  Principally, this means recovery of critical data files.  KBS Computer Services provides a complete backup strategy for most KBS computers.  Backup tapes are stored offsite.  Request  files from KBS Computer Services, specifying the time of disruption if necessary.  The critical computer is LTERNT2, a member of GPRNET.  Critical drive is D:/.  Critical paths are D:/Databases/LTER/ and D:/Projects/LTER/.  The single most important file is D:/Databases/LTER/LTER_Metadata.mdb.
+    </p>
+    
+    </div>
+    <div>
+    
+    
+    <h2><a name="3">3  Server Administration</a></h2>
+    
+    <p>The LTER Information Manager helps the LTER Secretary administer the Windows NT 4.0 Server "LTERNT2", and to some extent the Windows 2000 Server "LTERNT".  They serve the KBS LTER Internet Website and the KBS Internet Website, respectively (lter.kbs.msu.edu and www.kbs.msu.edu).  Both participate in GPRNET, a LAN.  LTERNT2 is a backup domain controller for GPRNET (primary domain controller is GPRPC10).  The book Wi
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_042: 
+  created_on: 
+  name: KBS035-prot01
+  dataset_id: "38"
+  body: 
+  abstract: "<kbsml_text><p>Sampling Frequency: Every fifth year </p> <p>In annual crops soil excavations at the time of plant physiological maturity or maximum aboveground biomass are used to index belowground primary productivity .  A 0.5 x 0.5 m area is excavated to 0.5 m, and soil and roots are removed to the laboratory for hydropneumatic elutriation (Smucker et al .  1981) .  Washed roots are dried at 60 degrees C and weighed  .</p> <p>In perennial plots (trees, alfalfa, native succession), minirhizotron techniques are used to index belowground productivity .  Permanently installed minirhizotron tubes are videotaped during the growing season and videotape images analyzed for root turnover at1.2 cm intervals to a depth of 1.5 m  .</p></kbsml_text>"
+  in_use_to: 
+  title: Belowground Net Primary Production
+  updated_on: 
+  change_summary: ""
+  id: "45"
+  description: <kbsml_text><p>See abstract. </p></kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_031: 
+  created_on: 
+  name: KBS020-prot01
+  dataset_id: "23"
+  body: 
+  abstract: "<kbsml_text><p>Sampling Frequency: minimum of once per year </p> <p>Harvestable biomass in each cropped plot is measured at the time of crop harvest .  For grains, the agricultural grain harvester is fitted with a GPS-referenced yield monitoring system to provide yield maps for each 1 ha treatment plot .  Additionally, grain isoff-loaded into weigh wagons and weighed at the KBS dairy  .</p> <p>Alfalfa and wheat straw is measured on a gravimetric basis per plot after it has been cut and baled .  Gravimetric moisture content is measured and subtracted from the biomass and the harvestable biomass estimate presented as dry weight alfalfa or straw per area  .</p></kbsml_text>"
+  in_use_to: 
+  title: Harvestable Biomass
+  updated_on: 
+  change_summary: ""
+  id: "29"
+  description: <kbsml_text><p>See abstract.</p></kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_020: 
+  created_on: 
+  name: KBS006-prot02
+  dataset_id: "9"
+  body: 
+  abstract: <kbsml_text><p>in progress</p></kbsml_text>
+  in_use_to: 
+  title: Gillson Pneumatic Elutriator
+  updated_on: 
+  change_summary: ""
+  id: "15"
+  description: |-
+    <kbsml_text>
+    <p><em>Setting up the elutriator</em></p>
+    
+      <p>Turn on air until the needle reads across from the black 20. Turn
+      on water to 70 psi.  Both these gauges should be checked regularly;
+      during elutriation water should be at 30-40 psi.</p>
+    
+      <p><em>Processing samples</em></p>
+    
+      <p>Before pouring the soil into the chamber, break up all large
+      clumps of soil and turn on the chamber to allow it to fill halfway
+      with water. Add sample, making sure sieve system is in correct order
+      of (from top to bottom) 710, 425, and 243 at the bottom. Elutriate
+      0-5 cm samples for 10 minutes and 5-15 samples for 15 minutes. When
+      the sample is done, remove all connecting chamber and sieve systems
+      and rinse through into sieves to make sure nothing is left in the
+      arm. As you take apart the system of sieves and connectors, rinse
+      through each part into the next sieve down. Empty chamber and turn
+      on, allowing it to rinse out for a few seconds.</p>
+    
+    <p><em>Filtering samples</em></p>
+    
+      <p>243 sieves should always be placed in the large funnels to be
+      rinsed out. For 0-5 cm samples, the 425 and 710 sieves can be placed
+      in smaller funnels unless the sample is unusually large. For 5-15 cm
+      samples, the 425 is placed in a large funnel and the 710 is placed
+      in a small funnel. It helps to wet the filter paper before placing
+      the sieve in the funnel. Rinse off the outside of the sieve and
+      rinse through screen, brushing lightly wit the tip of the water
+      bottle to knock off material that is sticking. Use a spatula to
+      remove all seeds that remain on the inside of the sieve after
+      rinsing. The filter paper is easiest to remove from the funnel with
+      the pump still on. If seeds have slipped down underneath the filter
+      paper, rinse out of funnel onto filter paper. Place filter paper in
+      appropriately labeled petri dish, not fully covering so that the
+      filter paper will not dry and seeds will not germinate. When the
+      filter paper is dry, cover the petri dish and tape securely for
+      storage.</p>
+    
+    
+    
+    <p><em>Suggestions</em></p>
+    
+    
+    
+      <p>Label petri dishes and filter paper ahead of each sample. </p>
+      <p>Use white grease to keep sieves and connectors from sticking
+      together. Avoid getting grease in the mesh on the sieves because it
+      will cause seeds to stick and water to back up. </p>
+      <p>Make sure the chamber you are using has three functioning air jets. </p>
+      <p>The pump should read at 200 or above on the red scale when it is
+      functioning properly.  If this is not the case, there could be
+      several causes:1) all connections with hoses should be tight; 2) the
+      rubber stoppers should be pressed into the beakers as tightly as
+      they can be; 3) the switch on the funnel should be in the vertical
+      position when that funnel is on; 4) try to limit the number of
+      funnels you have on at any one time; 5) make sure no water can get
+      into the pump by emptying the beaker out frequently.</p>
+    
+    </kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_009: 
+  created_on: 
+  name: KBS004-prot03
+  dataset_id: "7"
+  body: 
+  abstract: <kbsml_text><p>List of literature cited by original versions of core KBS LTER protocols.</p></kbsml_text>
+  in_use_to: 
+  title: Literature Cited
+  updated_on: 
+  change_summary: ""
+  id: "13"
+  description: |-
+    <kbsml_text>
+    <p>Baseline Sampling Protocols:  Literature Cited
+    </p>
+    <p>Bonde, T.A.  and T.  Rosswall.  1987.  Seasonal variation of potentially mineralizable nitrogen in four   
+    cropping systems.  Soil Sci.  Soc.  Am.  J.  51:1508-1514.
+    </p>
+    <p>Callahan, J.T.  1984.  Long-term ecological research.  BioScience 34:363-387.  
+    </p>
+    <p>Chapman, S.B.  1986.  Production ecology and nutrient budgets, In P.D.  Moore and S.B.  Chapman (eds.)  
+    <em>Methods in Plant Ecology
+    </em>.  Blackwell Science.  Oxford.
+    </p>
+    <p>Fernald, M.L.  1950.  
+    <em>Gray's Manual of Botany
+    </em>.  Eighth (Centennial) edition - Illustrated.  Dioscorides  Press, Oregon.
+    </p>
+    <p>Gleason and Conquist.  1963.  
+    <em>Manual of Vascular of Northeastern United States and Adjacent Canada
+    </em>.  D.   Van Nostrand Co., Inc., N.J.
+    </p>
+    <p>Gorentz, J.  and G.P.  Robertson.  1990.  
+    <em>The KBS LTER Data Catalog
+    </em>.  Morofsky Library, Kellogg  Biological Station, Michigan State University, Hickory Corners, MI 49060.
+    </p>
+    <p>Jenkinson, D.S.  and D.S.  Powlson.  1976.  The effect of biocidal treatments on metabolism in soil.  V.  A  
+     method of measuring soil biomass.  
+    <em>Soil Biol.  Biochem
+    </em>.  8:209-213.
+    </p>
+    <p>Linderg, T., T.A.  Bonde, L.  Bergstrom, R.  Petersson, T. Rosswall, and J.  Schruner.  Distribution of 15N  
+    in  the soil-plant system during a four-year field lysimeter study with barley 
+    <em>Hordeum distichum
+    </em> l.  and  perennial meadow fescue 
+    <em>Festuca pratensis
+    </em> Huds.  Plant Soil in press.
+    </p>
+    <p>Mutch, D.R., O.B.  Hesterman, J.J.  Kells, and L.P.  Hart.  1989.  
+    <em>Field Crop Scouting Manual
+    </em>.  Michigan  State University, Cooperative Extension Service.
+    </p>
+    <p>Smith, S.J.  1987.  Soluble organic nitrogen losses associated with recovery of mineralized nitrogen.  
+    <em>Soil  Sci.  Soc.  Am.  J
+    </em>.  51:1191-1194.
+    </p>
+    <p>Stanford, G.  and S.J.  Smith.  1972.  Nitrogen mineralization potentials of soils.  
+    <em>Soil Sci.  Soc.   Proc
+    </em>.  36:465-471.  
+    </p>
+    <p>Topp, G.C.  1987.  The application of Time-domain reflectometry (TDR) to soil water content measurement.   
+    <em>Proc.  International Conference on Measurement of Soil and Plant Water Status
+    </em>.  Logan, Utah, USA  1:85-93.
+    </p>
+    <p>Topp, G.C., J.L.  Davis and A.P.  Annan.  1980.  Electromagnetic determination of soil water content:   
+    measurements in coaxial transmission lines.  
+    <em>Water Resource Research
+    </em> 16:574-582.
+    </p>
+    <p>Voroney, R.P.  and E.A.  Paul.  1984.  Determination of Kc and Kn in situ for calibration of the chloroform  
+     fumigation-incubation method.  
+    <em>Soil Biochem
+    </em>.  16:9-14.  
+    </p>
+    <p>Voss, E.G.  1972.  Michigan Flora.  Part I.  
+    <em>Gymnosperms and Monocots
+    </em>.  Cranbrook Institute of Science  and University of Michigan Herbarium.
+    </p>
+    <p>Voss, E.G.  1985.  
+    <em>Michigan Flora.  Part II.  Dicots Sauruvaceae - Cornaceae
+    </em>.  Cranbrook Institute of  Science Bulletin 59 and University of Michigan Herbarium.
+    </p>
+    </kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_043: 
+  created_on: 
+  name: KBS036-prot01
+  dataset_id: "39"
+  body: 
+  abstract: "<kbsml_text><p>Sampling Frequency: every 5 years </p> <p>Composite soil samples were dried and sieved through a 250-um (60mesh) sieve .  Subsamples of 1.0 g were  extracted sequentially for the following phosphorus (P) fractions: Resin inorganic P (Pi), 0.5 M NaHCO <sub>3 </sub> Pi and organic P (Po), NaOHPi and Po, NaOH plus sonication Pi and Po, HCl Pi, and residual P .  The P fractionation method was modified from Hedley et al .  1982 .  Phosphorus was determined by the ascorbicacid-  molybdate method (Olsen and Sommers, 1982)  .</p></kbsml_text>"
+  in_use_to: 
+  title: Inorganic and Organic Soil Phosphorous Fractions
+  updated_on: 
+  change_summary: ""
+  id: "46"
+  description: |-
+    <kbsml_text>
+    <div>
+    <h2>Overview</h2>
+    <p>Phosphorus Sequential Fractionation Method
+    </p>
+    </div>
+    <div>
+    <h2>Modified Procedure from Hedley et al.  (1982)</h2>
+    
+    <ol>
+    <li><p>Weigh 1 g (60 mesh- 250 m m) of soil in a 50 ml centrifuge tube
+    </p></li>
+    <li><p>Add 30 ml deionized water plus the anion exchange resin in the bicarbonate form (procedure to prepare resin
+      bags attached).
+    </p></li>
+    <li><p>Shake for 16 h, remove the resin bag and wash any soil that might adhere to the bag back into the tube,
+    centrifuge the tube at 10 000 RPM for 10 min and discard the supernatant.
+    </p></li>
+    <li><p>Extract the P from the resin bag, by shaking the resin bag with 20 ml of 0.5 N HCl for 24 hours.  Save in
+    the cooler for determination of inorganic P in the resin extract.
+    </p></li>
+    <li><p>Add 20 ml of 0.5 M NaHCO
+    <sub>3
+    </sub> to the soil in the centrifuge tube, shake for 16 hours.  Centrifuge for 10 minutes at 7000 rpm.   Save
+    the extract in the freezer for determination of inorganic and total P in the NaHCO
+    <sub>3
+    </sub> extract.
+    </p></li>
+    <li><p>Add 30 ml of 0.1 N NaOH, shake for 16 hours, centrifuge for 10 minutes at 7000 rpm.  Save the extract in
+    the freezer for the determination of inorganic and total P in the NaOH 1 extract.
+    </p></li>
+    <li><p>Repeat step 6.  Save the extract in the freezer for the determination of inorganic and total P in the NaOH
+     2 extract.
+    </p></li>
+    <li><p>Add 20 ml of 0.1 N NaOH.  Put in ice bath.  Sonicate the samples for 2 min.  at 75 W.  Shake for 16 hours,
+     Centrifuge for 10 minutes at 7000 rpm.  Save in the freezer for the determination of inorganic P and total P
+    in   the SNaOH extracts.
+    </p></li>
+    <li><p>Add 30 ml of 1 N HCl, Shake for 16 hours, Centrifuge for 10 minutes at 7000 rpm.  Save the extracts in the
+     cooler for determination of inorganic P in the HCl extract.
+    </p></li>
+    <li><p>Digest the remaining soil with H
+    <sub>2
+    </sub>SO
+    <sub>4
+    </sub>and H
+    <sub>2
+    </sub>O
+    <sub>2
+    </sub>. Save the digests in the cooler for determination of residual P.
+    </p></li>
+    </ol>
+    
+    <p>Notes: Always prepare fresh NaOH solution for extraction and neutralization of samples.  A lot of P
+    contamination comes from old NaOH solution.
+    </p>
+    </div>
+    <div>
+    <h2>Preparation of resin bags</h2>
+    
+    <ol>
+    <li><p>Weigh 0.65 g of wet Dowex anion exchange resin (42 % moisture) or 0.4 g dry resin into nylon mesh bags
+    (diameter 0.53 um) and seal the bags.
+    </p></li>
+    <li><p>Shake the resin bag with 30 - 50 ml NaHCO
+    </p></li>
+    <li><p>Repeat the above step.
+    </p></li>
+    <li><p>the bags with deionized water.  The bags are ready to use.
+    </p></li>
+    <li><p>After use, rinse the bags very well from the acid solution, otherwise the nylon mesh will deteriorate.
+    Store the bags in deionized water.
+    </p></li>
+    <li><p>To use the bags again, regenerate by repeating steps 2 to 4.
+    </p></li>
+    </ol>
+    
+    </div>
+    <div>
+    <h2>Total P in the extracts
+    </h2>
+    <p>EPA methods for analysis of water 1978
+    </p>
+    <div><h3>Reagents</h3>
+    
+    <ol>
+    <li><p>Sulfuric acid solution, 11 N : Slowly add 310 ml concentrated sulfuric acid to 600 ml distilled water.
+    When cool, dilute to 1.0 liter.
+    </p></li>
+    <li><p>Ammonium Persulfate
+    </p></li>
+    </ol>
+    
+    </div>
+    <div>
+    <h3>Procedure</h3>
+    
+    <ol>
+    <li><p>Pipette 5 ml sample into a 125 ml Erlenmeyer flask.
+    </p></li>
+    <li><p>Add 40-45 ml distilled water.
+    </p></li>
+    <li><p>Add 1 ml H
+    <sub>2
+    </sub>SO
+    <sub>4
+    </sub> (11N) { for NaOH extracts, add 1.5 ml H
+    <sub>2
+    </sub>SO
+    <sub>4
+    </sub>).
+    </p></li>
+    <li><p>Add 0.4 g Ammonium Persulfate.
+    </p></li>
+    <li><p>Boil gently on a hot plate for about 30-40 minutes or until a final volume of about 10 ml is reached.  Do
+    not allow to get to dryness. Cool.  Make up volume to 50 ml.
+    </p></li>
+    <li><p>Cover with parafilm.  Handshake well.  Take a 20-ml aliquot into a plastic vial.
+    </p></li>
+    <li><p>Adjust the pH with 1 N NaOH.  (Procedure follows).
+    </p></li>
+    </ol>
+    
+    </div>
+    </div>
+    <div>
+    <h2>Summary of 1995 P fractionation Methods</h2>
+    <p>Soil samples from all LTER plots were sampled at a 0-25 cm depth in July 1995.  The soils were dried and
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_032: 
+  created_on: 
+  name: KBS021-prot01
+  dataset_id: "24"
+  body: 
+  abstract: <kbsml_text><p>The Alpkem 3550 Flow analyzer is an automated continuous-flow colorimetric analyzer used for the analysis of NO <sub>3 </sub> <sup>- </sup>, NO <sub>2 </sub> <sup>- </sup>, NH <sub>4 </sub> <sup>+ </sup>, and PO <sub>4 </sub> <sup>= </sup> in soil extracts and water samples  .  Our configuration consists of the Model 501 XYZ sampler, Model 502 pump, Model 503 Cartridge heater, Model 504 Power Supply, Model 505 Filter Photometer, Model 509 Power Distribution Module, Model 510 Monochromator Detector, Model 511 Dilutor, Model 512 Valve Module, New Analyzer Program (NAP) Software, and Super Cartridges (2 for NO <sub>3 </sub> <sup>- </sup>, 2 for NH <sub>4 </sub> <sup>+ </sup>, 1 for Phos/orthoPhos, 1 for Silicates)  .   Further information about the analyzer can be obtained from OI Analytical (OI Analytical, 151 Graham Road, P.O .  Box 9010, College Station, TX 77842 or www.oico.com) .</p></kbsml_text>
+  in_use_to: 
+  title: Alpkem Model 3550 Flow Analyzer
+  updated_on: 
+  change_summary: ""
+  id: "30"
+  description: "<kbsml_text>\r\n\
+    <ol>\r\n\
+    <li>\r\n\
+    <p>Turn on power switches</p>\r\n\
+    <p></p>\r\n\
+    <p>PC and monitor (if necessary)  main sampler/diluter  detectors (2)  appropriate hot plate (if needed)</p>\r\n\
+    </li><li>\r\n\
+    <p>Inspect tubing at pump site for failure.</p>\r\n\
+    </li><li>\r\n\
+    <p>Inspect plumbing for proper connections:</p>\r\n\
+    <p></p>\r\n\
+    <p>sampler  wash line  nitrogen lines  pump tubing  cartridges  detectors  waste lines and debubbler pull-off tubes (especially).</p>\r\n\
+    </li><li>\r\n\
+    <p>Turn on nitrogen gas at tank stem and at \xC2\xA8?T\xC2\xA8? valve.  You will have to co-ordinate with anyone using the gas mixing bench as these all use the same nitrogen tank.  Make sure you don't turn the nitrogen off on anyone (or more importantly they on you).</p>\r\n\
+    </li><li>\r\n\
+    <p>Connect nitrogen pump tubing at regulator above peristaltic pump (if necessary).</p>\r\n\
+    </li><li>\r\n\
+    <p>Immerse wash pump tube and diluter lines (2) in nanopure water (~1L) </p>\r\n\
+    </li><li>\r\n\
+    <p>Attach all other reagent pump tubing to wash bucket containing nanopure water and ~20 drops of Brij 35 (30%) </p>\r\n\
+    </li><li>\r\n\
+    <p>Clamp platens down on pump, pull platen levers up to apply pressure to tubes and start pump (normal speed 50 liquid should be observed moving through all appropriate tubes.  If movement is not observed check for improper connection, possible faulty tube or blockage in tube, sample probe or cartridge. </p>\r\n\
+    </li><li>\r\n\
+    <p>Allow water to flow through system until it stabilizes with a regular bubble pattern.  While waiting, prepare reagent blttles, standards, sample table(s), and set up software. </p>\r\n\
+    </li><li>\r\n\
+    <p>Turn on the computer, screen and printer (if necessary).</p>\r\n\
+    </li><li>\r\n\
+    <p>Click on the icon labeled \xC2\xA8?NAP\xC2\xA8? </p>\r\n\
+    </li><li>\r\n\
+    <p>Click OK, (registration is only necessary once a year). </p>\r\n\
+    </li><li>\r\n\
+    <p>Create the sample table: select Sample Table from the menu bar. </p>\r\n\
+    </li><li>\r\n\
+    <p>Print a copy of the sample table and check for accuracy, select File, Print. </p>\r\n\
+    </li><li>\r\n\
+    <p>When everything is correct, save the table, select File, Save As.  there is an eight character limit for the filenames.  for non-LTER files, we ask that the first letter of the filename be representative of you project/name.  For LTER inorganic-N analysis files use the following formula with the sample date: YYYYMMDD.  For LTER lysimeter analysis files use this formula: QYYMMDD.</p>\r\n\
+    </li><li>\r\n\
+    <p>Connect reagents and wash with appropriate pump tubes and wait for baseline to stabilize.  Continue by aligning samples with the sample run sequence table and with any other preparations for the run.  Make sure there are no bubbles trapped in the detector flow cells.</p>\r\n\
+    </li><li>\r\n\
+    <p>Cadmium Coil test If nitrate is being run, now is the time to attach the cadmium coil.  Make sure there is minimal oxygen (ambient air) being introduced through lines.  With pump on minimum speed insert coil between ports one and ten, on the cartridge.  Then set pump speed back to 50 and allow bubbles to stabilize.  After the cadmium coil is connected and the bubbles are acceptable, check the coil efficiency and peak repeatability by sampling working nitrate and nitrite standards of equal concentrations (usually 8ppm). This can be accomplished by using the sample table labeled \"coiltest\" with corresponding data files. Bring up the \"coiltest\" sample table and follow for cup placement. Start test by returning to the main window and selecting the \"coiltest\" sample table by either entering the name in the Filename box or clicking the arrow to the right and selecting it from the list.  If the data fields are empty, the appropriate data files should appear in the data file boxes automatically.  After the files are entered, press the Stand By button and check the baselines by clicking on the View option in the menu bar. When the baselines are acceptable, you exit back to the main window and press the On button. Select View to monitor the run.  Peak height measurements appear on the Channel Display screen.  Reach this window by double clicking on the graph window or highlighting the graph window and clicking Edit from the menu bar.  All four ni"
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_021: 
+  created_on: 
+  name: KBS011-prot01
+  dataset_id: "14"
+  body: 
+  abstract: |-
+    <kbsml_text><p>Sampling Frequency: minimum of once per month through the growing season (April -October)</p><p>The chloroform fumigation-incubation method (Jenkinson and Powlson 1976) is used to estimate microbial biomass C and N.  Triplicate subsamples from the composite soil sample of each plot (30 g freshweight) are placed inside 50 ml glass beakers.  Two treatments, control and fumigated, are used.  Samples designated for fumigation are placed in a vacuum desiccator lined with moist paper towels.  Acid washed chloroform is placed in a 50 ml beaker in the center of the desiccator.  The desiccator is sealed, placed in a laboratory hood and evacuated, allowing the chloroform to boil for approximately 30 secs.  The boiling is repeated 4 times.  Samples are incubated for 24 h in the chloroform vapor-saturated atmosphere.  At the end of theincubation period the desiccator is vacuum air-flushed 8 times in order to remove the chloroform.  Samples are removed from the desiccator, placed in quart wide mouth canning jars and sealed with lids fitted with rubber septa for gas sampling.  At the same time, unfumigated soil samples are placed in canning jars and treated in the samefashion, serving as controls.  Evolved CO<sub>2</sub> is measured using a TCD gas chromatograph equipped with a Porapak Q column.  Biomass C, Bc, is derived from the relationship:</p><p>Bc = Fc/Kc</p><p>where Fc = [ (CO<sub>2</sub>-C evolved from fumigated soil during the 10 day incubation) - (CO<sub>2</sub>-C evolved from the control during the 10 d incubation)] and Kc = 0.41.</p><p>Biomass N is estimated by measuring the flush of 2 M KCl extractable NH<sub>4</sub><sup>+</sup> at the end of the 10 d incubation period.  A 10 g subsample of the fumigated and unfumigated incubated samples is taken and analyzed for NH<sub>4</sub><sup>+</sup> and NO<sub>3</sub><sup>-</sup>N.  Microbial biomass N, Bn, is derived using the equation:</p><p>Bn = Fn/Kn</p><p>where Fn = [( N mineralized by a fumigated soil for the 10 d incubation period) - (N mineralized by the unfumigated soil)] and Kn = [-0.14 (CO<sub>2</sub>-C evolved from fumigated soil over the 10 day incubation period/N mineralized by the fumigated soil over the 10 day fumigation period) + 0.39].</p>
+    </kbsml_text>
+  in_use_to: 
+  title: Microbial Biomass C, N
+  updated_on: 
+  change_summary: ""
+  id: "17"
+  description: |-
+    <kbsml_text>
+    <div>
+    <h2>Chloroform Fumigation-Incubation:  Protocol for Soil Microbial Biomass C and N Determination
+    </h2>
+    <div>
+    <h3>Materials
+    </h3>
+    <ul>
+    <li><p>Commercial chloroform stabilized with ethanol (0.75%)
+    </p></li>
+    <li><p>Anhydrous K
+    <sub>2
+    </sub>CO
+    <sub>3
+    </sub>
+    </p></li>
+    <li><p>2 M NaOH solution
+    </p></li>
+    <li><p>1 L separatory funnel
+    </p></li>
+    <li><p>100 mL glass beakers for fumigated samples
+    </p></li>
+    <li><p>similar containers for control samples (need not be glass)
+    </p></li>
+    <li><p>Quart canning jars
+    </p></li>
+    <li><p>20 mL polyethylene scintillation vials
+    </p></li>
+    <li><p>Large glass vacuum desiccators (20L) (each desiccator will hold about 20 soil samples)
+    </p></li>
+    <li><p>rotary vacuum pump with cold trap or water pump
+    </p></li>
+    </ul>
+    </div>
+    <div>
+    <h3>Removal of ethanol from chloroform
+    </h3>
+    <p>In a fume hood:</p>
+    <ol>
+    <li><p>Wash approximately 100 mL of chloroform for each desiccator with 200 mL distilled water 3 times in a separatory funnel.  Discard upper phase.
+    </p></li>
+    <li><p>Dry the distilled chloroform over anhydrous K
+    <sub>2
+    </sub>CO
+    <sub>3
+    </sub>.
+    </p></li>
+    </ol>
+    
+    <p>The ethanol-free chloroform can be stored in the dark for a few weeks.
+    </p>
+    </div>
+    <div>
+    <h3>Soil preparation
+    </h3>
+    <p>Sample collection, sieving, compositing and distribution to recipient laboratories takes 2-3 days.  Samplesare stored at 4 degrees C in this period.</p>
+    <ol>
+    <li><p>Mix and composite soil samples by sieving to 4 mm.  Do this at field moisture unless partial drying is necessary to maintain micro-aggregate stability.
+    </p></li>
+    <li><p>Determine the soil moisture content by oven drying samples of each composite.
+    </p></li>
+    <li><p>Weigh 20g (fw) samples into 100 mL beakers and label samples to be fumigated with pencil (chloroform will dissolve most markers).
+    </p></li>
+    <li><p>Add water to bring each sample to 50% of its WHC (waterholding capacity; = 19% of soil dry weight for KBS LTER site soil).
+    </p></li>
+    <li><p>Preincubate the samples for 5 days at 25 degrees C in closed canning jars with a few mL of water in the bottom (100% humidity).
+    </p></li>
+    </ol>
+    
+    </div>
+    <div>
+    <h3>Fumigation
+    </h3>
+    <p>In a fume hood:</p>
+    <ol>
+    <li><p>Line the vacuum desiccator(s) with wet paper towels.
+    </p></li>
+    <li><p>Arrange fumigation samples (c.  20) and a conical flask containing 75 mL ethanol-free chloroform and a few boiling chips in each desiccator.
+    </p></li>
+    <li><p>Connect the desiccator(s) to a vacuum manifold which includes a vacuum gauge.  The pump should be protected from excessive chloroform vapor with a cold trap (-20  degrees C or better).  Change the pump oil frequently.
+    </p></li>
+    <li><p>Evacuate the desiccators until the chloroform boils for 1 min.
+    </p></li>
+    <li><p>Close the desiccator valves.
+    </p></li>
+    <li><p>Incubate the samples in chloroform vapor in the desiccator at room temp (in the fume hood) for 24 h.
+    </p></li>
+    <li><p>After fumigation open the desiccators and remove the chloroform flask and paper towel.
+    </p></li>
+    <li><p>Remove the residual chloroform by evacuating to 250 Pa and venting to atmosphere 6 times.  The meticulous removal of residual chloroform is essential.
+    </p></li>
+    </ol>
+    </div>
+    <div>
+    <h3>Incubation
+    </h3>
+    <ol>
+    <li><p>Check the sample weights and re-adjust moisture content to 50% water holding capacity (WHC) if necessary.
+    </p></li>
+    <li><p>Place the fumigated and control samples in canning jars with an open 20 mL scintillation vial containing 2 mL 2 M NaOH to trap CO
+    <sub>2
+    </sub>; for soils with very high organic matter content the volume or molarity of the trap can be adjusted to be equivalent to about twice the expected CO
+    <sub>2
+    </sub> flush.  A few mL of water in the bottom of the jar will maintain 100% humidity.  In the case of preincubated control samples open the canning jars for at least 5 min to equilibrate with atmospheric CO
+    <sub>2
+    </sub> concentration.
+    </p></li>
+    <li><p>Include several blank jars which contain everything except soil.
+    </p></li>
+    <li><p>Tightly close the jars and incubate for 10 days
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_010: 
+  created_on: 
+  name: KBS021-prot02
+  dataset_id: "24"
+  body: 
+  abstract: <kbsml_text><p>Instructions for mixing and handling various Alpkem reagents.</p></kbsml_text>
+  in_use_to: 
+  title: Alpkem Recipes
+  updated_on: 
+  change_summary: ""
+  id: "31"
+  description: |-
+    <kbsml_text>
+    <p>
+    <em>Follow all lab safety protocols when handling chemicals, including protective eye and skin wear and appropriate lab clothing.</em></p>
+    <div>
+    <h2>Ammonium Reagents</h2>
+    <div>
+    <h3>Citrate Complexing Reagent (4L)</h3>
+    <p>Sodium Citrate 112g</p>
+    <p>Sodium Hydroxide 4 g</p>
+    <p>Nanopure Water 4L</p>
+    <p>Brij 35 (30%) 20 ml</p>
+    <p>Partially fill a 4L Erlenmeyer flask with nanopure water. Add dry chemicals, stir until dissolved then bring to volume (4L) with nanopure water. Filter reagent then add 20 ml 30% Brij 35 (5 ml / L). This may be stored at room temperature or be refrigerated.</p></div>
+    <div>
+    <h3>Alkaline Phenol</h3>
+    <p>Sodium Hydroxide (10N or 40% w/v) 80 ml</p>
+    <p>Liquid Phenol (88%) 94 ml</p>
+    <p>Nanopure Water 1 L</p>
+    <p>Partially fill a 1L volumetric flask with nanopure water. Place in ice bath and stir while slowly adding sodium hydroxide first, then liquid phenol. Dilute to volume (1 L) with nanopure water and filter. Store refrigerated in light resistant container.</p>
+    <p>
+    <em>NOTE:</em> This reagent is hazardous waste! Any glassware, paper towels, gloves, filter paper, etc used/contaminated during this process must be treated or disposed of as hazardous waste.</p></div>
+    <div>
+    <h3>Sodium Nitroferricyanide (1L)</h3>
+    <p>Sodium Nitroferricyanide 0.5 g</p>
+    <p>Nanopure Water 1L</p>
+    <p>Partially fill a 1L volumetric flask with nanopure water. Carefully measure sodium nitroferricyanide and add to nanopure water. Dilute to volume (1L) with nanopure water and filter. Store refrigerated in light resistant container.</p>
+    <p>
+    <em>NOTE:</em> This reagent is hazardous waste! Any glassware, paper towels, gloves, filter paper, etc used/contaminated during this process must be treated or disposed of as hazardous waste.</p></div>
+    <div>
+    <h3>10N Sodium Hydroxide (1L)</h3>
+    <p>Sodium Hydroxide 400g</p>
+    <p>Nanopure Water 1L</p>
+    <p>Partially fill a 1L volumetric flask with nanopure water and place in ice bath. SLOWLY add sodium hydroxide while stirring to dissolve. This produces an exothermic reaction. Allow solution to cool to room temperature and bring to volume (1L) with nanopure water.</p>
+    <p>
+    <em>NOTE:</em> This is REALLY messy, nasty stuff to work with so my advice is to buy it already made up.</p></div></div>
+    <div>
+    <h2>Nitrate/Nitrite Reagents</h2>
+    <div>
+    <h3>Ammonium Chloride EDTA Buffer (4L)</h3>
+    <p>Ammonium Chloride 340 g</p>
+    <p>EDTA 0.4 g</p>
+    <p>10N Sodium Hydroxide 26+ ml</p>
+    <p>Nanopure Water 4L</p>
+    <p>Brij 35 (30%) 8ml</p>
+    <p>Partially fill a 4L Erlenmeyer flask with nanopure water. Add ammonium chloride and EDTA and stir until dissolved. Adjust buffer solution using 10 N sodium hydroxide (start with 26 ml and add from there as needed) to pH 8.50. Dilute to volume (4 L) with nanopure water and filter. Add 8 ml 30% Brij 35 (2 ml / L). Store refrigerated.</p>
+    <p>
+    <em>NOTE:</em> Keep some of the buffer on hand that does not have Brij 35 added to it. The buffer without Brij is needed to rinse and store the cadmium reduction coil after use. Routinely 1L of the ammonium chloride EDTA buffer is set aside in a separate 1L bottle and 6 ml of Brij 35 is added to the other 3L. Brij can always be added previous to use if necessary but the cadmium coil should not be stored in buffer that has Brij in it.</p></div>
+    <div>
+    <h3>Color Reagent (1L)</h3>
+    <p>Phosphoric Acid (85%) 100 ml</p>
+    <p>Sulfanilimide 40 g</p>
+    <p>N-1-Naphthylethylenediamine dihydrochloride 2g</p>
+    <p>Nanopure Water 1 L</p>
+    <p>Brij 35 (30%) 2 ml</p>
+    <p>Partially fill a 1 L volumetric flask with nanopure water. On stir plate, add phosphoric acid then dry chemicals. Stir until dry chemicals are dissolved. This can take several hours of stirring. Bring to volume (1L) with nanopure water and filter. Add 2ml (2 ml / L) of 30% Brij 35. Store refrigerated in light resistant container.</p></div></div>
+    <div>
+    <h2>Cadmium Coil Reactivation Reagents</h2>
+    <p>(see page 16 of The Flow Solution Nitrate/Nitrite Methodology)</p>
+    <p>Note: DO NOT use HCl acid every time you recharge.  This causes excessive damage to the
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_044: 
+  created_on: 
+  name: KBS039-prot01
+  dataset_id: "42"
+  body: 
+  abstract: |-
+    <kbsml_text><p>The
+    LTER GPS units are used for recording the locations of microplots, experiments,
+    instrumentation, plot corners, sampling sites, events and many other LTER
+    features that need to be mapped in the LTER GIS.
+    They are also used to navigate back to these locations.</p>
+    
+    <p>When
+    using the Trimble XRS Pro GPS with the Omnistar real-time correction service,
+    we can expect submeter accuracy (<u>+</u> 70 cm or better). </p></kbsml_text>
+  in_use_to: 
+  title: GPS Protocol for the LTER Laboratory
+  updated_on: 
+  change_summary: Changed satellite frequency assignment.
+  id: "49"
+  description: |-
+    <kbsml_text><h2>KBS LTER GPS Protocol</h2>
+    
+      <h2>Materials</h2>
+    
+      <h3>Hardware</h3>
+    
+      <p>The KBS LTER has two identical Trimble GPS units. "GPS I" is
+      to be used exclusively by the KBS LTER staff. "GPS II" can be
+      loaned to others with permission by the LTER Project Manager.</p>
+    
+      <p>Two components make up each GPS unit: the Trimble Data logger
+      type TSCe with touch screen, and the Trimble Receiver Type Pro
+      XRS model 33302-51.</p>
+    
+      <p>The GPS can be used in temperatures from -4 F to 140 F. The
+      logger is designed to withstand accidental immersion so it should
+      be fine to use it in the rain.</p>
+    
+      <p>The data logger is set to power off after 10 minutes of
+      inactivity to conserve the batteries.</p>
+    
+      <p>Start, Settings, Control Panel, Power Off tab, &lt;On
+      Batteries suspend after: 10 minutes&gt;</p>
+    
+      <h3>Software</h3>
+    
+      <ol>
+        <li>TerraSync - Used for collecting and updating GPS data on
+        the Trimble data logger.</li>
+    
+        <li>Trimble GPS Pathfinder Office (Version 2.9)- Used to manage
+        and process GPS data on the PC.</li>
+    
+        <li>Microsoft Active Sync 3.1.0.9558 - Used to connect your PC
+        to the Trimble Data Logger in order to transfer data.</li>
+    
+        <li>Omnistar is a GPS service that gives real-time
+        differential correction. The Omnistar service will be
+        maintained on "LTER GPS I", if funding allows. Omnistar service
+        will not be purchased for LTER GPS II unless another user
+        requests to borrow the unit and pays for the Omnistar service.
+        See the Appendix for service details.</li>
+      </ol>
+    
+      <h2>Set Up</h2>
+    
+      <h3>GPS Mission Planning</h3>
+    
+      <p>GPS mission planning allows you to determine what time of day
+      the satellites are in suboptimum position so that you can avoid
+      collecting GPS data during these times. Mission planning is
+      critical when collecting GPS data in forested areas or other
+      challenging sites (see "Collecting Data in Trees or near
+      Obstructions" in the Appendix).</p>
+    
+      <ol>
+        <li>The Planning Software should be installed on the two
+        computer's in the Robertson Lab that have Trimble's GPS
+        Pathfinder Office software, however, if it is not installed
+        then do the following.
+    
+        <ol>
+          <li>Go to Trimble website: <a href=
+          "http://www.trimble.com/">http://www.trimble.com</a>.</li>
+          
+          <li>Click on: &lt;Support and Training&gt;</li>
+          
+          <li>Scroll down and click on: &lt;Planning Software&gt;</li>
+          
+          <li>Click on: &lt;Downloads&gt;</li>
+          
+          <li>Download: Trimble Planning Software</li>
+        </ol></li>
+        <li>Update the ephemeris file if it has been more than one week
+        since it was last updated.
+        
+        <ol>
+          <li>Go to Trimble website: <a href=
+          "http://www.trimble.com/">http://www.trimble.com</a></li>
+          
+          <li>Click on: &lt;Support and Training&gt;</li>
+          
+          <li>Scroll to and click on: &lt;Planning Software&gt;</li>
+          
+          <li>Click on: &lt;Downloads&gt;</li>
+          
+          <li>Download: &lt;Ephemeris File&gt; Save it to D:\Program
+          Files\Common Files\Trimble\Almanacs\current.ssf.</li>
+        </ol></li>
+        
+        <li>Open GPS Pathfinder Office.</li>
+        
+        <li>If the &lt;Select Project&gt; window appears, deselect
+        "Display this dialog at start-up".</li>
+    
+        <li>Click &lt;Utilities&gt; on the Tool Bar.</li>
+    
+        <li>Scroll down to &lt;Quick Plan&gt;.</li>
+        
+        <li>&lt;Select Date&gt; window appears. Choose the date of
+        interest, and click OK.</li>
+    
+        <li>&lt;Edit Point&gt; window appears.</li>
+    
+        <li>Choose &lt;City&gt; and select Battle Creek, MI</li>
+    
+        <li>The Status window opens.
+    
+        <ol>
+          <li>Choose &lt;Options&gt; on the Tool Bar and scroll to
+          &lt;Elevation Mask&gt;, enter 10 degrees.</li>
+        </ol></li>
+        
+        <li>To view the PDOP status
+    
+        <ol>
+          <li>Click &lt;Graphs&gt; on the Tool Bar, and scroll down to
+          PDOP. A graph of PDOP over time will be displayed.  You should
+          plan to do your GPS data c
+  in_use_from: 
+  version: "3"
+  person_id: "21"
+  active: t
+protocols_033: 
+  created_on: 
+  name: KBS021-prot03
+  dataset_id: "24"
+  body: 
+  abstract: "<kbsml_text><p>Sampling Frequency: Monthly (1989 to 1995); bimonthly 1996 to present </p> <p>Triplicate subsamples (10 g fresh weight) from the composite soil sample of each plot are extracted with 100  mL of 1 M KCl .  Soil extracts are shaken for 1 minute and allowed to sit overnight and re shaken before filtering .  Soil extracts are filtered with a syringe filter using a Type A/E, 1um pore size, glass fiber filter .  Filtrates  are stored in 7 mL scintillation vials and refrigerated until analysis for NH <sub>4 </sub> <sup>+ </sup> and NO <sub>3 </sub> <sup>- </sup> are completed .  Both analyses are performed on a Flow Injector Analyzer (NH <sub>4 </sub> <sup>+ </sup>via diffusion colorimetry technique and NO <sub>3 </sub> <sup>- </sup> via cadmium reduction and colorimetry)  .</p></kbsml_text>"
+  in_use_to: 
+  title: Soil Inorganic N
+  updated_on: 
+  change_summary: ""
+  id: "33"
+  description: <kbsml_text><p>See abstract.</p></kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_022: 
+  created_on: 
+  name: KBS011-prot03
+  dataset_id: "14"
+  body: 
+  abstract: <kbsml_text><p>The equations for calculation of soil microbial biomass C and N are specified.</p></kbsml_text>
+  in_use_to: 
+  title: Equations for Soil Microbial Biomass C and N Calculation
+  updated_on: 
+  change_summary: ""
+  id: "19"
+  description: "<kbsml_text>\r\n <div>\r\n <h2> Choloroform Fumigation-Incubation: Equations for Soil Microbial Biomass C and N Calculation\r\n </h2>\r\n <table>\r\n  <tr>\r\n   <td><p>\r\n    <em>\r\n     VARIATE:\r\n\
+    \r\n    </em></p>\r\n   </td>\r\n   <td><p>\r\n    <em>\r\n     DEFINITION AND  EQUATION:\r\n\
+    \r\n    </em></p>\r\n   </td>\r\n  </tr>\r\n  <tr>\r\n   <td><p>\r\n    <em>CO2_C:\r\n    </em></p>\r\n   </td>\r\n  <td><p>CO2 mineralized in 10 day  incubation of unfumigated\r\n  soil at 25 C (&#181;g C g-1  soil):</p>\r\n\
+    \r\n    <p>\r\n     CO2_C = (B-T) * M*6/W\r\n\
+    \r\n    </p>\r\n\
+    \r\n   <p>where\r\n    B\r\n     = Titre for blank base  trap (mL),\r\n    T\r\n     = titre for sample base trap (mL),\r\n    M\r\n      = Molarity of HCl,\r\n    W\r\n     = dry weight of soil (g)\r\n   </p>\r\n  </td>\r\n </tr>\r\n <tr>\r\n  <td><p>\r\n   <em>CO2_F:\r\n   </em></p>\r\n  </td>\r\n  <td><p>CO2 mineralized in 10 day  incubation of chloroform fumigated soil at 25 C (&#181;g C g-1  soil):\r\n   </p>\r\n    <p>\r\n     CO2_F = (B-T) * M*6/W\r\n\
+    \r\n    </p>\r\n\
+    \r\n   <p>where\r\n    B\r\n     = Titre for blank base  trap (mL),\r\n    T\r\n     = titre for sample base trap (mL),\r\n    M\r\n      = Molarity of HCl,\r\n    W\r\n     = dry weight of soil (g)\r\n   </p>\r\n  </td>\r\n </tr>\r\n <tr>\r\n  <td><p>\r\n   <em>CFIBio_C:\r\n   </em></p>\r\n  </td>\r\n  <td><p>Microbial biomass C (&#181;g C g-1  soil):\r\n   </p>\r\n    <p>\r\n     CFIBIO_C = 1.73 * CO2_F -  0.56 * CO2_C\r\n\
+    \r\n    </p>\r\n\
+    \r\n   <p>The constants 1.73 and 0.56 are derived  from regression of CFI data against microscopically  determined biomass C (Horwath et al., 1996. Defining a  realistic control for the chlororform fumigation -  incubation method using microscopic counting and 14C  substrates. Can. J. Soil Sci. 76: 459-467).\r\n   </p>\r\n  </td>\r\n </tr>\r\n <tr>\r\n  <td><p>\r\n   <em>NF:\r\n   </em></p>\r\n  </td>\r\n  <td><p>N mineralized in 10 day  incubation of fumigated soil (&#181;g N g-1 soil):\r\n   </p>\r\n    <p>\r\n     NF = (NH4F+NO3F) -  (NH4I+NO3I)\r\n\
+    \r\n    </p>\r\n\
+    \r\n   <p>where:\r\n\
+    \r\n     </p><p>  NH4F\r\n     (&#181;g/g) = ammonium concentration in soil extract  (ppm-N) from fumigated soil after 10 day incubation *  soil extract volume (100 mL) / dry weight of extracted  soil (g)\r\n\
+    \r\n      </p><p>  NO3F\r\n      (&#181;g/g) = nitrate concentration in soil extract  (ppm-N) from fumigated soil after 10 day incubation *  soil extract volume (100 mL) / dry weight of extracted  soil (g)\r\n\
+    \r\n       </p><p>  NH4I\r\n       (&#181;g/g) = ammonium concentration in soil extract  (ppm-N) from soil before fumigation * soil extract volume  (100 mL) / dry weight of extracted soil (g)\r\n\
+    \r\n\
+    </p><p>  NO3I\r\n\
+    (&#181;g/g) = nitrate concentration in soil extract  (ppm-N) from soil before fumigation * soil extract volume  (100 mL) / dry weight of extracted soil (g)\r\n\
+    </p>\r\n\
+    </td>\r\n\
+    </tr>\r\n\
+    <tr>\r\n\
+    <td><p>\r\n\
+    <em>NC:\r\n\
+    </em></p>\r\n\
+    </td>\r\n\
+    <td><p>N mineralized in 10 day  incubation of unfumigated soil (&#181;g N g-1 soil):\r\n\
+    </p>\r\n\
+    <p>\r\n\
+    NC = (NH4C+NO3C) -  (NH4I+NO3I)\r\n\
+    \r\n\
+    </p>\r\n\
+    \r\n\
+    <p>where:\r\n\
+    \r\n\
+    </p><p>  NH4C\r\n (&#181;g/g) = ammonium concentration in soil extract  (ppm-N) from unfumigated soil after 10 day incubation *  soil extract volume (100 mL) / dry weight of extracted  soil (g)\r\n\
+    \r\n\
+    </p><p>  NO3C\r\n (&#181;g/g) = nitrate concentration in soil extract  (ppm-N) from unfumigated soil after 10 day incubation *  soil extract volume (100 mL) / dry weight of extracted  soil (g)\r\n\
+    \r\n\
+    </p><p>  NH4I\r\n (&#181;g/g) = ammonium concentration in soil extract  (ppm-N) from soil before fumigation * soil extract volume  (100 mL) / dry weight of extracted soil (g)\r\n\
+    \r\n\
+    </p><p>  NO3I\r\n (&#181;g/g) = nitrate concentration in soil extract  (ppm-N) from soil before fumigation * soil extract volume  (100 mL) / dry weight of extracted soil (g)\r\n\
+    </p>\r\n\
+    </td>\r\n\
+    </tr>\r\n\
+    <tr>\r\n\
+    <td><p>\r\n\
+    <em>CFIBIO_N:\r\n\
+    </em></p>\r\n\
+    </td>\r\n\
+    <td><p>Microbial biomass N (&#181;g N g-1  soil):\r\n\
+    </p>\r\n\
+    <p>\r\n\
+    CFIBIO_N = CFIBIO_C\r\n\
+    \r\n\
+    *(0.56\r\n\
+    \r\n\
+    *\r\n\
+    \r\n\
+    (NF-p*NC)\r\n\
+    \r\n\
+    /\r\n\
+    \r\n\
+    (CO2_F-p*CO2_C)\r\n\
+    \r\n\
+    +\r\n\
+    \r\n\
+    0.095\r\n\
+    \r\n\
+    </p>\r\n\
+    \r\n\
+    <p>where\r\n\
+    p\r\n = 0.29 * (CO2_F/CO2_C) +  0.23\r\n\
+    </p>\r\n\
+    <p>The constants 0.56 and 0.095 are  derived from regression of the amount of CO2-C and  mineral-N released on fumigation of soil to which  organisms of known C and N contents have been added  "
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_011: 
+  created_on: 
+  name: KBS024-prot01
+  dataset_id: "27"
+  body: 
+  abstract: "<kbsml_text><p>Sampling Frequency: Annually </p> <p>Total soil carbon and nitrogen are analyzed using the same basic methodology as total plant carbon and  nitrogen .  Subsamples from the composite soil sample from each plot in April are oven dried at 60 degrees  C for  48 h .  Duplicate subsamples (10 mg) from each dried sample are then finely ground in a roller mill, weighed into  tin foil cups and analyzed for C and N using a CHN analyzer  .</p></kbsml_text>"
+  in_use_to: 
+  title: Soil C and N
+  updated_on: 
+  change_summary: ""
+  id: "37"
+  description: |-
+    <kbsml_text>
+    <div>
+    <h2>Overview
+    </h2>
+    <p>
+    Soil and Plant Total C and N Analysis:  Carlo Erba NA1500 SeriesII
+    </p>
+    </div>
+    <div>
+    <h2>Sample Preparation
+    </h2>
+    <ol>
+    <li>
+    <p>All sample material must be dried and ground to a fine powder.  For soils, the dried soil could be ground
+    using a roller bar shaker or ground on the EPA grinder in the greenhouse.  Plant tissue should be run first
+    through the Wiley Mill and then passed through the Cyclotec grinder.  In addition, the micromill may be used to
+    even further pulverize samples that are extremely small in quantity or contain large (&gt;2 mm) pieces of
+    tissue following Cyclotech grinding.
+    </p>
+    </li>
+    <li>
+    <p>Each CN run must begin with a tin foil blank cup (sample #1) and four acetanilide standards (samples 2 thru
+    5).  The 1st standard should weigh about 0.2 to 0.3 mg, the 2nd standard should weigh about 0.5 to 0.6 mg, the
+    3rd standard should weigh about 1.0 to 1.2 mg, and the 4th standard should weigh about 2.0 to 2.8 mg.  Sample
+    #6 should be a blind standard of either soil or plant, depending on the type of samples on the run.  It is
+    important to check the printout value of this sample to ensure that the standard curve was properly set.  If
+    the values for C &amp; N are off for this blind standard, the run should be stopped.  We are attempting to
+    initiate a new standard using the NIST tissue of citrus leaves or tomato leaves, however, the N content is not
+    certified and the carbon value is not available from NIST.
+    </p>
+    </li>
+    </ol>
+    <p>It is recommended to run blind standards (the "soil standard" or an NIST compound) a minimum of every 15
+    samples to ensure confidence in the analysis.  The soil standards are O519 and O559 (provided by USDA-ARS
+    Pendleton OR) or an LTER-recommended soil NIST standard.  The plant standard compounds include citrus leaves,
+    pine needles and tomato leaves.
+    </p>
+    </div>
+    <div>
+    <h2>To Weigh a Sample or Standard
+    </h2>
+    <ol>
+    <li>
+    <p>Turn on the Sartorius scale if the display is not lit., press tare to bring display to 0.00 mg.  It is
+    recommended that you wear gloves while weighing samples.
+    </p>
+    </li>
+    <li>
+    <p>Place an empty tin foil cup on the weighing tray and close the doors.
+    </p>
+    </li>
+    <li>
+    <p>Tare off the weight of the cup using the tare button.
+    </p>
+    </li>
+    <li>
+    <p>Remove the cup and fill with ~ 1 spoon of tissue.
+    </p>
+    </li>
+    <li>
+    <p>Crunch the cup using two sets of tweezers.  Once completely closed into a ball formation, drop onto the
+    weighing plate to ensure no sample leaks out.  If the sample is leaky, discard the ball and begin again.
+    </p>
+    </li>
+    <li>
+    <p>Place the closed cup onto the weighing pan and record the weight (in mg) on the provided datasheet.
+    </p>
+    </li>
+    <li>
+    <p>Gently remove the sample and place into the plexiglass sample holding trays.
+    </p>
+    </li>
+    <li>
+    <p>Bring the scale display back to 0.00 mg by pressing tare.
+    </p>
+    </li>
+    <li>
+    <p>Using KIM wipes, clean the tweezers, the spoon, and the metal plate between each sample.
+    </p>
+    </li>
+    </ol>
+    <p>The key to the samples is a consistent weight .  Soil samples should weigh between 10.0 to 15.0 mg, and
+    plant samples from 4 to 6 mg.  The Sartorius scale can't provide an accurate weight under 0.2 mg.  Plexiglass
+    plates should be stored in a vacuum desiccator until analyzed.
+    </p>
+    </div>
+    <div>
+    <h2>Total C and N Analysis
+    </h2>
+    <p>
+    <em>WARNING:
+    </em>NEVER try to use the computer while a CN run is in progress!
+    </p>
+    <p>Basically, the computer is used mainly as an integrator and to advance the auto sampler.  Although run
+    conditions are recorded in the methods file, all run conditions must be manually checked prior to starting a
+    run.  Each run can contain a maximum of 99 samples, including the blinds, blanks, and standards.  Complete runs
+    are stored as methods (*.ead) and contain the sample table info, chromatograms and run parameters.  Stored
+    files contain individual chromatograms (*.dat).  The data should also be written to a summary file (*.sum)
+    which may be downloaded to the VAX and run through SAS jobs to avoid any manual
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_045: 
+  created_on: 
+  name: KBS050-prot01
+  dataset_id: "53"
+  body: 
+  abstract: " <kbsml_text>\r\n   <p>Starting in 1995 100m<span style=\"vertical-align:super\">2</span> plots in the forested and old field sites were fertilized with 20 kg N/ha annually in 6 monthly doses during the growing season. The plots were fertilized every year except for 1998. </p></kbsml_text>"
+  in_use_to: 
+  title: Microplot N fertilization in old fields and forests
+  updated_on: 
+  change_summary: ""
+  id: "50"
+  description: |-
+    <kbsml_text>       
+    <h3>Protocol for N application in forest and successional field plots</h3>
+            
+    <p>Fertilized (F) plots are 100 m<sup>2</sup> (10m x 10m) each, except in 3 CF, where the fertilized plot is 6m<sup>2</sup>(2m x 3m). Annual application rate is 10 kg N as NH<sub>4</sub>NO<sub>3</sub>, equivalent to 100 g (6 g on 3 CF) N per plot. The N is added in 5 doses. 4.5 L (0.3 L on 3 CF) per plot each time. This is equivalent to 0.05 mm precipitation. The 5 doses are applied in the period April thru November (after spring thaw thru litterfall).</p>
+            <p>Three-fold fertilization (3F) plots are 4m<sup>2</sup>(2m x 2m) each. The annual application rate is 30 kg N ha<sup>-1</sup>added in 0.5 L per plot increments. This is equal to 0.13 mm precipitation.</p>
+            <p>Preparing the N solution.</p>
+    <p>Dissolve 190 g of NH<sub>4</sub>NO<sub>3</sub>(35% N) in 15 L "Nano-pure" water in each of three "handy cans".</p>
+            <p>Spaying the plots</p>
+    <p>This can be done either by amount or by time. To do it by time, calibrate the backpack sprayer according to the ace of the person handling it. Spray a at a constant (maximum) rate for 30 seconds into a 1 L jar and weigh the amount . Repeat 3 to 4 times. Calculate spray rate per minute. Per Ambus averaged (450 to 480 ml per min).</p>
+            <p>In the field transfer 5 L of N solution into the sprayer. Begin spraying the 3F plot to add 0.5 L (about 1 min 15 sec). The F plots are divided into quadrants. The three first quadrants are sprayed to add 1.13 L ( about 2 min 30 sec) the remaining solution is distributed in the fourth quadrant. When the sprayer is getting low the rate decreases markedly. The 2 x 3 m F plot in 3 CF is sprayed to add 0.3 L (approximately 40 sec).</p>
+            <p>6-9-1997 Calibration for the sprayer was 550 - 650 ml in 30 seconds. There were 3 additional applications in 1997 (sb. is that in addition to the planned 5 or instead of?)</p></kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_034: 
+  created_on: 
+  name: KBS021-prot04
+  dataset_id: "24"
+  body: 
+  abstract: "<kbsml_text><p>Sampling Frequency: bimonthly (1989 to 1995); 1996 to present: minimum of once during the growing season (April - October)</p><p>N mineralization and nitrification are measured by estimated changes in accumulated and in situ nitrogen pool sizes, the difference equalling the assumed net mineralization potential.  Two methods of estimating mineralization and nitrification rates are used: a short-term buried bag (in field) incubation that accounts for the daily and seasonal temperature fluctuations and a long-term incubation that assesses soil organic matter quality with respect to mineralizable N.</p><p>Two 100 g fresh weight subsamples from the composite soil sample of each plot are placed in separate polyethylene bags and designated T21A and T21B.  The composite soil samples (T0) are immediately brought to the laboratory and sub sampled for inorganic N analysis and soil moisture.  The T21A and T21B samples are buried in the field in their respective plots.  In-field incubations are for 21 days after which time the soil cores are brought to the laboratory, and both A and B samples are composited and subsampled for moisture and inorganic N analysis.  Net mineralization is determined by subtracting the original soil NH4+ and NO3- concentration (T0) from the incubated soilNH4+ and NO3- concentration (T21).  Net nitrification is determined by subtracting the initial NO3- concentration (T0) from incubated NO3- concentration (T21).</p></kbsml_text>"
+  in_use_to: 
+  title: Short-term N Mineralization Potential
+  updated_on: 
+  change_summary: ""
+  id: "34"
+  description: |-
+    <kbsml_text>
+    <div>
+    <h2>Overview
+    </h2>
+    <p>Microbial transformations of organic N to ammonium is designated
+    ammonification; while the bacterial conversion of ammonium to nitrite
+    and nitrate is called nitrification.  The sum of these processes is N-
+    mineralization.  N-mineralization and nitrification are measured by
+    estimated changes in accumulated and in situ nitrogen pool sizes, the
+    difference equalling the assumed net mineralization potential.  Two
+    methods of estimatimg N-mineralization and nitrification are used: a
+    short-term buried bag (in field) incubation that accounts for the
+    daily and seasonal temperature fluctuations and a long-term incubation
+    that assesses soil organic matter quality with respect to
+    mineralizable N.
+    </p>
+    <p>Soils collected for short-term N mineralization
+    experiments(incubated in field) are seived, composited and then
+    divided into threesubsamples.  The first subsample (designated T0) is
+    analysed immediately for moisture and inorganic NH4+ and NO3-.  The
+    other two bags are incubated in the field for 21 days (T21) and
+    designated A and B.  This is done for all plots.  The bags are
+    incubated in their respective plots.  These bags are then collected
+    after an in field incubation of 21 days.  The soil samples in both bag
+    A and bag B of each plot are composited and analyzed for moisture
+    andinorganic NH4+ and NO3-.
+    </p>
+    </div>
+    <div>
+    <h2>General Procedures
+    </h2>
+    <div>
+    <h3>N-mineralization T0
+    </h3>
+    <div>
+    <h4>Materials
+    </h4>
+    
+    <ol>
+    <li><p>1/2&quot; Pres-a-ply labels
+    </p></li>
+    <li><p>Fisher brand 120 ml screw-cap containers
+    </p></li>
+    <li><p>1 M KCl solution
+    </p></li>
+    <li><p>Fisher brand 7 ml scintillation vials
+    </p></li>
+    <li><p>Gelman Easy-pressure filter holders
+    </p></li>
+    <li><p>Gelman Type A/E glass-fiber filters.
+    </p></li>
+    <li><p>10 cc Luerlok syringes
+    </p></li>
+    <li><p>Cardboard sample tray (12&quot;X17&quot;, w/partitions)
+    </p></li>
+    <li><p>Mettler PJ3600 balance
+    </p></li>
+    </ol>
+    
+    </div>
+    <div>
+    <h4>Procedure
+    </h4>
+    
+    <ol>
+    <li><p>From each of the LTER soil composite samples, 4 subsamples are taken for inorganic NH4+ and NO3- and
+    moisture analysis.
+    </p></li>
+    <li><p>The subsamples are as follows</p>
+    <p>a.  For inorganic NH4+ and NO3- analysis, 3 analytical replicates of 10 g each (see Inorganic N Protocol).
+    </p>
+    <p>b.  For moisture analysis, 1 replicate of 40 g (see Moisture Protocol).
+    </p>
+    </li>
+    </ol>
+    
+    </div>
+    </div>
+    <div>
+    <h3>N-mineralization T21 In Field Incubations
+    </h3>
+    <div>
+    <h4>Materials
+    </h4>
+    
+    <ol>
+    <li><p>T21 soil samples Bags A and B
+    </p></li>
+    <li><p>Trowel
+    </p></li>
+    <li><p>Maps
+    </p></li>
+    </ol>
+    
+    </div>
+    <div>
+    <h4>Procedure
+    </h4>
+    
+    <ol>
+    <li><p>Soil sample bags labeled N-min T21 A and B are incubated in the field for 21 days.
+    </p></li>
+    <li><p>In each plot, respective soil sampling bags are buried at 7 m North and West of the southwest cornerpost in
+      a 3&quot; soil core hole, approximately 7 cm deep.
+    </p></li>
+    <li><p>The soil sample bag is placed in the core hole and covered with soil to the level of the surrounding soil
+    surface, so that there is approximately 3 cm of soil covering the bag.  A flag should be placed next to the
+    buried bags, in order to easily locate the bags after the incubation period.
+    </p></li>
+    <li><p>Make sure that all bags are sealed tightly.
+    </p></li>
+    </ol>
+    
+    </div>
+    </div>
+    <div>
+    <h3>N-mineralization T21 Soil Sampling Processing
+    </h3>
+    <div>
+    <h4>Materials
+    </h4>
+    
+    <ol>
+    <li><p>1/2&quot; Pres-a-ply labels
+    </p></li>
+    <li><p>Fisher brand 120 ml screw-cap containers
+    </p></li>
+    <li><p>1 M KCl solution
+    </p></li>
+    <li><p>Fisher brand 7 ml scintillation vials
+    </p></li>
+    <li><p>Gelman Easy-pressure filter holders
+    </p></li>
+    <li><p>Gelman Type A/E glass-fiber filters.
+    </p></li>
+    <li><p>10 cc Luerlok syringes
+    </p></li>
+    <li><p>Cardboard sample tray (12&quot;X17&quot;, w/partitions)
+    </p></li>
+    <li><p>Mettler PJ3600 balance
+    </p></li>
+    </ol>
+    
+    </div>
+    <div>
+    <h4>Procedures
+    </h4>
+    
+    <ol>
+    <li><p>Both bags A and B, containing N-mineralization T21 soil samples that have been incuba
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_023: 
+  created_on: 
+  name: KBS011-prot04
+  dataset_id: "14"
+  body: 
+  abstract: <kbsml_text><p>The equations for calculation of soil microbial biovolume and carbon are specified.</p></kbsml_text>
+  in_use_to: 
+  title: Equations for Soil Microbial Biovolume and Carbon Calculation
+  updated_on: 
+  change_summary: ""
+  id: "20"
+  description: |-
+    <kbsml_text>
+    <div>
+    <h2>Epifluorescence Microscopy:  Equations for Soil Microbial Biovolume and Carbon Calculation
+    </h2>
+    <table>
+    <tr>
+    <td><p>
+    <em>VARIATE:
+    </em>
+    </p></td>
+    <td><p>
+    <em>DEFINITION AND EQUATION:
+    </em>
+    </p></td>
+    </tr>
+    <tr>
+    <td><p>
+    <em>s:
+    </em>
+    </p></td>
+    <td><p>
+    Mass of soil per image(&#181;g)</p>
+    <p>
+    <img src="http://lter.kbs.msu.edu/Data/LTER_Image.jsp?Image=KBS011-img0010.gif" alt="Mass of soil per image"/>
+    </p>
+    <p>
+    where
+    x = 512 * 0.089(&#181;m),
+    y = 768 * 0.089 (&#181;m) for bacterial images;
+    x = 512 * 1.0 (&#181;m),
+    y = 768 * 1.0 (&#181;m) for fungal hyphal images;
+    %H<sub>2</sub>O = water content of soil sample.
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td><p>
+    <em>bv:
+    </em>
+    </p></td>
+    <td><p>
+    Volume of each bacterial cell (&#181;m<sup>3</sup> )</p>
+    <p>
+    <img src="http://lter.kbs.msu.edu/Data/LTER_Image.jsp?Image=KBS011-img0006.gif" alt="Volume of bacteria"/>
+    </p>
+    <p>
+    <em>d</em> = small diameter of cell</p><p>
+    <em>l</em>= long diameter of cell</p><p>
+    The volume (<em>bv</em>) of each bacteria is calculated from measurements of the large,
+    <em>l</em>, and small,
+    <em>d</em>, diameters of each cell by assuming that the cells are
+     prolate spheroids.
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td><p>
+    BAC_NUM:
+    </p></td>
+    <td><p>
+    Total bacteria (cells g<sup>-1</sup>soil)</p>
+    <p>
+    BAC_NUM = count per image / <em>S</em>
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td><p>
+    BAC_VOL:
+    </p></td>
+    <td><p>
+    Bacterial biovolume (&#181;m<sup>3</sup>g<sup>-1</sup> soil)</p>
+    <p>
+    BAC_VOL =<img src="http://lter.kbs.msu.edu/Data/LTER_Image.jsp?Image=KBS011-img0005.gif" alt="Equation for bacterial volume"/>
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td><p>
+    BAC_C:
+    </p></td>
+    <td><p>
+    Bacterial biomass C (&#181;gC g<sup>-1</sup>soil)</p>
+    <p>
+    BAC_C = BAC_VOL * 0.2
+    </p>
+    <p>
+    The factor 0.2 used to convert
+     bacterial biovolume to carbon (C) is thought to be the
+     best available based on a range of estimates available in
+     the literature.
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td><p>
+    <em>hv:
+    </em>
+    </p></td>
+    <td><p>
+    Volume of each hyphal fragment (&#181;m<sup>3</sup>)</p>
+    <p>
+    <img src="http://lter.kbs.msu.edu/Data/LTER_Image.jsp?Image=KBS011-img0007.gif" alt="Equation for hyphal volume"/>
+    </p>
+    <p>
+    <em>d</em> = hyphal diameter</p><p>
+    <em>l</em> = hyphal length</p><p>
+     Hyphal volume for each fragment is calculated assuming
+     the hyphae are simple cylinders of length
+    <em>l</em> and diameter
+    <em>d</em>.
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td><p>
+    HYP_LEN:
+    </p></td>
+    <td><p>
+    Total fungal hyphal length (m g<sup>-1
+    </sup> soil)</p>
+    <p>HYP_LEN =<img src="http://lter.kbs.msu.edu/Data/LTER_Image.jsp?Image=KBS011-img0008.gif" alt="Equation for hyphal length"/> *10<sup>-6</sup>
+    </p>
+    <p>
+    <em>l</em> = hyphal length
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td><p>
+    HYP_DIAM:
+    </p></td>
+    <td><p>
+    Mean fungal hyphal diameter (&#181;m)
+    </p></td>
+    </tr>
+    <tr>
+    <td><p>
+    HYP_VOL:
+    </p></td>
+    <td><p>
+    Fungal hyphal biovolume (&#181;m<sup>3</sup> g<sup>-1</sup> soil)
+    </p><p>
+    HYP_VOL = <img src="http://lter.kbs.msu.edu/Data/LTER_Image.jsp?Image=KBS011-img0009.gif" alt="Equation for hyphal volume"/>
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td><p>
+    HYP_C:
+    </p></td>
+    <td><p>
+    Fungal hyphal biomass C (&#181;gC g<sup>-1</sup> soil)</p>
+    <p>
+    HYP_C = HYP_VOL * 0.15
+    </p>
+    <p>
+    The factor 0.15 used to convert fungal
+     biovolumes to carbon (C) is thought to be the best
+     available based on a range of estimates available in the
+     literature.
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td><p>
+    DMC_C:
+    </p></td>
+    <td><p>
+    Total microscopic biomass C (&#181;gC g<sup>-1</sup> soil)</p>
+    <p>
+    DMC_C = BAC_C + HYP_C
+    </p>
+    </td>
+    </tr>
+    </table>
+    </div>
+    </kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_012: 
+  created_on: 
+  name: KBS032-prot01
+  dataset_id: "35"
+  body: 
+  abstract: ""
+  in_use_to: 
+  title: |-
+    LTER Biodiversity Experiment
+    
+    Baseline Soil Sampling Protocol
+  updated_on: 
+  change_summary: ""
+  id: "43"
+  description: "<kbsml_text>\r\n\
+    <h2>Sample Collection and Processing</h2>\r\n\
+    <p> The LTER Biodiversity plots are 9.1 x 27.4 m (30 x 90 feet).  Soil\r\n\
+    cores are collected at each of two sampling stations along a transect\r\n\
+    that is centered between the east and west sides the plot.  One\r\n\
+    sampling station is 9 meters from the south border of the plot on the\r\n\
+    west side of the transect, the second station is 18 meters from the\r\n\
+    south border of the plot on the east side of the transect.  The cores\r\n\
+    are taken in at area of approximately 0.5 x 0.5 meters.  Half of the\r\n\
+    cores are taken within the crop row and half are taken between the\r\n\
+    rows.  Distances to sampling stations are estimated by pacing. </p>\r\n\
+    <p>\r\n\
+    A total of six 0-25 cm cores (three at each station) are collected and\r\n\
+    composited.  A second set cores, from 0-10 cm in depth, are collected\r\n\
+    at the two sampling stations, two cores at each station, and\r\n\
+    composited.  Before sampling each plot, a core is taken at the edge of\r\n\
+    the plot and discarded to prevent carryover between plots.  Latex\r\n\
+    gloves are worn when collecting soil cores in the field and while\r\n\
+    sieving.  Soil samples are sieved using a 4 mm mesh sieve. </p>\r\n\
+    <p>\r\n\
+    Soil samples are refrigerated at 4C until processing is complete.\r\n\
+    Ideally, samples for inorganic nitrogen and soil moisture should be\r\n\
+    processed within 24 hours of collection.  The maximum time between\r\n\
+    collection and processing is 48 hours.  Archive samples to be used for\r\n\
+    microbial (e.g. Phospholipid Fatty Acids) or DNA analysis should be\r\n\
+    frozen at -80C within 48 hours of collection. </p>\r\n\
+    <p>\r\n\
+    The 0-25 cm soil sample is analyzed for inorganic nitrogen (NO3 and\r\n\
+    NH4 pools) and soil moisture.  The remainder of the sample is air\r\n\
+    dried and archived.  The 0-10 cm soil cores are archived.  Four\r\n\
+    whirlpaks containing 25-30 g each are frozen at -80C and the remainder\r\n\
+    is air dried and archived.</p>\r\n\
+    <p><img alt=\"Plot Plan\" src=\"http://lter.kbs.msu.edu/Data/LTER_Image.jsp?Image=KBS032-protocol-1.jpg\"/>\r\n\
+    </p>\r\n\
+    \r\n\
+    <h2>Inorganic Nitrogen</h2>\r\n\
+    <p> Weigh 10 \xC2\xB10.01 g of sieved soil into a\r\n\
+    urinalysis cup (u-cup).  Add 100 ml of 1 M KCl, shake for one minute\r\n\
+    and allow to stand overnight.  Shake again for one minute the next day\r\n\
+    and let stand for about one hour or until the supernatant partially\r\n\
+    clears.  Filter the supernatant with a syringe filter using a type A/E\r\n\
+    1 \xC2\xB5m pore size glass fiber filter.  Refrigerate filtered supernatant\r\n\
+    if analysis will be done within one week, otherwise freeze extract at\r\n\
+    -10C to hold for analysis.  Analysis for inorganic nitrogen is\r\n\
+    performed on an Alpkem segmented flow analyzer.\r\n\
+    </p>\r\n\
+    <h2>Moisture</h2>\r\n\
+    <p> All weights for soil moisture are measured to\r\n\
+    nearest 0.01 g.  Label a soil tin with sample ID.  Record weight of\r\n\
+    \"Tin, Lid, and Label\".  Place 20-25 g of sieved, field moist\r\n\
+    soil in the tin.  Weigh and record the weight of the fresh soil.  Dry\r\n\
+    open tins in an oven at 105C for at least 24 hours.  Remove from the\r\n\
+    oven and place lid on tin.  When cooled to room temperature, record\r\n\
+    weight of \"Tin, Lid, Label, and Dry Soil\".  The weight of the\r\n\
+    dry soil is calculated by subtracting the \"Tin, Lid, and Label\"\r\n\
+    weight from the \"Tin, Lid, Label, and Dry Soil\" weight.  Soil\r\n\
+    moisture is expressed on a % dry weight basis by the formula: % Soil\r\n\
+    Moisture = 100 * [(Fresh weight - dry weight)/dry weight]\r\n\
+    </p>\r\n\
+    </kbsml_text>"
+  in_use_from: 
+  version: "2"
+  person_id: "21"
+  active: t
+protocols_001: 
+  created_on: 
+  name: KBS000-prot04
+  dataset_id: "3"
+  body: 
+  abstract: A protocol for conversion of lat/long to UTM using ArcView 3.2
+  in_use_to: 
+  title: Conversion of Longitude and Latitude to UTM Coordinates
+  updated_on: 
+  change_summary: ""
+  id: "4"
+  description: |-
+    <kbsml_text>
+    <p>Conversion of Longitude and Latitude to UTM Coordinates</p>
+    <p>Created 2/21/01, Tim Bergsma</p>
+    <p>The GPS unit on the harvester generates spatial data as decimal longitude (x
+    coordinate) and latitude (y coordinate, with altitude in feet (above mean sea level?).  The desired
+    coordinate system is a UTM projection, using NAD83 or WGS84 zone 16 as a
+    reference (I assume they are identical for our purposes), with height in meters.</p>
+    <p>One way to make the conversion to UTM is to use ArcView 3.2.</p>
+    <ol>
+    <li><p>Start ArcView 3.2.</p>
+    </li><li><p>Turn on the projector extension:  </p>
+    <p>
+    <em>
+    File&gt;Extensions&gt;Projector!</em></p>
+    </li><li><p>Open a new project (if necessary) and save as <em> temp.apr</em>.</p>
+    </li><li><p>(optional)  For convenience, set default working directory:  e.g. </p>
+    <p>
+    <em>
+    Project&gt;Properties&gt;Working Directory</em>&gt;g:\inetpub\lter\yield_data\2000_soybean.</p>
+    </li><li><p>Bring <em> temp.txt</em> into the project:  </p>
+    <p> <em> Project&gt;Add Table&gt;List
+    Files of Type&gt; *.txt</em>;<em> temp.txt.</em></p>
+    </li><li><p>Create a 'view':  e.g. select the view button and click 'new'
+    in the project window.  Creates 'View1 by default.</p>
+    </li><li><p>With the view active, you should get a view menu in the tool
+    bar.  Choose </p>
+    <p> <em> View&gt;Add Event Theme </em></p>
+    <p> and then set the table and coordinate
+    columns as necessary (e.g. <em> temp.txt</em>, longitude, latitude).</p>
+    </li><li><p>Choose </p>
+    <p> <em> View&gt;Properties&gt;Map Units&gt;decimal degrees.  </em></p>
+    <p>
+    This tells arcview how to interpret your long/lat data.</p>
+    </li><li><p>Choose </p>
+    <p> <em> View&gt;Properties&gt;Projection&gt;Category&gt;UTM 1983 </em></p>
+    <p> and </p>
+    <p><em>&gt;Type&gt;zone 16.  </em></p>
+    <p> This creates a projection of your long/lat data into
+    meters.</p>
+    </li><li><p>With the theme active (click near the theme name in the view
+    window), choose </p>
+    <p> <em> Theme&gt;Convert to Shapefile&gt;File Name&gt;</em><em>temp.shp </em></p>
+    <p> and </p>
+    <p><em>&gt;Directory&gt; </em> (set appropriately).</p>
+    </li><li><p><em>'Do you want to save in the projected units?'</em>  yes. <em>
+    'Shapefile
+    not added to view.' </em> o.k.</p>
+    </li><li><p>Now you have one view coded in long/lat.  You have a shapefile
+    on disk coded in UTM.  Create a new view ('View2' by default)  into which to put the shape
+    file:  click the <em>View</em> button and then the <em>New</em> button.</p>
+    </li><li><p>Choose </p>
+    <p> <em> View&gt;Add Theme&gt;</em><em> temp.shp.</em></p>
+    </li><li><p>(optional)  Choose </p>
+    <p> <em> View&gt;Properties&gt;Map Units&gt;meters </em></p>
+    <p> and </p>
+    <p><em>&gt;Distance Units&gt;meters.</em></p>
+    </li><li><p>Choose </p>
+    <p> <em> Theme&gt;Table </em></p>
+    <p> to bring up the underlying data for View
+    2.  It should look like your original data table, except that a shape
+    column has been added.</p>
+    </li><li><p>Choose</p>
+    <p><em>Table&gt;Start Editing.</em></p>
+    </li><li><p>Choose</p>
+    <p><em>Edit&gt;Add Field&gt; </em></p>
+    <ul>
+      <li><p>Name = Eastings</p></li>
+      <li><p>Type = Number</p></li>
+      <li><p>Width = 16</p></li>
+      <li><p>Decimal places =  <em>6</em>.</p></li>
+    </ul>
+    </li><li><p>Repeat previous step for field 'Northings'.</p>
+    </li><li><p>In the table, click on the heading 'Eastings' to activate it. 
+    Choose </p>
+    
+    <p> <em> Field&gt;calculate.  </em></p>
+    
+    <p> Double click on [Shape] to make it appear in
+    the formula box.  Add text to create the formula <em> [Shape].GetX.</em></p>
+    
+    </li><li><p>Repeat previous step for field 'Northings', but use <em> [Shape].GetY.</em></p>
+    
+    </li><li><p>Choose</p>
+    
+    <p><em>Table&gt;Stop Editing.</em> </p>
+    
+    <p>Save changes.</p>
+    
+    </li><li><p>With the table active, choose </p>
+    
+    <p><em>File&gt;Export.</em></p>
+    
+    <p>Export table as <em> temp2.txt.</em></p>
+    
+    </li><li><p>Close ArcView and eliminate all but the most recent of the
+    temporary files, including Arcview files.  (Alternatively, you may want to
+    keep all files until processing is finished.)</p></li></ol>
+    </kbs
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_046: 
+  created_on: 
+  name: KBS007-prot01
+  dataset_id: "10"
+  body: ""
+  abstract: "<kbsml_text><p>Sampling Frequency: During the growing season</p><p>In the perennial plant plots rooting depth is estimated during the growing season using minirhizotron video techniques.</p></kbsml_text>"
+  in_use_to: "2007-04-09"
+  title: Rooting Depth
+  updated_on: "2007-04-09"
+  change_summary: ""
+  id: "16"
+  description: See abstract.
+  in_use_from: "2007-04-09"
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_035: 
+  created_on: 
+  name: KBS021-prot05
+  dataset_id: "24"
+  body: 
+  abstract: "<kbsml_text><p>Sampling Frequency: Annually</p><p>N mineralization and nitrification are measured by estimated changes in accumulated and in situ nitrogen pool sizes, the difference equalling the assumed net mineralization potential.  Two methods of estimating mineralization and nitrification rates are used: a short-term buried bag (in field) incubation that accounts for the daily and seasonal temperature fluctuations and a long-term incubation that assesses soil organic matter quality with respect to mineralizable N.</p><p>Triplicate 10 g fresh weight sub samples for each of 10 extraction intervals (thirty 10g subsamples) are taken from the composite soil sample of selected plots.  The composite soil samples (T0) are immediately brought to the laboratory and subsampled for inorganic N analysis and soil moisture.  The subsamples are weighed into flasks, adjusted to soil field capacity (22%), loosely capped , and placed into a darkened incubation chamber at 25 degrees C.  At each extraction interval ( 1, 2, 4, 6, 9, 12, 15, 20, 28and 36 wks), appropriate flasks are removed and extracted with 1 M KCl.  Analyze extract for inorganic-N.  Periodically check a subset of flasks for moisture loss and adjust as needed.</p></kbsml_text>"
+  in_use_to: 
+  title: Long-term N Mineralization
+  updated_on: 
+  change_summary: ""
+  id: "35"
+  description: <kbsml_text><p>See KBS021-prot04.</p></kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_024: 
+  created_on: 
+  name: KBS012-prot01
+  dataset_id: "15"
+  body: 
+  abstract: "<kbsml_text><p>Sampling Frequency: Irregular</p><p>Soil macroinvertebrates are sampled on a seasonal basis corresponding to major activity periods; March, April and May, thereafter, intensity will decrease to bimonthly sampling through September.  Macroinvertebrates will be collected with a 7.6 cm diameter soil corerdriven gently by hand to a depth of 20 cm.  One core is taken at each of the 5 soil sampling stations per plot and all 5 cores are composited as one soil sample.  Soil samples are removed from the coring device, placed in zip-lock bags and stored in coolers.  Samples are then returned to the laboratory and stored at 40 &#176;C.  Macroinvertebrates are recovered from soil cores within 48 h of collection by elutriation.  The soil-root washer (Gilson Hydropneumatic Elutriator) is utilized to suspend soil subsamples in a vortex of water and compressed air which floats off soil and suspended organics.  Eluent from the elutriator is passed over a series of sieves which retains material greater than 300 m.  This retained material is preserved in 90% ethanol.  Invertebrates are then hand-sorted from the collected debris under a dissecting scope (25x), preserved in 75% ethanol and identified to the lowest practical taxon.</p></kbsml_text>"
+  in_use_to: 
+  title: Soil Invertebrates
+  updated_on: 
+  change_summary: ""
+  id: "21"
+  description: <kbsml_text><p>See abstract.</p></kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_013: 
+  created_on: 
+  name: KBS000-prot01
+  dataset_id: "3"
+  body: 
+  abstract: <kbsml_text><p>Data management plan for LTER weather station datalogger downloads.</p></kbsml_text>
+  in_use_to: 
+  title: KBS002 Data Management Plan
+  updated_on: 
+  change_summary: ""
+  id: "1"
+  description: |-
+    <kbsml_text>
+    <p>KBS002 Data Management Plan</p>
+    
+    <p>See Notes below!</p>
+    
+    <p>Prepared 6-15-01 by Tim Bergsma</p>
+    <p>Table of Transformations for &quot;Datalogger&quot; measurements</p>
+    <table>
+    <tr>
+    <td><p><em>Step</em></p></td>
+    <td><p><em>Initial Form</em></p></td>
+    <td><p><em>Initial Location</em></p></td>
+    <td><p><em>Transformation</em></p></td>
+    <td><p><em>Agent</em></p></td>
+    <td><p><em>Final Form</em></p></td>
+    <td><p><em>Final Location</em></p></td>
+    <td><p><em>Preserve Final Form?</em></p></td>
+    </tr>
+    <tr>
+    <td><p>1</p></td>
+    <td><p>digital</p></td>
+    <td><p>CR10 datalogger memory Area 1</p></td>
+    <td><p>download(daily)
+    </p></td>
+    <td><p>Campbell Scientific PC208W software on Windows NT2000 on GPRPC13<a href="file:///D:/PC208W/BIN/">D:\PC208W\BIN\</a>
+    (must be running under a login with appropriate authorization
+    </p></td>
+    <td><p>text file LTERWS.DAT
+    </p></td>
+    <td><p><a href="file://lternt2/projects/lter/lter">\\lternt2\projects\lter\lter
+     weather\data\</a></p></td>
+    <td><p>Yes. Gets appended daily.</p></td>
+    </tr>
+    <tr>
+    <td><p>2</p></td>
+    <td><p>LTERWS.DAT</p></td>
+    <td><p><a href="file://lternt2/projects/lter/lter">\\lternt2\projects\lter\lter
+     weather\data\</a></p></td>
+    <td><p>extract hourly data</p></td>
+    <td><p>Campbell Scientific PC208W &quot;SPLIT&quot; software on Windows NT2000 on GPRPC13<a href="file:///D:/PC208W/BIN/">D:\PC208W\BIN\</a>SPLITR.
+     See note on 6/14/01. Relies on *.PAR files.</p></td>
+    <td><p>text file, comma delimited LTERWS.CSV
+    </p></td>
+    <td><p><a href="file://lternt2/projects/lter/lter">\\lternt2\projects\lter\lter
+     weather\data\</a></p></td>
+    <td><p>No. Gets overwritten daily</p></td>
+    </tr>
+    <tr>
+    <td><p>3</p></td>
+    <td><p>LTERWS.CSV</p></td>
+    <td><p><a href="file://lternt2/projects/lter/lter">\\lternt2\projects\lter\lter
+     weather\data\</a></p></td>
+    <td><p>load into database</p></td>
+    <td><p>MSACCESS on GPRPC13</p></td>
+    <td><p>database table LTERWS
+    </p></td>
+    <td><p><a href="file://lternt2/database/weather1.mdb">\\lternt2\database\weather1.mdb</a> table &quot;lterws&quot;
+    </p></td>
+    <td><p>Yes.</p></td>
+    </tr>
+    <tr>
+    <td><p>4</p></td>
+    <td><p>table lterws</p></td>
+    <td><p><a href="file://lternt2/database/weather1.mdb">\\lternt2\database\weather1.mdb</a></p></td>
+    <td><p>process</p></td>
+    <td><p>queries</p></td>
+    <td><p>series of tables</p></td>
+    <td><p><a href="file://lternt2/database/weather1.mdb">\\lternt2\database\weather1.mdb</a> tables
+    </p></td>
+    <td><p>Yes. tables are usually appended but occasionally must be
+     regenerated. Design is problematic.</p></td>
+    </tr>
+    <tr>
+    <td><p>5</p></td>
+    <td><p>table webweather</p></td>
+    <td><p><a href="file://lternt2/database/weather1.mdb">\\lternt2\database\weather1.mdb</a></p></td>
+    <td><p>deliver to user</p></td>
+    <td><p>web server and ASP pages</p></td>
+    <td><p>varies</p></td>
+    <td><p>user's browser</p></td>
+    <td><p>No.</p></td>
+    </tr>
+    </table>
+    
+    <p>Table of Transformations for Belfort weighing bucket rain gauge</p>
+    <table>
+    <tr>
+    <td><p><em>Step</em></p></td>
+    <td><p><em>Initial Form</em></p></td>
+    <td><p><em>Initial Location</em></p></td>
+    <td><p><em>Transformation</em></p></td>
+    <td><p><em>Agent</em></p></td>
+    <td><p><em>Final Form</em></p></td>
+    <td><p><em>Final Location</em></p></td>
+    <td><p><em>Preserve Final Form?</em></p></td>
+    </tr>
+    <tr>
+    <td><p>1</p></td>
+    <td><p>paper</p></td>
+    <td><p>Belfort gauge at the LTER weather stationl.</p></td>
+    <td><p>collect(weekly)
+    </p></td>
+    <td><p>staff
+    </p></td>
+    <td><p>paper
+    </p></td>
+    <td><p>file drawer in Academic Bldg room 337.</p></td>
+    <td><p>Yes.</p></td>
+    </tr>
+    <tr>
+    <td><p>2</p></td>
+    <td><p>paper</p></td>
+    <td><p>file, room 337</p></td>
+    <td><p>interpret (count chart units)</p></td>
+    <td><p>staff</p></td>
+    <td><p>paper
+    </p></td>
+    <td><p>file drawer in Academic Bldg room 337.</p></td>
+    <td><p>Yes.</p></td>
+    </tr>
+    <tr>
+    <td><p>3</p></td>
+    <td><p>paper</p></td>
+    <td><p>file, room 337</p></td>
+    <td><p>copy</p></td>
+    <td><p>photocopy 80% original size</p></td>
+    <td><p>paper
+    </p></td>
+    <td><p>3 ring binder</p></td>
+    <td><p>Yes.</p></td>
+    </tr>
+    <tr>
+    <td><p
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_002: 
+  created_on: 
+  name: KBS011-prot02
+  dataset_id: "14"
+  body: 
+  abstract: "<kbsml_text><p>Sampling Frequency: Annually</p></kbsml_text>"
+  in_use_to: 
+  title: Soil Microbial Biovolume and C Determination
+  updated_on: 
+  change_summary: ""
+  id: "18"
+  description: |-
+    <kbsml_text>
+    <div>
+    <h2>Epifluorescence Microscopy and Image Analysis:
+    Protocol for Soil Microbial Biovolume and C Determination
+    </h2>
+    <div>
+    <h3>Materials
+    </h3>
+    <ul>
+    <li><p>Buffer: 0.05
+    <em>M
+    </em> Na
+    <sub>2
+    </sub> HPO
+    <sub>4
+    </sub>(7.8 g L
+    <sup>-1
+    </sup>) in 0.15
+    <em>M
+    </em> NaCl (8.8 g L
+    <sup>-1
+    </sup>)adjusted to pH 9.0.
+    </p></li>
+    <li><p>DTAF stain: 2 mg (5-[4,6-dichlorotriazin-2-yl] aminofluorescein) in 10 mL buffer.  Prepare fresh daily.
+    </p></li>
+    <li><p>Calcofluor M2R (Fluorescent Brightener) stain: 2 mg mL
+    <sup>-1
+    </sup>in water.  Stain is stable at room temperature for 1 month.
+    </p></li>
+    <li><p>Filter stains, buffer and wash water through 0.2 &#181;m filter.
+    </p></li>
+    </ul>
+    </div>
+    <div>
+    <h3>Slide Preparation
+    </h3>
+    <ol>
+    <li><p>Homogenize 10g soil in 190 mL filtered waterfor 1 min at full speed in a Waring blender.
+    </p></li>
+    <li><p>Allow coarse particles to settle for 30 sec.  With a wide-borepipette remove a bulk (5 mL) sample to a  capped test tube.
+    </p></li>
+    <li><p>Add 0.1 mL formalin (40% aqueous formaldehyde) as a preservative.
+    </p></li>
+    <li><p>Vortex this bulk sample before subsampling to prevent further sedimentation.
+    </p></li>
+    <li><p>Place 4 &#181;L drops of soil suspension onto each 6 mm diam.?well? of printed slides (Bellco toxoplasmolysis slides).  Spread the suspension uniformly across the well with the pipette tip without touching the tip to the slide surface.  Prepare 5 replicate smears of each soil suspension.
+    </p></li>
+    <li><p>Allow the smears to air dry completely, this fixes the organisms to the slide.  Prepare two slides for each sample; one will be stained for bacteria, the other for fungi.
+    </p></li>
+    </ol>
+    </div>
+    <div>
+    <h3>Staining
+    </h3>
+    
+    <div>
+    <h4>Bacteria
+    </h4>
+    
+    <ol>
+    <li><p>Flood each smear (well) with 8 &#181;L DTAF stain.
+    </p></li>
+    <li><p>Store slides in a container with wet tissue (100% RH) for 30 min.
+    </p></li>
+    <li><p>Remove excess stain by placing slides in a series of staining jars containing buffer, 3 changes (30 min each) and finally water (30 min).
+    </p></li>
+    <li><p>Air dry slides flat.
+    </p></li>
+    <li><p>Add a small drop of low-fluorescence immersion oil (Cargille type FF recommended) to each smear and cover the slide with a 50 x 25 mm cover slip.
+    </p></li>
+    </ol>
+    
+    </div>
+    <div>
+    <h4>Fungi
+    </h4>
+    
+    <ol>
+    <li><p>Flood each smear with 10 &#181;L Calcafluor M2R stain.
+    </p></li>
+    <li><p>Stain in a covered container with wet tissue (100% RH) for 2 h.
+    </p></li>
+    <li><p>Rinse by soaking slides in water in a staining jar for 30 min, 3 times.
+    </p></li>
+    <li><p>Air dry slides flat.
+    </p></li>
+    <li><p>Add small drops of low fluorescence immersion oil (Cargille type FF recommended) to each well and cover slide with a 50 x 25 mm cover slip.
+    </p></li>
+    </ol>
+    </div>
+    </div>
+    <div>
+    <h3>Biovolume estimation
+    </h3>
+    
+    <div>
+    <h4>Bacteria
+    </h4>
+    
+    <p>All bacteria are non-selectively stained green by this procedure.
+    Observe the bacteria using a fluorescence microscope with a 63 x
+    oil-immersion objective and 1.6 x zoom factor.  Excitation filter
+    450-490 nm, dichroic 510 nm and suppression &lt; 515 nm.  Collect 3
+    images from each smear (3 x 5 = 15 images per sample) (Princeton
+    Instruments cooled CCD camera with 512 x 768 pixels each representing
+    0.089 x 0.089 &#181;m at this magnification).  Measured soil bacteria
+    average 0.9 x 0.4 &#181;m, which corresponds to about 10 x 5 pixels.
+    The software procedure is set to discard any objects represented by
+    fewer than 5 pixels (smaller than about 0.2 x 0.2 &#181;m).  The
+    bacteria are detected, counted and measured by image analysis (IPLab
+    Spectrum Software, Apple Macintosh PPC computer).
+    </p>
+    <p>The volume (
+    <em>bv
+    </em>) of each bacteria is calculated from measurements of the large,
+    <em> l
+    </em> , and small,
+    <em>d
+    </em> , diameters of each cell by assuming that the cells are prolate spheroids.
+    </p>
+    <p>
+    <img src ="http://lter.kbs.msu.edu/Data/LTER_Image.jsp?Image=KBS011-img0006.gif" alt="Equation for biovolume of bacteria"/>
+    </p>
+    
+    </div>
+    <div>
+    <h4>Fungi
+    </h4>
+    
+    <
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_047: 
+  created_on: 
+  name: KBS031-prot02
+  dataset_id: "34"
+  body: ""
+  abstract: <kbsml_text><p>Instructions for installing quartz suction lysimeters at the KBS LTER site.  Lysimeters are installed semi-permanently in the C horizon, with enclosures  installed at the surface to protect access tubing.  Locations are chosen near treatment alleyways for convenient access and maintenance.</p></kbsml_text>
+  in_use_to: "2007-05-07"
+  title: Installation of Suction Lysimeters
+  updated_on: "2007-05-07"
+  change_summary: This protocol was available as a draft since 10-23-2002.  Minor additions to materials section were made on 3/20/2003 by Tim Bergsma at the request of Phil Robertson, by reference to an original protocol (hard copy) authored 2-9-1995 by Hamelink.
+  id: "42"
+  description: |-
+    <h2>Materials</h2>
+    
+    <ul>
+    <li>
+    <p>a soil auger (to dig the hole); 2 in. dia., 6 ft. long
+    </p>
+    </li>
+    <li>
+    <p>a tarp or plywood (to keep the horizons separate)
+    </p>
+    </li>
+    <li>
+    <p>a quart container (to mix the silica flour slurry)
+    </p>
+    </li>
+    <li>
+    <p>a stick (to stir the slurry)
+    </p>
+    </li>
+    <li>
+    <p>Prenart&#174; Super Quartz soilwater sampler, 21mm O.D. (Prenart 
+    Equipment ApS, Wildersgade 46B.4, 1408 Copenhagen K., Denmark, email: info@prenart.dk)
+    </p>
+    </li>
+    <li>
+    <p>the tubing: polyethylene, 1/8 in O.D. x 1.5 mm I.D., 40 m; purchase from Prenart
+    </p>
+    </li>
+    <li>
+    <p>clippers, very clean (to cut the tubing)
+    </p>
+    </li>
+    <li>
+    <p>silica flour (to get the best contact between the lysimeter and the soil);
+    purchase from Soilmoisture Equipment or from Prenart
+    </p>
+    </li>
+    <li>
+    <p>5+ L of deionized water (to prime the lysimeter)
+    </p>
+    </li>
+    <li>
+    <p>syringe with an adapter for lysimeter tubing (to prime the lysimeter)
+    </p>
+    </li>
+    <li>
+    <p>galvanized steel pipe, 1 in. O.D., 6 ft. long
+    </p>
+    </li>
+    <li>
+    <p>Rubber mallet (to pound pipe)
+    </p>
+    </li>
+    <li>
+    <p>Tamper: CPVC tubing, 3/4 in., with one end stoppered
+    </p>
+    </li>
+    </ul>
+    
+    
+    <h2>Procedure
+    </h2>
+    
+    <ol>
+    <li>
+    <p>Identifying the lysimeter location</p>
+    <ol>
+    <li>
+    <p>Either choose an appropriate spot arbitrarily or use a suitable
+    randomization technique, such as blind toss of a marker.  It may be
+    necessary to adjust location in consideration of traffic, field
+    operations, etc.
+    </p>
+    </li>
+    </ol>
+    
+    </li>
+    <li>
+    <p>Digging</p>
+    <ol>
+    <li>
+    <p>Lay the tarp or plywood next to where you will be digging.
+    </p>
+    </li>
+    <li>
+    <p>Set the auger at an angle above 45&#176; , e.g. 60&#176; or so. Start turning.
+    </p>
+    </li>
+    <li>
+    <p>Take the soil you are removing and carefully place it on the tarp or plywood, keeping the horizons separate.
+    </p>
+    </li>
+    <li>
+    <p>Dig until you are 5-10 cm into the C horizon. You should be able to tell by the texture. The soil will become almost pure sand, right after the clayey B horizon.
+    </p>
+    </li>
+    <li>
+    <p>Remove auger and place pipe down into hole, centering it.
+    </p>
+    </li>
+    <li>
+    <p>Pound pipe until it has deepened the hole by 15 to 20 cm or so.
+    </p>
+    </li>
+    <li>
+    <p>Remove pipe carefully, retaining the soil in its core. Note that the hole should be smaller in
+    diameter than that made by the auger.
+    </p>
+    </li>
+    <li>
+    <p>Bang pipe or use stick to clear out soil.
+    </p>
+    </li>
+    <li>
+    <p>Arrange pipe so that it is sticking in the hole again.
+    </p>
+    </li>
+    <li>
+    <p>Prepare the lysimeter either now or while you are digging.
+    </p>
+    </li>
+    </ol>
+    
+    </li>
+    <li>
+    <p>Preparing the lysimeter</p>
+    <ol>
+    <li>
+    <p>Attach a deterioration-resistant string securely to the lysimeter, for retrieval
+    </p>
+    </li>
+    <li>
+    <p>Unscrew the nut on the lysimeter, taking care not to lose the ferrules.
+     Push tubing through back piece (tubing longer than that supplied will likely
+     be necessary). This may takeconsiderable effort:  twisting with pliers may help.
+    </p>
+    </li>
+    <li>
+    <p>Cut the end of the tubing off at an angle. This is important because
+    otherwise the tubing can suction itself against the wall of the lysimeter, which
+    blocks passage of water. (It also removes any tubing damaged with pliers.)
+    </p>
+    </li>
+    <li>
+    <p>Screw the nut back onto the lysimeter, making sure that the ferrules are in
+    place and that the tubing sticks out into the lumen of the lysimeter, but is
+    not pressed all the way into the tip.
+    </p>
+    </li>
+    <li>
+    <p>Then take some deionized water into the syringe and attach syringe to tubing on opposite end of lysimeter.
+    </p>
+    </li>
+    <li>
+    <p>Squeeze the water into the lysimeter to force all the air out. Squeeze water
+    into it until it flushes uniformly. The lysimeter is now ready to be installed.
+    Make sure that you have enough tubing to reach from the lysimeter out to the alleyway.
+    </p>
+    </li>
+    </ol>
+    
+    </li>
+    <li>
+    <p>Preparing the hole and inserting the lysimeter</p>
+    <ol>
+    <li>
+    <p>Mix a trowel-full of silica flour with enough deionized water to make a slurry about th
+    </p>
+    </li>
+    </ol>
+  in_use_from: "2007-05-07"
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_036: 
+  created_on: 
+  name: KBS023-prot01
+  dataset_id: "26"
+  body: 
+  abstract: "<kbsml_text><p>Sampling Frequency: Weekly during the peak growing season (May-August) </p> <p>The general occurrence and abundance of insects within each plot is assessed with scouting .  Scouting consists of detailed inspection of soil and individual plants for insects within a meter row or a m <sup>2 </sup> area of the established sampling area .  Sweep samples are taken for foliar insects .  Samples of unidentified insects, weeds or pathogens are brought to the laboratory for identification  .</p> <p>Detailed sampling for predator and herbivore abundance is performed with yellow stickypanels .  These panels trap ladybird beetle adults, lacewing predators (Carne), lightningbugs (Lampyridae), potato leafhoppers (Empoasca fabae), aphids (Aphidae), corn rootworms (Diabrotica) and possibly others which are attracted to the LTER plot arrangement .  In each plot, a trap is placed at each of the 5 baseline sampling stations .  Each trap is counted weekly where species and abundances are determined .  Sticky panels are replaced at weekly intervals  .</p></kbsml_text>"
+  in_use_to: 
+  title: Insect Abundance
+  updated_on: 
+  change_summary: ""
+  id: "36"
+  description: |-
+    <kbsml_text>
+    <div>
+    <h2>Introduction
+    </h2>
+    
+    <p>A key aspect of establishing a long term program in insect
+    spatial and temporal dynamics is the development of a sampling
+    protocol. This includes the use of a standard method of
+    measurement for the species assemblage being monitored and the
+    use of permanent sample site locations distributed throughout the
+    landscape at known geographic locations. The application of
+    permanent sampling sites was used to account for differences in
+    time (weeks, years) without the complication of spatial
+    variation. A new sampling protocol was developed for the insect
+    monitoring within the KBS-LTER. Several factors were considered
+    when developing the method used to sample the selected insect
+    groups: a) a method which could be used in different habitats; b)
+    simple to maintain the sample device; c) low cost; d) ease of
+    removal of the sample device due to agronomic practices, e)
+    ability to sample a large number of locations over a sizeable
+    geographic area, and, f) independent of the observer. Six years
+    of consistent data have been collected weekly from May-August
+    from 210 permanent sample locations from the main LTER site.
+    Presently, 285 stations are sampled weekly over a 12-14 week
+    period each year.</p>
+    
+    <p>To satisfy these constraints, a colored (yellow) sticky trap
+    is used to sample plant dwelling predators (coccinellids,
+    chrysopids, lampyrids). The pitfall trap is used to sample ground
+    dwelling predators (carabids, arachnids, staphylinids). The
+    pitfall trap is a common method to record ground dwelling
+    invertebrate predators. The use of the sticky trap is less
+    commonly used. The consistency of patterns of catch of plant
+    dwelling predators during the six-year study has indicated that
+    sticky traps have the same advantages and disadvantages of the
+    pitfall trap. The use of the selected trapping methods has
+    provided the possibility to conduct the study at larger scales
+    with more groups of invertebrates (other than ground dwelling
+    arthropods), which has enhanced the understanding of the way that
+    invertebrates interact with the landscape.</p>
+    
+    
+    </div>
+    <div><h2>Plant dwelling insect predators
+    </h2>
+    
+    <p>At each sampling station we place one insect trap. Each trap
+    consists of a double sided cardboard yellow sticky trap (unbaited
+    Pherocon, Zoecon, Palo Alto, CA) suspended 1.2 m above the ground
+    as described in the next figure.</p>
+    
+    <p>Insect adults are sampled weekly during the growing season
+    (approximately from early May to late August). Insect are
+    identified in the field (using a pictorial key), recorded on
+    sampling sheets, and removed from the traps. Yellow sticky traps
+    are replaced every two weeks. All the data and ancillary
+    information are entered into a computer using a statistical
+    spreadsheet for maintenance and analysis.</p>
+    
+    <p>In 1995, we initiated the use of a Newton 110 PDA (personal
+    digital assistant) to substitute for sampling sheets in the
+    field. A special set of sampling software, designed initially for
+    plant dwelling insect sampling needs, but with potential for
+    other sampling protocols, allowed direct capture of all plant
+    dwelling insect directly on the field. At the end of each day
+    data are downloaded directly into a relational database system
+    for subsequent data management and analysis. </p>
+    
+    <p>Last Update: 15 December 1995 </p>
+    </div>
+    </kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_025: 
+  created_on: 
+  name: KBS013-prot01
+  dataset_id: "16"
+  body: 
+  abstract: "<kbsml_text><p>Sampling Frequency: Weekly and/or Precipitation-Event Basis</p><p>CO<sub>2</sub> and N<sub>2</sub>O fluxes are estimated using in situ closed-cover flux chambers.  Bases of the chambers (28 cm x 28 cm x 10 cm high) are permanently installed in all plots of 4 replicate blocks (removed only for farming activities).  Chamber bases are constructed from aluminum sheeting with a channel on the top outside rim to fit a plexiglass cover (29 cm x 29 cm x 14 cm high) fitted with a rubber septa.  Base channels are filled with water during sampling to provide a gas-tight seal.</p><p>Gas fluxes are measured at 40 minute sampling intervals over a 3 hour period.  Samples are taken from gas traps by inserting a 10 mL syringe into the rubber septa and drawing 10mL which is used to flush a vented 3 mL glass vial.  Glass vials are sealed with butyl septa and crimped with a standard crimp seal.  Another 10 mL gas sample is taken from the trap and placed in the glass vial, giving the vial a gas overpressure of 7 mL.  CH<sub>4</sub>and N<sub>2</sub>O are determined by gas chromatography.  CH<sub>4</sub>is analyzed with aflame ionization detector (300 degrees C), while N<sub>2</sub>O is analyzed with a 63Ni electron capture detector (350 degrees C).  CO<sub>2</sub> is analyzed using an infrared gas analyzer.  Gases for both CH4 and N2O are separated on a Poropak Q column (1.8 m, 80/100 mesh) at 80 degrees C.  Carrier gas for CH<sub>4</sub> is nitrogen, while carrier gas for N<sub>2</sub>O is argon/methane (90/10).</p></kbsml_text>"
+  in_use_to: 
+  title: CH<sub>4</sub>, N<sub>2</sub>O, CO<sub>2</sub> Fluxes
+  updated_on: 
+  change_summary: ""
+  id: "22"
+  description: |-
+    <kbsml_text>
+    <p>Field Gas Sampling Protocol
+    </p>
+    <p>Field Sampling: Usually April to November
+    </p>
+    <p>Equipment:
+    </p>
+    <ul>
+    <li><p>Tins
+    </p></li>
+    <li><p>Knife
+    </p></li>
+    <li><p>Soil Probe
+    </p></li>
+    <li><p>Syringe - 10ml (2)
+    </p></li>
+    <li><p>Needles - 25 gauge 1in (at least 10 per person)
+    </p></li>
+    <li><p>Septa for lids (venoject)
+    </p></li>
+    <li><p>Water
+    </p></li>
+    <li><p>Vials (crimped, sealed &amp; labelled)
+    </p></li>
+    <li><p>Timer
+    </p></li>
+    <li><p>Soil Thermometer
+    </p></li>
+    <li><p>Field Apron
+    </p></li>
+    <li><p>Pencils
+    </p></li>
+    <li><p>Data sheets
+    </p></li>
+    <li><p>Clippers
+    </p></li>
+    <li><p>Gas box frames (28cm X 28cm X 10cm)
+    </p></li>
+    <li><p>Gas box lid (29cm X 29cm X 14cm
+    </p></li>
+    </ul>
+    <p>Preparation:
+    </p>
+    <ol>
+    <li><p>Place metal frames in ground, bottom edge approximately 1in below surface.  The frames must be level to
+    hold  water in and maintain a proper air-tight seal at sampling.  (On badly sloping sites, this can be achieved
+     by  carefully hammering a wooden 2 x 4 placed over the top [the channel is on the top] of the base; use a
+    level  to  check anle).  Frames should be set into ground at least 1 day before sampling; they remain in the
+    soil  until  winter, and are not removed between sampling times except for plowing treatments.
+    </p></li>
+    <li><p>Plant growth within the box frames needs to be clipped without disturbing the soil prior to sampling
+    </p></li>
+    <li><p>Vials need to be crimped prior to sampling date.  Number of boxes * 4sampling times(T0-T3) = number of
+    vials  needed.  All vials are numbered with the set ID, then vials #'s 1-210 (for a full campaign, excluding
+    fertilizer sites; 1-136 for treatments 1-8 only), for gas sample identification.
+    </p></li>
+    <li><p>It is a good idea to check the boxes (frames and lids) for plant growth and damage, and to level the frames
+     the  day before sampling.
+    </p></li>
+    <li><p>The box lids need maintenance work on occasion.  The epoxyseals lining the edges of the box lid should be
+    checked by filling the boxes with water - look for leaks.  We've also been sealing the bottom channel on the
+    gas box frames to prevent leaking.
+    </p></li>
+    </ol>
+    <p>Sampling:
+    </p>
+    <ol>
+    <li><p>Record T0 soil temperature on data sheet.
+    </p></li>
+    <li><p>Record gas box lid type- it will be marked on the top (A,B, or C)
+    </p></li>
+    <li><p>Check the frames for obvious cracks.  Fill the frame troughs with water without spilling water onto the
+    soil  (added water may stimulate biological activity).
+    </p></li>
+    <li><p>Check septa (venoject) on the box lids and replace if needed; they get dirty and gooey as they weather.
+    </p></li>
+    <li><p>Place PVC lid on frame and check to see if a proper seal has formed; if lid has been laying flat on the
+    ground,  make sure you're not just moving the air that's been trapped inside for weeks directly onto the frame.
+      Gently  pull lid up and feel for suction or check water level
+    </p></li>
+    <li><p>Flush the sample vial with air from the chamber using a vent neele.  Remove the vent needle and inject
+    sample.   We usually flush with 10ml and inject as much as of an additional 10ml as possible (The over pressure
+     gaurds  against sample contamination, and provides an easy means for removing known volumes from the vial
+    during gas  analysis).
+    </p></li>
+    <li><p>Start timer as the first sample is injected into the vial; record vial number and time on data sheet.
+    </p></li>
+    </ol>
+    <p>Helpful hints: It is easiest to keep track of where you are in the vial sequence by placing the vent needle
+    in the next vial to be used and turning the &quot;used&quot; vials upside down in the tray.  Some of the
+    septa/vials may leak - this shouls be fairly obvious, listen for the leak.  If rain is expected, data sheets
+    can be photocopied onto rainproof paper.
+    </p>
+    <p>In the lab, analyze vials for CH4 (using the GC-FID), N2O (GC-FID), and CO2 (IRGA).  Analyze prior N2O,
+    because  the ECD carrier gas contains 10% CH4- you will contaminate CH4 samples with carryover from the ECD
+    injection  port.  Samples should be analyzed within a
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_014: 
+  created_on: 
+  name: KBS000-prot03
+  dataset_id: "3"
+  body: 
+  abstract: A plan for handling data from the harvest yield monitor.
+  in_use_to: 
+  title: Management Plan for Spatially Explicit Yield
+  updated_on: 
+  change_summary: ""
+  id: "3"
+  description: |-
+    <kbsml_text>
+    <p>Management Plan for KBS101-00 Spatially Explicit Yield 2000
+    </p>
+    <p>Table of Transformations
+    </p>
+    <table>
+    <tr>
+    <td>
+    <p>
+    <em>Initial Form
+    </em>
+    </p>
+    </td>
+    <td>
+    <p>
+    <em>Initial Location
+    </em>
+    </p>
+    </td>
+    <td>
+    <p>
+    <em>Transformation
+    </em>
+    </p>
+    </td>
+    <td>
+    <p>
+    <em>Agent
+    </em>
+    </p>
+    </td>
+    <td>
+    <p>
+    <em>Final Form
+    </em>
+    </p>
+    </td>
+    <td>
+    <p>
+    <em>Final Location
+    </em>
+    </p>
+    </td>
+    <td>
+    <p>
+    <em>Keep forever
+    </em>
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <p>proprietary
+    </p>
+    </td>
+    <td>
+    <p>Flash mem. card
+    </p>
+    </td>
+    <td>
+    <p>move to network drive
+    </p>
+    </td>
+    <td>
+    <p>AgLeader 2000
+    </p>
+    </td>
+    <td>
+    <p>*.yld file
+    </p>
+    </td>
+    <td>
+    <p>LTER/Yield_Data/ 2000_Soybean/*.yld
+    </p>
+    </td>
+    <td>
+    <p>Yes
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <p>*.yld file
+    </p>
+    </td>
+    <td>
+    <p>LTER/Yield_Data/ 2000_Soybean/*.yld
+    </p>
+    </td>
+    <td>
+    <p>create *.txt files</p>
+    <p>mark as 'read only'
+    </p>
+    </td>
+    <td>
+    <p>AgLeader 2000
+    </p>
+    </td>
+    <td>
+    <p>multiple *.txt files
+    </p>
+    </td>
+    <td>
+    <p>Distributed among corresponding Treatment/Rep folders, e.g. 2000_Soybean/Treatment_1/ Rep_1/T1R1.txt.
+    </p>
+    </td>
+    <td>
+    <p>Yes
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <p>*.txt file
+    </p>
+    </td>
+    <td>
+    <p>Rep_x folder
+    </p>
+    </td>
+    <td>
+    <p>Add header
+    </p>
+    </td>
+    <td>
+    <p> spreadsheet
+    </p>
+    </td>
+    <td>
+    <p>*.txt file
+    </p>
+    </td>
+    <td>
+    <p>Rep_x/Temp.txt
+    </p>
+    </td>
+    <td>
+    <p>No
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <p>*.txt file
+    </p>
+    </td>
+    <td>
+    <p>Rep_x folder
+    </p>
+    </td>
+    <td>
+    <p>Add Eastings/ Northings fields (Note 1)
+    </p>
+    </td>
+    <td>
+    <p>ArcView 3.2
+    </p>
+    </td>
+    <td>
+    <p>*.txt file
+    </p>
+    </td>
+    <td>
+    <p>Rep_x/Temp2.txt
+    </p>
+    </td>
+    <td>
+    <p>No
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <p>*.txt file
+    </p>
+    </td>
+    <td>
+    <p>Rep_x folder
+    </p>
+    </td>
+    <td>
+    <p>Standardize header, add  columns as necessary (Note 2)
+    </p>
+    </td>
+    <td>
+    <p>spreadsheet
+    </p>
+    </td>
+    <td>
+    <p>*.txt file, tab delimited
+    </p>
+    </td>
+    <td>
+    <p>Rep_x/2000TxRxbase.txt
+    </p>
+    </td>
+    <td>
+    <p>Yes
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <p>
+    </p>
+    </td>
+    <td>
+    <p>
+    </p>
+    </td>
+    <td>
+    <p>
+    </p>
+    </td>
+    <td>
+    <p>
+    </p>
+    </td>
+    <td>
+    <p>
+    </p>
+    </td>
+    <td>
+    <p>
+    </p>
+    </td>
+    <td>
+    <p>
+    </p>
+    </td>
+    </tr>
+    </table>
+    <p>Notes.
+    </p>
+    <p>1.  See document
+    <a href="../2000_soybean/UTM.htm">UTM.htm
+    </a>.
+    </p>
+    <p>2.  Field notes regarding moisture should be included in header and used to calculate columns.  See base data from 1998 for an example.  Field notes should also go on the web somewhere.  Change feet to meters.  Retain columns for longitude, latitude, Eastings, Northings and sample ID (unlike 1998 example).  Add columns for Meters East and Meters North.  Calculate from GIS data for SW corner of plot (
+    <a href="http://lter.kbs.msu.edu/Spatial/georef-plot_boundaries-wgs84.htm">on web
+    </a>).
+    </p>
+    </kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_003: 
+  created_on: 
+  name: KBS002-prot01
+  dataset_id: "5"
+  body: 
+  abstract: |-
+    <kbsml_text>
+    <p>Precipitation is measured using a Belfort Weighing Bucket Preciptiation Gauge.  Staff checks the gauge weekly, changing the chart and emptying the bucket as necessary.  During the winter, antifreeze (ethylene glycol solution) is added to the bucket, which serves to melt snow and protect the bucket.  The paper chart is changed weekly, and read by staff in units of 1/20th of one inch. Database algorythms convert readings to mm.  A date is midnight to midnight local time, either Eastern Standard Time or Eastern Daylight Time.  During the visit to the station, other sensors are inspected.
+    </p>
+    </kbsml_text>
+  in_use_to: 
+  title: LTER Weather Station Weekly Maintenance
+  updated_on: 
+  change_summary: I added steps for managing the bare soil reserve (recently established), where soil temperature and moisture are measured.
+  id: "7"
+  description: |-
+    <kbsml_text>
+    <p>
+    LTER Weather Station Maintenance
+    </p>
+    <p>
+    6-10-2002.  Tim Bergsma.  A maintenance routine for the LTER weather station has become institutionalized, but has not been thoroughly documented.  In 1997 a weighing bucket rain gauge was installed at the station, eventually replacing the tipping bucket rain gauge.  The design of the new gauge requires weekly maintenance visits; some method loosely corresponding to the protocol below has been employed since then.  Details vary.  For instance, copies of the removed charts were made and stored, from 7-29-97 until 10-15-2001.  I am no longer maintaining copies.  No regular log has been kept:  I am institutionalizing the log today.  Details of the operation of the weather station since its initial deployment exist in a variety of forms, and should be available elsewhere.  My purpose here is to create a protocol for weather station maintenance that corresponds to current practice.  Those maintaining the station should document whether this or some other protocol was employed, noting significant deviations, if any.
+    </p>
+    <p>
+    Frequency: weekly (usually Monday, as per labeling of precipitation chart)
+    </p>
+    <p>
+    Materials</p>
+    <ul>
+    <li><p>Belfort Instrument Company:  Chart No. 5-4046-B, normally stored in data manager's office.</p></li>
+    <li><p>special ink.  Contact Belfort for more information.  Dropper bottle stored at the instrument.</p></li>
+    <li><p>pencil</p></li>
+    <li><p>soft cloth</p></li>
+    <li><p>spare chart drum</p></li>
+    <li><p>antifreeze, appropriate containment equipment (funnels, waste containers, etc). </p></li>
+    <li><p>Belfort manual.  Currently in folder Weath. Inst. Doc, maintained by the LTER data manager, lter.data.manager@kbs.msu.edu.</p></li>
+    <li><p>grass clippers</p></li>
+    <li><p>Roundup (glyphosate)</p></li>
+    </ul>
+    
+    <p>
+    Procedure</p>
+    <ol>
+    <li><p>Label a new chart with station, date, expected time of deployment (optional) and your initials.</p></li>
+    <li><p>Fold the labeled tab under, and mount on spare drum.  Tail of chart overlaps clip such that pen won't snag if it passes the clip.</p></li>
+    <li><p>Proceed to weather station.  Visually inspect tower, sensors.</p></li>
+    <li><p>Climb tower to examine two light sensors at 3m.  Wipe sensing surfaces with a soft cloth if necessary.</p></li>
+    <li><p>Inspect rain gauge and open the access door.</p></li>
+    <li><p>"Ship" the pen and remove the current drum (becomes the spare).</p></li>
+    <li><p>Write in pencil directly on the removed chart:  OFF [date], [time], [time zone], [initials].</p></li>
+    <li><p>Store the chart/drum for transport. </p></li>
+    <li><p>Wind the clock fully (but gently), about 24 strokes.</p></li>
+    <li><p>Label the new chart, ON, [date], [time], [time zone], [initials].</p></li>
+    <li><p>Place the new drum, seated fully.</p></li>
+    <li><p>Add ink to the pen as necessary.</p></li>
+    <li><p>Remove the collection cylinder if necessary for the following.</p></li>
+    <li><p>Install or remove the collection funnel as necessary.  Should not be in place if there is risk of snow.</p></li>
+    <li><p>Empty bucket if necessary.  Rain water can be dumped locally.  If antifreeze is present, dispose properly.</p></li>
+    <li><p>Add/remove antifreeze as necessary.  Add if collected precip. is at risk of freezing, remove when diluted to ineffectiveness by precipitation.</p></li>
+    <li><p>Replace bucket and collection cylinder as necessary.</p></li>
+    <li><p>Place pen against chart, while setting the time.  Set the time by rotating the drum counter-clockwise only (avoids hysteresis error).</p></li>
+    <li><p>Start the ink flowing by prodding with a pointed object, if necessary.</p></li>
+    <li><p>Close the access door.</p></li>
+    <li><p>Ensure that plants are not growing in the bare soil reserve (east half of fenced area).  Spray with Roundup if necessary.</p></li>
+    <li><p>Ensure that plants are not excessively tall in the vegetated soil reserve (west half of fenced area).  Clip if necessary, to maintain canopy between 10 and 20 cm.</p></li>
+    <li><p>Write and submit a log entry, stipulating which maintenanc
+  in_use_from: 
+  version: "2"
+  person_id: "21"
+  active: t
+protocols_048: 
+  created_on: 
+  name: KBS019-prot02
+  dataset_id: "22"
+  body: ""
+  abstract: |-
+    <kbsml_text><p>Sampling Frequency: minimum of once each growing season </p> <p>Weed species composition are determined at the time of plant productivity sampling.  Weeds within the biomass sampling area, 1 m2, are clipped at ground level and placed in labeled paper bags .  In the laboratory plant are separated to individual species and bagged .  Species identification are determined based on Gleason and Cronquist (1963),Fernald (1950), and Voss (1972 and 1985) .  Biomass is dried at 60 degrees C for 48 h and weighed  .</p>
+    </kbsml_text>
+  in_use_to: 
+  title: Weed Species Composition
+  updated_on: "2007-05-07"
+  change_summary: ""
+  id: "27"
+  description: See abstract.
+  in_use_from: "1982-05-01"
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_037: 
+  created_on: 
+  name: KBS026-prot01
+  dataset_id: "29"
+  body: 
+  abstract: "<kbsml_text><p>Sampling Frequency: every three years </p> <p>Bulk density cores consist of intact cores taken in each plot  .</p></kbsml_text>"
+  in_use_to: 
+  title: Soil Bulk Density
+  updated_on: 
+  change_summary: ""
+  id: "38"
+  description: |-
+    <kbsml_text>
+    <p>
+    	<b>Bulk Density Sampling
+    	</b>
+    </p>
+    <p>
+    	<b>Working Protocol
+    	</b>
+    </p> 
+    <p>
+    	<b>Method used for 1988 and 1996 samples
+    	</b>
+    </p> 
+    <p>
+    	<b>Materials:
+    	</b></p>
+    	<ul> 
+    		<li><p>Root Sampler 7.95 cm dia. (ELKJAMP, Inc., Wageningen, Netherlands)
+    		</p></li> 
+    		<li><p># 5 paper bags (13 X 27 cm) pre-labeled
+    		</p></li> 
+    		<li><p>Meter Stick
+    		</p></li> 
+    		<li><p>Ruler with metric markings
+    		</p></li> 
+    		<li><p>Data Sheets
+    		</p></li> 
+    		<li><p>Drying Oven @ 105 degrees  C
+    		</p></li> 
+    		<li><p>Mettler PJ3600 balance
+    		</p></li> 
+    	</ul>
+    
+    <p> 
+    	<b>General Procedure
+    	</b>
+    </p>
+    
+    	<ol> 
+    		<li><p>Pre-label paper bags with the
+      appropriate information about the sample (e.g. date, plot, depth,
+      variate)
+    		</p></li> 
+    		<li><p>Take surface core using root corer 2m
+      south west of station flags 2, 3, and 4.
+    		</p></li> 
+    		<li><p>Measure core height and hole depth ("
+      15 cm.). Place core in paper bag.
+    		</p></li> 
+    		<li><p>Take second core from hole of the
+      first core.
+    		</p></li> 
+    		<li><p>Measure core height and hole depth ("
+      25 cm.) of second core. Place core in paper bag.
+    		</p></li> 
+    		<li><p>If soil moisture is to be calculated,
+      weigh soil cores before drying. Place cores paper bags and 10 empty
+      paper bags in drying oven at 105 degrees  C for 24 hours.
+    		</p></li> 
+    		<li><p>Remove cores and paper bags from oven
+      and allow to cool for 15 minutes.
+    		</p></li> 
+    		<li><p>Weigh cores and paper bags. Determine
+      soil mass by subtracting mean bag weight from the weight of the soil
+      core + bag weight. 
+    		</p></li>
+    	</ol>
+    
+    <p>
+    	<b>Method used for 1991
+      samples
+    	</b> 
+    </p>
+    
+    	<ul>
+    <li><p>Bulk density samples were taken using a
+      double cylinder, hammer-driven corer. The outer cylinder absorbs the
+      impact of the hammer and reduces compaction on the sample. The inner
+      cylinder preserves the intact sample for storage and analysis.
+    </p></li> 
+    <li><p>One sample per plot was taken, 3 m west
+      of the station #3 flag. Two cores were taken at each position. The first
+      core was from the surface to 7.5 cm. The second core was taken after
+      excavation of the hole to 15 cm and represents the 15 to 22.5 cm depth.
+      No core was retained to estimate bulk density from the 7.5 to 15 cm
+      depth. The exact depth of each core was recorded. Any anomalies in the
+      core (gravel, roots, unlevel core surface) were recorded.
+    </p></li> 
+    <li><p>The inner cylinder containing the 0-7.5
+      cm core was transferred to a wax-lined cardboard container, stored in a
+      cooler, and sent to Dr. Smucker's lab for pore distribution analysis.
+      The deeper cores (15 - 22.5 cm) were dried at 120degrees  C until core weight
+      achieved a constant mass. Core weight was recorded. Cores were broken
+      apart and gravel was removed, weighed, and subtracted from soil core
+      weight.
+    </p></li> 
+    <li><p>Cylinder core volume used in calculations
+      was 347.3 cm
+    <sup>3
+    </sup>. 
+    </p></li>
+    </ul>
+    
+    <p>
+    <b>Method used for 1999 1m samples
+    </b>    Bulk density samples were taken using a 3
+      inch diameter giddings probe. 
+    </p>
+    </kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_026: 
+  created_on: 
+  name: KBS013-prot01
+  dataset_id: "16"
+  body: 
+  abstract: "<kbsml_text><p>Sampling Frequency: Weekly and/or Precipitation-Event Basis</p><p>CO<sub>2</sub> and N<sub>2</sub>O fluxes are estimated using in situ closed-cover flux chambers.  Bases of the chambers (28 cm x 28 cm x 10 cm high) are permanently installed in all plots of 4 replicate blocks (removed only for farming activities).  Chamber bases are constructed from aluminum sheeting with a channel on the top outside rim to fit a plexiglass cover (29 cm x 29 cm x 14 cm high) fitted with a rubber septa.  Base channels are filled with water during sampling to provide a gas-tight seal.</p><p>Gas fluxes are measured at 40 minute sampling intervals over a 3 hour period.  Samples are taken from gas traps by inserting a 10 mL syringe into the rubber septa and drawing 10mL which is used to flush a vented 3 mL glass vial.  Glass vials are sealed with butyl septa and crimped with a standard crimp seal.  Another 10 mL gas sample is taken from the trap and placed in the glass vial, giving the vial a gas overpressure of 7 mL.  CH<sub>4</sub>and N<sub>2</sub>O are determined by gas chromatography.  CH<sub>4</sub>is analyzed with aflame ionization detector (300 degrees C), while N<sub>2</sub>O is analyzed with a 63Ni electron capture detector (350 degrees C).  CO<sub>2</sub> is analyzed using an infrared gas analyzer.  Gases for both CH4 and N2O are separated on a Poropak Q column (1.8 m, 80/100 mesh) at 80 degrees C.  Carrier gas for CH<sub>4</sub> is nitrogen, while carrier gas for N<sub>2</sub>O is argon/methane (90/10).</p></kbsml_text>"
+  in_use_to: 
+  title: CH<sub>4</sub>, N<sub>2</sub>O, CO<sub>2</sub> Fluxes
+  updated_on: 
+  change_summary: Protocols for round chambers and large vials were added.
+  id: "23"
+  description: |-
+    <kbsml_text>
+    <div>
+    <h2>Field Gas Sampling Protocol
+    </h2>
+    <p>Field Sampling: Usually April to November
+    </p>
+    <div>
+    <h3>Equipment
+    </h3>
+    
+    <ul>
+    <li>
+    <p> Tins or plastic bags: for soil samples (1 per chamber) 
+    </p>
+    </li>
+    <li>
+    <p> Knife: for inserting chamber base in soil 
+    </p>
+    </li>
+    <li>
+    <p> Small Level: for leveling chamber base 
+    </p>
+    </li>
+    <li>
+    <p> Rubber Mallet: for hammering base 
+    </p>
+    </li>
+    <li>
+    <p> Wood Block (2" x 4" x 18"): for hammering base, where necessary 
+    </p>
+    </li>
+    <li>
+    <p> Soil Probe 
+    </p>
+    </li>
+    <li>
+    <p> Syringe - 20mL 
+    </p>
+    </li>
+    <li>
+    <p> Needles 18 gauge (gray) (at least 10 per person) 
+    </p>
+    </li>
+    <li>
+    <p> Septa (from 3 ml venoject vials): for lids  
+    </p>
+    </li>
+    <li>
+    <p> Water in squirt bottle: for sampling square chambers 
+    </p>
+    </li>
+    <li>
+    <p> Vials (crimped, sealed, and labeled), 4 per chamber 
+    </p>
+    </li>
+    <li>
+    <p> Stop watch 
+    </p>
+    </li>
+    <li>
+    <p> Soil thermometer (Taylor small dial thermometers with 13 cm stems) 
+    </p>
+    </li>
+    <li>
+    <p> Ruler: to measure chamber height 
+    </p>
+    </li>
+    <li>
+    <p> Field apron or equivalent: for carrying supplies 
+    </p>
+    </li>
+    <li>
+    <p> Pencils 
+    </p>
+    </li>
+    <li>
+    <p> Data sheets 
+    </p>
+    </li>
+    <li>
+    <p> Clippers 
+    </p>
+    </li>
+    <li>
+    <p> Gas box frames for square chambers: </p>
+    <ul>
+    <li>
+    <p> Gas box base (aluminum, 27.3cm x 27.3cm x 10cm) - permanently installed in site 
+    </p>
+    </li>
+    <li>
+    <p> Gas box lid (29cm x 29cm x 14cm) 
+    </p>
+    </li>
+    </ul>
+    
+    </li>
+    <li>
+    <p> Gas box frames for round chambers </p>
+    <ul>
+    <li>
+    <p> Chamber base (PVC, 25cm dia.) - permanently installed in site 
+    </p>
+    </li>
+    <li>
+    <p> Chamber cap 
+    </p>
+    </li>
+    <li>
+    <p> Elastic band 
+    </p>
+    </li>
+    </ul>
+    
+    </li>
+    </ul>
+    
+    </div>
+    <div>
+    <h3>Preparation
+    </h3>
+    
+    <ol>
+    <li>
+    <p> Place chamber base in ground, bottom edge approximately 1 inch below surface.  The frames must be level.  On badly sloping sites, this can be achieved by carefully hammering a wooden 2 x 4 placed over the top of the base; use a level to check angle.  Frames should be set into ground at least 1 day before sampling; they remain in the soil until winter, and are not removed between sampling times except for plowing treatments. 
+    </p>
+    </li>
+    <li>
+    <p> Plant growth within the box frames needs to be clipped to base height (do not clip to soil surface) without disturbing the soil prior to sampling.  Litter is left in place.  The area inside the frame should be as representative as possible to the area outside the frame. 
+    </p>
+    </li>
+    <li>
+    <p> Vials need to be crimped prior to sampling date.  Number of boxes *4 sampling times (T0 - T3) = number of vials needed.  all vials are numbered with the set ID, then vial #'s 1 - 210 (for a full campaign, excluding fertilizer sites; 1 - 136 for treatments 1 - 8 only), for gas sample identification. 
+    </p>
+    </li>
+    <li>
+    <p> It is a good idea to check the boxes (frames and lids) for plant growth and damage, and to level the frames and clean the lids the day before sampling. 
+    </p>
+    </li>
+    <li>
+    <p> The chamber lids need to be kept clean; clean the inside with water (only) before each use.  The epoxy seals lining the edges of the box lid should be checked by filling the boxes with water - look for leaks.  We've also been sealing the bottom channel on the gas box frames to prevent leaking. 
+    </p>
+    </li>
+    <li>
+    <p> Frame height measured. 
+    </p>
+    </li>
+    </ol>
+    
+    </div>
+    <div>
+    <h3>Sampling
+    </h3>
+    
+    <ol>
+    <li>
+    <p> Stay on trails - do not trample plants or compress soil near chamber. 
+    </p>
+    </li>
+    <li>
+    <p> Record T0 soil temperature on data sheet; temperature probe should be inserted 10 cm. 
+    </p>
+    </li>
+    <li>
+    <p> Record gas box lid type - it will be marked on the top (A, B, or C).  Record height at 4 places. 
+    </p>
+    </li>
+    <li>
+    <p> Check the frames for obvious cracks.  Fill the frame troughs with water (square chambers) without spilling water onto the soil (added water may stimulate biological activity). 
+    </p>
+    </li>
+    <li>
+    <p> Check septa on the box lids and replace if needed; they get dirty and gooey as they weather. 
+    </p>
+    </li>
+    <li
+  in_use_from: 
+  version: "2"
+  person_id: "21"
+  active: t
+protocols_015: 
+  created_on: 
+  name: KBS002-prot01
+  dataset_id: "5"
+  body: 
+  abstract: |-
+    <kbsml_text>
+    <p>Precipitation is measured using a Belfort Weighing Bucket Preciptiation Gauge.  Staff checks the gauge weekly, changing the chart and emptying the bucket as necessary.  During the winter, antifreeze (ethylene glycol solution) is added to the bucket, which serves to melt snow and protect the bucket.  The paper chart is changed weekly, and read by staff in units of 1/20th of one inch. Database algorythms convert readings to mm.  A date is midnight to midnight local time, either Eastern Standard Time or Eastern Daylight Time.  During the visit to the station, other sensors are inspected.
+    </p>
+    </kbsml_text>
+  in_use_to: 
+  title: LTER Weather Station Weekly Maintenance
+  updated_on: 
+  change_summary: This is the first version of this document.
+  id: "6"
+  description: |-
+    <kbsml_text>
+    <p>
+    LTER Weather Station Maintenance
+    </p>
+    <p>
+    6-10-2002.  Tim Bergsma.  A maintenance routine for the LTER weather station has become institutionalized, but has not been thoroughly documented.  In 1997 a weighing bucket rain gauge was installed at the station, eventually replacing the tipping bucket rain gauge.  The design of the new gauge requires weekly maintenance visits; some method loosely corresponding to the protocol below has been employed since then.  Details vary.  For instance, copies of the removed charts were made and stored, from 7-29-97 until 10-15-2001.  I am no longer maintaining copies.  No regular log has been kept:  I am institutionalizing the log today.  Details of the operation of the weather station since its initial deployment exist in a variety of forms, and should be available elsewhere.  My purpose here is to create a protocol for weather station maintenance that corresponds to current practice.  Those maintaining the station should document whether this or some other protocol was employed, noting significant deviations, if any.
+    </p>
+    <p>
+    Frequency: weekly (usually Monday, as per labeling of precipitation chart)
+    </p>
+    <p>
+    Materials</p>
+    <ul>
+    <li><p>Belfort Instrument Company:  Chart No. 5-4046-B, normally stored in data manager's office.</p></li>
+    <li><p>special ink.  Contact Belfort for more information.  Dropper bottle stored at the instrument.</p></li>
+    <li><p>pencil</p></li>
+    <li><p>soft cloth</p></li>
+    <li><p>spare chart drum</p></li>
+    <li><p>antifreeze, appropriate containment equipment (funnels, waste containers, etc). </p></li>
+    <li><p>Belfort manual.  Currently in folder Weath. Inst. Doc, maintained by the LTER data manager, lter.data.manager@kbs.msu.edu.</p></li>
+    </ul>
+    
+    <p>
+    Procedure</p>
+    <ol>
+    <li><p>Label a new chart with station, date, expected time of deployment (optional) and your initials.</p></li>
+    <li><p>Fold the labeled tab under, and mount on spare drum.  Tail of chart overlaps clip such that pen won't snag if it passes the clip.</p></li>
+    <li><p>Proceed to weather station.  Visually inspect tower, sensors.</p></li>
+    <li><p>Climb tower to examine two light sensors at 3m.  Wipe sensing surfaces with a soft cloth if necessary.</p></li>
+    <li><p>Inspect rain gauge and open the access door.</p></li>
+    <li><p>"Ship" the pen and remove the current drum (becomes the spare).</p></li>
+    <li><p>Write in pencil directly on the removed chart:  OFF [date], [time], [time zone], [initials].</p></li>
+    <li><p>Store the chart/drum for transport. </p></li>
+    <li><p>Wind the clock fully (but gently), about 24 strokes.</p></li>
+    <li><p>Label the new chart, ON, [date], [time], [time zone], [initials].</p></li>
+    <li><p>Place the new drum, seated fully.</p></li>
+    <li><p>Add ink to the pen as necessary.</p></li>
+    <li><p>Remove the collection cylinder if necessary for the following.</p></li>
+    <li><p>Install or remove the collection funnel as necessary.  Should not be in place if there is risk of snow.</p></li>
+    <li><p>Empty bucket if necessary.  Rain water can be dumped locally.  If antifreeze is present, dispose properly.</p></li>
+    <li><p>Add/remove antifreeze as necessary.  Add if collected precip. is at risk of freezing, remove when diluted to ineffectiveness by precipitation.</p></li>
+    <li><p>Replace bucket and collection cylinder as necessary.</p></li>
+    <li><p>Place pen against chart, while setting the time.  Set the time by rotating the drum counter-clockwise only (avoids hysteresis error).</p></li>
+    <li><p>Start the ink flowing by prodding with a pointed object, if necessary.</p></li>
+    <li><p>Close the access door.</p></li>
+    <li><p>Write and submit a log entry, stipulating which maintenance tasks were performed.  Submit directly or by email to lter.data.manager@kbs.msu.edu.</p></li>
+    <li><p>Submit chart for processing.</p></li>
+    </ol>
+    </kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_004: 
+  created_on: 
+  name: KBS004-prot01
+  dataset_id: "7"
+  body: 
+  abstract: |-
+    <kbsml_text>
+    <p>Sampling Frequency: minimum of once per month through the growing season (April -October) </p> <p>Composite soil samples consist of 1-inch composited cores per plot taken to soil depth at each of the 5 baseline sampling stations per plot .  At each sampling station, cores are taken perpendicular to the crop row and between rows .  Soil cores from poplar plots are taken on a diagonal transect between two trees .  In successional plots cores are taken at 7.5&quot; intervals from an arbitrary starting point .  No soil cores are taken across wheel-track rows in any plots .  Soil cores from each plot are sieved and mixed into one soil composite sample  .</p>
+    </kbsml_text>
+  in_use_to: 
+  title: Soil Sampling
+  updated_on: 
+  change_summary: ""
+  id: "11"
+  description: |-
+    <kbsml_text>
+    <p>Soil cores are taken at 5 sampling stations per plot. Soil cores (2.5
+    cm dia.) are taken north of each station flag to a depth of 25 cm. An
+    equal number of cores are taken within row and between row when row
+    crops are grown. In non-cropped systems, cores are taken at 10 cm
+    intervals. All cores from each plot are composited in one sampling
+    bag. A standard sampling consists of 2 cores at each station.  Some
+    samplings will have more cores when soil demand is high. Normally
+    samplers start at the south end of Rep 1, 2, 3, and 4. They work north
+    and finish on the north side of Rep 5. Rep 6 and treatment 8&#146;s
+    are sampled after finishing with rep 5. 5. Forested sites are
+    collected by one person at the same time the main site is being
+    sampled. If 5 people are not available the forested sites maybe
+    sampled in the afternoon while soil from the main site is being
+    sieved.</p>
+    
+    <p>The soil is brought to the lab and sieved through a 4 mm screen to
+    remove debris and to homogenize the soil sample. Each treatment has a
+    specific screen in order to reduce contamination between
+    treatments. Latex gloves are worn when sieving and mixing the
+    soil.</p>
+    
+    <p>Field moist sieved soil subsamples are distributed to individuals
+    requesting soil prior to sampling. Excess soil is air dried and stored
+    by date of sampling. All samples, except the April sample, are
+    disposed of at the end of the year. The April sample is archived for
+    CN analysis.</p>
+    
+    <p>Mineralization potential may be assessed by as the difference in
+    nitrate and ammonia values from the initial sampling and an
+    &quot;incubated&quot; sample. Incubations are perfomed on a subsample
+    of the initial composite sample which is placed into a gas-permeable
+    plastic bag and buried in the plot from which the soil
+    originated. Incubation length is 21 days. (see Short-term
+    mineralization file for details).</p>
+    
+    <p> <em>Materials</em></p>
+    
+    <ol>
+      <li><p> Avery 5160 Laser Labels</p></li>
+      <li><p> 8x4x18 Plastic sampling bags (drawer F7)</p></li>
+      <li><p> Sharpies</p></li>
+      <li><p> Butter knives</p></li>
+      <li><p> Site maps</p></li>
+      <li><p> Soil probes</p></li>
+      <li><p> Buckets</p></li>
+      <li><p> Latex gloves</p></li>
+      <li><p> Tote Trays</p></li>
+      <li><p> Brush</p></li>
+      <li><p> 4 mm mesh soil sieves</p></li> 
+    </ol>
+    
+    
+    <p><em>Procedure</em></p>
+    
+      <p>1. Label plastic bags with appropriate information about the
+      sample (e.g. project, date, plot, variate. Cover labels with clear
+      mailing tape to secure label to bag and to protect against
+      moisture.</p>
+      <p>2. Prepare sampling buckets. Each bucket should have the
+      following: site map, sharpie marker, butter knife, sampling bags,
+      and soil probe.</p>
+      <p>3. Take samples to 25 cm at each of the 5 sampling stations. A
+      butter knife is helpful in removing soil from the probe. In cropped
+      systems, an equal number of cores should be taken in the crop row
+      and between the crop row. Take the same number of cores from
+      non-cropped systems. Composite all samples for each plot in one
+      plastic bag.</p>
+      <p>4. Tie the sample bag and place in the alleyway to be picked up
+      when the sampling is completed. All efforts should be made to
+      complete sampling in all plots on the same day.</p>
+      <p>5. Take a core at the edge of the next plot to clean the soil
+      probe. This will reduce contamination between plots.</p>
+      <p>6. Pick up soil samples and return to dry lab.</p>
+      <p>7. Separate soils by treatment.</p>
+      <p>8. Wear latex gloves while sieving. Sieve each soil sample using
+      the 4 mm mesh soil sieve labeled for that treatment. Sieves are kept
+      in the dry lab.</p>
+      <p>9. Sieve soil into a plastic tote tray. Return sieved soil to the
+      plastic sample bag. Discard rocks and large organic matter remaining
+      on the screen.</p>
+      <p>10. Brush sieve and tote tray clean.</p>
+      <p>11. Change latex gloves after each treatment.</p>
+    
+    <p>12. Weigh plastic bags containing sieved soil and record weights in
+    lab book.</p> <p>13. Place soil samples into 4 degrees C
+    re
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_049: 
+  created_on: 
+  name: KBS039-prot01
+  dataset_id: "42"
+  body: 
+  abstract: <kbsml_text><p></p></kbsml_text>
+  in_use_to: 
+  title: GPS Protocol for the LTER Laboratory
+  updated_on: 
+  change_summary: This is the first posted version of this document.
+  id: "47"
+  description: |-
+    <kbsml_text>
+    <div>
+    <h2>Hardware
+    </h2>
+    <p>Trimble Data logger type TSCE
+    </p>
+    <p> Trimble Receiver Type Pro XRS model 33302-51
+    </p>
+    </div>
+    <div>
+    <h2>Software
+    </h2>
+    <p>Trimble Terrasync
+    </p>
+    <p> Trimble Pathfinder version: 2.90.2.55
+    </p>
+    <p> Active Sync 3.1.0.9558
+    </p>
+    </div>
+    <div>
+    <h2>Checking Out the Unit
+    </h2>
+    <p>When Pathfinder application is open it prompts you to create or choose a Project. The Project for LTER users is already created, LTER Main Site, please select this project.  This means that everything you create, load, transfer will end up in that project.
+    </p>
+    <p> The directory is \\Lternt2\Projects\LTER\GPS\Pfdata\lter main
+    site\2002-.  This is where all the downloaded files from handheld unit
+    are stored. Create a different folder for every year of data
+    collection.</p>
+    <ul>
+    <li>
+    <p>Base- all the post processed files are stored here.
+    </p>
+    </li>
+    <li>
+    <p>Backup- all the back up files are stored here automatically when the original data is transferred.
+    </p>
+    </li>
+    <li>
+    <p>Export- is the default folder for all export files.
+    </p>
+    </li>
+    </ul>
+    
+    <p>Set up</p>
+    <ol>
+    <li>
+    <p>Make a data dictionary (choose the coordinate system and units).
+    Do this by opening GPS Pathfinder application on the PC.
+    <em>Utilities/ Data dictionary Editor
+    </em>
+    </p>
+    </li>
+    <li>
+    <p>Open ActiveSync software. This is necessary to establish a link between PC and the GPS unit.
+    </p>
+    </li>
+    <li>
+    <p>Transfer that dictionary into the data logger.
+    <em>Utilities/ data transfer/send/
+    </em> choose from the drop down menu  (make sure ActiveSync is open).
+    </p>
+    </li>
+    <li>
+    <p>Make sure that the Batteries for the receiver are charged i.e. the green indicator light should be flashing on the charger. Take an extra set if you plan to be out more than approx four hours.
+    </p>
+    </li>
+    <li>
+    <p>Connect the batteries (2). Do this by hooking them to cable coming from the data receiver that is split in two. Place batteries in pockets in the backpack next to the receiver.
+    </p>
+    </li>
+    <li>
+    <p>Connect the data logger to the receiver, using the cable a ninepin connector on each side, one reads to computer the other to receiver.
+    </p>
+    </li>
+    <li>
+    <p>In lab or in field, connect antenna to receiver
+    <em>Main Menu/Set Up/Connect.
+    </em> This step needs to be completed in order to verify the battery power of both data logger and receiver.
+    </p>
+    </li>
+    <li>
+    <p>Make sure that the there is enough battery power in the data logger:</p>
+    <ol>
+    <li>
+    <p>Turn on the data logger by pressing the black button on the top right of the key pad  ( do not hold it down for long).
+    </p>
+    </li>
+    <li>
+    <p>Open the TerraSync application (double click on the icon, it can be slow opening)
+    </p>
+    </li>
+    <li>
+    <p>Touch the battery that appears on the top of the screen. The right hand side of the battery indicates the logger and the left the attached batteries.
+    </p>
+    </li>
+    </ol>
+    
+    </li>
+    <li>
+    <p>Sign the unit out.
+    </p>
+    </li>
+    </ol>
+    
+    </div>
+    <div>
+    <h2>Collecting a Point
+    </h2>
+    
+    <ol>
+    <li>
+    <p>Open TerraSync by double clicking on the icon.  Make sure that all your settings are appropriate( consult the settings sheet), by opening.
+    <em>Main menu
+    </em> (is in the upper left hand corner of the application)
+    <em>/setup/Coordinate system
+    </em> and /or
+    <em>gps  setting, real time settings, logging settings
+    </em>
+    </p>
+    </li>
+    <li>
+    <p>If not connected, connect antennas to receiver by pressing
+    <em>connect
+    </em> in the top right hand corner of the
+    <em>setup
+    </em> menu (step 6 of checking out the unit).
+    </p>
+    </li>
+    <li>
+    <p>From
+    <em>Main menu
+    </em>choose
+    <em>data;
+    </em> a screen appears that prompts you to create a new data file.</p>
+    <ol>
+    <li>
+    <p>Assign the file a name (default name is the month-day-hour that you began the file). The naming convention for LTER  use is: TttRr_yyyymmdd.  Where the caps are indicative of literal (the actual letters) and the non caps are specific to each collection. Ex T03R5_20030226. TttRr can be replaced with name of feature, if these are being collected independent of plots.
+    </p>
+    </li>
+    <l
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: f
+protocols_038: 
+  created_on: 
+  name: KBS028-prot01
+  dataset_id: "31"
+  body: 
+  abstract: "<kbsml_text><p>Sampling Frequency: Monthly 1989 to 1994, yearly 1995 to present </p> <p>Duplicate subsamples from composite soil samples taken in each plot are used to measure soil pH .  Weighed soil samples (15 g fresh weight) are made into a soil suspension by the addition of deionized water in a soil:water ratio of 1:2 .  The glass electrode pH meter is standardized with standard buffer solutions of pH 7 and pH 4  .</p></kbsml_text>"
+  in_use_to: 
+  title: Soil pH
+  updated_on: 
+  change_summary: ""
+  id: "39"
+  description: |-
+    <kbsml_text>
+    <div>
+    <h2>Overview</h2>
+    <p>Soil pH is a measure of the hydrogen ion activity in soil solution. This
+    measure is generally considered an index of the acid or base intensity of a soil. The pH
+    reading is a product of complex electrode behavior with the soil suspension and
+    differences in soil:solution ratio, electrolyte concentration of the soil suspension, and
+    spatial placement of the electrode can affect this reading (Mclean 1982). Soil acidity has
+    a direct effect on the plant and is a major factor affecting nutrient availability to
+    plants.</p>
+    
+    </div><div><h2>References</h2>
+    
+    
+    <p>Mclean, E.O. 1982. Soil pH and line requirements. In <em>Methods
+      of Soil Analysis,  Part 2. Chemical and Microbiological Properties.</em>
+      Ag. Monograph No. 9, 2nd edition.</p>
+    
+    
+    
+    </div><div><h2>General Procedure</h2>
+    
+    
+    <p>Field moist soil is weighed to 15g (14.98 to 15.02 g) into 2 replicate
+    extraction cups. Cups are capped after weighing to avoid moisture loss. Using a repipet or
+    graduated cylinder 30 ml deionized water is added to each cup, capped and shaken for a
+    few seconds. The cap is removed to allow the solution to equilibrate with the atmosphere
+    for at least 30 minutes. The pH meter is standardized at pH 7 and 4.</p>
+    
+    <p>While gently swirling the slurry the electrode is placed into the
+    slurry. pH is measured to the nearest 0.01. Between samples the electrode is rinsed with
+    deionized water.</p>
+    
+    
+    </div><div><h2>Materials</h2>
+    
+    <ol>
+      <li><p>pH meter</p></li>
+      <li><p>Extraction cups and lids</p></li>
+      <li><p>Deionized water</p></li>
+    </ol>
+    
+    
+    </div><div><h2>Procedure</h2>
+    
+    <ol>
+      <li><p>Weigh 15 g field moist soil into 2 extraction cups.</p></li>
+      <li><p>Place lids on cups.</p></li>
+      <li><p>Add 30 ml of deionized water.</p></li>
+      <li><p>Gently swirl cups to form soil slurry.</p></li>
+      <li><p>Remove caps at least 30 minutes before measuring pH.</p></li>
+      <li><p>Standardize pH meter using pH 7 and 4.</p></li>
+      <li><p>Gently swirl the soil slurry while taking measurement.</p></li>
+      <li><p>Record pH to the nearest 0.01.</p></li>
+      <li><p>Recheck standard buffer concentrations every 10 to 12 samples.
+        Recalibrate meter as needed.</p></li>
+    </ol>
+    
+    
+    </div><div><h2>Calibration and Use of the pH Meter</h2>
+    
+    <ol>
+    <li><p>Put pH buffer solutions in 50 mL beakers. Have four 100 ml beakers on
+      hand for rinsing the electrode and a squirt bottle filled with nanopure water.</p>
+    </li><li><p>Remove the electrode from the storage buffer and remove the small cap
+      from the fill hole (on the side of the electrode near the top). Rinse the tip of the
+      electrode liberally with deionized water now and each time it is removed from a solution.</p>
+    </li><li><p>Press &quot;MODE&quot; to select pH and press &quot;CAL&quot; to
+      start the calibration sequence. The prompt display will alternate between &quot;&lt; 1PT
+      CAL&quot; and &quot;2PT CAL &gt;&quot;.</p>
+    </li><li><p>Press the black button to the right of the display for 2-point
+      calibration.</p>
+    </li><li><p>The prompt will read &quot;CAL 1 &gt;&quot;. If the displayed buffer
+      value reads &quot;7.00&quot;, press the right button indicated by the flashing
+      &quot;&gt;&quot;. If not, enter &quot;7.00&quot; on the keypad, then press the indicated
+      button. The readout will show the value of the first buffer and the prompt will read
+      &quot;CAL 1 = &quot;.</p>
+    </li><li><p>The prompt display will then read &quot;CAL 2 &gt;&quot;. Proceed as
+      above (Step 4), entering &quot;4.00&quot;. The readout will show the value of the second
+      buffer and the prompt will read &quot;CAL 2 =&quot;.</p>
+    </li><li><p>The prompt will then flash between &quot;MEASURE&quot; and &quot;CAL
+      1&quot;. Rinse the electrode and place the electrode in the pH 7 buffer, and press the
+      orange &quot;=&quot; button to start the measurement. Do not place electrode against the
+      bottom of the cup; this will affect the reading.</p>
+    </li><li><p>The prompt will read &quot;CAL 1&quot;. When the reading stabilizes,
+      again press &quot;=&quot;.</p>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_027: 
+  created_on: 
+  name: KBS015-prot01
+  dataset_id: "18"
+  body: 
+  abstract: "<kbsml_text><p>Sampling Frequency: Monthly </p> <p>Soil moisture analysis is completed monthly as part of the nitrogen mineralization potential measurements .  A 40 g fresh weight subsample taken from the composite soil sample of each plot is weighed and placed into a paper bag and then oven dried at 60 degrees  C for 48h .  After drying the samples are reweighed  .</p> <p>Moisture is expressed on a % dry weight basis by the formula: </p>   <p> %soil moisture (dw) = 100 * ((Fresh weight - dry weight)/dry weight) </p><p>  and on a fresh weight basis by the formula: </p><p>  %soil moisture (fw) = 100 * ((1- dry weight)/fresh weight)</p></kbsml_text>"
+  in_use_to: 
+  title: Gravimetric Soil Moisture
+  updated_on: 
+  change_summary: ""
+  id: "24"
+  description: |-
+    <kbsml_text>
+    <div>
+    <h2>Overview</h2>
+    <p>Soil moisture content affects microbial activity, nutrient
+    movement, and plant growth. Soil moisture content is needed to
+    calculate other soil biological parameters (e.g. N mineralization) on
+    a common (dry weight of soil) basis. The gravimetric method calculates
+    soil moisture by the difference between the fresh weight and dry
+    weight of a given soil sample.</p>
+    
+    
+    </div><div><h2>General Procedure</h2>
+    
+    
+    <p>Soil moisture samples are taken from the sieved soil samples at the
+    same time nitrogen mineralization samples are being weighed.  This
+    reduces the amount of time spent on handling the soil samples and
+    provides moisture availability for mineralization calculations.</p>
+    
+    
+    </div><div><h2>Materials</h2>
+    
+    <ol>
+      <li><p>Labels</p></li>
+      <li><p>small paper bags</p></li>
+      <li><p>Grocery Bag</p></li>
+      <li><p>Plastic spoons</p></li>
+      <li><p>Balance</p></li>
+    </ol>
+    
+    </div><div><h2>Procedure</h2>
+    
+      <p>1. Prepare labels and label small paper bags (1#, 2# or 3#) with
+      appropriate information about the sample (e.g. project, date, plot,
+      variate).</p>
+      <p>2. Tare paper bag on scale (zero the
+      balance). </p>
+      <p>3. Weigh approximately 40 g of sieved soil in tared paper
+      bag. Record exact weight of soil in bag onto soil moisture
+      spreadsheet.  Place weighed bags into a grocery bag labeled with
+      sampling date.</p>
+      <p>4. Place grocery bag into oven. Oven dry soil to a constant
+      weight. Approximately 24 hours @ 105 degrees C or 48 hours @ 60
+      degrees C if C/N analysis is required.</p>
+      <p>5. Weigh 10 empty paper bags and place them
+      in the oven with soil.</p>
+      <p>6. When drying is complete, remove bags
+      from oven and allow to cool for 15 minutes. </p>
+      <p>7. Tare scale to zero. Place each individual bag containing soil
+      on scale and record weight in lab book. Weigh empty paper bags and
+      record as bag tare weight.</p>
+      <p>8. Dispose of soil unless needed for C/N
+      analysis</p>
+      <p>9. Enter results into spreadsheet on
+      computer.</p>
+    
+    </div><div><h2>Calculations</h2>
+    
+      <p>% soil moisture = ((wet soil
+      wt) - (dry soil wt - bag wt.) / (dry soil wt. - bag wt.)) * 100</p>
+    
+    </div><div><h2>Approximate time required</h2>
+    
+      <p>1. Label preparation and bag labeling will
+      take 0.75 person hours.</p>
+      <p>2. Soil weighing will take 1 person hours</p>
+      <p>3. Oven drying will take 24 to 48 hours, 0
+      person hours.</p>
+      <p>4. Dry Weight recording will take .75
+      person hours.</p>
+      </div>
+    </kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_016: 
+  created_on: 
+  name: KBS002-prot02
+  dataset_id: "5"
+  body: 
+  abstract: |-
+    <kbsml_text>
+    <p/>
+    </kbsml_text>
+  in_use_to: 
+  title: LTER Weather Station Sensors
+  updated_on: 
+  change_summary: ""
+  id: "8"
+  description: |-
+    <kbsml_text>
+    <p>Campbell Scientifc sensors are connected to a CR10x datalogger, which takes readings every 10 seconds and stores hourly integrated values.  Temperature is measured by a model 107 temperature probe, housed in a vented shield.  Wind speed is measured by a model 014A, wind direction by model 024A.  The HMP35C RH meter was replaced in October 2001 with HMP45C.  The quantum sensor is model LI190S.  The pyranometer is LI200S.  See field logs for calibration dates, etc.
+    </p>
+    </kbsml_text>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t
+protocols_005: 
+  created_on: 
+  name: KBS000-prot02
+  dataset_id: "3"
+  body: 
+  abstract: <kbsml_text><p>A plan for managing inorganic N data.</p></kbsml_text>
+  in_use_to: 
+  title: KBS021 Data Management Plan
+  updated_on: 
+  change_summary: ""
+  id: "2"
+  description: |-
+    <kbsml_text>
+    <p>KBS021 Data Management Plan
+    </p>
+    <p>Table of Transformations
+    </p>
+    <p>7-5-2001
+    </p>
+    <p>Tim Bergsma
+    </p>
+    <table>
+    <tr>
+    <td>
+    <p>
+    <em>Step
+    </em>
+    </p>
+    </td>
+    <td>
+    <p>
+    <em>Initial Form
+    </em>
+    </p>
+    </td>
+    <td>
+    <p>
+    <em>Initial Location
+    </em>
+    </p>
+    </td>
+    <td>
+    <p>
+    <em>Transformation
+    </em>
+    </p>
+    </td>
+    <td>
+    <p>
+    <em>Agent
+    </em>
+    </p>
+    </td>
+    <td>
+    <p>
+    <em>Final Form
+    </em>
+    </p>
+    </td>
+    <td>
+    <p>
+    <em>Final Location
+    </em>
+    </p>
+    </td>
+    <td>
+    <p>
+    <em>Preserve Final Form?
+    </em>
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <p>1
+    </p>
+    </td>
+    <td>
+    <p>Alpkem output, digital file. ASCII?
+    </p>
+    </td>
+    <td>
+    <p>GPRPC12
+    </p>
+    </td>
+    <td>
+    <p>Load into MS Excel spreadsheet.
+    </p>
+    </td>
+    <td>
+    <p>Alpkem operator
+    </p>
+    </td>
+    <td>
+    <p>*.xls, usually labeled with sample date, e.g. 20001231win.xls
+    </p>
+    </td>
+    <td>
+    <p>\\Lternt2\Projects\LTER\LTER Soil\inorganic_N\[year]
+    </p>
+    </td>
+    <td>
+    <p>Yes
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <p>2
+    </p>
+    </td>
+    <td>
+    <p>*.xls, raw Alpkem output.
+    </p>
+    </td>
+    <td>
+    <p>\\Lternt2\Projects\LTER\LTER Soil\inorganic_N\[year]
+    </p>
+    </td>
+    <td>
+    <p>Mark up, as necessary (e.g. calculate result from dilutions, etc.)
+    </p>
+    </td>
+    <td>
+    <p>Alpkem operator
+    </p>
+    </td>
+    <td>
+    <p>*.xls, secondary spreadsheet in the same workbook
+    </p>
+    </td>
+    <td>
+    <p>\\Lternt2\Projects\LTER\LTER Soil\inorganic_N\[year]
+    </p>
+    </td>
+    <td>
+    <p>Yes
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <p>3
+    </p>
+    </td>
+    <td>
+    <p>*.xls, secondary spreadsheet if it exists, or raw Alpkem output.
+    </p>
+    </td>
+    <td>
+    <p>\\Lternt2\Projects\LTER\LTER Soil\inorganic_N\[year]
+    </p>
+    </td>
+    <td>
+    <p>Generate interface spreadsheet, linked to source data as much as  possible, in the format expected by the database. See notes for  7-5-2001 below
+    </p>
+    </td>
+    <td>
+    <p>Data manager
+    </p>
+    </td>
+    <td>
+    <p>*.xls, 'interface' spreadsheet
+    </p>
+    </td>
+    <td>
+    <p>\\Lternt2\Projects\LTER\LTER Soil\inorganic_N\[year]
+    </p>
+    </td>
+    <td>
+    <p>Yes
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <p>4
+    </p>
+    </td>
+    <td>
+    <p>*.xls, 'interface' spreadsheet
+    </p>
+    </td>
+    <td>
+    <p>\\Lternt2\Projects\LTER\LTER Soil\inorganic_N\[year]
+    </p>
+    </td>
+    <td>
+    <p>port interface to database by some appropriate means (e.g. cut and  paste). Import event is logged to table: ImportLog.
+    </p>
+    </td>
+    <td>
+    <p>Data manager
+    </p>
+    </td>
+    <td>
+    <p>Table:Data
+    </p>
+    </td>
+    <td>
+    <p>
+    <a href="file://Lternt2/Database/LTER/SoilNv2.mdb">\\Lternt2\Database\LTER\SoilNv2.mdb
+    </a>
+    </p>
+    </td>
+    <td>
+    <p>Yes
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <p>5
+    </p>
+    </td>
+    <td>
+    <p>Table:Data
+    </p>
+    </td>
+    <td>
+    <p>
+    <a href="file://Lternt2/Database/LTER/SoilNv2.mdb">\\Lternt2\Database\LTER\SoilNv2.mdb
+    </a>
+    </p>
+    </td>
+    <td>
+    <p>screen for suspicious data. See note.
+    </p>
+    </td>
+    <td>
+    <p>Data manager
+    </p>
+    </td>
+    <td>
+    <p>Queries: NitrateCV&gt;15 and AmmoniumCV&gt;25.
+    </p>
+    </td>
+    <td>
+    <p>
+    <a href="file://Lternt2/Database/LTER/SoilNv2.mdb">\\Lternt2\Database\LTER\SoilNv2.mdb
+    </a>
+    </p>
+    </td>
+    <td>
+    <p>Yes
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <p>6
+    </p>
+    </td>
+    <td>
+    <p>Table:Data
+    </p>
+    </td>
+    <td>
+    <p>
+    <a href="file://Lternt2/Database/LTER/SoilNv2.mdb">\\Lternt2\Database\LTER\SoilNv2.mdb
+    </a>
+    </p>
+    </td>
+    <td>
+    <p>integrate with soil moisture
+    </p>
+    </td>
+    <td>
+    <p>database alogrithm
+    </p>
+    </td>
+    <td>
+    <p>Queries: </p>
+    <p>Calc_1 thru Calc_7
+    </p>
+    <p>See Note on 7-9-2001
+    </p>
+    </td>
+    <td>
+    <p>
+    <a href="file://Lternt2/Database/LTER/SoilNv2.mdb">\\Lternt2\Database\LTER\SoilNv2.mdb
+    </a>
+    </p>
+    </td>
+    <td>
+    <p>No
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <p>7
+    </p>
+    </td>
+    <td>
+    <p>
+    </p>
+    </td>
+    <td>
+    <p>
+    </p>
+    </td>
+    <td>
+    <p>serve to web
+    </p>
+    </td>
+    <td>
+    <p>web query
+    </p>
+    </td>
+    <td>
+    <p>not yet established
+    </p>
+    </td>
+    <td>
+    <p>
+    </p>
+    </td>
+    <td>
+    <p>No
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <p>8
+    </p>
+    </td>
+    <td>
+    <p>
+    </p>
+    </td>
+    <td>
+    <p>
+    </p>
+    </td>
+    <td>
+    <p>
+    </p>
+    </td>
+    <td>
+    <p>
+    </p>
+    </td>
+    <td>
+    <p>
+    </p>
+    </td>
+    <td>
+    <p>
+    </p>
+    </td>
+    <td>
+    <p>
+    </p>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <p>9
+    </p>
+    </td>
+    <td>
+    <p>
+    </p>
+    </td>
+    <td>
+    <p>
+    </p>
+    </td>
+    <td>
+    <p>
+    </p>
+    </td>
+    <td>
+    <p>
+  in_use_from: 
+  version: "1"
+  person_id: "21"
+  active: t

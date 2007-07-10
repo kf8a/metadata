@@ -1,5 +1,7 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-one:
-  id: 1
-two:
-  id: 2
+--- 
+role_types_001: 
+  name: dataset
+  id: "1"
+role_types_002: 
+  name: lter
+  id: "2"

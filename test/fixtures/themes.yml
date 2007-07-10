@@ -1,5 +1,37 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-one:
-  id: 1
-two:
-  id: 2
+--- 
+themes_005: 
+  title: Other
+  priority: "9"
+  id: "5"
+themes_006: 
+  title: Plants
+  priority: "7"
+  id: "6"
+themes_007: 
+  title: Research Context
+  priority: "2"
+  id: "7"
+themes_008: 
+  title: Soil Properties
+  priority: "4"
+  id: "8"
+themes_009: 
+  title: Weather
+  priority: "1"
+  id: "9"
+themes_001: 
+  title: Agronomics
+  priority: "5"
+  id: "1"
+themes_002: 
+  title: Animals
+  priority: "8"
+  id: "2"
+themes_003: 
+  title: Ecosystem Processes
+  priority: "3"
+  id: "3"
+themes_004: 
+  title: Microbes
+  priority: "6"
+  id: "4"

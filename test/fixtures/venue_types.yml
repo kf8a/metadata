@@ -1,5 +1,10 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-one:
-  id: 1
-two:
-  id: 2
+--- 
+venue_types_003: 
+  name: other
+  id: "3"
+venue_types_001: 
+  name: local
+  id: "1"
+venue_types_002: 
+  name: national
+  id: "2"

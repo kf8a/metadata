@@ -1,22 +1,86 @@
 --- 
-roles_004: 
-  name: original investigator
-  id: "5"
-roles_005: 
+roles_015: 
   name: data manager
+  seniority: 
+  role_type_id: "1"
   id: "6"
-roles_006: 
+roles_004: 
+  name: Other Investigators
+  seniority: "4"
+  role_type_id: "2"
+  id: "13"
+roles_016: 
   name: lead investigator
+  seniority: 
+  role_type_id: "1"
   id: "7"
-roles_007: 
+roles_005: 
+  name: Current Graduate Students
+  seniority: "5"
+  role_type_id: "2"
+  id: "14"
+roles_017: 
   name: principal contact
+  seniority: 
+  role_type_id: "1"
   id: "8"
-roles_001: 
+roles_006: 
+  name: Current Undergraduate Interns
+  seniority: "6"
+  role_type_id: "2"
+  id: "15"
+roles_007: 
+  name: Emeritus Investigators
+  seniority: "7"
+  role_type_id: "2"
+  id: "16"
+roles_008: 
+  name: Emeritus Graduate Students
+  seniority: "8"
+  role_type_id: "2"
+  id: "17"
+roles_009: 
+  name: Emeritus Undergraduate Interns
+  seniority: "9"
+  role_type_id: "2"
+  id: "18"
+roles_010: 
+  name: Support Staff
+  seniority: "2"
+  role_type_id: "2"
+  id: "11"
+roles_011: 
   name: technician
+  seniority: 
+  role_type_id: "1"
   id: "2"
-roles_002: 
+roles_012: 
   name: administrator
+  seniority: 
+  role_type_id: "1"
   id: "1"
-roles_003: 
+roles_001: 
+  name: Director (Lead PI)
+  seniority: "0"
+  role_type_id: "2"
+  id: "9"
+roles_013: 
   name: investigator
+  seniority: 
+  role_type_id: "1"
   id: "4"
+roles_002: 
+  name: Executive Committee
+  seniority: "1"
+  role_type_id: "2"
+  id: "10"
+roles_014: 
+  name: original investigator
+  seniority: 
+  role_type_id: "1"
+  id: "5"
+roles_003: 
+  name: Co-Investigators
+  seniority: "3"
+  role_type_id: "2"
+  id: "12"

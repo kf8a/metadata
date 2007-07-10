@@ -1,21 +1,24 @@
 <ul>
-	<li><%= @person.title %> <%= @person.full_name %></li>
-<li><%= @person.organization%> <%=@person.sub_organization %></li>
-<li><%= @person.street_address %></li>
-<li><%= @person.city %> <%= @person.locale %>
+	<li class='person_name'><%= @person.given_name %> <%= @person.middle_name %>  <%= @person.sur_name %></li>
+	<% if @person.email -%>
+	<li><label>Email:</label> <%= @person.email.gsub(/@/,' at ') %></li>
+	<% end -%>
+	<% if @person.phone %>
+	<li><label>Phone:</label> <%= @person.phone %></li>
+	<% end %>
+	<% if @person.url %>
+	<li><label>Web page:</label> <%= link_to "#{@person.url}", @person.url %></li>
+	<% end %>
+	<li><label>Dept.:</label> <%= @person.sub_organization %></li>
+	<li><label>Institution:</label> <%= @person.organization%></li>
+	<li><label>Title:</label> <%= @person.title %></li>
+	<li><label>Project Role:</label> <%= @person.lter_roles[0].name %></li>
+	<li><label>Address:</label> <%= @person.street_address %>&nbsp;<%= @person.city %>&nbsp;<%= @person.locale %>
 	<% if @person.postal_code %>, <%= @person.postal_code %><% end %>
+	</span>
 </li>
-<% if @person.phone %>
-<li>Phone: <%= @person.phone %></li>
-<% end %>
 <% if @person.fax %>
-<li>Fax: <%= @person.fax %></li>
-<% end %>
-<% if @person.email -%>
-<li>Email: <%= @person.email.gsub(/@/,' at ') %></li>
-<% end -%>
-<% if @person.url %>
-<li>Web page: <%= link_to "#{@person.url}", @person.url %></li>
+<li><label>Fax:</label> <%= @person.fax %></li>
 <% end %>
 
 </ul>

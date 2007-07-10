@@ -2,13 +2,21 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 30) do
+ActiveRecord::Schema.define(:version => 38) do
 
   create_table "affiliations", :force => true do |t|
     t.column "person_id",  :integer
     t.column "role_id",    :integer
     t.column "dataset_id", :integer
     t.column "seniority",  :integer
+  end
+
+  create_table "areas", :force => true do |t|
+    t.column "name",        :string
+    t.column "treatment",   :string
+    t.column "replicate",   :integer
+    t.column "study_id",    :integer
+    t.column "description", :string
   end
 
   create_table "datasets", :force => true do |t|
@@ -31,17 +39,31 @@ ActiveRecord::Schema.define(:version => 30) do
   end
 
   create_table "datatables", :force => true do |t|
-    t.column "name",           :string
-    t.column "title",          :string
-    t.column "comments",       :text
-    t.column "dataset_id",     :integer
-    t.column "data_url",       :string
-    t.column "connection_url", :string
-    t.column "driver",         :string
-    t.column "is_restricted",  :boolean
-    t.column "description",    :text
-    t.column "object",         :string
-    t.column "metadata_url",   :string
+    t.column "name",                   :string
+    t.column "title",                  :string
+    t.column "comments",               :text
+    t.column "dataset_id",             :integer
+    t.column "data_url",               :string
+    t.column "connection_url",         :string
+    t.column "driver",                 :string
+    t.column "is_restricted",          :boolean
+    t.column "description",            :text
+    t.column "object",                 :string
+    t.column "metadata_url",           :string
+    t.column "is_sql",                 :boolean
+    t.column "update_frequency_years", :integer
+    t.column "last_updated_on",        :date
+  end
+
+  create_table "datatables_variates", :force => true do |t|
+  end
+
+  create_table "dbhs", :force => true do |t|
+    t.column "date",    :date
+    t.column "tree_id", :integer
+    t.column "tag_id",  :integer
+    t.column "dbh_cm",  :float
+    t.column "comment", :string
   end
 
   create_table "eml_docs", :force => true do |t|
@@ -158,9 +180,28 @@ ActiveRecord::Schema.define(:version => 30) do
     t.column "title", :string
   end
 
+  create_table "species", :force => true do |t|
+    t.column "species",               :string
+    t.column "genus",                 :string
+    t.column "family",                :string
+    t.column "code",                  :string
+    t.column "common_name",           :string
+    t.column "alternate_common_name", :string
+    t.column "attribution",           :string
+    t.column "woody",                 :boolean
+  end
+
   create_table "themes", :force => true do |t|
     t.column "title",    :string
     t.column "priority", :integer
+  end
+
+  create_table "trees", :force => true do |t|
+    t.column "species_id",   :integer
+    t.column "number",       :integer
+    t.column "alive",        :boolean
+    t.column "check_status", :boolean
+    t.column "area_id",      :integer
   end
 
   create_table "units", :force => true do |t|

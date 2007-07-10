@@ -17,6 +17,11 @@ class DatatablesController < ApplicationController
   def show
     @datatable = Datatable.find(params[:id])
     @dataset = @datatable.dataset
+    
+    @values
+    if @datatable.is_sql
+      @values  = ActiveRecord::Base.connection.execute(@datatable.object)
+    end
 
     respond_to do |format|
       format.html # show.rhtml
