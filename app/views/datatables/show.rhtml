@@ -27,25 +27,6 @@
 	<% end -%>
 </table>
 
-<h3>Data</h3>
-<table>
-	<tr>
-		<% @values.fields.each do |field| %>
-		<th>
-			<%= field.gsub(/_/,' ') %>
-		</th>
-		<% end %>
-	</tr>
-	<% @values.to_a.each do  |row| %>
-	<tr  class="<%= cycle('even','odd') -%>">
-		<% row.each do |v| %>
-		<td align='right'>
-			<%= v %>
-		</td>
-		<% end %>
-	</tr>
-	<% end %>
-</table>
 
 <%= link_to 'xml', formatted_datatable_path(@datatable, :xml) %>&nbsp;|&nbsp;
 <%= link_to 'csv',  formatted_datatable_path(@datatable,  :xml) %>&nbsp;|&nbsp;

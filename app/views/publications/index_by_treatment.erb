@@ -6,7 +6,7 @@
 </p>
 <ul>
 <% @treatments.each do |treatment| -%>
-	<li><a name='<%= treatment.name %>'><%= treatment.name %></a>
+	<li><a name='<%= treatment.name %>'><h2><%= treatment.name %></h2></a>
 		<ul>
 	<% treatment.publications.each do |publication| -%>
 	<li class='citation'>
