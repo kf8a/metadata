@@ -1,6 +1,6 @@
 class PublicationsController < ApplicationController
   
-  
+  before_filter :login_required, :except => [:index, :show, :index_by_treatment]
   # GET /publications
   # GET /publications.xml
   def index
@@ -20,25 +20,33 @@ class PublicationsController < ApplicationController
       order = 'citation'
       @decoration = 'by Author'
     end
-    
+  
+    if params[:treatment]
+      @alphabetical = true
+      treatment = Treatment.find(params[:treatment])  if params[:treatment]
+      @publications = treatment.publications
+      @decoration = "from #{treatment.name}: #{treatment.description}"
+    else
     @publications = Publication.find(:all, :order => order, 
       :conditions => [conditions, publication_types])
-
+    end
+    
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @publications.to_xml }
     end
   end
   
-  def index_by_treatment
+  def index_by_treatment    
     @studies = Study.find(:all)
-    @treatments  = Treatment.find(:all)
+
+    #@treatments  = Treatment.find(:all, :order => 'priority')
     respond_to do |format|
       format.html #{render  :template => '/publications/index_by_treatment.erb'} 
-      format.xml {render  :xml => @treatments.to_xml}
+      format.xml {render  :xml => @studies.to_xml}
     end
   end
-    
+  
   # GET /publications/1
   # GET /publications/1.xml
   def show

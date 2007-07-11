@@ -3,18 +3,16 @@
 
 Struct.new('Crumb', :url, :name)
 class ApplicationController < ActionController::Base
-  include ExceptionNotifiable
+#  include ExceptionNotifiable
   include Authenticated
   
-  consider_local "207.73.114.153"
+  #consider_local "207.73.114.153"
   
   before_filter :login_required, :except => [:index, :show]
   before_filter :set_title, :set_crumbs
   
   # Pick a unique cookie name to distinguish our session data from others'
   session :session_key => '_metadata_session_id'
-  
-  Mime::Type.register "text/xml", :eml  
   
   protected
    def local_request? #:doc:
@@ -28,6 +26,6 @@ class ApplicationController < ActionController::Base
   end
   
   def set_crumbs
-      @crumbs = []
+    @crumbs = []
   end
 end

@@ -17,6 +17,10 @@ class Datatable < ActiveRecord::Base
     return eml
   end
   
+  def to_csv
+    return 'not implemented'
+  end
+  
 private
   def eml_physical
     p = Element.new('physical')

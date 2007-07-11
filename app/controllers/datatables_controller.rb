@@ -26,6 +26,7 @@ class DatatablesController < ApplicationController
     respond_to do |format|
       format.html # show.rhtml
       format.xml  { render :xml => @datatable.to_xml }
+      format.csv  { render :csv => @datatable.to_csv }
     end
   end
 

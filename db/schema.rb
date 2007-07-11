@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 39) do
+ActiveRecord::Schema.define(:version => 40) do
 
   create_table "affiliations", :force => true do |t|
     t.column "person_id",  :integer
@@ -48,14 +48,6 @@ ActiveRecord::Schema.define(:version => 39) do
   end
 
   create_table "datatables_variates", :force => true do |t|
-  end
-
-  create_table "dbhs", :force => true do |t|
-    t.column "date",    :date
-    t.column "tree_id", :integer
-    t.column "tag_id",  :integer
-    t.column "dbh_cm",  :float
-    t.column "comment", :string
   end
 
   create_table "eml_docs", :force => true do |t|
@@ -209,6 +201,7 @@ ActiveRecord::Schema.define(:version => 39) do
     t.column "name",        :string
     t.column "description", :text
     t.column "study_id",    :integer
+    t.column "priority",    :integer
   end
 
   create_table "units", :force => true do |t|

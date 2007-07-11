@@ -27,9 +27,30 @@
 	<% end -%>
 </table>
 
+<% if @values -%>
+<h3>Data</h3>
+<table>
+	<tr>
+		<% @values.fields.each do |field| %>
+		<th>
+			<%= field.gsub(/_/,' ') %>
+		</th>
+		<% end %>
+	</tr>
+	<% @values.to_a.each do  |row| %>
+	<tr  class="<%= cycle('even','odd') -%>">
+		<% row.each do |v| %>
+		<td align='right'>
+			<%= v %>
+		</td>
+		<% end %>
+	</tr>
+	<% end %>
+</table>
+<% end -%>
 
 <%= link_to 'xml', formatted_datatable_path(@datatable, :xml) %>&nbsp;|&nbsp;
-<%= link_to 'csv',  formatted_datatable_path(@datatable,  :xml) %>&nbsp;|&nbsp;
+<%= link_to 'csv',  formatted_datatable_path(@datatable,  :csv) %>&nbsp;|&nbsp;
 <%= link_to 'eml', formatted_dataset_path(@dataset, :eml) %>&nbsp;|&nbsp;
 <%= link_to 'Back', dataset_path(@dataset) %>&nbsp;|&nbsp;
 <%= link_to 'Edit', edit_datatable_path(@datatable) if logged_in? %>

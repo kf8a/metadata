@@ -1,24 +1,20 @@
 <h2>Publications by Treatment</h2>
-<p>
-<% @treatments.each  do |treatment| -%>
-<a href='#<%= treatment.name %>'><%= treatment.name %></a>
-<% end -%>
-</p>
+<p>Please click on an experiment or treatment name to list LTER articles that  have reported results from same.</p>
 <ul>
-<% @treatments.each do |treatment| -%>
-	<li><a name='<%= treatment.name %>'><h2><%= treatment.name %></h2></a>
-		<ul>
-	<% treatment.publications.each do |publication| -%>
-	<li class='citation'>
-			<%= textilize(publication.citation) %>
-			<% if  publication.abstract  -%>
-				<a href="<%= url_for publication_path(publication) %>">
-					abstract&nbsp;&hellip;</a>
-			<% end -%>
-			<%= link_to 'edit', edit_publication_path(publication), {:class=>'edit'} if logged_in? %>
-	</li>	
-	<% end -%>
-		</ul>
+	<% @studies.each do |study| -%>
+	<li class='top_level'>
+		<% if study.treatments.size > 1 %>
+			<%= study.name %>
+			<ul>
+				<% study.treatments.each  do |treatment| -%>
+				<li>
+					<%= link_to treatment.name, {:action => :index, :treatment => treatment} %> <%= treatment.description %>
+				</li>
+				<% end -%>
+			</ul>
+		<% else -%>
+			<%= link_to study.name,  {:action => :index, :treatment => study.treatments[0].id} %>
+		<% end -%>
 	</li>
 <% end -%>
-</ul>
+<ul>
