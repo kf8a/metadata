@@ -31,7 +31,12 @@ class PublicationsController < ApplicationController
   end
   
   def index_by_treatment
-    
+    @studies = Study.find(:all)
+    @treatments  = Treatment.find(:all)
+    respond_to do |format|
+      format.html #{render  :template => '/publications/index_by_treatment.erb'} 
+      format.xml {render  :xml => @treatments.to_xml}
+    end
   end
     
   # GET /publications/1

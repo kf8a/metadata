@@ -1,0 +1,24 @@
+<h2>Publications by Treatment</h2>
+<p>
+<% @treatments.each  do |treatment| -%>
+<a href='#<%= treatment.name %>'><%= treatment.name %></a>
+<% end -%>
+</p>
+<ul>
+<% @treatments.each do |treatment| -%>
+	<li><a name='<%= treatment.name %>'><%= treatment.name %></a>
+		<ul>
+	<% treatment.publications.each do |publication| -%>
+	<li class='citation'>
+			<%= textilize(publication.citation) %>
+			<% if  publication.abstract  -%>
+				<a href="<%= url_for publication_path(publication) %>">
+					abstract&nbsp;&hellip;</a>
+			<% end -%>
+			<%= link_to 'edit', edit_publication_path(publication), {:class=>'edit'} if logged_in? %>
+	</li>	
+	<% end -%>
+		</ul>
+	</li>
+<% end -%>
+</ul>

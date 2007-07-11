@@ -14,7 +14,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :variates
 
-  map.resources :publications
+  map.resources :publications, :collection => {:index_by_treatment => :get}
   
   map.resources :contacts
   
