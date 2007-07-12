@@ -1,5 +1,5 @@
-<h2>Publications by Treatment</h2>
-<p>Please click on an experiment or treatment name to list LTER articles that  have reported results from same.</p>
+<h2>Publications by Site</h2>
+<p>Please click on an experiment or treatment name to list LTER articles that  have reported results from that site.</p>
 <ul>
 	<% @studies.each do |study| -%>
 	<li class='top_level'>
@@ -8,7 +8,8 @@
 			<ul>
 				<% study.treatments.each  do |treatment| -%>
 				<li>
-					<%= link_to treatment.name, {:action => :index, :treatment => treatment} %> <%= treatment.description %>
+					<%= treatment.name %>
+					<%= link_to "#{treatment.name} #{treatment.description}", {:action => :index, :treatment => treatment} %>
 				</li>
 				<% end -%>
 			</ul>
