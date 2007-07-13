@@ -71,6 +71,7 @@ label {
 
 li ul li {
 	padding-left: 1.5em;
+	margin-bottom: 0.1em;
 }
 #content .edit {
 	font-size: 90%;

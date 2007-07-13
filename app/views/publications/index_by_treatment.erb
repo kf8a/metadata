@@ -8,7 +8,6 @@
 			<ul>
 				<% study.treatments.each  do |treatment| -%>
 				<li>
-					<%= treatment.name %>
 					<%= link_to "#{treatment.name} #{treatment.description}", {:action => :index, :treatment => treatment} %>
 				</li>
 				<% end -%>
