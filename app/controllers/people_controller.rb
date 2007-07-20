@@ -28,7 +28,7 @@ class PeopleController < ApplicationController
   # GET /people/1.xml
   def show
     @person = Person.find(params[:id])
-    @title = 'KBS LTER directory'
+    @title = 'KBS LTER Directory'
     respond_to do |format|
       format.html # show.rhtml
       format.xml  { render :xml => @person.to_xml }
