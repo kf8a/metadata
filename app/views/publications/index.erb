@@ -8,7 +8,7 @@
 		<% end  -%>
 	<% end  -%>
 	<div class='citation'>
-			<%= textilize(publication.citation) %>
+			<%= textilize(publication.citation) if publication.citation %>
 			<% if  publication.abstract  -%>
 				<a href="<%= url_for publication_path(publication) %>">
 					abstract&nbsp;&hellip;</a>

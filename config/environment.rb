@@ -10,6 +10,8 @@ RAILS_GEM_VERSION = '1.2.3' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
+
+
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here
   
@@ -57,5 +59,10 @@ end
 # Mime::Type.register "text/richtext", :rtf
 # Mime::Type.register "application/x-mobile", :mobile
 Mime::Type.register "text/xml", :eml
-Mime::Type.register "text/csv", :csv
+
+#Mime::Type.register "text/csv", :csv
 # Include your application configuration below
+
+require_gem 'acts_as_taggable'
+
+Struct.new('Crumb', :url, :name)

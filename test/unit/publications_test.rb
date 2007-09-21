@@ -7,4 +7,8 @@ class PublicationsTest < Test::Unit::TestCase
   def test_truth
     assert true
   end
+  
+  def test_empty_citation
+    p = Publication.new
+  end
 end
