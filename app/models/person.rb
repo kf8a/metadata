@@ -4,7 +4,7 @@ class Person < ActiveRecord::Base
   has_many :dataset_roles, :through => :affiliations, :conditions => ['role_type_id = ?', RoleType.find_by_name('dataset')], :source => :role
   has_many :datasets, :through => :affiliations,  :source => :dataset
   
-  acts_as_taggable
+  #acts_as_taggable
   
   def full_name
     name = given_name

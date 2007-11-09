@@ -1,7 +1,7 @@
 <ul>
 	<li class='person_name'><%= @person.given_name %> <%= @person.middle_name %>  <%= @person.sur_name %></li>
 	<% if @person.email -%>
-	<li><label>Email:</label> <%= @person.email.gsub(/@/,' at ') %></li>
+	<li><label>Email:</label> <%= contact_link(@person.email) %></li>
 	<% end -%>
 	<% if @person.phone -%>
 	<li><label>Phone:</label> <%= @person.phone %></li>

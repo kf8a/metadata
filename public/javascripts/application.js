@@ -1,2 +1,7 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+function geo_decode() {
+	var email  = $('email').innerHTML;
+	email = email.gsub(/ at /,'@');
+	$('email').replace("<a id='email' href='mailto:"+email+"'>"+email+"</a>");
+}
+
+window.onload = function() { geo_decode()}
