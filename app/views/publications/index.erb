@@ -18,6 +18,7 @@
 <% end %>
 <p><% if logged_in? -%>
 	<%= link_to 'logout' %>
+	<%= link_to 'new publication', new_publication_path %>
 	<% else -%>
 	<%= link_to 'login', new_sessions_path %>
 	<% end -%>

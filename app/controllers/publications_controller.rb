@@ -61,6 +61,7 @@ class PublicationsController < ApplicationController
   # GET /publications/new
   def new
     @publications = Publication.new
+    @treatments = Treatment.find(:all)
   end
 
   # GET /publications/1;edit

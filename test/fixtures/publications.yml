@@ -57,7 +57,7 @@ publications_454:
   publication_type_id: "6"
   id: "244"
   year: "1998"
-  authors: |-
+  author: |-
     Craig K. Harris and Lisa S.
     Bohannan
   source_id: "1"
@@ -69,7 +69,7 @@ publications_406:
   publication_type_id: "3"
   id: "499"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_027: 
   citation: "Bruns, M. A., M. A. Fries, J. M. Tiedje, and E. A. Paul. 1998. Functional gene hybridization patterns of terrestrial ammonia-oxidizing bacteria. Microbial Ecology 36: 293-302. "
@@ -79,7 +79,7 @@ publications_027:
   publication_type_id: "1"
   id: "18"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_264: 
   citation: "Grandy, A. S., G. P. Robertson, and K. D. Thelen. 2006. Do productivity and environmental tradeoffs justify periodically cultivating no-till cropping systems? Agronomy Journal 98: 1377-1383."
@@ -89,7 +89,7 @@ publications_264:
   publication_type_id: "1"
   id: "347"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_074: 
   citation: "Paul, E. A., D. Harris, H. P. Collins, U. Schulthess, and G. P. Robertson. 1999. Evolution of CO2 and soil carbon dynamics in biologically managed, row-crop agroecosystems. Applied Soil Ecology 11:53-65. "
@@ -99,7 +99,7 @@ publications_074:
   publication_type_id: "1"
   id: "134"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_455: 
   citation: 
@@ -131,7 +131,7 @@ publications_455:
   publication_type_id: "6"
   id: "245"
   year: "1998"
-  authors: |-
+  author: |-
     Y. Kavdir, D.P. Rasse, A.J.M.
     Smucker
   source_id: "1"
@@ -143,7 +143,7 @@ publications_407:
   publication_type_id: "3"
   id: "500"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_217: 
   citation: Bird, G. W., and J. W. Fisk. 2000. Standards, technology, institutions, and economics of organic farming in the USA. Pages 213-228. Proceedings of the International Seminar on Development of Agribusiness and its Impact on Agriculture Production in Southeast Asia. Tokyo University of Agriculture, Tokyo, Japan.
@@ -153,7 +153,7 @@ publications_217:
   publication_type_id: "3"
   id: "302"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_028: 
   citation: "Buckley, D. H., J. R. Graber, and T. M. Schmidt. 1998. Phylogenetic analysis of nonthermiphilic members of the Kingdom Crenarachaeota and their diversity and abundance in soils. Applied and Environmental Microbiology 64: 4333-4339."
@@ -163,7 +163,7 @@ publications_028:
   publication_type_id: "1"
   id: "19"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_265: 
   citation: Groffman, P. M., E. A. Holland, D. D. Myrold, G. P. Robertson, and X. Zou. 1999. Denitrification. Pages 272-290 in G. P. Robertson, C. S. Bledsoe, D. C. Coleman, and P. Sollins, eds. Standard Soil Methods for Long-Term Ecological Research. Oxford University Press, New York.
@@ -173,7 +173,7 @@ publications_265:
   publication_type_id: "3"
   id: "349"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_075: 
   citation: "Paul, E. A., H. P. Collins, and S. W. Leavitt. 2001. Dynamics of resistant soil carbon of Midwestern agricultural soils measured by naturally-occurring 14C abundance. Geoderma 104: 239-256. "
@@ -183,7 +183,7 @@ publications_075:
   publication_type_id: "1"
   id: "135"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_456: 
   citation: 
@@ -236,7 +236,7 @@ publications_456:
   publication_type_id: "6"
   id: "247"
   year: "1998"
-  authors: |-
+  author: |-
     Wm. Berry Lyons, David T. Long, Carl
     Bowser, Gwen McPherson, and William McDowell
   source_id: "1"
@@ -248,7 +248,7 @@ publications_408:
   publication_type_id: "3"
   id: "501"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_218: 
   citation: "Bird, G. W., R. R. Harwood, J. E. Sanchez, M. F. Berney, J. Smeenk, and J. J. Smith. 2004. Role of nematodes in nutrient cycling. Phytopathology 94: S129."
@@ -258,7 +258,7 @@ publications_218:
   publication_type_id: "3"
   id: "303"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_029: 
   citation: Buckley, D. H., and T. M. Schmidt. 2001. The structure of microbial communities in soil and the lasting impact of cultivation. Microbial Ecology 42:11-21.
@@ -268,7 +268,7 @@ publications_029:
   publication_type_id: "1"
   id: "22"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_266: 
   citation: "Gross, K., and S. A. Emery. 2006. Succession and restoration in Michigan old-field communities. Pages (in press) in V. Kramer and R. J. Hobbs, eds. Old-Fields: Dynamics and Restoration of Abandoned Farmland. Island Press."
@@ -278,7 +278,7 @@ publications_266:
   publication_type_id: "3"
   id: "350"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_076: 
   citation: "Paul, E. A., S. J. Morris, J. Six, K. Paustian, and E. G. Gregorich. 2003. Interpretation of soil carbon and nitrogen dynamics in agricultural and afforested soils. Soil Science Society of America Journal 67: 1620-1628. "
@@ -288,7 +288,7 @@ publications_076:
   publication_type_id: "1"
   id: "136"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_457: 
   citation: 
@@ -323,7 +323,7 @@ publications_457:
   publication_type_id: "6"
   id: "248"
   year: "1998"
-  authors: |-
+  author: |-
     D.R. Mutch, M.A. Cavigelli, L.P.
     Hart, A.M. Jarosz, D.A. Landis, F.D. Menalled, K.A. Renner, L.K.
     Probyn, S. Deming, L.E. dyer, G. Manley, H. Miller, N. Rector, and
@@ -337,7 +337,7 @@ publications_409:
   publication_type_id: "3"
   id: "502"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_219: 
   citation: Blackwood, C. 2001. Spatial organization in soil bacterial communities. Ph.D. Dissertation, Michigan State University, East Lansing, Michigan, USA.
@@ -347,7 +347,7 @@ publications_219:
   publication_type_id: "2"
   id: "304"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_267: 
   citation: "Gross, K. L. 2000. Ecological interactions in agricultural systems: Evaluating what we know and how to apply it. Pages 37-47 in P. K. Jha, S. B. Karmacharya, R. R. Baral, and P. Lacoul, eds. Environment and Agriculture: At the Crossroads of the New Millenium. Ecological Society of Nepal."
@@ -357,7 +357,7 @@ publications_267:
   publication_type_id: "3"
   id: "351"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_077: 
   citation: "Paustian, K., E. T. Elliot, H. P. Collins, C. V. Cole, and E. A. Paul. 1995. Use of a network of long-term experiments in North America for analysis of soil carbon dynamics and global change. Australian Journal of Experimental Agriculture 35: 929-939."
@@ -367,7 +367,7 @@ publications_077:
   publication_type_id: "1"
   id: "137"
   year: "1995"
-  authors: 
+  author: 
   source_id: 
 publications_458: 
   citation: 
@@ -418,7 +418,7 @@ publications_458:
   publication_type_id: "6"
   id: "254"
   year: "1998"
-  authors: |-
+  author: |-
     Daniel P. Rasse and&nbsp; Alvin
     J.M. Smucker
   source_id: "1"
@@ -430,7 +430,7 @@ publications_268:
   publication_type_id: "1"
   id: "352"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_078: 
   citation: "Paustian, K., W. J. Parton, and J. Persson. 1992. Modeling soil organic matter in organic-amended and nitrogen-fertilized long-term plots. Soil Science Society of America Journal 56: 476-488."
@@ -440,7 +440,7 @@ publications_078:
   publication_type_id: "1"
   id: "138"
   year: "1992"
-  authors: 
+  author: 
   source_id: 
 publications_269: 
   citation: Hamilton, S. K., A. L. Kurzman, C. Arango, L. Jin, and G. P. Robertson. 2007. Evidence for carbon sequestration by agricultural liming. Global Biogeochem. Cycles (in press).
@@ -450,7 +450,7 @@ publications_269:
   publication_type_id: "1"
   id: "354"
   year: "2007"
-  authors: 
+  author: 
   source_id: 
 publications_079: 
   citation: "Petersen, S. O., and M. J. Klug. 1994. Effects of sieving, storage and incubation temperature on the phospholipid fatty acid profile of a soil microbial community. Appl. and Environ. Microbiol. 60: 2421-2430."
@@ -460,7 +460,7 @@ publications_079:
   publication_type_id: "1"
   id: "139"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_459: 
   citation: 
@@ -497,7 +497,7 @@ publications_459:
   publication_type_id: "6"
   id: "255"
   year: "1998"
-  authors: |-
+  author: |-
     Daniel P. Rasse, Alvin J.M.
     Smucker, and Joe T. Ritchie
   source_id: "1"
@@ -509,7 +509,7 @@ publications_320:
   publication_type_id: "3"
   id: "406"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_130: 
   citation: "Whitmire, S. L., and S. K. Hamilton. 2005. Rapid removal of nitrate and sulfate by freshwater wetland sediments. Journal of Environmental Quality 34: 2062-2071. "
@@ -519,7 +519,7 @@ publications_130:
   publication_type_id: "1"
   id: "203"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_321: 
   citation: Norton, J. M. 2000. Nitrification. Pages C160-181 in M. E. Sumner, ed. Handbook of Soil Science. CRC Press, Boca Raton, Florida, USA.
@@ -529,7 +529,7 @@ publications_321:
   publication_type_id: "3"
   id: "407"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_131: 
   citation: "Willson, T. C., E. A. Paul, and R. R. Harwood. 2001. Biologically active soil organic matter fractions in sustainable cropping systems. Applied Soil Ecology 16: 63-76. "
@@ -539,7 +539,7 @@ publications_131:
   publication_type_id: "1"
   id: "204"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_322: 
   citation: Ostrom, N. E., A. J. Pitt, R. L. Sutka, P. H. Ostrom, A. S. Grandy, K. H. Huizinga, and G. P. Robertson. 2007. Isotopomer effects during N2O reduction in soils. Journal of Geophysical Research (in press)
@@ -549,7 +549,7 @@ publications_322:
   publication_type_id: "1"
   id: "408"
   year: "2007"
-  authors: 
+  author: 
   source_id: 
 publications_132: 
   citation: |-
@@ -564,7 +564,7 @@ publications_132:
   publication_type_id: "2"
   id: "210"
   year: "1990"
-  authors: 
+  author: 
   source_id: 
 publications_323: 
   citation: "Park, E. J., and A. J. M. Smucker. 2005. Dynamics of carbon sequestered in concentric layers of soil magroaggregates. Korean Journal of Ecology 28: 181-188."
@@ -574,7 +574,7 @@ publications_323:
   publication_type_id: "1"
   id: "409"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_133: 
   citation: "Zhou, J., M. A. Bruns, and J. M. Tiedje. 1996. DNA recovery from soils of diverse composition. Applied Environmental Microbiology 62: 316-322."
@@ -584,7 +584,7 @@ publications_133:
   publication_type_id: "1"
   id: "206"
   year: "1996"
-  authors: 
+  author: 
   source_id: 
 publications_370: 
   citation: "Scriber, J. M., M. Deering, J. Donovan, H. Hereau, G. Ording, and A. Stump. 2002. Species at the edge: Island refuges, interspecific hybridization, and climate-driven range extensions of North American butterflies. Proceedings 10th Insects in Captivity Conference 10: 178-185."
@@ -594,7 +594,7 @@ publications_370:
   publication_type_id: "1"
   id: "460"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_180: 
   citation: "Lele, S., M. Taper, and S. H. Gage. 1998. Statistical analysis of population dynamics in space and time using estimating functions. Ecology 79: 1489-1502."
@@ -604,7 +604,7 @@ publications_180:
   publication_type_id: "1"
   id: "115"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_324: 
   citation: Park, E. J., W. J. Sul, and A. J. M. Smucker. 2007. Intraaggregate enhancements of organic biofilm depositions, carbon sequestration and aggregate stability during multiple drying/wetting cycles with glucose solutions. Soil Biology and Biochemistry (in press).
@@ -614,7 +614,7 @@ publications_324:
   publication_type_id: "1"
   id: "410"
   year: "2007"
-  authors: 
+  author: 
   source_id: 
 publications_134: 
   citation: "Hedin, L. O., J. C. von Fischer, N. E. Ostrom, M. G. Brown, and G. P. Robertson. 1998. Thermodynamic constraints on nitrogen transformation and other biogeochemical processes at soil-stream interfaces. Ecology 79: 684-703."
@@ -624,7 +624,7 @@ publications_134:
   publication_type_id: "1"
   id: "83"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_371: 
   citation: "Scriber, J. M., and S. Gage. 1995. Pollution and global change: plant ecotones, butterfly hybrid zones and changes in biodiversity. Pages 319-344 in J. M. Scriber, Y. Tsubaki, and R. C. Lederhouse, eds. The Swallowtail Butterflies:  Their Ecology and Evolutionary Biology. Scientific Publishers, Gainsville, Florida, USA."
@@ -634,7 +634,7 @@ publications_371:
   publication_type_id: "3"
   id: "461"
   year: "1995"
-  authors: 
+  author: 
   source_id: 
 publications_181: 
   citation: "Majdi, H., A. J. M. Smucker, and H. Persson. 1992. A comparison between minirhizotron and monolith sampling methods for measuring root growth of maize (Zea mays, L.). Plant and Soil 147: 127-134."
@@ -644,7 +644,7 @@ publications_181:
   publication_type_id: "1"
   id: "116"
   year: "1992"
-  authors: 
+  author: 
   source_id: 
 publications_325: 
   citation: Parry, D. 2000. Induced responses of poplars to defoliation and their effects on leaf-feeding Lepidoptera. Entomology. Ph.D. Dissertation, Michigan State University, East Lansing, Michigan.
@@ -654,7 +654,7 @@ publications_325:
   publication_type_id: "2"
   id: "411"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_135: 
   citation: Kosola, K. R. 1999. Laparascopic sampling of roots of known age from an expandable-wall minirhizotron system. Agronomy Journal 91:876-879.
@@ -664,7 +664,7 @@ publications_135:
   publication_type_id: "1"
   id: "103"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_372: 
   citation: "Scriber, J. M., R. C. Lederhouse, and R. Dowell. 1995. Hybridization studies with North American swallowtails. Pages 269-281 in J. M. Scriber, Y. Tsubaki, and R. C. Lederhouse, eds. The Swallowtail Butterflies:  Their Ecology and Evolutionary Biology. Scientific Publishers, Gainsville, Florida, USA."
@@ -674,7 +674,7 @@ publications_372:
   publication_type_id: "3"
   id: "462"
   year: "1995"
-  authors: 
+  author: 
   source_id: 
 publications_182: 
   citation: "Maredia, K. M., S. H. Gage, D. A. Landis, and T. M. Wirth. 1992. Visual response of Cocinella septempunctata (L.), Hippodamia parenthesis (Say) (Coleoptera: Coccinellidae), and Chrysioerua carnea (Stephens) (Neruoptera: Chrysopidae) to colors. Biological Control 2: 253-256. "
@@ -684,7 +684,7 @@ publications_182:
   publication_type_id: "1"
   id: "118"
   year: "1992"
-  authors: 
+  author: 
   source_id: 
 publications_326: 
   citation: "Paul, E. A. 1999. Soil biology and biochemistry: The soil biota and its processes. Pages C1-10 in M. E. Sumner, ed. Handbook of Soil Science. CRC Press, Boca Raton, Florida, USA."
@@ -694,7 +694,7 @@ publications_326:
   publication_type_id: "3"
   id: "412"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_136: 
   citation: "Maredia, K. M., S. H. Gage, D. L. Landis, and T. M. Wirth. 1992. Ecological observations on predatory Coccinellidae Coleoptera in southwestern Michigan. Great Lakes Entomologist 25: 265-270. "
@@ -704,7 +704,7 @@ publications_136:
   publication_type_id: "1"
   id: "119"
   year: "1992"
-  authors: 
+  author: 
   source_id: 
 publications_373: 
   citation: "Scriber, J. M., A. Stump, and M. Deering. 2003. Hybrid zone ecology and tiger swallowtail trait clines in North America. Pages 367-391 in C. Boggs, W. Watt, and P. Erlich, eds. Ecology and Evolution Taking Flight: Butterflies as Model Study Systems. University of Chicago Press, Chicago, Illinois, USA."
@@ -714,7 +714,7 @@ publications_373:
   publication_type_id: "3"
   id: "464"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_183: 
   citation: "Marino, P. C., K. L. Gross, and D. A. Landis. 1997. Weed seed loss due to predation in Michigan maize fields.  Agriculture Ecosystems and the Environment 66: 189-196."
@@ -724,7 +724,7 @@ publications_183:
   publication_type_id: "1"
   id: "120"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_137: 
   citation: "Kavdir, Y., D. P. Rasse, and A. J. M. Smucker. 2005. Specific contributions of dacaying alfalfa roots to nitrate leaching in a Kalamazoo loam soil. Agriculture, Ecosystems, and  Environment 109: 97-106."
@@ -734,7 +734,7 @@ publications_137:
   publication_type_id: "1"
   id: "2"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_374: 
   citation: "Scriber, J. M., Y. Tsubaki, and R. C. Lederhouse, eds. 1995. The Swallowtail Butterflies: Their Ecology and Evolutionary Biology. Scientific Publishers, Gainsville, Florida, USA."
@@ -744,7 +744,7 @@ publications_374:
   publication_type_id: "3"
   id: "465"
   year: "1995"
-  authors: 
+  author: 
   source_id: 
 publications_184: 
   citation: "Marino, P. C., and K. L. Gross. 1998. Competitive effects of conspecific and herbaceous (weeds) plants on growth and branch architecture of Populus x euramericana c.v. Eugenei. Canadian Journal of Forest Research 28: 359-367."
@@ -754,7 +754,7 @@ publications_184:
   publication_type_id: "1"
   id: "121"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_327: 
   citation: "Paul, E. A. 2000. Soil microbiology and biochemistry: Directions and challenges for the future. Pages 25-49 in J. O. Siqueira, F. M. S. Moreira, A. S. Lopes, L. R. G. Giilherme, V. Faquin, A. E. Furtini Neto, and J. G. Carvalho, eds. Soil Fertility, Soil biology, and Plant Nutrient Interrelationships. Society Brasileira de Ciencia do Solo, Lavras-MG, Brazil."
@@ -764,7 +764,7 @@ publications_327:
   publication_type_id: "3"
   id: "413"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_138: 
   citation: "Bruns, M. A., J. R. Stephen, G.A. Kowalchuk, J. I. Prosser, and E. A. Paul. 1999. Comparative diversity of ammonia-oxidizer 16S rRNA gene sequences in native, tilled, and successional soils. Applied and Environmental Microbiology 65: 2994-3000."
@@ -774,7 +774,7 @@ publications_138:
   publication_type_id: "1"
   id: "17"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_375: 
   citation: "Sharov, A., B. C. Pijanowski, A. Liebold, and S. H. Gage. 1999. What affected the rate of gypsy moth (Lepidoptera: Lymantriidae) spread in Michigan: Winter temperature or forest susceptibility? Agriculture and Forest Entomology 1: 37-45."
@@ -784,7 +784,7 @@ publications_375:
   publication_type_id: "1"
   id: "466"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_185: 
   citation: "Marino, P. C., and D. A. Landis. 1996. Effect of landscape structure on parasitoid diversity and parasitism in agroecosystems. Ecological Applications 6: 276-284."
@@ -794,7 +794,7 @@ publications_185:
   publication_type_id: "1"
   id: "122"
   year: "1996"
-  authors: 
+  author: 
   source_id: 
 publications_328: 
   citation: Paul, E. A., and H. P. Collins. 1998. The characteristics of soil organic matter relative to nutrient cycling. Pages 181-197 in R. Lal, W. H. Blum, and C. Valentine, eds. Methods for Assessment of Soil Degradation. CRC Press, Boca Raton, Florida, USA.
@@ -804,7 +804,7 @@ publications_328:
   publication_type_id: "3"
   id: "414"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_139: 
   citation: "Calmon, M. A., W. D. Batchelor, J. W. Jones, J. T. Ritchie, K. J. Boote, and L. C. Hammond. 1999. Simulating soybean root growth and soil water extraction using a functional crop model. Transactions American Society Agricultural Engineering 42: 1868-1877. "
@@ -814,7 +814,7 @@ publications_139:
   publication_type_id: "1"
   id: "23"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_376: 
   citation: Sinsabaugh, R. L., M. J. Klug, H. P. Collins, P. E. Yeager, and S. O. Peterson. 1999. Characterizing soil microbial communities. Pages 318-348 in G. P. Robertson, C. S. Bledsoe, D. C. Coleman, and P. Sollins, eds. Standard Soil Methods for Long-Term Ecological Research. Oxford University Press, New York.
@@ -824,7 +824,7 @@ publications_376:
   publication_type_id: "3"
   id: "467"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_186: 
   citation: "Mosier, A. R., A. D. Halvorson, G. A. Peterson, G. P. Robertson, and L. Sherrod. 2005. Measurement of net global warming potential in three agroecosystems. Nutrient Cycling in Agroecosystems 7: 67-76. "
@@ -834,7 +834,7 @@ publications_186:
   publication_type_id: "1"
   id: "126"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_329: 
   citation: Paul, E. A., D. Harris, M. Klug, and R. Ruess. 1999. The determination of microbial biomass. Pages 291-317 in G. P. Robertson, C. S. Bledsoe, D. C. Coleman, and P. Sollins, eds. Standard Soil Methods for Long-Term Ecological Research. Oxford University Press, New York.
@@ -844,7 +844,7 @@ publications_329:
   publication_type_id: "3"
   id: "415"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_377: 
   citation: "Sippel, S. J., and S. K. Hamilton. 1998. Four-township water atlas: A guide to the water resources in the townships of Barry and Prairieville (Barry County) and Richland and Ross (Kalamazoo County). Four-Township Water Resources Council, Inc., Richland, Michigan, USA."
@@ -854,7 +854,7 @@ publications_377:
   publication_type_id: "3"
   id: "468"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_187: 
   citation: "Mullholland, P. J., H. M. Valett, J. R. Webster, S. A. Thomas, L. N. Cooper, S. K. Hamilton, and B. J. Peterson. 2004. Stream denitrification and total nitrate uptake rates measured using a field 15N tracer addition approach. Limnology and Oceanography 49: 809-820."
@@ -864,7 +864,7 @@ publications_187:
   publication_type_id: "1"
   id: "127"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_378: 
   citation: "Sirota, J. M. 1990. The temporal and spatial distribution and sex ratio of summer adults of the seven spotted ladybird beetle (Coccinella septempunctata L. Coleoptera: Coccinellidae) in alfalfa. M.Sc. Thesis,  Michigan State University, East Lansing, Michigan, USA."
@@ -874,7 +874,7 @@ publications_378:
   publication_type_id: "2"
   id: "469"
   year: "1990"
-  authors: 
+  author: 
   source_id: 
 publications_188: 
   citation: "Ostrom, N. E., K. E. Knoke, L. O. Hedin, G. P. Robertson, and A. J. M. Smucker. 1998. Temporal trends in nitrogen isotope values of nitrate leaching from an agricultural soil. Chemical Geology 146: 219-227."
@@ -884,7 +884,7 @@ publications_188:
   publication_type_id: "1"
   id: "129"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_001: 
   citation: "Ayres, M. P., and J. M. Scriber. 1994. Local adaptations to regional climates in Papillo Canadensis Lepidoptera: Papollionidae. Ecological Monographs 64: 465-482. "
@@ -894,7 +894,7 @@ publications_001:
   publication_type_id: "1"
   id: "8"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_379: 
   citation: Sissoko, F. 1997. Enhancement of soil aggregation by the combined influences of soil wetting and drying and root-microbial associations. Pages 109. M.Sc. Thesis, Michigan State University, East Lansing, Michigan, USA.
@@ -904,7 +904,7 @@ publications_379:
   publication_type_id: "2"
   id: "470"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_189: 
   citation: "Phillips, C. J., D. Harris, S. L. Dollhopf, K. L. Gross, J. I. Prosser, and E. A. Paul. 2000. Effects of agronomic treatments on the structure and function of ammonia oxidizing communities. Applied Environmental Microbiology 66: 5410-5418. "
@@ -914,7 +914,7 @@ publications_189:
   publication_type_id: "1"
   id: "141"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_002: 
   citation: "Sticklen, J., and R. Tufankji. 1992. Utilizing a functional approach for modeling biological systems. Mathematical and Computer Modeling 16: 145-160. "
@@ -924,7 +924,7 @@ publications_002:
   publication_type_id: "1"
   id: "191"
   year: "1992"
-  authors: 
+  author: 
   source_id: 
 publications_430: 
   citation: "Farber, S., R. Costanza, D. L. Childers, J. Erickson, K. L. Gross, M. Grove, C. S. Hopkinson, J. Kahn, S. Pincetl, A. Troy, P. Warren, and M. A. Wilson. 2006. Linking ecology and economics for ecosystem management. BioScience 56: 121-133."
@@ -934,7 +934,7 @@ publications_430:
   publication_type_id: "1"
   id: "45"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_240: 
   citation: Dankert, B. A., D. A. Herms, D. Parry, A. J. M. Scriber, and L. A. Haas. 1997. Mediation of interspecific competition between folivores through defoliation-induced changes in host quality. Pages 71-88 in A. Raman, ed. Ecology and Evolution of Plant-Feeding Insects in Natural and Man-Made Environments. Backhus, Leiden, The Netherlands.
@@ -944,7 +944,7 @@ publications_240:
   publication_type_id: "3"
   id: "323"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_050: 
   citation: "Grandy, A. S., and G. P. Robertson. 2006. Aggregation and organic matter protection following tillage of an undisturbed soil profile. Soil Science Society of America Journal 70: 1398-1406."
@@ -954,7 +954,7 @@ publications_050:
   publication_type_id: "1"
   id: "66"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_003: 
   citation: "Dalal, R. C., W. Wang, G. P. Robertson, and W. J. Parton. 2003. Nitrous oxide emission from Australian agricultural lands and mitigation options: a review. Australian Journal of Soil Research 41: 165-195"
@@ -964,7 +964,7 @@ publications_003:
   publication_type_id: "1"
   id: "34"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_431: 
   citation: "Findlay, S., J. L. Tanks, S. Dye, H. M. Valett, P. J. Mulholland, W. H. McDowell, S. Johnson, S. K. Hamilton, J. A. Edmonds, W. K. Dodds, and W. B. Bowden. 2002. A cross-system comparison of bacterial and fungal biomass in detritus pools of headwater streams. Microbial Ecology 43: 55-66."
@@ -974,7 +974,7 @@ publications_431:
   publication_type_id: "1"
   id: "46"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_241: 
   citation: "Davis, A., K. Renner, C. Sprague, L. Dyer, and D. Mutch, eds. 2005. Integrated Weed Management: One Year's Seeding. Michigan State University Extension Bulletin E-2931, East Lansing, Michigan, USA."
@@ -984,7 +984,7 @@ publications_241:
   publication_type_id: "3"
   id: "324"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_051: 
   citation: "Grandy, A. S., and G. P. Robertson. 2006. Initial cultivation of a temperate-region soil immediately accelerates aggregate turnover and CO2 and N2O fluxes . Global Change Biology 12: 1507-1520."
@@ -994,7 +994,7 @@ publications_051:
   publication_type_id: "1"
   id: "65"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_004: 
   citation: "Gross, K. L., and K. A. Renner. 1989. A new method for estimating seed numbers in the soil. Weed Science 37: 836-839."
@@ -1004,7 +1004,7 @@ publications_004:
   publication_type_id: "1"
   id: "72"
   year: "1989"
-  authors: 
+  author: 
   source_id: 
 publications_432: 
   citation: "Robertson, G. P., J. C. Broome, E. A. Chornesky, J. R. Frankenberger, P. Johnson, M. Lipson, J. A. Miranowski, E. D. Owens, D. Pimentel, and L. A. Thrupp. 2004. Rethinking the vision for environmental research in U.S. agriculture. BioScience 54: 61-65."
@@ -1014,7 +1014,7 @@ publications_432:
   publication_type_id: "1"
   id: "156"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_242: 
   citation: "Dazzo, F., and J. Wopereis. 2000. Unraveling the infection process in the Rhizobium-legume symbiosis by microscopy. Pages 295-347 in E. Triplett, ed. Prokaryotic Nitrogen Fixation: A Model System for the Analysis of a Biological Process. Horizon Scientific Press, Wymondham, UK."
@@ -1024,7 +1024,7 @@ publications_242:
   publication_type_id: "3"
   id: "325"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_052: 
   citation: "Gross, K. L. 1990. A comparison of methods for estimating soil seed banks. Journal of Ecology 78: 1079-1093."
@@ -1034,7 +1034,7 @@ publications_052:
   publication_type_id: "1"
   id: "71"
   year: "1990"
-  authors: 
+  author: 
   source_id: 
 publications_005: 
   citation: "Harris, D., R. P. Voroney, and E. A. Paul. 1997. Measurement of microbial biomass C:N ratio by chloroform fumigation incubation. Canadian Journal of Soil Science 77: 507-514."
@@ -1044,7 +1044,7 @@ publications_005:
   publication_type_id: "1"
   id: "80"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_480: 
   citation: 
@@ -1054,7 +1054,7 @@ publications_480:
   publication_type_id: "6"
   id: "281"
   year: "1999"
-  authors: R.R. Harwod, D. Mutch, M.A. Cavigeli, J.C. Boles, and J. Sanchez
+  author: R.R. Harwod, D. Mutch, M.A. Cavigeli, J.C. Boles, and J. Sanchez
   source_id: "2"
 publications_433: 
   citation: 
@@ -1076,7 +1076,7 @@ publications_433:
   publication_type_id: "6"
   id: "229"
   year: "1998"
-  authors: |-
+  author: |-
     Kay. Baergen
     and Barbara Fox
   source_id: "1"
@@ -1088,7 +1088,7 @@ publications_243:
   publication_type_id: "3"
   id: "326"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_053: 
   citation: "Gross, K. L., A. Peters, and K. S. Pregitzer. 1993. Fine root growth and demographic responses to nutrient patches in four old-field successional species. Oecologia 95: 61-64."
@@ -1098,7 +1098,7 @@ publications_053:
   publication_type_id: "1"
   id: "69"
   year: "1993"
-  authors: 
+  author: 
   source_id: 
 publications_006: 
   citation: "Johnson, N. C., D. L. Rowland, L. Corkidi, L. M. Egerton-Warburton, and E. B. Allen. 2003. Nitrogen enrichment alters mycorrhizal allocation at five mesic to semiarid grasslands. Ecology 84: 1895-1908."
@@ -1108,7 +1108,7 @@ publications_006:
   publication_type_id: "1"
   id: "92"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_290: 
   citation: "Kavdir, Y., and A. J. M. Smucker. 2005. Soil aggregate sequestration of cover crop root and shoot-derived nitrogen. Plant and Soil 272: 263-276."
@@ -1118,7 +1118,7 @@ publications_290:
   publication_type_id: "1"
   id: "375"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_481: 
   citation: 
@@ -1128,7 +1128,7 @@ publications_481:
   publication_type_id: "6"
   id: "282"
   year: "1999"
-  authors: C. He
+  author: C. He
   source_id: "2"
 publications_434: 
   citation: 
@@ -1250,7 +1250,7 @@ publications_434:
   publication_type_id: "6"
   id: "237"
   year: "1998"
-  authors: |-
+  author: |-
     Ann-Marie Ezanno, R.R. Harwood,
     E.A. Paul, J.T. ritchie, N.E. Ostrom
   source_id: "1"
@@ -1262,7 +1262,7 @@ publications_244:
   publication_type_id: "3"
   id: "327"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_054: 
   citation: "Gross, K. L., M. R. Willig, L. Gough, R. Inouye, and S. B. Cox. 2000. Patterns of species density and productivity at different spatial scales in herbaceous plant communities. Oikos 89:417-427. "
@@ -1272,7 +1272,7 @@ publications_054:
   publication_type_id: "1"
   id: "70"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_007: 
   citation: "Kosola, K. R., D. I. Dickmann, R. B. Hall, and B. A. Workmaster. 2004. Cottonwood growth rate and fine root condensed tannin concentration. Tree Physiology 24: 1063-1068."
@@ -1282,7 +1282,7 @@ publications_007:
   publication_type_id: "1"
   id: "107"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_291: 
   citation: "Klug, M. J., and J. M. Tiedje. 1993. Response of microbial communities to changing environmental conditions:  chemical and physiological approaches. Pages 371-374 in R. Guerrero and C. Pedros-Alio, eds. Trends in Microbial Ecology. Spanish Society for Microbiology, Barcelona, Spain."
@@ -1292,7 +1292,7 @@ publications_291:
   publication_type_id: "3"
   id: "376"
   year: "1993"
-  authors: 
+  author: 
   source_id: 
 publications_482: 
   citation: 
@@ -1302,7 +1302,7 @@ publications_482:
   publication_type_id: "6"
   id: "283"
   year: "1999"
-  authors: Y. Kavdir and A.J.M. Smucker
+  author: Y. Kavdir and A.J.M. Smucker
   source_id: "2"
 publications_435: 
   citation: 
@@ -1374,7 +1374,7 @@ publications_435:
   publication_type_id: "6"
   id: "262"
   year: "1998"
-  authors: |-
+  author: |-
     M.A. Velbel, J.T. McGuire, N.P.
     Mellott, and M.J. Formolo
   source_id: "1"
@@ -1386,7 +1386,7 @@ publications_245:
   publication_type_id: "1"
   id: "328"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_055: 
   citation: "Gross, K. L., K. S. Pregitzer, and A. J. Burton. 1995. Spatial variation in nitrogen availability in three successional plant communities. Journal of Ecology 83: 357-367."
@@ -1396,7 +1396,7 @@ publications_055:
   publication_type_id: "1"
   id: "67"
   year: "1995"
-  authors: 
+  author: 
   source_id: 
 publications_292: 
   citation: "Kosola, K. R., D. Parry, and B. A. Workmaster. 2006. Response of condensed tannins in poplar roots to fertilization and gypsy moth defoliation. Tree Physiology 26: 1607-1611."
@@ -1406,7 +1406,7 @@ publications_292:
   publication_type_id: "1"
   id: "377"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_483: 
   citation: 
@@ -1416,7 +1416,7 @@ publications_483:
   publication_type_id: "6"
   id: "284"
   year: "1999"
-  authors: K.R. Kosola, D.I. Dickman, D. pary, C. Easley, E. Duncan, C. Lyn, E.A. Paul
+  author: K.R. Kosola, D.I. Dickman, D. pary, C. Easley, E. Duncan, C. Lyn, E.A. Paul
   source_id: "2"
 publications_436: 
   citation: 
@@ -1513,7 +1513,7 @@ publications_436:
   publication_type_id: "6"
   id: "263"
   year: "1998"
-  authors: |-
+  author: |-
     Tom Willson, E.A. Paul, and R.R.
     Harwood
   source_id: "1"
@@ -1525,7 +1525,7 @@ publications_246:
   publication_type_id: "3"
   id: "329"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_056: 
   citation: "Gross, K. L., D. Maruca, and K. S. Pregitzer. 1992. Seedling growth and root morphology of plants with different life histories. New Phytologist 120: 535-542."
@@ -1535,7 +1535,7 @@ publications_056:
   publication_type_id: "1"
   id: "68"
   year: "1992"
-  authors: 
+  author: 
   source_id: 
 publications_008: 
   citation: "Rettig, J. E., R. C. Fuller, A. L. Corbett, and T. Getty. 1997. Fluctuating asymmetry as an indicator of ecological stress. Oikos 80: 123-127."
@@ -1545,7 +1545,7 @@ publications_008:
   publication_type_id: "1"
   id: "153"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_293: 
   citation: "Kravchenko, A. N., G. P. Robertson, X. Hao, and D. G. Bullock. 2006. Management practice effects on surface total carbon: Difference in spatial variability patterns. Agronomy Journal 98: 1559-1568."
@@ -1555,7 +1555,7 @@ publications_293:
   publication_type_id: "1"
   id: "378"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_484: 
   citation: 
@@ -1565,7 +1565,7 @@ publications_484:
   publication_type_id: "6"
   id: "285"
   year: "1999"
-  authors: F. Menaled and K.L. Gros
+  author: F. Menaled and K.L. Gros
   source_id: "2"
 publications_247: 
   citation: "Dethlefsen, L., and T. M. Schmidt. 2005. Differences in codon bias cannot explain differences in translational power among microbes. BMC Bioinformatices 6: 3."
@@ -1575,7 +1575,7 @@ publications_247:
   publication_type_id: "1"
   id: "331"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_057: 
   citation: "He, C., S. B. Malcolm, K. A. Dahlberg, and B. Fu. 2000. A conceptual framework for integrating hydrological and biological indicators into watershed management. Landscape and Urban Planning 49: 25-34. "
@@ -1585,7 +1585,7 @@ publications_057:
   publication_type_id: "1"
   id: "82"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_009: 
   citation: "Robertson, G. P., and P. R. Grace. 2004. Greenhouse gas fluxes in tropical and temperate agriculture: The need for a full-cost accounting of global warming potentials. Environment, Development and Sustainability 6:51-63."
@@ -1595,7 +1595,7 @@ publications_009:
   publication_type_id: "1"
   id: "161"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_294: 
   citation: "Kravchenko, A. N., G. P. Robertson, K. D. Thelen, and R. R. Harwood. 2005. Management, topographical, and weather effects on spatial variability of crop grain yields. Agronomy Journal 97: 514-523."
@@ -1605,7 +1605,7 @@ publications_294:
   publication_type_id: "1"
   id: "379"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_485: 
   citation: 
@@ -1615,7 +1615,7 @@ publications_485:
   publication_type_id: "6"
   id: "286"
   year: "1999"
-  authors: S.J. Moris, S. Bohm, K. Paustian, E.T. Eliot, and E.A. Paul
+  author: S.J. Moris, S. Bohm, K. Paustian, E.T. Eliot, and E.A. Paul
   source_id: "2"
 publications_437: 
   citation: 
@@ -1647,7 +1647,7 @@ publications_437:
   publication_type_id: "6"
   id: "231"
   year: "1998"
-  authors: |-
+  author: |-
     M. F. Berney and G. W.
     Bird
   source_id: "1"
@@ -1659,7 +1659,7 @@ publications_248:
   publication_type_id: "2"
   id: "330"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_058: 
   citation: "Horn, R., and A. J. M. Smucker. 2005. Structure formation and its consequences for gas and water transport in unsaturated arable and forest soils. Soil Tillage Research 82: 5-14."
@@ -1669,7 +1669,7 @@ publications_058:
   publication_type_id: "1"
   id: "86"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_295: 
   citation: "Kurzman, A. L. 2006. Changes in major solute chemistry as water infiltrates soils: Comparisons between managed agroecosystems and unmanaged vegetation. Zoology. Ph.D. Dissertation, Michigan State University, East Lansing, Michigan, USA."
@@ -1679,7 +1679,7 @@ publications_295:
   publication_type_id: "2"
   id: "380"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_486: 
   citation: 
@@ -1689,7 +1689,7 @@ publications_486:
   publication_type_id: "6"
   id: "288"
   year: "1999"
-  authors: J. Qi and D.L. Skole
+  author: J. Qi and D.L. Skole
   source_id: "2"
 publications_438: 
   citation: 
@@ -1716,7 +1716,7 @@ publications_438:
   publication_type_id: "6"
   id: "253"
   year: "1998"
-  authors: Ponciroli, Garrett
+  author: Ponciroli, Garrett
   source_id: "1"
 publications_249: 
   citation: "Ebert-May, D., K. S. Williams, E. P. Weber, J. Hodder, and D. Luckie. 2004. Practicing scientific inquiry: what are the rules? Frontiers in Ecology and the Environment 2: 492-493."
@@ -1726,7 +1726,7 @@ publications_249:
   publication_type_id: "1"
   id: "332"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_059: 
   citation: "Kosola, K. R., D. I. Dickmann, E. A. Paul, and D. Parry. 2001. Repeated insect defoliation effects on growth, nitrogen aquisition, carbohydrates and root demography. Oecologia 129: 65-74."
@@ -1736,7 +1736,7 @@ publications_059:
   publication_type_id: "1"
   id: "105"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_296: 
   citation: "Landis, D., and P. Marino. 1999. Landscape structure and extra-field processes: Impact on management of pests and beneficials. Pages 79-104 in J. Ruberson, ed. Handbook of Pest Management. Marcel Dekker, New York, NY."
@@ -1746,7 +1746,7 @@ publications_296:
   publication_type_id: "3"
   id: "381"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_487: 
   citation: 
@@ -1756,7 +1756,7 @@ publications_487:
   publication_type_id: "6"
   id: "289"
   year: "1999"
-  authors: C.K. Vanderpol, C. Haris, T. Yamaguchi, E. Wolf
+  author: C.K. Vanderpol, C. Haris, T. Yamaguchi, E. Wolf
   source_id: "2"
 publications_439: 
   citation: 
@@ -1799,7 +1799,7 @@ publications_439:
   publication_type_id: "6"
   id: "238"
   year: "1998"
-  authors: |-
+  author: |-
     Stuart Gage, Manuel Colunga,
     Francis Pierce, and David Long
   source_id: "1"
@@ -1811,7 +1811,7 @@ publications_297:
   publication_type_id: "1"
   id: "382"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_488: 
   citation: 
@@ -1821,7 +1821,7 @@ publications_488:
   publication_type_id: "6"
   id: "287"
   year: "1999"
-  authors: G. Ponciroli, K. Tindal, K.L. Gros
+  author: G. Ponciroli, K. Tindal, K.L. Gros
   source_id: "2"
 publications_300: 
   citation: "Landis, D. A., F. D. Menalled, J. C. Lee, and D. M. Carmona. 2000. Habitat modification to enhance biological control in IPM. Pages 226-239 in G. G. Kennedy and T. B. Sutton, eds. Emerging Technologies for Integrated Pest Management: Concepts, Research, and Implementation. APS Press, St. Paul, MN."
@@ -1831,7 +1831,7 @@ publications_300:
   publication_type_id: "3"
   id: "385"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_110: 
   citation: "Six, J., E. T. Elliott, and K. Paustian. 1999. Aggregate and soil organic matter dynamics under conventional and no-tillage systems. Soil Science Society of America Journal 63:1350-1358. "
@@ -1841,7 +1841,7 @@ publications_110:
   publication_type_id: "1"
   id: "180"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_298: 
   citation: "Landis, D. A., and P. C. Marino. 1999. Conserving parasitoid communities of native pests: Implications for agricultural landscape structure. Pages 38-51 in L. Charlet and G. Brewer, eds. Biological Control of Native of Indegenous Pests. Proceedings Thomas Say Publications in Entomology. Entomoligical Society of America, Lanham, Maryland."
@@ -1851,7 +1851,7 @@ publications_298:
   publication_type_id: "3"
   id: "383"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_489: 
   citation: 
@@ -1861,7 +1861,7 @@ publications_489:
   publication_type_id: "6"
   id: "290"
   year: "1999"
-  authors: C.A. Wright, C.A. Redy, and E.A. Paul
+  author: C.A. Wright, C.A. Redy, and E.A. Paul
   source_id: "2"
 publications_301: 
   citation: "Liu, J., F. B. Dazzo, O. Glagoleva, B. Yu, and A. Jain. 2001. CMEIAS: A computer-aided system for the image analysis of bacterial morphotypes in microbial communities. Microbial Ecology 41: 173-194."
@@ -1871,7 +1871,7 @@ publications_301:
   publication_type_id: "1"
   id: "386"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_111: 
   citation: 
@@ -1965,7 +1965,7 @@ publications_111:
   publication_type_id: "6"
   id: "232"
   year: "1998"
-  authors: |-
+  author: |-
     G. W. Bird and M. F.
     Berney
   source_id: "1"
@@ -1977,7 +1977,7 @@ publications_299:
   publication_type_id: "3"
   id: "384"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_302: 
   citation: Lynch, M. D. J. 2004. Species richness and composition of soil Basidiomycota. MS Thesis, University of Western Ontario, London, Ontario, Canada.
@@ -1987,7 +1987,7 @@ publications_302:
   publication_type_id: "2"
   id: "387"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_112: 
   citation: "Six, J., E. T. Elliott, and K. Paustian. 2000. Soil macroaggregate turnover and microaggregate formation: A mechanism for C sequestration under no-tillage agriculture. Soil Biology and Biochemistry 32: 2099-2103. "
@@ -1997,7 +1997,7 @@ publications_112:
   publication_type_id: "1"
   id: "179"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_350: 
   citation: "Robertson, G. P. 1998. Field crop ecosystems. Pages 1-16 in M. A. Cavigelli, S. R. Deming, L. K. Probyn, and R. R. Harwood, eds. Michigan Field Crop Ecology: Managing Biological Processes for Productivity and Environmental Quality. Michigan State University Extension Bulletin E-2646, East Lansing, Michigan, USA."
@@ -2007,7 +2007,7 @@ publications_350:
   publication_type_id: "3"
   id: "439"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_160: 
   citation: "Harris, G. H., O. B. Hesterman, E. A. Paul, S. E. Peters, and R. R. Janke. 1994. Fate of legume and fertilizer 15N in a long-term cropping systems experiment. Agronomy Journal 86: 910-915. "
@@ -2017,7 +2017,7 @@ publications_160:
   publication_type_id: "1"
   id: "79"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_303: 
   citation: "Marino, P. C., and D. A. Landis. 2000. Parasitoid community structure: implications for biological control in agricultural landscapes. Pages 181-191 in B. Ekbom, ed. Interchanges of Insects Between Agricultural and Surrounding Landscapes. Kluwer Academic Press, Dordrecht, The Netherlands."
@@ -2027,7 +2027,7 @@ publications_303:
   publication_type_id: "3"
   id: "388"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_113: 
   citation: "Six, J., E. T. Elliott, and K. Paustian. 2000. Soil structure and soil organic matter: II. A normalized stability index and the effect of mineralogy. Soil Science Society of America Journal 64:1042-1049."
@@ -2037,7 +2037,7 @@ publications_113:
   publication_type_id: "1"
   id: "182"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_351: 
   citation: Robertson, G. P. 2000. Denitrification. Pages C181-190 in M. E. Sumner, ed. Handbook of Soil Science. CRC Press, Boca Raton, Florida, USA.
@@ -2047,7 +2047,7 @@ publications_351:
   publication_type_id: "3"
   id: "440"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_161: 
   citation: "Harris, D., and E. A. Paul. 1994. Measurement of microbial growth rates in soil. Applied Soil Ecology 1: 277-290. "
@@ -2057,7 +2057,7 @@ publications_161:
   publication_type_id: "1"
   id: "81"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_304: 
   citation: "Martinelli, L. A., M. C. Piccolo, A. R. Townsend, P. M. Vitousek, E. Cuevas, W. McDowell, G. P. Robertson, O. C. Santos, and K. Treseder. 1999. Nitrogen stable isotopic composition of leaves and soil: tropical versus temperate forests. Biogeochemistry 46: 45-65."
@@ -2067,7 +2067,7 @@ publications_304:
   publication_type_id: "1"
   id: "389"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_114: 
   citation: "Six, J., R. Merckx, K. Kimpe, E. T. Elliott, and K. Paustian. 2000. A re-evaluation of the enriched labile soil organic matter fraction. European Journal of Soil Science 51: 283-293. "
@@ -2077,7 +2077,7 @@ publications_114:
   publication_type_id: "1"
   id: "177"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_352: 
   citation: "Robertson, G. P. 2004. Abatement of nitrous oxide, methane, and the other non-CO2 greenhouse gases: The need for a systems approach. Pages 493-506 in C. B. Field and M. R. Raupach, eds. The Global Carbon Cycle. Island Press, Washington, DC, USA."
@@ -2087,7 +2087,7 @@ publications_352:
   publication_type_id: "3"
   id: "441"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_162: 
   citation: Henry, A., and K. R. Kosola. 1999. Root age and phosphorus effects on colonization of big bluestem (Andropogon geradii) by micorrhizal fungi. Soil Biology and Biochemistry 31:1657-1660.
@@ -2097,7 +2097,7 @@ publications_162:
   publication_type_id: "1"
   id: "84"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_115: 
   citation: "Six, J., R. T. Conant, E. A. Paul, and K. Paustian. 2002. Stabilization mechanisms of soil organic matter: Implications for C-saturation of soils. Plant and Soil 241: 155-176. "
@@ -2107,7 +2107,7 @@ publications_115:
   publication_type_id: "1"
   id: "178"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_353: 
   citation: "Robertson, G. P. 2005. Biogenic trace gas emissions from terrestrial ecosystems: The need for full-cost accounting mitigation strategies. Proceedings of the 2005 International Plant Nutrition Conference, Beijing, China, PRC."
@@ -2117,7 +2117,7 @@ publications_353:
   publication_type_id: "3"
   id: "442"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_163: 
   citation: "Horwath, W. R., E. A. Paul, D. Harris, J. Norton, L. Jagger, and K. A. Horton. 1996. Defining a realistic control for the chloroform fumigation incubation method using microscopic counting and 14C substrates. Canadian Journal of Soil Science 76: 459-467."
@@ -2127,7 +2127,7 @@ publications_163:
   publication_type_id: "1"
   id: "87"
   year: "1996"
-  authors: 
+  author: 
   source_id: 
 publications_305: 
   citation: McDermott, T. R., and F. B. Dazzo. 2002. Use of fluorescent antibodies for studying the ecology of soil- and plant-associated microbes. Pages 615-626 in C. Hurst, R. C. Crawford, G. R. Knudsen, M. J. McInerney, and L. D. Stetzenbach, eds. Manual of Environmental Microbiology. American Society for Microbiology Press, Washington, DC, USA.
@@ -2137,7 +2137,7 @@ publications_305:
   publication_type_id: "3"
   id: "390"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_116: 
   citation: "Smith, R. G., K. L. Gross, and S. Januchowski. 2005. Earthworms and weed seed distribution in annual crops. Agriculture, Ecosystems, and the Environment 108: 363-367. "
@@ -2147,7 +2147,7 @@ publications_116:
   publication_type_id: "1"
   id: "184"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_354: 
   citation: Robertson, G. P., C. S. Bledsoe, D. C. Coleman, and P. Sollins, eds. 1999. Standard Soil Methods for Long-Term Ecological Research. Oxford University Press, New York.
@@ -2157,7 +2157,7 @@ publications_354:
   publication_type_id: "3"
   id: "443"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_164: 
   citation: "Horwath, W. R., E. A. Paul, and K. S. Pregitzer. 1992. Injection of N-15 into trees to study nitrogen cycling in soil. Soil Science Society of America Journal 56: 316-319."
@@ -2167,7 +2167,7 @@ publications_164:
   publication_type_id: "1"
   id: "88"
   year: "1992"
-  authors: 
+  author: 
   source_id: 
 publications_306: 
   citation: McKeown, C. H. 2003. Quantifying the roles of competition and niche separation in native and exotic cocconellids, and the changes in the community in response to an exotic prey species. Entomology. MS. Thesis, Michigan State University, East Lansing, Michigan, USA.
@@ -2177,7 +2177,7 @@ publications_306:
   publication_type_id: "2"
   id: "391"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_117: 
   citation: "Smith, R. G., and K. L. Gross. 2006. Weed community and corn yield variability in diverse management systems. Weed Science 54: 106-113. "
@@ -2187,7 +2187,7 @@ publications_117:
   publication_type_id: "1"
   id: "185"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_355: 
   citation: "Robertson, G. P., J. C. Broome, E. A. Chornesky, J. R. Frankenberger, P. Johnson, M. Lipson, J. A. Miranowski, E. D. Owens, D. Pimentel, and L. A. Thrupp. 2004. Rethinking the vision for environmental research in U.S. agriculture. BioScience 54: 61-65."
@@ -2197,7 +2197,7 @@ publications_355:
   publication_type_id: "3"
   id: "444"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_165: 
   citation: "Horwath, W. R., K. S. Pregitzer, and E. A. Paul. 1994. 14C allocation in tree soil-systems. Tree Physiology 14: 1163-1176."
@@ -2207,7 +2207,7 @@ publications_165:
   publication_type_id: "1"
   id: "89"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_307: 
   citation: Menalled, F., J. Dauer, T. Fox, and K. Renner. 2001. Managing Your Farm to Increase Weed Seed Predation. Michigan State University Extension Bulletin E-2749, East Lansing, MI.
@@ -2217,7 +2217,7 @@ publications_307:
   publication_type_id: "3"
   id: "392"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_356: 
   citation: Robertson, G. P., L. W. Burger, C. L. Kling, R. Lowrance, and D. J. Mulla. 2007. New approaches to environmental management research at landscape and watershed scales. Pages (in press) in M. Schnepf, ed. Managing Agricultural Landscapes for Environmental Quality.
@@ -2227,7 +2227,7 @@ publications_356:
   publication_type_id: "3"
   id: "445"
   year: "2007"
-  authors: 
+  author: 
   source_id: 
 publications_166: 
   citation: Huberty, L. E., K. L. Gross, and C. J. Miller. 1998. Effects of nitrogen addition on success ional dynamics and species diversity in Michigan old-fields. Journal of Ecology 86:794-803.
@@ -2237,7 +2237,7 @@ publications_166:
   publication_type_id: "1"
   id: "90"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_308: 
   citation: Menalled, F., and D. A. Landis. 2004. Conservation of ground beetles in annual crops. Pages 593-595 in J. Capinera, ed. Encyclopedia of Entomology. Kluwer Academic Press, Dordrecht, The Netherlands.
@@ -2247,7 +2247,7 @@ publications_308:
   publication_type_id: "3"
   id: "393"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_118: 
   citation: "Smucker, A. J. M., and R. M. Aiken. 1992. Dynamic root responses to water deficits. Soil Science 154: 281-289. "
@@ -2257,7 +2257,7 @@ publications_118:
   publication_type_id: "1"
   id: "186"
   year: "1992"
-  authors: 
+  author: 
   source_id: 
 publications_357: 
   citation: Robertson, G. P., and A. S. Grandy. 2006. Soil system management in temperate regions. Pages 27-39 in N. Uphoff, A. S. Ball, E. Fernandes, H. Herren, O. Husson, M. Laing, C. Palm, J. Pretty, P. Sanchez, N. Snanginga, and J. Thies, eds. Biological Approaches to Sustainable Soil Systems. CRC Press, Taylor and Francis Group, Boca Raton, Florida, USA.
@@ -2267,7 +2267,7 @@ publications_357:
   publication_type_id: "3"
   id: "446"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_167: 
   citation: "Jame, Y. W., H. W. Cutforth, and J. T. Ritchie. 1999. Temperature response function for leaf appearance rate in wheat and corn. Canadian Journal of Plant Science 79: 1-10."
@@ -2277,7 +2277,7 @@ publications_167:
   publication_type_id: "1"
   id: "91"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_309: 
   citation: Menalled, F., M. Liebman, and K. Renner. 2003. The ecology of weed seed predation in herbaceous crop systems in D. Batish, ed. Handbook of Sustainable Weed Management. The Haworth Press, Binghampton, New York, USA.
@@ -2287,7 +2287,7 @@ publications_309:
   publication_type_id: "3"
   id: "394"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_119: 
   citation: "South, S. R., J. Qi, and D. P. Lusch. 2004. Optimal classification methods for mapping agricultural tillage practices. Remote Sensing of Environment 91: 90-97. "
@@ -2297,7 +2297,7 @@ publications_119:
   publication_type_id: "1"
   id: "187"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_358: 
   citation: Robertson, G. P., and P. Groffman. 2007. Nitrogen transformations. Pages 341-364 in E. A. Paul and F. E. Clark, eds. Soil Microbiology, Ecology, and Biochemistry. Elsevier Academic Press, Oxford, UK.
@@ -2307,7 +2307,7 @@ publications_358:
   publication_type_id: "3"
   id: "447"
   year: "2007"
-  authors: 
+  author: 
   source_id: 
 publications_168: 
   citation: "Johnson, L. B., and S. H. Gage. 1997. Landscape approaches to the analysis of aquatic ecosystems. Freshwater Biology 37: 113-132."
@@ -2317,7 +2317,7 @@ publications_168:
   publication_type_id: "1"
   id: "93"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_359: 
   citation: "Robertson, G. P., and K. L. Gross. 1994. Assessing the heterogeneity of below-ground resources: Quantifying pattern and scale. Pages 237-253 in M. M. Caldwell and R. W. Pearcy, eds. Plant Exploitation of Environmental Heterogeneity. Academic Press, New York, New York , USA."
@@ -2327,7 +2327,7 @@ publications_359:
   publication_type_id: "3"
   id: "448"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_169: 
   citation: "Jones, M. E., R. R. Harwood, N. C. Dehne, J. Smeenk, and E. Parker. 1998. Enhancing soil nitrogen mineralization and corn yield with overseeded cover crops. Journal of Soil and Water Conservation 53: 253-257. "
@@ -2337,7 +2337,7 @@ publications_169:
   publication_type_id: "1"
   id: "94"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_410: 
   citation: "Velbel, M. A., J. T. McGuire, and A. S. Madden. 2006. Scanning electron microscopy of garnet from souther Michigan soils: Etching rates and inheritance of pre-glacial and pre-pedogenic grain-surface textures in M. Mange and D. Wright, eds. Heavy Minerals in Use: Developments in Sedimentology. Elsevier Press."
@@ -2347,7 +2347,7 @@ publications_410:
   publication_type_id: "3"
   id: "503"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_220: 
   citation: "Bossart, J. L., and J. M. Scriber. 1995. Genetic variation in oviposition preferences in a tiger swallowtail butterfly: interspecific, interpopulation, and interindividual comparisons. Pages 183-193 in J. M. Scriber, Y. Tsubaki, and R. C. Lederhouse, eds. The Swallowtail Butterflies:  Their Ecology and Evolutionary Biology. Scientific Publishers, Inc., Gainsville, Florida, USA."
@@ -2357,7 +2357,7 @@ publications_220:
   publication_type_id: "3"
   id: "305"
   year: "1995"
-  authors: 
+  author: 
   source_id: 
 publications_030: 
   citation: "Buckley, D. H., and T. M. Schmidt. 2003. Diversity and dynamics of microbial communities in soils from agroecosystems. Environmental Microbiology 5: 441-452."
@@ -2367,7 +2367,7 @@ publications_030:
   publication_type_id: "1"
   id: "20"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_411: 
   citation: Vitosh, M. L., J. W. Johnson, and D. G. Mengel, eds. 1995. Tri-state Fertilizer Recommendations for Corn, Soybean, Wheat, and Alfalfa. Ohio State University Extension Bulletin E-2567, Columbus, Ohio, USA.
@@ -2377,7 +2377,7 @@ publications_411:
   publication_type_id: "3"
   id: "504"
   year: "1995"
-  authors: 
+  author: 
   source_id: 
 publications_221: 
   citation: Brewer, E. A. 2004. Impacts of Calcium and Nitrogen on Carbon Stabilization in Soils of an Afforested Red Pine Stand. MS Thesis, Bradley University, Peoria, Illinois.
@@ -2387,7 +2387,7 @@ publications_221:
   publication_type_id: "2"
   id: "306"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_031: 
   citation: "Cavigelli, M. A., G. P. Robertson, and M. J. Klug. 1995. Fatty acid methyl ester (FAME) profiles as measures of soil microbial community structure. Plant and Soil 170: 99-113."
@@ -2397,7 +2397,7 @@ publications_031:
   publication_type_id: "1"
   id: "24"
   year: "1995"
-  authors: 
+  author: 
   source_id: 
 publications_412: 
   citation: Webber, P. J. 1991. The Long-Term Ecological Research programme of the United States - a guide for Northern Sciences Network ecological research. Pages 69-73 in A.-L. Sippola and E. F. Roots, eds. UNESCO MAB Northern Sciences Network. Arctic Centre University of Lapland, Rovaneimi.
@@ -2407,7 +2407,7 @@ publications_412:
   publication_type_id: "3"
   id: "505"
   year: "1991"
-  authors: 
+  author: 
   source_id: 
 publications_222: 
   citation: Buckley, D. H. 2000. The diversity and dynamics of microbial groups in soils from agroecosystems. Ph.D. Dissertation, Michigan State University, East Lansing, Michigan, USA.
@@ -2417,7 +2417,7 @@ publications_222:
   publication_type_id: "2"
   id: "308"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_032: 
   citation: Cavigelli, M. A., and G. P. Robertson. 2001 Role of denitrifier diversity in rates of nitrous oxide consumption in a terrestrial ecosystem. Soil Biology and Biochemistry 33:297-310.
@@ -2427,7 +2427,7 @@ publications_032:
   publication_type_id: "1"
   id: "25"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_460: 
   citation: 
@@ -2468,7 +2468,7 @@ publications_460:
   publication_type_id: "6"
   id: "256"
   year: "1998"
-  authors: |-
+  author: |-
     Renner,
     Karen A., Sandra J. Halstead, and Katherine L.
     Gross
@@ -2481,7 +2481,7 @@ publications_413:
   publication_type_id: "1"
   id: "507"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_270: 
   citation: Hamilton, S. K., and N. E. Ostrom. 2007. Measurement of the stable isotope ratio of dissolved N2 in 15N tracer experiments. Limnology and Oceanography Methods (in press).
@@ -2491,7 +2491,7 @@ publications_270:
   publication_type_id: "1"
   id: "355"
   year: "2007"
-  authors: 
+  author: 
   source_id: 
 publications_080: 
   citation: "Phillips, C. J., E. A. Paul, and J. I. Prosser. 2000. Quantitative analysis of ammonia oxidising bacteria using competitive PCR. FEMS Microbial Ecology 32: 167-175. "
@@ -2501,7 +2501,7 @@ publications_080:
   publication_type_id: "1"
   id: "142"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_223: 
   citation: Burbank, D. H. 1991. Resource quality and recruitment of tree species in plantation forests of southwestern Michigan. Pages 145. Department of Forestry. M.Sc. Thesis, Michigan State University.
@@ -2511,7 +2511,7 @@ publications_223:
   publication_type_id: "2"
   id: "214"
   year: "1991"
-  authors: 
+  author: 
   source_id: 
 publications_033: 
   citation: "Cavigelli, M.A. and G.P. Robertson. 2000. The functional significance of denitrifier community composition in a terrestrial ecosystem. Ecology 81: 1402-1414."
@@ -2521,7 +2521,7 @@ publications_033:
   publication_type_id: "1"
   id: "26"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_461: 
   citation: 
@@ -2561,7 +2561,7 @@ publications_461:
   publication_type_id: "6"
   id: "257"
   year: "1998"
-  authors: |-
+  author: |-
     Joe T. Ritchie, Aris Gerakis,
     Daniel P. Rasse, and Alvin J.M. Smucker
   source_id: "1"
@@ -2573,7 +2573,7 @@ publications_414:
   publication_type_id: "5"
   id: "508"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_271: 
   citation: "Harris, C. K., and C. Bailey. 2002. Public preferences for a clean, green agricultural machine. Pages 31-42 in C. K. Harris, J. Molnar, T. Tomazic, and R. Wimberley, eds. The Social Risks of Agriculture: Americans Speak Out on Food. Praeger, New York, New York, USA."
@@ -2583,7 +2583,7 @@ publications_271:
   publication_type_id: "3"
   id: "356"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_081: 
   citation: "Pietola, L. M., and A. J. M. Smucker. 1995. Fine root dynamics of alfalfa after multiple cuttings and during a late invasion by weeds. Agronomy Journal 87: 1161-1169."
@@ -2593,7 +2593,7 @@ publications_081:
   publication_type_id: "1"
   id: "143"
   year: "1995"
-  authors: 
+  author: 
   source_id: 
 publications_224: 
   citation: "Buckley, D. H., and T. M. Schmidt. 2001. Environmental factors influencing the distribution of rRNA from Verrucomicrobia in soil. FEMS Microbial Ecology 35: 105-112."
@@ -2603,7 +2603,7 @@ publications_224:
   publication_type_id: "1"
   id: "21"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_034: 
   citation: "Clark, M. S., S. H. Gage, and J. R. Spence. 1997. Habitats and management associated with common ground beetles Coleoptera: Carabidae in a Michigan agricultural landscape. Environmental Entomology 26: 519-527"
@@ -2613,7 +2613,7 @@ publications_034:
   publication_type_id: "1"
   id: "27"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_462: 
   citation: 
@@ -2651,7 +2651,7 @@ publications_462:
   publication_type_id: "6"
   id: "258"
   year: "1998"
-  authors: |-
+  author: |-
     U. Schulthess, H.P. Collins, D.
     Harris, E.A. Paul, and J.T. Ritchie
   source_id: "1"
@@ -2663,7 +2663,7 @@ publications_272:
   publication_type_id: "3"
   id: "357"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_082: 
   citation: "Raikow, D.F. and S.K. Hamilton. 2001. Bivalve diets in a midwestern US stream: A stable isotope enrichment study. Limnology and Oceanography 46: 514-522. "
@@ -2673,7 +2673,7 @@ publications_082:
   publication_type_id: "1"
   id: "145"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_225: 
   citation: "Buckley, D. H., and T. M. Schmidt. 2002. Exploring the diversity of soil - a microbial rainforest. Pages 183-208 in J. T. Staley and A. L. Reysenbach, eds. Biodiversity of Microbial Life: Foundation of Earth's Biosphere. Wiley, New York, New York, USA."
@@ -2683,7 +2683,7 @@ publications_225:
   publication_type_id: "3"
   id: "309"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_035: 
   citation: "Colunga-Garcia, M., S. H. Gage, and D. A. Landis. 1997. Response of all assemblage of Coccinellidae (Coleoptera) to a diverse agricultural landscape. Environmental Entomology 26: 797-804"
@@ -2693,7 +2693,7 @@ publications_035:
   publication_type_id: "1"
   id: "31"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_463: 
   citation: 
@@ -2738,7 +2738,7 @@ publications_463:
   publication_type_id: "6"
   id: "259"
   year: "1998"
-  authors: |-
+  author: |-
     J.M. Scriber, K. Weir, D.
     Parry, J. Deering
   source_id: "1"
@@ -2750,7 +2750,7 @@ publications_415:
   publication_type_id: "5"
   id: "509"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_273: 
   citation: Harris, D. 1994. Analyses of DNA extracted from microbial communities. Pages 111-118 in K. Ritz, J. Dighton, and K. Giller, eds. Beyond the Biomass. John Wiley & Sons, Chichester, England.
@@ -2760,7 +2760,7 @@ publications_273:
   publication_type_id: "3"
   id: "358"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_083: 
   citation: Rasse, D. P., A. J. M. Smucker, and O. Schabenberger. 1999. Modifications of soil nitrogen pools in response to alfalfa root systems and shoot mulch. Agronomy Journal 91:471-477.
@@ -2770,7 +2770,7 @@ publications_083:
   publication_type_id: "1"
   id: "147"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_226: 
   citation: Cavigelli, M. 1998. Ecosystem consequences and spatial variability of microbial soil community structure. Crop &amp; Soil Sciences. Ph.D. Dissertation, Michigan State University, East Lansing, Michigan, USA.
@@ -2783,7 +2783,7 @@ publications_226:
   publication_type_id: "2"
   id: "215"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_036: 
   citation: "Costamagna, A.C., and D.A. Landis. 2004. Effect of food resources on adult Glyptapanteles milataris and Meterrus communis (Hymenoptera: Braconidae), parasitoids of Pseudaletia unipuncta (Lepidoptera: Noctuidae). Environmental Entomology 33: 128-137"
@@ -2793,7 +2793,7 @@ publications_036:
   publication_type_id: "1"
   id: "33"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_464: 
   citation: 
@@ -2832,7 +2832,7 @@ publications_464:
   publication_type_id: "6"
   id: "260"
   year: "1998"
-  authors: |-
+  author: |-
     Alvin Smucker, Djail Santos,
     Jennifer Wagester, and Eldor Paul
   source_id: "1"
@@ -2844,7 +2844,7 @@ publications_416:
   publication_type_id: "2"
   id: "227"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_274: 
   citation: Harris, D., and E. A. Paul. 1991. Techniques for examining the carbon relationships of plant-microbial symbioses. Pages 39-52 in D. Coleman and B. Fry, eds. Carbon Isotope Techniques. Academic Press, New York, New York, USA.
@@ -2854,7 +2854,7 @@ publications_274:
   publication_type_id: "3"
   id: "359"
   year: "1991"
-  authors: 
+  author: 
   source_id: 
 publications_084: 
   citation: Rasse, D. P., and A. J. M. Smucker. 1998. Root recolonization of previous root channels in corn and alfalfa rotations. Plant and Soil 204:203-212.
@@ -2864,7 +2864,7 @@ publications_084:
   publication_type_id: "1"
   id: "146"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_227: 
   citation: Daroub, S. 1994. The effect of tillage on phosphorus transformations in soils. Ph.D. Dissertation, Michigan State University, East Lansing, Michigan, USA.
@@ -2879,7 +2879,7 @@ publications_227:
   publication_type_id: "2"
   id: "218"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_037: 
   citation: "Colunga-Garcia, M. 1996. Interactions between landscape structure and ladybird beetles Coleoptera: Coccinellidae in field crop     agroecosystems. Entomology. Ph.D. Dissertation, Michigan State University, East     Lansing, Michigan, USA."
@@ -2889,7 +2889,7 @@ publications_037:
   publication_type_id: "2"
   id: "216"
   year: "1996"
-  authors: 
+  author: 
   source_id: 
 publications_465: 
   citation: 
@@ -2917,7 +2917,7 @@ publications_465:
   publication_type_id: "6"
   id: "261"
   year: "1998"
-  authors: |-
+  author: |-
     Christopher K. Vanderpool and
     Craig Harris
   source_id: "1"
@@ -2938,7 +2938,7 @@ publications_417:
   publication_type_id: "2"
   id: "219"
   year: "1993"
-  authors: 
+  author: 
   source_id: 
 publications_275: 
   citation: Harris, G. 1993. Nitrogen cycling in animal-, legume- and fertilizer-based cropping systems. Ph.D. Dissertation, Michigan State University, East Lansing, Michigan, USA.
@@ -2948,7 +2948,7 @@ publications_275:
   publication_type_id: "2"
   id: "360"
   year: "1993"
-  authors: 
+  author: 
   source_id: 
 publications_085: 
   citation: Rasse, D. P., and A. J. M. Smucker. 1999. Tillage effects on soil nitrogen and plant biomass in a corn-alfalfa rotation. Journal of Environmental Quality 28:873-880.
@@ -2958,7 +2958,7 @@ publications_085:
   publication_type_id: "1"
   id: "149"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_038: 
   citation: "Daroub, S., B. G. Ellis, and G. P. Robertson. 2001. Effect of cropping and low-chemical input systems on soil phosphorus fractions. Soil Science 166: 281-291."
@@ -2968,7 +2968,7 @@ publications_038:
   publication_type_id: "1"
   id: "36"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_466: 
   citation: 
@@ -3002,7 +3002,7 @@ publications_466:
   publication_type_id: "6"
   id: "264"
   year: "1998"
-  authors: |-
+  author: |-
     C.A. Wright,&nbsp; S. Balagee,
     R. G. Thorn, E. A. Paul and C. A. Reddy.
   source_id: "1"
@@ -3014,7 +3014,7 @@ publications_418:
   publication_type_id: "1"
   id: "202"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_276: 
   citation: "Harwood, R. R. 2001. Sustainability in agriculture systems in transition - At what cost? Pages 7-30 in W. Payne, D. Keeney, and S. Rao, eds. Sustainability of Agricultural Systems in Transition. ASA-CSSA-SSSA Special Publication #64."
@@ -3024,7 +3024,7 @@ publications_276:
   publication_type_id: "3"
   id: "361"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_086: 
   citation: Rasse, D. P., and A. J. M. Smucker. 2000. Alfalfa root and shoot mulching interactions with soil hydraulic properties and aggregation. Soil Science Society of America Journal 64:725-731.
@@ -3034,7 +3034,7 @@ publications_086:
   publication_type_id: "1"
   id: "150"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_228: 
   citation: Huberty, L. 1994. Dominance, diversity, and resource competition in old-field plant communities. Ph.D. Dissertation, Michigan State University, East Lansing, Michigan, USA.
@@ -3048,7 +3048,7 @@ publications_228:
   publication_type_id: "2"
   id: "221"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_039: 
   citation: "Daroub, S., F. J. Pierce, and B. G. Ellis. 2000. Phosphorus fractions and fate of phosphorus-33 in soils managed under plowing and no-tillage. Soil Science Society of America Journal 64: 170-176"
@@ -3058,7 +3058,7 @@ publications_039:
   publication_type_id: "1"
   id: "35"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_467: 
   citation: 
@@ -3068,7 +3068,7 @@ publications_467:
   publication_type_id: "6"
   id: "266"
   year: "1999"
-  authors: M.F Berney, G.W.Bird, and W.L.Godfriend
+  author: M.F Berney, G.W.Bird, and W.L.Godfriend
   source_id: "2"
 publications_419: 
   citation: "Sanchez, J. E., R. R. Harwood, T. C. Willson, K. Kizilkaya, J. Smeenk, E. Parker, E. A. Paul, B. D. Knezek, and G. P. Robertson. 2004. Integrated agricultural systems: Managing soil carbon and nitrogen for productivity and environmental quality. Agronomy Journal 96: 769-775. "
@@ -3078,7 +3078,7 @@ publications_419:
   publication_type_id: "1"
   id: "166"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_277: 
   citation: "Harwood, R. R. 2002. Sustainable agriculture on a populous, industrialized landscape: Building ecosystem vitality and productivity. Pages 305-315 in R. Lal, D. Hansen, N. Uphoff, and S. Slack, eds. Food Security and Environmental Quality in the Developing World. CRC Press, Boca Raton, Florida, USA."
@@ -3088,7 +3088,7 @@ publications_277:
   publication_type_id: "3"
   id: "362"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_087: 
   citation: Rasse, D.P., J.T. Ritchie, W.R. Peterson, J. Wei, and A.J.M. Smucker. 2000. Rye cover crop and nitrogen fertilization effects on nitrate leaching in inbred maize fields. Journal of Environmental Quality 29:298-304.
@@ -3098,7 +3098,7 @@ publications_087:
   publication_type_id: "1"
   id: "3"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_229: 
   citation: Caldeira, K., M. G. Morgan, D. Baldocchi, P. G. Brewer, C. T. A. Chen, G.-J. Nabuurs, N. Nakicenovic, and G. P. Robertson. 2004. A portfolio of carbon management options. Pages 103-130 in C. B. Field and M. R. Raupach, eds. The Global Carbon Cycle. Island Press, Washington, DC, USA.
@@ -3108,7 +3108,7 @@ publications_229:
   publication_type_id: "3"
   id: "310"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_468: 
   citation: 
@@ -3118,7 +3118,7 @@ publications_468:
   publication_type_id: "6"
   id: "267"
   year: "1999"
-  authors: G.W. Bird
+  author: G.W. Bird
   source_id: "2"
 publications_278: 
   citation: "Hedin, L. O., and M. G. Brown. 1994. Watershed-level coupling of nitrogen and sulfur in heterogeneous landscape. Verh. Internat. Verein. Limnol. 25: 1477-1482."
@@ -3128,7 +3128,7 @@ publications_278:
   publication_type_id: "1"
   id: "363"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_088: 
   citation: Rasse, D.P., J.T. Ritchie, W.R. Peterson, T.L. Loudon, and E.C. Martin. 1999. Nitrogen management impacts on yield and nitrate leaching in inbred maize systems. Journal of Environmental Quality 28:1365-1371.
@@ -3138,7 +3138,7 @@ publications_088:
   publication_type_id: "1"
   id: "148"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_469: 
   citation: 
@@ -3148,7 +3148,7 @@ publications_469:
   publication_type_id: "6"
   id: "268"
   year: "1999"
-  authors: C.B. Blackwod and E. A. Paul
+  author: C.B. Blackwod and E. A. Paul
   source_id: "2"
 publications_279: 
   citation: Holben, W. E. 1994. Isolation and purification of bacterial DNA from soil. Pages 727-751 in R. Weaver, P. Bottomly, and S. Angle, eds. Methods of Soil Analysis Part 2.  Microbiological and Biochemical Properties. Soil Science Society of America, Madison, Wisconsin, USA.
@@ -3158,7 +3158,7 @@ publications_279:
   publication_type_id: "3"
   id: "364"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_089: 
   citation: "Redman, A., and J. M. Scriber. 2000. Competition between gypsy moth, Lymantria dispar, and the northern tiger swallowtail, Papilip canadensis: interactions mediated by host plant chemistry, pathogens, and parasitoids. Oecologia 125: 218-228. "
@@ -3168,7 +3168,7 @@ publications_089:
   publication_type_id: "1"
   id: "151"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_330: 
   citation: Paul, E. A., W. R. Horwath, D. Harris, R. Follett, S. W. Leavitt, and B. A. Kimball. 1995. Establishing the pool sizes and fluxes in CO2 emissions from soil organic matter turnover. Pages 297-305 in R. Lal, ed. Soils and Global Change. Lewis Publishers.
@@ -3178,7 +3178,7 @@ publications_330:
   publication_type_id: "3"
   id: "416"
   year: "1995"
-  authors: 
+  author: 
   source_id: 
 publications_140: 
   citation: "Collins, H. P., R. L. Blevins, L. G. Bundy, D. R. Christenson, W. A. Dick, D. R. Huggins, and E. A. Paul. 1999. Soil carbon dynamics in corn-based agroecosystems: results from carbon-13 natural abundance. Soil Science Society of America Journal 63: 584-591"
@@ -3188,7 +3188,7 @@ publications_140:
   publication_type_id: "1"
   id: "28"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_331: 
   citation: "Paul, E. A., S. J. Morris, and S. Bohm. 2001. The determination of soil C pool sizes and turnover rates: Biophysical fractionation and tracers. Pages 193-206 in R. Lal, J. M. Kimble, R. F. Follett, and B. A. Stewart, eds. Assessment Methods for Soil Carbon. CRC Press, Boca Raton, Florida, USA."
@@ -3198,7 +3198,7 @@ publications_331:
   publication_type_id: "3"
   id: "417"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_141: 
   citation: Collins, H. P., E. T. Elliott, K. Paustian, L. G. Bundy, W. A. Dick, D. R. Huggins, A. J. M. Smucker, and E. A. Paul. 2000. Soil carbon pools and fluxes in long-term corn belt agroecosystems. Soil Biology and Biochemistry 32:157-168
@@ -3208,7 +3208,7 @@ publications_141:
   publication_type_id: "1"
   id: "29"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_332: 
   citation: "Paul, E. A., S. J. Morris, R. T. Conant, and A. F. Plante. 2006. Does the acid hydrolysis incubation method measure meaningful soil organic carbon pools? Soil Science Society of America Journal 70: 1023-1035."
@@ -3218,7 +3218,7 @@ publications_332:
   publication_type_id: "1"
   id: "418"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_142: 
   citation: "Colunga-Garcia, M., and S. H. Gage. 1998. Arrival, establishment, and habitat utilization of the exotic coccinellid Harmonia axyridis Pallas Coleoptera in a Michigan landscape. Environmental Entomology 27: 1574-1580"
@@ -3228,7 +3228,7 @@ publications_142:
   publication_type_id: "1"
   id: "30"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_380: 
   citation: Smeenk, J. P. 2003. The impacts of continuous corn and a corn-soybean-wheat rotation grown under various management schemes on nitrate leaching, soil physical characteristics and net returns. Ph.D. Dissertation, Michigan State University, East Lansing, Michigan, USA.
@@ -3238,7 +3238,7 @@ publications_380:
   publication_type_id: "2"
   id: "471"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_190: 
   citation: "Robertson, G. P., K. M. Klingensmith, M. J. Klug, E. A. Paul, J. C. Crum, and B. G. Ellis. 1997. Soil resources, microbial activity, and primary production across an agricultural ecosystem. Ecological Applications 7: 158-170."
@@ -3248,7 +3248,7 @@ publications_190:
   publication_type_id: "1"
   id: "159"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_333: 
   citation: "Paul, E. A., K. Paustian, E. T. Elliott, and C. V. Cole, eds. 1997. Soil Organic Matter in Temperate Ecosystems: Long-Term Experiments in North America. Lewis CRC Publishers, Boca Raton, Florida, USA."
@@ -3258,7 +3258,7 @@ publications_333:
   publication_type_id: "3"
   id: "419"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_143: 
   citation: "Eash, N. S., P. D. Stahl, T. B. Parkin, and D. L. Karlen. 1996. A simplified method for extraction of ergosterol from soil. Soil Science Society of America Journal 60: 468-471."
@@ -3268,7 +3268,7 @@ publications_143:
   publication_type_id: "1"
   id: "43"
   year: "1996"
-  authors: 
+  author: 
   source_id: 
 publications_381: 
   citation: Smith, J. J. 2004. Impacts of soil ecosystem disturbance on nematode community structure. MS Thesis, Dept. of Entomology, Michigan State University, East Lansing, Michigan, USA.
@@ -3278,7 +3278,7 @@ publications_381:
   publication_type_id: "2"
   id: "472"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_191: 
   citation: "Scheiner, S. M., S. B. Cox, M. Willig, G. G. Mittelbach, C. Osenberg, and M. Kaspari. 2000. Species richness, species-area curves and Simpson's paradox. Evolutionary Ecology Research 2: 791-802."
@@ -3288,7 +3288,7 @@ publications_191:
   publication_type_id: "1"
   id: "169"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_334: 
   citation: "Paul, E. A., and G. P. Robertson. 1989. Ecology and the agricultural sciences: a false dichotomy. Ecology 70: 1594-1597."
@@ -3298,7 +3298,7 @@ publications_334:
   publication_type_id: "1"
   id: "420"
   year: "1989"
-  authors: 
+  author: 
   source_id: 
 publications_144: 
   citation: "Fortuna, A. M., R. R. Harwood, G. P. Robertson, J. W. Fisk, and E. A. Paul. 2003. Seasonal changes in nitrification potential associated with application of N fertilizer and compost in maize systems of southwest Michigan. Agriculture, Ecosystems and the Environment 97: 285-293."
@@ -3308,7 +3308,7 @@ publications_144:
   publication_type_id: "1"
   id: "47"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_382: 
   citation: Smith, K. A., G. P. Robertson, and J. Melillo. 1994. Trace gas exchange between the terrestrial biosphere and the atmosphere in the midlatitudes. Pages 179-204 in R. G. Prinn, ed. Global Atmospheric-Biospheric Chemistry. Plenum Press, New York.
@@ -3318,7 +3318,7 @@ publications_382:
   publication_type_id: "3"
   id: "473"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_192: 
   citation: "Six, J., P. Callewaert, S. Landers, S. D. Gryze, S. J. Morris, R. G. Gregorich, E. A. Paul, and K. Paustian. 2002. Measuring and understanding carbon storage in afforested soils by physical fractionation. Soil Science Society of America Journal 66: 1981-1987. "
@@ -3328,7 +3328,7 @@ publications_192:
   publication_type_id: "1"
   id: "181"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_335: 
   citation: Paustian, K., G. I. Agren, and E. Bosatta. 1997. Modeling litter quality effects on decompostion and soil organic matter dynamics. Pages 313-336 in G. Cadisch and K. E. Giller, eds. Driven by Nature. CAB International, Wallingford, UK.
@@ -3338,7 +3338,7 @@ publications_335:
   publication_type_id: "3"
   id: "421"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_145: 
   citation: "Fortuna, A. M., E. A. Paul, and R. R. Harwood. 2003. The effects of compost and crop rotations on carbon turnover and the particulate organic matter fraction. Soil Science 168: 434-444."
@@ -3348,7 +3348,7 @@ publications_145:
   publication_type_id: "1"
   id: "49"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_383: 
   citation: "Smith, R. G., and K. L. Gross. 2006. Rapid change in the germinable fraction of the weed seed bank in crop rotations. Weed Science 54: 1094-1100."
@@ -3358,7 +3358,7 @@ publications_383:
   publication_type_id: "1"
   id: "475"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_193: 
   citation: "Suding, K. N., S. L. Collins, L. Gough, C. Clark, E. E. Cleland, K. L. Gross, D. G. Milchunas, and S. Pennings. 2005. Functional- and abundance-based mechanisms explain diversity loss due to N fertilization. PNAS 102: 4387-4392. "
@@ -3368,7 +3368,7 @@ publications_193:
   publication_type_id: "1"
   id: "194"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_336: 
   citation: "Paustian, K., H. P. Collins, and E. A. Paul. 1997. Management controls on soil carbon. Pages 15-49 in E. A. Paul, K. Paustian, E. T. Elliott, and C. V. Cole, eds. Soil Organic Matter in Temperate Agroecosystems: Long-Term Experiments in North America. CRC Press, Boca Raton, Florida, USA."
@@ -3378,7 +3378,7 @@ publications_336:
   publication_type_id: "3"
   id: "422"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_146: 
   citation: "Foster, B. L., and K. L. Gross. 1997. Partitioning the effects of plant biomass and litter on Andropogon gerardi in old-field vegetation. Ecology 78: 2091-2104."
@@ -3388,7 +3388,7 @@ publications_146:
   publication_type_id: "1"
   id: "51"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_384: 
   citation: "Smith, R. G. 2006. Timing of tillaged is an important filter on the assembly of weed communities. Weed Science 54: 705-712."
@@ -3398,7 +3398,7 @@ publications_384:
   publication_type_id: "1"
   id: "476"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_194: 
   citation: "Symstad, A. J., F. S. Chapin, D. H. Wall, K. L. Gross, L. F. Huenneke, G. G. Mittelbach, D. P. C. Peters, and D. G. Tilman. 2003. Long-term and large-scale perspectives on biodiversity-ecosystem functioning relationships. BioScience 53: 89-98. "
@@ -3408,7 +3408,7 @@ publications_194:
   publication_type_id: "1"
   id: "198"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_337: 
   citation: Paustian, K., E. Levine, W. M. Post, and I. M. Ryzhova. 1997. The use of models to integrate information and understanding of soil C at the regional scale. Pages 227-260 in H. Insam, A. B. McBratney, K. McSweeney, and D. L. Sparks, eds. Geoderma. Elsevier, Amsterdam, The Netherlands.
@@ -3418,7 +3418,7 @@ publications_337:
   publication_type_id: "3"
   id: "423"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_147: 
   citation: "Foster, B. L., and K. L. Gross. 1998. Species richness in a successional grassland: Effects of nitrogen enrichment and plant litter. Ecology 79: 2593-2602."
@@ -3428,7 +3428,7 @@ publications_147:
   publication_type_id: "1"
   id: "52"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_385: 
   citation: "Smucker, A. J. M. 1990. Quantification of root dynamics in agroecological systems. Remote Sensing Reviews 5: 237-248."
@@ -3438,7 +3438,7 @@ publications_385:
   publication_type_id: "1"
   id: "477"
   year: "1990"
-  authors: 
+  author: 
   source_id: 
 publications_195: 
   citation: "Tiedje, J. M., S. Asuming-Brempong, K. Nuesslein, T. L. Marsh, and S. J. Flynn. 1999. Opening the black box of soil microbial diversity. Applied Soil Ecology 13: 109-122."
@@ -3448,7 +3448,7 @@ publications_195:
   publication_type_id: "1"
   id: "200"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_148: 
   citation: "Fox, T. B., D. A. Landis, F. F. Cardoso, and C. D. DiFonzo. 2005. Impact of predation on establishment of the soybean aphis Aphis glycines Matsumura in soybean, Glycine max L. BioControl 50: 545-563. "
@@ -3458,7 +3458,7 @@ publications_148:
   publication_type_id: "1"
   id: "54"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_386: 
   citation: "Smucker, A. J. M. 1993. Soil environmental modifications of root dynamics and measurement. Annual Review Phytopathology 31: 191-216."
@@ -3468,7 +3468,7 @@ publications_386:
   publication_type_id: "1"
   id: "478"
   year: "1993"
-  authors: 
+  author: 
   source_id: 
 publications_196: 
   citation: |-
@@ -3481,7 +3481,7 @@ publications_196:
   publication_type_id: "2"
   id: "222"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_338: 
   citation: Paustian, K., G. P. Robertson, and E. T. Elliott. 1995. Management impacts on carbon storage and gas fluxes (CO2, CH4) in mid-latitude cropland ecosystems. Pages 69-84 in R. Lal, J. M. Kimble, E. Levine, and B. A. Stewart, eds. Soil Management and the Greenhouse Effect, Advances in Soil Science. CRC Press, Boca Raton, Florida, USA.
@@ -3491,7 +3491,7 @@ publications_338:
   publication_type_id: "3"
   id: "424"
   year: "1995"
-  authors: 
+  author: 
   source_id: 
 publications_149: 
   citation: "Freckman, D. W., and C. H. Ettema. 1993. Assessing nematode communities in agroecosystems of varying human intervention. Agriculture, Ecosystems and Environment 45: 239-261."
@@ -3501,7 +3501,7 @@ publications_149:
   publication_type_id: "1"
   id: "55"
   year: "1993"
-  authors: 
+  author: 
   source_id: 
 publications_197: 
   citation: 
@@ -3511,7 +3511,7 @@ publications_197:
   publication_type_id: "6"
   id: "265"
   year: "1999"
-  authors: T. T. Bergsma
+  author: T. T. Bergsma
   source_id: "2"
 publications_339: 
   citation: "Pennings, S. C., C. M. Clark, E. E. Cleland, S. L. Collins, L. Gough, K. L. Gross, D. G. Milchunas, and K. N. Suding. 2005. Do individual plant species show predictable responses to nitrogen addition across multiple experiments? Oikos 110: 547-555."
@@ -3521,7 +3521,7 @@ publications_339:
   publication_type_id: "1"
   id: "425"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_387: 
   citation: Smucker, A. J. M. 2002. Root contributions to soil structure. Pages 1273-1275 in R. Lal, ed. Encyclopedia of Soil Science. Marcel Dekker, Inc., New York, New York, USA.
@@ -3531,7 +3531,7 @@ publications_387:
   publication_type_id: "3"
   id: "479"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_198: 
   citation: 
@@ -3610,7 +3610,7 @@ publications_198:
   publication_type_id: "6"
   id: "252"
   year: "1998"
-  authors: |-
+  author: |-
     Keith Paustian, Eldor Paul,
     Edward T. Elliott
   source_id: "1"
@@ -3622,7 +3622,7 @@ publications_200:
   publication_type_id: "6"
   id: "272"
   year: "1999"
-  authors: F. Dazo, M.J. Klug, E. Peters, M. Cole, J.M. Tiedje, S. Marsh, and G.P. Robertson
+  author: F. Dazo, M.J. Klug, E. Peters, M. Cole, J.M. Tiedje, S. Marsh, and G.P. Robertson
   source_id: "2"
 publications_010: 
   citation: "Corbett, A. L. 1998. Root responses to nutrient heterogeneity: a comparison of dominant and subordinate species from old fields. Dept. of Botany and Plant Pathology. Michigan State University, East Lansing, Michigan, USA."
@@ -3636,7 +3636,7 @@ publications_010:
   publication_type_id: "2"
   id: "217"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_388: 
   citation: "Smucker, A. J. M. 2003. Root carbon contributions to soil aggregate formation and function. Pages 421-426 in J. Abe, ed. Roots: The Dynamic Interface between Plants and the Earth. Kluwer Academic Publishers, The Netherlands."
@@ -3646,7 +3646,7 @@ publications_388:
   publication_type_id: "3"
   id: "480"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_201: 
   citation: 
@@ -3656,7 +3656,7 @@ publications_201:
   publication_type_id: "6"
   id: "274"
   year: "1999"
-  authors: A.F. Ezano, R.R. Harwod, and E.A. Paul
+  author: A.F. Ezano, R.R. Harwod, and E.A. Paul
   source_id: "2"
 publications_011: 
   citation: |-
@@ -3669,7 +3669,7 @@ publications_011:
   publication_type_id: "2"
   id: "220"
   year: "1993"
-  authors: 
+  author: 
   source_id: 
 publications_389: 
   citation: "Smucker, A. J. M., C. J. Dell, and D. Santos. 2003. Tillage modifications of carbon sequestration within soil aggregates. Proceedings of the 16th International Conference of ISTRO: 1157-1159."
@@ -3679,7 +3679,7 @@ publications_389:
   publication_type_id: "1"
   id: "481"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_199: 
   citation: 
@@ -3707,7 +3707,7 @@ publications_199:
   publication_type_id: "6"
   id: "246"
   year: "1998"
-  authors: |-
+  author: |-
     Kevin R. Kosola, Donald I. Dickmann,
     Eldor Paul, Dylan Parry, Christine Easley, and Emily
     Duncan
@@ -3722,7 +3722,7 @@ publications_202:
   publication_type_id: "2"
   id: "207"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_012: 
   citation: |-
@@ -3736,7 +3736,7 @@ publications_012:
   publication_type_id: "2"
   id: "223"
   year: "1992"
-  authors: 
+  author: 
   source_id: 
 publications_440: 
   citation: 
@@ -3808,7 +3808,7 @@ publications_440:
   publication_type_id: "6"
   id: "249"
   year: "1998"
-  authors: |-
+  author: |-
     Klaus N&uuml;sslein and James M.
     Tiedje
   source_id: "1"
@@ -3820,7 +3820,7 @@ publications_250:
   publication_type_id: "1"
   id: "333"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_060: 
   citation: "Kosola, K. R., D. I. Dickmann, and D. Parry. 2002. Carbohydrates in individual poplar fine roots- effects of root age and defoliation. Tree Physiology 22:741-746. "
@@ -3830,7 +3830,7 @@ publications_060:
   publication_type_id: "1"
   id: "106"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_203: 
   citation: Bruns, M. 1996. Nucleic acid probe analysis of autotrophic ammonia-oxidizer populations in soils. Crop and Soil Sciences. Ph.D. Dissertation, Michigan State University, East Lansing, Michigan, USA.
@@ -3840,7 +3840,7 @@ publications_203:
   publication_type_id: "2"
   id: "213"
   year: "1996"
-  authors: 
+  author: 
   source_id: 
 publications_013: 
   citation: |-
@@ -3854,7 +3854,7 @@ publications_013:
   publication_type_id: "2"
   id: "226"
   year: "1990"
-  authors: 
+  author: 
   source_id: 
 publications_441: 
   citation: 
@@ -3876,7 +3876,7 @@ publications_441:
   publication_type_id: "6"
   id: "250"
   year: "1998"
-  authors: Dylan Parry
+  author: Dylan Parry
   source_id: "1"
 publications_251: 
   citation: Elwadie, M. 2002. Spatial and temporal dynamics of nitrogen-water interactions in corn in Michigan. Ph.D. Dissertation, Michigan State University, East Lansing, Michigan, USA.
@@ -3886,7 +3886,7 @@ publications_251:
   publication_type_id: "2"
   id: "334"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_061: 
   citation: "Kravchenko, A. N., G. P. Robertson, S. S. Snapp, and A. J. M. Smucker. 2006. Using information about spatial variability to improve estimates of total soil carbon. Agronomy Journal 98: 823-829."
@@ -3896,7 +3896,7 @@ publications_061:
   publication_type_id: "1"
   id: "109"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_204: 
   citation: |-
@@ -3908,7 +3908,7 @@ publications_204:
   publication_type_id: "2"
   id: "211"
   year: "1992"
-  authors: 
+  author: 
   source_id: 
 publications_014: 
   citation: "Blackwood, C. B. 2003. Eubacterial community structure and population size within the soil light fraction, rhizosphere, and heavy fraction of several agricultural systems. Soil Biology and Biochemistry 35: 1245-1255. "
@@ -3918,7 +3918,7 @@ publications_014:
   publication_type_id: "1"
   id: "12"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_442: 
   citation: 
@@ -3981,7 +3981,7 @@ publications_442:
   publication_type_id: "6"
   id: "251"
   year: "1998"
-  authors: K. Paustian
+  author: K. Paustian
   source_id: "1"
 publications_252: 
   citation: Fageria, N. K., and J. M. Scriber. 2001. The role of essential nutrients and minerals in insect resistance in crop plants. Pages 23-54 in T. Anathakrishnan, ed. Insects and Plant Defense Dynamics. Oxford and IHB, New Delhi, India.
@@ -3991,7 +3991,7 @@ publications_252:
   publication_type_id: "3"
   id: "335"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_062: 
   citation: "Landis, D. A., F. D. Menalled, A. C. Costamagna, and T. K. Wilkinson. 2005. Manipulating plant resources to enhance beneficial arthropods in agricultural landscapes. Weed Science 53: 902-908."
@@ -4001,7 +4001,7 @@ publications_062:
   publication_type_id: "1"
   id: "111"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_205: 
   citation: |-
@@ -4015,7 +4015,7 @@ publications_205:
   publication_type_id: "2"
   id: "212"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_015: 
   citation: "Broughton, L. C., and K. L. Gross. 2000. Patterns of diversity in plant and soil microbial communities along a productivity gradient in a Michigan old field. Oecologia 125: 420-427. "
@@ -4025,7 +4025,7 @@ publications_015:
   publication_type_id: "1"
   id: "16"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_490: 
   citation: "Scriber, J. M., G. Ording, and R. Mercader. 2007. Hybrid introgression and parapatric speciation in a hybrid zone. Pages (in press) in K. Tilman, ed. Populations, Species, and Phylogenies: Evolution in Insect - Plant Systems. University of California Press."
@@ -4035,7 +4035,7 @@ publications_490:
   publication_type_id: "3"
   id: "463"
   year: "2007"
-  authors: 
+  author: 
   source_id: 
 publications_443: 
   citation: 
@@ -4083,7 +4083,7 @@ publications_443:
   publication_type_id: "6"
   id: "228"
   year: "1998"
-  authors: |-
+  author: |-
     S. Asuming-Brempong,
     S.J. Flynn, and J.M. Tiedje
   source_id: "1"
@@ -4095,7 +4095,7 @@ publications_253:
   publication_type_id: "3"
   id: "336"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_063: 
   citation: "Landis, D. A., S. D. Wratten, and G. Gurr. 2000. Habitat management to conserve natural enemies of arthropod pests in agriculture. Annual Review Entomology 45: 175-201. "
@@ -4105,7 +4105,7 @@ publications_063:
   publication_type_id: "1"
   id: "110"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_016: 
   citation: "Davis, A. S., K. Renner, and K. L. Gross. 2005. Weed seedbank and community shifts in a long-term cropping systems experiment. Weed Science 53: 296-306. "
@@ -4115,7 +4115,7 @@ publications_016:
   publication_type_id: "1"
   id: "38"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_491: 
   citation: "Scriber, J. M. 2007. A mini-review of the \"feeding specialization/physiological efficiency\" hypothesis: 50 years of difficulties, and strong support from the North American Lauraceae-specialist, Papilio troilus (Papilionidae: Lepidoptera). Trends in Entomology (in press)."
@@ -4125,7 +4125,7 @@ publications_491:
   publication_type_id: "3"
   id: "459"
   year: "2007"
-  authors: 
+  author: 
   source_id: 
 publications_444: 
   citation: 
@@ -4170,7 +4170,7 @@ publications_444:
   publication_type_id: "6"
   id: "230"
   year: "1998"
-  authors: |-
+  author: |-
     Timothy T. Bergsma, Nathaniel E.
     Ostrom, Matt Emmons, and G. Philip Robertson
   source_id: "1"
@@ -4182,7 +4182,7 @@ publications_254:
   publication_type_id: "2"
   id: "337"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_064: 
   citation: "Leavitt, S. W., E. A. Paul, E. Pendall, P. J. Pinter, and B. A. Kimball. 1997. Field variability of carbon isotopes in soil organic matter pool sizes and fluxes. Nuclear Instrument Methods B 123: 451-454."
@@ -4192,7 +4192,7 @@ publications_064:
   publication_type_id: "1"
   id: "113"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_206: 
   citation: "Agrawal, A. A., K. R. Kosola, and D. Parry. 2002. Gypsy moth defoliation and N fertilization affect hybrid poplar regeneration following coppicing. Canadian Journal of Forest Research 32: 1491-1495."
@@ -4202,7 +4202,7 @@ publications_206:
   publication_type_id: "1"
   id: "291"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_017: 
   citation: "Fortuna, A. M., R. R. Harwood, K. Kizilkaya, and E. A. Paul. 2003. Optimizing nutrient availability and potential carbon sequestration in an agroecosystem. Soil Biology and Biochemistry 35: 1005-1013. "
@@ -4212,7 +4212,7 @@ publications_017:
   publication_type_id: "1"
   id: "48"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_492: 
   citation: "Costamagna, A. C., F. D. Menalled, and D. A. Landis. 2004. Host density influences parasitism of the armyworm Pseudaletia unipuncta in agricultural landscapes. Basic and Applied Ecology 5: 337-355. "
@@ -4222,7 +4222,7 @@ publications_492:
   publication_type_id: "1"
   id: "32"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_445: 
   citation: 
@@ -4278,7 +4278,7 @@ publications_445:
   publication_type_id: "6"
   id: "233"
   year: "1998"
-  authors: |-
+  author: |-
     Daniel H. Buckley and Thomas M.
     Schmidt
   source_id: "1"
@@ -4290,7 +4290,7 @@ publications_255:
   publication_type_id: "2"
   id: "338"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_065: 
   citation: "Lee, J. C., F. D. Menalled, and D. A. Landis. 2001. Refuge habitats modify impacr of insecticide disturbance on carabid beetle communities. Journal of Applied Ecology 38: 472-483. "
@@ -4300,7 +4300,7 @@ publications_065:
   publication_type_id: "1"
   id: "114"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_207: 
   citation: "Ka, J. O. and J. M. Tiedje. 1994. Integration and excision of a 2,4-Dichlorophenoxyacetate acid-degradative plasmid in alcaligenes paradoxus and evidence of its natural intergeneric transfer. Journal Bacteriology 176: 5284-5289."
@@ -4310,7 +4310,7 @@ publications_207:
   publication_type_id: "1"
   id: "1"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_018: 
   citation: "Aiken, R. M., and A. J. M. Smucker. 1996. Root system regulation of whole plant growth. Annual Review Phytopathology 34: 325-347. "
@@ -4320,7 +4320,7 @@ publications_018:
   publication_type_id: "1"
   id: "4"
   year: "1996"
-  authors: 
+  author: 
   source_id: 
 publications_493: 
   citation: Costamagna, A. C. 2006. Do varying natural enemy assemblages impact aphis glyucines population dynamics? Ph.D. Dissertation, Michigan State University, East Lansing, Michigan, USA.
@@ -4333,7 +4333,7 @@ publications_493:
   publication_type_id: "2"
   id: "319"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_446: 
   citation: 
@@ -4390,7 +4390,7 @@ publications_446:
   publication_type_id: "6"
   id: "234"
   year: "1998"
-  authors: |-
+  author: |-
     Cavigelli, M. A.&nbsp; and G.P.
     Robertson
   source_id: "1"
@@ -4402,7 +4402,7 @@ publications_256:
   publication_type_id: "3"
   id: "339"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_066: 
   citation: "Maredia, K. M., S. H. Gage, D. A. Landis, and M. J. Scriber. 1992. Habitat use patterns by the seven-spotted lady beetle (Coleoptera: Coccinellodae) in a diverse agricultural landscape. Biological Control 2: 159-165. "
@@ -4412,7 +4412,7 @@ publications_066:
   publication_type_id: "1"
   id: "117"
   year: "1992"
-  authors: 
+  author: 
   source_id: 
 publications_208: 
   citation: "Ambus, P., E. S. Jensen, and G. P. Robertson. 2001. Nitrous oxide and N-leaching losses from agricultural soil: influence of crop residue particle size, quality and placement. Phyton (Austria) 41: 7-15."
@@ -4422,7 +4422,7 @@ publications_208:
   publication_type_id: "1"
   id: "292"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_494: 
   citation: "Costamagna, A. C., and D. A. Landis. 2006. Predators exert top-down control of soybean aphid across a gradient of agricultural management systems. Ecological Applications 16: 1619-1628."
@@ -4432,7 +4432,7 @@ publications_494:
   publication_type_id: "1"
   id: "320"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_447: 
   citation: 
@@ -4464,7 +4464,7 @@ publications_447:
   publication_type_id: "6"
   id: "235"
   year: "1998"
-  authors: |-
+  author: |-
     M.A. Cavigelli, L.K. Probyn, S.
     Deming, G.P. Robertson, G.W. Bird, M.F. Berney, D.R. Mutch, T.E.
     Martin, M. Colunga-Garcia, S.H. Gage, L.E. Dyer, and R.R.
@@ -4478,7 +4478,7 @@ publications_257:
   publication_type_id: "3"
   id: "340"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_067: 
   citation: "McSwiney, C. P., and G. P. Robertson. 2005. Non-linear response of N2O flux to incremental fertilizer addition in a continuous maize (Zea mays sp.) cropping system. Global Change Biology 11: 1712-1719. "
@@ -4488,7 +4488,7 @@ publications_067:
   publication_type_id: "1"
   id: "123"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_209: 
   citation: Berney, M. F., and G. W. Bird. 1998. Nematodes. Pages 71-79 in M. A. Cavigelli, S. R. Deming, L. K. Probyn, and R. R. Harwood, eds. Michigan Field Crop Ecology. Michigan State University Extension Bulletin E-2646, East Lansing, MI.
@@ -4498,7 +4498,7 @@ publications_209:
   publication_type_id: "3"
   id: "294"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_019: 
   citation: "Ambus, P., and G. P. Robertson. 1998. Automated near-continuous measurement of CO2 and N2O fluxes with a photoacoustic infra-red spectrometer and flow-through soil cover boxes. Soil Science Society of America Journal 62:394-400. "
@@ -4508,7 +4508,7 @@ publications_019:
   publication_type_id: "1"
   id: "6"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_495: 
   citation: "Smith, R. G. 2005. Agroecosystem diversity: impacts on weed communities and crop yield. PhD Dissertation, Michigan State University, East Lansing, Michigan, USA."
@@ -4527,7 +4527,7 @@ publications_495:
   publication_type_id: "2"
   id: "474"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_258: 
   citation: Gage, S. H., J. R. Gosz, and W. Michener. 2002. Site to regional scaling. Pages 37-41 in A. Withey, W. Michener, and P. Tooby, eds. Scalable Information Networks for the Environment. San Diego Supercomputer Center, San Diego, California, USA.
@@ -4537,7 +4537,7 @@ publications_258:
   publication_type_id: "3"
   id: "341"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_068: 
   citation: "Menalled, F., K. L. Gross, and M. Hammond. 2001. Weed aboveground and seedbank community responses to agricultural management systems. Ecological Applications 11: 1586-1601. "
@@ -4547,7 +4547,7 @@ publications_068:
   publication_type_id: "1"
   id: "124"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_496: 
   citation: Robertson, G. P. 1994. The impact of soil and crop management practices on soil spatial heterogeneity. Pages 156-161 in C. E. Pankhurse, B. M. Doube, V. V. S. R. Gupta, and P. R. Grace, eds. Soil Biota Management in Sustainable Farming Systems. CSIRO, East Melbourne, Australia.
@@ -4557,7 +4557,7 @@ publications_496:
   publication_type_id: "3"
   id: "437"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_448: 
   citation: 
@@ -4598,7 +4598,7 @@ publications_448:
   publication_type_id: "6"
   id: "236"
   year: "1998"
-  authors: |-
+  author: |-
     Manuel Colunga and Stuart
     Gage
   source_id: "1"
@@ -4610,7 +4610,7 @@ publications_259:
   publication_type_id: "1"
   id: "342"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_069: 
   citation: "O'Neal, M. E., D. A. Landis, J. R. Miller, and C. D. DiFonzo. 2004. Corn phenology influences Diabrotica vigifera virgifera (LeConte) emigration and visitation to soybean. Environmental Entomology 33: 35-44. "
@@ -4620,7 +4620,7 @@ publications_069:
   publication_type_id: "1"
   id: "63"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_497: 
   citation: Rasse, D. 1997. Alfalfa and corn root modifications of soil nitrogen flux and retention. Ph.D. Dissertation, Michigan State University, East Lansing, Michigan, USA.
@@ -4630,7 +4630,7 @@ publications_497:
   publication_type_id: "2"
   id: "224"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_449: 
   citation: 
@@ -4670,7 +4670,7 @@ publications_449:
   publication_type_id: "6"
   id: "239"
   year: "1998"
-  authors: |-
+  author: |-
     Goodfriend, Wendy L. and Laura C.
     Broughton
   source_id: "1"
@@ -4691,7 +4691,7 @@ publications_500:
   publication_type_id: "2"
   id: "506"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_498: 
   citation: Raikow, D. F. 2001. How the feeding ecology of native and exotic mussels affects freshwater ecosystems. Dept. of Zoology. PhD Dissertation, Michigan State University, East Lansing, Michigan.
@@ -4710,7 +4710,7 @@ publications_498:
   publication_type_id: "2"
   id: "429"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_310: 
   citation: Menalled, F. D., and D. A. Landis. 2000. Principals of field crop pest ecology. Pages 14-24 in L. K. Probyn, M. A. Cavigelli, and D. R. Mutch, eds. Michigan Field Crop Pest Ecology and Management. Michigan State University Extension Bulletin E-2704, East Lansing, MI.
@@ -4720,7 +4720,7 @@ publications_310:
   publication_type_id: "3"
   id: "395"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_120: 
   citation: "Stahl, P. D., and M. J. Klug. 1996. Characterization and differentiation of filamentous fungi based on fatty acid composition. Applied and Environmental Microbiology 62: 4136-4146."
@@ -4730,7 +4730,7 @@ publications_120:
   publication_type_id: "1"
   id: "188"
   year: "1996"
-  authors: 
+  author: 
   source_id: 
 publications_501: 
   citation: "Suwanwaree, P. 2003. Methane oxidation in terrestrial ecosystems: Patterns and effects of disturbance. Ph.D. Dissertation, Michigan State University, East Lansing, Michigan, USA."
@@ -4751,7 +4751,7 @@ publications_501:
   publication_type_id: "2"
   id: "492"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_499: 
   citation: Broughton, L. C. 2001. Linking plant communities to soil microbial communities and processes in old-fields. PhD Dissertation, Michigan State University, East Lansing, Michigan, USA.
@@ -4772,7 +4772,7 @@ publications_499:
   publication_type_id: "2"
   id: "307"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_311: 
   citation: "Menalled, F. D., D. A. Landis, and L. E. Dyer. 2004. Research and extension supporting ecologically based IPM systems. Journal of Crop Improvement 11: 153-174."
@@ -4782,7 +4782,7 @@ publications_311:
   publication_type_id: "1"
   id: "396"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_121: 
   citation: "Stahl, P. D., and T. B. Parkin. 1996. Relationship of soil ergosterol content and fungal biomass. Soil Biology and Biochemistry 28: 847-855."
@@ -4792,7 +4792,7 @@ publications_121:
   publication_type_id: "1"
   id: "189"
   year: "1996"
-  authors: 
+  author: 
   source_id: 
 publications_502: 
   citation: Reid, N. 2005. Biogeochemical impacts of major reservoirs on the Kalamazoo River. Zoology. MS. Thesis, Michigan State University, East Lansing, Michigan, USA.
@@ -4802,7 +4802,7 @@ publications_502:
   publication_type_id: "2"
   id: "432"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_312: 
   citation: "Menalled, F. D., P. C. Marino, S. H. Gage, and D. A. Landis. 1999. Does agricultural landscape structure affect parasitism and parasitoid diversity? Ecological Applications 9: 634-641."
@@ -4812,7 +4812,7 @@ publications_312:
   publication_type_id: "1"
   id: "397"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_122: 
   citation: "Stevenson, B. S., S. A. Eichorst, J. T. Wertz, and T. M. Schmidt. 2004. New strategies for cultivation and detection of previously uncultured microbes. Applied and Environmental Microbiology 70: 4748-4755. "
@@ -4822,7 +4822,7 @@ publications_122:
   publication_type_id: "1"
   id: "190"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_360: 
   citation: Robertson, G. P., and R. R. Harwood. 2001. Sustainable agriculture. Pages 99-108 in S. A. Levin, ed. Encyclopedia of Biodiversity. Academic Press, New York.
@@ -4832,7 +4832,7 @@ publications_360:
   publication_type_id: "3"
   id: "449"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_170: 
   citation: "Ka, J. O., W. E. Holben, and J. M. Tiedje. 1994. Genetic and phenotypic diversity of 2,4-D degrading bacteria isolated from 2,4-D treated field soils. Applied and Environmental Microbiology 60: 1106-1115."
@@ -4842,7 +4842,7 @@ publications_170:
   publication_type_id: "1"
   id: "95"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_313: 
   citation: "Mercader, R., and J. M. Scriber. 2005. Phenotypic plasticity in host selection in adult tiger swallowtail butterflies, Papilio glaucus (Lepidptera: Papilionidae). Pages 25-57 in T. N. Ananthakrishnan, ed. Insects and Phenotypic Plasticity. IHB, Oxford, England, UK."
@@ -4852,7 +4852,7 @@ publications_313:
   publication_type_id: "3"
   id: "399"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_123: 
   citation: "Stoyan, H., H. De-Polli, S. Bohm, G. P. Robertson, and E. A. Paul. 2000. Spatial variability of soil respiration and related soil properties at the plant scale. Plant and Soil 222:203-214. "
@@ -4862,7 +4862,7 @@ publications_123:
   publication_type_id: "1"
   id: "192"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_503: 
   citation: Bergsma, T. T. 2000. The relationship between denitrification and nitrous oxide flux from soil. Ph.D. Dissertation, Michigan State University, East Lansing, Michigan, USA.
@@ -4872,7 +4872,7 @@ publications_503:
   publication_type_id: "2"
   id: "293"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_361: 
   citation: "Robertson, G. P., and E. A. Paul. 1998. Ecological research in agricultural ecosystems: contributions to ecosystem science and to the management of agronomic resources. Pages 142-164 in M. L. Pace and P. M. Groffman, eds. Successes, Limitations and Frontiers in Ecosystem Science. Springer-Verlag, New York."
@@ -4882,7 +4882,7 @@ publications_361:
   publication_type_id: "3"
   id: "450"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_171: 
   citation: "Ka, J. O., W. E. Holben, and J. M. Tiedje. 1994. Use of gene probes to aid recovery and identification of functionally dominant 2,4-D degrading populations in soil. Applied and Environmental Microbiology 60: 1116-1120."
@@ -4892,7 +4892,7 @@ publications_171:
   publication_type_id: "1"
   id: "96"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_314: 
   citation: "Mokma, D. L., and J. A. Doolittle. 1993. Mapping some loamy alfisols in southwestern Michigan using ground-penetrating radar. Soil Survey Horizons 34: 71-77."
@@ -4902,7 +4902,7 @@ publications_314:
   publication_type_id: "1"
   id: "400"
   year: "1993"
-  authors: 
+  author: 
   source_id: 
 publications_124: 
   citation: "Stres, B., I. Mahne, G. Avgustin, and J. M. Tiedje. 2004. Nitrous oxide reductase (nosZ) gene fragments differ between native and cultivated Michigan soils. Applied and Environmental Microbiology 70: 301-309. "
@@ -4912,7 +4912,7 @@ publications_124:
   publication_type_id: "1"
   id: "193"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_504: 
   citation: Ambus, P., and G. P. Robertson. 2006. The effect of increased N deposition on nitrous oxide, methane, and carbon dioxide fluxes from unmanaged forest and grassland communities in Michigan. Biogeochemistry 79:315-337
@@ -4922,7 +4922,7 @@ publications_504:
   publication_type_id: "1"
   id: "7"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_362: 
   citation: Robertson, G. P., and E. A. Paul. 2000. Decomposition and soil organic matter dynamics. Pages 104-116 in E. S. Osvaldo, R. B. Jackson, H. A. Mooney, and R. W. Howarth, eds. Methods in Ecosystem Science. Springer Verlag, New York, New York, USA.
@@ -4932,7 +4932,7 @@ publications_362:
   publication_type_id: "3"
   id: "451"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_172: 
   citation: "Ka, J. O., W. E. Holben, and J. M. Tiedje. 1994. Analysis of competition in soil among 2,4-D degrading bacteria. Applied and Environmental Microbiology 60: 1121-1128."
@@ -4942,7 +4942,7 @@ publications_172:
   publication_type_id: "1"
   id: "97"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_315: 
   citation: "Mokma, D. L., and J. A. Doolittle. 1993. Mapping soils and soil properties in southwest Michigan using ground-penetrating radar. Soil Survey Horizons 34: 13-22."
@@ -4952,7 +4952,7 @@ publications_315:
   publication_type_id: "1"
   id: "401"
   year: "1993"
-  authors: 
+  author: 
   source_id: 
 publications_125: 
   citation: "Suding, K. N., K. L. Gross, and G. Houseman. 2004. Alternative states and positive feedbacks in restoration ecology. Trends in Ecology &amp; Evolution 19: 46-53. "
@@ -4962,7 +4962,7 @@ publications_125:
   publication_type_id: "1"
   id: "195"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_505: 
   citation: "Menalled, F. D., R. G. Smith, J. T. Dauer, and T. B. Fox. 2007. Impact of agricultural management systems on carabid communities and weed seed predation. Agriculture, Ecosystems, and  Environment 118: 49-54."
@@ -4972,7 +4972,7 @@ publications_505:
   publication_type_id: "1"
   id: "398"
   year: "2007"
-  authors: 
+  author: 
   source_id: 
 publications_363: 
   citation: Robertson, G. P., P. Sollins, B. G. Ellis, and K. Lajtha. 1999. Exchangeable ions, pH, and cation exchange capacity. Pages 106-114 in G. P. Robertson, C. S. Bledsoe, D. C. Coleman, and P. Sollins, eds. Standard Soil Methods for Long-Term Ecological Research. Oxford University Press, New York.
@@ -4982,7 +4982,7 @@ publications_363:
   publication_type_id: "3"
   id: "452"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_173: 
   citation: "Ka, J. O., P. Burauel, J. A. Bronson, W. E. Holben, and J. M. Tiedje. 1995. DNA probe analysis of microbial community selected in field by long-term 2,4-D application. Soil Science Society of America Journal 59: 1581-1587."
@@ -4992,7 +4992,7 @@ publications_173:
   publication_type_id: "1"
   id: "98"
   year: "1995"
-  authors: 
+  author: 
   source_id: 
 publications_126: 
   citation: "Suleiman, A. A., and J. T. Ritchie. 2001. Estimating saturated hydraulic conductivity from soil porosity. Transactions American Society Agricultural Engineering 44: 235-239. "
@@ -5002,7 +5002,7 @@ publications_126:
   publication_type_id: "1"
   id: "196"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_506: 
   citation: "Lynch, M. D., and R. G. Thorn. 2006. Diversity of basidiomycetes in Michigan agricultural soils. Applied and Environmental Microbiology 72: 7050-7056."
@@ -5012,7 +5012,7 @@ publications_506:
   publication_type_id: "1"
   id: "510"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_364: 
   citation: "Robertson, G. P., D. A. Wedin, P. M. Groffman, J. M. Blair, E. Holland, D. Harris, and K. Nadelhoffer. 1999. Soil carbon and nitrogen availability: nitrogen mineralization, nitrification, and soil respiration potentials. Pages 258-271 in G. P. Robertson, C. S. Bledsoe, D. C. Coleman, and P. Sollins, eds. Standard Soil Methods for Long-Term Ecological Research. Oxford University Press, New York."
@@ -5022,7 +5022,7 @@ publications_364:
   publication_type_id: "3"
   id: "453"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_174: 
   citation: "Kellndorfer, J. M., L. E. Pierce, M. C. Dobson, and F. T. Ulaby. 1998. Toward consistant regional to global scale vegetation characterization using orbital SAR systems. IEEE Trans. Geosci. Remote Sensing 36: 1396-1411. "
@@ -5032,7 +5032,7 @@ publications_174:
   publication_type_id: "1"
   id: "99"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_316: 
   citation: Morris, S. J., and E. A. Paul. 2002. Forest ecology and soil organic matter. Pages 109-125 in J. M. Kimble, R. A. Birdsey, R. Lal, R. F. Follett, and J. Heath, eds. The Potential of US Forest Soil to Sequester Carbon and Mitigate the Greenhouse Effect. CRC Press, Boca Raton, Florida, USA.
@@ -5042,7 +5042,7 @@ publications_316:
   publication_type_id: "3"
   id: "402"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_127: 
   citation: "Suwanwaree, P., and G. P. Robertson. 2005. Methane oxidation in forest, successional, and no-till agricultural ecosystems: Effects of nitrogen and soil disturbance. Soil Science Society of America Journal 69: 1722-1729. "
@@ -5052,7 +5052,7 @@ publications_127:
   publication_type_id: "1"
   id: "197"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_507: 
   citation: "Gross, K. L., and C. E. Pake. 1996. Recommendations and executive summary of the ESA committee on the future of long-term ecological data (FLED). Bull. Ecol. Soc. Amer. 77: 192-196."
@@ -5062,7 +5062,7 @@ publications_507:
   publication_type_id: "1"
   id: "353"
   year: "1996"
-  authors: 
+  author: 
   source_id: 
 publications_365: 
   citation: Roda, A. 1996. Effects of growing alfalfa with perennial grasses upon potato leafhopper Homoptera Cicadellidae and alfalfa weevils Coleoptera Curculionidae.  M.S. Thesis, Michigan State University, East Lansing, Michigan, USA.
@@ -5072,7 +5072,7 @@ publications_365:
   publication_type_id: "2"
   id: "454"
   year: "1996"
-  authors: 
+  author: 
   source_id: 
 publications_175: 
   citation: "Klappenbach, J., J. M. Dunbar, and T. M. Schmidt. 2000. rRNA operon copy number reflects ecological strategies of bacteria. Applied and Environmental Microbiology 66: 1328-1333."
@@ -5082,7 +5082,7 @@ publications_175:
   publication_type_id: "1"
   id: "101"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_317: 
   citation: Morris, S. J., and G. P. Robertson. 2005. Linking function between scales of resolution. Pages 13-26 in J. Dighton, P. V. Oudemans, and J. F. White, eds. The Fungal Community, 3rd Ed. Marcel Dekker, New York, New York, USA.
@@ -5092,7 +5092,7 @@ publications_317:
   publication_type_id: "3"
   id: "403"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_128: 
   citation: "Thorn, R. G., C. A. Reddy, D. Harris, and E. A. Paul. 1996. Isolation of saprophytic basidiomycetes from field and forest soils. Applied and Environmental Microbiology 62: 4288-4292."
@@ -5102,7 +5102,7 @@ publications_128:
   publication_type_id: "1"
   id: "199"
   year: "1996"
-  authors: 
+  author: 
   source_id: 
 publications_366: 
   citation: Sanchez, J. E., R. R. Harwood, J. LeCureux, J. E. Shaw, M. Shaw, S. Smalley, J. Smeenk, and R. Voelker. 2001. Integrated Cropping System for Corn-Sugar Beet-Dry Bean Rotation. Michigan State University Extension Bulletin E-2738, East lansing, Michigan, USA.
@@ -5112,7 +5112,7 @@ publications_366:
   publication_type_id: "3"
   id: "455"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_176: 
   citation: "Knapp, A. K., and M. D. Smith. 2001. Variation among biomes in temporal dynamics of aboveground primary production. Science 291: 481-484."
@@ -5122,7 +5122,7 @@ publications_176:
   publication_type_id: "1"
   id: "102"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_318: 
   citation: "Mulholland, P. J., C. S. Fellows, J. L. Tank, N. B. Grimm, J. R. Webster, S. K. Hamilton, E. Marti, L. Ashkenas, W. B. Bowden, W. K. Dodds, W. H. McDowell, M. J. Paul, and B. J. Peterson. 2001. Inter-biome comparison of factors controlling stream metabolism. Freshwater Biology 46: 1503-1517."
@@ -5145,7 +5145,7 @@ publications_318:
   publication_type_id: "1"
   id: "404"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_367: 
   citation: Sanchez, J. E. 2000. Managing cropping systems to enhance the active soil nitrogen pool and control its mineralization. Ph.D. Dissertation, Michigan State University, East Lansing, Michigan, USA.
@@ -5155,7 +5155,7 @@ publications_367:
   publication_type_id: "2"
   id: "456"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_177: 
   citation: "Kosola, K. R., D. M. Durall, G. P. Robertson, D. I. Dickmann, D. Parry, C. A. Russell, and E. A. Paul. 2004. Resilience of mycorrhizal fungi on defoliated and fertilized hybrid poplars. Canadian Journal of Botany 82: 671-680."
@@ -5165,7 +5165,7 @@ publications_177:
   publication_type_id: "1"
   id: "104"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_319: 
   citation: "Mulholland, P. J., J. L. Tank, J. R. Webster, W. K. Dodds, S. K. Hamilton, S. L. Johnson, E. Marti, W. H. McDowell, J. Merriam, B. J. Peterson, H. M. Valett, and W. M. Wollheim. 2002. Can uptake lengths in streams be determined by nutrient addition experiments? : Results from an inter-biome comparison study. Journal of the North American Benthological Society 21: 544-560."
@@ -5175,7 +5175,7 @@ publications_319:
   publication_type_id: "1"
   id: "405"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_129: 
   citation: "Vinocur, M. G., and J. T. Ritchie. 2001. Maize leaf development biases caused by air-apex temperature differences. Agronomy Journal 93: 767-772. "
@@ -5185,7 +5185,7 @@ publications_129:
   publication_type_id: "1"
   id: "201"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_368: 
   citation: Santos, D. 1999. Contributions of roots and organic mater to soil aggregate stabilization. Ph.D. Dissertation, Michigan State University, East Lansing, Michigan, USA.
@@ -5195,7 +5195,7 @@ publications_368:
   publication_type_id: "2"
   id: "457"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_178: 
   citation: "Kosola, K. R., and K. L. Gross. 1999. Resource competition and suppression of plants colonizing early successional old fields. Oecologia 118: 69-75."
@@ -5205,7 +5205,7 @@ publications_178:
   publication_type_id: "1"
   id: "108"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_369: 
   citation: "Scriber, J. M. 1994. Climate legacies and sex chromosomes:  latitudinal patterns of voltinism, diapause and host-plant selection in 2 species of swallowtail butterflies at their hybrid zone. Pages 133-171 in H. V. Danks, ed. Insect Life-Cycle Polymorphism: Theory, Evolution and Ecological Consequences for Seasonality and Diapause Control. Kluwer Academic, Dordrecht, Netherlands."
@@ -5215,7 +5215,7 @@ publications_369:
   publication_type_id: "3"
   id: "458"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_179: 
   citation: "Leavitt, S. W., E. A. Paul, A. Galadima, F. S. Nakayama, S. R. Danzer, H. Johonson, and B. A. Kimball. 1996. Carbon isotopes and carbon turnover in cotton and wheat FACE experiments. Plant and Soil 187: 147-155."
@@ -5225,7 +5225,7 @@ publications_179:
   publication_type_id: "1"
   id: "112"
   year: "1996"
-  authors: 
+  author: 
   source_id: 
 publications_420: 
   citation: "Porter, J. H., P. Arzberger, H.-W. Braun, P. Bryant, S. H. Gage, T. Hansen, P. Hanson, C.-C. Lin, F.-P. Lin, T. K. Kratz, W. Michener, S. Shapiro, and T. Williams. 2005. Wireless sensor networks for ecology. BioScience 7: 561-572. "
@@ -5235,7 +5235,7 @@ publications_420:
   publication_type_id: "1"
   id: "144"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_230: 
   citation: "Cavigelli, M. A. 1998. Carbon and nitrogen. Pages 17-43 in M. A. Cavigelli, S. R. Deming, L. K. Probyn, and R. R. Harwood, eds. Michigan Field Crop Ecology: Managing Biological Processes for Productivity and Environmental Quality. Michigan State University Extension Bulletin E-2646, East Lansing, Michigan, USA."
@@ -5245,7 +5245,7 @@ publications_230:
   publication_type_id: "3"
   id: "311"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_040: 
   citation: "De Gryze, S., J. Six, K. Paustian, S. J. Morris, E. A. Paul, and R. Merckx. 2004. Soil organic carbon pool changes following land use conversions. Global Change Biology 10: 1120-1132. "
@@ -5255,7 +5255,7 @@ publications_040:
   publication_type_id: "1"
   id: "39"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_421: 
   citation: "Peterson, B. J., W. M. Wollheim, P. J. Mullholland, J. R. Webster, J. L. Meyer, J. L. Tank, E. Marti, W. B. Bowden, H. M. Valett, A. E. Hershey, W. B. McDowell, W. K. Dodds, S. K. Hamilton, S. Gregory, and D. D. Morrall. 2001. Control of nitrogen export from watersheds by headwater streams. Science 292: 86-90."
@@ -5265,7 +5265,7 @@ publications_421:
   publication_type_id: "1"
   id: "140"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_231: 
   citation: Cavigelli, M. A. 2000. Soil ecology and pest management. Pages 25-34 in L. K. Probyn, M. A. Cavigelli, and D. R. Mutch, eds. Michigan Field Crop Pest Ecology and Management. Michigan State University Extension Bulletin E-2704, East Lansing, MI.
@@ -5275,7 +5275,7 @@ publications_231:
   publication_type_id: "3"
   id: "312"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_041: 
   citation: "De Roo, R. D., Y. Du, F. T. Ulaby, and M. C. Dobson. 2001. A semi-empirical model at L-band and C-band for a soybean canopy with soil moisture inversion. IEEE Geoscience and Remote Sensing 39: 864-872 "
@@ -5285,7 +5285,7 @@ publications_041:
   publication_type_id: "1"
   id: "40"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_422: 
   citation: "Kemner, K. M., W. Yun, Z. Cai, B. Lai, H. R. Lee, D. G. Lengnini, W. Rodriguez, J. Jastrow, R. M. Miller, S. T. Pratt, M. A. Schnnegurt, C. F. Kulpa, and A. J. M. Smucker. 1998. Using X-ray microprobes for environment research.  Proceedings of the International Society for Optical Engineering 3449: 45-54."
@@ -5295,7 +5295,7 @@ publications_422:
   publication_type_id: "1"
   id: "100"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_232: 
   citation: "Cavigelli, M. A., S. R. Deming, L. K. Probyn, and R. R. Harwood, eds. 1998. Michigan Field Crop Ecology: Managing Biological Processes for Productivity and Environmental Quality. Michigan State University Extension Bulletin E-2646, East Lansing, Michigan, USA."
@@ -5305,7 +5305,7 @@ publications_232:
   publication_type_id: "3"
   id: "313"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_042: 
   citation: "Elwadie, M., F.J. Pierce, and C. Qi. 2005. Remote sensing of corn canopy dynamics and biophysical variables estimation. Agronomy Journal 97: 99-105."
@@ -5315,7 +5315,7 @@ publications_042:
   publication_type_id: "1"
   id: "44"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_470: 
   citation: 
@@ -5325,7 +5325,7 @@ publications_470:
   publication_type_id: "6"
   id: "269"
   year: "1999"
-  authors: J.C. Boles
+  author: J.C. Boles
   source_id: "2"
 publications_423: 
   citation: "Mittelbach, G. G., C. S. Steiner, S. M. Scheiner, K. L. Gross, H. Reynolds, R. B. Waide, M. Willig, S. I. Dodson, and L. Gough. 2001. What is the observed relationship between species richness and productivity? Ecology 82: 2381-2396. "
@@ -5335,7 +5335,7 @@ publications_423:
   publication_type_id: "1"
   id: "125"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_280: 
   citation: Holdaway-Dopp, H. A. 2003. Changes in microbial community responses to gradients of carbon, nitrogen, and wetting cycles in ceoncentric layers of soil macro-aggregates. MS Theses, Michigan State University, East Lansing, Michigan, USA.
@@ -5345,7 +5345,7 @@ publications_280:
   publication_type_id: "2"
   id: "365"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_090: 
   citation: "Rillig, M. C., P. W. Ramsey, S. J. Morris, and E. A. Paul. 2003. Glomalin, an arbuscular-mychrrhizal fungal protein, responds to landscape-level management. Plant and Soil 253: 293-299. "
@@ -5355,7 +5355,7 @@ publications_090:
   publication_type_id: "1"
   id: "154"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_233: 
   citation: Christenson, D. R., D. D. Warncke, M. L. Vitosh, L. W. Jacobs, and J. G. Dahl. 1992. Fertilizer Recommendations for Field Crops in Michigan. Michigan State University Extension Bulletin E-550A, East Lansing, MI.
@@ -5365,7 +5365,7 @@ publications_233:
   publication_type_id: "3"
   id: "314"
   year: "1992"
-  authors: 
+  author: 
   source_id: 
 publications_043: 
   citation: |-
@@ -5378,7 +5378,7 @@ publications_043:
   publication_type_id: "2"
   id: "208"
   year: "1992"
-  authors: 
+  author: 
   source_id: 
 publications_471: 
   citation: 
@@ -5388,7 +5388,7 @@ publications_471:
   publication_type_id: "6"
   id: "270"
   year: "1999"
-  authors: M. Colunga-G. and S.H. Gage
+  author: M. Colunga-G. and S.H. Gage
   source_id: "2"
 publications_424: 
   citation: "Holben, W. E., B. M. Schroeder, V. G. M. Calabrese, R. H. Olsen, J. K. Kukor, V. O. Biederbeck, A. E. Smith, and J. M. Tiedje. 1992. Gene probe analysis of soil microbial populations selected by amendment with 2,4-dichlorophenoxyacetic acid (2,4-D). Applied Environment Microbiology 58: 3941-3948."
@@ -5398,7 +5398,7 @@ publications_424:
   publication_type_id: "1"
   id: "85"
   year: "1992"
-  authors: 
+  author: 
   source_id: 
 publications_281: 
   citation: Holland, E. A., G. P. Robertson, J. Greenberg, P. Groffman, R. Boone, and J. Gosz. 1999. Soil CO2, N2O, and CH4 Exchange. Pages 185-201 in G. P. Robertson, C. S. Bledsoe, D. C. Coleman, and P. Sollins, eds. Standard Soil Methods for Long-Term Ecological Research. Oxford University Press, New York.
@@ -5408,7 +5408,7 @@ publications_281:
   publication_type_id: "3"
   id: "366"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_091: 
   citation: "Ritchie, J. T., A. Gerakis, and A. Suleiman. 1999. Simple model to estimate field-measured soil water limits. Transactions American Society Agricultural Engineering 42: 1609-1614. "
@@ -5418,7 +5418,7 @@ publications_091:
   publication_type_id: "1"
   id: "155"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_234: 
   citation: "Collins, H. P., E. A. Paul, K. Paustian, and E. T. Elliott. 1997. Characterization of soil organic carbon relative to its stability and turnover. Pages 51-72 in E. A. Paul, K. Paustian, E. T. Elliott, and C. V. Cole, eds. Soil Organic Matter in Temperate Agroecosystems: Long-Term Experiments in North America. CRC Lewis Publishers, Inc., Boca Raton, Florida, USA."
@@ -5428,7 +5428,7 @@ publications_234:
   publication_type_id: "3"
   id: "315"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_044: 
   citation: |-
@@ -5445,7 +5445,7 @@ publications_044:
   publication_type_id: "2"
   id: "209"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_472: 
   citation: 
@@ -5455,7 +5455,7 @@ publications_472:
   publication_type_id: "6"
   id: "271"
   year: "1999"
-  authors: S. Daroub, B.G. Elis, and G.P. Robertson
+  author: S. Daroub, B.G. Elis, and G.P. Robertson
   source_id: "2"
 publications_425: 
   citation: "Davis, A. S., J. Cardina, F. Forcella, G. B. Johnson, G. Kegode, J. L. Lindquist, E. C. Luschei, K. A. Renner, C. K. Sprague, and M. M. Williams. 2005. Environmental factors affecting seedbank persistence of 13 annual weeds across the U.S. corn belt. Weed Science 53: 296-306."
@@ -5465,7 +5465,7 @@ publications_425:
   publication_type_id: "1"
   id: "37"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_282: 
   citation: Horwath, W. R., and E. A. Paul. 1994. Microbial biomass. Pages 753-774 in R. W. Weaver, J. S. Angle, P. J. Bottomley, D. F. Bezdicek, M. S. Smith, M. A. Tabatabai, and A. G. Wollum, eds. Methods of Soil Analysis Part 2-Microbiological and Biochemical Properties. Soil Science Society of America, Madison, Wisconsin, USA.
@@ -5475,7 +5475,7 @@ publications_282:
   publication_type_id: "3"
   id: "367"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_092: 
   citation: "Robertson, G. P., E. A. Paul, and R. R. Harwood. 2000. Greenhouse gases in intensive agriculture: Contributions of individual gases to the radiative forcing of the atmosphere. Science 289:1922-1925. "
@@ -5485,7 +5485,7 @@ publications_092:
   publication_type_id: "1"
   id: "158"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_235: 
   citation: Collins, H. P., G. P. Robertson, and M. J. Klug, eds. 1995. The Significance and Regulation of Soil Biodiversity. Kluwer Academic Publishers, Boston, Massachusetts, USA.
@@ -5495,7 +5495,7 @@ publications_235:
   publication_type_id: "3"
   id: "316"
   year: "1995"
-  authors: 
+  author: 
   source_id: 
 publications_045: 
   citation: "Foster, B. L. 1999. Establishment, competition and the distribution of native grasses among Michigan old-fields. Journal of Ecology 87: 476-489"
@@ -5505,7 +5505,7 @@ publications_045:
   publication_type_id: "1"
   id: "53"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_473: 
   citation: 
@@ -5515,7 +5515,7 @@ publications_473:
   publication_type_id: "6"
   id: "273"
   year: "1999"
-  authors: C.J. Del, Y. Kavdir, D. Santos, and A.J. M. Smucker
+  author: C.J. Del, Y. Kavdir, D. Santos, and A.J. M. Smucker
   source_id: "2"
 publications_283: 
   citation: Huang, B. 1995. Tillage modifications of root and shoot growth responses to soil water content and nitrogen concentration altered by seasons. Department of Crop and Soil Sciences. Ph.D. Dissertation, Michigan State University, East Lansing, Michigan, USA.
@@ -5525,7 +5525,7 @@ publications_283:
   publication_type_id: "2"
   id: "368"
   year: "1995"
-  authors: 
+  author: 
   source_id: 
 publications_093: 
   citation: "Robertson, G. P., J. R. Crum, and B. G. Ellis. 1993. The spatial variability of soil resources following long-term disturbance. Oecologia 96: 451-456."
@@ -5535,7 +5535,7 @@ publications_093:
   publication_type_id: "1"
   id: "157"
   year: "1993"
-  authors: 
+  author: 
   source_id: 
 publications_236: 
   citation: "Colunga-Garcia, M., S. H. Gage, and L. E. Dyer. 1998. The insect community. Pages 59-70 in M. A. Cavigelli, S. R. Deming, L. K. Probyn, and R. R. Harwood, eds. Michigan Field Crop Ecology: Managing Biological Processes for Productivity and Environmental Quality. Michigan State University Extension Bulletin E-2646, East Lansing, Michigan, USA."
@@ -5545,7 +5545,7 @@ publications_236:
   publication_type_id: "3"
   id: "317"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_046: 
   citation: "Foster, B. L. 1999. Establishment, competition and the distribution of native grasses among Michigan old-fields. Journal of Ecology 87: 476-489. Abstract Foster, B. L., and K. L. Gross. 1999. Temporal and spatial variability of woody plant establishment in Michigan old-fields. American Midland Naturalist 142: 229-243. "
@@ -5555,7 +5555,7 @@ publications_046:
   publication_type_id: "1"
   id: "50"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_474: 
   citation: 
@@ -5565,7 +5565,7 @@ publications_474:
   publication_type_id: "6"
   id: "275"
   year: "1999"
-  authors: S.H. Gage, R. Waide, J.J. Hely
+  author: S.H. Gage, R. Waide, J.J. Hely
   source_id: "2"
 publications_426: 
   citation: "Dodds, W. K., A. J. Lopez, R. D. Bowden, S. Gregory, N. B. Grimm, S. K. Hamilton, A. E. Hershey, E. Marti, W. H. McDowell, J. L. Meyer, D. D. Morrall, P. J. Mulholland, B. J. Peterson, J. T. Tank, H. M. Valett, J. R. Webster, and W. M. Wollheim. 2002. N uptake as a function of concentration in streams. Journal of the North American Benthological Society 21: 206-220."
@@ -5575,7 +5575,7 @@ publications_426:
   publication_type_id: "1"
   id: "41"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_284: 
   citation: Huang, X. 2007. Analysis of effects of soil properties, topographicaql variables and management practices on spatial-temporal variability of crop yields. Ph.D. Dissertation, Michigan State University, East Lansing, Michigan, USA.
@@ -5585,7 +5585,7 @@ publications_284:
   publication_type_id: "2"
   id: "369"
   year: "2007"
-  authors: 
+  author: 
   source_id: 
 publications_094: 
   citation: "Robertson, G. P., and D. W. Freckman. 1995. The spatial distribution of nematode trophic groups across a cultivated ecosystem. Ecology 76: 1425-1432."
@@ -5595,7 +5595,7 @@ publications_094:
   publication_type_id: "1"
   id: "160"
   year: "1995"
-  authors: 
+  author: 
   source_id: 
 publications_237: 
   citation: Cora, J., F. J. Pierce, B. Basso, and J. T. Ritchie. 1999. Simulation of within field variability of corn yield with CERES-Maize model. Pages 1309-1319 in P. C. Robert, R. H. Rust, and W. E. Larson, eds. Precision Agriculture. ASA-CSSA-SSSA, Madison, Wisconsin, USA.
@@ -5605,7 +5605,7 @@ publications_237:
   publication_type_id: "3"
   id: "318"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_047: 
   citation: "Gage, S. H., M. Colunga-Garcia, J. J. Helly, G. R. Safir, and A. Momin. 2001. Structural design for management and visualization of information for simulation models applied to a regional scale. Computers and Electronics in Agriculture 33: 77-84."
@@ -5615,7 +5615,7 @@ publications_047:
   publication_type_id: "1"
   id: "57"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_475: 
   citation: 
@@ -5625,7 +5625,7 @@ publications_475:
   publication_type_id: "6"
   id: "276"
   year: "1999"
-  authors: W.L. Godfriend and K.L. Gros
+  author: W.L. Godfriend and K.L. Gros
   source_id: "2"
 publications_427: 
   citation: "Dodds, W. K., E. Marti, J. L. Tank, J. Pontius, S. K. Hamilton, N. B. Grimm, W. B. Bowden, W. H. McDowell, B. J. Peterson, H. M. Valett, J. R. Webster, and S. Gregory. 2004. Carbon and nitrogen stoichiometry and nitrogen cycling in streams. Oecologia 140: 458-467"
@@ -5635,7 +5635,7 @@ publications_427:
   publication_type_id: "1"
   id: "42"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_285: 
   citation: "Isard, S. A., and S. H. Gage. 2001. Flow of Life in the Atmosphere: An Airscape Approach to Understanding Invasive Organisms. Michigan State University Press, East Lansing, Michigan, US."
@@ -5645,7 +5645,7 @@ publications_285:
   publication_type_id: "3"
   id: "370"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_095: 
   citation: "Robertson, G. P., and S. M. Swinton. 2005. Reconciling agricultural productivity and environmental integrity: A grand challenge for agriculture. Frontiers in Ecology and the Environment 3: 38-46."
@@ -5655,7 +5655,7 @@ publications_095:
   publication_type_id: "1"
   id: "162"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_238: 
   citation: "Council for Agricultural Science and Technology (CAST). 2004. Climate Change and Greenhouse Gas Mitigation: Challenges and Opportunities for Agriculture. Task Force Report No. 141, Council for Agricultural Science and Technology (CAST), Ames, Iowa, USA."
@@ -5665,7 +5665,7 @@ publications_238:
   publication_type_id: "3"
   id: "321"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_048: 
   citation: "Gough, L., C. W. Osenberg, K. L. Gross, and S. L. Collins. 2000. Fertilization effects on species density and primary productivity in herbaceous plant communities. Oikos 89: 428-439."
@@ -5675,7 +5675,7 @@ publications_048:
   publication_type_id: "1"
   id: "62"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_476: 
   citation: 
@@ -5685,7 +5685,7 @@ publications_476:
   publication_type_id: "6"
   id: "277"
   year: "1999"
-  authors: S. Gray
+  author: S. Gray
   source_id: "2"
 publications_428: 
   citation: "Gantner, S., M. Schmid, C. Durr, R. Schuhegger, A. Steidle, P. Hutzler, C. Langebartels, L. Eberl, A. Hartmann, and F. B. Dazzo. 2006. In situ quantitation of the spatial scale of calling distances and population density-independent N-acylhomoserine lactone-mediated communication by rhizobacteria colonized on plant roots. FEMS Microbial Ecology 56: 188-194. "
@@ -5695,7 +5695,7 @@ publications_428:
   publication_type_id: "1"
   id: "58"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_286: 
   citation: Johnson, K., and J. M. Scriber. 1994. Geographic variation in plant allelochemicals of significance to insect herbivores. Pages 7-31 in T. N. Ananthakrishnan, ed. Functional Dynamics of Phytophagous Insects. Science Publishers, Lebanon, New Hampshire, USA.
@@ -5705,7 +5705,7 @@ publications_286:
   publication_type_id: "3"
   id: "371"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_096: 
   citation: |-
@@ -5718,7 +5718,7 @@ publications_096:
   publication_type_id: "2"
   id: "225"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_049: 
   citation: "Grace, P. R., J. N. Ladd, G. P. Robertson, and S. H. Gage. 2006. SOCRATES - A simple model for predicting long-term changes in soil organic carbon in terrestrial ecosystems. Soil Biology and Biochemistry 38: 1172-1176. "
@@ -5728,7 +5728,7 @@ publications_049:
   publication_type_id: "1"
   id: "64"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_477: 
   citation: 
@@ -5738,7 +5738,7 @@ publications_477:
   publication_type_id: "6"
   id: "278"
   year: "1999"
-  authors: M. Halvorson
+  author: M. Halvorson
   source_id: "2"
 publications_429: 
   citation: "Reilly, J., F. Tubiello, B. A. McCarl, D. Abler, R. Darwin, K. Fuglie, S. Hollinger, R. C. Izaurralde, S. Jagtag, J. Jones, L. Mearns, D. Ojima, E. A. Paul, K. Paustian, S. Riha, N. Rosenberg, and C. Rosenzweig. 2003. U.S. agriculture and climate change: New results. Climatic Change 57: 43-69. "
@@ -5748,7 +5748,7 @@ publications_429:
   publication_type_id: "1"
   id: "152"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_287: 
   citation: Kavdir, Y. 2000. Distribution of cover crop nitrogen retained by soil aggregates within a rye-corn agroecosystem. Crop and Soil Sciences. Ph.D. Dissertation, Michigan State University, East Lansing, MI.
@@ -5758,7 +5758,7 @@ publications_287:
   publication_type_id: "2"
   id: "372"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_097: 
   citation: "Russell, C. A., K. R. Kosola, E. A. Paul, and G. P. Robertson. 2004. Nitrogen cycling in poplar stands defoliated by insects. Biogeochemistry 68: 365-381. "
@@ -5768,7 +5768,7 @@ publications_097:
   publication_type_id: "1"
   id: "163"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_239: 
   citation: Crum, J. R., G. P. Robertson, and F. Nurenberger. 1990. Long-term climate trends and agricultural productivity in Southwestern Michigan. Pages 53-58 in D. Greenland and L. W. Swith, eds. Climate Variability and Ecosystem Response. U.S. Forest Service, U.S. Department of Agriculture, Washington, D.C.
@@ -5778,7 +5778,7 @@ publications_239:
   publication_type_id: "3"
   id: "322"
   year: "1990"
-  authors: 
+  author: 
   source_id: 
 publications_478: 
   citation: 
@@ -5788,7 +5788,7 @@ publications_478:
   publication_type_id: "6"
   id: "279"
   year: "1999"
-  authors: S. K. Hamilton
+  author: S. K. Hamilton
   source_id: "2"
 publications_100: 
   citation: "Sanchez, J. E., T. C. Willson, K. Kizilkaya, E. Parker, and R.R. Harwood. 2001. Enhancing the mineralizable nitrogen pool through substrate diversity in long-term cropping systems. Soil Science Society of America Journal 65: 1442-1447. "
@@ -5798,7 +5798,7 @@ publications_100:
   publication_type_id: "1"
   id: "167"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_288: 
   citation: Kavdir, Y., and A. J. M. Smucker. 2002. Soil aggregate sequestration of cover crop root and shoot residue nitrogen. Pages 134-142. Proceedings of the International Conference on Sustainable Land Use and Management. Soil Science Society of Turkey, Turkey.
@@ -5808,7 +5808,7 @@ publications_288:
   publication_type_id: "3"
   id: "373"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_098: 
   citation: "Rutledge, C. E., R. J. O'Neil, T. B. Fox, and D. A. Landis. 2004. Soybean aphid predators and their use in IPM. Annals of the Entomological Society of America 97: 240-248. "
@@ -5818,7 +5818,7 @@ publications_098:
   publication_type_id: "1"
   id: "164"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_479: 
   citation: 
@@ -5828,7 +5828,7 @@ publications_479:
   publication_type_id: "6"
   id: "280"
   year: "1999"
-  authors: M. Hamond, K. Tindal, and K.L. Gros
+  author: M. Hamond, K. Tindal, and K.L. Gros
   source_id: "2"
 publications_101: 
   citation: "Santos, D., S. L. S. Murphy, H. Taubner, A. J. M. Smucker, and R. Horn. 1997. Uniform separation of concentric surface layers from soil aggregates. Soil Science Society America Journal 61: 720-724."
@@ -5838,7 +5838,7 @@ publications_101:
   publication_type_id: "1"
   id: "168"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_289: 
   citation: "Kavdir, Y., and A. J. M. Smucker. 2004. Effects of rye roots and shoots on soil aggregate erosion rate. Journal of Harran Uni. Agr. Fac. 8: 29-32."
@@ -5848,7 +5848,7 @@ publications_289:
   publication_type_id: "1"
   id: "374"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_099: 
   citation: "Sanchez, J. E., E. A. Paul, T. C. Willson, J. Smeenk, and R. R. Harwood. 2002. Corn root effects on the nitrogen-supplying capacity of a conditioned soil. Agronomy Journal 94: 391-396. "
@@ -5858,7 +5858,7 @@ publications_099:
   publication_type_id: "1"
   id: "165"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_102: 
   citation: "Scriber, J. M. 2002. Latitudinal and local geographic mosaics in host plant preferences as shaped by thermal units and voltinism. European Journal of Entomology 99: 225-239. "
@@ -5868,7 +5868,7 @@ publications_102:
   publication_type_id: "1"
   id: "171"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_103: 
   citation: "Scriber, J. M. 2002. The evolution of insect-plant relationships; Chemical constraints, coadaptation and concordance of insect/plant traits. Entomologia Experimentalis et Applicata 104: 217.235. "
@@ -5878,7 +5878,7 @@ publications_103:
   publication_type_id: "1"
   id: "170"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_340: 
   citation: "Pietola, L., and A. J. M. Smucker. 2006. Elimination of non-root residue by image analysis of very fine roots. Computers and Electronics in Agriculture 53: 92-97."
@@ -5888,7 +5888,7 @@ publications_340:
   publication_type_id: "1"
   id: "426"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_150: 
   citation: Gage, S. H., S. A. Isard, and M. Colunga-G. 1999. Ecological scaling of aerobiological processes. Agricultural and Forest Meteorology 97:249-261.
@@ -5898,7 +5898,7 @@ publications_150:
   publication_type_id: "1"
   id: "56"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_104: 
   citation: "Scriber, J. M. 2004. Non-target impacts of forest defoliator management options: Decision for no spraying may have worse impacts on non-target Lepidoptera that Bacillus thuringiensis insecticides. Journal of Insect Conservation 8: 241-261."
@@ -5908,7 +5908,7 @@ publications_104:
   publication_type_id: "1"
   id: "172"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_341: 
   citation: "Pitt, A. J. 2003. Isotopomer effects associated with nitrification and denitrification: Implications for the global nitrous oxide cycle. MS. Thesis, Michigan State University, East Lansing, Michigan, USA."
@@ -5918,7 +5918,7 @@ publications_341:
   publication_type_id: "2"
   id: "427"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_151: 
   citation: "Garrison, M. V., W. D. Batchelor, R. S. Kanwar, and J. T. Ritchie. 1999. Evaluation of the CERES-Maize water and nitrogen balances under tile-drained conditions. Agricultural Systems 62: 189-199. "
@@ -5928,7 +5928,7 @@ publications_151:
   publication_type_id: "1"
   id: "59"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_105: 
   citation: "Scriber, J. M., J. L. Bossart, and D. M. Snider. 1992. Diagnostic alleles from electrophoresis distinguish two noctuid pest species, Hydraecia immanis and H. micacea Lepidoptera: Noctuidae. Great Lakes Entomologist 25: 91-98."
@@ -5938,7 +5938,7 @@ publications_105:
   publication_type_id: "1"
   id: "175"
   year: "1992"
-  authors: 
+  author: 
   source_id: 
 publications_342: 
   citation: Probyn, L. K., M. A. Cavigelli, and D. R. Mutch, eds. 2000. Michigan Field Crop Pest Ecology and Management. Michigan State University Extension Bulletin E-2704, East Lansing, Michigan, USA.
@@ -5948,7 +5948,7 @@ publications_342:
   publication_type_id: "3"
   id: "428"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_152: 
   citation: "Geml, J., D. D. Davis, and D. M. Geiser. 2005. Systematics of the genus Sphaerobolus based on molecular and morphological data, with the description of Sphaerobolus ingoldii sp. nov. Mycologia 97: 680-694. "
@@ -5958,7 +5958,7 @@ publications_152:
   publication_type_id: "1"
   id: "60"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_106: 
   citation: "Scriber, J. M., K. Keefover, and S. Nelson. 2002. Hot summer temperatures may stop genetic introgression of Papilio canadensis south of the hybrid zone in the North Amercian Great Lakes region. Ecography 25: 184-192."
@@ -5968,7 +5968,7 @@ publications_106:
   publication_type_id: "1"
   id: "174"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_390: 
   citation: Smucker, A. J. M., and Y. Kavdir. 2002. Biophysical infrastructures that promote carbon sequestration within soil aggregates. Pages 129-133. Proceedings of the International Conference on Sustainable Land Use and Management. Soil Science Society of Turkey, Turkey.
@@ -5978,7 +5978,7 @@ publications_390:
   publication_type_id: "3"
   id: "482"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_343: 
   citation: Rasmussen, P. E., H. P. Collins, and R. W. Smiley. 1989. Long-Term Management Effects on Soil Productivity and Crop Yield in Semi-Arid Regions of Eastern Oregon. USDA-Agricultural Research Service and Agricultural Experiment Station, Oregon State University Station Bulletin 675, Pendleton, Oregon.
@@ -5988,7 +5988,7 @@ publications_343:
   publication_type_id: "3"
   id: "430"
   year: "1989"
-  authors: 
+  author: 
   source_id: 
 publications_153: 
   citation: "Gomez, P., and J. Gurevitch. 1998. Weed community responses in a corn-soybean intercrop. Applied Vegetation Science 1: 281-288."
@@ -5998,7 +5998,7 @@ publications_153:
   publication_type_id: "1"
   id: "61"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_391: 
   citation: Smucker, A. J. M., W. Richner, and V. O. Snow. 1995. Bypass flow via root-induced macropores (RIMS) in subirrigated agriculture. Pages 255-258. Clean Water Clean Environment for the 21st Century, Conference Proceedings, Kansas City, MO.
@@ -6008,7 +6008,7 @@ publications_391:
   publication_type_id: "3"
   id: "483"
   year: "1995"
-  authors: 
+  author: 
   source_id: 
 publications_344: 
   citation: "Reeves, J. B. I., B. A. Francis, and S. K. Hamilton. 2005. Specular reflection and diffuse reflectance spectroscopy of soils. Applied Spectroscopy 59: 39-46."
@@ -6018,7 +6018,7 @@ publications_344:
   publication_type_id: "1"
   id: "431"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_154: 
   citation: "Haack, S. K., H. Garchow, D. A. Odelson, L. J. Forney, and M. J. Klug. 1994. Accuracy, reproducibility and interpretation of fatty acid methyl ester profiles of model bacterial communities. Applied and Environmental Microbiology 60: 2483-2493."
@@ -6028,7 +6028,7 @@ publications_154:
   publication_type_id: "1"
   id: "73"
   year: "1994"
-  authors: 
+  author: 
   source_id: 
 publications_107: 
   citation: Scriber, J. M., K. Weir, D. Parry, and J. Deering. 1999. Using hybrid and backcross larvae of Papilio canadensis and Papilio glaucus to detect induced phytochemical resistance in hybrid poplar trees experimentally defoliated by gypsy moths. Entomologia Experimentalis et Applicata 91:233-236.
@@ -6038,7 +6038,7 @@ publications_107:
   publication_type_id: "1"
   id: "173"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_392: 
   citation: Smucker, A. J. M., D. Santos, and Y. Kavdir. 1997. Concentric layering of carbon, nitrogen and clay within soil aggregates from tilled and non-tilled agroecosystems. Pages 129-140 in J. Caron, et al., ed. Third Eastern Canada Soil Structure Workshop Proceedings.
@@ -6048,7 +6048,7 @@ publications_392:
   publication_type_id: "3"
   id: "484"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_345: 
   citation: Reid, N. J., and S. K. Hamilton. 2007. Controls on algal abundance in a eutrophic river with varying degrees of impoundment (Kalamazoo River, Michigan, USA). Lake and Reservoir Management (in press).
@@ -6058,7 +6058,7 @@ publications_345:
   publication_type_id: "1"
   id: "433"
   year: "2007"
-  authors: 
+  author: 
   source_id: 
 publications_155: 
   citation: "Haack, S. K., H. Garchow, M. J. Klug, and L. J. Forney. 1995. Analysis of factors affecting the accuracy, reproducibility, and interpretation of microbial community carbon source utilization patterns. Applied and Environmental Microbiology 61: 1458-1468."
@@ -6068,7 +6068,7 @@ publications_155:
   publication_type_id: "1"
   id: "74"
   year: "1995"
-  authors: 
+  author: 
   source_id: 
 publications_108: 
   citation: "Scriber, J. M., and G. J. Ording. 2005. Ecological speciation without hose plant specialization: Possible origins of recently described cryptic Papilio species (Lepidoptera: Papilionidae). Entomologia Experimentalis et Applicata 115: 247-263. "
@@ -6078,7 +6078,7 @@ publications_108:
   publication_type_id: "1"
   id: "176"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_393: 
   citation: Snider, R. J., R. Snider, and A. J. M. Smucker. 1990. Collembolan populations and root dynamics in Michigan agroecosystems. Pages 168-191 in J. E. Box and L. C. Hammond, eds. Rhizosphere Dynamics. American Society of Agronomy, Madison, Wisconsin, USA.
@@ -6088,7 +6088,7 @@ publications_393:
   publication_type_id: "3"
   id: "485"
   year: "1990"
-  authors: 
+  author: 
   source_id: 
 publications_346: 
   citation: Ritchie, J. T., and J. Wei. 2000. Models of kernel number in maize. Pages 75-88 in M. Westgate and K. Boote, eds. Physiology and Modeling Kernel Set in Maize. American Society of Agronomy and Crop Science Society of America, Madison, WI.
@@ -6098,7 +6098,7 @@ publications_346:
   publication_type_id: "3"
   id: "434"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_156: 
   citation: "Haas, L., and J. M. Scriber. 1998. Phylloplane sterilization with bleach does not reduce Btk toxicity for Papilio glaucus larvae (Lepidoptera: papilionidae). The Great Lakes Entomologist 31: 49-57. "
@@ -6108,7 +6108,7 @@ publications_156:
   publication_type_id: "1"
   id: "75"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_109: 
   citation: "Six, J., E. T. Elliott, K. Paustian, and C. Combrink. 2000. Soil structure and soil organic matter: I. Distribution of aggregate size classes and aggregate associated carbon. Soil Science Society of America Journal 64:681-689."
@@ -6118,7 +6118,7 @@ publications_109:
   publication_type_id: "1"
   id: "183"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_394: 
   citation: Sollins, P., C. Glassman, E. A. Paul, C. Swanston, K. Lajtha, J. Heil, and T. E. Elliott. 1999. Soil carbon and nitrogen pools and fractions. Pages 89-105 in G. P. Robertson, C. S. Bledsoe, D. C. Coleman, and P. Sollins, eds. Standard Soil Methods for Long-Term Ecological Research. Oxford University Press, New York.
@@ -6128,7 +6128,7 @@ publications_394:
   publication_type_id: "3"
   id: "486"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_347: 
   citation: Robertson, G. P. 1991. The KBS LTER Project. Pages 86-92. Long-Term Ecological Research in the United States, 6th edition. LTER Network Office, Seattle, Washington.
@@ -6138,7 +6138,7 @@ publications_347:
   publication_type_id: "3"
   id: "435"
   year: "1991"
-  authors: 
+  author: 
   source_id: 
 publications_157: 
   citation: "Hamilton, S. K., J. L. Tank, D. F. Raikow, W. M. Wollheim, B. J. Peterson, and J. R. Webster. 2001. Nitrogen uptake and transformation in a midwestern U.S. stream: A stable isotope enrichment study. Biogeochemistry 54: 297-340. "
@@ -6148,7 +6148,7 @@ publications_157:
   publication_type_id: "1"
   id: "76"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_395: 
   citation: South, S. R. 2003. Identification and mapping of agricultural tillage methods utilizing remotely sensed data. Ph.D. Dissertation, Michigan State University, East Lansing, Michigan, USA.
@@ -6158,7 +6158,7 @@ publications_395:
   publication_type_id: "2"
   id: "487"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_348: 
   citation: "Robertson, G. P. 1993. Fluxes of nitrous oxide and other nitrogen trace gases from intensively managed landscapes:  a global perspective. Pages 95-108 in L. A. Harper, A. R. Mosier, J. M. Duxbury, and D. E. Rolston, eds. Agricultural Ecosystem Effects on Trace Gases and Global Climate Change. American Society of Agronomy, Madison, Wisconsin, USA."
@@ -6168,7 +6168,7 @@ publications_348:
   publication_type_id: "3"
   id: "436"
   year: "1993"
-  authors: 
+  author: 
   source_id: 
 publications_158: 
   citation: "Hamilton, S. K., J. L. Tank, D. F. Raikow, E. Siler, N. J. Dorn, and N. Leonard. 2004. The role of in-stream vs. allochthonous N in stream food webs: Modeling the results of a nitrogen isotope addition experiment. Journal of the North American Benthological Society 23: 429-448. "
@@ -6178,7 +6178,7 @@ publications_158:
   publication_type_id: "1"
   id: "77"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_396: 
   citation: "Stewart, C. E. 2006. Soil carbon saturation: A new model of soil organic matter stabilization and turnover. Ph.D. Dissertation, Colorado State University, Ft. Collins, Colorado, USA."
@@ -6188,7 +6188,7 @@ publications_396:
   publication_type_id: "2"
   id: "488"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_159: 
   citation: "Hanson, E. J., P. A. Throop, S. Serce, J. Ravenscroft, and E. A. Paul. 2002. Comparison of nitrification rates in blueberry and forest soils. American Journal of Horticulture Science 127: 136-142. "
@@ -6198,7 +6198,7 @@ publications_159:
   publication_type_id: "1"
   id: "78"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_397: 
   citation: "Stornaiuolo, S., B. Basso, and J. T. Ritchie. 1998. Influence of nitrogen fertilization on nitrate concentration in maize plants. Rivista Agronomia 32: 155-160."
@@ -6208,7 +6208,7 @@ publications_397:
   publication_type_id: "1"
   id: "489"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_349: 
   citation: "Robertson, G. P. 1997. Nitrogen use efficiency in row-crop agriculture: crop nitrogen use and soil nitrogen loss. Pages 347-365 in L. Jackson, ed. Ecology in Agriculture. Academic Press, New York City, New York, USA."
@@ -6218,7 +6218,7 @@ publications_349:
   publication_type_id: "3"
   id: "438"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_400: 
   citation: Suwanwaree, P., and G. P. Robertson. 2007. Methane oxidation in organic vs. conventional agriculture. Agriculture, Ecosystems & Environment (in press).
@@ -6228,7 +6228,7 @@ publications_400:
   publication_type_id: "1"
   id: "493"
   year: "2007"
-  authors: 
+  author: 
   source_id: 
 publications_210: 
   citation: "Bills, G. F., M. Christensen, M. Powell, and G. Thorn. 2004. Saprobic soil fungi. Pages 271-302 in G. M. Mueller, G. F. Bills, and M. S. Foster, eds. Biodiversity of Fungi: Inventory and Monitoring Methods. Elsevier Academic Press, Amsterdam, The Netherlands."
@@ -6238,7 +6238,7 @@ publications_210:
   publication_type_id: "3"
   id: "295"
   year: "2004"
-  authors: 
+  author: 
   source_id: 
 publications_020: 
   citation: "Ambus, P., and G. P. Robertson. 1999. Fluxes of CH4 and N2O in aspen stands grown under ambient and twice-ambient CO2. Plant and Soil 209:1-8. "
@@ -6248,7 +6248,7 @@ publications_020:
   publication_type_id: "1"
   id: "5"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_398: 
   citation: "Stres, B., and J. M. Tiedje. 2006. New frontiers in soil microbiology: How to link structure and function of microbial communities? Pages 1-22 in P. Nannipieri and K. Smalla, eds. Soil Biology, Nucleic Acids and Proteins in Soil. Springer Verlag, Berlin, Heidelberg, Germany"
@@ -6258,7 +6258,7 @@ publications_398:
   publication_type_id: "3"
   id: "490"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_401: 
   citation: "Swinton, S. M., F. Lupi, G. P. Robertson, and D. A. Landis. 2006. Ecosystem services from agriculture: Looking beyond the usual suspects. American Journal  of Agricultural Economics 88: 1160-1166."
@@ -6270,7 +6270,7 @@ publications_401:
   publication_type_id: "1"
   id: "494"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_211: 
   citation: Bird, G. W. 2000. Nematodes and soil quality. Pages 84-94 in L. K. Probyn, M. A. Cavigelli, and D. R. Mutch, eds. Michigan Field Crop Pest Ecology and Management. Michigan State University Extension Bulletin E-2704, East Lansing, MI.
@@ -6280,7 +6280,7 @@ publications_211:
   publication_type_id: "3"
   id: "296"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_021: 
   citation: "Bergsma, T. T., G. P. Robertson, and N. E. Ostrom. 2002. Influence of soil moisture and land use history on denitrification end-products. Journal of Environmental Quality 31: 711-717. "
@@ -6290,7 +6290,7 @@ publications_021:
   publication_type_id: "1"
   id: "9"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_399: 
   citation: "Sutka, R. L., N. E. Ostrom, P. H. Ostrom, J. A. Breznak, H. Gandhi, A. J. Pitt, and F. Li. 2006. Distinguishing nitrous oxide production from nitrification and denitrification on the basis of isotopomer abundences. Applied and Environmental Microbiology 72: 638-644."
@@ -6300,7 +6300,7 @@ publications_399:
   publication_type_id: "1"
   id: "491"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_402: 
   citation: "Swinton, S. M. 2005. As ecosystem services are demanded of agriculture, what of agricultural economists? Western Economics Forum 4: 21-23."
@@ -6310,7 +6310,7 @@ publications_402:
   publication_type_id: "1"
   id: "495"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_212: 
   citation: "Bird, G. W. 2001. Patterns of agricultural sustainability. Pages 101-106. Sustainable Agriculture: Possibility and Direction, 2nd Asia-Pacific Conference on Sustainable Agriculture. Thailand national Science and Technology Development Agency, Bankok, Thailand."
@@ -6320,7 +6320,7 @@ publications_212:
   publication_type_id: "3"
   id: "297"
   year: "2001"
-  authors: 
+  author: 
   source_id: 
 publications_022: 
   citation: "Bergsma, T. T., N. E. Ostrom, M. Emmons, and G. P. Robertson. 2001. Measuring simultaneous fluxes from soil of N2O and N2 in the field using the 15N-Gas &quot;Nonequilibrium&quot; technique. Environmental Science and Technology 35: 4307-4312. "
@@ -6330,7 +6330,7 @@ publications_022:
   publication_type_id: "1"
   id: "11"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_450: 
   citation: 
@@ -6364,7 +6364,7 @@ publications_450:
   publication_type_id: "6"
   id: "240"
   year: "1998"
-  authors: K.L. Gross
+  author: K.L. Gross
   source_id: "1"
 publications_403: 
   citation: "Tesar, D., and J. M. Scriber. 2002. Growth season constraints in climatic cold pockets: Tolerance of subfreezing temperatures and compensatory growth by tiger swallowtail butterfly larvae. Holarctic Lepidoptera 7: 39-44."
@@ -6374,7 +6374,7 @@ publications_403:
   publication_type_id: "1"
   id: "496"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_213: 
   citation: Bird, G. W. 2003. Role of integrated pest management and sustainable development. Pages 73-85 in K. S. Maredia, D. Dakouo, and D. Mota-Sanchez, eds. Integrated Pest Management in the Global Arena. CABI Publishing, Cambridge, Massachusetts, USA.
@@ -6384,7 +6384,7 @@ publications_213:
   publication_type_id: "3"
   id: "298"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_023: 
   citation: "Bergsma, T. T., Q. C. Bergsma, N. E. Ostrom, and G. P. Robertson. 1999. A heurstic model for the calculation of dinitrogen and nitrous oxide flux for 15N-labeled soil. Soil Science Society of America Journal 63:1709-1716. "
@@ -6394,7 +6394,7 @@ publications_023:
   publication_type_id: "1"
   id: "10"
   year: "1999"
-  authors: 
+  author: 
   source_id: 
 publications_260: 
   citation: "Grace, P. R., M. C. Jain, L. W. Harrington, and G. P. Robertson. 2003. Long-term sustainability of the tropical and subtropical rice and wheat system: An environmental perspective. Pages 27-43 in J. K. Ladha, J. E. Hill, J. M. Duxbury, R. K. Gupta, and R. J. Buresh, eds. Improving the Productivity and Sustainability of Rice-Wheat System: Issues and Impacts. American Society of Agronomy Special Publication 65, Madison, Wisconsin, USA."
@@ -6404,7 +6404,7 @@ publications_260:
   publication_type_id: "3"
   id: "343"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_070: 
   citation: "Ostrom, N. E., L. O. Hedin, J. C. von Fischer, and G. P. Robertson. 2002. Nitrogen transformations and NO3- removal at a soil-stream interface: a stable isotope approach. Ecological Applications 12: 1027-1043. "
@@ -6414,7 +6414,7 @@ publications_070:
   publication_type_id: "1"
   id: "130"
   year: "2002"
-  authors: 
+  author: 
   source_id: 
 publications_451: 
   citation: 
@@ -6449,7 +6449,7 @@ publications_451:
   publication_type_id: "6"
   id: "241"
   year: "1998"
-  authors: |-
+  author: |-
     S.J. Halstead, E.A. Paul, K.
     Paustian, and M. Harmon
   source_id: "1"
@@ -6461,7 +6461,7 @@ publications_214:
   publication_type_id: "3"
   id: "299"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_024: 
   citation: "Blackwood, C. B., C. J. Dell, A. J. M. Smucker, and E. A. Paul. 2006. Eubacterial communities in different soil macroaggregate environments and cropping systems. Soil Biology and Biochemistry 38: 720-728. "
@@ -6471,7 +6471,7 @@ publications_024:
   publication_type_id: "1"
   id: "14"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_261: 
   citation: Grandy, A. S. 2005. Ecosystem consequences of soil aggregation following soil disturbance. Ph.D. Dissertation, Michigan State University, East Lansing, Michigan, USA.
@@ -6490,7 +6490,7 @@ publications_261:
   publication_type_id: "2"
   id: "344"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_071: 
   citation: "Ostrom, P. H., M. Colunga, and S. H. Gage. 1997. Establishing pathways of energy flow for insect predators using stable isotope ratios: field and laboratory evidence. Oecologia 109: 108-113."
@@ -6500,7 +6500,7 @@ publications_071:
   publication_type_id: "1"
   id: "131"
   year: "1997"
-  authors: 
+  author: 
   source_id: 
 publications_452: 
   citation: 
@@ -6549,7 +6549,7 @@ publications_452:
   publication_type_id: "6"
   id: "242"
   year: "1998"
-  authors: Mark Halvorson
+  author: Mark Halvorson
   source_id: "1"
 publications_404: 
   citation: "Thelen, K. D. 2000. Putting it all together: the big picture. Pages 95-100 in L. K. Probyn, M. A. Cavigelli, and D. R. Mutch, eds. Michigan Field Crop Pest Ecology and Management. Michigan State University Extension Bulletin E-2704, East Lansing, MI."
@@ -6559,7 +6559,7 @@ publications_404:
   publication_type_id: "3"
   id: "497"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_215: 
   citation: Bird, G. W., M. F. Berney, and M. A. Cavigelli. 1998. Soil ecology. Pages 12-16 in M. A. Cavigelli, S. R. Deming, L. K. Probyn, and R. R. Harwood, eds. Michigan Field Crop Ecology. Michigan State University Extension Bulletin E-2646, East Lansing, MI.
@@ -6569,7 +6569,7 @@ publications_215:
   publication_type_id: "3"
   id: "300"
   year: "1998"
-  authors: 
+  author: 
   source_id: 
 publications_025: 
   citation: "Blackwood, C. B., T. Marsh, S.-H. Kim, and E. A. Paul. 2003. Terminal restriction fragment length polymorphism data analysis for quantitative comparison of microbial communities. Applied and Environmental Microbiology 69: 926-932. "
@@ -6579,7 +6579,7 @@ publications_025:
   publication_type_id: "1"
   id: "13"
   year: "2003"
-  authors: 
+  author: 
   source_id: 
 publications_262: 
   citation: "Grandy, A. S., T. D. Loecke, S. Parr, and G. P. Robertson. 2006. Long-term trends in nitrous oxide emissions, soil nitrogen, and crop yields of till and no-till cropping systems. Journal of Environmental Quality 35: 1487-1495."
@@ -6589,7 +6589,7 @@ publications_262:
   publication_type_id: "1"
   id: "346"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_072: 
   citation: "Park, E. J., and A. J. M. Smucker. 2005. Erosive strengths of concentric regions within soil macroaggregates. Soil Science Society of America Journal 69: 1912-1921. "
@@ -6599,7 +6599,7 @@ publications_072:
   publication_type_id: "1"
   id: "133"
   year: "2005"
-  authors: 
+  author: 
   source_id: 
 publications_453: 
   citation: 
@@ -6645,7 +6645,7 @@ publications_453:
   publication_type_id: "6"
   id: "243"
   year: "1998"
-  authors: |-
+  author: |-
     Stephen K.
     Hamilton
   source_id: "1"
@@ -6657,7 +6657,7 @@ publications_405:
   publication_type_id: "3"
   id: "498"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_216: 
   citation: "Bird, G. W., and M. J. Brewer. 2006. Integrated pest management, eco-literacy and unexpected consequences. Pages (in press) in C. R. Francis, C. R. Poincelot, and G. W. Bird, eds. Developing and Extending Sustainable Agriculture: A New Social Contract. Haworth Press, Binghampton, New York, USA."
@@ -6667,7 +6667,7 @@ publications_216:
   publication_type_id: "3"
   id: "301"
   year: "2006"
-  authors: 
+  author: 
   source_id: 
 publications_026: 
   citation: "Bossart, J. L., and J. M. Scriber. 1995. Maintenance of ecologically significant genetic variation in the tiger swallowtail butterfly through differential selection and gene flow. Evolution 49: 1163-1171. "
@@ -6677,7 +6677,7 @@ publications_026:
   publication_type_id: "1"
   id: "15"
   year: "1995"
-  authors: 
+  author: 
   source_id: 
 publications_263: 
   citation: Groffman, P. M. 2000. Nitrogen in the environment. Pages C190-200 in M. E. Sumner, ed. Handbook of Soil Science. CRC Press, Boca Raton, Florida, USA.
@@ -6687,7 +6687,7 @@ publications_263:
   publication_type_id: "3"
   id: "348"
   year: "2000"
-  authors: 
+  author: 
   source_id: 
 publications_073: 
   citation: "Park, E. J., and A. J. M. Smucker. 2005. Saturated hydraulic conductivity and porosity within macroaggregates modified by tillage. Soil Science Society of America Journal 69: 38-45."
@@ -6697,5 +6697,5 @@ publications_073:
   publication_type_id: "1"
   id: "132"
   year: "2005"
-  authors: 
+  author: 
   source_id: 

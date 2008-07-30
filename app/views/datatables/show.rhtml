@@ -27,8 +27,18 @@
 	<% end -%>
 </table>
 
+<h3>Data Access Statement</h3>
+<% if @datatable.access_statement then %>
+<%= @datatable.access_statement %>
+<% else %>
+See <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use policy</a>
+<% end %>
+
 <% if @values -%>
 <h3>Data</h3>
+<%= link_to 'Download as csv', formated_datatable_path(@datatables, :csv) %>
+
+<h3>Data Excerpt</h3>
 <table>
 	<tr>
 		<% @values.fields.each do |field| %>

@@ -1,4 +1,4 @@
-require 'mongrel_cluster/recipes'
+#require 'mongrel_cluster/recipes'
 
 # =============================================================================
 # REQUIRED VARIABLES

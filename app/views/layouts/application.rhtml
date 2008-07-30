@@ -42,10 +42,10 @@
 			<%= yield  %>
 		</div>
 		<div id='navigation'>
-			<%= render :file => "../../public/system/navigation.html" %>
+			<%= render :file => "#{RAILS_ROOT}/public/system/navigation.html"%>
 		</div>
 		<div id='footer'>
-			<%= render :file  => "../../public/system/footer.html"%>
+			<%= render :file  => "#{RAILS_ROOT}/public/system/footer.html"%>
 		</div>
 	</div>
 </body>

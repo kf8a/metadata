@@ -20,7 +20,9 @@ class DatatablesController < ApplicationController
     
     @values
     if @datatable.is_sql
-      @values  = ActiveRecord::Base.connection.execute(@datatable.object)
+      query =  @datatable.object
+      query = query + ' limit 50'
+      @values  = ActiveRecord::Base.connection.execute(query)
     end
 
     respond_to do |format|
