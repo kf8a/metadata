@@ -2,16 +2,15 @@
 
 <table>
   <tr>
-    <th>String</th>
-    <th>Text</th>
+    <th>Title</th>
+    <th>Abstract</th>
   </tr>
 
 <% for project in @projects %>
   <tr>
-    <td><%=h project.string %></td>
-    <td><%=h project.text %></td>
-    <td><%= link_to 'Show', project %></td>
-    <td><%= link_to 'Edit', edit_project_path(project) %></td>
+    <td><%=link_to  "#{project.title}", project %></td>
+    <td><%=h project.abstract %></td>
+    <td><%= link_to 'Edit', edit_project_path(project), {:class => 'edit'} if logged_in? %></td>
     <td><%= link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>

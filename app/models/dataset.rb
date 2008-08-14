@@ -7,6 +7,7 @@ class Dataset < ActiveRecord::Base
   has_many :affiliations, :order => 'seniority'
   has_many :roles, :through => :affiliations, :uniq => true
   has_and_belongs_to_many :themes
+  belongs_to :project
 
   #unpack and populate datatables and variates  
   def from_eml(dataset)

@@ -9,13 +9,13 @@
 # form the root of the application path.
 
 set :application, "metadata"
-set :domain, 'houghton.kbs.msu.edu'
+set :domain, 'sleeth.kbs.msu.edu'
 set :user, "deploy"
 set :use_sudo, false
-set :repository, "http://kf8a.textdriven.com/svn/lter/#{application}/trunk"
+set :repository,  "houghton.kbs.msu.edu:/var/www/lter/git/weather"
 set :rails_env, "production"
+set :scm, :git
 
-set :checkout, "export" 
 set :keep_releases, 10
 # =============================================================================
 # ROLES

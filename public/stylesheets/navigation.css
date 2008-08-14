@@ -12,7 +12,7 @@
 ul.makeMenu, ul.makeMenu ul {
 	/* put rounded bottoms on the menu */
 	-moz-border-radius: 10px;
-	
+	-webkit-border-radius: 10px;	
 
   width: 132px;
   height: 20em;			/* make the main menu a little taller so the child menus stay on the page */
@@ -38,11 +38,10 @@ ul.makeMenu li > ul {          /* using the > selector prevents many lesser brow
   top: 2px;               /* position slightly lower than the parent menu item */
   left: 130px;	/* move it right almost the width of the menu */
   height: auto;    /* don't make the child menus taller than necessary */
-  -moz-border-radius-topleft:10px;   /* round the top corners of the child menus */
-  -moz-border-radius-topright:10px;
-  /* put rounded bottoms on the menu */
-	-moz-border-radius-bottomleft:10px;
-	-moz-border-radius-bottomright:10px;
+/* round the top corners of the child menus */
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+
 	background-color: #e1e1e1; /* make the child menus a lighter color */
 	border-style: solid;
 	border-color: #a3a3a3;

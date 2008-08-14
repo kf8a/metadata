@@ -1,9 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  string: 
-  text: 
+  title: 
+  abstract: 
 
 two:
-  string: 
-  text: 
+  title: 
+  abstract: 

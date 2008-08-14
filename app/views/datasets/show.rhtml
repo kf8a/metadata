@@ -27,7 +27,7 @@
 	<li> <%= role.name.capitalize.pluralize %>
 		<ul>
 	<% @dataset.affiliations.each do |affiliation| -%>
-	<li><%= link_to "#{affiliation.person.full_name}", person_path(affiliation.person.id) if affiliation.role = role%>
+	<li><%= link_to "#{affiliation.person.full_name}", person_path(affiliation.person.id) if affiliation.role == role %>
 	</li>
 	<% end -%>
 		</ul>

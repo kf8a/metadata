@@ -1,5 +1,7 @@
 class DatatablesController < ApplicationController
   
+  #before_filter :is_restricted
+  
   # GET /datatables
   # GET /datatables.xml
   def index
@@ -14,21 +16,31 @@ class DatatablesController < ApplicationController
 
   # GET /datatables/1
   # GET /datatables/1.xml
-  def show
+  def show  
     @datatable = Datatable.find(params[:id])
     @dataset = @datatable.dataset
     
-    @values
+    @values = nil
     if @datatable.is_sql
       query =  @datatable.object
       query = query + ' limit 50'
       @values  = ActiveRecord::Base.connection.execute(query)
     end
+    p 'datset'
+    unless trusted_ip?
+      p "trusted"
+      if @datatable.is_restricted  
+        @values = nil
+        restricted = true
+        p 'embargoed'
+      end
+    end
+    
 
     respond_to do |format|
       format.html # show.rhtml
-      format.xml  { render :xml => @datatable.to_xml }
-      format.csv  { render :csv => @datatable.to_csv }
+      format.xml  { render :xml => @datatable.to_xml unless restricted}
+      format.csv  { render :csv => @datatable.to_csv unless restricted}
     end
   end
 
@@ -104,4 +116,5 @@ class DatatablesController < ApplicationController
     @crumbs << crumb
   
   end
+  
 end

@@ -6,6 +6,10 @@ describe ProjectsController do
     @mock_project ||= mock_model(Project, stubs)
   end
   
+  def mock_dataset(stubs={})
+    @mock_dataset ||= mock_model(Dataset,stubs)
+  end
+  
   describe "responding to GET index" do
 
     it "should expose all projects as @projects" do
@@ -68,6 +72,9 @@ describe ProjectsController do
       assigns[:project].should equal(mock_project)
     end
 
+    it "should expose a list of datasets as @datasets" do
+    end
+    
   end
 
   describe "responding to POST create" do
@@ -127,7 +134,7 @@ describe ProjectsController do
         put :update, :id => "1"
         response.should redirect_to(project_url(mock_project))
       end
-
+      
     end
     
     describe "with invalid params" do

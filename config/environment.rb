@@ -66,3 +66,4 @@ Mime::Type.register "text/xml", :eml
 #require_gem 'acts_as_taggable'
 
 Struct.new('Crumb', :url, :name)
+

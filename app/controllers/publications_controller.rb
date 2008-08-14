@@ -1,6 +1,7 @@
 class PublicationsController < ApplicationController
   
-  before_filter :login_required, :except => [:index, :show, :index_by_treatment]
+  before_filter :login_required, :except => [:index, :show, :index_by_treatment]  if ENV["RAILS_ENV"] == 'production'
+  
   # GET /publications
   # GET /publications.xml
   def index
@@ -51,7 +52,8 @@ class PublicationsController < ApplicationController
   # GET /publications/1.xml
   def show
     @publication = Publication.find(params[:id])
-    @publication.abstract.gsub!(/\n/,"\n\n")
+    @publication.abstract = @publication.abstract || '' # Make sure we have an abstract
+    @publication.abstract.gsub!(/\n/,"\n\n") 
     respond_to do |format|
       format.html # show.rhtml
       format.xml  { render :xml => @publication.to_xml }
@@ -73,13 +75,15 @@ class PublicationsController < ApplicationController
   # POST /publications
   # POST /publications.xml
   def create
-     @publication = Publication.new(params[:publications])
+    publication = params[:publications]
+    publication[:publication_type_id] = 1
+     @publication = Publication.new(publication)
    
      respond_to do |format|
        if @publication.save
          flash[:notice] = 'Publications was successfully created.'
-         format.html { redirect_to publications_url(@publications) }
-         format.xml  { head :created, :location => publications_url(@publications) }
+         format.html { redirect_to publication_url(@publication) }
+         format.xml  { head :created, :location => publication_url(@publication) }
        else
          format.html { render :action => "new" }
          format.xml  { render :xml => @publication.errors.to_xml }
@@ -109,7 +113,7 @@ class PublicationsController < ApplicationController
   def destroy
       @publication = Publication.find(params[:id])
       @publication.destroy
-   
+      p 'destroyed'
       respond_to do |format|
         format.html { redirect_to publications_url }
         format.xml  { head :ok }

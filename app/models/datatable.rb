@@ -17,8 +17,18 @@ class Datatable < ActiveRecord::Base
     return eml
   end
   
-  def to_csv
-    return 'not implemented'
+  def to_csv(restricted=false)
+    if restricted
+      return 'Data Embargoed'
+    end
+    values  = ActiveRecord::Base.connection.execute(object)
+    csv_string = FasterCSV.generate do |csv|
+      csv << variates.collect {|v| v.name }
+      values.each do |row|
+        csv << row
+      end
+    end
+    return  csv_string
   end
   
 private

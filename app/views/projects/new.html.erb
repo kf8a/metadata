@@ -4,13 +4,16 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :string %><br />
-    <%= f.text_field :string %>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
   </p>
   <p>
-    <%= f.label :text %><br />
-    <%= f.text_field :text %>
+    <%= f.label :abstract %><br />
+    <%= f.text_field :abstract %>
   </p>
+	<p>
+		<%= f.label :datasets%>
+	</p>
   <p>
     <%= f.submit "Create" %>
   </p>

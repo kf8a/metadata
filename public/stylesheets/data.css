@@ -64,10 +64,12 @@ label {
 #content ul.multicolumn {
 	margin: 0.1em;
 	-moz-column-width: 17em;
+	-webkit-column-width: 17em;
 }
 
 #content .twocolumn {
 	-moz-column-width: 20em;
+	-webkit-column-width: 20em;
 }
 
 li ul li {

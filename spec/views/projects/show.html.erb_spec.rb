@@ -5,8 +5,8 @@ describe "/projects/show.html.erb" do
   
   before(:each) do
     assigns[:project] = @project = stub_model(Project,
-      :string => ,
-      :text => 
+    :string => 'N fertility gradient',
+    :text => 'Nitrogen fertility gradient in corn'
     )
   end
 

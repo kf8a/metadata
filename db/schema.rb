@@ -9,13 +9,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 40) do
+ActiveRecord::Schema.define(:version => 20080729153355) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
     t.integer "role_id"
     t.integer "dataset_id"
     t.integer "seniority"
+  end
+
+  create_table "columns", :force => true do |t|
+    t.integer "datatable_id"
+    t.integer "variate_id"
+    t.integer "position"
+    t.string  "name"
   end
 
   create_table "datasets", :force => true do |t|
@@ -30,6 +37,7 @@ ActiveRecord::Schema.define(:version => 40) do
     t.boolean "on_web",       :default => true
     t.integer "version"
     t.boolean "core_dataset", :default => false
+    t.integer "project_id"
   end
 
   create_table "datasets_themes", :id => false, :force => true do |t|
@@ -47,11 +55,12 @@ ActiveRecord::Schema.define(:version => 40) do
     t.string  "driver"
     t.boolean "is_restricted"
     t.text    "description"
-    t.string  "object"
+    t.text    "object"
     t.string  "metadata_url"
     t.boolean "is_sql"
     t.integer "update_frequency_years"
     t.date    "last_updated_on"
+    t.text    "access_statement"
   end
 
   create_table "datatables_variates", :force => true do |t|
@@ -124,6 +133,13 @@ ActiveRecord::Schema.define(:version => 40) do
     t.string  "description"
   end
 
+  create_table "projects", :force => true do |t|
+    t.string   "title"
+    t.text     "abstract"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "protocols", :force => true do |t|
     t.string  "name"
     t.string  "title"
@@ -150,15 +166,20 @@ ActiveRecord::Schema.define(:version => 40) do
     t.text    "citation"
     t.text    "abstract"
     t.integer "year"
-    t.string  "author"
-    t.string  "title"
     t.string  "file_url"
+    t.text    "title"
+    t.text    "authors"
     t.integer "source_id"
   end
 
   create_table "publications_treatments", :id => false, :force => true do |t|
     t.integer "treatment_id"
     t.integer "publication_id"
+  end
+
+  create_table "replicates", :id => false, :force => true do |t|
+    t.string "replicate",   :limit => 50, :null => false
+    t.string "description"
   end
 
   create_table "role_types", :force => true do |t|
@@ -177,8 +198,8 @@ ActiveRecord::Schema.define(:version => 40) do
     t.datetime "updated_at"
   end
 
-  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "sources", :force => true do |t|
     t.string "title"
@@ -218,6 +239,8 @@ ActiveRecord::Schema.define(:version => 40) do
     t.text    "definition"
   end
 
+  add_index "units", ["name"], :name => "unit_names_key", :unique => true
+
   create_table "variates", :force => true do |t|
     t.string  "name"
     t.integer "datatable_id"
@@ -229,8 +252,8 @@ ActiveRecord::Schema.define(:version => 40) do
     t.string  "data_type"
     t.float   "min_valid"
     t.float   "max_valid"
-    t.float   "precision"
     t.string  "date_format"
+    t.float   "precision"
   end
 
   create_table "venue_types", :force => true do |t|

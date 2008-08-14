@@ -6,8 +6,8 @@ describe "/projects/new.html.erb" do
   before(:each) do
     assigns[:project] = stub_model(Project,
       :new_record? => true,
-      :string => ,
-      :text => 
+      :title => 'N fertility gradient',
+      :abstract => 'Nitrogen fertility gradient in corn'
     )
   end
 
@@ -15,8 +15,9 @@ describe "/projects/new.html.erb" do
     render "/projects/new.html.erb"
     
     response.should have_tag("form[action=?][method=post]", projects_path) do
-      with_tag("input#project_string[name=?]", "project[string]")
-      with_tag("input#project_text[name=?]", "project[text]")
+      with_tag("input#project_title[name=?]", "project[title]")
+      with_tag("input#project_abstract[name=?]", "project[abstract]")
+      with_tag("input#project_datasets[name=?]", "projects[datasets]")
     end
   end
 end

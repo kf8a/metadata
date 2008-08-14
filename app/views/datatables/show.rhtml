@@ -31,12 +31,14 @@
 <% if @datatable.access_statement then %>
 <%= @datatable.access_statement %>
 <% else %>
-See <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use policy</a>
+<p>See <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use policy</a></p>
 <% end %>
 
-<% if @values -%>
+<% if  @datatable.is_sql %>
 <h3>Data</h3>
-<%= link_to 'Download as csv', formated_datatable_path(@datatables, :csv) %>
+
+<% if @values -%>
+<%= link_to 'Download as csv', formatted_datatable_path(@datatable, :csv) %>
 
 <h3>Data Excerpt</h3>
 <table>
@@ -57,6 +59,9 @@ See <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use po
 	</tr>
 	<% end %>
 </table>
+<% else -%>
+<p>Data Embargoed</p>
+<% end -%>
 <% end -%>
 
 <%= link_to 'xml', formatted_datatable_path(@datatable, :xml) %>&nbsp;|&nbsp;
