@@ -25,6 +25,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :units
 
   map.resources :meeting_abstracts
+  
+  map.root :controller => 'datasets'
 
   map.open_id_complete 'sessions', :controller => "sessions", :action => "create", :requirements => { :method => :get }
   map.resource :sessions  

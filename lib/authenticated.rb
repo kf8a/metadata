@@ -1,6 +1,10 @@
 module Authenticated
   protected
   
+  def default
+    '/datasets'
+  end
+  
   def store_location
     session[:return_to] = request.request_uri
   end

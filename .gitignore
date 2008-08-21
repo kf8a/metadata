@@ -1,3 +1,4 @@
 db/meta_test
 log/
 vendor/rails/
+metadata.sql
