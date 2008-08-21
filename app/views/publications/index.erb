@@ -7,7 +7,7 @@
 			<p class='years'><%= year %></p>
 		<% end  -%>
 	<% end  -%>
-	<div class='citation'>
+	<div id="<%= publication.id%>"class='citation'>
 			<%= textilize(publication.citation) if publication.citation %>
 			<% if  publication.abstract  -%>
 				<a href="<%= url_for publication_path(publication) %>">

@@ -113,9 +113,13 @@ class PublicationsController < ApplicationController
   def destroy
       @publication = Publication.find(params[:id])
       @publication.destroy
-      p 'destroyed'
       respond_to do |format|
         format.html { redirect_to publications_url }
+        format.js  do
+          render :update do |page|
+            page.visual_effect :fade, @publication
+          end
+        end
         format.xml  { head :ok }
       end
     end

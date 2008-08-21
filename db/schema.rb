@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080729153355) do
+ActiveRecord::Schema.define(:version => 20080820172515) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -91,6 +91,21 @@ ActiveRecord::Schema.define(:version => 20080729153355) do
     t.integer "issued"
     t.integer "lifetime"
     t.string  "assoc_type"
+  end
+
+  create_table "open_id_authentication_associations", :force => true do |t|
+    t.integer "issued"
+    t.integer "lifetime"
+    t.string  "handle"
+    t.string  "assoc_type"
+    t.binary  "server_url"
+    t.binary  "secret"
+  end
+
+  create_table "open_id_authentication_nonces", :force => true do |t|
+    t.integer "timestamp",  :null => false
+    t.string  "server_url"
+    t.string  "salt",       :null => false
   end
 
   create_table "open_id_nonces", :force => true do |t|
