@@ -1,7 +1,9 @@
-<h1><%= link_to "#{@dataset.dataset}", dataset_path(@dataset) %>:<%= @datatable.title %></h1>
+<h1><%= link_to "#{@datatable.name}", dataset_path(@dataset) %> : <%= @datatable.title %></h1>
+
 <p>
 	<%= @datatable.description %>
 </p>
+
 <% unless  @datatable.is_sql %>
 <%= link_to 'Data', @datatable.data_url %> (on a different page)
 <% end %>
