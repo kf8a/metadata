@@ -17,9 +17,9 @@ set :git_enable_submodules,1
 
 set :mongrel_conf, '/etc/mongrel_cluster/metadata.yml'
 
-role :app, "sleeth.kbs.msu.edu"
-role :web, "sleeth.kbs.msu.edu"
-role :db,  "sleeth.kbs.msu.edu", :primary => true
+role :app, "houghton.kbs.msu.edu"
+role :web, "houghton.kbs.msu.edu"
+role :db,  "houghton.kbs.msu.edu", :primary => true
 
 namespace :deploy do
   namespace :mongrel do

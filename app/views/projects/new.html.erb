@@ -9,10 +9,11 @@
   </p>
   <p>
     <%= f.label :abstract %><br />
-    <%= f.text_field :abstract %>
+    <%= f.text_area :abstract %>
   </p>
 	<p>
 		<%= f.label :datasets%>
+		<%= select "dataset", "dataset", @datasets.collect {|x| [[x.dataset,x.title].join(' '),x.id]}, { :include_blank => true}, {:multiple => true, :size => 10} %>
 	</p>
   <p>
     <%= f.submit "Create" %>

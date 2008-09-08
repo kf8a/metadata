@@ -21,8 +21,6 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #++
 
-$:.unshift(File.dirname(__FILE__))
-
 require 'active_support/vendor'
 require 'active_support/basic_object'
 require 'active_support/inflector'
@@ -30,7 +28,6 @@ require 'active_support/callbacks'
 
 require 'active_support/core_ext'
 
-require 'active_support/clean_logger'
 require 'active_support/buffered_logger'
 
 require 'active_support/gzip'
@@ -57,8 +54,10 @@ require 'active_support/base64'
 
 require 'active_support/time_with_zone'
 
-I18n.backend.populate do
-  require 'active_support/locale/en-US.rb'
+require 'active_support/secure_random'
+
+I18n.populate do
+  I18n.load_translations File.dirname(__FILE__) + '/active_support/locale/en-US.yml'
 end
 
 Inflector = ActiveSupport::Deprecation::DeprecatedConstantProxy.new('Inflector', 'ActiveSupport::Inflector')

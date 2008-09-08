@@ -33,23 +33,23 @@ class VariatesControllerTest < Test::Unit::TestCase
   end
 
   def test_should_show_variate
-    get :show, :id => 1
+    get :show, :id => 51
     assert_response :success
   end
 
   def test_should_get_edit
-    get :edit, :id => 1
+    get :edit, :id => 51
     assert_response :success
   end
   
   def test_should_update_variate
-    put :update, :id => 1, :variate => { }
+    put :update, :id => 51, :variate => { }
     assert_redirected_to variate_path(assigns(:variate))
   end
   
   def test_should_destroy_variate
     old_count = Variate.count
-    delete :destroy, :id => 1
+    delete :destroy, :id => 51
     assert_equal old_count-1, Variate.count
     
     assert_redirected_to variates_path

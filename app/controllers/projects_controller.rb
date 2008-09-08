@@ -25,6 +25,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new.xml
   def new
     @project = Project.new
+    @datasets = Dataset.find(:allgui)
 
     respond_to do |format|
       format.html # new.html.erb

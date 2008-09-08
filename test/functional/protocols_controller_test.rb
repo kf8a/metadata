@@ -2,13 +2,13 @@ require File.dirname(__FILE__) + '/../test_helper'
 require 'protocols_controller'
 
 # Re-raise errors caught by the controller.
-class MethocolsController; def rescue_action(e) raise e end; end
+class ProtocolsController; def rescue_action(e) raise e end; end
 
-class MethocolsControllerTest < Test::Unit::TestCase
+class ProtocolsControllerTest < Test::Unit::TestCase
   fixtures :protocols
 
   def setup
-    @controller = MethocolsController.new
+    @controller = ProtocolsController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
   end
@@ -25,7 +25,7 @@ class MethocolsControllerTest < Test::Unit::TestCase
   end
   
   def test_should_create_protocol
-    old_count = Methocol.count
+    old_count = Protocol.count
     post :create, :protocol => { }
     assert_equal old_count+1, Methocol.count
     

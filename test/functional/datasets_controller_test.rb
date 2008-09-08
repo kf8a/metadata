@@ -33,23 +33,23 @@ class DatasetsControllerTest < Test::Unit::TestCase
   end
 
   def test_should_show_dataset
-    get :show, :id => 1
+    get :show, :id => 5
     assert_response :success
   end
 
   def test_should_get_edit
-    get :edit, :id => 1
+    get :edit, :id => 5
     assert_response :success
   end
   
   def test_should_update_dataset
-    put :update, :id => 1, :dataset => { }
+    put :update, :id => 5, :dataset => { }
     assert_redirected_to dataset_path(assigns(:dataset))
   end
   
   def test_should_destroy_dataset
     old_count = Dataset.count
-    delete :destroy, :id => 1
+    delete :destroy, :id => 5
     assert_equal old_count-1, Dataset.count
     
     assert_redirected_to datasets_path
