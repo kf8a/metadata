@@ -21,7 +21,6 @@ class DatatablesController < ApplicationController
     @datatable = Datatable.find(params[:id])
     @dataset = @datatable.dataset
     
-    p ['datatable1',@datatable]
     @values = nil
     if @datatable.is_sql
       query =  @datatable.object
@@ -29,15 +28,13 @@ class DatatablesController < ApplicationController
       @values  = ActiveRecord::Base.connection.execute(query)
     end
 
-    # unless trusted_ip?
-    #   if @datatable.is_restricted  
-    #     @values = nil
-    #     restricted = true
-    #   end
-    # end
-    
-    p ['datatable2',@datatable]
-    
+    unless trusted_ip?
+      if @datatable.is_restricted  
+        @values = nil
+        restricted = true
+      end
+    end
+        
     respond_to do |format|
       format.html # show.rhtml
       format.xml  { render :xml => @datatable.to_xml unless restricted}
