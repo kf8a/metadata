@@ -33,7 +33,7 @@ class PeopleControllerTest < Test::Unit::TestCase
   end
 
   def test_should_show_person
-    get :show, :id => 1
+    get :show, :id => 2
     assert_response :success
   end
 
@@ -49,7 +49,7 @@ class PeopleControllerTest < Test::Unit::TestCase
   
   def test_should_destroy_person
     old_count = Person.count
-    delete :destroy, :id => 1
+    delete :destroy, :id => 304
     assert_equal old_count-1, Person.count
     
     assert_redirected_to people_path

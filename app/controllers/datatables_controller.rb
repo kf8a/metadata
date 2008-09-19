@@ -16,31 +16,32 @@ class DatatablesController < ApplicationController
 
   # GET /datatables/1
   # GET /datatables/1.xml
+  # GET /datatables/1.csv
   def show  
     @datatable = Datatable.find(params[:id])
     @dataset = @datatable.dataset
     
+    p ['datatable1',@datatable]
     @values = nil
     if @datatable.is_sql
       query =  @datatable.object
       query = query + ' limit 50'
       @values  = ActiveRecord::Base.connection.execute(query)
     end
-    p 'datset'
-    unless trusted_ip?
-      p "trusted"
-      if @datatable.is_restricted  
-        @values = nil
-        restricted = true
-        p 'embargoed'
-      end
-    end
-    
 
+    # unless trusted_ip?
+    #   if @datatable.is_restricted  
+    #     @values = nil
+    #     restricted = true
+    #   end
+    # end
+    
+    p ['datatable2',@datatable]
+    
     respond_to do |format|
       format.html # show.rhtml
       format.xml  { render :xml => @datatable.to_xml unless restricted}
-      format.csv  { render :csv => @datatable.to_csv unless restricted}
+      format.csv  { render :text => @datatable.to_csv}
     end
   end
 

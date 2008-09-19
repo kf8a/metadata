@@ -18,8 +18,9 @@ class Datatable < ActiveRecord::Base
     return eml
   end
   
-  def to_csv(restricted=false)
-    if restricted
+  def to_csv
+    p 'in_csv'
+    if self.is_restricted
       return 'Data Embargoed'
     end
     values  = ActiveRecord::Base.connection.execute(object)
