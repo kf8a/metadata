@@ -13,13 +13,13 @@ set :use_sudo, false
 
 set :branch, "master"
 set :deploy_via, :copy
-set :git_enable_submodules,1
+#set :git_enable_submodules,1
 
 set :mongrel_conf, '/etc/mongrel_cluster/metadata.yml'
 
-role :app, "houghton.kbs.msu.edu"
-role :web, "houghton.kbs.msu.edu"
-role :db,  "houghton.kbs.msu.edu", :primary => true
+role :app, 'sebewa.kbs.msu.edu'
+role :web, 'sebewa.kbs.msu.edu'
+role :db,  'sebewa.kbs.msu.edu', :primary => true
 
 namespace :deploy do
   namespace :mongrel do
