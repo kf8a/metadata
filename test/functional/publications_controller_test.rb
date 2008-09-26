@@ -33,23 +33,24 @@ class PublicationsControllerTest < Test::Unit::TestCase
   end
 
   def test_should_show_publications
-    get :show, :id => 1
+    get :show, :id => 135
     assert_response :success
   end
 
   def test_should_get_edit
-    get :edit, :id => 1
+    get :edit, :id => 135
     assert_response :success
   end
   
   def test_should_update_publications
-    put :update, :id => 1, :publications => { }
+    pub = Publication.new
+    put :update, :id => 135, :publications => { pub }
     assert_redirected_to publications_path(assigns(:publications))
   end
   
   def test_should_destroy_publications
     old_count = Publications.count
-    delete :destroy, :id => 1
+    delete :destroy, :id => 135
     assert_equal old_count-1, Publications.count
     
     assert_redirected_to publications_path

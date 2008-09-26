@@ -33,24 +33,24 @@ class ProtocolsControllerTest < Test::Unit::TestCase
   end
 
   def test_should_show_protocol
-    get :show, :id => 1
+    get :show, :id => 48
     assert_response :success
   end
 
   def test_should_get_edit
-    get :edit, :id => 1
+    get :edit, :id => 48
     assert_response :success
   end
   
   def test_should_update_protocol
-    put :update, :id => 1, :protocol => { }
+    put :update, :id => 48, :protocol => { }
     assert_redirected_to protocol_path(assigns(:protocol))
   end
   
   def test_should_destroy_protocol
     old_count = Methocol.count
-    delete :destroy, :id => 1
-    assert_equal old_count-1, Methocol.count
+    delete :destroy, :id => 48
+    assert_equal old_count-1, Protocol.count
     
     assert_redirected_to protocols_path
   end

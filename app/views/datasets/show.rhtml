@@ -12,7 +12,7 @@
 <dl>
 	<% @dataset.datatables.each do |datatable| %>
 		<dt><%= link_to datatable.name, datatable_path(datatable) %> <%= datatable.title %></dt>
-		<dd><%= truncate(datatable.description,100) %></dd>
+		<dd><%= truncate(datatable.description,{:length=>100}) %></dd>
 	<% end %>
 </dl>
 <h2>Protocols</h2>

@@ -33,23 +33,23 @@ class DatatablesControllerTest < Test::Unit::TestCase
   end
 
   def test_should_show_datatable
-    get :show, :id => 1
+    get :show, :id => 24
     assert_response :success
   end
 
   def test_should_get_edit
-    get :edit, :id => 1
+    get :edit, :id => 24
     assert_response :success
   end
   
   def test_should_update_datatable
-    put :update, :id => 1, :datatable => { }
+    put :update, :id => 24, :datatable => { }
     assert_redirected_to datatable_path(assigns(:datatable))
   end
   
   def test_should_destroy_datatable
     old_count = Datatable.count
-    delete :destroy, :id => 1
+    delete :destroy, :id => 24
     assert_equal old_count-1, Datatable.count
     
     assert_redirected_to datatables_path
