@@ -1,4 +1,5 @@
 class Protocol < ActiveRecord::Base
   belongs_to :dataset
-  belongs_to :person
+  has_many :scribbles
+  has_many :people, :through => :scribbles
 end

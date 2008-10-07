@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080820172515) do
+ActiveRecord::Schema.define(:version => 20081007181620) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20080820172515) do
     t.integer "version"
     t.boolean "core_dataset", :default => false
     t.integer "project_id"
+    t.boolean "is_ecotrends"
   end
 
   create_table "datasets_themes", :id => false, :force => true do |t|
@@ -67,6 +68,16 @@ ActiveRecord::Schema.define(:version => 20080820172515) do
   end
 
   create_table "eml_docs", :force => true do |t|
+  end
+
+  create_table "geometry_columns", :id => false, :force => true do |t|
+    t.string  "f_table_catalog",   :limit => 256, :null => false
+    t.string  "f_table_schema",    :limit => 256, :null => false
+    t.string  "f_table_name",      :limit => 256, :null => false
+    t.string  "f_geometry_column", :limit => 256, :null => false
+    t.integer "coord_dimension",                  :null => false
+    t.integer "srid",                             :null => false
+    t.string  "type",              :limit => 30,  :null => false
   end
 
   create_table "meeting_abstracts", :force => true do |t|
@@ -207,6 +218,12 @@ ActiveRecord::Schema.define(:version => 20080820172515) do
     t.integer "seniority"
   end
 
+  create_table "scribbles", :force => true do |t|
+    t.integer "person_id"
+    t.integer "protocol_id"
+    t.integer "order"
+  end
+
   create_table "sessions", :force => true do |t|
     t.string   "session_id"
     t.text     "data"
@@ -218,6 +235,14 @@ ActiveRecord::Schema.define(:version => 20080820172515) do
 
   create_table "sources", :force => true do |t|
     t.string "title"
+  end
+
+  create_table "spatial_ref_sys", :id => false, :force => true do |t|
+    t.integer "srid",                      :null => false
+    t.string  "auth_name", :limit => 256
+    t.integer "auth_srid"
+    t.string  "srtext",    :limit => 2048
+    t.string  "proj4text", :limit => 2048
   end
 
   create_table "species", :force => true do |t|
@@ -238,6 +263,7 @@ ActiveRecord::Schema.define(:version => 20080820172515) do
   create_table "themes", :force => true do |t|
     t.string  "title"
     t.integer "priority"
+    t.string  "type",     :limit => 20
   end
 
   create_table "treatments", :force => true do |t|
@@ -269,6 +295,8 @@ ActiveRecord::Schema.define(:version => 20080820172515) do
     t.float   "max_valid"
     t.string  "date_format"
     t.float   "precision"
+    t.text    "query"
+    t.integer "variate_theme_id"
   end
 
   create_table "venue_types", :force => true do |t|
