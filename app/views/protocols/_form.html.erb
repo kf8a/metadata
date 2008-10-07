@@ -1,0 +1,35 @@
+<p>
+	<label for='protocol_name'>Name</label>
+	<%= f.text_field :name %>
+	<label for='protocol_title'>Title</label>
+	<%= f.text_field :title %>
+	<label for='protocol_version'>version</label>
+	<%= f.text_field :version %>
+	<label for='protocol_in_use_from'>In use from</label>
+	<%= f.date_select :in_use_from, :start_year => 1982, :end_year=> Date.today.year, :include_blank=>true %>
+	<label for='protocol_in_use_to'>to</label>
+	<%= f.date_select :in_use_to , :include_blank=>true%>
+	<label for='protocol_description'>Description</label>
+	<%= f.text_area :description, :size=>'60x10' %>
+	<label for='protocol_abstract'>Abstract</label>
+	<%= f.text_area :abstract, :size=>'60x10' %>
+	
+	</p>
+	<p>
+	<label for="protocol_body">Body</label>
+	<%= f.text_area :body, :size=>'60x40'%>
+	</p>
+	
+	<p>
+	<label for='protocol_people'>Author</label>
+	<%= f.collection_select :person_id, @people, :id, :full_name, {}, {:multiple => true, :size => 10}%>
+</p>
+<p>
+	<label for='protocol_change_summary'>Change summary</label>
+	<%= f.text_area :change_summary %>
+</p>
+<p>
+	<label for='protocol_dataset'>Dataset</label>
+	<% @datasets = Dataset.find(:all).map {|x| [x.dataset, x.id]} %>
+	<%= f.select :dataset_id, @datasets %>
+</p>
