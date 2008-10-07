@@ -16,9 +16,11 @@
 </p>
 <p>
 	<% if @protocol.people.size > 1 %>Authors: <% else %>Author: <% end %>
+	<ul>
 	<% @protocol.people.each do |person| %>
-		<%= link_to  "#{person.full_name}", person_path(person) %>
+		<li><%= link_to  "#{person.full_name}", person_path(person) %></li>
 	<% end %>
+	</ul>
 </p>
 <%= link_to 'Edit', edit_protocol_path(@protocol) %> |
 <%= link_to 'Back', protocols_path %>

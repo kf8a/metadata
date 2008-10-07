@@ -32,13 +32,16 @@ class ProtocolsController < ApplicationController
   # GET /protocols/1;edit
   def edit
     @protocol = Protocol.find(params[:id])
+    @people = Person.find(:all, :order => :sur_name)
+    
   end
 
   # POST /protocols
   # POST /protocols.xml
   def create
     @protocol = Protocol.new(params[:protocol])
-
+    @people = Person.find(:all, :order => :sur_name)
+    
     respond_to do |format|
       if @protocol.save
         flash[:notice] = 'Protocol was successfully created.'

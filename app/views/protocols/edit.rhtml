@@ -24,10 +24,10 @@
 		<label for="protocol_body">Body</label>
 		<%= f.text_area :body, :size=>'60x40'%>
 		</p>
+		
 		<p>
-		<label for='protocol_person_id'>Author</label>
-		<% @people = Person.find(:all).map {|x| [x.full_name, x.id]} %>
-		<%= f.select :person_id, @people  %>
+		<label for='protocol_people'>Author</label>
+		<%= f.collection_select :person_id, @people, :id, :full_name, {}, {:multiple => true, :size => 10}%>
 	</p>
 	<p>
 		<label for='protocol_change_summary'>Change summary</label>
