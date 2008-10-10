@@ -6,6 +6,10 @@
 	<%= f.text_area :citation , :size => '50x5'%>
 </p>
 <p>
+	<label for='publication_type'>Publication Type</label>
+	<%= f.select :publication_type_id, @publication_types, {:include_blank => true}%>
+</p>
+<p>
 	<label for='publication_abstract'>Abstract</label>
 	<%= textile_editor 'publications', :abstract, :size => '60x20'%>
 </p>

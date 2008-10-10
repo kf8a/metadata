@@ -64,12 +64,14 @@ class PublicationsController < ApplicationController
   def new
     @publications = Publication.new
     @treatments = Treatment.find(:all)
+    @publication_types = PublicationType.find(:all).collect {|x| [x.name, x.id]}
   end
 
   # GET /publications/1;edit
   def edit
     @publications = Publication.find(params[:id])
     @treatments =  Treatment.find(:all)
+    @publication_types = PublicationType.find(:all).collect {|x| [x.name, x.id]}
   end
 
   # POST /publications
