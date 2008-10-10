@@ -17,9 +17,9 @@ set :deploy_via, :copy
 
 set :mongrel_conf, '/etc/mongrel_cluster/metadata.yml'
 
-role :app, 'sebewa.kbs.msu.edu'
-role :web, 'sebewa.kbs.msu.edu'
-role :db,  'sebewa.kbs.msu.edu', :primary => true
+role :app, 'houghton.kbs.msu.edu'
+role :web, 'houghton.kbs.msu.edu'
+role :db,  'houghton.kbs.msu.edu', :primary => true
 
 namespace :deploy do
   namespace :mongrel do
