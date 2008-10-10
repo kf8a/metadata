@@ -14,7 +14,7 @@
 	<% if @person.title -%>
 	<li><label>Title:</label> <%= @person.title %></li>
 	<% end -%>
-	<li><label>Project Role:</label> <%= @person.lter_roles[0].name %></li>
+	<li><label>Project Role:</label> <%= @person.lter_roles[0].name if @person.lter_roles[0].respond_to?('name')%></li>
 	<li><label>Address:</label> <%= @person.street_address %>&nbsp;<%= @person.city %>&nbsp;<%= @person.locale %>
 	<% if @person.postal_code %>, <%= @person.postal_code %><% end %>
 	</span>
