@@ -24,7 +24,7 @@ class DatatablesController < ApplicationController
     @values = nil
     if @datatable.is_sql
       query =  @datatable.object
-      query = query + ' limit 50'
+      query = query + " limit #{@datatable.excerpt_limit}"
       @values  = ActiveRecord::Base.connection.execute(query)
     end
 
