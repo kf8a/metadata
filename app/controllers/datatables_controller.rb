@@ -24,7 +24,7 @@ class DatatablesController < ApplicationController
     @values = nil
     if @datatable.is_sql
       query =  @datatable.object
-      query = query + " limit #{@datatable.excerpt_limit}"
+      query = query + " limit #{@datatable.excerpt_limit}" unless @datatable.excerpt_limit.nil?
       @values  = ActiveRecord::Base.connection.execute(query)
     end
 
