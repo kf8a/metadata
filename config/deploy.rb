@@ -55,3 +55,11 @@ desc "Link in the production database.yml"
 task :link_production_db do
   run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
 end
+
+task :after_update_code, :roles => :app do
+  %w{publications images}.each do |share|
+    run "rm -rf #{release_path}/public/#{share}"
+    run "mkdir -p #{shared_path}/system/#{share}"
+    run "ln -nfs #{shared_path}/system/#{share} #{release_path}/public/#{share}"
+  end
+end

@@ -13,6 +13,7 @@
 				<a href="<%= url_for publication_path(publication) %>">
 					abstract&nbsp;&hellip;</a>
 			<% end -%>
+			<%= link_to_remote 'document', :url =>  publication.public_filename if publication.filename %>
 			<%= link_to 'edit', edit_publication_path(publication), {:class=>'edit'} if logged_in? %>
 	<%= link_to_remote image_tag("trash.gif"), :url => publication_path(publication), :method => 'delete', :confirm => 'Are you sure?' if logged_in?%>	
 	</div>

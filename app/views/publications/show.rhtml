@@ -4,7 +4,7 @@
 <div class='abstract'>
 	<%= textilize(@publication.abstract) %>
 </div>
-<p><%= @publication.filename %></p>
+<p><%= link_to @publication.filename, @publication.public_filename %></p>
 
 <% if @publication.treatments.size > 0 -%>
 <p>
