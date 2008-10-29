@@ -1,8 +1,8 @@
 <h1>New publications</h1>
 
-<%= error_messages_for :publications %>
+<%= error_messages_for :publication %>
 
-<% form_for(:publications, :url => publications_path) do |f| %>
+<% form_for(:publication, :url => publications_path, :html => {:multipart => true}) do |f| %>
 	<%= render :partial => 'form', :locals => {:f => f} %>
   <p>
     <%= submit_tag "Create" %>

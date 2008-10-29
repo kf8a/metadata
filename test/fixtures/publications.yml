@@ -60,7 +60,6 @@ publications_454:
   authors: |-
     Craig K. Harris and Lisa S.
     Bohannan
-  source_id: "1"
 publications_406: 
   citation: Thorn, R. G., and M. D. Lynch. 2006. Soil fungi. Pages (in press) in E. A. Paul and F. E. Clark, eds. Soil Microbiology, Biochemistry, and Ecology. Springer, New York, New York, USA.
   file_url: 
@@ -79,8 +78,8 @@ publications_027:
   publication_type_id: "1"
   id: "18"
   year: "1998"
-  authors: 
-  source_id: 
+  authors: 'cf eyecare'
+  filename: 'test.pdf'
 publications_264: 
   citation: "Grandy, A. S., G. P. Robertson, and K. D. Thelen. 2006. Do productivity and environmental tradeoffs justify periodically cultivating no-till cropping systems? Agronomy Journal 98: 1377-1383."
   file_url: 
@@ -185,6 +184,7 @@ publications_075:
   year: "2001"
   authors: 
   source_id: 
+  
 publications_456: 
   citation: 
   file_url: 
@@ -655,7 +655,6 @@ publications_325:
   id: "411"
   year: "2000"
   authors: 
-  source_id: 
 publications_135: 
   citation: Kosola, K. R. 1999. Laparascopic sampling of roots of known age from an expandable-wall minirhizotron system. Agronomy Journal 91:876-879.
   file_url: 
@@ -665,7 +664,6 @@ publications_135:
   id: "103"
   year: "1999"
   authors: 
-  source_id: 
 publications_372: 
   citation: "Scriber, J. M., R. C. Lederhouse, and R. Dowell. 1995. Hybridization studies with North American swallowtails. Pages 269-281 in J. M. Scriber, Y. Tsubaki, and R. C. Lederhouse, eds. The Swallowtail Butterflies:  Their Ecology and Evolutionary Biology. Scientific Publishers, Gainsville, Florida, USA."
   file_url: 

@@ -9,13 +9,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081007181620) do
+ActiveRecord::Schema.define(:version => 20081025184324) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
     t.integer "role_id"
     t.integer "dataset_id"
     t.integer "seniority"
+  end
+
+  create_table "collections", :force => true do |t|
+    t.string  "title"
+    t.text    "body"
+    t.integer "dataset_id"
   end
 
   create_table "columns", :force => true do |t|
@@ -38,7 +44,6 @@ ActiveRecord::Schema.define(:version => 20081007181620) do
     t.integer "version"
     t.boolean "core_dataset", :default => false
     t.integer "project_id"
-    t.boolean "is_ecotrends"
   end
 
   create_table "datasets_themes", :id => false, :force => true do |t|
@@ -62,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20081007181620) do
     t.integer "update_frequency_years"
     t.date    "last_updated_on"
     t.text    "access_statement"
+    t.integer "excerpt_limit"
   end
 
   create_table "datatables_variates", :force => true do |t|
@@ -196,6 +202,12 @@ ActiveRecord::Schema.define(:version => 20081007181620) do
     t.text    "title"
     t.text    "authors"
     t.integer "source_id"
+    t.integer "parent_id"
+    t.string  "content_type"
+    t.string  "filename"
+    t.integer "size"
+    t.integer "width"
+    t.integer "height"
   end
 
   create_table "publications_treatments", :id => false, :force => true do |t|
@@ -254,6 +266,39 @@ ActiveRecord::Schema.define(:version => 20081007181620) do
     t.string  "alternate_common_name"
     t.string  "attribution"
     t.boolean "woody"
+  end
+
+  create_table "specimen_images", :force => true do |t|
+    t.string "title"
+    t.string "alt"
+    t.string "photographer"
+    t.string "url"
+  end
+
+  create_table "specimens", :force => true do |t|
+    t.string  "order"
+    t.string  "family"
+    t.string  "genus"
+    t.string  "specific_eptithet"
+    t.string  "author"
+    t.string  "common_name"
+    t.string  "species_code"
+    t.string  "stage_sex"
+    t.string  "common_group"
+    t.string  "functional_group"
+    t.string  "hosts"
+    t.string  "habitat"
+    t.string  "geographic_distribution"
+    t.boolean "native"
+    t.integer "area_id"
+    t.string  "area"
+    t.integer "study_id"
+    t.integer "treatment_id"
+    t.string  "collector"
+    t.date    "collection_date"
+    t.string  "specimen_code"
+    t.string  "storage_location"
+    t.text    "comment"
   end
 
   create_table "studies", :force => true do |t|

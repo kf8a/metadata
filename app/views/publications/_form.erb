@@ -7,16 +7,21 @@
 </p>
 <p>
 	<label for='publication_type'>Publication Type</label>
-	<%= f.select :publication_type_id, @publication_types, {:include_blank => true}%>
+	<%= f.select :publication_type_id, @publication_types %>
 </p>
 <p>
 	<label for='publication_abstract'>Abstract</label>
-	<%= textile_editor 'publications', :abstract, :size => '60x20'%>
+	<%= textile_editor 'publication', :abstract, :size => '60x20'%>
 </p>
+<p>
+	<label for='publication_article'>Article:  <%= link_to @publication.filename, @publication.public_filename if @publication.filename %></label>
+	<%= f.file_field :uploaded_data %>
+</p>
+
 <p>
 	Treatment associations:
 	<% @treatments.each do |treatment| -%>
-		<%= treatment.name %><%= check_box_tag 'publications[treatment_ids][]', treatment.id, @publications.treatments.include?(treatment) %>
+		<%= treatment.name %><%= check_box_tag 'publications[treatment_ids][]', treatment.id, @publication.treatments.include?(treatment) %>
 	<% end -%>
 </p>
 <%= textile_editor_initialize -%>

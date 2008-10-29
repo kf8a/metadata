@@ -4,6 +4,7 @@
 <div class='abstract'>
 	<%= textilize(@publication.abstract) %>
 </div>
+<p><%= @publication.filename %></p>
 
 <% if @publication.treatments.size > 0 -%>
 <p>
@@ -15,4 +16,5 @@ Treatments used:
 <% end %>
 
 <%= link_to 'Edit', edit_publication_path(@publication) if logged_in? %> | 
+<%= link_to 'Destroy', @publication, :confirm => 'Are you sure?', :method => :delete %> | 
 <%= link_to 'Back', publications_path %>

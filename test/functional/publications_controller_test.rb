@@ -24,15 +24,15 @@ class PublicationsControllerTest < Test::Unit::TestCase
     assert_response :success
   end
   
-  def test_should_create_publications
-    old_count = Publications.count
-    post :create, :publications => { }
-    assert_equal old_count+1, Publications.count
+  def test_should_create_publication
+    old_count = Publication.count
+    post :create, :publication => {'year' => '2008'}
+    assert_equal (old_count+1), Publication.count
     
     assert_redirected_to publications_path(assigns(:publications))
   end
 
-  def test_should_show_publications
+  def test_should_show_publication
     get :show, :id => 135
     assert_response :success
   end
@@ -42,16 +42,15 @@ class PublicationsControllerTest < Test::Unit::TestCase
     assert_response :success
   end
   
-  def test_should_update_publications
-    pub = Publication.new
-    put :update, :id => 135, :publications => { pub }
-    assert_redirected_to publications_path(assigns(:publications))
+  def test_should_update_publication
+    put :update, :id => 18, :publication => {'year' => '2008'} 
+    assert_redirected_to publication_path(assigns(:publication))
   end
   
-  def test_should_destroy_publications
-    old_count = Publications.count
-    delete :destroy, :id => 135
-    assert_equal old_count-1, Publications.count
+  def test_should_destroy_publication
+    old_count = Publication.count
+    delete :destroy, :id => 18
+    assert_equal old_count-1, Publication.count
     
     assert_redirected_to publications_path
   end

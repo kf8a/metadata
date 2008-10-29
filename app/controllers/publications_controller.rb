@@ -62,26 +62,25 @@ class PublicationsController < ApplicationController
 
   # GET /publications/new
   def new
-    @publications = Publication.new
-    @treatments = Treatment.find(:all)
-    @publication_types = PublicationType.find(:all).collect {|x| [x.name, x.id]}
+    @publication = Publication.new
+    get_form_data
   end
 
   # GET /publications/1;edit
   def edit
-    @publications = Publication.find(params[:id])
-    @treatments =  Treatment.find(:all)
-    @publication_types = PublicationType.find(:all).collect {|x| [x.name, x.id]}
+    @publication = Publication.find(params[:id])
+    get_form_data
   end
 
   # POST /publications
   # POST /publications.xml
   def create
-    publication = params[:publications]
+    get_form_data
+    publication = params[:publication]
     publication[:publication_type_id] = 1
-     @publication = Publication.new(publication)
-   
-     respond_to do |format|
+    @publication = Publication.new(publication)
+
+    respond_to do |format|
        if @publication.save
          flash[:notice] = 'Publications was successfully created.'
          format.html { redirect_to publication_url(@publication) }
@@ -97,9 +96,9 @@ class PublicationsController < ApplicationController
   # PUT /publications/1.xml
    def update
      @publication = Publication.find(params[:id])
-   
+     
      respond_to do |format|
-       if @publication.update_attributes(params[:publications])
+       if @publication.update_attributes(params[:publication])
          flash[:notice] = 'Publications was successfully updated.'
          format.html { redirect_to publication_url(@publication) }
          format.xml  { head :ok }
@@ -137,5 +136,10 @@ class PublicationsController < ApplicationController
       crumb.url = publications_path
       crumb.name = 'Publications'
       @crumbs << crumb
+    end
+    
+    def get_form_data
+      @publication_types = PublicationType.find(:all).collect {|x| [x.name, x.id]} 
+      @treatments = Treatment.find(:all)
     end
   end
