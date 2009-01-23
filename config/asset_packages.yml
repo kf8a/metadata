@@ -1,0 +1,18 @@
+--- 
+javascripts: 
+- base: 
+  - prototype
+  - effects
+  - controls
+  - application
+  - textile-editor
+  - textile-editor-config
+stylesheets: 
+- base: 
+  - branding
+  - data
+  - kbs
+  - navigation
+  - print
+  - scaffold
+  - textile-editor
