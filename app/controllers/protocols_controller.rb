@@ -27,6 +27,7 @@ class ProtocolsController < ApplicationController
   # GET /protocols/new
   def new
     @protocol = Protocol.new
+    @people = Person.find(:all, :order => :sur_name)
   end
 
   # GET /protocols/1;edit
