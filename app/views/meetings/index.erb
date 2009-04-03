@@ -3,10 +3,10 @@
 <p>Abstracts from past and current meetings are available below:</p>
 <ul>
 <% @meetings.each do |meeting| %>
-<% if meeting.meeting_abstracts.size == 0 %>
-	<li><%= meeting.title %> <%= meeting.date.to_s(:long) %><%= link_to 'edit', edit_meeting_path(meeting), {:class => 'edit'} if logged_in? %></li></li>
-<% else %>
-	<li><%= link_to "#{meeting.title}", meeting_path(meeting) %> <%= meeting.date.to_s(:long) %> <%= link_to 'edit', edit_meeting_path(meeting), {:class => 'edit'} if logged_in? %></li>
+	<li><%= link_to "#{meeting.title}", meeting_path(meeting) %> <%= meeting.date.to_s(:long) %> 
+	<%= link_to 'edit', edit_meeting_path(meeting), {:class => 'edit'} if logged_in? %>
+		<%= link_to_remote image_tag("trash.gif"), :url => meeting_path(meeting), :method => 'delete', :confirm => 'Are you sure?' if logged_in?%>
+		</li>
 <% end %>
 <% end %>
 </ul>

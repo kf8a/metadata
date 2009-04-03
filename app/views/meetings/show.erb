@@ -1,8 +1,11 @@
 <h1><%= @meeting.title %></h1>
 
-<p><%= @meeting.date.to_s(:long) %></p>
-<p><h3>Presentation Titles.</h3> Please click on titles for abstracts.</p>
-<p><%= @meeting.announcement %></p>
+<% if @meeting.announcment %>
+<p><%= textilize(@meeting.announcement) %></p>
+<% end %>
+<% if @meeting.meeting_abstracts.size > 0 %>
+<h3>Presentation Titles.</h3><p>Please click on titles for abstracts.</p>
+<% end %>
 <ul>
 	<% @meeting.meeting_abstracts.each do | abstract| %>
 	<li class="citation">
@@ -12,3 +15,4 @@
 	</li>
 	<% end %>
 </ul>
+<p><%= @meeting.date.to_s(:long) %></p>
