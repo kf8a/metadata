@@ -9,6 +9,4 @@ class Publication < ActiveRecord::Base
   validates_presence_of :citation
   validates_numericality_of :year, :on => :create, :message => "is not a number"
   
-  has_attachment :content_type => ['application/pdf', 'application/msword', 'text/plain'], 
-    :storage => :file_system, :path_prefix => 'public/publications'
 end
