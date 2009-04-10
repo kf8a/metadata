@@ -1,4 +1,3 @@
-
 class DatasetsController < ApplicationController
       
   before_filter :set_title, :allow_on_web

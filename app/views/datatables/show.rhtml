@@ -44,7 +44,7 @@
 	TODO: temporal coverage
 	TODO: geographic coverage 
 	-->
-<%= link_to 'Download complete dataset', formatted_datatable_path(@datatable, :csv) %>
+<%= link_to 'Download complete dataset', datatable_path(@datatable, :format => :csv) %>
 
 <h3>Data Excerpt</h3>
 <table>
@@ -70,8 +70,8 @@
 <% end -%>
 <% end -%>
 
-<%= link_to 'xml', formatted_datatable_path(@datatable, :xml) %>&nbsp;|&nbsp;
-<%= link_to 'csv',  formatted_datatable_path(@datatable,  :csv) %>&nbsp;|&nbsp;
-<%= link_to 'eml', formatted_dataset_path(@dataset, :eml) %>&nbsp;|&nbsp;
+<%= link_to 'xml', datatable_path(@datatable, :format  => :xml) %>&nbsp;|&nbsp;
+<%= link_to 'csv',  datatable_path(@datatable,  :format => :csv) %>&nbsp;|&nbsp;
+<%= link_to 'eml', dataset_path(@dataset, :format => :eml) %>&nbsp;|&nbsp;
 <%= link_to 'Back', dataset_path(@dataset) %>&nbsp;|&nbsp;
 <%= link_to 'Edit', edit_datatable_path(@datatable) if logged_in? %>
