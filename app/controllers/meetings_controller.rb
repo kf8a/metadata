@@ -8,7 +8,7 @@ class MeetingsController < ApplicationController
     @meetings = @venue.meetings
     @title = @venue.name.humanize + "  Meetings"
     respond_to do |format|
-      format.html { render :template => 'meetings/index'}
+      format.html #index.html
       format.xml { render :xml => @meetings.to_xml}
     end
   end
@@ -73,6 +73,8 @@ class MeetingsController < ApplicationController
     venue = meeting.venue_type
     
     crumb.url = url_for(:controller => 'meetings', :location  => venue.name)
+  #  crumb.url = "/meetings/?location=#{venue.name}"
+  
     crumb.name = venue.name.capitalize + ' Meeting'
     @crumbs << crumb
   end
