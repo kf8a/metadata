@@ -40,7 +40,11 @@
 <h3>Data</h3>
 
 <% if @values -%>
-<%= link_to 'Download as csv', formatted_datatable_path(@datatable, :csv) %>
+<!-- 
+	TODO: temporal coverage
+	TODO: geographic coverage 
+	-->
+<%= link_to 'Download complete dataset', formatted_datatable_path(@datatable, :csv) %>
 
 <h3>Data Excerpt</h3>
 <table>
