@@ -6,9 +6,6 @@ class ApplicationController < ActionController::Base
     
   before_filter :login_required, :except => [:index, :show] if ENV["RAILS_ENV"] == 'production'
   before_filter :set_title, :set_crumbs
-    
-  # Pick a unique cookie name to distinguish our session data from others'
-  session :session_key => '_metadata_session_id'
   
   protected
    
