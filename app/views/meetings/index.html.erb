@@ -1,5 +1,5 @@
 <h1><%= @venue.name.capitalize %> Meetings</h1>
-<p>The KBS LTER Program hosts annual all scientist meetings at which LTER investigators present on-going research and discuss research findings.We also host shorter receptions and tours on an ad hoc basis.</p>
+<p>The KBS LTER Program hosts annual all scientist meetings at which LTER investigators present on-going research and discuss research findings. We also host shorter receptions and tours on an ad hoc basis.</p>
 <p>Abstracts from past and current meetings are available below:</p>
 <ul>
 <% @meetings.each do |meeting| %>
@@ -7,7 +7,6 @@
 	<%= link_to 'edit', edit_meeting_path(meeting), {:class => 'edit'} if logged_in? %>
 		<%= link_to_remote image_tag("trash.gif"), :url => meeting_path(meeting), :method => 'delete', :confirm => 'Are you sure?' if logged_in?%>
 		</li>
-<% end %>
 <% end %>
 </ul>
 
