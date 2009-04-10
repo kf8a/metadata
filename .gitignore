@@ -2,3 +2,6 @@ db/meta_test
 log/
 vendor/rails/
 metadata.sql
+public/stylesheets/base_packaged.css
+public/javascripts/base_packaged.js
+.DStore
