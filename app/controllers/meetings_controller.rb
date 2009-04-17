@@ -40,8 +40,8 @@ class MeetingsController < ApplicationController
     respond_to do |format|
       if @meeting.save
         flash[:notice] = 'Meeting was successfully created.'
-        format.html { redirect_to meetings_url(@meeting) }
-        format.xml  { head :created, :location => meetins_url(@meeting) }
+        format.html { redirect_to meetings_url }
+        format.xml  { head :created, :location => meeting_url(@meeting) }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @meeting.errors.to_xml }
