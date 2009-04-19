@@ -64,6 +64,22 @@ class MeetingsController < ApplicationController
      end
   end
   
+  def destroy
+    @meeting = Meeting.find(params[:id])
+    meeting_id = "meeting_#{@meeting.id}"
+    @meeting.destroy
+     respond_to do |format|
+       format.html { redirect_to meetings_url }
+       format.xml  { head :ok }
+       format.js do 
+         render :update do |page|
+           page.visual_effect :fade, meeting_id
+         end
+       end
+     end
+    
+  end
+  
   private
   def set_crumbs
     crumb = Struct::Crumb.new
