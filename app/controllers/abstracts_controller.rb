@@ -28,7 +28,7 @@ class AbstractsController < ApplicationController
         format.xml  { head :created, :location => abstracts_url(@meeting) }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @meeting_abstract.errors.to_xml }
+        format.xml  { render :xml => @abstract.errors.to_xml }
       end
     end
   end
@@ -46,7 +46,7 @@ class AbstractsController < ApplicationController
   
   # GET /meeting_abstract/1/edit
   def edit
-    @abstract = MeetingAbstract.find(params[:id])
+    @abstract = Abstract.find(params[:id])
   end
 
   # PUT /meeting_abstracts/1
@@ -55,7 +55,7 @@ class AbstractsController < ApplicationController
     @abstract = Abstract.find(params[:id])
 
     respond_to do |format|
-      if @abstract.update_attributes(params[:meeting_abstract])
+      if @abstract.update_attributes(params[:abstract])
         flash[:notice] = 'Meeting abstract  was successfully updated.'
         format.html { redirect_to abstract_url(@meeting_abstract) }
         format.xml  { head :ok }
