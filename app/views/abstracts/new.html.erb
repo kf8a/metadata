@@ -1,0 +1,23 @@
+<h1>New Meeting Abstract</h1>
+<%= error_messages_for :abstracts %>
+
+<% form_for(:abstract, :url =>abstracts_path) do |f| %>
+	<p>
+		<%= f.hidden_field :meeting_id %>
+	</p>
+	<p>
+		<label for='abstract_title'>Title</label><br/>
+		<%= f.text_area :title, :size => '60x3' %>
+	</p>
+	<p>
+		<label for='abstract_authors'>Authors</label><br/>
+		<%= f.text_area :authors , :size => '60x3'%>
+	</p>
+	<p>
+		<label for='abstract_abstract'>Abstract</label>
+		<%= textile_editor 'abstract', :abstract, :size => '60x20'%>
+	</p>
+  <p>
+    <%= submit_tag "Create" %>
+  </p>
+<% end %>
