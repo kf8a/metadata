@@ -3,18 +3,18 @@
 <% if @meeting.announcement %>
 <p><%= textilize(@meeting.announcement) %></p>
 <% end %>
-<% if @meeting.meeting_abstracts.size > 0 %>
+<% if @meeting.abstracts.size > 0 %>
 <h3>Presentation Titles.</h3><p>Please click on titles for abstracts.</p>
 <% end %>
 <ul>
-	<% @meeting.meeting_abstracts.each do | abstract| %>
+	<% @meeting.abstracts.each do | abstract| %>
 	<li id="abstract_<%= abstract.id %>" class="citation">
 		<%= abstract.authors %>
-		<%= link_to "#{abstract.title}", meeting_abstract_path(abstract) %>
-		<%= link_to 'Edit', edit_meeting_abstract_path(abstract) if logged_in? %>
-			<%= link_to_remote image_tag("trash.gif"), :url => meeting_abstract_path(abstract), :method => 'delete', :confirm => 'Are you sure?' if logged_in?%>
+		<%= link_to "#{abstract.title}", abstract_path(abstract) %>
+		<%= link_to 'Edit', edit_abstract_path(abstract) if logged_in? %>
+			<%= link_to_remote image_tag("trash.gif"), :url => abstract_path(abstract), :method => 'delete', :confirm => 'Are you sure?' if logged_in?%>
 	</li>
 	<% end %>
 </ul>
 <p><%= @meeting.date.to_s(:long) %></p>
-<p><%= link_to 'Add abstract', new_meeting_abstract_path({:meeting => @meeting.id}) if logged_in? %></p>
+<p><%= link_to 'Add abstract', new_abstract_path({:meeting => @meeting.id}) if logged_in? %></p>

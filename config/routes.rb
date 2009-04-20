@@ -24,7 +24,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :units
 
-  map.resources :meeting_abstracts
+  map.resources :abstracts
   
   map.root :controller => 'datasets'
 

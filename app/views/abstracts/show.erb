@@ -4,7 +4,7 @@
 
 <p><%= textilize(@abstract.abstract) %></p>
 
-<%= link_to 'Edit', edit_meeting_abstract_path(@abstract) %> |
+<%= link_to 'Edit', edit_abstract_path(@abstract) %> |
 <%= link_to 'Back', meeting_path(@abstract.meeting) %> | 
-<%= link_to 'Destroy', :url => meeting_abstract_path(@abstract), :method => 'post', :confirm => 'Are you sure?' if logged_in?  %>
+<%= link_to 'Destroy', :url => abstract_path(@abstract), :method => 'post', :confirm => 'Are you sure?' if logged_in?  %>
 <%= link_to 'log out', sessions_path(), :method => 'delete' %>
