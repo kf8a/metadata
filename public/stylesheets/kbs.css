@@ -1,8 +1,7 @@
 #content {
 	width: 550px;		/* content width */
 	float: right;		/* content on the right */
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: .8em;
+	font-size: 1em;
 	padding-left: 15px;
 }
 #content h3 {
@@ -50,10 +49,6 @@ a:link:hover {
 	background-color: white;;
 }
 
-
-.even {
-	background-color: #f8ffd6;
-}
 p {
 	font-size: 1em;
 	margin-top: 5px;

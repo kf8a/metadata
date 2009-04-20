@@ -17,7 +17,6 @@
 }
 
 #branding h2 {
-	font-family: Arial, Helvetica, sans-serif;
 	padding-left: 1em;
 	color: #FFFFFF;
 	font-size: 1em;
@@ -33,7 +32,9 @@
 }
 
 #branding {
-	font-family: Arial, Helvetica, sans-serif;
+	display: block;
+	height: 68px;
+	width: 700px;
 }
 
 #branding img {
@@ -41,11 +42,13 @@
 
 #branding h1 {
 	color:#006633;
-	font-family:Verdana,Arial,Helvetica,sans-serif;
 	font-size:30px;
 	font-weight: normal;
 	margin-bottom: 5px;
 	margin-top: 5px;
+	height: 32pt;
+	text-shadow: rgb(136, 136, 136) 2px 2px 2px;
+	width: 700px;
 }
 
 #lter_kbs {
@@ -76,6 +79,7 @@
 }
 
 #msu_logo {
+	height: 32px;
 	margin-top: 6px;
 	float: right;
 }
