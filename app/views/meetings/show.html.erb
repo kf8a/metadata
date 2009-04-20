@@ -4,7 +4,7 @@
 <p><%= textilize(@meeting.announcement) %></p>
 <% end %>
 <% if @meeting.abstracts.size > 0 %>
-<h3>Presentation Titles.</h3><p>Please click on titles for abstracts.</p>
+<h3>Presentation Titles</h3><p>Please click on titles for abstracts.</p>
 <% end %>
 <ul>
 	<% @meeting.abstracts.each do | abstract| %>
