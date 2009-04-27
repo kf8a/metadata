@@ -1,5 +1,7 @@
 .bulleted {
-	list-style-type: disc;
+	list-style-type: circle;
+	opacity: 0.49;
+	text-indent: 1em;
 }
 #searchform input {
 	margin-right:0.05em;

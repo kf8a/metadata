@@ -57,7 +57,7 @@ class AbstractsController < ApplicationController
     respond_to do |format|
       if @abstract.update_attributes(params[:abstract])
         flash[:notice] = 'Meeting abstract  was successfully updated.'
-        format.html { redirect_to abstract_url(@meeting_abstract) }
+        format.html { redirect_to abstract_url(@abstract) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
