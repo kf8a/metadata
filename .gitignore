@@ -4,6 +4,6 @@ vendor/rails/
 vendor/plugins/rspec/.git/
 vendor/plugins/rspec-rails/.git/
 metadata.sql
-public/stylesheets/base_packaged.css
+base_packaged.css
 public/javascripts/base_packaged.js
 .DStore

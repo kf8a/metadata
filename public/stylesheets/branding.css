@@ -34,7 +34,6 @@
 #branding {
 	font-family: Verdana, Ariel, Helvetica, sans-serif;
 	display: block;
-	height: 68px;
 	width: 700px;
 }
 
@@ -47,7 +46,6 @@
 	font-weight: normal;
 	margin-bottom: 5px;
 	margin-top: 5px;
-	height: 32pt;
 	text-shadow: rgb(136, 136, 136) 2px 2px 2px;
 	width: 700px;
 }
