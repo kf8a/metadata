@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
       
-  skip_filter :login_required, :only => ['alphabetical','show','index']
+  skip_filter :login_required, :only => ['alphabetical','show','index', 'emeritus']
 
   # GET /people
   # GET /people.xml
