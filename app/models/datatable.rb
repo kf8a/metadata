@@ -30,6 +30,8 @@ class Datatable < ActiveRecord::Base
         csv << row
       end
     end
+    # delete empty string values
+    csv_string.gsub!(/\,\"\"/,',')
     return  csv_string
   end
   
