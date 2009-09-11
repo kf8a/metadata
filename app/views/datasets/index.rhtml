@@ -17,6 +17,15 @@
 		</ul>
 <% end -%>
 
+<div id='network_databases'>
+  <h2>Lter Network Resources</h2>
+  <ul>
+    <li><%= link_to 'LTER Data Catalog', :url => 'http://metacat.lternet.edu/knb/'%> - search datasets from all LTER sites</li>
+  <li><%= link_to 'ClimDB/HydroDB', :url => 'http://www.fsl.orst.edu/climhy/'%> - climate and hydrology database</li> 
+  <li><%= link_to 'LTER Site Profiles (SiteDB)', :url => 'http://www.lternet.edu/sites/'%> - LTER site information database</li>
+  <li><%= link_to 'Ecotrends', :url => 'http://www.ecotrends.info/EcoTrends/'%> - find long term LTER, USFS, and ARS datasets</li>
+  </ul>
+</div>
 		
 <%= link_to 'New dataset', new_dataset_path %> | 
 <%= link_to 'login', new_sessions_path %>
