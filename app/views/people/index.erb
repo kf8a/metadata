@@ -2,7 +2,7 @@
 
 	<% @roles.each do |role| -%>
 	<h2><%= role.name %></h2>
-	<% role.people.sort! {|a,b| a.sur_name <=> b.sur_name } %>
+	<% role.people.sort! {|a,b| a.lter_roles.find(role).seniority <=> b.lter_roles.find(role).seniority } %>
 	<ul class='multicolumn'>
 	<% role.people.each do |person| -%>
   	<li><%= link_to "#{person.full_name}", person_path(person) %>
