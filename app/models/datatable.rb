@@ -1,6 +1,6 @@
 require 'rexml/document'
 require 'redcloth'
-require 'fastercsv'
+#require 'fastercsv'
 include REXML
 
 class Datatable < ActiveRecord::Base

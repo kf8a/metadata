@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081014142555) do
+ActiveRecord::Schema.define(:version => 20090410134851) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -23,6 +23,20 @@ ActiveRecord::Schema.define(:version => 20081014142555) do
     t.integer "variate_id"
     t.integer "position"
     t.string  "name"
+  end
+
+  create_table "committee_memberships", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "committee_id"
+    t.integer  "priority"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "committees", :force => true do |t|
+    t.string  "name"
+    t.integer "priority"
   end
 
   create_table "datasets", :force => true do |t|

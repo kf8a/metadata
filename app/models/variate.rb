@@ -18,11 +18,11 @@ private
     m = Element.new('measurementScale')
     scale = m.add_element(self.measurement_scale)
     case self.measurement_scale
-    when 'interval': eml_interval(scale)
-    when 'ratio': eml_ratio(scale)
-    when 'ordinal':
-    when 'nominal': eml_nominal(scale)
-    when 'datetime': eml_date_time(scale)
+    when 'interval' then eml_interval(scale)
+    when 'ratio' then eml_ratio(scale)
+    when 'ordinal' then 
+    when 'nominal'then  eml_nominal(scale)
+    when 'datetime' then eml_date_time(scale)
     end
     return m
   end
