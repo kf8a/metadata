@@ -7,6 +7,9 @@
 	<%= text_field_tag 'person[affiliations_attributes][][title]', @affiliation.title %>
 	</td>
 	<td>
-	<%= text_field_tag 'person[affiliations_attributes][][seniority]', @affiliation.seniority, :size => 5 %>
+	<%= text_field_tag 'person[affiliations_attributes][][seniority]', @affiliation.seniority, :size => 5 %> 
+	</td>
+	<td>
+	  <%= check_box_tag 'person[affiliations_attributes][][_delete]' %>
 	</td>
 </tr>
