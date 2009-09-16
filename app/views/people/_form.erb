@@ -65,8 +65,30 @@
 </p>
 </div>
 
-<p>
-	<% @roles.each do |role| %>
-		<%= role.name  %><%= check_box_tag 'person[lter_role_ids][]', role.id, person.lter_roles.include?(role) %><br/>
+<% f.fields_for :affiliations do |affiliation_form| %>
+
+<table>
+  <tr>
+    <th>Role</th>
+    
+    <th>Title</th>
+    <th>Seniority</th>
+  </tr>
+	<% @person.affiliations.each do |affiliation| %>
+	<tr>
+		<td>
+		  <%= select_tag 'person[affiliations_attributes][][role_id]',
+		    options_from_collection_for_select(lter_roles, :id, :name, :selected => affiliation.role_id) %>
+		</td>
+		<td>
+		<%= text_field_tag 'person[affiliations_attributes][][title]', affiliation.title %>
+		</td>
+		<td>
+		<%= text_field_tag 'person[affiliations_attributes][][seniority]', affiliation.seniority, :size => 5 %>
+		<%= hidden_field_tag 'person[affiliations_attributes][][id]', affiliation.id %>
+		</td>
+		</tr>
 	<% end %>
-</p>
+</table>
+<%= link_to_remote 'Add Role' %>
+<% end%>

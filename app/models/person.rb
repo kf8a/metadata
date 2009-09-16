@@ -5,6 +5,8 @@ class Person < ActiveRecord::Base
   has_many :datasets, :through => :affiliations,  :source => :dataset
   has_many :scribbles
   has_many :protocols, :through => :scribbles
+    
+  accepts_nested_attributes_for :affiliations, :allow_destroy => true
   
   #acts_as_taggable
   
@@ -22,14 +24,14 @@ class Person < ActiveRecord::Base
     self.dataset_roles.map(&:name).sort.uniq
   end
   
-  def lter_role_ids=(role_ids)
-    affiliations.each do |affiliation|
-      affiliation.destroy unless role_ids.include? affiliation.id
-    end
-    
-    role_ids.each do |role_id|
-      self.affiliations.create(:role_id => role_id) unless affiliations.any? {|d| d.role_id == role_id}
-    end
-  end
+  # def lter_role_ids=(role_ids)
+  #   affiliations.each do |affiliation|
+  #     affiliation.destroy unless role_ids.include? affiliation.id
+  #   end
+  #   
+  #   role_ids.each do |role_id|
+  #     self.affiliations.create(:role_id => role_id) unless affiliations.any? {|d| d.role_id == role_id}
+  #   end
+  # end
   
 end
