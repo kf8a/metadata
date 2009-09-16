@@ -24,5 +24,5 @@ class ApplicationController < ActionController::Base
   def set_crumbs
     @crumbs = []
   end
-
+  
 end

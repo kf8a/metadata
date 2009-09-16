@@ -1,0 +1,12 @@
+<tr>
+	<td>
+	  <%= select_tag 'person[affiliations_attributes][][role_id]',
+	    options_from_collection_for_select(lter_roles, :id, :name) %>
+	</td>
+	<td>
+	<%= text_field_tag 'person[affiliations_attributes][][title]', @affiliation.title %>
+	</td>
+	<td>
+	<%= text_field_tag 'person[affiliations_attributes][][seniority]', @affiliation.seniority, :size => 5 %>
+	</td>
+</tr>

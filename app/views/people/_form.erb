@@ -67,7 +67,7 @@
 
 <% f.fields_for :affiliations do |affiliation_form| %>
 
-<table>
+<table id='affiliations'>
   <tr>
     <th>Role</th>
     
@@ -90,5 +90,5 @@
 		</tr>
 	<% end %>
 </table>
-<%= link_to_remote 'Add Role' %>
+<%= link_to_remote 'Add Role',:url => {:controller => :affiliations, :action => :new} %>
 <% end%>
