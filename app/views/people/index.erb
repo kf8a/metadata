@@ -40,7 +40,7 @@
 	      <% end %>
 	    </li>
 	  </ul>
-	<% end %>
+	<% else %>
 	<% people = role.people.sort {|a,b| a.affiliations.find_by_role_id(role).seniority.to_s + a.sur_name <=>  b.affiliations.find_by_role_id(role).seniority.to_s + b.sur_name} %>
 	<ul class='multicolumn'>
 	<% people.each do |person| -%>
@@ -51,6 +51,7 @@
   	</li>
 	<% end %>
 	</ul>
+	<% end %>
 	<% end %>
 <br />
 
