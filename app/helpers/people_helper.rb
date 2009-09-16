@@ -6,6 +6,7 @@ module PeopleHelper
     
   def parenthize(string)
     return string if string.nil?
+    return string if string.strip == ""
     return "("+string+")"
   end
   
