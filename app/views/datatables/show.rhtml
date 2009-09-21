@@ -1,7 +1,7 @@
 <h1><%= link_to "#{@datatable.name}", dataset_path(@dataset) %> : <%= @datatable.title %></h1>
 
 <p>
-	<%= @datatable.description %>
+	<%= textilize @datatable.description %>
 </p>
 
 <% unless  @datatable.is_sql %>
