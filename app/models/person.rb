@@ -24,6 +24,10 @@ class Person < ActiveRecord::Base
     self.dataset_roles.map(&:name).sort.uniq
   end
   
+  def address
+    city || ''  + ' ' + street_address || ''
+  end
+  
   # def lter_role_ids=(role_ids)
   #   affiliations.each do |affiliation|
   #     affiliation.destroy unless role_ids.include? affiliation.id
