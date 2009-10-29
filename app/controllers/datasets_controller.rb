@@ -14,11 +14,9 @@ class DatasetsController < ApplicationController
     theme = params[:theme] || ''
     person = params[:person]
     @themes = Theme.find(:all, :order => :priority)
-    unless theme.empty?
-      unless theme[:id].empty?
+    unless theme.empty? || theme[:id].empty?
         @theme = Theme.find(theme[:id])
         @themes = [@theme]
-      end
     end
   #  unless person[:id].empty?
   #    @datasets = Dataset.find(:all, :conditions => '[person_id =?], person.id')
