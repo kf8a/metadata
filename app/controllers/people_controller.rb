@@ -36,7 +36,7 @@ class PeopleController < ApplicationController
   end
 
   def show_all
-    @people = Person.all
+    @people = Person.all(:order => 'sur_name')
   end
   
   # GET /people/1
