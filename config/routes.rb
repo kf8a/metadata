@@ -7,6 +7,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect 'people/alphabetical', :controller => 'people', :action => 'alphabetical', :requirements => { :method => :get }
   map.connect 'people/emeritus', :controller => 'people', :action => 'emeritus', :requirements => {:method => :get}
+  map.connect 'people/show_all', :controller => 'people', :action => 'show_all'
   
   map.resources :people
 

@@ -35,6 +35,10 @@ class PeopleController < ApplicationController
     
   end
 
+  def show_all
+    @people = Person.all
+  end
+  
   # GET /people/1
   # GET /people/1.xml
   def show
