@@ -11,7 +11,12 @@ class DatasetsController < ApplicationController
   # GET /datasets
   # GET /datasets.xml
   def index
+    theme = params[:theme]
     @themes = Theme.find(:all, :order => :priority)
+    unless theme[:id].empty?
+      @theme = Theme.find(theme[:id])
+      @themes = [@theme]
+    end
     @datasets = Dataset.find(:all)
     @crumbs = []
     respond_to do |format|

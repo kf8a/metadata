@@ -1,8 +1,7 @@
 <div id='search_form'>
-  <%= form_remote_tag :html => { :action =>
-      url_for(:controller => "some", :action => "place") }%>
-      Contributer: <%= collection_select :person, :person_id, Person.find_all_with_dataset, :id, :full_name,{ :include_blank => true } %>
-      Research Theme: <%= collection_select :theme,  :theme_id, Theme.all , :id, :title, { :include_blank => true }%>
+  <%= form_tag '/datasets', :method => 'get'%> 
+      Research Theme: <%= collection_select :theme,  :id, Theme.all , :id, :title, { :include_blank => true }%>
+       Contributor: <%= collection_select :person, :person_id, Person.find_all_with_dataset, :id, :full_name,{ :include_blank => true } %>
       Keywords: <%= text_field_tag 'keywords'%>
       
       From: <%= select_year 1988, :start_year => 1988, :end_year => Date.today.year %> To: <%= select_year Date.today, :start_year=>1988, :end_year => Date.today.year%>
