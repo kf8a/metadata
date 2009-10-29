@@ -31,6 +31,15 @@ class Person < ActiveRecord::Base
     return address
   end
   
+  def self.find_all_with_dataset
+    people = Person.all.collect {|x| x if x.has_dataset?}
+    people.compact
+  end
+    
+  def has_dataset?
+    self.dataset_roles.size > 0
+  end
+  
   # def lter_role_ids=(role_ids)
   #   affiliations.each do |affiliation|
   #     affiliation.destroy unless role_ids.include? affiliation.id
