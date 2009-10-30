@@ -16,7 +16,9 @@
       <%= submit_tag "Search" %>
 </div>
 <div id='datasets'>
+<% active_themes = @datasets.collect {|dataset| dataset.themes}.flatten.compact.uniq %>
 <% @themes.each do |theme| -%>
+  <% next unless active_themes.include?(theme)%>
 	<h2><%= theme.title %></h2>
 		<ul>
 		  <% @datasets.each do |dataset| %>
