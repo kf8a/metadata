@@ -12,16 +12,20 @@ class DatasetsController < ApplicationController
   # GET /datasets.xml
   def index
     theme = params[:theme] || ''
-    person = params[:person]
+    person = params[:person] || ''
+    @person = nil
+    @people = Person.find_all_with_dataset
+    
     @themes = Theme.find(:all, :order => :priority)
     unless theme.empty? || theme[:id].empty?
         @theme = Theme.find(theme[:id])
         @themes = [@theme]
     end
-  #  unless person[:id].empty?
-  #    @datasets = Dataset.find(:all, :conditions => '[person_id =?], person.id')
-  #  end
-  #  @datasets = Dataset.find(:all)
+    @datasets = Dataset.find(:all)
+    unless person.empty? || person[:id].empty?
+      @person = Person.find(person[:id])
+      @datasets = Dataset.find(:all, :joins => :people, :conditions => {:people => {:id => @person  }})
+   end
     @crumbs = []
     respond_to do |format|
       format.html # index.rhtml

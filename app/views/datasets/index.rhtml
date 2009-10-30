@@ -4,7 +4,7 @@
       Research Theme: <%= collection_select :theme,  :id, Theme.all , :id, :title, { :include_blank => true }%>
     </span>
     <span>  
-       Contributor: <%= collection_select :person, :person_id, Person.find_all_with_dataset, :id, :full_name,{ :include_blank => true } %>
+       Contributor:   <%= collection_select :person, :id, @people, :id, :full_name, { :include_blank => true } %>
     </span>
     <span>
       Keywords: <%= text_field_tag 'keywords'%>
@@ -19,8 +19,11 @@
 <% @themes.each do |theme| -%>
 	<h2><%= theme.title %></h2>
 		<ul>
-		<% theme.datasets.each do |dataset| -%>
-		<% next unless dataset.on_web %>
+		  <% @datasets.each do |dataset| %>
+		  <% next unless dataset.on_web %>
+		  <% next unless dataset.themes.exists?(theme.id) %>
+
+
 		<% if dataset.core_dataset %>
 			<li class='core_dataset'>
 		<% elsif dataset.datatables.size == 0 %>

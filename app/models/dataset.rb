@@ -9,6 +9,11 @@ class Dataset < ActiveRecord::Base
   has_and_belongs_to_many :themes
   belongs_to :project
 
+  def has_person(id)
+    person = Person.find(id)
+    people.exists?(person)
+  end
+  
   #unpack and populate datatables and variates  
   def from_eml(dataset)
     dataset.elements.each do |element|
