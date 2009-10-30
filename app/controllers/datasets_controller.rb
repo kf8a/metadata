@@ -25,6 +25,7 @@ class DatasetsController < ApplicationController
     unless person.empty? || person[:id].empty?
       @person = Person.find(person[:id])
       @datasets = Dataset.find(:all, :joins => :people, :conditions => {:people => {:id => @person  }})
+      @datasets.uniq!
    end
     @crumbs = []
     respond_to do |format|
