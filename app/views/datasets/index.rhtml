@@ -1,11 +1,17 @@
 <div id='search_form'>
-  <%= form_tag '/datasets', :method => 'get'%> 
+  <%= form_tag '/datasets', :method => 'get'%>
+    <span>
       Research Theme: <%= collection_select :theme,  :id, Theme.all , :id, :title, { :include_blank => true }%>
+    </span>
+    <span>  
        Contributor: <%= collection_select :person, :person_id, Person.find_all_with_dataset, :id, :full_name,{ :include_blank => true } %>
+    </span>
+    <span>
       Keywords: <%= text_field_tag 'keywords'%>
-      
+    </span>
+    <span>
       From: <%= select_year 1988, :start_year => 1988, :end_year => Date.today.year %> To: <%= select_year Date.today, :start_year=>1988, :end_year => Date.today.year%>
-      
+    </span>
       
       <%= submit_tag "Search" %>
 </div>
