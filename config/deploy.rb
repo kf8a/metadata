@@ -30,7 +30,7 @@ namespace :deploy do
       end
     end
    end
-    namespace :mongrel do
+  namespace :mongrel do
     [ :stop, :start, :restart ].each do |t|
       desc "#{t.to_s.capitalize} the mongrel appserver"
       task t, :roles => :app do
