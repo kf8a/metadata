@@ -22,6 +22,15 @@ role :web, 'houghton.kbs.msu.edu'
 role :db,  'houghton.kbs.msu.edu', :primary => true
 
 namespace :deploy do
+  namespace :thin do
+    [:stop, :start, :restart].each do |t|
+      desc "#{t.to_s.capitalize} the thin appserver"
+      task t, :roles => :app do
+        invoke_command "thin -C /etc/thin/metadata.yml #{t.to_s}"
+      end
+    end
+   end
+  
   namespace :mongrel do
     [ :stop, :start, :restart ].each do |t|
       desc "#{t.to_s.capitalize} the mongrel appserver"
