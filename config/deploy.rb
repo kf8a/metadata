@@ -40,20 +40,20 @@ namespace :deploy do
       end
     end
   end
-
-  desc "Custom restart task for mongrel cluster"
+  
+  desc "Custom restart task for thin cluster"
   task :restart, :roles => :app, :except => { :no_release => true } do
-    deploy.mongrel.restart
+    deploy.thin.restart
   end
-
-  desc "Custom start task for mongrel cluster"
+  
+  desc "Custom start task for thin cluster"
   task :start, :roles => :app do
-    deploy.mongrel.start
+    deploy.thin.start
   end
-
-  desc "Custom stop task for mongrel cluster"
+  
+  desc "Custom stop task for thin cluster"
   task :stop, :roles => :app do
-    deploy.mongrel.stop
+    deploy.thin.stop
   end
   
   after "deploy:update_code", :link_production_db
