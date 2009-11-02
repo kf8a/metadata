@@ -25,7 +25,10 @@ class Person < ActiveRecord::Base
   end
   
   def address
-    city || ''  + ' ' + street_address || ''
+    address = city || ''
+    address = address + ' '
+    address = street_address || ''
+    return address
   end
   
   # def lter_role_ids=(role_ids)
