@@ -71,7 +71,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.save
-        expire_action :action => :index
+        #expire_action :action => :index
         flash[:notice] = 'Person was successfully created.'
         format.html { redirect_to person_url(@person) }
         format.xml  { head :created, :location => person_url(@person) }
@@ -89,7 +89,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.update_attributes(params[:person])
-        expire_action :action => :index
+        #expire_action :action => :index
         flash[:notice] = 'Person was successfully updated.'
         format.html { redirect_to person_url(@person) }
         format.xml  { head :ok }
