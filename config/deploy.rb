@@ -39,17 +39,17 @@ namespace :deploy do
       end
     end
   end
-  
+
   desc "Custom restart task for thin cluster"
   task :restart, :roles => :app, :except => { :no_release => true } do
     deploy.thin.restart
   end
-  
+
   desc "Custom start task for thin cluster"
   task :start, :roles => :app do
     deploy.thin.start
   end
-  
+
   desc "Custom stop task for thin cluster"
   task :stop, :roles => :app do
     deploy.thin.stop
