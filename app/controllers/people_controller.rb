@@ -105,7 +105,7 @@ class PeopleController < ApplicationController
   def destroy
     @person = Person.find(params[:id])
     @person.destroy
-    
+
     expire_action :action => :index
     respond_to do |format|
       format.html { redirect_to people_url }
