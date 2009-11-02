@@ -16,8 +16,10 @@
 	<% people.each do |person| -%>
   	<li><%= link_to "#{person.full_name}", person_path(person) %> 
   	  <%= parenthize person.affiliations.find_by_role_id(role).title %>
-			<%= link_to 'Edit', edit_person_path(person), {:class => 'edit'} if logged_in? %>
-			<%= link_to_remote image_tag("trash.gif"), :url => person_path(person), :method => 'delete', :confirm => 'Are you sure?' if logged_in?%>
+  	  <%if logged_in? %>
+			  <%= link_to 'Edit', edit_person_path(person), {:class => 'edit'} %>
+			  <%= link_to_remote image_tag("trash.gif"), :url => person_path(person), :method => 'delete', :confirm => 'Are you sure?'%>
+			<% end %>
   	</li>
 	<% end %>
 	</ul>
