@@ -10,6 +10,9 @@
 </ul>
 <h2>Tables</h2>
 <dl>
+  <% unless  @dataset.datatables.size > 0 %>
+    <dd>No data available yet</dd>
+  <% end %>
 	<% @dataset.datatables.each do |datatable| %>
 		<dt><%= link_to datatable.name, datatable_path(datatable) %> <%= datatable.title %></dt>
 		<dd><%= truncate(datatable.description,{:length=>100}) %></dd>
