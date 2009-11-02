@@ -1,7 +1,7 @@
 class PeopleController < ApplicationController
       
   skip_filter :login_required, :only => ['alphabetical','show','index', 'emeritus']
-  caches_page :index
+  caches_action :index
 
   # GET /people
   # GET /people.xml
@@ -67,7 +67,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.save
-        expire_page :action => :index
+        expire_action :action => :index
         flash[:notice] = 'Person was successfully created.'
         format.html { redirect_to person_url(@person) }
         format.xml  { head :created, :location => person_url(@person) }
@@ -85,7 +85,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.update_attributes(params[:person])
-        expire_page :action => :index
+        expire_action :action => :index
         flash[:notice] = 'Person was successfully updated.'
         format.html { redirect_to person_url(@person) }
         format.xml  { head :ok }
@@ -102,7 +102,7 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     @person.destroy
     
-    expire_page :action => :index
+    expire_action :action => :index
     respond_to do |format|
       format.html { redirect_to people_url }
 
