@@ -25,9 +25,9 @@ class Person < ActiveRecord::Base
   end
   
   def address
-    address = city || ' '
+    address = city || ''
     address = address + ' '
-    address = street_address || ' '
+    address = street_address || ''
     return address
   end
   
