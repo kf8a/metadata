@@ -1,6 +1,7 @@
 class PublicationsController < ApplicationController
   
   before_filter :login_required, :except => [:index, :show, :index_by_treatment]  if ENV["RAILS_ENV"] == 'production'
+  caches_action :index
   
   # GET /publications
   # GET /publications.xml
@@ -82,6 +83,8 @@ class PublicationsController < ApplicationController
 
     respond_to do |format|
        if @publication.save
+         expire_action :action => :index
+         
          flash[:notice] = 'Publications was successfully created.'
          format.html { redirect_to publication_url(@publication) }
          format.xml  { head :created, :location => publication_url(@publication) }
@@ -99,6 +102,8 @@ class PublicationsController < ApplicationController
      
      respond_to do |format|
        if @publication.update_attributes(params[:publication])
+         expire_action :action => :index
+         
          flash[:notice] = 'Publications was successfully updated.'
          format.html { redirect_to publication_url(@publication) }
          format.xml  { head :ok }
@@ -114,6 +119,9 @@ class PublicationsController < ApplicationController
   def destroy
       @publication = Publication.find(params[:id])
       @publication.destroy
+      
+      expire_action :action => :index
+      
       respond_to do |format|
         format.html { redirect_to publications_url }
         format.js  do

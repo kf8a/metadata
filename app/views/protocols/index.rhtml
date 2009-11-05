@@ -4,7 +4,7 @@
 		<% theme.datasets.each do |dataset| -%>
 		<% next unless dataset.on_web %>
 		<% dataset.protocols.each do |protocol| -%>
-		<li><%= link_to "#{protocol.name}, V#{protocol.version}", protocol_path(protocol) %> <%= protocol.title %> <%= link_to  'Edit', edit_protocol_path(protocol), {:class => 'edit'} if logged_in? %></li>
+		<li><%= link_to "#{protocol.name}, V#{protocol.version}", protocol_path(protocol) %> <%= protocol.title %></li>
 		<% end -%>
 		<% end -%>
 		</ul>
