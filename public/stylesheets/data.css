@@ -135,3 +135,7 @@ a:hover.edit {
 .person {
 	margin-top: 1em;
 }
+
+.select_box {
+	width: 200px;
+}

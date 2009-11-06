@@ -57,6 +57,7 @@ class DatasetsController < ApplicationController
   # GET /datasets/1;edit
   def edit
     @dataset = Dataset.find(params[:id])
+    @people = Person.all
   end
 
   # POST /datasets
