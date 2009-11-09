@@ -19,6 +19,13 @@ class Person < ActiveRecord::Base
     name += sur_name
     return name
   end
+  
+  #hack
+  def short_full_name 
+    fn = full_name
+    chars = fn.mb_chars
+    (chars.length > 30 ? chars[0...30] + '...' : chars).to_s
+  end
     
   def unique_dataset_role_names
     self.dataset_roles.map(&:name).sort.uniq

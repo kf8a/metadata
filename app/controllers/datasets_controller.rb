@@ -58,6 +58,24 @@ class DatasetsController < ApplicationController
   def edit
     @dataset = Dataset.find(params[:id])
     @people = Person.all
+    @roles = Role.find(:all, :conditions => ['role_type_id = ?', RoleType.find_by_name('dataset')])
+  end
+  
+  # POST /dataset/new_affiliation 
+  def set_affiliation_for
+    @affiliation = Affiliation.new
+    people = Person.all
+    roles = Role.find(:all, :conditions => ['role_type_id = ?', RoleType.find_by_name('dataset')])
+    respond_to do |format|
+      format.html
+      format.js do
+        render :update do |page|
+          page.insert_html :bottom, 'affiliations', :partial => "affiliation", 
+            :locals => {:roles => roles, :people => people}
+        end
+      end
+    end
+    
   end
 
   # POST /datasets
