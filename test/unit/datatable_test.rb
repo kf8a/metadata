@@ -1,10 +1,5 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class DatatableTest < Test::Unit::TestCase
-  fixtures :datatables
+class DatatableTest < ActiveSupport::TestCase
 
-  # Replace this with your real tests.
-  def test_truth
-    assert true
-  end
 end

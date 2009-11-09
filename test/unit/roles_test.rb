@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class RolesTest < Test::Unit::TestCase
+class RolesTest < ActiveSupport::TestCase
   fixtures :roles
 
   # Replace this with your real tests.

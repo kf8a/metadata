@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class MethocolTest < Test::Unit::TestCase
+class MethocolTest < ActiveSupport::TestCase
   fixtures :protocols
 
   # Replace this with your real tests.

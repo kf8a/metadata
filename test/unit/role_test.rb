@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class RoleTest < Test::Unit::TestCase
-  fixtures :roles
+class RoleTest < ActiveSupport::TestCase
 
   # Replace this with your real tests.
   def test_truth

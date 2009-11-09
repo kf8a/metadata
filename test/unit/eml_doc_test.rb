@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class EmlDocTest < Test::Unit::TestCase
+class EmlDocTest < ActiveSupport::TestCase
   fixtures :eml_docs
 
   # Replace this with your real tests.
