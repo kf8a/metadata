@@ -15,6 +15,7 @@ class DatasetsController < ApplicationController
   def index
     theme = params[:theme] || ''
     person = params[:person] || ''
+    keyword_list = params[:dataset][:keyword_list] || ''
     @person = nil
     @people = Person.find_all_with_dataset
     
@@ -28,6 +29,10 @@ class DatasetsController < ApplicationController
       @person = Person.find(person[:id])
       @datasets = Dataset.find(:all, :joins => :people, :conditions => {:people => {:id => @person  }})
       @datasets.uniq!
+   end
+   unless keyword_list.empty?
+     @datasets = Dataset.find_tagged_with(keyword_list, :on => 'keywords')
+     @datasets.uniq!
    end
     @crumbs = []
     respond_to do |format|
