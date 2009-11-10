@@ -10,6 +10,8 @@ class Dataset < ActiveRecord::Base
   belongs_to :project
 
   accepts_nested_attributes_for :affiliations, :allow_destroy => true
+  
+  acts_as_taggable_on :keywords
 
   def has_person(id)
     person = Person.find(id)

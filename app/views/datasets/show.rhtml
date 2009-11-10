@@ -8,6 +8,8 @@
 	<li>Date Initiated: <%= @dataset.initiated %></li>
 	<li>Date Completed: <%= @dataset.completed %></li>
 </ul>
+<h2>Keywords</h2>
+<p><%= @dataset.keyword_list %></p>
 <h2>Tables</h2>
 <dl>
   <% unless  @dataset.datatables.size > 0 %>

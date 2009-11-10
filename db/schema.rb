@@ -9,13 +9,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090410134851) do
+ActiveRecord::Schema.define(:version => 20091110032539) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
     t.integer "role_id"
     t.integer "dataset_id"
     t.integer "seniority"
+    t.string  "title"
+  end
+
+  create_table "citations", :force => true do |t|
+    t.date     "datetime"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "columns", :force => true do |t|
@@ -25,25 +32,11 @@ ActiveRecord::Schema.define(:version => 20090410134851) do
     t.string  "name"
   end
 
-  create_table "committee_memberships", :force => true do |t|
-    t.integer  "person_id"
-    t.integer  "committee_id"
-    t.integer  "priority"
-    t.integer  "role_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "committees", :force => true do |t|
-    t.string  "name"
-    t.integer "priority"
-  end
-
   create_table "datasets", :force => true do |t|
     t.string  "dataset"
     t.string  "title"
     t.text    "abstract"
-    t.string  "keywords"
+    t.string  "old_keywords"
     t.string  "status"
     t.date    "initiated"
     t.date    "completed"
@@ -95,8 +88,8 @@ ActiveRecord::Schema.define(:version => 20090410134851) do
   end
 
   create_table "meeting_abstracts", :force => true do |t|
-    t.string  "title"
-    t.string  "authors"
+    t.text    "title"
+    t.text    "authors"
     t.text    "abstract"
     t.integer "meeting_id"
   end
@@ -165,14 +158,6 @@ ActiveRecord::Schema.define(:version => 20090410134851) do
     t.string  "open_id"
   end
 
-  create_table "plots", :force => true do |t|
-    t.string  "name"
-    t.integer "treatment_id"
-    t.integer "replicate"
-    t.integer "study_id"
-    t.string  "description"
-  end
-
   create_table "projects", :force => true do |t|
     t.string   "title"
     t.text     "abstract"
@@ -210,6 +195,12 @@ ActiveRecord::Schema.define(:version => 20090410134851) do
     t.text    "title"
     t.text    "authors"
     t.integer "source_id"
+    t.integer "parent_id"
+    t.string  "content_type"
+    t.string  "filename"
+    t.integer "size"
+    t.integer "width"
+    t.integer "height"
   end
 
   create_table "publications_treatments", :id => false, :force => true do |t|
@@ -274,6 +265,23 @@ ActiveRecord::Schema.define(:version => 20090410134851) do
     t.string "name"
   end
 
+  create_table "taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "taggable_type"
+    t.string   "context"
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
+  end
+
   create_table "themes", :force => true do |t|
     t.string  "title"
     t.integer "priority"
@@ -308,8 +316,8 @@ ActiveRecord::Schema.define(:version => 20090410134851) do
     t.float   "max_valid"
     t.string  "date_format"
     t.float   "precision"
-    t.integer "variate_theme_id"
     t.text    "query"
+    t.integer "variate_theme_id"
   end
 
   create_table "venue_types", :force => true do |t|
