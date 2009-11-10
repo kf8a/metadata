@@ -35,7 +35,7 @@ class DatasetsController < ApplicationController
      keyword_datasets = Dataset.find_tagged_with(keyword_list, :on => 'keywords')
      @datasets = @datasets & keyword_datasets
    end
-      
+         
     @crumbs = []
     respond_to do |format|
       format.html # index.rhtml
@@ -73,14 +73,14 @@ class DatasetsController < ApplicationController
   # POST /dataset/new_affiliation 
   def set_affiliation_for
     @affiliation = Affiliation.new
-    people = Person.all
+    people = Person.find(:all, :order => 'sur_name ASC')
     roles = Role.find(:all, :conditions => ['role_type_id = ?', RoleType.find_by_name('dataset')])
     respond_to do |format|
       format.html
       format.js do
         render :update do |page|
           page.insert_html :bottom, 'affiliations', :partial => "affiliation", 
-            :locals => {:roles => roles, :people => people}
+            :locals => {:roles => roles, :people => people, :affiliation => @affiliation}
         end
       end
     end
