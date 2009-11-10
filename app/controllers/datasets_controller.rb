@@ -1,7 +1,7 @@
 class DatasetsController < ApplicationController
       
   before_filter :set_title, :allow_on_web
-  before_filter :login_required, :except => [:index, :show, :auto_complete_for_dataset_keyword_list] if ENV["RAILS_ENV"] == 'production'
+  before_filter :login_required, :except => [:index, :show, :auto_complete_for_keyword_list] if ENV["RAILS_ENV"] == 'production'
     
   # POST /dataset
   def upload
