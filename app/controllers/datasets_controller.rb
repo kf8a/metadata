@@ -27,13 +27,14 @@ class DatasetsController < ApplicationController
     @datasets = Dataset.find(:all)
     unless person.empty? || person[:id].empty?
       @person = Person.find(person[:id])
-      @datasets = Dataset.find(:all, :joins => :people, :conditions => {:people => {:id => @person  }})
-      @datasets.uniq!
+      person_datasets = Dataset.find(:all, :joins => :people, :conditions => {:people => {:id => @person  }})
+      @datasets = @datasets & person_datasets
    end
    unless keyword_list.empty?
-     @datasets = Dataset.find_tagged_with(keyword_list, :on => 'keywords')
-     @datasets.uniq!
+     keyword_datasets = Dataset.find_tagged_with(keyword_list, :on => 'keywords')
+     @datasets = @datasets & keyword_datasets
    end
+   
     @crumbs = []
     respond_to do |format|
       format.html # index.rhtml
