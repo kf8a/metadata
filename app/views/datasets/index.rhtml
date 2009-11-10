@@ -10,7 +10,7 @@
       From: <%= select_year 1988, :start_year => 1988, :end_year => Date.today.year %> To: <%= select_year Date.today, :start_year=>1988, :end_year => Date.today.year%>
     </span>
     <span>
-      Keywords:<%= text_field_with_auto_complete :dataset, :keyword_list, {}, {:method => :get} %>
+      Keywords:<%= keyword_field_with_auto_complete_tag :keyword_list, {}, {:method => :get} %>
     </span>
     
       

@@ -14,9 +14,8 @@ class DatasetsController < ApplicationController
   def index
     theme = params[:theme] || ''
     person = params[:person] || ''
-    dataset = params[:dataset] || ''
-    keyword_list = ''
-    keyword_list = dataset[:keyword_list] unless dataset == ''
+    keyword_list = params[:keyword_list] || ''
+
     @person = nil
     @people = Person.find_all_with_dataset
     
@@ -36,7 +35,7 @@ class DatasetsController < ApplicationController
      keyword_datasets = Dataset.find_tagged_with(keyword_list, :on => 'keywords')
      @datasets = @datasets & keyword_datasets
    end
-   
+      
     @crumbs = []
     respond_to do |format|
       format.html # index.rhtml
@@ -134,9 +133,9 @@ class DatasetsController < ApplicationController
     end
   end
   
-  def auto_complete_for_dataset_keyword_list
+  def auto_complete_for_keyword_list
     @tags = Tag.find(:all, :conditions => [ 'name LIKE ?',
-        '%' + params[:dataset][:keyword_list] + '%' ], 
+        '%' + params[:keyword_list] + '%' ], 
         :order => 'name ASC')
     render :partial => 'tags'
   end
