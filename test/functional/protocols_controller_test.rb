@@ -4,7 +4,7 @@ require 'protocols_controller'
 # Re-raise errors caught by the controller.
 class ProtocolsController; def rescue_action(e) raise e end; end
 
-class ProtocolsControllerTest < Test::Unit::TestCase
+class ProtocolsControllerTest < ActiveSupport::TestCase
   fixtures :protocols
 
   def setup

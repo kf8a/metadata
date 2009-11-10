@@ -4,7 +4,7 @@ require 'affiliations_controller'
 # Re-raise errors caught by the controller.
 class AffiliationsController; def rescue_action(e) raise e end; end
 
-class AffiliationsControllerTest < Test::Unit::TestCase
+class AffiliationsControllerTest < ActiveSupport::TestCase
   fixtures :affiliations
 
   def setup

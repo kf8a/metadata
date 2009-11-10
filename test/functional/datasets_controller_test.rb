@@ -4,7 +4,7 @@ require 'datasets_controller'
 # Re-raise errors caught by the controller.
 class DatasetsController; def rescue_action(e) raise e end; end
 
-class DatasetsControllerTest < Test::Unit::TestCase
+class DatasetsControllerTest < ActiveSupport::TestCase
   fixtures :datasets
 
   def setup
