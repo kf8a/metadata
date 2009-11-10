@@ -15,21 +15,7 @@ class Dataset < ActiveRecord::Base
     person = Person.find(id)
     people.exists?(person)
   end
-  
-  def dataset_affiliations=(affiliations)
-    new_affiliations = affiliations["role_ids"].collect do |role_attributes|
-      role = Role.find(role_attributes[:id])
-      role_affiliations = role_attributes["person_ids"].collect do |person|
-        a = Affiliation.new
-        a.person = Person.find(person)
-        a.role = role
-        a
-      end
-      role_affiliations
-    end
-    affiliations = new_affiliations.flatten
-  end
-  
+    
   #unpack and populate datatables and variates  
   def from_eml(dataset)
     dataset.elements.each do |element|
