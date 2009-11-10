@@ -139,3 +139,9 @@ a:hover.edit {
 .select_box {
 	width: 200px;
 }
+
+#search_form {
+	border-style: groove;
+	padding: 10px;
+	background-color: #e8e8e8;
+}
