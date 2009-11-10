@@ -2,6 +2,8 @@ class DatasetsController < ApplicationController
       
   before_filter :set_title, :allow_on_web
   
+  auto_complete_for :dataset, :keyword_list
+  
   # POST /dataset
   def upload
     file = params[:file]
@@ -122,6 +124,13 @@ class DatasetsController < ApplicationController
       format.html { redirect_to datasets_url }
       format.xml  { head :ok }
     end
+  end
+  
+  def auto_complete_for_dataset_keyword_list
+    @tags = Tag.find(:all, :conditions => [ 'name LIKE ?',
+        '%' + params[:dataset][:keyword_list] + '%' ], 
+        :order => 'name ASC')
+    render :partial => 'tags'
   end
   
   private

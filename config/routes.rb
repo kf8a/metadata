@@ -13,7 +13,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :protocols
 
-  map.resources :datasets, :collection => {:set_affiliation_for => :post}
+  map.resources :datasets, :collection => {:set_affiliation_for => :post,
+                                           :auto_complete_for_dataset_keyword_list => :get}
 
   map.resources :datatables
 

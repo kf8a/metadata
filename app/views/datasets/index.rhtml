@@ -7,11 +7,12 @@
        Contributor:   <%= collection_select :person, :id, @people, :id, :full_name, { :include_blank => true } %>
     </span>
     <span>
-      Keywords: <%= text_field_tag 'keywords'%>
-    </span>
-    <span>
       From: <%= select_year 1988, :start_year => 1988, :end_year => Date.today.year %> To: <%= select_year Date.today, :start_year=>1988, :end_year => Date.today.year%>
     </span>
+    <span>
+      Keywords:<%= text_field_with_auto_complete :dataset, :keyword_list, {}, {:method => :get} %>
+    </span>
+    
       
       <%= submit_tag "Search" %>
 </div>
