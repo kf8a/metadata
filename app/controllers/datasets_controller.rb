@@ -2,7 +2,7 @@ class DatasetsController < ApplicationController
       
   before_filter :set_title, :allow_on_web
   
-  auto_complete_for :dataset, :keyword_list
+  #auto_complete_for :dataset, :keyword_list
   
   # POST /dataset
   def upload
@@ -15,7 +15,9 @@ class DatasetsController < ApplicationController
   def index
     theme = params[:theme] || ''
     person = params[:person] || ''
-    keyword_list = params[:dataset][:keyword_list] || ''
+    dataset = params[:dataset] || ''
+    keyword_list = ''
+    keyword_list = dataset[:keyword_list] unless dataset == ''
     @person = nil
     @people = Person.find_all_with_dataset
     
@@ -31,6 +33,7 @@ class DatasetsController < ApplicationController
       @datasets = @datasets & person_datasets
    end
    unless keyword_list.empty?
+     @keyword_list = keyword_list
      keyword_datasets = Dataset.find_tagged_with(keyword_list, :on => 'keywords')
      @datasets = @datasets & keyword_datasets
    end
