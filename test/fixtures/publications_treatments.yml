@@ -1,0 +1,1327 @@
+--- 
+publications_treatments_001: 
+  treatment_id: "7"
+  publication_id: "47"
+publications_treatments_002: 
+  treatment_id: "8"
+  publication_id: "509"
+publications_treatments_003: 
+  treatment_id: "9"
+  publication_id: "509"
+publications_treatments_004: 
+  treatment_id: "1"
+  publication_id: "161"
+publications_treatments_005: 
+  treatment_id: "4"
+  publication_id: "161"
+publications_treatments_006: 
+  treatment_id: "5"
+  publication_id: "291"
+publications_treatments_007: 
+  treatment_id: "2"
+  publication_id: "6"
+publications_treatments_008: 
+  treatment_id: "4"
+  publication_id: "6"
+publications_treatments_009: 
+  treatment_id: "6"
+  publication_id: "6"
+publications_treatments_010: 
+  treatment_id: "1"
+  publication_id: "9"
+publications_treatments_011: 
+  treatment_id: "7"
+  publication_id: "9"
+publications_treatments_012: 
+  treatment_id: "1"
+  publication_id: "17"
+publications_treatments_013: 
+  treatment_id: "7"
+  publication_id: "17"
+publications_treatments_014: 
+  treatment_id: "8"
+  publication_id: "17"
+publications_treatments_015: 
+  treatment_id: "1"
+  publication_id: "21"
+publications_treatments_016: 
+  treatment_id: "5"
+  publication_id: "21"
+publications_treatments_017: 
+  treatment_id: "7"
+  publication_id: "21"
+publications_treatments_018: 
+  treatment_id: "8"
+  publication_id: "21"
+publications_treatments_019: 
+  treatment_id: "11"
+  publication_id: "21"
+publications_treatments_020: 
+  treatment_id: "1"
+  publication_id: "20"
+publications_treatments_021: 
+  treatment_id: "1"
+  publication_id: "19"
+publications_treatments_022: 
+  treatment_id: "8"
+  publication_id: "19"
+publications_treatments_023: 
+  treatment_id: "1"
+  publication_id: "25"
+publications_treatments_024: 
+  treatment_id: "8"
+  publication_id: "25"
+publications_treatments_025: 
+  treatment_id: "1"
+  publication_id: "24"
+publications_treatments_026: 
+  treatment_id: "1"
+  publication_id: "26"
+publications_treatments_027: 
+  treatment_id: "8"
+  publication_id: "26"
+publications_treatments_028: 
+  treatment_id: "1"
+  publication_id: "27"
+publications_treatments_029: 
+  treatment_id: "2"
+  publication_id: "27"
+publications_treatments_030: 
+  treatment_id: "3"
+  publication_id: "27"
+publications_treatments_031: 
+  treatment_id: "4"
+  publication_id: "27"
+publications_treatments_032: 
+  treatment_id: "5"
+  publication_id: "27"
+publications_treatments_033: 
+  treatment_id: "6"
+  publication_id: "27"
+publications_treatments_034: 
+  treatment_id: "7"
+  publication_id: "27"
+publications_treatments_035: 
+  treatment_id: "1"
+  publication_id: "29"
+publications_treatments_036: 
+  treatment_id: "2"
+  publication_id: "29"
+publications_treatments_037: 
+  treatment_id: "1"
+  publication_id: "30"
+publications_treatments_038: 
+  treatment_id: "2"
+  publication_id: "30"
+publications_treatments_039: 
+  treatment_id: "3"
+  publication_id: "30"
+publications_treatments_040: 
+  treatment_id: "4"
+  publication_id: "30"
+publications_treatments_041: 
+  treatment_id: "5"
+  publication_id: "30"
+publications_treatments_042: 
+  treatment_id: "6"
+  publication_id: "30"
+publications_treatments_043: 
+  treatment_id: "7"
+  publication_id: "30"
+publications_treatments_044: 
+  treatment_id: "1"
+  publication_id: "31"
+publications_treatments_045: 
+  treatment_id: "6"
+  publication_id: "31"
+publications_treatments_046: 
+  treatment_id: "7"
+  publication_id: "31"
+publications_treatments_047: 
+  treatment_id: "9"
+  publication_id: "31"
+publications_treatments_048: 
+  treatment_id: "1"
+  publication_id: "36"
+publications_treatments_049: 
+  treatment_id: "2"
+  publication_id: "36"
+publications_treatments_050: 
+  treatment_id: "3"
+  publication_id: "36"
+publications_treatments_051: 
+  treatment_id: "4"
+  publication_id: "36"
+publications_treatments_052: 
+  treatment_id: "5"
+  publication_id: "36"
+publications_treatments_053: 
+  treatment_id: "6"
+  publication_id: "36"
+publications_treatments_054: 
+  treatment_id: "7"
+  publication_id: "36"
+publications_treatments_055: 
+  treatment_id: "8"
+  publication_id: "36"
+publications_treatments_056: 
+  treatment_id: "9"
+  publication_id: "36"
+publications_treatments_057: 
+  treatment_id: "1"
+  publication_id: "40"
+publications_treatments_058: 
+  treatment_id: "6"
+  publication_id: "40"
+publications_treatments_059: 
+  treatment_id: "7"
+  publication_id: "40"
+publications_treatments_060: 
+  treatment_id: "7"
+  publication_id: "49"
+publications_treatments_061: 
+  treatment_id: "7"
+  publication_id: "50"
+publications_treatments_062: 
+  treatment_id: "11"
+  publication_id: "53"
+publications_treatments_063: 
+  treatment_id: "1"
+  publication_id: "55"
+publications_treatments_064: 
+  treatment_id: "2"
+  publication_id: "55"
+publications_treatments_065: 
+  treatment_id: "3"
+  publication_id: "55"
+publications_treatments_066: 
+  treatment_id: "4"
+  publication_id: "55"
+publications_treatments_067: 
+  treatment_id: "5"
+  publication_id: "55"
+publications_treatments_068: 
+  treatment_id: "6"
+  publication_id: "55"
+publications_treatments_069: 
+  treatment_id: "7"
+  publication_id: "55"
+publications_treatments_070: 
+  treatment_id: "8"
+  publication_id: "55"
+publications_treatments_071: 
+  treatment_id: "1"
+  publication_id: "62"
+publications_treatments_072: 
+  treatment_id: "7"
+  publication_id: "62"
+publications_treatments_073: 
+  treatment_id: "1"
+  publication_id: "72"
+publications_treatments_074: 
+  treatment_id: "2"
+  publication_id: "72"
+publications_treatments_075: 
+  treatment_id: "3"
+  publication_id: "72"
+publications_treatments_076: 
+  treatment_id: "4"
+  publication_id: "72"
+publications_treatments_077: 
+  treatment_id: "5"
+  publication_id: "72"
+publications_treatments_078: 
+  treatment_id: "6"
+  publication_id: "72"
+publications_treatments_079: 
+  treatment_id: "7"
+  publication_id: "72"
+publications_treatments_080: 
+  treatment_id: "1"
+  publication_id: "67"
+publications_treatments_081: 
+  treatment_id: "7"
+  publication_id: "67"
+publications_treatments_082: 
+  treatment_id: "9"
+  publication_id: "67"
+publications_treatments_083: 
+  treatment_id: "1"
+  publication_id: "81"
+publications_treatments_084: 
+  treatment_id: "7"
+  publication_id: "81"
+publications_treatments_085: 
+  treatment_id: "8"
+  publication_id: "81"
+publications_treatments_086: 
+  treatment_id: "5"
+  publication_id: "87"
+publications_treatments_087: 
+  treatment_id: "5"
+  publication_id: "89"
+publications_treatments_088: 
+  treatment_id: "7"
+  publication_id: "90"
+publications_treatments_089: 
+  treatment_id: "7"
+  publication_id: "92"
+publications_treatments_090: 
+  treatment_id: "12"
+  publication_id: "1"
+publications_treatments_091: 
+  treatment_id: "12"
+  publication_id: "97"
+publications_treatments_092: 
+  treatment_id: "12"
+  publication_id: "95"
+publications_treatments_093: 
+  treatment_id: "12"
+  publication_id: "96"
+publications_treatments_094: 
+  treatment_id: "12"
+  publication_id: "98"
+publications_treatments_095: 
+  treatment_id: "16"
+  publication_id: "16"
+publications_treatments_096: 
+  treatment_id: "16"
+  publication_id: "28"
+publications_treatments_097: 
+  treatment_id: "16"
+  publication_id: "52"
+publications_treatments_098: 
+  treatment_id: "16"
+  publication_id: "51"
+publications_treatments_099: 
+  treatment_id: "16"
+  publication_id: "71"
+publications_treatments_100: 
+  treatment_id: "16"
+  publication_id: "68"
+publications_treatments_101: 
+  treatment_id: "1"
+  publication_id: "99"
+publications_treatments_102: 
+  treatment_id: "2"
+  publication_id: "99"
+publications_treatments_103: 
+  treatment_id: "3"
+  publication_id: "99"
+publications_treatments_104: 
+  treatment_id: "4"
+  publication_id: "99"
+publications_treatments_105: 
+  treatment_id: "5"
+  publication_id: "99"
+publications_treatments_106: 
+  treatment_id: "6"
+  publication_id: "99"
+publications_treatments_107: 
+  treatment_id: "7"
+  publication_id: "99"
+publications_treatments_108: 
+  treatment_id: "8"
+  publication_id: "99"
+publications_treatments_109: 
+  treatment_id: "9"
+  publication_id: "99"
+publications_treatments_110: 
+  treatment_id: "10"
+  publication_id: "99"
+publications_treatments_111: 
+  treatment_id: "11"
+  publication_id: "99"
+publications_treatments_112: 
+  treatment_id: "16"
+  publication_id: "99"
+publications_treatments_113: 
+  treatment_id: "1"
+  publication_id: "101"
+publications_treatments_114: 
+  treatment_id: "7"
+  publication_id: "102"
+publications_treatments_115: 
+  treatment_id: "5"
+  publication_id: "103"
+publications_treatments_116: 
+  treatment_id: "5"
+  publication_id: "106"
+publications_treatments_117: 
+  treatment_id: "5"
+  publication_id: "105"
+publications_treatments_118: 
+  treatment_id: "1"
+  publication_id: "117"
+publications_treatments_119: 
+  treatment_id: "2"
+  publication_id: "117"
+publications_treatments_120: 
+  treatment_id: "3"
+  publication_id: "117"
+publications_treatments_121: 
+  treatment_id: "4"
+  publication_id: "117"
+publications_treatments_122: 
+  treatment_id: "5"
+  publication_id: "117"
+publications_treatments_123: 
+  treatment_id: "6"
+  publication_id: "117"
+publications_treatments_124: 
+  treatment_id: "7"
+  publication_id: "117"
+publications_treatments_125: 
+  treatment_id: "6"
+  publication_id: "118"
+publications_treatments_126: 
+  treatment_id: "7"
+  publication_id: "118"
+publications_treatments_127: 
+  treatment_id: "1"
+  publication_id: "124"
+publications_treatments_128: 
+  treatment_id: "2"
+  publication_id: "124"
+publications_treatments_129: 
+  treatment_id: "3"
+  publication_id: "124"
+publications_treatments_130: 
+  treatment_id: "4"
+  publication_id: "124"
+publications_treatments_131: 
+  treatment_id: "1"
+  publication_id: "400"
+publications_treatments_132: 
+  treatment_id: "2"
+  publication_id: "400"
+publications_treatments_133: 
+  treatment_id: "3"
+  publication_id: "400"
+publications_treatments_134: 
+  treatment_id: "4"
+  publication_id: "400"
+publications_treatments_135: 
+  treatment_id: "5"
+  publication_id: "400"
+publications_treatments_136: 
+  treatment_id: "6"
+  publication_id: "400"
+publications_treatments_137: 
+  treatment_id: "7"
+  publication_id: "400"
+publications_treatments_138: 
+  treatment_id: "8"
+  publication_id: "400"
+publications_treatments_139: 
+  treatment_id: "9"
+  publication_id: "400"
+publications_treatments_140: 
+  treatment_id: "10"
+  publication_id: "400"
+publications_treatments_141: 
+  treatment_id: "11"
+  publication_id: "400"
+publications_treatments_142: 
+  treatment_id: "1"
+  publication_id: "129"
+publications_treatments_143: 
+  treatment_id: "2"
+  publication_id: "129"
+publications_treatments_144: 
+  treatment_id: "16"
+  publication_id: "130"
+publications_treatments_145: 
+  treatment_id: "1"
+  publication_id: "134"
+publications_treatments_146: 
+  treatment_id: "2"
+  publication_id: "134"
+publications_treatments_147: 
+  treatment_id: "3"
+  publication_id: "134"
+publications_treatments_148: 
+  treatment_id: "4"
+  publication_id: "134"
+publications_treatments_149: 
+  treatment_id: "5"
+  publication_id: "134"
+publications_treatments_150: 
+  treatment_id: "6"
+  publication_id: "134"
+publications_treatments_151: 
+  treatment_id: "7"
+  publication_id: "134"
+publications_treatments_152: 
+  treatment_id: "8"
+  publication_id: "134"
+publications_treatments_153: 
+  treatment_id: "1"
+  publication_id: "137"
+publications_treatments_154: 
+  treatment_id: "2"
+  publication_id: "137"
+publications_treatments_155: 
+  treatment_id: "3"
+  publication_id: "137"
+publications_treatments_156: 
+  treatment_id: "4"
+  publication_id: "137"
+publications_treatments_157: 
+  treatment_id: "5"
+  publication_id: "137"
+publications_treatments_158: 
+  treatment_id: "6"
+  publication_id: "137"
+publications_treatments_159: 
+  treatment_id: "7"
+  publication_id: "137"
+publications_treatments_160: 
+  treatment_id: "1"
+  publication_id: "142"
+publications_treatments_161: 
+  treatment_id: "2"
+  publication_id: "142"
+publications_treatments_162: 
+  treatment_id: "3"
+  publication_id: "142"
+publications_treatments_163: 
+  treatment_id: "4"
+  publication_id: "142"
+publications_treatments_164: 
+  treatment_id: "5"
+  publication_id: "142"
+publications_treatments_165: 
+  treatment_id: "6"
+  publication_id: "142"
+publications_treatments_166: 
+  treatment_id: "7"
+  publication_id: "142"
+publications_treatments_167: 
+  treatment_id: "8"
+  publication_id: "142"
+publications_treatments_168: 
+  treatment_id: "9"
+  publication_id: "142"
+publications_treatments_169: 
+  treatment_id: "11"
+  publication_id: "142"
+publications_treatments_170: 
+  treatment_id: "6"
+  publication_id: "143"
+publications_treatments_171: 
+  treatment_id: "5"
+  publication_id: "153"
+publications_treatments_172: 
+  treatment_id: "9"
+  publication_id: "161"
+publications_treatments_173: 
+  treatment_id: "1"
+  publication_id: "158"
+publications_treatments_174: 
+  treatment_id: "2"
+  publication_id: "158"
+publications_treatments_175: 
+  treatment_id: "3"
+  publication_id: "158"
+publications_treatments_176: 
+  treatment_id: "4"
+  publication_id: "158"
+publications_treatments_177: 
+  treatment_id: "5"
+  publication_id: "158"
+publications_treatments_178: 
+  treatment_id: "6"
+  publication_id: "158"
+publications_treatments_179: 
+  treatment_id: "7"
+  publication_id: "158"
+publications_treatments_180: 
+  treatment_id: "8"
+  publication_id: "158"
+publications_treatments_181: 
+  treatment_id: "9"
+  publication_id: "158"
+publications_treatments_182: 
+  treatment_id: "11"
+  publication_id: "158"
+publications_treatments_183: 
+  treatment_id: "1"
+  publication_id: "157"
+publications_treatments_184: 
+  treatment_id: "8"
+  publication_id: "157"
+publications_treatments_185: 
+  treatment_id: "5"
+  publication_id: "163"
+publications_treatments_186: 
+  treatment_id: "8"
+  publication_id: "169"
+publications_treatments_187: 
+  treatment_id: "5"
+  publication_id: "173"
+publications_treatments_188: 
+  treatment_id: "1"
+  publication_id: "180"
+publications_treatments_189: 
+  treatment_id: "2"
+  publication_id: "180"
+publications_treatments_190: 
+  treatment_id: "8"
+  publication_id: "180"
+publications_treatments_191: 
+  treatment_id: "1"
+  publication_id: "183"
+publications_treatments_192: 
+  treatment_id: "2"
+  publication_id: "183"
+publications_treatments_193: 
+  treatment_id: "9"
+  publication_id: "183"
+publications_treatments_194: 
+  treatment_id: "1"
+  publication_id: "182"
+publications_treatments_195: 
+  treatment_id: "2"
+  publication_id: "182"
+publications_treatments_196: 
+  treatment_id: "18"
+  publication_id: "355"
+publications_treatments_197: 
+  treatment_id: "1"
+  publication_id: "354"
+publications_treatments_198: 
+  treatment_id: "2"
+  publication_id: "354"
+publications_treatments_199: 
+  treatment_id: "3"
+  publication_id: "354"
+publications_treatments_200: 
+  treatment_id: "4"
+  publication_id: "354"
+publications_treatments_201: 
+  treatment_id: "5"
+  publication_id: "354"
+publications_treatments_202: 
+  treatment_id: "6"
+  publication_id: "354"
+publications_treatments_203: 
+  treatment_id: "7"
+  publication_id: "354"
+publications_treatments_204: 
+  treatment_id: "18"
+  publication_id: "354"
+publications_treatments_205: 
+  treatment_id: "16"
+  publication_id: "354"
+publications_treatments_206: 
+  treatment_id: "10"
+  publication_id: "7"
+publications_treatments_207: 
+  treatment_id: "9"
+  publication_id: "7"
+publications_treatments_208: 
+  treatment_id: "1"
+  publication_id: "347"
+publications_treatments_209: 
+  treatment_id: "2"
+  publication_id: "347"
+publications_treatments_210: 
+  treatment_id: "8"
+  publication_id: "66"
+publications_treatments_211: 
+  treatment_id: "8"
+  publication_id: "65"
+publications_treatments_212: 
+  treatment_id: "16"
+  publication_id: "342"
+publications_treatments_213: 
+  treatment_id: "16"
+  publication_id: "60"
+publications_treatments_214: 
+  treatment_id: "1"
+  publication_id: "332"
+publications_treatments_215: 
+  treatment_id: "2"
+  publication_id: "332"
+publications_treatments_216: 
+  treatment_id: "3"
+  publication_id: "332"
+publications_treatments_217: 
+  treatment_id: "4"
+  publication_id: "332"
+publications_treatments_218: 
+  treatment_id: "5"
+  publication_id: "332"
+publications_treatments_219: 
+  treatment_id: "6"
+  publication_id: "332"
+publications_treatments_220: 
+  treatment_id: "7"
+  publication_id: "332"
+publications_treatments_221: 
+  treatment_id: "8"
+  publication_id: "332"
+publications_treatments_222: 
+  treatment_id: "11"
+  publication_id: "332"
+publications_treatments_223: 
+  treatment_id: "10"
+  publication_id: "332"
+publications_treatments_224: 
+  treatment_id: "9"
+  publication_id: "332"
+publications_treatments_225: 
+  treatment_id: "1"
+  publication_id: "39"
+publications_treatments_226: 
+  treatment_id: "5"
+  publication_id: "39"
+publications_treatments_227: 
+  treatment_id: "7"
+  publication_id: "39"
+publications_treatments_228: 
+  treatment_id: "9"
+  publication_id: "39"
+publications_treatments_229: 
+  treatment_id: "1"
+  publication_id: "156"
+publications_treatments_230: 
+  treatment_id: "2"
+  publication_id: "156"
+publications_treatments_231: 
+  treatment_id: "3"
+  publication_id: "156"
+publications_treatments_232: 
+  treatment_id: "4"
+  publication_id: "156"
+publications_treatments_233: 
+  treatment_id: "5"
+  publication_id: "156"
+publications_treatments_234: 
+  treatment_id: "6"
+  publication_id: "156"
+publications_treatments_235: 
+  treatment_id: "7"
+  publication_id: "156"
+publications_treatments_236: 
+  treatment_id: "6"
+  publication_id: "431"
+publications_treatments_237: 
+  treatment_id: "17"
+  publication_id: "185"
+publications_treatments_238: 
+  treatment_id: "1"
+  publication_id: "162"
+publications_treatments_239: 
+  treatment_id: "2"
+  publication_id: "162"
+publications_treatments_240: 
+  treatment_id: "3"
+  publication_id: "162"
+publications_treatments_241: 
+  treatment_id: "4"
+  publication_id: "162"
+publications_treatments_242: 
+  treatment_id: "5"
+  publication_id: "162"
+publications_treatments_243: 
+  treatment_id: "6"
+  publication_id: "162"
+publications_treatments_244: 
+  treatment_id: "15"
+  publication_id: "123"
+publications_treatments_245: 
+  treatment_id: "7"
+  publication_id: "195"
+publications_treatments_246: 
+  treatment_id: "7"
+  publication_id: "194"
+publications_treatments_247: 
+  treatment_id: "13"
+  publication_id: "184"
+publications_treatments_248: 
+  treatment_id: "18"
+  publication_id: "549"
+publications_treatments_249: 
+  treatment_id: "1"
+  publication_id: "546"
+publications_treatments_250: 
+  treatment_id: "2"
+  publication_id: "546"
+publications_treatments_251: 
+  treatment_id: "3"
+  publication_id: "546"
+publications_treatments_252: 
+  treatment_id: "4"
+  publication_id: "546"
+publications_treatments_253: 
+  treatment_id: "5"
+  publication_id: "546"
+publications_treatments_254: 
+  treatment_id: "6"
+  publication_id: "546"
+publications_treatments_255: 
+  treatment_id: "7"
+  publication_id: "546"
+publications_treatments_256: 
+  treatment_id: "11"
+  publication_id: "546"
+publications_treatments_257: 
+  treatment_id: "10"
+  publication_id: "546"
+publications_treatments_258: 
+  treatment_id: "9"
+  publication_id: "546"
+publications_treatments_259: 
+  treatment_id: "1"
+  publication_id: "537"
+publications_treatments_260: 
+  treatment_id: "2"
+  publication_id: "537"
+publications_treatments_261: 
+  treatment_id: "17"
+  publication_id: "537"
+publications_treatments_262: 
+  treatment_id: "7"
+  publication_id: "532"
+publications_treatments_263: 
+  treatment_id: "1"
+  publication_id: "533"
+publications_treatments_264: 
+  treatment_id: "2"
+  publication_id: "533"
+publications_treatments_265: 
+  treatment_id: "4"
+  publication_id: "533"
+publications_treatments_266: 
+  treatment_id: "1"
+  publication_id: "408"
+publications_treatments_267: 
+  treatment_id: "7"
+  publication_id: "408"
+publications_treatments_268: 
+  treatment_id: "9"
+  publication_id: "408"
+publications_treatments_269: 
+  treatment_id: "1"
+  publication_id: "516"
+publications_treatments_270: 
+  treatment_id: "3"
+  publication_id: "516"
+publications_treatments_271: 
+  treatment_id: "1"
+  publication_id: "534"
+publications_treatments_272: 
+  treatment_id: "2"
+  publication_id: "534"
+publications_treatments_273: 
+  treatment_id: "4"
+  publication_id: "534"
+publications_treatments_274: 
+  treatment_id: "1"
+  publication_id: "519"
+publications_treatments_275: 
+  treatment_id: "7"
+  publication_id: "519"
+publications_treatments_276: 
+  treatment_id: "8"
+  publication_id: "519"
+publications_treatments_277: 
+  treatment_id: "9"
+  publication_id: "519"
+publications_treatments_278: 
+  treatment_id: "18"
+  publication_id: "521"
+publications_treatments_279: 
+  treatment_id: "1"
+  publication_id: "511"
+publications_treatments_280: 
+  treatment_id: "2"
+  publication_id: "511"
+publications_treatments_281: 
+  treatment_id: "3"
+  publication_id: "511"
+publications_treatments_282: 
+  treatment_id: "4"
+  publication_id: "511"
+publications_treatments_283: 
+  treatment_id: "5"
+  publication_id: "511"
+publications_treatments_284: 
+  treatment_id: "6"
+  publication_id: "511"
+publications_treatments_285: 
+  treatment_id: "7"
+  publication_id: "511"
+publications_treatments_286: 
+  treatment_id: "8"
+  publication_id: "511"
+publications_treatments_287: 
+  treatment_id: "11"
+  publication_id: "511"
+publications_treatments_288: 
+  treatment_id: "10"
+  publication_id: "511"
+publications_treatments_289: 
+  treatment_id: "9"
+  publication_id: "511"
+publications_treatments_290: 
+  treatment_id: "1"
+  publication_id: "109"
+publications_treatments_291: 
+  treatment_id: "2"
+  publication_id: "109"
+publications_treatments_292: 
+  treatment_id: "3"
+  publication_id: "109"
+publications_treatments_293: 
+  treatment_id: "4"
+  publication_id: "109"
+publications_treatments_294: 
+  treatment_id: "5"
+  publication_id: "109"
+publications_treatments_295: 
+  treatment_id: "6"
+  publication_id: "109"
+publications_treatments_296: 
+  treatment_id: "7"
+  publication_id: "109"
+publications_treatments_297: 
+  treatment_id: "5"
+  publication_id: "172"
+publications_treatments_298: 
+  treatment_id: "1"
+  publication_id: "187"
+publications_treatments_299: 
+  treatment_id: "2"
+  publication_id: "187"
+publications_treatments_300: 
+  treatment_id: "16"
+  publication_id: "187"
+publications_treatments_301: 
+  treatment_id: "8"
+  publication_id: "190"
+publications_treatments_302: 
+  treatment_id: "1"
+  publication_id: "193"
+publications_treatments_303: 
+  treatment_id: "8"
+  publication_id: "193"
+publications_treatments_304: 
+  treatment_id: "2"
+  publication_id: "197"
+publications_treatments_305: 
+  treatment_id: "11"
+  publication_id: "197"
+publications_treatments_306: 
+  treatment_id: "9"
+  publication_id: "197"
+publications_treatments_307: 
+  treatment_id: "18"
+  publication_id: "203"
+publications_treatments_308: 
+  treatment_id: "2"
+  publication_id: "45"
+publications_treatments_309: 
+  treatment_id: "3"
+  publication_id: "45"
+publications_treatments_310: 
+  treatment_id: "5"
+  publication_id: "377"
+publications_treatments_311: 
+  treatment_id: "13"
+  publication_id: "476"
+publications_treatments_312: 
+  treatment_id: "13"
+  publication_id: "475"
+publications_treatments_313: 
+  treatment_id: "1"
+  publication_id: "320"
+publications_treatments_314: 
+  treatment_id: "2"
+  publication_id: "320"
+publications_treatments_315: 
+  treatment_id: "4"
+  publication_id: "320"
+publications_treatments_316: 
+  treatment_id: "1"
+  publication_id: "545"
+publications_treatments_317: 
+  treatment_id: "3"
+  publication_id: "545"
+publications_treatments_318: 
+  treatment_id: "4"
+  publication_id: "545"
+publications_treatments_319: 
+  treatment_id: "7"
+  publication_id: "545"
+publications_treatments_320: 
+  treatment_id: "17"
+  publication_id: "545"
+publications_treatments_321: 
+  treatment_id: "1"
+  publication_id: "378"
+publications_treatments_322: 
+  treatment_id: "2"
+  publication_id: "378"
+publications_treatments_323: 
+  treatment_id: "4"
+  publication_id: "378"
+publications_treatments_324: 
+  treatment_id: "1"
+  publication_id: "510"
+publications_treatments_325: 
+  treatment_id: "2"
+  publication_id: "510"
+publications_treatments_326: 
+  treatment_id: "7"
+  publication_id: "510"
+publications_treatments_327: 
+  treatment_id: "8"
+  publication_id: "510"
+publications_treatments_328: 
+  treatment_id: "1"
+  publication_id: "398"
+publications_treatments_329: 
+  treatment_id: "2"
+  publication_id: "398"
+publications_treatments_330: 
+  treatment_id: "4"
+  publication_id: "398"
+publications_treatments_331: 
+  treatment_id: "13"
+  publication_id: "544"
+publications_treatments_332: 
+  treatment_id: "6"
+  publication_id: "13"
+publications_treatments_333: 
+  treatment_id: "17"
+  publication_id: "13"
+publications_treatments_334: 
+  treatment_id: "1"
+  publication_id: "379"
+publications_treatments_335: 
+  treatment_id: "2"
+  publication_id: "379"
+publications_treatments_336: 
+  treatment_id: "3"
+  publication_id: "379"
+publications_treatments_337: 
+  treatment_id: "4"
+  publication_id: "379"
+publications_treatments_338: 
+  treatment_id: "1"
+  publication_id: "38"
+publications_treatments_339: 
+  treatment_id: "2"
+  publication_id: "38"
+publications_treatments_340: 
+  treatment_id: "3"
+  publication_id: "38"
+publications_treatments_341: 
+  treatment_id: "4"
+  publication_id: "38"
+publications_treatments_342: 
+  treatment_id: "6"
+  publication_id: "12"
+publications_treatments_343: 
+  treatment_id: "17"
+  publication_id: "12"
+publications_treatments_344: 
+  treatment_id: "17"
+  publication_id: "166"
+publications_treatments_345: 
+  treatment_id: "17"
+  publication_id: "48"
+publications_treatments_346: 
+  treatment_id: "18"
+  publication_id: "202"
+publications_treatments_347: 
+  treatment_id: "2"
+  publication_id: "92"
+publications_treatments_348: 
+  treatment_id: "17"
+  publication_id: "47"
+publications_treatments_349: 
+  treatment_id: "5"
+  publication_id: "20"
+publications_treatments_350: 
+  treatment_id: "7"
+  publication_id: "20"
+publications_treatments_351: 
+  treatment_id: "8"
+  publication_id: "20"
+publications_treatments_352: 
+  treatment_id: "11"
+  publication_id: "20"
+publications_treatments_353: 
+  treatment_id: "2"
+  publication_id: "161"
+publications_treatments_354: 
+  treatment_id: "18"
+  publication_id: "77"
+publications_treatments_355: 
+  treatment_id: "7"
+  publication_id: "425"
+publications_treatments_356: 
+  treatment_id: "11"
+  publication_id: "425"
+publications_treatments_357: 
+  treatment_id: "1"
+  publication_id: "126"
+publications_treatments_358: 
+  treatment_id: "2"
+  publication_id: "126"
+publications_treatments_359: 
+  treatment_id: "6"
+  publication_id: "126"
+publications_treatments_360: 
+  treatment_id: "5"
+  publication_id: "104"
+publications_treatments_361: 
+  treatment_id: "7"
+  publication_id: "531"
+publications_treatments_362: 
+  treatment_id: "9"
+  publication_id: "136"
+publications_treatments_363: 
+  treatment_id: "1"
+  publication_id: "418"
+publications_treatments_364: 
+  treatment_id: "2"
+  publication_id: "418"
+publications_treatments_365: 
+  treatment_id: "9"
+  publication_id: "418"
+publications_treatments_366: 
+  treatment_id: "13"
+  publication_id: "382"
+publications_treatments_367: 
+  treatment_id: "1"
+  publication_id: "346"
+publications_treatments_368: 
+  treatment_id: "2"
+  publication_id: "346"
+publications_treatments_369: 
+  treatment_id: "11"
+  publication_id: "7"
+publications_treatments_370: 
+  treatment_id: "6"
+  publication_id: "14"
+publications_treatments_371: 
+  treatment_id: "17"
+  publication_id: "14"
+publications_treatments_372: 
+  treatment_id: "1"
+  publication_id: "37"
+publications_treatments_373: 
+  treatment_id: "2"
+  publication_id: "37"
+publications_treatments_374: 
+  treatment_id: "21"
+  publication_id: "152"
+publications_treatments_375: 
+  treatment_id: "21"
+  publication_id: "396"
+publications_treatments_376: 
+  treatment_id: "22"
+  publication_id: "144"
+publications_treatments_377: 
+  treatment_id: "22"
+  publication_id: "58"
+publications_treatments_378: 
+  treatment_id: "21"
+  publication_id: "111"
+publications_treatments_379: 
+  treatment_id: "22"
+  publication_id: "491"
+publications_treatments_380: 
+  treatment_id: "21"
+  publication_id: "494"
+publications_treatments_381: 
+  treatment_id: "22"
+  publication_id: "328"
+publications_treatments_382: 
+  treatment_id: "21"
+  publication_id: "331"
+publications_treatments_383: 
+  treatment_id: "21"
+  publication_id: "42"
+publications_treatments_384: 
+  treatment_id: "21"
+  publication_id: "34"
+publications_treatments_385: 
+  treatment_id: "21"
+  publication_id: "198"
+publications_treatments_386: 
+  treatment_id: "21"
+  publication_id: "548"
+publications_treatments_387: 
+  treatment_id: "22"
+  publication_id: "426"
+publications_treatments_388: 
+  treatment_id: "18"
+  publication_id: "127"
+publications_treatments_389: 
+  treatment_id: "21"
+  publication_id: "524"
+publications_treatments_390: 
+  treatment_id: "20"
+  publication_id: "2"
+publications_treatments_391: 
+  treatment_id: "20"
+  publication_id: "375"
+publications_treatments_392: 
+  treatment_id: "1"
+  publication_id: "543"
+publications_treatments_393: 
+  treatment_id: "2"
+  publication_id: "543"
+publications_treatments_394: 
+  treatment_id: "3"
+  publication_id: "543"
+publications_treatments_395: 
+  treatment_id: "4"
+  publication_id: "543"
+publications_treatments_396: 
+  treatment_id: "16"
+  publication_id: "400"
+publications_treatments_397: 
+  treatment_id: "16"
+  publication_id: "44"
+publications_treatments_398: 
+  treatment_id: "17"
+  publication_id: "565"
+publications_treatments_399: 
+  treatment_id: "18"
+  publication_id: "566"
+publications_treatments_400: 
+  treatment_id: "18"
+  publication_id: "567"
+publications_treatments_401: 
+  treatment_id: "1"
+  publication_id: "597"
+publications_treatments_402: 
+  treatment_id: "2"
+  publication_id: "597"
+publications_treatments_403: 
+  treatment_id: "3"
+  publication_id: "597"
+publications_treatments_404: 
+  treatment_id: "4"
+  publication_id: "597"
+publications_treatments_405: 
+  treatment_id: "7"
+  publication_id: "597"
+publications_treatments_406: 
+  treatment_id: "10"
+  publication_id: "597"
+publications_treatments_407: 
+  treatment_id: "9"
+  publication_id: "597"
+publications_treatments_408: 
+  treatment_id: "1"
+  publication_id: "601"
+publications_treatments_409: 
+  treatment_id: "2"
+  publication_id: "601"
+publications_treatments_410: 
+  treatment_id: "3"
+  publication_id: "601"
+publications_treatments_411: 
+  treatment_id: "4"
+  publication_id: "601"
+publications_treatments_412: 
+  treatment_id: "7"
+  publication_id: "601"
+publications_treatments_413: 
+  treatment_id: "10"
+  publication_id: "601"
+publications_treatments_414: 
+  treatment_id: "9"
+  publication_id: "601"
+publications_treatments_415: 
+  treatment_id: "18"
+  publication_id: "614"
+publications_treatments_416: 
+  treatment_id: "18"
+  publication_id: "571"
+publications_treatments_417: 
+  treatment_id: "18"
+  publication_id: "562"
+publications_treatments_418: 
+  treatment_id: "16"
+  publication_id: "562"
+publications_treatments_419: 
+  treatment_id: "18"
+  publication_id: "569"
+publications_treatments_420: 
+  treatment_id: "16"
+  publication_id: "569"
+publications_treatments_421: 
+  treatment_id: "7"
+  publication_id: "596"
+publications_treatments_422: 
+  treatment_id: "7"
+  publication_id: "619"
+publications_treatments_423: 
+  treatment_id: "21"
+  publication_id: "592"
+publications_treatments_424: 
+  treatment_id: "1"
+  publication_id: "551"
+publications_treatments_425: 
+  treatment_id: "2"
+  publication_id: "551"
+publications_treatments_426: 
+  treatment_id: "3"
+  publication_id: "551"
+publications_treatments_427: 
+  treatment_id: "4"
+  publication_id: "551"
+publications_treatments_428: 
+  treatment_id: "1"
+  publication_id: "573"
+publications_treatments_429: 
+  treatment_id: "2"
+  publication_id: "573"
+publications_treatments_430: 
+  treatment_id: "3"
+  publication_id: "573"
+publications_treatments_431: 
+  treatment_id: "4"
+  publication_id: "573"
+publications_treatments_432: 
+  treatment_id: "18"
+  publication_id: "575"
+publications_treatments_433: 
+  treatment_id: "16"
+  publication_id: "617"
+publications_treatments_434: 
+  treatment_id: "11"
+  publication_id: "578"
+publications_treatments_435: 
+  treatment_id: "16"
+  publication_id: "621"
+publications_treatments_436: 
+  treatment_id: "11"
+  publication_id: "596"
+publications_treatments_437: 
+  treatment_id: "7"
+  publication_id: "618"
+publications_treatments_438: 
+  treatment_id: "11"
+  publication_id: "618"
+publications_treatments_439: 
+  treatment_id: "21"
+  publication_id: "604"
+publications_treatments_440: 
+  treatment_id: "22"
+  publication_id: "610"
+publications_treatments_441: 
+  treatment_id: "21"
+  publication_id: "512"
+publications_treatments_442: 
+  treatment_id: "21"
+  publication_id: "554"

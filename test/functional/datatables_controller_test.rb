@@ -4,7 +4,7 @@ require 'datatables_controller'
 # Re-raise errors caught by the controller.
 class DatatablesController; def rescue_action(e) raise e end; end
 
-class DatatablesControllerTest < ActiveSupport::TestCase
+class DatatablesControllerTest < ActionController::TestCase
   fixtures :datatables
 
   def setup

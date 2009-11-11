@@ -1,86 +1,106 @@
 --- 
-roles_015: 
-  name: data manager
-  seniority: 
-  role_type_id: "1"
-  id: "6"
-roles_004: 
-  name: Other Investigators
-  seniority: "4"
-  role_type_id: "2"
-  id: "13"
-roles_016: 
-  name: lead investigator
-  seniority: 
-  role_type_id: "1"
-  id: "7"
-roles_005: 
-  name: Current Graduate Students
-  seniority: "5"
-  role_type_id: "2"
-  id: "14"
-roles_017: 
-  name: principal contact
-  seniority: 
-  role_type_id: "1"
-  id: "8"
-roles_006: 
-  name: Current Undergraduate Interns
-  seniority: "6"
-  role_type_id: "2"
-  id: "15"
-roles_007: 
-  name: Emeritus Investigators
-  seniority: "7"
-  role_type_id: "2"
-  id: "16"
-roles_008: 
-  name: Emeritus Graduate Students
-  seniority: "8"
-  role_type_id: "2"
-  id: "17"
-roles_009: 
-  name: Emeritus Undergraduate Interns
-  seniority: "9"
-  role_type_id: "2"
-  id: "18"
-roles_010: 
-  name: Support Staff
-  seniority: "2"
-  role_type_id: "2"
-  id: "11"
-roles_011: 
-  name: technician
-  seniority: 
-  role_type_id: "1"
-  id: "2"
-roles_012: 
-  name: administrator
-  seniority: 
-  role_type_id: "1"
-  id: "1"
 roles_001: 
-  name: Director (Lead PI)
-  seniority: "0"
-  role_type_id: "2"
   id: "9"
-roles_013: 
-  name: investigator
-  seniority: 
-  role_type_id: "1"
-  id: "4"
+  name: Director (Lead PI)
+  role_type_id: "3"
+  seniority: "0"
 roles_002: 
-  name: Executive Committee
-  seniority: "1"
-  role_type_id: "2"
   id: "10"
-roles_014: 
-  name: original investigator
-  seniority: 
-  role_type_id: "1"
-  id: "5"
-roles_003: 
-  name: Co-Investigators
-  seniority: "3"
+  name: Executive Committee (Principal Investigators)
   role_type_id: "2"
+  seniority: "1"
+roles_003: 
   id: "12"
+  name: Co-Investigators
+  role_type_id: "2"
+  seniority: "7"
+roles_004: 
+  id: "13"
+  name: Other Investigators
+  role_type_id: "2"
+  seniority: "8"
+roles_005: 
+  id: "14"
+  name: Current Graduate Students
+  role_type_id: "2"
+  seniority: "9"
+roles_006: 
+  id: "15"
+  name: Current Undergraduate Interns
+  role_type_id: "2"
+  seniority: "10"
+roles_007: 
+  id: "16"
+  name: Emeritus Investigators
+  role_type_id: "2"
+  seniority: "11"
+roles_008: 
+  id: "17"
+  name: Emeritus Graduate Students
+  role_type_id: "2"
+  seniority: "12"
+roles_009: 
+  id: "18"
+  name: Emeritus Undergraduate Interns
+  role_type_id: "2"
+  seniority: "13"
+roles_010: 
+  id: "11"
+  name: LTER Staff
+  role_type_id: "2"
+  seniority: "2"
+roles_011: 
+  id: "2"
+  name: technician
+  role_type_id: "1"
+  seniority: "5"
+roles_012: 
+  id: "1"
+  name: administrator
+  role_type_id: "1"
+  seniority: 
+roles_013: 
+  id: "4"
+  name: investigator
+  role_type_id: "1"
+  seniority: "3"
+roles_014: 
+  id: "5"
+  name: original investigator
+  role_type_id: "1"
+  seniority: "1"
+roles_015: 
+  id: "6"
+  name: data manager
+  role_type_id: "1"
+  seniority: "6"
+roles_016: 
+  id: "7"
+  name: lead investigator
+  role_type_id: "1"
+  seniority: "0"
+roles_017: 
+  id: "8"
+  name: principal contact
+  role_type_id: "1"
+  seniority: "4"
+roles_018: 
+  id: "21"
+  name: Research Advisory Committee
+  role_type_id: "2"
+  seniority: "3"
+roles_019: 
+  id: "22"
+  name: Education and Outreach Committee
+  role_type_id: "2"
+  seniority: "4"
+roles_020: 
+  id: "23"
+  name: LTER National Network Representatives
+  role_type_id: "2"
+  seniority: "5"
+roles_021: 
+  id: "24"
+  name: AgroEcology Committee
+  role_type_id: "2"
+  seniority: "6"

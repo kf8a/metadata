@@ -4,7 +4,7 @@ require 'protocols_controller'
 # Re-raise errors caught by the controller.
 class ProtocolsController; def rescue_action(e) raise e end; end
 
-class ProtocolsControllerTest < ActiveSupport::TestCase
+class ProtocolsControllerTest < ActionController::TestCase
   fixtures :protocols
 
   def setup
@@ -27,7 +27,7 @@ class ProtocolsControllerTest < ActiveSupport::TestCase
   def test_should_create_protocol
     old_count = Protocol.count
     post :create, :protocol => { }
-    assert_equal old_count+1, Methocol.count
+    assert_equal old_count+1, Protocol.count
     
     assert_redirected_to protocol_path(assigns(:protocol))
   end
@@ -48,7 +48,7 @@ class ProtocolsControllerTest < ActiveSupport::TestCase
   end
   
   def test_should_destroy_protocol
-    old_count = Methocol.count
+    old_count = Protocol.count
     delete :destroy, :id => 48
     assert_equal old_count-1, Protocol.count
     

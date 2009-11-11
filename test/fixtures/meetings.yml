@@ -1,85 +1,136 @@
 --- 
-meetings_002: 
-  announcement: 
-  date_to: 
-  title: ASM at Estes Park
-  date: "2006-08-01"
-  venue_type_id: "2"
-  id: "2"
-meetings_003: 
-  announcement: 
-  date_to: 
-  title: All Scientist Meeting
-  date: "2004-10-08"
-  venue_type_id: "1"
-  id: "3"
-meetings_004: 
-  announcement: 
-  date_to: 
-  title: All Scientist Meeting
-  date: "2003-09-12"
-  venue_type_id: "1"
-  id: "4"
-meetings_005: 
-  announcement: 
-  date_to: 
-  title: All Scientist Meeting
-  date: "2002-10-04"
-  venue_type_id: "1"
-  id: "5"
-meetings_006: 
-  announcement: 
-  date_to: 
-  title: All Scientist Meeting in Seattle
-  date: "2003-09-18"
-  venue_type_id: "2"
-  id: "7"
-meetings_007: 
-  announcement: 
-  date_to: 
-  title: All Scientist Meeting at Snowbird
-  date: "2000-08-05"
-  venue_type_id: "2"
-  id: "8"
-meetings_008: 
-  announcement: 
-  date_to: "1996-07-17"
-  title: All Scientist Meeting
-  date: "1996-07-16"
-  venue_type_id: "1"
-  id: "11"
-meetings_009: 
-  announcement: 
-  date_to: "1998-07-22"
-  title: All Scientist Meeting
-  date: "1998-07-21"
-  venue_type_id: "1"
-  id: "10"
-meetings_010: 
-  announcement: 
-  date_to: "1999-07-21"
-  title: All Scientist Meeting
-  date: "1999-07-20"
-  venue_type_id: "1"
-  id: "9"
-meetings_011: 
-  announcement: " Symposium in Celebration of the First 12 years of Long-Term Ecological      Research at MSU and in Honor of the Contributions of Eldor A.Paul and      Richard R. Harwood"
-  date_to: 
-  title: Campus Symposium
-  date: "2001-04-19"
-  venue_type_id: "1"
-  id: "6"
-meetings_012: 
-  announcement: ""
-  date_to: "2007-05-03"
-  title: test
-  date: "2007-05-03"
-  venue_type_id: "1"
-  id: "12"
 meetings_001: 
+  id: "2"
+  date: "2006-08-01"
+  title: ASM at Estes Park
   announcement: 
+  venue_type_id: "2"
   date_to: 
+meetings_002: 
+  id: "3"
+  date: "2004-10-08"
   title: All Scientist Meeting
-  date: "2006-05-09"
+  announcement: 
   venue_type_id: "1"
+  date_to: 
+meetings_003: 
+  id: "4"
+  date: "2003-09-12"
+  title: All Scientist Meeting
+  announcement: 
+  venue_type_id: "1"
+  date_to: 
+meetings_004: 
+  id: "5"
+  date: "2002-10-04"
+  title: All Scientist Meeting
+  announcement: 
+  venue_type_id: "1"
+  date_to: 
+meetings_005: 
+  id: "7"
+  date: "2003-09-18"
+  title: All Scientist Meeting in Seattle
+  announcement: 
+  venue_type_id: "2"
+  date_to: 
+meetings_006: 
+  id: "8"
+  date: "2000-08-05"
+  title: All Scientist Meeting at Snowbird
+  announcement: 
+  venue_type_id: "2"
+  date_to: 
+meetings_007: 
+  id: "11"
+  date: "1996-07-16"
+  title: All Scientist Meeting
+  announcement: 
+  venue_type_id: "1"
+  date_to: "1996-07-17"
+meetings_008: 
+  id: "10"
+  date: "1998-07-21"
+  title: All Scientist Meeting
+  announcement: 
+  venue_type_id: "1"
+  date_to: "1998-07-22"
+meetings_009: 
+  id: "9"
+  date: "1999-07-20"
+  title: All Scientist Meeting
+  announcement: 
+  venue_type_id: "1"
+  date_to: "1999-07-21"
+meetings_010: 
+  id: "6"
+  date: "2001-04-19"
+  title: Campus Symposium
+  announcement: " Symposium in Celebration of the First 12 years of Long-Term Ecological      Research at MSU and in Honor of the Contributions of Eldor A.Paul and      Richard R. Harwood"
+  venue_type_id: "1"
+  date_to: 
+meetings_011: 
+  id: "13"
+  date: "2007-05-14"
+  title: All Scientist Poster Reception
+  announcement: ""
+  venue_type_id: "1"
+  date_to: "2007-05-14"
+meetings_012: 
+  id: "12"
+  date: "2007-01-16"
+  title: All Scientist Discussion Meeting
+  announcement: ""
+  venue_type_id: "1"
+  date_to: "2007-01-16"
+meetings_013: 
   id: "1"
+  date: "2006-05-09"
+  title: All Scientist Poster Reception
+  announcement: 
+  venue_type_id: "1"
+  date_to: 
+meetings_014: 
+  id: "14"
+  date: "2009-09-14"
+  title: <a href='http://www.lternet.edu/asm/'>ASM at Estes Park</a>
+  announcement: 
+  venue_type_id: "2"
+  date_to: "2009-09-16"
+meetings_015: 
+  id: "18"
+  date: 
+  title: 
+  announcement: 
+  venue_type_id: 
+  date_to: 
+meetings_016: 
+  id: "16"
+  date: "2009-05-05"
+  title: KBS LTER and GLBRC T4 Joint Meeting
+  announcement: |
+    h3. May 5-6, 2009
+    
+    h3. GLBRC T4 Researchers (from 8:00 am May 5)
+    
+    <p class="indent">The GLBRC retreat will begin at 8:00 am Tuesday, May 5 and adjourn at noon on Wednesday, May 6.  Tuesday evening there will be a joint GLBRC - LTER barbecue reception followed by a plenary talk by Steve Pueppke, Director of the Michigan Agricultural Experiment Station and Office of Biobased Technologies and an evening poster reception.  The meeting  will conclude with a field tour Wednesday morning.  You are welcome to stay for the LTER meeting which will adjourn Wednesday evening.</p>
+    
+    h3. LTER Researchers (from 5:30 pm May 5)
+    
+    <p class="indent">The KBS LTER All Scientist Meeting will start with a joint LTER-GLBRC barbecue reception Tuesday, May 5 at 5:30 pm.  Following the barbecue will be a plenary talk by MAES Director Steve Pueppke and an evening poster reception.  We will adjourn at 5:30 pm Wednesday.<p>
+    <a href="http://lter.kbs.msu.edu/downloads/images/Agenda.pdf">Agenda (pdf)</a>
+    
+    <a href="http://lter.kbs.msu.edu/downloads/images/Participants.pdf">Participants (pdf)</a>
+    
+    <a href="http://lter.kbs.msu.edu/downloads/presentations.php">Information for Poster Presenters</a>
+    
+
+  venue_type_id: "1"
+  date_to: "2009-05-07"
+meetings_017: 
+  id: "19"
+  date: 
+  title: 
+  announcement: 
+  venue_type_id: 
+  date_to: 

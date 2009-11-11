@@ -1,332 +1,137 @@
 --- 
-datasets_054: 
-  completed: 
-  initiated: "1987-04-18"
-  status: active
-  core_dataset: t
-  abstract: |-
-    Originally, wind direction and speed, total solar radiation, net solar radiation, rainfall, air temperature, and relative humidity were recorded hourly in connnection with measurements of evapotranspiration and deep percolation from a 6 m2 in-ground weighing lysimeter.  The lysimeter and fetch area were planted to continuous alfalfa.  
-    
-    Although the lysimeter is no longer in operation, weather data collection continues.  Precipitation was measured with a tipping bucket rain gauge until fall of 1997, when it was replaced with a weighing bucket rain gauge.  All other sensors are electronic, connected to a data logger that is polled remotely.  Instruments to measure wind speed and direction are mounted on a tower at 10 m.  Light sensors (net solar radiation and photosynthetically active radiation) a thermometer, and an RH probe (with a built-in thermometer) are mounted at about 3 m.  Soil moisture and temperature is being monitored on a trial basis near the base of the tower.  4-16-2002 T.T.B.
-  title: KBS LTER Meteorological Station
-  id: "5"
-  version: "8"
-  dataset: KBS002
-  released: 
-  on_web: t
-  keywords: weather temperature moisture wind humidity light PAR rainfall
-datasets_043: 
-  completed: 
-  initiated: "2002-05-22"
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>Maps, aerial photographs, and satellite images are acquired or produced by KBS personnel to aid the planning, execution, and interpretation of research.  Management of image data is complex; this data set is an entry-level organizational framework for representing KBS LTER geospatial image inventories.  Additional resources and/or views of the data may be available elsewhere.</p></kbsml_text>
-  title: Geospatial Imagery for the KBS LTER and Environs
-  id: "44"
-  version: "8"
-  dataset: KBS041
-  released: 
-  on_web: t
-  keywords: 
-datasets_032: 
-  completed: 
-  initiated: "1990-04-01"
-  status: unknown
-  core_dataset: 
-  abstract: <kbsml_text><p>Measurements of dinitrogen fixation potential (acetylene reduction assay) and biomass and N accretion in hairy vetch used as a winter cover in low-chemical input cropping systems.  Aboveground biomass accumulation  is measured in the low-chemical input cropping system described in KBS004, and aboveground and belowground biomass (roots, nodules) and N2 fixation by intact nodules is measured in a subset of ancillary plots with different levels of available soil nitrogen.</p></kbsml_text>
-  title: Dinitrogen Fixation by Hairy Vetch (Vicia villosaL.) in a Low-Chemical Input Cropping System
-  id: "19"
-  version: "8"
-  dataset: KBS016
-  released: 
-  on_web: t
-  keywords: 
-datasets_021: 
-  completed: 
-  initiated: "1999-04-01"
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>Since 1998, samples have been collected and analyzed for hydrochemistry (major solutes and nutrients) at key points along hydrological flow paths, including infiltrating soil water, ground waters, springs, streams, wetlands, and lakes. This sampling has included analysis of soil water infiltrating from the rooting zone of various treatments of the LTER study site.</p></kbsml_text>
-  title: Hydrochemistry in precipitation, local surface, soil, and ground water.
-  id: "50"
-  version: "8"
-  dataset: KBS047
-  released: 
-  on_web: t
-  keywords: 
-datasets_010: 
-  completed: 
-  initiated: 
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>This data set contains information about agronomic yields for main site cropping systems. Main site cropping systems include treatments 1-4 (corn - wheat - soybean rotations) and treatment 6 (alfalfa) after 1994. For more complete descriptions of these systems see the data set descriptor for the main cropping system study (KBS004). Agronomic yields are measured during normal crop harvest; yields are determined by machine harvesters appropriate to each crop as described in the Agronomic protocol.</p></kbsml_text>
-  title: Agronomic Yields in Row Crop Agriculture
-  id: "23"
-  version: "8"
-  dataset: KBS020
-  released: 
-  on_web: t
-  keywords: 
-datasets_055: 
-  completed: 
-  initiated: 
-  status: active
-  core_dataset: t
-  abstract: <kbsml_text><p>under development</p></kbsml_text>
-  title: Soil Inorganic N in Cropped and Successional Communities
-  id: "24"
-  version: "8"
-  dataset: KBS021
-  released: 
-  on_web: t
-  keywords: 
-datasets_044: 
-  completed: 
-  initiated: "1988-05-01"
-  status: complete
-  core_dataset: 
-  abstract: |-
-    Results from a study of spatial variability conducted across the main experimental area (45 ha) at KBS prior to dividing the site into 1-ha experimental plots.  During the 1988 growing season a stratified unaligned sampling scheme was used to collect 400--600 samples across the site (uniformly planted to a single variety of soybeans) for:
-    # geomorphological characteristics (microtopography, soil horizon depths, bulk density, texture); 
-    # soil chemical characteristics (pH, NO3, NH4, total C, total N, moisture, inorganic P, trace metals); 
-    # soil biological characteristics (N mineralization potentials, microbial biomass C, microbial biomass N, fungal/bacterial ratios, nematodes and other soil invertebrates;  seed bank size); 
-    #  plant weed species abundance, weed biomass at peak standing crop); and    
-    # insect characteristics (major pest and predator species).  
-    
-    Most soil samples were taken before crop emergence, plant phenology samples were taken throughout the growing  season, biomass samples were taken at physiological maturity, and insect samples were taken continuously.  Dried soil and plant samples are archived for potential future analysis.
-  title: Baseline Spatial Variability Study
-  id: "6"
-  version: "8"
-  dataset: KBS003
-  released: 
-  on_web: t
-  keywords: 
-datasets_033: 
-  completed: 
-  initiated: 
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>The KBS Herbarium contains over 6,000 specimens, with emphasis on various lifeforms of plants in southwestern Michigan.</p></kbsml_text>
-  title: KBS Herbarium
-  id: "21"
-  version: "8"
-  dataset: KBS018
-  released: 
-  on_web: t
-  keywords: 
-datasets_022: 
-  completed: 
-  initiated: "1995-04-01"
-  status: unkown
-  core_dataset: 
-  abstract: <kbsml_text><p>10 m<sup>2</sup> plots in the old field and forest ecosystems were fertilized with 2 rates of nitrogen. N<sub>2</sub>O, CO<sub>2</sub> and CH<sub>4</sub> measurements were made with a static chamber method</p></kbsml_text>
-  title: Tracegas fluxes in forestes and old fields under enhanced nitrogen regimes
-  id: "53"
-  version: "8"
-  dataset: KBS050
-  released: 
-  on_web: f
-  keywords: CH4 CO2 N2O tracegas forest old field
-datasets_011: 
-  completed: 
-  initiated: 
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>under development</p></kbsml_text>
-  title: High Resolution Yield Monitoring in Row Crop Agriculture
-  id: "40"
-  version: "8"
-  dataset: KBS037
-  released: 
-  on_web: t
-  keywords: 
-datasets_056: 
-  completed: 
-  initiated: 
-  status: active
-  core_dataset: t
-  abstract: <kbsml_text><p>6-28-2003 Tim Bergsma.  I merged KBS027 with KBS015.  The two protocols in this database were renamed and moved to KBS015.</p></kbsml_text>
-  title: Soil Moisture in Cropped and Successional Communities
-  id: "30"
-  version: "8"
-  dataset: KBS027
-  released: 
-  on_web: f
-  keywords: 
-datasets_045: 
-  completed: 
-  initiated: 
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>under development</p></kbsml_text>
-  title: Soil Carbon and Nitrogen Content in Cropped and Successional Communities
-  id: "27"
-  version: "8"
-  dataset: KBS024
-  released: 
-  on_web: t
-  keywords: 
-datasets_034: 
-  completed: 
-  initiated: 
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>This data set contains information about above ground net primary productivitiy (ANPP) for all main site cropping systems as well as for the forested sites added in 1993. Main site cropping systems include all treatments as described in the data set descriptor for the main cropping system study . ANPP is measured as peak biomass for a given cropping system; in some systems with complex communities peaks occur at different times of year and measurements are taken at multiple times as described in the ANPP protocol.</p></kbsml_text>
-  title: Aboveground Net Primary Production in Row Crop Agriculture
-  id: "22"
-  version: "8"
-  dataset: KBS019
-  released: 
-  on_web: t
-  keywords: 
-datasets_023: 
-  completed: 
-  initiated: "2006-01-26"
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>A short (2 meter) flux tower is used to measure CO<sub>2</sub> and H<sub>2</sub>O fluxes from the alfalfa treatment (T6) in block 6.</p></kbsml_text>
-  title: University of Toledo's mobile CO2 flux tower
-  id: "54"
-  version: "8"
-  dataset: KBS051
-  released: 
-  on_web: t
-  keywords: CO2 flux tower
-datasets_012: 
-  completed: 
-  initiated: 
-  status: active
-  core_dataset: 
-  abstract: "<kbsml_text><p> The Living Field Laboratory is designed to evaluate the effects of extended rotations and different management systems on yield, weed and insect pressure as well as soil health.</p><p>The LFL has a factorial design that allows for the comparison of a number of interactions. These interactions include: differences in management practices (Integrated-Fertilizer vs. Integrated-Compost), rotation effects, and cover crops. The rotation consists of the following crops in the order listed, corn (Zea mays L.)/ corn,/soybean (Glycine max)/wheat (Triticum aestivum). Cover crops vary depending upon the point in the rotation. Crimson clover (Trifolium incarnatum L.) is seeded to 1st yr. corn, 2nd yr. corn is in rye grass (lolium multiflorum), soybeans have no cover, and red clover (Trifolium pratense L.) is seeded into wheat plots.</p></kbsml_text>"
-  title: Living Field Laboratory
-  id: "45"
-  version: "8"
-  dataset: KBS042
-  released: 
-  on_web: t
-  keywords: 
 datasets_001: 
-  completed: 
-  initiated: "2002-04-09"
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>Various resources related to the management of KBS LTER datasets.</p></kbsml_text>
-  title: Data Management
   id: "3"
-  version: "8"
   dataset: KBS000
+  title: Data Management
+  abstract: <kbsml_text><p>Various resources related to the management of KBS LTER datasets.</p></kbsml_text>
+  old_keywords: 
+  status: active
+  initiated: "2002-04-09"
+  completed: 
   released: 
   on_web: f
-  keywords: 
-datasets_046: 
-  completed: 
-  initiated: 
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>Soil bulk density is used to convert water content by weight to water content by volume and for calculating porosity and void ratio. Bulk density has an inverse relationship with soil structure and soil porosity. Bulk density data were collected using an excavation procedure found in the sampling protocols.</p></kbsml_text>
-  title: Soil Bulk Density in Cropped and Successional Communities
-  id: "29"
   version: "8"
-  dataset: KBS026
-  released: 
-  on_web: t
-  keywords: 
-datasets_035: 
-  completed: 
-  initiated: "2002-08-07"
-  status: active
   core_dataset: 
-  abstract: <kbsml_text><p>This dataset includes terrestrial and aquatic species lists for ecosystems within or near the W. K. Kellogg Biological Station.  See also KBS018 and KBS025.</p></kbsml_text>
-  title: Biodiversity in a Southwest Michigan Landscape
-  id: "25"
-  version: "8"
-  dataset: KBS022
-  released: 
-  on_web: t
-  keywords: 
-datasets_024: 
-  completed: 
-  initiated: "1989-05-01"
-  status: unknown
-  core_dataset: 
-  abstract: <kbsml_text><p>Populations of Fusarium graminearum(corn stalk rot pathogen), fungistatic capacity of soils, and suppressiveness of soils to F. graminearum in main cropping system experiment (see KBS004).   Measurements taken to test effects of distrubance and litter cover on pathogen presence and suppression.</p></kbsml_text>
-  title: Pathogen Equilibria in Cropped and Successional Communities
-  id: "12"
-  version: "8"
-  dataset: KBS009
-  released: 
-  on_web: t
-  keywords: 
-datasets_013: 
-  completed: 
-  initiated: "1989-05-01"
-  status: unknown
-  core_dataset: 
-  abstract: <kbsml_text><p>Insect herbivory and predation in the main cropping system experiment (seee KBS004). Goals are to quantify the abundance and distribution of key pest and beneficial insects in each of several different crop-treatment combinations, and to quantify and model how predators and pests repond to an array of cultural and chemcial manipulations over time.</p></kbsml_text>
-  title: Insect Dynamics in Cropped and Successional Communities
-  id: "11"
-  version: "8"
-  dataset: KBS008
-  released: 
-  on_web: t
-  keywords: 
+  project_id: 
 datasets_002: 
+  id: "11"
+  dataset: KBS008
+  title: Insect Dynamics in Cropped and Successional Communities
+  abstract: Insect herbivory and predation in the main cropping system experiment (see KBS004). Goals are to quantify the abundance and distribution of key pest and beneficial insects in each of several different crop-treatment combinations, and to quantify and model how predators and pests respond to an array of cultural and chemical manipulations over time.
+  old_keywords: 
+  status: unknown
+  initiated: "1989-05-01"
   completed: 
-  initiated: 
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>under development</p></kbsml_text>
-  title: KBS Stand Counts in Row Crop Agriculture
-  id: "33"
-  version: "8"
-  dataset: KBS030
   released: 
   on_web: t
-  keywords: 
-datasets_047: 
-  completed: 
-  initiated: 
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_003: 
+  id: "28"
+  dataset: KBS025
+  title: KBS Insect Collections
+  abstract: <kbsml_text><p>under development</p></kbsml_text>
+  old_keywords: 
   status: active
+  initiated: 
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_004: 
+  id: "48"
+  dataset: KBS045
+  title: Forest Increment Survey
+  abstract: <kbsml_text><p>In 1998, a new protocol was instituted for measuring the diameters of every tree greater than 5 cm dbh in the coniferous and deciduous forest plots.  Trees are usually measured in January.  Exponential equations are used to estimate tree mass for each year.  The goal is to estimate wood production for any given time period (usually one year) as the difference between two estimates of mass.</p></kbsml_text>
+  old_keywords: 
+  status: active
+  initiated: "2003-05-15"
+  completed: 
+  released: 
+  on_web: f
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_005: 
+  id: "56"
+  dataset: KBS053
+  title: Human population in the counties surrounding KBS
+  abstract: <p>Human populations by county for the counties surrounding KBS. These numbers are extracted from US census data</p>
+  old_keywords: population census
+  status: active
+  initiated: "2006-05-31"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_006: 
+  id: "57"
+  dataset: KBS-Test
+  title: Testing dataset
+  abstract: <kbsml_text><p>This is only a test</p></kbsml_text>
+  old_keywords: 
+  status: active
+  initiated: "2003-10-23"
+  completed: 
+  released: 
+  on_web: f
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_007: 
+  id: "4"
+  dataset: KBS001
+  title: Pond Laboratory Meteorological Station
+  abstract: Wind direction and speed, solar radiation, photosynthetically active radiation, rainfall, air temperature, and relative humidity are recorded hourly.
+  old_keywords: 
+  status: active
+  initiated: "1983-05-23"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_008: 
+  id: "40"
+  dataset: KBS037
+  title: High Resolution Yield Monitoring in Row Crop Agriculture
+  abstract: <kbsml_text><p>under development</p></kbsml_text>
+  old_keywords: 
+  status: active
+  initiated: 
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_009: 
+  id: "23"
+  dataset: KBS020
+  title: Agronomic Yields in Row Crop Agriculture
+  abstract: |-
+    <kbsml_text><p>This data set contains information about agronomic yields for main site cropping systems. Main site cropping systems include treatments 1-4 (corn - wheat - soybean rotations) and treatment 6 (alfalfa) after 1994. For more complete descriptions of these systems see the data set descriptor for the main cropping system study (KBS004). Agronomic yields are measured during normal crop harvest; yields are determined by machine harvesters appropriate to each crop as described in the Agronomic protocol.</p></kbsml_text>
+    
+    A quick change.
+  old_keywords: 
+  status: active
+  initiated: 
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
   core_dataset: t
-  abstract: <kbsml_text><p>under development</p></kbsml_text>
-  title: Soil  pH in Cropped and Successional Communities
-  id: "31"
-  version: "8"
-  dataset: KBS028
-  released: 
-  on_web: t
-  keywords: 
-datasets_036: 
-  completed: 
-  initiated: 
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>under development</p></kbsml_text>
-  title: Plant Carbon and Nitrogen Content in Cropped and Successional Communities
-  id: "32"
-  version: "8"
-  dataset: KBS029
-  released: 
-  on_web: t
-  keywords: 
-datasets_025: 
-  completed: 
-  initiated: "1989-05-01"
-  status: unknown
-  core_dataset: 
-  abstract: <kbsml_text><p>Results from a field plot experiment to examine mechanisms of gene transfer in soil.  Field plots (4 treatments x 2 replicate blocks) have been treated differentially with 2,4-D; population of 2,4-D-metabolizing bacteria determined using plasmid gene probes and MPN plate counts.</p></kbsml_text>
-  title: Gene Transfer Experiment
-  id: "13"
-  version: "8"
-  dataset: KBS010
-  released: 
-  on_web: t
-  keywords: 
-datasets_014: 
-  completed: 
-  initiated: "1989-05-01"
-  status: unknown
-  core_dataset: 
+  project_id: 
+datasets_010: 
+  id: "15"
+  dataset: KBS012
+  title: Soil Invertebrates in Cropped and Successional Communities
   abstract: |-
     <kbsml_text><p>Soil invertebrates were sampled from the main cropping system
     experiment (KBS004) via 7.5 cm diameter soil cores.  Invertebrates were
@@ -335,57 +140,196 @@ datasets_014:
     Riverside). Arthropods are classified to the lowest proctical taxon and further
     classified, when possible, to functional feeding specialization (e.g.,
     fungivore, bacterivore).</p></kbsml_text>
-  title: Soil Invertebrates in Cropped and Successional Communities
-  id: "15"
-  version: "8"
-  dataset: KBS012
-  released: 
-  on_web: t
-  keywords: 
-datasets_003: 
-  completed: 
-  initiated: 
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>under development</p></kbsml_text>
-  title: KBS Insect Collections
-  id: "28"
-  version: "8"
-  dataset: KBS025
-  released: 
-  on_web: t
-  keywords: 
-datasets_048: 
-  completed: 
-  initiated: "2002-04-26"
-  status: under review
-  core_dataset: 
-  abstract: <kbsml_text><p>under development</p></kbsml_text>
-  title: Soil Phosphorus in Cropped and Successional Communities
-  id: "39"
-  version: "8"
-  dataset: KBS036
-  released: 
-  on_web: t
-  keywords: 
-datasets_037: 
-  completed: 
-  initiated: "2002-04-11"
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>under development</p></kbsml_text>
-  title: Agronomic Biodiversity Experiment
-  id: "35"
-  version: "8"
-  dataset: KBS032
-  released: 
-  on_web: t
-  keywords: 
-datasets_026: 
-  completed: 
+  old_keywords: 
+  status: unknown
   initiated: "1989-05-01"
-  status: complete
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
   core_dataset: 
+  project_id: 
+datasets_011: 
+  id: "26"
+  dataset: KBS023
+  title: Insect Population Dynamics in Cropped and Successional Communities
+  abstract: <kbsml_text><p>Plant dwelling insect occurrence in the main site cropping system of the KBS-LTER has been recorded since 1989. The effort has focused on characterizing the temporal and spatial abundance and diversity of set of insects representative of a higher order insect trophic level, the herbivore predators. The insect database contains more than 27300 records and consists of counts of adult insects of fourteen species of Coccinellidae, one species of Chrysopidae, and one species of Lampyridae from 30 sample sites in each of the seven treatments in the Main Site Cropping System. The standard method used to measure these organisms is a yellow sticky trap. Sampling is conducted weekly during the growing season as described in the sampling protocol.</p></kbsml_text>
+  old_keywords: 
+  status: active
+  initiated: 
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_012: 
+  id: "46"
+  dataset: KBS043
+  title: 1994 Earthworm Survey
+  abstract: <kbsml_text><p>In 1994, Paul Dalby sampled earthworms in four LTER treatments to determine species and abundance.</p></kbsml_text>
+  old_keywords: 
+  status: complete
+  initiated: "1994-07-12"
+  completed: "1994-07-13"
+  released: "1997-11-27"
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_013: 
+  id: "52"
+  dataset: KBS049
+  title: Aphid Collection Tower
+  abstract: <kbsml_text><p>Survey of the airborne aphid population</p></kbsml_text>
+  old_keywords: 
+  status: active
+  initiated: "2005-06-20"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_014: 
+  id: "17"
+  dataset: KBS014
+  title: Water Movement in KBS Landscapes
+  abstract: |-
+    <kbsml_text><p>Measurements of water movement through and within two
+    landscape transects of approximately 12% slope. Neutron probe access tubes to
+    1.5 m depth installed along a Kalamazoo soil series transect and along an
+    Oshtemo series transect. Also time domain reflectometry (TDR) probes inserted
+    horizontally into soil horizons above and below textural boundaries in 12 soil
+    pits along these two transects.</p></kbsml_text>
+  old_keywords: 
+  status: completed
+  initiated: "1990-05-01"
+  completed: "1994-05-30"
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_015: 
+  id: "34"
+  dataset: KBS031
+  title: Lysimeter Leachate N in Cropped and Successional Communities
+  abstract: <kbsml_text><p>under development</p></kbsml_text>
+  old_keywords: 
+  status: active
+  initiated: "1995-05-17"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_016: 
+  id: "54"
+  dataset: KBS051
+  title: University of Toledo's mobile CO2 flux tower
+  abstract: <kbsml_text><p>A short (2 meter) flux tower is used to measure CO<sub>2</sub> and H<sub>2</sub>O fluxes from the alfalfa treatment (T6) in block 6.</p></kbsml_text>
+  old_keywords: CO2 flux tower
+  status: active
+  initiated: "2006-01-26"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_017: 
+  id: "50"
+  dataset: KBS047
+  title: Hydro-chemistry in precipitation, local surface, soil, and ground water.
+  abstract: Since 1998, samples have been collected and analyzed for hydrochemistry (major solutes and nutrients) at key points along hydrological flow paths, including infiltrating soil water, ground waters, springs, streams, wetlands, and lakes. This sampling has included analysis of soil water infiltrating from the rooting zone of various treatments of the LTER study site.
+  old_keywords: 
+  status: active
+  initiated: "1999-04-01"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_018: 
+  id: "63"
+  dataset: KBS058
+  title: GLBRC Experiment
+  abstract: Great Lakes Bioenergy Research Consortium Sustainably Experiment
+  old_keywords: sustainability, GLBRC
+  status: active
+  initiated: "2008-04-01"
+  completed: 
+  released: 
+  on_web: t
+  version: 
+  core_dataset: f
+  project_id: 
+datasets_019: 
+  id: "61"
+  dataset: KBS056
+  title: Main site scale-up Fields
+  abstract: This study investigates the viability of extending the treatments on the Main Site to larger areas, in a conventional farming system.
+  old_keywords: 
+  status: active
+  initiated: "2006-05-01"
+  completed: 
+  released: 
+  on_web: t
+  version: 
+  core_dataset: f
+  project_id: 
+datasets_020: 
+  id: "12"
+  dataset: KBS009
+  title: Pathogen Equilibria in Cropped and Successional Communities
+  abstract: Populations of Fusarium graminearum(corn stalk rot pathogen), fungistatic capacity of soils, and suppressiveness of soils to F. graminearum in main cropping system experiment (see KBS004).   Measurements taken to test effects of disturbance and litter cover on pathogen presence and suppression.
+  old_keywords: 
+  status: unknown
+  initiated: "1989-05-01"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_021: 
+  id: "51"
+  dataset: KBS048
+  title: Aeronet sun-photometer node at KBS
+  abstract: |
+    The *sunphotometer* mounted near the gas shed on the main site. 
+    
+
+  old_keywords: 
+  status: active
+  initiated: "2003-05-22"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_022: 
+  id: "13"
+  dataset: KBS010
+  title: Gene Transfer Experiment
+  abstract: <kbsml_text><p>Results from a field plot experiment to examine mechanisms of gene transfer in soil.  Field plots (4 treatments x 2 replicate blocks) have been treated differentially with 2,4-D; population of 2,4-D-metabolizing bacteria determined using plasmid gene probes and MPN plate counts.</p></kbsml_text>
+  old_keywords: 
+  status: unknown
+  initiated: "1989-05-01"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_023: 
+  id: "14"
+  dataset: KBS011
+  title: Microbial Biomass Dynamics in Cropped and Successional Communities
   abstract: |-
     <kbsml_text>
     <p>The purpose of these studies is to determine patterns of microbial biomass dynamics in crop and successional communities.</p>
@@ -395,403 +339,762 @@ datasets_026:
     Samples were collected by K. Klingensmith in 1989 and by S. Halstead in other years.  D. Harris performed lab analysis, data entry, data analysis, and data submission.  Original data files not available; contact the LTER data manager with questions.  The data currently available was derived from web-based files which were last reviewed by D. Harris on 10-01-1997 and may be available from archives.
     </p>
     </kbsml_text>
-  title: Microbial Biomass Dynamics in Cropped and Successional Communities
-  id: "14"
-  version: "8"
-  dataset: KBS011
-  released: 
-  on_web: t
-  keywords: 
-datasets_015: 
-  completed: 
-  initiated: 
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>Plant dwelling insect occurrence in the main site cropping system of the KBS-LTER has been recorded since 1989. The effort has focused on characterizing the temporal and spatial abundance and diversity of set of insects representative of a higher order insect trophic level, the herbivore predators. The insect database contains more than 27300 records and consists of counts of adult insects of fourteen species of Coccinellidae, one species of Chrysopidae, and one species of Lampyridae from 30 sample sites in each of the seven treatments in the Main Site Cropping System. The standard method used to measure these organisms is a yellow sticky trap. Sampling is conducted weekly during the growing season as described in the sampling protocol.</p></kbsml_text>
-  title: Insect Population Dynamics in Cropped and Successional Communities
-  id: "26"
-  version: "8"
-  dataset: KBS023
-  released: 
-  on_web: t
-  keywords: 
-datasets_004: 
-  completed: 
-  initiated: "2003-03-03"
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>An LTER project goal is to periodically collect and analyze deep soil cores for the main site treatments at a frequency of every three years.  Soil is sampled to a depth of one meter, and analyzed for horizon depths, texture, moisture, and  C and N content.</p></kbsml_text>
-  title: Deep Soil Core Surveys
-  id: "47"
-  version: "8"
-  dataset: KBS044
-  released: 
-  on_web: f
-  keywords: 
-datasets_049: 
-  completed: 
-  initiated: 
+  old_keywords: 
   status: complete
-  core_dataset: 
-  abstract: <kbsml_text><p>Simulated soil moisture and temperature for treatments 1, 2, 4, 6, 7, and 8.  Simulations were performed using the SALUS crop model.  For further details see simulation protocol.</p></kbsml_text>
-  title: Modeled Soil Moisture and Temperature
-  id: "41"
-  version: "8"
-  dataset: KBS038
-  released: 
-  on_web: t
-  keywords: 
-datasets_038: 
-  completed: 
-  initiated: "2002-04-11"
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>under development</p></kbsml_text>
-  title: Nitrogen Rate Manipulation in Row Crop Agriculture
-  id: "36"
-  version: "8"
-  dataset: KBS033
-  released: 
-  on_web: t
-  keywords: nitrogen yield fertilizer corn zea mays
-datasets_027: 
-  completed: 
-  initiated: "2006-05-12"
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>Archived sample list. This contains the list of archived plant, soil, water and microbial samples. Small quantities are available for research by contacting<ul><li>Plant and Soil Samples -- Andrew Corbin</li><li>Water Samples -- Steve Hamilton</li><li>Microbial Samples -- Tom Schmidt</li></ul></p></kbsml_text>
-  title: Archived plant, soil, water  and microbial samples
-  id: "55"
-  version: "8"
-  dataset: KBS052
-  released: 
-  on_web: t
-  keywords: Archive plant soil water microbial
-datasets_016: 
-  completed: "1994-07-13"
-  initiated: "1994-07-12"
-  status: complete
-  core_dataset: 
-  abstract: <kbsml_text><p>In 1994, Paul Dalby sampled earthworms in four LTER treatments to determine species and abundance.</p></kbsml_text>
-  title: 1994 Earthworm Survey
-  id: "46"
-  version: "8"
-  dataset: KBS043
-  released: "1997-11-27"
-  on_web: t
-  keywords: 
-datasets_005: 
-  completed: 
-  initiated: "2003-05-15"
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>In 1998, a new protocol was instituted for measuring the diameters of every tree greater than 5 cm dbh in the coniferous and deciduous forest plots.  Trees are usually measured in January.  Exponential equations are used to estimate tree mass for each year.  The goal is to estimate wood production for any given time period (usually one year) as the difference between two estimates of mass.</p></kbsml_text>
-  title: Forest Increment Survey
-  id: "48"
-  version: "8"
-  dataset: KBS045
-  released: 
-  on_web: f
-  keywords: 
-datasets_050: 
-  completed: 
-  initiated: 
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>Minimum and maximum temperature, precipitation, and depth of snow cover are recorded daily.</p></kbsml_text>
-  title: KBS National Weather Service Station
-  id: "20"
-  version: "8"
-  dataset: KBS017
-  released: 
-  on_web: t
-  keywords: weather temperature moisture wind humidity light PAR rainfall
-datasets_039: 
-  completed: 
-  initiated: "2002-04-11"
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>under development</p></kbsml_text>
-  title: European Corn Borer Study
-  id: "37"
-  version: "8"
-  dataset: KBS034
-  released: 
-  on_web: t
-  keywords: 
-datasets_028: 
-  completed: 
-  initiated: "2002-06-05"
-  status: merged into KBS019 on 6-27-2003.
-  core_dataset: 
-  abstract: <kbsml_text><p>Under development to replace or suplement KBS019.</p></kbsml_text>
-  title: Retired Candidate ANPP dataset
-  id: "58"
-  version: "8"
-  dataset: x_KBS_ANPP
-  released: 
-  on_web: f
-  keywords: 
-datasets_017: 
-  completed: 
-  initiated: "2005-06-20"
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>Survey of the airborne aphid population</p></kbsml_text>
-  title: Aphid Collection Tower
-  id: "52"
-  version: "8"
-  dataset: KBS049
-  released: 
-  on_web: t
-  keywords: 
-datasets_006: 
-  completed: 
-  initiated: "2003-10-21"
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>See thesis</p></kbsml_text>
-  title: Methane consumption as influenced by nitrogen fertilization and tillage
-  id: "49"
-  version: "8"
-  dataset: KBS046
-  released: 
-  on_web: f
-  keywords: 
-datasets_051: 
-  completed: 
-  initiated: "1990-07-01"
-  status: active
-  core_dataset: 
-  abstract: |-
-    Analyses of soil moisture in upper 15 cm and upper 50 cm of soil profile in each plot of the main cropping system experiment described in
-    KBS004.  Nondestructive measurements taken with replicate time domain reflectometry (TDR) probes installed semipermanently in each plot.  Gravimetric  samples taken monthly to 15 cm.
-  title: Soil Moisture Changes in Cropped and Successional Communities
-  id: "18"
-  version: "8"
-  dataset: KBS015
-  released: 
-  on_web: t
-  keywords: 
-datasets_040: 
-  completed: 
-  initiated: 
-  status: under review
-  core_dataset: 
-  abstract: <kbsml_text><p>under development</p></kbsml_text>
-  title: Belowground Net Primary Production in Row Crop Agriculture
-  id: "38"
-  version: "8"
-  dataset: KBS035
-  released: 
-  on_web: t
-  keywords: 
-datasets_029: 
-  completed: 
   initiated: "1989-05-01"
-  status: unknown
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
   core_dataset: 
-  abstract: <kbsml_text><p>Results from a set of experimental subplots within selected crop and successional communities (see KBS 004) designed to determine how plants partition resources and whether crop-weed interactions vary in response to resource levels.  Effects of N fertilizer on community production and partitioning at the species level determined by manipulating fertilizer inputs in the historically tilled early successional community and high chemical input CT and NT corn/soybean treatments.  Competitive effects examined in the conventionally tilled (CT), no-till (NT), and poplar treatments by determining how crop density affects growth and nitrogen uptake in the presence and absence of competing weeds.</p></kbsml_text>
-  title: Plant Community Resource Partitioning Experiment
+  project_id: 
+datasets_024: 
+  id: "58"
+  dataset: x_KBS_ANPP
+  title: Retired Candidate ANPP dataset
+  abstract: <kbsml_text><p>Under development to replace or suplement KBS019.</p></kbsml_text>
+  old_keywords: 
+  status: merged into KBS019 on 6-27-2003.
+  initiated: "2002-06-05"
+  completed: 
+  released: 
+  on_web: f
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_025: 
   id: "8"
-  version: "8"
   dataset: KBS005
-  released: 
-  on_web: t
-  keywords: 
-datasets_018: 
-  completed: 
-  initiated: "1989-08-01"
-  status: active
-  core_dataset: 
-  abstract: |-
-    <kbsml_text><p>Results from a study of N2O and CO2 fluxes from soybean/corn
-    cropping systems either no-till (NT) or conventionally tilled (CT; moldboard
-    plow) and either N-fertilized (180 kg/ha N) or not N-fertilized in a complete
-    factorial design with four replicate blocks (2 x 2 x 4 treatment plots) plus
-    the never-tilled early successional sites (n = 4 replicates) noted in KBS004.
-    Fluxes are measured using static chambers 30 cm x 30 cm x 14 cm high placed on
-    semipermanent bases installed in the surface soil of each plot. Gas samples are
-    taken from each plot at 15-minute intervals for 90 minutes per sample day, once
-    per week or keyed to rainfall events.</p></kbsml_text>
-  title: Trace Gas Fluxes in Cropped and Successional Communities
-  id: "16"
-  version: "8"
-  dataset: KBS013
-  released: 
-  on_web: t
-  keywords: N2O CO2 CH4 methane carbon dioxide nitrous oxide flux
-datasets_007: 
-  completed: 
-  initiated: "2006-05-31"
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>Human populations by county for the counties surrounding KBS. These numbers are extracted from US census data</p></kbsml_text>
-  title: Human population in the counties surrounding KBS
-  id: "56"
-  version: "8"
-  dataset: KBS053
-  released: 
-  on_web: t
-  keywords: population census
-datasets_052: 
-  completed: 
-  initiated: "2003-05-22"
-  status: active
-  core_dataset: 
-  abstract: The *sunphotometer* mounted near the gas shed on the main site.
-  title: Aeronet sunphotometer node at KBS
-  id: "51"
-  version: "8"
-  dataset: KBS048
-  released: 
-  on_web: t
-  keywords: 
-datasets_041: 
-  completed: 
-  initiated: "2002-05-07"
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>Periodically in the history of the KBS LTER, global positioning systems have been used to survey prominent geographical features.  New equipment was purchased in the Spring of 2002 with the intent of providing state-of-the-art positioning information for features that were unsurveyed, traditionally-surveyed, or surveyed with older GPS equipment.</p></kbsml_text>
-  title: KBS LTER Global Positioning System Data
-  id: "42"
-  version: "8"
-  dataset: KBS039
-  released: 
-  on_web: t
-  keywords: 
-datasets_030: 
-  completed: 
-  initiated: "1988-05-01"
+  title: Plant Community Resource Partitioning Experiment
+  abstract: <kbsml_text><p>Results from a set of experimental subplots within selected crop and successional communities (see KBS 004) designed to determine how plants partition resources and whether crop-weed interactions vary in response to resource levels.  Effects of N fertilizer on community production and partitioning at the species level determined by manipulating fertilizer inputs in the historically tilled early successional community and high chemical input CT and NT corn/soybean treatments.  Competitive effects examined in the conventionally tilled (CT), no-till (NT), and poplar treatments by determining how crop density affects growth and nitrogen uptake in the presence and absence of competing weeds.</p></kbsml_text>
+  old_keywords: 
   status: unknown
+  initiated: "1989-05-01"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
   core_dataset: 
+  project_id: 
+datasets_026: 
+  id: "9"
+  dataset: KBS006
+  title: Distribution and Composition of Seed Bank in Cropped and Successional Communities
   abstract: |-
     The distribution and composition of the weed seed bank in treatments 1-7 of the main cropping system experiment (see KBS004) is periodically evaluated to determine 
     # how well the seed bank predicts weed abundances and composition in subsequent years, and 
     # how changes in disturbance (tillage) and plant species (cropping systems) affect the bank.  Composite soil samples to two depths are periodically elutriated to determine seed densities, species composition, and viabilities of seven target species which are dominant on the site.
-  title: Distribution and Composition of Seed Bank in Cropped and Successional Communities
-  id: "9"
-  version: "8"
-  dataset: KBS006
-  released: 
-  on_web: t
-  keywords: 
-datasets_019: 
-  completed: 
-  initiated: "1990-05-01"
+  old_keywords: 
   status: unknown
-  core_dataset: 
-  abstract: |-
-    <kbsml_text><p>Measurements of water movement through and within two
-    landscape transects of approximately 12% slope. Neutron probe access tubes to
-    1.5 m depth installed along a Kalamazoo soil series transect and along an
-    Oshtemo series transect. Also time domain reflectometry (TDR) probes inserted
-    horizontally into soil horizons above and below textural boundaries in 12 soil
-    pits along these two transects.</p></kbsml_text>
-  title: Water Movement in KBS Landscapes
-  id: "17"
-  version: "8"
-  dataset: KBS014
+  initiated: "1988-05-01"
+  completed: 
   released: 
   on_web: t
-  keywords: 
-datasets_008: 
-  completed: 
-  initiated: "2003-10-23"
-  status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>This is only a test</p></kbsml_text>
-  title: Testing dataset
-  id: "57"
   version: "8"
-  dataset: KBS-Test
+  core_dataset: 
+  project_id: 
+datasets_027: 
+  id: "10"
+  dataset: KBS007
+  title: Root Production and Turnover in Cropped and Successional Communities
+  abstract: Root production and turnover to depth of 1.5m measured by minirhizotron and microvideo camera methods in alfalfa, populus, and never-tilled native succession plots of main cropping system experiment (see KBS004).  Root numbers determined from video images taken at 1.2-cm intervals (2.16 cm^2^).
+  old_keywords: 
+  status: unknown
+  initiated: "1989-05-01"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_028: 
+  id: "19"
+  dataset: KBS016
+  title: Dinitrogen Fixation by Hairy Vetch (Vicia villosaL.) in a Low-Chemical Input Cropping System
+  abstract: <kbsml_text><p>Measurements of dinitrogen fixation potential (acetylene reduction assay) and biomass and N accretion in hairy vetch used as a winter cover in low-chemical input cropping systems.  Aboveground biomass accumulation  is measured in the low-chemical input cropping system described in KBS004, and aboveground and belowground biomass (roots, nodules) and N2 fixation by intact nodules is measured in a subset of ancillary plots with different levels of available soil nitrogen.</p></kbsml_text>
+  old_keywords: 
+  status: unknown
+  initiated: "1990-04-01"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_029: 
+  id: "21"
+  dataset: KBS018
+  title: KBS Herbarium
+  abstract: <kbsml_text><p>The KBS Herbarium contains over 6,000 specimens, with emphasis on various lifeforms of plants in southwestern Michigan.</p></kbsml_text>
+  old_keywords: 
+  status: active
+  initiated: 
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_030: 
+  id: "25"
+  dataset: KBS022
+  title: Biodiversity in a Southwest Michigan Landscape
+  abstract: <kbsml_text><p>This dataset includes terrestrial and aquatic species lists for ecosystems within or near the W. K. Kellogg Biological Station.  See also KBS018 and KBS025.</p></kbsml_text>
+  old_keywords: 
+  status: active
+  initiated: "2002-08-07"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_031: 
+  id: "32"
+  dataset: KBS029
+  title: Plant Carbon and Nitrogen Content in Cropped and Successional Communities
+  abstract: <kbsml_text><p>under development</p></kbsml_text>
+  old_keywords: 
+  status: active
+  initiated: 
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_032: 
+  id: "35"
+  dataset: KBS032
+  title: Agronomic Biodiversity Experiment
+  abstract: <kbsml_text><p>under development</p></kbsml_text>
+  old_keywords: 
+  status: active
+  initiated: "2002-04-11"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_033: 
+  id: "47"
+  dataset: KBS044
+  title: Deep Soil Core Surveys
+  abstract: <kbsml_text><p>An LTER project goal is to periodically collect and analyze deep soil cores for the main site treatments at a frequency of every three years.  Soil is sampled to a depth of one meter, and analyzed for horizon depths, texture, moisture, and  C and N content.</p></kbsml_text>
+  old_keywords: 
+  status: active
+  initiated: "2003-03-03"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_034: 
+  id: "37"
+  dataset: KBS034
+  title: European Corn Borer Study
+  abstract: <kbsml_text><p>under development</p></kbsml_text>
+  old_keywords: 
+  status: active
+  initiated: "2002-04-11"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_035: 
+  id: "38"
+  dataset: KBS035
+  title: Belowground Net Primary Production in Row Crop Agriculture
+  abstract: <kbsml_text><p>under development</p></kbsml_text>
+  old_keywords: 
+  status: under review
+  initiated: 
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_036: 
+  id: "42"
+  dataset: KBS039
+  title: KBS LTER Global Positioning System Data
+  abstract: <kbsml_text><p>Periodically in the history of the KBS LTER, global positioning systems have been used to survey prominent geographical features.  New equipment was purchased in the Spring of 2002 with the intent of providing state-of-the-art positioning information for features that were unsurveyed, traditionally-surveyed, or surveyed with older GPS equipment.</p></kbsml_text>
+  old_keywords: 
+  status: active
+  initiated: "2002-05-07"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_037: 
+  id: "43"
+  dataset: KBS040
+  title: County, State, and Regional Yields
+  abstract: <kbsml_text><p>County, state, and regional yields are not a product of KBS LTER research, but are scavenged from public sources such as http://www.usda.gov/nass/ and made available here for the convenience of KBS researchers.  Yields from KBS treatments may be interpreted in the context of local and regional yields.  Local and regional yields are also considered when planning agronomic inputs.</p></kbsml_text>
+  old_keywords: 
+  status: active
+  initiated: "2002-05-20"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_038: 
+  id: "44"
+  dataset: KBS041
+  title: Geospatial Imagery for the KBS LTER and Environs
+  abstract: <kbsml_text><p>Maps, aerial photographs, and satellite images are acquired or produced by KBS personnel to aid the planning, execution, and interpretation of research.  Management of image data is complex; this data set is an entry-level organizational framework for representing KBS LTER geospatial image inventories.  Additional resources and/or views of the data may be available elsewhere.</p></kbsml_text>
+  old_keywords: 
+  status: active
+  initiated: "2002-05-22"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_039: 
+  id: "33"
+  dataset: KBS030
+  title: KBS Stand Counts in Row Crop Agriculture
+  abstract: Annual stand count data from the Main site Agronomic Plots T1 through T4.
+  old_keywords: 
+  status: active
+  initiated: 
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_040: 
+  id: "6"
+  dataset: KBS003
+  title: Baseline Spatial Variability Study
+  abstract: |-
+    Results from a study of spatial variability conducted across the main experimental area (45 ha) at KBS prior to dividing the site into 1-ha experimental plots.  During the 1988 growing season a stratified unaligned sampling scheme was used to collect 400--600 samples across the site (uniformly planted to a single variety of soybeans) for:
+    # geomorphological characteristics (microtopography, soil horizon depths, bulk density, texture); 
+    # soil chemical characteristics (pH, NO3, NH4, total C, total N, moisture, inorganic P, trace metals); 
+    # soil biological characteristics (N mineralization potentials, microbial biomass C, microbial biomass N, fungal/bacterial ratios, nematodes and other soil invertebrates;  seed bank size); 
+    #  plant weed species abundance, weed biomass at peak standing crop); and    
+    # insect characteristics (major pest and predator species).  
+    
+    Most soil samples were taken before crop emergence, plant phenology samples were taken throughout the growing  season, biomass samples were taken at physiological maturity, and insect samples were taken continuously.  Dried soil and plant samples are archived for potential future analysis.
+  old_keywords: 
+  status: complete
+  initiated: "1988-05-01"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_041: 
+  id: "27"
+  dataset: KBS024
+  title: Soil Carbon and Nitrogen Content in Cropped and Successional Communities
+  abstract: <kbsml_text><p>under development</p></kbsml_text>
+  old_keywords: 
+  status: active
+  initiated: 
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_042: 
+  id: "39"
+  dataset: KBS036
+  title: Soil Phosphorus in Cropped and Successional Communities
+  abstract: <kbsml_text><p>under development</p></kbsml_text>
+  old_keywords: 
+  status: under review
+  initiated: "2002-04-26"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_043: 
+  id: "41"
+  dataset: KBS038
+  title: Modeled Soil Moisture and Temperature
+  abstract: <kbsml_text><p>Simulated soil moisture and temperature for treatments 1, 2, 4, 6, 7, and 8.  Simulations were performed using the SALUS crop model.  For further details see simulation protocol.</p></kbsml_text>
+  old_keywords: 
+  status: complete
+  initiated: 
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_044: 
+  id: "20"
+  dataset: KBS017
+  title: KBS National Weather Service Station
+  abstract: <kbsml_text><p>Minimum and maximum temperature, precipitation, and depth of snow cover are recorded daily.</p></kbsml_text>
+  old_keywords: weather temperature moisture wind humidity light PAR rainfall
+  status: active
+  initiated: 
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_045: 
+  id: "60"
+  dataset: KBS055
+  title: Plant community and ecosystem responses to long-term fertilization
+  abstract: "This work is part o the long-term sampling and monitoring of successional dynamics in abandoned fields \xE2\x80\x93 and responses to N-fertilization \xE2\x80\x93 that is part of the KBS LTER proposal. Data from this research has been, and will continue to, contribute to LTER cross-site analysis of plant community dynamics, diversity-productivity, and responses to fertilization and disturbance.\r\n\
+    \r\n\
+    Experimental treatments are:\r\n\
+    * Nitrogen addition vs. no nitrogen addition\r\n\
+    * Annual disturbance vs. undisturbed\r\n"
+  old_keywords: succession old field  fertilization
+  status: current
+  initiated: "1989-05-01"
+  completed: 
+  released: 
+  on_web: t
+  version: 
+  core_dataset: f
+  project_id: 
+datasets_046: 
+  id: "16"
+  dataset: KBS013
+  title: Trace Gas Fluxes in Cropped and Successional Communities
+  abstract: |-
+    Results from a study of N2O and CO2 fluxes from soybean/corn
+    
+    cropping systems either no-till (NT) or conventionally tilled (CT; moldboard
+    
+    plow) and either N-fertilized (180 kg/ha N) or not N-fertilized in a complete
+    
+    factorial design with four replicate blocks (2 x 2 x 4 treatment plots) plus
+    
+    the never-tilled early successional sites (n = 4 replicates) noted in KBS004.
+    
+    Fluxes are measured using static chambers 30 cm x 30 cm x 14 cm high placed on
+    
+    semipermanent bases installed in the surface soil of each plot. Gas samples are
+    
+    taken from each plot at 15-minute intervals for 90 minutes per sample day, once
+    
+    per week or keyed to rainfall events.
+  old_keywords: N2O CO2 CH4 methane carbon dioxide nitrous oxide flux
+  status: active
+  initiated: "1989-08-01"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: t
+  project_id: 
+datasets_047: 
+  id: "31"
+  dataset: KBS028
+  title: Soil  pH in Cropped and Successional Communities
+  abstract: <kbsml_text><p>under development</p></kbsml_text>
+  old_keywords: 
+  status: active
+  initiated: 
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: t
+  project_id: 
+datasets_048: 
+  id: "29"
+  dataset: KBS026
+  title: Soil Bulk Density in Cropped and Successional Communities
+  abstract: <kbsml_text><p>Soil bulk density is used to convert water content by weight to water content by volume and for calculating porosity and void ratio. Bulk density has an inverse relationship with soil structure and soil porosity. Bulk density data were collected using an excavation procedure found in the sampling protocols.</p></kbsml_text>
+  old_keywords: 
+  status: active
+  initiated: 
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: t
+  project_id: 
+datasets_049: 
+  id: "24"
+  dataset: KBS021
+  title: Soil Inorganic N in Cropped and Successional Communities
+  abstract: <kbsml_text><p>under development</p></kbsml_text>
+  old_keywords: 
+  status: active
+  initiated: 
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: t
+  project_id: 
+datasets_050: 
+  id: "30"
+  dataset: KBS027
+  title: Soil Moisture in Cropped and Successional Communities
+  abstract: <kbsml_text><p>6-28-2003 Tim Bergsma.  I merged KBS027 with KBS015.  The two protocols in this database were renamed and moved to KBS015.</p></kbsml_text>
+  old_keywords: 
+  status: active
+  initiated: 
+  completed: 
   released: 
   on_web: f
-  keywords: 
-datasets_053: 
-  completed: 
-  initiated: "1988-01-01"
-  status: active
+  version: "8"
   core_dataset: t
-  abstract: " <p>Most long-term hypotheses associated with the KBS LTER site are being tested within the context of the main cropping systems study. This study was established on a 48 ha area on which a series of 7 different cropping systems were established in spring 1988, each replicated in one of 6 ha blocks. An eighth never-tilled successional treatment, is located 200 m off-site, replicated as four 0.06 ha plots. \r\n </p> \r\n <p>\r\n\
-    Cropping systems include the following treatments: \r\n  <ol> \r\n   <li><p>\r\n\
-    standard chemical input corn/soybean/wheat rotation conventionally tilled (corn/soybean prior to 1992) \r\n   </p></li> \r\n   <li><p>\r\n\
-    standard chemical input corn/soybean/wheat rotation no-tilled (corn/soybean prior to 1992) \r\n   </p></li> \r\n   <li><p>\r\n\
-    low chemical input corn/soybean/wheat rotation conventionally tilled (ridge till prior to 1994) \r\n   </p></li> \r\n   <li><p>\r\n\
-    zero chemical input corn/soybean wheat rotation conventionally tilled (ridge till prior to 1994) \r\n   </p></li> \r\n   <li><p>\r\n\
-    Populus clones on short-rotation (6-7 year) harvest cycle \r\n   </p></li> \r\n   <li><p>\r\n\
-    continuous alfalfa, replanted every 6-7 years \r\n   </p></li> \r\n   <li><p>\r\n\
-    early successional community on historically tilled soil \r\n   </p></li> \r\n   <li><p>\r\n\
-    successional community on never-tilled soil. \r\n   </p></li> \r\n  </ol> \r\n </p>\r\n <p>\r\n\
-    For specific crops in a given year see the Annual Crops Summary Table.\r\n\
-    </p> \r\n\
-    <p>\r\n\
-    In 1993 a series of forest sites were added to the main cropping system study to provide long-term reference points and to allow hypotheses related to substrate diversity to be tested. These include: \r\n <ul> \r\n  <li><p>\r\n\
-    DF - three deciduous forest stands, two old-growth and one 40-60 years post-cutting \r\n  </p></li> \r\n  <li><p>\r\n\
-    CF - three conifer plantations, 40-60 years old \r\n  </p></li> \r\n  <li><p>\r\n\
-    SF - three old-field (mid-successional) sites 40+ years post-abandonment. \r\n  </p></li> \r\n  </ul>\r\n </p> \r\n <p>\r\n\
-    All share a soil series with the main cropping system treatments, and are within 5 km of all other sites. \r\n </p> \r\n <p>\r\n\
-    For each system (and for a number of microplot treatments nested within the main treatment plots) the following baseline variates are being measured (described in greater detail in other data set descriptors): \r\n  <ul> \r\n   <li><p>\r\n\
-    plant characteristics, including species distributions and abundances, net aboveground productivity by functional group (crop vs. non dominant biomass, selected non dominant biomass), economic yields, tissue C and N contents, seed bank composition; \r\n   </p></li> \r\n   <li><p>\r\n\
-    soil chemical and physical characteristics, including soil moisture, pH, inorganic N and P pools, total C, N, and P pools, bulk density; \r\n   </p></li> \r\n   <li><p>\r\n\
-    soil biological characteristics, including microbial biomass C and N, N mineralization rates (buried bags), microbial populations, invertebrate populations; and \r\n   </p></li> \r\n   <li><p>\r\n\
-    insect and pathogen dynamics, including distributions and abundances of major insect pests and predators and of Fusarium pathogens. \r\n   </p></li> \r\n  </ul> \r\n </p>\r\n"
-  title: Main Cropping System Experiment
+  project_id: 
+datasets_051: 
+  id: "49"
+  dataset: KBS046
+  title: Methane consumption as influenced by nitrogen fertilization and tillage
+  abstract: <kbsml_text><p>See thesis</p></kbsml_text>
+  old_keywords: 
+  status: active
+  initiated: "2003-10-21"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_052: 
+  id: "65"
+  dataset: KBS060
+  title: GLBRC agronomic Yields
+  abstract: 
+  old_keywords: 
+  status: active
+  initiated: "2008-03-01"
+  completed: 
+  released: 
+  on_web: t
+  version: "1"
+  core_dataset: f
+  project_id: 
+datasets_053: 
+  id: "59"
+  dataset: KBS054
+  title: NADP Station
+  abstract: "The NADP/NTN station is part of the National Atmospheric Deposition Program and National Trends Network (NADP/NTN). Precipitation samples from the KBS NADP station, located adjacent to the Pond Lab Weather Station, are collected weekly and mailed to a central analytical laboratory in Illinois.\r\n\
+    Data are available from \"NDAP\":http://nadp.sws.uiuc.edu/sites/siteinfo.asp?net=NTN&id=MI26\r\n\
+    \r\n\
+    Location: 42\xC2\xB0 24' 36\" N, 85\xC2\xB0 23' 26\" W\r\n\
+    Elevation:  944 ft. above sea level "
+  old_keywords: 
+  status: active
+  initiated: 
+  completed: 
+  released: 
+  on_web: t
+  version: 
+  core_dataset: f
+  project_id: 
+datasets_054: 
+  id: "55"
+  dataset: KBS052
+  title: Archived plant, soil, water  and microbial samples
+  abstract: |-
+    Archived sample list. This contains the list of archived plant, soil, water and microbial samples. Small quantities are available for research by contacting:
+    
+    * Plant and Soil Samples -- Andrew Corbin
+    * Water Samples -- Steve Hamilton
+    * Microbial Samples -- Tom Schmidt
+  old_keywords: Archive plant soil water microbial
+  status: active
+  initiated: "2006-05-12"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_055: 
+  id: "66"
+  dataset: KBS061
+  title: "GLBRC CO2 Eddy Covariance Flux "
+  abstract: Measuring CO2 fluxes with eddy covariance
+  old_keywords: co2 flux
+  status: active
+  initiated: "2008-11-01"
+  completed: 
+  released: 
+  on_web: t
+  version: "1"
+  core_dataset: f
+  project_id: 
+datasets_056: 
+  id: "22"
+  dataset: KBS019
+  title: Aboveground Net Primary Production in Row Crop Agriculture
+  abstract: This data set contains information about above ground net primary productivity (ANPP) for all main site cropping systems as well as for the forested sites added in 1993. Main site cropping systems include all treatments as described in the data set descriptor for the main cropping system study . ANPP is measured as peak biomass for a given cropping system; in some systems with complex communities peaks occur at different times of year and measurements are taken at multiple times as described in the ANPP protocol.
+  old_keywords: 
+  status: active
+  initiated: 
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: t
+  project_id: 
+datasets_057: 
+  id: "18"
+  dataset: KBS015
+  title: Soil Moisture Changes in Cropped and Successional Communities
+  abstract: Analysis of soil moisture in upper 15 cm and upper 50 cm of soil profile in each plot of the main cropping system experiment described in KBS004.  Nondestructive measurements taken with replicate time domain reflectometry (TDR) probes installed semipermanently in each plot.  Gravimetric  samples taken monthly to 15 cm.
+  old_keywords: 
+  status: active
+  initiated: "1990-07-01"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: t
+  project_id: 
+datasets_058: 
   id: "7"
-  version: "8"
   dataset: KBS004
-  released: 
-  on_web: t
-  keywords: 
-datasets_042: 
-  completed: 
-  initiated: "2002-05-20"
+  title: Main Cropping System Experiment
+  abstract: |-
+    <p>Most long-term hypotheses associated with the KBS LTER site are being tested within the context of the main cropping systems study. This study was established on a 48 ha area on which a series of 7 different cropping systems were established in spring 1988, each replicated in one of 6 ha blocks. An eighth never-tilled successional treatment, is located 200 m off-site, replicated as four 0.06 ha plots. 
+     </p> 
+     <p>
+    Cropping systems include the following treatments: 
+      <ol> 
+       <li>standard chemical input corn/soybean/wheat rotation conventionally tilled (corn/soybean prior to 1992) </li> 
+       <li>standard chemical input corn/soybean/wheat rotation no-tilled (corn/soybean prior to 1992) </li> 
+       <li>low chemical input corn/soybean/wheat rotation conventionally tilled (ridge till prior to 1994) </li> 
+       <li>zero chemical input corn/soybean wheat rotation conventionally tilled (ridge till prior to 1994) </li> 
+       <li>Populus clones on short-rotation (6-7 year) harvest cycle </li> 
+       <li>continuous alfalfa, replanted every 6-7 years </li> 
+       <li>early successional community on historically tilled soil </li> 
+       <li>successional community on never-tilled soil. </li> 
+      </ol> 
+     </p>
+     <p>
+    For specific crops in a given year see the Annual Crops Summary Table.
+    </p> 
+    <p>
+    In 1993 a series of forest sites were added to the main cropping system study to provide long-term reference points and to allow hypotheses related to substrate diversity to be tested. These include: 
+     <ul> 
+      <li>DF - three deciduous forest stands, two old-growth and one 40-60 years post-cutting </li> 
+      <li>CF - three conifer plantations, 40-60 years old </li> 
+      <li>SF - three old-field (mid-successional) sites 40+ years post-abandonment. </li> 
+      </ul>
+     </p> 
+     <p>
+    All share a soil series with the main cropping system treatments, and are within 5 km of all other sites. 
+     </p> 
+     <p>
+    For each system (and for a number of microplot treatments nested within the main treatment plots) the following baseline variates are being measured (described in greater detail in other data set descriptors): 
+      <ul> 
+       <li>plant characteristics, including species distributions and abundances, net aboveground productivity by functional group (crop vs. non dominant biomass, selected non dominant biomass), economic yields, tissue C and N contents, seed bank composition; </li> 
+       <li>soil chemical and physical characteristics, including soil moisture, pH, inorganic N and P pools, total C, N, and P pools, bulk density; </li> 
+       <li>soil biological characteristics, including microbial biomass C and N, N mineralization rates (buried bags), microbial populations, invertebrate populations; and </li> 
+       <li>insect and pathogen dynamics, including distributions and abundances of major insect pests and predators and of Fusarium pathogens. </li> 
+      </ul> 
+     </p>
+  old_keywords: 
   status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>County, state, and regional yields are not a product of KBS LTER research, but are scavenged from public sources such as http://www.usda.gov/nass/ and made available here for the convenience of KBS researchers.  Yields from KBS treatments may be interpreted in the context of local and regional yields.  Local and regional yields are also considered when planning agronomic inputs.</p></kbsml_text>
-  title: County, State, and Regional Yields
-  id: "43"
-  version: "8"
-  dataset: KBS040
+  initiated: "1988-01-01"
+  completed: 
   released: 
   on_web: t
-  keywords: 
-datasets_031: 
-  completed: 
-  initiated: "1989-05-01"
-  status: unknown
-  core_dataset: 
-  abstract: Root production and turnover to depth of 1.5m measured by minirhizotron and microvideo camera methods in alfalfa, populus, and never-tilled native succession plots of main cropping system experiment (see KBS004).  Root numbers determined from video images taken at 1.2-cm intervals (2.16 cm^2^).
-  title: Root Production and Turnover in Cropped and Successional Communities
-  id: "10"
   version: "8"
-  dataset: KBS007
-  released: 
-  on_web: t
-  keywords: 
-datasets_020: 
-  completed: 
-  initiated: "1995-05-17"
+  core_dataset: t
+  project_id: 
+datasets_059: 
+  id: "36"
+  dataset: KBS033
+  title: Nitrogen Rate Manipulation in Row Crop Agriculture
+  abstract: "<p>This study provides a gradient of nitrogen fertilization under rainfed and irrigated conditions. Nitrogen applications range from 0 to 291 kg N/ha . Plots are 5\xC3\x9730 m arranged in each of 4 replicate blocks. The crop rotation (wheat, corn, soybean) follows the pattern of the main site.</p>\r\n\
+    <p>The study started in 2002 as a rainfed only study on the south end of the main site. In 2005 a new rainfed and irrigated study was started at the south end of the lysimeter field. The original study site was discontinued in 2006.</p>"
+  old_keywords: nitrogen yield fertilizer corn zea mays
   status: active
-  core_dataset: 
-  abstract: <kbsml_text><p>under development</p></kbsml_text>
-  title: Lysimeter Leachate N in Cropped and Successional Communities
-  id: "34"
-  version: "8"
-  dataset: KBS031
-  released: 
-  on_web: t
-  keywords: 
-datasets_009: 
+  initiated: "2002-04-11"
   completed: 
-  initiated: "1983-05-23"
-  status: active
-  core_dataset: 
-  abstract: Wind direction and speed, solar radiation, photosynthetically active radiation, rainfall, air temperature, and relative humidity are recorded hourly.
-  title: Pond Laboratory Meteorological Station
-  id: "4"
-  version: "8"
-  dataset: KBS001
   released: 
   on_web: t
-  keywords: 
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_060: 
+  id: "62"
+  dataset: KBS057
+  title: KBS Lidar Elevation
+  abstract: This data set provides high resolution elevation data of the Kellogg Biological Station, Lux Arbor Reserve and the Marshall Farm properties collected via airborne LIDAR (Light Detection and Ranging) technology on 22 April 2008. The vertical accuracy is better than 6 inches.  The horizontal accuracy is better than 1 meter.  The projected coordinate system is NAD1983, UTM, zone 16N.  The elevation data are in meters.
+  old_keywords: elevation
+  status: active
+  initiated: "2008-04-01"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: f
+  project_id: 
+datasets_061: 
+  id: "67"
+  dataset: KBS062
+  title: GLBRC Trace gas monitoring
+  abstract: Monitoring tracegas fluxes from the GLBRC site using  static chambers. Measurements are taken every two weeks during the growing season.
+  old_keywords: flux CH4 N2O CO2
+  status: active
+  initiated: "2008-04-01"
+  completed: 
+  released: 
+  on_web: t
+  version: "1"
+  core_dataset: f
+  project_id: 
+datasets_062: 
+  id: "5"
+  dataset: KBS002
+  title: KBS LTER Meteorological Station
+  abstract: |
+    Originally, wind direction and speed, total solar radiation, net solar radiation, rainfall, air temperature, and relative humidity were recorded hourly in connection with measurements of evapotranspiration and deep percolation from a 6 m2 in-ground weighing lysimeter.  The lysimeter and fetch area were planted to continuous alfalfa.  
+    
+    Although the lysimeter is no longer in operation, weather data collection continues.  Precipitation was measured with a tipping bucket rain gauge until fall of 1997, when it was replaced with a weighing bucket rain gauge.  All other sensors are electronic, connected to a data logger that is polled remotely.  Instruments to measure wind speed and direction are mounted on a tower at 10 m.  Light sensors (net solar radiation and photosynthetically active radiation) a thermometer, and an RH probe (with a built-in thermometer) are mounted at about 3 m.  Soil moisture and temperature is being monitored on a trial basis near the base of the tower.  4-16-2002 T.T.B.
+
+  old_keywords: weather temperature moisture wind humidity light PAR rainfall
+  status: active
+  initiated: "1987-04-18"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: t
+  project_id: 
+datasets_063: 
+  id: "45"
+  dataset: KBS042
+  title: Living Field Laboratory
+  abstract: |
+    <p>The Living Field Laboratory is a long-term rotation study established in 1993 under the direction of Emeritus Professor Dr. Richard Harwood to evaluate the benefits of cover crops (as green manure) and/or the addition of composted dairy manure in two integrated systems compared to a conventional and an organic system. The LFL accommodates every entry point of the crop rotation each year and has a factorial design that allows for the comparison of a number of interactions. These interactions include: differences in N management, rotation effects, and cover crops. From 1993 through 2005, the rotation consisted of corn (Zea mays L.)/corn/soybean (Glycine max)/wheat (Triticum aestivum) vs. continuous corn. During this period, crimson clover (Trifolium incarnatum L.) was seeded to 1st yr. corn, 2nd yr corn was in rye grass (Lolium multiflorum), soybean had no cover, and red clover (Trifolium pretense L.) was frost-seeded into wheat.</p>
+    
+    <p>In 2006, under the direction of Dr. Sieglinde Snapp and through consultation with a farmer advisory group, the rotation was shortened to a 3 yr rotation of corn/soybean/wheat vs. continuous corn. The remaining plot in each management system was converted to a 2 yr rotation of corn/soybean. Cereal rye (Secale cereale) is now planted after corn regardless of crop rotation. Cereal rye follows soybean in the 2-yr rotation. Red clover is frost-seeded into wheat.</p>
+    
+    <p>The management systems are: Conventional, Integrated Fertilizer and Integrated Compost. Weed management is identical across systems, and nitrogen fertilizer management adjusted to take into account soil N availability and balance nitrogen inputs across treatments. The cover crop is present as a split plot (plus minus) within each system. The split-plot cover crop treatment was established in 1993 in Integrated Fertilizer and in Integrated Compost, while the split-plot cover crop treatment was established 14 years later in 2007 in the Conventional treatment, to allow a comparison of short and long-term cover crop presence.</p>
+    
+    <p>In 2007, the organic management system was changed to a comparison of a perennial grain systems (perennial wheat-alfalfa intercrop) and a 4-yr rotation of corn/soybean/wheat/ alfalfa (Medicago sativa). This allows the comparison of a typical Michigan field crop organic system to a novel system that involves a new, perennial system.</p>
+
+  old_keywords: 
+  status: active
+  initiated: 
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_064: 
+  id: "64"
+  dataset: KBS059
+  title: Near  continuous trace gas flux monitoring
+  abstract: Monitoring tracegas fluxes several times a day using automated closed chamber flux measurements. The flux measurement schematic is found <a href="http://lter.kbs.msu.edu/data/automated_chamber_schematics.pdf">here</a>
+  old_keywords: flux CH4 N2O CO2
+  status: active
+  initiated: "2008-01-01"
+  completed: 
+  released: 
+  on_web: t
+  version: "1"
+  core_dataset: f
+  project_id: 
+datasets_065: 
+  id: "68"
+  dataset: KBS063
+  title: GLBRC Annual Net Primary Productivity
+  abstract: ANPP monitoring on the GLBRC sites
+  old_keywords: anpp
+  status: active
+  initiated: "2008-04-01"
+  completed: 
+  released: 
+  on_web: t
+  version: "1"
+  core_dataset: f
+  project_id: 
+datasets_066: 
+  id: "53"
+  dataset: KBS050
+  title: Tracegas fluxes in forests and old fields under enhanced nitrogen regimes
+  abstract: 10 m<sup>2</sup> plots in the old field and forest ecosystems were fertilized with 2 rates of nitrogen. N<sub>2</sub>O, CO<sub>2</sub> and CH<sub>4</sub> measurements were made with a static chamber method
+  old_keywords: CH4 CO2 N2O tracegas forest old field
+  status: unkown
+  initiated: "1995-04-01"
+  completed: 
+  released: 
+  on_web: t
+  version: "8"
+  core_dataset: 
+  project_id: 
+datasets_067: 
+  id: "69"
+  dataset: 
+  title: 
+  abstract: 
+  old_keywords: 
+  status: 
+  initiated: 
+  completed: 
+  released: 
+  on_web: t
+  version: 
+  core_dataset: f
+  project_id: 
+datasets_068: 
+  id: "70"
+  dataset: 
+  title: 
+  abstract: 
+  old_keywords: 
+  status: 
+  initiated: 
+  completed: 
+  released: 
+  on_web: t
+  version: 
+  core_dataset: f
+  project_id: 
+datasets_069: 
+  id: "71"
+  dataset: 
+  title: 
+  abstract: 
+  old_keywords: 
+  status: 
+  initiated: 
+  completed: 
+  released: 
+  on_web: t
+  version: 
+  core_dataset: f
+  project_id: 
+datasets_070: 
+  id: "72"
+  dataset: 
+  title: 
+  abstract: 
+  old_keywords: 
+  status: 
+  initiated: 
+  completed: 
+  released: 
+  on_web: t
+  version: 
+  core_dataset: f
+  project_id: 

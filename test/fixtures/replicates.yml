@@ -1,0 +1,19 @@
+--- 
+replicates_001: 
+  replicate: R1
+  description: 
+replicates_002: 
+  replicate: R2
+  description: 
+replicates_003: 
+  replicate: R3
+  description: 
+replicates_004: 
+  replicate: R4
+  description: 
+replicates_005: 
+  replicate: R5
+  description: 
+replicates_006: 
+  replicate: R6
+  description: 

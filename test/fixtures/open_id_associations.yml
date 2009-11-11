@@ -1,11 +1,11 @@
 --- 
 open_id_associations_001: 
-  handle: "{HMAC-SHA1}{45db5259}{gLYpjQ==}"
-  server_url: http://www.myopenid.com/server
-  lifetime: "1209600"
-  assoc_type: HMAC-SHA1
-  issued: "1172001369"
   id: "1"
+  server_url: http://www.myopenid.com/server
+  handle: "{HMAC-SHA1}{45db5259}{gLYpjQ==}"
   secret: !binary |
     /AuqfbKdVTdFs1pkCos3ACDoTPY=
 
+  issued: "1172001369"
+  lifetime: "1209600"
+  assoc_type: HMAC-SHA1

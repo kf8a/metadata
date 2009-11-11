@@ -4,7 +4,7 @@ require 'publications_controller'
 # Re-raise errors caught by the controller.
 class PublicationsController; def rescue_action(e) raise e end; end
 
-class PublicationsControllerTest < ActiveSupport::TestCase
+class PublicationsControllerTest < ActionController::TestCase
   fixtures :publications
 
   def setup
