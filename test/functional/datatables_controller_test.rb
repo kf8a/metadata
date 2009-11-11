@@ -33,7 +33,7 @@ class DatatablesControllerTest < ActionController::TestCase
   end
 
   def test_should_show_datatable
-    get :show, :id => 24
+    get :show, :id => 121
     assert_response :success
   end
 

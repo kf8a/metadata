@@ -25,12 +25,12 @@ class ProtocolsControllerTest < ActionController::TestCase
   end
   
   def test_should_create_protocol
-    old_count = Protocol.count
-    post :create, :protocol => { }
-    assert_equal old_count+1, Protocol.count
-    
-    assert_redirected_to protocol_path(assigns(:protocol))
-  end
+     old_count = Protocol.count
+     post :create, :protocol => {:dataset_id => 35 }
+     assert_equal old_count+1, Protocol.count
+     
+     assert_redirected_to protocol_path(assigns(:protocol))
+   end
 
   def test_should_show_protocol
     get :show, :id => 48
