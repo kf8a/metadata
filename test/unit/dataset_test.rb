@@ -3,8 +3,9 @@ require File.dirname(__FILE__) + '/../test_helper'
 class DatasetTest < ActiveSupport::TestCase
   
   Factory.define :datatable do |d|
-    d.name 'KBS001_001'
-  end
+     d.name 'KBS001_001'
+     d.object 'select now() as sample_date'
+   end
   
   Factory.define :person do |p|
     p.sur_name 'bauer'
@@ -19,6 +20,26 @@ class DatasetTest < ActiveSupport::TestCase
     d.title 'KBS001'
   end
   
+  context 'Temporal Extent' do
+    setup do
+      @dataset = Factory.create(:dataset, 
+        :datatables  => [Factory.create(:datatable), 
+                         Factory.create(:datatable, 
+                         :object => "select now() - interval '2 days' as sample_date")])
+    end
+    
+    should 'respond to temporal_extent' do
+      assert @dataset.temporal_extent()
+    end
+    
+    should 'return the maximum and minimum sample dates from the dataset' do
+      extent = @dataset.temporal_extent
+      assert extent[:end_date].kind_of?(Time)
+      assert extent[:begin_date].kind_of?(Time)
+      assert extent[:end_date] > extent[:begin_date]
+    end
+  end
+  
   context "Finding Datasets" do
     
     setup do
@@ -31,6 +52,7 @@ class DatasetTest < ActiveSupport::TestCase
     should 'respond to find_by_datetime' do
       assert Dataset.find_by_datetime(Time.now, Time.now - 1.year)
     end
+    
     
     should 'respond to find_by_keywords' do
       assert Dataset.find_by_keywords('earth,wind,fire')

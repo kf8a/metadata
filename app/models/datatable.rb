@@ -6,6 +6,12 @@ include REXML
 class Datatable < ActiveRecord::Base
   belongs_to :dataset
   has_many :variates, :order => :position
+  
+  def temporal_extent
+    query = "select max(sample_date), min(sample_date) from (#{object}) as t1"
+    values = ActiveRecord::Base.connection.execute(query)
+    {:end_date => Time.parse(values[0]['max']), :begin_date => Time.parse(values[0]['min'])}
+  end
     
   def to_eml
     eml = Element.new('datatable')
