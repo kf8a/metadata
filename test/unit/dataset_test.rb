@@ -1,48 +1,91 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class DatasetTest < ActiveSupport::TestCase
-
-  Factory.define :role do |r|
-    r.role_type_id 1
-    r.seniority 2
+  
+  Factory.define :datatable do |d|
+    d.name 'KBS001_001'
   end
   
-  Factory.define :person do |person|
-    person.sur_name 'meier'
-    person.given_name 'bob'
+  Factory.define :person do |p|
+    p.sur_name 'bauer'
+    p.given_name 'bill'
   end
-
-  context "A dataset" do
-
+  
+  Factory.define :theme do |t|
+    t.title  'Agronomic'
+  end
+  
+  Factory.define :dataset do |d|
+    d.title 'KBS001'
+  end
+  
+  context "Finding Datasets" do
+    
     setup do
-      @dataset = Dataset.new
-      Factory(:role, :id => 7, :name => 'investigator')
-      Factory(:role, :id => 8, :name => 'contact')
-      Factory(:person, :given_name => 'bob')
-      Factory(:person, :given_name => 'sue')
-      Factory(:person, :given_name => 'bill')
-      @params ={"role_ids"=>[{:id => "7", "person_ids"=>["1", "2", "3"]}, {:id => "8", "person_ids"=>["2"]}]}
+      @person = Factory.create(:person)
+      @dataset = Factory.create(:dataset,:keyword_list => 'earth,wind', :people => [@person])
+      @unfound_dataset = Factory.create(:dataset, :keyword_list => 'wildfire')
+      @theme = Factory.create(:theme, :datasets => [@dataset])
     end
 
-    should 'accept new dataset affiliations' do 
-      assert @dataset.dataset_affiliations=@params 
+    should 'respond to find_by_datetime' do
+      assert Dataset.find_by_datetime(Time.now, Time.now - 1.year)
     end
     
-    should 'add 4 people to the dataset' do
-       assert @dataset.people == []
-       @dataset.dataset_affiliations=@params
-       p @dataset.to_yaml
-       assert @dataset.affiliations.size == 4
-     end
-    
-    
-    should 'add people with 2 roles' do
-      assert @dataset.roles == []
-      @dataset.dataset_affiliations=@params
-      assert @dataset.roles.size == 2
+    should 'respond to find_by_keywords' do
+      assert Dataset.find_by_keywords('earth,wind,fire')
     end
     
-     
+    should 'find one dataset by keyword earth' do
+      assert Dataset.find_by_keywords('earth').size == 1
+      assert Dataset.find_by_keywords('earth') == [@dataset]
+    end
+    
+    should 'handle more than one keyword' do
+      assert Dataset.find_by_keywords('earth,wind') == [@dataset]
+    end
+    
+    should 'not find a dataset by a wrong keyword' do
+      assert Dataset.find_by_keywords('fire') == []
+    end
+    
+    should 'respond to find_by_person' do
+      assert Dataset.find_by_person(Person.find(:first))
+    end
+    
+    should 'find a dataset by person_id' do
+      assert Dataset.find_by_person(@person).size == 1
+      assert Dataset.find_by_person(@person) == [@dataset]
+    end
+    
+    should 'not find a dataset by wrong person_id' do
+      assert Dataset.find_by_person(5) == []
+    end
+    
+    should 'respond to find_by_theme' do
+      assert Dataset.find_by_theme(@theme)
+    end
+    
+    should 'find one dataset by theme @theme' do
+      assert Dataset.find_by_theme(@theme).size == 1
+      assert Dataset.find_by_theme(@theme) == [@dataset]
+    end
+    
+    should 'not find a dataset with a new theme' do
+      new_theme = Factory.create(:theme)
+      assert Dataset.find_by_theme(new_theme) == []
+    end
+    
+    should 'respond to find_by_theme_keywords_person_date' do
+      assert Dataset.find_by_theme_person_keywords_date(@theme, @person, 'fire',Date.today)
+    end
+    
+    should 'find one dataset if called with findable words' do
+      assert Dataset.find_by_theme_person_keywords_date(@theme, nil, nil,nil) == [@dataset]
+      assert Dataset.find_by_theme_person_keywords_date(nil, @person, nil,nil) == [@dataset]
+      assert Dataset.find_by_theme_person_keywords_date(nil, nil, 'wind',nil) == [@dataset]
+      
+    end
     
   end
 end

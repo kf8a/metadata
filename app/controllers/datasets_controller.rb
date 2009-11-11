@@ -27,12 +27,12 @@ class DatasetsController < ApplicationController
     @datasets = Dataset.find(:all)
     unless person.empty? || person[:id].empty?
       @person = Person.find(person[:id])
-      person_datasets = Dataset.find(:all, :joins => :people, :conditions => {:people => {:id => @person  }})
+      person_datasets = Dataset.find_by_person(@person)
       @datasets = @datasets & person_datasets
    end
    unless keyword_list.empty?
      @keyword_list = keyword_list
-     keyword_datasets = Dataset.find_tagged_with(keyword_list, :on => 'keywords')
+     keyword_datasets = Dataset.find_by_keywords(keyword_list)
      @datasets = @datasets & keyword_datasets
    end
          

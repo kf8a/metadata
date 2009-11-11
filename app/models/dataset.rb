@@ -13,6 +13,40 @@ class Dataset < ActiveRecord::Base
   
   acts_as_taggable_on :keywords
 
+  def self.find_by_datetime(start_time, end_time)
+    []  
+  end
+  
+  def self.find_by_keywords(keyword_list)
+    self.find_tagged_with(keyword_list,:on => 'keywords')
+  end
+  
+  def self.find_by_theme(theme_id)
+    self.find(:all, :joins => :themes, :conditions => {:themes => {:id => theme_id}})
+  end
+  
+  def self.find_by_person(person_id)
+    self.find(:all, :joins => :people, :conditions => {:people => {:id => person_id}})
+  end
+  
+  def self.find_by_theme_person_keywords_date(theme_id, person_id, keywords, date)
+    datasets = self.all
+    if theme_id
+      theme_datasets = self.find_by_theme(theme_id)
+      datasets = theme_datasets & datasets
+    end
+    if person_id
+      person_datasets = self.find_by_person(person_id)
+      datasets = person_datasets & datasets
+    end
+    if keywords && !keywords.empty?  
+      keyword_datasets = self.find_by_keywords(keywords)
+      datasets = keyword_datasets & datasets
+    end
+    
+    datasets
+  end
+  
   def has_person(id)
     person = Person.find(id)
     people.exists?(person)
