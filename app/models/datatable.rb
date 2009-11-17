@@ -24,7 +24,7 @@ class Datatable < ActiveRecord::Base
   end
   
   def to_csv
-    if self.is_restricted && !trusted_ip?
+    if self.is_restricted && !ApplicationController.trusted_ip?
       return 'Data Embargoed'
     end
     values  = ActiveRecord::Base.connection.execute(object)
