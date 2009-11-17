@@ -1,6 +1,5 @@
 require 'rexml/document'
 require 'redcloth'
-#require 'fastercsv'
 include REXML
 
 class Datatable < ActiveRecord::Base
@@ -25,8 +24,7 @@ class Datatable < ActiveRecord::Base
   end
   
   def to_csv
-    p 'in_csv'
-    if self.is_restricted
+    if self.is_restricted && !trusted_ip?
       return 'Data Embargoed'
     end
     values  = ActiveRecord::Base.connection.execute(object)
