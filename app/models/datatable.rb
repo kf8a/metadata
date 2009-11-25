@@ -24,9 +24,6 @@ class Datatable < ActiveRecord::Base
   end
   
   def to_csv
-    if self.is_restricted # && !DatatablesController.trusted_ip?
-      return 'Data Embargoed'
-    end
     values  = ActiveRecord::Base.connection.execute(object)
     csv_string = FasterCSV.generate do |csv|
       csv << variates.collect {|v| v.name }
