@@ -24,6 +24,7 @@
 		<ul>
 		  <% @datasets.each do |dataset| %>
 		  <% next unless dataset.on_web %>
+		  <% next unless dataset.datatables.size > 0 %>
 		  <% next unless dataset.themes.exists?(theme.id) %>
 
 
