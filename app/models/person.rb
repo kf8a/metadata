@@ -10,6 +10,11 @@ class Person < ActiveRecord::Base
   
   #acts_as_taggable
   
+  def get_all_lter_roles
+    roles = lter_roles.collect {|x| x.name.singularize }
+    roles.join(', ')
+  end
+  
   def full_name
     name = given_name
     if friendly_name && friendly_name.size > 0

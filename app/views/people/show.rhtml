@@ -1,6 +1,6 @@
 <ul>
 	<li class='person_name'><%= @person.given_name %> <%= @person.middle_name %>  <%= @person.sur_name %></li>
-	<li><%= @person.lter_roles[0].name if @person.lter_roles[0].respond_to?('name')%></li>
+	<li><%= @person.get_all_lter_roles if @person.get_all_lter_roles.strip != '' %></li>
 	<% if @person.title and @person.title.strip != '' -%>
   	<li><%= @person.title %></li>
   <% end -%>
