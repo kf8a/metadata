@@ -25,11 +25,9 @@
 	<% end -%>
 
 	
-	<% if @person.address and @person.address.strip != '' -%>
-	<li class='address'><%= @person.street_address %>&nbsp;<%= @person.city %>&nbsp;<%= @person.locale %>
+	<% if @person.address and @person.address.strip != '' and  @person.postal_code and @person.postal_code.strip != '' -%>
+	<li class='address'><%= @person.street_address %>&nbsp;<%= @person.city %>&nbsp;<%= @person.locale %>, <%= @person.postal_code %>
 	<% end -%>
-	<% if @person.postal_code and @person.postal_code.strip != '' -%>, <%= @person.postal_code %><% end %>
-	</span>
   </li>
 
 
