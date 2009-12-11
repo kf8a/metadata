@@ -145,3 +145,7 @@ a:hover.edit {
 	padding: 10px;
 	background-color: #e8e8e8;
 }
+
+.address {
+	padding-top: 1em;
+}
