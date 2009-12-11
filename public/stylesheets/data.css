@@ -149,3 +149,12 @@ a:hover.edit {
 .address {
 	padding-top: 1em;
 }
+
+.person_lter_roles {
+	padding-top: 0.4em;
+	padding-bottom: 0.4em;
+}
+
+.person_email {
+	padding-top: 0.5em;
+}
