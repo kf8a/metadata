@@ -8,13 +8,19 @@ class Dataset < ActiveRecord::Base
   has_many :roles, :through => :affiliations, :uniq => true
   has_and_belongs_to_many :themes
   belongs_to :project
+  belongs_to :study
 
   accepts_nested_attributes_for :affiliations, :allow_destroy => true
   
   acts_as_taggable_on :keywords
 
-  def self.find_by_datetime(start_time, end_time)
-    []  
+  def self.find_by_date_interval(start_time, end_time)
+    datasets = []
+    Dataset.all.each do |dataset|
+      next unless dataset.within_interval?(start_time, end_time)
+      datasets << dataset
+    end
+    datasets
   end
   
   def self.find_by_keywords(keyword_list)
@@ -52,15 +58,14 @@ class Dataset < ActiveRecord::Base
     people.exists?(person)
   end
   
-  def temporal_extent
-    temporal_extents = datatables.collect do |datatable|
-      extents = datatable.temporal_extent
-      [extents[:end_date], extents[:begin_date]]
+  def within_interval?(start_date=Date.today, end_date=Date.today)
+    any_within_interval = datatables.collect do |datatable|
+      datatable.within_interval?(start_date, end_date)
     end
-    max = temporal_extents.transpose[0].max
-    min = temporal_extents.transpose[1].min
-    {:end_date => max, :begin_date => min}
+    #TODO query the start and end dates as well
+    return any_within_interval.include?(true)
   end
+  
     
   #unpack and populate datatables and variates  
   def from_eml(dataset)
@@ -96,13 +101,13 @@ class Dataset < ActiveRecord::Base
     eml_dataset.add_element contact_info
     eml_dataset.add_element access
 
-    coverage = eml_dataset.add_element coverage
-    temporal_coverage = coverage.add_element temporalCoverage 
-    range_of_dates = temporal_coverage.add_element rangeOfDates
-    begin_date = range_of_dates.add_element beginDate
-    end_date = range_of_dates.add_element endDate
-    begin_date.add_element calendarDate(temporal_extent[:begin_date].to_date)
-    begin_date.add_element time(temporal_extent[:begin_date].strftime("%XZ"))
+    coverage = eml_dataset.add_element('coverage')
+    temporal_coverage = coverage.add_element('temporalCoverage')
+    range_of_dates = temporal_coverage.add_element('rangeOfDates')
+    begin_date = range_of_dates.add_element('beginDate')
+    end_date = range_of_dates.add_element('endDate')
+    begin_date.add_element('calendarDate').add_element(temporal_extent[:begin_date].to_date)
+    begin_date.add_element('time').add_element(temporal_extent[:begin_date].strftime("%XZ"))
     end_date.add_element calendarDate(temporal_extent[:end_date].to_date)
     end_date.add_element time(temporal_extent[:end_date].strftime("%XZ"))
 

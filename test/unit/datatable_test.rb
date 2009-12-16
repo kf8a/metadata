@@ -5,26 +5,42 @@ class DatatableTest < ActiveSupport::TestCase
   
   Factory.define :datatable do |d|
     d.name 'KBS001_001'
-    d.object 'select now() as sample_date'
+    d.object %q{select now() as sample_date}
+    d.is_sql true
   end
   
-  context 'temporal extent' do
+  context 'datatable with sample_date' do
     setup do
       @datatable = Factory.create(:datatable)
     end
     
-    should 'respond_to temporal_extent' do
-      assert @datatable.temporal_extent
+    should 'respond_to has_data_in_interval?' do
+      assert @datatable.respond_to?('within_interval?')
     end
     
-    should 'return todays date' do
-      extent = @datatable.temporal_extent
-      assert extent[:end_date].kind_of?(Time)
-      assert extent[:begin_date].kind_of?(Time)
-      assert extent[:end_date] == extent[:begin_date]
-      assert extent[:end_date].to_date == Time.now.to_date
+    should 'return true if interval includes today' do
+     assert @datatable.within_interval?(Date.today, Date.today + 1.day)
     end
     
+    should 'return false if the interval is later than the data times' do
+      assert !@datatable.within_interval?(Date.today + 1.day, Date.today + 4.day)
+    end
+    
+    should 'return false if the interval is earlier than the data times' do
+      assert !@datatable.within_interval?(Date.today - 4.day, Date.today - 2.day)
+    end
+     
+  end
+  
+  context 'datatable without sample_date' do
+    setup do
+      @datatable = Factory.create(:datatable)
+      @datatable.object = 'select 1 as treatment'
+    end
+    
+    should 'return false if interval does not include today' do
+      assert !@datatable.within_interval?(Date.today + 1.day, Date.today + 4.day)
+    end
   end
 
 end

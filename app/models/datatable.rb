@@ -6,12 +6,33 @@ class Datatable < ActiveRecord::Base
   belongs_to :dataset
   has_many :variates, :order => :position
   
-  def temporal_extent
-    query = "select max(sample_date), min(sample_date) from (#{object}) as t1"
-    values = ActiveRecord::Base.connection.execute(query)
-    {:end_date => Time.parse(values[0]['max']), :begin_date => Time.parse(values[0]['min'])}
-  end
+  def within_interval?(start_date=Date.today, end_date=Date.today)
     
+    return false unless is_sql
+    
+    values = ActiveRecord::Base.connection.execute(object)
+    return false unless values.fields.member?('sample_date')
+    
+    if start_date.class == Time
+      start_date = start_date.to_date
+    end
+    if end_date.class == Time
+      end_date = end_date.to_date
+    end
+    
+    query = "select max(sample_date), min(sample_date) from (#{object}) as t1"
+    
+    values = ActiveRecord::Base.connection.execute(query)
+    data_start_date = Time.parse(values[0]['min']).to_date
+    data_end_date = Time.parse(values[0]['max']).to_date
+
+    if data_end_date < start_date || data_start_date > end_date then
+      return false
+    else
+      return true
+    end
+  end
+      
   def to_eml
     eml = Element.new('datatable')
     eml.add_attribute('id',name)
