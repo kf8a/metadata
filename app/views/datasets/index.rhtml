@@ -19,7 +19,7 @@
 <div id='studies'>
   <% @studies.each do |study| %>
     <h2><%= study.name%></h2>
-    <p><%= study.description %></p>
+    <p><%= truncate(study.description) %></p>
     <div id='datasets'>
     <% active_themes = study.datasets.collect {|dataset| dataset.themes}.flatten.compact.uniq %>
     <% @themes.each do |theme| -%>
