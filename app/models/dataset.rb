@@ -99,7 +99,7 @@ class Dataset < ActiveRecord::Base
     eml_dataset.add_element('abstract').add_element('para').add_text(abstract)
     eml_dataset.add_element keyword_sets
     eml_dataset.add_element contact_info
-    eml_dataset.add_element access
+    eml_dataset.add_element eml_access
 
     coverage = eml_dataset.add_element('coverage')
     temporal_coverage = coverage.add_element('temporalCoverage')
@@ -145,7 +145,7 @@ private
     return i
   end
   
-  def access
+  def eml_access
     a = Element.new('access')
     a.add_attribute('scope','document')
     a.add_attribute('order','allowFirst')
