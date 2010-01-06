@@ -16,32 +16,40 @@
       
       <%= submit_tag "Search" %>
 </div>
-<div id='datasets'>
-<% active_themes = @datasets.collect {|dataset| dataset.themes}.flatten.compact.uniq %>
-<% @themes.each do |theme| -%>
-  <% next unless active_themes.include?(theme)%>
-	<h2><%= theme.title %></h2>
-		<ul>
-		  <% @datasets.each do |dataset| %>
-		  <% next unless dataset.on_web %>
-		  <% next unless dataset.datatables.size > 0 %>
-		  <% next unless dataset.themes.exists?(theme.id) %>
+<div id='studies'>
+  <% @studies.each do |study| %>
+    <h2><%= study.name%></h2>
+    <p><%= study.description %></p>
+    <div id='datasets'>
+    <% active_themes = study.datasets.collect {|dataset| dataset.themes}.flatten.compact.uniq %>
+    <% @themes.each do |theme| -%>
+      <% next unless active_themes.include?(theme)%>
+    	<h3><%= theme.title %></h3>
+    		<ul>
+    		  <% @datasets.each do |dataset| %>
+    		  <% next unless dataset.on_web %>
+    		  <% next unless dataset.datatables.size > 0 %>
+    		  <% next unless dataset.themes.exists?(theme.id) %>
+    		  <% next unless dataset.study == study %>
 
 
-		<% if dataset.core_dataset %>
-			<li class='core_dataset'>
-		<% elsif dataset.datatables.size == 0 %>
-			<li class='no_data'>
-		<% else %>
-			<li>
-		<% end %>
-		<%= link_to dataset.dataset, dataset_path(dataset) %> <%= truncate(dataset.title,{:length => 47}) %> 
-		<%= link_to 'eml', dataset_path(dataset, :format=>:eml) %> 
-		<%= link_to  'Edit', edit_dataset_path(dataset), {:class => 'edit'} if logged_in? %></li>
-		<% end -%>
-		</ul>
-<% end -%>
+    		<% if dataset.core_dataset %>
+    			<li class='core_dataset'>
+    		<% elsif dataset.datatables.size == 0 %>
+    			<li class='no_data'>
+    		<% else %>
+    			<li>
+    		<% end %>
+    		<%= link_to truncate(dataset.title,{:length => 60}) , dataset_path(dataset) %>
+    		<%= link_to 'eml', dataset_path(dataset, :format=>:eml) %> 
+    		<%= link_to  'Edit', edit_dataset_path(dataset), {:class => 'edit'} if logged_in? %></li>
+    		<% end -%>
+    		</ul>
+    <% end -%>
+    </div>
+  <% end %>
 </div>
+
 
 <div id='network_databases'>
   <h2>LTER Network Resources</h2>

@@ -19,6 +19,8 @@ class DatasetsController < ApplicationController
     @person = nil
     @people = Person.find_all_with_dataset
     
+    @studies = Study.all(:order => 'seniority')
+    
     @themes = Theme.find(:all, :order => :priority)
     unless theme.empty? || theme[:id].empty?
         @theme = Theme.find(theme[:id])

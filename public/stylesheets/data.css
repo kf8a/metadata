@@ -8,15 +8,14 @@
 	margin-right:0.05em;
 	color:#CCCCCC;
 }
-#content h3 {
-	font-size: 1.2em;
-	font-weight: bold;
-	color: #006633;
-}
 
 #content h1 {
 	font-size: 1.2em;
 	font-weight: bold;
+	color: #006633;
+}
+#content h3 {
+	font-size: 0.5em;
 	color: #006633;
 }
 
@@ -144,15 +143,6 @@ a:hover.edit {
 	border-style: groove;
 	padding: 10px;
 	background-color: #e8e8e8;
-}
-
-.address {
-	padding-top: 1em;
-}
-
-.person_lter_roles {
-	padding-top: 0.4em;
-	padding-bottom: 0.4em;
 }
 
 .person_email {
