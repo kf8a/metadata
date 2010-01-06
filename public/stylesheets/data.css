@@ -148,3 +148,10 @@ a:hover.edit {
 .person_email {
 	padding-top: 0.5em;
 }
+
+#network_databases {
+	position: absolute;
+	top: 26em;
+	left: 10px;
+	width: 120px;
+}
