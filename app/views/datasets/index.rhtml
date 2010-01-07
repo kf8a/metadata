@@ -49,6 +49,26 @@
   <% end %>
 </div>
 
+<div id='all datasets'>
+  <h2>Unassigned Datasets</h2>
+  <% @datasets.each do |dataset| %>
+    <% next unless dataset.study_id.nil?%>
+    <% next unless dataset.on_web %>
+	  
+ 
+		<% if dataset.core_dataset %>
+			<li class='core_dataset'>
+		<% elsif dataset.datatables.size == 0 %>
+			<li class='no_data'>
+		<% else %>
+			<li>
+		<% end %>
+		<%= link_to truncate(dataset.title,{:length => 60}) , dataset_path(dataset) %>
+		<%= link_to 'eml', dataset_path(dataset, :format=>:eml) %> 
+		<%= link_to  'Edit', edit_dataset_path(dataset), {:class => 'edit'} if logged_in? %></li>
+   
+  <% end %>
+</div>
 
 <div id='network_databases'>
   <h2>LTER Network Resources</h2>
