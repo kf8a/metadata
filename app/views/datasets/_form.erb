@@ -17,6 +17,9 @@
   <%= render :partial => 'affiliation', :locals => {:affiliation => affiliation, :people => people, :roles => roles}%>
   <% end %>
 </table>
+
 <%= link_to_remote 'Add Affiliation', :url => set_affiliation_for_datasets_url %>
 
+<h2>Study</h2>
+<%= select_tag 'dataset[study_id]', options_from_collection_for_select(Study.all, :id, :name, :selected => dataset.study_id) %>
 
