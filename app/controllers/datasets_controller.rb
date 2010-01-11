@@ -158,6 +158,9 @@ class DatasetsController < ApplicationController
   
   def allow_on_web
     return unless params[:id]
+    if params[:id] =~ /KBS\d\d\d/
+      params[:id] = Dataset.find_by_dataset(params[:id])
+    end
     dataset = Dataset.find(params[:id])
     dataset.on_web
   end
