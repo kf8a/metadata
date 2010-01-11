@@ -29,7 +29,7 @@
     		  <% next unless dataset.on_web %>
     		  <% next unless dataset.datatables.size > 0 %>
     		  <% next unless dataset.themes.exists?(theme.id) %>
-    		  <% next unless dataset.study == study %>
+    		  <% next unless dataset.studies.include?(study) %>
 
 
     		<% if dataset.core_dataset %>
@@ -52,7 +52,7 @@
 <div id='all datasets'>
   <h2>Unassigned Datasets</h2>
   <% @datasets.each do |dataset| %>
-    <% next unless dataset.study_id.nil?%>
+    <% next unless dataset.studies.empty?%>
     <% next unless dataset.on_web %>
 	  
  

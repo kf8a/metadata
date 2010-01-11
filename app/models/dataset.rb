@@ -8,7 +8,7 @@ class Dataset < ActiveRecord::Base
   has_many :roles, :through => :affiliations, :uniq => true
   has_and_belongs_to_many :themes
   belongs_to :project
-  belongs_to :study
+  has_and_belongs_to_many :studies
 
   accepts_nested_attributes_for :affiliations, :allow_destroy => true
   
