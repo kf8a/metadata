@@ -9,6 +9,8 @@ class Dataset < ActiveRecord::Base
   has_and_belongs_to_many :themes
   belongs_to :project
   has_and_belongs_to_many :studies
+  
+  validates_presence_of :abstract
 
   accepts_nested_attributes_for :affiliations, :allow_destroy => true
   

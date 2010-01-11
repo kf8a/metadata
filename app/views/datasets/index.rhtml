@@ -27,7 +27,7 @@
     		<ul>
     		  <% @datasets.each do |dataset| %>
     		  <% next unless dataset.on_web %>
-    		  <% next unless dataset.datatables.size > 0 %>
+    		  <% next unless dataset.datatables.size > 0 && !logged_in? %>
     		  <% next unless dataset.themes.exists?(theme.id) %>
     		  <% next unless dataset.studies.include?(study) %>
 
