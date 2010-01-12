@@ -11,6 +11,9 @@
   <%= text_field_with_auto_complete :dataset, :keyword_list, {}, {:method => :get} %>
 </p>
 
+<p><label for='dataset_core_dataset'>Signature Dataset</label>
+  <%= f.check_box :core_dataset%>
+  </p>
 <h2>Affiliations</h2>
 <table  id='affiliations'>
   <% dataset.affiliations.each do |affiliation| %>

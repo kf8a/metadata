@@ -17,8 +17,21 @@
       <%= submit_tag "Search" %>
 </div>
 <div class='studies'>
+  <h2>Signature Datasets</h2>
+  <ul class=''>
+  <% @signature_datasets.each do |dataset| %>
+    <li><%= link_to truncate(dataset.title,{:length => 90}) , dataset_path(dataset) %></li>
+  <% end %>
+  </ul>
+  
+  <h2>Long term experiments</h2>
+  <ul class='multicolumn'>
   <% @studies.each do |study| %>
-    <h2><a href="<%= study.description %>"><%= study.name%></a></h2>
+   <li><a href="#study_<%=study.id%>"><%= study.name %></a></li>
+  <% end %>
+  </ul>
+  <% @studies.each do |study| %>
+    <h2 id="study_<%=study.id%>"><a href="<%= study.description %>"><%= study.name%></a></h2>
     <div class='datasets container'>
     <% active_themes = study.datasets.collect {|dataset| dataset.themes}.flatten.compact.uniq %>
     <% @themes.each do |theme| -%>

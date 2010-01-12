@@ -20,6 +20,7 @@ class DatasetsController < ApplicationController
     @people = Person.find_all_with_dataset(:order => 'sur_name')
     
     @studies = Study.all(:order => 'seniority')
+    @signature_datasets = Dataset.find_signature_set
     
     @themes = Theme.find(:all, :order => :priority)
     unless theme.empty? || theme[:id].empty?

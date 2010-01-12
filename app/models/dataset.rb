@@ -16,6 +16,9 @@ class Dataset < ActiveRecord::Base
   
   acts_as_taggable_on :keywords
 
+  def self.find_signature_set
+    self.find(:all, :conditions => ['core_dataset is true'])
+  end
   def self.find_by_date_interval(start_time, end_time)
     datasets = []
     Dataset.all.each do |dataset|
