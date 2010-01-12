@@ -12,7 +12,6 @@ class Person < ActiveRecord::Base
   
   def get_all_lter_roles
     roles = lter_roles.collect {|x| x.name.singularize }
-    roles.join(', ')
   end
   
   def full_name
@@ -43,8 +42,8 @@ class Person < ActiveRecord::Base
     return address
   end
   
-  def self.find_all_with_dataset
-    people = Person.all.collect {|x| x if x.has_dataset?}
+  def self.find_all_with_dataset(options={})
+    people = Person.all(options).collect {|x| x if x.has_dataset?}
     people.compact
   end
     

@@ -17,7 +17,7 @@ class DatasetsController < ApplicationController
     keyword_list = params[:keyword_list] || ''
 
     @person = nil
-    @people = Person.find_all_with_dataset
+    @people = Person.find_all_with_dataset(:order => 'sur_name')
     
     @studies = Study.all(:order => 'seniority')
     
