@@ -20,6 +20,11 @@
 
 <%= link_to_remote 'Add Affiliation', :url => set_affiliation_for_datasets_url %>
 
+<h2>Themes</h2>
+<% @themes.each do |theme| -%>
+  <%= theme.title %><%= check_box_tag 'dataset[theme_ids][]', theme.id, @dataset.themes.include?(theme)%>
+<% end -%>
+
 <h2>Study associations</h2>
 
 	<% @studies.each do |study| -%>

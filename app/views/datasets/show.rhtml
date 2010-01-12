@@ -26,7 +26,7 @@
 	<li><%= link_to "#{protocol.name} #{protocol.version}", protocol_path(protocol) %> <%= protocol.title %></li>
 	<% end -%>
 </ul>
-<h2>Personel</h2>
+<h2>Personnel</h2>
 <ul>
 	<% @roles.each do |role| %>
 	<li> <%= role.name.capitalize.pluralize %>
