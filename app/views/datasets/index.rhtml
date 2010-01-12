@@ -20,7 +20,7 @@
   <h2>Signature Datasets</h2>
   <ul class=''>
   <% @signature_datasets.each do |dataset| %>
-    <li><%= link_to truncate(dataset.title,{:length => 90}) , dataset_path(dataset) %></li>
+    <li><%= link_to truncate(dataset.title,{:length => 90}) , dataset_path(dataset) %> 	<%= link_to 'eml', dataset_path(dataset, :format=>:eml) %></li>
   <% end %>
   </ul>
   
