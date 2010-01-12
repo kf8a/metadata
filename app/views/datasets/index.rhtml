@@ -1,7 +1,7 @@
 <div id='search_form'>
   <%= form_tag '/datasets', :method => 'get'%>
     <span>
-      Research Theme: <%= collection_select :theme,  :id, Theme.all , :id, :title, { :include_blank => "All" }%>
+      Research Theme: <%= collection_select :theme,  :id, @themes , :id, :title, { :include_blank => "All" }%>
     </span>
     <span>  
        Contributor:   <%= collection_select :person, :id, @people, :id, :full_name, { :include_blank => "All" } %>
