@@ -107,14 +107,14 @@ class Dataset < ActiveRecord::Base
     eml_dataset.add_element eml_access
 
     coverage = eml_dataset.add_element('coverage')
-    temporal_coverage = coverage.add_element('temporalCoverage')
-    range_of_dates = temporal_coverage.add_element('rangeOfDates')
-    begin_date = range_of_dates.add_element('beginDate')
-    end_date = range_of_dates.add_element('endDate')
-    begin_date.add_element('calendarDate').add_element(temporal_extent[:begin_date].to_date)
-    begin_date.add_element('time').add_element(temporal_extent[:begin_date].strftime("%XZ"))
-    end_date.add_element calendarDate(temporal_extent[:end_date].to_date)
-    end_date.add_element time(temporal_extent[:end_date].strftime("%XZ"))
+    # temporal_coverage = coverage.add_element('temporalCoverage')
+    # range_of_dates = temporal_coverage.add_element('rangeOfDates')
+    # begin_date = range_of_dates.add_element('beginDate')
+    # end_date = range_of_dates.add_element('endDate')
+    # begin_date.add_element('calendarDate').add_element(temporal_extent[:begin_date].to_date)
+    # begin_date.add_element('time').add_element(temporal_extent[:begin_date].strftime("%XZ"))
+    # end_date.add_element calendarDate(temporal_extent[:end_date].to_date)
+    # end_date.add_element time(temporal_extent[:end_date].strftime("%XZ"))
 
     datatables.each do |datatable|
       eml_dataset.add_element datatable.to_eml
