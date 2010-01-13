@@ -1,0 +1,8 @@
+<ul>
+	<li class='person_name'><%= @person.given_name %> <%= @person.middle_name %>  <%= @person.sur_name %></li>
+	<li class='person_title'><%= @person.lter_roles[0].name.singularize %></li>
+	<% if @person.email and @person.email.strip != '' -%>
+	<li class='person_email'><%= contact_link(@person.email) %></li>
+	<% end -%>
+	
+</ul>

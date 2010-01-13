@@ -1,6 +1,10 @@
+ <% if @person.lter_roles.include?(Role.find_by_name('Emeritus Investigators'))%>
+    <%= render :partial => 'emeritus', :locals => {:person => @person}%>
+ <% else %>
 <ul>
+ 
+
 	<li class='person_name'><%= @person.given_name %> <%= @person.middle_name %>  <%= @person.sur_name %></li>
-	<li class='person_lter_roles'><%= @person.get_all_lter_roles if @person.get_all_lter_roles.strip != '' %></li>
 	<% if @person.title and @person.title.strip != '' -%>
   	<li class='person_title'><%= @person.title %></li>
   <% end -%>
@@ -10,38 +14,39 @@
 	<% if @person.organization and @person.organization.strip != '' -%>
 	<li><%= @person.organization%></li>
 	<% end -%>
+	<% if @person.address and @person.address.strip != '' and  @person.postal_code and @person.postal_code.strip != '' -%>
+	<li class='address'><%= @person.city %>&nbsp;<%= @person.locale %>, <%= @person.postal_code %></li>
+	<% end -%>
+	
 
 	<% if @person.email and @person.email.strip != '' -%>
 	<li class='person_email'><%= contact_link(@person.email) %></li>
 	<% end -%>
 	<% if @person.phone and @person.phone.strip != '' -%>
-	<li><%= @person.phone %></li>
+	<li>
+	<%= @person.phone %>
+		<% if @person.fax and @person.fax.strip != '' %>
+    | fax: <%= @person.fax %>
+    <% end %>
+	</li>
 	<% end -%>
-	<% if @person.fax and @person.fax.strip != '' %>
-  <li><%= @person.fax %> (fax)</li>
-  <% end %>
 	<% if @person.url and @person.url.strip != ''-%>
-	<li><%= link_to "#{@person.url}", @person.url %></li>
+	<li><%= link_to "#{@person.url.gsub(/http:\/\//,'')}", @person.url%></li>
 	<% end -%>
-
-	
-	<% if @person.address and @person.address.strip != '' and  @person.postal_code and @person.postal_code.strip != '' -%>
-	<li class='address'><%= @person.street_address %>&nbsp;<%= @person.city %>&nbsp;<%= @person.locale %>, <%= @person.postal_code %>
-	<% end -%>
-  </li>
-
 
 </ul>
 
-<% if @person.datasets.size > 0 %>
-Datasets:
+<% committees = @person.get_all_lter_roles -%>
+<% unless committees.empty? %>
 <ul>
-	<% @person.datasets.each do |dataset| %>
-		<li><%= link_to "#{dataset.dataset}", dataset_path(dataset) %> <%= dataset.title %></li>
-	<% end %>
+Committees:
+  <% committees.each do |committee| %>
+    <li><%= committee%></li>
+  <% end %>
 </ul>
 <% end %>
-
+	<% end %>
+	
 <%= link_to 'Edit', edit_person_path(@person) if logged_in? %> |
 <%= link_to 'Delete', person_path(@person), :method => 'post', :confirm => 'Are you sure?' if logged_in? %>
 <%= link_to 'Back', people_path %>
