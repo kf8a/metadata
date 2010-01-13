@@ -12,8 +12,6 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 
 Rails::Initializer.run do |config|
-  config.gem "thoughtbot-shoulda", :lib => 'shoulda', :source => 'http://gems.github.com'
-  config.gem "thoughtbot-factory_girl", :lib    => "factory_girl", :source => "http://gems.github.com"
   config.gem "fastercsv" unless RUBY_VERSION > "1.9"
   config.gem "acts-as-taggable-on", :source => "http://gemcutter.org"
   
