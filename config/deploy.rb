@@ -15,7 +15,6 @@ set :branch, "searching"
 set :deploy_via, :copy
 #set :git_enable_submodules,1
 
-set :mongrel_conf, '/etc/mongrel_cluster/metadata.yml'
 
 role :app, 'sebewa.kbs.msu.edu'
 role :web, 'sebewa.kbs.msu.edu'

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091110032539) do
+ActiveRecord::Schema.define(:version => 20100111173650) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -45,6 +45,11 @@ ActiveRecord::Schema.define(:version => 20091110032539) do
     t.integer "version"
     t.boolean "core_dataset", :default => false
     t.integer "project_id"
+  end
+
+  create_table "datasets_studies", :id => false, :force => true do |t|
+    t.integer "dataset_id"
+    t.integer "study_id"
   end
 
   create_table "datasets_themes", :id => false, :force => true do |t|
@@ -221,6 +226,8 @@ ActiveRecord::Schema.define(:version => 20091110032539) do
     t.string  "name"
     t.integer "role_type_id"
     t.integer "seniority"
+    t.boolean "show_in_overview",   :default => true
+    t.boolean "show_in_detailview", :default => true
   end
 
   create_table "scribbles", :force => true do |t|
@@ -262,7 +269,9 @@ ActiveRecord::Schema.define(:version => 20091110032539) do
   end
 
   create_table "studies", :force => true do |t|
-    t.string "name"
+    t.string  "name"
+    t.text    "description"
+    t.integer "seniority"
   end
 
   create_table "taggings", :force => true do |t|
