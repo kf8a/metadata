@@ -14,6 +14,12 @@ class Person < ActiveRecord::Base
     roles = lter_roles.collect {|x| x.name.singularize }
   end
   
+  def only_emeritus?
+    emeritus_roles = lter_roles.collect   {|role| role.emeritus? }
+    emeritus_roles.reject! {|x| !x }
+    emeritus_roles.size == lter_roles.size 
+  end
+  
   def full_name
     name = given_name
     if friendly_name && friendly_name.size > 0
