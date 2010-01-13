@@ -26,7 +26,7 @@ class DatasetsControllerTest < ActionController::TestCase
   
   def test_should_create_dataset
     old_count = Dataset.count
-    post :create, :dataset => { }
+    post :create, :dataset => {:abstract => 'some text' }
     assert_equal old_count+1, Dataset.count
     
     assert_redirected_to dataset_path(assigns(:dataset))

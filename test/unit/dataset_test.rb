@@ -21,24 +21,24 @@ class DatasetTest < ActiveSupport::TestCase
     d.title 'KBS001'
   end
   
-  context 'Temporal Extent' do
-    setup do
-      @dataset = Factory.create(:dataset, 
-        :datatables  => [Factory.create(:datatable), 
-                         Factory.create(:datatable, 
-                         :object => "select now() - interval '2 days' as sample_date")])
-    end
-    
-    should 'respond to within_interval' do
-      assert @dataset.respond_to?('within_interval?')
-    end
-    
-    should 'return true on within_interval today' do
-      assert @dataset.within_interval?(Date.today, Date.today+1.day)
-    end
-    
-  end
-  
+  # context 'Temporal Extent' do
+  #   setup do
+  #     @dataset = Factory.create(:dataset, 
+  #       :datatables  => [Factory.create(:datatable), 
+  #                        Factory.create(:datatable, 
+  #                        :object => "select now() - interval '2 days' as sample_date")])
+  #   end
+  #   
+  #   should 'respond to within_interval' do
+  #     assert @dataset.respond_to?('within_interval?')
+  #   end
+  #   
+  #   should 'return true on within_interval today' do
+  #     assert @dataset.within_interval?(Date.today, Date.today+1.day)
+  #   end
+  #   
+  # end
+  #   
   # context "Finding Datasets" do
   #   
   #   setup do
