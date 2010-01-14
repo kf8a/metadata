@@ -11,6 +11,14 @@
   <%= text_field_with_auto_complete :dataset, :keyword_list, {}, {:method => :get} %>
 </p>
 
+<p>
+  <label for='dataset_status'>Status</label>
+  <%= f.text_field :status%>
+  <label for='dataset_initiated'>Initiated</label>
+  <%= f.date_select :initiated, :include_blank => true %>
+  <label for='dataset_completed'>Completed</label>
+  <%= f.date_select :completed, :include_blank => true%>
+</p>
 <p><label for='dataset_core_dataset'>Signature Dataset</label>
   <%= f.check_box :core_dataset%>
   </p>
