@@ -15,10 +15,12 @@ class Dataset < ActiveRecord::Base
   accepts_nested_attributes_for :affiliations, :allow_destroy => true
   
   acts_as_taggable_on :keywords
-
+  
+  # Finders
   def self.find_signature_set
     self.find(:all, :conditions => ['core_dataset is true'])
   end
+  
   def self.find_by_date_interval(start_time, end_time)
     datasets = []
     Dataset.all.each do |dataset|
@@ -107,20 +109,30 @@ class Dataset < ActiveRecord::Base
     eml_dataset.add_element eml_access
 
     coverage = eml_dataset.add_element('coverage')
-    # temporal_coverage = coverage.add_element('temporalCoverage')
-    # range_of_dates = temporal_coverage.add_element('rangeOfDates')
-    # begin_date = range_of_dates.add_element('beginDate')
-    # end_date = range_of_dates.add_element('endDate')
-    # begin_date.add_element('calendarDate').add_element(temporal_extent[:begin_date].to_date)
-    # begin_date.add_element('time').add_element(temporal_extent[:begin_date].strftime("%XZ"))
-    # end_date.add_element calendarDate(temporal_extent[:end_date].to_date)
-    # end_date.add_element time(temporal_extent[:end_date].strftime("%XZ"))
+    temporal_coverage = coverage.add_element('temporalCoverage')
+    range_of_dates = temporal_coverage.add_element('rangeOfDates')
+    begin_date = range_of_dates.add_element('beginDate')
+    end_date = range_of_dates.add_element('endDate')
+    begin_date.add_element('calendarDate').add_element(temporal_extent[:begin_date].to_date)
+    begin_date.add_element('time').add_element(temporal_extent[:begin_date].strftime("%XZ"))
+    end_date.add_element calendarDate(temporal_extent[:end_date].to_date)
+    end_date.add_element time(temporal_extent[:end_date].strftime("%XZ"))
 
     datatables.each do |datatable|
       eml_dataset.add_element datatable.to_eml
     end
     eml_dataset.add_element('additionalMetadata').add_element eml_custom_unit_list
     emldoc.root.to_s
+  end
+  
+  def temporal_extent
+    begin_date = nil
+    end_date = nil
+    datatables.each do |datatable |
+      dates = datatable.eml_temporal_extent
+      begin_date = dates[:begin_date] if begin_date < dates[:begin_date]
+      end_date = dates[:end_date] if end_date > dates[:end_date]
+    end
   end
   
 private
