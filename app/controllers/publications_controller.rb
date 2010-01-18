@@ -8,6 +8,8 @@ class PublicationsController < ApplicationController
   def index
     @crumbs = []
     @pub_type = params[:type]
+    @word = params[:word]
+
     publication_types  = PublicationType.find_all_by_name(@pub_type)
     if publication_types.empty?
       @pub_type = ''
@@ -22,7 +24,7 @@ class PublicationsController < ApplicationController
       order = 'citation'
       @decoration = 'by Author'
     end
-  
+    
     if params[:treatment]
       @alphabetical = true
       treatment = Treatment.find(params[:treatment])  if params[:treatment]
@@ -32,6 +34,11 @@ class PublicationsController < ApplicationController
     @publications = Publication.find(:all, :order => order, 
       :conditions => [conditions, publication_types])
     end
+    
+    if @word
+      @publications = Publication.find_by_word(@word)
+    end
+    
     
     respond_to do |format|
       format.html # index.rhtml

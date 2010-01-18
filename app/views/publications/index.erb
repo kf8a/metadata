@@ -1,3 +1,9 @@
+<div id='search_form'>
+  <%= form_tag '/publications', :method => 'get'%>
+    <%= text_field_tag :word, @word, {:size => 60, :method => :get} %>
+      
+      <%= submit_tag "Search" %>
+</div>
 <h1>Publications <%= @decoration %>: <%=h @pub_type%> </h1>
 <% year = 0 -%>
 <% for publication in @publications %>
