@@ -119,10 +119,6 @@ a:hover.edit {
 }
 */
 
-.core_dataset {
-	background: url(../images/core.png) no-repeat right top;
-}
-
 .no_data {
 	color: #939393;
 }
