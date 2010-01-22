@@ -57,7 +57,11 @@ class Datatable < ActiveRecord::Base
     return  csv_string
   end
   
+  def temporal_extent
+    {:begin_date => now(),:end_date => now()}
+  end
 private
+
   def eml_physical
     p = Element.new('physical')
     p.add_element('objectName').add_text(self.title)

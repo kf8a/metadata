@@ -1,4 +1,4 @@
- <% if @person.lter_roles.include?(Role.find_by_name('Emeritus Investigators'))%>
+   <% if @person.only_emeritus? %>
     <%= render :partial => 'emeritus', :locals => {:person => @person}%>
  <% else %>
 <ul>

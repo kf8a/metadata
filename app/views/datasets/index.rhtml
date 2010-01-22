@@ -31,8 +31,9 @@
   <% end %>
   </ul>
   <% @studies.each do |study| %>
+    <div class="datasets container <%= cycle('even','odd') -%>">
     <h2 id="study_<%=study.id%>"><a href="<%= study.description %>"><%= study.name%></a></h2>
-    <ul class="datasets container <%= cycle('even','odd') -%>">
+    <ul>
     
     		  <% @datasets.each do |dataset| %>
     		  <% next unless dataset.on_web %>
@@ -54,6 +55,7 @@
     		<%= link_to  'Edit', edit_dataset_path(dataset), {:class => 'edit'} if logged_in? %></li>
     <% end -%>
     </ul>
+    </div>
   <% end %>
 </div>
 

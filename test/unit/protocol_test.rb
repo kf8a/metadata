@@ -1,10 +1,9 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class MethocolTest < ActiveSupport::TestCase
-  fixtures :protocols
+class ProtocolTest < ActiveSupport::TestCase
 
-  # Replace this with your real tests.
-  def test_truth
-    assert true
+  Factory.define :protocol do |p|
+    p.name 'First protocol'
   end
+  
 end

@@ -19,7 +19,15 @@ class DatasetTest < ActiveSupport::TestCase
   
   Factory.define :dataset do |d|
     d.title 'KBS001'
+    d.abstract 'some new dataset'
   end
+  
+  Factory.define :protocol do |p|
+    p.name  'Proto1'
+    p.version  0
+  end
+  
+ 
   
   # context 'Temporal Extent' do
   #   setup do
