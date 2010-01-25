@@ -149,18 +149,83 @@ a:hover.edit {
 }
 
 
-#content h2.study_title a {
+#content h2.study-title a {
 	width: 470px;
-	background-color: #ccc;			text-decoration: none;
+	background-color: #dedede;			text-decoration: none;
 	color: #006633;
 	  -moz-border-radius:10px;
   -webkit-border-radius:10px;
-	border-style: none;
-	border-color: black;
 	font-weight: normal;
 	font-style: normal;
 	display: block;
-	font-size: 1.2em;
 	font-variant: normal;
-	padding: 1ex 2em .7ex;
+	padding: 0 2em 0;
+}
+
+#core-area-search {
+	float:left
+}
+
+#core-area-search label {
+	padding-right: 10px;
+}
+
+#theme_id {
+	margin-left: 10px;
+}
+
+
+
+#contributor-search {
+	float: left;
+}
+
+#contributor-search label {
+	text-align: center;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+#top-line-search {
+	height: 5em;
+}
+
+
+#experiment-search {
+	float:left
+}
+
+#experiment-search label {
+	text-align: center;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+#bottom-line-search {
+	clear: both;
+}
+
+#year-search {
+	float:left;
+}
+
+#year-search label {
+	display:inline;
+}
+
+#keyword-search {
+	float:left;
+	margin-left: 1em;
+}
+
+input#keyword_list {
+	margin-left: 0;
+}
+
+#bottom-line-search input {
+	margin-left: 2em;
+}
+
+#keyword-search label {
+	display:inline;
 }

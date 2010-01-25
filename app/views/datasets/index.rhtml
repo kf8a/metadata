@@ -1,20 +1,28 @@
 <div id='search-form'>
   <%= form_tag '/datasets', :method => 'get'%>
-    <span>
-      LTER Core Areas/KBS Themes: <%= collection_select :theme,  :id, @themes , :id, :title, { :include_blank => "All" }%>
-    </span>
-    <span>  
-       Contributor:   <%= collection_select :person, :id, @people, :id, :full_name, { :include_blank => "All" } %>
-    </span>
-    <span>
-      From: <%= select_year 1988, :start_year => 1988, :end_year => Date.today.year %> To: <%= select_year Date.today, :start_year=>1988, :end_year => Date.today.year%>
-    </span>
-    <span>
-      Keywords:<%= keyword_field_with_auto_complete_tag :keyword_list, {}, {:method => :get} %>
-    </span>
+  <div id='top-line-search'>
+    <div id='core-area-search'>
+    <label>KBS Theme/LTER Core Area</label> <%= collection_select :theme,  :id, @themes , :id, :title, { :include_blank => "All" }%>
+    </div>
+    <div id='experiment-search'>
+      <label>Long-term Experiment</label>
+      <%= collection_select :study, :id, @studies, :id, :name, {:include_blank => 'All'}%>
+    </div>
+    <div id='contributor-search'>  
+       <label>Contributor:</label><%= collection_select :person, :id, @people, :id, :full_name, { :include_blank => "All" } %>
+    </div>
+    </div>
+    <div id='bottom-line-search'>
+    <div id='year-search'>
+      <label>From:</label> <%= select_year 1988, :start_year => 1988, :end_year => Date.today.year %><label>To:</label><%= select_year Date.today, :start_year=>1988, :end_year => Date.today.year%>
+    </div>
+    <div id='keyword-search'>
+      <label>Keywords:</label><%= keyword_field_with_auto_complete_tag :keyword_list, {}, {:method => :get} %>
+    </div>
     
       
       <%= submit_tag "Search" %>
+</div>
 </div>
 <div class='studies'>
   <h2>Signature Datasets</h2>
@@ -24,15 +32,9 @@
   <% end %>
   </ul>
   
-  <h2>Long term experiments</h2>
-  <ul class='multicolumn'>
-  <% @studies.each do |study| %>
-   <li><a href="#study_<%=study.id%>"><%= study.name %></a></li>
-  <% end %>
-  </ul>
   <% @studies.each do |study| %>
     <div class="datasets container">
-    <h2 id="study_<%=study.id%>" class="study_title"><a href="<%= study.description %>"><%= study.name%></a></h2>
+    <h2 class="study-title"><a href="<%= study.description %>"><%= study.name%></a></h2>
     <ul>
     
     		  <% @datasets.each do |dataset| %>
