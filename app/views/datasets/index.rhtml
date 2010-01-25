@@ -1,4 +1,4 @@
-<div id='search_form'>
+<div id='search-form'>
   <%= form_tag '/datasets', :method => 'get'%>
     <span>
       LTER Core Areas/KBS Themes: <%= collection_select :theme,  :id, @themes , :id, :title, { :include_blank => "All" }%>
@@ -44,9 +44,9 @@
 
           <li class="dataset  <%= cycle('even','odd') -%>">
     		<% if dataset.core_dataset %>
-    			<li class='core_dataset dataset'>
+    			<li class='core-dataset dataset'>
     		<% elsif dataset.datatables.size == 0 %>
-    			<li class='no_data dataset'>
+    			<li class='no-data dataset'>
     		<% else %>
     			<li>
     		<% end %>
@@ -67,9 +67,9 @@
 	  
  
 		<% if dataset.core_dataset %>
-			<li class='core_dataset'>
+			<li class='core-dataset'>
 		<% elsif dataset.datatables.size == 0 %>
-			<li class='no_data'>
+			<li class='no-data'>
 		<% else %>
 			<li>
 		<% end %>
@@ -80,7 +80,7 @@
   <% end %>
 </div>
 
-<div id='network_databases'>
+<div id='network-databases'>
   <h2>LTER Network Resources</h2>
   <ul>
     <li><a href='http://metacat.lternet.edu/knb/'>LTER Data Catalog</a></li>

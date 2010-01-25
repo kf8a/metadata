@@ -29,7 +29,7 @@
 	font-weight: bold;
 }
 
-.person_name {
+.person-name {
 	color: #006633;
 	font-size: 1.4em;
 	margin-bottom: 0.2em;
@@ -48,7 +48,7 @@
 }
 
 .citation {
-	margin-bottom: 1en;
+	margin-bottom: 1em;
 }
 
 label {
@@ -119,7 +119,7 @@ a:hover.edit {
 }
 */
 
-.no_data {
+.no-data {
 	color: #939393;
 }
 
@@ -127,23 +127,40 @@ a:hover.edit {
 	margin-top: 1em;
 }
 
-.select_box {
+.select-box {
 	width: 200px;
 }
 
-#search_form {
+#search-form {
 	border-style: groove;
 	padding: 10px;
 	background-color: #e8e8e8;
 }
 
-.person_email {
+.person-email {
 	padding-top: 0.5em;
 }
 
-#network_databases {
+#network-databases {
 	position: absolute;
 	top: 26em;
 	left: 10px;
 	width: 120px;
+}
+
+
+#content h2.study_title a {
+	width: 470px;
+	background-color: #ccc;			text-decoration: none;
+	color: #006633;
+	  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+	border-style: none;
+	border-color: black;
+	font-weight: normal;
+	font-style: normal;
+	display: block;
+	font-size: 1.2em;
+	font-variant: normal;
+	padding: 1ex 2em .7ex;
 }
