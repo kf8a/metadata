@@ -1,3 +1,7 @@
+.hidden {
+	visibility: hidden;
+	height: 0px;;
+}
 .bulleted {
 	list-style-type: circle;
 	text-indent: 1em;

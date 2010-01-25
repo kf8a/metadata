@@ -15,6 +15,10 @@ class DatasetsController < ApplicationController
     theme = params[:theme] || ''
     person = params[:person] || ''
     keyword_list = params[:keyword_list] || ''
+    
+    if params[:theme] || params[:person] || params[:keyword_list]
+      @search_visible = 'hidden'
+    end
 
     @person = nil
     @people = Person.find_all_with_dataset(:order => 'sur_name')
