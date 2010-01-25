@@ -46,7 +46,7 @@
     		  <% end -%>
     		  <% next unless dataset.studies.include?(study) %>
 
-          <li class="dataset  <%= cycle('even','odd') -%>">
+          <li class="dataset">
     		<%= link_to truncate(dataset.title,{:length => 80}) , dataset_path(dataset) %>
     		<%= link_to 'eml', dataset_path(dataset, :format=>:eml) %> 
     		<%= link_to  'Edit', edit_dataset_path(dataset), {:class => 'edit'} if logged_in? %></li>
