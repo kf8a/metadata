@@ -58,7 +58,7 @@ class Datatable < ActiveRecord::Base
   end
   
   def temporal_extent
-    {:begin_date => now(),:end_date => now()}
+    {:begin_date => Time.now(),:end_date => Time.now()}
   end
 private
 

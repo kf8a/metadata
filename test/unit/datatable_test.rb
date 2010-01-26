@@ -7,6 +7,7 @@ class DatatableTest < ActiveSupport::TestCase
     d.name 'KBS001_001'
     d.object %q{select now() as sample_date}
     d.is_sql true
+    d.description 'This is a datatable'
   end
   
   context 'datatable with sample_date' do
@@ -43,4 +44,18 @@ class DatatableTest < ActiveSupport::TestCase
     end
   end
 
+  context 'eml generation' do
+    setup do 
+      @datatable = Factory.create(:datatable)
+    end
+    
+    should 'return respond to to_eml' do
+      assert @datatable.respond_to?('to_eml')
+    end
+    
+    should 'return an eml datatable fragment' do
+      eml = @datatable.to_eml
+      assert eml.to_s =~ /datatable/
+    end
+  end
 end
