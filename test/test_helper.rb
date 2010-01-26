@@ -28,31 +28,5 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
   #load File.join(RAILS_ROOT,'test', 'mocks', 'test', 'authenticated_mock.rb')
-  
-  def self.should_have_attached_file(attachment)
-    klass = self.name.gsub(/Test$/, '').constantize
-  
-    context "To support a paperclip attachment named #{attachment}, #{klass}" do
-      should_have_db_column("#{attachment}_file_name",    :type => :string)
-      should_have_db_column("#{attachment}_content_type", :type => :string)
-      should_have_db_column("#{attachment}_file_size",    :type => :integer)
-    end
-  
-    should "have a paperclip attachment named ##{attachment}" do
-      assert klass.new.respond_to?(attachment.to_sym), 
-             "@#{klass.name.underscore} doesn't have a paperclip field named #{attachment}"
-      assert_equal Paperclip::Attachment, klass.new.send(attachment.to_sym).class
-    end
-  end
-  
-  def self.should_accept_nested_attributes_for(*associations)
-    klass = self.name.gsub(/Test$/, '').constantize
-
-    associations.each do |association|
-      should "accept nested attributes for #{association}" do
-        assert klass.new.respond_to?("#{association}_attributes="), "#{klass} does not accept nested attributes for association: #{association}"
-      end
-    end
-  end
 end
 
