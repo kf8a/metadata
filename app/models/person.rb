@@ -20,18 +20,20 @@ class Person < ActiveRecord::Base
     emeritus_roles.size == lter_roles.size 
   end
   
-  def full_name
+  def normal_given_name
     name = given_name
-    if friendly_name && friendly_name.size > 0
-      name = friendly_name
-    end
-    name += " "
-    name += sur_name
+     if friendly_name && friendly_name.size > 0
+       name = friendly_name
+     end
     name
   end
   
+  def full_name
+    normal_given_name + " "  + sur_name
+  end
+  
   def last_name_first
-    sur_name + ', ' + given_name
+    sur_name + ', ' + normal_given_name
   end
   
   #hack
