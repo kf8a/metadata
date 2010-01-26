@@ -40,6 +40,8 @@ class PersonTest < ActiveSupport::TestCase
   context 'a persons name' do
     setup do
       @person = Factory.create(:person, {:given_name => 'howard', :sur_name => 'spencer'})
+      @friendly_person = Factory.create(:person, {:given_name => 'howard', :sur_name => 'spencer', 
+          :friendly_name => 'bops'})
     end
     
     should 'return first_name last_name in response to full_name' do
@@ -48,6 +50,11 @@ class PersonTest < ActiveSupport::TestCase
     
     should 'return last_name, first_name in response to last_name_first' do
       assert @person.last_name_first == 'spencer, howard'
+    end
+    
+    should 'use the friendly_name if available' do
+      assert @friendly_person.full_name == 'bops spencer'
+      assert @friendly_person.last_name_first == 'spencer, bops'
     end
   end
 end
