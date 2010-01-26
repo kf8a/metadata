@@ -73,7 +73,7 @@ class DatasetsController < ApplicationController
   # GET /datasets/1;edit
   def edit
     @dataset = Dataset.find(params[:id])
-    @people = Person.all
+    @people = Person.all(:order => 'sur_name')
     @studies = Study.all(:order => 'seniority')
     @themes = Theme.all(:order => 'priority')
     @roles = Role.find(:all, :conditions => ['role_type_id = ?', RoleType.find_by_name('dataset')])
