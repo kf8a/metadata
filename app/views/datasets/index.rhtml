@@ -2,14 +2,14 @@
   <%= form_tag '/datasets', :method => 'get'%>
   <div id='top-line-search'>
     <div id='core-area-search'>
-    <label>KBS Theme/LTER Core Area</label> <%= collection_select :theme,  :id, @themes , :id, :title, { :include_blank => "All" }%>
+    <label>Theme/LTER Core Area</label> <%= collection_select :theme,  :id, @themes , :id, :title, { :include_blank => "All" }%>
     </div>
     <div id='experiment-search'>
       <label>Long-term Experiment</label>
       <%= collection_select :study, :id, @studies, :id, :name, {:include_blank => 'All'}%>
     </div>
     <div id='contributor-search'>  
-       <label>Contributor:</label><%= collection_select :person, :id, @people, :id, :full_name, { :include_blank => "All" } %>
+       <label>Contributor:</label><%= collection_select :person, :id, @people, :id, :last_name_first, { :include_blank => "All" } %>
     </div>
     </div>
     <div id='bottom-line-search'>

@@ -27,7 +27,11 @@ class Person < ActiveRecord::Base
     end
     name += " "
     name += sur_name
-    return name
+    name
+  end
+  
+  def last_name_first
+    sur_name + ', ' + given_name
   end
   
   #hack

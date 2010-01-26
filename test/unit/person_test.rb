@@ -3,7 +3,8 @@ require File.dirname(__FILE__) + '/../test_helper'
 class PersonTest < ActiveSupport::TestCase
   
   Factory.define :person do |p|
-    p.sur_name 'bill'
+    p.sur_name 'spencer'
+    p.given_name 'howard'
   end
   
   Factory.define :role do |r|
@@ -33,6 +34,20 @@ class PersonTest < ActiveSupport::TestCase
     should 'return false if one role in non emeritus' do
       @person.lter_roles << Factory.create(:role)
       assert !@person.only_emeritus?
+    end
+  end
+  
+  context 'a persons name' do
+    setup do
+      @person = Factory.create(:person, {:given_name => 'howard', :sur_name => 'spencer'})
+    end
+    
+    should 'return first_name last_name in response to full_name' do
+      assert @person.full_name == 'howard spencer'
+    end
+    
+    should 'return last_name, first_name in response to last_name_first' do
+      assert @person.last_name_first == 'spencer, howard'
     end
   end
 end
