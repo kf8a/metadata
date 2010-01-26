@@ -13,12 +13,8 @@ class Datatable < ActiveRecord::Base
     values = ActiveRecord::Base.connection.execute(object)
     return false unless values.fields.member?('sample_date')
     
-    if start_date.class == Time
-      start_date = start_date.to_date
-    end
-    if end_date.class == Time
-      end_date = end_date.to_date
-    end
+    start_date = convert_to_date(start_date)
+    end_date = convert_to_date(end_date)
     
     query = "select max(sample_date), min(sample_date) from (#{object}) as t1"
     
@@ -26,11 +22,7 @@ class Datatable < ActiveRecord::Base
     data_start_date = Time.parse(values[0]['min']).to_date
     data_end_date = Time.parse(values[0]['max']).to_date
 
-    if data_end_date < start_date || data_start_date > end_date then
-      return false
-    else
-      return true
-    end
+    !(data_end_date < start_date || data_start_date > end_date) 
   end
       
   def to_eml
@@ -79,5 +71,12 @@ private
       a.add_element variate.to_eml
     end
     return a
+  end
+  
+  def convert_to_date(time)
+    if time.class == Time
+        time = time.to_date
+    end
+    time
   end
 end

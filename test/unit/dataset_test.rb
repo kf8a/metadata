@@ -2,34 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class DatasetTest < ActiveSupport::TestCase
   
-  Factory.define :datatable do |d|
-     d.name 'KBS001_001'
-     d.object 'select now() as sample_date'
-     d.is_sql true
-     d.description 'This is a datatable'
-   end
-  
-  Factory.define :person do |p|
-    p.sur_name 'bauer'
-    p.given_name 'bill'
-  end
-  
-  Factory.define :theme do |t|
-    t.title  'Agronomic'
-  end
-  
-  Factory.define :dataset do |d|
-    d.title 'KBS001'
-    d.abstract 'some new dataset'
-  end
-  
-  Factory.define :protocol do |p|
-    p.name  'Proto1'
-    p.version  0
-  end
-  
- 
-  
+   
   # context 'Temporal Extent' do
   #   setup do
   #     @dataset = Factory.create(:dataset, 
@@ -52,27 +25,52 @@ class DatasetTest < ActiveSupport::TestCase
     
     setup do
       @person = Factory.create(:person)
-      @dataset = Factory.create(:dataset,:keyword_list => 'earth,wind', :people => [@person], 
+      @dataset = Factory.create(:dataset,:keyword_list => 'earth,wind,fire', :people => [@person], 
                                 :datatables=>[Factory.create(:datatable)])
+      #future dataset
+      Factory.create(:dataset,:keyword_list => 'fire', 
+                  :datatables=>[Factory.create(:datatable, {:object => %q{select now() + '1 year' as sample_date}})])
       @unfound_dataset = Factory.create(:dataset, :keyword_list => 'wildfire')
       @theme = Factory.create(:theme, :datasets => [@dataset])
+    end
+    
+    should 'respond to within_interval?' do
+      assert @dataset.respond_to?('within_interval?')
+    end
+    
+    should 'return yes for todays dataset' do
+      assert @dataset.within_interval?(Date.today, Date.today)
     end
   
     should 'respond to find_by_date_interval' do
        assert Dataset.respond_to?('find_by_date_interval')
      end
      
-     #TODO
-     # should 'find a dataset by todays date' do
-     #   assert Dataset.find_by_date_interval(Date.today, Time.now - 1.year).size == 1
-     # end
-     
+    should 'find a dataset by todays date' do
+      assert Dataset.find_by_date_interval(Date.today, Date.today) == [@dataset]
+    end
+    
+    should 'find a dataset in the last month' do
+      assert Dataset.find_by_date_interval(Date.today - 1.month, Date.today) == [@dataset]
+    end
+    
+    should 'not find a dataset from last year' do
+      assert Dataset.find_by_date_interval(Date.today - 1.year - 1.month, Date.today - 1.year) == []
+    end
+    
+    should 'find a dataset if called only with the year' do
+      assert Dataset.find_by_date_interval(Date.today.year, Date.today.year) == [@dataset]
+    end
+    
+    should 'find a dataset if called with english names' do
+      assert Dataset.find_by_date_interval('yesterday','tomorrow') == [@dataset]
+    end
+      
     should 'respond to find_by_keywords' do
-      assert Dataset.find_by_keywords('earth,wind,fire')
+      assert Dataset.respond_to?('find_by_keywords')
     end
     
     should 'find one dataset by keyword earth' do
-      assert Dataset.find_by_keywords('earth').size == 1
       assert Dataset.find_by_keywords('earth') == [@dataset]
     end
     
@@ -81,7 +79,7 @@ class DatasetTest < ActiveSupport::TestCase
     end
     
     should 'not find a dataset by a wrong keyword' do
-      assert Dataset.find_by_keywords('fire') == []
+      assert Dataset.find_by_keywords('noise') == []
     end
     
     should 'respond to find_by_person' do
@@ -89,7 +87,6 @@ class DatasetTest < ActiveSupport::TestCase
     end
     
     should 'find a dataset by person_id' do
-      assert Dataset.find_by_person(@person).size == 1
       assert Dataset.find_by_person(@person) == [@dataset]
     end
     
@@ -102,7 +99,6 @@ class DatasetTest < ActiveSupport::TestCase
     end
     
     should 'find one dataset by theme @theme' do
-      assert Dataset.find_by_theme(@theme).size == 1
       assert Dataset.find_by_theme(@theme) == [@dataset]
     end
     
@@ -111,16 +107,23 @@ class DatasetTest < ActiveSupport::TestCase
       assert Dataset.find_by_theme(new_theme) == []
     end
     
-    should 'respond to find_by_theme_keywords_person_date' do
-      assert Dataset.find_by_theme_person_keywords_date(@theme, @person, 'fire',Date.today)
+    should 'respond to find_by_theme_keywords_person_date_interval' do
+      assert Dataset.respond_to?('find_by_theme_person_keywords_date_interval')
     end
     
-    should 'find one dataset if called with findable words' do
-      assert Dataset.find_by_theme_person_keywords_date(@theme, nil, nil,nil) == [@dataset]
-      assert Dataset.find_by_theme_person_keywords_date(nil, @person, nil,nil) == [@dataset]
-      assert Dataset.find_by_theme_person_keywords_date(nil, nil, 'wind',nil) == [@dataset]
-      
+    should 'find one dataset if called with findable conditions' do
+      assert Dataset.find_by_theme_person_keywords_date_interval(@theme, nil, nil,nil,nil) == [@dataset]
+      assert Dataset.find_by_theme_person_keywords_date_interval(nil, @person, nil,nil,nil) == [@dataset]
+      assert Dataset.find_by_theme_person_keywords_date_interval(nil, nil, 'wind',nil,nil) == [@dataset]     
+      assert Dataset.find_by_theme_person_keywords_date_interval(nil,nil,nil,Date.today-1.month, Date.today) == [@dataset]
+      assert Dataset.find_by_theme_person_keywords_date_interval(@theme,@person, 'wind',nil,nil) == [@dataset]
+      assert Dataset.find_by_theme_person_keywords_date_interval(@theme,@person, 'wind',Date.today.year, Date.today.year) == [@dataset]
     end
     
+    should 'not find a dataset if one of the conditions in not met' do
+      assert Dataset.find_by_theme_person_keywords_date_interval(@theme, @person, 'wind', Date.today - 1.year, Date.today - 1.month) == []
+      assert Dataset.find_by_theme_person_keywords_date_interval(nil, @person,'noise',nil,nil) == []
+      assert Dataset.find_by_theme_person_keywords_date_interval(@theme, @person, 'noise', nil, nil) == []
+    end
   end
 end

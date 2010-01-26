@@ -5,12 +5,13 @@ require 'protocols_controller'
 class ProtocolsController; def rescue_action(e) raise e end; end
 
 class ProtocolsControllerTest < ActionController::TestCase
-  fixtures :protocols
+  #fixtures :protocols
 
   def setup
     @controller = ProtocolsController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
+    @protocol = Factory.create(:protocol)
   end
 
   def test_should_get_index
@@ -33,23 +34,23 @@ class ProtocolsControllerTest < ActionController::TestCase
    end
 
   def test_should_show_protocol
-    get :show, :id => 48
+    get :show, :id => @protocol
     assert_response :success
   end
 
   def test_should_get_edit
-    get :edit, :id => 48
+    get :edit, :id => @protocol
     assert_response :success
   end
   
   def test_should_update_protocol
-    put :update, :id => 48, :protocol => { }
+    put :update, :id => @protocol, :protocol => { }
     assert_redirected_to protocol_path(assigns(:protocol))
   end
   
   def test_should_destroy_protocol
     old_count = Protocol.count
-    delete :destroy, :id => 48
+    delete :destroy, :id => @protocol
     assert_equal old_count-1, Protocol.count
     
     assert_redirected_to protocols_path

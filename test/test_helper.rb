@@ -80,6 +80,7 @@ class ActiveSupport::TestCase
     Factory.define :protocol do |p|
       p.name  'Proto1'
       p.version  0
+      p.dataset Factory.create(:dataset)
     end
 
 end

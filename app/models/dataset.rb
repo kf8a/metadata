@@ -1,4 +1,5 @@
 require 'rexml/document'
+
 include REXML
 class Dataset < ActiveRecord::Base
   has_many :datatables, :order => 'name'
@@ -42,7 +43,7 @@ class Dataset < ActiveRecord::Base
     self.find(:all, :joins => :people, :conditions => {:people => {:id => person_id}})
   end
   
-  def self.find_by_theme_person_keywords_date(theme_id, person_id, keywords, date)
+  def self.find_by_theme_person_keywords_date_interval(theme_id, person_id, keywords, sdate, edate)
     datasets = self.all
     if theme_id
       theme_datasets = self.find_by_theme(theme_id)
@@ -56,7 +57,10 @@ class Dataset < ActiveRecord::Base
       keyword_datasets = self.find_by_keywords(keywords)
       datasets = keyword_datasets & datasets
     end
-    
+    if sdate || edate
+      date_datasets = self.find_by_date_interval(sdate,edate)
+      datasets = date_datasets & datasets
+    end
     datasets
   end
   
@@ -66,8 +70,10 @@ class Dataset < ActiveRecord::Base
   end
   
   def within_interval?(start_date=Date.today, end_date=Date.today)
+    sdate = Chronic.parse(start_date)
+    edate = Chronic.parse(end_date)
     any_within_interval = datatables.collect do |datatable|
-      datatable.within_interval?(start_date, end_date)
+      datatable.within_interval?(sdate, edate)
     end
     #TODO query the start and end dates as well
     return any_within_interval.include?(true)

@@ -1,15 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class DatatableTest < ActiveSupport::TestCase
-  
-  
-  Factory.define :datatable do |d|
-    d.name 'KBS001_001'
-    d.object %q{select now() as sample_date}
-    d.is_sql true
-    d.description 'This is a datatable'
-  end
-  
+    
   context 'datatable with sample_date' do
     setup do
       @datatable = Factory.create(:datatable)
@@ -31,6 +23,9 @@ class DatatableTest < ActiveSupport::TestCase
       assert !@datatable.within_interval?(Date.today - 4.day, Date.today - 2.day)
     end
      
+    should 'work with time values as well' do
+      assert @datatable.within_interval?(Date.today, Time.now + 1.day)
+    end
   end
   
   context 'datatable without sample_date' do
