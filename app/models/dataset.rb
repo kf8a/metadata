@@ -23,7 +23,7 @@ class Dataset < ActiveRecord::Base
   
   def self.find_by_date_interval(start_time, end_time)
     datasets = []
-    Dataset.all.each do |dataset|
+    Dataset.all(:conditions => ['on_web is true']).each do |dataset|
       next unless dataset.within_interval?(start_time, end_time)
       datasets << dataset
     end
@@ -129,7 +129,7 @@ class Dataset < ActiveRecord::Base
     begin_date = nil
     end_date = nil
     datatables.each do |datatable |
-      dates = datatable.eml_temporal_extent
+      dates = datatable.temporal_extent
       begin_date = dates[:begin_date] if begin_date < dates[:begin_date]
       end_date = dates[:end_date] if end_date > dates[:end_date]
     end
