@@ -5,12 +5,13 @@ require 'datasets_controller'
 class DatasetsController; def rescue_action(e) raise e end; end
 
 class DatasetsControllerTest < ActionController::TestCase
-  fixtures :datasets
 
   def setup
     @controller = DatasetsController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
+    @dataset = Factory.create(:dataset)
+    Factory.create(:dataset)
   end
 
   def test_should_get_index
@@ -33,23 +34,23 @@ class DatasetsControllerTest < ActionController::TestCase
   end
 
   def test_should_show_dataset
-    get :show, :id => 5
+    get :show, :id => @dataset
     assert_response :success
   end
 
   def test_should_get_edit
-    get :edit, :id => 5
+    get :edit, :id => @dataset
     assert_response :success
   end
   
   def test_should_update_dataset
-    put :update, :id => 5, :dataset => { }
+    put :update, :id => @dataset, :dataset => { }
     assert_redirected_to dataset_path(assigns(:dataset))
   end
   
   def test_should_destroy_dataset
     old_count = Dataset.count
-    delete :destroy, :id => 5
+    delete :destroy, :id => @dataset
     assert_equal old_count-1, Dataset.count
     
     assert_redirected_to datasets_path

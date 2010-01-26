@@ -54,5 +54,33 @@ class ActiveSupport::TestCase
         end
       end
     end
+    
+    
+    Factory.define :datatable do |d|
+       d.name 'KBS001_001'
+       d.object 'select now() as sample_date'
+       d.is_sql true
+       d.description 'This is a datatable'
+     end
+
+    Factory.define :person do |p|
+      p.sur_name 'bauer'
+      p.given_name 'bill'
+    end
+
+    Factory.define :theme do |t|
+      t.title  'Agronomic'
+    end
+
+    Factory.define :dataset do |d|
+      d.title 'KBS001'
+      d.abstract 'some new dataset'
+    end
+
+    Factory.define :protocol do |p|
+      p.name  'Proto1'
+      p.version  0
+    end
+
 end
 
