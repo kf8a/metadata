@@ -136,9 +136,11 @@ a:hover.edit {
 }
 
 #search-form {
-	border-style: groove;
 	padding: 10px;
-	background-color: #e8e8e8;
+	background-color: #dedede;
+	-moz-border-radius:10px;
+  -webkit-border-radius:10px;
+	
 }
 
 .person-email {
@@ -154,10 +156,11 @@ a:hover.edit {
 
 
 #content h2.study-title a {
-	width: 470px;
-	background-color: #dedede;			text-decoration: none;
+	width: 498px;
+	background-color: #dedede;			
+	text-decoration: none;
 	color: #006633;
-	  -moz-border-radius:10px;
+	-moz-border-radius:10px;
   -webkit-border-radius:10px;
 	font-weight: normal;
 	font-style: normal;
@@ -220,14 +223,11 @@ a:hover.edit {
 #keyword-search {
 	float:left;
 	margin-left: 1em;
+	margin-right: 2em;
 }
 
 input#keyword_list {
 	margin-left: 0;
-}
-
-#bottom-line-search input {
-	margin-left: 2em;
 }
 
 #keyword-search label {
