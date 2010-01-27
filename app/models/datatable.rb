@@ -51,6 +51,9 @@ class Datatable < ActiveRecord::Base
         query = "select max(obs_date), min(obs_date) from (#{object}) as t1" 
         data_start_date, data_end_date = query_datatable_for_temporal_extent(query)
       
+      elsif values.fields.member?('date') 
+        query = "select max(date), min(date) from (#{object}) as t1"
+        data_start_date, data_end_date = query_datatable_for_temporal_extent(query)
       end
     end
     {:begin_date => data_start_date,:end_date => data_end_date}

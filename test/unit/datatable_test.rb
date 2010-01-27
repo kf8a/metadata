@@ -129,6 +129,39 @@ class DatatableTest < ActiveSupport::TestCase
     end
   end
 
+  context 'datatable with date' do
+    setup do
+      @datatable = Factory.create(:datatable, :object => %q{select current_date as obs_date})
+    end
+    should 'return true if interval includes today' do
+      assert @datatable.within_interval?(Date.today, Date.today + 1.day)
+     end
+
+     should 'return false if the interval is later than the data times' do
+       assert !@datatable.within_interval?(Date.today + 1.day, Date.today + 4.day)
+     end
+
+     should 'return false if the interval is earlier than the data times' do
+       assert !@datatable.within_interval?(Date.today - 4.day, Date.today - 2.day)
+     end
+
+
+     should 'have the correct temporal extent' do
+       dates = @datatable.temporal_extent
+       assert dates[:begin_date] == Date.today
+       assert dates[:end_date] == Date.today
+     end
+
+     should 'cache the temporal extent' do
+       assert @datatable.begin_date.nil?
+       assert @datatable.end_date.nil?
+       @datatable.update_temporal_extent
+       assert @datatable.begin_date == Date.today
+       assert @datatable.end_date == Date.today
+     end
+    
+  end
+
   context 'eml generation' do
     setup do 
       @datatable = Factory.create(:datatable)

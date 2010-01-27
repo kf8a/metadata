@@ -16,6 +16,18 @@ class DatasetTest < ActiveSupport::TestCase
     end
   end
   
+  context 'no temporal extent' do
+    setup do
+      @dataset = Factory.create(:dataset, :initiated => '2000-1-1', 
+        :datatables => [Factory.create(:datatable, :object => 'select 1')])
+    end
+    
+    should 'not update temporal extent if extent is missing' do
+      @dataset.update_temporal_extent
+      assert @dataset.initiated == Date.parse('2000-1-1')
+      assert @dataset.completed == nil
+    end
+  end
    
   context 'Current Temporal Extent' do
     setup do
@@ -36,6 +48,7 @@ class DatasetTest < ActiveSupport::TestCase
       assert @dataset.initiated == Date.today
       assert @dataset.completed == Date.today
     end
+
   end
   
   context 'past temporal extent' do

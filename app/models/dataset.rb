@@ -151,8 +151,8 @@ class Dataset < ActiveRecord::Base
   
    def update_temporal_extent
      dates = temporal_extent
-     self.initiated = dates[:begin_date]
-     self.completed = dates[:end_date]
+     self.initiated = dates[:begin_date] if dates[:begin_date]
+     self.completed = dates[:end_date] if dates[:end_date]
      save
    end
   
