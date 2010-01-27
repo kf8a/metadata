@@ -67,6 +67,8 @@ class DatasetTest < ActiveSupport::TestCase
                   :datatables=>[Factory.create(:datatable, {:object => %q{select now() + '2 year' as sample_date}})])
       @unfound_dataset = Factory.create(:dataset, :keyword_list => 'wildfire')
       @theme = Factory.create(:theme, :datasets => [@dataset])
+      # make sure we have an up to date extent
+      @dataset.update_temporal_extent
     end
     
     should 'respond to within_interval?' do
@@ -82,7 +84,7 @@ class DatasetTest < ActiveSupport::TestCase
      end
          
     should 'not find a dataset from last year' do
-      assert Dataset.find_by_year(Date.today - 1.year - 1.month, Date.today - 1.year) == []
+      assert Dataset.find_by_year(Date.today - 1.year - 1.month, Date.today - 1.year - 1.day) == []
     end
     
     should 'find a dataset if called  with the year' do

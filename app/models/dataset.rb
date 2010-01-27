@@ -19,20 +19,15 @@ class Dataset < ActiveRecord::Base
   
   # Finders
   def self.find_signature_set
-    self.find(:all, :conditions => ['core_dataset is true'])
+    self.find(:all, :conditions => ['core_dataset is true and on_web is true'])
   end
   
   def self.find_by_year(syear,eyear)
     self.find_by_date_interval(Date.parse(syear.to_s + '-1-1'), Date.parse(eyear.to_s+'-12-31'))
   end
   
-  def self.find_by_date_interval(start_time, end_time)
-    datasets = []
-    Dataset.all(:conditions => ['on_web is true']).each do |dataset|
-      next unless dataset.within_interval?(start_time, end_time)
-      datasets << dataset
-    end
-    datasets
+  def self.find_by_date_interval(begin_date, end_date)
+    Dataset.all(:conditions => ['on_web is true and (initiated < ? or completed < ?)', end_date,begin_date])
   end
   
   def self.find_by_keywords(keyword_list)
@@ -151,6 +146,7 @@ class Dataset < ActiveRecord::Base
      dates = temporal_extent
      self.initiated = dates[:begin_date]
      self.completed = dates[:end_date]
+     save
    end
   
 private

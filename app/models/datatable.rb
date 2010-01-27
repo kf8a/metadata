@@ -38,18 +38,19 @@ class Datatable < ActiveRecord::Base
   end
   
   def temporal_extent
-    data_start_date = nil
-    data_end_date = nil
+    data_start_date = data_end_date = nil
     if is_sql
     
       values = ActiveRecord::Base.connection.execute(object)
       if values.fields.member?('sample_date')
     
         query = "select max(sample_date), min(sample_date) from (#{object}) as t1"
-    
-        values = ActiveRecord::Base.connection.execute(query)
-        data_start_date = Time.parse(values[0]['min']).to_date
-        data_end_date = Time.parse(values[0]['max']).to_date
+        data_start_date, data_end_date = query_datatable_for_temporal_extent(query)
+        
+      elsif values.fields.member?('obs_date')
+        query = "select max(obs_date), min(obs_date) from (#{object}) as t1" 
+        data_start_date, data_end_date = query_datatable_for_temporal_extent(query)
+      
       end
     end
     {:begin_date => data_start_date,:end_date => data_end_date}
@@ -63,6 +64,11 @@ class Datatable < ActiveRecord::Base
   end
   
 private
+
+  def query_datatable_for_temporal_extent(query)
+    values = ActiveRecord::Base.connection.execute(query)
+    [Time.parse(values[0]['min']).to_date,Time.parse(values[0]['max']).to_date]
+  end
 
   def eml_physical
     p = Element.new('physical')
