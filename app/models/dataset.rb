@@ -22,6 +22,10 @@ class Dataset < ActiveRecord::Base
     self.find(:all, :conditions => ['core_dataset is true'])
   end
   
+  def self.find_by_year(syear,eyear)
+    self.find_by_date_interval(Date.parse(syear.to_s + '-1-1'), Date.parse(eyear.to_s+'-12-31'))
+  end
+  
   def self.find_by_date_interval(start_time, end_time)
     datasets = []
     Dataset.all(:conditions => ['on_web is true']).each do |dataset|
@@ -43,7 +47,7 @@ class Dataset < ActiveRecord::Base
     self.find(:all, :joins => :people, :conditions => {:people => {:id => person_id}})
   end
   
-  def self.find_by_theme_person_keywords_date_interval(theme_id, person_id, keywords, sdate, edate)
+  def self.find_by_theme_person_keywords_year(theme_id, person_id, keywords, syear, eyear)
     datasets = self.all
     if theme_id
       theme_datasets = self.find_by_theme(theme_id)
@@ -57,8 +61,8 @@ class Dataset < ActiveRecord::Base
       keyword_datasets = self.find_by_keywords(keywords)
       datasets = keyword_datasets & datasets
     end
-    if sdate || edate
-      date_datasets = self.find_by_date_interval(sdate,edate)
+    if syear || eyear
+      date_datasets = self.find_by_year(syear,eyear)
       datasets = date_datasets & datasets
     end
     datasets
@@ -68,15 +72,15 @@ class Dataset < ActiveRecord::Base
     person = Person.find(id)
     people.exists?(person)
   end
-  
-  def within_interval?(start_date=Date.today, end_date=Date.today)
-    sdate = Chronic.parse(start_date)
-    edate = Chronic.parse(end_date)
+   
+  def within_interval?(start_date=Date.today, end_date=Date.today)   
+    sdate = start_date.to_date
+    edate = end_date.to_date
     any_within_interval = datatables.collect do |datatable|
       datatable.within_interval?(sdate, edate)
     end
     #TODO query the start and end dates as well
-    return any_within_interval.include?(true)
+    any_within_interval.include?(true)
   end
   
     
@@ -130,16 +134,24 @@ class Dataset < ActiveRecord::Base
     eml_dataset.add_element('additionalMetadata').add_element eml_custom_unit_list
     emldoc.root.to_s
   end
-  
+ 
+  #temporal extent
   def temporal_extent
     begin_date = nil
     end_date = nil
     datatables.each do |datatable |
       dates = datatable.temporal_extent
-      begin_date = dates[:begin_date] if begin_date < dates[:begin_date]
-      end_date = dates[:end_date] if end_date > dates[:end_date]
+      begin_date = dates[:begin_date] if begin_date.nil? || begin_date > dates[:begin_date]
+      end_date = dates[:end_date] if end_date.nil? || end_date < dates[:end_date]
     end
+    {:begin_date => begin_date, :end_date => end_date}
   end
+  
+   def update_temporal_extent
+     dates = temporal_extent
+     self.initiated = dates[:begin_date]
+     self.completed = dates[:end_date]
+   end
   
 private
 

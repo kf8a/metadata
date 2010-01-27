@@ -7,22 +7,10 @@ class Datatable < ActiveRecord::Base
   has_many :variates, :order => :position
   
   def within_interval?(start_date=Date.today, end_date=Date.today)
+    extent = temporal_extent
+    return false if extent[:begin_date].nil?
     
-    return false unless is_sql
-    
-    values = ActiveRecord::Base.connection.execute(object)
-    return false unless values.fields.member?('sample_date')
-    
-    start_date = convert_to_date(start_date)
-    end_date = convert_to_date(end_date)
-    
-    query = "select max(sample_date), min(sample_date) from (#{object}) as t1"
-    
-    values = ActiveRecord::Base.connection.execute(query)
-    data_start_date = Time.parse(values[0]['min']).to_date
-    data_end_date = Time.parse(values[0]['max']).to_date
-
-    !(data_end_date < start_date || data_start_date > end_date) 
+    !(extent[:begin_date] < start_date || extent[:end_date] > end_date) 
   end
       
   def to_eml
@@ -50,8 +38,30 @@ class Datatable < ActiveRecord::Base
   end
   
   def temporal_extent
-    {:begin_date => Time.now(),:end_date => Time.now()}
+    data_start_date = nil
+    data_end_date = nil
+    if is_sql
+    
+      values = ActiveRecord::Base.connection.execute(object)
+      if values.fields.member?('sample_date')
+    
+        query = "select max(sample_date), min(sample_date) from (#{object}) as t1"
+    
+        values = ActiveRecord::Base.connection.execute(query)
+        data_start_date = Time.parse(values[0]['min']).to_date
+        data_end_date = Time.parse(values[0]['max']).to_date
+      end
+    end
+    {:begin_date => data_start_date,:end_date => data_end_date}
   end
+  
+  def update_temporal_extent
+    dates = temporal_extent
+    self.begin_date = dates[:begin_date]
+    self.end_date = dates[:end_date]
+    save
+  end
+  
 private
 
   def eml_physical
