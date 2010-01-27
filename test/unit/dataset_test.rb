@@ -64,10 +64,17 @@ class DatasetTest < ActiveSupport::TestCase
       @dataset = Factory.create(:dataset,:keyword_list => 'earth,wind,fire', :people => [@person], 
             :datatables=>[Factory.create(:datatable)])
       @dataset.studies << @study
+      
       #future dataset
-      Factory.create(:dataset,:keyword_list => 'fire', 
+      study2 = Factory.create(:study)
+      dataset2 = Factory.create(:dataset,:keyword_list => 'fire', 
                   :datatables=>[Factory.create(:datatable, {:object => %q{select now() + '2 year' as sample_date}})])
+      dataset2.studies << study2
+      
       @unfound_dataset = Factory.create(:dataset, :keyword_list => 'wildfire')
+      @unfound_study = Factory.create(:study)
+      @unfound_dataset.studies << @unfound_study
+            
       @theme = Factory.create(:theme, :datasets => [@dataset])
       # make sure we have an up to date extent
       @dataset.update_temporal_extent
@@ -159,6 +166,7 @@ class DatasetTest < ActiveSupport::TestCase
     
     should 'not find the wrong dataset with study' do
       new_study = Factory.create(:study)
+      assert Dataset.find_by_study(@unfound_study) == [@unfound_dataset]
       assert Dataset.find_by_study(new_study) == []
       assert Dataset.find_by_study(new_study.id) == []
       assert Dataset.find_by_study(new_study.id.to_s) == []
@@ -198,6 +206,9 @@ class DatasetTest < ActiveSupport::TestCase
       params = {:theme => {:id => @theme.id}, :person => {:id => @person.id}}
       assert Dataset.find_by_params(params) == [@dataset]
       params = {:theme => {:id => @theme}, :keywords => 'wind'}
+      assert Dataset.find_by_params(params) == [@dataset]
+      params = {:study => {:id => @study}, :theme => {:id => ''}, :person => {:id => ''},
+          :date => {:syear => Date.today.year, :eyear => Date.today.year + 3}}
       assert Dataset.find_by_params(params) == [@dataset]
       
     end

@@ -53,7 +53,7 @@ class Dataset < ActiveRecord::Base
     datasets = self.all
     params.each do |key, value|
       
-      method = 'find_by_'+key
+      method = 'find_by_'+key.to_s
       if value.respond_to?('keys') 
         if value.keys.include?(:id)
           value_id = value[:id]
@@ -61,7 +61,7 @@ class Dataset < ActiveRecord::Base
             datasets = self.send(method.to_sym, value_id) & datasets
           end
         else # we assume that we have a year
-          datasets = Dataset.find_by_year(value[:syear], value[:eyear])
+          datasets = Dataset.find_by_year(value[:syear], value[:eyear]) & datasets
         end
       else
         datasets = self.send(method.to_sym, value) & datasets
