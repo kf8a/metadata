@@ -60,8 +60,10 @@ class DatasetTest < ActiveSupport::TestCase
     
     setup do
       @person = Factory.create(:person)
+      @study = Factory.create(:study)
       @dataset = Factory.create(:dataset,:keyword_list => 'earth,wind,fire', :people => [@person], 
-                                :datatables=>[Factory.create(:datatable)])
+            :datatables=>[Factory.create(:datatable)])
+      @dataset.studies << @study
       #future dataset
       Factory.create(:dataset,:keyword_list => 'fire', 
                   :datatables=>[Factory.create(:datatable, {:object => %q{select now() + '2 year' as sample_date}})])
@@ -119,6 +121,10 @@ class DatasetTest < ActiveSupport::TestCase
       assert Dataset.find_by_person(5) == []
     end
     
+    should 'not find a dataset with an empty person' do
+      assert Dataset.find_by_person('') == []
+    end
+    
     should 'respond to find_by_theme' do
       assert Dataset.find_by_theme(@theme)
     end
@@ -127,27 +133,82 @@ class DatasetTest < ActiveSupport::TestCase
       assert Dataset.find_by_theme(@theme) == [@dataset]
     end
     
+    should 'find the dataset by theme id' do
+      assert Dataset.find_by_theme(@theme.id) == [@dataset]
+      assert Dataset.find_by_theme(@theme.id.to_s) == [@dataset]
+    end
+    
     should 'not find a dataset with a new theme' do
       new_theme = Factory.create(:theme)
       assert Dataset.find_by_theme(new_theme) == []
     end
     
-    should 'respond to find_by_theme_keywords_person_date_interval' do
-      assert Dataset.respond_to?('find_by_theme_person_keywords_year')
+    should 'not find a dataset with an empty string for theme' do
+      assert Dataset.find_by_theme('') == []
     end
     
-    should 'find one dataset if called with findable conditions' do
-      assert Dataset.find_by_theme_person_keywords_year(@theme, nil, nil,nil,nil) == [@dataset]
-      assert Dataset.find_by_theme_person_keywords_year(nil, @person, nil,nil,nil) == [@dataset]
-      assert Dataset.find_by_theme_person_keywords_year(nil, nil, 'wind',nil,nil) == [@dataset]     
-      assert Dataset.find_by_theme_person_keywords_year(@theme,@person, 'wind',nil,nil) == [@dataset]
-      assert Dataset.find_by_theme_person_keywords_year(@theme,@person, 'wind',Date.today.year, Date.today.year) == [@dataset]
+    should 'respond to find_by_study' do
+      assert Dataset.respond_to?('find_by_study') 
     end
     
-    should 'not find a dataset if one of the conditions in not met' do
-      assert Dataset.find_by_theme_person_keywords_year(@theme, @person, 'wind', Date.today.year - 1.year, Date.today.year - 1) == []
-      assert Dataset.find_by_theme_person_keywords_year(nil, @person,'noise',nil,nil) == []
-      assert Dataset.find_by_theme_person_keywords_year(@theme, @person, 'noise', nil, nil) == []
+    should 'find the right dataset with study' do
+      assert Dataset.find_by_study(@study) == [@dataset]
+      assert Dataset.find_by_study(@study.id) == [@dataset]
+      assert Dataset.find_by_study(@study.id.to_s) == [@dataset]
     end
+    
+    should 'not find the wrong dataset with study' do
+      new_study = Factory.create(:study)
+      assert Dataset.find_by_study(new_study) == []
+      assert Dataset.find_by_study(new_study.id) == []
+      assert Dataset.find_by_study(new_study.id.to_s) == []
+    end
+    
+    should 'respond to find_by_params' do
+      assert Dataset.respond_to?('find_by_params')
+    end
+    
+    should 'find one dataset if called with one findable parameter' do
+      params = {:theme => {:id => @theme.id.to_s}}
+      assert Dataset.find_by_params(params) == [@dataset]
+      params = {:person => {:id => @person}}
+      assert Dataset.find_by_params(params) == [@dataset]
+      params = {:keywords => 'wind'}
+      assert Dataset.find_by_params(params) == [@dataset]
+      params = {:study => {:id => @study.id}}
+      assert Dataset.find_by_params(params) == [@dataset]
+      params = {:date => {:syear => Date.today.year, :eyear => Date.today.year}}
+      assert Dataset.find_by_params(params) == [@dataset]
+      
+    end
+    
+    should 'not find dataset if called with  wrong theme' do
+      t = Factory.create(:theme)
+      params = {:theme => {:id => t.id}}
+      assert Dataset.find_by_params(params) == []
+    end
+    
+    should 'not find dataset if called with wrong person' do
+      p = Factory.create(:person)
+      params = {:person => {:id  => p.id}}
+      assert Dataset.find_by_params(params) == []
+    end
+    
+    should 'find one dataset if called with multiple findable parameters' do
+      params = {:theme => {:id => @theme.id}, :person => {:id => @person.id}}
+      assert Dataset.find_by_params(params) == [@dataset]
+      params = {:theme => {:id => @theme}, :keywords => 'wind'}
+      assert Dataset.find_by_params(params) == [@dataset]
+      
+    end
+    
+    should 'find one datasetif a parameter is empty' do    
+      params = {:theme => {:id => ''}, :person => {:id => @person}}
+      assert Dataset.find_by_params(params) == [@dataset]
+      
+      params = {:theme => {:id => nil}, :person => {:id => @person}}
+      assert Dataset.find_by_params(params) == [@dataset]
+    end
+    
   end
 end

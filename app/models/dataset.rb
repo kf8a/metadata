@@ -35,30 +35,37 @@ class Dataset < ActiveRecord::Base
   end
   
   def self.find_by_theme(theme_id)
+    return [] if theme_id == ''
     self.find(:all, :joins => :themes, :conditions => {:themes => {:id => theme_id}})
   end
   
   def self.find_by_person(person_id)
+    return [] if person_id == ''
     self.find(:all, :joins => :people, :conditions => {:people => {:id => person_id}})
   end
   
-  def self.find_by_theme_person_keywords_year(theme_id, person_id, keywords, syear, eyear)
+  def self.find_by_study(study_id)
+    return [] if study_id == ''
+    self.find(:all, :joins => :studies, :conditions => {:studies => {:id => study_id}})
+  end
+  
+  def self.find_by_params(params)
     datasets = self.all
-    if theme_id
-      theme_datasets = self.find_by_theme(theme_id)
-      datasets = theme_datasets & datasets
-    end
-    if person_id
-      person_datasets = self.find_by_person(person_id)
-      datasets = person_datasets & datasets
-    end
-    if keywords && !keywords.empty?  
-      keyword_datasets = self.find_by_keywords(keywords)
-      datasets = keyword_datasets & datasets
-    end
-    if syear || eyear
-      date_datasets = self.find_by_year(syear,eyear)
-      datasets = date_datasets & datasets
+    params.each do |key, value|
+      
+      method = 'find_by_'+key
+      if value.respond_to?('keys') 
+        if value.keys.include?(:id)
+          value_id = value[:id]
+          unless value_id.nil? || value_id == ''
+            datasets = self.send(method.to_sym, value_id) & datasets
+          end
+        else # we assume that we have a year
+          datasets = Dataset.find_by_year(value[:syear], value[:eyear])
+        end
+      else
+        datasets = self.send(method.to_sym, value) & datasets
+      end
     end
     datasets
   end

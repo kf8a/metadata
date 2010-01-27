@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100111173650) do
+ActiveRecord::Schema.define(:version => 20100127131313) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -74,6 +74,8 @@ ActiveRecord::Schema.define(:version => 20100111173650) do
     t.date    "last_updated_on"
     t.text    "access_statement"
     t.integer "excerpt_limit"
+    t.date    "begin_date"
+    t.date    "end_date"
   end
 
   create_table "datatables_variates", :force => true do |t|
@@ -90,6 +92,13 @@ ActiveRecord::Schema.define(:version => 20100111173650) do
     t.integer "coord_dimension",                  :null => false
     t.integer "srid",                             :null => false
     t.string  "type",              :limit => 30,  :null => false
+  end
+
+  create_table "log_hiresyieldmanagement", :id => false, :force => true do |t|
+    t.date    "obsdate"
+    t.integer "obsnumber"
+    t.string  "author"
+    t.text    "observation"
   end
 
   create_table "meeting_abstracts", :force => true do |t|
@@ -331,6 +340,7 @@ ActiveRecord::Schema.define(:version => 20100111173650) do
 
   create_table "venue_types", :force => true do |t|
     t.string "name"
+    t.text   "description"
   end
 
 end

@@ -82,6 +82,10 @@ class ActiveSupport::TestCase
       p.version  0
       p.dataset Factory.create(:dataset)
     end
+    
+    Factory.define :study do |s|
+      s.name 'LTER'
+    end
 
 end
 

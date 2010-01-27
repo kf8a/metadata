@@ -12,37 +12,50 @@ class DatasetsController < ApplicationController
   # GET /datasets
   # GET /datasets.xml
   def index
-    theme = params[:theme] || ''
-    person = params[:person] || ''
-    keyword_list = params[:keyword_list] || ''
+    query =  {'theme' => {'id' => nil}, 'person' => {'id' => nil}, 'study' => {'id' => nil}, 
+      'keywords' => '', 'date' => {'syear' => '1988', 'eyear' => Date.today.year.to_s}}
+    query.merge!(params)
     
-    if params[:theme] || params[:person] || params[:keyword_list]
-      @search_visible = 'hidden'
-    end
-
-    @person = nil
+    theme_id = query['theme']['id']
+    person_id = query['person']['id']
+    study_id = query['study']['id']
+    keyword_list = query['keyword_list']
+    date = query['date']
+        
     @people = Person.find_all_with_dataset(:order => 'sur_name')
-    
-    @studies = Study.all(:order => 'seniority')
-    @signature_datasets = Dataset.find_signature_set
-    
     @themes = Theme.find(:all, :order => :priority)
-    unless theme.empty? || theme[:id].empty?
-        @theme = Theme.find(theme[:id])
-        @themes = [@theme]
+
+    if theme_id && !theme_id.empty?
+      @theme = Theme.find(theme_id)
     end
-    @datasets = Dataset.find(:all)
-    unless person.empty? || person[:id].empty?
-      @person = Person.find(person[:id])
-      person_datasets = Dataset.find_by_person(@person)
-      @datasets = @datasets & person_datasets
+    
+    if person_id && !person_id.empty?
+      @person = Person.find(person_id)
+    end
+    
+    if study_id && !study_id.empty?
+      @study = Study.find(study_id)
+    end
+    
+    if keyword_list
+      @keyword_list = keyword_list
+    end
+            
+   @datasets = Dataset.find_by_params({:theme => {:id => theme_id}, :person => {:id => person_id},
+          :study => {:id => study_id}})
+
+   @signature_datasets = @datasets.collect do |dataset|  
+     dataset if dataset.core_dataset?
    end
-   unless keyword_list.empty?
-     @keyword_list = keyword_list
-     keyword_datasets = Dataset.find_by_keywords(keyword_list)
-     @datasets = @datasets & keyword_datasets
+   @signature_datasets.compact!
+   
+   @studies = @datasets.collect do |dataset|
+     dataset.studies.flatten
    end
-         
+   @studies.flatten!
+   @studies.compact!
+   @studies.uniq!
+                                     
     @crumbs = []
     respond_to do |format|
       format.html # index.rhtml

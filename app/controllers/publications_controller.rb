@@ -94,7 +94,7 @@ class PublicationsController < ApplicationController
          
          flash[:notice] = 'Publications was successfully created.'
          format.html { redirect_to publication_url(@publication) }
-         format.xml  { head :created, :location => publication_url(@publication) }
+         format.xml  { render :xml => @publication, :status => :created, :location => @publication }
        else
          format.html { render :action => "new" }
          format.xml  { render :xml => @publication.errors.to_xml }
