@@ -86,9 +86,6 @@ a:visited.edit {
 	text-decoration: none;
 }
 
-a:visited {
-	text-decoration: none;
-}
 a:hover.edit {
 	text-decoration: underline;
 }
@@ -147,12 +144,6 @@ a:hover.edit {
 	padding-top: 0.5em;
 }
 
-#network-databases {
-	position: absolute;
-	top: 26em;
-	left: 10px;
-	width: 120px;
-}
 
 
 #content h2.study-title a {

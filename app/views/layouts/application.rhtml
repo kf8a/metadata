@@ -29,6 +29,7 @@
 
 		</div>
 		<div id='content'>
+			
 			<p style="color: green"><%= flash[:notice] %></p>
 			<ul id=crumbs>
 				<li><a href='/'>Home</a></li>
@@ -42,6 +43,9 @@
 		</div>
 		<div id='navigation'>
 			<%= render :file => "#{RAILS_ROOT}/public/system/navigation.html"%>
+			<% if controller.controller_name == 'datasets' || controller.controller_name == 'datatables' || controller.controller_name == 'protocols' %>
+			  <%= render :file => "#{RAILS_ROOT}/public/system/network_db.html"%>
+			<% end %>
 		</div>
 		<div id='footer'>
 			<%= render :file  => "#{RAILS_ROOT}/public/system/footer.html"%>

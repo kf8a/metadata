@@ -15,7 +15,7 @@ ul.makeMenu, ul.makeMenu ul {
 	-webkit-border-radius: 10px;	
 
   width: 132px;
-  height: 20em;			/* make the main menu a little taller so the child menus stay on the page */
+  height: 18em;			/* make the main menu a little taller so the child menus stay on the page */
   background-color: #ccc;     /* a bg-color MUST be included for IE to work properly! */
   padding-left: 0;           /* stops the usual indent from ul */
   margin: 0;
@@ -68,4 +68,18 @@ ul.makeMenu li:hover > a { color: #000; } /* supports links in branch headings -
 
 #crumbs li {
 	display: inline;
+}
+
+#network-databases {
+	margin-top: 29px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+#network-databases li{
+ 	list-style-type: none;
+}
+
+#network-databases ul {
+	margin:0px;
+	padding:0;
 }
