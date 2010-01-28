@@ -42,12 +42,14 @@ class DatasetsController < ApplicationController
     end
             
    @datasets = Dataset.find_by_params({:theme => {:id => theme_id}, :person => {:id => person_id},
-          :study => {:id => study_id}, :date => {:syear => date['syear'], :eyear => date['eyear']}})
+          :study => {:id => study_id}, :date => {:syear => date['syear'], :eyear => date['eyear']},
+          :keywords => keyword_list})
 
    @signature_datasets = @datasets.collect do |dataset|  
      dataset if dataset.core_dataset?
    end
    @signature_datasets.compact!
+   
    
    @studies = @datasets.collect do |dataset|
      dataset.studies.flatten
@@ -56,6 +58,8 @@ class DatasetsController < ApplicationController
    @studies.compact!
    @studies.uniq!
    @studies.sort! {|a,b| a.seniority <=> b.seniority}
+   
+   @studies = [@study] if @study
                                      
     @crumbs = []
     respond_to do |format|

@@ -223,7 +223,10 @@ class DatasetTest < ActiveSupport::TestCase
       params = {:study => {:id => @study}, :theme => {:id => ''}, :person => {:id => ''},
           :date => {:syear => Date.today.year, :eyear => Date.today.year + 3}}
       assert Dataset.find_by_params(params) == [@dataset]
-      
+      params = params = {:study => {:id => nil}, :theme => {:id => ''}, :person => {:id => ''},
+          :date => {:syear => Date.today.year, :eyear => Date.today.year + 3},
+          :keywords => 'earth'}
+      assert Dataset.find_by_params(params) == [@dataset]
     end
     
     should 'find one datasetif a parameter is empty' do    
@@ -231,6 +234,11 @@ class DatasetTest < ActiveSupport::TestCase
       assert Dataset.find_by_params(params) == [@dataset]
       
       params = {:theme => {:id => nil}, :person => {:id => @person}}
+      assert Dataset.find_by_params(params) == [@dataset]  
+    end
+    
+    should 'find all datasets if empty keywords' do
+      params = {:theme => {:id => nil}, :person => {:id => @person}, :keywords => ''}
       assert Dataset.find_by_params(params) == [@dataset]
     end
     

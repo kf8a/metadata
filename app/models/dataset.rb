@@ -63,8 +63,10 @@ class Dataset < ActiveRecord::Base
         else # we assume that we have a year
           datasets = Dataset.find_by_year(value[:syear], value[:eyear]) & datasets
         end
-      else
-        datasets = self.send(method.to_sym, value) & datasets
+      else # assume have keywords
+        unless value.nil? || value == ''
+          datasets = self.send(method.to_sym, value) & datasets
+        end
       end
     end
     datasets
