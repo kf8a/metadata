@@ -14,7 +14,10 @@ pre {
 }
 
 a { color: #000; }
-a:visited { color: #666; }
+a:visited { 
+	color: #666; 
+	text-decoration: none; 
+}
 a:hover { color: #fff; background-color:#000; }
 
 .fieldWithErrors {
