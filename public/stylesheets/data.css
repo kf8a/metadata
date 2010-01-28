@@ -81,6 +81,10 @@ a:link.edit{
 	color: #7f7f7f;
 }
 
+a:visited {
+    text-decoration: none;
+}
+
 a:visited.edit {
 	color: #bfbfbf;
 	text-decoration: none;
