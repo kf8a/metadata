@@ -4,6 +4,8 @@
 	<%= textilize @datatable.description %>
 </p>
 
+Temporal Coverage <%= @datatable.begin_date%> to <%= @datatable.end_date %>
+
 <% unless  @datatable.is_sql %>
 <%= link_to 'Data', @datatable.data_url %> (on a different page)
 <% end %>
