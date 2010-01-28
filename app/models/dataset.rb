@@ -145,6 +145,8 @@ class Dataset < ActiveRecord::Base
     end_date = nil
     datatables.each do |datatable |
       dates = datatable.temporal_extent
+      next if dates[:begin_date].nil?
+      next if dates[:end_date].nil?
       begin_date = dates[:begin_date] if begin_date.nil? || begin_date > dates[:begin_date]
       end_date = dates[:end_date] if end_date.nil? || end_date < dates[:end_date]
     end

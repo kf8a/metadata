@@ -32,9 +32,10 @@ class DatasetTest < ActiveSupport::TestCase
   context 'Current Temporal Extent' do
     setup do
       @dataset = Factory.create(:dataset, 
-        :datatables  => [Factory.create(:datatable), 
+        :datatables  => [Factory.create(:datatable, :object => 'select 1'), 
                          Factory.create(:datatable, 
-                         :object => "select now() as sample_date")])
+                         :object => "select now() as sample_date"),
+                         Factory.create(:datatable, :object => 'select 1')])
     end
   
     should 'be today' do
