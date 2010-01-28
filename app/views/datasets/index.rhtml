@@ -9,7 +9,7 @@
       <%= collection_select :study, :id, Study.all(:order => 'seniority'), :id, :name, {:include_blank => 'All'}%>
     </div>
     <div id='contributor-search'>  
-       <label>Contributor:</label><%= collection_select :person, :id, @people, :id, :last_name_first, { :include_blank => "All" } %>
+       <label>Contributor:</label><%= select :person, :id, @people.collect{|x| [truncate(x.last_name_first, :length => 16), x.id]},  { :include_blank => "All" } %>
     </div>
     </div>
     <div id='bottom-line-search'>
