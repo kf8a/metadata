@@ -48,7 +48,7 @@ class DatasetsController < ApplicationController
    @signature_datasets = @datasets.collect do |dataset|  
      dataset if dataset.core_dataset?
    end
-   @signature_datasets.compact!
+   @signature_datasets.compact!.sort!{|a,b| a.title <=> b.title}
    
    
    @studies = @datasets.collect do |dataset|

@@ -41,7 +41,7 @@
     <h2 class="study-title"><a href="<%= study.description %>"><%= study.name%></a></h2>
     <ul>
     
-    		  <% @datasets.each do |dataset| %>
+    		  <% @datasets.sort {|x,y| x.title <=> y.title}.each do |dataset| %>
     		  <% next unless dataset.on_web %>
     		  <% if !logged_in? %>
     		    <% next unless dataset.datatables.size > 0 %>
