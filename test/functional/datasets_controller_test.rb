@@ -153,4 +153,7 @@ class DatasetsControllerTest < ActionController::TestCase
     should_not_set_the_flash
   end
   
+  context 'search without returning a signature dataset' do
+  end
+  
 end
