@@ -56,4 +56,16 @@ class DatatablesControllerTest < ActionController::TestCase
     
     assert_redirected_to datatables_path
   end
+  
+  context 'a datatable without description' do
+    setup do
+      @table = Factory.create(:datatable, :description=>nil, :dataset => Factory.create(:dataset))
+      get :show,  :id => @table
+    end
+    
+    should_respond_with :success
+    should_render_template :show
+    
+  end
+  
 end

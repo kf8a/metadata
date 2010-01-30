@@ -1,10 +1,9 @@
 <h1><%= link_to "#{@datatable.name}", dataset_path(@dataset) %> : <%= @datatable.title %></h1>
 
 <p>
-	<%= textilize @datatable.description %>
+	<%= textilize @datatable.description  if @datatable.description %>
 </p>
 
-Temporal Coverage <%= @datatable.begin_date%> to <%= @datatable.end_date %>
 
 <% unless  @datatable.is_sql %>
 <%= link_to 'Data', @datatable.data_url %> (on a different page)
