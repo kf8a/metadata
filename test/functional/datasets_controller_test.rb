@@ -156,4 +156,17 @@ class DatasetsControllerTest < ActionController::TestCase
   context 'search without returning a signature dataset' do
   end
   
+  context 'dataset with tables not on web' do
+    setup do
+      @dataset = Factory.create(:dataset)
+      @table = Factory.create(:datatable, :dataset => @dataset, :on_web => false)
+      get :show, :id => @dataset
+    end
+    
+    should_respond_with :success
+    should_render_template :show
+    
+    should 'not show the @table'      
+    
+  end
 end

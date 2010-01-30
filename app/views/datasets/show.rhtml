@@ -15,6 +15,7 @@
     <dd>No data available yet</dd>
   <% end %>
 	<% @dataset.datatables.each do |datatable| %>
+	  <% next unless datatable.on_web %>
 		<dt><%= link_to datatable.name, datatable_path(datatable) %> <%= datatable.title %></dt>
 		<dd><%= truncate(datatable.description,{:length=>100}) %></dd>
 	<% end %>

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100127131313) do
+ActiveRecord::Schema.define(:version => 20100130030415) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(:version => 20100127131313) do
     t.integer "excerpt_limit"
     t.date    "begin_date"
     t.date    "end_date"
+    t.boolean "on_web",                 :default => true
   end
 
   create_table "datatables_variates", :force => true do |t|
