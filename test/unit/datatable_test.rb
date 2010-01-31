@@ -96,72 +96,52 @@ class DatatableTest < ActiveSupport::TestCase
     
   end
   
-  context 'datatable with observation_date' do
+  context 'datatable with different date representations' do
     setup do 
-      @datatable = Factory.create(:datatable, :object => %q{select current_date as obs_date})
+      obs_date = Factory.create(:datatable, :object => %q{select current_date as obs_date})
+      datetime = Factory.create(:datatable, :object => %q{select current_date as datetime})
+      date = Factory.create(:datatable, :object => %q{select current_date as date})
+      @date_representations = [obs_date, datetime, date]
     end
     
     should 'return true if interval includes today' do
-     assert @datatable.within_interval?(Date.today, Date.today + 1.day)
+      @date_representations.each do |date_representation|
+        assert date_representation.within_interval?(Date.today, Date.today + 1.day)
+      end
     end
     
     should 'return false if the interval is later than the data times' do
-      assert !@datatable.within_interval?(Date.today + 1.day, Date.today + 4.day)
+      @date_representations.each do |date_representation|
+        assert !date_representation.within_interval?(Date.today + 1.day, Date.today + 4.day)
+      end
     end
     
     should 'return false if the interval is earlier than the data times' do
-      assert !@datatable.within_interval?(Date.today - 4.day, Date.today - 2.day)
+      @date_representations.each do |date_representation|
+        assert !date_representation.within_interval?(Date.today - 4.day, Date.today - 2.day)
+      end
     end
          
     
     should 'have the correct temporal extent' do
-      dates = @datatable.temporal_extent
-      assert dates[:begin_date] == Date.today
-      assert dates[:end_date] == Date.today
+      @date_representations.each do |date_representation|     
+        dates = date_representation.temporal_extent
+        assert dates[:begin_date] == Date.today
+        assert dates[:end_date] == Date.today
+      end
     end
     
     should 'cache the temporal extent' do
-      assert @datatable.begin_date.nil?
-      assert @datatable.end_date.nil?
-      @datatable.update_temporal_extent
-      assert @datatable.begin_date == Date.today
-      assert @datatable.end_date == Date.today
+      @date_representations.each do |date_representation|
+        assert date_representation.begin_date.nil?
+        assert date_representation.end_date.nil?
+        date_representation.update_temporal_extent
+        assert date_representation.begin_date == Date.today
+        assert date_representation.end_date == Date.today
+      end
     end
   end
-
-  context 'datatable with date' do
-    setup do
-      @datatable = Factory.create(:datatable, :object => %q{select current_date as obs_date})
-    end
-    should 'return true if interval includes today' do
-      assert @datatable.within_interval?(Date.today, Date.today + 1.day)
-     end
-
-     should 'return false if the interval is later than the data times' do
-       assert !@datatable.within_interval?(Date.today + 1.day, Date.today + 4.day)
-     end
-
-     should 'return false if the interval is earlier than the data times' do
-       assert !@datatable.within_interval?(Date.today - 4.day, Date.today - 2.day)
-     end
-
-
-     should 'have the correct temporal extent' do
-       dates = @datatable.temporal_extent
-       assert dates[:begin_date] == Date.today
-       assert dates[:end_date] == Date.today
-     end
-
-     should 'cache the temporal extent' do
-       assert @datatable.begin_date.nil?
-       assert @datatable.end_date.nil?
-       @datatable.update_temporal_extent
-       assert @datatable.begin_date == Date.today
-       assert @datatable.end_date == Date.today
-     end
-    
-  end
-
+  
   context 'eml generation' do
     setup do 
       @datatable = Factory.create(:datatable)

@@ -42,17 +42,14 @@ class Datatable < ActiveRecord::Base
     if is_sql
     
       values = ActiveRecord::Base.connection.execute(object)
-      if values.fields.member?('sample_date')
-    
-        query = "select max(sample_date), min(sample_date) from (#{object}) as t1"
-        data_start_date, data_end_date = query_datatable_for_temporal_extent(query)
-        
-      elsif values.fields.member?('obs_date')
-        query = "select max(obs_date), min(obs_date) from (#{object}) as t1" 
-        data_start_date, data_end_date = query_datatable_for_temporal_extent(query)
-      
-      elsif values.fields.member?('date') 
-        query = "select max(date), min(date) from (#{object}) as t1"
+      date_field = case 
+      when values.fields.member?('sample_date') then 'sample_date'
+      when values.fields.member?('obs_date') then 'obs_date'
+      when values.fields.member?('date') then 'date'
+      when values.fields.member?('datetime') then 'datetime'
+      end
+      unless date_field.nil?
+        query = "select max(#{date_field}), min(#{date_field}) from (#{object}) as t1"        
         data_start_date, data_end_date = query_datatable_for_temporal_extent(query)
       end
     end
@@ -61,8 +58,8 @@ class Datatable < ActiveRecord::Base
   
   def update_temporal_extent
     dates = temporal_extent
-    self.begin_date = dates[:begin_date]
-    self.end_date = dates[:end_date]
+    self.begin_date = dates[:begin_date] if dates[:begin_date]
+    self.end_date = dates[:end_date] if dates[:end_date]
     save
   end
   
