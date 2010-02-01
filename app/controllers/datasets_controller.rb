@@ -69,11 +69,11 @@ class DatasetsController < ApplicationController
    @studies = [@study] if @study
                                      
     @crumbs = []
-    # respond_to do |format|
-    #   format.html # index.rhtml
-    #   format.xml  { render :xml => @datasets.to_xml }
-    #   format.eml { render :xml => eml_harvester_list }
-    # end
+    respond_to do |format|
+      format.html # index.rhtml
+      format.xml  { render :xml => @datasets.to_xml }
+      format.eml { render :eml => @datasets }
+    end
   end
 
   # GET /datasets/1
