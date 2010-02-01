@@ -12,6 +12,9 @@ class DatasetsController < ApplicationController
   # GET /datasets
   # GET /datasets.xml
   def index
+    if params[:Dataset] 
+      request.format = :eml
+    end
     query =  {'theme' => {'id' => nil}, 'person' => {'id' => nil}, 'study' => {'id' => nil}, 
       'keywords' => '', 'date' => {'syear' => '1988', 'eyear' => Date.today.year.to_s}}
     query.merge!(params)
