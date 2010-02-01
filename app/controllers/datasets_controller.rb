@@ -58,6 +58,7 @@ class DatasetsController < ApplicationController
    
    
    @studies = @datasets.collect do |dataset|
+     next unless dataset.on_web
      dataset.studies.flatten
    end
    @studies.flatten!
