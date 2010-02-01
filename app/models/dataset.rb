@@ -1,7 +1,7 @@
 require 'rexml/document'
 
 include REXML
-class Dataset < ActiveRecord::Base
+class Dataset < ActiveRecord::Base  
   has_many :datatables, :order => 'name'
   has_many :protocols, :conditions => 'active is true'
   has_many :people, :through => :affiliations
@@ -104,7 +104,7 @@ class Dataset < ActiveRecord::Base
     emldoc = Document.new(%q{<?xml version="1.0" encoding="UTF-8"?>
 <eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.0.0" xmlns:set="http://exslt.org/sets" xmlns:exslt="http://exslt.org/common" xmlns:stmml="http://www.xml-cml.org/schema/stmml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="eml://ecoinformatics.org/eml-2.0.0 eml.xsd" packageId="knb-lter-kbs.1.8" system="KBS LTER">
 </eml:eml>})
-    e = Document.new to_xml
+#    e = Document.new to_xml
     eml_dataset = emldoc.root.add_element('dataset')
     eml_dataset.add_element('title').add_text(title)
     eml_dataset.add_element('creator', {'id' => 'KBS LTER'})
@@ -138,6 +138,7 @@ class Dataset < ActiveRecord::Base
     eml_dataset.add_element('additionalMetadata').add_element eml_custom_unit_list
     emldoc.root.to_s
   end
+  
  
   #temporal extent
   def temporal_extent

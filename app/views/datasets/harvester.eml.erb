@@ -1,3 +1,0 @@
-<% @datasets.each do |dataset| %>
-  	knb-lter-kbs <%=dataset.id %> <%=dataset.version%> eml://ecoinformatics.org/eml-2.0.0 http://sebewa.kbs.msu.edu<%= dataset_path(dataset, :format=>:eml) %>
-<% end %>

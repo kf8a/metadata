@@ -2,7 +2,9 @@ class DatasetsController < ApplicationController
       
   before_filter :set_title, :allow_on_web
   before_filter :login_required, :except => [:index, :show, :auto_complete_for_keyword_list] if ENV["RAILS_ENV"] == 'production'
-    
+  
+  layout proc {|controller| controller.request.format == :eml ? false : 'application'}
+  
   # POST /dataset
   def upload
     file = params[:file]
@@ -66,11 +68,11 @@ class DatasetsController < ApplicationController
    @studies = [@study] if @study
                                      
     @crumbs = []
-    respond_to do |format|
-      format.html # index.rhtml
-      format.xml  { render :xml => @datasets.to_xml }
-      format.eml { render :file => 'datasets/harvester', :layout => false }
-    end
+    # respond_to do |format|
+    #   format.html # index.rhtml
+    #   format.xml  { render :xml => @datasets.to_xml }
+    #   format.eml { render :xml => eml_harvester_list }
+    # end
   end
 
   # GET /datasets/1
@@ -172,7 +174,10 @@ class DatasetsController < ApplicationController
     render :partial => 'tags'
   end
   
+  
+  
   private
+    
   def set_title
     @title  = 'LTER Datasets'
   end

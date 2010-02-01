@@ -169,4 +169,14 @@ class DatasetsControllerTest < ActionController::TestCase
     should 'not show the @table'      
     
   end
+  
+  context 'eml harvester document' do
+    setup do
+      @dataset = Factory.create(:dataset)
+      get :index, :format => :eml
+    end
+    
+    should_respond_with :success
+    
+  end
 end

@@ -15,6 +15,7 @@ Rails::Initializer.run do |config|
   config.gem "fastercsv" unless RUBY_VERSION > "1.9"
   config.gem "acts-as-taggable-on", :source => "http://gemcutter.org"
   config.gem "paperclip"
+  config.gem 'nokogiri'
   
   # Settings in config/environments/* take precedence over those specified here
   
