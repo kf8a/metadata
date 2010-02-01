@@ -1,5 +1,5 @@
 xml.instruct! :xml, :version => '1.0' 
-xml.hrv:harvestlist, :xmlns => 'eml://ecoinformatics.org/harvestList'
+xml.hrv:harvestlist, 'xmlns:hrv' => 'eml://ecoinformatics.org/harvestList'
 
 @datasets.each do |dataset|
 xml.document do
