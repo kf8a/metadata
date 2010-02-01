@@ -66,6 +66,7 @@ class DatasetsController < ApplicationController
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @datasets.to_xml }
+      format.eml { render :file => 'datasets/harvester', :layout => false }
     end
   end
 
