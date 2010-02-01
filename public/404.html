@@ -5,9 +5,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta http-equiv='refresh' content='10;url=http://lter.kbs.msu.edu'>
-  <link rel="stylesheet" type="text/css" href="/css/kbs.css"/>
-  <link rel="stylesheet" type="text/css" href="/css/doc1.css"/>
-   <?php include("../includes/nav.php"); ?>
+	<%= stylesheet_link_merged :base %>
+	<%= stylesheet_link_tag "print", :media =>"print"%>
+  <%= javascript_include_merged :base %>
    <!--[if lte IE 6]>
 <style type="text/css">
 ul.makeMenu li { behavior: url("/iemen.htc"); }
@@ -50,7 +50,6 @@ ul.makeMenu ul { display: none; position: absolute; top: 2px; left: 78px; }
 	  <div id='navigation'>
 			<%= render :file => "#{RAILS_ROOT}/public/system/navigation.html"%>
 			<% if controller.controller_name == 'datasets' || controller.controller_name == 'datatables' || controller.controller_name == 'protocols' %>
-			  <%= render :file => "#{RAILS_ROOT}/public/system/network_db.html"%>
 			<% end %>
 		</div>
 		<div id='footer'>
@@ -58,4 +57,4 @@ ul.makeMenu ul { display: none; position: absolute; top: 2px; left: 78px; }
 		</div>
 	</div>
 </body>
-<!-- InstanceEnd --></html>
+</html>
