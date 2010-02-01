@@ -126,10 +126,10 @@ class Dataset < ActiveRecord::Base
       coverage = eml_dataset.add_element('coverage')
       temporal_coverage = coverage.add_element('temporalCoverage')
       range_of_dates = temporal_coverage.add_element('rangeOfDates')
-      begin_date = range_of_dates.add_element('beginDate')
-      end_date = range_of_dates.add_element('endDate')
-      begin_date.add_element('calendarDate').add_element(initiated)
-      end_date.add_element calendarDate(completed)
+      begin_calendar_date = range_of_dates.add_element('beginDate').add_element('calendarDate')
+      end_calendar_date = range_of_dates.add_element('endDate').add_element('calendarDate')
+      begin_calendar_date.add_text(initiated.to_s)
+      end_calendar_date.add_text(completed.to_s)
     end
 
     datatables.each do |datatable|

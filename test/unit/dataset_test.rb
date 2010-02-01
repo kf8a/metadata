@@ -68,7 +68,18 @@ class DatasetTest < ActiveSupport::TestCase
     
     
   end
+  
+  context 'eml generatation' do
+    setup do 
+      @dataset = Factory.create(:dataset, :initiated => Date.today, :completed => Date.today)
+      @dataset_no_date = Factory.create(:dataset, :datatables  => [Factory.create(:datatable),  Factory.create(:datatable)])    
+    end
     
+    should 'be successful' do
+      assert !@dataset.to_eml.nil?
+      assert !@dataset_no_date.to_eml.nil?
+    end
+  end
 
   context "Finding Datasets" do
     
