@@ -50,13 +50,7 @@ class DatasetsController < ApplicationController
           :study => {:id => study_id}, :date => {:syear => date['syear'], :eyear => date['eyear']},
           :keywords => keyword_list})
 
-   @signature_datasets = @datasets.collect do |dataset|  
-     dataset if dataset.core_dataset?
-   end
-   @signature_datasets.compact!
-   @signature_datasets.sort!{|a,b| a.title <=> b.title} if @signature_datasets
-   
-   
+  
    @studies = @datasets.collect do |dataset|
      next unless dataset.on_web
      dataset.studies.flatten
