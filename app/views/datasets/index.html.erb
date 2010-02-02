@@ -47,6 +47,7 @@
   <% end %>
 </div>
 
+<% if logged_in? %>
 <div id='all datasets'>
   <h2>Unassigned Datasets</h2>
   <% @datasets.each do |dataset| %>
@@ -67,6 +68,7 @@
    
   <% end %>
 </div>
+<% end %>
 		
-<%= link_to 'New dataset', new_dataset_path %> | 
+<%= link_to 'New dataset', new_dataset_path if logged_in? %> | 
 <%= link_to 'login', new_sessions_path %>
