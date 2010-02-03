@@ -12,4 +12,5 @@ $(document).ready(function() {
 	}
 	
 	geo_decode();
+	$('.quickTree').quickTree();
 });
