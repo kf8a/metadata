@@ -59,7 +59,6 @@ class DatasetsControllerTest < ActionController::TestCase
     should_assign_to :datasets
     should_assign_to :people
     should_assign_to :themes
-    should_assign_to :signature_datasets
     
     should_respond_with :success
     should_render_template :index
@@ -77,9 +76,7 @@ class DatasetsControllerTest < ActionController::TestCase
     should_assign_to :people
     should_assign_to :themes
     should_assign_to :studies
-    
-    should_assign_to :signature_datasets
-    
+        
     should_respond_with :success
     should_render_template :index
     should_not_set_the_flash
@@ -97,11 +94,7 @@ class DatasetsControllerTest < ActionController::TestCase
     should_assign_to :themes
     should_assign_to :studies
     should_assign_to :theme
-    
-    should 'have an empty signature_datasets' do
-       assert_equal [], assigns(:signature_datasets)
-     end
-     
+         
      should 'have the right theme' do
        assert @theme == assigns(:theme)
      end
@@ -120,11 +113,7 @@ class DatasetsControllerTest < ActionController::TestCase
     should_assign_to :people
     should_assign_to :themes
     should_assign_to :studies
-    
-    should 'have an empty signature_datasets' do
-      assert_equal [], assigns(:signature_datasets)
-    end
-    
+        
     should_respond_with :success
     should_render_template :index
     should_not_set_the_flash
@@ -152,31 +141,13 @@ class DatasetsControllerTest < ActionController::TestCase
     should_render_template :index
     should_not_set_the_flash
   end
-  
-  context 'search without returning a signature dataset' do
-  end
-  
-  context 'dataset with tables not on web' do
-    setup do
-      @dataset = Factory.create(:dataset)
-      @table = Factory.create(:datatable, :dataset => @dataset, :on_web => false)
-      get :show, :id => @dataset
-    end
     
-    should_respond_with :success
-    should_render_template :show
-    
-    should 'not show the @table'      
-    
-  end
-  
   context 'eml harvester document' do
     setup do
       @dataset = Factory.create(:dataset)
       get :index, :format => :eml
     end
     
-    should_respond_with :success
-    
+    should 'be succesful'
   end
 end
