@@ -81,10 +81,6 @@ a:link.edit{
 	color: #7f7f7f;
 }
 
-a:visited {
-    text-decoration: none;
-}
-
 a:visited.edit {
 	color: #bfbfbf;
 	text-decoration: none;
@@ -150,7 +146,7 @@ a:hover.edit {
 
 
 
-#content h2.study-title a {
+#content h2.study-title {
 	width: 498px;
 	background-color: #dedede;			
 	text-decoration: none;
@@ -223,3 +219,14 @@ input#keyword_list {
 #keyword-search label {
 	display:inline;
 }
+
+tree * {margin:0; padding:0;}
+.tree li {list-style:none; padding-left:21px;}
+.tree li.root {padding-left:0;}
+.tree li li { no-repeat 17px center; margin-left:10px; padding-left:31px;}
+.tree li li.root {padding-left:10px; }
+.tree li li.root.last {background:none; clear:both;}
+.tree li li.last {clear:both;}
+.expand {background:url(/images/plusMinus.gif) no-repeat; width:16px; _width:13px; height:12px; display:block; float:left; margin-top:2px; padding:0 10px 0 0; text-indent:-9999px; line-height:0; font-size:0;}
+.contract {background-position:0 -16px;}
+.expand:hover {cursor:pointer;}

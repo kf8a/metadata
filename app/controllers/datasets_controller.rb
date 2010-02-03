@@ -1,6 +1,7 @@
 class DatasetsController < ApplicationController
       
-  before_filter :set_title, :allow_on_web
+  before_filter :set_title
+  before_filter :allow_on_web, :except => [:autocomplete_for_keyword_list]
   before_filter :login_required, :except => [:index, :show, :auto_complete_for_keyword_list] if ENV["RAILS_ENV"] == 'production'
   
   layout proc {|controller| controller.request.format == :eml ? false : 'application'}
@@ -163,10 +164,10 @@ class DatasetsController < ApplicationController
   end
   
   def auto_complete_for_keyword_list
-    @tags = Tag.find(:all, :conditions => [ 'name LIKE ?',
-        '%' + params[:keyword_list] + '%' ], 
+    tags = Tag.find(:all, :conditions => [ 'name LIKE ?',
+        '%' + params[:q] + '%' ], 
         :order => 'name ASC')
-    render :partial => 'tags'
+    render :text => (tags.collect{|x| x.name}).join("\n")
   end
   
   

@@ -1,9 +1,15 @@
-function geo_decode() {
-		var email  = $('email');
-		if (email != null) {
-			email = email.innerHTML.gsub(/ at /,'@');
-			$('email').replace("<a id='email' href='mailto:"+email+"'>"+email+"</a>");
-		}
-}
 
-window.onload = function() { geo_decode()}
+
+$(document).ready(function() { 
+	function geo_decode() {
+			var email  = $('#email').get(0);
+			if ((email != undefined)) {
+				email = email.innerHTML.split(/ /).join('@');
+
+				$('#email').empty();
+				$('#email').append("<a id='email' href='mailto:"+email+"'>"+email+"</a>");
+			}
+	}
+	
+	geo_decode();
+});
