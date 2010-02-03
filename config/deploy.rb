@@ -64,7 +64,7 @@ task :link_production_db do
 end
 
 task :after_update_code, :roles => :app do
-  %w{publications images}.each do |share|
+  %w{publications}.each do |share|
     run "rm -rf #{release_path}/public/#{share}"
     run "mkdir -p #{shared_path}/system/#{share}"
     run "ln -nfs #{shared_path}/system/#{share} #{release_path}/public/#{share}"
