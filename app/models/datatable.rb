@@ -5,6 +5,7 @@ include REXML
 class Datatable < ActiveRecord::Base
   belongs_to :dataset
   has_many :variates, :order => :position
+  has_and_belongs_to_many :themes
   
   def within_interval?(start_date=Date.today, end_date=Date.today)
     extent = temporal_extent

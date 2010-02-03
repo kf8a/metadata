@@ -2,6 +2,8 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class DatasetTest < ActiveSupport::TestCase
   
+  should_have_and_belong_to_many :themes
+  
   context 'dataset' do
     setup do
       @dataset = Factory.create(:dataset)

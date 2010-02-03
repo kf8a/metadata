@@ -2,6 +2,8 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class DatatableTest < ActiveSupport::TestCase
   
+  should_have_and_belong_to_many :themes
+  
   context 'datatable' do
     setup do
       @datatable = Factory.create(:datatable)
