@@ -233,6 +233,6 @@ tree * {margin:0; padding:0;}
 .tree li li.root {padding-left:10px; }
 .tree li li.root.last {background:none; }
 .tree li li.last {}
-.expand {background:url(/dynamic/images/plus_minus.png) no-repeat; width:16px; _width:13px; height:12px; display:block; float:left; margin-top:0px; padding:0 10px 0 0; text-indent:-9999px; line-height:0; font-size:0;}
+.expand {background:url(/metadata_images/plus_minus.png) no-repeat; width:16px; _width:13px; height:12px; display:block; float:left; margin-top:0px; padding:0 10px 0 0; text-indent:-9999px; line-height:0; font-size:0;}
 .contract {background-position:0 -16px;}
 .expand:hover {cursor:pointer;}
