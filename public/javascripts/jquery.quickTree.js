@@ -12,40 +12,40 @@ jQuery.fn.quickTree = function() {
     return this.each(function(){
 	
 		//set variables
-        var $tree = $(this);
-        var $roots = $tree.find('li');
+        var jQuerytree = jQuery(this);
+        var jQueryroots = jQuerytree.find('li');
         
 		//set last list-item as variable (to allow different background graphic to be applied)
-        $tree.find('li:last-child').addClass('last');
+        jQuerytree.find('li:last-child').addClass('last');
 		
 		//add class to allow styling
-        $tree.addClass('tree');
+        jQuerytree.addClass('tree');
 		
 		//hide all lists inside of main list by default
-        $tree.find('ul').hide();
+        jQuerytree.find('ul').hide();
 		
 		//iterate through all list items
-        $roots.each(function(){
+        jQueryroots.each(function(){
 		
 			//if list-item contains a child list
-            if ($(this).children('ul').length > 0) {
+            if (jQuery(this).children('ul').length > 0) {
 			
 				//add expand/contract control
-                $(this).addClass('root').prepend('<span class="expand" />');
+                jQuery(this).addClass('root').prepend('<span class="expand" />');
 				
             }
             
         }); //end .each
 
 		//handle clicking on expand/contract control
-        $('span.expand').toggle(
+        jQuery('span.expand').toggle(
 			//if it's clicked once, find all child lists and expand
             function(){
-                $(this).toggleClass('contract').nextAll('ul').slideDown();
+                jQuery(this).toggleClass('contract').nextAll('ul').slideDown();
             },
 			//if it's clicked again, find all child lists and contract
             function(){
-                $(this).toggleClass('contract').nextAll('ul').slideUp();
+                jQuery(this).toggleClass('contract').nextAll('ul').slideUp();
             }
         );
     });
