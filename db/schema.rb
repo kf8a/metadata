@@ -96,13 +96,6 @@ ActiveRecord::Schema.define(:version => 20100201141347) do
     t.string  "type",              :limit => 30,  :null => false
   end
 
-  create_table "log_hiresyieldmanagement", :id => false, :force => true do |t|
-    t.date    "obsdate"
-    t.integer "obsnumber"
-    t.string  "author"
-    t.text    "observation"
-  end
-
   create_table "meeting_abstracts", :force => true do |t|
     t.text    "title"
     t.text    "authors"
