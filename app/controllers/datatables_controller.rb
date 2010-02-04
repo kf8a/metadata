@@ -48,11 +48,15 @@ class DatatablesController < ApplicationController
   # GET /datatables/new
   def new
     @datatable = Datatable.new
+    @themes = Theme.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
+    @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
   end
 
   # GET /datatables/1;edit
   def edit
     @datatable = Datatable.find(params[:id])
+    @themes = Theme.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
+    @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
   end
 
   # POST /datatables

@@ -14,3 +14,11 @@
 	<label for='datatable_description'>Description</label>
 	<%= f.text_area :description, :size => '60x10' %>
 </p>
+<p>
+  <label for='datatable_theme'>KBS Theme</label>
+  <%= f.select :theme_id, @themes %>
+</p>
+<p>
+  <label for='datatable_theme'>LTER Core Area</label>
+  <%= f.select :core_area_id, @core_areas %>
+</p>

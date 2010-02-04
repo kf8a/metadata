@@ -1,5 +1,5 @@
 <% @themes.each do |theme| -%>
-	<h2><%= theme.title %></h2>
+	<h2><%= theme.name %></h2>
 		<ul>
 		<% theme.datasets.each do |dataset| -%>
 		<% next unless dataset.on_web %>

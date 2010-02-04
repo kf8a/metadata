@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100203164718) do
+ActiveRecord::Schema.define(:version => 20100204163035) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -30,6 +30,10 @@ ActiveRecord::Schema.define(:version => 20100203164718) do
     t.integer "variate_id"
     t.integer "position"
     t.string  "name"
+  end
+
+  create_table "core_areas", :force => true do |t|
+    t.string "name"
   end
 
   create_table "datasets", :force => true do |t|
@@ -78,13 +82,8 @@ ActiveRecord::Schema.define(:version => 20100203164718) do
     t.date    "begin_date"
     t.date    "end_date"
     t.boolean "on_web",                 :default => true
-  end
-
-  create_table "datatables_themes", :id => false, :force => true do |t|
-    t.integer  "datatable_id"
-    t.integer  "theme_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer "theme_id"
+    t.integer "core_area_id"
   end
 
   create_table "datatables_variates", :force => true do |t|
@@ -310,7 +309,7 @@ ActiveRecord::Schema.define(:version => 20100203164718) do
   end
 
   create_table "themes", :force => true do |t|
-    t.string  "title"
+    t.string  "name"
     t.integer "priority"
     t.integer "parent_id"
     t.integer "lft"

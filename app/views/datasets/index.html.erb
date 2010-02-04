@@ -3,7 +3,7 @@
   <%= form_tag '/datasets', :method => 'get'%>
   <div id='top-line-search'>
     <div id='core-area-search'>
-    <label>Theme/LTER Core Area</label> <%= collection_select :theme, :id,  @themes, :id, :title, { :include_blank => "All" }%>
+    <label>Theme/LTER Core Area</label> <%= collection_select :theme, :id,  @themes, :id, :name, { :include_blank => "All" }%>
     </div>
     <div id='experiment-search'>
       <label>Long-term Experiment</label>

@@ -2,7 +2,8 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class DatatableTest < ActiveSupport::TestCase
   
-  should_have_and_belong_to_many :themes
+  should_belong_to :theme
+  should_belong_to :core_area
   
   context 'datatable' do
     setup do

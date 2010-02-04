@@ -69,7 +69,7 @@ class ActiveSupport::TestCase
     end
 
     Factory.define :theme do |t|
-      t.title  'Agronomic'
+      t.name  'Agronomic'
     end
 
     Factory.define :dataset do |d|
