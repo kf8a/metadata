@@ -34,7 +34,7 @@
 <h2>Themes</h2>
 <ul>
 <% @themes.each do |theme| -%>
-  <li><%= theme.title %><%= check_box_tag 'dataset[theme_ids][]', theme.id, @dataset.themes.include?(theme)%></li>
+  <li><%= theme.name %><%= check_box_tag 'dataset[theme_ids][]', theme.id, @dataset.themes.include?(theme)%></li>
 <% end -%>
 </ul>
 <h2>Study associations</h2>
