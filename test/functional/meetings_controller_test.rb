@@ -4,7 +4,7 @@ require 'meetings_controller'
 # Re-raise errors caught by the controller.
 class MeetingsController; def rescue_action(e) raise e end; end
 
-class MeetingsControllerTest < Test::Unit::TestCase
+class MeetingsControllerTest < ActionController::TestCase
   def setup
     @controller = MeetingsController.new
     @request    = ActionController::TestRequest.new

@@ -1,0 +1,13 @@
+<h1>Editing dataset <%=@dataset.dataset %></h1>
+
+<%= error_messages_for :dataset %>
+
+<% form_for(:dataset, :url => dataset_path(@dataset), :html => { :method => :put }) do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f, :dataset => @dataset, :people => @people, :roles => @roles} %>
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', dataset_path(@dataset) %> |
+<%= link_to 'Back', datasets_path %>

@@ -1,6 +1,7 @@
 require 'rexml/document'
+
 include REXML
-class Dataset < ActiveRecord::Base
+class Dataset < ActiveRecord::Base  
   has_many :datatables, :order => 'name'
   has_many :protocols, :conditions => 'active is true'
   has_many :people, :through => :affiliations
@@ -8,7 +9,85 @@ class Dataset < ActiveRecord::Base
   has_many :roles, :through => :affiliations, :uniq => true
   has_and_belongs_to_many :themes
   belongs_to :project
+  has_and_belongs_to_many :studies
+  
+  validates_presence_of :abstract
 
+  accepts_nested_attributes_for :affiliations, :allow_destroy => true
+  
+  acts_as_taggable_on :keywords
+  
+  # Finders
+  def self.find_signature_set
+    self.find(:all, :conditions => ['core_dataset is true and on_web is true'])
+  end
+  
+  def self.find_by_year(syear,eyear)
+    self.find_by_date_interval(Date.parse(syear.to_s + '-1-1'), Date.parse(eyear.to_s+'-12-31'))
+  end
+  
+  def self.find_by_date_interval(begin_date, end_date)
+    Dataset.all(:conditions => ['on_web is true and (initiated < ? or completed < ?)', end_date,begin_date])
+  end
+  
+  def self.find_by_keywords(keyword_list)
+    self.find_tagged_with(keyword_list,:on => 'keywords')
+  end
+  
+  def self.find_by_theme(theme_id)
+    return [] if theme_id == ''
+    self.find(:all, :joins => :themes, :conditions => {:themes => {:id => theme_id}})
+  end
+  
+  def self.find_by_person(person_id)
+    return [] if person_id == ''
+    self.find(:all, :joins => :people, :conditions => {:people => {:id => person_id}})
+  end
+  
+  def self.find_by_study(study_id)
+    return [] if study_id == ''
+    self.find(:all, :joins => :studies, :conditions => {:studies => {:id => study_id}})
+  end
+  
+  def self.find_by_params(params)
+    datasets = self.all
+    params.each do |key, value|
+      
+      method = 'find_by_'+key.to_s
+      if value.respond_to?('keys') 
+        if value.keys.include?(:id)
+          value_id = value[:id]
+          unless value_id.nil? || value_id == ''
+            datasets = self.send(method.to_sym, value_id) & datasets
+          end
+        else # we assume that we have a year
+          datasets = Dataset.find_by_year(value[:syear], value[:eyear]) & datasets
+        end
+      else # assume have keywords
+        unless value.nil? || value == ''
+          datasets = self.send(method.to_sym, value) & datasets
+        end
+      end
+    end
+    datasets
+  end
+  
+  def has_person(id)
+    person = Person.find(id)
+    people.exists?(person)
+  end
+   
+  def within_interval?(start_date=Date.today, end_date=Date.today)   
+    sdate = start_date.to_date
+    edate = end_date.to_date
+    any_within_interval = datatables.collect do |datatable|
+      datatable.within_interval?(sdate, edate)
+    end
+    #TODO query the start and end dates as well
+    any_within_interval.include?(true)
+  end
+  
+    
   #unpack and populate datatables and variates  
   def from_eml(dataset)
     dataset.elements.each do |element|
@@ -25,7 +104,7 @@ class Dataset < ActiveRecord::Base
     emldoc = Document.new(%q{<?xml version="1.0" encoding="UTF-8"?>
 <eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.0.0" xmlns:set="http://exslt.org/sets" xmlns:exslt="http://exslt.org/common" xmlns:stmml="http://www.xml-cml.org/schema/stmml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="eml://ecoinformatics.org/eml-2.0.0 eml.xsd" packageId="knb-lter-kbs.1.8" system="KBS LTER">
 </eml:eml>})
-    e = Document.new to_xml
+#    e = Document.new to_xml
     eml_dataset = emldoc.root.add_element('dataset')
     eml_dataset.add_element('title').add_text(title)
     eml_dataset.add_element('creator', {'id' => 'KBS LTER'})
@@ -41,13 +120,47 @@ class Dataset < ActiveRecord::Base
     eml_dataset.add_element('abstract').add_element('para').add_text(abstract)
     eml_dataset.add_element keyword_sets
     eml_dataset.add_element contact_info
-    eml_dataset.add_element access
+    eml_dataset.add_element eml_access
+
+    unless initiated.nil? or completed.nil?
+      coverage = eml_dataset.add_element('coverage')
+      temporal_coverage = coverage.add_element('temporalCoverage')
+      range_of_dates = temporal_coverage.add_element('rangeOfDates')
+      begin_calendar_date = range_of_dates.add_element('beginDate').add_element('calendarDate')
+      end_calendar_date = range_of_dates.add_element('endDate').add_element('calendarDate')
+      begin_calendar_date.add_text(initiated.to_s)
+      end_calendar_date.add_text(completed.to_s)
+    end
+
     datatables.each do |datatable|
       eml_dataset.add_element datatable.to_eml
     end
     eml_dataset.add_element('additionalMetadata').add_element eml_custom_unit_list
     emldoc.root.to_s
   end
+  
+ 
+  #temporal extent
+  def temporal_extent
+    begin_date = nil
+    end_date = nil
+    datatables.each do |datatable |
+      dates = datatable.temporal_extent
+      datatable.update_temporal_extent
+      next if dates[:begin_date].nil?
+      next if dates[:end_date].nil?
+      begin_date = dates[:begin_date] if begin_date.nil? || begin_date > dates[:begin_date]
+      end_date = dates[:end_date] if end_date.nil? || end_date < dates[:end_date]
+    end
+    {:begin_date => begin_date, :end_date => end_date}
+  end
+  
+   def update_temporal_extent
+     dates = temporal_extent
+     self.initiated = dates[:begin_date] if dates[:begin_date]
+     self.completed = dates[:end_date] if dates[:end_date]
+     save
+   end
   
 private
 
@@ -76,7 +189,7 @@ private
     return i
   end
   
-  def access
+  def eml_access
     a = Element.new('access')
     a.add_attribute('scope','document')
     a.add_attribute('order','allowFirst')

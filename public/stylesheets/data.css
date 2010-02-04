@@ -1,3 +1,7 @@
+.hidden {
+	visibility: hidden;
+	height: 0px;;
+}
 .bulleted {
 	list-style-type: circle;
 	text-indent: 1em;
@@ -7,11 +11,6 @@
 #searchform input {
 	margin-right:0.05em;
 	color:#CCCCCC;
-}
-#content h3 {
-	font-size: 1.2em;
-	font-weight: bold;
-	color: #006633;
 }
 
 #content h1 {
@@ -34,7 +33,7 @@
 	font-weight: bold;
 }
 
-.person_name {
+.person-name {
 	color: #006633;
 	font-size: 1.4em;
 	margin-bottom: 0.2em;
@@ -53,7 +52,7 @@
 }
 
 .citation {
-	margin-bottom: 1en;
+	margin-bottom: 1em;
 }
 
 label {
@@ -82,14 +81,15 @@ a:link.edit{
 	color: #7f7f7f;
 }
 
+a:visited {
+    text-decoration: none;
+}
+
 a:visited.edit {
 	color: #bfbfbf;
 	text-decoration: none;
 }
 
-a:visited {
-	text-decoration: none;
-}
 a:hover.edit {
 	text-decoration: underline;
 }
@@ -124,10 +124,102 @@ a:hover.edit {
 }
 */
 
-.core_dataset {
-	background: url(../images/core.png) no-repeat right top;
+.no-data {
+	color: #939393;
 }
 
-.no_data {
-	color: #939393;
+.person {
+	margin-top: 1em;
+}
+
+.select-box {
+	width: 200px;
+}
+
+#search-form {
+	padding: 10px;
+	background-color: #dedede;
+	-moz-border-radius:10px;
+  -webkit-border-radius:10px;
+	
+}
+
+.person-email {
+	padding-top: 0.5em;
+}
+
+
+
+#content h2.study-title a {
+	width: 498px;
+	background-color: #dedede;			
+	text-decoration: none;
+	color: #006633;
+	-moz-border-radius:10px;
+  -webkit-border-radius:10px;
+	font-weight: normal;
+	font-style: normal;
+	display: block;
+	font-variant: normal;
+	padding: 0 2em 0;
+}
+
+#core-area-search {
+	float:left
+}
+
+#core-area-search label {
+	padding-right: 5px;
+}
+
+
+#contributor-search {
+	float: left;
+}
+
+#contributor-search label {
+	text-align: center;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+#top-line-search {
+	height: 5em;
+}
+
+
+#experiment-search {
+	float:left
+}
+
+#experiment-search label {
+	text-align: center;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+#bottom-line-search {
+	clear: both;
+}
+
+#year-search {
+	float:left;
+}
+
+#year-search label {
+	display:inline;
+}
+
+#keyword-search {
+	float:left;
+	margin-left: 1em;
+	margin-right: 2em;
+}
+
+input#keyword_list {
+	margin-left: 0;
+}
+
+#keyword-search label {
+	display:inline;
 }

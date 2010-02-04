@@ -7,12 +7,14 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect 'people/alphabetical', :controller => 'people', :action => 'alphabetical', :requirements => { :method => :get }
   map.connect 'people/emeritus', :controller => 'people', :action => 'emeritus', :requirements => {:method => :get}
+  map.connect 'people/show_all', :controller => 'people', :action => 'show_all'
   
   map.resources :people
 
   map.resources :protocols
 
-  map.resources :datasets
+  map.resources :datasets, :collection => {:set_affiliation_for => :post,
+                                           :auto_complete_for_keyword_list => :get}
 
   map.resources :datatables
 

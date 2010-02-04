@@ -4,13 +4,14 @@ require 'protocols_controller'
 # Re-raise errors caught by the controller.
 class ProtocolsController; def rescue_action(e) raise e end; end
 
-class ProtocolsControllerTest < Test::Unit::TestCase
-  fixtures :protocols
+class ProtocolsControllerTest < ActionController::TestCase
+  #fixtures :protocols
 
   def setup
     @controller = ProtocolsController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
+    @protocol = Factory.create(:protocol)
   end
 
   def test_should_get_index
@@ -25,31 +26,31 @@ class ProtocolsControllerTest < Test::Unit::TestCase
   end
   
   def test_should_create_protocol
-    old_count = Protocol.count
-    post :create, :protocol => { }
-    assert_equal old_count+1, Methocol.count
-    
-    assert_redirected_to protocol_path(assigns(:protocol))
-  end
+     old_count = Protocol.count
+     post :create, :protocol => {:dataset_id => 35 }
+     assert_equal old_count+1, Protocol.count
+     
+     assert_redirected_to protocol_path(assigns(:protocol))
+   end
 
   def test_should_show_protocol
-    get :show, :id => 48
+    get :show, :id => @protocol
     assert_response :success
   end
 
   def test_should_get_edit
-    get :edit, :id => 48
+    get :edit, :id => @protocol
     assert_response :success
   end
   
   def test_should_update_protocol
-    put :update, :id => 48, :protocol => { }
+    put :update, :id => @protocol, :protocol => { }
     assert_redirected_to protocol_path(assigns(:protocol))
   end
   
   def test_should_destroy_protocol
-    old_count = Methocol.count
-    delete :destroy, :id => 48
+    old_count = Protocol.count
+    delete :destroy, :id => @protocol
     assert_equal old_count-1, Protocol.count
     
     assert_redirected_to protocols_path

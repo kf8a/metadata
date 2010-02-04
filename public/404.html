@@ -1,30 +1,60 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><!-- InstanceBegin template="/Templates/page2.dwt.php" codeOutsideHTMLIsLocked="false" -->
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <title>The page you were looking for doesn't exist (404)</title>
-	<style type="text/css">
-		body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-		div.dialog {
-			width: 25em;
-			padding: 0 4em;
-			margin: 4em auto 0 auto;
-			border: 1px solid #ccc;
-			border-right-color: #999;
-			border-bottom-color: #999;
-		}
-		h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
-	</style>
-</head>
-
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv='refresh' content='10;url=http://lter.kbs.msu.edu'>
+	<%= stylesheet_link_merged :base %>
+	<%= stylesheet_link_tag "print", :media =>"print"%>
+  <%= javascript_include_merged :base %>
+   <!--[if lte IE 6]>
+<style type="text/css">
+ul.makeMenu li { behavior: url("/iemen.htc"); }
+ul.makeMenu ul { display: none; position: absolute; top: 2px; left: 78px; }
+</style>
+<![endif]-->
+  <title>KBS - </title>
+ </head>
 <body>
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <h1>The page you were looking for doesn't exist.</h1>
-    <p>You may have mistyped the address or the page may have moved.</p>
-  </div>
+
+
+<div id="wrapper">
+	<div id='branding'>
+		<a id='msu_logo' href="http://www.msu.edu">
+			<img alt="Michigan State University" src="/images/common/logo_msu_pos_122.gif"/>
+		</a>
+		<h1><%= @title %></h1>
+		<div id="topcoloredbar">
+			<div id='search'>
+				<a href="/people">People</a>
+
+				<form action="http://www.google.com/u/ltersearch" method='get' id="searchform">
+					<input type='text' name='q' maxlength='255' size='20' value="Search KBS LTER" onfocus="if(this.value==defaultValue) this.value=''" onblur="if(this.value=='') this.value=defaultValue" />
+				</form>
+			</div>
+			<h2><a href='/'>The KBS LTER Site</a></h2>
+		</div>
+
+	</div>
+	<div id='content'>
+		
+	  <h3>The page you requested could not be found.</h3>
+	  <ul>
+	    <li>To report this problem, contact the <a href="mailto:bfox@kbs.msu.edu">webmaster</a>  </li>
+        <li>To continue browsing, click the back button on your browser. </li>
+	   </ul>
+	   <p>Please wait, after 10 seconds this page will send you back to the KBS LTER home page or click <a href="http://houghton.kbs.msu.edu">here</a> to go there now.
+	  
+	  </div>
+	  <div id='navigation'>
+			<%= render :file => "#{RAILS_ROOT}/public/system/navigation.html"%>
+			<% if controller.controller_name == 'datasets' || controller.controller_name == 'datatables' || controller.controller_name == 'protocols' %>
+			<% end %>
+		</div>
+		<div id='footer'>
+			<%= render :file  => "#{RAILS_ROOT}/public/system/footer.html"%>
+		</div>
+	</div>
 </body>
 </html>

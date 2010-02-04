@@ -11,15 +11,14 @@ set :deploy_to, "/var/u/apps/#{application}"
 set :user, 'deploy'
 set :use_sudo, false
 
-set :branch, "master"
+set :branch, "searching"
 set :deploy_via, :copy
 #set :git_enable_submodules,1
 
-set :mongrel_conf, '/etc/mongrel_cluster/metadata.yml'
 
-role :app, 'houghton.kbs.msu.edu'
-role :web, 'houghton.kbs.msu.edu'
-role :db,  'houghton.kbs.msu.edu', :primary => true
+role :app, 'sebewa.kbs.msu.edu'
+role :web, 'sebewa.kbs.msu.edu'
+role :db,  'sebewa.kbs.msu.edu', :primary => true
 
 namespace :deploy do
   namespace :thin do
@@ -30,7 +29,6 @@ namespace :deploy do
       end
     end
    end
-  
   namespace :mongrel do
     [ :stop, :start, :restart ].each do |t|
       desc "#{t.to_s.capitalize} the mongrel appserver"
@@ -40,17 +38,17 @@ namespace :deploy do
       end
     end
   end
-  
+
   desc "Custom restart task for thin cluster"
   task :restart, :roles => :app, :except => { :no_release => true } do
     deploy.thin.restart
   end
-  
+
   desc "Custom start task for thin cluster"
   task :start, :roles => :app do
     deploy.thin.start
   end
-  
+
   desc "Custom stop task for thin cluster"
   task :stop, :roles => :app do
     deploy.thin.stop

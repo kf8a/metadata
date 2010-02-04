@@ -4,7 +4,7 @@ require 'variates_controller'
 # Re-raise errors caught by the controller.
 class VariatesController; def rescue_action(e) raise e end; end
 
-class VariatesControllerTest < Test::Unit::TestCase
+class VariatesControllerTest < ActionController::TestCase
   fixtures :variates
 
   def setup

@@ -1,12 +1,15 @@
 class PublicationsController < ApplicationController
   
   before_filter :login_required, :except => [:index, :show, :index_by_treatment]  if ENV["RAILS_ENV"] == 'production'
+  caches_action :index
   
   # GET /publications
   # GET /publications.xml
   def index
     @crumbs = []
     @pub_type = params[:type]
+    @word = params[:word]
+
     publication_types  = PublicationType.find_all_by_name(@pub_type)
     if publication_types.empty?
       @pub_type = ''
@@ -21,7 +24,7 @@ class PublicationsController < ApplicationController
       order = 'citation'
       @decoration = 'by Author'
     end
-  
+    
     if params[:treatment]
       @alphabetical = true
       treatment = Treatment.find(params[:treatment])  if params[:treatment]
@@ -31,6 +34,11 @@ class PublicationsController < ApplicationController
     @publications = Publication.find(:all, :order => order, 
       :conditions => [conditions, publication_types])
     end
+    
+    if @word
+      @publications = Publication.find_by_word(@word)
+    end
+    
     
     respond_to do |format|
       format.html # index.rhtml
@@ -82,9 +90,11 @@ class PublicationsController < ApplicationController
 
     respond_to do |format|
        if @publication.save
+         expire_action :action => :index
+         
          flash[:notice] = 'Publications was successfully created.'
          format.html { redirect_to publication_url(@publication) }
-         format.xml  { head :created, :location => publication_url(@publication) }
+         format.xml  { render :xml => @publication, :status => :created, :location => @publication }
        else
          format.html { render :action => "new" }
          format.xml  { render :xml => @publication.errors.to_xml }
@@ -99,6 +109,8 @@ class PublicationsController < ApplicationController
      
      respond_to do |format|
        if @publication.update_attributes(params[:publication])
+         expire_action :action => :index
+         
          flash[:notice] = 'Publications was successfully updated.'
          format.html { redirect_to publication_url(@publication) }
          format.xml  { head :ok }
@@ -114,6 +126,9 @@ class PublicationsController < ApplicationController
   def destroy
       @publication = Publication.find(params[:id])
       @publication.destroy
+      
+      expire_action :action => :index
+      
       respond_to do |format|
         format.html { redirect_to publications_url }
         format.js  do

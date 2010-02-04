@@ -10,14 +10,37 @@ class Person < ActiveRecord::Base
   
   #acts_as_taggable
   
-  def full_name
+  def get_all_lter_roles
+    roles = lter_roles.collect {|x| x.name.singularize }
+  end
+  
+  def only_emeritus?
+    emeritus_roles = lter_roles.collect   {|role| role.emeritus? }
+    emeritus_roles.reject! {|x| !x }
+    emeritus_roles.size == lter_roles.size 
+  end
+  
+  def normal_given_name
     name = given_name
-    if friendly_name && friendly_name.size > 0
-      name = friendly_name
-    end
-    name += " "
-    name += sur_name
-    return name
+     if friendly_name && friendly_name.size > 0
+       name = friendly_name
+     end
+    name
+  end
+  
+  def full_name
+    normal_given_name + " "  + sur_name
+  end
+  
+  def last_name_first
+    sur_name + ', ' + normal_given_name
+  end
+  
+  #hack
+  def short_full_name 
+    fn = full_name
+    chars = fn.mb_chars
+    (chars.length > 30 ? chars[0...30] + '...' : chars).to_s
   end
     
   def unique_dataset_role_names
@@ -29,6 +52,15 @@ class Person < ActiveRecord::Base
     address = address + ' '
     address = street_address || ''
     return address
+  end
+  
+  def self.find_all_with_dataset(options={})
+    people = Person.all(options).collect {|x| x if x.has_dataset?}
+    people.compact
+  end
+    
+  def has_dataset?
+    self.dataset_roles.size > 0
   end
   
   # def lter_role_ids=(role_ids)

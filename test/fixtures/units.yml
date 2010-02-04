@@ -1,1231 +1,1261 @@
 --- 
-units_203: 
-  name: tonnesPerAcre
-  in_eml: f
-  id: "208"
-  description: ""
-  definition: stmml:unit name="tonnesPerAcre" unitType="arealMass" parentSI="kilogramsPerHectare" multiplierToSI="1000.0"
-units_176: 
-  name: squareMeter
-  in_eml: t
-  id: "179"
-  description: square meters
-  definition: 
-units_148: 
-  name: nanosecond
-  in_eml: t
-  id: "151"
-  description: 1/1000000 of a second
-  definition: 
-units_063: 
-  name: hectare
-  in_eml: t
-  id: "65"
-  description: 1 hectare is 10^4 square meters
-  definition: 
-units_034: 
-  name: dekagram
-  in_eml: t
-  id: "36"
-  description: .01 kg
-  definition: 
-units_006: 
-  name: are
-  in_eml: t
-  id: "8"
-  description: 100 square meters
-  definition: 
-units_091: 
-  name: liter
-  in_eml: t
-  id: "95"
-  description: 1000 cm^3
-  definition: 
-units_204: 
-  name: wattsPerSquareMeter
-  in_eml: f
-  id: "209"
-  description: ""
-  definition: stmml:unit name="wattsPerSquareMeter" unitType="energy" parentSI="joule" multiplierToSI="0.000011574"
-units_177: 
-  name: squareMeterPerKilogram
-  in_eml: t
-  id: "180"
-  description: square meters per kilogram
-  definition: 
-units_149: 
-  name: nauticalMile
-  in_eml: t
-  id: "152"
-  description: nautical mile
-  definition: 
-units_064: 
-  name: hectogram
-  in_eml: t
-  id: "66"
-  description: .1 kg
-  definition: 
-units_035: 
-  name: dekameter
-  in_eml: t
-  id: "37"
-  description: 10 meters
-  definition: 
-units_007: 
-  name: atmosphere
-  in_eml: t
-  id: "9"
-  description: 1 atmosphere = 101325 pascals
-  definition: 
-units_092: 
-  name: litersPerHectare
-  in_eml: t
-  id: "96"
-  description: liters per hectare
-  definition: 
-units_205: 
-  name: megajoule
-  in_eml: f
-  id: "210"
-  description: ""
-  definition: stmml:unit name="megaJoule" unitType="energy" parentSI="joule" multiplyerToSi="1000"
-units_178: 
-  name: squareMile
-  in_eml: t
-  id: "181"
-  description: 1 mile squared
-  definition: 
-units_120: 
-  name: milesPerHour
-  in_eml: t
-  id: "123"
-  description: miles per hour
-  definition: 
-units_065: 
-  name: hectometer
-  in_eml: t
-  id: "67"
-  description: 100 meters
-  definition: 
-units_036: 
-  name: dekasecond
-  in_eml: t
-  id: "38"
-  description: 10 seconds
-  definition: 
-units_008: 
-  name: bar
-  in_eml: t
-  id: "10"
-  description: 1 bar = 100000 pascals
-  definition: 
-units_093: 
-  name: litersPerSecond
-  in_eml: t
-  id: "97"
-  description: liters per second
-  definition: 
-units_179: 
-  name: squareMillimeters
-  in_eml: t
-  id: "182"
-  description: square millmeters
-  definition: 
-units_037: 
-  name: dimensionless
-  in_eml: t
-  id: "39"
-  description: a designation asserting the absence of an associated unit
-  definition: 
-units_009: 
-  name: becquerel
-  in_eml: t
-  id: "11"
-  description: becquerel
-  definition: 
-units_094: 
-  name: litersPerSquareMeter
-  in_eml: t
-  id: "98"
-  description: liters per square meter
-  definition: 
-units_150: 
-  name: newton
-  in_eml: t
-  id: "153"
-  description: newton
-  definition: 
-units_121: 
-  name: milesPerMinute
-  in_eml: t
-  id: "124"
-  description: miles per minute
-  definition: 
-units_066: 
-  name: hectosecond
-  in_eml: t
-  id: "68"
-  description: 100 seconds
-  definition: 
-units_038: 
-  name: fahrenheit
-  in_eml: t
-  id: "40"
-  description: An obsolescent unit of temperature still used in popular meteorology
-  definition: 
-units_095: 
-  name: lumen
-  in_eml: t
-  id: "99"
-  description: lumen
-  definition: 
-units_151: 
-  name: nominalDay
-  in_eml: t
-  id: "154"
-  description: one day excluding leap seconds, 86400 seconds
-  definition: 
-units_122: 
-  name: milesPerSecond
-  in_eml: t
-  id: "125"
-  description: miles per second
-  definition: 
-units_067: 
-  name: henry
-  in_eml: t
-  id: "69"
-  description: henry
-  definition: 
-units_039: 
-  name: farad
-  in_eml: t
-  id: "41"
-  description: farad
-  definition: 
-units_096: 
-  name: lux
-  in_eml: t
-  id: "100"
-  description: lux
-  definition: 
-units_180: 
-  name: squareYard
-  in_eml: t
-  id: "183"
-  description: 36 inches squared
-  definition: 
-units_152: 
-  name: nominalHour
-  in_eml: t
-  id: "155"
-  description: one hour excluding leap seconds, 3600 seconds
-  definition: 
-units_123: 
-  name: millibar
-  in_eml: t
-  id: "126"
-  description: millibar
-  definition: 
-units_097: 
-  name: megagram
-  in_eml: t
-  id: "101"
-  description: 1000 kg
-  definition: 
-units_010: 
-  name: britishThermalUnit
-  in_eml: t
-  id: "12"
-  description: 1 btu = 1055.0559 J
-  definition: 
-units_068: 
-  name: hertz
-  in_eml: t
-  id: "70"
-  description: hertz
-  definition: 
-units_181: 
-  name: tesla
-  in_eml: t
-  id: "184"
-  description: tesla
-  definition: 
-units_153: 
-  name: nominalLeapYear
-  in_eml: t
-  id: "156"
-  description: one 366 day year excluding leap seconds, 31622400 seconds
-  definition: 
-units_124: 
-  name: milligram
-  in_eml: t
-  id: "127"
-  description: 0.000001 kg
-  definition: 
-units_098: 
-  name: megahertz
-  in_eml: t
-  id: "102"
-  description: megahertz
-  definition: 
-units_069: 
-  name: hour
-  in_eml: t
-  id: "71"
-  description: 3600 seconds
-  definition: 
-units_182: 
-  name: ton
-  in_eml: t
-  id: "185"
-  description: standard US (short) ton = 2000 lbs
-  definition: 
-units_125: 
-  name: milligramsPerCubicMeter
-  in_eml: t
-  id: "128"
-  description: milligrams Per Cubic Meter
-  definition: 
-units_040: 
-  name: fathom
-  in_eml: t
-  id: "42"
-  description: 6 feet
-  definition: 
-units_011: 
-  name: bushel
-  in_eml: t
-  id: "13"
-  description: 1 bushel = 35.23907 liters
-  definition: 
-units_183: 
-  name: tonne
-  in_eml: t
-  id: "186"
-  description: metric ton or tonne
-  definition: 
-units_154: 
-  name: nominalMinute
-  in_eml: t
-  id: "157"
-  description: one minute excluding leap seconds, 60 seconds
-  definition: 
-units_126: 
-  name: milligramsPerLiter
-  in_eml: t
-  id: "129"
-  description: milligrams / liter
-  definition: 
-units_041: 
-  name: feetPerDay
-  in_eml: t
-  id: "43"
-  description: feet per day
-  definition: 
-units_099: 
-  name: megameter
-  in_eml: t
-  id: "103"
-  description: 1000000 meters
-  definition: 
-units_012: 
-  name: bushelsPerAcre
-  in_eml: t
-  id: "14"
-  description: bushels per acre -- 1 bushel = 35.23907 liters/1 acre = 4046.8564 squareMeters
-  definition: 
-units_184: 
-  name: tonnePerHectare
-  in_eml: t
-  id: "187"
-  description: metric ton or tonne per hectare
-  definition: 
-units_155: 
-  name: nominalWeek
-  in_eml: t
-  id: "158"
-  description: one day excluding leap seconds, 604800 seconds
-  definition: 
-units_127: 
-  name: milliGramsPerMilliLiter
-  in_eml: t
-  id: "130"
-  description: milligrams per milliliter
-  definition: 
-units_042: 
-  name: feetPerHour
-  in_eml: t
-  id: "44"
-  description: feet per hour
-  definition: 
-units_013: 
-  name: calorie
-  in_eml: t
-  id: "15"
-  description: 1 cal = 4.1868 J
-  definition: 
-units_070: 
-  name: inch
-  in_eml: t
-  id: "72"
-  description: An imperial measure of length
-  definition: 
-units_185: 
-  name: tonnesPerYear
-  in_eml: t
-  id: "188"
-  description: tonnes Per Year
-  definition: 
-units_156: 
-  name: nominalYear
-  in_eml: t
-  id: "159"
-  description: one year excluding leap seconds and leap days, 31536000 seconds
-  definition: 
-units_128: 
-  name: milligramsPerSquareMeter
-  in_eml: t
-  id: "131"
-  description: milligrams Per Square Meter
-  definition: 
-units_043: 
-  name: feetPerSecond
-  in_eml: t
-  id: "45"
-  description: feet per second
-  definition: 
-units_014: 
-  name: candela
-  in_eml: t
-  id: "16"
-  description: SI unit of luminosity
-  definition: 
-units_071: 
-  name: joule
-  in_eml: t
-  id: "73"
-  description: joule = N*m
-  definition: 
-units_186: 
-  name: volt
-  in_eml: t
-  id: "189"
-  description: volt
-  definition: 
-units_157: 
-  name: number
-  in_eml: t
-  id: "160"
-  description: a number
-  definition: 
-units_129: 
-  name: millihertz
-  in_eml: t
-  id: "132"
-  description: millihertz
-  definition: 
-units_015: 
-  name: candelaPerSquareMeter
-  in_eml: t
-  id: "17"
-  description: candela Per Square Meter
-  definition: 
-units_072: 
-  name: katal
-  in_eml: t
-  id: "74"
-  description: katal
-  definition: 
-units_158: 
-  name: numberPerGram
-  in_eml: t
-  id: "161"
-  description: number of entities per gram
-  definition: 
-units_044: 
-  name: feetSquaredPerDay
-  in_eml: t
-  id: "46"
-  description: feet squared per day
-  definition: 
-units_016: 
-  name: celsius
-  in_eml: t
-  id: "18"
-  description: A common unit of temperature
-  definition: 
-units_073: 
-  name: kelvin
-  in_eml: t
-  id: "75"
-  description: SI unit of temperature
-  definition: 
-units_187: 
-  name: watt
-  in_eml: t
-  id: "190"
-  description: watt = J/s
-  definition: 
-units_159: 
-  name: numberPerKilometerSquared
-  in_eml: t
-  id: "162"
-  description: number per kilometer squared
-  definition: 
-units_045: 
-  name: foot
-  in_eml: t
-  id: "47"
-  description: 12 inches
-  definition: 
-units_100: 
-  name: megapascal
-  in_eml: t
-  id: "104"
-  description: megapascal
-  definition: 
-units_017: 
-  name: centigram
-  in_eml: t
-  id: "19"
-  description: 0.00001 kg
-  definition: 
-units_074: 
-  name: kilogram
-  in_eml: t
-  id: "76"
-  description: SI unit of mass
-  definition: 
-units_188: 
-  name: waveNumber
-  in_eml: t
-  id: "191"
-  description: 1/meters
-  definition: 
-units_130: 
-  name: milliliter
-  in_eml: t
-  id: "133"
-  description: 1/1000 of a liter
-  definition: 
-units_046: 
-  name: Foot_Gold_Coast
-  in_eml: t
-  id: "48"
-  description: 12 inches
-  definition: 
-units_101: 
-  name: megasecond
-  in_eml: t
-  id: "105"
-  description: 1000000 seconds
-  definition: 
-units_018: 
-  name: centimeter
-  in_eml: t
-  id: "20"
-  description: .01 meters
-  definition: 
-units_075: 
-  name: kilogramPerCubicMeter
-  in_eml: t
-  id: "77"
-  description: kilogram per cubic meter
-  definition: 
-units_189: 
-  name: weber
-  in_eml: t
-  id: "192"
-  description: weber
-  definition: 
-units_131: 
-  name: millimeter
-  in_eml: t
-  id: "134"
-  description: .001 meters
-  definition: 
-units_102: 
-  name: megavolt
-  in_eml: t
-  id: "106"
-  description: megavolt
-  definition: 
-units_019: 
-  name: centimeterPerYear
-  in_eml: t
-  id: "21"
-  description: centimeter Per Year
-  definition: 
-units_076: 
-  name: kilogramsPerHectare
-  in_eml: t
-  id: "78"
-  description: kilograms per hectare
-  definition: 
-units_047: 
-  name: Foot_US
-  in_eml: t
-  id: "49"
-  description: 12 inches
-  definition: 
-units_160: 
-  name: numberPerMeterCubed
-  in_eml: t
-  id: "163"
-  description: number per meter cubed
-  definition: 
-units_103: 
-  name: megawatt
-  in_eml: t
-  id: "107"
-  description: megawatt
-  definition: 
-units_048: 
-  name: footPound
-  in_eml: t
-  id: "50"
-  description: 1 ft-lbs = 1.355818 J
-  definition: 
-units_161: 
-  name: numberPerMeterSquared
-  in_eml: t
-  id: "164"
-  description: number per meter squared
-  definition: 
-units_132: 
-  name: millimetersPerSecond
-  in_eml: t
-  id: "135"
-  description: millimeters per second
-  definition: 
-units_077: 
-  name: kilogramsPerHectarePerYear
-  in_eml: t
-  id: "79"
-  description: kilograms Per Hectare Per Year
-  definition: 
-units_049: 
-  name: gallon
-  in_eml: t
-  id: "51"
-  description: US liquid gallon
-  definition: 
-units_104: 
-  name: meter
-  in_eml: t
-  id: "108"
-  description: SI unit of length
-  definition: 
-units_190: 
-  name: yard
-  in_eml: t
-  id: "193"
-  description: 3 feet
-  definition: 
-units_162: 
-  name: ohm
-  in_eml: t
-  id: "165"
-  description: ohm
-  definition: 
-units_133: 
-  name: millimolesPerGram
-  in_eml: t
-  id: "136"
-  description: millimoles per gram
-  definition: 
-units_020: 
-  name: centimetersPerSecond
-  in_eml: t
-  id: "22"
-  description: centimeters per second
-  definition: 
-units_078: 
-  name: kilogramsPerMeterSquaredPerSecond
-  in_eml: t
-  id: "80"
-  description: kilograms per meter sqared per second
-  definition: 
-units_105: 
-  name: metersPerDay
-  in_eml: t
-  id: "109"
-  description: meters per day
-  definition: 
-units_191: 
-  name: yardsPerSecond
-  in_eml: t
-  id: "198"
-  description: yards per second
-  definition: 
-units_163: 
-  name: ohmMeter
-  in_eml: t
-  id: "166"
-  description: ohm meters
-  definition: 
-units_134: 
-  name: millisecond
-  in_eml: t
-  id: "137"
-  description: 1/1000 of a second
-  definition: 
-units_021: 
-  name: centisecond
-  in_eml: t
-  id: "23"
-  description: 1/100 of a second
-  definition: 
-units_079: 
-  name: kilogramsPerMeterSquaredPerYear
-  in_eml: t
-  id: "81"
-  description: kilograms Per Meter Squared Per Year
-  definition: 
-units_106: 
-  name: metersPerGram
-  in_eml: t
-  id: "110"
-  description: meters per gram
-  definition: 
-units_192: 
-  name: Yard_Indian
-  in_eml: t
-  id: "194"
-  description: This is an ESRI unit and the multiplier comes from ESRI.  It may not be accurate
-  definition: 
-units_164: 
-  name: pascal
-  in_eml: t
-  id: "167"
-  description: pascal
-  definition: 
-units_135: 
-  name: millivolt
-  in_eml: t
-  id: "138"
-  description: millivolt
-  definition: 
-units_107: 
-  name: metersPerSecond
-  in_eml: t
-  id: "111"
-  description: meters per second
-  definition: 
-units_050: 
-  name: grad
-  in_eml: t
-  id: "52"
-  description: grad
-  definition: 
-units_193: 
-  name: Yard_Sears
-  in_eml: t
-  id: "196"
-  description: This is an ESRI unit and the multiplier comes from ESRI.  It may not be accurate
-  definition: 
-units_136: 
-  name: milliwatt
-  in_eml: t
-  id: "139"
-  description: milliwatt
-  definition: 
-units_022: 
-  name: coulomb
-  in_eml: t
-  id: "24"
-  description: SI unit of charge
-  definition: 
-units_108: 
-  name: metersPerSecondSquared
-  in_eml: t
-  id: "112"
-  description: meters per second squared
-  definition: 
-units_051: 
-  name: gram
-  in_eml: t
-  id: "53"
-  description: 0.001 kg
-  definition: 
-units_194: 
-  name: gramsPerDecagrams
-  in_eml: f
-  id: "199"
-  description: ""
-  definition: stmml:unit name="gramsPerDecagrams" unitType="massPerMass" parentSI="gramsPerGram" multiplierToSI="0.01"
-units_165: 
-  name: pint
-  in_eml: t
-  id: "168"
-  description: US liquid pint
-  definition: 
-units_137: 
-  name: minute
-  in_eml: t
-  id: "140"
-  description: 60 seconds
-  definition: 
-units_023: 
-  name: cubicCentimetersPerCubicCentimeters
-  in_eml: t
-  id: "25"
-  description: cubic centimeters per cubic centimeter
-  definition: 
-units_080: 
-  name: kilogramsPerSecond
-  in_eml: t
-  id: "82"
-  description: kilograms per second
-  definition: 
-units_109: 
-  name: metersSquaredPerDay
-  in_eml: t
-  id: "113"
-  description: meters squared per day
-  definition: 
-units_052: 
-  name: gramsPerCentimeterSquaredPerSecond
-  in_eml: t
-  id: "54"
-  description: grams Per Centimeter Squared Per Second
-  definition: 
-units_195: 
-  name: kilogramsPerHectarePerDay
-  in_eml: f
-  id: "200"
-  description: ""
-  definition: stmml:unit name="kilogramsPerHectarePerDay" unitType="arealMassDensityRate" parentSI="kilogramsPerMeterSquaredPerSecond" multiplierToSI="0.00000868"
-units_166: 
-  name: pound
-  in_eml: t
-  id: "169"
-  description: 1 pound in the Avoirdupois (commerce) scale
-  definition: 
-units_138: 
-  name: molality
-  in_eml: t
-  id: "141"
-  description: molality = moles/kg
-  definition: 
-units_024: 
-  name: cubicFeetPerSecond
-  in_eml: t
-  id: "26"
-  description: cubic feet per second
-  definition: 
-units_081: 
-  name: kilogramsPerSquareMeter
-  in_eml: t
-  id: "83"
-  description: kilograms per square meter
-  definition: 
-units_053: 
-  name: gramsPerCubicCentimeter
-  in_eml: t
-  id: "55"
-  description: grams per cubic centimeter
-  definition: 
-units_196: 
-  name: microEinsteinPerMeterSquaredPerSecond
-  in_eml: f
-  id: "201"
-  description: ""
-  definition: stmml:unit name="microEinsteinPerMeterSquaredPerSecond" unitType="energyDensity" parentSI="unkown" multiplierToSI="1.0"
-units_167: 
-  name: poundsPerSquareInch
-  in_eml: t
-  id: "170"
-  description: lbs/square inch
-  definition: 
-units_139: 
-  name: molarity
-  in_eml: t
-  id: "142"
-  description: molarity = moles/liter
-  definition: 
-units_025: 
-  name: cubicInch
-  in_eml: t
-  id: "27"
-  description: cubic inch
-  definition: 
-units_082: 
-  name: kilohertz
-  in_eml: t
-  id: "84"
-  description: kilohertz
-  definition: 
-units_054: 
-  name: gramsPerGram
-  in_eml: t
-  id: "56"
-  description: grams per gram
-  definition: 
-units_197: 
-  name: microgramsPerGramPerDay
-  in_eml: f
-  id: "202"
-  description: ""
-  definition: stmml:unit name="microgramsPerGramPerDay" unitType="massDensityRate" parentSI="unspecified" multiplierToSI="1.0"
-units_168: 
-  name: quart
-  in_eml: t
-  id: "171"
-  description: US liquid quart
-  definition: 
-units_083: 
-  name: kiloliter
-  in_eml: t
-  id: "85"
-  description: 1 cubic meter
-  definition: 
-units_026: 
-  name: cubicMeter
-  in_eml: t
-  id: "28"
-  description: cubic meter
-  definition: 
-units_169: 
-  name: radian
-  in_eml: t
-  id: "172"
-  description: 2 pi radians comprise a unit circle.
-  definition: 
-units_084: 
-  name: kilometer
-  in_eml: t
-  id: "86"
-  description: 1000 meters
-  definition: 
-units_055: 
-  name: gramsPerHectarePerDay
-  in_eml: t
-  id: "57"
-  description: grams Per Hectare Squared Per Day
-  definition: 
-units_110: 
-  name: Link_Clarke
-  in_eml: t
-  id: "93"
-  description: " may not be accurate"
-  definition: 
-units_027: 
-  name: cubicMeterPerKilogram
-  in_eml: t
-  id: "29"
-  description: cubic meters per kilogram
-  definition: 
-units_198: 
-  name: microgramsPerKilogram
-  in_eml: f
-  id: "203"
-  description: ""
-  definition: stmml:unit name="microgramsPerKilogram" unitType="massPerMass"  parentSI="microgramsPerGram" multiplierToSI="0.001"
-units_140: 
-  name: mole
-  in_eml: t
-  id: "143"
-  description: SI unit of substance amount
-  definition: 
-units_085: 
-  name: kilometersPerHour
-  in_eml: t
-  id: "87"
-  description: km/hr
-  definition: 
-units_056: 
-  name: gramsPerLiter
-  in_eml: t
-  id: "58"
-  description: grams per liter
-  definition: 
-units_111: 
-  name: metersSquaredPerSecond
-  in_eml: t
-  id: "114"
-  description: meters squared per second
-  definition: 
-units_028: 
-  name: cubicMetersPerSecond
-  in_eml: t
-  id: "30"
-  description: cubic meters per second
-  definition: 
-units_199: 
-  name: milligramsPerDay
-  in_eml: f
-  id: "204"
-  description: ""
-  definition: stmml:unit name="milligramsPerDay" unitType="massFlux" parentSI="kilogramsPerSecond" multiplierToSI="0.000000000011574"
-units_141: 
-  name: molePerCubicMeter
-  in_eml: t
-  id: "144"
-  description: mole per cubic meter
-  definition: 
-units_086: 
-  name: kilopascal
-  in_eml: t
-  id: "88"
-  description: kilopascal
-  definition: 
-units_057: 
-  name: gramsPerLiterPerDay
-  in_eml: t
-  id: "59"
-  description: grams Per (Liter Per Day)
-  definition: 
-units_112: 
-  name: microgram
-  in_eml: t
-  id: "115"
-  description: 0.000000001 kg
-  definition: 
-units_029: 
-  name: cubicMicrometersPerGram
-  in_eml: t
-  id: "31"
-  description: cubic micrometers per gram
-  definition: 
-units_170: 
-  name: second
-  in_eml: t
-  id: "173"
-  description: SI unit of time
-  definition: 
-units_142: 
-  name: molesPerGram
-  in_eml: t
-  id: "145"
-  description: moles per gram
-  definition: 
-units_087: 
-  name: kilosecond
-  in_eml: t
-  id: "89"
-  description: 1000 seconds
-  definition: 
-units_058: 
-  name: gramsPerMeterSquaredPerYear
-  in_eml: t
-  id: "60"
-  description: grams Per Meter Squared Per Year
-  definition: 
-units_113: 
-  name: microgramsPerGram
-  in_eml: t
-  id: "116"
-  description: micrograms per gram
-  definition: 
-units_171: 
-  name: siemen
-  in_eml: t
-  id: "174"
-  description: siemen
-  definition: 
-units_059: 
-  name: gramsPerMilliliter
-  in_eml: t
-  id: "61"
-  description: grams per milliliter
-  definition: 
-units_114: 
-  name: microgramsPerLiter
-  in_eml: t
-  id: "117"
-  description: micrograms / liter
-  definition: 
-units_172: 
-  name: sievert
-  in_eml: t
-  id: "175"
-  description: sievert
-  definition: 
-units_143: 
-  name: molesPerKilogram
-  in_eml: t
-  id: "146"
-  description: moles per kilogram
-  definition: 
-units_115: 
-  name: microliter
-  in_eml: t
-  id: "118"
-  description: 1/1000000 of a liter
-  definition: 
-units_088: 
-  name: kilovolt
-  in_eml: t
-  id: "90"
-  description: kilovolt
-  definition: 
 units_001: 
-  name: acre
-  in_eml: t
   id: "3"
+  name: acre
   description: 1 acre = 4046.8564 square meters or 1 hectare = 2.4710 acres
-  definition: 
-units_030: 
-  name: decigram
   in_eml: t
-  id: "32"
-  description: 0.0001 kg
-  definition: 
-units_173: 
-  name: squareCentimeters
-  in_eml: t
-  id: "176"
-  description: square centimeters
-  definition: 
-units_144: 
-  name: molesPerKilogramPerSecond
-  in_eml: t
-  id: "147"
-  description: moles per kilogram per second
-  definition: 
-units_116: 
-  name: micrometer
-  in_eml: t
-  id: "119"
-  description: .000001 meters
   definition: 
 units_002: 
-  name: ampere
-  in_eml: t
   id: "4"
+  name: ampere
   description: SI unit of electrical current
-  definition: 
-units_031: 
-  name: decimeter
   in_eml: t
-  id: "33"
-  description: .1 meters
-  definition: 
-units_089: 
-  name: kilowatt
-  in_eml: t
-  id: "91"
-  description: kilowatt
-  definition: 
-units_200: 
-  name: milligramsPerGram
-  in_eml: f
-  id: "205"
-  description: ""
-  definition: stmml:unit name="milligramsPerGram" unitType="massPerMass" parentSI="microgramsPerGram" multiplierToSI="0.001"
-units_174: 
-  name: squareFoot
-  in_eml: t
-  id: "177"
-  description: 12 inches squared
-  definition: 
-units_145: 
-  name: nanogram
-  in_eml: t
-  id: "148"
-  description: 0.000000000001 kg
-  definition: 
-units_117: 
-  name: micron
-  in_eml: t
-  id: "120"
-  description: .000001 meters
   definition: 
 units_003: 
-  name: amperePerMeter
-  in_eml: t
   id: "5"
+  name: amperePerMeter
   description: ampere per meter
-  definition: 
-units_060: 
-  name: gramsPerSquareMeter
   in_eml: t
-  id: "62"
-  description: grams per square meter
-  definition: 
-units_032: 
-  name: decisecond
-  in_eml: t
-  id: "34"
-  description: 1/10 of a second
-  definition: 
-units_201: 
-  name: numberPerAcre
-  in_eml: f
-  id: "206"
-  description: ""
-  definition: stmml:unit name="numberPerAcre" unitType="arealDensity" parentSI="numberPerMeter" multiplierToSI="0.00024711"
-units_175: 
-  name: squareKilometers
-  in_eml: t
-  id: "178"
-  description: square kilometers
-  definition: 
-units_146: 
-  name: nanometer
-  in_eml: t
-  id: "149"
-  description: .000000001 meters
-  definition: 
-units_118: 
-  name: microsecond
-  in_eml: t
-  id: "121"
-  description: 1/100000 of a second
   definition: 
 units_004: 
-  name: amperePerSquareMeter
-  in_eml: t
   id: "6"
+  name: amperePerSquareMeter
   description: ampere per meter squared
-  definition: 
-units_061: 
-  name: gramsPerYear
   in_eml: t
-  id: "63"
-  description: grams Per Year
-  definition: 
-units_202: 
-  name: poundsPerAcre
-  in_eml: f
-  id: "207"
-  description: ""
-  definition: stmml:unit name="poundsPerAcre" unitType="arealMass" parentSI="kilogramsPerHectare" multiplierToSI="1.14"
-units_147: 
-  name: nanomolesPerGramPerSecond
-  in_eml: t
-  id: "150"
-  description: nanomoles Per Gram Per Second
-  definition: 
-units_119: 
-  name: mile
-  in_eml: t
-  id: "122"
-  description: 5280 ft or 1609.344 meters
-  definition: 
-units_090: 
-  name: knots
-  in_eml: t
-  id: "92"
-  description: knots
-  definition: 
-units_062: 
-  name: gray
-  in_eml: t
-  id: "64"
-  description: gray
-  definition: 
-units_033: 
-  name: degree
-  in_eml: t
-  id: "35"
-  description: 360 degrees comprise a unit circle
   definition: 
 units_005: 
-  name: angstrom
-  in_eml: t
   id: "7"
+  name: angstrom
   description: 1/10000000000 meter
+  in_eml: t
   definition: 
+units_006: 
+  id: "8"
+  name: are
+  description: 100 square meters
+  in_eml: t
+  definition: 
+units_007: 
+  id: "9"
+  name: atmosphere
+  description: 1 atmosphere = 101325 pascals
+  in_eml: t
+  definition: 
+units_008: 
+  id: "10"
+  name: bar
+  description: 1 bar = 100000 pascals
+  in_eml: t
+  definition: 
+units_009: 
+  id: "11"
+  name: becquerel
+  description: becquerel
+  in_eml: t
+  definition: 
+units_010: 
+  id: "12"
+  name: britishThermalUnit
+  description: 1 btu = 1055.0559 J
+  in_eml: t
+  definition: 
+units_011: 
+  id: "13"
+  name: bushel
+  description: 1 bushel = 35.23907 liters
+  in_eml: t
+  definition: 
+units_012: 
+  id: "14"
+  name: bushelsPerAcre
+  description: bushels per acre -- 1 bushel = 35.23907 liters/1 acre = 4046.8564 squareMeters
+  in_eml: t
+  definition: 
+units_013: 
+  id: "15"
+  name: calorie
+  description: 1 cal = 4.1868 J
+  in_eml: t
+  definition: 
+units_014: 
+  id: "16"
+  name: candela
+  description: SI unit of luminosity
+  in_eml: t
+  definition: 
+units_015: 
+  id: "17"
+  name: candelaPerSquareMeter
+  description: candela Per Square Meter
+  in_eml: t
+  definition: 
+units_016: 
+  id: "18"
+  name: celsius
+  description: A common unit of temperature
+  in_eml: t
+  definition: 
+units_017: 
+  id: "19"
+  name: centigram
+  description: 0.00001 kg
+  in_eml: t
+  definition: 
+units_018: 
+  id: "20"
+  name: centimeter
+  description: .01 meters
+  in_eml: t
+  definition: 
+units_019: 
+  id: "21"
+  name: centimeterPerYear
+  description: centimeter Per Year
+  in_eml: t
+  definition: 
+units_020: 
+  id: "22"
+  name: centimetersPerSecond
+  description: centimeters per second
+  in_eml: t
+  definition: 
+units_021: 
+  id: "23"
+  name: centisecond
+  description: 1/100 of a second
+  in_eml: t
+  definition: 
+units_022: 
+  id: "24"
+  name: coulomb
+  description: SI unit of charge
+  in_eml: t
+  definition: 
+units_023: 
+  id: "25"
+  name: cubicCentimetersPerCubicCentimeters
+  description: cubic centimeters per cubic centimeter
+  in_eml: t
+  definition: 
+units_024: 
+  id: "26"
+  name: cubicFeetPerSecond
+  description: cubic feet per second
+  in_eml: t
+  definition: 
+units_025: 
+  id: "27"
+  name: cubicInch
+  description: cubic inch
+  in_eml: t
+  definition: 
+units_026: 
+  id: "28"
+  name: cubicMeter
+  description: cubic meter
+  in_eml: t
+  definition: 
+units_027: 
+  id: "29"
+  name: cubicMeterPerKilogram
+  description: cubic meters per kilogram
+  in_eml: t
+  definition: 
+units_028: 
+  id: "30"
+  name: cubicMetersPerSecond
+  description: cubic meters per second
+  in_eml: t
+  definition: 
+units_029: 
+  id: "31"
+  name: cubicMicrometersPerGram
+  description: cubic micrometers per gram
+  in_eml: t
+  definition: 
+units_030: 
+  id: "32"
+  name: decigram
+  description: 0.0001 kg
+  in_eml: t
+  definition: 
+units_031: 
+  id: "33"
+  name: decimeter
+  description: .1 meters
+  in_eml: t
+  definition: 
+units_032: 
+  id: "34"
+  name: decisecond
+  description: 1/10 of a second
+  in_eml: t
+  definition: 
+units_033: 
+  id: "35"
+  name: degree
+  description: 360 degrees comprise a unit circle
+  in_eml: t
+  definition: 
+units_034: 
+  id: "36"
+  name: dekagram
+  description: .01 kg
+  in_eml: t
+  definition: 
+units_035: 
+  id: "37"
+  name: dekameter
+  description: 10 meters
+  in_eml: t
+  definition: 
+units_036: 
+  id: "38"
+  name: dekasecond
+  description: 10 seconds
+  in_eml: t
+  definition: 
+units_037: 
+  id: "39"
+  name: dimensionless
+  description: a designation asserting the absence of an associated unit
+  in_eml: t
+  definition: 
+units_038: 
+  id: "40"
+  name: fahrenheit
+  description: An obsolescent unit of temperature still used in popular meteorology
+  in_eml: t
+  definition: 
+units_039: 
+  id: "41"
+  name: farad
+  description: farad
+  in_eml: t
+  definition: 
+units_040: 
+  id: "42"
+  name: fathom
+  description: 6 feet
+  in_eml: t
+  definition: 
+units_041: 
+  id: "43"
+  name: feetPerDay
+  description: feet per day
+  in_eml: t
+  definition: 
+units_042: 
+  id: "44"
+  name: feetPerHour
+  description: feet per hour
+  in_eml: t
+  definition: 
+units_043: 
+  id: "45"
+  name: feetPerSecond
+  description: feet per second
+  in_eml: t
+  definition: 
+units_044: 
+  id: "46"
+  name: feetSquaredPerDay
+  description: feet squared per day
+  in_eml: t
+  definition: 
+units_045: 
+  id: "47"
+  name: foot
+  description: 12 inches
+  in_eml: t
+  definition: 
+units_046: 
+  id: "48"
+  name: Foot_Gold_Coast
+  description: 12 inches
+  in_eml: t
+  definition: 
+units_047: 
+  id: "49"
+  name: Foot_US
+  description: 12 inches
+  in_eml: t
+  definition: 
+units_048: 
+  id: "50"
+  name: footPound
+  description: 1 ft-lbs = 1.355818 J
+  in_eml: t
+  definition: 
+units_049: 
+  id: "51"
+  name: gallon
+  description: US liquid gallon
+  in_eml: t
+  definition: 
+units_050: 
+  id: "52"
+  name: grad
+  description: grad
+  in_eml: t
+  definition: 
+units_051: 
+  id: "53"
+  name: gram
+  description: 0.001 kg
+  in_eml: t
+  definition: 
+units_052: 
+  id: "54"
+  name: gramsPerCentimeterSquaredPerSecond
+  description: grams Per Centimeter Squared Per Second
+  in_eml: t
+  definition: 
+units_053: 
+  id: "55"
+  name: gramsPerCubicCentimeter
+  description: grams per cubic centimeter
+  in_eml: t
+  definition: 
+units_054: 
+  id: "56"
+  name: gramsPerGram
+  description: grams per gram
+  in_eml: t
+  definition: 
+units_055: 
+  id: "57"
+  name: gramsPerHectarePerDay
+  description: grams Per Hectare Squared Per Day
+  in_eml: t
+  definition: 
+units_056: 
+  id: "58"
+  name: gramsPerLiter
+  description: grams per liter
+  in_eml: t
+  definition: 
+units_057: 
+  id: "59"
+  name: gramsPerLiterPerDay
+  description: grams Per (Liter Per Day)
+  in_eml: t
+  definition: 
+units_058: 
+  id: "60"
+  name: gramsPerMeterSquaredPerYear
+  description: grams Per Meter Squared Per Year
+  in_eml: t
+  definition: 
+units_059: 
+  id: "61"
+  name: gramsPerMilliliter
+  description: grams per milliliter
+  in_eml: t
+  definition: 
+units_060: 
+  id: "62"
+  name: gramsPerSquareMeter
+  description: grams per square meter
+  in_eml: t
+  definition: 
+units_061: 
+  id: "63"
+  name: gramsPerYear
+  description: grams Per Year
+  in_eml: t
+  definition: 
+units_062: 
+  id: "64"
+  name: gray
+  description: gray
+  in_eml: t
+  definition: 
+units_063: 
+  id: "65"
+  name: hectare
+  description: 1 hectare is 10^4 square meters
+  in_eml: t
+  definition: 
+units_064: 
+  id: "66"
+  name: hectogram
+  description: .1 kg
+  in_eml: t
+  definition: 
+units_065: 
+  id: "67"
+  name: hectometer
+  description: 100 meters
+  in_eml: t
+  definition: 
+units_066: 
+  id: "68"
+  name: hectosecond
+  description: 100 seconds
+  in_eml: t
+  definition: 
+units_067: 
+  id: "69"
+  name: henry
+  description: henry
+  in_eml: t
+  definition: 
+units_068: 
+  id: "70"
+  name: hertz
+  description: hertz
+  in_eml: t
+  definition: 
+units_069: 
+  id: "71"
+  name: hour
+  description: 3600 seconds
+  in_eml: t
+  definition: 
+units_070: 
+  id: "72"
+  name: inch
+  description: An imperial measure of length
+  in_eml: t
+  definition: 
+units_071: 
+  id: "73"
+  name: joule
+  description: joule = N*m
+  in_eml: t
+  definition: 
+units_072: 
+  id: "74"
+  name: katal
+  description: katal
+  in_eml: t
+  definition: 
+units_073: 
+  id: "75"
+  name: kelvin
+  description: SI unit of temperature
+  in_eml: t
+  definition: 
+units_074: 
+  id: "76"
+  name: kilogram
+  description: SI unit of mass
+  in_eml: t
+  definition: 
+units_075: 
+  id: "77"
+  name: kilogramPerCubicMeter
+  description: kilogram per cubic meter
+  in_eml: t
+  definition: 
+units_076: 
+  id: "78"
+  name: kilogramsPerHectare
+  description: kilograms per hectare
+  in_eml: t
+  definition: 
+units_077: 
+  id: "79"
+  name: kilogramsPerHectarePerYear
+  description: kilograms Per Hectare Per Year
+  in_eml: t
+  definition: 
+units_078: 
+  id: "80"
+  name: kilogramsPerMeterSquaredPerSecond
+  description: kilograms per meter sqared per second
+  in_eml: t
+  definition: 
+units_079: 
+  id: "81"
+  name: kilogramsPerMeterSquaredPerYear
+  description: kilograms Per Meter Squared Per Year
+  in_eml: t
+  definition: 
+units_080: 
+  id: "82"
+  name: kilogramsPerSecond
+  description: kilograms per second
+  in_eml: t
+  definition: 
+units_081: 
+  id: "83"
+  name: kilogramsPerSquareMeter
+  description: kilograms per square meter
+  in_eml: t
+  definition: 
+units_082: 
+  id: "84"
+  name: kilohertz
+  description: kilohertz
+  in_eml: t
+  definition: 
+units_083: 
+  id: "85"
+  name: kiloliter
+  description: 1 cubic meter
+  in_eml: t
+  definition: 
+units_084: 
+  id: "86"
+  name: kilometer
+  description: 1000 meters
+  in_eml: t
+  definition: 
+units_085: 
+  id: "87"
+  name: kilometersPerHour
+  description: km/hr
+  in_eml: t
+  definition: 
+units_086: 
+  id: "88"
+  name: kilopascal
+  description: kilopascal
+  in_eml: t
+  definition: 
+units_087: 
+  id: "89"
+  name: kilosecond
+  description: 1000 seconds
+  in_eml: t
+  definition: 
+units_088: 
+  id: "90"
+  name: kilovolt
+  description: kilovolt
+  in_eml: t
+  definition: 
+units_089: 
+  id: "91"
+  name: kilowatt
+  description: kilowatt
+  in_eml: t
+  definition: 
+units_090: 
+  id: "92"
+  name: knots
+  description: knots
+  in_eml: t
+  definition: 
+units_091: 
+  id: "95"
+  name: liter
+  description: 1000 cm^3
+  in_eml: t
+  definition: 
+units_092: 
+  id: "96"
+  name: litersPerHectare
+  description: liters per hectare
+  in_eml: t
+  definition: 
+units_093: 
+  id: "97"
+  name: litersPerSecond
+  description: liters per second
+  in_eml: t
+  definition: 
+units_094: 
+  id: "98"
+  name: litersPerSquareMeter
+  description: liters per square meter
+  in_eml: t
+  definition: 
+units_095: 
+  id: "99"
+  name: lumen
+  description: lumen
+  in_eml: t
+  definition: 
+units_096: 
+  id: "100"
+  name: lux
+  description: lux
+  in_eml: t
+  definition: 
+units_097: 
+  id: "101"
+  name: megagram
+  description: 1000 kg
+  in_eml: t
+  definition: 
+units_098: 
+  id: "102"
+  name: megahertz
+  description: megahertz
+  in_eml: t
+  definition: 
+units_099: 
+  id: "103"
+  name: megameter
+  description: 1000000 meters
+  in_eml: t
+  definition: 
+units_100: 
+  id: "104"
+  name: megapascal
+  description: megapascal
+  in_eml: t
+  definition: 
+units_101: 
+  id: "105"
+  name: megasecond
+  description: 1000000 seconds
+  in_eml: t
+  definition: 
+units_102: 
+  id: "106"
+  name: megavolt
+  description: megavolt
+  in_eml: t
+  definition: 
+units_103: 
+  id: "107"
+  name: megawatt
+  description: megawatt
+  in_eml: t
+  definition: 
+units_104: 
+  id: "108"
+  name: meter
+  description: SI unit of length
+  in_eml: t
+  definition: 
+units_105: 
+  id: "109"
+  name: metersPerDay
+  description: meters per day
+  in_eml: t
+  definition: 
+units_106: 
+  id: "110"
+  name: metersPerGram
+  description: meters per gram
+  in_eml: t
+  definition: 
+units_107: 
+  id: "111"
+  name: metersPerSecond
+  description: meters per second
+  in_eml: t
+  definition: 
+units_108: 
+  id: "112"
+  name: metersPerSecondSquared
+  description: meters per second squared
+  in_eml: t
+  definition: 
+units_109: 
+  id: "113"
+  name: metersSquaredPerDay
+  description: meters squared per day
+  in_eml: t
+  definition: 
+units_110: 
+  id: "93"
+  name: Link_Clarke
+  description: " may not be accurate"
+  in_eml: t
+  definition: 
+units_111: 
+  id: "114"
+  name: metersSquaredPerSecond
+  description: meters squared per second
+  in_eml: t
+  definition: 
+units_112: 
+  id: "115"
+  name: microgram
+  description: 0.000000001 kg
+  in_eml: t
+  definition: 
+units_113: 
+  id: "116"
+  name: microgramsPerGram
+  description: micrograms per gram
+  in_eml: t
+  definition: 
+units_114: 
+  id: "117"
+  name: microgramsPerLiter
+  description: micrograms / liter
+  in_eml: t
+  definition: 
+units_115: 
+  id: "118"
+  name: microliter
+  description: 1/1000000 of a liter
+  in_eml: t
+  definition: 
+units_116: 
+  id: "119"
+  name: micrometer
+  description: .000001 meters
+  in_eml: t
+  definition: 
+units_117: 
+  id: "120"
+  name: micron
+  description: .000001 meters
+  in_eml: t
+  definition: 
+units_118: 
+  id: "121"
+  name: microsecond
+  description: 1/100000 of a second
+  in_eml: t
+  definition: 
+units_119: 
+  id: "122"
+  name: mile
+  description: 5280 ft or 1609.344 meters
+  in_eml: t
+  definition: 
+units_120: 
+  id: "123"
+  name: milesPerHour
+  description: miles per hour
+  in_eml: t
+  definition: 
+units_121: 
+  id: "124"
+  name: milesPerMinute
+  description: miles per minute
+  in_eml: t
+  definition: 
+units_122: 
+  id: "125"
+  name: milesPerSecond
+  description: miles per second
+  in_eml: t
+  definition: 
+units_123: 
+  id: "126"
+  name: millibar
+  description: millibar
+  in_eml: t
+  definition: 
+units_124: 
+  id: "127"
+  name: milligram
+  description: 0.000001 kg
+  in_eml: t
+  definition: 
+units_125: 
+  id: "128"
+  name: milligramsPerCubicMeter
+  description: milligrams Per Cubic Meter
+  in_eml: t
+  definition: 
+units_126: 
+  id: "129"
+  name: milligramsPerLiter
+  description: milligrams / liter
+  in_eml: t
+  definition: 
+units_127: 
+  id: "130"
+  name: milliGramsPerMilliLiter
+  description: milligrams per milliliter
+  in_eml: t
+  definition: 
+units_128: 
+  id: "131"
+  name: milligramsPerSquareMeter
+  description: milligrams Per Square Meter
+  in_eml: t
+  definition: 
+units_129: 
+  id: "132"
+  name: millihertz
+  description: millihertz
+  in_eml: t
+  definition: 
+units_130: 
+  id: "133"
+  name: milliliter
+  description: 1/1000 of a liter
+  in_eml: t
+  definition: 
+units_131: 
+  id: "134"
+  name: millimeter
+  description: .001 meters
+  in_eml: t
+  definition: 
+units_132: 
+  id: "135"
+  name: millimetersPerSecond
+  description: millimeters per second
+  in_eml: t
+  definition: 
+units_133: 
+  id: "136"
+  name: millimolesPerGram
+  description: millimoles per gram
+  in_eml: t
+  definition: 
+units_134: 
+  id: "137"
+  name: millisecond
+  description: 1/1000 of a second
+  in_eml: t
+  definition: 
+units_135: 
+  id: "138"
+  name: millivolt
+  description: millivolt
+  in_eml: t
+  definition: 
+units_136: 
+  id: "139"
+  name: milliwatt
+  description: milliwatt
+  in_eml: t
+  definition: 
+units_137: 
+  id: "140"
+  name: minute
+  description: 60 seconds
+  in_eml: t
+  definition: 
+units_138: 
+  id: "141"
+  name: molality
+  description: molality = moles/kg
+  in_eml: t
+  definition: 
+units_139: 
+  id: "142"
+  name: molarity
+  description: molarity = moles/liter
+  in_eml: t
+  definition: 
+units_140: 
+  id: "143"
+  name: mole
+  description: SI unit of substance amount
+  in_eml: t
+  definition: 
+units_141: 
+  id: "144"
+  name: molePerCubicMeter
+  description: mole per cubic meter
+  in_eml: t
+  definition: 
+units_142: 
+  id: "145"
+  name: molesPerGram
+  description: moles per gram
+  in_eml: t
+  definition: 
+units_143: 
+  id: "146"
+  name: molesPerKilogram
+  description: moles per kilogram
+  in_eml: t
+  definition: 
+units_144: 
+  id: "147"
+  name: molesPerKilogramPerSecond
+  description: moles per kilogram per second
+  in_eml: t
+  definition: 
+units_145: 
+  id: "148"
+  name: nanogram
+  description: 0.000000000001 kg
+  in_eml: t
+  definition: 
+units_146: 
+  id: "149"
+  name: nanometer
+  description: .000000001 meters
+  in_eml: t
+  definition: 
+units_147: 
+  id: "150"
+  name: nanomolesPerGramPerSecond
+  description: nanomoles Per Gram Per Second
+  in_eml: t
+  definition: 
+units_148: 
+  id: "151"
+  name: nanosecond
+  description: 1/1000000 of a second
+  in_eml: t
+  definition: 
+units_149: 
+  id: "152"
+  name: nauticalMile
+  description: nautical mile
+  in_eml: t
+  definition: 
+units_150: 
+  id: "153"
+  name: newton
+  description: newton
+  in_eml: t
+  definition: 
+units_151: 
+  id: "154"
+  name: nominalDay
+  description: one day excluding leap seconds, 86400 seconds
+  in_eml: t
+  definition: 
+units_152: 
+  id: "155"
+  name: nominalHour
+  description: one hour excluding leap seconds, 3600 seconds
+  in_eml: t
+  definition: 
+units_153: 
+  id: "156"
+  name: nominalLeapYear
+  description: one 366 day year excluding leap seconds, 31622400 seconds
+  in_eml: t
+  definition: 
+units_154: 
+  id: "157"
+  name: nominalMinute
+  description: one minute excluding leap seconds, 60 seconds
+  in_eml: t
+  definition: 
+units_155: 
+  id: "158"
+  name: nominalWeek
+  description: one day excluding leap seconds, 604800 seconds
+  in_eml: t
+  definition: 
+units_156: 
+  id: "159"
+  name: nominalYear
+  description: one year excluding leap seconds and leap days, 31536000 seconds
+  in_eml: t
+  definition: 
+units_157: 
+  id: "160"
+  name: number
+  description: a number
+  in_eml: t
+  definition: 
+units_158: 
+  id: "161"
+  name: numberPerGram
+  description: number of entities per gram
+  in_eml: t
+  definition: 
+units_159: 
+  id: "162"
+  name: numberPerKilometerSquared
+  description: number per kilometer squared
+  in_eml: t
+  definition: 
+units_160: 
+  id: "163"
+  name: numberPerMeterCubed
+  description: number per meter cubed
+  in_eml: t
+  definition: 
+units_161: 
+  id: "164"
+  name: numberPerMeterSquared
+  description: number per meter squared
+  in_eml: t
+  definition: 
+units_162: 
+  id: "165"
+  name: ohm
+  description: ohm
+  in_eml: t
+  definition: 
+units_163: 
+  id: "166"
+  name: ohmMeter
+  description: ohm meters
+  in_eml: t
+  definition: 
+units_164: 
+  id: "167"
+  name: pascal
+  description: pascal
+  in_eml: t
+  definition: 
+units_165: 
+  id: "168"
+  name: pint
+  description: US liquid pint
+  in_eml: t
+  definition: 
+units_166: 
+  id: "169"
+  name: pound
+  description: 1 pound in the Avoirdupois (commerce) scale
+  in_eml: t
+  definition: 
+units_167: 
+  id: "170"
+  name: poundsPerSquareInch
+  description: lbs/square inch
+  in_eml: t
+  definition: 
+units_168: 
+  id: "171"
+  name: quart
+  description: US liquid quart
+  in_eml: t
+  definition: 
+units_169: 
+  id: "172"
+  name: radian
+  description: 2 pi radians comprise a unit circle.
+  in_eml: t
+  definition: 
+units_170: 
+  id: "173"
+  name: second
+  description: SI unit of time
+  in_eml: t
+  definition: 
+units_171: 
+  id: "174"
+  name: siemen
+  description: siemen
+  in_eml: t
+  definition: 
+units_172: 
+  id: "175"
+  name: sievert
+  description: sievert
+  in_eml: t
+  definition: 
+units_173: 
+  id: "176"
+  name: squareCentimeters
+  description: square centimeters
+  in_eml: t
+  definition: 
+units_174: 
+  id: "177"
+  name: squareFoot
+  description: 12 inches squared
+  in_eml: t
+  definition: 
+units_175: 
+  id: "178"
+  name: squareKilometers
+  description: square kilometers
+  in_eml: t
+  definition: 
+units_176: 
+  id: "179"
+  name: squareMeter
+  description: square meters
+  in_eml: t
+  definition: 
+units_177: 
+  id: "180"
+  name: squareMeterPerKilogram
+  description: square meters per kilogram
+  in_eml: t
+  definition: 
+units_178: 
+  id: "181"
+  name: squareMile
+  description: 1 mile squared
+  in_eml: t
+  definition: 
+units_179: 
+  id: "182"
+  name: squareMillimeters
+  description: square millmeters
+  in_eml: t
+  definition: 
+units_180: 
+  id: "183"
+  name: squareYard
+  description: 36 inches squared
+  in_eml: t
+  definition: 
+units_181: 
+  id: "184"
+  name: tesla
+  description: tesla
+  in_eml: t
+  definition: 
+units_182: 
+  id: "185"
+  name: ton
+  description: standard US (short) ton = 2000 lbs
+  in_eml: t
+  definition: 
+units_183: 
+  id: "186"
+  name: tonne
+  description: metric ton or tonne
+  in_eml: t
+  definition: 
+units_184: 
+  id: "187"
+  name: tonnePerHectare
+  description: metric ton or tonne per hectare
+  in_eml: t
+  definition: 
+units_185: 
+  id: "188"
+  name: tonnesPerYear
+  description: tonnes Per Year
+  in_eml: t
+  definition: 
+units_186: 
+  id: "189"
+  name: volt
+  description: volt
+  in_eml: t
+  definition: 
+units_187: 
+  id: "190"
+  name: watt
+  description: watt = J/s
+  in_eml: t
+  definition: 
+units_188: 
+  id: "191"
+  name: waveNumber
+  description: 1/meters
+  in_eml: t
+  definition: 
+units_189: 
+  id: "192"
+  name: weber
+  description: weber
+  in_eml: t
+  definition: 
+units_190: 
+  id: "193"
+  name: yard
+  description: 3 feet
+  in_eml: t
+  definition: 
+units_191: 
+  id: "198"
+  name: yardsPerSecond
+  description: yards per second
+  in_eml: t
+  definition: 
+units_192: 
+  id: "194"
+  name: Yard_Indian
+  description: This is an ESRI unit and the multiplier comes from ESRI.  It may not be accurate
+  in_eml: t
+  definition: 
+units_193: 
+  id: "196"
+  name: Yard_Sears
+  description: This is an ESRI unit and the multiplier comes from ESRI.  It may not be accurate
+  in_eml: t
+  definition: 
+units_194: 
+  id: "215"
+  name: nanogramsPerGramPerDay
+  description: 
+  in_eml: f
+  definition: stmml:unit name="nanogramsPerGramPerDay" unitType="massDensityRate" parentSI="unspecified" multiplierToSI="1.0"
+units_195: 
+  id: "200"
+  name: kilogramsPerHectarePerDay
+  description: ""
+  in_eml: f
+  definition: stmml:unit name="kilogramsPerHectarePerDay" unitType="arealMassDensityRate" parentSI="kilogramsPerMeterSquaredPerSecond" multiplierToSI="0.00000868"
+units_196: 
+  id: "201"
+  name: microEinsteinPerMeterSquaredPerSecond
+  description: ""
+  in_eml: f
+  definition: stmml:unit name="microEinsteinPerMeterSquaredPerSecond" unitType="energyDensity" parentSI="unkown" multiplierToSI="1.0"
+units_197: 
+  id: "202"
+  name: microgramsPerGramPerDay
+  description: ""
+  in_eml: f
+  definition: stmml:unit name="microgramsPerGramPerDay" unitType="massDensityRate" parentSI="unspecified" multiplierToSI="1.0"
+units_198: 
+  id: "203"
+  name: microgramsPerKilogram
+  description: ""
+  in_eml: f
+  definition: stmml:unit name="microgramsPerKilogram" unitType="massPerMass"  parentSI="microgramsPerGram" multiplierToSI="0.001"
+units_199: 
+  id: "204"
+  name: milligramsPerDay
+  description: ""
+  in_eml: f
+  definition: stmml:unit name="milligramsPerDay" unitType="massFlux" parentSI="kilogramsPerSecond" multiplierToSI="0.000000000011574"
+units_200: 
+  id: "205"
+  name: milligramsPerGram
+  description: ""
+  in_eml: f
+  definition: stmml:unit name="milligramsPerGram" unitType="massPerMass" parentSI="microgramsPerGram" multiplierToSI="0.001"
+units_201: 
+  id: "206"
+  name: numberPerAcre
+  description: ""
+  in_eml: f
+  definition: stmml:unit name="numberPerAcre" unitType="arealDensity" parentSI="numberPerMeter" multiplierToSI="0.00024711"
+units_202: 
+  id: "207"
+  name: poundsPerAcre
+  description: ""
+  in_eml: f
+  definition: stmml:unit name="poundsPerAcre" unitType="arealMass" parentSI="kilogramsPerHectare" multiplierToSI="1.14"
+units_203: 
+  id: "208"
+  name: tonnesPerAcre
+  description: ""
+  in_eml: f
+  definition: stmml:unit name="tonnesPerAcre" unitType="arealMass" parentSI="kilogramsPerHectare" multiplierToSI="1000.0"
+units_204: 
+  id: "210"
+  name: megajoule
+  description: ""
+  in_eml: f
+  definition: stmml:unit name="megaJoule" unitType="energy" parentSI="joule" multiplyerToSi="1000"
+units_205: 
+  id: "212"
+  name: milligramsPerCubicCentimeter
+  description: 
+  in_eml: f
+  definition: stmml:unit  name="milligramsPerCubicCentimeter" unitType="massPerVolume" parentSI="gramsPerCubicCentimeter" multiplier="0.0001"
+units_206: 
+  id: "209"
+  name: wattsPerSquareMeter
+  description: ""
+  in_eml: f
+  definition: stmml:unit name="wattsPerSquareMeter" unitType="energy" parentSI="joulePerSecond" multiplierToSI="0.000011574"
+units_207: 
+  id: "199"
+  name: gramsPerHectograms
+  description: ""
+  in_eml: f
+  definition: stmml:unit name="gramsPerHectograms" unitType="massPerMass" parentSI="gramsPerGram" multiplierToSI="0.01"
+units_208: 
+  id: "216"
+  name: milligramsPerSquareMeterPerDay
+  description: 
+  in_eml: f
+  definition: stmml:unit name='milligramsPerSquareMeterPerDay" unitType='stmml:unit name="gramsPerSquareMeterPerDay" unitType="massDensityRate" parentSI="gramsPerSquareMeterPerMinute" multiplierToSI="1000"
+units_209: 
+  id: "213"
+  name: gramsPerSquareMeterPerDay
+  description: 
+  in_eml: f
+  definition: stmml:unit name="gramsPerSquareMeterPerDay" unitType="massDensityRate" parentSI="kilogramsPerMeterSquaredPerSecond" multiplierToSI="86.4"
+units_210: 
+  id: "214"
+  name: nanogramsPerSquareMeterPerMInute
+  description: 
+  in_eml: f
+  definition: stmml:unit name="nanogramsPerSquareMeterPerMInute" unitType="massDensityRate" parentSI="kilogramsPerMeterSquaredPerSecond" multiplierToSI="0.000006"

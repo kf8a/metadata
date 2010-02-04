@@ -1,0 +1,46 @@
+<p>
+	<label for='dataset_title'>Title</label>
+	<%= f.text_field :title %>
+</p>
+<p>
+	<label for="dataset_abstract">Abstract</label>
+	<%= f.text_area :abstract, :cols => 60 %>
+</p>
+<p>
+  <label for='dataset_keyword_list'>Keywords</label>
+  <%= text_field_with_auto_complete :dataset, :keyword_list, {}, {:method => :get} %>
+</p>
+
+<p>
+  <label for='dataset_status'>Status</label>
+  <%= f.text_field :status%>
+  <label for='dataset_initiated'>Initiated</label>
+  <%= f.date_select :initiated,  {:start_year => 1880, :include_blank => true} %>
+  <label for='dataset_completed'>Completed</label>
+  <%= f.date_select :completed, {:start_year=> 1980, :include_blank => true}%>
+</p>
+<p><label for='dataset_core_dataset'>Signature Dataset</label>
+  <%= f.check_box :core_dataset%>
+  </p>
+<h2>Affiliations</h2>
+<table  id='affiliations'>
+  <% dataset.affiliations.each do |affiliation| %>
+  <%= render :partial => 'affiliation', :locals => {:affiliation => affiliation, :people => people, :roles => roles}%>
+  <% end %>
+</table>
+
+<%= link_to_remote 'Add Affiliation', :url => set_affiliation_for_datasets_url %>
+
+<h2>Themes</h2>
+<ul>
+<% @themes.each do |theme| -%>
+  <li><%= theme.title %><%= check_box_tag 'dataset[theme_ids][]', theme.id, @dataset.themes.include?(theme)%></li>
+<% end -%>
+</ul>
+<h2>Study associations</h2>
+<ul>
+	<% @studies.each do |study| -%>
+		<li><%= study.name %><%= check_box_tag 'dataset[study_ids][]', study.id, @dataset.studies.include?(study) %></li>
+	<% end -%>
+</ul>
+

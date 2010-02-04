@@ -35,6 +35,10 @@ class PeopleController < ApplicationController
     
   end
 
+  def show_all
+    @people = Person.all(:order => 'sur_name')
+  end
+  
   # GET /people/1
   # GET /people/1.xml
   def show
@@ -101,7 +105,7 @@ class PeopleController < ApplicationController
   def destroy
     @person = Person.find(params[:id])
     @person.destroy
-    
+
     expire_action :action => :index
     respond_to do |format|
       format.html { redirect_to people_url }

@@ -4,13 +4,15 @@ require 'datatables_controller'
 # Re-raise errors caught by the controller.
 class DatatablesController; def rescue_action(e) raise e end; end
 
-class DatatablesControllerTest < Test::Unit::TestCase
-  fixtures :datatables
+class DatatablesControllerTest < ActionController::TestCase
+  #fixtures :datatables
 
   def setup
     @controller = DatatablesController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
+    @table = Factory.create(:datatable, :dataset => Factory.create(:dataset))
+    Factory.create(:datatable, :dataset => Factory.create(:dataset))
   end
 
   def test_should_get_index
@@ -33,25 +35,37 @@ class DatatablesControllerTest < Test::Unit::TestCase
   end
 
   def test_should_show_datatable
-    get :show, :id => 24
+    get :show, :id => @table
     assert_response :success
   end
 
   def test_should_get_edit
-    get :edit, :id => 24
+    get :edit, :id => @table
     assert_response :success
   end
   
   def test_should_update_datatable
-    put :update, :id => 24, :datatable => { }
+    put :update, :id => @table, :datatable => { }
     assert_redirected_to datatable_path(assigns(:datatable))
   end
   
   def test_should_destroy_datatable
     old_count = Datatable.count
-    delete :destroy, :id => 24
+    delete :destroy, :id => @table
     assert_equal old_count-1, Datatable.count
     
     assert_redirected_to datatables_path
   end
+  
+  context 'a datatable without description' do
+    setup do
+      @table = Factory.create(:datatable, :description=>nil, :dataset => Factory.create(:dataset))
+      get :show,  :id => @table
+    end
+    
+    should_respond_with :success
+    should_render_template :show
+    
+  end
+  
 end

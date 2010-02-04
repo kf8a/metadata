@@ -1,37 +1,41 @@
 --- 
-themes_005: 
-  title: Other
-  priority: "9"
-  id: "5"
-themes_006: 
-  title: Plants
-  priority: "7"
-  id: "6"
-themes_007: 
-  title: Research Context
-  priority: "2"
-  id: "7"
-themes_008: 
-  title: Soil Properties
-  priority: "4"
-  id: "8"
-themes_009: 
-  title: Weather
-  priority: "1"
-  id: "9"
 themes_001: 
+  id: "1"
   title: Agronomics
   priority: "5"
-  id: "1"
 themes_002: 
+  id: "2"
   title: Animals
   priority: "8"
-  id: "2"
 themes_003: 
+  id: "3"
   title: Ecosystem Processes
   priority: "3"
-  id: "3"
 themes_004: 
+  id: "4"
   title: Microbes
   priority: "6"
-  id: "4"
+themes_005: 
+  id: "5"
+  title: Other
+  priority: "10"
+themes_006: 
+  id: "6"
+  title: Plants
+  priority: "7"
+themes_007: 
+  id: "7"
+  title: Research Context
+  priority: "2"
+themes_008: 
+  id: "8"
+  title: Soil Properties
+  priority: "4"
+themes_009: 
+  id: "9"
+  title: Weather
+  priority: "1"
+themes_010: 
+  id: "12"
+  title: Biocomplexity
+  priority: "9"

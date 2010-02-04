@@ -4,7 +4,7 @@ require 'units_controller'
 # Re-raise errors caught by the controller.
 class UnitsController; def rescue_action(e) raise e end; end
 
-class UnitsControllerTest < Test::Unit::TestCase
+class UnitsControllerTest < ActionController::TestCase
   def setup
     @controller = UnitsController.new
     @request    = ActionController::TestRequest.new

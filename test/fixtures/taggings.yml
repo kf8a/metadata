@@ -1,0 +1,595 @@
+--- 
+taggings_001: 
+  id: "4"
+  tag_id: "4"
+  taggable_id: "56"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.330383
+taggings_002: 
+  id: "5"
+  tag_id: "5"
+  taggable_id: "56"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.334256
+taggings_003: 
+  id: "6"
+  tag_id: "6"
+  taggable_id: "54"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.35743
+taggings_004: 
+  id: "7"
+  tag_id: "7"
+  taggable_id: "54"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.360772
+taggings_005: 
+  id: "8"
+  tag_id: "8"
+  taggable_id: "54"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.363975
+taggings_006: 
+  id: "9"
+  tag_id: "9"
+  taggable_id: "63"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.372951
+taggings_007: 
+  id: "10"
+  tag_id: "10"
+  taggable_id: "63"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.420257
+taggings_008: 
+  id: "11"
+  tag_id: "11"
+  taggable_id: "20"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.465424
+taggings_009: 
+  id: "12"
+  tag_id: "12"
+  taggable_id: "20"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.468759
+taggings_010: 
+  id: "13"
+  tag_id: "13"
+  taggable_id: "20"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.472045
+taggings_011: 
+  id: "14"
+  tag_id: "14"
+  taggable_id: "20"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.475294
+taggings_012: 
+  id: "15"
+  tag_id: "15"
+  taggable_id: "20"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.478467
+taggings_013: 
+  id: "16"
+  tag_id: "16"
+  taggable_id: "20"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.481608
+taggings_014: 
+  id: "17"
+  tag_id: "17"
+  taggable_id: "20"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.484741
+taggings_015: 
+  id: "18"
+  tag_id: "18"
+  taggable_id: "20"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.487905
+taggings_016: 
+  id: "19"
+  tag_id: "19"
+  taggable_id: "60"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.495441
+taggings_017: 
+  id: "20"
+  tag_id: "20"
+  taggable_id: "60"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.498591
+taggings_018: 
+  id: "21"
+  tag_id: "21"
+  taggable_id: "60"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.501778
+taggings_019: 
+  id: "22"
+  tag_id: "22"
+  taggable_id: "60"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.504991
+taggings_020: 
+  id: "23"
+  tag_id: "23"
+  taggable_id: "16"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.512392
+taggings_021: 
+  id: "24"
+  tag_id: "6"
+  taggable_id: "16"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.514228
+taggings_022: 
+  id: "25"
+  tag_id: "24"
+  taggable_id: "16"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.517428
+taggings_023: 
+  id: "26"
+  tag_id: "25"
+  taggable_id: "16"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.520812
+taggings_024: 
+  id: "27"
+  tag_id: "26"
+  taggable_id: "16"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.524029
+taggings_025: 
+  id: "28"
+  tag_id: "27"
+  taggable_id: "16"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.527305
+taggings_026: 
+  id: "29"
+  tag_id: "28"
+  taggable_id: "16"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.530612
+taggings_027: 
+  id: "30"
+  tag_id: "29"
+  taggable_id: "16"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.533828
+taggings_028: 
+  id: "31"
+  tag_id: "7"
+  taggable_id: "16"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.5357
+taggings_029: 
+  id: "32"
+  tag_id: "30"
+  taggable_id: "55"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.554183
+taggings_030: 
+  id: "33"
+  tag_id: "31"
+  taggable_id: "55"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.557576
+taggings_031: 
+  id: "34"
+  tag_id: "32"
+  taggable_id: "55"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.560998
+taggings_032: 
+  id: "35"
+  tag_id: "33"
+  taggable_id: "55"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.564382
+taggings_033: 
+  id: "36"
+  tag_id: "34"
+  taggable_id: "55"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.56779
+taggings_034: 
+  id: "37"
+  tag_id: "35"
+  taggable_id: "66"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.57526
+taggings_035: 
+  id: "38"
+  tag_id: "7"
+  taggable_id: "66"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.577115
+taggings_036: 
+  id: "39"
+  tag_id: "36"
+  taggable_id: "36"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.589022
+taggings_037: 
+  id: "40"
+  tag_id: "37"
+  taggable_id: "36"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.592248
+taggings_038: 
+  id: "41"
+  tag_id: "38"
+  taggable_id: "36"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.595591
+taggings_039: 
+  id: "42"
+  tag_id: "39"
+  taggable_id: "36"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.598869
+taggings_040: 
+  id: "43"
+  tag_id: "40"
+  taggable_id: "36"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.602237
+taggings_041: 
+  id: "44"
+  tag_id: "41"
+  taggable_id: "36"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.605549
+taggings_042: 
+  id: "45"
+  tag_id: "42"
+  taggable_id: "62"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.612923
+taggings_043: 
+  id: "46"
+  tag_id: "7"
+  taggable_id: "67"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.618811
+taggings_044: 
+  id: "47"
+  tag_id: "24"
+  taggable_id: "67"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.621021
+taggings_045: 
+  id: "48"
+  tag_id: "23"
+  taggable_id: "67"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.623034
+taggings_046: 
+  id: "49"
+  tag_id: "6"
+  taggable_id: "67"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.624965
+taggings_047: 
+  id: "50"
+  tag_id: "11"
+  taggable_id: "5"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.631024
+taggings_048: 
+  id: "51"
+  tag_id: "12"
+  taggable_id: "5"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.632982
+taggings_049: 
+  id: "52"
+  tag_id: "13"
+  taggable_id: "5"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.634904
+taggings_050: 
+  id: "53"
+  tag_id: "14"
+  taggable_id: "5"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.636722
+taggings_051: 
+  id: "54"
+  tag_id: "15"
+  taggable_id: "5"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.638713
+taggings_052: 
+  id: "55"
+  tag_id: "16"
+  taggable_id: "5"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.640746
+taggings_053: 
+  id: "56"
+  tag_id: "17"
+  taggable_id: "5"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.642658
+taggings_054: 
+  id: "57"
+  tag_id: "18"
+  taggable_id: "5"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.64456
+taggings_055: 
+  id: "58"
+  tag_id: "7"
+  taggable_id: "64"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.65279
+taggings_056: 
+  id: "59"
+  tag_id: "24"
+  taggable_id: "64"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.654734
+taggings_057: 
+  id: "60"
+  tag_id: "23"
+  taggable_id: "64"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.656675
+taggings_058: 
+  id: "61"
+  tag_id: "6"
+  taggable_id: "64"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.658638
+taggings_059: 
+  id: "62"
+  tag_id: "43"
+  taggable_id: "68"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.666002
+taggings_060: 
+  id: "63"
+  tag_id: "24"
+  taggable_id: "53"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.672024
+taggings_061: 
+  id: "64"
+  tag_id: "6"
+  taggable_id: "53"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.673967
+taggings_062: 
+  id: "65"
+  tag_id: "23"
+  taggable_id: "53"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.675864
+taggings_063: 
+  id: "66"
+  tag_id: "44"
+  taggable_id: "53"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.679132
+taggings_064: 
+  id: "67"
+  tag_id: "45"
+  taggable_id: "53"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.6824
+taggings_065: 
+  id: "68"
+  tag_id: "20"
+  taggable_id: "53"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.684255
+taggings_066: 
+  id: "69"
+  tag_id: "21"
+  taggable_id: "53"
+  tagger_id: 
+  tagger_type: 
+  taggable_type: Dataset
+  context: keywords
+  created_at: 2009-11-10 08:39:21.686255

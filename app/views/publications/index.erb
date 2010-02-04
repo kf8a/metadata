@@ -1,3 +1,9 @@
+<div id='search_form'>
+  <%= form_tag '/publications', :method => 'get'%>
+    <%= text_field_tag :word, @word, {:size => 60, :method => :get} %>
+      
+      <%= submit_tag "Search" %>
+</div>
 <h1>Publications <%= @decoration %>: <%=h @pub_type%> </h1>
 <% year = 0 -%>
 <% for publication in @publications %>
@@ -14,8 +20,6 @@
 					abstract&nbsp;&hellip;</a>
 			<% end -%>
 			<%= link_to_remote 'document', :url =>  publication.public_filename if publication.filename %>
-			<%= link_to 'edit', edit_publication_path(publication), {:class=>'edit'} if logged_in? %>
-	<%= link_to_remote image_tag("trash.gif"), :url => publication_path(publication), :method => 'delete', :confirm => 'Are you sure?' if logged_in?%>	
 	</div>
 <% end %>
 <p><% if logged_in? -%>

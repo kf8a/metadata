@@ -1,12 +1,18 @@
 require 'rexml/document'
 require 'redcloth'
-#require 'fastercsv'
 include REXML
 
 class Datatable < ActiveRecord::Base
   belongs_to :dataset
   has_many :variates, :order => :position
+  
+  def within_interval?(start_date=Date.today, end_date=Date.today)
+    extent = temporal_extent
+    return false if extent[:begin_date].nil?
     
+    !(extent[:begin_date] < start_date || extent[:end_date] > end_date) 
+  end
+      
   def to_eml
     eml = Element.new('datatable')
     eml.add_attribute('id',name)
@@ -19,10 +25,6 @@ class Datatable < ActiveRecord::Base
   end
   
   def to_csv
-    p 'in_csv'
-    if self.is_restricted
-      return 'Data Embargoed'
-    end
     values  = ActiveRecord::Base.connection.execute(object)
     csv_string = FasterCSV.generate do |csv|
       csv << variates.collect {|v| v.name }
@@ -35,7 +37,39 @@ class Datatable < ActiveRecord::Base
     return  csv_string
   end
   
+  def temporal_extent
+    data_start_date = data_end_date = nil
+    if is_sql
+    
+      values = ActiveRecord::Base.connection.execute(object)
+      date_field = case 
+      when values.fields.member?('sample_date') then 'sample_date'
+      when values.fields.member?('obs_date') then 'obs_date'
+      when values.fields.member?('date') then 'date'
+      when values.fields.member?('datetime') then 'datetime'
+      end
+      unless date_field.nil?
+        query = "select max(#{date_field}), min(#{date_field}) from (#{object}) as t1"        
+        data_start_date, data_end_date = query_datatable_for_temporal_extent(query)
+      end
+    end
+    {:begin_date => data_start_date,:end_date => data_end_date}
+  end
+  
+  def update_temporal_extent
+    dates = temporal_extent
+    self.begin_date = dates[:begin_date] if dates[:begin_date]
+    self.end_date = dates[:end_date] if dates[:end_date]
+    save
+  end
+  
 private
+
+  def query_datatable_for_temporal_extent(query)
+    values = ActiveRecord::Base.connection.execute(query)
+    [Time.parse(values[0]['min']).to_date,Time.parse(values[0]['max']).to_date]
+  end
+
   def eml_physical
     p = Element.new('physical')
     p.add_element('objectName').add_text(self.title)
@@ -53,5 +87,12 @@ private
       a.add_element variate.to_eml
     end
     return a
+  end
+  
+  def convert_to_date(time)
+    if time.class == Time
+        time = time.to_date
+    end
+    time
   end
 end

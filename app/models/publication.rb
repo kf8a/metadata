@@ -9,4 +9,10 @@ class Publication < ActiveRecord::Base
   validates_presence_of :citation
   validates_numericality_of :year, :on => :create, :message => "is not a number"
   
+  def Publication.find_by_word(word)
+    word = '%'+word+'%'
+    find(:all, :order => 'year desc', 
+      :conditions => 
+      [%q{((lower(citation) like lower(?)) or (lower(abstract) like lower(?))) and publication_type_id < 6}, word, word ])
+  end
 end

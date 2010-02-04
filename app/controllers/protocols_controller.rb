@@ -1,6 +1,8 @@
 class ProtocolsController < ApplicationController
   
   before_filter :set_title
+  caches_action :index
+  
   # GET /protocols
   # GET /protocols.xml
   def index
@@ -45,6 +47,8 @@ class ProtocolsController < ApplicationController
     
     respond_to do |format|
       if @protocol.save
+        expire_action :action => :index
+        
         flash[:notice] = 'Protocol was successfully created.'
         format.html { redirect_to protocol_url(@protocol) }
         format.xml  { head :created, :location => protocol_url(@protocol) }
@@ -62,6 +66,8 @@ class ProtocolsController < ApplicationController
 
     respond_to do |format|
       if @protocol.update_attributes(params[:protocol])
+        expire_action :action => :index
+        
         flash[:notice] = 'Protocol was successfully updated.'
         format.html { redirect_to protocol_url(@protocol) }
         format.xml  { head :ok }
@@ -78,6 +84,8 @@ class ProtocolsController < ApplicationController
     @protocol = Protocol.find(params[:id])
     @protocol.destroy
 
+    expire_action :action => :index
+    
     respond_to do |format|
       format.html { redirect_to protocols_url }
       format.xml  { head :ok }
