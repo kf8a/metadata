@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(:version => 20100203164718) do
 
   create_table "datatables_themes", :id => false, :force => true do |t|
     t.integer  "datatable_id"
-    t.integer  "theme_ids"
+    t.integer  "theme_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
