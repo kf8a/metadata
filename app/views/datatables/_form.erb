@@ -16,7 +16,7 @@
 </p>
 <p>
   <label for='datatable_theme'>KBS Theme</label>
-  <%= f.select :theme_id, @themes %>
+  <%= f.select :theme_id, nested_set_options(Theme, @theme) {|i| "#{'-' * i.level} #{i.name}" } %>
 </p>
 <p>
   <label for='datatable_theme'>LTER Core Area</label>
