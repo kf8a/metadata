@@ -240,6 +240,15 @@ input#keyword_list {
 	background-color: orange;
 }
 
+li.study_title {
+	background-color: #f5f5f5;
+	margin: 2px;
+	-moz-border-radius:10px;
+  -webkit-border-radius:10px;
+}
+li.study_title li {
+	padding-top: 3px;
+}
 
 tree * {margin:0; padding:0;}
 .tree li {list-style:none; padding-left:21px;}
