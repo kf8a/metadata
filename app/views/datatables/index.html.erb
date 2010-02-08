@@ -45,3 +45,13 @@
   </li>
   <% end -%>
 </ul>
+
+<% if logged_in? %>
+<h3>Datatables</h3>
+<ul>
+  <% @datatables.each do |datatable| %>
+    <% next unless datatable %>
+    <li><%= link_to datatable.title, datatable_path(datatable)%></li>
+    <% end -%>
+</ul>
+<% end %>
