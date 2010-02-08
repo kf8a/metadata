@@ -1,0 +1,15 @@
+<h1>datatables</h1>
+
+<ul>
+  <% @studies.each do |study| -%>
+  <li><%= study.name %></li>
+  <ul>
+    <% @themes.each do |theme| %>
+    <li><%= theme.name %></li>
+    <ul>
+      <%= render :partial=>'theme', :collection => theme.descendants, :locals => {:study => study} %>
+    </ul>
+    <% end -%>
+  </ul>
+  <% end -%>
+</ul>

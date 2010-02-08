@@ -30,6 +30,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :units
   
+  map.resources :themes
+  
   map.root :controller => 'datasets'
 
   map.open_id_complete 'sessions', :controller => "sessions", :action => "create", :requirements => { :method => :get }

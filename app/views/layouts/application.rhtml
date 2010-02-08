@@ -8,13 +8,15 @@
 	<%= stylesheet_link_merged :base %>
   
   <link type="text/css" href="/stylesheets/jquery.autocomplete.css" rel="stylesheet" />
-  <%= javascript_include_merged :base %>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+  
   <script type='text/javascript' src='/javascripts/jquery.autocomplete.js'></script>
+  <script type='text/javascript' src='/javascripts/jquery-ui.min.js'></script>
+  
   <script type="text/javascript" src="/javascripts/jquery.quickTree.js" ></script>
   <script>jQuery.noConflict();</script>
-  <script type='text/javascript' src='/javascripts/application.js'></script>
-  
+  <%= javascript_include_merged :base %>
+    
 </head>
 <body>
 	<div id='wrapper'>

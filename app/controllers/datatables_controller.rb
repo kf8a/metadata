@@ -6,8 +6,23 @@ class DatatablesController < ApplicationController
   # GET /datatables.xml
   def index
 
-    @datatables = [] # Datatable.find(:all)
-
+    @datatables = Datatable.all
+    @themes = Theme.roots
+    @studies = Study.all
+    
+    # 
+    # @datatables = studies.collect do |s|
+    #   study_themes = themes.collect do |t|
+    #     next if t.datatables.empty?
+    #     theme_datatables = t.datatables.collect do |d|
+    #       next unless  d.dataset.studies.include?(s)
+    #       d
+    #     end
+    #     {t => theme_datatables.compact}
+    #   end
+    #   {s => study_themes.compact}
+    # end
+    
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @datatables.to_xml }
