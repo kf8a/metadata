@@ -226,6 +226,18 @@ input#keyword_list {
 	display:inline;
 }
 
+#content a.download_link {
+	background-color: yellow;
+	padding: 10px;
+	-moz-border-radius:10px;
+  -webkit-border-radius:10px;
+	border-style: outset;
+}
+
+#content a.download_link:hover {
+	background-color: orange;
+}
+
 tree * {margin:0; padding:0;}
 .tree li {list-style:none; padding-left:21px;}
 .tree li.root {padding-left:0;}
