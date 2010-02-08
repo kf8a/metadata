@@ -22,7 +22,7 @@ jQuery.fn.quickTree = function() {
         jQuerytree.addClass('tree');
 		
 		//hide all lists inside of main list by default
-        jQuerytree.find('ul').hide();
+     //   jQuerytree.find('ul').hide();
 		
 		//iterate through all list items
         jQueryroots.each(function(){
