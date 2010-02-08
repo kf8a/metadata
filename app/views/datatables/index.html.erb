@@ -9,8 +9,8 @@
     <li><%= theme.name %>
         <ul>
         <% theme.children.each do |t| -%>
-        <% next unless theme.datatables?(study)%>
-        
+        <% next unless t.datatables?(study)%>
+
         <%= render :partial=>'theme', :locals => {:theme => t, :study => study} %>
         <% end -%>
       </ul>

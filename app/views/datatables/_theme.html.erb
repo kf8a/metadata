@@ -1,7 +1,8 @@
 <li><%= theme.name%>
-<ul>
+  <ul>
   <% theme.children.each do |t| -%>
   <% next unless t.datatables?(study)%>
+  <li><%=t.name %>
     <ul>
     <%= render :partial => 'theme',  :locals => {:theme => t, :study => study}%>
     </ul>
@@ -12,5 +13,5 @@
     <%= link_to datatable.name, datatable_path(datatable) %>
   </li>
   <% end -%>
-</ul>
+  </ul>
 </li>
