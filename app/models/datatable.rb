@@ -8,6 +8,8 @@ class Datatable < ActiveRecord::Base
   belongs_to :theme
   belongs_to :core_area
   
+  acts_as_taggable_on :keywords
+  
   def within_interval?(start_date=Date.today, end_date=Date.today)
     extent = temporal_extent
     return false if extent[:begin_date].nil?

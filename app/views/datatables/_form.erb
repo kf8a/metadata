@@ -15,6 +15,10 @@
 	<%= f.text_area :description, :size => '60x10' %>
 </p>
 <p>
+  <label for='dataset_keyword_list'>Keywords</label>
+  <%= text_field_with_auto_complete :datatable, :keyword_list, {}, {:method => :get} %>
+</p>
+<p>
   <label for='datatable_theme'>KBS Theme</label>
   <%= f.select :theme_id, nested_set_options(Theme, @theme) {|i| "#{'-' * i.level} #{i.name}" }, :include_blank => true %>
 </p>

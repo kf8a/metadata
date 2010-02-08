@@ -5,6 +5,9 @@
 </p>
 
 <p>Dataset: <%= link_to @datatable.dataset.title, dataset_path(@datatable.dataset) %></p>
+<% if @datatable.keywords.any? %>
+<p>Keywords: <%= @datatable.keywords.join(', ')%></p>
+<% end %>
 
 <% unless  @datatable.is_sql %>
 <%= link_to 'Data', @datatable.data_url %> (on a different page)
