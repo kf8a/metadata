@@ -5,11 +5,15 @@
   <li><%= study.name %>
   <ul class=>
     <% @themes.each do |theme| %>
-    <% next unless theme.has_datatables?(study)%>
+    <% next unless theme.datatables?(study)%>
     <li><%= theme.name %>
-    <ul>
-      <%= render :partial=>'theme', :collection => theme.children, :locals => {:study => study} %>
-    </ul>
+        <ul>
+        <% theme.children.each do |t| -%>
+        <% next unless theme.datatables?(study)%>
+        
+        <%= render :partial=>'theme', :locals => {:theme => t, :study => study} %>
+        <% end -%>
+      </ul>
     </li>
     <% end -%>
   </ul>

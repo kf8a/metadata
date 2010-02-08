@@ -22,43 +22,43 @@ class ThemeTest < ActiveSupport::TestCase
       @sub_sub_theme.move_to_child_of(@sub_theme)
     end
     
-    should 'respond to has_datatables?' do
-      assert @theme.respond_to?('has_datatables?')
+    should 'respond to datatables?' do
+      assert @theme.respond_to?('datatables?')
     end
     
     should 'return true if @theme has a datatable' do
       @datatable.theme = @theme
       assert @datatable.save
-      assert @theme.has_datatables?
+      assert @theme.datatables?
     end
     
     should 'return false if @theme does not have a datatable' do
-      assert !@theme.has_datatables?
+      assert !@theme.datatables?
     end
     
     should 'return true if the subtheme has a datatable' do
       @datatable.theme = @sub_theme
       assert @datatable.save
-      assert @theme.has_datatables?
+      assert @theme.datatables?
     end
     
     should 'return true if the sub sub theme has a datatable' do
       @datatable.theme = @sub_sub_theme
       assert @datatable.save
-      assert @theme.has_datatables?
+      assert @theme.datatables?
     end
          
     should 'return true if a datatable is in the current study' do  
       @datatable.theme = @theme
       assert @datatable.save
-      assert @theme.has_datatables?(@study)
+      assert @theme.datatables?(@study)
     end
       
     should 'return false if a datatable is in a different study' do
       @datatable.theme = @theme
       assert @datatable.save
       study = Factory.create(:study)
-      assert !@theme.has_datatables?(study)
+      assert !@theme.datatables?(study)
     end
 
   end
