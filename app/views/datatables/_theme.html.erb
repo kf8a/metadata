@@ -8,7 +8,7 @@
   <% theme.datatables.each do |datatable| -%>
   <% next unless datatable.dataset.studies.include?(study) -%>
   <li>
-    <%= datatable.name %>
+    <%= link_to datatable.name, datatable_path(datatable) %>
   </li>
   <% end -%>
 </ul>
