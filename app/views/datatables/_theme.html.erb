@@ -1,7 +1,9 @@
-<li><%= theme.name %> </li>
+<li><%= theme.name %>
 <ul>
   <% if theme.descendants.size > 0 -%>
+    <ul>
     <%= render :partial => 'theme', :collection => theme.descendants, :locals => {:study => study}%>
+    </ul>
   <% end -%>
   <% theme.datatables.each do |datatable| -%>
   <% next unless datatable.dataset.studies.include?(study) -%>
@@ -10,3 +12,4 @@
   </li>
   <% end -%>
 </ul>
+</li>

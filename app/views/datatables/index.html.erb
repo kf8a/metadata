@@ -1,15 +1,17 @@
 <h1>datatables</h1>
 
-<ul>
+<ul class='quickTree'>
   <% @studies.each do |study| -%>
-  <li><%= study.name %></li>
-  <ul>
+  <li><%= study.name %>
+  <ul class=>
     <% @themes.each do |theme| %>
-    <li><%= theme.name %></li>
+    <li><%= theme.name %>
     <ul>
       <%= render :partial=>'theme', :collection => theme.descendants, :locals => {:study => study} %>
     </ul>
+    </li>
     <% end -%>
   </ul>
+  </li>
   <% end -%>
 </ul>
