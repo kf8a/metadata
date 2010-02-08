@@ -7,7 +7,7 @@ class ThemesControllerTest < ActionController::TestCase
       get :index
     end
     
-    should_assign_to :theme_root
+    should_assign_to :theme_roots
     should_respond_with :success
   end
 end

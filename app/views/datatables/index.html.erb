@@ -5,6 +5,7 @@
   <li><%= study.name %>
   <ul class=>
     <% @themes.each do |theme| %>
+    <% next unless theme.has_datatables?(study)%>
     <li><%= theme.name %>
     <ul>
       <%= render :partial=>'theme', :collection => theme.descendants, :locals => {:study => study} %>
