@@ -47,11 +47,15 @@
 	-->
 <%= link_to 'Download complete dataset', datatable_path(@datatable, :format => :csv) ,:class => 'download_link'%>
 
-<h3>Related Tables</h3>
+
 <% related_tables = @datatable.dataset.datatables.collect  do |d|
+  next if d == @datatable
   link_to d.title , datatable_path(d) 
 end -%>
+<% if related_tables.any? %>
+<h3>Related Tables</h3>
 <p><%= related_tables.join(', ')%></p>
+<% end %>
 
 <h3>Data Excerpt</h3>
 <table>
