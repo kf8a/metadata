@@ -1,5 +1,30 @@
 <h1>datatables</h1>
 
+<div id='search-form'>
+  <%= form_tag '/datatables', :method => 'get'%>
+  <div id='top-line-search'>
+    <div id='core-area-search'>
+    <label>Theme/LTER Core Area</label> <%= collection_select :theme, :id,  @themes, :id, :name, { :include_blank => "All" }%>
+    </div>
+    <div id='experiment-search'>
+      <label>Long-term Experiment</label>
+      <%= collection_select :study, :id, Study.all(:order => 'seniority'), :id, :name, {:include_blank => 'All'}%>
+    </div>
+    <div id='contributor-search'>  
+       <label>Contributor:</label><%= select :person, :id, @people.collect{|x| [truncate(x.last_name_first, :length => 16), x.id]},  { :include_blank => "All" } %>
+    </div>
+    </div>
+    <div id='bottom-line-search'>
+    <div id='year-search'>
+      <label>From:</label> <%= select_year 1988, :start_year => 1988, :end_year => Date.today.year, :field_name => 'syear' %><label>To:</label><%= select_year Date.today, :start_year=>1988, :end_year => Date.today.year, :field_name => 'eyear'%>
+    </div>
+    <div id='keyword-search'>
+      <label>Keywords:</label><%= text_field_tag :keyword_list, @keyword_list, {:id => 'keyworder'}  %>
+    </div>  
+      <%= submit_tag "Search" %>
+</div>
+</div>
+
 <ul class='quickTree'>
   <% @studies.each do |study| -%>
   <li class='study_title'><%= study.name %>
