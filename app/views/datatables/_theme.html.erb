@@ -1,4 +1,4 @@
-<li><%= theme.name%>
+<li><%= theme.name.capitalize %>
   <ul>
   <% theme.children.each do |t| -%>
   <% next unless t.datatables?(study)%>

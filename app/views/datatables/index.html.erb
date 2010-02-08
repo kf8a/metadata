@@ -31,7 +31,7 @@
   <ul class=>
     <% @themes.each do |theme| %>
     <% next unless theme.datatables?(study)%>
-    <li><%= theme.name %>
+    <li><%= theme.name.capitalize %>
         <ul>
         <% theme.children.each do |t| -%>
         <% next unless t.datatables?(study)%>
