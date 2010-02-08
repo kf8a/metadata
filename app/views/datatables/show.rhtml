@@ -4,6 +4,7 @@
 	<%= textilize @datatable.description  if @datatable.description %>
 </p>
 
+<p>Dataset: <%= link_to @datatable.dataset.title, dataset_path(@datatable.dataset) %></p>
 
 <% unless  @datatable.is_sql %>
 <%= link_to 'Data', @datatable.data_url %> (on a different page)
@@ -56,6 +57,8 @@ end -%>
 <h3>Related Tables</h3>
 <p><%= related_tables.join(', ')%></p>
 <% end %>
+
+
 
 <h3>Data Excerpt</h3>
 <table>
