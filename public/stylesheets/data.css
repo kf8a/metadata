@@ -246,6 +246,9 @@ li.study_title {
 	-moz-border-radius:10px;
   -webkit-border-radius:10px;
 }
+li.study_title ul {
+	background-color: white;
+}
 li.study_title li {
 	padding-top: 3px;
 }
