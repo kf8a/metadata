@@ -1,8 +1,8 @@
-<li><%= theme.name %>
+<li><%= theme.name if theme.has_datatables?(study)%>
 <ul>
-  <% if theme.descendants.size > 0 -%>
+  <% if theme.children.size > 0 -%>
     <ul>
-    <%= render :partial => 'theme', :collection => theme.descendants, :locals => {:study => study}%>
+    <%= render :partial => 'theme', :collection => theme.children, :locals => {:study => study}%>
     </ul>
   <% end -%>
   <% theme.datatables.each do |datatable| -%>

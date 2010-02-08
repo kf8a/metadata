@@ -8,7 +8,7 @@
     <% next unless theme.has_datatables?(study)%>
     <li><%= theme.name %>
     <ul>
-      <%= render :partial=>'theme', :collection => theme.descendants, :locals => {:study => study} %>
+      <%= render :partial=>'theme', :collection => theme.children, :locals => {:study => study} %>
     </ul>
     </li>
     <% end -%>
