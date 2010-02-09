@@ -1,5 +1,13 @@
 <li><%= theme.name.capitalize %>
   <ul>
+    <% theme.datatables.each do |datatable| -%>
+    <% next unless datatable.dataset.studies.include?(study) -%>
+    <% next unless @datatables.include?(datatable) -%>
+    <li>
+      <%= link_to datatable.title, datatable_path(datatable) %>
+    </li>
+    <% end -%>
+    
   <% theme.children.each do |t| -%>
   <% next unless t.datatables?(study) -%>
 
@@ -10,12 +18,6 @@
     <%= render :partial => 'theme',  :locals => {:theme => t, :study => study}%>
     </ul>
   <% end -%>
-  <% theme.datatables.each do |datatable| -%>
-  <% next unless datatable.dataset.studies.include?(study) -%>
-  <% next unless @datatables.include?(datatable) -%>
-  <li>
-    <%= link_to datatable.title, datatable_path(datatable) %>
-  </li>
-  <% end -%>
+
   </ul>
 </li>
