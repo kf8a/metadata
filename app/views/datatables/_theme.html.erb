@@ -1,7 +1,9 @@
 <li><%= theme.name.capitalize %>
   <ul>
   <% theme.children.each do |t| -%>
-  <% next unless t.datatables?(study)%>
+  <% next unless t.datatables?(study) -%>
+  <% next unless t.include_datatables?(@datatables) -%>
+  
   <li><%=t.name %>
     <ul>
     <%= render :partial => 'theme',  :locals => {:theme => t, :study => study}%>

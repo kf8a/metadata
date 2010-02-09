@@ -60,7 +60,20 @@ class ThemeTest < ActiveSupport::TestCase
       study = Factory.create(:study)
       assert !@theme.datatables?(study)
     end
-
+    
+    context 'include_datatables?' do
+      should 'return false if the datatable is not in the current theme' do
+        datatable = Factory.create(:datatable)
+        assert !@theme.include_datatables?([datatable])
+      end
+    
+      should 'return true if the datatable is in the current theme' do
+        @datatable.theme = @theme
+        assert @datatable.save
+        assert @theme.datatables?
+        assert @theme.include_datatables?([@datatable])
+      end
+    end
   end
   
 end

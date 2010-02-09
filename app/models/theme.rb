@@ -12,5 +12,12 @@ class Theme < ActiveRecord::Base
     end
     i_have_datatables || children_have_datatables
   end
+  
+  def include_datatables?(test_datatables=[])
+    my_datatables = descendants.collect {|d| d.datatables }.flatten
+    my_datatables = my_datatables + datatables
+
+    (my_datatables & test_datatables).any?
+  end
 
 end
