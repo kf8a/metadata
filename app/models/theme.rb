@@ -21,9 +21,10 @@ class Theme < ActiveRecord::Base
   def include_datatables_from_study?(test_datatables, study)
     my_datatables = self_and_descendants_datatables
     datatables_in_study = my_datatables.collect do |table|
-      table.dataset.studies.include?(study)
+      table if table.dataset.studies.include?(study)
     end
-    datatables_in_study.include?(true)
+
+    (test_datatables & datatables_in_study).any?
   end
   
   def self_and_descendants_datatables

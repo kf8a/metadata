@@ -2,6 +2,7 @@
   <ul>
   <% theme.children.each do |t| -%>
   <% next unless t.datatables?(study) -%>
+
   <% next unless t.include_datatables_from_study?(@datatables, study) -%>
   
   <li><%=t.name %>

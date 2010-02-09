@@ -88,6 +88,11 @@ class ThemeTest < ActiveSupport::TestCase
         should 'return false if the datatable is in a different study ' do
           assert !@theme.include_datatables_from_study?([@datatable], @study2)
         end
+        
+        should 'return false if there is an empty array passed' do
+          assert !@theme.include_datatables_from_study?([], @study2)
+          assert !@theme.include_datatables_from_study?([], @study)
+        end
       end
     end
   end

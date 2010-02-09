@@ -33,16 +33,8 @@
     <% next unless theme.datatables?(study) -%>
     <% next unless theme.include_datatables_from_study?(@datatables, study) -%>
     
-    <li><%= theme.name.capitalize %>
-        <ul>
-        <% theme.children.each do |t| -%>
-        <% next unless t.datatables?(study) -%>
-        <% next unless t.include_datatables_from_study?(@datatables, study) -%>
-
-        <%= render :partial=>'theme', :locals => {:theme => t, :study => study} %>
-        <% end -%>
-      </ul>
-    </li>
+    <%= render :partial=>'theme', :locals => {:theme => theme, :study => study} %>
+  
     <% end -%>
   </ul>
   </li>
