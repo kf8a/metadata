@@ -53,8 +53,8 @@
 <h3>Datatables</h3>
 <ul>
   <% @datatables.each do |datatable| %>
-    <% next unless datatable %>
-    <li><%= link_to datatable.title, datatable_path(datatable)%></li>
+    <% next if datatable.theme_id %>
+    <li><%= link_to datatable.title, datatable_path(datatable)%> <%=link_to "edit", edit_datatable_path(datatable)%></li>
     <% end -%>
 </ul>
 <% end %>
