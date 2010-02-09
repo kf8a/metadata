@@ -75,8 +75,7 @@ jQuery(document).ready(function() {
 	}
  
 	function update_parent(theme_id, parent_id){
-		console.log(parent_id);
-		console.log(theme_id);
+
 		var path = jQuery('#update_path').val();
 		jQuery.post(path + '/' + theme_id + '.js', {parent_id: parent_id, action: 'update', _method: 'put', only_parent: 'true' },
 		  function(data){

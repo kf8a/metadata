@@ -137,8 +137,6 @@ class DatatableTest < ActiveSupport::TestCase
     
     should 'cache the temporal extent' do
       @date_representations.each do |date_representation|
-        assert date_representation.begin_date.nil?
-        assert date_representation.end_date.nil?
         date_representation.update_temporal_extent
         assert date_representation.begin_date == Date.today
         assert date_representation.end_date == Date.today
@@ -171,10 +169,12 @@ class DatatableTest < ActiveSupport::TestCase
       dataset = Factory.create(:dataset, :people=>[@person], :studies => [@study])
       
       @datatable = Factory.create(:datatable, :dataset=> dataset, 
-        :keyword_list => 'earth,wind,fire', :theme => @theme)
+        :keyword_list => 'earth,wind,fire', :theme => @theme, :on_web => true)
+        
+      @datatable.update_temporal_extent
         
       @unfound_datatable = Factory.create(:datatable, :dataset => Factory.create(:dataset),
-          :keyword_list => 'wildfire')
+          :keyword_list => 'wildfire', :on_web => true)
       @unfound_study = Factory.create(:study)
       @unfound_datatable.dataset.studies << @unfound_study
       
@@ -196,6 +196,11 @@ class DatatableTest < ActiveSupport::TestCase
       assert Datatable.find_by_keywords('noise') == []
     end
     
+    should 'find all datatables with empty keyword' do
+      assert Datatable.find_by_keywords('').include?(@datatable)
+      assert Datatable.find_by_keywords('').include?(@unfound_datatable)
+    end
+    
     should 'respond to find_by_person' do
       assert Datatable.respond_to?('find_by_person')
     end
@@ -211,6 +216,20 @@ class DatatableTest < ActiveSupport::TestCase
     should 'not find a datatable with an empty person' do
       assert Datatable.find_by_person('') == []
     end
+    
+    # year
+    should 'respond to find_by_year' do
+       assert Datatable.respond_to?('find_by_year')
+     end
+         
+    should 'not find a datatable from last year' do
+      assert Datatable.find_by_year(Date.today - 1.year - 1.month, Date.today - 1.year - 1.day) == []
+    end
+    
+    should 'find a datatable if called with the year' do
+      assert Datatable.find_by_year(Date.today.year, Date.today.year) == [@datatable]
+    end
+    
        
     # themes
     should 'respond to find_by_theme' do
@@ -261,18 +280,57 @@ class DatatableTest < ActiveSupport::TestCase
     end
     
     should 'find one datatable if called with one findable parameter' do
-      # params = {:theme => {:id => @theme.id.to_s}}
-      # assert Datatable.find_by_params(params) == [@datatable]
+      params = {:theme => {:id => @theme.id.to_s}}
+      assert Datatable.find_by_params(params) == [@datatable]
       params = {:person => {:id => @person}}
       assert Datatable.find_by_params(params) == [@datatable]
       params = {:keywords => 'wind'}
       assert Datatable.find_by_params(params) == [@datatable]
-      # params = {:study => {:id => @study.id}}
-      # assert Datatable.find_by_params(params) == [@datatable]
-      # params = {:date => {:syear => Date.today.year, :eyear => Date.today.year}}
-      # assert Datatable.find_by_params(params) == [@datatable]
-      
+      params = {:study => {:id => @study.id}}
+      assert Datatable.find_by_params(params) == [@datatable]
+      params = {:date => {:syear => Date.today.year, :eyear => Date.today.year}}
+      assert Datatable.find_by_params(params) == [@datatable]     
     end
+    
+    should 'not find datatable if called with  wrong theme' do
+      t = Factory.create(:theme)
+      params = {:theme => {:id => t.id}}
+      assert Datatable.find_by_params(params) == []
+    end
+    
+    should 'not find datatable if called with wrong person' do
+      p = Factory.create(:person)
+      params = {:person => {:id  => p.id}}
+      assert Datatable.find_by_params(params) == []
+    end
+    
+    should 'find one datatable if called with multiple findable parameters' do
+      params = {:theme => {:id => @theme.id}, :person => {:id => @person.id}}
+      assert Datatable.find_by_params(params) == [@datatable]
+      params = {:theme => {:id => @theme}, :keywords => 'wind'}
+      assert Datatable.find_by_params(params) == [@datatable]
+      params = {:study => {:id => @study}, :theme => {:id => ''}, :person => {:id => ''},
+          :date => {:syear => Date.today.year, :eyear => Date.today.year + 3}}
+      assert Datatable.find_by_params(params) == [@datatable]
+      params = params = {:study => {:id => nil}, :theme => {:id => ''}, :person => {:id => ''},
+          :date => {:syear => Date.today.year, :eyear => Date.today.year + 3},
+          :keywords => 'earth'}
+      assert Datatable.find_by_params(params) == [@datatable]
+    end
+    
+    should 'find one datatable if a parameter is empty' do    
+      params = {:theme => {:id => ''}, :person => {:id => @person}}
+      assert Datatable.find_by_params(params) == [@datatable]
+      
+      params = {:theme => {:id => nil}, :person => {:id => @person}}
+      assert Datatable.find_by_params(params) == [@datatable]  
+    end
+    
+    should 'find all datatables if empty keywords' do
+      params = {:theme => {:id => nil}, :person => {:id => @person}, :keywords => ''}
+      assert Datatable.find_by_params(params).include?(@datatable)
+    end
+
 
   end
 end

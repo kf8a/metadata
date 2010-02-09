@@ -37,12 +37,9 @@ class DatatablesController < ApplicationController
     end
       
     @datatables = Datatable.find_by_params({:theme => {:id => theme_id}, :study => {:id => study_id},
-        :person => {:id => person_id}, :keywords => keyword_list})
-    # @datatables = Datatable.find_by_params({:theme => {:id => theme_id}, :person => {:id => person_id},
-    #           :study => {:id => study_id}, :date => {:syear => date['syear'], :eyear => date['eyear']},
-    #           :keywords => keyword_list})
-    # 
+        :person => {:id => person_id}, :keywords => keyword_list })
        
+       #   :date => {:syear => date['syear'], :eyear => date['eyear']}
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @datatables.to_xml }

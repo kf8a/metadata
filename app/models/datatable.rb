@@ -67,8 +67,23 @@ class Datatable < ActiveRecord::Base
     save
   end
   
+  def begin_date
+    if read_attribute(:begin_date)
+      update_temporal_extent
+    end
+    read_attribute(:begin_date)
+  end
+  
+  def end_date
+    if read_attribute(:end_date)
+      update_temporal_extent
+    end
+    read_attribute(:end_date)
+  end
+  
   ## Finding datatables
   def self.find_by_keywords(keyword_list='')
+    return self.find(:all, :conditions => ['on_web is true']) if keyword_list == ''
     self.find_tagged_with(keyword_list,:on => 'keywords')    
   end  
   
@@ -84,8 +99,12 @@ class Datatable < ActiveRecord::Base
       " where people.id = #{person_id}")
   end
   
+  def self.find_by_date_interval(begin_date, end_date)
+    self.all(:conditions => ['on_web is true and (end_date < ? or begin_date < ?)', end_date, begin_date])
+  end
+  
   def self.find_by_year(syear, eyear)
-    
+    self.find_by_date_interval(Date.parse(syear.to_s + '-1-1'), Date.parse(eyear.to_s+'-12-31'))
   end
   
   def self.find_by_theme(theme_id ='')
