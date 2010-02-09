@@ -148,23 +148,11 @@ a.edit:hover {
 }
 
 
-
-#content li.study-title {
-	width: 498px;
-	text-decoration: none;
-	color: #006633;
-	-moz-border-radius:10px;
-  -webkit-border-radius:10px;
-	font-weight: normal;
-	font-style: normal;
-	display: block;
-	font-variant: normal;
-	padding: 0 2em 0;
+#content li.study_title {
+	margin-top: 0.5em;
+		font-size: 1.3em;
 }
 
-#content li.study-title ul {
-	background-color: white;
-}
 
 #core-area-search {
 	float:left
