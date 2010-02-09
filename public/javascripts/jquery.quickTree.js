@@ -22,7 +22,7 @@ jQuery.fn.quickTree = function() {
         jQuerytree.addClass('tree');
 		
 		//hide all lists inside of main list by default
-     //   jQuerytree.find('ul').hide();
+        jQuerytree.find('ul').hide();
 		
 		//iterate through all list items
         jQueryroots.each(function(){
@@ -34,19 +34,21 @@ jQuery.fn.quickTree = function() {
                 jQuery(this).addClass('root').prepend('<span class="expand" />');
 				
             }
-            
+        		
         }); //end .each
 
 		//handle clicking on expand/contract control
+				//if it's clicked once, find all child lists and contract
         jQuery('span.expand').toggle(
-			//if it's clicked once, find all child lists and expand
+						 function(){
+	                jQuery(this).toggleClass('contract').nextAll('ul').slideUp();
+	            },
+							//if it's clicked again,  find all child lists and expand
             function(){
                 jQuery(this).toggleClass('contract').nextAll('ul').slideDown();
-            },
-			//if it's clicked again, find all child lists and contract
-            function(){
-                jQuery(this).toggleClass('contract').nextAll('ul').slideUp();
-            }
+            }   
         );
+
+			jQuery('span.expand').toggleClass('contract').nextAll('ul').slideDown();
     });
 };
