@@ -90,5 +90,5 @@ end -%>
 <%= link_to 'xml', datatable_path(@datatable, :format  => :xml) %>&nbsp;|&nbsp;
 <%= link_to 'csv',  datatable_path(@datatable,  :format => :csv) %>&nbsp;|&nbsp;
 <%= link_to 'eml', dataset_path(@dataset, :format => :eml) %>&nbsp;|&nbsp;
-<%= link_to 'Back', dataset_path(@dataset) %>&nbsp;|&nbsp;
+<%= link_to 'Back', datatable_path(@datatable) %>&nbsp;|&nbsp;
 <%= link_to 'Edit', edit_datatable_path(@datatable) if logged_in? %>

@@ -6,7 +6,6 @@ class DatatablesController < ApplicationController
   # GET /datatables.xml
   def index
 
-    @datatables = Datatable.all
     @themes = Theme.roots
     @studies = Study.all(:order => 'seniority')
     @people = Person.find_all_with_dataset(:order => 'sur_name')
@@ -36,11 +35,12 @@ class DatatablesController < ApplicationController
     if keyword_list
       @keyword_list = keyword_list
     end
-    
+      
+    @datatables = Datatable.find_by_params({:person => {:id => person_id}, :keywords => keyword_list})
     # @datatables = Datatable.find_by_params({:theme => {:id => theme_id}, :person => {:id => person_id},
-    #        :study => {:id => study_id}, :date => {:syear => date['syear'], :eyear => date['eyear']},
-    #        :keywords => keyword_list})
-    
+    #           :study => {:id => study_id}, :date => {:syear => date['syear'], :eyear => date['eyear']},
+    #           :keywords => keyword_list})
+    # 
        
     respond_to do |format|
       format.html # index.rhtml

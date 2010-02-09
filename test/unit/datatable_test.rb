@@ -4,7 +4,8 @@ class DatatableTest < ActiveSupport::TestCase
   
   should_belong_to :theme
   should_belong_to :core_area
-  
+  should_belong_to :dataset
+    
   context 'datatable' do
     setup do
       @datatable = Factory.create(:datatable)
@@ -147,7 +148,9 @@ class DatatableTest < ActiveSupport::TestCase
   
   context 'eml generation' do
     setup do 
-      @datatable = Factory.create(:datatable)
+      @person = Factory.create(:person)
+      dataset = Factory.create(:dataset, :people=>[@person])
+      @datatable = Factory.create(:datatable, :dataset => dataset)
     end
     
     should 'return respond to to_eml' do
@@ -158,5 +161,66 @@ class DatatableTest < ActiveSupport::TestCase
       eml = @datatable.to_eml
       assert eml.to_s =~ /datatable/
     end
+  end
+  
+  context 'finding datatables' do
+    setup do 
+      @person = Factory.create(:person)
+      dataset = Factory.create(:dataset, :people=>[@person])
+      
+      @datatable = Factory.create(:datatable, :dataset=> dataset, :keyword_list => 'earth,wind,fire')
+    end
+    
+    should 'respond to find_by_keywords' do
+      assert Datatable.respond_to?('find_by_keywords')
+    end
+
+    should 'find one dataset by keyword earth' do
+      assert Datatable.find_by_keywords('earth') == [@datatable]
+    end
+
+    should 'handle more than one keyword' do
+      assert Datatable.find_by_keywords('earth,wind') == [@datatable]
+    end
+
+    should 'not find a dataset by a wrong keyword' do
+      assert Datatable.find_by_keywords('noise') == []
+    end
+    
+    should 'respond to find_by_person' do
+      assert Datatable.respond_to?('find_by_person')
+    end
+       
+    should 'find a dataset by person_id' do
+      assert Datatable.find_by_person(@person) == [@datatable]
+    end
+    
+    should 'not find a dataset by wrong person_id' do
+      assert Datatable.find_by_person(5) == []
+    end
+       
+    should 'not find a dataset with an empty person' do
+      assert Datatable.find_by_person('') == []
+    end
+       
+
+    should 'respond to find_by_params' do
+      assert Datatable.respond_to?('find_by_params')
+    end
+    
+    should 'find one dataset if called with one findable parameter' do
+      # params = {:theme => {:id => @theme.id.to_s}}
+      # assert Datatable.find_by_params(params) == [@datatable]
+      params = {:person => {:id => @person}}
+      assert Datatable.find_by_params(params) == [@datatable]
+      params = {:keywords => 'wind'}
+      assert Datatable.find_by_params(params) == [@datatable]
+      # params = {:study => {:id => @study.id}}
+      # assert Datatable.find_by_params(params) == [@datatable]
+      # params = {:date => {:syear => Date.today.year, :eyear => Date.today.year}}
+      # assert Datatable.find_by_params(params) == [@datatable]
+      
+    end
+
   end
 end

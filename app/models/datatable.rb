@@ -67,6 +67,59 @@ class Datatable < ActiveRecord::Base
     save
   end
   
+  ## Finding datatables
+  def self.find_by_keywords(keyword_list='')
+    self.find_tagged_with(keyword_list,:on => 'keywords')    
+  end  
+  
+  def self.find_by_person(person_id = '')
+    return [] if person_id == ''
+    if person_id.respond_to?('id')
+       person_id = person_id.id
+     end
+     self.find_by_sql("SELECT datatables.*, datatables.* FROM datatables " +
+      " INNER JOIN datasets ON datasets.id = datatables.dataset_id " + 
+      " inner join affiliations on datasets.id = affiliations.dataset_id " + 
+      " inner join people on affiliations.person_id = people.id " +
+      " where people.id = #{person_id}")
+  end
+  
+  def self.find_by_year(syear, eyear)
+    
+  end
+  
+  def self.find_by_theme(theme)
+    
+  end
+  
+  def self.find_by_study(study)
+    
+  end
+  
+  def self.find_by_params(params)
+    datatables = self.all
+    params.each do |key, value|
+      
+      method = 'find_by_'+key.to_s
+      if value.respond_to?('keys') 
+        if value.keys.include?(:id)
+          value_id = value[:id]
+
+          unless value_id.nil? || value_id == ''
+            datatables = self.send(method.to_sym, value_id) & datatables
+          end
+        else # we assume that we have a year
+          datatables = self.find_by_year(value[:syear], value[:eyear]) & datatables
+        end
+      else # assume have keywords
+        unless value.nil? || value == ''
+          datatables = self.send(method.to_sym, value) & datatables
+        end
+      end
+    end
+    datatables
+  end
+  
 private
 
   def query_datatable_for_temporal_extent(query)
