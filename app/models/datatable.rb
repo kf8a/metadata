@@ -77,7 +77,7 @@ class Datatable < ActiveRecord::Base
     if person_id.respond_to?('id')
        person_id = person_id.id
      end
-     self.find_by_sql("SELECT datatables.*, datatables.* FROM datatables " +
+     self.find_by_sql("SELECT datatables.* FROM datatables " +
       " INNER JOIN datasets ON datasets.id = datatables.dataset_id " + 
       " inner join affiliations on datasets.id = affiliations.dataset_id " + 
       " inner join people on affiliations.person_id = people.id " +
@@ -88,12 +88,21 @@ class Datatable < ActiveRecord::Base
     
   end
   
-  def self.find_by_theme(theme)
-    
+  def self.find_by_theme(theme_id ='')
+    return [] if theme_id == ''
+     self.find(:all, :conditions => {:theme_id => theme_id})
   end
   
-  def self.find_by_study(study)
-    
+  def self.find_by_study(study_id = '')
+    return [] if study_id == '' || study_id.nil?
+    if study_id.respond_to?('id')
+      study_id = study_id.id
+    end
+    self.find_by_sql("select datatables.* from datatables " +
+          " inner join datasets on datasets.id = datatables.dataset_id " + 
+          " inner join datasets_studies on datasets_studies.dataset_id = datasets.id " +
+          " inner join studies on datasets_studies.study_id = studies.id " +
+          " where studies.id = #{study_id}" )
   end
   
   def self.find_by_params(params)

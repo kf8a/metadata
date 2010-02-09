@@ -73,6 +73,16 @@ class ThemeTest < ActiveSupport::TestCase
         assert @theme.datatables?
         assert @theme.include_datatables?([@datatable])
       end
+      
+      should 'return false if the datatable is in a different study ' do
+        @datatable.theme = @theme
+        study = Factory.create(:study)
+        @datatable.dataset.studies = [study]
+        assert @datatable.save
+        assert @theme.datatables?
+        assert !@theme.include_datatables_from_study?([@datatable], @study)
+        
+      end
     end
   end
   

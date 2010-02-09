@@ -166,16 +166,25 @@ class DatatableTest < ActiveSupport::TestCase
   context 'finding datatables' do
     setup do 
       @person = Factory.create(:person)
-      dataset = Factory.create(:dataset, :people=>[@person])
+      @theme = Factory.create(:theme)
+      @study = Factory.create(:study)
+      dataset = Factory.create(:dataset, :people=>[@person], :studies => [@study])
       
-      @datatable = Factory.create(:datatable, :dataset=> dataset, :keyword_list => 'earth,wind,fire')
+      @datatable = Factory.create(:datatable, :dataset=> dataset, 
+        :keyword_list => 'earth,wind,fire', :theme => @theme)
+        
+      @unfound_datatable = Factory.create(:datatable, :dataset => Factory.create(:dataset),
+          :keyword_list => 'wildfire')
+      @unfound_study = Factory.create(:study)
+      @unfound_datatable.dataset.studies << @unfound_study
+      
     end
     
     should 'respond to find_by_keywords' do
       assert Datatable.respond_to?('find_by_keywords')
     end
 
-    should 'find one dataset by keyword earth' do
+    should 'find one datatable by keyword earth' do
       assert Datatable.find_by_keywords('earth') == [@datatable]
     end
 
@@ -183,7 +192,7 @@ class DatatableTest < ActiveSupport::TestCase
       assert Datatable.find_by_keywords('earth,wind') == [@datatable]
     end
 
-    should 'not find a dataset by a wrong keyword' do
+    should 'not find a datatable by a wrong keyword' do
       assert Datatable.find_by_keywords('noise') == []
     end
     
@@ -191,24 +200,67 @@ class DatatableTest < ActiveSupport::TestCase
       assert Datatable.respond_to?('find_by_person')
     end
        
-    should 'find a dataset by person_id' do
+    should 'find a datatable by person_id' do
       assert Datatable.find_by_person(@person) == [@datatable]
     end
     
-    should 'not find a dataset by wrong person_id' do
+    should 'not find a datatable by wrong person_id' do
       assert Datatable.find_by_person(5) == []
     end
        
-    should 'not find a dataset with an empty person' do
+    should 'not find a datatable with an empty person' do
       assert Datatable.find_by_person('') == []
     end
        
+    # themes
+    should 'respond to find_by_theme' do
+      assert Datatable.find_by_theme(@theme)
+    end
+    
+    should 'find one datatable by theme @theme' do
+      assert Datatable.find_by_theme(@theme) == [@datatable]
+    end
+    
+    should 'find the datatable by theme id' do
+      assert Datatable.find_by_theme(@theme.id) == [@datatable]
+      assert Datatable.find_by_theme(@theme.id.to_s) == [@datatable]
+    end
+    
+    should 'not find a datatable with a new theme' do
+      new_theme = Factory.create(:theme)
+      assert Datatable.find_by_theme(new_theme) == []
+    end
+    
+    should 'not find a datatable with an empty string for theme' do
+      assert Datatable.find_by_theme('') == []
+    end
 
+    # studies
+    should 'respond to find_by_study' do
+      assert Datatable.respond_to?('find_by_study') 
+    end
+    
+    should 'find the right datatable with study' do
+      assert Datatable.find_by_study(@study) == [@datatable]
+      assert Datatable.find_by_study(@study.id) == [@datatable]
+      assert Datatable.find_by_study(@study.id.to_s) == [@datatable]
+    end
+    
+    should 'not find the wrong datatable with study' do
+      new_study = Factory.create(:study)
+      assert Datatable.find_by_study == []
+      assert Datatable.find_by_study(@unfound_study) == [@unfound_datatable]
+      assert Datatable.find_by_study(new_study) == []
+      assert Datatable.find_by_study(new_study.id) == []
+      assert Datatable.find_by_study(new_study.id.to_s) == []
+    end
+    
+    # params
     should 'respond to find_by_params' do
       assert Datatable.respond_to?('find_by_params')
     end
     
-    should 'find one dataset if called with one findable parameter' do
+    should 'find one datatable if called with one findable parameter' do
       # params = {:theme => {:id => @theme.id.to_s}}
       # assert Datatable.find_by_params(params) == [@datatable]
       params = {:person => {:id => @person}}
