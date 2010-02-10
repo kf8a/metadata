@@ -25,7 +25,7 @@
 
 <ul class='quickTree'>
   <% @studies.each do |study| -%>
-  <li class='study_title'><%= study.name %>
+  <li class='study-title'><%= study.name %>
   <ul>
     <% @themes.each do |theme| %>
     <% next unless theme.datatables?(study) -%>
