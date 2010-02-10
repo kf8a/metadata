@@ -40,7 +40,6 @@ class DatatablesController < ApplicationController
         :person => {:id => person_id}, :keywords => keyword_list })
        
        #   :date => {:syear => date['syear'], :eyear => date['eyear']}
-    @datatables.sort! {|a,b| sprintf("%.5i",a.weight) + a.title <=> sprintf("%.5i",b.weight) + b.title}
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @datatables.to_xml }

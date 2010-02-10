@@ -1,6 +1,8 @@
 <li><%= theme.name.capitalize %>
   <ul>
-    <% theme.datatables.each do |datatable| -%>
+    <% datatables = theme.datatables -%>
+    <% datatables.sort! {|a,b| sprintf("%.5i",a.weight) + a.title <=> sprintf("%.5i",b.weight) + b.title}%>
+    <% datatables.each do |datatable| -%>
     <% next unless datatable.dataset.studies.include?(study) -%>
     <% next unless @datatables.include?(datatable) -%>
     <li>
