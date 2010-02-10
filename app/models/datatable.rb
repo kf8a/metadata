@@ -10,6 +10,8 @@ class Datatable < ActiveRecord::Base
   
   validates_presence_of :title
   
+  accepts_nested_attributes_for :variates
+  
   acts_as_taggable_on :keywords
   
   def within_interval?(start_date=Date.today, end_date=Date.today)

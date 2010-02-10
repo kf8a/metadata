@@ -30,3 +30,44 @@
   <label for='datatable_weight'>Weight</label>
   <%= f.text_field :weight %>
 </p>
+
+<% f.fields_for :variates do |variate_form| %>
+<table id='variates'>
+  <tr>
+    <th>Name</th>
+    <th>weight</th>
+    <th>description</th>
+    <th>units</th>
+    <th>scale</th>
+    <th>data_type</th>
+    <th>max_valid</th>
+    <th>min_valid</th>
+    <th>date_format</th>
+    <th>precision</th>
+    <th>missing value</th>
+  </tr>
+  <% @datatable.variates.each do |variate| %>
+    <tr>
+      <td><%= text_field_tag 'datatable[variates_attributes][][name]', variate.name %></td>
+      <td><%= text_field_tag 'datatable[variates_attributes][][weight]', variate.weight, {:size => 5} %></td>
+      <td><%= text_field_tag 'datatable[variates_attributes][][description]', variate.description %></td>
+      <td><%= select_tag 'datatable[variates_attributes][][unit_id]', 
+        options_from_collection_for_select(Unit.all, :id, :name, variate.unit_id)
+      %></td>
+      <td><%= select_tag 'datatable[variates_attributes][][measurement_scale]', 
+          options_for_select(['nominal','interval','ratio'], variate.measurement_scale)%></td>
+      <td><%= select_tag 'datatable[variates_attributes][][data_type]', 
+            options_for_select(['datetime','integer','real','text'], variate.data_type)%></td>
+      <td><%= text_field_tag 'datatable[variates_attributes][][max_valid]', variate.max_valid %></td>
+      <td><%= text_field_tag 'datatable[variates_attributes][][min_valud]', variate.min_valid %></td>
+      <td><%= text_field_tag 'datatable[variates_attributes][][date_format]', variate.date_format %></td>
+      <td><%= text_field_tag 'datatable[variates_attributes][][precision]', variate.precision %></td>
+      <td><%= text_field_tag 'datatable[variates_attributes][][missing_value_indicator]', variate.missing_value_indicator %></td>
+      	<td>
+    		  <%= check_box_tag 'datatable[variates_attributes][][_delete]' %>
+    		</td>
+    </tr>
+  <% end %>
+</table>
+<%= link_to_remote 'Add Variate',:url => {:controller => :variates, :action => :new} %>
+<% end %>
