@@ -3,6 +3,7 @@
   <td><%= text_field_tag 'datatable[variates_attributes][][weight]',nil , {:size => 5} %></td>
   <td><%= text_field_tag 'datatable[variates_attributes][][description]' %></td>
   <td><%= select_tag 'datatable[variates_attributes][][unit_id]', 
+   "<option></option>" +
     options_from_collection_for_select(Unit.all, :id, :name)
   %></td>
   <td><%= select_tag 'datatable[variates_attributes][][measurement_scale]', 
