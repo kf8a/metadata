@@ -5,6 +5,8 @@ class DatatableTest < ActiveSupport::TestCase
   should_belong_to :theme
   should_belong_to :core_area
   should_belong_to :dataset
+  
+  should_validate_presence_of :title
     
   context 'datatable' do
     setup do

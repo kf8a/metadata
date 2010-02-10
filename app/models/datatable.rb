@@ -8,6 +8,8 @@ class Datatable < ActiveRecord::Base
   belongs_to :theme
   belongs_to :core_area
   
+  validates_presence_of :title
+  
   acts_as_taggable_on :keywords
   
   def within_interval?(start_date=Date.today, end_date=Date.today)

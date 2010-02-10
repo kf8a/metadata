@@ -28,7 +28,7 @@ class DatatablesControllerTest < ActionController::TestCase
   
   def test_should_create_datatable
     old_count = Datatable.count
-    post :create, :datatable => { }
+    post :create, :datatable => {:title => 'soil pH' }
     assert_equal old_count+1, Datatable.count
     
     assert_redirected_to datatable_path(assigns(:datatable))
@@ -45,7 +45,7 @@ class DatatablesControllerTest < ActionController::TestCase
   end
   
   def test_should_update_datatable
-    put :update, :id => @table, :datatable => { }
+    put :update, :id => @table, :datatable => {:title => 'soil moisture' }
     assert_redirected_to datatable_path(assigns(:datatable))
   end
   
