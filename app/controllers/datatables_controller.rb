@@ -7,7 +7,7 @@ class DatatablesController < ApplicationController
   def index
 
     @themes = Theme.roots
-    @studies = Study.all(:order => 'seniority')
+    @studies = Study.all(:order => 'weight')
     @people = Person.find_all_with_dataset(:order => 'sur_name')
     
     query =  {'theme' => {'id' => nil}, 'person' => {'id' => nil}, 'study' => {'id' => nil}, 

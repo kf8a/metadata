@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100204163035) do
+ActiveRecord::Schema.define(:version => 20100210141959) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20100204163035) do
     t.boolean "on_web",                 :default => true
     t.integer "theme_id"
     t.integer "core_area_id"
+    t.integer "weight",                 :default => 100
   end
 
   create_table "datatables_variates", :force => true do |t|
@@ -250,7 +251,7 @@ ActiveRecord::Schema.define(:version => 20100204163035) do
   create_table "scribbles", :force => true do |t|
     t.integer "person_id"
     t.integer "protocol_id"
-    t.integer "order"
+    t.integer "weight"
   end
 
   create_table "sessions", :force => true do |t|
@@ -288,7 +289,7 @@ ActiveRecord::Schema.define(:version => 20100204163035) do
   create_table "studies", :force => true do |t|
     t.string  "name"
     t.text    "description"
-    t.integer "seniority"
+    t.integer "weight"
   end
 
   create_table "taggings", :force => true do |t|
@@ -310,7 +311,7 @@ ActiveRecord::Schema.define(:version => 20100204163035) do
 
   create_table "themes", :force => true do |t|
     t.string  "name"
-    t.integer "priority"
+    t.integer "weight"
     t.integer "parent_id"
     t.integer "lft"
     t.integer "rgt"
@@ -320,7 +321,7 @@ ActiveRecord::Schema.define(:version => 20100204163035) do
     t.string  "name"
     t.text    "description"
     t.integer "study_id"
-    t.integer "priority"
+    t.integer "weight"
   end
 
   create_table "units", :force => true do |t|
@@ -335,7 +336,7 @@ ActiveRecord::Schema.define(:version => 20100204163035) do
   create_table "variates", :force => true do |t|
     t.string  "name"
     t.integer "datatable_id"
-    t.integer "position"
+    t.integer "weight"
     t.text    "description"
     t.string  "missing_value_indicator"
     t.integer "unit_id"

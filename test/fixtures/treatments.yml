@@ -4,154 +4,154 @@ treatments_001:
   name: T1
   description: Conventional corn/soybean/wheat
   study_id: "1"
-  priority: "1"
+  weight: "1"
 treatments_002: 
   id: "2"
   name: T2
   description: No-till corn/soybean/wheat
   study_id: "1"
-  priority: "2"
+  weight: "2"
 treatments_003: 
   id: "3"
   name: T3
   description: Reduced input corn/soybean/wheat
   study_id: "1"
-  priority: "3"
+  weight: "3"
 treatments_004: 
   id: "4"
   name: T4
   description: Organic corn/soybean/wheat
   study_id: "1"
-  priority: "4"
+  weight: "4"
 treatments_005: 
   id: "5"
   name: T5
   description: Poplars
   study_id: "1"
-  priority: "5"
+  weight: "5"
 treatments_006: 
   id: "6"
   name: T6
   description: Alfalfa
   study_id: "1"
-  priority: "6"
+  weight: "6"
 treatments_007: 
   id: "7"
   name: T7
   description: Early Successional
   study_id: "1"
-  priority: "7"
+  weight: "7"
 treatments_008: 
   id: "8"
   name: T8
   description: Mid Successional (never tilled)
   study_id: "1"
-  priority: "8"
+  weight: "8"
 treatments_009: 
   id: "11"
   name: SF
   description: Mid Successional (historically tilled)
   study_id: "1"
-  priority: "11"
+  weight: "11"
 treatments_010: 
   id: "10"
   name: CF
   description: Conifer Forest (planted)
   study_id: "1"
-  priority: "10"
+  weight: "10"
 treatments_011: 
   id: "15"
   name: N Fertility Gradient
   description: 
   study_id: "3"
-  priority: "50"
+  weight: "50"
 treatments_012: 
   id: "12"
   name: Gene Transfer Study
   description: 
   study_id: "5"
-  priority: "20"
+  weight: "20"
 treatments_013: 
   id: "19"
   name: N Deposition Study
   description: 
   study_id: "6"
-  priority: "110"
+  weight: "110"
 treatments_014: 
   id: "17"
   name: Living Field Lab
   description: 
   study_id: "7"
-  priority: "80"
+  weight: "80"
 treatments_015: 
   id: "18"
   name: Aquatic sites
   description: 
   study_id: "9"
-  priority: "100"
+  weight: "100"
 treatments_016: 
   id: "16"
   name: KBS Landscape
   description: 
   study_id: "10"
-  priority: "70"
+  weight: "70"
 treatments_017: 
   id: "13"
   name: Biodiversity Gradient
   description: 
   study_id: "2"
-  priority: "30"
+  weight: "30"
 treatments_018: 
   id: "14"
   name: European Cornborer study
   description: 
   study_id: "4"
-  priority: "40"
+  weight: "40"
 treatments_019: 
   id: "9"
   name: DF
   description: Deciduous Forest (late successional)
   study_id: "1"
-  priority: "9"
+  weight: "9"
 treatments_020: 
   id: "20"
   name: Lysimeter Field
   description: 
   study_id: "12"
-  priority: "112"
+  weight: "112"
 treatments_021: 
   id: "21"
   name: Regional or Synthesis
   description: 
   study_id: "13"
-  priority: "190"
+  weight: "190"
 treatments_022: 
   id: "22"
   name: Methods
   description: 
   study_id: "14"
-  priority: "200"
+  weight: "200"
 treatments_023: 
   id: "23"
   name: Biofuels Diversity Study
   description: 
   study_id: "11"
-  priority: "60"
+  weight: "60"
 treatments_024: 
   id: "24"
   name: Intensive Plots
   description: 
   study_id: "8"
-  priority: "91"
+  weight: "91"
 treatments_025: 
   id: "25"
   name: Scale-up Fields
   description: 
   study_id: "8"
-  priority: "92"
+  weight: "92"
 treatments_026: 
   id: "26"
   name: Extensive Sites
   description: 
   study_id: "8"
-  priority: "93"
+  weight: "93"

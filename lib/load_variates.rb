@@ -37,7 +37,7 @@ reader.each do |row|
   v = Variate.new
   v.name = row[0]
   v.datatable = table
-  v.position = row[2]
+  v.weight = row[2]
   v.description = row[3]
   v.missing_value_indicator = row[4]
   v.unit = u
@@ -49,7 +49,7 @@ reader.each do |row|
   v.date_format = row[12]
   v.save
   
-  # p "insert into variates (name, datatable_id, position, description, " +
+  # p "insert into variates (name, datatable_id, weight, description, " +
   #   "missing_value_indicator, unit_id, measurement_scale, data_type, min_valid, " +
   #   "max_valid, precision, date_format) values (#{row[0]},#{table.id}, " +
   #   "#{row[2]}, #{row[3]},#{row[4]},#{unit_id},#{row[7]}, #{row[8]},#{row[9]}," +

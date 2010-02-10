@@ -87,5 +87,8 @@ class ActiveSupport::TestCase
       s.name 'LTER'
     end
 
+    Factory.define :variate do |v|
+      v.name 'date'
+    end
 end
 

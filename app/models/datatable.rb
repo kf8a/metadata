@@ -4,7 +4,7 @@ include REXML
 
 class Datatable < ActiveRecord::Base
   belongs_to :dataset
-  has_many :variates, :order => :position
+  has_many :variates, :order => :weight
   belongs_to :theme
   belongs_to :core_area
   

@@ -6,7 +6,7 @@
     </div>
     <div id='experiment-search'>
       <label>Long-term Experiment</label>
-      <%= select :study, :id, Study.all(:order => 'seniority').collect{|x| [truncate(x.name, :length => 37), x.id]}, {:include_blank => 'All'}%>
+      <%= select :study, :id, Study.all(:order => 'weight').collect{|x| [truncate(x.name, :length => 37), x.id]}, {:include_blank => 'All'}%>
     </div>
     <div id='contributor-search'>  
        <label>Contributor:</label><%= select :person, :id, @people.collect{|x| [truncate(x.last_name_first, :length => 16), x.id]},  { :include_blank => "All" } %>

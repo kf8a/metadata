@@ -29,7 +29,7 @@ class DatasetsController < ApplicationController
     date = query['date']
         
     @people = Person.find_all_with_dataset(:order => 'sur_name')
-    @themes = Theme.find(:all, :order => :priority)
+    @themes = Theme.find(:all, :order => :weight)
 
     if theme_id && !theme_id.empty?
       @theme = Theme.find(theme_id)
@@ -59,7 +59,7 @@ class DatasetsController < ApplicationController
    @studies.flatten!
    @studies.compact!
    @studies.uniq!
-   @studies.sort! {|a,b| a.seniority <=> b.seniority}
+   @studies.sort! {|a,b| a.weight <=> b.weight}
    
    @studies = [@study] if @study
                                      
@@ -95,8 +95,8 @@ class DatasetsController < ApplicationController
   def edit
     @dataset = Dataset.find(params[:id])
     @people = Person.all(:order => 'sur_name')
-    @studies = Study.all(:order => 'seniority')
-    @themes = Theme.all(:order => 'priority')
+    @studies = Study.all(:order => 'weight')
+    @themes = Theme.all(:order => 'weight')
     @roles = Role.find(:all, :conditions => ['role_type_id = ?', RoleType.find_by_name('dataset')])
   end
   
