@@ -58,7 +58,11 @@
 end -%>
 <% if related_tables.any? %>
 <h3>Related Tables</h3>
-<p><%= related_tables.join(', ')%></p>
+<ul>
+  <% related_tables.each do |table| %>
+    <li><%= table %></li>
+  <% end %>
+</ul>
 <% end %>
 
 
