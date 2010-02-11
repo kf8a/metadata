@@ -34,6 +34,20 @@
 	<% end -%>
 </table>
 
+<h2>Personnel</h2>
+<ul>
+	<% @roles.each do |role| %>
+	<li> <%= role.name.capitalize.pluralize %>
+		<ul>
+	<% @dataset.affiliations.each do |affiliation| -%>
+	<li><%= link_to "#{affiliation.person.full_name}", person_path(affiliation.person.id) if affiliation.role == role %>
+	</li>
+	<% end -%>
+		</ul>
+	</li>
+	<% end -%>
+</ul>
+
 <h3>Data Access Statement</h3>
 <% if @datatable.access_statement then %>
 <%= @datatable.access_statement %>

@@ -53,6 +53,7 @@ class DatatablesController < ApplicationController
   def show  
     @datatable = Datatable.find(params[:id])
     @dataset = @datatable.dataset
+    @roles = @dataset.roles
     
     @values = nil
     if @datatable.is_sql
