@@ -66,6 +66,7 @@
       <td><%= text_field_tag 'datatable[variates_attributes][][missing_value_indicator]', variate.missing_value_indicator %></td>
       	<td>
     		  <%= check_box_tag 'datatable[variates_attributes][][_delete]' %>
+    		  	<%= hidden_field_tag 'datatable[variates_attributes][][id]', variate.id %>
     		</td>
     </tr>
   <% end %>
