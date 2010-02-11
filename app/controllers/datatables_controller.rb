@@ -43,6 +43,7 @@ class DatatablesController < ApplicationController
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @datatables.to_xml }
+      format.rss {render :rss => @datatables}
     end
   end
 
