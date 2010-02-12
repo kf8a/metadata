@@ -7,3 +7,4 @@ metadata.sql
 base_packaged.css
 public/javascripts/base_packaged.js
 .DStore
+tmp/
