@@ -3,6 +3,7 @@ require 'redcloth'
 include REXML
 
 class Datatable < ActiveRecord::Base
+  attr_protected :object
   belongs_to :dataset
   has_many :variates, :order => :weight
   belongs_to :theme
