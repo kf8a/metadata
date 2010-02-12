@@ -224,6 +224,8 @@ input#keyword_list {
 li.study-title {
 	background-color: white;
 	font-size: 1.2em;
+	font-weight: bold;
+	
 	margin: 2px;
 	padding-top: 1px;
 	padding-bottom: 1px;
@@ -233,6 +235,7 @@ li.study-title {
 	border-bottom-width: 1px;
 }
 li.study-title ul {
+	font-weight: normal;
 	background-color: white;
 	position: relative;
 	left: 1px;
@@ -240,6 +243,10 @@ li.study-title ul {
 }
 li.study_title li {
 	padding-top: 3px;
+}
+
+.quickTree {
+	border-top-style: solid;
 }
 
 tree * {margin:0; padding:0;}
