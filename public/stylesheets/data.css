@@ -222,14 +222,15 @@ input#keyword_list {
 }
 
 li.study-title {
-	background-color: #ededed;
+	background-color: white;
 	font-size: 1.2em;
 	margin: 2px;
 	padding-top: 1px;
 	padding-bottom: 1px;
 	padding-right: 1px;
 	padding: 1px;
-
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
 }
 li.study-title ul {
 	background-color: white;
