@@ -10,7 +10,7 @@ class DatatablesController < ApplicationController
     @studies = Study.all(:order => 'weight')
     @people = Person.find_all_with_dataset(:order => 'sur_name')
     
-    query =  {'theme' => {'id' => nil}, 'person' => {'id' => nil}, 'study' => {'id' => nil}, 
+    query =  {'theme' => {'id' => ''}, 'person' => {'id' => ''}, 'study' => {'id' => ''}, 
       'keywords' => '', 'date' => {'syear' => '1988', 'eyear' => Date.today.year.to_s}}
     query.merge!(params)
     
@@ -35,7 +35,7 @@ class DatatablesController < ApplicationController
     if keyword_list
       @keyword_list = keyword_list
     end
-      
+          
     @datatables = Datatable.find_by_params({:theme => {:id => theme_id}, :study => {:id => study_id},
         :person => {:id => person_id}, :keywords => keyword_list })
        
