@@ -167,11 +167,17 @@ class DatatableTest < ActiveSupport::TestCase
     setup do 
       @person = Factory.create(:person)
       @theme = Factory.create(:theme)
+      @subtheme = Factory.create(:theme)
+      @subtheme.move_to_child_of(@theme)
+      
       @study = Factory.create(:study)
       dataset = Factory.create(:dataset, :people=>[@person], :studies => [@study])
       
       @datatable = Factory.create(:datatable, :dataset=> dataset, 
         :keyword_list => 'earth,wind,fire', :theme => @theme, :on_web => true)
+      
+      @datatable2 = Factory.create(:datatable, :dataset=> Factory.create(:dataset), 
+        :keyword_list => 'water', :theme => @subtheme, :on_web => true)
         
       @datatable.update_temporal_extent
         
@@ -238,13 +244,24 @@ class DatatableTest < ActiveSupport::TestCase
       assert Datatable.find_by_theme(@theme)
     end
     
+    should 'find datatables in subthemes' do
+      assert Datatable.find_by_theme(@theme).include?(@datatable2)      
+    end
+    
     should 'find one datatable by theme @theme' do
-      assert Datatable.find_by_theme(@theme) == [@datatable]
+      datatables =  Datatable.find_by_theme(@theme)
+      assert datatables.include?(@datatable)
+      assert datatables.include?(@datatable2)
     end
     
     should 'find the datatable by theme id' do
-      assert Datatable.find_by_theme(@theme.id) == [@datatable]
-      assert Datatable.find_by_theme(@theme.id.to_s) == [@datatable]
+      datatables = Datatable.find_by_theme(@theme.id)
+      assert datatables.include?(@datatable)
+      assert datatables.include?(@datatable2)
+      
+      datatables = Datatable.find_by_theme(@theme.id.to_s)
+      assert datatables.include?(@datatable)
+      assert datatables.include?(@datatable2)
     end
     
     should 'not find a datatable with a new theme' do
@@ -283,7 +300,7 @@ class DatatableTest < ActiveSupport::TestCase
     
     should 'find one datatable if called with one findable parameter' do
       params = {:theme => {:id => @theme.id.to_s}}
-      assert Datatable.find_by_params(params) == [@datatable]
+      assert Datatable.find_by_params(params).include?(@datatable)
       params = {:person => {:id => @person}}
       assert Datatable.find_by_params(params) == [@datatable]
       params = {:keywords => 'wind'}
@@ -301,8 +318,8 @@ class DatatableTest < ActiveSupport::TestCase
     end
     
     should 'not find datatable if called with wrong person' do
-      p = Factory.create(:person)
-      params = {:person => {:id  => p.id}}
+      person = Factory.create(:person)
+      params = {:person => {:id  => person.id}}
       assert Datatable.find_by_params(params) == []
     end
     

@@ -114,7 +114,12 @@ class Datatable < ActiveRecord::Base
   
   def self.find_by_theme(theme_id ='')
     return [] if theme_id == ''
-     self.find(:all, :conditions => {:theme_id => theme_id})
+    theme = Theme.find(theme_id)
+    datatables = self.find(:all, :conditions => {:theme_id => theme})
+    theme.descendants.each do |subtheme|
+      datatables.push(self.find(:all, :conditions => {:theme_id => subtheme}))
+    end
+    datatables.flatten.uniq
   end
   
   def self.find_by_study(study_id = '')
