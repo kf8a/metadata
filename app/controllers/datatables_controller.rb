@@ -13,7 +13,7 @@ class DatatablesController < ApplicationController
     @people = Person.find_all_with_dataset(:order => 'sur_name')
     
     query =  {'theme' => {'id' => ''}, 'person' => {'id' => ''}, 'study' => {'id' => ''}, 
-      'keywords' => '', 'date' => {'syear' => '1988', 'eyear' => Date.today.year.to_s}}
+      'keywords' => '', 'syear' => '1988', 'eyear' => Date.today.year.to_s}
     query.merge!(params)
     
     theme_id = query['theme']['id']
@@ -37,11 +37,18 @@ class DatatablesController < ApplicationController
     if keyword_list
       @keyword_list = keyword_list
     end
+ 
+    if date
+      @syear = date['syear'].to_i || 1988
+      @eyear = date['eyear'].to_i || Date.today.year
+    end
+    
+
           
     @datatables = Datatable.find_by_params({:theme => {:id => theme_id}, :study => {:id => study_id},
-        :person => {:id => person_id}, :keywords => keyword_list })
-       
-       #   :date => {:syear => date['syear'], :eyear => date['eyear']}
+        :person => {:id => person_id}, :keywords => keyword_list,
+          :date => {:syear => date['syear'], :eyear => date['eyear']}})
+          
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @datatables.to_xml }

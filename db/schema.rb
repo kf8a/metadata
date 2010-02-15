@@ -52,6 +52,8 @@ ActiveRecord::Schema.define(:version => 20100210141959) do
     t.integer "metacat_id"
   end
 
+  add_index "datasets", ["dataset"], :name => "datasets_dataset_key", :unique => true
+
   create_table "datasets_studies", :id => false, :force => true do |t|
     t.integer "dataset_id"
     t.integer "study_id"
