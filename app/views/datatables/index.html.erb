@@ -2,7 +2,7 @@
   <%= form_tag '/datatables', :method => 'get'%>
   <div id='top-line-search'>
     <div id='core-area-search'>
-    <label>Theme/LTER Core Area</label> <%= select_tag 'theme_id', options_for_select(nested_set_options(Theme) {|i| "#{'-' * i.level} #{i.name}" } ) , { :include_blank => "All" }%>
+    <label>Theme/LTER Core Area</label> <%= select :theme, :id , @themes.collect {|x| [x.name, x.id]},  { :include_blank => "All" }%>
     </div>
     <div id='experiment-search'>
       <label>Long-term Experiment</label>
