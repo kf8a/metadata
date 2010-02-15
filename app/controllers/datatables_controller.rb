@@ -6,7 +6,9 @@ class DatatablesController < ApplicationController
   # GET /datatables.xml
   def index
 
+    # just use the lower case (ie the datatable themese)
     @themes = Theme.roots
+  
     @studies = Study.all(:order => 'weight')
     @people = Person.find_all_with_dataset(:order => 'sur_name')
     
