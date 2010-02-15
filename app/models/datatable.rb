@@ -1,5 +1,4 @@
 require 'rexml/document'
-require 'redcloth'
 include REXML
 
 class Datatable < ActiveRecord::Base
