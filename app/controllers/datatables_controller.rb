@@ -13,7 +13,7 @@ class DatatablesController < ApplicationController
     @people = Person.find_all_with_dataset(:order => 'sur_name')
     
     query =  {'theme' => {'id' => ''}, 'person' => {'id' => ''}, 'study' => {'id' => ''}, 
-      'keywords' => '', 'syear' => '1988', 'eyear' => Date.today.year.to_s}
+      'keywords' => '', :date => {'syear' => '1988', 'eyear' => Date.today.year.to_s}}
     query.merge!(params)
     
     theme_id = query['theme']['id']
