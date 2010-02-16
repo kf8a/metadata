@@ -8,7 +8,7 @@ class Theme < ActiveRecord::Base
     children_have_datatables = children.collect {|d| d.datatables?(study)}.include?(true)
     i_have_datatables = datatables.any?
     if study
-      i_have_datatables = datatables.collect {|d| d.dataset.studies.include?(study)}.include?(true)
+      i_have_datatables = datatables.collect {|d| d.study == study}.include?(true)
     end
     i_have_datatables || children_have_datatables
   end
@@ -21,7 +21,7 @@ class Theme < ActiveRecord::Base
   def include_datatables_from_study?(test_datatables, study)
     my_datatables = self_and_descendants_datatables
     datatables_in_study = my_datatables.collect do |table|
-      table if table.dataset.studies.include?(study)
+      table if table.study == study
     end
 
     (test_datatables & datatables_in_study).any?

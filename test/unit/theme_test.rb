@@ -8,11 +8,7 @@ class ThemeTest < ActiveSupport::TestCase
 
     setup do 
       @study = Factory.create(:study)
-      @datatable = Factory.create(:datatable)
-
-      @dataset = Factory.create(:dataset)
-      @dataset.studies << [@study]
-      @dataset.datatables << [@datatable]
+      @datatable = Factory.create(:datatable, :study => @study)
 
       @theme = Factory.create(:theme)
       @sub_theme = Factory.create(:theme)
