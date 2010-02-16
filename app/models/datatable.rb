@@ -7,6 +7,7 @@ class Datatable < ActiveRecord::Base
   has_many :variates, :order => :weight
   belongs_to :theme
   belongs_to :core_area
+  belongs_to :study
   
   validates_presence_of :title
   

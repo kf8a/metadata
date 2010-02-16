@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100210141959) do
+ActiveRecord::Schema.define(:version => 20100216144410) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20100210141959) do
     t.integer "theme_id"
     t.integer "core_area_id"
     t.integer "weight",                 :default => 100
+    t.integer "study_id"
   end
 
   create_table "datatables_variates", :force => true do |t|
