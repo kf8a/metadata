@@ -1,4 +1,5 @@
 require 'rexml/document'
+require 'csv'
 include REXML
 
 class Datatable < ActiveRecord::Base
@@ -35,7 +36,7 @@ class Datatable < ActiveRecord::Base
   
   def to_csv
     values  = ActiveRecord::Base.connection.execute(object)
-    csv_string = FasterCSV.generate do |csv|
+    csv_string = CSV.generate do |csv|
       csv << variates.collect {|v| v.name }
       values.each do |row|
         csv << row
