@@ -39,8 +39,8 @@ class DatatablesController < ApplicationController
     
           
     @datatables = Datatable.find_by_params({:theme => {:id => theme_id}, :study => {:id => study_id},
-        :person => {:id => person_id}, :keywords => @keyword_list,
-          :date => {:syear => date['syear'], :eyear => date['eyear']}})
+        :person => {:id => person_id}, :keywords => @keyword_list})
+        #  :date => {:syear => date['syear'], :eyear => date['eyear']}})
           
     respond_to do |format|
       format.html # index.rhtml
