@@ -96,9 +96,9 @@ end -%>
 	</tr>
 	<% @values.to_a.each do  |row| %>
 	<tr  class="<%= cycle('even','odd') -%>">
-		<% row.each do |v| %>
+		<% row.keys.each do |key| %>
 		<td align='right'>
-			<%= v %>
+			<%= row[key] %>
 		</td>
 		<% end %>
 	</tr>

@@ -39,7 +39,7 @@ class Datatable < ActiveRecord::Base
     csv_string = CSV.generate do |csv|
       csv << variates.collect {|v| v.name }
       values.each do |row|
-        csv << row
+        csv << row.values
       end
     end
     # delete empty string values
