@@ -238,6 +238,11 @@ class DatatableTest < ActiveSupport::TestCase
       assert Datatable.find_by_year(Date.today.year, Date.today.year) == [@datatable]
     end
     
+    should 'find a datatable without dates if called with the full year range' do
+      datatables =  Datatable.find_by_year(1988, Date.today.year)
+      assert datatables.include?(@datatable)
+      assert datatables.include?(@unfound_datatable)
+    end
        
     # themes
     should 'respond to find_by_theme' do
