@@ -153,10 +153,12 @@ class DatatablesController < ApplicationController
     
     datatable  = Datatable.find(params[:id])
 
-    study = datatable.study
-    crumb.url = study_path(study)
-    crumb.name = study.name
-    @crumbs << crumb
+    if datatable.study
+      study = datatable.study
+      crumb.url = study_path(study)
+      crumb.name = study.name
+      @crumbs << crumb
+    end
     crumb = Struct::Crumb.new
     
     crumb.url =  dataset_path(datatable.dataset)
