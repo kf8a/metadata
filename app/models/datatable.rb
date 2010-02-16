@@ -106,9 +106,9 @@ class Datatable < ActiveRecord::Base
   
   def self.find_by_date_interval(begin_date, end_date)
     if begin_date.year == 1988 && end_date.year == Date.today.year
-      self.all(:conditions => ['on_web is true'])
+      self.all
     else
-      self.all(:conditions => ['on_web is true and (end_date < ? or begin_date < ?)', end_date, begin_date])
+      self.all(:conditions => ['(end_date < ? or begin_date < ?)', end_date, begin_date])
     end
   end
   
