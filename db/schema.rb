@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100216144410) do
+ActiveRecord::Schema.define(:version => 20100216182425) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -293,6 +293,9 @@ ActiveRecord::Schema.define(:version => 20100216144410) do
     t.string  "name"
     t.text    "description"
     t.integer "weight"
+    t.integer "parent_id"
+    t.integer "lft"
+    t.integer "rgt"
   end
 
   create_table "taggings", :force => true do |t|
