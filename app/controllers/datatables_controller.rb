@@ -146,12 +146,19 @@ class DatatablesController < ApplicationController
     crumb = Struct::Crumb.new
     @crumbs = []
     return unless params[:id]
-    crumb.url = '/datasets/'
-    crumb.name = 'Data Catalog: Datasets'
+    crumb.url = '/datatables/'
+    crumb.name = 'Data Catalog: Datatables'
     @crumbs << crumb
     crumb = Struct::Crumb.new
     
     datatable  = Datatable.find(params[:id])
+
+    study = datatable.study
+    crumb.url = study_path(study)
+    crumb.name = study.name
+    @crumbs << crumb
+    crumb = Struct::Crumb.new
+    
     crumb.url =  dataset_path(datatable.dataset)
     crumb.name = datatable.dataset.title
     @crumbs << crumb
