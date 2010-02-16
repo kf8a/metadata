@@ -14,8 +14,8 @@ class DatatablesController < ApplicationController
     
     query =  {'theme' => {'id' => ''}, 'person' => {'id' => ''}, 'study' => {'id' => ''}, 
       'keywords' => '', 'date' => {'syear' => '1988', 'eyear' => Date.today.year.to_s}}
-    query.merge!(params)
-        
+    query.merge!(params) unless params['commit'] == 'Clear'
+            
     theme_id = query['theme']['id']
     person_id = query['person']['id']
     study_id = query['study']['id']

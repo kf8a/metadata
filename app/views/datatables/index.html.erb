@@ -18,9 +18,9 @@
       <label>To:</label><%= select_year @eyear, :start_year => 1988, :end_year => Date.today.year, :field_name => 'eyear' %>
     </div>
     <div id='keyword-search'>
-      <label>Keywords:</label><%= text_field_tag :keyword_list, @keyword_list, {:id => 'keyworder'}  %>
+      <label>Keywords:</label><%= text_field_tag :keyword_list, @keyword_list, {:id => 'keyworder', :size=>20}  %>
     </div>  
-      <%= submit_tag "Search" %>
+      <%= submit_tag "Search"%><%= submit_tag 'Clear'%>
 </div>
 </div>
 

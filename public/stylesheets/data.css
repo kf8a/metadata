@@ -182,25 +182,26 @@ a.edit:hover {
 }
 
 #bottom-line-search {
-	clear: both;
+	display:inline;
 }
 
 #year-search {
-	float:left;
+	display:inline;
 }
 
 #year-search label {
 	display:inline;
+	width: 50px;
 }
 
 #keyword-search {
-	float:left;
-	margin-left: 1em;
-	margin-right: 2em;
+	margin-left: 0em;
+	margin-right:0em;
+	display: inline;
 }
 
-input#keyword_list {
-	margin-left: 0;
+input#keyword-list {
+	margin-left: 0;	
 }
 
 #keyword-search label {
