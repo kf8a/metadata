@@ -31,7 +31,6 @@
   <li class='study-title'><%= study.name %>
   <ul>
     <% @themes.each do |theme| %>
-    <% next unless theme.datatables?(study) -%>
     <% next unless theme.include_datatables_from_study?(@datatables, study) -%>
  
     <%= render :partial=>'theme', :locals => {:theme => theme, :study => study} %>

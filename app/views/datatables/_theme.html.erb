@@ -4,14 +4,12 @@
     <% datatables.sort! {|a,b| sprintf("%.5i",a.weight) + a.title <=> sprintf("%.5i",b.weight) + b.title}%>
     <% datatables.each do |datatable| -%>
     <% next unless datatable.dataset.studies.include?(study) -%>
-    <% next unless @datatables.include?(datatable) -%>
     <li>
       <%= link_to datatable.title, datatable_path(datatable) %>
     </li>
     <% end -%>
     
   <% theme.children.each do |t| -%>
-  <% next unless t.datatables?(study) -%>
 
   <% next unless t.include_datatables_from_study?(@datatables, study) -%>
   
