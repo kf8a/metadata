@@ -19,7 +19,7 @@
   <%= text_field_with_auto_complete :datatable, :keyword_list, {}, {:method => :get} %>
 </p>
 <p>
-  <label for='datatable_study_id'>Study</label>
+  <label for='datatable_study_id'>Experiment</label>
   <%= f.select :study_id, Study.all.collect{|x| [x.name, x.id]}, :include_blank => true %>
 </p>
 <p>

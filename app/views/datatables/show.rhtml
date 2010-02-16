@@ -4,6 +4,9 @@
 	<%= textilize @datatable.description  if @datatable.description %>
 </p>
 
+<% if @datatable.study %>
+<p>Experiment: <%= @datatable.study.name %></p>
+<% end %>
 <p>Dataset: <%= link_to @datatable.dataset.title, dataset_path(@datatable.dataset) %></p>
 <% if @datatable.keywords.any? %>
 <p>Keywords: <%= @datatable.keywords.join(', ')%></p>

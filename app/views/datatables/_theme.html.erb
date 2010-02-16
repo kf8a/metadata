@@ -1,9 +1,8 @@
 <li><%= theme.name.capitalize %>
   <ul>
-    <% datatables = theme.datatables -%>
+    <% datatables = theme.datatables_in_study(study) -%>
     <% datatables.sort! {|a,b| sprintf("%.5i",a.weight) + a.title <=> sprintf("%.5i",b.weight) + b.title}%>
     <% datatables.each do |datatable| -%>
-    <% next unless datatable.dataset.studies.include?(study) -%>
     <li>
       <%= link_to datatable.title, datatable_path(datatable) %>
     </li>
