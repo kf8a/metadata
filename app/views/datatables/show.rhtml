@@ -7,6 +7,7 @@
 <% if @datatable.study %>
 <p>Experiment: <%= @datatable.study.name %></p>
 <% end %>
+Temporal Coverage: <%= @datatable.begin_date %> to <%= @datatable.end_date %>
 <p>Dataset: <%= link_to @datatable.dataset.title, dataset_path(@datatable.dataset) %></p>
 <% if @datatable.keywords.any? %>
 <p>Keywords: <%= @datatable.keywords.join(', ')%></p>
