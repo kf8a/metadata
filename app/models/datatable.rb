@@ -28,7 +28,13 @@ class Datatable < ActiveRecord::Base
     return title if (self.begin_date.nil? or self.end_date.nil?)
     year_end = end_date.year
     year_start = begin_date.year
-    title + " (#{year_start} to #{ year_end > Time.now.year - 3 ? 'present': year_end})"
+    reply = ""
+    if year_end == year_start
+      reply = " (#{year_start})"
+    else
+      reply = " (#{year_start} to #{ year_end > Time.now.year - 3 ? 'present': year_end})"
+    end
+    title + reply
   end
       
   def to_eml
