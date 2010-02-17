@@ -49,6 +49,6 @@ jQuery.fn.quickTree = function() {
             }   
         );
 
-			jQuery('span.expand').toggleClass('contract').nextAll('ul').slideDown();
+			//jQuery('span.expand').toggleClass('contract').nextAll('ul').slideDown();
     });
 };
