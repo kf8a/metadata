@@ -1,14 +1,14 @@
-<h1><%= link_to "#{@datatable.name}", dataset_path(@dataset) %> : <%= @datatable.title %></h1>
+<h1><%= @datatable.title %></h1>
 
 <p>
 	<%= textilize @datatable.description  if @datatable.description %>
 </p>
 
 <% if @datatable.study %>
-<p>Experiment: <%= @datatable.study.name %></p>
+<p>Experiment: <%= link_to @datatable.study.name, study_path(@datatable.study) %></p>
 <% end %>
 Temporal Coverage: <%= @datatable.begin_date %> to <%= @datatable.end_date %>
-<p>Dataset: <%= link_to @datatable.dataset.title, dataset_path(@datatable.dataset) %></p>
+<p>Dataset: <%= link_to @datatable.dataset.title, dataset_path(@datatable.dataset) %>, <%= "#{@datatable.name}"%></p>
 <% if @datatable.keywords.any? %>
 <p>Keywords: <%= @datatable.keywords.join(', ')%></p>
 <% end %>
