@@ -25,10 +25,10 @@ class Datatable < ActiveRecord::Base
   
   #TODO create a completed flag and use the actual end year if present
   def title_and_years
-    return title unless begin_date || end_date
+    return title if (self.begin_date.nil? or self.end_date.nil?)
     year_end = end_date.year
     year_start = begin_date.year
-    title + " (#{year_end} to #{ year_end < Date.today.year - 3 ? 'present': year_end})"
+    title + " (#{year_start} to #{ year_end > Time.now.year - 3 ? 'present': year_end})"
   end
       
   def to_eml
@@ -79,20 +79,6 @@ class Datatable < ActiveRecord::Base
     self.begin_date = dates[:begin_date] if dates[:begin_date]
     self.end_date = dates[:end_date] if dates[:end_date]
     save
-  end
-  
-  def begin_date
-    if read_attribute(:begin_date)
-      update_temporal_extent
-    end
-    read_attribute(:begin_date)
-  end
-  
-  def end_date
-    if read_attribute(:end_date)
-      update_temporal_extent
-    end
-    read_attribute(:end_date)
   end
   
   ## Finding datatables
