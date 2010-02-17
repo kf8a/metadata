@@ -32,7 +32,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :themes
   
-  map.resources :studies
+  map.resources :studies, :path_prefix => '/dynamic'
   
   map.root :controller => 'datasets'
 
