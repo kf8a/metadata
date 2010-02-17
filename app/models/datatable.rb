@@ -22,6 +22,14 @@ class Datatable < ActiveRecord::Base
     
     !(extent[:begin_date] < start_date || extent[:end_date] > end_date) 
   end
+  
+  #TODO create a completed flag and use the actual end year if present
+  def title_and_years
+    return title unless begin_date || end_date
+    year_end = end_date.year
+    year_start = begin_date.year
+    title + " (#{year_end} to #{ year_end < Date.today.year - 3 ? 'present': year_end})"
+  end
       
   def to_eml
     eml = Element.new('datatable')
