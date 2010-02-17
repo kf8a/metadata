@@ -38,14 +38,13 @@ jQuery.fn.quickTree = function() {
         }); //end .each
 
 		//handle clicking on expand/contract control
-				//if it's clicked once, find all child lists and contract
         jQuery('span.expand').toggle(
 						 function(){
-	                jQuery(this).toggleClass('contract').nextAll('ul').slideUp();
+	               jQuery(this).toggleClass('contract').nextAll('ul').slideDown();
+                
 	            },
-							//if it's clicked again,  find all child lists and expand
             function(){
-                jQuery(this).toggleClass('contract').nextAll('ul').slideDown();
+ 								jQuery(this).toggleClass('contract').nextAll('ul').slideUp();
             }   
         );
 
