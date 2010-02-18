@@ -29,6 +29,7 @@
   <% next unless study.include_datatables?(@datatables)%>
   
   <li class='study-title'><%= study.name %> <%= link_to 'edit', edit_study_path(study) if logged_in?%>
+    <p><%= study.synopsis%></p>
   <ul>
     <% @themes.each do |theme| %>
     <% next unless theme.include_datatables_from_study?(@datatables, study) -%>

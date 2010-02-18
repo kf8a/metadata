@@ -226,7 +226,13 @@ li.study-title {
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
 }
+li.study-title p {
+	font-weight: normal;
+	font-size: 0.7em;
+	margin-left: 4em;
+}
 li.study-title ul {
+	font-size: 0.9em;
 	font-weight: normal;
 	background-color: white;
 	position: relative;
