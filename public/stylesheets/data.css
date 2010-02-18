@@ -81,10 +81,6 @@ a.edit:link{
 	color: #7f7f7f;
 }
 
-a:visited {
-    text-decoration: none;
-}
-
 a.edit:visited {
 	color: #bfbfbf;
 }
@@ -238,7 +234,6 @@ li.study-title p {
 	margin-left: 4em;
 }
 li.study-title ul {
-	font-size: 0.9em;
 	font-weight: normal;
 	background-color: white;
 	position: relative;
