@@ -24,11 +24,20 @@
 </div>
 </div>
 
+<ul class='twocolumn'>
+  <% @studies.each do |study| %>
+  <% next unless study.include_datatables?(@datatables)%>
+  
+  <li class='study-index'><%= link_to study.name, url_for({:anchor => "study_#{study.id}"}) %> <%= link_to 'edit', edit_study_path(study) if logged_in?%>
+    <p><%= study.synopsis%></p>
+  </li>
+  <% end %>
+</ul>
 <ul class='quickTree'>
   <% @studies.each do |study| -%>
   <% next unless study.include_datatables?(@datatables)%>
   
-  <li class='study-title'><%= study.name %> <%= link_to 'edit', edit_study_path(study) if logged_in?%>
+  <li class='study-title' id='study_<%=study.id%>'><%= study.name %> <%= link_to 'edit', edit_study_path(study) if logged_in?%>
     <p><%= study.synopsis%></p>
   <ul>
     <% @themes.each do |theme| %>

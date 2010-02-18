@@ -213,6 +213,12 @@ a.edit:hover {
 	border-style: inset;
 }
 
+li.study-index p {
+	font-weight: normal;
+	font-size: 0.7em;
+	margin-left: 4em;
+}
+
 li.study-title {
 	background-color: white;
 	font-size: 1.2em;
