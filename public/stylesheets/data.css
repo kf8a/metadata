@@ -143,6 +143,10 @@ a.edit:hover {
 	padding-top: 0.5em;
 }
 
+#keyworder {
+	width: 520px;
+}
+
 #core-area-search {
 	float:left
 }
@@ -162,6 +166,7 @@ a.edit:hover {
 
 .year-search {
 	float: left;
+	margin-left: 6px;
 }
 
 .year-search label {
