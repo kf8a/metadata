@@ -151,34 +151,13 @@ a.edit:hover {
 	padding-right: 5px;
 }
 
-
-#contributor-search {
-	float: left;
-}
-
-#contributor-search label {
-	text-align: center;
-	padding-right: 10px;
-	padding-left: 10px;
-}
-
 #top-line-search {
-	height: 5em;
+	height: 3em;
 }
 
-
-#experiment-search {
-	float:left
-}
-
-#experiment-search label {
-	text-align: center;
-	padding-right: 10px;
-	padding-left: 10px;
-}
-
-#bottom-line-search {
-	display:inline;
+#search-submit {
+	padding-top: 1.2em;
+	text-align: right;
 }
 
 .year-search {
