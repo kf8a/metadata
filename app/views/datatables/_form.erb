@@ -31,6 +31,10 @@
   <%= f.select :core_area_id, @core_areas , :include_blank => true%>
 </p>
 <p>
+  Temporal Coverage: <%= @datatable.begin_date %> to: <%= @datatable.end_date%>
+  <%= button_to_remote 'update temporal extent', :url => {:action => :update_temporal_extent, :id => @datatable}%>
+</p>
+<p>
   <label for='datatable_weight'>Weight</label>
   <%= f.text_field :weight %>
 </p>
@@ -86,3 +90,4 @@
 </table>
 <%= link_to_remote 'Add Variate',:url => {:controller => :variates, :action => :new} %>
 <% end %>
+

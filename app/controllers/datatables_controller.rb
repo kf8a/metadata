@@ -142,6 +142,15 @@ class DatatablesController < ApplicationController
     end
   end
   
+  def update_temporal_extent
+    @datatable = Datatable.find(params[:id])
+    @datatable.update_temporal_extent
+    @datatable.save
+    respond_to do |format|
+      format.js {render :nothing => true}
+    end
+  end
+  
   private
   def set_crumbs
     crumb = Struct::Crumb.new
