@@ -12,34 +12,23 @@ class DatatablesController < ApplicationController
     @studies = Study.all(:order => 'weight')
     @people = Person.find_all_with_dataset(:order => 'sur_name')
     
-    query =  {'theme' => {'id' => ''}, 'person' => {'id' => ''}, 'study' => {'id' => ''}, 
+    query =  {'theme' => {'id' => ''}, 
       'keywords' => '', 'date' => {'syear' => '1988', 'eyear' => Date.today.year.to_s}}
     query.merge!(params) unless params['commit'] == 'Clear'
             
     theme_id = query['theme']['id']
-    person_id = query['person']['id']
-    study_id = query['study']['id']
     @keyword_list = query['keyword_list']
     date = query['date']
     
     if theme_id && !theme_id.empty?
       @theme = Theme.find(theme_id)
     end
-    
-    if person_id && !person_id.empty?
-      @person = Person.find(person_id)
-    end
-    
-    if study_id && !study_id.empty?
-      @study = Study.find(study_id)
-    end
-    
+        
     @syear = date['syear'].to_i || 1988
     @eyear = date['eyear'].to_i || Date.today.year
     
           
-    @datatables = Datatable.find_by_params({:theme => {:id => theme_id}, :study => {:id => study_id},
-        :person => {:id => person_id}, :keywords => @keyword_list, 
+    @datatables = Datatable.find_by_params({:theme => {:id => theme_id}, :keywords => @keyword_list, 
         :date => {:syear => date['syear'], :eyear => date['eyear']}})
           
     respond_to do |format|
