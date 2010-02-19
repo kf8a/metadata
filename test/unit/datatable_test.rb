@@ -196,7 +196,7 @@ class DatatableTest < ActiveSupport::TestCase
   
   context 'finding datatables' do
     setup do 
-      @person = Factory.create(:person)
+      @person = Factory.create(:person, :given_name => 'bob')
       @theme = Factory.create(:theme)
       @subtheme = Factory.create(:theme)
       @subtheme.move_to_child_of(@theme)
@@ -238,6 +238,10 @@ class DatatableTest < ActiveSupport::TestCase
     should 'find all datatables with empty keyword' do
       assert Datatable.find_by_keywords('').include?(@datatable)
       assert Datatable.find_by_keywords('').include?(@unfound_datatable)
+    end
+    
+    should 'find a datatable with the person in the search field' do
+      assert Datatable.find_by_keywords('bob') == [@datatable]
     end
     
     should 'respond to find_by_person' do

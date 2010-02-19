@@ -91,19 +91,33 @@ class Datatable < ActiveRecord::Base
   ## Finding datatables
   def self.find_by_keywords(keyword_list='')
     return self.find(:all, :conditions => ['on_web is true']) if keyword_list == ''
-    self.find_tagged_with(keyword_list,:on => 'keywords')    
+    keyword_results = self.find_tagged_with(keyword_list,:on => 'keywords')  
+    people_results = keyword_list.split(',').collect do |keyword|
+      self.find_by_person_name(keyword)
+    end
+    keyword_results.concat(people_results.flatten)
   end  
   
+  def self.find_by_person_name(name='')
+    ['given_name', 'sur_name'].collect do |field|
+      self.find_by_person_field(name,field)
+    end.flatten
+  end
+  
+  def self.find_by_person_field(name, field)
+    self.find_by_sql("SELECT datatables.* FROM datatables " +
+      " INNER JOIN datasets ON datasets.id = datatables.dataset_id " + 
+      " inner join affiliations on datasets.id = affiliations.dataset_id " + 
+      " inner join people on affiliations.person_id = people.id " +
+      " where people.#{field} like '%#{name}%'")
+  end
+    
   def self.find_by_person(person_id = '')
     return [] if person_id == ''
     if person_id.respond_to?('id')
        person_id = person_id.id
      end
-     self.find_by_sql("SELECT datatables.* FROM datatables " +
-      " INNER JOIN datasets ON datasets.id = datatables.dataset_id " + 
-      " inner join affiliations on datasets.id = affiliations.dataset_id " + 
-      " inner join people on affiliations.person_id = people.id " +
-      " where people.id = #{person_id}")
+     self.find_by_person_field(person_id, 'id')
   end
   
   def self.find_by_date_interval(begin_date, end_date)
