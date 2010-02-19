@@ -172,8 +172,8 @@ class DatatableTest < ActiveSupport::TestCase
     
     should 'cache the temporal extent' do
         @year.update_temporal_extent
-        assert date_representation.begin_date == Date.today
-        assert date_representation.end_date == Date.today
+        assert @year.begin_date.year == Date.today.year
+        assert @year.end_date.year == Date.today.year
     end
   end
   
