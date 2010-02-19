@@ -65,6 +65,7 @@ class DatatablesController < ApplicationController
       @datatable.excerpt_limit = 50 if @datatable.excerpt_limit.nil?
       query = query + " limit #{@datatable.excerpt_limit}" 
       @values  = ActiveRecord::Base.connection.execute(query)
+      #TDOD convert the array into a ruby object
     end
 
     unless trusted_ip?

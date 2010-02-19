@@ -94,7 +94,7 @@ end -%>
 		</th>
 		<% end %>
 	</tr>
-	<% @values.to_a.each do  |row| %>
+	<% @values.each do  |row| %>
 	<tr  class="<%= cycle('even','odd') -%>">
 		<% row.keys.each do |key| %>
 		<td align='right'>
@@ -103,6 +103,7 @@ end -%>
 		<% end %>
 	</tr>
 	<% end %>
+	<% @values.clear %>
 </table>
 <% else -%>
 <p>Data Embargoed</p>
