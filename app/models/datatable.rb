@@ -71,6 +71,7 @@ class Datatable < ActiveRecord::Base
       when values.fields.member?('obs_date') then 'obs_date'
       when values.fields.member?('date') then 'date'
       when values.fields.member?('datetime') then 'datetime'
+      when values.fields.member?('year') then 'year'
       end
       unless date_field.nil?
         query = "select max(#{date_field}), min(#{date_field}) from (#{object}) as t1"        
@@ -167,7 +168,11 @@ private
 
   def query_datatable_for_temporal_extent(query)
     values = ActiveRecord::Base.connection.execute(query)
-    [Time.parse(values[0]['min']).to_date,Time.parse(values[0]['max']).to_date]
+    if values[0].class == 'Date' 
+      [Time.parse(values[0]['min']).to_date,Time.parse(values[0]['max']).to_date]
+    else # assume is a year
+      [Time.parse(values[0]['min'].to_s + '-1-1').to_date,Time.parse(values[0]['max'].to_s + '-1-1').to_date ]
+    end
   end
 
   def eml_physical

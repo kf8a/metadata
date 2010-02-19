@@ -147,6 +147,36 @@ class DatatableTest < ActiveSupport::TestCase
     end
   end
   
+  context 'datatable with year' do
+    setup do 
+      @year = Factory.create(:datatable, :object => "select #{Time.now.year} as year")
+    end
+    should 'return true if interval includes today' do
+        assert @year.within_interval?(Date.today - 1.year, Date.today + 1.day)
+    end
+    
+    should 'return false if the interval is later than the data times' do
+        assert !@year.within_interval?(Date.today + 1.day, Date.today + 4.day)
+    end
+    
+    should 'return false if the interval is earlier than the data times' do
+        assert !@year.within_interval?(Date.today - 4.year, Date.today - 2.year)
+    end
+         
+    
+    should 'have the correct temporal extent' do
+        dates = @year.temporal_extent
+        assert dates[:begin_date].year == Date.today.year
+        assert dates[:end_date].year == Date.today.year
+    end
+    
+    should 'cache the temporal extent' do
+        @year.update_temporal_extent
+        assert date_representation.begin_date == Date.today
+        assert date_representation.end_date == Date.today
+    end
+  end
+  
   context 'eml generation' do
     setup do 
       @person = Factory.create(:person)

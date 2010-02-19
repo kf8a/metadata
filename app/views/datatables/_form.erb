@@ -39,6 +39,10 @@
   <label for='datatable_on_web'>On Web</label>
   <%= f.check_box :on_web %>
 </p>
+<p>
+  <label for='datatable_restricted'>Restricted (only visible at KBS)</label>
+  <%= f.check_box :is_restricted %>
+</p>
 
 <% f.fields_for :variates do |variate_form| %>
 <table id='variates'>
