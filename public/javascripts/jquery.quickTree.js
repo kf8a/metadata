@@ -40,15 +40,15 @@ jQuery.fn.quickTree = function() {
 		//handle clicking on expand/contract control
         jQuery('span.expand').toggle(
 						 function(){
-								jQuery(this).toggleClass('contract').nextAll('ul').slideUp();
-							
+							jQuery(this).toggleClass('contract').nextAll('ul').slideDown();
 	            },
             function(){
-	            jQuery(this).toggleClass('contract').nextAll('ul').slideDown();
+							jQuery(this).toggleClass('contract').nextAll('ul').slideUp();
+	
   
             }   
         );
 
-			jQuery('span.expand').toggleClass('contract').nextAll('ul').slideDown();
+			//jQuery('span.expand').toggleClass('contract').nextAll('ul').slideDown();
     });
 };

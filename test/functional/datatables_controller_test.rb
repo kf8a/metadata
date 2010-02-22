@@ -70,14 +70,11 @@ class DatatablesControllerTest < ActionController::TestCase
   
   context 'GET with empty search parameters' do
     setup do
-      get :index, :theme => {:id => ''}, :study => {:id => ''}, :person => {:id => ''},
-          :keyword_list => '', :date => {:syear => '1988', :eyear => Date.today.year.to_s}, :commit => 'Search'
+      get :index, :theme => {:id => ''},:keyword_list => '', :date => {:syear => '1988', :eyear => Date.today.year.to_s}, :commit => 'Search'
     end
   
     should_assign_to :datatables
-    should_assign_to :people
     should_assign_to :themes
-    should_assign_to :studies
         
     should_respond_with :success
     should_render_template :index
