@@ -110,7 +110,7 @@ class Dataset < ActiveRecord::Base
     creator = eml_dataset.add_element('creator', {'id' => 'KBS LTER'})
     people.each do | person |
       p = eml_dataset.add_element('associatedParty', {'id' => person.person, 'scope' => 'document'})
-      createor.add_element(p)
+      creator.add_element(p)
       
       p.add_element eml_individual_name(person)
       p.add_element address(person)
