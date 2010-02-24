@@ -107,9 +107,11 @@ class Dataset < ActiveRecord::Base
 #    e = Document.new to_xml
     eml_dataset = emldoc.root.add_element('dataset')
     eml_dataset.add_element('title').add_text(title)
-    eml_dataset.add_element('creator', {'id' => 'KBS LTER'})
+    creator = eml_dataset.add_element('creator', {'id' => 'KBS LTER'})
     people.each do | person |
       p = eml_dataset.add_element('associatedParty', {'id' => person.person, 'scope' => 'document'})
+      createor.add_element(p)
+      
       p.add_element eml_individual_name(person)
       p.add_element address(person)
       p.add_element('phone', {'phonetype' => 'phone'}).add_text(person.phone) 
