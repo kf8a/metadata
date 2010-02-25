@@ -32,6 +32,7 @@ jQuery.fn.quickTree = function() {
 			
 				//add expand/contract control
                 jQuery(this).addClass('root').prepend('<span class="expand" />');
+								jQuery(this).parent().addClass('expanded');
 				
             }
         		
@@ -41,11 +42,11 @@ jQuery.fn.quickTree = function() {
         jQuery('span.expand').toggle(
 						 function(){
 							jQuery(this).toggleClass('contract').nextAll('ul').slideDown();
+							jQuery(this).parent().toggleClass('expanded');
 	            },
             function(){
 							jQuery(this).toggleClass('contract').nextAll('ul').slideUp();
-	
-  
+							jQuery(this).parent().toggleClass('expanded');
             }   
         );
 
