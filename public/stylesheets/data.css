@@ -8,10 +8,6 @@
 	list-style-position: inside;
 	
 }
-#searchform input {
-	margin-right:0.05em;
-	color:#CCCCCC;
-}
 
 #content h1 {
 	font-size: 1.2em;
@@ -145,6 +141,10 @@ a.edit:hover {
 
 #keyworder {
 	width: 520px;
+}
+
+#keyworder input {
+	color:#CCCCCC;
 }
 
 #core-area-search {

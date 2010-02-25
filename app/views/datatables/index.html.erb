@@ -2,7 +2,7 @@
       <div id='bottom-line-search'>
 
       <div id='keyword-search'>
-       <%= text_field_tag :keyword_list, @keyword_list, {:id => 'keyworder'}  %>
+       <%= text_field_tag :keyword_list, @keyword_list || 'Search for keywords, contributors or abstract', {:id => 'keyworder', :onfocus=>"if(this.value==defaultValue) this.value=''", :onblur=>"if(this.value=='') this.value=defaultValue"}  %>
       </div>  
        
   </div>
