@@ -25,18 +25,18 @@ jQuery.fn.quickTree = function() {
         jQuerytree.find('ul').hide();
 		
 		//iterate through all list items
-        jQueryroots.each(function(){
+		        jQueryroots.each(function(){
 		
 			//if list-item contains a child list
-            if (jQuery(this).children('ul').length > 0) {
+		            if (jQuery(this).children('ul').length > 0) {
 			
 				//add expand/contract control
-                jQuery(this).addClass('root').prepend('<span class="expand" />');
+		                jQuery(this).addClass('root').prepend('<span class="expand" />');
 								jQuery(this).parent().addClass('expanded');
 				
-            }
-        		
-        }); //end .each
+		            }
+		        		
+		        }); //end .each
 
 		//handle clicking on expand/contract control
         jQuery('span.expand').toggle(
