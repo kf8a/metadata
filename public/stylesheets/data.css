@@ -210,7 +210,7 @@ li.study-title {
 	padding-right: 1px;
 	padding: 1px;
 }
-.study-title .expanded {
+.study-title > .expanded {
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
 }
