@@ -10,17 +10,15 @@
   <td>Experiment:</td><td> <%= link_to @datatable.study.name, study_path(@datatable.study) %></td>
   </tr>
 <% end %>
+<% if @datatable.begin_date && @datatable.end_date %>
 <tr>
 <td>Temporal Coverage:</td> <td><%= @datatable.begin_date %> to <%= @datatable.end_date %></td>
 </tr>
+<% end %>
 <tr>
 <td>Dataset:</td><td><%= link_to @datatable.dataset.title, dataset_path(@datatable.dataset) %>, <%= "#{@datatable.name}"%></td>
 </tr>
-<% if @datatable.keywords.any? %>
-<tr>
-<td>Keywords:</td><td><%= @datatable.keywords.join(', ')%></td>
-</tr>
-<% end %>
+
 <% related_tables = @datatable.dataset.datatables.collect  do |d|
   next if d == @datatable
   link_to d.title , datatable_path(d) 
@@ -35,6 +33,12 @@ end -%>
   </ul>
 </tr>
 <% end -%>
+<% if @datatable.keywords.any? %>
+<tr>
+<td>Keywords:</td><td><%= @datatable.keywords.join(', ')%></td>
+</tr>
+<% end %>
+</table>
 
 <% unless  @datatable.is_sql %>
 <%= link_to 'Data', @datatable.data_url %> (on a different page)
