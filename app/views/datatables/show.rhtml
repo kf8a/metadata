@@ -4,7 +4,7 @@
 	<%= textilize @datatable.description  if @datatable.description %>
 </p>
 
-<table class='datatable_tag'>
+<table class='data-description'>
 <% if @datatable.study %>
 <tr>
   <td>Experiment:</td><td> <%= link_to @datatable.study.name, study_path(@datatable.study) %></td>
@@ -21,11 +21,25 @@
 <td>Keywords:</td><td><%= @datatable.keywords.join(', ')%></td>
 </tr>
 <% end %>
+<% related_tables = @datatable.dataset.datatables.collect  do |d|
+  next if d == @datatable
+  link_to d.title , datatable_path(d) 
+end -%>
+<% if related_tables.any? %>
+<tr>
+  <td>Related Tables</td>
+  <td><ul>
+    <% related_tables.each do |table| %>
+      <li><%= table %></li>
+    <% end %>
+  </ul>
+</tr>
+<% end -%>
 
 <% unless  @datatable.is_sql %>
 <%= link_to 'Data', @datatable.data_url %> (on a different page)
 <% end %>
-<table class='variate_table'>
+<table class='variate-table'>
 	<tr>
 		<th>Variate</th>
 		<th>Description</th>
@@ -33,10 +47,10 @@
 	</tr>
 	<% @datatable.variates.each do |variate| -%>
 		<tr>
-			<td class='space_after'>
+			<td class='space-after'>
 				<%= variate.name %>
 			</td>
-			<td class='space_after'>
+			<td class='space-after'>
 				<%= variate.description %>
 			</td>
 			<td>
@@ -76,21 +90,6 @@
 <% end %>
 See <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use policy</a>
 </p>
-
-<% related_tables = @datatable.dataset.datatables.collect  do |d|
-  next if d == @datatable
-  link_to d.title , datatable_path(d) 
-end -%>
-<% if related_tables.any? %>
-<h3>Related Tables</h3>
-<ul>
-  <% related_tables.each do |table| %>
-    <li><%= table %></li>
-  <% end %>
-</ul>
-<% end %>
-
-
 
 <h3>Data Excerpt</h3>
 <table>

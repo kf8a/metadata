@@ -230,20 +230,26 @@ li.study-title ul {
 	margin-right: 1px;
 	color: #333;
 }
-li.study_title li {
+li.study-title li {
 	padding-top: 3px;
 }
 
 
-.variate_table {
-	margin-top: 5px;
+.variate-table {
+	margin-top: 7px;
 	width: 100%;
 	border-bottom-style: solid;
 	border-top-style: solid;
 	border-bottom-width: 1px;
+	border-top-width: 1px;
 }
 
-.datatable_tag tr td:first-class{
+table.data-description {
+	border-top-style: solid;
+	border-top-width: 1px;
+}
+
+.data-description tr td:first-child{
 	font-weight: bold;
 }
 
@@ -251,7 +257,7 @@ li.study_title li {
 	text-align: left;
 }
 
-.space_after {
+.space-after {
 	padding-right:2em;
 }
 
