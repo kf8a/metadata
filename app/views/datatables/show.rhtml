@@ -4,19 +4,28 @@
 	<%= textilize @datatable.description  if @datatable.description %>
 </p>
 
+<table class='datatable_tag'>
 <% if @datatable.study %>
-<p>Experiment: <%= link_to @datatable.study.name, study_path(@datatable.study) %></p>
+<tr>
+  <td>Experiment:</td><td> <%= link_to @datatable.study.name, study_path(@datatable.study) %></td>
+  </tr>
 <% end %>
-Temporal Coverage: <%= @datatable.begin_date %> to <%= @datatable.end_date %>
-<p>Dataset: <%= link_to @datatable.dataset.title, dataset_path(@datatable.dataset) %>, <%= "#{@datatable.name}"%></p>
+<tr>
+<td>Temporal Coverage:</td> <td><%= @datatable.begin_date %> to <%= @datatable.end_date %></td>
+</tr>
+<tr>
+<td>Dataset:</td><td><%= link_to @datatable.dataset.title, dataset_path(@datatable.dataset) %>, <%= "#{@datatable.name}"%></td>
+</tr>
 <% if @datatable.keywords.any? %>
-<p>Keywords: <%= @datatable.keywords.join(', ')%></p>
+<tr>
+<td>Keywords:</td><td><%= @datatable.keywords.join(', ')%></td>
+</tr>
 <% end %>
 
 <% unless  @datatable.is_sql %>
 <%= link_to 'Data', @datatable.data_url %> (on a different page)
 <% end %>
-<table class='full_width'>
+<table class='variate_table'>
 	<tr>
 		<th>Variate</th>
 		<th>Description</th>

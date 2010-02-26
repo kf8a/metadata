@@ -235,11 +235,19 @@ li.study_title li {
 }
 
 
-.full_width {
+.variate_table {
+	margin-top: 5px;
 	width: 100%;
+	border-bottom-style: solid;
+	border-top-style: solid;
+	border-bottom-width: 1px;
 }
 
-#content table.full_width tbody tr th {
+.datatable_tag tr td:first-class{
+	font-weight: bold;
+}
+
+#content table.variate_table tbody tr th {
 	text-align: left;
 }
 
