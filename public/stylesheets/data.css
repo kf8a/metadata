@@ -203,7 +203,7 @@ li.study-title {
 	background-color: white;
 	font-size: 1.2em;
 	font-weight: bold;
-	
+	color:#063;;
 	margin: 2px;
 	padding-top: 1px;
 	padding-bottom: 1px;
@@ -219,6 +219,7 @@ li.study-title p {
 	font-size: 0.7em;
 	margin-left: 4em;
 	margin-top: 0;
+	color: #333;
 }
 li.study-title ul {
 	font-weight: normal;
@@ -226,6 +227,7 @@ li.study-title ul {
 	position: relative;
 	left: 1px;
 	margin-right: 1px;
+	color: #333;
 }
 li.study_title li {
 	padding-top: 3px;
