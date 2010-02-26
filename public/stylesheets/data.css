@@ -180,9 +180,10 @@ a.edit:hover {
 }
 
 #content a.download-link {
+	display: block;
 	padding: 10px;
 	margin-top: 20px;
-	margin-bottom:40px;
+	margin-bottom:20px;
 	-moz-border-radius:10px;
   -webkit-border-radius:10px;
 	border-style: outset;
@@ -231,6 +232,19 @@ li.study-title ul {
 }
 li.study_title li {
 	padding-top: 3px;
+}
+
+
+.full_width {
+	width: 100%;
+}
+
+#content table.full_width tbody tr th {
+	text-align: left;
+}
+
+.space_after {
+	padding-right:2em;
 }
 
 .quickTree {

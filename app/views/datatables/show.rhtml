@@ -16,23 +16,22 @@ Temporal Coverage: <%= @datatable.begin_date %> to <%= @datatable.end_date %>
 <% unless  @datatable.is_sql %>
 <%= link_to 'Data', @datatable.data_url %> (on a different page)
 <% end %>
-<h3>Variates</h3>
-<table>
+<table class='full_width'>
 	<tr>
 		<th>Variate</th>
 		<th>Description</th>
 		<th>Units</th>
 	</tr>
 	<% @datatable.variates.each do |variate| -%>
-		<tr class="<%= cycle('even','odd') -%>">
-			<td>
+		<tr>
+			<td class='space_after'>
 				<%= variate.name %>
 			</td>
-			<td>
+			<td class='space_after'>
 				<%= variate.description %>
 			</td>
 			<td>
-				<%= variate.unit.name if variate.unit %>
+				<%= variate.unit.human_name if variate.unit %>
 			</td>
 		</tr>
 	<% end -%>
@@ -52,23 +51,22 @@ Temporal Coverage: <%= @datatable.begin_date %> to <%= @datatable.end_date %>
 	<% end -%>
 </ul>
 
-<h3>Data Access Statement</h3>
-<% if @datatable.access_statement then %>
-<%= @datatable.access_statement %>
-<% else %>
-<p>See <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use policy</a></p>
-<% end %>
 
 <% if  @datatable.is_sql %>
-<h3>Data</h3>
 
+<p>
 <% if @values -%>
 <!-- 
-	TODO: temporal coverage
 	TODO: geographic coverage 
 	-->
-<%= link_to 'Download complete datatable', datatable_path(@datatable, :format => :csv) ,:class => 'download-link'%>
+<%= link_to 'Download complete datatable', datatable_path(@datatable, :format => :csv) ,
+:class => 'download-link'%>
 
+<% if @datatable.access_statement then %>
+  <%= @datatable.access_statement %>
+<% end %>
+See <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use policy</a>
+</p>
 
 <% related_tables = @datatable.dataset.datatables.collect  do |d|
   next if d == @datatable
