@@ -38,6 +38,19 @@ end -%>
 <td>Keywords:</td><td><%= @datatable.keywords.join(', ')%></td>
 </tr>
 <% end %>
+<tr>
+  <td>Personnel</td>
+  <td>
+    <ul>
+      <% personnel = @datatable.personnel -%>
+      <% personnel.keys.each do |key| -%>
+        <li>
+          <%= link_to "#{key.full_name}", person_path(key.id)%>, <%= personnel[key].join(',') %>
+        </li>
+      <% end %>
+    </ul>
+  </td>
+</tr>
 </table>
 
 <% unless  @datatable.is_sql %>
@@ -64,20 +77,6 @@ end -%>
 	<% end -%>
 </table>
 
-<h2>Personnel</h2>
-<ul>
-	<% @roles.each do |role| %>
-	<li> <%= role.name.capitalize.pluralize %>
-		<ul>
-	<% @dataset.affiliations.each do |affiliation| -%>
-	<li><%= link_to "#{affiliation.person.full_name}", person_path(affiliation.person.id) if affiliation.role == role %>
-	</li>
-	<% end -%>
-		</ul>
-	</li>
-	<% end -%>
-</ul>
-
 
 <% if  @datatable.is_sql %>
 
@@ -92,7 +91,7 @@ end -%>
 <% if @datatable.access_statement then %>
   <%= @datatable.access_statement %>
 <% end %>
-See <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use policy</a>
+The <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use policy applies to the this dataset</a>
 </p>
 
 <h3>Data Excerpt</h3>

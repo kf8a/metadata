@@ -16,6 +16,18 @@ class Datatable < ActiveRecord::Base
   
   acts_as_taggable_on :keywords
   
+  def personnel
+    h = {}
+    dataset.affiliations.each do |affiliation|
+      if h[affiliation.person]
+        h[affiliation.person] = h[affiliation.person].push((affiliation.role.name))
+      else
+        h[affiliation.person] = [affiliation.role.name]
+      end
+    end
+    h
+  end
+  
   def within_interval?(start_date=Date.today, end_date=Date.today)
     extent = temporal_extent
     return false if extent[:begin_date].nil?
@@ -100,16 +112,16 @@ class Datatable < ActiveRecord::Base
   
   def self.find_by_person_name(name='')
     ['given_name', 'sur_name'].collect do |field|
-      self.find_by_person_field(name,field)
+      self.find_by_person_field('%'+name+'%','like', field)
     end.flatten
   end
   
-  def self.find_by_person_field(name, field)
+  def self.find_by_person_field(name, operator, field)
     self.find_by_sql("SELECT datatables.* FROM datatables " +
       " INNER JOIN datasets ON datasets.id = datatables.dataset_id " + 
       " inner join affiliations on datasets.id = affiliations.dataset_id " + 
       " inner join people on affiliations.person_id = people.id " +
-      " where people.#{field} like '%#{name}%'")
+      " where people.#{field} #{operator} '#{name}'")
   end
     
   def self.find_by_person(person_id = '')
@@ -117,7 +129,7 @@ class Datatable < ActiveRecord::Base
     if person_id.respond_to?('id')
        person_id = person_id.id
      end
-     self.find_by_person_field(person_id, 'id')
+     self.find_by_person_field(person_id, '=', 'id')
   end
   
   def self.find_by_date_interval(begin_date, end_date)
