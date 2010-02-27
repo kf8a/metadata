@@ -245,6 +245,7 @@ li.study-title li {
 }
 
 table.data-description {
+	width: 100%;
 	border-top-style: solid;
 	border-top-width: 1px;
 }
