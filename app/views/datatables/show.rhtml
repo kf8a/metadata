@@ -39,7 +39,7 @@ end -%>
 </tr>
 <% end %>
 <tr>
-  <td>Personnel</td>
+  <td>Personnel:</td>
   <td>
     <ul>
       <% personnel = @datatable.personnel -%>
@@ -65,7 +65,7 @@ end -%>
 	<% @datatable.variates.each do |variate| -%>
 		<tr>
 			<td class='space-after'>
-				<%= variate.name %>
+				<%= variate.name.gsub(/_/,' ') %>
 			</td>
 			<td class='space-after'>
 				<%= variate.description %>
