@@ -16,6 +16,20 @@ class Datatable < ActiveRecord::Base
   
   acts_as_taggable_on :keywords
   
+  define_index do
+    indexes title
+    indexes description
+    indexes theme.name, :as => :theme_name
+    indexes dataset.affiliations.person.sur_name, :as => :sur_name
+    indexes dataset.affiliations.person.given_name, :as => :given_name
+    indexes keywords(:name), :as => :keyword_name
+    where "datatables.on_web is true and datasets.on_web"
+    
+    has theme.name, :as => :themes
+    
+    set_property :field_weights => {:keyword_name => 20, :theme_name => 20, :title => 10}
+  end
+  
   def personnel
     h = {}
     dataset.affiliations.each do |affiliation|
