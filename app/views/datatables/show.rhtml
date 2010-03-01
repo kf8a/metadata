@@ -1,6 +1,9 @@
 <h1><%= @datatable.title_and_years %></h1>
 
 <p>
+  <%= textilize @datatable.dataset.abstract if @datatable.dataset.abstract%>
+</p>
+<p>
 	<%= textilize @datatable.description  if @datatable.description %>
 </p>
 

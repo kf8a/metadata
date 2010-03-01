@@ -115,6 +115,11 @@ a.edit:hover {
 }
 */
 
+#network-databases h2 {
+	font-size: small;
+	margin-bottom:0.5em;
+}
+
 .no-data {
 	color: #939393;
 }
