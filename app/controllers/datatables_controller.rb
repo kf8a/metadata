@@ -8,16 +8,15 @@ class DatatablesController < ApplicationController
 
     # just use the lower case (ie the datatable themese)
     @themes = Theme.roots
-  
- 
-    
+
     query =  {'theme' => {'id' => ''}, 
-      'keywords' => '', 'date' => {'syear' => '1988', 'eyear' => Date.today.year.to_s}}
+      'keyword_list' => '', 'date' => {'syear' => '1988', 'eyear' => Date.today.year.to_s}}
     query.merge!(params) unless params['commit'] == 'Clear'
             
     theme_id = query['theme']['id']
-    @keyword_list = query['keyword_list'] ||''
+    @keyword_list = query['keyword_list']
     @keyword_list = nil if @keyword_list.empty?
+
     date = query['date']
     
     if theme_id && !theme_id.empty?
@@ -30,14 +29,17 @@ class DatatablesController < ApplicationController
     @studies = Study.all(:order => 'weight')
     
     @datatables = []
-    if @theme
-      p @theme
-      @datatable = Datatable.search @keyword_list, :with => {:theme_id => @theme.id}
+
+    logger.info ['theme', @theme]
+    logger.info ['keyword_list', @keyword_list]
+    if @keyword_list and @theme
+      logger.info 'theme'
+      @datatable = Datatable.search @keyword_list, :star => :true, :with => {:theme_id => @theme.id, :year_start => @syear...@eyear, :year_end => @syear...@eyear}
     elsif @keyword_list
-      p @keyword_list
-      @datatables = Datatable.search @keyword_list 
+      logger.info 'keyword only search'
+      @datatables = Datatable.search @keyword_list
     else
-      @datatables = Datatable.all
+      @datatables = Datatable.find_by_params({:theme => {:id => theme_id}, :date => {:syear => date['syear'], :eyear => date['eyear']}})
     end
     # @datatables = Datatable.find_by_params({:theme => {:id => theme_id}, :keywords => @keyword_list, 
     #     :date => {:syear => date['syear'], :eyear => date['eyear']}})

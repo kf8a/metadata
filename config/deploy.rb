@@ -54,7 +54,16 @@ namespace :deploy do
     deploy.thin.stop
   end
   
-  after "deploy:update_code", :link_production_db
+ # after :deploy, :link_paperclip_storage, 
+  after :deploy, :link_production_db
+  after :deploy, :update_spinks
+end
+
+desc 'Update spinks'
+task :update_spinks do
+  run "cd #{release_path};rake ts:stop RAILS_ENV=production"
+  run "cd #{release_path};rake ts:index RAILS_ENV=production"
+  run "cd #{release_path};rake ts:start RAILS_ENV=production"
 end
 
 # database.yml task
@@ -63,10 +72,10 @@ task :link_production_db do
   run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
 end
 
-task :after_update_code, :roles => :app do
-  %w{publications}.each do |share|
-    run "rm -rf #{release_path}/public/#{share}"
-    run "mkdir -p #{shared_path}/system/#{share}"
-    run "ln -nfs #{shared_path}/system/#{share} #{release_path}/public/#{share}"
-  end
-end
+# task :link_paperclip_storage, :roles => :app do
+#   %w{publications}.each do |share|
+#     run "rm -rf #{release_path}/public/#{share}"
+#     run "mkdir -p #{shared_path}/system/#{share}"
+#     run "ln -nfs #{shared_path}/system/#{share} #{release_path}/public/#{share}"
+#   end
+# end
