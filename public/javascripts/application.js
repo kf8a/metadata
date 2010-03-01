@@ -11,7 +11,7 @@ jQuery(document).ready(function() {
 			}
 	};
 	
-	jQuery('.theme_container').draggable({
+	jQuery('.sortable_container').draggable({
 		zIndex: 100000,
 		revert: 'invalid',
 		opacity: 0.5,
@@ -19,8 +19,8 @@ jQuery(document).ready(function() {
 		helper: 'clone'
 	});
 	
-	jQuery(".theme_list").droppable({
-			accept: ".theme_container",
+	jQuery(".sortable_list").droppable({
+			accept: ".sortable_container",
 			drop: function(ev, ui) {
 				var source_li = jQuery(ui.draggable);
 				var child_ul = jQuery(this).children('ul');
@@ -34,17 +34,17 @@ jQuery(document).ready(function() {
 	    }
 		});
 		
-	jQuery(".theme_container").droppable({
-		accept: ".theme_container",
-		hoverClass: 'theme_container-hover',
+	jQuery(".sortable_container").droppable({
+		accept: ".sortable_container",
+		hoverClass: 'sortable_container-hover',
 		tolerance : 'pointer',
 		greedy : true,
 		drop: function(ev, ui) {
 			var source_li = jQuery(ui.draggable);
 			var target_li = jQuery(this).children('ul');
-			console.log(target_li);
-			console.log(target_li.children('li'));
-			var theme_id = source_li.children('input').value;
+			var set_id = source_li.children('input').value;
+			console.log(source_li.text());
+			console.log(source_li.html());
 			var parent_id = target_li.children('li').children('input').val();
 			if(target_li.children('ul').length <= 0){
 				target_li.append('<ul></ul>');
@@ -55,7 +55,7 @@ jQuery(document).ready(function() {
 			}
 			jQuery(this).children('ul:hidden').slideDown();
 			insert_alphabetic(child_ul, source_li);
-			update_parent(theme_id, parent_id);
+			update_parent(set_id, parent_id);
 		}
 	});
 
@@ -76,10 +76,11 @@ jQuery(document).ready(function() {
 		source_li.appendTo(child_ul);
 	}
  
-	function update_parent(theme_id, parent_id){
+	function update_parent(set_id, parent_id){
 
 		var path = jQuery('#update_path').val();
-		jQuery.post(path + '/' + theme_id + '.js', {parent_id: parent_id, action: 'update', _method: 'put', only_parent: 'true' },
+		console.log(path);
+		jQuery.post(path + '/' + set_id + '.js', {parent_id: parent_id, action: 'update', _method: 'put', only_parent: 'true' },
 		  function(data){
 				if(data.length > 0){
 					var result = eval('(' + data + ')');
@@ -94,4 +95,5 @@ jQuery(document).ready(function() {
 	
 	geo_decode();
 	jQuery('.quickTree').quickTree();
+	jQuery('.collapsable').collapseDiv();
 });

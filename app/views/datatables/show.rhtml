@@ -1,11 +1,14 @@
 <h1><%= @datatable.title_and_years %></h1>
 
-<p>
+<%= textilize @datatable.description  if @datatable.description %>
+
+<div class='collapsable'>
+  <h2>Dataset Abstract:</h2>
+  <div>
   <%= textilize @datatable.dataset.abstract if @datatable.dataset.abstract%>
-</p>
-<p>
-	<%= textilize @datatable.description  if @datatable.description %>
-</p>
+  </div>
+</div>
+
 
 <table class='data-description'>
 <% if @datatable.study %>
@@ -31,7 +34,7 @@
 end -%>
 <% if related_tables.any? %>
 <tr>
-  <td>Related Tables</td>
+  <td>Related Tables:</td>
   <td><ul>
     <% related_tables.each do |table| %>
       <li><%= table %></li>
