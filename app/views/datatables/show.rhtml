@@ -16,7 +16,10 @@
 </tr>
 <% end %>
 <tr>
-<td>Dataset:</td><td><%= link_to @datatable.dataset.title, dataset_path(@datatable.dataset) %>, <%= "#{@datatable.name}"%></td>
+  <td>Datatable ID:</td><td><%= @datatable.name%></td>
+</tr>
+<tr>
+<td>Dataset:</td><td><%= link_to @datatable.dataset.title, dataset_path(@dataset) %>, <%= "#{@dataset.dataset}"%></td>
 </tr>
 
 <% related_tables = @datatable.dataset.datatables.collect  do |d|

@@ -30,12 +30,12 @@ class Theme < ActiveRecord::Base
     my_datatables + datatables
   end
   
-  def datatables_in_study(study)
-    datatables.collect {|table| table if table.study == study }.compact
-  end
-
-  def datatables_in_study(study, test_datatables)
-    datatables.collect {|table| table if table.study == study and test_datatables.include?(table)}.compact
+  def datatables_in_study(study, test_datatables=[])
+    if test_datatables.any?
+      datatables.collect {|table| table if table.study == study and test_datatables.include?(table)}.compact
+    else
+      datatables.collect {|table| table if table.study == study }.compact
+    end
   end
 
 end

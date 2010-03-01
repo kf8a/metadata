@@ -89,6 +89,10 @@ class ThemeTest < ActiveSupport::TestCase
           assert !@theme.include_datatables_from_study?([], @study2)
           assert !@theme.include_datatables_from_study?([], @study)
         end
+        
+        should 'only return datatables from the offered tables' do
+          assert @theme.datatables_in_study(@study) == [@datatable]
+        end
       end
     end
   end
