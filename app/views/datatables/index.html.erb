@@ -4,9 +4,9 @@
       <div id='bottom-line-search'>
 
       <div id='keyword-search'>
-       <%= text_field_tag :keyword_list, @keyword_list || 'Search for keywords, contributors or abstract', {:id => 'keyworder', :onfocus=>"if(this.value==defaultValue) this.value=''", :onblur=>"if(this.value=='') this.value=defaultValue"}  %>
+       <%= text_field_tag :keyword_list, @keyword_list || @default_value , {:id => 'keyworder', :onfocus=>"if(this.value==defaultValue) this.value=''"}  %>
       </div>  
-       
+
   </div>
   <div id='top-line-search'>
     <div id='core-area-search'>
@@ -26,6 +26,7 @@
  
 </div>
 
+<a href='#quickTree-expand'>Expand All</a>
 <ul class='quickTree'>
   <% @studies.each do |study| -%>
   <% next unless study.include_datatables?(@datatables)%>

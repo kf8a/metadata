@@ -19,15 +19,15 @@ class Datatable < ActiveRecord::Base
   define_index do
     indexes title
     indexes description
-    indexes theme.name, :as => :theme_name
+    indexes theme.name, :as => :theme
     indexes dataset.affiliations.person.sur_name, :as => :sur_name
     indexes dataset.affiliations.person.given_name, :as => :given_name
-    indexes keywords(:name), :as => :keyword_name
+    indexes keywords(:name), :as => :keyword
     where "datatables.on_web is true and datasets.on_web"
     
-    has theme(:id), :as => :theme_id
+    has theme_id
     
-    set_property :field_weights => {:keyword_name => 20, :theme_name => 20, :title => 10}
+    set_property :field_weights => {:keyword => 20, :theme => 20, :title => 10}
   end
   
   def personnel
