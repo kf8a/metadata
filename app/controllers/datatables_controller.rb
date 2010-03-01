@@ -16,7 +16,7 @@ class DatatablesController < ApplicationController
     query.merge!(params) unless params['commit'] == 'Clear'
             
     theme_id = query['theme']['id']
-    @keyword_list = query['keyword_list']
+    @keyword_list = query['keyword_list'] ||''
     @keyword_list = nil if @keyword_list.empty?
     date = query['date']
     
