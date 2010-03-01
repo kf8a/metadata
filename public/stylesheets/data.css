@@ -268,6 +268,16 @@ table.data-description {
 	margin: 0;
 }
 
+#content div.collapsable {
+	padding-bottom:1em;
+}
+#content div.collapsable h2{
+	color:black;
+	font-size: small;
+	font-weight: normal;
+	font-style: normal;
+}
+
 
 .space-after {
 	padding-right:2em;
