@@ -9,8 +9,7 @@ class DatatablesController < ApplicationController
     # just use the lower case (ie the datatable themese)
     @themes = Theme.roots
   
-    @studies = Study.all(:order => 'weight')
-    @people = Person.find_all_with_dataset(:order => 'sur_name')
+ 
     
     query =  {'theme' => {'id' => ''}, 
       'keywords' => '', 'date' => {'syear' => '1988', 'eyear' => Date.today.year.to_s}}
@@ -18,6 +17,7 @@ class DatatablesController < ApplicationController
             
     theme_id = query['theme']['id']
     @keyword_list = query['keyword_list']
+    @keyword_list = nil if @keyword_list.empty?
     date = query['date']
     
     if theme_id && !theme_id.empty?
@@ -27,9 +27,20 @@ class DatatablesController < ApplicationController
     @syear = date['syear'].to_i || 1988
     @eyear = date['eyear'].to_i || Date.today.year
     
-          
-    @datatables = Datatable.find_by_params({:theme => {:id => theme_id}, :keywords => @keyword_list, 
-        :date => {:syear => date['syear'], :eyear => date['eyear']}})
+    @studies = Study.all(:order => 'weight')
+    
+    @datatables = []
+    if @theme
+      p @theme
+      @datatable = Datatable.search @keyword_list, :with => {:theme_id => @theme.id}
+    elsif @keyword_list
+      p @keyword_list
+      @datatables = Datatable.search @keyword_list 
+    else
+      @datatables = Datatable.all
+    end
+    # @datatables = Datatable.find_by_params({:theme => {:id => theme_id}, :keywords => @keyword_list, 
+    #     :date => {:syear => date['syear'], :eyear => date['eyear']}})
           
     respond_to do |format|
       format.html # index.rhtml

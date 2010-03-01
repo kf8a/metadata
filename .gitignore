@@ -1,5 +1,5 @@
 db/meta_test
-db/sphinks
+db/sphinx
 log/
 vendor/rails/
 vendor/plugins/rspec/.git/

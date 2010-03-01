@@ -25,7 +25,7 @@ class Datatable < ActiveRecord::Base
     indexes keywords(:name), :as => :keyword_name
     where "datatables.on_web is true and datasets.on_web"
     
-    has theme.name, :as => :themes
+    has theme(:id), :as => :theme_id
     
     set_property :field_weights => {:keyword_name => 20, :theme_name => 20, :title => 10}
   end

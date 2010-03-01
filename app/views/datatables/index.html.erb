@@ -1,4 +1,6 @@
 <div id='search-form'>
+  <%= form_tag '/datatables', :method => 'get'%>
+  
       <div id='bottom-line-search'>
 
       <div id='keyword-search'>
@@ -6,7 +8,6 @@
       </div>  
        
   </div>
-  <%= form_tag '/datatables', :method => 'get'%>
   <div id='top-line-search'>
     <div id='core-area-search'>
     <label>Theme/LTER Core Area</label> <%= select :theme, :id , @themes.collect {|x| [x.name, x.id]},  { :include_blank => "All" }%>
