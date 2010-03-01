@@ -1,6 +1,6 @@
 <li><%= theme.name.capitalize %>
   <ul>
-    <% datatables = theme.datatables_in_study(study) -%>
+    <% datatables = theme.datatables_in_study(study, @datatables) -%>
     <% datatables.sort! {|a,b| sprintf("%.5i",a.weight) + a.title <=> sprintf("%.5i",b.weight) + b.title}%>
     <% datatables.each do |datatable| -%>
     <li>

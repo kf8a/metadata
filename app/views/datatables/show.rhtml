@@ -33,11 +33,6 @@ end -%>
   </ul>
 </tr>
 <% end -%>
-<% if @datatable.keywords.any? %>
-<tr>
-<td>Keywords:</td><td><%= @datatable.keywords.join(', ')%></td>
-</tr>
-<% end %>
 <tr>
   <td>Personnel:</td>
   <td>
@@ -51,6 +46,12 @@ end -%>
     </ul>
   </td>
 </tr>
+<% if @datatable.keywords.any? %>
+<tr>
+<td>Keywords:</td><td><%= @datatable.keywords.join(', ')%></td>
+</tr>
+<% end %>
+
 </table>
 
 <% unless  @datatable.is_sql %>
