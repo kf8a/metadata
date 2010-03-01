@@ -104,7 +104,9 @@ end -%>
 The <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use policy applies to the this dataset</a>
 </p>
 
-<h3>Data Excerpt</h3>
+<div class='collapsable'>
+<h2>Data Excerpt</h2>
+<div>
 <table>
 	<tr>
 		<% @values.fields.each do |field| %>
@@ -124,6 +126,8 @@ The <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use po
 	<% end %>
 	<% @values.clear %>
 </table>
+</div>
+</div>
 <% else -%>
 <p>Data Embargoed</p>
 <% end -%>
