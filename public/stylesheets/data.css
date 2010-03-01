@@ -252,6 +252,7 @@ table.data-description {
 
 .data-description tr td:first-child{
 	font-weight: bold;
+	vertical-align: top;
 }
 
 #content table.variate_table tbody tr th {
