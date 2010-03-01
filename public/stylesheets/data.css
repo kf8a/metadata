@@ -259,6 +259,11 @@ table.data-description {
 	text-align: left;
 }
 
+#content table.data-description tbody tr td ul {
+	margin: 0;
+}
+
+
 .space-after {
 	padding-right:2em;
 }
