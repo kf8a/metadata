@@ -15,3 +15,4 @@ stylesheets:
   - navigation
   - scaffold
   - textile-editor
+  - jquery-ui.custom.css
