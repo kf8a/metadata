@@ -23,11 +23,10 @@ class Datatable < ActiveRecord::Base
     indexes dataset.affiliations.person.sur_name, :as => :sur_name
     indexes dataset.affiliations.person.given_name, :as => :given_name
     indexes keywords(:name), :as => :keyword
+    indexes dataset.title, :as => :dataset_title
     where "datatables.on_web is true and datasets.on_web"
     
-    has theme_id
-    
-    set_property :field_weights => {:keyword => 20, :theme => 20, :title => 10}
+    #set_property :field_weights => {:keyword => 20, :theme => 20, :title => 10}
   end
   
   def personnel
@@ -113,97 +112,7 @@ class Datatable < ActiveRecord::Base
     self.end_date = dates[:end_date] if dates[:end_date]
     save
   end
-  
-  ## Finding datatables
-  def self.find_by_keywords(keyword_list='')
-    return self.find(:all, :conditions => ['on_web is true']) if keyword_list == ''
-    keyword_results = self.find_tagged_with(keyword_list,:on => 'keywords')  
-    people_results = keyword_list.split(',').collect do |keyword|
-      self.find_by_person_name(keyword)
-    end
-    keyword_results.concat(people_results.flatten)
-  end  
-  
-  def self.find_by_person_name(name='')
-    ['given_name', 'sur_name'].collect do |field|
-      self.find_by_person_field('%'+name+'%','like', field)
-    end.flatten
-  end
-  
-  def self.find_by_person_field(name, operator, field)
-    self.find_by_sql("SELECT datatables.* FROM datatables " +
-      " INNER JOIN datasets ON datasets.id = datatables.dataset_id " + 
-      " inner join affiliations on datasets.id = affiliations.dataset_id " + 
-      " inner join people on affiliations.person_id = people.id " +
-      " where people.#{field} #{operator} '#{name}'")
-  end
     
-  def self.find_by_person(person_id = '')
-    return [] if person_id == ''
-    if person_id.respond_to?('id')
-       person_id = person_id.id
-     end
-     self.find_by_person_field(person_id, '=', 'id')
-  end
-  
-  def self.find_by_date_interval(begin_date, end_date)
-    if begin_date.year == 1988 && end_date.year == Date.today.year
-      self.all
-    else
-      self.all(:conditions => ['(end_date < ? or begin_date < ?)', end_date, begin_date])
-    end
-  end
-  
-  def self.find_by_year(syear, eyear)     
-    self.find_by_date_interval(Date.parse(syear.to_s + '-1-1'), Date.parse(eyear.to_s+'-12-31'))
-  end
-  
-  def self.find_by_theme(theme_id ='')
-    return [] if theme_id == ''
-    theme = Theme.find(theme_id)
-    datatables = self.find(:all, :conditions => {:theme_id => theme})
-    theme.descendants.each do |subtheme|
-      datatables.push(self.find(:all, :conditions => {:theme_id => subtheme}))
-    end
-    datatables.flatten.uniq
-  end
-  
-  def self.find_by_study(study_id = '')
-    return [] if study_id == '' || study_id.nil?
-    if study_id.respond_to?('id')
-      study_id = study_id.id
-    end
-    self.find_by_sql("select datatables.* from datatables " +
-          " inner join datasets on datasets.id = datatables.dataset_id " + 
-          " inner join datasets_studies on datasets_studies.dataset_id = datasets.id " +
-          " inner join studies on datasets_studies.study_id = studies.id " +
-          " where studies.id = #{study_id}" )
-  end
-  
-  def self.find_by_params(params)
-    datatables = self.all
-    params.each do |key, value|
-      
-      method = 'find_by_'+key.to_s
-      if value.respond_to?('keys') 
-        if value.keys.include?(:id)
-          value_id = value[:id]
-
-          unless value_id.nil? || value_id == ''
-            datatables = self.send(method.to_sym, value_id) & datatables
-          end
-        else # we assume that we have a year
-          datatables = self.find_by_year(value[:syear], value[:eyear]) & datatables
-        end
-      else # assume have keywords
-        unless value.nil? || value == ''
-          datatables = self.send(method.to_sym, value) & datatables
-        end
-      end
-    end
-    datatables
-  end
-  
 private
 
   def query_datatable_for_temporal_extent(query)

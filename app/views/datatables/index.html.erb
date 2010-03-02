@@ -4,29 +4,14 @@
       <div id='bottom-line-search'>
 
       <div id='keyword-search'>
-       <%= text_field_tag :keyword_list, @keyword_list || @default_value , {:id => 'keyworder', :onfocus=>"if(this.value==defaultValue) this.value=''"}  %>
+       <%= text_field_tag :keyword_list, @keyword_list || @default_value , {:id => 'keyworder'}  %>
       </div>  
-
-  </div>
-  <div id='top-line-search'>
-    <div id='core-area-search'>
-    <label>Theme/LTER Core Area</label> <%= select :theme, :id , @themes.collect {|x| [x.name, x.id]},  { :include_blank => "All" }%>
-    </div>
-  
-      <div class='year-search'>
-        <label>From:</label><%= select_year @syear, :start_year => 1988, :end_year => Date.today.year, :field_name => 'syear'%>
-      </div>
-      <div class='year-search'>
-        <label>To:</label><%= select_year @eyear, :start_year => 1988, :end_year => Date.today.year, :field_name => 'eyear' %>
-      </div>
-      <div id='search-submit'>
-      <%= submit_tag "Search"%><%= submit_tag 'Clear'%>
-      </div>
-    </div>
- 
+        <div id='search-submit'>
+        <%= submit_tag "Search"%>
+        </div>
+  </div> 
 </div>
 
-<a href='#quickTree-expand'>Expand All</a>
 <ul class='quickTree'>
   <% @studies.each do |study| -%>
   <% next unless study.include_datatables?(@datatables)%>

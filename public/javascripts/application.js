@@ -96,4 +96,23 @@ jQuery(document).ready(function() {
 	geo_decode();
 	jQuery('.quickTree').quickTree();
 	jQuery('.collapsable').collapseDiv();
+	jQuery('#keyworder').addClass("default");
+	jQuery('#keyworder').focus(function() {
+		if(this.value==jQuery(this)[0].defaultValue) {
+				this.value='';
+		};
+		jQuery(this).removeClass('default');
+	});
+	jQuery('.quickTree').prepend("<div class'quick_expander'><a href='#' class='expand_all'>[Expand All]</a></div>")
+	jQuery('.expand_all').toggle(
+		function() {
+			jQuery('span.expand').nextAll('ul').slideDown();
+			jQuery('span.expand').parent().toggleClass('expanded');
+			jQuery(this).text('[Collapse All]');
+	},
+		function() {
+			jQuery('span.expand').nextAll('ul').slideUp();
+			jQuery('span.expand').parent().toggleClass('expanded');
+			jQuery(this).text('[Expand All]');
+		});
 });

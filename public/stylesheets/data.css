@@ -145,39 +145,25 @@ a.edit:hover {
 }
 
 #keyworder {
-	width: 520px;
+	width: 430px;
 }
 
 #keyworder input {
 	color:#CCCCCC;
 }
 
-#core-area-search {
-	float:left
-}
-
-#core-area-search label {
-	padding-right: 5px;
+.default {
+	color:grey;
 }
 
 #top-line-search {
 	height: 3em;
 }
-
 #search-submit {
-	padding-top: 1.2em;
 	text-align: right;
-}
-
-.year-search {
-	float: left;
-	margin-left: 6px;
-}
-
-.year-search label {
-	text-align: center;
-	padding-right: 10px;
-	padding-left: 10px;
+	float: none;
+	display: inline;
+	margin-left: 10px;
 }
 
 #keyword-search {

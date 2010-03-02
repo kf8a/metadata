@@ -9,41 +9,22 @@ class DatatablesController < ApplicationController
     # just use the lower case (ie the datatable themese)
     @themes = Theme.roots
     
-    @default_value = 'Search for keywords, contributors or abstract'
+    @default_value = 'Search for themes, core areas, keywords, contributors or words in the abstract'
 
-    query =  {'theme' => {'id' => ''}, 
-      'keyword_list' => '', 'date' => {'syear' => '1988', 'eyear' => Date.today.year.to_s}}
+    query =  {'keyword_list' => ''}
     query.merge!(params) unless params['commit'] == 'Clear'
             
-    theme_id = query['theme']['id']
     @keyword_list = query['keyword_list']
-    @keyword_list = nil if @keyword_list.empty?
-    @keyword_list = nil if @keyword_list == @default_value
-
-    date = query['date']
-    
-    if theme_id && !theme_id.empty?
-      @theme = Theme.find(theme_id)
-    end
-    
-    @syear = date['syear'].to_i || 1988
-    @eyear = date['eyear'].to_i || Date.today.year
+    @keyword_list = nil if @keyword_list.empty? || @keyword_list == @default_value
     
     @studies = Study.all(:order => 'weight')
     
-    @datatables = []
-
-    if @keyword_list and @theme
-      @datatables = Datatable.search @keyword_list,  :with => {:theme_id => @theme.self_and_decendants_ids}
-    elsif @keyword_list
+    if @keyword_list
       @datatables = Datatable.search @keyword_list
     else
-      @datatables = Datatable.find_by_params({:theme => {:id => theme_id}})
-      #@datatables = Datatable.find_by_params({:theme => {:id => theme_id}, :date => {:syear => date['syear'], :eyear => date['eyear']}})
+      @datatables = Datatable.all
     end
-    # @datatables = Datatable.find_by_params({:theme => {:id => theme_id}, :keywords => @keyword_list, 
-    #     :date => {:syear => date['syear'], :eyear => date['eyear']}})
-          
+    
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @datatables.to_xml }

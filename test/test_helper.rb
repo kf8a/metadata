@@ -55,16 +55,6 @@ class ActiveSupport::TestCase
       end
     end
     
-    
-    Factory.define :datatable do |d|
-       d.name 'KBS001_001'
-       d.title 'a really cool datatable'
-       d.object 'select now() as sample_date'
-       d.is_sql true
-       d.description 'This is a datatable'
-       d.weight 100
-     end
-
     Factory.define :person do |p|
       p.sur_name 'bauer'
       p.given_name 'bill'
@@ -92,5 +82,16 @@ class ActiveSupport::TestCase
     Factory.define :variate do |v|
       v.name 'date'
     end
+    
+    Factory.define :datatable do |d|
+       d.name 'KBS001_001'
+       d.title 'a really cool datatable'
+       d.object 'select now() as sample_date'
+       d.is_sql true
+       d.description 'This is a datatable'
+       d.weight 100
+       d.theme Factory.create(:theme)
+     end
+    
 end
 

@@ -12,6 +12,7 @@ class DatatablesControllerTest < ActionController::TestCase
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
     @table = Factory.create(:datatable, :dataset => Factory.create(:dataset))
+    
     Factory.create(:datatable, :dataset => Factory.create(:dataset))
   end
 
@@ -70,7 +71,7 @@ class DatatablesControllerTest < ActionController::TestCase
   
   context 'GET with empty search parameters' do
     setup do
-      get :index, :theme => {:id => ''},:keyword_list => '', :date => {:syear => '1988', :eyear => Date.today.year.to_s}, :commit => 'Search'
+      get :index,:keyword_list => '', :commit => 'Search'
     end
   
     should_assign_to :datatables
