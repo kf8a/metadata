@@ -156,6 +156,10 @@ a.edit:hover {
 	color:grey;
 }
 
+#content .expand_all {
+	font-size: x-small;
+}
+
 #top-line-search {
 	height: 3em;
 }

@@ -103,7 +103,7 @@ jQuery(document).ready(function() {
 		};
 		jQuery(this).removeClass('default');
 	});
-	jQuery('.quickTree').prepend("<div class'quick_expander'><a href='#' class='expand_all'>[Expand All]</a></div>")
+	jQuery('.quickTree').prepend("<a href='#' class='expand_all'>[Expand All]</a>")
 	jQuery('.expand_all').toggle(
 		function() {
 			jQuery('span.expand').nextAll('ul').slideDown();
