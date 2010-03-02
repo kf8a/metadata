@@ -130,11 +130,11 @@ jQuery(document).ready(function() {
 	jQuery('.quickTree').prepend("<a href='#' class='expand_all'>[Expand All]</a>")
 	jQuery('.expand_all').toggle(
 		function() {
-			jQuery('span.expand').trigger('click');
+			jQuery('span.expand:not(.contract)').trigger('click');
 			jQuery(this).text('[Collapse All]');
 	},
 		function() {
-			jQuery('span.expand').trigger('click');
+			jQuery('span.expand.contract').trigger('click');
 			jQuery(this).text('[Expand All]');
 		});
 });

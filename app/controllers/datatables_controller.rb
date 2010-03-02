@@ -125,6 +125,10 @@ class DatatablesController < ApplicationController
     end
   end
   
+  def suggest(q='')
+    
+  end
+  
   def update_temporal_extent
     @datatable = Datatable.find(params[:id])
     @datatable.update_temporal_extent
