@@ -40,7 +40,7 @@ jQuery.fn.quickTree = function() {
 		var jQueryroots = jQuerytree.find('li');
 
 		//set last list-item as variable (to allow different background graphic to be applied)
-		jQuerytree.find('li:last-child').addClass('last');
+		//jQuerytree.find('li:last-child').addClass('last');
 
 		//add class to allow styling
 		jQuerytree.addClass('tree');

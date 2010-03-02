@@ -97,22 +97,44 @@ jQuery(document).ready(function() {
 	jQuery('.quickTree').quickTree();
 	jQuery('.collapsable').collapseDiv();
 	jQuery('#keyworder').addClass("default");
+	
 	jQuery('#keyworder').focus(function() {
 		if(this.value==jQuery(this)[0].defaultValue) {
 				this.value='';
 		};
 		jQuery(this).removeClass('default');
 	});
+	jQuery('#keyworder').blur(function() {
+		if(this.value=='') {
+				this.value=jQuery(this)[0].defaultValue;
+		};
+		jQuery(this).addClass('default');
+	});
+	
+	jQuery('#peoplesearch').addClass("default");
+	
+	jQuery('#peoplesearch').focus(function() {
+		if(this.value==jQuery(this)[0].defaultValue) {
+				this.value='';
+		};
+		jQuery(this).removeClass('default');
+	});
+	jQuery('#peoplesearch').blur(function() {
+		if(this.value=='') {
+				this.value=jQuery(this)[0].defaultValue;
+		};
+		jQuery(this).addClass('default');
+	});
+	
+	
 	jQuery('.quickTree').prepend("<a href='#' class='expand_all'>[Expand All]</a>")
 	jQuery('.expand_all').toggle(
 		function() {
-			jQuery('span.expand').nextAll('ul').slideDown();
-			jQuery('span.expand').parent().toggleClass('expanded');
+			jQuery('span.expand').trigger('click');
 			jQuery(this).text('[Collapse All]');
 	},
 		function() {
-			jQuery('span.expand').nextAll('ul').slideUp();
-			jQuery('span.expand').parent().toggleClass('expanded');
+			jQuery('span.expand').tigger('click');
 			jQuery(this).text('[Expand All]');
 		});
 });
