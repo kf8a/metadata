@@ -128,8 +128,11 @@ class DatatablesController < ApplicationController
   
   def suggest
     term = params[:term]
-    a = Tag.all.collect(&:name).sort.uniq
-    b = a.collect  {|x| x =~ Regexp.new(term+'.')? x : nil }.compact
+    list = Tag.all.collect(&:name)
+    list = list + Person.find_all_with_dataset.collect(&:full_name)
+    list = list + Theme.all.collect(&:name)
+    list.uniq!
+    b = list.collect  {|x| x =~ Regexp.new(term+'.',true) ? x : nil }.compact
     respond_to do |format|
       format.json {render :json => b}
     end
