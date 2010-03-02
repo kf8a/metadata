@@ -1,6 +1,7 @@
 class DatatablesController < ApplicationController
   
   #before_filter :is_restricted
+   before_filter :login_required, :except => [:index, :show, :suggest] if ENV["RAILS_ENV"] == 'production'
   
   # GET /datatables
   # GET /datatables.xml
