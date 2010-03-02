@@ -108,15 +108,13 @@ jQuery(document).ready(function() {
 	jQuery('#keyworder').focus(function() {
 		if(this.value==jQuery(this)[0].defaultValue) {
 				this.value='';
-		};
-		jQuery(this).removeClass('default');
-	});
+				jQuery(this).removeClass('default');
+		}	});
 	jQuery('#keyworder').blur(function() {
 		if(this.value=='') {
 				this.value=jQuery(this)[0].defaultValue;
-		};
-		jQuery(this).addClass('default');
-	});
+				jQuery(this).addClass('default');			
+		} });
 	
 	jQuery('#peoplesearch').addClass("default");
 	
