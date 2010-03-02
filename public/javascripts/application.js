@@ -134,7 +134,7 @@ jQuery(document).ready(function() {
 			jQuery(this).text('[Collapse All]');
 	},
 		function() {
-			jQuery('span.expand').tigger('click');
+			jQuery('span.expand').trigger('click');
 			jQuery(this).text('[Expand All]');
 		});
 });
