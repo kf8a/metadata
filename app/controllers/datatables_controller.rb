@@ -18,14 +18,14 @@ class DatatablesController < ApplicationController
     @keyword_list = query['keyword_list']
     @keyword_list = nil if @keyword_list.empty? || @keyword_list == @default_value
     
-    @studies = Study.all(:order => 'weight')
-    
     if @keyword_list
       @datatables = Datatable.search @keyword_list
     else
       @datatables = Datatable.all
     end
     
+    @studies = Study.find_all_with_datatables(@datatables, {:order => 'weight'})
+       
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @datatables.to_xml }

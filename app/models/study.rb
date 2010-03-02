@@ -8,4 +8,8 @@ class Study < ActiveRecord::Base
   def include_datatables?(table_query = [])
     (datatables & table_query).any?
   end
+  
+  def self.find_all_with_datatables(tables = [], options = {})
+    self.all.collect {|x| x.include_datatables?(tables)  ? x : nil}.compact
+  end
 end

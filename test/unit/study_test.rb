@@ -8,7 +8,10 @@ class StudyTest < ActiveSupport::TestCase
   context 'querying for datatables' do
     setup do
       @study = Factory.create(:study)
+      assert @study.save
+      2.times {Factory.create(:study).save }
       @datatable  = Factory.create(:datatable, :study => @study)
+      @datatable.save
     end
     
     should 'return true if queried for included datatables' do
@@ -19,6 +22,10 @@ class StudyTest < ActiveSupport::TestCase
       assert  !@study.include_datatables?([Factory.create(:datatable)])
     end
 
+
+    should 'find only the studies that include the datatable' do
+      assert Study.find_all_with_datatables([@datatable]) == [@study]
+    end
   end
 
 end
