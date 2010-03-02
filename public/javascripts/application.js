@@ -96,6 +96,13 @@ jQuery(document).ready(function() {
 	geo_decode();
 	jQuery('.quickTree').quickTree();
 	jQuery('.collapsable').collapseDiv();
+	
+	jQuery(function() {
+			jQuery("#keyworder").autocomplete({
+				source: "/datatables/suggest"
+			});
+		});
+		
 	jQuery('#keyworder').addClass("default");
 	
 	jQuery('#keyworder').focus(function() {

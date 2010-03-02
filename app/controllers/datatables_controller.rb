@@ -125,8 +125,13 @@ class DatatablesController < ApplicationController
     end
   end
   
-  def suggest(q='')
-    
+  def suggest
+    term = params[:term]
+    a = Tag.all.collect(&:name).sort.uniq
+    b = a.collect  {|x| x =~ Regexp.new(term+'.')? x : nil }.compact
+    respond_to do |format|
+      format.json {render :json => b}
+    end
   end
   
   def update_temporal_extent

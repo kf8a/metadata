@@ -18,38 +18,16 @@ class DatasetsController < ApplicationController
     if params[:Dataset] 
       request.format = :eml
     end
-    query =  {'theme' => {'id' => nil}, 'person' => {'id' => nil}, 'study' => {'id' => nil}, 
-      'keywords' => '', 'date' => {'syear' => '1988', 'eyear' => Date.today.year.to_s}}
-    query.merge!(params)
-    
-    theme_id = query['theme']['id']
-    person_id = query['person']['id']
-    study_id = query['study']['id']
-    keyword_list = query['keyword_list']
-    date = query['date']
+     keyword_list = params['keyword_list']
         
     @people = Person.find_all_with_dataset(:order => 'sur_name')
     @themes = Theme.find(:all, :order => :weight)
 
-    if theme_id && !theme_id.empty?
-      @theme = Theme.find(theme_id)
-    end
-    
-    if person_id && !person_id.empty?
-      @person = Person.find(person_id)
-    end
-    
-    if study_id && !study_id.empty?
-      @study = Study.find(study_id)
-    end
-    
     if keyword_list
       @keyword_list = keyword_list
     end
             
-   @datasets = Dataset.find_by_params({:theme => {:id => theme_id}, :person => {:id => person_id},
-          :study => {:id => study_id}, :date => {:syear => date['syear'], :eyear => date['eyear']},
-          :keywords => keyword_list})
+   @datasets = Dataset.all
 
   
    @studies = @datasets.collect do |dataset|

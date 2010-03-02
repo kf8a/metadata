@@ -84,29 +84,7 @@ class DatasetsControllerTest < ActionController::TestCase
     should_not_set_the_flash
   end
   
-  
-  context 'GET with study search' do
-    setup do
-      @study = Factory.create(:study)
-      Factory.create(:dataset, :studies => [@study])
-      Factory.create(:dataset, :studies => [Factory.create(:study)])
-      get :index, :study => {:id => @study.id.to_s}
-  end
-    
-    should_assign_to :datasets
-    should_assign_to :people
-    should_assign_to :themes
-    should_assign_to :studies
-   
-    should 'have only one study' do
-      assert [@study] == assigns(:studies)
-    end
-   
-    should_respond_with :success
-    should_render_template :index
-    should_not_set_the_flash
-  end
-    
+      
   context 'eml harvester document' do
     setup do
       @dataset = Factory.create(:dataset)
