@@ -128,16 +128,12 @@ class DatatablesController < ApplicationController
   
   def suggest
     term = params[:term]
-    # list = []
-    #  if File.exists?('public/datatable_suggest.yaml')
-    #    list = File.open('public/datatable_suggest.yaml') {|y| YAML::load(y)}
-    #  else
-       list = Tag.all.collect(&:name)
-      list = list + Person.find_all_with_dataset.collect(&:sur_name)
-      list = list + Theme.all.collect(&:name)
-     #  File.open('public/datatable_suggeest.yaml','w') {|out| out.write(list.to_yaml) }
-     # end
-    keywords = list.collect  {|x| x =~ Regexp.new(term,true) ? x : nil }.compact.sort.uniq
+    list = Tag.all.collect {|x| x.name.downcase}
+    list = list + Person.find_all_with_dataset.collect {|x| x.sur_name.downcase}
+    list = list + Theme.all.collect {|x| x.name.downcase}
+    list = list + CoreArea.all.collect {|x| x.name.downcase}
+
+    keywords = list.compact.uniq.sort
     respond_to do |format|
       format.json {render :json => keywords}
     end

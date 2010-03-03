@@ -98,11 +98,20 @@ jQuery(document).ready(function() {
 	jQuery('.collapsable').collapseDiv();
 	
 	jQuery(function() {
-			jQuery("#keyworder").autocomplete({
-				source: "/datatables/suggest"
-			});
-		});
+		jQuery.ajax({
+			url: "/datatables/suggest",
+			dataType: "json",
+			success: function(data) {
+				var cache = data;
 		
+				jQuery("#keyworder").autocomplete({
+					source: cache,
+					minLength: 2
+				});
+			}
+		});
+	});
+				
 	jQuery(function() {
 		if (jQuery('#keyworder')[0].value == 'Search for core areas, keywords, contributors or words') {	
 			jQuery('#keyworder').addClass("default");
