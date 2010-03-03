@@ -11,7 +11,7 @@ jQuery(document).ready(function() {
 			}
 	};
 	
-	jQuery('.sortable_container').draggable({
+	jQuery('.sortable-container').draggable({
 		zIndex: 100000,
 		revert: 'invalid',
 		opacity: 0.5,
@@ -19,8 +19,8 @@ jQuery(document).ready(function() {
 		helper: 'clone'
 	});
 	
-	jQuery(".sortable_list").droppable({
-			accept: ".sortable_container",
+	jQuery(".sortable-list").droppable({
+			accept: ".sortable-container",
 			drop: function(ev, ui) {
 				var source_li = jQuery(ui.draggable);
 				var child_ul = jQuery(this).children('ul');
@@ -35,8 +35,8 @@ jQuery(document).ready(function() {
 		});
 		
 	jQuery(".sortable_container").droppable({
-		accept: ".sortable_container",
-		hoverClass: 'sortable_container-hover',
+		accept: ".sortable-container",
+		hoverClass: 'sortable-container-hover',
 		tolerance : 'pointer',
 		greedy : true,
 		drop: function(ev, ui) {
@@ -103,21 +103,19 @@ jQuery(document).ready(function() {
 			});
 		});
 		
-	jQuery('#keyworder').addClass("default");
-	
+	jQuery('#keyworder').addClass("default");	
 	jQuery('#keyworder').focus(function() {
-		if(this.value==jQuery(this)[0].defaultValue) {
+		if(this.value=='Search for core areas, keywords, contributors or words') {
 				this.value='';
 				jQuery(this).removeClass('default');
 		}	});
 	jQuery('#keyworder').blur(function() {
 		if(this.value=='') {
-				this.value=jQuery(this)[0].defaultValue;
+				this.value='Search for core areas, keywords, contributors or words';
 				jQuery(this).addClass('default');			
 		} });
 	
-	jQuery('#peoplesearch').addClass("default");
-	
+	jQuery('#peoplesearch').addClass("default");	
 	jQuery('#peoplesearch').focus(function() {
 		if(this.value==jQuery(this)[0].defaultValue) {
 				this.value='';
