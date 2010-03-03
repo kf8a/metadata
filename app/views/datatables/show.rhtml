@@ -9,6 +9,12 @@
   </div>
 </div>
 
+<% if @datatable.access_statement then %>
+  <%= @datatable.access_statement %>
+<% end %>
+The <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use policy applies to the this dataset</a>
+</p>
+
 
 <table class='data-description'>
 <% if @datatable.study %>
