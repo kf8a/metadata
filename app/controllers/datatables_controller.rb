@@ -131,7 +131,7 @@ class DatatablesController < ApplicationController
     list = Tag.all.collect(&:name)
     list = list + Person.find_all_with_dataset.collect(&:sur_name)
     list = list + Theme.all.collect(&:name)
-    keywords = list.collect  {|x| x =~ Regexp.new(term+'.',true) ? x : nil }.compact.sort.uniq
+    keywords = list.collect  {|x| x =~ Regexp.new(term,true) ? x : nil }.compact.sort.uniq
     respond_to do |format|
       format.json {render :json => keywords}
     end
