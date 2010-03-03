@@ -20,6 +20,7 @@ class Datatable < ActiveRecord::Base
     indexes title
     indexes description
     indexes theme.name, :as => :theme
+    indexes dataset.affiliations.person.full_name :as => :full_name
     indexes dataset.affiliations.person.sur_name, :as => :sur_name
     indexes dataset.affiliations.person.given_name, :as => :given_name
     indexes keywords(:name), :as => :keyword
