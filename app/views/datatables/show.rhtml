@@ -65,7 +65,14 @@ end -%>
 <td>Keywords:</td><td><%= @datatable.keywords.join(', ')%></td>
 </tr>
 <% end %>
-
+<tr>
+  <td>Metadata</td>
+  <td>
+    <ul>
+      <li><%= link_to 'Complete EML', dataset_path(@dataset, :format => :eml) %></li>
+    </ul>
+  </td>
+</tr>
 </table>
 
 <% unless  @datatable.is_sql %>
@@ -135,8 +142,6 @@ end -%>
 <% end -%>
 <% end -%>
 
-<%= link_to 'xml', datatable_path(@datatable, :format  => :xml) %>&nbsp;|&nbsp;
-<%= link_to 'csv',  datatable_path(@datatable,  :format => :csv) %>&nbsp;|&nbsp;
-<%= link_to 'eml', dataset_path(@dataset, :format => :eml) %>&nbsp;|&nbsp;
+&nbsp;|&nbsp;
 <%= link_to 'Back', datatables_path() %>&nbsp;|&nbsp;
 <%= link_to 'Edit', edit_datatable_path(@datatable) if logged_in? %>
