@@ -230,13 +230,17 @@ li.study-title li {
 }
 
 
-.variate-table {
-	margin-top: 7px;
+#content table.variate-table {
+	margin-top: 1.2em;
 	width: 100%;
 	border-bottom-style: solid;
-	border-top-style: solid;
 	border-bottom-width: 1px;
-	border-top-width: 1px;
+}
+
+
+#content table.variate-table tbody tr th {
+	border-style: solid;
+	border-bottom-width: 1px;
 }
 
 table.data-description {

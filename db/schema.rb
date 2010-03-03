@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100216183217) do
+ActiveRecord::Schema.define(:version => 20100303123318) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -37,19 +37,21 @@ ActiveRecord::Schema.define(:version => 20100216183217) do
   end
 
   create_table "datasets", :force => true do |t|
-    t.string  "dataset"
-    t.string  "title"
-    t.text    "abstract"
-    t.string  "old_keywords"
-    t.string  "status"
-    t.date    "initiated"
-    t.date    "completed"
-    t.date    "released"
-    t.boolean "on_web",       :default => true
-    t.integer "version"
-    t.boolean "core_dataset", :default => false
-    t.integer "project_id"
-    t.integer "metacat_id"
+    t.string   "dataset"
+    t.string   "title"
+    t.text     "abstract"
+    t.string   "old_keywords"
+    t.string   "status"
+    t.date     "initiated"
+    t.date     "completed"
+    t.date     "released"
+    t.boolean  "on_web",       :default => true
+    t.integer  "version"
+    t.boolean  "core_dataset", :default => false
+    t.integer  "project_id"
+    t.integer  "metacat_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "datasets", ["dataset"], :name => "datasets_dataset_key", :unique => true
@@ -65,29 +67,31 @@ ActiveRecord::Schema.define(:version => 20100216183217) do
   end
 
   create_table "datatables", :force => true do |t|
-    t.string  "name"
-    t.string  "title"
-    t.text    "comments"
-    t.integer "dataset_id"
-    t.string  "data_url"
-    t.string  "connection_url"
-    t.string  "driver"
-    t.boolean "is_restricted"
-    t.text    "description"
-    t.text    "object"
-    t.string  "metadata_url"
-    t.boolean "is_sql"
-    t.integer "update_frequency_years"
-    t.date    "last_updated_on"
-    t.text    "access_statement"
-    t.integer "excerpt_limit"
-    t.date    "begin_date"
-    t.date    "end_date"
-    t.boolean "on_web",                 :default => true
-    t.integer "theme_id"
-    t.integer "core_area_id"
-    t.integer "weight",                 :default => 100
-    t.integer "study_id"
+    t.string   "name"
+    t.string   "title"
+    t.text     "comments"
+    t.integer  "dataset_id"
+    t.string   "data_url"
+    t.string   "connection_url"
+    t.string   "driver"
+    t.boolean  "is_restricted"
+    t.text     "description"
+    t.text     "object"
+    t.string   "metadata_url"
+    t.boolean  "is_sql"
+    t.integer  "update_frequency_years"
+    t.date     "last_updated_on"
+    t.text     "access_statement"
+    t.integer  "excerpt_limit"
+    t.date     "begin_date"
+    t.date     "end_date"
+    t.boolean  "on_web",                 :default => true
+    t.integer  "theme_id"
+    t.integer  "core_area_id"
+    t.integer  "weight",                 :default => 100
+    t.integer  "study_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "datatables_variates", :force => true do |t|
