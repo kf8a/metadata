@@ -103,7 +103,13 @@ jQuery(document).ready(function() {
 			});
 		});
 		
-	jQuery('#keyworder').addClass("default");	
+	jQuery(function() {
+		if (jQuery('#keyworder')[0].value == 'Search for core areas, keywords, contributors or words') {	
+			jQuery('#keyworder').addClass("default");
+		};
+	});
+	
+		
 	jQuery('#keyworder').focus(function() {
 		if(this.value=='Search for core areas, keywords, contributors or words') {
 				this.value='';
