@@ -182,6 +182,9 @@ a.edit:hover {
 	-moz-border-radius:10px;
   -webkit-border-radius:10px;
 	border-style: outset;
+	font-variant: small-caps;
+	text-align: center;
+	font-size: large;
 }
 
 #content a.download-link:hover {
