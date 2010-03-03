@@ -10,13 +10,13 @@ class Study < ActiveRecord::Base
   end
   
   def self.find_all_with_datatables(tables = [], options = {})
-    ## optimization
-    table_ids = tables.collect(&:study_id).compact.uniq
-    if table_ids.empty?
-      self.all
-    else
-      self.find_by_sql("select * from studies where id in (#{table_ids.join(',')})")
-    end
-#    self.all.collect {|x| x.include_datatables?(tables)  ? x : nil}.compact
+    # ## optimization
+    # table_ids = tables.collect(&:study_id).compact.uniq
+    # if table_ids.empty?
+    #   self.all
+    # else
+    #   self.find_by_sql("select * from studies where id in (#{table_ids.join(',')})")
+    # end
+    self.all(options).collect {|x| x.include_datatables?(tables)  ? x : nil}.compact
   end
 end
