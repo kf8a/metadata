@@ -11,7 +11,7 @@ class Study < ActiveRecord::Base
   
   def self.find_all_with_datatables(tables = [], options = {})
     ## optimization
-    table_ids = tables.collect(&:study_id)
+    table_ids = tables.collect(&:study_id).compact.uniq
     self.find_by_sql("select * from studies where id in (#{table_ids.join(',')})")
 #    self.all.collect {|x| x.include_datatables?(tables)  ? x : nil}.compact
   end
