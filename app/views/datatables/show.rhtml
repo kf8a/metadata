@@ -60,7 +60,7 @@ end -%>
     </ul>
   </td>
 </tr>
-<% if @datatable.keywords.any? %>
+<% if @datatable.keywords.any? and logged_in?%>
 <tr>
 <td>Keywords:</td><td><%= @datatable.keywords.join(', ')%></td>
 </tr>
