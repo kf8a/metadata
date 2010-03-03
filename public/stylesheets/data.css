@@ -241,6 +241,7 @@ li.study-title li {
 #content table.variate-table tbody tr th {
 	border-style: solid;
 	border-bottom-width: 1px;
+	text-align: left;
 }
 
 table.data-description {
