@@ -61,9 +61,7 @@ end
 
 desc 'Update spinks'
 task :update_spinks do
-  run "cd #{release_path};rake ts:stop RAILS_ENV=production"
-  run "cd #{release_path};rake ts:index RAILS_ENV=production"
-  run "cd #{release_path};rake ts:start RAILS_ENV=production"
+  run "cd #{release_path};rake ts:reindex RAILS_ENV=production"
 end
 
 # database.yml task
