@@ -10,7 +10,7 @@ class DatatablesController < ApplicationController
     # just use the lower case (ie the datatable themese)
     @themes = Theme.roots
     
-    @default_value = 'Search for themes, core areas, keywords, contributors or words in the abstract'
+    @default_value = 'Search for core areas, keywords, contributors or words'
 
     query =  {'keyword_list' => ''}
     query.merge!(params) unless params['commit'] == 'Clear'
