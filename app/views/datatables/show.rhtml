@@ -2,18 +2,17 @@
 
 <%= textilize @datatable.description  if @datatable.description %>
 
-<div class='collapsable'>
-  <h2>Dataset Abstract:</h2>
-  <div>
-  <%= textilize @datatable.dataset.abstract if @datatable.dataset.abstract%>
-  </div>
-</div>
-
 <% if @datatable.access_statement then %>
   <%= @datatable.access_statement %>
 <% end %>
 The <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use policy applies to the this dataset</a>
-</p>
+
+<div class='collapsable'>
+  <h2>Context:</h2>
+  <div>
+  <%= textilize @datatable.dataset.abstract if @datatable.dataset.abstract%>
+  </div>
+</div>
 
 
 <table class='data-description'>
@@ -104,10 +103,7 @@ end -%>
 <%= link_to 'Download complete datatable', datatable_path(@datatable, :format => :csv) ,
 :class => 'download-link'%>
 
-<% if @datatable.access_statement then %>
-  <%= @datatable.access_statement %>
-<% end %>
-The <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use policy applies to the this dataset</a>
+
 </p>
 
 <div>
