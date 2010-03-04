@@ -1,5 +1,10 @@
 class StudiesController < ApplicationController
   
+  #GET /studies
+  def index
+    @study_roots = Study.roots
+  end
+  
    # GET /studies/1;edit
   def edit
     @study = Study.find(params[:id])
