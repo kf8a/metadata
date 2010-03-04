@@ -13,7 +13,6 @@
 </div>
 
 <ul class='quickTree'>
-  <%= debug @datatables.collect {|x| x.is_restricted ? x : nil }.compact %>
   <% @studies.each do |study| -%>
   <% next unless study.include_datatables?(@datatables)%>
   
