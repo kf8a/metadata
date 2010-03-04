@@ -27,7 +27,7 @@
     <% next if datatable.theme_id %>
     <li><%= link_to datatable.title_and_years, datatable_path(datatable)%> <%=link_to "edit", edit_datatable_path(datatable)%>
         <span class='updated_at'>
-          <%= datatable.updated_at %> 
+          <%= datatable.updated_at.to_date %> 
         </span>
       </li>
     <% end -%>
