@@ -30,7 +30,10 @@ The <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use po
   <td>Datatable ID:</td><td><%= @datatable.name%></td>
 </tr>
 <tr>
-<td>Dataset:</td><td><%= link_to @datatable.dataset.title, dataset_path(@dataset) %>, <%= "#{@dataset.dataset}"%></td>
+<td>Dataset:</td><td><%= link_to @datatable.dataset.title, dataset_path(@dataset) %></td>
+</tr>
+<tr>
+  <td> Dataset ID:</td><td> <%= "#{@dataset.dataset}"%></td>
 </tr>
 
 <% related_tables = @datatable.dataset.datatables.collect  do |d|
