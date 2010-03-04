@@ -276,6 +276,9 @@ table.data-description {
 	font-style: normal;
 }
 
+#content .updated_at {
+	font-size: 0.5em;
+}
 
 .space-after {
 	padding-right:2em;

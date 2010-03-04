@@ -5,8 +5,10 @@
     <% datatables.each do |datatable| -%>
     <li>
       <%= link_to datatable.title_and_years, datatable_path(datatable) %>
-      <% if logged_in? %
-          Last updated: <%= datatable.updated_at %>
+      <% if logged_in? %>
+        <span class='updated_at'>
+         <%= datatable.updated_at %>
+         </span>
       <% end %>
     </li>
     <% end -%>
