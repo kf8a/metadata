@@ -31,7 +31,10 @@
   <%= f.select :core_area_id, @core_areas , :include_blank => true%>
 </p>
 <p>
-  Temporal Coverage: <%= @datatable.begin_date %> to: <%= @datatable.end_date%>
+  <label for='datatable_begin_date'>Temporal Coverage from:</label>
+  <%= f.date_select :begin_date, :include_blank => true, :end_year => Time.now.year, :start_year => Time.now.year - 10%> 
+  <label for='datatable_end_date'>to</label>
+  <%= f.date_select :end_date, :include_blank => true, :end_year => Time.now.year, :start_year => Time.now.year - 10 %>
   <%= button_to_remote 'update temporal extent', :url => {:action => :update_temporal_extent, :id => @datatable}%>
 </p>
 <p>
