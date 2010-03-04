@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100303123318) do
+ActiveRecord::Schema.define(:version => 20100304164208) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -79,16 +79,16 @@ ActiveRecord::Schema.define(:version => 20100303123318) do
     t.text     "object"
     t.string   "metadata_url"
     t.boolean  "is_sql"
-    t.integer  "update_frequency_years"
+    t.integer  "update_frequency_days"
     t.date     "last_updated_on"
     t.text     "access_statement"
     t.integer  "excerpt_limit"
     t.date     "begin_date"
     t.date     "end_date"
-    t.boolean  "on_web",                 :default => true
+    t.boolean  "on_web",                :default => true
     t.integer  "theme_id"
     t.integer  "core_area_id"
-    t.integer  "weight",                 :default => 100
+    t.integer  "weight",                :default => 100
     t.integer  "study_id"
     t.datetime "created_at"
     t.datetime "updated_at"
