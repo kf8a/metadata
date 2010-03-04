@@ -6,7 +6,7 @@ class Study < ActiveRecord::Base
   acts_as_nested_set
   
   def include_datatables?(table_query = [])
-    (datatables & table_query).any?
+    (self_and_descendants_datatables & table_query).any?
   end
   
   def self.find_all_with_datatables(tables = [], options = {})
@@ -19,4 +19,12 @@ class Study < ActiveRecord::Base
     # end
     self.all(options).collect {|x| x.include_datatables?(tables)  ? x : nil}.compact
   end
+  
+  private
+  
+  def self_and_descendants_datatables
+    my_datatables = descendants.collect {|d| d.datatables }.flatten
+    my_datatables + datatables
+  end
+  
 end

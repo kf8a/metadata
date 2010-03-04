@@ -5,7 +5,7 @@ class StudyTest < ActiveSupport::TestCase
   should_have_many :datatables
   should_have_and_belong_to_many :datasets
 
-  context 'querying for datatables' do
+  context 'querying for datatables with root studies' do
     setup do
       @study = Factory.create(:study, :weight => 200)
       2.times {Factory.create(:study) }
@@ -35,4 +35,17 @@ class StudyTest < ActiveSupport::TestCase
     end
   end
 
+  context 'querying for datatables with nested studies' do
+    setup do 
+      @study = Factory.create(:study)
+      @child_study = Factory.create(:study)
+      assert @child_study.move_to_child_of(@study)
+      
+      @datatable = Factory.create(:datatable, :study => @child_study)
+    end
+    
+    should 'should return true for the parent study if the dataset is in the child study' do
+      assert @study.include_datatables?([@datatable])
+    end
+  end
 end
