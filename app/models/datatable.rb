@@ -97,6 +97,7 @@ class Datatable < ActiveRecord::Base
       when values.fields.member?('date') then 'date'
       when values.fields.member?('datetime') then 'datetime'
       when values.fields.member?('year') then 'year'
+      when values.fields.member?('harvest_date') then 'harvest_date'
       end
       unless date_field.nil?
         query = "select max(#{date_field}), min(#{date_field}) from (#{object}) as t1"        
