@@ -13,6 +13,7 @@
 </div>
 
 <ul class='quickTree'>
+  <%= debug @datatables %>
   <% @studies.each do |study| -%>
   <% next unless study.include_datatables?(@datatables)%>
   
@@ -25,7 +26,11 @@
 <ul>
   <% @datatables.each do |datatable| %>
     <% next if datatable.theme_id %>
-    <li><%= link_to datatable.title, datatable_path(datatable)%> <%=link_to "edit", edit_datatable_path(datatable)%></li>
+    <li><%= link_to datatable.title_and_years, datatable_path(datatable)%> <%=link_to "edit", edit_datatable_path(datatable)%>
+        <span class='updated_at'>
+          <%= datatable.updated_at %> 
+        </span>
+      </li>
     <% end -%>
 </ul>
 <% end %>

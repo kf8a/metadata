@@ -5,7 +5,9 @@
   <ul>
   <% study.children.each do |s| %>
     <% next unless s.include_datatables?(@datatables)%>
+    
     <%= render :partial => 'study', :locals=>{:study => s}%>
+    
   <% end %>
   </ul>
 <ul>
