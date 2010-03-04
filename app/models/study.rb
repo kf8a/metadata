@@ -10,7 +10,7 @@ class Study < ActiveRecord::Base
   end
   
   def self.find_all_with_datatables(tables = [], options = {})
-    # ## optimization
+    # TODO optimization
     # table_ids = tables.collect(&:study_id).compact.uniq
     # if table_ids.empty?
     #   self.all
@@ -18,6 +18,10 @@ class Study < ActiveRecord::Base
     #   self.find_by_sql("select * from studies where id in (#{table_ids.join(',')})")
     # end
     self.all(options).collect {|x| x.include_datatables?(tables)  ? x : nil}.compact
+  end
+  
+  def self.find_all_roots_with_datatables(tables=[], options={})
+    self.roots(options).collect {|x| x.include_datatables?(tables) ? x : nil}.compact
   end
   
   private

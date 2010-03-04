@@ -38,6 +38,8 @@ class StudyTest < ActiveSupport::TestCase
   context 'querying for datatables with nested studies' do
     setup do 
       @study = Factory.create(:study)
+      #create a second root study
+      Factory.create(:study) 
       @child_study = Factory.create(:study)
       assert @child_study.move_to_child_of(@study)
       
@@ -46,6 +48,10 @@ class StudyTest < ActiveSupport::TestCase
     
     should 'should return true for the parent study if the dataset is in the child study' do
       assert @study.include_datatables?([@datatable])
+    end
+    
+    should 'return only the root studies' do 
+      assert Study.find_all_roots_with_datatables([@datatable]) == [@study]
     end
   end
 end

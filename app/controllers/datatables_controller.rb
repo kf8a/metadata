@@ -24,7 +24,7 @@ class DatatablesController < ApplicationController
       @datatables = Datatable.all
     end
     
-    @studies = Study.find_all_with_datatables(@datatables, {:order => 'weight'})
+    @studies = Study.find_all_roots_with_datatables(@datatables, {:order => 'weight'})
        
     respond_to do |format|
       format.html # index.rhtml
