@@ -1,0 +1,17 @@
+<li class='study-title' id='study_<%=study.id%>'><%= study.name %> <%= link_to 'edit', edit_study_path(study) if logged_in?%>
+  <% unless  study.synopsis == '' %>
+  <p><%= study.synopsis%></p>
+  <% end %>
+  <% study.children.each do |s| %>
+    <% next unless s.include_datatables?(@datatables)%>
+    <%= render :partial => 'study', :locals=>{:study => s}%>
+  <% end %>
+<ul>
+  <% @themes.each do |theme| %>
+  <% next unless theme.include_datatables_from_study?(@datatables, study) -%>
+
+  <%= render :partial=>'theme', :locals => {:theme => theme, :study => study} %>
+
+  <% end -%>
+</ul>
+</li>
