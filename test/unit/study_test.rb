@@ -5,13 +5,16 @@ class StudyTest < ActiveSupport::TestCase
   should_have_many :datatables
   should_have_and_belong_to_many :datasets
 
-  context 'querying for datatables with root studies' do
+  context 'querying for datatables' do
     setup do
+      theme = Factory.create(:theme)
       @study = Factory.create(:study, :weight => 200)
       2.times {Factory.create(:study) }
       @study2 = Factory.create(:study, :weight=>100)
+
       @datatable  = Factory.create(:datatable, :study => @study)
       @datatable2 = Factory.create(:datatable, :study => @study2)
+      @unthemed_datatable = Factory.create(:datatable, :study => @study, :theme => nil)
     end
     
     should 'return true if queried for included datatables' do
@@ -21,11 +24,15 @@ class StudyTest < ActiveSupport::TestCase
     should 'return false if queried for a non affiliated datatable' do
       assert  !@study.include_datatables?([Factory.create(:datatable)])
     end
-
+    
+    should 'return false if queried with an unthemed datatable' do
+      assert !@study.include_datatables?([@unthemed_datatable])
+    end
 
     should 'find only the studies that include the datatable' do
       assert Study.find_all_with_datatables([@datatable]) == [@study]
     end
+    
     
     should 'return the studies in the proper order' do
       studies = Study.find_all_with_datatables([@datatable, @datatable2], {:order => :weight})
