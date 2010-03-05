@@ -82,7 +82,7 @@ class Datatable < ActiveRecord::Base
       end
     end
     # delete empty string values
-    csv_string.gsub!(/\,\"\"/,',')
+    #csv_string.gsub!(/\,\"\"/,',')
     return  csv_string
   end
   
