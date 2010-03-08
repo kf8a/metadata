@@ -6,7 +6,7 @@ class Study < ActiveRecord::Base
   acts_as_nested_set
   
   def include_datatables?(table_query = [])
-    (self_and_descendants_themed_datatables & table_query).any?
+    (self_and_descendants_datatables & table_query).any?
   end
   
   def self.find_all_with_datatables(tables = [], options = {})

@@ -21,7 +21,7 @@ class DatatablesController < ApplicationController
     if @keyword_list
       @datatables = Datatable.search @keyword_list
     else
-      @datatables = Datatable.all
+      @datatables = Datatable.find(:all, :conditions => ['is_secondary is false'])
     end
     
     @studies = Study.find_all_roots_with_datatables(@datatables, {:order => 'weight'})

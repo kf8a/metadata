@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100304164208) do
+ActiveRecord::Schema.define(:version => 20100308223149) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(:version => 20100304164208) do
     t.integer  "study_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_secondary",          :default => false
   end
 
   create_table "datatables_variates", :force => true do |t|
@@ -338,8 +339,9 @@ ActiveRecord::Schema.define(:version => 20100304164208) do
   create_table "units", :force => true do |t|
     t.string  "name"
     t.text    "description"
-    t.boolean "in_eml",      :default => false
+    t.boolean "in_eml",                     :default => false
     t.text    "definition"
+    t.string  "human_name",  :limit => nil
   end
 
   add_index "units", ["name"], :name => "unit_names_key", :unique => true

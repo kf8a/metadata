@@ -14,7 +14,6 @@ class StudyTest < ActiveSupport::TestCase
 
       @datatable  = Factory.create(:datatable, :study => @study)
       @datatable2 = Factory.create(:datatable, :study => @study2)
-      @unthemed_datatable = Factory.create(:datatable, :study => @study, :theme => nil)
     end
     
     should 'return true if queried for included datatables' do
@@ -25,10 +24,6 @@ class StudyTest < ActiveSupport::TestCase
       assert  !@study.include_datatables?([Factory.create(:datatable)])
     end
     
-    should 'return false if queried with an unthemed datatable' do
-      assert !@study.include_datatables?([@unthemed_datatable])
-    end
-
     should 'find only the studies that include the datatable' do
       assert Study.find_all_with_datatables([@datatable]) == [@study]
     end
