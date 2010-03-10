@@ -7,10 +7,12 @@
 <% end %>
 The <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use policy applies to the this dataset</a>
 
-<div class='collapsable'>
+<div>
   <h2>Context:</h2>
-  <div>
-  <%= textilize @datatable.dataset.abstract if @datatable.dataset.abstract%>
+  <div class='truncate'>
+    <% if @datatable.dataset.abstract %>
+    <%= textilize @datatable.dataset.abstract%>
+    <% end %>
   </div>
 </div>
 

@@ -11,6 +11,10 @@ jQuery(document).ready(function() {
 			}
 	};
 	
+
+	// truncate long contexts on datatable pages
+  jQuery('.truncate').truncate({max_length: 500});
+	
 	jQuery('.sortable-container').draggable({
 		zIndex: 100000,
 		revert: 'invalid',

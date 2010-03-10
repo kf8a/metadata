@@ -53,6 +53,10 @@
   <label for='datatable_restricted'>Restricted (only visible at KBS)</label>
   <%= f.check_box :is_restricted %>
 </p>
+<p>
+  <label for='datatable_is_secondary'>Secondary Table</label>
+  <%= f.check_box :is_secondary %>
+</p>
 
 <% f.fields_for :variates do |variate_form| %>
 <table id='variates'>
