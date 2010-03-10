@@ -117,20 +117,20 @@ jQuery(document).ready(function() {
 	});
 				
 	jQuery(function() {
-		if (jQuery('#keyworder')[0].value == 'Search for core areas, keywords, contributors or words') {	
+		if (jQuery('#keyworder')[0].value == 'Search for core areas, keywords or people') {	
 			jQuery('#keyworder').addClass("default");
 		};
 	});
 	
 		
 	jQuery('#keyworder').focus(function() {
-		if(this.value=='Search for core areas, keywords, contributors or words') {
+		if(this.value=='Search for core areas, keywords or people') {
 				this.value='';
 				jQuery(this).removeClass('default');
 		}	});
 	jQuery('#keyworder').blur(function() {
 		if(this.value=='') {
-				this.value='Search for core areas, keywords, contributors or words';
+				this.value='Search for core areas, keywords or people';
 				jQuery(this).addClass('default');			
 		} });
 	
