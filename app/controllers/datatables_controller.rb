@@ -149,14 +149,21 @@ class DatatablesController < ApplicationController
   end
   
   private
+  
+  def set_title
+    @title  = 'LTER Data Catalog'
+  end
+  
   def set_crumbs
     crumb = Struct::Crumb.new
     @crumbs = []
-    return unless params[:id]
+   
     crumb.url = '/datatables/'
-    crumb.name = 'Data Catalog: Datatables'
+    crumb.name = 'Data Catalog'
     @crumbs << crumb
     crumb = Struct::Crumb.new
+    
+    return unless params[:id]
     
     datatable  = Datatable.find(params[:id])
 
