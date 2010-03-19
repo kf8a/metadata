@@ -1,3 +1,6 @@
+<p>
+  The KBS LTER Data Catalog is a collection of publicly available datasets associated with the site. You are welcome to examine and use the data as you like for personal and class use; publication requires permission as detailed in our <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>Terms of use</a>. Please direct questions and comments to the  <a href='mailto:data.manager@kbs.msu.du'>KBS LTER Information Manager</a>.
+</p>
 <div id='search-form'>
   <%= form_tag '/datatables', :method => 'get'%>
   
@@ -11,9 +14,6 @@
         </div>
   </div> 
 </div>
-<p>
-  Data and samples collected and archived as part ofKBS LTER Project activities are available to the general scientific community for examination and further analysis. Certain <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>restrictions</a> apply. If you have questions or comments about data management and presentation, contact the <a href='mailto:data.manager@kbs.msu.du'>Data Manager</a>
-</p>
 
 <ul class='quickTree'>
   <% @studies.each do |study| -%>
