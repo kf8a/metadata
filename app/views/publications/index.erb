@@ -20,6 +20,7 @@
 					abstract&nbsp;&hellip;</a>
 			<% end -%>
 			<%= link_to_remote 'document', :url =>  publication.public_filename if publication.filename %>
+			<%= link_to 'edit', edit_publication_path(publication) if logged_in?%>
 	</div>
 <% end %>
 <p><% if logged_in? -%>
