@@ -20,7 +20,7 @@ The <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use po
 <table class='data-description'>
 <% if @datatable.study %>
 <tr>
-  <td>Experiment:</td><td> <%= link_to @datatable.study.name, study_path(@datatable.study) %></td>
+  <td>Experiment:</td><td> <%= @datatable.study.name %></td>
   </tr>
 <% end %>
 <% if @datatable.begin_date && @datatable.end_date %>
