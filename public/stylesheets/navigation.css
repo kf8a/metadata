@@ -70,16 +70,11 @@ ul.makeMenu li:hover > a { color: #000; } /* supports links in branch headings -
 	display: inline;
 }
 
-#network-databases {
-	margin-top: 29px;
-	margin-left: 10px;
-	margin-right: 10px;
-}
-#network-databases li{
- 	list-style-type: none;
-}
+#network-databases {margin-top: 29px; margin-left: 10px; margin-right: 10px}
 
-#network-databases ul {
-	margin:0px;
-	padding:0;
+#network-databases li {
+	margin-left:20px;
+	list-style-type: disc;
+	font-size: 0.7em;
 }
+#network-databases ul {margin:0px; padding:0}

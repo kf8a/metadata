@@ -1,16 +1,65 @@
 require 'rexml/document'
-require 'redcloth'
+require 'csv'
 include REXML
 
 class Datatable < ActiveRecord::Base
+  attr_protected :object
   belongs_to :dataset
-  has_many :variates, :order => :position
+  has_many :variates, :order => :weight
+  belongs_to :theme
+  belongs_to :core_area
+  belongs_to :study
+  
+  validates_presence_of :title
+  
+  accepts_nested_attributes_for :variates
+  
+  acts_as_taggable_on :keywords
+  
+  define_index do
+    indexes title
+    indexes description
+    indexes theme.name, :as => :theme
+    indexes dataset.affiliations.person.sur_name, :as => :sur_name
+    indexes dataset.affiliations.person.given_name, :as => :given_name
+    indexes keywords(:name), :as => :keyword
+    indexes dataset.title, :as => :dataset_title
+    where "datatables.on_web is true and datasets.on_web"
+    
+    #set_property :field_weights => {:keyword => 20, :theme => 20, :title => 10}
+  end
+  
+  def personnel
+    h = {}
+    dataset.affiliations.each do |affiliation|
+      if h[affiliation.person]
+        h[affiliation.person] = h[affiliation.person].push((affiliation.role.name))
+      else
+        h[affiliation.person] = [affiliation.role.name]
+      end
+    end
+    h
+  end
   
   def within_interval?(start_date=Date.today, end_date=Date.today)
     extent = temporal_extent
     return false if extent[:begin_date].nil?
     
     !(extent[:begin_date] < start_date || extent[:end_date] > end_date) 
+  end
+  
+  #TODO create a completed flag and use the actual end year if present
+  def title_and_years
+    return title if (self.begin_date.nil? or self.end_date.nil?)
+    year_end = end_date.year
+    year_start = begin_date.year
+    reply = ""
+    if year_end == year_start
+      reply = " (#{year_start})"
+    else
+      reply = " (#{year_start} to #{ year_end > Time.now.year - 3 ? 'present': year_end})"
+    end
+    title + reply
   end
       
   def to_eml
@@ -26,14 +75,14 @@ class Datatable < ActiveRecord::Base
   
   def to_csv
     values  = ActiveRecord::Base.connection.execute(object)
-    csv_string = FasterCSV.generate do |csv|
+    csv_string = CSV.generate do |csv|
       csv << variates.collect {|v| v.name }
       values.each do |row|
-        csv << row
+        csv << row.values
       end
     end
     # delete empty string values
-    csv_string.gsub!(/\,\"\"/,',')
+    #csv_string.gsub!(/\,\"\"/,',')
     return  csv_string
   end
   
@@ -47,6 +96,8 @@ class Datatable < ActiveRecord::Base
       when values.fields.member?('obs_date') then 'obs_date'
       when values.fields.member?('date') then 'date'
       when values.fields.member?('datetime') then 'datetime'
+      when values.fields.member?('year') then 'year'
+      when values.fields.member?('harvest_date') then 'harvest_date'
       end
       unless date_field.nil?
         query = "select max(#{date_field}), min(#{date_field}) from (#{object}) as t1"        
@@ -62,12 +113,16 @@ class Datatable < ActiveRecord::Base
     self.end_date = dates[:end_date] if dates[:end_date]
     save
   end
-  
+    
 private
 
   def query_datatable_for_temporal_extent(query)
     values = ActiveRecord::Base.connection.execute(query)
-    [Time.parse(values[0]['min']).to_date,Time.parse(values[0]['max']).to_date]
+    if values[0].class == 'Date' 
+      [Time.parse(values[0]['min']).to_date,Time.parse(values[0]['max']).to_date]
+    else # assume is a year
+      [Time.parse(values[0]['min'].to_s + '-1-1').to_date,Time.parse(values[0]['max'].to_s + '-1-1').to_date ]
+    end
   end
 
   def eml_physical

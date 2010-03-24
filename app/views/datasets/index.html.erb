@@ -1,3 +1,4 @@
+
 <div id='search-form'>
   <%= form_tag '/datasets', :method => 'get'%>
   <div id='top-line-search'>
@@ -6,7 +7,7 @@
     </div>
     <div id='experiment-search'>
       <label>Long-term Experiment</label>
-      <%= collection_select :study, :id, Study.all(:order => 'seniority'), :id, :name, {:include_blank => 'All'}%>
+      <%= collection_select :study, :id, Study.all(:order => 'weight'), :id, :name, {:include_blank => 'All'}%>
     </div>
     <div id='contributor-search'>  
        <label>Contributor:</label><%= select :person, :id, @people.collect{|x| [truncate(x.last_name_first, :length => 16), x.id]},  { :include_blank => "All" } %>
@@ -17,34 +18,33 @@
       <label>From:</label> <%= select_year 1988, :start_year => 1988, :end_year => Date.today.year, :field_name => 'syear' %><label>To:</label><%= select_year Date.today, :start_year=>1988, :end_year => Date.today.year, :field_name => 'eyear'%>
     </div>
     <div id='keyword-search'>
-      <label>Keywords:</label><%= keyword_field_with_auto_complete_tag :keyword_list, {}, {:method => :get} %>
-    </div>
-    
-      
+      <label>Keywords:</label><%= text_field_tag :keyword_list, @keyword_list, {:id => 'keyworder'}  %>
+    </div>  
       <%= submit_tag "Search" %>
 </div>
 </div>
-<div class="studies">
-  
+<div>
+<ul class="studies quickTree">
   <% @studies.each do |study| %>
-    <div class="datasets container">
-    <h2 class="study-title"><a href="<%= study.description %>"><%= study.name%></a></h2>
+    <li class="study-title">
+      <a href="<%= study.description %>"><%= study.name%></a>
     <ul>
-    
-    		  <% @datasets.sort {|x,y| x.title <=> y.title}.each do |dataset| %>
-    		  <% next unless dataset.on_web %>
-    		  <% if !logged_in? %>
+      <% @datasets.sort {|x,y| x.title <=> y.title}.each do |dataset| %>
+    	  <% next unless dataset.on_web %>
+    		<% if !logged_in? %>
     		    <% next unless dataset.datatables.size > 0 %>
-    		  <% end -%>
-    		  <% next unless dataset.studies.include?(study) %>
+    		<% end -%>
+    		<% next unless dataset.studies.include?(study) %>
 
-          <li class="dataset">
-    		<%= link_to truncate(dataset.title,{:length => 80}) , dataset_path(dataset) %>
-    		<%= link_to  'Edit', edit_dataset_path(dataset), {:class => 'edit'} if logged_in? %></li>
-    <% end -%>
+        <li class="dataset">
+    		  <%= link_to truncate(dataset.title,{:length => 80}) , dataset_path(dataset) %>
+    		  <%= link_to  'Edit', edit_dataset_path(dataset), {:class => 'edit'} if logged_in? %>
+    		</li>
+      <% end -%>
     </ul>
-    </div>
+  </li>
   <% end %>
+</ul>
 </div>
 
 <% if logged_in? %>
@@ -72,3 +72,4 @@
 		
 <%= link_to 'New dataset', new_dataset_path if logged_in? %> | 
 <%= link_to 'login', new_sessions_path %>
+

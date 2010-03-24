@@ -16,62 +16,7 @@ class Dataset < ActiveRecord::Base
   accepts_nested_attributes_for :affiliations, :allow_destroy => true
   
   acts_as_taggable_on :keywords
-  
-  # Finders
-  def self.find_signature_set
-    self.find(:all, :conditions => ['core_dataset is true and on_web is true'])
-  end
-  
-  def self.find_by_year(syear,eyear)
-    self.find_by_date_interval(Date.parse(syear.to_s + '-1-1'), Date.parse(eyear.to_s+'-12-31'))
-  end
-  
-  def self.find_by_date_interval(begin_date, end_date)
-    Dataset.all(:conditions => ['on_web is true and (initiated < ? or completed < ?)', end_date,begin_date])
-  end
-  
-  def self.find_by_keywords(keyword_list)
-    self.find_tagged_with(keyword_list,:on => 'keywords')
-  end
-  
-  def self.find_by_theme(theme_id)
-    return [] if theme_id == ''
-    self.find(:all, :joins => :themes, :conditions => {:themes => {:id => theme_id}})
-  end
-  
-  def self.find_by_person(person_id)
-    return [] if person_id == ''
-    self.find(:all, :joins => :people, :conditions => {:people => {:id => person_id}})
-  end
-  
-  def self.find_by_study(study_id)
-    return [] if study_id == ''
-    self.find(:all, :joins => :studies, :conditions => {:studies => {:id => study_id}})
-  end
-  
-  def self.find_by_params(params)
-    datasets = self.all
-    params.each do |key, value|
-      
-      method = 'find_by_'+key.to_s
-      if value.respond_to?('keys') 
-        if value.keys.include?(:id)
-          value_id = value[:id]
-          unless value_id.nil? || value_id == ''
-            datasets = self.send(method.to_sym, value_id) & datasets
-          end
-        else # we assume that we have a year
-          datasets = Dataset.find_by_year(value[:syear], value[:eyear]) & datasets
-        end
-      else # assume have keywords
-        unless value.nil? || value == ''
-          datasets = self.send(method.to_sym, value) & datasets
-        end
-      end
-    end
-    datasets
-  end
-  
+    
   def has_person(id)
     person = Person.find(id)
     people.exists?(person)
@@ -104,17 +49,17 @@ class Dataset < ActiveRecord::Base
     emldoc = Document.new(%q{<?xml version="1.0" encoding="UTF-8"?>
 <eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.0.0" xmlns:set="http://exslt.org/sets" xmlns:exslt="http://exslt.org/common" xmlns:stmml="http://www.xml-cml.org/schema/stmml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="eml://ecoinformatics.org/eml-2.0.0 eml.xsd" packageId="knb-lter-kbs.1.8" system="KBS LTER">
 </eml:eml>})
-#    e = Document.new to_xml
     eml_dataset = emldoc.root.add_element('dataset')
     eml_dataset.add_element('title').add_text(title)
-    eml_dataset.add_element('creator', {'id' => 'KBS LTER'})
+    creator = eml_dataset.add_element('creator', {'id' => 'KBS LTER'})
+    creator.add_element('positionName').add_text('Data Manager')
     people.each do | person |
-      p = eml_dataset.add_element('associatedParty', {'id' => person.person, 'scope' => 'document'})
+      p = eml_dataset.add_element('associatedParty', {'id' => person.person, 'scope' => 'document'})      
       p.add_element eml_individual_name(person)
       p.add_element address(person)
-      p.add_element('phone', {'phonetype' => 'phone'}).add_text(person.phone) 
-      p.add_element('phone',{'phonetype' => 'fax'}).add_text(person.fax) 
-      p.add_element('electronicMailAddress').add_text(person.email)
+      p.add_element('phone', {'phonetype' => 'phone'}).add_text(person.phone) if person.phone
+      p.add_element('phone',{'phonetype' => 'fax'}).add_text(person.fax) if person.fax
+      p.add_element('electronicMailAddress').add_text(person.email) if person.email
 #      p.add_element('role').add_text(person)
     end
     eml_dataset.add_element('abstract').add_element('para').add_text(abstract)
@@ -231,12 +176,12 @@ private
   def address(person)
     a = Element.new('address')
     a.add_attribute('scope','document')
-    a.add_element('deliveryPoint').add_text(person.organization)
-    a.add_element('deliveryPoint').add_text(person.street_address)
-    a.add_element('city').add_text(person.city)
-    a.add_element('adminstrativeArea').add_text(person.locale)
-    a.add_element('postalCode').add_text(person.postal_code)
-    a.add_element('country').add_text(person.country)
+    a.add_element('deliveryPoint').add_text(person.organization) if person.organization
+    a.add_element('deliveryPoint').add_text(person.street_address) if person.street_address
+    a.add_element('city').add_text(person.city) if person.city
+   # a.add_element('administrativeArea').add_text(person.locale) if person.locale
+    a.add_element('postalCode').add_text(person.postal_code) if person.postal_code
+    a.add_element('country').add_text(person.country) if person.country
     return a
   end
 end

@@ -12,6 +12,7 @@ class DatatablesControllerTest < ActionController::TestCase
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
     @table = Factory.create(:datatable, :dataset => Factory.create(:dataset))
+    
     Factory.create(:datatable, :dataset => Factory.create(:dataset))
   end
 
@@ -28,7 +29,7 @@ class DatatablesControllerTest < ActionController::TestCase
   
   def test_should_create_datatable
     old_count = Datatable.count
-    post :create, :datatable => { }
+    post :create, :datatable => {:title => 'soil pH' }
     assert_equal old_count+1, Datatable.count
     
     assert_redirected_to datatable_path(assigns(:datatable))
@@ -45,7 +46,7 @@ class DatatablesControllerTest < ActionController::TestCase
   end
   
   def test_should_update_datatable
-    put :update, :id => @table, :datatable => { }
+    put :update, :id => @table, :datatable => {:title => 'soil moisture' }
     assert_redirected_to datatable_path(assigns(:datatable))
   end
   
@@ -65,6 +66,21 @@ class DatatablesControllerTest < ActionController::TestCase
     
     should_respond_with :success
     should_render_template :show
+    
+  end
+  
+  context 'GET with empty search parameters' do
+    setup do
+      get :index,:keyword_list => '', :commit => 'Search'
+    end
+  
+    should_assign_to :datatables
+    should_assign_to :themes
+        
+    should_respond_with :success
+    should_render_template :index
+    should_not_set_the_flash
+    
     
   end
   

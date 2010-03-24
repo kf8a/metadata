@@ -1,4 +1,5 @@
 db/meta_test
+db/sphinx
 log/
 vendor/rails/
 vendor/plugins/rspec/.git/
@@ -7,3 +8,5 @@ metadata.sql
 base_packaged.css
 public/javascripts/base_packaged.js
 .DStore
+tmp/
+config/database.yml

@@ -8,10 +8,6 @@
 	list-style-position: inside;
 	
 }
-#searchform input {
-	margin-right:0.05em;
-	color:#CCCCCC;
-}
 
 #content h1 {
 	font-size: 1.2em;
@@ -47,7 +43,7 @@
 	display: inline;
 }
 
-.top_level {
+.top-level {
 	margin-bottom: 0.4em;
 }
 
@@ -77,20 +73,15 @@ li ul li {
 #content .edit {
 	font-size: 90%;
 }
-a:link.edit{
+a.edit:link{
 	color: #7f7f7f;
 }
 
-a:visited {
-    text-decoration: none;
-}
-
-a:visited.edit {
+a.edit:visited {
 	color: #bfbfbf;
-	text-decoration: none;
 }
 
-a:hover.edit {
+a.edit:hover {
 	text-decoration: underline;
 }
 
@@ -124,6 +115,11 @@ a:hover.edit {
 }
 */
 
+#network-databases h2 {
+	font-size: small;
+	margin-bottom:0.5em;
+}
+
 .no-data {
 	color: #939393;
 }
@@ -148,78 +144,157 @@ a:hover.edit {
 	padding-top: 0.5em;
 }
 
-
-
-#content h2.study-title a {
-	width: 498px;
-	background-color: #dedede;			
-	text-decoration: none;
-	color: #006633;
-	-moz-border-radius:10px;
-  -webkit-border-radius:10px;
-	font-weight: normal;
-	font-style: normal;
-	display: block;
-	font-variant: normal;
-	padding: 0 2em 0;
+#keyworder {
+	width: 350px;
 }
 
-#core-area-search {
-	float:left
+#keyworder input {
+	color:#CCCCCC;
 }
 
-#core-area-search label {
-	padding-right: 5px;
+.default {
+	color:grey;
 }
 
-
-#contributor-search {
-	float: left;
-}
-
-#contributor-search label {
-	text-align: center;
-	padding-right: 10px;
-	padding-left: 10px;
+#content .expand_all {
+	font-size: x-small;
 }
 
 #top-line-search {
-	height: 5em;
+	height: 3em;
 }
-
-
-#experiment-search {
-	float:left
-}
-
-#experiment-search label {
-	text-align: center;
-	padding-right: 10px;
-	padding-left: 10px;
-}
-
-#bottom-line-search {
-	clear: both;
-}
-
-#year-search {
-	float:left;
-}
-
-#year-search label {
-	display:inline;
+#search-submit {
+	text-align: right;
+	float: none;
+	display: inline;
+	margin-left: 10px;
 }
 
 #keyword-search {
-	float:left;
-	margin-left: 1em;
-	margin-right: 2em;
+	display: inline;
 }
 
-input#keyword_list {
-	margin-left: 0;
+#content a.download-link {
+	display: block;
+	padding: 10px;
+	margin-top: 20px;
+	margin-bottom:20px;
+	-moz-border-radius:10px;
+  -webkit-border-radius:10px;
+	border-style: outset;
+	font-variant: small-caps;
+	text-align: center;
+	font-size: large;
 }
 
-#keyword-search label {
-	display:inline;
+#content a.download-link:hover {
+	text-decoration: none;
+	border-style: inset;
 }
+
+li.study-index p {
+	font-weight: normal;
+	font-size: 0.7em;
+	margin-left: 4em;
+}
+
+li.study-title {
+	background-color: white;
+	font-size: 1.2em;
+	font-weight: bold;
+	color:#063;;
+	margin: 2px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-right: 1px;
+	padding: 1px;
+}
+.study-title > .expanded {
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+li.study-title p {
+	font-weight: normal;
+	font-size: 0.7em;
+	margin-left: 4em;
+	margin-top: 0;
+	color: #333;
+}
+li.study-title ul {
+	font-weight: normal;
+	background-color: white;
+	position: relative;
+	left: 1px;
+	margin-right: 1px;
+	color: #333;
+}
+li.study-title li {
+	padding-top: 3px;
+}
+
+
+#content table.variate-table {
+	margin-top: 1.2em;
+	width: 100%;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+
+
+#content table.variate-table tbody tr th {
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	text-align: left;
+}
+
+table.data-description {
+	width: 100%;
+	border-top-style: solid;
+	border-top-width: 1px;
+}
+
+.data-description tr td:first-child{
+	font-weight: bold;
+	vertical-align: top;
+}
+
+#content table.variate_table tbody tr th {
+	text-align: left;
+}
+
+#content table.data-description tbody tr td ul {
+	margin: 0;
+}
+
+#content div.collapsable {
+	padding-bottom:1em;
+}
+#content div.collapsable h2{
+	color:black;
+	font-size: small;
+	font-weight: normal;
+	font-style: normal;
+}
+
+#content .updated_at {
+	font-size: 0.5em;
+}
+
+.space-after {
+	padding-right:2em;
+}
+
+.quickTree {
+	border-top-style: solid;
+}
+
+tree * {margin:0; padding:0;}
+.tree li {list-style:none; padding-left:21px;}
+.tree li.root {padding-left:0;}
+.tree li li { no-repeat 17px center; margin-left:10px; padding-left:31px;}
+.tree li li.root {padding-left:10px; }
+.tree li li.root.last {background:none; }
+.tree li li.last {}
+.expand {background:url(/metadata_images/plus_minus.png) no-repeat; width:16px; height:12px; display:block; float:left; margin-top:0px; padding:0 10px 0 0; text-indent:-9999px; line-height:0; font-size:0;}
+.contract {background-position:0 -16px;}
+.expand:hover {cursor:pointer;}

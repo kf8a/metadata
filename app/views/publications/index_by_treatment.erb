@@ -2,7 +2,7 @@
 <p>Please click on an experiment or treatment name to list LTER articles that  have reported results from that site.</p>
 <ul>
 	<% @studies.each do |study| -%>
-	<li class='top_level'>
+	<li class='top-level'>
 		<% if study.treatments.size > 1 %>
 			<%= study.name %>
 			<ul>

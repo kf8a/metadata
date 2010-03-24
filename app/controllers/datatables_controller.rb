@@ -1,16 +1,35 @@
 class DatatablesController < ApplicationController
   
   #before_filter :is_restricted
+   before_filter :login_required, :except => [:index, :show, :suggest] if ENV["RAILS_ENV"] == 'production'
   
   # GET /datatables
   # GET /datatables.xml
   def index
 
-    @datatables = [] # Datatable.find(:all)
+    # just use the lower case (ie the datatable themese)
+    @themes = Theme.roots
+    
+    @default_value = 'Search for core areas, keywords or people'
 
+    query =  {'keyword_list' => ''}
+    query.merge!(params) unless params['commit'] == 'Clear'
+            
+    @keyword_list = query['keyword_list']
+    @keyword_list = nil if @keyword_list.empty? || @keyword_list == @default_value
+    
+    if @keyword_list
+      @datatables = Datatable.search @keyword_list
+    else
+      @datatables = Datatable.find(:all, :conditions => ['is_secondary is false'])
+    end
+    
+    @studies = Study.find_all_roots_with_datatables(@datatables, {:order => 'weight'})
+       
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @datatables.to_xml }
+      format.rss {render :rss => @datatables}
     end
   end
 
@@ -20,6 +39,7 @@ class DatatablesController < ApplicationController
   def show  
     @datatable = Datatable.find(params[:id])
     @dataset = @datatable.dataset
+    @roles = @dataset.roles
     
     @values = nil
     if @datatable.is_sql
@@ -29,6 +49,7 @@ class DatatablesController < ApplicationController
       @datatable.excerpt_limit = 50 if @datatable.excerpt_limit.nil?
       query = query + " limit #{@datatable.excerpt_limit}" 
       @values  = ActiveRecord::Base.connection.execute(query)
+      #TDOD convert the array into a ruby object
     end
 
     unless trusted_ip?
@@ -48,11 +69,15 @@ class DatatablesController < ApplicationController
   # GET /datatables/new
   def new
     @datatable = Datatable.new
+    @themes = Theme.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
+    @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
   end
 
   # GET /datatables/1;edit
   def edit
     @datatable = Datatable.find(params[:id])
+    
+    @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
   end
 
   # POST /datatables
@@ -101,17 +126,55 @@ class DatatablesController < ApplicationController
     end
   end
   
+  def suggest
+    term = params[:term]
+    list = Tag.all.collect {|x| x.name.downcase}
+    list = list + Person.find_all_with_dataset.collect {|x| x.sur_name.downcase}
+    list = list + Theme.all.collect {|x| x.name.downcase}
+    list = list + CoreArea.all.collect {|x| x.name.downcase}
+
+    keywords = list.compact.uniq.sort
+    respond_to do |format|
+      format.json {render :json => keywords}
+    end
+  end
+  
+  def update_temporal_extent
+    @datatable = Datatable.find(params[:id])
+    @datatable.update_temporal_extent
+    @datatable.save
+    respond_to do |format|
+      format.js {render :nothing => true}
+    end
+  end
+  
   private
+  
+  def set_title
+    @title  = 'LTER Data Catalog'
+  end
+  
   def set_crumbs
     crumb = Struct::Crumb.new
     @crumbs = []
-    return unless params[:id]
-    crumb.url = '/datasets/'
-    crumb.name = 'Data Catalog: Datasets'
+   
+    crumb.url = '/datatables/'
+    crumb.name = 'Data Catalog'
     @crumbs << crumb
     crumb = Struct::Crumb.new
     
+    return unless params[:id]
+    
     datatable  = Datatable.find(params[:id])
+
+    if datatable.study
+      study = datatable.study
+      crumb.url = study_path(study)
+      crumb.name = study.name
+      @crumbs << crumb
+    end
+    crumb = Struct::Crumb.new
+    
     crumb.url =  dataset_path(datatable.dataset)
     crumb.name = datatable.dataset.title
     @crumbs << crumb

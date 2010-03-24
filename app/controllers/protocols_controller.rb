@@ -6,7 +6,7 @@ class ProtocolsController < ApplicationController
   # GET /protocols
   # GET /protocols.xml
   def index
-    @themes = Theme.find(:all)
+    @themes = Theme.roots
     @protocols = Protocol.find(:all)
 
     respond_to do |format|

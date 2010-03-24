@@ -53,13 +53,15 @@ class DatasetsControllerTest < ActionController::TestCase
   
   context 'GET index' do
     setup do
+      @dataset = Factory.create(:dataset)
+      Factory.create(:dataset)
+      
       get :index
     end
     
     should_assign_to :datasets
     should_assign_to :people
     should_assign_to :themes
-    should_assign_to :signature_datasets
     
     should_respond_with :success
     should_render_template :index
@@ -69,114 +71,26 @@ class DatasetsControllerTest < ActionController::TestCase
   
   context 'GET with empty search parameters' do
     setup do
-      get :index, :theme => {:id => ''}, :study => {:id => ''}, :person => {:id => ''},
-          :keyword_list => '', :date => {:syear => '1988', :eyear => Date.today.year.to_s}, :commit => 'Search'
+      get :index, :keyword_list => '', :commit => 'Search'
     end
   
     should_assign_to :datasets
     should_assign_to :people
     should_assign_to :themes
     should_assign_to :studies
-    
-    should_assign_to :signature_datasets
-    
+        
     should_respond_with :success
     should_render_template :index
     should_not_set_the_flash
   end
   
-  
-  context 'GET index with theme search' do
-    setup do 
-      @theme = Factory.create(:theme, :id => 1)
-      get :index, :theme => {:id => '1'}
-    end
-    
-    should_assign_to :datasets
-    should_assign_to :people
-    should_assign_to :themes
-    should_assign_to :studies
-    should_assign_to :theme
-    
-    should 'have an empty signature_datasets' do
-       assert_equal [], assigns(:signature_datasets)
-     end
-     
-     should 'have the right theme' do
-       assert @theme == assigns(:theme)
-     end
-     
-    should_respond_with :success
-    should_render_template :index
-    should_not_set_the_flash
-  end
-  
-  context 'GET with date search' do
-    setup do 
-      get :index, :date => {:syear => 2000, :eyear => 2003}
-    end
-    
-    should_assign_to :datasets
-    should_assign_to :people
-    should_assign_to :themes
-    should_assign_to :studies
-    
-    should 'have an empty signature_datasets' do
-      assert_equal [], assigns(:signature_datasets)
-    end
-    
-    should_respond_with :success
-    should_render_template :index
-    should_not_set_the_flash
-    
-  end
-  
-  context 'GET with study search' do
-    setup do
-      @study = Factory.create(:study)
-      Factory.create(:dataset, :studies => [@study])
-      Factory.create(:dataset, :studies => [Factory.create(:study)])
-      get :index, :study => {:id => @study.id.to_s}
-  end
-    
-    should_assign_to :datasets
-    should_assign_to :people
-    should_assign_to :themes
-    should_assign_to :studies
-   
-    should 'have only one study' do
-      assert [@study] == assigns(:studies)
-    end
-   
-    should_respond_with :success
-    should_render_template :index
-    should_not_set_the_flash
-  end
-  
-  context 'search without returning a signature dataset' do
-  end
-  
-  context 'dataset with tables not on web' do
-    setup do
-      @dataset = Factory.create(:dataset)
-      @table = Factory.create(:datatable, :dataset => @dataset, :on_web => false)
-      get :show, :id => @dataset
-    end
-    
-    should_respond_with :success
-    should_render_template :show
-    
-    should 'not show the @table'      
-    
-  end
-  
+      
   context 'eml harvester document' do
     setup do
       @dataset = Factory.create(:dataset)
       get :index, :format => :eml
     end
     
-    should_respond_with :success
-    
+    should 'be succesful'
   end
 end

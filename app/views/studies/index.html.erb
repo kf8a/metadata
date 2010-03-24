@@ -1,0 +1,29 @@
+
+<div id='sortable-list'>
+<% @study_roots.each do |study_root| -%>
+<div class="study-list">
+  <li class="sortable-container"><p><%= study_root.name %> <%= link_to 'edit', edit_study_path(study_root)%></p>
+    <input type='hidden' value="<%=study_root.id %>"/>
+    <p><%= study_root.synopsis %></p>
+    <ul class="sortable-tree">
+    <% if study_root.descendants.length > 0 -%>
+    <%= render :partial => 'study', :collection => study_root.descendants %>
+  <% end -%>
+  </ul>
+  </li>
+</div>
+
+<% end -%>
+</ul>
+</div>
+
+<% form_for(:study, :url => studies_path) do |f| %>
+<text_field type='hidden' id='updatePath' value='study'>
+  <p>
+    <label for='study_name'>Theme Name</label>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= submit_tag "Create" %>
+  </p>
+<% end %>

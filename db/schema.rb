@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100201141347) do
+ActiveRecord::Schema.define(:version => 20100308223149) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -32,21 +32,29 @@ ActiveRecord::Schema.define(:version => 20100201141347) do
     t.string  "name"
   end
 
-  create_table "datasets", :force => true do |t|
-    t.string  "dataset"
-    t.string  "title"
-    t.text    "abstract"
-    t.string  "old_keywords"
-    t.string  "status"
-    t.date    "initiated"
-    t.date    "completed"
-    t.date    "released"
-    t.boolean "on_web",       :default => true
-    t.integer "version"
-    t.boolean "core_dataset", :default => false
-    t.integer "project_id"
-    t.integer "metacat_id"
+  create_table "core_areas", :force => true do |t|
+    t.string "name"
   end
+
+  create_table "datasets", :force => true do |t|
+    t.string   "dataset"
+    t.string   "title"
+    t.text     "abstract"
+    t.string   "old_keywords"
+    t.string   "status"
+    t.date     "initiated"
+    t.date     "completed"
+    t.date     "released"
+    t.boolean  "on_web",       :default => true
+    t.integer  "version"
+    t.boolean  "core_dataset", :default => false
+    t.integer  "project_id"
+    t.integer  "metacat_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "datasets", ["dataset"], :name => "datasets_dataset_key", :unique => true
 
   create_table "datasets_studies", :id => false, :force => true do |t|
     t.integer "dataset_id"
@@ -59,25 +67,32 @@ ActiveRecord::Schema.define(:version => 20100201141347) do
   end
 
   create_table "datatables", :force => true do |t|
-    t.string  "name"
-    t.string  "title"
-    t.text    "comments"
-    t.integer "dataset_id"
-    t.string  "data_url"
-    t.string  "connection_url"
-    t.string  "driver"
-    t.boolean "is_restricted"
-    t.text    "description"
-    t.text    "object"
-    t.string  "metadata_url"
-    t.boolean "is_sql"
-    t.integer "update_frequency_years"
-    t.date    "last_updated_on"
-    t.text    "access_statement"
-    t.integer "excerpt_limit"
-    t.date    "begin_date"
-    t.date    "end_date"
-    t.boolean "on_web",                 :default => true
+    t.string   "name"
+    t.string   "title"
+    t.text     "comments"
+    t.integer  "dataset_id"
+    t.string   "data_url"
+    t.string   "connection_url"
+    t.string   "driver"
+    t.boolean  "is_restricted"
+    t.text     "description"
+    t.text     "object"
+    t.string   "metadata_url"
+    t.boolean  "is_sql"
+    t.integer  "update_frequency_days"
+    t.date     "last_updated_on"
+    t.text     "access_statement"
+    t.integer  "excerpt_limit"
+    t.date     "begin_date"
+    t.date     "end_date"
+    t.boolean  "on_web",                :default => true
+    t.integer  "theme_id"
+    t.integer  "core_area_id"
+    t.integer  "weight",                :default => 100
+    t.integer  "study_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_secondary",          :default => false
   end
 
   create_table "datatables_variates", :force => true do |t|
@@ -237,7 +252,7 @@ ActiveRecord::Schema.define(:version => 20100201141347) do
   create_table "scribbles", :force => true do |t|
     t.integer "person_id"
     t.integer "protocol_id"
-    t.integer "order"
+    t.integer "weight"
   end
 
   create_table "sessions", :force => true do |t|
@@ -275,7 +290,11 @@ ActiveRecord::Schema.define(:version => 20100201141347) do
   create_table "studies", :force => true do |t|
     t.string  "name"
     t.text    "description"
-    t.integer "seniority"
+    t.integer "weight"
+    t.integer "parent_id"
+    t.integer "lft"
+    t.integer "rgt"
+    t.text    "synopsis"
   end
 
   create_table "taggings", :force => true do |t|
@@ -296,22 +315,26 @@ ActiveRecord::Schema.define(:version => 20100201141347) do
   end
 
   create_table "themes", :force => true do |t|
-    t.string  "title"
-    t.integer "priority"
+    t.string  "name"
+    t.integer "weight"
+    t.integer "parent_id"
+    t.integer "lft"
+    t.integer "rgt"
   end
 
   create_table "treatments", :force => true do |t|
     t.string  "name"
     t.text    "description"
     t.integer "study_id"
-    t.integer "priority"
+    t.integer "weight"
   end
 
   create_table "units", :force => true do |t|
     t.string  "name"
     t.text    "description"
-    t.boolean "in_eml",      :default => false
+    t.boolean "in_eml",                     :default => false
     t.text    "definition"
+    t.string  "human_name",  :limit => nil
   end
 
   add_index "units", ["name"], :name => "unit_names_key", :unique => true
@@ -319,7 +342,7 @@ ActiveRecord::Schema.define(:version => 20100201141347) do
   create_table "variates", :force => true do |t|
     t.string  "name"
     t.integer "datatable_id"
-    t.integer "position"
+    t.integer "weight"
     t.text    "description"
     t.string  "missing_value_indicator"
     t.integer "unit_id"

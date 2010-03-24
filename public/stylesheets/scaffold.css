@@ -13,12 +13,14 @@ pre {
   font-size: 11px;
 }
 
-a { color: #000; }
+a { 
+	color: #000;
+	 }
 a:visited { 
 	color: #666; 
 	text-decoration: none; 
 }
-a:hover { color: #fff; background-color:#000; }
+a:hover { color: #000; background-color:#eee; }
 
 .fieldWithErrors {
   padding: 2px;

@@ -1,4 +1,5 @@
 <% @themes.each do |theme| -%>
+  <% next if theme.datatables? %>
 	<h2><%= theme.name %></h2>
 		<ul>
 		<% theme.datasets.each do |dataset| -%>

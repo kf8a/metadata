@@ -1,0 +1,4 @@
+<li id="<%= study.id %>" class='sortable_container'>
+  <p><%= study.name %> <%= link_to 'edit', edit_study_path(study)%></p>
+  <input type='hidden' value="<%=study.id %>"/>
+</li>

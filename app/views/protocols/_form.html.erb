@@ -33,3 +33,7 @@
 	<% @datasets = Dataset.find(:all).map {|x| [x.dataset, x.id]} %>
 	<%= f.select :dataset_id, @datasets %>
 </p>
+
+<div class="wmd-preview"></div>
+  
+  <script type="text/javascript" src="javascripts/wmd/wmd.js""></script>

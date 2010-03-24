@@ -16,7 +16,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :datasets, :collection => {:set_affiliation_for => :post,
                                            :auto_complete_for_keyword_list => :get}
 
-  map.resources :datatables
+  map.resources :datatables, :collection => {:suggest => :get}
 
   map.resources :variates
 
@@ -29,6 +29,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :meetings
   
   map.resources :units
+  
+  map.resources :themes
+  
+  map.resources :studies
   
   map.root :controller => 'datasets'
 

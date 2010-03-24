@@ -1,6 +1,7 @@
 class DatasetsController < ApplicationController
       
-  before_filter :set_title, :allow_on_web
+  before_filter :set_title
+  before_filter :allow_on_web, :except => [:autocomplete_for_keyword_list]
   before_filter :login_required, :except => [:index, :show, :auto_complete_for_keyword_list] if ENV["RAILS_ENV"] == 'production'
   
   layout proc {|controller| controller.request.format == :eml ? false : 'application'}
@@ -17,38 +18,16 @@ class DatasetsController < ApplicationController
     if params[:Dataset] 
       request.format = :eml
     end
-    query =  {'theme' => {'id' => nil}, 'person' => {'id' => nil}, 'study' => {'id' => nil}, 
-      'keywords' => '', 'date' => {'syear' => '1988', 'eyear' => Date.today.year.to_s}}
-    query.merge!(params)
-    
-    theme_id = query['theme']['id']
-    person_id = query['person']['id']
-    study_id = query['study']['id']
-    keyword_list = query['keyword_list']
-    date = query['date']
+     keyword_list = params['keyword_list']
         
     @people = Person.find_all_with_dataset(:order => 'sur_name')
-    @themes = Theme.find(:all, :order => :priority)
+    @themes = Theme.find(:all, :order => :weight)
 
-    if theme_id && !theme_id.empty?
-      @theme = Theme.find(theme_id)
-    end
-    
-    if person_id && !person_id.empty?
-      @person = Person.find(person_id)
-    end
-    
-    if study_id && !study_id.empty?
-      @study = Study.find(study_id)
-    end
-    
     if keyword_list
       @keyword_list = keyword_list
     end
             
-   @datasets = Dataset.find_by_params({:theme => {:id => theme_id}, :person => {:id => person_id},
-          :study => {:id => study_id}, :date => {:syear => date['syear'], :eyear => date['eyear']},
-          :keywords => keyword_list})
+   @datasets = Dataset.all
 
   
    @studies = @datasets.collect do |dataset|
@@ -58,7 +37,7 @@ class DatasetsController < ApplicationController
    @studies.flatten!
    @studies.compact!
    @studies.uniq!
-   @studies.sort! {|a,b| a.seniority <=> b.seniority}
+   @studies.sort! {|a,b| a.weight <=> b.weight}
    
    @studies = [@study] if @study
                                      
@@ -94,8 +73,8 @@ class DatasetsController < ApplicationController
   def edit
     @dataset = Dataset.find(params[:id])
     @people = Person.all(:order => 'sur_name')
-    @studies = Study.all(:order => 'seniority')
-    @themes = Theme.all(:order => 'priority')
+    @studies = Study.all(:order => 'weight')
+    @themes = Theme.all(:order => 'weight')
     @roles = Role.find(:all, :conditions => ['role_type_id = ?', RoleType.find_by_name('dataset')])
   end
   
@@ -163,10 +142,10 @@ class DatasetsController < ApplicationController
   end
   
   def auto_complete_for_keyword_list
-    @tags = Tag.find(:all, :conditions => [ 'name LIKE ?',
-        '%' + params[:keyword_list] + '%' ], 
+    tags = Tag.find(:all, :conditions => [ 'name LIKE ?',
+        '%' + params[:q] + '%' ], 
         :order => 'name ASC')
-    render :partial => 'tags'
+    render :text => (tags.collect{|x| x.name}).join("\n")
   end
   
   

@@ -5,12 +5,14 @@ require 'variates_controller'
 class VariatesController; def rescue_action(e) raise e end; end
 
 class VariatesControllerTest < ActionController::TestCase
-  fixtures :variates
+  #fixtures :variates
 
   def setup
     @controller = VariatesController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
+    @variate = Factory.create(:variate)
+    Factory.create(:variate)
   end
 
   def test_should_get_index
@@ -33,23 +35,23 @@ class VariatesControllerTest < ActionController::TestCase
   end
 
   def test_should_show_variate
-    get :show, :id => 51
+    get :show, :id => @variate.id
     assert_response :success
   end
 
   def test_should_get_edit
-    get :edit, :id => 51
+    get :edit, :id => @variate.id
     assert_response :success
   end
   
   def test_should_update_variate
-    put :update, :id => 51, :variate => { }
+    put :update, :id => @variate, :variate => { }
     assert_redirected_to variate_path(assigns(:variate))
   end
   
   def test_should_destroy_variate
     old_count = Variate.count
-    delete :destroy, :id => 51
+    delete :destroy, :id => @variate
     assert_equal old_count-1, Variate.count
     
     assert_redirected_to variates_path

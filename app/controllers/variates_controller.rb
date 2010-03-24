@@ -24,6 +24,14 @@ class VariatesController < ApplicationController
   # GET /variates/new
   def new
     @variate = Variate.new
+    respond_to do |format|
+       format.html
+       format.js do
+         render :update do |page|
+           page.insert_html :bottom, 'variates', :partial => "new"
+         end
+       end
+     end
   end
 
   # GET /variates/1;edit

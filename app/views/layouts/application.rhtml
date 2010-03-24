@@ -5,9 +5,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<title>LTER: <%= controller.controller_name %>:<%= controller.action_name %></title>
-	<%= stylesheet_link_merged :base %>
-	<%= stylesheet_link_tag "print", :media =>"print"%>
-  <%= javascript_include_merged :base %>
+	<%= stylesheet_link_merged :base, :media=>'screen,print' %>
+  	
+  <link rel="alternate" type="application/rss+xml" title="Data" href="/datatables.rss" />
 </head>
 <body>
 	<div id='wrapper'>
@@ -21,7 +21,7 @@
 					<a href="/people">People</a>
 
 					<form action="http://www.google.com/u/ltersearch" method='get' id="searchform">
-						<input type='text' name='q' maxlength='255' size='20' value="Search KBS LTER" onfocus="if(this.value==defaultValue) this.value=''" onblur="if(this.value=='') this.value=defaultValue" />
+						<input id='peoplesearch' type='text' name='q' maxlength='255' size='20' value="Search KBS LTER"/>
 					</form>
 				</div>
 				<h2><a href='/'>The KBS LTER Site</a></h2>
@@ -51,6 +51,19 @@
 			<%= render :file  => "#{RAILS_ROOT}/public/system/footer.html"%>
 		</div>
 	</div>
+  <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> -->
+  
+  <script type='text/javascript' src='/javascripts/jquery-1.4.2.min.js'></script>
+  <script type='text/javascript' src='/javascripts/jquery-ui.min.js'></script>
+  
+  <script type="text/javascript" src="/javascripts/jquery.quickTree.js" ></script>
+  <script type='text/javascript' src='/javascripts/jquery.truncator.js'></script>
+  <script>jQuery.noConflict();</script>
+  
+  <!-- <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+  <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script> -->
+  
+  <%= javascript_include_merged :base %>
 	<script type="text/javascript">
   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
