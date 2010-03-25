@@ -11,7 +11,13 @@ class Person < ActiveRecord::Base
   #acts_as_taggable
   
   def get_all_lter_roles
-    roles = lter_roles.collect {|x| x.name.singularize }
+    lter_roles.collect {|x| x.name.singularize }
+  end
+  
+  def get_committee_roles
+    lter_roles.collect do |x|
+      x.name.singularize if x.committee?
+    end.compact
   end
   
   def only_emeritus?

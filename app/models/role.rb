@@ -6,4 +6,9 @@ class Role < ActiveRecord::Base
   def emeritus?
     name =~ /^Emeritus/
   end
+  
+  def committee?
+    name =~ /Committee/ || name =~/Network Representatives/
+  end
+  
 end
