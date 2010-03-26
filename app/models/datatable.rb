@@ -75,7 +75,12 @@ class Datatable < ActiveRecord::Base
   
   def to_csv
     values  = ActiveRecord::Base.connection.execute(object)
-    csv_string = CSV.generate do |csv|
+    if RUBY_VERSION > "1.9"
+      output = CSV
+    else
+      output = FasterCSV
+    end
+    csv_string = output.generate do |csv|
       csv << variates.collect {|v| v.name }
       values.each do |row|
         csv << row.values

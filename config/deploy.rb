@@ -59,7 +59,7 @@ namespace :deploy do
   after :deploy, :update_spinks
 end
 
-desc 'Update spinks'
+desc 'Update sphinks'
 task :update_spinks do
   run "cd #{release_path};rake ts:stop RAILS_ENV=production"
   run "cd #{release_path};rake ts:index RAILS_ENV=production"
