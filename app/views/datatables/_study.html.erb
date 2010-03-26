@@ -1,4 +1,4 @@
-<li class='study-title' id='study_<%=study.id%>'><%= study.name %> <%= link_to 'edit', edit_study_path(study) if logged_in?%>
+<li class='study-title' id='study_<%=study.id%>'><%= study.name %> <%= link_to 'edit', edit_study_path(study), :class=>'edit' if logged_in?%>
   <% unless  study.synopsis == '' %>
   <p><%= study.synopsis%></p>
   <% end %>

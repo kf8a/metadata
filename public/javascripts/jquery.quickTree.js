@@ -53,7 +53,8 @@ jQuery.fn.quickTree = function() {
 			//if list-item contains a child list
 			if (jQuery(this).children('ul').length > 0) {
 				//add expand/contract control
-				jQuery(this).addClass('root').prepend('<span class="expand" />');
+				
+				jQuery(this).addClass('root').contents(':first').wrap('<span class="expand" />');
 				jQuery(this).parent().addClass('expanded');
 			}
 			}); //end .each
