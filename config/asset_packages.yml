@@ -4,9 +4,12 @@ javascripts:
   - prototype
   - effects
   - controls
+  - jquery.truncator
+  - jquery.quickTree
   - application
   - textile-editor
   - textile-editor-config
+
 stylesheets: 
 - base: 
   - branding
@@ -15,4 +18,4 @@ stylesheets:
   - navigation
   - scaffold
   - textile-editor
-  - jquery-ui.custom
+
