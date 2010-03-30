@@ -1,7 +1,7 @@
 class PublicationsController < ApplicationController
   
   before_filter :login_required, :except => [:index, :show, :index_by_treatment]  if ENV["RAILS_ENV"] == 'production'
-  caches_action :index
+  #caches_action :index
   
   # GET /publications
   # GET /publications.xml
