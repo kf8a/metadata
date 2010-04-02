@@ -88,7 +88,33 @@ class Datatable < ActiveRecord::Base
     end
     # delete empty string values
     #csv_string.gsub!(/\,\"\"/,',')
-    return  csv_string
+    #prepend the data access statement and source info
+    
+    return  data_access_statement + data_source +  csv_string
+  end
+  
+  def data_contact
+    # contact = self.dataset.principal_contact
+    # "#{contact.full_name} #{contact.email} #{contact.phone}"
+  end
+  
+  def data_source
+    "#\n# Data Source: http://lter.kbs.msu.edu/datatables/#{self.id}
+# Metadata: http://lter.kbs.msu.edu/datatables/#{self.id}.eml\n#\n#"
+  end
+  
+  def data_access_statement
+    "# Terms of Use
+#   Data in the KBS LTER core database may not be published without written permission of the lead investigator
+#   or project director. These restrictions are intended mainly to preserve the primary investigators' rights
+#   to first publication and to ensure that data users are aware of the limitations that may be associated with
+#   any specific data set. These restrictions apply to both the baseline data set and to the data sets associated
+#   with specific LTER-supported subprojects.\n#
+#   All investigators on-site are expected to release their data to the core database within
+#   a reasonable period of time following subproject completion.\n#
+#   Access to data is provided by the KBS LTER Data Manager with oversight provided by the Executive Committee,
+#   chaired by the Project Director. Access to sample archives is provided by the Project Director.
+#   All publications of KBS data and images must acknowledge KBS LTER support.\n"
   end
   
   def temporal_extent
@@ -136,7 +162,8 @@ private
     p.add_element('encodingMethod').add_text('None')
     dataformat = p.add_element('dataFormat').add_element('textFormat')
     dataformat.add_element('attributeOrientation').add_text('column')
-    dataformat.add_element('simleDelimiter').add_element('fieldDelimiter').add_text(',')
+    dataformat.add_element('simpleDelimiter').add_element('fieldDelimiter').add_text(',')
+    dataformat.add_element('numHeaderLines').add_text('18')
     p.add_element('distribution').add_element('online').add_element('url').add_text(data_url)
     return p
   end

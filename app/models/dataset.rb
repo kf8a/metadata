@@ -32,6 +32,8 @@ class Dataset < ActiveRecord::Base
     any_within_interval.include?(true)
   end
   
+  def principal_contact
+  end
     
   #unpack and populate datatables and variates  
   def from_eml(dataset)
