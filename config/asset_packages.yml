@@ -18,5 +18,14 @@ stylesheets:
   - navigation
   - scaffold
   - textile-editor
-  - jquery.ui.base
+  - jquery.ui.core
+  - jquery.ui.resizable
+  - jquery.ui.accordion
+  - jquery.ui.autocomplete
+  - jquery.ui.button
+  - jquery.ui.dialog
+  - jquery.ui.slider
+  - jquery.ui.tabs
+  - jquery.ui.datepicker
+  - jquery.ui.progressbar
 
