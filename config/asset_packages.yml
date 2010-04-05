@@ -18,4 +18,5 @@ stylesheets:
   - navigation
   - scaffold
   - textile-editor
+  - themes/base/jquery.ui.base
 
