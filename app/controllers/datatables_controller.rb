@@ -169,15 +169,15 @@ class DatatablesController < ApplicationController
 
     if datatable.study
       study = datatable.study
-      crumb.url = study_path(study)
+      #crumb.url = study_path(study)
       crumb.name = study.name
       @crumbs << crumb
     end
-    crumb = Struct::Crumb.new
-    
-    crumb.url =  dataset_path(datatable.dataset)
-    crumb.name = datatable.dataset.title
-    @crumbs << crumb
+    # crumb = Struct::Crumb.new
+    # 
+    # crumb.url =  dataset_path(datatable.dataset)
+    # crumb.name = datatable.dataset.title
+    # @crumbs << crumb
   
   end
   
