@@ -24,6 +24,8 @@ class Datatable < ActiveRecord::Base
     indexes dataset.affiliations.person.given_name, :as => :given_name
     indexes keywords(:name), :as => :keyword
     indexes dataset.title, :as => :dataset_title
+    indexes dataset.dataset, :as => :dataset_identifier
+    indexes name
     where "datatables.on_web is true and datasets.on_web"
     
     #set_property :field_weights => {:keyword => 20, :theme => 20, :title => 10}
