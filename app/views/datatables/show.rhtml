@@ -25,7 +25,7 @@ The <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use po
     <% if @datatable.study.url.nil? || @datatable.study.url.empty? %>
       <%= @datatable.study.name %>
     <% else %>
-      <%= link_to "#{@datatabe.study.name}", @datatable.study.url %>
+      <%= link_to "#{@datatable.study.name}", @datatable.study.url %>
     <% end %>
   </td>
 </tr>
