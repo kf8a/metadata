@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100308223149) do
+ActiveRecord::Schema.define(:version => 20100414132157) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -109,6 +109,13 @@ ActiveRecord::Schema.define(:version => 20100308223149) do
     t.integer "coord_dimension",                  :null => false
     t.integer "srid",                             :null => false
     t.string  "type",              :limit => 30,  :null => false
+  end
+
+  create_table "log_hiresyieldmanagement", :id => false, :force => true do |t|
+    t.date    "obsdate"
+    t.integer "obsnumber"
+    t.string  "author"
+    t.text    "observation"
   end
 
   create_table "meeting_abstracts", :force => true do |t|
@@ -295,6 +302,7 @@ ActiveRecord::Schema.define(:version => 20100308223149) do
     t.integer "lft"
     t.integer "rgt"
     t.text    "synopsis"
+    t.string  "url"
   end
 
   create_table "taggings", :force => true do |t|
