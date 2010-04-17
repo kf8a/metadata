@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'rexml/document'
 require 'csv'
 include REXML
@@ -85,14 +87,32 @@ class Datatable < ActiveRecord::Base
     csv_string = output.generate do |csv|
       csv << variates.collect {|v| v.name }
       values.each do |row|
+        row["comment"] = Iconv.iconv("LATIN1", "UTF-8", row["comment"])
         csv << row.values
       end
     end
     # delete empty string values
     #csv_string.gsub!(/\,\"\"/,',')
     #prepend the data access statement and source info
-    
     return  data_access_statement + data_source +  csv_string
+  end
+  
+  def from_utf8(str, encoding_to='US-ASCII')
+    ic = Iconv.new encoding_to, 'UTF-8' 
+    non_utf_str = ""
+    begin 
+      non_utf_str << ic.iconv(str)
+    rescue Exception => e
+      non_utf_str << e.success
+      p non_utf_str
+      p e.failed.chars
+      ch, str = e.failed.chars #.split(//,2)
+      p ch
+      p str
+      non_utf_str << "?"
+      retry
+    end
+    return non_utf_str
   end
   
   def data_contact
