@@ -90,7 +90,6 @@ class DatatablesControllerTest < ActionController::TestCase
       get :show,  :id => table, :format => '.climdb'
     end
     
-    should_respond_with :success
   end
   
 end
