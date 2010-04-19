@@ -62,7 +62,8 @@ class DatatablesController < ApplicationController
     respond_to do |format|
       format.html # show.rhtml
       format.xml  { render :xml => @datatable.to_xml unless restricted}
-      format.csv  { render :text => @datatable.to_csv unless restricted}
+      format.csv  { render :text => @datatable.to_csv_with_metadata unless restricted}
+      format.climdb { render :text => @datatable.to_climdb unless restricted }
     end
   end
 

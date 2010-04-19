@@ -87,14 +87,19 @@ class Datatable < ActiveRecord::Base
     csv_string = output.generate do |csv|
       csv << variates.collect {|v| v.name }
       values.each do |row|
-        row["comment"] = Iconv.iconv("LATIN1", "UTF-8", row["comment"])
         csv << row.values
       end
     end
-    # delete empty string values
-    #csv_string.gsub!(/\,\"\"/,',')
-    #prepend the data access statement and source info
-    return  data_access_statement + data_source +  csv_string
+    csv_string
+  end
+  
+  def to_csv_with_metadata
+    data_access_statement + data_source +  to_csv
+  end
+
+  def to_climdb
+    csv_string = to_csv
+    '!' + csv_string
   end
   
   def from_utf8(str, encoding_to='US-ASCII')

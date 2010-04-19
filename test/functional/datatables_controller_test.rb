@@ -84,4 +84,13 @@ class DatatablesControllerTest < ActionController::TestCase
     
   end
   
+  context 'GET /datatables/1.climdb' do
+    setup do 
+      table = Factory.create(:datatable, :description=>nil, :dataset => Factory.create(:dataset))
+      get :show,  :id => table, :format => '.climdb'
+    end
+    
+    should_respond_with :success
+  end
+  
 end
