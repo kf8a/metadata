@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100414132157) do
+ActiveRecord::Schema.define(:version => 20100421190055) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -35,6 +35,16 @@ ActiveRecord::Schema.define(:version => 20100414132157) do
   create_table "core_areas", :force => true do |t|
     t.string "name"
   end
+
+  create_table "data_contributions", :force => true do |t|
+    t.integer  "person_id"
+    t.integer  "datatable_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "data_contributions", ["datatable_id", "person_id", "role_id"], :name => "data_contributions_uniq_idx", :unique => true
 
   create_table "datasets", :force => true do |t|
     t.string   "dataset"

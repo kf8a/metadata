@@ -11,6 +11,8 @@ class PersonTest < ActiveSupport::TestCase
     r.name 'Emeritus something'
   end
   
+  should_have_many :datatables, :through => :data_contributions
+  
   context 'an emeritus' do 
     setup do
       @emeritus = Factory.create(:person, :lter_roles  => [Factory.create(:role)])

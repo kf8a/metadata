@@ -5,6 +5,9 @@ class Person < ActiveRecord::Base
   has_many :datasets, :through => :affiliations,  :source => :dataset
   has_many :scribbles
   has_many :protocols, :through => :scribbles
+  
+  has_many :data_contributions
+  has_many :datatables, :through => :data_contributions
     
   accepts_nested_attributes_for :affiliations, :allow_destroy => true
   

@@ -7,6 +7,8 @@ class DatatableTest < ActiveSupport::TestCase
   should_belong_to :dataset
   should_belong_to :study
   
+  should_have_many :data_contributions
+  
   should_validate_presence_of :title
     
   context 'datatable' do

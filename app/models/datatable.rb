@@ -12,7 +12,12 @@ class Datatable < ActiveRecord::Base
   belongs_to :core_area
   belongs_to :study
   
+  has_many :data_contributions
+  has_many :people, :through => :data_contributions
+    
   validates_presence_of :title
+  
+  accepts_nested_attributes_for :data_contributions
   
   accepts_nested_attributes_for :variates
   
@@ -35,11 +40,11 @@ class Datatable < ActiveRecord::Base
   
   def personnel
     h = {}
-    dataset.affiliations.each do |affiliation|
-      if h[affiliation.person]
-        h[affiliation.person] = h[affiliation.person].push((affiliation.role.name))
+    data_contributions.each do |contribution|
+      if h[contribution.person]
+        h[contribution.person] = h[contribution.person].push((contribution.role.name))
       else
-        h[affiliation.person] = [affiliation.role.name]
+        h[contribution.person] = [contribution.role.name]
       end
     end
     h
@@ -86,7 +91,6 @@ class Datatable < ActiveRecord::Base
     end
     csv_string = output.generate do |csv|
       csv << variates.collect {|v| v.name }
-      p csv
       values.each do |row|
         csv << row.values
       end

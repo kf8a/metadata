@@ -11,4 +11,7 @@ class Role < ActiveRecord::Base
     name =~ /Committee/ || name =~/Network Representatives/
   end
   
+  def Role.data_roles
+    self.find(:all, :conditions => "role_type_id = #{RoleType.find_by_name('dataset').id}")
+  end
 end
