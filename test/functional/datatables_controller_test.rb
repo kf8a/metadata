@@ -90,6 +90,8 @@ class DatatablesControllerTest < ActionController::TestCase
       get :show,  :id => table, :format => '.climdb'
     end
     
+    
+    
   end
   
 end

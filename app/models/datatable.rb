@@ -86,6 +86,7 @@ class Datatable < ActiveRecord::Base
     end
     csv_string = output.generate do |csv|
       csv << variates.collect {|v| v.name }
+      p csv
       values.each do |row|
         csv << row.values
       end
@@ -94,32 +95,15 @@ class Datatable < ActiveRecord::Base
   end
   
   def to_csv_with_metadata
-    data_access_statement + data_source +  to_csv
+    Iconv.conv('utf-16','utf-8', data_access_statement + data_source + to_csv)
+#    data_access_statement + data_source +  to_csv
   end
 
   def to_climdb
     csv_string = to_csv
     '!' + csv_string
   end
-  
-  def from_utf8(str, encoding_to='US-ASCII')
-    ic = Iconv.new encoding_to, 'UTF-8' 
-    non_utf_str = ""
-    begin 
-      non_utf_str << ic.iconv(str)
-    rescue Exception => e
-      non_utf_str << e.success
-      p non_utf_str
-      p e.failed.chars
-      ch, str = e.failed.chars #.split(//,2)
-      p ch
-      p str
-      non_utf_str << "?"
-      retry
-    end
-    return non_utf_str
-  end
-  
+    
   def data_contact
     # contact = self.dataset.principal_contact
     # "#{contact.full_name} #{contact.email} #{contact.phone}"
