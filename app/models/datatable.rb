@@ -39,7 +39,14 @@ class Datatable < ActiveRecord::Base
   end
   
   def personnel
-    h = {}
+    h = datatable_personnel
+    if h.empty?
+      h = dataset_personnel
+    end
+    h
+  end
+  
+  def datatable_personnel(h = {})
     data_contributions.each do |contribution|
       if h[contribution.person]
         h[contribution.person] = h[contribution.person].push((contribution.role.name))
@@ -48,6 +55,17 @@ class Datatable < ActiveRecord::Base
       end
     end
     h
+  end
+  
+  def dataset_personnel(h = {})
+    dataset.affiliations.each do |contribution|
+      if h[contribution.person]
+        h[contribution.person] = h[contribution.person].push((contribution.role.name))
+      else
+        h[contribution.person] = [contribution.role.name]
+      end
+    end
+    h 
   end
   
   def within_interval?(start_date=Date.today, end_date=Date.today)
