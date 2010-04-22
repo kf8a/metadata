@@ -46,15 +46,15 @@ class Datatable < ActiveRecord::Base
     h
   end
   
-  def datatable_personnel(h = {})
+  def datatable_personnel
     compile_personnel(data_contributions)
   end
   
-  def dataset_personnel(h = {})
+  def dataset_personnel
     compile_personnel(dataset.affiliations)
   end
   
-  def compile_personnel(h = {}, source)
+  def compile_personnel(source, h={})
     source.each do |contribution|
       if h[contribution.person]
         h[contribution.person] = h[contribution.person].push((contribution.role.name))
