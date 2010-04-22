@@ -99,8 +99,9 @@ class Datatable < ActiveRecord::Base
   end
   
   def to_csv_with_metadata
+    # stupid microsofts
     result = data_access_statement + data_source +  to_csv
-    if is_utf-8
+    if is_utf_8
       result = Iconv.conv('utf-16','utf-8', result)
     end
     result
