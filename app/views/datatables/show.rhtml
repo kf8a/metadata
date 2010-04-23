@@ -98,7 +98,7 @@ end -%>
 </table>
 
 <% unless  @datatable.is_sql %>
-  <% unless @datatable.object.empty? %>
+  <% unless @datatable.object.nil? %>
 <%= link_to 'Data', @datatable.data_url %> (on a different page)
   <% end %>
 <% end %>
