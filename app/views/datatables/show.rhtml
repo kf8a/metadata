@@ -98,7 +98,9 @@ end -%>
 </table>
 
 <% unless  @datatable.is_sql %>
+  <% unless @datatable.object.empty? %>
 <%= link_to 'Data', @datatable.data_url %> (on a different page)
+  <% end %>
 <% end %>
 <table class='variate-table'>
 	<tr>
