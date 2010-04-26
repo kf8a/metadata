@@ -11,6 +11,7 @@ class Datatable < ActiveRecord::Base
   belongs_to :theme
   belongs_to :core_area
   belongs_to :study
+  belongs_to :website
   
   has_many :data_contributions
   has_many :people, :through => :data_contributions
