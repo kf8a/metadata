@@ -23,6 +23,10 @@
   <%= f.select :study_id, Study.all.collect{|x| [x.name, x.id]}, :include_blank => true %>
 </p>
 <p>
+  <label for='datatable_website_id'>Website</label>
+  <%= f.select :website_id, Website.all.collect {|x| [x.name, x.id]}%>
+</p>
+<p>
   <label for='datatable_theme'>KBS Theme</label>
   <%= f.select :theme_id, nested_set_options(Theme, @theme) {|i| "#{'-' * i.level} #{i.name}" }, :include_blank => true %>
 </p>
