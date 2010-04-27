@@ -34,6 +34,7 @@ class Datatable < ActiveRecord::Base
     indexes dataset.title, :as => :dataset_title
     indexes dataset.dataset, :as => :dataset_identifier
     indexes name
+    indexes website.name, :as => :website
     where "datatables.on_web is true and datasets.on_web"
     
     #set_property :field_weights => {:keyword => 20, :theme => 20, :title => 10}
@@ -115,6 +116,8 @@ class Datatable < ActiveRecord::Base
   end
   
   def to_csv_with_metadata
+    # TODO test if file exists and send that
+    
     # stupid microsofts
     result = data_access_statement + data_source +  to_csv
     if is_utf_8

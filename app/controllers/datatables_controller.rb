@@ -17,11 +17,12 @@ class DatatablesController < ApplicationController
             
     @keyword_list = query['keyword_list']
     @keyword_list = nil if @keyword_list.empty? || @keyword_list == @default_value
-    
+
     if @keyword_list
       @datatables = Datatable.search @keyword_list
     else
-      @datatables = Datatable.find(:all, :conditions => ['is_secondary is false'])
+      @datatables = Datatable.find(:all, :conditions => ['is_secondary is false and website_id = ?', 
+          Website.find_by_name('LTER')])
     end
     
     @studies = Study.find_all_roots_with_datatables(@datatables, {:order => 'weight'})
