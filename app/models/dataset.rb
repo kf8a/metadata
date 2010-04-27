@@ -21,6 +21,12 @@ class Dataset < ActiveRecord::Base
     person = Person.find(id)
     people.exists?(person)
   end
+  
+  def datatable_people
+    datatables.collect do |table|
+      table.people
+    end.flatten
+  end
    
   def within_interval?(start_date=Date.today, end_date=Date.today)   
     sdate = start_date.to_date
@@ -55,15 +61,17 @@ class Dataset < ActiveRecord::Base
     eml_dataset.add_element('title').add_text(title)
     creator = eml_dataset.add_element('creator', {'id' => 'KBS LTER'})
     creator.add_element('positionName').add_text('Data Manager')
-    people.each do | person |
-      p = eml_dataset.add_element('associatedParty', {'id' => person.person, 'scope' => 'document'})      
-      p.add_element eml_individual_name(person)
-      p.add_element address(person)
-      p.add_element('phone', {'phonetype' => 'phone'}).add_text(person.phone) if person.phone
-      p.add_element('phone',{'phonetype' => 'fax'}).add_text(person.fax) if person.fax
-      p.add_element('electronicMailAddress').add_text(person.email) if person.email
-#      p.add_element('role').add_text(person)
-    end
+    
+    [people, datatable_people].flatten.uniq.each do |person|
+        p = eml_dataset.add_element('associatedParty', {'id' => person.person, 'scope' => 'document'})      
+        p.add_element eml_individual_name(person)
+        p.add_element address(person)
+        p.add_element('phone', {'phonetype' => 'phone'}).add_text(person.phone) if person.phone
+        p.add_element('phone',{'phonetype' => 'fax'}).add_text(person.fax) if person.fax
+        p.add_element('electronicMailAddress').add_text(person.email) if person.email
+        #      p.add_element('role').add_text(person)
+      end
+    
     eml_dataset.add_element('abstract').add_element('para').add_text(abstract)
     eml_dataset.add_element keyword_sets
     eml_dataset.add_element contact_info
