@@ -46,8 +46,8 @@
           <td><%= select_tag 'datatable[data_contributions_attributes][][person_id]',  options_from_collection_for_select(Person.all, :id, :short_full_name, contribution.person_id) %></td>
           <td><%= select_tag 'datatable[data_contributions_attributes][][role_id]', options_from_collection_for_select(Role.data_roles, :id, :name, contribution.role_id) %></td>
           <td>
-      		  <%= check_box_tag 'datatable[contributions_attributes][][_delete]' %>
-      		  <%= hidden_field_tag 'datatable[contributions_attributes][][id]', contribution.id %>
+      		  <%= check_box_tag 'datatable[data_contributions_attributes][][_delete]' %>
+      		  <%= hidden_field_tag 'datatable[data_contributions_attributes][][id]', contribution.id %>
       		</td>
         </tr>
       <% end %>
