@@ -10,6 +10,7 @@ class Dataset < ActiveRecord::Base
   has_and_belongs_to_many :themes
   belongs_to :project
   has_and_belongs_to_many :studies
+  belongs_to :sponsor
   
   validates_presence_of :abstract
 

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100426124331) do
+ActiveRecord::Schema.define(:version => 20100507132118) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20100426124331) do
     t.integer  "metacat_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "sonsor_id"
   end
 
   add_index "datasets", ["dataset"], :name => "datasets_dataset_key", :unique => true
@@ -121,6 +122,13 @@ ActiveRecord::Schema.define(:version => 20100426124331) do
     t.integer "coord_dimension",                  :null => false
     t.integer "srid",                             :null => false
     t.string  "type",              :limit => 30,  :null => false
+  end
+
+  create_table "locations", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "log_hiresyieldmanagement", :id => false, :force => true do |t|
@@ -304,6 +312,11 @@ ActiveRecord::Schema.define(:version => 20100426124331) do
     t.string  "alternate_common_name"
     t.string  "attribution"
     t.boolean "woody"
+  end
+
+  create_table "sponsors", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "studies", :force => true do |t|
