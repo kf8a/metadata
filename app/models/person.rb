@@ -8,6 +8,8 @@ class Person < ActiveRecord::Base
   
   has_many :data_contributions
   has_many :datatables, :through => :data_contributions
+  
+  has_many :datafiles
     
   accepts_nested_attributes_for :affiliations, :allow_destroy => true
   
