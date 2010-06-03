@@ -10,7 +10,7 @@
 # It's strongly recommended to check this file into your version control system.
 
 ActiveRecord::Schema.define(:version => 20100618120203) do
-
+  
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
     t.integer "role_id"
@@ -390,12 +390,15 @@ ActiveRecord::Schema.define(:version => 20100618120203) do
     t.integer "weight"
   end
 
-  create_table "units", :force => true do |t|
+  create_table "units", :id => false, :force => true do |t|
+    t.integer "id",                                                 :null => false
     t.string  "name"
     t.text    "description"
-    t.boolean "in_eml",                     :default => false
+    t.boolean "in_eml",                          :default => false
     t.text    "definition"
-    t.string  "human_name",  :limit => nil
+    t.string  "human_name",       :limit => nil
+    t.integer "deprecated_to"
+    t.integer "unit_registry_id"
   end
 
   add_index "units", ["name"], :name => "unit_names_key", :unique => true
@@ -432,6 +435,7 @@ ActiveRecord::Schema.define(:version => 20100618120203) do
     t.float   "precision"
     t.text    "query"
     t.integer "variate_theme_id"
+    t.integer "registry_unit_id"
   end
 
   create_table "venue_types", :force => true do |t|
