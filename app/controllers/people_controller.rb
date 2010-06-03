@@ -1,6 +1,7 @@
 class PeopleController < ApplicationController
       
-  skip_filter :login_required, :only => ['alphabetical','show','index', 'emeritus']
+  before_filter :login_required, :except => [:index, :show, :alphabetical, :emeritus] if ENV["RAILS_ENV"] == 'production'
+  
   caches_action :index
 
   # GET /people
