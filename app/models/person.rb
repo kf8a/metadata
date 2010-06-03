@@ -56,11 +56,26 @@ class Person < ActiveRecord::Base
     self.dataset_roles.map(&:name).sort.uniq
   end
   
+  def usa_address?
+    return (country.nil? || country == '' || country.downcase =='usa' || country.downcase == 'us')
+  end
+  
+  def complete_address?
+    !(city.nil? || street_address.nil? || postal_code.nil? || locale.nil?  \
+       || city.strip.empty? || street_address.strip.empty? \
+      || postal_code.strip.empty? || locale.strip.empty?) || !usa_address?
+  end
+  
   def address
-    address = city || ''
-    address = address + ' '
-    address = street_address || ''
-    return address
+    cty = city || ''
+    str = street_address || ''
+    lcl = locale || ""
+    pc = postal_code || ''
+    if usa_address?
+      "#{str} #{cty}, #{lcl} #{pc}"
+    else
+      "#{str}\n#{pc} #{cty} #{country}"
+    end
   end
   
   def self.find_all_with_dataset(options={})

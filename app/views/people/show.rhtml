@@ -14,8 +14,8 @@
 	<% if @person.organization and @person.organization.strip != '' -%>
 	<li><%= @person.organization%></li>
 	<% end -%>
-	<% if @person.address and @person.address.strip != '' and  @person.postal_code and @person.postal_code.strip != '' -%>
-	<li class='address'><%= @person.city %>&nbsp;<%= @person.locale %>, <%= @person.postal_code %></li>
+	<% if @person.complete_address? %>
+	<li class='address'><%= @person.address %></li>
 	<% end -%>
 	
 
