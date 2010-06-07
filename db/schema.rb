@@ -10,8 +10,8 @@
 # It's strongly recommended to check this file into your version control system.
 
 ActiveRecord::Schema.define(:version => 20100618120203) do
-  
-  create_table "affiliations", :force => true do |t|
+ 
+   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
     t.integer "role_id"
     t.integer "dataset_id"
