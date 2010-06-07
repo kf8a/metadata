@@ -1,0 +1,2 @@
+module GlbrcHelper
+end
