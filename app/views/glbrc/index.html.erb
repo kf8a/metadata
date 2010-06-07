@@ -1,0 +1,43 @@
+<h1>Table of Contents</h1>
+<p id='datatable-intro'>
+  The KBS LTER Data Catalog is a collection of publicly available datatables associated with the site. You are welcome to examine and use the data as you like for personal and class use; data are copyrighted and use in a publication requires permission as detailed in our <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>Terms of use</a>. Please direct questions and comments to the  <a href='mailto:data.manager@kbs.msu.edu'>KBS LTER Information Manager</a>. Click on the triangle next to the experiment title to show associated datatables.
+</p>
+
+<div id='search-form'>
+  <%= form_tag '/datatables', :method => 'get'%>
+  
+      <div id='bottom-line-search'>
+
+      <div id='keyword-search'>
+       <%= text_field_tag :keyword_list, @keyword_list || @default_value , {:id => 'keyworder'}  %>
+      </div>  
+        <div id='search-submit'>
+        <%= submit_tag "Search Datacatalog"%>
+        </div>
+  </div> 
+</div>
+
+
+<ul class='quickTree'>
+  <% @studies.each do |study| -%>
+  <% next unless study.include_datatables?(@datatables)%>
+  
+  <%= render :partial => 'study',  :locals => {:study => study}%>
+  <% end -%>
+</ul>
+
+<% if logged_in? %>
+<h3>Datatables</h3>
+<ul>
+  <% @datatables.each do |datatable| %>
+    <% next if datatable.theme_id %>
+    <li><%= link_to datatable.title_and_years, datatable_path(datatable)%> <%=link_to "edit", edit_datatable_path(datatable)%>
+        <span class='updated_at'>
+          <%= datatable.updated_at.to_date if datatable.updated_at %> 
+        </span>
+      </li>
+    <% end -%>
+</ul>
+<% end %>
+
+<%= link_to 'login', new_sessions_path %>
