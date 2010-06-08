@@ -73,7 +73,7 @@ class Dataset < ActiveRecord::Base
         #      p.add_element('role').add_text(person)
       end
     
-    eml_dataset.add_element('abstract').add_element('para').add_text(abstract)
+    eml_dataset.add_element('abstract').add_element('para').add_text(textilize(abstract))
     eml_dataset.add_element keyword_sets
     eml_dataset.add_element contact_info
     eml_dataset.add_element eml_access
@@ -91,7 +91,7 @@ class Dataset < ActiveRecord::Base
     datatables.each do |datatable|
       eml_dataset.add_element datatable.to_eml
     end
-    eml_dataset.add_element('additionalMetadata').add_element eml_custom_unit_list
+    eml_dataset.add_element('additionalMetadata').add eml_custom_unit_list
     emldoc.root.to_s
   end
   
@@ -133,7 +133,7 @@ private
     e.add_attribute('xsi:schemaLocation',"http://www.xml-cml.org/schema/stmml http://lter.kbs.msu.edu/Data/schemas/stmml.xsd")
     
     custom_units.flatten.compact.sort.uniq.each do |unit|
-      e.add_element(unit)
+      e.add_text unit
     end
     return e
   end
