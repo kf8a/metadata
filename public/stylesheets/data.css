@@ -1,4 +1,4 @@
-.hidden {
+css.hidden {
 	visibility: hidden;
 	height: 0px;;
 }
@@ -27,12 +27,6 @@
 #content ul label {
 	display: inline;
 	font-weight: bold;
-}
-
-.person-name {
-	color: #006633;
-	font-size: 1.4em;
-	margin-bottom: 0.2em;
 }
 
 .even {
