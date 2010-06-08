@@ -63,7 +63,7 @@ class GlbrcController < ApplicationController
   private
     
   def set_title
-    @title  = 'GLBRC Thrust 4'
+    @title  = 'GLBRC Sustainability'
   end
 
 end
