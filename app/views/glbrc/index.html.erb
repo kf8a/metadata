@@ -1,3 +1,4 @@
+
 <h1>Data Catalog</h1>
 <p id='datatable-intro'>
   Thrust 4 activities are designed to inform bioenergy research and technology in order to create sustainable bioenergy practices.  The Thrust 4 Data Catalog is a collection that describes existing data and offers opportunities for data sharing.  To access a data table, please request permission from the lead investigator.  Data are copyrighted and use in a publication requires permission as detailed in our Terms of Use.  Please direct questions to the <a href='mailto:glbrc.data@kbs.msu.edu'>T4 GLBRC Data Coordinator</a>.  
@@ -9,17 +10,13 @@
 <div id='search-form'>
   <%= form_tag '/datatables', :method => 'get'%>
   
-      <div id='bottom-line-search'>
-
       <div id='keyword-search'>
        <%= text_field_tag :keyword_list, @keyword_list || @default_value , {:id => 'keyworder'}  %>
       </div>  
         <div id='search-submit'>
         <%= submit_tag "Search Datacatalog"%>
         </div>
-  </div> 
 </div>
-
 
 <ul class='quickTree'>
   <% @studies.each do |study| -%>
@@ -30,7 +27,7 @@
 </ul>
 
 <h1>Protocols</h1>
-<%= debug @protocols%>
+
 <ul>
   <% @protocols.each do |protocol|%>
   <li><%=h protocol %></li>
