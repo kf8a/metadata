@@ -28,15 +28,6 @@ namespace :deploy do
         invoke_command "thin -C /etc/thin/metadata.yml #{t.to_s}"
       end
     end
-   end
-  namespace :mongrel do
-    [ :stop, :start, :restart ].each do |t|
-      desc "#{t.to_s.capitalize} the mongrel appserver"
-      task t, :roles => :app do
-        #invoke_command checks the use_sudo variable to determine how to run the mongrel_rails command
-        invoke_command "mongrel_rails cluster::#{t.to_s} -C #{mongrel_conf}" #, :via => run_method
-      end
-    end
   end
 
   desc "Custom restart task for thin cluster"
@@ -56,6 +47,7 @@ namespace :deploy do
   
  # after :deploy, :link_paperclip_storage, 
   after :deploy, :link_production_db
+  after :deploy, :link_new_relic
   after :deploy, :update_spinks
 end
 
@@ -71,6 +63,12 @@ end
 desc "Link in the production database.yml"
 task :link_production_db do
   run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
+end
+
+# link newrelic.yml
+desc "Link in the new relic monitoring"
+task :link_new_relic do
+  run "ln -nfs #{deploy_to}/shared/config/newrelic.yml #{release_path}/config/newrelic.yml"
 end
 
 # task :link_paperclip_storage, :roles => :app do

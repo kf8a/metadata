@@ -10,3 +10,4 @@ public/javascripts/base_packaged.js
 .DStore
 tmp/
 config/database.yml
+config/newrelic.yml
