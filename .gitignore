@@ -14,3 +14,6 @@ tmp/
 config/database.yml
 config/newrelic.yml
 *.backup
+doc/models.pdf
+lib/plots.sql
+lib/loadplots.rb

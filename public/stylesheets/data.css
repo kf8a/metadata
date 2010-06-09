@@ -6,7 +6,6 @@ css.hidden {
 	list-style-type: circle;
 	text-indent: 1em;
 	list-style-position: inside;
-	
 }
 
 #content h1 {
@@ -286,7 +285,7 @@ table.data-description {
 tree * {margin:0; padding:0;}
 .tree li {list-style:none; padding-left:21px;}
 .tree li.root {padding-left:0;}
-.tree li li { no-repeat 17px center; margin-left:10px; padding-left:31px;}
+.tree li li { no-repeat: 17px center; margin-left:10px; padding-left:31px;}
 .tree li li.root {padding-left:10px; }
 .tree li li.root.last {background:none; }
 .tree li li.last {}
