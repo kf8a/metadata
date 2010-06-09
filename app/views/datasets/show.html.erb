@@ -1,7 +1,7 @@
 <h1><%= @dataset.dataset %>:<%= @dataset.title %> 
 </h1>
 <p>
-	<%= textilize @dataset.abstract %>
+	<%= textilize @dataset.abstract if @dataset.abstract %>
 </p>
 <ul>
 	<li>Status: <%= @dataset.status %></li>
