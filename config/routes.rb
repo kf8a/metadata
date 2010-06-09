@@ -39,7 +39,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :studies
   
   map.resources :templates
-  
+
+  map.resources :glbrc
+
+  #TODO evaluate the data_contributions model
   map.resources :data_contributions
      
   map.root :controller => 'datatables'

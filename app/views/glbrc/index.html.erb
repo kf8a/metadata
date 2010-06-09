@@ -30,6 +30,12 @@
 </ul>
 
 <h1>Protocols</h1>
+<%= debug @protocols%>
+<ul>
+  <% @protocols.each do |protocol|%>
+  <li><%=h protocol %></li>
+  <% end %>
+</ul>
 <h1>Other Data</h1>
 
 <h1>Data Queue</h1>

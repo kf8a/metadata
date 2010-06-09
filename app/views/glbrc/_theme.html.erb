@@ -4,7 +4,7 @@
     <% datatables.sort! {|a,b| sprintf("%.5i",a.weight) + a.title <=> sprintf("%.5i",b.weight) + b.title}%>
     <% datatables.each do |datatable| -%>
     <li>
-      <%= link_to datatable.title_and_years, datatable_path(datatable) %>
+      <%= link_to datatable.title_and_years, glbrc_path(datatable) %>
       <% if logged_in? %>
         <span class='updated_at'>
          <%= datatable.updated_at.to_date if datatable.updated_at %> 
