@@ -81,6 +81,7 @@
 #glbrc li.study-title li { padding-top: 3px; }
 #glbrc .person-email { padding-top: 0.5em; }
 #glbrc .default { color: grey; }
+#glbrc #content { width: 650px; }
 #glbrc #content h1 {
   font-size: 1.2em;
   font-weight: bold;
