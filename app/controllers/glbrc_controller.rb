@@ -13,7 +13,7 @@ class GlbrcController < ApplicationController
     @keyword_list = nil if @keyword_list.empty? || @keyword_list == @default_value
 
     if @keyword_list
-      @datatables = Datatable.search @keyword_list, :tag => {:website => 'GLBRC'}
+      @datatables = Datatable.search @keyword_list, :with => {:website_id => Website.find_by_name('GLBRC').id}
     else
       @datatables = Datatable.find(:all, :conditions => ['is_secondary is false and website_id = ?',  Website.find_by_name('GLBRC')])
     end
