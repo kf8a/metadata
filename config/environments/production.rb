@@ -18,6 +18,6 @@ config.action_mailer.default_url_options = {:host => 'sebewa.kbs.msu.edu'}
 # Disable delivery errors, bad email addresses will be ignored
 # config.action_mailer.raise_delivery_errors = false
 
-$ActionController::AbstractRequest.relative_url_root = "/dynamic"
+#ActionController::AbstractRequest.relative_url_root = "/dynamic"
 
 #ExceptionNotifier.exception_recipients = %w(bohms@msu.edu)
