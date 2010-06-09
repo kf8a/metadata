@@ -40,7 +40,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :templates
 
-  map.resources :glbrc
+  map.resources :glbrc, :collection => {:suggest => :get}
 
   #TODO evaluate the data_contributions model
   map.resources :data_contributions

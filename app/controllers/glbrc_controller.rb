@@ -22,7 +22,7 @@ class GlbrcController < ApplicationController
     
     @protocols = @datatables.collect do |datatable|
       datatable.dataset.protocols
-    end.flatten.sort.uniq
+    end.flatten.uniq
     
 
     respond_to do |format|
@@ -94,6 +94,18 @@ class GlbrcController < ApplicationController
       format.xml  { render :xml => @datatable.to_xml unless restricted}
       format.csv  { render :text => @datatable.to_csv_with_metadata unless restricted}
       format.climdb { render :text => @datatable.to_climdb unless restricted }
+    end
+  end
+
+  def suggest
+    term = params[:term]
+    #list = Tag.all.collect {|x| x.name.downcase}
+    # list = list + Person.find_all_with_dataset.collect {|x| x.sur_name.downcase}
+    list = Theme.all.collect {|x| x.name.downcase}
+
+    keywords = list.compact.uniq.sort
+    respond_to do |format|
+      format.json {render :json => keywords}
     end
   end
 
