@@ -1,4 +1,9 @@
-@title-color: blue;
+@orange: #F7941E;
+@light-blue: #009BDA;
+@green: #71BF44;
+@blue: #005387;
+@grey: #828282;
+@title-color: @blue;
 @text-color: black;
 .rounded-corners {
 	-moz-border-radius:10px;
@@ -6,6 +11,16 @@
 }
 
 #glbrc {
+	
+	#branding {
+		h1 {
+			color: @title-color;
+		}
+		
+		#glbrc-logo {
+			float: right;
+		}
+	}
 
 	.hidden {
 		visibility: hidden;
