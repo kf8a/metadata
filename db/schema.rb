@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100507132118) do
+ActiveRecord::Schema.define(:version => 20100603185306) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -45,6 +45,17 @@ ActiveRecord::Schema.define(:version => 20100507132118) do
   end
 
   add_index "data_contributions", ["datatable_id", "person_id", "role_id"], :name => "data_contributions_uniq_idx", :unique => true
+
+  create_table "datafiles", :force => true do |t|
+    t.text     "title"
+    t.text     "description"
+    t.string   "original_data_file_name"
+    t.string   "original_data_content_type"
+    t.integer  "original_data_file_size"
+    t.integer  "person_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "datasets", :force => true do |t|
     t.string   "dataset"
