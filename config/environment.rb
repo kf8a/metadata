@@ -56,7 +56,5 @@ config.action_controller.session_store = :active_record_store
   # See Rails::Configuration for more options
 end
 
-#require_gem 'acts_as_taggable'
-
 Struct.new('Crumb', :url, :name)
 
