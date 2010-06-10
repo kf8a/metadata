@@ -248,6 +248,10 @@ ActiveRecord::Schema.define(:version => 20100618120203) do
   create_table "protocols_sponsors", :id => false, :force => true do |t|
     t.integer "protocol_id"
     t.integer "sponsor_id"
+
+  create_table "protocols_studies", :force => true do |t|
+    t.integer "protocol_id"
+    t.integer "study_id"
   end
 
   create_table "publication_types", :force => true do |t|
@@ -416,6 +420,7 @@ ActiveRecord::Schema.define(:version => 20100618120203) do
   add_index "users", ["id", "confirmation_token"], :name => "index_users_on_id_and_confirmation_token"
   add_index "users", ["identity_url"], :name => "index_users_on_identity_url", :unique => true
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
+
 
   create_table "variates", :force => true do |t|
     t.string  "name"

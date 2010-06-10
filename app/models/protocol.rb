@@ -4,7 +4,14 @@ class Protocol < ActiveRecord::Base
   has_many :people, :through => :scribbles
   has_one :precedent, :class_name => "Protocol", :foreign_key => "precedent_id"
   belongs_to :supercedent, :class_name => "Protocol", :foreign_key => "supercedent_id"
-
+  
+  has_and_belongs_to_many :sponsors
+  
+  named_scope :glbrc, {
+    :joins => 'join protocols_sponsors on protocols_sponsors.protocol_id = protocols.id join sponsors on sponsors.id = protocols_sponsors.sponsor_id',
+    :conditions => "sponsors.name = 'GLBRC'"
+  }
+  
   #TODO update these with proper rails style
   def person_id
     scribbles.collect {|s| s.person_id }

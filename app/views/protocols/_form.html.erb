@@ -33,7 +33,10 @@
 	<% @datasets = Dataset.find(:all).map {|x| [x.dataset, x.id]} %>
 	<%= f.select :dataset_id, @datasets %>
 </p>
-
+<p>
+  <label for='protocol_sponsors'>Sponsors</label>
+  <%= f.collection_select :sponsor_ids, Sponsor.all, :id, :name, {}, {:multiple => true} %>
+</p>
 <div class="wmd-preview"></div>
   
   <script type="text/javascript" src="javascripts/wmd/wmd.js""></script>

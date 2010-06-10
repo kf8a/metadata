@@ -2,7 +2,7 @@ class Study < ActiveRecord::Base
   has_many :treatments
   has_and_belongs_to_many :datasets
   has_many :datatables
-  
+    
   acts_as_nested_set
     
   # returns true if one or more of the tables passed is part of the current study

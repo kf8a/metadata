@@ -24,6 +24,8 @@ class GlbrcController < ApplicationController
       datatable.dataset.protocols
     end.flatten.uniq
     
+    @protocols = Protocol.glbrc
+    
 
     respond_to do |format|
       format.html # index.rhtml

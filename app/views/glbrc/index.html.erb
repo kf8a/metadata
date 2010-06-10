@@ -30,7 +30,7 @@ The Thrust 4 Data Catalog is a collection of GLBRC data that has been prepared w
 
 <ul>
   <% @protocols.each do |protocol|%>
-  <li><%=h protocol %></li>
+  <li><%=link_to protocol.title, protocol_path(protocol) %></li>
   <% end %>
 </ul>
 <!-- <h1>Other Data</h1>

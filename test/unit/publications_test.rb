@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class PublicationsTest < ActiveSupport::TestCase
-  
+
   context 'finding publications by words' do
     setup do
       @pub = Factory.create(:publication)
