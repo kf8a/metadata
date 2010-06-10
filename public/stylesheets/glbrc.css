@@ -12,7 +12,15 @@
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
 }
-#glbrc #branding h1 { color: #005387; }
+#glbrc #branding h1 {
+  color: #f7941e;
+  text-shadow: none;
+  font-family: Helvetica;
+  font-variant: small-caps;
+  font-weight: bold;
+  padding-left: 2em;
+  padding-top: 0.5em;
+}
 #glbrc #branding #glbrc-logo { float: right; }
 #glbrc .hidden {
   visibility: hidden;
@@ -37,6 +45,7 @@
   padding-left: 1.5em;
   margin-bottom: 0.1em;
 }
+#glbrc a { color: #009bda; }
 #glbrc a.edit:link { color: #7f7f7f; }
 #glbrc a.edit:visited { color: #bfbfbf; }
 #glbrc a.edit:hover { text-decoration: underline; }
@@ -180,7 +189,7 @@
 }
 #glbrc #search-form {
   padding: 10px;
-  background-color: #71bf44;
+  background-color: #009bda;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
 }
