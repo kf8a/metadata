@@ -40,7 +40,7 @@ class DatatablesController < ApplicationController
   def show  
     @datatable = Datatable.find(params[:id])
     @dataset = @datatable.dataset
-    @roles = @dataset.roles
+   # @roles = @dataset.roles
     
     @values = nil
     if @datatable.is_sql
@@ -130,8 +130,8 @@ class DatatablesController < ApplicationController
   
   def suggest
     term = params[:term]
-    list = Tag.all.collect {|x| x.name.downcase}
-    list = list + Person.find_all_with_dataset.collect {|x| x.sur_name.downcase}
+  #  list = Datatable.tags.all.collect {|x| x.name.downcase}
+    list = Person.find_all_with_dataset.collect {|x| x.sur_name.downcase}
     list = list + Theme.all.collect {|x| x.name.downcase}
     list = list + CoreArea.all.collect {|x| x.name.downcase}
 
