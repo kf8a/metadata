@@ -72,6 +72,7 @@
   border-bottom-style: solid;
   border-bottom-width: 1px;
 }
+#glbrc li.study-title > a { color: #005387; }
 #glbrc li.study-title p {
   font-weight: normal;
   font-size: 0.7em;
@@ -117,6 +118,7 @@
   -moz-column-width: 20em;
   -webkit-column-width: 20em;
 }
+#glbrc #content .right { float: right; }
 #glbrc #content .edit {
   font-size: 90%;
   float: right;

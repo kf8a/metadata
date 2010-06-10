@@ -17,25 +17,28 @@ The Thrust 4 Data Catalog is a collection of GLBRC data related to sustainabilit
         <%= submit_tag "Search Datacatalog"%>
         </div>
 </div>
-
+<div>
+<h1 class='right'>Data</h1>
 <ul class='quickTree'>
-  <% @studies.each do |study| -%>
-  <% next unless study.include_datatables?(@datatables)%>
-  
-  <%= render :partial => 'study',  :locals => {:study => study}%>
-  <% end -%>
+  <li>
+    <%= render_study(:code => 'GIBC')%>
+    <%= render_study(:code => 'GSCALE')%>
+    <%= render_study(:code => 'GEXT')%>
+  </li>
 </ul>
 
-<h1>Protocols</h1>
-
-<ul>
+<h1 class='right'>Protocols</h1>
+<ul class='quickTree'>
   <% @protocols.each do |protocol|%>
-  <li><%=link_to protocol.title, protocol_path(protocol) %></li>
+  <li class='study-title'>
+    <%=link_to protocol.title, protocol_path(protocol) %>
+    <p><%=h truncate(protocol.abstract, :length => 300) %></p>
+  </li>
   <% end %>
 </ul>
 <!-- <h1>Other Data</h1>
 
 <h1>Data Queue</h1> -->
-
+</div>
 
 <%= link_to 'login', new_sessions_path %>
