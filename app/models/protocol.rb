@@ -10,7 +10,7 @@ class Protocol < ActiveRecord::Base
   named_scope :glbrc, {
     :joins => 'join protocols_sponsors on protocols_sponsors.protocol_id = protocols.id join sponsors on sponsors.id = protocols_sponsors.sponsor_id',
     :conditions => "sponsors.name = 'GLBRC' and active is true",
-    :order => "protocols.name"
+    :order => "protocols.title"
   }
    
   #TODO update these with proper rails style
