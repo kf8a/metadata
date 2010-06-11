@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100603185306) do
+ActiveRecord::Schema.define(:version => 20100611152400) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(:version => 20100603185306) do
     t.boolean  "is_secondary",          :default => false
     t.boolean  "is_utf_8",              :default => false
     t.integer  "website_id"
+    t.boolean  "metadata_only",         :default => false
   end
 
   create_table "datatables_variates", :force => true do |t|
@@ -244,6 +245,11 @@ ActiveRecord::Schema.define(:version => 20100603185306) do
     t.boolean "active",         :default => true
   end
 
+  create_table "protocols_sponsors", :id => false, :force => true do |t|
+    t.integer "protocol_id"
+    t.integer "sponsor_id"
+  end
+
   create_table "publication_types", :force => true do |t|
     t.string "name"
   end
@@ -326,6 +332,7 @@ ActiveRecord::Schema.define(:version => 20100603185306) do
   end
 
   create_table "sponsors", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -339,6 +346,7 @@ ActiveRecord::Schema.define(:version => 20100603185306) do
     t.integer "rgt"
     t.text    "synopsis"
     t.string  "url"
+    t.string  "code"
   end
 
   create_table "taggings", :force => true do |t|
