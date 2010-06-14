@@ -47,7 +47,7 @@
 
 <% related_tables = @datatable.dataset.datatables.collect  do |d|
   next if d == @datatable
-  link_to d.title , datatable_path(d) 
+  link_to d.title , glbrc_path(d) 
 end -%>
 <% if related_tables.any? %>
 <tr>
