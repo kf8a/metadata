@@ -2,37 +2,34 @@ class DatatablesController < ApplicationController
 
   #before_filter :is_restricted
   before_filter :login_required, :except => [:index, :show, :suggest] if ENV["RAILS_ENV"] == 'production'
+  caches_page :index
 
   # GET /datatables
   # GET /datatables.xml
   def index
-
-    # just use the lower case (ie the datatable themese)
-    @themes = Theme.roots
-
+    retrieve_datatables('keyword_list' =>'')
     @default_value = 'Search for core areas, keywords or people'
+    
+    respond_to do |format|
+      format.html # index.rhtml
+      format.xml  { render :xml => @datatables.to_xml }
+      format.rss {render :rss => @datatables}
+    end
+  end
 
+  def search
     query =  {'keyword_list' => ''}
-    query.merge!(params) unless params['commit'] == 'Clear'
-
-    @keyword_list = query['keyword_list']
-    @keyword_list = nil if @keyword_list.empty? || @keyword_list == @default_value
-
-    if @keyword_list
-      @datatables = Datatable.search @keyword_list, :tag => {:website => 'LTER'}
+     query.merge!(params)
+    if query['keyword_list'].empty? 
+      redirect_to datatables_url
     else
-      @datatables = Datatable.find(:all, :conditions => ['is_secondary is false and website_id = ?', 
-        Website.find_by_name('LTER')])
-      end
-
-      @studies = Study.find_all_roots_with_datatables(@datatables, {:order => 'weight'})
-
+      retrieve_datatables(query)
       respond_to do |format|
-        format.html # index.rhtml
-        format.xml  { render :xml => @datatables.to_xml }
-        format.rss {render :rss => @datatables}
+        format.html
       end
     end
+
+  end
 
     # GET /datatables/1
     # GET /datatables/1.xml
@@ -128,13 +125,14 @@ class DatatablesController < ApplicationController
     end
 
     def suggest
-      term = params[:term]
-      #  list = Datatable.tags.all.collect {|x| x.name.downcase}
-      list = Person.find_all_with_dataset.collect {|x| x.sur_name.downcase}
-      list = list + Theme.all.collect {|x| x.name.downcase}
-      list = list + CoreArea.all.collect {|x| x.name.downcase}
-
-      keywords = list.compact.uniq.sort
+      # term = params[:term]
+      # #  list = Datatable.tags.all.collect {|x| x.name.downcase}
+      # list = Person.find_all_with_dataset.collect {|x| x.sur_name.downcase}
+      # list = list + Theme.all.collect {|x| x.name.downcase}
+      # list = list + CoreArea.all.collect {|x| x.name.downcase}
+      # 
+      # keywords = list.compact.uniq.sort
+      keywords = ''
       respond_to do |format|
         format.json {render :json => keywords}
       end
@@ -182,4 +180,19 @@ class DatatablesController < ApplicationController
 
     end
 
+    def retrieve_datatables(query)
+      @themes = Theme.roots
+
+      @keyword_list = query['keyword_list']
+      @keyword_list = nil if @keyword_list.empty? || @keyword_list == @default_value
+
+      if @keyword_list
+        @datatables = Datatable.search @keyword_list, :tag => {:website => 'LTER'}
+      else
+        @datatables = Datatable.find(:all, :conditions => ['is_secondary is false and website_id = ?', Website.find_by_name('LTER')])
+      end
+
+      @studies = Study.find_all_roots_with_datatables(@datatables, {:order => 'weight'})
+      
+    end
   end
