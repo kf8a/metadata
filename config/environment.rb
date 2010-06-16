@@ -10,8 +10,10 @@ RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
-Encoding.default_internal = 'utf-8'
-Encoding.default_external = 'utf-8'
+if RUBY_VERSION > '1.9'
+  Encoding.default_internal = 'utf-8'
+  Encoding.default_external = 'utf-8'
+end
 
 Rails::Initializer.run do |config|
   config.gem "fastercsv" unless RUBY_VERSION > "1.9"
