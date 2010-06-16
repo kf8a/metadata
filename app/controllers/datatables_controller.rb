@@ -125,14 +125,13 @@ class DatatablesController < ApplicationController
     end
 
     def suggest
-      # term = params[:term]
-      # #  list = Datatable.tags.all.collect {|x| x.name.downcase}
-      # list = Person.find_all_with_dataset.collect {|x| x.sur_name.downcase}
-      # list = list + Theme.all.collect {|x| x.name.downcase}
-      # list = list + CoreArea.all.collect {|x| x.name.downcase}
-      # 
-      # keywords = list.compact.uniq.sort
-      keywords = ''
+      term = params[:term]
+      #  list = Datatable.tags.all.collect {|x| x.name.downcase}
+      list = Person.find_all_with_dataset.collect {|x| x.sur_name.downcase}
+      list = list + Theme.all.collect {|x| x.name.downcase}
+      list = list + CoreArea.all.collect {|x| x.name.downcase}
+
+      keywords = list.compact.uniq.sort
       respond_to do |format|
         format.json {render :json => keywords}
       end
