@@ -10,6 +10,3 @@
 [submodule "vendor/plugins/open_id_authentication"]
 	path = vendor/plugins/open_id_authentication
 	url = git://github.com/rails/open_id_authentication.git
-[submodule "vendor/plugins/restful_authentication"]
-	path = vendor/plugins/restful_authentication
-	url = git://github.com/technoweenie/restful-authentication.git
