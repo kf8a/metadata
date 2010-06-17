@@ -2,6 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  include Clearance::Authentication
   include Authenticated
     
   before_filter :login_required, :except => [:index, :show] if ENV["RAILS_ENV"] == 'production'
