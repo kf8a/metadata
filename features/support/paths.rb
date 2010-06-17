@@ -16,6 +16,8 @@ module NavigationHelpers
       sign_in_path
     when /the password reset request page/i
       new_password_path
+    when /the new upload page/
+      new_upload_path
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
