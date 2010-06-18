@@ -1,4 +1,4 @@
-class DatatablesController < ApplicationController
+dclass DatatablesController < ApplicationController
 
   #before_filter :is_restricted
   before_filter :login_required, :except => [:index, :show, :suggest, :search] if ENV["RAILS_ENV"] == 'production'
@@ -47,7 +47,7 @@ class DatatablesController < ApplicationController
         query =  @datatable.object
         #@data_count = ActiveRecord::Base.connection.execute("select count() from (#{@datatable.object}) as t1")
 
-        @datatable.excerpt_limit = 50 unless @datatable.excerpt_limit
+        @datatable.excerpt_limit = 5 unless @datatable.excerpt_limit
         query = query + " limit #{@datatable.excerpt_limit}" 
         @values  = ActiveRecord::Base.connection.execute(query)
         #TDOD convert the array into a ruby object
