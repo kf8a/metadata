@@ -23,6 +23,7 @@ Rails::Initializer.run do |config|
   config.gem 'RedCloth'
   config.gem 'thinking-sphinx', :lib     => 'thinking_sphinx'
   config.gem 'liquid'
+  config.gem "clearance", :lib     => 'clearance',  :source  => 'http://gems.github.com',  :version => '0.8.8'
   config.gem 'formtastic'
   #config.gem 'subdomain-fu'
   #config.gem "matthuhiggins-foreigner", :lib => "foreigner"
