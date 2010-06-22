@@ -7,10 +7,11 @@ class TemplatesController < ApplicationController
   end
   
   def show
-    @template = Template.find(params[:id])
+    @t = Template.find(params[:id])
   end
   
   def new
+    @t = Template.new
   end
   
   def create

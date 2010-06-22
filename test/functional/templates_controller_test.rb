@@ -21,6 +21,16 @@ class TemplatesControllerTest < ActionController::TestCase
     should_render_template :new
   end
   
+  context 'on GET to :show' do
+    setup do
+      template = Factory.create(:template)
+      get :show, :id => template.id
+    end
+    
+    should_respond_with :success
+    should_render_template :show
+  end
+  
   context 'on POST to :create' do
     setup do 
       post :create
