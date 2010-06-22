@@ -8,8 +8,8 @@ class StudiesControllerTest < ActionController::TestCase
       get :edit, :id => 3
     end
     
-    should_respond_with :success
-    should_assign_to :study
+    should respond_with :success
+    should assign_to :study
   end
   
   context 'on POST to :update' do
@@ -18,7 +18,7 @@ class StudiesControllerTest < ActionController::TestCase
       post :update, :id => 3
     end
 
-    should_respond_with :redirect   #to datatables
-    should_assign_to :study
+    should respond_with :redirect   #to datatables
+    should assign_to :study
   end
 end

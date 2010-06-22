@@ -7,9 +7,9 @@ class TemplatesControllerTest < ActionController::TestCase
       get :index
     end
     
-    should_respond_with :success
-    should_assign_to :templates
-    should_render_template :index
+    should respond_with :success
+    should assign_to :templates
+    should render_template :index
   end
   
   context 'on GET to :new' do
@@ -17,8 +17,8 @@ class TemplatesControllerTest < ActionController::TestCase
       get :new
     end
     
-    should_respond_with :success
-    should_render_template :new
+    should respond_with :success
+    should render_template :new
   end
   
   context 'on GET to :show' do
@@ -27,8 +27,8 @@ class TemplatesControllerTest < ActionController::TestCase
       get :show, :id => template.id
     end
     
-    should_respond_with :success
-    should_render_template :show
+    should respond_with :success
+    should render_template :show
   end
   
   context 'on POST to :create' do
@@ -36,7 +36,7 @@ class TemplatesControllerTest < ActionController::TestCase
       post :create, {:controller => 'datatables', :action => 'show', :layout => 'p'}
     end
     
-    should_respond_with :redirect
+    should respond_with :redirect
   end
   
 end

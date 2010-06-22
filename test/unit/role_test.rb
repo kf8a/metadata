@@ -1,10 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class RoleTest < ActiveSupport::TestCase
-
- Factory.define :role do |r|
-   r.name 'Emeritus Investigators'
- end
  
  context 'evaluating a role' do
    setup do 

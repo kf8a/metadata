@@ -1,4 +1,4 @@
-class AddOpenidTables < ActiveRecord::Migration
+class ClearanceOpenidAddOpenidTables < ActiveRecord::Migration
   def self.up
      create_table :open_id_authentication_associations, :force => true do |t|
        t.integer :issued, :lifetime

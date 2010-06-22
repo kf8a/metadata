@@ -2,8 +2,8 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class StudyTest < ActiveSupport::TestCase
   
-  should_have_many :datatables
-  should_have_and_belong_to_many :datasets
+  should have_many :datatables
+  should have_and_belong_to_many :datasets
 
   context 'querying for datatables' do
     setup do

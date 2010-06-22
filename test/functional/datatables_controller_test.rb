@@ -65,8 +65,8 @@ class DatatablesControllerTest < ActionController::TestCase
       get :show,  :id => @table
     end
     
-    should_respond_with :success
-    should_render_template :show
+    should respond_with :success
+    should render_template :show
     
   end
   
@@ -75,12 +75,12 @@ class DatatablesControllerTest < ActionController::TestCase
       get :index,:keyword_list => '', :commit => 'Search'
     end
   
-    should_assign_to :datatables
-    should_assign_to :themes
+    should assign_to :datatables
+    should assign_to :themes
         
-    should_respond_with :success
-    should_render_template :index
-    should_not_set_the_flash
+    should respond_with :success
+    should render_template :index
+    should_not set_the_flash
     
     
   end

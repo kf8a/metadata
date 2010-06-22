@@ -1,4 +1,4 @@
-class AddIdentityUrlToUsers < ActiveRecord::Migration
+class ClearanceOpenidAddIdentityUrlToUsers < ActiveRecord::Migration
 
   def self.up
     add_column :users, :identity_url, :string

@@ -2,14 +2,14 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class DatatableTest < ActiveSupport::TestCase
   
-  should_belong_to :theme
-  should_belong_to :core_area
-  should_belong_to :dataset
-  should_belong_to :study
+  should belong_to :theme
+  should belong_to :core_area
+  should belong_to :dataset
+  should belong_to :study
   
-  should_have_many :data_contributions
+  should have_many :data_contributions
   
-  should_validate_presence_of :title
+  should validate_presence_of :title
     
   context 'datatable' do
     setup do
