@@ -12,6 +12,8 @@ javascripts:
 
 stylesheets: 
 - base: 
+  - formtastic
+  - formtastic_changes
   - branding
   - data
   - kbs
