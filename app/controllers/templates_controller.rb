@@ -15,6 +15,12 @@ class TemplatesController < ApplicationController
   end
   
   def create
+    @t = Template.new(params[:template])
+    if @t.save
+      redirect_to template_url(@t)
+    else
+      render :action => 'new'
+    end
   end
   
   def update

@@ -33,8 +33,10 @@ class TemplatesControllerTest < ActionController::TestCase
   
   context 'on POST to :create' do
     setup do 
-      post :create
+      post :create, {:controller => 'datatables', :action => 'show', :layout => 'p'}
     end
+    
+    should_respond_with :redirect
   end
   
 end
