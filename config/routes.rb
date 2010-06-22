@@ -35,6 +35,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :studies
   
+  map.resources :templates
+  
   map.resources :data_contributions
   
   map.root :controller => 'datasets'
