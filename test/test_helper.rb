@@ -92,6 +92,12 @@ class ActiveSupport::TestCase
        d.weight 100
        d.theme Factory.create(:theme)
      end
+     
+     Factory.define :website do |w|
+     end
+     
+     Factory.define :template do |t|
+     end
     
 end
 

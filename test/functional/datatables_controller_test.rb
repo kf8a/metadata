@@ -14,6 +14,7 @@ class DatatablesControllerTest < ActionController::TestCase
     @table = Factory.create(:datatable, :dataset => Factory.create(:dataset))
     
     Factory.create(:datatable, :dataset => Factory.create(:dataset))
+    Factory.create(:website, :id=>1).save
   end
 
   def test_should_get_index

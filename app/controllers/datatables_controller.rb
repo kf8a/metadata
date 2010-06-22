@@ -55,9 +55,16 @@ class DatatablesController < ApplicationController
           #TDOD convert the array into a ruby object
         end
       end
+      
+      #grab the right template to render
+      template = Website.find(1).layout('datatable','show')
 
       respond_to do |format|
-        format.html # show.rhtml
+        if template
+          format.html {render :html => template}
+        else
+          format.html #show.html.erb
+        end
         format.xml  { render :xml => @datatable.to_xml unless restricted}
         format.csv  { render :text => @datatable.to_csv_with_metadata unless restricted}
         format.climdb { render :text => @datatable.to_climdb unless restricted }

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100611152400) do
+ActiveRecord::Schema.define(:version => 20100618120203) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(:version => 20100611152400) do
     t.integer  "metacat_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "sonsor_id"
+    t.integer  "sponsor_id"
   end
 
   add_index "datasets", ["dataset"], :name => "datasets_dataset_key", :unique => true
@@ -364,6 +364,15 @@ ActiveRecord::Schema.define(:version => 20100611152400) do
 
   create_table "tags", :force => true do |t|
     t.string "name"
+  end
+
+  create_table "templates", :force => true do |t|
+    t.integer  "website_id"
+    t.string   "controller"
+    t.string   "action"
+    t.text     "layout"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "themes", :force => true do |t|

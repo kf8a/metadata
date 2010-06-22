@@ -22,6 +22,7 @@ Rails::Initializer.run do |config|
   config.gem 'nokogiri'
   config.gem 'RedCloth'
   config.gem 'thinking-sphinx', :lib     => 'thinking_sphinx'
+  config.gem 'liquid'
   #config.gem 'subdomain-fu'
   #config.gem "matthuhiggins-foreigner", :lib => "foreigner"
   
