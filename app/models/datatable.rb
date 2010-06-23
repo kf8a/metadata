@@ -100,6 +100,9 @@ class Datatable < ActiveRecord::Base
   end
   
   def to_csv
+    if metadata_only
+      return 'Data available by request from glbrc.data@kbs.msu.edu'
+    end
     values  = ActiveRecord::Base.connection.execute(object)
     if RUBY_VERSION > "1.9"
       output = CSV
