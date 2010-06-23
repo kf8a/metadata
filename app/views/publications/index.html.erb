@@ -20,10 +20,10 @@
 					abstract&nbsp;&hellip;</a>
 			<% end -%>
 			<%= link_to_remote 'document', :url =>  publication.public_filename if publication.filename %>
-			<%= link_to 'edit', edit_publication_path(publication) if logged_in?%>
+			<%= link_to 'edit', edit_publication_path(publication) if signed_in?%>
 	</div>
 <% end %>
-<p><% if logged_in? -%>
+<p><% if signed_in? -%>
 	<%= link_to 'new publication', new_publication_path %>
 	<% else -%>
 	<%= link_to 'login', new_session_path %>

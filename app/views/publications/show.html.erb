@@ -14,6 +14,6 @@ Treatments used:
 </p>
 <% end %>
 
-<%= link_to 'Edit', edit_publication_path(@publication) if logged_in? %> | 
+<%= link_to 'Edit', edit_publication_path(@publication) if signed_in? %> | 
 <%= link_to 'Destroy', @publication, :confirm => 'Are you sure?', :method => :delete %> | 
 <%= link_to 'Back', publications_path %>

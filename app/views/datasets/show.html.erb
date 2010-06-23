@@ -40,5 +40,5 @@
 	<% end -%>
 </ul>
 <%= link_to 'eml', dataset_path(@dataset, :format => :eml) %> |
-<%= link_to 'Edit', edit_dataset_path(@dataset) if logged_in?%> |
+<%= link_to 'Edit', edit_dataset_path(@dataset) if signed_in?%> |
 <%= link_to 'Back', datasets_path %>

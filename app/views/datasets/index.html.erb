@@ -31,14 +31,14 @@
     <ul>
       <% @datasets.sort {|x,y| x.title <=> y.title}.each do |dataset| %>
     	  <% next unless dataset.on_web %>
-    		<% if !logged_in? %>
+    		<% if !signed_in? %>
     		    <% next unless dataset.datatables.size > 0 %>
     		<% end -%>
     		<% next unless dataset.studies.include?(study) %>
 
         <li class="dataset">
     		  <%= link_to truncate(dataset.title,{:length => 80}) , dataset_path(dataset) %>
-    		  <%= link_to  'Edit', edit_dataset_path(dataset), {:class => 'edit'} if logged_in? %>
+    		  <%= link_to  'Edit', edit_dataset_path(dataset), {:class => 'edit'} if signed_in? %>
     		</li>
       <% end -%>
     </ul>
@@ -47,7 +47,7 @@
 </ul>
 </div>
 
-<% if logged_in? %>
+<% if signed_in? %>
 <div id='all datasets'>
   <h2>Unassigned Datasets</h2>
   <% @datasets.each do |dataset| %>
@@ -64,12 +64,12 @@
 		<% end %>
 		<%= link_to truncate(dataset.title,{:length => 60}) , dataset_path(dataset) %>
 		<%= link_to 'eml', dataset_path(dataset, :format=>:eml) %> 
-		<%= link_to  'Edit', edit_dataset_path(dataset), {:class => 'edit'} if logged_in? %></li>
+		<%= link_to  'Edit', edit_dataset_path(dataset), {:class => 'edit'} if signed_in? %></li>
    
   <% end %>
 </div>
 <% end %>
 		
-<%= link_to 'New dataset', new_dataset_path if logged_in? %> | 
+<%= link_to 'New dataset', new_dataset_path if signed_in? %> | 
 <%= link_to 'login', new_session_path %>
 
