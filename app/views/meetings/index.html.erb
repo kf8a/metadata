@@ -5,10 +5,10 @@
 <ul>
 <% @meetings.each do |meeting| %>
 	<li id="meeting_<%=meeting.id%>"><%= link_to "#{meeting.title}", meeting_path(meeting) %> <%= meeting.date.to_s(:long) %> 
-	<%= link_to 'edit', edit_meeting_path(meeting), {:class => 'edit'} if logged_in? %>
-		<%= link_to_remote image_tag("trash.gif"), :url => meeting_path(meeting), :method => 'delete', :confirm => 'Are you sure?' if logged_in?%>
+	<%= link_to 'edit', edit_meeting_path(meeting), {:class => 'edit'} if signed_in? %>
+		<%= link_to_remote image_tag("trash.gif"), :url => meeting_path(meeting), :method => 'delete', :confirm => 'Are you sure?' if signed_in?%>
 		</li>
 <% end %>
 </ul>
 
-<%= link_to 'new meeting', new_meeting_path() if logged_in? %>
+<%= link_to 'new meeting', new_meeting_path() if signed_in? %>

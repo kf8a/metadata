@@ -1,7 +1,0 @@
-<h1>Custom Units</h1>
-
-<ul>
-<% @units.each do |unit| %>
-	<li><%= unit.name %> <%= link_to 'edit', edit_unit_path(unit),{:class => 'edit'} if logged_in?%></li>
-<% end %>
-</ul>
