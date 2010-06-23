@@ -1,5 +1,9 @@
 <h2>Sign in</h2>
 
+<div class="notice"><%= flash[:failure] %></div>
+<div class="notice"><%= flash[:success] %></div>
+
+
 <% semantic_form_for :session, :url => session_path do |form| %>
   <% form.inputs do %>
     <%= form.input :email %>

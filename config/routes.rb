@@ -40,7 +40,11 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :data_contributions
   
-  map.root :controller => 'datasets'
+  map.resource  :session, 
+                :controller => 'sessions',   
+                :only       => [:new, :create, :destroy]
+  
+  map.root :controller => 'datatables'
 
   #map.open_id_complete 'sessions', :controller => "sessions", :action => "create", :requirements => { :method => :get }
   #map.resource :sessions  
