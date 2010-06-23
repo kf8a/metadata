@@ -42,8 +42,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.root :controller => 'datasets'
 
-  map.open_id_complete 'sessions', :controller => "sessions", :action => "create", :requirements => { :method => :get }
-  map.resource :sessions  
+  #map.open_id_complete 'sessions', :controller => "sessions", :action => "create", :requirements => { :method => :get }
+  #map.resource :sessions  
   
   # The priority is based upon order of creation: first created -> highest priority.
   
