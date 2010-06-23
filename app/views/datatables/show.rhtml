@@ -134,8 +134,10 @@ end -%>
 <!-- 
 	TODO: geographic coverage 
 	-->
-<%= link_to 'Download complete data table', datatable_path(@datatable, :format => :csv) ,
-:class => 'download-link'%>
+<% unless @datatable.metadata_only? %>
+  <%= link_to 'Download complete data table', datatable_path(@datatable, :format => :csv) ,
+  :class => 'download-link'%>
+<% end %>
 
 
 </p>
