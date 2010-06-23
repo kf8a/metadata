@@ -3,7 +3,6 @@
 
 class ApplicationController < ActionController::Base
   include Clearance::Authentication
-  include Authenticated
     
   before_filter :login_required, :except => [:index, :show] if ENV["RAILS_ENV"] == 'production'
   before_filter :set_title, :set_crumbs
