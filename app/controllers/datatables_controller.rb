@@ -40,9 +40,7 @@ class DatatablesController < ApplicationController
     # @roles = @dataset.roles
 
     @values = nil
-    if @datatable.metadata_only?
-      restricted = true
-    elsif (!trusted_ip? && @datatable.is_restricted)
+    if (!trusted_ip? && @datatable.is_restricted)
       restricted = true
     else
       if @datatable.is_sql
