@@ -1,4 +1,4 @@
-dclass DatatablesController < ApplicationController
+class DatatablesController < ApplicationController
 
   #before_filter :is_restricted
   before_filter :login_required, :except => [:index, :show, :suggest, :search] if ENV["RAILS_ENV"] == 'production'
