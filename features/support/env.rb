@@ -16,11 +16,10 @@ require 'webrat'
 require 'webrat/core/matchers'
 
 require 'factory_girl' 
-p File.dirname(__FILE__) + "../../test/factories/*.rb"
+
 Dir.glob(File.dirname(__FILE__) + "/../../test/factories/*.rb").each do |factory| 
   require factory 
 end
-
 
 Webrat.configure do |config|
   config.mode = :rails
