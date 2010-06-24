@@ -11,7 +11,7 @@ set :deploy_to, "/var/u/apps/#{application}"
 set :user, 'deploy'
 set :use_sudo, false
 
-set :branch, "master"
+set :branch, "clearance"
 set :deploy_via, :copy
 #set :git_enable_submodules,1
 
