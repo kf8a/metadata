@@ -32,4 +32,10 @@ Feature: Sign in
       And I should be signed in
       When I return next time
       Then I should be signed in
-
+ 
+    Scenario: Openid user signs in
+      Given I am signed up with an openid
+      When I go to the sign in page
+      And I sign in as "email@person.com"
+      Then I should see "Signed in"
+      And I should be signed in
