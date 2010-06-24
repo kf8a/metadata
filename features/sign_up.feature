@@ -23,8 +23,8 @@ Feature: Sign up
     Scenario: User confirms his account
       Given I signed up with "email@person.com/password"
       When I follow the confirmation link sent to "email@person.com"
-      Then I should see "Confirmed email and signed in"
-      And I should be signed in
+      Then I should be signed in
+      And I should see "Confirmed email and signed in"
 
     Scenario: Signed in user clicks confirmation link again
       Given I signed up with "email@person.com/password"
