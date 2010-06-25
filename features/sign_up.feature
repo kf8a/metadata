@@ -21,13 +21,12 @@ Feature: Sign up
       And a confirmation message should be sent to "email@person.com"
 
     Scenario: User confirms his account
-      Given I signed up with "email@person.com/password"
+      Given I signed up with "email@person.com"/"password"
       When I follow the confirmation link sent to "email@person.com"
       Then I should be signed in
-      And I should see "Confirmed email and signed in"
 
     Scenario: Signed in user clicks confirmation link again
-      Given I signed up with "email@person.com/password"
+      Given I signed up with "email@person.com"/"password"
       When I follow the confirmation link sent to "email@person.com"
       Then I should be signed in
       When I follow the confirmation link sent to "email@person.com"
@@ -35,7 +34,7 @@ Feature: Sign up
       And I should be signed in
 
     Scenario: Signed out user clicks confirmation link again
-      Given I signed up with "email@person.com/password"
+      Given I signed up with "email@person.com"/"password"
       When I follow the confirmation link sent to "email@person.com"
       Then I should be signed in
       When I sign out

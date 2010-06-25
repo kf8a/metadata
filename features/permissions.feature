@@ -4,7 +4,7 @@ Feature: permissions to download a GLBRC datatable
 	Must have permission from all owners to download. 
 
 Background:
-  Given one to many datatable owners named 'Lead Investigator'
+  Given one owner with the role 'Lead Investigator'
   And a person that wants to download data named 'data requester'
   And a person that has been given permission named 'approved'
   And a person that has not been given permission named 'not approved'
