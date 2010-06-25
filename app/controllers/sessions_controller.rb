@@ -3,7 +3,7 @@ class SessionsController < Clearance::SessionsController
   def create
     if params[:session]
       session = params[:session]
-      params[:openid_identifier] = session[:openid_identifier] unless session[:openid_identifier].empty?
+      params[:openid_url] = session[:openid_url] unless session[:openid_url].empty?
     end
     if using_open_id?
       authenticate_with_openid
@@ -15,7 +15,7 @@ class SessionsController < Clearance::SessionsController
   private
     
   def authenticate_with_openid
-    @openid_url = params[:openid_identifier]
+    @openid_url = params[:openid_url]
 
     # Pass optional :required and :optional keys to specify what sreg fields
     # you want. Be sure to yield registration, a third argument in the block.

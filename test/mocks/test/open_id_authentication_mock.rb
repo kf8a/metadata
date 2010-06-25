@@ -11,7 +11,7 @@ module OpenIdAuthentication
 
   protected
 
-    def authenticate_with_open_id(identity_url = params[:openid_identifier], fields = {}) #:doc:
+    def authenticate_with_open_id(identity_url = params[:openid_url], fields = {}) #:doc:
       identity_url = normalize_url(identity_url)
       if User.find_by_openid_url(identity_url) || identity_url.include?('good')
         # Don't process registration fields unless it is requested.
