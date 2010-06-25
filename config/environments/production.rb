@@ -14,6 +14,7 @@ config.action_controller.perform_caching             = true
 # Enable serving of images, stylesheets, and javascripts from an asset server
 config.action_controller.asset_host                  = "http://lter.kbs.msu.edu/dynamic"
 
+config.action_mailer.default_url_options = {:host => 'sebewa.kbs.msu.edu'}
 # Disable delivery errors, bad email addresses will be ignored
 # config.action_mailer.raise_delivery_errors = false
 
