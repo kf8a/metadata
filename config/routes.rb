@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resource :session, :controller => 'sessions'
+  
   Clearance::Routes.draw(map)
   map.resources :projects
 
@@ -39,7 +41,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :templates
   
   map.resources :data_contributions
-   
+     
   map.root :controller => 'datatables'
 
   #map.open_id_complete 'sessions', :controller => "sessions", :action => "create", :requirements => { :method => :get }

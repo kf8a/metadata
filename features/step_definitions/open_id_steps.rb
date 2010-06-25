@@ -29,3 +29,7 @@ When /^I sign in as "([^"]*)"$/ do |email|
   And %{I fill in "Email" with "#{email}"}
   And %{I press "Sign in"}
 end
+
+When /^I sign in with the identity_url "([^"]*)"$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end

@@ -65,5 +65,6 @@ Rails::Initializer.run do |config|
   # See Rails::Configuration for more options
 end
 
+OpenIdAuthentication.store = :file
 Struct.new('Crumb', :url, :name)
 

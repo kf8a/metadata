@@ -33,9 +33,16 @@ Feature: Sign in
       When I return next time
       Then I should be signed in
  
-    Scenario: Openid user signs in
-      Given I am signed up with openid "http://person@person.com"
-      When I go to the sign in page
-      And I sign in as "email@person.com"
-      Then I should be signed in
+  Scenario: Openid user signs in
+    Given I am signed up with openid "http://person@person.com"
+    When I go to the sign in page
+    And I sign in as "email@person.com"
+    Then I should be signed in
  
+  Scenario: Openid user signs in with invalid identity_url
+    Given no user exists with an email of "email@person.com"
+    When I go to the sign in page
+    And I sign in with the identity_url "bad.url"
+    Then  I should be signed out
+    And I should see "Bad email or password"
+    
