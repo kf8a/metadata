@@ -15,6 +15,11 @@ class Datatable < ActiveRecord::Base
   
   has_many :data_contributions
   has_many :people, :through => :data_contributions
+  
+  #permissions
+  has_many :permissions
+  has_many :users, :through => :permissions
+  has_many :owners, :through => :owners
     
   validates_presence_of :title
   

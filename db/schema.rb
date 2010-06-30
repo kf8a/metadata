@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100618120203) do
+ActiveRecord::Schema.define(:version => 20100630152706) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -199,6 +199,13 @@ ActiveRecord::Schema.define(:version => 20100618120203) do
     t.binary "value"
   end
 
+  create_table "ownerships", :force => true do |t|
+    t.integer  "datatable_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "people", :force => true do |t|
     t.string  "person"
     t.string  "sur_name"
@@ -219,6 +226,13 @@ ActiveRecord::Schema.define(:version => 20100618120203) do
     t.string  "url"
     t.boolean "deceased"
     t.string  "open_id"
+  end
+
+  create_table "permissions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "datatable_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "projects", :force => true do |t|

@@ -6,6 +6,8 @@ class DatatableTest < ActiveSupport::TestCase
   should belong_to :core_area
   should belong_to :dataset
   should belong_to :study
+  should have_many :owners
+  should have_many :users
   
   should have_many :data_contributions
   
