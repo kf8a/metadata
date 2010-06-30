@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100630152706) do
+ActiveRecord::Schema.define(:version => 20100630163503) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -349,6 +349,7 @@ ActiveRecord::Schema.define(:version => 20100630152706) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "data_restricted", :default => false
   end
 
   create_table "studies", :force => true do |t|
