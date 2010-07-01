@@ -38,6 +38,7 @@ Factory.define :website do |w|
 end
 
 Factory.define :permission do |p|
+
 end
 
 Factory.define :publication do |p|
