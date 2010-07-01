@@ -12,6 +12,12 @@
 </p>
 
 <p>
+  <label for='dataset_website_id'>Website</label>
+  <%= f.select :website_id, Website.all.collect {|x| [x.name, x.id]}%>
+</p>
+
+
+<p>
   <label for='dataset_status'>Status</label>
   <%= f.text_field :status%>
   <label for='dataset_initiated'>Initiated</label>

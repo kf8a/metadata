@@ -22,13 +22,6 @@ Factory.define :protocol do |p|
   p.dataset Factory.create(:dataset)
 end
 
-Factory.define :study do |s|
-  s.name 'LTER'
-end
-
-Factory.define :variate do |v|
-  v.name 'date'
-end
 
 Factory.define :datatable do |d|
   d.name          'KBS001_001'
@@ -38,12 +31,13 @@ Factory.define :datatable do |d|
   d.description   'This is a datatable'
   d.weight        100
   d.theme         Factory.create(:theme)
+  d.dataset       Factory.create(:dataset)
 end
 
 Factory.define :website do |w|
 end
 
-Factory.define :template do |t|
+Factory.define :permission do |p|
 end
 
 Factory.define :publication do |p|
@@ -56,3 +50,15 @@ end
 Factory.define :sponsor do |s|
   s.name    'LTER'
 end
+
+Factory.define :study do |s|
+  s.name 'LTER'
+end
+
+Factory.define :template do |t|
+end
+
+Factory.define :variate do |v|
+  v.name 'date'
+end
+

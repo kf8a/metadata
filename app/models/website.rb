@@ -1,5 +1,5 @@
 class Website < ActiveRecord::Base
-  has_many :datatables
+  has_many :datasets
   has_many :templates
   
   def layout(controller, action)

@@ -4,9 +4,11 @@ class DatasetTest < ActiveSupport::TestCase
     
   should have_many :datatables
   should have_many :affiliations
-    
+  should belong_to :website
+  
   should have_and_belong_to_many :themes
   should have_and_belong_to_many :studies
+  
   
   context 'dataset' do
     setup do

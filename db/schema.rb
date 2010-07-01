@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100630163503) do
+ActiveRecord::Schema.define(:version => 20100701135327) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20100630163503) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "sponsor_id"
+    t.integer  "website_id"
   end
 
   add_index "datasets", ["dataset"], :name => "datasets_dataset_key", :unique => true
@@ -116,7 +117,6 @@ ActiveRecord::Schema.define(:version => 20100630163503) do
     t.datetime "updated_at"
     t.boolean  "is_secondary",          :default => false
     t.boolean  "is_utf_8",              :default => false
-    t.integer  "website_id"
     t.boolean  "metadata_only",         :default => false
   end
 
@@ -458,6 +458,7 @@ ActiveRecord::Schema.define(:version => 20100630163503) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "dataset_id"
   end
 
 end

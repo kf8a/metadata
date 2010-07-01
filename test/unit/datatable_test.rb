@@ -12,10 +12,12 @@ class DatatableTest < ActiveSupport::TestCase
   should have_many :data_contributions
   
   should validate_presence_of :title
+  should validate_presence_of :dataset
     
   context 'datatable' do
     setup do
-      @datatable = Factory.create(:datatable)
+      @datatable = Factory :datatable
+      assert_valid @datatable
     end
     
     should 'respond to temporal_extent' do
@@ -28,6 +30,47 @@ class DatatableTest < ActiveSupport::TestCase
     
     should 'respond to update_temporal_extent' do
       assert @datatable.respond_to?('update_temporal_extent')
+    end
+    
+  end
+  
+  context 'datatable permissions' do
+    setup do
+      @unrestricted = Factory  :datatable
+            
+      sponsor = Factory :sponsor, :data_restricted => true
+      dataset = Factory :dataset, :sponsor => sponsor
+      @restricted = Factory :datatable, :dataset => dataset        
+      
+      @anonymous_user = nil
+      @unauthorized_user = Factory :user, 
+        :email      => 'bill@person.com',
+        :password   => 'password'
+      
+      owner = Factory :user, 
+        :email    => 'phil@person.com',
+        :password => 'password'
+      @authorized_user = Factory :user,
+        :email      => 'bob@person.com',
+        :password   => 'password',
+        :permissions => [Factory.create(:permission, :datatable => @restricted, :owner => owner)]
+    end
+    
+    should 'tell if it needs to be restricted at all' do
+      assert !@unrestricted.restricted?
+      assert @restricted.restricted?
+    end
+    
+    should 'allow anyone to download unrestricted datatables' do
+      assert @unrestricted.can_download?(@anonymous_user)
+      assert @unrestricted.can_download?(@unauthorized_user)
+      assert @unrestricted.can_download?(@authorized_user)
+    end
+    
+    should 'only allow authorized users to download restricted datatables' do
+      assert !@restricted.can_download?(@anonymous_user)
+      assert !@restricted.can_download?(@unauthorized_user)
+      assert @restricted.can_download?(@authorized_user)
     end
   end
   

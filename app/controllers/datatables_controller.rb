@@ -88,6 +88,7 @@ class DatatablesController < ApplicationController
   # POST /datatables.xml
   def create
     @datatable = Datatable.new(params[:datatable])
+    @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
 
     respond_to do |format|
       if @datatable.save
@@ -194,7 +195,7 @@ class DatatablesController < ApplicationController
     if @keyword_list
       @datatables = Datatable.search @keyword_list, :tag => {:website => 'LTER'}
     else
-      @datatables = Datatable.find(:all, :conditions => ['is_secondary is false and website_id = ?', Website.find_by_name('LTER')])
+      @datatables = Datatable.find(:all, :joins=> 'left join datasets on datasets.id = datatables.dataset_id', :conditions => ['is_secondary is false and website_id = ?', Website.find_by_name('LTER')])
     end
 
     @studies = Study.find_all_roots_with_datatables(@datatables, {:order => 'weight'})
