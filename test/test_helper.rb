@@ -28,9 +28,8 @@ class ActiveSupport::TestCase
   # instantiated fixtures translates to a database query per test method),
   # then set this back to true.
   self.use_instantiated_fixtures  = false
-  
+
   # Add more helper methods to be used by all tests here...
-  #load File.join(RAILS_ROOT,'test', 'mocks', 'test', 'authenticated_mock.rb')
 
   def self.should_have_attached_file(attachment)
     klass = self.name.gsub(/Test$/, '').constantize
@@ -57,7 +56,17 @@ class ActiveSupport::TestCase
       end
     end
   end    
-  
+
+  # from http://github.com/maxim/shmacros
+  # def self.should_validate_associated(*associations)
+  #   klass = self.name.gsub(/Test$/, '').constantize
+  #   associations.each do |association|
+  #     should "validate associated #{association}" do
+  #       p klass.new.methods.grep(/valid/)
+  #       assert klass.new.respond_to?("validate_associated_records_for_#{association}")
+  #     end
+  #   end
+  # end
 end
 
 
