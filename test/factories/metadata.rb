@@ -31,13 +31,13 @@ Factory.define :variate do |v|
 end
 
 Factory.define :datatable do |d|
-  d.name 'KBS001_001'
-  d.title 'a really cool datatable'
-  d.object 'select now() as sample_date'
-  d.is_sql true
-  d.description 'This is a datatable'
-  d.weight 100
-  d.theme Factory.create(:theme)
+  d.name          'KBS001_001'
+  d.title         'a really cool datatable'
+  d.object        'select now() as sample_date'
+  d.is_sql         true
+  d.description   'This is a datatable'
+  d.weight        100
+  d.theme         Factory.create(:theme)
 end
 
 Factory.define :website do |w|
@@ -46,10 +46,13 @@ end
 Factory.define :template do |t|
 end
 
-
 Factory.define :publication do |p|
-  p.citation  'bogus data, brown and company'
-  p.abstract 'something in here'
-  p.year 2000
+  p.citation            'bogus data, brown and company'
+  p.abstract            'something in here'
+  p.year                2000
   p.publication_type_id 1
+end
+
+Factory.define :sponsor do |s|
+  s.name    'LTER'
 end
