@@ -54,8 +54,9 @@ class DatatablesController < ApplicationController
       end
     end
 
-    #grab the right template to render
-    template = Website.find(1).layout('datatable','show')
+    #grab the right template to render otherwise just do the default thing for now
+    website = Website.find(:first)
+    template = website.layout('datatable','show') if website
 
     respond_to do |format|
       if template
