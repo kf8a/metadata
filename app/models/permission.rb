@@ -7,6 +7,8 @@ class Permission < ActiveRecord::Base
   validates_associated :user, :datatable, :owner
   
   def validate
-    errors.add('owner') unless datatable.owners.include?(owner)
+    if datatable
+      errors.add('owner') unless datatable.owners.include?(owner)
+    end
   end
 end

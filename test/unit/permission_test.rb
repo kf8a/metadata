@@ -5,9 +5,10 @@ class PermissionTest < ActiveSupport::TestCase
   should belong_to :datatable
   should belong_to :owner
 
-  # should validate_presence_of :user
-  # should validate_presence_of :datatable
-  # should validate_presence_of :owner
+  #TODO figure out why it fails with these
+  should validate_presence_of :user
+  should validate_presence_of :datatable
+  should validate_presence_of :owner
   
   # TODO figure out how to write a matcher for associated models
   # should_validate_associated :user
