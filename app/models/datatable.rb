@@ -251,8 +251,6 @@ private
   
   def permitted?(user)
     granted_by = permissions.collect {|x| x.user == user ? x.owner : nil}.compact
-    p granted_by
-    p owners
     granted_by == owners
   end
 end

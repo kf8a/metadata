@@ -36,24 +36,23 @@ class DatatableTest < ActiveSupport::TestCase
   
   context 'datatable permissions' do
     setup do
+      @anonymous_user     = nil
+      @unauthorized_user  = Factory :user, :email => 'unauthorized@person.com'
+      @authorized_user    = Factory :user, :email => 'authorized@person.com'
+      @owner              = Factory :user, :email => 'owner@person.com'
+      
       @unrestricted = Factory  :datatable
             
       sponsor = Factory :sponsor, :data_restricted => true
       dataset = Factory :dataset, :sponsor => sponsor
-      @restricted = Factory :datatable, :dataset => dataset        
+      @restricted = Factory :datatable, 
+        :dataset    => dataset,
+        :owners => [@owner]
       
-      @anonymous_user = nil
-      @unauthorized_user = Factory :user, 
-        :email      => 'bill@person.com',
-        :password   => 'password'
-      
-      owner = Factory :user, 
-        :email    => 'phil@person.com',
-        :password => 'password'
-      @authorized_user = Factory :user,
-        :email      => 'bob@person.com',
-        :password   => 'password',
-        :permissions => [Factory.create(:permission, :datatable => @restricted, :owner => owner)]
+      Factory :permission, 
+        :datatable  => @restricted,
+        :user       => @authorized_user,
+        :owner      => @owner
     end
     
     should 'tell if it needs to be restricted at all' do
@@ -71,6 +70,11 @@ class DatatableTest < ActiveSupport::TestCase
       assert !@restricted.can_download?(@anonymous_user)
       assert !@restricted.can_download?(@unauthorized_user)
       assert @restricted.can_download?(@authorized_user)
+    end
+    
+    should 'authorized table should have the right owner' do
+      assert @restricted.owners.size == 1
+      assert @restricted.owners.include?(@owner)
     end
   end
   
