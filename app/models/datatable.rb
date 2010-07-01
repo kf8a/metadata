@@ -17,7 +17,7 @@ class Datatable < ActiveRecord::Base
   
   #permissions
   has_many :permissions
-  has_many :users, :through => :permissions
+  #has_many :users, :through => :permissions
   has_many :ownerships
   has_many :owners, :through => :ownerships, :source => :user
     
