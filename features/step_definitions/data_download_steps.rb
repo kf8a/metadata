@@ -1,4 +1,4 @@
-Given /^I am signed in as "([^"]*)"$/ do |arg1|
+Given /^I am signed in$/ do
   pending # express the regexp above with the code you wish you had
 end
 
@@ -6,19 +6,7 @@ Given /^I own datatable "([^"]*)"$/ do |arg1|
   pending # express the regexp above with the code you wish you had
 end
 
-Then /^I will download a file$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then /^the file will contain the data$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
 Given /^I have permission to download$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then /^I should download a file$/ do
   pending # express the regexp above with the code you wish you had
 end
 
@@ -31,9 +19,25 @@ Then /^I will request access to the data$/ do
 end
 
 Given /^a protected datatable$/ do
-  datatable = Factory.create( :datatable,
-    {:name     => 'KBS001', :sponsor => Factory.create(:restricted => true) } )
+  sponsor = Factory :sponsor, :data_restricted => true
+  dataset = Factory :dataset, :sponsor => sponsor
+  @datatable = Factory  :datatable,
+    :name     => 'KBS001', 
+    :dataset  => dataset,
+    :object   => 'select now()',
+    :is_sql   => true
 end
+
+
+Given /^a public datatable$/ do
+  @datatable = Factory :datatable,
+    :id       => 1,
+    :name     => 'KBS001',
+    :dataset  => Factory.create(:dataset),
+    :object   => 'select now()',
+    :is_sql   => true
+end
+
 
 Given /^the datatable is owned by "([^"]*)"$/ do |arg1|
   pending # express the regexp above with the code you wish you had
@@ -47,11 +51,6 @@ Given /^"([^"]*)" has not given permission$/ do |arg1|
   pending # express the regexp above with the code you wish you had
 end
 
-Given /^a public datatable$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
 Then /^the file should contain the data$/ do
   pending # express the regexp above with the code you wish you had
 end
-

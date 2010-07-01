@@ -16,9 +16,12 @@ module NavigationHelpers
       sign_in_path
     when /the password reset request page/i
       new_password_path
-    
-    when /the datatable page/i
-      datatables/4
+      
+    when /the datatable page/
+      datatable_path(@datatable)
+      
+    when /the datatable download page/
+      datatable_path(@datatable, :format => 'csv')
   
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
