@@ -2,16 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class PersonTest < ActiveSupport::TestCase
   
-  Factory.define :person do |p|
-    p.sur_name 'spencer'
-    p.given_name 'howard'
-  end
-  
-  Factory.define :role do |r|
-    r.name 'Emeritus something'
-  end
-  
-  should_have_many :datatables, :through => :data_contributions
+  should have_many :datatables
   
   context 'an emeritus' do 
     setup do

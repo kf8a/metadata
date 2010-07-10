@@ -2,18 +2,21 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class DatatableTest < ActiveSupport::TestCase
   
-  should_belong_to :theme
-  should_belong_to :core_area
-  should_belong_to :dataset
-  should_belong_to :study
+  should belong_to :theme
+  should belong_to :core_area
+  should belong_to :dataset
+  should belong_to :study
+  should have_many :owners
   
-  should_have_many :data_contributions
+  should have_many :data_contributions
   
-  should_validate_presence_of :title
+  should validate_presence_of :title
+  should validate_presence_of :dataset
     
   context 'datatable' do
     setup do
-      @datatable = Factory.create(:datatable)
+      @datatable = Factory :datatable
+      assert_valid @datatable
     end
     
     should 'respond to temporal_extent' do
@@ -27,8 +30,70 @@ class DatatableTest < ActiveSupport::TestCase
     should 'respond to update_temporal_extent' do
       assert @datatable.respond_to?('update_temporal_extent')
     end
+    
   end
   
+  context 'using datatable permissions' do
+    setup do
+      @anonymous_user     = nil
+      @unauthorized_user  = Factory :user, :email => 'unauthorized@person.com'
+      @authorized_user    = Factory :user, :email => 'authorized@person.com'
+      @owner              = Factory :user, :email => 'owner@person.com'
+      
+      @unrestricted = Factory  :datatable
+            
+      sponsor = Factory :sponsor, :data_restricted => true
+      dataset = Factory :dataset, :sponsor => sponsor
+      @restricted = Factory :datatable, 
+        :dataset    => dataset,
+        :owners => [@owner]
+      
+      Factory :permission, 
+        :datatable  => @restricted,
+        :user       => @authorized_user,
+        :owner      => @owner
+    end
+    
+    should 'tell if it needs to be restricted at all' do
+      assert !@unrestricted.restricted?
+      assert @restricted.restricted?
+    end
+    
+    should 'allow anyone to download unrestricted datatables' do
+      assert @unrestricted.can_download?(@anonymous_user)
+      assert @unrestricted.can_download?(@unauthorized_user)
+      assert @unrestricted.can_download?(@authorized_user)
+    end
+    
+    should 'only allow authorized users to download restricted datatables' do
+      assert !@restricted.can_download?(@anonymous_user)
+      assert !@restricted.can_download?(@unauthorized_user)
+      assert  @restricted.can_download?(@authorized_user)
+    end
+    
+    should 'authorized table should have the right owner' do
+      assert @restricted.owners.size == 1
+      assert @restricted.owners.include?(@owner)
+    end 
+  
+  end
+  
+  context 'setting datatable permissions' do
+    setup do
+      @owner  = Factory :user, :email => 'owner@person.com'
+      @user   = Factory :user, :email => 'user@person.com'
+      @other  = Factory :user, :email => 'other@person.com'
+      
+      sponsor     = Factory :sponsor, :data_restricted => true
+      dataset     = Factory :dataset, :sponsor => sponsor
+      @datatable  = Factory :datatable, :owners => [@owner]
+    end
+    
+    should 'give permissions to the user if owner' 
+    
+    should 'not give permission to user if not the owner'
+    
+  end
     
   context 'datatable with sample_date' do
     setup do

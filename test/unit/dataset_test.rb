@@ -2,11 +2,13 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class DatasetTest < ActiveSupport::TestCase
     
-  should_have_many :datatables
-  should_have_many :affiliations
-    
-  should_have_and_belong_to_many :themes
-  should_have_and_belong_to_many :studies
+  should have_many :datatables
+  should have_many :affiliations
+  should belong_to :website
+  
+  should have_and_belong_to_many :themes
+  should have_and_belong_to_many :studies
+  
   
   context 'dataset' do
     setup do

@@ -1,6 +1,6 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class TemplateTest < ActiveSupport::TestCase
- should_belong_to :website
+ should belong_to :website
  
 end

@@ -1,0 +1,28 @@
+<h1>Editing Meeting Abstracts</h1>
+<%= error_messages_for :abstracts %>
+
+<% form_for(:abstract, :url => abstract_path(@abstract), 
+	:html => { :method => :put }) do |f| %>
+	<p>
+		<label for='abstract_title'>Title</label><br/>
+		<%= f.text_area :title, :size => '60x3' %>
+	</p>
+	<p>
+		<label for='abstract_authors'>Authors</label><br/>
+		<%= f.text_area :authors , :size => '60x3'%>
+	</p>
+	<p>
+		<label for='abstract_abstract'>Abstract</label>
+		<%= textile_editor 'abstract', :abstract, :size => '60x20'%>
+	</p>
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+
+<%= link_to 'Show', abstract_path(@abstract) %> |
+<%= link_to 'Back', abstract_path %> | 
+<%= link_to 'log out', session_path(), :method => 'delete' %>
+
+<%= textile_editor_initialize -%>

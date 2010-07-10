@@ -1,0 +1,14 @@
+<h2>Sign up</h2>
+
+<div class='notice'><%= flash[:failure] %></div>
+<div class='notice'><%= flash[:success] %></div>
+
+
+<% semantic_form_for @user do |form| %>
+  <%= form.error_messages %>
+  <%= render :partial => "/users/inputs", :locals => { :form => form } %>
+  <% form.buttons do %>
+    <%= form.commit_button "Sign up" %>
+  <% end %>
+<% end %>
+

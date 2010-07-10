@@ -1,8 +1,11 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'test_help'
-# gem 'flexmock'
-# require 'flexmock/test_unit'
+require 'factory_girl' 
+
+Dir.glob(File.dirname(__FILE__) + "/factories/*.rb").each do |factory| 
+  require factory 
+end
 
 class ActiveSupport::TestCase
   # Transactional fixtures accelerate your tests by wrapping each test method
@@ -27,77 +30,44 @@ class ActiveSupport::TestCase
   self.use_instantiated_fixtures  = false
 
   # Add more helper methods to be used by all tests here...
-  #load File.join(RAILS_ROOT,'test', 'mocks', 'test', 'authenticated_mock.rb')
-  
-    def self.should_have_attached_file(attachment)
-      klass = self.name.gsub(/Test$/, '').constantize
-    
-      context "To support a paperclip attachment named #{attachment}, #{klass}" do
-        should_have_db_column("#{attachment}_file_name",    :type => :string)
-        should_have_db_column("#{attachment}_content_type", :type => :string)
-        should_have_db_column("#{attachment}_file_size",    :type => :integer)
-      end
-    
-      should "have a paperclip attachment named ##{attachment}" do
-        assert klass.new.respond_to?(attachment.to_sym), 
-               "@#{klass.name.underscore} doesn't have a paperclip field named #{attachment}"
-        assert_equal Paperclip::Attachment, klass.new.send(attachment.to_sym).class
-      end
+
+  def self.should_have_attached_file(attachment)
+    klass = self.name.gsub(/Test$/, '').constantize
+
+    context "To support a paperclip attachment named #{attachment}, #{klass}" do
+      should_have_db_column("#{attachment}_file_name",    :type => :string)
+      should_have_db_column("#{attachment}_content_type", :type => :string)
+      should_have_db_column("#{attachment}_file_size",    :type => :integer)
     end
-    
-    def self.should_accept_nested_attributes_for(*associations)
-      klass = self.name.gsub(/Test$/, '').constantize
-  
-      associations.each do |association|
-        should "accept nested attributes for #{association}" do
-          assert klass.new.respond_to?("#{association}_attributes="), "#{klass} does not accept nested attributes for association: #{association}"
-        end
+
+    should "have a paperclip attachment named ##{attachment}" do
+      assert klass.new.respond_to?(attachment.to_sym), 
+      "@#{klass.name.underscore} doesn't have a paperclip field named #{attachment}"
+      assert_equal Paperclip::Attachment, klass.new.send(attachment.to_sym).class
+    end
+  end
+
+  def self.should_accept_nested_attributes_for(*associations)
+    klass = self.name.gsub(/Test$/, '').constantize
+
+    associations.each do |association|
+      should "accept nested attributes for #{association}" do
+        assert klass.new.respond_to?("#{association}_attributes="), "#{klass} does not accept nested attributes for association: #{association}"
       end
     end
-    
-    Factory.define :person do |p|
-      p.sur_name 'bauer'
-      p.given_name 'bill'
-    end
+  end    
 
-    Factory.define :theme do |t|
-      t.name  'Agronomic'
-    end
-
-    Factory.define :dataset do |d|
-      d.title 'KBS001'
-      d.abstract 'some new dataset'
-    end
-
-    Factory.define :protocol do |p|
-      p.name  'Proto1'
-      p.version  0
-      p.dataset Factory.create(:dataset)
-    end
-    
-    Factory.define :study do |s|
-      s.name 'LTER'
-    end
-
-    Factory.define :variate do |v|
-      v.name 'date'
-    end
-    
-    Factory.define :datatable do |d|
-       d.name 'KBS001_001'
-       d.title 'a really cool datatable'
-       d.object 'select now() as sample_date'
-       d.is_sql true
-       d.description 'This is a datatable'
-       d.weight 100
-       d.theme Factory.create(:theme)
-     end
-     
-     Factory.define :website do |w|
-     end
-     
-     Factory.define :template do |t|
-     end
-    
+  # from http://github.com/maxim/shmacros
+  # def self.should_validate_associated(*associations)
+  #   klass = self.name.gsub(/Test$/, '').constantize
+  #   associations.each do |association|
+  #     should "validate associated #{association}" do
+  #       p klass.new.methods.grep(/valid/)
+  #       assert klass.new.respond_to?("validate_associated_records_for_#{association}")
+  #     end
+  #   end
+  # end
 end
+
+
 

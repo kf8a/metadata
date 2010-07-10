@@ -100,55 +100,7 @@ jQuery(document).ready(function() {
 	geo_decode();
 	jQuery('.quickTree').quickTree();
 	jQuery('.collapsable').collapseDiv();
-	
-	jQuery(function() {
-		jQuery.ajax({
-			url: "/datatables/suggest",
-			dataType: "json",
-			success: function(data) {
-				var cache = data;
 		
-				jQuery("#keyworder").autocomplete({
-					source: cache,
-					minLength: 2
-				});
-			}
-		});
-	});
-				
-	jQuery(function() {
-		if (jQuery('#keyworder')[0].value == 'Search for core areas, keywords or people') {	
-			jQuery('#keyworder').addClass("default");
-		};
-	});
-	
-		
-	jQuery('#keyworder').focus(function() {
-		if(this.value=='Search for core areas, keywords or people') {
-				this.value='';
-				jQuery(this).removeClass('default');
-		}	});
-	jQuery('#keyworder').blur(function() {
-		if(this.value=='') {
-				this.value='Search for core areas, keywords or people';
-				jQuery(this).addClass('default');			
-		} });
-	
-	jQuery('#peoplesearch').addClass("default");	
-	jQuery('#peoplesearch').focus(function() {
-		if(this.value==jQuery(this)[0].defaultValue) {
-				this.value='';
-		};
-		jQuery(this).removeClass('default');
-	});
-	jQuery('#peoplesearch').blur(function() {
-		if(this.value=='') {
-				this.value=jQuery(this)[0].defaultValue;
-		};
-		jQuery(this).addClass('default');
-	});
-	
-	
 	jQuery('.quickTree').prepend("<a href='#' class='expand_all'>[Expand All]</a>")
 	jQuery('.expand_all').toggle(
 		function() {

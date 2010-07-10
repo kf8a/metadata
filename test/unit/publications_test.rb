@@ -1,13 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class PublicationsTest < ActiveSupport::TestCase
-
-  Factory.define :publication do |p|
-    p.citation  'bogus data, brown and company'
-    p.abstract 'something in here'
-    p.year 2000
-    p.publication_type_id 1
-  end
   
   context 'finding publications by words' do
     setup do

@@ -11,14 +11,14 @@ set :deploy_to, "/var/u/apps/#{application}"
 set :user, 'deploy'
 set :use_sudo, false
 
-set :branch, "master"
+set :branch, "clearance"
 set :deploy_via, :copy
 #set :git_enable_submodules,1
 
 
-role :app, 'houghton.kbs.msu.edu'
-role :web, 'houghton.kbs.msu.edu'
-role :db,  'houghton.kbs.msu.edu', :primary => true
+role :app, 'sebewa.kbs.msu.edu'
+role :web, 'sebewa.kbs.msu.edu'
+role :db,  'sebewa.kbs.msu.edu', :primary => true
 
 namespace :deploy do
   namespace :thin do

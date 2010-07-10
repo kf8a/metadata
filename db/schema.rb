@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100618120203) do
+ActiveRecord::Schema.define(:version => 20100701150102) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20100618120203) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "sponsor_id"
+    t.integer  "website_id"
   end
 
   add_index "datasets", ["dataset"], :name => "datasets_dataset_key", :unique => true
@@ -116,7 +117,6 @@ ActiveRecord::Schema.define(:version => 20100618120203) do
     t.datetime "updated_at"
     t.boolean  "is_secondary",          :default => false
     t.boolean  "is_utf_8",              :default => false
-    t.integer  "website_id"
     t.boolean  "metadata_only",         :default => false
   end
 
@@ -199,6 +199,13 @@ ActiveRecord::Schema.define(:version => 20100618120203) do
     t.binary "value"
   end
 
+  create_table "ownerships", :force => true do |t|
+    t.integer  "datatable_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "people", :force => true do |t|
     t.string  "person"
     t.string  "sur_name"
@@ -219,6 +226,14 @@ ActiveRecord::Schema.define(:version => 20100618120203) do
     t.string  "url"
     t.boolean "deceased"
     t.string  "open_id"
+  end
+
+  create_table "permissions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "datatable_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "owner_id"
   end
 
   create_table "projects", :force => true do |t|
@@ -335,6 +350,7 @@ ActiveRecord::Schema.define(:version => 20100618120203) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "data_restricted", :default => false
   end
 
   create_table "studies", :force => true do |t|
@@ -400,6 +416,23 @@ ActiveRecord::Schema.define(:version => 20100618120203) do
 
   add_index "units", ["name"], :name => "unit_names_key", :unique => true
 
+  create_table "users", :force => true do |t|
+    t.string   "email"
+    t.string   "encrypted_password", :limit => 128
+    t.string   "salt",               :limit => 128
+    t.string   "confirmation_token", :limit => 128
+    t.string   "remember_token",     :limit => 128
+    t.boolean  "email_confirmed",                   :default => false, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "identity_url"
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["id", "confirmation_token"], :name => "index_users_on_id_and_confirmation_token"
+  add_index "users", ["identity_url"], :name => "index_users_on_identity_url", :unique => true
+  add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
+
   create_table "variates", :force => true do |t|
     t.string  "name"
     t.integer "datatable_id"
@@ -426,6 +459,7 @@ ActiveRecord::Schema.define(:version => 20100618120203) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "dataset_id"
   end
 
 end

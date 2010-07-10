@@ -11,10 +11,10 @@
 	<li id="abstract_<%= abstract.id %>" class="citation">
 		<%= truncate(abstract.authors, :length=>80) %>
 		<%= link_to "#{abstract.title}", abstract_path(abstract) %>
-		<%= link_to 'Edit', edit_abstract_path(abstract) if logged_in? %>
-			<%= link_to_remote image_tag("trash.gif"), :url => abstract_path(abstract), :method => 'delete', :confirm => 'Are you sure?' if logged_in?%>
+		<%= link_to 'Edit', edit_abstract_path(abstract) if signed_in? %>
+			<%= link_to_remote image_tag("trash.gif"), :url => abstract_path(abstract), :method => 'delete', :confirm => 'Are you sure?' if signed_in?%>
 	</li>
 	<% end %>
 </ul>
 <p><%= @meeting.date.to_s(:long) %></p>
-<p><%= link_to 'Add abstract', new_abstract_path({:meeting => @meeting.id}) if logged_in? %></p>
+<p><%= link_to 'Add abstract', new_abstract_path({:meeting => @meeting.id}) if signed_in? %></p>

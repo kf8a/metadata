@@ -1,8 +1,8 @@
 require 'test_helper'
 
 class WebsiteTest < ActiveSupport::TestCase
-  should_have_many :datatables
-  should_have_many :templates
+  should have_many :datasets
+  should have_many :templates
 
   context 'website' do
     setup do

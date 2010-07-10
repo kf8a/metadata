@@ -1,18 +1,8 @@
-require File.dirname(__FILE__) + '/../test_helper'
-require 'sessions_controller'
-
-# Re-raise errors caught by the controller.
-class SessionsController; def rescue_action(e) raise e end; end
+require 'test_helper'
 
 class SessionsControllerTest < ActionController::TestCase
-  def setup
-    @controller = SessionsController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
-  end
-
   # Replace this with your real tests.
-  def test_truth
+  test "the truth" do
     assert true
   end
 end

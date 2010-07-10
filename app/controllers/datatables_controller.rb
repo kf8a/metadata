@@ -47,15 +47,16 @@ class DatatablesController < ApplicationController
         query =  @datatable.object
         #@data_count = ActiveRecord::Base.connection.execute("select count() from (#{@datatable.object}) as t1")
 
-        @datatable.excerpt_limit = 50 unless @datatable.excerpt_limit
+        @datatable.excerpt_limit = 5 unless @datatable.excerpt_limit
         query = query + " limit #{@datatable.excerpt_limit}" 
         @values  = ActiveRecord::Base.connection.execute(query)
         #TDOD convert the array into a ruby object
       end
     end
 
-    #grab the right template to render
-    template = Website.find(1).layout('datatable','show')
+    #grab the right template to render otherwise just do the default thing for now
+    website = Website.find(:first)
+    template = website.layout('datatable','show') if website
 
     respond_to do |format|
       if template
@@ -87,6 +88,7 @@ class DatatablesController < ApplicationController
   # POST /datatables.xml
   def create
     @datatable = Datatable.new(params[:datatable])
+    @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
 
     respond_to do |format|
       if @datatable.save
@@ -193,7 +195,7 @@ class DatatablesController < ApplicationController
     if @keyword_list
       @datatables = Datatable.search @keyword_list, :tag => {:website => 'LTER'}
     else
-      @datatables = Datatable.find(:all, :conditions => ['is_secondary is false and website_id = ?', Website.find_by_name('LTER')])
+      @datatables = Datatable.find(:all, :joins=> 'left join datasets on datasets.id = datatables.dataset_id', :conditions => ['is_secondary is false and website_id = ?', Website.find_by_name('LTER')])
     end
 
     @studies = Study.find_all_roots_with_datatables(@datatables, {:order => 'weight'})

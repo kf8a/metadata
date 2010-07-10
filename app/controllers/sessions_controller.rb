@@ -1,41 +1,53 @@
-class SessionsController < ApplicationController
+class SessionsController < Clearance::SessionsController
 
-  skip_before_filter :login_required
-  
   def create
-    open_id_authentication(params[:openid_url])
+    if params[:session]
+      session = params[:session]
+      params[:openid_url] = session[:openid_url] unless session[:openid_url].empty?
+    end
+    if using_open_id?
+      authenticate_with_openid
+    else
+      super    # let clearance handle it
+    end
   end
   
-  def new
-    store_location
-  end
-  
-  def delete
-    logout
-  end
-  
- protected
-  def open_id_authentication(identity_url)
-      authenticate_with_open_id(identity_url) do |status, identity_url|
-        if :successful
-          if @current_user = Person.find_by_open_id(identity_url)
-            successful_login
+  private
+    
+  def authenticate_with_openid
+    @openid_url = params[:openid_url]
+
+    # Pass optional :required and :optional keys to specify what sreg fields
+    # you want. Be sure to yield registration, a third argument in the block.
+    authenticate_with_open_id(@openid_url, :optional => [:email]) do |result, identity_url, reg|
+       
+      if result.successful?
+        @user = ::User.find_by_identity_url(identity_url)
+        logger.info @user
+        if @user.nil?
+          if reg['email'].present?
+            # create account for user
+            @user = ::User.new
+            @user.email = reg['email']
+            @user.identity_url = identity_url
+            @user.encrypted_password = 'no password' # hack around validation
+            @user.save
           else
-            failed_login "Sorry, no user by that identity URL exists"
+            flash[:notice] = "We couldn't get your email address from your OpenId provider, please enter it to finish"
+            # didn't get email from openid, need to prompt for it
+            redirect_to new_user_path(:identity_url => identity_url)
+            return
           end
         end
+
+        sign_user_in(@user)
+        redirect_back_or url_after_create
+      else
+        deny_access(result.message ||
+        "Sorry, could not authenticate #{identity_url}")
       end
     end
 
-  private
-    def successful_login
-      login(@current_user.id)
-      redirect_back_or_default
-    end
+  end
 
-    def failed_login(message)
-      flash[:error] = message
-      redirect_to(new_sessions_url)
-    end
-  
 end

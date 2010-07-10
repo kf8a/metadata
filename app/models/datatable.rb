@@ -11,12 +11,17 @@ class Datatable < ActiveRecord::Base
   belongs_to :theme
   belongs_to :core_area
   belongs_to :study
-  belongs_to :website
   
   has_many :data_contributions
   has_many :people, :through => :data_contributions
+  
+  #permissions
+  has_many :permissions
+  #has_many :users, :through => :permissions
+  has_many :ownerships
+  has_many :owners, :through => :ownerships, :source => :user
     
-  validates_presence_of :title
+  validates_presence_of :title, :dataset
   
   accepts_nested_attributes_for :data_contributions
   
@@ -65,6 +70,26 @@ class Datatable < ActiveRecord::Base
       end
     end
     h
+  end
+  
+  def restricted?
+    if dataset.sponsor
+      dataset.sponsor.data_restricted?
+    else
+      false
+    end
+  end
+  
+  def can_download?(user)
+    if restricted?
+      if user.nil?
+        false
+      else
+        permitted?(user)
+      end
+    else
+      true
+    end
   end
   
   def within_interval?(start_date=Date.today, end_date=Date.today)
@@ -222,5 +247,10 @@ private
         time = time.to_date
     end
     time
+  end
+  
+  def permitted?(user)
+    granted_by = permissions.collect {|x| x.user == user ? x.owner : nil}.compact
+    granted_by == owners
   end
 end
