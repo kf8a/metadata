@@ -3,6 +3,8 @@ class DatatablesController < ApplicationController
   #before_filter :is_restricted
   before_filter :login_required, :except => [:index, :show, :suggest, :search] if ENV["RAILS_ENV"] == 'production'
   caches_page :index
+  caches_page :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
+
 
   # GET /datatables
   # GET /datatables.xml
@@ -81,6 +83,12 @@ class DatatablesController < ApplicationController
     @datatable = Datatable.find(params[:id])
 
     @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
+    @expire_path = "/datatables/" + @datatable.id.to_s + ".csv"
+  end
+  
+  def delete_csv_cache
+    @expire_path = params[:expire_path]
+    expire_page @expire_path
   end
 
   # POST /datatables
