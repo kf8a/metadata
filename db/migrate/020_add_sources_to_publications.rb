@@ -1,6 +1,7 @@
 class AddSourcesToPublications < ActiveRecord::Migration
   def self.up
     add_column :publications, :source_id, :integer
+    add_column :publications, :parent_id, :integer
     
     create_table :sources do |t|
         t.column :title, :string
@@ -9,6 +10,7 @@ class AddSourcesToPublications < ActiveRecord::Migration
 
   def self.down
     drop_table :sources
+    remove_column :publications, :parent_id
     remove_column :publications, :source_id
   end
 end
