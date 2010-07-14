@@ -68,7 +68,7 @@ end
 SubdomainFu.tld_sizes = {:development => 0,
                          :cucumber => 0,
                          :test => 0,
-                         :production => 4} # set all at once (also the defaults)
+                         :production => 3} # set all at once (also the defaults)
 
 
 OpenIdAuthentication.store = :file
