@@ -1,7 +1,7 @@
 class DatatablesController < ApplicationController
 
   #before_filter :is_restricted
-  before_filter :login_required, :except => [:index, :show, :suggest, :search] if ENV["RAILS_ENV"] == 'production'
+  before_filter :authenticate, :except => [:index, :show, :suggest, :search] if ENV["RAILS_ENV"] == 'production'
   caches_page :index
 
   # GET /datatables
@@ -192,7 +192,6 @@ class DatatablesController < ApplicationController
     @keyword_list = query['keyword_list']
     @keyword_list = nil if @keyword_list.empty? || @keyword_list == @default_value
 
-    logger.info 'subdomain', current_subdomain
     if @keyword_list
       @datatables = Datatable.search @keyword_list, :tag => {:website => current_subdomain}
     else

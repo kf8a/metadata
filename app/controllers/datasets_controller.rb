@@ -2,7 +2,7 @@ class DatasetsController < ApplicationController
       
   before_filter :set_title
   before_filter :allow_on_web, :except => [:autocomplete_for_keyword_list]
-  before_filter :login_required, :except => [:index, :show, :auto_complete_for_keyword_list] if ENV["RAILS_ENV"] == 'production'
+  before_filter :authenticate, :except => [:index, :show, :auto_complete_for_keyword_list] if ENV["RAILS_ENV"] == 'production'
   
   layout proc {|controller| controller.request.format == :eml ? false : 'application'}
   
