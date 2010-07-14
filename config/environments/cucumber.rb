@@ -22,6 +22,8 @@ config.action_controller.allow_forgery_protection    = false
 config.action_mailer.default_url_options = {:host => 'localhost:3000'} 
 config.action_mailer.delivery_method = :test
 
+SubdomainFu.tld_size = 1
+
 config.gem "shoulda", :lib => false
 config.gem "factory_girl" , :lib => false
  

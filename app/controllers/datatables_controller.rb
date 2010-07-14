@@ -192,10 +192,14 @@ class DatatablesController < ApplicationController
     @keyword_list = query['keyword_list']
     @keyword_list = nil if @keyword_list.empty? || @keyword_list == @default_value
 
+    logger.info 'subdomain', current_subdomain
     if @keyword_list
-      @datatables = Datatable.search @keyword_list, :tag => {:website => 'LTER'}
+      @datatables = Datatable.search @keyword_list, :tag => {:website => current_subdomain}
     else
-      @datatables = Datatable.find(:all, :joins=> 'left join datasets on datasets.id = datatables.dataset_id', :conditions => ['is_secondary is false and website_id = ?', Website.find_by_name('LTER')])
+      @datatables = Datatable.find(:all, 
+                                   :joins=> 'left join datasets on datasets.id = datatables.dataset_id', 
+                                   :conditions => ['is_secondary is false and website_id = ?',
+                                        Website.find_by_name(current_subdomain)])
     end
 
     @studies = Study.find_all_roots_with_datatables(@datatables, {:order => 'weight'})

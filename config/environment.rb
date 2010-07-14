@@ -29,7 +29,7 @@ Rails::Initializer.run do |config|
   config.gem "shoulda", :lib => false
   config.gem "factory_girl" , :lib => false
  
-  #config.gem 'subdomain-fu'
+  config.gem 'subdomain-fu'
   #config.gem "matthuhiggins-foreigner", :lib => "foreigner"
   
   # Settings in config/environments/* take precedence over those specified here
@@ -64,6 +64,12 @@ Rails::Initializer.run do |config|
   
   # See Rails::Configuration for more options
 end
+
+SubdomainFu.tld_sizes = {:development => 0,
+                         :cucumber => 0,
+                         :test => 0,
+                         :production => 1} # set all at once (also the defaults)
+
 
 OpenIdAuthentication.store = :file
 Struct.new('Crumb', :url, :name)
