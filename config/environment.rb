@@ -58,7 +58,9 @@ config.action_controller.session_store = :active_record_store
   # config.active_record.default_timezone = :utc
   
   # See Rails::Configuration for more options
+  
 end
 
+ActionController::Base.cache_store = :file_store, "tmp/cache" #"/path/to/cache/directory" 
 Struct.new('Crumb', :url, :name)
 

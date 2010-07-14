@@ -11,6 +11,4 @@
 
 <%= link_to 'Show', datatable_path(@datatable) %> |
 <%= link_to 'Back', datatables_path %>
-<%= button_to_remote "Delete cached version", :url => { :action => "delete_csv_cache", :expire_path => @expire_path } %> 
-
-expire_page @expire_path
+<%= button_to_remote "Delete cached version", :url => { :action => "delete_csv_cache", :id => @datatable } if @controller.fragment_exist?(:controller => "datatables", :action => "show", :id => @datatable, :format => "csv") %>
