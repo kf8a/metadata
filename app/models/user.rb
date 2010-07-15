@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
 
   before_save :downcase_email
 
+  def allowed(datatable)
+    false
+  end
   protected
 
   def downcase_email

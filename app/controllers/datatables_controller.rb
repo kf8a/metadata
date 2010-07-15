@@ -1,8 +1,10 @@
 class DatatablesController < ApplicationController
+  
+  layout :site_layout
 
   #before_filter :is_restricted
-  before_filter :login_required, :except => [:index, :show, :suggest, :search] if ENV["RAILS_ENV"] == 'production'
-  caches_page :index
+  before_filter :authenticate, :except => [:index, :show, :suggest, :search] if ENV["RAILS_ENV"] == 'production'
+  #caches_page :index
 
   # GET /datatables
   # GET /datatables.xml
@@ -11,7 +13,7 @@ class DatatablesController < ApplicationController
     @default_value = 'Search for core areas, keywords or people'
 
     respond_to do |format|
-      format.html # index.rhtml
+      format.html {render "#{current_subdomain}_index.html.erb"}
       format.xml  { render :xml => @datatables.to_xml }
       format.rss {render :rss => @datatables}
     end
@@ -131,6 +133,7 @@ class DatatablesController < ApplicationController
     end
   end
 
+  #TODO only return the ones for the right website.
   def suggest
     term = params[:term]
     #  list = Datatable.tags.all.collect {|x| x.name.downcase}
@@ -156,7 +159,11 @@ class DatatablesController < ApplicationController
   private
 
   def set_title
-    @title  = 'LTER Data Catalog'
+    if current_subdomain == "lter"
+      @title  = 'LTER Data Catalog'
+    else
+      @title = 'GLBRC Data Catalog'
+    end
   end
 
   def set_crumbs
@@ -193,12 +200,16 @@ class DatatablesController < ApplicationController
     @keyword_list = nil if @keyword_list.empty? || @keyword_list == @default_value
 
     if @keyword_list
-      @datatables = Datatable.search @keyword_list, :tag => {:website => 'LTER'}
+      @datatables = Datatable.search @keyword_list, :tag => {:website => current_subdomain}
     else
-      @datatables = Datatable.find(:all, :joins=> 'left join datasets on datasets.id = datatables.dataset_id', :conditions => ['is_secondary is false and website_id = ?', Website.find_by_name('LTER')])
+      @datatables = Datatable.find(:all, 
+                                   :joins=> 'left join datasets on datasets.id = datatables.dataset_id', 
+                                   :conditions => ['is_secondary is false and website_id = ?',
+                                        Website.find_by_name(current_subdomain)])
     end
 
     @studies = Study.find_all_roots_with_datatables(@datatables, {:order => 'weight'})
 
   end
+  
 end

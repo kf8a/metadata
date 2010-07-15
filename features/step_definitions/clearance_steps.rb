@@ -40,7 +40,13 @@ When /^session is cleared$/ do
 end
 
 Given /^I have signed in with "(.*)"\/"(.*)"$/ do |email, password|
-  Given %{I am signed up and confirmed as "#{email}/#{password}"}
+  #Given %{I am signed up and confirmed as "#{email}/#{password}"}
+  #TODO not sure why I can't call this step definition from another file
+  user = Factory :email_confirmed_user,
+      :email                 => email,
+      :password              => password,
+      :password_confirmation => password
+          
   And %{I sign in as "#{email}/#{password}"}
 end
 

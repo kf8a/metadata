@@ -1,0 +1,15 @@
+
+<div id='protocols'>
+<h1 class='right'>Protocols</h1>
+<ul>
+  <% @protocols.each do |protocol|%>
+  <li class='study-title'>
+    <%=link_to protocol.title, protocol_path(protocol) %>
+    <p><%=h truncate(protocol.abstract, :length => 300) %></p>
+  </li>
+  <% end %>
+</ul>
+</div>
+<!-- <h1>Other Data</h1>
+
+<h1>Data Queue</h1> -->

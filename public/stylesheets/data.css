@@ -279,6 +279,10 @@ table.data-description {
 	padding-right:2em;
 }
 
+.big {
+	font-size:large;
+}
+
 .quickTree {
 	border-top-style: solid;
 }
