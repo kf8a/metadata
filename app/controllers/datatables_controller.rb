@@ -13,7 +13,7 @@ class DatatablesController < ApplicationController
     @default_value = 'Search for core areas, keywords or people'
 
     respond_to do |format|
-      format.html # index.rhtml
+      format.html {render "#{current_subdomain}_index.html.erb"}
       format.xml  { render :xml => @datatables.to_xml }
       format.rss {render :rss => @datatables}
     end

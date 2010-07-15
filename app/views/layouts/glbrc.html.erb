@@ -12,56 +12,29 @@
   <script>jQuery.noConflict();</script>
 
   <%= javascript_include_merged :base %>
-  <%= javascript_include_tag 'keyworder'%>
   	  
-  <link rel="alternate" type="application/rss+xml" title="Data" href="/datatables.rss" />
 </head>
 <body>
 	<div id='wrapper'>
+	  <div id='glbrc'>
 		<div id='branding'>
-			<a id='msu_logo' href="http://www.msu.edu">
-				<img alt="Michigan State University" src="/images/common/logo_msu_pos_122.gif"/>
+			<a id='glbrc-logo' href="http://glbrc.org">
+				<img alt="Great Lakes Bioenergy Consortium" src="/images/common/glbrc_small.jpg"/>
 			</a>
 			<h1><%= @title %></h1>
-			<div id="topcoloredbar">
-				<div id='search'>
-					<a href="/people">People</a>
-
-					<form action="http://www.google.com/u/ltersearch" method='get' id="searchform">
-						<input id='peoplesearch' type='text' name='q' maxlength='255' size='20' value="Search KBS LTER"/>
-					</form>
-				</div>
-				<h2><a href='/'>The KBS LTER Site</a></h2>
-			</div>
+		
 
 		</div>
 		<div id='content'>
 			
 			<p style="color: green"><%= flash[:notice] %></p>
-			<ul id=crumbs>
-				<li><a href='/'>Home</a></li>
-
-				<% @crumbs.each do |crumb| %>
-				<li> >
-				<%if crumb.url.nil? %>
-				  <%= crumb.name %>
-				<%else %>
-				   <%= link_to "#{crumb.name}", crumb.url  %>
-				<% end %>
-				</li>
-				<% end %>
-
-			</ul>
 			<%= yield  %>
 		</div>
 		<div id='navigation'>
-			<%= render :file => "#{RAILS_ROOT}/public/system/navigation.html"%>
-			<% if controller.controller_name == 'datasets' || controller.controller_name == 'datatables' || controller.controller_name == 'protocols' %>
-			  <%= render :file => "#{RAILS_ROOT}/public/system/network_db.html"%>
-			<% end %>
+
 		</div>
 		<div id='footer'>
-			<%= render :file  => "#{RAILS_ROOT}/public/system/footer.html"%>
+		</div>
 		</div>
 	</div>
   
