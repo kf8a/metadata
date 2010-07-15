@@ -1,4 +1,6 @@
 class DatatablesController < ApplicationController
+  
+  layout :datatable_layout
 
   #before_filter :is_restricted
   before_filter :authenticate, :except => [:index, :show, :suggest, :search] if ENV["RAILS_ENV"] == 'production'
@@ -156,7 +158,11 @@ class DatatablesController < ApplicationController
   private
 
   def set_title
-    @title  = 'LTER Data Catalog'
+    if current_subdomain == "lter"
+      @title  = 'LTER Data Catalog'
+    else
+      @title = 'GLBRC Data Catalog'
+    end
   end
 
   def set_crumbs
@@ -203,5 +209,9 @@ class DatatablesController < ApplicationController
 
     @studies = Study.find_all_roots_with_datatables(@datatables, {:order => 'weight'})
 
+  end
+  
+  def datatable_layout
+    current_subdomain == 'glbrc' ? "glbrc" : "lter"
   end
 end
