@@ -17,6 +17,7 @@ stylesheets:
   - branding
   - data
   - kbs
+  - glbrc
   - navigation
   - scaffold
   - textile-editor
