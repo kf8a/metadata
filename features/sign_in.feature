@@ -45,4 +45,8 @@ Feature: Sign in
     And I sign in with the identity_url "bad.url"
     Then  I should be signed out
     And I should see "Bad email or password"
+  
+  #TODO  
+  Scenario: Openid user signs in with an account without an email
+  
     
