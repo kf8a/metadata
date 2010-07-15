@@ -1,6 +1,6 @@
 class DatatablesController < ApplicationController
   
-  layout :datatable_layout
+  layout :site_layout
 
   #before_filter :is_restricted
   before_filter :authenticate, :except => [:index, :show, :suggest, :search] if ENV["RAILS_ENV"] == 'production'
@@ -211,7 +211,4 @@ class DatatablesController < ApplicationController
 
   end
   
-  def datatable_layout
-    current_subdomain == 'glbrc' ? "glbrc" : "lter"
-  end
 end

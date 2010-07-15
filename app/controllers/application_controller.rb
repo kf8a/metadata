@@ -23,4 +23,8 @@ class ApplicationController < ActionController::Base
     @crumbs = []
   end
   
+  def site_layout
+     current_subdomain == 'glbrc' ? "glbrc" : "lter"
+  end
+  
 end

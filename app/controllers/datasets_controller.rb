@@ -1,10 +1,12 @@
 class DatasetsController < ApplicationController
       
+  layout :site_layout
+  
   before_filter :set_title
   before_filter :allow_on_web, :except => [:autocomplete_for_keyword_list]
   before_filter :authenticate, :except => [:index, :show, :auto_complete_for_keyword_list] if ENV["RAILS_ENV"] == 'production'
   
-  layout proc {|controller| controller.request.format == :eml ? false : 'application'}
+  #layout proc {|controller| controller.request.format == :eml ? false : 'application'}
   
   # POST /dataset
   def upload
@@ -172,4 +174,5 @@ class DatasetsController < ApplicationController
     dataset = Dataset.find(params[:id])
     dataset.on_web
   end
+  
 end
