@@ -4,7 +4,7 @@ class DatatablesController < ApplicationController
 
   #before_filter :is_restricted
   before_filter :authenticate, :except => [:index, :show, :suggest, :search] if ENV["RAILS_ENV"] == 'production'
-  caches_page :index
+  #caches_page :index
 
   # GET /datatables
   # GET /datatables.xml
