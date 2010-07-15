@@ -1,7 +1,8 @@
 class ProtocolsController < ApplicationController
   
+  layout :site_layout
   before_filter :set_title
-  caches_action :index
+  #caches_action :index
   
   # GET /protocols
   # GET /protocols.xml

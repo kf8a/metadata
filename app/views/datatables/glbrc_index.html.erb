@@ -8,7 +8,7 @@ The Thrust 4 Data Catalog is a collection of GLBRC data related to sustainabilit
   Data from the Great Lakes Bioenergy Research Center Sustainability Thrust database are copyrighted. Use of any data from this catalog in a public presentation or publication requires written permission from the lead investigator (listed with each data table) or the GLBRC T4 Research Leader.  This restriction applies to users both internal and external to the Center.  These restrictions are intended mainly to preserve the primary investigators' rights to first publication and to ensure that data users are aware of the limitations that may be associated with the data. All publications with GLBRC T4 data and images must acknowledge the DOE Great Lakes Bioenergy Research Center grant (DOE BER Office of Science DE-FC02-07ER64494).</p>
 
 <div id='search-form'>
-  <%= form_tag '/glbrc', :method => 'get'%>
+  <%= form_tag '/datatables', :method => 'get'%>
   
       <div id='keyword-search'>
        <%= text_field_tag :keyword_list, @keyword_list || @default_value , {:id => 'keyworder'}  %>

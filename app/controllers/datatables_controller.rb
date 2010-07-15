@@ -133,6 +133,7 @@ class DatatablesController < ApplicationController
     end
   end
 
+  #TODO only return the ones for the right website.
   def suggest
     term = params[:term]
     #  list = Datatable.tags.all.collect {|x| x.name.downcase}
