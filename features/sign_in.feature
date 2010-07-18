@@ -4,7 +4,7 @@ Feature: Sign in
   Should be able to sign in
 
     Scenario: User is not signed up
-      Given I visit 'http://lter.localhost:3000'
+      Given I go to 'http://lter.localhost:3000'
       Given no user exists with an email of "email@person.com"
       When I go to the sign in page
       And I sign in as "email@person.com"/"password"
