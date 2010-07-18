@@ -11,9 +11,10 @@ class DatatablesController < ApplicationController
   def index
     retrieve_datatables('keyword_list' =>'')
     @default_value = 'Search for core areas, keywords or people'
+    request_subdomain = params[:requested_subdomain] || current_subdomain
 
     respond_to do |format|
-      format.html {render "#{current_subdomain}_index.html.erb"}
+      format.html {render "#{request_subdomain}_index.html.erb"}
       format.xml  { render :xml => @datatables.to_xml }
       format.rss {render :rss => @datatables}
     end
