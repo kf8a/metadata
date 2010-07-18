@@ -4,7 +4,7 @@ Feature: Sign out
   Should be able to sign out
 
     Scenario: User signs out
-      Given I visit 'http://lter.localhost:3000'    
+      Given I am in the LTER subdomain
       Given I am signed up and confirmed as "email@person.com"/"password"
       When I sign in as "email@person.com"/"password"
       Then I should be signed in

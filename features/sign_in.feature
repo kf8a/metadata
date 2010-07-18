@@ -4,7 +4,7 @@ Feature: Sign in
   Should be able to sign in
 
     Scenario: User is not signed up
-      Given I visit 'http://lter.localhost:3000'
+      Given I am in the LTER subdomain
       Given no user exists with an email of "email@person.com"
       When I go to the sign in page
       And I sign in as "email@person.com"/"password"
@@ -12,7 +12,7 @@ Feature: Sign in
       And I should be signed out
 
     Scenario: User is not confirmed
-      Given I visit 'http://lter.localhost:3000'
+      Given I am in the LTER subdomain
       Given I signed up with "email@person.com"/"password"
       When I go to the sign in page
       And I sign in as "email@person.com"/"password"
@@ -20,7 +20,7 @@ Feature: Sign in
       And I should be signed out
 
    Scenario: User enters wrong password
-      Given I visit 'http://lter.localhost:3000'
+      Given I am in the LTER subdomain
       Given I am signed up and confirmed as "email@person.com"/"password"
       When I go to the sign in page
       And I sign in as "email@person.com"/"wrongpassword"
@@ -28,7 +28,7 @@ Feature: Sign in
       And I should be signed out
 
    Scenario: User signs in successfully
-      Given I visit 'http://lter.localhost:3000'
+      Given I am in the LTER subdomain
       Given I am signed up and confirmed as "email@person.com"/"password"
       When I go to the sign in page
       And I sign in as "email@person.com"/"password"
@@ -38,14 +38,14 @@ Feature: Sign in
       Then I should be signed in
  
   Scenario: Openid user signs in
-    Given I visit 'http://lter.localhost:3000'
+    Given I am in the LTER subdomain
     Given I am signed up with openid "http://person@person.com"
     When I go to the sign in page
     And I sign in as "email@person.com"
     Then I should be signed in
  
   Scenario: Openid user signs in with invalid identity_url
-    Given I visit 'http://lter.localhost:3000'
+    Given I am in the LTER subdomain
     Given no user exists with an email of "email@person.com"
     When I go to the sign in page
     And I sign in with the identity_url "bad.url"
