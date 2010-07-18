@@ -4,7 +4,7 @@ Feature: Sign up
   Should be able to sign up
 
     Scenario: User signs up with invalid data
-      Given I visit 'http://lter.localhost:3000'
+      Given I am in the LTER subdomain
       When I go to the sign up page
       And I fill in "Email" with "invalidemail"
       And I fill in "Password" with "password"
@@ -13,7 +13,7 @@ Feature: Sign up
       Then I should see error messages
 
     Scenario: User signs up with valid data
-      Given I visit 'http://lter.localhost:3000'
+      Given I am in the LTER subdomain
       When I go to the sign up page
       And I fill in "Email" with "email@person.com"
       And I fill in "Password" with "password"
@@ -23,13 +23,13 @@ Feature: Sign up
       And a confirmation message should be sent to "email@person.com"
 
     Scenario: User confirms his account
-      Given I visit 'http://lter.localhost:3000'
+      Given I am in the LTER subdomain
       Given I signed up with "email@person.com"/"password"
       When I follow the confirmation link sent to "email@person.com"
       Then I should be signed in
 
     Scenario: Signed in user clicks confirmation link again
-      Given I visit 'http://lter.localhost:3000'
+      Given I am in the LTER subdomain
       Given I signed up with "email@person.com"/"password"
       When I follow the confirmation link sent to "email@person.com"
       Then I should be signed in
@@ -38,7 +38,7 @@ Feature: Sign up
       And I should be signed in
 
     Scenario: Signed out user clicks confirmation link again
-      Given I visit 'http://lter.localhost:3000'
+      Given I am in the LTER subdomain
       Given I signed up with "email@person.com"/"password"
       When I follow the confirmation link sent to "email@person.com"
       Then I should be signed in
