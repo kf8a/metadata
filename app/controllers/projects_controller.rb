@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
+  
   # GET /projects
   # GET /projects.xml
   def index
