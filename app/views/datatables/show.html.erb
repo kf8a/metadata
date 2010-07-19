@@ -185,4 +185,4 @@ end -%>
 <% end -%>
 
 <%= link_to 'Back to Data Catalog', datatables_path() %>&nbsp;&nbsp;
-<%= link_to 'Edit', edit_datatable_path(@datatable) if admin? %>
+<%= link_to 'Edit', edit_datatable_path(@datatable) if current_user.try(:admin?) %>
