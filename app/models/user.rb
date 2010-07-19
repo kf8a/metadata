@@ -1,8 +1,6 @@
 class User < ActiveRecord::Base
   include Clearance::User
   
-  ROLES = %w[admin editor uploader]
-  
   has_many :permissions
   has_many :datatables, :through => :ownership
 
