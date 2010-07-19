@@ -19,7 +19,9 @@ class UploadsControllerTest < ActionController::TestCase
   end
   
   test "should show an upload" do
-    @upload = Factory.create(:upload)
+    file_name = '/../SingingSongtestfile.txt'
+    post :create, :upload => {:title => 'Title', :abstract => 'Abstract', :owners => 'Me', :file => fixture_file_upload(file_name)}
+    @upload = Upload.find(:first)
     get :show, :id => @upload
     assert_response :success
   end
