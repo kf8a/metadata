@@ -63,3 +63,6 @@ Factory.define :variate do |v|
   v.name 'date'
 end
 
+Factory.define :upload do |u|
+end
+
