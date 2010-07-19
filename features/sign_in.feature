@@ -15,7 +15,8 @@ Feature: Sign in
       Given I am in the LTER subdomain
       Given I signed up with "email@person.com"/"password"
       When I go to the sign in page
-      And I sign in as "email@person.com"/"password"
+        And I sign in as "email@person.com"/"password"
+        And I follow the redirect
       Then I should see "User has not confirmed email"
       And I should be signed out
 
@@ -31,7 +32,8 @@ Feature: Sign in
       Given I am in the LTER subdomain
       Given I am signed up and confirmed as "email@person.com"/"password"
       When I go to the sign in page
-      And I sign in as "email@person.com"/"password"
+        And I sign in as "email@person.com"/"password"
+        And I follow the redirect
       Then I should see "Signed in"
       And I should be signed in
       When I return next time
@@ -41,7 +43,8 @@ Feature: Sign in
     Given I am in the LTER subdomain
     Given I am signed up with openid "http://person@person.com"
     When I go to the sign in page
-    And I sign in as "email@person.com"
+      And I sign in as "email@person.com"
+      And I follow the redirect
     Then I should be signed in
  
   Scenario: Openid user signs in with invalid identity_url

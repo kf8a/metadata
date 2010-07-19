@@ -41,6 +41,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :templates
   
   map.resources :data_contributions
+  
+  map.resources :uploads
      
   map.root :controller => 'datatables'
 

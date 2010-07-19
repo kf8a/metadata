@@ -19,6 +19,7 @@ Feature: Sign up
       And I fill in "Password" with "password"
       And I fill in "Confirm password" with "password"
       And I press "Sign up"
+      And I follow the redirect
       Then I should see "instructions for confirming"
       And a confirmation message should be sent to "email@person.com"
 
@@ -34,6 +35,7 @@ Feature: Sign up
       When I follow the confirmation link sent to "email@person.com"
       Then I should be signed in
       When I follow the confirmation link sent to "email@person.com"
+        And I follow the redirect
       Then I should see "Confirmed email and signed in"
       And I should be signed in
 
@@ -43,7 +45,8 @@ Feature: Sign up
       When I follow the confirmation link sent to "email@person.com"
       Then I should be signed in
       When I sign out
-      And I follow the confirmation link sent to "email@person.com"
+        And I follow the confirmation link sent to "email@person.com"
+        And I follow the redirect
       Then I should see "Already confirmed email. Please sign in."
       And I should be signed out
       
