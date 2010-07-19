@@ -20,6 +20,9 @@ module NavigationHelpers
     when /the datatable page/
       datatable_path(@datatable)
       
+    when /the datatable edit page/
+      edit_datatable_path(@datatable)
+           
     when /the datatable download page/
       datatable_path(@datatable, :format => 'csv')
       

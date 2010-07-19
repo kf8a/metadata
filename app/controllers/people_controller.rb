@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
       
-  before_filter :login_required, :except => [:index, :show, :alphabetical, :emeritus] if ENV["RAILS_ENV"] == 'production'
+  before_filter :admin?, :except => [:index, :show, :alphabetical, :emeritus] if ENV["RAILS_ENV"] == 'production'
   
   caches_action :index
 

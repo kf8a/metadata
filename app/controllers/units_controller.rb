@@ -1,6 +1,8 @@
 class UnitsController < ApplicationController
   
   before_filter :is_custom_unit, :except => ['show','index']
+  before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
+  
   
   def index
     @units = Unit.find(:all, :conditions => ['in_eml is false'])

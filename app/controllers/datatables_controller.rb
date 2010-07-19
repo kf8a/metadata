@@ -2,8 +2,8 @@ class DatatablesController < ApplicationController
   
   layout :site_layout
 
-  #before_filter :is_restricted
-  before_filter :authenticate, :except => [:index, :show, :suggest, :search] if ENV["RAILS_ENV"] == 'production'
+  before_filter :admin?, :except => [:index, :show, :suggest, :search] if ENV["RAILS_ENV"] == 'production'
+if ENV["RAILS_ENV"] == 'production'
   caches_action :index
   caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
 

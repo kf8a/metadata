@@ -1,5 +1,7 @@
 class MeetingsController < ApplicationController
 
+  before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
+
   def index
     venue = 1 # KBS
     venue = 2 if params[:location] == 'national'

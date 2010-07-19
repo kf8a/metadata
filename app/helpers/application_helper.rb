@@ -18,4 +18,7 @@ module ApplicationHelper
     end
   end
   
+  def admin?
+    current_user.try(:role) == 'admin'
+  end
 end

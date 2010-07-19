@@ -13,6 +13,13 @@ class ApplicationController < ActionController::Base
      LOCAL_IPS =~ request.remote_ip
    end
   
+   def admin?
+     return unless signed_in?
+     unless current_user.try(:role) == 'admin'
+       deny_access
+     end
+   end
+    
   private
   
   def set_title
@@ -27,4 +34,5 @@ class ApplicationController < ActionController::Base
      current_subdomain == 'glbrc' ? "glbrc" : "lter"
   end
   
+   
 end
