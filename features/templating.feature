@@ -4,6 +4,6 @@ As an admin
 I want to edit the layout through the website
 
 Scenario: An admin user creates a template
-Given I am signed in as an admin
+Given I am signed in as admin
 When I go to templates/new
 Then I should see 'New Template'

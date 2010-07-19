@@ -3,7 +3,7 @@ class DatatablesController < ApplicationController
   layout :site_layout
 
   #before_filter :is_restricted
-  before_filter :admin?, :except => [:index, :show, :suggest, :search] if ENV["RAILS_ENV"] == 'production'
+  before_filter :admin?, :except => [:index, :show, :suggest, :search] unless ENV["RAILS_ENV"] == 'development'
   #caches_page :index
 
   # GET /datatables
