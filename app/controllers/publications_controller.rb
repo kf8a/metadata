@@ -1,6 +1,6 @@
 class PublicationsController < ApplicationController
   
-  before_filter :login_required, :except => [:index, :show, :index_by_treatment]  if ENV["RAILS_ENV"] == 'production'
+  before_filter :admin?, :except => [:index, :show, :index_by_treatment]  if ENV["RAILS_ENV"] == 'production'
   #caches_action :index
   
   # GET /publications

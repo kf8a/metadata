@@ -1,4 +1,6 @@
 class VariatesController < ApplicationController
+  before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
+  
   # GET /variates
   # GET /variates.xml
   def index
