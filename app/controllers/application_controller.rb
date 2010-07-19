@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   def admin?
     authenticate
     
-    current_user.role == 'admin'
+    current_user.try(:role) == 'admin'
   end
   
 end
