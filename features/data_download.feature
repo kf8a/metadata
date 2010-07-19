@@ -7,7 +7,7 @@ Feature: Download data
 Scenario: The data owner downloads a datatable
   Given I have signed in with "bob@person.com"/"password"
     And "bob@person.com"/"password" owns the datatable "KBS001"
-  When  I go to the datatable page 1
+  When  I go to the datatable page
     And I press "download"
   Then  I should be on the datatable download page
     And I should see "now"
