@@ -16,4 +16,7 @@ module ApplicationHelper
     render :partial => 'study',  :locals => {:study => study}
   end
   
+  def admin?
+    current_user.try(:role) == 'admin'
+  end
 end
