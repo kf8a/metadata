@@ -4,7 +4,7 @@
 class ApplicationController < ActionController::Base
   include Clearance::Authentication
     
-  before_filter :authenticate, :except => [:index, :show] if ENV["RAILS_ENV"] == 'production'
+  before_filter :admin?, :except => [:index, :show] if ENV["RAILS_ENV"] == 'production'
   before_filter :set_title, :set_crumbs
    
    LOCAL_IPS =/^127\.0\.0\.1$|^192\.231\.113\.|^192\.108\.190\.|^192\.108\.188\.|^192\.108\.191\./
@@ -25,6 +25,12 @@ class ApplicationController < ActionController::Base
   
   def site_layout
      current_subdomain == 'glbrc' ? "glbrc" : "lter"
+  end
+  
+  def admin?
+    authenticate
+    
+    current_user.role == 'admin'
   end
   
 end
