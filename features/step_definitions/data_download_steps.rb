@@ -15,7 +15,7 @@ Then /^I will request access to the data$/ do
   pending # express the regexp above with the code you wish you had
 end
 
-Given /^a protected datatable$/ do
+Given /^a protected datatable exists$/ do
   sponsor = Factory :sponsor, :data_restricted => true
   dataset = Factory :dataset, :sponsor => sponsor
   @datatable = Factory  :datatable,
@@ -26,7 +26,7 @@ Given /^a protected datatable$/ do
 end
 
 
-Given /^a public datatable$/ do
+Given /^a public datatable exists$/ do
   @datatable = Factory :datatable,
     :id       => 1,
     :name     => 'KBS001',

@@ -11,7 +11,10 @@ class DatatablesController < ApplicationController
   def index
     retrieve_datatables('keyword_list' =>'')
     @default_value = 'Search for core areas, keywords or people'
-
+    
+    #TODO: Webrat defaults to www.example.com for the host
+    current_subdomain = 'lter' unless ['lter','glbrc'].include?(current_subdomain) #so that testing will work
+    
     respond_to do |format|
       format.html {render "#{current_subdomain}_index.html.erb"}
       format.xml  { render :xml => @datatables.to_xml }
@@ -203,9 +206,9 @@ class DatatablesController < ApplicationController
       @datatables = Datatable.search @keyword_list, :tag => {:website => current_subdomain}
     else
       @datatables = Datatable.find(:all, 
-                                   :joins=> 'left join datasets on datasets.id = datatables.dataset_id', 
-                                   :conditions => ['is_secondary is false and website_id = ?',
-                                        Website.find_by_name(current_subdomain)])
+          :joins=> 'left join datasets on datasets.id = datatables.dataset_id', 
+          :conditions => ['is_secondary is false and website_id = ?',
+              Website.find_by_name(current_subdomain)])
     end
 
     @studies = Study.find_all_roots_with_datatables(@datatables, {:order => 'weight'})
