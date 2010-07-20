@@ -3,7 +3,8 @@ Feature: Only admins should be able to edit
 Scenario: A admin user wants to edit
   Given I am signed in as admin
     And a public datatable
-  When  I go to the datatable page
+    And I am in the LTER subdomain
+  When  I go to the datatables page
   Then  I should see "edit"
   
 Scenario: A signed in user wants to edit
