@@ -7,5 +7,4 @@ Given /^I am signed in as admin$/ do
        :password_confirmation => password
        
   And %{I sign in as "#{email}", "#{password}"}
-#  Given %{I sign in as "email@person.com", "password"}
 end
