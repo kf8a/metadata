@@ -40,12 +40,31 @@ class DatatablesControllerTest < ActionController::TestCase
     get :show, :id => @table
     assert_response :success
   end
-
+  
+  def test_should_show_datatable_in_csv_format
+    get :show, :id => @table, :format => "csv"
+    assert_response :success
+  end
+  
+  def test_should_create_csv_cache
+    table_id = @table.id.to_s
+    get :show, :id => table_id, :format => "csv"
+    assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :id => table_id, :format => "csv") 
+  end
+  
   def test_should_get_edit
     get :edit, :id => @table
     assert_response :success
   end
   
+  def test_should_delete_csv_cache
+    table_id = @table.id.to_s
+    get :show, :id => table_id, :format => "csv"
+    assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :id => table_id, :format => "csv")
+    get :delete_csv_cache, :id => table_id
+    assert !@controller.fragment_exist?(:controller => "datatables", :action => "show", :id => table_id, :format => "csv")
+  end
+
   def test_should_update_datatable
     put :update, :id => @table, :datatable => {:title => 'soil moisture' }
     assert_redirected_to datatable_path(assigns(:datatable))

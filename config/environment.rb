@@ -63,6 +63,7 @@ Rails::Initializer.run do |config|
   # config.active_record.default_timezone = :utc
   
   # See Rails::Configuration for more options
+  
 end
 
 SubdomainFu.tld_sizes = {:development => 0,
@@ -72,5 +73,8 @@ SubdomainFu.tld_sizes = {:development => 0,
 
 
 OpenIdAuthentication.store = :file
+
+ActionController::Base.cache_store = :file_store, "tmp/cache" #"/path/to/cache/directory" 
+
 Struct.new('Crumb', :url, :name)
 

@@ -36,7 +36,7 @@ Given /^a public datatable exists$/ do
 end
 
 Given /^"([^"]*)"\/"([^"]*)" owns the datatable "([^"]*)"$/ do |arg1, arg2, arg3|
-  Given %{a protected datatable}
+  Given %{a protected datatable exists}
   @datatable.owners = [user]
 end
 

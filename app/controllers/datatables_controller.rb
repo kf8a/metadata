@@ -5,6 +5,7 @@ class DatatablesController < ApplicationController
   #before_filter :is_restricted
   before_filter :admin?, :except => [:index, :show, :suggest, :search] unless ENV["RAILS_ENV"] == 'development'
   #caches_page :index
+  caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
 
   # GET /datatables
   # GET /datatables.xml
@@ -87,6 +88,13 @@ class DatatablesController < ApplicationController
     @datatable = Datatable.find(params[:id])
 
     @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
+  end
+  
+  def delete_csv_cache
+    @id = params[:id]
+    expire_action :action => "show", :id => @id, :format => "csv"
+    flash[:notice] = 'Datatable cache was successfully deleted.'
+    redirect_to :action => "edit", :id => @id
   end
 
   # POST /datatables

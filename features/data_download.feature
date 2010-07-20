@@ -56,7 +56,7 @@ Scenario: A user has received partial permission to download data
 
   
 Scenario: An anonymous user looks at a protected datatable 
-  Given a protected datatable
+  Given a protected datatable exists
   When  I go to the datatable page
   Then  I should not see "Download"
     And I should not see "Request data"
@@ -64,7 +64,7 @@ Scenario: An anonymous user looks at a protected datatable
     And I should see "Sign up"
     
 Scenario: An anonymous user looks at a public datatable
-  Given a public datatable
+  Given a public datatable exists
   When  I go to the the datatable page
   Then  I should see "Download"
     And I should not see "sign up"
