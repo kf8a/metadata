@@ -1,11 +1,12 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class StudiesControllerTest < ActionController::TestCase
 
   context 'with an admin user' do
     setup do 
-      controller.current_user = User.new(:role => 'admin')
+      @controller.current_user = User.new(:role => 'admin')
     end
+    
     context 'on GET to :edit' do
       setup do
         @study = Factory.create(:study, :id => 3)
