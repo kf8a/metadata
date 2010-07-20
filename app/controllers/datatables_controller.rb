@@ -12,6 +12,9 @@ class DatatablesController < ApplicationController
     retrieve_datatables('keyword_list' =>'')
     @default_value = 'Search for core areas, keywords or people'
     request_subdomain = params[:requested_subdomain] || current_subdomain
+    
+    #TODO default for cucumber
+    request_subdomain = 'lter' unless ['lter','glbrc'].include?(request_subdomain)
 
     respond_to do |format|
       format.html {render "#{request_subdomain}_index.html.erb"}
