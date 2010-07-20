@@ -35,9 +35,8 @@ Given /^a public datatable exists$/ do
     :is_sql   => true
 end
 
-Given /^"([^"]*)"\/"([^"]*)" owns the datatable "([^"]*)"$/ do |arg1, arg2, arg3|
-  Given %{a protected datatable exists}
-  @datatable.owners = [user]
+Given /^"([^"]*)"\/"([^"]*)" owns the datatable "([^"]*)"$/ do |user, password, datatable|
+  pending
 end
 
 Given /^"([^"]*)"\/"([^"]*)" does not have permission to download$/ do |arg1, arg2|

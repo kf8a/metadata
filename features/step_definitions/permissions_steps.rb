@@ -1,3 +1,41 @@
+
+Given /^"([^"]*)" has not given permission$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^I am the data owner$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^"([^"]*)" has requested access$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^"([^"]*)" has access to the datatable$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^"([^"]*)" does not have access to the datatable$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^"([^"]*)" is the data owner$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^"([^"]*)" has been granted access by "([^"]*)"$/ do |arg1, arg2|
+  pending # express the regexp above with the code you wish you had
+end
+
+Given /^"([^"]*)" has not been granted access by "([^"]*)"$/ do |arg1, arg2|
+  pending # express the regexp above with the code you wish you had
+end
+
+Then /^I see that "([^"]*)" has not granted access$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+
 Given /^one to many datatable owners named 'Lead Investigator'$/ do
   pending # express the regexp above with the code you wish you had
 end

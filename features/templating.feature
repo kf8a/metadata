@@ -7,5 +7,5 @@ Scenario: An admin user creates a template
   Given I am signed up and confirmed as "email@person.com"/"password"
     And I have the "admin" role
    When I sign in as "email@person.com"/"password"
-    And I go to templates/new
-   Then I should see 'New Template'
+    And I go to new templates
+   Then I should see "New"
