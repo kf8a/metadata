@@ -13,6 +13,7 @@ class VariatesControllerTest < ActionController::TestCase
     @response   = ActionController::TestResponse.new
     @variate = Factory.create(:variate)
     Factory.create(:variate)
+     @controller.current_user = User.new(:role => 'admin')
   end
 
   def test_should_get_index
@@ -39,7 +40,7 @@ class VariatesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  def test_should_get_edit
+  def test_should_get_edit  
     get :edit, :id => @variate.id
     assert_response :success
   end
@@ -49,11 +50,12 @@ class VariatesControllerTest < ActionController::TestCase
     assert_redirected_to variate_path(assigns(:variate))
   end
   
-  def test_should_destroy_variate
+  def test_should_destroy_variate  
     old_count = Variate.count
     delete :destroy, :id => @variate
     assert_equal old_count-1, Variate.count
     
     assert_redirected_to variates_path
   end
+ 
 end

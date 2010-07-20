@@ -13,6 +13,10 @@ class DatasetsControllerTest < ActionController::TestCase
     @response   = ActionController::TestResponse.new
     @dataset = Factory.create(:dataset)
     Factory.create(:dataset)
+    
+    #TODO test with admin and non admin users
+    @controller.current_user = User.new(:role => 'admin')
+    
   end
  
   def test_should_get_new
