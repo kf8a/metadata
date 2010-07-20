@@ -13,7 +13,9 @@ module ApplicationHelper
   def render_study(options)
     study = Study.find(:first, :conditions => options)
     
-    render :partial => 'study',  :locals => {:study => study}
+    if study
+      render :partial => 'study',  :locals => {:study => study}
+    end
   end
   
   def admin?

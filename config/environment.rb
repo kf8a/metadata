@@ -27,7 +27,7 @@ Rails::Initializer.run do |config|
   config.gem 'formtastic'
  
   config.gem "shoulda", :lib => false
-  config.gem "factory_girl" , :lib => false
+  config.gem "thoughtbot-factory_girl" , :lib => false
  
   config.gem 'subdomain-fu'
   #config.gem "matthuhiggins-foreigner", :lib => "foreigner"
@@ -75,6 +75,5 @@ SubdomainFu.tld_sizes = {:development => 0,
 OpenIdAuthentication.store = :file
 
 ActionController::Base.cache_store = :file_store, "tmp/cache" #"/path/to/cache/directory" 
-
 Struct.new('Crumb', :url, :name)
 

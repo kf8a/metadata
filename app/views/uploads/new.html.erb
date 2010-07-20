@@ -1,0 +1,12 @@
+<% form_for @upload do |f| %>
+    <%= f.label :title, 'Title of Study' %>:
+    <%= f.text_field :title %><br />
+    <%= f.label :abstract, 'Abstract of Study' %>:
+    <%= f.text_field :abstract %><br />
+    <%= f.label :owners, 'List of Owners' %>:
+    <%= f.text_field :owners %><br />
+    <%= f.label :file, 'File' %>:
+    <%= f.file_field :file %><br />
+    <%= submit_tag 'Submit Study' %>
+<% end %>
+

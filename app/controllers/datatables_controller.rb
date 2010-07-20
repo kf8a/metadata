@@ -2,9 +2,8 @@ class DatatablesController < ApplicationController
   
   layout :site_layout
 
-  #before_filter :is_restricted
   before_filter :admin?, :except => [:index, :show, :suggest, :search] unless ENV["RAILS_ENV"] == 'development'
-  #caches_page :index
+
   caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
 
   # GET /datatables
@@ -12,12 +11,10 @@ class DatatablesController < ApplicationController
   def index
     retrieve_datatables('keyword_list' =>'')
     @default_value = 'Search for core areas, keywords or people'
-    
-    #TODO: Webrat defaults to www.example.com for the host
-    current_subdomain = 'lter' unless ['lter','glbrc'].include?(current_subdomain) #so that testing will work
-    
+    request_subdomain = params[:requested_subdomain] || current_subdomain
+
     respond_to do |format|
-      format.html {render "#{current_subdomain}_index.html.erb"}
+      format.html {render "#{request_subdomain}_index.html.erb"}
       format.xml  { render :xml => @datatables.to_xml }
       format.rss {render :rss => @datatables}
     end

@@ -18,7 +18,7 @@ class DatatablesControllerTest < ActionController::TestCase
   end
 
   def test_should_get_index
-    get :index
+    get :index, :requested_subdomain => 'lter'
     assert_response :success
     assert assigns(:datatables)
   end
@@ -91,7 +91,7 @@ class DatatablesControllerTest < ActionController::TestCase
   
   context 'GET with empty search parameters' do
     setup do
-      get :index,:keyword_list => '', :commit => 'Search'
+      get :index, :keyword_list => '', :commit => 'Search', :requested_subdomain => 'lter'
     end
   
     should assign_to :datatables
