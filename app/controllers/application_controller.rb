@@ -17,7 +17,6 @@ class ApplicationController < ActionController::Base
   
   def admin?
     if signed_in?
-      logger_info current_user
       unless current_user.try(:role) == 'admin'
         deny_access
       end
