@@ -11,3 +11,7 @@ end
 Factory.define :email_confirmed_user, :parent => :user do |user|
   user.email_confirmed { true }
 end
+
+Factory.define :admin_user, :parent => :user do |user|
+  user.role {'admin'}
+end

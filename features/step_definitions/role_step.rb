@@ -1,11 +1,11 @@
 Given /^I am signed in as admin$/ do
-  user = Factory :user,
-     :email                 => "email@person.com",
-     :role                  => 'admin'
-  Given %{I sign in as "email@person.com", "password"}
-end
-
-Given /^I am signed in as a user$/ do
-  user = Factory :user,
-     :email                 => "email@person.com"
+  email = 'person@email.com'
+  password = 'password'
+  Factory :admin_user,
+       :email                 =>  email,
+       :password              => password,
+       :password_confirmation => password
+       
+  And %{I sign in as "#{email}", "#{password}"}
+#  Given %{I sign in as "email@person.com", "password"}
 end
