@@ -25,12 +25,12 @@ class DatatablesControllerTest < ActionController::TestCase
   
   def test_should_create_index_cache_for_lter
     get :index, :requested_subdomain => 'lter'
-    assert @controller.fragment_exist?(:controller => "datatables", :action => "index")
+    assert @controller.fragment_exist?(:controller => "datatables", :action => "index", :action_suffix => "lter")
   end
   
   def test_should_create_index_cache_for_glbrc
     get :index, :requested_subdomain => 'glbrc'
-    assert @controller.fragment_exist?(:controller => "datatables", :action => "index")
+    assert @controller.fragment_exist?(:controller => "datatables", :action => "index", :action_suffix => "glbrc")
   end
 
   def test_should_get_new
