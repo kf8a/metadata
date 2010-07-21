@@ -15,6 +15,9 @@ class DatatablesControllerTest < ActionController::TestCase
     
     Factory.create(:datatable, :dataset => Factory.create(:dataset))
     Factory.create(:website, :id=>1).save
+    
+    #TODO test with admin and non admin users
+    @controller.current_user = User.new(:role => 'admin')
   end
 
   def test_should_get_index

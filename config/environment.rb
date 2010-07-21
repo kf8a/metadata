@@ -73,6 +73,7 @@ SubdomainFu.tld_sizes = {:development => 0,
 
 
 OpenIdAuthentication.store = :file
+
 ActionController::Base.cache_store = :file_store, "tmp/cache" #"/path/to/cache/directory" 
 Struct.new('Crumb', :url, :name)
 

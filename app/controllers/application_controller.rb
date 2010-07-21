@@ -12,15 +12,16 @@ class ApplicationController < ActionController::Base
    def trusted_ip?
      LOCAL_IPS =~ request.remote_ip
    end
-  
-   def admin?
-     return unless signed_in?
-     unless current_user.try(:role) == 'admin'
-       deny_access
-     end
-   end
-    
+      
   private
+  
+  def admin?
+    if signed_in?
+      unless current_user.try(:role) == 'admin'
+        deny_access
+      end
+    end
+  end
   
   def set_title
     @title = 'LTER KBS'

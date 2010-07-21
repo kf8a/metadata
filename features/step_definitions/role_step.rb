@@ -1,10 +1,9 @@
-Given /^I am signed in as admin$/ do
-  email = 'person@email.com'
-  password = 'password'
-  Factory :admin_user,
-       :email                 =>  email,
-       :password              => password,
-       :password_confirmation => password
-       
-  And %{I sign in as "#{email}", "#{password}"}
+Given /^I have the "([^"]*)" role$/ do |role|
+  user = User.first
+  user.role = role
+  user.save   #need to save so that it can be found later
+end
+
+Then /^I should have the "([^"]*)" role$/ do |role|
+  assert controller.current_user.role == role
 end

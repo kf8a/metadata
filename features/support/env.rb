@@ -22,6 +22,7 @@ Dir.glob(File.dirname(__FILE__) + "/../../test/factories/*.rb").each do |factory
 end
 
 Webrat.configure do |config|
+#  config.application_address = 'lter.dev'
   config.mode = :rails
   config.open_error_files = false # Set to true if you want error pages to pop up in the browser
 end

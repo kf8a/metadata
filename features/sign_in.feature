@@ -27,7 +27,7 @@ Feature: Sign in
       And I sign in as "email@person.com"/"wrongpassword"
       Then I should see "Bad email or password"
       And I should be signed out
-
+   
    Scenario: User signs in successfully
       Given I am in the LTER subdomain
       Given I am signed up and confirmed as "email@person.com"/"password"
@@ -46,7 +46,7 @@ Feature: Sign in
       And I sign in as "email@person.com"
       And I follow the redirect
     Then I should be signed in
- 
+   
   Scenario: Openid user signs in with invalid identity_url
     Given I am in the LTER subdomain
     Given no user exists with an email of "email@person.com"
