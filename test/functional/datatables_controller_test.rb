@@ -8,9 +8,6 @@ class DatatablesControllerTest < ActionController::TestCase
   #fixtures :datatables
 
   def setup
-    @controller = DatatablesController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
     @table = Factory.create(:datatable, :dataset => Factory.create(:dataset))
     
     Factory.create(:datatable, :dataset => Factory.create(:dataset))
