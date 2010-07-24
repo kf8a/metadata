@@ -32,6 +32,10 @@ class DatatablesControllerTest < ActionController::TestCase
     get :index, :requested_subdomain => 'glbrc'
     assert @controller.fragment_exist?(:controller => "datatables", :action => "index", :action_suffix => "glbrc")
   end
+  
+  test "should get the template in the database if there is one" do
+    Factory.create(:website, :name => 'lter')
+  end
 
   def test_should_get_new
     get :new
