@@ -5,17 +5,18 @@ class DatatablesController < ApplicationController
   before_filter :admin?, :except => [:index, :show, :suggest, :search] unless ENV["RAILS_ENV"] == 'development'
   
   caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
-
+  
   # GET /datatables
   # GET /datatables.xml
   def index
     retrieve_datatables('keyword_list' =>'')
     @default_value = 'Search for core areas, keywords or people'
+    #TODO put subdomain stuff somewhere where all controllers have access
     request_subdomain = params[:requested_subdomain] || current_subdomain
     
     #TODO default for cucumber
     request_subdomain = 'lter' unless ['lter','glbrc'].include?(request_subdomain)
-
+    
     respond_to do |format|
       format.html {render "#{request_subdomain}_index.html.erb"}
       format.xml  { render :xml => @datatables.to_xml }
