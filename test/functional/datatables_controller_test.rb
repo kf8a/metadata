@@ -23,12 +23,22 @@ class DatatablesControllerTest < ActionController::TestCase
     assert assigns(:datatables)
   end
   
-  def test_should_create_index_cache_for_lter
+  test "should get the LTER version of the index" do
+    get :index, :requested_subdomain => 'lter'
+    assert_select 'h1', 'LTER Data Catalog'
+  end
+  
+  test "should create index cache for lter" do
     get :index, :requested_subdomain => 'lter'
     assert @controller.fragment_exist?(:controller => "datatables", :action => "index", :action_suffix => "lter")
   end
-  
-  def test_should_create_index_cache_for_glbrc
+
+  test "should get the glbrc version of the index" do
+    get :index, :requested_subdomain => 'glbrc'
+    assert_select 'h1', 'GLBRC Data Catalog'
+  end  
+
+  test "should create index cache for glbrc" do
     get :index, :requested_subdomain => 'glbrc'
     assert @controller.fragment_exist?(:controller => "datatables", :action => "index", :action_suffix => "glbrc")
   end
@@ -39,9 +49,13 @@ class DatatablesControllerTest < ActionController::TestCase
                     :website_id => lter_website.id,
                     :controller => 'datatables',
                     :action     => 'index',
-                    :layout     => '<h1>LTER test index page</h1>')
+                    :layout     => '<h3>LTER test index page</h3>')
     get :index, :requested_subdomain => 'lter'
-    assert_select 'h1', 'LTER test index page'
+    assert_select 'h3', 'LTER test index page'
+  end
+  
+  test "index should get the template in app/views if no db template" do
+    true
   end
 
   def test_should_get_new

@@ -11,13 +11,10 @@ class DatatablesController < ApplicationController
   def index
     retrieve_datatables('keyword_list' =>'')
     @default_value = 'Search for core areas, keywords or people'
-    #TODO put subdomain stuff somewhere where all controllers have access
-    subdomain = request_subdomain(params[:requested_subdomain])
-    
-    #TODO default for cucumber
+    subdomain_request = request_subdomain(params[:requested_subdomain])
     
     respond_to do |format|
-      format.html {render "#{subdomain}_index.html.erb"}
+      format.html {render "#{subdomain_request}_index.html.erb"}
       format.xml  { render :xml => @datatables.to_xml }
       format.rss {render :rss => @datatables}
     end

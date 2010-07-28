@@ -8,42 +8,43 @@
   </p>
 
   <div id='search-form'>
-    <%= form_tag '/datatables/search', :method => 'get'%>
+    <% form_tag('/datatables/search', :method => 'get') do %>
     
-        <div id='bottom-line-search'>
+      <div id='bottom-line-search'>
 
         <div id='keyword-search'>
-         <%= text_field_tag :keyword_list, @keyword_list || @default_value , {:id => 'keyworder'}  %>
+          <%= text_field_tag :keyword_list, @keyword_list || @default_value , {:id => 'keyworder'}  %>
         </div>  
-          <div id='search-submit'>
+        <div id='search-submit'>
           <%= submit_tag "Search Datacatalog"%>
-          </div>
-    </div> 
+        </div>
+      </div> 
+    <% end %>
   </div>
 
 
 
   <ul class='quickTree'>
     <% @studies.each do |study| -%>
-    <% next unless study.include_datatables?(@datatables)%>
+      <% next unless study.include_datatables?(@datatables)%>
     
-    <%= render :partial => 'study',  :locals => {:study => study}%>
+      <%= render :partial => 'study',  :locals => {:study => study}%>
     <% end -%>
   </ul>
 <% end %>
 
 <% if signed_in? %>
-<h3>Datatables</h3>
-<ul>
-  <% @datatables.each do |datatable| %>
-    <% next if datatable.theme_id %>
-    <li><%= link_to datatable.title_and_years, datatable_path(datatable)%> <%=link_to "edit", edit_datatable_path(datatable)%>
+  <h3>Datatables</h3>
+  <ul>
+    <% @datatables.each do |datatable| %>
+      <% next if datatable.theme_id %>
+      <li><%= link_to datatable.title_and_years, datatable_path(datatable)%> <%=link_to "edit", edit_datatable_path(datatable)%>
         <span class='updated_at'>
           <%= datatable.updated_at.to_date if datatable.updated_at %> 
         </span>
       </li>
     <% end -%>
-</ul>
+  </ul>
 <% end %>
 
 <%= link_to 'login', new_session_path %>
