@@ -33,16 +33,16 @@ class DatatablesControllerTest < ActionController::TestCase
     assert @controller.fragment_exist?(:controller => "datatables", :action => "index", :action_suffix => "glbrc")
   end
   
-#  test "index should get the template in the database if there is one" do
-#    lter_website = Factory.create(:website, :name => 'lter')
-#    Factory.create(:template, 
-#                    :website_id => lter_website.id,
-#                    :controller => 'datatables',
-#                    :action     => 'index',
-#                    :layout     => '<h1>LTER test index page</h1>')
-#    get :index, :requested_subdomain => 'lter'
-#    assert_select 'h1', 'LTER test index page'
-#  end
+  test "index should get the template in the database if there is one" do
+    lter_website = Factory.create(:website, :name => 'lter')
+    Factory.create(:template, 
+                    :website_id => lter_website.id,
+                    :controller => 'datatables',
+                    :action     => 'index',
+                    :layout     => '<h1>LTER test index page</h1>')
+    get :index, :requested_subdomain => 'lter'
+    assert_select 'h1', 'LTER test index page'
+  end
 
   def test_should_get_new
     get :new

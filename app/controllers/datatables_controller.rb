@@ -12,13 +12,12 @@ class DatatablesController < ApplicationController
     retrieve_datatables('keyword_list' =>'')
     @default_value = 'Search for core areas, keywords or people'
     #TODO put subdomain stuff somewhere where all controllers have access
-    request_subdomain = params[:requested_subdomain] || current_subdomain
+    subdomain = request_subdomain(params[:requested_subdomain])
     
     #TODO default for cucumber
-    request_subdomain = 'lter' unless ['lter','glbrc'].include?(request_subdomain)
     
     respond_to do |format|
-      format.html {render "#{request_subdomain}_index.html.erb"}
+      format.html {render "#{subdomain}_index.html.erb"}
       format.xml  { render :xml => @datatables.to_xml }
       format.rss {render :rss => @datatables}
     end
@@ -171,7 +170,7 @@ class DatatablesController < ApplicationController
   private
 
   def set_title
-    if current_subdomain == "lter"
+    if request_subdomain(params[:requested_subdomain]) == "lter"
       @title  = 'LTER Data Catalog'
     else
       @title = 'GLBRC Data Catalog'

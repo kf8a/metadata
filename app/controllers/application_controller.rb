@@ -35,5 +35,9 @@ class ApplicationController < ActionController::Base
      current_subdomain == 'glbrc' ? "glbrc" : "lter"
   end
   
+  def request_subdomain(requested_subdomain=current_subdomain)
+    request_subdomain = 'lter' unless ['lter','glbrc'].include?(request_subdomain)
+    return request_subdomain
+  end
    
 end
