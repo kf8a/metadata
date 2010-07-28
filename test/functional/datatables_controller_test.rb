@@ -21,7 +21,6 @@ class DatatablesControllerTest < ActionController::TestCase
     get :index, :requested_subdomain => 'lter'
     assert_response :success
     assert assigns(:datatables)
-    assert assigns(:yes_you_can)
   end
   
   def test_should_create_index_cache_for_lter
