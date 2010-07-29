@@ -13,8 +13,16 @@ class DatatablesController < ApplicationController
     @default_value = 'Search for core areas, keywords or people'
     subdomain_request = request_subdomain(params[:requested_subdomain])
     
+    website = Website.find_by_name(subdomain_request)
+    @plate = nil
+    @plate = website.layout('datatables','index') if website
+    
     respond_to do |format|
-      format.html {render "#{subdomain_request}_index.html.erb"}
+      if @plate
+        format.html {render "liquid_index.html.erb"}
+      else
+        format.html {render "#{subdomain_request}_index.html.erb"}
+      end
       format.xml  { render :xml => @datatables.to_xml }
       format.rss {render :rss => @datatables}
     end
@@ -58,12 +66,14 @@ class DatatablesController < ApplicationController
     end
 
     #grab the right template to render otherwise just do the default thing for now
-    website = Website.find(:first)
-    template = website.layout('datatable','show') if website
+    subdomain_request = request_subdomain(params[:requested_subdomain])
+    website = Website.find_by_name(subdomain_request)
+    @plate = nil
+    @plate = website.layout('datatables','show') if website
 
     respond_to do |format|
-      if template
-        format.html {render :html => template}
+      if @plate
+        format.html {render "liquid_show.html.erb"}
       else
         format.html #show.html.erb
       end

@@ -16,6 +16,12 @@ class DatatablesControllerTest < ActionController::TestCase
     #TODO test with admin and non admin users
     @controller.current_user = User.new(:role => 'admin')
   end
+  
+  def teardown
+    @controller.expire_fragment(%r{.*})
+    Website.destroy_all
+    Template.destroy_all
+  end
 
   def test_should_get_index
     get :index, :requested_subdomain => 'lter'
@@ -45,17 +51,27 @@ class DatatablesControllerTest < ActionController::TestCase
   
   test "index should get the template in the database if there is one" do
     lter_website = Factory.create(:website, :name => 'lter')
-    Factory.create(:template, 
+    index_layout = Factory.create(:template, 
                     :website_id => lter_website.id,
                     :controller => 'datatables',
                     :action     => 'index',
-                    :layout     => '<h3>LTER test index page</h3>')
+                    :layout     => '<h3 id="correct">LTER test index page</h3>')
+    assert lter_website
+    assert index_layout
+    assert lter_website.layout('datatables', 'index')
+    assert Website.find_by_name('lter')
+    assert Website.find_by_name('lter').layout('datatables', 'index')
     get :index, :requested_subdomain => 'lter'
-    assert_select 'h3', 'LTER test index page'
+    assert assigns(:plate)
+    assert_select 'h3#correct'
   end
   
   test "index should get the template in app/views if no db template" do
-    true
+    lter_website = Website.find_by_name('lter')
+    assert_nil lter_website
+    assert !@controller.fragment_exist?(:controller => "datatables", :action => "index", :action_suffix => "lter")
+    get :index, :requested_subdomain => 'lter'
+    assert_select 'h3#correct', false
   end
 
   def test_should_get_new
@@ -85,6 +101,31 @@ class DatatablesControllerTest < ActionController::TestCase
     table_id = @table.id.to_s
     get :show, :id => table_id, :format => "csv"
     assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :id => table_id, :format => "csv") 
+  end
+  
+  test "show should get the template in the database if there is one" do
+    lter_website = Factory.create(:website, :name => 'lter')
+    index_layout = Factory.create(:template, 
+                    :website_id => lter_website.id,
+                    :controller => 'datatables',
+                    :action     => 'show',
+                    :layout     => '<h3 id="correct">LTER test show page</h3>')
+    assert lter_website
+    assert index_layout
+    assert lter_website.layout('datatables', 'show')
+    assert Website.find_by_name('lter')
+    assert Website.find_by_name('lter').layout('datatables', 'show')
+    get :show, :id => @table, :requested_subdomain => 'lter'
+    assert assigns(:plate)
+    assert_select 'h3#correct'
+  end
+  
+  test "show should get the template in app/views if no db template" do
+    lter_website = Website.find_by_name('lter')
+    assert_nil lter_website
+    assert !@controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => "lter")
+    get :show, :id => @table, :requested_subdomain => 'lter'
+    assert_select 'h3#correct', false
   end
   
   def test_should_get_edit
