@@ -1,21 +1,21 @@
 <li class='study-title' id='study_<%=study.id%>'><%= study.name %> 
   <% unless  study.synopsis == '' %>
-  <p><%= study.synopsis%></p>
+    <p><%= study.synopsis%></p>
   <% end %>
   <ul>
-  <% study.children.each do |s| %>
-    <% next unless s.include_datatables?(@datatables)%>
-    
-    <%= render :partial => 'study', :locals=>{:study => s}%>
-    
-  <% end %>
+    <% study.children.each do |s| %>
+      <% next unless s.include_datatables?(@datatables)%>
+      
+      <%= render :partial => 'study', :locals=>{:study => s}%>
+      
+    <% end %>
   </ul>
-<ul>
-  <% @themes.each do |theme| %>
-  <% next unless theme.include_datatables_from_study?(@datatables, study) -%>
+  <ul>
+    <% @themes.each do |theme| %>
+      <% next unless theme.include_datatables_from_study?(@datatables, study) -%>
 
-  <%= render :partial=>'theme', :locals => {:theme => theme, :study => study} %>
+      <%= render :partial=>'theme', :locals => {:theme => theme, :study => study} %>
 
-  <% end -%>
-</ul>
+    <% end -%>
+  </ul>
 </li>

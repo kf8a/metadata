@@ -5,19 +5,24 @@ class DatatablesController < ApplicationController
   before_filter :admin?, :except => [:index, :show, :suggest, :search] unless ENV["RAILS_ENV"] == 'development'
   
   caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
-
+  
   # GET /datatables
   # GET /datatables.xml
   def index
     retrieve_datatables('keyword_list' =>'')
     @default_value = 'Search for core areas, keywords or people'
-    request_subdomain = params[:requested_subdomain] || current_subdomain
+    subdomain_request = request_subdomain(params[:requested_subdomain])
     
-    #TODO default for cucumber
-    request_subdomain = 'lter' unless ['lter','glbrc'].include?(request_subdomain)
-
+    website = Website.find_by_name(subdomain_request)
+    @plate = nil
+    @plate = website.layout('datatables','index') if website
+    
     respond_to do |format|
-      format.html {render "#{request_subdomain}_index.html.erb"}
+      if @plate
+        format.html {render "liquid_index.html.erb"}
+      else
+        format.html {render "#{subdomain_request}_index.html.erb"}
+      end
       format.xml  { render :xml => @datatables.to_xml }
       format.rss {render :rss => @datatables}
     end
@@ -61,12 +66,14 @@ class DatatablesController < ApplicationController
     end
 
     #grab the right template to render otherwise just do the default thing for now
-    website = Website.find(:first)
-    template = website.layout('datatable','show') if website
+    subdomain_request = request_subdomain(params[:requested_subdomain])
+    website = Website.find_by_name(subdomain_request)
+    @plate = nil
+    @plate = website.layout('datatables','show') if website
 
     respond_to do |format|
-      if template
-        format.html {render :html => template}
+      if @plate
+        format.html {render "liquid_show.html.erb"}
       else
         format.html #show.html.erb
       end
@@ -170,7 +177,7 @@ class DatatablesController < ApplicationController
   private
 
   def set_title
-    if current_subdomain == "lter"
+    if request_subdomain(params[:requested_subdomain]) == "lter"
       @title  = 'LTER Data Catalog'
     else
       @title = 'GLBRC Data Catalog'
