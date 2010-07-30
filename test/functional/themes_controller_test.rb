@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class ThemesControllerTest < ActionController::TestCase
   context 'GET index' do
