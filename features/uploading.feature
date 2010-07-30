@@ -2,7 +2,11 @@ Feature: Upload new studies.
   In order to share data
   A user wants to be able to upload a study.
   
-Scenario: Upload an LTER file.
+Scenario: An admin uploads an LTER file.
+  Given I am signed up and confirmed as "email@person.com"/"password"
+    And I have the "admin" role
+  When I sign in as "email@person.com"/"password"
+   
   Given I am in the LTER subdomain
   When I go to the new upload page
     And I fill in "Title" with "Does Singing to the Soil Cause Erosion?"
