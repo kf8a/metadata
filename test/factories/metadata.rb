@@ -66,3 +66,5 @@ end
 Factory.define :upload do |u|
 end
 
+Factory.define :meeting do |m|
+end
