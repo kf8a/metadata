@@ -14,6 +14,7 @@ class DatatablesController < ApplicationController
     subdomain_request = request_subdomain(params[:requested_subdomain])
     
     website = Website.find_by_name(subdomain_request)
+    website = Website.find(:first) unless website
     @plate = nil
     @plate = website.layout('datatables','index') if website
     
@@ -68,6 +69,7 @@ class DatatablesController < ApplicationController
     #grab the right template to render otherwise just do the default thing for now
     subdomain_request = request_subdomain(params[:requested_subdomain])
     website = Website.find_by_name(subdomain_request)
+    website = Website.find(:first) unless website
     @plate = nil
     @plate = website.layout('datatables','show') if website
 
