@@ -68,3 +68,8 @@ end
 
 Factory.define :meeting do |m|
 end
+
+Factory.define :abstract do |a|
+  a.abstract  'A quick little discussion of the meeting.'
+  a.meeting   Factory.create(:meeting)
+end
