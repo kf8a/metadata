@@ -5,12 +5,23 @@ require 'affiliations_controller'
 class AffiliationsController; def rescue_action(e) raise e end; end
 
 class AffiliationsControllerTest < ActionController::TestCase
-  fixtures :affiliations
+#  fixtures :affiliations
 
   def setup
-    @controller = AffiliationsController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
+    #TODO test with admin and non admin users
+    @controller.current_user = User.new(:role => 'admin')
   end
+
+  def teardown
+  end
+  
+  context "on GET to :new" do
+    setup do
+      get :new
+    end
+
+    should render_template :new
+  end
+
 
 end
