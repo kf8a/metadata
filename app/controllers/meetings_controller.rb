@@ -61,6 +61,7 @@ class MeetingsController < ApplicationController
          format.html { redirect_to meeting_url(@meeting) }
          format.xml  { head :ok }
        else
+         @venues = VenueType.find(:all).collect {|x| [x.name, x.id]}
          format.html { render :action => "edit" }
          format.xml  { render :xml => @meeting.errors.to_xml }
        end

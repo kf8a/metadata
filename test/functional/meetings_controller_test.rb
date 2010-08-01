@@ -81,46 +81,45 @@ class MeetingsControllerTest < ActionController::TestCase
     should_not set_the_flash
   end
 
-#  
-#  
-#  context "on PUT :update for an abstract" do
-#    setup do
-#      @abstract = Factory.create(:abstract, :abstract => "The old boring abstract")
-#    end
-#    
-#    context "with a valid change" do
-#    
-#      setup do
-#        put :update, :id => @abstract, :abstract => {:abstract => "A whole new abstract"}
-#      end
-#    
-#      should set_the_flash
-#      should redirect_to("the abstract's show page") {abstract_url(@abstract)}
-#    end
-#    
-#    context "with an invalid change" do
-#    
-#      setup do
-#        put :update, :id => @abstract, :abstract => {:abstract => nil}
-#      end
-#      
-#      should_not set_the_flash
-#      should render_template :edit
-#    end
-#  end
-#  
-#  context "an abstract which exists" do
-#    setup do
-#      @abstract = Factory.create(:abstract)
-#    end
-#    
-#    context "on DELETE :destroy for the abstract" do
-#      setup do
-#        delete :destroy, :id => @abstract
-#      end
-#      
-#      should redirect_to("meetings page") {meetings_url}
-#    end
-#  end
+  context "on PUT :update for a meeting" do
+    setup do
+      @meeting = Factory.create(:meeting, :title => "The old boring title")
+    end
+    
+    context "with a valid change" do
+    
+      setup do
+        put :update, :id => @meeting, :meeting => {:title => "A whole new title"}
+      end
+    
+      should set_the_flash
+      should redirect_to("the meeting's show page") {meeting_url(@meeting)}
+    end
+    
+    context "with an invalid change" do
+    
+      setup do
+        put :update, :id => @meeting, :meeting => {:venue_type => nil}
+      end
+      
+      should assign_to :venues
+      should_not set_the_flash
+      should render_template :edit
+    end
+  end
+  
+  context "a meeting which exists" do
+    setup do
+      @meeting = Factory.create(:meeting)
+    end
+    
+    context "on DELETE :destroy for the abstract" do
+      setup do
+        delete :destroy, :id => @meeting
+      end
+      
+      should redirect_to("meetings page") {meetings_url}
+    end
+  end
 
 end
