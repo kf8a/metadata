@@ -66,7 +66,12 @@ end
 Factory.define :upload do |u|
 end
 
+Factory.define :venue_type do |v|
+  v.name  'Venue Name'
+end
+
 Factory.define :meeting do |m|
+  m.venue_type  Factory.create(:venue_type)
 end
 
 Factory.define :abstract do |a|
