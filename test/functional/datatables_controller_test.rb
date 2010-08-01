@@ -86,6 +86,15 @@ class DatatablesControllerTest < ActionController::TestCase
     
     assert_redirected_to datatable_path(assigns(:datatable))
   end
+  
+  context "trying to create datatable with invalid parameters" do
+    setup do
+      post :create, :datatable => {:title => nil}
+    end
+    
+    should render_template "new"
+    should_not set_the_flash
+  end
 
   def test_should_show_datatable
     get :show, :id => @table
@@ -95,6 +104,27 @@ class DatatablesControllerTest < ActionController::TestCase
   def test_should_show_datatable_in_csv_format
     get :show, :id => @table, :format => "csv"
     assert_response :success
+  end
+  
+  context 'GET /datatables/1.climdb' do
+    setup do 
+      table = Factory.create(:datatable, :description=>nil, 
+                              :dataset => Factory.create(:dataset))
+      get :show,  :id => table, :format => 'climdb'
+    end
+
+    should respond_with_content_type(:csv)
+  end
+  
+  context "show in climdb a restricted datatable on an untrusted ip" do
+    setup do
+      @restricted_datatable = Factory.create(:datatable, 
+                                              :is_restricted => true)
+      @request[:remote_ip] = '142.222.1.2'
+      get :show, :id => @restricted_datatable, :format => "climdb"
+    end
+    
+    should redirect_to("the html version of the show page") {datatable_path(@restricted_datatable)}
   end
   
   def test_should_create_csv_cache
@@ -146,6 +176,15 @@ class DatatablesControllerTest < ActionController::TestCase
     assert_redirected_to datatable_path(assigns(:datatable))
   end
   
+  context "PUT :update with invalid attributes" do
+    setup do
+      put :update, :id => @table, :datatable => {:title => nil}
+    end
+    
+    should render_template "edit"
+    should_not set_the_flash
+  end
+  
   def test_should_destroy_datatable
     old_count = Datatable.count
     delete :destroy, :id => @table
@@ -162,7 +201,6 @@ class DatatablesControllerTest < ActionController::TestCase
     
     should respond_with :success
     should render_template :show
-    
   end
   
   context 'GET with empty search parameters' do
@@ -176,18 +214,16 @@ class DatatablesControllerTest < ActionController::TestCase
     should respond_with :success
     should render_template :index
     should_not set_the_flash
-    
-    
   end
   
-  context 'GET /datatables/1.climdb' do
-    setup do 
-      table = Factory.create(:datatable, :description=>nil, :dataset => Factory.create(:dataset))
-      get :show,  :id => table, :format => '.climdb'
+  context "GET search with empty search parameters" do
+    setup do
+      get :search, :keyword_list => ''
     end
     
-    
-    
+    should redirect_to("datatables index") {datatables_url}
   end
+  
+  #Actual testing of the search function, with a real search, requires Sphinx I think. That seems like too much of a pain to have on always for the test suite. It will have to be tested manually.
   
 end

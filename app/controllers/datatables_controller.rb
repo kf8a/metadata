@@ -81,7 +81,8 @@ class DatatablesController < ApplicationController
       end
       format.xml  { render :xml => @datatable.to_xml}
       format.csv  { render :text => @datatable.to_csv_with_metadata }
-      format.climdb { render :text => @datatable.to_climdb unless restricted }
+      format.climdb { render :text => @datatable.to_climdb } unless restricted
+      format.climdb { redirect_to datatable_url(@datatable) } if restricted
     end
   end
 
@@ -135,6 +136,7 @@ class DatatablesController < ApplicationController
         format.html { redirect_to datatable_url(@datatable) }
         format.xml  { head :ok }
       else
+        @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
         format.html { render :action => "edit" }
         format.xml  { render :xml => @datatable.errors.to_xml }
       end
