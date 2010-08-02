@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class WebsiteTest < ActiveSupport::TestCase
   should have_many :datasets

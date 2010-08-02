@@ -28,19 +28,19 @@ class DatasetsController < ApplicationController
       @keyword_list = keyword_list
     end
             
-   @datasets = Dataset.all
+    @datasets = Dataset.all
 
   
-   @studies = @datasets.collect do |dataset|
-     next unless dataset.on_web
-     dataset.studies.flatten
-   end
-   @studies.flatten!
-   @studies.compact!
-   @studies.uniq!
-   @studies.sort! {|a,b| a.weight <=> b.weight}
+    @studies = @datasets.collect do |dataset|
+      next unless dataset.on_web
+      dataset.studies.flatten
+    end
+    @studies.flatten!
+    @studies.compact!
+    @studies.uniq!
+    @studies.sort! {|a,b| a.weight <=> b.weight}
    
-   @studies = [@study] if @study
+    @studies = [@study] if @study
                                      
     @crumbs = []
     respond_to do |format|

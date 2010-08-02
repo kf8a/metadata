@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class UploadsControllerTest < ActionController::TestCase
-  setup do 
+  def setup do 
     @controller = UploadsController.new
     @controller.current_user = User.new(:role=>'admin')
   end
@@ -27,7 +27,7 @@ class UploadsControllerTest < ActionController::TestCase
     file_name = '/../data/SingingSongtestfile.txt'
     post :create, :upload => {:title => 'Title', :abstract => 'Abstract', :owners => 'Me', :file => fixture_file_upload(file_name)}
     @upload = Upload.find(:first)
-    get :show, :id => @upload
+    get :show, :id => @upload.id
     assert_response :success
   end
 end

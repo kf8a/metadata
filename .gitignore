@@ -13,3 +13,4 @@ public/*.html
 tmp/
 config/database.yml
 config/newrelic.yml
+rcov/
