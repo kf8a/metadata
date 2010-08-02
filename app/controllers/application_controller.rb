@@ -4,7 +4,7 @@
 class ApplicationController < ActionController::Base
   include Clearance::Authentication
     
-  before_filter :authenticate, :except => [:index, :show] if ENV["RAILS_ENV"] == 'production'
+  before_filter :authenticate, :except => [:index, :show] unless ENV["RAILS_ENV"] == 'development'
   before_filter :set_title, :set_crumbs
    
    LOCAL_IPS =/^127\.0\.0\.1$|^192\.231\.113\.|^192\.108\.190\.|^192\.108\.188\.|^192\.108\.191\./
@@ -12,8 +12,16 @@ class ApplicationController < ActionController::Base
    def trusted_ip?
      LOCAL_IPS =~ request.remote_ip
    end
-  
+      
   private
+  
+  def admin?
+    if signed_in?
+      unless current_user.try(:role) == 'admin'
+        deny_access
+      end
+    end
+  end
   
   def set_title
     @title = 'LTER KBS'
@@ -23,4 +31,14 @@ class ApplicationController < ActionController::Base
     @crumbs = []
   end
   
+  def site_layout
+     current_subdomain == 'glbrc' ? "glbrc" : "lter"
+  end
+  
+  def request_subdomain(requested_subdomain=current_subdomain)
+    requested_subdomain = current_subdomain if requested_subdomain.blank?
+    requested_subdomain = 'lter' unless ['lter','glbrc'].include?(requested_subdomain)
+    return requested_subdomain
+  end
+   
 end

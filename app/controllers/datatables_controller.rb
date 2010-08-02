@@ -1,17 +1,29 @@
 class DatatablesController < ApplicationController
+  
+  layout :site_layout
 
-  #before_filter :is_restricted
-  before_filter :login_required, :except => [:index, :show, :suggest, :search] if ENV["RAILS_ENV"] == 'production'
-  caches_page :index
-
+  before_filter :admin?, :except => [:index, :show, :suggest, :search] unless ENV["RAILS_ENV"] == 'development'
+  
+  caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
+  
   # GET /datatables
   # GET /datatables.xml
   def index
     retrieve_datatables('keyword_list' =>'')
     @default_value = 'Search for core areas, keywords or people'
-
+    subdomain_request = request_subdomain(params[:requested_subdomain])
+    
+    website = Website.find_by_name(subdomain_request)
+    website = Website.find(:first) unless website
+    @plate = nil
+    @plate = website.layout('datatables','index') if website
+    
     respond_to do |format|
-      format.html # index.rhtml
+      if @plate
+        format.html {render "liquid_index.html.erb"}
+      else
+        format.html {render "#{subdomain_request}_index.html.erb"}
+      end
       format.xml  { render :xml => @datatables.to_xml }
       format.rss {render :rss => @datatables}
     end
@@ -55,18 +67,22 @@ class DatatablesController < ApplicationController
     end
 
     #grab the right template to render otherwise just do the default thing for now
-    website = Website.find(:first)
-    template = website.layout('datatable','show') if website
+    subdomain_request = request_subdomain(params[:requested_subdomain])
+    website = Website.find_by_name(subdomain_request)
+    website = Website.find(:first) unless website
+    @plate = nil
+    @plate = website.layout('datatables','show') if website
 
     respond_to do |format|
-      if template
-        format.html {render :html => template}
+      if @plate
+        format.html {render "liquid_show.html.erb"}
       else
         format.html #show.html.erb
       end
       format.xml  { render :xml => @datatable.to_xml}
       format.csv  { render :text => @datatable.to_csv_with_metadata }
-      format.climdb { render :text => @datatable.to_climdb unless restricted }
+      format.climdb { render :text => @datatable.to_climdb } unless restricted
+      format.climdb { redirect_to datatable_url(@datatable) } if restricted
     end
   end
 
@@ -82,6 +98,13 @@ class DatatablesController < ApplicationController
     @datatable = Datatable.find(params[:id])
 
     @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
+  end
+  
+  def delete_csv_cache
+    @id = params[:id]
+    expire_action :action => "show", :id => @id, :format => "csv"
+    flash[:notice] = 'Datatable cache was successfully deleted.'
+    redirect_to :action => "edit", :id => @id
   end
 
   # POST /datatables
@@ -113,6 +136,7 @@ class DatatablesController < ApplicationController
         format.html { redirect_to datatable_url(@datatable) }
         format.xml  { head :ok }
       else
+        @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
         format.html { render :action => "edit" }
         format.xml  { render :xml => @datatable.errors.to_xml }
       end
@@ -131,6 +155,7 @@ class DatatablesController < ApplicationController
     end
   end
 
+  #TODO only return the ones for the right website.
   def suggest
     term = params[:term]
     #  list = Datatable.tags.all.collect {|x| x.name.downcase}
@@ -156,7 +181,11 @@ class DatatablesController < ApplicationController
   private
 
   def set_title
-    @title  = 'LTER Data Catalog'
+    if request_subdomain(params[:requested_subdomain]) == "lter"
+      @title  = 'LTER Data Catalog'
+    else
+      @title = 'GLBRC Data Catalog'
+    end
   end
 
   def set_crumbs
@@ -193,12 +222,16 @@ class DatatablesController < ApplicationController
     @keyword_list = nil if @keyword_list.empty? || @keyword_list == @default_value
 
     if @keyword_list
-      @datatables = Datatable.search @keyword_list, :tag => {:website => 'LTER'}
+      @datatables = Datatable.search @keyword_list, :tag => {:website => current_subdomain}
     else
-      @datatables = Datatable.find(:all, :joins=> 'left join datasets on datasets.id = datatables.dataset_id', :conditions => ['is_secondary is false and website_id = ?', Website.find_by_name('LTER')])
+      @datatables = Datatable.find(:all, 
+          :joins=> 'left join datasets on datasets.id = datatables.dataset_id', 
+          :conditions => ['is_secondary is false and website_id = ?',
+              Website.find_by_name(current_subdomain)])
     end
 
     @studies = Study.find_all_roots_with_datatables(@datatables, {:order => 'weight'})
 
   end
+  
 end

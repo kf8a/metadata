@@ -135,8 +135,21 @@ end -%>
 	TODO: geographic coverage 
 	-->
 <% unless @datatable.metadata_only? %>
-  <%= link_to 'Download complete data table', datatable_path(@datatable, :format => :csv) ,
-  :class => 'download-link'%>
+  <% if @datatable.restricted? %>
+    <% if signed_in? %>
+        <% if current_user.allowed(@datatable) %>
+          <%= link_to 'Download complete data table', datatable_path(@datatable, :format => :csv) ,
+           :class => 'download-link'%>
+        <% else %>
+          <a class='download-link' href='mailto:glbrc.data@kbs.msu.edu'>Request data</a>
+        <% end %>
+    <% else %>
+      <%= link_to 'Sign in to request the data', sign_in_path, :class => 'download-link' %> or <%= link_to 'Sign up', sign_up_path %> if you have not done so already.
+    <% end %>
+  <% else %>
+    <%= link_to 'Download complete data table', datatable_path(@datatable, :format => :csv) ,
+    :class => 'download-link'%>
+  <% end %>
 <% end %>
 
 
@@ -172,4 +185,4 @@ end -%>
 <% end -%>
 
 <%= link_to 'Back to Data Catalog', datatables_path() %>&nbsp;&nbsp;
-<%= link_to 'Edit', edit_datatable_path(@datatable) if signed_in? %>
+<%= link_to 'Edit', edit_datatable_path(@datatable) if admin? %>

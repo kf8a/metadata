@@ -1,24 +1,30 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class StudiesControllerTest < ActionController::TestCase
 
-  context 'on GET to :edit' do
-    setup do
-      @study = Factory.create(:study, :id => 3)
-      get :edit, :id => 3
+  context 'with an admin user' do
+    setup do 
+      @controller.current_user = User.new(:role => 'admin')
     end
     
-    should respond_with :success
-    should assign_to :study
-  end
-  
-  context 'on POST to :update' do
-    setup do
-      @study = Factory.create(:study, :id => 3)
-      post :update, :id => 3
+    context 'on GET to :edit' do
+      setup do
+        @study = Factory.create(:study, :id => 3)
+        get :edit, :id => 3
+      end
+
+      should respond_with :success
+      should assign_to :study
     end
 
-    should respond_with :redirect   #to datatables
-    should assign_to :study
+    context 'on POST to :update' do
+      setup do
+        @study = Factory.create(:study, :id => 3)
+        post :update, :id => 3
+      end
+
+      should respond_with :redirect   #to datatables
+      should assign_to :study
+    end
   end
 end

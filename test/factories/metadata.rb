@@ -63,3 +63,18 @@ Factory.define :variate do |v|
   v.name 'date'
 end
 
+Factory.define :upload do |u|
+end
+
+Factory.define :venue_type do |v|
+  v.name  'Venue Name'
+end
+
+Factory.define :meeting do |m|
+  m.venue_type  Factory.create(:venue_type)
+end
+
+Factory.define :abstract do |a|
+  a.abstract  'A quick little discussion of the meeting.'
+  a.meeting   Factory.create(:meeting)
+end

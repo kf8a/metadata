@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>LTER: <%= controller.controller_name %>:<%= controller.action_name %></title>
+	<%= stylesheet_link_merged :base, :media=>'screen,print' %>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+
+  <script>jQuery.noConflict();</script>
+
+  <%= javascript_include_merged :base %>
+  	  
+</head>
+<body>
+	<div id='wrapper'>
+	  <div id='glbrc'>
+		<div id='branding'>
+			<a id='glbrc-logo' href="http://glbrc.org">
+				<img alt="Great Lakes Bioenergy Consortium" src="/images/common/glbrc_small.jpg"/>
+			</a>
+			<h1><%= @title %></h1>
+		
+
+		</div>
+		<div id='content'>
+			
+			<p style="color: green"><%= flash[:notice] %></p>
+			<%= yield  %>
+		</div>
+		<div id='navigation'>
+
+		</div>
+		<div id='footer'>
+		</div>
+		</div>
+	</div>
+  
+  <%= debug(params) if Rails.env.development? %>
+  
+	<script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+  try {
+  var pageTracker = _gat._getTracker("UA-379552-5");
+  pageTracker._trackPageview();
+  } catch(err) {}</script>
+</body>
+</html>

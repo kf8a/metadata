@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>LTER: <%= controller.controller_name %>:<%= controller.action_name %></title>
+	<%= stylesheet_link_merged :base, :media=>'screen,print' %>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+
+  <script>jQuery.noConflict();</script>
+
+  <%= javascript_include_merged :base %>
+  <%= javascript_include_tag 'keyworder'%>
+  	  
+  <link rel="alternate" type="application/rss+xml" title="Data" href="/datatables.rss" />
+</head>
+<body>
+	<div id='wrapper'>
+		<div id='branding'>
+			<a id='msu_logo' href="http://www.msu.edu">
+				<img alt="Michigan State University" src="/images/common/logo_msu_pos_122.gif"/>
+			</a>
+			<h1><%= @title %></h1>
+			<div id="topcoloredbar">
+				<div id='search'>
+					<a href="/people">People</a>
+
+					<form action="http://www.google.com/u/ltersearch" method='get' id="searchform">
+						<input id='peoplesearch' type='text' name='q' maxlength='255' size='20' value="Search KBS LTER"/>
+					</form>
+				</div>
+				<h2><a href='/'>The KBS LTER Site</a></h2>
+			</div>
+
+		</div>
+		<div id='content'>
+			
+			<p style="color: green"><%= flash[:notice] %></p>
+			<ul id=crumbs>
+				<li><a href='/'>Home</a></li>
+
+				<% @crumbs.each do |crumb| %>
+				<li> >
+				<%if crumb.url.nil? %>
+				  <%= crumb.name %>
+				<%else %>
+				   <%= link_to "#{crumb.name}", crumb.url  %>
+				<% end %>
+				</li>
+				<% end %>
+
+			</ul>
+			<%= yield  %>
+		</div>
+		<div id='navigation'>
+			<%= render :file => "#{RAILS_ROOT}/public/system/navigation.html"%>
+			<% if controller.controller_name == 'datasets' || controller.controller_name == 'datatables' || controller.controller_name == 'protocols' %>
+			  <%= render :file => "#{RAILS_ROOT}/public/system/network_db.html"%>
+			<% end %>
+		</div>
+		<div id='footer'>
+			<%= render :file  => "#{RAILS_ROOT}/public/system/footer.html"%>
+		</div>
+	</div>
+  
+  <%= debug(params) if Rails.env.development? %>
+  
+	<script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+  try {
+  var pageTracker = _gat._getTracker("UA-379552-5");
+  pageTracker._trackPageview();
+  } catch(err) {}</script>
+</body>
+</html>

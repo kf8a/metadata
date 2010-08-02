@@ -5,7 +5,7 @@ class CreatePublications < ActiveRecord::Migration
       t.column :citation, :text
       t.column :abstract, :text
       t.column :year, :int
-      t.column :author, :string
+      t.column :authors, :string
       t.column :title, :string
     end
   end

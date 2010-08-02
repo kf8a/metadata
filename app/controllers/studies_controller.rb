@@ -1,5 +1,7 @@
 class StudiesController < ApplicationController
   
+  before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
+  
   #GET /studies
   def index
     @study_roots = Study.roots

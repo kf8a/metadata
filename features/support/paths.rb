@@ -20,8 +20,17 @@ module NavigationHelpers
     when /the datatable page/
       datatable_path(@datatable)
       
+    when /the datatable edit page/
+      edit_datatable_path(@datatable)
+           
     when /the datatable download page/
       datatable_path(@datatable, :format => 'csv')
+      
+    when /LTER datatables/
+      datatables_path
+      
+    when /GLBRC datatables/
+      datatables_path
   
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

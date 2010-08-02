@@ -8,13 +8,13 @@ class DatasetsControllerTest < ActionController::TestCase
   
 
   def setup
-    @controller = DatasetsController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
     @dataset = Factory.create(:dataset)
     Factory.create(:dataset)
+    
+    #TODO test with admin and non admin users
+    @controller.current_user = User.new(:role => 'admin')
   end
- 
+   
   def test_should_get_new
     get :new
     assert_response :success
@@ -26,6 +26,15 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_equal old_count+1, Dataset.count
     
     assert_redirected_to dataset_path(assigns(:dataset))
+  end
+  
+  context "POST :create with invalid parameters" do
+    setup do
+      post :create, :dataset => {:abstract => nil}
+    end
+    
+    should render_template :new
+    should_not set_the_flash
   end
 
   def test_should_show_dataset
@@ -43,6 +52,15 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_redirected_to dataset_path(assigns(:dataset))
   end
   
+  context "PUT :update with invalid parameters" do
+    setup do
+      put :update, :id => @dataset, :dataset => {:abstract => nil}
+    end
+    
+    should render_template :edit
+    should_not set_the_flash
+  end
+
   def test_should_destroy_dataset
     old_count = Dataset.count
     delete :destroy, :id => @dataset
@@ -92,5 +110,15 @@ class DatasetsControllerTest < ActionController::TestCase
     end
     
     should 'be succesful'
+  end
+  
+  context "eml harvester document is used as parameter for index" do
+    setup do
+      @dataset = Factory.create(:dataset)
+      get :index, :Dataset => @dataset
+    end
+    
+    should respond_with :success
+    should respond_with_content_type :eml
   end
 end

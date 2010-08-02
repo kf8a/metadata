@@ -11,12 +11,10 @@ config.whiny_nils = true
 
 # Show full error reports and disable caching
 config.action_controller.consider_all_requests_local = true
-config.action_controller.perform_caching             = false
+config.action_controller.perform_caching             = true
 
 # Disable request forgery protection in test environment
 config.action_controller.allow_forgery_protection    = false
-
-
 
 # Tell Action Mailer not to deliver emails to the real world.
 # The :test delivery method accumulates sent emails in the
@@ -25,7 +23,7 @@ config.action_mailer.default_url_options = {:host => 'localhost:3000'}
 config.action_mailer.delivery_method = :test
 
 config.gem "shoulda", :lib => false
-config.gem "factory_girl" , :lib => false
+config.gem "thoughtbot-factory_girl" , :lib => false
  
 config.gem 'cucumber-rails',   :lib => false, :version => '>=0.3.2' unless File.directory?(File.join(Rails.root, 'vendor/plugins/cucumber-rails'))
 config.gem 'database_cleaner', :lib => false, :version => '>=0.5.0' unless File.directory?(File.join(Rails.root, 'vendor/plugins/database_cleaner'))

@@ -27,9 +27,9 @@ Rails::Initializer.run do |config|
   config.gem 'formtastic'
  
   config.gem "shoulda", :lib => false
-  config.gem "factory_girl" , :lib => false
+  config.gem "thoughtbot-factory_girl" , :lib => false
  
-  #config.gem 'subdomain-fu'
+  config.gem 'subdomain-fu'
   #config.gem "matthuhiggins-foreigner", :lib => "foreigner"
   
   # Settings in config/environments/* take precedence over those specified here
@@ -63,8 +63,17 @@ Rails::Initializer.run do |config|
   # config.active_record.default_timezone = :utc
   
   # See Rails::Configuration for more options
+  
 end
 
+SubdomainFu.tld_sizes = {:development => 0,
+                         :cucumber => 0,
+                         :test => 0,
+                         :production => 3} # set all at once (also the defaults)
+
+
 OpenIdAuthentication.store = :file
+
+ActionController::Base.cache_store = :file_store, "tmp/cache" #"/path/to/cache/directory" 
 Struct.new('Crumb', :url, :name)
 

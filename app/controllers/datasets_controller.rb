@@ -1,10 +1,11 @@
 class DatasetsController < ApplicationController
       
-  before_filter :set_title
-  before_filter :allow_on_web, :except => [:autocomplete_for_keyword_list]
-  before_filter :login_required, :except => [:index, :show, :auto_complete_for_keyword_list] if ENV["RAILS_ENV"] == 'production'
+  layout :site_layout
   
-  layout proc {|controller| controller.request.format == :eml ? false : 'application'}
+  before_filter :allow_on_web, :except => [:autocomplete_for_keyword_list]
+  before_filter :admin?, :except => [:index, :show, :auto_complete_for_keyword_list] if ENV["RAILS_ENV"] == 'production'
+  
+  #layout proc {|controller| controller.request.format == :eml ? false : 'application'}
   
   # POST /dataset
   def upload
@@ -27,19 +28,19 @@ class DatasetsController < ApplicationController
       @keyword_list = keyword_list
     end
             
-   @datasets = Dataset.all
+    @datasets = Dataset.all
 
   
-   @studies = @datasets.collect do |dataset|
-     next unless dataset.on_web
-     dataset.studies.flatten
-   end
-   @studies.flatten!
-   @studies.compact!
-   @studies.uniq!
-   @studies.sort! {|a,b| a.weight <=> b.weight}
+    @studies = @datasets.collect do |dataset|
+      next unless dataset.on_web
+      dataset.studies.flatten
+    end
+    @studies.flatten!
+    @studies.compact!
+    @studies.uniq!
+    @studies.sort! {|a,b| a.weight <=> b.weight}
    
-   @studies = [@study] if @study
+    @studies = [@study] if @study
                                      
     @crumbs = []
     respond_to do |format|
@@ -172,4 +173,5 @@ class DatasetsController < ApplicationController
     dataset = Dataset.find(params[:id])
     dataset.on_web
   end
+  
 end

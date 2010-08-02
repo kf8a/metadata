@@ -1,6 +1,6 @@
 class ThemesController < ApplicationController
   
-  before_filter :login_required  if ENV["RAILS_ENV"] == 'production'
+  before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
   
   def index
     @theme_roots = Theme.roots    

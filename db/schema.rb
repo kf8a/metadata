@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100701150102) do
+ActiveRecord::Schema.define(:version => 20100719124908) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -416,6 +416,15 @@ ActiveRecord::Schema.define(:version => 20100701150102) do
 
   add_index "units", ["name"], :name => "unit_names_key", :unique => true
 
+  create_table "uploads", :force => true do |t|
+    t.string   "title"
+    t.string   "owners"
+    t.text     "abstract"
+    t.binary   "file"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email"
     t.string   "encrypted_password", :limit => 128
@@ -426,6 +435,7 @@ ActiveRecord::Schema.define(:version => 20100701150102) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "identity_url"
+    t.string   "role"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

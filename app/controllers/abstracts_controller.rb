@@ -1,6 +1,7 @@
 class AbstractsController < ApplicationController
 
-
+  before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
+  
   # GET meeting_abstracts
   # GET meeting_abstracts.xml
   def index

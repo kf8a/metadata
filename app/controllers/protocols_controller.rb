@@ -1,7 +1,9 @@
 class ProtocolsController < ApplicationController
   
-  before_filter :set_title
-  caches_action :index
+  layout :site_layout
+  before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
+  
+  #caches_action :index
   
   # GET /protocols
   # GET /protocols.xml

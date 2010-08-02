@@ -12,6 +12,10 @@ class ProtocolsControllerTest < ActionController::TestCase
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
     @protocol = Factory.create(:protocol)
+    
+    #TODO test with admin and non admin users
+    @controller.current_user = User.new(:role => 'admin')
+    
   end
 
   def test_should_get_index

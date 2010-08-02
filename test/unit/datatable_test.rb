@@ -7,7 +7,6 @@ class DatatableTest < ActiveSupport::TestCase
   should belong_to :dataset
   should belong_to :study
   should have_many :owners
-  should have_many :users
   
   should have_many :data_contributions
   
@@ -34,7 +33,7 @@ class DatatableTest < ActiveSupport::TestCase
     
   end
   
-  context 'datatable permissions' do
+  context 'using datatable permissions' do
     setup do
       @anonymous_user     = nil
       @unauthorized_user  = Factory :user, :email => 'unauthorized@person.com'
@@ -69,15 +68,32 @@ class DatatableTest < ActiveSupport::TestCase
     should 'only allow authorized users to download restricted datatables' do
       assert !@restricted.can_download?(@anonymous_user)
       assert !@restricted.can_download?(@unauthorized_user)
-      assert @restricted.can_download?(@authorized_user)
+      assert  @restricted.can_download?(@authorized_user)
     end
     
     should 'authorized table should have the right owner' do
       assert @restricted.owners.size == 1
       assert @restricted.owners.include?(@owner)
-    end
+    end 
+  
   end
   
+  context 'setting datatable permissions' do
+    setup do
+      @owner  = Factory :user, :email => 'owner@person.com'
+      @user   = Factory :user, :email => 'user@person.com'
+      @other  = Factory :user, :email => 'other@person.com'
+      
+      sponsor     = Factory :sponsor, :data_restricted => true
+      dataset     = Factory :dataset, :sponsor => sponsor
+      @datatable  = Factory :datatable, :owners => [@owner]
+    end
+    
+    should 'give permissions to the user if owner' 
+    
+    should 'not give permission to user if not the owner'
+    
+  end
     
   context 'datatable with sample_date' do
     setup do
