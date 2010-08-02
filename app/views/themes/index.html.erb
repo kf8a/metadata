@@ -1,0 +1,28 @@
+
+<div id='theme_list'>
+  <ul id='theme_tree'>
+<% @theme_roots.each do |theme_root| -%>
+<div class="theme_list">
+  <li class="theme_container"><%= theme_root.name %>
+    <input type='hidden' value="<%=theme_root.id %>">
+<ul class="theme_tree">
+  <% if theme_root.descendants.length > 0 -%>
+    <%= render :partial => 'theme', :collection => theme_root.descendants %>
+  <% end -%>
+</ul>
+</li>
+</div>
+
+<% end -%>
+</ul>
+</div>
+
+<% form_for(:theme, :url => themes_path) do |f| %>
+  <p>
+    <label for='theme_name'>Theme Name</label>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= submit_tag "Create" %>
+  </p>
+<% end %>
