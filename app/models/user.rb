@@ -9,8 +9,13 @@ class User < ActiveRecord::Base
   before_save :downcase_email
 
   def allowed(datatable)
-    false
+    if self.role == 'admin'
+      true
+    else
+      false
+    end
   end
+  
   protected
 
   def downcase_email

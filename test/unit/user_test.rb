@@ -9,4 +9,23 @@ class UserTest < ActiveSupport::TestCase
       assert User::ROLES.include?('admin')
     end
   end
+  
+  context "allowed(datatable) function" do
+    context "a restricted datatable" do
+      setup do
+        @datatable = Factory.create(:restricted_datatable)
+      end
+      
+      context "an admin user" do
+        setup do
+          @admin = Factory.create(:admin_user)
+        end
+        
+        should "be allowed to download datatable" do
+          assert @admin.allowed(@datatable)
+        end
+      end
+      
+    end
+  end
 end

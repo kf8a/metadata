@@ -33,6 +33,10 @@ Factory.define :datatable do |d|
   d.dataset       Factory.create(:dataset)
 end
 
+Factory.define :restricted_datatable, :parent => :datatable do |datatable|
+  datatable.is_restricted   true
+end
+
 Factory.define :website do |w|
 end
 
@@ -80,3 +84,8 @@ end
 
 Factory.define :project do |p|
 end
+
+#Factory.define :ownership do |o|
+#  o.user        Factory.create(:user)
+#  o.datatable   Factory.create(:datatable)
+#end
