@@ -8,13 +8,8 @@ class PublicationsControllerTest < ActionController::TestCase
  fixtures :publications
 
   def setup
-    @controller = PublicationsController.new
-    @request    = ActionController::TestRequest.new
-    @response   = ActionController::TestResponse.new
-    
     #TODO test with admin and non admin users
     @controller.current_user = User.new(:role => 'admin')
-    
   end
 
   def test_should_get_index
@@ -22,7 +17,24 @@ class PublicationsControllerTest < ActionController::TestCase
     assert_response :success
     assert assigns(:publications)
   end
+  
+  context "GET :index with params[:alphabetical]" do
+    setup do
+      get :index, :alphabetical => true
+    end
+    
+    should assign_to(:alphabetical).with(true)
+    should assign_to(:decoration).with("by Author")
+  end
 
+  context "GET :index with params[:treatment]" do
+    setup do
+      get :index, :treatment => true
+    end
+    
+    should assign_to(:alphabetical).with(true)
+  end
+  
   def test_should_get_new
     get :new
     assert_response :success

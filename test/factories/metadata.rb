@@ -22,7 +22,6 @@ Factory.define :protocol do |p|
   p.dataset Factory.create(:dataset)
 end
 
-
 Factory.define :datatable do |d|
   d.name          'KBS001_001'
   d.title         'a really cool datatable'
@@ -77,4 +76,7 @@ end
 Factory.define :abstract do |a|
   a.abstract  'A quick little discussion of the meeting.'
   a.meeting   Factory.create(:meeting)
+end
+
+Factory.define :project do |p|
 end

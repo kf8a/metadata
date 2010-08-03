@@ -1,6 +1,6 @@
 <p>categorical <%= link_to 'alphabetical', {:action => :alphabetical} %></p>
 
-	<% @roles.each do |role| -%>
+<% @roles.each do |role| -%>
 	<h2><%= role.name %></h2>
 	<% if role.id == 23 then %>
 	  <ul>
@@ -11,18 +11,17 @@
 	    <%= show_committee('Social Science Committee',role) %>
 	  </ul>
 	<% else %>
-	<% people = role.people.uniq.sort {|a,b| a.affiliations.find_by_role_id(role).seniority.to_s + a.sur_name <=>  b.affiliations.find_by_role_id(role).seniority.to_s + b.sur_name} 
-	%>
-	<ul class='multicolumn'>
-	<% people.each do |person| -%>
-  	<li><%= link_to "#{person.full_name}", person_path(person) %> 
-  	  <%= parenthize person.affiliations.find_by_role_id(role).title %>
-
-  	</li>
+	  <% people = role.people.uniq.sort {|a,b| a.affiliations.find_by_role_id(role).seniority.to_s + a.sur_name <=>  b.affiliations.find_by_role_id(role).seniority.to_s + b.sur_name} 
+	  %>
+	  <ul class='multicolumn'>
+	    <% people.each do |person| -%>
+    	  <li><%= link_to "#{person.full_name}", person_path(person) %> 
+    	    <%= parenthize person.affiliations.find_by_role_id(role).title %>
+    	  </li>
+	    <% end %>
+	  </ul>
 	<% end %>
-	</ul>
-	<% end %>
-	<% end %>
+<% end %>
 <br />
 
 <%= link_to 'Emeritus...', {:action => 'emeritus' } %>

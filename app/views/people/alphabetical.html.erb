@@ -1,11 +1,11 @@
 <p><%= link_to  'categorical', {:action => :index}%> alphabetical</p>
 <ul class='multicolumn'>
-<% for person in @people %>
-  <li><%= link_to "#{person.full_name}", person_path(person) %>
-	<%= link_to 'Edit', edit_person_path(person), {:class => 'edit'} if signed_in? %>
-	<%= link_to_remote image_tag("trash.gif"), :url => person_path(person), :method => 'post', :confirm => 'Are you sure?' if signed_in?%>
-  </li>
-<% end %>
+  <% for person in @people %>
+    <li><%= link_to "#{person.full_name}", person_path(person) %>
+	      <%= link_to 'Edit', edit_person_path(person), {:class => 'edit'} if signed_in? %>
+	      <%= link_to_remote image_tag("trash.gif"), :url => person_path(person), :method => 'post', :confirm => 'Are you sure?' if signed_in?%>
+    </li>
+  <% end %>
 </ul>
 
 <br />
