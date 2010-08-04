@@ -16,13 +16,13 @@ Then /^I will request access to the data$/ do
 end
 
 Given /^a protected datatable exists$/ do
-  sponsor = Factory :sponsor, :data_restricted => true
-  dataset = Factory :dataset, :sponsor => sponsor
-  @datatable = Factory  :datatable,
+  sponsor = Factory.create(:sponsor, :data_restricted => true)
+  dataset = Factory.create(:dataset, :sponsor => sponsor)
+  @datatable = Factory.create(:restricted_datatable,
     :name     => 'KBS001', 
     :dataset  => dataset,
     :object   => 'select now()',
-    :is_sql   => true
+    :is_sql   => true)
 end
 
 
@@ -49,10 +49,15 @@ Given /^"([^"]*)" has given permission$/ do |arg1|
   pending # express the regexp above with the code you wish you had
 end
 
-Given /^"([^"]*)" is an administrator$/ do |user|
-  @user = User.find_by_email(user)
-  @user.role = "admin"
-  @user.save
+Given /^"([^"]*)" is an administrator$/ do |email|
+  @user = User.find_by_email(email)
+  if @user
+    @user.email_confirmed = true
+    @user.role = "admin"
+    @user.save
+  else
+    @user = Factory.create(:admin_user, :email => email, :email_confirmed => true)
+  end
 end
 
 Then /^the file should contain the data$/ do

@@ -6,11 +6,11 @@ Feature: Download data
   
   Scenario: The admin user downloads a protected datatable
     Given a protected datatable exists
-      And I have signed in with "bob@person.com"/"password"
       And "bob@person.com" is an administrator
-     When I go to the datatable page
-      And I press "Download complete data table"
-     Then I should be on the datatable download page
+      And I sign in as "bob@person.com"/"password"
+    When I go to the datatable page
+      And I follow "Download complete data table"
+    Then I should be on the datatable download page
       And I should see "now"
 
   Scenario: The data owner downloads a datatable
