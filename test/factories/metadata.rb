@@ -85,7 +85,7 @@ end
 Factory.define :project do |p|
 end
 
-#Factory.define :ownership do |o|
+Factory.define :ownership do |o|
 #  o.user        Factory.create(:user)
 #  o.datatable   Factory.create(:datatable)
-#end
+end

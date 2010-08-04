@@ -1,8 +1,15 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class UserTest < ActiveSupport::TestCase
+
+  setup do
+    @user = Factory.create(:user)
+  end
+  
   should have_many :permissions
   should have_many :datatables
+  
+  should validate_uniqueness_of(:email).case_insensitive
   
   context 'a user' do
     should 'include admin role' do
