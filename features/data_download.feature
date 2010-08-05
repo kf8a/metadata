@@ -18,7 +18,8 @@ Feature: Download data
       And I should see "now"
 
   Scenario: The data owner downloads a datatable
-    Given "bob@person.com"/"password" owns the restricted datatable "KBS001"
+    Given a protected datatable exists
+      And "bob@person.com"/"password" owns the datatable
       And "bob@person.com" is not an administrator
     When  I sign in as "bob@person.com"/"password"
     Then  I should not have the "admin" role
@@ -29,7 +30,8 @@ Feature: Download data
       And I should see "now"
 
   Scenario: An authorized user downloads a datatable
-    Given "bob@person.com" has permission to download a restricted datatable
+    Given a protected datatable exists
+      And "bob@person.com" has permission to download the datatable
       And "bob@person.com" is not an administrator
     When  I sign in as "bob@person.com"/"password"
     Then  I should not have the "admin" role
@@ -40,7 +42,8 @@ Feature: Download data
       And I should see "now"
 
   Scenario: A user requests access to a datatable
-    Given "bob@person.com" does not have permission to download a restricted datatable
+    Given a protected datatable exists
+      And "bob@person.com" does not have permission to download the datatable
       And "bob@person.com" is not an administrator
     When  I sign in as "bob@person.com"/"password"
     Then I should not have the "admin" role
@@ -53,8 +56,9 @@ Feature: Download data
   
   Scenario: A user has received permission to download data from all data owners
     Given I have signed in with "bob@person.com"/"password"
-      And "alice@person.com"/"password" owns the restricted datatable "KBS001"
-      And "bill@person.com"/"password" owns the restricted datatable "KBS001"
+      And a protected datatable exists
+      And "alice@person.com"/"password" owns the datatable
+      And "bill@person.com"/"password" owns the datatable
       And "alice@person.com" has given "bob@person.com" permission
       And "bill@person.com" has given "bob@person.com" permission
     When  I go to the datatable page
@@ -66,8 +70,9 @@ Feature: Download data
 
   Scenario: A user has received partial permission to download data
     Given I have signed in with "bob@person.com"/"password"
-      And "alice@person.com"/"password" owns the restricted datatable "KBS001"
-      And "bill@person.com"/"password" owns the restricted datatable "KBS001"
+      And a protected datatable exists
+      And "alice@person.com"/"password" owns the datatable
+      And "bill@person.com"/"password" owns the datatable
       And "alice@person.com" has given "bob@person.com" permission
       And "bill@person.com" has not given "bob@person.com" permission
     When  I go to the datatable page

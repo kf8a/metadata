@@ -22,17 +22,10 @@ Given /^a public datatable exists$/ do
     :is_sql   => true
 end
 
-Given /^"([^"]*)"\/"([^"]*)" owns the restricted datatable "([^"]*)"$/ do |user, password, datatable|
-  @datatable = Datatable.find_by_name(datatable)
-  if @datatable
-    @datatable.is_restricted = true
-    @datatable.save
-  else
-    @datatable = Factory.create(:restricted_datatable, :name => datatable)
-  end
-  @user = User.find_by_email(user)
-  @user = Factory.create(:email_confirmed_user, :email => user, :password => password) unless @user
-  Factory.create(:ownership, :user => @user, :datatable => @datatable)
+Given /^"([^"]*)"\/"([^"]*)" owns the datatable$/ do |owner, password|
+  @owner = User.find_by_email(owner)
+  @owner = Factory.create(:email_confirmed_user, :email => owner, :password => password) unless @owner
+  Factory.create(:ownership, :user => @owner, :datatable => @datatable)
 end
 
 Given /^"([^"]*)" has permission to download a restricted datatable$/ do |user|
