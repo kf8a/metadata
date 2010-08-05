@@ -18,7 +18,7 @@ class UserTest < ActiveSupport::TestCase
   end
   
   context "allowed(datatable) function" do
-    context "a restricted datatable" do
+    context "a protected datatable" do
       setup do
         @datatable = Factory.create(:protected_datatable)
       end
@@ -33,6 +33,46 @@ class UserTest < ActiveSupport::TestCase
         end
       end
       
+      context "the owner" do
+        setup do
+          @owner = Factory.create(:email_confirmed_user)
+          Factory.create(:ownership, :user => @owner, :datatable => @datatable)
+        end
+        
+        should "be allowed to download datatable" do
+          assert @owner.allowed(@datatable)
+        end
+      end
+      
+    end
+  end
+  
+  context "the owns(datatable) function" do
+    context "with a protected datatable" do
+      setup do
+        @datatable = Factory.create(:protected_datatable)
+      end
+      
+      context "and an owner" do
+        setup do
+          @owner = Factory.create(:email_confirmed_user)
+          Factory.create(:ownership, :user => @owner, :datatable => @datatable)
+        end
+        
+        should "own the datatable" do
+          assert @owner.owns(@datatable)
+        end
+      end
+      
+      context "and a non-owner" do
+        setup do
+          @nonowner = Factory.create(:email_confirmed_user)
+        end
+        
+        should "not own the datatable" do
+          assert ! @nonowner.owns(@datatable)
+        end
+      end
     end
   end
 end

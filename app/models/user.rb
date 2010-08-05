@@ -11,9 +11,15 @@ class User < ActiveRecord::Base
   def allowed(datatable)
     if self.role == 'admin'
       true
+    elsif self.owns(datatable)
+      true
     else
       false
     end
+  end
+  
+  def owns(datatable)
+    Ownership.find_by_user_id_and_datatable_id(self, datatable)
   end
   
   protected
