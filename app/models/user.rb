@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
       true
     elsif self.owns(datatable)
       true
+    elsif self.permitted(datatable)
+      true
     else
       false
     end
@@ -20,6 +22,13 @@ class User < ActiveRecord::Base
   
   def owns(datatable)
     Ownership.find_by_user_id_and_datatable_id(self, datatable)
+  end
+  
+  def permitted(datatable)
+    permitted = true
+    datatable.owners.each do |owner|
+      permitted = false unless Permission.find_by_user_id_and_owner_id_and_datatable_id(self, owner, datatable)
+    end
   end
   
   protected

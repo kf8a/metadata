@@ -25,8 +25,7 @@ Given /^"([^"]*)"\/"([^"]*)" owns the datatable$/ do |owner, password|
   Factory.create(:ownership, :user => @owner, :datatable => @datatable)
 end
 
-Given /^"([^"]*)" has permission to download a restricted datatable$/ do |user|
-  @datatable = Factory.create(:restricted_datatable)
+Given /^"([^"]*)" has permission to download the datatable$/ do |user|
   @user = User.find_by_email(user)
   @user = Factory.create(:email_confirmed_user, :email => user) unless @user
   @owner = Factory.create(:email_confirmed_user)

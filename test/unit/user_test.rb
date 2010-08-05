@@ -18,7 +18,7 @@ class UserTest < ActiveSupport::TestCase
   end
   
   context "allowed(datatable) function" do
-    context "a protected datatable" do
+    context "with a protected datatable" do
       setup do
         @datatable = Factory.create(:protected_datatable)
       end
@@ -44,6 +44,18 @@ class UserTest < ActiveSupport::TestCase
         end
       end
       
+      context "someone with permission" do
+        setup do
+          @user = Factory.create(:email_confirmed_user)
+          @owner = Factory.create(:email_confirmed_user)
+          Factory.create(:ownership, :user => @owner, :datatable => @datatable)
+          Factory.create(:permission, :user => @user, :datatable => @datatable, :owner => @owner)
+        end
+        
+        should "be allowed to download datatable" do
+          assert @user.allowed(@datatable)
+        end
+      end
     end
   end
   
