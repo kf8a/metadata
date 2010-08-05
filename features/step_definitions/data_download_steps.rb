@@ -3,11 +3,8 @@ Then /^I will request access to the data$/ do
 end
 
 Given /^a protected datatable exists$/ do
-  sponsor = Factory.create(:sponsor, :data_restricted => true)
-  dataset = Factory.create(:dataset, :sponsor => sponsor)
-  @datatable = Factory.create(:restricted_datatable,
+  @datatable = Factory.create(:protected_datatable,
     :name     => 'KBS001', 
-    :dataset  => dataset,
     :object   => 'select now()',
     :is_sql   => true)
 end

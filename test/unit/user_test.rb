@@ -20,7 +20,7 @@ class UserTest < ActiveSupport::TestCase
   context "allowed(datatable) function" do
     context "a restricted datatable" do
       setup do
-        @datatable = Factory.create(:restricted_datatable)
+        @datatable = Factory.create(:protected_datatable)
       end
       
       context "an admin user" do
