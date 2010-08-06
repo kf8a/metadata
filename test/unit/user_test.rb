@@ -18,9 +18,11 @@ class UserTest < ActiveSupport::TestCase
   end
   
   context "allowed(datatable) function" do
-    context "with a protected datatable" do
+    context "with a protected and owned datatable" do
       setup do
         @datatable = Factory.create(:protected_datatable)
+        @owner = Factory.create(:email_confirmed_user)
+        Factory.create(:ownership, :user => @owner, :datatable => @datatable)
       end
       
       context "an admin user" do
@@ -34,11 +36,6 @@ class UserTest < ActiveSupport::TestCase
       end
       
       context "the owner" do
-        setup do
-          @owner = Factory.create(:email_confirmed_user)
-          Factory.create(:ownership, :user => @owner, :datatable => @datatable)
-        end
-        
         should "be allowed to download datatable" do
           assert @owner.allowed(@datatable)
         end
@@ -47,13 +44,21 @@ class UserTest < ActiveSupport::TestCase
       context "someone with permission" do
         setup do
           @user = Factory.create(:email_confirmed_user)
-          @owner = Factory.create(:email_confirmed_user)
-          Factory.create(:ownership, :user => @owner, :datatable => @datatable)
           Factory.create(:permission, :user => @user, :datatable => @datatable, :owner => @owner)
         end
         
         should "be allowed to download datatable" do
           assert @user.allowed(@datatable)
+        end
+      end
+      
+      context "someone without permission" do
+        setup do
+          @user = Factory.create(:email_confirmed_user)
+        end
+        
+        should "not be allowed to download datatable" do
+          assert ! @user.allowed(@datatable)
         end
       end
     end

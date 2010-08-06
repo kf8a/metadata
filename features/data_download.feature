@@ -51,8 +51,6 @@ Feature: Download data
     When I go to the datatable page
     Then  I should see "Request data"
       And I should not see "Download complete data table"
-    When  I press "request data"
-    Then  I will request access to the data
   
   Scenario: A user has received permission to download data from all data owners
     Given I have signed in with "bob@person.com"/"password"

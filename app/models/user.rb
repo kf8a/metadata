@@ -25,10 +25,16 @@ class User < ActiveRecord::Base
   end
   
   def permitted(datatable)
-    permitted = true
+#    permitted = true
+    permissions = 0
+    permissions_required = 0
     datatable.owners.each do |owner|
-      permitted = false unless Permission.find_by_user_id_and_owner_id_and_datatable_id(self, owner, datatable)
+      permissions_required += 1
+      if Permission.find_by_user_id_and_owner_id_and_datatable_id(self, owner, datatable)
+        permissions += 1
+      end
     end
+    permissions == permissions_required
   end
   
   protected

@@ -1,7 +1,3 @@
-Then /^I will request access to the data$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
 Given /^a protected datatable exists$/ do
   @datatable = Factory.create(:protected_datatable,
     :name     => 'KBS001', 
@@ -33,11 +29,10 @@ Given /^"([^"]*)" has permission to download the datatable$/ do |user|
   Factory.create(:permission, :user => @user, :datatable => @datatable, :owner => @owner)
 end
 
-Given /^"([^"]*)" does not have permission to download a restricted datatable$/ do |user|
-  @datatable = Factory.create(:restricted_datatable)
+Given /^"([^"]*)" does not have permission to download the datatable$/ do |user|
   @user = User.find_by_email(user)
   @user = Factory.create(:email_confirmed_user, :email => user) unless @user
-  @owner = Factory.create(:email_confirmed_user)
+  @owner = Factory.create(:email_confirmed_user) unless @owner
   Factory.create(:ownership, :user => @owner, :datatable => @datatable)
   assert_nil Permission.find_by_user_id(@user)
 end
