@@ -15,6 +15,14 @@ class ApplicationControllerTest < ActionController::TestCase
     def testadmin
       render :text => "You are an admin"
     end
+    
+    def testpagechoose
+      sub = params[:sub]
+      con = params[:cont]
+      page_req = params[:page_req]
+      @page_chosen = template_choose(sub, con, page_req)
+      render :text => "Something needs to be rendered"
+    end
   end
   
   class FooControllerTest < ActionController::TestCase
@@ -46,6 +54,30 @@ class ApplicationControllerTest < ActionController::TestCase
         end
         
         should respond_with :success
+      end
+    end
+    
+    context "template choose function" do
+      setup do
+        @controller.current_user = User.new(:role => 'admin')  
+      end
+      
+      context "when a subdomain is requested which exists" do
+        setup do
+          get :testpagechoose, :sub => "lter", :cont => "datatables", :page_req => "index"
+        end
+        
+        should respond_with(:success)
+        should assign_to(:page_chosen).with("app/views/datatables/lter_index.html.erb")
+      end
+      
+      context "when a subdomain is requested which does not exist" do
+        setup do
+          get :testpagechoose, :sub => "lter", :cont => "people", :page_req => "index"
+        end
+
+        should respond_with(:success)
+        should assign_to(:page_chosen).with("app/views/people/index.html.erb")
       end
     end
   end
