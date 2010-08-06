@@ -1,28 +1,8 @@
-
-Given /^I own datatable "([^"]*)"$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-Given /^I have permission to download$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-Given /^I do not have permission to download$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then /^I will request access to the data$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
 Given /^a protected datatable exists$/ do
-  sponsor = Factory :sponsor, :data_restricted => true
-  dataset = Factory :dataset, :sponsor => sponsor
-  @datatable = Factory  :datatable,
+  @datatable = Factory.create(:protected_datatable,
     :name     => 'KBS001', 
-    :dataset  => dataset,
     :object   => 'select now()',
-    :is_sql   => true
+    :is_sql   => true)
 end
 
 
@@ -35,16 +15,72 @@ Given /^a public datatable exists$/ do
     :is_sql   => true
 end
 
-Given /^"([^"]*)"\/"([^"]*)" owns the datatable "([^"]*)"$/ do |user, password, datatable|
-  pending
+Given /^"([^"]*)"\/"([^"]*)" owns the datatable$/ do |owner, password|
+  @owner = User.find_by_email(owner)
+  @owner = Factory.create(:email_confirmed_user, :email => owner, :password => password) unless @owner
+  Factory.create(:ownership, :user => @owner, :datatable => @datatable)
 end
 
-Given /^"([^"]*)"\/"([^"]*)" does not have permission to download$/ do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
+Given /^"([^"]*)" has permission to download the datatable$/ do |user|
+  @user = User.find_by_email(user)
+  @user = Factory.create(:email_confirmed_user, :email => user) unless @user
+  @owner = Factory.create(:email_confirmed_user)
+  Factory.create(:ownership, :user => @owner, :datatable => @datatable)
+  Factory.create(:permission, :user => @user, :datatable => @datatable, :owner => @owner)
 end
 
-Given /^"([^"]*)" has given permission$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+Given /^"([^"]*)" does not have permission to download the datatable$/ do |user|
+  @user = User.find_by_email(user)
+  @user = Factory.create(:email_confirmed_user, :email => user) unless @user
+  @owner = Factory.create(:email_confirmed_user) unless @owner
+  Factory.create(:ownership, :user => @owner, :datatable => @datatable)
+  assert_nil Permission.find_by_user_id(@user)
+end
+
+Given /^"([^"]*)" has given "([^"]*)" permission$/ do |owner, user|
+  @user = User.find_by_email(user)
+  @owner = User.find_by_email(owner)
+  @user = Factory.create(:email_confirmed_user, :email => user) unless @user
+  @owner = Factory.create(:email_confirmed_user) unless @owner
+  ownership = Ownership.find_by_user_id_and_datatable_id(@owner, @datatable)
+  Factory.create(:ownership, :user => @owner, :datatable => @datatable) unless ownership
+  Factory.create(:permission, :user => @user, :datatable => @datatable, :owner => @owner)
+end
+
+Given /^"([^"]*)" has not given "([^"]*)" permission$/ do |owner, user|
+  @user = User.find_by_email(user)
+  @owner = User.find_by_email(owner)
+  @user = Factory.create(:email_confirmed_user, :email => user) unless @user
+  @owner = Factory.create(:email_confirmed_user) unless @owner
+  ownership = Ownership.find_by_user_id_and_datatable_id(@owner, @datatable)
+  Factory.create(:ownership, :user => @owner, :datatable => @datatable) unless ownership
+  assert_nil Permission.find_by_user_id_and_owner_id(@user, @owner)
+end
+
+Given /^"([^"]*)" is an administrator$/ do |email|
+  @user = User.find_by_email(email)
+  if @user
+    @user.email_confirmed = true
+    @user.role = "admin"
+    @user.save
+  else
+    @user = Factory.create(:admin_user, :email => email, :email_confirmed => true)
+  end
+end
+
+Given /^"([^"]*)" is not an administrator$/ do |email|
+  @user = User.find_by_email(email)
+  if @user
+    @user.email_confirmed = true
+    @user.role = "normal"
+    @user.save
+  else
+    @user = Factory.create(:user, :email => email, :email_confirmed => true, :role => "normal")
+  end
+end
+
+Given /^all caches are cleared$/ do
+  @controller.expire_fragment(%r{.*})
 end
 
 Then /^the file should contain the data$/ do

@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 class UploadsControllerTest < ActionController::TestCase
 
   def setup
-    @controller.current_user = User.new(:role => 'admin')
+    @controller.current_user = User.new(:role=>'admin')
   end
   
   test "should get new" do

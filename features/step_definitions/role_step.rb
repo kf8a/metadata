@@ -5,5 +5,9 @@ Given /^I have the "([^"]*)" role$/ do |role|
 end
 
 Then /^I should have the "([^"]*)" role$/ do |role|
-  assert controller.current_user.role == role
+  assert_equal controller.current_user.role, role
+end
+
+Then /^I should not have the "([^"]*)" role$/ do |role|
+  assert_not_equal controller.current_user.role, role
 end
