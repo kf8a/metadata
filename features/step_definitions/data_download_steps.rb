@@ -40,12 +40,20 @@ end
 Given /^"([^"]*)" has given "([^"]*)" permission$/ do |owner, user|
   @user = User.find_by_email(user)
   @owner = User.find_by_email(owner)
+  @user = Factory.create(:email_confirmed_user, :email => user) unless @user
+  @owner = Factory.create(:email_confirmed_user) unless @owner
+  ownership = Ownership.find_by_user_id_and_datatable_id(@owner, @datatable)
+  Factory.create(:ownership, :user => @owner, :datatable => @datatable) unless ownership
   Factory.create(:permission, :user => @user, :datatable => @datatable, :owner => @owner)
 end
 
 Given /^"([^"]*)" has not given "([^"]*)" permission$/ do |owner, user|
   @user = User.find_by_email(user)
   @owner = User.find_by_email(owner)
+  @user = Factory.create(:email_confirmed_user, :email => user) unless @user
+  @owner = Factory.create(:email_confirmed_user) unless @owner
+  ownership = Ownership.find_by_user_id_and_datatable_id(@owner, @datatable)
+  Factory.create(:ownership, :user => @owner, :datatable => @datatable) unless ownership
   assert_nil Permission.find_by_user_id_and_owner_id(@user, @owner)
 end
 
