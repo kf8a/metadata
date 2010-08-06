@@ -17,12 +17,14 @@ class DatatablesController < ApplicationController
     website = Website.find(:first) unless website
     @plate = nil
     @plate = website.layout('datatables','index') if website
-    
+
+    page = template_choose(subdomain_request, "datatables", "index")
+        
     respond_to do |format|
       if @plate
         format.html {render "liquid_index.html.erb"}
       else
-        format.html {render "#{subdomain_request}_index.html.erb"}
+        format.html {render page}
       end
       format.xml  { render :xml => @datatables.to_xml }
       format.rss {render :rss => @datatables}
@@ -30,17 +32,18 @@ class DatatablesController < ApplicationController
   end
 
   def search
+    subdomain_request = request_subdomain(params[:requested_subdomain])
     query =  {'keyword_list' => ''}
     query.merge!(params)
     if query['keyword_list'].empty? 
       redirect_to datatables_url
     else
       retrieve_datatables(query)
+      page = template_choose(subdomain_request, "datatables", "search")
       respond_to do |format|
-        format.html
+        format.html {render page}
       end
     end
-
   end
 
   # GET /datatables/1
@@ -72,12 +75,12 @@ class DatatablesController < ApplicationController
     website = Website.find(:first) unless website
     @plate = nil
     @plate = website.layout('datatables','show') if website
-
+    page = template_choose(subdomain_request, "datatables", "show")
     respond_to do |format|
       if @plate
         format.html {render "liquid_show.html.erb"}
       else
-        format.html #show.html.erb
+        format.html {render page}
       end
       format.xml  { render :xml => @datatable.to_xml}
       format.csv  { render :text => @datatable.to_csv_with_metadata }
@@ -113,13 +116,15 @@ class DatatablesController < ApplicationController
     @datatable = Datatable.new(params[:datatable])
     @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
 
+    subdomain_request = request_subdomain(params[:requested_subdomain])
     respond_to do |format|
       if @datatable.save
         flash[:notice] = 'Datatable was successfully created.'
         format.html { redirect_to datatable_url(@datatable) }
         format.xml  { head :created, :location => datatable_url(@datatable) }
       else
-        format.html { render :action => "new" }
+        page = template_choose(subdomain_request, "datatables", "new")
+        format.html { render page }
         format.xml  { render :xml => @datatable.errors.to_xml }
       end
     end
@@ -128,6 +133,7 @@ class DatatablesController < ApplicationController
   # PUT /datatables/1
   # PUT /datatables/1.xml
   def update
+    subdomain_request = request_subdomain(params[:requested_subdomain])
     @datatable = Datatable.find(params[:id])
 
     respond_to do |format|
@@ -137,7 +143,8 @@ class DatatablesController < ApplicationController
         format.xml  { head :ok }
       else
         @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
-        format.html { render :action => "edit" }
+        page = template_choose(subdomain_request, "datatables", "edit")
+        format.html { render page }
         format.xml  { render :xml => @datatable.errors.to_xml }
       end
     end
