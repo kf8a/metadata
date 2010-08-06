@@ -31,7 +31,15 @@
 			<%= yield  %>
 		</div>
 		<div id='navigation'>
-
+        <ul>
+          <li><a href='#'>Data Catalog</a></li>
+          <li><a href='#'>Protocols</a></li>
+          <li><a href='#'>Experimental Layouts</a></li>
+          <li><a href='#'>Publications</a></li>
+          <% if signed_in? %>
+            <li><a href='#'>Uploads</a></li>
+          <% end %>
+        </ul>
 		</div>
 		<div id='footer'>
 		</div>
