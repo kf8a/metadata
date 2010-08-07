@@ -19,15 +19,10 @@ class DatasetsController < ApplicationController
     if params[:Dataset] 
       request.format = :eml
     end
-     keyword_list = params['keyword_list']
+    @keyword_list = params['keyword_list']
         
     @people = Person.find_all_with_dataset(:order => 'sur_name')
     @themes = Theme.find(:all, :order => :weight)
-
-    if keyword_list
-      @keyword_list = keyword_list
-    end
-            
     @datasets = Dataset.all
 
   
