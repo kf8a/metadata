@@ -88,5 +88,48 @@ class DatasetTest < ActiveSupport::TestCase
       assert !@dataset_no_date.to_eml.nil?
     end
   end
-
+  
+  context "has person function" do
+    setup do
+      @dataset = Factory.create(:dataset)
+    end
+    
+    context "with a person affiliated with the dataset" do
+      setup do
+        @person = Factory.create(:person)
+        @affiliation = Factory.create(:affiliation, :person => @person, :dataset => @dataset)
+      end
+      
+      should "return true for that person" do
+        assert @affiliation
+        assert @dataset.has_person(@person)
+      end
+      
+      should "return false for someone else" do
+        @stranger = Factory.create(:person)
+        assert !@dataset.has_person(@stranger)
+      end
+    end
+  end
+  
+  context "within_interval? function" do
+    setup do
+      @dataset = Factory.create(:dataset)
+    end
+    
+    context "and two datatables" do
+      setup do
+        Factory.create(:datatable, :dataset => @dataset, :begin_date => (Date.today - 7), :end_date => (Date.today - 4))
+        Factory.create(:datatable, :dataset => @dataset, :begin_date => (Date.today - 365), :end_date => (Date.today - 364))
+      end
+      
+      should "return true for dates which include a datatable" do
+        assert @dataset.within_interval?(Date.today - 10, Date.today)
+      end
+      
+      should "return false for dates which do not include a datatable" do
+        assert !@dataset.within_interval?(Date.today - 500, Date.today - 400)
+      end
+    end
+  end
 end
