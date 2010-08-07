@@ -16,28 +16,14 @@ class DatasetsController < ApplicationController
   # GET /datasets
   # GET /datasets.xml
   def index
-    if params[:Dataset] 
-      request.format = :eml
-    end
-    @keyword_list = params['keyword_list']
-        
-    @people = Person.find_all_with_dataset(:order => 'sur_name')
-    @themes = Theme.find(:all, :order => :weight)
-    @datasets = Dataset.all
-
-  
-    @studies = @datasets.collect do |dataset|
-      next unless dataset.on_web
-      dataset.studies.flatten
-    end
-    @studies.flatten!
-    @studies.compact!
-    @studies.uniq!
-    @studies.sort! {|a,b| a.weight <=> b.weight}
-   
-    @studies = [@study] if @study
-                                     
-    @crumbs = []
+    request.format  = :eml if params[:Dataset]
+    @keyword_list   = params['keyword_list']
+    @people         = Person.find_all_with_dataset(:order => 'sur_name')
+    @themes         = Theme.find(:all, :order => :weight)
+    @datasets       = Dataset.all
+    @studies        = collect_and_normalize_studies(@datasets)
+    @studies        = [@study] if @study
+    @crumbs         = []
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @datasets.to_xml }
@@ -49,9 +35,9 @@ class DatasetsController < ApplicationController
   # GET /datasets/1.xml
   # GET /dataset/1.eml
   def show
-    @dataset = Dataset.find(params[:id])
-    @title = @dataset.title
-    @roles = @dataset.roles
+    @dataset  = Dataset.find(params[:id])
+    @title    = @dataset.title
+    @roles    = @dataset.roles
 
     respond_to do |format|
       format.html # show.rhtml
@@ -67,28 +53,29 @@ class DatasetsController < ApplicationController
 
   # GET /datasets/1;edit
   def edit
-    @dataset = Dataset.find(params[:id])
-    @people = Person.all(:order => 'sur_name')
-    @studies = Study.all(:order => 'weight')
-    @themes = Theme.all(:order => 'weight')
-    @roles = Role.find(:all, :conditions => ['role_type_id = ?', RoleType.find_by_name('dataset')])
+    @dataset  = Dataset.find(params[:id])
+    @people   = Person.all(:order => 'sur_name')
+    @roles  = Role.find_all_by_role_type_id(RoleType.find_by_name('dataset'))
   end
   
   # POST /dataset/new_affiliation 
   def set_affiliation_for
     @affiliation = Affiliation.new
-    people = Person.find(:all, :order => 'sur_name ASC')
-    roles = Role.find(:all, :conditions => ['role_type_id = ?', RoleType.find_by_name('dataset')])
+    people = Person.all(:order => 'sur_name ASC')
+    roles = Role.find_all_by_role_type_id(RoleType.find_by_name('dataset'))
+    
     respond_to do |format|
       format.html
       format.js do
         render :update do |page|
-          page.insert_html :bottom, 'affiliations', :partial => "affiliation", 
-            :locals => {:roles => roles, :people => people, :affiliation => @affiliation}
+          page.insert_html :bottom, 'affiliations', 
+            :partial  => "affiliation", 
+            :locals   => {:roles        => roles, 
+                          :people       => people, 
+                          :affiliation  => @affiliation}
         end
       end
     end
-    
   end
 
   # POST /datasets
@@ -169,4 +156,14 @@ class DatasetsController < ApplicationController
     dataset.on_web
   end
   
+  def collect_and_normalize_studies(datasets)
+    @studies = datasets.collect do |dataset|
+      next unless dataset.on_web
+      dataset.studies.flatten
+    end
+    @studies.flatten!
+    @studies.compact!
+    @studies.uniq!
+    @studies.sort! {|a,b| a.weight <=> b.weight}
+  end
 end

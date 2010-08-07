@@ -12,20 +12,10 @@ class DatatablesController < ApplicationController
     retrieve_datatables('keyword_list' =>'')
     @default_value = 'Search for core areas, keywords or people'
     subdomain_request = request_subdomain(params[:requested_subdomain])
-    
-    website = Website.find_by_name(subdomain_request)
-    website = Website.find(:first) unless website
-    @plate = nil
-    @plate = website.layout('datatables','index') if website
-
     page = template_choose(subdomain_request, "datatables", "index")
         
     respond_to do |format|
-      if @plate
-        format.html {render "liquid_index.html.erb"}
-      else
-        format.html {render page}
-      end
+      format.html {render page}
       format.xml  { render :xml => @datatables.to_xml }
       format.rss {render :rss => @datatables}
     end
@@ -71,19 +61,11 @@ class DatatablesController < ApplicationController
 
     #grab the right template to render otherwise just do the default thing for now
     subdomain_request = request_subdomain(params[:requested_subdomain])
-    website = Website.find_by_name(subdomain_request)
-    website = Website.find(:first) unless website
-    @plate = nil
-    @plate = website.layout('datatables','show') if website
     page = template_choose(subdomain_request, "datatables", "show")
     respond_to do |format|
-      if @plate
-        format.html {render "liquid_show.html.erb"}
-      else
-        format.html {render page}
-      end
-      format.xml  { render :xml => @datatable.to_xml}
-      format.csv  { render :text => @datatable.to_csv_with_metadata }
+      format.html   { render page}
+      format.xml    { render :xml => @datatable.to_xml}
+      format.csv    { render :text => @datatable.to_csv_with_metadata }
       format.climdb { render :text => @datatable.to_climdb } unless restricted
       format.climdb { redirect_to datatable_url(@datatable) } if restricted
     end
