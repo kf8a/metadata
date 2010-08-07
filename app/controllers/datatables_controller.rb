@@ -59,7 +59,6 @@ class DatatablesController < ApplicationController
       end
     end
 
-    #grab the right template to render otherwise just do the default thing for now
     subdomain_request = request_subdomain(params[:requested_subdomain])
     page = template_choose(subdomain_request, "datatables", "show")
     respond_to do |format|
