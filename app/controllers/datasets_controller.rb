@@ -63,12 +63,16 @@ class DatasetsController < ApplicationController
     @affiliation = Affiliation.new
     people = Person.all(:order => 'sur_name ASC')
     roles = Role.find_all_by_role_type_id(RoleType.find_by_name('dataset'))
+    
     respond_to do |format|
       format.html
       format.js do
         render :update do |page|
-          page.insert_html :bottom, 'affiliations', :partial => "affiliation", 
-            :locals => {:roles => roles, :people => people, :affiliation => @affiliation}
+          page.insert_html :bottom, 'affiliations', 
+            :partial  => "affiliation", 
+            :locals   => {:roles        => roles, 
+                          :people       => people, 
+                          :affiliation  => @affiliation}
         end
       end
     end

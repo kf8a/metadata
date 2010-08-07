@@ -79,6 +79,21 @@ class ApplicationControllerTest < ActionController::TestCase
         should respond_with(:success)
         should assign_to(:page_chosen).with("app/views/people/index.html.erb")
       end
+      
+      context "when a template is in the database" do
+        setup do
+          lter_website = Factory.create(:website, :name => 'lter')
+          index_layout = Factory.create(:template, 
+                    :website_id => lter_website.id,
+                    :controller => 'datatables',
+                    :action     => 'index',
+                    :layout     => '<h3 id="correct">testpagechoose</h3>')
+          get :testpagechoose, :sub => "lter", :cont => "datatables", :page_req => "index"
+        end
+
+        should respond_with(:success)
+        should assign_to(:page_chosen).with("app/views/datatables/liquid_index.html.erb")
+      end
     end
   end
 end
