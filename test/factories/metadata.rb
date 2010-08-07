@@ -90,3 +90,9 @@ Factory.define :ownership do |o|
 #  o.user        Factory.create(:user)
 #  o.datatable   Factory.create(:datatable)
 end
+
+Factory.define :unit do |u|
+end
+
+Factory.define :affiliation do |a|
+end
