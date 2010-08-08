@@ -27,11 +27,11 @@ class PublicationsController < ApplicationController
     
     if params[:treatment]
       @alphabetical = true
-      treatment = Treatment.find(params[:treatment])  if params[:treatment]
+      treatment = Treatment.find(params[:treatment])
       @publications = treatment.publications
       @decoration = "from #{treatment.name}: #{treatment.description}"
     else
-    @publications = Publication.find(:all, :order => order, 
+      @publications = Publication.find(:all, :order => order, 
       :conditions => [conditions, publication_types])
     end
     

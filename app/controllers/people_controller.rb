@@ -7,7 +7,7 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.xml
   def index
-    @people = Person.find(:all, :order => 'sur_name', :order => 'sur_name')
+    @people = Person.all(:order => 'sur_name', :order => 'sur_name')
     @title = 'KBS LTER Directory'
     @roles = RoleType.find_by_name('lter').roles.find(:all, :order => :seniority, :conditions =>['name not like ?','Emeritus%'])
     respond_to do |format|
@@ -17,7 +17,7 @@ class PeopleController < ApplicationController
   end  
   
   def alphabetical
-    @people = Person.find(:all, :order => 'sur_name')
+    @people = Person.all(:order => 'sur_name')
     @title = 'KBS LTER Directory (alphabetical)'
     respond_to do |format|
       format.html # index.rhtml
@@ -26,7 +26,7 @@ class PeopleController < ApplicationController
   end  
   
   def emeritus
-    @people = Person.find(:all, :order => 'sur_name', :order => 'sur_name')
+    @people = Person.all(:order => 'sur_name', :order => 'sur_name')
     @title = 'KBS LTER Directory'
     @roles = RoleType.find_by_name('lter').roles.find(:all, :order => :seniority, :conditions =>['name like ?','Emeritus%'])
     respond_to do |format|
@@ -55,14 +55,14 @@ class PeopleController < ApplicationController
   def new
     @person = Person.new
     @title = 'New Person'
-    @roles = Role.find(:all, :conditions => ['role_type_id = ?', RoleType.find_by_name('lter')])
+    @roles = Role.find_all_by_role_type_id(RoleType.find_by_name('lter'))
   end
 
   # GET /people/1;edit
   def edit
     @person = Person.find(params[:id])
     @title = 'Edit ' + @person.full_name
-    @roles = Role.find(:all, :conditions => ['role_type_id = ?', RoleType.find_by_name('lter')])
+    @roles = Role.find_all_by_role_type_id(RoleType.find_by_name('lter'))
   end
 
   # POST /people
@@ -110,7 +110,6 @@ class PeopleController < ApplicationController
     expire_action :action => :index
     respond_to do |format|
       format.html { redirect_to people_url }
-
       format.xml  { head :ok }
     end
   end
