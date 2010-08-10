@@ -44,9 +44,13 @@ class PeopleController < ApplicationController
   # GET /people/1.xml
   def show
     @person = Person.find(params[:id])
+    
+    subdomain_request = request_subdomain(params[:requested_subdomain])
+    page = template_choose(subdomain_request, "people", "show")
+
     @title = 'KBS LTER Directory'
     respond_to do |format|
-      format.html # show.rhtml
+      format.html { render page }
       format.xml  { render :xml => @person.to_xml }
     end
   end
