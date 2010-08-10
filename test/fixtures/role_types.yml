@@ -1,7 +1,7 @@
 --- 
 role_types_001: 
   id: "1"
-  name: dataset
+  name: lter_dataset
 role_types_002: 
   id: "2"
   name: lter
