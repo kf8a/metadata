@@ -29,26 +29,28 @@ class DatatablesControllerTest < ActionController::TestCase
     assert assigns(:datatables)
   end
   
-  test "should get the LTER version of the index" do
-    get :index, :requested_subdomain => 'lter'
-    assert_select 'h1', 'LTER Data Catalog'
+  context "GET :index / 'lter' subdomain" do
+    setup do
+      get :index, :requested_subdomain => 'lter'
+    end
+
+    should render_template 'lter_index'
+    should "create index cache" do
+      assert @controller.fragment_exist?(:controller => "datatables", :action => "index", :action_suffix => "lter")
+    end
   end
   
-  test "should create index cache for lter" do
-    get :index, :requested_subdomain => 'lter'
-    assert @controller.fragment_exist?(:controller => "datatables", :action => "index", :action_suffix => "lter")
+  context "GET :index / 'glbrc' subdomain" do
+    setup do
+      get :index, :requested_subdomain => 'glbrc'
+    end
+
+    should render_template 'glbrc_index'
+    should "create index cache" do
+      assert @controller.fragment_exist?(:controller => "datatables", :action => "index", :action_suffix => "glbrc")    
+    end
   end
 
-  test "should get the glbrc version of the index" do
-    get :index, :requested_subdomain => 'glbrc'
-    assert_select 'h1', 'GLBRC Data Catalog'
-  end  
-
-  test "should create index cache for glbrc" do
-    get :index, :requested_subdomain => 'glbrc'
-    assert @controller.fragment_exist?(:controller => "datatables", :action => "index", :action_suffix => "glbrc")
-  end
-  
   test "index should get the template in the database if there is one" do
     lter_website = Factory.create(:website, :name => 'lter')
     index_layout = Factory.create(:template, 
