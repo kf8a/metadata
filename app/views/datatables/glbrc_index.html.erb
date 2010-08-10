@@ -9,7 +9,7 @@
   </p>
 
   <div id='search-form'>
-    <% form_tag('/datatables', :method => 'get') do %>
+    <% form_tag('/datatables/search') do %>
     
       <div id='keyword-search'>
         <%= text_field_tag :keyword_list, @keyword_list || @default_value , {:id => 'keyworder'}  %>
