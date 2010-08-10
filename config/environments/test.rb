@@ -21,3 +21,5 @@ config.action_mailer.default_url_options = {:host => 'localhost:3000'}
 
 config.gem "rspec", :lib => false, :version => ">= 1.2.0"
 config.gem "rspec-rails", :lib => false, :version => ">= 1.2.0"
+config.gem "shoulda", :lib => false
+config.gem "thoughtbot-factory_girl" , :lib => false
