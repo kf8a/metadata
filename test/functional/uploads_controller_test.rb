@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class UploadsControllerTest < ActionController::TestCase
-  def setup do 
-    @controller = UploadsController.new
+
+  def setup
     @controller.current_user = User.new(:role=>'admin')
   end
   

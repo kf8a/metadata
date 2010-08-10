@@ -22,6 +22,9 @@ Factory.define :protocol do |p|
   p.dataset Factory.create(:dataset)
 end
 
+Factory.define :sponsor do |s|
+  s.name    'LTER'
+end
 
 Factory.define :datatable do |d|
   d.name          'KBS001_001'
@@ -33,6 +36,11 @@ Factory.define :datatable do |d|
   d.theme         Factory.create(:theme)
   d.dataset       Factory.create(:dataset)
 end
+
+Factory.define :protected_datatable, :parent => :datatable do |datatable|
+  datatable.dataset   Factory.create(:dataset, :sponsor => Factory.create(:sponsor, :data_restricted => true))
+end
+
 
 Factory.define :website do |w|
 end
@@ -46,10 +54,6 @@ Factory.define :publication do |p|
   p.abstract            'something in here'
   p.year                2000
   p.publication_type_id 1
-end
-
-Factory.define :sponsor do |s|
-  s.name    'LTER'
 end
 
 Factory.define :study do |s|
@@ -77,4 +81,18 @@ end
 Factory.define :abstract do |a|
   a.abstract  'A quick little discussion of the meeting.'
   a.meeting   Factory.create(:meeting)
+end
+
+Factory.define :project do |p|
+end
+
+Factory.define :ownership do |o|
+#  o.user        Factory.create(:user)
+#  o.datatable   Factory.create(:datatable)
+end
+
+Factory.define :unit do |u|
+end
+
+Factory.define :affiliation do |a|
 end

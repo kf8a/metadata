@@ -141,7 +141,15 @@ end -%>
           <%= link_to 'Download complete data table', datatable_path(@datatable, :format => :csv) ,
            :class => 'download-link'%>
         <% else %>
-          <a class='download-link' href='mailto:glbrc.data@kbs.msu.edu'>Request data</a>
+          <%= mail_to 'glbrc.data@kbs.msu.edu', 'Request data', :class => 'download-link' %>
+          <% @datatable.owners.each do |owner| %>
+            <p><%= owner.email %>
+            <% if current_user.has_permission_from(owner, @datatable) %>
+              has given you permission</p>
+            <% else %>
+              needs to give you permission</p>
+            <% end %>
+          <% end %>
         <% end %>
     <% else %>
       <%= link_to 'Sign in to request the data', sign_in_path, :class => 'download-link' %> or <%= link_to 'Sign up', sign_up_path %> if you have not done so already.

@@ -45,6 +45,9 @@ class DatasetsControllerTest < ActionController::TestCase
   def test_should_get_edit
     get :edit, :id => @dataset
     assert_response :success
+    assert assigns(:dataset)
+    assert assigns(:people)
+    assert assigns(:roles)
   end
   
   def test_should_update_dataset
