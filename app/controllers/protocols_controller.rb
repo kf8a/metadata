@@ -10,9 +10,11 @@ class ProtocolsController < ApplicationController
   def index
     @themes = Theme.roots
     @protocols = Protocol.find(:all)
+    subdomain_request = request_subdomain(params[:requested_subdomain])
+    page = template_choose(subdomain_request, "protocols", "index")
 
     respond_to do |format|
-      format.html # index.rhtml
+      format.html {render page}
       format.xml  { render :xml => @protocols.to_xml }
     end
   end

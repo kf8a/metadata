@@ -20,6 +20,14 @@ class ProtocolsControllerTest < ActionController::TestCase
     assert assigns(:protocols)
   end
 
+  context "GET :index / 'glbrc' subdomain" do
+    setup do
+      get :index, :requested_subdomain => 'glbrc'
+    end
+
+    should render_template 'glbrc_index'
+  end
+
   def test_should_get_new
     get :new
     assert_response :success
