@@ -31,6 +31,9 @@ module NavigationHelpers
       
     when /GLBRC datatables/
       datatables_path
+      
+    when /new protocols/
+      new_protocol_path
   
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
