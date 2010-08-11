@@ -1,7 +1,7 @@
 <p>
   <label for='protocol_websites'>Websites</label>
       <% @websites.each do |website| %>
-  			<%= check_box_tag("protocols[website_ids][#{website.id}]", 
+  			<%= check_box_tag("protocol[website_list][#{website.id}]", 
                           "1", 
                           @protocol.websites.detect{|w| w == website}) %>
   			<%= "#{website.name}"%>

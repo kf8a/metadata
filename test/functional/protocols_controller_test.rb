@@ -95,7 +95,6 @@ class ProtocolsControllerTest < ActionController::TestCase
     
     should assign_to :protocol
     should redirect_to("the show page") {protocol_url(assigns(:protocol))}
-    
   end
   
   private
