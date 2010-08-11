@@ -7,12 +7,24 @@ Feature: Give Permissions to another user
   As a data owner
   I want to control who can download data that I contribute
 
-# Scenario: I want to grant permission to download to a user
-#   Given I have signed in as "email@person.com"/"password"
-#     And I am the data owner
-#     And "bob@person.com" has requested access
-#   When I go to somewhere
-#   Then I should see "something"
+  Scenario: I want to grant permission to download to a user
+    Given a protected datatable exists
+      And "bob@person.com"/"password" owns the datatable
+      And "bob@person.com" is not an administrator
+      And "sam@person.com" does not have permission to download the datatable
+      And "sam@person.com" is not an administrator
+    When  I sign in as "bob@person.com"/"password"
+      And I go to the datatable page
+      And I follow "Permissions Management"
+    Then I should not see "sam@person.com has permission from you"
+    
+    When I follow "Add Permissions"
+    Then I should see "Use this page to give permission to someone to download"
+
+    When I fill in "Email" with "sam@person.com"
+      And I press "Grant Permission"
+    Then I should see "sam@person.com has permission from you"
+
 # 
 # Scenario: I want to revoke permission to download from a user
 #   Given I have signed in as "email@person.com"/"password"

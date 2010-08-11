@@ -4,8 +4,16 @@ As an admin
 I want to edit the layout through the website
 
 Scenario: An admin user creates a template
-  Given I am signed up and confirmed as "email@person.com"/"password"
-    And I have the "admin" role
-   When I sign in as "email@person.com"/"password"
-    And I go to new templates
-   Then I should see "New"
+  Given "bob@person.com" is an administrator
+  When  I sign in as "bob@person.com"/"password"
+    And I go to the new template page
+  Then I should be on the new template page
+  Then I should see "Layout*"
+  
+  When I fill in "Controller*" with "Protocols"
+    And I fill in "Action*" with "Index"
+    And I fill in "Layout*" with "Test words"
+    And I press "Create Template"
+    
+  Then I should see something
+  
