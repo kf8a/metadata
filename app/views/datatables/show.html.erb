@@ -141,7 +141,7 @@ end -%>
           <%= link_to 'Download complete data table', datatable_path(@datatable, :format => :csv) ,
            :class => 'download-link'%>
           <% if current_user.owns(@datatable) %>
-            <%= link_to 'Permissions Management', permission_path(:datatable => @datatable) %>
+            <%= link_to 'Permissions Management', permission_path(@datatable) %>
           <% end %>
         <% else %>
           <%= mail_to 'glbrc.data@kbs.msu.edu', 'Request data', :class => 'download-link' %>

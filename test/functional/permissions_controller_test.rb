@@ -35,7 +35,7 @@ class PermissionsControllerTest < ActionController::TestCase
       
       context "and GET :show the datatable's permissions" do
         setup do
-          get :show, :datatable => @datatable
+          get :show, :id => @datatable
         end
         
         should_not respond_with :success
@@ -60,11 +60,13 @@ class PermissionsControllerTest < ActionController::TestCase
       
       context "and GET :show the datatable's permissions" do
         setup do
-          get :show, :datatable => @datatable
+          get :show, :id => @datatable
         end
         
         should respond_with :success
         should render_template 'show'
+        should assign_to(:datatable).with(@datatable)
+        should assign_to(:permitted_users)
       end
       
       context "and GET :show with invalid datatable param" do
@@ -84,6 +86,7 @@ class PermissionsControllerTest < ActionController::TestCase
         
         should respond_with :success
         should render_template 'new'
+        should assign_to(:datatable).with(@datatable)
       end
       
       context "and GET :new with invalid datatable param" do
@@ -93,6 +96,15 @@ class PermissionsControllerTest < ActionController::TestCase
         
         should_not respond_with :success
         should redirect_to("the permissions index") {permissions_path}
+      end
+      
+      context "and POST :create with a valid user email address" do
+        setup do
+          @user = Factory.create(:email_confirmed_user)          
+          post :create, :datatable => @datatable, :email => @user.email
+        end
+        
+        should redirect_to("the datatable permission page") {permission_path(@datatable)}
       end
     end
   end
