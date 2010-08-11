@@ -7,6 +7,7 @@ include REXML
 class Datatable < ActiveRecord::Base
   attr_protected :object
   belongs_to :dataset
+  has_and_belongs_to_many :protocols
   has_many :variates, :order => :weight
   belongs_to :theme
   belongs_to :core_area

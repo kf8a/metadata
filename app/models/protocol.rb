@@ -1,5 +1,7 @@
 class Protocol < ActiveRecord::Base
   belongs_to :dataset
+  has_and_belongs_to_many :websites
+  has_and_belongs_to_many :datatables
   has_many :scribbles
   has_many :people, :through => :scribbles
   has_one :precedent, :class_name => "Protocol", :foreign_key => "precedent_id"

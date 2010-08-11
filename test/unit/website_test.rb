@@ -3,6 +3,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 class WebsiteTest < ActiveSupport::TestCase
   should have_many :datasets
   should have_many :templates
+  should have_and_belong_to_many :protocols
 
   context 'website' do
     setup do
