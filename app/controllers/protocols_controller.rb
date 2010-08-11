@@ -34,14 +34,14 @@ class ProtocolsController < ApplicationController
   def new
     @protocol = Protocol.new
     @people = Person.find(:all, :order => :sur_name)
-    @websites = Website.all
+    get_all_websites
   end
 
   # GET /protocols/1;edit
   def edit
     @protocol = Protocol.find(params[:id])
     @people = Person.find(:all, :order => :sur_name)
-    @websites = Website.all
+    get_all_websites
   end
 
   # POST /protocols
@@ -68,7 +68,8 @@ class ProtocolsController < ApplicationController
   # PUT /protocols/1.xml
   def update
     @protocol = Protocol.find(params[:id])
-
+    get_all_websites
+  
     respond_to do |format|
       if @protocol.update_attributes(params[:protocol])
         expire_action :action => :index
@@ -111,7 +112,7 @@ class ProtocolsController < ApplicationController
   end
   
   def get_all_websites
-    Website.all
+    @websites = Website.all
   end
   
 end
