@@ -34,13 +34,14 @@ class ProtocolsController < ApplicationController
   def new
     @protocol = Protocol.new
     @people = Person.find(:all, :order => :sur_name)
+    @websites = Website.all
   end
 
   # GET /protocols/1;edit
   def edit
     @protocol = Protocol.find(params[:id])
     @people = Person.find(:all, :order => :sur_name)
-    
+    @websites = Website.all
   end
 
   # POST /protocols
@@ -108,4 +109,9 @@ class ProtocolsController < ApplicationController
     crumb.name = 'Data Catalog: Protocols'
     @crumbs << crumb
   end
+  
+  def get_all_websites
+    Website.all
+  end
+  
 end

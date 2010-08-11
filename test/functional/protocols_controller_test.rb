@@ -63,4 +63,15 @@ class ProtocolsControllerTest < ActionController::TestCase
     
     assert_redirected_to protocols_path
   end
+  
+  context 'POST with website' do
+    setup do
+      @protocol = Factory.create(:protocol)
+      post :create, :id => @protocol, :websites=>['2']
+    end
+    
+    should assign_to :protocol
+    should redirect_to("the show page") {protocol_url(assigns(:protocol))}
+    
+  end
 end
