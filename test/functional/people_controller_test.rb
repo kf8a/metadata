@@ -52,10 +52,39 @@ class PeopleControllerTest < ActionController::TestCase
       get :show, :id => @person
     end
     
+    should respond_with :success
+    
     should render_template :show
+    # by default render the lter layout
+    should render_with_layout 'lter'
     should assign_to :person
   end
 
+  context "GET: show for subdomain glbrc" do
+    setup do
+       @person = Factory.create(:person)
+      get :show, :id => @person, :requested_subdomain => 'glbrc'
+    end
+    
+    should respond_with :success
+    
+    should render_template :show
+    should render_with_layout 'glbrc'
+    should assign_to :person
+  end
+  
+  context "GET: show for subdomain lter" do
+    setup do
+      @person = Factory.create(:person)
+      get :show, :id => @person, :requested_subdomain => 'lter'
+    end
+    
+     should respond_with :success
+
+     should render_template :show
+     should render_with_layout 'lter'
+     should assign_to :person
+  end
   
   def test_should_get_new
     get :new
