@@ -14,9 +14,10 @@ Feature: Give Permissions to another user
     When  I sign in as "bob@person.com"/"password"
       And I go to the datatable page
       And I follow "Permissions Management"
-    Then I should be on the datatable permission page
+    Then I should not see "sam@person.com has permission from you"
     
-    When I fill in "Add Email" with "sam@person.com"
+    When I follow "Add Permissions"
+      And I fill in "Email" with "sam@person.com"
       And I press "Grant Permission"
     Then I should see "sam@person.com has permission from you"
 
