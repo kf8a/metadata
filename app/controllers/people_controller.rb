@@ -1,5 +1,7 @@
 class PeopleController < ApplicationController
-      
+  
+  layout :site_layout
+  
   before_filter :admin?, :except => [:index, :show, :alphabetical, :emeritus] if ENV["RAILS_ENV"] == 'production'
   
   caches_action :index
@@ -8,7 +10,6 @@ class PeopleController < ApplicationController
   # GET /people.xml
   def index
     @people = Person.all(:order => 'sur_name', :order => 'sur_name')
-    @title = 'KBS LTER Directory'
     @roles = RoleType.find_by_name('lter').roles.find(:all, :order => :seniority, :conditions =>['name not like ?','Emeritus%'])
     respond_to do |format|
       format.html # index.rhtml
@@ -27,7 +28,6 @@ class PeopleController < ApplicationController
   
   def emeritus
     @people = Person.all(:order => 'sur_name', :order => 'sur_name')
-    @title = 'KBS LTER Directory'
     @roles = RoleType.find_by_name('lter').roles.find(:all, :order => :seniority, :conditions =>['name like ?','Emeritus%'])
     respond_to do |format|
       format.html # emeritus.rhtml
@@ -44,9 +44,12 @@ class PeopleController < ApplicationController
   # GET /people/1.xml
   def show
     @person = Person.find(params[:id])
-    @title = 'KBS LTER Directory'
+    
+    subdomain_request = request_subdomain(params[:requested_subdomain])
+    page = template_choose(subdomain_request, "people", "show")
+
     respond_to do |format|
-      format.html # show.rhtml
+      format.html { render page }
       format.xml  { render :xml => @person.to_xml }
     end
   end
@@ -54,7 +57,6 @@ class PeopleController < ApplicationController
   # GET /people/new
   def new
     @person = Person.new
-    @title = 'New Person'
     @roles = Role.find_all_by_role_type_id(RoleType.find_by_name('lter'))
   end
 
@@ -113,4 +115,14 @@ class PeopleController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  private 
+  def set_title
+    if request_subdomain(params[:requested_subdomain]) == "lter"
+      @title = 'KBS LTER Directory'
+    else
+      @title = 'GLBRC Directory'
+    end
+  end
+  
 end

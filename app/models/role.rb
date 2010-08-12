@@ -12,6 +12,6 @@ class Role < ActiveRecord::Base
   end
   
   def Role.data_roles
-    self.find(:all, :conditions => "role_type_id = #{RoleType.find_by_name('dataset').id}")
+    self.find(:all, :conditions => ["role_type_id = ?", RoleType.find_by_name('lter_dataset')])
   end
 end

@@ -50,13 +50,11 @@ class ApplicationController < ActionController::Base
       @plate = website.layout(controller, page) if website
       return liquid_name if @plate
     end
-    file_name = "app/views/" + controller + "/" + domain + "_" + page + ".html.erb"
-    if File.file?(file_name)
-      return file_name
-    else
-      non_domain_file_name = "app/views/" + controller + "/" + page + ".html.erb"
-      return non_domain_file_name
-    end
+
+    domain_file_name = "app/views/" + controller + "/" + domain + "_" + page + ".html.erb"
+    non_domain_file_name = "app/views/" + controller + "/" + page + ".html.erb"
+    
+    File.file?(domain_file_name) ? domain_file_name : non_domain_file_name
   end
    
 end

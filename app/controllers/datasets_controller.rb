@@ -57,14 +57,14 @@ class DatasetsController < ApplicationController
     @people   = Person.all(:order => 'sur_name')
     @studies = Study.all(:order => 'weight')
     @themes = Theme.all(:order => 'weight')
-    @roles  = Role.find_all_by_role_type_id(RoleType.find_by_name('dataset'))
+    @roles  = Role.find_all_by_role_type_id(RoleType.find_by_name('lter_dataset'))
   end
   
   # POST /dataset/new_affiliation 
   def set_affiliation_for
     @affiliation = Affiliation.new
     people = Person.all(:order => 'sur_name ASC')
-    roles = Role.find_all_by_role_type_id(RoleType.find_by_name('dataset'))
+    roles = Role.find_all_by_role_type_id(RoleType.find_by_name('lter_dataset'))
     
     respond_to do |format|
       format.html
