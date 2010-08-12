@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
     @crumbs = []
   end
 
-  #TODO subdomain_fu returns the subdomain test during testing not sure if this in needed
+  #INFO subdomain_fu returns the subdomain test during testing 
   def site_layout
     request_subdomain
   end
@@ -42,22 +42,24 @@ class ApplicationController < ActionController::Base
 
   def template_choose(page=action_name)
     liquid_name = "app/views/#{controller_name}/liquid_#{page}.html.erb"
-    if File.file?(liquid_name)
-      website = Website.find_by_name(request_subdomain)
-      website = Website.find(:first) unless website
-      @plate = nil
-      @plate = website.layout(controller_name, page) if website
-      return liquid_name if @plate
-    end
-
     domain_file_name = "app/views/#{controller_name}/#{request_subdomain}_#{page}.html.erb"
     non_domain_file_name = "app/views/#{controller_name}/#{page}.html.erb"
 
-    if File.file?(domain_file_name) then
+    if use_liquid_layout(liquid_name,page)
+      liquid_name
+    elsif File.file?(domain_file_name)
       domain_file_name
     else
       non_domain_file_name
     end
   end
-
+  
+  def use_liquid_layout(liquid_name,page)
+    website = Website.find_by_name(request_subdomain)
+    website = Website.find(:first) unless website
+    @plate = nil
+    @plate = website.layout(controller_name, page) if website
+    File.file?(liquid_name) && @plate
+  end
+  
 end
