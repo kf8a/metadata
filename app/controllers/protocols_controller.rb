@@ -9,9 +9,12 @@ class ProtocolsController < ApplicationController
   # GET /protocols.xml
   def index
     @themes = Theme.roots
-    @protocols = Protocol.find(:all)
+  
     subdomain_request = request_subdomain(params[:requested_subdomain])
-    page = template_choose(subdomain_request, "protocols", "index")
+    website =  Website.find_by_name(subdomain_request)
+    page = template_choose(subdomain_request, controller_name, action_name)
+  
+    @protocols = website.protocols.all
 
     respond_to do |format|
       format.html {render page}
@@ -22,11 +25,21 @@ class ProtocolsController < ApplicationController
   # GET /protocols/1
   # GET /protocols/1.xml
   def show
-    @protocol = Protocol.find(params[:id])
+    subdomain_request = request_subdomain(params[:requested_subdomain])
+    website =  Website.find_by_name(subdomain_request)
+    page = template_choose(subdomain_request, controller_name, action_name)
+    
+    @protocol = website.protocols.first(:conditions => ['id = ?', params[:id]])
 
+     
     respond_to do |format|
-      format.html # show.rhtml
-      format.xml  { render :xml => @protocol.to_xml }
+      if @protocol
+        format.html # show.rhtml
+        format.xml  { render :xml => @protocol.to_xml }
+      else
+        format.html { redirect_to protocols_url}
+        format.xml  { head :not_found}
+      end
     end
   end
 
@@ -112,6 +125,10 @@ class ProtocolsController < ApplicationController
   
   def get_all_websites
     Website.all
+  end
+  
+  def find_website
+ 
   end
   
 end

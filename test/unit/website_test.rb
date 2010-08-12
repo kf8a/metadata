@@ -4,7 +4,8 @@ class WebsiteTest < ActiveSupport::TestCase
   should have_many :datasets
   should have_many :templates
   should have_and_belong_to_many :protocols
-
+  
+    
   context 'website' do
     setup do
       @template = Factory.create(:template,  :controller => 'datatable', 
@@ -21,6 +22,9 @@ class WebsiteTest < ActiveSupport::TestCase
                                 :layout => 'nothing').save
     end
 
+    # This needs to have a record in the database before it will pass
+    should validate_uniqueness_of :name
+    
     should 'find a template' do
       assert !@website.layout('datatable', 'show').nil?
     end
