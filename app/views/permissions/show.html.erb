@@ -1,7 +1,16 @@
 <h2>Permissions for <%= @datatable.name %></h2>
 
 <% @permitted_users.each do |user| %>
-  <p><%= user.email %> has permission from you.</p>
+  <p>
+    <%= user.email %> has permission from you.
+    <%= button_to "Revoke permission from #{user.email}", { 
+          :action => "destroy", 
+          :id => @datatable.id, 
+          :user => user.id }, 
+          :confirm => "Are you sure?", 
+          :method => :delete %>
+  </p>
+
 <% end %>
 
 <%= link_to 'Add Permissions', new_permission_path(:datatable => @datatable) %>

@@ -25,17 +25,19 @@ Feature: Give Permissions to another user
       And I press "Grant Permission"
     Then I should see "sam@person.com has permission from you"
 
-# 
-# Scenario: I want to revoke permission to download from a user
-#   Given I have signed in as "email@person.com"/"password"
-#     And I am the data owner
-#     And "bob@person.com" has access to the datatable
-#   When I go somewhere
-#   Then I should see "bob@person.com"
-#     And the "bob_permission" checkbox should be checked
-#   When I uncheck the checkbox
-#   Then "bob@person.com" does not have access to the datatable
-#     And the checkbox next to "bob@person.com" is unchecked
+ 
+  Scenario: I want to revoke permission to download from a user
+    Given a protected datatable exists
+      And "bob@person.com"/"password" owns the datatable
+      And "bob@person.com" has given "sam@person.com" permission
+    When  I sign in as "bob@person.com"/"password"
+      And I go to the datatable page
+      And I follow "Permissions Management"
+    Then I should see "sam@person.com has permission from you"
+
+    When I press "Revoke permission from sam@person.com"
+    Then "sam@person.com" should not have access to the datatable
+      And I should not see "sam@person.com has permission from you"
 #     
 # Scenario: A user has partial access to data
 #   Given I have signed in as "email@person.com"/"password"

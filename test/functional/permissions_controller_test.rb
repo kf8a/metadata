@@ -42,6 +42,14 @@ class PermissionsControllerTest < ActionController::TestCase
         should redirect_to("the permissions index") {permissions_path}
       end
       
+      context "and DELETE :destroy the datatable's permissions" do
+        setup do
+          delete :destroy, :id => @datatable
+        end
+        
+        should_not respond_with :success
+        should redirect_to("the permissions index") {permissions_path}
+      end
     end
     
     context ", signed in as the owner" do
@@ -105,6 +113,24 @@ class PermissionsControllerTest < ActionController::TestCase
         end
         
         should redirect_to("the datatable permission page") {permission_path(@datatable)}
+      end
+      
+      context "and a user has permission from the owner" do
+        setup do
+          @user = Factory.create(:email_confirmed_user)
+          Factory.create(:permission, 
+                          :user => @user, 
+                          :owner => @owner, 
+                          :datatable => @datatable)
+        end
+
+        context "and DELETE :destroy permission from the user" do
+          setup do
+            delete :destroy, :id => @datatable.id, :user => @user
+          end
+          
+          should redirect_to("the datatable permission page") {permission_path(@datatable)}
+        end
       end
     end
   end

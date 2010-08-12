@@ -1,3 +1,7 @@
+Then /^"([^"]*)" should not have access to the datatable$/ do |email|
+  @user = User.find_by_email(email)
+  assert !@user.permitted(@datatable)
+end
 
 Given /^"([^"]*)" has not given permission$/ do |arg1|
   pending # express the regexp above with the code you wish you had
