@@ -3,13 +3,18 @@ Feature: Protocols should be linked to more than one dataset and show up on one 
   As an administrator
   I want to associate protocols with websites
   
+  Background:
+  
   Scenario: Assigning a new protocol to a website
     Given I am in the GLBRC subdomain
+    And   a glbrc website exists
+    And   a lter website exists
     And   "bob@person.com" is an administrator
     When  I sign in as "bob@person.com"/"password"
     And   I go to the "new protocols" page
     And   I fill in "title" with "Earthworm counting"
-    And   I select "glbrc" from "websites"
+    And   I check the "glbrc" website
+    And   I uncheck the "lter" website
     And   I press "Submit"
     And   I go to the protocols page
     Then  I should see "Earthworm counting"
