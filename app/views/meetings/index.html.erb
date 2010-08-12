@@ -4,7 +4,7 @@
 <p>Abstracts from past and current meetings are available below:</p>
 <ul>
 <% @meetings.each do |meeting| %>
-	<li id="meeting_<%=meeting.id%>"><%= link_to "#{meeting.title}", meeting_path(meeting) %> <%= meeting.date.to_s(:long) %> 
+	<li id="meeting_<%=meeting.id%>"><%= link_to "#{meeting.title}", meeting_path(meeting) %> <%= meeting.date.to_s %> 
 	<%= link_to 'edit', edit_meeting_path(meeting), {:class => 'edit'} if signed_in? %>
 		<%= link_to_remote image_tag("trash.gif"), :url => meeting_path(meeting), :method => 'delete', :confirm => 'Are you sure?' if signed_in?%>
 		</li>

@@ -9,7 +9,7 @@ class DatatablesControllerTest < ActionController::TestCase
 
   def setup
     @table = Factory.create(:datatable, :dataset => Factory.create(:dataset))
-    
+    @request.host = 'lter.dev'
     Factory.create(:datatable, :dataset => Factory.create(:dataset))
     Factory.create(:website, :id=>1).save
     

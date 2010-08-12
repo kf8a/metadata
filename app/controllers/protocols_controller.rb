@@ -9,7 +9,6 @@ class ProtocolsController < ApplicationController
   def index
     @themes = Theme.roots
     @protocols = Protocol.find(:all)
-    subdomain_request = request_subdomain(params[:requested_subdomain])
     page = template_choose
 
     respond_to do |format|

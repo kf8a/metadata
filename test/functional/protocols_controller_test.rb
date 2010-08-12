@@ -43,6 +43,7 @@ class ProtocolsControllerTest < ActionController::TestCase
    end
 
   def test_should_show_protocol
+    assert !File.file?('non existent file')
     get :show, :id => @protocol
     assert_response :success
   end

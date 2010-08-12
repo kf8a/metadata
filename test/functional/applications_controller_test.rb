@@ -59,6 +59,11 @@ class ApplicationControllerTest < ActionController::TestCase
         @controller.current_user = User.new(:role => 'admin')  
       end
       
+      teardown do
+        #remove all mocks so they don't interfere with later tests
+        Mocha::Mockery.instance.stubba.unstub_all
+      end
+      
       context "when a subdomain is requested which exists" do
         setup do
           # create a foo_index.html.erb page mock File
@@ -98,7 +103,7 @@ class ApplicationControllerTest < ActionController::TestCase
           
           get :testpagechoose,:page_req => "index"
         end
-
+        
         should respond_with(:success)
         should assign_to(:page_chosen).with("app/views/foo/liquid_index.html.erb")
       end

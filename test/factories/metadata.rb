@@ -31,7 +31,7 @@ Factory.define :sponsor do |s|
 end
 
 Factory.define :datatable do |d|
-  d.name          {|t| t.name = Factory.next(:title)}
+  d.name          'kbs001'
   d.title         'a really cool datatable'
   d.object        'select now() as sample_date'
   d.is_sql         true

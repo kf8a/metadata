@@ -33,15 +33,11 @@ class ApplicationController < ActionController::Base
 
   #TODO subdomain_fu returns the subdomain test during testing not sure if this in needed
   def site_layout
-    if request_subdomain == 'test'
-      'lter'
-    else
-      request_subdomain
-    end
+    request_subdomain
   end
 
   def request_subdomain(requested_subdomain=current_subdomain)
-      current_subdomain  #|| 'lter'
+      current_subdomain  || 'lter'
   end
 
   def template_choose(page=action_name)
