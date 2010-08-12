@@ -1,6 +1,6 @@
 class PermissionsController < ApplicationController
 
-  before_filter :require_datatable, :require_owner, :except => [:index] unless ENV["RAILS_ENV"] == 'development'
+  before_filter :require_datatable, :require_owner, :except => [:index]
   
   def index
   end
@@ -21,11 +21,12 @@ class PermissionsController < ApplicationController
   
   def create
     user = User.find_by_email(params[:email])
+    flash[:notice] = 'No user with that email' unless user
     owner = current_user
     permission = Permission.new(:user => user, :datatable => @datatable, :owner => owner)
     respond_to do |format|
       if permission.save
-        flash[:notice] = 'Permission has been granted to #{user.email}'
+        flash[:notice] = 'Permission has been granted to ' + user.email
         format.html { redirect_to permission_path(@datatable) }
         format.xml  { head :created, :location => permission_path(@datatable) }
       else
@@ -44,7 +45,7 @@ class PermissionsController < ApplicationController
     end
 
     respond_to do |format|
-      flash[:notice] = 'Permission has been revoked from #{user.email}'
+      flash[:notice] = 'Permission has been revoked from ' + user.email
       format.html { redirect_to permission_path(@datatable) }
       format.xml  { head :ok }
     end
@@ -63,6 +64,12 @@ class PermissionsController < ApplicationController
   end
 
   def require_owner
+    unless signed_in?
+      flash[:notice] = "You must be signed in to access this page"
+      redirect_to :action => :index
+      return false
+    end
+    
     unless current_user.owns(@datatable)
       flash[:notice] = "You must be the owner of the datatable in order to access this page"
       redirect_to :action => :index
