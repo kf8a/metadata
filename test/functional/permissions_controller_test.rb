@@ -9,10 +9,9 @@ class PermissionsControllerTest < ActionController::TestCase
       Factory.create(:ownership, :user => @owner, :datatable => @datatable)
     end
     
-    context ", signed in as non-owner" do
+    context "and not signed in at all" do
       setup do
-        @nonowner = Factory.create(:email_confirmed_user)
-        @controller.current_user = @nonowner
+        @controller.current_user = nil
       end
       
       context "and GET :index" do
@@ -22,6 +21,13 @@ class PermissionsControllerTest < ActionController::TestCase
         
         should respond_with :success
         should render_template 'index'
+      end
+    end
+    
+    context ", signed in as non-owner" do
+      setup do
+        @nonowner = Factory.create(:email_confirmed_user)
+        @controller.current_user = @nonowner
       end
       
       context "and GET :new permission for the datatable" do
@@ -42,6 +48,14 @@ class PermissionsControllerTest < ActionController::TestCase
         should redirect_to("the permissions index") {permissions_path}
       end
       
+      context "and DELETE :destroy the datatable's permissions" do
+        setup do
+          delete :destroy, :id => @datatable
+        end
+        
+        should_not respond_with :success
+        should redirect_to("the permissions index") {permissions_path}
+      end
     end
     
     context ", signed in as the owner" do
@@ -105,6 +119,24 @@ class PermissionsControllerTest < ActionController::TestCase
         end
         
         should redirect_to("the datatable permission page") {permission_path(@datatable)}
+      end
+      
+      context "and a user has permission from the owner" do
+        setup do
+          @user = Factory.create(:email_confirmed_user)
+          Factory.create(:permission, 
+                          :user => @user, 
+                          :owner => @owner, 
+                          :datatable => @datatable)
+        end
+
+        context "and DELETE :destroy permission from the user" do
+          setup do
+            delete :destroy, :id => @datatable.id, :user => @user
+          end
+          
+          should redirect_to("the datatable permission page") {permission_path(@datatable)}
+        end
       end
     end
   end
