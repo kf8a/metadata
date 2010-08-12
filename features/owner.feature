@@ -5,24 +5,31 @@ Feature: Assign owners to datatables
   
   Scenario: An admin adds an owner to a datatable
     Given "admin@person.com" is an administrator
-     And  a protected datatable "kbs001" exists
+      And a protected datatable exists named "kbs001"
     When  I sign in as "admin@person.com"/"password"
-    And   I go to the ownership page
-    And   I select "bill@person.com"
-    And   I select datatable "kbs001"
-    And   I press "Set Owner"
-    Then  "bill@person.com" owns the datatable "kbs001"
+      And I go to the datatable page
+      And I follow "Owners Management"
+    Then I should see "Owners:"
+      And I should not see "bill@person"
+      And "bill@person.com" should not own the datatable "kbs001"
+      
+    When I follow "Add Owner"
+    Then I should see "Use this page to grant ownership to someone"
+
+    When I fill in "Email" with "bill@person.com"
+      And I press "Set Owner"
+    Then I should see "bill@person.com"
+      And  "bill@person.com" should own the datatable "kbs001"
     
   Scenario: A signed in user tries to modify ownership
-    Given "bob@person.com" is not a administrator
-    And   a protected datatable "kbs001" exists
+    Given "bob@person.com" is not an administrator
+      And a protected datatable exists named "kbs001"
     When  I sign in as "bob@person.com"/"password"
-    And   I go to the ownership page
+      And I go to the ownerships page
     Then  I should be on the sign_in page
   
   Scenario: An anonymous user tries to modify ownership
-  Given  "bob@person.com" is not a administrator
-   And   a protected datatable "kbs001" exists
-   When  I go to the ownership page
-   Then  I should be on the sign_in page
-  
+    Given  "bob@person.com" is not an administrator
+      And   a protected datatable exists named "kbs001"
+    When  I go to the ownerships page
+    Then  I should be on the sign_in page
