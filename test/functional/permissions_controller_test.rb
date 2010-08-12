@@ -22,6 +22,15 @@ class PermissionsControllerTest < ActionController::TestCase
         should respond_with :success
         should render_template 'index'
       end
+      
+      context "and GET :show the datatable's permissions" do
+        setup do
+          get :show, :id => @datatable
+        end
+        
+        should_not respond_with :success
+        should redirect_to("the permissions index") {permissions_path}
+      end
     end
     
     context ", signed in as non-owner" do
