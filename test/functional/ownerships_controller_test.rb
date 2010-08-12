@@ -37,20 +37,22 @@ class OwnershipsControllerTest < ActionController::TestCase
         should respond_with :redirect
       end      
     end
-#    
-#    context ", signed in as the owner" do
-#      setup do
-#        @controller.current_user = @owner
-#      end
-#      
-#      context "and GET :index" do
-#        setup do
-#          get :index
-#        end
-#        
-#        should respond_with :success
-#        should render_template 'index'
-#      end
+    
+    context ", signed in as an admin" do
+      setup do
+        @admin = Factory.create(:email_confirmed_user, :role => 'admin')
+        @controller.current_user = @admin
+      end
+      
+      context "and GET :index" do
+        setup do
+          get :index
+        end
+        
+        should respond_with :success
+        should render_template 'index'
+      end
+    end
 #      
 #      context "and GET :show the datatable's permissions" do
 #        setup do
