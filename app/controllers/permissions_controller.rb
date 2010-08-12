@@ -3,7 +3,6 @@ class PermissionsController < ApplicationController
   before_filter :require_datatable, :require_owner, :except => [:index] unless ENV["RAILS_ENV"] == 'development'
   
   def index
-  
   end
   
   def show

@@ -9,10 +9,9 @@ class PermissionsControllerTest < ActionController::TestCase
       Factory.create(:ownership, :user => @owner, :datatable => @datatable)
     end
     
-    context ", signed in as non-owner" do
+    context "and not signed in at all" do
       setup do
-        @nonowner = Factory.create(:email_confirmed_user)
-        @controller.current_user = @nonowner
+        @controller.current_user = nil
       end
       
       context "and GET :index" do
@@ -22,6 +21,13 @@ class PermissionsControllerTest < ActionController::TestCase
         
         should respond_with :success
         should render_template 'index'
+      end
+    end
+    
+    context ", signed in as non-owner" do
+      setup do
+        @nonowner = Factory.create(:email_confirmed_user)
+        @controller.current_user = @nonowner
       end
       
       context "and GET :new permission for the datatable" do

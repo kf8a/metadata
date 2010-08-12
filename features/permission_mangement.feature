@@ -47,7 +47,19 @@ Feature: Give Permissions to another user
       And "bob@person.com" has given "sam@person.com" permission
     When I sign in as "bob@person.com"/"password"
       And I go to the datatable page
-      Then I should see "Permissions Management"
       And I follow "Permissions Management"
     Then I should see "sam@person.com has permission from you"
       And I should see "sam@person.com still needs permission from alice@person.com"
+      
+  Scenario: A user checks the index to see all of the datatables they own
+    Given "bob@person.com"/"password" owns a datatable named "A Datatable"
+      And "bob@person.com"/"password" owns a datatable named "Another Datatable"
+      And a protected datatable exists named "A Datatable Bob Does Not Own"
+    When  I sign in as "bob@person.com"/"password"
+      And I go to the permissions page
+    Then I should see "A Datatable"
+      And I should see "Another Datatable"
+      And I should not see "A Datatable Bob Does Not Own"
+    
+    When I follow "Modify Permissions for Another Datatable"
+    Then I should see "Permissions for Another Datatable" 
