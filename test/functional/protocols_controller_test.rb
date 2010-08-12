@@ -1,33 +1,56 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'protocols_controller'
 
-# Re-raise errors caught by the controller.
-class ProtocolsController; def rescue_action(e) raise e end; end
-
 class ProtocolsControllerTest < ActionController::TestCase
   #fixtures :protocols
 
   def setup
-    @protocol = Factory.create(:protocol)
-    
+    generate_websites_and_protocols
     #TODO test with admin and non admin users
     @controller.current_user = User.new(:role => 'admin')
   end
+  
+  context 'GET: index in lter (default) subdomain' do
+    setup do
+       get :index, :requested_subdomain => 'lter'
+     end
 
-  def test_should_get_index
-    get :index
-    assert_response :success
-    assert assigns(:protocols)
+     should render_template 'index'
+
+     should 'only have lter protocols' do
+       assert assigns(:protocols) == [@protocol]
+     end
+    
   end
 
-  context "GET :index / 'glbrc' subdomain" do
+  context "GET :index / glbrc subdomain" do
     setup do
       get :index, :requested_subdomain => 'glbrc'
     end
 
     should render_template 'glbrc_index'
+    
+    should 'only have glbrc protocols' do
+      assert assigns(:protocols) == [@glbrc_protocol]
+    end
+  end
+  
+  context 'GET :show in glbrc subdomain with lter_protocol' do
+    setup do 
+      get :show, :id => @protocol, :requested_subdomain => 'glbrc'
+    end
+    
+    should redirect_to("the index page") {protocols_url()}
   end
 
+  context 'GET :show in glbrc subdomain with glbrc protocol' do
+    setup do 
+      get :show, :id => @glbrc_protocol, :requested_subdomain => 'glbrc'
+    end
+    
+    should respond_with(:success)
+  end
+  
   def test_should_get_new
     get :new
     assert_response :success
@@ -74,4 +97,17 @@ class ProtocolsControllerTest < ActionController::TestCase
     should redirect_to("the show page") {protocol_url(assigns(:protocol))}
     
   end
+  
+  private
+
+  def generate_websites_and_protocols
+    @website = Factory.create(:website, :name=>'lter')
+    @protocol = Factory.create(:protocol, :title => 'lter_protocol')
+    @website.protocols << @protocol
+    
+    @glbrc_website = Factory.create(:website, :name=>'glbrc')
+    @glbrc_protocol = Factory.create(:protocol, :title => 'glbrc protocol')
+    @glbrc_website.protocols << @glbrc_protocol
+  end
+
 end
