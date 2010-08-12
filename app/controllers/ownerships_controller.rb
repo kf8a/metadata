@@ -5,6 +5,10 @@ class OwnershipsController < ApplicationController
   def index
   end
   
+  def show
+    get_datatable
+  end
+  
   private
   
   def require_admin
@@ -17,6 +21,16 @@ class OwnershipsController < ApplicationController
     unless current_user.role == 'admin'
       flash[:notice] = "You must be signed in as an administrator in order to access this page"
       redirect_to sign_in_path
+      return false
+    end
+  end
+  
+  def get_datatable
+    @datatable = Datatable.find(params[:id]) if params[:id]
+    @datatable = Datatable.find(params[:datatable]) if params[:datatable]
+    unless @datatable
+      flash[:notice] = "You must select a valid datatable to grant permissions"
+      redirect_to :action => :index
       return false
     end
   end
