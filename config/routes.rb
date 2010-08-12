@@ -45,6 +45,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :uploads
   
   map.resources :permissions
+  
+  map.resources :ownerships
      
   map.root :controller => 'datatables'
 
