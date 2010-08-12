@@ -12,7 +12,7 @@ class DatatablesController < ApplicationController
     retrieve_datatables('keyword_list' =>'')
     @default_value = 'Search for core areas, keywords or people'
     subdomain_request = request_subdomain(params[:requested_subdomain])
-    page = template_choose(subdomain_request, "datatables", "index")
+    page = template_choose('index')
         
     respond_to do |format|
       format.html {render page}
@@ -29,7 +29,7 @@ class DatatablesController < ApplicationController
       redirect_to datatables_url
     else
       retrieve_datatables(query)
-      page = template_choose(subdomain_request, "datatables", "search")
+      page = template_choose("search")
       respond_to do |format|
         format.html {render page}
       end
@@ -60,7 +60,7 @@ class DatatablesController < ApplicationController
     end
 
     subdomain_request = request_subdomain(params[:requested_subdomain])
-    page = template_choose(subdomain_request, "datatables", "show")
+    page = template_choose
     respond_to do |format|
       format.html   { render page}
       format.xml    { render :xml => @datatable.to_xml}
@@ -104,7 +104,7 @@ class DatatablesController < ApplicationController
         format.html { redirect_to datatable_url(@datatable) }
         format.xml  { head :created, :location => datatable_url(@datatable) }
       else
-        page = template_choose(subdomain_request, "datatables", "new")
+        page = template_choose("new")
         format.html { render page }
         format.xml  { render :xml => @datatable.errors.to_xml }
       end
@@ -124,7 +124,7 @@ class DatatablesController < ApplicationController
         format.xml  { head :ok }
       else
         @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
-        page = template_choose(subdomain_request, "datatables", "edit")
+        page = template_choose("edit")
         format.html { render page }
         format.xml  { render :xml => @datatable.errors.to_xml }
       end

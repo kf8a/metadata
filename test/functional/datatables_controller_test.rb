@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'datatables_controller'
 
-# Re-raise errors caught by the controller.
-class DatatablesController; def rescue_action(e) raise e end; end
+# # Re-raise errors caught by the controller.
+# class DatatablesController; def rescue_action(e) raise e end; end
 
 class DatatablesControllerTest < ActionController::TestCase
   #fixtures :datatables
@@ -12,6 +12,9 @@ class DatatablesControllerTest < ActionController::TestCase
     
     Factory.create(:datatable, :dataset => Factory.create(:dataset))
     Factory.create(:website, :id=>1).save
+    
+    #default domain
+    @controller.stubs(:current_subdomain).returns('lter')
     
     #TODO test with admin and non admin users
     @controller.current_user = User.new(:role => 'admin')
@@ -31,7 +34,8 @@ class DatatablesControllerTest < ActionController::TestCase
   
   context "GET :index / 'lter' subdomain" do
     setup do
-      get :index, :requested_subdomain => 'lter'
+      @controller.stubs(:current_subdomain).returns('lter')
+      get :index
     end
 
     should render_template 'lter_index'
@@ -42,7 +46,8 @@ class DatatablesControllerTest < ActionController::TestCase
   
   context "GET :index / 'glbrc' subdomain" do
     setup do
-      get :index, :requested_subdomain => 'glbrc'
+      @controller.stubs(:current_subdomain).returns('glbrc')
+      get :index
     end
 
     should render_template 'glbrc_index'
@@ -51,6 +56,16 @@ class DatatablesControllerTest < ActionController::TestCase
     end
   end
 
+  context 'signed in user tries to edit' do
+    setup do
+      @controller.current_user = User.new
+      get :edit
+    end
+    
+    should respond_with(:redirect)
+    should redirect_to("the sign in page") {sign_in_url}
+      
+  end
   test "index should get the template in the database if there is one" do
     lter_website = Factory.create(:website, :name => 'lter')
     index_layout = Factory.create(:template, 
@@ -63,7 +78,7 @@ class DatatablesControllerTest < ActionController::TestCase
     assert lter_website.layout('datatables', 'index')
     assert Website.find_by_name('lter')
     assert Website.find_by_name('lter').layout('datatables', 'index')
-    get :index, :requested_subdomain => 'lter'
+    get :index #, :requested_subdomain => 'lter'
     assert assigns(:plate)
     assert_select 'h3#correct'
   end

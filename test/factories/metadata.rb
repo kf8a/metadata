@@ -1,3 +1,7 @@
+Factory.sequence :title do |n|
+  "KBS00#{n}"
+end
+
 Factory.define :person do |p|
   p.sur_name 'bauer'
   p.given_name 'bill'
@@ -27,7 +31,7 @@ Factory.define :sponsor do |s|
 end
 
 Factory.define :datatable do |d|
-  d.name          'KBS001_001'
+  d.name          {|t| t.name = Factory.next(:title)}
   d.title         'a really cool datatable'
   d.object        'select now() as sample_date'
   d.is_sql         true

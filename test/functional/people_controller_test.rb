@@ -1,9 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'people_controller'
 
-# Re-raise errors caught by the controller.
-class PeopleController; def rescue_action(e) raise e end; end
-
 class PeopleControllerTest < ActionController::TestCase
   fixtures :people, :role_types, :roles,  :affiliations
   
@@ -62,8 +59,9 @@ class PeopleControllerTest < ActionController::TestCase
 
   context "GET: show for subdomain glbrc" do
     setup do
+      @controller.stubs(:current_subdomain).returns('glbrc')
        @person = Factory.create(:person)
-      get :show, :id => @person, :requested_subdomain => 'glbrc'
+      get :show, :id => @person
     end
     
     should respond_with :success

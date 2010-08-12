@@ -1,6 +1,5 @@
 class ProtocolsController < ApplicationController
   
-  layout :site_layout
   before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
   
   #caches_action :index
@@ -11,7 +10,7 @@ class ProtocolsController < ApplicationController
     @themes = Theme.roots
     @protocols = Protocol.find(:all)
     subdomain_request = request_subdomain(params[:requested_subdomain])
-    page = template_choose(subdomain_request, "protocols", "index")
+    page = template_choose
 
     respond_to do |format|
       format.html {render page}

@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'protocols_controller'
 
-# Re-raise errors caught by the controller.
-class ProtocolsController; def rescue_action(e) raise e end; end
+# # Re-raise errors caught by the controller.
+# class ProtocolsController; def rescue_action(e) raise e end; end
 
 class ProtocolsControllerTest < ActionController::TestCase
   #fixtures :protocols
@@ -22,7 +22,8 @@ class ProtocolsControllerTest < ActionController::TestCase
 
   context "GET :index / 'glbrc' subdomain" do
     setup do
-      get :index, :requested_subdomain => 'glbrc'
+      @controller.stubs(:current_subdomain).returns('glbrc')
+      get :index #, :requested_subdomain => 'glbrc'
     end
 
     should render_template 'glbrc_index'

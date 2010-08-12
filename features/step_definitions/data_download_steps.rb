@@ -1,6 +1,6 @@
 Given /^a protected datatable exists$/ do
   @datatable = Factory.create(:protected_datatable,
-    :name     => 'KBS001', 
+    :name     => Factory.next(:title), 
     :object   => 'select now()',
     :is_sql   => true)
 end
@@ -8,8 +8,7 @@ end
 
 Given /^a public datatable exists$/ do
   @datatable = Factory :datatable,
-    :id       => 1,
-    :name     => 'KBS001',
+    :name     => Factory.next(:title),
     :dataset  => Factory.create(:dataset),
     :object   => 'select now()',
     :is_sql   => true

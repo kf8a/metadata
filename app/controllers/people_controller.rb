@@ -45,11 +45,8 @@ class PeopleController < ApplicationController
   def show
     @person = Person.find(params[:id])
     
-    subdomain_request = request_subdomain(params[:requested_subdomain])
-    page = template_choose(subdomain_request, "people", "show")
-
     respond_to do |format|
-      format.html { render page }
+      format.html { render template_choose }
       format.xml  { render :xml => @person.to_xml }
     end
   end
