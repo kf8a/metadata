@@ -17,6 +17,3 @@ config.action_view.debug_rjs                         = true
 config.action_mailer.raise_delivery_errors = false
 
 config.action_mailer.default_url_options = {:host => 'localhost:3000'} 
-
-config.gem "shoulda", :lib => false
-config.gem "thoughtbot-factory_girl" , :lib => false
