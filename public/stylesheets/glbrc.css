@@ -9,9 +9,44 @@
 
 
 */.rounded-corners {
+  border-radius: 10px;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
 }
+#glbrc #navigation {
+  width: 100%;
+  position: absolute;
+  top: 1px;
+  font-weight: bold;
+}
+#glbrc #navigation ul li {
+  list-style-type: none;
+  width: 10em;
+  height: 3em;
+  float: left;
+  text-align: center;
+  background-color: white;
+}
+#glbrc #navigation ul li:hover {
+  background-color: #009bda;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+#glbrc #navigation ul li a {
+  display: block;
+  width: 10em;
+  height: 3em;
+}
+#glbrc #navigation ul li a:hover {
+  background-color: #009bda;
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+#glbrc #branding { margin-top: 4.5em; }
 #glbrc #branding h1 {
   color: #f7941e;
   text-shadow: none;
@@ -128,6 +163,7 @@
   padding: 10px;
   margin-top: 20px;
   margin-bottom: 20px;
+  border-radius: 10px;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-style: outset;
@@ -193,6 +229,7 @@
 #glbrc #search-form {
   padding: 10px;
   background-color: #009bda;
+  border-radius: 10px;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
 }

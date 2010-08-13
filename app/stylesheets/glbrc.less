@@ -5,14 +5,55 @@
 @grey: #828282;
 @title-color: @blue;
 @text-color: black;
+@menu-height: 3em;
+@menu-width: 10em;
 .rounded-corners {
+	border-radius: 10px;
 	-moz-border-radius:10px;
 	-webkit-border-radius:10px;
 }
 
+
 #glbrc {
 	
+	#navigation {
+		width: 100%;
+		position: absolute;
+		top: 1px;
+		font-weight: bold;
+		
+		ul li {
+			list-style-type: none;
+			width: @menu-width;
+			height: @menu-height;
+			float: left;
+			text-align:center;
+			background-color: white;
+			
+			:hover {
+				background-color:@light-blue;
+				.rounded-corners;
+			}
+			
+			a {
+				display: block;
+				width: @menu-width;
+				height: @menu-height;
+				
+				:hover {
+					background-color: @light-blue;
+					text-decoration: none;
+					color: white;
+					.rounded-corners;
+				}
+			}
+		}
+		
+	}
+	
 	#branding {
+		margin-top: @menu-height + 1.5em;
+		
 		h1 {
 			color: @orange;
 			text-shadow: none;
