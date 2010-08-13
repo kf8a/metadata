@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   ROLES = %w[admin editor uploader]
   
   has_many :permissions
-  has_many :datatables, :through => :ownership
+  has_many :ownerships
+  has_many :datatables, :through => :ownerships
 
   before_save :downcase_email
 
