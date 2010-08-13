@@ -12,6 +12,7 @@ public/javascripts/base_packaged.js
 public/datatables
 public/*.html
 .DStore
+.DS_Store
 tmp/
 config/database.yml
 config/newrelic.yml
