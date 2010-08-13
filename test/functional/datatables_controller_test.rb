@@ -1,9 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'datatables_controller'
 
-# Re-raise errors caught by the controller.
-class DatatablesController; def rescue_action(e) raise e end; end
-
 class DatatablesControllerTest < ActionController::TestCase
   #fixtures :datatables
 
