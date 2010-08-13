@@ -23,7 +23,7 @@ config.action_mailer.default_url_options = {:host => 'localhost:3000'}
 config.action_mailer.delivery_method = :test
 
 config.gem "shoulda", :lib => false
-config.gem "thoughtbot-factory_girl" , :lib => false
+config.gem "factory_girl" , :lib => false
  
 config.gem 'cucumber-rails',   :lib => false, :version => '>=0.3.2' unless File.directory?(File.join(Rails.root, 'vendor/plugins/cucumber-rails'))
 config.gem 'database_cleaner', :lib => false, :version => '>=0.5.0' unless File.directory?(File.join(Rails.root, 'vendor/plugins/database_cleaner'))
