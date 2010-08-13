@@ -11,14 +11,15 @@ set :deploy_to, "/var/u/apps/#{application}"
 set :user, 'deploy'
 set :use_sudo, false
 
-set :branch, "clearance"
+set :branch, $1 if `git branch` =~ /\* (\S+)\s/m
 set :deploy_via, :copy
 #set :git_enable_submodules,1
 
+set :host, "sebewa" 
 
-role :app, 'sebewa.kbs.msu.edu'
-role :web, 'sebewa.kbs.msu.edu'
-role :db,  'sebewa.kbs.msu.edu', :primary => true
+role :app, "#{host}.kbs.msu.edu"
+role :web, "#{host}.kbs.msu.edu"
+role :db,  "#{host}.kbs.msu.edu", :primary => true
 
 namespace :deploy do
   namespace :thin do
