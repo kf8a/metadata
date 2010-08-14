@@ -6,14 +6,14 @@
   <% end %>
 </p>
 
-<% form_tag '/permissions/create' do %>
-  <%= label_tag 'email' %>
-  <%= text_field_tag 'email' %>
+<% form_for @ownership do %>
+  <%= label_tag 'user' %>
+  <%= select_tag 'user', options_from_collection_for_select(@users, 'id', 'email') %>
   <% if @datatable %>
     <%= hidden_field_tag 'datatable', @datatable.id %>
   <% else %>
     <%= label_tag 'datatable' %>
     <%= select_tag 'datatable', options_from_collection_for_select(@datatables, 'id', 'name') %>
   <% end %>
-  <%= submit_tag 'Grant Permission' %>
+  <%= submit_tag 'Set Owner' %>
 <% end %>

@@ -77,6 +77,8 @@ class OwnershipsControllerTest < ActionController::TestCase
         should respond_with :success
         should render_template 'new'
         should assign_to(:datatable).with(@datatable)
+        should assign_to(:users)
+        should assign_to(:ownership)
       end
       
       context "and GET :new with no datatable param" do
@@ -88,35 +90,35 @@ class OwnershipsControllerTest < ActionController::TestCase
         should render_template 'new'
         should_not assign_to(:datatable)
         should assign_to(:datatables)
+        should assign_to(:users)
+        should assign_to(:ownership)
+      end
+      
+      context "and POST :create with a valid user" do
+        setup do
+          @user = Factory.create(:email_confirmed_user)          
+          post :create, :datatable => @datatable, :user => @user
+        end
+        
+        should redirect_to("the datatable ownership page") {ownership_path(@datatable)}
+      end
+      
+      context "and a user owns the datatable" do
+        setup do
+          @user = Factory.create(:email_confirmed_user)
+          Factory.create(:ownership, 
+                          :user => @user, 
+                          :datatable => @datatable)
+        end
+
+        context "and DELETE :destroy ownership from the user" do
+          setup do
+            delete :destroy, :datatable => @datatable, :user => @user
+          end
+          
+          should redirect_to("the datatable ownership page") {ownership_path(@datatable)}
+        end
       end
     end
-      
-#      
-#      context "and POST :create with a valid user email address" do
-#        setup do
-#          @user = Factory.create(:email_confirmed_user)          
-#          post :create, :datatable => @datatable, :email => @user.email
-#        end
-#        
-#        should redirect_to("the datatable permission page") {permission_path(@datatable)}
-#      end
-#      
-#      context "and a user has permission from the owner" do
-#        setup do
-#          @user = Factory.create(:email_confirmed_user)
-#          Factory.create(:permission, 
-#                          :user => @user, 
-#                          :owner => @owner, 
-#                          :datatable => @datatable)
-#        end
-
-#        context "and DELETE :destroy permission from the user" do
-#          setup do
-#            delete :destroy, :id => @datatable.id, :user => @user
-#          end
-#          
-#          should redirect_to("the datatable permission page") {permission_path(@datatable)}
-#        end
-#      end
   end
 end

@@ -9,7 +9,7 @@
         <%= owner.email %>
         <%= button_to "Revoke ownership from #{owner.email}", { 
           :action => "destroy", 
-          :id => @datatable.id, 
+          :datatable => @datatable.id, 
           :user => owner.id }, 
           :confirm => "Are you sure?", 
           :method => :delete %>
