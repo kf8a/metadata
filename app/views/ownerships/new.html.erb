@@ -1,0 +1,19 @@
+<p>Use this page to make someone an owner of 
+  <% if @datatable %>
+    <%= @datatable.name %>.
+  <% else %>
+    a datatable.
+  <% end %>
+</p>
+
+<% form_for @ownership do %>
+  <%= label_tag 'user' %>
+  <%= select_tag 'user', options_from_collection_for_select(@users, 'id', 'email') %>
+  <% if @datatable %>
+    <%= hidden_field_tag 'datatable', @datatable.id %>
+  <% else %>
+    <%= label_tag 'datatable' %>
+    <%= select_tag 'datatable', options_from_collection_for_select(@datatables, 'id', 'name') %>
+  <% end %>
+  <%= submit_tag 'Set Owner' %>
+<% end %>
