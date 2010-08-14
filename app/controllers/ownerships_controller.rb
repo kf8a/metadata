@@ -9,6 +9,11 @@ class OwnershipsController < ApplicationController
     get_datatable
   end
   
+  def new
+    @datatable = params[:datatable]
+    @datatables = Datatable.all unless @datatable
+  end
+  
   private
   
   def require_admin

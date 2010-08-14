@@ -68,27 +68,29 @@ class OwnershipsControllerTest < ActionController::TestCase
         
         should redirect_to("the ownerships index") {ownerships_path}
       end
+      
+      context "and GET :new permission for the datatable" do
+        setup do
+          get :new, :datatable => @datatable
+        end
+        
+        should respond_with :success
+        should render_template 'new'
+        should assign_to(:datatable).with(@datatable)
+      end
+      
+      context "and GET :new with no datatable param" do
+        setup do
+          get :new
+        end
+        
+        should respond_with :success
+        should render_template 'new'
+        should_not assign_to(:datatable)
+        should assign_to(:datatables)
+      end
     end
-
-#      
-#      context "and GET :new permission for the datatable" do
-#        setup do
-#          get :new, :datatable => @datatable
-#        end
-#        
-#        should respond_with :success
-#        should render_template 'new'
-#        should assign_to(:datatable).with(@datatable)
-#      end
-#      
-#      context "and GET :new with invalid datatable param" do
-#        setup do
-#          get :new
-#        end
-#        
-#        should_not respond_with :success
-#        should redirect_to("the permissions index") {permissions_path}
-#      end
+      
 #      
 #      context "and POST :create with a valid user email address" do
 #        setup do

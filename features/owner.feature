@@ -9,18 +9,34 @@ Feature: Assign owners to datatables
     When  I sign in as "admin@person.com"/"password"
       And I go to the datatable page
       And I follow "Owners Management"
-    Then I should see "Owners:"
+    Then I should see "Owned by:"
       And I should not see "bill@person"
       And "bill@person.com" should not own the datatable "kbs001"
       
     When I follow "Add Owner"
-    Then I should see "Use this page to grant ownership to someone"
+    Then I should see "Use this page to make someone an owner of kbs001"
 
-    When I fill in "Email" with "bill@person.com"
+    When I select "bill@person.com" from "Email"
       And I press "Set Owner"
     Then I should see "bill@person.com"
       And  "bill@person.com" should own the datatable "kbs001"
-    
+  
+  Scenario: An admin adds an owner to a datable without selecting it first
+    Given "admin@person.com" is an administrator
+      And a protected datatable exists named "kbs001"
+    When  I sign in as "admin@person.com"/"password"
+      And I go to the new ownership page
+    Then "bill@person.com" should not own the datatable "kbs001"
+      
+    When I follow "Add Owner"
+    Then I should see "Use this page to make someone an owner of a datatable"
+
+    When I select "bill@person.com" from "Email"
+      And I select "kbs001" from "Datatable"
+      And I press "Set Owner"
+    Then I should see "bill@person.com"
+      And  "bill@person.com" should own the datatable "kbs001"
+  
   Scenario: A signed in user tries to modify ownership
     Given "bob@person.com" is not an administrator
       And a protected datatable exists named "kbs001"
