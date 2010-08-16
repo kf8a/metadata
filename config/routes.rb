@@ -1,7 +1,20 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resource :session, :controller => 'sessions'
   
+   map.resource :session, :controller => 'sessions'
+    
+    map.sign_in  'sign_in',
+      :controller => 'sessions',
+      :action     => 'new'
+    map.sign_out 'sign_out',
+      :controller => 'sessions',
+      :action     => 'destroy',
+      :method     => :delete
+      
   Clearance::Routes.draw(map)
+  
+ 
+  
+  
   map.resources :projects
 
   map.resources :weathers
