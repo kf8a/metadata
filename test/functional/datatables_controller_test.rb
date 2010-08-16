@@ -2,7 +2,6 @@ require File.dirname(__FILE__) + '/../test_helper'
 require 'datatables_controller'
 
 class DatatablesControllerTest < ActionController::TestCase
-  #fixtures :datatables
   
   context 'not signed in' do
     setup do
@@ -22,6 +21,23 @@ class DatatablesControllerTest < ActionController::TestCase
         get :search, :keyword_list=>'test'
       end
       should respond_with :success
+    end
+    
+    context 'GET :edit' do
+      setup do
+        get :edit
+      end
+      should respond_with :redirect
+      should redirect_to("the sign in page") {sign_in_path}
+    end
+    
+    context 'POST :update' do
+      setup do
+        post :edit
+      end
+      
+      should respond_with :redirect
+      should redirect_to("the sign in page") {sign_in_path}
     end
   end
 

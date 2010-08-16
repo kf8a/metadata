@@ -7,6 +7,41 @@ class PeopleController; def rescue_action(e) raise e end; end
 class PeopleControllerTest < ActionController::TestCase
   fixtures :people, :role_types, :roles,  :affiliations
   
+  context 'not signed in' do
+     setup do
+       @controller.current_user = nil
+     end
+
+     context "and GET :index" do
+       setup do
+         get :index
+       end
+
+       should respond_with :success
+     end
+
+     context 'GET :edit' do
+       setup do
+         get :edit, :id => 1
+       end
+       should respond_with :redirect
+       should redirect_to("the sign in page") {sign_in_path}
+     end
+
+     context 'POST :update' do
+       setup do
+         post :update
+       end
+
+       should respond_with :redirect
+       should redirect_to("the sign in page") {sign_in_path}
+     end
+   end
+
+   context 'signed in as admin' do
+
+   end
+  
   def setup
     #TODO test with admin and non admin users
     @controller.current_user = User.new(:role => 'admin')
