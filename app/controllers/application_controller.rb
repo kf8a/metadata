@@ -4,7 +4,7 @@
 class ApplicationController < ActionController::Base
   include Clearance::Authentication
     
-  before_filter :authenticate, :except => [:index, :show] unless ENV["RAILS_ENV"] == 'development'
+  before_filter :admin?, :except => [:index, :show] unless ENV["RAILS_ENV"] == 'development'
   before_filter :set_title, :set_crumbs
    
    LOCAL_IPS =/^127\.0\.0\.1$|^192\.231\.113\.|^192\.108\.190\.|^192\.108\.188\.|^192\.108\.191\./
@@ -16,10 +16,23 @@ class ApplicationController < ActionController::Base
   private
   
   def admin?
-    if signed_in?
-      unless current_user.try(:role) == 'admin'
-        deny_access
-      end
+    unless signed_in?
+      flash[:notice] = "You must be signed in as an administrator in order to access this page"
+      deny_access
+      return false
+    end
+    
+    unless current_user.role == 'admin'
+      flash[:notice] = "You must be signed in as an administrator in order to access this page"
+      deny_access
+      return false
+    end
+  end
+  
+  def is_signed_in?
+    unless signed_in?
+      flash[:notice] = "You must be signed in to order to access this page"
+      deny_access
     end
   end
   

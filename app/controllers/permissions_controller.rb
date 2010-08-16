@@ -1,6 +1,7 @@
 class PermissionsController < ApplicationController
 
-  before_filter :require_datatable, :require_owner, :except => [:index]
+  before_filter :require_datatable, :require_owner, :except => [:index] unless ENV["RAILS_ENV"] == 'development'
+  #before_filter :admin?, :except => [:index] unless ENV["RAILS_ENV"] == 'development'
   
   def index
   end
@@ -63,6 +64,11 @@ class PermissionsController < ApplicationController
     end
   end
 
+  #override to allow owners
+  def admin?
+    true
+  end
+  
   def require_owner
     unless signed_in?
       flash[:notice] = "You must be signed in to access this page"
