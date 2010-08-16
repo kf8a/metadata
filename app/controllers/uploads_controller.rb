@@ -1,6 +1,10 @@
 class UploadsController < ApplicationController
 
+  layout :site_layout
+  before_filter :admin?, :except => [:index, :show]  unless ENV["RAILS_ENV"] == 'development'
+  
   def new
+    
     @upload = Upload.new
   end
   
@@ -25,5 +29,9 @@ class UploadsController < ApplicationController
     respond_to do |format|
       format.html #show.html.erb
     end
+  end
+  
+  def set_title
+    @title = "GLBRC Data Upload"
   end
 end

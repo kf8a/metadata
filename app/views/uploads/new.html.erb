@@ -1,12 +1,13 @@
-<% form_for @upload do |f| %>
-    <%= f.label :title, 'Title of Study' %>:
-    <%= f.text_field :title %><br />
-    <%= f.label :abstract, 'Abstract of Study' %>:
-    <%= f.text_field :abstract %><br />
-    <%= f.label :owners, 'List of Owners' %>:
-    <%= f.text_field :owners %><br />
-    <%= f.label :file, 'File' %>:
-    <%= f.file_field :file %><br />
-    <%= submit_tag 'Submit Study' %>
-<% end %>
+
+<% semantic_form_for :upload,  :html => { :enctype => "multipart/form-data" } do |form| -%>
+  <% form.inputs do -%>
+    <%= form.input :title, :label => "Data Table Title" %>
+    <%= form.input :abstract, :as => :text, :label => 'Abstract' , :input_html =>{ :size =>"30x10" }%>
+    <%= form.input :owners, :label => "Responsible PI's" %>
+    <%= form.input :file%>
+  <% end -%>
+  <% form.buttons do -%>
+    <%= form.commit_button "Submit" %>
+  <% end -%>
+<% end -%>
 
