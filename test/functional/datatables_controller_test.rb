@@ -3,6 +3,31 @@ require 'datatables_controller'
 
 class DatatablesControllerTest < ActionController::TestCase
   #fixtures :datatables
+  
+  context 'not signed in' do
+    setup do
+      @controller.current_user = nil
+    end
+
+    context "and GET :index" do
+      setup do
+        get :index
+      end
+      
+      should respond_with :success
+    end
+    
+    context 'GET :search' do
+      setup do
+        get :search, :keyword_list=>'test'
+      end
+      should respond_with :success
+    end
+  end
+
+  context 'signed in as admin' do
+
+  end
 
   def setup
     @table = Factory.create(:datatable, :dataset => Factory.create(:dataset))

@@ -1,6 +1,6 @@
 class OwnershipsController < ApplicationController
 
-  before_filter :admin?, :except=>[] unless ENV["RAILS_ENV"] == 'development'
+  before_filter :admin? unless ENV["RAILS_ENV"] == 'development'
 
   def index
   end
