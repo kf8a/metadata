@@ -48,6 +48,7 @@ namespace :deploy do
   
  # after :deploy, :link_paperclip_storage, 
   after :deploy, :link_production_db
+  after :deploy, :link_site_keys
   after :deploy, :link_new_relic
   after :deploy, :update_spinks
 end
@@ -64,6 +65,12 @@ end
 desc "Link in the production database.yml"
 task :link_production_db do
   run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
+end
+
+#link site_keys.rb
+desc "Link in the site_keys.rb file"
+task :link_site_keys do
+  run "ln -nfs #{deploy_to}/shared/config/site_keys.rb #{release_path}/config/initializers/site_keys.rb"
 end
 
 # link newrelic.yml
