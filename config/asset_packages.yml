@@ -7,8 +7,6 @@ javascripts:
   - jquery.truncator
   - jquery.quickTree
   - application
-  - textile-editor
-  - textile-editor-config
 
 stylesheets: 
 - base: 
