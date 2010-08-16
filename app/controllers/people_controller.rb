@@ -2,7 +2,7 @@ class PeopleController < ApplicationController
   
   layout :site_layout
   
-  before_filter :admin?, :except => [:index, :show, :alphabetical, :emeritus] if ENV["RAILS_ENV"] == 'production'
+  before_filter :admin?, :except => [:index, :show, :alphabetical, :emeritus] unless ENV["RAILS_ENV"] == 'development'
   
   caches_action :index
 
