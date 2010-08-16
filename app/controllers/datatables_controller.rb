@@ -4,7 +4,7 @@ class DatatablesController < ApplicationController
 
   before_filter :admin?, :except => [:index, :show, :suggest, :search] unless ENV["RAILS_ENV"] == 'development'
   
-  caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
+  #caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
   
   # GET /datatables
   # GET /datatables.xml
