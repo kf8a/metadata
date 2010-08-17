@@ -60,6 +60,14 @@ class DatatablesController < ApplicationController
     end
 
     subdomain_request = request_subdomain(params[:requested_subdomain])
+    @website = @dataset.website
+    @website_name = @website.try(:name)
+    if @website_name
+      unless @website_name == subdomain_request
+        redirect_to datatables_url
+        return false
+      end
+    end
     page = template_choose(subdomain_request, "datatables", "show")
     respond_to do |format|
       format.html   { render page}

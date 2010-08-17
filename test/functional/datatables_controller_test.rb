@@ -170,6 +170,7 @@ class DatatablesControllerTest < ActionController::TestCase
   context "GET :show / 'glbrc' subdomain but lter datatable" do
     setup do
       lter_website = Website.find_by_name('lter')
+      lter_website = Factory.create(:website, :name => 'lter') unless lter_website
       @lterdatatable = Factory.create(:datatable, :dataset => Factory.create(:dataset, :website => lter_website))
       get :show, :id => @lterdatatable, :requested_subdomain => 'glbrc'
     end
