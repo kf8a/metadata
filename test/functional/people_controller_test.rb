@@ -132,6 +132,7 @@ class PeopleControllerTest < ActionController::TestCase
     assert_equal old_count+1, Person.count
     
     assert_redirected_to person_path(assigns(:person))
+    #TODO test that the cache get's invalidated
   end
   
   #Trying to create a person with invalid parameters should be tested once any parameters are invalid.
@@ -139,11 +140,20 @@ class PeopleControllerTest < ActionController::TestCase
   def test_should_get_edit
     get :edit, :id => 107
     assert_response :success
+
   end
   
   def test_should_update_person
     put :update, :id => '107', :person=>{"city"=>"Hickory Corners", "postal_code"=>"49060", "title"=>"", "lter_role_ids"=>["15"], "country"=>"USA", "sur_name"=>"Grillo (REU)", "url"=>"", "street_address"=>"", "given_name"=>"Michael", "sub_organization"=>"Kellogg Biological Station", "fax"=>"", "phone"=>"", "organization"=>"Michigan State University", "locale"=>"MI", "friendly_name"=>"Mike", "middle_name"=>"", "email"=>"grillom1@msu.edu"}
     assert_redirected_to person_path(assigns(:person))
+  end
+  
+  def test_update_should_invalidate_cache
+    get :index
+    
+    put :update, :id => '107', :person=>{"city"=>"Hickory Corners", "postal_code"=>"49060", "title"=>"", "lter_role_ids"=>["15"], "country"=>"USA", "sur_name"=>"Grillo (REU)", "url"=>"", "street_address"=>"", "given_name"=>"Michael", "sub_organization"=>"Kellogg Biological Station", "fax"=>"", "phone"=>"", "organization"=>"Michigan State University", "locale"=>"MI", "friendly_name"=>"Mike", "middle_name"=>"", "email"=>"grillom1@msu.edu"}
+       
+    #assert File.exists? ActionController::Base.page_cache_path(@request.path) 
   end
   
   #Trying to update a person with invalid parameters should be tested once any parameters count as invalid.
