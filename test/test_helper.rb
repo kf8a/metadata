@@ -4,7 +4,7 @@ require 'test_help'
 require 'shoulda'
 require 'factory_girl' 
 
-Dir.glob(File.dirname(__FILE__) + "/factories/*.rb").each do |factory| 
+Dir.glob(RAILS_ROOT + "/test/factories/*.rb").each do |factory| 
   require factory 
 end
 
