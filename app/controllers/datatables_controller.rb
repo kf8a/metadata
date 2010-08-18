@@ -22,13 +22,13 @@ class DatatablesController < ApplicationController
   end
 
   def search
-    subdomain_request = request_subdomain(params[:requested_subdomain])
     query =  {'keyword_list' => ''}
     query.merge!(params)
     if query['keyword_list'].empty? 
       redirect_to datatables_url
     else
       retrieve_datatables(query)
+      subdomain_request = request_subdomain(params[:requested_subdomain])
       page = template_choose(subdomain_request, "datatables", "search")
       respond_to do |format|
         format.html {render page}
@@ -60,13 +60,10 @@ class DatatablesController < ApplicationController
     end
 
     subdomain_request = request_subdomain(params[:requested_subdomain])
-    @website = @dataset.website
-    @website_name = @website.try(:name)
-    if @website_name
-      unless @website_name == subdomain_request
-        redirect_to datatables_url
-        return false
-      end
+    @website_name = @dataset.website.try(:name)
+    if @website_name and @website_name != subdomain_request
+      redirect_to datatables_url
+      return false
     end
     page = template_choose(subdomain_request, "datatables", "show")
     respond_to do |format|
@@ -81,15 +78,15 @@ class DatatablesController < ApplicationController
   # GET /datatables/new
   def new
     @datatable = Datatable.new
-    @themes = Theme.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
-    @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
+    @themes = Theme.all(:order => 'name').collect {|x| [x.name, x.id]}
+    @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
   end
 
   # GET /datatables/1;edit
   def edit
     @datatable = Datatable.find(params[:id])
 
-    @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
+    @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
   end
   
   def delete_csv_cache
@@ -103,7 +100,7 @@ class DatatablesController < ApplicationController
   # POST /datatables.xml
   def create
     @datatable = Datatable.new(params[:datatable])
-    @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
+    @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
 
     subdomain_request = request_subdomain(params[:requested_subdomain])
     respond_to do |format|
@@ -220,7 +217,7 @@ class DatatablesController < ApplicationController
     if @keyword_list
       @datatables = Datatable.search @keyword_list, :tag => {:website => current_subdomain}
     else
-      @datatables = Datatable.find(:all, 
+      @datatables = Datatable.all( 
           :joins=> 'left join datasets on datasets.id = datatables.dataset_id', 
           :conditions => ['is_secondary is false and website_id = ?',
               Website.find_by_name(current_subdomain)])
