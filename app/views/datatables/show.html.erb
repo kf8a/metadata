@@ -1,100 +1,101 @@
 <h1><%= @datatable.title_and_years %></h1>
 
 <%= textilize @datatable.description  if @datatable.description %>
+<%= @datatable.access_statement       if @datatable.access_statement %>
 
-<% if @datatable.access_statement then %>
-  <%= @datatable.access_statement %>
-<% end %>
 The <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use policy applies to the this dataset</a>
 
 <div>
   <h2>Context:</h2>
   <div class='truncate'>
-    <% if @datatable.dataset.abstract %>
-    <%= textilize @datatable.dataset.abstract%>
-    <% end %>
+    <%= textilize @datatable.dataset.abstract if @datatable.dataset.abstract%>
   </div>
 </div>
 
 
 <table class='data-description'>
-<% if @datatable.study %>
-<tr>
-  <td>Experiment:</td>
-  <td>
-    <% if @datatable.study.url.nil? || @datatable.study.url.empty? %>
-      <%= @datatable.study.name %>
-    <% else %>
-      <%= link_to "#{@datatable.study.name}", @datatable.study.url %>
-    <% end %>
-  </td>
-</tr>
-<% end %>
-<% if @datatable.begin_date && @datatable.end_date %>
-<tr>
-<td>Temporal Coverage:</td> <td><%= @datatable.begin_date %> to <%= @datatable.end_date %></td>
-</tr>
-<% end %>
-<tr>
-  <td>Datatable ID:</td><td><%= @datatable.name%></td>
-</tr>
-<tr>
-<td>Dataset:</td><td><%= link_to @datatable.dataset.title, dataset_path(@dataset) %></td>
-</tr>
-<tr>
-  <td> Dataset ID:</td><td> <%= "#{@dataset.dataset}"%></td>
-</tr>
+  <% if @datatable.study %>
+    <tr>
+      <td>Experiment:</td>
+      <td>
+        <% if @datatable.study.url.nil? || @datatable.study.url.empty? %>
+          <%= @datatable.study.name %>
+        <% else %>
+          <%= link_to "#{@datatable.study.name}", @datatable.study.url %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% if @datatable.begin_date && @datatable.end_date %>
+    <tr>
+      <td>Temporal Coverage:</td>
+      <td><%= @datatable.begin_date %> to <%= @datatable.end_date %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td>Datatable ID:</td>
+    <td><%= @datatable.name%></td>
+  </tr>
+  <tr>
+    <td>Dataset:</td>
+    <td><%= link_to @datatable.dataset.title, dataset_path(@dataset) %></td>
+  </tr>
+  <tr>
+    <td> Dataset ID:</td>
+    <td> <%= "#{@dataset.dataset}"%></td>
+  </tr>
 
-<% related_tables = @datatable.dataset.datatables.collect  do |d|
-  next if d == @datatable
-  link_to d.title , datatable_path(d) 
-end -%>
-<% if related_tables.any? %>
-<tr>
-  <td>Related Tables:</td>
-  <td><ul>
-    <% related_tables.each do |table| %>
-      <li><%= table %></li>
-    <% end %>
-  </ul>
-</tr>
-<% end -%>
-<tr>
-  <td>Personnel:</td>
-  <td>
-    <ul>
-      <% personnel = @datatable.personnel -%>
-      <% personnel.keys.each do |key| -%>
-        <li>
-          <%= link_to "#{key.full_name}", person_path(key.id)%>, <%= personnel[key].join(',') %>
-        </li>
-      <% end %>
-    </ul>
-  </td>
-</tr>
-<% unless  @datatable.dataset.protocols.empty? %>
-<tr>
-  <td>Protocols</td>
-  <td>
-    <% @datatable.dataset.protocols.each do |protocol| %>
-      <%= link_to protocol.name, protocol_path(protocol)%>
-    <% end %>
-  </td>
-</tr>
-<% end %>
-<% if @datatable.keywords.any? and signed_in?%>
-<tr>
-<td>Keywords:</td><td><%= @datatable.keywords.join(', ')%></td>
-</tr>
-<% end %>
-<tr>
-  <td>Metadata</td>
-  <td>
-    <ul>
-      <li><%= link_to 'Complete EML', dataset_path(@dataset, :format => :eml) %></li>
-    </ul>
-  </td>
-</tr>
+  <% related_tables = @datatable.dataset.datatables.collect  do |d|
+    next if d == @datatable
+    link_to d.title , datatable_path(d) 
+  end -%>
+  <% if related_tables.any? %>
+    <tr>
+      <td>Related Tables:</td>
+      <td><ul>
+        <% related_tables.each do |table| %>
+          <li><%= table %></li>
+        <% end %>
+      </ul></td>
+    </tr>
+  <% end -%>
+  <tr>
+    <td>Personnel:</td>
+    <td>
+      <ul>
+        <% personnel = @datatable.personnel -%>
+        <% personnel.keys.each do |key| -%>
+          <li>
+            <%= link_to "#{key.full_name}", person_path(key.id)%>, <%= personnel[key].join(',') %>
+          </li>
+        <% end %>
+      </ul>
+    </td>
+  </tr>
+  <% unless  @datatable.dataset.protocols.empty? %>
+    <tr>
+      <td>Protocols</td>
+      <td>
+        <% @datatable.dataset.protocols.each do |protocol| %>
+          <%= link_to protocol.name, protocol_path(protocol)%>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <% if @datatable.keywords.any? and signed_in?%>
+    <tr>
+      <td>Keywords:</td>
+      <td><%= @datatable.keywords.join(', ')%></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td>Metadata</td>
+    <td>
+      <ul>
+        <li><%= link_to 'Complete EML', dataset_path(@dataset, :format => :eml) %></li>
+      </ul>
+    </td>
+  </tr>
 </table>
 
 <table class='variate-table'>
@@ -121,81 +122,93 @@ end -%>
 
 <% unless  @datatable.is_sql %>
   <% unless @datatable.object.nil? %>
-  <p>
-    <%= link_to 'Data', @datatable.data_url %> (on a different page)
-  </p>
+    <p>
+      <%= link_to 'Data', @datatable.data_url %> (on a different page)
+    </p>
   <% end %>
 <% end %>
 
 <% if  @datatable.is_sql %>
-
-<p>
-<% if @values -%>
-<!-- 
-	TODO: geographic coverage 
-	-->
-<% unless @datatable.metadata_only? %>
-  <% if @datatable.restricted? %>
-    <% if signed_in? %>
-        <% if current_user.allowed(@datatable) %>
-          <%= link_to 'Download complete data table', datatable_path(@datatable, :format => :csv) ,
-           :class => 'download-link'%>
-          <% if current_user.owns(@datatable) %>
-            <%= link_to 'Permissions Management', permission_path(@datatable), :class => 'download-link' %>
-          <% end %>
-          <% if current_user.role == 'admin' %>
-            <%= link_to 'Owners Management', ownership_path(@datatable), :class => 'download-link' %>
+  <% if @values -%>
+    <p>
+      <!-- 
+    	TODO: geographic coverage 
+    	-->
+      <% unless @datatable.metadata_only? %>
+        <% if @datatable.restricted? %>
+          <% if signed_in? %>
+            <% if current_user.allowed(@datatable) %>
+              <%= link_to 'Download complete data table', 
+                          datatable_path(@datatable,
+                          :format => :csv) ,
+                          :class => 'download-link'%>
+              <% if current_user.owns(@datatable) %>
+                <%= link_to 'Permissions Management',
+                             permission_path(@datatable), 
+                             :class => 'download-link' %>
+              <% end %>
+              <% if current_user.role == 'admin' %>
+                <%= link_to 'Owners Management', 
+                            ownership_path(@datatable), 
+                            :class => 'download-link' %>
+              <% end %>
+            <% else %>
+              <%= mail_to 'glbrc.data@kbs.msu.edu', 
+                          'Request data', 
+                          :class => 'download-link' %>
+              <% @datatable.owners.each do |owner| %>
+                <p>
+                  <%= owner.email %>
+                  <% if current_user.has_permission_from(owner, @datatable) %>
+                    has given you permission
+                  <% else %>
+                    needs to give you permission
+                  <% end %>
+                </p>
+              <% end %>
+            <% end %>
+          <% else %>
+            <%= link_to 'Sign in to request the data', 
+                        sign_in_path, 
+                        :class => 'download-link' %> or 
+            <%= link_to 'Sign up', 
+                        sign_up_path %> if you have not done so already.
           <% end %>
         <% else %>
-          <%= mail_to 'glbrc.data@kbs.msu.edu', 'Request data', :class => 'download-link' %>
-          <% @datatable.owners.each do |owner| %>
-            <p><%= owner.email %>
-            <% if current_user.has_permission_from(owner, @datatable) %>
-              has given you permission</p>
-            <% else %>
-              needs to give you permission</p>
-            <% end %>
-          <% end %>
+          <%= link_to 'Download complete data table', 
+                      datatable_path(@datatable, 
+                      :format => :csv) ,
+                      :class => 'download-link'%>
         <% end %>
-    <% else %>
-      <%= link_to 'Sign in to request the data', sign_in_path, :class => 'download-link' %> or <%= link_to 'Sign up', sign_up_path %> if you have not done so already.
-    <% end %>
-  <% else %>
-    <%= link_to 'Download complete data table', datatable_path(@datatable, :format => :csv) ,
-    :class => 'download-link'%>
-  <% end %>
-<% end %>
-
-
-</p>
-
-<div>
-<h2>Data Excerpt</h2>
-<div>
-<table>
-	<tr>
-		<% @values.fields.each do |field| %>
-		<th>
-			<%= field.gsub(/_/,' ') %>
-		</th>
-		<% end %>
-	</tr>
-	<% @values.each do  |row| %>
-	<tr  class="<%= cycle('even','odd') -%>">
-		<% row.keys.each do |key| %>
-		<td align='right'>
-			<%= row[key] %>
-		</td>
-		<% end %>
-	</tr>
-	<% end %>
-	<% @values.clear %>
-</table>
-</div>
-</div>
-<% else -%>
-<p>Data Embargoed</p>
-<% end -%>
+      <% end %>
+    </p>
+    <div>
+      <h2>Data Excerpt</h2>
+      <div>
+        <table>
+        	<tr>
+        		<% @values.fields.each do |field| %>
+          		<th>
+          			<%= field.gsub(/_/,' ') %>
+          		</th>
+        		<% end %>
+        	</tr>
+        	<% @values.each do  |row| %>
+          	<tr  class="<%= cycle('even','odd') -%>">
+          		<% row.keys.each do |key| %>
+            		<td align='right'>
+            			<%= row[key] %>
+            		</td>
+          		<% end %>
+          	</tr>
+        	<% end %>
+        	<% @values.clear %>
+        </table>
+      </div>
+    </div>
+  <% else -%>
+    <p>Data Embargoed</p>
+  <% end -%>
 <% end -%>
 
 <%= link_to 'Back to Data Catalog', datatables_path() %>&nbsp;&nbsp;
