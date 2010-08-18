@@ -3,9 +3,11 @@ Given /^a (.*) website exists$/ do |website|
 end
 
 When(/^I check the "(.+?)" website$/) do |name|
-  check(field_by_xpath("//label/a[.=#{name}]"))
+  @website = Website.find_by_name(name)
+  check "protocol[website_list][#{@website.id}]"
 end
 
 When(/^I uncheck the "(.+?)" website$/) do |name|
-  uncheck(field_by_xpath("//label/a[.=#{name}]"))
+  @website = Website.find_by_name(name)
+  uncheck "protocol[website_list][#{@website.id}]"
 end
