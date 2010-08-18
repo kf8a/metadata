@@ -10,15 +10,7 @@ class User < ActiveRecord::Base
   before_save :downcase_email
 
   def allowed(datatable)
-    if self.role == 'admin'
-      true
-    elsif self.owns(datatable)
-      true
-    elsif self.permitted(datatable)
-      true
-    else
-      false
-    end
+    role == 'admin' or owns(datatable) or permitted(datatable)
   end
   
   def owns(datatable)

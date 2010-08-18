@@ -69,7 +69,15 @@ class DatatablesController < ApplicationController
     respond_to do |format|
       format.html   { render page}
       format.xml    { render :xml => @datatable.to_xml}
-      format.csv    { render :text => @datatable.to_csv_with_metadata }
+      if @datatable.restricted?
+        if signed_in? and current_user.allowed(@datatable)
+          format.csv    { render :text => @datatable.to_csv_with_metadata }
+        else
+          format.csv { redirect_to datatable_url(@datatable) }
+        end
+      else
+        format.csv    { render :text => @datatable.to_csv_with_metadata }
+      end
       format.climdb { render :text => @datatable.to_climdb } unless restricted
       format.climdb { redirect_to datatable_url(@datatable) } if restricted
     end
