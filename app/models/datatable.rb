@@ -85,15 +85,6 @@ class Datatable < ActiveRecord::Base
   #TODO need to decide wether the permissions stuff is a function of the user or the datatable
   def can_be_downloaded_by?(user)
     !restricted? or permitted?(user)
-    # if restricted?
-    #     if user.nil?
-    #       false
-    #     else
-    #       permitted?(user)
-    #     end
-    #   else
-    #     true
-    #   end
   end
   
   def within_interval?(start_date=Date.today, end_date=Date.today)
