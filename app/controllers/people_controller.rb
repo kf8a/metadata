@@ -72,6 +72,9 @@ class PeopleController < ApplicationController
   def create
     @person = Person.new(params[:person])
 
+    #invalidate index cache here
+    expire_page :action => :index
+    
     respond_to do |format|
       if @person.save
         expire_action :action => :index
@@ -89,7 +92,8 @@ class PeopleController < ApplicationController
   # PUT /people/1.xml
   def update    
     @person = Person.find(params[:id])
-
+    expire_page :action => :index
+    
     respond_to do |format|
       if @person.update_attributes(params[:person])
         expire_action :action => :index
