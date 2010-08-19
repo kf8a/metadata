@@ -63,6 +63,7 @@ end
 
 task :production do 
   set :host, 'houghton'
+  
   role :app, "#{host}.kbs.msu.edu"
   role :web, "#{host}.kbs.msu.edu"
   role :db,  "#{host}.kbs.msu.edu", :primary => true
