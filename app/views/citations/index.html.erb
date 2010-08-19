@@ -1,0 +1,11 @@
+<h2>Citations</h2>
+<ul>
+<% @citations.each do |citation| %>
+  <li>
+    <%= citation.citation %>
+    <% if signed_in? %>
+      <%= link_to 'PDF', citations_path(citation, :format => :pdf)%>
+    <% end %>
+  </li>
+<% end %>
+</ul>
