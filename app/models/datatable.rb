@@ -74,13 +74,10 @@ class Datatable < ActiveRecord::Base
   end
   
   def restricted?
-    if dataset.sponsor
-      dataset.sponsor.data_restricted?
-    else
-      false
-    end
+    dataset.sponsor.try(:data_restricted?)
   end
   
+  #TODO I think we can get rid of can_download since we are using user.allowed? in datatables_controller
   def can_download?(user)
     if restricted?
       if user.nil?
