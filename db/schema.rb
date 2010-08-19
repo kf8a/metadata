@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100812131935) do
+ActiveRecord::Schema.define(:version => 20100819190303) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -19,8 +19,49 @@ ActiveRecord::Schema.define(:version => 20100812131935) do
     t.string  "title"
   end
 
+  create_table "authors", :force => true do |t|
+    t.string   "sur_name"
+    t.string   "given_name"
+    t.string   "middle_name"
+    t.integer  "seniority"
+    t.integer  "person_id"
+    t.integer  "citation_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "citation_types", :force => true do |t|
+    t.string   "abbreviation"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "citations", :force => true do |t|
-    t.date     "datetime"
+    t.text     "title"
+    t.text     "abstract"
+    t.date     "pub_date"
+    t.integer  "pub_year"
+    t.integer  "citation_type_id"
+    t.text     "address"
+    t.text     "notes"
+    t.string   "publication"
+    t.integer  "start_page_number"
+    t.integer  "ending_page_number"
+    t.text     "periodical_full_name"
+    t.string   "periodical_abbreviation"
+    t.string   "volume"
+    t.string   "issue"
+    t.string   "city"
+    t.string   "publisher"
+    t.string   "secondary_title"
+    t.string   "series_title"
+    t.string   "isbn"
+    t.string   "doi"
+    t.string   "pdf"
+    t.text     "full_text"
+    t.string   "url"
+    t.integer  "website_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -241,14 +282,6 @@ ActiveRecord::Schema.define(:version => 20100812131935) do
     t.integer  "owner_id"
   end
 
-  create_table "plots", :force => true do |t|
-    t.string  "name"
-    t.integer "treatment_id"
-    t.integer "replicate"
-    t.integer "study_id"
-    t.string  "description"
-  end
-
   create_table "projects", :force => true do |t|
     t.string   "title"
     t.text     "abstract"
@@ -427,9 +460,9 @@ ActiveRecord::Schema.define(:version => 20100812131935) do
   create_table "units", :force => true do |t|
     t.string  "name"
     t.text    "description"
-    t.boolean "in_eml",      :default => false
+    t.boolean "in_eml",                     :default => false
     t.text    "definition"
-    t.string  "human_name"
+    t.string  "human_name",  :limit => nil
   end
 
   add_index "units", ["name"], :name => "unit_names_key", :unique => true
