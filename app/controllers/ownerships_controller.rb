@@ -15,6 +15,7 @@ class OwnershipsController < ApplicationController
     @users = User.all
     @ownership = Ownership.new
     @user_count = 1
+    @datatable_count = 1 unless @datatable
   end
   
   def add_another_user
@@ -37,6 +38,26 @@ class OwnershipsController < ApplicationController
     end
   end
   
+  def add_another_datatable
+    @datatables = Datatable.all
+    @datatable_count = params['datatable_count'].to_i
+    @datatable_count += 1
+    respond_to do |format|
+      format.html
+      format.js do
+        render :update do |page|
+          page.insert_html :bottom, 'datatable_boxes', 
+            :partial  => "datatablebox",
+            :locals   => {:datatables => @datatables, :datatable_count => @datatable_count}
+          
+          page.replace_html 'datatable_counter', 
+            :partial => "datatablecounter", 
+            :locals => {:datatable_count => @datatable_count}
+        end
+      end
+    end
+  end
+
   def create
     users = []
     user_count = params[:user_count].to_i
@@ -46,10 +67,27 @@ class OwnershipsController < ApplicationController
       user = User.find(params[user_name])
       users << user
     end
-    datatable = Datatable.find(params[:datatable])
+    @datatable = Datatable.find(params[:datatable]) if params[:datatable]
+    unless @datatable
+      datatables = []
+      datatable_count = params[:datatable_count].to_i
+      datatable_count.times do |count|
+        datatable_number = count + 1
+        datatable_name = "datatable_" + datatable_number.to_s
+        datatable = Datatable.find(params[datatable_name])
+        datatables << datatable
+      end
+    end
     users.each do |user|
-      ownership = Ownership.new(:user => user, :datatable => datatable)
-      ownership.save
+      if @datatable
+        ownership = Ownership.new(:user => user, :datatable => @datatable)
+        ownership.save
+      else
+        datatables.each do |table|
+          ownership = Ownership.new(:user => user, :datatable => table)
+          ownership.save
+        end
+      end
     end
 
     redirect_to ownerships_path

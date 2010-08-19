@@ -112,6 +112,36 @@ class OwnershipsControllerTest < ActionController::TestCase
         end
         
         should redirect_to("the ownerships page") {ownerships_path}
+        should "make all the users own the datatable" do
+          assert @user_1.owns(@datatable)
+          assert @user_2.owns(@datatable)
+          assert @user_3.owns(@datatable)
+        end
+      end
+      
+      context "and POST :create with multiple users and datatables" do
+        setup do
+          @user_1 = Factory.create(:email_confirmed_user)
+          @user_2 = Factory.create(:email_confirmed_user)
+          @user_3 = Factory.create(:email_confirmed_user)
+          @datatable_1 = Factory.create(:protected_datatable)
+          @datatable_2 = Factory.create(:protected_datatable)
+          @datatable_3 = Factory.create(:protected_datatable)
+          post :create, :datatable_1 => @datatable_1, :datatable_2 => @datatable_2, :datatable_3 => @datatable_3, :user_1 => @user_1, :user_2 => @user_2, :user_3 => @user_3, :user_count => 3, :datatable_count => 3
+        end
+        
+        should redirect_to("the ownerships page") {ownerships_path}
+        should "make all the users own all the datatables" do
+          assert @user_1.owns(@datatable_1)
+          assert @user_2.owns(@datatable_1)
+          assert @user_3.owns(@datatable_1)
+          assert @user_1.owns(@datatable_2)
+          assert @user_2.owns(@datatable_2)
+          assert @user_3.owns(@datatable_2)
+          assert @user_1.owns(@datatable_3)
+          assert @user_2.owns(@datatable_3)
+          assert @user_3.owns(@datatable_3)
+        end
       end
       
       context "and a user owns the datatable" do

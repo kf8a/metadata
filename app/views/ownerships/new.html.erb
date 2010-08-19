@@ -17,8 +17,13 @@
   <% if @datatable %>
     <%= hidden_field_tag 'datatable', @datatable.id %>
   <% else %>
-    <%= label_tag 'datatable' %>
-    <%= select_tag 'datatable', options_from_collection_for_select(@datatables, 'id', 'name') %>
+    <%= label_tag 'datatables' %>
+    <div id="datatable_boxes">
+      <%= render :partial => 'datatablebox', :locals => {:datatables => @datatables, :datatable_count => @datatable_count} %>
+    </div>
+    <div id="datatable_counter">
+      <%= render :partial => 'datatablecounter', :locals => {:datatable_count => @datatable_count} %>
+    </div>
   <% end %>
   <%= submit_tag 'Add Owners' %>
 <% end %>
