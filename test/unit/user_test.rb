@@ -12,8 +12,16 @@ class UserTest < ActiveSupport::TestCase
   should validate_uniqueness_of(:email).case_insensitive
   
   context 'a user' do
+    setup do
+      @user = Factory :user
+    end
+    
     should 'include admin role' do
       assert User::ROLES.include?('admin')
+    end
+    
+    should 'respond to has_permission_from' do
+      assert @user.respond_to?('has_permission_from')
     end
   end
   
@@ -92,4 +100,5 @@ class UserTest < ActiveSupport::TestCase
       end
     end
   end
+  
 end

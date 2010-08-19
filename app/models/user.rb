@@ -14,29 +14,20 @@ class User < ActiveRecord::Base
   end
   
   def owns(datatable)
-    Ownership.find_by_user_id_and_datatable_id(self, datatable)
+    datatables.include?(datatable)
   end
   
   def permitted(datatable)
-#    permitted = true
-    permissions = 0
-    permissions_required = 0
-    datatable.owners.each do |owner|
-      permissions_required += 1
-      if has_permission_from(owner, datatable)
-        permissions += 1
-      end
-    end
-    permissions == permissions_required
+    datatable.permitted?(self)
   end
   
   def has_permission_from(owner, datatable)
-    if Permission.find_by_user_id_and_owner_id_and_datatable_id(self, owner, datatable)
-      true
-    else
-      false
-    end
-  end
+     if Permission.find_by_user_id_and_owner_id_and_datatable_id(self, owner, datatable)
+       true
+     else
+       false
+     end
+   end
   
   protected
 

@@ -77,17 +77,14 @@ class Datatable < ActiveRecord::Base
     dataset.sponsor.try(:data_restricted?)
   end
   
-  #TODO I think we can get rid of can_download since we are using user.allowed? in datatables_controller
-  def can_download?(user)
-    if restricted?
-      if user.nil?
-        false
-      else
-        permitted?(user)
-      end
-    else
-      true
-    end
+  def permitted?(user)
+    permissions_granted_by = permissions.collect {|x| x.user == user ? x.owner : nil}.compact
+    permissions_granted_by == owners
+  end
+  
+  #TODO need to decide wether the permissions stuff is a function of the user or the datatable
+  def can_be_downloaded_by?(user)
+    !restricted? or permitted?(user) or user.try(:role) == 'admin'
   end
   
   def within_interval?(start_date=Date.today, end_date=Date.today)
@@ -246,9 +243,5 @@ private
     end
     time
   end
-  
-  def permitted?(user)
-    granted_by = permissions.collect {|x| x.user == user ? x.owner : nil}.compact
-    granted_by == owners
-  end
+ 
 end
