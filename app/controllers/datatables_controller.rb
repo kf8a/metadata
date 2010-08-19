@@ -42,21 +42,12 @@ class DatatablesController < ApplicationController
   def show  
     @datatable = Datatable.find(params[:id])
     @dataset = @datatable.dataset
-    # @roles = @dataset.roles
 
     @values = nil
     if (!trusted_ip? && @datatable.is_restricted)
       restricted = true
     else
-      if @datatable.is_sql
-        query =  @datatable.object
-        #@data_count = ActiveRecord::Base.connection.execute("select count() from (#{@datatable.object}) as t1")
-
-        @datatable.excerpt_limit = 5 unless @datatable.excerpt_limit
-        query = query + " limit #{@datatable.excerpt_limit}" 
-        @values  = ActiveRecord::Base.connection.execute(query)
-        #TDOD convert the array into a ruby object
-      end
+      @values = @datatable.perform_query if @datatable.is_sql
     end
 
     subdomain_request = request_subdomain(params[:requested_subdomain])

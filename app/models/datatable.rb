@@ -205,6 +205,14 @@ class Datatable < ActiveRecord::Base
     self.end_date = dates[:end_date] if dates[:end_date]
     save
   end
+  
+  def perform_query
+    query =  self.object
+    self.excerpt_limit = 5 unless self.excerpt_limit
+    query = query + " limit #{self.excerpt_limit}" 
+    ActiveRecord::Base.connection.execute(query)
+    #TDOD convert the array into a ruby object
+  end
     
 private
 
