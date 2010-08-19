@@ -1,18 +1,9 @@
 Given /^a protected datatable exists$/ do
-  @datatable = Factory.create(:protected_datatable,
-    :name     => 'KBS001', 
-    :object   => 'select now()',
-    :is_sql   => true)
+  @datatable = Factory.create(:protected_datatable)
 end
 
-
 Given /^a public datatable exists$/ do
-  @datatable = Factory :datatable,
-    :id       => 1,
-    :name     => 'KBS001',
-    :dataset  => Factory.create(:dataset),
-    :object   => 'select now()',
-    :is_sql   => true
+  @datatable = Factory.create(:datatable)
 end
 
 Given /^"([^"]*)"\/"([^"]*)" owns the datatable$/ do |owner, password|
@@ -25,7 +16,8 @@ Given /^"([^"]*)" has permission to download the datatable$/ do |user|
   @user = User.find_by_email(user)
   @user = Factory.create(:email_confirmed_user, :email => user) unless @user
   @owner = Factory.create(:email_confirmed_user)
-  Factory.create(:ownership, :user => @owner, :datatable => @datatable)
+  ownership = Ownership.find_by_user_id_and_datatable_id(@owner.id, @datatable.id)
+  Factory.create(:ownership, :user => @owner, :datatable => @datatable) unless ownership
   Factory.create(:permission, :user => @user, :datatable => @datatable, :owner => @owner)
 end
 
@@ -55,7 +47,8 @@ Given /^"([^"]*)" has not given "([^"]*)" permission$/ do |owner, user|
   @owner = Factory.create(:email_confirmed_user) unless @owner
   ownership = Ownership.find_by_user_id_and_datatable_id(@owner, @datatable)
   Factory.create(:ownership, :user => @owner, :datatable => @datatable) unless ownership
-  assert_nil Permission.find_by_user_id_and_owner_id(@user, @owner)
+  permission = Permission.find_by_user_id_and_owner_id(@user, @owner)
+  permission.destroy if permission
 end
 
 Given /^"([^"]*)" is an administrator$/ do |email|
@@ -82,8 +75,4 @@ end
 
 Given /^all caches are cleared$/ do
   @controller.expire_fragment(%r{.*})
-end
-
-Then /^the file should contain the data$/ do
-  pending # express the regexp above with the code you wish you had
 end
