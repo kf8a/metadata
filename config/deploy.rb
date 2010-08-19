@@ -51,7 +51,6 @@ namespace :deploy do
   after 'deploy:symlink', :link_site_keys
   after 'deploy:symlink', :link_new_relic
   after 'deploy:symlink', :update_spinks
-  after 'deploy:symlink', :set_subdomain_tdl
 end
 
 task :staging do 
