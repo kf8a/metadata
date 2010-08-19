@@ -33,7 +33,8 @@ Given /^"([^"]*)" does not have permission to download the datatable$/ do |user|
   @user = User.find_by_email(user)
   @user = Factory.create(:email_confirmed_user, :email => user) unless @user
   @owner = Factory.create(:email_confirmed_user) unless @owner
-  Factory.create(:ownership, :user => @owner, :datatable => @datatable)
+  ownership = Ownership.find_by_user_id_and_datatable_id(@owner.id, @datatable.id)
+  Factory.create(:ownership, :user => @owner, :datatable => @datatable) unless ownership
   assert_nil Permission.find_by_user_id(@user)
 end
 

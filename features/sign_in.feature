@@ -43,7 +43,7 @@ Feature: Sign in
     Given I am in the LTER subdomain
     Given I am signed up with openid "http://person@person.com"
     When I go to the sign in page
-      And deI sign in with the identity_url 'http://person@person.com
+      And I sign in with the identity_url "http://person@person.com"
     Then I should be signed in
    
   Scenario: Openid user signs in with invalid identity_url
