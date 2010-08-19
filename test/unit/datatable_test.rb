@@ -61,15 +61,17 @@ class DatatableTest < ActiveSupport::TestCase
     end
     
     should 'allow anyone to download unrestricted datatables' do
-      assert @unrestricted.can_download?(@anonymous_user)
-      assert @unrestricted.can_download?(@unauthorized_user)
-      assert @unrestricted.can_download?(@authorized_user)
+      assert @unrestricted.can_be_downloaded_by?(@anonymous_user)
+      assert @unrestricted.can_be_downloaded_by?(@unauthorized_user)
+      assert @unrestricted.can_be_downloaded_by?(@authorized_user)
+      assert @unrestricted.can_be_downloaded_by?(nil)
     end
     
     should 'only allow authorized users to download restricted datatables' do
-      assert !@restricted.can_download?(@anonymous_user)
-      assert !@restricted.can_download?(@unauthorized_user)
-      assert  @restricted.can_download?(@authorized_user)
+      assert !@restricted.can_be_downloaded_by?(@anonymous_user)
+      assert !@restricted.can_be_downloaded_by?(@unauthorized_user)
+      assert  @restricted.can_be_downloaded_by?(@authorized_user)
+      assert !@restricted.can_be_downloaded_by?(nil)
     end
     
     should 'authorized table should have the right owner' do
