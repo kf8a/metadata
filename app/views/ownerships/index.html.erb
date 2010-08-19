@@ -2,6 +2,8 @@
 
 <% Datatable.all.each do |datatable| %>
   <h3><%= datatable.name %></h3>
+    <%= link_to "Add Ownership for #{datatable.name}", new_ownership_path(:datatable => datatable) %><br />
+  <%= link_to "View #{datatable.name}", datatable_path(datatable) %>
   <h4>Owned by:</h4>
   <ul>
     <% datatable.owners.each do |owner| %>
@@ -9,13 +11,11 @@
           <%= owner.email %>
           <%= button_to "Revoke ownership from #{owner.email}", { 
             :action => "destroy", 
-            :id => datatable.id, 
+            :datatable => datatable.id, 
             :user => owner.id }, 
             :confirm => "Are you sure?", 
             :method => :delete %>
       </li>
     <% end %>
   </ul>
-  <%= link_to "Add Ownership for #{datatable.name}", new_ownership_path(datatable) %>
-  <%= link_to "View #{datatable.name}", datatable_path(datatable) %>
 <% end %>
