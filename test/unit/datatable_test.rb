@@ -40,7 +40,8 @@ class DatatableTest < ActiveSupport::TestCase
       @unauthorized_user  = Factory :user, :email => 'unauthorized@person.com'
       @authorized_user    = Factory :user, :email => 'authorized@person.com'
       @owner              = Factory :user, :email => 'owner@person.com'
-      
+      @admin              = Factory :user, :email => 'admin@person.com', :role => 'admin'
+            
       @unrestricted = Factory  :datatable
             
       sponsor = Factory :sponsor, :data_restricted => true
@@ -64,14 +65,14 @@ class DatatableTest < ActiveSupport::TestCase
       assert @unrestricted.can_be_downloaded_by?(@anonymous_user)
       assert @unrestricted.can_be_downloaded_by?(@unauthorized_user)
       assert @unrestricted.can_be_downloaded_by?(@authorized_user)
-      assert @unrestricted.can_be_downloaded_by?(nil)
+      assert @unrestricted.can_be_downloaded_by?(@admin)
     end
     
     should 'only allow authorized users to download restricted datatables' do
       assert !@restricted.can_be_downloaded_by?(@anonymous_user)
       assert !@restricted.can_be_downloaded_by?(@unauthorized_user)
       assert  @restricted.can_be_downloaded_by?(@authorized_user)
-      assert !@restricted.can_be_downloaded_by?(nil)
+      assert  @restricted.can_be_downloaded_by?(@admin)
     end
     
     should 'authorized table should have the right owner' do
