@@ -21,6 +21,14 @@ class User < ActiveRecord::Base
     datatable.permitted?(self)
   end
   
+  def has_permission_from(owner, datatable)
+     if Permission.find_by_user_id_and_owner_id_and_datatable_id(self, owner, datatable)
+       true
+     else
+       false
+     end
+   end
+  
   protected
 
   def downcase_email
