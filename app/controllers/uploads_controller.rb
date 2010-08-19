@@ -1,10 +1,9 @@
 class UploadsController < ApplicationController
 
   layout :site_layout
-  before_filter :admin?, :except => [:index, :show]  unless ENV["RAILS_ENV"] == 'development'
+  before_filter :can_upload?, :except => [:index, :show]  unless ENV["RAILS_ENV"] == 'development'
   
   def new
-    
     @upload = Upload.new
   end
   
@@ -33,5 +32,11 @@ class UploadsController < ApplicationController
   
   def set_title
     @title = "GLBRC Data Upload"
+  end
+  
+  private
+  
+  def can_upload?
+    current_user.role == 'admin' or current_user.role == 'uploader'
   end
 end

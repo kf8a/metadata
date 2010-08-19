@@ -5,6 +5,7 @@ class WebsiteTest < ActiveSupport::TestCase
   should have_many :templates
   should have_and_belong_to_many :protocols
   
+  should validate_presence_of :name
     
   context 'website' do
     setup do

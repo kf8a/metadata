@@ -43,6 +43,7 @@ end
 
 
 Factory.define :website do |w|
+  w.name 'Name'
 end
 
 Factory.define :permission do |p|

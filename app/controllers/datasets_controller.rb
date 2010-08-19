@@ -38,9 +38,20 @@ class DatasetsController < ApplicationController
     @dataset  = Dataset.find(params[:id])
     @title    = @dataset.title
     @roles    = @dataset.roles
+    
+    subdomain_request = request_subdomain(params[:requested_subdomain])
+    @website = @dataset.website
+    @website_name = @website.try(:name)
+    if @website_name
+      unless @website_name == subdomain_request
+        redirect_to datasets_url
+        return false
+      end
+    end
+    page = template_choose(subdomain_request, "datasets", "show")
 
     respond_to do |format|
-      format.html # show.rhtml
+      format.html { render page}
       format.eml { render :xml => @dataset.to_eml }
       format.xml  { render :xml => @dataset.to_xml }
     end
