@@ -95,5 +95,8 @@ end
 Factory.define :unit do |u|
 end
 
-Factory.define :affiliation do |a|
+Factory.define :affiliation do |affiliate|
+end
+
+Factory.define :citation do |cite|
 end

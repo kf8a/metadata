@@ -12,9 +12,6 @@ ActionController::Routing::Routes.draw do |map|
       
   Clearance::Routes.draw(map)
   
- 
-  
-  
   map.resources :projects
 
   map.resources :weathers
@@ -60,6 +57,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :permissions
   
   map.resources :ownerships
+  
+  map.resources :citations
      
   map.root :controller => 'datatables'
 
