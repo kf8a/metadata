@@ -14,22 +14,45 @@ class OwnershipsController < ApplicationController
     @datatables = Datatable.all unless @datatable
     @users = User.all
     @ownership = Ownership.new
+    @user_count = 1
+  end
+  
+  def add_another_user
+    @users = User.all
+    @user_count = params['user_count'].to_i
+    @user_count += 1
+    respond_to do |format|
+      format.html
+      format.js do
+        render :update do |page|
+          page.insert_html :bottom, 'user_boxes', 
+            :partial  => "userbox",
+            :locals   => {:users => @users, :user_count => @user_count}
+          
+          page.replace_html 'user_counter', 
+            :partial => "usercounter", 
+            :locals => {:user_count => @user_count}
+        end
+      end
+    end
   end
   
   def create
-    user = User.find(params[:user])
-    datatable = Datatable.find(params[:datatable])
-    ownership = Ownership.new(:user => user, :datatable => datatable)
-    respond_to do |format|
-      if ownership.save
-        flash[:notice] = 'Ownership has been granted to ' + user.email
-        format.html { redirect_to ownership_path(datatable) }
-        format.xml  { head :created, :location => ownership_path(datatable) }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => ownership.errors.to_xml }
-      end
+    users = []
+    user_count = params[:user_count].to_i
+    user_count.times do |count|
+      user_number = count + 1
+      user_name = "user_" + user_number.to_s
+      user = User.find(params[user_name])
+      users << user
     end
+    datatable = Datatable.find(params[:datatable])
+    users.each do |user|
+      ownership = Ownership.new(:user => user, :datatable => datatable)
+      ownership.save
+    end
+
+    redirect_to ownerships_path
   end
   
   def destroy

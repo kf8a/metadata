@@ -16,7 +16,7 @@ Feature: Assign owners to datatables
     When I follow "Add Owner"
     Then I should see "Use this page to add owners to kbs001"
 
-    When I select "bill@person.com" from "User"
+    When I select "bill@person.com" from "user_1"
       And I press "Add Owners"
     Then I should see "bill@person.com"
       And  "bill@person.com" should own the datatable "kbs001"
@@ -36,10 +36,10 @@ Feature: Assign owners to datatables
 
     When I select "bill@person.com" from "User"
       And I press "Add Another User"
-      And I select "chris@person.com" from "User"
+      And I select "chris@person.com" from "User_2"
       And I select "kbs001" from "Datatable"
       And I press "Add Another Datatable"
-      And I select "kbs002" from Datatable"
+      And I select "kbs002" from "Datatable"
       And I press "Add Owners"
     Then I should see "bill@person.com"
       And  "bill@person.com" should own the datatable "kbs001"

@@ -97,10 +97,21 @@ class OwnershipsControllerTest < ActionController::TestCase
       context "and POST :create with a valid user" do
         setup do
           @user = Factory.create(:email_confirmed_user)          
-          post :create, :datatable => @datatable, :user => @user
+          post :create, :datatable => @datatable, :user_1 => @user, :user_count => 1
         end
         
-        should redirect_to("the datatable ownership page") {ownership_path(@datatable)}
+        should redirect_to("the ownerships page") {ownerships_path}
+      end
+      
+      context "and POST :create with multiple users" do
+        setup do
+          @user_1 = Factory.create(:email_confirmed_user)
+          @user_2 = Factory.create(:email_confirmed_user)
+          @user_3 = Factory.create(:email_confirmed_user)
+          post :create, :datatable => @datatable, :user_1 => @user_1, :user_2 => @user_2, :user_3 => @user_3, :user_count => 3
+        end
+        
+        should redirect_to("the ownerships page") {ownerships_path}
       end
       
       context "and a user owns the datatable" do

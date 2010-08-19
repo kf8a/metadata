@@ -1,0 +1,2 @@
+<% user_number = 'user_' + user_count.to_s %>
+<%= select_tag user_number, options_from_collection_for_select(users, 'id', 'email') %>
