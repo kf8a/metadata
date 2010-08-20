@@ -1,27 +1,82 @@
 require 'test_helper'
 
 class CitationsControllerTest < ActionController::TestCase
- 
-  context 'GET :index from anonymous user' do
+
+  context 'anonymous user' do
     setup do
-      get :index
+      @controller.current_user = nil
     end
-    
-    should respond_with(:success)
-    should assign_to :citations
+
+    context 'GET :index from anonymous user' do
+      setup do
+        get :index
+      end
+
+      should respond_with(:success)
+      should assign_to :citations
+
+    end
+
+    context 'POST: create' do
+      setup do
+        post :create 
+      end
+
+      should respond_with :forbidden
+    end
 
   end
-  
-  context 'GET :index from a signed in user' do
+
+  context 'signed in user' do
+    
     setup do
       @controller.current_user = Factory :user
-      get :index
     end
     
-    should respond_with :success
-    should assign_to :citations
+    context 'GET :index' do
+      setup do
+        get :index
+      end
+
+      should respond_with :success
+      should assign_to :citations
+
+      should 'have a PDF download link'
+    end
+
+    context 'POST: create' do
+      setup do
+        post :create
+      end
+
+      should respond_with :forbidden
+    end
     
-    should 'have a PDF download link'
   end
-  
+
+  context 'signed in as admin' do
+    
+    setup do
+      @controller.current_user = Factory :user, :role => 'admin'
+    end
+
+    context 'GET :index' do
+      setup do
+        get :index
+      end
+
+      should respond_with :success
+      should assign_to :citations
+
+      should 'have a PDF download link'
+    end
+
+    context 'POST: create' do
+      setup do
+        post :create
+      end
+
+      should redirect_to('the citation index page') { citation_url(assigns(:citation)) }
+    end
+  end
 end

@@ -14,3 +14,11 @@ Feature: Citation viewing and downloading
      When I go to the citations page
      Then I should see "Citations"
       And I should see "PDF"
+      
+  Scenario: An anonymous user tries to add a citation
+    When I post to citations 
+    Then I should get an error
+    
+  Scenario: A signed in user tries to add a citation
+    When I post to citations
+    Then I should be successful
