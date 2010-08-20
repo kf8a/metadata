@@ -1,0 +1,166 @@
+grammar RIS
+	rule document
+		citation* <DocumentNode>
+	end
+
+	rule citation
+		type tags er <CitationNode>
+	end
+	
+	rule tags
+		tag* <ParentNode>
+	end
+	
+	rule entry
+		tag text_lines <ParentNode>
+	end
+	
+	rule text_lines 
+		text+ <ParentNode>
+	end
+	
+	rule type
+		'TY  - ' text <CitationType>
+	end
+	
+	rule er
+		'ER  - ' line_end <NullNode>
+	end
+	
+	rule tag
+		url / abstract / author / keyword / pdf / title / id / year / publication / label / rn / doi /
+			language / volume / issue / sp / ep / sn
+	end
+	
+	rule url
+		'UR  - ' text_lines {
+			def content(h)
+				h.url = text_value[6..text_value.length].chomp
+			end
+		}
+	end
+	
+	rule abstract
+		'AB  - ' text_lines <Abstract>
+	end
+	
+	rule author
+	  'AU  - ' text_lines <AuthorNode>
+		/ 
+		'A1  - ' text_lines <AuthorNode>
+		/ 
+		'A2  - ' text_lines <AuthorNode>
+	end
+	
+	rule keyword 
+		'KW  - ' text_lines <Keyword>
+	end
+	
+	rule pdf 
+		'L1  - ' text_lines {
+			def content(h) 
+				file_name = text_value[6..text_value.length].chomp
+		  end
+		}
+	end
+	
+	rule title
+		'T1  - ' text_lines <TitleNode>
+		/ 
+		'ST  - ' text_lines <TitleNode>
+		/ 
+		'TI  - ' text_lines <TitleNode>
+	end
+	
+	rule id 
+		'ID  - ' text_lines <NullNode>
+	end
+	
+	rule year 
+		'PY  - ' text_lines {
+			def content(h)
+				h.pub_year = text_value[6..text_value.length].to_i
+			end
+		}
+	end
+	
+	rule publication
+		'T2  - ' text_lines {
+		def content(h)
+			h.publication = text_value[6..text_value.length].chomp
+		end
+		}
+	end
+	
+	rule label
+		'LB  - ' text_lines <Tags>
+	end
+	
+	rule rn
+		'RN  - ' text_lines <Tags>
+	end
+	
+	rule doi
+		'DO  - ' text_lines {
+		def content(h)
+	    h.doi = text_value[6..text_value.length].gsub("\r\n",' ').gsub("\n",' ')
+	  end
+		}
+	end
+	
+	rule language
+		'LA  - ' text_lines <Tags>
+	end
+	
+	rule volume
+		'VL  - ' text_lines {
+		def content(h)
+			h.volume = text_value[6..text_value.length].chomp
+		end
+		}
+	end
+	
+	rule issue
+		'IS  - ' text_lines {
+			def content(h)
+				h.issue = text_value[6..text_value.length].chomp
+			end
+		}
+	end
+	
+	rule sp
+		'SP  - ' text_lines {
+		def content(h)
+	    start_page, end_page = text_value[6..text_value.length].chomp.split(/\-+/)
+	    h.start_page_number = start_page
+	    h.ending_page_number = end_page if end_page
+	  end
+		}
+	end
+	
+	rule ep
+		'EP  - ' text_lines {
+			def content(h)
+				h.ending_page_number = text_value[6..text_value.length].chomp
+			end
+		}
+	end
+	
+	rule sn
+		'SN  - ' text_lines {
+			def content(h)
+				h.isbn = text_value[6..text_value.length].chomp
+			end
+		}
+	end
+	
+	rule text
+		(!(line_end / tag / type / er) .)+ line_end
+	end
+	
+	
+	rule line_end
+		"\r\n"+ / "\n"+
+	end
+	
+end
