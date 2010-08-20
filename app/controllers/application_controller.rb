@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   end
   
   def set_title
-    @title = 'LTER KBS'
+     @title = request_subdomain(params[:requested_subdomain]).upcase
   end
   
   def set_crumbs
