@@ -71,10 +71,7 @@ class PeopleController < ApplicationController
   # POST /people.xml
   def create
     @person = Person.new(params[:person])
-
-    #invalidate index cache here
-    expire_page :action => :index
-    
+     
     respond_to do |format|
       if @person.save
         expire_action :action => :index
