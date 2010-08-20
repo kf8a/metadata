@@ -9,6 +9,10 @@ ActionController::Routing::Routes.draw do |map|
       :controller => 'sessions',
       :action     => 'destroy',
       :method     => :delete
+
+    map.sign_up  'sign_up',
+      :controller => 'users',
+      :action     => 'new'
       
   Clearance::Routes.draw(map)
   

@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  layout :glbrc
+  
   include Clearance::User
   
   ROLES = %w[admin editor uploader]

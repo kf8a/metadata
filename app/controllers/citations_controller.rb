@@ -1,6 +1,5 @@
 class CitationsController < ApplicationController
   # layout :site_layout
-  # caches_action :index
 
   def index
     @citations = Citation.all
@@ -17,7 +16,6 @@ class CitationsController < ApplicationController
       if signed_in? and current_user.role == 'admin'
         if @citation.save
 
-          expire_action :action => :index
           flash[:notice] = 'Citation was successfully created.'
           format.html { redirect_to citation_url(@citation) }
           format.xml  { head :created, :location => citation_url(@citation) }
