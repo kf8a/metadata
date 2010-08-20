@@ -3,7 +3,7 @@ class Citation < ActiveRecord::Base
   belongs_to :citation_type
   belongs_to :website
   
-  def citation
-    ""
+  def to_s
+    title.to_s
   end
 end

@@ -1,12 +1,13 @@
 class CitationsController < ApplicationController
-  # layout :site_layout
+  layout :site_layout
+  caches_action :index if RAILS_ENV == 'production'
 
   def index
     @citations = Citation.all
   end
 
   def show
-    @citation = Citation.find(:params[:id])
+    @citation = Citation.find(params[:id])
   end
 
   def create
@@ -16,6 +17,7 @@ class CitationsController < ApplicationController
       if signed_in? and current_user.role == 'admin'
         if @citation.save
 
+          expire_action :acton => :index
           flash[:notice] = 'Citation was successfully created.'
           format.html { redirect_to citation_url(@citation) }
           format.xml  { head :created, :location => citation_url(@citation) }

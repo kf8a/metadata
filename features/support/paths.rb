@@ -34,6 +34,9 @@ module NavigationHelpers
       
     when /new protocols/
       new_protocol_path
+      
+    when /the citation page/
+      citation_path(@citation)
   
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

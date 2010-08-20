@@ -12,7 +12,7 @@ class CitationsControllerTest < ActionController::TestCase
         get :index
       end
 
-      should respond_with(:success)
+      should respond_with :success
       should assign_to :citations
 
     end
@@ -76,6 +76,7 @@ class CitationsControllerTest < ActionController::TestCase
         post :create
       end
 
+      should respond_with :redirect
       should redirect_to('the citation index page') { citation_url(assigns(:citation)) }
     end
   end

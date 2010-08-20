@@ -14,12 +14,12 @@ class CitationTest < ActiveSupport::TestCase
       assert @citation.valid?
     end
     
-    should 'respond to citation' do
-      assert @citation.respond_to?('citation')
+    should 'respond to to_s' do
+      assert @citation.respond_to?('to_s')
     end
     
-    should 'return a string for citation' do
-      assert_kind_of String, @citation.citation
+    should 'return a string for to_s' do
+      assert_kind_of String, @citation.to_s
     end
     
   end
