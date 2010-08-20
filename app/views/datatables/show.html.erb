@@ -147,13 +147,11 @@
                           :class => 'download-link'%>
               <% if current_user.owns(@datatable) %>
                 <%= link_to 'Permissions Management',
-                             permission_path(@datatable), 
-                             :class => 'download-link' %>
+                             permission_path(@datatable) %>
               <% end %>
               <% if current_user.role == 'admin' %>
                 <%= link_to 'Owners Management', 
-                            ownership_path(@datatable), 
-                            :class => 'download-link' %>
+                            ownership_path(@datatable) %>
               <% end %>
             <% else %>
               <%= mail_to 'glbrc.data@kbs.msu.edu', 
