@@ -93,10 +93,8 @@ class DatatableTest < ActiveSupport::TestCase
       @datatable  = Factory :datatable, :owners => [@owner]
     end
     
-    should 'give permissions to the user if owner' 
-    
-    should 'not give permission to user if not the owner'
-    
+    #TODO is there anything to test here?
+        
   end
     
   context 'datatable with sample_date' do

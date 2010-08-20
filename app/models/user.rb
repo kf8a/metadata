@@ -22,11 +22,7 @@ class User < ActiveRecord::Base
   end
   
   def has_permission_from(owner, datatable)
-     if Permission.find_by_user_id_and_owner_id_and_datatable_id(self, owner, datatable)
-       true
-     else
-       false
-     end
+    true == Permission.find_by_user_id_and_owner_id_and_datatable_id(self, owner, datatable)
    end
   
   protected
