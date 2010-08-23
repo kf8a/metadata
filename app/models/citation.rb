@@ -3,7 +3,8 @@ class Citation < ActiveRecord::Base
   belongs_to :citation_type
   belongs_to :website
   
-  has_attached_file :pdf
+  has_attached_file :pdf, :url => "/lib/citations/:attachment/:id/:style/:basename.:extension",  
+   :path => ":rails_root/lib/citations/:attachment/:id/:style/:basename.:extension"
   
   def to_s
     title.to_s

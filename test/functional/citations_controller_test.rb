@@ -28,11 +28,11 @@ class CitationsControllerTest < ActionController::TestCase
   end
 
   context 'signed in user' do
-    
+
     setup do
       @controller.current_user = Factory :user
     end
-    
+
     context 'GET :index' do
       setup do
         get :index
@@ -51,11 +51,11 @@ class CitationsControllerTest < ActionController::TestCase
 
       should respond_with :forbidden
     end
-    
+
   end
 
   context 'signed in as admin' do
-    
+
     setup do
       @controller.current_user = Factory :user, :role => 'admin'
     end
@@ -77,7 +77,18 @@ class CitationsControllerTest < ActionController::TestCase
       end
 
       should respond_with :redirect
-      should redirect_to('the citation index page') { citation_url(assigns(:citation)) }
+      should redirect_to('the citation page') { citation_url(assigns(:citation)) }
     end
+
+    context 'POST: create with attachment' do
+      setup do
+        post :create, :pdf => 'testing'
+      end
+
+      should respond_with :redirect
+      should redirect_to('the citation page') {citation_url(assigns(:citation))}
+
+    end
+
   end
 end

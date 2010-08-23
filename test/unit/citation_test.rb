@@ -24,5 +24,8 @@ class CitationTest < ActiveSupport::TestCase
       assert_kind_of String, @citation.to_s
     end
     
+    should 'attach a file'
+    
+    should 'return attached file'
   end
 end
