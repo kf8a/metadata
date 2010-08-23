@@ -4,7 +4,8 @@ As an admin
 I want to edit the layout through the website
 
 Scenario: An admin user creates a template
-  Given "bob@person.com" is an administrator
+  Given A user exists and is confirmed with an email of "bob@person.com"
+    And "bob@person.com" is an administrator
   When  I sign in as "bob@person.com"/"password"
     And I go to the new template page
   Then I should be on the new template page
