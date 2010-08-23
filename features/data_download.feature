@@ -10,7 +10,7 @@ Feature: Download data
 
   Scenario: The admin user downloads a protected datatable
     Given a protected datatable exists
-      And A user exists and is confirmed with an email of "bob@person.com"
+      And a user exists and is confirmed with an email of "bob@person.com"
       And "bob@person.com" is an administrator
      When I sign in as "bob@person.com"/"password"
       And I go to the datatable page
