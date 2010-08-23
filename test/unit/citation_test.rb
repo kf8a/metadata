@@ -4,6 +4,8 @@ class CitationTest < ActiveSupport::TestCase
   should belong_to :citation_type
   should have_many :authors
   should belong_to :website
+  
+  should have_attached_file(:pdf)
 
   context 'a citation object' do
     setup do
