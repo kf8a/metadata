@@ -4,7 +4,7 @@ Feature: Assign owners to datatables
   I want to assign users as owners of datatables
   
   Scenario: An admin adds an owner to a datatable
-    Given A user exists and is confirmed with an email of "admin@person.com"
+    Given a user exists and is confirmed with an email of "admin@person.com"
       And "admin@person.com" is an administrator
       And a protected datatable exists named "kbs001"
     When  I sign in as "admin@person.com"/"password"
@@ -23,7 +23,7 @@ Feature: Assign owners to datatables
       And  "bill@person.com" should own the datatable "kbs001"
   
     Scenario: An admin adds an owner to a datatable without selecting it first
-    Given A user exists and is confirmed with an email of "admin@person.com"
+    Given a user exists and is confirmed with an email of "admin@person.com"
       And "admin@person.com" is an administrator
       And a protected datatable exists named "kbs001"
     When  I sign in as "admin@person.com"/"password"
@@ -39,7 +39,7 @@ Feature: Assign owners to datatables
       And  "bill@person.com" should own the datatable "kbs001"
   
   Scenario: An admin removes ownership from a user
-    Given A user exists and is confirmed with an email of "admin@person.com"
+    Given a user exists and is confirmed with an email of "admin@person.com"
       And "admin@person.com" is an administrator
       And a user exists and is confirmed with an email of "bill@person.com"
       And "bill@person.com"/"password" owns a datatable named "kbs001"
@@ -55,7 +55,7 @@ Feature: Assign owners to datatables
       And "bill@person.com" should not own the datatable "kbs001"
   
   Scenario: A signed in user tries to modify ownership
-    Given A user exists and is confirmed with an email of "bob@person.com"
+    Given a user exists and is confirmed with an email of "bob@person.com"
       And "bob@person.com" is not an administrator
       And a protected datatable exists named "kbs001"
     When  I sign in as "bob@person.com"/"password"
@@ -63,7 +63,7 @@ Feature: Assign owners to datatables
     Then  I should be on the sign_in page
   
   Scenario: An anonymous user tries to modify ownership
-    Given A user exists and is confirmed with an email of "bob@person.com"
+    Given a user exists and is confirmed with an email of "bob@person.com"
       And "bob@person.com" is not an administrator
       And   a protected datatable exists named "kbs001"
     When  I go to the ownerships page

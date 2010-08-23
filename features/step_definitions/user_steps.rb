@@ -18,12 +18,12 @@ Given /^I am signed up and confirmed as "(.*)"\/"(.*)"$/ do |email, password|
     :password_confirmation => password
 end
 
-Given /^A user exists with an email of "(.*)"$/ do |email|
+Given /^a user exists with an email of "(.*)"$/ do |email|
   user = Factory :user,
     :email                 => email
 end
 
-Given /^A user exists and is confirmed with an email of "(.*)"$/ do |email|
+Given /^a user exists and is confirmed with an email of "([^"]*)"$/ do |email|
   user = Factory :email_confirmed_user,
     :email                 => email
 end

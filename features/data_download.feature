@@ -66,7 +66,7 @@ Feature: Download data
       And I should see "now"  
 
   Scenario: A user has received partial permission to download data
-    Given I have signed in with "bob@person.com"/"password"
+    Given a user exists and is confirmed with an email of "bob@person.com"
       And a protected datatable exists
       And "alice@person.com"/"password" owns the datatable
       And "bill@person.com"/"password" owns the datatable
