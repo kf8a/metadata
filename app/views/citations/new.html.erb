@@ -1,4 +1,5 @@
 <% semantic_form_for @citation, :html => { :multipart => true } do |form| %>
-  <%= form.inputs :title, :abstract, :pdf %>
+  <%= form.inputs :title, :abstract %>
+  <%= form.input :pdf , :as => :file%>
   <%= form.buttons %>
 <% end %>
