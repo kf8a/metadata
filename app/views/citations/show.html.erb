@@ -1,4 +1,4 @@
-<p><%= @citation.to_s %></p>
+<p><%= @citation.formatted_as_default %></p>
 <p><%= @citation.abstract %></p>
 <% if signed_in? or RAILS_ENV=='development'%>
   <%=link_to 'PDF', @citation.pdf.url%>

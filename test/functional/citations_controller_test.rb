@@ -15,6 +15,20 @@ class CitationsControllerTest < ActionController::TestCase
       should respond_with :success
       should assign_to :citations
 
+      should render_with_layout 'lter'
+      
+    end
+    
+    context 'GET :index from glbrc' do
+      setup do
+        get :index, :requested_subdomain => 'glbrc'
+      end
+      
+      should respond_with :success
+      should assign_to :citations
+      
+      should render_with_layout 'glbrc'
+      
     end
 
     context 'POST: create' do
