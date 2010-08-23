@@ -1,0 +1,5 @@
+<p><%= @citation.to_s %></p>
+<p><%= @citation.abstract %></p>
+<% if signed_in? %>
+  <%=link_to 'PDF', citation_url(@citation)%>
+<% end %>
