@@ -5,7 +5,7 @@
   <% @protocols.each do |protocol|%>
   <li class='study-title'>
     <%=link_to protocol.title, protocol_path(protocol) %>
-    <p><%=h truncate(protocol.abstract, :length => 300) %></p>
+    <p><%=h truncate(textilize(protocol.abstract), :length => 300) %></p>
   </li>
   <% end %>
 </ul>
