@@ -52,13 +52,14 @@ Given /^"([^"]*)" has not given "([^"]*)" permission$/ do |owner, user|
 end
 
 Given /^"([^"]*)" is an administrator$/ do |email|
+
   @user = User.find_by_email(email)
   if @user
     @user.email_confirmed = true
     @user.role = "admin"
     @user.save
   else
-    @user = Factory.create(:admin_user, :email => email, :email_confirmed => true)
+    raise 'user does not exist'
   end
 end
 
