@@ -9,6 +9,7 @@ Feature: Protocols should be linked to more than one dataset and show up on one 
     Given I am in the GLBRC subdomain
     And   a glbrc website exists
     And   a lter website exists
+    And   a user exists and is confirmed with an email of "bob@person.com"
     And   "bob@person.com" is an administrator
     When  I sign in as "bob@person.com"/"password"
     And   I go to the "new protocols" page

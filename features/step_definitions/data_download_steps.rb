@@ -38,6 +38,7 @@ Given /^"([^"]*)" has given "([^"]*)" permission$/ do |owner, user|
   ownership = Ownership.find_by_user_id_and_datatable_id(@owner, @datatable)
   Factory.create(:ownership, :user => @owner, :datatable => @datatable) unless ownership
   Factory.create(:permission, :user => @user, :datatable => @datatable, :owner => @owner)
+  assert Permission.find_by_user_id_and_owner_id(@user, @owner)
 end
 
 Given /^"([^"]*)" has not given "([^"]*)" permission$/ do |owner, user|
