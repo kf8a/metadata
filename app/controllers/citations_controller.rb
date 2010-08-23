@@ -18,7 +18,7 @@ class CitationsController < ApplicationController
     @citation = Citation.new(params[:citation])
 
     respond_to do |format|
-      if signed_in? and current_user.role == 'admin'
+      if signed_in? and current_user.role == 'admin' or RAILS_ENV =='development'
         if @citation.save
 
           expire_action :acton => :index
@@ -37,5 +37,13 @@ class CitationsController < ApplicationController
         format.json { head :forbidden }
       end
     end
+  end
+  
+  def download
+    head(:not_found) and return unless (citation = Citation.find_by_id(params[:id]))
+    head(:forbidden) and return unless signed_in?
+    
+    path = citation.pdf.path(params[:style])
+    send_file(path)
   end
 end

@@ -63,11 +63,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :ownerships
   
   map.resources :citations
-     
+  
+  #route to handle pdf downloads
+  map.connect '/assets/citations/:attachment/:id/:style/:basename.:extension', :controller => 'citations', :action => 'download', :requirements => { :method => :get }
+      
   map.root :controller => 'datatables'
-
-  #map.open_id_complete 'sessions', :controller => "sessions", :action => "create", :requirements => { :method => :get }
-  #map.resource :sessions  
   
   # The priority is based upon order of creation: first created -> highest priority.
   
