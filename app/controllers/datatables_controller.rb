@@ -51,8 +51,8 @@ class DatatablesController < ApplicationController
     end
 
     @subdomain_request = request_subdomain(params[:requested_subdomain])
-    @website_name = @dataset.website.try(:name)
-    if @website_name and @website_name != @subdomain_request
+    website_name = @dataset.website.try(:name)
+    if website_name and website_name != @subdomain_request
       redirect_to datatables_url
       return false
     end
@@ -60,12 +60,8 @@ class DatatablesController < ApplicationController
     respond_to do |format|
       format.html   { render page}
       format.xml    { render :xml => @datatable.to_xml}
-      if @datatable.restricted?
-        if signed_in? and current_user.allowed?(@datatable)
-          format.csv    { render :text => @datatable.to_csv_with_metadata }
-        else
-          format.csv { redirect_to datatable_url(@datatable) }
-        end
+      if @datatable.restricted? and !current_user.try(:allowed?, @datatable)
+        format.csv { redirect_to datatable_url(@datatable) }
       else
         format.csv    { render :text => @datatable.to_csv_with_metadata }
       end
