@@ -2,22 +2,18 @@ class ProtocolsController < ApplicationController
   
   layout :site_layout
   before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
-  
+    
   #caches_action :index
   
   # GET /protocols
   # GET /protocols.xml
   def index
     @themes = Theme.roots
-  
-    subdomain_request = request_subdomain(params[:requested_subdomain])
-    website =  Website.find_by_name(subdomain_request)
-    page = template_choose(subdomain_request, controller_name, action_name)
-  
+    website =  Website.find_by_name(@subdomain_request)
     @protocols = website.protocols.all
 
     respond_to do |format|
-      format.html {render page}
+      format.html { render @page }
       format.xml  { render :xml => @protocols.to_xml }
     end
   end
@@ -25,16 +21,12 @@ class ProtocolsController < ApplicationController
   # GET /protocols/1
   # GET /protocols/1.xml
   def show
-    subdomain_request = request_subdomain(params[:requested_subdomain])
-    website =  Website.find_by_name(subdomain_request)
-    page = template_choose(subdomain_request, controller_name, action_name)
-    
+    website =  Website.find_by_name(@subdomain_request)
     @protocol = website.protocols.first(:conditions => ['id = ?', params[:id]])
 
-     
     respond_to do |format|
       if @protocol
-        format.html # show.rhtml
+        format.html { render @page }
         format.xml  { render :xml => @protocol.to_xml }
       else
         format.html { redirect_to protocols_url}
@@ -46,14 +38,14 @@ class ProtocolsController < ApplicationController
   # GET /protocols/new
   def new
     @protocol = Protocol.new
-    @people = Person.find(:all, :order => :sur_name)
+    @people = Person.all(:order => :sur_name)
     get_all_websites
   end
 
   # GET /protocols/1;edit
   def edit
     @protocol = Protocol.find(params[:id])
-    @people = Person.find(:all, :order => :sur_name)
+    @people = Person.all(:order => :sur_name)
     get_all_websites
   end
 
@@ -61,7 +53,7 @@ class ProtocolsController < ApplicationController
   # POST /protocols.xml
   def create
     @protocol = Protocol.new(params[:protocol])
-    @people = Person.find(:all, :order => :sur_name)
+    @people = Person.all(:order => :sur_name)
     
     respond_to do |format|
       if @protocol.save
@@ -112,9 +104,11 @@ class ProtocolsController < ApplicationController
   end
   
   private
+
   def set_title
     @title = 'Protocols'
   end
+
   def set_crumbs
     crumb = Struct::Crumb.new
     @crumbs = []

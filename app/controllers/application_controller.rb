@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   include Clearance::Authentication
     
   #before_filter :admin?, :except => [:index, :show] unless ENV["RAILS_ENV"] == 'development'
-  before_filter :set_title, :set_crumbs
+  before_filter :set_crumbs, :set_subdomain_request, :set_title, :set_page_request
    
    LOCAL_IPS =/^127\.0\.0\.1$|^192\.231\.113\.|^192\.108\.190\.|^192\.108\.188\.|^192\.108\.191\./
 
@@ -23,12 +23,20 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def set_title
-     @title = request_subdomain(params[:requested_subdomain]).upcase
-  end
-  
   def set_crumbs
     @crumbs = []
+  end
+
+  def set_page_request
+    @page = template_choose(@subdomain_request)
+  end
+
+  def set_subdomain_request
+    @subdomain_request = request_subdomain(params[:requested_subdomain])
+  end
+
+  def set_title
+     @title = @subdomain_request.upcase
   end
   
   def site_layout
@@ -41,7 +49,7 @@ class ApplicationController < ActionController::Base
     return requested_subdomain
   end
   
-  def template_choose(domain, controller, page)
+  def template_choose(domain, controller=controller_name, page=action_name)
     non_domain_file_name = "app/views/" + controller + "/" + page + ".html.erb"
     domain_file_name = "app/views/" + controller + "/" + domain + "_" + page + ".html.erb"
     liquid_name = "app/views/" + controller + "/liquid_" + page + ".html.erb"

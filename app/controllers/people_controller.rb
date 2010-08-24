@@ -45,11 +45,8 @@ class PeopleController < ApplicationController
   def show
     @person = Person.find(params[:id])
     
-    subdomain_request = request_subdomain(params[:requested_subdomain])
-    page = template_choose(subdomain_request, "people", "show")
-
     respond_to do |format|
-      format.html { render page }
+      format.html { render @page }
       format.xml  { render :xml => @person.to_xml }
     end
   end
@@ -119,7 +116,7 @@ class PeopleController < ApplicationController
   
   private 
   def set_title
-    if request_subdomain(params[:requested_subdomain]) == "lter"
+    if @subdomain_request == "lter"
       @title = 'KBS LTER Directory'
     else
       @title = 'GLBRC Directory'
