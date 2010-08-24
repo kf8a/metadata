@@ -140,12 +140,12 @@
       <% unless @datatable.metadata_only? %>
         <% if @datatable.restricted? %>
           <% if signed_in? %>
-            <% if current_user.allowed(@datatable) %>
+            <% if current_user.allowed?(@datatable) %>
               <%= link_to 'Download complete data table', 
                           datatable_path(@datatable,
                           :format => :csv) ,
                           :class => 'download-link'%>
-              <% if current_user.owns(@datatable) %>
+              <% if current_user.owns?(@datatable) %>
                 <%= link_to 'Permissions Management',
                              permission_path(@datatable) %>
               <% end %>
@@ -160,7 +160,7 @@
               <% @datatable.owners.each do |owner| %>
                 <p>
                   <%= owner.email %>
-                  <% if current_user.has_permission_from(owner, @datatable) %>
+                  <% if current_user.has_permission_from?(owner, @datatable) %>
                     has given you permission
                   <% else %>
                     needs to give you permission

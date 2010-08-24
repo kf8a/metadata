@@ -61,7 +61,7 @@ class DatatablesController < ApplicationController
       format.html   { render page}
       format.xml    { render :xml => @datatable.to_xml}
       if @datatable.restricted?
-        if signed_in? and current_user.allowed(@datatable)
+        if signed_in? and current_user.allowed?(@datatable)
           format.csv    { render :text => @datatable.to_csv_with_metadata }
         else
           format.csv { redirect_to datatable_url(@datatable) }

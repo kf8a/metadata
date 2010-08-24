@@ -76,7 +76,7 @@ class PermissionsController < ApplicationController
       return false
     end
     
-    unless current_user.owns(@datatable)
+    unless current_user.owns?(@datatable)
       flash[:notice] = "You must be the owner of the datatable in order to access this page"
       redirect_to :action => :index
       return false

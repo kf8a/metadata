@@ -113,9 +113,9 @@ class OwnershipsControllerTest < ActionController::TestCase
         
         should redirect_to("the ownerships page") {ownerships_path}
         should "make all the users own the datatable" do
-          assert @user_1.owns(@datatable)
-          assert @user_2.owns(@datatable)
-          assert @user_3.owns(@datatable)
+          assert @user_1.owns?(@datatable)
+          assert @user_2.owns?(@datatable)
+          assert @user_3.owns?(@datatable)
         end
       end
       
@@ -132,15 +132,15 @@ class OwnershipsControllerTest < ActionController::TestCase
         
         should redirect_to("the ownerships page") {ownerships_path}
         should "make all the users own all the datatables" do
-          assert @user_1.owns(@datatable_1)
-          assert @user_2.owns(@datatable_1)
-          assert @user_3.owns(@datatable_1)
-          assert @user_1.owns(@datatable_2)
-          assert @user_2.owns(@datatable_2)
-          assert @user_3.owns(@datatable_2)
-          assert @user_1.owns(@datatable_3)
-          assert @user_2.owns(@datatable_3)
-          assert @user_3.owns(@datatable_3)
+          assert @user_1.owns?(@datatable_1)
+          assert @user_2.owns?(@datatable_1)
+          assert @user_3.owns?(@datatable_1)
+          assert @user_1.owns?(@datatable_2)
+          assert @user_2.owns?(@datatable_2)
+          assert @user_3.owns?(@datatable_2)
+          assert @user_1.owns?(@datatable_3)
+          assert @user_2.owns?(@datatable_3)
+          assert @user_3.owns?(@datatable_3)
         end
       end
       
