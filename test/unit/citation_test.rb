@@ -16,16 +16,13 @@ class CitationTest < ActiveSupport::TestCase
       assert @citation.valid?
     end
     
-    should 'respond to to_s' do
-      assert @citation.respond_to?('to_s')
+    should 'respond to formatted_as_default' do
+      assert @citation.respond_to?('formatted_as_default')
     end
     
-    should 'return a string for to_s' do
-      assert_kind_of String, @citation.to_s
+    should 'return a string for formatted_as_default' do
+      assert_kind_of String, @citation.formatted_as_default
     end
     
-    should 'attach a file'
-    
-    should 'return attached file'
   end
 end

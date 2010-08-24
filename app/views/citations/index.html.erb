@@ -2,9 +2,9 @@
 <ul>
 <% @citations.each do |citation| %>
   <li>
-    <%= citation.citation %>
+    <%= link_to citation.formatted_as_default, citation_path(citation) %>
     <% if signed_in? %>
-      <%= link_to 'PDF', citations_path(citation, :format => :pdf)%>
+      <%= link_to 'PDF', citation.pdf.url%>
     <% end %>
   </li>
 <% end %>

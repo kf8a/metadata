@@ -6,8 +6,8 @@ class Citation < ActiveRecord::Base
   has_attached_file :pdf, :url => "/assets/citations/:attachment/:id/:style/:basename.:extension",  
    :path => ":rails_root/assets/citations/:attachment/:id/:style/:basename.:extension"
   
-  def to_s
-    title.to_s
+  def formatted_as_default
+    authors.collect {|author| "#{author.sur_name} #{author.given_name}"}.join(', ') + title.to_s
   end
  
 end

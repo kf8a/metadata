@@ -6,6 +6,11 @@ module ApplicationHelper
     RedCloth.new(text).to_html
   end 
   
+  # use to strip out html tags when using truncate
+  def strip_html_tags(string = '')
+    string.gsub(/<\/?[^>]*>/,  "")
+  end
+  
   def lter_roles
     Role.find(:all,  :conditions => ['role_type_id = ?', RoleType.find_by_name('lter')])
   end

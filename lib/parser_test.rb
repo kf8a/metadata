@@ -2,14 +2,15 @@
 
 require 'polyglot'
 require 'treetop'
-#require 'citrus'
 require 'active_record'
 
 
 ActiveRecord::Base.establish_connection(
   :adapter => "sqlite3",
-  :database => "../db/appdb",
+  :database =>":memory:"
 )
+
+load "../db/schema.rb"
 
 require 'paperclip'
 require '../app/models/citation'
@@ -24,7 +25,7 @@ parser = RISParser.new
 parser.consume_all_input = false
 
 #file = File.open('../test/data/GLBRC_Publications_Thrust4.ris',"r:UTF-8")
-file = File.open('../test/data/multiple.ris',"r:UTF-8")
+file = File.open('../test/data/single.ris',"r:UTF-8")
 
 #file = File.open('../test/data/single.ris',"r:UTF-8")
 
