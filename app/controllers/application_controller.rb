@@ -44,11 +44,7 @@ class ApplicationController < ActionController::Base
   def template_choose(domain, controller, page)
     liquid_name = "app/views/" + controller + "/liquid_" + page + ".html.erb"
     if File.file?(liquid_name)
-      website = Website.find_by_name(domain)
-      website = Website.find(:first) unless website
-      plate = nil
-      plate = website.layout(controller, page) if website
-      return liquid_name if plate
+      return liquid_name if liquid_template_exists?(domain, controller, page)
     end
 
     domain_file_name = "app/views/" + controller + "/" + domain + "_" + page + ".html.erb"
@@ -56,5 +52,12 @@ class ApplicationController < ActionController::Base
     
     File.file?(domain_file_name) ? domain_file_name : non_domain_file_name
   end
-   
+
+  def liquid_template_exists?(domain, controller, page)
+    website = Website.find_by_name(domain)
+    website = Website.find(:first) unless website
+    plate = nil
+    plate = website.layout(controller, page) if website
+    !plate.blank?
+  end
 end
