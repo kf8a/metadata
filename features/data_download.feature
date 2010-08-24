@@ -10,6 +10,7 @@ Feature: Download data
 
   Scenario: The admin user downloads a protected datatable
     Given a protected datatable exists
+      And a user exists and is confirmed with an email of "bob@person.com"
       And "bob@person.com" is an administrator
      When I sign in as "bob@person.com"/"password"
       And I go to the datatable page
@@ -65,7 +66,7 @@ Feature: Download data
       And I should see "now"  
 
   Scenario: A user has received partial permission to download data
-    Given I have signed in with "bob@person.com"/"password"
+    Given a user exists and is confirmed with an email of "bob@person.com"
       And a protected datatable exists
       And "alice@person.com"/"password" owns the datatable
       And "bill@person.com"/"password" owns the datatable

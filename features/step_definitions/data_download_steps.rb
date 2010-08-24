@@ -38,6 +38,7 @@ Given /^"([^"]*)" has given "([^"]*)" permission$/ do |owner, user|
   ownership = Ownership.find_by_user_id_and_datatable_id(@owner, @datatable)
   Factory.create(:ownership, :user => @owner, :datatable => @datatable) unless ownership
   Factory.create(:permission, :user => @user, :datatable => @datatable, :owner => @owner)
+  assert Permission.find_by_user_id_and_owner_id(@user, @owner)
 end
 
 Given /^"([^"]*)" has not given "([^"]*)" permission$/ do |owner, user|
@@ -52,26 +53,15 @@ Given /^"([^"]*)" has not given "([^"]*)" permission$/ do |owner, user|
 end
 
 Given /^"([^"]*)" is an administrator$/ do |email|
-
   @user = User.find_by_email(email)
-  if @user
-    @user.email_confirmed = true
-    @user.role = "admin"
-    @user.save
-  else
-    raise 'user does not exist'
-  end
+  @user.role = "admin"
+  @user.save
 end
 
 Given /^"([^"]*)" is not an administrator$/ do |email|
   @user = User.find_by_email(email)
-  if @user
-    @user.email_confirmed = true
-    @user.role = "normal"
-    @user.save
-  else
-    @user = Factory.create(:user, :email => email, :email_confirmed => true, :role => "normal")
-  end
+  @user.role = "normal"
+  @user.save
 end
 
 Given /^all caches are cleared$/ do

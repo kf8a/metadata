@@ -4,26 +4,6 @@ Then /^I should see error messages$/ do
   assert_match /error(s)? prohibited/m, response.body
 end
 
-# Database
-
-Given /^no user exists with an email of "(.*)"$/ do |email|
-  assert_nil User.find_by_email(email)
-end
-
-Given /^I signed up with "(.*)"\/"(.*)"$/ do |email, password|
-  user = Factory :user,
-    :email                 => email,
-    :password              => password,
-    :password_confirmation => password
-end 
-
-Given /^I am signed up and confirmed as "(.*)"\/"(.*)"$/ do |email, password|
-  user = Factory :email_confirmed_user,
-    :email                 => email,
-    :password              => password,
-    :password_confirmation => password
-end
-
 # Session
 
 Then /^I should be signed in$/ do

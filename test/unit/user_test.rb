@@ -20,8 +20,8 @@ class UserTest < ActiveSupport::TestCase
       assert User::ROLES.include?('admin')
     end
     
-    should 'respond to has_permission_from' do
-      assert @user.respond_to?('has_permission_from')
+    should 'respond to has_permission_from?' do
+      assert @user.respond_to?('has_permission_from?')
     end
   end
   
@@ -39,13 +39,13 @@ class UserTest < ActiveSupport::TestCase
         end
         
         should "be allowed to download datatable" do
-          assert @admin.allowed(@datatable)
+          assert @admin.allowed?(@datatable)
         end
       end
       
       context "the owner" do
         should "be allowed to download datatable" do
-          assert @owner.allowed(@datatable)
+          assert @owner.allowed?(@datatable)
         end
       end
       
@@ -56,7 +56,7 @@ class UserTest < ActiveSupport::TestCase
         end
         
         should "be allowed to download datatable" do
-          assert @user.allowed(@datatable)
+          assert @user.allowed?(@datatable)
         end
       end
       
@@ -66,7 +66,7 @@ class UserTest < ActiveSupport::TestCase
         end
         
         should "not be allowed to download datatable" do
-          assert ! @user.allowed(@datatable)
+          assert ! @user.allowed?(@datatable)
         end
       end
     end
@@ -85,7 +85,7 @@ class UserTest < ActiveSupport::TestCase
         end
         
         should "own the datatable" do
-          assert @owner.owns(@datatable)
+          assert @owner.owns?(@datatable)
         end
       end
       
@@ -95,7 +95,7 @@ class UserTest < ActiveSupport::TestCase
         end
         
         should "not own the datatable" do
-          assert ! @nonowner.owns(@datatable)
+          assert ! @nonowner.owns?(@datatable)
         end
       end
     end
