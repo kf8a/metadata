@@ -97,7 +97,7 @@ class DatatablesController < ApplicationController
         format.html { redirect_to datatable_url(@datatable) }
         format.xml  { head :created, :location => datatable_url(@datatable) }
       else
-        @page = template_choose(@subdomain_request, controller_name, "new")
+        @page = template_choose("new")
         format.html { render @page }
         format.xml  { render :xml => @datatable.errors.to_xml }
       end
@@ -116,7 +116,7 @@ class DatatablesController < ApplicationController
         format.xml  { head :ok }
       else
         @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
-        @page = template_choose(@subdomain_request, controller_name, "edit")
+        @page = template_choose("edit")
         format.html { render @page }
         format.xml  { render :xml => @datatable.errors.to_xml }
       end

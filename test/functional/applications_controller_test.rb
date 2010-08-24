@@ -20,7 +20,7 @@ class ApplicationControllerTest < ActionController::TestCase
       sub = params[:sub]
       con = params[:cont]
       page_req = params[:page_req]
-      @page_chosen = template_choose(sub, con, page_req)
+      @page_chosen = template_choose(page_req, con, sub)
       render :text => "Something needs to be rendered"
     end
   end

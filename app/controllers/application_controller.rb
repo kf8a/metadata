@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_page_request
-    @page = template_choose(@subdomain_request)
+    @page = template_choose
   end
 
   def set_subdomain_request
@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
     return requested_subdomain
   end
   
-  def template_choose(domain, controller=controller_name, page=action_name)
+  def template_choose(page=action_name, controller=controller_name, domain=@subdomain_request)
     non_domain_file_name = "app/views/" + controller + "/" + page + ".html.erb"
     domain_file_name = "app/views/" + controller + "/" + domain + "_" + page + ".html.erb"
     liquid_name = "app/views/" + controller + "/liquid_" + page + ".html.erb"
