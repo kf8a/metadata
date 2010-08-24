@@ -80,7 +80,6 @@ class DatatablesController < ApplicationController
   # GET /datatables/1;edit
   def edit
     @datatable = Datatable.find(params[:id])
-
     @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
   end
   
