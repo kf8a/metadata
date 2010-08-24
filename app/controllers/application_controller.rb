@@ -46,9 +46,9 @@ class ApplicationController < ActionController::Base
     if File.file?(liquid_name)
       website = Website.find_by_name(domain)
       website = Website.find(:first) unless website
-      @plate = nil
-      @plate = website.layout(controller, page) if website
-      return liquid_name if @plate
+      plate = nil
+      plate = website.layout(controller, page) if website
+      return liquid_name if plate
     end
 
     domain_file_name = "app/views/" + controller + "/" + domain + "_" + page + ".html.erb"

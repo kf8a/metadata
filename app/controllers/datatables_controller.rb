@@ -11,8 +11,8 @@ class DatatablesController < ApplicationController
   def index
     retrieve_datatables('keyword_list' =>'')
     @default_value = 'Search for core areas, keywords or people'
-    subdomain_request = request_subdomain(params[:requested_subdomain])
-    page = template_choose(subdomain_request, "datatables", "index")
+    @subdomain_request = request_subdomain(params[:requested_subdomain])
+    page = template_choose(@subdomain_request, "datatables", "index")
         
     respond_to do |format|
       format.html {render page}
@@ -50,13 +50,13 @@ class DatatablesController < ApplicationController
       @values = @datatable.perform_query if @datatable.is_sql
     end
 
-    subdomain_request = request_subdomain(params[:requested_subdomain])
+    @subdomain_request = request_subdomain(params[:requested_subdomain])
     @website_name = @dataset.website.try(:name)
-    if @website_name and @website_name != subdomain_request
+    if @website_name and @website_name != @subdomain_request
       redirect_to datatables_url
       return false
     end
-    page = template_choose(subdomain_request, "datatables", "show")
+    page = template_choose(@subdomain_request, "datatables", "show")
     respond_to do |format|
       format.html   { render page}
       format.xml    { render :xml => @datatable.to_xml}

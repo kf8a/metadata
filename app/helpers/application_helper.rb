@@ -21,4 +21,12 @@ module ApplicationHelper
   def admin?
     current_user.try(:role) == 'admin'
   end
+
+  def get_liquid_template(domain, controller, page)
+    website = Website.find_by_name(domain)
+    website = Website.find(:first) unless website
+    plate = nil
+    plate = website.layout(controller, page) if website
+  end
+
 end
