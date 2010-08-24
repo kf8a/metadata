@@ -42,15 +42,14 @@ class ApplicationController < ActionController::Base
   end
   
   def template_choose(domain, controller, page)
-    liquid_name = "app/views/" + controller + "/liquid_" + page + ".html.erb"
-    if File.file?(liquid_name)
-      return liquid_name if liquid_template_exists?(domain, controller, page)
-    end
-
-    domain_file_name = "app/views/" + controller + "/" + domain + "_" + page + ".html.erb"
     non_domain_file_name = "app/views/" + controller + "/" + page + ".html.erb"
-    
-    File.file?(domain_file_name) ? domain_file_name : non_domain_file_name
+    domain_file_name = "app/views/" + controller + "/" + domain + "_" + page + ".html.erb"
+    liquid_name = "app/views/" + controller + "/liquid_" + page + ".html.erb"
+
+    name = non_domain_file_name
+    name = domain_file_name if File.file?(domain_file_name)
+    name = liquid_name if File.file?(liquid_name) and liquid_template_exists?(domain, controller, page)
+    return name
   end
 
   def liquid_template_exists?(domain, controller, page)
