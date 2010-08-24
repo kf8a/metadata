@@ -23,13 +23,6 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def is_signed_in?
-    unless signed_in?
-      flash[:notice] = "You must be signed in to order to access this page"
-      deny_access
-    end
-  end
-  
   def set_title
      @title = request_subdomain(params[:requested_subdomain]).upcase
   end
