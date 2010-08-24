@@ -16,23 +16,10 @@ class ApplicationController < ActionController::Base
   private
   
   def admin?
-    unless signed_in?
+    unless current_user.try(:role) == 'admin'
       flash[:notice] = "You must be signed in as an administrator in order to access this page"
       deny_access
       return false
-    end
-    
-    unless current_user.role == 'admin'
-      flash[:notice] = "You must be signed in as an administrator in order to access this page"
-      deny_access
-      return false
-    end
-  end
-  
-  def is_signed_in?
-    unless signed_in?
-      flash[:notice] = "You must be signed in to order to access this page"
-      deny_access
     end
   end
   
