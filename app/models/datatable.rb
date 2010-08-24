@@ -247,7 +247,7 @@ private
   
   def convert_to_date(time)
     if time.class == Time
-        time = time.to_date
+      time = time.to_date
     end
     time
   end

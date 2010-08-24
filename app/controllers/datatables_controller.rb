@@ -56,9 +56,9 @@ class DatatablesController < ApplicationController
       format.html   { render @page}
       format.xml    { render :xml => @datatable.to_xml}
       if @datatable.restricted? and !current_user.try(:allowed?, @datatable)
-        format.csv { redirect_to datatable_url(@datatable) }
+        format.csv  { redirect_to datatable_url(@datatable) }
       else
-        format.csv    { render :text => @datatable.to_csv_with_metadata }
+        format.csv  { render :text => @datatable.to_csv_with_metadata }
       end
       format.climdb { render :text => @datatable.to_climdb } unless restricted
       format.climdb { redirect_to datatable_url(@datatable) } if restricted
@@ -115,7 +115,7 @@ class DatatablesController < ApplicationController
         format.html { redirect_to datatable_url(@datatable) }
         format.xml  { head :ok }
       else
-        @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
+        @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
         @page = template_choose("edit")
         format.html { render @page }
         format.xml  { render :xml => @datatable.errors.to_xml }

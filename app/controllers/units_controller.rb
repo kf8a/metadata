@@ -5,7 +5,7 @@ class UnitsController < ApplicationController
   
   
   def index
-    @units = Unit.find(:all, :conditions => ['in_eml is false'])
+    @units = Unit.all(:conditions => ['in_eml is false'])
   end
   
   

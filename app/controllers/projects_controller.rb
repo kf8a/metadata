@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.xml
   def index
-    @projects = Project.find(:all)
+    @projects = Project.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -27,7 +27,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new.xml
   def new
     @project = Project.new
-    @datasets = Dataset.find(:all)
+    @datasets = Dataset.all
 
     respond_to do |format|
       format.html # new.html.erb
