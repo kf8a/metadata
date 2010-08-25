@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   include Clearance::Authentication
     
   #before_filter :admin?, :except => [:index, :show] unless ENV["RAILS_ENV"] == 'development'
-  before_filter :set_crumbs, :set_subdomain_request, :set_title, :set_page_request
+  before_filter :set_crumbs, :set_subdomain_request, :set_title
    
    LOCAL_IPS =/^127\.0\.0\.1$|^192\.231\.113\.|^192\.108\.190\.|^192\.108\.188\.|^192\.108\.191\./
 
@@ -25,10 +25,6 @@ class ApplicationController < ActionController::Base
   
   def set_crumbs
     @crumbs = []
-  end
-
-  def set_page_request
-    @page = template_choose
   end
 
   def set_subdomain_request
@@ -59,6 +55,19 @@ class ApplicationController < ActionController::Base
     name = domain_file_name if File.file?(domain_file_name)
     name = liquid_name if File.file?(liquid_name) and liquid_template_exists?(domain, controller, page)
     return name
+  end
+
+  def render_me(page=action_name, controller=controller_name, domain=@subdomain_request)
+    domain_file_name = "app/views/" + controller + "/" + domain + "_" + page + ".html.erb"
+    liquid_name = "app/views/" + controller + "/liquid_" + page + ".html.erb"
+
+    if File.file?(liquid_name) and liquid_template_exists?(domain, controller, page)
+      render :action => "liquid_#{page}", :controller => controller
+    elsif File.file?(domain_file_name)
+      render :action => "#{domain}_#{page}", :controller => controller
+    else
+      render :action => page, :controller => controller
+    end
   end
 
   def liquid_template_exists?(domain, controller, page)

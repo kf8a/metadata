@@ -13,7 +13,7 @@ class ProtocolsController < ApplicationController
     @protocols = website.protocols.all
 
     respond_to do |format|
-      format.html { render @page }
+      format.html { render_me }
       format.xml  { render :xml => @protocols.to_xml }
     end
   end
@@ -26,7 +26,7 @@ class ProtocolsController < ApplicationController
 
     respond_to do |format|
       if @protocol
-        format.html { render @page }
+        format.html { render_me }
         format.xml  { render :xml => @protocol.to_xml }
       else
         format.html { redirect_to protocols_url}

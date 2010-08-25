@@ -46,7 +46,7 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     
     respond_to do |format|
-      format.html { render @page }
+      format.html { render_me }
       format.xml  { render :xml => @person.to_xml }
     end
   end

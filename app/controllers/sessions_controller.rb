@@ -4,7 +4,7 @@ class SessionsController < Clearance::SessionsController
   
   def new
     logger.info "subdomain: #{@subdomain_request}"
-    render @page
+    render_me
   end
 
   def create
