@@ -45,9 +45,9 @@ class ApplicationController < ActionController::Base
     return requested_subdomain
   end
   
-  def render_me(page=action_name, mycontroller=controller_name, domain=@subdomain_request)
-    domain_file_name = "app/views/" + mycontroller + "/" + domain + "_" + page + ".html.erb"
-    liquid_name = "app/views/" + mycontroller + "/liquid_" + page + ".html.erb"
+  def render_subdomain(page=action_name, mycontroller=controller_name, domain=@subdomain_request)
+    domain_file_name = "app/views/" + mycontroller + "/"  + domain + "_" + page + ".html.erb"
+    liquid_name      = "app/views/" + mycontroller + "/liquid_" + page + ".html.erb"
 
     if File.file?(liquid_name) and liquid_template_exists?(domain, mycontroller, page)
       render :template => "#{mycontroller}/liquid_#{page}"

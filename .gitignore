@@ -18,3 +18,5 @@ config/database.yml
 config/newrelic.yml
 rcov/
 nbproject/
+config/development.sphinx.conf
+assets/

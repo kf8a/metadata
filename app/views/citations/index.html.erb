@@ -3,8 +3,8 @@
   <li class='citation'>
     <%= formatted_as_default(citation) %>
     <%= link_to 'abstract', citation_url(citation)%>
-    <% if signed_in? && citation.pdf.url %>
-      <%= link_to 'PDF', citation.pdf.url %>
+    <% if citation.pdf.url %>
+      <%= link_to 'pdf', citation.pdf.url %>
     <% end %>
   </li>
 <% end %>

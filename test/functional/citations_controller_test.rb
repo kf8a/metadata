@@ -30,6 +30,15 @@ class CitationsControllerTest < ActionController::TestCase
       should render_with_layout 'glbrc'
       
     end
+    
+    context 'GET :download' do
+      setup do
+        @citation = Factory :citation
+        get :download, :id => @citation
+      end
+      
+      should redirect_to('the sign in page') { sign_in_url }
+    end
 
     context 'POST: create' do
       setup do
@@ -54,8 +63,6 @@ class CitationsControllerTest < ActionController::TestCase
 
       should respond_with :success
       should assign_to :citations
-
-      should 'have a PDF download link'
     end
 
     context 'POST: create' do

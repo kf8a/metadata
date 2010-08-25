@@ -23,7 +23,7 @@ class ApplicationControllerTest < ActionController::TestCase
       @people = Person.all(:order => 'sur_name')
       @roles = RoleType.find_by_name('lter').roles.all(:order => :seniority, :conditions =>['name not like ?','Emeritus%'])
       
-      render_me(page_req, con, sub)
+      render_subdomain(page_req, con, sub)
     end
   end
   

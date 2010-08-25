@@ -8,5 +8,5 @@
 <% end %>
 
 <% if signed_in? or RAILS_ENV=='development'%>
-  <%=link_to 'PDF', @citation.pdf.url  if @citation.pdf.url %>
+  <%=link_to 'pdf', @citation.pdf.url  if @citation.pdf.url %>
 <% end %>
