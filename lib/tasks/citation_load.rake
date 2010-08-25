@@ -13,6 +13,7 @@ namespace :citation do
     file = File.open(args[:file],"r:UTF-8")
     content = file.read
     a = parser.parse(content)
+    p parser.failure_reason
     path = Pathname.new(File.dirname(file))
     citations = a.content(path.realpath.to_s + '/' + File.basename(file, '.ris').to_s + '.Data/PDF')
 
