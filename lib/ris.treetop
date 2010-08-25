@@ -89,7 +89,7 @@ grammar RIS
 		'UR' tag_space text_lines
 		{
 			def content(basename, h)
-				h.url = extract_value(text_value).chomp
+				h.publisher_url = extract_value(text_value).chomp
 			end
 		}
 	end

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100824133608) do
+ActiveRecord::Schema.define(:version => 20100825152246) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(:version => 20100824133608) do
     t.string   "isbn"
     t.string   "doi"
     t.text     "full_text"
-    t.string   "url"
+    t.string   "publisher_url"
     t.integer  "website_id"
     t.datetime "created_at"
     t.datetime "updated_at"
