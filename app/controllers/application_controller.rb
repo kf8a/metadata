@@ -50,10 +50,11 @@ class ApplicationController < ActionController::Base
   end
   
   def template_choose(page=action_name, controller=controller_name, domain=@subdomain_request)
-    non_domain_file_name = "app/views/" + controller + "/" + page + ".html.erb"
-    domain_file_name = "app/views/" + controller + "/" + domain + "_" + page + ".html.erb"
-    liquid_name = "app/views/" + controller + "/liquid_" + page + ".html.erb"
+    non_domain_file_name = "app/views/" + controller + "/"        + page   + ".html.erb"
+    domain_file_name     = "app/views/" + controller + "/"        + domain + "_" + page + ".html.erb"
+    liquid_name          = "app/views/" + controller + "/liquid_" + page   + ".html.erb"
 
+    # Maybe this would read better as a case statement
     name = non_domain_file_name
     name = domain_file_name if File.file?(domain_file_name)
     name = liquid_name if File.file?(liquid_name) and liquid_template_exists?(domain, controller, page)
