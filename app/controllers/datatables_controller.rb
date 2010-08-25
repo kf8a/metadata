@@ -13,7 +13,7 @@ class DatatablesController < ApplicationController
     @default_value = 'Search for core areas, keywords or people'
         
     respond_to do |format|
-      format.html {render_me}
+      format.html {render_subdomain}
       format.xml  { render :xml => @datatables.to_xml }
       format.rss {render :rss => @datatables}
     end
@@ -27,7 +27,7 @@ class DatatablesController < ApplicationController
     else
       retrieve_datatables(query)
       respond_to do |format|
-        format.html {render_me}
+        format.html {render_subdomain}
       end
     end
   end
@@ -53,7 +53,7 @@ class DatatablesController < ApplicationController
     end
 
     respond_to do |format|
-      format.html   { render_me }
+      format.html   { render_subdomain }
       format.xml    { render :xml => @datatable.to_xml}
       if @datatable.restricted? and !current_user.try(:allowed?, @datatable)
         format.csv  { redirect_to datatable_url(@datatable) }
@@ -97,7 +97,7 @@ class DatatablesController < ApplicationController
         format.html { redirect_to datatable_url(@datatable) }
         format.xml  { head :created, :location => datatable_url(@datatable) }
       else
-        format.html { render_me "new" }
+        format.html { render_subdomain "new" }
         format.xml  { render :xml => @datatable.errors.to_xml }
       end
     end
@@ -115,7 +115,7 @@ class DatatablesController < ApplicationController
         format.xml  { head :ok }
       else
         @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
-        format.html { render_me "edit" }
+        format.html { render_subdomain "edit" }
         format.xml  { render :xml => @datatable.errors.to_xml }
       end
     end

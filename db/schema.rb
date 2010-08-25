@@ -285,14 +285,6 @@ ActiveRecord::Schema.define(:version => 20100825181536) do
     t.integer  "owner_id"
   end
 
-  create_table "plots", :force => true do |t|
-    t.string  "name"
-    t.integer "treatment_id"
-    t.integer "replicate"
-    t.integer "study_id"
-    t.string  "description"
-  end
-
   create_table "projects", :force => true do |t|
     t.string   "title"
     t.text     "abstract"
@@ -471,9 +463,9 @@ ActiveRecord::Schema.define(:version => 20100825181536) do
   create_table "units", :force => true do |t|
     t.string  "name"
     t.text    "description"
-    t.boolean "in_eml",      :default => false
+    t.boolean "in_eml",                     :default => false
     t.text    "definition"
-    t.string  "human_name"
+    t.string  "human_name",  :limit => nil
   end
 
   add_index "units", ["name"], :name => "unit_names_key", :unique => true

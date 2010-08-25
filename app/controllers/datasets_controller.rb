@@ -48,7 +48,7 @@ class DatasetsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { render_me }
+      format.html { render_subdomain }
       format.eml { render :xml => @dataset.to_eml }
       format.xml  { render :xml => @dataset.to_xml }
     end
