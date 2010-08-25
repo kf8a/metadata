@@ -3,9 +3,11 @@ class CitationsController < ApplicationController
   caches_action :index if RAILS_ENV == 'production'
 
   def index
-    @citations = Citation.all
-    subdomain_request = request_subdomain(params[:requested_subdomain])
-    page = template_choose(subdomain_request, "datatables", "index")
+    @citations = Citation.all(:order => 'pub_year desc')
+    # subdomain_request = request_subdomain(params[:requested_subdomain])
+    # page = nil
+    # page = template_choose(subdomain_request, "datatables", "index")
+    
   end
 
   def show
@@ -46,4 +48,14 @@ class CitationsController < ApplicationController
     logger.info path
     send_file(path)
   end
+  
+  private 
+  
+  def set_title
+     if request_subdomain(params[:requested_subdomain]) == "lter"
+       @title  = 'LTER Publications'
+     else
+       @title = 'GLBRC Publications'
+     end
+   end
 end

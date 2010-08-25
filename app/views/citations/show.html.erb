@@ -1,5 +1,6 @@
-<p><%= @citation.formatted_as_default %></p>
+<p><%= formatted_as_default(@citation) %></p>
 <p><%= @citation.abstract %></p>
+<p><%- @citation.url %></p>
 <% if signed_in? or RAILS_ENV=='development'%>
-  <%=link_to 'PDF', @citation.pdf.url%>
+  <%=link_to 'PDF', @citation.pdf.url  if @citation.pdf.url %>
 <% end %>

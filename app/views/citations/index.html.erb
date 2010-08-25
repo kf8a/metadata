@@ -1,10 +1,10 @@
-<h2>Citations</h2>
 <ul>
 <% @citations.each do |citation| %>
-  <li>
-    <%= link_to citation.formatted_as_default, citation_path(citation) %>
-    <% if signed_in? %>
-      <%= link_to 'PDF', citation.pdf.url%>
+  <li class='citation'>
+    <%= formatted_as_default(citation) %>
+    <%= link_to 'abstract', citation_url(citation)%>
+    <% if signed_in? && citation.pdf.url %>
+      <%= link_to 'PDF', citation.pdf.url %>
     <% end %>
   </li>
 <% end %>
