@@ -51,6 +51,7 @@ namespace :deploy do
   after 'deploy:symlink', :link_site_keys
   after 'deploy:symlink', :link_new_relic
   after 'deploy:symlink', :update_spinks
+  after 'deploy:symlink', :link_assets
 end
 
 task :staging do 
@@ -97,6 +98,11 @@ end
 desc 'set subdomain tdl'
 task :set_subdomain_tdl do
   run "sed -i 's/production => 3/production => 2/' #{release_path}/config/environment.rb"
+end
+
+desc 'link asset directory'
+task :link_assets do
+  run "ln -nfs #{deploy_to}/shared/assets #{release_path}"
 end
 
 # task :link_paperclip_storage, :roles => :app do
