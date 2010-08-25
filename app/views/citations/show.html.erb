@@ -1,6 +1,8 @@
 <p><%= formatted_as_default(@citation) %></p>
 <p><%= @citation.abstract %></p>
-<p>DOI: <%= @citation.doi %></p>
+<% if @citation.doi %>
+  <p>DOI: <%= @citation.doi %></p>
+<% end %>
 <p><%= link_to @citation.url, @citation.url %></p>
 
 <% if signed_in? or RAILS_ENV=='development'%>
