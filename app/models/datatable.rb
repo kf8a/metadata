@@ -79,7 +79,7 @@ class Datatable < ActiveRecord::Base
   
   def permitted?(user)
     permissions_granted_by = permissions.collect {|x| x.user == user ? x.owner : nil}.compact
-    permissions_granted_by == owners
+    permissions_granted_by == owners and not owners.empty?
   end
   
   #TODO need to decide wether the permissions stuff is a function of the user or the datatable

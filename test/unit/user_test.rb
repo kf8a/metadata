@@ -69,7 +69,9 @@ class UserTest < ActiveSupport::TestCase
           assert ! @user.allowed?(@datatable)
         end
       end
+    
     end
+    
   end
   
   context "the owns(datatable) function" do
