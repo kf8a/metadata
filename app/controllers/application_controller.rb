@@ -61,6 +61,19 @@ class ApplicationController < ActionController::Base
     return name
   end
 
+  def render_me(page=action_name, controller=controller_name, domain=@subdomain_request)
+    domain_file_name = "app/views/" + controller + "/" + domain + "_" + page + ".html.erb"
+    liquid_name = "app/views/" + controller + "/liquid_" + page + ".html.erb"
+
+    if File.file?(liquid_name) and liquid_template_exists?(domain, controller, page)
+      render :action => "liquid_#{page}", :controller => controller
+    elsif File.file?(domain_file_name)
+      render :action => "#{domain}_#{page}", :controller => controller
+    else
+      render :action => page, :controller => controller
+    end
+  end
+
   def liquid_template_exists?(domain, controller, page)
     website = Website.find_by_name(domain)
     website = Website.find(:first) unless website
