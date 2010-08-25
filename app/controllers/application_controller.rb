@@ -46,16 +46,19 @@ class ApplicationController < ActionController::Base
   end
   
   def render_subdomain(page=action_name, mycontroller=controller_name, domain=@subdomain_request)
-    domain_file_name = "app/views/" + mycontroller + "/"  + domain + "_" + page + ".html.erb"
-    liquid_name      = "app/views/" + mycontroller + "/liquid_" + page + ".html.erb"
-
-    if File.file?(liquid_name) and liquid_template_exists?(domain, mycontroller, page)
+    if liquid_file_exists?(mycontroller, page) and liquid_template_exists?(domain, mycontroller, page)
       render :template => "#{mycontroller}/liquid_#{page}"
-    elsif File.file?(domain_file_name)
+    elsif domain_specific_file_exists?(domain, mycontroller, page)
       render :template => "#{mycontroller}/#{domain}_#{page}"
     else
       render :template => "#{mycontroller}/#{page}"
     end
+  end
+
+  def liquid_file_exists?(mycontroller, page)
+    erb_name  = "app/views/" + mycontroller + "/liquid_" + page + ".html.erb"
+    rhtml_name = "app/views/" + mycontroller + "/liquid_" + page + ".rhtml"
+    File.file?(erb_name) or File.file?(rhtml_name)
   end
 
   def liquid_template_exists?(domain, mycontroller, page)
@@ -64,5 +67,11 @@ class ApplicationController < ActionController::Base
     plate = nil
     plate = website.layout(mycontroller, page) if website
     !plate.blank?
+  end
+
+  def domain_specific_file_exists?(domain, mycontroller, page)
+    erb_name = "app/views/" + mycontroller + "/"  + domain + "_" + page + ".html.erb"
+    rhtml_name = "app/views/" + mycontroller + "/"  + domain + "_" + page + ".rhtml"
+    File.file?(erb_name) or File.file?(rhtml_name)
   end
 end

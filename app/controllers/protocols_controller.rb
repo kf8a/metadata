@@ -63,7 +63,7 @@ class ProtocolsController < ApplicationController
         format.html { redirect_to protocol_url(@protocol) }
         format.xml  { head :created, :location => protocol_url(@protocol) }
       else
-        format.html { render :action => "new" }
+        format.html { render_subdomain "new" }
         format.xml  { render :xml => @protocol.errors.to_xml }
       end
     end
@@ -83,7 +83,7 @@ class ProtocolsController < ApplicationController
         format.html { redirect_to protocol_url(@protocol) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { render_subdomain "edit" }
         format.xml  { render :xml => @protocol.errors.to_xml }
       end
     end
