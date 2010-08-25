@@ -40,7 +40,7 @@ class Datatable < ActiveRecord::Base
     indexes dataset.title, :as => :dataset_title
     indexes dataset.dataset, :as => :dataset_identifier
     indexes name
-    indexes website.name, :as => :website
+    has dataset.website_id, :as => :website
     where "datatables.on_web is true and datasets.on_web"
     
     #set_property :field_weights => {:keyword => 20, :theme => 20, :title => 10}
