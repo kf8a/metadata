@@ -1,4 +1,4 @@
-TY  - JOUR
+﻿TY  - JOUR
 AB  - Production of biofuels from feedstocks that are diverted from food production or that
 are grown on land that could grow crops has two important drawbacks: higher food prices
 and decreased reduction in greenhouse gas emissions. If U.S. policy were to change and
@@ -252,7 +252,7 @@ ER  -
 
 
 TY  - JOUR
-AB  - Background: Agricultural residues could potentially be converted to bioenergy, but the sustainable harvest rate is unclear. Results: Residue removal increases soil loss at rates that vary with topography, crop rotation and management; decreases yields (100-year mean yields changed -0.07 to -0.08% for every percent of residue mass removed); decreases soil carbon (approximately 40-90 kg C ha-1 year-1 per Mg of residue harvested); and decreases soil nitrogen (3 kg N ha-1 year-1 per Mg residue harvested). Conclusion: Even where soil loss is within tolerable limits, harvesting residue is a question of trade-offs in terms of reduction of yield and loss of soil nutrients. The effects of increased residue harvest are highly variable, depending on local climate and soil erodibility and it is thus problematic to apply a single harvest rate globally. However, on flat land under conservation management, the majority of residue could be sustainably harvested for bioenergy.
+AB  - Background: Agricultural residues could potentially be converted to bioenergy, but the sustainable harvest rate is unclear. Results: Residue removal increases soil loss at rates that vary with topography, crop rotation and management; decreases yields (100-year mean yields changed -0.07 to -0.08% for every percent of residue mass removed); decreases soil carbon (approximately 40–90 kg C ha-1 year-1 per Mg of residue harvested); and decreases soil nitrogen (3 kg N ha-1 year-1 per Mg residue harvested). Conclusion: Even where soil loss is within tolerable limits, harvesting residue is a question of trade-offs in terms of reduction of yield and loss of soil nutrients. The effects of increased residue harvest are highly variable, depending on local climate and soil erodibility and it is thus problematic to apply a single harvest rate globally. However, on flat land under conservation management, the majority of residue could be sustainably harvested for bioenergy.
 AU  - Gregg, Jay S
 AU  - Izaurralde, R Cesar
 DO  - doi:10.4155/bfs.09.8
@@ -1104,3 +1104,5 @@ TI  - An integrative modeling framework to evaluate the productivity and sustain
 VL  - In press
 ID  - 47
 ER  - 
+
+
