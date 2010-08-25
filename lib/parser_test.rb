@@ -12,9 +12,8 @@ ActiveRecord::Base.establish_connection(
 
 load "../db/schema.rb"
 
-require 'paperclip'
-require '../app/models/citation'
-require '../app/models/author'
+require '../config/environment'
+
 require 'ris'
 require 'ris_nodes'
 
@@ -24,14 +23,16 @@ parser = RISParser.new
 
 parser.consume_all_input = false
 
-#file = File.open('../test/data/GLBRC_Publications_Thrust4.ris',"r:UTF-8")
-file = File.open('../test/data/single.ris',"r:UTF-8")
 
+file = File.open('../test/data/GLBRC_Publications_Thrust4.ris',"r:UTF-8")
 #file = File.open('../test/data/single.ris',"r:UTF-8")
 
 content = file.read
-#p content
+
 a = parser.parse(content)
-#a = parser.parse("TY  - test\r\nAB  - This is an abstract\r\nwith two lines\r\nUR  - url format\r\nER  - \r\n")
-#p a
-p a.content
+#a = parser.parse("TY  - JOUR\r\nAB  - This is an abstract\r\nWith two lines\r\nUR  - url format\r\nER  - \r\n")
+#a = parser.parse("TY  - JOUR\r\nER  - \r\n")
+
+a.write_dot_file('test')
+p parser.failure_reason
+p a.content('test/data')
