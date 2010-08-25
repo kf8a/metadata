@@ -9,8 +9,8 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.xml
   def index
-    @people = Person.all(:order => 'sur_name', :order => 'sur_name')
-    @roles = RoleType.find_by_name('lter').roles.find(:all, :order => :seniority, :conditions =>['name not like ?','Emeritus%'])
+    @people = Person.all(:order => 'sur_name')
+    @roles = RoleType.find_by_name('lter').roles.all(:order => :seniority, :conditions =>['name not like ?','Emeritus%'])
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @people.to_xml }
@@ -27,8 +27,8 @@ class PeopleController < ApplicationController
   end  
   
   def emeritus
-    @people = Person.all(:order => 'sur_name', :order => 'sur_name')
-    @roles = RoleType.find_by_name('lter').roles.find(:all, :order => :seniority, :conditions =>['name like ?','Emeritus%'])
+    @people = Person.all(:order => 'sur_name')
+    @roles = RoleType.find_by_name('lter').roles.all(:order => :seniority, :conditions =>['name like ?','Emeritus%'])
     respond_to do |format|
       format.html # emeritus.rhtml
       format.xml  { render :xml => @people.to_xml }
@@ -45,11 +45,8 @@ class PeopleController < ApplicationController
   def show
     @person = Person.find(params[:id])
     
-    subdomain_request = request_subdomain(params[:requested_subdomain])
-    page = template_choose(subdomain_request, "people", "show")
-
     respond_to do |format|
-      format.html { render page }
+      format.html { render @page }
       format.xml  { render :xml => @person.to_xml }
     end
   end
@@ -119,7 +116,7 @@ class PeopleController < ApplicationController
   
   private 
   def set_title
-    if request_subdomain(params[:requested_subdomain]) == "lter"
+    if @subdomain_request == "lter"
       @title = 'KBS LTER Directory'
     else
       @title = 'GLBRC Directory'

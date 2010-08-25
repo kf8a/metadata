@@ -3,10 +3,8 @@ class SessionsController < Clearance::SessionsController
   layout :site_layout
   
   def new
-    subdomain_request = request_subdomain(params[:requested_subdomain])
-    page = template_choose(subdomain_request, controller_name, action_name)
-    logger.info "subdomain: #{subdomain_request}"
-    render page
+    logger.info "subdomain: #{@subdomain_request}"
+    render @page
   end
 
   def create
@@ -61,7 +59,7 @@ class SessionsController < Clearance::SessionsController
   
   private
   def set_title
-    @title = request_subdomain(params[:requested_subdomain]).upcase
+    @title = @subdomain_request.upcase
   end
   
 end

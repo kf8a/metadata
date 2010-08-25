@@ -17,7 +17,7 @@ class Permission < ActiveRecord::Base
 
   def unique_permissions
     if user && datatable && owner
-      if Permission.count(:conditions => ['user_id = ? and datatable_id = ? and owner_id = ?', user_id, datatable_id, owner_id]) > 0
+      if Permission.find_by_user_id_and_datatable_id_and_owner_id(user_id, datatable_id, owner_id)
         errors.add_to_base('can only be saved once')
       end
     end

@@ -13,7 +13,7 @@ class PublicationsController < ApplicationController
     publication_types  = PublicationType.find_all_by_name(@pub_type)
     if publication_types.empty?
       @pub_type = ''
-      publication_types = PublicationType.find(:all)
+      publication_types = PublicationType.all
     end
     @pub_type =  @pub_type.gsub(/_/,' ') unless @pub_type == ''
     conditions = 'publication_type_id in (?) and publication_type_id < 6 '
@@ -31,7 +31,7 @@ class PublicationsController < ApplicationController
       @publications = treatment.publications
       @decoration = "from #{treatment.name}: #{treatment.description}"
     else
-      @publications = Publication.find(:all, :order => order, 
+      @publications = Publication.all(:order => order,
       :conditions => [conditions, publication_types])
     end
     
@@ -146,6 +146,7 @@ class PublicationsController < ApplicationController
     def set_title
       @title = 'Publications'
     end
+
     def set_crumbs
       crumb = Struct::Crumb.new
       @crumbs = []
@@ -155,7 +156,7 @@ class PublicationsController < ApplicationController
     end
     
     def get_form_data
-      @publication_types = PublicationType.find(:all).collect {|x| [x.name, x.id]} 
-      @treatments = Treatment.find(:all)
+      @publication_types = PublicationType.all.collect {|x| [x.name, x.id]} 
+      @treatments = Treatment.all
     end
   end

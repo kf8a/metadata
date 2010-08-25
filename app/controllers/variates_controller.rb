@@ -4,7 +4,7 @@ class VariatesController < ApplicationController
   # GET /variates
   # GET /variates.xml
   def index
-    @variates = Variate.find(:all)
+    @variates = Variate.all
 
     respond_to do |format|
       format.html # index.rhtml

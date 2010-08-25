@@ -4,10 +4,6 @@ class CitationsController < ApplicationController
 
   def index
     @citations = Citation.all(:order => 'pub_year desc')
-    # subdomain_request = request_subdomain(params[:requested_subdomain])
-    # page = nil
-    # page = template_choose(subdomain_request, "datatables", "index")
-    
   end
 
   def show

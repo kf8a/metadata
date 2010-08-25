@@ -102,7 +102,6 @@ class DatatablesControllerTest < ActionController::TestCase
     assert Website.find_by_name('lter')
     assert Website.find_by_name('lter').layout('datatables', 'index')
     get :index, :requested_subdomain => 'lter'
-    assert assigns(:plate)
     assert_select 'h3#correct'
   end
   
@@ -197,7 +196,6 @@ class DatatablesControllerTest < ActionController::TestCase
     assert Website.find_by_name('lter')
     assert Website.find_by_name('lter').layout('datatables', 'show')
     get :show, :id => @table, :requested_subdomain => 'lter'
-    assert assigns(:plate)
     assert_select 'h3#correct'
   end
   
