@@ -38,7 +38,7 @@ class CitationsController < ApplicationController
   
   def download
     head(:not_found) and return unless (citation = Citation.find_by_id(params[:id]))
-    head(:forbidden) and return unless signed_in? or RAILS_ENV == 'development'
+    redirect_to sign_in_url and return unless signed_in? or RAILS_ENV == 'development'
     
     path = citation.pdf.path(params[:style])
     logger.info path
