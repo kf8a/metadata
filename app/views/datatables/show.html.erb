@@ -163,7 +163,7 @@
                             ownership_path(@datatable) %>
               <% end %>
             <% else %>
-              <%= mail_to 'glbrc.data@kbs.msu.edu', 
+              <%= mail_to permission_request_email_list(@datatable), 
                           'Request data', 
                           :class => 'download-link' %>
               <% @datatable.owners.each do |owner| %>

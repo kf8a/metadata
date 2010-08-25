@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   include Clearance::Authentication
     
   #before_filter :admin?, :except => [:index, :show] unless ENV["RAILS_ENV"] == 'development'
-  before_filter :set_crumbs, :set_subdomain_request, :set_title, :set_page_request
+  before_filter :set_crumbs, :set_subdomain_request, :set_title
    
    LOCAL_IPS =/^127\.0\.0\.1$|^192\.231\.113\.|^192\.108\.190\.|^192\.108\.188\.|^192\.108\.191\./
 
@@ -27,10 +27,6 @@ class ApplicationController < ActionController::Base
     @crumbs = []
   end
 
-  def set_page_request
-    @page = template_choose
-  end
-
   def set_subdomain_request
     @subdomain_request = request_subdomain(params[:requested_subdomain])
   end
@@ -49,22 +45,24 @@ class ApplicationController < ActionController::Base
     return requested_subdomain
   end
   
-  def template_choose(page=action_name, controller=controller_name, domain=@subdomain_request)
-    non_domain_file_name = "app/views/" + controller + "/" + page + ".html.erb"
-    domain_file_name = "app/views/" + controller + "/" + domain + "_" + page + ".html.erb"
-    liquid_name = "app/views/" + controller + "/liquid_" + page + ".html.erb"
+  def render_me(page=action_name, mycontroller=controller_name, domain=@subdomain_request)
+    domain_file_name = "app/views/" + mycontroller + "/" + domain + "_" + page + ".html.erb"
+    liquid_name = "app/views/" + mycontroller + "/liquid_" + page + ".html.erb"
 
-    name = non_domain_file_name
-    name = domain_file_name if File.file?(domain_file_name)
-    name = liquid_name if File.file?(liquid_name) and liquid_template_exists?(domain, controller, page)
-    return name
+    if File.file?(liquid_name) and liquid_template_exists?(domain, mycontroller, page)
+      render :template => "#{mycontroller}/liquid_#{page}"
+    elsif File.file?(domain_file_name)
+      render :template => "#{mycontroller}/#{domain}_#{page}"
+    else
+      render :template => "#{mycontroller}/#{page}"
+    end
   end
 
-  def liquid_template_exists?(domain, controller, page)
+  def liquid_template_exists?(domain, mycontroller, page)
     website = Website.find_by_name(domain)
     website = Website.find(:first) unless website
     plate = nil
-    plate = website.layout(controller, page) if website
+    plate = website.layout(mycontroller, page) if website
     !plate.blank?
   end
 end

@@ -3,7 +3,7 @@ class CitationsController < ApplicationController
   caches_action :index if RAILS_ENV == 'production'
 
   def index
-    @citations = Citation.all
+    @citations = Citation.all(:order => 'pub_year desc')
   end
 
   def show
@@ -31,16 +31,27 @@ class CitationsController < ApplicationController
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @citation.errors.to_xml }
-        format.josn { render :json => @citation.errors.to_json }
+        format.json { render :json => @citation.errors.to_json }
       end
     end
   end
   
   def download
     head(:not_found) and return unless (citation = Citation.find_by_id(params[:id]))
-    head(:forbidden) and return unless signed_in?
+    head(:forbidden) and return unless signed_in? or RAILS_ENV == 'development'
     
     path = citation.pdf.path(params[:style])
+    logger.info path
     send_file(path)
   end
+  
+  private 
+  
+  def set_title
+     if request_subdomain(params[:requested_subdomain]) == "lter"
+       @title  = 'LTER Publications'
+     else
+       @title = 'GLBRC Publications'
+     end
+   end
 end

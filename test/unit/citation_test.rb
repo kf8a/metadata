@@ -16,13 +16,5 @@ class CitationTest < ActiveSupport::TestCase
       assert @citation.valid?
     end
     
-    should 'respond to formatted_as_default' do
-      assert @citation.respond_to?('formatted_as_default')
-    end
-    
-    should 'return a string for formatted_as_default' do
-      assert_kind_of String, @citation.formatted_as_default
-    end
-    
   end
 end

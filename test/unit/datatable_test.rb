@@ -34,6 +34,45 @@ class DatatableTest < ActiveSupport::TestCase
     
   end
   
+  context 'datatable without owners and permissions' do
+    setup do 
+      @anonymous_user     = nil
+      @unauthorized_user  = Factory :user, :email => 'unauthorized@person.com'
+      @admin              = Factory :user, :email => 'admin@person.com', :role => 'admin'
+      
+      @unrestricted = Factory  :datatable
+      
+      sponsor = Factory :sponsor, :data_restricted => true
+      dataset = Factory :dataset, :sponsor => sponsor
+      @restricted = Factory :datatable, 
+        :dataset    => dataset
+    end
+    
+    should 'tell if it needs to be restricted at all' do
+       assert !@unrestricted.restricted?
+       assert  @restricted.restricted?
+     end
+     
+     should 'allow restrict datatables to be permitted' do
+       assert !@restricted.permitted?(@anonymous_user)
+       assert !@restricted.permitted?(@unauthorized_user)
+       assert !@restricted.permitted?(@admin)
+     end
+
+     should 'allow anyone to download unrestricted datatables' do
+       assert @unrestricted.can_be_downloaded_by?(@anonymous_user)
+       assert @unrestricted.can_be_downloaded_by?(@unauthorized_user)
+       assert @unrestricted.can_be_downloaded_by?(@admin)
+     end
+
+     should 'only allow authorized users to download restricted datatables' do
+       assert !@restricted.can_be_downloaded_by?(@anonymous_user)
+       assert !@restricted.can_be_downloaded_by?(@unauthorized_user)
+       assert  @restricted.can_be_downloaded_by?(@admin)
+     end
+   
+  end
+  
   context 'using datatable permissions' do
     setup do
       @anonymous_user     = nil

@@ -1,166 +1,295 @@
 grammar RIS
 	rule document
-		citation* <DocumentNode>
+		citations* {
+		def content(basename = nil)
+	    elements.map do |e|
+	      e.content(basename)
+	    end
+	  end
+		}
 	end
 
-	rule citation
-		type tags er <CitationNode>
-	end
-	
-	rule tags
-		tag* <ParentNode>
-	end
-	
-	rule entry
-		tag text_lines <ParentNode>
-	end
-	
-	rule text_lines 
-		text+ <ParentNode>
+	rule citations
+		type tags er 
+		{
+		def content(basename=nil, h=Citation.new) 
+			    elements.map do |e| 
+		 				e.content(basename, h)
+			    end.compact
+			  end
+		}
 	end
 	
 	rule type
-		'TY  - ' text <CitationType>
+			'TY  - ' text
+			 {
+			def content(basename, h)
+				type = extract_value(text_value).chomp			
+				h.citation_type = CitationType.find_by_abbreviation(type)
+				nil # return nil because we are not interested in the  citation type record
+			end
+			}
+		end
+		
+		rule er
+			'ER  - ' line_ends <NullNode>
+		end
+		
+	rule text
+		!(line_end / tag / er / type) word_characters line_ends 
 	end
 	
-	rule er
-		'ER  - ' line_end <NullNode>
+	rule word_character
+	#	[a-zA-Z0-9 \t:\.,-\?\!_\(\)\\\/@\[\]\'\"\]
+	#	[\x20-\x7e]
+	(!line_end .)
+	end
+	
+	rule word_characters
+		word_character+
+	end
+	
+	rule text_lines
+		text+
+	end
+	
+	
+	rule tags 
+		tag+ <ParentNode>
+	end
+	
+	rule space
+		' '
+	end
+	
+	rule dash
+		'-'
+	end
+	
+	rule line_ends
+		line_end+
+	end
+	
+	rule line_end
+		"\r\n" / "\n"
 	end
 	
 	rule tag
 		url / abstract / author / keyword / pdf / title / id / year / publication / label / rn / doi /
-			language / volume / issue / sp / ep / sn
+		language / volume / issue / sp / ep / sn / publisher / note / dp / address / an / da / et / city / 
+		unknown
+		#		[A-Z] [A-Z] space space dash space 	
+	end
+	
+	rule tag_space
+		space space dash space
 	end
 	
 	rule url
-		'UR  - ' text_lines {
-			def content(h)
-				h.url = text_value[6..text_value.length].chomp
+		'UR' tag_space text_lines
+		{
+			def content(basename, h)
+				h.publisher_url = extract_value(text_value).chomp
 			end
 		}
 	end
 	
 	rule abstract
-		'AB  - ' text_lines <Abstract>
-	end
-	
-	rule author
-	  'AU  - ' text_lines <AuthorNode>
-		/ 
-		'A1  - ' text_lines <AuthorNode>
-		/ 
-		'A2  - ' text_lines <AuthorNode>
-	end
-	
-	rule keyword 
-		'KW  - ' text_lines <Keyword>
-	end
-	
-	rule pdf 
-		'L1  - ' text_lines {
-			def content(h) 
-				file_name = text_value[6..text_value.length].chomp
-		  end
-		}
-	end
-	
-	rule title
-		'T1  - ' text_lines <TitleNode>
-		/ 
-		'ST  - ' text_lines <TitleNode>
-		/ 
-		'TI  - ' text_lines <TitleNode>
-	end
-	
-	rule id 
-		'ID  - ' text_lines <NullNode>
-	end
-	
-	rule year 
-		'PY  - ' text_lines {
-			def content(h)
-				h.pub_year = text_value[6..text_value.length].to_i
+		'AB' tag_space text_lines
+		{
+			def content(basename, h)
+				h.abstract = extract_value(text_value).gsub("\r\n",' ').gsub("\n",' ')
 			end
 		}
 	end
 	
-	rule publication
-		'T2  - ' text_lines {
-		def content(h)
-			h.publication = text_value[6..text_value.length].chomp
-		end
+	rule author
+		'AU' tag_space text_lines <AuthorNode>
+		/
+		'A1' tag_space text_lines <AuthorNode>
+		/
+		'A2' tag_space text_lines <AuthorNode>
+	end
+	
+	rule keyword
+		'KW' tag_space text_lines
+		{
+			def content(basename, h)
+		    #h.keywords = extract_value(text_value)
+		  end
+		}
+	end
+	
+	rule pdf
+		'L1' tag_space text_lines 
+		{
+			def content(basename, h)
+		    	file_name = extract_value(text_value)
+		    	file_name.gsub!(/internal-pdf:\//,'')
+					h.pdf = File.open(basename + file_name.to_s,'r')
+		  end		
+		}
+	end
+	
+	rule title
+		'T1' tag_space text_lines <TitleNode>
+		/
+		'ST' tag_space text_lines <TitleNode>
+		/
+		'TI' tag_space text_lines <TitleNode>
+	end
+	
+	rule year
+		'PY' tag_space text_lines 
+		{
+				def content(basename, h)
+					h.pub_year = extract_value(text_value).to_i
+				end		
+		}
+	end
+	
+	rule id
+		'ID' tag_space text_lines <NullNode>
+	end
+	
+	rule publication 
+		'T2' tag_space text_lines 
+		{
+			def content(basename, h)
+				h.publication = extract_value(text_value)
+			end
 		}
 	end
 	
 	rule label
-		'LB  - ' text_lines <Tags>
+		'LB' tag_space text_lines <TextNode>
 	end
 	
 	rule rn
-		'RN  - ' text_lines <Tags>
+		'RN' tag_space text_lines <TextNode>
 	end
 	
 	rule doi
-		'DO  - ' text_lines {
-		def content(h)
-	    h.doi = text_value[6..text_value.length].gsub("\r\n",' ').gsub("\n",' ')
-	  end
+		'DO' tag_space text_lines 
+		{
+			def content(basename, h)
+		    h.doi = extract_value(text_value).gsub("\r\n",' ').gsub("\n",' ')
+		  end
 		}
 	end
 	
 	rule language
-		'LA  - ' text_lines <Tags>
+		'LA' tag_space text_lines <TextNode>
 	end
 	
-	rule volume
-		'VL  - ' text_lines {
-		def content(h)
-			h.volume = text_value[6..text_value.length].chomp
-		end
+	rule volume 
+		'VL' tag_space text_lines 
+		{
+			def content(basename, h)
+				h.volume = extract_value(text_value)
+			end
 		}
 	end
 	
 	rule issue
-		'IS  - ' text_lines {
-			def content(h)
-				h.issue = text_value[6..text_value.length].chomp
+		'IS' tag_space text_lines 
+		{
+			def content(basename, h)
+				h.issue = extract_value(text_value)
 			end
 		}
 	end
 	
 	rule sp
-		'SP  - ' text_lines {
-		def content(h)
-	    start_page, end_page = text_value[6..text_value.length].chomp.split(/\-+/)
-	    h.start_page_number = start_page
-	    h.ending_page_number = end_page if end_page
-	  end
+		'SP' tag_space text_lines 
+		{
+			def content(basename, h)
+		    start_page, end_page = extract_value(text_value).split(/\-+/)
+		    h.start_page_number = start_page
+		    h.ending_page_number = end_page if end_page
+		  end
 		}
 	end
 	
 	rule ep
-		'EP  - ' text_lines {
-			def content(h)
-				h.ending_page_number = text_value[6..text_value.length].chomp
+		'EP' tag_space text_lines 
+		{
+			def content(basename, h)
+				h.ending_page_number = extract_value(text_value)
 			end
 		}
 	end
 	
 	rule sn
-		'SN  - ' text_lines {
-			def content(h)
-				h.isbn = text_value[6..text_value.length].chomp
+		'SN' tag_space text_lines 
+		{
+			def content(basename, h)
+				h.isbn = extract_value(text_value)
 			end
 		}
 	end
 	
-	rule text
-		(!(line_end / tag / type / er) .)+ line_end
+	rule publisher
+		'PB' tag_space text_lines 
+		{
+			def content(basename, h)
+				h.publisher = extract_value(text_value)
+			end
+		}
 	end
 	
+	rule note
+		'N1' tag_space text_lines 
+		{
+			def content(basename, h)
+				h.notes = extract_value(text_value)
+			end
+		}
+	end
 	
-	rule line_end
-		"\r\n"+ / "\n"+
+	rule dp
+		'DP' tag_space text_lines <TextNode>
+	end
+	
+	rule address
+		'AD' tag_space text_lines 
+		{
+		def content(basename, h)
+			h.address = extract_value(text_value)
+		end
+		}
+	end
+	
+	#TODO what is this
+	rule an
+		'AN' tag_space text_lines <TextNode>
+	end
+	
+	#TODO what is this
+	rule da
+		'DA' tag_space text_lines <TextNode>
+	end
+	
+	#TODO what is this
+	rule et
+		'ET' tag_space text_lines <TextNode>
+	end
+	
+	rule city
+		'CY' tag_space text_lines
+		{
+		def content(basename, h)
+			h.city = extract_value(text_value)
+		end
+		}
+	end
+	
+	rule unknown
+		[A-Z] [A-Z] tag_space text_lines {
+			def content(basename, h)
+				raise text_value
+			end
+		}
 	end
 	
 end

@@ -6,8 +6,6 @@ class Citation < ActiveRecord::Base
   has_attached_file :pdf, :url => "/assets/citations/:attachment/:id/:style/:basename.:extension",  
    :path => ":rails_root/assets/citations/:attachment/:id/:style/:basename.:extension"
   
-  def formatted_as_default
-    authors.collect {|author| "#{author.sur_name} #{author.given_name}"}.join(', ') + title.to_s
-  end
- 
+  attr_protected :pdf_file_name, :pdf_content_type, :pdf_size
+   
 end
