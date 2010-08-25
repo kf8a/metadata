@@ -45,7 +45,7 @@ class DatatableTest < ActiveSupport::TestCase
       sponsor = Factory :sponsor, :data_restricted => true
       dataset = Factory :dataset, :sponsor => sponsor
       @restricted = Factory :datatable, 
-        :dataset    => dataset,
+        :dataset    => dataset
     end
     
     should 'tell if it needs to be restricted at all' do
