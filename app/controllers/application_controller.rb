@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   include Clearance::Authentication
     
   #before_filter :admin?, :except => [:index, :show] unless ENV["RAILS_ENV"] == 'development'
-  before_filter :set_crumbs, :set_subdomain_request, :set_title, :set_page_request
+  before_filter :set_crumbs, :set_subdomain_request, :set_title
    
    LOCAL_IPS =/^127\.0\.0\.1$|^192\.231\.113\.|^192\.108\.190\.|^192\.108\.188\.|^192\.108\.191\./
 
@@ -25,10 +25,6 @@ class ApplicationController < ActionController::Base
   
   def set_crumbs
     @crumbs = []
-  end
-
-  def set_page_request
-    @page = template_choose
   end
 
   def set_subdomain_request
