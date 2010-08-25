@@ -3,7 +3,9 @@
 <% if @citation.doi %>
   <p>DOI: <%= @citation.doi %></p>
 <% end %>
-<p><%= link_to @citation.publisher_url, @citation.publisher_url %></p>
+<% if @citation.publisher_url %>
+  <p><%= link_to @citation.publisher_url, @citation.publisher_url %></p>
+<% end %>
 
 <% if signed_in? or RAILS_ENV=='development'%>
   <%=link_to 'PDF', @citation.pdf.url  if @citation.pdf.url %>
