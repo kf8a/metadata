@@ -4,7 +4,7 @@
   <%= textilize @datatable.description  if @datatable.description %>
   <%= @datatable.access_statement       if @datatable.access_statement %>
 
-  The <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use policy applies to the this dataset</a>
+  The <%=link_to 'standard data use policy applies to the this dataset' , sponsor_url(@datatable.dataset.sponsor)%>
 
   <div>
     <h2>Context:</h2>
@@ -166,16 +166,6 @@
               <%= mail_to permission_request_email_list(@datatable), 
                           'Request data', 
                           :class => 'download-link' %>
-              <% @datatable.owners.each do |owner| %>
-                <p>
-                  <%= owner.email %>
-                  <% if current_user.has_permission_from?(owner, @datatable) %>
-                    has given you permission
-                  <% else %>
-                    needs to give you permission
-                  <% end %>
-                </p>
-              <% end %>
             <% end %>
           <% end %>
         <% end %>

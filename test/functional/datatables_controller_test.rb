@@ -8,7 +8,7 @@ class DatatablesControllerTest < ActionController::TestCase
       @controller.current_user = nil
     end
 
-    context "and GET :index" do
+    context "GET :index" do
       setup do
         get :index
       end
@@ -21,6 +21,22 @@ class DatatablesControllerTest < ActionController::TestCase
         get :search, :keyword_list=>'test'
       end
       should respond_with :success
+    end
+    
+    context 'GET :show' do
+      setup do
+        @sponsor  = Factory.create :sponsor, :data_use_statement => 'smoke em if you got em'
+        dataset   = Factory.create :dataset, :sponsor => @sponsor
+        datatable = Factory.create :datatable, :dataset => dataset
+        
+        get :show, :id => datatable
+      end
+      
+      should respond_with :success
+      
+      should 'include the link to the sponsors data use statement' do
+        assert_select "a[href$=/sponsors/#{@sponsor.id}]"
+      end
     end
     
     context 'GET :edit' do
