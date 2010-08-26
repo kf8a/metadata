@@ -7,6 +7,7 @@ class ApplicationControllerTest < ActionController::TestCase
   #This is a fake controller in which we can test the various things that should apply to all controllers.
   
     before_filter :admin?, :only => [:testadmin]
+    helper PeopleHelper
   
     def testadmin
       render :text => "You are an admin"
