@@ -3,7 +3,12 @@ class PermissionsController < ApplicationController
   before_filter :require_datatable, :require_owner, :except => [:index] unless ENV["RAILS_ENV"] == 'development'
   #before_filter :admin?, :except => [:index] unless ENV["RAILS_ENV"] == 'development'
   
+  layout :site_layout
+  
   def index
+    respond_to do |format|
+      format.html { render_subdomain }
+    end
   end
   
   def show
@@ -17,7 +22,9 @@ class PermissionsController < ApplicationController
   end
   
   def new
-
+    respond_to do |format|
+      format.html { render_subdomain }
+    end
   end
   
   def create
