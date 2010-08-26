@@ -136,8 +136,19 @@
     	TODO: geographic coverage 
     	-->
       <% unless @datatable.metadata_only? %>
-        <% if @datatable.restricted? %>
-          <% if signed_in? %>
+        <% unless @datatable.restricted? %>
+          <%= link_to 'Download complete data table',
+                      datatable_path(@datatable,
+                      :format => :csv) ,
+                      :class => 'download-link'%>
+        <% else %>
+          <% unless signed_in? %>
+            <%= link_to 'Sign in to request the data',
+                        sign_in_path,
+                        :class => 'download-link' %> or
+            <%= link_to 'Sign up',
+                        sign_up_path %> if you have not done so already.
+          <% else %>
             <% if current_user.allowed?(@datatable) %>
               <%= link_to 'Download complete data table', 
                           datatable_path(@datatable,
@@ -166,50 +177,39 @@
                 </p>
               <% end %>
             <% end %>
-          <% else %>
-            <%= link_to 'Sign in to request the data', 
-                        sign_in_path, 
-                        :class => 'download-link' %> or 
-            <%= link_to 'Sign up', 
-                        sign_up_path %> if you have not done so already.
           <% end %>
-        <% else %>
-          <%= link_to 'Download complete data table', 
-                      datatable_path(@datatable, 
-                      :format => :csv) ,
-                      :class => 'download-link'%>
         <% end %>
       <% end %>
     </p>
     
+    <div>
+      <h2>Data Excerpt</h2>
       <div>
-        <h2>Data Excerpt</h2>
-        <div>
-          <table>
-          	<tr>
-          		<% @values.fields.each do |field| %>
-            		<th>
-            			<%= field.gsub(/_/,' ') %>
-            		</th>
-          		<% end %>
-          	</tr>
-          	<% @values.each do  |row| %>
-            	<tr  class="<%= cycle('even','odd') -%>">
-            		<% row.keys.each do |key| %>
-              		<td align='right'>
-              			<%= row[key] %>
-              		</td>
-            		<% end %>
-            	</tr>
-          	<% end %>
-          	<% @values.clear %>
-          </table>
-        </div>
+        <table>
+          <tr>
+            <% @values.fields.each do |field| %>
+              <th>
+                <%= field.gsub(/_/,' ') %>
+              </th>
+            <% end %>
+          </tr>
+          <% @values.each do  |row| %>
+            <tr  class="<%= cycle('even','odd') -%>">
+              <% row.keys.each do |key| %>
+                <td align='right'>
+                  <%= row[key] %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+          <% @values.clear %>
+        </table>
       </div>
-    <% end %>
-  <% else -%>
-    <p>Data Embargoed</p>
-  <% end -%>
+    </div>
+  <% end %>
+<% else -%>
+  <p>Data Embargoed</p>
+<% end -%>
 
 <%= link_to 'Back to Data Catalog', datatables_path() %>&nbsp;&nbsp;
 <%= link_to 'Edit', edit_datatable_path(@datatable) if admin? %>

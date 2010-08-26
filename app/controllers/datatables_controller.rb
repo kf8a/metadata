@@ -39,17 +39,17 @@ class DatatablesController < ApplicationController
     @datatable = Datatable.find(params[:id])
     @dataset = @datatable.dataset
 
+    website_name = @dataset.website.try(:name)
+    if website_name and website_name != @subdomain_request
+      redirect_to datatables_url
+      return false
+    end
+
     @values = nil
     if (!trusted_ip? && @datatable.is_restricted)
       restricted = true
     else
       @values = @datatable.perform_query if @datatable.is_sql
-    end
-
-    website_name = @dataset.website.try(:name)
-    if website_name and website_name != @subdomain_request
-      redirect_to datatables_url
-      return false
     end
 
     respond_to do |format|

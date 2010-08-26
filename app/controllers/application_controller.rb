@@ -45,36 +45,33 @@ class ApplicationController < ActionController::Base
     return requested_subdomain
   end
   
-  def template_choose(page=action_name, controller=controller_name, domain=@subdomain_request)
-    non_domain_file_name = "app/views/" + controller + "/"        + page   + ".html.erb"
-    domain_file_name     = "app/views/" + controller + "/"        + domain + "_" + page + ".html.erb"
-    liquid_name          = "app/views/" + controller + "/liquid_" + page   + ".html.erb"
-
-    # Maybe this would read better as a case statement
-    name = non_domain_file_name
-    name = domain_file_name if File.file?(domain_file_name)
-    name = liquid_name if File.file?(liquid_name) and liquid_template_exists?(domain, controller, page)
-    return name
-  end
-
-  def render_subdomain(page=action_name, controller=controller_name, domain=@subdomain_request)
-    domain_file_name = "app/views/" + controller + "/"  + domain + "_" + page + ".html.erb"
-    liquid_name      = "app/views/" + controller + "/liquid_" + page + ".html.erb"
-
-    if File.file?(liquid_name) and liquid_template_exists?(domain, controller, page)
-      render :action => "liquid_#{page}", :controller => controller
-    elsif File.file?(domain_file_name)
-      render :action => "#{domain}_#{page}", :controller => controller
+  def render_subdomain(page=action_name, mycontroller=controller_name, domain=@subdomain_request)
+    if liquid_file_exists?(mycontroller, page) and liquid_template_exists?(domain, mycontroller, page)
+      render :template => "#{mycontroller}/liquid_#{page}"
+    elsif domain_specific_file_exists?(domain, mycontroller, page)
+      render :template => "#{mycontroller}/#{domain}_#{page}"
     else
-      render :action => page, :controller => controller
+      render :template => "#{mycontroller}/#{page}"
     end
   end
 
-  def liquid_template_exists?(domain, controller, page)
+  def liquid_file_exists?(mycontroller, page)
+    erb_name  = "app/views/" + mycontroller + "/liquid_" + page + ".html.erb"
+    rhtml_name = "app/views/" + mycontroller + "/liquid_" + page + ".rhtml"
+    File.file?(erb_name) or File.file?(rhtml_name)
+  end
+
+  def liquid_template_exists?(domain, mycontroller, page)
     website = Website.find_by_name(domain)
     website = Website.find(:first) unless website
     plate = nil
-    plate = website.layout(controller, page) if website
+    plate = website.layout(mycontroller, page) if website
     !plate.blank?
+  end
+
+  def domain_specific_file_exists?(domain, mycontroller, page)
+    erb_name = "app/views/" + mycontroller + "/"  + domain + "_" + page + ".html.erb"
+    rhtml_name = "app/views/" + mycontroller + "/"  + domain + "_" + page + ".rhtml"
+    File.file?(erb_name) or File.file?(rhtml_name)
   end
 end

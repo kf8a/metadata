@@ -16,8 +16,14 @@ class ApplicationControllerTest < ActionController::TestCase
       sub = params[:sub]
       con = params[:cont]
       page_req = params[:page_req]
-      @page_chosen = template_choose(page_req, con, sub)
-      render :text => "Something needs to be rendered"
+
+      #necessary variables to load the pages below
+      @themes = Theme.roots
+      @protocols = Protocol.all
+      @people = Person.all(:order => 'sur_name')
+      @roles = RoleType.find_by_name('lter').roles.all(:order => :seniority, :conditions =>['name not like ?','Emeritus%'])
+      
+      render_subdomain(page_req, con, sub)
     end
   end
   
@@ -60,11 +66,11 @@ class ApplicationControllerTest < ActionController::TestCase
       
       context "when a subdomain is requested which exists" do
         setup do
-          get :testpagechoose, :sub => "lter", :cont => "datatables", :page_req => "index"
+          get :testpagechoose, :sub => "glbrc", :cont => "protocols", :page_req => "index"
         end
         
         should respond_with(:success)
-        should assign_to(:page_chosen).with("app/views/datatables/lter_index.html.erb")
+        should render_template "protocols/glbrc_index"
       end
       
       context "when a subdomain is requested which does not exist" do
@@ -73,7 +79,7 @@ class ApplicationControllerTest < ActionController::TestCase
         end
 
         should respond_with(:success)
-        should assign_to(:page_chosen).with("app/views/people/index.html.erb")
+        should render_template "people/index"
       end
       
       context "when a template is in the database" do
@@ -88,7 +94,7 @@ class ApplicationControllerTest < ActionController::TestCase
         end
 
         should respond_with(:success)
-        should assign_to(:page_chosen).with("app/views/datatables/liquid_index.html.erb")
+        should render_template "datatables/liquid_index"
       end
     end
   end
