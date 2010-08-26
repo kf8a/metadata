@@ -14,7 +14,4 @@ Scenario: An admin user creates a template
   When I fill in "Controller*" with "Protocols"
     And I fill in "Action*" with "Index"
     And I fill in "Layout*" with "Test words"
-    And I press "Create Template"
-    
-  Then I should see something
-  
+    And I press "Create Template"  

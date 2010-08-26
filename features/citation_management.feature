@@ -12,6 +12,3 @@ Feature: citations management
     Then  I should see "10 records uploaded"
 
   Scenario: Uploading an RIS formatted file from the command line
-    Given I have a valid api-key of "1234"
-    When  I send a json record
-    Then  I should see success
