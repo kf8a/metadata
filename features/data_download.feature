@@ -7,10 +7,10 @@ Feature: Download data
   Background:
     Given I am on the datatables page
       And all caches are cleared
+      And a user exists and is confirmed with an email of "bob@person.com"
 
   Scenario: The admin user downloads a protected datatable
     Given a protected datatable exists
-      And a user exists and is confirmed with an email of "bob@person.com"
       And "bob@person.com" is an administrator
      When I sign in as "bob@person.com"/"password"
       And I go to the datatable page
@@ -20,7 +20,7 @@ Feature: Download data
 
   Scenario: The data owner downloads a datatable
     Given a protected datatable exists
-      And "bob@person.com"/"password" owns the datatable
+      And "bob@person.com" owns the datatable
       And "bob@person.com" is not an administrator
      When I sign in as "bob@person.com"/"password"
      Then I should not have the "admin" role
@@ -34,6 +34,7 @@ Feature: Download data
     Given a protected datatable exists
       And "bob@person.com" has permission to download the datatable
       And "bob@person.com" is not an administrator
+      And "bob@person.com" does not own the datatable
      When I sign in as "bob@person.com"/"password"
      Then I should not have the "admin" role
       And I should be signed in
@@ -46,6 +47,7 @@ Feature: Download data
     Given a protected datatable exists
       And "bob@person.com" does not have permission to download the datatable
       And "bob@person.com" is not an administrator
+      And "bob@person.com" does not own the datatable
      When I sign in as "bob@person.com"/"password"
      Then I should not have the "admin" role
       And I should be signed in
@@ -55,8 +57,10 @@ Feature: Download data
   
   Scenario: A user has received permission to download data from all data owners
     Given a protected datatable exists
-      And "alice@person.com"/"password" owns the datatable
-      And "bill@person.com"/"password" owns the datatable
+      And a user exists and is confirmed with an email of "alice@person.com"
+      And a user exists and is confirmed with an email of "bill@person.com"
+      And "alice@person.com" owns the datatable
+      And "bill@person.com" owns the datatable
       And "alice@person.com" has given "bob@person.com" permission
       And "bill@person.com" has given "bob@person.com" permission
      When I sign in as "bob@person.com"/"password"
@@ -66,10 +70,11 @@ Feature: Download data
       And I should see "now"  
 
   Scenario: A user has received partial permission to download data
-    Given a user exists and is confirmed with an email of "bob@person.com"
+    Given a user exists and is confirmed with an email of "alice@person.com"
+      And a user exists and is confirmed with an email of "bill@person.com"
       And a protected datatable exists
-      And "alice@person.com"/"password" owns the datatable
-      And "bill@person.com"/"password" owns the datatable
+      And "alice@person.com" owns the datatable
+      And "bill@person.com" owns the datatable
       And "alice@person.com" has given "bob@person.com" permission
       And "bill@person.com" has not given "bob@person.com" permission
      When I sign in as "bob@person.com"/"password"
