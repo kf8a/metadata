@@ -9,4 +9,9 @@ class ApplicationHelperTest < ActionView::TestCase
   def test_strip_html_tags
     assert_equal strip_html_tags("<p>This is a test</p>"), "This is a test"
   end
+  
+  def test_lter_roles
+    assert lter_roles
+    assert lter_roles.kind_of(Array)
+  end
 end

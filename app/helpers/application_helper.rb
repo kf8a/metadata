@@ -12,7 +12,7 @@ module ApplicationHelper
   end
   
   def lter_roles
-    Role.all_by_role_type_id(RoleType.find_by_name('lter'))
+    Role.find_all_by_role_type_id(RoleType.find_by_name('lter'))
   end
   
   def render_study(options)
