@@ -13,6 +13,11 @@ Given /^a public datatable exists$/ do
   @datatable = Factory.create(:datatable)
 end
 
+Given /^a public datatable exists named "([^"]*)"$/ do |name|
+  @datatable = Factory.create(:datatable,
+    :name     => name)
+end
+
 Given /^all caches are cleared$/ do
   @controller.expire_fragment(%r{.*})
 end

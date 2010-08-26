@@ -12,6 +12,12 @@ Given /^"([^"]*)" owns the datatable$/ do |owner|
   Factory.create(:ownership, :user => @owner, :datatable => @datatable)
 end
 
+Given /^"([^"]*)" does not own the datatable$/ do |owner|
+  @owner = User.find_by_email(owner)
+  ownership = Ownership.find_by_user_id_and_datatable_id(@owner, @datatable)
+  ownership.try(:delete)
+end
+
 Then /^"([^"]*)" should own the datatable "([^"]*)"$/ do |email, name|
   user = User.find_by_email(email)
   @datatable = Datatable.find_by_name(name)
