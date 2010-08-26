@@ -46,13 +46,13 @@ Feature: Sign in
       And I sign in with the identity_url "http://person@person.com"
     Then I should be signed in
    
-  Scenario: Openid user signs in with invalid identity_url
-    Given I am in the LTER subdomain
-    Given no user exists with an email of "email@person.com"
-    When I go to the sign in page
-    And I sign in with the identity_url "bad.url"
-    Then  I should be signed out
-    And I should see "Bad email or password"
+  # Scenario: Openid user signs in with invalid identity_url
+  #   Given I am in the LTER subdomain
+  #   Given no user exists with an email of "email@person.com"
+  #   When I go to the sign in page
+  #   And I sign in with the identity_url "bad.url"
+  #   Then  I should be signed out
+  #   And I should see "Bad email or password"
   
   #TODO  
   Scenario: Openid user signs in with an account without an email
