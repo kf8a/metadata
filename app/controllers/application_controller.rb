@@ -46,12 +46,22 @@ class ApplicationController < ActionController::Base
   end
   
   def render_subdomain(page=action_name, mycontroller=controller_name, domain=@subdomain_request)
-    if liquid_file_exists?(mycontroller, page) and liquid_template_exists?(domain, mycontroller, page)
-      render :template => "#{mycontroller}/liquid_#{page}"
-    elsif domain_specific_file_exists?(domain, mycontroller, page)
+    render_liquid(page, mycontroller, domain) or
+    render_domain_specific(page, mycontroller, domain) or
+    render :template => "#{mycontroller}/#{page}"
+  end
+
+  def render_liquid(page, mycontroller, domain)
+    if liquid_file_exists?(mycontroller, page)
+      if liquid_template_exists?(domain, mycontroller, page)
+        render :template => "#{mycontroller}/liquid_#{page}"
+      end
+    end
+  end
+
+  def render_domain_specific(page, mycontroller, domain)
+    if domain_specific_file_exists?(domain, mycontroller, page)
       render :template => "#{mycontroller}/#{domain}_#{page}"
-    else
-      render :template => "#{mycontroller}/#{page}"
     end
   end
 
@@ -64,8 +74,7 @@ class ApplicationController < ActionController::Base
   def liquid_template_exists?(domain, mycontroller, page)
     website = Website.find_by_name(domain)
     website = Website.find(:first) unless website
-    plate = nil
-    plate = website.layout(mycontroller, page) if website
+    plate = website.try(:layout, mycontroller, page)
     !plate.blank?
   end
 
