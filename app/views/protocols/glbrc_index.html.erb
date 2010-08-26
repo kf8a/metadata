@@ -5,7 +5,6 @@
   <% @protocols.each do |protocol|%>
   <li class='study-title'>
     <%=link_to protocol.title, protocol_path(protocol) %>
-    <p><%= truncate(strip_html_tags(protocol.abstract), :length => 300) if protocol.abstract%></p>
   </li>
   <% end %>
 </ul>
