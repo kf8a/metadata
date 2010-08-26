@@ -11,7 +11,8 @@ class DatatablesController < ApplicationController
   def index
     retrieve_datatables('keyword_list' =>'')
     @default_value = 'Search for core areas, keywords or people'
-        
+    
+    @sponsor = Sponsor.find_by_name('glbrc')
     respond_to do |format|
       format.html {render_subdomain}
       format.xml  { render :xml => @datatables.to_xml }
@@ -20,6 +21,8 @@ class DatatablesController < ApplicationController
   end
 
   def search
+    @sponsor = Sponsor.find_by_name('glbrc')
+    
     query =  {'keyword_list' => ''}
     query.merge!(params)
     if query['keyword_list'].empty? 
