@@ -64,6 +64,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :citations
   
+  map.resources :sponsors
+  
   #route to handle pdf downloads
   map.connect '/assets/citations/:attachment/:id/:style/:basename.:extension', :controller => 'citations', :action => 'download', :requirements => { :method => :get }
       
