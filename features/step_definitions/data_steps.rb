@@ -18,6 +18,15 @@ Given /^a public datatable exists named "([^"]*)"$/ do |name|
     :name     => name)
 end
 
+Given /^a public lter datatable exists named "([^"]*)"$/ do |title|
+  @website = Website.find_by_name("lter")
+  assert @website
+  Factory.create(:datatable,
+    :title => title,
+    :dataset => Factory.create(:dataset, :website => @website),
+    :study => Factory.create(:study))
+end
+
 Given /^all caches are cleared$/ do
   @controller.expire_fragment(%r{.*})
 end
