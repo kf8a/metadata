@@ -79,7 +79,6 @@ Feature: Download data
       And I should see "bill@person.com needs to give you permission"
       And I should see "alice@person.com has given you permission"
 
-  
   Scenario: An anonymous user looks at a protected datatable 
     Given a protected datatable exists
      When I go to the datatable page

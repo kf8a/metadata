@@ -200,10 +200,7 @@ class DatatablesController < ApplicationController
     @keyword_list = nil if @keyword_list.empty? || @keyword_list == @default_value
 
     website = Website.find_by_name(current_subdomain)
-    website_id = 1 #default
-    if website
-      website_id = website.id
-    end
+    website_id = (website.try(:id) or 1)
     if @keyword_list
       @datatables = Datatable.search @keyword_list, :with => {:website => website_id}
     else
