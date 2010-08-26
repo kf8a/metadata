@@ -4,7 +4,12 @@
   <%= textilize @datatable.description  if @datatable.description %>
   <%= @datatable.access_statement       if @datatable.access_statement %>
 
-  The <%=link_to 'standard data use policy applies to the this dataset' , sponsor_url(@datatable.dataset.sponsor)%>
+  <!-- TODO Temporary: use the default if sponsor is lter. -->
+  <% if @datatable.dataset.sponsor.name == 'lter' %>
+    The <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use policy applies to the this dataset</a>
+  <% else %>
+    The <%=link_to 'standard data use policy applies to the this dataset' , sponsor_url(@datatable.dataset.sponsor)%>
+  <% end %>
 
   <div>
     <h2>Context:</h2>
