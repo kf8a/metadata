@@ -18,7 +18,7 @@ Given /^a public datatable exists named "([^"]*)"$/ do |name|
     :name     => name)
 end
 
-Given /^a public lter datatable exists named "([^"]*)"$/ do |title|
+Given /^a public lter datatable exists titled "([^"]*)"$/ do |title|
   @website = Website.find_by_name("lter")
   assert @website
   Factory.create(:datatable,

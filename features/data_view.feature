@@ -11,9 +11,9 @@ Feature: Data View
     Given I am signed in as a normal user
       And I am in the lter subdomain
       And all caches are cleared
-      And a public lter datatable exists named "First one"
-      And a public lter datatable exists named "Second one"
-      And a public lter datatable exists named "Third one"
+      And a public lter datatable exists titled "First one"
+      And a public lter datatable exists titled "Second one"
+      And a public lter datatable exists titled "Third one"
     When I go to the datatables page
     Then I should see "First one"
       And I should see "Second one"
