@@ -23,3 +23,6 @@ Feature: Data View
     Given a public lter datatable exists with cool data
     When I go to the datatable page
     Then I should see "sample date"
+      And I should see "Distance"
+      And I should see "How far away it is"
+      And I should see "miles"

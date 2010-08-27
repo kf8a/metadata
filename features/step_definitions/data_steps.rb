@@ -31,6 +31,11 @@ Given /^a public lter datatable exists with cool data$/ do
   @datatable = Factory.create(:datatable,
     :dataset => Factory.create(:dataset, :website => @website),
     :study => Factory.create(:study))
+  Factory.create(:variate,
+    :datatable => @datatable,
+    :name => "Distance",
+    :description => "How far away it is",
+    :unit => Factory.create(:unit, :name => "Miles"))
 end
 
 Given /^all caches are cleared$/ do
