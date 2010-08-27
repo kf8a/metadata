@@ -51,16 +51,12 @@
       <td> <%= "#{@dataset.dataset}"%></td>
     </tr>
 
-    <% related_tables = @datatable.dataset.datatables.collect  do |d|
-      next if d == @datatable
-      link_to d.title , datatable_path(d) 
-    end -%>
-    <% if related_tables.any? %>
+    <% if @datatable.related_tables.any? %>
       <tr>
         <td>Related Tables:</td>
         <td><ul>
-          <% related_tables.each do |table| %>
-            <li><%= table %></li>
+          <% @datatable.related_tables.each do |table| %>
+            <li><%=  link_to table.title , datatable_path(table) %></li>
           <% end %>
         </ul></td>
       </tr>

@@ -20,9 +20,15 @@ end
 
 Given /^a public lter datatable exists titled "([^"]*)"$/ do |title|
   @website = Website.find_by_name("lter")
-  assert @website
-  Factory.create(:datatable,
+  @datatable = Factory.create(:datatable,
     :title => title,
+    :dataset => Factory.create(:dataset, :website => @website),
+    :study => Factory.create(:study))
+end
+
+Given /^a public lter datatable exists with cool data$/ do
+  @website = Website.find_by_name("lter")
+  @datatable = Factory.create(:datatable,
     :dataset => Factory.create(:dataset, :website => @website),
     :study => Factory.create(:study))
 end

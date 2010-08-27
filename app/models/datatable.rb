@@ -213,7 +213,11 @@ class Datatable < ActiveRecord::Base
     ActiveRecord::Base.connection.execute(query)
     #TDOD convert the array into a ruby object
   end
-    
+
+  def related_tables
+    self.dataset.datatables - [self]
+  end
+  
 private
 
   def query_datatable_for_temporal_extent(query)

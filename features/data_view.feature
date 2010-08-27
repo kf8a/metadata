@@ -6,15 +6,20 @@ Feature: Data View
   Background:
     Given a website exists named "lter"
       And a website exists named "glbrc"
-      
-  Scenario: Normal user sees which datatables are available
-    Given I am signed in as a normal user
+      And I am signed in as a normal user
       And I am in the lter subdomain
       And all caches are cleared
-      And a public lter datatable exists titled "First one"
+      
+  Scenario: Seeing which datatables are available
+    Given a public lter datatable exists titled "First one"
       And a public lter datatable exists titled "Second one"
       And a public lter datatable exists titled "Third one"
     When I go to the datatables page
     Then I should see "First one"
       And I should see "Second one"
       And I should see "Third one"
+
+  Scenario: Viewing a public datatable
+    Given a public lter datatable exists with cool data
+    When I go to the datatable page
+    Then I should see "sample date"
