@@ -8,11 +8,11 @@ class CreateEvents < ActiveRecord::Migration
       t.text :description
       t.timestamps
     end
-    #add_column :datatables, :event_query, :text
+    add_column :datatables, :event_query, :text
   end
 
   def self.down
-    #remove_column :datatables, :event_query
+    remove_column :datatables, :event_query
     drop_table :events
   end
 end
