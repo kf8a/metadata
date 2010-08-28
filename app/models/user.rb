@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   before_save :downcase_email
 
-  def allowed?(datatable)
+  def can_download?(datatable)
     role == 'admin' or owns?(datatable) or permitted?(datatable)
   end
   

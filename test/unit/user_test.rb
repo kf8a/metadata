@@ -39,13 +39,13 @@ class UserTest < ActiveSupport::TestCase
         end
         
         should "be allowed to download datatable" do
-          assert @admin.allowed?(@datatable)
+          assert @admin.can_download?(@datatable)
         end
       end
       
       context "the owner" do
         should "be allowed to download datatable" do
-          assert @owner.allowed?(@datatable)
+          assert @owner.can_download?(@datatable)
         end
       end
       
@@ -56,7 +56,7 @@ class UserTest < ActiveSupport::TestCase
         end
         
         should "be allowed to download datatable" do
-          assert @user.allowed?(@datatable)
+          assert @user.can_download?(@datatable)
         end
       end
       
@@ -66,7 +66,7 @@ class UserTest < ActiveSupport::TestCase
         end
         
         should "not be allowed to download datatable" do
-          assert ! @user.allowed?(@datatable)
+          assert ! @user.can_download?(@datatable)
         end
       end
     

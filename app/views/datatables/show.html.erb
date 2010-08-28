@@ -151,7 +151,7 @@
             <%= link_to 'Sign up',
                         sign_up_path %> if you have not done so already.
           <% else %>
-            <% if current_user.allowed?(@datatable) %>
+            <% if current_user.can_download?(@datatable) %>
               <%= link_to 'Download complete data table', 
                           datatable_path(@datatable,
                           :format => :csv) ,
