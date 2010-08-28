@@ -1,8 +1,9 @@
 
   <h1><%= @datatable.title_and_years %></h1>
 
-  <%= textilize @datatable.description  if @datatable.description %>
-  <%= @datatable.access_statement       if @datatable.access_statement %>
+  <%= textilize @datatable.description if @datatable.description %>
+  <%= @datatable.try(:summary_graph) %>
+  <%= @datatable.try(:access_statement) %>
 
   <!-- TODO Temporary: use the default if sponsor is lter. -->
   <% if @datatable.dataset.sponsor.try(:name) == 'lter' %>
@@ -17,7 +18,6 @@
       <%= textilize @datatable.dataset.abstract if @datatable.dataset.abstract%>
     </div>
   </div>
-
 
   <table class='data-description'>
     <% if @datatable.study %>

@@ -32,6 +32,22 @@ class DatatableTest < ActiveSupport::TestCase
       assert @datatable.respond_to?('update_temporal_extent')
     end
     
+    should 'respond to events' do
+      assert @datatable.respond_to?('events')
+    end
+    
+    should 'return events as a list of event objects' do
+      assert_kind_of Array, @datatable.events
+    end
+  end
+  
+  context 'a datatable with an event query' do
+    setup do
+      @datatable = Factory :datatable
+    end
+    
+    should 'return a an array of events'
+    
   end
   
   context 'datatable without owners and permissions' do

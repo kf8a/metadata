@@ -1,3 +1,4 @@
+	if (jQuery('#keyworder').length > 0) {
 jQuery(function() {
 	jQuery.ajax({
 		url: "/datatables/suggest",
@@ -14,9 +15,11 @@ jQuery(function() {
 });
 			
 jQuery(function() {
-	if (jQuery('#keyworder')[0].value == 'Search for core areas, keywords or people') {	
-		jQuery('#keyworder').addClass("default");
-	};
+
+		if (jQuery('#keyworder')[0].value == 'Search for core areas, keywords or people') {	
+			jQuery('#keyworder').addClass("default");
+		};
+
 });
 
 	
@@ -30,3 +33,4 @@ jQuery('#keyworder').blur(function() {
 			this.value='Search for core areas, keywords or people';
 			jQuery(this).addClass('default');			
 	} });
+	};

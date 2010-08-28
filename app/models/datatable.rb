@@ -94,6 +94,18 @@ class Datatable < ActiveRecord::Base
     !(extent[:begin_date] < start_date || extent[:end_date] > end_date) 
   end
   
+  def events
+    values  = ActiveRecord::Base.connection.execute(event_query)
+    
+    events = values.collect do |value|
+      {'start' => Date.parse(value['date']).rfc2822,
+        'title' => value['title'],
+        'description' => value['description'],
+       'durationEvent' => false }
+    end
+    {'dateTimeFormat'=> 'Gregorian', 'events'=> events}.to_json
+  end
+  
   #TODO create a completed flag and use the actual end year if present
   def title_and_years
     return title if (self.begin_date.nil? or self.end_date.nil?)

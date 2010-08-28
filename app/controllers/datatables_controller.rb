@@ -34,6 +34,11 @@ class DatatablesController < ApplicationController
       end
     end
   end
+  
+  def events
+    datatable = Datatable.find(params[:id])
+    render :json => datatable.events
+  end
 
   # GET /datatables/1
   # GET /datatables/1.xml

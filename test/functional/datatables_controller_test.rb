@@ -26,7 +26,7 @@ class DatatablesControllerTest < ActionController::TestCase
         assert @controller.fragment_exist?(:controller => "datatables", :action => "index", :action_suffix => "lter")
       end
     end
-
+    
     context "GET :index / 'glbrc' subdomain" do
       setup do
         get :index, :requested_subdomain => 'glbrc'
@@ -38,6 +38,13 @@ class DatatablesControllerTest < ActionController::TestCase
       end
     end
     
+    context 'GET :events' do
+      setup do
+        get :events, :format => :json
+      end
+      
+      should respond_with :success
+    end
     
     context 'GET :search' do
       setup do
