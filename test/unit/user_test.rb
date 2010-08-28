@@ -24,56 +24,7 @@ class UserTest < ActiveSupport::TestCase
       assert @user.respond_to?('has_permission_from?')
     end
   end
-  
-  context "allowed(datatable) function" do
-    context "with a protected and owned datatable" do
-      setup do
-        @datatable = Factory.create(:protected_datatable)
-        @owner = Factory.create(:email_confirmed_user)
-        Factory.create(:ownership, :user => @owner, :datatable => @datatable)
-      end
-      
-      context "an admin user" do
-        setup do
-          @admin = Factory.create(:admin_user)
-        end
-        
-        should "be allowed to download datatable" do
-          assert @admin.can_download?(@datatable)
-        end
-      end
-      
-      context "the owner" do
-        should "be allowed to download datatable" do
-          assert @owner.can_download?(@datatable)
-        end
-      end
-      
-      context "someone with permission" do
-        setup do
-          @user = Factory.create(:email_confirmed_user)
-          Factory.create(:permission, :user => @user, :datatable => @datatable, :owner => @owner)
-        end
-        
-        should "be allowed to download datatable" do
-          assert @user.can_download?(@datatable)
-        end
-      end
-      
-      context "someone without permission" do
-        setup do
-          @user = Factory.create(:email_confirmed_user)
-        end
-        
-        should "not be allowed to download datatable" do
-          assert ! @user.can_download?(@datatable)
-        end
-      end
-    
-    end
-    
-  end
-  
+
   context "the owns(datatable) function" do
     context "with a protected datatable" do
       setup do

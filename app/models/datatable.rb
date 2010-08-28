@@ -84,7 +84,14 @@ class Datatable < ActiveRecord::Base
   
   #TODO need to decide wether the permissions stuff is a function of the user or the datatable
   def can_be_downloaded_by?(user)
-    !restricted? or permitted?(user) or user.try(:role) == 'admin'
+    !self.restricted? or
+      user.try(:role) == 'admin' or
+      self.is_owned_by?(user) or
+      self.permitted?(user)
+  end
+
+  def is_owned_by?(user)
+    user.try(:owns?, self)
   end
   
   def within_interval?(start_date=Date.today, end_date=Date.today)

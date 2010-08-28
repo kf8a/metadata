@@ -58,10 +58,10 @@ class DatatablesController < ApplicationController
     respond_to do |format|
       format.html   { render_subdomain }
       format.xml    { render :xml => @datatable.to_xml}
-      if @datatable.restricted? and !current_user.try(:can_download?, @datatable)
-        format.csv  { redirect_to datatable_url(@datatable) }
-      else
+      if @datatable.can_be_downloaded_by?(current_user) and not restricted
         format.csv  { render :text => @datatable.to_csv_with_metadata }
+      else
+        format.csv  { redirect_to datatable_url(@datatable) }
       end
       format.climdb { render :text => @datatable.to_climdb } unless restricted
       format.climdb { redirect_to datatable_url(@datatable) } if restricted
