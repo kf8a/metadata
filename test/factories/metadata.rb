@@ -106,3 +106,6 @@ end
 Factory.define :author do |author|
   author.seniority  1
 end
+
+Factory.define :collection do |c|
+end

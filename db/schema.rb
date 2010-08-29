@@ -69,6 +69,11 @@ ActiveRecord::Schema.define(:version => 20100827221259) do
     t.datetime "pdf_updated_at"
   end
 
+  create_table "collections", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "columns", :force => true do |t|
     t.integer "datatable_id"
     t.integer "variate_id"
