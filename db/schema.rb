@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20100827221259) do
   create_table "collections", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "datatable_id"
   end
 
   create_table "columns", :force => true do |t|
