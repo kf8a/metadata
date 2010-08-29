@@ -4,7 +4,7 @@
 <%= @datatable.access_statement       if @datatable.access_statement %>
 
 <!-- TODO Temporary: use the default if sponsor is lter. -->
-<% if @datatable.dataset.sponsor.try(:name) == 'lter' %>
+<% if @dataset.sponsor.try(:name) == 'lter' %>
   The <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use policy applies to the this dataset</a>
 <% else %>
   The <%=link_to 'standard data use policy applies to the this dataset' , sponsor_url(@dataset.sponsor)%>
@@ -127,15 +127,12 @@
       <%= link_to 'Data', @datatable.data_url %> (on a different page)
     </p>
   <% end %>
-<% end %>
-
-<% unless  @datatable.is_sql %>
   <p>Data Embargoed</p>
 <% else %>
   <% if @values -%>
     <p>
-      <!-- 
-    	TODO: geographic coverage 
+      <!--
+    	TODO: geographic coverage
     	-->
       <% unless @datatable.metadata_only? %>
         <% if @datatable.can_be_downloaded_by?(current_user) %>
@@ -162,7 +159,7 @@
         <% end %>
       <% end %>
     </p>
-    
+
     <div>
       <h2>Data Excerpt</h2>
       <div>
@@ -188,7 +185,7 @@
       </div>
     </div>
   <% end %>
-<% end -%>
+<% end %>
 
 <%= link_to 'Back to Data Catalog', datatables_path() %>&nbsp;&nbsp;
 <%= link_to 'Edit', edit_datatable_path(@datatable) if admin? %>
