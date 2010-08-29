@@ -26,16 +26,20 @@ Given /^a public lter datatable exists titled "([^"]*)"$/ do |title|
     :study => Factory.create(:study))
 end
 
-Given /^a public lter datatable exists with cool data$/ do
+Given /^a public lter datatable exists with book data$/ do
   @website = Website.find_by_name("lter")
   @datatable = Factory.create(:datatable,
     :dataset => Factory.create(:dataset, :website => @website),
     :study => Factory.create(:study))
   Factory.create(:variate,
     :datatable => @datatable,
-    :name => "Distance",
-    :description => "How far away it is",
-    :unit => Factory.create(:unit, :name => "Miles"))
+    :name => "Title",
+    :description => "The name of the book")
+  Factory.create(:variate,
+    :datatable => @datatable,
+    :name => "Length",
+    :description => "How long the book is",
+    :unit => Factory.create(:unit, :name => "pages"))
 end
 
 Given /^all caches are cleared$/ do
