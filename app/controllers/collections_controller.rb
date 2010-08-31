@@ -6,7 +6,7 @@ class CollectionsController < ApplicationController
   
   def show
     @collection = Collection.find(params[:id])
-    @values = @collection.datatable.perform_query
+    @values = @collection.perform_query
   end
   
 end
