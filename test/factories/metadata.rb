@@ -102,4 +102,5 @@ Factory.define :citation do |cite|
 end
 
 Factory.define :collection do |c|
+  c.datatable   Factory.create(:datatable)
 end

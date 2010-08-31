@@ -18,5 +18,7 @@ class CollectionsControllerTest < ActionController::TestCase
     end
     
     should respond_with :success
+    should assign_to(:collection).with(@collection)
+    should assign_to(:values)
   end
 end

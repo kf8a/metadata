@@ -1,0 +1,79 @@
+<h1><%= @collection.datatable.title_and_years %></h1>
+
+<table class='data-description'>
+  <% unless @collection.datatable.dataset.protocols.empty? %>
+    <tr>
+      <td>Protocols</td>
+      <td>
+        <% @collection.datatable.dataset.protocols.each do |protocol| %>
+          <%= link_to protocol.name, protocol_path(protocol)%>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+
+  <% if @collection.datatable.keywords.any? %>
+    <tr>
+      <td>Keywords:</td>
+      <td><%= @datatable.keywords.join(', ')%></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td>Metadata</td>
+    <td>
+      <ul>
+        <li><%= link_to 'Complete EML', dataset_path(@dataset, :format => :eml) %></li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+<table class='variate-table'>
+  <tr>
+    <th>Variate</th>
+    <th>Description</th>
+    <th>Units</th>
+  </tr>
+  <% @collection.datatable.variates.each do |variate| -%>
+    <tr>
+      <td class='space-after'>
+        <%= variate.name.gsub(/_/,' ') %>
+      </td>
+      <td class='space-after'>
+        <%= variate.description %>
+      </td>
+      <td>
+        <%= variate.unit.human_name if variate.unit %>
+      </td>
+    </tr>
+  <% end -%>
+</table>
+
+
+
+<div>
+  <h2>Data Excerpt</h2>
+  <div>
+    <table>
+      <tr>
+        <% @values.fields.each do |field| %>
+          <th>
+            <%= field.gsub(/_/,' ') %>
+          </th>
+        <% end %>
+      </tr>
+      <% @values.each do  |row| %>
+        <tr  class="<%= cycle('even','odd') -%>">
+          <% row.keys.each do |key| %>
+            <td align='right'>
+              <%= row[key] %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+      <% @values.clear %>
+    </table>
+  </div>
+</div>
+
+<%= link_to 'Back to Collections Catalog', collections_path() %>
