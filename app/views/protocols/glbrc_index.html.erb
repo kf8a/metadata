@@ -3,7 +3,7 @@
 <h1 class='right'>Protocols</h1>
 <ul>
   <% @protocols.each do |protocol|%>
-  <li class='study-title'>
+  <li>
     <%=link_to protocol.title, protocol_path(protocol) %>
   </li>
   <% end %>
