@@ -40,7 +40,10 @@ class DatatablesControllerTest < ActionController::TestCase
     
     context 'GET :events' do
       setup do
-        get :events, :format => :json
+        @sponsor  = Factory.create :sponsor, :data_use_statement => 'smoke em if you got em'
+        dataset   = Factory.create :dataset, :sponsor => @sponsor
+        datatable = Factory.create :datatable, :dataset => dataset
+        get :events, :id => datatable, :format => :json
       end
       
       should respond_with :success

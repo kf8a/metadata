@@ -36,14 +36,14 @@ class DatatableTest < ActiveSupport::TestCase
       assert @datatable.respond_to?('events')
     end
     
-    should 'return events as a list of event objects' do
-      assert_kind_of Array, @datatable.events
+    should 'return events as a string' do
+      assert_kind_of String, @datatable.events
     end
   end
   
   context 'a datatable with an event query' do
     setup do
-      @datatable = Factory :datatable
+      @datatable = Factory :datatable, :object=>'select now()'
     end
     
     should 'return a an array of events'

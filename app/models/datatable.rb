@@ -95,7 +95,8 @@ class Datatable < ActiveRecord::Base
   end
   
   def events
-    values  = ActiveRecord::Base.connection.execute(event_query)
+    event_query_sql = event_query || ""
+    values  = ActiveRecord::Base.connection.execute(event_query_sql)
     
     events = values.collect do |value|
       {'start' => Date.parse(value['date']).rfc2822,
