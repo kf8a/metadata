@@ -1,9 +1,14 @@
+require 'simplecov-html'  
+SimpleCov.start 'rails'
+
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'test_help'
 require 'shoulda'
 require 'factory_girl' 
 require "shoulda_macros/paperclip" #copied over from the gem
+
+
 
 Dir.glob(RAILS_ROOT + "/test/factories/*.rb").each do |factory| 
   require factory 
