@@ -20,3 +20,4 @@ rcov/
 nbproject/
 config/development.sphinx.conf
 assets/
+coverage/
