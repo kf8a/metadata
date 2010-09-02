@@ -100,3 +100,6 @@ end
 
 Factory.define :citation do |cite|
 end
+
+Factory.define :author do |author|
+end
