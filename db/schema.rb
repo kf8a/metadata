@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100827221259) do
+ActiveRecord::Schema.define(:version => 20100829033625) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -67,6 +67,12 @@ ActiveRecord::Schema.define(:version => 20100827221259) do
     t.string   "pdf_content_type"
     t.integer  "pdf_file_size"
     t.datetime "pdf_updated_at"
+  end
+
+  create_table "collections", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "datatable_id"
   end
 
   create_table "columns", :force => true do |t|
