@@ -2,7 +2,7 @@ class DatatablesController < ApplicationController
   
   layout :site_layout
 
-  before_filter :admin?, :except => [:index, :show, :suggest, :search] unless ENV["RAILS_ENV"] == 'development'
+  before_filter :admin?, :except => [:index, :show, :suggest, :search, :events] unless ENV["RAILS_ENV"] == 'development'
   
   #caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
   
@@ -33,6 +33,11 @@ class DatatablesController < ApplicationController
         format.html {render_subdomain}
       end
     end
+  end
+  
+  def events
+    datatable = Datatable.find(params[:id])
+    render :json => datatable.events
   end
 
   # GET /datatables/1

@@ -6,14 +6,15 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<title>LTER: <%= controller.controller_name %>:<%= controller.action_name %></title>
 	<%= stylesheet_link_merged :base, :media=>'screen,print' %>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-
-  <script>jQuery.noConflict();</script>
-
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+ 
+  <script type='text/javascript' src='http://simile.mit.edu/timeline/api/timeline-api.js'></script>
+  <script>$.noConflict();</script> -->
   <%= javascript_include_merged :base %>
-  <%= javascript_include_tag 'keyworder'%>
-  	  
+  <script type='text/javascript' src='/javascripts/timeline-init.js'></script>
+  
+    	  
   <link rel="alternate" type="application/rss+xml" title="Data" href="/datatables.rss" />
 </head>
 <body>

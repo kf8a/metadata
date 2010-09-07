@@ -6,9 +6,6 @@
 	margin-bottom: 1em;
 }
 
-#navigation b{
-}
-
 ul.makeMenu, ul.makeMenu ul {
 	/* put rounded bottoms on the menu */
 	-moz-border-radius: 10px;
@@ -30,7 +27,7 @@ ul.makeMenu li {
 	padding: 5px;
 	text-align: center;			/* center the text */
 	font-weight: normal;
-	color: #006633;
+	color: #006633;	
 }
 ul.makeMenu li > ul {          /* using the > selector prevents many lesser browsers (and IE - see below) hiding child ULs */
   display: none;               /* hides child menu blocks - one of the most important declarations */
@@ -50,13 +47,19 @@ ul.makeMenu li > ul {          /* using the > selector prevents many lesser brow
 ul.makeMenu li:hover, ul.makeMenu li.CSStoHighlight {
   background-color: #ffa;      /* gives the active menu a yellow background */
   color: #000;                 /* makes the active menu item text black */ 
+	z-index: 2000;
+	
 }
 ul.makeMenu ul.CSStoShow {     /* must not be combined with the next rule or IE gets confused */
   display: block;              /* specially to go with the className changes in the behaviour file */
+	z-index: 2000;
+
 }
 ul.makeMenu li:hover > ul {    /* one of the most important declarations - the browser must detect hovering over arbitrary elements
                                   the > targets only the child ul, not any child uls of that child ul */
   display: block;              /* makes the child block visible - one of the most important declarations */
+	z-index: 2000;
+
 }
 /* and some link styles */
 ul.makeMenu li a { color: #063; display: block; width: 95%; text-decoration: none;

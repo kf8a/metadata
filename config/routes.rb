@@ -34,7 +34,8 @@ ActionController::Routing::Routes.draw do |map|
                                            :auto_complete_for_keyword_list => :get}
 
   map.resources :datatables, :collection => {:suggest => :get,
-                                             :search  => :get}
+                                             :search  => :get,
+                                             :events  => :get}
 
   map.resources :variates
 

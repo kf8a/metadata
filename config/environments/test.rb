@@ -19,6 +19,10 @@ config.action_controller.perform_caching             = true #this needs to be tr
 config.action_mailer.delivery_method = :test
 config.action_mailer.default_url_options = {:host => 'localhost:3000'} 
 
+if RUBY_VERSION > "1.9"
+  config.gem 'simplecov'
+  config.gem 'simplecov-html'
+end
 config.gem "shoulda", :lib => false
 config.gem "factory_girl" , :lib => false
 

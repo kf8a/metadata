@@ -1,7 +1,8 @@
 <h1><%= @datatable.title_and_years %></h1>
 
-<%= textilize @datatable.description  if @datatable.description %>
-<%= @datatable.access_statement       if @datatable.access_statement %>
+<%= textilize @datatable.description if @datatable.description %>
+<%= @datatable.try(:summary_graph) %>
+<%= @datatable.try(:access_statement) %>
 
 <!-- TODO Temporary: use the default if sponsor is lter. -->
 <% if @dataset.sponsor.try(:name) == 'lter' %>
@@ -9,6 +10,7 @@
 <% else %>
   The <%=link_to 'standard data use policy applies to the this dataset' , sponsor_url(@dataset.sponsor)%>
 <% end %>
+ 
 
 <div>
   <h2>Context:</h2>
@@ -17,9 +19,31 @@
   </div>
 </div>
 
+<<<<<<< HEAD
 
 <table class='data-description'>
   <% if @datatable.study %>
+=======
+  <table class='data-description'>
+    <% if @datatable.study %>
+      <tr>
+        <td>Experiment:</td>
+        <td>
+          <% if @datatable.study.url.nil? || @datatable.study.url.empty? %>
+            <%= @datatable.study.name %>
+          <% else %>
+            <%= link_to "#{@datatable.study.name}", @datatable.study.url %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    <% if @datatable.begin_date && @datatable.end_date %>
+      <tr>
+        <td>Temporal Coverage:</td>
+        <td><%= @datatable.begin_date %> to <%= @datatable.end_date %></td>
+      </tr>
+    <% end %>
+>>>>>>> work
     <tr>
       <td>Experiment:</td>
       <td>

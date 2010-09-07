@@ -37,10 +37,13 @@ module NavigationHelpers
       
     when /the citation page/
       citation_path(@citation)
+
+    when /the new citation page/
+      new_citation_path
     
     when /the collection page/
       collection_path(@collection)
-  
+      
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
