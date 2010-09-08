@@ -20,7 +20,7 @@
 	  <div id='glbrc'>
 	    <div id='sign-in'>
 	      <% if signed_in? %>
-	        <p><%= current_user.email %></p>
+	        <%= link_to 'Sign Out', sign_out_url %>
 	      <% else %>
 	        <%= link_to 'Sign In', sign_in_url %>  
 	      <% end %>
