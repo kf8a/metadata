@@ -28,6 +28,21 @@ end
 
 Given /^a public lter datatable exists with species data$/ do
   @website = Website.find_by_name("lter")
+  Factory.create(:species,
+    :species => "P.leo",
+    :genus => "Panthera",
+    :family => "Felidae",
+    :common_name => "Lion")
+  Factory.create(:species,
+    :species => "P.tigris",
+    :genus => "Panthera",
+    :family => "Felidae",
+    :common_name => "Tiger")
+  Factory.create(:species,
+    :species => "U. americanus",
+    :genus => "Ursus",
+    :family => "Ursidae",
+    :common_name => "American Black Bear")
   @datatable = Factory.create(:datatable,
     :object => 'select 1 as test, 2 as more',
     :dataset => Factory.create(:dataset, :website => @website),
