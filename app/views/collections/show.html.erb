@@ -55,13 +55,6 @@
   <h2>Data</h2>
   <div>
     <table>
-      <%#*<tr>%>
-        <%# @values.fields.each do |field| %>
-          <%#*<th>%>
-            <%#= field.gsub(/_/,' ') %>
-          <%#*</th>%>
-        <%# end %>
-      <%#*</tr>%>
       <% @values.each do  |row| %>
         <tr  class="<%= cycle('even','odd') -%>">
           <td>
