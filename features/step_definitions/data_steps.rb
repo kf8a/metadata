@@ -29,12 +29,12 @@ end
 Given /^a public lter datatable exists with species data$/ do
   @website = Website.find_by_name("lter")
   Factory.create(:species,
-    :species => "P.leo",
+    :species => "P. leo",
     :genus => "Panthera",
     :family => "Felidae",
     :common_name => "Lion")
   Factory.create(:species,
-    :species => "P.tigris",
+    :species => "P. tigris",
     :genus => "Panthera",
     :family => "Felidae",
     :common_name => "Tiger")
@@ -44,18 +44,25 @@ Given /^a public lter datatable exists with species data$/ do
     :family => "Ursidae",
     :common_name => "American Black Bear")
   @datatable = Factory.create(:datatable,
-    :object => 'select 1 as test, 2 as more',
+    :object => 'select * from species',
     :dataset => Factory.create(:dataset, :website => @website),
     :study => Factory.create(:study))
   Factory.create(:variate,
     :datatable => @datatable,
-    :name => "Title",
-    :description => "The name of the book")
+    :name => "Species",
+    :description => "The name of the species")
   Factory.create(:variate,
     :datatable => @datatable,
-    :name => "Length",
-    :description => "How long the book is",
-    :unit => Factory.create(:unit, :name => "pages"))
+    :name => "Genus",
+    :description => "The genus of the species")
+  Factory.create(:variate,
+    :datatable => @datatable,
+    :name => "Family",
+    :description => "The family of the genus")
+  Factory.create(:variate,
+    :datatable => @datatable,
+    :name => "Common Name",
+    :description => "What Joe Public calls the species")
 end
 
 Given /^all caches are cleared$/ do
