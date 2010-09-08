@@ -49,9 +49,12 @@
   <% end -%>
 </table>
 
-<%= button_to 'Show customization forms', {:action => 'customize', :id => @collection}, :method => :get%>
+
 <% if @customize %>
+  <%= button_to 'Hide customization forms', {:action => 'customize', :id => @collection, :custom => false} %>
   Customization form is shown now.
+<% else %>
+  <%= button_to 'Show customization forms', {:action => 'customize', :id => @collection, :custom => true}%>
 <% end %>
 
 <div>

@@ -7,12 +7,13 @@ class CollectionsController < ApplicationController
   def show
     @collection = Collection.find(params[:id])
     @values = @collection.perform_query
+    @customize = false
   end
 
   def customize
     @collection = Collection.find(params[:id])
     @values = @collection.perform_query
-    @customize = true
+    @customize = params[:custom]
     render 'show'
   end
   
