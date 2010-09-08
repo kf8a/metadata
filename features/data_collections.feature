@@ -27,14 +27,17 @@ Feature: Data Collections
       And the datatable has a collection
     When I go to the collection page
     Then show me the page
-    Then I should see "Title: Language, Truth, and Logic"
-      And I should see "Author: Ayer, Alfred Jules"
-      And I should see "LOC Call Number: B53 .A9 1952"
-      And I should see "LOC Control Number: 52000860"
-      And I should see "Completed Reading?: False"
+    Then I should see "Species: P. leo"
+      And I should see "Genus: Panthera"
+      And I should see "Family: Felidae"
+      And I should see "Common Name: Lion"
 
-      And I should see "Title: The economist's view of the world"
-      And I should see "Author: Rhoads, Steven E."
-      And I should see "LOC Call Number: HB171 .R43 1985"
-      And I should see "LOC Control Number: 84014997"
-      And I should see "Completed Reading?: True"
+      And I should see "Species: P. tigris"
+      And I should see "Genus: Panthera"
+      And I should see "Family: Felidae"
+      And I should see "Common Name: Tiger"
+
+      And I should see "Species: U. americanus"
+      And I should see "Genus: Ursus"
+      And I should see "Family: Ursidae"
+      And I should see "Common Name: American Black Bear"

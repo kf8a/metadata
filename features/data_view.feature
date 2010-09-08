@@ -22,8 +22,7 @@ Feature: Data View
   Scenario: Viewing a public datatable
     Given a public lter datatable exists with species data
     When I go to the datatable page
-    Then I should see "Title"
-      And I should see "The name of the book"
-      And I should see "Length"
-      And I should see "How long the book is"
-      And I should see "pages"
+    Then I should see "Species"
+      And I should see "The name of the species"
+      And I should see "Genus"
+      And I should see "The genus of the species"
