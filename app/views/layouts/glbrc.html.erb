@@ -18,7 +18,13 @@
 <body>
 	<div id='wrapper'>
 	  <div id='glbrc'>
-	    <div id='sign-in'><%= link_to 'Sign In', sign_in_url %></div>
+	    <div id='sign-in'>
+	      <% if signed_in? %>
+	        <p><%= current_user.email %></p>
+	      <% else %>
+	        <%= link_to 'Sign In', sign_in_url %>  
+	      <% end %>
+	    </div>
 		<div id='branding'>
 			<a id='glbrc-logo' href="http://glbrc.org">
 				<img alt="Great Lakes Bioenergy Consortium" src="/images/common/glbrc_small.jpg"/>
