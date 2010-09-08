@@ -40,3 +40,16 @@ Feature: Data Collections
       And I should see "Genus: Ursus"
       And I should see "Family: Ursidae"
       And I should see "Common Name: American Black Bear"
+
+  Scenario: Searching a public datatable's colleciton
+    Given a public lter datatable exists with species data
+      And the datatable has a collection
+    When I go to the collection page
+      And I press "Show customization forms"
+      And I select "Family" from "limitby"
+      And I press "Limit display by field"
+      And I fill in "containing" with "Felidae"
+      And I press "Where 'Family' contains:"
+    Then I should see "Species: P. leo"
+      And I should see "Species: P. tigris"
+      And I should not see "Species: U. americanus"
