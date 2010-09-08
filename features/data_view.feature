@@ -20,12 +20,10 @@ Feature: Data View
       And I should see "Third one"
 
   Scenario: Viewing a public datatable
-    Given a public lter datatable exists with book data
+    Given a public lter datatable exists with species data
     When I go to the datatable page
-    Then I should see "sample date"
-      And I should see "Title"
+    Then I should see "Title"
       And I should see "The name of the book"
-
       And I should see "Length"
       And I should see "How long the book is"
       And I should see "pages"

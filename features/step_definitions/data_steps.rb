@@ -26,9 +26,10 @@ Given /^a public lter datatable exists titled "([^"]*)"$/ do |title|
     :study => Factory.create(:study))
 end
 
-Given /^a public lter datatable exists with book data$/ do
+Given /^a public lter datatable exists with species data$/ do
   @website = Website.find_by_name("lter")
   @datatable = Factory.create(:datatable,
+    :object => 'select 1 as test, 2 as more',
     :dataset => Factory.create(:dataset, :website => @website),
     :study => Factory.create(:study))
   Factory.create(:variate,

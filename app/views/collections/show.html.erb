@@ -55,20 +55,25 @@
   <h2>Data</h2>
   <div>
     <table>
-      <tr>
-        <% @values.fields.each do |field| %>
-          <th>
-            <%= field.gsub(/_/,' ') %>
-          </th>
-        <% end %>
-      </tr>
+      <%#*<tr>%>
+        <%# @values.fields.each do |field| %>
+          <%#*<th>%>
+            <%#= field.gsub(/_/,' ') %>
+          <%#*</th>%>
+        <%# end %>
+      <%#*</tr>%>
       <% @values.each do  |row| %>
         <tr  class="<%= cycle('even','odd') -%>">
-          <% row.keys.each do |key| %>
-            <td align='right'>
-              <%= row[key] %>
-            </td>
-          <% end %>
+          <td>
+            <% row.keys.each do |key| %>
+              <%= key + ":" + row[key] %><br />
+            <% end %>
+          </td>
+          <td>
+            <% if row['image'] %>
+              <img src="<%= row['image'] %>" alt="A picture"/>
+            <% end %>
+          </td>
         </tr>
       <% end %>
       <% @values.clear %>
