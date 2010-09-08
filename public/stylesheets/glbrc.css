@@ -93,10 +93,6 @@
   padding-top: 0.5em;
 }
 #glbrc #branding #glbrc-logo { float: right; }
-#glbrc #branding #glbrc-logo a {
-  padding: 0;
-  margin: 0;
-}
 #glbrc .hidden {
   visibility: hidden;
   height: 0px;
@@ -282,6 +278,48 @@
   margin-left: 10px;
 }
 #glbrc #keyword-search { display: inline; }
+#glbrc #point-to-sign-in {
+  background-color: #ededed;
+  border: 2px solid #666666;
+  z-index: 100;
+  opacity: 0.6;
+  font-size: 15px;
+  line-height: 1.3em;
+  margin: 10px auto;
+  padding: 10px;
+  position: absolute;
+  top: 30px;
+  left: 600px;
+  text-align: center;
+  width: 200px;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-box-shadow: 0 0 5px #888888;
+  -webkit-box-shadow: 0 0 5px #888888;
+}
+#glbrc #sign-in-arrow-border {
+  border-color: transparent transparent #666666 transparent;
+  border-style: solid;
+  border-width: 10px;
+  height: 0;
+  width: 0;
+  position: absolute;
+  top: -20px;
+  bottom: 0px;
+  left: 60px;
+}
+#glbrc #sign-in-arrow {
+  border-color: transparent transparent #ededed transparent;
+  border-style: solid;
+  border-width: 10px;
+  height: 0;
+  width: 0;
+  position: absolute;
+  top: -17px;
+  bottom: 0px;
+  left: 60px;
+}
 #glbrc .space-after { padding-right: 2em; }
 #glbrc .quickTree { border-top-style: solid; }
 #glbrc tree * {
