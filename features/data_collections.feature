@@ -47,8 +47,8 @@ Feature: Data Collections
     When I go to the collection page
       And I press "Show customization forms"
       And I select "Family" from "limitby"
-      And I press "Limit display by field"
-      And I fill in "containing" with "Felidae"
+      And I press "Customize"
+      And I fill in "contains" with "Felidae"
       And I press "Where 'Family' contains:"
     Then I should see "Species: P. leo"
       And I should see "Species: P. tigris"

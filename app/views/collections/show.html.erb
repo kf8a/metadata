@@ -52,7 +52,16 @@
 
 <% if @customize %>
   <%= button_to 'Hide customization forms', {:action => 'customize', :id => @collection, :custom => false} %>
-  Customization form is shown now.
+  <% form_tag :action => 'customize', :id => @collection do %>
+    <%= hidden_field_tag 'custom', true %>
+    <table>
+      <tr>
+        <td><%= label_tag 'limitby', 'Limit display by field: '%></td>
+        <td><%= select_tag 'limitby', options_for_select(@values.fields.collect {|v| v.titleize}) %></td>
+      </tr>
+    </table>
+    <%= submit_tag 'Customize' %>
+  <% end %>
 <% else %>
   <%= button_to 'Show customization forms', {:action => 'customize', :id => @collection, :custom => true}%>
 <% end %>
