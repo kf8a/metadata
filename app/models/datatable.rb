@@ -111,7 +111,11 @@ class Datatable < ActiveRecord::Base
         'description' => value['description'],
        'durationEvent' => false }
     end
-    {'dateTimeFormat'=> 'Gregorian', 'events'=> events}.to_json
+    
+    event_summary = events.inject do |event|
+      
+    end
+    {'dateTimeFormat'=> 'Gregorian', 'events'=> event_summary}.to_json
   end
   
   #TODO create a completed flag and use the actual end year if present
@@ -180,22 +184,12 @@ class Datatable < ActiveRecord::Base
   end
   
   def data_source
-    "#\n# Data Source: http://lter.kbs.msu.edu/datatables/#{self.id}
-# Metadata: http://lter.kbs.msu.edu/datatables/#{self.id}.eml\n#\n#"
+    "\n# Data Source: http://#{dataset.sponsor.name}.kbs.msu.edu/datatables/#{self.id}
+# Metadata: http://#{dataset.sponsor.name}.kbs.msu.edu/datatables/#{self.id}.eml\n#\n#"
   end
   
   def data_access_statement
-    "# Terms of Use
-#   Data in the KBS LTER core database may not be published without written permission of the lead investigator
-#   or project director. These restrictions are intended mainly to preserve the primary investigators' rights
-#   to first publication and to ensure that data users are aware of the limitations that may be associated with
-#   any specific data set. These restrictions apply to both the baseline data set and to the data sets associated
-#   with specific LTER-supported subprojects.\n#
-#   All investigators on-site are expected to release their data to the core database within
-#   a reasonable period of time following subproject completion.\n#
-#   Access to data is provided by the KBS LTER Data Manager with oversight provided by the Executive Committee,
-#   chaired by the Project Director. Access to sample archives is provided by the Project Director.
-#   All publications of KBS data and images must acknowledge KBS LTER support.\n"
+    dataset.sponsor.try(:data_use_statement).gsub(/.{1,60}(?:\s|\Z)/){($& + 5.chr).gsub(/\n\005/,"\n").gsub(/\005/,"\n")}.split(/\n/).collect {|line| "# #{line}\n"}.join
   end
   
   def temporal_extent
