@@ -34,7 +34,7 @@ class DatatablesControllerTest < ActionController::TestCase
 
       should render_template 'glbrc_index'
       should "create index cache" do
-        assert @controller.fragment_exist?(:controller => "datatables", :action => "index", :action_suffix => "glbrc")    
+        assert @controller.fragment_exist?(:controller => "datatables", :action => "index", :action_suffix => "glbrc")
       end
     end
     

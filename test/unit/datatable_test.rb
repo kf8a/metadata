@@ -89,27 +89,27 @@ class DatatableTest < ActiveSupport::TestCase
     end
     
     should 'tell if it needs to be restricted at all' do
-       assert !@unrestricted.restricted?
-       assert  @restricted.restricted?
-     end
+      assert !@unrestricted.restricted?
+      assert  @restricted.restricted?
+    end
      
-     should 'allow restrict datatables to be permitted' do
-       assert !@restricted.permitted?(@anonymous_user)
-       assert !@restricted.permitted?(@unauthorized_user)
-       assert !@restricted.permitted?(@admin)
-     end
+    should 'allow restrict datatables to be permitted' do
+      assert !@restricted.permitted?(@anonymous_user)
+      assert !@restricted.permitted?(@unauthorized_user)
+      assert !@restricted.permitted?(@admin)
+    end
 
-     should 'allow anyone to download unrestricted datatables' do
-       assert @unrestricted.can_be_downloaded_by?(@anonymous_user)
-       assert @unrestricted.can_be_downloaded_by?(@unauthorized_user)
-       assert @unrestricted.can_be_downloaded_by?(@admin)
-     end
+    should 'allow anyone to download unrestricted datatables' do
+      assert @unrestricted.can_be_downloaded_by?(@anonymous_user)
+      assert @unrestricted.can_be_downloaded_by?(@unauthorized_user)
+      assert @unrestricted.can_be_downloaded_by?(@admin)
+    end
 
-     should 'only allow authorized users to download restricted datatables' do
-       assert !@restricted.can_be_downloaded_by?(@anonymous_user)
-       assert !@restricted.can_be_downloaded_by?(@unauthorized_user)
-       assert  @restricted.can_be_downloaded_by?(@admin)
-     end
+    should 'only allow authorized users to download restricted datatables' do
+      assert !@restricted.can_be_downloaded_by?(@anonymous_user)
+      assert !@restricted.can_be_downloaded_by?(@unauthorized_user)
+      assert  @restricted.can_be_downloaded_by?(@admin)
+    end
    
   end
   
