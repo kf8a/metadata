@@ -49,7 +49,10 @@
   <% end -%>
 </table>
 
-
+<%= button_to 'Show customization forms', {:action => 'customize', :id => @collection}, :method => :get%>
+<% if @customize %>
+  Customization form is shown now.
+<% end %>
 
 <div>
   <h2>Data</h2>
