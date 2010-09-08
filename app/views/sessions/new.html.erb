@@ -6,12 +6,14 @@
 
 <% semantic_form_for :session, :url => session_path do |form| %>
   <% form.inputs do %>
-    <%= form.input :openid_url, :required => false,  :wrapper_html => { :class => "openid" } %>
-    <li class='big'>
-    or
-    </li>
+
     <%= form.input :email , :required => false, :input_html => { :size => 25 } %>
     <%= form.input :password, :as => :password, :input_html => { :size => 25 }, :required => false %>
+     <li class='big'>
+      or
+      </li>
+    <%= form.input :openid_url, :required => false,  :wrapper_html => { :class => "openid" } %>
+   
   <% end %>
   <% form.buttons do %>
     <%= form.commit_button "Sign in" %>
