@@ -26,7 +26,6 @@ Feature: Data Collections
     Given a public lter datatable exists with species data
       And the datatable has a collection
     When I go to the collection page
-    Then show me the page
     Then I should see "Species: P. leo"
       And I should see "Genus: Panthera"
       And I should see "Family: Felidae"
