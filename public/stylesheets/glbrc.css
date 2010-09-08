@@ -13,6 +13,41 @@
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
 }
+.bottom-rounded-corners {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  -moz-border-bottom-left-radius: 10px;
+  -moz-border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+}
+#glbrc #sign-in {
+  position: fixed;
+  top: 0px;
+  left: 650px;
+  background-color: #009bda;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  -moz-border-bottom-left-radius: 10px;
+  -moz-border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+  padding: 0 0px 4px;
+}
+#glbrc #sign-in a {
+  color: white;
+  padding: 0 20px 4px;
+}
+#glbrc #sign-in a:hover {
+  color: blue;
+  background-color: #f7941e;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  -moz-border-bottom-left-radius: 10px;
+  -moz-border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+}
 #glbrc #navigation {
   width: 100%;
   position: absolute;
@@ -58,6 +93,10 @@
   padding-top: 0.5em;
 }
 #glbrc #branding #glbrc-logo { float: right; }
+#glbrc #branding #glbrc-logo a {
+  padding: 0;
+  margin: 0;
+}
 #glbrc .hidden {
   visibility: hidden;
   height: 0px;
