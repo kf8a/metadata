@@ -23,11 +23,11 @@ Feature: Data Collections
       And I should see "Third one"
 
   Scenario: Viewing a public datatable's collection
-    Given a public lter datatable exists with book data
+    Given a public lter datatable exists with species data
       And the datatable has a collection
     When I go to the collection page
-    Then I should see "sample date"
-      And I should see "Title: Language, Truth, and Logic"
+    Then show me the page
+    Then I should see "Title: Language, Truth, and Logic"
       And I should see "Author: Ayer, Alfred Jules"
       And I should see "LOC Call Number: B53 .A9 1952"
       And I should see "LOC Control Number: 52000860"
