@@ -13,7 +13,12 @@ class CollectionsController < ApplicationController
   def customize
     @collection = Collection.find(params[:id])
     @limitby = params[:limitby]
+    @contains = params[:contains]
     @values = @collection.perform_query
+    @limitoptions = []
+    @values.fields.each do |field|
+      @limitoptions << [field.titleize, field]
+    end
     @customize = params[:custom]
     render 'show'
   end
