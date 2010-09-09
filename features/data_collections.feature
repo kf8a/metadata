@@ -67,3 +67,16 @@ Feature: Data Collections
     Then I should see "Common Name: American Black Bear"
       And I should see "Common Name: Lion"
       And I should not see "Common Name: Tiger"
+
+   Scenario: Sorting a public datatable's collection
+    Given a public lter datatable exists with species data
+      And the datatable has a collection
+    When I go to the collection page
+      And I press "Show customization forms"
+      And I select "Common Name" from "sortby"
+      And I select "Descending" from "sort_direction"
+      And I press "Customize"
+    Then I should see "Common Name: Tiger Family: Felidae Genus: Panthera Species: P. tigris Common Name: Lion Family: Felidae Genus: Panthera Species: P. leo Common Name: American Black Bear Family: Ursidae Genus: Ursus Species: U. americanus"
+    When I select "Ascending" from "sort_direction"
+      And I press "Customize"
+    Then I should see "Common Name: American Black Bear Family: Ursidae Genus: Ursus Species: U. americanus Common Name: Lion Family: Felidae Genus: Panthera Species: P. leo Common Name: Tiger Family: Felidae Genus: Panthera Species: P. tigris"
