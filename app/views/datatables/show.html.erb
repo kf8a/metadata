@@ -141,10 +141,15 @@
                       datatable_path(@datatable,
                         :format => :csv) ,
                         :class => 'download-link'%>
+          <%= link_to 'View as a Collection', 
+                      collection_path(@datatable.collection),
+                      :class => 'download-link' if @datatable.collection %>
           <%= link_to 'Permissions Management',
-                      permission_path(@datatable) if current_user.try(:owns?, @datatable) %>
+                      permission_path(@datatable),
+                      :class => 'download-link' if current_user.try(:owns?, @datatable)%>
           <%= link_to 'Owners Management',
-                      ownership_path(@datatable) if current_user.try(:role) == 'admin' %>
+                      ownership_path(@datatable),
+                      :class => 'download-link' if current_user.try(:role) == 'admin' %>
         <% else %>
           <% if signed_in? %>
             <%= mail_to permission_request_email_list(@datatable),
