@@ -49,7 +49,7 @@ Feature: Data Collections
       And I select "Family" from "limitby"
       And I press "Customize"
       And I fill in "contains" with "Felidae"
-      And I press "Where 'Family' contains:"
+      And I press "Customize"
     Then I should see "Species: P. leo"
       And I should see "Species: P. tigris"
       And I should not see "Species: U. americanus"
