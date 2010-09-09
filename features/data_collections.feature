@@ -41,7 +41,7 @@ Feature: Data Collections
       And I should see "Family: Ursidae"
       And I should see "Common Name: American Black Bear"
 
-  Scenario: Searching a public datatable's colleciton
+  Scenario: Searching a public datatable's collection
     Given a public lter datatable exists with species data
       And the datatable has a collection
     When I go to the collection page
@@ -53,3 +53,16 @@ Feature: Data Collections
     Then I should see "Species: P. leo"
       And I should see "Species: P. tigris"
       And I should not see "Species: U. americanus"
+
+  Scenario: Searching a public datatable's collection using parameters
+    Given a public lter datatable exists with species data
+      And the datatable has a collection
+    When I go to the collection page
+      And I press "Show customization forms"
+      And I select "Common Name" from "limitby"
+      And I press "Customize"
+      And I select "American Black Bear" from "limit1"
+      And I select "Lion" from "limit2"
+    Then I should see "Common Name: American Black Bear"
+      And I should see "Common Name: Lion"
+      And I should not see "Common Name: Tiger"
