@@ -61,6 +61,13 @@
                 options_for_select(@limitoptions, @limitby) %></td>
       </tr>
       <% if @limitby %>
+        <%= hidden_field_tag 'oldlimitby', @limitby  %>
+        <tr>
+          <td><%= label_tag 'limit1', "Where '#{@limitby.titleize}' ranges from: " %></td>
+          <td><%= select_tag 'limit1', options_for_select(@limitrange, @limit1)%></td>
+          <td><%= label_tag 'limit2', " to: " %></td>
+          <td><%= select_tag 'limit2', options_for_select(@limitrange, @limit2)%></td>
+        </tr>
         <tr>
           <td><%= label_tag 'conatins', "Where '#{@limitby.titleize}' contains: "%> </td>
           <td><%= text_field_tag 'contains'%> </td>
@@ -79,6 +86,8 @@
     <table>
       <% @values.each do  |row| %>
         <% next unless @limitby.blank? || @contains.blank? || row[@limitby].casecmp(@contains) == 0 %>
+        <% next unless @limitby.blank? || @limit1.blank? || row[@limitby].casecmp(@limit1) >= 0 %>
+        <% next unless @limitby.blank? || @limit2.blank? || row[@limitby].casecmp(@limit2) <= 0 %>
         <tr  class="<%= cycle('even','odd') -%>">
           <td>
             <% row.keys.each do |key| %>
