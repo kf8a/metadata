@@ -38,16 +38,6 @@
         <td><%= @datatable.begin_date %> to <%= @datatable.end_date %></td>
       </tr>
     <% end %>
-    <tr>
-      <td>Experiment:</td>
-      <td>
-        <% if @datatable.study.url.nil? || @datatable.study.url.empty? %>
-          <%= @datatable.study.name %>
-        <% else %>
-          <%= link_to "#{@datatable.study.name}", @datatable.study.url %>
-        <% end %>
-      </td>
-    </tr>
   <% if @datatable.begin_date && @datatable.end_date %>
     <tr>
       <td>Temporal Coverage:</td>
