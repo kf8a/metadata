@@ -63,6 +63,7 @@ Feature: Data Collections
       And I press "Customize"
       And I select "American Black Bear" from "limit1"
       And I select "Lion" from "limit2"
+      And I press "Customize"
     Then I should see "Common Name: American Black Bear"
       And I should see "Common Name: Lion"
       And I should not see "Common Name: Tiger"
