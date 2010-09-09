@@ -13,6 +13,42 @@
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
 }
+.bottom-rounded-corners {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  -moz-border-bottom-left-radius: 10px;
+  -moz-border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+}
+#glbrc #sign-in {
+  position: fixed;
+  top: 0px;
+  left: 650px;
+  background-color: #009bda;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  -moz-border-bottom-left-radius: 10px;
+  -moz-border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+  padding: 0 0px 4px;
+  z-index: 100;
+}
+#glbrc #sign-in a {
+  color: white;
+  padding: 0 20px 4px;
+}
+#glbrc #sign-in a:hover {
+  color: blue;
+  background-color: #f7941e;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  -moz-border-bottom-left-radius: 10px;
+  -moz-border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+}
 #glbrc #navigation {
   width: 100%;
   position: absolute;
@@ -243,6 +279,48 @@
   margin-left: 10px;
 }
 #glbrc #keyword-search { display: inline; }
+#glbrc #point-to-sign-in {
+  background-color: #ededed;
+  border: 2px solid #666666;
+  z-index: 100;
+  opacity: 0.6;
+  font-size: 15px;
+  line-height: 1.3em;
+  margin: 10px auto;
+  padding: 10px;
+  position: absolute;
+  top: 30px;
+  left: 600px;
+  text-align: center;
+  width: 200px;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-box-shadow: 0 0 5px #888888;
+  -webkit-box-shadow: 0 0 5px #888888;
+}
+#glbrc #sign-in-arrow-border {
+  border-color: transparent transparent #666666 transparent;
+  border-style: solid;
+  border-width: 10px;
+  height: 0;
+  width: 0;
+  position: absolute;
+  top: -20px;
+  bottom: 0px;
+  left: 60px;
+}
+#glbrc #sign-in-arrow {
+  border-color: transparent transparent #ededed transparent;
+  border-style: solid;
+  border-width: 10px;
+  height: 0;
+  width: 0;
+  position: absolute;
+  top: -17px;
+  bottom: 0px;
+  left: 60px;
+}
 #glbrc .space-after { padding-right: 2em; }
 #glbrc .quickTree { border-top-style: solid; }
 #glbrc tree * {

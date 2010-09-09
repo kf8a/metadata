@@ -1,5 +1,5 @@
 if RUBY_VERSION > "1.9"
-require 'simplecov-html'  
+require 'simplecov'  
 SimpleCov.start 'rails'
 end
 

@@ -13,6 +13,7 @@ class DatatableTest < ActiveSupport::TestCase
   
   should validate_presence_of :title
   should validate_presence_of :dataset
+#  should validate_presence_of :study
     
   context 'datatable' do
     setup do
@@ -38,6 +39,27 @@ class DatatableTest < ActiveSupport::TestCase
     
     should 'return events as a string' do
       assert_kind_of String, @datatable.events
+    end
+    
+    should 'respond to study' do
+      assert @datatable.respond_to?('study')
+    end
+  
+  end
+  
+  context 'datatable with and without sponsors' do
+    setup do 
+      sponsor = Factory.create :sponsor, :data_use_statement => 'Use it', :name => 'GLBRC'
+      dataset_with_sponsor = Factory :dataset, :sponsor => sponsor
+      dataset_without_sponsor = Factory :dataset, :sponsor => nil
+      @datatable = Factory :datatable, :dataset => dataset_with_sponsor
+      @datatable_without_sponsor = Factory :datatable, :dataset => dataset_without_sponsor
+    end
+    
+    should 'retrieve data access statement' do
+      p @datatable.data_access_statement
+      assert @datatable.data_access_statement                 =~ /Use it/
+      assert @datatable_without_sponsor.data_access_statement == ''    
     end
   end
   

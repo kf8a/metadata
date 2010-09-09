@@ -31,7 +31,6 @@
   </div>
 
 
-  <%= link_to 'login', new_session_path unless signed_in? %>
   <% if signed_in? %>
     <li><a href='/uploads/new'>Uploads</a></li>
   <% end %>
