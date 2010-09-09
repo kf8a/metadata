@@ -73,6 +73,12 @@
           <td><%= text_field_tag 'contains'%> </td>
         </tr>
       <% end %>
+      <tr>
+        <td><%= label_tag 'sortby', 'Sort display by field: '%></td>
+        <td><%= select_tag 'sortby',
+                options_for_select(@limitoptions, @sortby) %></td>
+        <td><%= select_tag 'sort_direction', options_for_select(["Ascending", "Descending"], @sort_direction)%> </td>
+      </tr>
     </table>
     <%= submit_tag 'Customize' %>
   <% end %>
