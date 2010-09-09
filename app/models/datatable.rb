@@ -184,12 +184,22 @@ class Datatable < ActiveRecord::Base
   end
   
   def data_source
-    "\n# Data Source: http://#{dataset.sponsor.name}.kbs.msu.edu/datatables/#{self.id}
-# Metadata: http://#{dataset.sponsor.name}.kbs.msu.edu/datatables/#{self.id}.eml\n#\n#"
+    "\n# Data Source: http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}
+# Metadata: http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}.eml\n#\n#"
   end
   
   def data_access_statement
-    dataset.sponsor.try(:data_use_statement).gsub(/.{1,60}(?:\s|\Z)/){($& + 5.chr).gsub(/\n\005/,"\n").gsub(/\005/,"\n")}.split(/\n/).collect {|line| "# #{line}\n"}.join
+    access_statement = dataset.sponsor.try(:data_use_statement)
+    if access_statement
+      access_statement.gsub(/.{1,60}(?:\s|\Z)/){($& + 5.chr)
+        .gsub(/\n\005/,"\n")
+        .gsub(/\005/,"\n")}
+        .split(/\n/)
+        .collect {|line| "# #{line}\n"}
+        .join
+    else
+      ''
+    end
   end
   
   def temporal_extent
@@ -269,5 +279,9 @@ private
     end
     time
   end
- 
+  
+  def sponsor_name
+    dataset.sponsor.try(:name) || 'LTER'
+  end
+  
 end
