@@ -6,7 +6,8 @@ include REXML
 
 class Datatable < ActiveRecord::Base
   attr_protected :object
-  
+
+  has_one                 :collection
   belongs_to              :core_area
   belongs_to              :dataset
   has_many                :data_contributions

@@ -1,5 +1,7 @@
 class CollectionsController < ApplicationController
 
+  layout :site_layout
+
   def index
     @collections = Collection.all
   end
