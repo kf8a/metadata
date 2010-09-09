@@ -57,12 +57,15 @@
     <table>
       <tr>
         <td><%= label_tag 'limitby', 'Limit display by field: '%></td>
-        <td><%= select_tag 'limitby', options_for_select(@values.fields.collect {|v| v.titleize}) %></td>
+        <td><%= select_tag 'limitby', 
+                options_for_select(@limitoptions, @limitby) %></td>
       </tr>
-      <tr>
-        <td><%= label_tag 'conatins', "Where '#{@limitby}' contains: "%> </td>
-        <td><%= text_field_tag 'contains'%> </td>
-      </tr>
+      <% if @limitby %>
+        <tr>
+          <td><%= label_tag 'conatins', "Where '#{@limitby.titleize}' contains: "%> </td>
+          <td><%= text_field_tag 'contains'%> </td>
+        </tr>
+      <% end %>
     </table>
     <%= submit_tag 'Customize' %>
   <% end %>
@@ -75,6 +78,7 @@
   <div>
     <table>
       <% @values.each do  |row| %>
+        <% next unless @limitby.blank? || @contains.blank? || row[@limitby].casecmp(@contains) == 0 %>
         <tr  class="<%= cycle('even','odd') -%>">
           <td>
             <% row.keys.each do |key| %>
