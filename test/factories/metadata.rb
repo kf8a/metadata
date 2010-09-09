@@ -26,6 +26,11 @@ Factory.define :sponsor do |s|
   s.name    'LTER'
 end
 
+
+Factory.define :study do |s|
+  s.name 'LTER'
+end
+
 Factory.define :datatable do |d|
   d.name          'KBS001_001'
   d.title         'a really cool datatable'
@@ -35,6 +40,7 @@ Factory.define :datatable do |d|
   d.weight        100
   d.theme         Factory.create(:theme)
   d.dataset       Factory.create(:dataset)
+  d.study         Factory.create(:study)
 end
 
 Factory.define :protected_datatable, :parent => :datatable do |datatable|
@@ -55,10 +61,6 @@ Factory.define :publication do |p|
   p.abstract            'something in here'
   p.year                2000
   p.publication_type_id 1
-end
-
-Factory.define :study do |s|
-  s.name 'LTER'
 end
 
 Factory.define :template do |t|
