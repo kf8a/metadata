@@ -166,15 +166,17 @@
       <div>
         <table>
           <tr>
+            <% fieldlist = [] %>
             <% @values.fields.each do |field| %>
               <th>
-                <%= field.gsub(/_/,' ') %>
+                <%= field.titleize %>
+                <% fieldlist << field %>
               </th>
             <% end %>
           </tr>
           <% @values.each do  |row| %>
             <tr  class="<%= cycle('even','odd') -%>">
-              <% row.keys.each do |key| %>
+              <% fieldlist.each do |key| %>
                 <td align='right'>
                   <%= row[key] %>
                 </td>
