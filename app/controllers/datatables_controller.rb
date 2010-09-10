@@ -170,7 +170,7 @@ class DatatablesController < ApplicationController
     if @subdomain_request == 'lter'
       @title  = 'LTER Data Catalog'
     else
-      @title = 'GLBRC Data Catalog'
+      @title = 'GLBRC Sustainability Data Catalog'
     end
   end
 
