@@ -13,9 +13,9 @@ class CitationsControllerTest < ActionController::TestCase
         author1 = Factory.create(:author, :sur_name => 'Zebedee', :seniority => 1)
         author2 = Factory.create(:author, :sur_name => 'Alfred', :seniority => 1)
         @citation1 = Factory.create(:citation, 
-          :authors => [author1], :title => 'citation1')
+          :authors => [author1], :title => 'citation1', :pub_year => 2010)
         @citation2 = Factory.create(:citation, 
-          :authors => [author2], :title => 'citation2')
+          :authors => [author2], :title => 'citation2', :pub_year => 2010)
         get :index
       end
 
