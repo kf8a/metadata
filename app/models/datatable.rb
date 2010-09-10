@@ -115,7 +115,7 @@ class Datatable < ActiveRecord::Base
     event_summary = events.inject do |event|
       
     end
-    {'dateTimeFormat'=> 'Gregorian', 'events'=> event_summary}.to_json
+    {'dateTimeFormat'=> 'Gregorian', 'events'=> events}.to_json
   end
   
   #TODO create a completed flag and use the actual end year if present
