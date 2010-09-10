@@ -20,9 +20,9 @@ Feature: Data View
       And I should see "Third one"
 
   Scenario: Viewing a public datatable
-    Given a public lter datatable exists with cool data
+    Given a public lter datatable exists with species data
     When I go to the datatable page
-    Then I should see "sample date"
-      And I should see "Distance"
-      And I should see "How far away it is"
-      And I should see "miles"
+    Then I should see "Species"
+      And I should see "The name of the species"
+      And I should see "Genus"
+      And I should see "The genus of the species"

@@ -6,27 +6,23 @@ include REXML
 
 class Datatable < ActiveRecord::Base
   attr_protected :object
-  belongs_to :dataset
+
+  has_one                 :collection
+  belongs_to              :core_area
+  belongs_to              :dataset
+  has_many                :data_contributions
+  has_many                :owners, :through => :ownerships, :source => :user
+  has_many                :ownerships
+  has_many                :people, :through => :data_contributions
+  has_many                :permissions
   has_and_belongs_to_many :protocols
-  has_many :variates, :order => :weight
-  belongs_to :theme
-  belongs_to :core_area
-  belongs_to :study
-  
-  has_many :data_contributions
-  has_many :people, :through => :data_contributions
-  
-  #permissions
-  has_many :permissions
-  #has_many :users, :through => :permissions
-  has_many :ownerships
-  has_many :owners, :through => :ownerships, :source => :user
+  belongs_to              :study
+  belongs_to              :theme
+  has_many                :variates, :order => :weight
     
   validates_presence_of :title, :dataset
   
-  accepts_nested_attributes_for :data_contributions
-  
-  accepts_nested_attributes_for :variates
+  accepts_nested_attributes_for :data_contributions, :variates
   
   acts_as_taggable_on :keywords
   
@@ -145,9 +141,9 @@ class Datatable < ActiveRecord::Base
   
   def to_csv
     if self.metadata_only?
-       return 'Data available by request from glbrc.data@kbs.msu.edu'
-     end
-     values  = ActiveRecord::Base.connection.execute(object)
+      return 'Data available by request from glbrc.data@kbs.msu.edu'
+    end
+    values  = ActiveRecord::Base.connection.execute(object)
     if RUBY_VERSION > "1.9"
       output = CSV
     else

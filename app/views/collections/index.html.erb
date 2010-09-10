@@ -1,0 +1,9 @@
+<h3>Collections</h3>
+
+<ul>
+  <% @collections.each do |collection| %>
+    <li>
+      <%= link_to collection.datatable.title_and_years, collection_path(collection)%>
+    </li>
+  <% end -%>
+</ul>

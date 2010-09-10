@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100827221259) do
+ActiveRecord::Schema.define(:version => 20100829033625) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -67,6 +67,12 @@ ActiveRecord::Schema.define(:version => 20100827221259) do
     t.string   "pdf_content_type"
     t.integer  "pdf_file_size"
     t.datetime "pdf_updated_at"
+  end
+
+  create_table "collections", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "datatable_id"
   end
 
   create_table "columns", :force => true do |t|
@@ -297,14 +303,6 @@ ActiveRecord::Schema.define(:version => 20100827221259) do
     t.integer  "owner_id"
   end
 
-  create_table "plots", :force => true do |t|
-    t.string  "name"
-    t.integer "treatment_id"
-    t.integer "replicate"
-    t.integer "study_id"
-    t.string  "description"
-  end
-
   create_table "projects", :force => true do |t|
     t.string   "title"
     t.text     "abstract"
@@ -484,9 +482,9 @@ ActiveRecord::Schema.define(:version => 20100827221259) do
   create_table "units", :force => true do |t|
     t.string  "name"
     t.text    "description"
-    t.boolean "in_eml",      :default => false
+    t.boolean "in_eml",                     :default => false
     t.text    "definition"
-    t.string  "human_name"
+    t.string  "human_name",  :limit => nil
   end
 
   add_index "units", ["name"], :name => "unit_names_key", :unique => true
