@@ -9,6 +9,13 @@ class CitationsControllerTest < ActionController::TestCase
 
     context 'GET :index from anonymous user' do
       setup do
+        Citation.delete_all  #clear out other citations
+        author1 = Factory.create(:author, :sur_name => 'Zebedee', :seniority => 1)
+        author2 = Factory.create(:author, :sur_name => 'Alfred', :seniority => 1)
+        @citation1 = Factory.create(:citation, 
+          :authors => [author1], :title => 'citation1')
+        @citation2 = Factory.create(:citation, 
+          :authors => [author2], :title => 'citation2')
         get :index
       end
 
@@ -16,6 +23,14 @@ class CitationsControllerTest < ActionController::TestCase
       should assign_to :citations
 
       should render_with_layout 'lter'
+      
+      should 'return the citations in alphabetical order' do
+        citations = assigns(:citations)
+        assert citations.size == 2
+ 
+        assert citations[0] == @citation2
+        assert citations[1] == @citation1
+      end
       
     end
     
