@@ -3,6 +3,7 @@ Factory.define :affiliation do |affiliate|
 end
 
 Factory.define :author do |author|
+  author.seniority  1
 end
 
 Factory.define :citation do |cite|
@@ -21,25 +22,11 @@ Factory.define :person do |p|
   p.given_name 'bill'
 end
 
-<<<<<<< HEAD
-
 Factory.define :study do |s|
   s.name 'LTER'
 end
 
-Factory.define :datatable do |d|
-  d.name          'KBS001_001'
-  d.title         'a really cool datatable'
-  d.object        'select now() as sample_date'
-  d.is_sql         true
-  d.description   'This is a datatable'
-  d.weight        100
-  d.theme         Factory.create(:theme)
-  d.dataset       Factory.create(:dataset)
-  d.study         Factory.create(:study)
-=======
 Factory.define :project do |p|
->>>>>>> Adds species to features, reorganizes factories
 end
 
 Factory.define :publication do |p|
@@ -60,19 +47,12 @@ Factory.define :sponsor do |s|
   s.name    'LTER'
 end
 
-<<<<<<< HEAD
-=======
-Factory.define :study do |s|
-  s.name 'LTER'
-end
-
 Factory.define :unit do |u|
 end
 
 Factory.define :upload do |u|
 end
 
->>>>>>> Adds species to features, reorganizes factories
 Factory.define :template do |t|
 end
 
@@ -123,13 +103,7 @@ Factory.define :meeting do |m|
   m.venue_type  Factory.create(:venue_type)
 end
 
-Factory.define :author do |author|
-  author.seniority  1
-end
-
-Factory.define :collection do |c|
-  c.datatable   Factory.create(:datatable)
-
+  
 Factory.define :abstract do |a|
   a.abstract  'A quick little discussion of the meeting.'
   a.meeting   Factory.create(:meeting)
