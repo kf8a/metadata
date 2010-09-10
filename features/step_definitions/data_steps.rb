@@ -1,7 +1,3 @@
-Given /^a protected datatable exists$/ do
-  @datatable = Factory.create(:protected_datatable)
-end
-
 Given /^a protected datatable exists named "([^"]*)"$/ do |name|
   @datatable = Factory.create(:protected_datatable,
     :name     => name,

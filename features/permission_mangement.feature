@@ -63,4 +63,7 @@ Feature: Give Permissions to another user
       And I should not see "A Datatable Bob Does Not Own"
     
     When I follow "Modify Permissions for Another Datatable"
-    Then I should see "Permissions for Another Datatable" 
+    Then I should see "Permissions for Another Datatable"
+
+  Scenario: An owner gives permission by accepting someone's request
+    Given a user exists with an email of "test@test.com"

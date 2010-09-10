@@ -9,7 +9,7 @@ end
 
 Given /^"([^"]*)" owns the datatable$/ do |owner|
   @owner = User.find_by_email(owner)
-  Factory.create(:ownership, :user => @owner, :datatable => @datatable)
+  Factory.create(:ownership, :user => @owner, :datatable => Datatable.last)
 end
 
 Given /^"([^"]*)" does not own the datatable$/ do |owner|

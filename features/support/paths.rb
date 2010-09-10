@@ -18,13 +18,13 @@ module NavigationHelpers
       new_password_path
       
     when /the datatable page/
-      datatable_path(@datatable)
+      datatable_path(Datatable.last)
       
     when /the datatable edit page/
-      edit_datatable_path(@datatable)
+      edit_datatable_path(Datatable.last)
            
     when /the datatable download page/
-      datatable_path(@datatable, :format => 'csv')
+      datatable_path(Datatable.last, :format => 'csv')
       
     when /LTER datatables/
       datatables_path
