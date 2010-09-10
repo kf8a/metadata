@@ -42,7 +42,8 @@ Feature: Assign owners to datatables
     Given a user exists and is confirmed with an email of "admin@person.com"
       And "admin@person.com" is an administrator
       And a user exists and is confirmed with an email of "bill@person.com"
-      And "bill@person.com" owns a datatable named "kbs001"
+      And a datatable exists with a name of "kbs001"
+      And "bill@person.com" owns the datatable named "kbs001"
     When  I sign in as "admin@person.com"/"password"
       And I go to the datatable page
       And I follow "Owners Management"

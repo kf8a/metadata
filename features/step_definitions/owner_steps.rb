@@ -1,20 +1,19 @@
-Given /^"([^"]*)" owns a datatable named "([^"]*)"$/ do |email, name|
-  @datatable = Factory.create(:protected_datatable,
-    :name     => name,
-    :object   => 'select now()',
-    :is_sql   => true)
-  @owner = User.find_by_email(email)
-  Factory.create(:ownership, :user => @owner, :datatable => @datatable)
+Given /^"([^"]*)" owns the datatable named "([^"]*)"$/ do |email, name|
+  owner = User.find_by_email(email)
+  datatable = Datatable.find_by_name(name)
+  Factory.create(:ownership, :user => owner, :datatable => datatable)
 end
 
-Given /^"([^"]*)" owns the datatable$/ do |owner|
-  @owner = User.find_by_email(owner)
-  Factory.create(:ownership, :user => @owner, :datatable => Datatable.last)
+Given /^"([^"]*)" owns the datatable$/ do |email|
+  owner = User.find_by_email(email)
+  datatable = Datatable.last
+  Factory.create(:ownership, :user => owner, :datatable => datatable)
 end
 
-Given /^"([^"]*)" does not own the datatable$/ do |owner|
-  @owner = User.find_by_email(owner)
-  ownership = Ownership.find_by_user_id_and_datatable_id(@owner, @datatable)
+Given /^"([^"]*)" does not own the datatable$/ do |email|
+  owner = User.find_by_email(email)
+  datatable = Datatable.last
+  ownership = Ownership.find_by_user_id_and_datatable_id(owner, datatable)
   ownership.try(:delete)
 end
 

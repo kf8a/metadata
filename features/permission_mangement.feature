@@ -53,8 +53,10 @@ Feature: Give Permissions to another user
       And I should see "sam@person.com still needs permission from alice@person.com"
       
   Scenario: A user checks the index to see all of the datatables they own
-    Given "bob@person.com" owns a datatable named "A Datatable"
-      And "bob@person.com" owns a datatable named "Another Datatable"
+    Given a protected datatable exists with a name of "A Datatable"
+      And a protected datatable exists with a name of "Another Datatable"
+      And "bob@person.com" owns the datatable named "A Datatable"
+      And "bob@person.com" owns the datatable named "Another Datatable"
       And a protected datatable exists named "A Datatable Bob Does Not Own"
     When  I sign in as "bob@person.com"/"password"
       And I go to the permissions page
