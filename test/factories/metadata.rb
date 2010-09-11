@@ -94,6 +94,9 @@ Factory.define :protected_datatable, :parent => :datatable do |datatable|
   datatable.dataset   Factory.create(:dataset, :sponsor => Factory.create(:sponsor, :data_restricted => true))
 end
 
+Factory.define :public_datatable, :parent => :datatable do |datatable|
+end
+
 Factory.define :collection do |c|
   c.datatable   Factory.create(:datatable)
 end

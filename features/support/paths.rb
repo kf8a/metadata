@@ -36,13 +36,13 @@ module NavigationHelpers
       new_protocol_path
       
     when /the citation page/
-      citation_path(@citation)
+      citation_path(Citation.last)
 
     when /the new citation page/
       new_citation_path
     
     when /the collection page/
-      collection_path(@collection)
+      collection_path(Collection.last)
       
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

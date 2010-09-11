@@ -1,20 +1,4 @@
-Given /^a protected datatable exists named "([^"]*)"$/ do |name|
-  @datatable = Factory.create(:protected_datatable,
-    :name     => name,
-    :object   => 'select now()',
-    :is_sql   => true)
-end
-
-Given /^a public datatable exists$/ do
-  @datatable = Factory.create(:datatable)
-end
-
-Given /^a public datatable exists named "([^"]*)"$/ do |name|
-  @datatable = Factory.create(:datatable,
-    :name     => name)
-end
-
-Given /^a public lter datatable exists titled "([^"]*)"$/ do |title|
+Given /^a public lter datatable exists with a title of "([^"]*)"$/ do |title|
   @website = Website.find_by_name("lter")
   @datatable = Factory.create(:datatable,
     :title => title,

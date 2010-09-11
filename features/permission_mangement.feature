@@ -57,7 +57,7 @@ Feature: Give Permissions to another user
       And a protected datatable exists with a name of "Another Datatable"
       And "bob@person.com" owns the datatable named "A Datatable"
       And "bob@person.com" owns the datatable named "Another Datatable"
-      And a protected datatable exists named "A Datatable Bob Does Not Own"
+      And a protected datatable exists with a name of "A Datatable Bob Does Not Own"
     When  I sign in as "bob@person.com"/"password"
       And I go to the permissions page
     Then I should see "A Datatable"
