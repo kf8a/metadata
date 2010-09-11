@@ -104,4 +104,5 @@ Factory.define :citation do |cite|
 end
 
 Factory.define :author do |author|
+  author.seniority  1
 end

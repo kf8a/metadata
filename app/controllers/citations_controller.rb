@@ -3,7 +3,10 @@ class CitationsController < ApplicationController
   caches_action :index if RAILS_ENV == 'production'
 
   def index
-    @citations = Citation.all(:order => 'pub_year desc')
+    @citations = Citation.all(
+      :joins=> 'left join authors on authors.citation_id = citations.id', 
+      :conditions => 'seniority = 1', 
+      :order => 'authors.sur_name, pub_year desc')
   end
 
   def show
@@ -38,7 +41,7 @@ class CitationsController < ApplicationController
   
   def download
     head(:not_found) and return unless (citation = Citation.find_by_id(params[:id]))
-    redirect_to sign_in_url and return unless signed_in? or RAILS_ENV == 'development'
+    redirect_to sign_up_url and return unless signed_in?
     
     path = citation.pdf.path(params[:style])
     logger.info path

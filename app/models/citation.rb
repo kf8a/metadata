@@ -1,5 +1,5 @@
 class Citation < ActiveRecord::Base
-  has_many :authors
+  has_many :authors, :order => :seniority
   belongs_to :citation_type
   belongs_to :website
   

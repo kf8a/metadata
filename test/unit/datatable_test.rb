@@ -57,7 +57,6 @@ class DatatableTest < ActiveSupport::TestCase
     end
     
     should 'retrieve data access statement' do
-      p @datatable.data_access_statement
       assert @datatable.data_access_statement                 =~ /Use it/
       assert @datatable_without_sponsor.data_access_statement == ''    
     end

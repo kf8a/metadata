@@ -1,8 +1,7 @@
 require 'test_helper'
 
 class AuthorTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
-  end
+
+  should belong_to :citation
+  should validate_presence_of 'seniority'
 end

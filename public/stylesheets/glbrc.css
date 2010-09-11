@@ -33,6 +33,7 @@
   -webkit-border-bottom-left-radius: 10px;
   -webkit-border-bottom-right-radius: 10px;
   padding: 0 0px 4px;
+  opacity: 0.8;
   z-index: 100;
 }
 #glbrc #sign-in a {

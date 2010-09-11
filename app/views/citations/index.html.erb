@@ -3,7 +3,7 @@
   <li class='citation'>
     <%= formatted_as_default(citation) %>
     <%= link_to 'abstract', citation_url(citation)%>
-    <% if citation.pdf.url %>
+    <% if citation.pdf.exists? %>
       <%= link_to 'pdf', citation.pdf.url %>
     <% end %>
   </li>
