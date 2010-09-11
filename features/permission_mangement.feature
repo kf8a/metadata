@@ -67,5 +67,20 @@ Feature: Give Permissions to another user
     When I follow "Modify Permissions for Another Datatable"
     Then I should see "Permissions for Another Datatable"
 
+  Scenario: A potential downloader requests permission
+    When I sign in as "sam@person.com"/"password"
+    And I go to the datatable page
+    And I follow "Request data"
+    Then I should see "Permission to download"
+    And I should see "has been requested"
+    And I should see "Email the owners of this datatable"
+
   Scenario: An owner gives permission by accepting someone's request
-    Given a user exists with an email of "test@test.com"
+    Given "sam@person.com" has requested permission
+    When I sign in as "bob@person.com"/"password"
+    And I go to the datatable page
+    And I follow "Permissions Management"
+    Then I should see "sam@person.com has requested permission"
+    When I press "Grant permission to sam@person.com"
+    Then I should see "sam@person.com has permission from you"
+
