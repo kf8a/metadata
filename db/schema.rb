@@ -285,7 +285,7 @@ ActiveRecord::Schema.define(:version => 20100913181251) do
 
   create_table "pages", :force => true do |t|
     t.string   "title"
-    t.string   "body"
+    t.text     "body"
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"

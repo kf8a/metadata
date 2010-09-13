@@ -26,6 +26,9 @@ Factory.define :study do |s|
   s.name 'LTER'
 end
 
+Factory.define :page do |p|
+end
+
 Factory.define :project do |p|
 end
 

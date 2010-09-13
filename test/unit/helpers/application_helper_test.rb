@@ -6,6 +6,10 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal textilize("<p>This *is* a test</p>"), "<p>This <strong>is</strong> a test</p>"
   end
   
+  def test_texilize_with_nil
+    assert_equal textilize(nil), ''
+  end
+  
   def test_strip_html_tags
     assert_equal strip_html_tags("<p>This is a test</p>"), "This is a test"
   end

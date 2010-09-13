@@ -3,7 +3,7 @@ require 'redcloth'
 
 module ApplicationHelper
   def textilize(text)
-    RedCloth.new(text).to_html
+    text ? RedCloth.new(text).to_html : '' 
   end 
   
   # use to strip out html tags when using truncate
