@@ -178,7 +178,7 @@ class DatatableTest < ActiveSupport::TestCase
     
   context 'datatable with sample_date' do
     setup do
-      @datatable = Factory.create(:datatable)
+      @datatable = Factory.create(:datatable, :object => %q{select now() as sample_date} )
       @old_data = Factory.create(:datatable, :object => %q{select now() - interval '3 year' as sample_date})
     end
     
