@@ -12,7 +12,7 @@ end
 
 Given /^"([^"]*)" is not an administrator$/ do |email|
   @user = User.find_by_email(email)
-  @user.role = "normal"
+  @user.role = 'normal'
   @user.save
 end
 

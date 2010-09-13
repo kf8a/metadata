@@ -5,7 +5,7 @@ end
 Given /^a protected datatable exists named "([^"]*)"$/ do |name|
   @datatable = Factory.create(:protected_datatable,
     :name     => name,
-    :object   => 'select now()',
+    :object   => 'select 1 as test',
     :is_sql   => true)
 end
 

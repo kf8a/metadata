@@ -83,7 +83,7 @@ end
 Factory.define :datatable do |d|
   d.name          'KBS001_001'
   d.title         'a really cool datatable'
-  d.object        'select now() as sample_date'
+  d.object        "select 1 as sample_date"
   d.is_sql         true
   d.description   'This is a datatable'
   d.weight        100

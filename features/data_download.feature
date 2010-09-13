@@ -16,7 +16,7 @@ Feature: Download data
       And I go to the datatable page
       And I follow "Download complete data table"
      Then I should be on the datatable download page
-      And I should see "now"
+      And I should see "1"
 
   Scenario: The data owner downloads a datatable
     Given a protected datatable exists
@@ -28,7 +28,7 @@ Feature: Download data
      When I go to the datatable page
       And I follow "Download complete data table"
      Then I should be on the datatable download page
-      And I should see "now"
+      And I should see "1"
 
   Scenario: An authorized user downloads a datatable
     Given a protected datatable exists
@@ -41,7 +41,7 @@ Feature: Download data
      When I go to the datatable page
       And I follow "Download complete data table"
      Then I should be on the datatable download page
-      And I should see "now"
+      And I should see "1"
 
   Scenario: A user requests access to a datatable
     Given a protected datatable exists
@@ -52,7 +52,7 @@ Feature: Download data
      Then I should not have the "admin" role
       And I should be signed in
      When I go to the datatable page
-     Then I should see "Request data"
+     Then I should see "Request Data"
       And I should not see "Download complete data table"
   
   Scenario: A user has received permission to download data from all data owners
@@ -67,7 +67,7 @@ Feature: Download data
       And I go to the datatable page
       And I follow "Download complete data table"
      Then I should be on the datatable download page
-      And I should see "now"  
+      And I should see "1"  
 
   Scenario: A user has received partial permission to download data
     Given a user exists and is confirmed with an email of "alice@person.com"
@@ -79,30 +79,27 @@ Feature: Download data
       And "bill@person.com" has not given "bob@person.com" permission
      When I sign in as "bob@person.com"/"password"
       And I go to the datatable page
-     Then I should see "Request data"
+     Then I should see "Request Data"
       And I should not see "Download complete data table"
 
   Scenario: An anonymous user looks at a protected datatable 
     Given a protected datatable exists
      When I go to the datatable page
      Then I should not see "Download"
-      And I should not see "Request data"
+      And I should not see "Request Data"
       And I should see "Sign in"
-      And I should see "Sign up"
     
   Scenario: An anonymous user looks at a public datatable
     Given a public datatable exists
      When I go to the the datatable page
      Then I should see "Download"
-      And I should not see "Sign up"
       And I should not see "Sign in"
      When I follow "Download"
      Then I should be on the datatable download page
-      And I should see "now"
+      And I should see "1"
     
   Scenario: An anonymous users types in the url for a protected datatable html view
     Given a protected datatable exists
      When I go to the datatable download page
      Then I should see "Sign in"
-      And I should see "Sign up"
       
