@@ -14,11 +14,7 @@ class PermissionsController < ApplicationController
   def show
     owner = current_user
     @permissions = Permission.find_all_by_owner_id_and_datatable_id(owner.id, @datatable.id)
-    
-    if current_user.admin?
-      @permissions = Permission.find(:all)
-    end 
-    
+        
     @permitted_users = []
     @permissions.each do |permission|
       user = User.find(permission.user_id)
