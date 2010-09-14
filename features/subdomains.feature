@@ -9,7 +9,7 @@ Scenario: Datatables index works on each subdomain.
   
   Given I am in the GLBRC subdomain
   When I go to the datatables page
-  Then I should see "The Thrust 4 Data Catalog is a collection of GLBRC data related to sustainability research at different T4 research sites in Michigan and Wisconsin."
+  Then I should see "This catalog is a collection of the data from the GLBRC sustainability research sites in Michigan and Wisconsin."
 
 
 Scenario: Sign in styles correctly in the LTER subdomain
