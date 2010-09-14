@@ -1,37 +1,34 @@
 ActionController::Routing::Routes.draw do |map|
   
-   map.resource :session, :controller => 'sessions'
-   map.resource :users, :controller => 'users'
+  map.resource :session, :controller => 'sessions'
+  map.resource :users, :controller => 'users'
     
-    map.sign_in  'sign_in',
-      :controller => 'sessions',
-      :action     => 'new'
-    map.sign_out 'sign_out',
-      :controller => 'sessions',
-      :action     => 'destroy',
-      :method     => :delete
+  map.sign_in  'sign_in',
+    :controller => 'sessions',
+    :action     => 'new'
+  map.sign_out 'sign_out',
+    :controller => 'sessions',
+    :action     => 'destroy',
+    :method     => :delete
 
-    map.sign_up  'sign_up',
-      :controller => 'users',
-      :action     => 'new'
+  map.sign_up  'sign_up',
+    :controller => 'users',
+    :action     => 'new'
       
   Clearance::Routes.draw(map)
   
-  map.resources :projects
-
-  map.resources :weathers
-
+  map.resources :abstracts
+  
   map.resources :affiliations
 
-  map.connect 'people/alphabetical', :controller => 'people', :action => 'alphabetical', :requirements => { :method => :get }
-  map.connect 'people/emeritus', :controller => 'people', :action => 'emeritus', :requirements => {:method => :get}
-  map.connect 'people/show_all', :controller => 'people', :action => 'show_all'
+  map.resources :citations, :collection => {:download => :get}
   
-  map.resources :people, :collection => {:alphabetical => :get,
-                                         :emeritus => :get}
+  map.resources :collections, :collection => {:customize => :post}
+  
+  map.resources :contacts
 
-  map.resources :protocols
-
+  map.resources :data_contributions
+  
   map.resources :datasets, :collection => {
                            :set_affiliation_for => :post,
                            :auto_complete_for_keyword_list => :get,
@@ -45,44 +42,47 @@ ActionController::Routing::Routes.draw do |map|
                             :update_temporal_extent => :get
                             }
 
-  map.resources :variates
+  map.resources :meetings
+
+  map.resources :ownerships, :collection => {:add_another_user => :post,
+                                             :add_another_datatable => :post,
+                                             :revoke => :delete},
+                             :except => :destroy
+
+  map.resources :pages
+
+  map.connect 'people/alphabetical', :controller => 'people', :action => 'alphabetical', :requirements => { :method => :get }
+  map.connect 'people/emeritus', :controller => 'people', :action => 'emeritus', :requirements => {:method => :get}
+  map.connect 'people/show_all', :controller => 'people', :action => 'show_all'
+  
+  map.resources :people, :collection => {:alphabetical => :get,
+                                         :emeritus => :get}
+
+  map.resources :permissions, :collection => {:create => :any}
+  
+  map.resources :permission_requests
+
+  map.resources :projects
+
+  map.resources :protocols
 
   map.resources :publications, :collection => {:index_by_treatment => :get}
   
-  map.resources :contacts
-  
-  map.resources :abstracts
-  
-  map.resources :meetings
-  
-  map.resources :units
-  
-  map.resources :themes
+  map.resources :sponsors
   
   map.resources :studies
   
   map.resources :templates
   
-  map.resources :data_contributions
+  map.resources :themes
+  
+  map.resources :units
   
   map.resources :uploads
-  
-  map.resources :permissions, :collection => {:create => :any}
-  
-  map.resources :permission_requests
-  
-  map.resources :ownerships, :collection => {:add_another_user => :post,
-                                             :add_another_datatable => :post,
-                                             :revoke => :delete},
-                             :except => :destroy
-  
-  map.resources :citations, :collection => {:download => :get}
-  
-  map.resources :sponsors
-  
-  map.resources :collections, :collection => {:customize => :post}
-  
-  map.resources :pages
+
+  map.resources :variates
+
+  map.resources :weathers
   
   #route to handle pdf downloads
   map.connect '/assets/citations/:attachment/:id/:style/:basename.:extension', :controller => 'citations', :action => 'download', :requirements => { :method => :get }
