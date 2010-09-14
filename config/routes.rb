@@ -27,7 +27,8 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'people/emeritus', :controller => 'people', :action => 'emeritus', :requirements => {:method => :get}
   map.connect 'people/show_all', :controller => 'people', :action => 'show_all'
   
-  map.resources :people
+  map.resources :people, :collection => {:alphabetical => :get,
+                                         :emeritus => :get}
 
   map.resources :protocols
 
@@ -64,7 +65,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :permission_requests
   
-  map.resources :ownerships
+  map.resources :ownerships, :collection => {:add_another_user => :post,
+                                             :add_another_datatable => :post}
   
   map.resources :citations
   
@@ -98,6 +100,6 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/service.wsdl', :action => 'wsdl'
 
   # Install the default route as the lowest priority.
-  map.connect ':controller/:action/:id.:format'
-  map.connect ':controller/:action/:id'
+#  map.connect ':controller/:action/:id.:format'
+#  map.connect ':controller/:action/:id'
 end
