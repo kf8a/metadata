@@ -92,16 +92,6 @@ class PermissionsControllerTest < ActionController::TestCase
         should assign_to(:permitted_users)
       end
       
-      context "and GET :show with invalid datatable param" do
-        setup do
-          get :show
-        end
-        
-        should_not respond_with :success
-        should redirect_to("the permissions index") {permissions_path}
-      end
-
-      
       context "and GET :new permission for the datatable" do
         setup do
           get :new, :datatable => @datatable

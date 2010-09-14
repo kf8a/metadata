@@ -8,7 +8,7 @@
     <li>
         <%= owner.email %>
         <%= button_to "Revoke ownership from #{owner.email}", { 
-          :action => "destroy", 
+          :action => "revoke", 
           :datatable => @datatable.id, 
           :user => owner.id }, 
           :confirm => "Are you sure?", 

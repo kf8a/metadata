@@ -67,12 +67,14 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :uploads
   
-  map.resources :permissions
+  map.resources :permissions, :collection => {:create => :any}
   
   map.resources :permission_requests
   
   map.resources :ownerships, :collection => {:add_another_user => :post,
-                                             :add_another_datatable => :post}
+                                             :add_another_datatable => :post,
+                                             :revoke => :delete},
+                             :except => :destroy
   
   map.resources :citations, :collection => {:download => :get}
   
@@ -112,8 +114,4 @@ ActionController::Routing::Routes.draw do |map|
   # Allow downloading Web Service WSDL as a file with an extension
   # instead of a file named 'wsdl'
   map.connect ':controller/service.wsdl', :action => 'wsdl'
-
-  # Install the default route as the lowest priority.
-#  map.connect ':controller/:action/:id.:format'
-#  map.connect ':controller/:action/:id'
 end
