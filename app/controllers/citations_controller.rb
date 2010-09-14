@@ -54,7 +54,7 @@ class CitationsController < ApplicationController
      if request_subdomain(params[:requested_subdomain]) == "lter"
        @title  = 'LTER Publications'
      else
-       @title = 'GLBRC Publications'
+       @title = 'GLBRC Sustainability Publications'
      end
    end
 end
