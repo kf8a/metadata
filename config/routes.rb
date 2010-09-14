@@ -76,7 +76,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :sponsors
   
-  map.resources :collections
+  map.resources :collections, :collection => {:customize => :post}
   
   map.resources :pages
   
