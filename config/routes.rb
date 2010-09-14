@@ -35,9 +35,13 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :datasets, :collection => {:set_affiliation_for => :post,
                                            :auto_complete_for_keyword_list => :get}
 
-  map.resources :datatables, :collection => {:suggest => :get,
-                                             :search  => :get,
-                                             :events  => :get}
+  map.resources :datatables, :collection => {
+                            :auto_complete_for_datatable_keyword_list => :get,
+                            :events  => :get,
+                            :suggest => :get,
+                            :search  => :get,
+                            :update_temporal_extent => :get
+                            }
 
   map.resources :variates
 
