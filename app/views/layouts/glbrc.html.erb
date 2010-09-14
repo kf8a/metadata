@@ -19,9 +19,9 @@
 	  <div id='glbrc'>
 	    <div id='sign-in'>
 	      <% if signed_in? %>
-	        <%= link_to 'Sign&nbsp;Out', sign_out_url %>
+	        <%= link_to 'Sign&nbsp;Out', sign_out_url(:only_path => true) %>
 	      <% else %>
-	        <%= link_to 'Sign&nbsp;In', sign_in_url %>  
+	        <%= link_to 'Sign&nbsp;In', sign_in_url(:only_path => true) %>  
 	      <% end %>
 	    </div>
 		<div id='branding'>
