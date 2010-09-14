@@ -72,7 +72,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :ownerships, :collection => {:add_another_user => :post,
                                              :add_another_datatable => :post}
   
-  map.resources :citations
+  map.resources :citations, :collection => {:download => :get}
   
   map.resources :sponsors
   
