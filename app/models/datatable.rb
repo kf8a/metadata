@@ -188,11 +188,11 @@ class Datatable < ActiveRecord::Base
   def data_access_statement
     access_statement = dataset.sponsor.try(:data_use_statement)
     if access_statement
-      access_statement.gsub(/.{1,60}(?:\s|\Z)/){($& + 5.chr)
-        .gsub(/\n\005/,"\n")
-        .gsub(/\005/,"\n")}
-        .split(/\n/)
-        .collect {|line| "# #{line}\n"}
+      access_statement.gsub(/.{1,60}(?:\s|\Z)/){($& + 5.chr)\
+        .gsub(/\n\005/,"\n")\
+        .gsub(/\005/,"\n")}\
+        .split(/\n/)\
+        .collect {|line| "# #{line}\n"}\
         .join
     else
       ''
