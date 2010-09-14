@@ -1,6 +1,9 @@
 set :application, "metadata"
-set :repository,  "/Users/bohms/code/metadata"
+
+#set :repository,  "/Users/bohms/code/metadata"
 set :scm, :git
+set :repository, "git@github.com:kf8a/metadata.git"
+
 
 # If you aren't deploying to /u/apps/#{application} on the target
 # servers (which is the default), you can specify the actual location
@@ -11,9 +14,12 @@ set :deploy_to, "/var/u/apps/#{application}"
 set :user, 'deploy'
 set :use_sudo, false
 
-set :branch, $1 if `git branch` =~ /\* (\S+)\s/m
+#set :branch, $1 if `git branch` =~ /\* (\S+)\s/m
+set :branch, "master"
 set :deploy_via, :remote_cache
 #set :git_enable_submodules,1
+
+ssh_options[:forward_agent] = true
 
 before :deploy do
   unless exists?(:host)
