@@ -19,7 +19,7 @@ class DatasetsController < ApplicationController
     request.format  = :eml if params[:Dataset]
     @keyword_list   = params['keyword_list']
     @people         = Person.find_all_with_dataset(:order => 'sur_name')
-    @themes         = Theme.find(:all, :order => :weight)
+    @themes         = Theme.all(:order => :weight)
     @datasets       = Dataset.all
     @studies        = collect_and_normalize_studies(@datasets)
     @studies        = [@study] if @study
@@ -38,9 +38,17 @@ class DatasetsController < ApplicationController
     @dataset  = Dataset.find(params[:id])
     @title    = @dataset.title
     @roles    = @dataset.roles
+    @website  = @dataset.website
+    @website_name = @website.try(:name)
+    if @website_name
+      unless @website_name == @subdomain_request
+        redirect_to datasets_url
+        return false
+      end
+    end
 
     respond_to do |format|
-      format.html # show.rhtml
+      format.html { render_subdomain }
       format.eml { render :xml => @dataset.to_eml }
       format.xml  { render :xml => @dataset.to_xml }
     end

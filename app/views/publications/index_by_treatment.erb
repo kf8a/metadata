@@ -13,7 +13,7 @@
 				<% end -%>
 			</ul>
 		<% else -%>
-			<%= link_to study.name,  {:action => :index, :treatment => study.treatments[0].id} %>
+			<%= link_to study.name,  {:action => :index, :treatment => study.treatments[0]} %>
 		<% end -%>
 	</li>
 <% end -%>

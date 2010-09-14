@@ -63,7 +63,7 @@ class DatasetTest < ActiveSupport::TestCase
   context 'past temporal extent' do
     setup do
       @dataset = Factory.create(:dataset, 
-        :datatables  => [Factory.create(:datatable), 
+        :datatables  => [Factory.create(:datatable, :object => 'select now() as sample_date'), 
                          Factory.create(:datatable, 
                          :object => "select now() - interval '1 year' as sample_date")])
     end
@@ -119,8 +119,12 @@ class DatasetTest < ActiveSupport::TestCase
     
     context "and two datatables" do
       setup do
-        Factory.create(:datatable, :dataset => @dataset, :begin_date => (Date.today - 7), :end_date => (Date.today - 4))
-        Factory.create(:datatable, :dataset => @dataset, :begin_date => (Date.today - 365), :end_date => (Date.today - 364))
+        Factory.create(:datatable, :dataset => @dataset, 
+          :object => 'select now() as sample_date',  
+          :begin_date => (Date.today - 7),   :end_date => (Date.today - 4))
+        Factory.create(:datatable, :dataset => @dataset, 
+          :object => %q{select now() - interval '1 year' as sample_date}, 
+          :begin_date => (Date.today - 365), :end_date => (Date.today - 364))
       end
       
       should "return true for dates which include a datatable" do

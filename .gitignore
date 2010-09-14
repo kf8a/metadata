@@ -1,6 +1,8 @@
 db/meta_test
+db/*.sqlite3
 db/sphinx
 log/
+doc/*.dot
 vendor/rails/
 vendor/plugins/rspec/.git/
 vendor/plugins/rspec-rails/.git/
@@ -10,7 +12,14 @@ public/javascripts/base_packaged.js
 public/datatables
 public/*.html
 .DStore
+.DS_Store
 tmp/
 config/database.yml
 config/newrelic.yml
 rcov/
+nbproject/
+config/development.sphinx.conf
+assets/
+coverage/
+Gemfile.lock
+.bundle

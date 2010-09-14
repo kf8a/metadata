@@ -21,15 +21,16 @@ class PermissionTest < ActiveSupport::TestCase
       owner       = Factory :user
       datatable   = Factory :datatable, :owners => [owner]
 
-      @permission = Factory :permission,
+      @permission = Factory.build :permission,
         :datatable  => datatable,
         :user       => user,
         :owner      => owner
     end
 
     should 'be valid' do
-      assert_valid @permission
+      assert @permission.valid?
     end
+    
   end
 
   context 'setting permissions' do
@@ -55,6 +56,25 @@ class PermissionTest < ActiveSupport::TestCase
       assert !p.valid?
     end
 
-    should 'not allow permissions to be set more than once' 
+    should 'not allow permissions to be set more than once' do
+      user         = Factory :user
+      
+      p1           = Permission.new
+      p1.datatable = @datatable
+      p1.owner     = @owner
+      p1.user      = user
+      
+      
+      p2           = Permission.new
+      p2.datatable = @datatable
+      p2.owner     = @owner
+      p2.user      = user
+       
+      #TODO after saving the permission becomes invalid. Don't know if that would cause problems elsewere.
+      assert p1.valid?
+      assert p1.save  
+      assert !p1.valid?
+      assert !p2.valid?
+    end
   end
 end

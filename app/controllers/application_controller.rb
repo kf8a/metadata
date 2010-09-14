@@ -4,8 +4,8 @@
 class ApplicationController < ActionController::Base
   include Clearance::Authentication
     
-  before_filter :authenticate, :except => [:index, :show] unless ENV["RAILS_ENV"] == 'development'
-  before_filter :set_title, :set_crumbs
+  #before_filter :admin?, :except => [:index, :show] unless ENV["RAILS_ENV"] == 'development'
+  before_filter :set_crumbs, :set_subdomain_request, :set_title
    
    LOCAL_IPS =/^127\.0\.0\.1$|^192\.231\.113\.|^192\.108\.190\.|^192\.108\.188\.|^192\.108\.191\./
 
@@ -16,19 +16,23 @@ class ApplicationController < ActionController::Base
   private
   
   def admin?
-    if signed_in?
-      unless current_user.try(:role) == 'admin'
-        deny_access
-      end
+    unless current_user.try(:role) == 'admin'
+      flash[:notice] = "You must be signed in as an administrator in order to access this page"
+      deny_access
+      return false
     end
-  end
-  
-  def set_title
-    @title = 'LTER KBS'
   end
   
   def set_crumbs
     @crumbs = []
+  end
+
+  def set_subdomain_request
+    @subdomain_request = request_subdomain(params[:requested_subdomain])
+  end
+
+  def set_title
+     @title = @subdomain_request.upcase
   end
   
   def site_layout
@@ -41,20 +45,42 @@ class ApplicationController < ActionController::Base
     return requested_subdomain
   end
   
-  def template_choose(domain, controller, page)
-    liquid_name = "app/views/" + controller + "/liquid_" + page + ".html.erb"
-    if File.file?(liquid_name)
-      website = Website.find_by_name(domain)
-      website = Website.find(:first) unless website
-      @plate = nil
-      @plate = website.layout(controller, page) if website
-      return liquid_name if @plate
-    end
-
-    domain_file_name = "app/views/" + controller + "/" + domain + "_" + page + ".html.erb"
-    non_domain_file_name = "app/views/" + controller + "/" + page + ".html.erb"
-    
-    File.file?(domain_file_name) ? domain_file_name : non_domain_file_name
+  def render_subdomain(page=action_name, mycontroller=controller_name, domain=@subdomain_request)
+    render_liquid(page, mycontroller, domain) or
+    render_domain_specific(page, mycontroller, domain) or
+    render :template => "#{mycontroller}/#{page}"
   end
-   
+
+  def render_liquid(page, mycontroller, domain)
+    if liquid_file_exists?(mycontroller, page)
+      if liquid_template_exists?(domain, mycontroller, page)
+        render :template => "#{mycontroller}/liquid_#{page}"
+      end
+    end
+  end
+
+  def render_domain_specific(page, mycontroller, domain)
+    if domain_specific_file_exists?(domain, mycontroller, page)
+      render :template => "#{mycontroller}/#{domain}_#{page}"
+    end
+  end
+
+  def liquid_file_exists?(mycontroller, page)
+    erb_name  = "app/views/" + mycontroller + "/liquid_" + page + ".html.erb"
+    rhtml_name = "app/views/" + mycontroller + "/liquid_" + page + ".rhtml"
+    File.file?(erb_name) or File.file?(rhtml_name)
+  end
+
+  def liquid_template_exists?(domain, mycontroller, page)
+    website = Website.find_by_name(domain)
+    website = Website.find(:first) unless website
+    plate = website.try(:layout, mycontroller, page)
+    !plate.blank?
+  end
+
+  def domain_specific_file_exists?(domain, mycontroller, page)
+    erb_name = "app/views/" + mycontroller + "/"  + domain + "_" + page + ".html.erb"
+    rhtml_name = "app/views/" + mycontroller + "/"  + domain + "_" + page + ".rhtml"
+    File.file?(erb_name) or File.file?(rhtml_name)
+  end
 end

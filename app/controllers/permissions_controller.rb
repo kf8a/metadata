@@ -1,13 +1,20 @@
 class PermissionsController < ApplicationController
 
   before_filter :require_datatable, :require_owner, :except => [:index] unless ENV["RAILS_ENV"] == 'development'
+  #before_filter :admin?, :except => [:index] unless ENV["RAILS_ENV"] == 'development'
+  
+  layout :site_layout
   
   def index
+    respond_to do |format|
+      format.html { render_subdomain }
+    end
   end
   
   def show
     owner = current_user
     @permissions = Permission.find_all_by_owner_id_and_datatable_id(owner.id, @datatable.id)
+        
     @permitted_users = []
     @permissions.each do |permission|
       user = User.find(permission.user_id)
@@ -16,16 +23,19 @@ class PermissionsController < ApplicationController
   end
   
   def new
-
+    respond_to do |format|
+      format.html { render_subdomain }
+    end
   end
   
   def create
     user = User.find_by_email(params[:email])
+    flash[:notice] = 'No user with that email' unless user
     owner = current_user
     permission = Permission.new(:user => user, :datatable => @datatable, :owner => owner)
     respond_to do |format|
       if permission.save
-        flash[:notice] = 'Permission has been granted to #{user.email}'
+        flash[:notice] = 'Permission has been granted to ' + user.email
         format.html { redirect_to permission_path(@datatable) }
         format.xml  { head :created, :location => permission_path(@datatable) }
       else
@@ -44,7 +54,7 @@ class PermissionsController < ApplicationController
     end
 
     respond_to do |format|
-      flash[:notice] = 'Permission has been revoked from #{user.email}'
+      flash[:notice] = 'Permission has been revoked from ' + user.email
       format.html { redirect_to permission_path(@datatable) }
       format.xml  { head :ok }
     end
@@ -62,9 +72,14 @@ class PermissionsController < ApplicationController
     end
   end
 
+  #override to allow owners
+  def admin?
+    true
+  end
+  
   def require_owner
-    unless current_user.owns(@datatable)
-      flash[:notice] = "You must be the owner of the datatable in order to access this page"
+    unless current_user.try(:owns?, @datatable)
+      flash[:notice] = "You must be signed in as the owner of the datatable in order to access this page"
       redirect_to :action => :index
       return false
     end

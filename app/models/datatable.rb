@@ -6,26 +6,24 @@ include REXML
 
 class Datatable < ActiveRecord::Base
   attr_protected :object
-  belongs_to :dataset
-  has_many :variates, :order => :weight
-  belongs_to :theme
-  belongs_to :core_area
-  belongs_to :study
-  
-  has_many :data_contributions
-  has_many :people, :through => :data_contributions
-  
-  #permissions
-  has_many :permissions
-  #has_many :users, :through => :permissions
-  has_many :ownerships
-  has_many :owners, :through => :ownerships, :source => :user
+
+  has_one                 :collection
+  belongs_to              :core_area
+  belongs_to              :dataset
+  has_many                :data_contributions
+  has_many                :owners, :through => :ownerships, :source => :user
+  has_many                :ownerships
+#has_many                :people, :through => :data_contributions
+  has_many                :permissions
+  has_and_belongs_to_many :protocols
+  belongs_to              :study
+  belongs_to              :theme
+  has_many                :variates, :order => :weight
     
   validates_presence_of :title, :dataset
   
-  accepts_nested_attributes_for :data_contributions
-  
-  accepts_nested_attributes_for :variates
+  accepts_nested_attributes_for :data_contributions, :allow_destroy => true
+  accepts_nested_attributes_for :variates, :allow_destroy => true
   
   acts_as_taggable_on :keywords
   
@@ -39,7 +37,7 @@ class Datatable < ActiveRecord::Base
     indexes dataset.title, :as => :dataset_title
     indexes dataset.dataset, :as => :dataset_identifier
     indexes name
-    indexes website.name, :as => :website
+    has dataset.website_id, :as => :website
     where "datatables.on_web is true and datasets.on_web"
     
     #set_property :field_weights => {:keyword => 20, :theme => 20, :title => 10}
@@ -73,23 +71,24 @@ class Datatable < ActiveRecord::Base
   end
   
   def restricted?
-    if dataset.sponsor
-      dataset.sponsor.data_restricted?
-    else
-      false
-    end
+    dataset.sponsor.try(:data_restricted?)
   end
   
-  def can_download?(user)
-    if restricted?
-      if user.nil?
-        false
-      else
-        permitted?(user)
-      end
-    else
-      true
-    end
+  def permitted?(user)
+    permissions_granted_by = permissions.collect {|x| x.user == user ? x.owner : nil}.compact
+    permissions_granted_by == owners and not owners.empty?
+  end
+  
+  #TODO need to decide wether the permissions stuff is a function of the user or the datatable
+  def can_be_downloaded_by?(user)
+    !self.restricted? or
+      user.try(:role) == 'admin' or
+      self.is_owned_by?(user) or
+      self.permitted?(user)
+  end
+
+  def is_owned_by?(user)
+    user.try(:owns?, self)
   end
   
   def within_interval?(start_date=Date.today, end_date=Date.today)
@@ -97,6 +96,23 @@ class Datatable < ActiveRecord::Base
     return false if extent[:begin_date].nil?
     
     !(extent[:begin_date] < start_date || extent[:end_date] > end_date) 
+  end
+  
+  def events
+    event_query_sql = event_query || ""
+    values  = ActiveRecord::Base.connection.execute(event_query_sql)
+    
+    events = values.collect do |value|
+      {'start' => Date.parse(value['date']).rfc2822,
+        'title' => value['title'],
+        'description' => value['description'],
+       'durationEvent' => false }
+    end
+    
+    event_summary = events.inject do |event|
+      
+    end
+    {'dateTimeFormat'=> 'Gregorian', 'events'=> events}.to_json
   end
   
   #TODO create a completed flag and use the actual end year if present
@@ -126,9 +142,9 @@ class Datatable < ActiveRecord::Base
   
   def to_csv
     if self.metadata_only?
-       return 'Data available by request from glbrc.data@kbs.msu.edu'
-     end
-     values  = ActiveRecord::Base.connection.execute(object)
+      return 'Data available by request from glbrc.data@kbs.msu.edu'
+    end
+    values  = ActiveRecord::Base.connection.execute(object)
     if RUBY_VERSION > "1.9"
       output = CSV
     else
@@ -165,22 +181,22 @@ class Datatable < ActiveRecord::Base
   end
   
   def data_source
-    "#\n# Data Source: http://lter.kbs.msu.edu/datatables/#{self.id}
-# Metadata: http://lter.kbs.msu.edu/datatables/#{self.id}.eml\n#\n#"
+    "\n# Data Source: http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}
+# Metadata: http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}.eml\n#\n#"
   end
   
   def data_access_statement
-    "# Terms of Use
-#   Data in the KBS LTER core database may not be published without written permission of the lead investigator
-#   or project director. These restrictions are intended mainly to preserve the primary investigators' rights
-#   to first publication and to ensure that data users are aware of the limitations that may be associated with
-#   any specific data set. These restrictions apply to both the baseline data set and to the data sets associated
-#   with specific LTER-supported subprojects.\n#
-#   All investigators on-site are expected to release their data to the core database within
-#   a reasonable period of time following subproject completion.\n#
-#   Access to data is provided by the KBS LTER Data Manager with oversight provided by the Executive Committee,
-#   chaired by the Project Director. Access to sample archives is provided by the Project Director.
-#   All publications of KBS data and images must acknowledge KBS LTER support.\n"
+    access_statement = dataset.sponsor.try(:data_use_statement)
+    if access_statement
+      access_statement.gsub(/.{1,60}(?:\s|\Z)/){($& + 5.chr)\
+        .gsub(/\n\005/,"\n")\
+        .gsub(/\005/,"\n")}\
+        .split(/\n/)\
+        .collect {|line| "# #{line}\n"}\
+        .join
+    else
+      ''
+    end
   end
   
   def temporal_extent
@@ -210,7 +226,19 @@ class Datatable < ActiveRecord::Base
     self.end_date = dates[:end_date] if dates[:end_date]
     save
   end
-    
+  
+  def perform_query
+    query =  self.object
+    self.excerpt_limit = 5 unless self.excerpt_limit
+    query = query + " limit #{self.excerpt_limit}" 
+    ActiveRecord::Base.connection.execute(query)
+    #TDOD convert the array into a ruby object
+  end
+
+  def related_tables
+    self.dataset.datatables - [self]
+  end
+  
 private
 
   def query_datatable_for_temporal_extent(query)
@@ -244,13 +272,13 @@ private
   
   def convert_to_date(time)
     if time.class == Time
-        time = time.to_date
+      time = time.to_date
     end
     time
   end
   
-  def permitted?(user)
-    granted_by = permissions.collect {|x| x.user == user ? x.owner : nil}.compact
-    granted_by == owners
+  def sponsor_name
+    dataset.sponsor.try(:name) || 'LTER'
   end
+  
 end

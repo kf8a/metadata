@@ -1,11 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
-require 'publications_controller'
-
-# Re-raise errors caught by the controller.
-class PublicationsController; def rescue_action(e) raise e end; end
 
 class PublicationsControllerTest < ActionController::TestCase
- fixtures :publications
+ fixtures :publications, :treatments
 
   def setup
     #TODO test with admin and non admin users

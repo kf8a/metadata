@@ -2,15 +2,15 @@ class PeopleController < ApplicationController
   
   layout :site_layout
   
-  before_filter :admin?, :except => [:index, :show, :alphabetical, :emeritus] if ENV["RAILS_ENV"] == 'production'
+  before_filter :admin?, :except => [:index, :show, :alphabetical, :emeritus] unless ENV["RAILS_ENV"] == 'development'
   
   caches_action :index
 
   # GET /people
   # GET /people.xml
   def index
-    @people = Person.all(:order => 'sur_name', :order => 'sur_name')
-    @roles = RoleType.find_by_name('lter').roles.find(:all, :order => :seniority, :conditions =>['name not like ?','Emeritus%'])
+    @people = Person.all(:order => 'sur_name')
+    @roles = RoleType.find_by_name('lter').roles.all(:order => :seniority, :conditions =>['name not like ?','Emeritus%'])
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @people.to_xml }
@@ -27,8 +27,8 @@ class PeopleController < ApplicationController
   end  
   
   def emeritus
-    @people = Person.all(:order => 'sur_name', :order => 'sur_name')
-    @roles = RoleType.find_by_name('lter').roles.find(:all, :order => :seniority, :conditions =>['name like ?','Emeritus%'])
+    @people = Person.all(:order => 'sur_name')
+    @roles = RoleType.find_by_name('lter').roles.all(:order => :seniority, :conditions =>['name like ?','Emeritus%'])
     respond_to do |format|
       format.html # emeritus.rhtml
       format.xml  { render :xml => @people.to_xml }
@@ -45,11 +45,8 @@ class PeopleController < ApplicationController
   def show
     @person = Person.find(params[:id])
     
-    subdomain_request = request_subdomain(params[:requested_subdomain])
-    page = template_choose(subdomain_request, "people", "show")
-
     respond_to do |format|
-      format.html { render page }
+      format.html { render_subdomain }
       format.xml  { render :xml => @person.to_xml }
     end
   end
@@ -71,7 +68,7 @@ class PeopleController < ApplicationController
   # POST /people.xml
   def create
     @person = Person.new(params[:person])
-
+     
     respond_to do |format|
       if @person.save
         expire_action :action => :index
@@ -89,7 +86,8 @@ class PeopleController < ApplicationController
   # PUT /people/1.xml
   def update    
     @person = Person.find(params[:id])
-
+    expire_page :action => :index
+    
     respond_to do |format|
       if @person.update_attributes(params[:person])
         expire_action :action => :index
@@ -118,7 +116,7 @@ class PeopleController < ApplicationController
   
   private 
   def set_title
-    if request_subdomain(params[:requested_subdomain]) == "lter"
+    if @subdomain_request == "lter"
       @title = 'KBS LTER Directory'
     else
       @title = 'GLBRC Directory'

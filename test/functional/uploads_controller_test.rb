@@ -30,4 +30,13 @@ class UploadsControllerTest < ActionController::TestCase
     get :show, :id => @upload.id
     assert_response :success
   end
+  
+  context 'GET :new in the glbrc subdomain' do
+    setup do
+      get :new, :requested_subdomain => 'glbrc'
+    end
+    
+    should render_template 'new'
+    should render_with_layout(:glbrc)
+  end
 end

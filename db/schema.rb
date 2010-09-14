@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100719124908) do
+ActiveRecord::Schema.define(:version => 20100913181251) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -19,10 +19,60 @@ ActiveRecord::Schema.define(:version => 20100719124908) do
     t.string  "title"
   end
 
-  create_table "citations", :force => true do |t|
-    t.date     "datetime"
+  create_table "authors", :force => true do |t|
+    t.string   "sur_name"
+    t.string   "given_name"
+    t.string   "middle_name"
+    t.integer  "seniority"
+    t.integer  "person_id"
+    t.integer  "citation_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "citation_types", :force => true do |t|
+    t.string   "abbreviation"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "citations", :force => true do |t|
+    t.text     "title"
+    t.text     "abstract"
+    t.date     "pub_date"
+    t.integer  "pub_year"
+    t.integer  "citation_type_id"
+    t.text     "address"
+    t.text     "notes"
+    t.string   "publication"
+    t.integer  "start_page_number"
+    t.integer  "ending_page_number"
+    t.text     "periodical_full_name"
+    t.string   "periodical_abbreviation"
+    t.string   "volume"
+    t.string   "issue"
+    t.string   "city"
+    t.string   "publisher"
+    t.string   "secondary_title"
+    t.string   "series_title"
+    t.string   "isbn"
+    t.string   "doi"
+    t.text     "full_text"
+    t.string   "publisher_url"
+    t.integer  "website_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "pdf_file_name"
+    t.string   "pdf_content_type"
+    t.integer  "pdf_file_size"
+    t.datetime "pdf_updated_at"
+  end
+
+  create_table "collections", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "datatable_id"
   end
 
   create_table "columns", :force => true do |t|
@@ -118,12 +168,29 @@ ActiveRecord::Schema.define(:version => 20100719124908) do
     t.boolean  "is_secondary",          :default => false
     t.boolean  "is_utf_8",              :default => false
     t.boolean  "metadata_only",         :default => false
+    t.text     "summary_graph"
+    t.text     "event_query"
+  end
+
+  create_table "datatables_protocols", :id => false, :force => true do |t|
+    t.integer "datatable_id"
+    t.integer "protocol_id"
   end
 
   create_table "datatables_variates", :force => true do |t|
   end
 
   create_table "eml_docs", :force => true do |t|
+  end
+
+  create_table "events", :force => true do |t|
+    t.string   "title"
+    t.datetime "start"
+    t.datetime "end"
+    t.text     "caption"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "geometry_columns", :id => false, :force => true do |t|
@@ -206,6 +273,24 @@ ActiveRecord::Schema.define(:version => 20100719124908) do
     t.datetime "updated_at"
   end
 
+  create_table "page_images", :force => true do |t|
+    t.string   "title"
+    t.string   "attribution"
+    t.integer  "page_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  create_table "pages", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "people", :force => true do |t|
     t.string  "person"
     t.string  "sur_name"
@@ -236,6 +321,14 @@ ActiveRecord::Schema.define(:version => 20100719124908) do
     t.integer  "owner_id"
   end
 
+  create_table "plots", :force => true do |t|
+    t.string  "name"
+    t.integer "treatment_id"
+    t.integer "replicate"
+    t.integer "study_id"
+    t.string  "description"
+  end
+
   create_table "projects", :force => true do |t|
     t.string   "title"
     t.text     "abstract"
@@ -263,6 +356,11 @@ ActiveRecord::Schema.define(:version => 20100719124908) do
   create_table "protocols_sponsors", :id => false, :force => true do |t|
     t.integer "protocol_id"
     t.integer "sponsor_id"
+  end
+
+  create_table "protocols_websites", :id => false, :force => true do |t|
+    t.integer "protocol_id"
+    t.integer "website_id"
   end
 
   create_table "publication_types", :force => true do |t|
@@ -350,7 +448,8 @@ ActiveRecord::Schema.define(:version => 20100719124908) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "data_restricted", :default => false
+    t.boolean  "data_restricted",    :default => false
+    t.text     "data_use_statement"
   end
 
   create_table "studies", :force => true do |t|
@@ -409,9 +508,9 @@ ActiveRecord::Schema.define(:version => 20100719124908) do
   create_table "units", :force => true do |t|
     t.string  "name"
     t.text    "description"
-    t.boolean "in_eml",                     :default => false
+    t.boolean "in_eml",      :default => false
     t.text    "definition"
-    t.string  "human_name",  :limit => nil
+    t.string  "human_name"
   end
 
   add_index "units", ["name"], :name => "unit_names_key", :unique => true
@@ -469,7 +568,6 @@ ActiveRecord::Schema.define(:version => 20100719124908) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "dataset_id"
   end
 
 end

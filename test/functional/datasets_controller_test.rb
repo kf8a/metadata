@@ -42,6 +42,30 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  context "an lter dataset" do
+    setup do
+      lter_website = Website.find_by_name('lter')
+      lter_website = Factory.create(:website, :name => 'lter') unless lter_website
+      @lterdataset = Factory.create(:dataset, :website => lter_website)
+    end
+      
+    context "GET :show the dataset / 'glbrc' subdomain" do
+      setup do
+        get :show, :id => @lterdataset, :requested_subdomain => 'glbrc'
+      end
+
+      should_not respond_with :success
+    end
+    
+    context "GET :show the dataset / 'lter' subdomain" do
+      setup do
+        get :show, :id => @lterdataset, :requested_subdomain => 'lter'
+      end
+      
+      should respond_with :success
+    end
+  end
+  
   def test_should_get_edit
     get :edit, :id => @dataset
     assert_response :success

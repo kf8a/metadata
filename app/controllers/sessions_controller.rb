@@ -1,4 +1,11 @@
 class SessionsController < Clearance::SessionsController
+  
+  layout :site_layout
+  
+  def new
+    logger.info "subdomain: #{@subdomain_request}"
+    render_subdomain
+  end
 
   def create
     if params[:session]
@@ -49,5 +56,10 @@ class SessionsController < Clearance::SessionsController
     end
 
   end
-
+  
+  private
+  def set_title
+    @title = @subdomain_request.upcase
+  end
+  
 end

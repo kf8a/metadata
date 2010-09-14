@@ -7,8 +7,6 @@ javascripts:
   - jquery.truncator
   - jquery.quickTree
   - application
-  - textile-editor
-  - textile-editor-config
 
 stylesheets: 
 - base: 
@@ -18,6 +16,7 @@ stylesheets:
   - data
   - kbs
   - glbrc
+  - lter_supplemental
   - navigation
   - scaffold
   - textile-editor

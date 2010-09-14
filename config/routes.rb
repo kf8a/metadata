@@ -1,7 +1,22 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resource :session, :controller => 'sessions'
   
+   map.resource :session, :controller => 'sessions'
+   map.resource :users, :controller => 'users'
+    
+    map.sign_in  'sign_in',
+      :controller => 'sessions',
+      :action     => 'new'
+    map.sign_out 'sign_out',
+      :controller => 'sessions',
+      :action     => 'destroy',
+      :method     => :delete
+
+    map.sign_up  'sign_up',
+      :controller => 'users',
+      :action     => 'new'
+      
   Clearance::Routes.draw(map)
+  
   map.resources :projects
 
   map.resources :weathers
@@ -20,7 +35,8 @@ ActionController::Routing::Routes.draw do |map|
                                            :auto_complete_for_keyword_list => :get}
 
   map.resources :datatables, :collection => {:suggest => :get,
-                                             :search  => :get}
+                                             :search  => :get,
+                                             :events  => :get}
 
   map.resources :variates
 
@@ -45,11 +61,21 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :uploads
   
   map.resources :permissions
-     
+  
+  map.resources :ownerships
+  
+  map.resources :citations
+  
+  map.resources :sponsors
+  
+  map.resources :collections
+  
+  map.resources :pages
+  
+  #route to handle pdf downloads
+  map.connect '/assets/citations/:attachment/:id/:style/:basename.:extension', :controller => 'citations', :action => 'download', :requirements => { :method => :get }
+      
   map.root :controller => 'datatables'
-
-  #map.open_id_complete 'sessions', :controller => "sessions", :action => "create", :requirements => { :method => :get }
-  #map.resource :sessions  
   
   # The priority is based upon order of creation: first created -> highest priority.
   

@@ -1,10 +1,10 @@
 class VariatesController < ApplicationController
-  before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
+  before_filter :admin?, :except => [:index, :show]  unless ENV["RAILS_ENV"] == 'development'
   
   # GET /variates
   # GET /variates.xml
   def index
-    @variates = Variate.find(:all)
+    @variates = Variate.all
 
     respond_to do |format|
       format.html # index.rhtml

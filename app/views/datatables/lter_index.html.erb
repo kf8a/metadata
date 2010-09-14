@@ -47,4 +47,4 @@
   </ul>
 <% end %>
 
-<%= link_to 'login', new_session_path %>
+<%= link_to 'login', new_session_path unless signed_in? %>

@@ -2,19 +2,18 @@ class ProtocolsController < ApplicationController
   
   layout :site_layout
   before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
-  
+    
   #caches_action :index
   
   # GET /protocols
   # GET /protocols.xml
   def index
     @themes = Theme.roots
-    @protocols = Protocol.find(:all)
-    subdomain_request = request_subdomain(params[:requested_subdomain])
-    page = template_choose(subdomain_request, "protocols", "index")
+    website =  Website.find_by_name(@subdomain_request)
+    @protocols = website.protocols.all
 
     respond_to do |format|
-      format.html {render page}
+      format.html { render_subdomain }
       format.xml  { render :xml => @protocols.to_xml }
     end
   end
@@ -22,32 +21,39 @@ class ProtocolsController < ApplicationController
   # GET /protocols/1
   # GET /protocols/1.xml
   def show
-    @protocol = Protocol.find(params[:id])
+    website =  Website.find_by_name(@subdomain_request)
+    @protocol = website.protocols.first(:conditions => ['id = ?', params[:id]])
 
     respond_to do |format|
-      format.html # show.rhtml
-      format.xml  { render :xml => @protocol.to_xml }
+      if @protocol
+        format.html { render_subdomain }
+        format.xml  { render :xml => @protocol.to_xml }
+      else
+        format.html { redirect_to protocols_url}
+        format.xml  { head :not_found}
+      end
     end
   end
 
   # GET /protocols/new
   def new
     @protocol = Protocol.new
-    @people = Person.find(:all, :order => :sur_name)
+    @people = Person.all(:order => :sur_name)
+    get_all_websites
   end
 
   # GET /protocols/1;edit
   def edit
     @protocol = Protocol.find(params[:id])
-    @people = Person.find(:all, :order => :sur_name)
-    
+    @people = Person.all(:order => :sur_name)
+    get_all_websites
   end
 
   # POST /protocols
   # POST /protocols.xml
   def create
     @protocol = Protocol.new(params[:protocol])
-    @people = Person.find(:all, :order => :sur_name)
+    @people = Person.all(:order => :sur_name)
     
     respond_to do |format|
       if @protocol.save
@@ -57,7 +63,7 @@ class ProtocolsController < ApplicationController
         format.html { redirect_to protocol_url(@protocol) }
         format.xml  { head :created, :location => protocol_url(@protocol) }
       else
-        format.html { render :action => "new" }
+        format.html { render_subdomain "new" }
         format.xml  { render :xml => @protocol.errors.to_xml }
       end
     end
@@ -67,7 +73,8 @@ class ProtocolsController < ApplicationController
   # PUT /protocols/1.xml
   def update
     @protocol = Protocol.find(params[:id])
-
+    get_all_websites
+  
     respond_to do |format|
       if @protocol.update_attributes(params[:protocol])
         expire_action :action => :index
@@ -76,7 +83,7 @@ class ProtocolsController < ApplicationController
         format.html { redirect_to protocol_url(@protocol) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { render_subdomain "edit" }
         format.xml  { render :xml => @protocol.errors.to_xml }
       end
     end
@@ -97,9 +104,11 @@ class ProtocolsController < ApplicationController
   end
   
   private
+
   def set_title
     @title = 'Protocols'
   end
+
   def set_crumbs
     crumb = Struct::Crumb.new
     @crumbs = []
@@ -108,4 +117,13 @@ class ProtocolsController < ApplicationController
     crumb.name = 'Data Catalog: Protocols'
     @crumbs << crumb
   end
+  
+  def get_all_websites
+    @websites = Website.all
+  end
+  
+  def find_website
+ 
+  end
+  
 end

@@ -16,6 +16,10 @@
   <%= f.select :website_id, Website.all.collect {|x| [x.name, x.id]}%>
 </p>
 
+<p>
+  <label for=dataset_sponsor>Sponsor</label>
+  <%= f.select :sponsor_id, Sponsor.all.collect {|x| [x.name, x.id]}%>
+</p>
 
 <p>
   <label for='dataset_status'>Status</label>

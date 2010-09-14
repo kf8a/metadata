@@ -1,0 +1,117 @@
+<h1><%= @collection.datatable.title_and_years %></h1>
+
+<table class='data-description'>
+  <% unless @collection.datatable.dataset.protocols.empty? %>
+    <tr>
+      <td>Protocols</td>
+      <td>
+        <% @collection.datatable.dataset.protocols.each do |protocol| %>
+          <%= link_to protocol.name, protocol_path(protocol)%>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+
+  <% if @collection.datatable.keywords.any? %>
+    <tr>
+      <td>Keywords:</td>
+      <td><%= @collection.datatable.keywords.join(', ')%></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td>Metadata</td>
+    <td>
+      <ul>
+        <li><%= link_to 'Complete EML', dataset_path(@dataset, :format => :eml) %></li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+<table class='variate-table'>
+  <tr>
+    <th>Variate</th>
+    <th>Description</th>
+    <th>Units</th>
+  </tr>
+  <% @collection.datatable.variates.each do |variate| -%>
+    <tr>
+      <td class='space-after'>
+        <%= variate.name.gsub(/_/,' ') %>
+      </td>
+      <td class='space-after'>
+        <%= variate.description %>
+      </td>
+      <td>
+        <%= variate.unit.human_name if variate.unit %>
+      </td>
+    </tr>
+  <% end -%>
+</table>
+
+
+<% if @customize %>
+  <%= button_to 'Hide customization forms', {:action => 'customize', :id => @collection, :custom => false} %>
+  <% form_tag :action => 'customize', :id => @collection do %>
+    <%= hidden_field_tag 'custom', true %>
+    <table>
+      <tr>
+        <td><%= label_tag 'limitby', 'Limit display by field: '%></td>
+        <td><%= select_tag 'limitby', 
+                options_for_select(@limitoptions, @limitby) %></td>
+      </tr>
+      <% if @limitby %>
+        <%= hidden_field_tag 'oldlimitby', @limitby  %>
+        <tr>
+          <td><%= label_tag 'limit1', "Where '#{@limitby.titleize}' ranges from: " %></td>
+          <td><%= select_tag 'limit1', options_for_select(@limitrange, @limit1)%></td>
+          <td><%= label_tag 'limit2', " to: " %></td>
+          <td><%= select_tag 'limit2', options_for_select(@limitrange, @limit2)%></td>
+        </tr>
+        <tr>
+          <td><%= label_tag 'conatins', "Where '#{@limitby.titleize}' contains: "%> </td>
+          <td><%= text_field_tag 'contains'%> </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td><%= label_tag 'sortby', 'Sort display by field: '%></td>
+        <td><%= select_tag 'sortby',
+                options_for_select(@limitoptions, @sortby) %></td>
+        <td><%= select_tag 'sort_direction', options_for_select(["Ascending", "Descending"], @sort_direction)%> </td>
+      </tr>
+    </table>
+    <%= submit_tag 'Customize' %>
+  <% end %>
+<% else %>
+  <%= button_to 'Show customization forms', {:action => 'customize', :id => @collection, :custom => true}%>
+<% end %>
+
+<div>
+  <h2>Data</h2>
+  <div>
+    <table>
+      <% @values.each do  |row| %>
+        <% next unless @limitby.blank? || @contains.blank? || row[@limitby].casecmp(@contains) == 0 %>
+        <% next unless @limitby.blank? || @limit1.blank? || row[@limitby].casecmp(@limit1) >= 0 %>
+        <% next unless @limitby.blank? || @limit2.blank? || row[@limitby].casecmp(@limit2) <= 0 %>
+        <tr  class="<%= cycle('even','odd') -%>">
+          <td>
+            <% row.keys.each do |key| %>
+              <% next unless row[key] %>
+              <% next if key == "id" %>
+              <%= key.titleize + ": " + row[key] %><br />
+            <% end %>
+          </td>
+          <td>
+            <% if row['image'] %>
+              <img src="<%= row['image'] %>" alt="A picture"/>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      <% @values.clear %>
+    </table>
+  </div>
+</div>
+
+<%= link_to 'Back to Collections Catalog', collections_path() %>

@@ -2,16 +2,20 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class DatatableTest < ActiveSupport::TestCase
   
-  should belong_to :theme
-  should belong_to :core_area
-  should belong_to :dataset
-  should belong_to :study
-  should have_many :owners
-  
-  should have_many :data_contributions
-  
+  should belong_to                :core_area
+  should belong_to                :dataset
+  should have_many                :data_contributions
+  should have_many                :owners
+  should have_many                :ownerships
+  should have_many                :permissions
+  should have_and_belong_to_many  :protocols
+  should belong_to                :study
+  should belong_to                :theme
+  should have_many                :variates
+    
   should validate_presence_of :title
   should validate_presence_of :dataset
+#  should validate_presence_of :study
     
   context 'datatable' do
     setup do
@@ -31,6 +35,94 @@ class DatatableTest < ActiveSupport::TestCase
       assert @datatable.respond_to?('update_temporal_extent')
     end
     
+    should 'respond to events' do
+      assert @datatable.respond_to?('events')
+    end
+    
+    should 'return events as a string' do
+      assert_kind_of String, @datatable.events
+    end
+    
+    should 'respond to study' do
+      assert @datatable.respond_to?('study')
+    end
+  
+  end
+  
+  context 'datatable personnel' do
+    setup do
+      dataset = Factory :dataset
+      @datatable = Factory :datatable, :dataset => dataset
+    end
+    
+    should 'be able to add contributors' do
+      assert @datatable.data_contributions << [Factory.create(:data_contribution, :datatable => @datatable)]
+      assert @datatable.datatable_personnel
+    end
+    
+  end
+  
+  context 'datatable with and without sponsors' do
+    setup do 
+      sponsor = Factory.create :sponsor, :data_use_statement => 'Use it', :name => 'GLBRC'
+      dataset_with_sponsor = Factory :dataset, :sponsor => sponsor
+      dataset_without_sponsor = Factory :dataset, :sponsor => nil
+      @datatable = Factory :datatable, :dataset => dataset_with_sponsor
+      @datatable_without_sponsor = Factory :datatable, :dataset => dataset_without_sponsor
+    end
+    
+    should 'retrieve data access statement' do
+      assert @datatable.data_access_statement                 =~ /Use it/
+      assert @datatable_without_sponsor.data_access_statement == ''    
+    end
+  end
+  
+  context 'a datatable with an event query' do
+    setup do
+      @datatable = Factory :datatable, :object=>'select now()'
+    end
+    
+    should 'return a an array of events'
+    
+  end
+  
+  context 'datatable without owners and permissions' do
+    setup do 
+      @anonymous_user     = nil
+      @unauthorized_user  = Factory :user, :email => 'unauthorized@person.com'
+      @admin              = Factory :user, :email => 'admin@person.com', :role => 'admin'
+      
+      @unrestricted = Factory  :datatable
+      
+      sponsor = Factory :sponsor, :data_restricted => true
+      dataset = Factory :dataset, :sponsor => sponsor
+      @restricted = Factory :datatable, 
+        :dataset    => dataset
+    end
+    
+    should 'tell if it needs to be restricted at all' do
+      assert !@unrestricted.restricted?
+      assert  @restricted.restricted?
+    end
+     
+    should 'allow restrict datatables to be permitted' do
+      assert !@restricted.permitted?(@anonymous_user)
+      assert !@restricted.permitted?(@unauthorized_user)
+      assert !@restricted.permitted?(@admin)
+    end
+
+    should 'allow anyone to download unrestricted datatables' do
+      assert @unrestricted.can_be_downloaded_by?(@anonymous_user)
+      assert @unrestricted.can_be_downloaded_by?(@unauthorized_user)
+      assert @unrestricted.can_be_downloaded_by?(@admin)
+    end
+
+    should 'only allow authorized users to download restricted datatables' do
+      assert !@restricted.can_be_downloaded_by?(@anonymous_user)
+      assert !@restricted.can_be_downloaded_by?(@unauthorized_user)
+      assert  @restricted.can_be_downloaded_by?(@admin)
+    end
+   
   end
   
   context 'using datatable permissions' do
@@ -39,7 +131,8 @@ class DatatableTest < ActiveSupport::TestCase
       @unauthorized_user  = Factory :user, :email => 'unauthorized@person.com'
       @authorized_user    = Factory :user, :email => 'authorized@person.com'
       @owner              = Factory :user, :email => 'owner@person.com'
-      
+      @admin              = Factory :user, :email => 'admin@person.com', :role => 'admin'
+            
       @unrestricted = Factory  :datatable
             
       sponsor = Factory :sponsor, :data_restricted => true
@@ -60,15 +153,17 @@ class DatatableTest < ActiveSupport::TestCase
     end
     
     should 'allow anyone to download unrestricted datatables' do
-      assert @unrestricted.can_download?(@anonymous_user)
-      assert @unrestricted.can_download?(@unauthorized_user)
-      assert @unrestricted.can_download?(@authorized_user)
+      assert @unrestricted.can_be_downloaded_by?(@anonymous_user)
+      assert @unrestricted.can_be_downloaded_by?(@unauthorized_user)
+      assert @unrestricted.can_be_downloaded_by?(@authorized_user)
+      assert @unrestricted.can_be_downloaded_by?(@admin)
     end
     
     should 'only allow authorized users to download restricted datatables' do
-      assert !@restricted.can_download?(@anonymous_user)
-      assert !@restricted.can_download?(@unauthorized_user)
-      assert  @restricted.can_download?(@authorized_user)
+      assert !@restricted.can_be_downloaded_by?(@anonymous_user)
+      assert !@restricted.can_be_downloaded_by?(@unauthorized_user)
+      assert  @restricted.can_be_downloaded_by?(@authorized_user)
+      assert  @restricted.can_be_downloaded_by?(@admin)
     end
     
     should 'authorized table should have the right owner' do
@@ -89,15 +184,13 @@ class DatatableTest < ActiveSupport::TestCase
       @datatable  = Factory :datatable, :owners => [@owner]
     end
     
-    should 'give permissions to the user if owner' 
-    
-    should 'not give permission to user if not the owner'
-    
+    #TODO is there anything to test here?
+        
   end
     
   context 'datatable with sample_date' do
     setup do
-      @datatable = Factory.create(:datatable)
+      @datatable = Factory.create(:datatable, :object => %q{select now() as sample_date} )
       @old_data = Factory.create(:datatable, :object => %q{select now() - interval '3 year' as sample_date})
     end
     

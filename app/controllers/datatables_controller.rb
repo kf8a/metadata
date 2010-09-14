@@ -2,38 +2,42 @@ class DatatablesController < ApplicationController
   
   layout :site_layout
 
-  before_filter :admin?, :except => [:index, :show, :suggest, :search] unless ENV["RAILS_ENV"] == 'development'
+  before_filter :admin?, :except => [:index, :show, :suggest, :search, :events] unless ENV["RAILS_ENV"] == 'development'
   
-  caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
+  #caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
   
   # GET /datatables
   # GET /datatables.xml
   def index
     retrieve_datatables('keyword_list' =>'')
     @default_value = 'Search for core areas, keywords or people'
-    subdomain_request = request_subdomain(params[:requested_subdomain])
-    page = template_choose(subdomain_request, "datatables", "index")
-        
+    
+    @sponsor = Sponsor.find_by_name('glbrc')
     respond_to do |format|
-      format.html {render page}
+      format.html {render_subdomain}
       format.xml  { render :xml => @datatables.to_xml }
       format.rss {render :rss => @datatables}
     end
   end
 
   def search
-    subdomain_request = request_subdomain(params[:requested_subdomain])
+    @sponsor = Sponsor.find_by_name('glbrc')
+    
     query =  {'keyword_list' => ''}
     query.merge!(params)
     if query['keyword_list'].empty? 
       redirect_to datatables_url
     else
       retrieve_datatables(query)
-      page = template_choose(subdomain_request, "datatables", "search")
       respond_to do |format|
-        format.html {render page}
+        format.html {render_subdomain}
       end
     end
+  end
+  
+  def events
+    datatable = Datatable.find(params[:id])
+    render :json => datatable.events
   end
 
   # GET /datatables/1
@@ -42,29 +46,28 @@ class DatatablesController < ApplicationController
   def show  
     @datatable = Datatable.find(params[:id])
     @dataset = @datatable.dataset
-    # @roles = @dataset.roles
+
+    website_name = @dataset.website.try(:name)
+    if website_name and website_name != @subdomain_request
+      redirect_to datatables_url
+      return false
+    end
 
     @values = nil
     if (!trusted_ip? && @datatable.is_restricted)
       restricted = true
     else
-      if @datatable.is_sql
-        query =  @datatable.object
-        #@data_count = ActiveRecord::Base.connection.execute("select count() from (#{@datatable.object}) as t1")
-
-        @datatable.excerpt_limit = 5 unless @datatable.excerpt_limit
-        query = query + " limit #{@datatable.excerpt_limit}" 
-        @values  = ActiveRecord::Base.connection.execute(query)
-        #TDOD convert the array into a ruby object
-      end
+      @values = @datatable.perform_query if @datatable.is_sql
     end
 
-    subdomain_request = request_subdomain(params[:requested_subdomain])
-    page = template_choose(subdomain_request, "datatables", "show")
     respond_to do |format|
-      format.html   { render page}
+      format.html   { render_subdomain }
       format.xml    { render :xml => @datatable.to_xml}
-      format.csv    { render :text => @datatable.to_csv_with_metadata }
+      if @datatable.can_be_downloaded_by?(current_user) and not restricted
+        format.csv  { render :text => @datatable.to_csv_with_metadata }
+      else
+        format.csv  { redirect_to datatable_url(@datatable) }
+      end
       format.climdb { render :text => @datatable.to_climdb } unless restricted
       format.climdb { redirect_to datatable_url(@datatable) } if restricted
     end
@@ -73,15 +76,14 @@ class DatatablesController < ApplicationController
   # GET /datatables/new
   def new
     @datatable = Datatable.new
-    @themes = Theme.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
-    @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
+    @themes = Theme.all(:order => 'name').collect {|x| [x.name, x.id]}
+    @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
   end
 
   # GET /datatables/1;edit
   def edit
     @datatable = Datatable.find(params[:id])
-
-    @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
+    @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
   end
   
   def delete_csv_cache
@@ -95,17 +97,15 @@ class DatatablesController < ApplicationController
   # POST /datatables.xml
   def create
     @datatable = Datatable.new(params[:datatable])
-    @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
+    @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
 
-    subdomain_request = request_subdomain(params[:requested_subdomain])
     respond_to do |format|
       if @datatable.save
         flash[:notice] = 'Datatable was successfully created.'
         format.html { redirect_to datatable_url(@datatable) }
         format.xml  { head :created, :location => datatable_url(@datatable) }
       else
-        page = template_choose(subdomain_request, "datatables", "new")
-        format.html { render page }
+        format.html { render_subdomain "new" }
         format.xml  { render :xml => @datatable.errors.to_xml }
       end
     end
@@ -114,7 +114,6 @@ class DatatablesController < ApplicationController
   # PUT /datatables/1
   # PUT /datatables/1.xml
   def update
-    subdomain_request = request_subdomain(params[:requested_subdomain])
     @datatable = Datatable.find(params[:id])
 
     respond_to do |format|
@@ -123,9 +122,8 @@ class DatatablesController < ApplicationController
         format.html { redirect_to datatable_url(@datatable) }
         format.xml  { head :ok }
       else
-        @core_areas = CoreArea.find(:all, :order => 'name').collect {|x| [x.name, x.id]}
-        page = template_choose(subdomain_request, "datatables", "edit")
-        format.html { render page }
+        @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
+        format.html { render_subdomain "edit" }
         format.xml  { render :xml => @datatable.errors.to_xml }
       end
     end
@@ -169,10 +167,10 @@ class DatatablesController < ApplicationController
   private
 
   def set_title
-    if request_subdomain(params[:requested_subdomain]) == "lter"
+    if @subdomain_request == 'lter'
       @title  = 'LTER Data Catalog'
     else
-      @title = 'GLBRC Data Catalog'
+      @title = 'GLBRC Sustainability Data Catalog'
     end
   end
 
@@ -209,13 +207,15 @@ class DatatablesController < ApplicationController
     @keyword_list = query['keyword_list']
     @keyword_list = nil if @keyword_list.empty? || @keyword_list == @default_value
 
+    website = Website.find_by_name(@subdomain_request)
+    website_id = (website.try(:id) or 1)
     if @keyword_list
-      @datatables = Datatable.search @keyword_list, :tag => {:website => current_subdomain}
+      @datatables = Datatable.search @keyword_list, :with => {:website => website_id}
     else
-      @datatables = Datatable.find(:all, 
+      @datatables = Datatable.all( 
           :joins=> 'left join datasets on datasets.id = datatables.dataset_id', 
           :conditions => ['is_secondary is false and website_id = ?',
-              Website.find_by_name(current_subdomain)])
+              Website.find_by_name(@subdomain_request)])
     end
 
     @studies = Study.find_all_roots_with_datatables(@datatables, {:order => 'weight'})

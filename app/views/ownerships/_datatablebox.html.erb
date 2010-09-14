@@ -1,0 +1,2 @@
+<% datatable_number = 'datatable_' + datatable_count.to_s %>
+<%= select_tag datatable_number, options_from_collection_for_select(datatables, 'id', 'name') %>

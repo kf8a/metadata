@@ -1,4 +1,11 @@
 <p>
+  <label for='protocol_websites'>Websites</label>
+      <% @websites.each do |website| %>
+  			<%= check_box_tag("protocol[website_list][#{website.id}]", 
+                          "1", 
+                          @protocol.websites.detect{|w| w == website}) %>
+  			<%= "#{website.name}"%>
+  		<% end %>
 	<label for='protocol_name'>Name</label>
 	<%= f.text_field :name %>
 	<label for='protocol_title'>Title</label>
