@@ -7,7 +7,6 @@ class DatatableTest < ActiveSupport::TestCase
   should have_many                :data_contributions
   should have_many                :owners
   should have_many                :ownerships
-  should have_many                :people
   should have_many                :permissions
   should have_and_belong_to_many  :protocols
   should belong_to                :study
@@ -48,6 +47,19 @@ class DatatableTest < ActiveSupport::TestCase
       assert @datatable.respond_to?('study')
     end
   
+  end
+  
+  context 'datatable personnel' do
+    setup do
+      dataset = Factory :dataset
+      @datatable = Factory :datatable, :dataset => dataset
+    end
+    
+    should 'be able to add contributors' do
+      assert @datatable.data_contributions << [Factory.create(:data_contribution, :datatable => @datatable)]
+      assert @datatable.datatable_personnel
+    end
+    
   end
   
   context 'datatable with and without sponsors' do

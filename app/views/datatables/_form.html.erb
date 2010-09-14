@@ -42,7 +42,7 @@
         <td><%= select_tag 'datatable[data_contributions_attributes][][person_id]',  options_from_collection_for_select(Person.all, :id, :short_full_name, contribution.person_id) %></td>
         <td><%= select_tag 'datatable[data_contributions_attributes][][role_id]', options_from_collection_for_select(Role.data_roles, :id, :name, contribution.role_id) %></td>
         <td>
-    		  <%= check_box_tag 'datatable[data_contributions_attributes][][_delete]' %>
+    		  <%= check_box_tag 'datatable[data_contributions_attributes][][_destroy]' %>
     		  <%= hidden_field_tag 'datatable[data_contributions_attributes][][id]', contribution.id %>
     		</td>
       </tr>
@@ -114,7 +114,7 @@
       <td><%= text_field_tag 'datatable[variates_attributes][][precision]', variate.precision %></td>
       <td><%= text_field_tag 'datatable[variates_attributes][][missing_value_indicator]', variate.missing_value_indicator %></td>
     	<td>
-  		  <%= check_box_tag 'datatable[variates_attributes][][_delete]' %>
+  		  <%= check_box_tag 'datatable[variates_attributes][][_destroy]' %>
   		  <%= hidden_field_tag 'datatable[variates_attributes][][id]', variate.id %>
   		</td>
     </tr>

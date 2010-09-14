@@ -13,7 +13,7 @@ class Datatable < ActiveRecord::Base
   has_many                :data_contributions
   has_many                :owners, :through => :ownerships, :source => :user
   has_many                :ownerships
-  has_many                :people, :through => :data_contributions
+#has_many                :people, :through => :data_contributions
   has_many                :permissions
   has_and_belongs_to_many :protocols
   belongs_to              :study
@@ -22,7 +22,8 @@ class Datatable < ActiveRecord::Base
     
   validates_presence_of :title, :dataset
   
-  accepts_nested_attributes_for :data_contributions, :variates
+  accepts_nested_attributes_for :data_contributions, :allow_destroy => true
+  accepts_nested_attributes_for :variates, :allow_destroy => true
   
   acts_as_taggable_on :keywords
   

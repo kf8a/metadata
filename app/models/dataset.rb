@@ -26,7 +26,7 @@ class Dataset < ActiveRecord::Base
   
   def datatable_people
     datatables.collect do |table|
-      table.people
+      table.personnel.keys
     end.flatten
   end
    

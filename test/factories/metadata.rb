@@ -83,6 +83,8 @@ Factory.define :protocol do |p|
   p.dataset Factory.create(:dataset)
 end
 
+
+
 Factory.define :datatable do |d|
   d.name          'KBS001_001'
   d.title         'a really cool datatable'
@@ -100,6 +102,12 @@ end
 
 Factory.define :collection do |c|
   c.datatable   Factory.create(:datatable)
+end
+
+Factory.define :data_contribution do |d|
+  d.person    Factory.create(:person)
+  d.role      Factory.create(:role)
+  d.datatable Factory.create(:datatable)
 end
 
 Factory.define :meeting do |m|
