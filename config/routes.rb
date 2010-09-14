@@ -82,6 +82,14 @@ ActionController::Routing::Routes.draw do |map|
   
   #route to handle pdf downloads
   map.connect '/assets/citations/:attachment/:id/:style/:basename.:extension', :controller => 'citations', :action => 'download', :requirements => { :method => :get }
+  
+  #route for application tests
+  map.resources :foo, :controller => 'application_controller_test/foo', 
+                        :collection => {
+                          :alphabetical => :get,
+                          :emeritus => :get,
+                          :testadmin => :get, 
+                          :testpagechoose => :get} if RAILS_ENV=='test'
       
   map.root :controller => 'datatables'
   
