@@ -12,7 +12,7 @@ set :user, 'deploy'
 set :use_sudo, false
 
 set :branch, $1 if `git branch` =~ /\* (\S+)\s/m
-set :deploy_via, :copy
+set :deploy_via, :remote_cache
 #set :git_enable_submodules,1
 
 before :deploy do
