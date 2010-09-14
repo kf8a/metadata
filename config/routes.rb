@@ -62,6 +62,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :permissions
   
+  map.resources :permission_requests
+  
   map.resources :ownerships
   
   map.resources :citations
