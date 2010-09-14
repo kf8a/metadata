@@ -14,7 +14,7 @@ class OwnershipsController < ApplicationController
   
   def new
     @datatable = Datatable.find(params[:datatable]) if params[:datatable]
-    @datatables = Datatable.all unless @datatable
+    @datatables = Datatable.all(:order => 'name') unless @datatable
     @users = User.all(:order => 'email')
     @ownership = Ownership.new
     @user_count = 1
