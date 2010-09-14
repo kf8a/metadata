@@ -4,11 +4,6 @@ Given /^I am in the (.*) subdomain$/ do |subdomain|
   visit path
 end
 
-Given /^a website exists named "([^"]*)"$/ do |name|
-  Factory.create(:website, :name => name)
-end
-
-
 When /^I follow the redirect$/ do
   follow_redirect! if redirect?
 end

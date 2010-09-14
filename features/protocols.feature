@@ -7,8 +7,8 @@ Feature: Protocols should be linked to more than one dataset and show up on one 
   
   Scenario: Assigning a new protocol to a website
     Given I am in the GLBRC subdomain
-    And   a glbrc website exists
-    And   a lter website exists
+    And   a website exists with a name of "glbrc"
+    And   a website exists with a name of "lter"
     And   a user exists and is confirmed with an email of "bob@person.com"
     And   "bob@person.com" is an administrator
     When  I sign in as "bob@person.com"/"password"

@@ -1,3 +1,4 @@
 Given /^the datatable has a collection$/ do
-  @collection = Factory.create(:collection, :datatable => @datatable)
+  datatable = Datatable.last
+  collection = Factory.create(:collection, :datatable => datatable)
 end

@@ -4,18 +4,18 @@ Feature: Data Collections
   I want to be able to browse and search the data for some datatables
 
   Background:
-    Given a website exists named "lter"
-      And a website exists named "glbrc"
+    Given a website exists with a name of "lter"
+      And a website exists with a name of "glbrc"
       And I am signed in as a normal user
       And I am in the lter subdomain
       And all caches are cleared
 
   Scenario: Seeing which datatables are available as collections
-    Given a public lter datatable exists titled "First one"
+    Given a public lter datatable exists with a title of "First one"
       And the datatable has a collection
-      And a public lter datatable exists titled "Second one"
+      And a public lter datatable exists with a title of "Second one"
       And the datatable has a collection
-      And a public lter datatable exists titled "Third one"
+      And a public lter datatable exists with a title of "Third one"
       And the datatable has a collection
     When I go to the collections page
     Then I should see "First one"

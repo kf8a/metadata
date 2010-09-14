@@ -18,13 +18,13 @@ module NavigationHelpers
       new_password_path
       
     when /the datatable page/
-      datatable_path(@datatable)
+      datatable_path(Datatable.last)
       
     when /the datatable edit page/
-      edit_datatable_path(@datatable)
+      edit_datatable_path(Datatable.last)
            
     when /the datatable download page/
-      datatable_path(@datatable, :format => 'csv')
+      datatable_path(Datatable.last, :format => 'csv')
       
     when /LTER datatables/
       datatables_path
@@ -36,14 +36,14 @@ module NavigationHelpers
       new_protocol_path
       
     when /the citation page/
-      citation_path(@citation)
-      
+      citation_path(Citation.last)
+
     when /the new citation page/
       new_citation_path
     
     when /the collection page/
-      collection_path(@collection)
-  
+      collection_path(Collection.last)
+      
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

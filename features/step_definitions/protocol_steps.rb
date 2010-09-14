@@ -1,7 +1,3 @@
-Given /^a (.*) website exists$/ do |website|
-  Factory.create(:website, :name => website)
-end
-
 When(/^I check the "(.+?)" website$/) do |name|
   @website = Website.find_by_name(name)
   check "protocol[website_list][#{@website.id}]"

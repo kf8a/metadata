@@ -31,4 +31,5 @@ class CollectionsControllerTest < ActionController::TestCase
     
     should respond_with :success
   end
+
 end

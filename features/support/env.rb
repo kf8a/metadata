@@ -15,11 +15,8 @@ require 'cucumber/web/tableish'
 require 'webrat'
 require 'webrat/core/matchers'
 
-require 'factory_girl' 
-
-Dir.glob(File.dirname(__FILE__) + "/../../test/factories/*.rb").each do |factory| 
-  require factory 
-end
+require 'factory_girl'
+require 'factory_girl/step_definitions'
 
 Webrat.configure do |config|
 #  config.application_address = 'lter.dev'

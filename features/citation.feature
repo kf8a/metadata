@@ -8,12 +8,12 @@ Feature: Citation viewing and downloading
     Then I should see "Publications"
     
   Scenario: An anonymous user visits a citation page
-    Given a citation with the title "Earthworms"
+    Given a citation exists with a title of "Earthworms"
      When I go to the citation page
      Then I should see "Earthworms"
      
   Scenario: A signed in user visits a citation page
-    Given a citation with the title "Corn weevil" 
+    Given a citation exists with a title of "Corn weevil" 
       And I have signed in with "bob@person.com"/"password"
      When I go to the citation page
      Then I should see "Corn weevil"

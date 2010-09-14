@@ -5,15 +5,15 @@ Given /^I have the "([^"]*)" role$/ do |role|
 end
 
 Given /^"([^"]*)" is an administrator$/ do |email|
-  @user = User.find_by_email(email)
-  @user.role = "admin"
-  @user.save
+  user = User.find_by_email(email)
+  user.role = "admin"
+  user.save
 end
 
 Given /^"([^"]*)" is not an administrator$/ do |email|
-  @user = User.find_by_email(email)
-  @user.role = 'normal'
-  @user.save
+  user = User.find_by_email(email)
+  user.role = "normal"
+  user.save
 end
 
 Then /^I should have the "([^"]*)" role$/ do |role|
