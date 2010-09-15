@@ -72,7 +72,7 @@ Feature: Give Permissions to another user
     And I go to the datatable page
     And I follow "Request data"
     And I press "Create a permission request"
-    Then I should see "Permission to download"
+    Then I should see "Permission for sam@person.com to download"
     And I should see "has been requested"
     And I should see "Email the owners of this datatable"
 

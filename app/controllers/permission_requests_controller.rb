@@ -1,6 +1,7 @@
 class PermissionRequestsController < ApplicationController
 
   before_filter :authenticate
+  helper :datatables
   
   def new
     @permission_request = PermissionRequest.new
