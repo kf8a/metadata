@@ -23,5 +23,22 @@ class PermissionRequestsControllerTest < ActionController::TestCase
         should_not respond_with :success
       end
     end
+    
+    context "and signed in as a valid user" do
+      setup do
+        @user = Factory.create(:email_confirmed_user)
+        @controller.current_user = @user
+      end
+      
+      context "GET :new" do
+        setup do
+          get :new, :datatable => @datatable
+        end
+        
+        should respond_with :success
+        should assign_to(:datatable).with(@datatable)
+        should assign_to(:permission_request)
+      end
+    end
   end
 end
