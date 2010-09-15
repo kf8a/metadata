@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class PermissionRequestTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
-  end
+
+  should belong_to :user
+  should belong_to :datatable
+
+  #TODO figure out why it fails with these
+  should validate_presence_of :user
+  should validate_presence_of :datatable
 end
