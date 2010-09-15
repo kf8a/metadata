@@ -117,7 +117,7 @@ class OwnershipsController < ApplicationController
     @datatable = Datatable.find(params[:id]) if params[:id]
     @datatable = Datatable.find(params[:datatable]) if params[:datatable]
     unless @datatable
-      flash[:notice] = "You must select a valid datatable to grant permissions"
+      flash[:notice] = "You must select a valid datatable to grant ownerships"
       redirect_to :action => :index
       return false
     end
