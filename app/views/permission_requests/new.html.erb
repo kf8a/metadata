@@ -1,4 +1,4 @@
-<p>Use this page to request permission for <%= current_user %> to download 
+<p>Use this page to request permission for <%= current_user.email %> to download 
     <%= @datatable.name %>.
 </p>
 <% form_for @permission_request do |f| %>
