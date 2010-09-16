@@ -1,2 +1,2 @@
 <%= hidden_field_tag 'datatable_count', datatable_count %>
-<%= button_to_remote 'Add Another Datatable', :url => {:action => "add_another_datatable", :datatable_count => @datatable_count} %>
+<%= button_to_remote 'Add Another Datatable', :url => {:action => "add_another_datatable", :datatable_count => datatable_count} %>
