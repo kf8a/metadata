@@ -24,11 +24,11 @@
 </p>
 <p>
   <label for='datatable_theme'>KBS Theme</label>
-  <%= f.select :theme_id, nested_set_options(Theme, @theme) {|i| "#{'-' * i.level} #{i.name}" }, :include_blank => true %>
+  <%= f.select :theme_id, nested_set_options(Theme, theme) {|i| "#{'-' * i.level} #{i.name}" }, :include_blank => true %>
 </p>
 <p>
   <label for='datatable_theme'>LTER Core Area</label>
-  <%= f.select :core_area_id, @core_areas , :include_blank => true%>
+  <%= f.select :core_area_id, core_areas , :include_blank => true%>
 </p>
 <% f.fields_for :data_contributions do |contribution_form| %>
   <table id='data-contributions'>
@@ -55,7 +55,7 @@
   <%= f.date_select :begin_date, :include_blank => true, :end_year => Time.now.year, :start_year => 1887%> 
   <label for='datatable_end_date'>to</label>
   <%= f.date_select :end_date, :include_blank => true, :end_year => Time.now.year, :start_year => 1887 %>
-  <%= button_to_remote 'update temporal extent', :url => {:action => :update_temporal_extent, :id => @datatable}%>
+  <%= button_to_remote 'update temporal extent', :url => {:action => :update_temporal_extent, :id => datatable}%>
 </p>
 <p>
   <label for='datatable_weight'>Weight</label>

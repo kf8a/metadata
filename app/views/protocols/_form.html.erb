@@ -29,7 +29,7 @@
 	
 	<p>
 	<label for='protocol_people'>Author</label>
-	<%= f.collection_select :person_id, @people, :id, :full_name, {}, {:multiple => true, :size => 10}%>
+	<%= f.collection_select :person_id, people, :id, :full_name, {}, {:multiple => true, :size => 10}%>
 </p>
 <p>
 	<label for='protocol_change_summary'>Change summary</label>
@@ -37,8 +37,8 @@
 </p>
 <p>
 	<label for='protocol_dataset'>Dataset</label>
-	<% @datasets = Dataset.find(:all).map {|x| [x.dataset, x.id]} %>
-	<%= f.select :dataset_id, @datasets %>
+	<% datasets = Dataset.find(:all).map {|x| [x.dataset, x.id]} %>
+	<%= f.select :dataset_id, datasets %>
 </p>
 
 <div class="wmd-preview"></div>
