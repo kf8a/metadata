@@ -1,6 +1,7 @@
 class StudiesController < ApplicationController
   
   before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
+  before_filter :get_study, :only => [:edit, :update]
   
   #GET /studies
   def index
@@ -9,13 +10,10 @@ class StudiesController < ApplicationController
   
    # GET /studies/1;edit
   def edit
-    @study = Study.find(params[:id])
   end
   
    # POST /studies/1
   def update
-    @study = Study.find(params[:id])
-
     respond_to do |format|
       if @study.update_attributes(params[:study])
         flash[:notice] = 'Study was successfully updated.'
@@ -26,6 +24,11 @@ class StudiesController < ApplicationController
         format.xml  { render :xml => @study.errors.to_xml }
       end
     end
-    
+  end
+  
+  private
+  
+  def get_study
+    @study = Study.find(params[:id])
   end
 end

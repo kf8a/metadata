@@ -3,13 +3,13 @@ class PagesController < ApplicationController
   layout :site_layout
   
   before_filter :admin?, :except => [:show] unless ENV["RAILS_ENV"] == 'development'
+  before_filter :get_page, :only => [:show, :edit, :update, :destroy]
   
   def index
     return head :bad_request
   end
   
   def show
-    @page = Page.find(params[:id])
     @title = @page.title
   end
   
@@ -34,12 +34,9 @@ class PagesController < ApplicationController
   end
   
   def edit
-    @page = Page.find(params[:id])
   end
   
   def update
-    @page = Page.find(params[:id])
-
     respond_to do |format|
       if @page.update_attributes(params[:page])
         flash[:notice] = 'Page was successfully updated.'
@@ -53,8 +50,13 @@ class PagesController < ApplicationController
   end
   
   def destroy 
-    @page = Page.find(params[:id])
     @page.destroy
+  end
+  
+  private
+  
+  def get_page
+    @page = Page.find(params[:id])
   end
  
 end

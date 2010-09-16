@@ -1,19 +1,19 @@
 class CollectionsController < ApplicationController
 
   layout :site_layout
+  
+  before_filter :get_collection, :only => [:show, :customize]
 
   def index
     @collections = Collection.all
   end
   
   def show
-    @collection = Collection.find(params[:id])
     @values = @collection.perform_query
     @customize = false
   end
 
   def customize
-    @collection = Collection.find(params[:id])
     @limitby = params[:limitby]
     if @limitby == params[:oldlimitby] || params[:oldlimitby].blank?
       @limit1 = params[:limit1]
@@ -46,4 +46,9 @@ class CollectionsController < ApplicationController
     render 'show'
   end
   
+  private
+  
+  def get_collection
+    @collection = Collection.find(params[:id])
+  end
 end

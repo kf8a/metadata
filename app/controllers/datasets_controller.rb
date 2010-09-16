@@ -4,6 +4,7 @@ class DatasetsController < ApplicationController
   
   before_filter :allow_on_web, :except => [:autocomplete_for_keyword_list]
   before_filter :admin?, :except => [:index, :show, :auto_complete_for_keyword_list] if ENV["RAILS_ENV"] == 'production'
+  before_filter :get_dataset, :only => [:show, :edit, :update, :destroy]
   
   #layout proc {|controller| controller.request.format == :eml ? false : 'application'}
   
@@ -35,7 +36,6 @@ class DatasetsController < ApplicationController
   # GET /datasets/1.xml
   # GET /dataset/1.eml
   def show
-    @dataset  = Dataset.find(params[:id])
     @title    = @dataset.title
     @roles    = @dataset.roles
     @website  = @dataset.website
@@ -61,7 +61,6 @@ class DatasetsController < ApplicationController
 
   # GET /datasets/1;edit
   def edit
-    @dataset  = Dataset.find(params[:id])
     @people   = Person.all(:order => 'sur_name')
     @studies = Study.all(:order => 'weight')
     @themes = Theme.all(:order => 'weight')
@@ -108,8 +107,6 @@ class DatasetsController < ApplicationController
   # PUT /datasets/1
   # PUT /datasets/1.xml
   def update
-    @dataset = Dataset.find(params[:id])
-
     respond_to do |format|
       if @dataset.update_attributes(params[:dataset])
         flash[:notice] = 'Dataset was successfully updated.'
@@ -125,7 +122,6 @@ class DatasetsController < ApplicationController
   # DELETE /datasets/1
   # DELETE /datasets/1.xml
   def destroy
-    @dataset = Dataset.find(params[:id])
     @dataset.destroy
 
     respond_to do |format|
@@ -175,5 +171,9 @@ class DatasetsController < ApplicationController
     @studies.compact!
     @studies.uniq!
     @studies.sort! {|a,b| a.weight <=> b.weight}
+  end
+  
+  def get_dataset
+    @dataset  = Dataset.find(params[:id])
   end
 end
