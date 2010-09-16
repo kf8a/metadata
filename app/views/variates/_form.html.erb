@@ -1,0 +1,10 @@
+<p>
+  <label for='variate_name'>Title</label>
+  <%= f.text_field :name%>
+
+  <label for='variate_theme_id'>Theme</label>
+  <%= f.select :variate_theme_id, @variate_themes, {} %>
+
+  <label for='query'>Query</label>
+  <%= f.text_area :query %>
+</p>
