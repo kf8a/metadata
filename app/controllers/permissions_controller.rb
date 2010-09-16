@@ -60,6 +60,19 @@ class PermissionsController < ApplicationController
     end
   end
   
+  def deny
+    user = User.find_by_email(params[:email])
+    request = PermissionRequest.find_by_user_id_and_datatable_id(user.id, @datatable.id)
+    request.denied = true
+    request.save
+    
+    respond_to do |format|
+      flash[:notice] = 'Permission has been denied for ' + user.email
+      format.html { redirect_to permission_path(@datatable) }
+      format.xml { head :ok }
+    end
+  end
+  
   private
   
   def require_datatable

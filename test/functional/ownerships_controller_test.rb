@@ -61,14 +61,6 @@ class OwnershipsControllerTest < ActionController::TestCase
         should assign_to(:datatable).with(@datatable)
       end
       
-      context "and GET :show with invalid datatable param" do
-        setup do
-          get :show
-        end
-        
-        should redirect_to("the ownerships index") {ownerships_path}
-      end
-      
       context "and GET :new permission for the datatable" do
         setup do
           get :new, :datatable => @datatable
@@ -152,9 +144,9 @@ class OwnershipsControllerTest < ActionController::TestCase
                           :datatable => @datatable)
         end
 
-        context "and DELETE :destroy ownership from the user" do
+        context "and DELETE :revoke ownership from the user" do
           setup do
-            delete :destroy, :datatable => @datatable, :user => @user
+            delete :revoke, :datatable => @datatable, :user => @user
           end
           
           should redirect_to("the datatable ownership page") {ownership_path(@datatable)}

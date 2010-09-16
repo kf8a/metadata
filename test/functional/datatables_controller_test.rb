@@ -3,7 +3,7 @@ require 'datatables_controller'
 
 class DatatablesControllerTest < ActionController::TestCase
   
-  context 'not signed in' do
+  context 'an unsigned in user' do
     setup do
       @controller.current_user = nil
     end
@@ -74,7 +74,7 @@ class DatatablesControllerTest < ActionController::TestCase
     
     context 'GET :edit' do
       setup do
-        get :edit
+        get :edit, :id => @table
       end
       should respond_with :redirect
       should redirect_to("the sign in page") {sign_in_path}
@@ -82,7 +82,7 @@ class DatatablesControllerTest < ActionController::TestCase
     
     context 'POST :update' do
       setup do
-        post :edit
+        post :update, :id => @table
       end
       
       should respond_with :redirect
@@ -294,7 +294,7 @@ class DatatablesControllerTest < ActionController::TestCase
   test "show should get the template in app/views if no db template" do
     lter_website = Website.find_by_name('lter')
     assert_nil lter_website
-    assert !@controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => "lter")
+    assert !@controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => "lter", :id => @table)
     get :show, :id => @table, :requested_subdomain => 'lter'
     assert_select 'h3#correct', false
   end

@@ -14,19 +14,21 @@ Factory.define :dataset do |d|
   d.abstract 'some new dataset'
 end
 
+Factory.define :ownership do |o|
+end
+
+Factory.define :page do |p|
+end
+
 Factory.define :permission do |p|
+end
+
+Factory.define :permission_request do |p|
 end
 
 Factory.define :person do |p|
   p.sur_name 'bauer'
   p.given_name 'bill'
-end
-
-Factory.define :study do |s|
-  s.name 'LTER'
-end
-
-Factory.define :page do |p|
 end
 
 Factory.define :project do |p|
@@ -48,6 +50,10 @@ end
 
 Factory.define :sponsor do |s|
   s.name    'LTER'
+end
+
+Factory.define :study do |s|
+  s.name 'LTER'
 end
 
 Factory.define :unit do |u|
@@ -120,10 +126,4 @@ Factory.define :abstract do |a|
   a.abstract  'A quick little discussion of the meeting.'
   a.meeting   Factory.create(:meeting)
 end
-
-Factory.define :ownership do |o|
-#  o.user        Factory.create(:user)
-#  o.datatable   Factory.create(:datatable)
-end
-
 
