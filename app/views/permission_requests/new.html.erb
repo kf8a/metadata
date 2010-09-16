@@ -1,8 +1,7 @@
 <p>Use this page to request permission for <%= current_user.email %> to download 
     <%= @datatable.name %>.
 </p>
-<% form_for @permission_request do |f| %>
-  <%= f.hidden_field :user_id %>
-  <%= f.hidden_field :datatable_id %>
+<% form_tag '/permission_requests/create' do %>
+  <%= hidden_field_tag 'datatable', @datatable.id %>
   <%= submit_tag 'Create a permission request' %>
 <% end %>

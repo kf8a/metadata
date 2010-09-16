@@ -25,7 +25,7 @@ class PermissionRequestsControllerTest < ActionController::TestCase
       
       context "POST :create" do
         setup do
-          post :create, :permission_request => {:datatable_id => @datatable}
+          post :create, :datatable => @datatable
         end
         
         should_not respond_with :success
@@ -45,12 +45,11 @@ class PermissionRequestsControllerTest < ActionController::TestCase
         
         should respond_with :success
         should assign_to(:datatable).with(@datatable)
-        should assign_to(:permission_request)
       end
       
       context "POST :create" do
         setup do
-          post :create, :permission_request => {:datatable_id => @datatable.id, :user_id => @user.id}
+          post :create, :datatable => @datatable
         end
         
         should respond_with :success

@@ -58,9 +58,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :people, :collection => {:alphabetical => :get,
                                          :emeritus => :get}
 
-  map.resources :permissions, :collection => {:create => :any}
+  map.resources :permissions, :collection => {:create => :any,
+                                              :deny => :any}
   
-  map.resources :permission_requests
+  map.resources :permission_requests, :collection => {:create => :any}
 
   map.resources :projects
 

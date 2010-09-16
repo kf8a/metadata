@@ -2,6 +2,20 @@
 
 <%= link_to 'Add Permissions', new_permission_path(:datatable => @datatable) %>
 
+<% @datatable.requesters.each do |requester| %>
+  <% next if @permitted_users.include?(requester) %>
+  <p><%= requester.email %> has requested permission.</p>
+  <%= button_to "Grant permission to #{requester.email}", { 
+      :action => "create", 
+      :id => @datatable.id, 
+      :email => requester.email }, 
+      :method => :post %>
+  <%= button_to "Deny request for #{requester.email}", { 
+      :action => "deny", 
+      :id => @datatable.id, 
+      :email => requester.email }, 
+      :method => :put %>
+<% end %>
 <% @permitted_users.each do |user| %>
   <p>
     <%= user.email %> has permission from you.

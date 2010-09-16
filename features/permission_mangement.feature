@@ -71,6 +71,7 @@ Feature: Give Permissions to another user
     When I sign in as "sam@person.com"/"password"
     And I go to the datatable page
     And I follow "Request data"
+    Then I should see "Use this page to request permission for sam@person.com to download"
     And I press "Create a permission request"
     Then I should see "Permission for sam@person.com to download"
     And I should see "has been requested"
@@ -85,3 +86,12 @@ Feature: Give Permissions to another user
     When I press "Grant permission to sam@person.com"
     Then I should see "sam@person.com has permission from you"
 
+  Scenario: An owner denies someone's request
+    Given "sam@person.com" has requested permission
+    When I sign in as "bob@person.com"/"password"
+    And I go to the datatable page
+    And I follow "Permissions Management"
+    Then I should see "sam@person.com has requested permission"
+    When I press "Deny request for sam@person.com"
+    Then I should not see "sam@person.com has permission from you"
+    And I should not see "sam@person.com has requested permission"
