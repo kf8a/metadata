@@ -39,10 +39,6 @@ class DatasetsController < ApplicationController
     @title    = @dataset.title
     @roles    = @dataset.roles
     unless @dataset.valid_request?(@subdomain_request)
-#    @website  = @dataset.website
-#    @website_name = @website.try(:name)
-#    if @website_name
-#      unless @website_name == @subdomain_request
       redirect_to datasets_url
       return false
     end
