@@ -1,7 +1,6 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class PermissionRequestsControllerTest < ActionController::TestCase
-  # Replace this with your real tests.
 
   context "a protected and owned datatable" do
     setup do
