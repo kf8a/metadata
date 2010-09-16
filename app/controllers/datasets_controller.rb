@@ -1,5 +1,5 @@
 class DatasetsController < ApplicationController
-      
+
   layout :site_layout
   
   before_filter :allow_on_web, :except => [:autocomplete_for_keyword_list]
@@ -65,6 +65,8 @@ class DatasetsController < ApplicationController
     @studies = Study.all(:order => 'weight')
     @themes = Theme.all(:order => 'weight')
     @roles  = Role.find_all_by_role_type_id(RoleType.find_by_name('lter_dataset'))
+    @websites = Website.all.collect {|x| [x.name, x.id]}
+    @sponsors = Sponsor.all.collect {|x| [x.name, x.id]}
   end
   
   # POST /dataset/new_affiliation 
@@ -107,6 +109,8 @@ class DatasetsController < ApplicationController
   # PUT /datasets/1
   # PUT /datasets/1.xml
   def update
+    @sponsors = Sponsor.all.collect {|x| [x.name, x.id]}
+    @websites = Website.all.collect {|x| [x.name, x.id]}
     respond_to do |format|
       if @dataset.update_attributes(params[:dataset])
         flash[:notice] = 'Dataset was successfully updated.'

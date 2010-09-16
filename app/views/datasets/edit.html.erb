@@ -3,7 +3,7 @@
 <%= error_messages_for :dataset %>
 
 <% form_for(:dataset, :url => dataset_path(@dataset), :html => { :method => :put }) do |f| %>
-  <%= render :partial => 'form', :locals => {:f => f, :dataset => @dataset, :people => @people, :roles => @roles} %>
+  <%= render :partial => 'form', :locals => {:f => f, :dataset => @dataset, :people => @people, :roles => @roles, :websites => @websites, :sponsors => @sponsors} %>
   <p>
     <%= submit_tag "Update" %>
   </p>
