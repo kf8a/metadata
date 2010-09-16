@@ -1,5 +1,5 @@
 class ProtocolsController < ApplicationController
-  
+
   layout :site_layout
   before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
   before_filter :get_protocol, :only => [:edit, :update, :destroy]
@@ -40,12 +40,14 @@ class ProtocolsController < ApplicationController
   def new
     @protocol = Protocol.new
     @people = Person.all(:order => :sur_name)
+    @datasets = Dataset.find(:all).map {|x| [x.dataset, x.id]}
     get_all_websites
   end
 
   # GET /protocols/1;edit
   def edit
     @people = Person.all(:order => :sur_name)
+    @datasets = Dataset.find(:all).map {|x| [x.dataset, x.id]}
     get_all_websites
   end
 
