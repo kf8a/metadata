@@ -3,7 +3,7 @@
 <%= error_messages_for :protocol %>
 
 <% form_for(:protocol, :url => protocol_path(@protocol), :html => { :method => :put }) do |f| %>
-	<%= render :partial => 'form', :locals => {:f => f}%>
+	<%= render :partial => 'form', :locals => {:f => f, :people => @people}%>
   <p>
     <%= submit_tag "Update" %>
   </p>
