@@ -1,6 +1,7 @@
 class MeetingsController < ApplicationController
 
   before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
+  before_filter :get_meeting, :only => [:show, :edit, :update, :destroy]
 
   def index
     venue = 1 # KBS
@@ -18,8 +19,6 @@ class MeetingsController < ApplicationController
   # GET /meeting/1
   # GET /meeting/1.xml
   def show
-    @meeting = Meeting.find(params[:id])
-
     respond_to do |format|
       format.html # show.rhtml
       format.xml  { render :xml => @person.to_xml }
@@ -32,7 +31,6 @@ class MeetingsController < ApplicationController
   end
   
   def edit
-    @meeting = Meeting.find(params[:id])
     @venues = VenueType.find(:all).collect {|x| [x.name, x.id]}
   end
   
@@ -52,8 +50,6 @@ class MeetingsController < ApplicationController
   end
   
   def update
-    @meeting = Meeting.find(params[:id])
-    
     respond_to do |format|
        if @meeting.update_attributes(params[:meeting])
          flash[:notice] = 'Meetings was successfully updated.'
@@ -68,7 +64,6 @@ class MeetingsController < ApplicationController
   end
   
   def destroy
-    @meeting = Meeting.find(params[:id])
     meeting_id = "meeting_#{@meeting.id}"
     @meeting.destroy
      respond_to do |format|
@@ -95,5 +90,9 @@ class MeetingsController < ApplicationController
   
     crumb.name = venue.name.capitalize + ' Meeting'
     @crumbs << crumb
+  end
+  
+  def get_meeting
+    @meeting = Meeting.find(params[:id])
   end
 end

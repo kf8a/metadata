@@ -1,6 +1,7 @@
 class PublicationsController < ApplicationController
   
   before_filter :admin?, :except => [:index, :show, :index_by_treatment]  if ENV["RAILS_ENV"] == 'production'
+  before_filter :get_publication, :only => [:show, :edit, :update, :destroy]
   #caches_action :index
   
   # GET /publications
@@ -59,7 +60,6 @@ class PublicationsController < ApplicationController
   # GET /publications/1
   # GET /publications/1.xml
   def show
-    @publication = Publication.find(params[:id])
     @publication.abstract = @publication.abstract || '' # Make sure we have an abstract
     @publication.abstract.gsub!(/\n/,"\n\n") 
     respond_to do |format|
@@ -76,7 +76,6 @@ class PublicationsController < ApplicationController
 
   # GET /publications/1;edit
   def edit
-    @publication = Publication.find(params[:id])
     get_form_data
   end
 
@@ -105,8 +104,6 @@ class PublicationsController < ApplicationController
   # PUT /publications/1
   # PUT /publications/1.xml
   def update
-    @publication = Publication.find(params[:id])
-     
     respond_to do |format|
       if @publication.update_attributes(params[:publication])
         expire_action :action => :index
@@ -125,38 +122,41 @@ class PublicationsController < ApplicationController
   # DELETE /publications/1
   # DELETE /publications/1.xml
   def destroy
-      @publication = Publication.find(params[:id])
-      @publication.destroy
-      
-      expire_action :action => :index
-      
-      respond_to do |format|
-        format.html { redirect_to publications_url }
-        format.js  do
-          render :update do |page|
-            page.visual_effect :fade, @publication
-          end
+    @publication.destroy
+    
+    expire_action :action => :index
+    
+    respond_to do |format|
+      format.html { redirect_to publications_url }
+      format.js  do
+        render :update do |page|
+          page.visual_effect :fade, @publication
         end
-        format.xml  { head :ok }
       end
-    end
-    
-    private
-    
-    def set_title
-      @title = 'Publications'
-    end
-
-    def set_crumbs
-      crumb = Struct::Crumb.new
-      @crumbs = []
-      crumb.url = publications_path
-      crumb.name = 'Publications'
-      @crumbs << crumb
-    end
-    
-    def get_form_data
-      @publication_types = PublicationType.all.collect {|x| [x.name, x.id]} 
-      @treatments = Treatment.all
+      format.xml  { head :ok }
     end
   end
+    
+  private
+    
+  def set_title
+    @title = 'Publications'
+  end
+
+  def set_crumbs
+    crumb = Struct::Crumb.new
+    @crumbs = []
+    crumb.url = publications_path
+    crumb.name = 'Publications'
+    @crumbs << crumb
+  end
+    
+  def get_form_data
+    @publication_types = PublicationType.all.collect {|x| [x.name, x.id]} 
+    @treatments = Treatment.all
+  end
+    
+  def get_publication
+    @publication = Publication.find(params[:id])
+  end
+end

@@ -3,6 +3,7 @@ class DatatablesController < ApplicationController
   layout :site_layout
 
   before_filter :admin?, :except => [:index, :show, :suggest, :search, :events] unless ENV["RAILS_ENV"] == 'development'
+  before_filter :get_datatable, :only => [:show, :edit, :update, :destroy, :update_temporal_extent]
   
   #caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
   
@@ -44,7 +45,6 @@ class DatatablesController < ApplicationController
   # GET /datatables/1.xml
   # GET /datatables/1.csv
   def show  
-    @datatable = Datatable.find(params[:id])
     @dataset = @datatable.dataset
 
     website_name = @dataset.website.try(:name)
@@ -82,7 +82,6 @@ class DatatablesController < ApplicationController
 
   # GET /datatables/1;edit
   def edit
-    @datatable = Datatable.find(params[:id])
     @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
   end
   
@@ -114,8 +113,6 @@ class DatatablesController < ApplicationController
   # PUT /datatables/1
   # PUT /datatables/1.xml
   def update
-    @datatable = Datatable.find(params[:id])
-
     respond_to do |format|
       if @datatable.update_attributes(params[:datatable])
         flash[:notice] = 'Datatable was successfully updated.'
@@ -132,7 +129,6 @@ class DatatablesController < ApplicationController
   # DELETE /datatables/1
   # DELETE /datatables/1.xml
   def destroy
-    @datatable = Datatable.find(params[:id])
     @datatable.destroy
 
     respond_to do |format|
@@ -156,7 +152,6 @@ class DatatablesController < ApplicationController
   end
 
   def update_temporal_extent
-    @datatable = Datatable.find(params[:id])
     @datatable.update_temporal_extent
     @datatable.save
     respond_to do |format|
@@ -201,6 +196,10 @@ class DatatablesController < ApplicationController
 
   end
 
+  def get_datatable
+    @datatable = Datatable.find(params[:id])
+  end
+  
   def retrieve_datatables(query)
     @themes = Theme.roots
 
