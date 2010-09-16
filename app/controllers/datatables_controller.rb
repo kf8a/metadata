@@ -1,5 +1,5 @@
 class DatatablesController < ApplicationController
-  
+
   layout :site_layout
 
   before_filter :admin?, :except => [:index, :show, :suggest, :search, :events] unless ENV["RAILS_ENV"] == 'development'
@@ -78,11 +78,17 @@ class DatatablesController < ApplicationController
     @datatable = Datatable.new
     @themes = Theme.all(:order => 'name').collect {|x| [x.name, x.id]}
     @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
+    @studies = Study.all.collect{|x| [x.name, x.id]}
+    @people = Person.all
+    @units = Unit.all
   end
 
   # GET /datatables/1;edit
   def edit
     @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
+    @studies = Study.all.collect{|x| [x.name, x.id]}
+    @people = Person.all
+    @units = Unit.all
   end
   
   def delete_csv_cache
@@ -97,7 +103,10 @@ class DatatablesController < ApplicationController
   def create
     @datatable = Datatable.new(params[:datatable])
     @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
-
+    @studies = Study.all.collect{|x| [x.name, x.id]}
+    @people = Person.all
+    @units = Unit.all
+    
     respond_to do |format|
       if @datatable.save
         flash[:notice] = 'Datatable was successfully created.'
@@ -113,13 +122,18 @@ class DatatablesController < ApplicationController
   # PUT /datatables/1
   # PUT /datatables/1.xml
   def update
+    @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
+    @studies = Study.all.collect{|x| [x.name, x.id]}
+    @people = Person.all
+    @units = Unit.all
+    
     respond_to do |format|
       if @datatable.update_attributes(params[:datatable])
         flash[:notice] = 'Datatable was successfully updated.'
         format.html { redirect_to datatable_url(@datatable) }
         format.xml  { head :ok }
       else
-        @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
+
         format.html { render_subdomain "edit" }
         format.xml  { render :xml => @datatable.errors.to_xml }
       end
