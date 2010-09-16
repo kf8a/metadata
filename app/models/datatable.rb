@@ -141,10 +141,7 @@ class Datatable < ActiveRecord::Base
   end
   
   def to_csv
-    if self.metadata_only?
-      return 'Data available by request from glbrc.data@kbs.msu.edu'
-    end
-    values  = ActiveRecord::Base.connection.execute(object)
+    values  = perform_query(limited = false)
     if RUBY_VERSION > "1.9"
       output = CSV
     else
@@ -173,6 +170,16 @@ class Datatable < ActiveRecord::Base
   def to_climdb
     csv_string = to_csv
     '!' + csv_string
+  end
+  
+  def to_xls
+    values = perfom_query(limited=false)
+    
+  end
+  
+  def to_ods
+    values = perfom_query(limited=false)
+    
   end
     
   def data_contact
@@ -227,10 +234,12 @@ class Datatable < ActiveRecord::Base
     save
   end
   
-  def perform_query
+  def perform_query(limited = true)
     query =  self.object
-    self.excerpt_limit = 5 unless self.excerpt_limit
-    query = query + " limit #{self.excerpt_limit}" 
+    if limited
+      self.excerpt_limit = 5 unless self.excerpt_limit
+      query = query + " limit #{self.excerpt_limit}" 
+    end
     ActiveRecord::Base.connection.execute(query)
     #TDOD convert the array into a ruby object
   end
@@ -257,7 +266,7 @@ private
     dataformat = p.add_element('dataFormat').add_element('textFormat')
     dataformat.add_element('attributeOrientation').add_text('column')
     dataformat.add_element('simpleDelimiter').add_element('fieldDelimiter').add_text(',')
-    dataformat.add_element('numHeaderLines').add_text('18')
+    dataformat.add_element('numHeaderLines').add_text(data_access_statement.lines.to_a.size.to_s)
     p.add_element('distribution').add_element('online').add_element('url').add_text(data_url)
     return p
   end

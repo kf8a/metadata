@@ -354,29 +354,59 @@ class DatatableTest < ActiveSupport::TestCase
     end
   end
   
-  context 'climbdb format' do
+  context 'datatable formats' do
     setup do 
       dataset = Factory.create(:dataset)
       @datatable = Factory.create(:datatable, :dataset => dataset, :object=>'select now()')
     end
-    
-    should 'respond to to_climdb' do
-      assert @datatable.respond_to?('to_climdb')
+
+    context 'climbdb format' do
+
+      should 'respond to to_climdb' do
+        assert @datatable.respond_to?('to_climdb')
+      end
+
+      context 'return a climdb formatted document' do
+
+        setup do
+          @doc = CSV.parse(@datatable.to_climdb)
+        end
+
+        should 'have the first line start with a bang !' do
+          assert @doc[0].join(',') =~ /^!/
+        end
+
+      end
+
     end
-    
-    context 'return a climdb formatted document' do
+
+    context 'csv format' do
       
-      setup do
-        @doc = CSV.parse(@datatable.to_climdb)
+      should 'respond to to_csv' do
+        assert @datatable.respond_to?('to_csv')
       end
       
-      should 'have the first line start with a bang !' do
-        assert @doc[0].join(',') =~ /^!/
+      should 'return a csv formatted document' do
+        assert CSV.parse(@datatable.to_csv)
+      end
+       
+    end
+    
+    context 'xls format' do
+      
+      should 'respond to to_xls' do
+        assert @datatable.respond_to?('to_xls')
       end
       
     end
+    
+    context 'ods format' do
       
+      should 'respond to to_ods' do
+        assert @datatable.respond_to?('to_ods')
+      end
       
+    end
   end
   
 end

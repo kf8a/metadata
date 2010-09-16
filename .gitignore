@@ -1,8 +1,10 @@
 db/meta_test
+.yardoc
 db/*.sqlite3
 db/sphinx
 log/
 doc/*.dot
+doc/*
 vendor/rails/
 vendor/plugins/rspec/.git/
 vendor/plugins/rspec-rails/.git/
