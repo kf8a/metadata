@@ -13,6 +13,6 @@ require 'metric_fu'
 
 MetricFu::Configuration.run do |config|
   #define what metrics you want to use
-  config.metrics  = [:churn, :flay, :reek, :stats]
-  config.graphs   = [:flay, :stats]
+  config.metrics  = [:churn, :flay, :rails_best_practices, :reek, :roodi, :saikuro, :stats]
+  config.graphs   = [:flay, :rails_best_practices, :reek, :roodi, :stats]
 end
