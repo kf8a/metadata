@@ -37,16 +37,15 @@ class DatasetsController < ApplicationController
   # GET /dataset/1.eml
   def show
     @title    = @dataset.title
-    @roles    = @dataset.roles
-    unless @dataset.valid_request?(@subdomain_request)
-      redirect_to datasets_url
-      return false
-    end
 
-    respond_to do |format|
-      format.html { render_subdomain }
-      format.eml { render :xml => @dataset.to_eml }
-      format.xml  { render :xml => @dataset.to_xml }
+    if @dataset.valid_request?(@subdomain_request)
+      respond_to do |format|
+        format.html { render_subdomain }
+        format.eml { render :xml => @dataset.to_eml }
+        format.xml  { render :xml => @dataset.to_xml }
+      end
+    else
+      redirect_to datasets_url
     end
   end
 
