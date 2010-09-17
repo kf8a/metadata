@@ -260,6 +260,11 @@ class Datatable < ActiveRecord::Base
     self.dataset.datatables - [self]
   end
   
+  def values
+    values = nil
+    values = self.perform_query if self.is_sql
+  end
+  
 private
 
   def query_datatable_for_temporal_extent(query)
