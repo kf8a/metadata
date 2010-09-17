@@ -44,29 +44,26 @@ class DatatablesController < ApplicationController
   # GET /datatables/1
   # GET /datatables/1.xml
   # GET /datatables/1.csv
-  def show  
-    @dataset = @datatable.dataset
+  def show
+    accessible_by_ip = trusted_ip? || !@datatable.is_restricted
+    csv_ok = accessible_by_ip && @datatable.can_be_downloaded_by?(current_user)
+    climdb_ok = accessible_by_ip
 
-    unless @dataset.valid_request?(@subdomain_request)
-      redirect_to datatables_url
-      return false
-    end
-
-    @values = @datatable.values
-    if (!trusted_ip? && @datatable.is_restricted)
-      restricted = true
-    end
-
-    respond_to do |format|
-      format.html   { render_subdomain }
-      format.xml    { render :xml => @datatable.to_xml}
-      if @datatable.can_be_downloaded_by?(current_user) and not restricted
-        format.csv  { render :text => @datatable.to_csv_with_metadata }
-      else
-        format.csv  { redirect_to datatable_url(@datatable) }
+    if @datatable.dataset.valid_request?(@subdomain_request)
+      respond_to do |format|
+        format.html   { render_subdomain }
+        format.xml    { render :xml => @datatable.to_xml}
+        format.csv do
+          render :text => @datatable.to_csv_with_metadata if csv_ok
+          redirect_to datatable_url(@datatable) unless csv_ok
+        end
+        format.climdb do
+          render :text => @datatable.to_climdb if climdb_ok
+          redirect_to datatable_url(@datatable) unless climdb_ok
+        end
       end
-      format.climdb { render :text => @datatable.to_climdb } unless restricted
-      format.climdb { redirect_to datatable_url(@datatable) } if restricted
+    else
+      redirect_to datatables_url
     end
   end
 
