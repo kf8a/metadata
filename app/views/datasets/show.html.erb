@@ -28,7 +28,7 @@
 </ul>
 <h2>Personnel</h2>
 <ul>
-	<% @roles.each do |role| %>
+	<% @dataset.roles.each do |role| %>
 	<li> <%= role.name.capitalize.pluralize %>
 		<ul>
 	<% @dataset.affiliations.each do |affiliation| -%>
