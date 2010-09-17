@@ -13,7 +13,6 @@ Feature: Password reset
       Given I am in the LTER subdomain
       Given I signed up with "email@person.com"/"password"
       When I request password reset link to be sent to "email@person.com"
-        And I follow the redirect
       Then I should see "instructions for changing your password"
       And a password reset message should be sent to "email@person.com"
 
@@ -22,17 +21,17 @@ Feature: Password reset
       Given I signed up with "email@person.com"/"password"
       When I follow the password reset link sent to "email@person.com"
       And I update my password with "newpassword/wrongconfirmation"
-      Then I should be signed out
-      And  I should see error messages
+      Then I should not see "Signed in"
+      And  I should see "Password doesn't match confirmation"
 
     Scenario: User is signed up and updates his password
       Given I am in the LTER subdomain
       Given I signed up with "email@person.com"/"password"
       When I follow the password reset link sent to "email@person.com"
       And I update my password with "newpassword/newpassword"
-      Then I should be signed in
+      Then I should see "Signed in"
       When I sign out
-      Then I should be signed out
+      Then I should see "Signed out"
       And I sign in as "email@person.com"/"newpassword"
-      Then I should be signed in
+      Then I should see "Signed in"
 

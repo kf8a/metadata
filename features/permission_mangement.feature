@@ -70,7 +70,7 @@ Feature: Give Permissions to another user
   Scenario: A potential downloader requests permission
     When I sign in as "sam@person.com"/"password"
     And I go to the datatable page
-    And I follow "Request data"
+    And I follow "Request Data"
     Then I should see "Use this page to request permission for sam@person.com to download"
     And I press "Create a permission request"
     Then I should see "Permission for sam@person.com to download"

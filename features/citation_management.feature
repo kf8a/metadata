@@ -7,7 +7,7 @@ Feature: citations management
     Given I have signed in with "bob@person.com"/"password"
     And   I have the "admin" role
     And   I am on the new citation page
-    When  I attach the file "test/data/bibliography.zip" to "pdf"
+    When  I attach the file "test/data/bibliography.zip" to "Pdf"
     And   I press "Create"
     #Then  I should see "10 records uploaded"
 

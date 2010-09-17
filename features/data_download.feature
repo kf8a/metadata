@@ -6,7 +6,6 @@ Feature: Download data
   
   Background:
     Given I am on the datatables page
-      And all caches are cleared
       And a user exists and is confirmed with an email of "bob@person.com"
 
   Scenario: The admin user downloads a protected datatable
@@ -23,8 +22,6 @@ Feature: Download data
       And "bob@person.com" owns the datatable
       And "bob@person.com" is not an administrator
      When I sign in as "bob@person.com"/"password"
-     Then I should not have the "admin" role
-      And I should be signed in
      When I go to the datatable page
       And I follow "Download complete data table"
      Then I should be on the datatable download page
@@ -36,8 +33,6 @@ Feature: Download data
       And "bob@person.com" is not an administrator
       And "bob@person.com" does not own the datatable
      When I sign in as "bob@person.com"/"password"
-     Then I should not have the "admin" role
-      And I should be signed in
      When I go to the datatable page
       And I follow "Download complete data table"
      Then I should be on the datatable download page
@@ -48,11 +43,9 @@ Feature: Download data
       And "bob@person.com" does not have permission to download the datatable
       And "bob@person.com" is not an administrator
       And "bob@person.com" does not own the datatable
-     When I sign in as "bob@person.com"/"password"
-     Then I should not have the "admin" role
-      And I should be signed in
-     When I go to the datatable page
-     Then I should see "Request Data"
+    When I sign in as "bob@person.com"/"password"
+      And I go to the datatable page
+    Then I should see "Request Data"
       And I should not see "Download complete data table"
   
   Scenario: A user has received permission to download data from all data owners

@@ -8,7 +8,6 @@ Feature: Data Collections
       And a website exists with a name of "glbrc"
       And I am signed in as a normal user
       And I am in the lter subdomain
-      And all caches are cleared
 
   Scenario: Seeing which datatables are available as collections
     Given a public lter datatable exists with a title of "First one"

@@ -14,7 +14,6 @@ Scenario: An admin uploads an LTER file.
     And I fill in "Responsible PI's" with "N. Owner and others"
     And I attach the SingingSoil test file
     And I press "Submit"
-    And I follow the redirect
    Then I should see "Study was uploaded!"
 
 Scenario: An uploader uploads a file in the GLBRC domain
@@ -29,5 +28,4 @@ Scenario: An uploader uploads a file in the GLBRC domain
     And I fill in "Responsible PI's" with "N. Owner and others"
     And I attach the SingingSoil test file
     And I press "Submit"
-    And I follow the redirect
    Then I should see "Study was uploaded!"

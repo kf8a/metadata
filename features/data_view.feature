@@ -8,16 +8,16 @@ Feature: Data View
       And a website exists with a name of "glbrc"
       And I am signed in as a normal user
       And I am in the lter subdomain
-      And all caches are cleared
       
   Scenario: Seeing which datatables are available
     Given a public lter datatable exists with a title of "First one"
       And a public lter datatable exists with a title of "Second one"
       And a public lter datatable exists with a title of "Third one"
     When I go to the datatables page
-    Then I should see "First one"
-      And I should see "Second one"
-      And I should see "Third one"
+    Then show me the page
+    Then I should see "First One"
+      And I should see "Second One"
+      And I should see "Third One"
 
   Scenario: Viewing a public datatable
     Given a public lter datatable exists with species data

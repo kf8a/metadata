@@ -45,7 +45,3 @@ Given /^a public lter datatable exists with species data$/ do
     :name => "Common Name",
     :description => "What Joe Public calls the species")
 end
-
-Given /^all caches are cleared$/ do
-  @controller.expire_fragment(%r{.*})
-end
