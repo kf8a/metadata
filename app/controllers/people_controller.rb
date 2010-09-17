@@ -3,13 +3,14 @@ class PeopleController < ApplicationController
   layout :site_layout
   
   before_filter :admin?, :except => [:index, :show, :alphabetical, :emeritus] unless ENV["RAILS_ENV"] == 'development'
+  before_filter :get_person, :only => [:show, :edit, :update, :destroy]
+  before_filter :get_people, :only => [:index, :alphabetical, :emeritus, :show_all]
   
   caches_action :index
 
   # GET /people
   # GET /people.xml
   def index
-    @people = Person.all(:order => 'sur_name')
     @roles = RoleType.find_by_name('lter').roles.all(:order => :seniority, :conditions =>['name not like ?','Emeritus%'])
     respond_to do |format|
       format.html # index.rhtml
@@ -18,7 +19,6 @@ class PeopleController < ApplicationController
   end  
   
   def alphabetical
-    @people = Person.all(:order => 'sur_name')
     @title = 'KBS LTER Directory (alphabetical)'
     respond_to do |format|
       format.html # index.rhtml
@@ -27,7 +27,6 @@ class PeopleController < ApplicationController
   end  
   
   def emeritus
-    @people = Person.all(:order => 'sur_name')
     @roles = RoleType.find_by_name('lter').roles.all(:order => :seniority, :conditions =>['name like ?','Emeritus%'])
     respond_to do |format|
       format.html # emeritus.rhtml
@@ -37,14 +36,11 @@ class PeopleController < ApplicationController
   end
 
   def show_all
-    @people = Person.all(:order => 'sur_name')
   end
   
   # GET /people/1
   # GET /people/1.xml
   def show
-    @person = Person.find(params[:id])
-    
     respond_to do |format|
       format.html { render_subdomain }
       format.xml  { render :xml => @person.to_xml }
@@ -59,7 +55,6 @@ class PeopleController < ApplicationController
 
   # GET /people/1;edit
   def edit
-    @person = Person.find(params[:id])
     @title = 'Edit ' + @person.full_name
     @roles = Role.find_all_by_role_type_id(RoleType.find_by_name('lter'))
   end
@@ -85,7 +80,6 @@ class PeopleController < ApplicationController
   # PUT /people/1
   # PUT /people/1.xml
   def update    
-    @person = Person.find(params[:id])
     expire_page :action => :index
     
     respond_to do |format|
@@ -104,7 +98,6 @@ class PeopleController < ApplicationController
   # DELETE /people/1
   # DELETE /people/1.xml
   def destroy
-    @person = Person.find(params[:id])
     @person.destroy
 
     expire_action :action => :index
@@ -123,4 +116,11 @@ class PeopleController < ApplicationController
     end
   end
   
+  def get_people
+    @people = Person.all(:order => 'sur_name')
+  end
+  
+  def get_person
+    @person = Person.find(params[:id])
+  end
 end

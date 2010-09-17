@@ -1,2 +1,2 @@
 <%= hidden_field_tag 'user_count', user_count %>
-<%= button_to_remote 'Add Another User', :url => {:action => "add_another_user", :user_count => @user_count} %>
+<%= button_to_remote 'Add Another User', :url => {:action => "add_another_user", :user_count => user_count} %>

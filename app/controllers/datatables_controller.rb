@@ -1,8 +1,9 @@
 class DatatablesController < ApplicationController
-  
+
   layout :site_layout
 
   before_filter :admin?, :except => [:index, :show, :suggest, :search, :events] unless ENV["RAILS_ENV"] == 'development'
+  before_filter :get_datatable, :only => [:show, :edit, :update, :destroy, :update_temporal_extent]
   
   #caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
   
@@ -43,33 +44,26 @@ class DatatablesController < ApplicationController
   # GET /datatables/1
   # GET /datatables/1.xml
   # GET /datatables/1.csv
-  def show  
-    @datatable = Datatable.find(params[:id])
-    @dataset = @datatable.dataset
+  def show
+    accessible_by_ip = trusted_ip? || !@datatable.is_restricted
+    csv_ok = accessible_by_ip && @datatable.can_be_downloaded_by?(current_user)
+    climdb_ok = accessible_by_ip
 
-    website_name = @dataset.website.try(:name)
-    if website_name and website_name != @subdomain_request
-      redirect_to datatables_url
-      return false
-    end
-
-    @values = nil
-    if (!trusted_ip? && @datatable.is_restricted)
-      restricted = true
-    else
-      @values = @datatable.perform_query if @datatable.is_sql
-    end
-
-    respond_to do |format|
-      format.html   { render_subdomain }
-      format.xml    { render :xml => @datatable.to_xml}
-      if @datatable.can_be_downloaded_by?(current_user) and not restricted
-        format.csv  { render :text => @datatable.to_csv_with_metadata }
-      else
-        format.csv  { redirect_to datatable_url(@datatable) }
+    if @datatable.dataset.valid_request?(@subdomain_request)
+      respond_to do |format|
+        format.html   { render_subdomain }
+        format.xml    { render :xml => @datatable.to_xml}
+        format.csv do
+          render :text => @datatable.to_csv_with_metadata if csv_ok
+          redirect_to datatable_url(@datatable) unless csv_ok
+        end
+        format.climdb do
+          render :text => @datatable.to_climdb if climdb_ok
+          redirect_to datatable_url(@datatable) unless climdb_ok
+        end
       end
-      format.climdb { render :text => @datatable.to_climdb } unless restricted
-      format.climdb { redirect_to datatable_url(@datatable) } if restricted
+    else
+      redirect_to datatables_url
     end
   end
 
@@ -78,12 +72,17 @@ class DatatablesController < ApplicationController
     @datatable = Datatable.new
     @themes = Theme.all(:order => 'name').collect {|x| [x.name, x.id]}
     @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
+    @studies = Study.all.collect{|x| [x.name, x.id]}
+    @people = Person.all
+    @units = Unit.all
   end
 
   # GET /datatables/1;edit
   def edit
-    @datatable = Datatable.find(params[:id])
     @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
+    @studies = Study.all.collect{|x| [x.name, x.id]}
+    @people = Person.all
+    @units = Unit.all
   end
   
   def delete_csv_cache
@@ -98,7 +97,10 @@ class DatatablesController < ApplicationController
   def create
     @datatable = Datatable.new(params[:datatable])
     @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
-
+    @studies = Study.all.collect{|x| [x.name, x.id]}
+    @people = Person.all
+    @units = Unit.all
+    
     respond_to do |format|
       if @datatable.save
         flash[:notice] = 'Datatable was successfully created.'
@@ -114,15 +116,18 @@ class DatatablesController < ApplicationController
   # PUT /datatables/1
   # PUT /datatables/1.xml
   def update
-    @datatable = Datatable.find(params[:id])
-
+    @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
+    @studies = Study.all.collect{|x| [x.name, x.id]}
+    @people = Person.all
+    @units = Unit.all
+    
     respond_to do |format|
       if @datatable.update_attributes(params[:datatable])
         flash[:notice] = 'Datatable was successfully updated.'
         format.html { redirect_to datatable_url(@datatable) }
         format.xml  { head :ok }
       else
-        @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
+
         format.html { render_subdomain "edit" }
         format.xml  { render :xml => @datatable.errors.to_xml }
       end
@@ -132,7 +137,6 @@ class DatatablesController < ApplicationController
   # DELETE /datatables/1
   # DELETE /datatables/1.xml
   def destroy
-    @datatable = Datatable.find(params[:id])
     @datatable.destroy
 
     respond_to do |format|
@@ -156,7 +160,6 @@ class DatatablesController < ApplicationController
   end
 
   def update_temporal_extent
-    @datatable = Datatable.find(params[:id])
     @datatable.update_temporal_extent
     @datatable.save
     respond_to do |format|
@@ -201,6 +204,10 @@ class DatatablesController < ApplicationController
 
   end
 
+  def get_datatable
+    @datatable = Datatable.find(params[:id])
+  end
+  
   def retrieve_datatables(query)
     @themes = Theme.roots
 

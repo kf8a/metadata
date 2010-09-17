@@ -1,7 +1,8 @@
 class ProtocolsController < ApplicationController
-  
+
   layout :site_layout
   before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
+  before_filter :get_protocol, :only => [:edit, :update, :destroy]
     
   #caches_action :index
   
@@ -39,13 +40,14 @@ class ProtocolsController < ApplicationController
   def new
     @protocol = Protocol.new
     @people = Person.all(:order => :sur_name)
+    @datasets = Dataset.find(:all).map {|x| [x.dataset, x.id]}
     get_all_websites
   end
 
   # GET /protocols/1;edit
   def edit
-    @protocol = Protocol.find(params[:id])
     @people = Person.all(:order => :sur_name)
+    @datasets = Dataset.find(:all).map {|x| [x.dataset, x.id]}
     get_all_websites
   end
 
@@ -72,7 +74,6 @@ class ProtocolsController < ApplicationController
   # PUT /protocols/1
   # PUT /protocols/1.xml
   def update
-    @protocol = Protocol.find(params[:id])
     get_all_websites
   
     respond_to do |format|
@@ -92,7 +93,6 @@ class ProtocolsController < ApplicationController
   # DELETE /protocols/1
   # DELETE /protocols/1.xml
   def destroy
-    @protocol = Protocol.find(params[:id])
     @protocol.destroy
 
     expire_action :action => :index
@@ -126,4 +126,7 @@ class ProtocolsController < ApplicationController
  
   end
   
+  def get_protocol
+    @protocol = Protocol.find(params[:id])
+  end
 end

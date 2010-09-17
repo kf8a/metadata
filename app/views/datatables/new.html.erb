@@ -3,7 +3,7 @@
 <%= error_messages_for :datatable %>
 
 <% form_for(:datatable, :url => datatables_path) do |f| %>
-  <%= render :partial => 'form', :locals => {:f => f} %>
+  <%= render :partial => 'form', :locals => {:f => f, :theme => @theme, :core_areas => @core_areas, :datatable => @datatable, :studies => @studies, :people => @people, :units => @units} %>
   <p>
     <%= submit_tag "Create" %>
   </p>

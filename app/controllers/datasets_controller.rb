@@ -1,9 +1,10 @@
 class DatasetsController < ApplicationController
-      
+
   layout :site_layout
   
   before_filter :allow_on_web, :except => [:autocomplete_for_keyword_list]
   before_filter :admin?, :except => [:index, :show, :auto_complete_for_keyword_list] if ENV["RAILS_ENV"] == 'production'
+  before_filter :get_dataset, :only => [:show, :edit, :update, :destroy]
   
   #layout proc {|controller| controller.request.format == :eml ? false : 'application'}
   
@@ -35,22 +36,16 @@ class DatasetsController < ApplicationController
   # GET /datasets/1.xml
   # GET /dataset/1.eml
   def show
-    @dataset  = Dataset.find(params[:id])
     @title    = @dataset.title
-    @roles    = @dataset.roles
-    @website  = @dataset.website
-    @website_name = @website.try(:name)
-    if @website_name
-      unless @website_name == @subdomain_request
-        redirect_to datasets_url
-        return false
-      end
-    end
 
-    respond_to do |format|
-      format.html { render_subdomain }
-      format.eml { render :xml => @dataset.to_eml }
-      format.xml  { render :xml => @dataset.to_xml }
+    if @dataset.valid_request?(@subdomain_request)
+      respond_to do |format|
+        format.html { render_subdomain }
+        format.eml { render :xml => @dataset.to_eml }
+        format.xml  { render :xml => @dataset.to_xml }
+      end
+    else
+      redirect_to datasets_url
     end
   end
 
@@ -61,11 +56,12 @@ class DatasetsController < ApplicationController
 
   # GET /datasets/1;edit
   def edit
-    @dataset  = Dataset.find(params[:id])
     @people   = Person.all(:order => 'sur_name')
     @studies = Study.all(:order => 'weight')
     @themes = Theme.all(:order => 'weight')
     @roles  = Role.find_all_by_role_type_id(RoleType.find_by_name('lter_dataset'))
+    @websites = Website.all.collect {|x| [x.name, x.id]}
+    @sponsors = Sponsor.all.collect {|x| [x.name, x.id]}
   end
   
   # POST /dataset/new_affiliation 
@@ -108,8 +104,8 @@ class DatasetsController < ApplicationController
   # PUT /datasets/1
   # PUT /datasets/1.xml
   def update
-    @dataset = Dataset.find(params[:id])
-
+    @sponsors = Sponsor.all.collect {|x| [x.name, x.id]}
+    @websites = Website.all.collect {|x| [x.name, x.id]}
     respond_to do |format|
       if @dataset.update_attributes(params[:dataset])
         flash[:notice] = 'Dataset was successfully updated.'
@@ -125,7 +121,6 @@ class DatasetsController < ApplicationController
   # DELETE /datasets/1
   # DELETE /datasets/1.xml
   def destroy
-    @dataset = Dataset.find(params[:id])
     @dataset.destroy
 
     respond_to do |format|
@@ -175,5 +170,9 @@ class DatasetsController < ApplicationController
     @studies.compact!
     @studies.uniq!
     @studies.sort! {|a,b| a.weight <=> b.weight}
+  end
+  
+  def get_dataset
+    @dataset  = Dataset.find(params[:id])
   end
 end

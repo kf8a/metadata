@@ -1,5 +1,6 @@
 class VariatesController < ApplicationController
   before_filter :admin?, :except => [:index, :show]  unless ENV["RAILS_ENV"] == 'development'
+  before_filter :get_variate, :only => [:show, :edit, :update, :destroy]
   
   # GET /variates
   # GET /variates.xml
@@ -15,8 +16,6 @@ class VariatesController < ApplicationController
   # GET /variates/1
   # GET /variates/1.xml
   def show
-    @variate = Variate.find(params[:id])
-
     respond_to do |format|
       format.html # show.rhtml
       format.xml  { render :xml => @variate.to_xml }
@@ -38,7 +37,6 @@ class VariatesController < ApplicationController
 
   # GET /variates/1;edit
   def edit
-    @variate = Variate.find(params[:id])
   end
 
   # POST /variates
@@ -61,8 +59,6 @@ class VariatesController < ApplicationController
   # PUT /variates/1
   # PUT /variates/1.xml
   def update
-    @variate = Variate.find(params[:id])
-
     respond_to do |format|
       if @variate.update_attributes(params[:variate])
         flash[:notice] = 'Variate was successfully updated.'
@@ -78,12 +74,17 @@ class VariatesController < ApplicationController
   # DELETE /variates/1
   # DELETE /variates/1.xml
   def destroy
-    @variate = Variate.find(params[:id])
     @variate.destroy
 
     respond_to do |format|
       format.html { redirect_to variates_url }
       format.xml  { head :ok }
     end
+  end
+  
+  private
+  
+  def get_variate
+    @variate = Variate.find(params[:id])
   end
 end

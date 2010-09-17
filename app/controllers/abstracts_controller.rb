@@ -1,6 +1,7 @@
 class AbstractsController < ApplicationController
 
   before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
+  before_filter :get_abstract, :only => [:show, :edit, :update, :destroy]
   
   # GET meeting_abstracts
   # GET meeting_abstracts.xml
@@ -37,8 +38,6 @@ class AbstractsController < ApplicationController
   # GET meeting_abstracts/1
   # GET meeting_abstracts/1.xml
   def show
-    @abstract = Abstract.find(params[:id])
-
     respond_to do |format|
       format.html # show.rhtml
       format.xml  { render :xml => @abstract.to_xml }
@@ -47,14 +46,11 @@ class AbstractsController < ApplicationController
   
   # GET /meeting_abstract/1/edit
   def edit
-    @abstract = Abstract.find(params[:id])
   end
 
   # PUT /meeting_abstracts/1
   # PUT /meeting_abstracts/1.xml
   def update
-    @abstract = Abstract.find(params[:id])
-
     respond_to do |format|
       if @abstract.update_attributes(params[:abstract])
         flash[:notice] = 'Meeting abstract  was successfully updated.'
@@ -68,7 +64,6 @@ class AbstractsController < ApplicationController
   end
   
   def destroy
-    @abstract = Abstract.find(params[:id])
     abstract_id = "abstract_#{@abstract.id}"
     @abstract.destroy
      respond_to do |format|
@@ -80,7 +75,11 @@ class AbstractsController < ApplicationController
          end
        end
      end
-    
   end
-
+  
+  private
+  
+  def get_abstract
+    @abstract = Abstract.find(params[:id])  
+  end
 end

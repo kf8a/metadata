@@ -1,5 +1,5 @@
 <tr>
-  <td><%= select_tag 'datatable[data_contributions_attributes][][person_id]',  options_from_collection_for_select(Person.all(:order => 'sur_name'), :id, :short_full_name) %></td>
+  <td><%= select_tag 'datatable[data_contributions_attributes][][person_id]',  options_from_collection_for_select(people), :id, :short_full_name) %></td>
   <td><%= select_tag 'datatable[data_contributions_attributes][][role_id]', options_from_collection_for_select(Role.data_roles, :id, :name) %></td>
   <td>
 	  <%= check_box_tag 'datatable[data_contributions_attributes][][_delete]' %>
