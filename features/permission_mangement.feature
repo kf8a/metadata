@@ -92,4 +92,15 @@ Feature: Give Permissions to another user
     Then I should see "sam@person.com has requested permission"
     When I press "Deny request for sam@person.com"
     Then I should not see "sam@person.com has permission from you"
-    And I should not see "sam@person.com has requested permission"
+    And I should see "sam@person.com has requested permission but it has been denied by: bob@person.com"
+
+  Scenario: An owner sees that another owner has denied someone's request
+    Given "sam@person.com" has requested permission
+      And a user exists and is confirmed with an email of "alice@person.com"
+      And "alice@person.com" owns the datatable
+      And "alice@person.com" has not given "sam@person.com" permission
+      And "alice@person.com" has denied the request of "sam@person.com"
+    When I sign in as "bob@person.com"/"password"
+      And I go to the datatable page
+      And I follow "Permissions Management"
+    Then I should see "sam@person.com has requested permission but it has been denied by: alice@person.com"

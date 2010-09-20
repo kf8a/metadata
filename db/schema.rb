@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100915140148) do
+ActiveRecord::Schema.define(:version => 20100920173545) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -316,7 +316,6 @@ ActiveRecord::Schema.define(:version => 20100915140148) do
   create_table "permission_requests", :force => true do |t|
     t.integer  "datatable_id"
     t.integer  "user_id"
-    t.boolean  "denied"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -327,6 +326,7 @@ ActiveRecord::Schema.define(:version => 20100915140148) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "owner_id"
+    t.string   "decision"
   end
 
   create_table "plots", :force => true do |t|
