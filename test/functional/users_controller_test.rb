@@ -14,4 +14,15 @@ class UsersControllerTest < ActionController::TestCase
     end
     
   end
+  
+  context 'try to set the role yourself' do
+    setup do
+      get :create, :email => Factory.next(:email), :password => 'password', 
+          :password_confirmation => 'password', :role => 'admin'
+    end
+    
+    should 'fail' do 
+      assert assigns(:user).role.nil?
+    end
+  end
 end
