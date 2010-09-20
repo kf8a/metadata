@@ -1,49 +1,75 @@
 require 'test_helper'
 
 class InvitesControllerTest < ActionController::TestCase
-  
-  context 'GET :index' do
-    setup do
-      get :index
-    end
-    
-    should respond_with :success
-    should assign_to(:invites)
-  end
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
-  test "should create invite" do
-    assert_difference('Invite.count') do
-      post :create, :invite => { }
+  context 'as an admin' do
+    setup do 
+      @controller.current_user = Factory.create :admin_user
     end
 
-    assert_redirected_to invite_path(assigns(:invite))
-  end
+    context 'GET :index' do
+      setup do
+        get :index
+      end
 
-  test "should show invite" do
-    get :show, :id => invites(:one).to_param
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, :id => invites(:one).to_param
-    assert_response :success
-  end
-
-  test "should update invite" do
-    put :update, :id => invites(:one).to_param, :invite => { }
-    assert_redirected_to invite_path(assigns(:invite))
-  end
-
-  test "should destroy invite" do
-    assert_difference('Invite.count', -1) do
-      delete :destroy, :id => invites(:one).to_param
+      should respond_with :success
+      should assign_to(:invites)
     end
 
-    assert_redirected_to invites_path
+    context 'GET :show' do
+      setup do
+        @invite = Factory.create :invite
+        get :show, :id => @invite
+      end
+
+      should respond_with(:success)
+    end
+
+    context 'GET :new' do
+      setup do 
+        get :new
+      end
+
+      should respond_with(:success)
+    end
+
+    context 'GET :edit' do
+      setup do
+        invite = Factory.create :invite
+        get :edit, :id => invite
+      end
+
+      should respond_with(:success)
+    end
+
+    context 'POST :create' do
+      setup do
+        post :create, :invite => { }
+      end
+
+      should redirect_to('the invite_path') { invite_path(assigns(:invite)) }
+    end
+
+    context 'PUT :update' do
+      setup do 
+        invite = Factory.create :invite
+        put :update, :id => invite, :invite => {}
+      end
+
+      should redirect_to('the invite_path') { invite_path(assigns(:invite)) }
+    end
+
+    context 'DELETE :destroy' do
+      setup do
+        @count = Invite.count
+        invite = Invite.first
+        delete :destroy, :id => invite
+      end
+
+      should 'remove one invite' do
+        assert Invite.count == @count - 1
+      end
+    end
   end
+
 end

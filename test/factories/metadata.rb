@@ -15,6 +15,7 @@ Factory.define :dataset do |d|
 end
 
 Factory.define :invite do |i|
+  i.email     Factory.next(:email)
 end
 
 Factory.define :ownership do |o|

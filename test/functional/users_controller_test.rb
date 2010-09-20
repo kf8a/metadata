@@ -6,11 +6,13 @@ class UsersControllerTest < ActionController::TestCase
     setup do
       @invite = Factory.create :invite, :email => 'bob@nospam.com'
       @invite.invite!
-      get :sign_up, :id => @invite.invite_code
+      @email = Factory.next(:email)
+      get :create, :invite => @invite.invite_code, :email => @email, 
+        :password => 'password', :password_confirmation => 'password'
     end
     
     should 'result in a new user with that email' do
-      assert Users.find_by_email('bob@nospam.com')
+      assert User.find_by_email(@email)
     end
     
   end
