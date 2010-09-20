@@ -1,14 +1,11 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'projects_controller'
 
-# Re-raise errors caught by the controller.
-class ProjectsController; def rescue_action(e) raise e end; end
-
 class ProjectsControllerTest < ActionController::TestCase
 
   def setup
     #TODO test with admin and non admin users
-    @controller.current_user = User.new(:role => 'admin')  
+    @controller.current_user = Factory.create :admin_user
   end
   
   def teardown

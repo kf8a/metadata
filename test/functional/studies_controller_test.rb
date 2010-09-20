@@ -4,7 +4,7 @@ class StudiesControllerTest < ActionController::TestCase
 
   context 'with an admin user' do
     setup do 
-      @controller.current_user = User.new(:role => 'admin')
+      @controller.current_user = Factory.create :admin_user
     end
     
     context "on GET to :index" do
