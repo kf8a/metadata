@@ -156,8 +156,7 @@
             <%= mail_to permission_request_email_list(@datatable),
                         'Email Owners',
                         :body => "Thanks for your interest in the  GLBRC data. This email is addressed to the Lead Investigators of the data table that you requested. Please let them know how you would like to use the data and what institution you are from. The lead investigators plan to respond promptly to requests. If you do not receive an email within the next several days then you are welcome to contact the GLBRC data coordinator (glbrc.data@kbs.msu.edu) so she can follow up on your request.\nData requested: http://glbrc.kbs.msu.edu#{url_for(@datatable)}",
-                        :subject => 'GLBRC data request',                        
-                        :class => 'download-link',
+                        :subject => 'GLBRC data request',             
                         :encode => 'hex' %>
           <% else %>
             <%= link_to 'Sign in to request the data',
