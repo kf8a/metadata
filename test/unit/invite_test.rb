@@ -3,16 +3,16 @@ require 'test_helper'
 class InviteTest < ActiveSupport::TestCase
   
   should validate_presence_of :email
-  should validate_uniqueness_of :email
+  #should validate_uniqueness_of :email
  
   context 'inviting' do
     setup do
-      @invite = Invite.new
-      @invite.invite!
+      @invite = Invite.create :email => Factory.next(:email)
     end
     
-    should 'generate an invite code' do
-      assert @invite.code.length > 0
+    should 'be invited' do
+      assert @invite.invite!
+      assert @invite.invited?
     end
 
   end

@@ -1,10 +1,14 @@
 require 'test_helper'
 
 class InvitesControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:invites)
+  
+  context 'GET :index' do
+    setup do
+      get :index
+    end
+    
+    should respond_with :success
+    should assign_to(:invites)
   end
 
   test "should get new" do

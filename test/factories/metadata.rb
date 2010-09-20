@@ -14,6 +14,9 @@ Factory.define :dataset do |d|
   d.abstract 'some new dataset'
 end
 
+Factory.define :invite do |i|
+end
+
 Factory.define :ownership do |o|
 end
 

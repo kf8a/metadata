@@ -9,6 +9,8 @@ class UserTest < ActiveSupport::TestCase
   should have_many :permissions
   should have_many :datatables
   
+  should have_many :sponsor_roles
+  
   should validate_uniqueness_of(:email).case_insensitive
   
   context 'a user' do

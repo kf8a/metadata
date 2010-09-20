@@ -3,9 +3,13 @@ class User < ActiveRecord::Base
   
   ROLES = %w[admin editor uploader]
   
+  attr_protected :role
+  
   has_many :permissions
   has_many :ownerships
   has_many :datatables, :through => :ownerships
+  
+  has_many :sponsor_roles
 
   before_save :downcase_email
 
