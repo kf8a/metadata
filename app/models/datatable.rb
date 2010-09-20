@@ -90,6 +90,11 @@ class Datatable < ActiveRecord::Base
     end
     requesters
   end
+
+  def requested_by?(user)
+    request = PermissionRequest.find_by_datatable_id_and_user_id(self.id, user.id)
+    !request.blank?
+  end
   
   #TODO need to decide wether the permissions stuff is a function of the user or the datatable
   def can_be_downloaded_by?(user)

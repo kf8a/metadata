@@ -25,6 +25,9 @@ module NavigationHelpers
            
     when /the datatable download page/
       datatable_path(Datatable.last, :format => 'csv')
+
+    when /the datatable show page for "(.*)"/
+      datatable_path(Datatable.find_by_name($1))
       
     when /LTER datatables/
       datatables_path

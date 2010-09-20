@@ -14,10 +14,9 @@ Feature: Data View
       And a public lter datatable exists with a title of "Second one"
       And a public lter datatable exists with a title of "Third one"
     When I go to the datatables page
-    Then show me the page
-    Then I should see "First One"
-      And I should see "Second One"
-      And I should see "Third One"
+    Then I should see "First one"
+      And I should see "Second one"
+      And I should see "Third one"
 
   Scenario: Viewing a public datatable
     Given a public lter datatable exists with species data
