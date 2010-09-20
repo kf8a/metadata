@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
     self.datatables.include?(datatable)
   end
   
+  def admin?
+    role == 'admin'
+  end
+  
   def permitted?(datatable)
     datatable.permitted?(self)
   end

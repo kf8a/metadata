@@ -26,6 +26,20 @@ class UserTest < ActiveSupport::TestCase
     should 'respond to has_permission_from?' do
       assert @user.respond_to?('has_permission_from?')
     end
+    
+    should 'not be an admin' do
+      assert !@user.admin?
+    end
+  end
+  
+  context 'an admin user' do
+    setup do
+      @user = Factory :admin_user
+    end
+    
+    should 'be an admin?' do
+      assert @user.admin?
+    end
   end
   
   context 'membership in sponsors' do
