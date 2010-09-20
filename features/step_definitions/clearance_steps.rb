@@ -1,18 +1,4 @@
-# General
-
-Then /^I should see error messages$/ do
-  assert_match /error(s)? prohibited/m, response.body
-end
-
 # Session
-
-Then /^I should be signed in$/ do
-  assert controller.signed_in?
-end
-
-Then /^I should be signed out$/ do
-  assert ! controller.signed_in?
-end
 
 When /^session is cleared$/ do
   request.reset_session

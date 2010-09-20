@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100915140148) do
+ActiveRecord::Schema.define(:version => 20100920173545) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -316,7 +316,6 @@ ActiveRecord::Schema.define(:version => 20100915140148) do
   create_table "permission_requests", :force => true do |t|
     t.integer  "datatable_id"
     t.integer  "user_id"
-    t.boolean  "denied"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -327,6 +326,15 @@ ActiveRecord::Schema.define(:version => 20100915140148) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "owner_id"
+    t.string   "decision"
+  end
+
+  create_table "plots", :force => true do |t|
+    t.string  "name"
+    t.integer "treatment_id"
+    t.integer "replicate"
+    t.integer "study_id"
+    t.string  "description"
   end
 
   create_table "projects", :force => true do |t|
@@ -508,9 +516,9 @@ ActiveRecord::Schema.define(:version => 20100915140148) do
   create_table "units", :force => true do |t|
     t.string  "name"
     t.text    "description"
-    t.boolean "in_eml",                     :default => false
+    t.boolean "in_eml",      :default => false
     t.text    "definition"
-    t.string  "human_name",  :limit => nil
+    t.string  "human_name"
   end
 
   add_index "units", ["name"], :name => "unit_names_key", :unique => true

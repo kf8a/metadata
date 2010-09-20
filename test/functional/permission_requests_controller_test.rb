@@ -14,20 +14,14 @@ class PermissionRequestsControllerTest < ActionController::TestCase
         @controller.current_user = nil
       end
 
-      context "GET :new" do
-        setup do
-          get :new, :datatable => @datatable
-        end
-        
-        should_not respond_with :success
-      end
-      
       context "POST :create" do
         setup do
           post :create, :datatable => @datatable
         end
         
-        should_not respond_with :success
+        should "not create a permission request" do
+          assert_nil PermissionRequest.find_by_datatable_id_and_user_id(@datatable, @user)
+        end
       end
     end
     
@@ -37,21 +31,11 @@ class PermissionRequestsControllerTest < ActionController::TestCase
         @controller.current_user = @user
       end
       
-      context "GET :new" do
-        setup do
-          get :new, :datatable => @datatable
-        end
-        
-        should respond_with :success
-        should assign_to(:datatable).with(@datatable)
-      end
-      
       context "POST :create" do
         setup do
           post :create, :datatable => @datatable
         end
         
-        should respond_with :success
         should "create a permission request" do
           assert PermissionRequest.find_by_datatable_id_and_user_id(@datatable, @user)
         end

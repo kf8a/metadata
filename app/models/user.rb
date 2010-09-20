@@ -19,9 +19,14 @@ class User < ActiveRecord::Base
   
   def has_permission_from?(owner, datatable)
     permission = Permission.find_by_user_id_and_owner_id_and_datatable_id(self, owner, datatable)
-    !permission.blank?
+    permission && permission.decision != "denied"
   end
-  
+
+  def denied_access?(datatable)
+    !datatable.deniers_of(self).blank?
+  end
+
+
   protected
 
   def downcase_email

@@ -4,9 +4,9 @@ Scenario: A signed in user wants to edit
   Given I am signed up and confirmed as "email@person.com"/"password"
   And   a public datatable exists
   When  I sign in as "email@person.com"/"password"
-  Then  I should be signed in
+  Then  I should see "Signed in"
   When  I go to the datatable page
-  And  I should not see "Edit"
+  Then  I should not see "Edit"
   
 Scenario: A signed in user goes to the edit page
   Given I have signed in with "email@person.com"/"password"
@@ -24,7 +24,6 @@ Scenario: A admin user wants to edit
     And I have the "admin" role
     And a public datatable exists
   When  I sign in as "email@person.com"/"password"
-  Then  I should be signed in
-   And  I should have the "admin" role
+  Then  I should see "Signed in"
   When  I go to the datatable page
   Then  I should see "Edit"

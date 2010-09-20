@@ -29,8 +29,8 @@ Feature: Citation viewing and downloading
     Given I have signed in with "admin@person.com"/"password"
       And I have the "admin" role
      When I go to the new citation page
-      And I fill in "title" with "Corn weevil"
-      And I attach the file "test/data/citation.pdf" to "pdf"
+      And I fill in "Title" with "Corn weevil"
+      And I attach the file "test/data/citation.pdf" to "Pdf"
      When I press "Create"
      #Then I should see "created successfully"
     #  And I should see "Corn weevil"

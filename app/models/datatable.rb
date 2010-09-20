@@ -75,7 +75,7 @@ class Datatable < ActiveRecord::Base
   end
   
   def permitted?(user)
-    permissions_granted_by = permissions.collect {|x| x.user == user ? x.owner : nil}.compact
+    permissions_granted_by = permissions.collect {|x| (x.user == user) && (x.decision != "denied") ? x.owner : nil}.compact
     permissions_granted_by == owners and not owners.empty?
   end
   
@@ -83,19 +83,26 @@ class Datatable < ActiveRecord::Base
     requests = PermissionRequest.find_all_by_datatable_id(self.id)
     requesters = []
     requests.each do |request|
-      next if request.denied == true
       user = request.user
       next if self.permitted?(user)
       requesters << user
     end
     requesters
   end
+
+  def requested_by?(user)
+    request = PermissionRequest.find_by_datatable_id_and_user_id(self.id, user.id)
+    !request.blank?
+  end
+
+  def deniers_of(user)
+    permissions.collect {|x| (x.user == user) && (x.decision == "denied") ? x.owner : nil}.compact
+  end
   
-  #TODO need to decide wether the permissions stuff is a function of the user or the datatable
   def can_be_downloaded_by?(user)
-    !self.restricted? or
-      user.try(:role) == 'admin' or
-      self.is_owned_by?(user) or
+    !self.restricted? ||
+      user.try(:role) == 'admin' ||
+      self.is_owned_by?(user) ||
       self.permitted?(user)
   end
 

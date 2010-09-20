@@ -50,7 +50,7 @@ Feature: Assign owners to datatables
     Then I should see "Owned by: bill@person.com"
       And I should see "bill@person.com"
       
-    When I press "Revoke Ownership from bill@person.com"
+    When I press "Revoke ownership from bill@person.com"
     Then I should see "Ownership has been revoked from bill@person.com"
       And I should not see "Owned by: bill@person.com"
       And "bill@person.com" should not own the datatable "kbs001"

@@ -104,10 +104,9 @@
           "<option></option>" +
           options_from_collection_for_select(units, :id, :name, variate.unit_id)
       %></td>
-      <td><%= select_tag 'datatable[variates_attributes][][measurement_scale]', 
-          options_for_select(['nominal','interval','ratio', 'datetime'], variate.measurement_scale)%></td>
+      <td><%= select_tag 'datatable[variates_attributes][][measurement_scale]', options_for_measurement_scale(variate) %></td>
       <td><%= select_tag 'datatable[variates_attributes][][data_type]', 
-            options_for_select(['text','datetime','integer','real','text'], variate.data_type)%></td>
+                options_for_data_type(variate) %></td>
       <td><%= text_field_tag 'datatable[variates_attributes][][max_valid]', variate.max_valid %></td>
       <td><%= text_field_tag 'datatable[variates_attributes][][min_valid]', variate.min_valid %></td>
       <td><%= text_field_tag 'datatable[variates_attributes][][date_format]', variate.date_format %></td>
