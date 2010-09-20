@@ -245,7 +245,7 @@ ActiveRecord::Schema.define(:version => 20100920180136) do
     t.date    "date_to"
   end
 
-  create_table "members", :force => true do |t|
+  create_table "memberships", :force => true do |t|
     t.integer "sponsor_id"
     t.integer "user_id"
   end

@@ -9,7 +9,7 @@ class UserTest < ActiveSupport::TestCase
   should have_many :permissions
   should have_many :datatables
   
-  should have_many :members
+  should have_many :memberships
   should have_many :sponsors
   
   should validate_uniqueness_of(:email).case_insensitive
