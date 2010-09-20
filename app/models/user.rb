@@ -9,7 +9,8 @@ class User < ActiveRecord::Base
   has_many :ownerships
   has_many :datatables, :through => :ownerships
   
-  has_many :sponsor_roles
+  has_many :members
+  has_many :sponsors, :through => :members
 
   before_save :downcase_email
 

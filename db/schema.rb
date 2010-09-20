@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100920153614) do
+ActiveRecord::Schema.define(:version => 20100920180136) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -245,6 +245,11 @@ ActiveRecord::Schema.define(:version => 20100920153614) do
     t.date    "date_to"
   end
 
+  create_table "members", :force => true do |t|
+    t.integer "sponsor_id"
+    t.integer "user_id"
+  end
+
   create_table "open_id_associations", :force => true do |t|
     t.binary  "server_url"
     t.string  "handle"
@@ -455,12 +460,6 @@ ActiveRecord::Schema.define(:version => 20100920153614) do
     t.string  "alternate_common_name"
     t.string  "attribution"
     t.boolean "woody"
-  end
-
-  create_table "sponsor_roles", :force => true do |t|
-    t.integer "sponsor_id"
-    t.integer "user_id"
-    t.string  "role"
   end
 
   create_table "sponsors", :force => true do |t|

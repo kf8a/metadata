@@ -4,7 +4,7 @@ class UsersControllerTest < ActionController::TestCase
  
   context 'sign_up with invite' do
     setup do
-      @invite = Factory.create :invite, :email => 'bob@nospam.com'
+      @invite = Factory.create :invite, :email => 'bob@nospam.com' , :glbrc_member  => true
       @invite.invite!
       @email = Factory.next(:email)
       get :create, :invite => @invite.invite_code, :email => @email, 
@@ -12,7 +12,8 @@ class UsersControllerTest < ActionController::TestCase
     end
     
     should 'result in a new user with that email' do
-      assert User.find_by_email(@email)
+      assert user = User.find_by_email(@email)
+      assert user.members.include(Sponsor.find_by_name('glbrc'))
     end
     
   end

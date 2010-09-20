@@ -9,7 +9,8 @@ class UserTest < ActiveSupport::TestCase
   should have_many :permissions
   should have_many :datatables
   
-  should have_many :sponsor_roles
+  should have_many :members
+  should have_many :sponsors
   
   should validate_uniqueness_of(:email).case_insensitive
   
@@ -25,6 +26,19 @@ class UserTest < ActiveSupport::TestCase
     should 'respond to has_permission_from?' do
       assert @user.respond_to?('has_permission_from?')
     end
+  end
+  
+  context 'membership in sponsors' do
+    setup do 
+      
+      @user = Factory.create :user
+    end
+    
+    should 'accept membership in a sponsor' do
+      sponsor = Factory.create :sponsor, :data_use_statement => 'Use it', :name => 'GLBRC'
+      assert @user.sponsors << [sponsor]
+    end
+    
   end
 
   context "the owns(datatable) function" do

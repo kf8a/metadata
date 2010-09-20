@@ -1,5 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :invites
   
   map.send_invitation '/send_invitation/:id', :controller => "invites", :action => "send_invitation"
   map.redeem_invitation '/signup/:invite_code', :controller => 'users', :action => 'new'
@@ -45,6 +44,8 @@ ActionController::Routing::Routes.draw do |map|
                             :search  => :get,
                             :update_temporal_extent => :get
                             }
+
+  map.resources :invites
 
   map.resources :meetings
 
