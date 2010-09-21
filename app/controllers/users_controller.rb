@@ -9,7 +9,9 @@ class UsersController < Clearance::UsersController
     if @user.save
       if invite_code && @invite
         @invite.redeemed!
-        @user.sponsors << Sponsor.find_by_name('glbrc')
+        if @invite.glbrc_member?
+          @user.sponsors << Sponsor.find_by_name('glbrc')
+        end
       end
       
       flash_notice_after_create
