@@ -1,4 +1,6 @@
 class CollectionsController < ApplicationController
+  #This controller allows searching and sorting of a datatable's data through
+  #a "collection" of its data.
 
   layout :site_layout
   
@@ -14,13 +16,14 @@ class CollectionsController < ApplicationController
   end
 
   def customize
-    set_limits(params)
     @values = @collection.perform_query
-    set_limitrange(@values)
     set_limitoptions(@values)
+    set_limits(params)
     @sortby = params[:sortby]
     @sort_direction = params[:sort_direction]
     @values = sort_values(@values, @sort_direction, @sortby)
+    set_limitrange(@values, @limitby)
+
     @customize = params[:custom]
     render 'show'
   end
@@ -31,40 +34,45 @@ class CollectionsController < ApplicationController
     @collection = Collection.find(params[:id])
   end
 
-  def set_limits(params)
-    @limitby = params[:limitby]
-    if @limitby == params[:oldlimitby] || params[:oldlimitby].blank?
-      @limit1 = params[:limit1]
-      @limit2 = params[:limit2]
-      @contains = params[:contains]
-    else
-      @limit1 = nil
-      @limit2 = nil
-      @contains = nil
-    end
+  def new_limitby?(limitby, oldlimitby)
+    oldlimitby && limitby != oldlimitby
   end
 
-  def set_limitrange(values)
-    @limitrange = []
-    values.each do |row|
-      @limitrange << row[@limitby] if row[@limitby]
+  def set_limits(params)
+    @limitby = params[:limitby]
+    if new_limitby?(@limitby, params[:oldlimitby])
+      @limit_min = nil
+      @limit_max = nil
+      @contains = nil
+    else
+      @limit_min = params[:limit_min]
+      @limit_max = params[:limit_max]
+      @contains = params[:contains]
     end
-    @limitrange.uniq!
-    @limitrange.sort!
   end
 
   def set_limitoptions(values)
-    @limitoptions = []
-    values.fields.each do |field|
+    @limitoptions = values.fields.collect do |field|
       next if field == "id"
-      @limitoptions << [field.titleize, field]
+      [field.titleize, field]
     end
-    @limitoptions.sort!
+    @limitoptions = normalize(@limitoptions)
+  end
+
+  def set_limitrange(values, limitby)
+    @limitrange = values.collect {|row| row[limitby]}
+    @limitrange = normalize(@limitrange)
   end
 
   def sort_values(values, direction, sortby)
     values = values.sort {|a,b| a[sortby]<=>b[sortby] rescue 0} if direction == "Ascending"
     values = values.sort {|a,b| b[sortby]<=>a[sortby] rescue 0} if direction == "Descending"
     values
+  end
+
+  def normalize(array)
+    array.compact!
+    array.uniq!
+    array.sort!
   end
 end
