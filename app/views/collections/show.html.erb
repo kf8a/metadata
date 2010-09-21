@@ -63,10 +63,10 @@
       <% if @limitby %>
         <%= hidden_field_tag 'oldlimitby', @limitby  %>
         <tr>
-          <td><%= label_tag 'limit1', "Where '#{@limitby.titleize}' ranges from: " %></td>
-          <td><%= select_tag 'limit1', options_for_select(@limitrange, @limit1)%></td>
-          <td><%= label_tag 'limit2', " to: " %></td>
-          <td><%= select_tag 'limit2', options_for_select(@limitrange, @limit2)%></td>
+          <td><%= label_tag 'limit_min', "Where '#{@limitby.titleize}' ranges from: " %></td>
+          <td><%= select_tag 'limit_min', options_for_select(@limitrange, @limit_min)%></td>
+          <td><%= label_tag 'limit_max', " to: " %></td>
+          <td><%= select_tag 'limit_max', options_for_select(@limitrange, @limit_max)%></td>
         </tr>
         <tr>
           <td><%= label_tag 'conatins', "Where '#{@limitby.titleize}' contains: "%> </td>
@@ -92,8 +92,8 @@
     <table>
       <% @values.each do  |row| %>
         <% next unless @limitby.blank? || @contains.blank? || row[@limitby].casecmp(@contains) == 0 %>
-        <% next unless @limitby.blank? || @limit1.blank? || row[@limitby].casecmp(@limit1) >= 0 %>
-        <% next unless @limitby.blank? || @limit2.blank? || row[@limitby].casecmp(@limit2) <= 0 %>
+        <% next unless @limitby.blank? || @limit_min.blank? || row[@limitby].casecmp(@limit_min) >= 0 %>
+        <% next unless @limitby.blank? || @limit_max.blank? || row[@limitby].casecmp(@limit_max) <= 0 %>
         <tr  class="<%= cycle('even','odd') -%>">
           <td>
             <% row.keys.each do |key| %>

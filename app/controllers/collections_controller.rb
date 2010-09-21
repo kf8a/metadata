@@ -1,4 +1,6 @@
 class CollectionsController < ApplicationController
+  #This controller allows searching and sorting of a datatable's data through
+  #a "collection" of its data.
 
   layout :site_layout
   
@@ -15,12 +17,11 @@ class CollectionsController < ApplicationController
 
   def customize
     set_limits(params)
-    @values = @collection.perform_query
-    set_limitrange(@values)
-    set_limitoptions(@values)
     @sortby = params[:sortby]
     @sort_direction = params[:sort_direction]
-    @values = sort_values(@values, @sort_direction, @sortby)
+    @values = set_values(@collection, @sort_direction, @sortby)
+    set_limitrange(@values, @limitby)
+    set_limitoptions(@values)
     @customize = params[:custom]
     render 'show'
   end
@@ -33,22 +34,24 @@ class CollectionsController < ApplicationController
 
   def set_limits(params)
     @limitby = params[:limitby]
-    if @limitby == params[:oldlimitby] || params[:oldlimitby].blank?
-      @limit1 = params[:limit1]
-      @limit2 = params[:limit2]
-      @contains = params[:contains]
-    else
-      @limit1 = nil
-      @limit2 = nil
+    if new_limitby?(@limitby, params[:oldlimitby])
+      @limit_min = nil
+      @limit_max = nil
       @contains = nil
+    else
+      @limit_min = params[:limit_min]
+      @limit_max = params[:limit_max]
+      @contains = params[:contains]
     end
   end
 
-  def set_limitrange(values)
-    @limitrange = []
-    values.each do |row|
-      @limitrange << row[@limitby] if row[@limitby]
-    end
+  def new_limitby?(limitby, oldlimitby)
+    oldlimitby && limitby != oldlimitby
+  end
+
+  def set_limitrange(values, limitby)
+    @limitrange = values.collect {|row| row[limitby]}
+    @limitrange.compact!
     @limitrange.uniq!
     @limitrange.sort!
   end
@@ -62,9 +65,9 @@ class CollectionsController < ApplicationController
     @limitoptions.sort!
   end
 
-  def sort_values(values, direction, sortby)
+  def sort_values(collection, direction, sortby)
+    values = collection.perform_query
     values = values.sort {|a,b| a[sortby]<=>b[sortby] rescue 0} if direction == "Ascending"
     values = values.sort {|a,b| b[sortby]<=>a[sortby] rescue 0} if direction == "Descending"
-    values
   end
 end
