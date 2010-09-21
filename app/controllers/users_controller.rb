@@ -11,6 +11,7 @@ class UsersController < Clearance::UsersController
         @invite.redeemed!
         if @invite.glbrc_member?
           @user.sponsors << Sponsor.find_by_name('glbrc')
+          @user.save
         end
       end
       

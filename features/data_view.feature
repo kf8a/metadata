@@ -10,13 +10,16 @@ Feature: Data View
       And I am in the lter subdomain
       
   Scenario: Seeing which datatables are available
-    Given a public lter datatable exists with a title of "First one"
+    Given a study exists with a name of "Awesome Study"
+      And a public lter datatable exists with a title of "First one"
       And a public lter datatable exists with a title of "Second one"
       And a public lter datatable exists with a title of "Third one"
     When I go to the datatables page
-    Then I should see "First one"
+    Then I should see "Awesome Study"
+      And I should see "First one"
       And I should see "Second one"
       And I should see "Third one"
+      And I should not see "Datatables"
 
   Scenario: Viewing a public datatable
     Given a public lter datatable exists with species data

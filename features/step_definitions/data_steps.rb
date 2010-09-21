@@ -1,10 +1,11 @@
 
 Given /^a public lter datatable exists with a title of "([^"]*)"$/ do |title|
-  @website = Website.find_by_name("lter")
-  @datatable = Factory.create(:datatable,
+  website = Website.find_by_name("lter") || Factory.create(:website, :name => "lter")
+  study = Study.find_by_name("Awesome Study") || Factory.create(:study)
+  datatable = Factory.create(:datatable,
     :title => title,
-    :dataset => Factory.create(:dataset, :website => @website),
-    :study => Factory.create(:study))
+    :dataset => Factory.create(:dataset, :website => website),
+    :study => study)
 end
 
 Given /^a public lter datatable exists with species data$/ do
