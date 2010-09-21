@@ -1,6 +1,6 @@
+#This controller allows searching and sorting of a datatable's data through
+#a "collection" of its data.
 class CollectionsController < ApplicationController
-  #This controller allows searching and sorting of a datatable's data through
-  #a "collection" of its data.
 
   layout :site_layout
   
