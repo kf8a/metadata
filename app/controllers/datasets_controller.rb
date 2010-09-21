@@ -20,7 +20,7 @@ class DatasetsController < ApplicationController
     request.format  = :eml if params[:Dataset]
     @keyword_list   = params['keyword_list']
     @people         = Person.find_all_with_dataset(:order => 'sur_name')
-    @themes         = Theme.all(:order => :weight)
+    @themes         = Theme.by_weight
     @datasets       = Dataset.all
     @studies        = collect_and_normalize_studies(@datasets)
     @studies        = [@study] if @study
@@ -58,7 +58,7 @@ class DatasetsController < ApplicationController
   def edit
     @people   = Person.all(:order => 'sur_name')
     @studies = Study.all(:order => 'weight')
-    @themes = Theme.all(:order => 'weight')
+    @themes = Theme.by_weight
     @roles  = Role.find_all_by_role_type_id(RoleType.find_by_name('lter_dataset'))
     @websites = Website.all.collect {|x| [x.name, x.id]}
     @sponsors = Sponsor.all.collect {|x| [x.name, x.id]}
