@@ -16,12 +16,14 @@ class CollectionsController < ApplicationController
   end
 
   def customize
+    @values = @collection.perform_query
+    set_limitoptions(@values)
     set_limits(params)
     @sortby = params[:sortby]
     @sort_direction = params[:sort_direction]
-    @values = set_values(@collection, @sort_direction, @sortby)
+    @values = sort_values(@values, @sort_direction, @sortby)
     set_limitrange(@values, @limitby)
-    set_limitoptions(@values)
+
     @customize = params[:custom]
     render 'show'
   end
@@ -30,6 +32,10 @@ class CollectionsController < ApplicationController
   
   def get_collection
     @collection = Collection.find(params[:id])
+  end
+
+  def new_limitby?(limitby, oldlimitby)
+    oldlimitby && limitby != oldlimitby
   end
 
   def set_limits(params)
@@ -45,29 +51,28 @@ class CollectionsController < ApplicationController
     end
   end
 
-  def new_limitby?(limitby, oldlimitby)
-    oldlimitby && limitby != oldlimitby
+  def set_limitoptions(values)
+    @limitoptions = values.fields.collect do |field|
+      next if field == "id"
+      [field.titleize, field]
+    end
+    @limitoptions = normalize(@limitoptions)
   end
 
   def set_limitrange(values, limitby)
     @limitrange = values.collect {|row| row[limitby]}
-    @limitrange.compact!
-    @limitrange.uniq!
-    @limitrange.sort!
+    @limitrange = normalize(@limitrange)
   end
 
-  def set_limitoptions(values)
-    @limitoptions = []
-    values.fields.each do |field|
-      next if field == "id"
-      @limitoptions << [field.titleize, field]
-    end
-    @limitoptions.sort!
-  end
-
-  def sort_values(collection, direction, sortby)
-    values = collection.perform_query
+  def sort_values(values, direction, sortby)
     values = values.sort {|a,b| a[sortby]<=>b[sortby] rescue 0} if direction == "Ascending"
     values = values.sort {|a,b| b[sortby]<=>a[sortby] rescue 0} if direction == "Descending"
+    values
+  end
+
+  def normalize(array)
+    array.compact!
+    array.uniq!
+    array.sort!
   end
 end
