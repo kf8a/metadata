@@ -15,10 +15,8 @@ Feature: Data View
       And a public lter datatable exists with a title of "Second one"
       And a public lter datatable exists with a title of "Third one"
     When I go to the datatables page
-    Then some details should be true
-    Then show me the page
     Then I should see "Awesome Study"
-    Then I should see "First one"
+      And I should see "First one"
       And I should see "Second one"
       And I should see "Third one"
       And I should not see "Datatables"
