@@ -8,7 +8,7 @@ class UnitsControllerTest < ActionController::TestCase
   def setup
 
     #TODO test with admin and non admin users
-    @controller.current_user = User.new(:role => 'admin')
+    @controller.current_user = Factory.create :admin_user
   end
 
   context "GET :index" do

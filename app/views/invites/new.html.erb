@@ -1,0 +1,10 @@
+<h1>New invite</h1>
+
+<% semantic_form_for @invite do |invite| %>
+  <%= invite.error_messages %>
+  
+  <%= invite.inputs :firstname, :lastname, :email, :glbrc_member %>
+  <%= invite.buttons %>
+<% end %>
+
+<%= link_to 'Back', invites_path %>

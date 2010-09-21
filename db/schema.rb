@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100920173545) do
+ActiveRecord::Schema.define(:version => 20100920191255) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -203,6 +203,19 @@ ActiveRecord::Schema.define(:version => 20100920173545) do
     t.string  "type",              :limit => 30,  :null => false
   end
 
+  create_table "invites", :force => true do |t|
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "email"
+    t.string   "invite_code",  :limit => 40
+    t.datetime "invited_at"
+    t.datetime "redeemed_at"
+    t.boolean  "glbrc_member"
+  end
+
+  add_index "invites", ["id", "email"], :name => "index_invites_on_id_and_email"
+  add_index "invites", ["id", "invite_code"], :name => "index_invites_on_id_and_invite_code"
+
   create_table "locations", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -230,6 +243,11 @@ ActiveRecord::Schema.define(:version => 20100920173545) do
     t.text    "announcement"
     t.integer "venue_type_id"
     t.date    "date_to"
+  end
+
+  create_table "memberships", :force => true do |t|
+    t.integer "sponsor_id"
+    t.integer "user_id"
   end
 
   create_table "open_id_associations", :force => true do |t|

@@ -14,6 +14,10 @@ Factory.define :dataset do |d|
   d.abstract 'some new dataset'
 end
 
+Factory.define :invite do |i|
+  i.email     Factory.next(:email)
+end
+
 Factory.define :ownership do |o|
 end
 

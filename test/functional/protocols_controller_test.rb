@@ -7,7 +7,7 @@ class ProtocolsControllerTest < ActionController::TestCase
   def setup
     generate_websites_and_protocols
     #TODO test with admin and non admin users
-    @controller.current_user = User.new(:role => 'admin')
+    @controller.current_user = Factory.create :admin_user
   end
   
   context 'GET: index in lter (default) subdomain' do

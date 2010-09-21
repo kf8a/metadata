@@ -27,3 +27,9 @@ Given /^I am signed in as a normal user$/ do
   @user.role = "normal"
   When %{I sign in as "normal@person.com"/"password"}
 end
+
+Given /^"([^"]*)" is a "([^"]*)" member$/ do |email, sponsor_name|
+  user = User.find_by_email(email)
+  sponsor = Factory :sponsor, :name => sponsor_name
+  user.sponsors << sponsor
+end

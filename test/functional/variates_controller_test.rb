@@ -10,7 +10,7 @@ class VariatesControllerTest < ActionController::TestCase
     @response   = ActionController::TestResponse.new
     @variate = Factory.create(:variate)
     Factory.create(:variate)
-     @controller.current_user = User.new(:role => 'admin')
+     @controller.current_user = Factory.create :admin_user
   end
 
   def test_should_get_index

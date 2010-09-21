@@ -1,9 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'datasets_controller'
 
-# Re-raise errors caught by the controller.
-class DatasetsController; def rescue_action(e) raise e end; end
-
 class DatasetsControllerTest < ActionController::TestCase
   
 
@@ -12,7 +9,7 @@ class DatasetsControllerTest < ActionController::TestCase
     Factory.create(:dataset)
     
     #TODO test with admin and non admin users
-    @controller.current_user = User.new(:role => 'admin')
+    @controller.current_user = Factory.create :admin_user
   end
    
   def test_should_get_new

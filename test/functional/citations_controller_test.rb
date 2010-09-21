@@ -93,7 +93,7 @@ class CitationsControllerTest < ActionController::TestCase
   context 'signed in as admin' do
 
     setup do
-      @controller.current_user = Factory :user, :role => 'admin'
+      @controller.current_user = Factory.create :admin_user
     end
 
     context 'GET :index' do

@@ -52,7 +52,7 @@ class ApplicationControllerTest < ActionController::TestCase
       
       context "when an admin is logged in" do
         setup do
-          @controller.current_user = User.new(:role => 'admin')  
+          @controller.current_user = Factory.create :admin_user
           get :testadmin
         end
         
@@ -62,7 +62,7 @@ class ApplicationControllerTest < ActionController::TestCase
     
     context "template choose function" do
       setup do
-        @controller.current_user = User.new(:role => 'admin')  
+        @controller.current_user = Factory.create :admin_user
       end
       
       context "when a subdomain is requested which exists" do

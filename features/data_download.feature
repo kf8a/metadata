@@ -26,6 +26,18 @@ Feature: Download data
       And I follow "Download complete data table"
      Then I should be on the datatable download page
       And I should see "1"
+      
+  Scenario: A sponsor member downloads a datatable
+     Given a protected datatable exists
+       And the datatable sponsored by "glbrc"
+       And "bob@person.com" owns the datatable
+       And "bob@person.com" is not an administrator
+       And "bob@person.com" is a "glbrc" member
+      When I sign in as "bob@person.com"/"password"
+      When I go to the datatable page
+       And I follow "Download complete data table"
+      Then I should be on the datatable download page
+       And I should see "1"
 
   Scenario: An authorized user downloads a datatable
     Given a protected datatable exists

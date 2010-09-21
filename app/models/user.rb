@@ -3,14 +3,23 @@ class User < ActiveRecord::Base
   
   ROLES = %w[admin editor uploader]
   
+  attr_protected :role
+  
   has_many :permissions
   has_many :ownerships
   has_many :datatables, :through => :ownerships
+  
+  has_many :memberships
+  has_many :sponsors, :through => :memberships
 
   before_save :downcase_email
 
   def owns?(datatable)
     self.datatables.include?(datatable)
+  end
+  
+  def admin?
+    role == 'admin'
   end
   
   def permitted?(datatable)
