@@ -45,3 +45,8 @@ Given /^a public lter datatable exists with species data$/ do
     :name => "Common Name",
     :description => "What Joe Public calls the species")
 end
+
+Given /^the datatable sponsored by "([^"]*)"$/ do |sponsor|
+  datatable = Datatable.last
+  datatable.dataset.sponsor.name = sponsor
+end

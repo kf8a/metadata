@@ -1,16 +1,13 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'abstracts_controller'
 
-# Re-raise errors caught by the controller.
-class AbstractsController; def rescue_action(e) raise e end; end
-
 class AbstractsControllerTest < ActionController::TestCase
 
   def setup
     @meeting = Factory.create(:meeting)
     
     #TODO test with admin and non admin users
-    @controller.current_user = User.new(:role => 'admin')  
+    @controller.current_user = Factory.create :admin_user
   end
   
   def teardown

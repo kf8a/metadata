@@ -4,7 +4,7 @@ class PagesControllerTest < ActionController::TestCase
 
   context 'as an admin' do
     setup do
-      @controller.current_user =  User.new(:role => 'admin')
+      @controller.current_user =  Factory.create :admin_user
     end
     
     context 'GET :show' do
