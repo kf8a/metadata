@@ -32,6 +32,22 @@ Given /^"([^"]*)" has requested permission$/ do |email|
   assert PermissionRequest.find_by_user_id_and_datatable_id(user, datatable)
 end
 
+Given /^"([^"]*)" has denied the request of "([^"]*)"$/ do |owner_email, user_email|
+  owner = User.find_by_email(owner_email)
+  user = User.find_by_email(user_email)
+  datatable = Datatable.last
+  permission = Permission.find_by_user_id_and_owner_id_and_datatable_id(user, owner)
+  unless permission
+    permission = Permission.new
+    permission.user = user
+    permission.owner = owner
+    permission.datatable = datatable
+  end
+  permission.decision = "denied"
+  permission.save
+end
+
+
 Then /^"([^"]*)" should not have access to the datatable$/ do |email|
   @user = User.find_by_email(email)
   assert !@user.permitted?(Datatable.last)
