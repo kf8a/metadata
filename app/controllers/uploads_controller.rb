@@ -2,6 +2,10 @@ class UploadsController < ApplicationController
 
   layout :site_layout
   before_filter :can_upload?, :except => [:index, :show]  unless ENV["RAILS_ENV"] == 'development'
+
+  def index
+    @uploads = Upload.all
+  end
   
   def new
     @upload = Upload.new
