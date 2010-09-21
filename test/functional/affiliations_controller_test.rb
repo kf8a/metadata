@@ -1,15 +1,12 @@
 require File.dirname(__FILE__) + '/../test_helper'
 require 'affiliations_controller'
 
-# Re-raise errors caught by the controller.
-class AffiliationsController; def rescue_action(e) raise e end; end
-
 class AffiliationsControllerTest < ActionController::TestCase
 #  fixtures :affiliations
 
   def setup
     #TODO test with admin and non admin users
-    @controller.current_user = User.new(:role => 'admin')
+    @controller.current_user = Factory.create :admin_user
   end
 
   def teardown

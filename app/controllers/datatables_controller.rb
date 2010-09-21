@@ -11,7 +11,6 @@ class DatatablesController < ApplicationController
   # GET /datatables.xml
   def index
     retrieve_datatables('keyword_list' =>'')
-    @default_value = 'Search for core areas, keywords or people'
     
     @sponsor = Sponsor.find_by_name('glbrc')
     respond_to do |format|
@@ -209,6 +208,7 @@ class DatatablesController < ApplicationController
   end
   
   def retrieve_datatables(query)
+    @default_value = 'Search for core areas, keywords or people'
     @themes = Theme.roots
 
     @keyword_list = query['keyword_list']

@@ -100,14 +100,20 @@ class Datatable < ActiveRecord::Base
   end
   
   def can_be_downloaded_by?(user)
-    !self.restricted? ||
-      user.try(:role) == 'admin' ||
-      self.is_owned_by?(user) ||
+    !self.restricted? or
+      user.try(:admin?) or
+      self.owned_by?(user) or
+      member?(user) or
       self.permitted?(user)
   end
 
-  def is_owned_by?(user)
+  def owned_by?(user)
     user.try(:owns?, self)
+  end
+  
+  def member?(user)
+    sponsors = user.try(:sponsors)
+    sponsors.respond_to?('include?') ? sponsors.include?(self.dataset.try(:sponsor)) : false
   end
   
   def within_interval?(start_date=Date.today, end_date=Date.today)

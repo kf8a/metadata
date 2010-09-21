@@ -125,7 +125,7 @@ class DatatablesControllerTest < ActionController::TestCase
 
   context 'signed in as admin' do
     setup do
-      @controller.current_user = User.new(:role => 'admin')
+      @controller.current_user = Factory.create :admin_user
     end
     
     teardown do
@@ -220,7 +220,7 @@ class DatatablesControllerTest < ActionController::TestCase
     Factory.create(:website, :id=>1).save
     
     #TODO test with admin and non admin users
-    @controller.current_user = User.new(:role => 'admin')
+    @controller.current_user = Factory.create :admin_user
   end
   
   def teardown
