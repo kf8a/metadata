@@ -6,7 +6,7 @@ class AbstractsController < ApplicationController
   # GET meeting_abstracts
   # GET meeting_abstracts.xml
   def index
-    @abstracts = Abstract.find(:all, :order=> :authors)
+    @abstracts = Abstract.by_authors
     respond_to do |format|
       format.html # index.erb
       format.xml { render :xml => @abstracts.to_xml}
