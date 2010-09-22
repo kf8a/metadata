@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
 
 class InviteMailerTest < ActionMailer::TestCase
   # replace this with your real tests
