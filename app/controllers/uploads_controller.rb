@@ -34,13 +34,14 @@ class UploadsController < ApplicationController
     end
   end
   
+  private
+  
+  def can_upload?
+    current_user.role == 'admin' || current_user.role == 'uploader'
+  end
+
   def set_title
     @title = "GLBRC Data Upload"
   end
   
-  private
-  
-  def can_upload?
-    current_user.role == 'admin' or current_user.role == 'uploader'
-  end
 end
