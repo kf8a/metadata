@@ -69,8 +69,8 @@ class DatatablesController < ApplicationController
   # GET /datatables/new
   def new
     @datatable = Datatable.new
-    @themes = Theme.all(:order => 'name').collect {|x| [x.name, x.id]}
-    @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
+    @themes = Theme.by_name.collect {|x| [x.name, x.id]}
+    @core_areas = CoreArea.by_name.collect {|x| [x.name, x.id]}
     @studies = Study.all.collect{|x| [x.name, x.id]}
     @people = Person.all
     @units = Unit.all
@@ -78,7 +78,7 @@ class DatatablesController < ApplicationController
 
   # GET /datatables/1;edit
   def edit
-    @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
+    @core_areas = CoreArea.by_name.collect {|x| [x.name, x.id]}
     @studies = Study.all.collect{|x| [x.name, x.id]}
     @people = Person.all
     @units = Unit.all
@@ -95,7 +95,7 @@ class DatatablesController < ApplicationController
   # POST /datatables.xml
   def create
     @datatable = Datatable.new(params[:datatable])
-    @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
+    @core_areas = CoreArea.by_name.collect {|x| [x.name, x.id]}
     @studies = Study.all.collect{|x| [x.name, x.id]}
     @people = Person.all
     @units = Unit.all
@@ -115,7 +115,7 @@ class DatatablesController < ApplicationController
   # PUT /datatables/1
   # PUT /datatables/1.xml
   def update
-    @core_areas = CoreArea.all(:order => 'name').collect {|x| [x.name, x.id]}
+    @core_areas = CoreArea.by_name.collect {|x| [x.name, x.id]}
     @studies = Study.all.collect{|x| [x.name, x.id]}
     @people = Person.all
     @units = Unit.all

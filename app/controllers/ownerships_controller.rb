@@ -5,7 +5,7 @@ class OwnershipsController < ApplicationController
   before_filter :admin? unless ENV["RAILS_ENV"] == 'development'
 
   def index
-    @datatables = Datatable.all(:order => 'name')
+    @datatables = Datatable.by_name
   end
   
   def show
@@ -14,8 +14,8 @@ class OwnershipsController < ApplicationController
   
   def new
     @datatable = Datatable.find(params[:datatable]) if params[:datatable]
-    @datatables = Datatable.all(:order => 'name') unless @datatable
-    @users = User.all(:order => 'email')
+    @datatables = Datatable.by_name unless @datatable
+    @users = User.by_email
     @ownership = Ownership.new
     @user_count = 1
     @datatable_count = 1 unless @datatable

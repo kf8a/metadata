@@ -4,6 +4,9 @@ class Study < ActiveRecord::Base
   has_many :datatables
   
   acts_as_nested_set
+
+  named_scope :by_weight, :order => 'weight'
+  named_scope :by_id,     :order => 'id'
     
   # returns true if one or more of the tables passed is part of the current study
   def include_datatables?(table_query = [])

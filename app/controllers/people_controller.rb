@@ -117,7 +117,7 @@ class PeopleController < ApplicationController
   end
   
   def get_people
-    @people = Person.all(:order => 'sur_name')
+    @people = Person.by_sur_name
   end
   
   def get_person

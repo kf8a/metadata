@@ -48,7 +48,7 @@ class PublicationsController < ApplicationController
   end
   
   def index_by_treatment    
-    @studies = Study.find(:all, :order => :id)
+    @studies = Study.by_id
 
     #@treatments  = Treatment.find(:all, :order => 'priority')
     respond_to do |format|
