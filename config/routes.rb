@@ -18,8 +18,6 @@ ActionController::Routing::Routes.draw do |map|
     :controller => 'users',
     :action     => 'new'
       
-  
-  
   map.resources :abstracts
   
   map.resources :affiliations
