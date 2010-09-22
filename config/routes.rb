@@ -18,8 +18,6 @@ ActionController::Routing::Routes.draw do |map|
     :controller => 'users',
     :action     => 'new'
       
-  Clearance::Routes.draw(map)
-  
   map.resources :abstracts
   
   map.resources :affiliations
@@ -102,6 +100,8 @@ ActionController::Routing::Routes.draw do |map|
                           :testpagechoose => :get} if RAILS_ENV=='test'
       
   map.root :controller => 'datatables'
+
+  Clearance::Routes.draw(map)
   
   # The priority is based upon order of creation: first created -> highest priority.
   
