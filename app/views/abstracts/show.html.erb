@@ -4,7 +4,10 @@
 
 <p><%= textilize(@abstract.abstract) %></p>
 
-<%= link_to 'Edit', edit_abstract_path(@abstract) %> |
-<%= link_to 'Back', meeting_path(@abstract.meeting) %> | 
-<%= link_to 'Destroy', :url => abstract_path(@abstract), :method => 'post', :confirm => 'Are you sure?' if signed_in?  %>
-<%= link_to 'log out', session_path(), :method => 'delete' %>
+<%= link_to 'Index', abstracts_path %> |
+<%= link_to 'Back to meeting', meeting_path(@abstract.meeting) %> |
+<% if admin? %>
+  <%= link_to 'Edit', edit_abstract_path(@abstract) %> |
+  <%= link_to 'Destroy', :url => abstract_path(@abstract), :method => 'post', :confirm => 'Are you sure?' %>
+<% end %>
+<%= link_to 'log out', session_path(), :method => 'delete' if signed_in? %>

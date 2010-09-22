@@ -63,6 +63,7 @@ class ApplicationControllerTest < ActionController::TestCase
     context "template choose function" do
       setup do
         @controller.current_user = Factory.create :admin_user
+        Factory.create(:role_type, :name => 'lter')
       end
       
       context "when a subdomain is requested which exists" do
