@@ -77,7 +77,7 @@ class Datatable < ActiveRecord::Base
   end
   
   def permitted?(user)
-    permitted = !self.owners.empty?
+    permitted = !self.owners.empty? && !user.blank?
     self.owners.each do |owner|
       permitted = (permitted && user.has_permission_from?(owner, self))
     end
