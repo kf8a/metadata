@@ -61,15 +61,15 @@ Feature: Download data
       And I should not see "Download complete data table"
   
   Scenario: A user has received permission to download data from all data owners
-    Given a protected datatable exists
+    Given a protected datatable exists with a name of "Double Trouble"
       And a user exists and is confirmed with an email of "alice@person.com"
       And a user exists and is confirmed with an email of "bill@person.com"
-      And "alice@person.com" owns the datatable
-      And "bill@person.com" owns the datatable
-      And "alice@person.com" has given "bob@person.com" permission
-      And "bill@person.com" has given "bob@person.com" permission
+      And "alice@person.com" owns the datatable named "Double Trouble"
+      And "bill@person.com" owns the datatable named "Double Trouble"
+      And "alice@person.com" has given "bob@person.com" permission for "Double Trouble"
+      And "bill@person.com" has given "bob@person.com" permission for "Double Trouble"
      When I sign in as "bob@person.com"/"password"
-      And I go to the datatable page
+      And I go to the datatable show page for "Double Trouble"
       And I follow "Download complete data table"
      Then I should be on the datatable download page
       And I should see "1"  

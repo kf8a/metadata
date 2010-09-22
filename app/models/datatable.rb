@@ -77,8 +77,11 @@ class Datatable < ActiveRecord::Base
   end
   
   def permitted?(user)
-    permissions_granted_by = permissions.collect {|x| (x.user == user) && (x.decision != "denied") ? x.owner : nil}.compact
-    permissions_granted_by == owners and not owners.empty?
+    permitted = !self.owners.empty?
+    self.owners.each do |owner|
+      permitted = (permitted && user.has_permission_from?(owner, self))
+    end
+    permitted
   end
   
   def requesters
