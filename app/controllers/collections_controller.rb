@@ -5,18 +5,17 @@ class CollectionsController < ApplicationController
   layout :site_layout
   
   before_filter :get_collection, :only => [:show, :customize]
+  before_filter :set_values, :only => [:show, :customize]
 
   def index
     @collections = Collection.all
   end
   
   def show
-    @values = @collection.perform_query
     @customize = false
   end
 
   def customize
-    @values = @collection.perform_query
     set_limitoptions(@values)
     set_limits(params)
     @sortby = params[:sortby]
@@ -62,6 +61,10 @@ class CollectionsController < ApplicationController
   def set_limitrange(values, limitby)
     @limitrange = values.collect {|row| row[limitby]}
     @limitrange = normalize(@limitrange)
+  end
+
+  def set_values
+    @values = @collection.perform_query
   end
 
   def sort_values(values, direction, sortby)
