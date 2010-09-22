@@ -20,15 +20,15 @@ ActionController::Routing::Routes.draw do |map|
       
   map.resources :abstracts
   
-  map.resources :affiliations
+  map.resources :affiliations, :only => [:index, :show, :new, :edit]
 
-  map.resources :citations, :collection => {:download => :get}
+  map.resources :citations, :only => [:index, :show, :new, :create],
+                            :collection => {:download => :get}
   
-  map.resources :collections, :collection => {:customize => :post}
+  map.resources :collections, :only => [:index, :show],
+                              :collection => {:customize => :post}
   
-  map.resources :contacts
-
-  map.resources :data_contributions
+  map.resources :data_contributions, :only => [:new]
   
   map.resources :datasets, :collection => {
                            :set_affiliation_for => :post,
@@ -47,21 +47,19 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :meetings
 
-  map.resources :ownerships, :collection => {:add_another_user => :post,
+  map.resources :ownerships, :only => [:index, :new, :show, :create],
+                             :collection => {:add_another_user      => :post,
                                              :add_another_datatable => :post,
-                                             :revoke => :delete},
-                             :except => :destroy
+                                             :revoke                => :delete}
 
   map.resources :pages
 
-  map.connect 'people/alphabetical', :controller => 'people', :action => 'alphabetical', :requirements => { :method => :get }
-  map.connect 'people/emeritus', :controller => 'people', :action => 'emeritus', :requirements => {:method => :get}
-  map.connect 'people/show_all', :controller => 'people', :action => 'show_all'
-  
-  map.resources :people, :collection => {:alphabetical => :get,
-                                         :emeritus => :get}
+  map.resources :people, :collection => {:alphabetical  => :get,
+                                         :emeritus      => :get,
+                                         :show_all      => :get}
 
-  map.resources :permissions, :collection => {:create => :any,
+  map.resources :permissions, :except => [:edit, :update],
+                              :collection => {:create => :any,
                                               :deny => :any}
   
   map.resources :permission_requests, :collection => {:create => :any}
@@ -72,22 +70,20 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :publications, :collection => {:index_by_treatment => :get}
   
-  map.resources :sponsors
+  map.resources :sponsors, :only => [:show]
   
-  map.resources :studies
+  map.resources :studies, :only => [:index, :edit, :update]
   
-  map.resources :templates
+  map.resources :templates, :except => [:edit]
   
-  map.resources :themes
+  map.resources :themes, :only => [:index, :create, :update]
   
-  map.resources :units
+  map.resources :units, :only => [:index, :edit, :update, :show]
   
-  map.resources :uploads
+  map.resources :uploads, :only => [:index, :new, :create, :show]
 
   map.resources :variates
 
-  map.resources :weathers
-  
   #route to handle pdf downloads
   map.connect '/assets/citations/:attachment/:id/:style/:basename.:extension', :controller => 'citations', :action => 'download', :requirements => { :method => :get }
   

@@ -1,5 +1,17 @@
 class AffiliationsController < ApplicationController
  
+  def index
+    
+  end
+  
+  def show
+    
+  end
+  
+  def edit
+    
+  end
+
   # GET /affiliations/new
   def new
     @affiliation = Affiliation.new
