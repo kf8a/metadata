@@ -3,10 +3,7 @@ class CitationsController < ApplicationController
   caches_action :index if RAILS_ENV == 'production'
 
   def index
-    @citations = Citation.all(
-      :joins=> 'left join authors on authors.citation_id = citations.id', 
-      :conditions => 'seniority = 1', 
-      :order => 'authors.sur_name, pub_year desc')
+    @citations = Citation.with_authors_by_sur_name_and_pub_year
   end
 
   def show

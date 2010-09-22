@@ -5,7 +5,7 @@ class DataContributionsController < ApplicationController
       format.html
       format.js do
         render :update do |page|
-          page.insert_html :bottom, 'data-contributions', :partial => "new", :locals => {:people => Person.all(:order => 'sur_name')}
+          page.insert_html :bottom, 'data-contributions', :partial => "new", :locals => {:people => Person.by_surname}
         end
       end
     end

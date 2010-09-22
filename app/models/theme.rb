@@ -3,6 +3,9 @@ class Theme < ActiveRecord::Base
   
   has_and_belongs_to_many :datasets
   has_many :datatables
+
+  named_scope :by_weight, :order => :weight
+  named_scope :by_name, :order => 'name'
   
   def datatables?(study=nil)
     children_have_datatables = children.collect {|d| d.datatables?(study)}.include?(true)

@@ -6,7 +6,7 @@ class UnitsController < ApplicationController
   
 
   def index
-    @units = Unit.all(:conditions => ['in_eml is false'])
+    @units = Unit.not_in_eml
   end
   
   def edit

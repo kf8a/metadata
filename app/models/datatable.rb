@@ -26,6 +26,8 @@ class Datatable < ActiveRecord::Base
   accepts_nested_attributes_for :variates, :allow_destroy => true
   
   acts_as_taggable_on :keywords
+
+  named_scope :by_name, :order => 'name'
   
   define_index do
     indexes title
