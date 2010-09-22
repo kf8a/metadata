@@ -49,6 +49,10 @@ Factory.define :role do |r|
   r.name 'Emeritus Investigators'
 end
 
+Factory.define :role_type do |r|
+  
+end
+
 Factory.define :species do |s|
 end
 
