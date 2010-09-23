@@ -69,8 +69,9 @@ class Dataset < ActiveRecord::Base
   
   def to_eml
     emldoc = Document.new(%q{<?xml version="1.0" encoding="UTF-8"?>
-<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.0.0" xmlns:set="http://exslt.org/sets" xmlns:exslt="http://exslt.org/common" xmlns:stmml="http://www.xml-cml.org/schema/stmml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="eml://ecoinformatics.org/eml-2.0.0 eml.xsd" packageId="knb-lter-kbs.1.8" system="KBS LTER">
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.0.0" xmlns:set="http://exslt.org/sets" xmlns:exslt="http://exslt.org/common" xmlns:stmml="http://www.xml-cml.org/schema/stmml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="eml://ecoinformatics.org/eml-2.0.0 eml.xsd" packageId="knb-lter-kbs.#{self.id}" system="KBS LTER">
 </eml:eml>})
+    emldoc.root.add_element eml_access
     eml_dataset = emldoc.root.add_element('dataset')
     eml_dataset.add_element('title').add_text(title)
     creator = eml_dataset.add_element('creator', {'id' => 'KBS LTER'})
@@ -89,7 +90,6 @@ class Dataset < ActiveRecord::Base
     eml_dataset.add_element('abstract').add_element('para').add_text(textilize(abstract))
     eml_dataset.add_element keyword_sets
     eml_dataset.add_element contact_info
-    eml_dataset.add_element eml_access
 
     unless initiated.nil? or completed.nil?
       coverage = eml_dataset.add_element('coverage')
