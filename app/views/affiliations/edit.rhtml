@@ -1,12 +1,10 @@
 <h1>Editing affiliation</h1>
 
-<%= error_messages_for :affiliation %>
+<%= error_messages_for 'affiliation' %>
 
-<% form_for(:affiliation, :url => affiliation_path(@affiliation), :html => { :method => :put }) do |f| %>
-  <p>
-    <%= submit_tag "Update" %>
-  </p>
+<% semantic_form_for @affiliation do |form| %>
+  <%= form.inputs %>
+  <%= form.buttons %>
 <% end %>
 
-<%= link_to 'Show', affiliation_path(@affiliation) %> |
 <%= link_to 'Back', affiliations_path %>

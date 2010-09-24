@@ -25,6 +25,17 @@ class AffiliationsController < ApplicationController
     end
   end
 
+  def create
+    @affiliation = Affiliation.new(params[:affiliation])
+
+    if @affiliation.save
+      flash[:notice] = 'Affiliation was successfully created.'
+      redirect_to @affiliation
+    else
+      render_subdomain "new"
+    end
+  end
+
   private ###########################################
 
   def get_affiliation
