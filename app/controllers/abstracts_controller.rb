@@ -53,7 +53,7 @@ class AbstractsController < ApplicationController
   def update
     respond_to do |format|
       if @abstract.update_attributes(params[:abstract])
-        flash[:notice] = 'Meeting abstract  was successfully updated.'
+        flash[:notice] = 'Meeting abstract was successfully updated.'
         format.html { redirect_to abstract_url(@abstract) }
         format.xml  { head :ok }
       else
