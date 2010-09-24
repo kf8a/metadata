@@ -1,15 +1,15 @@
 class AffiliationsController < ApplicationController
- 
+
+  before_filter :get_affiliation, :only => [:edit, :show]
+
   def index
-    
+    @affiliations = Affiliation.all
   end
   
   def show
-    
   end
   
   def edit
-    
   end
 
   # GET /affiliations/new
@@ -25,4 +25,9 @@ class AffiliationsController < ApplicationController
     end
   end
 
+  private ###########################################
+
+  def get_affiliation
+    @affiliation = Affiliation.find(params[:id])
+  end
 end
