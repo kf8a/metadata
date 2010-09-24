@@ -9,12 +9,12 @@ Feature: Download data
       And a user exists and is confirmed with an email of "bob@person.com"
 
   Scenario: The admin user downloads a protected datatable
-    Given a protected datatable exists
+    Given a protected datatable exists with a name of "Download Me"
       And "bob@person.com" is an administrator
      When I sign in as "bob@person.com"/"password"
-      And I go to the datatable page
+      And I go to the datatable show page for "Download Me"
       And I follow "Download complete data table"
-     Then I should be on the datatable download page
+     Then I should be on the datatable download page for "Download Me"
       And I should see "1"
 
   Scenario: The data owner downloads a datatable
@@ -95,12 +95,12 @@ Feature: Download data
       And I should see "Sign in"
     
   Scenario: An anonymous user looks at a public datatable
-    Given a public datatable exists
-     When I go to the the datatable page
+    Given a public datatable exists with a name of "Easy Download"
+     When I go to the the datatable show page for "Easy Download"
      Then I should see "Download"
       And I should not see "Sign in"
      When I follow "Download"
-     Then I should be on the datatable download page
+     Then I should be on the datatable download page for "Easy Download"
       And I should see "1"
     
   Scenario: An anonymous users types in the url for a protected datatable html view
