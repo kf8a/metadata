@@ -1,0 +1,8 @@
+<%= link_to 'Index', abstracts_path %> |
+<%= link_to 'Back to meeting', meeting_path(abstract.meeting) %> |
+<%= link_to_unless_current 'Show', abstract %> |
+<% if admin? %>
+  <%= link_to_unless_current 'Edit', edit_abstract_path(abstract) %> |
+  <%= link_to 'Destroy', abstract, :method => 'delete', :confirm => 'Are you sure?' %> |
+<% end %>
+<%= link_to 'log out', session_path(), :method => 'delete' if signed_in? %>
