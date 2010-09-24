@@ -4,6 +4,8 @@
 class ApplicationController < ActionController::Base
   include Clearance::Authentication
     
+  layout :site_layout
+
   #before_filter :admin?, :except => [:index, :show] unless ENV["RAILS_ENV"] == 'development'
   before_filter :set_crumbs, :set_subdomain_request, :set_title
    
