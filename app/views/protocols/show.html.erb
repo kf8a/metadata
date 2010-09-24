@@ -1,4 +1,4 @@
-<h1><%= link_to "#{@protocol.dataset.dataset}", dataset_path(@protocol.dataset) %>: <%= @protocol.title %></h1>
+<h1><%= link_to "#{@protocol.dataset.dataset}", dataset_path(@protocol.dataset) if @protocol.dataset %>: <%= @protocol.title %></h1>
 <p>
 	<%= "In use from "unless @protocol.in_use_from.nil? %><%= @protocol.in_use_from %> 
 	<%= " to " unless @protocol.in_use_to.nil? %><%= @protocol.in_use_to %>
