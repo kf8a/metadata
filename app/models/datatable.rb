@@ -148,11 +148,12 @@ class Datatable < ActiveRecord::Base
   end
       
   def to_eml
-    eml = Element.new('datatable')
+    eml = Element.new('dataTable')
     eml.add_attribute('id',name)
     eml.add_element('entityName').add_text(title)
     eml.add_element('entityDescription').add_text(description.gsub(/<\/?[^>]*>/, ""))
     eml.add_element eml_physical
+#    eml.add_element eml_coverage
     eml.add_element eml_attributes
 #    eml.add_element('numberOfRecords').add_text()
     return eml
@@ -287,11 +288,31 @@ private
     p.add_element('objectName').add_text(self.title)
     p.add_element('encodingMethod').add_text('None')
     dataformat = p.add_element('dataFormat').add_element('textFormat')
+    dataformat.add_element('numHeaderLines').add_text((data_access_statement.lines.to_a.size + 4).to_s)
     dataformat.add_element('attributeOrientation').add_text('column')
-    dataformat.add_element('simpleDelimiter').add_element('fieldDelimiter').add_text(',')
-    dataformat.add_element('numHeaderLines').add_text(data_access_statement.lines.to_a.size.to_s)
+    dataformat.add_element('simpleDelimited').add_element('fieldDelimiter').add_text(',')
     p.add_element('distribution').add_element('online').add_element('url').add_text(data_url)
     return p
+  end
+  
+  def eml_coverage
+    # e = Element.new('coverage')
+    # e.add_element eml_geographic_coverage
+    # e.add_element eml_temporal_coverage
+    # e.add_element eml_taxonomic_coverage
+    # e
+  end
+  
+  def eml_geographic_coverage
+    
+  end
+  
+  def eml_temporal_coverage
+    
+  end
+  
+  def eml_taxonomic_coverage
+    
   end
   
   def eml_attributes
