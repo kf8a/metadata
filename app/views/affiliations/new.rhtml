@@ -1,11 +1,10 @@
 <h1>New affiliation</h1>
 
-<%= error_messages_for :affiliation %>
+<%= error_messages_for 'affiliation' %>
 
-<% form_for(:affiliation, :url => affiliations_path) do |f| %>
-  <p>
-    <%= submit_tag "Create" %>
-  </p>
+<% semantic_form_for @affiliation do |form| %>
+  <%= form.inputs %>
+  <%= form.buttons %>
 <% end %>
 
 <%= link_to 'Back', affiliations_path %>
