@@ -16,10 +16,6 @@ class Variate < ActiveRecord::Base
 private
   def eml_measurement_scale
     m = Element.new('measurementScale')
-    if measurement_scale == 'datetime'
-       self.measurement_scale = 'dateTime'
-       save
-     end
     scale = m.add_element(measurement_scale)
     case self.measurement_scale
     when 'interval' then eml_interval(scale)
