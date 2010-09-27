@@ -68,10 +68,21 @@ class Dataset < ActiveRecord::Base
   end  
   
   def to_eml
-    emldoc = Document.new(%q{<?xml version="1.0" encoding="UTF-8"?>
-<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.0.0" xmlns:set="http://exslt.org/sets" xmlns:exslt="http://exslt.org/common" xmlns:stmml="http://www.xml-cml.org/schema/stmml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="eml://ecoinformatics.org/eml-2.0.0 eml.xsd" packageId="knb-lter-kbs.1.8" system="KBS LTER">
-</eml:eml>})
-    emldoc.root.add_element eml_access
+    emldoc = Document.new()
+    root = emldoc.add_element('eml:eml')
+    package_id = "knb-lter-kbs.#{metacat_id.nil? ? self.id : metacat_id}.#{version}"
+    
+    root.attributes['xmlns:eml']            = 'eml://ecoinformatics.org/eml-2.1.0'
+    root.attributes['xmlns:set']            = 'http://exslt.org/sets'
+    root.attributes['xmlns:exslt']          = 'http://exslt.org/common'
+    root.attributes['xmlns:stmml']          = 'http://www.xml-cml.org/schema/stmml'
+    root.attributes['xmlns:xsi']            = 'http://www.w3.org/2001/XMLSchema-instance'
+    root.attributes['xsi:schemaLocation']   = 'eml://ecoinformatics.org/eml-2.1.0 eml.xsd'
+    root.attributes['packageId']            =  package_id
+    root.attributes['system']               = 'KBS LTER'
+
+    root.add_element eml_access
+
     eml_dataset = emldoc.root.add_element('dataset')
     eml_dataset.add_element('title').add_text(title)
     creator = eml_dataset.add_element('creator', {'id' => 'KBS LTER'})
@@ -84,28 +95,29 @@ class Dataset < ActiveRecord::Base
         p.add_element('phone', {'phonetype' => 'phone'}).add_text(person.phone) if person.phone
         p.add_element('phone',{'phonetype' => 'fax'}).add_text(person.fax) if person.fax
         p.add_element('electronicMailAddress').add_text(person.email) if person.email
-        #      p.add_element('role').add_text(person)
+        p.add_element('role').add_text(person.lter_roles.first.try(:name).try(:singularize))
       end
     
     eml_dataset.add_element('abstract').add_element('para').add_text(textilize(abstract))
     eml_dataset.add_element keyword_sets
     eml_dataset.add_element contact_info
 
-    unless initiated.nil? or completed.nil?
-      coverage = eml_dataset.add_element('coverage')
-      temporal_coverage = coverage.add_element('temporalCoverage')
-      range_of_dates = temporal_coverage.add_element('rangeOfDates')
-      begin_calendar_date = range_of_dates.add_element('beginDate').add_element('calendarDate')
-      end_calendar_date = range_of_dates.add_element('endDate').add_element('calendarDate')
-      begin_calendar_date.add_text(initiated.to_s)
-      end_calendar_date.add_text(completed.to_s)
-    end
-
+    # unless initiated.nil? or completed.nil?
+    #   coverage = eml_dataset.add_element('coverage')
+    #   temporal_coverage = coverage.add_element('temporalCoverage')
+    #   range_of_dates = temporal_coverage.add_element('rangeOfDates')
+    #   begin_calendar_date = range_of_dates.add_element('beginDate').add_element('calendarDate')
+    #   end_calendar_date = range_of_dates.add_element('endDate').add_element('calendarDate')
+    #   begin_calendar_date.add_text(initiated.to_s)
+    #   end_calendar_date.add_text(completed.to_s)
+    # end
+    
     datatables.each do |datatable|
       eml_dataset.add_element datatable.to_eml
     end
-    eml_dataset.add_element('additionalMetadata').add eml_custom_unit_list
-    emldoc.root.to_s
+
+    root.add_element('additionalMetadata').add_element('metadata').add eml_custom_unit_list
+    root.to_s
   end
   
  
@@ -138,15 +150,25 @@ private
       datatable.variates.collect do | variate |
         next unless variate.unit
         next unless !variate.unit.in_eml
-        variate.unit.definition
+        variate.unit
       end
     end
     
     e = Element.new('stmml:unitList')
     e.add_attribute('xsi:schemaLocation',"http://www.xml-cml.org/schema/stmml http://lter.kbs.msu.edu/Data/schemas/stmml.xsd")
     
-    custom_units.flatten.compact.sort.uniq.each do |unit|
-      e.add_text unit
+    logger.info custom_units
+    
+    custom_units.flatten.compact.uniq.each do |unit|
+
+      unit_element = Element.new('stmml:unit')
+      unit_element.attributes['id'] = unit.name
+      unit_element.attributes['multiplierToSI'] = unit.multiplier_to_si
+      unit_element.attributes['parentSI'] = unit.parent_si
+      unit_element.attributes['unitType'] = unit.unit_type
+      
+      unit_element.attributes['name'] = unit.name
+      e.add_element unit_element
     end
     return e
   end
@@ -192,8 +214,8 @@ private
       :city => 'Hickory Corners',:locale => 'Mi',:postal_code => '49060',
       :country => 'USA')
     a = i.add_element address(p)
-    a.add_element('electronicMailAddress').add_text('data.manager@kbs.msu.edu')
-    a.add_element('onlineUrl').add_text('http://lter.kbs.msu.edu')
+    i.add_element('electronicMailAddress').add_text('data.manager@kbs.msu.edu')
+    i.add_element('onlineUrl').add_text('http://lter.kbs.msu.edu')
     return i
   end
 
@@ -203,7 +225,7 @@ private
     a.add_element('deliveryPoint').add_text(person.organization) if person.organization
     a.add_element('deliveryPoint').add_text(person.street_address) if person.street_address
     a.add_element('city').add_text(person.city) if person.city
-   # a.add_element('administrativeArea').add_text(person.locale) if person.locale
+    a.add_element('administrativeArea').add_text(person.locale) if person.locale
     a.add_element('postalCode').add_text(person.postal_code) if person.postal_code
     a.add_element('country').add_text(person.country) if person.country
     return a

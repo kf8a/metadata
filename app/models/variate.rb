@@ -16,15 +16,15 @@ class Variate < ActiveRecord::Base
 private
   def eml_measurement_scale
     m = Element.new('measurementScale')
-    scale = m.add_element(self.measurement_scale)
+    scale = m.add_element(measurement_scale)
     case self.measurement_scale
     when 'interval' then eml_interval(scale)
     when 'ratio' then eml_ratio(scale)
     when 'ordinal' then 
     when 'nominal'then  eml_nominal(scale)
-    when 'datetime' then eml_date_time(scale)
+    when 'dateTime' then eml_date_time(scale)
     end
-    return m
+    m
   end
   
   def eml_unit
@@ -35,7 +35,7 @@ private
       u.add_element('customUnit').add_text(self.unit.name)
       # TODO: need to add custom unit tags to the end of the document
     end
-    return u
+    u
   end
   
   def eml_date_time(e)

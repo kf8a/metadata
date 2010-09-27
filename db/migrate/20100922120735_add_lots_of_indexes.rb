@@ -35,8 +35,6 @@ class AddLotsOfIndexes < ActiveRecord::Migration
     add_index :permissions,             :user_id
     add_index :permissions,             :datatable_id
     add_index :permissions,             :owner_id
-    add_index :plots,                   :treatment_id
-    add_index :plots,                   :study_id
     add_index :protocols,               :person_id
     add_index :protocols,               :dataset_id
     add_index :protocols_sponsors,      :protocol_id
