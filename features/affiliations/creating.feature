@@ -1,7 +1,7 @@
-Feature: Creating abstract
-  In order to provide a quick overview
+Feature: Creating affiliation
+  In order to assign accurate rights
   As an admin
-  I want to create an abstract
+  I want to create an affiliation
 
   Scenario: Admin creates an affiliation
     Given an admin user exists with an email of "admin@person.com"

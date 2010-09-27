@@ -1,6 +1,7 @@
 class AffiliationsController < ApplicationController
 
-  before_filter :get_affiliation, :only => [:edit, :show]
+  before_filter :admin?, :except => [:index, :show] unless ENV["RAILS_ENV"] == 'development'
+  before_filter :get_affiliation, :only => [:edit, :show, :destroy]
 
   def index
     @affiliations = Affiliation.all
@@ -34,6 +35,12 @@ class AffiliationsController < ApplicationController
     else
       render_subdomain "new"
     end
+  end
+
+  def destroy
+    @affiliation.destroy
+    flash[:notice] = 'Affiliation was successfully destroyed.'
+    redirect_to 'index'
   end
 
   private ###########################################

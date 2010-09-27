@@ -13,5 +13,5 @@ Feature: Browsing Affiliation
 
     When I follow "Show" within "tr#affiliation_1337"
     Then I should see "Tech Guy"
-      And I should see "Edit"
+      And I should not see "Edit"
       And I should see "Back"
