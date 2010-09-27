@@ -21,10 +21,10 @@ Feature: Invite users and pre assign them to sponsors
     
   Scenario: A glbrc member invitee signs up
     Given "sam@person.com" is invited to be a "glbrc" member
-    When I follow the invite link sent to "email@person.com"
-     And I fill in "Email" with "sam@person.com"
-     And I fill in "Password" with "password"
-     And I fill in "Confirm password" with "password"
+    When I follow the invite link sent to "sam@person.com"
+     And I fill in "user_email" with "sam@person.com"
+     And I fill in "user_password" with "password"
+     And I fill in "user_password_confirmation" with "password"
      And I press "Sign up"
     Then I should see "instructions for confirming"
      And a confirmation message should be sent to "sam@person.com"
