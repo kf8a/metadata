@@ -70,6 +70,7 @@ class Dataset < ActiveRecord::Base
   def to_eml
     emldoc = Document.new()
     root = emldoc.add_element('eml:eml')
+    package_id = "knb-lter-kbs.#{metacat_id.nil? ? self.id : metacat_id}.#{version}"
     
     root.attributes['xmlns:eml']            = 'eml://ecoinformatics.org/eml-2.1.0'
     root.attributes['xmlns:set']            = 'http://exslt.org/sets'
@@ -77,7 +78,7 @@ class Dataset < ActiveRecord::Base
     root.attributes['xmlns:stmml']          = 'http://www.xml-cml.org/schema/stmml'
     root.attributes['xmlns:xsi']            = 'http://www.w3.org/2001/XMLSchema-instance'
     root.attributes['xsi:schemaLocation']   = 'eml://ecoinformatics.org/eml-2.1.0 eml.xsd'
-    root.attributes['packageId']            = "knb-lter-kbs.#{self.id}.#{version}"
+    root.attributes['packageId']            =  package_id
     root.attributes['system']               = 'KBS LTER'
 
     root.add_element eml_access
