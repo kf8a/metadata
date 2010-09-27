@@ -14,9 +14,11 @@ class PermissionsController < ApplicationController
   def show
     owner = current_user
     @permissions = Permission.find_all_by_owner_id_and_datatable_id(owner.id, @datatable.id)
-        
+
+    #TODO move permitted_users this to the user model
     @permitted_users = []
     @permissions.each do |permission|
+      next if permission.decision == "denied"
       user = User.find(permission.user_id)
       @permitted_users << user
     end
@@ -32,7 +34,13 @@ class PermissionsController < ApplicationController
     user = User.find_by_email(params[:email])
     flash[:notice] = 'No user with that email' unless user
     owner = current_user
-    permission = Permission.new(:user => user, :datatable => @datatable, :owner => owner)
+    permission = Permission.find_by_user_id_and_datatable_id_and_owner_id(user.id, @datatable.id, owner.id)
+    if permission
+      permission.decision = "approved"
+    else
+      permission = Permission.new(:user => user, :datatable => @datatable, :owner => owner, :decision => "approved")
+    end
+
     respond_to do |format|
       if permission.save
         flash[:notice] = 'Permission has been granted to ' + user.email
@@ -62,10 +70,15 @@ class PermissionsController < ApplicationController
   
   def deny
     user = User.find_by_email(params[:email])
-    request = PermissionRequest.find_by_user_id_and_datatable_id(user.id, @datatable.id)
-    request.denied = true
-    request.save
-    
+    owner = current_user
+    permission = Permission.find_by_user_id_and_datatable_id_and_owner_id(user.id, @datatable.id, owner.id)
+    if permission
+      permission.decision = "denied"
+    else
+      permission = Permission.new(:user => user, :datatable => @datatable, :owner => owner, :decision => "denied")
+    end
+
+    permission.save
     respond_to do |format|
       flash[:notice] = 'Permission has been denied for ' + user.email
       format.html { redirect_to permission_path(@datatable) }

@@ -1,0 +1,7 @@
+<h3>Meeting Abstracts</h3>
+
+<ul class ="abstract_list">
+  <% @abstracts.each do |abstract| %>
+    <li><%= link_to abstract.title, abstract %> by <%= abstract.authors %></li>
+  <% end %>
+</ul>

@@ -39,14 +39,14 @@ class ProtocolsController < ApplicationController
   # GET /protocols/new
   def new
     @protocol = Protocol.new
-    @people = Person.all(:order => :sur_name)
+    @people = Person.by_sur_name
     @datasets = Dataset.find(:all).map {|x| [x.dataset, x.id]}
     get_all_websites
   end
 
   # GET /protocols/1;edit
   def edit
-    @people = Person.all(:order => :sur_name)
+    @people = Person.by_sur_name
     @datasets = Dataset.find(:all).map {|x| [x.dataset, x.id]}
     get_all_websites
   end
@@ -55,7 +55,7 @@ class ProtocolsController < ApplicationController
   # POST /protocols.xml
   def create
     @protocol = Protocol.new(params[:protocol])
-    @people = Person.all(:order => :sur_name)
+    @people = Person.by_sur_name
     
     respond_to do |format|
       if @protocol.save

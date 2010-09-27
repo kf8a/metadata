@@ -49,6 +49,10 @@ Factory.define :role do |r|
   r.name 'Emeritus Investigators'
 end
 
+Factory.define :role_type do |r|
+  
+end
+
 Factory.define :species do |s|
 end
 
@@ -100,12 +104,20 @@ Factory.define :datatable do |d|
   d.is_sql         true
   d.description   'This is a datatable'
   d.weight        100
-  d.theme         Factory.create(:theme)
-  d.dataset       Factory.create(:dataset)
+  d.association   :theme
+  d.association   :dataset
+end
+
+Factory.define :restricted_sponsor, :parent => :sponsor do |sponsor|
+  sponsor.data_restricted   true
+end
+
+Factory.define :restricted_dataset, :parent => :dataset do |dataset|
+  dataset.association   :sponsor, :factory => :restricted_sponsor
 end
 
 Factory.define :protected_datatable, :parent => :datatable do |datatable|
-  datatable.dataset   Factory.create(:dataset, :sponsor => Factory.create(:sponsor, :data_restricted => true))
+  datatable.association   :dataset, :factory => :restricted_dataset
 end
 
 Factory.define :collection do |c|

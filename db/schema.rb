@@ -19,6 +19,10 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
     t.string  "title"
   end
 
+  add_index "affiliations", ["dataset_id"], :name => "index_affiliations_on_dataset_id"
+  add_index "affiliations", ["person_id"], :name => "index_affiliations_on_person_id"
+  add_index "affiliations", ["role_id"], :name => "index_affiliations_on_role_id"
+
   create_table "authors", :force => true do |t|
     t.string   "sur_name"
     t.string   "given_name"
@@ -29,6 +33,9 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "authors", ["citation_id"], :name => "index_authors_on_citation_id"
+  add_index "authors", ["person_id"], :name => "index_authors_on_person_id"
 
   create_table "citation_types", :force => true do |t|
     t.string   "abbreviation"
@@ -69,11 +76,16 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
     t.datetime "pdf_updated_at"
   end
 
+  add_index "citations", ["citation_type_id"], :name => "index_citations_on_citation_type_id"
+  add_index "citations", ["website_id"], :name => "index_citations_on_website_id"
+
   create_table "collections", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "datatable_id"
   end
+
+  add_index "collections", ["datatable_id"], :name => "index_collections_on_datatable_id"
 
   create_table "columns", :force => true do |t|
     t.integer "datatable_id"
@@ -81,6 +93,9 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
     t.integer "position"
     t.string  "name"
   end
+
+  add_index "columns", ["datatable_id"], :name => "index_columns_on_datatable_id"
+  add_index "columns", ["variate_id"], :name => "index_columns_on_variate_id"
 
   create_table "core_areas", :force => true do |t|
     t.string "name"
@@ -107,6 +122,8 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
     t.datetime "updated_at"
   end
 
+  add_index "datafiles", ["person_id"], :name => "index_datafiles_on_person_id"
+
   create_table "datasets", :force => true do |t|
     t.string   "dataset"
     t.string   "title"
@@ -128,16 +145,26 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
   end
 
   add_index "datasets", ["dataset"], :name => "datasets_dataset_key", :unique => true
+  add_index "datasets", ["metacat_id"], :name => "index_datasets_on_metacat_id"
+  add_index "datasets", ["project_id"], :name => "index_datasets_on_project_id"
+  add_index "datasets", ["sponsor_id"], :name => "index_datasets_on_sponsor_id"
+  add_index "datasets", ["website_id"], :name => "index_datasets_on_website_id"
 
   create_table "datasets_studies", :id => false, :force => true do |t|
     t.integer "dataset_id"
     t.integer "study_id"
   end
 
+  add_index "datasets_studies", ["dataset_id"], :name => "index_datasets_studies_on_dataset_id"
+  add_index "datasets_studies", ["study_id"], :name => "index_datasets_studies_on_study_id"
+
   create_table "datasets_themes", :id => false, :force => true do |t|
     t.integer "theme_id"
     t.integer "dataset_id"
   end
+
+  add_index "datasets_themes", ["dataset_id"], :name => "index_datasets_themes_on_dataset_id"
+  add_index "datasets_themes", ["theme_id"], :name => "index_datasets_themes_on_theme_id"
 
   create_table "datatables", :force => true do |t|
     t.string   "name"
@@ -172,10 +199,18 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
     t.text     "event_query"
   end
 
+  add_index "datatables", ["core_area_id"], :name => "index_datatables_on_core_area_id"
+  add_index "datatables", ["dataset_id"], :name => "index_datatables_on_dataset_id"
+  add_index "datatables", ["study_id"], :name => "index_datatables_on_study_id"
+  add_index "datatables", ["theme_id"], :name => "index_datatables_on_theme_id"
+
   create_table "datatables_protocols", :id => false, :force => true do |t|
     t.integer "datatable_id"
     t.integer "protocol_id"
   end
+
+  add_index "datatables_protocols", ["datatable_id"], :name => "index_datatables_protocols_on_datatable_id"
+  add_index "datatables_protocols", ["protocol_id"], :name => "index_datatables_protocols_on_protocol_id"
 
   create_table "datatables_variates", :force => true do |t|
   end
@@ -250,6 +285,8 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
     t.integer "meeting_id"
   end
 
+  add_index "meeting_abstracts", ["meeting_id"], :name => "index_meeting_abstracts_on_meeting_id"
+
   create_table "meetings", :force => true do |t|
     t.date    "date"
     t.string  "title"
@@ -257,6 +294,8 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
     t.integer "venue_type_id"
     t.date    "date_to"
   end
+
+  add_index "meetings", ["venue_type_id"], :name => "index_meetings_on_venue_type_id"
 
   create_table "memberships", :force => true do |t|
     t.integer "sponsor_id"
@@ -304,6 +343,9 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
     t.datetime "updated_at"
   end
 
+  add_index "ownerships", ["datatable_id"], :name => "index_ownerships_on_datatable_id"
+  add_index "ownerships", ["user_id"], :name => "index_ownerships_on_user_id"
+
   create_table "page_images", :force => true do |t|
     t.string   "title"
     t.string   "attribution"
@@ -313,6 +355,8 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
   end
+
+  add_index "page_images", ["page_id"], :name => "index_page_images_on_page_id"
 
   create_table "pages", :force => true do |t|
     t.string   "title"
@@ -347,10 +391,12 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
   create_table "permission_requests", :force => true do |t|
     t.integer  "datatable_id"
     t.integer  "user_id"
-    t.boolean  "denied"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "permission_requests", ["datatable_id"], :name => "index_permission_requests_on_datatable_id"
+  add_index "permission_requests", ["user_id"], :name => "index_permission_requests_on_user_id"
 
   create_table "permissions", :force => true do |t|
     t.integer  "user_id"
@@ -358,7 +404,23 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "owner_id"
+    t.string   "decision"
   end
+
+  add_index "permissions", ["datatable_id"], :name => "index_permissions_on_datatable_id"
+  add_index "permissions", ["owner_id"], :name => "index_permissions_on_owner_id"
+  add_index "permissions", ["user_id"], :name => "index_permissions_on_user_id"
+
+  create_table "plots", :force => true do |t|
+    t.string  "name"
+    t.integer "treatment_id"
+    t.integer "replicate"
+    t.integer "study_id"
+    t.string  "description"
+  end
+
+  add_index "plots", ["study_id"], :name => "index_plots_on_study_id"
+  add_index "plots", ["treatment_id"], :name => "index_plots_on_treatment_id"
 
   create_table "projects", :force => true do |t|
     t.string   "title"
@@ -384,15 +446,24 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
     t.boolean "active",         :default => true
   end
 
+  add_index "protocols", ["dataset_id"], :name => "index_protocols_on_dataset_id"
+  add_index "protocols", ["person_id"], :name => "index_protocols_on_person_id"
+
   create_table "protocols_sponsors", :id => false, :force => true do |t|
     t.integer "protocol_id"
     t.integer "sponsor_id"
   end
 
+  add_index "protocols_sponsors", ["protocol_id"], :name => "index_protocols_sponsors_on_protocol_id"
+  add_index "protocols_sponsors", ["sponsor_id"], :name => "index_protocols_sponsors_on_sponsor_id"
+
   create_table "protocols_websites", :id => false, :force => true do |t|
     t.integer "protocol_id"
     t.integer "website_id"
   end
+
+  add_index "protocols_websites", ["protocol_id"], :name => "index_protocols_websites_on_protocol_id"
+  add_index "protocols_websites", ["website_id"], :name => "index_protocols_websites_on_website_id"
 
   create_table "publication_types", :force => true do |t|
     t.string "name"
@@ -415,10 +486,17 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
     t.integer "height"
   end
 
+  add_index "publications", ["parent_id"], :name => "index_publications_on_parent_id"
+  add_index "publications", ["publication_type_id"], :name => "index_publications_on_publication_type_id"
+  add_index "publications", ["source_id"], :name => "index_publications_on_source_id"
+
   create_table "publications_treatments", :id => false, :force => true do |t|
     t.integer "treatment_id"
     t.integer "publication_id"
   end
+
+  add_index "publications_treatments", ["publication_id"], :name => "index_publications_treatments_on_publication_id"
+  add_index "publications_treatments", ["treatment_id"], :name => "index_publications_treatments_on_treatment_id"
 
   create_table "replicates", :id => false, :force => true do |t|
     t.string "replicate",   :limit => 50, :null => false
@@ -437,11 +515,16 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
     t.boolean "show_in_detailview", :default => true
   end
 
+  add_index "roles", ["role_type_id"], :name => "index_roles_on_role_type_id"
+
   create_table "scribbles", :force => true do |t|
     t.integer "person_id"
     t.integer "protocol_id"
     t.integer "weight"
   end
+
+  add_index "scribbles", ["person_id"], :name => "index_scribbles_on_person_id"
+  add_index "scribbles", ["protocol_id"], :name => "index_scribbles_on_protocol_id"
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id"
@@ -495,6 +578,8 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
     t.string  "code"
   end
 
+  add_index "studies", ["parent_id"], :name => "index_studies_on_parent_id"
+
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -507,6 +592,7 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
 
   add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
   add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
+  add_index "taggings", ["tagger_id"], :name => "index_taggings_on_tagger_id"
 
   create_table "tags", :force => true do |t|
     t.string "name"
@@ -521,6 +607,8 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
     t.datetime "updated_at"
   end
 
+  add_index "templates", ["website_id"], :name => "index_templates_on_website_id"
+
   create_table "themes", :force => true do |t|
     t.string  "name"
     t.integer "weight"
@@ -529,12 +617,16 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
     t.integer "rgt"
   end
 
+  add_index "themes", ["parent_id"], :name => "index_themes_on_parent_id"
+
   create_table "treatments", :force => true do |t|
     t.string  "name"
     t.text    "description"
     t.integer "study_id"
     t.integer "weight"
   end
+
+  add_index "treatments", ["study_id"], :name => "index_treatments_on_study_id"
 
   create_table "units", :force => true do |t|
     t.string  "name"
@@ -592,6 +684,10 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
     t.text    "query"
     t.integer "variate_theme_id"
   end
+
+  add_index "variates", ["datatable_id"], :name => "index_variates_on_datatable_id"
+  add_index "variates", ["unit_id"], :name => "index_variates_on_unit_id"
+  add_index "variates", ["variate_theme_id"], :name => "index_variates_on_variate_theme_id"
 
   create_table "venue_types", :force => true do |t|
     t.string "name"

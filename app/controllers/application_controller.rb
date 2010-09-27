@@ -4,6 +4,8 @@
 class ApplicationController < ActionController::Base
   include Clearance::Authentication
     
+  layout :site_layout
+
   #before_filter :admin?, :except => [:index, :show] unless ENV["RAILS_ENV"] == 'development'
   before_filter :set_crumbs, :set_subdomain_request, :set_title
    
@@ -66,9 +68,10 @@ class ApplicationController < ActionController::Base
   end
 
   def liquid_file_exists?(mycontroller, page)
-    erb_name  = "app/views/" + mycontroller + "/liquid_" + page + ".html.erb"
-    rhtml_name = "app/views/" + mycontroller + "/liquid_" + page + ".rhtml"
-    File.file?(erb_name) or File.file?(rhtml_name)
+    base_name = "app/views/" + mycontroller + "/liquid_" + page
+    erb_name  = base_name + ".html.erb"
+    rhtml_name = base_name + ".rhtml"
+    File.file?(erb_name) || File.file?(rhtml_name)
   end
 
   def liquid_template_exists?(domain, mycontroller, page)
@@ -79,8 +82,9 @@ class ApplicationController < ActionController::Base
   end
 
   def domain_specific_file_exists?(domain, mycontroller, page)
-    erb_name = "app/views/" + mycontroller + "/"  + domain + "_" + page + ".html.erb"
-    rhtml_name = "app/views/" + mycontroller + "/"  + domain + "_" + page + ".rhtml"
-    File.file?(erb_name) or File.file?(rhtml_name)
+    base_name = "app/views/"+ mycontroller + "/"  + domain + "_" + page
+    erb_name = base_name + ".html.erb"
+    rhtml_name = base_name + ".rhtml"
+    File.file?(erb_name) || File.file?(rhtml_name)
   end
 end

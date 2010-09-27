@@ -4,13 +4,14 @@
   <tr>
   </tr>
   
-<% for affiliation in @affiliations %>
-  <tr>
-    <td><%= link_to 'Show', affiliation_path(affiliation) %></td>
-    <td><%= link_to 'Edit', edit_affiliation_path(affiliation) %></td>
-    <td><%= link_to 'Destroy', affiliation_path(affiliation), :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+  <% @affiliations.each do |affiliation| %>
+    <tr id="affiliation_<%= affiliation.id %>">
+      <td><%= affiliation.title %></td>
+      <td><%= link_to 'Show', affiliation_path(affiliation) %></td>
+      <td><%= link_to 'Edit', edit_affiliation_path(affiliation) %></td>
+      <td><%= link_to 'Destroy', affiliation_path(affiliation), :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
 </table>
 
 <br />

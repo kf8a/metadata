@@ -5,22 +5,21 @@ Given /^no user exists with an email of "(.*)"$/ do |email|
 end
 
 Given /^I signed up with "(.*)"\/"(.*)"$/ do |email, password|
-  user = Factory :user,
+  Factory :user,
     :email                 => email,
     :password              => password,
     :password_confirmation => password
 end
 
 Given /^I am signed up and confirmed as "(.*)"\/"(.*)"$/ do |email, password|
-  user = Factory :email_confirmed_user,
+  Factory :email_confirmed_user,
     :email                 => email,
     :password              => password,
     :password_confirmation => password
 end
 
 Given /^a user exists and is confirmed with an email of "([^"]*)"$/ do |email|
-  user = Factory :email_confirmed_user,
-    :email                 => email
+  Factory :email_confirmed_user, :email => email
 end
 
 Given /^I am signed in as a normal user$/ do

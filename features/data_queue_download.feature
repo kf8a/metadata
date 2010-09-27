@@ -7,7 +7,7 @@ Feature: Download data that was uploaded with upload feature.
     Given I have signed in with "bob@person.com"/"password"
       And I have the "admin" role
       And a file "test.dat" has been uploaded
-     When I go to the upload index page
+     When I go to the uploads page
       And I follow "test.dat"
  #    Then I can download the file from the database
 	

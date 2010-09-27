@@ -21,19 +21,18 @@
       </div> 
     <% end %>
   </div>
-
-
-
-  <ul class='quickTree'>
-    <% @studies.each do |study| -%>
-      <% next unless study.include_datatables?(@datatables)%>
-    
-      <%= render :partial => 'study',  :locals => {:study => study}%>
-    <% end -%>
-  </ul>
 <% end %>
 
-<% if signed_in? %>
+<ul class='quickTree'>
+  <% @studies.each do |study| -%>
+    <% next unless study.include_datatables?(@datatables)%>
+
+    <%= render :partial => 'study',  :locals => {:study => study}%>
+  <% end -%>
+</ul>
+
+
+<% if admin? %>
   <h3>Datatables</h3>
   <ul>
     <% @datatables.each do |datatable| %>

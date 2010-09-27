@@ -43,13 +43,9 @@
 				<li><a href='/'>Home</a></li>
 
 				<% @crumbs.each do |crumb| %>
-				<li> >
-				<%if crumb.url.nil? %>
-				  <%= crumb.name %>
-				<%else %>
-				   <%= link_to "#{crumb.name}", crumb.url  %>
-				<% end %>
-				</li>
+                                  <li> >
+                                    <%= link_to_if crumb.url, "#{crumb.name}", crumb.url  %>
+                                  </li>
 				<% end %>
 
 			</ul>

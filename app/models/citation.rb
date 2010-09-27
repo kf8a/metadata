@@ -7,5 +7,10 @@ class Citation < ActiveRecord::Base
    :path => ":rails_root/assets/citations/:attachment/:id/:style/:basename.:extension"
   
   attr_protected :pdf_file_name, :pdf_content_type, :pdf_size
+
+  named_scope :with_authors_by_sur_name_and_pub_year,
+          :joins=> 'left join authors on authors.citation_id = citations.id',
+          :conditions => 'seniority = 1',
+          :order => 'authors.sur_name, pub_year desc'
    
 end

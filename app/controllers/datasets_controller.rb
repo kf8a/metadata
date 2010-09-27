@@ -20,7 +20,7 @@ class DatasetsController < ApplicationController
     request.format  = :eml if params[:Dataset]
     @keyword_list   = params['keyword_list']
     @people         = Person.find_all_with_dataset(:order => 'sur_name')
-    @themes         = Theme.all(:order => :weight)
+    @themes         = Theme.by_weight
     @datasets       = Dataset.all
     @studies        = collect_and_normalize_studies(@datasets)
     @studies        = [@study] if @study
@@ -56,9 +56,9 @@ class DatasetsController < ApplicationController
 
   # GET /datasets/1;edit
   def edit
-    @people   = Person.all(:order => 'sur_name')
-    @studies = Study.all(:order => 'weight')
-    @themes = Theme.all(:order => 'weight')
+    @people   = Person.by_sur_name
+    @studies = Study.by_weight
+    @themes = Theme.by_weight
     @roles  = Role.find_all_by_role_type_id(RoleType.find_by_name('lter_dataset'))
     @websites = Website.all.collect {|x| [x.name, x.id]}
     @sponsors = Sponsor.all.collect {|x| [x.name, x.id]}
@@ -67,7 +67,7 @@ class DatasetsController < ApplicationController
   # POST /dataset/new_affiliation 
   def set_affiliation_for
     @affiliation = Affiliation.new
-    people = Person.all(:order => 'sur_name ASC')
+    people = Person.by_sur_name_asc
     roles = Role.find_all_by_role_type_id(RoleType.find_by_name('lter_dataset'))
     
     respond_to do |format|

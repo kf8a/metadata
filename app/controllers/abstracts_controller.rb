@@ -6,7 +6,7 @@ class AbstractsController < ApplicationController
   # GET meeting_abstracts
   # GET meeting_abstracts.xml
   def index
-    @abstracts = Abstract.find(:all, :order=> :authors)
+    @abstracts = Abstract.by_authors
     respond_to do |format|
       format.html # index.erb
       format.xml { render :xml => @abstracts.to_xml}
@@ -53,7 +53,7 @@ class AbstractsController < ApplicationController
   def update
     respond_to do |format|
       if @abstract.update_attributes(params[:abstract])
-        flash[:notice] = 'Meeting abstract  was successfully updated.'
+        flash[:notice] = 'Meeting abstract was successfully updated.'
         format.html { redirect_to abstract_url(@abstract) }
         format.xml  { head :ok }
       else

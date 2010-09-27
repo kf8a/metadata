@@ -4,7 +4,16 @@
 
 <% @datatable.requesters.each do |requester| %>
   <% next if @permitted_users.include?(requester) %>
-  <p><%= requester.email %> has requested permission.</p>
+  <% if requester.denied_access?(@datatable) %>
+    <p>
+      <%= requester.email %> has requested permission but it has been denied by:
+      <% @datatable.deniers_of(requester).each do |denier| %>
+        <%= denier.email %>
+      <% end %>
+    </p>
+  <% else %>
+    <p><%= requester.email %> has requested permission.</p>
+  <% end %>
   <%= button_to "Grant permission to #{requester.email}", { 
       :action => "create", 
       :id => @datatable.id, 
@@ -28,11 +37,11 @@
         <p><%= user.email %> still needs permission from <%= owner.email %></p>
       <% end %>
   <% end %>
-    <%= button_to "Revoke permission from #{user.email}", { 
-          :action => "destroy", 
-          :id => @datatable.id, 
-          :user => user.id }, 
-          :confirm => "Are you sure?", 
-          :method => :delete %>
+  <%= button_to "Revoke permission from #{user.email}", {
+        :action => "destroy",
+        :id => @datatable.id,
+        :user => user.id },
+        :confirm => "Are you sure?",
+        :method => :delete %>
 
 <% end %>
