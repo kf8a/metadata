@@ -43,48 +43,68 @@ class ApplicationController < ActionController::Base
   
   def request_subdomain(requested_subdomain=current_subdomain)
     requested_subdomain = current_subdomain if requested_subdomain.blank?
-    requested_subdomain = 'lter' unless ['lter','glbrc'].include?(requested_subdomain)
+    requested_subdomain = 'lter' unless valid_subdomain?(requested_subdomain)
     return requested_subdomain
+  end
+
+  def valid_subdomain?(subdomain)
+    ['lter','glbrc'].include?(subdomain)
   end
   
   def render_subdomain(page=action_name, mycontroller=controller_name, domain=@subdomain_request)
-    render_liquid(page, mycontroller, domain) or
-    render_domain_specific(page, mycontroller, domain) or
-    render :template => "#{mycontroller}/#{page}"
+    handler = TemplateHandler.new(page, mycontroller, domain)
+    render :template => handler.correct_template
+  end
+end
+
+#Takes care of choosing templates
+class TemplateHandler
+  def initialize(page, mycontroller, domain)
+    @page = page
+    @mycontroller = mycontroller
+    @domain = domain
   end
 
-  def render_liquid(page, mycontroller, domain)
-    if liquid_file_exists?(mycontroller, page)
-      if liquid_template_exists?(domain, mycontroller, page)
-        render :template => "#{mycontroller}/liquid_#{page}"
-      end
+  def correct_template
+    self.render_liquid or self.render_domain_specific or self.render_default
+  end
+
+  #renders pages like "uploads/liquid_index"
+  def render_liquid
+    if self.liquid_file_exists? && self.liquid_template_exists?
+      "#{@mycontroller}/liquid_#{@page}"
     end
   end
 
-  def render_domain_specific(page, mycontroller, domain)
-    if domain_specific_file_exists?(domain, mycontroller, page)
-      render :template => "#{mycontroller}/#{domain}_#{page}"
-    end
+  #renders pages like "uploads/glbrc_index"
+  def render_domain_specific
+    "#{@mycontroller}/#{@domain}_#{@page}" if self.domain_specific_file_exists?
   end
 
-  def liquid_file_exists?(mycontroller, page)
-    base_name = "app/views/" + mycontroller + "/liquid_" + page
+  #renders pages like "uploads/index"
+  def render_default
+    "#{@mycontroller}/#{@page}"
+  end
+
+  def liquid_file_exists?
+    base_name = "app/views/" + @mycontroller + "/liquid_" + @page
     erb_name  = base_name + ".html.erb"
     rhtml_name = base_name + ".rhtml"
     File.file?(erb_name) || File.file?(rhtml_name)
   end
 
-  def liquid_template_exists?(domain, mycontroller, page)
-    website = Website.find_by_name(domain)
-    website = Website.find(:first) unless website
-    plate = website.try(:layout, mycontroller, page)
+  def liquid_template_exists?
+    website = Website.find_by_name(@domain)
+    website ||= Website.find(:first)
+    plate = website.try(:layout, @mycontroller, @page)
     !plate.blank?
   end
 
-  def domain_specific_file_exists?(domain, mycontroller, page)
-    base_name = "app/views/"+ mycontroller + "/"  + domain + "_" + page
+  def domain_specific_file_exists?
+    base_name = "app/views/"+ @mycontroller + "/"  + @domain + "_" + @page
     erb_name = base_name + ".html.erb"
     rhtml_name = base_name + ".rhtml"
     File.file?(erb_name) || File.file?(rhtml_name)
   end
+
 end

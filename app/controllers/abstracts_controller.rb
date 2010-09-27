@@ -1,3 +1,4 @@
+#Controls pages dealing with abstracts of meetings
 class AbstractsController < ApplicationController
 
   before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
