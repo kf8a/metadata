@@ -111,12 +111,10 @@ class Dataset < ActiveRecord::Base
     #   begin_calendar_date.add_text(initiated.to_s)
     #   end_calendar_date.add_text(completed.to_s)
     # end
-
-    eml_dataset.add_element datatables.first.to_eml
     
-    # datatables.each do |datatable|
-    #   eml_dataset.add_element datatable.to_eml
-    # end
+    datatables.each do |datatable|
+      eml_dataset.add_element datatable.to_eml
+    end
 
     root.add_element('additionalMetadata').add_element('metadata').add eml_custom_unit_list
     root.to_s
