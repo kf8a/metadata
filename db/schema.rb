@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100920180136) do
+ActiveRecord::Schema.define(:version => 20100923123838) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -178,6 +178,19 @@ ActiveRecord::Schema.define(:version => 20100920180136) do
   end
 
   create_table "datatables_variates", :force => true do |t|
+  end
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.string   "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "eml_docs", :force => true do |t|
@@ -526,9 +539,12 @@ ActiveRecord::Schema.define(:version => 20100920180136) do
   create_table "units", :force => true do |t|
     t.string  "name"
     t.text    "description"
-    t.boolean "in_eml",                     :default => false
+    t.boolean "in_eml",                 :default => false
     t.text    "definition"
-    t.string  "human_name",  :limit => nil
+    t.integer "deprecated_in_favor_of"
+    t.string  "unit_type"
+    t.string  "parent_si"
+    t.float   "multiplier_to_si"
   end
 
   add_index "units", ["name"], :name => "unit_names_key", :unique => true
