@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100923123838) do
+ActiveRecord::Schema.define(:version => 20100925124905) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -278,6 +278,11 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
     t.text    "observation"
   end
 
+  create_table "measurement_scales", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "meeting_abstracts", :force => true do |t|
     t.text    "title"
     t.text    "authors"
@@ -410,17 +415,6 @@ ActiveRecord::Schema.define(:version => 20100923123838) do
   add_index "permissions", ["datatable_id"], :name => "index_permissions_on_datatable_id"
   add_index "permissions", ["owner_id"], :name => "index_permissions_on_owner_id"
   add_index "permissions", ["user_id"], :name => "index_permissions_on_user_id"
-
-  create_table "plots", :force => true do |t|
-    t.string  "name"
-    t.integer "treatment_id"
-    t.integer "replicate"
-    t.integer "study_id"
-    t.string  "description"
-  end
-
-  add_index "plots", ["study_id"], :name => "index_plots_on_study_id"
-  add_index "plots", ["treatment_id"], :name => "index_plots_on_treatment_id"
 
   create_table "projects", :force => true do |t|
     t.string   "title"
