@@ -1,7 +1,7 @@
 class AffiliationsController < ApplicationController
 
   before_filter :admin?, :except => [:index, :show] unless ENV["RAILS_ENV"] == 'development'
-  before_filter :get_affiliation, :only => [:edit, :show, :destroy]
+  before_filter :get_affiliation, :only => [:show, :edit, :update, :destroy]
 
   def index
     @affiliations = Affiliation.all
@@ -11,6 +11,15 @@ class AffiliationsController < ApplicationController
   end
   
   def edit
+  end
+
+  def update
+    if @affiliation.update_attributes(params[:affiliation])
+      flash[:notice] = 'Affiliation was successfully updated.'
+      redirect_to @affiliation
+    else
+      render_subdomain "edit"
+    end
   end
 
   # GET /affiliations/new

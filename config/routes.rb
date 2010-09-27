@@ -20,7 +20,7 @@ ActionController::Routing::Routes.draw do |map|
       
   map.resources :abstracts
   
-  map.resources :affiliations, :except => [:update]
+  map.resources :affiliations
 
   map.resources :citations, :only => [:index, :show, :new, :create],
                             :collection => {:download => :get}
