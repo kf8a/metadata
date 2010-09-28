@@ -12,14 +12,4 @@ class CollectionsController < ApplicationController
     @collection = Collection.find(params[:id])
     @customizer = Customizer.new(params, @collection.values)
   end
-
-  private
-  
-  def get_collection
-
-  end
-
-  def set_values
-
-  end
 end
