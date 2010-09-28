@@ -11,7 +11,7 @@ class UsersControllerTest < ActionController::TestCase
 
       get :create, :user => { :email => @email, 
                               :password => 'password', :password_confirmation => 'password'},
-                   :invite_code => @invite.invite_code
+                              :invite_code => @invite.invite_code
     end
     
     should 'result in a new user who is a member of the glbrc sponsor' do

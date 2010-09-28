@@ -21,4 +21,9 @@ class UsersController < Clearance::UsersController
       render :template => 'users/new'
     end
   end
+  
+  def new
+    @invite_code = params[:invite_code]
+    super
+  end
 end
