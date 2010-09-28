@@ -4,58 +4,23 @@ class CollectionsController < ApplicationController
 
   layout :site_layout
   
-  before_filter :get_collection, :only => [:show, :customize]
-  before_filter :set_values, :only => [:show, :customize]
+  before_filter :get_collection, :only => :show
+  before_filter :set_values, :only => :show
 
   def index
     @collections = Collection.all
   end
   
   def show
-    @customize = false
-  end
-
-  def customize
-    set_limitoptions(@values)
-    set_limits(params)
-    @sortby = params[:sortby]
-    @sort_direction = params[:sort_direction]
-    @values = sort_values(@values, @sort_direction, @sortby)
-    set_limitrange(@values, @limitby)
-
     @customize = params[:custom]
-    render 'show'
+    @customizer = Customizer.new(params, @values)
+    @values = @customizer.sort_values(@values)
   end
-  
+
   private
   
   def get_collection
     @collection = Collection.find(params[:id])
-  end
-
-  def new_limitby?(limitby, oldlimitby)
-    oldlimitby && limitby != oldlimitby
-  end
-
-  def set_limits(params)
-    @limitby = params[:limitby]
-    if new_limitby?(@limitby, params[:oldlimitby])
-      @limit_min = nil
-      @limit_max = nil
-      @contains = nil
-    else
-      @limit_min = params[:limit_min]
-      @limit_max = params[:limit_max]
-      @contains = params[:contains]
-    end
-  end
-
-  def set_limitoptions(values)
-    @limitoptions = values.fields.collect do |field|
-      next if field == "id"
-      [field.titleize, field]
-    end
-    @limitoptions = normalize(@limitoptions)
   end
 
   def set_limitrange(values, limitby)
@@ -66,11 +31,49 @@ class CollectionsController < ApplicationController
   def set_values
     @values = @collection.perform_query
   end
+end
 
-  def sort_values(values, direction, sortby)
-    values = values.sort {|a,b| a[sortby]<=>b[sortby] rescue 0} if direction == "Ascending"
-    values = values.sort {|a,b| b[sortby]<=>a[sortby] rescue 0} if direction == "Descending"
-    values
+class Customizer
+  def initialize(params, values)
+    @params = params
+    @values = values
+  end
+
+  def limitby
+    @params[:limitby]
+  end
+
+  def limitoptions
+    @limitoptions ||= self.setlimitoptions
+  end
+  
+  def setlimitoptions
+    limitoptions = @values.fields.collect do |field|
+      next if field == "id"
+      [field.titleize, field]
+    end
+    limitoptions = self.normalize(limitoptions)
+  end
+
+  def limit_min
+    if self.new_limitby? then nil else @params[:limit_min] end
+  end
+
+  def limit_max
+    if self.new_limitby? then nil else @params[:limit_max] end
+  end
+
+  def limitrange
+    @limitrange ||= self.setlimitrange
+  end
+
+  def setlimitrange
+    limitrange = @values.collect {|row| row[self.limitby]}
+    limitrange = self.normalize(limitrange)
+  end
+
+  def contains
+    if self.new_limitby? then nil else @params[:contains] end
   end
 
   def normalize(array)
@@ -78,4 +81,27 @@ class CollectionsController < ApplicationController
     array.uniq!
     array.sort!
   end
+
+  def oldlimitby
+    @params[:oldlimitby]
+  end
+
+  def new_limitby?
+    self.oldlimitby && self.limitby != self.oldlimitby
+  end
+
+  def sortby
+    @params[:sortby]
+  end
+
+  def sort_direction
+    @params[:sort_direction]
+  end
+
+  def sort_values(values)
+    values = values.sort {|a,b| a[self.sortby]<=>b[self.sortby] rescue 0} if self.sort_direction == "Ascending"
+    values = values.sort {|a,b| b[self.sortby]<=>a[self.sortby] rescue 0} if self.sort_direction == "Descending"
+    values
+  end
+
 end

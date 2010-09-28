@@ -51,39 +51,39 @@
 
 
 <% if @customize %>
-  <%= button_to 'Hide customization forms', {:action => 'customize', :id => @collection, :custom => false} %>
-  <% form_tag :action => 'customize', :id => @collection do %>
+  <%= button_to 'Hide customization forms', {:action => 'show', :id => @collection, :custom => false}, :method => :get %>
+  <% form_tag({:action => 'show', :id => @collection}, :method => :get) do %>
     <%= hidden_field_tag 'custom', true %>
     <table>
       <tr>
         <td><%= label_tag 'limitby', 'Limit display by field: '%></td>
         <td><%= select_tag 'limitby', 
-                options_for_select(@limitoptions, @limitby) %></td>
+                options_for_select(@customizer.limitoptions, @customizer.limitby) %></td>
       </tr>
-      <% if @limitby %>
-        <%= hidden_field_tag 'oldlimitby', @limitby  %>
+      <% if @customizer.limitby %>
+        <%= hidden_field_tag 'oldlimitby', @customizer.limitby  %>
         <tr>
-          <td><%= label_tag 'limit_min', "Where '#{@limitby.titleize}' ranges from: " %></td>
-          <td><%= select_tag 'limit_min', options_for_select(@limitrange, @limit_min)%></td>
+          <td><%= label_tag 'limit_min', "Where '#{@customizer.limitby.titleize}' ranges from: " %></td>
+          <td><%= select_tag 'limit_min', options_for_select(@customizer.limitrange, @customizer.limit_min)%></td>
           <td><%= label_tag 'limit_max', " to: " %></td>
-          <td><%= select_tag 'limit_max', options_for_select(@limitrange, @limit_max)%></td>
+          <td><%= select_tag 'limit_max', options_for_select(@customizer.limitrange, @customizer.limit_max)%></td>
         </tr>
         <tr>
-          <td><%= label_tag 'conatins', "Where '#{@limitby.titleize}' contains: "%> </td>
+          <td><%= label_tag 'conatins', "Where '#{@customizer.limitby.titleize}' contains: "%> </td>
           <td><%= text_field_tag 'contains'%> </td>
         </tr>
       <% end %>
       <tr>
         <td><%= label_tag 'sortby', 'Sort display by field: '%></td>
         <td><%= select_tag 'sortby',
-                options_for_select(@limitoptions, @sortby) %></td>
-        <td><%= select_tag 'sort_direction', options_for_select(["Ascending", "Descending"], @sort_direction)%> </td>
+                options_for_select(@customizer.limitoptions, @customizer.sortby) %></td>
+        <td><%= select_tag 'sort_direction', options_for_select(["Ascending", "Descending"], @customizer.sort_direction)%> </td>
       </tr>
     </table>
     <%= submit_tag 'Customize' %>
   <% end %>
 <% else %>
-  <%= button_to 'Show customization forms', {:action => 'customize', :id => @collection, :custom => true}%>
+  <%= button_to 'Show customization forms', {:action => 'show', :id => @collection, :custom => true}, :method => :get %>
 <% end %>
 
 <div>
@@ -91,9 +91,9 @@
   <div>
     <table>
       <% @values.each do  |row| %>
-        <% next unless @limitby.blank? || @contains.blank? || row[@limitby].casecmp(@contains) == 0 %>
-        <% next unless @limitby.blank? || @limit_min.blank? || row[@limitby].casecmp(@limit_min) >= 0 %>
-        <% next unless @limitby.blank? || @limit_max.blank? || row[@limitby].casecmp(@limit_max) <= 0 %>
+        <% next unless @customizer.limitby.blank? || @customizer.contains.blank? || row[@customizer.limitby].casecmp(@customizer.contains) == 0 %>
+        <% next unless @customizer.limitby.blank? || @customizer.limit_min.blank? || row[@customizer.limitby].casecmp(@customizer.limit_min) >= 0 %>
+        <% next unless @customizer.limitby.blank? || @customizer.limit_max.blank? || row[@customizer.limitby].casecmp(@customizer.limit_max) <= 0 %>
         <tr  class="<%= cycle('even','odd') -%>">
           <td>
             <% row.keys.each do |key| %>
