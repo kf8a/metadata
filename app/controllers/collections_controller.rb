@@ -4,58 +4,23 @@ class CollectionsController < ApplicationController
 
   layout :site_layout
   
-  before_filter :get_collection, :only => [:show, :customize]
-  before_filter :set_values, :only => [:show, :customize]
+  before_filter :get_collection, :only => :show
+  before_filter :set_values, :only => :show
 
   def index
     @collections = Collection.all
   end
   
   def show
-    @customize = false
-  end
-
-  def customize
-    set_limitoptions(@values)
-    set_limits(params)
-    @sortby = params[:sortby]
-    @sort_direction = params[:sort_direction]
-    @values = sort_values(@values, @sort_direction, @sortby)
-    set_limitrange(@values, @limitby)
-
     @customize = params[:custom]
-    render 'show'
+    @customizer = Customizer.new(params, @values)
+    @values = @customizer.sort_values(@values)
   end
-  
+
   private
   
   def get_collection
     @collection = Collection.find(params[:id])
-  end
-
-  def new_limitby?(limitby, oldlimitby)
-    oldlimitby && limitby != oldlimitby
-  end
-
-  def set_limits(params)
-    @limitby = params[:limitby]
-    if new_limitby?(@limitby, params[:oldlimitby])
-      @limit_min = nil
-      @limit_max = nil
-      @contains = nil
-    else
-      @limit_min = params[:limit_min]
-      @limit_max = params[:limit_max]
-      @contains = params[:contains]
-    end
-  end
-
-  def set_limitoptions(values)
-    @limitoptions = values.fields.collect do |field|
-      next if field == "id"
-      [field.titleize, field]
-    end
-    @limitoptions = normalize(@limitoptions)
   end
 
   def set_limitrange(values, limitby)
@@ -65,17 +30,5 @@ class CollectionsController < ApplicationController
 
   def set_values
     @values = @collection.perform_query
-  end
-
-  def sort_values(values, direction, sortby)
-    values = values.sort {|a,b| a[sortby]<=>b[sortby] rescue 0} if direction == "Ascending"
-    values = values.sort {|a,b| b[sortby]<=>a[sortby] rescue 0} if direction == "Descending"
-    values
-  end
-
-  def normalize(array)
-    array.compact!
-    array.uniq!
-    array.sort!
   end
 end

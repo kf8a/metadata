@@ -25,8 +25,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :citations, :only => [:index, :show, :new, :create],
                             :collection => {:download => :get}
   
-  map.resources :collections, :only => [:index, :show],
-                              :collection => {:customize => :post}
+  map.resources :collections, :only => [:index, :show]
   
   map.resources :data_contributions, :only => [:new]
   
