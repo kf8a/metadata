@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   
   map.send_invitation '/send_invitation/:id', :controller => "invites", :action => "send_invitation"
-  map.redeem_invitation '/sign_up/:invite_code', :controller => 'users', :action => 'new'
+  map.redeem_invitation '/signup/:invite_code', :controller => 'users', :action => 'new'
   
   map.resource :session, :controller => 'sessions'
   map.resource :users, :controller => 'users'
@@ -25,8 +25,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :citations, :only => [:index, :show, :new, :create],
                             :collection => {:download => :get}
   
-  map.resources :collections, :only => [:index, :show],
-                              :collection => {:customize => :post}
+  map.resources :collections, :only => [:index, :show]
   
   map.resources :data_contributions, :only => [:new]
   
@@ -39,7 +38,7 @@ ActionController::Routing::Routes.draw do |map|
                             :auto_complete_for_datatable_keyword_list => :get,
                             :events  => :get,
                             :suggest => :get,
-                            :search  => :get,
+                            :search  => :post,
                             :update_temporal_extent => :get
                             }
 
