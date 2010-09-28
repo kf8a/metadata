@@ -67,9 +67,10 @@ class Customizer
     @params[:sort_direction]
   end
 
-  def sort_values(values)
-    values = values.sort {|a,b| a[self.sortby]<=>b[self.sortby] rescue 0} if self.sort_direction == "Ascending"
-    values = values.sort {|a,b| b[self.sortby]<=>a[self.sortby] rescue 0} if self.sort_direction == "Descending"
+  def sorted_values
+    values = @values
+    values = @values.sort {|a,b| a[self.sortby]<=>b[self.sortby] rescue 0} if self.sort_direction == "Ascending"
+    values = @values.sort {|a,b| b[self.sortby]<=>a[self.sortby] rescue 0} if self.sort_direction == "Descending"
     values
   end
 end

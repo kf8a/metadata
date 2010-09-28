@@ -4,25 +4,12 @@ class CollectionsController < ApplicationController
 
   layout :site_layout
   
-  before_filter :get_collection, :only => :show
-  before_filter :set_values, :only => :show
-
   def index
     @collections = Collection.all
   end
   
   def show
-    @customizer = Customizer.new(params, @values)
-    @values = @customizer.sort_values(@values)
-  end
-
-  private
-  
-  def get_collection
     @collection = Collection.find(params[:id])
-  end
-
-  def set_values
-    @values = @collection.perform_query
+    @customizer = Customizer.new(params, @collection.values)
   end
 end

@@ -7,4 +7,8 @@ class Collection < ActiveRecord::Base
     query =  self.datatable.object
     ActiveRecord::Base.connection.execute(query)
   end
+
+  def values
+    @values ||= self.perform_query
+  end
 end
