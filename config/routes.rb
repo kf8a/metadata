@@ -39,7 +39,7 @@ ActionController::Routing::Routes.draw do |map|
                             :auto_complete_for_datatable_keyword_list => :get,
                             :events  => :get,
                             :suggest => :get,
-                            :search  => :get,
+                            :search  => :post,
                             :update_temporal_extent => :get
                             }
 
