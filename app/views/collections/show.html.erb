@@ -50,7 +50,7 @@
 </table>
 
 
-<% if @customize %>
+<% if @customizer.customize %>
   <%= button_to 'Hide customization forms', {:action => 'show', :id => @collection, :custom => false}, :method => :get %>
   <% form_tag({:action => 'show', :id => @collection}, :method => :get) do %>
     <%= hidden_field_tag 'custom', true %>

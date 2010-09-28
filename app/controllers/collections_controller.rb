@@ -12,7 +12,6 @@ class CollectionsController < ApplicationController
   end
   
   def show
-    @customize = params[:custom]
     @customizer = Customizer.new(params, @values)
     @values = @customizer.sort_values(@values)
   end
@@ -21,11 +20,6 @@ class CollectionsController < ApplicationController
   
   def get_collection
     @collection = Collection.find(params[:id])
-  end
-
-  def set_limitrange(values, limitby)
-    @limitrange = values.collect {|row| row[limitby]}
-    @limitrange = normalize(@limitrange)
   end
 
   def set_values

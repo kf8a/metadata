@@ -4,6 +4,10 @@ class Customizer
     @values = values
   end
 
+  def customize
+    @params[:custom]
+  end
+
   def limitby
     @params[:limitby]
   end
