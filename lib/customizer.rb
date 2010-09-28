@@ -4,6 +4,30 @@ class Customizer
     @values = values
   end
 
+  def accepts?(row)
+    self.accepts_by_contains?(row) &&
+        self.accepts_by_min(row) &&
+        self.accepts_by_max(row)
+  end
+
+  def accepts_by_contains?(row)
+    self.limitby.blank? ||
+        self.contains.blank? ||
+        row[self.limitby].casecmp(self.contains) == 0
+  end
+
+  def accepts_by_min(row)
+    self.limitby.blank? ||
+        self.limit_min.blank? ||
+        row[self.limitby].casecmp(self.limit_min) >= 0
+  end
+
+  def accepts_by_max(row)
+    self.limitby.blank? ||
+        self.limit_max.blank? ||
+        row[self.limitby].casecmp(self.limit_max) <= 0
+  end
+
   def customize
     @params[:custom]
   end
