@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   
   map.send_invitation '/send_invitation/:id', :controller => "invites", :action => "send_invitation"
-  map.redeem_invitation '/sign_up/:invite_code', :controller => 'users', :action => 'new'
+  map.redeem_invitation '/signup/:invite_code', :controller => 'users', :action => 'new'
   
   map.resource :session, :controller => 'sessions'
   map.resource :users, :controller => 'users'
