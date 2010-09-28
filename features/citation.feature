@@ -26,11 +26,11 @@ Feature: Citation viewing and downloading
   Scenario: An anonymous user tries to add a citation and gets an error
     
   Scenario: A signed in user tries to add a citation
-    Given I have signed in with "admin@person.com"/"password"
-      And I have the "admin" role
-     When I go to the new citation page
+    Given an admin user exists with an email of "admin@person.com"
+    When I sign in as "admin@person.com"/"password"
+      And I go to the new citation page
       And I fill in "Title" with "Corn weevil"
       And I attach the file "test/data/citation.pdf" to "Pdf"
-     When I press "Create"
-     #Then I should see "created successfully"
-    #  And I should see "Corn weevil"
+    When I press "Create"
+    Then I should see "Citation was successfully created."
+      And I should see "Corn weevil"
