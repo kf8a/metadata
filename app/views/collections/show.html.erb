@@ -90,7 +90,7 @@
   <h2>Data</h2>
   <div>
     <table>
-      <% @customizer.sorted_values.each do  |row| %>
+      <% @customizer.sorted_values.each do |row| %>
         <% if @customizer.accepts?(row) %>
           <tr  class="<%= cycle('even','odd') -%>">
             <td>
