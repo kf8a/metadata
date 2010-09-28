@@ -90,26 +90,24 @@
   <h2>Data</h2>
   <div>
     <table>
-      <% @values.each do  |row| %>
-        <% next unless @customizer.limitby.blank? || @customizer.contains.blank? || row[@customizer.limitby].casecmp(@customizer.contains) == 0 %>
-        <% next unless @customizer.limitby.blank? || @customizer.limit_min.blank? || row[@customizer.limitby].casecmp(@customizer.limit_min) >= 0 %>
-        <% next unless @customizer.limitby.blank? || @customizer.limit_max.blank? || row[@customizer.limitby].casecmp(@customizer.limit_max) <= 0 %>
-        <tr  class="<%= cycle('even','odd') -%>">
-          <td>
-            <% row.keys.each do |key| %>
-              <% next unless row[key] %>
-              <% next if key == "id" %>
-              <%= key.titleize + ": " + row[key] %><br />
-            <% end %>
-          </td>
-          <td>
-            <% if row['image'] %>
-              <img src="<%= row['image'] %>" alt="A picture"/>
-            <% end %>
-          </td>
-        </tr>
+      <% @customizer.sorted_values.each do  |row| %>
+        <% if @customizer.accepts?(row) %>
+          <tr  class="<%= cycle('even','odd') -%>">
+            <td>
+              <% row.keys.each do |key| %>
+                <% next unless row[key] %>
+                <% next if key == "id" %>
+                <%= key.titleize + ": " + row[key] %><br />
+              <% end %>
+            </td>
+            <td>
+              <% if row['image'] %>
+                <img src="<%= row['image'] %>" alt="A picture"/>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
-      <% @values.clear %>
     </table>
   </div>
 </div>

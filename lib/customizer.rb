@@ -4,6 +4,34 @@ class Customizer
     @values = values
   end
 
+  def accepts?(row)
+    self.accepts_by_contains?(row) &&
+        self.accepts_by_min(row) &&
+        self.accepts_by_max(row)
+  end
+
+  def accepts_by_contains?(row)
+    self.limitby.blank? ||
+        self.contains.blank? ||
+        row[self.limitby].casecmp(self.contains) == 0
+  end
+
+  def accepts_by_min(row)
+    self.limitby.blank? ||
+        self.limit_min.blank? ||
+        row[self.limitby].casecmp(self.limit_min) >= 0
+  end
+
+  def accepts_by_max(row)
+    self.limitby.blank? ||
+        self.limit_max.blank? ||
+        row[self.limitby].casecmp(self.limit_max) <= 0
+  end
+
+  def customize
+    @params[:custom]
+  end
+  
   def limitby
     @params[:limitby]
   end
@@ -63,9 +91,10 @@ class Customizer
     @params[:sort_direction]
   end
 
-  def sort_values(values)
-    values = values.sort {|a,b| a[self.sortby]<=>b[self.sortby] rescue 0} if self.sort_direction == "Ascending"
-    values = values.sort {|a,b| b[self.sortby]<=>a[self.sortby] rescue 0} if self.sort_direction == "Descending"
+  def sorted_values
+    values = @values
+    values = @values.sort {|a,b| a[self.sortby]<=>b[self.sortby] rescue 0} if self.sort_direction == "Ascending"
+    values = @values.sort {|a,b| b[self.sortby]<=>a[self.sortby] rescue 0} if self.sort_direction == "Descending"
     values
   end
 end

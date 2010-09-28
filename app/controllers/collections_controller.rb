@@ -4,31 +4,22 @@ class CollectionsController < ApplicationController
 
   layout :site_layout
   
-  before_filter :get_collection, :only => :show
-  before_filter :set_values, :only => :show
-
   def index
     @collections = Collection.all
   end
   
   def show
-    @customize = params[:custom]
+    @collection = Collection.find(params[:id])
     @customizer = Customizer.new(params, @values)
-    @values = @customizer.sort_values(@values)
   end
 
   private
   
   def get_collection
-    @collection = Collection.find(params[:id])
-  end
 
-  def set_limitrange(values, limitby)
-    @limitrange = values.collect {|row| row[limitby]}
-    @limitrange = normalize(@limitrange)
   end
 
   def set_values
-    @values = @collection.perform_query
+
   end
 end
