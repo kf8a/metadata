@@ -1,5 +1,7 @@
 # encoding: UTF-8
 
+# from http://github.com/maximkulkin/spreadsheet
+
 require 'spreadsheet/builder'
 
 Spreadsheet::XmlBuilder = begin
