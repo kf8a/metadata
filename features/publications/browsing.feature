@@ -4,7 +4,8 @@ Feature: Browsing Publications
   I want to see all of the publications
 
   Scenario: Going to the publication index to see publications
-    Given a publication exists with a year of "1984"
+    Given a publication type exists with an id of "1"
+      And a publication exists with a year of "1984"
       And I am signed in as a normal user
     When I go to the publications page
     Then I should see "1984"
