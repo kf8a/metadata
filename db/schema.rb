@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100925124905) do
+ActiveRecord::Schema.define(:version => 20100929130709) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -584,6 +584,12 @@ ActiveRecord::Schema.define(:version => 20100925124905) do
   end
 
   add_index "studies", ["parent_id"], :name => "index_studies_on_parent_id"
+
+  create_table "study_urls", :force => true do |t|
+    t.integer "website_id"
+    t.integer "study_id"
+    t.string  "url"
+  end
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

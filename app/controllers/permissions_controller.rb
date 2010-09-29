@@ -1,7 +1,6 @@
 class PermissionsController < ApplicationController
 
-  before_filter :require_datatable, :require_owner, :except => [:index] unless ENV["RAILS_ENV"] == 'development'
-  #before_filter :admin?, :except => [:index] unless ENV["RAILS_ENV"] == 'development'
+  before_filter :require_datatable, :require_owner, :except => [:index] 
   
   layout :site_layout
   

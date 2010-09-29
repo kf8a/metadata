@@ -45,6 +45,9 @@ Factory.define :publication do |p|
   p.publication_type_id 1
 end
 
+Factory.define :publication_type do |p|
+end
+
 Factory.define :role do |r|
   r.name 'Emeritus Investigators'
 end
@@ -62,6 +65,9 @@ end
 
 Factory.define :study do |s|
   s.name 'LTER'
+end
+
+Factory.define :study_url do |s|
 end
 
 Factory.define :unit do |u|

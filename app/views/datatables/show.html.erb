@@ -1,4 +1,4 @@
-<h1><%= @datatable.title_and_years %></h1>
+s<h1><%= @datatable.title_and_years %></h1>
 
 <%= textilize @datatable.description if @datatable.description %>
 <%= @datatable.try(:summary_graph) %>
@@ -27,7 +27,7 @@
         <% if @datatable.study.url.nil? || @datatable.study.url.empty? %>
           <%= @datatable.study.name %>
         <% else %>
-          <%= link_to "#{@datatable.study.name}", @datatable.study.url %>
+          <%= link_to "#{@datatable.study.name}", @datatable.study.study_url(@website) %>
         <% end %>
       </td>
     </tr>
