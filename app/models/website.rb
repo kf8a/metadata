@@ -2,6 +2,7 @@ class Website < ActiveRecord::Base
   has_many :datasets
   has_many :templates
   has_and_belongs_to_many :protocols
+  has_many :study_urls
   
   validates_uniqueness_of :name
   validates_presence_of :name

@@ -4,6 +4,7 @@ class StudyTest < ActiveSupport::TestCase
   
   should have_many :datatables
   should have_and_belong_to_many :datasets
+  should have_many :study_urls
 
   context 'querying for datatables' do
     setup do
@@ -54,6 +55,22 @@ class StudyTest < ActiveSupport::TestCase
     
     should 'return only the root studies' do 
       assert Study.find_all_roots_with_datatables([@datatable]) == [@study]
+    end
+  end
+  
+  context 'return the right url for the website' do
+    setup do
+      @study      = Factory.create(:study)
+      @website_1  = Factory.create(:website, :name => 'first')
+      @website_2  = Factory.create(:website, :name => 'second')
+      study_url_1 = Factory.create(:study_url, :url => 'somewhere', :website => @website_1)
+      study_url_2 = Factory.create(:study_url, :url => 'somewhere else', :website => @website_2)
+      @study.study_urls << [study_url_1, study_url_2]
+    end
+    
+    should 'get the right url for the website' do
+      assert @study.study_url(@website_1) == 'somewhere'
+      assert @study.study_url(@website_2) == 'somewhere else'
     end
   end
 end

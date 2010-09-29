@@ -4,6 +4,7 @@ class WebsiteTest < ActiveSupport::TestCase
   should have_many :datasets
   should have_many :templates
   should have_and_belong_to_many :protocols
+  should have_many :study_urls
   
   should validate_presence_of :name
     

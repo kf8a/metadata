@@ -47,6 +47,9 @@ class DatatablesController < ApplicationController
     accessible_by_ip = trusted_ip? || !@datatable.is_restricted
     csv_ok = accessible_by_ip && @datatable.can_be_downloaded_by?(current_user)
     climdb_ok = accessible_by_ip
+    
+    @website = Website.find_by_name(@subdomain_request)
+    
 
     if @datatable.dataset.valid_request?(@subdomain_request)
       respond_to do |format|

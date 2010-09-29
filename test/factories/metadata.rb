@@ -64,6 +64,9 @@ Factory.define :study do |s|
   s.name 'LTER'
 end
 
+Factory.define :study_url do |s|
+end
+
 Factory.define :unit do |u|
 end
 

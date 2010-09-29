@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100925124905) do
+ActiveRecord::Schema.define(:version => 20100929130709) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -416,17 +416,6 @@ ActiveRecord::Schema.define(:version => 20100925124905) do
   add_index "permissions", ["owner_id"], :name => "index_permissions_on_owner_id"
   add_index "permissions", ["user_id"], :name => "index_permissions_on_user_id"
 
-  create_table "plots", :force => true do |t|
-    t.string  "name"
-    t.integer "treatment_id"
-    t.integer "replicate"
-    t.integer "study_id"
-    t.string  "description"
-  end
-
-  add_index "plots", ["study_id"], :name => "index_plots_on_study_id"
-  add_index "plots", ["treatment_id"], :name => "index_plots_on_treatment_id"
-
   create_table "projects", :force => true do |t|
     t.string   "title"
     t.text     "abstract"
@@ -584,6 +573,12 @@ ActiveRecord::Schema.define(:version => 20100925124905) do
   end
 
   add_index "studies", ["parent_id"], :name => "index_studies_on_parent_id"
+
+  create_table "study_urls", :force => true do |t|
+    t.integer "website_id"
+    t.integer "study_id"
+    t.string  "url"
+  end
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
