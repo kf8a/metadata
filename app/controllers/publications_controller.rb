@@ -91,7 +91,7 @@ class PublicationsController < ApplicationController
       if @publication.save
         expire_action :action => :index
          
-        flash[:notice] = 'Publications was successfully created.'
+        flash[:notice] = 'Publication was successfully created.'
         format.html { redirect_to publication_url(@publication) }
         format.xml  { render :xml => @publication, :status => :created, :location => @publication }
       else
@@ -108,7 +108,7 @@ class PublicationsController < ApplicationController
       if @publication.update_attributes(params[:publication])
         expire_action :action => :index
          
-        flash[:notice] = 'Publications was successfully updated.'
+        flash[:notice] = 'Publication was successfully updated.'
         format.html { redirect_to publication_url(@publication) }
         format.xml  { head :ok }
       else
