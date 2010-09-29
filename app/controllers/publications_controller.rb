@@ -16,7 +16,7 @@ class PublicationsController < ApplicationController
       @pub_type = ''
       publication_types = PublicationType.all
     end
-    @pub_type =  @pub_type.gsub(/_/,' ') unless @pub_type == ''
+    @pub_type =  @pub_type.gsub(/_/,' ') unless @pub_type.blank?
     conditions = 'publication_type_id in (?) and publication_type_id < 6 '
     order = 'year desc, citation'
     @decoration = 'by year'
