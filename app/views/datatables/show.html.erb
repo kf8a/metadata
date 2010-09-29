@@ -140,9 +140,6 @@ s<h1><%= @datatable.title_and_years %></h1>
           <%= link_to 'Download complete data table',
                       datatable_path(@datatable,:format => :csv),
                       :class => 'download-link'%>
-          <%= link_to 'Download as an OpenOffice spreadsheet',
-                      datatable_path(@datatable, :format => :ods),
-                      :class => 'download-link' if @trusted %>
           <%= link_to 'View as a Collection', 
                       collection_path(@datatable.collection) if @datatable.collection %>
           <%= link_to 'Permissions Management',
