@@ -1,8 +1,13 @@
 require 'polyglot'
 require 'treetop'
 
-require './../lib/ris'
-require './../lib/ris_nodes'
+if RUBY_VERSION > '1.9.2'
+  require_relative '../ris'
+  require_relative '../ris_nodes'
+else
+  require 'lib/ris'
+  require 'lib/ris_nodes'
+end
 
 namespace :citation do
   desc 'load ris citation file'
