@@ -27,7 +27,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :collections, :only => [:index, :show]
   
-  map.resources :data_contributions, :only => [:new]
+  map.resources :data_contributions, :only => [:create]
   
   map.resources :datasets, :collection => {
                            :set_affiliation_for => :post,

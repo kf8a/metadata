@@ -13,7 +13,7 @@ class DataContributionsControllerTest < ActionController::TestCase
   
   context "on GET to :new" do
     setup do
-      get :new
+      get :create
     end
 
     should render_template :new
