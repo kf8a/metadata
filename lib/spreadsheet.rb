@@ -4,13 +4,13 @@
 
 require 'spreadsheet/builder'
 
-Spreadsheet::XmlBuilder = begin
-  require 'spreadsheet/libxml_xml_builder'
-  Spreadsheet::LibxmlXmlBuilder
-rescue LoadError  
+# Spreadsheet::XmlBuilder = begin
+#   require 'spreadsheet/libxml_xml_builder'
+#   Spreadsheet::LibxmlXmlBuilder
+# rescue LoadError  
   require 'spreadsheet/builder_xml_builder'
-  Spreadsheet::BuilderXmlBuilder
-end
+Spreadsheet::XmlBuilder =  Spreadsheet::BuilderXmlBuilder
+# end
 
 if defined?(RAILS_ENV)
   require 'action_view'
