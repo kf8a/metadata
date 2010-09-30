@@ -48,7 +48,7 @@
       </tr>
     <% end %>
   </table>
-  <%= link_to_remote 'Add Person',:url => {:controller => :data_contributions, :action => :create} %>
+  <%= link_to_remote 'Add Person',:url => {:controller => :data_contributions, :action => :new}, :method => :get %>
 <% end %>
 <p>
   <label for='datatable_begin_date'>Temporal Coverage from:</label>
@@ -119,6 +119,6 @@
     </tr>
   <% end %>
 </table>
-<%= link_to_remote 'Add Variate',:url => {:controller => :variates, :action => :new} %>
+<%= link_to_remote 'Add Variate',:url => {:controller => :variates, :action => :new}, :method => :get %>
 <% end %>
 

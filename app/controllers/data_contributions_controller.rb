@@ -1,5 +1,5 @@
 class DataContributionsController < ApplicationController
-  def create
+  def new
     @data_contribution = DataContribution.new
     respond_to do |format|
       format.html
