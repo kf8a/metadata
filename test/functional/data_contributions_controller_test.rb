@@ -16,7 +16,7 @@ class DataContributionsControllerTest < ActionController::TestCase
       get :create
     end
 
-    should render_template :new
+    should render_template :create
   end
 
 end
