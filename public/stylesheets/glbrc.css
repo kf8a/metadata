@@ -48,8 +48,9 @@
   border-width: 2px;
 }
 #glbrc .sign-up {
+  border: 2px solid #71bf44;
+  float: right;
   display: block;
-  background-color: #71bf44;
   border-radius: 10px;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
