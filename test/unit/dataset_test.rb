@@ -112,6 +112,45 @@ class DatasetTest < ActiveSupport::TestCase
     end
   end
   
+  context 'set affiliations' do
+    setup do
+      @dataset = Factory.create(:dataset)
+    end
+    
+    should 'be able to add a affiliation when none exists' do
+      params = { :dataset=>{"title"=>"Trace Gas Fluxes on the Main Cropping System Experiment",
+       "abstract"=>"Trace gases (methane,
+       carbon dioxide and nitrous oxide) have been measured on the LTER main experimental site since 1991 and on the successional and forested sites since 1993.  The trace gas fluxes are analyzed twice monthly or monthly until the ground freezes.  Samples are collected from permanently-installed in-situ static chambers. CH<sub>4</sub> and N<sub>2</sub>O are analyzed using gas-chromatography and CO<sub>2</sub> is measured with an infrared gas analyzer. Soil moisture and temperature are measured at the same time the gas samples are collected.",
+       "keyword_list"=>"CO2,
+       flux,
+       N2O,
+       CH4,
+       methane,
+       carbon dioxide,
+       nitrous oxide,
+       gas flux,
+       gases,
+       agriculture,
+       trace gases",
+       "website_id"=>"1",
+       "sponsor_id"=>"1",
+       "status"=>"active",
+       "initiated(1i)"=>"1991",
+       "initiated(2i)"=>"6",
+       "initiated(3i)"=>"12",
+       "completed(1i)"=>"2009",
+       "completed(2i)"=>"10",
+       "completed(3i)"=>"9",
+       "core_dataset"=>"1",
+       "affiliations_attributes"=>[{"person_id"=>"158",
+       "seniority"=>"1"}]},
+       "commit"=>"Update",
+       "id"=>"16"}
+       
+      assert @dataset.update_attributes(params[:dataset])
+    end
+  end
+  
   context "within_interval? function" do
     setup do
       @dataset = Factory.create(:dataset)
