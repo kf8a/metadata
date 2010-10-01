@@ -47,6 +47,24 @@
   border-color: #000000;
   border-width: 2px;
 }
+#glbrc .sign-up {
+  display: block;
+  background-color: #71bf44;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  padding: 10px 20px 20px 20px;
+  width: 12em;
+}
+#glbrc .sign-up a {
+  background-color: #009bda;
+  color: white;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  padding: 10px;
+}
+#glbrc .sign-up a:hover { background-color: #005387; }
 #glbrc #sign-in {
   position: fixed;
   top: 0px;

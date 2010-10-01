@@ -58,10 +58,6 @@ class SessionsController < Clearance::SessionsController
   
   private
   
-  def return_to
-    '/datatables'
-  end
-  
   def set_title
     @title = @subdomain_request.upcase
   end
