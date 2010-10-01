@@ -26,6 +26,7 @@ Rails::Initializer.run do |config|
   config.gem "clearance"
   config.gem 'formtastic'
   config.gem 'zipruby'
+  config.gem 'less'
  
   config.gem 'subdomain-fu'
   #config.gem "matthuhiggins-foreigner", :lib => "foreigner"

@@ -76,6 +76,7 @@ task :production do
   role :db,  "#{host}.kbs.msu.edu", :primary => true
   
   after 'deploy:symlink', :set_subdomain_tdl
+  after 'deploy:symlink', :set_asset_host
 end
 
 desc 'Update sphinks'
@@ -104,6 +105,11 @@ end
 desc 'set subdomain tdl'
 task :set_subdomain_tdl do
   run "sed -i 's/production => 3/production => 2/' #{release_path}/config/environment.rb"
+end
+
+desc 'set asset host on production' 
+task :set_asset_host do
+  run "sed -i 's/#config.action_controller.asset_host/config.action_controller.asset_host/' #{release_path}/config/environments/production.rb"
 end
 
 desc 'link asset directory'

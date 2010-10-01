@@ -20,7 +20,7 @@ module Spreadsheet
     end
     
     def to_s
-      @xml.to_s
+      @xml.target!
     end
   end
 end

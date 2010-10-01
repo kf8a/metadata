@@ -14,7 +14,7 @@ class Datatable < ActiveRecord::Base
   has_many                :data_contributions
   has_many                :owners, :through => :ownerships, :source => :user
   has_many                :ownerships
-#has_many                :people, :through => :data_contributions
+  has_many                :people, :through => :data_contributions
   has_many                :permissions
   has_and_belongs_to_many :protocols
   belongs_to              :study
@@ -34,6 +34,8 @@ class Datatable < ActiveRecord::Base
     indexes title
     indexes description
     indexes theme.name, :as => :theme
+    indexes people.sur_name, :as => :datatable_sur_name
+    indexes people.given_name, :as => :datatable_given_name
     indexes dataset.affiliations.person.sur_name, :as => :sur_name
     indexes dataset.affiliations.person.given_name, :as => :given_name
     indexes keywords(:name), :as => :keyword
