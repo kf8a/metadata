@@ -11,7 +11,7 @@ class ProtocolsController < ApplicationController
   def index
     @themes = Theme.roots
     website =  Website.find_by_name(@subdomain_request)
-    @protocols = website.protocols.all
+    @protocols = website.protocols.find(:all, :order => 'title')
 
     respond_to do |format|
       format.html { render_subdomain }
