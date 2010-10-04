@@ -49,19 +49,32 @@ class DatatablesController < ApplicationController
     climdb_ok = accessible_by_ip
     
     @website = Website.find_by_name(@subdomain_request)
-    
+    @trusted = trusted_ip?
 
     if @datatable.dataset.valid_request?(@subdomain_request)
       respond_to do |format|
         format.html   { render_subdomain }
         format.xml    { render :xml => @datatable.to_xml}
+        format.ods do
+          if csv_ok
+            render :text => @datatable.to_ods
+          else
+            redirect_to datatable_url(@datatable)
+          end
+        end
         format.csv do
-          render :text => @datatable.to_csv_with_metadata if csv_ok
-          redirect_to datatable_url(@datatable) unless csv_ok
+          if csv_ok
+            render :text => @datatable.to_csv_with_metadata
+          else
+            redirect_to datatable_url(@datatable)
+          end
         end
         format.climdb do
-          render :text => @datatable.to_climdb if climdb_ok
-          redirect_to datatable_url(@datatable) unless climdb_ok
+          if climdb_ok
+            render :text => @datatable.to_climdb
+          else
+            redirect_to datatable_url(@datatable)
+          end
         end
       end
     else
