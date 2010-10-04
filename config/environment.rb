@@ -25,13 +25,8 @@ Rails::Initializer.run do |config|
   config.gem 'liquid'
   config.gem "clearance"
   config.gem 'formtastic'
-  # Roo needs
-   #'spreadsheet', '> 0.6.4'
-   # 'nokogiri', '>= 0.0.1'
-   # 'builder', '>= 2.1.2'
-   # 'google-spreadsheet-ruby','>= 0.0.5'
-   # 'rubyzip','>= 0.9.2'
-  #config.gem 'roo'
+  config.gem 'zipruby'
+  config.gem 'less'
  
   config.gem 'subdomain-fu'
   #config.gem "matthuhiggins-foreigner", :lib => "foreigner"

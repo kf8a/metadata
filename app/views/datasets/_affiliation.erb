@@ -2,9 +2,9 @@
   <td><%= select_tag 'dataset[affiliations_attributes][][person_id]', options_from_collection_for_select(people, :id, :last_name_first, :selected => affiliation.person_id)%></td>
   <td><%= select_tag 'dataset[affiliations_attributes][][role_id]',  options_from_collection_for_select(roles, :id, :name, :selected => affiliation.role_id) %></td>
   <td>	<%= text_field_tag 'dataset[affiliations_attributes][][seniority]', affiliation.seniority, :size => 5 %>
-    <%= hidden_field_tag 'dataset[affiliations_attributes][][id]', affiliation.id %>
+    <%= hidden_field_tag 'dataset[affiliations_attributes][][id]', affiliation.id  if affiliation.id%>
     </td>
     <td>
-		  <%= check_box_tag 'dataset[affiliations_attributes][][_delete]' %> delete
+		  <%= check_box_tag 'dataset[affiliations_attributes][][_destroy]' %> delete
 		</td>
 </tr>
