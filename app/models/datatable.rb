@@ -74,7 +74,7 @@ class Datatable < ActiveRecord::Base
     end
     h
   end
-  
+     
   def restricted?
     dataset.sponsor.try(:data_restricted?)
   end
@@ -181,7 +181,7 @@ class Datatable < ActiveRecord::Base
     else
       output = FasterCSV
     end
-    csv_string = output.generate do |csv|
+    csv_string = output.generate(:encoding=> 'u') do |csv|
       csv << variates.collect {|v| v.name }
       values.each do |row|
         csv << row.values
