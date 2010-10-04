@@ -5,9 +5,7 @@ Feature: Creating abstract
 
   Scenario: Admin creates an abstract
     Given an admin user exists with an email of "admin@person.com"
-      And the following meeting exists:
-      |title          |venue type id    |
-      |"Long Meeting" |1                |
+      And a local meeting exists with a title of "Long Meeting"
     When I sign in as "admin@person.com"/"password"
       And I go to the meetings page
       And I follow "Long Meeting"
@@ -25,9 +23,7 @@ Feature: Creating abstract
 
   Scenario: Admin forgets to put in an abstract
     Given an admin user exists with an email of "admin@person.com"
-      And the following meeting exists:
-      |title          |venue type id    |
-      |"Long Meeting" |1                |
+      And a local meeting exists with a title of "Long Meeting"
     When I sign in as "admin@person.com"/"password"
       And I go to the meetings page
       And I follow "Long Meeting"

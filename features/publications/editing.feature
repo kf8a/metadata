@@ -4,8 +4,7 @@ Feature: Editing publication
   I want to edit a publication
 
   Scenario: Admin edits a publication
-    Given a publication type exists with an id of "1"
-      And the following publication exists:
+    Given the following publication exists:
       |year |abstract           |id   |citation         |
       |1984 |"A nice abstract"  |2489 |"A nice citation"|
       And an admin user exists with an email of "admin@person.com"
@@ -25,8 +24,7 @@ Feature: Editing publication
       And I should see "An Edited Citation"
 
 Scenario: Admin fails to edit a publication
-    Given a publication type exists with an id of "1"
-      And the following publication exists:
+    Given the following publication exists:
       |year |abstract           |id   |citation         |
       |1984 |"A nice abstract"  |2489 |"A nice citation"|
       And an admin user exists with an email of "admin@person.com"
