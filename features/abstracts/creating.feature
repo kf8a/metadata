@@ -49,19 +49,19 @@ Feature: Creating abstract
     When I go to the abstracts page
       Then I should not see "An Awesome Abstract"
 
-@javascript
-Scenario: Admin deletes an abstract from the meeting page
-    Given an admin user exists with an email of "admin@person.com"
-      And the following abstract exists:
-      |title                |authors                        |abstract             |
-      |"An Awesome Abstract"|"Abstract Guy and Abstract Gal"|"A testable abstract"|
-
-    When I sign in as "admin@person.com"/"password"
-      And I go to the abstracts page
-      And I follow "An Awesome Abstract"
-      And I follow "Back to meeting"
-      And I confirm a js popup on the next step
-      And I follow "Trash"
-
-    When I go to the abstracts page
-    Then I should not see "An Awesome Abstract"
+#@javascript
+#Scenario: Admin deletes an abstract from the meeting page
+#    Given an admin user exists with an email of "admin@person.com"
+#      And the following abstract exists:
+#      |title                |authors                        |abstract             |
+#      |"An Awesome Abstract"|"Abstract Guy and Abstract Gal"|"A testable abstract"|
+#
+#    When I sign in as "admin@person.com"/"password"
+#      And I go to the abstracts page
+#      And I follow "An Awesome Abstract"
+#      And I follow "Back to meeting"
+#      And I confirm a js popup on the next step
+#      And I follow "Trash"
+#
+#    When I go to the abstracts page
+#    Then I should not see "An Awesome Abstract"
