@@ -10,8 +10,8 @@ Feature: Sign up
       And I fill in "Password" with "password"
       And I fill in "Confirm password" with ""
       And I press "Sign up"
-      Then I should see "Email is invalid"
-      And I should see "Password doesn't match confirmation"
+      Then I should see "is invalid"
+      And I should see "doesn't match confirmation"
 
     Scenario: User signs up with valid data
       Given I am in the LTER subdomain
