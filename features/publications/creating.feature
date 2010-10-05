@@ -4,8 +4,7 @@ Feature: Creating publication
   I want to create a publication
 
   Scenario: Admin creates an publication
-    Given a publication type exists with an id of "1"
-      And an admin user exists with an email of "admin@person.com"
+    Given an admin user exists with an email of "admin@person.com"
     When I sign in as "admin@person.com"/"password"
       And I go to the publications page
       And I follow "new publication"
@@ -19,8 +18,7 @@ Feature: Creating publication
       And I should see "A quick abstract"
 
   Scenario: Admin fails to create a publication
-    Given a publication type exists with an id of "1"
-      And an admin user exists with an email of "admin@person.com"
+    Given an admin user exists with an email of "admin@person.com"
     When I sign in as "admin@person.com"/"password"
       And I go to the publications page
       And I follow "new publication"
@@ -33,8 +31,7 @@ Feature: Creating publication
     Then I should not see "Publication was successfully created."
 
   Scenario: Admin deletes an publication
-    Given a publication type exists with an id of "1"
-      And the following publication exists:
+    Given the following publication exists:
       |year |abstract           |id   |citation         |
       |1984 |"A nice abstract"  |2489 |"A nice citation"|
       And an admin user exists with an email of "admin@person.com"

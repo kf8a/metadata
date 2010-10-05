@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class ThemeTest < ActiveSupport::TestCase
   should have_and_belong_to_many :datasets
