@@ -58,3 +58,8 @@ if defined?(ActiveRecord::Base)
   rescue LoadError => ignore_if_database_cleaner_not_present
   end
 end
+
+Capybara.run_server = true #Whether start server when testing
+Capybara.default_wait_time = 2 #When we testing AJAX, we can set a default wait time
+Capybara.ignore_hidden_elements = false #Ignore hidden elements when testing, make helpful when you hide or show elements using javascript
+Capybara.javascript_driver = :webdriver #default driver when you using @javascript tag

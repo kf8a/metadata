@@ -140,20 +140,11 @@ Factory.define :public_datatable, :parent => :datatable do |datatable|
 end
 
 Factory.define :meeting do |m|
-  m.venue_type  Factory.create(:venue_type)
-end
-
-Factory.define :local_venue, :parent => :venue_type do |venue|
-  venue.id    1
-  venue.name  "local"
-end
-
-Factory.define :local_meeting, :parent => :meeting do |meeting|
-  meeting.venue_type    VenueType.find(1) || Factory.create(:local_venue)
+  m.venue_type_id    1
 end
 
 Factory.define :abstract do |a|
   a.abstract  'A quick little discussion of the meeting.'
-  a.meeting   Factory.create(:meeting)
+  a.association   :meeting
 end
 

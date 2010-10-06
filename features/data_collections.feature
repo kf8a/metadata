@@ -80,10 +80,8 @@ Feature: Data Collections
       And I select "Common Name" from "sortby"
       And I select "Descending" from "sort_direction"
       And I press "Customize"
-    #Since the order of traits is not guaranteed, a better way to test this needs to be found.
-    #Then I should see "Common Name: Tiger Family: Felidae Genus: Panthera Species: P. tigris Common Name: Lion Family: Felidae Genus: Panthera Species: P. leo Common Name: American Black Bear Family: Ursidae Genus: Ursus Species: U. americanus"
+    Then I should see "Common Name: Tiger Family: Felidae Genus: Panthera Species: P. tigris Common Name: Lion Family: Felidae Genus: Panthera Species: P. leo Common Name: American Black Bear Family: Ursidae Genus: Ursus Species: U. americanus"
 
     When I select "Ascending" from "sort_direction"
       And I press "Customize"
-    #Same here
-    #Then I should see "Common Name: American Black Bear Family: Ursidae Genus: Ursus Species: U. americanus Common Name: Lion Family: Felidae Genus: Panthera Species: P. leo Common Name: Tiger Family: Felidae Genus: Panthera Species: P. tigris"
+    Then I should see "Common Name: American Black Bear Family: Ursidae Genus: Ursus Species: U. americanus Common Name: Lion Family: Felidae Genus: Panthera Species: P. leo Common Name: Tiger Family: Felidae Genus: Panthera Species: P. tigris"
