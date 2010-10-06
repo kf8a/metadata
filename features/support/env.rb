@@ -4,6 +4,8 @@
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 
+
+
 ENV["RAILS_ENV"] ||= "cucumber"
 require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
 
@@ -15,10 +17,10 @@ require 'cucumber/web/tableish'
 require 'webrat'
 require 'webrat/core/matchers'
 
+
 Webrat.configure do |config|
   config.mode = :rails
   config.application_port = 4567 # defaults to 3001. Avoid Selenium's default port, 4444
-  config.application_environment = RAILS_ENV || :cucumber
   config.open_error_files = false # Set to true if you want error pages to pop up in the browser
 end
 

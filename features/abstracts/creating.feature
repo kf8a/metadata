@@ -54,8 +54,8 @@ Feature: Creating abstract
 
 @javascript
 Scenario: Admin deletes an abstract from the meeting page
+    #This is tested in meeting_abstracts.sel
     Given the local venue type exists
-      And I am in the lter subdomain
       And an admin user exists with an email of "admin@person.com"
       And the following abstract exists:
       |title                |authors                        |abstract             |
