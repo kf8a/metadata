@@ -12,18 +12,18 @@ require 'cucumber/rails/world'
 require 'cucumber/rails/active_record'
 require 'cucumber/web/tableish'
 
+require 'webrat'
+require 'webrat/core/matchers'
+
+Webrat.configure do |config|
+  config.mode = :rails
+  config.application_port = 4567 # defaults to 3001. Avoid Selenium's default port, 4444
+  config.application_environment = RAILS_ENV || :cucumber
+  config.open_error_files = false # Set to true if you want error pages to pop up in the browser
+end
+
 require 'factory_girl'
 require 'factory_girl/step_definitions'
-
-require 'capybara/rails'
-require 'capybara/cucumber'
-require 'capybara/session'
-require 'cucumber/rails/capybara_javascript_emulation' # Lets you click links with onclick javascript handlers without using @culerity or @javascript
-# Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
-# order to ease the transition to Capybara we set the default here. If you'd
-# prefer to use XPath just remove this line and adjust any selectors in your
-# steps to use the XPath syntax.
-Capybara.default_selector = :css
 
 # If you set this to false, any error raised from within your app will bubble 
 # up to your step definition and out to cucumber unless you catch it somewhere
@@ -58,8 +58,3 @@ if defined?(ActiveRecord::Base)
   rescue LoadError => ignore_if_database_cleaner_not_present
   end
 end
-
-Capybara.run_server = true #Whether start server when testing
-Capybara.default_wait_time = 2 #When we testing AJAX, we can set a default wait time
-Capybara.ignore_hidden_elements = false #Ignore hidden elements when testing, make helpful when you hide or show elements using javascript
-Capybara.javascript_driver = :webdriver #default driver when you using @javascript tag
