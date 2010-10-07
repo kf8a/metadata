@@ -140,12 +140,11 @@ Factory.define :public_datatable, :parent => :datatable do |datatable|
 end
 
 Factory.define :meeting do |m|
-  m.venue_type  Factory.create(:venue_type)
+  m.venue_type_id    1
 end
 
-  
 Factory.define :abstract do |a|
   a.abstract  'A quick little discussion of the meeting.'
-  a.meeting   Factory.create(:meeting)
+  a.association   :meeting
 end
 

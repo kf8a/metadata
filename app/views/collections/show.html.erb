@@ -94,7 +94,7 @@
         <% if @customizer.accepts?(row) %>
           <tr  class="<%= cycle('even','odd') -%>">
             <td>
-              <% row.keys.each do |key| %>
+              <% row.keys.sort.each do |key| %>
                 <% next unless row[key] %>
                 <% next if key == "id" %>
                 <%= key.titleize + ": " + row[key] %><br />

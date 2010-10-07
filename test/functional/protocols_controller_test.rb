@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 require 'protocols_controller'
 
 class ProtocolsControllerTest < ActionController::TestCase
