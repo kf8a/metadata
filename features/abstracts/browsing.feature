@@ -4,7 +4,8 @@ Feature: Browsing Abstract
   I want to see all of the abstracts
 
   Scenario: Going to the abstract index to see abstracts
-    Given the following abstract exists:
+    Given the local venue type exists
+      And the following abstract exists:
       |title                |authors                        |abstract|
       |"An Awesome Abstract"|"Abstract Guy and Abstract Gal"|"A testable abstract"|
 

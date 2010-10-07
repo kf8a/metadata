@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
 
@@ -12,7 +12,7 @@ class UserTest < ActiveSupport::TestCase
   should have_many :memberships
   should have_many :sponsors
   
-  should validate_uniqueness_of(:email).case_insensitive
+  should validate_uniqueness_of(:email).case_insensitive.with_message(/this email account is already registered/)
   
   context 'a user' do
     setup do

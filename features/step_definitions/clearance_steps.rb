@@ -16,6 +16,14 @@ Given /^I have signed in with "(.*)"\/"(.*)"$/ do |email, password|
   And %{I sign in as "#{email}/#{password}"}
 end
 
+Then /^I should be signed in$/ do
+  assert controller.signed_in?
+end
+
+Then /^I should be signed out$/ do
+  assert ! controller.signed_in?
+end
+
 # Emails
 
 Then /^a confirmation message should be sent to "(.*)"$/ do |email|

@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class CitationsControllerTest < ActionController::TestCase
 
@@ -52,7 +52,7 @@ class CitationsControllerTest < ActionController::TestCase
         get :download, :id => @citation
       end
       
-      should redirect_to('the sign in page') { sign_up_url }
+      should redirect_to('the sign in page') { sign_in_url }
     end
 
     context 'POST: create' do

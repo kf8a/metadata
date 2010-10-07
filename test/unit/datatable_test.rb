@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class DatatableTest < ActiveSupport::TestCase
   
@@ -408,6 +408,7 @@ class DatatableTest < ActiveSupport::TestCase
       
       should 'respond to to_ods' do
         assert @datatable.respond_to?('to_ods')
+        assert @datatable.to_ods
       end
       
     end

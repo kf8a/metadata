@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 require 'rexml/document'
+require 'spreadsheet'
 require 'csv'
 include REXML
 
@@ -13,7 +14,7 @@ class Datatable < ActiveRecord::Base
   has_many                :data_contributions
   has_many                :owners, :through => :ownerships, :source => :user
   has_many                :ownerships
-#has_many                :people, :through => :data_contributions
+  has_many                :people, :through => :data_contributions
   has_many                :permissions
   has_and_belongs_to_many :protocols
   belongs_to              :study
@@ -33,6 +34,8 @@ class Datatable < ActiveRecord::Base
     indexes title
     indexes description
     indexes theme.name, :as => :theme
+    indexes people.sur_name, :as => :datatable_sur_name
+    indexes people.given_name, :as => :datatable_given_name
     indexes dataset.affiliations.person.sur_name, :as => :sur_name
     indexes dataset.affiliations.person.given_name, :as => :given_name
     indexes keywords(:name), :as => :keyword
@@ -71,7 +74,7 @@ class Datatable < ActiveRecord::Base
     end
     h
   end
-  
+     
   def restricted?
     dataset.sponsor.try(:data_restricted?)
   end
@@ -191,7 +194,7 @@ class Datatable < ActiveRecord::Base
     # TODO test if file exists and send that
     
     # stupid microsofts
-    result = data_access_statement + data_source +  to_csv
+    result = data_access_statement + data_source +  to_csv.force_encoding("UTF-8")
     if is_utf_8
       result = Iconv.conv('utf-16','utf-8', result)
     end
@@ -204,13 +207,45 @@ class Datatable < ActiveRecord::Base
   end
   
   def to_xls
-    values = perfom_query(limited=false)
-    
+ 
   end
   
   def to_ods
-    values = perfom_query(limited=false)
-    
+    values = perform_query(limited=false)
+    sheet = Spreadsheet::Builder.new
+    sheet.spreadsheet do 
+      sheet.table "Data Use Policy" do
+        data_access_statement.each_line do |line|
+          sheet.row do 
+            sheet.cell line
+          end
+        end
+        data_source.each_line do |source|
+          sheet.row do
+            sheet.cell source
+          end
+        end
+      end
+      
+      sheet.table "Data" do
+        sheet.header do
+       
+          sheet.row do
+            variates.each do |variate|
+              sheet.cell variate.name
+            end
+          end
+        end
+        values.each do |elements|
+          sheet.row do  
+            elements.values.each do |element| 
+              sheet.cell element
+            end
+          end
+        end
+      end
+    end
+    sheet.content!
   end
     
   def data_contact

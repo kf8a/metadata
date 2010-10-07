@@ -4,7 +4,7 @@ Feature: Browsing Publications
   I want to see all of the publications
 
   Scenario: Going to the publication index to see publications
-    Given a publication type exists with an id of "1"
+    Given the journal articles publication type exists
       And the following publication exists:
       |year   |abstract         |id   |citation|
       |1984 |"A nice abstract"  |2488 |"Cool citation"|

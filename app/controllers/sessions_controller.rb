@@ -3,7 +3,6 @@ class SessionsController < Clearance::SessionsController
   layout :site_layout
   
   def new
-    logger.info "subdomain: #{@subdomain_request}"
     render_subdomain
   end
 
@@ -58,6 +57,7 @@ class SessionsController < Clearance::SessionsController
   end
   
   private
+  
   def set_title
     @title = @subdomain_request.upcase
   end

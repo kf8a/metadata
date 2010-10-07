@@ -10,7 +10,6 @@
 </div>
 
 <% semantic_form_for @user do |form| %>
-  <%= form.error_messages %>
   <%= hidden_field_tag :invite_code, @invite_code %>
   
   <%= render :partial => "/users/inputs", :locals => { :form => form } %>

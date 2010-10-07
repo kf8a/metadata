@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class AbstractTest < ActiveSupport::TestCase
   should validate_presence_of :meeting
