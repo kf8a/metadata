@@ -37,7 +37,7 @@ Feature: Assign owners to datatables
       And I press "Add Owners"
     Then I should see "bill@person.com"
       And  "bill@person.com" should own the datatable "kbs001"
-  
+
   Scenario: An admin removes ownership from a user
     Given a user exists and is confirmed with an email of "admin@person.com"
       And "admin@person.com" is an administrator

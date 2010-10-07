@@ -17,7 +17,7 @@ Feature: Browsing Publications
       Then I should see "A nice abstract"
 
   Scenario: Searching the publications index
-    Given a publication type exists with an id of "1"
+    Given the journal articles publication type exists
       And the following publications exist:
       |year   |abstract         |id   |citation|
       |1984 |"A nice abstract"  |2488 |"Cool citation"|

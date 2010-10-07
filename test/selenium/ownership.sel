@@ -3,14 +3,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://localhost:3000/" />
-<title>meetings_abstracts</title>
+<link rel="selenium.base" href="" />
+<title>ownership</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">meetings_abstracts</td></tr>
+<tr><td rowspan="1" colspan="3">ownership</td></tr>
 </thead><tbody>
+<!--Requires 2 datatables named kbs001 and kbs002-->
+<!--Requires: cathy@person is a user-->
+<!--Requires bill@person is a user-->
 <!--Requires: admin@person.com is an admin-->
 <tr>
 	<td>open</td>
@@ -39,57 +42,57 @@
 </tr>
 <tr>
 	<td>open</td>
-	<td>/meetings/new</td>
+	<td>/ownerships/new</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>meeting_title</td>
-	<td>Long Meeting</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Long Meeting</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Add abstract</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>abstract_title</td>
-	<td>An Awesome Abstract</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>abstract_authors</td>
-	<td>Awesome Guy and Awesome Gal</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>abstract_abstract</td>
-	<td>A testable abstract</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Awesome Guy and Awesome Gal An Awesome Abstract Edit</td>
-	<td></td>
+	<td>select</td>
+	<td>user_1</td>
+	<td>label=bill@person.com</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//img[@alt='Trash']</td>
+	<td>//input[@value='Add Another User']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>user_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>user_2</td>
+	<td>label=cathy@person.com</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>datatable_1</td>
+	<td>label=kbs001</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//input[@value='Add Another Datatable']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>datatable_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>datatable_2</td>
+	<td>label=kbs002</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>commit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Revoke ownership from bill@person.com']</td>
 	<td></td>
 </tr>
 <tr>
@@ -98,18 +101,33 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextNotPresent</td>
-	<td>Awesome Guy and Awesome Gal An Awesome Abstract Edit</td>
+	<td>clickAndWait</td>
+	<td>//input[@value='Revoke ownership from cathy@person.com']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/ownerships</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Venue name Meeting</td>
+	<td>//input[@value='Revoke ownership from bill@person.com']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//img[@alt='Trash']</td>
+	<td>assertConfirmation</td>
+	<td>Are you sure?</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Revoke ownership from cathy@person.com']</td>
 	<td></td>
 </tr>
 <tr>
