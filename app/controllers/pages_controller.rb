@@ -51,6 +51,7 @@ class PagesController < ApplicationController
   
   def destroy 
     @page.destroy
+    redirect_to :action => 'index'
   end
   
   private

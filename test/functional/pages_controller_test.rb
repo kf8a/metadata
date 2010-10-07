@@ -51,7 +51,13 @@ class PagesControllerTest < ActionController::TestCase
       should redirect_to("the show page") {page_url(assigns(:page))}
     end
 
-    context 'DELETE :delete' do
+    context 'DELETE :destroy' do
+      setup do
+        @page = Factory.create :page
+        delete :destroy, :id => @page
+      end
+
+      should redirect_to("the pages page") {pages_url}
     end
   end
   
