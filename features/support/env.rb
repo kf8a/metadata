@@ -4,7 +4,10 @@
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 
-
+if RUBY_VERSION > "1.9"
+  require 'simplecov'
+  SimpleCov.start 'rails'
+end
 
 ENV["RAILS_ENV"] ||= "cucumber"
 require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
