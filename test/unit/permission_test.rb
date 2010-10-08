@@ -72,9 +72,46 @@ class PermissionTest < ActiveSupport::TestCase
        
       #TODO after saving the permission becomes invalid. Don't know if that would cause problems elsewere.
       assert p1.valid?
-      assert p1.save  
-      assert !p1.valid?
+      assert p1.save
       assert !p2.valid?
+    end
+
+    should 'allow permissions to be updated' do
+      user         = Factory :user
+
+      p1           = Permission.new
+      p1.datatable = @datatable
+      p1.owner     = @owner
+      p1.user      = user
+      p1.save
+
+      permission = Permission.find_by_datatable_id_and_owner_id_and_user_id(@datatable, @owner, user)
+      permission.decision = "approved"
+      assert permission.valid?
+      assert permission.save
+    end
+
+    should 'allow permissions from multiple owners' do
+      user         = Factory :user
+
+      owner2       = Factory :user
+      Factory.create(:ownership, :user => owner2, :datatable => @datatable)
+      @datatable.reload
+      assert @datatable.owners == [@owner, owner2]
+
+      p1           = Permission.new
+      p1.datatable = @datatable
+      p1.owner     = @owner
+      p1.user      = user
+      p1.save
+
+      p2 = Permission.new
+      p2.datatable = @datatable
+      p2.owner     = owner2
+      p2.user      = user
+
+      assert p2.valid?
+      assert p2.save
     end
   end
 end

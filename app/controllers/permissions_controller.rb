@@ -33,7 +33,7 @@ class PermissionsController < ApplicationController
     user = User.find_by_email(params[:email])
     flash[:notice] = 'No user with that email' unless user
     owner = current_user
-    permission = Permission.find_by_user_id_and_datatable_id_and_owner_id(user.id, @datatable.id, owner.id)
+    permission = Permission.find_by_user_id_and_datatable_id_and_owner_id(user, @datatable, owner)
     if permission
       permission.decision = "approved"
     else
@@ -70,7 +70,7 @@ class PermissionsController < ApplicationController
   def deny
     user = User.find_by_email(params[:email])
     owner = current_user
-    permission = Permission.find_by_user_id_and_datatable_id_and_owner_id(user.id, @datatable.id, owner.id)
+    permission = Permission.find_by_user_id_and_datatable_id_and_owner_id(user, @datatable, owner)
     if permission
       permission.decision = "denied"
     else
