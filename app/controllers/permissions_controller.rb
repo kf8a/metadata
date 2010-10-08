@@ -97,11 +97,6 @@ class PermissionsController < ApplicationController
     end
   end
 
-  #override to allow owners
-  def admin?
-    true
-  end
-  
   def require_owner
     unless current_user.try(:owns?, @datatable)
       flash[:notice] = "You must be signed in as the owner of the datatable in order to access this page"
