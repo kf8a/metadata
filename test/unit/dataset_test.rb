@@ -23,7 +23,33 @@ class DatasetTest < ActiveSupport::TestCase
       assert @dataset.respond_to?('temporal_extent')
     end
   end
-  
+
+  context 'datatable_people function' do
+    context 'for a dataset with datatables and people' do
+      setup do
+        @dataset = Factory.create(:dataset)
+        datatable1 = Factory.create(:datatable, :dataset => @dataset)
+        @dataset.reload
+        datatable2 = Factory.create(:datatable, :dataset => @dataset)
+        @dataset.reload
+        @person1 = Factory.create(:person, :given_name => "Angela")
+        @person2 = Factory.create(:person, :given_name => "Bob")
+        assert DataContribution.create(:datatable => datatable1, :person => @person1, :role => Factory.create(:role))
+        datatable1.reload
+        @dataset.reload
+        assert DataContribution.create(:datatable => datatable2, :person => @person2, :role => Factory.create(:role))
+        datatable2.reload
+        @dataset.reload
+      end
+
+      should 'list all people' do
+        @dataset.reload
+        assert @dataset.datatable_people.include?(@person1)
+        assert @dataset.datatable_people.include?(@person2)
+      end
+    end
+  end
+
   context 'no temporal extent' do
     setup do
       @dataset = Factory.create(:dataset, :initiated => '2000-1-1', 
