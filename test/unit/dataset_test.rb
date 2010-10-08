@@ -89,29 +89,6 @@ class DatasetTest < ActiveSupport::TestCase
     end
   end
   
-  context "has person function" do
-    setup do
-      @dataset = Factory.create(:dataset)
-    end
-    
-    context "with a person affiliated with the dataset" do
-      setup do
-        @person = Factory.create(:person)
-        @affiliation = Factory.create(:affiliation, :person => @person, :dataset => @dataset)
-      end
-      
-      should "return true for that person" do
-        assert @affiliation
-        assert @dataset.has_person(@person)
-      end
-      
-      should "return false for someone else" do
-        @stranger = Factory.create(:person)
-        assert !@dataset.has_person(@stranger)
-      end
-    end
-  end
-  
   context 'set affiliations' do
     setup do
       @dataset = Factory.create(:dataset)
