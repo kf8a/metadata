@@ -32,11 +32,4 @@ class Study < ActiveRecord::Base
   def self_and_descendants_datatables
     descendants.collect {|d| d.datatables }.flatten + datatables
   end
-  
-  def self_and_descendants_themed_datatables
-    my_datatables = descendants.collect {|d| d.datatables }.flatten
-    all_datatables = my_datatables + datatables    
-    all_datatables.collect {|d| d.theme ? d : nil}.compact
-  end
-  
 end
