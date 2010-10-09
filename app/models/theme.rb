@@ -40,9 +40,4 @@ class Theme < ActiveRecord::Base
       datatables.collect {|table| table if table.study == study }.compact
     end
   end
-  
-  def self_and_decendants_ids
-    my_ids = descendants.collect {|i| i.id}.flatten
-    my_ids.push(id)
-  end
 end
