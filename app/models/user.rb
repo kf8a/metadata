@@ -40,11 +40,6 @@ class User < ActiveRecord::Base
     permission && permission.decision != "denied"
   end
 
-  def denied_access?(datatable)
-    !datatable.deniers_of(self).blank?
-  end
-
-
   protected
 
   def downcase_email

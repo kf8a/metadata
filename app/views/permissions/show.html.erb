@@ -4,15 +4,15 @@
 
 <% @datatable.requesters.each do |requester| %>
   <% next if @permitted_users.include?(requester) %>
-  <% if requester.denied_access?(@datatable) %>
+  <% if @datatable.deniers_of(requester).blank? %>
+    <p><%= requester.email %> has requested permission.</p>
+  <% else %>
     <p>
       <%= requester.email %> has requested permission but it has been denied by:
       <% @datatable.deniers_of(requester).each do |denier| %>
         <%= denier.email %>
       <% end %>
     </p>
-  <% else %>
-    <p><%= requester.email %> has requested permission.</p>
   <% end %>
   <%= button_to "Grant permission to #{requester.email}", { 
       :action => "create", 
