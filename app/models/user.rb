@@ -35,10 +35,6 @@ class User < ActiveRecord::Base
     role == 'admin'
   end
   
-  def permitted?(datatable)
-    datatable.permitted?(self)
-  end
-  
   def has_permission_from?(owner, datatable)
     permission = Permission.find_by_user_id_and_owner_id_and_datatable_id(self, owner, datatable)
     permission && permission.decision != "denied"
