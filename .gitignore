@@ -23,5 +23,4 @@ nbproject/
 config/development.sphinx.conf
 assets/
 coverage/
-Gemfile.lock
 .bundle
