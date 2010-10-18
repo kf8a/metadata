@@ -1,3 +1,5 @@
+require "bundler/capistrano"
+
 set :application, "metadata"
 
 #set :repository,  "/Users/bohms/code/metadata"

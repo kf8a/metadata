@@ -1,5 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
-require 'meetings_controller'
+require File.expand_path('../../test_helper',__FILE__) 
 
 # Re-raise errors caught by the controller.
 class MeetingsController; def rescue_action(e) raise e end; end

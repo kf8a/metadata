@@ -8,7 +8,7 @@ require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'test_help'
 require 'shoulda'
 require 'factory_girl' 
-require "test/shoulda_macros/paperclip" #copied over from the gem
+#require "test/shoulda_macros/paperclip" #copied over from the gem
 
 Dir.glob(RAILS_ROOT + "/test/factories/*.rb").each do |factory| 
   require factory 

@@ -1,5 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
-require 'projects_controller'
+require File.expand_path('../../test_helper',__FILE__) 
 
 class ProjectsControllerTest < ActionController::TestCase
 

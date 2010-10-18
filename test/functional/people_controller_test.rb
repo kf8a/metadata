@@ -1,8 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
-require 'people_controller'
-
-# Re-raise errors caught by the controller.
-class PeopleController; def rescue_action(e) raise e end; end
+require File.expand_path('../../test_helper',__FILE__) 
 
 class PeopleControllerTest < ActionController::TestCase
   fixtures :people, :role_types, :roles,  :affiliations
