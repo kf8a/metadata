@@ -14,6 +14,7 @@ gem 'formtastic'
 gem 'zipruby'
 gem 'less'
 gem 'subdomain-fu'
+gem 'thin'
 
 gem 'rcov'  #this is called from rake, but should only be called in testing not production
 
