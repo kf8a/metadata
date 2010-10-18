@@ -15,6 +15,7 @@ gem 'zipruby'
 gem 'less'
 gem 'subdomain-fu'
 
+gem 'rcov'  #this is called from rake, but should only be called in testing not production
 
 group :development do
   # bundler requires these gems in development
@@ -26,7 +27,6 @@ group :test do
     gem 'simplecov'
     gem 'simplecov-html'
   end
-  gem 'rcov'
   gem "shoulda"
   gem "factory_girl" 
 
