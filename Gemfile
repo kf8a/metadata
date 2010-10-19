@@ -1,5 +1,10 @@
-source :gemcutter
-gem "rails", "=2.3.10"
+source 'http://rubygems.org'
+
+gem 'rails', '3.0.1'
+
+# Bundle edge Rails instead:
+# gem 'rails', :git => 'git://github.com/rails/rails.git'
+
 gem "pg"
 gem "rack-openid"
 gem "fastercsv" unless RUBY_VERSION > "1.9"
@@ -13,7 +18,7 @@ gem "clearance"
 gem 'formtastic'
 gem 'zipruby'
 gem 'less'
-gem 'subdomain-fu'
+gem "subdomain-fu", :git => "git://github.com/nhowell/subdomain-fu.git"
 gem 'thin'
 
 gem 'metric_fu'

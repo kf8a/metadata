@@ -1,10 +1,10 @@
 Metadata::Application.routes.draw do
   match '/send_invitation/:id' => 'invites#send_invitation', :as => :send_invitation
   match '/signup/:invite_code' => 'users#new', :as => :redeem_invitation
-  resource :session
+  resource :session, :controller => 'sessions'
   resource :users
   match 'sign_in' => 'sessions#new', :as => :sign_in
-  match 'sign_out' => 'sessions#destroy', :as => :sign_out, :method => delete
+  match 'sign_out' => 'sessions#destroy', :as => :sign_out, :constraints => { :method => 'delete' }
   match 'sign_up' => 'users#new', :as => :sign_up
   resources :abstracts
   resources :affiliations
@@ -50,13 +50,13 @@ Metadata::Application.routes.draw do
   end
   resources :permissions do
     collection do
-      any :create
-      any :deny
+      post :create
+      put :deny
     end
   end
   resources :permission_requests do
     collection do
-      any :create
+      post :create
     end
   end
   resources :projects
@@ -73,8 +73,7 @@ Metadata::Application.routes.draw do
   resources :units
   resources :uploads
   resources :variates
-  match '/assets/citations/:attachment/:id/:style/:basename.:extension' => 'citations#download', :constraints => { :method => get }
-  match '/' => 'datatables#index'
+  match '/assets/citations/:attachment/:id/:style/:basename.:extension' => 'citations#download', :constraints => { :method => 'get' }
+  root :to => 'datatables#index'
   match ':controller/service.wsdl' => '#wsdl'
-  Clearance::Routes.draw(map)
 end
