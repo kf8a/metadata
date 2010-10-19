@@ -41,5 +41,5 @@ group :cucumber do
 
   gem 'cucumber-rails'
   gem 'database_cleaner'
-  gem 'capybara'
+  gem 'webrat'
 end

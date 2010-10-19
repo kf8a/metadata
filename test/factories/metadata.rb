@@ -1,3 +1,8 @@
+#Sequences
+Factory.sequence :email do |n|
+  "user#{n}@example.com"
+end
+
 #Independent factories#########
 Factory.define :affiliation do |affiliate|
 end
