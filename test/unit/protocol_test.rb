@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.expand_path('../../test_helper',__FILE__) 
 
 class ProtocolTest < ActiveSupport::TestCase
   should have_and_belong_to_many :websites

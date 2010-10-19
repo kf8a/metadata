@@ -1,8 +1,4 @@
-require 'test_helper'
-require 'units_controller'
-
-# Re-raise errors caught by the controller.
-class UnitsController; def rescue_action(e) raise e end; end
+require File.expand_path('../../test_helper',__FILE__) 
 
 class UnitsControllerTest < ActionController::TestCase
   def setup

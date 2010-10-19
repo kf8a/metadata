@@ -1,5 +1,4 @@
-require 'test_helper'
-require 'datasets_controller'
+require File.expand_path('../../test_helper',__FILE__) 
 
 class DatasetsControllerTest < ActionController::TestCase
   

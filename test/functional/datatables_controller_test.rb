@@ -1,5 +1,4 @@
-require 'test_helper'
-require 'datatables_controller'
+require File.expand_path('../../test_helper',__FILE__) 
 
 class DatatablesControllerTest < ActionController::TestCase
   
