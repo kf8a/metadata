@@ -16,7 +16,7 @@ gem 'less'
 gem 'subdomain-fu'
 gem 'thin'
 
-gem 'rcov'  #this is called from rake, but should only be called in testing not production
+gem 'metric_fu'
 
 group :development do
   # bundler requires these gems in development
