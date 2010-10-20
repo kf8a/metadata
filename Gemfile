@@ -5,11 +5,10 @@ gem 'rails', '3.0.1'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem "pg"
-gem "rack-openid"
-gem "fastercsv" unless RUBY_VERSION > "1.9"
-gem "acts-as-taggable-on"
-gem "paperclip"
+gem 'pg'
+gem 'rack-openid'
+gem 'acts-as-taggable-on'
+gem 'paperclip'
 gem 'nokogiri'
 gem 'RedCloth'
 gem 'thinking-sphinx',
@@ -18,11 +17,11 @@ gem 'thinking-sphinx',
   :require => 'thinking_sphinx'
 
 gem 'liquid'
-gem "clearance"
+gem 'clearance', :git => 'git://github.com/thoughtbot/clearance.git'
 gem 'formtastic'
 gem 'zipruby'
 gem 'less'
-gem "subdomain-fu", :git => "git://github.com/nhowell/subdomain-fu.git"
+gem 'subdomain-fu', :git => 'git://github.com/nhowell/subdomain-fu.git'
 gem 'thin'
 
 gem 'metric_fu'
