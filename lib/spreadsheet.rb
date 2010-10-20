@@ -12,7 +12,7 @@ require 'spreadsheet/builder'
 Spreadsheet::XmlBuilder =  Spreadsheet::BuilderXmlBuilder
 # end
 
-if defined?(RAILS_ENV)
+if defined?(Rails.env)
   require 'action_view'
 
   Mime::Type.register 'application/vnd.oasis.opendocument.spreadsheet', :ods

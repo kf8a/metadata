@@ -1,6 +1,6 @@
 class InvitesController < ApplicationController
   
-  before_filter :admin? unless RAILS_ENV['development']
+  before_filter :admin? unless Rails.env == 'development'
   
   # GET /invites
   # GET /invites.xml

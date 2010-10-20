@@ -3,7 +3,7 @@ class DatasetsController < ApplicationController
   layout :site_layout
   
   before_filter :allow_on_web, :except => [:autocomplete_for_keyword_list]
-  before_filter :admin?, :except => [:index, :show, :auto_complete_for_keyword_list] if ENV["RAILS_ENV"] == 'production'
+  before_filter :admin?, :except => [:index, :show, :auto_complete_for_keyword_list] if Rails.env == 'production'
   before_filter :get_dataset, :only => [:show, :edit, :update, :destroy]
   
   #layout proc {|controller| controller.request.format == :eml ? false : 'application'}

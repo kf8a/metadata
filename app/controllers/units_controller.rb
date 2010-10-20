@@ -1,6 +1,6 @@
 class UnitsController < ApplicationController
   
-  before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
+  before_filter :admin?, :except => [:index, :show]  if Rails.env == 'production'
   before_filter :get_unit, :only => [:edit, :update, :show]
   before_filter :is_custom_unit, :only => ['edit','update']
   

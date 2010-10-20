@@ -1,6 +1,6 @@
 class TemplatesController < ApplicationController
   
-  before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
+  before_filter :admin?, :except => [:index, :show]  if Rails.env == 'production'
   
   def index
     @templates = Template.find(:all)

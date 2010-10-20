@@ -2,7 +2,7 @@ class PeopleController < ApplicationController
   
   layout :site_layout
   
-  before_filter :admin?, :except => [:index, :show, :alphabetical, :emeritus] unless ENV["RAILS_ENV"] == 'development'
+  before_filter :admin?, :except => [:index, :show, :alphabetical, :emeritus] unless Rails.env == 'development'
   before_filter :get_person, :only => [:show, :edit, :update, :destroy]
   before_filter :get_people, :only => [:index, :alphabetical, :emeritus, :show_all]
   

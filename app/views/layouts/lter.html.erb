@@ -52,13 +52,13 @@
 			<%= yield  %>
 		</div>
 		<div id='navigation'>
-			<%= render :file => "#{RAILS_ROOT}/public/system/navigation.html"%>
+			<%= render :file => "#{Rails.root}/public/system/navigation.html"%>
 			<% if controller.controller_name == 'datasets' || controller.controller_name == 'datatables' || controller.controller_name == 'protocols' %>
-			  <%= render :file => "#{RAILS_ROOT}/public/system/network_db.html"%>
+			  <%= render :file => "#{Rails.root}/public/system/network_db.html"%>
 			<% end %>
 		</div>
 		<div id='footer'>
-			<%= render :file  => "#{RAILS_ROOT}/public/system/footer.html"%>
+			<%= render :file  => "#{Rails.root}/public/system/footer.html"%>
 		</div>
 	</div>
   
