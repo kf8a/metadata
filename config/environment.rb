@@ -5,10 +5,12 @@ require File.expand_path('../application', __FILE__)
 Metadata::Application.initialize!
 
 #Maybe these belong here
-SubdomainFu.tld_sizes = {:development => 0,
-                         :cucumber => 0,
-                         :test => 0,
-                         :production => 3} # set all at once (also the defaults)
+SubdomainFu.configure do |config|
+  config.tld_sizes = {:development => 0,
+                       :cucumber => 0,
+                       :test => 0,
+                       :production => 3}
+end
 
 
 OpenIdAuthentication.store = :file
