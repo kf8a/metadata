@@ -4,12 +4,7 @@
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
 
-if RUBY_VERSION > "1.9"
-  require 'simplecov'
-  SimpleCov.start 'rails'
-end
-
-ENV["RAILS_ENV"] ||= "cucumber"
+ENV["RAILS_ENV"] ||= "test"
 require File.expand_path(File.dirname(__FILE__) + '/../../config/environment')
 
 require 'cucumber/formatter/unicode' # Remove this line if you don't want Cucumber Unicode support
@@ -20,15 +15,11 @@ require 'cucumber/web/tableish'
 require 'webrat'
 require 'webrat/core/matchers'
 
-
 Webrat.configure do |config|
   config.mode = :rails
-  config.application_port = 4567 # defaults to 3001. Avoid Selenium's default port, 4444
   config.open_error_files = false # Set to true if you want error pages to pop up in the browser
 end
 
-require 'factory_girl'
-require 'factory_girl/step_definitions'
 
 # If you set this to false, any error raised from within your app will bubble 
 # up to your step definition and out to cucumber unless you catch it somewhere
