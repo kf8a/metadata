@@ -44,10 +44,12 @@ group :test do
 end
 
 group :cucumber do
+  gem 'capybara'
   gem "shoulda"
   gem "factory_girl"
-
   gem 'cucumber-rails'
+  gem 'cucumber'
+  gem 'spork'
+  gem 'launchy'
   gem 'database_cleaner'
-  gem 'webrat'
 end
