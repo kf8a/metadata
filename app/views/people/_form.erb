@@ -94,5 +94,7 @@
 		</tr>
 	<% end %>
 </table>
-<%= link_to_remote 'Add Role',:url => {:controller => :affiliations, :action => :new} %>
+<%= link_to 'Add Role',
+      :url => {:controller => :affiliations, :action => :new},
+      :remote => true %>
 <% end%>

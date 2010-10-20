@@ -9,10 +9,16 @@
 <ul>
 	<% @meeting.abstracts.each do | abstract| %>
 	  <li id="abstract_<%= abstract.id %>" class="citation">
-		  <%= truncate(abstract.authors, :length=>80) %>
-		  <%= link_to "#{abstract.title}", abstract_path(abstract) %>
-		  <%= link_to 'Edit', edit_abstract_path(abstract) if admin? %>
-		  <%= link_to_remote image_tag("trash.gif"), :url => abstract_path(abstract), :method => 'delete', :confirm => 'Are you sure?' if admin?%>
+            <%= truncate(abstract.authors, :length=>80) %>
+            <%= link_to "#{abstract.title}", abstract_path(abstract) %>
+            <% if admin? %>
+              <%= link_to 'Edit', edit_abstract_path(abstract) %>
+              <%= link_to image_tag("trash.gif"),
+                  :url => abstract_path(abstract),
+                  :method => 'delete',
+                  :confirm => 'Are you sure?',
+                  :remote => true %>
+            <% end %>
 	  </li>
 	<% end %>
 </ul>
