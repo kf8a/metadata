@@ -40,3 +40,7 @@ module Metadata
     config.filter_parameters += [:password]
   end
 end
+
+#Maybe these belong here
+ActionController::Base.cache_store = :file_store, "tmp/cache" #"/path/to/cache/directory"
+Struct.new('Crumb', :url, :name)
