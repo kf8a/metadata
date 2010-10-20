@@ -2,7 +2,7 @@
 
 <%= error_messages_for :person %>
 
-<% form_for(:person, :url => people_path) do |f| %>
+<%= form_for(:person, :url => people_path) do |f| %>
 	<%= render :partial=>"form" , :locals=>{:f =>  f, :person => @person}%>
   <p>
     <%= submit_tag "Create" %>

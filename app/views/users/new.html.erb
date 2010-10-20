@@ -9,7 +9,7 @@
   <div id='sign-in-arrow'></div>
 </div>
 
-<% semantic_form_for @user do |form| %>
+<%= semantic_form_for @user do |form| %>
   <%= hidden_field_tag :invite_code, @invite_code %>
   
   <%= render :partial => "/users/inputs", :locals => { :form => form } %>

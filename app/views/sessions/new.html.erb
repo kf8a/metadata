@@ -8,7 +8,7 @@
    <%= link_to "Sign up", sign_up_path %>
 </div>
 
-<% semantic_form_for :session, :url => session_path do |form| %>
+<%= semantic_form_for :session, :url => session_path do |form| %>
   <% form.inputs do %>
 
     <%= form.input :email , :required => false, :input_html => { :size => 25 } %>

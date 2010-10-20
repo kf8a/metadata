@@ -2,7 +2,7 @@
 
 <%= error_messages_for :datatable %>
 
-<% form_for(:datatable, :url => datatable_path(@datatable), :html => { :method => :put }) do |f| %>
+<%= form_for(:datatable, :url => datatable_path(@datatable), :html => { :method => :put }) do |f| %>
 	<%= render :partial => 'form', :locals => {:f => f, :theme => @theme, :core_areas => @core_areas, :datatable => @datatable, :studies => @studies, :people => @people, :units => @units} %>
   <p>
     <%= submit_tag "Update" %>
