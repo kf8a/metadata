@@ -12,7 +12,11 @@ gem "acts-as-taggable-on"
 gem "paperclip"
 gem 'nokogiri'
 gem 'RedCloth'
-gem 'thinking-sphinx', "=1.3.18"
+gem 'thinking-sphinx',
+  :git     => 'git://github.com/freelancing-god/thinking-sphinx.git',
+  :branch  => 'rails3',
+  :require => 'thinking_sphinx'
+
 gem 'liquid'
 gem "clearance"
 gem 'formtastic'

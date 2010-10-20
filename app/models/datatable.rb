@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 require 'rexml/document'
-require 'spreadsheet'
+#require 'spreadsheet'
 require 'csv'
 include REXML
 
@@ -44,7 +44,7 @@ class Datatable < ActiveRecord::Base
     indexes name
     has dataset.website_id, :as => :website
     where "datatables.on_web is true and datasets.on_web"
-    
+
     #set_property :field_weights => {:keyword => 20, :theme => 20, :title => 10}
   end
   
