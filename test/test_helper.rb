@@ -10,7 +10,7 @@ require 'shoulda'
 require 'factory_girl' 
 require Rails.root.join('test', 'shoulda_macros', 'paperclip')
 
-Dir.glob(RAILS_ROOT + "/test/factories/*.rb").each do |factory| 
+Dir.glob(Rails.root.to_s + "/test/factories/*.rb").each do |factory|
   require factory 
 end
 
