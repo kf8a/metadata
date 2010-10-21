@@ -10,10 +10,6 @@ require 'shoulda'
 require 'factory_girl' 
 require Rails.root.join('test', 'shoulda_macros', 'paperclip')
 
-Dir.glob(Rails.root.to_s + "/test/factories/*.rb").each do |factory|
-  require factory 
-end
-
 class ActiveSupport::TestCase
   # Transactional fixtures accelerate your tests by wrapping each test method
   # in a transaction that's rolled back on completion.  This ensures that the

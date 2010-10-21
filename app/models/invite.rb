@@ -2,8 +2,8 @@ require 'digest/sha1'
 
 class Invite < ActiveRecord::Base
 
-  validates_presence_of :email, :on => :save, :message => "can't be blank"
-  validates_uniqueness_of :email, :on => :save, :message => "is already registered"
+  validates_presence_of :email, :message => "can't be blank"
+  validates_uniqueness_of :email, :message => "is already registered"
 
   scope :unsent_invitations, :conditions => {:redeemed_at => nil, :invite_code => nil}
 

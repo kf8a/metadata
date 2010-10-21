@@ -38,7 +38,8 @@ group :test do
     gem 'simplecov-html'
   end
   gem "shoulda"
-  gem "factory_girl" 
+  gem "factory_girl"
+  gem 'factory_girl_rails'
 
   gem "rspec", "=1.3.0"
   gem "rspec-rails"

@@ -1,8 +1,3 @@
-#Sequences
-Factory.sequence :email do |n|
-  "user#{n}@example.com"
-end
-
 #Independent factories#########
 Factory.define :affiliation do |affiliate|
 end
@@ -20,7 +15,7 @@ Factory.define :dataset do |d|
 end
 
 Factory.define :invite do |i|
-  i.email     Factory.next(:email)
+  i.sequence(:email) {|n| "person#{n}@example.com" }
 end
 
 Factory.define :ownership do |o|
