@@ -8,6 +8,13 @@ GIT
       riddle (>= 1.0.12)
 
 GIT
+  remote: git://github.com/galetahub/awesome_nested_set.git
+  revision: 0d41cedec4c15ea86587fe282c122f279556a992
+  specs:
+    awesome_nested_set (1.4.3)
+      activerecord (>= 1.1)
+
+GIT
   remote: git://github.com/nhowell/subdomain-fu.git
   revision: c6fbf945cf3f4ab344f9c8e0604dc5dcca9ee6cf
   specs:
@@ -226,6 +233,7 @@ PLATFORMS
 DEPENDENCIES
   RedCloth
   acts-as-taggable-on
+  awesome_nested_set!
   capybara
   clearance!
   cucumber
