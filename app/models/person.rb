@@ -11,8 +11,8 @@ class Person < ActiveRecord::Base
     
   accepts_nested_attributes_for :affiliations, :allow_destroy => true
 
-  named_scope :by_sur_name, :order => 'sur_name'
-  named_scope :by_sur_name_asc, :order => 'sur_name ASC'
+  scope :by_sur_name, :order => 'sur_name'
+  scope :by_sur_name_asc, :order => 'sur_name ASC'
   
   #acts_as_taggable
   

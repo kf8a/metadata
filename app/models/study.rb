@@ -7,8 +7,8 @@ class Study < ActiveRecord::Base
     
   acts_as_nested_set
 
-  named_scope :by_weight, :order => 'weight'
-  named_scope :by_id,     :order => 'id'
+  scope :by_weight, :order => 'weight'
+  scope :by_id,     :order => 'id'
   
   def study_url(website)
     study_urls.find(:first, :conditions => ['website_id = ?', website.id]).url

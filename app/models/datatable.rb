@@ -28,7 +28,7 @@ class Datatable < ActiveRecord::Base
   
   acts_as_taggable_on :keywords
 
-  named_scope :by_name, :order => 'name'
+  scope :by_name, :order => 'name'
   
   define_index do
     indexes title

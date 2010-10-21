@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
 
   before_save :downcase_email
 
-  named_scope :by_email, :order => 'email'
+  scope :by_email, :order => 'email'
 
   def owns?(datatable)
     self.datatables.include?(datatable)
