@@ -11,8 +11,6 @@ class Publication < ActiveRecord::Base
   
   def Publication.find_by_word(word)
     word = '%'+word+'%'
-    find(:all, :order => 'year desc', 
-      :conditions => 
-      [%q{((lower(citation) like lower(?)) or (lower(abstract) like lower(?))) and publication_type_id < 6}, word, word ])
+    Publication.order('year desc').where(%q{((lower(citation) like lower(?)) or (lower(abstract) like lower(?))) and publication_type_id < 6}, word, word)
   end
 end

@@ -11,7 +11,7 @@ class Study < ActiveRecord::Base
   scope :by_id,     :order => 'id'
   
   def study_url(website)
-    study_urls.find(:first, :conditions => ['website_id = ?', website.id]).url
+    self.study_urls.where(:website_id => website.id).first.url
   end
     
   # returns true if one or more of the tables passed is part of the current study

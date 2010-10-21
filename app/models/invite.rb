@@ -18,7 +18,7 @@ class Invite < ActiveRecord::Base
   end
 
   def self.find_redeemable(invite_code)
-    self.find(:first, :conditions => {:redeemed_at => nil, :invite_code => invite_code})
+    self.where(:redeemed_at => nil, :invite_code => invite_code).first
   end
 
   def redeemed!

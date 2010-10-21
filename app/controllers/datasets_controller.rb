@@ -19,7 +19,7 @@ class DatasetsController < ApplicationController
   def index
     request.format  = :eml if params[:Dataset]
     @keyword_list   = params['keyword_list']
-    @people         = Person.find_all_with_dataset(:order => 'sur_name')
+    @people         = Person.find_all_with_dataset.order('sur_name')
     @themes         = Theme.by_weight
     @datasets       = Dataset.all
     @studies        = collect_and_normalize_studies(@datasets)
@@ -130,9 +130,7 @@ class DatasetsController < ApplicationController
   end
   
   def auto_complete_for_keyword_list
-    tags = Tag.find(:all, :conditions => [ 'name LIKE ?',
-        '%' + params[:q] + '%' ], 
-        :order => 'name ASC')
+    tags = Tag.order('name ASC').where('name LIKE ?', '%' + params[:q] + '%')
     render :text => (tags.collect{|x| x.name}).join("\n")
   end
   

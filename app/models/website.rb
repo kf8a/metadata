@@ -8,7 +8,7 @@ class Website < ActiveRecord::Base
   validates_presence_of :name
   
   def layout(controller, action)
-    template = templates.find(:first, :conditions => ['controller = ? and action = ?', controller, action])
+    template = self.templates.find_by_controller_and_action(controller, action)
     Liquid::Template.parse(template.layout) if template
   end
 end

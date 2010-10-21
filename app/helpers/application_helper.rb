@@ -16,7 +16,7 @@ module ApplicationHelper
   end
   
   def render_study(options)
-    study = Study.find(:first, :conditions => options)
+    study = Study.where(options).first
     
     if study
       render :partial => 'study',  :locals => {:study => study}
@@ -29,7 +29,7 @@ module ApplicationHelper
 
   def get_liquid_template(domain, controller, page)
     website = Website.find_by_name(domain)
-    website = Website.find(:first) unless website
+    website = Website.first unless website
     plate = nil
     plate = website.layout(controller, page) if website
   end
