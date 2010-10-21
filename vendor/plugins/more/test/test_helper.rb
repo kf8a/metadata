@@ -5,6 +5,14 @@ require 'action_pack'
 require 'action_controller'
 
 module Rails
+  def self.env
+    string = 'development'
+    def string.development?
+      true
+    end
+    string
+  end
+
   def self.root
     File.expand_path(File.dirname(__FILE__))
   end
@@ -13,8 +21,6 @@ module Rails
     ActiveSupport::BacktraceCleaner.new
   end
 end
-
-RAILS_ENV = 'development'
 
 # load plugin
 $LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib')

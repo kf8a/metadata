@@ -1,0 +1,53 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    actionmailer (2.3.8)
+      actionpack (= 2.3.8)
+    actionpack (2.3.8)
+      activesupport (= 2.3.8)
+      rack (~> 1.1.0)
+    activerecord (2.3.8)
+      activesupport (= 2.3.8)
+    activeresource (2.3.8)
+      activesupport (= 2.3.8)
+    activesupport (2.3.8)
+    gemcutter (0.5.0)
+      json_pure
+    git (1.2.5)
+    jeweler (1.4.0)
+      gemcutter (>= 0.1.0)
+      git (>= 1.2.5)
+      rubyforge (>= 2.0.0)
+    json_pure (1.4.3)
+    less (1.2.21)
+      mutter (>= 0.4.2)
+      treetop (>= 1.4.2)
+    mutter (0.5.3)
+    polyglot (0.3.1)
+    rack (1.1.0)
+    rails (2.3.8)
+      actionmailer (= 2.3.8)
+      actionpack (= 2.3.8)
+      activerecord (= 2.3.8)
+      activeresource (= 2.3.8)
+      activesupport (= 2.3.8)
+      rake (>= 0.8.3)
+    rake (0.8.7)
+    redgreen (1.2.2)
+    rubyforge (2.0.4)
+      json_pure (>= 1.1.7)
+    shoulda (2.10.3)
+    treetop (1.4.8)
+      polyglot (>= 0.3.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  actionpack (= 2.3.8)
+  jeweler
+  less
+  rails (= 2.3.8)
+  rake
+  redgreen
+  shoulda
