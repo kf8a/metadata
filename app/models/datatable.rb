@@ -1,7 +1,7 @@
 # encoding: UTF-8
 
 require 'rexml/document'
-#require 'spreadsheet'
+require 'spreadsheet'
 require 'csv'
 include REXML
 
