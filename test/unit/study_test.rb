@@ -44,7 +44,7 @@ class StudyTest < ActiveSupport::TestCase
       #create a second root study
       Factory.create(:study) 
       @child_study = Factory.create(:study)
-      assert @child_study.move_to_child_of(@study)
+      @child_study.move_to_child_of(@study)
       
       @datatable = Factory.create(:datatable, :study => @child_study)
     end

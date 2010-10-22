@@ -23,8 +23,8 @@ class Study < ActiveRecord::Base
     self.all(options).collect {|x| x.include_datatables?(tables)  ? x : nil}.compact
   end
   
-  def self.find_all_roots_with_datatables(tables=[], options={})
-    self.roots(options).collect {|x| x.include_datatables?(tables) ? x : nil}.compact
+  def self.find_all_roots_with_datatables(tables=[])
+    self.roots.collect {|x| x.include_datatables?(tables) ? x : nil}.compact
   end
   
   private

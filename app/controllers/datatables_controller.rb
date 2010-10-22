@@ -241,7 +241,7 @@ class DatatablesController < ApplicationController
               Website.find_by_name(@subdomain_request)])
     end
 
-    @studies = Study.find_all_roots_with_datatables(@datatables, {:order => 'weight'})
+    @studies = Study.find_all_roots_with_datatables(@datatables).order('weight')
 
   end
   
