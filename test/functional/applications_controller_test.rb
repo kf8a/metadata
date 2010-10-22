@@ -21,13 +21,13 @@ class ApplicationControllerTest < ActionController::TestCase
       #necessary variables to load the pages below
       @themes = Theme.roots
       @protocols = Protocol.all
-      @people = Person.all(:order => 'sur_name')
+      @people = Person.order('sur_name')
       @roles = RoleType.find_by_name('lter').roles.all(:order => :seniority, :conditions =>['name not like ?','Emeritus%'])
       
       render_subdomain(page_req, con, sub)
     end
   end
-  
+
   class FooControllerTest < ActionController::TestCase
 
     context "the admin function" do
@@ -63,7 +63,7 @@ class ApplicationControllerTest < ActionController::TestCase
     context "template choose function" do
       setup do
         @controller.current_user = Factory.create :admin_user
-        Factory.create(:role_type, :name => 'lter')
+        Factory.create(:role_type, :name => 'lter') unless RoleType.find_by_name('lter')
       end
       
       context "when a subdomain is requested which exists" do
