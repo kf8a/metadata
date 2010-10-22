@@ -9,7 +9,7 @@ class Unit < ActiveRecord::Base
     name.gsub(/Per/,'/').downcase
   end
 
-  def self.after_find
+  def after_find
     # Delayed::Job.enqueue UnitUpdateJob.new(self)
   end
 
