@@ -19,7 +19,7 @@ class DatasetsController < ApplicationController
   def index
     request.format  = :eml if params[:Dataset]
     @keyword_list   = params['keyword_list']
-    @people         = Person.find_all_with_dataset.order('sur_name')
+    @people         = Person.find_all_with_dataset
     @themes         = Theme.by_weight
     @datasets       = Dataset.all
     @studies        = collect_and_normalize_studies(@datasets)

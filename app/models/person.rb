@@ -81,8 +81,8 @@ class Person < ActiveRecord::Base
     end
   end
   
-  def self.find_all_with_dataset(options={})
-    people = Person.all(options).collect {|x| x if x.has_dataset?}
+  def self.find_all_with_dataset
+    people = Person.order('sur_name').collect {|x| x if x.has_dataset?}
     people.compact
   end
     
