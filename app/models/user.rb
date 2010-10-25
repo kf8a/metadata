@@ -23,8 +23,6 @@ class User < ActiveRecord::Base
   has_many :memberships
   has_many :sponsors, :through => :memberships
 
-  before_save :downcase_email
-
   named_scope :by_email, :order => 'email'
 
   def owns?(datatable)
@@ -48,10 +46,4 @@ class User < ActiveRecord::Base
     !datatable.deniers_of(self).blank?
   end
 
-
-  protected
-
-  def downcase_email
-    self.email = email.to_s.downcase
-  end
 end
