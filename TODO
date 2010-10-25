@@ -1,3 +1,5 @@
 TODO figure out why the javascript for the keyworder responds differently on lter and glbrc
 TODO mail permission requests to lead investigators 
 TODO check delete people
+TODO add checkbox to user list to allow Suzanne to add and remove people from the glbrc memebership
+TODO save the invite code in a session variable so that people can leave and come back and still be members of glbrc
