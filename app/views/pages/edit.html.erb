@@ -1,5 +1,5 @@
 <%= semantic_form_for @page do |form| %>
-  <%= form.error_messages %>
+  <%= render "shared/error_messages", :target => @pages %>
 
   <%= render :partial => 'inputs',:locals => { :form => form }  %>
 

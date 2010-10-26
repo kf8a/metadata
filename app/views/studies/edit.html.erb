@@ -1,9 +1,8 @@
 <h1>Editing <%= @study.name%></h1>
 
-<%= error_messages_for :study %>
-
 <%= form_for(:study, :url => study_path(@study), :html => { :method => :put }) do |f| %>
-	<%= render :partial => 'form', :locals => {:f => f} %>
+  <%= render "shared/error_messages", :target => @study %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
   <p>
     <%= submit_tag "Update" %>
   </p>

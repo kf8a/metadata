@@ -1,8 +1,7 @@
 <h1>Editing variate</h1>
 
-<%= error_messages_for :variate %>
-
 <%= form_for(:variate, :url => variate_path(@variate), :html => { :method => :put }) do |f| %>
+  <%= render "shared/error_messages", :target => @variate %>
   <p>
     <%= submit_tag "Update" %>
   </p>
