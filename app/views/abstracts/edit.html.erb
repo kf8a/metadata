@@ -1,5 +1,5 @@
 <h1>Editing Meeting Abstracts</h1>
-<% form_for(:abstract, :url => abstract_path(@abstract), 
+<%= form_for(:abstract, :url => abstract_path(@abstract),
 	:html => { :method => :put }) do |f| %>
   <%= render "shared/error_messages", :target => @abstract %>
   <p>
