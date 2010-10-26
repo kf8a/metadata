@@ -1,4 +1,5 @@
-TODO Fix 2 failures and 0 errors in functional tests
+TODO Fix the deprecations warnings.
+TODO Get cucumber to work.
 TODO figure out why the javascript for the keyworder responds differently on lter and glbrc
 TODO mail permission requests to lead investigators 
 TODO check delete people
