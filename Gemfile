@@ -25,6 +25,9 @@ gem 'subdomain-fu', :git => 'git://github.com/nhowell/subdomain-fu.git'
 gem 'thin'
 gem 'awesome_nested_set', :git => 'git://github.com/galetahub/awesome_nested_set.git'
 
+#Gets rid of annoying UTF-8 string error in rack
+gem "escape_utils"
+
 gem 'metric_fu'
 
 group :development do
