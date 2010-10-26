@@ -38,9 +38,10 @@ module Metadata
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    config.cache_store = :file_store, "tmp/cache"
   end
 end
 
 #Maybe these belong here
-ActionController::Base.cache_store = :file_store, "tmp/cache" #"/path/to/cache/directory"
 Struct.new('Crumb', :url, :name)
