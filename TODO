@@ -1,5 +1,5 @@
-TODO Fix the deprecations warnings.
-TODO Get cucumber to work.
+TODO Figure out what to do about Rails.root/test/mocks/test folder
+TODO Fix 25 failed, 460 skipped, 44 undefined steps
 TODO figure out why the javascript for the keyworder responds differently on lter and glbrc
 TODO mail permission requests to lead investigators 
 TODO check delete people
