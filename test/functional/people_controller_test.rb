@@ -43,10 +43,6 @@ class PeopleControllerTest < ActionController::TestCase
     @controller.current_user = Factory.create :admin_user
   end
   
-#  def teardown
-    #@controller.expire_fragment(%r{.*})
-#  end
-
   context "GET :index" do
     setup do
       get :index

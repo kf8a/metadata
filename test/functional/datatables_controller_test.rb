@@ -222,6 +222,7 @@ class DatatablesControllerTest < ActionController::TestCase
   end
   
   def teardown
+    @controller.expire_fragment(:controller => "datatables", :action => "index", :action_suffix => "lter")
     Website.destroy_all
     Template.destroy_all
   end
