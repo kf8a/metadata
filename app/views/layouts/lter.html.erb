@@ -5,13 +5,13 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<title>LTER: <%= controller.controller_name %>:<%= controller.action_name %></title>
-	<%= stylesheet_link_merged :base, :media=>'screen,print' %>
+	<%= raw stylesheet_link_merged :base, :media=>'screen,print' %>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
  
   <script type='text/javascript' src='http://simile.mit.edu/timeline/api/timeline-api.js'></script>
   <script>$.noConflict();</script>
-  <%= javascript_include_merged :base %>
+  <%= raw javascript_include_merged :base %>
   <script type='text/javascript' src='http://glbrc.sebewa.kbs.msu.edu/javascripts/timeline-init.js'></script>
   
     	  
