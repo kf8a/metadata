@@ -102,6 +102,8 @@ end
 # Actions
 
 When /^I sign in as "(.*)\/(.*)"$/ do |email, password|
+  email.delete!('"')
+  password.delete!('"')
   When %{I go to the sign in page}
   And %{I fill in "Email" with "#{email}"}
   And %{I fill in "Password" with "#{password}"}
