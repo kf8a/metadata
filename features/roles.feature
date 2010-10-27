@@ -18,10 +18,8 @@ Scenario: An anonymous user wants to edit
   When  I go to the datatable page
   Then  I should not see "Edit"
   
-Scenario: A admin user wants to edit
-  Given I am signed up and confirmed as "email@person.com"/"password"
-    And I have the "admin" role
+Scenario: An admin user wants to edit
+  Given I am signed in as an administrator
     And a public datatable exists
-  When  I sign in as "email@person.com"/"password"
-    And I go to the datatable page
+  When  I go to the datatable page
   Then  I should see "Edit"
