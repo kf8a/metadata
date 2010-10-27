@@ -13,6 +13,12 @@ Given /^I am signed in as an administrator$/ do
   When %{I sign in as "admin@person.com"/"password"}
 end
 
+Given /^I am signed in as an uploader$/ do
+  @user = Factory :email_confirmed_user, :email => "uploader@person.com"
+  @user.role = "uploader"
+  When %{I sign in as "uploader@person.com"/"password"}
+end
+
 Given /^"([^"]*)" is a "([^"]*)" member$/ do |email, sponsor_name|
   user = User.find_by_email(email)
   sponsor = Factory :sponsor, :name => sponsor_name

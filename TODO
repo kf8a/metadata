@@ -1,5 +1,5 @@
 TODO Figure out what to do about Rails.root/test/mocks/test folder
-TODO Fix 2 failed, 14 skipped, 0 undefined steps
+TODO Run javascript tests, all others already pass
 TODO figure out why the javascript for the keyworder responds differently on lter and glbrc
 TODO mail permission requests to lead investigators 
 TODO check delete people
