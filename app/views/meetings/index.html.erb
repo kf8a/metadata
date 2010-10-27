@@ -7,10 +7,9 @@
 	<li id="meeting_<%=meeting.id%>"><%= link_to "#{meeting.title}", meeting_path(meeting) %> <%= meeting.date.to_s %>
           <% if signed_in? %>
             <%= link_to 'edit', edit_meeting_path(meeting), {:class => 'edit'} %>
-            <%= link_to image_tag("trash.gif"),
-                :url     => meeting_path(meeting),
-                :method  => 'delete',
+            <%= link_to image_tag("trash.gif"), meeting,
                 :confirm => 'Are you sure?',
+                :method  => :delete,
                 :remote  => true %>
           <% end %>
         </li>

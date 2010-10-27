@@ -6,18 +6,20 @@ To use these selenium files, you'll need to do the following:
 
 3. Open up Tools/Selenium IDE in Firefox
 
-4. Start up a server (script/server)
+4. Start up a server (rails server)
 
-5. Open up the file in the Selenium IDE
+5. Go to http://localhost:3000
 
-6. Press "Play current test case"
+6. Open up the file in the Selenium IDE
+
+7. Press "Play current test case"
 
 
 
 
 (For running the whole suite do:
 
-1-4 above, then
+1-5 above, then
 
 5. Open Test Suite
 

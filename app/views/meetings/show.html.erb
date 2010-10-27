@@ -13,9 +13,8 @@
             <%= link_to "#{abstract.title}", abstract_path(abstract) %>
             <% if admin? %>
               <%= link_to 'Edit', edit_abstract_path(abstract) %>
-              <%= link_to image_tag("trash.gif"),
-                  :url => abstract_path(abstract),
-                  :method => 'delete',
+              <%= link_to image_tag("trash.gif"), abstract_path(abstract),
+                  :method => :delete,
                   :confirm => 'Are you sure?',
                   :remote => true %>
             <% end %>

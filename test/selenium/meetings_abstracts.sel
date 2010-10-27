@@ -11,7 +11,7 @@
 <thead>
 <tr><td rowspan="1" colspan="3">meetings_abstracts</td></tr>
 </thead><tbody>
-<!--Requires: admin@person.com is an admin-->
+<!--Requires: admin@person.com is an admin and at least one venue type-->
 <tr>
 	<td>open</td>
 	<td>/</td>
@@ -104,7 +104,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Venue name Meeting</td>
+	<td>link=Local Meeting</td>
 	<td></td>
 </tr>
 <tr>

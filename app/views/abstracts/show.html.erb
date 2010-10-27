@@ -2,6 +2,6 @@
 
 <p><%= @abstract.authors %></p>
 
-<p><%= textilize(@abstract.abstract) %></p>
+<p><%= raw textilize(@abstract.abstract) %></p>
 
 <%= render :partial => 'navbar', :locals => {:abstract => @abstract} %>
