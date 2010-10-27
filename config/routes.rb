@@ -4,7 +4,7 @@ Metadata::Application.routes.draw do
   resource :session, :controller => 'sessions'
   resource :users
   match 'sign_in' => 'sessions#new', :as => :sign_in
-  match 'sign_out' => 'sessions#destroy', :as => :sign_out, :constraints => { :method => 'delete' }
+  match 'sign_out' => 'sessions#destroy', :as => :sign_out
   match 'sign_up' => 'users#new', :as => :sign_up
   resources :abstracts
   resources :affiliations
