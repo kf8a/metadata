@@ -43,8 +43,8 @@ class PermissionsController < ApplicationController
     respond_to do |format|
       if permission.save
         flash[:notice] = 'Permission has been granted to ' + user.email
-        format.html { redirect_to permission_path(@datatable) }
-        format.xml  { head :created, :location => permission_path(@datatable) }
+        format.html { redirect_to permission_path(@datatable.id) }
+        format.xml  { head :created, :location => permission_path(@datatable.id) }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => permission.errors.to_xml }
