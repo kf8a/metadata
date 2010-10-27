@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/freelancing-god/thinking-sphinx.git
-  revision: 462c98a3959ac8c0f9dec81c1d14bd9951fdd87d
+  revision: 108a1fce2623f392152aa1bc5e5866890556f31d
   branch: rails3
   specs:
     thinking-sphinx (2.0.0.rc2)
@@ -15,6 +15,13 @@ GIT
       activerecord (>= 1.1)
 
 GIT
+  remote: git://github.com/jnicklas/xpath.git
+  revision: 80fbaf445a98ff3490e99a0c55f7b162912fd76a
+  specs:
+    xpath (0.1.1)
+      nokogiri (~> 1.3)
+
+GIT
   remote: git://github.com/nhowell/subdomain-fu.git
   revision: c6fbf945cf3f4ab344f9c8e0604dc5dcca9ee6cf
   specs:
@@ -22,7 +29,7 @@ GIT
 
 GIT
   remote: git://github.com/thoughtbot/clearance.git
-  revision: 56b3ec05166888c3610ee4b339bfab844920ea18
+  revision: 46f93a47aa752bb42e8baca955896fc3426a60f5
   specs:
     clearance (0.9.0.rc9)
       rails (~> 3.0.0)
@@ -84,17 +91,17 @@ GEM
       sexp_processor (~> 3.0.3)
     colored (1.2)
     configuration (1.1.0)
-    cucumber (0.9.2)
+    cucumber (0.9.3)
       builder (~> 2.1.2)
       diff-lcs (~> 1.1.2)
-      gherkin (~> 2.2.5)
+      gherkin (~> 2.2.9)
       json (~> 1.4.6)
       term-ansicolor (~> 1.0.5)
     cucumber-rails (0.3.2)
       cucumber (>= 0.8.0)
     culerity (0.2.12)
     daemons (1.1.0)
-    database_cleaner (0.5.2)
+    database_cleaner (0.6.0)
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
@@ -124,7 +131,7 @@ GEM
     hoe (2.6.2)
       rake (>= 0.8.7)
       rubyforge (>= 2.0.4)
-    i18n (0.4.1)
+    i18n (0.4.2)
     json (1.4.6)
     json_pure (1.4.6)
     launchy (0.3.7)
@@ -134,10 +141,11 @@ GEM
       mutter (>= 0.4.2)
       treetop (>= 1.4.2)
     liquid (2.2.2)
-    mail (2.2.7)
+    mail (2.2.9)
       activesupport (>= 2.3.6)
-      mime-types
-      treetop (>= 1.4.5)
+      i18n (~> 0.4.1)
+      mime-types (~> 1.16)
+      treetop (~> 1.4.8)
     main (4.2.0)
       arrayfields (>= 4.7.4)
       fattr (>= 2.1.0)
@@ -155,7 +163,7 @@ GEM
     mime-types (1.16)
     mutter (0.5.3)
     nokogiri (1.4.3.1)
-    paperclip (2.3.4)
+    paperclip (2.3.5)
       activerecord
       activesupport
     pg (0.9.0)
@@ -265,4 +273,5 @@ DEPENDENCIES
   subdomain-fu!
   thin
   thinking-sphinx!
+  xpath!
   zipruby

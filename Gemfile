@@ -50,6 +50,7 @@ end
 
 group :cucumber do
   gem 'capybara'
+  gem 'xpath', :git => 'git://github.com/jnicklas/xpath.git'
   gem "shoulda"
   gem "factory_girl"
   gem 'cucumber-rails'
