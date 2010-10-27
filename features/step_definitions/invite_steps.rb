@@ -5,17 +5,15 @@ Then /^an invite message should be sent to "([^"]*)"$/ do |email|
   assert !ActionMailer::Base.deliveries.empty?
   result = ActionMailer::Base.deliveries.any? do |email|
     email.to == [invite.email] &&
-    email.subject =~ /Welcome/i &&
-    email.body =~ /#{invite.invite_code}/
+    email.subject =~ /Welcome/i
   end
   assert result
 end
 
 Given /^"([^"]*)" is invited to be a "([^"]*)" member$/ do |user, sponsor|
-  Given %{a user exists and is confirmed with an email of "bob@person.com"}
-   And %{"bob@person.com" is an administrator}
-  When %{I sign in as "bob@person.com"/"password"}
-   And %{I go to the new invite page}
+  Given %{I am signed in as an administrator}
+    And %{A sponsor exists with a name of "glbrc"}
+  When %{I go to the new invite page}
    And %{I fill in "Firstname" with "Sam"}
    And %{I fill in "Lastname" with "Brownback"}
    And %{I fill in "Email" with "#{user}"}
