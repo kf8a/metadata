@@ -1,7 +1,7 @@
 <h1><%= @meeting.title %></h1>
 
 <% if @meeting.announcement %>
-  <p><%= textilize(@meeting.announcement) %></p>
+  <%= textilize(@meeting.announcement) %>
 <% end %>
 <% if @meeting.abstracts.size > 0 %>
   <h3>Presentation Titles</h3><p>Please click on titles for abstracts.</p>
