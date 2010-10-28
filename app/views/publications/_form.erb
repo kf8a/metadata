@@ -24,4 +24,4 @@
 		<%= treatment.name %><%= check_box_tag 'publications[treatment_ids][]', treatment.id, @publication.treatments.include?(treatment) %>
 	<% end -%>
 </p>
-<%= textile_editor_initialize -%>
+<%= raw textile_editor_initialize -%>
