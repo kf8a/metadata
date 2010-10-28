@@ -1,4 +1,4 @@
-<p><%= formatted_as_default(@citation) %></p>
+<p><%= raw formatted_as_default(@citation) %></p>
 <p><%= @citation.abstract %></p>
 <% if @citation.doi %>
   <p>DOI: <%= @citation.doi %></p>
