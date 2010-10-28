@@ -1,5 +1,6 @@
 TODO Figure out what to do about Rails.root/test/mocks/test folder
-TODO Run ownership javascript test, all others already pass
+TODO Do manual testing through the website.
+TODO Figure out what is wrong with the textile stuff
 TODO figure out why the javascript for the keyworder responds differently on lter and glbrc
 TODO mail permission requests to lead investigators 
 TODO check delete people

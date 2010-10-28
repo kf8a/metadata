@@ -12,8 +12,8 @@
 <tr><td rowspan="1" colspan="3">ownership</td></tr>
 </thead><tbody>
 <!--Requires 2 datatables named kbs001 and kbs002-->
-<!--Requires: cathy@person is a user-->
-<!--Requires bill@person is a user-->
+<!--Requires: cathy@person.com is a user-->
+<!--Requires bill@person.com is a user-->
 <!--Requires: admin@person.com is an admin-->
 <tr>
 	<td>open</td>
@@ -52,7 +52,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>//input[@value='Add Another User']</td>
+	<td>link=Add Another User</td>
 	<td></td>
 </tr>
 <tr>
@@ -72,7 +72,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>//input[@value='Add Another Datatable']</td>
+	<td>link=Add Another Datatable</td>
 	<td></td>
 </tr>
 <tr>
