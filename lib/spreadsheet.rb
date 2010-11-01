@@ -12,12 +12,12 @@ require 'spreadsheet/builder'
 Spreadsheet::XmlBuilder =  Spreadsheet::BuilderXmlBuilder
 # end
 
-if defined?(RAILS_ENV)
+if defined?(Rails.env)
   require 'action_view'
 
   Mime::Type.register 'application/vnd.oasis.opendocument.spreadsheet', :ods
 
+  require 'spreadsheet/template_handler'
   ActionView::Template.register_template_handler :rsheet, Spreadsheet::TemplateHandler
-  ActionView::Template.exempt_from_layout :rsheet
 end
 

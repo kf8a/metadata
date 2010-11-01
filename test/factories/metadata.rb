@@ -15,7 +15,7 @@ Factory.define :dataset do |d|
 end
 
 Factory.define :invite do |i|
-  i.email     Factory.next(:email)
+  i.sequence(:email) {|n| "person#{n}@example.com" }
 end
 
 Factory.define :ownership do |o|
@@ -43,6 +43,9 @@ Factory.define :publication do |p|
   p.abstract            'something in here'
   p.year                2000
   p.publication_type_id 1
+end
+
+Factory.define :publication_type do |p|
 end
 
 Factory.define :role do |r|
@@ -137,12 +140,11 @@ Factory.define :public_datatable, :parent => :datatable do |datatable|
 end
 
 Factory.define :meeting do |m|
-  m.venue_type  Factory.create(:venue_type)
+  m.venue_type_id    1
 end
 
-  
 Factory.define :abstract do |a|
   a.abstract  'A quick little discussion of the meeting.'
-  a.meeting   Factory.create(:meeting)
+  a.association   :meeting
 end
 

@@ -1,22 +1,34 @@
-source :gemcutter
-gem "rails", "=2.3.10"
-gem "pg"
-gem "rack-openid"
-gem "fastercsv" unless RUBY_VERSION > "1.9"
-gem "acts-as-taggable-on"
-gem "paperclip"
+source 'http://rubygems.org'
+
+gem 'rails', '3.0.1'
+
+# Bundle edge Rails instead:
+# gem 'rails', :git => 'git://github.com/rails/rails.git'
+
+gem 'pg'
+gem 'rack-openid'
+gem 'acts-as-taggable-on'
+gem 'paperclip'
 gem 'nokogiri'
 gem 'RedCloth'
-gem 'thinking-sphinx', "=1.3.18"
+gem 'thinking-sphinx',
+  :git     => 'git://github.com/freelancing-god/thinking-sphinx.git',
+  :branch  => 'rails3',
+  :require => 'thinking_sphinx'
+
 gem 'liquid'
-gem "clearance"
+gem 'clearance', :git => 'git://github.com/thoughtbot/clearance.git'
 gem 'formtastic'
 gem 'zipruby'
 gem 'less'
-gem 'subdomain-fu'
+gem 'subdomain-fu', :git => 'git://github.com/nhowell/subdomain-fu.git'
 gem 'thin'
+gem 'awesome_nested_set', :git => 'git://github.com/galetahub/awesome_nested_set.git'
 
-gem 'rcov'  #this is called from rake, but should only be called in testing not production
+#Gets rid of annoying UTF-8 string error in rack
+gem "escape_utils"
+
+gem 'metric_fu'
 
 group :development do
   # bundler requires these gems in development
@@ -29,17 +41,21 @@ group :test do
     gem 'simplecov-html'
   end
   gem "shoulda"
-  gem "factory_girl" 
+  gem "factory_girl"
+  gem 'factory_girl_rails'
 
   gem "rspec", "=1.3.0"
   gem "rspec-rails"
 end
 
 group :cucumber do
+  gem 'capybara'
+  gem 'xpath', :git => 'git://github.com/jnicklas/xpath.git'
   gem "shoulda"
   gem "factory_girl"
-
   gem 'cucumber-rails'
+  gem 'cucumber'
+  gem 'spork'
+  gem 'launchy'
   gem 'database_cleaner'
-  gem 'capybara'
 end

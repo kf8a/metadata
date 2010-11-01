@@ -1,6 +1,6 @@
 class AffiliationsController < ApplicationController
 
-  before_filter :admin?, :except => [:index, :show] unless ENV["RAILS_ENV"] == 'development'
+  before_filter :admin?, :except => [:index, :show] unless Rails.env == 'development'
   before_filter :get_affiliation, :only => [:show, :edit, :update, :destroy]
 
   def index

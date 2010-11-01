@@ -1,18 +1,54 @@
-# Session
+# General
 
-When /^session is cleared$/ do
-  request.reset_session
-  controller.instance_variable_set(:@_current_user, nil)
+Then /^I should see error messages$/ do
+  Then %{I should see "errors prohibited"}
 end
 
-Given /^I have signed in with "(.*)"\/"(.*)"$/ do |email, password|
-  #Given %{I am signed up and confirmed as "#{email}/#{password}"}
-  #TODO not sure why I can't call this step definition from another file
+Then /^I should see an error message$/ do
+  Then %{I should see "error prohibited"}
+end
+
+# Database
+
+Given /^no user exists with an email of "(.*)"$/ do |email|
+  assert_nil User.find_by_email(email)
+end
+
+Given /^I signed up with "(.*)\/(.*)"$/ do |email, password|
+  user = Factory :user,
+    :email                 => email,
+    :password              => password,
+    :password_confirmation => password
+end 
+
+Given /^I am signed up and confirmed as "(.*)\/(.*)"$/ do |email, password|
   user = Factory :email_confirmed_user,
-      :email                 => email,
-      :password              => password,
-      :password_confirmation => password
-          
+    :email                 => email,
+    :password              => password,
+    :password_confirmation => password
+end
+
+# Session
+
+Then /^I should be signed in$/ do
+  Given %{I am on the homepage} 
+  Then %{I should see "Sign Out"}
+end
+
+Then /^I should be signed out$/ do
+  Given %{I am on the homepage} 
+  Then %{I should see "Sign In"}
+end
+
+When /^session is cleared$/ do
+  # TODO: This doesn't work with Capybara
+  # TODO: I tried Capybara.reset_sessions! but that didn't work
+  #request.reset_session
+  #controller.instance_variable_set(:@_current_user, nil)
+end
+
+Given /^I have signed in with "(.*)\/(.*)"$/ do |email, password|
+  Given %{I am signed up and confirmed as "#{email}/#{password}"}
   And %{I sign in as "#{email}/#{password}"}
 end
 
@@ -65,15 +101,20 @@ end
 
 # Actions
 
-When /^I sign in as "(.*)"\/"(.*)"$/ do |email, password|
+When /^I sign in as "(.*)\/(.*)"$/ do |email, password|
+  email.delete!('"')
+  password.delete!('"')
   When %{I go to the sign in page}
   And %{I fill in "Email" with "#{email}"}
   And %{I fill in "Password" with "#{password}"}
   And %{I press "Sign in"}
 end
 
-When /^I sign out$/ do
-  visit '/sign_out'
+When "I sign out" do
+  steps %{
+    When I go to the homepage
+    And I follow "Sign Out"
+  }
 end
 
 When /^I request password reset link to be sent to "(.*)"$/ do |email|

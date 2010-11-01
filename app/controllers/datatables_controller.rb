@@ -2,7 +2,7 @@ class DatatablesController < ApplicationController
 
   layout :site_layout
 
-  before_filter :admin?, :except => [:index, :show, :suggest, :search, :events] unless ENV["RAILS_ENV"] == 'development'
+  before_filter :admin?, :except => [:index, :show, :suggest, :search, :events] unless Rails.env == 'development'
   before_filter :get_datatable, :only => [:show, :edit, :update, :destroy, :update_temporal_extent]
   
   #caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
@@ -241,7 +241,7 @@ class DatatablesController < ApplicationController
               Website.find_by_name(@subdomain_request)])
     end
 
-    @studies = Study.find_all_roots_with_datatables(@datatables, {:order => 'weight'})
+    @studies = Study.find_all_roots_with_datatables(@datatables)
 
   end
   

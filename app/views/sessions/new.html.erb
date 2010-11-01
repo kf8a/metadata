@@ -8,8 +8,8 @@
    <%= link_to "Sign up", sign_up_path %>
 </div>
 
-<% semantic_form_for :session, :url => session_path do |form| %>
-  <% form.inputs do %>
+<%= semantic_form_for :session, :url => session_path do |form| %>
+  <%= form.inputs do %>
 
     <%= form.input :email , :required => false %>
     <%= form.input :password, :as => :password, :required => false %>
@@ -19,7 +19,7 @@
     <%= form.input :openid_url, :required => false,  :wrapper_html => { :class => "openid" } %>
    
   <% end %>
-  <% form.buttons do %>
+  <%= form.buttons do %>
     <%= form.commit_button "Sign in" %>
   <% end %>
 <% end %>

@@ -34,7 +34,7 @@ more on textile:
 
 */
 
-document.write('<script src="/dynamic/javascripts/textile-editor-config.js" type="text/javascript"></script>');
+document.write('<script src="/javascripts/textile-editor-config.js" type="text/javascript"></script>');
 
 // // initiliaze the quicktags													
 // function initQuicktags(canvasi) {

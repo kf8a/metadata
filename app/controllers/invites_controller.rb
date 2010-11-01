@@ -1,6 +1,6 @@
 class InvitesController < ApplicationController
   
-  before_filter :admin? unless RAILS_ENV['development']
+  before_filter :admin? unless Rails.env == 'development'
   
   # GET /invites
   # GET /invites.xml
@@ -87,7 +87,7 @@ class InvitesController < ApplicationController
   def send_invitation
     @invite = Invite.find(params[:id])
     @invite.invite!
-    InviteMailer.deliver_invitation(@invite)
+    InviteMailer.invitation(@invite).deliver
     flash[:notice] = "Invite sent to #{@invite.email}"
     redirect_to(invites_url)
   end

@@ -28,7 +28,7 @@ class Datatable < ActiveRecord::Base
   
   acts_as_taggable_on :keywords
 
-  named_scope :by_name, :order => 'name'
+  scope :by_name, :order => 'name'
   
   define_index do
     indexes title
@@ -44,7 +44,7 @@ class Datatable < ActiveRecord::Base
     indexes name
     has dataset.website_id, :as => :website
     where "datatables.on_web is true and datasets.on_web"
-    
+
     #set_property :field_weights => {:keyword => 20, :theme => 20, :title => 10}
   end
   

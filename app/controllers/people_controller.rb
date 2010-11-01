@@ -2,7 +2,7 @@ class PeopleController < ApplicationController
   
   layout :site_layout
   
-  before_filter :admin?, :except => [:index, :show, :alphabetical, :emeritus] unless ENV["RAILS_ENV"] == 'development'
+  before_filter :admin?, :except => [:index, :show, :alphabetical, :emeritus] unless Rails.env == 'development'
   before_filter :get_person, :only => [:show, :edit, :update, :destroy]
   before_filter :get_people, :only => [:index, :alphabetical, :emeritus, :show_all]
   
@@ -11,7 +11,7 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.xml
   def index
-    @roles = RoleType.find_by_name('lter').roles.all(:order => :seniority, :conditions =>['name not like ?','Emeritus%'])
+    @roles = RoleType.find_by_name('lter').roles.order('seniority').where('name not like ?','Emeritus%')
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @people.to_xml }
@@ -27,7 +27,7 @@ class PeopleController < ApplicationController
   end  
   
   def emeritus
-    @roles = RoleType.find_by_name('lter').roles.all(:order => :seniority, :conditions =>['name like ?','Emeritus%'])
+    @roles = RoleType.find_by_name('lter').roles.order('seniority').where('name like ?','Emeritus%')
     respond_to do |format|
       format.html # emeritus.rhtml
       format.xml  { render :xml => @people.to_xml }

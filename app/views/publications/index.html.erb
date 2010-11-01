@@ -1,8 +1,7 @@
 <div id='search_form'>
   <%= form_tag '/publications', :method => 'get'%>
-    <%= text_field_tag :word, @word, {:size => 60, :method => :get} %>
-      
-      <%= submit_tag "Search" %>
+    <%= text_field_tag :word, @word, :size => 60 %>
+    <%= submit_tag "Search" %>
 </div>
 <h1>Publications <%= @decoration %>: <%=h @pub_type%> </h1>
 <% year = 0 -%>
@@ -19,14 +18,12 @@
 				<a href="<%= url_for publication_path(publication) %>">
 					abstract&nbsp;&hellip;</a>
 			<% end -%>
-			<%= link_to_remote 'document', :url =>  publication.public_filename if publication.filename %>
-			<%= link_to 'edit', edit_publication_path(publication) if signed_in?%>
+			<%= link_to 'document', :url =>  publication.public_filename, :remote => true if publication.filename %>
+			<%= link_to 'edit', edit_publication_path(publication) if admin?%>
 	</div>
 <% end %>
-<p><% if signed_in? -%>
-	<%= link_to 'new publication', new_publication_path %>
-	<% else -%>
-	<%= link_to 'login', new_session_path %>
-	<% end -%>
+<p>
+    <%= link_to 'new publication', new_publication_path if admin? %>
+    <%= link_to 'login', new_session_path unless signed_in? %>
 </p>
 

@@ -1,18 +1,14 @@
-# if RUBY_VERSION > "1.9"
-# require 'simplecov'  
-# SimpleCov.start 'rails'
-# end
+if RUBY_VERSION > "1.9"
+  require 'simplecov'
+  SimpleCov.start 'rails'
+end
 
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
-require 'test_help'
+require 'rails/test_help'
 require 'shoulda'
 require 'factory_girl' 
-#require "test/shoulda_macros/paperclip" #copied over from the gem
-
-Dir.glob(RAILS_ROOT + "/test/factories/*.rb").each do |factory| 
-  require factory 
-end
+require Rails.root.join('test', 'shoulda_macros', 'paperclip')
 
 class ActiveSupport::TestCase
   # Transactional fixtures accelerate your tests by wrapping each test method

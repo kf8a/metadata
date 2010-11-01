@@ -1,7 +1,7 @@
 #Controls pages dealing with abstracts of meetings
 class AbstractsController < ApplicationController
 
-  before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
+  before_filter :admin?, :except => [:index, :show]  if Rails.env == 'production'
   before_filter :get_abstract, :only => [:show, :edit, :update, :destroy]
   
   # GET meeting_abstracts

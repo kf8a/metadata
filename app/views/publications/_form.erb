@@ -1,6 +1,7 @@
 <p>
 	<label for='publication_year'>Year</label>
 	<%= f.text_field :year%>
+</p>
 <p>
 	<label for='publication_citation'>Citation</label>
 	<%= f.text_area :citation , :size => '50x5'%>
@@ -24,4 +25,4 @@
 		<%= treatment.name %><%= check_box_tag 'publications[treatment_ids][]', treatment.id, @publication.treatments.include?(treatment) %>
 	<% end -%>
 </p>
-<%= textile_editor_initialize -%>
+<%= raw textile_editor_initialize -%>

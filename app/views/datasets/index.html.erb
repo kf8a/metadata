@@ -1,50 +1,54 @@
 
 <div id='search-form'>
-  <%= form_tag '/datasets', :method => 'get'%>
-  <div id='top-line-search'>
-    <div id='core-area-search'>
-      <label>Theme/LTER Core Area</label> <%= collection_select :theme, :id,  @themes, :id, :name, { :include_blank => "All" }%>
+  <%= form_tag '/datasets', :method => 'get' do %>
+    <div id='top-line-search'>
+      <div id='core-area-search'>
+        <label>Theme/LTER Core Area</label>
+        <%= collection_select :theme, :id,  @themes, :id, :name, { :include_blank => "All" } %>
+      </div>
+      <div id='experiment-search'>
+        <label>Long-term Experiment</label>
+        <%= collection_select :study, :id, Study.order('weight'), :id, :name, {:include_blank => 'All'}%>
+      </div>
+      <div id='contributor-search'>
+        <label>Contributor:</label>
+        <%= select :person, :id, @people.collect{|x| [truncate(x.last_name_first, :length => 16), x.id]},  { :include_blank => "All" } %>
+      </div>
     </div>
-    <div id='experiment-search'>
-      <label>Long-term Experiment</label>
-      <%= collection_select :study, :id, Study.all(:order => 'weight'), :id, :name, {:include_blank => 'All'}%>
-    </div>
-    <div id='contributor-search'>  
-       <label>Contributor:</label><%= select :person, :id, @people.collect{|x| [truncate(x.last_name_first, :length => 16), x.id]},  { :include_blank => "All" } %>
-    </div>
-  </div>
-  <div id='bottom-line-search'>
-    <div id='year-search'>
-      <label>From:</label> <%= select_year 1988, :start_year => 1988, :end_year => Date.today.year, :field_name => 'syear' %><label>To:</label><%= select_year Date.today, :start_year=>1988, :end_year => Date.today.year, :field_name => 'eyear'%>
-    </div>
-    <div id='keyword-search'>
-      <label>Keywords:</label><%= text_field_tag :keyword_list, @keyword_list, {:id => 'keyworder'}  %>
-    </div>  
+    <div id='bottom-line-search'>
+      <div id='year-search'>
+        <label>From:</label>
+        <%= select_year 1988, :start_year => 1988, :end_year => Date.today.year, :field_name => 'syear' %><label>To:</label><%= select_year Date.today, :start_year=>1988, :end_year => Date.today.year, :field_name => 'eyear'%>
+      </div>
+      <div id='keyword-search'>
+        <label>Keywords:</label>
+        <%= text_field_tag :keyword_list, @keyword_list, {:id => 'keyworder'} %>
+      </div>
       <%= submit_tag "Search" %>
-  </div>
+    </div>
+  <% end %>
 </div>
 <div>
-<ul class="studies quickTree">
-  <% @studies.each do |study| %>
-    <li class="study-title">
-      <a href="<%= study.description %>"><%= study.name%></a>
-    <ul>
-      <% @datasets.sort {|x,y| x.title <=> y.title}.each do |dataset| %>
-    	  <% next unless dataset.on_web %>
-          <% if !signed_in? %>
-            <% next unless dataset.datatables.size > 0 %>
+  <ul class="studies quickTree">
+    <% @studies.each do |study| %>
+      <li class="study-title">
+        <a href="<%= study.description %>"><%= study.name%></a>
+        <ul>
+          <% @datasets.sort {|x,y| x.title <=> y.title}.each do |dataset| %>
+            <% next unless dataset.on_web %>
+            <% if !signed_in? %>
+              <% next unless dataset.datatables.size > 0 %>
+            <% end -%>
+            <% next unless dataset.studies.include?(study) %>
+            <li class="dataset">
+              <%= link_to truncate(dataset.title,{:length => 80}) , dataset_path(dataset) %>
+              <%= link_to  'Edit', edit_dataset_path(dataset), {:class => 'edit'} if signed_in? %>
+            </li>
           <% end -%>
-          <% next unless dataset.studies.include?(study) %>
-
-          <li class="dataset">
-            <%= link_to truncate(dataset.title,{:length => 80}) , dataset_path(dataset) %>
-            <%= link_to  'Edit', edit_dataset_path(dataset), {:class => 'edit'} if signed_in? %>
-          </li>
-      <% end -%>
-    </ul>
-  </li>
-  <% end %>
-</ul>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
 </div>
 
 <% if signed_in? %>
@@ -53,23 +57,19 @@
     <% @datasets.each do |dataset| %>
       <% next unless dataset.studies.empty?%>
       <% next unless dataset.on_web %>
-
-
-        <% if dataset.core_dataset %>
-          <li class='core-dataset'>
-        <% elsif dataset.datatables.size == 0 %>
-          <li class='no-data'>
-        <% else %>
-          <li>
-        <% end %>
-        <%= link_to truncate(dataset.title,{:length => 60}) , dataset_path(dataset) %>
-        <%= link_to 'eml', dataset_path(dataset, :format=>:eml) %>
-        <%= link_to  'Edit', edit_dataset_path(dataset), {:class => 'edit'} if signed_in? %></li>
-
+      <% if dataset.core_dataset %>
+        <li class='core-dataset'>
+      <% elsif dataset.datatables.size == 0 %>
+        <li class='no-data'>
+      <% else %>
+        <li>
+      <% end %>
+      <%= link_to truncate(dataset.title,{:length => 60}) , dataset_path(dataset) %>
+      <%= link_to 'eml', dataset_path(dataset, :format=>:eml) %>
+      <%= link_to  'Edit', edit_dataset_path(dataset), {:class => 'edit'} if signed_in? %></li>
     <% end %>
   </div>
 <% end %>
 		
 <%= link_to 'New dataset', new_dataset_path if signed_in? %> | 
 <%= link_to 'login', new_session_path %>
-

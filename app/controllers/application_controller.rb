@@ -1,12 +1,12 @@
-# Filters added to this controller apply to all controllers in the application.
-# Likewise, all the methods added will be available for all controllers.
+require 'template_handler'
 
 class ApplicationController < ActionController::Base
+  protect_from_forgery
+  
   include Clearance::Authentication
     
   layout :site_layout
 
-  #before_filter :admin?, :except => [:index, :show] unless ENV["RAILS_ENV"] == 'development'
   before_filter :set_crumbs, :set_subdomain_request, :set_title
    
    LOCAL_IPS =/^127\.0\.0\.1$|^192\.231\.113\.|^192\.108\.190\.|^192\.108\.188\.|^192\.108\.191\./

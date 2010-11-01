@@ -4,7 +4,8 @@ Feature: Editing abstract
   I want to edit an abstract
 
   Scenario: Admin edits an abstract
-    Given an admin user exists with an email of "admin@person.com"
+    Given the local venue type exists
+      And an admin user exists with an email of "admin@person.com"
       And the following abstract exists:
       |title                |authors                        |abstract             |
       |"An Awesome Abstract"|"Abstract Guy and Abstract Gal"|"A testable abstract"|
@@ -26,7 +27,8 @@ Feature: Editing abstract
       And I should see "An Edited Abstract"
 
   Scenario: Admin fails to edit an abstract
-    Given an admin user exists with an email of "admin@person.com"
+    Given the local venue type exists
+      And an admin user exists with an email of "admin@person.com"
       And the following abstract exists:
       |title                |authors                        |abstract             |
       |"An Awesome Abstract"|"Abstract Guy and Abstract Gal"|"A testable abstract"|

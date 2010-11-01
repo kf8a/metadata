@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   has_many :memberships
   has_many :sponsors, :through => :memberships
 
-  named_scope :by_email, :order => 'email'
+  scope :by_email, :order => 'email'
 
   def owns?(datatable)
     self.datatables.include?(datatable)
@@ -33,17 +33,18 @@ class User < ActiveRecord::Base
     role == 'admin'
   end
   
-  def permitted?(datatable)
-    datatable.permitted?(self)
-  end
-  
   def has_permission_from?(owner, datatable)
     permission = Permission.find_by_user_id_and_owner_id_and_datatable_id(self, owner, datatable)
     permission && permission.decision != "denied"
   end
 
+  protected
+
+  def downcase_email
+    self.email = email.to_s.downcase
+  end
+
   def denied_access?(datatable)
     !datatable.deniers_of(self).blank?
   end
-
 end

@@ -49,6 +49,9 @@ module NavigationHelpers
     
     when /the collection page/
       collection_path(Collection.last)
+
+    when /the template page/
+      template_path(Template.last)
       
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

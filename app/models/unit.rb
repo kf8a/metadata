@@ -1,15 +1,15 @@
 class Unit < ActiveRecord::Base
   has_many :variates
 
-  after_find :after_find
+  after_find :update_job
   #  after_find :update_dictionary
-  named_scope :not_in_eml, :conditions => ['in_eml is false']
+  scope :not_in_eml, :conditions => ['in_eml is false']
 
   def human_name
     name.gsub(/Per/,'/').downcase
   end
 
-  def after_find
+  def update_job
     # Delayed::Job.enqueue UnitUpdateJob.new(self)
   end
 

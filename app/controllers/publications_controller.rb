@@ -1,6 +1,6 @@
 class PublicationsController < ApplicationController
   
-  before_filter :admin?, :except => [:index, :show, :index_by_treatment]  if ENV["RAILS_ENV"] == 'production'
+  before_filter :admin?, :except => [:index, :show, :index_by_treatment]  if Rails.env == 'production'
   before_filter :get_publication, :only => [:show, :edit, :update, :destroy]
   #caches_action :index
   
@@ -16,7 +16,7 @@ class PublicationsController < ApplicationController
       @pub_type = ''
       publication_types = PublicationType.all
     end
-    @pub_type =  @pub_type.gsub(/_/,' ') unless @pub_type == ''
+    @pub_type =  @pub_type.gsub(/_/,' ') unless @pub_type.blank?
     conditions = 'publication_type_id in (?) and publication_type_id < 6 '
     order = 'year desc, citation'
     @decoration = 'by year'
@@ -91,7 +91,7 @@ class PublicationsController < ApplicationController
       if @publication.save
         expire_action :action => :index
          
-        flash[:notice] = 'Publications was successfully created.'
+        flash[:notice] = 'Publication was successfully created.'
         format.html { redirect_to publication_url(@publication) }
         format.xml  { render :xml => @publication, :status => :created, :location => @publication }
       else
@@ -108,7 +108,7 @@ class PublicationsController < ApplicationController
       if @publication.update_attributes(params[:publication])
         expire_action :action => :index
          
-        flash[:notice] = 'Publications was successfully updated.'
+        flash[:notice] = 'Publication was successfully updated.'
         format.html { redirect_to publication_url(@publication) }
         format.xml  { head :ok }
       else
