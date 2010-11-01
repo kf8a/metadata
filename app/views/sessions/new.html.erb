@@ -11,11 +11,11 @@
 <% semantic_form_for :session, :url => session_path do |form| %>
   <% form.inputs do %>
 
-    <%= form.input :email , :required => false, :input_html => { :size => 25 } %>
-    <%= form.input :password, :as => :password, :input_html => { :size => 25 }, :required => false %>
+    <%= form.input :email , :required => false %>
+    <%= form.input :password, :as => :password, :required => false %>
      <li class='big'>
       or
-      </li>
+     </li>
     <%= form.input :openid_url, :required => false,  :wrapper_html => { :class => "openid" } %>
    
   <% end %>
