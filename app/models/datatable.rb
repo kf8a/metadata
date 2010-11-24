@@ -194,7 +194,7 @@ class Datatable < ActiveRecord::Base
     # TODO test if file exists and send that
     
     # stupid microsofts
-    result = data_access_statement + data_source +  to_csv.force_encoding("UTF-8")
+    result = data_access_statement + data_source + data_comments + to_csv.force_encoding("UTF-8")
     if is_utf_8
       result = Iconv.conv('utf-16','utf-8', result)
     end
@@ -225,6 +225,7 @@ class Datatable < ActiveRecord::Base
             sheet.cell source
           end
         end
+        sheet.cell data_comments
       end
       
       sheet.table "Data" do
@@ -248,6 +249,9 @@ class Datatable < ActiveRecord::Base
     sheet.content!
   end
     
+  def data_comments
+    comments ? comments : ''
+  end
   def data_contact
     # contact = self.dataset.principal_contact
     # "#{contact.full_name} #{contact.email} #{contact.phone}"
