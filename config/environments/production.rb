@@ -31,8 +31,14 @@ Metadata::Application.configure do
   # In production, Apache or nginx will already do this
   config.serve_static_assets = false
 
+  # configure common asset hash across all hosts
+  # RELEASE_NUMBER = 1
+  # config.action_controller.asset_path_template = proc { |asset_path|
+  #     "/release-#{RELEASE_NUMBER}#{asset_path}"
+  #   }
   # Enable serving of images, stylesheets, and javascripts from an asset server
   config.action_controller.asset_host = "http://lter.kbs.msu.edu"
+  
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
