@@ -138,7 +138,6 @@ class DatatablesControllerTest < ActionController::TestCase
       end
       
       should respond_with :success
-      should assign_to(:datatables)
     end
     
     context 'GET :new' do
@@ -347,11 +346,7 @@ class DatatablesControllerTest < ActionController::TestCase
       get :index, :keyword_list => '', :commit => 'Search', :requested_subdomain => 'lter'
     end
   
-    should assign_to :datatables
-    should assign_to :themes
-        
-    should respond_with :success
-    should render_template :index
+    should redirect_to("datatables index") {datatables_url}
     should_not set_the_flash
   end
   
