@@ -36,10 +36,10 @@ group :development do
 end
 
 group :test do
-  # if RUBY_VERSION > "1.9"
-  #   gem 'simplecov'
-  #   gem 'simplecov-html'
-  # end
+  #if RUBY_VERSION > "1.9"
+    gem 'simplecov'
+    gem 'simplecov-html'
+  #end
   gem "shoulda"
   gem "factory_girl"
   gem 'factory_girl_rails'

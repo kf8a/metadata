@@ -7,7 +7,9 @@ include REXML
 
 class Datatable < ActiveRecord::Base
   attr_protected :object
-
+  
+  acts_as_taggable_on :keywords
+  
   has_one                 :collection
   belongs_to              :core_area
   belongs_to              :dataset
@@ -25,8 +27,6 @@ class Datatable < ActiveRecord::Base
   
   accepts_nested_attributes_for :data_contributions, :allow_destroy => true
   accepts_nested_attributes_for :variates, :allow_destroy => true
-  
-  acts_as_taggable_on :keywords
 
   scope :by_name, :order => 'name'
   
@@ -38,7 +38,7 @@ class Datatable < ActiveRecord::Base
     indexes people.given_name, :as => :datatable_given_name
     indexes dataset.affiliations.person.sur_name, :as => :sur_name
     indexes dataset.affiliations.person.given_name, :as => :given_name
-    indexes keywords(:name), :as => :keyword
+    indexes taggings.tag.name, :as => :keyword_name
     indexes dataset.title, :as => :dataset_title
     indexes dataset.dataset, :as => :dataset_identifier
     indexes name
