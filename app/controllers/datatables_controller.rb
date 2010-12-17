@@ -5,6 +5,7 @@ class DatatablesController < ApplicationController
   before_filter :admin?, :except => [:index, :show, :suggest, :search, :events] unless Rails.env == 'development'
   before_filter :get_datatable, :only => [:show, :edit, :update, :destroy, :update_temporal_extent]
   
+  caches_action :index
   #caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
   
   # GET /datatables

@@ -58,7 +58,8 @@ namespace :deploy do
   after 'deploy:symlink', :link_production_db
   after 'deploy:symlink', :link_site_keys
   after 'deploy:symlink', :link_new_relic
-  after 'deploy:symlink', :update_spinks
+  before 'deploy:symlink', :stop_sphinks
+  after 'deploy:symlink', :update_sphinks
   after 'deploy:symlink', :link_assets
 end
 
@@ -71,9 +72,9 @@ task :staging do
 end
 
 task :production do 
-  set :host, 'houghton'
+  set :host, 'gprpc28'
   
-  role :app, "#{host}.kbs.msu.edu"
+  role :app, "#{host}.kbs.msu.edu"#, "gprpc28.kbs.msu.edu"
   role :web, "#{host}.kbs.msu.edu"
   role :db,  "#{host}.kbs.msu.edu", :primary => true
   
@@ -81,12 +82,15 @@ task :production do
   after 'deploy:symlink', :set_asset_host
 end
 
+desc 'stop sphinks'
+task :stop_sphinks do
+  run "cd #{current_path};rake ts:stop RAILS_ENV=production"
+end
+
 desc 'Update sphinks'
-task :update_spinks do
-  run "cd #{release_path};rake ts:stop RAILS_ENV=production"
+task :update_sphinks do
   run "cd #{release_path};rake ts:index RAILS_ENV=production"
   run "cd #{release_path};rake ts:start RAILS_ENV=production"
-  
 end
 
 desc "Link in the production database.yml"
