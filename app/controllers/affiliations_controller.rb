@@ -27,11 +27,12 @@ class AffiliationsController < ApplicationController
     @affiliation = Affiliation.new
     respond_to do |format|
       format.html
-      format.js do
-        render :update do |page|
-          page.insert_html :bottom, 'affiliations', :partial => "new"
-        end
-      end
+      format.js # do
+       #        render :update do |page|
+       #          logger.info page
+       #          page.insert_html :bottom, 'affiliations', :partial => "new"
+       #        end
+       #      end
     end
   end
 

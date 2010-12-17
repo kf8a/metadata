@@ -74,7 +74,7 @@ end
 task :production do 
   set :host, 'gprpc28'
   
-  role :app, "#{host}.kbs.msu.edu"#, "gprpc28.kbs.msu.edu"
+  role :app, "#{host}.kbs.msu.edu" #, "gprpc28.kbs.msu.edu"
   role :web, "#{host}.kbs.msu.edu"
   role :db,  "#{host}.kbs.msu.edu", :primary => true
   
@@ -90,6 +90,7 @@ end
 desc 'Update sphinks'
 task :update_sphinks do
   run "cd #{release_path};rake ts:index RAILS_ENV=production"
+  run "cd #{release_path};chmod go-r config/production.sphinx.conf"
   run "cd #{release_path};rake ts:start RAILS_ENV=production"
 end
 
