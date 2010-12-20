@@ -9,7 +9,7 @@
       <%= render :partial => 'study', :locals=>{:study => s}%>
       
     <% end %>
-  </ul>
+  </ul>  
   <ul>
     <% @themes.each do |theme| %>
       <% next unless theme.include_datatables_from_study?(@datatables, study) -%>
