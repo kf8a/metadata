@@ -22,7 +22,6 @@ gem 'formtastic'
 gem 'zipruby'
 gem 'less'
 gem 'subdomain-fu', :git => 'git://github.com/nhowell/subdomain-fu.git'
-gem 'thin'
 gem 'awesome_nested_set', :git => 'git://github.com/galetahub/awesome_nested_set.git'
 
 gem 'jquery-rails', '>= 0.2.6'

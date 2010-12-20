@@ -102,13 +102,11 @@ GEM
     cucumber-rails (0.3.2)
       cucumber (>= 0.8.0)
     culerity (0.2.12)
-    daemons (1.1.0)
     database_cleaner (0.6.0)
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     escape_utils (0.1.9)
-    eventmachine (0.12.10)
     factory_girl (1.3.2)
     factory_girl_rails (1.0)
       factory_girl (~> 1.3)
@@ -233,10 +231,6 @@ GEM
     simplecov-html (0.3.9)
     spork (0.8.4)
     term-ansicolor (1.0.5)
-    thin (1.2.7)
-      daemons (>= 1.0.9)
-      eventmachine (>= 0.12.6)
-      rack (>= 1.0.0)
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
@@ -276,7 +270,6 @@ DEPENDENCIES
   simplecov-html
   spork
   subdomain-fu!
-  thin
   thinking-sphinx!
   xpath!
   zipruby
