@@ -47,6 +47,7 @@
   border-color: #000000;
   border-width: 2px;
 }
+#glbrc { overflow: hidden; }
 #glbrc .sign-up {
   border: 2px solid #71bf44;
   float: right;
@@ -96,8 +97,9 @@
   -webkit-border-bottom-right-radius: 10px;
 }
 #glbrc #navigation {
-  width: 100%;
   position: absolute;
+  width: 100%;
+  left: 1px;
   top: 1px;
   font-weight: bold;
 }
@@ -209,7 +211,10 @@
 #glbrc li.study-title li { padding-top: 3px; }
 #glbrc .person-email { padding-top: 0.5em; }
 #glbrc .default { color: grey; }
-#glbrc #content { width: 650px; }
+#glbrc #content {
+  width: 650px;
+  float: none;
+}
 #glbrc #content h1 {
   font-size: 1.2em;
   font-weight: bold;
