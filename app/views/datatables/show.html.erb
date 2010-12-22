@@ -24,10 +24,10 @@
     <tr>
       <td>Experiment:</td>
       <td>
-        <% if @datatable.study.study_url(@website).nil? %>
-          <%= @datatable.study.name %>
-        <% else %>
+        <% if @datatable.study.study_url(@website) %>
           <%= link_to "#{@datatable.study.name}", @datatable.study.study_url(@website) %>
+        <% else %>
+          <%= @datatable.study.name %>
         <% end %>
       </td>
     </tr>
