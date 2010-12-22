@@ -24,7 +24,7 @@
     <tr>
       <td>Experiment:</td>
       <td>
-        <% if @datatable.study.url.nil? || @datatable.study.url.empty? || @datatable.study.study_url(@website).nil? %>
+        <% if (@datatable.study.url.nil? || @datatable.study.url.empty?) && @datatable.study.study_url(@website).nil? %>
           <%= @datatable.study.name %>
         <% else %>
           <%= link_to "#{@datatable.study.name}", @datatable.study.study_url(@website) %>
