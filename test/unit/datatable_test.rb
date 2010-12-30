@@ -315,6 +315,7 @@ class DatatableTest < ActiveSupport::TestCase
     setup do 
       @year = Factory.create(:datatable, :object => "select #{Time.now.year} as year")
     end
+    
     should 'return true if interval includes today' do
         assert @year.within_interval?(Date.today - 1.year, Date.today + 1.day)
     end
@@ -361,7 +362,8 @@ class DatatableTest < ActiveSupport::TestCase
   context 'datatable formats' do
     setup do 
       dataset = Factory.create(:dataset)
-      @datatable = Factory.create(:datatable, :dataset => dataset, :object=>'select now()')
+      @datatable = Factory.create(:datatable, :dataset => dataset, :object=>"select now() as a, '1' as b")
+      @datatable.variates << [Variate.new(:name => 'a'), Variate.new(:name => 'b')]
     end
 
     context 'climbdb format' do
@@ -392,6 +394,10 @@ class DatatableTest < ActiveSupport::TestCase
       
       should 'return a csv formatted document' do
         assert CSV.parse(@datatable.to_csv)
+      end
+      
+      should 'return the data in the right order' do
+        assert_equal '1', CSV.parse(@datatable.to_csv)[1][0]
       end
        
     end

@@ -176,6 +176,7 @@ class Datatable < ActiveRecord::Base
   
   def to_csv
     values  = perform_query(limited = false)
+    logger.info values
     if RUBY_VERSION > "1.9"
       output = CSV
     else
@@ -184,7 +185,10 @@ class Datatable < ActiveRecord::Base
     csv_string = output.generate do |csv|
       csv << variates.collect {|v| v.name }
       values.each do |row|
-        csv << row.values
+        csv << variates.collect do |v|
+          row[v.name.downcase]
+        end
+#        csv << row.values
       end
     end
     csv_string
