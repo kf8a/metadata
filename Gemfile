@@ -5,7 +5,9 @@ gem 'rails', '3.0.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'newrelic_rpm'
 gem 'pg'
+gem 'sqlite3-ruby'
 gem 'rack-openid'
 gem 'acts-as-taggable-on'
 gem 'paperclip'
