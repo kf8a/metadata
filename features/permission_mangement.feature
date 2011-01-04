@@ -101,6 +101,7 @@ Feature: Give Permissions to another user
       And "alice@person.com" has not given "sam@person.com" permission
       And "alice@person.com" has denied the request of "sam@person.com"
     When I sign in as "bob@person.com"/"password"
-      And I go to the datatable page
+      Then I should be signed in
+    When I go to the datatable page
       And I follow "Permissions Management"
     Then I should see "sam@person.com has requested permission but it has been denied by: alice@person.com"
