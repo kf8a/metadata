@@ -13,6 +13,7 @@ Metadata::Application.routes.draw do
       get :download
     end
   end
+  resources :authors
   resources :collections
   resources :data_contributions
   resources :datasets do
