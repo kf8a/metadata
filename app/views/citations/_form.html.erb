@@ -1,8 +1,12 @@
   <%= form.inputs:citation_type %>
+<% form.inputs do %>
   <%= form.input :state, :as => :radio,  :collection => ['submitted','forthcomming','published'] %>
-  <% @citation.authors.each do |author| %>
-    <%= form.inputs :given_name, :sur_name, :for => author %>
+<% end %>
+<% @citation.authors.each do |author| %>
+  <%= semantic_fields_for "author[#{author.id}]", author do |f| %>
+    <%= f.inputs :given_name, :sur_name %>
   <% end %>
+<% end %>
 
   <%= form.inputs :title, :abstract, :pub_year, :publication, :start_page_number, :ending_page_number, :periodical_full_name,
     :periodical_abbreviation, :volume, :issue, :isbn, :doi, :publisher_url, :full_text, :publisher, :address, :city %>
