@@ -19,14 +19,14 @@ class Citation < ActiveRecord::Base
    
   state_machine do
     state :submitted
-    state :accepted
+    state :forthcomming
     state :published
 
     event :accept do
-      transitions :to => :accepted, :from => :submitted
+      transitions :to => :forthcomming, :from => [:submitted, :published]
     end
     event :publish do
-      transitions :to => :published, :from => [:accepted, :submitted]
+      transitions :to => :published, :from => [:fothcomming, :submitted]
     end
   end
 end
