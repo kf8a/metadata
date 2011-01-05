@@ -1,0 +1,6 @@
+  <%= form.inputs:citation_type %>
+  <%= form.inputs :given_name, :sur_name, :for => :author, :name => Author %>
+
+  <%= form.inputs :title, :abstract, :pub_year, :publication, :start_page_number, :ending_page_number, :periodical_full_name,
+    :periodical_abbreviation, :volume, :issue, :isbn, :doi, :publisher_url, :full_text, :publisher, :address, :city %>
+  <%= form.inputs :pdf , :as => :file%>
