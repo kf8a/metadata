@@ -2,16 +2,16 @@
 <% form.inputs do %>
   <%= form.input :state, :as => :radio,  :collection => ['submitted','forthcomming','published'] %>
 <% end %>
-<% @citation.authors.each do |author| %>
-  <%= semantic_fields_for "author[#{author.id}]", author do |f| %>
+<%= form.inputs :doi %>
+<%= form.inputs :for=> :authors do |f| %>
     <%= f.inputs do %>
       <%= f.input :given_name %>
       <%= f.input :middle_name %>
       <%= f.input :sur_name %>
+      <%= f.input :seniority %>
     <% end %>
-  <% end %>
 <% end %>
 
   <%= form.inputs :title, :abstract, :pub_year, :publication, :start_page_number, :ending_page_number, :periodical_full_name,
-    :periodical_abbreviation, :volume, :issue, :isbn, :doi, :publisher_url, :full_text, :publisher, :address, :city %>
+    :periodical_abbreviation, :volume, :issue, :isbn, :publisher_url, :full_text, :publisher, :address, :city %>
   <%= form.inputs :pdf , :as => :file%>
