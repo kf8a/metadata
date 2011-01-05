@@ -341,16 +341,7 @@ class DatatablesControllerTest < ActionController::TestCase
     should render_template :show
   end
   
-  context 'GET with empty search parameters' do
-    setup do
-      get :index, :keyword_list => '', :commit => 'Search', :requested_subdomain => 'lter'
-    end
-  
-    should redirect_to("datatables index") {datatables_url}
-    should_not set_the_flash
-  end
-  
-  context "GET search with empty search parameters" do
+  context "GET :search with empty search parameters" do
     setup do
       get :search, :keyword_list => ''
     end

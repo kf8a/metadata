@@ -18,13 +18,13 @@ module NavigationHelpers
       new_password_path
       
     when /the datatable page/
-      datatable_path(Datatable.last)
+      datatable_path(Datatable.order('created_at').last)
       
     when /the datatable edit page/
-      edit_datatable_path(Datatable.last)
+      edit_datatable_path(Datatable.order('created_at').last)
            
     when /the datatable download page/
-      datatable_path(Datatable.last, :format => 'csv')
+      datatable_path(Datatable.order('created_at').last, :format => 'csv')
 
     when /the datatable download page for "(.*)"/
       datatable_path(Datatable.find_by_name($1), :format => 'csv')
@@ -42,16 +42,16 @@ module NavigationHelpers
       new_protocol_path
       
     when /the citation page/
-      citation_path(Citation.last)
+      citation_path(Citation.order('created_at').last)
 
     when /the new citation page/
       new_citation_path
     
     when /the collection page/
-      collection_path(Collection.last)
+      collection_path(Collection.order('created_at').last)
 
     when /the template page/
-      template_path(Template.last)
+      template_path(Template.order('created_at').last)
       
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
