@@ -4,7 +4,11 @@
 <% end %>
 <% @citation.authors.each do |author| %>
   <%= semantic_fields_for "author[#{author.id}]", author do |f| %>
-    <%= f.inputs :given_name, :sur_name %>
+    <%= f.inputs do %>
+      <%= f.input :given_name %>
+      <%= f.input :middle_name %>
+      <%= f.input :sur_name %>
+    <% end %>
   <% end %>
 <% end %>
 
