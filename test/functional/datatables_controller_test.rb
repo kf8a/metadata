@@ -343,7 +343,7 @@ class DatatablesControllerTest < ActionController::TestCase
   
   context 'GET with empty search parameters' do
     setup do
-      get :index, :keyword_list => '', :commit => 'Search', :requested_subdomain => 'lter'
+      get :search, :keyword_list => '', :commit => 'Search', :requested_subdomain => 'lter'
     end
   
     should redirect_to("datatables index") {datatables_url}
