@@ -37,6 +37,7 @@ class CitationsController < ApplicationController
 
   def edit
     head(:forbidden) and return unless signed_in? and current_user.role == 'admin'
+    @citation = Citation.find(params[:id]) 
   end
   
   def update

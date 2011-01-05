@@ -168,6 +168,7 @@ class CitationsControllerTest < ActionController::TestCase
       end
 
       should respond_with :success
+      should assign_to(:citation)
     end
 
     context 'POST: update' do
