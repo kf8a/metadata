@@ -164,11 +164,16 @@ class CitationsControllerTest < ActionController::TestCase
     context 'GET: edit' do
       setup do
         citation = Factory.create :citation
+        citation.authors = [Factory.create(:author), Factory.create(:author)]
         get :edit, :id => citation
       end
 
       should respond_with :success
       should assign_to(:citation)
+
+      should 'have two authors' do
+        assert_select '#citation_author_given_name'
+      end
     end
 
     context 'POST: update' do
