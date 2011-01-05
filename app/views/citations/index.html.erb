@@ -1,7 +1,7 @@
 <ul>
 <% @citations.each do |citation| %>
   <li class='citation'>
-    <%= formatted_as_default(citation) %>
+    <%=raw formatted_as_default(citation) %>
     <%= link_to 'abstract', citation_url(citation)%>
     <% if citation.pdf.exists? %>
       <%= link_to 'pdf', citation.pdf.url %>
