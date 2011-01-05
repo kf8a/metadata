@@ -1,4 +1,5 @@
   <%= form.inputs:citation_type %>
+  <%= form.input :state, :as => :radio,  :collection => ['submitted','forthcomming','published'] %>
   <% @citation.authors.each do |author| %>
     <%= form.inputs :given_name, :sur_name, :for => author %>
   <% end %>
