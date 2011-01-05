@@ -171,7 +171,7 @@ class CitationsControllerTest < ActionController::TestCase
       should respond_with :success
       should assign_to(:citation)
 
-      should 'have two authors' do
+      should 'have an author' do
         assert_select '#citation_author_given_name'
       end
     end
