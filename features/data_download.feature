@@ -15,7 +15,7 @@ Feature: Download data
       And I go to the datatable show page for "Download Me"
       And I follow "Download complete data table"
      Then I should be on the datatable download page for "Download Me"
-      And I should see "1"
+      And I should see "Metadata: "
 
   Scenario: The data owner downloads a datatable
     Given a protected datatable exists
@@ -25,7 +25,7 @@ Feature: Download data
      When I go to the datatable page
       And I follow "Download complete data table"
      Then I should be on the datatable download page
-      And I should see "1"
+      And I should see "Metadata: "
       
   Scenario: A sponsor member downloads a datatable
      Given a protected datatable exists
@@ -37,7 +37,7 @@ Feature: Download data
       When I go to the datatable page
        And I follow "Download complete data table"
       Then I should be on the datatable download page
-       And I should see "1"
+       And I should see "Metadata: "
 
   Scenario: An authorized user downloads a datatable
     Given a protected datatable exists
@@ -48,7 +48,7 @@ Feature: Download data
      When I go to the datatable page
       And I follow "Download complete data table"
      Then I should be on the datatable download page
-      And I should see "1"
+      And I should see "Metadata: "
 
   Scenario: A user requests access to a datatable
     Given a protected datatable exists
@@ -72,7 +72,7 @@ Feature: Download data
       And I go to the datatable show page for "Double Trouble"
       And I follow "Download complete data table"
      Then I should be on the datatable download page
-      And I should see "1"  
+      And I should see "Metadata: "
 
   Scenario: A user has received partial permission to download data
     Given a user exists and is confirmed with an email of "alice@person.com"
@@ -101,7 +101,7 @@ Feature: Download data
       And I should not see "Sign in"
      When I follow "Download"
      Then I should be on the datatable download page for "Easy Download"
-      And I should see "1"
+      And I should see "Metadata: "
     
   Scenario: An anonymous users types in the url for a protected datatable html view
     Given a protected datatable exists

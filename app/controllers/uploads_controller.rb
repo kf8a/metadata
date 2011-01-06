@@ -37,7 +37,7 @@ class UploadsController < ApplicationController
   private
   
   def can_upload?
-    current_user.role == 'admin' || current_user.role == 'uploader'
+    current_user.try(:role) == 'admin' || current_user.try(:role) == 'uploader'
   end
 
   def set_title
