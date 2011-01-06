@@ -54,15 +54,12 @@ group :test do
 
   gem "rspec", "=1.3.0"
   gem "rspec-rails"
-end
 
-group :cucumber do
+  #Cucumber stuff
   gem 'capybara'
-  gem 'xpath', :git => 'git://github.com/jnicklas/xpath.git'
   gem "shoulda"
   gem "factory_girl"
   gem 'cucumber-rails'
-  gem 'cucumber'
   gem 'spork'
   gem 'launchy'
   gem 'database_cleaner'
