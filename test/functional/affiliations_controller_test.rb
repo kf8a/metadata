@@ -2,7 +2,6 @@ require File.expand_path('../../test_helper',__FILE__)
 require 'affiliations_controller'
 
 class AffiliationsControllerTest < ActionController::TestCase
-#  fixtures :affiliations
 
   def setup
     #TODO test with admin and non admin users
