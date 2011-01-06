@@ -240,6 +240,7 @@ GEM
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
     thor (0.14.6)
+    transitions (0.0.9)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.23)
@@ -282,5 +283,6 @@ DEPENDENCIES
   subdomain-fu!
   thin
   thinking-sphinx!
+  transitions
   xpath!
   zipruby

@@ -31,6 +31,8 @@ if RUBY_VERSION < "1.9"
   gem 'fastercsv'
 end
 
+gem "transitions", :require => ["transitions", "active_record/transitions"]
+
 #Gets rid of annoying UTF-8 string error in rack
 gem "escape_utils"
 

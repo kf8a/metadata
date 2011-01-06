@@ -15,6 +15,10 @@ class CitationTest < ActiveSupport::TestCase
     should 'be valid' do
       assert @citation.valid?
     end
+
+    should 'start out as submitted' do
+      assert_equal 'submitted', @citation.state
+    end
     
   end
 end

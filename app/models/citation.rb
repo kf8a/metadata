@@ -1,7 +1,11 @@
 class Citation < ActiveRecord::Base
+  include ActiveRecord::Transitions
+
   has_many :authors, :order => :seniority
   belongs_to :citation_type
   belongs_to :website
+
+  accepts_nested_attributes_for :authors
   
   has_attached_file :pdf, :url => "/assets/citations/:attachment/:id/:style/:basename.:extension",  
    :path => ":rails_root/assets/citations/:attachment/:id/:style/:basename.:extension"
@@ -13,4 +17,16 @@ class Citation < ActiveRecord::Base
           :conditions => 'seniority = 1',
           :order => 'authors.sur_name, pub_year desc'
    
+  state_machine do
+    state :submitted
+    state :forthcomming
+    state :published
+
+    event :accept do
+      transitions :to => :forthcomming, :from => [:submitted, :published]
+    end
+    event :publish do
+      transitions :to => :published, :from => [:fothcomming, :submitted]
+    end
+  end
 end
