@@ -3,7 +3,9 @@ class CitationsController < ApplicationController
   caches_action :index if Rails.env == 'production'
 
   def index
-    @citations = Citation.with_authors_by_sur_name_and_pub_year
+    @submitted_citations = Citation.submitted_with_authors_by_sur_name_and_pub_year
+    @forthcomming_citations = Citation.forthcomming_with_authors_by_sur_name_and_pub_year
+    @citations = Citation.published_with_authors_by_sur_name_and_pub_year
   end
 
   def show
