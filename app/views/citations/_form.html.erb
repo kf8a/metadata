@@ -1,0 +1,27 @@
+<%= form.inputs:citation_type %>
+<% form.inputs do %>
+  <%= form.input :state, :as => :radio,  :collection => ['submitted','forthcomming','published'] %>
+<% end %>
+<%= form.inputs :doi %>
+<%= form.inputs :for=> :authors do |f| %>
+    <%= f.inputs do %>
+      <%= f.input :given_name %>
+      <%= f.input :middle_name %>
+      <%= f.input :sur_name %>
+      <%= f.input :seniority %>
+      <% if false %>
+      <% unless f.object.new_record? %>
+        <li>
+        <%= f.label '_destroy', "Remove" %>
+        <%= f.check_box '_destroy' %>
+        </li>
+      <% end %>
+    <% end %>
+    <% end %>
+<% end %>
+
+<%= link_to 'add author', new_author_url(), :remote => true %>
+
+<%= form.inputs :title, :abstract, :pub_year, :publication, :start_page_number, :ending_page_number, :periodical_full_name,
+    :periodical_abbreviation, :volume, :issue, :isbn, :publisher_url, :full_text, :publisher, :address, :city %>
+<%= form.inputs :pdf , :as => :file%>
