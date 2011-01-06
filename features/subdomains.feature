@@ -1,7 +1,8 @@
 Feature: Use subdomains to divide up the site.
   In order to access areas with different permissions and standards
   A user wants to be able to go to different subdomains.
-  
+
+#TODO These do not work in capybara, because of the way the subdomain is set.
 Scenario: Datatables index works at LTER subdomain.
   Given I am in the LTER subdomain
   When I go to the datatables page
