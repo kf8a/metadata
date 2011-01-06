@@ -39,5 +39,5 @@ jQuery(document).ready(function() {
   function add_fields(link, association, content) {
       var new_id = new Date().getTime();
         var regexp = new RegExp("new_" + association, "g")
-          jQuery(link).parent().before(content.replace(regexp, new_id));
+          jQuery(link).prev().append(content.replace(regexp, new_id));
   }

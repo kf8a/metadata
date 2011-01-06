@@ -4,17 +4,11 @@
 <% end %>
 <div id='authors'>
   <%= form.inputs :for=> :authors do |f| %>
-    <%= f.inputs do %>
-      <%= f.input :given_name %>
-      <%= f.input :middle_name %>
-      <%= f.input :sur_name %>
-      <%= f.input :seniority %>
-      <%= link_to_remove_fields "Remove", f %>
-    <% end %>
+    <%= render :partial => 'author_fields', :locals => {:f=>f} %>
   <% end %>
 </div>
 
-<%= link_to 'add author', new_author_url, :remote => true %>
+<%= link_to_add_fields "Add Author", form, :authors %>
 
 <%= form.inputs :title, :abstract, :pub_year, :publication, :start_page_number, :ending_page_number, :periodical_full_name,
     :periodical_abbreviation, :volume, :issue, :isbn, :publisher_url, :full_text, :publisher, :address, :city %>
