@@ -55,6 +55,13 @@ class CitationsControllerTest < ActionController::TestCase
       should redirect_to('the sign in page') { sign_in_url }
     end
 
+    context 'GET: new' do
+      setup do
+        get :new
+      end
+      should respond_with :forbidden
+    end
+
     context 'POST: create' do
       setup do
         post :create 
@@ -95,6 +102,14 @@ class CitationsControllerTest < ActionController::TestCase
 
       should respond_with :success
       should assign_to :citations
+    end
+    
+    context 'GET: new' do
+      setup do
+        get :new
+      end
+
+      should respond_with :forbidden
     end
 
     context 'POST: create' do
@@ -172,7 +187,7 @@ class CitationsControllerTest < ActionController::TestCase
       should assign_to(:citation)
 
       should 'have an author' do
-        assert_select '#citation_author_given_name'
+        assert_select '#citation_authors_attributes_0_given_name'
       end
     end
 

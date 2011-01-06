@@ -11,6 +11,7 @@ class CitationsController < ApplicationController
   end
   
   def new
+    head(:forbidden) and return unless signed_in? and current_user.role == 'admin'
     @citation = Citation.new
   end
 
