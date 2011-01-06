@@ -4,7 +4,7 @@ class CitationsController < ApplicationController
 
   def index
     @submitted_citations = Citation.submitted_with_authors_by_sur_name_and_pub_year
-    @forthcomming_citations = Citation.forthcomming_with_authors_by_sur_name_and_pub_year
+    @forthcoming_citations = Citation.forthcoming_with_authors_by_sur_name_and_pub_year
     @citations = Citation.published_with_authors_by_sur_name_and_pub_year
   end
 

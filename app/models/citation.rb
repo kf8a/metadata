@@ -22,7 +22,7 @@ class Citation < ActiveRecord::Base
           :conditions => "seniority = 1 and state = 'submitted'",
           :order => 'authors.sur_name, pub_year desc'
 
-  scope :forthcomming_with_authors_by_sur_name_and_pub_year,
+  scope :forthcoming_with_authors_by_sur_name_and_pub_year,
           :joins=> 'left join authors on authors.citation_id = citations.id',
           :conditions => "seniority = 1 and state = 'forthcomming'",
           :order => 'authors.sur_name, pub_year desc'
