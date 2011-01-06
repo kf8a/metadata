@@ -12,11 +12,21 @@ class Citation < ActiveRecord::Base
   
   attr_protected :pdf_file_name, :pdf_content_type, :pdf_size
 
-  scope :with_authors_by_sur_name_and_pub_year,
+  scope :published_with_authors_by_sur_name_and_pub_year,
           :joins=> 'left join authors on authors.citation_id = citations.id',
-          :conditions => 'seniority = 1',
+          :conditions => "seniority = 1 and state = 'published'",
           :order => 'authors.sur_name, pub_year desc'
-   
+  
+  scope :submitted_with_authors_by_sur_name_and_pub_year,
+          :joins=> 'left join authors on authors.citation_id = citations.id',
+          :conditions => "seniority = 1 and state = 'submitted'",
+          :order => 'authors.sur_name, pub_year desc'
+
+  scope :forthcoming_with_authors_by_sur_name_and_pub_year,
+          :joins=> 'left join authors on authors.citation_id = citations.id',
+          :conditions => "seniority = 1 and state = 'forthcomming'",
+          :order => 'authors.sur_name, pub_year desc'
+
   state_machine do
     state :submitted
     state :forthcomming
