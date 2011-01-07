@@ -1,6 +1,6 @@
 class CitationsController < ApplicationController
   layout :site_layout
-  caches_action :index if Rails.env == 'production'
+#  caches_action :index if Rails.env == 'production'
 
   def index
     @submitted_citations = Citation.submitted_with_authors_by_sur_name_and_pub_year
@@ -69,6 +69,19 @@ class CitationsController < ApplicationController
     path = citation.pdf.path(params[:style])
     logger.info path
     send_file(path)
+  end
+
+  def destroy
+    head(:forbidden) and return unless signed_in? and current_user.role == 'admin'
+
+    @citation = Citation.find(params[:id])
+    @citation.destroy 
+
+    expire_action :action => :index
+    respond_to do |format|
+      format.html { redirect_to citations_url }
+      format.xml  { head :ok }
+    end
   end
   
   private 

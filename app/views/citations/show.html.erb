@@ -11,3 +11,7 @@
     <%=link_to 'pdf', @citation.pdf.url  if @citation.pdf.url %>
   <% end %>
 <% end %>
+<% if signed_in? and current_user.role == 'admin' %>
+  <%= link_to 'Delete', citation_path(@citation), :method => 'delete', 
+                        :confirm => 'Are you sure?' %>
+<% end %> 

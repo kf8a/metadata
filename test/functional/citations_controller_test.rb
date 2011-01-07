@@ -87,16 +87,27 @@ class CitationsControllerTest < ActionController::TestCase
       
       should respond_with :forbidden
     end
-  end
 
-  context 'POST: update' do
-    setup do
-      @citation = Factory.create :citation
-      post :update, :id => @citation, :title => 'nothing'
+    context 'POST: update' do
+      setup do
+        @citation = Factory.create :citation
+        post :update, :id => @citation, :title => 'nothing'
+      end
+
+      should respond_with :forbidden
     end
 
-    should respond_with :forbidden
+    context 'DELETE' do
+      setup do 
+        citation = Factory :citation
+        post :destroy, :id => citation
+      end
+
+      should respond_with :forbidden
+    end
+    
   end
+
 
   context 'signed in user' do
 
@@ -147,6 +158,14 @@ class CitationsControllerTest < ActionController::TestCase
       should respond_with :forbidden
     end
 
+    context 'DELETE' do
+      setup do 
+        citation = Factory :citation
+        post :destroy, :id => citation
+      end
+
+      should respond_with :forbidden
+    end
   end
 
   context 'signed in as admin' do
@@ -219,6 +238,15 @@ class CitationsControllerTest < ActionController::TestCase
       should 'actually save the title' do
         assert_equal 'nothing', assigns(:citation).title
       end
+    end
+
+    context 'DESTROY' do
+      setup do
+        @citation = Factory.create :citation
+        post :destroy, :id => @citation
+      end
+
+      should redirect_to('the citation index page') {citations_url() }
     end
   end
 end

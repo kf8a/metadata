@@ -44,6 +44,7 @@ class Citation < ActiveRecord::Base
   end
 
   def formatted
+    #TODO: need to handle the case where there is no volume or where the numbers are blank
     volume_and_page = case
       when volume && start_page_number && ending_page_number
         if start_page_number == ending_page_number
