@@ -6,6 +6,10 @@ Factory.define :author do |author|
   author.seniority  1
 end
 
+Factory.define :editor do |editor|
+  editor.seniority 1
+end
+
 Factory.define :citation do |cite|
 end
 

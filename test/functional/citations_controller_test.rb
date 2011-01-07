@@ -189,6 +189,7 @@ class CitationsControllerTest < ActionController::TestCase
       setup do
         citation = Factory.create :citation
         citation.authors = [Factory.create(:author), Factory.create(:author)]
+        citation.editors = [Factory.create(:editor), Factory.create(:editor)]
         get :edit, :id => citation
       end
 
@@ -198,6 +199,11 @@ class CitationsControllerTest < ActionController::TestCase
       should 'have an author' do
         assert_select '#citation_authors_attributes_0_given_name'
       end
+
+      should 'have an editor' do
+        assert_select '#citation_editors_attributes_0_given_name'
+      end
+
     end
 
     context 'POST: update' do
