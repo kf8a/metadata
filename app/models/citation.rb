@@ -68,11 +68,10 @@ class Citation < ActiveRecord::Base
     author_array = []
     if authors.length > 1
       last_author = authors.pop
-      author_array = authors.collect {|author| "#{author.sur_name}, #{author.given_name}. #{author.middle_name}."}
-      author_array.push("#{last_author.given_name}. #{last_author.middle_name}. #{last_author.sur_name}.")
+      author_array = authors.collect {|author| "#{author.formatted}"}
+      author_array.push("#{last_author.formatted(:natural)}.")
     elsif authors.length > 0
-      author = authors.first
-      author_array = ["#{author.sur_name}, #{author.given_name}. #{author.middle_name}."]
+      author_array = [authors.first.formatted]
     end 
     author_array.to_sentence(:two_words_connector => ', and ')
   end
