@@ -14,4 +14,8 @@ module CitationsHelper
       
       "#{authors}. #{citation.pub_year}. <em>#{citation.title}</em> #{citation.publication} #{volume_and_page}"
   end
+
+  def formatted_as_book(citation)
+   "" 
+  end
 end

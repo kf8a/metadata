@@ -2,7 +2,7 @@ require File.expand_path('../../../test_helper',__FILE__)
 
 class CitationsHelperTest < ActionView::TestCase
  
-   context 'a citation' do
+   context 'a citation with default format' do
     setup do
       @citation = Citation.new
     end
@@ -37,4 +37,14 @@ class CitationsHelperTest < ActionView::TestCase
       end
     end
   end
+
+   context 'a citation with book format' do
+     setup do
+       @citation = Citation.new
+     end
+
+     should 'return a string' do
+      assert formatted_as_book(@citation).kind_of?(String)
+     end
+   end
 end
