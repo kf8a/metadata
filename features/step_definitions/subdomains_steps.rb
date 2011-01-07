@@ -1,7 +1,8 @@
 Given /^I am in the (.*) subdomain$/ do |subdomain|
   subdomain = subdomain.downcase
   Capybara.default_host = "#{subdomain}.localhost"
-  Capybara.app_host = "http://#{subdomain}.localhost:3000"
+  switch_session(subdomain)
+  visit("http://#{subdomain}.localhost")
 end
 
 When /^I follow the redirect$/ do

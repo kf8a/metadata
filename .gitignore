@@ -1,4 +1,4 @@
-db/meta_test
+db/meta_*
 .yardoc
 db/*.sqlite3
 db/sphinx

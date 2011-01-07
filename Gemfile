@@ -5,7 +5,9 @@ gem 'rails', '3.0.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'newrelic_rpm'
 gem 'pg'
+gem 'sqlite3-ruby'
 gem 'rack-openid'
 gem 'acts-as-taggable-on'
 gem 'paperclip'
@@ -52,15 +54,12 @@ group :test do
 
   gem "rspec", "=1.3.0"
   gem "rspec-rails"
-end
 
-group :cucumber do
+  #Cucumber stuff
   gem 'capybara'
-  gem 'xpath', :git => 'git://github.com/jnicklas/xpath.git'
   gem "shoulda"
   gem "factory_girl"
   gem 'cucumber-rails'
-  gem 'cucumber'
   gem 'spork'
   gem 'launchy'
   gem 'database_cleaner'
