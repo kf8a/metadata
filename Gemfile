@@ -5,7 +5,7 @@ gem 'rails', '3.0.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'newrelic_rpm'
+gem 'newrelic_rpm', '2.13.4'
 gem 'pg'
 gem 'sqlite3-ruby'
 gem 'rack-openid'

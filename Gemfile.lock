@@ -261,7 +261,7 @@ DEPENDENCIES
   less
   liquid
   metric_fu
-  newrelic_rpm
+  newrelic_rpm (= 2.13.4)
   nokogiri
   paperclip
   pg
