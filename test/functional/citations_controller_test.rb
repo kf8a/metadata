@@ -11,11 +11,11 @@ class CitationsControllerTest < ActionController::TestCase
       setup do
         Citation.delete_all  #clear out other citations
         author1 = Factory.create(:author, :sur_name => 'Zebedee', :seniority => 1)
-        author2 = Factory.create(:author, :sur_name => 'Alfred', :seniority => 1)
+        author2 = Factory.create(:author, :sur_name => 'Alfred',  :seniority => 1)
         @citation1 = Factory.create(:citation, 
-          :authors => [author1], :title => 'citation1', :pub_year => 2010)
+          :authors => [author1], :title => 'citation1', :pub_year => 2010, :state => 'published')
         @citation2 = Factory.create(:citation, 
-          :authors => [author2], :title => 'citation2', :pub_year => 2010)
+          :authors => [author2], :title => 'citation2', :pub_year => 2010, :state => 'published')
         get :index
       end
 
@@ -53,6 +53,15 @@ class CitationsControllerTest < ActionController::TestCase
       end
       
       should redirect_to('the sign in page') { sign_in_url }
+    end
+
+    context 'GET :show' do
+      setup do
+        @citation = Factory :citation, :abstract => '*Something*', :title => 'article'
+        get :show, :id => @citation
+      end
+
+      should respond_with :success
     end
 
     context 'GET: new' do
