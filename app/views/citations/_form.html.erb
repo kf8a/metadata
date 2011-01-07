@@ -2,13 +2,22 @@
 <%= form.inputs do %>
   <%= form.input :state, :as => :radio,  :collection => ['submitted','forthcomming','published'] %>
 <% end %>
+<h2>Authors</h2>
 <div id='authors'>
   <%= form.inputs :for=> :authors do |f| %>
     <%= render :partial => 'author_fields', :locals => {:f=>f} %>
   <% end %>
 </div>
-
 <%= link_to_add_fields "Add Author", form, :authors %>
+
+<h2>Editors</h2>
+<div id='editors'>
+  <%= form.inputs :for => :editors do |f| %>
+    <%= render :partial => 'editor_fields', :locals => {:f=>f} %>
+  <% end %>
+</div>
+<%= link_to_add_fields "Add Editors", form, :editors %>
+
 
 <%= form.inputs :title, :secondary_title, :series_title, :abstract, :pub_year, :pub_date, :publication, 
     :start_page_number, :ending_page_number, :periodical_full_name,

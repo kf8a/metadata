@@ -1,7 +1,7 @@
 <h2>Submitted</h2>
 <ul>
   <% @submitted_citations.each do |citation| %>
-    <li class='citation' >
+    <li class='citation'>
     <%=raw formatted_as_default(citation) %>
     <%= link_to 'abstract', citation_url(citation)%>
     <% if citation.pdf.exists? %>

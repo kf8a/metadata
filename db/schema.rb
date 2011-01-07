@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110105030350) do
+ActiveRecord::Schema.define(:version => 20110107144139) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -230,6 +230,17 @@ ActiveRecord::Schema.define(:version => 20110105030350) do
     t.datetime "updated_at"
   end
 
+  create_table "editors", :force => true do |t|
+    t.string   "sur_name"
+    t.string   "given_name"
+    t.string   "middle_name"
+    t.integer  "seniority"
+    t.integer  "person_id"
+    t.integer  "citation_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "eml_docs", :force => true do |t|
   end
 
@@ -417,17 +428,6 @@ ActiveRecord::Schema.define(:version => 20110105030350) do
   add_index "permissions", ["datatable_id"], :name => "index_permissions_on_datatable_id"
   add_index "permissions", ["owner_id"], :name => "index_permissions_on_owner_id"
   add_index "permissions", ["user_id"], :name => "index_permissions_on_user_id"
-
-  create_table "plots", :force => true do |t|
-    t.string  "name"
-    t.integer "treatment_id"
-    t.integer "replicate"
-    t.integer "study_id"
-    t.string  "description"
-  end
-
-  add_index "plots", ["study_id"], :name => "index_plots_on_study_id"
-  add_index "plots", ["treatment_id"], :name => "index_plots_on_treatment_id"
 
   create_table "projects", :force => true do |t|
     t.string   "title"

@@ -2,10 +2,13 @@ class Citation < ActiveRecord::Base
   include ActiveRecord::Transitions
 
   has_many :authors, :order => :seniority
+  has_many :editors, :order => :seniority
+
   belongs_to :citation_type
   belongs_to :website
 
   accepts_nested_attributes_for :authors
+  accepts_nested_attributes_for :editors
   
   has_attached_file :pdf, :url => "/assets/citations/:attachment/:id/:style/:basename.:extension",  
    :path => ":rails_root/assets/citations/:attachment/:id/:style/:basename.:extension"
