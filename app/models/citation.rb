@@ -42,4 +42,31 @@ class Citation < ActiveRecord::Base
       transitions :to => :published, :from => [:fothcomming, :submitted]
     end
   end
+
+  def formatted
+    volume_and_page = case
+      when volume && start_page_number && ending_page_number
+        "#{volume}:#{start_page_number}-#{ending_page_number}"
+      when volume && start_page_number
+        "#{volume}:#{start_page_number}"
+      when volume
+        "#{volume}"
+      else
+        ""
+      end
+    
+    "#{author_string} #{pub_year}. #{title}. #{publication} #{volume_and_page}"
+  end
+
+  private
+
+  def author_string
+    author_array = []
+    if authors.length > 1
+      last_author = authors.pop
+      author_array = authors.collect {|author| "#{author.sur_name}, #{author.given_name}. #{author.middle_name}."}
+      author_array.push("#{last_author.given_name}. #{last_author.middle_name}. #{last_author.sur_name}.")
+    end
+    author_array.to_sentence(:two_words_connector => ', and ')
+  end
 end

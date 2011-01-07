@@ -12,10 +12,13 @@ module CitationsHelper
           ""
         end
       
-      "#{authors}. #{citation.pub_year}. <em>#{citation.title}</em> #{citation.publication} #{volume_and_page}"
+      "#{authors} #{citation.pub_year}. <em>#{citation.title}</em> #{citation.publication} #{volume_and_page}"
   end
 
   def formatted_as_book(citation)
-   "" 
+     authors = citation.authors.collect {|author| "#{author.sur_name} #{author.given_name}"}.join(', ').upcase
+     editors = citation.editors.collect {|editor| "#{editor.sur_name} #{author.given_name}"}.join(', ').upcase
+
+     "#{authors} "
   end
 end

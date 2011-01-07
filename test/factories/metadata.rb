@@ -13,6 +13,9 @@ end
 Factory.define :citation do |cite|
 end
 
+Factory.define :citation_type do |cite_type|
+end
+
 Factory.define :dataset do |d|
   d.title 'KBS001'
   d.abstract 'some new dataset'

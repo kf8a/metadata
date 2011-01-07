@@ -10,6 +10,20 @@ class CitationTest < ActiveSupport::TestCase
   context 'a citation object' do
     setup do
       @citation = Factory :citation
+      @citation.authors << Author.new( :sur_name => 'Loecke', 
+                                       :given_name => 'T', :middle_name => 'D',
+                                       :seniority => 1)
+
+      @citation.authors << Author.new(:sur_name => 'Robertson',
+                                      :given_name => 'G', :middle_name => 'P',
+                                      :seniority => 2)
+
+      @citation.title = 'Soil resource heterogeneity in the form of aggregated litter alters maize productivity'
+      @citation.publication = 'Plant and Soil'
+      @citation.volume = 325
+      @citation.start_page_number = 231
+      @citation.ending_page_number = 241
+      @citation.pub_year = 2008
     end
     
     should 'be valid' do
@@ -19,6 +33,22 @@ class CitationTest < ActiveSupport::TestCase
     should 'start out as submitted' do
       assert_equal 'submitted', @citation.state
     end
-    
+
+    should 'be formatted as default' do
+      result = 'Loecke, T. D., and G. P. Robertson. 2008. Soil resource heterogeneity in the form of aggregated litter alters maize productivity. Plant and Soil 325:231-241'
+      assert_equal result, @citation.formatted
+    end
+  end
+
+  context 'formatting a book citation' do
+    setup do
+      @citation = Factory :citation
+      @citation.citation_type = Factory :citation_type, :name => 'book'
+    end
+
+    should 'be formatted correctly' do
+      result = "SHOKO, I., CHAI, B. Gene-targeted-metagenomics. In: BRUIJN, F. J. D. (ed.) Handbook of Molecular Microbial Ecology. Wiley/Blackwell Press."
+      assert_equal result, @citation.formatted
+    end
   end
 end
