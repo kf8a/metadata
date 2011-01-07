@@ -7,15 +7,17 @@ class AuthorTest < ActiveSupport::TestCase
 
   context 'an author with a last name' do
     setup do
-      @author = Factory :author, :sur_name => 'bond'
+      @author1 = Factory :author, :sur_name => 'bond'
+      @author2 = Factory :author, :sur_name => 'BOND', :given_name => ''
     end
 
     should 'be formatted correctly as default' do
-      assert_equal 'Bond', @author.formatted
+      assert_equal 'Bond', @author1.formatted
+      assert_equal 'Bond', @author2.formatted
     end
 
     should 'be formatted corretly as natural' do
-      assert_equal 'Bond', @author.formatted(:natural)
+      assert_equal 'Bond', @author1.formatted(:natural)
     end
   end
 

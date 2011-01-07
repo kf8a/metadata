@@ -12,9 +12,9 @@ class Author < ActiveRecord::Base
   end
   
   def format_as_default
-    if given_name and middle_name
+    if has_given_name? and  has_middle_name?
       "#{sur_name.capitalize}, #{given_name[0].upcase}. #{middle_name[0].upcase}."
-    elsif given_name
+    elsif has_given_name?
       "#{sur_name.capitalize}, #{given_name[0].upcase}."
     else
       sur_name.capitalize
@@ -22,12 +22,22 @@ class Author < ActiveRecord::Base
   end
 
   def format_as_natural
-    if given_name and middle_name
+    if has_given_name? and has_middle_name?
       "#{given_name[0].upcase}. #{middle_name[0].upcase}. #{sur_name.capitalize}"
     elsif given_name
       "#{given_name[0].upcase}. #{sur_name.capitalize}"
     else
       sur_name.capitalize
     end
+  end
+
+  private
+  
+  def has_given_name?
+    !(given_name.nil? || given_name.try(:empty?))
+  end
+
+  def has_middle_name?
+    !(middle_name.nil? || middle_name.try(:empty?))
   end
 end
