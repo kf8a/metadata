@@ -12,6 +12,6 @@
   <% end %>
 <% end %>
 <% if signed_in? and current_user.role == 'admin' %>
-  <%= link_to 'Delete', citation_path(@citation), :method => 'delete', 
-                        :confirm => 'Are you sure?' %>
+  <%= button_to 'Delete', { :action => "destroy", :id => @citation.id },
+    :confirm => "Are you sure?", :method => :delete  %>
 <% end %> 

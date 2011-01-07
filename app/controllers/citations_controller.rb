@@ -74,8 +74,8 @@ class CitationsController < ApplicationController
   def destroy
     head(:forbidden) and return unless signed_in? and current_user.role == 'admin'
 
-    @citation = Citation.find(params[:id])
-    @citation.destroy 
+    citation = Citation.find(params[:id])
+    citation.destroy 
 
     expire_action :action => :index
     respond_to do |format|
