@@ -269,31 +269,31 @@ class DatatableTest < ActiveSupport::TestCase
   
   context 'datatable with different date representations' do
     setup do 
-      obs_date = Factory.create(:datatable, :object => %q{select current_date as obs_date})
-      datetime = Factory.create(:datatable, :object => %q{select current_date as datetime})
-      date = Factory.create(:datatable, :object => %q{select current_date as date})
+      obs_date = Factory.create(:datatable, :object => %q{select current_date at time zone 'America/New_York' as obs_date})
+      datetime = Factory.create(:datatable, :object => %q{select current_date at time zone 'America/New_York' as datetime})
+      date = Factory.create(:datatable, :object => %q{select current_date at time zone 'America/New_York' as date})
       @date_representations = [obs_date, datetime, date]
     end
-    
+
     should 'return true if interval includes today' do
       @date_representations.each do |date_representation|
         assert date_representation.within_interval?(Date.today, Date.today + 1.day)
       end
     end
-    
+
     should 'return false if the interval is later than the data times' do
       @date_representations.each do |date_representation|
         assert !date_representation.within_interval?(Date.today + 1.day, Date.today + 4.day)
       end
     end
-    
+
     should 'return false if the interval is earlier than the data times' do
       @date_representations.each do |date_representation|
         assert !date_representation.within_interval?(Date.today - 4.day, Date.today - 2.day)
       end
     end
-         
-    
+
+
     should 'have the correct temporal extent' do
       @date_representations.each do |date_representation|     
         dates = date_representation.temporal_extent
@@ -301,7 +301,7 @@ class DatatableTest < ActiveSupport::TestCase
         assert dates[:end_date] == Date.today
       end
     end
-    
+
     should 'cache the temporal extent' do
       @date_representations.each do |date_representation|
         date_representation.update_temporal_extent
@@ -310,12 +310,12 @@ class DatatableTest < ActiveSupport::TestCase
       end
     end
   end
-  
+
   context 'datatable with year' do
     setup do 
       @year = Factory.create(:datatable, :object => "select #{Time.now.year} as year")
     end
-    
+
     should 'return true if interval includes today' do
         assert @year.within_interval?(Date.today - 1.year, Date.today + 1.day)
     end
