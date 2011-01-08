@@ -269,9 +269,9 @@ class DatatableTest < ActiveSupport::TestCase
   
   context 'datatable with different date representations' do
     setup do 
-      obs_date = Factory.create(:datatable, :object => %q{select current_date at time zone 'America/New_York' as obs_date})
-      datetime = Factory.create(:datatable, :object => %q{select current_date at time zone 'America/New_York' as datetime})
-      date = Factory.create(:datatable, :object => %q{select current_date at time zone 'America/New_York' as date})
+      obs_date = Factory.create(:datatable, :object => %Q{select date '#{Date.today}' as obs_date})
+      datetime = Factory.create(:datatable, :object => %Q{select date '#{Date.today}'as datetime})
+      date = Factory.create(:datatable, :object => %Q{select date '#{Date.today}' as date})
       @date_representations = [obs_date, datetime, date]
     end
 
