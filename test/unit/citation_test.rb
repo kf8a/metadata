@@ -14,7 +14,6 @@ class CitationTest < ActiveSupport::TestCase
                                       :given_name => 'G', :middle_name => 'P',
                                       :seniority => 1)
 
-      @citation.citation_type = Factory :citation_type, :name => 'article'
       @citation.title = 'Long-term ecological research: Re-inventing network science'
       @citation.publication = 'Frontiers in Ecology and the Environment'
       @citation.volume = 6

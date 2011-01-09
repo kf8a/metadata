@@ -44,12 +44,13 @@ class Citation < ActiveRecord::Base
   end
 
   def formatted
-    case citation_type.name
+    case citation_type.try(:name)
     when 'book' then formatted_book
     else formatted_article
     end
   end
 
+  private
 
   def formatted_article
     #TODO: need to handle the case where there is no volume or where the numbers are blank
@@ -74,8 +75,6 @@ class Citation < ActiveRecord::Base
   def formatted_book
     "#{author_string} #{pub_year}. #{title}. Pages #{start_page_number}-#{ending_page_number} in #{editor_string}, eds. #{publication}. #{publisher}, #{address}"
   end
-
-  private
 
   def author_string
     author_array = []
