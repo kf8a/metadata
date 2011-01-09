@@ -44,6 +44,14 @@ class Citation < ActiveRecord::Base
   end
 
   def formatted
+    case citation_type.name
+    when 'book' then formatted_book
+    else formatted_article
+    end
+  end
+
+
+  def formatted_article
     #TODO: need to handle the case where there is no volume or where the numbers are blank
     volume_and_page = case
       when volume && start_page_number && ending_page_number
@@ -59,8 +67,12 @@ class Citation < ActiveRecord::Base
       else
         ""
       end
-    
+
     "#{author_string} #{pub_year}. #{title}. #{publication} #{volume_and_page}"
+  end
+
+  def formatted_book
+    "#{author_string} #{pub_year}. #{title}. Pages #{start_page_number}-#{ending_page_number} in #{editor_string}, eds. #{publication}. #{publisher}, #{address}"
   end
 
   private
@@ -75,5 +87,12 @@ class Citation < ActiveRecord::Base
       author_array = [authors.first.formatted]
     end 
     author_array.to_sentence(:two_words_connector => ', and ')
+  end
+
+  def editor_string
+    editor_array = editors.collect do |editor|
+      "#{editor.formatted(:natural)}"
+    end
+    editor_array.to_sentence(:two_words_connector => ', and ')
   end
 end

@@ -14,6 +14,7 @@ class CitationTest < ActiveSupport::TestCase
                                       :given_name => 'G', :middle_name => 'P',
                                       :seniority => 1)
 
+      @citation.citation_type = Factory :citation_type, :name => 'article'
       @citation.title = 'Long-term ecological research: Re-inventing network science'
       @citation.publication = 'Frontiers in Ecology and the Environment'
       @citation.volume = 6
@@ -46,6 +47,7 @@ class CitationTest < ActiveSupport::TestCase
       @citation.authors << Author.new(:sur_name => 'Robertson',
                                       :given_name => 'G', :middle_name => 'P',
                                       :seniority => 2)
+      @citation.citation_type = Factory :citation_type, :name => 'article'
 
       @citation.title = 'Soil resource heterogeneity in the form of aggregated litter alters maize productivity'
       @citation.publication = 'Plant and Soil'
@@ -75,8 +77,21 @@ class CitationTest < ActiveSupport::TestCase
       @citation.pub_year = 2006
       @citation.title    = 'Soil system management in temperate regions'
       @citation.start_page_number = 27
-      @citation.ending_page_number = 38
+      @citation.ending_page_number = 39
+      @citation.editors << Editor.new(:sur_name => 'Uphoff',
+                                     :given_name => 'N',
+                                     :seniority => 1)
+     @citation.editors << Editor.new(:sur_name => 'Ball',
+                                     :given_name => 'A',
+                                     :middle_name => 'S',
+                                     :seniority => 2) 
+     @citation.editors << Editor.new(:sur_name => 'Thies',
+                                     :given_name => 'J',
+                                     :seniority => 3)
 
+     @citation.publication = 'Biological Approaches to Sustainable Soil Systems'
+     @citation.publisher = 'CRC Press, Taylor and Francis Group'
+     @citation.address = 'Boca Raton, Florida, USA'
     end
 
     should 'be formatted correctly' do
