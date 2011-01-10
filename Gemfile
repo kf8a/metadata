@@ -7,7 +7,6 @@ gem 'rails', '3.0.3'
 
 gem 'newrelic_rpm'
 gem 'pg'
-gem 'sqlite3-ruby'
 gem 'rack-openid'
 gem 'acts-as-taggable-on'
 gem 'paperclip'
@@ -38,9 +37,10 @@ gem "escape_utils"
 
 gem 'metric_fu'
 
-group :development do
+group :development, :test  do
   # bundler requires these gems in development
   # gem "rails-footnotes"
+  gem 'sqlite3-ruby'
 end
 
 group :test do
@@ -48,6 +48,8 @@ group :test do
     gem 'simplecov'
     gem 'simplecov-html'
   #end
+  gem 'sqlite3-ruby'
+
   gem "shoulda"
   gem "factory_girl"
   gem 'factory_girl_rails'
