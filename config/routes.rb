@@ -76,9 +76,10 @@ Metadata::Application.routes.draw do
   resources :units
   resources :uploads
   resources :variates
-  match '/assets/citations/:attachment/:id/:style/:basename.:extension' => 'citations#download', :constraints => { :method => 'get' }
+  #match '/assets/citations/:attachment/:id/:style/:basename.:extension' => 'citations#download', :constraints => { :method => 'get' }
   root :to => 'datatables#index'
   match ':controller/service.wsdl' => '#wsdl'
+
   if Rails.env == 'test'
     match 'application_controller_test/foo/testadmin' => 'application_controller_test/foo#testadmin'
     match 'application_controller_test/foo/testpagechoose' => 'application_controller_test/foo#testpagechoose'
