@@ -1,6 +1,6 @@
 class CitationsController < ApplicationController
   layout :site_layout
-  caches_action :index if Rails.env == 'production'
+#  caches_action :index if Rails.env == 'production'
 
   def index
     @submitted_citations = Citation.submitted_with_authors_by_sur_name_and_pub_year
