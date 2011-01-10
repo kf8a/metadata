@@ -1,7 +1,7 @@
 module PeopleHelper
 
   def contact_link(email)
-    "<span id='email'>#{email.gsub(/@/,' at ')}</span>"
+    "#{email.gsub(/@/,' at ')}"
   end
 
   def parenthize(string)

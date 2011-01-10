@@ -17,7 +17,7 @@
   	<% end -%>
 	
   	<% if @person.email and @person.email.strip != '' -%>
-    	<li class='person-email'><%=raw contact_link(@person.email) %></li>
+    	<li class='person-email'><%=contact_link(@person.email) %></li>
   	<% end -%>
   	<% if @person.phone and @person.phone.strip != '' -%>
     	<li>

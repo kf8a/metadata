@@ -1,13 +1,13 @@
 jQuery(document).ready(function() { 
 	function geo_decode() {
-		var email  = jQuery('#email').get(0);
+		var email  = jQuery('.person-email').get(0);
 		if ((email != undefined)) {
 			email_name = email.innerHTML.split(/ /)[0]
 			email_domain = email.innerHTML.split(/ /)[2]
-			email = [email_name, email_domain].join('@');
-
-			jQuery('#email').empty();
-			jQuery('#email').append("<a id='email' href='mailto:"+email+"'>"+email+"</a>");
+			email_string = [email_name, email_domain].join('@');
+      
+			//jQuery('#email').empty();
+			jQuery(email).replaceWith("<a id='email' href='mailto:"+email_string+"'>"+email_string+"</a>");
 		}
 	};
 
