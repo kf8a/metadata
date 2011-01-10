@@ -10,7 +10,7 @@ class Citation < ActiveRecord::Base
   accepts_nested_attributes_for :authors
   accepts_nested_attributes_for :editors
   
-  has_attached_file :pdf, :url => "/assets/citations/:attachment/:id/:style/:basename.:extension",  
+  has_attached_file :pdf, :url => "/citations/:id/download",
    :path => ":rails_root/assets/citations/:attachment/:id/:style/:basename.:extension"
   
   attr_protected :pdf_file_name, :pdf_content_type, :pdf_size

@@ -8,11 +8,13 @@ Metadata::Application.routes.draw do
   match 'sign_up' => 'users#new', :as => :sign_up
   resources :abstracts
   resources :affiliations
+
   resources :citations do
-    collection do
+    member do
       get :download
     end
   end
+
   resources :authors
   resources :collections
   resources :data_contributions

@@ -68,7 +68,7 @@ class CitationsController < ApplicationController
     
     path = citation.pdf.path(params[:style])
     logger.info path
-    send_file(path)
+    send_file  path,  :disposition => 'inline' 
   end
 
   def destroy
