@@ -9,9 +9,9 @@ module CitationFormat
   
   def format_as_default
     if has_given_name? and  has_middle_name?
-      "#{sur_name}, #{given_name[0].upcase}. #{middle_name[0].upcase}."
+      "#{sur_name}, #{given_name[0..0].upcase}. #{middle_name[0..0].upcase}."
     elsif has_given_name?
-      "#{sur_name}, #{given_name[0].upcase}."
+      "#{sur_name}, #{given_name[0..0].upcase}."
     else
       sur_name
     end
@@ -19,9 +19,9 @@ module CitationFormat
 
   def format_as_natural
     if has_given_name? and has_middle_name?
-      "#{given_name[0].upcase}. #{middle_name[0].upcase}. #{sur_name}"
+      "#{given_name[0..0].upcase}. #{middle_name[0..0].upcase}. #{sur_name}"
     elsif given_name
-      "#{given_name[0].upcase}. #{sur_name}"
+      "#{given_name[0..0].upcase}. #{sur_name}"
     else
       sur_name
     end
