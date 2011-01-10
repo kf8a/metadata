@@ -31,7 +31,7 @@ class CitationTest < ActiveSupport::TestCase
     end
 
     should 'be formatted as default' do
-      result = 'Robertson, G. P. 2008. Long-term ecological research: Re-inventing network science. Frontiers in Ecology and the Environment 6:281'
+      result = 'Robertson, G. P. 2008. Long-term ecological research: Re-inventing network science. Frontiers in Ecology and the Environment 6:281.'
       assert_equal result, @citation.formatted
     end
   end
@@ -57,7 +57,7 @@ class CitationTest < ActiveSupport::TestCase
     end
     
     should 'be formatted as default' do
-      result = 'Loecke, T. D., and G. P. Robertson. 2008. Soil resource heterogeneity in the form of aggregated litter alters maize productivity. Plant and Soil 325:231-241'
+      result = 'Loecke, T. D., and G. P. Robertson. 2008. Soil resource heterogeneity in the form of aggregated litter alters maize productivity. Plant and Soil 325:231-241.'
       assert_equal result, @citation.formatted
     end
   end
@@ -94,7 +94,7 @@ class CitationTest < ActiveSupport::TestCase
     end
 
     should 'be formatted correctly' do
-      result = 'Robertson, G. P., and A. S. Grandy. 2006. Soil system management in temperate regions. Pages 27-39 in N. Uphoff, A. S. Ball, and J. Thies, eds. Biological Approaches to Sustainable Soil Systems. CRC Press, Taylor and Francis Group, Boca Raton, Florida, USA'
+      result = 'Robertson, G. P., and A. S. Grandy. 2006. Soil system management in temperate regions. Pages 27-39 in N. Uphoff, A. S. Ball, and J. Thies, eds. Biological Approaches to Sustainable Soil Systems. CRC Press, Taylor and Francis Group, Boca Raton, Florida, USA.'
       assert_equal result, @citation.formatted
     end
   end

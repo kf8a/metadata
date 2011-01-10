@@ -26,10 +26,10 @@ class CitationsControllerTest < ActionController::TestCase
       
       should 'return the citations in alphabetical order' do
         citations = assigns(:citations)
-        assert citations.size == 2
+        assert_equal 2, citations.size
  
-        assert citations[0] == @citation2
-        assert citations[1] == @citation1
+        assert_equal @citation2, citations[0]
+        assert_equal @citation1,  citations[1] 
       end
       
     end

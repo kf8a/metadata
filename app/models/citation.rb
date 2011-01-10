@@ -18,17 +18,17 @@ class Citation < ActiveRecord::Base
   scope :published_with_authors_by_sur_name_and_pub_year,
           :joins=> 'left join authors on authors.citation_id = citations.id',
           :conditions => "seniority = 1 and state = 'published'",
-          :order => 'authors.sur_name, pub_year desc'
+          :order => 'pub_year desc, authors.sur_name'
   
   scope :submitted_with_authors_by_sur_name_and_pub_year,
           :joins=> 'left join authors on authors.citation_id = citations.id',
           :conditions => "seniority = 1 and state = 'submitted'",
-          :order => 'authors.sur_name, pub_year desc'
+          :order => 'pub_year desc, authors.sur_name'
 
   scope :forthcoming_with_authors_by_sur_name_and_pub_year,
           :joins=> 'left join authors on authors.citation_id = citations.id',
           :conditions => "seniority = 1 and state = 'forthcomming'",
-          :order => 'authors.sur_name, pub_year desc'
+          :order => 'pub_year desc,  authors.sur_name'
 
   state_machine do
     state :submitted
@@ -69,11 +69,11 @@ class Citation < ActiveRecord::Base
         ""
       end
 
-    "#{author_string} #{pub_year}. #{title}. #{publication} #{volume_and_page}"
+    "#{author_string} #{pub_year}. #{title}. #{publication} #{volume_and_page}."
   end
 
   def formatted_book
-    "#{author_string} #{pub_year}. #{title}. Pages #{start_page_number}-#{ending_page_number} in #{editor_string}, eds. #{publication}. #{publisher}, #{address}"
+    "#{author_string} #{pub_year}. #{title}. Pages #{start_page_number}-#{ending_page_number} in #{editor_string}, eds. #{publication}. #{publisher}, #{address}."
   end
 
   def author_string
