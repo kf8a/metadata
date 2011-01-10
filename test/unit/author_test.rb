@@ -7,8 +7,8 @@ class AuthorTest < ActiveSupport::TestCase
 
   context 'an author with a last name' do
     setup do
-      @author1 = Factory :author, :sur_name => 'bond'
-      @author2 = Factory :author, :sur_name => 'BOND', :given_name => ''
+      @author1 = Factory :author, :sur_name => 'Bond'
+      @author2 = Factory :author, :sur_name => 'Bond', :given_name => ''
     end
 
     should 'be formatted correctly as default' do
