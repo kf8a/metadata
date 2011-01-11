@@ -1,4 +1,4 @@
-class DatattableSweeper < ActionController::Caching::Sweeper
+class DatatableSweeper < ActionController::Caching::Sweeper
   observe Datatable
 
   def after_create(datatable)
@@ -11,7 +11,7 @@ class DatattableSweeper < ActionController::Caching::Sweeper
 
   def after_destroy(datatable)
    expire_cache_for(datatable) 
-  en
+  end
 
   private
 
