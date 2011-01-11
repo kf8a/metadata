@@ -21,7 +21,6 @@
       </div> 
     <% end %>
   </div>
-<% end %>
 
 <ul class='quickTree'>
   <% @studies.each do |study| -%>
@@ -30,7 +29,7 @@
     <%= render :partial => 'study',  :locals => {:study => study}%>
   <% end -%>
 </ul>
-
+<% end %>
 
 <% if admin? %>
   <h3>Datatables</h3>
