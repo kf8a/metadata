@@ -16,7 +16,7 @@ class CitationTest < ActiveSupport::TestCase
 
       @citation.title = 'Long-term ecological research: Re-inventing network science'
       @citation.publication = 'Frontiers in Ecology and the Environment'
-      @citation.volume = 6
+      @citation.volume = '6'
       @citation.start_page_number = 281
       @citation.ending_page_number = 281
       @citation.pub_year = 2008
@@ -50,7 +50,7 @@ class CitationTest < ActiveSupport::TestCase
 
       @citation.title = 'Soil resource heterogeneity in the form of aggregated litter alters maize productivity'
       @citation.publication = 'Plant and Soil'
-      @citation.volume = 325
+      @citation.volume = '325'
       @citation.start_page_number = 231
       @citation.ending_page_number = 241
       @citation.pub_year = 2008
@@ -108,6 +108,7 @@ class CitationTest < ActiveSupport::TestCase
                                       :seniority => 1) 
       @citation.title = 'Implications of LCA accounting methods in a corn and corn stover to ethanol system'
       @citation.pub_year = 2009
+      @citation.volume = ''
     end
 
     should 'be formatted correctly' do

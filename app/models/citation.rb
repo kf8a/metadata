@@ -53,17 +53,16 @@ class Citation < ActiveRecord::Base
   private
 
   def formatted_article
-    #TODO: need to handle the case where there is no volume or where the numbers are blank
     volume_and_page = case
-      when volume && start_page_number && ending_page_number
+      when has_volume? && start_page_number && ending_page_number
         if start_page_number == ending_page_number
           "#{volume}:#{start_page_number}."
         else
           "#{volume}:#{start_page_number}-#{ending_page_number}."
         end
-      when volume && start_page_number
+      when has_volume? && start_page_number
         "#{volume}:#{start_page_number}."
-      when volume
+      when has_volume?
         "#{volume}."
       else
         ""
@@ -93,5 +92,9 @@ class Citation < ActiveRecord::Base
       "#{editor.formatted(:natural)}"
     end
     editor_array.to_sentence(:two_words_connector => ', and ')
+  end
+
+  def has_volume?
+    volume && !volume.empty?
   end
 end
