@@ -16,7 +16,7 @@ class CitationTest < ActiveSupport::TestCase
 
       @citation.title = 'Long-term ecological research: Re-inventing network science'
       @citation.publication = 'Frontiers in Ecology and the Environment'
-      @citation.volume = 6
+      @citation.volume = '6'
       @citation.start_page_number = 281
       @citation.ending_page_number = 281
       @citation.pub_year = 2008
@@ -50,7 +50,7 @@ class CitationTest < ActiveSupport::TestCase
 
       @citation.title = 'Soil resource heterogeneity in the form of aggregated litter alters maize productivity'
       @citation.publication = 'Plant and Soil'
-      @citation.volume = 325
+      @citation.volume = '325'
       @citation.start_page_number = 231
       @citation.ending_page_number = 241
       @citation.pub_year = 2008
@@ -95,6 +95,24 @@ class CitationTest < ActiveSupport::TestCase
 
     should 'be formatted correctly' do
       result = 'Robertson, G. P., and A. S. Grandy. 2006. Soil system management in temperate regions. Pages 27-39 in N. Uphoff, A. S. Ball, and J. Thies, eds. Biological Approaches to Sustainable Soil Systems. CRC Press, Taylor and Francis Group, Boca Raton, Florida, USA.'
+      assert_equal result, @citation.formatted
+    end
+  end
+
+  context 'formatting a submitted citation' do
+    setup do
+      @citation = Factory :citation
+      @citation.authors << Author.new(:sur_name => 'Kaufman',
+                                      :given_name => 'A',
+                                      :middle_name => 'S',
+                                      :seniority => 1) 
+      @citation.title = 'Implications of LCA accounting methods in a corn and corn stover to ethanol system'
+      @citation.pub_year = 2009
+      @citation.volume = ''
+    end
+
+    should 'be formatted correctly' do
+      result = 'Kaufman, A. S. 2009. Implications of LCA accounting methods in a corn and corn stover to ethanol system.'
       assert_equal result, @citation.formatted
     end
   end

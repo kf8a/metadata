@@ -5,6 +5,7 @@ class DatatablesController < ApplicationController
   before_filter :admin?, :except => [:index, :show, :suggest, :search, :events] unless Rails.env == 'development'
   before_filter :get_datatable, :only => [:show, :edit, :update, :destroy, :update_temporal_extent]
   
+  cache_sweeper :datatable_sweeper
   #caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
   
   # GET /datatables
@@ -12,7 +13,6 @@ class DatatablesController < ApplicationController
   def index
     retrieve_datatables('keyword_list' =>'')
     
-    @sponsor = Sponsor.find_by_name('glbrc')
     respond_to do |format|
       format.html {render_subdomain}
       format.xml  { render :xml => @datatables.to_xml }
@@ -21,8 +21,6 @@ class DatatablesController < ApplicationController
   end
 
   def search
-    @sponsor = Sponsor.find_by_name('glbrc')
-    
     query =  {'keyword_list' => ''}
     query.merge!(params)
     if query['keyword_list'].empty? 
