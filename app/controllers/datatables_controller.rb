@@ -156,7 +156,7 @@ class DatatablesController < ApplicationController
   # DELETE /datatables/1.xml
   def destroy
     @datatable.destroy
-    expire_page :index
+    expire_page :action => :index
 
     respond_to do |format|
       format.html { redirect_to datatables_url }
