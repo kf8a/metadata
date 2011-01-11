@@ -6,6 +6,7 @@ class DatatablesController < ApplicationController
   before_filter :get_datatable, :only => [:show, :edit, :update, :destroy, :update_temporal_extent]
   
   #caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
+  caches_page :index
   
   # GET /datatables
   # GET /datatables.xml
@@ -118,6 +119,7 @@ class DatatablesController < ApplicationController
     
     respond_to do |format|
       if @datatable.save
+        expire_page :index
         flash[:notice] = 'Datatable was successfully created.'
         format.html { redirect_to datatable_url(@datatable) }
         format.xml  { head :created, :location => datatable_url(@datatable) }
@@ -138,6 +140,7 @@ class DatatablesController < ApplicationController
     
     respond_to do |format|
       if @datatable.update_attributes(params[:datatable])
+        expire_page :index
         flash[:notice] = 'Datatable was successfully updated.'
         format.html { redirect_to datatable_url(@datatable) }
         format.xml  { head :ok }
@@ -153,6 +156,7 @@ class DatatablesController < ApplicationController
   # DELETE /datatables/1.xml
   def destroy
     @datatable.destroy
+    expire_page :index
 
     respond_to do |format|
       format.html { redirect_to datatables_url }
