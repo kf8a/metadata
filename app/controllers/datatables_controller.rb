@@ -119,7 +119,7 @@ class DatatablesController < ApplicationController
     
     respond_to do |format|
       if @datatable.save
-        expire_page :index
+        expire_page :action => :index
         flash[:notice] = 'Datatable was successfully created.'
         format.html { redirect_to datatable_url(@datatable) }
         format.xml  { head :created, :location => datatable_url(@datatable) }
@@ -140,7 +140,7 @@ class DatatablesController < ApplicationController
     
     respond_to do |format|
       if @datatable.update_attributes(params[:datatable])
-        expire_page :index
+        expire_page :action => :index
         flash[:notice] = 'Datatable was successfully updated.'
         format.html { redirect_to datatable_url(@datatable) }
         format.xml  { head :ok }
