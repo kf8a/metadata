@@ -98,4 +98,21 @@ class CitationTest < ActiveSupport::TestCase
       assert_equal result, @citation.formatted
     end
   end
+
+  context 'formatting a submitted citation' do
+    setup do
+      @citation = Factory :citation
+      @citation.authors << Author.new(:sur_name => 'Kaufman',
+                                      :given_name => 'A',
+                                      :middle_name => 'S',
+                                      :seniority => 1) 
+      @citation.title = 'Implications of LCA accounting methods in a corn and corn stover to ethanol system'
+      @citation.pub_year = 2009
+    end
+
+    should 'be formatted correctly' do
+      result = 'Kaufman, A. S. 2009. Implications of LCA accounting methods in a corn and corn stover to ethanol system.'
+      assert_equal result, @citation.formatted
+    end
+  end
 end
