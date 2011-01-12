@@ -429,6 +429,17 @@ ActiveRecord::Schema.define(:version => 20110107144139) do
   add_index "permissions", ["owner_id"], :name => "index_permissions_on_owner_id"
   add_index "permissions", ["user_id"], :name => "index_permissions_on_user_id"
 
+  create_table "plots", :force => true do |t|
+    t.string  "name"
+    t.integer "treatment_id"
+    t.integer "replicate"
+    t.integer "study_id"
+    t.string  "description"
+  end
+
+  add_index "plots", ["study_id"], :name => "index_plots_on_study_id"
+  add_index "plots", ["treatment_id"], :name => "index_plots_on_treatment_id"
+
   create_table "projects", :force => true do |t|
     t.string   "title"
     t.text     "abstract"
