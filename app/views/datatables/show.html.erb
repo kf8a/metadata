@@ -1,7 +1,9 @@
 <% cache(:action_suffix => 'page') do %>
 <h1><%= @datatable.title_and_years %></h1>
 
-<%= textilize @datatable.description if @datatable.description %>
+<p class='description'>
+<%=raw textilize @datatable.description if @datatable.description %>
+</p>
 <%= @datatable.try(:summary_graph) %>
 <%= @datatable.try(:access_statement) %>
 
@@ -16,7 +18,7 @@
 <div>
   <h2>Context:</h2>
   <div class='truncate'>
-    <%= textilize @datatable.dataset.try(:abstract) %>
+    <%=raw textilize @datatable.dataset.try(:abstract) %>
   </div>
 </div>
 

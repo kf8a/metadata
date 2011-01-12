@@ -1,3 +1,4 @@
+<%=cache do %>
 <h2>Submitted</h2>
 <ul>
   <% @submitted_citations.each do |citation| %>
@@ -16,3 +17,4 @@
     <%= render :partial => 'citation', :locals => {:citation=>citation} %>
 <% end %>
 </ul>
+<% end %>
