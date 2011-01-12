@@ -1,5 +1,5 @@
 <% cache(:action_suffix => 'page') do %>
-<h1><%= @datatable.title_and_years %></h1>
+<h1><%=raw @datatable.title_and_years %></h1>
 
 <p class='description'>
 <%=raw textilize @datatable.description if @datatable.description %>
@@ -59,7 +59,7 @@
       <td>Related Tables:</td>
       <td><ul>
         <% @datatable.related_tables.each do |table| %>
-          <li><%=  link_to table.title , datatable_path(table) %></li>
+          <li><%=link_to raw(table.title) , datatable_path(table) %></li>
         <% end %>
       </ul></td>
     </tr>
@@ -146,7 +146,7 @@
                       :class => 'download-link'%>
           <%= link_to 'Download data as spreadsheet',
                       datatable_path(@datatable,:format => :ods),
-                      :class => 'download-link' if @trusted %>
+                      :class => 'download-link' if false %>
           <%= link_to 'View as a Collection', 
                       collection_path(@datatable.collection) if @datatable.collection %>
           <%= link_to 'Permissions Management',
