@@ -146,7 +146,7 @@
                       :class => 'download-link'%>
           <%= link_to 'Download data as spreadsheet',
                       datatable_path(@datatable,:format => :ods),
-                      :class => 'download-link' if @trusted %>
+                      :class => 'download-link' if false %>
           <%= link_to 'View as a Collection', 
                       collection_path(@datatable.collection) if @datatable.collection %>
           <%= link_to 'Permissions Management',
