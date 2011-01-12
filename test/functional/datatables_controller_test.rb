@@ -167,7 +167,7 @@ class DatatablesControllerTest < ActionController::TestCase
       should respond_with :success
 
       should 'include the abstract' do
-        assert_select "p.description", "This is the first abstract"
+        assert_select "p", "This is the first abstract"
       end
 
       context 'changing the description' do
