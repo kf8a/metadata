@@ -167,18 +167,17 @@ class DatatablesControllerTest < ActionController::TestCase
       should respond_with :success
 
       should 'include the abstract' do
-        assert_select "p", "This is the first abstract"
+        assert_select "p.description", "This is the first abstract"
       end
 
       context 'changing the description' do
         setup do
-          @datatable.description = 'This is a new abstract'
-          @datatable.save
+          put :update, :id => @datatable, :datatable => {:description => 'This is a new abstract'}
           get :show, :id => @datatable
         end
 
         should 'include the new abstract' do
-          assert_select "p", "This is a new abstract"
+          assert_select "p.description", "This is a new abstract"
         end
 
       end
@@ -198,13 +197,12 @@ class DatatablesControllerTest < ActionController::TestCase
 
     context 'changing the description' do
       setup do
-        @datatable.description = 'This is a new abstract'
-        @datatable.save
+        put :update, :id => @datatable, :datatable => {:description => 'This is a new abstract'}
         get :show, :id => @datatable, :requested_subdomain => 'glbrc'
       end
 
       should 'include the new abstract' do
-        assert_select "p", "This is a new abstract"
+        assert_select "p.description", "This is a new abstract"
       end
 
     end
