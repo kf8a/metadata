@@ -6,7 +6,7 @@ class DatatablesController < ApplicationController
   before_filter :get_datatable, :only => [:show, :edit, :update, :destroy, :update_temporal_extent]
   
   cache_sweeper :datatable_sweeper
-  #caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
+  caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
   
   # GET /datatables
   # GET /datatables.xml
@@ -98,13 +98,6 @@ class DatatablesController < ApplicationController
     @units = Unit.all
   end
   
-  def delete_csv_cache
-    @id = params[:id]
-    expire_action :action => "show", :id => @id, :format => "csv"
-    flash[:notice] = 'Datatable cache was successfully deleted.'
-    redirect_to :action => "edit", :id => @id
-  end
-
   # POST /datatables
   # POST /datatables.xml
   def create
