@@ -4,7 +4,8 @@ class ProtocolsController < ApplicationController
   before_filter :admin?, :except => [:index, :show]  if Rails.env == 'production'
   before_filter :get_protocol, :only => [:edit, :update, :destroy]
     
-  #caches_action :index
+  cache_sweeper :protocol_sweeper
+  caches_action :index, :show
   
   # GET /protocols
   # GET /protocols.xml
