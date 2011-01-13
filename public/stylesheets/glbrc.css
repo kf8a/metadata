@@ -179,7 +179,7 @@
 }
 #glbrc .study-title {
   background-color: white;
-  font-size: 1.2em !important;
+  font-size: 1.2em;
   font-weight: bold;
   color: #005387;
   margin: 2px;
@@ -239,7 +239,13 @@
   font-size: 90%;
   float: right;
 }
+#glbrc #content h1.publication-section { margin-bottom: 0; }
 #glbrc #content .synopsis {
+  font-size: 0.9em;
+  margin-top: 0;
+}
+#glbrc #content .indent { margin-left: 2em; }
+#glbrc #content li.synopsis {
   font-weight: normal;
   font-size: 0.7em;
   margin-left: 4em;
