@@ -34,7 +34,7 @@ namespace :deploy do
     [:stop, :start, :restart].each do |t|
       desc "#{t.to_s.capitalize} the thin appserver"
       task t, :roles => :app do
-        invoke_command "cd #{release_path};bundle exec thin -C /etc/thin/metadata.yml #{t.to_s}"
+        invoke_command "cd #{current_path};bundle exec thin -C /etc/thin/metadata.yml #{t.to_s}"
       end
     end
   end
@@ -64,17 +64,35 @@ namespace :deploy do
 end
 
 task :staging do 
+  set :deploy_via, :remote_cache
+  
   set :host, 'sebewa'
   
   role :app, "#{host}.kbs.msu.edu"
   role :web, "#{host}.kbs.msu.edu"
   role :db,  "#{host}.kbs.msu.edu", :primary => true
+  
+end
+
+task :master do
+  set :deploy_via, :remote_cache
+  
+  set :host, 'houghton'
+  
+  role :app, "#{host}.kbs.msu.edu"
+  role :web, "#{host}.kbs.msu.edu"
+  role :db,  "#{host}.kbs.msu.edu", :primary => true
+  
+  after 'deploy:symlink', :set_subdomain_tdl
+  after 'deploy:symlink', :set_asset_host
 end
 
 task :production do 
-  set :host, 'gprpc28'
+  set :deploy_via, :remote_cache
   
-  role :app, "#{host}.kbs.msu.edu" #, "gprpc28.kbs.msu.edu"
+  set :host, 'gprpc37'
+  
+  role :app, "#{host}.kbs.msu.edu", "gprpc28.kbs.msu.edu" #, "35.8.163.71"
   role :web, "#{host}.kbs.msu.edu"
   role :db,  "#{host}.kbs.msu.edu", :primary => true
   
@@ -111,7 +129,8 @@ end
 
 desc 'set subdomain tdl'
 task :set_subdomain_tdl do
-  run "sed -i 's/production => 3/production => 2/' #{release_path}/config/environment.rb"
+  #run "sed -i 's/production => 3/production => 2/' #{release_path}/config/environment.rb"
+  run "sed -i 's/production => 3/production => 2/' #{release_path}/config/initializers/subdomain_fu.rb"
 end
 
 desc 'set asset host on production' 
