@@ -1,17 +1,19 @@
 <%=cache do %>
-<h2>Submitted</h2>
+<h2 class='study-title'>Submitted</h2>
+<p class='synopsis'>Papers still in review; contact the first author for further information.</p>
 <ul>
   <% @submitted_citations.each do |citation| %>
     <%= render :partial => 'citation', :locals => {:citation=>citation} %>
   <% end %>
 </ul>
-<h2>Forthcoming</h2>
+<h2 class='study-title'>Forthcoming</h2>
+<p class='synopsis'>Papers accepted but not yet published.</p>
 <ul>
   <% @forthcoming_citations.each do |citation| %>
     <%= render :partial => 'citation', :locals => {:citation=>citation} %>
   <% end %>
 </ul>
-<h2>Published</h2>
+<h2 class='study-title'>Published (alphabetical by year)</h2>
 <ul>
 <% @citations.each do |citation| %>
     <%= render :partial => 'citation', :locals => {:citation=>citation} %>

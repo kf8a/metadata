@@ -177,9 +177,9 @@
   font-size: 0.7em;
   margin-left: 4em;
 }
-#glbrc li.study-title {
+#glbrc .study-title {
   background-color: white;
-  font-size: 1.2em;
+  font-size: 1.2em !important;
   font-weight: bold;
   color: #005387;
   margin: 2px;
@@ -188,19 +188,12 @@
   padding-right: 1px;
   padding: 1px;
 }
-#glbrc li.study-title > .expanded {
+#glbrc .study-title > .expanded {
   border-bottom-style: solid;
   border-bottom-width: 1px;
 }
-#glbrc li.study-title > a { color: #005387; }
-#glbrc li.study-title p {
-  font-weight: normal;
-  font-size: 0.7em;
-  margin-left: 4em;
-  margin-top: 0;
-  color: black;
-}
-#glbrc li.study-title ul {
+#glbrc .study-title > a { color: #005387; }
+#glbrc .study-title ul {
   font-weight: normal;
   background-color: white;
   position: relative;
@@ -208,7 +201,7 @@
   margin-right: 1px;
   color: black;
 }
-#glbrc li.study-title li { padding-top: 3px; }
+#glbrc .study-title li { padding-top: 3px; }
 #glbrc .person-email { padding-top: 0.5em; }
 #glbrc .default { color: grey; }
 #glbrc #content {
@@ -245,6 +238,13 @@
 #glbrc #content .edit {
   font-size: 90%;
   float: right;
+}
+#glbrc #content .synopsis {
+  font-weight: normal;
+  font-size: 0.7em;
+  margin-left: 4em;
+  margin-top: 0;
+  color: black;
 }
 #glbrc #content a.download-link {
   display: block;
