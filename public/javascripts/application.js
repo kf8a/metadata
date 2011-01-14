@@ -33,7 +33,7 @@ jQuery(document).ready(function() {
 
   function remove_fields(link) {
       jQuery(link).prev("input[type=hidden]").val("1");
-        jQuery(link).parent().parent(".inputs").hide();
+        jQuery(link).parent().parents(".inputs").first().hide();
   }
 
   function add_fields(link, association, content) {
