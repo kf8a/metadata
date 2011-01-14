@@ -1,11 +1,11 @@
 GIT
   remote: git://github.com/freelancing-god/thinking-sphinx.git
-  revision: c3abbd9e5e5e7f226058ec364abea02fc9faf74e
+  revision: 92277757cd4c95520e298a2375b6f2482ece0ce6
   branch: rails3
   specs:
-    thinking-sphinx (2.0.1)
+    thinking-sphinx (2.0.2)
       activerecord (>= 3.0.3)
-      riddle (>= 1.2.1)
+      riddle (>= 1.2.2)
 
 GIT
   remote: git://github.com/galetahub/awesome_nested_set.git
@@ -22,9 +22,9 @@ GIT
 
 GIT
   remote: git://github.com/thoughtbot/clearance.git
-  revision: 7fb410051e0e7cce758883c98ec7b13824265cd0
+  revision: a3f4117637a1ec0ec4343ef03acde0610ca10673
   specs:
-    clearance (0.9.1)
+    clearance (0.10.0)
       rails (~> 3.0.0)
 
 GEM
@@ -91,6 +91,8 @@ GEM
       ruby_parser (~> 2.0.4)
       sexp_processor (~> 3.0.3)
     colored (1.2)
+    commonwatir (1.6.5)
+      user-choices
     configuration (1.2.0)
     cucumber (0.10.0)
       builder (>= 2.1.2)
@@ -108,13 +110,16 @@ GEM
       abstract (>= 1.0.0)
     escape_utils (0.1.9)
     eventmachine (0.12.10)
-    factory_girl (1.3.2)
+    factory_girl (1.3.3)
     factory_girl_rails (1.0.1)
       factory_girl (~> 1.3)
       railties (>= 3.0.0)
     fattr (2.2.0)
     ffi (0.6.3)
       rake (>= 0.8.7)
+    firewatir (1.6.5)
+      activesupport
+      commonwatir (= 1.6.5)
     flay (1.4.1)
       ruby_parser (~> 2.0)
       sexp_processor (~> 3.0)
@@ -231,6 +236,8 @@ GEM
     ruby_parser (2.0.5)
       sexp_processor (~> 3.0)
     rubyzip (0.9.4)
+    s4t-utils (1.0.4)
+      hoe (>= 1.3.0)
     selenium-webdriver (0.1.2)
       childprocess (~> 0.1.5)
       ffi (~> 0.6.3)
@@ -253,6 +260,11 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.23)
+    user-choices (1.1.6.1)
+      builder (>= 2.1.2)
+      s4t-utils (>= 1.0.3)
+      xml-simple (>= 1.0.11)
+    xml-simple (1.0.12)
     xpath (0.1.3)
       nokogiri (~> 1.3)
     zipruby (0.3.6)
@@ -272,6 +284,7 @@ DEPENDENCIES
   escape_utils
   factory_girl
   factory_girl_rails
+  firewatir
   formtastic
   jquery-rails (>= 0.2.6)
   launchy
