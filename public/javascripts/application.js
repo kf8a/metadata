@@ -30,10 +30,6 @@ jQuery(document).ready(function() {
 			jQuery(this).text('[Expand All]');
 		});
 
-  function remove_fields(link) {
-      jQuery(link).prev("input[type=hidden]").val("1");
-        jQuery(link).parent().parents(".inputs").first().hide();
-  }
   
     //This sends a delete request and hides the containing element
     jQuery('.deleter').live('click', function(e) {
@@ -46,6 +42,11 @@ jQuery(document).ready(function() {
         });
     });
 });
+
+  function remove_fields(link) {
+      jQuery(link).prev("input[type=hidden]").val("1");
+        jQuery(link).parent().parent(".inputs").first().hide();
+  }
 
 function add_fields(link, association, content) {
     var new_id = new Date().getTime();

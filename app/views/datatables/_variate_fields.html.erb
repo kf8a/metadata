@@ -1,7 +1,7 @@
 <%= f.inputs do %>
   <%= f.input :name %>
   <%= f.input :weight, :input_html => { :size => 5 } %>
-  <%= f.input :description %>
+  <%= f.input :description, :input_html => {:size => '200x1'} %>
   <%= f.input :unit %>
   <%= f.input :measurement_scale, :collection => ['nominal', 'interval', 'ratio', 'datetime'] %>
   <%= f.input :data_type, :collection => ['text','datetime','integer','real','text'] %>
