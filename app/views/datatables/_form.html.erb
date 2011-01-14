@@ -3,9 +3,9 @@
   <%= form.input :comments, :input_html => { :size => '60x5' } %>
   <%= form.input :description, :input_html => { :size => '60x5' } %>
   <%= form.input :keyword_list, :label => 'Keywords' %>
-  <%= form.input :study_id, :label => 'Experiment' %>
-  <%= form.input :theme_id, :label => 'KBS Theme' %>
-  <%= form.input :core_area_id, :label => 'LTER Core Area' %>
+  <%= form.input :study, :label => 'Experiment' %>
+  <%= form.input :theme, :label => 'KBS Theme' %>
+  <%= form.input :core_area, :label => 'LTER Core Area' %>
 <% end %>
 
 <h2>Data Contributions</h2>
@@ -17,8 +17,9 @@
 <%= link_to_add_fields "Add Person", form, :data_contributions %>
 
 <%= form.inputs do %>
-  <%= form.input :begin_date, :label => 'Temporal Coverage from:', :input_html => { :include_blank => true, :end_year => Time.now.year, :start_year => 1887 } %>
-  <%= form.input :end_date, :label => 'to', :input_html => { :include_blank => true, :end_year => Time.now.year, :start_year => 1887 } %>
+<h2>Temporal Coverage</h2>
+  <%= form.input :begin_date, :label => 'from:', :end_year => Time.now.year, :start_year => 1887 %>
+  <%= form.input :end_date, :label => 'to', :end_year => Time.now.year, :start_year => 1887 %>
   <%= form.input :weight %>
   <%= form.input :update_frequency_days, :label => 'Expected Update Frequency (days)' %>
   <%= form.input :on_web %>

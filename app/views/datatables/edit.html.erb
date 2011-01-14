@@ -1,11 +1,9 @@
 <h1>Editing datatable</h1>
 
-  <%= form_for @datatable do |f| %>
+<%= semantic_form_for @datatable, :html => { :multipart => true } do |form| %>
   <%= render "shared/error_messages", :target => @datatable %>
-  <%= render :partial => 'form', :locals => {:f => f, :theme => @theme, :core_areas => @core_areas, :datatable => @datatable, :studies => @studies, :people => @people, :units => @units} %>
-  <p>
-    <%= submit_tag "Update" %>
-  </p>
+  <%= render :partial => 'form', :locals => {:form => form } %>
+  <%= form.buttons %>
 <% end %>
 
 <%= link_to 'Show', datatable_path(@datatable) %> |
