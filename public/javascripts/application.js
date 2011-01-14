@@ -29,15 +29,26 @@ jQuery(document).ready(function() {
 			jQuery('span.expand.contract').trigger('click');
 			jQuery(this).text('[Expand All]');
 		});
-	});
 
   function remove_fields(link) {
       jQuery(link).prev("input[type=hidden]").val("1");
         jQuery(link).parent().parents(".inputs").first().hide();
   }
+  
+    //This sends a delete request and hides the containing element
+    jQuery('.deleter').live('click', function(e) {
+        e.preventDefault();
+        path = jQuery(this).attr('href');
+        jQuery(this).parent().hide('slow');
+        jQuery.ajax({
+            type: 'DELETE',
+            url: path
+        });
+    });
+});
 
-  function add_fields(link, association, content) {
-      var new_id = new Date().getTime();
-        var regexp = new RegExp("new_" + association, "g")
-          jQuery(link).prev().append(content.replace(regexp, new_id));
-  }
+function add_fields(link, association, content) {
+    var new_id = new Date().getTime();
+      var regexp = new RegExp("new_" + association, "g")
+        jQuery(link).prev().append(content.replace(regexp, new_id));
+}

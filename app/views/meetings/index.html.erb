@@ -9,8 +9,7 @@
             <%= link_to 'edit', edit_meeting_path(meeting), {:class => 'edit'} %>
             <%= link_to image_tag("trash.gif"), meeting,
                 :confirm => 'Are you sure?',
-                :method  => :delete,
-                :remote  => true %>
+                :class => 'deleter' %>
           <% end %>
         </li>
 <% end %>
