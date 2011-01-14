@@ -66,8 +66,6 @@ group :test do
   gem 'spork'
   gem 'launchy'
   gem 'database_cleaner'
-
-  gem 'firewatir'
 end
 
 group :production do

@@ -32,12 +32,6 @@ begin
       t.profile = 'rerun'
     end
 
-    Cucumber::Rake::Task.new({:watir => 'db:test:prepare'}, 'Run features that are run in watir') do |t|
-      t.binary = vendored_cucumber_bin
-      t.fork = true # You may get faster startup if you set this to false
-      t.profile = 'watir'
-    end
-
     desc 'Run all features'
     task :all => [:ok, :wip]
   end
