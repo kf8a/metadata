@@ -56,17 +56,18 @@ Feature: Creating abstract
 Scenario: Admin deletes an abstract from the meeting page
     #This is tested in meeting_abstracts.sel
     Given the local venue type exists
-      And an admin user exists with an email of "admin@person.com"
+      And I am signed in as an administrator
       And the following abstract exists:
       |title                |authors                        |abstract             |
       |"An Awesome Abstract"|"Abstract Guy and Abstract Gal"|"A testable abstract"|
 
-    When I sign in as "admin@person.com"/"password"
-      And I go to the abstracts page
+    When I go to the abstracts page
       And I follow "An Awesome Abstract"
       And I follow "Back to meeting"
       And I confirm a js popup on the next step
       And I follow "Trash"
+      And I wait for 3 seconds
+      Then I should not see hidden text "An Awesome Abstract"
 
     When I go to the abstracts page
     Then I should not see "An Awesome Abstract"

@@ -10,21 +10,9 @@ Feature: All the javascripts should work properly
     When I go to the new meeting page
       And I fill in "meeting_title" with "Long Meeting"
       And I press "Create"
-      And I follow "Long Meeting"
-      And I follow "Add abstract"
-      And I fill in "abstract_title" with "An Awesome Abstract"
-      And I fill in "abstract_authors" with "Awesome Guy and Awesome Gal"
-      And I fill in "abstract_abstract" with "A testable abstract"
-      And I press "Create"
-    Then I should see "Awesome Guy and Awesome Gal An Awesome Abstract Edit"
-    When I go to the meetings page
-      And I follow "Long Meeting"
-    Then I should see "Awesome Guy and Awesome Gal"
-
+      And I go to the meetings page
+    Then I should see "Long Meeting"
     When I confirm a js popup on the next step
-    When I follow "Trash"
-      And I wait for 5 seconds
-    Then I should not see hidden text "Awesome Guy and Awesome Gal"
-    When I go to the meetings page
-      And I follow "Long Meeting"
-    Then I should not see "Awesome Guy and Awesome Gal"
+      And I follow "Trash"
+      And I wait for 3 seconds
+    Then I should not see hidden text "Long Meeting"
