@@ -4,8 +4,7 @@ Feature: citations management
   I want to import a bibliography file
 
   Scenario: Importing a RIS formatted bibliography file
-    Given I have signed in with "bob@person.com"/"password"
-    And   I have the "admin" role
+    Given I am signed in as an administrator
     And   I am on the new citation page
     When  I attach the file "test/data/bibliography.zip" to "Pdf"
     And   I press "Create"
