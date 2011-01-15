@@ -219,44 +219,44 @@ class Datatable < ActiveRecord::Base
  
   end
   
-  def to_ods
-    values = perform_query(limited=false)
-    sheet = Spreadsheet::Builder.new
-    sheet.spreadsheet do 
-      sheet.table "Data Use Policy" do
-        data_access_statement.each_line do |line|
-          sheet.row do 
-            sheet.cell line
-          end
-        end
-        data_source.each_line do |source|
-          sheet.row do
-            sheet.cell source
-          end
-        end
-        sheet.cell data_comments
-      end
-      
-      sheet.table "Data" do
-        sheet.header do
-       
-          sheet.row do
-            variates.each do |variate|
-              sheet.cell variate.name
-            end
-          end
-        end
-        values.each do |elements|
-          sheet.row do  
-            elements.values.each do |element| 
-              sheet.cell element
-            end
-          end
-        end
-      end
-    end
-    sheet.content!
-  end
+#  def to_ods
+#    values = perform_query(limited=false)
+#    sheet = Spreadsheet::Builder.new
+#    sheet.spreadsheet do
+#      sheet.table "Data Use Policy" do
+#        data_access_statement.each_line do |line|
+#          sheet.row do
+#            sheet.cell line
+#          end
+#        end
+#        data_source.each_line do |source|
+#          sheet.row do
+#            sheet.cell source
+#          end
+#        end
+#        sheet.cell data_comments
+#      end
+#
+#      sheet.table "Data" do
+#        sheet.header do
+#
+#          sheet.row do
+#            variates.each do |variate|
+#              sheet.cell variate.name
+#            end
+#          end
+#        end
+#        values.each do |elements|
+#          sheet.row do
+#            elements.values.each do |element|
+#              sheet.cell element
+#            end
+#          end
+#        end
+#      end
+#    end
+#    sheet.content!
+#  end
     
   def data_comments
     comments ? comments : ''
