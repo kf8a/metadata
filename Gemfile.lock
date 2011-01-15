@@ -15,12 +15,6 @@ GIT
       activerecord (>= 3.0.0)
 
 GIT
-  remote: git://github.com/nhowell/subdomain-fu.git
-  revision: c6fbf945cf3f4ab344f9c8e0604dc5dcca9ee6cf
-  specs:
-    subdomain-fu (1.0.0.beta2)
-
-GIT
   remote: git://github.com/thoughtbot/clearance.git
   revision: a3f4117637a1ec0ec4343ef03acde0610ca10673
   specs:
@@ -171,7 +165,7 @@ GEM
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
       net-ssh (>= 2.0.9)
-    net-ssh (2.0.23)
+    net-ssh (2.0.24)
     net-ssh-gateway (1.0.1)
       net-ssh (>= 1.99.1)
     newrelic_rpm (2.13.4)
@@ -252,7 +246,7 @@ GEM
     transitions (0.0.9)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
-    tzinfo (0.3.23)
+    tzinfo (0.3.24)
     xpath (0.1.3)
       nokogiri (~> 1.3)
 
@@ -286,13 +280,11 @@ DEPENDENCIES
   rails (= 3.0.3)
   rspec (= 1.3.0)
   rspec-rails
-  rubyzip
   shoulda
   simplecov
   simplecov-html
   spork
   sqlite3-ruby
-  subdomain-fu!
   thin
   thinking-sphinx!
   transitions
