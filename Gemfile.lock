@@ -255,7 +255,6 @@ GEM
     tzinfo (0.3.23)
     xpath (0.1.3)
       nokogiri (~> 1.3)
-    zipruby (0.3.6)
 
 PLATFORMS
   ruby
@@ -287,6 +286,7 @@ DEPENDENCIES
   rails (= 3.0.3)
   rspec (= 1.3.0)
   rspec-rails
+  rubyzip
   shoulda
   simplecov
   simplecov-html
@@ -296,4 +296,3 @@ DEPENDENCIES
   thin
   thinking-sphinx!
   transitions
-  zipruby

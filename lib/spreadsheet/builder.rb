@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
-require 'zipruby'
+#zipruby breaks rubyzip which is required for selenium-webdriver
+#require 'zipruby'
 
 module Spreadsheet
   
