@@ -4,9 +4,7 @@ Feature: Invite users and pre assign them to sponsors
   I want to send out invites and pre assign users to sponsors when they sign up
           
   Scenario: An admin creates and sends invite to a glbrc member
-    Given a user exists and is confirmed with an email of "bob@person.com"
-      And "bob@person.com" is an administrator
-     And I sign in as "bob@person.com"/"password"
+    Given I am signed in as an administrator
     When I go to the new invite page
      And I fill in "Firstname" with "Sam"
      And I fill in "Lastname" with "Brownback"
@@ -26,7 +24,5 @@ Feature: Invite users and pre assign them to sponsors
      And I fill in "user_password" with "password"
      And I fill in "user_password_confirmation" with "password"
      And I press "Sign up"
-    Then I should see "instructions for confirming"
-     And a confirmation message should be sent to "sam@person.com"
-     And "sam@person.com" is a "glbrc" member
+    Then "sam@person.com" is a "glbrc" member
     

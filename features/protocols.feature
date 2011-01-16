@@ -11,7 +11,7 @@ Feature: Protocols should be linked to more than one dataset and show up on one 
     And   a website exists with a name of "lter"
     And   a user exists and is confirmed with an email of "bob@person.com"
     And   "bob@person.com" is an administrator
-    When  I sign in as "bob@person.com"/"password"
+    When  I sign in as "bob@person.com/password"
     And   I go to the "new protocols" page
     And   I check the "glbrc" website
     And   I uncheck the "lter" website
@@ -24,10 +24,8 @@ Feature: Protocols should be linked to more than one dataset and show up on one 
     Given I am in the LTER subdomain
     And   a website exists with a name of "glbrc"
     And   a website exists with a name of "lter"
-    And   a user exists and is confirmed with an email of "bob@person.com"
-    And   "bob@person.com" is an administrator
-    When  I sign in as "bob@person.com"/"password"
-    And   I go to the "new protocols" page
+    And   I am signed in as an administrator
+    When  I go to the new protocol page
     And   I check the "glbrc" website
     And   I uncheck the "lter" website
     And   I fill in "Title" with "Earthworm counting"

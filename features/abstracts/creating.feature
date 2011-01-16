@@ -5,10 +5,9 @@ Feature: Creating abstract
 
   Scenario: Admin creates an abstract
     Given the local venue type exists
-      And an admin user exists with an email of "admin@person.com"
+      And I am signed in as an administrator
       And a meeting exists with a title of "Long Meeting"
-    When I sign in as "admin@person.com"/"password"
-      And I go to the meetings page
+    When I go to the meetings page
       And I follow "Long Meeting"
       And I follow "Add abstract"
     Then I should see "New Meeting Abstract"
@@ -24,10 +23,9 @@ Feature: Creating abstract
 
   Scenario: Admin forgets to put in an abstract
     Given the local venue type exists
-      And an admin user exists with an email of "admin@person.com"
+      And I am signed in as an administrator
       And a meeting exists with a title of "Long Meeting"
-    When I sign in as "admin@person.com"/"password"
-      And I go to the meetings page
+    When I go to the meetings page
       And I follow "Long Meeting"
       And I follow "Add abstract"
       And I fill in "Title" with "Short Abstract"
@@ -38,13 +36,12 @@ Feature: Creating abstract
 
   Scenario: Admin deletes an abstract
     Given the local venue type exists
-      And an admin user exists with an email of "admin@person.com"
+      And I am signed in as an administrator
       And the following abstract exists:
       |title                |authors                        |abstract             |
       |"An Awesome Abstract"|"Abstract Guy and Abstract Gal"|"A testable abstract"|
 
-    When I sign in as "admin@person.com"/"password"
-      And I go to the abstracts page
+    When I go to the abstracts page
       And I follow "An Awesome Abstract"
       And I follow "Destroy"
     Then I should not see "An Awesome Abstract"

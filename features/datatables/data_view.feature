@@ -23,7 +23,8 @@ Feature: Data View
 
   Scenario: Viewing a public datatable
     Given a public lter datatable exists with species data
-    When I go to the datatable page
+    When I go to the datatable show page for "Species Table"
+    Then show me the page
     Then I should see "Species"
       And I should see "The name of the species"
       And I should see "Genus"

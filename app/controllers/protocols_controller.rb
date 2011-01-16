@@ -23,8 +23,7 @@ class ProtocolsController < ApplicationController
   # GET /protocols/1
   # GET /protocols/1.xml
   def show
-    website =  Website.find_by_name(@subdomain_request)
-    @protocol = website.protocols.first(:conditions => ['id = ?', params[:id]])
+    @protocol = Protocol.find(params[:id])
 
     respond_to do |format|
       if @protocol
