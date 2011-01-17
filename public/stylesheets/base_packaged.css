@@ -1,0 +1,141 @@
+#branding form p {display: inline;  width: 167px}
+#branding a {color: white; text-decoration: none}
+#branding a:link {text-decoration: none}
+#branding a:hover {text-decoration: underline}
+#branding h2 {padding-left: 1em; color: #FFFFFF; font-size: 1em; margin-top: 3px; margin-bottom: 3px; font-weight: normal}
+#topcoloredbar a:hover {color:#000000; text-decoration:underline; background-color:#FFFFCC}
+#branding {font-family: Verdana, Ariel, Helvetica, sans-serif; display: block; width: 700px}
+#branding img {}
+#branding h1 {color:#006633; font-size:30px; font-weight: normal; margin-bottom: 5px; margin-top: 5px; text-shadow: rgb(136, 136, 136) 2px 2px 2px; width: 700px}
+#lter_kbs {margin: 0; padding: 0; height: 40px; text-indent: -5000px; background: url(/images/common/title.jpg) no-repeat}
+#search form {display: inline; padding-left: 1em}
+#search {float: right; margin-right: 5px; height:20px}
+#branding a {color: white}
+#branding a:hover {background-color: #ffffcc}
+#msu_logo {height: 32px; margin-top: 6px; float: right}
+#gallery {height: 176px;  }
+#topcoloredbar {color: #FFFFFF; width:700px; padding-top: 0.1em; padding-bottom: .2em; line-height: 1.5em; margin-bottom:0.3em; text-align:left; background-color: #006633}
+#topcoloredbar h2 {font-weight: normal; padding-left: 1em; display: inline}
+#topcoloredbar a {color:#FFFFFF; font-size: .9em}
+#searchform input {color:#CCCCCC}
+.hidden {visibility: hidden; height: 0px;}
+.bulleted {list-style-type: circle; text-indent: 1em; list-style-position: inside}
+#searchform input {margin-right:0.05em; color:#CCCCCC}
+#content h1 {font-size: 1.2em; font-weight: bold; color: #006633}
+#content h2 {font-size: 1em; font-weight: bold; color: #006633; clear: both; padding-top: 1em; margin-bottom: 0px}
+#content ul label {display: inline; font-weight: bold}
+.person-name {color: #006633; font-size: 1.4em; margin-bottom: 0.2em}
+.even {background-color: #f8ffd6}
+.citation p {display: inline}
+.top-level {margin-bottom: 0.4em}
+.citation {margin-bottom: 1em}
+label {display: block}
+#content ul.multicolumn {margin: 0.1em; -moz-column-width: 17em; -webkit-column-width: 17em}
+#content .twocolumn {-moz-column-width: 20em; -webkit-column-width: 20em}
+li ul li {padding-left: 1.5em; margin-bottom: 0.1em}
+#content .edit {font-size: 90%}
+a.edit:link{ color: #7f7f7f}
+a:visited {text-decoration: none}
+a.edit:visited {color: #bfbfbf}
+a.edit:hover {text-decoration: underline}
+#bottomlinks a:hover {text-decoration: underline; background-color: #CCFFFF}
+#bottomlinks {margin-top:.5em; font-family:sans-serif; font-size: 80%; border-top: 1px solid green; border-bottom: 1px solid green; text-align: center}
+#bottomlinks a {color: #006633; font-size: 80%}
+#copyright {font-family: Times New Roman, Times, serif; font-size: 10px; width: 700px}
+ .no-data {color: #939393}
+.person {margin-top: 1em}
+.select-box {width: 200px}
+#search-form {padding: 10px; background-color: #dedede; -moz-border-radius:10px; -webkit-border-radius:10px}
+.person-email {padding-top: 0.5em}
+#core-area-search {float:left }
+#core-area-search label {padding-right: 5px}
+#contributor-search {float: left}
+#contributor-search label {text-align: center; padding-right: 10px; padding-left: 10px}
+#top-line-search {height: 5em}
+#experiment-search {float:left }
+#experiment-search label {text-align: center; padding-right: 10px; padding-left: 10px}
+#bottom-line-search {clear: both}
+#year-search {float:left}
+#year-search label {display:inline}
+#keyword-search {float:left; margin-left: 1em; margin-right: 2em}
+input#keyword_list {margin-left: 0}
+#keyword-search label {display:inline}
+#content a.download-link {padding: 10px; margin-top: 20px; margin-bottom:40px; -moz-border-radius:10px; -webkit-border-radius:10px; border-style: outset}
+#content a.download-link:hover {text-decoration: none; border-style: inset}
+li.study-title {background-color: white; font-size: 1.2em; font-weight: bold; margin: 2px; padding-top: 1px; padding-bottom: 1px; padding-right: 1px; padding: 1px; border-bottom-style: solid; border-bottom-width: 1px}
+li.study-title ul {font-weight: normal; background-color: white; position: relative; left: 1px; margin-right: 1px}
+li.study_title li {padding-top: 3px}
+.quickTree {border-top-style: solid}
+tree * {margin:0; padding:0;}
+.tree li {list-style:none; padding-left:21px;}
+.tree li.root {padding-left:0;}
+.tree li li {no-repeat 17px center; margin-left:10px; padding-left:31px;}
+.tree li li.root {padding-left:10px}
+.tree li li.root.last {background:none}
+.tree li li.last {}
+.expand {background:url(/metadata_images/plus_minus.png) no-repeat; width:16px; height:12px; display:block; float:left; margin-top:0px; padding:0 10px 0 0; text-indent:-9999px; line-height:0; font-size:0;}
+.contract {background-position:0 -16px;}
+.expand:hover {cursor:pointer;}
+#content {width: 550px;  float: right;  font-size: 1em; padding-left: 15px}
+#content ul {list-style: none; margin-left: 0; padding-left: 0}
+#wrapper {width: 700px}
+#footer {clear: both; width: 700px}
+img {border: none}
+.citation {text-indent: -2em; padding-left: 4em}
+a:link {color:blue; text-decoration: none}
+a:link:hover {text-decoration: underline; background-color: white;}
+p {font-size: 1em; margin-top: 5px}
+#navigation {width: 132px; float: left; font-size: 0.75em; margin-top: 1em; margin-bottom: 1em}
+#navigation b{ }
+ul.makeMenu, ul.makeMenu ul { -moz-border-radius: 10px; -webkit-border-radius: 10px; width: 132px; height: 20em;  background-color: #ccc;  padding-left: 0;  margin: 0; cursor: default;  margin-left: 0px; margin-top: 0px}
+ul.makeMenu li {list-style-type: none;  margin: 0px;  position: relative;  padding: 5px; text-align: center;  font-weight: normal; color: #006633}
+ul.makeMenu li > ul { display: none;  position: absolute;  top: 2px;  left: 130px;  height: auto;   -moz-border-radius:10px; -webkit-border-radius:10px; background-color: #e1e1e1;  border-style: solid; border-color: #a3a3a3}
+ul.makeMenu li:hover, ul.makeMenu li.CSStoHighlight {background-color: #ffa;  color: #000;  }
+ul.makeMenu ul.CSStoShow { display: block;  }
+ul.makeMenu li:hover > ul { display: block;  }
+ ul.makeMenu li a {color: #063; display: block; width: 95%; text-decoration: none}
+ul.makeMenu li a:hover, ul.makeMenu li a.CSStoHighLink {color: #000}
+ul.makeMenu li:hover > a {color: #000}
+ #crumbs li {display: inline}
+#network-databases {margin-top: 29px; margin-left: 10px; margin-right: 10px}
+#network-databases li{ list-style-type: none}
+#network-databases ul {margin:0px; padding:0}
+body {background-color: #fff; color: #333}
+body, p, ol, ul, td {font-family: Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif; font-size: 13px}
+pre {background-color: #eee; padding: 10px; font-size: 11px}
+a {color: #000}
+a:visited {color: #666; text-decoration: none}
+a:hover {color: #000; background-color:#eee}
+.fieldWithErrors {padding: 2px; background-color: red; display: table}
+#errorExplanation {width: 400px; border: 2px solid red; padding: 7px; padding-bottom: 12px; margin-bottom: 20px; background-color: #f0f0f0}
+#errorExplanation h2 {text-align: left; font-weight: bold; padding: 5px 5px 5px 15px; font-size: 12px; margin: -7px; background-color: #c00; color: #fff}
+#errorExplanation p {color: #333; margin-bottom: 0; padding: 5px}
+#errorExplanation ul li {font-size: 12px; list-style: square}
+div.uploadStatus {margin: 5px}
+div.progressBar {margin: 5px}
+div.progressBar div.border {background-color: #fff; border: 1px solid grey; width: 100%}
+div.progressBar div.background {background-color: #333; height: 18px; width: 0%}
+button {width: 24px; height: 24px; margin-right: 2px; background-color: #f0f0ee; background-repeat: no-repeat; border: 1px solid #f0f0ee; padding: 0px}
+button:hover, button.unselected:hover {border: 1px solid #999}
+button.selected {border: 1px solid #ce9100; background-color: #ffffff}
+button.unselected {border: 1px solid #f0f0ee; background-color: #f0f0ee}
+button.publish {padding:5px; display:block}
+ div.textile-toolbar {background-color: #f0f0ee; padding: 3px; margin-bottom: 4px}
+#ed_strong {background: url(/dynamic/images/textile-editor/bold.png) no-repeat center center}
+#ed_emphasis {background: url(/dynamic/images/textile-editor/italic.png) no-repeat center center}
+#ed_underline {background: url(/dynamic/images/textile-editor/underline.png) no-repeat center center}
+#ed_strike {background: url(/dynamic/images/textile-editor/strikethrough.png) no-repeat center center}
+#ed_ul {background: url(/dynamic/images/textile-editor/list_bullets.png) no-repeat center center}
+#ed_ol {background: url(/dynamic/images/textile-editor/list_numbers.png) no-repeat center center}
+#ed_p {background: url(/dynamic/images/textile-editor/paragraph.png) no-repeat center center}
+#ed_h1 {background: url(/dynamic/images/textile-editor/h1.png) no-repeat center center}
+#ed_h2 {background: url(/dynamic/images/textile-editor/h2.png) no-repeat center center}
+#ed_h3 {background: url(/dynamic/images/textile-editor/h3.png) no-repeat center center}
+#ed_h4 {background: url(/dynamic/images/textile-editor/h4.png) no-repeat center center}
+#ed_indent {background: url(/dynamic/images/textile-editor/indent.png) no-repeat center center}
+#ed_outdent {background: url(/dynamic/images/textile-editor/outdent.png) no-repeat center center}
+#ed_justifyl {background: url(/dynamic/images/textile-editor/left.png) no-repeat center center}
+#ed_justifyc {background: url(/dynamic/images/textile-editor/center.png) no-repeat center center}
+#ed_justifyr {background: url(/dynamic/images/textile-editor/right.png) no-repeat center center}
+#ed_justify {background: url(/dynamic/images/textile-editor/justify.png) no-repeat center center}
+#ed_block {background: url(/dynamic/images/textile-editor/blockquote.png) no-repeat center center}
