@@ -15,8 +15,10 @@
 </ul>
 <h1 class='publication-section'>Published (alphabetical by year)</h1>
 <ul>
+<% year = 0 -%>
 <% @citations.each do |citation| %>
-    <%= render :partial => 'citation', :locals => {:citation=>citation} %>
+  <%= render :partial => 'citation', :locals => {:citation=>citation, :year => year} %>
+  <% year = citation.pub_year -%>
 <% end %>
 </ul>
 <% end %>
