@@ -1,24 +1,24 @@
 <%=cache do %>
-<% year = 0 -%>
 <h1 class='publication-section'>Submitted</h1>
 <p class='synopsis indent'>Papers still in review; contact the first author for further information.</p>
 <ul>
   <% @submitted_citations.each do |citation| %>
-    <%= render :partial => 'citation', :locals => {:citation=>citation, :year => year} %>
+    <%= render :partial => 'citation', :locals => {:citation=>citation, :year => nil} %>
   <% end %>
 </ul>
 <h1 class='publication-section'>Forthcoming</h1>
 <p class='synopsis indent'>Papers accepted but not yet published.</p>
 <ul>
   <% @forthcoming_citations.each do |citation| %>
-    <%= render :partial => 'citation', :locals => {:citation=>citation, :year => year} %>
+    <%= render :partial => 'citation', :locals => {:citation=>citation, :year => nil} %>
   <% end %>
 </ul>
 <h1 class='publication-section'>Published (alphabetical by year)</h1>
 <ul>
+<% year = 0 -%>
 <% @citations.each do |citation| %>
   <%= render :partial => 'citation', :locals => {:citation=>citation, :year => year} %>
-  <% year = citation.pub_year -%>
+  <% year = citation.pub_year.to_i -%>
 <% end %>
 </ul>
 <% end %>
