@@ -60,6 +60,7 @@ class PeopleControllerTest < ActionController::TestCase
   
   context "GET :alphabetical" do
     setup do
+      Rails.cache.clear
       get :alphabetical
     end
     
@@ -69,6 +70,7 @@ class PeopleControllerTest < ActionController::TestCase
 
   context "GET :emeritus" do
     setup do
+      Rails.cache.clear
       get :emeritus
     end
     
