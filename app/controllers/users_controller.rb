@@ -2,7 +2,7 @@ class UsersController < Clearance::UsersController
   layout :site_layout
   
   def create
-    @user = ::User.new params[:user]
+    @user = User.new params[:user]
     invite_code = params[:invite_code]
     @invite = Invite.find_redeemable(invite_code)
 
