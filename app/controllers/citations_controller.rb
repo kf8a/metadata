@@ -64,6 +64,7 @@ class CitationsController < ApplicationController
   
   def download
     head(:not_found) and return unless (citation = Citation.find_by_id(params[:id]))
+    store_location
     redirect_to sign_in_url and return unless signed_in?
     
     path = citation.pdf.path(params[:style])
