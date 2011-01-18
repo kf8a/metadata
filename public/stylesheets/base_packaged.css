@@ -226,7 +226,7 @@ p {font-size: 1em; margin-top: 5px}
 #glbrc #content .edit {font-size: 90%; float: right}
 #glbrc #content h1.publication-section {margin-bottom: 0}
 #glbrc #content .synopsis {font-size: 0.9em; margin-top: 0}
-#glbrc #content .indent {margin-left: 2em}
+#glbrc #content .indent {margin-left: 1.1em}
 #glbrc #content li.synopsis {font-weight: normal; font-size: 0.7em; margin-left: 4em; margin-top: 0; color: black}
 #glbrc #content a.download-link {display: block; padding: 10px; margin-top: 20px; margin-bottom: 20px; border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-style: outset; font-variant: small-caps; text-align: center; font-size: large}
 #glbrc #content a.download-link:hover {text-decoration: none; border-style: inset}
