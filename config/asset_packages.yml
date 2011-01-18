@@ -10,11 +10,10 @@ stylesheets:
 - base: 
   - formtastic
   - formtastic_changes
+  - scaffold
   - branding
+  - navigation
   - data
   - kbs
   - glbrc
   - lter_supplemental
-  - navigation
-  - scaffold
-  - textile-editor

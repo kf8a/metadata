@@ -157,9 +157,18 @@
   margin-bottom: 0.2em;
 }
 #glbrc .even { background-color: #f8ffd6; }
-#glbrc .citation p { display: inline; }
 #glbrc .top-level { margin-bottom: 0.4em; }
-#glbrc .citation { margin-bottom: 1em; }
+#glbrc .citation {
+  margin-bottom: 1em;
+  margin-left: 1em;
+}
+#glbrc .citation p { display: inline; }
+#glbrc .pub_year {
+  margin-left: -0.4em;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
 #glbrc label { display: block; }
 #glbrc li ul li {
   padding-left: 1.5em;

@@ -1,6 +1,6 @@
 <li class='study-title' id='study_<%=study.id%>'><%= study.name %> 
   <% unless  study.synopsis == '' %>
-    <p class='synopsis'><%=raw study.synopsis%></p>
+    <p><%=raw study.synopsis%></p>
   <% end %>
   <ul>
     <% study.children.each do |s| %>

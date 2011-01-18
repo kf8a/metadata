@@ -24,5 +24,6 @@ Feature: Invite users and pre assign them to sponsors
      And I fill in "user_password" with "password"
      And I fill in "user_password_confirmation" with "password"
      And I press "Sign up"
-    Then "sam@person.com" is a "glbrc" member
-    
+    Then I should see "You are now signed up"
+     And a confirmation message should be sent to "sam@person.com"
+     And "sam@person.com" is a "glbrc" member

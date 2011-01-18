@@ -54,13 +54,13 @@ class DatatablesController < ApplicationController
       respond_to do |format|
         format.html   { render_subdomain }
         format.xml    { render :xml => @datatable.to_xml}
-        format.ods do
-          if csv_ok
-            render :text => @datatable.to_ods
-          else
-            redirect_to datatable_url(@datatable)
-          end
-        end
+#         format.ods do
+#           if csv_ok
+#             render :text => @datatable.to_ods
+#           else
+#             redirect_to datatable_url(@datatable)
+#           end
+#         end
         format.csv do
           if csv_ok
             render :text => @datatable.to_csv_with_metadata

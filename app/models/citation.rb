@@ -23,12 +23,12 @@ class Citation < ActiveRecord::Base
   scope :submitted_with_authors_by_sur_name_and_pub_year,
           :joins=> 'left join authors on authors.citation_id = citations.id',
           :conditions => "seniority = 1 and state = 'submitted'",
-          :order => 'pub_year desc, authors.sur_name'
+          :order => 'authors.sur_name, pub_year desc'
 
   scope :forthcoming_with_authors_by_sur_name_and_pub_year,
           :joins=> 'left join authors on authors.citation_id = citations.id',
           :conditions => "seniority = 1 and state = 'forthcomming'",
-          :order => 'pub_year desc,  authors.sur_name'
+          :order => 'authors.sur_name, pub_year desc'
 
   state_machine do
     state :submitted

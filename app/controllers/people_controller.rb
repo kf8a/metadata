@@ -6,7 +6,8 @@ class PeopleController < ApplicationController
   before_filter :get_person, :only => [:show, :edit, :update, :destroy]
   before_filter :get_people, :only => [:index, :alphabetical, :emeritus, :show_all]
   
-  caches_action :index
+  cache_sweeper :people_sweeper
+  caches_action :index, :alphabetical, :emeritus
 
   # GET /people
   # GET /people.xml
@@ -66,7 +67,6 @@ class PeopleController < ApplicationController
      
     respond_to do |format|
       if @person.save
-        expire_action :action => :index
         flash[:notice] = 'Person was successfully created.'
         format.html { redirect_to person_url(@person) }
         format.xml  { head :created, :location => person_url(@person) }
@@ -80,11 +80,9 @@ class PeopleController < ApplicationController
   # PUT /people/1
   # PUT /people/1.xml
   def update    
-    expire_page :action => :index
     
     respond_to do |format|
       if @person.update_attributes(params[:person])
-        expire_action :action => :index
         flash[:notice] = 'Person was successfully updated.'
         format.html { redirect_to person_url(@person) }
         format.xml  { head :ok }
@@ -100,7 +98,6 @@ class PeopleController < ApplicationController
   def destroy
     @person.destroy
 
-    expire_action :action => :index
     respond_to do |format|
       format.html { redirect_to people_url }
       format.xml  { head :ok }

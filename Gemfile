@@ -21,6 +21,7 @@ gem 'thinking-sphinx',
 gem 'liquid'
 gem 'clearance', :git => 'git://github.com/thoughtbot/clearance.git'
 gem 'formtastic'
+#gem 'zipruby'
 gem 'less'
 gem 'awesome_nested_set', :git => 'git://github.com/galetahub/awesome_nested_set.git'
 gem 'thin'

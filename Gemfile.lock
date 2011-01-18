@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: git://github.com/thoughtbot/clearance.git
-  revision: a3f4117637a1ec0ec4343ef03acde0610ca10673
+  revision: a3cced57394cc0ce541395f6a3123e0ab7ea6717
   specs:
     clearance (0.10.0)
       rails (~> 3.0.0)
