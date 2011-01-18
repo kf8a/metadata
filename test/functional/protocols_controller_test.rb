@@ -1,8 +1,6 @@
-require 'test_helper'
-require 'protocols_controller'
+require File.expand_path('../../test_helper',__FILE__) 
 
 class ProtocolsControllerTest < ActionController::TestCase
-  #fixtures :protocols
 
   def setup
     generate_websites_and_protocols
@@ -12,7 +10,8 @@ class ProtocolsControllerTest < ActionController::TestCase
   
   context 'GET: index in lter (default) subdomain' do
     setup do
-       get :index, :requested_subdomain => 'lter'
+      Rails.cache.clear
+      get :index, :requested_subdomain => 'lter'
      end
 
      should render_template 'index'
@@ -25,6 +24,7 @@ class ProtocolsControllerTest < ActionController::TestCase
 
   context "GET :index / glbrc subdomain" do
     setup do
+      Rails.cache.clear
       get :index, :requested_subdomain => 'glbrc'
     end
 

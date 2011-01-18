@@ -1,6 +1,6 @@
 class MeetingsController < ApplicationController
 
-  before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
+  before_filter :admin?, :except => [:index, :show]  if Rails.env == 'production'
   before_filter :get_meeting, :only => [:show, :edit, :update, :destroy]
 
   def index
@@ -64,15 +64,12 @@ class MeetingsController < ApplicationController
   end
   
   def destroy
-    meeting_id = "meeting_#{@meeting.id}"
     @meeting.destroy
      respond_to do |format|
        format.html { redirect_to meetings_url }
        format.xml  { head :ok }
        format.js do 
-         render :update do |page|
-           page.visual_effect :fade, meeting_id
-         end
+         render :nothing => true
        end
      end
   end

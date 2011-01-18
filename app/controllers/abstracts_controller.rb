@@ -1,7 +1,7 @@
 #Controls pages dealing with abstracts of meetings
 class AbstractsController < ApplicationController
 
-  before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
+  before_filter :admin?, :except => [:index, :show]  if Rails.env == 'production'
   before_filter :get_abstract, :only => [:show, :edit, :update, :destroy]
   
   # GET meeting_abstracts
@@ -65,15 +65,12 @@ class AbstractsController < ApplicationController
   end
   
   def destroy
-    abstract_id = "abstract_#{@abstract.id}"
     @abstract.destroy
      respond_to do |format|
        format.html { redirect_to meetings_url }
        format.xml  { head :ok }
-       format.js do 
-         render :update do |page|
-           page.visual_effect :fade, abstract_id
-         end
+       format.js do
+         render :nothing => true
        end
      end
   end

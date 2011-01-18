@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.expand_path('../../test_helper',__FILE__) 
 
 class ThemeTest < ActiveSupport::TestCase
   should have_and_belong_to_many :datasets
@@ -92,6 +92,31 @@ class ThemeTest < ActiveSupport::TestCase
         
         should 'only return datatables from the offered tables' do
           assert @theme.datatables_in_study(@study) == [@datatable]
+        end
+      end
+    end
+
+    context "datatables_in_study function" do
+      context "and a study with datatables" do
+        setup do
+          @datatable.theme = @theme
+          assert @datatable.save
+          @datatable2 = Factory.create(:datatable, :study => @study, :theme => @theme)
+          @outside_datatable = Factory.create(:datatable, :theme => @theme)
+        end
+
+        should "show all of the datatables in the study" do
+          assert @theme.datatables_in_study(@study).include?(@datatable)
+          assert @theme.datatables_in_study(@study).include?(@datatable2)
+        end
+
+        should "not show datatable outside of the study" do
+          assert !@theme.datatables_in_study(@study).include?(@outside_datatable)
+        end
+
+        should "show only the datatables selected as test_datatables" do
+          assert @theme.datatables_in_study(@study, [@datatable]).include?(@datatable)
+          assert !@theme.datatables_in_study(@study, [@datatable]).include?(@datatable2)
         end
       end
     end

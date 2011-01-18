@@ -51,6 +51,8 @@
 
 #glbrc {
 	
+	overflow: hidden;
+		
 	.sign-up {
 		border: 2px solid @green;
 		float: right;
@@ -95,8 +97,9 @@
 	}
 	
 	#navigation {
-		width: 100%;
 		position: absolute;
+		width: 100%;
+		left: 1px;
 		top: 1px;
 		font-weight: bold;
 		
@@ -168,17 +171,24 @@
 		background-color: #f8ffd6;
 	}
 
-	.citation p {
-		display: inline;
-	}
-
 	.top-level {
 		margin-bottom: 0.4em;
 	}
 
 	.citation {
 		margin-bottom: 1em;
+    margin-left: 1em; 
+    p {
+      display: inline;
+    }  
 	}
+
+  .pub_year {
+    margin-left: -0.4em;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
 
 	label {
 		display: block;
@@ -224,7 +234,7 @@
 		margin-left: 4em;
 	}
 
-	li.study-title {
+	.study-title {
 		background-color: white;
 		font-size: 1.2em;
 		font-weight: bold;
@@ -243,13 +253,6 @@
 		
 		> a {
 			color:@title-color;
-		}
-		p {
-			font-weight: normal;
-			font-size: 0.7em;
-			margin-left: 4em;
-			margin-top: 0;
-			color: @text-color;
 		}
 		ul {
 			font-weight: normal;
@@ -276,6 +279,7 @@
 
 	#content {
 		width: 650px;
+		float:none;
 		
 		h1 {
 			font-size: 1.2em;
@@ -317,6 +321,25 @@
 			float: right;
 		}
 
+    h1.publication-section {
+      margin-bottom: 0;
+    }
+    .synopsis {
+      font-size: 0.9em;
+      margin-top: 0;
+    }
+
+    .indent {
+      margin-left: 1.1em;
+    }
+
+		li.synopsis {
+			font-weight: normal;
+			font-size: 0.7em;
+			margin-left: 4em;
+			margin-top: 0;
+			color: @text-color;
+		}
 
 		a.download-link {
 			display: block;

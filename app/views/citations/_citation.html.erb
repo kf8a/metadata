@@ -1,0 +1,16 @@
+<li class='citation'>
+<% unless year.nil? %>
+<% if citation.pub_year.to_i != year  -%>
+  <div class='pub_year'><%= citation.pub_year %></div>
+<% end %>
+<% end %>
+<p>
+<%=raw citation.formatted %>
+</p>
+<% unless citation.abstract.try(:empty?) %> 
+<%= link_to 'abstract', citation_url(citation) %>
+<% end %>
+<% if citation.pdf.exists? %>
+  <%= link_to 'pdf', citation.pdf.url %>
+<% end %>
+</li>

@@ -1,6 +1,6 @@
 class StudiesController < ApplicationController
   
-  before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
+  before_filter :admin?, :except => [:index, :show]  if Rails.env == 'production'
   before_filter :get_study, :only => [:edit, :update]
   
   #GET /studies

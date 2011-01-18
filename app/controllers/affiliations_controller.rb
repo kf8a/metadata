@@ -1,6 +1,6 @@
 class AffiliationsController < ApplicationController
 
-  before_filter :admin?, :except => [:index, :show] unless ENV["RAILS_ENV"] == 'development'
+  before_filter :admin?, :except => [:index, :show] unless Rails.env == 'development'
   before_filter :get_affiliation, :only => [:show, :edit, :update, :destroy]
 
   def index
@@ -27,11 +27,7 @@ class AffiliationsController < ApplicationController
     @affiliation = Affiliation.new
     respond_to do |format|
       format.html
-      format.js do
-        render :update do |page|
-          page.insert_html :bottom, 'affiliations', :partial => "new"
-        end
-      end
+      format.js 
     end
   end
 

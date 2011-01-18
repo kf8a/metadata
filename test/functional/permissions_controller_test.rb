@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.expand_path('../../test_helper',__FILE__) 
 
 class PermissionsControllerTest < ActionController::TestCase
 
@@ -119,6 +119,26 @@ class PermissionsControllerTest < ActionController::TestCase
         
         should redirect_to("the datatable permission page") {permission_path(@datatable)}
       end
+
+      context "and POST :create with an invalid user email address" do
+        setup do
+          post :create, :datatable => @datatable, :email => nil
+        end
+
+        should render_template 'new'
+      end
+
+      context "and PUT :deny with a valid user email address" do
+        setup do
+          @user = Factory.create(:email_confirmed_user)
+          put :deny, :datatable => @datatable, :email => @user.email
+        end
+
+        should "make datatable not downloadable by user" do
+          assert !@datatable.can_be_downloaded_by?(@user)
+        end
+      end
+
       
       context "and a user has permission from the owner" do
         setup do
@@ -127,6 +147,26 @@ class PermissionsControllerTest < ActionController::TestCase
                           :user => @user, 
                           :owner => @owner, 
                           :datatable => @datatable)
+        end
+
+        context "and POST :create permission for that user" do
+          setup do
+            post :create, :datatable => @datatable, :email => @user.email
+          end
+
+          should "make datatable downloadable by user" do
+            assert @datatable.can_be_downloaded_by?(@user)
+          end
+        end
+
+        context "and PUT :deny permission for that user" do
+          setup do
+            put :deny, :datatable => @datatable, :email => @user.email
+          end
+
+          should "make datatable not downloadable by user" do
+            assert !@datatable.can_be_downloaded_by?(@user)
+          end
         end
 
         context "and DELETE :destroy permission from the user" do

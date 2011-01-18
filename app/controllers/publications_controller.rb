@@ -1,6 +1,6 @@
 class PublicationsController < ApplicationController
   
-  before_filter :admin?, :except => [:index, :show, :index_by_treatment]  if ENV["RAILS_ENV"] == 'production'
+  before_filter :admin?, :except => [:index, :show, :index_by_treatment]  if Rails.env == 'production'
   before_filter :get_publication, :only => [:show, :edit, :update, :destroy]
   #caches_action :index
   

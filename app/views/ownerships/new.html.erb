@@ -6,7 +6,7 @@
   <% end -%>
 </p>
 
-<% form_for @ownership do %>
+<%= form_for @ownership do %>
   <%= label_tag 'user' %>
   <div id="user_boxes">
     <%= render :partial => 'userbox', :locals => {:users => @users, :user_count => @user_count}%>

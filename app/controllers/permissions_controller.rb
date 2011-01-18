@@ -33,7 +33,7 @@ class PermissionsController < ApplicationController
     user = User.find_by_email(params[:email])
     flash[:notice] = 'No user with that email' unless user
     owner = current_user
-    permission = Permission.find_by_user_id_and_datatable_id_and_owner_id(user.id, @datatable.id, owner.id)
+    permission = Permission.find_by_user_id_and_datatable_id_and_owner_id(user, @datatable, owner)
     if permission
       permission.decision = "approved"
     else
@@ -43,8 +43,8 @@ class PermissionsController < ApplicationController
     respond_to do |format|
       if permission.save
         flash[:notice] = 'Permission has been granted to ' + user.email
-        format.html { redirect_to permission_path(@datatable) }
-        format.xml  { head :created, :location => permission_path(@datatable) }
+        format.html { redirect_to permission_path(@datatable.id) }
+        format.xml  { head :created, :location => permission_path(@datatable.id) }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => permission.errors.to_xml }
@@ -70,7 +70,7 @@ class PermissionsController < ApplicationController
   def deny
     user = User.find_by_email(params[:email])
     owner = current_user
-    permission = Permission.find_by_user_id_and_datatable_id_and_owner_id(user.id, @datatable.id, owner.id)
+    permission = Permission.find_by_user_id_and_datatable_id_and_owner_id(user, @datatable, owner)
     if permission
       permission.decision = "denied"
     else
@@ -97,11 +97,6 @@ class PermissionsController < ApplicationController
     end
   end
 
-  #override to allow owners
-  def admin?
-    true
-  end
-  
   def require_owner
     unless current_user.try(:owns?, @datatable)
       flash[:notice] = "You must be signed in as the owner of the datatable in order to access this page"

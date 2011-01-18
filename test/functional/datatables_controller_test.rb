@@ -1,5 +1,4 @@
-require 'test_helper'
-require 'datatables_controller'
+require File.expand_path('../../test_helper',__FILE__) 
 
 class DatatablesControllerTest < ActionController::TestCase
   
@@ -129,7 +128,6 @@ class DatatablesControllerTest < ActionController::TestCase
     end
     
     teardown do
-      @controller.expire_fragment(%r{.*})
       Website.destroy_all
       Template.destroy_all
     end
@@ -140,7 +138,6 @@ class DatatablesControllerTest < ActionController::TestCase
       end
       
       should respond_with :success
-      should assign_to(:datatables)
     end
     
     context 'GET :new' do
@@ -175,13 +172,12 @@ class DatatablesControllerTest < ActionController::TestCase
 
       context 'changing the description' do
         setup do
-          @datatable.description = 'This is a new abstract'
-          @datatable.save
+          put :update, :id => @datatable, :datatable => {:description => 'This is a new abstract'}
           get :show, :id => @datatable
         end
 
         should 'include the new abstract' do
-          assert_select "p", "This is a new abstract"
+          assert_select "p.description", "This is a new abstract"
         end
 
       end
@@ -201,13 +197,12 @@ class DatatablesControllerTest < ActionController::TestCase
 
     context 'changing the description' do
       setup do
-        @datatable.description = 'This is a new abstract'
-        @datatable.save
+        put :update, :id => @datatable, :datatable => {:description => 'This is a new abstract'}
         get :show, :id => @datatable, :requested_subdomain => 'glbrc'
       end
 
       should 'include the new abstract' do
-        assert_select "p", "This is a new abstract"
+        assert_select "p.description", "This is a new abstract"
       end
 
     end
@@ -224,7 +219,7 @@ class DatatablesControllerTest < ActionController::TestCase
   end
   
   def teardown
-    @controller.expire_fragment(%r{.*})
+    @controller.expire_fragment(:controller => "datatables", :action => "index", :action_suffix => "lter")
     Website.destroy_all
     Template.destroy_all
   end
@@ -272,7 +267,7 @@ class DatatablesControllerTest < ActionController::TestCase
   def test_should_create_csv_cache
     table_id = @table.id.to_s
     get :show, :id => table_id, :format => "csv"
-    # assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :id => table_id, :format => "csv") 
+    assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :id => table_id, :format => "csv") 
   end
   
   test "show should get the template in the database if there is one" do
@@ -304,13 +299,13 @@ class DatatablesControllerTest < ActionController::TestCase
     assert_response :success
   end
   
-  # def test_should_delete_csv_cache
-  #   table_id = @table.id.to_s
-  #   get :show, :id => table_id, :format => "csv"
-  #   assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :id => table_id, :format => "csv")
-  #   get :delete_csv_cache, :id => table_id
-  #   assert !@controller.fragment_exist?(:controller => "datatables", :action => "show", :id => table_id, :format => "csv")
-  # end
+  def test_should_delete_csv_cache_on_update_table
+    table_id = @table.id.to_s
+    get :show, :id => table_id, :format => "csv"
+    assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :id => table_id, :format => "csv")
+    put :update, :id => table_id, :datatable => { :description => "No CSV cache" }
+    assert !@controller.fragment_exist?(:controller => "datatables", :action => "show", :id => table_id, :format => "csv")
+  end
 
   def test_should_update_datatable
     put :update, :id => @table, :datatable => {:title => 'soil moisture' }
@@ -346,14 +341,10 @@ class DatatablesControllerTest < ActionController::TestCase
   
   context 'GET with empty search parameters' do
     setup do
-      get :index, :keyword_list => '', :commit => 'Search', :requested_subdomain => 'lter'
+      get :search, :keyword_list => '', :commit => 'Search', :requested_subdomain => 'lter'
     end
   
-    should assign_to :datatables
-    should assign_to :themes
-        
-    should respond_with :success
-    should render_template :index
+    should redirect_to("datatables index") {datatables_url}
     should_not set_the_flash
   end
   

@@ -1,9 +1,7 @@
 --- 
 javascripts: 
 - base: 
-  - prototype
-  - effects
-  - controls
+  - rails
   - jquery.truncator
   - jquery.quickTree
   - application
@@ -12,22 +10,10 @@ stylesheets:
 - base: 
   - formtastic
   - formtastic_changes
+  - scaffold
   - branding
+  - navigation
   - data
   - kbs
   - glbrc
   - lter_supplemental
-  - navigation
-  - scaffold
-  - textile-editor
-  - jquery.ui.core
-  - jquery.ui.resizable
-  - jquery.ui.accordion
-  - jquery.ui.autocomplete
-  - jquery.ui.button
-  - jquery.ui.dialog
-  - jquery.ui.slider
-  - jquery.ui.tabs
-  - jquery.ui.datepicker
-  - jquery.ui.progressbar
-

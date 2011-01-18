@@ -11,8 +11,8 @@ class Person < ActiveRecord::Base
     
   accepts_nested_attributes_for :affiliations, :allow_destroy => true
 
-  named_scope :by_sur_name, :order => 'sur_name'
-  named_scope :by_sur_name_asc, :order => 'sur_name ASC'
+  scope :by_sur_name, :order => 'sur_name'
+  scope :by_sur_name_asc, :order => 'sur_name ASC'
   
   #acts_as_taggable
   
@@ -81,8 +81,8 @@ class Person < ActiveRecord::Base
     end
   end
   
-  def self.find_all_with_dataset(options={})
-    people = Person.all(options).collect {|x| x if x.has_dataset?}
+  def self.find_all_with_dataset
+    people = Person.order('sur_name').collect {|x| x if x.has_dataset?}
     people.compact
   end
     

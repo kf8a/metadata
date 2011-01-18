@@ -1,4 +1,4 @@
-db/meta_test
+db/meta_*
 .yardoc
 db/*.sqlite3
 db/sphinx
@@ -9,8 +9,6 @@ vendor/rails/
 vendor/plugins/rspec/.git/
 vendor/plugins/rspec-rails/.git/
 metadata.sql
-base_packaged.css
-public/javascripts/base_packaged.js
 public/datatables
 public/*.html
 .DStore
@@ -23,5 +21,5 @@ nbproject/
 config/development.sphinx.conf
 assets/
 coverage/
-Gemfile.lock
 .bundle
+*.swp

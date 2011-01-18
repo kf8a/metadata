@@ -1,17 +1,18 @@
 class ProtocolsController < ApplicationController
 
   layout :site_layout
-  before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
+  before_filter :admin?, :except => [:index, :show]  if Rails.env == 'production'
   before_filter :get_protocol, :only => [:edit, :update, :destroy]
     
-  #caches_action :index
+  cache_sweeper :protocol_sweeper
+  caches_action :index, :show
   
   # GET /protocols
   # GET /protocols.xml
   def index
     @themes = Theme.roots
     website =  Website.find_by_name(@subdomain_request)
-    @protocols = website.protocols.find(:all, :order => 'title')
+    @protocols = website.protocols.find(:all, :order => 'title', :conditions => ['active = true'])
 
     respond_to do |format|
       format.html { render_subdomain }

@@ -1,9 +1,8 @@
 <h1>New protocol</h1>
 
-<%= error_messages_for :protocol %>
-
-<% form_for(:protocol, :url => protocols_path) do |f| %>
-	<%= render :partial => 'form', :locals => {:f => f, :people => @people, :datasets => @datasets}%>	
+<%= form_for(:protocol, :url => protocols_path) do |f| %>
+  <%= render "shared/error_messages", :target => @protocol %>
+  <%= render :partial => 'form', :locals => {:f => f, :people => @people, :datasets => @datasets}%>
   <p>
     <%= submit_tag "Create" %>
   </p>

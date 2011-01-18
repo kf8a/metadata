@@ -2,7 +2,7 @@ class OwnershipsController < ApplicationController
 
   layout :site_layout
   
-  before_filter :admin? unless ENV["RAILS_ENV"] == 'development'
+  before_filter :admin? unless Rails.env == 'development'
 
   def index
     @datatables = Datatable.by_name
@@ -114,8 +114,8 @@ class OwnershipsController < ApplicationController
   private
     
   def get_datatable
-    @datatable = Datatable.find(params[:id]) if params[:id]
-    @datatable = Datatable.find(params[:datatable]) if params[:datatable]
+    @datatable = Datatable.find_by_id(params[:id]) if params[:id]
+    @datatable = Datatable.find_by_id(params[:datatable]) if params[:datatable]
     unless @datatable
       flash[:notice] = "You must select a valid datatable to grant ownerships"
       redirect_to :action => :index

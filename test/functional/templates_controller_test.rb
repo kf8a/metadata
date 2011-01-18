@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.expand_path('../../test_helper',__FILE__) 
 
 class TemplatesControllerTest < ActionController::TestCase
 
@@ -37,7 +37,7 @@ class TemplatesControllerTest < ActionController::TestCase
 
     context 'on POST to :create' do
       setup do 
-        post :create, {:controller => 'datatables', :action => 'show', :layout => 'p'}
+        post :create, :template => {:controller => 'datatables', :action => 'show', :layout => 'p'}
       end
 
       should respond_with :redirect

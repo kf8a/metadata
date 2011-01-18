@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   
   layout :site_layout
   
-  before_filter :admin?, :except => [:show] unless ENV["RAILS_ENV"] == 'development'
+  before_filter :admin?, :except => [:show] unless Rails.env == 'development'
   before_filter :get_page, :only => [:show, :edit, :update, :destroy]
   
   def index
@@ -51,6 +51,7 @@ class PagesController < ApplicationController
   
   def destroy 
     @page.destroy
+    redirect_to :action => 'index'
   end
   
   private

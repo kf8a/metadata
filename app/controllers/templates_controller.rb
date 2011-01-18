@@ -1,6 +1,7 @@
 class TemplatesController < ApplicationController
-  
-  before_filter :admin?, :except => [:index, :show]  if ENV["RAILS_ENV"] == 'production'
+
+  before_filter :admin?, :except => [:index, :show]  if Rails.env == 'production'
+  respond_to :html, :xml, :json
   
   def index
     @templates = Template.find(:all)
@@ -15,12 +16,7 @@ class TemplatesController < ApplicationController
   end
   
   def create
-    @t = Template.new(params[:template])
-    if @t.save
-      redirect_to template_url(@t)
-    else
-      render :action => 'new'
-    end
+    respond_with(@t = Template.create(params[:template]))
   end
   
   def update

@@ -19,11 +19,6 @@ class Dataset < ActiveRecord::Base
   
   acts_as_taggable_on :keywords
     
-  def has_person(id)
-    person = Person.find(id)
-    people.exists?(person)
-  end
-  
   def datatable_people
     datatables.collect do |table|
       table.personnel.keys

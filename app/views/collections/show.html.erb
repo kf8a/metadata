@@ -52,7 +52,7 @@
 
 <% if @customizer.customize %>
   <%= button_to 'Hide customization forms', {:action => 'show', :id => @collection, :custom => false}, :method => :get %>
-  <% form_tag({:action => 'show', :id => @collection}, :method => :get) do %>
+  <%= form_tag({:action => 'show', :id => @collection}, :method => :get) do %>
     <%= hidden_field_tag 'custom', true %>
     <table>
       <tr>
@@ -94,7 +94,7 @@
         <% if @customizer.accepts?(row) %>
           <tr  class="<%= cycle('even','odd') -%>">
             <td>
-              <% row.keys.each do |key| %>
+              <% row.keys.sort.each do |key| %>
                 <% next unless row[key] %>
                 <% next if key == "id" %>
                 <%= key.titleize + ": " + row[key] %><br />

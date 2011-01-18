@@ -5,7 +5,7 @@
   <%= textilize @sponsor.data_use_statement if @sponsor %>
 
   <div id='search-form'>
-    <% form_tag('/datatables/search') do %>
+    <%= form_tag('/datatables/search') do %>
     
       <div id='keyword-search'>
         <%= text_field_tag :keyword_list, @keyword_list || @default_value , {:id => 'keyworder'}  %>
@@ -18,14 +18,12 @@
   <div>
     <h1 class='right'>Data</h1>
     <ul class='quickTree'>
-      <li>
         <%= render_study(:code => 'GIBC')%>
         <%= render_study(:code => 'GSCALE')%>
         <%= render_study(:code => 'GEXT')%>
         <%= render_study(:code => 'GSWITCH')%>
         <%= render_study(:code => 'GVAR')%>
         <%= render_study(:code => 'GPROD')%>
-      </li>
     </ul>
   </div>
 

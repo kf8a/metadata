@@ -47,6 +47,7 @@
   border-color: #000000;
   border-width: 2px;
 }
+#glbrc { overflow: hidden; }
 #glbrc .sign-up {
   border: 2px solid #71bf44;
   float: right;
@@ -96,8 +97,9 @@
   -webkit-border-bottom-right-radius: 10px;
 }
 #glbrc #navigation {
-  width: 100%;
   position: absolute;
+  width: 100%;
+  left: 1px;
   top: 1px;
   font-weight: bold;
 }
@@ -155,9 +157,18 @@
   margin-bottom: 0.2em;
 }
 #glbrc .even { background-color: #f8ffd6; }
-#glbrc .citation p { display: inline; }
 #glbrc .top-level { margin-bottom: 0.4em; }
-#glbrc .citation { margin-bottom: 1em; }
+#glbrc .citation {
+  margin-bottom: 1em;
+  margin-left: 1em;
+}
+#glbrc .citation p { display: inline; }
+#glbrc .pub_year {
+  margin-left: -0.4em;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
 #glbrc label { display: block; }
 #glbrc li ul li {
   padding-left: 1.5em;
@@ -175,7 +186,7 @@
   font-size: 0.7em;
   margin-left: 4em;
 }
-#glbrc li.study-title {
+#glbrc .study-title {
   background-color: white;
   font-size: 1.2em;
   font-weight: bold;
@@ -186,19 +197,12 @@
   padding-right: 1px;
   padding: 1px;
 }
-#glbrc li.study-title > .expanded {
+#glbrc .study-title > .expanded {
   border-bottom-style: solid;
   border-bottom-width: 1px;
 }
-#glbrc li.study-title > a { color: #005387; }
-#glbrc li.study-title p {
-  font-weight: normal;
-  font-size: 0.7em;
-  margin-left: 4em;
-  margin-top: 0;
-  color: black;
-}
-#glbrc li.study-title ul {
+#glbrc .study-title > a { color: #005387; }
+#glbrc .study-title ul {
   font-weight: normal;
   background-color: white;
   position: relative;
@@ -206,10 +210,13 @@
   margin-right: 1px;
   color: black;
 }
-#glbrc li.study-title li { padding-top: 3px; }
+#glbrc .study-title li { padding-top: 3px; }
 #glbrc .person-email { padding-top: 0.5em; }
 #glbrc .default { color: grey; }
-#glbrc #content { width: 650px; }
+#glbrc #content {
+  width: 650px;
+  float: none;
+}
 #glbrc #content h1 {
   font-size: 1.2em;
   font-weight: bold;
@@ -240,6 +247,19 @@
 #glbrc #content .edit {
   font-size: 90%;
   float: right;
+}
+#glbrc #content h1.publication-section { margin-bottom: 0; }
+#glbrc #content .synopsis {
+  font-size: 0.9em;
+  margin-top: 0;
+}
+#glbrc #content .indent { margin-left: 1.1em; }
+#glbrc #content li.synopsis {
+  font-weight: normal;
+  font-size: 0.7em;
+  margin-left: 4em;
+  margin-top: 0;
+  color: black;
 }
 #glbrc #content a.download-link {
   display: block;

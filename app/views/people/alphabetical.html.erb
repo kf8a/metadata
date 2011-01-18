@@ -2,8 +2,14 @@
 <ul class='multicolumn'>
   <% for person in @people %>
     <li><%= link_to "#{person.full_name}", person_path(person) %>
-	      <%= link_to 'Edit', edit_person_path(person), {:class => 'edit'} if signed_in? %>
-	      <%= link_to_remote image_tag("trash.gif"), :url => person_path(person), :method => 'post', :confirm => 'Are you sure?' if signed_in?%>
+      <% if signed_in? %>
+        <%= link_to 'Edit', edit_person_path(person), {:class => 'edit'} %>
+        <%= link_to image_tag("trash.gif"),
+            :url => person_path(person),
+            :method => 'post',
+            :confirm => 'Are you sure?',
+            :remote => true %>
+      <% end %>
     </li>
   <% end %>
 </ul>

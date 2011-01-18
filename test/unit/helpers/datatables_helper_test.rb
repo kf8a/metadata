@@ -10,4 +10,8 @@ class DatatablesHelperTest < ActionView::TestCase
     assert permission_request_email_list(datatable) =~ /test/
     assert permission_request_email_list(datatable) =~ /glbrc/
   end
+  
+  def test_personnel_by_roles
+    datatable = Factory.create :datatable
+  end
 end

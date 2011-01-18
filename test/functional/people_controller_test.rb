@@ -1,8 +1,4 @@
-require 'test_helper'
-require 'people_controller'
-
-# Re-raise errors caught by the controller.
-class PeopleController; def rescue_action(e) raise e end; end
+require File.expand_path('../../test_helper',__FILE__) 
 
 class PeopleControllerTest < ActionController::TestCase
   fixtures :people, :role_types, :roles,  :affiliations
@@ -47,13 +43,13 @@ class PeopleControllerTest < ActionController::TestCase
     @controller.current_user = Factory.create :admin_user
   end
   
-  def teardown
-    @controller.expire_fragment(%r{.*})
-  end
-
   context "GET :index" do
     setup do
       get :index
+    end
+
+    teardown do
+      @controller.expire_fragment(:action => :index)
     end
     
     should respond_with :success
@@ -64,6 +60,7 @@ class PeopleControllerTest < ActionController::TestCase
   
   context "GET :alphabetical" do
     setup do
+      Rails.cache.clear
       get :alphabetical
     end
     
@@ -73,6 +70,7 @@ class PeopleControllerTest < ActionController::TestCase
 
   context "GET :emeritus" do
     setup do
+      Rails.cache.clear
       get :emeritus
     end
     

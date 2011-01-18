@@ -1,7 +1,7 @@
 class UploadsController < ApplicationController
 
   layout :site_layout
-  before_filter :can_upload?, :except => [:index, :show]  unless ENV["RAILS_ENV"] == 'development'
+  before_filter :can_upload?, :except => [:index, :show]  unless Rails.env == 'development'
 
   def index
     @uploads = Upload.all
@@ -37,7 +37,7 @@ class UploadsController < ApplicationController
   private
   
   def can_upload?
-    current_user.role == 'admin' || current_user.role == 'uploader'
+    current_user.try(:role) == 'admin' || current_user.try(:role) == 'uploader'
   end
 
   def set_title

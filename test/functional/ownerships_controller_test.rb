@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.expand_path('../../test_helper',__FILE__) 
 
 class OwnershipsControllerTest < ActionController::TestCase
 
@@ -59,6 +59,17 @@ class OwnershipsControllerTest < ActionController::TestCase
         
         should render_template 'show'
         should assign_to(:datatable).with(@datatable)
+      end
+
+      context "and GET :show with invalid datatable" do
+        setup do
+          bad_id = @datatable.id
+          @datatable.destroy
+          assert_nil Datatable.find_by_id(bad_id)
+          get :show, :id => bad_id
+        end
+
+        should redirect_to("the ownerships page") {ownerships_path}
       end
       
       context "and GET :new permission for the datatable" do

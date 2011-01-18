@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.expand_path('../../test_helper',__FILE__) 
 
 class PublicationsControllerTest < ActionController::TestCase
  fixtures :publications, :treatments

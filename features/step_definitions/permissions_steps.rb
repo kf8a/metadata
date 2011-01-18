@@ -61,5 +61,5 @@ end
 
 Then /^"([^"]*)" should not have access to the datatable$/ do |email|
   @user = User.find_by_email(email)
-  assert !@user.permitted?(Datatable.last)
+  assert !Datatable.last.can_be_downloaded_by?(@user)
 end

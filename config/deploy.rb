@@ -1,3 +1,5 @@
+require "bundler/capistrano"
+
 set :application, "metadata"
 
 #set :repository,  "/Users/bohms/code/metadata"
@@ -32,7 +34,7 @@ namespace :deploy do
     [:stop, :start, :restart].each do |t|
       desc "#{t.to_s.capitalize} the thin appserver"
       task t, :roles => :app do
-        invoke_command "thin -C /etc/thin/metadata.yml #{t.to_s}"
+        invoke_command "cd #{current_path};bundle exec thin -C /etc/thin/metadata.yml #{t.to_s}"
       end
     end
   end
@@ -56,19 +58,25 @@ namespace :deploy do
   after 'deploy:symlink', :link_production_db
   after 'deploy:symlink', :link_site_keys
   after 'deploy:symlink', :link_new_relic
-  after 'deploy:symlink', :update_spinks
+  before 'deploy:symlink', :stop_sphinks
+  after 'deploy:symlink', :update_sphinks
   after 'deploy:symlink', :link_assets
 end
 
 task :staging do 
+  set :deploy_via, :remote_cache
+  
   set :host, 'sebewa'
   
   role :app, "#{host}.kbs.msu.edu"
   role :web, "#{host}.kbs.msu.edu"
   role :db,  "#{host}.kbs.msu.edu", :primary => true
+  
 end
 
-task :production do 
+task :master do
+  set :deploy_via, :remote_cache
+  
   set :host, 'houghton'
   
   role :app, "#{host}.kbs.msu.edu"
@@ -79,12 +87,29 @@ task :production do
   after 'deploy:symlink', :set_asset_host
 end
 
-desc 'Update sphinks'
-task :update_spinks do
-  run "cd #{release_path};rake ts:stop RAILS_ENV=production"
-  run "cd #{release_path};rake ts:index RAILS_ENV=production"
-  run "cd #{release_path};rake ts:start RAILS_ENV=production"
+task :production do 
+  set :deploy_via, :remote_cache
   
+  set :host, 'gprpc37'
+  
+  role :app, "#{host}.kbs.msu.edu", "gprpc28.kbs.msu.edu" #, "35.8.163.71"
+  role :web, "#{host}.kbs.msu.edu"
+  role :db,  "#{host}.kbs.msu.edu", :primary => true
+  
+  after 'deploy:symlink', :set_subdomain_tdl
+  after 'deploy:symlink', :set_asset_host
+end
+
+desc 'stop sphinks'
+task :stop_sphinks do
+  run "cd #{current_path};rake ts:stop RAILS_ENV=production"
+end
+
+desc 'Update sphinks'
+task :update_sphinks do
+  run "cd #{release_path};rake ts:index RAILS_ENV=production"
+  run "cd #{release_path};chmod go-r config/production.sphinx.conf"
+  run "cd #{release_path};rake ts:start RAILS_ENV=production"
 end
 
 desc "Link in the production database.yml"
@@ -104,7 +129,8 @@ end
 
 desc 'set subdomain tdl'
 task :set_subdomain_tdl do
-  run "sed -i 's/production => 3/production => 2/' #{release_path}/config/environment.rb"
+  #run "sed -i 's/production => 3/production => 2/' #{release_path}/config/environment.rb"
+  run "sed -i 's/production => 3/production => 2/' #{release_path}/config/initializers/subdomain_fu.rb"
 end
 
 desc 'set asset host on production' 

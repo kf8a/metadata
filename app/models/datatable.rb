@@ -1,13 +1,14 @@
 # encoding: UTF-8
 
 require 'rexml/document'
-require 'spreadsheet'
 require 'csv'
 include REXML
 
 class Datatable < ActiveRecord::Base
   attr_protected :object
-
+  
+  acts_as_taggable_on :keywords
+  
   has_one                 :collection
   belongs_to              :core_area
   belongs_to              :dataset
@@ -25,10 +26,8 @@ class Datatable < ActiveRecord::Base
   
   accepts_nested_attributes_for :data_contributions, :allow_destroy => true
   accepts_nested_attributes_for :variates, :allow_destroy => true
-  
-  acts_as_taggable_on :keywords
 
-  named_scope :by_name, :order => 'name'
+  scope :by_name, :order => 'name'
   
   define_index do
     indexes title
@@ -38,13 +37,13 @@ class Datatable < ActiveRecord::Base
     indexes people.given_name, :as => :datatable_given_name
     indexes dataset.affiliations.person.sur_name, :as => :sur_name
     indexes dataset.affiliations.person.given_name, :as => :given_name
-    indexes keywords(:name), :as => :keyword
+    indexes taggings.tag.name, :as => :keyword_name
     indexes dataset.title, :as => :dataset_title
     indexes dataset.dataset, :as => :dataset_identifier
     indexes name
     has dataset.website_id, :as => :website
     where "datatables.on_web is true and datasets.on_web"
-    
+
     #set_property :field_weights => {:keyword => 20, :theme => 20, :title => 10}
   end
   
@@ -176,6 +175,7 @@ class Datatable < ActiveRecord::Base
   
   def to_csv
     values  = perform_query(limited = false)
+    logger.info values
     if RUBY_VERSION > "1.9"
       output = CSV
     else
@@ -184,7 +184,10 @@ class Datatable < ActiveRecord::Base
     csv_string = output.generate do |csv|
       csv << variates.collect {|v| v.name }
       values.each do |row|
-        csv << row.values
+        csv << variates.collect do |v|
+          row[v.name.downcase]
+        end
+#        csv << row.values
       end
     end
     csv_string
@@ -194,7 +197,12 @@ class Datatable < ActiveRecord::Base
     # TODO test if file exists and send that
     
     # stupid microsofts
-    result = data_access_statement + data_source +  to_csv.force_encoding("UTF-8")
+    result = ""
+    if RUBY_VERSION > "1.9"
+      result = data_access_statement + data_source + data_comments + to_csv.force_encoding("UTF-8")
+    else
+      result = data_access_statement + data_source + data_comments + to_csv
+    end
     if is_utf_8
       result = Iconv.conv('utf-16','utf-8', result)
     end
@@ -210,44 +218,48 @@ class Datatable < ActiveRecord::Base
  
   end
   
-  def to_ods
-    values = perform_query(limited=false)
-    sheet = Spreadsheet::Builder.new
-    sheet.spreadsheet do 
-      sheet.table "Data Use Policy" do
-        data_access_statement.each_line do |line|
-          sheet.row do 
-            sheet.cell line
-          end
-        end
-        data_source.each_line do |source|
-          sheet.row do
-            sheet.cell source
-          end
-        end
-      end
-      
-      sheet.table "Data" do
-        sheet.header do
-       
-          sheet.row do
-            variates.each do |variate|
-              sheet.cell variate.name
-            end
-          end
-        end
-        values.each do |elements|
-          sheet.row do  
-            elements.values.each do |element| 
-              sheet.cell element
-            end
-          end
-        end
-      end
-    end
-    sheet.content!
-  end
+#   def to_ods
+#     values = perform_query(limited=false)
+#     sheet = Spreadsheet::Builder.new
+#     sheet.spreadsheet do 
+#       sheet.table "Data Use Policy" do
+#         data_access_statement.each_line do |line|
+#           sheet.row do 
+#             sheet.cell line
+#           end
+#         end
+#         data_source.each_line do |source|
+#           sheet.row do
+#             sheet.cell source
+#           end
+#         end
+#         sheet.cell data_comments
+#       end
+#       
+#       sheet.table "Data" do
+#         sheet.header do
+#        
+#           sheet.row do
+#             variates.each do |variate|
+#               sheet.cell variate.name
+#             end
+#           end
+#         end
+#         values.each do |elements|
+#           sheet.row do  
+#             elements.values.each do |element| 
+#               sheet.cell element
+#             end
+#           end
+#         end
+#       end
+#     end
+#     sheet.content!
+#   end
     
+  def data_comments
+    comments ? comments : ''
+  end
   def data_contact
     # contact = self.dataset.principal_contact
     # "#{contact.full_name} #{contact.email} #{contact.phone}"

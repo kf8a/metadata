@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.expand_path('../../test_helper',__FILE__) 
 
 class DatasetTest < ActiveSupport::TestCase
     
@@ -23,7 +23,33 @@ class DatasetTest < ActiveSupport::TestCase
       assert @dataset.respond_to?('temporal_extent')
     end
   end
-  
+
+  context 'datatable_people function' do
+    context 'for a dataset with datatables and people' do
+      setup do
+        @dataset = Factory.create(:dataset)
+        datatable1 = Factory.create(:datatable, :dataset => @dataset)
+        @dataset.reload
+        datatable2 = Factory.create(:datatable, :dataset => @dataset)
+        @dataset.reload
+        @person1 = Factory.create(:person, :given_name => "Angela")
+        @person2 = Factory.create(:person, :given_name => "Bob")
+        assert DataContribution.create(:datatable => datatable1, :person => @person1, :role => Factory.create(:role))
+        datatable1.reload
+        @dataset.reload
+        assert DataContribution.create(:datatable => datatable2, :person => @person2, :role => Factory.create(:role))
+        datatable2.reload
+        @dataset.reload
+      end
+
+      should 'list all people' do
+        @dataset.reload
+        assert @dataset.datatable_people.include?(@person1)
+        assert @dataset.datatable_people.include?(@person2)
+      end
+    end
+  end
+
   context 'no temporal extent' do
     setup do
       @dataset = Factory.create(:dataset, :initiated => '2000-1-1', 
@@ -86,29 +112,6 @@ class DatasetTest < ActiveSupport::TestCase
     should 'be successful' do
       assert !@dataset.to_eml.nil?
       assert !@dataset_no_date.to_eml.nil?
-    end
-  end
-  
-  context "has person function" do
-    setup do
-      @dataset = Factory.create(:dataset)
-    end
-    
-    context "with a person affiliated with the dataset" do
-      setup do
-        @person = Factory.create(:person)
-        @affiliation = Factory.create(:affiliation, :person => @person, :dataset => @dataset)
-      end
-      
-      should "return true for that person" do
-        assert @affiliation
-        assert @dataset.has_person(@person)
-      end
-      
-      should "return false for someone else" do
-        @stranger = Factory.create(:person)
-        assert !@dataset.has_person(@stranger)
-      end
     end
   end
   

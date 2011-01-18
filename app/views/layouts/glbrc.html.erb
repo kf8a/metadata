@@ -5,13 +5,14 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<title>GLBRC Sustainability: <%= controller.controller_name %></title>
-	<%= stylesheet_link_merged :base, :media=>'screen,print' %>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+	<%= raw stylesheet_link_merged :base, :media=>'screen,print' %>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 
   <script>jQuery.noConflict();</script>
 
-  <%= javascript_include_merged :base %>
+  <%= raw javascript_include_merged :base %>
+  <%= csrf_meta_tag %>
 
 </head>
 <body>
@@ -19,9 +20,9 @@
 	  <div id='glbrc'>
 	    <div id='sign-in'>
 	      <% if signed_in? %>
-	        <%= link_to 'Sign&nbsp;Out', sign_out_url(:only_path => true) %>
+	        <%= link_to 'Sign Out', sign_out_url(:only_path => true) %>
 	      <% else %>
-	        <%= link_to 'Sign&nbsp;In', sign_in_url(:only_path => true) %>  
+	        <%= link_to 'Sign In', sign_in_url(:only_path => true) %>
 	      <% end %>
 	    </div>
 		<div id='branding'>

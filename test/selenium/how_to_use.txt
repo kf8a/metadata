@@ -1,0 +1,30 @@
+To use these selenium files, you'll need to do the following:
+
+1. Download the Selenium IDE as a Firefox extension.
+
+2. Open up Firefox
+
+3. Open up Tools/Selenium IDE in Firefox
+
+4. Start up a server (rails server)
+
+5. Go to http://localhost:3000
+
+6. Open up the file in the Selenium IDE
+
+7. Press "Play current test case"
+
+
+
+
+(For running the whole suite do:
+
+1-5 above, then
+
+5. Open Test Suite
+
+6. Choose javascript_tests.sel
+
+7. Press "Play Entire Test Suite"
+
+

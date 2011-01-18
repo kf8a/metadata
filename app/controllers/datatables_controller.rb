@@ -2,17 +2,18 @@ class DatatablesController < ApplicationController
 
   layout :site_layout
 
-  before_filter :admin?, :except => [:index, :show, :suggest, :search, :events] unless ENV["RAILS_ENV"] == 'development'
+  before_filter :admin?, :except => [:index, :show, :suggest, :search, :events] unless Rails.env == 'development'
   before_filter :get_datatable, :only => [:show, :edit, :update, :destroy, :update_temporal_extent]
-  
-  #caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
+ 
+  protect_from_forgery :except => [:index, :show, :search] 
+  cache_sweeper :datatable_sweeper
+  caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
   
   # GET /datatables
   # GET /datatables.xml
   def index
     retrieve_datatables('keyword_list' =>'')
     
-    @sponsor = Sponsor.find_by_name('glbrc')
     respond_to do |format|
       format.html {render_subdomain}
       format.xml  { render :xml => @datatables.to_xml }
@@ -21,8 +22,6 @@ class DatatablesController < ApplicationController
   end
 
   def search
-    @sponsor = Sponsor.find_by_name('glbrc')
-    
     query =  {'keyword_list' => ''}
     query.merge!(params)
     if query['keyword_list'].empty? 
@@ -55,13 +54,13 @@ class DatatablesController < ApplicationController
       respond_to do |format|
         format.html   { render_subdomain }
         format.xml    { render :xml => @datatable.to_xml}
-        format.ods do
-          if csv_ok
-            render :text => @datatable.to_ods
-          else
-            redirect_to datatable_url(@datatable)
-          end
-        end
+#         format.ods do
+#           if csv_ok
+#             render :text => @datatable.to_ods
+#           else
+#             redirect_to datatable_url(@datatable)
+#           end
+#         end
         format.csv do
           if csv_ok
             render :text => @datatable.to_csv_with_metadata
@@ -100,13 +99,6 @@ class DatatablesController < ApplicationController
     @units = Unit.all
   end
   
-  def delete_csv_cache
-    @id = params[:id]
-    expire_action :action => "show", :id => @id, :format => "csv"
-    flash[:notice] = 'Datatable cache was successfully deleted.'
-    redirect_to :action => "edit", :id => @id
-  end
-
   # POST /datatables
   # POST /datatables.xml
   def create
@@ -241,7 +233,7 @@ class DatatablesController < ApplicationController
               Website.find_by_name(@subdomain_request)])
     end
 
-    @studies = Study.find_all_roots_with_datatables(@datatables, {:order => 'weight'})
+    @studies = Study.find_all_roots_with_datatables(@datatables)
 
   end
   

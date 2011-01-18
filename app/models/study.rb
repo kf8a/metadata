@@ -7,11 +7,11 @@ class Study < ActiveRecord::Base
     
   acts_as_nested_set
 
-  named_scope :by_weight, :order => 'weight'
-  named_scope :by_id,     :order => 'id'
+  scope :by_weight, :order => 'weight'
+  scope :by_id,     :order => 'id'
   
   def study_url(website)
-    study_urls.find(:first, :conditions => ['website_id = ?', website.id]).url
+    self.study_urls.where(:website_id => website.id).first.try(:url)
   end
     
   # returns true if one or more of the tables passed is part of the current study
@@ -23,8 +23,8 @@ class Study < ActiveRecord::Base
     self.all(options).collect {|x| x.include_datatables?(tables)  ? x : nil}.compact
   end
   
-  def self.find_all_roots_with_datatables(tables=[], options={})
-    self.roots(options).collect {|x| x.include_datatables?(tables) ? x : nil}.compact
+  def self.find_all_roots_with_datatables(tables=[])
+    self.roots.order('weight').collect {|x| x.include_datatables?(tables) ? x : nil}.compact
   end
   
   private
@@ -32,11 +32,4 @@ class Study < ActiveRecord::Base
   def self_and_descendants_datatables
     descendants.collect {|d| d.datatables }.flatten + datatables
   end
-  
-  def self_and_descendants_themed_datatables
-    my_datatables = descendants.collect {|d| d.datatables }.flatten
-    all_datatables = my_datatables + datatables    
-    all_datatables.collect {|d| d.theme ? d : nil}.compact
-  end
-  
 end

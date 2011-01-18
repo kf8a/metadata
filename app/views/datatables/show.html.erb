@@ -1,6 +1,9 @@
-<h1><%= @datatable.title_and_years %></h1>
+<% cache(:action_suffix => 'page') do %>
+<h1><%=raw @datatable.title_and_years %></h1>
 
-<%= textilize @datatable.description if @datatable.description %>
+<p class='description'>
+<%=raw textilize @datatable.description if @datatable.description %>
+</p>
 <%= @datatable.try(:summary_graph) %>
 <%= @datatable.try(:access_statement) %>
 
@@ -15,7 +18,7 @@
 <div>
   <h2>Context:</h2>
   <div class='truncate'>
-    <%= textilize @datatable.dataset.try(:abstract) %>
+    <%=raw textilize @datatable.dataset.try(:abstract) %>
   </div>
 </div>
 
@@ -24,10 +27,10 @@
     <tr>
       <td>Experiment:</td>
       <td>
-        <% if @datatable.study.url.nil? || @datatable.study.url.empty? %>
-          <%= @datatable.study.name %>
-        <% else %>
+        <% if @datatable.study.study_url(@website) %>
           <%= link_to "#{@datatable.study.name}", @datatable.study.study_url(@website) %>
+        <% else %>
+          <%= @datatable.study.name %>
         <% end %>
       </td>
     </tr>
@@ -56,7 +59,7 @@
       <td>Related Tables:</td>
       <td><ul>
         <% @datatable.related_tables.each do |table| %>
-          <li><%=  link_to table.title , datatable_path(table) %></li>
+          <li><%=link_to raw(table.title) , datatable_path(table) %></li>
         <% end %>
       </ul></td>
     </tr>
@@ -121,6 +124,7 @@
   <% end -%>
 </table>
 
+<% end %> 
 
 <% unless  @datatable.is_sql %>
   <% unless @datatable.object.nil? %>
@@ -142,7 +146,7 @@
                       :class => 'download-link'%>
           <%= link_to 'Download data as spreadsheet',
                       datatable_path(@datatable,:format => :ods),
-                      :class => 'download-link' if @trusted %>
+                      :class => 'download-link' if false %>
           <%= link_to 'View as a Collection', 
                       collection_path(@datatable.collection) if @datatable.collection %>
           <%= link_to 'Permissions Management',
@@ -171,6 +175,7 @@
       <% end %>
     </p>
 
+  <% cache(:action_suffix => 'data') do %>
     <div>
       <h2>Data Excerpt</h2>
       <div>
@@ -197,6 +202,7 @@
         </table>
       </div>
     </div>
+  <% end %>
   <% end %>
 <% end %>
 

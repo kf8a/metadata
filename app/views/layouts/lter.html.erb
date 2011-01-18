@@ -1,19 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<title>LTER: <%= controller.controller_name %>:<%= controller.action_name %></title>
-	<%= stylesheet_link_merged :base, :media=>'screen,print' %>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
- 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>LTER: <%= controller.controller_name %>:<%= controller.action_name %></title>
+  <%= raw stylesheet_link_merged :base, :media=>'screen,print' %>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js"></script>
   <script type='text/javascript' src='http://simile.mit.edu/timeline/api/timeline-api.js'></script>
   <script>$.noConflict();</script>
-  <%= javascript_include_merged :base %>
-  <script type='text/javascript' src='http://glbrc.sebewa.kbs.msu.edu/javascripts/timeline-init.js'></script>
-  
+  <%= raw javascript_include_merged :base %>
+  <!-- <script type='text/javascript' src='http://glbrc.sebewa.kbs.msu.edu/javascripts/timeline-init.js'></script> -->
+  <%= csrf_meta_tag %>
     	  
   <link rel="alternate" type="application/rss+xml" title="Data" href="/datatables.rss" />
 </head>
@@ -21,7 +19,7 @@
 	<div id='wrapper'>
 		<div id='branding'>
 			<a id='msu_logo' href="http://www.msu.edu">
-				<img alt="Michigan State University" src="/images/common/logo_msu_pos_122.gif"/>
+			  <%= image_tag('common/logo_msu_pos_122.gif', :alt => 'Michigan State University Logo')%>
 			</a>
 			<h1><%= @title %></h1>
 			<div id="topcoloredbar">
@@ -52,13 +50,13 @@
 			<%= yield  %>
 		</div>
 		<div id='navigation'>
-			<%= render :file => "#{RAILS_ROOT}/public/system/navigation.html"%>
+			<%= render :file => "#{Rails.root}/public/system/navigation.html"%>
 			<% if controller.controller_name == 'datasets' || controller.controller_name == 'datatables' || controller.controller_name == 'protocols' %>
-			  <%= render :file => "#{RAILS_ROOT}/public/system/network_db.html"%>
+			  <%= render :file => "#{Rails.root}/public/system/network_db.html"%>
 			<% end %>
 		</div>
 		<div id='footer'>
-			<%= render :file  => "#{RAILS_ROOT}/public/system/footer.html"%>
+			<%= render :file  => "#{Rails.root}/public/system/footer.html"%>
 		</div>
 	</div>
   

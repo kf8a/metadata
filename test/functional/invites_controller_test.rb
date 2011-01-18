@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.expand_path('../../test_helper',__FILE__) 
 
 class InvitesControllerTest < ActionController::TestCase
 
@@ -52,6 +52,14 @@ class InvitesControllerTest < ActionController::TestCase
 
     end
 
+    context 'POST :create with invalid attributes' do
+      setup do
+        post :create, :invite => { :email => nil }
+      end
+
+      should render_template 'new'
+    end
+
     context 'PUT :update' do
       setup do 
         put :update, :id => @invite, :invite => {}
@@ -60,6 +68,14 @@ class InvitesControllerTest < ActionController::TestCase
       should 'redirect to the show page' do
         assert redirect_to invite_path(assigns(:invite))
       end
+    end
+
+    context 'PUT :update with invalid attributes' do
+      setup do
+        put :update, :id => @invite, :invite => { :email => nil }
+      end
+
+      should render_template 'edit'
     end
 
     context 'DELETE :destroy' do

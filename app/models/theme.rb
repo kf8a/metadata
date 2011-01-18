@@ -4,8 +4,8 @@ class Theme < ActiveRecord::Base
   has_and_belongs_to_many :datasets
   has_many :datatables
 
-  named_scope :by_weight, :order => :weight
-  named_scope :by_name, :order => 'name'
+  scope :by_weight, :order => :weight
+  scope :by_name, :order => 'name'
   
   def datatables?(study=nil)
     children_have_datatables = children.collect {|d| d.datatables?(study)}.include?(true)
@@ -39,10 +39,5 @@ class Theme < ActiveRecord::Base
     else
       datatables.collect {|table| table if table.study == study }.compact
     end
-  end
-  
-  def self_and_decendants_ids
-    my_ids = descendants.collect {|i| i.id}.flatten
-    my_ids.push(id)
   end
 end

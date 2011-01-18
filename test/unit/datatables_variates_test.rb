@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.expand_path('../../test_helper',__FILE__) 
 
 class DatatablesVariatesTest < ActiveSupport::TestCase
   fixtures :datatables_variates
