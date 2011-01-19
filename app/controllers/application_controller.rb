@@ -40,9 +40,9 @@ class ApplicationController < ActionController::Base
   def site_layout
     request_subdomain(params[:requested_subdomain])
   end
-  
-  def request_subdomain(requested_subdomain=current_subdomain)
-    requested_subdomain = current_subdomain if requested_subdomain.blank?
+
+  def request_subdomain(requested_subdomain=request.subdomain)
+    requested_subdomain = request.subdomain if requested_subdomain.blank?
     requested_subdomain = 'lter' unless valid_subdomain?(requested_subdomain)
     return requested_subdomain
   end

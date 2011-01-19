@@ -7,7 +7,7 @@ Feature: Assign owners to datatables
     Given a user exists and is confirmed with an email of "admin@person.com"
       And "admin@person.com" is an administrator
       And a protected datatable exists with a name of "kbs001"
-    When  I sign in as "admin@person.com"/"password"
+    When  I sign in as "admin@person.com/password"
       And I go to the datatable page
       And I follow "Owners Management"
     Then I should see "Owned by:"
@@ -26,7 +26,7 @@ Feature: Assign owners to datatables
     Given a user exists and is confirmed with an email of "admin@person.com"
       And "admin@person.com" is an administrator
       And a protected datatable exists with a name of "kbs001"
-    When  I sign in as "admin@person.com"/"password"
+    When  I sign in as "admin@person.com/password"
     Then "bill@person.com" should not own the datatable "kbs001"
 
     When I go to the new ownership page
@@ -44,7 +44,7 @@ Feature: Assign owners to datatables
       And a user exists and is confirmed with an email of "bill@person.com"
       And a datatable exists with a name of "kbs001"
       And "bill@person.com" owns the datatable named "kbs001"
-    When  I sign in as "admin@person.com"/"password"
+    When  I sign in as "admin@person.com/password"
       And I go to the datatable page
       And I follow "Owners Management"
     Then I should see "Owned by: bill@person.com"
@@ -59,7 +59,7 @@ Feature: Assign owners to datatables
     Given a user exists and is confirmed with an email of "bob@person.com"
       And "bob@person.com" is not an administrator
       And a protected datatable exists with a name of "kbs001"
-    When  I sign in as "bob@person.com"/"password"
+    When  I sign in as "bob@person.com/password"
       And I go to the ownerships page
     Then  I should be on the sign_in page
   

@@ -17,7 +17,7 @@ Feature: Give Permissions to another user
       And "sam@person.com" does not have permission to download the datatable
 
   Scenario: I want to grant permission to download to a user
-    When  I sign in as "bob@person.com"/"password"
+    When  I sign in as "bob@person.com/password"
       And I go to the datatable page
       And I follow "Permissions Management"
     Then I should not see "sam@person.com has permission from you"
@@ -32,7 +32,7 @@ Feature: Give Permissions to another user
  
   Scenario: I want to revoke permission to download from a user
     Given "bob@person.com" has given "sam@person.com" permission
-    When  I sign in as "bob@person.com"/"password"
+    When  I sign in as "bob@person.com/password"
       And I go to the datatable page
       And I follow "Permissions Management"
     Then I should see "sam@person.com has permission from you"
@@ -46,7 +46,7 @@ Feature: Give Permissions to another user
       And "alice@person.com" owns the datatable
       And "alice@person.com" has not given "sam@person.com" permission
       And "bob@person.com" has given "sam@person.com" permission
-    When I sign in as "bob@person.com"/"password"
+    When I sign in as "bob@person.com/password"
       And I go to the datatable page
       And I follow "Permissions Management"
     Then I should see "sam@person.com has permission from you"
@@ -58,7 +58,7 @@ Feature: Give Permissions to another user
       And "bob@person.com" owns the datatable named "A Datatable"
       And "bob@person.com" owns the datatable named "Another Datatable"
       And a protected datatable exists with a name of "A Datatable Bob Does Not Own"
-    When  I sign in as "bob@person.com"/"password"
+    When  I sign in as "bob@person.com/password"
       And I go to the permissions page
     Then I should see "A Datatable"
       And I should see "Another Datatable"
@@ -68,7 +68,7 @@ Feature: Give Permissions to another user
     Then I should see "Permissions for Another Datatable"
 
   Scenario: A potential downloader requests permission
-    When I sign in as "sam@person.com"/"password"
+    When I sign in as "sam@person.com/password"
     And I go to the datatable page
     ####This stuff needs to be tested manually, I cannot get it to work here
     #And I follow "Request Data"
@@ -77,7 +77,7 @@ Feature: Give Permissions to another user
 
   Scenario: An owner gives permission by accepting someone's request
     Given "sam@person.com" has requested permission
-    When I sign in as "bob@person.com"/"password"
+    When I sign in as "bob@person.com/password"
     And I go to the datatable page
     And I follow "Permissions Management"
     Then I should see "sam@person.com has requested permission"
@@ -86,7 +86,7 @@ Feature: Give Permissions to another user
 
   Scenario: An owner denies someone's request
     Given "sam@person.com" has requested permission
-    When I sign in as "bob@person.com"/"password"
+    When I sign in as "bob@person.com/password"
     And I go to the datatable page
     And I follow "Permissions Management"
     Then I should see "sam@person.com has requested permission"
@@ -100,7 +100,7 @@ Feature: Give Permissions to another user
       And "alice@person.com" owns the datatable
       And "alice@person.com" has not given "sam@person.com" permission
       And "alice@person.com" has denied the request of "sam@person.com"
-    When I sign in as "bob@person.com"/"password"
+    When I sign in as "bob@person.com/password"
       Then I should be signed in
     When I go to the datatable page
       And I follow "Permissions Management"

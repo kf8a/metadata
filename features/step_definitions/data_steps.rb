@@ -27,6 +27,7 @@ Given /^a public lter datatable exists with species data$/ do
     :common_name => "American Black Bear")
   @datatable = Factory.create(:datatable,
     :object => 'select * from species',
+    :name => "Species Table",
     :dataset => Factory.create(:dataset, :website => @website),
     :study => Factory.create(:study))
   Factory.create(:variate,

@@ -6,9 +6,10 @@ Feature: Data View
   Background:
     Given a website exists with a name of "lter"
       And a website exists with a name of "glbrc"
-      And I am signed in as a normal user
       And I am in the lter subdomain
-      
+      And I am signed in as a normal user
+      And the cache is clear
+            
   Scenario: Seeing which datatables are available
     Given a study exists with a name of "Awesome Study"
       And a public lter datatable exists with a title of "First one"
@@ -23,7 +24,7 @@ Feature: Data View
 
   Scenario: Viewing a public datatable
     Given a public lter datatable exists with species data
-    When I go to the datatable page
+    When I go to the datatable show page for "Species Table"
     Then I should see "Species"
       And I should see "The name of the species"
       And I should see "Genus"
