@@ -69,7 +69,11 @@ class CitationsController < ApplicationController
     deny_access and return unless signed_in?
     
     path = citation.pdf.path(params[:style])
-    send_file  path, :type => 'application/pdf', :disposition => 'inline'
+    if Rails.env.production?
+        redirect_to(AWS::S3::S3Object.url_for(path, citation.pdf.bucket_name, :expires_in => 10.seconds))
+    else
+      send_file  path, :type => 'application/pdf', :disposition => 'inline'
+    end
   end
 
   def destroy
