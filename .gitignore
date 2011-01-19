@@ -15,6 +15,7 @@ public/*.html
 .DS_Store
 tmp/
 config/database.yml
+config/s3.yml
 config/newrelic.yml
 rcov/
 nbproject/
