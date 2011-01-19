@@ -176,7 +176,7 @@ p {font-size: 1em; margin-top: 5px}
 .image_caption_left {float: left; width: 200px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px}
 .ImageLeft {padding: 0.3em; float: left; margin: 0.3em; border-color: #000000; border-width: 2px}
 .ImageRight {padding: 0.3em; float: right; margin: 0.3em; border-color: #000000; border-width: 2px}
-#glbrc {overflow: hidden; padding-top: 1em}
+#glbrc {overflow: hidden}
 #glbrc .sign-up {border: 2px solid #71bf44; float: right; display: block; border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; padding: 10px 20px 20px 20px; width: 12em}
 #glbrc .sign-up a {background-color: #009bda; color: white; border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; padding: 10px}
 #glbrc .sign-up a:hover {background-color: #005387}

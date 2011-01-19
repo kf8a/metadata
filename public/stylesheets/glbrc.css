@@ -47,10 +47,7 @@
   border-color: #000000;
   border-width: 2px;
 }
-#glbrc {
-  overflow: hidden;
-  padding-top: 1em;
-}
+#glbrc { overflow: hidden; }
 #glbrc .sign-up {
   border: 2px solid #71bf44;
   float: right;
