@@ -1,3 +1,4 @@
+<% cache do %>
 <% @themes.each do |theme| -%>
   <% next if theme.datatables? %>
 	<h2><%= theme.name %></h2>
@@ -14,3 +15,4 @@
 <br />
 
 <%= link_to 'New protocol', new_protocol_path %>
+<% end %>

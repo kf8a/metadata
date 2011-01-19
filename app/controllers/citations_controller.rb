@@ -3,12 +3,14 @@ class CitationsController < ApplicationController
 #  caches_action :index if Rails.env == 'production'
 
   def index
+    store_location
     @submitted_citations = Citation.submitted_with_authors_by_sur_name_and_pub_year
     @forthcoming_citations = Citation.forthcoming_with_authors_by_sur_name_and_pub_year
     @citations = Citation.published_with_authors_by_sur_name_and_pub_year
   end
 
   def show
+    store_location
     @citation = Citation.find(params[:id])
   end
   
@@ -64,8 +66,7 @@ class CitationsController < ApplicationController
   
   def download
     head(:not_found) and return unless (citation = Citation.find_by_id(params[:id]))
-    store_location
-    redirect_to sign_in_url and return unless signed_in?
+    deny_access and return unless signed_in?
     
     path = citation.pdf.path(params[:style])
     logger.info path

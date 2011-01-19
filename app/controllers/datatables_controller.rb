@@ -12,6 +12,7 @@ class DatatablesController < ApplicationController
   # GET /datatables
   # GET /datatables.xml
   def index
+    store_location
     retrieve_datatables('keyword_list' =>'')
     
     respond_to do |format|
@@ -50,6 +51,7 @@ class DatatablesController < ApplicationController
     @website = Website.find_by_name(@subdomain_request)
     @trusted = trusted_ip?
 
+    store_location #in case we have to log in and come back here
     if @datatable.dataset.valid_request?(@subdomain_request)
       respond_to do |format|
         format.html   { render_subdomain }
