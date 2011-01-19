@@ -58,6 +58,7 @@ namespace :deploy do
   after 'deploy:symlink', :link_production_db
   after 'deploy:symlink', :link_site_keys
   after 'deploy:symlink', :link_new_relic
+  after 'deploy:symlink', :link_s3
   before 'deploy:symlink', :stop_sphinks
   after 'deploy:symlink', :update_sphinks
   after 'deploy:symlink', :link_assets
@@ -125,6 +126,11 @@ end
 desc "Link in the new relic monitoring"
 task :link_new_relic do
   run "ln -nfs #{deploy_to}/shared/config/newrelic.yml #{release_path}/config/newrelic.yml"
+end
+
+desc "Link in the s3 credentials"
+task :link_s3 do
+  run "ln -nfs #{deploy_to}/shared/config/s3.yml #{release_path}/config/s3.yml"
 end
 
 desc 'set subdomain tdl'
