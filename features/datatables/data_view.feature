@@ -8,6 +8,7 @@ Feature: Data View
       And a website exists with a name of "glbrc"
       And I am in the lter subdomain
       And I am signed in as a normal user
+      And the cache is clear
             
   Scenario: Seeing which datatables are available
     Given a study exists with a name of "Awesome Study"
