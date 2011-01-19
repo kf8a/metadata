@@ -5,7 +5,8 @@ Feature: Download data
   I want to download datatables
   
   Background:
-    Given I am on the datatables page
+    Given the cache is clear
+      And I am on the datatables page
       And a user exists and is confirmed with an email of "bob@person.com"
 
   Scenario: The admin user downloads a protected datatable
@@ -106,5 +107,5 @@ Feature: Download data
   Scenario: An anonymous users types in the url for a protected datatable html view
     Given a protected datatable exists
      When I go to the datatable download page
-     Then I should see "Sign In"
+     Then I should see "You do not have permission to download this datatable"
       

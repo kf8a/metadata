@@ -24,3 +24,7 @@ Given /^"([^"]*)" is a "([^"]*)" member$/ do |email, sponsor_name|
   sponsor = Factory :sponsor, :name => sponsor_name
   user.sponsors << sponsor
 end
+
+Given /^I am signed out$/ do
+  Given %{I am on the sign out page}
+end
