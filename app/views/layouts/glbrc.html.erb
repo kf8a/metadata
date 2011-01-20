@@ -18,37 +18,36 @@
 <body>
 	<div id='wrapper'>
 	  <div id='glbrc'>
-	    <div id='sign-in'>
-	      <% if signed_in? %>
-	        <%= link_to 'Sign Out', sign_out_url(:only_path => true) %>
-	      <% else %>
-	        <%= link_to 'Sign In', sign_in_url(:only_path => true) %>
-	      <% end %>
-	    </div>
-		<div id='branding'>
-			<a id='glbrc-logo' href="http://glbrc.org">
-				<img alt="Great Lakes Bioenergy Consortium" src="/images/common/glbrc_small.jpg"/>
-			</a>
-			<h1><%= @title %></h1>
-		
-
-		</div>
-		<div id='content'>
-			
-			<p style="color: green"><%= flash[:notice] %></p>
-			<%= yield  %>
-		</div>
-		<div id='navigation'>
-        <ul>
-          <li><a href='/datatables'>Data Catalog</a></li>
-          <li><a href='/protocols'>Protocols</a></li>
-          <li><a href='/pages/1'>Experimental Layouts</a></li>
-          <li><a href='/citations'>Publications</a></li>
-        </ul>
-		</div>
-		<div id='footer'>
-		</div>
-		</div>
+            <div id="sign-in-wrapper">
+              <div id='sign-in'>
+                <% if signed_in? %>
+                  <%= link_to 'Sign Out', sign_out_url(:only_path => true) %>
+                <% else %>
+                  <%= link_to 'Sign In', sign_in_url(:only_path => true) %>
+                <% end %>
+              </div>
+            </div>
+            <div id='branding'>
+              <a id='glbrc-logo' href="http://glbrc.org">
+                <img alt="Great Lakes Bioenergy Consortium" src="/images/common/glbrc_small.jpg"/>
+              </a>
+              <h1><%= @title %></h1>
+            </div>
+            <div id='content'>
+              <p style="color: green"><%= flash[:notice] %></p>
+              <%= yield  %>
+            </div>
+            <div id='navigation'>
+              <ul>
+                <li><a href='/datatables'>Data Catalog</a></li>
+                <li><a href='/protocols'>Protocols</a></li>
+                <li><a href='/pages/1'>Experimental Layouts</a></li>
+                <li><a href='/citations'>Publications</a></li>
+              </ul>
+            </div>
+            <div id='footer'>
+            </div>
+          </div>
 	</div>
   
   <%= debug(params) if Rails.env.development? %>
