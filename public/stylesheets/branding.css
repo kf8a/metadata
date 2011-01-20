@@ -38,6 +38,7 @@
 }
 
 #branding img {
+  z-index: 10;
 }
 
 #branding h1 {
