@@ -11,6 +11,6 @@
 <%= link_to 'abstract', citation_url(citation) %>
 <% end %>
 <% if citation.pdf.exists? %>
-  <%= link_to 'pdf', citation.pdf.url %>
+  <%= link_to 'pdf', download_citation_url(citation) %>
 <% end %>
 </li>

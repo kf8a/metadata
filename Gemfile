@@ -11,6 +11,7 @@ gem 'pg'
 gem 'rack-openid'
 gem 'acts-as-taggable-on'
 gem 'paperclip'
+gem 'aws-s3'
 gem 'nokogiri'
 gem 'RedCloth'
 gem 'thinking-sphinx',

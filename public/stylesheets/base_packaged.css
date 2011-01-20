@@ -73,7 +73,7 @@ div.progressBar div.background {background-color: #333; height: 18px; width: 0%}
 #branding h2 {padding-left: 1em; color: #FFFFFF; font-size: 1em; margin-top: 3px; margin-bottom: 3px; font-weight: normal}
 #topcoloredbar a:hover {color:#000000; text-decoration:underline; background-color:#FFFFCC}
 #branding {font-family: Verdana, Ariel, Helvetica, sans-serif; display: block; width: 700px}
-#branding img {}
+#branding img {z-index: 10}
 #branding h1 {color:#006633; font-size:30px; font-weight: normal; margin-bottom: 5px; margin-top: 5px; text-shadow: rgb(136, 136, 136) 2px 2px 2px; width: 700px}
 #lter_kbs {margin: 0; padding: 0; height: 40px; text-indent: -5000px; background: url(/images/common/title.jpg) no-repeat}
 #search form {display: inline; padding-left: 1em}
