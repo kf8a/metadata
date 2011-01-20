@@ -8,7 +8,7 @@
 <% end %>
 <% if @citation.pdf.exists? %>
   <% if signed_in? or Rails.env == 'development'%>
-    <%=link_to 'pdf', @citation.pdf.url  if @citation.pdf.url %>
+    <%=link_to 'pdf', download_citation_url(@citation) if @citation.pdf.url %>
   <% end %>
 <% end %>
 <% if signed_in? and current_user.role == 'admin' %>

@@ -1,1 +1,1 @@
-OpenIdAuthentication.store = :file
+OpenIdAuthentication.store = :memcache, "thetford.kbs.msu.edu"

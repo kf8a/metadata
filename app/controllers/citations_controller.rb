@@ -3,12 +3,14 @@ class CitationsController < ApplicationController
 #  caches_action :index if Rails.env == 'production'
 
   def index
+    store_location
     @submitted_citations = Citation.submitted_with_authors_by_sur_name_and_pub_year
     @forthcoming_citations = Citation.forthcoming_with_authors_by_sur_name_and_pub_year
     @citations = Citation.published_with_authors_by_sur_name_and_pub_year
   end
 
   def show
+    store_location
     @citation = Citation.find(params[:id])
   end
   
@@ -64,11 +66,15 @@ class CitationsController < ApplicationController
   
   def download
     head(:not_found) and return unless (citation = Citation.find_by_id(params[:id]))
-    redirect_to sign_in_url and return unless signed_in?
+    deny_access and return unless signed_in?
     
+    logger.info  "USER: #{signed_in?}"
     path = citation.pdf.path(params[:style])
-    logger.info path
-    send_file  path, :type => 'application/pdf', :disposition => 'inline'
+    if Rails.env.production? and signed_in?
+      redirect_to(AWS::S3::S3Object.url_for(path, citation.pdf.bucket_name, :expires_in => 10.seconds))
+    else
+      send_file  path, :type => 'application/pdf', :disposition => 'inline'
+    end
   end
 
   def destroy
