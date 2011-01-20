@@ -1,6 +1,5 @@
 class CitationsController < ApplicationController
   layout :site_layout
-#  caches_action :index if Rails.env == 'production'
 
   def index
     store_location

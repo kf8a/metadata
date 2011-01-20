@@ -1,16 +1,16 @@
 <li class='citation'>
-<% unless year.nil? %>
-<% if citation.pub_year.to_i != year  -%>
-  <div class='pub_year'><%= citation.pub_year %></div>
-<% end %>
-<% end %>
-<p>
-<%=raw citation.formatted %>
-</p>
-<% unless citation.abstract.try(:empty?) %> 
-<%= link_to 'abstract', citation_url(citation) %>
-<% end %>
-<% if citation.pdf.exists? %>
-  <%= link_to 'pdf', download_citation_url(citation) %>
-<% end %>
+  <% cache :action_suffix => "citation-#{citation.id}" do %>
+    <% unless year.nil? %>
+      <% if citation.pub_year.to_i != year  -%>
+          <div class='pub_year'><%= citation.pub_year %></div>
+      <% end %>
+    <% end %>
+    <p>
+    <%=raw citation.formatted %>
+    </p>
+  <% end %>
+  <%= link_to 'abstract', citation_url(citation) %>
+  <% if citation.pdf.exists?  and signed_in? %>
+    <%= link_to 'pdf', download_citation_url(citation) %>
+  <% end %>
 </li>

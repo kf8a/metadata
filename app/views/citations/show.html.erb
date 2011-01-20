@@ -1,14 +1,18 @@
-<p><%= raw @citation.formatted  %></p>
-<p><%=raw textilize(@citation.abstract) %></p>
-<% if @citation.doi %>
-  <p>DOI: <a href="http://dx.doi.org/<%= @citation.doi %>"><%= @citation.doi %></a></p>
-<% end %>
-<% if @citation.publisher_url %>
-  <p><%= link_to @citation.publisher_url, @citation.publisher_url %></p>
+<% cache do %>
+  <p><%= raw @citation.formatted  %></p>
+  <p><%=raw textilize(@citation.abstract) %></p>
+  <% if @citation.doi %>
+    <p>DOI: <a href="http://dx.doi.org/<%= @citation.doi %>"><%= @citation.doi %></a></p>
+  <% end %>
+  <% if @citation.publisher_url %>
+    <p><%= link_to @citation.publisher_url, @citation.publisher_url %></p>
+  <% end %>
 <% end %>
 <% if @citation.pdf.exists? %>
-  <% if signed_in? or Rails.env == 'development'%>
-    <%=link_to 'pdf', download_citation_url(@citation) if @citation.pdf.url %>
+  <% if signed_in? %>
+    <%=link_to 'Get PDF', download_citation_url(@citation), :class=>'download-link'%>
+  <% else %>
+    <%= link_to 'Sign in to download PDF', download_citation_url(@citation), :class=>'download-link'  %>
   <% end %>
 <% end %>
 <% if signed_in? and current_user.role == 'admin' %>
