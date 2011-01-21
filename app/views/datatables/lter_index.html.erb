@@ -1,5 +1,5 @@
 <% cache(:action_suffix => "lter") do %>
-<h1>Table of Contents</h1>
+  <h1>Table of Contents</h1>
 
   <p id='datatable-intro'>
     The KBS LTER Data Catalog is a collection of publicly available datatables associated with the site. You are welcome to examine and use the data as you like for personal and class use; data are copyrighted and use in a publication requires permission as detailed in our <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>Terms of use</a>. Please direct questions and comments to the  <a href='mailto:data.manager@kbs.msu.edu'>KBS LTER Information Manager</a>. Click on the triangle next to the experiment title to show associated datatables.
@@ -20,13 +20,13 @@
     <% end %>
   </div>
 
-<ul class='quickTree'>
-  <% @studies.each do |study| -%>
-    <% next unless study.include_datatables?(@datatables)%>
+  <ul class='quickTree'>
+    <% @studies.each do |study| -%>
+      <% next unless study.include_datatables?(@datatables)%>
 
-    <%= render :partial => 'study',  :locals => {:study => study}%>
-  <% end -%>
-</ul>
+      <%= render :partial => 'study',  :locals => {:study => study}%>
+    <% end -%>
+  </ul>
 <% end %>
 
 <% if admin? %>
@@ -41,10 +41,4 @@
       </li>
     <% end -%>
   </ul>
-<% end %>
-
-<% if signed_in? %>
-  <%= link_to 'Sign Out', sign_out_path %>
-<% else %>
-  <%= link_to 'Sign In', sign_in_path %>
 <% end %>

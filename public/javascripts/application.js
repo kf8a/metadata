@@ -41,6 +41,9 @@ jQuery(document).ready(function() {
             url: path
         });
     });
+
+    //Loads the sign-in part of the root on each page load, including going back
+    jQuery('#sign-in-wrapper').load('/ div#sign-in');
 });
 
   function remove_fields(link) {

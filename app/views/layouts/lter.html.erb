@@ -16,49 +16,53 @@
   <link rel="alternate" type="application/rss+xml" title="Data" href="/datatables.rss" />
 </head>
 <body>
-	<div id='wrapper'>
-		<div id='branding'>
-			<a id='msu_logo' href="http://www.msu.edu">
-			  <%= image_tag('common/logo_msu_pos_122.gif', :alt => 'Michigan State University Logo')%>
-			</a>
-			<h1><%= @title %></h1>
-			<div id="topcoloredbar">
-				<div id='search'>
-					<a href="/people">People</a>
-
-					<form action="http://www.google.com/u/ltersearch" method='get' id="searchform">
-						<input id='peoplesearch' type='text' name='q' maxlength='255' size='20' value="Search KBS LTER"/>
-					</form>
-				</div>
-				<h2><a href='/'>The KBS LTER Site</a></h2>
-			</div>
-
-		</div>
-		<div id='content'>
-			
-			<p style="color: green"><%= flash[:notice] %></p>
-			<ul id=crumbs>
-				<li><a href='/'>Home</a></li>
-
-				<% @crumbs.each do |crumb| %>
-                                  <li> >
-                                    <%= link_to_if crumb.url, "#{crumb.name}", crumb.url  %>
-                                  </li>
-				<% end %>
-
-			</ul>
-			<%= yield  %>
-		</div>
-		<div id='navigation'>
-			<%= render :file => "#{Rails.root}/public/system/navigation.html"%>
-			<% if controller.controller_name == 'datasets' || controller.controller_name == 'datatables' || controller.controller_name == 'protocols' %>
-			  <%= render :file => "#{Rails.root}/public/system/network_db.html"%>
-			<% end %>
-		</div>
-		<div id='footer'>
-			<%= render :file  => "#{Rails.root}/public/system/footer.html"%>
-		</div>
-	</div>
+  <div id='wrapper'>
+    <div id="sign-in-wrapper">
+      <div id='sign-in'>
+        <% if signed_in? %>
+          <%= link_to 'Sign Out', sign_out_url(:only_path => true) %>
+        <% else %>
+          <%= link_to 'Sign In', sign_in_url(:only_path => true) %>
+        <% end %>
+      </div>
+    </div>
+    <div id='branding'>
+      <a id='msu_logo' href="http://www.msu.edu">
+        <%= image_tag('common/logo_msu_pos_122.gif', :alt => 'Michigan State University Logo')%>
+      </a>
+      <h1><%= @title %></h1>
+      <div id="topcoloredbar">
+        <div id='search'>
+          <a href="/people">People</a>
+          <form action="http://www.google.com/u/ltersearch" method='get' id="searchform">
+            <input id='peoplesearch' type='text' name='q' maxlength='255' size='20' value="Search KBS LTER"/>
+          </form>
+        </div>
+        <h2><a href='/'>The KBS LTER Site</a></h2>
+      </div>
+    </div>
+    <div id='content'>
+      <p style="color: green"><%= flash[:notice] %></p>
+      <ul id=crumbs>
+        <li><a href='/'>Home</a></li>
+        <% @crumbs.each do |crumb| %>
+          <li> >
+            <%= link_to_if crumb.url, "#{crumb.name}", crumb.url  %>
+          </li>
+        <% end %>
+      </ul>
+      <%= yield  %>
+    </div>
+    <div id='navigation'>
+      <%= render :file => "#{Rails.root}/public/system/navigation.html"%>
+      <% if controller.controller_name == 'datasets' || controller.controller_name == 'datatables' || controller.controller_name == 'protocols' %>
+        <%= render :file => "#{Rails.root}/public/system/network_db.html"%>
+      <% end %>
+    </div>
+    <div id='footer'>
+      <%= render :file  => "#{Rails.root}/public/system/footer.html"%>
+    </div>
+  </div>
   
   <%= debug(params) if Rails.env.development? %>
   

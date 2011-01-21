@@ -1,4 +1,10 @@
-  <p>To download copies of listed articles you must first <a href='/sign_in'>sign-in</a> </p>
+<p>To download copies of listed articles you must first 
+<% unless signed_in? %>
+  <a href='/sign_in'>sign-in</a> 
+<% else %>
+  sign_in
+<% end %>
+</p>
 <h1 class='publication-section'>Submitted</h1>
 <p class='synopsis indent'>Papers still in review; contact the first author for further information.</p>
 <ul>
