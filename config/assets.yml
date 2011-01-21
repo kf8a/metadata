@@ -1,0 +1,19 @@
+embed_assets: on
+
+javascripts: 
+  base: 
+  - public/javascripts/rails.js
+  - public/javascripts/jquery.truncator.js
+  - public/javascripts/jquery.quickTree.js
+  - public/javascripts/application.js
+
+stylesheets: 
+  base: 
+  - public/stylesheets/formtastic.css
+  - public/stylesheets/scaffold.css
+  - public/stylesheets/branding.css
+  - public/stylesheets/navigation.css
+  - public/stylesheets/data.css
+  - public/stylesheets/kbs.css
+  - public/stylesheets/glbrc.css
+  - public/stylesheets/lter_supplemental.css
