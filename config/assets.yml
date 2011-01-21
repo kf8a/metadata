@@ -1,6 +1,6 @@
 embed_assets: on
 
-package_path 'packages'
+package_path: 'packages'
 
 javascripts: 
   base: 
