@@ -42,10 +42,7 @@ jQuery(document).ready(function() {
         });
     });
 
-    //Loads the sign-in part of the root on each page load, including going back
-    //jQuery('#sign-in-wrapper').load('/ div#sign-in');
-
-    //Make member-only content visible
+    //Make member-only content visible and adjust the sign-in indicator if necessary
     jQuery.get('/users');
 });
 

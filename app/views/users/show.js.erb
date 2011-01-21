@@ -1,3 +1,6 @@
 <% if signed_in? %>  
 jQuery('.member-only').show();  
+jQuery('#sign-in').children('a').text('Sign Out')
+<% else %>
+jQuery('#sign-in').children('a').text('Sign In')
 <% end %>  
