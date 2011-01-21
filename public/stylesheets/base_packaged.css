@@ -14,7 +14,6 @@ form.formtastic fieldset.buttons {padding-left:25%}
 form.formtastic fieldset ol {}
 form.formtastic fieldset.buttons li {float:left; padding-right:0.5em}
  form.formtastic fieldset > ol > li {margin-bottom:1.5em}
-form.formtastic fieldset > ol > li {overflow:auto}
  form.formtastic fieldset > ol > li.required {}
 form.formtastic fieldset > ol > li.optional {}
 form.formtastic fieldset > ol > li.error {}
