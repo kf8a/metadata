@@ -65,7 +65,9 @@ class CitationsController < ApplicationController
 
   def download
     head(:not_found) and return unless (citation = Citation.find_by_id(params[:id]))
-    deny_access and return unless signed_in?
+    unless signed_in?
+      deny_access and return
+    end
 
     logger.info  "USER: #{signed_in?}"
     path = citation.pdf.path(params[:style])
