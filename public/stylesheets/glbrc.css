@@ -142,6 +142,7 @@
   padding-top: 0.5em;
 }
 #glbrc #branding #glbrc-logo { float: right; }
+#glbrc .member-only { display: none; }
 #glbrc .hidden {
   visibility: hidden;
   height: 0px;

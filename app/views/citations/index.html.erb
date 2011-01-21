@@ -5,6 +5,7 @@
   sign_in
 <% end %>
 </p>
+<% cache do %>
 <h1 class='publication-section'>Submitted</h1>
 <p class='synopsis indent'>Papers still in review; contact the first author for further information.</p>
 <ul>
@@ -27,3 +28,4 @@
   <% year = citation.pub_year.to_i -%>
 <% end %>
 </ul>
+<% end %>
