@@ -41,10 +41,14 @@ class ApplicationController < ActionController::Base
     request_subdomain(params[:requested_subdomain])
   end
 
-  def request_subdomain(requested_subdomain=request.subdomain)
-    requested_subdomain = request.subdomain if requested_subdomain.blank?
+  def request_subdomain(requested_subdomain)
+    requested_subdomain = get_subdomain_from_request if requested_subdomain.blank?
     requested_subdomain = 'lter' unless valid_subdomain?(requested_subdomain)
     return requested_subdomain
+  end
+
+  def get_subdomain_from_request
+    if request.host.downcase.include?("glbrc") then "glbrc" else "lter" end
   end
 
   def valid_subdomain?(subdomain)
