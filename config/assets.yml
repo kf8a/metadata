@@ -1,5 +1,7 @@
 embed_assets: on
 
+package_path 'packages'
+
 javascripts: 
   base: 
   - public/javascripts/rails.js
