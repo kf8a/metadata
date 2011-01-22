@@ -7,8 +7,8 @@
     <p>
     <%=raw citation.formatted %>
     </p>
-  <%= link_to 'abstract', citation_url(citation) %>
+  <%= link_to 'abstract', citation_path(citation) %>
   <% if citation.pdf.exists? %>
-    <%= link_to 'pdf', download_citation_url(citation), :class=>'member-only'%>
+    <%= link_to 'pdf', download_citation_path(citation), :class=>'member-only'%>
   <% end %>
 </li>
