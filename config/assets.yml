@@ -1,6 +1,7 @@
 embed_assets: on
 
 package_path: 'packages'
+javascript_compressor: closure
 
 javascripts: 
   base: 
