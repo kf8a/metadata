@@ -4,13 +4,12 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <title>LTER: <%= controller.controller_name %>:<%= controller.action_name %></title>
-  <%= raw stylesheet_link_merged :base, :media=>'screen,print' %>
+  <%= include_stylesheets :base, :media => 'screen,print' %>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js"></script>
-  <script type='text/javascript' src='http://simile.mit.edu/timeline/api/timeline-api.js'></script>
   <script>$.noConflict();</script>
-  <%= raw javascript_include_merged :base %>
-  <!-- <script type='text/javascript' src='http://glbrc.sebewa.kbs.msu.edu/javascripts/timeline-init.js'></script> -->
+
+  <%= include_javascripts :base %>
   <%= csrf_meta_tag %>
     	  
   <link rel="alternate" type="application/rss+xml" title="Data" href="/datatables.rss" />
