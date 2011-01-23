@@ -21,10 +21,10 @@
       var full_node = $(this).hide();
 
       truncated_node.insertAfter(full_node);
-      
+
       findNodeForMore(truncated_node).append(' (<a href="#show more content">'+opts.more+'</a>)');
       findNodeForLess(full_node).append(' (<a href="#show less content">'+opts.less+'</a>)');
-      
+
       truncated_node.find('a:last').click(function() {
         truncated_node.hide(); full_node.show(); return false;
       });
@@ -35,8 +35,8 @@
     });
   }
 
-  // Note that the " (â€¦more)" bit counts towards the max length â€“ so a max
-  // length of 10 would truncate "1234567890" to "12 (â€¦more)".
+  // Note that the " (...|more)" bit counts towards the max length .." so a max
+  // length of 10 would truncate "1234567890" to "12 (...|more)".
   $.fn.truncate.defaults = {
     max_length: 100,
     more: '...more',
