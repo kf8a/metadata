@@ -15,11 +15,9 @@
   </p>
   <p>
     <label for='abstract_abstract'>Abstract</label>
-    <%= textile_editor 'abstract', :abstract, :size => '60x20'%>
+    <%= f.text_area :abstract, :size => '60x20'%>
   </p>
   <p>
     <%= submit_tag "Create" %>
   </p>
 <% end %>
-
-<%= raw textile_editor_initialize %>
