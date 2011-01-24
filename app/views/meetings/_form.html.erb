@@ -15,7 +15,5 @@
 </p>
 <p>
 	<label for='meeting_announcement'>Announcement</label>
-	<%= textile_editor 'meeting', :announcement, :size => '60x20'%>
+	<%= f.text_area :announcement, :size => '60x20'%>
 </p>
-
-<%= raw textile_editor_initialize -%>
