@@ -12,7 +12,7 @@ class CitationsController < ApplicationController
     store_location
     @citation = Citation.find(params[:id])
   end
-  
+
   def new
     head(:forbidden) and return unless signed_in? and current_user.role == 'admin'
     @citation = Citation.new
@@ -43,7 +43,7 @@ class CitationsController < ApplicationController
     head(:forbidden) and return unless signed_in? and current_user.role == 'admin'
     @citation = Citation.find(params[:id]) 
   end
-  
+
   def update
     head(:forbidden) and return unless signed_in? and current_user.role == 'admin'
 
@@ -62,12 +62,14 @@ class CitationsController < ApplicationController
       end
     end
   end
-  
+
   def download
     head(:not_found) and return unless (citation = Citation.find_by_id(params[:id]))
-    deny_access and return unless signed_in?
-    
     logger.info  "USER: #{signed_in?}"
+    unless signed_in?
+      deny_access and return
+    end
+
     path = citation.pdf.path(params[:style])
     if Rails.env.production? and signed_in?
       redirect_to(AWS::S3::S3Object.url_for(path, citation.pdf.bucket_name, :expires_in => 10.seconds))
@@ -88,9 +90,9 @@ class CitationsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   private 
-  
+
   def set_title
      if request_subdomain(params[:requested_subdomain]) == "lter"
        @title  = 'LTER Publications'

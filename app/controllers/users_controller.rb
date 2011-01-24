@@ -14,16 +14,19 @@ class UsersController < Clearance::UsersController
           @user.save
         end
       end
-      
+
       flash_notice_after_create
       redirect_to(url_after_create)
     else
       render :template => 'users/new'
     end
   end
-  
+
   def new
     @invite_code = params[:invite_code]
     super
+  end
+
+  def show
   end
 end

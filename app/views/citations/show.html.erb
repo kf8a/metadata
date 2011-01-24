@@ -10,9 +10,9 @@
 <% end %>
 <% if @citation.pdf.exists? %>
   <% if signed_in? %>
-    <%=link_to 'Get PDF', download_citation_url(@citation), :class=>'download-link'%>
+    <%=link_to 'Get PDF', download_citation_path(@citation), :class=>'download-link'%>
   <% else %>
-    <%= link_to 'Sign in to download PDF', download_citation_url(@citation), :class=>'download-link'  %>
+    <%= link_to 'Sign in to download PDF', sign_in_path, :class=>'download-link'  %>
   <% end %>
 <% end %>
 <% if signed_in? and current_user.role == 'admin' %>

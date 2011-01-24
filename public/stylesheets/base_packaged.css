@@ -14,7 +14,6 @@ form.formtastic fieldset.buttons {padding-left:25%}
 form.formtastic fieldset ol {}
 form.formtastic fieldset.buttons li {float:left; padding-right:0.5em}
  form.formtastic fieldset > ol > li {margin-bottom:1.5em}
-form.formtastic fieldset > ol > li {overflow:auto}
  form.formtastic fieldset > ol > li.required {}
 form.formtastic fieldset > ol > li.optional {}
 form.formtastic fieldset > ol > li.error {}
@@ -191,6 +190,7 @@ p {font-size: 1em; margin-top: 5px}
 #glbrc #branding {margin-top: 4.5em}
 #glbrc #branding h1 {color: #f7941e; text-shadow: none; font-family: Helvetica; font-variant: small-caps; font-weight: bold; padding-left: 50px; padding-top: 0.5em}
 #glbrc #branding #glbrc-logo {float: right}
+#glbrc .member-only {display: none}
 #glbrc .hidden {visibility: hidden; height: 0px}
 #glbrc .bulleted {list-style-type: circle; text-indent: 1em; list-style-position: inside}
 #glbrc .person-name {color: #005387; font-size: 1.4em; margin-bottom: 0.2em}
