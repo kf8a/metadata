@@ -12,7 +12,7 @@
 </p>
 <p>
 	<label for='publication_abstract'>Abstract</label>
-	<%= textile_editor 'publication', :abstract, :size => '60x20'%>
+	<%= f.text_area :abstract, :size => '60x20'%>
 </p>
 <p>
 	<label for='publication_article'>Article:  <%= link_to @publication.filename, @publication.public_filename if @publication.filename %></label>
@@ -25,4 +25,3 @@
 		<%= treatment.name %><%= check_box_tag 'publications[treatment_ids][]', treatment.id, @publication.treatments.include?(treatment) %>
 	<% end -%>
 </p>
-<%= raw textile_editor_initialize -%>

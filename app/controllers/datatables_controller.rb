@@ -67,7 +67,7 @@ class DatatablesController < ApplicationController
           if csv_ok
             render :text => @datatable.to_csv_with_metadata
           else
-            redirect_to datatable_url(@datatable)
+            render :text => "You do not have permission to download this datatable"
           end
         end
         format.climdb do

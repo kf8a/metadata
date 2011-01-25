@@ -4,9 +4,8 @@ Feature: Creating affiliation
   I want to create an affiliation
 
   Scenario: Admin creates an affiliation
-    Given an admin user exists with an email of "admin@person.com"
-    When I sign in as "admin@person.com"/"password"
-      And I go to the affiliations page
+    Given I am signed in as an administrator
+    When I go to the affiliations page
       And I follow "New affiliation"
     Then I should see "New affiliation"
 
@@ -17,12 +16,11 @@ Feature: Creating affiliation
       And I should see "President"
 
   Scenario: Admin deletes an affiliation
-    Given an admin user exists with an email of "admin@person.com"
+    Given I am signed in as an administrator
       And the following affiliation exists:
       |title          |Seniority |id   |
       |"El Presidente"|"Supre"   |7331 |
 
-    When I sign in as "admin@person.com"/"password"
-      And I go to the affiliations page
+    When I go to the affiliations page
       And I follow "Destroy" within "tr#affiliation_7331"
     Then I should not see "El Presidente"

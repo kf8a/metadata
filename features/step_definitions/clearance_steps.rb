@@ -1,11 +1,11 @@
 # General
 
 Then /^I should see error messages$/ do
-  Then %{I should see "errors prohibited"}
+  Then %{I should see "invalid"}
 end
 
 Then /^I should see an error message$/ do
-  Then %{I should see "error prohibited"}
+  Then %{I should see "invalid"}
 end
 
 # Database
@@ -15,28 +15,25 @@ Given /^no user exists with an email of "(.*)"$/ do |email|
 end
 
 Given /^I signed up with "(.*)\/(.*)"$/ do |email, password|
-  user = Factory :user,
-    :email                 => email,
-    :password              => password,
-    :password_confirmation => password
-end 
+  Factory(:user,
+          :email                 => email,
+          :password              => password,
+          :password_confirmation => password)
+end
 
-Given /^I am signed up and confirmed as "(.*)\/(.*)"$/ do |email, password|
-  user = Factory :email_confirmed_user,
-    :email                 => email,
-    :password              => password,
-    :password_confirmation => password
+Given /^I am signed up as "([^"]+)"$/ do |email_password|
+  Given %{I signed up with "#{email_password}"}
 end
 
 # Session
 
 Then /^I should be signed in$/ do
-  Given %{I am on the homepage} 
+  Given %{I am on the homepage}
   Then %{I should see "Sign Out"}
 end
 
 Then /^I should be signed out$/ do
-  Given %{I am on the homepage} 
+  Given %{I am on the homepage}
   Then %{I should see "Sign In"}
 end
 
@@ -48,29 +45,16 @@ When /^session is cleared$/ do
 end
 
 Given /^I have signed in with "(.*)\/(.*)"$/ do |email, password|
-  Given %{I am signed up and confirmed as "#{email}/#{password}"}
+  Given %{I am signed up as "#{email}/#{password}"}
   And %{I sign in as "#{email}/#{password}"}
 end
 
+Given /^I sign in$/ do
+  email = Factory.next(:email)
+  Given %{I have signed in with "#{email}/password"}
+end
+
 # Emails
-
-Then /^a confirmation message should be sent to "(.*)"$/ do |email|
-  user = User.find_by_email(email)
-  assert !user.confirmation_token.blank?
-  assert !ActionMailer::Base.deliveries.empty?
-  result = ActionMailer::Base.deliveries.any? do |email|
-    email.to == [user.email] &&
-    email.subject =~ /confirm/i &&
-    email.body =~ /#{user.confirmation_token}/
-  end
-  assert result
-end
-
-When /^I follow the confirmation link sent to "(.*)"$/ do |email|
-  user = User.find_by_email(email)
-  visit new_user_confirmation_path(:user_id => user,
-                                   :token   => user.confirmation_token)
-end
 
 Then /^a password reset message should be sent to "(.*)"$/ do |email|
   user = User.find_by_email(email)
@@ -102,8 +86,6 @@ end
 # Actions
 
 When /^I sign in as "(.*)\/(.*)"$/ do |email, password|
-  email.delete!('"')
-  password.delete!('"')
   When %{I go to the sign in page}
   And %{I fill in "Email" with "#{email}"}
   And %{I fill in "Password" with "#{password}"}

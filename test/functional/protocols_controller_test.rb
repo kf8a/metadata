@@ -34,15 +34,15 @@ class ProtocolsControllerTest < ActionController::TestCase
       assert assigns(:protocols) == [@glbrc_protocol]
     end
   end
-  
+
   context 'GET :show in glbrc subdomain with lter_protocol' do
-    setup do 
+    setup do
       get :show, :id => @protocol, :requested_subdomain => 'glbrc'
     end
-    
+
     should redirect_to("the index page") {protocols_url()}
   end
-
+  
   context 'GET :show in glbrc subdomain with glbrc protocol' do
     setup do 
       get :show, :id => @glbrc_protocol, :requested_subdomain => 'glbrc'

@@ -5,13 +5,14 @@ Feature: Download data
   I want to download datatables
   
   Background:
-    Given I am on the datatables page
+    Given the cache is clear
+      And I am on the datatables page
       And a user exists and is confirmed with an email of "bob@person.com"
 
   Scenario: The admin user downloads a protected datatable
     Given a protected datatable exists with a name of "Download Me"
       And "bob@person.com" is an administrator
-     When I sign in as "bob@person.com"/"password"
+     When I sign in as "bob@person.com/password"
       And I go to the datatable show page for "Download Me"
       And I follow "Download complete data table"
      Then I should be on the datatable download page for "Download Me"
@@ -21,7 +22,7 @@ Feature: Download data
     Given a protected datatable exists
       And "bob@person.com" owns the datatable
       And "bob@person.com" is not an administrator
-     When I sign in as "bob@person.com"/"password"
+     When I sign in as "bob@person.com/password"
      When I go to the datatable page
       And I follow "Download complete data table"
      Then I should be on the datatable download page
@@ -33,7 +34,7 @@ Feature: Download data
        And "bob@person.com" owns the datatable
        And "bob@person.com" is not an administrator
        And "bob@person.com" is a "glbrc" member
-      When I sign in as "bob@person.com"/"password"
+      When I sign in as "bob@person.com/password"
       When I go to the datatable page
        And I follow "Download complete data table"
       Then I should be on the datatable download page
@@ -44,7 +45,7 @@ Feature: Download data
       And "bob@person.com" has permission to download the datatable
       And "bob@person.com" is not an administrator
       And "bob@person.com" does not own the datatable
-     When I sign in as "bob@person.com"/"password"
+     When I sign in as "bob@person.com/password"
      When I go to the datatable page
       And I follow "Download complete data table"
      Then I should be on the datatable download page
@@ -55,7 +56,7 @@ Feature: Download data
       And "bob@person.com" does not have permission to download the datatable
       And "bob@person.com" is not an administrator
       And "bob@person.com" does not own the datatable
-    When I sign in as "bob@person.com"/"password"
+    When I sign in as "bob@person.com/password"
       And I go to the datatable page
     Then I should see "Request Data"
       And I should not see "Download complete data table"
@@ -68,7 +69,7 @@ Feature: Download data
       And "bill@person.com" owns the datatable named "Double Trouble"
       And "alice@person.com" has given "bob@person.com" permission for "Double Trouble"
       And "bill@person.com" has given "bob@person.com" permission for "Double Trouble"
-     When I sign in as "bob@person.com"/"password"
+     When I sign in as "bob@person.com/password"
       And I go to the datatable show page for "Double Trouble"
       And I follow "Download complete data table"
      Then I should be on the datatable download page
@@ -82,7 +83,7 @@ Feature: Download data
       And "bill@person.com" owns the datatable
       And "alice@person.com" has given "bob@person.com" permission
       And "bill@person.com" has not given "bob@person.com" permission
-     When I sign in as "bob@person.com"/"password"
+     When I sign in as "bob@person.com/password"
       And I go to the datatable page
      Then I should see "Request Data"
       And I should not see "Download complete data table"
@@ -106,5 +107,5 @@ Feature: Download data
   Scenario: An anonymous users types in the url for a protected datatable html view
     Given a protected datatable exists
      When I go to the datatable download page
-     Then I should see "Sign in"
+     Then I should see "You do not have permission to download this datatable"
       
