@@ -84,8 +84,8 @@ task :master do
   role :web, "#{host}.kbs.msu.edu"
   role :db,  "#{host}.kbs.msu.edu", :primary => true
   
-  after 'deploy:symlink', :set_subdomain_tdl
-  after 'deploy:symlink', :set_asset_host
+#  after 'deploy:symlink', :set_subdomain_tdl
+#  after 'deploy:symlink', :set_asset_host
 end
 
 task :production do 
@@ -93,12 +93,12 @@ task :production do
   
   set :host, 'gprpc37'
   
-  role :app, "#{host}.kbs.msu.edu", "gprpc28.kbs.msu.edu" #, "35.8.163.71"
+  role :app, "#{host}.kbs.msu.edu", "gprpc28.kbs.msu.edu", "houghton.kbs.msu.edu" #, "35.8.163.71"
   role :web, "#{host}.kbs.msu.edu"
   role :db,  "#{host}.kbs.msu.edu", :primary => true
   
-  after 'deploy:symlink', :set_subdomain_tdl
-  after 'deploy:symlink', :set_asset_host
+#  after 'deploy:symlink', :set_subdomain_tdl
+#  after 'deploy:symlink', :set_asset_host
 end
 
 desc 'stop sphinks'
