@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110107144139) do
+ActiveRecord::Schema.define(:version => 20110125220122) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -23,6 +23,9 @@ ActiveRecord::Schema.define(:version => 20110107144139) do
   add_index "affiliations", ["dataset_id"], :name => "index_affiliations_on_dataset_id"
   add_index "affiliations", ["person_id"], :name => "index_affiliations_on_person_id"
   add_index "affiliations", ["role_id"], :name => "index_affiliations_on_role_id"
+
+# Could not dump table "areas" because of following StandardError
+#   Unknown type 'geometry' for column 'the_geom'
 
   create_table "authors", :force => true do |t|
     t.string   "sur_name"
@@ -136,7 +139,7 @@ ActiveRecord::Schema.define(:version => 20110107144139) do
     t.date     "completed"
     t.date     "released"
     t.boolean  "on_web",       :default => true
-    t.integer  "version"
+    t.integer  "version",      :default => 1
     t.boolean  "core_dataset", :default => false
     t.integer  "project_id"
     t.integer  "metacat_id"
@@ -277,12 +280,8 @@ ActiveRecord::Schema.define(:version => 20110107144139) do
   add_index "invites", ["id", "email"], :name => "index_invites_on_id_and_email"
   add_index "invites", ["id", "invite_code"], :name => "index_invites_on_id_and_invite_code"
 
-  create_table "locations", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+# Could not dump table "locations" because of following StandardError
+#   Unknown type 'geometry' for column 'the_geom'
 
   create_table "log_hiresyieldmanagement", :id => false, :force => true do |t|
     t.date    "obsdate"
@@ -428,17 +427,6 @@ ActiveRecord::Schema.define(:version => 20110107144139) do
   add_index "permissions", ["datatable_id"], :name => "index_permissions_on_datatable_id"
   add_index "permissions", ["owner_id"], :name => "index_permissions_on_owner_id"
   add_index "permissions", ["user_id"], :name => "index_permissions_on_user_id"
-
-  create_table "plots", :force => true do |t|
-    t.string  "name"
-    t.integer "treatment_id"
-    t.integer "replicate"
-    t.integer "study_id"
-    t.string  "description"
-  end
-
-  add_index "plots", ["study_id"], :name => "index_plots_on_study_id"
-  add_index "plots", ["treatment_id"], :name => "index_plots_on_treatment_id"
 
   create_table "projects", :force => true do |t|
     t.string   "title"
@@ -717,6 +705,27 @@ ActiveRecord::Schema.define(:version => 20110107144139) do
     t.string "name"
     t.text   "description"
   end
+
+  create_table "versions", :force => true do |t|
+    t.integer  "versioned_id"
+    t.string   "versioned_type"
+    t.integer  "user_id"
+    t.string   "user_type"
+    t.string   "user_name"
+    t.text     "modifications"
+    t.integer  "number"
+    t.integer  "reverted_from"
+    t.string   "tag"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "versions", ["created_at"], :name => "index_versions_on_created_at"
+  add_index "versions", ["number"], :name => "index_versions_on_number"
+  add_index "versions", ["tag"], :name => "index_versions_on_tag"
+  add_index "versions", ["user_id", "user_type"], :name => "index_versions_on_user_id_and_user_type"
+  add_index "versions", ["user_name"], :name => "index_versions_on_user_name"
+  add_index "versions", ["versioned_id", "versioned_type"], :name => "index_versions_on_versioned_id_and_versioned_type"
 
   create_table "websites", :force => true do |t|
     t.string   "name"

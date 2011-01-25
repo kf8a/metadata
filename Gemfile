@@ -40,6 +40,9 @@ gem 'metric_fu'
 
 gem 'jammit'
 
+# versioning support for protocols
+gem 'vestal_versions', :git => 'git://github.com/adamcooper/vestal_versions'
+
 group :development, :test  do
   # bundler requires these gems in development
   # gem "rails-footnotes"

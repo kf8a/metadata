@@ -1,4 +1,5 @@
 require "bundler/capistrano"
+require 'new_relic/recipes'
 
 set :application, "metadata"
 
@@ -99,6 +100,7 @@ task :production do
   
 #  after 'deploy:symlink', :set_subdomain_tdl
 #  after 'deploy:symlink', :set_asset_host
+  after "deploy:update", "newrelic:notice_deployment"
 end
 
 desc 'stop sphinks'

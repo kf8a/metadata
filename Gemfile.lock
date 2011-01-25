@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/adamcooper/vestal_versions
+  revision: 6273df533f85014062e346cb1807b0531a809ee2
+  specs:
+    vestal_versions (1.2.2)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+
+GIT
   remote: git://github.com/freelancing-god/thinking-sphinx.git
   revision: 92277757cd4c95520e298a2375b6f2482ece0ce6
   branch: rails3
@@ -300,3 +308,4 @@ DEPENDENCIES
   thin
   thinking-sphinx!
   transitions
+  vestal_versions!
