@@ -7,6 +7,8 @@ class Protocol < ActiveRecord::Base
   has_one :precedent, :class_name => "Protocol", :foreign_key => "precedent_id"
   belongs_to :supercedent, :class_name => "Protocol", :foreign_key => "supercedent_id"
 
+  versioned :dependent => :tracking
+
   attr_accessor :website_list
   after_save :update_websites
   
