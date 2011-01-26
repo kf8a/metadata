@@ -10,8 +10,6 @@
 	<%= f.text_field :name %>
 	<label for='protocol_title'>Title</label>
 	<%= f.text_field :title %>
-	<label for='protocol_version'>version</label>
-	<%= f.text_field :version %>
 	<label for='protocol_in_use_from'>In use from</label>
 	<%= f.date_select :in_use_from, :start_year => 1982, :end_year=> Date.today.year, :include_blank=>true %>
 	<label for='protocol_in_use_to'>to</label>
@@ -35,11 +33,9 @@
 	<label for='protocol_change_summary'>Change summary</label>
 	<%= f.text_area :change_summary %>
 </p>
+<label for='protocol_dataset'>Dataset</label>
+<%= f.select :dataset_id, datasets %>
 <p>
-	<label for='protocol_dataset'>Dataset</label>
-	<%= f.select :dataset_id, datasets %>
+<%= check_box_tag :new_version %> Consider this a new Version
 </p>
-
-<div class="wmd-preview"></div>
-  
-  <script type="text/javascript" src="javascripts/wmd/wmd.js""></script>
+<p>
