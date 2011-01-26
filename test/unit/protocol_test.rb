@@ -9,6 +9,7 @@ class ProtocolTest < ActiveSupport::TestCase
       @website = Factory :website, :name=>'lter'
       @website2 = Factory :website, :name => 'glbrc'
       @protocol = Factory.create(:protocol)
+      @other_protocol = Factory.create(:protocol)
     end
     
     should 'save websites' do
@@ -30,10 +31,8 @@ class ProtocolTest < ActiveSupport::TestCase
       assert @protocol.respond_to?('archived?')
     end
 
-    should 'be archivable' do
-      assert_equal false, @protocol.archived?
-      assert_equal true, @protocol.archive
-      assert_equal true, @protocol.archived?
+    should 'deprecate another protocol' do
+      assert @other_protocol.deprecates(@protocol)
     end
 
   end
