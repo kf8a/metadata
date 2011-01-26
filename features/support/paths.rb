@@ -41,9 +41,6 @@ module NavigationHelpers
     when /the citation page/
       citation_path(Citation.order('created_at').last)
 
-    when /the new citation page/
-      new_citation_path
-    
     when /the collection page/
       collection_path(Collection.order('created_at').last)
 
