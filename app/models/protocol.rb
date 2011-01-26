@@ -13,6 +13,10 @@ class Protocol < ActiveRecord::Base
 
   attr_accessor :website_list
   after_save :update_websites
+
+  def archive
+    archived = true
+  end
   
   #TODO update these with proper rails style
   def update_websites

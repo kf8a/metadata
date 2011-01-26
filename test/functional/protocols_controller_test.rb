@@ -52,7 +52,7 @@ class ProtocolsControllerTest < ActionController::TestCase
       should redirect_to('the new protocol page') {protocol_path(assigns(:protocol))}
 
       should 'archive the current protocol' do
-        assert @protocol.archived?
+        assert_equal true,  @protocol.archived?
       end
 
       should 'create a new protocol'

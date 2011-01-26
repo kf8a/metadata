@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110125220122) do
+ActiveRecord::Schema.define(:version => 20110126223229) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -450,6 +450,8 @@ ActiveRecord::Schema.define(:version => 20110125220122) do
     t.text    "change_summary"
     t.integer "dataset_id"
     t.boolean "active",         :default => true
+    t.boolean "archived"
+    t.integer "deprecates"
   end
 
   add_index "protocols", ["dataset_id"], :name => "index_protocols_on_dataset_id"
