@@ -26,5 +26,9 @@ class ProtocolTest < ActiveSupport::TestCase
         assert @protocol.websites.include?(@website2)
     end
 
+    should 'be archivable' do
+      assert @protocol.respond_to?('archived?')
+    end
+
   end
 end

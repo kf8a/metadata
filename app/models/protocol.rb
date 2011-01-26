@@ -1,4 +1,5 @@
 #TODO add an updated_by attribute to track who changed the protocol
+#TODO save old protocols in an old_protocol table just in case there is a problem with vestal_versions
 class Protocol < ActiveRecord::Base
   belongs_to :dataset
   has_and_belongs_to_many :websites

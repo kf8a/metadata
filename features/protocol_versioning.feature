@@ -7,11 +7,11 @@ Feature: Protocols should exists in several versions
 
   Scenario: a protocol is updated to a new version
     Given I am signed in as an administrator
-    And a protocol exists
-    And I go to the protocols edit page
-    And I change the title to 'new protocol'
-    And I check the 'consider this a new version' checkbox
-    When I hit 'update'
-    And I go to the protocol page
-    Then I should see the 'new protocol'
-    And I should see a link to the previous protocol
+    And a protocol exists with title: "old protocol"
+    And I go to the protocol's edit page 
+    And I fill in "Title" with "new protocol"
+    And I check "consider this a new version"
+    When I press "Update"
+    Then I should be on the protocol page
+    Then I should see "new protocol"
+    And I should see "old protocol"
