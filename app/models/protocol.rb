@@ -1,3 +1,4 @@
+#TODO add an updated_by attribute to track who changed the protocol
 class Protocol < ActiveRecord::Base
   belongs_to :dataset
   has_and_belongs_to_many :websites
@@ -11,6 +12,12 @@ class Protocol < ActiveRecord::Base
 
   attr_accessor :website_list
   after_save :update_websites
+
+  def deprecates(other)
+    other.active = false
+    other.save
+    deprecates = other.id
+  end
   
   #TODO update these with proper rails style
   def update_websites

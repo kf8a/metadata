@@ -182,7 +182,6 @@ class CitationsControllerTest < ActionController::TestCase
       should respond_with :success
       should assign_to :citations
 
-      should 'have a PDF download link'
     end
 
     context 'POST: create' do
