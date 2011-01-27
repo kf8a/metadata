@@ -1,19 +1,19 @@
 <% cache do %>
-<h1><%= link_to "#{@protocol.dataset.dataset}", dataset_path(@protocol.dataset) if @protocol.dataset %>: <%= @protocol.title %></h1>
+<h1><%= link_to "#{@protocol.dataset.dataset}", dataset_path(@protocol.dataset) if @protocol.dataset %>: <%=raw @protocol.title %></h1>
 <p>
 	<%= "In use from "unless @protocol.in_use_from.nil? %><%= @protocol.in_use_from %> 
 	<%= " to " unless @protocol.in_use_to.nil? %><%= @protocol.in_use_to %>
 </p>
 <p>
-	<%= textilize(@protocol.description) if @protocol.description %>
+	<%=raw textilize(@protocol.description) if @protocol.description %>
 </p>
 <h2>Abstract</h2>
 <p>
-	<%= textilize(@protocol.abstract) if @protocol.abstract%>
+	<%=raw textilize(@protocol.abstract) if @protocol.abstract%>
 </p>
 <h2>Protocol</h2>
 <p>
-	<%= textilize(@protocol.body) if @protocol.body %>
+	<%=raw textilize(@protocol.body) if @protocol.body %>
 </p>
 <p>
 	<% if @protocol.people.size > 1 %>Authors: <% else %>Author: <% end %>
