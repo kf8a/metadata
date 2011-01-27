@@ -10,7 +10,7 @@ Feature: Protocols should exists in several versions
     And a protocol exists with title: "old protocol"
     And I go to the protocol's edit page 
     And I fill in "Title" with "new protocol"
-    And I check "consider this a new version"
+    And I check "new_version"
     When I press "Update"
     Then I should be on the protocol page
     Then I should see "new protocol"

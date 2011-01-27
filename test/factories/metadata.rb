@@ -106,7 +106,7 @@ end
 
 Factory.define :protocol do |p|
   p.name  'Proto1'
-  p.version  0
+  p.version_tag  0
   p.dataset Factory.create(:dataset)
 end
 

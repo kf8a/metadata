@@ -9,7 +9,6 @@ class ProtocolTest < ActiveSupport::TestCase
       @website = Factory :website, :name=>'lter'
       @website2 = Factory :website, :name => 'glbrc'
       @protocol = Factory.create(:protocol)
-      @other_protocol = Factory.create(:protocol)
     end
 
     should 'save websites' do
@@ -27,9 +26,21 @@ class ProtocolTest < ActiveSupport::TestCase
         assert @protocol.websites.include?(@website2)
     end
 
-    should 'deprecate another protocol' do
-      assert @other_protocol.deprecates(@protocol)
+  end
+
+  context 'deprecating a protocol' do
+    setup do 
+      @protocol = Factory.create(:protocol)
+      @new_protocol = Factory.create(:protocol)
+      @new_protocol.deprecate(@protocol)
     end
 
+    should 'increment the protocol number of the new protocol' do
+      assert_equal @protocol.version_tag + 1, @new_protocol.version_tag 
+    end
+
+    should 'connect the new protocol to the old protocol' do
+      assert_equal @protocol.id, @new_protocol.deprecates
+    end
   end
 end
