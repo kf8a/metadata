@@ -77,11 +77,16 @@ class ProtocolsController < ApplicationController
   # PUT /protocols/1.xml
   def update
     get_all_websites
-  
+    
+    if params[:consider_this_a_new_version]
+      old_protocol = Protocol.find(params[:id])
+      @protocol = Protocol.new(params[:protocol])
+      @protocol.deprecates(old_protocol)
+    end
     respond_to do |format|
       if @protocol.update_attributes(params[:protocol])
         expire_action :action => :index
-        
+
         flash[:notice] = 'Protocol was successfully updated.'
         format.html { redirect_to protocol_url(@protocol) }
         format.xml  { head :ok }

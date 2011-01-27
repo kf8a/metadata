@@ -450,7 +450,6 @@ ActiveRecord::Schema.define(:version => 20110126223229) do
     t.text    "change_summary"
     t.integer "dataset_id"
     t.boolean "active",         :default => true
-    t.boolean "archived"
     t.integer "deprecates"
   end
 

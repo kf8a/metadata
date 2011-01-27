@@ -46,14 +46,10 @@ class ProtocolsControllerTest < ActionController::TestCase
 
     context 'POST: update with version' do
       setup do 
-        put :update, :id => @protocol, :protocol => {:title => 'new protocol'}, :consider_new_version => true
+        put :update, :id => @protocol, :protocol => {:title => 'new protocol'}, :consider_this_a_new_version => true
       end
 
       should redirect_to('the new protocol page') {protocol_path(assigns(:protocol))}
-
-      should 'mark the current protocol as inactive' do
-        assert_equal false,  @protocol.active?
-      end
 
       should 'create a new protocol' do
         assert_not_equal @protocol, assigns(:protocol)
