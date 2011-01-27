@@ -79,13 +79,9 @@ class ProtocolsController < ApplicationController
     get_all_websites
     
     respond_to do |format|
-      logger.info "params: #{params[:new_version]}"
       if params[:new_version]
         old_protocol = Protocol.find(params[:id])
         @protocol = Protocol.new(params[:protocol])
-        @protocol.deprecates(old_protocol)
-        logger.info "Old protocol: #{old_protocol}"
-        logger.info "New protocol: #{@protocol}"
       end
       if @protocol.update_attributes(params[:protocol])
         expire_action :action => :index

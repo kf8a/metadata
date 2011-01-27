@@ -13,10 +13,11 @@ class Protocol < ActiveRecord::Base
   attr_accessor :website_list
   after_save :update_websites
 
-  def deprecates(other)
+  def deprecate(other)
     other.active = false
     other.save
-    deprecates = other.id
+    self.deprecates = other.id
+    self.version_tag = other.version_tag + 1
   end
   
   #TODO update these with proper rails style
