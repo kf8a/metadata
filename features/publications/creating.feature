@@ -4,9 +4,8 @@ Feature: Creating publication
   I want to create a publication
 
   Scenario: Admin creates an publication
-    Given an admin user exists with an email of "admin@person.com"
-    When I sign in as "admin@person.com"/"password"
-      And I go to the publications page
+    Given I am signed in as an administrator
+    When I go to the publications page
       And I follow "new publication"
     Then I should see "New publication"
 
@@ -18,9 +17,8 @@ Feature: Creating publication
       And I should see "A quick abstract"
 
   Scenario: Admin fails to create a publication
-    Given an admin user exists with an email of "admin@person.com"
-    When I sign in as "admin@person.com"/"password"
-      And I go to the publications page
+    Given I am signed in as an administrator
+    When I go to the publications page
       And I follow "new publication"
     Then I should see "New publication"
 
@@ -35,9 +33,8 @@ Feature: Creating publication
       And the following publication exists:
       |year |abstract           |id   |citation         |publication_type_id|
       |1984 |"A nice abstract"  |2489 |"A nice citation"|1                  |
-      And an admin user exists with an email of "admin@person.com"
-    When I sign in as "admin@person.com"/"password"
-      And I go to the publications page
+      And I am signed in as an administrator
+    When I go to the publications page
       And I follow "abstract" within "div#2489"
       And I follow "Destroy"
     Then I should not see "A nice citation"

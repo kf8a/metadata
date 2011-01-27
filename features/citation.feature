@@ -14,12 +14,12 @@ Feature: Citation viewing and downloading
      
   Scenario: A signed in user visits a citation page
     Given a citation exists with a title of "Corn weevil" 
-      And I have signed in with "bob@person.com"/"password"
+      And I have signed in with "bob@person.com/password"
      When I go to the citation page
      Then I should see "Corn weevil"
     
   Scenario: A signed in user visits the citation page
-    Given I have signed in with "bob@person.com"/"password"
+    Given I have signed in with "bob@person.com/password"
      When I go to the citations page
      Then I should see "Publications"
       
@@ -27,7 +27,7 @@ Feature: Citation viewing and downloading
     
   Scenario: A signed in user tries to add a citation
     Given an admin user exists with an email of "admin@person.com"
-    When I sign in as "admin@person.com"/"password"
+    When I sign in as "admin@person.com/password"
       And I go to the new citation page
       And I fill in "Title" with "Corn weevil"
       And I attach the file "test/data/citation.pdf" to "Pdf"

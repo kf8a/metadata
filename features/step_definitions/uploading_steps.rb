@@ -5,10 +5,8 @@ end
 
 Given /^a file "([^"]*)" has been uploaded$/ do |name|
   file_name = File.join(Rails.root, 'test', 'data', name)
-  Given %{I am signed up and confirmed as "email@person.com"/"password"}
-    And %{I have the "admin" role}
-   When %{I sign in as "email@person.com"/"password"}
-  And %{I go to the new upload page}
+  Given %{I am signed in as an administrator}
+  When %{I go to the new upload page}
   And %{I fill in "Data Table Title" with "#{name}"}
   attach_file("File", file_name)
   And %{I press "Submit"}

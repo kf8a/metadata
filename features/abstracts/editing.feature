@@ -5,13 +5,12 @@ Feature: Editing abstract
 
   Scenario: Admin edits an abstract
     Given the local venue type exists
-      And an admin user exists with an email of "admin@person.com"
+      And I am signed in as an administrator
       And the following abstract exists:
       |title                |authors                        |abstract             |
       |"An Awesome Abstract"|"Abstract Guy and Abstract Gal"|"A testable abstract"|
 
-    When I sign in as "admin@person.com"/"password"
-      And I go to the abstracts page
+    When I go to the abstracts page
       And I follow "An Awesome Abstract"
       And I follow "Edit"
     Then I should see "Editing Meeting Abstracts"
@@ -28,13 +27,12 @@ Feature: Editing abstract
 
   Scenario: Admin fails to edit an abstract
     Given the local venue type exists
-      And an admin user exists with an email of "admin@person.com"
+      And I am signed in as an administrator
       And the following abstract exists:
       |title                |authors                        |abstract             |
       |"An Awesome Abstract"|"Abstract Guy and Abstract Gal"|"A testable abstract"|
 
-    When I sign in as "admin@person.com"/"password"
-      And I go to the abstracts page
+    When I go to the abstracts page
       And I follow "An Awesome Abstract"
       And I follow "Edit"
       And I fill in "Title" with "An Edited Abstract"

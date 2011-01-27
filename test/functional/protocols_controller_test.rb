@@ -2,101 +2,153 @@ require File.expand_path('../../test_helper',__FILE__)
 
 class ProtocolsControllerTest < ActionController::TestCase
 
-  def setup
-    generate_websites_and_protocols
-    #TODO test with admin and non admin users
-    @controller.current_user = Factory.create :admin_user
-  end
-  
-  context 'GET: index in lter (default) subdomain' do
+  context 'an admin user' do
     setup do
-      Rails.cache.clear
-      get :index, :requested_subdomain => 'lter'
-     end
+      generate_websites_and_protocols
+      @controller.current_user = Factory.create :admin_user
+    end
 
-     should render_template 'index'
+    context 'GET: new' do
+      setup do 
+        get :new
+      end
 
-     should 'only have lter protocols' do
-       assert assigns(:protocols) == [@protocol]
-     end
-    
+      should respond_with(:success)
+    end
+
+    context 'POST: create' do
+      setup do
+        post :create, :protocol => {:dataset_id => 35 }
+      end
+     should redirect_to('the protocol show page') {protocol_path(assigns(:protocol))}
+    end
+
+    context 'GET: edit with new version' do
+    end
+  
+    context 'POST with website' do
+      setup do
+        @protocol = Factory.create(:protocol)
+        post :create, :id => @protocol, :websites=>['2']
+      end
+
+      should assign_to :protocol
+      should redirect_to("the show page") {protocol_url(assigns(:protocol))}
+    end
+
+    context 'POST :update' do
+      setup do
+        put :update, :id => @protocol, :protocol => {}
+      end
+
+      should redirect_to('the protocol page') {protocol_url(assigns(:protocol))}
+    end
+
+    context 'POST: update with version' do
+      setup do 
+        put :update, :id => @protocol, :protocol => {:title => 'new protocol'}, :new_version => 1
+      end
+
+      should redirect_to('the new protocol page') {protocol_path(assigns(:protocol))}
+
+      should 'create a new protocol' do
+        assert_not_equal @protocol, assigns(:protocol)
+      end
+
+      should redirect_to('the new protocol') {protocol_path(assigns(:protocol))}
+
+    end
+
+    context 'DESTROY' do
+      setup do
+        delete :destroy, :id => @protocol
+      end
+
+      should redirect_to('the index page') {protocols_path}
+    end
   end
 
-  context "GET :index / glbrc subdomain" do
+  context 'a anonymous user' do
     setup do
-      Rails.cache.clear
-      get :index, :requested_subdomain => 'glbrc'
+      generate_websites_and_protocols
+      @controller.current_user = nil
     end
 
-    should render_template 'glbrc_index'
-    
-    should 'only have glbrc protocols' do
-      assert assigns(:protocols) == [@glbrc_protocol]
+    context 'GET: index in lter (default) subdomain' do
+      setup do
+        Rails.cache.clear
+        get :index, :requested_subdomain => 'lter'
+      end
+
+      should render_template 'index'
+
+      should 'only have lter protocols' do
+        assert assigns(:protocols) == [@protocol]
+      end
     end
-  end
-  
-  context 'GET :show in glbrc subdomain with lter_protocol' do
-    setup do 
-      get :show, :id => @protocol, :requested_subdomain => 'glbrc'
+
+    context "GET :index / glbrc subdomain" do
+      setup do
+        Rails.cache.clear
+        get :index, :requested_subdomain => 'glbrc'
+      end
+
+      should render_template 'glbrc_index'
+
+      should 'only have glbrc protocols' do
+        assert assigns(:protocols) == [@glbrc_protocol]
+      end
     end
-    
-    should redirect_to("the index page") {protocols_url()}
+
+    context 'GET :show in glbrc subdomain with lter_protocol' do
+      setup do
+        get :show, :id => @protocol, :requested_subdomain => 'glbrc'
+      end
+
+      should redirect_to("the index page") {protocols_url()}
+    end
+
+    context 'GET :show in glbrc subdomain with glbrc protocol' do
+      setup do 
+        get :show, :id => @glbrc_protocol, :requested_subdomain => 'glbrc'
+      end
+
+      should respond_with(:success)
+    end
+
+    context 'POST: create' do
+      setup do
+        post :create, :protocol => {:dataset_id => 35 }
+      end
+
+      should redirect_to('the sign in page') {sign_in_path}
+    end
+
+    context 'GET: new' do
+      setup do 
+        get :new
+      end
+
+      should redirect_to('the sign in page') {sign_in_path}
+    end
+
+    context 'GET: show' do
+      setup do
+        get :show, :id=> @protocol
+      end
+
+      should respond_with(:success)
+    end
+
+    context 'GET: edit' do
+      setup do
+        get :edit, :id => @protocol
+      end
+
+      should redirect_to('the sign in page') {sign_in_url}
+    end
   end
 
-  context 'GET :show in glbrc subdomain with glbrc protocol' do
-    setup do 
-      get :show, :id => @glbrc_protocol, :requested_subdomain => 'glbrc'
-    end
-    
-    should respond_with(:success)
-  end
-  
-  def test_should_get_new
-    get :new
-    assert_response :success
-  end
-  
-  def test_should_create_protocol
-     old_count = Protocol.count
-     post :create, :protocol => {:dataset_id => 35 }
-     assert_equal old_count+1, Protocol.count
-     
-     assert_redirected_to protocol_path(assigns(:protocol))
-   end
-
-  def test_should_show_protocol
-    get :show, :id => @protocol
-    assert_response :success
-  end
-
-  def test_should_get_edit
-    get :edit, :id => @protocol
-    assert_response :success
-  end
-  
-  def test_should_update_protocol
-    put :update, :id => @protocol, :protocol => { }
-    assert_redirected_to protocol_path(assigns(:protocol))
-  end
-  
-  def test_should_destroy_protocol
-    old_count = Protocol.count
-    delete :destroy, :id => @protocol
-    assert_equal old_count-1, Protocol.count
-    
-    assert_redirected_to protocols_path
-  end
-  
-  context 'POST with website' do
-    setup do
-      @protocol = Factory.create(:protocol)
-      post :create, :id => @protocol, :websites=>['2']
-    end
-    
-    should assign_to :protocol
-    should redirect_to("the show page") {protocol_url(assigns(:protocol))}
-  end
-  
   private
 
   def generate_websites_and_protocols

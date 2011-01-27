@@ -8,9 +8,8 @@ Feature: Editing publication
       And the following publication exists:
       |year |abstract           |id   |citation         |
       |1984 |"A nice abstract"  |2489 |"A nice citation"|
-      And an admin user exists with an email of "admin@person.com"
-    When I sign in as "admin@person.com"/"password"
-      And I go to the publications page
+      And I am signed in as an administrator
+    When I go to the publications page
       And I follow "edit" within "div#2489"
     Then I should see "Editing publications"
 
@@ -29,9 +28,8 @@ Scenario: Admin fails to edit a publication
       And the following publication exists:
       |year |abstract           |id   |citation         |
       |1984 |"A nice abstract"  |2489 |"A nice citation"|
-      And an admin user exists with an email of "admin@person.com"
-    When I sign in as "admin@person.com"/"password"
-      And I go to the publications page
+      And I am signed in as an administrator
+    When I go to the publications page
       And I follow "edit" within "div#2489"
     Then I should see "Editing publications"
 
