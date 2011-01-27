@@ -47,6 +47,7 @@ group :development, :test  do
   # bundler requires these gems in development
   # gem "rails-footnotes"
   gem 'sqlite3-ruby'
+  gem 'silent-postgres'
 end
 
 group :test do

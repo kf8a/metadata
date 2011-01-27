@@ -46,7 +46,7 @@ class ProtocolsControllerTest < ActionController::TestCase
 
     context 'POST: update with version' do
       setup do 
-        put :update, :id => @protocol, :protocol => {:title => 'new protocol'}, :consider_this_a_new_version => true
+        put :update, :id => @protocol, :protocol => {:title => 'new protocol'}, :new_version => 1
       end
 
       should redirect_to('the new protocol page') {protocol_path(assigns(:protocol))}
