@@ -9,5 +9,6 @@ eml.elements['//dataset'].each do |dataset|
   
   dataset.elements.each do |e|
     
-  p doc.to_yaml
+    p doc.to_yaml
+  end
 end
