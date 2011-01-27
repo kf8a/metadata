@@ -27,10 +27,6 @@ class ProtocolTest < ActiveSupport::TestCase
         assert @protocol.websites.include?(@website2)
     end
 
-    should 'tell if it is archived'do
-      assert @protocol.respond_to?('archived?')
-    end
-
     should 'deprecate another protocol' do
       assert @other_protocol.deprecates(@protocol)
     end
