@@ -438,7 +438,7 @@ ActiveRecord::Schema.define(:version => 20110126223229) do
   create_table "protocols", :force => true do |t|
     t.string  "name"
     t.string  "title"
-    t.integer "version"
+    t.integer "version_tag"
     t.date    "in_use_from"
     t.date    "in_use_to"
     t.text    "description"
