@@ -61,7 +61,6 @@ class ProtocolsController < ApplicationController
     
     respond_to do |format|
       if @protocol.save
-        expire_action :action => :index
         
         flash[:notice] = 'Protocol was successfully created.'
         format.html { redirect_to protocol_url(@protocol) }
@@ -82,6 +81,7 @@ class ProtocolsController < ApplicationController
       if params[:new_version]
         old_protocol = Protocol.find(params[:id])
         @protocol = Protocol.new(params[:protocol])
+        @protocol.deprecate(old_protocol)
       end
       if @protocol.update_attributes(params[:protocol])
         flash[:notice] = 'Protocol was successfully updated.'

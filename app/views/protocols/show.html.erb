@@ -1,5 +1,15 @@
 <% cache do %>
   <h1><%= link_to "#{@protocol.dataset.dataset}", dataset_path(@protocol.dataset) if @protocol.dataset %>: <%=raw @protocol.title %></h1>
+  <p class='notice'>
+    <% if @protocol.active? -%>
+      Active
+    <% else -%>
+      Replaced by: <%= link_to @protocol.replaced_by.title, protocol_path(@protocol.replaced_by) %>
+    <% end -%>
+  </p>
+  <% unless @protocol.deprecates.nil? -%>
+    <p>Replaces <%= link_to Protocol.find(@protocol.deprecates).title, protocol_path(@protocol.deprecates) %>
+  <% end -%>
   <p>
   <%= "In use from "unless @protocol.in_use_from.nil? %><%= @protocol.in_use_from %> 
   <%= " to " unless @protocol.in_use_to.nil? %><%= @protocol.in_use_to %>
@@ -27,7 +37,7 @@
   <% @protocol.datatables.each do |datatable| -%>
     <%= link_to datatable.to_label, datatable_path(datatable) %>
   <% end -%>
-  
+
   <p>
   <%= link_to 'Edit', edit_protocol_path(@protocol) %> |
   <%= link_to 'Back', protocols_path %>

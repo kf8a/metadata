@@ -42,5 +42,15 @@ class ProtocolTest < ActiveSupport::TestCase
     should 'connect the new protocol to the old protocol' do
       assert_equal @protocol.id, @new_protocol.deprecates
     end
+
+    should 'deactivate the old protocol' do
+      assert_equal false, @protocol.active?
+      assert_equal true, @new_protocol.active?
+    end
+
+    should 'enable the report of the newer version by the old version' do
+      newer = @protocol.replaced_by
+      assert_equal @new_protocol.id, newer.id
+    end
   end
 end

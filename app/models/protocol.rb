@@ -12,6 +12,11 @@ class Protocol < ActiveRecord::Base
     other.active = false
     other.save
     self.deprecates = other.id
-    self.version_tag = other.version_tag + 1
+    self.version_tag = other.version_tag.to_i + 1
+    save
+  end
+
+  def replaced_by
+    Protocol.where(:deprecates => self.id).first
   end
 end

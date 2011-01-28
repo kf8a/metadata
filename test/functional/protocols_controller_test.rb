@@ -23,9 +23,6 @@ class ProtocolsControllerTest < ActionController::TestCase
      should redirect_to('the protocol show page') {protocol_path(assigns(:protocol))}
     end
 
-    context 'GET: edit with new version' do
-    end
-  
     context 'POST with website' do
       setup do
         @protocol = Factory.create(:protocol)
@@ -46,13 +43,18 @@ class ProtocolsControllerTest < ActionController::TestCase
 
     context 'POST: update with version' do
       setup do 
-        put :update, :id => @protocol, :protocol => {:title => 'new protocol'}, :new_version => 1
+        put :update, :id => @protocol, :protocol => {:title => 'new protocol'}, :new_version => "1"
       end
-
-      should redirect_to('the new protocol page') {protocol_path(assigns(:protocol))}
 
       should 'create a new protocol' do
         assert_not_equal @protocol, assigns(:protocol)
+      end
+
+      should 'depreate the old protocol' do
+        p @protocol
+        p assigns(:protocol)
+        assert_equal @protocol.id, assigns(:protocol).deprecates
+        assert_equal false, @protocol.active?
       end
 
       should redirect_to('the new protocol') {protocol_path(assigns(:protocol))}
