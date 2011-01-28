@@ -48,7 +48,6 @@ class ProtocolsController < ApplicationController
 
   # GET /protocols/1;edit
   def edit
-    @people = Person.by_sur_name
     @datasets = Dataset.find(:all).map {|x| [x.dataset, x.id]}
     get_all_websites
   end
@@ -57,7 +56,6 @@ class ProtocolsController < ApplicationController
   # POST /protocols.xml
   def create
     @protocol = Protocol.new(params[:protocol])
-    @people = Person.by_sur_name
     
     respond_to do |format|
       if @protocol.save
@@ -81,7 +79,7 @@ class ProtocolsController < ApplicationController
       if params[:new_version]
         old_protocol = Protocol.find(params[:id])
         @protocol = Protocol.new(params[:protocol])
-        @protocol.deprecate(old_protocol)
+        @protocol.deprecate!(old_protocol)
       end
       if @protocol.update_attributes(params[:protocol])
         flash[:notice] = 'Protocol was successfully updated.'
@@ -99,8 +97,6 @@ class ProtocolsController < ApplicationController
   def destroy
     @protocol.destroy
 
-    expire_action :action => :index
-    
     respond_to do |format|
       format.html { redirect_to protocols_url }
       format.xml  { head :ok }

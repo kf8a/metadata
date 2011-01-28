@@ -54,6 +54,7 @@ class ProtocolsControllerTest < ActionController::TestCase
         p @protocol
         p assigns(:protocol)
         assert_equal @protocol.id, assigns(:protocol).deprecates
+        assert_equal true, assigns(:protocol).active?
         assert_equal false, @protocol.active?
       end
 
