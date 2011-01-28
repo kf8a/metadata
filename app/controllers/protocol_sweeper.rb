@@ -27,8 +27,8 @@ class ProtocolSweeper < ActionController::Caching::Sweeper
     protocol.datatables.each do |datatable|
       expire_fragment(:controller => 'datatables', :action=>'show', :id=>datatable)
     end 
-    protocol.dataset.datatables.each do |datatable|
-      expire_fragment(:controller => 'datatables', :action=>'show', :id=>datatable)
-    end
+    #protocol.dataset.datatables.each do |datatable|
+    #  expire_fragment(:controller => 'datatables', :action=>'show', :id=>datatable)
+    #end
   end
 end
