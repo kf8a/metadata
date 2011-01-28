@@ -41,7 +41,6 @@ class ProtocolsController < ApplicationController
   # GET /protocols/new
   def new
     @protocol = Protocol.new
-    @people = Person.by_sur_name
     @datasets = Dataset.find(:all).map {|x| [x.dataset, x.id]}
     get_all_websites
   end
@@ -56,10 +55,10 @@ class ProtocolsController < ApplicationController
   # POST /protocols.xml
   def create
     @protocol = Protocol.new(params[:protocol])
-    
+
     respond_to do |format|
       if @protocol.save
-        
+
         flash[:notice] = 'Protocol was successfully created.'
         format.html { redirect_to protocol_url(@protocol) }
         format.xml  { head :created, :location => protocol_url(@protocol) }
@@ -74,7 +73,7 @@ class ProtocolsController < ApplicationController
   # PUT /protocols/1.xml
   def update
     get_all_websites
-    
+
     respond_to do |format|
       if params[:new_version]
         old_protocol = Protocol.find(params[:id])

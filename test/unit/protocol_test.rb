@@ -25,14 +25,13 @@ class ProtocolTest < ActiveSupport::TestCase
         assert @protocol.websites.include?(@website)
         assert @protocol.websites.include?(@website2)
     end
-
   end
 
   context 'deprecating a protocol' do
     setup do 
       @protocol = Factory.create(:protocol)
       @new_protocol = Factory.create(:protocol)
-      @new_protocol.deprecate(@protocol)
+      @new_protocol.deprecate!(@protocol)
     end
 
     should 'increment the protocol number of the new protocol' do

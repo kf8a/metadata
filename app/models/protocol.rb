@@ -8,7 +8,7 @@ class Protocol < ActiveRecord::Base
 
   versioned :dependent => :tracking
 
-  def deprecate(other)
+  def deprecate!(other)
     other.active = false
     other.save
     self.deprecates = other.id

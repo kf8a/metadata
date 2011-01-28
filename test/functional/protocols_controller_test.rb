@@ -51,11 +51,9 @@ class ProtocolsControllerTest < ActionController::TestCase
       end
 
       should 'depreate the old protocol' do
-        p @protocol
-        p assigns(:protocol)
         assert_equal @protocol.id, assigns(:protocol).deprecates
         assert_equal true, assigns(:protocol).active?
-        assert_equal false, @protocol.active?
+        assert_equal false, Protocol.find(@protocol).active?
       end
 
       should redirect_to('the new protocol') {protocol_path(assigns(:protocol))}
