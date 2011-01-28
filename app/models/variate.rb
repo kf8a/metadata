@@ -9,7 +9,7 @@ class Variate < ActiveRecord::Base
     eml = Element.new('attribute')
     eml.add_element('attributeName').add_text(self.name)
     eml.add_element('attributeDefinition').add_text(self.description)
-    eml.add_element eml_measurement_scale
+    eml.add_element eml_measurement_scale unless self.measurement_scale.nil?
     return eml
   end
 

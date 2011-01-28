@@ -1,11 +1,9 @@
 <h1>Editing protocol</h1>
 
-<%= form_for(:protocol, :url => protocol_path(@protocol), :html => { :method => :put }) do |f| %>
+<%= semantic_form_for @protocol,:html => { :multipart => true } do |form| %>
   <%= render "shared/error_messages", :target => @protocol %>
-  <%= render :partial => 'form', :locals => {:f => f, :people => @people, :datasets => @datasets}%>
-  <p>
-    <%= submit_tag "Update" %>
-  </p>
+  <%= render :partial => 'form', :locals => {:form => form, :websites => @websites, :people => @people, :datasets => @datasets } %>
+  <%= form.buttons %>
 <% end %>
 
 <%= link_to 'Show', protocol_path(@protocol) %> |
