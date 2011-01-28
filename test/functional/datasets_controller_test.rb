@@ -47,7 +47,7 @@ class DatasetsControllerTest < ActionController::TestCase
       
     context "GET :show the dataset / 'glbrc' subdomain" do
       setup do
-        get :show, :id => @lterdataset, :requested_subdomain => 'glbrc'
+        get :show, :id => @lterdataset, :requested_subdomain => 'glbrc', :format =>'xml'
       end
 
       should_not respond_with :success
@@ -55,7 +55,7 @@ class DatasetsControllerTest < ActionController::TestCase
     
     context "GET :show the dataset / 'lter' subdomain" do
       setup do
-        get :show, :id => @lterdataset, :requested_subdomain => 'lter'
+        get :show, :id => @lterdataset, :requested_subdomain => 'lter', :formt => 'xml'
       end
       
       should respond_with :success
@@ -104,28 +104,12 @@ class DatasetsControllerTest < ActionController::TestCase
     should assign_to :people
     should assign_to :themes
     
-    should respond_with :success
-    should render_template :index
+    should redirect_to('the datatable page') {datatables_path}
     should_not set_the_flash
     
   end
-  
-  context 'GET with empty search parameters' do
-    setup do
-      get :index, :keyword_list => '', :commit => 'Search'
-    end
-  
-    should assign_to :datasets
-    should assign_to :people
-    should assign_to :themes
-    should assign_to :studies
-        
-    should respond_with :success
-    should render_template :index
-    should_not set_the_flash
-  end
-  
-      
+
+
   context 'eml harvester document' do
     setup do
       @dataset = Factory.create(:dataset)

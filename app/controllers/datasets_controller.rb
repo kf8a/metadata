@@ -26,7 +26,7 @@ class DatasetsController < ApplicationController
     @studies        = [@study] if @study
     @crumbs         = []
     respond_to do |format|
-      format.html # index.rhtml
+      format.html {redirect_to datatables_path}
       format.xml  { render :xml => @datasets.to_xml }
       format.eml { render :eml => @datasets }
     end
