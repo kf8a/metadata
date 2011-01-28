@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/adamcooper/vestal_versions
+  revision: 6273df533f85014062e346cb1807b0531a809ee2
+  specs:
+    vestal_versions (1.2.2)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+
+GIT
   remote: git://github.com/freelancing-god/thinking-sphinx.git
   revision: 92277757cd4c95520e298a2375b6f2482ece0ce6
   branch: rails3
@@ -182,6 +190,11 @@ GEM
       activerecord
       activesupport
     pg (0.10.0)
+    pickle (0.4.4)
+      cucumber (>= 0.8)
+      rake
+      rspec (>= 1.3)
+      yard
     polyglot (0.3.1)
     rack (1.2.1)
     rack-mount (0.6.13)
@@ -240,6 +253,7 @@ GEM
       rubyzip
     sexp_processor (3.0.5)
     shoulda (2.11.3)
+    silent-postgres (0.0.7)
     simplecov (0.3.9)
       simplecov-html (>= 0.3.7)
     simplecov-html (0.3.9)
@@ -258,6 +272,7 @@ GEM
     xml-simple (1.0.12)
     xpath (0.1.3)
       nokogiri (~> 1.3)
+    yard (0.6.4)
     yui-compressor (0.9.1)
 
 PLATFORMS
@@ -288,11 +303,13 @@ DEPENDENCIES
   nokogiri
   paperclip
   pg
+  pickle
   rack-openid
   rails (= 3.0.3)
   rspec (= 1.3.0)
   rspec-rails
   shoulda
+  silent-postgres
   simplecov
   simplecov-html
   spork
@@ -300,3 +317,4 @@ DEPENDENCIES
   thin
   thinking-sphinx!
   transitions
+  vestal_versions!

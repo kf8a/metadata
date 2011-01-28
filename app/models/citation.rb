@@ -1,6 +1,8 @@
 class Citation < ActiveRecord::Base
   include ActiveRecord::Transitions
 
+  versioned :dependent => :tracking
+
   has_many :authors, :order => :seniority
   has_many :editors, :order => :seniority
 

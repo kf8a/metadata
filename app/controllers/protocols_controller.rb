@@ -1,7 +1,7 @@
 class ProtocolsController < ApplicationController
 
   layout :site_layout
-  before_filter :admin?, :except => [:index, :show]  if Rails.env == 'production'
+  before_filter :admin?, :except => [:index, :show]  if Rails.env != 'development'
   before_filter :get_protocol, :only => [:edit, :update, :destroy]
     
   cache_sweeper :protocol_sweeper
@@ -77,11 +77,15 @@ class ProtocolsController < ApplicationController
   # PUT /protocols/1.xml
   def update
     get_all_websites
-  
+    
     respond_to do |format|
+      if params[:new_version]
+        old_protocol = Protocol.find(params[:id])
+        @protocol = Protocol.new(params[:protocol])
+      end
       if @protocol.update_attributes(params[:protocol])
         expire_action :action => :index
-        
+
         flash[:notice] = 'Protocol was successfully updated.'
         format.html { redirect_to protocol_url(@protocol) }
         format.xml  { head :ok }
