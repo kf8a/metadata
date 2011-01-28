@@ -77,16 +77,27 @@
       </ul>
     </td>
   </tr>
-  <% unless  @datatable.dataset.protocols.empty? %>
+  <% if @datatable.protocols.empty? -%>
+    <% unless  @datatable.dataset.protocols.empty? -%>
+      <tr>
+        <td>Protocols</td>
+        <td>
+          <% @datatable.dataset.protocols.each do |protocol| %>
+            <%= link_to protocol.name, protocol_path(protocol)%>
+          <% end %>
+        </td>
+      </tr>
+    <% end -%>
+  <% else -%>
     <tr>
       <td>Protocols</td>
       <td>
-        <% @datatable.dataset.protocols.each do |protocol| %>
-          <%= link_to protocol.name, protocol_path(protocol)%>
-        <% end %>
+        <% @datatable.protocols.each do |protocol| %>
+          <%= link_to protocol.name, protocol_path(protocol) %>
+        <% end -%>
       </td>
     </tr>
-  <% end %>
+  <% end -%>
   <% if @datatable.keywords.any? and signed_in?%>
     <tr>
       <td>Keywords:</td>

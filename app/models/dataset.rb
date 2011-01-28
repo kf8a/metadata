@@ -18,7 +18,11 @@ class Dataset < ActiveRecord::Base
   accepts_nested_attributes_for :affiliations, :allow_destroy => true
   
   acts_as_taggable_on :keywords
-    
+
+  def to_label
+   "#{title} (#{dataset})" 
+  end
+
   def datatable_people
     datatables.collect do |table|
       table.personnel.keys

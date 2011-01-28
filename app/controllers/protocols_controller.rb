@@ -84,8 +84,6 @@ class ProtocolsController < ApplicationController
         @protocol = Protocol.new(params[:protocol])
       end
       if @protocol.update_attributes(params[:protocol])
-        expire_action :action => :index
-
         flash[:notice] = 'Protocol was successfully updated.'
         format.html { redirect_to protocol_url(@protocol) }
         format.xml  { head :ok }

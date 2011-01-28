@@ -12,14 +12,14 @@ class ProtocolTest < ActiveSupport::TestCase
     end
 
     should 'save websites' do
-      @protocol.website_list = {@website.id.to_s => '1', @website2.id.to_s => '0'}
+      @protocol.websites << @website
       assert @protocol.save
 
       assert @protocol.websites.include?(@website)
     end
 
     should 'save multiple websites' do
-       @protocol.website_list = {@website.id.to_s => '1', @website2.id.to_s => '1'}
+       @protocol.websites << [@website, @website2 ]
         assert @protocol.save
 
         assert @protocol.websites.include?(@website)
