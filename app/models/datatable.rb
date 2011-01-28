@@ -46,6 +46,10 @@ class Datatable < ActiveRecord::Base
 
     #set_property :field_weights => {:keyword => 20, :theme => 20, :title => 10}
   end
+
+  def to_label
+    "#{title} (#{name})"
+  end
   
   def personnel
     h = datatable_personnel

@@ -1,11 +1,9 @@
 <h1>New protocol</h1>
 
-<%= form_for(:protocol, :url => protocols_path) do |f| %>
+<%= semantic_form_for @protocol,:html => { :multipart => true } do |form| %>
   <%= render "shared/error_messages", :target => @protocol %>
-  <%= render :partial => 'form', :locals => {:f => f, :people => @people, :datasets => @datasets}%>
-  <p>
-    <%= submit_tag "Create" %>
-  </p>
+  <%= render :partial => 'form', :locals => {:form => form, :websites => @websites, :people => @people, :datasets => @datasets } %>
+  <%= form.buttons %>
 <% end %>
 
 <%= link_to 'Back', protocols_path %>

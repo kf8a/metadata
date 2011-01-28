@@ -342,28 +342,26 @@ class DatatableTest < ActiveSupport::TestCase
     end
   end
   
-  context 'eml generation' do
-    setup do 
-      @person = Factory.create(:person)
-      dataset = Factory.create(:dataset, :people=>[@person])
-      @datatable = Factory.create(:datatable, :dataset => dataset)
-    end
-    
-    should 'return respond to to_eml' do
-      assert @datatable.respond_to?('to_eml')
-    end
-    
-    should 'return an eml datatable fragment' do
-      eml = @datatable.to_eml
-      assert eml.to_s =~ /datatable/
-    end
-  end
-  
   context 'datatable formats' do
     setup do 
       dataset = Factory.create(:dataset)
       @datatable = Factory.create(:datatable, :dataset => dataset, :object=>"select now() as a, '1' as b")
       @datatable.variates << [Variate.new(:name => 'a'), Variate.new(:name => 'b')]
+    end
+
+    context 'eml format' do
+      setup  do 
+        @datatable.protocols << Factory.create(:protocol)
+        @eml = @datatable.to_eml
+      end
+
+      should 'return respond to to_eml' do
+        assert @datatable.respond_to?('to_eml')
+      end
+
+      should 'return an eml datatable fragment' do
+        assert @eml.to_s =~ /datatable/
+      end
     end
 
     context 'climbdb format' do

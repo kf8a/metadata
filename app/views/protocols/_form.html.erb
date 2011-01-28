@@ -1,41 +1,15 @@
-<p>
-  <label for='protocol_websites'>Websites</label>
-      <% @websites.each do |website| %>
-  			<%= check_box_tag("protocol[website_list][#{website.id}]", 
-                          "1", 
-                          @protocol.websites.detect{|w| w == website}) %>
-  			<%= "#{website.name}"%>
-  		<% end %>
-	<label for='protocol_name'>Name</label>
-	<%= f.text_field :name %>
-	<label for='protocol_title'>Title</label>
-	<%= f.text_field :title %>
-	<label for='protocol_in_use_from'>In use from</label>
-	<%= f.date_select :in_use_from, :start_year => 1982, :end_year=> Date.today.year, :include_blank=>true %>
-	<label for='protocol_in_use_to'>to</label>
-	<%= f.date_select :in_use_to , :include_blank=>true%>
-	<label for='protocol_description'>Description</label>
-	<%= f.text_area :description, :size=>'60x10' %>
-	<label for='protocol_abstract'>Abstract</label>
-	<%= f.text_area :abstract, :size=>'60x10' %>
-	
-	</p>
-	<p>
-	<label for="protocol_body">Body</label>
-	<%= f.text_area :body, :size=>'60x40'%>
-	</p>
-	
-	<p>
-	<label for='protocol_people'>Author</label>
-	<%= f.collection_select :person_id, people, :id, :full_name, {}, {:multiple => true, :size => 10}%>
-</p>
-<p>
-	<label for='protocol_change_summary'>Change summary</label>
-	<%= f.text_area :change_summary %>
-</p>
-<label for='protocol_dataset'>Dataset</label>
-<%= f.select :dataset_id, datasets %>
-<p>
+<%= form.inputs do %>
+<%= form.input :website, :as => :check_boxes, :collection => Website.all %>
+<%= form.input :name, :hint => 'a short name following the kbs convention' %>
+<%= form.input :title, :size=> 60, :hint => 'A descriptive title of the protocol', :input_html => { :size => 60 }  %>
+<%= form.input :in_use_from, :start_year => 1982, :include_blank => true %>
+<%= form.input :in_use_to, :start_year => 1982, :include_blank => true %>
+<%= form.input :description, :input_html => {:rows =>5}%>
+<%= form.input :abstract %>
+<%= form.input :body, :input_html => {:rows => 50} %>
+<%= form.input :people, :collection=>Person.find(:all, :order=>'sur_name, given_name'), :as => :check_boxes, :wrapper_html => {:class => 'scroll_checkboxes'} %>
+<%= form.input :datatables, :collection=>Datatable.find(:all, :order=>'title'), :as => :check_boxes, :wrapper_html=>{:class => 'scroll_checkboxes'} %>
+<%= form.input :dataset, :collection => Dataset.all, :include_blank => true %>
+<%= form.input :change_summary, :input_html => {:rows =>2}%>
+<% end %>
 <%= check_box_tag :new_version %> Consider this a new Version
-</p>
-<p>
