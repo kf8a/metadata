@@ -12,27 +12,26 @@ class ProtocolTest < ActiveSupport::TestCase
     end
 
     should 'save websites' do
-      @protocol.website_list = {@website.id.to_s => '1', @website2.id.to_s => '0'}
+      @protocol.websites << @website
       assert @protocol.save
 
       assert @protocol.websites.include?(@website)
     end
 
     should 'save multiple websites' do
-       @protocol.website_list = {@website.id.to_s => '1', @website2.id.to_s => '1'}
+       @protocol.websites << [@website, @website2 ]
         assert @protocol.save
 
         assert @protocol.websites.include?(@website)
         assert @protocol.websites.include?(@website2)
     end
-
   end
 
   context 'deprecating a protocol' do
     setup do 
       @protocol = Factory.create(:protocol)
       @new_protocol = Factory.create(:protocol)
-      @new_protocol.deprecate(@protocol)
+      @new_protocol.deprecate!(@protocol)
     end
 
     should 'increment the protocol number of the new protocol' do
@@ -41,6 +40,16 @@ class ProtocolTest < ActiveSupport::TestCase
 
     should 'connect the new protocol to the old protocol' do
       assert_equal @protocol.id, @new_protocol.deprecates
+    end
+
+    should 'deactivate the old protocol' do
+      assert_equal false, @protocol.active?
+      assert_equal true, @new_protocol.active?
+    end
+
+    should 'enable the report of the newer version by the old version' do
+      newer = @protocol.replaced_by
+      assert_equal @new_protocol.id, newer.id
     end
   end
 end

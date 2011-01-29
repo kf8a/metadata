@@ -2,8 +2,8 @@ class DatasetsController < ApplicationController
 
   layout :site_layout
   
-  before_filter :allow_on_web, :except => [:autocomplete_for_keyword_list]
-  before_filter :admin?, :except => [:index, :show, :auto_complete_for_keyword_list] if Rails.env == 'production'
+  before_filter :allow_on_web
+  before_filter :admin?, :except => [:index, :show ] if Rails.env == 'production'
   before_filter :get_dataset, :only => [:show, :edit, :update, :destroy]
   
   #layout proc {|controller| controller.request.format == :eml ? false : 'application'}
@@ -26,7 +26,7 @@ class DatasetsController < ApplicationController
     @studies        = [@study] if @study
     @crumbs         = []
     respond_to do |format|
-      format.html # index.rhtml
+      format.html {redirect_to datatables_path}
       format.xml  { render :xml => @datasets.to_xml }
       format.eml { render :eml => @datasets }
     end
@@ -128,16 +128,10 @@ class DatasetsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
-  def auto_complete_for_keyword_list
-    tags = Tag.order('name ASC').where('name LIKE ?', '%' + params[:q] + '%')
-    render :text => (tags.collect{|x| x.name}).join("\n")
-  end
-  
-  
-  
+
+
   private
-    
+
   def set_title
     @title  = 'LTER Datasets'
   end

@@ -41,14 +41,12 @@ class ProtocolsController < ApplicationController
   # GET /protocols/new
   def new
     @protocol = Protocol.new
-    @people = Person.by_sur_name
     @datasets = Dataset.find(:all).map {|x| [x.dataset, x.id]}
     get_all_websites
   end
 
   # GET /protocols/1;edit
   def edit
-    @people = Person.by_sur_name
     @datasets = Dataset.find(:all).map {|x| [x.dataset, x.id]}
     get_all_websites
   end
@@ -57,12 +55,10 @@ class ProtocolsController < ApplicationController
   # POST /protocols.xml
   def create
     @protocol = Protocol.new(params[:protocol])
-    @people = Person.by_sur_name
-    
+
     respond_to do |format|
       if @protocol.save
-        expire_action :action => :index
-        
+
         flash[:notice] = 'Protocol was successfully created.'
         format.html { redirect_to protocol_url(@protocol) }
         format.xml  { head :created, :location => protocol_url(@protocol) }
@@ -77,15 +73,14 @@ class ProtocolsController < ApplicationController
   # PUT /protocols/1.xml
   def update
     get_all_websites
-    
+
     respond_to do |format|
       if params[:new_version]
         old_protocol = Protocol.find(params[:id])
         @protocol = Protocol.new(params[:protocol])
+        @protocol.deprecate!(old_protocol)
       end
       if @protocol.update_attributes(params[:protocol])
-        expire_action :action => :index
-
         flash[:notice] = 'Protocol was successfully updated.'
         format.html { redirect_to protocol_url(@protocol) }
         format.xml  { head :ok }
@@ -101,8 +96,6 @@ class ProtocolsController < ApplicationController
   def destroy
     @protocol.destroy
 
-    expire_action :action => :index
-    
     respond_to do |format|
       format.html { redirect_to protocols_url }
       format.xml  { head :ok }
