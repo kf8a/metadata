@@ -7,7 +7,7 @@ class DatatablesController < ApplicationController
  
   protect_from_forgery :except => [:index, :show, :search] 
   cache_sweeper :datatable_sweeper
-  caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
+  #caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
   
   # GET /datatables
   # GET /datatables.xml
@@ -65,7 +65,8 @@ class DatatablesController < ApplicationController
 #         end
         format.csv do
           if csv_ok
-            render :text => @datatable.to_csv_with_metadata
+            file_cache = ActiveSupport::Cache.lookup_store(:file_store, 'tmp/cache')
+            render :text => file_cache.fetch("csv_#{@datatable.id}") { @datatable.to_csv_with_metadata }
           else
             render :text => "You do not have permission to download this datatable"
           end

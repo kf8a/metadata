@@ -437,6 +437,9 @@ ActiveRecord::Schema.define(:version => 20110126223229) do
     t.string  "description"
   end
 
+  add_index "plots", ["study_id"], :name => "index_plots_on_study_id"
+  add_index "plots", ["treatment_id"], :name => "index_plots_on_treatment_id"
+
   create_table "projects", :force => true do |t|
     t.string   "title"
     t.text     "abstract"

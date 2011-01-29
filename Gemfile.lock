@@ -119,7 +119,6 @@ GEM
     factory_girl_rails (1.0.1)
       factory_girl (~> 1.3)
       railties (>= 3.0.0)
-    fastercsv (1.5.4)
     fattr (2.2.0)
     ffi (0.6.3)
       rake (>= 0.8.7)
@@ -292,7 +291,6 @@ DEPENDENCIES
   escape_utils
   factory_girl
   factory_girl_rails
-  fastercsv
   formtastic
   jammit
   jquery-rails (>= 0.2.6)
