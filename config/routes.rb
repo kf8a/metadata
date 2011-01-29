@@ -21,8 +21,6 @@ Metadata::Application.routes.draw do
   resources :datasets do
     collection do
       post :set_affiliation_for
-      get :auto_complete_for_keyword_list
-      get :auto_complete_for_dataset_keyword_list
     end
   end
   resources :datatables do
