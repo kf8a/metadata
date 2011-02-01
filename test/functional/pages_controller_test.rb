@@ -32,6 +32,15 @@ class PagesControllerTest < ActionController::TestCase
       should respond_with :success
     end
 
+    context 'GET: edit' do
+      setup do
+        page = Factory.create :page
+        get :edit, :id=> page
+      end
+
+      should respond_with :success
+    end
+
     context 'POST :update' do
       setup do
         @page = Factory.create :page
