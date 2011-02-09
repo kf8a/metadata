@@ -5,11 +5,9 @@
     <% datatables.each do |datatable| -%>
       <li>
         <%=link_to raw(datatable.title_and_years), datatable_path(datatable) %>
-        <% if signed_in? %>
-          <span class='updated_at'>
+          <span class='member-only'>
              <%= datatable.updated_at.to_date if datatable.updated_at %> 
           </span>
-        <% end %>
       </li>
     <% end -%>
     
