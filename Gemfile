@@ -13,7 +13,7 @@ gem 'acts-as-taggable-on'
 gem 'paperclip'
 gem 'aws-s3'
 gem 'nokogiri'
-gem 'RedCloth'
+gem 'RedCloth', '4.2.4'
 gem 'thinking-sphinx',
   :git     => 'git://github.com/freelancing-god/thinking-sphinx.git',
   :branch  => 'rails3',
