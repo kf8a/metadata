@@ -8,6 +8,10 @@
     <p><%= link_to @citation.publisher_url, @citation.publisher_url %></p>
   <% end %>
 <% end %>
+<p>
+Download citation to
+<%= link_to 'endnote', endnote_citation_path(@citation) %>
+</p>
 <% if @citation.pdf.exists? %>
   <% if signed_in? %>
     <%=link_to 'Get PDF', download_citation_path(@citation), :class=>'download-link'%>

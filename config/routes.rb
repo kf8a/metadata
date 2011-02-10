@@ -12,6 +12,7 @@ Metadata::Application.routes.draw do
   resources :citations do
     member do
       get :download
+      get :endnote
     end
   end
 
