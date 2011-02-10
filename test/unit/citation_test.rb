@@ -60,6 +60,18 @@ class CitationTest < ActiveSupport::TestCase
       result = 'Loecke, T. D., and G. P. Robertson. 2008. Soil resource heterogeneity in the form of aggregated litter alters maize productivity. Plant and Soil 325:231-241.'
       assert_equal result, @citation.formatted
     end
+
+    should 'be exported to endnote' do
+      result = "%0 Journal Article
+%T Soil resource heterogeneity in the form of aggregated litter alters maize productivity
+%A Loecke, T. D.
+%A Robertson, G. P.
+%J Plant and Soil
+%V 325
+%@ 231-241
+%D 2008"
+    assert_equal result, @citation.as_endnote
+    end
   end
 
   context 'formatting a book citation' do
@@ -97,6 +109,24 @@ class CitationTest < ActiveSupport::TestCase
       result = 'Robertson, G. P., and A. S. Grandy. 2006. Soil system management in temperate regions. Pages 27-39 in N. Uphoff, A. S. Ball, and J. Thies, eds. Biological Approaches to Sustainable Soil Systems. CRC Press, Taylor and Francis Group, Boca Raton, Florida, USA.'
       assert_equal result, @citation.formatted
     end
+
+    should 'be exported as endnote' do
+      result = "%0 Book Section
+%T Soil system management in temperate regions
+%A Robertson, G. P.
+%A Grandy, A. S.
+%E Uphoff, N.
+%E Ball, A. S.
+%E Thies, J.
+%B Biological Approaches to Sustainable Soil Systems
+%I CRC Press, Taylor and Francis Group
+%C Boca Raton, Florida, USA
+%V 
+%@ 27-39
+%D 2006"
+
+      assert_equal result, @citation.as_endnote
+    end
   end
 
   context 'formatting a submitted citation' do
@@ -115,5 +145,17 @@ class CitationTest < ActiveSupport::TestCase
       result = 'Kaufman, A. S. 2009. Implications of LCA accounting methods in a corn and corn stover to ethanol system.'
       assert_equal result, @citation.formatted
     end
+
+    should 'be exported to bibtex' 
+
+    should 'be exported to endnote' do
+      result = "%0 Journal Article
+%T Implications of LCA accounting methods in a corn and corn stover to ethanol system
+%A Kaufman, A. S.
+%D 2009"
+
+    assert_equal result, @citation.as_endnote
+    end
   end
+
 end
