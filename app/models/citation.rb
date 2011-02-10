@@ -61,6 +61,36 @@ class Citation < ActiveRecord::Base
     end
   end
 
+  def as_endnote
+    endnote = "%0 "
+    case citation_type.try(:name)
+    when 'book' then 
+      endnote += "Book Section\n"
+    else
+      endnote += "Journal Article\n"
+    end
+    endnote += "%T #{title}\n"
+    authors.each do |author|
+      endnote += "%A #{author.formatted()}\n"
+    end
+    editors.each do |editor|
+      endnote += "%E #{editor.formatted()}\n"
+    end
+    case citation_type.try(:name)
+    when 'book' then 
+      endnote += "%B #{publication}\n"
+      endnote += "%I #{publisher}\n" 
+      endnote += "%C #{address}\n" 
+    else
+      endnote += "%J #{publication}\n" if publication
+    end
+    endnote += "%V #{volume}\n" unless volume.try(:empty?)
+    endnote += "%@ #{start_page_number}-#{ending_page_number}\n" if start_page_number
+    endnote += "%D #{pub_year}" if pub_year
+    endnote += "\n%X #{abstract}" if abstract
+    endnote
+  end
+
   private
 
   def formatted_article

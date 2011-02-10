@@ -23,7 +23,7 @@ class CitationsControllerTest < ActionController::TestCase
       should assign_to :citations
 
       should render_with_layout 'lter'
-      
+
       should 'return the citations in alphabetical order' do
         citations = assigns(:citations)
         assert_equal 2, citations.size
@@ -31,27 +31,27 @@ class CitationsControllerTest < ActionController::TestCase
         assert_equal @citation2, citations[0]
         assert_equal @citation1,  citations[1] 
       end
-      
+
     end
-    
+
     context 'GET :index from glbrc' do
       setup do
         get :index, :requested_subdomain => 'glbrc'
       end
-      
+
       should respond_with :success
       should assign_to :citations
-      
+
       should render_with_layout 'glbrc'
-      
+
     end
-    
+
     context 'GET :download' do
       setup do
         @citation = Factory :citation
         get :download, :id => @citation
       end
-      
+
       should redirect_to('the sign in page') { sign_in_url }
     end
 
@@ -59,6 +59,15 @@ class CitationsControllerTest < ActionController::TestCase
       setup do
         @citation = Factory :citation, :abstract => '*Something*', :title => 'article'
         get :show, :id => @citation
+      end
+
+      should respond_with :success
+    end
+
+    context 'GET :endnote' do
+      setup do
+        @citation = Factory :citation, :abstract => '*Something*', :title => 'article'
+        get :endnote, :id => @citation
       end
 
       should respond_with :success

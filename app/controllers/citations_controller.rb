@@ -65,7 +65,6 @@ class CitationsController < ApplicationController
 
   def download
     head(:not_found) and return unless (citation = Citation.find_by_id(params[:id]))
-    logger.info  "USER: #{signed_in?}"
     unless signed_in?
       deny_access and return
     end
@@ -76,6 +75,11 @@ class CitationsController < ApplicationController
     else
       send_file  path, :type => 'application/pdf', :disposition => 'inline'
     end
+  end
+
+  def endnote
+    @citation = Citation.find(params[:id])
+    send_data @citation.as_endnote, :filename=>'glbrc.enw'
   end
 
   def destroy
