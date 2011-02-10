@@ -79,7 +79,7 @@ class CitationsController < ApplicationController
 
   def endnote
     @citation = Citation.find(params[:id])
-    render :text => @citation.as_endnote
+    send_data @citation.as_endnote, :filename=>'glbrc.enw'
   end
 
   def destroy
