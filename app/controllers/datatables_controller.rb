@@ -7,7 +7,7 @@ class DatatablesController < ApplicationController
  
   protect_from_forgery :except => [:index, :show, :search] 
   cache_sweeper :datatable_sweeper
-  #caches_action :show, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
+  caches_action :show, :expires_in => 1.day, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
   
   # GET /datatables
   # GET /datatables.xml
