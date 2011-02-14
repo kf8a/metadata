@@ -9,10 +9,15 @@ Metadata::Application.routes.draw do
   resources :abstracts
   resources :affiliations
 
+
   resources :citations do
     member do
       get :download
       get :endnote
+    end
+    collection do
+      get :biblio
+      get :bibliography
     end
   end
 

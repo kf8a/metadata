@@ -67,10 +67,27 @@ class CitationsControllerTest < ActionController::TestCase
     context 'GET :endnote' do
       setup do
         @citation = Factory :citation, :abstract => '*Something*', :title => 'article'
-        get :endnote, :id => @citation
       end
 
-      should respond_with :success
+      context 'with id' do
+        setup {get :endnote, :id => @citation}
+        should respond_with :success
+      end
+
+      context 'without id' do
+        setup {get :bibliography}
+        should respond_with :success
+      end
+
+      context 'with date' do
+        setup {get :bibliography, :date=>Date.today}
+        should respond_with :success
+      end
+
+      context 'get the search form' do
+        setup {get :biblio}
+        should respond_with :success
+      end
     end
 
     context 'GET: new' do
@@ -93,7 +110,7 @@ class CitationsControllerTest < ActionController::TestCase
         citation = Factory.create :citation
         post :edit, :id => citation
       end
-      
+
       should respond_with :forbidden
     end
 

@@ -78,8 +78,21 @@ class CitationsController < ApplicationController
   end
 
   def endnote
-    @citation = Citation.find(params[:id])
-    send_data @citation.as_endnote, :filename=>'glbrc.enw'
+    citation = Citation.find(params[:id])
+    send_data citation.as_endnote, :filename=>'glbrc.enw'
+  end
+
+  def biblio
+  end
+
+  def bibliography 
+    citations = []
+    if params[:date]
+      citations = Citation.where('updated_at > ?', params[:date]) 
+    else
+      citations = Citation.all
+    end
+    send_data citations.collect {|x| x.as_endnote}, :filename=>'glbrc.enw'
   end
 
   def destroy
