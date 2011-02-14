@@ -80,7 +80,9 @@ Metadata::Application.routes.draw do
   resources :units
   resources :uploads
   resources :variates
-  #match '/assets/citations/:attachment/:id/:style/:basename.:extension' => 'citations#download', :constraints => { :method => 'get' }
+
+  match "/application.manifest" => Rails::Offline
+
   root :to => 'datatables#index'
   match ':controller/service.wsdl' => '#wsdl'
 
