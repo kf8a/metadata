@@ -65,7 +65,8 @@ class DatatablesController < ApplicationController
 #         end
         format.csv do
           if csv_ok
-            render :text => @datatable.to_csv_with_metadata
+            file_cache = ActiveSupport::Cache.lookup_store(:file_store, 'tmp/cache')
+            render :text => file_cache.fetch("csv_#{@datatable.id}") { @datatable.to_csv_with_metadata }
           else
             render :text => "You do not have permission to download this datatable"
           end
