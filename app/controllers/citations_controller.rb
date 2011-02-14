@@ -6,11 +6,28 @@ class CitationsController < ApplicationController
     @submitted_citations = Citation.submitted_with_authors_by_sur_name_and_pub_year
     @forthcoming_citations = Citation.forthcoming_with_authors_by_sur_name_and_pub_year
     @citations = Citation.published_with_authors_by_sur_name_and_pub_year
+    if params[:date]
+       date = params[:date]
+       query_date = Date.civil(date['year'].to_i,date['month'].to_i,date['day'].to_i)
+       @citations = Citation.where('updated_at > ?', query_date).all
+    end
+    respond_to do |format|
+      format.html 
+      format.enw do
+        send_data @citations.collect {|x| x.as_endnote}.join("\n"), :filename=>'glbrc.enw'
+      end
+    end
   end
 
   def show
     store_location
     @citation = Citation.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.enw do
+        send_data @citation.as_endnote, :filename=>'glbrc.enw'
+      end
+    end
   end
 
   def new
@@ -77,11 +94,6 @@ class CitationsController < ApplicationController
     end
   end
 
-  def endnote
-    citation = Citation.find(params[:id])
-    send_data citation.as_endnote, :filename=>'glbrc.enw'
-  end
-
   def biblio
   end
 
@@ -94,7 +106,6 @@ class CitationsController < ApplicationController
     else
       @citations = Citation.all
     end
-    send_data @citations.collect {|x| x.as_endnote}, :filename=>'glbrc.enw'
   end
 
   def destroy

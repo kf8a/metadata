@@ -32,6 +32,17 @@ class CitationsControllerTest < ActionController::TestCase
         assert_equal @citation1,  citations[1] 
       end
 
+      context 'in endnote format' do
+        setup {get :index, :format=>:enw}
+        should assign_to :citations
+        should respond_with :success
+      end
+
+      context 'with a date parameter' do
+        setup {get :index, :date=>{:year=>'2011', :month=>'4', :day => '16'}}
+        should respond_with :success
+      end
+
     end
 
     context 'GET :index from glbrc' do
@@ -62,35 +73,17 @@ class CitationsControllerTest < ActionController::TestCase
       end
 
       should respond_with :success
+
+      context 'in endnote format' do
+        setup {get :show, :id => @citation, :format=>'enw'}
+        should respond_with :success
+      end
     end
 
-    context 'GET :endnote' do
-      setup do
-        @citation = Factory :citation, :abstract => '*Something*', :title => 'article'
-        Factory.create :citation
-        Factory.create :citation
-      end
-
-      context 'with id' do
-        setup {get :endnote, :id => @citation}
-        should respond_with :success
-      end
-
-      context 'without id' do
-        setup {get :bibliography}
-        should respond_with :success
-        should assign_to(:citations)
-      end
-
-      context 'with date' do
-        setup {get :bibliography, :date=>{:year=>'2011', :month=>'4', :day => '16'}}
-        should respond_with :success
-      end
-
-      context 'get the search form' do
-        setup {get :biblio}
-        should respond_with :success
-      end
+    # this form is to enter the date for the downloading citations older than the date.
+    context 'get the download form' do
+      setup {get :biblio}
+      should respond_with :success
     end
 
     context 'GET: new' do
