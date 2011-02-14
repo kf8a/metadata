@@ -88,11 +88,13 @@ class CitationsController < ApplicationController
   def bibliography 
     citations = []
     if params[:date]
-      citations = Citation.where('updated_at > ?', params[:date]) 
+      date = params[:date]
+      query_date = Date.civil(date['year'].to_i,date['month'].to_i,date['day'].to_i)
+      citations = Citation.where('updated_at > ?', query_date)
     else
       citations = Citation.all
     end
-    send_data citations.collect {|x| x.as_endnote}, :filename=>'glbrc.enw'
+    send_data citations.collect {|x| x.as_endnote}[0], :filename=>'glbrc.enw'
   end
 
   def destroy

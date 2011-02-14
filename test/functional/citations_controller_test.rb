@@ -80,7 +80,7 @@ class CitationsControllerTest < ActionController::TestCase
       end
 
       context 'with date' do
-        setup {get :bibliography, :date=>Date.today}
+        setup {get :bibliography, :date=>{:year=>'2011', :month=>'4', :day => '16'}}
         should respond_with :success
       end
 

@@ -1,0 +1,5 @@
+<%= form_tag('/citations/bibliography', :method=>'get') do %>
+  <%= label_tag(:q, 'Download citations updated after this date') %>
+  <%= select_date %>
+  <%= submit_tag("Download") %>
+<% end %>
