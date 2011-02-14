@@ -58,6 +58,7 @@ group :test do
   gem 'sqlite3-ruby'
 
   gem "shoulda"
+  #gem "shoulda-matchers" # to use rspec like syntax
   gem "factory_girl"
   gem 'factory_girl_rails'
 

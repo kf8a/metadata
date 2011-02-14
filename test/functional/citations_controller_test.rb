@@ -67,6 +67,8 @@ class CitationsControllerTest < ActionController::TestCase
     context 'GET :endnote' do
       setup do
         @citation = Factory :citation, :abstract => '*Something*', :title => 'article'
+        Factory.create :citation
+        Factory.create :citation
       end
 
       context 'with id' do
@@ -77,6 +79,7 @@ class CitationsControllerTest < ActionController::TestCase
       context 'without id' do
         setup {get :bibliography}
         should respond_with :success
+        should assign_to(:citations)
       end
 
       context 'with date' do
