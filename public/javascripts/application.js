@@ -42,8 +42,10 @@ jQuery(document).ready(function() {
         });
     });
 
-    //Make member-only content visible and adjust the sign-in indicator if necessary
-    jQuery.get('/users');
+    // Make member-only content visible and adjust the sign-in indicator if necessary
+    // append a random number so that IE7 will actually make the call and not return a cached value
+    url = "/users?"
+    jQuery.get(url.concat(Math.random()));
 });
 
   function remove_fields(link) {
