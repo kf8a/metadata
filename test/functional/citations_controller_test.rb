@@ -77,6 +77,7 @@ class CitationsControllerTest < ActionController::TestCase
       context 'in endnote format' do
         setup {get :show, :id => @citation, :format=>'enw'}
         should respond_with :success
+
       end
     end
 
