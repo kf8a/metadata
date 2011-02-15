@@ -25,3 +25,4 @@ coverage/
 .bundle
 *.swp
 lib/tasks/move_to_s3.rake
+*.komodoproject

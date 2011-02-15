@@ -265,9 +265,11 @@ class DatatablesControllerTest < ActionController::TestCase
   
   
   def test_should_create_csv_cache
+    file_cache = ActiveSupport::Cache.lookup_store(:file_store, 'tmp/cache')
+    assert_equal nil, file_cache.read("csv_#{@table.id}")
     table_id = @table.id.to_s
     get :show, :id => table_id, :format => "csv"
-    assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :id => table_id, :format => "csv") 
+    assert_equal @table.to_csv_with_metadata, file_cache.read("csv_#{@table.id}")
   end
   
   test "show should get the template in the database if there is one" do
@@ -300,11 +302,12 @@ class DatatablesControllerTest < ActionController::TestCase
   end
   
   def test_should_delete_csv_cache_on_update_table
+    file_cache = ActiveSupport::Cache.lookup_store(:file_store, 'tmp/cache')
     table_id = @table.id.to_s
     get :show, :id => table_id, :format => "csv"
-    assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :id => table_id, :format => "csv")
+    assert_equal @table.to_csv_with_metadata, file_cache.read("csv_#{@table.id}")
     put :update, :id => table_id, :datatable => { :description => "No CSV cache" }
-    assert !@controller.fragment_exist?(:controller => "datatables", :action => "show", :id => table_id, :format => "csv")
+    assert_equal nil, file_cache.read("csv_#{@table.id}")
   end
 
   def test_should_update_datatable

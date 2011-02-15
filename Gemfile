@@ -13,7 +13,7 @@ gem 'acts-as-taggable-on'
 gem 'paperclip'
 gem 'aws-s3'
 gem 'nokogiri'
-gem 'RedCloth'
+gem 'RedCloth', '4.2.4'
 gem 'thinking-sphinx',
   :git     => 'git://github.com/freelancing-god/thinking-sphinx.git',
   :branch  => 'rails3',
@@ -43,6 +43,9 @@ gem 'jammit'
 # versioning support for protocols
 gem 'vestal_versions', :git => 'git://github.com/adamcooper/vestal_versions'
 
+# offile manifest
+gem 'rack-offline'
+
 group :development, :test  do
   # bundler requires these gems in development
   # gem "rails-footnotes"
@@ -58,6 +61,7 @@ group :test do
   gem 'sqlite3-ruby'
 
   gem "shoulda"
+  #gem "shoulda-matchers" # to use rspec like syntax
   gem "factory_girl"
   gem 'factory_girl_rails'
 

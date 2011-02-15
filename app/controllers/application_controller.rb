@@ -42,9 +42,7 @@ class ApplicationController < ActionController::Base
   end
 
   def request_subdomain(requested_subdomain)
-    requested_subdomain = get_subdomain_from_request if requested_subdomain.blank?
-    requested_subdomain = 'lter' unless valid_subdomain?(requested_subdomain)
-    return requested_subdomain
+    valid_subdomain?(requested_subdomain) ? requested_subdomain : get_subdomain_from_request
   end
 
   def get_subdomain_from_request
