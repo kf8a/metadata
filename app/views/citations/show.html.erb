@@ -10,7 +10,7 @@
 <% end %>
 <p>
 Download citation to
-<%= link_to 'endnote', endnote_citation_path(@citation) %>
+<%= link_to 'endnote', citation_path(@citation, :format=>'enw') %>
 </p>
 <% if @citation.pdf.exists? %>
   <% if signed_in? %>
