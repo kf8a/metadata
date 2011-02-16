@@ -78,6 +78,7 @@ GEM
       mime-types
       xml-simple
     bson (1.2.2)
+    bson_ext (1.2.0)
     builder (2.1.2)
     capistrano (2.5.19)
       highline
@@ -301,6 +302,7 @@ DEPENDENCIES
   awesome_nested_set!
   aws-s3
   bin!
+  bson_ext
   capistrano
   capybara
   clearance!
