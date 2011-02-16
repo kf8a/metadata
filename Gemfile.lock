@@ -23,14 +23,6 @@ GIT
       activerecord (>= 3.0.0)
 
 GIT
-  remote: git://github.com/jnunemaker/bin.git
-  revision: 9a1cd19c4e41a48c1d88800c94d1cf42206525fd
-  specs:
-    bin (0.6.3)
-      activesupport (>= 2.3)
-      mongo (~> 1.0.1)
-
-GIT
   remote: git://github.com/thoughtbot/clearance.git
   revision: 342a930583aaa2c721b1a4840467cde336ad5422
   specs:
@@ -77,8 +69,6 @@ GEM
       builder
       mime-types
       xml-simple
-    bson (1.2.2)
-    bson_ext (1.2.0)
     builder (2.1.2)
     capistrano (2.5.19)
       highline
@@ -177,6 +167,7 @@ GEM
     main (4.4.0)
       arrayfields (>= 4.7.4)
       fattr (>= 2.1.0)
+    memcache-client (1.8.5)
     metric_fu (2.0.1)
       Saikuro (>= 1.1.0)
       activesupport (>= 2.0.0)
@@ -189,8 +180,6 @@ GEM
       reek (>= 1.2.6)
       roodi (>= 2.1.0)
     mime-types (1.16)
-    mongo (1.0.9)
-      bson (>= 1.0.5)
     mutter (0.5.3)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
@@ -301,8 +290,6 @@ DEPENDENCIES
   acts-as-taggable-on
   awesome_nested_set!
   aws-s3
-  bin!
-  bson_ext
   capistrano
   capybara
   clearance!
@@ -318,6 +305,7 @@ DEPENDENCIES
   launchy
   less
   liquid
+  memcache-client
   metric_fu
   newrelic_rpm
   nokogiri

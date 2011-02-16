@@ -81,6 +81,7 @@ end
 
 group :production do
   gem 'dalli'
-  gem 'bson_ext'
-  gem 'bin', :git=>'git://github.com/jnunemaker/bin.git'
+  gem 'memcache-client'
+#  gem 'bson_ext'
+#  gem 'bin', :git=>'git://github.com/jnunemaker/bin.git'
 end
