@@ -38,9 +38,28 @@ class CitationsControllerTest < ActionController::TestCase
         should respond_with :success
       end
 
-      context 'with a date parameter' do
-        setup {get :index, :date=>{:year=>'2011', :month=>'4', :day => '16'}}
+      context 'with a past date' do
+        setup do 
+          date = Date.today
+          get :index, :date=>{:year=>"#{date.year - 1}", :month=>'4', :day => '16'}
+        end
         should respond_with :success
+        should assign_to :citations
+        should 'not have any citations since the date is in the future' do
+          assert_equal 2, assigns(:citations).size
+        end
+      end
+
+      context 'with a future date parameter' do
+        setup do 
+          date = Date.today
+          get :index, :date=>{:year=>"#{date.year + 1}", :month=>'4', :day => '16'}
+        end
+        should respond_with :success
+        should assign_to :citations
+        should 'not have any citations since the date is in the future' do
+          assert_equal 0, assigns(:citations).size
+        end
       end
 
     end
