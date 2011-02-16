@@ -4,17 +4,17 @@ class DatatablesController < ApplicationController
 
   before_filter :admin?, :except => [:index, :show, :suggest, :search, :events] unless Rails.env == 'development'
   before_filter :get_datatable, :only => [:show, :edit, :update, :destroy, :update_temporal_extent]
- 
+
   protect_from_forgery :except => [:index, :show, :search] 
   cache_sweeper :datatable_sweeper
   caches_action :show, :expires_in => 1.day, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
-  
+
   # GET /datatables
   # GET /datatables.xml
   def index
     store_location
     retrieve_datatables('keyword_list' =>'')
-    
+
     respond_to do |format|
       format.html {render_subdomain}
       format.xml  { render :xml => @datatables.to_xml }
@@ -34,7 +34,7 @@ class DatatablesController < ApplicationController
       end
     end
   end
-  
+
   def events
     datatable = Datatable.find(params[:id])
     render :json => datatable.events
@@ -47,7 +47,7 @@ class DatatablesController < ApplicationController
     accessible_by_ip = trusted_ip? || !@datatable.is_restricted
     csv_ok = accessible_by_ip && @datatable.can_be_downloaded_by?(current_user)
     climdb_ok = accessible_by_ip
-    
+
     @website = Website.find_by_name(@subdomain_request)
     @trusted = trusted_ip?
 
@@ -65,8 +65,10 @@ class DatatablesController < ApplicationController
 #         end
         format.csv do
           if csv_ok
-            file_cache = ActiveSupport::Cache.lookup_store(:file_store, 'tmp/cache')
-            render :text => file_cache.fetch("csv_#{@datatable.id}") { @datatable.to_csv_with_metadata }
+             # TODO renable after we have a common place for this cache
+#            file_cache = ActiveSupport::Cache.lookup_store(:file_store, 'tmp/cache')
+#            render :text => file_cache.fetch("csv_#{@datatable.id}") { @datatable.to_csv_with_metadata }
+             render :text => @datatable.to_csv_with_metadata
           else
             render :text => "You do not have permission to download this datatable"
           end
@@ -130,7 +132,7 @@ class DatatablesController < ApplicationController
     @studies = Study.all.collect{|x| [x.name, x.id]}
     @people = Person.all
     @units = Unit.all
-    
+
     respond_to do |format|
       if @datatable.update_attributes(params[:datatable])
         flash[:notice] = 'Datatable was successfully updated.'

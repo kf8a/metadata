@@ -264,13 +264,14 @@ class DatatablesControllerTest < ActionController::TestCase
   end
   
   
-  def test_should_create_csv_cache
-    file_cache = ActiveSupport::Cache.lookup_store(:file_store, 'tmp/cache')
-    assert_equal nil, file_cache.read("csv_#{@table.id}")
-    table_id = @table.id.to_s
-    get :show, :id => table_id, :format => "csv"
-    assert_equal @table.to_csv_with_metadata, file_cache.read("csv_#{@table.id}")
-  end
+  #TODO renable after we get a common place to put these files S3 or gridfs
+#  def test_should_create_csv_cache
+#    file_cache = ActiveSupport::Cache.lookup_store(:file_store, 'tmp/cache')
+#    assert_equal nil, file_cache.read("csv_#{@table.id}")
+#    table_id = @table.id.to_s
+#    get :show, :id => table_id, :format => "csv"
+#    assert_equal @table.to_csv_with_metadata, file_cache.read("csv_#{@table.id}")
+#  end
   
   test "show should get the template in the database if there is one" do
     lter_website = Factory.create(:website, :name => 'lter')
@@ -301,14 +302,15 @@ class DatatablesControllerTest < ActionController::TestCase
     assert_response :success
   end
   
-  def test_should_delete_csv_cache_on_update_table
-    file_cache = ActiveSupport::Cache.lookup_store(:file_store, 'tmp/cache')
-    table_id = @table.id.to_s
-    get :show, :id => table_id, :format => "csv"
-    assert_equal @table.to_csv_with_metadata, file_cache.read("csv_#{@table.id}")
-    put :update, :id => table_id, :datatable => { :description => "No CSV cache" }
-    assert_equal nil, file_cache.read("csv_#{@table.id}")
-  end
+  #TODO renable after we get the csv caches in a common place
+#  def test_should_delete_csv_cache_on_update_table
+#    file_cache = ActiveSupport::Cache.lookup_store(:file_store, 'tmp/cache')
+#    table_id = @table.id.to_s
+#    get :show, :id => table_id, :format => "csv"
+#    assert_equal @table.to_csv_with_metadata, file_cache.read("csv_#{@table.id}")
+#    put :update, :id => table_id, :datatable => { :description => "No CSV cache" }
+#    assert_equal nil, file_cache.read("csv_#{@table.id}")
+#  end
 
   def test_should_update_datatable
     put :update, :id => @table, :datatable => {:title => 'soil moisture' }
