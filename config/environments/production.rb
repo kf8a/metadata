@@ -25,7 +25,10 @@ Metadata::Application.configure do
   # config.logger = SyslogLogger.new
 
   # Use a different cache store in production
-  config.cache_store = :dalli_store, "thetford.kbs.msu.edu", {:compress => true, :compress_threshold => 64*1024}
+#  config.cache_store = :dalli_store, "thetford.kbs.msu.edu", {:compress => true, :compress_threshold => 64*1024}
+  db = Mongo::Connection.new
+  config.cache_store = Bin::Store.new(db['bin_cache'])
+
 
   # Disable Rails's static asset server
   # In production, Apache or nginx will already do this

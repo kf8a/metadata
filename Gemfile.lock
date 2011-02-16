@@ -119,6 +119,7 @@ GEM
       cucumber (>= 0.8.0)
     culerity (0.2.15)
     daemons (1.1.0)
+    dalli (1.0.2)
     database_cleaner (0.6.3)
     diesel (0.1.4)
       railties (~> 3.0.3)
@@ -175,7 +176,6 @@ GEM
     main (4.4.0)
       arrayfields (>= 4.7.4)
       fattr (>= 2.1.0)
-    memcached (1.0.6)
     metric_fu (2.0.1)
       Saikuro (>= 1.1.0)
       activesupport (>= 2.0.0)
@@ -305,6 +305,7 @@ DEPENDENCIES
   capybara
   clearance!
   cucumber-rails
+  dalli
   database_cleaner
   escape_utils
   factory_girl
@@ -315,7 +316,6 @@ DEPENDENCIES
   launchy
   less
   liquid
-  memcached
   metric_fu
   newrelic_rpm
   nokogiri
