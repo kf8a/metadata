@@ -27,9 +27,6 @@ Metadata::Application.configure do
   # Use a different cache store in production
 #   config.cache_store = :mem_cache_store, "thetford.kbs.msu.edu", {:compress => :true}
   config.cache_store = :dalli_store, "thetford.kbs.msu.edu", {:compress => true, :compress_threshold => 64*1024}
-#  db = Mongo::Connection.new('thetford.kbs.msu.edu').db('cache')
-#  db.ccreate_collection('bin_cache', {:capped=>true, :max=>1000})
-#  config.cache_store = Bin::Store.new(db['bin_cache'])
 
 
   # Disable Rails's static asset server
