@@ -19,6 +19,7 @@ gem 'thinking-sphinx',
   :branch  => 'rails3',
   :require => 'thinking_sphinx'
 
+gem 'bin', :git=>'git://github.com/jnunemaker/bin.git'
 gem 'liquid'
 gem 'clearance', :git => 'git://github.com/thoughtbot/clearance.git'
 gem 'formtastic'
@@ -80,5 +81,5 @@ group :test do
 end
 
 group :production do
-  gem 'memcache-client'
+  gem 'dali'
 end
