@@ -15,17 +15,16 @@ class UploadsControllerTest < ActionController::TestCase
     get :new
     assert assigns(:upload)
   end
-  
+
+  #TODO Make sure these next two are tested with an actual file uploaded, prob in cucumber
   test "should create upload" do
     assert_difference 'Upload.count' do
-      file_name = '/../data/SingingSongtestfile.txt'
-      post :create, :upload => {:title => 'Title', :abstract => 'Abstract', :owners => 'Me', :file => fixture_file_upload(file_name)}
+      post :create, :upload => {:title => 'Title', :abstract => 'Abstract', :owners => 'Me'}
     end
   end
   
   test "should show an upload" do
-    file_name = '/../data/SingingSongtestfile.txt'
-    post :create, :upload => {:title => 'Title', :abstract => 'Abstract', :owners => 'Me', :file => fixture_file_upload(file_name)}
+    post :create, :upload => {:title => 'Title', :abstract => 'Abstract', :owners => 'Me'}
     @upload = Upload.find(:first)
     get :show, :id => @upload.id
     assert_response :success
