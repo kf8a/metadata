@@ -121,32 +121,32 @@ class Datatable < ActiveRecord::Base
   def owned_by?(user)
     user.try(:owns?, self)
   end
-  
+
   def member?(user)
     sponsors = user.try(:sponsors)
     sponsors.respond_to?('include?') ? sponsors.include?(self.dataset.try(:sponsor)) : false
   end
-  
+
   def within_interval?(start_date=Date.today, end_date=Date.today)
     extent = temporal_extent
     return false if extent[:begin_date].nil?
-    
+
     !(extent[:begin_date] < start_date || extent[:end_date] > end_date) 
   end
-  
+
   def events
     event_query_sql = event_query || ""
     values  = ActiveRecord::Base.connection.execute(event_query_sql)
-    
+
     events = values.collect do |value|
       {'start' => Date.parse(value['date']).rfc2822,
         'title' => value['title'],
         'description' => value['description'],
        'durationEvent' => false }
     end
-    
+
     event_summary = events.inject do |event|
-      
+
     end
     {'dateTimeFormat'=> 'Gregorian', 'events'=> events}.to_json
   end
@@ -198,8 +198,6 @@ class Datatable < ActiveRecord::Base
   end
   
   def to_csv_with_metadata
-    # TODO test if file exists and send that
-    
     # stupid microsofts
     result = ""
     if RUBY_VERSION > "1.9"
@@ -262,7 +260,7 @@ class Datatable < ActiveRecord::Base
 #   end
     
   def data_comments
-    comments ? comments : ''
+    comments ?  comments.gsub(/^/,'#') + "\n" : ''
   end
   def data_contact
     # contact = self.dataset.principal_contact
