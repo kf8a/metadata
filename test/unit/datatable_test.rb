@@ -385,19 +385,26 @@ class DatatableTest < ActiveSupport::TestCase
     end
 
     context 'csv format' do
-      
+
       should 'respond to to_csv' do
         assert @datatable.respond_to?('to_csv')
       end
-      
+
       should 'return a csv formatted document' do
         assert CSV.parse(@datatable.to_csv)
       end
-      
+
       should 'return the data in the right order' do
         assert_equal '1', CSV.parse(@datatable.to_csv)[1][0]
       end
-       
+      
+      context 'with comment' do
+        setup  {@datatable.comments = "something\nand something else"}
+
+        should 'return a commented out version of the comment' do
+          assert_equal "#something\n#and something else\n", @datatable.data_comments
+        end
+      end
     end
     
     context 'xls format' do
