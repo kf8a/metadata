@@ -1,7 +1,5 @@
 class PagesController < ApplicationController
   
-  layout :site_layout
-  
   before_filter :admin?, :except => [:show] unless Rails.env == 'development'
   before_filter :get_page, :only => [:show, :edit, :update, :destroy]
   

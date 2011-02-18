@@ -1,7 +1,5 @@
 class SessionsController < Clearance::SessionsController
   
-  layout :site_layout
-  
   def new
     render_subdomain
   end

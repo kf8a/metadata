@@ -1,7 +1,5 @@
 class OwnershipsController < ApplicationController
 
-  layout :site_layout
-  
   before_filter :admin? unless Rails.env == 'development'
 
   def index

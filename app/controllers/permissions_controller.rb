@@ -2,8 +2,6 @@ class PermissionsController < ApplicationController
 
   before_filter :require_datatable, :require_owner, :except => [:index] 
   
-  layout :site_layout
-  
   def index
     respond_to do |format|
       format.html { render_subdomain }

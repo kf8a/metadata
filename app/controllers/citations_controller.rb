@@ -1,5 +1,4 @@
 class CitationsController < ApplicationController
-  layout :site_layout
 
   def index
     store_location

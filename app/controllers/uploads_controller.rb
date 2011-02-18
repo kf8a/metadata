@@ -1,6 +1,5 @@
 class UploadsController < ApplicationController
 
-  layout :site_layout
   before_filter :can_upload?, :except => [:index, :show]  unless Rails.env == 'development'
 
   def index
