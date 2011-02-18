@@ -59,11 +59,12 @@ class Citation < ActiveRecord::Base
     where('updated_at > ?', query_date).all
   end
 
+  def book?
+    citation_type.try(:name) == 'book'
+  end
+
   def formatted
-    case citation_type.try(:name)
-    when 'book' then formatted_book
-    else formatted_article
-    end
+    book? ? formatted_book : formatted_article
   end
 
   def as_endnote
