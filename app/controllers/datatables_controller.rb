@@ -5,7 +5,7 @@ class DatatablesController < ApplicationController
   before_filter :admin?, :except => [:index, :show, :suggest, :search, :events] unless Rails.env == 'development'
   before_filter :get_datatable, :only => [:show, :edit, :update, :destroy, :update_temporal_extent]
 
-  protect_from_forgery :except => [:index, :show, :search] 
+  protect_from_forgery :except => [:index, :show, :search]
   cache_sweeper :datatable_sweeper
   caches_action :show, :expires_in => 1.day, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
 
@@ -25,7 +25,7 @@ class DatatablesController < ApplicationController
   def search
     query =  {'keyword_list' => ''}
     query.merge!(params)
-    if query['keyword_list'].empty? 
+    if query['keyword_list'].empty?
       redirect_to datatables_url
     else
       retrieve_datatables(query)
@@ -103,7 +103,7 @@ class DatatablesController < ApplicationController
     @people = Person.all
     @units = Unit.all
   end
-  
+
   # POST /datatables
   # POST /datatables.xml
   def create
@@ -112,7 +112,7 @@ class DatatablesController < ApplicationController
     @studies = Study.all.collect{|x| [x.name, x.id]}
     @people = Person.all
     @units = Unit.all
-    
+
     respond_to do |format|
       if @datatable.save
         flash[:notice] = 'Datatable was successfully created.'
@@ -209,7 +209,7 @@ class DatatablesController < ApplicationController
       @crumbs << crumb
     end
     # crumb = Struct::Crumb.new
-    # 
+    #
     # crumb.url =  dataset_path(datatable.dataset)
     # crumb.name = datatable.dataset.title
     # @crumbs << crumb
@@ -219,7 +219,7 @@ class DatatablesController < ApplicationController
   def get_datatable
     @datatable = Datatable.find(params[:id])
   end
-  
+
   def retrieve_datatables(query)
     @default_value = 'Search for core areas, keywords or people'
     @themes = Theme.roots
@@ -232,14 +232,13 @@ class DatatablesController < ApplicationController
     if @keyword_list
       @datatables = Datatable.search @keyword_list, :with => {:website => website_id}
     else
-      @datatables = Datatable.all( 
-          :joins=> 'left join datasets on datasets.id = datatables.dataset_id', 
-          :conditions => ['is_secondary is false and website_id = ?',
-              Website.find_by_name(@subdomain_request)])
+      @datatables = Datatable.
+          joins('left join datasets on datasets.id = datatables.dataset_id').
+          where('is_secondary is false and website_id = ?', website_id).all
     end
 
     @studies = Study.find_all_roots_with_datatables(@datatables)
 
   end
-  
+
 end
