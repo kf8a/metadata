@@ -77,6 +77,7 @@ group :test do
   gem 'launchy'
   gem 'database_cleaner'
   gem 'pickle'
+  gem 'single_test'
 end
 
 group :production do

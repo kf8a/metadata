@@ -54,6 +54,11 @@ class Citation < ActiveRecord::Base
     end
   end
 
+  def Citation.by_date(date)
+    query_date = Date.civil(date['year'].to_i,date['month'].to_i,date['day'].to_i)
+    where('updated_at > ?', query_date).all
+  end
+
   def formatted
     case citation_type.try(:name)
     when 'book' then formatted_book

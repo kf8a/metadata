@@ -1,14 +1,15 @@
 class CitationsController < ApplicationController
+  respond_to :html, :xml, :json
+  before_filter :admin?, :only => [:new, :create, :edit, :update, :destroy]
 
   def index
     store_location
     @submitted_citations = Citation.submitted_with_authors_by_sur_name_and_pub_year
     @forthcoming_citations = Citation.forthcoming_with_authors_by_sur_name_and_pub_year
-    @citations = Citation.published_with_authors_by_sur_name_and_pub_year
     if params[:date]
-       date = params[:date]
-       query_date = Date.civil(date['year'].to_i,date['month'].to_i,date['day'].to_i)
-       @citations = Citation.where('updated_at > ?', query_date).all
+      @citations = Citation.by_date(params[:date])
+    else
+      @citations = Citation.published_with_authors_by_sur_name_and_pub_year
     end
     respond_to do |format|
       format.html 
@@ -30,53 +31,30 @@ class CitationsController < ApplicationController
   end
 
   def new
-    head(:forbidden) and return unless signed_in? and current_user.role == 'admin'
     @citation = Citation.new
   end
 
   def create
-    #short circuit if we are not going to process the request anyways
-    head(:forbidden) and return unless signed_in? and current_user.role == 'admin'
-
     @citation = Citation.new(params[:citation])
-
-    respond_to do |format|
-      if @citation.save
-        expire_action :action => :index
-        flash[:notice] = 'Citation was successfully created.'
-        format.html { redirect_to citation_url(@citation) }
-        format.xml  { head :created, :location => citation_url(@citation) }
-        format.json { head :created, :location => citation_url(@citation)}
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @citation.errors.to_xml }
-        format.json { render :json => @citation.errors.to_json }
-      end
+    if @citation.save
+      expire_action :action => :index
+      flash[:notice] = 'Citation was successfully created.'
     end
+
+    respond_with @citation
   end
 
   def edit
-    head(:forbidden) and return unless signed_in? and current_user.role == 'admin'
     @citation = Citation.find(params[:id]) 
   end
 
   def update
-    head(:forbidden) and return unless signed_in? and current_user.role == 'admin'
-
     @citation = Citation.find(params[:id])
-
-    respond_to do |format|
-      if @citation.update_attributes(params[:citation])
-        expire_action :action => :index
-        format.html {redirect_to citation_url(@citation)}
-        format.xml  { head :created, :location => citation_url(@citation) }
-        format.json { head :created, :location => citation_url(@citation)}
-      else
-        format.html { render :action => 'new'}
-        format.xml  { render :xml => @citation.errors.to_xml }
-        format.json { render :json => @citation.errors.to_json }
-      end
+    if @citation.update_attributes(params[:citation])
+      expire_action :action => :index
     end
+
+    respond_with @citation
   end
 
   def download
@@ -97,36 +75,28 @@ class CitationsController < ApplicationController
   end
 
   def bibliography 
-    @citations = []
     if params[:date]
-      date = params[:date]
-      query_date = Date.civil(date['year'].to_i,date['month'].to_i,date['day'].to_i)
-      @citations = Citation.where('updated_at > ?', query_date).all
+      @citations = Citation.by_date(params[:date])
     else
       @citations = Citation.all
     end
   end
 
   def destroy
-    head(:forbidden) and return unless signed_in? and current_user.role == 'admin'
-
     citation = Citation.find(params[:id])
     citation.destroy 
 
     expire_action :action => :index
-    respond_to do |format|
-      format.html { redirect_to citations_url }
-      format.xml  { head :ok }
-    end
+    respond_with citation
   end
 
   private 
 
   def set_title
-     if request_subdomain(params[:requested_subdomain]) == "lter"
-       @title  = 'LTER Publications'
-     else
-       @title = 'GLBRC Sustainability Publications'
-     end
-   end
+    if @subdomain_request == "lter"
+      @title  = 'LTER Publications'
+    else
+      @title = 'GLBRC Sustainability Publications'
+    end
+  end
 end

@@ -110,7 +110,8 @@ class CitationsControllerTest < ActionController::TestCase
       setup do
         get :new
       end
-      should respond_with :forbidden
+
+      should redirect_to('the sign in path') { sign_in_path }
     end
 
     context 'POST: create' do
@@ -118,7 +119,7 @@ class CitationsControllerTest < ActionController::TestCase
         post :create 
       end
 
-      should respond_with :forbidden
+      should redirect_to('the sign in path') { sign_in_path }
     end
 
     context 'GET: edit' do
@@ -127,7 +128,7 @@ class CitationsControllerTest < ActionController::TestCase
         post :edit, :id => citation
       end
 
-      should respond_with :forbidden
+      should redirect_to('the sign in path') { sign_in_path }
     end
 
     context 'POST: update' do
@@ -136,7 +137,7 @@ class CitationsControllerTest < ActionController::TestCase
         post :update, :id => @citation, :title => 'nothing'
       end
 
-      should respond_with :forbidden
+      should redirect_to('the sign in path') { sign_in_path }
     end
 
     context 'DELETE' do
@@ -145,7 +146,7 @@ class CitationsControllerTest < ActionController::TestCase
         post :destroy, :id => citation
       end
 
-      should respond_with :forbidden
+      should redirect_to('the sign in path') { sign_in_path }
     end
     
   end
@@ -171,7 +172,7 @@ class CitationsControllerTest < ActionController::TestCase
         get :new
       end
 
-      should respond_with :forbidden
+      should redirect_to('the sign in path') { sign_in_path }
     end
 
     context 'POST: create' do
@@ -179,7 +180,7 @@ class CitationsControllerTest < ActionController::TestCase
         post :create
       end
 
-      should respond_with :forbidden
+      should redirect_to('the sign in path') { sign_in_path }
     end
     
     context 'GET: edit' do
@@ -188,7 +189,7 @@ class CitationsControllerTest < ActionController::TestCase
         get :edit, :id => @citation
       end
 
-      should respond_with :forbidden
+      should redirect_to('the sign in path') { sign_in_path }
     end
 
     context 'POST: update' do
@@ -197,7 +198,7 @@ class CitationsControllerTest < ActionController::TestCase
         post :update, :id => @citation, :title=>'nothing'
       end
 
-      should respond_with :forbidden
+      should redirect_to('the sign in path') { sign_in_path }
     end
 
     context 'DELETE' do
@@ -206,7 +207,7 @@ class CitationsControllerTest < ActionController::TestCase
         post :destroy, :id => citation
       end
 
-      should respond_with :forbidden
+      should redirect_to('the sign in path') { sign_in_path }
     end
   end
 
@@ -231,7 +232,6 @@ class CitationsControllerTest < ActionController::TestCase
         post :create
       end
 
-      should respond_with :redirect
       should redirect_to('the citation page') { citation_url(assigns(:citation)) }
     end
 
@@ -240,7 +240,6 @@ class CitationsControllerTest < ActionController::TestCase
         post :create, :pdf => 'testing'
       end
 
-      should respond_with :redirect
       should redirect_to('the citation page') {citation_url(assigns(:citation))}
 
     end
@@ -272,7 +271,6 @@ class CitationsControllerTest < ActionController::TestCase
         post :update, :id => citation, :citation => {:title => 'nothing' }
       end
 
-      should respond_with :redirect
       should redirect_to('the citation page') {citation_url(assigns(:citation))}
       should assign_to(:citation)
 
