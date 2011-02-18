@@ -54,6 +54,7 @@ class CitationTest < ActiveSupport::TestCase
       @citation.start_page_number = 231
       @citation.ending_page_number = 241
       @citation.pub_year = 2008
+      @citation.abstract = 'An abstract of the article.'
     end
     
     should 'be formatted as default' do
@@ -69,7 +70,8 @@ class CitationTest < ActiveSupport::TestCase
 %J Plant and Soil
 %V 325
 %@ 231-241
-%D 2008"
+%D 2008
+%X An abstract of the article."
     assert_equal result, @citation.as_endnote
     end
   end

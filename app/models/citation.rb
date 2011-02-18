@@ -69,12 +69,7 @@ class Citation < ActiveRecord::Base
 
   def as_endnote
     endnote = "%0 "
-    case citation_type.try(:name)
-    when 'book' then 
-      endnote += "Book Section\n"
-    else
-      endnote += "Journal Article\n"
-    end
+    endnote += book? ? "Book Section\n" : "Journal Article\n"
     endnote += "%T #{title}\n"
     authors.each do |author|
       endnote += "%A #{author.formatted()}\n"
@@ -82,8 +77,7 @@ class Citation < ActiveRecord::Base
     editors.each do |editor|
       endnote += "%E #{editor.formatted()}\n"
     end
-    case citation_type.try(:name)
-    when 'book' then 
+    if book?
       endnote += "%B #{publication}\n"
       endnote += "%I #{publisher}\n" 
       endnote += "%C #{address}\n" 
