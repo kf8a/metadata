@@ -7,6 +7,22 @@ class CitationTest < ActiveSupport::TestCase
   
   should have_attached_file(:pdf)
 
+  context 'Some citations exist at different dates' do
+    setup do
+      @oldcitation = Factory.create(:citation, :title => 'Old Citation')
+      @oldcitation.updated_at = Date.civil(2000, 1, 1)
+      @oldcitation.save
+      @newcitation = Factory.create(:citation, :title => 'New Citation')
+      @newcitation.updated_at = Date.civil(2002, 1, 1)
+      @newcitation.save
+    end
+
+    should 'give the right ones with Citation.by_date(date)' do
+      date = {'year' => '2001', 'month' => '10', 'day' => '21'}
+      assert_equal [@newcitation], Citation.by_date(date)
+    end
+  end
+
   context 'a citation object with a single author' do
     setup do
       @citation = Factory :citation
