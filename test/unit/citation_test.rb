@@ -52,6 +52,29 @@ class CitationTest < ActiveSupport::TestCase
     end
   end
 
+  context 'a citation object with zero authors' do
+    setup do
+      @citation = Factory :citation
+      @citation.authors = []
+
+      @citation.title = 'Long-term ecological research: Re-inventing network science'
+      @citation.publication = 'Frontiers in Ecology and the Environment'
+      @citation.volume = '6'
+      @citation.start_page_number = 281
+      @citation.ending_page_number = 281
+      @citation.pub_year = 2008
+    end
+
+    should 'be valid' do
+      assert @citation.valid?
+    end
+
+    should 'be formatted starting with the title' do
+      result = '2008. Long-term ecological research: Re-inventing network science. Frontiers in Ecology and the Environment 6:281.'
+      assert_equal result, @citation.formatted
+    end
+  end
+
   context 'a citation object with multiple authors' do
     setup do
       @citation = Factory :citation
@@ -176,4 +199,57 @@ class CitationTest < ActiveSupport::TestCase
     end
   end
 
+  context 'a citation object with no ending page number' do
+    setup do
+      @citation = Factory :citation
+      @citation.authors << Author.new( :sur_name => 'Loecke',
+                                       :given_name => 'T', :middle_name => 'D',
+                                       :seniority => 1)
+
+      @citation.authors << Author.new(:sur_name => 'Robertson',
+                                      :given_name => 'G', :middle_name => 'P',
+                                      :seniority => 2)
+      @citation.citation_type = Factory :citation_type, :name => 'article'
+
+      @citation.title = 'Soil resource heterogeneity in the form of aggregated litter alters maize productivity'
+      @citation.publication = 'Plant and Soil'
+      @citation.volume = '325'
+      @citation.start_page_number = 231
+      @citation.ending_page_number = nil
+      @citation.pub_year = 2008
+      @citation.abstract = 'An abstract of the article.'
+    end
+
+    should 'be formatted correctly' do
+      assert @citation.formatted.end_with?('Plant and Soil 325:231.')
+    end
+
+  end
+
+  context 'a citation object with no start page' do
+    setup do
+      @citation = Factory :citation
+      @citation.authors << Author.new( :sur_name => 'Loecke',
+                                       :given_name => 'T', :middle_name => 'D',
+                                       :seniority => 1)
+
+      @citation.authors << Author.new(:sur_name => 'Robertson',
+                                      :given_name => 'G', :middle_name => 'P',
+                                      :seniority => 2)
+      @citation.citation_type = Factory :citation_type, :name => 'article'
+
+      @citation.title = 'Soil resource heterogeneity in the form of aggregated litter alters maize productivity'
+      @citation.publication = 'Plant and Soil'
+      @citation.volume = '325'
+      @citation.start_page_number = nil
+      @citation.ending_page_number = nil
+      @citation.pub_year = 2008
+      @citation.abstract = 'An abstract of the article.'
+    end
+
+    should 'be formatted correctly' do
+      assert @citation.formatted.end_with?('Plant and Soil 325.')
+    end
+
+  end
 end

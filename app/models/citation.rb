@@ -109,11 +109,19 @@ class Citation < ActiveRecord::Base
         ""
       end
 
-    "#{author_string} #{pub_year}. #{title}. #{publication} #{volume_and_page}".rstrip
+    "#{author_and_year}. #{title}. #{publication} #{volume_and_page}".rstrip
   end
 
   def formatted_book
-    "#{author_string} #{pub_year}. #{title}. Pages #{start_page_number}-#{ending_page_number} in #{editor_string}, eds. #{publication}. #{publisher}, #{address}.".rstrip
+    "#{author_and_year}. #{title}. Pages #{start_page_number}-#{ending_page_number} in #{editor_string}, eds. #{publication}. #{publisher}, #{address}.".rstrip
+  end
+
+  def author_and_year
+    if authors.empty?
+      "#{pub_year}"
+    else
+      "#{author_string} #{pub_year}"
+    end
   end
 
   def author_string
