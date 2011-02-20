@@ -30,15 +30,11 @@ class Dataset < ActiveRecord::Base
   end
 
   def valid_request?(subdomain)
-    valid_request = true
-    website  = self.website
-    website_name = website.try(:name)
-    if website_name
-      unless website_name == subdomain
-        valid_request = false
-      end
-    end
-    valid_request
+    website_name.blank? || (website_name == subdomain)
+  end
+
+  def website_name
+    website.try(:name)
   end
   
   def within_interval?(start_date=Date.today, end_date=Date.today)   

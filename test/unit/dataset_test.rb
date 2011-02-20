@@ -61,6 +61,33 @@ class DatasetTest < ActiveSupport::TestCase
     end
   end
 
+  context 'valid_request function' do
+    context 'for a dataset with no website' do
+      setup do
+        @dataset = Factory.create(:dataset, :website => nil)
+      end
+
+      should 'be true for any subdomain' do
+        assert @dataset.valid_request?('glbrc')
+        assert @dataset.valid_request?('lter')
+        assert @dataset.valid_request?('non-existent domain')
+      end
+    end
+
+    context 'for a dataset with a website' do
+      setup do
+        @website = Factory.create(:website, :name => 'cool_website')
+        @dataset = Factory.create(:dataset, :website => @website)
+      end
+
+      should 'only be true for that website as subdomain' do
+        assert !@dataset.valid_request?('glbrc')
+        assert !@dataset.valid_request?('lter')
+        assert @dataset.valid_request?('cool_website')
+      end
+    end
+  end
+
   context 'no temporal extent' do
     setup do
       @dataset = Factory.create(:dataset, :initiated => '2000-1-1', 
