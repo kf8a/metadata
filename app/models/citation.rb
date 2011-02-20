@@ -23,14 +23,14 @@ class Citation < ActiveRecord::Base
     has_attached_file :pdf, :url => "/citations/:id/download",
         :path => ":rails_root/assets/citations/:attachment/:id/:style/:basename.:extension"
   end
-  
+
   attr_protected :pdf_file_name, :pdf_content_type, :pdf_size
 
   scope :published_with_authors_by_sur_name_and_pub_year,
           :joins=> 'left join authors on authors.citation_id = citations.id',
           :conditions => "seniority = 1 and state = 'published'",
           :order => 'pub_year desc, authors.sur_name'
-  
+
   scope :submitted_with_authors_by_sur_name_and_pub_year,
           :joins=> 'left join authors on authors.citation_id = citations.id',
           :conditions => "seniority = 1 and state = 'submitted'",
@@ -79,8 +79,8 @@ class Citation < ActiveRecord::Base
     end
     if book?
       endnote += "%B #{publication}\n"
-      endnote += "%I #{publisher}\n" 
-      endnote += "%C #{address}\n" 
+      endnote += "%I #{publisher}\n"
+      endnote += "%C #{address}\n"
     else
       endnote += "%J #{publication}\n" if publication
     end
@@ -125,14 +125,13 @@ class Citation < ActiveRecord::Base
   end
 
   def author_string
-    author_array = []
     if authors.length > 1
       last_author = authors.pop
       author_array = authors.collect {|author| "#{author.formatted}"}
       author_array.push("#{last_author.formatted(:natural)}.")
-    elsif authors.length > 0
+    else
       author_array = [authors.first.formatted]
-    end 
+    end
     author_array.to_sentence(:two_words_connector => ', and ')
   end
 

@@ -1,10 +1,10 @@
-require File.expand_path('../../test_helper',__FILE__) 
+require File.expand_path('../../test_helper',__FILE__)
 
 class CitationTest < ActiveSupport::TestCase
   should belong_to :citation_type
   should have_many :authors
   should belong_to :website
-  
+
   should have_attached_file(:pdf)
 
   context 'Some citations exist at different dates' do
@@ -37,7 +37,7 @@ class CitationTest < ActiveSupport::TestCase
       @citation.ending_page_number = 281
       @citation.pub_year = 2008
     end
-    
+
     should 'be valid' do
       assert @citation.valid?
     end
@@ -78,7 +78,7 @@ class CitationTest < ActiveSupport::TestCase
   context 'a citation object with multiple authors' do
     setup do
       @citation = Factory :citation
-      @citation.authors << Author.new( :sur_name => 'Loecke', 
+      @citation.authors << Author.new( :sur_name => 'Loecke',
                                        :given_name => 'T', :middle_name => 'D',
                                        :seniority => 1)
 
@@ -95,7 +95,7 @@ class CitationTest < ActiveSupport::TestCase
       @citation.pub_year = 2008
       @citation.abstract = 'An abstract of the article.'
     end
-    
+
     should 'be formatted as default' do
       result = 'Loecke, T. D., and G. P. Robertson. 2008. Soil resource heterogeneity in the form of aggregated litter alters maize productivity. Plant and Soil 325:231-241.'
       assert_equal result, @citation.formatted
@@ -136,7 +136,7 @@ class CitationTest < ActiveSupport::TestCase
      @citation.editors << Editor.new(:sur_name => 'Ball',
                                      :given_name => 'A',
                                      :middle_name => 'S',
-                                     :seniority => 2) 
+                                     :seniority => 2)
      @citation.editors << Editor.new(:sur_name => 'Thies',
                                      :given_name => 'J',
                                      :seniority => 3)
@@ -162,8 +162,7 @@ class CitationTest < ActiveSupport::TestCase
 %B Biological Approaches to Sustainable Soil Systems
 %I CRC Press, Taylor and Francis Group
 %C Boca Raton, Florida, USA
-%V 
-%@ 27-39
+%V \n%@ 27-39
 %D 2006"
 
       assert_equal result, @citation.as_endnote
@@ -176,7 +175,7 @@ class CitationTest < ActiveSupport::TestCase
       @citation.authors << Author.new(:sur_name => 'Kaufman',
                                       :given_name => 'A',
                                       :middle_name => 'S',
-                                      :seniority => 1) 
+                                      :seniority => 1)
       @citation.title = 'Implications of LCA accounting methods in a corn and corn stover to ethanol system'
       @citation.pub_year = 2009
       @citation.volume = ''
@@ -187,7 +186,7 @@ class CitationTest < ActiveSupport::TestCase
       assert_equal result, @citation.formatted
     end
 
-    should 'be exported to bibtex' 
+    should 'be exported to bibtex'
 
     should 'be exported to endnote' do
       result = "%0 Journal Article
