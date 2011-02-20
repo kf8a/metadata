@@ -6,11 +6,11 @@ Feature: Protocols should exists in several versions
   Background:
 
   Scenario: a protocol is updated to a new version
-    Given I am signed in as an administrator
-    And a website exists with name: "glbrc"
+    Given a website exists with name: "glbrc"
     And I am in the GLBRC subdomain
+    And I am signed in as an administrator
     And a protocol exists with title: "old protocol"
-    And I go to the protocol's edit page 
+    And I go to the protocol's edit page
     And I fill in "Title" with "new protocol"
     And I check "glbrc"
     And I check "new_version"
