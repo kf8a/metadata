@@ -117,11 +117,7 @@ class Citation < ActiveRecord::Base
   end
 
   def author_and_year
-    if authors.empty?
-      "#{pub_year}"
-    else
-      "#{author_string} #{pub_year}"
-    end
+    authors.empty? ? "#{pub_year}" : "#{author_string} #{pub_year}"
   end
 
   def author_string
@@ -136,9 +132,7 @@ class Citation < ActiveRecord::Base
   end
 
   def editor_string
-    editor_array = editors.collect do |editor|
-      "#{editor.formatted(:natural)}"
-    end
+    editor_array = editors.collect { |editor| editor.formatted(:natural) }
     editor_array.to_sentence(:two_words_connector => ', and ')
   end
 
