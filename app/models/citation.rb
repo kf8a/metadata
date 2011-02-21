@@ -134,8 +134,4 @@ class Citation < ActiveRecord::Base
     editor_array = editors.collect { |editor| editor.formatted(:natural) }
     editor_array.to_sentence(:two_words_connector => ', and ')
   end
-
-  def has_volume?
-    volume && !volume.empty?
-  end
 end
