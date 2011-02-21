@@ -251,4 +251,39 @@ class CitationTest < ActiveSupport::TestCase
     end
 
   end
+
+  context 'a citation object with two editors' do
+    setup do
+      @citation = Factory :citation
+      @citation.citation_type = Factory :citation_type, :name => 'book'
+      @citation.authors << Author.new(:sur_name => 'Robertson',
+                                      :given_name => 'G', :middle_name => 'P',
+                                      :seniority => 1)
+
+      @citation.authors << Author.new(:sur_name => 'Grandy',
+                                      :given_name => 'A', :middle_name => 'S',
+                                      :seniority => 2)
+      @citation.pub_year = 2006
+      @citation.title    = 'Soil system management in temperate regions'
+      @citation.start_page_number = 27
+      @citation.ending_page_number = 39
+      @citation.editors << Editor.new(:sur_name => 'Uphoff',
+                                     :given_name => 'N',
+                                     :seniority => 1)
+     @citation.editors << Editor.new(:sur_name => 'Ball',
+                                     :given_name => 'A',
+                                     :middle_name => 'S',
+                                     :seniority => 2)
+
+     @citation.publication = 'Biological Approaches to Sustainable Soil Systems'
+     @citation.publisher = 'CRC Press, Taylor and Francis Group'
+     @citation.address = 'Boca Raton, Florida, USA'
+    end
+
+    should 'be formatted correctly' do
+      result = "Robertson, G. P., and A. S. Grandy. 2006. Soil system management in temperate regions. Pages 27-39 in N. Uphoff, and A. S. Ball, eds. Biological Approaches to Sustainable Soil Systems. CRC Press, Taylor and Francis Group, Boca Raton, Florida, USA."
+      assert_equal result, @citation.formatted
+    end
+
+  end
 end
