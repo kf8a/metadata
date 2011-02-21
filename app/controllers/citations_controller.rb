@@ -12,7 +12,7 @@ class CitationsController < ApplicationController
       @citations = Citation.published_with_authors_by_sur_name_and_pub_year
     end
     respond_to do |format|
-      format.html 
+      format.html
       format.enw do
         send_data @citations.collect {|x| x.as_endnote}.join("\n"), :filename=>'glbrc.enw'
       end
@@ -45,7 +45,7 @@ class CitationsController < ApplicationController
   end
 
   def edit
-    @citation = Citation.find(params[:id]) 
+    @citation = Citation.find(params[:id])
   end
 
   def update
@@ -74,7 +74,7 @@ class CitationsController < ApplicationController
   def biblio
   end
 
-  def bibliography 
+  def bibliography
     if params[:date]
       @citations = Citation.by_date(params[:date])
     else
@@ -84,13 +84,13 @@ class CitationsController < ApplicationController
 
   def destroy
     citation = Citation.find(params[:id])
-    citation.destroy 
+    citation.destroy
 
     expire_action :action => :index
     respond_with citation
   end
 
-  private 
+  private
 
   def set_title
     if @subdomain_request == "lter"
