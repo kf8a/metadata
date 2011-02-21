@@ -37,14 +37,10 @@ class Dataset < ActiveRecord::Base
     website.try(:name)
   end
   
-  def within_interval?(start_date=Date.today, end_date=Date.today)   
+  def within_interval?(start_date, end_date)   
     sdate = start_date.to_date
     edate = end_date.to_date
-    any_within_interval = datatables.collect do |datatable|
-      datatable.within_interval?(sdate, edate)
-    end
-    #TODO query the start and end dates as well
-    any_within_interval.include?(true)
+    !datatables.index { |table| table.within_interval?(sdate, edate) }.blank?
   end
   
   def principal_contact
