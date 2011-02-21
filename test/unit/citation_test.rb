@@ -270,14 +270,14 @@ class CitationTest < ActiveSupport::TestCase
       @citation.editors << Editor.new(:sur_name => 'Uphoff',
                                      :given_name => 'N',
                                      :seniority => 1)
-     @citation.editors << Editor.new(:sur_name => 'Ball',
+      @citation.editors << Editor.new(:sur_name => 'Ball',
                                      :given_name => 'A',
                                      :middle_name => 'S',
                                      :seniority => 2)
 
-     @citation.publication = 'Biological Approaches to Sustainable Soil Systems'
-     @citation.publisher = 'CRC Press, Taylor and Francis Group'
-     @citation.address = 'Boca Raton, Florida, USA'
+      @citation.publication = 'Biological Approaches to Sustainable Soil Systems'
+      @citation.publisher = 'CRC Press, Taylor and Francis Group'
+      @citation.address = 'Boca Raton, Florida, USA'
     end
 
     should 'be formatted correctly' do
