@@ -71,10 +71,8 @@ class Citation < ActiveRecord::Base
     endnote = "%0 "
     endnote += book? ? "Book Section\n" : "Journal Article\n"
     endnote += "%T #{title}\n"
-    authors.each do |author|
-      endnote += "%A #{author.formatted()}\n"
-    end
-    editors.each { |editor| endnote += "%E #{editor.formatted()}\n" }
+    authors.each { |author| endnote += "%A #{author.formatted}\n" }
+    editors.each { |editor| endnote += "%E #{editor.formatted}\n" }
     if book?
       endnote += "%B #{publication}\n"
       endnote += "%I #{publisher}\n"
@@ -83,11 +81,9 @@ class Citation < ActiveRecord::Base
       endnote += "%J #{publication}\n" unless publication.blank?
     end
     endnote += "%V #{volume}\n" unless volume.blank?
-    if start_page_number
-      endnote += "%@ #{start_page_number}-#{ending_page_number}\n"
-    end
-    endnote += "%D #{pub_year}" if pub_year
-    endnote += "\n%X #{abstract}" if abstract
+    endnote += "%@ #{page_numbers}\n" unless page_numbers.blank?
+    endnote += "%D #{pub_year}" unless pub_year.blank?
+    endnote += "\n%X #{abstract}" unless abstract.blank?
     endnote
   end
 
@@ -98,21 +94,37 @@ class Citation < ActiveRecord::Base
   end
 
   def volume_and_page
-    volume.blank? ? "" : "#{volume}#{page_numbers}."
+    if volume.blank?
+      ""
+    elsif page_numbers.blank?
+      "#{volume}."
+    else
+      "#{volume}:#{page_numbers}."
+    end
   end
 
   def page_numbers
     if start_page_number.blank?
       ""
     elsif !ending_page_number.blank? && start_page_number != ending_page_number
-      ":#{start_page_number}-#{ending_page_number}"
+      "#{start_page_number}-#{ending_page_number}"
     else
-      ":#{start_page_number}"
+      "#{start_page_number}"
     end
   end
 
   def formatted_book
-    "#{author_and_year}. #{title}. Pages #{start_page_number}-#{ending_page_number} in #{editor_string}, eds. #{publication}. #{publisher}, #{address}.".rstrip
+    "#{author_and_year}. #{title}. #{page_numbers_book}#{editor_string}. #{publication}. #{publisher}, #{address}."
+  end
+
+  def page_numbers_book
+    if page_numbers.blank?
+      ""
+    elsif page_numbers.include?('-')
+      "Pages #{page_numbers}"
+    else
+      "Page #{page_numbers}"
+    end
   end
 
   def author_and_year
@@ -131,7 +143,12 @@ class Citation < ActiveRecord::Base
   end
 
   def editor_string
-    editor_array = editors.collect { |editor| editor.formatted(:natural) }
-    editor_array.to_sentence(:two_words_connector => ', and ')
+    if editors.blank?
+      ""
+    else
+      editor_array = editors.collect { |editor| editor.formatted(:natural) }
+      eds = editor_array.to_sentence(:two_words_connector => ', and ')
+      " in #{eds}, eds"
+    end
   end
 end
