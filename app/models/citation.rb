@@ -74,18 +74,18 @@ class Citation < ActiveRecord::Base
     authors.each do |author|
       endnote += "%A #{author.formatted()}\n"
     end
-    editors.each do |editor|
-      endnote += "%E #{editor.formatted()}\n"
-    end
+    editors.each { |editor| endnote += "%E #{editor.formatted()}\n" }
     if book?
       endnote += "%B #{publication}\n"
       endnote += "%I #{publisher}\n"
       endnote += "%C #{address}\n"
     else
-      endnote += "%J #{publication}\n" if publication
+      endnote += "%J #{publication}\n" unless publication.blank?
     end
-    endnote += "%V #{volume}\n" unless volume.try(:empty?)
-    endnote += "%@ #{start_page_number}-#{ending_page_number}\n" if start_page_number
+    endnote += "%V #{volume}\n" unless volume.blank?
+    if start_page_number
+      endnote += "%@ #{start_page_number}-#{ending_page_number}\n"
+    end
     endnote += "%D #{pub_year}" if pub_year
     endnote += "\n%X #{abstract}" if abstract
     endnote
@@ -94,22 +94,21 @@ class Citation < ActiveRecord::Base
   private
 
   def formatted_article
-    volume_and_page = case
-      when has_volume? && start_page_number && ending_page_number
-        if start_page_number == ending_page_number
-          "#{volume}:#{start_page_number}."
-        else
-          "#{volume}:#{start_page_number}-#{ending_page_number}."
-        end
-      when has_volume? && start_page_number
-        "#{volume}:#{start_page_number}."
-      when has_volume?
-        "#{volume}."
-      else
-        ""
-      end
-
     "#{author_and_year}. #{title}. #{publication} #{volume_and_page}".rstrip
+  end
+
+  def volume_and_page
+    volume.blank? ? "" : "#{volume}#{page_numbers}."
+  end
+
+  def page_numbers
+    if start_page_number.blank?
+      ""
+    elsif !ending_page_number.blank? && start_page_number != ending_page_number
+      ":#{start_page_number}-#{ending_page_number}"
+    else
+      ":#{start_page_number}"
+    end
   end
 
   def formatted_book

@@ -162,7 +162,7 @@ class CitationTest < ActiveSupport::TestCase
 %B Biological Approaches to Sustainable Soil Systems
 %I CRC Press, Taylor and Francis Group
 %C Boca Raton, Florida, USA
-%V \n%@ 27-39
+%@ 27-39
 %D 2006"
 
       assert_equal result, @citation.as_endnote
