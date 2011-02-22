@@ -127,11 +127,11 @@ class Datatable < ActiveRecord::Base
     sponsors.include?(self.dataset.try(:sponsor))
   end
 
-  def within_interval?(start_date=Date.today, end_date=Date.today)
+  def within_interval?(start_date, end_date)
     extent = temporal_extent
-    return false if extent[:begin_date].nil?
 
-    !(extent[:begin_date] < start_date || extent[:end_date] > end_date)
+    extent[:begin_date] &&
+        extent[:begin_date] >= start_date && extent[:end_date] <= end_date
   end
 
   def events
