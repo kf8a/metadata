@@ -170,6 +170,10 @@ class DatatablesControllerTest < ActionController::TestCase
         assert_select "p", "This is the first abstract"
       end
 
+      should "create show cache" do
+        assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'page', :id => @datatable)
+      end
+
       context 'changing the description' do
         setup do
           put :update, :id => @datatable, :datatable => {:description => 'This is a new abstract'}
@@ -359,6 +363,19 @@ class DatatablesControllerTest < ActionController::TestCase
     end
     
     should redirect_to("datatables index") {datatables_url}
+  end
+
+  def test_caching_and_expiring
+    @datatable = Factory.create :datatable, :dataset => Factory.create(:dataset),
+                                  :description => 'This is the first abstract'
+    get :show, :id => @datatable
+    assert @datatable.is_sql
+    assert @datatable.values
+    assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'page', :id => @datatable)
+    assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'data', :id => @datatable)
+    put :update, :id => @datatable, :datatable => { }
+    assert !@controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'page', :id => @datatable)
+    assert !@controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'data', :id => @datatable)
   end
   
   #Actual testing of the search function, with a real search, requires Sphinx I think. That seems like too much of a pain to have on always for the test suite. It will have to be tested manually.
