@@ -372,10 +372,10 @@ class DatatablesControllerTest < ActionController::TestCase
     assert @datatable.is_sql
     assert @datatable.values
     assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'page', :id => @datatable)
-    assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'data', :id => @datatable)
+    assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'data', :id => @datatable, :expires_in => 1.day)
     put :update, :id => @datatable, :datatable => { }
     assert !@controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'page', :id => @datatable)
-    assert !@controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'data', :id => @datatable)
+    assert !@controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'data', :id => @datatable, :expires_in => 1.day)
   end
   
   #Actual testing of the search function, with a real search, requires Sphinx I think. That seems like too much of a pain to have on always for the test suite. It will have to be tested manually.

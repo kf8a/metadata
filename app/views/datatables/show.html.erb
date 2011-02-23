@@ -186,7 +186,7 @@
       <% end %>
     </p>
 
-    <% cache(:action_suffix => 'data') do %>
+    <% cache(:action_suffix => 'data', :expires_in => 1.day) do %>
       <div>
         <h2>Data Excerpt</h2>
         <div>
