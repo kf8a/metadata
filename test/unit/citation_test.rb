@@ -1,7 +1,6 @@
 require File.expand_path('../../test_helper',__FILE__)
 
 class CitationTest < ActiveSupport::TestCase
-  should belong_to :citation_type
   should have_many :authors
   should belong_to :website
 
@@ -77,7 +76,7 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'a citation object with multiple authors' do
     setup do
-      @citation = Factory :citation
+      @citation = Factory :article_citation
       @citation.authors << Author.new( :sur_name => 'Loecke',
                                        :given_name => 'T', :middle_name => 'D',
                                        :seniority => 1)
@@ -85,7 +84,6 @@ class CitationTest < ActiveSupport::TestCase
       @citation.authors << Author.new(:sur_name => 'Robertson',
                                       :given_name => 'G', :middle_name => 'P',
                                       :seniority => 2)
-      @citation.citation_type = Factory :citation_type, :name => 'article'
 
       @citation.title = 'Soil resource heterogeneity in the form of aggregated litter alters maize productivity'
       @citation.publication = 'Plant and Soil'
@@ -117,8 +115,8 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'formatting a book citation' do
     setup do
-      @citation = Factory :citation
-      @citation.citation_type = Factory :citation_type, :name => 'book'
+      @citation = Factory :book_citation
+
       @citation.authors << Author.new(:sur_name => 'Robertson',
                                       :given_name => 'G', :middle_name => 'P',
                                       :seniority => 1)
@@ -200,7 +198,7 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'a citation object with no ending page number' do
     setup do
-      @citation = Factory :citation
+      @citation = Factory :article_citation
       @citation.authors << Author.new( :sur_name => 'Loecke',
                                        :given_name => 'T', :middle_name => 'D',
                                        :seniority => 1)
@@ -208,7 +206,6 @@ class CitationTest < ActiveSupport::TestCase
       @citation.authors << Author.new(:sur_name => 'Robertson',
                                       :given_name => 'G', :middle_name => 'P',
                                       :seniority => 2)
-      @citation.citation_type = Factory :citation_type, :name => 'article'
 
       @citation.title = 'Soil resource heterogeneity in the form of aggregated litter alters maize productivity'
       @citation.publication = 'Plant and Soil'
@@ -227,7 +224,7 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'a citation object with no start page' do
     setup do
-      @citation = Factory :citation
+      @citation = Factory :article_citation
       @citation.authors << Author.new( :sur_name => 'Loecke',
                                        :given_name => 'T', :middle_name => 'D',
                                        :seniority => 1)
@@ -235,7 +232,6 @@ class CitationTest < ActiveSupport::TestCase
       @citation.authors << Author.new(:sur_name => 'Robertson',
                                       :given_name => 'G', :middle_name => 'P',
                                       :seniority => 2)
-      @citation.citation_type = Factory :citation_type, :name => 'article'
 
       @citation.title = 'Soil resource heterogeneity in the form of aggregated litter alters maize productivity'
       @citation.publication = 'Plant and Soil'
@@ -254,8 +250,7 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'a citation object with two editors' do
     setup do
-      @citation = Factory :citation
-      @citation.citation_type = Factory :citation_type, :name => 'book'
+      @citation = Factory :book_citation
       @citation.authors << Author.new(:sur_name => 'Robertson',
                                       :given_name => 'G', :middle_name => 'P',
                                       :seniority => 1)

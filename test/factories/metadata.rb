@@ -15,6 +15,12 @@ unless Factory.factories.include?(:affiliation) #prevent redefining these factor
   Factory.define :citation do |cite|
   end
 
+  Factory.define :article_citation do |cite|
+  end
+
+  Factory.define :book_citation do |cite|
+  end
+
   Factory.define :citation_type do |cite_type|
   end
 
