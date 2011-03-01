@@ -14,15 +14,10 @@ gem 'paperclip'
 gem 'aws-s3'
 gem 'nokogiri'
 gem 'RedCloth', '4.2.4'
-gem 'thinking-sphinx',
-  :git     => 'git://github.com/freelancing-god/thinking-sphinx.git',
-  :branch  => 'rails3',
-  :require => 'thinking_sphinx'
-
+gem 'thinking-sphinx'
 gem 'liquid'
-gem 'clearance', :git => 'git://github.com/thoughtbot/clearance.git'
+gem 'clearance'
 gem 'formtastic'
-#gem 'zipruby'
 gem 'less'
 gem 'awesome_nested_set', :git => 'git://github.com/galetahub/awesome_nested_set.git'
 gem 'thin'
@@ -54,10 +49,8 @@ group :development, :test  do
 end
 
 group :test do
-  #if RUBY_VERSION > "1.9"
-    gem 'simplecov'
-    gem 'simplecov-html'
-  #end
+  gem 'simplecov'
+  gem 'simplecov-html'
   gem 'sqlite3-ruby'
 
   gem "shoulda"
