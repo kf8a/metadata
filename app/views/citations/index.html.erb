@@ -1,9 +1,5 @@
 <p>To download copies of listed articles you must first 
-<% unless signed_in? %>
-  <a href='/sign_in'>sign-in</a> 
-<% else %>
-  sign_in
-<% end %>
+  <%= link_to_unless signed_in?, 'sign-in', sign_in_path %>
 </p>
 <% cache do %>
 <h1 class='publication-section'>Submitted</h1>
