@@ -26,20 +26,9 @@ class Citation < ActiveRecord::Base
 
   attr_protected :pdf_file_name, :pdf_content_type, :pdf_size
 
-  scope :published_with_authors_by_sur_name_and_pub_year,
-          :joins=> 'left join authors on authors.citation_id = citations.id',
-          :conditions => "seniority = 1 and state = 'published'",
-          :order => 'pub_year desc, authors.sur_name'
-
-  scope :submitted_with_authors_by_sur_name_and_pub_year,
-          :joins=> 'left join authors on authors.citation_id = citations.id',
-          :conditions => "seniority = 1 and state = 'submitted'",
-          :order => 'authors.sur_name, pub_year desc'
-
-  scope :forthcoming_with_authors_by_sur_name_and_pub_year,
-          :joins=> 'left join authors on authors.citation_id = citations.id',
-          :conditions => "seniority = 1 and state = 'forthcomming'",
-          :order => 'authors.sur_name, pub_year desc'
+  scope :published, where(:state => 'published')
+  scope :submitted, where(:state => 'submitted')
+  scope :forthcoming, where(:state => 'forthcoming')
 
   state_machine do
     state :submitted
@@ -57,6 +46,17 @@ class Citation < ActiveRecord::Base
   def Citation.by_date(date)
     query_date = Date.civil(date['year'].to_i,date['month'].to_i,date['day'].to_i)
     where('updated_at > ?', query_date).all
+  end
+
+  def Citation.sort_by_author_and_date
+    all.sort do |a,b|
+      auth = a.primary_author_sur_name <=> b.primary_author_sur_name
+      auth == 0 ? a.pub_date <=> b.pub_date : auth
+    end
+  end
+
+  def primary_author_sur_name
+    self.authors.find_by_seniority(1).try(:sur_name) if authors
   end
 
   def book?

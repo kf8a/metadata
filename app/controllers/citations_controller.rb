@@ -4,12 +4,12 @@ class CitationsController < ApplicationController
 
   def index
     store_location
-    @submitted_citations = Citation.submitted_with_authors_by_sur_name_and_pub_year
-    @forthcoming_citations = Citation.forthcoming_with_authors_by_sur_name_and_pub_year
+    @submitted_citations = Citation.submitted.sort_by_author_and_date
+    @forthcoming_citations = Citation.forthcoming.sort_by_author_and_date
     if params[:date]
       @citations = Citation.by_date(params[:date])
     else
-      @citations = Citation.published_with_authors_by_sur_name_and_pub_year
+      @citations = Citation.published.sort_by_author_and_date
     end
     respond_to do |format|
       format.html

@@ -1,14 +1,16 @@
-<li class='citation'>
-    <% unless year.nil? %>
-      <% if citation.pub_year.to_i != year  -%>
-          <div class='pub_year'><%= citation.pub_year %></div>
+<div id=<%= citation.id %> >
+  <li class='citation'>
+      <% unless year.nil? %>
+        <% if citation.pub_year.to_i != year  -%>
+            <div class='pub_year'><%= citation.pub_year %></div>
+        <% end %>
       <% end %>
+      <p>
+      <%=raw citation.formatted %>
+      </p>
+    <%= link_to 'abstract', citation_path(citation) %>
+    <% if citation.pdf.exists? %>
+      <%= link_to 'pdf', download_citation_path(citation), :class=>'member-only'%>
     <% end %>
-    <p>
-    <%=raw citation.formatted %>
-    </p>
-  <%= link_to 'abstract', citation_path(citation) %>
-  <% if citation.pdf.exists? %>
-    <%= link_to 'pdf', download_citation_path(citation), :class=>'member-only'%>
-  <% end %>
-</li>
+  </li>
+</div>
