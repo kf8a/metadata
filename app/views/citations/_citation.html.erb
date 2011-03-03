@@ -7,8 +7,17 @@
     <p>
     <%=raw citation.formatted %>
     </p>
-  <%= link_to 'abstract', citation_path(citation) %>
-  <% if citation.pdf.exists? %>
-    <%= link_to 'pdf', download_citation_path(citation), :class=>'member-only'%>
-  <% end %>
+    <div class='non-member'>
+      <% if citation.pdf.exists? -%>
+        <%= link_to 'abstracts + pdf', citation_path(citation) %>
+      <% else -%>
+        <%= link_to 'abstracts', citation_path(citation) %>
+      <% end -%>
+    </div>
+    <div class='member-only'>
+      <%= link_to 'abstract', citation_path(citation) %>
+      <% if citation.pdf.exists? %>
+        <%= link_to 'pdf', download_citation_path(citation)%>
+      <% end %>
+    </div>
 </li>
