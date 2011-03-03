@@ -1,11 +1,7 @@
 <p>To download copies of listed articles you must first
   <%= link_to_unless signed_in?, 'sign-in', sign_in_path %>
 </p>
-<div id='search_form'>
-  <%= form_tag search_citations_path, :method => 'get'%>
-    <%= text_field_tag :word, @word, :size => 60 %>
-    <%= submit_tag "Search" %>
-</div>
+<%= render :partial => 'search_form', :locals => {:word => @word, :type => @type} %>
 <h1 class='publication-section'>Submitted</h1>
 <p class='synopsis indent'>Papers still in review; contact the first author for further information.</p>
 <ul>

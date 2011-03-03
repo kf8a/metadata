@@ -36,3 +36,22 @@ Feature: Browsing Citations
       And I should see "Old citation"
       And I should not see "1984"
       And I should not see "Cool citation"
+
+  Scenario: Browsing by type
+    Given the following citations exist:
+      |pub_year|abstract         |id   |title          |type|
+      |1984    |"A nice abstract"|2488 |"Cool citation"|ArticleCitation|
+      |1981    |"An old abstract"|2489 |"Old citation" |BookCitation|
+      And I am signed in as a normal user
+    When I go to the citations page
+    Then I should see "1984"
+      And I should see "Cool citation"
+      And I should see "1981"
+      And I should see "Old citation"
+
+    When I select "Article" from "type"
+      And I press "Search"
+    Then I should see "1984"
+      And I should see "Cool citation"
+      And I should not see "1981"
+      And I should not see "Old citation"

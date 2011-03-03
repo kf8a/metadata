@@ -1,0 +1,8 @@
+<div id='search_form'>
+  <%= form_tag search_citations_path, :method => 'get'%>
+    <%= label_tag :word, "Containing text:" %>
+    <%= text_field_tag :word, word, :size => 60 %>
+    <%= label_tag :type, "Type" %>
+    <%= select_tag :type, options_for_select({ '' => '', 'Book' => 'BookCitation', 'Article' => 'ArticleCitation' }, type) %>
+    <%= submit_tag "Search" %>
+</div>
