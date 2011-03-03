@@ -1,4 +1,4 @@
-<p>To download copies of listed articles you must first 
+<p>To download copies of listed articles you must first
   <%= link_to_unless signed_in?, 'sign-in', sign_in_path %>
 </p>
 <div id='search_form'>
@@ -6,7 +6,6 @@
     <%= text_field_tag :word, @word, :size => 60 %>
     <%= submit_tag "Search" %>
 </div>
-<% cache do %>
 <h1 class='publication-section'>Submitted</h1>
 <p class='synopsis indent'>Papers still in review; contact the first author for further information.</p>
 <ul>
@@ -23,10 +22,9 @@
 </ul>
 <h1 class='publication-section'>Published (alphabetical by year)</h1>
 <ul>
-<% year = 0 -%>
-<% @citations.each do |citation| %>
-  <%= render :partial => 'citation', :locals => {:citation=>citation, :year => year} %>
-  <% year = citation.pub_year.to_i -%>
-<% end %>
+  <% year = 0 -%>
+  <% @citations.each do |citation| %>
+    <%= render :partial => 'citation', :locals => {:citation=>citation, :year => year} %>
+    <% year = citation.pub_year.to_i -%>
+  <% end %>
 </ul>
-<% end %>

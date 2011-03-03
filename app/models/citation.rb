@@ -48,6 +48,12 @@ class Citation < ActiveRecord::Base
     where('updated_at > ?', query_date).all
   end
 
+  def Citation.by_word(word)
+    word = '%'+word+'%'
+    where(%q{((lower(title) like lower(?)) or (lower(abstract) like lower(?)))}, word, word)
+  end
+
+  #TODO see if sort_by is faster. Also it would be nice if we could use arel here.
   def Citation.sort_by_author_and_date
     all.sort do |a,b|
       auth = a.primary_author_sur_name <=> b.primary_author_sur_name

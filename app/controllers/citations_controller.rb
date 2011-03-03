@@ -19,6 +19,23 @@ class CitationsController < ApplicationController
     end
   end
 
+  def search
+    @word = params[:word]
+    @submitted_citations = Citation.submitted.by_word(@word).sort_by_author_and_date
+    @forthcoming_citations = Citation.forthcoming.by_word(@word).sort_by_author_and_date
+    if params[:date]
+      @citations = Citation.by_word(@word).by_date(params[:date])
+    else
+      @citations = Citation.published.by_word(@word).sort_by_author_and_date
+    end
+    respond_to do |format|
+      format.html
+      format.enw do
+        send_data @citations.collect {|x| x.as_endnote}.join("\n"), :filename=>'glbrc.enw'
+      end
+    end
+  end
+
   def show
     store_location
     @citation = Citation.find(params[:id])
