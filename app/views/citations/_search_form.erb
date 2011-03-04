@@ -4,5 +4,7 @@
     <%= text_field_tag :word, word, :size => 60 %>
     <%= label_tag :type, "Type" %>
     <%= select_tag :type, options_for_select({ '' => '', 'Book' => 'BookCitation', 'Article' => 'ArticleCitation' }, type) %>
+    <%= label_tag :sort_by, "Sort by:" %>
+    <%= select_tag :sort_by, options_for_select(['Primary Author and Date(Default)', 'Title'], sort_by) %>
     <%= submit_tag "Search" %>
 </div>

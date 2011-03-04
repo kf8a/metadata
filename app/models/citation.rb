@@ -57,6 +57,14 @@ class Citation < ActiveRecord::Base
     array_of_citations.collect {|x| x.as_endnote}.join("\n")
   end
 
+  def Citation.sorted_by(sorter)
+    if sorter == "Title"
+      order('title').all
+    else
+      all.sort
+    end
+  end
+
   def <=>(other)
     auth = self.primary_author_sur_name <=> other.primary_author_sur_name
     if [-1, 1].include?(auth)

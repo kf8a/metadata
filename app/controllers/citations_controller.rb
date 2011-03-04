@@ -20,15 +20,15 @@ class CitationsController < ApplicationController
   end
 
   def search
-    @word, @type = params[:word], params[:type]
+    @word, @type, @sort_by = params[:word], params[:type], params[:sort_by]
     citations = Citation.where(:type => @type).presence || Citation
     citations = citations.by_word(@word) if @word.present?
-    @submitted_citations = citations.submitted.sort
-    @forthcoming_citations = citations.forthcoming.sort
+    @submitted_citations = citations.submitted.sorted_by(@sort_by)
+    @forthcoming_citations = citations.forthcoming.sorted_by(@sort_by)
     if params[:date]
-      @citations = citations.by_date(params[:date]).sort
+      @citations = citations.by_date(params[:date]).sorted_by(@sort_by)
     else
-      @citations = citations.published.sort
+      @citations = citations.published.sorted_by(@sort_by)
     end
     respond_to do |format|
       format.html
