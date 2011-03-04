@@ -7,11 +7,6 @@ GIT
       activesupport (>= 3.0.0)
 
 GIT
-  remote: git://github.com/balexand/ruby-openid.git
-  revision: 884881ad81a59973f9f63841babe77494ddc7d6b
-  specs:
-
-GIT
   remote: git://github.com/freelancing-god/thinking-sphinx.git
   revision: ccc0719048fe6136064e627a61ee4da400cceba6
   branch: rails3
@@ -169,7 +164,6 @@ GEM
     main (4.4.0)
       arrayfields (>= 4.7.4)
       fattr (>= 2.1.0)
-    memcache (1.2.13)
     metric_fu (2.1.1)
       Saikuro (>= 1.1.0)
       activesupport (>= 2.0.0)
@@ -309,7 +303,6 @@ DEPENDENCIES
   launchy
   less
   liquid
-  memcache
   metric_fu
   newrelic_rpm
   nokogiri
@@ -321,7 +314,6 @@ DEPENDENCIES
   rails (= 3.0.5)
   rspec (= 1.3.0)
   rspec-rails
-  ruby-openid!
   shoulda
   silent-postgres
   simplecov

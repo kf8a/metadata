@@ -9,7 +9,7 @@ gem 'capistrano'
 gem 'newrelic_rpm'
 gem 'pg'
 gem 'rack-openid'
-gem 'ruby-openid', :git => 'git://github.com/balexand/ruby-openid.git'
+#gem 'ruby-openid', :git => 'git://github.com/balexand/ruby-openid.git' #TODO when issue 8 is resolved it should work agian with the normal gem
 gem 'acts-as-taggable-on'
 gem 'paperclip'
 gem 'aws-s3'
