@@ -9,7 +9,6 @@ gem 'capistrano'
 gem 'newrelic_rpm'
 gem 'pg'
 gem 'rack-openid'
-#gem 'ruby-openid', :git => 'git://github.com/balexand/ruby-openid.git' #TODO when issue 8 is resolved it should work agian with the normal gem
 gem 'acts-as-taggable-on'
 gem 'paperclip'
 gem 'aws-s3'
@@ -48,7 +47,6 @@ gem 'vestal_versions', :git => 'git://github.com/adamcooper/vestal_versions'
 gem 'rack-offline'
 
 gem 'dalli'
-#gem 'memcache'
 
 group :development, :test  do
   # bundler requires these gems in development
@@ -79,7 +77,4 @@ group :test do
   gem 'launchy'
   gem 'database_cleaner'
   gem 'pickle'
-end
-
-group :production do
 end
