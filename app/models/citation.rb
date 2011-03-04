@@ -53,16 +53,17 @@ class Citation < ActiveRecord::Base
     where(%q{((lower(title) like lower(?)) or (lower(abstract) like lower(?)))}, word, word)
   end
 
-  #TODO see if sort_by is faster. Also it would be nice if we could use arel here.
-  def Citation.sort_by_author_and_date
-    all.sort do |a,b|
-      auth = a.primary_author_sur_name <=> b.primary_author_sur_name
-      auth == 0 ? a.pub_date <=> b.pub_date : auth
+  def <=>(other)
+    auth = self.primary_author_sur_name <=> other.primary_author_sur_name
+    if [-1, 1].include?(auth)
+      auth
+    else
+      self.pub_date.try(:<=>, other.pub_date) || self.try(:title).to_s <=> other.try(:title).to_s
     end
   end
 
   def primary_author_sur_name
-    self.authors.find_by_seniority(1).try(:sur_name) if authors
+    self.authors ? self.authors.find_by_seniority(1).try(:sur_name).to_s : ""
   end
 
   def book?

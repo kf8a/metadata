@@ -24,7 +24,7 @@ class CitationsControllerTest < ActionController::TestCase
 
       should render_with_layout 'lter'
 
-      should 'return the citations in alphabetical order' do
+      should 'return the citations in order of author last name' do
         citations = assigns(:citations)
         assert_equal 2, citations.size
  

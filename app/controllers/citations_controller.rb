@@ -4,12 +4,12 @@ class CitationsController < ApplicationController
 
   def index
     store_location
-    @submitted_citations = Citation.submitted.sort_by_author_and_date
-    @forthcoming_citations = Citation.forthcoming.sort_by_author_and_date
+    @submitted_citations = Citation.submitted.sort
+    @forthcoming_citations = Citation.forthcoming.sort
     if params[:date]
-      @citations = Citation.by_date(params[:date])
+      @citations = Citation.by_date(params[:date]).sort
     else
-      @citations = Citation.published.sort_by_author_and_date
+      @citations = Citation.published.sort
     end
     respond_to do |format|
       format.html
@@ -23,12 +23,12 @@ class CitationsController < ApplicationController
     @word, @type = params[:word], params[:type]
     citations = @type.blank? ? Citation : Citation.where(:type => @type)
     citations = citations.by_word(@word) unless @word.blank?
-    @submitted_citations = citations.submitted.sort_by_author_and_date
-    @forthcoming_citations = citations.forthcoming.sort_by_author_and_date
+    @submitted_citations = citations.submitted.sort
+    @forthcoming_citations = citations.forthcoming.sort
     if params[:date]
-      @citations = citations.by_date(params[:date])
+      @citations = citations.by_date(params[:date]).sort
     else
-      @citations = citations.published.sort_by_author_and_date
+      @citations = citations.published.sort
     end
     respond_to do |format|
       format.html
