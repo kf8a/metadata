@@ -33,7 +33,7 @@ class Citation < ActiveRecord::Base
 
   scope :published, lambda {|website_id| with_authors_by_sur_name_and_pub_year.where("state = 'published'").where("website_id = ?",website_id)}
   scope :submitted, lambda {|website_id| with_authors_by_sur_name_and_pub_year.where("state = 'submitted'").where("website_id =?", website_id)}
-  scope :forthcoming, lambda {|website_id| with_authors_by_sur_name_and_pub_year.where("state = 'forthcomming'").where("website_id =?", website_id)}
+  scope :forthcoming, lambda {|website_id| with_authors_by_sur_name_and_pub_year.where("state = 'forthcoming'").where("website_id =?", website_id)}
   
   state_machine do
     state :submitted
