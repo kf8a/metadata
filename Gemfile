@@ -54,10 +54,8 @@ group :development, :test  do
 end
 
 group :test do
-  #if RUBY_VERSION > "1.9"
-    gem 'simplecov'
-    gem 'simplecov-html'
-  #end
+  gem 'simplecov'
+  gem 'simplecov-html'
   gem 'sqlite3-ruby'
 
   gem "shoulda"
@@ -81,4 +79,5 @@ end
 
 group :production do
   gem 'dalli'
+  gem 'memcache-client'
 end
