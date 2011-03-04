@@ -7,9 +7,8 @@ Feature: Browsing Citations
     Given the cache is clear
 
   Scenario: Going to the citation index to see citations
-    Given the following citation exists:
-      |pub_year|abstract         |id   |title          |
-      |1984    |"A nice abstract"|2488 |"Cool citation"|
+    Given a citation exists with pub_year: 1984, abstract: "A nice abstract", id: 2488, title: "Cool citation"
+      And an author exists with citation: the citation
       And I am signed in as a normal user
     When I go to the citations page
     Then I should see "1984"
@@ -19,10 +18,10 @@ Feature: Browsing Citations
       Then I should see "A nice abstract"
 
   Scenario: Searching the citations index
-    Given the following citations exist:
-      |pub_year|abstract         |id   |title          |
-      |1984    |"A nice abstract"|2488 |"Cool citation"|
-      |1981    |"An old abstract"|2489 |"Old citation" |
+    Given a citation exists with pub_year: 1984, abstract: "A nice abstract", id: 2488, title: "Cool citation"
+      And an author exists with citation: the citation
+      And a citation exists with pub_year: 1981, abstract: "An old abstract", id: 2489, title: "Old citation"
+      And an author exists with citation: the citation
       And I am signed in as a normal user
     When I go to the citations page
     Then I should see "1984"
@@ -38,10 +37,10 @@ Feature: Browsing Citations
       And I should not see "Cool citation"
 
   Scenario: Browsing by type
-    Given the following citations exist:
-      |pub_year|abstract         |id   |title          |type|
-      |1984    |"A nice abstract"|2488 |"Cool citation"|ArticleCitation|
-      |1981    |"An old abstract"|2489 |"Old citation" |BookCitation|
+    Given an article citation exists with pub_year: 1984, abstract: "A nice abstract", title: "Cool citation"
+      And an author exists with citation: the article citation
+      And a book citation exists with pub_year: 1981, abstract: "An old abstract", title: "Old citation"
+      And an author exists with citation: the book citation
       And I am signed in as a normal user
     When I go to the citations page
     Then I should see "1984"

@@ -6,13 +6,12 @@ class CitationsController < ApplicationController
     store_location
     website = Website.find_by_name(@subdomain_request)
     website_id = (website.try(:id) or 1)
-    @submitted_citations = Citation.submitted(website_id)
-    @forthcoming_citations = Citation.forthcoming(website_id)
-    @citations = Citation.published(website_id) 
+    @submitted_citations = Citation.submitted
+    @forthcoming_citations = Citation.forthcoming
     if params[:date]
-      @citations = Citation.by_date(params[:date]).sort
+      @citations = Citation.by_date(params[:date])
     else
-      @citations = Citation.published.sort
+      @citations = Citation.published
     end
     respond_to do |format|
       format.html

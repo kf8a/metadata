@@ -12,9 +12,10 @@ class CitationsControllerTest < ActionController::TestCase
         Citation.delete_all  #clear out other citations
         author1 = Factory.create(:author, :sur_name => 'Zebedee', :seniority => 1)
         author2 = Factory.create(:author, :sur_name => 'Alfred',  :seniority => 1)
-        @citation1 = Factory.create(:citation, 
+        website = Website.find_by_name("lter") || Factory.create(:website, :name => "lter")
+        @citation1 = Factory.create(:citation, :website => website,
           :authors => [author1], :title => 'citation1', :pub_year => 2010, :state => 'published')
-        @citation2 = Factory.create(:citation, 
+        @citation2 = Factory.create(:citation, :website => website,
           :authors => [author2], :title => 'citation2', :pub_year => 2010, :state => 'published')
         get :index
       end

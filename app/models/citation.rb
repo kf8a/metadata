@@ -27,24 +27,23 @@ class Citation < ActiveRecord::Base
   attr_protected :pdf_file_name, :pdf_content_type, :pdf_size
 
   scope :with_authors_by_sur_name_and_pub_year,
-          :joins=> 'left join authors on authors.citation_id = citations.id',
-          :conditions => "seniority = 1",
-          :order => 'pub_year desc, authors.sur_name' 
+      joins(:authors).where(:authors => {:seniority => 1}).
+      order('pub_year desc, authors.sur_name')
 
-  scope :published, lambda {|website_id| with_authors_by_sur_name_and_pub_year.where("state = 'published'").where("website_id = ?",website_id)}
-  scope :submitted, lambda {|website_id| with_authors_by_sur_name_and_pub_year.where("state = 'submitted'").where("website_id =?", website_id)}
-  scope :forthcoming, lambda {|website_id| with_authors_by_sur_name_and_pub_year.where("state = 'forthcoming'").where("website_id =?", website_id)}
+  scope :published, where(:state => 'published').with_authors_by_sur_name_and_pub_year
+  scope :submitted, where(:state => 'submitted').with_authors_by_sur_name_and_pub_year
+  scope :forthcoming, where(:state => 'forthcoming').with_authors_by_sur_name_and_pub_year
   
   state_machine do
     state :submitted
-    state :forthcomming
+    state :forthcoming
     state :published
 
     event :accept do
-      transitions :to => :forthcomming, :from => [:submitted, :published]
+      transitions :to => :forthcoming, :from => [:submitted, :published]
     end
     event :publish do
-      transitions :to => :published, :from => [:fothcomming, :submitted]
+      transitions :to => :published, :from => [:fothcoming, :submitted]
     end
   end
 
@@ -67,24 +66,11 @@ class Citation < ActiveRecord::Base
   end
 
   def Citation.sorted_by(sorter)
-    if sorter == "Title"
-      order('title').all
+    if sorter.downcase == "primary author and date(default)"
+      all
     else
-      all.sort
+      order(sorter.downcase).all
     end
-  end
-
-  def <=>(other)
-    auth = self.primary_author_sur_name <=> other.primary_author_sur_name
-    if [-1, 1].include?(auth)
-      auth
-    else
-      self.pub_date.try(:<=>, other.pub_date) || self.try(:title).to_s <=> other.try(:title).to_s
-    end
-  end
-
-  def primary_author_sur_name
-    self.authors ? self.authors.find_by_seniority(1).try(:sur_name).to_s : ""
   end
 
   def book?
