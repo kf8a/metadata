@@ -5,11 +5,14 @@ Feature: Browsing Citations
 
   Background: No cache
     Given the cache is clear
+      And a website exists with name: "lter"
 
   Scenario: Going to the citation index to see citations
-    Given a citation exists with pub_year: 1984, abstract: "A nice abstract", id: 2488, title: "Cool citation"
+    Given a citation exists with pub_year: 1984, abstract: "A nice abstract", id: 2488, title: "Cool citation", website: the website
       And an author exists with citation: the citation
       And I am signed in as a normal user
+    Then the website should have 1 citations
+
     When I go to the citations page
     Then I should see "1984"
       And I should see "Cool citation"
@@ -18,11 +21,13 @@ Feature: Browsing Citations
       Then I should see "A nice abstract"
 
   Scenario: Searching the citations index
-    Given a citation exists with pub_year: 1984, abstract: "A nice abstract", id: 2488, title: "Cool citation"
+    Given a citation exists with pub_year: 1984, abstract: "A nice abstract", id: 2488, title: "Cool citation", website: the website
       And an author exists with citation: the citation
-      And a citation exists with pub_year: 1981, abstract: "An old abstract", id: 2489, title: "Old citation"
+      And a citation exists with pub_year: 1981, abstract: "An old abstract", id: 2489, title: "Old citation", website: the website
       And an author exists with citation: the citation
       And I am signed in as a normal user
+    Then the website should have 2 citations
+
     When I go to the citations page
     Then I should see "1984"
       And I should see "Cool citation"
@@ -37,11 +42,13 @@ Feature: Browsing Citations
       And I should not see "Cool citation"
 
   Scenario: Browsing by type
-    Given an article citation exists with pub_year: 1984, abstract: "A nice abstract", title: "Cool citation"
+    Given an article citation exists with pub_year: 1984, abstract: "A nice abstract", title: "Cool citation", website: the website
       And an author exists with citation: the article citation
-      And a book citation exists with pub_year: 1981, abstract: "An old abstract", title: "Old citation"
+      And a book citation exists with pub_year: 1981, abstract: "An old abstract", title: "Old citation", website: the website
       And an author exists with citation: the book citation
       And I am signed in as a normal user
+    Then the website should have 2 citations
+
     When I go to the citations page
     Then I should see "1984"
       And I should see "Cool citation"

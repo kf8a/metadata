@@ -4,6 +4,7 @@ class CitationsControllerTest < ActionController::TestCase
 
   context 'anonymous user' do
     setup do
+      @website = Website.find_or_create_by_name('lter')
       @controller.current_user = nil
     end
 
@@ -156,6 +157,7 @@ class CitationsControllerTest < ActionController::TestCase
   context 'signed in user' do
 
     setup do
+      @website = Website.find_or_create_by_name('lter')
       @controller.current_user = Factory :user
     end
 
@@ -215,6 +217,7 @@ class CitationsControllerTest < ActionController::TestCase
   context 'signed in as admin' do
 
     setup do
+      @website = Website.find_or_create_by_name('lter')
       @controller.current_user = Factory.create :admin_user
     end
 

@@ -4,14 +4,13 @@ class CitationsController < ApplicationController
 
   def index
     store_location
-    website = Website.find_by_name(@subdomain_request)
-    website_id = (website.try(:id) or 1)
-    @submitted_citations = Citation.submitted
-    @forthcoming_citations = Citation.forthcoming
+    website = Website.find_by_name(@subdomain_request) || Website.first
+    @submitted_citations = website.citations.submitted
+    @forthcoming_citations = website.citations.forthcoming
     if params[:date]
-      @citations = Citation.by_date(params[:date])
+      @citations = website.citations.by_date(params[:date])
     else
-      @citations = Citation.published
+      @citations = website.citations.published
     end
     respond_to do |format|
       format.html
@@ -22,7 +21,9 @@ class CitationsController < ApplicationController
 
   def search
     @word, @type, @sort_by = params[:word], params[:type], params[:sort_by]
-    citations = Citation.where(:type => @type).presence || Citation
+    website = Website.find_by_name(@subdomain_request) || Website.first
+    citations = website.citations
+    citations = citations.where(:type => @type) if @type.present?
     citations = citations.by_word(@word) if @word.present?
     @submitted_citations = citations.submitted.sorted_by(@sort_by)
     @forthcoming_citations = citations.forthcoming.sorted_by(@sort_by)

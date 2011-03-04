@@ -3,6 +3,7 @@ class Website < ActiveRecord::Base
   has_many :templates
   has_and_belongs_to_many :protocols
   has_many :study_urls
+  has_many :citations
   
   validates_uniqueness_of :name
   validates_presence_of :name
