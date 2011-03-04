@@ -4,8 +4,11 @@ class CitationsController < ApplicationController
 
   def index
     store_location
-    @submitted_citations = Citation.submitted.sort
-    @forthcoming_citations = Citation.forthcoming.sort
+    website = Website.find_by_name(@subdomain_request)
+    website_id = (website.try(:id) or 1)
+    @submitted_citations = Citation.submitted(website_id)
+    @forthcoming_citations = Citation.forthcoming(website_id)
+    @citations = Citation.published(website_id) 
     if params[:date]
       @citations = Citation.by_date(params[:date]).sort
     else
