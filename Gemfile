@@ -79,5 +79,5 @@ end
 
 group :production do
   gem 'dalli'
-  gem 'memcached'
+  gem 'memcache-client'
 end

@@ -25,8 +25,8 @@ Metadata::Application.configure do
   # config.logger = SyslogLogger.new
 
   # Use a different cache store in production
-  config.cache_store = :mem_cache_store, "thetford.kbs.msu.edu", {:compress => :true}
-#  config.cache_store = :dalli_store, "thetford.kbs.msu.edu", {:compress => true, :compress_threshold => 64*1024}
+#  config.cache_store = :mem_cache_store, "thetford.kbs.msu.edu", {:compress => :true}
+  config.cache_store = :dalli_store, "thetford.kbs.msu.edu", {:compress => true, :compress_threshold => 64*1024}
 
 
   # Disable Rails's static asset server
