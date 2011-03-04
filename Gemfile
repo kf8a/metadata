@@ -75,4 +75,5 @@ end
 
 group :production do
   gem 'dalli'
+  gem 'memcache-client'
 end
