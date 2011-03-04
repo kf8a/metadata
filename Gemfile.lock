@@ -13,18 +13,24 @@ GIT
     awesome_nested_set (1.5.0)
       activerecord (>= 3.0.0)
 
+GIT
+  remote: https://github.com/kf8a/ruby-openid.git
+  revision: 34f17393dd1234d65d3787ddaa84aebbbd371649
+  specs:
+    ruby-openid (2.1.8)
+
 GEM
   remote: http://rubygems.org/
   specs:
     RedCloth (4.2.4)
     Saikuro (1.1.0)
     abstract (1.0.0)
-    actionmailer (3.0.4)
-      actionpack (= 3.0.4)
+    actionmailer (3.0.5)
+      actionpack (= 3.0.5)
       mail (~> 2.2.15)
-    actionpack (3.0.4)
-      activemodel (= 3.0.4)
-      activesupport (= 3.0.4)
+    actionpack (3.0.5)
+      activemodel (= 3.0.5)
+      activesupport (= 3.0.5)
       builder (~> 2.1.2)
       erubis (~> 2.6.6)
       i18n (~> 0.4)
@@ -32,19 +38,19 @@ GEM
       rack-mount (~> 0.6.13)
       rack-test (~> 0.5.7)
       tzinfo (~> 0.3.23)
-    activemodel (3.0.4)
-      activesupport (= 3.0.4)
+    activemodel (3.0.5)
+      activesupport (= 3.0.5)
       builder (~> 2.1.2)
       i18n (~> 0.4)
-    activerecord (3.0.4)
-      activemodel (= 3.0.4)
-      activesupport (= 3.0.4)
+    activerecord (3.0.5)
+      activemodel (= 3.0.5)
+      activesupport (= 3.0.5)
       arel (~> 2.0.2)
       tzinfo (~> 0.3.23)
-    activeresource (3.0.4)
-      activemodel (= 3.0.4)
-      activesupport (= 3.0.4)
-    activesupport (3.0.4)
+    activeresource (3.0.5)
+      activemodel (= 3.0.5)
+      activesupport (= 3.0.5)
+    activesupport (3.0.5)
     acts-as-taggable-on (2.0.6)
     arel (2.0.9)
     arrayfields (4.7.4)
@@ -71,8 +77,7 @@ GEM
     celerity (0.8.8)
     childprocess (0.1.7)
       ffi (~> 0.6.3)
-    chronic (0.2.3)
-      hoe (>= 1.2.1)
+    chronic (0.3.0)
     churn (0.0.13)
       chronic (>= 0.2.3)
       hirb
@@ -128,8 +133,6 @@ GEM
     haml (3.0.25)
     highline (1.6.1)
     hirb (0.4.0)
-    hoe (2.9.1)
-      rake (>= 0.8.7)
     i18n (0.5.0)
     jammit (0.6.0)
       closure-compiler (>= 0.1.0)
@@ -154,25 +157,25 @@ GEM
     main (4.4.0)
       arrayfields (>= 4.7.4)
       fattr (>= 2.1.0)
-    memcache-client (1.8.5)
-    metric_fu (2.0.1)
+    metric_fu (2.1.1)
       Saikuro (>= 1.1.0)
       activesupport (>= 2.0.0)
-      chronic (~> 0.2.3)
+      chronic (~> 0.3.0)
       churn (>= 0.0.7)
       flay (>= 1.2.1)
-      flog (>= 2.2.0)
-      rails_best_practices (>= 0.3.16)
+      flog (>= 2.3.0)
+      rails_best_practices (>= 0.6.4)
       rcov (>= 0.8.3.3)
       reek (>= 1.2.6)
       roodi (>= 2.1.0)
+      syntax
     mime-types (1.16)
     mutter (0.5.3)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
       net-ssh (>= 2.0.9)
-    net-ssh (2.1.0)
+    net-ssh (2.1.3)
     net-ssh-gateway (1.0.1)
       net-ssh (>= 1.99.1)
     newrelic_rpm (2.13.4)
@@ -196,14 +199,14 @@ GEM
       ruby-openid (>= 2.1.8)
     rack-test (0.5.7)
       rack (>= 1.0)
-    rails (3.0.4)
-      actionmailer (= 3.0.4)
-      actionpack (= 3.0.4)
-      activerecord (= 3.0.4)
-      activeresource (= 3.0.4)
-      activesupport (= 3.0.4)
+    rails (3.0.5)
+      actionmailer (= 3.0.5)
+      actionpack (= 3.0.5)
+      activerecord (= 3.0.5)
+      activeresource (= 3.0.5)
+      activesupport (= 3.0.5)
       bundler (~> 1.0)
-      railties (= 3.0.4)
+      railties (= 3.0.5)
     rails_best_practices (0.7.1)
       activesupport
       colored (~> 1.2)
@@ -212,9 +215,9 @@ GEM
       i18n
       ruby-progressbar (~> 0.0.9)
       ruby_parser (~> 2.0.4)
-    railties (3.0.4)
-      actionpack (= 3.0.4)
-      activesupport (= 3.0.4)
+    railties (3.0.5)
+      actionpack (= 3.0.5)
+      activesupport (= 3.0.5)
       rake (>= 0.8.7)
       thor (~> 0.14.4)
     rake (0.8.7)
@@ -230,7 +233,6 @@ GEM
     rspec-rails (1.3.2)
       rack (>= 1.0.0)
       rspec (>= 1.3.0)
-    ruby-openid (2.1.8)
     ruby-progressbar (0.0.9)
     ruby2ruby (1.2.5)
       ruby_parser (~> 2.0)
@@ -254,6 +256,7 @@ GEM
     sqlite3 (1.3.3)
     sqlite3-ruby (1.3.3)
       sqlite3 (>= 1.3.3)
+    syntax (1.0.0)
     term-ansicolor (1.0.5)
     thin (1.2.8)
       daemons (>= 1.0.9)
@@ -297,7 +300,6 @@ DEPENDENCIES
   launchy
   less
   liquid
-  memcache-client
   metric_fu
   newrelic_rpm
   nokogiri
@@ -306,9 +308,10 @@ DEPENDENCIES
   pickle
   rack-offline
   rack-openid
-  rails (= 3.0.4)
+  rails (= 3.0.5)
   rspec (= 1.3.0)
   rspec-rails
+  ruby-openid!
   shoulda
   silent-postgres
   simplecov
