@@ -57,6 +57,10 @@ class Citation < ActiveRecord::Base
     array_of_citations.collect {|x| x.as_endnote}.join("\n")
   end
 
+  def Citation.to_bib(array_of_citations)
+    array_of_citations.collect {|x| x.as_bibtex}.join("\n")
+  end
+
   def Citation.sorted_by(sorter)
     if sorter == "Title"
       order('title').all
@@ -84,6 +88,31 @@ class Citation < ActiveRecord::Base
 
   def formatted
     book? ? formatted_book : formatted_article
+  end
+
+  def as_bibtex
+    bibtex = "@misc{citation_#{id},\n"
+    bibtex += "abstract = {#{abstract}}" if abstract.present?
+    bibtex += 'author = {'
+    authors.collect { |author| "#{author.given_name} #{author.middle_name} #{author.sur_name}"}.join(' and ')
+    bibtex += '},\n'
+    bibtex += 'editor = {'
+    editors.collect { |editor| "#{editor.given_name} #{editor.middle_name} #{editor.sur_name}"}.join(' and ')
+    bibtex += '},\n'
+    bibtex += "title = {#{title}},\n" if title.present?
+    bibtex += "publisher = {#{publisher}},\n" if publisher.present?
+    bibtex += "year = {#{pub_year}},\n" if pub_year.present?
+    bibtex += "address = {#{address}},\n" if address.present?
+    bibtex += "note = {#{notes}},\n" if notes.present?
+    bibtex += "journal = {#{publication}},\n" if publication.present?
+    bibtex += "pages = {#{page_numbers}},\n" if page_numbers.present?
+    bibtex += "volume = {#{volume}},\n" if volume.present?
+    bibtex += "number = {#{issue}},\n" if issue.present?
+    bibtex += "series = {#{series_title}},\n" if series_title.present?
+    bibtex += "ISBN = {#{isbn}},\n" if isbn.present?
+    bibtex += "}"
+    
+    bibtex
   end
 
   def as_endnote

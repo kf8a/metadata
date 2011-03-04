@@ -13,9 +13,8 @@ class CitationsController < ApplicationController
     end
     respond_to do |format|
       format.html
-      format.enw do
-        send_data Citation.to_enw(@citations), :filename=>'glbrc.enw'
-      end
+      format.enw { send_data Citation.to_enw(@citations), :filename=>'glbrc.enw' }
+      format.bib { send_data Citation.to_bib(@citations), :filename=>'glbrc.bib' }
     end
   end
 
@@ -32,9 +31,8 @@ class CitationsController < ApplicationController
     end
     respond_to do |format|
       format.html
-      format.enw do
-        send_data Citation.to_enw(@citations), :filename=>'glbrc.enw'
-      end
+      format.enw { send_data Citation.to_enw(@citations), :filename=>'glbrc.enw' }
+      format.bib { send_data Citation.to_bib(@citations), :filename=>'glbrc.bib' }
     end
   end
 
