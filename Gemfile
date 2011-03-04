@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.4'
+gem 'rails', '3.0.5'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -8,6 +8,7 @@ gem 'rails', '3.0.4'
 gem 'capistrano'
 gem 'newrelic_rpm'
 gem 'pg'
+gem 'ruby-openid', :git => 'https://github.com/kf8a/ruby-openid.git'
 gem 'rack-openid'
 gem 'acts-as-taggable-on'
 gem 'paperclip'
@@ -46,6 +47,8 @@ gem 'vestal_versions', :git => 'git://github.com/adamcooper/vestal_versions'
 # offile manifest
 gem 'rack-offline'
 
+gem 'dalli'
+
 group :development, :test  do
   # bundler requires these gems in development
   # gem "rails-footnotes"
@@ -75,9 +78,4 @@ group :test do
   gem 'launchy'
   gem 'database_cleaner'
   gem 'pickle'
-end
-
-group :production do
-  gem 'dalli'
-  gem 'memcache-client'
 end

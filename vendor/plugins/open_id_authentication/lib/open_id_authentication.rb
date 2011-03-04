@@ -30,6 +30,10 @@ module OpenIdAuthentication
       require 'memcache'
       require 'openid/store/memcache'
       OpenID::Store::Memcache.new(MemCache.new(parameters))
+    when :dalli_store
+      require 'dalli'
+      require 'openid/store/memcache'
+      OpenID::Store::Memcache.new(Dalli::Client.new(parameters))
     else
       store
     end
