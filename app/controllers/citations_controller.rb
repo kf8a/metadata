@@ -14,15 +14,15 @@ class CitationsController < ApplicationController
     respond_to do |format|
       format.html
       format.enw do
-        send_data @citations.collect {|x| x.as_endnote}.join("\n"), :filename=>'glbrc.enw'
+        send_data Citation.to_enw(@citations), :filename=>'glbrc.enw'
       end
     end
   end
 
   def search
     @word, @type = params[:word], params[:type]
-    citations = @type.blank? ? Citation : Citation.where(:type => @type)
-    citations = citations.by_word(@word) unless @word.blank?
+    citations = Citation.where(:type => @type).presence || Citation
+    citations = citations.by_word(@word) if @word.present?
     @submitted_citations = citations.submitted.sort
     @forthcoming_citations = citations.forthcoming.sort
     if params[:date]
@@ -33,7 +33,7 @@ class CitationsController < ApplicationController
     respond_to do |format|
       format.html
       format.enw do
-        send_data @citations.collect {|x| x.as_endnote}.join("\n"), :filename=>'glbrc.enw'
+        send_data Citation.to_enw(@citations), :filename=>'glbrc.enw'
       end
     end
   end

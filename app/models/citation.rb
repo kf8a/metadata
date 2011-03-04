@@ -45,12 +45,16 @@ class Citation < ActiveRecord::Base
 
   def Citation.by_date(date)
     query_date = Date.civil(date['year'].to_i,date['month'].to_i,date['day'].to_i)
-    where('updated_at > ?', query_date).all
+    where('updated_at > ?', query_date)
   end
 
   def Citation.by_word(word)
     word = '%'+word+'%'
     where(%q{((lower(title) like lower(?)) or (lower(abstract) like lower(?)))}, word, word)
+  end
+
+  def Citation.to_enw(array_of_citations)
+    array_of_citations.collect {|x| x.as_endnote}.join("\n")
   end
 
   def <=>(other)
