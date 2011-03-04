@@ -3,9 +3,11 @@ class CitationsController < ApplicationController
 
   def index
     store_location
-    @submitted_citations = Citation.submitted_with_authors_by_sur_name_and_pub_year
-    @forthcoming_citations = Citation.forthcoming_with_authors_by_sur_name_and_pub_year
-    @citations = Citation.published_with_authors_by_sur_name_and_pub_year
+    website = Website.find_by_name(@subdomain_request)
+    website_id = (website.try(:id) or 1)
+    @submitted_citations = Citation.submitted(website_id)
+    @forthcoming_citations = Citation.forthcoming(website_id)
+    @citations = Citation.published(website_id) 
     if params[:date]
        date = params[:date]
        query_date = Date.civil(date['year'].to_i,date['month'].to_i,date['day'].to_i)
