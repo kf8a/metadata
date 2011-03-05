@@ -76,7 +76,7 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'a citation object with multiple authors' do
     setup do
-      @citation = Factory :article_citation
+      @citation = ArticleCitation.new
       @citation.authors << Author.new( :sur_name => 'Loecke',
                                        :given_name => 'T', :middle_name => 'D',
                                        :seniority => 1)
@@ -92,6 +92,7 @@ class CitationTest < ActiveSupport::TestCase
       @citation.ending_page_number = 241
       @citation.pub_year = 2008
       @citation.abstract = 'An abstract of the article.'
+      @citation.save
     end
 
     should 'be formatted as default' do
@@ -115,7 +116,7 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'formatting a book citation' do
     setup do
-      @citation = Factory :book_citation
+      @citation = BookCitation.new
 
       @citation.authors << Author.new(:sur_name => 'Robertson',
                                       :given_name => 'G', :middle_name => 'P',
@@ -142,6 +143,7 @@ class CitationTest < ActiveSupport::TestCase
      @citation.publication = 'Biological Approaches to Sustainable Soil Systems'
      @citation.publisher = 'CRC Press, Taylor and Francis Group'
      @citation.address = 'Boca Raton, Florida, USA'
+     @citation.save
     end
 
     should 'be formatted correctly' do
@@ -169,7 +171,7 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'formatting a submitted citation' do
     setup do
-      @citation = Factory :citation
+      @citation = Citation.new
       @citation.authors << Author.new(:sur_name => 'Kaufman',
                                       :given_name => 'A',
                                       :middle_name => 'S',
@@ -177,6 +179,7 @@ class CitationTest < ActiveSupport::TestCase
       @citation.title = 'Implications of LCA accounting methods in a corn and corn stover to ethanol system'
       @citation.pub_year = 2009
       @citation.volume = ''
+      @citation.save
     end
 
     should 'be formatted correctly' do
@@ -198,7 +201,7 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'a citation object with no ending page number' do
     setup do
-      @citation = Factory :article_citation
+      @citation = ArticleCitation.new
       @citation.authors << Author.new( :sur_name => 'Loecke',
                                        :given_name => 'T', :middle_name => 'D',
                                        :seniority => 1)
@@ -214,6 +217,7 @@ class CitationTest < ActiveSupport::TestCase
       @citation.ending_page_number = nil
       @citation.pub_year = 2008
       @citation.abstract = 'An abstract of the article.'
+      @citation.save
     end
 
     should 'be formatted correctly' do
@@ -224,7 +228,7 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'a citation object with no start page' do
     setup do
-      @citation = Factory :article_citation
+      @citation = ArticleCitation.new
       @citation.authors << Author.new( :sur_name => 'Loecke',
                                        :given_name => 'T', :middle_name => 'D',
                                        :seniority => 1)
@@ -240,6 +244,7 @@ class CitationTest < ActiveSupport::TestCase
       @citation.ending_page_number = nil
       @citation.pub_year = 2008
       @citation.abstract = 'An abstract of the article.'
+      @citation.save
     end
 
     should 'be formatted correctly' do
@@ -250,7 +255,7 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'a citation object with two editors' do
     setup do
-      @citation = Factory :book_citation
+      @citation = BookCitation.new
       @citation.authors << Author.new(:sur_name => 'Robertson',
                                       :given_name => 'G', :middle_name => 'P',
                                       :seniority => 1)
@@ -273,6 +278,7 @@ class CitationTest < ActiveSupport::TestCase
       @citation.publication = 'Biological Approaches to Sustainable Soil Systems'
       @citation.publisher = 'CRC Press, Taylor and Francis Group'
       @citation.address = 'Boca Raton, Florida, USA'
+      @citation.save
     end
 
     should 'be formatted correctly' do

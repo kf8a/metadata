@@ -24,6 +24,10 @@ class Citation < ActiveRecord::Base
         :path => ":rails_root/assets/citations/:attachment/:id/:style/:basename.:extension"
   end
 
+  define_index do
+    indexes title
+  end
+
   attr_protected :pdf_file_name, :pdf_content_type, :pdf_size
 
   scope :with_authors_by_sur_name_and_pub_year,
@@ -43,18 +47,13 @@ class Citation < ActiveRecord::Base
       transitions :to => :forthcoming, :from => [:submitted, :published]
     end
     event :publish do
-      transitions :to => :published, :from => [:fothcoming, :submitted]
+      transitions :to => :published, :from => [:forthcoming, :submitted]
     end
   end
 
   def Citation.by_date(date)
     query_date = Date.civil(date['year'].to_i,date['month'].to_i,date['day'].to_i)
     where('updated_at > ?', query_date)
-  end
-
-  def Citation.by_word(word)
-    word = '%'+word+'%'
-    where(%q{((lower(title) like lower(?)) or (lower(abstract) like lower(?)))}, word, word)
   end
 
   def Citation.to_enw(array_of_citations)

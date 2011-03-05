@@ -20,11 +20,21 @@ class CitationsController < ApplicationController
   end
 
   def search
+    @word = params[:word]
+    website = Website.find_by_name(@subdomain_request) || Website.first
+    @citations = Citation.search @word, :with => { :website_id => website.id }
+    respond_to do |format|
+      format.html
+      format.enw { send_data Citation.to_enw(@citations), :filename=>'glbrc.enw' }
+      format.bib { send_data Citation.to_bib(@citations), :filename=>'glbrc.bib' }
+    end
+  end
+
+  def filtered
     @word, @type, @sort_by = params[:word], params[:type], params[:sort_by]
     website = Website.find_by_name(@subdomain_request) || Website.first
     citations = website.citations
     citations = citations.where(:type => @type) if @type.present?
-    citations = citations.by_word(@word) if @word.present?
     @submitted_citations = citations.submitted.sorted_by(@sort_by)
     @forthcoming_citations = citations.forthcoming.sorted_by(@sort_by)
     if params[:date]

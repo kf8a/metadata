@@ -17,6 +17,7 @@ Metadata::Application.routes.draw do
     collection do
       get :biblio
       get :search
+      get :filtered
     end
   end
 
