@@ -57,7 +57,7 @@ class Citation < ActiveRecord::Base
   end
 
   def as_endnote
-    endnote = "\n%0 "
+    endnote = "%0 "
     case citation_type.try(:name)
     when 'book' then 
       endnote += "Book Section\n"
@@ -83,6 +83,7 @@ class Citation < ActiveRecord::Base
     endnote += "%@ #{start_page_number}-#{ending_page_number}\n" if start_page_number
     endnote += "%D #{pub_year}" if pub_year
     endnote += "\n%X #{abstract}" if abstract
+    endnote += "\n%R #{doi}" if doi
     endnote
   end
 
