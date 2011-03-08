@@ -16,7 +16,7 @@ class CitationsController < ApplicationController
     respond_to do |format|
       format.html 
       format.enw do
-        send_data @citations.collect {|x| x.as_endnote}.join("\n\n"), :filename=>'glbrc.enw'
+        send_data @citations.collect {|x| x.as_endnote}.join("\r\n\r\n"), :filename=>'glbrc.enw'
       end
     end
   end
