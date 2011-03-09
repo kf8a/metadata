@@ -84,6 +84,8 @@ class Citation < ActiveRecord::Base
     endnote += "%D #{pub_year}" if pub_year
     endnote += "\n%X #{abstract}" if abstract
     endnote += "\n%R #{doi}" if doi
+    endnote += "\n%U #{publisher_url}" if publisher_url
+    endnote += "\n%@ #{isbn}" if isbn
     endnote
   end
 
