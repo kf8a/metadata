@@ -57,7 +57,7 @@ class Citation < ActiveRecord::Base
   end
 
   def Citation.to_enw(array_of_citations)
-    array_of_citations.collect {|x| x.as_endnote}.join("\n")
+    array_of_citations.collect {|x| x.as_endnote}.join("\r\n\r\n")
   end
 
   def Citation.to_bib(array_of_citations)
@@ -118,10 +118,13 @@ class Citation < ActiveRecord::Base
     else
       endnote += "%J #{publication}\n" unless publication.blank?
     end
-    endnote += "%V #{volume}\n" unless volume.blank?
-    endnote += "%@ #{page_numbers}\n" unless page_numbers.blank?
-    endnote += "%D #{pub_year}" unless pub_year.blank?
-    endnote += "\n%X #{abstract}" unless abstract.blank?
+    endnote += "%V #{volume}\n" unless volume.try(:empty?)
+    endnote += "%P #{start_page_number}-#{ending_page_number}\n" if start_page_number
+    endnote += "%D #{pub_year}" if pub_year
+    endnote += "\n%X #{abstract}" if abstract
+    endnote += "\n%R #{doi}" if doi
+    endnote += "\n%U #{publisher_url}" if publisher_url
+    endnote += "\n%@ #{isbn}" if isbn
     endnote
   end
 

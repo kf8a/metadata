@@ -66,9 +66,21 @@ class CitationsController < ApplicationController
 
   def create
     @citation = Citation.new(params[:citation])
-    if @citation.save
-      expire_action :action => :index
-      flash[:notice] = 'Citation was successfully created.'
+    #TODO replace this with the real website id
+    @citation.website_id=2
+
+    respond_to do |format|
+      if @citation.save
+        expire_action :action => :index
+        flash[:notice] = 'Citation was successfully created.'
+        format.html { redirect_to citation_url(@citation) }
+        format.xml  { head :created, :location => citation_url(@citation) }
+        format.json { head :created, :location => citation_url(@citation)}
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @citation.errors.to_xml }
+        format.json { render :json => @citation.errors.to_json }
+      end
     end
 
     respond_with @citation
