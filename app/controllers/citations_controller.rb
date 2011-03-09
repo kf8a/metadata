@@ -42,6 +42,8 @@ class CitationsController < ApplicationController
     head(:forbidden) and return unless signed_in? and current_user.role == 'admin'
 
     @citation = Citation.new(params[:citation])
+    #TODO replace this with the real website id
+    @citation.website_id=2
 
     respond_to do |format|
       if @citation.save
