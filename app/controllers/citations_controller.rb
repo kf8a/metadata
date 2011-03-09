@@ -16,7 +16,7 @@ class CitationsController < ApplicationController
     respond_to do |format|
       format.html 
       format.enw do
-        send_data @citations.collect {|x| x.as_endnote}.join("\n"), :filename=>'glbrc.enw'
+        send_data @citations.collect {|x| x.as_endnote}.join("\r\n\r\n"), :filename=>'glbrc.enw'
       end
     end
   end
@@ -42,6 +42,8 @@ class CitationsController < ApplicationController
     head(:forbidden) and return unless signed_in? and current_user.role == 'admin'
 
     @citation = Citation.new(params[:citation])
+    #TODO replace this with the real website id
+    @citation.website_id=2
 
     respond_to do |format|
       if @citation.save

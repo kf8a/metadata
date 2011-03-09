@@ -80,9 +80,12 @@ class Citation < ActiveRecord::Base
       endnote += "%J #{publication}\n" if publication
     end
     endnote += "%V #{volume}\n" unless volume.try(:empty?)
-    endnote += "%@ #{start_page_number}-#{ending_page_number}\n" if start_page_number
+    endnote += "%P #{start_page_number}-#{ending_page_number}\n" if start_page_number
     endnote += "%D #{pub_year}" if pub_year
     endnote += "\n%X #{abstract}" if abstract
+    endnote += "\n%R #{doi}" if doi
+    endnote += "\n%U #{publisher_url}" if publisher_url
+    endnote += "\n%@ #{isbn}" if isbn
     endnote
   end
 
