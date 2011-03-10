@@ -16,4 +16,10 @@ class ArticleCitation < Citation
   def formatted
     "#{author_and_year}. #{title}. #{publication} #{volume_and_page}".rstrip
   end
+
+  private
+
+  def bibtex_type
+    :article
+  end
 end

@@ -87,7 +87,7 @@ class Citation < ActiveRecord::Base
 
   def as_bibtex
     entry = BibTeX::Entry.new
-    entry.type = :misc
+    entry.type = bibtex_type
     entry.key = "citation_#{id}"
     entry[:abstract] = abstract if abstract.present?
     entry[:author] = authors.collect { |author| "#{author.given_name} #{author.middle_name} #{author.sur_name}"}.join(' and ')
@@ -131,6 +131,10 @@ class Citation < ActiveRecord::Base
   end
 
   private
+
+  def bibtex_type
+    :misc
+  end
 
   def formatted_article
     "#{author_and_year}. #{title}. #{publication} #{volume_and_page}".rstrip

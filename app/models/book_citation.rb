@@ -18,4 +18,10 @@ class BookCitation < Citation
   def formatted
     "#{author_and_year}. #{title}. #{page_numbers_book}#{editor_string}. #{publication}. #{publisher}, #{address}."
   end
+
+  private
+
+  def bibtex_type
+    :book
+  end
 end

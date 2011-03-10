@@ -138,6 +138,10 @@ class CitationTest < ActiveSupport::TestCase
       should 'have right abstract' do
         assert_equal 'An abstract of the article.', @entry.abstract
       end
+
+      should 'have right type' do
+        assert_equal :article, @entry.type
+      end
     end
   end
 
@@ -332,6 +336,10 @@ class CitationTest < ActiveSupport::TestCase
 
       should 'have right authors' do
         assert_equal 'G P Robertson and A S Grandy', @entry.author
+      end
+
+      should 'have the right type' do
+        assert_equal :book, @entry.type
       end
     end
 
