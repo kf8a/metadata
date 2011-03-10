@@ -94,11 +94,7 @@ class CitationsController < ApplicationController
 
   def download
     head(:not_found) and return unless (citation = Citation.find_by_id(params[:id]))
-    unless citation.open_access
-      unless signed_in? 
-        deny_access and return
-      end
-    end
+    deny_access and return unless citation.open_access || signed_in?
 
     path = citation.pdf.path(params[:style])
     if Rails.env.production? 
@@ -112,11 +108,8 @@ class CitationsController < ApplicationController
   end
 
   def bibliography
-    if params[:date]
-      @citations = Citation.by_date(params[:date])
-    else
-      @citations = Citation.all
-    end
+    date = params[:date].presence
+    @citations = date ? Citation.by_date(date) : Citation.all
   end
 
   def destroy
