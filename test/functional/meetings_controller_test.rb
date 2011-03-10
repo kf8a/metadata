@@ -9,6 +9,9 @@ class MeetingsControllerTest < ActionController::TestCase
 
     #TODO test with admin and non admin users
     @controller.current_user = Factory.create :admin_user
+    @venue_type = Factory :venue_type
+    @meeting = Factory :meeting
+    @meeting.venue_type = @venue_type
   end
 
   def teardown
@@ -20,7 +23,6 @@ class MeetingsControllerTest < ActionController::TestCase
       get :index
     end
 
-    should assign_to :venue
     should assign_to :meetings
     should assign_to :title
     should render_template :index

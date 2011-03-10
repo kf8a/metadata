@@ -7,6 +7,8 @@ class CitationTest < ActiveSupport::TestCase
   
   should have_attached_file(:pdf)
 
+  should respond_to?('open_access')
+
   context 'a citation object with a single author' do
     setup do
       @citation = Factory :citation
@@ -68,7 +70,7 @@ class CitationTest < ActiveSupport::TestCase
 %A Robertson, G. P.
 %J Plant and Soil
 %V 325
-%@ 231-241
+%P 231-241
 %D 2008"
     assert_equal result, @citation.as_endnote
     end
@@ -122,7 +124,7 @@ class CitationTest < ActiveSupport::TestCase
 %I CRC Press, Taylor and Francis Group
 %C Boca Raton, Florida, USA
 %V 
-%@ 27-39
+%P 27-39
 %D 2006"
 
       assert_equal result, @citation.as_endnote

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110126223229) do
+ActiveRecord::Schema.define(:version => 20110310133802) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -23,6 +23,9 @@ ActiveRecord::Schema.define(:version => 20110126223229) do
   add_index "affiliations", ["dataset_id"], :name => "index_affiliations_on_dataset_id"
   add_index "affiliations", ["person_id"], :name => "index_affiliations_on_person_id"
   add_index "affiliations", ["role_id"], :name => "index_affiliations_on_role_id"
+
+# Could not dump table "areas" because of following StandardError
+#   Unknown type 'geometry' for column 'the_geom'
 
   create_table "authors", :force => true do |t|
     t.string   "sur_name"
@@ -76,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20110126223229) do
     t.integer  "pdf_file_size"
     t.datetime "pdf_updated_at"
     t.string   "state"
+    t.boolean  "open_access",             :default => false
   end
 
   add_index "citations", ["citation_type_id"], :name => "index_citations_on_citation_type_id"
@@ -136,7 +140,7 @@ ActiveRecord::Schema.define(:version => 20110126223229) do
     t.date     "completed"
     t.date     "released"
     t.boolean  "on_web",       :default => true
-    t.integer  "version"
+    t.integer  "version",      :default => 1
     t.boolean  "core_dataset", :default => false
     t.integer  "project_id"
     t.integer  "metacat_id"
@@ -277,12 +281,8 @@ ActiveRecord::Schema.define(:version => 20110126223229) do
   add_index "invites", ["id", "email"], :name => "index_invites_on_id_and_email"
   add_index "invites", ["id", "invite_code"], :name => "index_invites_on_id_and_invite_code"
 
-  create_table "locations", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+# Could not dump table "locations" because of following StandardError
+#   Unknown type 'geometry' for column 'the_geom'
 
   create_table "log_hiresyieldmanagement", :id => false, :force => true do |t|
     t.date    "obsdate"
@@ -428,17 +428,6 @@ ActiveRecord::Schema.define(:version => 20110126223229) do
   add_index "permissions", ["datatable_id"], :name => "index_permissions_on_datatable_id"
   add_index "permissions", ["owner_id"], :name => "index_permissions_on_owner_id"
   add_index "permissions", ["user_id"], :name => "index_permissions_on_user_id"
-
-  create_table "plots", :force => true do |t|
-    t.string  "name"
-    t.integer "treatment_id"
-    t.integer "replicate"
-    t.integer "study_id"
-    t.string  "description"
-  end
-
-  add_index "plots", ["study_id"], :name => "index_plots_on_study_id"
-  add_index "plots", ["treatment_id"], :name => "index_plots_on_treatment_id"
 
   create_table "projects", :force => true do |t|
     t.string   "title"
@@ -656,12 +645,13 @@ ActiveRecord::Schema.define(:version => 20110126223229) do
   create_table "units", :force => true do |t|
     t.string  "name"
     t.text    "description"
-    t.boolean "in_eml",                 :default => false
+    t.boolean "in_eml",                                :default => false
     t.text    "definition"
     t.integer "deprecated_in_favor_of"
     t.string  "unit_type"
     t.string  "parent_si"
     t.float   "multiplier_to_si"
+    t.string  "abbreviation",           :limit => nil
   end
 
   add_index "units", ["name"], :name => "unit_names_key", :unique => true

@@ -25,8 +25,8 @@ class CitationsControllerTest < ActionController::TestCase
       should render_with_layout 'lter'
 
       should 'return the citations in alphabetical order' do
-        citations = assigns(:citations)
-        assert_equal 2, citations.size
+#        citations = assigns(:citations)
+        assert_equal 2, assigns(:citations).size
  
         assert_equal @citation2, citations[0]
         assert_equal @citation1,  citations[1] 
@@ -83,6 +83,17 @@ class CitationsControllerTest < ActionController::TestCase
       end
 
       should redirect_to('the sign in page') { sign_in_url }
+    end
+
+    context 'GET: download an open access publication' do
+      setup do
+        @citation= Factory :citation
+        @citation.open_access = true
+
+        get :download, :id => @citation
+      end
+
+      should respond_with :redirect
     end
 
     context 'GET :show' do

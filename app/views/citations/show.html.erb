@@ -13,7 +13,7 @@ Download citation to
 <%= link_to 'endnote', citation_path(@citation, :format=>'enw') %>
 </p>
 <% if @citation.pdf.exists? %>
-  <% if signed_in? %>
+  <% if signed_in? or @citation.open_access %>
     <%=link_to 'Get PDF', download_citation_path(@citation), :class=>'download-link'%>
   <% else %>
     <%= link_to 'Sign in to download PDF', sign_in_path, :class=>'download-link'  %>
