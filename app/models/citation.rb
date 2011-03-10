@@ -63,7 +63,10 @@ class Citation < ActiveRecord::Base
   end
 
   def Citation.to_bib(array_of_citations)
-    array_of_citations.collect {|x| x.as_bibtex}.join("\n")
+    bib = BibTeX::Bibliography.new
+    array_of_citations.each {|x| bib << x.as_bibtex}
+
+    bib.to_s
   end
 
   def Citation.sorted_by(sorter)
