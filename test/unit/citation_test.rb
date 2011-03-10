@@ -19,9 +19,10 @@ class CitationTest < ActiveSupport::TestCase
       @newcitation.save
     end
 
-    should 'give the right ones with Citation.by_date(date)' do
+    should 'Citation.by_date(date) should only include citations after date' do
       date = {'year' => '2001', 'month' => '10', 'day' => '21'}
-      assert_equal [@newcitation], Citation.by_date(date)
+      assert Citation.by_date(date).include?(@newcitation)
+      assert !Citation.by_date(date).include?(@oldcitation)
     end
   end
 
