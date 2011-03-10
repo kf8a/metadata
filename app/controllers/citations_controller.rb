@@ -106,7 +106,7 @@ class CitationsController < ApplicationController
     end
 
     path = citation.pdf.path(params[:style])
-    if Rails.env.production? and signed_in?
+    if Rails.env.production? 
       redirect_to(AWS::S3::S3Object.url_for(path, citation.pdf.bucket_name, :expires_in => 10.seconds))
     else
       send_file  path, :type => 'application/pdf', :disposition => 'inline'
