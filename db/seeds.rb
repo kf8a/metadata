@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+
+VenueType.find_or_create_by_name('local')
+VenueType.find_or_create_by_name('national')
+VenueType.find_or_create_by_name('other')

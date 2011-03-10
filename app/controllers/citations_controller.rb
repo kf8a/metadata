@@ -82,8 +82,6 @@ class CitationsController < ApplicationController
         format.json { render :json => @citation.errors.to_json }
       end
     end
-
-    respond_with @citation
   end
 
   def edit

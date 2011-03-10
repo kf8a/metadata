@@ -7,8 +7,10 @@ ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'rails/test_help'
 require 'shoulda'
-require 'factory_girl' 
+require 'factory_girl'
 require Rails.root.join('test', 'shoulda_macros', 'paperclip')
+
+require "#{Rails.root}/db/seeds.rb"
 
 class ActiveSupport::TestCase
   # Transactional fixtures accelerate your tests by wrapping each test method
@@ -44,7 +46,7 @@ class ActiveSupport::TestCase
     end
 
     should "have a paperclip attachment named ##{attachment}" do
-      assert klass.new.respond_to?(attachment.to_sym), 
+      assert klass.new.respond_to?(attachment.to_sym),
       "@#{klass.name.underscore} doesn't have a paperclip field named #{attachment}"
       assert_equal Paperclip::Attachment, klass.new.send(attachment.to_sym).class
     end
@@ -58,7 +60,7 @@ class ActiveSupport::TestCase
         assert klass.new.respond_to?("#{association}_attributes="), "#{klass} does not accept nested attributes for association: #{association}"
       end
     end
-  end    
+  end
 
   # from http://github.com/maxim/shmacros
   # def self.should_validate_associated(*associations)
@@ -76,6 +78,3 @@ unless defined?(Test::Unit::AssertionFailedError)
   class Test::Unit::AssertionFailedError < ActiveSupport::TestCase::Assertion
   end
 end
-
-
-

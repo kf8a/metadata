@@ -1,7 +1,6 @@
-require File.expand_path('../../test_helper',__FILE__) 
+require File.expand_path('../../test_helper',__FILE__)
 
 class DatatablesVariatesTest < ActiveSupport::TestCase
-  fixtures :datatables_variates
 
   # Replace this with your real tests.
   def test_truth
