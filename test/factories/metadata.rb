@@ -147,7 +147,7 @@ Factory.define :public_datatable, :parent => :datatable do |datatable|
 end
 
 Factory.define :meeting do |m|
-  m.venue_type_id    1
+  m.association :venue_type
 end
 
 Factory.define :abstract do |a|
