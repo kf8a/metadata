@@ -52,6 +52,7 @@ group :development, :test  do
 end
 
 group :test do
+  gem 'bibtex-ruby'
   gem 'simplecov'
   gem 'simplecov-html'
   gem 'sqlite3-ruby'

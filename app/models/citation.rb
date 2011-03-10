@@ -1,3 +1,5 @@
+require 'bibtex'
+
 class Citation < ActiveRecord::Base
   include ActiveRecord::Transitions
 
@@ -37,7 +39,7 @@ class Citation < ActiveRecord::Base
   scope :published, where(:state => 'published').with_authors_by_sur_name_and_pub_year
   scope :submitted, where(:state => 'submitted').with_authors_by_sur_name_and_pub_year
   scope :forthcoming, where(:state => 'forthcoming').with_authors_by_sur_name_and_pub_year
-  
+
   state_machine do
     state :submitted
     state :forthcoming
@@ -81,28 +83,25 @@ class Citation < ActiveRecord::Base
   end
 
   def as_bibtex
-    bibtex = "@misc{citation_#{id},\n"
-    bibtex += "abstract = {#{abstract}}" if abstract.present?
-    bibtex += 'author = {'
-    authors.collect { |author| "#{author.given_name} #{author.middle_name} #{author.sur_name}"}.join(' and ')
-    bibtex += '},\n'
-    bibtex += 'editor = {'
-    editors.collect { |editor| "#{editor.given_name} #{editor.middle_name} #{editor.sur_name}"}.join(' and ')
-    bibtex += '},\n'
-    bibtex += "title = {#{title}},\n" if title.present?
-    bibtex += "publisher = {#{publisher}},\n" if publisher.present?
-    bibtex += "year = {#{pub_year}},\n" if pub_year.present?
-    bibtex += "address = {#{address}},\n" if address.present?
-    bibtex += "note = {#{notes}},\n" if notes.present?
-    bibtex += "journal = {#{publication}},\n" if publication.present?
-    bibtex += "pages = {#{page_numbers}},\n" if page_numbers.present?
-    bibtex += "volume = {#{volume}},\n" if volume.present?
-    bibtex += "number = {#{issue}},\n" if issue.present?
-    bibtex += "series = {#{series_title}},\n" if series_title.present?
-    bibtex += "ISBN = {#{isbn}},\n" if isbn.present?
-    bibtex += "}"
-    
-    bibtex
+    entry = BibTeX::Entry.new
+    entry.type = :misc
+    entry.key = "citation_#{id}"
+    entry[:abstract] = abstract if abstract.present?
+    entry[:author] = authors.collect { |author| "#{author.given_name} #{author.middle_name} #{author.sur_name}"}.join(' and ')
+    entry[:editor] = editors.collect { |editor| "#{editor.given_name} #{editor.middle_name} #{editor.sur_name}"}.join(' and ')
+    entry[:title] = title if title.present?
+    entry[:publisher] = publisher if publisher.present?
+    entry[:year] = pub_year.to_s if pub_year.present?
+    entry[:address] = address if address.present?
+    entry[:note] = notes if notes.present?
+    entry[:journal] = publication if publication.present?
+    entry[:pages] = page_numbers if page_numbers.present?
+    entry[:volume] = volume if volume.present?
+    entry[:number] = issue if issue.present?
+    entry[:series] = series_title if series_title.present?
+    entry[:isbn] = isbn if isbn.present?
+
+    entry
   end
 
   def as_endnote

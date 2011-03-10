@@ -58,6 +58,7 @@ GEM
       builder
       mime-types
       xml-simple
+    bibtex-ruby (1.2.0)
     builder (2.1.2)
     capistrano (2.5.19)
       highline
@@ -284,6 +285,7 @@ DEPENDENCIES
   acts-as-taggable-on
   awesome_nested_set!
   aws-s3
+  bibtex-ruby
   capistrano
   capybara
   clearance

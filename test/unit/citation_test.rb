@@ -1,4 +1,5 @@
 require File.expand_path('../../test_helper',__FILE__)
+require 'bibtex'
 
 class CitationTest < ActiveSupport::TestCase
   should have_many :authors
@@ -111,6 +112,32 @@ class CitationTest < ActiveSupport::TestCase
 %D 2008
 %X An abstract of the article."
     assert_equal result, @citation.as_endnote
+    end
+
+    context 'as bibtex' do
+      setup do
+        @entry = @citation.as_bibtex
+      end
+
+      should 'be a bibtex entry' do
+        assert_equal @entry.class, BibTeX::Entry
+      end
+
+      should 'have right title' do
+        assert_equal 'Soil resource heterogeneity in the form of aggregated litter alters maize productivity', @entry.title
+      end
+
+      should 'have right publication year' do
+        assert_equal '2008', @entry.year
+      end
+
+      should 'have right authors' do
+        assert_equal 'T D Loecke and G P Robertson', @entry.author
+      end
+
+      should 'have right abstract' do
+        assert_equal 'An abstract of the article.', @entry.abstract
+      end
     end
   end
 
@@ -284,6 +311,28 @@ class CitationTest < ActiveSupport::TestCase
     should 'be formatted correctly' do
       result = "Robertson, G. P., and A. S. Grandy. 2006. Soil system management in temperate regions. Pages 27-39 in N. Uphoff, and A. S. Ball, eds. Biological Approaches to Sustainable Soil Systems. CRC Press, Taylor and Francis Group, Boca Raton, Florida, USA."
       assert_equal result, @citation.formatted
+    end
+
+    context 'as bibtex' do
+      setup do
+        @entry = @citation.as_bibtex
+      end
+
+      should 'be a bibtex entry' do
+        assert_equal @entry.class, BibTeX::Entry
+      end
+
+      should 'have right title' do
+        assert_equal 'Soil system management in temperate regions', @entry.title
+      end
+
+      should 'have right publication year' do
+        assert_equal '2006', @entry.year
+      end
+
+      should 'have right authors' do
+        assert_equal 'G P Robertson and A S Grandy', @entry.author
+      end
     end
 
   end
