@@ -4,14 +4,12 @@ class CitationsController < ApplicationController
 
   def index
     store_location
-    website = Website.find_by_name(@subdomain_request) || Website.first
-    @submitted_citations = website.citations.submitted
-    @forthcoming_citations = website.citations.forthcoming
-    if params[:date]
-      @citations = website.citations.by_date(params[:date])
-    else
-      @citations = website.citations.published
-    end
+    citations = website.citations
+    @submitted_citations = citations.submitted
+    @forthcoming_citations = citations.forthcoming
+    date = params[:date].presence
+    @citations = date ? citations.by_date(date) : citations.published
+
     respond_to do |format|
       format.html
       format.enw { send_data Citation.to_enw(@citations), :filename=>'glbrc.enw' }
@@ -21,7 +19,6 @@ class CitationsController < ApplicationController
 
   def search
     @word = params[:word]
-    website = Website.find_by_name(@subdomain_request) || Website.first
     @citations = Citation.search @word, :with => { :website_id => website.id }
     respond_to do |format|
       format.html
@@ -32,16 +29,14 @@ class CitationsController < ApplicationController
 
   def filtered
     @word, @type, @sort_by = params[:word], params[:type], params[:sort_by]
-    website = Website.find_by_name(@subdomain_request) || Website.first
     citations = website.citations
     citations = citations.where(:type => @type) if @type.present?
     @submitted_citations = citations.submitted.sorted_by(@sort_by)
     @forthcoming_citations = citations.forthcoming.sorted_by(@sort_by)
-    if params[:date]
-      @citations = citations.by_date(params[:date]).sorted_by(@sort_by)
-    else
-      @citations = citations.published.sorted_by(@sort_by)
-    end
+    date = params[:date].presence
+    @citations = date ? citations.by_date(date) : citations.published
+    @citations.sorted_by(@sort_by)
+
     respond_to do |format|
       format.html
       format.enw { send_data Citation.to_enw(@citations), :filename=>'glbrc.enw' }
@@ -140,5 +135,9 @@ class CitationsController < ApplicationController
     else
       @title = 'GLBRC Sustainability Publications'
     end
+  end
+
+  def website
+    @website ||= Website.find_by_name(@subdomain_request) || Website.first
   end
 end
