@@ -99,8 +99,10 @@ class CitationsController < ApplicationController
 
   def download
     head(:not_found) and return unless (citation = Citation.find_by_id(params[:id]))
-    unless signed_in?
-      deny_access and return
+    unless citation.open_access
+      unless signed_in? 
+        deny_access and return
+      end
     end
 
     path = citation.pdf.path(params[:style])

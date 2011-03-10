@@ -6,6 +6,7 @@ class CitationTest < ActiveSupport::TestCase
   should belong_to :website
 
   should have_attached_file(:pdf)
+  should respond_to?('open_access')
 
   context 'Some citations exist at different dates' do
     setup do
@@ -108,7 +109,7 @@ class CitationTest < ActiveSupport::TestCase
 %A Robertson, G. P.
 %J Plant and Soil
 %V 325
-%@ 231-241
+%P 231-241
 %D 2008
 %X An abstract of the article."
     assert_equal result, @citation.as_endnote
@@ -193,7 +194,7 @@ class CitationTest < ActiveSupport::TestCase
 %B Biological Approaches to Sustainable Soil Systems
 %I CRC Press, Taylor and Francis Group
 %C Boca Raton, Florida, USA
-%@ 27-39
+%P 27-39
 %D 2006"
 
       assert_equal result, @citation.as_endnote

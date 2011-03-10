@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110222164316) do
+ActiveRecord::Schema.define(:version => 20110310133802) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(:version => 20110222164316) do
     t.datetime "pdf_updated_at"
     t.string   "state"
     t.string   "type"
+    t.boolean  "open_access",             :default => false
   end
 
   add_index "citations", ["citation_type_id"], :name => "index_citations_on_citation_type_id"
@@ -437,9 +438,6 @@ ActiveRecord::Schema.define(:version => 20110222164316) do
     t.integer "study_id"
     t.string  "description"
   end
-
-  add_index "plots", ["study_id"], :name => "index_plots_on_study_id"
-  add_index "plots", ["treatment_id"], :name => "index_plots_on_treatment_id"
 
   create_table "projects", :force => true do |t|
     t.string   "title"

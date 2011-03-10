@@ -7,7 +7,7 @@ class ArticleCitation < Citation
     editors.each { |editor| endnote += "%E #{editor.formatted}\n" }
     endnote += "%J #{publication}\n" unless publication.blank?
     endnote += "%V #{volume}\n" unless volume.blank?
-    endnote += "%@ #{page_numbers}\n" unless page_numbers.blank?
+    endnote += "%P #{page_numbers}\n" unless page_numbers.blank?
     endnote += "%D #{pub_year}" unless pub_year.blank?
     endnote += "\n%X #{abstract}" unless abstract.blank?
     endnote

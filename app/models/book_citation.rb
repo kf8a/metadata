@@ -9,7 +9,7 @@ class BookCitation < Citation
     endnote += "%I #{publisher}\n"
     endnote += "%C #{address}\n"
     endnote += "%V #{volume}\n" unless volume.blank?
-    endnote += "%@ #{page_numbers}\n" unless page_numbers.blank?
+    endnote += "%P #{page_numbers}\n" unless page_numbers.blank?
     endnote += "%D #{pub_year}" unless pub_year.blank?
     endnote += "\n%X #{abstract}" unless abstract.blank?
     endnote

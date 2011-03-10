@@ -1,4 +1,4 @@
-require File.expand_path('../../test_helper',__FILE__) 
+require File.expand_path('../../test_helper',__FILE__)
 
 class CitationsControllerTest < ActionController::TestCase
 
@@ -29,9 +29,8 @@ class CitationsControllerTest < ActionController::TestCase
       should 'return the citations in order of author last name' do
         citations = assigns(:citations)
         assert_equal 2, citations.size
- 
         assert_equal @citation2, citations[0]
-        assert_equal @citation1,  citations[1] 
+        assert_equal @citation1,  citations[1]
       end
 
       context 'in endnote format' do
@@ -41,7 +40,7 @@ class CitationsControllerTest < ActionController::TestCase
       end
 
       context 'with a past date' do
-        setup do 
+        setup do
           date = Date.today
           get :index, :date=>{:year=>"#{date.year - 1}", :month=>'4', :day => '16'}
         end
@@ -53,7 +52,7 @@ class CitationsControllerTest < ActionController::TestCase
       end
 
       context 'with a future date parameter' do
-        setup do 
+        setup do
           date = Date.today
           get :index, :date=>{:year=>"#{date.year + 1}", :month=>'4', :day => '16'}
         end
@@ -87,6 +86,17 @@ class CitationsControllerTest < ActionController::TestCase
       should redirect_to('the sign in page') { sign_in_url }
     end
 
+    context 'GET: download an open access publication' do
+      setup do
+        @citation= Factory :citation
+        @citation.open_access = true
+
+        get :download, :id => @citation
+      end
+
+      should respond_with :redirect
+    end
+
     context 'GET :show' do
       setup do
         @citation = Factory :citation, :abstract => '*Something*', :title => 'article'
@@ -118,7 +128,7 @@ class CitationsControllerTest < ActionController::TestCase
 
     context 'POST: create' do
       setup do
-        post :create 
+        post :create
       end
 
       should redirect_to('the sign in path') { sign_in_path }
@@ -143,14 +153,14 @@ class CitationsControllerTest < ActionController::TestCase
     end
 
     context 'DELETE' do
-      setup do 
+      setup do
         citation = Factory :citation
         post :destroy, :id => citation
       end
 
       should redirect_to('the sign in path') { sign_in_path }
     end
-    
+
   end
 
 
@@ -169,7 +179,7 @@ class CitationsControllerTest < ActionController::TestCase
       should respond_with :success
       should assign_to :citations
     end
-    
+
     context 'GET: new' do
       setup do
         get :new
@@ -185,7 +195,7 @@ class CitationsControllerTest < ActionController::TestCase
 
       should redirect_to('the sign in path') { sign_in_path }
     end
-    
+
     context 'GET: edit' do
       setup do
         @citation = Factory.create :citation
@@ -205,7 +215,7 @@ class CitationsControllerTest < ActionController::TestCase
     end
 
     context 'DELETE' do
-      setup do 
+      setup do
         citation = Factory :citation
         post :destroy, :id => citation
       end

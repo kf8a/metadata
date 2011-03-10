@@ -129,6 +129,19 @@ unless Factory.factories.include?(:affiliation) #prevent redefining these factor
     d.association   :dataset
   end
 
+  Factory.define :data_contribution do |d|
+    d.person    Factory.create(:person)
+    d.role      Factory.create(:role)
+    d.datatable Factory.create(:datatable)
+  end
+
+  Factory.define :public_datatable, :parent => :datatable do |datatable|
+  end
+
+  Factory.define :meeting do |m|
+    m.venue_type_id   1
+  end
+
   Factory.define :restricted_sponsor, :parent => :sponsor do |sponsor|
     sponsor.data_restricted   true
   end
@@ -143,19 +156,6 @@ unless Factory.factories.include?(:affiliation) #prevent redefining these factor
 
   Factory.define :collection do |c|
     c.datatable   Factory.create(:datatable)
-  end
-
-  Factory.define :data_contribution do |d|
-    d.person    Factory.create(:person)
-    d.role      Factory.create(:role)
-    d.datatable Factory.create(:datatable)
-  end
-
-  Factory.define :public_datatable, :parent => :datatable do |datatable|
-  end
-
-  Factory.define :meeting do |m|
-    m.venue_type_id    1
   end
 
   Factory.define :abstract do |a|
