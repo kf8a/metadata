@@ -3,10 +3,11 @@ require 'bibtex'
 
 class CitationTest < ActiveSupport::TestCase
   should have_many :authors
+  should have_many :editors
   should belong_to :website
 
-  should have_attached_file(:pdf)
-  should respond_to?('open_access')
+  should have_attached_file :pdf
+  should respond_to? :open_access
 
   context 'Some citations exist at different dates' do
     setup do
@@ -24,7 +25,7 @@ class CitationTest < ActiveSupport::TestCase
     end
   end
 
-  context 'a citation object with a single author' do
+  context 'a generic citation with a single author' do
     setup do
       @citation = Factory :citation
       @citation.authors << Author.new(:sur_name => 'Robertson',
@@ -219,7 +220,31 @@ class CitationTest < ActiveSupport::TestCase
       assert_equal result, @citation.formatted
     end
 
-    should 'be exported to bibtex'
+    context 'as bibtex' do
+      setup do
+        @entry = @citation.as_bibtex
+      end
+
+      should 'be a bibtex entry' do
+        assert_equal @entry.class, BibTeX::Entry
+      end
+
+      should 'have right title' do
+        assert_equal 'Implications of LCA accounting methods in a corn and corn stover to ethanol system', @entry.title
+      end
+
+      should 'have right publication year' do
+        assert_equal '2009', @entry.year
+      end
+
+      should 'have right authors' do
+        assert_equal 'A S Kaufman', @entry.author
+      end
+
+      should 'have right type' do
+        assert_equal :misc, @entry.type
+      end
+    end
 
     should 'be exported to endnote' do
       result = "%0 Journal Article
