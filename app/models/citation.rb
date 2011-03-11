@@ -78,7 +78,7 @@ class Citation < ActiveRecord::Base
   end
 
   def book?
-    citation_type.try(:name) == 'book'
+    type == BookCitation || citation_type.try(:name) == 'book'
   end
 
   def formatted
