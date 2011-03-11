@@ -181,12 +181,7 @@ class Datatable < ActiveRecord::Base
   def to_csv
     values  = perform_query(limited = false)
     logger.info values
-    if RUBY_VERSION > "1.9"
-      output = CSV
-    else
-      output = FasterCSV
-    end
-    csv_string = output.generate do |csv|
+    csv_string = CSV.generate do |csv|
       csv << variates.collect {|v| v.name }
       values.each do |row|
         csv << variates.collect do |v|
@@ -327,6 +322,18 @@ class Datatable < ActiveRecord::Base
     self.dataset.datatables - [self]
   end
 
+  def sponsor_name
+    dataset.sponsor.try(:name) || 'lter'
+  end
+
+  def study_link_for(website)
+    study.try(:study_url, website)
+  end
+
+  def study_name
+    study.try(:name).to_s
+  end
+
   def values
     values = nil
     values = self.perform_query if self.is_sql
@@ -388,10 +395,6 @@ private
       time = time.to_date
     end
     time
-  end
-
-  def sponsor_name
-    dataset.sponsor.try(:name) || 'LTER'
   end
 
 end

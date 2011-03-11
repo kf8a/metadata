@@ -2,13 +2,13 @@
   <h1><%=raw @datatable.title_and_years %></h1>
 
   <p class='description'>
-    <%=raw textilize @datatable.description if @datatable.description %>
+    <%=raw textilize @datatable.description.presence %>
   </p>
-  <%= @datatable.try(:summary_graph) %>
-  <%= @datatable.try(:access_statement) %>
+  <%= @datatable.summary_graph %>
+  <%= @datatable.access_statement %>
 
   <!-- TODO Temporary: use the default if sponsor is lter. -->
-  <% if @datatable.dataset.sponsor.try(:name) == 'lter' %>
+  <% if @datatable.sponsor_name == 'lter' %>
     The <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use policy applies to the this dataset</a>
   <% else %>
     The <%=link_to 'standard data use policy applies to the this dataset' , sponsor_url(@datatable.dataset.sponsor)%>
@@ -27,10 +27,10 @@
       <tr>
         <td>Experiment:</td>
         <td>
-          <% if @datatable.study.study_url(@website) %>
-            <%= link_to "#{@datatable.study.name}", @datatable.study.study_url(@website) %>
+          <% if @datatable.study_link_for @website %>
+            <%= link_to @datatable.study_name, @datatable.study_link_for(@website) %>
           <% else %>
-            <%= @datatable.study.name %>
+            <%= @datatable.study_name %>
           <% end %>
         </td>
       </tr>
