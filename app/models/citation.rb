@@ -109,18 +109,12 @@ class Citation < ActiveRecord::Base
 
   def as_endnote
     endnote = "%0 "
-    endnote += book? ? "Book Section\n" : "Journal Article\n"
+    endnote += endnote_type
     endnote += "%T #{title}\n"
     authors.each { |author| endnote += "%A #{author.formatted}\n" }
     editors.each { |editor| endnote += "%E #{editor.formatted}\n" }
-    if book?
-      endnote += "%B #{publication}\n"
-      endnote += "%I #{publisher}\n"
-      endnote += "%C #{address}\n"
-    else
-      endnote += "%J #{publication}\n" unless publication.blank?
-    end
-    endnote += "%V #{volume}\n" unless volume.try(:empty?)
+    endnote += endnote_publication_data
+    endnote += "%V #{volume}\n" if volume.present?
     endnote += "%P #{start_page_number}-#{ending_page_number}\n" if start_page_number
     endnote += "%D #{pub_year}" if pub_year
     endnote += "\n%X #{abstract}" if abstract
@@ -134,6 +128,18 @@ class Citation < ActiveRecord::Base
 
   def bibtex_type
     :misc
+  end
+
+  def endnote_type
+    book? ? "Book Section\n" : "Journal Article\n"
+  end
+
+  def endnote_publication_data
+    if book?
+      "%B #{publication}\n" + "%I #{publisher}\n" + "%C #{address}\n"
+    else
+      publication.present? ? "%J #{publication}\n" : ""
+    end
   end
 
   def formatted_article

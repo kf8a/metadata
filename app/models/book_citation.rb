@@ -1,19 +1,4 @@
 class BookCitation < Citation
-  def as_endnote
-    endnote = "%0 "
-    endnote += "Book Section\n"
-    endnote += "%T #{title}\n"
-    authors.each { |author| endnote += "%A #{author.formatted}\n" }
-    editors.each { |editor| endnote += "%E #{editor.formatted}\n" }
-    endnote += "%B #{publication}\n"
-    endnote += "%I #{publisher}\n"
-    endnote += "%C #{address}\n"
-    endnote += "%V #{volume}\n" unless volume.blank?
-    endnote += "%P #{page_numbers}\n" unless page_numbers.blank?
-    endnote += "%D #{pub_year}" unless pub_year.blank?
-    endnote += "\n%X #{abstract}" unless abstract.blank?
-    endnote
-  end
 
   def formatted
     "#{author_and_year}. #{title}. #{page_numbers_book}#{editor_string}. #{publication}. #{publisher}, #{address}."
@@ -23,5 +8,13 @@ class BookCitation < Citation
 
   def bibtex_type
     :book
+  end
+
+  def endnote_type
+    "Book Section\n"
+  end
+
+  def endnote_publication_data
+    "%B #{publication}\n" + "%I #{publisher}\n" + "%C #{address}\n"
   end
 end

@@ -10,14 +10,16 @@ class Permission < ActiveRecord::Base
   validate :only_owners_can_set_permissions
 
   def Permission.permitted_users
-    all.collect do |permission|
-      permission.user unless permission.decision == "denied"
-    end.compact
+    all.collect { |permission| permission.user unless permission.denied? }.compact
   end
      
   def only_owners_can_set_permissions
     if datatable
       errors[:base] << 'owners only' unless datatable.owners.include?(owner)
     end
+  end
+
+  def denied?
+    decision == "denied"
   end
 end
