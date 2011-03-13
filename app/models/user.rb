@@ -1,3 +1,4 @@
+# Members who are able to log in and do things on the site.
 class User < ActiveRecord::Base
   extend Clearance::User::ClassMethods 
   include Clearance::User::InstanceMethods 
