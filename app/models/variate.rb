@@ -53,22 +53,20 @@ private
 
   def eml_interval(e)
     e.add_element eml_unit
-    if !self.precision
-      p = e.add_element('precision').add_text('1')
-      p << Comment.new("default precision none specified")
-    else
-      e.add_element('precision').add_text(self.precision.to_s)
-    end
-    e.add_element('numericDomain').add_element('numberType').add_text(self.data_type)
+    eml_precision_and_number_type(e)
   end
 
   def eml_ratio(e)
     e.add_element('unit')
-    if !self.precision
+    eml_precision_and_number_type(e)
+  end
+
+  def eml_precision_and_number_type(e)
+    if self.precision
+      e.add_element('precision').add_text(self.precision.to_s)
+    else
       p = e.add_element('precision').add_text('1')
       p << Comment.new("default precision none specified")
-    else
-      e.add_element('precision').add_text(self.precision.to_s)
     end
     e.add_element('numericDomain').add_element('numberType').add_text(self.data_type)
   end
