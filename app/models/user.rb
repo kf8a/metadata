@@ -31,12 +31,12 @@ class User < ActiveRecord::Base
   end
   
   def admin?
-    role == 'admin'
+    'admin' == role
   end
   
   def has_permission_from?(owner, datatable)
-    permission = Permission.find_by_user_id_and_owner_id_and_datatable_id(self, owner, datatable)
-    permission && permission.decision != "denied"
+    permission = permissions.find_by_owner_id_and_datatable_id(owner, datatable)
+    permission && !permission.denied?
   end
 
 end
