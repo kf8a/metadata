@@ -83,5 +83,41 @@ class UserTest < ActiveSupport::TestCase
       end
     end
   end
+
+  context 'An owner has given a user permission to use a datatable.' do
+    setup do
+      @datatable = Factory.create(:protected_datatable)
+      @owner = Factory.create(:email_confirmed_user)
+      Factory.create(:ownership, :user => @owner, :datatable => @datatable)
+      Factory.create(:permission, :user => @user, :owner => @owner, :datatable => @datatable)
+    end
+
+    context '#has_permission_from?' do
+      setup do
+        @has_permission_from = @user.has_permission_from?(@owner, @datatable)
+      end
+
+      should 'be true' do
+        assert @has_permission_from
+      end
+    end
+
+    context 'another user has been denied acces to use the datatable.' do
+      setup do
+        @another_user = Factory.create(:email_confirmed_user)
+        Factory.create(:permission, :user => @another_user, :owner => @owner, :datatable => @datatable, :decision => 'denied')
+      end
+
+      context '#has_permission_from?' do
+        setup do
+          @has_permission_from = @another_user.has_permission_from?(@owner, @datatable)
+        end
+
+        should 'be false' do
+          assert !@has_permission_from
+        end
+      end
+    end
+  end
   
 end
