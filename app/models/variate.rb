@@ -31,12 +31,16 @@ private
   def eml_unit
     u = Element.new('unit')
     if self.unit.try(:in_eml)
-      u.add_element('standardUnit').add_text(self.unit.name)
+      u.add_element('standardUnit').add_text(unit_name)
     else
-      u.add_element('customUnit').add_text(self.unit.try(:name))
+      u.add_element('customUnit').add_text(unit_name)
       # TODO: need to add custom unit tags to the end of the document
     end
     u
+  end
+
+  def unit_name
+    self.unit.try(:name)
   end
 
   def eml_date_time(e)
