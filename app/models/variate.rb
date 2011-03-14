@@ -30,12 +30,9 @@ private
 
   def eml_unit
     u = Element.new('unit')
-    if self.unit.try(:in_eml)
-      u.add_element('standardUnit').add_text(unit_name)
-    else
-      u.add_element('customUnit').add_text(unit_name)
-      # TODO: need to add custom unit tags to the end of the document
-    end
+    unit_type = self.unit.try(:in_eml) ? 'standardUnit' : 'customUnit'
+    u.add_element(unit_type).add_text(unit_name)
+
     u
   end
 
