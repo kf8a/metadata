@@ -1,6 +1,6 @@
 require File.expand_path('../../test_helper',__FILE__) 
 
-class PublicationsTest < ActiveSupport::TestCase
+class PublicationTest < ActiveSupport::TestCase
   
   context 'finding publications by words' do
     setup do
