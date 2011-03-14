@@ -63,12 +63,18 @@ private
   end
 
   def eml_precision_and_number_type(element)
-    if self.precision
-      element.add_element('precision').add_text(self.precision.to_s)
-    else
-      precision_element = element.add_element('precision').add_text('1')
-      precision_element << Comment.new("default precision none specified")
-    end
+    precision_element = self.precision ? eml_precision : default_eml_precision
+    element.add_element precision_element
     element.add_element('numericDomain').add_element('numberType').add_text(self.data_type)
+  end
+
+  def eml_precision
+    Element.new('precision').add_text(self.precision.to_s)
+  end
+
+  def default_eml_precision
+    precision_element = Element.new('precision').add_text('1')
+    precision_element << Comment.new("default precision none specified")
+    precision_element
   end
 end
