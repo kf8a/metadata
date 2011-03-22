@@ -9,6 +9,7 @@ xml.rss :version => "2.0" do
       xml.item do
         xml.title citation.formatted
         xml.description textilize(citation.abstract)
+        xml.category citation.state
         xml.pubDate citation.updated_at
         xml.link citation_url(citation)
         xml.guid citation_url(citation) 
