@@ -5,7 +5,7 @@ xml.rss :version => "2.0" do
     xml.description "Area 4 publications"
     xml.link citations_url
 
-    [@submitted_citations, @forthcoming_citations,@citations].flatten.each do |citation|
+    [@submitted_citations, @forthcoming_citations, @citations].flatten.each do |citation|
       xml.item do
         xml.title citation.formatted
         xml.description textilize(citation.abstract)
