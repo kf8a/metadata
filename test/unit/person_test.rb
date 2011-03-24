@@ -107,14 +107,20 @@ class PersonTest < ActiveSupport::TestCase
         :city=>'Anytown', :locale => 'CA', :postal_code => '55555'})
       @explicit_us_address = Factory.create(:person,  {:street_address => '208 Main St.', 
           :city=>'Anytown', :locale => 'CA', :postal_code => '55555', :country=>'USA'} )
+      @less_explicit_us_address = Factory.create(:person,  {:street_address => '208 Main St.',
+          :city=>'Anytown', :locale => 'CA', :postal_code => '55555', :country=>'US'} )
       @eu_address = Factory.create(:person, {:street_address => 'Hanover Strasse 20', 
           :city=>'Hanover', :postal_code=>'242435', :country=>'Germany'})
+      @empty_country_address = Factory.create(:person, {:street_address => '208 Main St.',
+        :city=>'Anytown', :locale => 'CA', :postal_code => '55555', :country => ''})
     end
     
     should 'usa_address? should return appropriately' do
       assert @implicit_us_address.usa_address?
       assert @explicit_us_address.usa_address?
+      assert @less_explicit_us_address.usa_address?
       assert !@eu_address.usa_address?
+      assert @empty_country_address.usa_address?
     end
     
     should 'return the proper address format for us address' do
