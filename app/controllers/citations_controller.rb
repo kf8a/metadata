@@ -18,6 +18,7 @@ class CitationsController < ApplicationController
       format.enw do
         send_data @citations.collect {|x| x.as_endnote}.join("\r\n\r\n"), :filename=>'glbrc.enw'
       end
+      format.rss { render :layout => false } #index.rss.builder
     end
   end
 
