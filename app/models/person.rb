@@ -48,10 +48,6 @@ class Person < ActiveRecord::Base
     full_name.truncate(33)
   end
     
-  def unique_dataset_role_names
-    self.dataset_roles.map(&:name).sort.uniq
-  end
-  
   def usa_address?
     return (country.nil? || country == '' || country.downcase =='usa' || country.downcase == 'us')
   end
