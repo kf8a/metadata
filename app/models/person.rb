@@ -44,11 +44,8 @@ class Person < ActiveRecord::Base
     sur_name + ', ' + normal_given_name
   end
   
-  #hack
-  def short_full_name 
-    fn = full_name
-    chars = fn.mb_chars
-    (chars.length > 30 ? chars[0...30] + '...' : chars).to_s
+  def short_full_name
+    full_name.truncate(33)
   end
     
   def unique_dataset_role_names
