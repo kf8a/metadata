@@ -78,6 +78,7 @@ class PersonTest < ActiveSupport::TestCase
       @person = Factory.create(:person, {:given_name => 'howard', :sur_name => 'spencer'})
       @friendly_person = Factory.create(:person, {:given_name => 'howard', :sur_name => 'spencer', 
           :friendly_name => 'bops'})
+      @long_name = Factory.create(:person, :given_name => 'Shankurnarayanan', :sur_name => 'Ramachandranathan')
     end
     
     should 'return first_name last_name in response to full_name' do
@@ -91,6 +92,12 @@ class PersonTest < ActiveSupport::TestCase
     should 'use the friendly_name if available' do
       assert @friendly_person.full_name == 'bops spencer'
       assert @friendly_person.last_name_first == 'spencer, bops'
+    end
+
+    should 'truncate the name if necessary in response to #short_full_name' do
+      assert_equal 'bops spencer', @friendly_person.short_full_name
+      assert_equal 'howard spencer', @person.short_full_name
+      assert_equal 'Shankurnarayanan Ramachandrana...', @long_name.short_full_name
     end
   end
   
