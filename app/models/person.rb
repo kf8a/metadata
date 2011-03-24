@@ -33,11 +33,7 @@ class Person < ActiveRecord::Base
   end
   
   def normal_given_name
-    name = given_name
-     if friendly_name && friendly_name.size > 0
-       name = friendly_name
-     end
-    name
+    friendly_name.presence || given_name
   end
   
   def full_name
