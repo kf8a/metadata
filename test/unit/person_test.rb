@@ -21,6 +21,30 @@ class PersonTest < ActiveSupport::TestCase
         assert @result.include?('Owner')
       end
     end
+
+    context 'some of the roles are committee roles' do
+      setup do
+        @first_committee = Factory.create(:lter_role, :name => 'Committee Members')
+        @second_committee = Factory.create(:lter_role, :name => 'Network Representatives')
+        assert @first_committee.committee?
+        assert @second_committee.committee?
+        @person.lter_roles << @first_committee
+        @person.lter_roles << @second_committee
+      end
+
+      context '#get_committee_roles' do
+        setup do
+          @result = @person.get_committee_roles
+        end
+
+        should 'return only the committee role names' do
+          assert @result.include?('Committee Member')
+          assert @result.include?('Network Representative')
+          assert !@result.include?('Creator')
+          assert !@result.include?('Owner')
+        end
+      end
+    end
   end
   
   context 'an emeritus' do 
