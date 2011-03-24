@@ -112,6 +112,10 @@ unless Factory.factories.include?(:affiliation) #prevent redefining these factor
 
   #Dependent factories##########
 
+  Factory.define :lter_role, :parent => :role do |role|
+    role.role_type    RoleType.find_by_name('lter') || Factory.create(:role_type, :name => 'lter')
+  end
+
   Factory.define :protocol do |p|
     p.name  'Proto1'
     p.version_tag  0

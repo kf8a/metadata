@@ -3,6 +3,25 @@ require File.expand_path('../../test_helper',__FILE__)
 class PersonTest < ActiveSupport::TestCase
   
   should have_many :datatables
+
+  context 'a person with some lter_roles' do
+    setup do
+      @first_role = Factory.create(:lter_role, :name => 'Creators')
+      @second_role = Factory.create(:lter_role, :name => 'Owners')
+      @person = Factory.create(:person, :lter_roles => [@first_role, @second_role])
+    end
+
+    context '#get_all_lter_roles' do
+      setup do
+        @result = @person.get_all_lter_roles
+      end
+
+      should 'return the names as singular' do
+        assert @result.include?('Creator')
+        assert @result.include?('Owner')
+      end
+    end
+  end
   
   context 'an emeritus' do 
     setup do
@@ -20,11 +39,11 @@ class PersonTest < ActiveSupport::TestCase
         :lter_roles => [Factory.create(:role, :name => 'something else')])
     end
     
-    should 'return false for .only_emeritus?' do
+    should 'return false for #only_emeritus?' do
       assert !@person.only_emeritus?
     end
     
-    should 'return false if one role in non emeritus' do
+    should 'return false for #only_emeritus? if one role is non emeritus' do
       @person.lter_roles << Factory.create(:role)
       assert !@person.only_emeritus?
     end
