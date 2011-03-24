@@ -1,4 +1,4 @@
-require File.expand_path('../../test_helper',__FILE__) 
+require File.expand_path('../../test_helper',__FILE__)
 
 class ProtocolTest < ActiveSupport::TestCase
   should have_and_belong_to_many :websites
@@ -28,14 +28,15 @@ class ProtocolTest < ActiveSupport::TestCase
   end
 
   context 'deprecating a protocol' do
-    setup do 
-      @protocol = Factory.create(:protocol)
+    setup do
+      @protocol = Factory.create(:protocol, :version_tag => 4)
       @new_protocol = Factory.create(:protocol)
       @new_protocol.deprecate!(@protocol)
+      @protocol.reload
     end
 
     should 'increment the protocol number of the new protocol' do
-      assert_equal @protocol.version_tag + 1, @new_protocol.version_tag 
+      assert_equal @protocol.version_tag + 1, @new_protocol.version_tag
     end
 
     should 'connect the new protocol to the old protocol' do
