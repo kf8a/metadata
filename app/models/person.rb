@@ -58,14 +58,10 @@ class Person < ActiveRecord::Base
   end
   
   def address
-    cty = city || ''
-    str = street_address || ''
-    lcl = locale || ""
-    pc = postal_code || ''
     if usa_address?
-      "#{str} #{cty}, #{lcl} #{pc}"
+      "#{street_address} #{city}, #{locale} #{postal_code}"
     else
-      "#{str}\n#{pc} #{cty} #{country}"
+      "#{street_address}\n#{postal_code} #{city} #{country}"
     end
   end
   
