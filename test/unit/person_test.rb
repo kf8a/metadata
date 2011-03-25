@@ -134,15 +134,18 @@ class PersonTest < ActiveSupport::TestCase
   end
   
   context 'incomplete addresses' do
-    setup do 
-      @complete = Factory.create(:person,  {:street_address => '208 Main St.', 
-          :city=>'Anytown', :locale => 'CA', :postal_code => '55555', :country=>'USA'} )
-      @no_city =     Factory.create(:person,  {:street_address => '208 Main St.', 
-               :locale => 'CA', :postal_code => '55555', :country=>'USA'} )
-      @city_blank =          Factory.create(:person,  {:street_address => '208 Main St.', 
-              :city=>' ', :locale => 'CA', :postal_code => '55555', :country=>'USA'} )
-      @city_empty =          Factory.create(:person,  {:street_address => '208 Main St.', 
-              :city=>'', :locale => 'CA', :postal_code => '55555', :country=>'USA'} )
+    setup do
+      full_address = {:street_address => '208 Main St.', :city=>'Anytown',
+          :locale => 'CA', :postal_code => '55555', :country=>'USA'}
+      @complete = Factory.create(:person, full_address)
+      @no_city =  Factory.create(:person, full_address.merge(:city => nil))
+      @city_blank = Factory.create(:person, full_address.merge(:city => ' '))
+      @city_empty = Factory.create(:person, full_address.merge(:city => ''))
+      @no_street_address = Factory.create(:person, full_address.merge(:street_address => nil))
+      @street_address_blank = Factory.create(:person, full_address.merge(:street_address => ' '))
+      @no_postal_code = Factory.create(:person, full_address.merge(:postal_code => nil))
+      @postal_code_blank = Factory.create(:person, full_address.merge(:postal_code => ' '))
+      @locale_blank = Factory.create(:person, full_address.merge(:locale => ' '))
       @eu_address = Factory.create(:person, {:street_address => 'Hanover Strasse 20', 
                   :city=>'Hanover', :postal_code=>'242435', :country=>'Germany'})
     end
@@ -152,6 +155,11 @@ class PersonTest < ActiveSupport::TestCase
       assert !@no_city.complete_address?
       assert !@city_empty.complete_address?
       assert !@city_blank.complete_address?
+      assert !@no_street_address.complete_address?
+      assert !@street_address_blank.complete_address?
+      assert !@no_postal_code.complete_address?
+      assert !@postal_code_blank.complete_address?
+      assert !@locale_blank.complete_address?
       assert @eu_address.complete_address?
     end
   end
