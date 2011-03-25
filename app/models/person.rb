@@ -49,7 +49,7 @@ class Person < ActiveRecord::Base
   end
     
   def usa_address?
-    return (country.nil? || country == '' || country.downcase =='usa' || country.downcase == 'us')
+    country.blank? || country.downcase == 'usa' || country.downcase == 'us'
   end
   
   def complete_address?
