@@ -145,6 +145,7 @@ class PersonTest < ActiveSupport::TestCase
       @street_address_blank = Factory.create(:person, full_address.merge(:street_address => ' '))
       @no_postal_code = Factory.create(:person, full_address.merge(:postal_code => nil))
       @postal_code_blank = Factory.create(:person, full_address.merge(:postal_code => ' '))
+      @no_locale = Factory.create(:person, full_address.merge(:locale => nil))
       @locale_blank = Factory.create(:person, full_address.merge(:locale => ' '))
       @eu_address = Factory.create(:person, {:street_address => 'Hanover Strasse 20', 
                   :city=>'Hanover', :postal_code=>'242435', :country=>'Germany'})
@@ -159,8 +160,18 @@ class PersonTest < ActiveSupport::TestCase
       assert !@street_address_blank.complete_address?
       assert !@no_postal_code.complete_address?
       assert !@postal_code_blank.complete_address?
+      assert !@no_locale.complete_address?
       assert !@locale_blank.complete_address?
       assert @eu_address.complete_address?
+    end
+
+    should 'return the proper address format' do
+      assert_equal '208 Main St. Anytown, CA 55555', @complete.address
+      assert_equal '208 Main St. , CA 55555', @no_city.address
+      assert_equal ' Anytown, CA 55555', @no_street_address.address
+      assert_equal '208 Main St. Anytown, CA ', @no_postal_code.address
+      assert_equal '208 Main St. Anytown,  55555', @no_locale.address
+      assert_equal '208 Main St. Anytown,   55555', @locale_blank.address
     end
   end
 end
