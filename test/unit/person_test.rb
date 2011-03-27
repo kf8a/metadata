@@ -1,4 +1,5 @@
-require File.expand_path('../../test_helper',__FILE__) 
+require File.expand_path('../../test_helper',__FILE__)
+require 'mocha'
 
 class PersonTest < ActiveSupport::TestCase
   
@@ -172,6 +173,25 @@ class PersonTest < ActiveSupport::TestCase
       assert_equal '208 Main St. Anytown, CA ', @no_postal_code.address
       assert_equal '208 Main St. Anytown,  55555', @no_locale.address
       assert_equal '208 Main St. Anytown,   55555', @locale_blank.address
+    end
+  end
+
+  context 'Some people have a dataset role, others do not. ' do
+    setup do
+      data_role = Factory.create(:role)
+      @dataperson1 = Factory.create(:person, :sur_name => 'Jones')
+      @dataperson1.expects(:dataset_roles).returns([data_role])
+      @dataperson2 = Factory.create(:person, :sur_name => 'Smith')
+      @dataperson2.expects(:dataset_roles).returns([data_role])
+      @nodataperson = Factory.create(:person, :sur_name => 'Nodata')
+    end
+
+    context '#has_dataset?' do
+      should "return true for those with dataset roles, false for others" do
+        assert @dataperson1.has_dataset?
+        assert @dataperson2.has_dataset?
+        assert !@nodataperson.has_dataset?
+      end
     end
   end
 end

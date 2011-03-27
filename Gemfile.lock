@@ -171,6 +171,7 @@ GEM
       roodi (>= 2.1.0)
       syntax
     mime-types (1.16)
+    mocha (0.9.12)
     mutter (0.5.3)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
@@ -303,6 +304,7 @@ DEPENDENCIES
   less
   liquid
   metric_fu
+  mocha
   newrelic_rpm
   nokogiri
   paperclip
