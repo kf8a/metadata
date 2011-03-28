@@ -12,17 +12,6 @@ class PersonTest < ActiveSupport::TestCase
       @person = Factory.create(:person, :lter_roles => [@first_role, @second_role])
     end
 
-    context '#get_all_lter_roles' do
-      setup do
-        @result = @person.get_all_lter_roles
-      end
-
-      should 'return the names as singular' do
-        assert @result.include?('Creator')
-        assert @result.include?('Owner')
-      end
-    end
-
     context 'some of the roles are committee roles' do
       setup do
         @first_committee = Factory.create(:lter_role, :name => 'Committee Members')
@@ -194,4 +183,6 @@ class PersonTest < ActiveSupport::TestCase
       end
     end
   end
+
+  #TODO a test needs to be written for find_all_with_dataset
 end

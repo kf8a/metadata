@@ -14,12 +14,6 @@ class Person < ActiveRecord::Base
   scope :by_sur_name, :order => 'sur_name'
   scope :by_sur_name_asc, :order => 'sur_name ASC'
 
-  #acts_as_taggable
-
-  def get_all_lter_roles
-    lter_roles.collect {|x| x.name.singularize }
-  end
-
   def get_committee_roles
     lter_roles.collect do |x|
       x.name.singularize if x.committee?
