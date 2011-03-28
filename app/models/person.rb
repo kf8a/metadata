@@ -21,9 +21,7 @@ class Person < ActiveRecord::Base
   end
 
   def only_emeritus?
-    emeritus_roles = lter_roles.collect   {|role| role.emeritus? }
-    emeritus_roles.reject! {|x| !x }
-    emeritus_roles.size == lter_roles.size
+    !lter_roles.any? { |role| !role.emeritus? }
   end
 
   def normal_given_name
