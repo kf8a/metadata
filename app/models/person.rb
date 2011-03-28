@@ -15,13 +15,11 @@ class Person < ActiveRecord::Base
   scope :by_sur_name_asc, :order => 'sur_name ASC'
 
   def get_committee_roles
-    lter_roles.collect do |x|
-      x.name.singularize if x.committee?
-    end.compact
+    lter_roles.collect { |role| role.committee_role_name }.compact
   end
 
   def only_emeritus?
-    !lter_roles.any? { |role| !role.emeritus? }
+    lter_roles.all? { |role| role.emeritus? }
   end
 
   def normal_given_name
