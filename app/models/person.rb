@@ -68,14 +68,4 @@ class Person < ActiveRecord::Base
     self.dataset_roles.size > 0
   end
 
-  # def lter_role_ids=(role_ids)
-  #   affiliations.each do |affiliation|
-  #     affiliation.destroy unless role_ids.include? affiliation.id
-  #   end
-  #
-  #   role_ids.each do |role_id|
-  #     self.affiliations.create(:role_id => role_id) unless affiliations.any? {|d| d.role_id == role_id}
-  #   end
-  # end
-
 end
