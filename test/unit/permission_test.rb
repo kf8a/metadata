@@ -54,6 +54,7 @@ class PermissionTest < ActiveSupport::TestCase
       p.user      = Factory :user
 
       assert !p.valid?
+      assert_equal ['owners only'], p.errors[:base]
     end
 
     should 'not allow permissions to be set more than once' do
