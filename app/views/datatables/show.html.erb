@@ -137,83 +137,22 @@
 
 <% end %> 
 
-<% unless  @datatable.is_sql %>
-  <% unless @datatable.object.nil? %>
-    <p>
-      <%= link_to 'Data', @datatable.data_url %> (on a different page)
-    </p>
-  <% end %>
-  <p>Data Embargoed</p>
-<% else %>
+<% if @datatable.is_sql %>
   <% if @datatable.values -%>
-    <p>
       <!--
     	TODO: geographic coverage
     	-->
-      <% unless @datatable.metadata_only? %>
-        <% if @datatable.can_be_downloaded_by?(current_user) %>
-          <%= link_to 'Download complete data table',
-                      datatable_path(@datatable,:format => :csv),
-                      :class => 'download-link'%>
-          <%= link_to 'Download data as spreadsheet',
-                      datatable_path(@datatable,:format => :ods),
-                      :class => 'download-link' if false %>
-          <%= link_to 'View as a Collection', 
-                      collection_path(@datatable.collection) if @datatable.collection %>
-          <%= link_to 'Permissions Management',
-                      permission_path(@datatable) if current_user.try(:owns?, @datatable)%>
-          <%= link_to 'Owners Management',
-                      ownership_path(@datatable) if admin? %>
-        <% else %>
-          <% if signed_in? %>
-            <% if @datatable.requested_by?(current_user) %>
-              <p>You have already requested permission to download this datatable.</p>
-            <% else %>
-              <%= mail_to permission_request_email_list(@datatable),
-                          'Request Data',
-                          :body => "Thanks for your interest in the  GLBRC data. This email is addressed to the Lead Investigators of the data table that you requested. Please let them know how you would like to use the data and what institution you are from. The lead investigators plan to respond promptly to requests. If you do not receive an email within the next several days then you are welcome to contact the GLBRC data coordinator (glbrc.data@kbs.msu.edu) so she can follow up on your request.\nData requested: http://glbrc.kbs.msu.edu#{url_for(@datatable)}",
-                          :subject => 'GLBRC data request',
-                          :class => 'download-link',
-                          :encode => 'hex',
-                          :onclick => remote_function(:url => {:controller => 'permission_requests', :action => 'create', :datatable => @datatable.id}) %>
-            <% end %>
-          <% else %>
-            <%= link_to 'Sign in to request the data',
-                        sign_in_path,
-                          :class => 'download-link' %> 
-          <% end %>
-        <% end %>
-      <% end %>
-    </p>
+     <%= render :partial => 'download_button', :locals => {:datatable => @datatable} %>
 
-    <% cache(:action_suffix => 'data', :expires_in => 1.day) do %>
-    <div>
-      <h2>Data Excerpt</h2>
-      <div>
-        <table>
-          <tr>
-            <% fieldlist = [] %>
-            <% @datatable.values.fields.each do |field| %>
-              <th>
-                <%= field.titleize %>
-                <% fieldlist << field %>
-              </th>
-            <% end %>
-          </tr>
-          <% @datatable.values.each do  |row| %>
-            <tr  class="<%= cycle('even','odd') -%>">
-              <% fieldlist.each do |key| %>
-                <td align='right'>
-                  <%= row[key] %>
-                </td>
-              <% end %>
-            </tr>
-          <% end %>
-          <% @datatable.values.clear %>
-        </table>
-      </div>
-    </div>
+    <%= render :partial => 'data_preview', :locals => {:datatable => @datatable} %>
   <% end %>
+<% else %>
+  <% if @datatable.object.nil? %>
+    <p>Data Embargoed</p>
+  <% else %>
+    <p>
+      <%= link_to 'Data', @datatable.data_url %> (on a different page)
+    </p>
   <% end %>
 <% end %>
 
