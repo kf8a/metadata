@@ -1,0 +1,28 @@
+<% cache(:action_suffix => 'data', :expires_in => 1.day) do %>
+  <div>
+    <h2>Data Excerpt</h2>
+    <div>
+      <table>
+        <tr>
+          <% fieldlist = [] %>
+          <% datatable.values.fields.each do |field| %>
+            <th>
+              <%= field.titleize %>
+              <% fieldlist << field %>
+            </th>
+          <% end %>
+        </tr>
+        <% datatable.values.each do  |row| %>
+          <tr  class="<%= cycle('even','odd') -%>">
+            <% fieldlist.each do |key| %>
+              <td align='right'>
+                <%= row[key] %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+        <% datatable.values.clear %>
+      </table>
+    </div>
+  </div>
+<% end %>
