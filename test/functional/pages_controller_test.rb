@@ -1,14 +1,14 @@
-require File.expand_path('../../test_helper',__FILE__) 
+require File.expand_path('../../test_helper',__FILE__)
 
 class PagesControllerTest < ActionController::TestCase
 
   context 'as an admin' do
     setup do
-      @controller.current_user =  Factory.create :admin_user
+      signed_in_as_admin
     end
-    
+
     context 'GET :show' do
-      setup do 
+      setup do
         @page = Factory.create :page
         get :show, :id => @page
       end
@@ -69,43 +69,43 @@ class PagesControllerTest < ActionController::TestCase
       should redirect_to("the pages page") {pages_url}
     end
   end
-  
+
   context 'as a regular user' do
     setup do
       @controller.current_user = nil
     end
-    
+
     context 'GET: index' do
       setup do
         get :index
       end
-      
+
       should redirect_to("the sign in page") {sign_in_url}
     end
-    
+
     context 'GET :show' do
       setup do
         @page = Factory.create(:page)
         get :show, :id => @page
       end
-      
+
       should respond_with :success
     end
-    
+
     context 'PUT :create' do
       setup do
         put :create
       end
-      
+
       should redirect_to("the sign in page") {sign_in_url}
     end
-    
+
     context 'POST :update' do
       setup do
         @page = Factory.create :page
         post :update, :id => @page, :title => 'something else'
       end
-      
+
       should redirect_to("the sign in page") {sign_in_url}
     end
   end

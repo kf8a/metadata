@@ -1,4 +1,4 @@
-require File.expand_path('../../test_helper',__FILE__) 
+require File.expand_path('../../test_helper',__FILE__)
 
 class OwnershipsControllerTest < ActionController::TestCase
 
@@ -8,55 +8,53 @@ class OwnershipsControllerTest < ActionController::TestCase
       @owner = Factory.create(:email_confirmed_user)
       Factory.create(:ownership, :user => @owner, :datatable => @datatable)
     end
-    
+
     context "and not signed in at all" do
       setup do
         @controller.current_user = nil
       end
-      
+
       context "and GET :index" do
         setup do
           get :index
         end
-        
+
         should respond_with :redirect
       end
     end
-      
+
     context ", signed in as non-admin" do
       setup do
-        @nonadmin = Factory.create(:email_confirmed_user, :role => nil)
-        @controller.current_user = @nonadmin
+        signed_in_as_normal_user
       end
-      
+
       context "and GET :index" do
         setup do
           get :index
         end
-        
+
         should respond_with :redirect
-      end      
+      end
     end
-    
+
     context ", signed in as an admin" do
       setup do
-        @admin = Factory.create(:email_confirmed_user, :role => 'admin')
-        @controller.current_user = @admin
+        signed_in_as_admin
       end
-      
+
       context "and GET :index" do
         setup do
           get :index
         end
-        
+
         should render_template 'index'
       end
-      
+
       context "and GET :show the datatable's owners" do
         setup do
           get :show, :id => @datatable
         end
-        
+
         should render_template 'show'
         should assign_to(:datatable).with(@datatable)
       end
@@ -71,24 +69,24 @@ class OwnershipsControllerTest < ActionController::TestCase
 
         should redirect_to("the ownerships page") {ownerships_path}
       end
-      
+
       context "and GET :new permission for the datatable" do
         setup do
           get :new, :datatable => @datatable
         end
-        
+
         should respond_with :success
         should render_template 'new'
         should assign_to(:datatable).with(@datatable)
         should assign_to(:users)
         should assign_to(:ownership)
       end
-      
+
       context "and GET :new with no datatable param" do
         setup do
           get :new
         end
-        
+
         should respond_with :success
         should render_template 'new'
         should_not assign_to(:datatable)
@@ -96,16 +94,16 @@ class OwnershipsControllerTest < ActionController::TestCase
         should assign_to(:users)
         should assign_to(:ownership)
       end
-      
+
       context "and POST :create with a valid user" do
         setup do
-          @user = Factory.create(:email_confirmed_user)          
+          @user = Factory.create(:email_confirmed_user)
           post :create, :datatable => @datatable, :user_1 => @user, :user_count => 1
         end
-        
+
         should redirect_to("the ownerships page") {ownerships_path}
       end
-      
+
       context "and POST :create with multiple users" do
         setup do
           @user_1 = Factory.create(:email_confirmed_user)
@@ -113,7 +111,7 @@ class OwnershipsControllerTest < ActionController::TestCase
           @user_3 = Factory.create(:email_confirmed_user)
           post :create, :datatable => @datatable, :user_1 => @user_1, :user_2 => @user_2, :user_3 => @user_3, :user_count => 3
         end
-        
+
         should redirect_to("the ownerships page") {ownerships_path}
         should "make all the users own the datatable" do
           assert @user_1.owns?(@datatable)
@@ -121,7 +119,7 @@ class OwnershipsControllerTest < ActionController::TestCase
           assert @user_3.owns?(@datatable)
         end
       end
-      
+
       context "and POST :create with multiple users and datatables" do
         setup do
           @user_1 = Factory.create(:email_confirmed_user)
@@ -132,7 +130,7 @@ class OwnershipsControllerTest < ActionController::TestCase
           @datatable_3 = Factory.create(:protected_datatable)
           post :create, :datatable_1 => @datatable_1, :datatable_2 => @datatable_2, :datatable_3 => @datatable_3, :user_1 => @user_1, :user_2 => @user_2, :user_3 => @user_3, :user_count => 3, :datatable_count => 3
         end
-        
+
         should redirect_to("the ownerships page") {ownerships_path}
         should "make all the users own all the datatables" do
           assert @user_1.owns?(@datatable_1)
@@ -146,12 +144,12 @@ class OwnershipsControllerTest < ActionController::TestCase
           assert @user_3.owns?(@datatable_3)
         end
       end
-      
+
       context "and a user owns the datatable" do
         setup do
           @user = Factory.create(:email_confirmed_user)
-          Factory.create(:ownership, 
-                          :user => @user, 
+          Factory.create(:ownership,
+                          :user => @user,
                           :datatable => @datatable)
         end
 
@@ -159,7 +157,7 @@ class OwnershipsControllerTest < ActionController::TestCase
           setup do
             delete :revoke, :datatable => @datatable, :user => @user
           end
-          
+
           should redirect_to("the datatable ownership page") {ownership_path(@datatable)}
         end
       end

@@ -168,7 +168,7 @@ class CitationsControllerTest < ActionController::TestCase
 
     setup do
       @website = Website.find_or_create_by_name('lter')
-      @controller.current_user = Factory :user
+      signed_in_as_normal_user
     end
 
     context 'GET :index' do
@@ -228,7 +228,7 @@ class CitationsControllerTest < ActionController::TestCase
 
     setup do
       @website = Website.find_or_create_by_name('lter')
-      @controller.current_user = Factory.create :admin_user
+      signed_in_as_admin
     end
 
     context 'GET :index' do

@@ -33,9 +33,6 @@ unless Factory.factories.include?(:affiliation) #prevent redefining these factor
     i.sequence(:email) {|n| "person#{n}@example.com" }
   end
 
-  Factory.define :ownership do |o|
-  end
-
   Factory.define :page do |p|
   end
 
@@ -131,6 +128,11 @@ unless Factory.factories.include?(:affiliation) #prevent redefining these factor
     d.weight        100
     d.association   :theme
     d.association   :dataset
+  end
+
+  Factory.define :ownership do |o|
+    o.association  :datatable
+    o.association  :user
   end
 
   Factory.define :data_contribution do |d|
