@@ -47,6 +47,8 @@ gem 'vestal_versions', :git => 'git://github.com/adamcooper/vestal_versions'
 # offile manifest
 gem 'rack-offline'
 
+gem 'comfortable_mexican_sofa'
+
 gem 'dalli'
 
 group :development, :test  do
@@ -78,4 +80,8 @@ group :test do
   gem 'launchy'
   gem 'database_cleaner'
   gem 'pickle'
+end
+
+group :production do
+  gem 'preheat'
 end
