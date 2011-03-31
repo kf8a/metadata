@@ -182,6 +182,7 @@ class DatatableTest < ActiveSupport::TestCase
       @owner              = Factory :user, :email => 'owner@person.com'
       @admin              = Factory :user, :email => 'admin@person.com', :role => 'admin'
       @member             = Factory :user, :email => 'member@person.com', :sponsors => [sponsor]
+      @denied_user        = Factory :user, :email => 'denied@perso.com'
 
       @unrestricted = Factory  :datatable
 
@@ -193,6 +194,12 @@ class DatatableTest < ActiveSupport::TestCase
         :datatable  => @restricted,
         :user       => @authorized_user,
         :owner      => @owner
+
+      Factory :permission,
+        :datatable  => @restricted,
+        :user       => @denied_user,
+        :owner      => @owner,
+        :decision   => 'denied'
     end
 
     should 'tell if it needs to be restricted at all' do
@@ -206,6 +213,7 @@ class DatatableTest < ActiveSupport::TestCase
       assert @unrestricted.can_be_downloaded_by?(@authorized_user)
       assert @unrestricted.can_be_downloaded_by?(@admin)
       assert @unrestricted.can_be_downloaded_by?(@member)
+      assert @unrestricted.can_be_downloaded_by?(@denied_user)
     end
 
     should 'only allow authorized users to download restricted datatables' do
@@ -214,6 +222,12 @@ class DatatableTest < ActiveSupport::TestCase
       assert  @restricted.can_be_downloaded_by?(@authorized_user)
       assert  @restricted.can_be_downloaded_by?(@admin)
       assert  @restricted.can_be_downloaded_by?(@member)
+      assert !@restricted.can_be_downloaded_by?(@denied_user)
+    end
+
+    should 'return the owner that denied user on #deniers_of' do
+      assert_equal [@owner], @restricted.deniers_of(@denied_user)
+      assert_equal [], @restricted.deniers_of(@authorized_user)
     end
 
     should 'authorized table should have the right owner' do
