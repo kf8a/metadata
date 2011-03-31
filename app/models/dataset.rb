@@ -129,6 +129,10 @@ class Dataset < ActiveRecord::Base
      save
    end
 
+  def restricted?
+    sponsor.try(:data_restricted?)
+  end
+
 private
 
   def eml_custom_unit_list

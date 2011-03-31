@@ -77,7 +77,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def restricted?
-    dataset.sponsor.try(:data_restricted?)
+    dataset.restricted?
   end
 
   def permitted?(user)
@@ -87,12 +87,10 @@ class Datatable < ActiveRecord::Base
   end
 
   def requesters
-    requests = PermissionRequest.find_all_by_datatable_id(self.id)
     requesters = []
-    requests.each do |request|
+    self.permission_requests.each do |request|
       user = request.user
-      next if self.permitted?(user)
-      requesters << user
+      requesters << user unless self.permitted?(user)
     end
     requesters
   end
