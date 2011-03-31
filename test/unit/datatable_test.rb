@@ -9,6 +9,7 @@ class DatatableTest < ActiveSupport::TestCase
   should have_many                :owners
   should have_many                :ownerships
   should have_many                :people
+  should have_many                :permission_requests
   should have_many                :permissions
   should have_and_belong_to_many  :protocols
   should belong_to                :study

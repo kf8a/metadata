@@ -17,6 +17,7 @@ class Datatable < ActiveRecord::Base
   has_many                :owners, :through => :ownerships, :source => :user
   has_many                :ownerships
   has_many                :people, :through => :data_contributions
+  has_many                :permission_requests
   has_many                :permissions
   has_and_belongs_to_many :protocols
   belongs_to              :study
