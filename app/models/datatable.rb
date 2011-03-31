@@ -53,11 +53,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def personnel
-    h = datatable_personnel
-    if h.empty?
-      h = dataset_personnel
-    end
-    h
+    datatable_personnel.presence || dataset_personnel
   end
 
   def datatable_personnel
