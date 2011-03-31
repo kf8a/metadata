@@ -35,6 +35,31 @@ class DatatableTest < ActiveSupport::TestCase
       end
     end
 
+    context 'which has datatable personnel' do
+      setup do
+        @person1 = Factory.create(:person, :sur_name => 'Datatableman')
+        @person2 = Factory.create(:person, :sur_name => 'Datatablewoman')
+        @datatable.stubs(:datatable_personnel).returns([@person1, @person2])
+      end
+
+      should 'return those personnel on #personnel' do
+        assert_equal [@person1, @person2], @datatable.personnel
+      end
+    end
+
+    context 'which has no datatable personnel but does have dataset personnel' do
+      setup do
+        @person1 = Factory.create(:person, :sur_name => 'Datatableman')
+        @person2 = Factory.create(:person, :sur_name => 'Datatablewoman')
+        @datatable.stubs(:datatable_personnel).returns([])
+        @datatable.stubs(:dataset_personnel).returns([@person1, @person2])
+      end
+
+      should 'return the dataset personnel' do
+        assert_equal [@person1, @person2], @datatable.personnel
+      end
+    end
+
     should 'respond to temporal_extent' do
       assert @datatable.respond_to?('temporal_extent')
     end
@@ -82,6 +107,7 @@ class DatatableTest < ActiveSupport::TestCase
       @datatable = Factory :datatable, :dataset => dataset_with_sponsor
       @datatable_without_sponsor = Factory :datatable, :dataset => dataset_without_sponsor
     end
+
 
     should 'retrieve data access statement' do
       assert @datatable.data_access_statement                 =~ /Use it/
