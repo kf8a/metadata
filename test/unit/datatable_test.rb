@@ -221,21 +221,34 @@ class DatatableTest < ActiveSupport::TestCase
 
   end
 
-  context 'A datatable with a permission request' do
+  context 'A datatable with permission requests' do
     setup do
       @owner  = Factory :user, :email => 'owner@person.com'
       @user   = Factory :user, :email => 'user@person.com'
       @other  = Factory :user, :email => 'other@person.com'
+      @permitted_user = Factory :user, :email => 'permitted@person.com'
 
       sponsor     = Factory :sponsor, :data_restricted => true
       dataset     = Factory :dataset, :sponsor => sponsor
       @datatable  = Factory :datatable, :owners => [@owner]
 
       Factory.create(:permission_request, :user => @user, :datatable => @datatable)
+      Factory.create(:permission_request, :user => @permitted_user, :datatable => @datatable)
+      Factory.create(:permission, :owner => @owner, :datatable => @datatable, :user => @permitted_user)
     end
 
-    should 'return the user of that permission request on #requesters' do
-      assert_equal [@user], @datatable.requesters
+    context '#requesters' do
+      setup do
+        @result = @datatable.requesters
+      end
+
+      should 'include the users of those permission requests' do
+        assert @result.include?(@user)
+      end
+
+      should 'not include users who are already permitted' do
+        assert !@result.include?(@permitted_user)
+      end
     end
 
   end
