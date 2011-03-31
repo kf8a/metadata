@@ -96,7 +96,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def deniers_of(user)
-    permissions.collect {|x| (x.user == user) && (x.decision == "denied") ? x.owner : nil}.compact
+    permissions.where(:user_id => user, :decision => 'denied').collect(&:owner)
   end
 
   def can_be_downloaded_by?(user)
