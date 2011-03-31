@@ -80,11 +80,9 @@ class Datatable < ActiveRecord::Base
   end
 
   def permitted?(user)
-    permitted = !self.owners.empty? && !user.blank?
-    self.owners.each do |owner|
-      permitted = (permitted && user.has_permission_from?(owner, self))
+    owners.present? && user.present? && owners.all? do |owner|
+      user.has_permission_from?(owner, self)
     end
-    permitted
   end
 
   def requesters
