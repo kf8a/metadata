@@ -92,8 +92,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def requested_by?(user)
-    request = PermissionRequest.find_by_datatable_id_and_user_id(self.id, user.id)
-    !request.blank?
+    requesters.include?(user)
   end
 
   def deniers_of(user)
