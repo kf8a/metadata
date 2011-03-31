@@ -19,6 +19,7 @@ class Datatable < ActiveRecord::Base
   has_many                :people, :through => :data_contributions
   has_many                :permission_requests
   has_many                :permissions
+  has_many                :requesters, :through => :permission_requests, :source => :user
   has_and_belongs_to_many :protocols
   belongs_to              :study
   belongs_to              :theme
@@ -86,13 +87,8 @@ class Datatable < ActiveRecord::Base
     end
   end
 
-  def requesters
-    requesters = []
-    self.permission_requests.each do |request|
-      user = request.user
-      requesters << user unless self.permitted?(user)
-    end
-    requesters
+  def pending_requesters
+    requesters.collect { |user| user unless self.permitted?(user) }.compact
   end
 
   def requested_by?(user)

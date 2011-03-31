@@ -238,9 +238,9 @@ class DatatableTest < ActiveSupport::TestCase
       Factory.create(:permission, :owner => @owner, :datatable => @datatable, :user => @permitted_user)
     end
 
-    context '#requesters' do
+    context '#pending_requesters' do
       setup do
-        @result = @datatable.requesters
+        @result = @datatable.pending_requesters
       end
 
       should 'include the users of those permission requests' do
