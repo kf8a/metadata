@@ -372,10 +372,23 @@ class DatatablesControllerTest < ActionController::TestCase
     assert @datatable.is_sql
     assert @datatable.values
     assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'page', :id => @datatable)
-    assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'data', :id => @datatable, :expires_in => 1.day)
+    assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'data', :id => @datatable)
     put :update, :id => @datatable, :datatable => { }
     assert !@controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'page', :id => @datatable)
-    assert !@controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'data', :id => @datatable, :expires_in => 1.day)
+    assert !@controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'data', :id => @datatable)
+  end
+
+  def test_expiring_in_one_day
+    @datatable = Factory.create :datatable, :dataset => Factory.create(:dataset),
+                                  :description => 'This is the first abstract'
+    get :show, :id => @datatable
+    assert @datatable.is_sql
+    assert @datatable.values
+    assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'data', :id => @datatable)
+    future_time = Time.now + 1.day
+    Time.stubs(:now).returns(future_time)
+    assert !@controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'data', :id => @datatable)
+    Time.unstub(:now) #otherwise all future tests think it's tomorrow
   end
 
   #Actual testing of the search function, with a real search, requires Sphinx I think. That seems like too much of a pain to have on always for the test suite. It will have to be tested manually.
