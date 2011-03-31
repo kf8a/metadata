@@ -67,7 +67,7 @@ class Datatable < ActiveRecord::Base
   def compile_personnel(source, h={})
     source.each do |contribution|
       if h[contribution.person]
-        h[contribution.person] = h[contribution.person].push((contribution.role.name))
+        h[contribution.person].push((contribution.role.name))
       else
         h[contribution.person] = [contribution.role.name]
       end

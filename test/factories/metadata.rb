@@ -136,9 +136,9 @@ unless Factory.factories.include?(:affiliation) #prevent redefining these factor
   end
 
   Factory.define :data_contribution do |d|
-    d.person    Factory.create(:person)
-    d.role      Factory.create(:role)
-    d.datatable Factory.create(:datatable)
+    d.association   :person
+    d.association    :role
+    d.association   :datatable
   end
 
   Factory.define :public_datatable, :parent => :datatable do |datatable|

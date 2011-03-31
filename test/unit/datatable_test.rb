@@ -93,10 +93,13 @@ class DatatableTest < ActiveSupport::TestCase
     end
 
     should 'be able to add contributors' do
-      assert @datatable.data_contributions << [Factory.create(:data_contribution, :datatable => @datatable)]
-      assert @datatable.datatable_personnel
+      person = Factory.create(:person)
+      assert @datatable.data_contributions << [Factory.create(:data_contribution, :datatable => @datatable, :person => person)]
+      different_role = Factory.create(:role, :name => 'AnotherRole')
+      @datatable.data_contributions << [Factory.create(:data_contribution, :datatable => @datatable, :person => person, :role => different_role)]
+      assert_equal 2, @datatable.datatable_personnel[person].count
+      assert_equal ["Emeritus Investigators", "AnotherRole"], @datatable.datatable_personnel[person]
     end
-
   end
 
   context 'datatable with and without sponsors' do
