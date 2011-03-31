@@ -97,8 +97,11 @@ class DatatableTest < ActiveSupport::TestCase
       assert @datatable.data_contributions << [Factory.create(:data_contribution, :datatable => @datatable, :person => person)]
       different_role = Factory.create(:role, :name => 'AnotherRole')
       @datatable.data_contributions << [Factory.create(:data_contribution, :datatable => @datatable, :person => person, :role => different_role)]
+      another_person = Factory.create(:person, :sur_name => 'Testerman')
+      @datatable.data_contributions << [Factory.create(:data_contribution, :datatable => @datatable, :person => another_person)]
       assert_equal 2, @datatable.datatable_personnel[person].count
       assert_equal ["Emeritus Investigators", "AnotherRole"], @datatable.datatable_personnel[person]
+      assert_equal ["Emeritus Investigators"], @datatable.datatable_personnel[another_person]
     end
   end
 
@@ -218,7 +221,7 @@ class DatatableTest < ActiveSupport::TestCase
 
   end
 
-  context 'setting datatable permissions' do
+  context 'A datatable with a permission request' do
     setup do
       @owner  = Factory :user, :email => 'owner@person.com'
       @user   = Factory :user, :email => 'user@person.com'
@@ -227,9 +230,13 @@ class DatatableTest < ActiveSupport::TestCase
       sponsor     = Factory :sponsor, :data_restricted => true
       dataset     = Factory :dataset, :sponsor => sponsor
       @datatable  = Factory :datatable, :owners => [@owner]
+
+      Factory.create(:permission_request, :user => @user, :datatable => @datatable)
     end
 
-    #TODO is there anything to test here?
+    should 'return the user of that permission request on #requesters' do
+      assert_equal [@user], @datatable.requesters
+    end
 
   end
 

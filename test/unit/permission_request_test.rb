@@ -8,7 +8,7 @@ class PermissionRequestTest < ActiveSupport::TestCase
   should validate_presence_of :user
   should validate_presence_of :datatable
 
-  context 'a user has already requested persmission for a datatable' do
+  context 'a user has already requested permission for a datatable' do
     setup do
       @user = Factory.create(:email_confirmed_user)
       @datatable = Factory.create(:protected_datatable)
