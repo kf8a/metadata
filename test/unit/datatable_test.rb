@@ -12,6 +12,7 @@ class DatatableTest < ActiveSupport::TestCase
   should have_many                :permission_requests
   should have_many                :permissions
   should have_and_belong_to_many  :protocols
+  should have_many                :requesters
   should belong_to                :study
   should belong_to                :theme
   should have_many                :variates
@@ -249,6 +250,17 @@ class DatatableTest < ActiveSupport::TestCase
 
       should 'not include users who are already permitted' do
         assert !@result.include?(@permitted_user)
+      end
+    end
+
+    context '#requested_by?' do
+      should 'be true for those who requested' do
+        assert @datatable.requested_by?(@user)
+        assert @datatable.requested_by?(@permitted_user)
+      end
+
+      should 'be false for others' do
+        assert !@datatable.requested_by?(@other)
       end
     end
 
