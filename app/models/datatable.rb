@@ -383,11 +383,4 @@ private
     return a
   end
 
-  def convert_to_date(time)
-    if time.class == Time
-      time = time.to_date
-    end
-    time
-  end
-
 end
