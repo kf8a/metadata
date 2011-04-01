@@ -100,10 +100,10 @@ class Datatable < ActiveRecord::Base
   end
 
   def can_be_downloaded_by?(user)
-    !self.restricted? or
-      user.try(:admin?) or
-      self.owned_by?(user) or
-      member?(user) or
+    !self.restricted? ||
+      user.try(:admin?) ||
+      self.owned_by?(user) ||
+      member?(user) ||
       self.permitted?(user)
   end
 
