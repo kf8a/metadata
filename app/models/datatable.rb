@@ -108,7 +108,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def owned_by?(user)
-    user.try(:owns?, self)
+    owners.include?(user)
   end
 
   def member?(user)
