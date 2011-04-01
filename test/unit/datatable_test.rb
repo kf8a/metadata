@@ -496,22 +496,6 @@ class DatatableTest < ActiveSupport::TestCase
       end
     end
 
-    context 'xls format' do
-
-      should 'respond to to_xls' do
-        assert @datatable.respond_to?('to_xls')
-      end
-
-    end
-
-#     context 'ods format' do
-#
-#       should 'respond to to_ods' do
-#         assert @datatable.respond_to?('to_ods')
-#         assert @datatable.to_ods
-#       end
-#
-#     end
   end
 
 end

@@ -160,9 +160,7 @@ class Datatable < ActiveRecord::Base
     eml.add_element('entityName').add_text(title)
     eml.add_element('entityDescription').add_text(description.gsub(/<\/?[^>]*>/, ""))
     eml.add_element eml_physical
-#    eml.add_element eml_coverage
     eml.add_element eml_attributes
-#    eml.add_element('numberOfRecords').add_text()
     return eml
   end
 
@@ -203,55 +201,8 @@ class Datatable < ActiveRecord::Base
     "!#{to_csv}"
   end
 
-  def to_xls
-
-  end
-
-#   def to_ods
-#     values = perform_query(limited=false)
-#     sheet = Spreadsheet::Builder.new
-#     sheet.spreadsheet do
-#       sheet.table "Data Use Policy" do
-#         data_access_statement.each_line do |line|
-#           sheet.row do
-#             sheet.cell line
-#           end
-#         end
-#         data_source.each_line do |source|
-#           sheet.row do
-#             sheet.cell source
-#           end
-#         end
-#         sheet.cell data_comments
-#       end
-#
-#       sheet.table "Data" do
-#         sheet.header do
-#
-#           sheet.row do
-#             variates.each do |variate|
-#               sheet.cell variate.name
-#             end
-#           end
-#         end
-#         values.each do |elements|
-#           sheet.row do
-#             elements.values.each do |element|
-#               sheet.cell element
-#             end
-#           end
-#         end
-#       end
-#     end
-#     sheet.content!
-#   end
-
   def data_comments
     comments ?  comments.gsub(/^/,'#') + "\n" : ''
-  end
-  def data_contact
-    # contact = self.dataset.principal_contact
-    # "#{contact.full_name} #{contact.email} #{contact.phone}"
   end
 
   def data_source
@@ -353,26 +304,6 @@ private
     dataformat.add_element('simpleDelimited').add_element('fieldDelimiter').add_text(',')
     p.add_element('distribution').add_element('online').add_element('url').add_text(data_url)
     return p
-  end
-
-  def eml_coverage
-    # e = Element.new('coverage')
-    # e.add_element eml_geographic_coverage
-    # e.add_element eml_temporal_coverage
-    # e.add_element eml_taxonomic_coverage
-    # e
-  end
-
-  def eml_geographic_coverage
-
-  end
-
-  def eml_temporal_coverage
-
-  end
-
-  def eml_taxonomic_coverage
-
   end
 
   def eml_attributes
