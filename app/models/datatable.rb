@@ -171,7 +171,7 @@ class Datatable < ActiveRecord::Base
       csv << variates.collect {|v| v.name }
       values.each do |row|
         csv << variates.collect do |v|
-          p v
+          p v unless Rails.env == 'test' #too noisy in tests
           row[v.name.downcase]
         end
 #        csv << row.values
