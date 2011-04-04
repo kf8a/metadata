@@ -5,14 +5,15 @@
       <table>
         <tr>
           <% fieldlist = [] %>
-          <% datatable.values.fields.each do |field| %>
+          <% values = datatable.values %>
+          <% values.fields.each do |field| %>
             <th>
               <%= field.titleize %>
               <% fieldlist << field %>
             </th>
           <% end %>
         </tr>
-        <% datatable.values.each do  |row| %>
+        <% values.values.each do  |row| %>
           <tr  class="<%= cycle('even','odd') -%>">
             <% fieldlist.each do |key| %>
               <td align='right'>
@@ -21,7 +22,6 @@
             <% end %>
           </tr>
         <% end %>
-        <% datatable.values.clear %>
       </table>
     </div>
   </div>

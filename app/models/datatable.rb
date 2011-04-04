@@ -7,6 +7,7 @@ include REXML
 
 class Datatable < ActiveRecord::Base
   attr_protected :object
+  attr_accessor :materialized_datatable_id
   
   acts_as_taggable_on :keywords
   
@@ -178,30 +179,26 @@ class Datatable < ActiveRecord::Base
     return eml
   end
   
-  def to_csv
-    values  = perform_query(limited = false)
-    logger.info values
+  def to_csv(version = nil)
+    mtable = MaterializedDatatable.find_by_datatable_id(materialized_datatable_id)
+    values  = perform_query(limited = false).values
     csv_string = CSV.generate do |csv|
       csv << variates.collect {|v| v.name }
       values.each do |row|
         csv << variates.collect do |v|
-          p v
           row[v.name.downcase]
         end
-#        csv << row.values
       end
     end
+    # mtable.data = csv_string
+    # mtable.save
     csv_string
   end
   
-  def to_csv_with_metadata
+  def to_csv_with_metadata(version = nil)
     # stupid microsofts
     result = ""
-    if RUBY_VERSION > "1.9"
-      result = data_access_statement + data_source + data_comments + to_csv.force_encoding("UTF-8")
-    else
-      result = data_access_statement + data_source + data_comments + to_csv
-    end
+    result = data_access_statement + data_source + data_comments + to_csv.force_encoding("UTF-8")
     if is_utf_8
       result = Iconv.conv('utf-16','utf-8', result)
     end
@@ -265,6 +262,7 @@ class Datatable < ActiveRecord::Base
   end
   
   def data_source
+    mtable = MaterializedDatatable.find(materialized_datatable_id)
     "\n# Data Source: http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}
 # Metadata: http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}.eml\n#\n#"
   end
@@ -311,14 +309,34 @@ class Datatable < ActiveRecord::Base
     save
   end
   
-  def perform_query(limited = true)
+  # performs the database query to retrieve the actual data
+  # the version number can be used to specify a version of the data
+  # if the version is nil or does not exist it will return the most
+  # recent version of the data returns a materialized_datatable
+  def perform_query(limited = true, version = nil)
     query =  self.object
     if limited
       self.excerpt_limit = 5 unless self.excerpt_limit
       query = query + " limit #{self.excerpt_limit}" 
     end
-    ActiveRecord::Base.connection.execute(query)
-    #TDOD convert the array into a ruby object
+    if version
+      MaterializedDatatable.find_by_datatable_and_version(self.id, version)
+    else
+      #try to find it
+      table = MaterializedDatatable.find_by_datatable(self.id)
+      if table
+        result = ActiveRecord::Base.connection.execute(query)
+        table.values = result
+        table.fields = result.fields
+        table.save
+        result.clear
+      else
+        result = ActiveRecord::Base.connection.execute(query)
+        table = MaterializedDatatable.create({:datatable => id, :values => result, :fields => result.fields})
+        result.clear
+      end
+      table # return the materialized_datatable
+    end
   end
 
   def related_tables
