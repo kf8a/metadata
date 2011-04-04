@@ -48,6 +48,8 @@ class DatatablesController < ApplicationController
     csv_ok = accessible_by_ip && @datatable.can_be_downloaded_by?(current_user)
     climdb_ok = accessible_by_ip
 
+    version = params[:version].to_i
+
     @website = Website.find_by_name(@subdomain_request)
     @trusted = trusted_ip?
 
@@ -68,7 +70,7 @@ class DatatablesController < ApplicationController
              # TODO renable after we have a common place for this cache
 #            file_cache = ActiveSupport::Cache.lookup_store(:file_store, 'tmp/cache')
 #            render :text => file_cache.fetch("csv_#{@datatable.id}") { @datatable.to_csv_with_metadata }
-             render :text => @datatable.to_csv_with_metadata
+             render :text => @datatable.to_csv_with_metadata(version)
           else
             render :text => "You do not have permission to download this datatable"
           end
