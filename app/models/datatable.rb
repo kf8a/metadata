@@ -182,11 +182,7 @@ class Datatable < ActiveRecord::Base
 
   def to_csv_with_metadata
     # stupid microsofts
-    if RUBY_VERSION > "1.9"
-      result = data_access_statement + data_source + data_comments + to_csv.force_encoding("UTF-8")
-    else
-      result = data_access_statement + data_source + data_comments + to_csv
-    end
+    result = data_access_statement + data_source + data_comments + to_csv.force_encoding("UTF-8")
     result = Iconv.conv('utf-16','utf-8', result) if is_utf_8
 
     result
