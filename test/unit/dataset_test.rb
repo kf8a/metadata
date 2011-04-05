@@ -16,11 +16,11 @@ class DatasetTest < ActiveSupport::TestCase
     end
 
     should 'respond to update_temporal_extent' do
-      assert @dataset.respond_to?('update_temporal_extent')
+      assert_respond_to @dataset, 'update_temporal_extent'
     end
 
     should 'respond to temporal extent' do
-      assert @dataset.respond_to?('temporal_extent')
+      assert_respond_to @dataset, 'temporal_extent'
     end
   end
 
@@ -55,8 +55,8 @@ class DatasetTest < ActiveSupport::TestCase
 
       should 'list all people' do
         @dataset.reload
-        assert @dataset.datatable_people.include?(@person1)
-        assert @dataset.datatable_people.include?(@person2)
+        assert_includes @dataset.datatable_people, @person1
+        assert_includes @dataset.datatable_people, @person2
       end
     end
   end
@@ -81,8 +81,8 @@ class DatasetTest < ActiveSupport::TestCase
       end
 
       should 'only be true for that website as subdomain' do
-        assert !@dataset.valid_request?('glbrc')
-        assert !@dataset.valid_request?('lter')
+        refute @dataset.valid_request?('glbrc')
+        refute @dataset.valid_request?('lter')
         assert @dataset.valid_request?('cool_website')
       end
     end
@@ -96,8 +96,8 @@ class DatasetTest < ActiveSupport::TestCase
 
     should 'not update temporal extent if extent is missing' do
       @dataset.update_temporal_extent
-      assert @dataset.initiated == Date.parse('2000-1-1')
-      assert @dataset.completed == nil
+      assert_equal Date.parse('2000-1-1'), @dataset.initiated
+      assert_nil @dataset.completed
     end
   end
 
@@ -112,15 +112,15 @@ class DatasetTest < ActiveSupport::TestCase
 
     should 'be today' do
       dates = @dataset.temporal_extent
-      assert  dates[:begin_date] == Date.today
-      assert dates[:end_date] == Date.today
+      assert_equal Date.today, dates[:begin_date]
+      assert_equal Date.today, dates[:end_date]
     end
 
     should 'update temporal extent to today' do
       @dataset.update_temporal_extent
       @dataset.reload #make sure it updates in the database
-      assert @dataset.initiated == Date.today
-      assert @dataset.completed == Date.today
+      assert_equal Date.today, @dataset.initiated
+      assert_equal Date.today, @dataset.completed
     end
 
   end
@@ -135,11 +135,9 @@ class DatasetTest < ActiveSupport::TestCase
 
     should 'be today to a year ago' do
       dates = @dataset.temporal_extent
-      assert  dates[:begin_date] == Date.today - 1.year
-      assert dates[:end_date] == Date.today
+      assert_equal Date.today - 1.year, dates[:begin_date]
+      assert_equal Date.today, dates[:end_date]
     end
-
-
   end
 
   context 'eml generatation' do
@@ -149,8 +147,8 @@ class DatasetTest < ActiveSupport::TestCase
     end
 
     should 'be successful' do
-      assert !@dataset.to_eml.nil?
-      assert !@dataset_with_datatable.to_eml.nil?
+      refute @dataset.to_eml.nil?
+      refute @dataset_with_datatable.to_eml.nil?
     end
 
     context 'dataset with protocols in the datatables' do
@@ -222,7 +220,7 @@ class DatasetTest < ActiveSupport::TestCase
       end
 
       should "return false for dates which do not include a datatable" do
-        assert !@dataset.within_interval?(Date.today - 500, Date.today - 400)
+        refute @dataset.within_interval?(Date.today - 500, Date.today - 400)
       end
     end
   end
