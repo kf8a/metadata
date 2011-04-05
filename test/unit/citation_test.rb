@@ -21,8 +21,8 @@ class CitationTest < ActiveSupport::TestCase
 
     should 'Citation.by_date(date) should only include citations after date' do
       date = {'year' => '2001', 'month' => '10', 'day' => '21'}
-      assert Citation.by_date(date).include?(@newcitation)
-      assert !Citation.by_date(date).include?(@oldcitation)
+      assert_includes Citation.by_date(date), @newcitation
+      refute_includes Citation.by_date(date), @oldcitation
     end
   end
 
@@ -123,7 +123,7 @@ class CitationTest < ActiveSupport::TestCase
       end
 
       should 'be a bibtex entry' do
-        assert_equal @entry.class, BibTeX::Entry
+        assert_instance_of BibTeX::Entry, @entry
       end
 
       should 'have right title' do
@@ -227,7 +227,7 @@ class CitationTest < ActiveSupport::TestCase
       end
 
       should 'be a bibtex entry' do
-        assert_equal @entry.class, BibTeX::Entry
+        assert_instance_of BibTeX::Entry, @entry
       end
 
       should 'have right title' do
@@ -350,7 +350,7 @@ class CitationTest < ActiveSupport::TestCase
       end
 
       should 'be a bibtex entry' do
-        assert_equal @entry.class, BibTeX::Entry
+        assert_instance_of BibTeX::Entry, @entry
       end
 
       should 'have right title' do
