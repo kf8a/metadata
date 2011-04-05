@@ -56,7 +56,6 @@ namespace :deploy do
   
  # after :deploy, :link_paperclip_storage, 
   after 'deploy:symlink', :link_production_db
-  after 'deploy:symlink', :link_mongo
   after 'deploy:symlink', :link_site_keys
   after 'deploy:symlink', :link_new_relic
   after 'deploy:symlink', :link_s3
@@ -142,7 +141,7 @@ end
 
 desc 'link mongo initializer'
 task :link_mongo do
-  run "ln -nfs #{deploy_to}/shared/config/initializers/mongo.rb #{release_path}/config/initializers/mongo.rb"
+  run "ln -nfs #{deploy_to}/shared/config/mongo.rb #{release_path}/config/initializers/mongo.rb"
 end
 
 # task :link_paperclip_storage, :roles => :app do

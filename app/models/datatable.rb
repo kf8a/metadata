@@ -179,8 +179,8 @@ class Datatable < ActiveRecord::Base
     return eml
   end
   
-  def to_csv(version = nil)
-    values  = perform_query(limited = false).values
+  def to_csv
+    values  = perform_query
     csv_string = CSV.generate do |csv|
       csv << variates.collect {|v| v.name }
       values.each do |row|
@@ -189,14 +189,12 @@ class Datatable < ActiveRecord::Base
         end
       end
     end
-    # mtable.data = csv_string
-    # mtable.save
     csv_string
   end
   
-  def to_csv_with_metadata(version = nil)
+  def to_csv_with_metadata
     # stupid microsofts
-    csv_string = to_csv(version).force_encoding("UTF-8")
+    csv_string = to_csv.force_encoding("UTF-8")
     result = ""
     result = data_access_statement + data_source + data_comments + csv_string
     if is_utf_8
@@ -262,12 +260,9 @@ class Datatable < ActiveRecord::Base
   end
   
   def data_source
-    mtable = MaterializedDatatable.find_by_datatable(id)
     "\n# Data Source: http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}
 # The newest version of the data http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}.csv
-# Full EML Metadata: http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}.eml\n#
-# BETA: This version of the data can be downloaded at http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}.csv?version=#{mtable.version_number}_beta
-# BETA: the versioned datatable is experimental and might NOT be permanent. Please use the Data Source url to cite this datatable.\n#\n#"
+# Full EML Metadata: http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}.eml\n#"
   end
   
   def data_access_statement
@@ -320,31 +315,9 @@ class Datatable < ActiveRecord::Base
   end
   
 
-  # performs the database query to retrieve the actual data
-  # the version number can be used to specify a version of the data
-  # if the version is nil or does not exist it will return the most
-  # recent version of the data returns a materialized_datatable
-  def perform_query(version = nil)
+  def perform_query
     query =  self.object
-    if version
-      table = MaterializedDatatable.find_by_datatable_and_version(self.id, version)
-    else
-      #try to find it
-      table = MaterializedDatatable.find_by_datatable(self.id)
-      if table
-        result = ActiveRecord::Base.connection.execute(query)
-        table.values = result
-        table.fields = result.fields
-        table.save
-        result.clear
-      else
-        result = ActiveRecord::Base.connection.execute(query)
-        table = MaterializedDatatable.create({:datatable => id, :values => result, :fields => result.fields})
-        table.save
-        result.clear
-      end
-    end
-    table # return the materialized_datatable
+    ActiveRecord::Base.connection.execute(query)
   end
 
   def related_tables

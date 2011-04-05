@@ -46,11 +46,6 @@ gem 'rack-offline'
 
 gem 'dalli'
 
-#support for data version
-gem 'mm-versionable', :git => 'git://github.com/kf8a/mm-versionable.git'
-gem 'bson_ext'
-gem 'mongo_mapper'
-
 group :development, :test  do
   # bundler requires these gems in development
   # gem "rails-footnotes"
