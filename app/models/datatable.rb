@@ -264,9 +264,10 @@ class Datatable < ActiveRecord::Base
   def data_source
     mtable = MaterializedDatatable.find_by_datatable(id)
     "\n# Data Source: http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}
-# This version of the data http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}.csv?version=#{mtable.version_number}
 # The newest version of the data http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}.csv
-# Full EML Metadata: http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}.eml\n#\n#"
+# Full EML Metadata: http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}.eml\n#
+# BETA: This version of the data can be downloaded at http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}.csv?version=#{mtable.version_number}_beta
+# BETA: the versioned datatable is experimental and might NOT be permanent. Please use the Data Source url to cite this datatable.\n#\n#"
   end
   
   def data_access_statement
