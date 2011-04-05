@@ -23,10 +23,7 @@ gem 'less'
 gem 'awesome_nested_set', :git => 'git://github.com/galetahub/awesome_nested_set.git'
 gem 'thin'
 gem 'jquery-rails', '>= 0.2.6'
-if RUBY_VERSION < "1.9"
-  gem 'fastercsv'
-end
-
+gem 'fastercsv'
 gem "transitions", :require => ["transitions", "active_record/transitions"]
 
 #Gets rid of annoying UTF-8 string error in rack
@@ -63,13 +60,11 @@ group :test do
   gem "factory_girl"
   gem 'factory_girl_rails'
 
-  gem "rspec", "=1.3.0"
   gem "rspec-rails"
 
   #Cucumber stuff
   gem 'capybara'
   gem "shoulda"
-  gem "factory_girl"
   gem 'cucumber-rails'
   gem 'spork'
   gem 'launchy'
