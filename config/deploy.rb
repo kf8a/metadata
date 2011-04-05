@@ -66,7 +66,6 @@ namespace :deploy do
 end
 
 task :staging do 
-  set :deploy_via, :remote_cache
   
   set :host, 'sebewa'
   
@@ -77,7 +76,6 @@ task :staging do
 end
 
 task :master do
-  set :deploy_via, :remote_cache
   
   set :host, 'houghton'
   
@@ -90,7 +88,6 @@ task :master do
 end
 
 task :production do 
-  set :deploy_via, :remote_cache
   
   set :host, 'gprpc37'
   

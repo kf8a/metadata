@@ -26,7 +26,7 @@ end
 class AuthorNode < Treetop::Runtime::SyntaxNode
   def content(basename, h)
     sur_name, given_name = extract_value(text_value).chomp.split(',')
-    a = Author.new(:sur_name => sur_name, :given_name => given_name)
+    a = Author.new(:sur_name => sur_name.strip, :given_name => given_name.strip, :seniority => h.authors.size )
     h.authors << a
   end
 end
