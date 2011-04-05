@@ -20,7 +20,6 @@ set :use_sudo, false
 #set :branch, $1 if `git branch` =~ /\* (\S+)\s/m
 set :branch, "master"
 set :deploy_via, :remote_cache
-#set :git_enable_submodules,1
 
 ssh_options[:forward_agent] = true
 
@@ -57,6 +56,7 @@ namespace :deploy do
   
  # after :deploy, :link_paperclip_storage, 
   after 'deploy:symlink', :link_production_db
+  after 'deploy:symlink', :link_mongo
   after 'deploy:symlink', :link_site_keys
   after 'deploy:symlink', :link_new_relic
   after 'deploy:symlink', :link_s3
@@ -83,7 +83,6 @@ task :master do
   role :web, "#{host}.kbs.msu.edu"
   role :db,  "#{host}.kbs.msu.edu", :primary => true
   
-#  after 'deploy:symlink', :set_subdomain_tdl
 #  after 'deploy:symlink', :set_asset_host
 end
 
@@ -95,7 +94,6 @@ task :production do
   role :web, "#{host}.kbs.msu.edu"
   role :db,  "#{host}.kbs.msu.edu", :primary => true
   
-#  after 'deploy:symlink', :set_subdomain_tdl
 #  after 'deploy:symlink', :set_asset_host
   after "deploy:update", "newrelic:notice_deployment"
 end
@@ -132,12 +130,6 @@ task :link_s3 do
   run "ln -nfs #{deploy_to}/shared/config/s3.yml #{release_path}/config/s3.yml"
 end
 
-desc 'set subdomain tdl'
-task :set_subdomain_tdl do
-  #run "sed -i 's/production => 3/production => 2/' #{release_path}/config/environment.rb"
-  run "sed -i 's/production => 3/production => 2/' #{release_path}/config/initializers/subdomain_fu.rb"
-end
-
 desc 'set asset host on production' 
 task :set_asset_host do
   run "sed -i 's/#config.action_controller.asset_host/config.action_controller.asset_host/' #{release_path}/config/environments/production.rb"
@@ -146,6 +138,11 @@ end
 desc 'link asset directory'
 task :link_assets do
   run "ln -nfs #{deploy_to}/shared/assets #{release_path}"
+end
+
+desc 'link mongo initializer'
+task :link_mongo do
+  run "ln -nfs #{deploy_to}/shared/config/initializers/mongo.rb #{release_path}/config/initializers/mongo.rb"
 end
 
 # task :link_paperclip_storage, :roles => :app do
