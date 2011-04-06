@@ -67,8 +67,8 @@ GEM
     capistrano (2.5.20)
       highline
       highline
-      net-scp (>= 1.0.0)
       net-scp
+      net-scp (>= 1.0.0)
       net-sftp
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
@@ -248,11 +248,6 @@ GEM
     rspec-expectations (2.5.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.5.0)
-    rspec-rails (2.5.0)
-      actionpack (~> 3.0)
-      activesupport (~> 3.0)
-      railties (~> 3.0)
-      rspec (~> 2.5.0)
     ruby-progressbar (0.0.9)
     ruby2ruby (1.2.5)
       ruby_parser (~> 2.0)
@@ -330,7 +325,7 @@ DEPENDENCIES
   rack-offline
   rack-openid
   rails (= 3.0.5)
-  rspec-rails
+  rspec
   ruby-openid!
   shoulda
   silent-postgres
