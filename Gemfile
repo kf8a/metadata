@@ -58,8 +58,6 @@ group :test do
   #gem "shoulda-matchers" # to use rspec like syntax
   gem 'factory_girl_rails'
 
-  #gem "rspec" #, "=1.3.0"
-
   #Cucumber stuff
   gem 'capybara'
   gem "factory_girl"
