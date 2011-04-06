@@ -86,6 +86,10 @@ class DatatableTest < ActiveSupport::TestCase
       assert @datatable.respond_to?('study')
     end
 
+    should 'respond to can_be_quality_controlled_by?' do
+      assert_respond_to @datatable, 'quality_controlled_by?'
+    end
+
   end
 
   context 'datatable personnel' do
