@@ -7,6 +7,7 @@ include REXML
 
 class Datatable < ActiveRecord::Base
   attr_protected :object
+  attr_accessor :materialized_datatable_id
   
   acts_as_taggable_on :keywords
   
@@ -179,16 +180,13 @@ class Datatable < ActiveRecord::Base
   end
   
   def to_csv
-    values  = perform_query(limited = false)
-    logger.info values
+    values  = perform_query
     csv_string = CSV.generate do |csv|
       csv << variates.collect {|v| v.name }
       values.each do |row|
         csv << variates.collect do |v|
-          p v
           row[v.name.downcase]
         end
-#        csv << row.values
       end
     end
     csv_string
@@ -196,12 +194,9 @@ class Datatable < ActiveRecord::Base
   
   def to_csv_with_metadata
     # stupid microsofts
+    csv_string = to_csv.force_encoding("UTF-8")
     result = ""
-    if RUBY_VERSION > "1.9"
-      result = data_access_statement + data_source + data_comments + to_csv.force_encoding("UTF-8")
-    else
-      result = data_access_statement + data_source + data_comments + to_csv
-    end
+    result = data_access_statement + data_source + data_comments + csv_string
     if is_utf_8
       result = Iconv.conv('utf-16','utf-8', result)
     end
@@ -266,7 +261,8 @@ class Datatable < ActiveRecord::Base
   
   def data_source
     "\n# Data Source: http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}
-# Metadata: http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}.eml\n#\n#"
+# The newest version of the data http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}.csv
+# Full EML Metadata: http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}.eml\n#"
   end
   
   def data_access_statement
@@ -310,15 +306,18 @@ class Datatable < ActiveRecord::Base
     self.end_date = dates[:end_date] if dates[:end_date]
     save
   end
-  
-  def perform_query(limited = true)
+
+  def data_preview
     query =  self.object
-    if limited
-      self.excerpt_limit = 5 unless self.excerpt_limit
-      query = query + " limit #{self.excerpt_limit}" 
-    end
+    self.excerpt_limit = 5 unless self.excerpt_limit
+    query = query + " limit #{self.excerpt_limit}" 
     ActiveRecord::Base.connection.execute(query)
-    #TDOD convert the array into a ruby object
+  end
+  
+
+  def perform_query
+    query =  self.object
+    ActiveRecord::Base.connection.execute(query)
   end
 
   def related_tables

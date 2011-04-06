@@ -2427,3 +2427,4 @@ end
 class RISParser < Treetop::Runtime::CompiledParser
   include RIS
 end
+

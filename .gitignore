@@ -5,9 +5,6 @@ db/sphinx
 log/
 doc/*.dot
 doc/*
-vendor/rails/
-vendor/plugins/rspec/.git/
-vendor/plugins/rspec-rails/.git/
 metadata.sql
 public/datatables
 public/*.html

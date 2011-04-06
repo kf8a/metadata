@@ -13,16 +13,16 @@ namespace :citation do
     parser.consume_all_input = false
     file = File.open(args[:file],"r:UTF-8")
     content = file.read
-    a = parser.parse(content)
+    a = parser.parse(content[1..-1])
     p parser.failure_reason
     path = Pathname.new(File.dirname(file))
     citations = a.content(path.realpath.to_s + '/' + File.basename(file, '.ris').to_s + '.Data/PDF')
 
-    web = Website.find_by_name('glbrc')
+    web = Website.find_by_name('lter')
     citations.flatten.each do |citation|
       citation.website = web
-      p citation
-      citation.save
+      p citation.save
+      p citation.errors
     end
   end
 end
