@@ -23,7 +23,6 @@ gem 'less'
 gem 'awesome_nested_set', :git => 'git://github.com/galetahub/awesome_nested_set.git'
 gem 'thin'
 gem 'jquery-rails', '>= 0.2.6'
-gem 'fastercsv'
 gem "transitions", :require => ["transitions", "active_record/transitions"]
 
 #Gets rid of annoying UTF-8 string error in rack
@@ -46,6 +45,8 @@ group :development, :test  do
   # gem "rails-footnotes"
   gem 'sqlite3-ruby'
   gem 'silent-postgres'
+  gem "shoulda"
+  gem "rspec-rails"
 end
 
 group :test do
@@ -53,18 +54,15 @@ group :test do
   gem 'bibtex-ruby'
   gem 'simplecov'
   gem 'simplecov-html'
-  gem 'sqlite3-ruby'
 
-  gem "shoulda"
   #gem "shoulda-matchers" # to use rspec like syntax
-  gem "factory_girl"
   gem 'factory_girl_rails'
 
-  gem "rspec-rails"
+  #gem "rspec" #, "=1.3.0"
 
   #Cucumber stuff
   gem 'capybara'
-  gem "shoulda"
+  gem "factory_girl"
   gem 'cucumber-rails'
   gem 'spork'
   gem 'launchy'

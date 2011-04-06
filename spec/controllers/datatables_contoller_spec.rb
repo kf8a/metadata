@@ -52,12 +52,18 @@ describe DatatablesController do
           mock_datatable.should_receive(:is_sql).and_return(:true)
           mock_datatable.should_receive(:is_restricted).and_return(:false)
           mock_datatable.should_receive(:object).and_return("select * from datatables")
-          
+
           mock_datatable.should_receive(:to_xml).and_return("generated XML")
           get :show, :id => "37"
           response.body.should == "generated XML"
         end
 
+      end
+
+      describe 'with a version' do
+        it 'should retrieve the version requested' do
+          get :show, :id => 37, :version => 1
+        end
       end
 
     end

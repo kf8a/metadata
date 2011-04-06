@@ -71,6 +71,18 @@ class DatatablesControllerTest < ActionController::TestCase
       end
     end
 
+    context 'GET :show with version' do
+      setup do
+        @sponsor  = Factory.create :sponsor, :data_use_statement => 'smoke em if you got em'
+        dataset   = Factory.create :dataset, :sponsor => @sponsor
+        datatable = Factory.create :datatable, :dataset => dataset
+        
+        get :show, :id => datatable, :version => 0
+      end
+
+      should respond_with :success
+    end
+    
     context 'GET :edit' do
       setup do
         get :edit, :id => @table
