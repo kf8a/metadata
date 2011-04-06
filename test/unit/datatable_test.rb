@@ -87,7 +87,7 @@ class DatatableTest < ActiveSupport::TestCase
     end
 
     should 'respond to can_be_quality_controlled_by?' do
-      assert_respond_to @datatable, 'quality_controlled_by?'
+      assert_respond_to @datatable, 'can_be_quality_controlled_by?'
     end
 
   end

@@ -51,6 +51,10 @@ class Datatable < ActiveRecord::Base
     #set_property :field_weights => {:keyword => 20, :theme => 20, :title => 10}
   end
 
+  def can_by_quality_controlled_by?(user)
+    
+  end
+
   def to_label
     "#{title} (#{name})"
   end
