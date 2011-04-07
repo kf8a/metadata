@@ -24,17 +24,6 @@ class DatasetTest < ActiveSupport::TestCase
     end
   end
 
-  context 'to_label function' do
-    setup do
-      @dataset = Factory.create(:dataset, :title => 'LabelTitle', :dataset => 'Label Dataset')
-    end
-
-    should "provide the title and dataset" do
-      assert_equal "LabelTitle (Label Dataset)", @dataset.to_label
-    end
-
-  end
-
   context 'datatable_people function' do
     context 'for a dataset with datatables and people' do
       setup do

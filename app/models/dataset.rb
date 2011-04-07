@@ -19,10 +19,6 @@ class Dataset < ActiveRecord::Base
 
   acts_as_taggable_on :keywords
 
-  def to_label
-   "#{title} (#{dataset})"
-  end
-
   def datatable_people
     datatables.collect { |table| table.personnel.keys }.flatten
   end
