@@ -109,7 +109,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def can_be_quality_controlled_by?(user)
-    !self.restricted? || user.try(:admin?) || self.owned_by?(user)
+    user.try(:admin?) || self.owned_by?(user)
   end
 
   def owned_by?(user)

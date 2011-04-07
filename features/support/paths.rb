@@ -33,6 +33,9 @@ module NavigationHelpers
     when /the datatable show page for "(.*)"/
       datatable_path(Datatable.find_by_name($1))
 
+    when /the quality control page for "(.*)"/
+      qc_datatable_path(Datatable.find_by_name($1))
+
     when /LTER datatables/
       datatables_path
 

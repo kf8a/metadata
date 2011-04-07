@@ -37,6 +37,9 @@ Metadata::Application.routes.draw do
       post :search
       get :update_temporal_extent
     end
+    member do
+      get :qc
+    end
   end
   resources :invites
   resources :meetings

@@ -1,7 +1,7 @@
 class DatatablesController < ApplicationController
 
-  before_filter :admin?, :except => [:index, :show, :suggest, :search, :events] unless Rails.env == 'development'
-  before_filter :get_datatable, :only => [:show, :edit, :update, :destroy, :update_temporal_extent]
+  before_filter :admin?, :except => [:index, :show, :suggest, :search, :events, :qc] unless Rails.env == 'development'
+  before_filter :get_datatable, :only => [:show, :edit, :update, :destroy, :update_temporal_extent, :qc]
 
   protect_from_forgery :except => [:index, :show, :search]
   cache_sweeper :datatable_sweeper
@@ -81,6 +81,14 @@ class DatatablesController < ApplicationController
       end
     else
       redirect_to datatables_url
+    end
+  end
+
+  def qc
+    unless @datatable.can_be_quality_controlled_by?(current_user)
+      flash[:notice] = "You do not have permission to quality control this datatable"
+      deny_access
+      return false
     end
   end
 

@@ -2,6 +2,22 @@ require File.expand_path('../../test_helper',__FILE__)
 
 class DatatablesControllerTest < ActionController::TestCase
 
+  def setup
+    @table = Factory.create(:datatable, :dataset => Factory.create(:dataset))
+
+    Factory.create(:datatable, :dataset => Factory.create(:dataset))
+    Factory.create(:website, :id=>1).save
+
+    #TODO test with admin and non admin users
+    signed_in_as_admin
+  end
+
+  def teardown
+    @controller.expire_fragment(:controller => "datatables", :action => "index", :action_suffix => "lter")
+    Website.destroy_all
+    Template.destroy_all
+  end
+
   context 'an unsigned in user' do
     setup do
       @controller.current_user = nil
@@ -132,6 +148,16 @@ class DatatablesControllerTest < ActionController::TestCase
       should_not respond_with :success
     end
 
+    context "GET :qc" do
+      setup do
+        refute @table.can_be_quality_controlled_by?(@controller.current_user)
+        get :qc, :id => @table
+      end
+
+      should respond_with :redirect
+      should redirect_to("the sign in page") {sign_in_path}
+    end
+
   end
 
   context 'signed in as admin' do
@@ -198,6 +224,15 @@ class DatatablesControllerTest < ActionController::TestCase
 
       end
     end
+
+    context "GET :qc" do
+      setup do
+        get :qc, :id => @table
+      end
+
+      should respond_with :success
+    end
+
   end
 
   context 'GET :show in the subdomain' do
@@ -223,24 +258,6 @@ class DatatablesControllerTest < ActionController::TestCase
 
     end
   end
-
-  def setup
-    @table = Factory.create(:datatable, :dataset => Factory.create(:dataset))
-
-    Factory.create(:datatable, :dataset => Factory.create(:dataset))
-    Factory.create(:website, :id=>1).save
-
-    #TODO test with admin and non admin users
-    signed_in_as_admin
-  end
-
-  def teardown
-    @controller.expire_fragment(:controller => "datatables", :action => "index", :action_suffix => "lter")
-    Website.destroy_all
-    Template.destroy_all
-  end
-
-
 
   test "index should get the template in the database if there is one" do
     lter_website = Factory.create(:website, :name => 'lter')
