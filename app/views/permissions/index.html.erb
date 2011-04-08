@@ -1,11 +1,11 @@
 <% if signed_in? %>
   <h2>Permissions Management for Datatables Owned by <%= current_user.email %></h2>
 
-  <% Ownership.find_all_by_user_id(current_user.id).each do |ownership| %>
-    <h4><%= ownership.datatable.name %>:</h4>
+  <% @datatables.each do |datatable| %>
+    <h4><%= datatable.name %>:</h4>
     <ul>
-      <li><%= link_to "Modify Permissions for #{ownership.datatable.name}", permission_path(ownership.datatable) %></li>
-      <li><%= link_to "View #{ownership.datatable.name}", datatable_path(ownership.datatable) %></li>
+      <li><%= link_to "Modify Permissions for #{datatable.name}", permission_path(datatable) %></li>
+      <li><%= link_to "View #{datatable.name}", datatable_path(datatable) %></li>
     </ul>
   <% end %>
 <% else %>
