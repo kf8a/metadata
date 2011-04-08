@@ -25,6 +25,9 @@ gem 'thin'
 gem 'jquery-rails', '>= 0.2.6'
 gem "transitions", :require => ["transitions", "active_record/transitions"]
 
+# for creating bibtex formatted citations
+gem 'bibtex-ruby'
+
 #Gets rid of annoying UTF-8 string error in rack
 gem "escape_utils"
 
@@ -51,7 +54,6 @@ end
 
 group :test do
   gem 'mocha'
-  gem 'bibtex-ruby'
   gem 'simplecov'
   gem 'simplecov-html'
 
