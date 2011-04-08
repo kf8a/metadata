@@ -36,9 +36,9 @@ class Citation < ActiveRecord::Base
       joins(:authors).where(:authors => {:seniority => 1}).
       order('pub_year desc, authors.sur_name')
 
-  scope :published, lambda {|website_id| with_authors_by_sur_name_and_pub_year.
-  scope :submitted, lambda {|website_id| with_authors_by_sur_name_and_pub_year.
-  scope :forthcoming, lambda {|website_id| with_authors_by_sur_name_and_pub_year
+  scope :published, lambda {|website_id| with_authors_by_sur_name_and_pub_year.where("state = 'published'").where("website_id = ?",website_id)}
+  scope :submitted, lambda {|website_id| with_authors_by_sur_name_and_pub_year.where("state = 'submitted'").where("website_id =?", website_id)}
+  scope :forthcoming, lambda {|website_id| with_authors_by_sur_name_and_pub_year.where("state = 'forthcoming'").where("website_id =?", website_id)}
 
   state_machine do
     state :submitted
