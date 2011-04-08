@@ -35,18 +35,6 @@ class Dataset < ActiveRecord::Base
     website.try(:name)
   end
 
-  #unpack and populate datatables and variates
-  def from_eml(dataset)
-    dataset.elements.each do |element|
-      self.send(element.name, element.value)
-    end
-    dataset.elements['//dataTable'].each do |datatable|
-      dtable = DataTable.new
-      dtable.from_eml(datatable)
-      datatables << dtable
-    end
-  end
-
   def to_eml
     emldoc = Document.new()
     root = emldoc.add_element('eml:eml')
