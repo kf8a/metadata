@@ -35,12 +35,6 @@ class Dataset < ActiveRecord::Base
     website.try(:name)
   end
 
-  def within_interval?(start_date, end_date)
-    sdate = start_date.to_date
-    edate = end_date.to_date
-    !datatables.index { |table| table.within_interval?(sdate, edate) }.blank?
-  end
-
   #unpack and populate datatables and variates
   def from_eml(dataset)
     dataset.elements.each do |element|

@@ -66,10 +66,6 @@ class DatatableTest < ActiveSupport::TestCase
       assert @datatable.respond_to?('temporal_extent')
     end
 
-    should 'respond_to has_data_in_interval?' do
-      assert @datatable.respond_to?('within_interval?')
-    end
-
     should 'respond to update_temporal_extent' do
       assert @datatable.respond_to?('update_temporal_extent')
     end
@@ -298,19 +294,6 @@ class DatatableTest < ActiveSupport::TestCase
     end
 
 
-    should 'return true if interval includes today' do
-     assert @datatable.within_interval?(Date.today, Date.today + 1.day)
-    end
-
-    should 'return false if the interval is later than the data times' do
-      assert !@datatable.within_interval?(Date.today + 1.day, Date.today + 4.day)
-    end
-
-    should 'return false if the interval is earlier than the data times' do
-      assert !@datatable.within_interval?(Date.today - 4.day, Date.today - 2.day)
-    end
-
-
     should 'have the correct temporal extent' do
       dates = @datatable.temporal_extent
       assert dates[:begin_date] == Date.today
@@ -354,10 +337,6 @@ class DatatableTest < ActiveSupport::TestCase
       @datatable.object = 'select 1 as treatment'
     end
 
-    should 'return false for within_interval?' do
-      assert !@datatable.within_interval?(Date.today + 1.day, Date.today + 4.day)
-    end
-
     should 'return nils for temporal_extent' do
       dates = @datatable.temporal_extent
       assert dates[:begin_date].nil?
@@ -373,25 +352,6 @@ class DatatableTest < ActiveSupport::TestCase
       date = Factory.create(:datatable, :object => %Q{select date '#{Date.today}' as date})
       @date_representations = [obs_date, datetime, date]
     end
-
-    should 'return true if interval includes today' do
-      @date_representations.each do |date_representation|
-        assert date_representation.within_interval?(Date.today, Date.today + 1.day)
-      end
-    end
-
-    should 'return false if the interval is later than the data times' do
-      @date_representations.each do |date_representation|
-        assert !date_representation.within_interval?(Date.today + 1.day, Date.today + 4.day)
-      end
-    end
-
-    should 'return false if the interval is earlier than the data times' do
-      @date_representations.each do |date_representation|
-        assert !date_representation.within_interval?(Date.today - 4.day, Date.today - 2.day)
-      end
-    end
-
 
     should 'have the correct temporal extent' do
       @date_representations.each do |date_representation|
@@ -414,19 +374,6 @@ class DatatableTest < ActiveSupport::TestCase
     setup do
       @year = Factory.create(:datatable, :object => "select #{Time.now.year} as year")
     end
-
-    should 'return true if interval includes today' do
-        assert @year.within_interval?(Date.today - 1.year, Date.today + 1.day)
-    end
-
-    should 'return false if the interval is later than the data times' do
-        assert !@year.within_interval?(Date.today + 1.day, Date.today + 4.day)
-    end
-
-    should 'return false if the interval is earlier than the data times' do
-        assert !@year.within_interval?(Date.today - 4.year, Date.today - 2.year)
-    end
-
 
     should 'have the correct temporal extent' do
         dates = @year.temporal_extent
