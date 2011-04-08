@@ -12,9 +12,6 @@
     <% if citation.pdf.exists? %>
       <%= link_to 'pdf', download_citation_path(citation), :class=>'member-only'%>
     <% end %>
-    <p>
-    <%=raw citation.formatted %>
-    </p>
     <div class='non-member'>
       <% if citation.pdf.exists? -%>
         <%= link_to 'abstracts + pdf', citation_path(citation) %>
