@@ -64,9 +64,7 @@ class CitationsController < ApplicationController
   end
 
   def create
-    @citation = Citation.new(params[:citation])
-    #TODO replace this with the real website id
-    @citation.website_id=2
+    @citation = website.citations.new(params[:citation])
 
     respond_to do |format|
       if @citation.save

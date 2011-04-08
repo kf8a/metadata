@@ -252,6 +252,10 @@ class CitationsControllerTest < ActionController::TestCase
         post :create
       end
 
+      should 'create a citation for the website currently using' do
+        assert_equal @website, Citation.find(assigns(:citation)).website
+      end
+      
       should redirect_to('the citation page') { citation_url(assigns(:citation)) }
     end
 
