@@ -199,4 +199,29 @@ class DatasetTest < ActiveSupport::TestCase
       assert @dataset.update_attributes(params[:dataset])
     end
   end
+
+  context "within_interval? function" do
+    setup do
+      @dataset = Factory.create(:dataset)
+    end
+
+    context "and two datatables" do
+      setup do
+        Factory.create(:datatable, :dataset => @dataset,
+          :object => 'select now() as sample_date',
+          :begin_date => (Date.today - 7),   :end_date => (Date.today - 4))
+        Factory.create(:datatable, :dataset => @dataset,
+          :object => %q{select now() - interval '1 year' as sample_date},
+          :begin_date => (Date.today - 365), :end_date => (Date.today - 364))
+      end
+
+      should "return true for dates which include a datatable" do
+        assert @dataset.within_interval?(Date.today - 10, Date.today)
+      end
+
+      should "return false for dates which do not include a datatable" do
+        refute @dataset.within_interval?(Date.today - 500, Date.today - 400)
+      end
+    end
+  end
 end

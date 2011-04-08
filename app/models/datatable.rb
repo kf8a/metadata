@@ -125,6 +125,13 @@ class Datatable < ActiveRecord::Base
     sponsors.include?(self.dataset.try(:sponsor))
   end
 
+  def within_interval?(start_date, end_date)
+    extent = temporal_extent
+
+    extent[:begin_date] &&
+        extent[:begin_date] >= start_date && extent[:end_date] <= end_date
+  end
+
   def events
     event_query_sql = event_query || ""
     values  = ActiveRecord::Base.connection.execute(event_query_sql)
