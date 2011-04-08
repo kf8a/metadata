@@ -39,6 +39,12 @@ class CitationsControllerTest < ActionController::TestCase
         should respond_with :success
       end
 
+      context 'as an rss feed' do
+        setup {get :index, :format => :rss}
+        should assign_to :citations
+        should respond_with :success
+      end
+
       context 'with a past date' do
         setup do
           date = Date.today
