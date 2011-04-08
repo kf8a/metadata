@@ -14,6 +14,10 @@ class Variate < ActiveRecord::Base
     eml
   end
 
+  def human_name
+    self.unit.try(:human_name)
+  end
+
 private
   def eml_measurement_scale
     measurement_scale_element = Element.new('measurementScale')
