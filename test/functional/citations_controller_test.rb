@@ -116,6 +116,12 @@ class CitationsControllerTest < ActionController::TestCase
         should respond_with :success
 
       end
+      
+      context 'in bibtext format' do
+        setup {get :show, :id=>@citation, :format => 'bib'}
+        should respond_with :success
+        should assign_to :citation
+      end
     end
 
     # this form is to enter the date for the downloading citations older than the date.
