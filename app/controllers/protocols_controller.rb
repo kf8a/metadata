@@ -1,6 +1,5 @@
 class ProtocolsController < ApplicationController
 
-  layout :site_layout
   before_filter :admin?, :except => [:index, :show]  if Rails.env != 'development'
   before_filter :get_protocol, :only => [:edit, :update, :destroy]
     

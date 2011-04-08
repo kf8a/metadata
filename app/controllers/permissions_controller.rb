@@ -2,9 +2,8 @@ class PermissionsController < ApplicationController
 
   before_filter :require_datatable, :require_owner, :except => [:index] 
   
-  layout :site_layout
-  
   def index
+    @datatables = Ownership.find_all_by_user_id(current_user).collect(&:datatable)
     respond_to do |format|
       format.html { render_subdomain }
     end
@@ -12,15 +11,8 @@ class PermissionsController < ApplicationController
   
   def show
     owner = current_user
-    @permissions = Permission.find_all_by_owner_id_and_datatable_id(owner.id, @datatable.id)
-
-    #TODO move permitted_users this to the user model
-    @permitted_users = []
-    @permissions.each do |permission|
-      next if permission.decision == "denied"
-      user = User.find(permission.user_id)
-      @permitted_users << user
-    end
+    @permissions = Permission.where(:owner_id => owner.id, :datatable_id => @datatable.id)
+    @permitted_users = @permissions.permitted_users
   end
   
   def new

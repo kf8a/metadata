@@ -1,7 +1,7 @@
 require 'rexml/document'
 
 include REXML
-class Dataset < ActiveRecord::Base  
+class Dataset < ActiveRecord::Base
   has_many :datatables, :order => 'name'
   has_many :protocols, :conditions => 'active is true'
   has_many :people, :through => :affiliations
@@ -12,49 +12,36 @@ class Dataset < ActiveRecord::Base
   has_and_belongs_to_many :studies
   belongs_to :sponsor
   belongs_to :website
-  
+
   validates_presence_of :abstract
 
   accepts_nested_attributes_for :affiliations, :allow_destroy => true
-  
+
   acts_as_taggable_on :keywords
 
   def to_label
-   "#{title} (#{dataset})" 
+   "#{title} (#{dataset})"
   end
 
   def datatable_people
-    datatables.collect do |table|
-      table.personnel.keys
-    end.flatten
+    datatables.collect { |table| table.personnel.keys }.flatten
   end
 
   def valid_request?(subdomain)
-    valid_request = true
-    website  = self.website
-    website_name = website.try(:name)
-    if website_name
-      unless website_name == subdomain
-        valid_request = false
-      end
-    end
-    valid_request
+    website_name.blank? || (website_name == subdomain)
   end
-  
-  def within_interval?(start_date=Date.today, end_date=Date.today)   
+
+  def website_name
+    website.try(:name)
+  end
+
+  def within_interval?(start_date, end_date)
     sdate = start_date.to_date
     edate = end_date.to_date
-    any_within_interval = datatables.collect do |datatable|
-      datatable.within_interval?(sdate, edate)
-    end
-    #TODO query the start and end dates as well
-    any_within_interval.include?(true)
+    !datatables.index { |table| table.within_interval?(sdate, edate) }.blank?
   end
-  
-  def principal_contact
-  end
-    
-  #unpack and populate datatables and variates  
+
+  #unpack and populate datatables and variates
   def from_eml(dataset)
     dataset.elements.each do |element|
       self.send(element.name, element.value)
@@ -64,13 +51,13 @@ class Dataset < ActiveRecord::Base
       dtable.from_eml(datatable)
       datatables << dtable
     end
-  end  
-  
+  end
+
   def to_eml
     emldoc = Document.new()
     root = emldoc.add_element('eml:eml')
     package_id = "knb-lter-kbs.#{metacat_id.nil? ? self.id : metacat_id}.#{version}"
-    
+
     root.attributes['xmlns:eml']            = 'eml://ecoinformatics.org/eml-2.1.0'
     root.attributes['xmlns:set']            = 'http://exslt.org/sets'
     root.attributes['xmlns:exslt']          = 'http://exslt.org/common'
@@ -86,9 +73,9 @@ class Dataset < ActiveRecord::Base
     eml_dataset.add_element('title').add_text(title)
     creator = eml_dataset.add_element('creator', {'id' => 'KBS LTER'})
     creator.add_element('positionName').add_text('Data Manager')
-    
+
     [people, datatable_people].flatten.uniq.each do |person|
-        p = eml_dataset.add_element('associatedParty', {'id' => person.person, 'scope' => 'document'})      
+        p = eml_dataset.add_element('associatedParty', {'id' => person.person, 'scope' => 'document'})
         p.add_element eml_individual_name(person)
         p.add_element address(person)
         p.add_element('phone', {'phonetype' => 'phone'}).add_text(person.phone) if person.phone
@@ -96,7 +83,7 @@ class Dataset < ActiveRecord::Base
         p.add_element('electronicMailAddress').add_text(person.email) if person.email
         p.add_element('role').add_text(person.lter_roles.first.try(:name).try(:singularize))
       end
-    
+
     eml_dataset.add_element('abstract').add_element('para').add_text(textilize(abstract))
     eml_dataset.add_element keyword_sets
     eml_dataset.add_element contact_info
@@ -110,7 +97,7 @@ class Dataset < ActiveRecord::Base
     #   begin_calendar_date.add_text(initiated.to_s)
     #   end_calendar_date.add_text(completed.to_s)
     # end
-    
+
     datatables.each do |datatable|
       eml_dataset.add_element datatable.to_eml
     end
@@ -118,8 +105,8 @@ class Dataset < ActiveRecord::Base
     root.add_element('additionalMetadata').add_element('metadata').add eml_custom_unit_list
     root.to_s
   end
-  
- 
+
+
   #temporal extent
   def temporal_extent
     begin_date = nil
@@ -134,14 +121,18 @@ class Dataset < ActiveRecord::Base
     end
     {:begin_date => begin_date, :end_date => end_date}
   end
-  
+
    def update_temporal_extent
      dates = temporal_extent
      self.initiated = dates[:begin_date] if dates[:begin_date]
      self.completed = dates[:end_date] if dates[:end_date]
      save
    end
-  
+
+  def restricted?
+    sponsor.try(:data_restricted?)
+  end
+
 private
 
   def eml_custom_unit_list
@@ -152,12 +143,12 @@ private
         variate.unit
       end
     end
-    
+
     e = Element.new('stmml:unitList')
     e.add_attribute('xsi:schemaLocation',"http://www.xml-cml.org/schema/stmml http://lter.kbs.msu.edu/Data/schemas/stmml.xsd")
-    
+
     logger.info custom_units
-    
+
     custom_units.flatten.compact.uniq.each do |unit|
 
       unit_element = Element.new('stmml:unit')
@@ -165,7 +156,7 @@ private
       unit_element.attributes['multiplierToSI'] = unit.multiplier_to_si
       unit_element.attributes['parentSI'] = unit.parent_si
       unit_element.attributes['unitType'] = unit.unit_type
-      
+
       unit_element.attributes['name'] = unit.name
       e.add_element unit_element
     end
@@ -178,7 +169,7 @@ private
     i.add_element('surName').add_text( person.sur_name )
     return i
   end
-  
+
   def eml_access
     a = Element.new('access')
     a.add_attribute('scope','document')
@@ -188,14 +179,14 @@ private
     a.add_element eml_allow('public','read')
     return a
   end
-  
+
   def eml_allow(principal, permission)
     a = Element.new('allow')
     a.add_element('principal').add_text(principal)
-    a.add_element('permission').add_text(permission)  
+    a.add_element('permission').add_text(permission)
     return a
   end
-  
+
   def keyword_sets
     k = Element.new('keywordSet')
     ['LTER','KBS','Kellogg Biological Station', 'Hickory Corners', 'Michigan', 'Great Lakes'].each do| keyword |
@@ -203,7 +194,7 @@ private
     end
     return k
   end
-  
+
   def contact_info
     i = Element.new('contact')
     i.add_element('organizationName').add_text('Kellogg Biological Station')
@@ -230,4 +221,3 @@ private
     return a
   end
 end
-

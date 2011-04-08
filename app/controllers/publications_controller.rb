@@ -1,9 +1,9 @@
 class PublicationsController < ApplicationController
-  
+
   before_filter :admin?, :except => [:index, :show, :index_by_treatment]  if Rails.env == 'production'
   before_filter :get_publication, :only => [:show, :edit, :update, :destroy]
   #caches_action :index
-  
+
   # GET /publications
   # GET /publications.xml
   def index
@@ -25,43 +25,42 @@ class PublicationsController < ApplicationController
       order = 'citation'
       @decoration = 'by Author'
     end
-    
+
     if params[:treatment]
       @alphabetical = true
       treatment = Treatment.find(params[:treatment])
       @publications = treatment.publications
       @decoration = "from #{treatment.name}: #{treatment.description}"
     else
-      @publications = Publication.all(:order => order,
-      :conditions => [conditions, publication_types])
+      @publications = Publication.order(order).where(conditions, publication_types)
     end
-    
+
     if @word
       @publications = Publication.find_by_word(@word)
     end
-    
-    
+
+
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @publications.to_xml }
     end
   end
-  
-  def index_by_treatment    
+
+  def index_by_treatment
     @studies = Study.by_id
 
     #@treatments  = Treatment.find(:all, :order => 'priority')
     respond_to do |format|
-      format.html #{render  :template => '/publications/index_by_treatment.erb'} 
+      format.html #{render  :template => '/publications/index_by_treatment.erb'}
       format.xml {render  :xml => @studies.to_xml}
     end
   end
-  
+
   # GET /publications/1
   # GET /publications/1.xml
   def show
     @publication.abstract = @publication.abstract || '' # Make sure we have an abstract
-    @publication.abstract.gsub!(/\n/,"\n\n") 
+    @publication.abstract.gsub!(/\n/,"\n\n")
     respond_to do |format|
       format.html # show.rhtml
       format.xml  { render :xml => @publication.to_xml }
@@ -90,7 +89,7 @@ class PublicationsController < ApplicationController
     respond_to do |format|
       if @publication.save
         expire_action :action => :index
-         
+
         flash[:notice] = 'Publication was successfully created.'
         format.html { redirect_to publication_url(@publication) }
         format.xml  { render :xml => @publication, :status => :created, :location => @publication }
@@ -100,14 +99,14 @@ class PublicationsController < ApplicationController
       end
     end
   end
- 
+
   # PUT /publications/1
   # PUT /publications/1.xml
   def update
     respond_to do |format|
       if @publication.update_attributes(params[:publication])
         expire_action :action => :index
-         
+
         flash[:notice] = 'Publication was successfully updated.'
         format.html { redirect_to publication_url(@publication) }
         format.xml  { head :ok }
@@ -118,14 +117,14 @@ class PublicationsController < ApplicationController
       end
     end
   end
- 
+
   # DELETE /publications/1
   # DELETE /publications/1.xml
   def destroy
     @publication.destroy
-    
+
     expire_action :action => :index
-    
+
     respond_to do |format|
       format.html { redirect_to publications_url }
       format.js  do
@@ -136,9 +135,9 @@ class PublicationsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-    
+
   private
-    
+
   def set_title
     @title = 'Publications'
   end
@@ -150,12 +149,12 @@ class PublicationsController < ApplicationController
     crumb.name = 'Publications'
     @crumbs << crumb
   end
-    
+
   def get_form_data
-    @publication_types = PublicationType.all.collect {|x| [x.name, x.id]} 
+    @publication_types = PublicationType.all.collect {|x| [x.name, x.id]}
     @treatments = Treatment.all
   end
-    
+
   def get_publication
     @publication = Publication.find(params[:id])
   end

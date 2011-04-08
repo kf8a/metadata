@@ -4,8 +4,6 @@ require 'customizer'
 #a "collection" of its data.
 class CollectionsController < ApplicationController
 
-  layout :site_layout
-  
   def index
     @collections = Collection.all
   end

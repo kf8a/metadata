@@ -1,8 +1,41 @@
-require File.expand_path('../../test_helper',__FILE__) 
+require File.expand_path('../../test_helper',__FILE__)
+require 'mocha'
 
 class PersonTest < ActiveSupport::TestCase
   
   should have_many :datatables
+
+  context 'a person with some lter_roles' do
+    setup do
+      @first_role = Factory.create(:lter_role, :name => 'Creators')
+      @second_role = Factory.create(:lter_role, :name => 'Owners')
+      @person = Factory.create(:person, :lter_roles => [@first_role, @second_role])
+    end
+
+    context 'some of the roles are committee roles' do
+      setup do
+        @first_committee = Factory.create(:lter_role, :name => 'Committee Members')
+        @second_committee = Factory.create(:lter_role, :name => 'Network Representatives')
+        assert @first_committee.committee?
+        assert @second_committee.committee?
+        @person.lter_roles << @first_committee
+        @person.lter_roles << @second_committee
+      end
+
+      context '#get_committee_roles' do
+        setup do
+          @result = @person.get_committee_roles
+        end
+
+        should 'return only the committee role names' do
+          assert @result.include?('Committee Member')
+          assert @result.include?('Network Representative')
+          assert !@result.include?('Creator')
+          assert !@result.include?('Owner')
+        end
+      end
+    end
+  end
   
   context 'an emeritus' do 
     setup do
@@ -20,11 +53,11 @@ class PersonTest < ActiveSupport::TestCase
         :lter_roles => [Factory.create(:role, :name => 'something else')])
     end
     
-    should 'return false for .only_emeritus?' do
+    should 'return false for #only_emeritus?' do
       assert !@person.only_emeritus?
     end
     
-    should 'return false if one role in non emeritus' do
+    should 'return false for #only_emeritus? if one role is non emeritus' do
       @person.lter_roles << Factory.create(:role)
       assert !@person.only_emeritus?
     end
@@ -35,6 +68,7 @@ class PersonTest < ActiveSupport::TestCase
       @person = Factory.create(:person, {:given_name => 'howard', :sur_name => 'spencer'})
       @friendly_person = Factory.create(:person, {:given_name => 'howard', :sur_name => 'spencer', 
           :friendly_name => 'bops'})
+      @long_name = Factory.create(:person, :given_name => 'Shankurnarayanan', :sur_name => 'Ramachandranathan')
     end
     
     should 'return first_name last_name in response to full_name' do
@@ -49,6 +83,12 @@ class PersonTest < ActiveSupport::TestCase
       assert @friendly_person.full_name == 'bops spencer'
       assert @friendly_person.last_name_first == 'spencer, bops'
     end
+
+    should 'truncate the name if necessary in response to #short_full_name' do
+      assert_equal 'bops spencer', @friendly_person.short_full_name
+      assert_equal 'howard spencer', @person.short_full_name
+      assert_equal 'Shankurnarayanan Ramachandrana...', @long_name.short_full_name
+    end
   end
   
   context 'dealing with non US address' do
@@ -57,14 +97,20 @@ class PersonTest < ActiveSupport::TestCase
         :city=>'Anytown', :locale => 'CA', :postal_code => '55555'})
       @explicit_us_address = Factory.create(:person,  {:street_address => '208 Main St.', 
           :city=>'Anytown', :locale => 'CA', :postal_code => '55555', :country=>'USA'} )
+      @less_explicit_us_address = Factory.create(:person,  {:street_address => '208 Main St.',
+          :city=>'Anytown', :locale => 'CA', :postal_code => '55555', :country=>'US'} )
       @eu_address = Factory.create(:person, {:street_address => 'Hanover Strasse 20', 
           :city=>'Hanover', :postal_code=>'242435', :country=>'Germany'})
+      @empty_country_address = Factory.create(:person, {:street_address => '208 Main St.',
+        :city=>'Anytown', :locale => 'CA', :postal_code => '55555', :country => ''})
     end
     
     should 'usa_address? should return appropriately' do
       assert @implicit_us_address.usa_address?
       assert @explicit_us_address.usa_address?
+      assert @less_explicit_us_address.usa_address?
       assert !@eu_address.usa_address?
+      assert @empty_country_address.usa_address?
     end
     
     should 'return the proper address format for us address' do
@@ -78,15 +124,19 @@ class PersonTest < ActiveSupport::TestCase
   end
   
   context 'incomplete addresses' do
-    setup do 
-      @complete = Factory.create(:person,  {:street_address => '208 Main St.', 
-          :city=>'Anytown', :locale => 'CA', :postal_code => '55555', :country=>'USA'} )
-      @no_city =     Factory.create(:person,  {:street_address => '208 Main St.', 
-               :locale => 'CA', :postal_code => '55555', :country=>'USA'} )
-      @city_blank =          Factory.create(:person,  {:street_address => '208 Main St.', 
-              :city=>' ', :locale => 'CA', :postal_code => '55555', :country=>'USA'} )
-      @city_empty =          Factory.create(:person,  {:street_address => '208 Main St.', 
-              :city=>'', :locale => 'CA', :postal_code => '55555', :country=>'USA'} )
+    setup do
+      full_address = {:street_address => '208 Main St.', :city=>'Anytown',
+          :locale => 'CA', :postal_code => '55555', :country=>'USA'}
+      @complete = Factory.create(:person, full_address)
+      @no_city =  Factory.create(:person, full_address.merge(:city => nil))
+      @city_blank = Factory.create(:person, full_address.merge(:city => ' '))
+      @city_empty = Factory.create(:person, full_address.merge(:city => ''))
+      @no_street_address = Factory.create(:person, full_address.merge(:street_address => nil))
+      @street_address_blank = Factory.create(:person, full_address.merge(:street_address => ' '))
+      @no_postal_code = Factory.create(:person, full_address.merge(:postal_code => nil))
+      @postal_code_blank = Factory.create(:person, full_address.merge(:postal_code => ' '))
+      @no_locale = Factory.create(:person, full_address.merge(:locale => nil))
+      @locale_blank = Factory.create(:person, full_address.merge(:locale => ' '))
       @eu_address = Factory.create(:person, {:street_address => 'Hanover Strasse 20', 
                   :city=>'Hanover', :postal_code=>'242435', :country=>'Germany'})
     end
@@ -96,7 +146,43 @@ class PersonTest < ActiveSupport::TestCase
       assert !@no_city.complete_address?
       assert !@city_empty.complete_address?
       assert !@city_blank.complete_address?
+      assert !@no_street_address.complete_address?
+      assert !@street_address_blank.complete_address?
+      assert !@no_postal_code.complete_address?
+      assert !@postal_code_blank.complete_address?
+      assert !@no_locale.complete_address?
+      assert !@locale_blank.complete_address?
       assert @eu_address.complete_address?
     end
+
+    should 'return the proper address format' do
+      assert_equal '208 Main St. Anytown, CA 55555', @complete.address
+      assert_equal '208 Main St. , CA 55555', @no_city.address
+      assert_equal ' Anytown, CA 55555', @no_street_address.address
+      assert_equal '208 Main St. Anytown, CA ', @no_postal_code.address
+      assert_equal '208 Main St. Anytown,  55555', @no_locale.address
+      assert_equal '208 Main St. Anytown,   55555', @locale_blank.address
+    end
   end
+
+  context 'Some people have a dataset role, others do not. ' do
+    setup do
+      data_role = Factory.create(:role)
+      @dataperson1 = Factory.create(:person, :sur_name => 'Jones')
+      @dataperson1.expects(:dataset_roles).returns([data_role])
+      @dataperson2 = Factory.create(:person, :sur_name => 'Smith')
+      @dataperson2.expects(:dataset_roles).returns([data_role])
+      @nodataperson = Factory.create(:person, :sur_name => 'Nodata')
+    end
+
+    context '#has_dataset?' do
+      should "return true for those with dataset roles, false for others" do
+        assert @dataperson1.has_dataset?
+        assert @dataperson2.has_dataset?
+        assert !@nodataperson.has_dataset?
+      end
+    end
+  end
+
+  #TODO a test needs to be written for find_all_with_dataset
 end

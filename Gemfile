@@ -15,20 +15,14 @@ gem 'paperclip'
 gem 'aws-s3'
 gem 'nokogiri'
 gem 'RedCloth', '4.2.4'
-gem 'thinking-sphinx',
-  :git     => 'git://github.com/freelancing-god/thinking-sphinx.git',
-  :branch  => 'rails3',
-  :require => 'thinking_sphinx'
-
+gem 'thinking-sphinx'
 gem 'liquid'
-gem 'clearance', :git => 'git://github.com/thoughtbot/clearance.git'
+gem 'clearance'
 gem 'formtastic'
-#gem 'zipruby'
 gem 'less'
 gem 'awesome_nested_set', :git => 'git://github.com/galetahub/awesome_nested_set.git'
 gem 'thin'
 gem 'jquery-rails', '>= 0.2.6'
-
 gem "transitions", :require => ["transitions", "active_record/transitions"]
 
 #Gets rid of annoying UTF-8 string error in rack
@@ -52,17 +46,17 @@ group :development, :test  do
   gem 'sqlite3-ruby'
   gem 'silent-postgres'
   gem "shoulda"
-  gem "rspec-rails"
+  gem "rspec"
 end
 
 group :test do
+  gem 'mocha'
+  gem 'bibtex-ruby'
   gem 'simplecov'
   gem 'simplecov-html'
 
   #gem "shoulda-matchers" # to use rspec like syntax
   gem 'factory_girl_rails'
-
-  #gem "rspec" #, "=1.3.0"
 
   #Cucumber stuff
   gem 'capybara'
@@ -72,4 +66,5 @@ group :test do
   gem 'launchy'
   gem 'database_cleaner'
   gem 'pickle'
+  gem 'single_test'
 end

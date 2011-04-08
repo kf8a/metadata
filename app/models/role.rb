@@ -14,5 +14,9 @@ class Role < ActiveRecord::Base
   def self.data_roles
     self.where(:role_type_id => RoleType.find_by_name('lter_dataset'))
   end
+
+  def committee_role_name
+    name.singularize if committee?
+  end
   
 end

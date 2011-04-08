@@ -1,3 +1,5 @@
+require 'bibtex'
+
 class Citation < ActiveRecord::Base
   include ActiveRecord::Transitions
 
@@ -23,63 +25,96 @@ class Citation < ActiveRecord::Base
     has_attached_file :pdf, :url => "/citations/:id/download",
         :path => ":rails_root/assets/citations/:attachment/:id/:style/:basename.:extension"
   end
-  
+
+  define_index do
+    indexes title
+  end
+
   attr_protected :pdf_file_name, :pdf_content_type, :pdf_size
 
   scope :with_authors_by_sur_name_and_pub_year,
-          :joins=> 'left join authors on authors.citation_id = citations.id',
-          :conditions => "seniority = 1",
-          :order => 'pub_year desc, authors.sur_name' 
+      joins(:authors).where(:authors => {:seniority => 1}).
+      order('pub_year desc, authors.sur_name')
 
+  scope :published, lambda {|website_id| with_authors_by_sur_name_and_pub_year.
+  scope :submitted, lambda {|website_id| with_authors_by_sur_name_and_pub_year.
+  scope :forthcoming, lambda {|website_id| with_authors_by_sur_name_and_pub_year
 
-  scope :published, lambda {|website_id| with_authors_by_sur_name_and_pub_year.where("state = 'published'").where("website_id = ?",website_id)}
-  scope :submitted, lambda {|website_id| with_authors_by_sur_name_and_pub_year.where("state = 'submitted'").where("website_id =?", website_id)}
-  scope :forthcoming, lambda {|website_id| with_authors_by_sur_name_and_pub_year.where("state = 'forthcoming'").where("website_id =?", website_id)}
-  
   state_machine do
     state :submitted
-    state :forthcomming
+    state :forthcoming
     state :published
 
     event :accept do
-      transitions :to => :forthcomming, :from => [:submitted, :published]
+      transitions :to => :forthcoming, :from => [:submitted, :published]
     end
     event :publish do
-      transitions :to => :published, :from => [:fothcomming, :submitted]
+      transitions :to => :published, :from => [:forthcoming, :submitted]
     end
   end
 
-  def formatted
-    case citation_type.try(:name)
-    when 'book' then formatted_book
-    else formatted_article
+  def Citation.by_date(date)
+    query_date = Date.civil(date['year'].to_i,date['month'].to_i,date['day'].to_i)
+    where('updated_at > ?', query_date)
+  end
+
+  def Citation.to_enw(array_of_citations)
+    array_of_citations.collect {|x| x.as_endnote}.join("\r\n\r\n")
+  end
+
+  def Citation.to_bib(array_of_citations)
+    bib = BibTeX::Bibliography.new
+    array_of_citations.each {|x| bib << x.as_bibtex}
+
+    bib.to_s
+  end
+
+  def Citation.sorted_by(sorter)
+    if sorter.downcase == "primary author and date(default)"
+      all
+    else
+      order(sorter.downcase).all
     end
+  end
+
+  def book?
+    type == BookCitation || citation_type.try(:name) == 'book'
+  end
+
+  def formatted
+    book? ? formatted_book : formatted_article
+  end
+
+  def as_bibtex
+    entry = BibTeX::Entry.new
+    entry.type = bibtex_type
+    entry.key = "citation_#{id}"
+    entry[:abstract] = abstract if abstract.present?
+    entry[:author] = authors.collect { |author| "#{author.given_name} #{author.middle_name} #{author.sur_name}"}.join(' and ')
+    entry[:editor] = editors.collect { |editor| "#{editor.given_name} #{editor.middle_name} #{editor.sur_name}"}.join(' and ')
+    entry[:title] = title if title.present?
+    entry[:publisher] = publisher if publisher.present?
+    entry[:year] = pub_year.to_s if pub_year.present?
+    entry[:address] = address if address.present?
+    entry[:note] = notes if notes.present?
+    entry[:journal] = publication if publication.present?
+    entry[:pages] = page_numbers if page_numbers.present?
+    entry[:volume] = volume if volume.present?
+    entry[:number] = issue if issue.present?
+    entry[:series] = series_title if series_title.present?
+    entry[:isbn] = isbn if isbn.present?
+
+    entry
   end
 
   def as_endnote
     endnote = "%0 "
-    case citation_type.try(:name)
-    when 'book' then 
-      endnote += "Book Section\n"
-    else
-      endnote += "Journal Article\n"
-    end
+    endnote += endnote_type
     endnote += "%T #{title}\n"
-    authors.each do |author|
-      endnote += "%A #{author.formatted()}\n"
-    end
-    editors.each do |editor|
-      endnote += "%E #{editor.formatted()}\n"
-    end
-    case citation_type.try(:name)
-    when 'book' then 
-      endnote += "%B #{publication}\n"
-      endnote += "%I #{publisher}\n" 
-      endnote += "%C #{address}\n" 
-    else
-      endnote += "%J #{publication}\n" if publication
-    end
-    endnote += "%V #{volume}\n" unless volume.try(:empty?)
+    authors.each { |author| endnote += "%A #{author.formatted}\n" }
+    editors.each { |editor| endnote += "%E #{editor.formatted}\n" }
+    endnote += endnote_publication_data
+    endnote += "%V #{volume}\n" if volume.present?
     endnote += "%P #{start_page_number}-#{ending_page_number}\n" if start_page_number
     endnote += "%D #{pub_year}" if pub_year
     endnote += "\n%X #{abstract}" if abstract
@@ -91,49 +126,82 @@ class Citation < ActiveRecord::Base
 
   private
 
-  def formatted_article
-    volume_and_page = case
-      when has_volume? && start_page_number && ending_page_number
-        if start_page_number == ending_page_number
-          "#{volume}:#{start_page_number}."
-        else
-          "#{volume}:#{start_page_number}-#{ending_page_number}."
-        end
-      when has_volume? && start_page_number
-        "#{volume}:#{start_page_number}."
-      when has_volume?
-        "#{volume}."
-      else
-        ""
-      end
+  def bibtex_type
+    :misc
+  end
 
-    "#{author_string} #{pub_year}. #{title}. #{publication} #{volume_and_page}".rstrip
+  def endnote_type
+    book? ? "Book Section\n" : "Journal Article\n"
+  end
+
+  def endnote_publication_data
+    if book?
+      "%B #{publication}\n" + "%I #{publisher}\n" + "%C #{address}\n"
+    else
+      publication.present? ? "%J #{publication}\n" : ""
+    end
+  end
+
+  def formatted_article
+    "#{author_and_year}. #{title}. #{publication} #{volume_and_page}".rstrip
+  end
+
+  def volume_and_page
+    if volume.blank?
+      ""
+    elsif page_numbers.blank?
+      "#{volume}."
+    else
+      "#{volume}:#{page_numbers}."
+    end
+  end
+
+  def page_numbers
+    if start_page_number.blank?
+      ""
+    elsif !ending_page_number.blank? && start_page_number != ending_page_number
+      "#{start_page_number}-#{ending_page_number}"
+    else
+      "#{start_page_number}"
+    end
   end
 
   def formatted_book
-    "#{author_string} #{pub_year}. #{title}. Pages #{start_page_number}-#{ending_page_number} in #{editor_string}, eds. #{publication}. #{publisher}, #{address}.".rstrip
+    "#{author_and_year}. #{title}. #{page_numbers_book}#{editor_string}. #{publication}. #{publisher}, #{address}."
+  end
+
+  def page_numbers_book
+    if page_numbers.blank?
+      ""
+    elsif page_numbers.include?('-')
+      "Pages #{page_numbers}"
+    else
+      "Page #{page_numbers}"
+    end
+  end
+
+  def author_and_year
+    authors.empty? ? "#{pub_year}" : "#{author_string} #{pub_year}"
   end
 
   def author_string
-    author_array = []
     if authors.length > 1
       last_author = authors.pop
       author_array = authors.collect {|author| "#{author.formatted}"}
       author_array.push("#{last_author.formatted(:natural)}.")
-    elsif authors.length > 0
+    else
       author_array = [authors.first.formatted]
-    end 
+    end
     author_array.to_sentence(:two_words_connector => ', and ')
   end
 
   def editor_string
-    editor_array = editors.collect do |editor|
-      "#{editor.formatted(:natural)}"
+    if editors.blank?
+      ""
+    else
+      editor_array = editors.collect { |editor| editor.formatted(:natural) }
+      eds = editor_array.to_sentence(:two_words_connector => ', and ')
+      " in #{eds}, eds"
     end
-    editor_array.to_sentence(:two_words_connector => ', and ')
-  end
-
-  def has_volume?
-    volume && !volume.empty?
   end
 end

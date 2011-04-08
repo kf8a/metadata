@@ -1,4 +1,7 @@
-<%= form.inputs:citation_type, :doi %>
+<%= form.inputs do %>
+  <%= form.input :type, :as => :select, :collection => { 'Book' => 'BookCitation', 'Article' => 'ArticleCitation' } %>
+<% end %>
+<%= form.inputs :doi %>
 <%= form.inputs do %>
   <%= form.input :state, :as => :radio,  :collection => ['submitted','forthcomming','published'] %>
 <% end %>
@@ -19,9 +22,8 @@
 <%= link_to_add_fields "Add Editors", form, :editors %>
 
 
-<%= form.inputs :title, :secondary_title, :series_title, :abstract, :pub_year, :pub_date, :publication, 
+<%= form.inputs :title, :secondary_title, :series_title, :abstract, :pub_year, :pub_date, :publication,
     :start_page_number, :ending_page_number, :periodical_full_name,
-    :periodical_abbreviation, :volume, :issue, :isbn, :publisher_url, 
+    :periodical_abbreviation, :volume, :issue, :isbn, :publisher_url,
     :full_text, :publisher, :address, :city, :notes, :open_access %>
 <%= form.inputs :pdf , :as => :file%>
-

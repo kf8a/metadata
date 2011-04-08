@@ -149,6 +149,16 @@ class PermissionsControllerTest < ActionController::TestCase
                           :datatable => @datatable)
         end
 
+        context "and GET :show the datatable's permissions" do
+          setup do
+            get :show, :id => @datatable
+          end
+
+          should 'have the right permitted users' do
+            assert_equal [@user], assigns(:permitted_users)
+          end
+        end
+
         context "and POST :create permission for that user" do
           setup do
             post :create, :datatable => @datatable, :email => @user.email

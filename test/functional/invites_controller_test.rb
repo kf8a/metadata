@@ -1,10 +1,10 @@
-require File.expand_path('../../test_helper',__FILE__) 
+require File.expand_path('../../test_helper',__FILE__)
 
 class InvitesControllerTest < ActionController::TestCase
 
   context 'as an admin' do
-    setup do 
-      @controller.current_user = Factory.create :admin_user
+    setup do
+      signed_in_as_admin
       @invite = Factory.create :invite
     end
 
@@ -26,7 +26,7 @@ class InvitesControllerTest < ActionController::TestCase
     end
 
     context 'GET :new' do
-      setup do 
+      setup do
         get :new
       end
 
@@ -45,7 +45,7 @@ class InvitesControllerTest < ActionController::TestCase
       setup do
         post :create, :invite => { :email => Factory.next(:email) }
       end
-      
+
       should 'redirect to show page' do
         assert redirect_to invite_path(assigns(:invite))
       end
@@ -61,10 +61,10 @@ class InvitesControllerTest < ActionController::TestCase
     end
 
     context 'PUT :update' do
-      setup do 
+      setup do
         put :update, :id => @invite, :invite => {}
       end
-      
+
       should 'redirect to the show page' do
         assert redirect_to invite_path(assigns(:invite))
       end

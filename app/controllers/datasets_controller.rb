@@ -1,7 +1,5 @@
 class DatasetsController < ApplicationController
 
-  layout :site_layout
-  
   before_filter :allow_on_web
   before_filter :admin?, :except => [:index, :show ] if Rails.env == 'production'
   before_filter :get_dataset, :only => [:show, :edit, :update, :destroy]

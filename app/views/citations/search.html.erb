@@ -1,0 +1,7 @@
+<p>To download copies of listed articles you must first
+  <%= link_to_unless signed_in?, 'sign-in', sign_in_path %>
+</p>
+<h1>Search Results for <%= @word %>: </h1>
+<ul>
+  <%= render :partial => 'citation', :collection => @citations, :locals => {:year => nil} %>
+</ul>

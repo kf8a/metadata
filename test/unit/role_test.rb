@@ -43,9 +43,9 @@ class RoleTest < ActiveSupport::TestCase
     setup do
       @lter_roletype = RoleType.find_by_name("lter_dataset")
       @lter_roletype ||= Factory.create(:role_type, :name => "lter_dataset")
-      @role1 = Factory.create(:role, :role_type_id => @lter_roletype)
-      @role2 = Factory.create(:role, :role_type_id => @lter_roletype)
-      @role3 = Factory.create(:role, :role_type_id => @lter_roletype)
+      @role1 = Factory.create(:role, :role_type => @lter_roletype)
+      @role2 = Factory.create(:role, :role_type => @lter_roletype)
+      @role3 = Factory.create(:role, :role_type => @lter_roletype)
     end
 
     should "find all of the lter_dataset roles" do

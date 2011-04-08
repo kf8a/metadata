@@ -16,6 +16,8 @@ Metadata::Application.routes.draw do
     end
     collection do
       get :biblio
+      get :search
+      get :filtered
     end
   end
 
@@ -34,6 +36,9 @@ Metadata::Application.routes.draw do
       get :suggest
       post :search
       get :update_temporal_extent
+    end
+    member do
+      get :qc
     end
   end
   resources :invites

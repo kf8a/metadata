@@ -1,3 +1,4 @@
+# Members who are able to log in and do things on the site.
 class User < ActiveRecord::Base
   extend Clearance::User::ClassMethods 
   include Clearance::User::InstanceMethods 
@@ -30,21 +31,12 @@ class User < ActiveRecord::Base
   end
   
   def admin?
-    role == 'admin'
+    'admin' == role
   end
   
   def has_permission_from?(owner, datatable)
-    permission = Permission.find_by_user_id_and_owner_id_and_datatable_id(self, owner, datatable)
-    permission && permission.decision != "denied"
+    permission = permissions.find_by_owner_id_and_datatable_id(owner, datatable)
+    permission && !permission.denied?
   end
 
-  protected
-
-  def downcase_email
-    self.email = email.to_s.downcase
-  end
-
-  def denied_access?(datatable)
-    !datatable.deniers_of(self).blank?
-  end
 end

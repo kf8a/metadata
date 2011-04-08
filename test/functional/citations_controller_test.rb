@@ -1,9 +1,10 @@
-require File.expand_path('../../test_helper',__FILE__) 
+require File.expand_path('../../test_helper',__FILE__)
 
 class CitationsControllerTest < ActionController::TestCase
 
   context 'anonymous user' do
     setup do
+      @website = Website.find_or_create_by_name('lter')
       @controller.current_user = nil
     end
 
@@ -12,9 +13,10 @@ class CitationsControllerTest < ActionController::TestCase
         Citation.delete_all  #clear out other citations
         author1 = Factory.create(:author, :sur_name => 'Zebedee', :seniority => 1)
         author2 = Factory.create(:author, :sur_name => 'Alfred',  :seniority => 1)
-        @citation1 = Factory.create(:citation, 
+        website = Website.find_by_name("lter") || Factory.create(:website, :name => "lter")
+        @citation1 = Factory.create(:citation, :website => website,
           :authors => [author1], :title => 'citation1', :pub_year => 2010, :state => 'published')
-        @citation2 = Factory.create(:citation, 
+        @citation2 = Factory.create(:citation, :website => website,
           :authors => [author2], :title => 'citation2', :pub_year => 2010, :state => 'published')
         get :index
       end
@@ -24,12 +26,11 @@ class CitationsControllerTest < ActionController::TestCase
 
       should render_with_layout 'lter'
 
-      should 'return the citations in alphabetical order' do
-#        citations = assigns(:citations)
-        assert_equal 2, assigns(:citations).size
- 
+      should 'return the citations in order of author last name' do
+        citations = assigns(:citations)
+        assert_equal 2, citations.size
         assert_equal @citation2, citations[0]
-        assert_equal @citation1,  citations[1] 
+        assert_equal @citation1,  citations[1]
       end
 
       context 'in endnote format' do
@@ -39,7 +40,7 @@ class CitationsControllerTest < ActionController::TestCase
       end
 
       context 'with a past date' do
-        setup do 
+        setup do
           date = Date.today
           get :index, :date=>{:year=>"#{date.year - 1}", :month=>'4', :day => '16'}
         end
@@ -51,7 +52,7 @@ class CitationsControllerTest < ActionController::TestCase
       end
 
       context 'with a future date parameter' do
-        setup do 
+        setup do
           date = Date.today
           get :index, :date=>{:year=>"#{date.year + 1}", :month=>'4', :day => '16'}
         end
@@ -121,15 +122,16 @@ class CitationsControllerTest < ActionController::TestCase
       setup do
         get :new
       end
-      should respond_with :forbidden
+
+      should redirect_to('the sign in path') { sign_in_path }
     end
 
     context 'POST: create' do
       setup do
-        post :create 
+        post :create
       end
 
-      should respond_with :forbidden
+      should redirect_to('the sign in path') { sign_in_path }
     end
 
     context 'GET: edit' do
@@ -138,7 +140,7 @@ class CitationsControllerTest < ActionController::TestCase
         post :edit, :id => citation
       end
 
-      should respond_with :forbidden
+      should redirect_to('the sign in path') { sign_in_path }
     end
 
     context 'POST: update' do
@@ -147,25 +149,26 @@ class CitationsControllerTest < ActionController::TestCase
         post :update, :id => @citation, :title => 'nothing'
       end
 
-      should respond_with :forbidden
+      should redirect_to('the sign in path') { sign_in_path }
     end
 
     context 'DELETE' do
-      setup do 
+      setup do
         citation = Factory :citation
         post :destroy, :id => citation
       end
 
-      should respond_with :forbidden
+      should redirect_to('the sign in path') { sign_in_path }
     end
-    
+
   end
 
 
   context 'signed in user' do
 
     setup do
-      @controller.current_user = Factory :user
+      @website = Website.find_or_create_by_name('lter')
+      signed_in_as_normal_user
     end
 
     context 'GET :index' do
@@ -176,13 +179,13 @@ class CitationsControllerTest < ActionController::TestCase
       should respond_with :success
       should assign_to :citations
     end
-    
+
     context 'GET: new' do
       setup do
         get :new
       end
 
-      should respond_with :forbidden
+      should redirect_to('the sign in path') { sign_in_path }
     end
 
     context 'POST: create' do
@@ -190,16 +193,16 @@ class CitationsControllerTest < ActionController::TestCase
         post :create
       end
 
-      should respond_with :forbidden
+      should redirect_to('the sign in path') { sign_in_path }
     end
-    
+
     context 'GET: edit' do
       setup do
         @citation = Factory.create :citation
         get :edit, :id => @citation
       end
 
-      should respond_with :forbidden
+      should redirect_to('the sign in path') { sign_in_path }
     end
 
     context 'POST: update' do
@@ -208,23 +211,24 @@ class CitationsControllerTest < ActionController::TestCase
         post :update, :id => @citation, :title=>'nothing'
       end
 
-      should respond_with :forbidden
+      should redirect_to('the sign in path') { sign_in_path }
     end
 
     context 'DELETE' do
-      setup do 
+      setup do
         citation = Factory :citation
         post :destroy, :id => citation
       end
 
-      should respond_with :forbidden
+      should redirect_to('the sign in path') { sign_in_path }
     end
   end
 
   context 'signed in as admin' do
 
     setup do
-      @controller.current_user = Factory.create :admin_user
+      @website = Website.find_or_create_by_name('lter')
+      signed_in_as_admin
     end
 
     context 'GET :index' do
@@ -242,7 +246,6 @@ class CitationsControllerTest < ActionController::TestCase
         post :create
       end
 
-      should respond_with :redirect
       should redirect_to('the citation page') { citation_url(assigns(:citation)) }
     end
 
@@ -251,7 +254,6 @@ class CitationsControllerTest < ActionController::TestCase
         post :create, :pdf => 'testing'
       end
 
-      should respond_with :redirect
       should redirect_to('the citation page') {citation_url(assigns(:citation))}
 
     end
@@ -283,7 +285,6 @@ class CitationsControllerTest < ActionController::TestCase
         post :update, :id => citation, :citation => {:title => 'nothing' }
       end
 
-      should respond_with :redirect
       should redirect_to('the citation page') {citation_url(assigns(:citation))}
       should assign_to(:citation)
 

@@ -1,6 +1,6 @@
 Given /^"([^"]*)" has permission to download the datatable$/ do |email|
   user = User.find_by_email(email)
-  owner = Factory.create(:email_confirmed_user)
+  owner = Factory.create(:email_confirmed_user, :email => 'permission_owner@example.com')
   datatable = Datatable.last
   Factory.create(:ownership, :user => owner, :datatable => datatable)
   Factory.create(:permission, :user => user, :datatable => datatable, :owner => owner)

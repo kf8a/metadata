@@ -1,5 +1,4 @@
 class UsersController < Clearance::UsersController
-  layout :site_layout
   
   def create
     @user = User.new params[:user]

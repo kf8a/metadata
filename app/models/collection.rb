@@ -11,4 +11,8 @@ class Collection < ActiveRecord::Base
   def values
     @values ||= self.perform_query
   end
+
+  def title_and_years
+    self.datatable.title_and_years
+  end
 end

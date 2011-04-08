@@ -8,10 +8,18 @@ class Permission < ActiveRecord::Base
   
   validates_uniqueness_of :user_id, :scope => [:datatable_id, :owner_id]
   validate :only_owners_can_set_permissions
+
+  def Permission.permitted_users
+    all.collect { |permission| permission.user unless permission.denied? }.compact
+  end
      
   def only_owners_can_set_permissions
     if datatable
       errors[:base] << 'owners only' unless datatable.owners.include?(owner)
     end
+  end
+
+  def denied?
+    decision == "denied"
   end
 end

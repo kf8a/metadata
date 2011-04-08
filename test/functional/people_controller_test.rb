@@ -1,8 +1,8 @@
-require File.expand_path('../../test_helper',__FILE__) 
+require File.expand_path('../../test_helper',__FILE__)
 
 class PeopleControllerTest < ActionController::TestCase
   fixtures :people, :role_types, :roles,  :affiliations
-  
+
   context 'not signed in' do
      setup do
        @controller.current_user = nil
@@ -37,12 +37,12 @@ class PeopleControllerTest < ActionController::TestCase
    context 'signed in as admin' do
 
    end
-  
+
   def setup
     #TODO test with admin and non admin users
-    @controller.current_user = Factory.create :admin_user
+    signed_in_as_admin
   end
-  
+
   context "GET :index" do
     setup do
       get :index
@@ -51,19 +51,19 @@ class PeopleControllerTest < ActionController::TestCase
     teardown do
       @controller.expire_fragment(:action => :index)
     end
-    
+
     should respond_with :success
     should render_template :index
     should assign_to :people
     should assign_to :roles
   end
-  
+
   context "GET :alphabetical" do
     setup do
       Rails.cache.clear
       get :alphabetical
     end
-    
+
     should render_template :alphabetical
     should assign_to :people
   end
@@ -73,20 +73,20 @@ class PeopleControllerTest < ActionController::TestCase
       Rails.cache.clear
       get :emeritus
     end
-    
+
     should render_template :emeritus
     should assign_to :people
     should assign_to :roles
   end
-  
+
   context "GET :show for a person" do
     setup do
       @person = Factory.create(:person)
       get :show, :id => @person
     end
-    
+
     should respond_with :success
-    
+
     should render_template :show
     # by default render the lter layout
     should render_with_layout 'lter'
@@ -98,69 +98,69 @@ class PeopleControllerTest < ActionController::TestCase
        @person = Factory.create(:person)
       get :show, :id => @person, :requested_subdomain => 'glbrc'
     end
-    
+
     should respond_with :success
-    
+
     should render_template :show
     should render_with_layout 'glbrc'
     should assign_to :person
   end
-  
+
   context "GET: show for subdomain lter" do
     setup do
       @person = Factory.create(:person)
       get :show, :id => @person, :requested_subdomain => 'lter'
     end
-    
+
      should respond_with :success
 
      should render_template :show
      should render_with_layout 'lter'
      should assign_to :person
   end
-  
+
   def test_should_get_new
     get :new
     assert_response :success
   end
-  
+
   def test_should_create_person
     old_count = Person.count
     post :create, :person => { }
     assert_equal old_count+1, Person.count
-    
+
     assert_redirected_to person_path(assigns(:person))
     #TODO test that the cache get's invalidated
   end
-  
+
   #Trying to create a person with invalid parameters should be tested once any parameters are invalid.
-  
+
   def test_should_get_edit
     get :edit, :id => 107
     assert_response :success
 
   end
-  
+
   def test_should_update_person
     put :update, :id => '107', :person=>{"city"=>"Hickory Corners", "postal_code"=>"49060", "title"=>"", "lter_role_ids"=>["15"], "country"=>"USA", "sur_name"=>"Grillo (REU)", "url"=>"", "street_address"=>"", "given_name"=>"Michael", "sub_organization"=>"Kellogg Biological Station", "fax"=>"", "phone"=>"", "organization"=>"Michigan State University", "locale"=>"MI", "friendly_name"=>"Mike", "middle_name"=>"", "email"=>"grillom1@msu.edu"}
     assert_redirected_to person_path(assigns(:person))
   end
-  
+
   def test_update_should_invalidate_cache
     get :index
-    
+
     put :update, :id => '107', :person=>{"city"=>"Hickory Corners", "postal_code"=>"49060", "title"=>"", "lter_role_ids"=>["15"], "country"=>"USA", "sur_name"=>"Grillo (REU)", "url"=>"", "street_address"=>"", "given_name"=>"Michael", "sub_organization"=>"Kellogg Biological Station", "fax"=>"", "phone"=>"", "organization"=>"Michigan State University", "locale"=>"MI", "friendly_name"=>"Mike", "middle_name"=>"", "email"=>"grillom1@msu.edu"}
-       
-    #assert File.exists? ActionController::Base.page_cache_path(@request.path) 
+
+    #assert File.exists? ActionController::Base.page_cache_path(@request.path)
   end
-  
+
   #Trying to update a person with invalid parameters should be tested once any parameters count as invalid.
-  
+
   def test_should_destroy_person
     old_count = Person.count
     delete :destroy, :id => 304
     assert_equal old_count-1, Person.count
-    
+
     assert_redirected_to people_path
   end
 end
