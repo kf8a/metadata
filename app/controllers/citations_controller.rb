@@ -15,6 +15,7 @@ class CitationsController < ApplicationController
       format.html
       format.enw { send_data Citation.to_enw(@citations), :filename=>'glbrc.enw' }
       format.bib { send_data Citation.to_bib(@citations), :filename=>'glbrc.bib' }
+      format.rss { render :layout => false } #index.rss.builder
     end
   end
 
