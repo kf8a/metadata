@@ -49,6 +49,7 @@ group :development, :test  do
   gem 'sqlite3-ruby'
   gem 'silent-postgres'
   gem "shoulda"
+  gem 'rspec-rails'
   gem "rspec"
 end
 
