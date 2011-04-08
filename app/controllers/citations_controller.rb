@@ -1,5 +1,6 @@
 class CitationsController < ApplicationController
   respond_to :html, :xml, :json
+  layout :site_layout
   before_filter :admin?, :only => [:new, :create, :edit, :update, :destroy]
 
   def index
