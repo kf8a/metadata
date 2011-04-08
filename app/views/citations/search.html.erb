@@ -1,3 +1,6 @@
+<p>
+<%= render :partial => 'search_form', :locals => {:word => @word, :type => @type, :sort_by => @sort_by} %>
+</p>
 <p>To download copies of listed articles you must first
   <%= link_to_unless signed_in?, 'sign-in', sign_in_path %>
 </p>
