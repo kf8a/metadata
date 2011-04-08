@@ -1,14 +1,5 @@
-<div id='search_form'>
+<div id='search-form'>
   <%= form_tag search_citations_path, :method => 'get'%>
-    <%= label_tag :word, "Containing text:" %>
-    <%= text_field_tag :word, word, :size => 60 %>
+    <%= text_field_tag :word, word, :size => 80 %>
     <%= submit_tag "Search all citations" %>
-</div>
-<div id="filter_form">
-  <%= form_tag filtered_citations_path, :method => 'get' %>
-  <%= label_tag :type, "Type" %>
-    <%= select_tag :type, options_for_select({ '' => '', 'Book' => 'BookCitation', 'Article' => 'ArticleCitation' }, type) %>
-    <%= label_tag :sort_by, "Sort by:" %>
-    <%= select_tag :sort_by, options_for_select(['Primary Author and Date(Default)', 'Title'], sort_by) %>
-    <%= submit_tag "Filter citations" %>
 </div>
