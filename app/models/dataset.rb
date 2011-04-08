@@ -39,6 +39,24 @@ class Dataset < ActiveRecord::Base
     website.try(:name)
   end
 
+  def within_interval?(start_date, end_date)
+    sdate = start_date.to_date
+    edate = end_date.to_date
+    !datatables.index { |table| table.within_interval?(sdate, edate) }.blank?
+  end
+
+  #unpack and populate datatables and variates
+  def from_eml(dataset)
+    dataset.elements.each do |element|
+      self.send(element.name, element.value)
+    end
+    dataset.elements['//dataTable'].each do |datatable|
+      dtable = DataTable.new
+      dtable.from_eml(datatable)
+      datatables << dtable
+    end
+  end
+
   def to_eml
     emldoc = Document.new()
     root = emldoc.add_element('eml:eml')
