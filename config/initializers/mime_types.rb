@@ -10,7 +10,7 @@
 # Mime::Type.register "application/x-mobile", :mobile
 Mime::Type.register "text/xml", :eml
 Mime::Type.register "text/csv", :climdb
-Mime::Type.register "text/text", :enw
-Mime::Type.register "text/text", :bib
+Mime::Type.register "application/x-endnote-refer", :enw
+Mime::Type.register "application/x-bibtex", :bib
 #Mime::Type.register "application/vnd.ms-excel", :xls
 
