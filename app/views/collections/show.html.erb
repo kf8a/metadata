@@ -1,7 +1,7 @@
 <h1><%= @collection.datatable.title_and_years %></h1>
 
 <table class='data-description'>
-  <% unless @collection.datatable.dataset.protocols.empty? %>
+  <% if @collection.datatable.dataset.protocols.present? %>
     <tr>
       <td>Protocols</td>
       <td>
