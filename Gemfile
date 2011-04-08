@@ -1,11 +1,11 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.5'
+gem 'rails', '3.0.6'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'capistrano'
+gem 'capistrano' #, :git=>'git://github.com/capistrano/capistrano.git'
 gem 'newrelic_rpm'
 gem 'pg'
 gem 'ruby-openid', :git => 'https://github.com/kf8a/ruby-openid.git'
