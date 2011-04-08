@@ -28,6 +28,9 @@ class Citation < ActiveRecord::Base
 
   define_index do
     indexes title
+    indexes abstract
+    indexes authors.sur_name :as => :authors
+    has website_id
   end
 
   attr_protected :pdf_file_name, :pdf_content_type, :pdf_size

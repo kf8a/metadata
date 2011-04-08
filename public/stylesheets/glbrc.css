@@ -337,6 +337,8 @@
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
 }
+#glbrc #word { width: 450px; }
+#glbrc #word input { color: #cccccc; }
 #glbrc #keyworder { width: 450px; }
 #glbrc #keyworder input { color: #cccccc; }
 #glbrc #search-submit {
