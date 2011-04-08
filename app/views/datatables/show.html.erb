@@ -73,7 +73,7 @@
       <tr>
         <td>Protocols</td>
         <td>
-          <% @datatable.dataset.protocols_with_backup.each do |protocol| %>
+          <% @datatable.protocols_with_backup.each do |protocol| %>
             <%= link_to protocol.name, protocol_path(protocol)%>
           <% end %>
         </td>
