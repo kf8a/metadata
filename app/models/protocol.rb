@@ -8,6 +8,10 @@ class Protocol < ActiveRecord::Base
 
   versioned :dependent => :tracking
 
+  def to_s
+    "#{self.title}"
+  end
+
   def deprecate!(other)
     other.active = false
     other.save
@@ -18,5 +22,9 @@ class Protocol < ActiveRecord::Base
 
   def replaced_by
     Protocol.where(:deprecates => self.id).first
+  end
+
+  def dataset_description
+    self.dataset.try(:dataset)
   end
 end
