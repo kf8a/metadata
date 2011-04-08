@@ -42,8 +42,8 @@ class CitationsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.enw { send_data Citation.to_enw(@citations), :filename=>'glbrc.enw' }
-      format.bib { send_data Citation.to_bib(@citations), :filename=>'glbrc.bib' }
+      format.enw { send_data Citation.to_enw(@citations), :filename=>'index.enw' }
+      format.bib { send_data Citation.to_bib(@citations), :filename=>'index.bib' }
       format.rss { render :layout => false } #index.rss.builder
     end
   end
@@ -53,9 +53,8 @@ class CitationsController < ApplicationController
     @citation = Citation.find(params[:id])
     respond_to do |format|
       format.html
-      format.enw do
-        send_data @citation.as_endnote, :filename=>'glbrc.enw'
-      end
+      format.enw { send_data @citation.as_endnote, :filename=>"#{@citation.id}-#{@citation.title}-#{@citation.pub_year}.enw" }
+      format.bib { send_data @citation.as_bibtex, :filename=>"#{@citation.id}-#{@citation.title}-#{@citation.pub_year}.bib" }
     end
   end
 

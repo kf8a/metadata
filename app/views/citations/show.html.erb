@@ -11,6 +11,7 @@
 <p>
 Download citation to
 <%= link_to 'endnote', citation_path(@citation, :format=>'enw') %>
+<%= link_to 'bibtex',  citation_path(@citation, :format=>'bib') %>
 </p>
 <% if @citation.pdf.exists? %>
   <% if signed_in? or @citation.open_access %>
