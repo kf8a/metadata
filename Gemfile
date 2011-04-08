@@ -1,11 +1,11 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.5'
+gem 'rails', '3.0.6'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'capistrano'
+gem 'capistrano' #, :git=>'git://github.com/capistrano/capistrano.git'
 gem 'newrelic_rpm'
 gem 'pg'
 gem 'ruby-openid', :git => 'https://github.com/kf8a/ruby-openid.git'
@@ -24,6 +24,9 @@ gem 'awesome_nested_set', :git => 'git://github.com/galetahub/awesome_nested_set
 gem 'thin'
 gem 'jquery-rails', '>= 0.2.6'
 gem "transitions", :require => ["transitions", "active_record/transitions"]
+
+# for creating bibtex formatted citations
+gem 'bibtex-ruby'
 
 #Gets rid of annoying UTF-8 string error in rack
 gem "escape_utils"
@@ -51,7 +54,6 @@ end
 
 group :test do
   gem 'mocha'
-  gem 'bibtex-ruby'
   gem 'simplecov'
   gem 'simplecov-html'
 
