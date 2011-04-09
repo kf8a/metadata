@@ -21,12 +21,16 @@ class CitationsController < ApplicationController
 
   def search
     @word = params[:word]
-    @citations = Citation.search @word, :with => { :website_id => website.id }
-    respond_to do |format|
-      format.html
-      format.enw { send_data Citation.to_enw(@citations), :filename=>'glbrc.enw' }
-      format.bib { send_data Citation.to_bib(@citations), :filename=>'glbrc.bib' }
-      format.rss { render :layout => false } #index.rss.builder
+    if @word.empty?
+      redirect_to citations_url
+    else
+      @citations = Citation.search @word, :with => { :website_id => website.id }
+      respond_to do |format|
+        format.html
+        format.enw { send_data Citation.to_enw(@citations), :filename=>'glbrc.enw' }
+        format.bib { send_data Citation.to_bib(@citations), :filename=>'glbrc.bib' }
+        format.rss { render :layout => false } #index.rss.builder
+      end
     end
   end
 
