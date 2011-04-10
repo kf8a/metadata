@@ -3,7 +3,7 @@ class PermissionsController < ApplicationController
   before_filter :require_datatable, :require_owner, :except => [:index] 
   
   def index
-    @datatables = Ownership.find_all_by_user_id(current_user).collect(&:datatable)
+    @datatables = current_user.try(:datatables)
     respond_to do |format|
       format.html { render_subdomain }
     end

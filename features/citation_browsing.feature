@@ -20,23 +20,24 @@ Feature: Browsing Citations
     When I follow "abstract" within "div#2488"
       Then I should see "A nice abstract"
 
-  Scenario: Browsing by type
-    Given a citation exists with type: "ArticleCitation", pub_year: 1984, abstract: "A nice abstract", title: "Cool citation", website: the website
-      And an author exists with citation: the citation
-      And a citation exists with type: "BookCitation", pub_year: 1981, abstract: "An old abstract", title: "Old citation", website: the website
-      And an author exists with citation: the citation
-      And I am signed in as a normal user
-    Then the website should have 2 citations
-
-    When I go to the citations page
-    Then I should see "1984"
-      And I should see "Cool citation"
-      And I should see "1981"
-      And I should see "Old citation"
-
-    When I select "Article" from "type"
-      And I press "Filter"
-    Then I should see "1984"
-      And I should see "Cool citation"
-      And I should not see "1981"
-      And I should not see "Old citation"
+# This feature has been removed, at least for now
+#  Scenario: Browsing by type
+#    Given a citation exists with type: "ArticleCitation", pub_year: 1984, abstract: "A nice abstract", title: "Cool citation", website: the website
+#      And an author exists with citation: the citation
+#      And a citation exists with type: "BookCitation", pub_year: 1981, abstract: "An old abstract", title: "Old citation", website: the website
+#      And an author exists with citation: the citation
+#      And I am signed in as a normal user
+#    Then the website should have 2 citations
+#
+#    When I go to the citations page
+#    Then I should see "1984"
+#      And I should see "Cool citation"
+#      And I should see "1981"
+#      And I should see "Old citation"
+#
+#    When I select "Article" from "type"
+#      And I press "Filter"
+#    Then I should see "1984"
+#      And I should see "Cool citation"
+#      And I should not see "1981"
+#      And I should not see "Old citation"

@@ -23,6 +23,10 @@ class Dataset < ActiveRecord::Base
    "#{title} (#{dataset})"
   end
 
+  def to_s
+    "#{dataset}"
+  end
+
   def datatable_people
     datatables.collect { |table| table.personnel.keys }.flatten
   end
