@@ -232,6 +232,15 @@ GEM
       ruby2ruby (~> 1.2)
       ruby_parser (~> 2.0)
       sexp_processor (~> 3.0)
+    remarkable (4.0.0.alpha4)
+      rspec (>= 2.0.0.alpha11)
+    remarkable_activemodel (4.0.0.alpha4)
+      remarkable (~> 4.0.0.alpha4)
+      rspec (>= 2.0.0.alpha11)
+    remarkable_activerecord (4.0.0.alpha4)
+      remarkable (~> 4.0.0.alpha4)
+      remarkable_activemodel (~> 4.0.0.alpha4)
+      rspec (>= 2.0.0.alpha11)
     riddle (1.2.2)
     roodi (2.1.0)
       ruby_parser
@@ -325,6 +334,7 @@ DEPENDENCIES
   rack-offline
   rack-openid
   rails (= 3.0.6)
+  remarkable_activerecord (>= 4.0.0.alpha2)
   rspec
   rspec-rails
   ruby-openid!
