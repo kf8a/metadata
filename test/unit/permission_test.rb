@@ -71,10 +71,10 @@ class PermissionTest < ActiveSupport::TestCase
       p2.owner     = @owner
       p2.user      = user
 
-      #TODO after saving the permission becomes invalid. Don't know if that would cause problems elsewere.
       assert p1.valid?
       assert p1.save
-      assert !p2.valid?
+      refute p2.valid?
+      assert p1.valid?
     end
 
     should 'allow permissions to be updated' do
