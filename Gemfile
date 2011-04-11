@@ -49,7 +49,7 @@ group :development, :test  do
   gem 'sqlite3-ruby'
   gem 'silent-postgres'
   gem "shoulda"
-#  gem 'rspec-rails'
+  gem 'rspec-rails'
   gem "rspec"
 end
 
@@ -60,6 +60,7 @@ group :test do
 
   #gem "shoulda-matchers" # to use rspec like syntax
   gem 'factory_girl_rails'
+  gem 'remarkable_activerecord', '>=4.0.0.alpha2'
 
   #Cucumber stuff
   gem 'capybara'

@@ -10,7 +10,6 @@ class ProtocolsController < ApplicationController
   def index
     store_location
     @themes = Theme.roots
-    website =  Website.find_by_name(@subdomain_request)
     @protocols = website.protocols.find(:all, :order => 'title', :conditions => ['active = true'])
 
     respond_to do |format|
@@ -23,7 +22,6 @@ class ProtocolsController < ApplicationController
   # GET /protocols/1.xml
   def show
     store_location
-    website =  Website.find_by_name(@subdomain_request)
     @protocol = website.protocols.first(:conditions => ['id = ?', params[:id]])
 
     respond_to do |format|

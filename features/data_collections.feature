@@ -4,9 +4,7 @@ Feature: Data Collections
   I want to be able to browse and search the data for some datatables
 
   Background:
-    Given a website exists with a name of "lter"
-      And a website exists with a name of "glbrc"
-      And I am signed in as a normal user
+    Given I am signed in as a normal user
       And I am in the lter subdomain
 
   Scenario: Seeing which datatables are available as collections

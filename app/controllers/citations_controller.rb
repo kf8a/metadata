@@ -134,8 +134,4 @@ class CitationsController < ApplicationController
       @title = 'GLBRC Sustainability Publications'
     end
   end
-
-  def website
-    @website ||= Website.find_by_name(@subdomain_request) || Website.first
-  end
 end

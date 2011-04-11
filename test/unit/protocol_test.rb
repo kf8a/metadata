@@ -6,8 +6,8 @@ class ProtocolTest < ActiveSupport::TestCase
 
   context 'a protocol' do
     setup do
-      @website = Factory :website, :name=>'lter'
-      @website2 = Factory :website, :name => 'glbrc'
+      @website = Website.find_by_name('lter')
+      @website2 = Website.find_by_name('glbrc')
       @protocol = Factory.create(:protocol)
     end
 

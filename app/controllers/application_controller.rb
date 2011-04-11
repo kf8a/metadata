@@ -57,4 +57,8 @@ class ApplicationController < ActionController::Base
     handler = TemplateHandler.new(page, mycontroller, domain)
     render :template => handler.correct_template
   end
+
+  def website
+    @website ||= Website.find_by_name(@subdomain_request) || Website.first
+  end
 end

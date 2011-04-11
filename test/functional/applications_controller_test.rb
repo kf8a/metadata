@@ -86,8 +86,8 @@ class ApplicationControllerTest < ActionController::TestCase
 
       context "when a template is in the database" do
         setup do
-          lter_website = Factory.create(:website, :name => 'lter')
-          index_layout = Factory.create(:template,
+          lter_website = Website.find_by_name('lter')
+          Factory.create(:template,
                     :website_id => lter_website.id,
                     :controller => 'datatables',
                     :action     => 'index',

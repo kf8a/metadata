@@ -45,8 +45,7 @@ class DatatablesController < ApplicationController
     accessible_by_ip = trusted_ip? || !@datatable.is_restricted
     csv_ok = accessible_by_ip && @datatable.can_be_downloaded_by?(current_user)
     climdb_ok = accessible_by_ip
-
-    @website = Website.find_by_name(@subdomain_request)
+    @website = website
     @trusted = trusted_ip?
 
     store_location #in case we have to log in and come back here
@@ -233,14 +232,12 @@ class DatatablesController < ApplicationController
     @keyword_list = query['keyword_list']
     @keyword_list = nil if @keyword_list.empty? || @keyword_list == @default_value
 
-    website = Website.find_by_name(@subdomain_request)
-    website_id = (website.try(:id) or 1)
     if @keyword_list
-      @datatables = Datatable.search @keyword_list, :with => {:website => website_id}
+      @datatables = Datatable.search @keyword_list, :with => {:website => website.id}
     else
       @datatables = Datatable.
           joins('left join datasets on datasets.id = datatables.dataset_id').
-          where('is_secondary is false and website_id = ?', website_id).all
+          where('is_secondary is false and website_id = ?', website.id).all
     end
 
     @studies = Study.find_all_roots_with_datatables(@datatables)
