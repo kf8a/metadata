@@ -56,8 +56,7 @@ class PublicationsControllerTest < ActionController::TestCase
     old_count = Publication.count
     post :create, :publication => {'year' => '2008', :citation => 'Jones et.al 2008'}
     assert_equal (old_count+1), Publication.count
-    #TODO check redirect on create publication
-    #assert_redirected_to publications_path(assigns(:publications))
+    assert_redirected_to publication_path(assigns(:publication))
   end
   
   context "POST :create with invalid parameters" do
