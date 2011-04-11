@@ -3,12 +3,8 @@ Feature: Protocols should be linked to more than one dataset and show up on one 
   As an administrator
   I want to associate protocols with websites
   
-  Background:
-  
   Scenario: Assigning a new protocol to a website
     Given I am in the GLBRC subdomain
-    And   a website exists with a name of "glbrc"
-    And   a website exists with a name of "lter"
     And   a dataset exists with a dataset of "Useful Dataset"
     And   a user exists and is confirmed with an email of "bob@person.com"
     And   "bob@person.com" is an administrator
@@ -24,8 +20,6 @@ Feature: Protocols should be linked to more than one dataset and show up on one 
   
   Scenario: A protocol which is not assigned to LTER does not show up on LTER
     Given I am in the LTER subdomain
-    And   a website exists with a name of "glbrc"
-    And   a website exists with a name of "lter"
     And   I am signed in as an administrator
     When  I go to the new protocol page
     And   I check "glbrc"

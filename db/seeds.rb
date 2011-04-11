@@ -9,3 +9,6 @@
 VenueType.find_or_create_by_name('local')
 VenueType.find_or_create_by_name('national')
 VenueType.find_or_create_by_name('other')
+
+Website.find_or_create_by_name('lter')
+Website.find_or_create_by_name('glbrc')

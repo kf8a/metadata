@@ -3,11 +3,8 @@ Feature: Protocols should exists in several versions
   As a user
   I want to see older version of the protocol
 
-  Background:
-
   Scenario: a protocol is updated to a new version
-    Given a website exists with name: "glbrc"
-    And I am in the GLBRC subdomain
+    Given I am in the GLBRC subdomain
     And I am signed in as an administrator
     And a protocol exists with title: "old protocol"
     And I go to the protocol's edit page

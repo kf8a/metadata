@@ -5,7 +5,6 @@ Feature: citations management
 
   Background: No cache
     Given the cache is clear
-      And a website exists with name: "lter"
 
   Scenario: Importing a RIS formatted bibliography file
     Given I am signed in as an administrator

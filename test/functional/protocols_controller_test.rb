@@ -153,11 +153,11 @@ class ProtocolsControllerTest < ActionController::TestCase
   private
 
   def generate_websites_and_protocols
-    @website = Factory.create(:website, :name=>'lter')
+    @website = Website.find_by_name('lter')
     @protocol = Factory.create(:protocol, :title => 'lter_protocol')
     @website.protocols << @protocol
     
-    @glbrc_website = Factory.create(:website, :name=>'glbrc')
+    @glbrc_website = Website.find_by_name('glbrc')
     @glbrc_protocol = Factory.create(:protocol, :title => 'glbrc protocol')
     @glbrc_website.protocols << @glbrc_protocol
   end
