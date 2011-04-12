@@ -490,11 +490,11 @@ class DatatableTest < ActiveSupport::TestCase
       end
 
       should 'return a csv formatted document' do
-        assert CSV.parse(@datatable.to_csv)
+        assert CSV.parse(@datatable.raw_csv)
       end
 
       should 'return the data in the right order' do
-        assert_equal '1', CSV.parse(@datatable.to_csv)[1][0]
+        assert_equal '1', CSV.parse(@datatable.raw_csv)[1][0]
       end
 
       context 'with comment' do
