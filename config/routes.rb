@@ -6,6 +6,7 @@ Metadata::Application.routes.draw do
   match 'sign_in' => 'sessions#new', :as => :sign_in
   match 'sign_out' => 'sessions#destroy', :as => :sign_out
   match 'sign_up' => 'users#new', :as => :sign_up
+
   resources :abstracts
   resources :affiliations
 
@@ -79,7 +80,11 @@ Metadata::Application.routes.draw do
       get :index_by_treatment
     end
   end
-  resources :sponsors
+
+  resources :sponsors, :as => 'termsofuse'
+  match '/termsofuse/:id' => "sponsors#show"
+  match '/termsofuse' => 'sponsors#index'
+
   resources :studies
   resources :templates
   resources :themes

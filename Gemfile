@@ -25,6 +25,8 @@ gem 'thin'
 gem 'jquery-rails', '>= 0.2.6'
 gem "transitions", :require => ["transitions", "active_record/transitions"]
 
+gem 'friendly_id'
+
 # for creating bibtex formatted citations
 gem 'bibtex-ruby'
 

@@ -72,7 +72,7 @@ class DatatablesControllerTest < ActionController::TestCase
 
     context 'GET :show' do
       setup do
-        @sponsor  = Factory.create :sponsor, :data_use_statement => 'smoke em if you got em'
+        @sponsor  = Factory.create :sponsor, :name=>'glbrc', :data_use_statement => 'smoke em if you got em'
         dataset   = Factory.create :dataset, :sponsor => @sponsor
         datatable = Factory.create :datatable, :dataset => dataset
 
@@ -82,7 +82,7 @@ class DatatablesControllerTest < ActionController::TestCase
       should respond_with :success
 
       should 'include the link to the sponsors data use statement' do
-        assert_select "a[href$=/sponsors/#{@sponsor.id}]"
+        assert_select "a[href$=/sponsors/#{@sponsor.name}]"
       end
     end
 
