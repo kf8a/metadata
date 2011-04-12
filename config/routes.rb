@@ -81,8 +81,9 @@ Metadata::Application.routes.draw do
     end
   end
 
-  resources :sponsors
-  match "/termsofuse/:id" => "sponsors#show"
+  resources :sponsors, :as => 'termsofuse'
+  match '/termsofuse' => 'sponsors#index'
+
   resources :studies
   resources :templates
   resources :themes
