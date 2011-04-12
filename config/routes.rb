@@ -82,8 +82,7 @@ Metadata::Application.routes.draw do
   end
 
   resources :sponsors
-  match "/terms_of_use/:id" => "sponsors#show"
-  match "/glbrc_terms_of_use" => "sponsors#show#2"
+  match "/termsofuse/:id" => "sponsors#show"
   resources :studies
   resources :templates
   resources :themes
