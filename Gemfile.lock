@@ -15,7 +15,7 @@ GIT
 
 GIT
   remote: https://github.com/kf8a/ruby-openid.git
-  revision: 34f17393dd1234d65d3787ddaa84aebbbd371649
+  revision: c010cead260bce7a2707d8bbe7430c2121141103
   specs:
     ruby-openid (2.1.8)
 
