@@ -123,6 +123,9 @@ class DatatablesControllerTest < ActionController::TestCase
       end
 
       should respond_with_content_type(:csv)
+      should 'give a real climdb document' do
+        assert_equal "!\n\n", response.body
+      end
     end
 
     context "show in climdb a restricted datatable on an untrusted ip" do
