@@ -186,7 +186,7 @@ class Datatable < ActiveRecord::Base
     csv_string
   end
 
-  def to_csv_with_metadata
+  def to_csv
     # stupid microsofts
     csv_string = raw_csv.force_encoding("UTF-8")
     result = ""
