@@ -3,9 +3,6 @@ Feature: Citation viewing and downloading
   As a User 
   I want to download research papers produced at the site
 
-  Background: A website exists
-    Given a website exists with name: "lter"
-
   Scenario: An anonymous user visits the citations page
     When I go to the citations page
     Then I should see "Publications"

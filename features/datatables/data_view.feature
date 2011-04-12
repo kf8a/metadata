@@ -4,9 +4,7 @@ Feature: Data View
   I want to see the metadata and a sample of the data
 
   Background:
-    Given a website exists with a name of "lter"
-      And a website exists with a name of "glbrc"
-      And I am in the lter subdomain
+    Given I am in the lter subdomain
       And I am signed in as a normal user
       And the cache is clear
             

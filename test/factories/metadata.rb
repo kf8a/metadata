@@ -13,6 +13,7 @@ unless Factory.factories.include?(:affiliation) #prevent redefining these factor
   end
 
   Factory.define :citation do |cite|
+    cite.website   Website.find_by_name('lter')
   end
 
   Factory.define :article_citation do |cite|

@@ -5,13 +5,11 @@ Feature: Browsing Citations
 
   Background: No cache
     Given the cache is clear
-      And a website exists with name: "lter"
 
   Scenario: Going to the citation index to see citations
-    Given a citation exists with pub_year: 1984, abstract: "A nice abstract", id: 2488, title: "Cool citation", website: the website
+    Given a citation exists with pub_year: 1984, abstract: "A nice abstract", id: 2488, title: "Cool citation"
       And an author exists with citation: the citation
       And I am signed in as a normal user
-    Then the website should have 1 citations
 
     When I go to the citations page
     Then I should see "1984"

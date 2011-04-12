@@ -6,7 +6,6 @@ class DatatablesControllerTest < ActionController::TestCase
     @table = Factory.create(:datatable, :dataset => Factory.create(:dataset))
 
     Factory.create(:datatable, :dataset => Factory.create(:dataset))
-    Factory.create(:website, :id=>1).save
 
     #TODO test with admin and non admin users
     signed_in_as_admin
@@ -260,7 +259,7 @@ class DatatablesControllerTest < ActionController::TestCase
   end
 
   test "index should get the template in the database if there is one" do
-    lter_website = Factory.create(:website, :name => 'lter')
+    lter_website = Website.find_by_name('lter')
     index_layout = Factory.create(:template,
                     :website_id => lter_website.id,
                     :controller => 'datatables',
@@ -277,7 +276,8 @@ class DatatablesControllerTest < ActionController::TestCase
 
   test "index should get the template in app/views if no db template" do
     lter_website = Website.find_by_name('lter')
-    assert_nil lter_website
+    lter_website.destroy
+    assert_nil Website.find_by_name('lter')
     assert !@controller.fragment_exist?(:controller => "datatables", :action => "index", :action_suffix => "lter")
     get :index, :requested_subdomain => 'lter'
     assert_select 'h3#correct', false
@@ -307,7 +307,7 @@ class DatatablesControllerTest < ActionController::TestCase
 #  end
 
   test "show should get the template in the database if there is one" do
-    lter_website = Factory.create(:website, :name => 'lter')
+    lter_website = Website.find_by_name('lter')
     index_layout = Factory.create(:template,
                     :website_id => lter_website.id,
                     :controller => 'datatables',
@@ -324,7 +324,8 @@ class DatatablesControllerTest < ActionController::TestCase
 
   test "show should get the template in app/views if no db template" do
     lter_website = Website.find_by_name('lter')
-    assert_nil lter_website
+    lter_website.destroy
+    assert_nil Website.find_by_name('lter')
     assert !@controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => "lter", :id => @table)
     get :show, :id => @table, :requested_subdomain => 'lter'
     assert_select 'h3#correct', false

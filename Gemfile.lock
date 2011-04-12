@@ -232,6 +232,15 @@ GEM
       ruby2ruby (~> 1.2)
       ruby_parser (~> 2.0)
       sexp_processor (~> 3.0)
+    remarkable (4.0.0.alpha4)
+      rspec (>= 2.0.0.alpha11)
+    remarkable_activemodel (4.0.0.alpha4)
+      remarkable (~> 4.0.0.alpha4)
+      rspec (>= 2.0.0.alpha11)
+    remarkable_activerecord (4.0.0.alpha4)
+      remarkable (~> 4.0.0.alpha4)
+      remarkable_activemodel (~> 4.0.0.alpha4)
+      rspec (>= 2.0.0.alpha11)
     riddle (1.2.2)
     roodi (2.1.0)
       ruby_parser
@@ -243,6 +252,11 @@ GEM
     rspec-expectations (2.5.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.5.0)
+    rspec-rails (2.5.0)
+      actionpack (~> 3.0)
+      activesupport (~> 3.0)
+      railties (~> 3.0)
+      rspec (~> 2.5.0)
     ruby-progressbar (0.0.9)
     ruby2ruby (1.2.5)
       ruby_parser (~> 2.0)
@@ -320,7 +334,9 @@ DEPENDENCIES
   rack-offline
   rack-openid
   rails (= 3.0.6)
+  remarkable_activerecord (>= 4.0.0.alpha2)
   rspec
+  rspec-rails
   ruby-openid!
   shoulda
   silent-postgres
