@@ -56,6 +56,9 @@ class PeopleControllerTest < ActionController::TestCase
     should render_template :index
     should assign_to :people
     should assign_to :roles
+    should "create index cache" do
+      assert @controller.fragment_exist?(:controller => "people", :action => "index")
+    end
   end
 
   context "GET :alphabetical" do
@@ -66,6 +69,9 @@ class PeopleControllerTest < ActionController::TestCase
 
     should render_template :alphabetical
     should assign_to :people
+    should "create alphabetical cache" do
+      assert @controller.fragment_exist?(:controller => "people", :action => "alphabetical")
+    end
   end
 
   context "GET :emeritus" do
@@ -77,6 +83,9 @@ class PeopleControllerTest < ActionController::TestCase
     should render_template :emeritus
     should assign_to :people
     should assign_to :roles
+    should "create emeritus cache" do
+      assert @controller.fragment_exist?(:controller => "people", :action => "emeritus")
+    end
   end
 
   context "GET :show for a person" do
@@ -124,13 +133,26 @@ class PeopleControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  def test_should_create_person
-    old_count = Person.count
-    post :create, :person => { }
-    assert_equal old_count+1, Person.count
+  context 'An index cache already exists' do
+    setup do
+      get :index
+      assert @controller.fragment_exist?(:controller => "people", :action => "index")
+    end
 
-    assert_redirected_to person_path(assigns(:person))
-    #TODO test that the cache get's invalidated
+    context 'Post :create' do
+      setup do
+        @old_count = Person.count
+        post :create, :person => { }
+      end
+
+      should redirect_to("the sign in page") {person_path(assigns(:person))}
+      should 'create a person' do
+        assert_equal @old_count+1, Person.count
+      end
+      should 'invalidate the index cache' do
+        refute @controller.fragment_exist?(:controller => "people", :action => "index")
+      end
+    end
   end
 
   #Trying to create a person with invalid parameters should be tested once any parameters are invalid.
