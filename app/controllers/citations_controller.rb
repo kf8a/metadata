@@ -1,7 +1,8 @@
 class CitationsController < ApplicationController
   respond_to :html, :xml, :json
   layout :site_layout
-  before_filter :admin?, :only => [:new, :create, :edit, :update, :destroy]
+  cache_sweeper :citation_sweeper
+  before_filter :admin?, :only => [:new, :create, :edit, :update, :destroy] unless Rails.env == 'development'
 
   def index
     store_location
@@ -71,7 +72,6 @@ class CitationsController < ApplicationController
 
     respond_to do |format|
       if @citation.save
-        expire_action :action => :index
         flash[:notice] = 'Citation was successfully created.'
         format.html { redirect_to citation_url(@citation) }
         format.xml  { head :created, :location => citation_url(@citation) }
@@ -90,10 +90,7 @@ class CitationsController < ApplicationController
 
   def update
     @citation = Citation.find(params[:id])
-    if @citation.update_attributes(params[:citation])
-      expire_action :action => :index
-    end
-
+    @citation.update_attributes(params[:citation])
     respond_with @citation
   end
 
@@ -121,7 +118,6 @@ class CitationsController < ApplicationController
     citation = Citation.find(params[:id])
     citation.destroy
 
-    expire_action :action => :index
     respond_with citation
   end
 

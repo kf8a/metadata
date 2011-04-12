@@ -10,9 +10,9 @@
       </p>
     <div class='non-member'>
       <% if citation.pdf.exists? -%>
-        <%= link_to 'abstracts + pdf', citation_path(citation) %>
+        <%= link_to 'abstract + pdf', citation_path(citation) %>
       <% else -%>
-        <%= link_to 'abstracts', citation_path(citation) %>
+        <%= link_to 'abstract', citation_path(citation) %>
       <% end -%>
     </div>
     <div class='member-only'>

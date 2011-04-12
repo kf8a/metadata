@@ -1,21 +1,21 @@
 class CitationSweeper < ActionController::Caching::Sweeper
   observe Citation
 
-  def after_create(datatable)
-    expire_cache_for(datatable)
+  def after_create(citation)
+    expire_cache_for(citation)
   end
 
-  def after_update(datatable)
-   expire_cache_for(datatable) 
+  def after_update(citation)
+   expire_cache_for(citation) 
   end
 
-  def after_destroy(datatable)
-   expire_cache_for(datatable) 
+  def after_destroy(citation)
+   expire_cache_for(citation) 
   end
 
   private
 
-  def expire_cache_for(datatable)
+  def expire_cache_for(citation)
     expire_fragment(:controller => 'citations', :action => 'index')
   end
 end
