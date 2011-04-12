@@ -44,15 +44,13 @@ class DatatablesController < ApplicationController
   def show
     accessible_by_ip = trusted_ip? || !@datatable.is_restricted
     csv_ok = accessible_by_ip && @datatable.can_be_downloaded_by?(current_user)
-    climdb_ok = accessible_by_ip
     @website = website
-    @trusted = trusted_ip?
 
     store_location #in case we have to log in and come back here
     if @datatable.dataset.valid_request?(@subdomain_request)
       respond_to do |format|
         format.html   { render_subdomain }
-        format.xml    { render :xml => @datatable.to_xml}
+        format.xml
 #         format.ods do
 #           if csv_ok
 #             render :text => @datatable.to_ods
@@ -71,7 +69,7 @@ class DatatablesController < ApplicationController
           end
         end
         format.climdb do
-          if climdb_ok
+          if csv_ok
             render :text => @datatable.to_climdb
           else
             redirect_to datatable_url(@datatable)
