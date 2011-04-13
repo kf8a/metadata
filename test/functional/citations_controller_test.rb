@@ -310,7 +310,7 @@ class CitationsControllerTest < ActionController::TestCase
     context 'POST: update' do
       setup do
         citation = Factory.create :citation
-        post :update, :id => citation, :citation => {:title => 'nothing', :type=>'Article' }
+        post :update, :id => citation, :citation => {:title => 'nothing', :type=>'ArticleCitation' }
       end
 
       should redirect_to('the citation page') {citation_url(assigns(:citation))}
