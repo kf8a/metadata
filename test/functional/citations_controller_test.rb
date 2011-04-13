@@ -267,7 +267,7 @@ class CitationsControllerTest < ActionController::TestCase
 
     context 'POST: create with attachment' do
       setup do
-        post :create, :pdf => 'testing'
+        post :create, :citation => {:pdf => 'testing'}
       end
 
       should redirect_to('the citation page') {citation_url(assigns(:citation))}
@@ -276,11 +276,15 @@ class CitationsControllerTest < ActionController::TestCase
 
     context 'POST: create with type' do
       setup do 
-        post :create, :type => 'ArticleCitation'
+        post :create, :citation => {:type => 'ArticleCitation'}
       end
 
       should assign_to(:citation)
       should redirect_to('the citation show page') {citation_url(assigns(:citation))}
+
+      should 'have a type of ArticleCitation' do
+        assert_equal 'ArticleCitation', assigns(:citation).type
+      end
 
       should 'be an article' do
         assert_kind_of ArticleCitation, Citation.find(assigns(:citation).id)
@@ -311,11 +315,15 @@ class CitationsControllerTest < ActionController::TestCase
     context 'POST: update' do
       setup do
         citation = Factory.create :citation
-        post :update, :id => citation, :citation => {:title => 'nothing', :type=>'ArticleCitation' }
+        post :update, :id => citation.id, :citation => {:title => 'nothing', :type=>'ArticleCitation' }
       end
 
       should redirect_to('the citation page') {citation_url(assigns(:citation))}
       should assign_to(:citation)
+
+      should 'assign a type of ArticleCitation' do
+        assert_equal 'ArticleCitation', assigns(:citation).type
+      end
 
       should 'actually save the title' do
         assert_equal 'nothing', assigns(:citation).title
