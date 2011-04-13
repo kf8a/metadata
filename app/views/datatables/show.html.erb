@@ -11,7 +11,7 @@
   <% if @datatable.sponsor_name == 'lter' %>
     The <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use policy applies to the this dataset</a>
   <% else %>
-    The <%=link_to 'standard data use policy applies to the this dataset' , sponsor_url(@datatable.dataset.sponsor)%>
+    The <%=link_to 'standard data use policy applies to the this dataset' , termsofuse_path(@datatable.dataset.sponsor)%>
   <% end %>
 
 
