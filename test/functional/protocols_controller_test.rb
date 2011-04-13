@@ -4,6 +4,7 @@ class ProtocolsControllerTest < ActionController::TestCase
 
   context 'an admin user' do
     setup do
+      User.destroy_all
       generate_websites_and_protocols
       @controller.current_user = Factory.create :admin_user
     end
