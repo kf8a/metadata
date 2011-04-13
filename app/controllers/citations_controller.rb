@@ -68,7 +68,10 @@ class CitationsController < ApplicationController
   end
 
   def create
+    citation_class = params[:citation].try(:delete, :type)
+    logger.info "Class = #{citation_class}"
     @citation = website.citations.new(params[:citation])
+    @citation.type = citation_class
 
     respond_to do |format|
       if @citation.save
@@ -91,6 +94,7 @@ class CitationsController < ApplicationController
   def update
     @citation = Citation.find(params[:id])
     @citation.update_attributes(params[:citation])
+    @citation.type = params[:citation][:type]
     respond_with @citation
   end
 
