@@ -70,19 +70,9 @@ class CitationsController < ApplicationController
     citation_class = params[:citation].try(:delete, :type)
     @citation = website.citations.new(params[:citation])
     @citation.type = citation_class
-
-    respond_to do |format|
-      if @citation.save
-        flash[:notice] = 'Citation was successfully created.'
-        format.html { redirect_to citation_url(@citation) }
-        format.xml  { head :created, :location => citation_url(@citation) }
-        format.json { head :created, :location => citation_url(@citation)}
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @citation.errors.to_xml }
-        format.json { render :json => @citation.errors.to_json }
-      end
-    end
+    flash[:notice] = 'Citation was successfully created.' if @citation.save
+    
+    respond_with @citation
   end
 
   def edit
