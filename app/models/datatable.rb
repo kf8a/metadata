@@ -112,10 +112,6 @@ class Datatable < ActiveRecord::Base
       self.permitted?(user)
   end
 
-  def can_be_quality_controlled_by?(user)
-    user.try(:admin?) || self.owned_by?(user)
-  end
-
   def owned_by?(user)
     owners.include?(user)
   end
@@ -173,7 +169,7 @@ class Datatable < ActiveRecord::Base
     return eml
   end
 
-  def to_csv
+  def raw_csv
     values  = perform_query
     csv_string = CSV.generate do |csv|
       csv << variates.collect {|v| v.name }
@@ -186,9 +182,9 @@ class Datatable < ActiveRecord::Base
     csv_string
   end
 
-  def to_csv_with_metadata
+  def to_csv
     # stupid microsofts
-    csv_string = to_csv.force_encoding("UTF-8")
+    csv_string = raw_csv.force_encoding("UTF-8")
     result = ""
     result = data_access_statement + data_source + data_comments + csv_string
     if is_utf_8
@@ -198,7 +194,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def to_climdb
-    "!#{to_csv}"
+    "!#{raw_csv}"
   end
 
   def data_comments

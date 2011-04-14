@@ -123,6 +123,9 @@ class DatatablesControllerTest < ActionController::TestCase
       end
 
       should respond_with_content_type(:csv)
+      should 'give a real climdb document' do
+        assert_equal "!\n\n", response.body
+      end
     end
 
     context "show in climdb a restricted datatable on an untrusted ip" do
@@ -149,12 +152,10 @@ class DatatablesControllerTest < ActionController::TestCase
 
     context "GET :qc" do
       setup do
-        refute @table.can_be_quality_controlled_by?(@controller.current_user)
         get :qc, :id => @table
       end
 
-      should respond_with :redirect
-      should redirect_to("the sign in page") {sign_in_path}
+      should respond_with :success
     end
 
   end
@@ -303,7 +304,7 @@ class DatatablesControllerTest < ActionController::TestCase
 #    assert_equal nil, file_cache.read("csv_#{@table.id}")
 #    table_id = @table.id.to_s
 #    get :show, :id => table_id, :format => "csv"
-#    assert_equal @table.to_csv_with_metadata, file_cache.read("csv_#{@table.id}")
+#    assert_equal @table.to_csv, file_cache.read("csv_#{@table.id}")
 #  end
 
   test "show should get the template in the database if there is one" do
@@ -341,7 +342,7 @@ class DatatablesControllerTest < ActionController::TestCase
 #    file_cache = ActiveSupport::Cache.lookup_store(:file_store, 'tmp/cache')
 #    table_id = @table.id.to_s
 #    get :show, :id => table_id, :format => "csv"
-#    assert_equal @table.to_csv_with_metadata, file_cache.read("csv_#{@table.id}")
+#    assert_equal @table.to_csv, file_cache.read("csv_#{@table.id}")
 #    put :update, :id => table_id, :datatable => { :description => "No CSV cache" }
 #    assert_equal nil, file_cache.read("csv_#{@table.id}")
 #  end
