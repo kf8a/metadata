@@ -37,13 +37,11 @@ class CitationsController < ApplicationController
 
   def filtered
     @word, @type, @sort_by = params[:word], params[:type], params[:sort_by]
-    citations = website.citations
-    citations = citations.where(:type => @type) if @type.present?
-    @submitted_citations = citations.submitted.sorted_by(@sort_by)
-    @forthcoming_citations = citations.forthcoming.sorted_by(@sort_by)
+    @citations = website.citations.sorted_by(@sort_by).by_type(@type)
+    @submitted_citations = @citations.submitted
+    @forthcoming_citations = @citations.forthcoming
     date = params[:date].presence
-    @citations = date ? citations.by_date(date) : citations.published
-    @citations.sorted_by(@sort_by)
+    @citations = date ? @citations.by_date(date) : @citations.published
 
     respond_to do |format|
       format.html
