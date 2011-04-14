@@ -2,7 +2,7 @@
 
 <%= form_for(:publication, :url => publication_path(@publication), :html => { :multipart => true, :method => :put }) do |f| %>
   <%= render "shared/error_messages", :target => @publication %>
-  <%= render :partial => 'form', :locals => {:f => f} %>
+  <%= render :partial => 'form', :locals => { :f => f, :publication_types => @publication_types, :publication => @publication, :treatments => @treatments } %>
   <p>
     <%= submit_tag "Update" %>
   </p>
