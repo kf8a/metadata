@@ -83,7 +83,6 @@ class DatatablesController < ApplicationController
   # GET /datatables/new
   def new
     @datatable = Datatable.new
-    @themes = Theme.by_name.collect {|x| [x.name, x.id]}
     @core_areas = CoreArea.by_name.collect {|x| [x.name, x.id]}
     @studies = Study.all.collect{|x| [x.name, x.id]}
     @people = Person.all
