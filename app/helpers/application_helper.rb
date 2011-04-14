@@ -15,14 +15,6 @@ module ApplicationHelper
     Role.find_all_by_role_type_id(RoleType.find_by_name('lter'))
   end
   
-  def render_study(options)
-    study = Study.where(options).first
-    
-    if study
-      render :partial => 'study',  :locals => {:study => study}
-    end
-  end
-  
   def admin?
     current_user.try(:role) == 'admin'
   end

@@ -17,4 +17,11 @@ module DatatablesHelper
         variate.data_type)
   end
 
+  def render_study(options)
+    study = Study.where(options).first
+
+    if study
+      render :partial => 'study',  :locals => {:study => study}
+    end
+  end
 end
