@@ -1,10 +1,9 @@
 <ul>
-	<li class='person-name'><%= person.given_name %> <%= person.middle_name %>  <%= person.sur_name %></li>
-	<% if person.lter_roles and person.lter_roles != [] -%>
-  	<li class='person_title'><%= person.lter_roles[0].name.singularize %></li>
+  <li class='person-name'><%= person.given_name %> <%= person.middle_name %>  <%= person.sur_name %></li>
+  <% if person.lter_roles.present? -%>
+    <li class='person_title'><%= person.lter_roles[0].name.singularize %></li>
   <% end -%>
-	<% if person.email && person.email.strip != '' -%>
-  	<li class='person-email'><%= contact_link(person.email) %></li>
-	<% end -%>
-	
+  <% if person.email.present? -%>
+    <li class='person-email'><%= contact_link(person.email) %></li>
+  <% end -%>
 </ul>
