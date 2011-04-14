@@ -12,24 +12,6 @@ Feature: Quality Control
     Given a protected datatable exists with a name of "QC Me"
       And "bob@person.com" is an administrator
      When I sign in as "bob@person.com/password"
-      And I go to the datatable show page for "QC Me"
-      And I follow "Quality Control"
+      And I go to the quality control page for "QC Me"
      Then I should be on the quality control page for "QC Me"
       And I should see "Time Series Graphs"
-
-  Scenario: The data owner checks quality of a datatable
-    Given a protected datatable exists
-      And "bob@person.com" owns the datatable
-      And "bob@person.com" is not an administrator
-     When I sign in as "bob@person.com/password"
-     When I go to the datatable page
-      And I follow "Quality Control"
-     Then I should see "Time Series Graphs"
-
-  Scenario: Some other user tries to check quality of a datatable
-    Given a protected datatable exists
-      And "bob@person.com" does not own the datatable
-      And "bob@person.com" is not an administrator
-     When I sign in as "bob@person.com/password"
-     When I go to the datatable page
-      Then I should not see "Quality Control"

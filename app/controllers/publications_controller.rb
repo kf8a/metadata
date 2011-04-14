@@ -59,7 +59,7 @@ class PublicationsController < ApplicationController
   # GET /publications/1
   # GET /publications/1.xml
   def show
-    @publication.abstract = @publication.abstract || '' # Make sure we have an abstract
+    @publication.abstract ||= '' # Make sure we have an abstract
     @publication.abstract.gsub!(/\n/,"\n\n")
     respond_to do |format|
       format.html # show.rhtml

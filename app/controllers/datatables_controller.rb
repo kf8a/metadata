@@ -44,15 +44,13 @@ class DatatablesController < ApplicationController
   def show
     accessible_by_ip = trusted_ip? || !@datatable.is_restricted
     csv_ok = accessible_by_ip && @datatable.can_be_downloaded_by?(current_user)
-    climdb_ok = accessible_by_ip
     @website = website
-    @trusted = trusted_ip?
 
     store_location #in case we have to log in and come back here
     if @datatable.dataset.valid_request?(@subdomain_request)
       respond_to do |format|
         format.html   { render_subdomain }
-        format.xml    { render :xml => @datatable.to_xml}
+        format.xml
 #         format.ods do
 #           if csv_ok
 #             render :text => @datatable.to_ods
@@ -61,19 +59,15 @@ class DatatablesController < ApplicationController
 #           end
 #         end
         format.csv do
-          if csv_ok
-             # TODO renable after we have a common place for this cache
+                       # TODO renable after we have a common place for this cache
 #            file_cache = ActiveSupport::Cache.lookup_store(:file_store, 'tmp/cache')
-#            render :text => file_cache.fetch("csv_#{@datatable.id}") { @datatable.to_csv_with_metadata }
-             render :text => @datatable.to_csv_with_metadata
-          else
+#            render :text => file_cache.fetch("csv_#{@datatable.id}") { @datatable.to_csv }
+          unless csv_ok
             render :text => "You do not have permission to download this datatable"
           end
         end
         format.climdb do
-          if climdb_ok
-            render :text => @datatable.to_climdb
-          else
+          unless csv_ok
             redirect_to datatable_url(@datatable)
           end
         end
@@ -84,17 +78,11 @@ class DatatablesController < ApplicationController
   end
 
   def qc
-    unless @datatable.can_be_quality_controlled_by?(current_user)
-      flash[:notice] = "You do not have permission to quality control this datatable"
-      deny_access
-      return false
-    end
   end
 
   # GET /datatables/new
   def new
     @datatable = Datatable.new
-    @themes = Theme.by_name.collect {|x| [x.name, x.id]}
     @core_areas = CoreArea.by_name.collect {|x| [x.name, x.id]}
     @studies = Study.all.collect{|x| [x.name, x.id]}
     @people = Person.all

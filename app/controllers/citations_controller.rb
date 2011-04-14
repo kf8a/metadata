@@ -37,13 +37,11 @@ class CitationsController < ApplicationController
 
   def filtered
     @word, @type, @sort_by = params[:word], params[:type], params[:sort_by]
-    citations = website.citations
-    citations = citations.where(:type => @type) if @type.present?
-    @submitted_citations = citations.submitted.sorted_by(@sort_by)
-    @forthcoming_citations = citations.forthcoming.sorted_by(@sort_by)
+    @citations = website.citations.sorted_by(@sort_by).by_type(@type)
+    @submitted_citations = @citations.submitted
+    @forthcoming_citations = @citations.forthcoming
     date = params[:date].presence
-    @citations = date ? citations.by_date(date) : citations.published
-    @citations.sorted_by(@sort_by)
+    @citations = date ? @citations.by_date(date) : @citations.published
 
     respond_to do |format|
       format.html
@@ -56,10 +54,11 @@ class CitationsController < ApplicationController
   def show
     store_location
     @citation = Citation.find(params[:id])
+    file_title = @citation.file_title
     respond_to do |format|
       format.html
-      format.enw { send_data @citation.as_endnote, :filename=>"#{@citation.id}-#{@citation.title}-#{@citation.pub_year}.enw" }
-      format.bib { send_data @citation.as_bibtex, :filename=>"#{@citation.id}-#{@citation.title}-#{@citation.pub_year}.bib" }
+      format.enw { send_data @citation.to_enw, :filename => "#{file_title}.enw" }
+      format.bib { send_data @citation.to_bib, :filename => "#{file_title}.bib" }
     end
   end
 
@@ -71,19 +70,9 @@ class CitationsController < ApplicationController
     citation_class = params[:citation].try(:delete, :type)
     @citation = website.citations.new(params[:citation])
     @citation.type = citation_class
-
-    respond_to do |format|
-      if @citation.save
-        flash[:notice] = 'Citation was successfully created.'
-        format.html { redirect_to citation_url(@citation) }
-        format.xml  { head :created, :location => citation_url(@citation) }
-        format.json { head :created, :location => citation_url(@citation)}
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @citation.errors.to_xml }
-        format.json { render :json => @citation.errors.to_json }
-      end
-    end
+    flash[:notice] = 'Citation was successfully created.' if @citation.save
+    
+    respond_with @citation
   end
 
   def edit
