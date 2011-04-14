@@ -1,98 +1,98 @@
 <div class='twocolumn'>
-<p>
-	<label for='person_sur_name'>Sur Name</label>
-	<%= f.text_field :sur_name %>
-</p>
-<p>
-	<label for='person_middle_name'>Middle Name</label>
-	<%= f.text_field :middle_name %>
-</p>
-<p>
-	<label for='person_give_name'>Given Name</label>
-	<%= f.text_field :given_name %>
-</p>
-<p>
-	<label for='person_friendly_name'>Friendly Name</label>
-	<%= f.text_field :friendly_name %>
-</p>
-<p>
-	<label for='person_title'>Title</label>
-	<%= f.text_field :title %>
-</p>
-<p>
-	<label for="person_organization">Organization</label>
-	<%= f.text_field :organization %>
-</p>
-<p>
-	<label for="person_sub_organization">Sub Organization</label>
-	<%= f.text_field :sub_organization %>
-</p>
-<p>
-	<label for='person_street_address'>Street Address</label>
-	<%= f.text_field :street_address %>
-</p>
-<p>
-	<label for='person_city'>City</label>
-	<%= f.text_field :city %>
-</p>
-<p>
-	<label for='person_locale'>Locale</label>
-	<%= f.text_field :locale %>
-</p>
-<p>
-	<label for='person_country'>Country</label>
-	<%= f.text_field :country %>
-</p>
-<p>
-	<label for='person_postal_code'>Postal Code</label>
-	<%= f.text_field :postal_code %>
-</p>
-<p>
-	<label for='person_phone'>Phone Number</label>
-	<%= f.text_field :phone %>
-</p>
-<p>
-	<label for='person_fax'>Fax number</label>
-	<%= f.text_field :fax %>
-</p>
-<p>
-	<label for='person_email'>Email</label>
-	<%= f.text_field :email %>
-</p>
-<p>
-	<label for='person_url'>Website</label>
-	<%= f.text_field :url %>
-</p>
+  <p>
+    <label for='person_sur_name'>Sur Name</label>
+    <%= f.text_field :sur_name %>
+  </p>
+  <p>
+    <label for='person_middle_name'>Middle Name</label>
+    <%= f.text_field :middle_name %>
+  </p>
+  <p>
+    <label for='person_give_name'>Given Name</label>
+    <%= f.text_field :given_name %>
+  </p>
+  <p>
+    <label for='person_friendly_name'>Friendly Name</label>
+    <%= f.text_field :friendly_name %>
+  </p>
+  <p>
+    <label for='person_title'>Title</label>
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <label for="person_organization">Organization</label>
+    <%= f.text_field :organization %>
+  </p>
+  <p>
+    <label for="person_sub_organization">Sub Organization</label>
+    <%= f.text_field :sub_organization %>
+  </p>
+  <p>
+    <label for='person_street_address'>Street Address</label>
+    <%= f.text_field :street_address %>
+  </p>
+  <p>
+    <label for='person_city'>City</label>
+    <%= f.text_field :city %>
+  </p>
+  <p>
+    <label for='person_locale'>Locale</label>
+    <%= f.text_field :locale %>
+  </p>
+  <p>
+    <label for='person_country'>Country</label>
+    <%= f.text_field :country %>
+  </p>
+  <p>
+    <label for='person_postal_code'>Postal Code</label>
+    <%= f.text_field :postal_code %>
+  </p>
+  <p>
+    <label for='person_phone'>Phone Number</label>
+    <%= f.text_field :phone %>
+  </p>
+  <p>
+    <label for='person_fax'>Fax number</label>
+    <%= f.text_field :fax %>
+  </p>
+  <p>
+    <label for='person_email'>Email</label>
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <label for='person_url'>Website</label>
+    <%= f.text_field :url %>
+  </p>
 </div>
 
 <%= f.fields_for :affiliations do |affiliation_form| %>
 
-<table id='affiliations'>
-  <tr>
-    <th>Role</th>
+  <table id='affiliations'>
+    <tr>
+      <th>Role</th>
     
-    <th>Title</th>
-    <th>Seniority</th>
-    <th>Delete</th>
-  </tr>
-	<% @person.affiliations.each do |affiliation| %>
-	<tr>
-		<td>
-		  <%= select_tag 'person[affiliations_attributes][][role_id]',
+      <th>Title</th>
+      <th>Seniority</th>
+      <th>Delete</th>
+    </tr>
+    <% @person.affiliations.each do |affiliation| %>
+      <tr>
+        <td>
+          <%= select_tag 'person[affiliations_attributes][][role_id]',
 		    options_from_collection_for_select(lter_roles, :id, :name, :selected => affiliation.role_id) %>
-		</td>
-		<td>
-		<%= text_field_tag 'person[affiliations_attributes][][title]', affiliation.title %>
-		</td>
-		<td>
-		<%= text_field_tag 'person[affiliations_attributes][][seniority]', affiliation.seniority, :size => 5 %>
+        </td>
+        <td>
+          <%= text_field_tag 'person[affiliations_attributes][][title]', affiliation.title %>
+        </td>
+        <td>
+          <%= text_field_tag 'person[affiliations_attributes][][seniority]', affiliation.seniority, :size => 5 %>
 		<%= hidden_field_tag 'person[affiliations_attributes][][id]', affiliation.id %>
-		</td>
-		<td>
-		  <%= check_box_tag 'person[affiliations_attributes][][_destroy]' %>
-		</td>
-		</tr>
-	<% end %>
-</table>
-<%= link_to 'Add Role', new_affiliation_path, :remote => true %>
+        </td>
+        <td>
+          <%= check_box_tag 'person[affiliations_attributes][][_destroy]' %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= link_to 'Add Role', new_affiliation_path, :remote => true %>
 <% end%>
