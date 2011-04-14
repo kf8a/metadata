@@ -21,7 +21,7 @@ module DatatablesHelper
     study = Study.where(options).first
 
     if study
-      render :partial => 'study',  :locals => {:study => study, :themes => @themes}
+      render :partial => 'study',  :locals => {:study => study, :themes => @themes, :datatables => @datatables}
     end
   end
 end
