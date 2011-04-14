@@ -1,19 +1,19 @@
 <p>
-	<label for='meeting_title'>Title</label>
-	<%= f.text_field :title %>
+  <%= f.label      :title %>
+  <%= f.text_field :title %>
 </p>
 <p>
-	<label for='meeting_date'>Start Date</label>
-	<%= f.date_select :date %>
+  <%= f.label       :date, 'Start Date' %>
+  <%= f.date_select :date %>
 </p>
 <p>
-	<label for='meeting_date_to'>End Date</label>
-	<%= f.date_select :date_to %>
+  <%= f.label       :date_to, 'End Date' %>
+  <%= f.date_select :date_to %>
 </p>
 <p>
-	<%= f.select :venue_type_id, @venues %>
+  <%= f.select :venue_type_id, @venues %>
 </p>
 <p>
-	<label for='meeting_announcement'>Announcement</label>
-	<%= f.text_area :announcement, :size => '60x20'%>
+  <%= f.label     :announcement %>
+  <%= f.text_area :announcement, :size => '60x20'%>
 </p>
