@@ -27,11 +27,8 @@
       <tr>
         <td>Experiment:</td>
         <td>
-          <% if @datatable.study_link_for @website %>
-            <%= link_to @datatable.study_name, @datatable.study_link_for(@website) %>
-          <% else %>
-            <%= @datatable.study_name %>
-          <% end %>
+          <%= link_to_if @datatable.study_link_for(@website),
+              @datatable.study_name, @datatable.study_link_for(@website) %>
         </td>
       </tr>
     <% end %>
