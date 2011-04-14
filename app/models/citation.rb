@@ -83,11 +83,6 @@ class Citation < ActiveRecord::Base
     where(:type => type) if type
   end
 
-  def change_type(new_type)
-    self.type = new_type
-    self.save
-  end
-
   def book?
     type == BookCitation || citation_type.try(:name) == 'book'
   end
