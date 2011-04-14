@@ -235,17 +235,6 @@ class DatatableTest < ActiveSupport::TestCase
       assert @restricted.owners.size == 1
       assert @restricted.owners.include?(@owner)
     end
-
-    should 'only allow authorized users to do quality control' do
-      refute @restricted.can_be_quality_controlled_by?(@anonymous_user)
-      refute @restricted.can_be_quality_controlled_by?(@unauthorized_user)
-      refute @restricted.can_be_quality_controlled_by?(@authorized_user)
-      assert @restricted.can_be_quality_controlled_by?(@admin)
-      refute @restricted.can_be_quality_controlled_by?(@member)
-      assert @restricted.can_be_quality_controlled_by?(@owner)
-      refute @restricted.can_be_quality_controlled_by?(@denied_user)
-    end
-
   end
 
   context 'A datatable with permission requests' do

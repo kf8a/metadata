@@ -5,9 +5,10 @@ Feature: Browsing Citations
 
   Background: No cache
     Given the cache is clear
+    Then a website should exist with name: "lter"
 
   Scenario: Going to the citation index to see citations
-    Given a citation exists with pub_year: 1984, abstract: "A nice abstract", id: 2488, title: "Cool citation"
+    Given a citation exists with pub_year: 1984, abstract: "A nice abstract", id: 2488, title: "Cool citation", website: the website
       And an author exists with citation: the citation
       And I am signed in as a normal user
 

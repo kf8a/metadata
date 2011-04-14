@@ -112,10 +112,6 @@ class Datatable < ActiveRecord::Base
       self.permitted?(user)
   end
 
-  def can_be_quality_controlled_by?(user)
-    user.try(:admin?) || self.owned_by?(user)
-  end
-
   def owned_by?(user)
     owners.include?(user)
   end

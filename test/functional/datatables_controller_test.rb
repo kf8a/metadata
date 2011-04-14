@@ -152,12 +152,10 @@ class DatatablesControllerTest < ActionController::TestCase
 
     context "GET :qc" do
       setup do
-        refute @table.can_be_quality_controlled_by?(@controller.current_user)
         get :qc, :id => @table
       end
 
-      should respond_with :redirect
-      should redirect_to("the sign in page") {sign_in_path}
+      should respond_with :success
     end
 
   end

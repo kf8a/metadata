@@ -78,11 +78,6 @@ class DatatablesController < ApplicationController
   end
 
   def qc
-    unless @datatable.can_be_quality_controlled_by?(current_user)
-      flash[:notice] = "You do not have permission to quality control this datatable"
-      deny_access
-      return false
-    end
   end
 
   # GET /datatables/new
