@@ -54,10 +54,11 @@ class CitationsController < ApplicationController
   def show
     store_location
     @citation = Citation.find(params[:id])
+    file_title = @citation.file_title
     respond_to do |format|
       format.html
-      format.enw { send_data @citation.as_endnote, :filename=>"#{@citation.id}-#{@citation.title}-#{@citation.pub_year}.enw" }
-      format.bib { send_data @citation.as_bibtex, :filename=>"#{@citation.id}-#{@citation.title}-#{@citation.pub_year}.bib" }
+      format.enw { send_data @citation.to_enw, :filename => "#{file_title}.enw" }
+      format.bib { send_data @citation.to_bib, :filename => "#{file_title}.bib" }
     end
   end
 

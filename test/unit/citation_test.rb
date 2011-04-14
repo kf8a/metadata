@@ -114,12 +114,12 @@ class CitationTest < ActiveSupport::TestCase
 %P 231-241
 %D 2008
 %X An abstract of the article."
-    assert_equal result, @citation.as_endnote
+    assert_equal result, @citation.to_enw
     end
 
     context 'as bibtex' do
       setup do
-        @entry = @citation.as_bibtex
+        @entry = @citation.to_bib
       end
 
       should 'be a bibtex entry' do
@@ -199,7 +199,7 @@ class CitationTest < ActiveSupport::TestCase
 %P 27-39
 %D 2006"
 
-      assert_equal result, @citation.as_endnote
+      assert_equal result, @citation.to_enw
     end
   end
 
@@ -223,7 +223,7 @@ class CitationTest < ActiveSupport::TestCase
 
     context 'as bibtex' do
       setup do
-        @entry = @citation.as_bibtex
+        @entry = @citation.to_bib
       end
 
       should 'be a bibtex entry' do
@@ -253,7 +253,7 @@ class CitationTest < ActiveSupport::TestCase
 %A Kaufman, A. S.
 %D 2009"
 
-    assert_equal result, @citation.as_endnote
+    assert_equal result, @citation.to_enw
     end
   end
 
@@ -346,7 +346,7 @@ class CitationTest < ActiveSupport::TestCase
 
     context 'as bibtex' do
       setup do
-        @entry = @citation.as_bibtex
+        @entry = @citation.to_bib
       end
 
       should 'be a bibtex entry' do

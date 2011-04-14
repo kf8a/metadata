@@ -62,12 +62,12 @@ class Citation < ActiveRecord::Base
   end
 
   def Citation.to_enw(array_of_citations)
-    array_of_citations.collect {|x| x.as_endnote}.join("\r\n\r\n")
+    array_of_citations.collect {|x| x.to_enw}.join("\r\n\r\n")
   end
 
   def Citation.to_bib(array_of_citations)
     bib = BibTeX::Bibliography.new
-    array_of_citations.each {|x| bib << x.as_bibtex}
+    array_of_citations.each {|x| bib << x.to_bib}
 
     bib.to_s
   end
@@ -83,6 +83,10 @@ class Citation < ActiveRecord::Base
     where(:type => type) if type
   end
 
+  def file_title
+    "#{self.id}-#{self.title}-#{self.pub_year}"
+  end
+
   def book?
     type == BookCitation || citation_type.try(:name) == 'book'
   end
@@ -91,7 +95,7 @@ class Citation < ActiveRecord::Base
     book? ? formatted_book : formatted_article
   end
 
-  def as_bibtex
+  def to_bib
     entry = BibTeX::Entry.new
     entry.type = bibtex_type
     entry.key = "citation_#{id}"
@@ -113,7 +117,7 @@ class Citation < ActiveRecord::Base
     entry
   end
 
-  def as_endnote
+  def to_enw
     endnote = "%0 "
     endnote += endnote_type
     endnote += "%T #{title}\n"
