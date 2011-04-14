@@ -126,6 +126,11 @@ class Citation < ActiveRecord::Base
     endnote += "\n%@ #{isbn}" if isbn
     endnote
   end
+  
+  def self.select_options
+    classes = descendants.map{ |c| c.to_s }.sort
+    classes.collect {|c| [c.gsub(/Citation/,''), c] }
+  end
 
   private
 

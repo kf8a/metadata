@@ -1,5 +1,5 @@
 <%= form.inputs do %>
-  <%= form.input :type, :as => :select, :collection => { 'Book' => 'BookCitation', 'Article' => 'ArticleCitation' } %>
+  <%= form.input :type, :as => :select, :collection => Citation.select_options %>
 <% end %>
 <%= form.inputs :doi %>
 <%= form.inputs do %>
