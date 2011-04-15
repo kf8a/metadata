@@ -28,3 +28,26 @@ class Protocol < ActiveRecord::Base
     self.dataset.try(:dataset)
   end
 end
+
+# == Schema Information
+#
+# Table name: protocols
+#
+#  id             :integer         not null, primary key
+#  name           :string(255)
+#  title          :string(255)
+#  version_tag    :integer
+#  in_use_from    :date
+#  in_use_to      :date
+#  description    :text
+#  abstract       :text
+#  body           :text
+#  person_id      :integer
+#  created_on     :date
+#  updated_on     :date
+#  change_summary :text
+#  dataset_id     :integer
+#  active         :boolean         default(TRUE)
+#  deprecates     :integer
+#
+

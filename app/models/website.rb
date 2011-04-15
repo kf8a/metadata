@@ -14,3 +14,14 @@ class Website < ActiveRecord::Base
     Liquid::Template.parse(template.layout) if template
   end
 end
+
+# == Schema Information
+#
+# Table name: websites
+#
+#  id         :integer         not null, primary key
+#  name       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+

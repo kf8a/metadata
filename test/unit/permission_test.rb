@@ -131,3 +131,17 @@ class PermissionTest < ActiveSupport::TestCase
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: permissions
+#
+#  id           :integer         not null, primary key
+#  user_id      :integer
+#  datatable_id :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#  owner_id     :integer
+#  decision     :string(255)
+#
+

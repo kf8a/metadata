@@ -27,3 +27,19 @@ class UnitTest < ActiveSupport::TestCase
     
   end
 end
+
+# == Schema Information
+#
+# Table name: units
+#
+#  id                     :integer         not null, primary key
+#  name                   :string(255)
+#  description            :text
+#  in_eml                 :boolean         default(FALSE)
+#  definition             :text
+#  deprecated_in_favor_of :integer
+#  unit_type              :string(255)
+#  parent_si              :string(255)
+#  multiplier_to_si       :float
+#
+

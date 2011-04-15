@@ -246,3 +246,25 @@ class VariateTest < ActiveSupport::TestCase
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: variates
+#
+#  id                      :integer         not null, primary key
+#  name                    :string(255)
+#  datatable_id            :integer
+#  weight                  :integer
+#  description             :text
+#  missing_value_indicator :string(255)
+#  unit_id                 :integer
+#  measurement_scale       :string(255)
+#  data_type               :string(255)
+#  min_valid               :float
+#  max_valid               :float
+#  date_format             :string(255)
+#  precision               :float
+#  query                   :text
+#  variate_theme_id        :integer
+#
+

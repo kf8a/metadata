@@ -8168,3 +8168,30 @@ people_389:
   url: ""
   deceased: 
   open_id: 
+
+# == Schema Information
+#
+# Table name: people
+#
+#  id               :integer         not null, primary key
+#  person           :string(255)
+#  sur_name         :string(255)
+#  given_name       :string(255)
+#  middle_name      :string(255)
+#  friendly_name    :string(255)
+#  title            :string(255)
+#  sub_organization :string(255)
+#  organization     :string(255)
+#  street_address   :string(255)
+#  city             :string(255)
+#  locale           :string(255)
+#  country          :string(255)
+#  postal_code      :string(255)
+#  phone            :string(255)
+#  fax              :string(255)
+#  email            :string(255)
+#  url              :string(255)
+#  deceased         :boolean
+#  open_id          :string(255)
+#
+

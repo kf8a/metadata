@@ -3366,3 +3366,16 @@ affiliations_481:
   dataset_id: "20"
   seniority: 
   title: 
+
+# == Schema Information
+#
+# Table name: affiliations
+#
+#  id         :integer         not null, primary key
+#  person_id  :integer
+#  role_id    :integer
+#  dataset_id :integer
+#  seniority  :integer
+#  title      :string(255)
+#
+

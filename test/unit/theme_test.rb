@@ -123,3 +123,16 @@ class ThemeTest < ActiveSupport::TestCase
   end
 
 end
+
+# == Schema Information
+#
+# Table name: themes
+#
+#  id        :integer         not null, primary key
+#  name      :string(255)
+#  weight    :integer
+#  parent_id :integer
+#  lft       :integer
+#  rgt       :integer
+#
+

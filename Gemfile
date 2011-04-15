@@ -53,6 +53,7 @@ group :development, :test  do
   gem "shoulda"
   gem 'rspec-rails'
   gem "rspec"
+  gem "annotate"
 end
 
 group :test do

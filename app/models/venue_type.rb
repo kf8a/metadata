@@ -4,3 +4,13 @@ class VenueType < ActiveRecord::Base
 
   validates_presence_of :name
 end
+
+# == Schema Information
+#
+# Table name: venue_types
+#
+#  id          :integer         not null, primary key
+#  name        :string(255)
+#  description :text
+#
+

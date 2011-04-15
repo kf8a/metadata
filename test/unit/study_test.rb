@@ -74,3 +74,20 @@ class StudyTest < ActiveSupport::TestCase
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: studies
+#
+#  id          :integer         not null, primary key
+#  name        :string(255)
+#  description :text
+#  weight      :integer
+#  parent_id   :integer
+#  lft         :integer
+#  rgt         :integer
+#  synopsis    :text
+#  url         :string(255)
+#  code        :string(255)
+#
+

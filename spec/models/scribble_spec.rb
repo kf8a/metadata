@@ -10,3 +10,14 @@ describe Scribble do
     Scribble.create!(@valid_attributes)
   end
 end
+
+# == Schema Information
+#
+# Table name: scribbles
+#
+#  id          :integer         not null, primary key
+#  person_id   :integer
+#  protocol_id :integer
+#  weight      :integer
+#
+

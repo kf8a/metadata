@@ -56,6 +56,7 @@ GEM
       activesupport (= 3.0.6)
     activesupport (3.0.6)
     acts-as-taggable-on (2.0.6)
+    annotate (2.4.0)
     arel (2.0.9)
     arrayfields (4.7.4)
     aws-s3 (0.6.2)
@@ -309,6 +310,7 @@ PLATFORMS
 DEPENDENCIES
   RedCloth (= 4.2.4)
   acts-as-taggable-on
+  annotate
   awesome_nested_set!
   aws-s3
   bibtex-ruby

@@ -6,3 +6,13 @@ class MeasurementScaleTest < ActiveSupport::TestCase
     assert true
   end
 end
+
+# == Schema Information
+#
+# Table name: measurement_scales
+#
+#  id         :integer         not null, primary key
+#  created_at :datetime
+#  updated_at :datetime
+#
+

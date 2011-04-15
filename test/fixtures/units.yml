@@ -1259,3 +1259,19 @@ units_210:
   description: 
   in_eml: f
   definition: stmml:unit name="nanogramsPerSquareMeterPerMInute" unitType="massDensityRate" parentSI="kilogramsPerMeterSquaredPerSecond" multiplierToSI="0.000006"
+
+# == Schema Information
+#
+# Table name: units
+#
+#  id                     :integer         not null, primary key
+#  name                   :string(255)
+#  description            :text
+#  in_eml                 :boolean         default(FALSE)
+#  definition             :text
+#  deprecated_in_favor_of :integer
+#  unit_type              :string(255)
+#  parent_si              :string(255)
+#  multiplier_to_si       :float
+#
+

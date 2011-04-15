@@ -20,3 +20,16 @@ class Role < ActiveRecord::Base
   end
   
 end
+
+# == Schema Information
+#
+# Table name: roles
+#
+#  id                 :integer         not null, primary key
+#  name               :string(255)
+#  role_type_id       :integer
+#  seniority          :integer
+#  show_in_overview   :boolean         default(TRUE)
+#  show_in_detailview :boolean         default(TRUE)
+#
+

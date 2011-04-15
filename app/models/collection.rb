@@ -16,3 +16,14 @@ class Collection < ActiveRecord::Base
     self.datatable.title_and_years
   end
 end
+
+# == Schema Information
+#
+# Table name: collections
+#
+#  id           :integer         not null, primary key
+#  created_at   :datetime
+#  updated_at   :datetime
+#  datatable_id :integer
+#
+

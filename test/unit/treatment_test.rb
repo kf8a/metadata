@@ -7,3 +7,15 @@ class TreatmentTest < ActiveSupport::TestCase
     assert true
   end
 end
+
+# == Schema Information
+#
+# Table name: treatments
+#
+#  id          :integer         not null, primary key
+#  name        :string(255)
+#  description :text
+#  study_id    :integer
+#  weight      :integer
+#
+
