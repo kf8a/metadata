@@ -22,6 +22,10 @@ class Person < ActiveRecord::Base
     lter_roles.all? { |role| role.emeritus? }
   end
 
+  def expanded_name
+    "#{given_name} #{middle_name} #{sur_name}"
+  end
+
   def normal_given_name
     friendly_name.presence || given_name
   end
