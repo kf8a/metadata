@@ -17,9 +17,10 @@
 <%= link_to_add_fields "Add Person", form, :data_contributions %>
 
 <%= form.inputs do %>
-<h2>Temporal Coverage</h2>
-  <%= form.input :begin_date, :label => 'from:', :end_year => Time.now.year, :start_year => 1887 %>
-  <%= form.input :end_date, :label => 'to', :end_year => Time.now.year, :start_year => 1887 %>
+  <h2>Temporal Coverage</h2>
+  <div id="temporal_coverage">
+    <%= render 'temporal_coverage', :locals => {:form => form} %>
+  </div>
   <%= form.input :weight %>
   <%= form.input :update_frequency_days, :label => 'Expected Update Frequency (days)' %>
   <%= form.input :on_web %>
