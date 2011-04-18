@@ -19,10 +19,11 @@
 <%= form.inputs do %>
   <h2>Temporal Coverage</h2>
   <div id="temporal_coverage">
-    <%= render 'temporal_coverage', :locals => {:form => form} %>
+    <%= form.input :begin_date, :label => 'from:', :end_year => Time.now.year, :start_year => 1887 %>
+    <%= form.input :end_date, :label => 'to', :end_year => Time.now.year, :start_year => 1887 %>
   </div>
   <% unless datatable.new_record? %>
-    <%= link_to "Update Temporal Coverage", update_temporal_coverage_path, :remote => true, :id => datatable %>
+    <%= link_to "Update Temporal Coverage", update_temporal_extent_datatable_path(datatable), :remote => true %>
   <% end %>
   <%= form.input :weight %>
   <%= form.input :update_frequency_days, :label => 'Expected Update Frequency (days)' %>
