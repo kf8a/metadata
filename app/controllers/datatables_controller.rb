@@ -167,9 +167,9 @@ class DatatablesController < ApplicationController
   def update_temporal_extent
     @datatable.update_temporal_extent
     @datatable.save
-    respond_to do |format|
-      format.js {render :nothing => true}
-    end
+#    respond_to do |format|
+#      format.js {render :nothing => true}
+#    end
   end
 
   private
