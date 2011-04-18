@@ -2,7 +2,7 @@
 <%= form_for(:abstract, :url => abstract_path(@abstract),
              :html => { :method => :put , :multipart=>true}) do |f| %>
   <%= render "shared/error_messages", :target => @abstract %>
-  <%= render :partial=>:form, :locals => {:f => f } %>
+  <%= render :partial=>'form', :locals => {:f => f } %>
   <p>
     <%= submit_tag "Update" %>
   </p>
