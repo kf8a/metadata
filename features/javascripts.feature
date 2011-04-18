@@ -6,7 +6,7 @@ Feature: All the javascripts should work properly
   @javascript
   Scenario: An admin creates and then deletes an abstract
     Given I am signed in as an administrator
-      And a venue type exists
+      And the local venue type exists
     When I go to the new meeting page
       And I fill in "meeting_title" with "Long Meeting"
       And I press "Create"
