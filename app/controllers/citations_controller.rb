@@ -13,12 +13,7 @@ class CitationsController < ApplicationController
     date = params[:date].presence
     @citations = date ? citations.by_date(date) : citations.published
 
-    respond_to do |format|
-      format.html
-      format.enw { send_data Citation.to_enw(@citations), :filename=>'glbrc.enw' }
-      format.bib { send_data Citation.to_bib(@citations), :filename=>'glbrc.bib' }
-      format.rss { render :layout => false } #index.rss.builder
-    end
+    index_responder
   end
 
   def search
@@ -27,12 +22,7 @@ class CitationsController < ApplicationController
       redirect_to citations_url
     else
       @citations = Citation.search @word, :with => { :website_id => website.id }
-      respond_to do |format|
-        format.html
-        format.enw { send_data Citation.to_enw(@citations), :filename=>'glbrc.enw' }
-        format.bib { send_data Citation.to_bib(@citations), :filename=>'glbrc.bib' }
-        format.rss { render :layout => false } #index.rss.builder
-      end
+      index_responder
     end
   end
 
@@ -44,12 +34,7 @@ class CitationsController < ApplicationController
     date = params[:date].presence
     @citations = date ? @citations.by_date(date) : @citations.published
 
-    respond_to do |format|
-      format.html
-      format.enw { send_data Citation.to_enw(@citations), :filename=>'index.enw' }
-      format.bib { send_data Citation.to_bib(@citations), :filename=>'index.bib' }
-      format.rss { render :layout => false } #index.rss.builder
-    end
+    index_responder
   end
 
   def show
@@ -121,6 +106,15 @@ class CitationsController < ApplicationController
       @title  = 'LTER Publications'
     else
       @title = 'GLBRC Sustainability Publications'
+    end
+  end
+  
+  def index_responder
+    respond_to do |format|
+      format.html
+      format.enw { send_data Citation.to_enw(@citations), :filename=>'glbrc.enw' }
+      format.bib { send_data Citation.to_bib(@citations), :filename=>'glbrc.bib' }
+      format.rss { render :layout => false } #index.rss.builder
     end
   end
 end
