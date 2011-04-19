@@ -5,18 +5,7 @@
   <p>
     <%= f.hidden_field :meeting_id %>
   </p>
-  <p>
-    <label for='abstract_title'>Title</label><br/>
-    <%= f.text_area :title, :size => '60x3' %>
-  </p>
-  <p>
-    <label for='abstract_authors'>Authors</label><br/>
-    <%= f.text_area :authors , :size => '60x3'%>
-  </p>
-  <p>
-    <label for='abstract_abstract'>Abstract</label>
-    <%= f.text_area :abstract, :size => '60x20'%>
-  </p>
+  <%= render :partial=>'form', :locals => {:f => f } %>
   <p>
     <%= submit_tag "Create" %>
   </p>

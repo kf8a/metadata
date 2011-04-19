@@ -2,6 +2,8 @@
 
 <ul class ="abstract_list">
   <% @abstracts.each do |abstract| %>
-    <li><%= link_to abstract.title, abstract %> by <%= abstract.authors %></li>
+    <li>
+      <%= link_to abstract.title, abstract %> by <%= abstract.authors %> &nbsp;
+    </li>
   <% end %>
 </ul>

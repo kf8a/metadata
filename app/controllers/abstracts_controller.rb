@@ -13,6 +13,16 @@ class AbstractsController < ApplicationController
       format.xml { render :xml => @abstracts.to_xml}
     end
   end
+
+  def download
+    head(:not_found) and return unless (abstract= Abstract.find_by_id(params[:id]))
+    path = abstract.pdf.path(params[:style])
+    if Rails.env.production? 
+      redirect_to(AWS::S3::S3Object.url_for(path, abstract.pdf.bucket_name, :expires_in => 10.seconds))
+    else
+      send_file  path, :type => 'application/pdf', :disposition => 'inline'
+    end
+  end
   
   # GET meeting_abstracts/new?meeting=1
   def new

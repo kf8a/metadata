@@ -64,6 +64,7 @@ GEM
       xml-simple
     babosa (0.3.3)
     bibtex-ruby (1.2.1)
+    blankslate (2.1.2.3)
     builder (2.1.2)
     capistrano (2.5.21)
       highline
@@ -194,6 +195,8 @@ GEM
     paperclip (2.3.11)
       activerecord (>= 2.3.0)
       activesupport (>= 2.3.2)
+    parslet (1.2.0)
+      blankslate (~> 2.0)
     pg (0.10.1)
     pickle (0.4.7)
       cucumber (>= 0.8)
@@ -333,6 +336,7 @@ DEPENDENCIES
   newrelic_rpm
   nokogiri
   paperclip
+  parslet
   pg
   pickle
   rack-offline

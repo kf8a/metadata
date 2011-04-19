@@ -111,7 +111,15 @@ module RIS
   module Type1
 			def content(basename, h)
 				type = extract_value(text_value).chomp			
-				h.citation_type = CitationType.find_by_abbreviation(type)
+    case type
+    when 'JOUR'    then h.type = 'ArticleCitation'
+    when 'BOOK'    then h.type = 'BookCitation'
+    when 'THES'    then h.type = 'ThesisCitation'
+    when 'RPRT'    then h.type = 'ReportCitation'
+    when 'CONF'    then h.type = 'ConferenceCitation'
+    when 'CHAP'    then h.type = 'ChapterCitation'
+    when 'EBOOK'   then h.type = 'EbookCitation'
+    end
 				nil # return nil because we are not interested in the  citation type record
 			end
   end
@@ -894,6 +902,16 @@ module RIS
     end
   end
 
+  module Author3
+    def tag_space
+      elements[1]
+    end
+
+    def text_lines
+      elements[2]
+    end
+  end
+
   def _nt_author
     start_index = index
     if node_cache[:author].has_key?(index)
@@ -987,8 +1005,36 @@ module RIS
         if r9
           r0 = r9
         else
-          @index = i0
-          r0 = nil
+          i13, s13 = index, []
+          if has_terminal?('A3', false, index)
+            r14 = instantiate_node(SyntaxNode,input, index...(index + 2))
+            @index += 2
+          else
+            terminal_parse_failure('A3')
+            r14 = nil
+          end
+          s13 << r14
+          if r14
+            r15 = _nt_tag_space
+            s13 << r15
+            if r15
+              r16 = _nt_text_lines
+              s13 << r16
+            end
+          end
+          if s13.last
+            r13 = instantiate_node(AuthorNode,input, i13...index, s13)
+            r13.extend(Author3)
+          else
+            @index = i13
+            r13 = nil
+          end
+          if r13
+            r0 = r13
+          else
+            @index = i0
+            r0 = nil
+          end
         end
       end
     end
