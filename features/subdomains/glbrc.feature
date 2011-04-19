@@ -5,7 +5,7 @@ Feature: Use subdomains to divide up the site.
 Scenario: Datatables index works at GLBRC subdomain.
   Given I am in the GLBRC subdomain
   When I go to the datatables page
-  Then I should see "This catalog is a collection of the data from the GLBRC sustainability research sites in Michigan and Wisconsin"
+  Then I should see "GLBRC Sustainability Research Data Catalog"
 
 Scenario: Sign in styles correctly in the GLBRC subdomain
   Given I am in the GLBRC subdomain

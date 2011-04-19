@@ -5,7 +5,7 @@ Feature: Use subdomains to divide up the site.
 Scenario: Datatables index works at LTER subdomain.
   Given I am in the LTER subdomain
   When I go to the datatables page
-  Then I should see "The KBS LTER Data Catalog is a collection of publicly available datatables associated with the site."
+  Then I should not see "GLBRC Sustainability Research Data Catalog"
   
 Scenario: Sign in styles correctly in the LTER subdomain
   Given I am in the LTER subdomain
