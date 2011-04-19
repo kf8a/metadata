@@ -131,6 +131,10 @@ unless Factory.factories.include?(:affiliation) #prevent redefining these factor
     d.association   :dataset
   end
 
+  Factory.define :old_datatable, :parent => :datatable do |datatable|
+    datatable.object   %q{select now() - interval '3 year' as sample_date}
+  end
+
   Factory.define :ownership do |o|
     o.association  :datatable
     o.association  :user

@@ -1,3 +1,1 @@
-<%= semantic_form_for @datatable, :html => { :multipart => true } do |form| %>
-  $("temporal_coverage").update("<%= escape_javascript(render(:partial => 'temporal_coverage', :locals => {:form => form}))%>");
-<% end %>
+jQuery('#temporal_coverage').load('edit.html div#temporal_coverage');
