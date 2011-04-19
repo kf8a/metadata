@@ -25,7 +25,15 @@ grammar RIS
 			 {
 			def content(basename, h)
 				type = extract_value(text_value).chomp			
-				h.citation_type = CitationType.find_by_abbreviation(type)
+        case type
+        when 'JOUR'    then h.type = 'ArticleCitation'
+        when 'BOOK'    then h.type = 'BookCitation'
+        when 'THES'    then h.type = 'ThesisCitation'
+        when 'RPRT'    then h.type = 'ReportCitation'
+        when 'CONF'    then h.type = 'ConferenceCitation'
+        when 'CHAP'    then h.type = 'ChapterCitation'
+        when 'EBOOK'   then h.type = 'EbookCitation'
+        end
 				nil # return nil because we are not interested in the  citation type record
 			end
 			}
@@ -109,6 +117,8 @@ grammar RIS
 		'A1' tag_space text_lines <AuthorNode>
 		/
 		'A2' tag_space text_lines <AuthorNode>
+    /
+    'A3' tag_space text_lines <AuthorNode>
 	end
 	
 	rule keyword

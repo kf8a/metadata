@@ -27,6 +27,8 @@ gem "transitions", :require => ["transitions", "active_record/transitions"]
 
 gem 'friendly_id'
 
+gem 'parslet'
+
 # for creating bibtex formatted citations
 gem 'bibtex-ruby'
 
