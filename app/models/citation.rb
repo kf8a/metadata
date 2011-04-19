@@ -172,9 +172,7 @@ class Citation < ActiveRecord::Base
   end
 
   def page_numbers
-    if start_page_number.blank?
-      ""
-    elsif !ending_page_number.blank? && start_page_number != ending_page_number
+    if start_page_number.to_i < ending_page_number.to_i
       "#{start_page_number}-#{ending_page_number}"
     else
       "#{start_page_number}"
