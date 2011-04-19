@@ -3,6 +3,7 @@ class CitationsController < ApplicationController
   layout :site_layout
   cache_sweeper :citation_sweeper
   before_filter :admin?, :only => [:new, :create, :edit, :update, :destroy] unless Rails.env == 'development'
+  before_filter :get_citation, :only => [:show, :edit, :update, :destroy]
 
   def index
     store_location
@@ -53,7 +54,6 @@ class CitationsController < ApplicationController
 
   def show
     store_location
-    @citation = Citation.find(params[:id])
     file_title = @citation.file_title
     respond_to do |format|
       format.html
@@ -76,11 +76,9 @@ class CitationsController < ApplicationController
   end
 
   def edit
-    @citation = Citation.find(params[:id])
   end
 
   def update
-    @citation = Citation.find(params[:id])
     @citation.type = params[:citation].try(:delete, 'type')
     @citation.update_attributes(params[:citation])
     respond_with @citation
@@ -107,13 +105,16 @@ class CitationsController < ApplicationController
   end
 
   def destroy
-    citation = Citation.find(params[:id])
-    citation.destroy
+    @citation.destroy
 
-    respond_with citation
+    respond_with @citation
   end
 
   private
+
+  def get_citation
+    @citation = Citation.find(params[:id])
+  end
 
   def set_title
     if @subdomain_request == "lter"
