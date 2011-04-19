@@ -18,7 +18,6 @@ Feature: Browsing Abstract
     Then I should see "An Awesome Abstract"
       And I should see "Abstract Guy and Abstract Gal"
       And I should see "A testable abstract"
-      And I should see "Index"
       And I should see "log out"
       And I should not see "Edit"
       And I should not see "Destroy"
