@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110418185339) do
+ActiveRecord::Schema.define(:version => 20110419142830) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -826,6 +826,7 @@ ActiveRecord::Schema.define(:version => 20110418185339) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "data_catalog_intro"
   end
 
 end
