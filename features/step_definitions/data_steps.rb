@@ -55,5 +55,5 @@ end
 
 Then /^I should see the old date$/ do
   old_date = Time.now.year - 3
-  Then %{I should see "#{old_date} to present"}
+  Then %{I should see "Old Datatable (#{old_date})"}
 end
