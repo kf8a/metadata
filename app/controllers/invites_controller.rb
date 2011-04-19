@@ -1,6 +1,7 @@
 class InvitesController < ApplicationController
   
   before_filter :admin? unless Rails.env == 'development'
+  before_filter :get_invite, :only => [:show, :edit, :update, :destroy, :send_invitation]
   
   # GET /invites
   # GET /invites.xml
@@ -16,8 +17,6 @@ class InvitesController < ApplicationController
   # GET /invites/1
   # GET /invites/1.xml
   def show
-    @invite = Invite.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @invite }
@@ -37,7 +36,6 @@ class InvitesController < ApplicationController
 
   # GET /invites/1/edit
   def edit
-    @invite = Invite.find(params[:id])
   end
 
   # POST /invites
@@ -59,8 +57,6 @@ class InvitesController < ApplicationController
   # PUT /invites/1
   # PUT /invites/1.xml
   def update
-    @invite = Invite.find(params[:id])
-
     respond_to do |format|
       if @invite.update_attributes(params[:invite])
         format.html { redirect_to(@invite, :notice => 'Invite was successfully updated.') }
@@ -75,7 +71,6 @@ class InvitesController < ApplicationController
   # DELETE /invites/1
   # DELETE /invites/1.xml
   def destroy
-    @invite = Invite.find(params[:id])
     @invite.destroy
 
     respond_to do |format|
@@ -85,11 +80,16 @@ class InvitesController < ApplicationController
   end
   
   def send_invitation
-    @invite = Invite.find(params[:id])
     @invite.invite!
     InviteMailer.invitation(@invite).deliver
     flash[:notice] = "Invite sent to #{@invite.email}"
     redirect_to(invites_url)
+  end
+
+  private#########################
+  
+  def get_invite
+    @invite = Invite.find(params[:id])
   end
 
 end
