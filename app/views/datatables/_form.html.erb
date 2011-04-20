@@ -16,14 +16,15 @@
 </div>
 <%= link_to_add_fields "Add Person", form, :data_contributions %>
 
+<h2>Temporal Coverage</h2>
+<div id="temporal_coverage">
+  <%= render :partial => 'temporal_coverage', :locals => {:form => form} %>
+</div>
+<% unless datatable.new_record? %>
+  <%= link_to "Update Temporal Coverage", update_temporal_extent_datatable_path(datatable), :remote => true %>
+<% end %>
+
 <%= form.inputs do %>
-  <h2>Temporal Coverage</h2>
-  <div id="temporal_coverage">
-    <%= render :partial => 'temporal_coverage', :locals => {:form => form} %>
-  </div>
-  <% unless datatable.new_record? %>
-    <%= link_to "Update Temporal Coverage", update_temporal_extent_datatable_path(datatable), :remote => true %>
-  <% end %>
   <%= form.input :weight %>
   <%= form.input :update_frequency_days, :label => 'Expected Update Frequency (days)' %>
   <%= form.input :on_web %>
