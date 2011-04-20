@@ -93,7 +93,6 @@ class Customizer
 
   def sorted_values
     values = @values.sort {|firstrow, secondrow| firstrow[self.sortby]<=>secondrow[self.sortby] rescue 0}
-    values = values.reverse if self.sort_direction == "Descending"
-    values
+    self.sort_direction == "Descending" ? values.reverse : values
   end
 end
