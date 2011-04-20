@@ -14,9 +14,7 @@ class Permission < ActiveRecord::Base
   end
      
   def only_owners_can_set_permissions
-    if datatable
-      errors[:base] << 'owners only' unless datatable.owners.include?(owner)
-    end
+    errors[:base] << 'owners only' unless datatable.try(:owners).to_a.include?(owner)
   end
 
   def denied?
