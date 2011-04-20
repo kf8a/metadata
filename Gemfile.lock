@@ -156,9 +156,6 @@ GEM
     launchy (0.4.0)
       configuration (>= 0.0.5)
       rake (>= 0.8.1)
-    less (1.2.21)
-      mutter (>= 0.4.2)
-      treetop (>= 1.4.2)
     liquid (2.2.2)
     mail (2.2.17)
       activesupport (>= 2.3.6)
@@ -182,7 +179,6 @@ GEM
       syntax
     mime-types (1.16)
     mocha (0.9.12)
-    mutter (0.5.3)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -331,7 +327,6 @@ DEPENDENCIES
   jammit
   jquery-rails (>= 0.2.6)
   launchy
-  less
   liquid
   metric_fu
   mocha
