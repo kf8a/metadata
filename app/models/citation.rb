@@ -57,6 +57,7 @@ class Citation < ActiveRecord::Base
   end
 
   def Citation.by_date(date)
+    return false unless date
     query_date = Date.civil(date['year'].to_i,date['month'].to_i,date['day'].to_i)
     where('updated_at > ?', query_date)
   end

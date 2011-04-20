@@ -11,7 +11,7 @@ class CitationsController < ApplicationController
     @submitted_citations = citations.submitted
     @forthcoming_citations = citations.forthcoming
     date = params[:date].presence
-    @citations = date ? citations.by_date(date) : citations.published
+    @citations = citations.by_date(date) || citations.published
 
     index_responder
   end
@@ -27,12 +27,12 @@ class CitationsController < ApplicationController
   end
 
   def filtered
-    @word, @type, @sort_by = params[:word], params[:type], params[:sort_by]
+    @type, @sort_by = params[:type], params[:sort_by]
     @citations = website.citations.sorted_by(@sort_by).by_type(@type)
     @submitted_citations = @citations.submitted
     @forthcoming_citations = @citations.forthcoming
     date = params[:date].presence
-    @citations = date ? @citations.by_date(date) : @citations.published
+    @citations = @citations.by_date(date) || @citations.published
 
     index_responder
   end
@@ -86,7 +86,7 @@ class CitationsController < ApplicationController
 
   def bibliography
     date = params[:date].presence
-    @citations = date ? Citation.by_date(date) : Citation.all
+    @citations = Citation.by_date(date) || Citation.all
   end
 
   def destroy
@@ -113,7 +113,7 @@ class CitationsController < ApplicationController
     respond_to do |format|
       format.html
       format.enw { send_data Citation.to_enw(@citations), :filename=>'glbrc.enw' }
-      format.bib { send_data Citation.to_bib(@citations), :filename=>'glbrc.bib' }
+      format.bib { send_data Citation.to_bib(@citations), :filename=>'glbdrc.bib' }
       format.rss { render :layout => false } #index.rss.builder
     end
   end
