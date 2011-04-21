@@ -1,79 +1,68 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<% content_for :head do %>
   <title>LTER: <%= controller.controller_name %>:<%= controller.action_name %></title>
-  <%= include_stylesheets :base, :media => 'screen,print' %>
   <link rel="stylesheet/less" type="text/css" media="screen" href="stylesheets/lter_supplemental.less" />
-  <%= javascript_include_tag "less" %>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js"></script>
-  <script>$.noConflict();</script>
-
-  <%= include_javascripts :base %>
-  <%= csrf_meta_tag %>
-    	  
   <link rel="alternate" type="application/rss+xml" title="Data" href="/datatables.rss" />
-</head>
-<body>
-  <div id='wrapper'>
-    <div id="sign-in-wrapper">
-      <div id='sign-in'>
-        <% if signed_in? %>
-          <%= link_to 'Sign Out', sign_out_url(:only_path => true) %>
-        <% else %>
-          <%= link_to 'Sign In', sign_in_url(:only_path => true) %>
-        <% end %>
-      </div>
-    </div>
-    <div id='branding'>
-      <a id='msu_logo' href="http://www.msu.edu">
-        <%= image_tag('common/logo_msu_pos_122.gif', :alt => 'Michigan State University Logo')%>
-      </a>
-      <h1><%= @title %></h1>
-      <div id="topcoloredbar">
-        <div id='search'>
-          <a href="/people">People</a>
-          <form action="http://www.google.com/u/ltersearch" method='get' id="searchform">
-            <input id='peoplesearch' type='text' name='q' maxlength='255' size='20' value="Search KBS LTER"/>
-          </form>
-        </div>
-        <h2><a href='/'>The KBS LTER Site</a></h2>
-      </div>
-    </div>
-    <div id='content'>
-      <p style="color: green"><%= flash[:notice] %></p>
-      <ul id=crumbs>
-        <li><a href='/'>Home</a></li>
-        <% @crumbs.each do |crumb| %>
-          <li> >
-            <%= link_to_if crumb.url, "#{crumb.name}", crumb.url  %>
-          </li>
-        <% end %>
-      </ul>
-      <%= yield  %>
-    </div>
-    <div id='navigation'>
-      <%= render :file => "#{Rails.root}/public/system/navigation.html"%>
-      <% if controller.controller_name == 'datasets' || controller.controller_name == 'datatables' || controller.controller_name == 'protocols' %>
-        <%= render :file => "#{Rails.root}/public/system/network_db.html"%>
+<% end %>
+  
+<% content_for :content do %>
+  <div id="sign-in-wrapper">
+    <div id='sign-in'>
+      <% if signed_in? %>
+        <%= link_to 'Sign Out', sign_out_url(:only_path => true) %>
+      <% else %>
+        <%= link_to 'Sign In', sign_in_url(:only_path => true) %>
       <% end %>
     </div>
-    <div id='footer'>
-      <%= render :file  => "#{Rails.root}/public/system/footer.html"%>
+  </div>
+  <div id='branding'>
+    <a id='msu_logo' href="http://www.msu.edu">
+      <%= image_tag('common/logo_msu_pos_122.gif', :alt => 'Michigan State University Logo')%>
+    </a>
+    <h1><%= @title %></h1>
+    <div id="topcoloredbar">
+      <div id='search'>
+        <a href="/people">People</a>
+        <form action="http://www.google.com/u/ltersearch" method='get' id="searchform">
+          <input id='peoplesearch' type='text' name='q' maxlength='255' size='20' value="Search KBS LTER"/>
+        </form>
+      </div>
+      <h2><a href='/'>The KBS LTER Site</a></h2>
     </div>
   </div>
-  
-  <%= debug(params) if Rails.env.development? %>
-  
-	<script type="text/javascript">
-  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  <div id='content'>
+    <p style="color: green"><%= flash[:notice] %></p>
+    <ul id=crumbs>
+      <li><a href='/'>Home</a></li>
+      <% @crumbs.each do |crumb| %>
+        <li> >
+          <%= link_to_if crumb.url, "#{crumb.name}", crumb.url  %>
+        </li>
+      <% end %>
+    </ul>
+    <%= yield  %>
+  </div>
+  <div id='navigation'>
+    <%= render :file => "#{Rails.root}/public/system/navigation.html"%>
+    <% if controller.controller_name == 'datasets' || controller.controller_name == 'datatables' || controller.controller_name == 'protocols' %>
+      <%= render :file => "#{Rails.root}/public/system/network_db.html"%>
+    <% end %>
+  </div>
+  <div id='footer'>
+    <%= render :file  => "#{Rails.root}/public/system/footer.html"%>
+  </div>
+<% end %>
+
+<% content_for :bottom_scripts do %>
+  <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
   </script>
   <script type="text/javascript">
-  try {
-  var pageTracker = _gat._getTracker("UA-379552-5");
-  pageTracker._trackPageview();
-  } catch(err) {}</script>
-</body>
-</html>
+    try {
+    var pageTracker = _gat._getTracker("UA-379552-5");
+    pageTracker._trackPageview();
+    } catch(err) {}
+  </script>
+<% end %>
+
+<%= render :file => 'layouts/application' %>

@@ -1,58 +1,43 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<title>GLBRC Sustainability: <%= controller.controller_name %></title>
-  <%= include_stylesheets :base, :media => 'screen,print' %>
+<% content_for :head do %>
+  <title>GLBRC Sustainability: <%= controller.controller_name %></title>
   <link rel="stylesheet/less" type="text/css" media="screen" href="stylesheets/glbrc.less" />
-  <%= javascript_include_tag "less" %>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<% end %>
 
-  <script type='text/javascript'>jQuery.noConflict();</script>
+<% content_for :content do %>
+  <div id='glbrc'>
+    <div id="sign-in-wrapper">
+      <div id='sign-in'>
+        <% if signed_in? %>
+          <%= link_to 'Sign Out', sign_out_url(:only_path => true) %>
+        <% else %>
+          <%= link_to 'Sign In', sign_in_url(:only_path => true) %>
+        <% end %>
+      </div>
+    </div>
+    <div id='branding'>
+      <a id='glbrc-logo' href="http://glbrc.org">
+        <img alt="Great Lakes Bioenergy Consortium" src="/images/common/glbrc_small.jpg"/>
+      </a>
+      <h1><%= @title %></h1>
+    </div>
+    <div id='content'>
+      <p style="color: green"><%= flash[:notice] %></p>
+      <%= yield  %>
+    </div>
+    <div id='navigation'>
+      <ul>
+        <li><a href='/datatables'>Data Catalog</a></li>
+        <li><a href='/protocols'>Protocols</a></li>
+        <li><a href='/pages/1'>Experimental Layouts</a></li>
+        <li><a href='/citations'>Publications</a></li>
+      </ul>
+    </div>
+    <div id='footer'>
+    </div>
+  </div>
+<% end %>
 
-  <%= include_javascripts :base %>
-  <%= csrf_meta_tag %>
-
-</head>
-<body>
-	<div id='wrapper'>
-	  <div id='glbrc'>
-            <div id="sign-in-wrapper">
-              <div id='sign-in'>
-                <% if signed_in? %>
-                  <%= link_to 'Sign Out', sign_out_url(:only_path => true) %>
-                <% else %>
-                  <%= link_to 'Sign In', sign_in_url(:only_path => true) %>
-                <% end %>
-              </div>
-            </div>
-            <div id='branding'>
-              <a id='glbrc-logo' href="http://glbrc.org">
-                <img alt="Great Lakes Bioenergy Consortium" src="/images/common/glbrc_small.jpg"/>
-              </a>
-              <h1><%= @title %></h1>
-            </div>
-            <div id='content'>
-              <p style="color: green"><%= flash[:notice] %></p>
-              <%= yield  %>
-            </div>
-            <div id='navigation'>
-              <ul>
-                <li><a href='/datatables'>Data Catalog</a></li>
-                <li><a href='/protocols'>Protocols</a></li>
-                <li><a href='/pages/1'>Experimental Layouts</a></li>
-                <li><a href='/citations'>Publications</a></li>
-              </ul>
-            </div>
-            <div id='footer'>
-            </div>
-          </div>
-	</div>
-  
-  <%= debug(params) if Rails.env.development? %>
-  <%= debug(session) if Rails.env.development? %>
-  
+<% content_for :bottom_scripts do %>
   <script type="text/javascript">
 
     var _gaq = _gaq || [];
@@ -66,5 +51,6 @@
      })();
 
   </script>
-</body>
-</html>
+<% end %>
+
+<%= render :file => 'layouts/application' %>

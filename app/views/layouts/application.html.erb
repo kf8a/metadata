@@ -1,13 +1,25 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-  <title>Metadata</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <%= include_stylesheets :base, :media => 'screen,print' %>
+  <%= yield :head %>
+  <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" %>
+  <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js" %>
+  <script type='text/javascript'>jQuery.noConflict();</script>
+  <%= include_javascripts :base %>
+  <%= javascript_include_tag "less" %>
   <%= csrf_meta_tag %>
 </head>
 <body>
+  <div id="wrapper"
+    <%= yield :content %>
+  </div>
 
-<%= yield %>
+  <%= debug(params) if Rails.env.development? %>
+  <%= debug(session) if Rails.env.development? %>
+
+  <%= yield :bottom_scripts %>
 
 </body>
 </html>
