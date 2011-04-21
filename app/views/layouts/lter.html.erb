@@ -5,15 +5,7 @@
 <% end %>
   
 <% content_for :content do %>
-  <div id="sign-in-wrapper">
-    <div id='sign-in'>
-      <% if signed_in? %>
-        <%= link_to 'Sign Out', sign_out_url(:only_path => true) %>
-      <% else %>
-        <%= link_to 'Sign In', sign_in_url(:only_path => true) %>
-      <% end %>
-    </div>
-  </div>
+  <%= render 'layouts/sign_in' %>
   <div id='branding'>
     <a id='msu_logo' href="http://www.msu.edu">
       <%= image_tag('common/logo_msu_pos_122.gif', :alt => 'Michigan State University Logo')%>
