@@ -26,6 +26,10 @@ class User < ActiveRecord::Base
 
   scope :by_email, :order => 'email'
 
+  def to_s
+    self.email
+  end
+
   def owns?(datatable)
     self.datatables.include?(datatable)
   end
