@@ -19,5 +19,3 @@ stylesheets:
   - public/stylesheets/navigation.css
   - public/stylesheets/data.css
   - public/stylesheets/kbs.css
-  - public/stylesheets/glbrc.css
-  - public/stylesheets/lter_supplemental.css
