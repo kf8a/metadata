@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_crumbs, :set_subdomain_request, :extra_views, :set_title
 
+  respond_to :html, :xml, :json
+
    LOCAL_IPS =/^127\.0\.0\.1$|^192\.231\.113\.|^192\.108\.190\.|^192\.108\.188\.|^192\.108\.191\./
 
    def trusted_ip?

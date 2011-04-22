@@ -19,5 +19,26 @@ class AffiliationsControllerTest < ActionController::TestCase
     should render_template :new
   end
 
+  context 'on POST :create' do
+    setup do
+      post :create, :affiliation => {}
+    end
 
+    should redirect_to("the affiliation page") {affiliation_url(assigns(:affiliation))}
+  end
+
+  context 'an affiliation exists.' do
+    setup do
+      @affiliation = Factory.create(:affiliation)
+    end
+
+    context "PUT :update to affiliation with valid attributes" do
+      setup do
+        put :update, :id => @affiliation, :affiliation => {}
+      end
+
+      should redirect_to("the affiliation page") {affiliation_url(@affiliation)}
+      should set_the_flash
+    end
+  end
 end

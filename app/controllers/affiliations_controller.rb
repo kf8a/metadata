@@ -16,10 +16,8 @@ class AffiliationsController < ApplicationController
   def update
     if @affiliation.update_attributes(params[:affiliation])
       flash[:notice] = 'Affiliation was successfully updated.'
-      redirect_to @affiliation
-    else
-      render_subdomain "edit"
     end
+    respond_with @affiliation
   end
 
   # GET /affiliations/new
@@ -36,10 +34,9 @@ class AffiliationsController < ApplicationController
 
     if @affiliation.save
       flash[:notice] = 'Affiliation was successfully created.'
-      redirect_to @affiliation
-    else
-      render_subdomain "new"
     end
+
+    respond_with @affiliation
   end
 
   def destroy
