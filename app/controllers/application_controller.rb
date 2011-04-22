@@ -1,4 +1,3 @@
-require 'template_handler'
 require 'liquid_resolver'
 require 'subdomain_resolver'
 
@@ -60,11 +59,6 @@ class ApplicationController < ActionController::Base
 
   def valid_subdomain?(subdomain)
     ['lter','glbrc'].include?(subdomain)
-  end
-
-  def render_subdomain(page=action_name, mycontroller=controller_name, domain=@subdomain_request)
-    handler = TemplateHandler.new(page, mycontroller, domain)
-    render :template => handler.correct_template
   end
 
   def website
