@@ -1,4 +1,6 @@
 require 'template_handler'
+require 'liquid_resolver'
+require 'subdomain_resolver'
 
 class ApplicationController < ActionController::Base
   protect_from_forgery
@@ -7,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   layout :site_layout
 
-  before_filter :set_crumbs, :set_subdomain_request, :set_title
+  before_filter :set_crumbs, :set_subdomain_request, :extra_views, :set_title
 
    LOCAL_IPS =/^127\.0\.0\.1$|^192\.231\.113\.|^192\.108\.190\.|^192\.108\.188\.|^192\.108\.191\./
 
@@ -16,6 +18,11 @@ class ApplicationController < ActionController::Base
    end
 
   private
+
+  def extra_views
+    prepend_view_path SubdomainResolver.new(@subdomain_request)
+    prepend_view_path LiquidResolver.new(@subdomain_request)
+  end
 
   def admin?
     unless current_user.try(:role) == 'admin'

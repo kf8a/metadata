@@ -14,7 +14,7 @@ class DatatablesController < ApplicationController
     retrieve_datatables('keyword_list' =>'')
 
     respond_to do |format|
-      format.html {render_subdomain}
+      format.html #{render_subdomain}
       format.xml  { render :xml => @datatables.to_xml }
       format.rss {render :rss => @datatables}
     end
