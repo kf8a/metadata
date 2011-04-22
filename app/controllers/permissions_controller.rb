@@ -4,9 +4,6 @@ class PermissionsController < ApplicationController
   
   def index
     @datatables = current_user.try(:datatables)
-    respond_to do |format|
-      format.html { render_subdomain }
-    end
   end
   
   def show
@@ -16,9 +13,6 @@ class PermissionsController < ApplicationController
   end
   
   def new
-    respond_to do |format|
-      format.html { render_subdomain }
-    end
   end
   
   def create

@@ -13,9 +13,7 @@ class DatatablesController < ApplicationController
     store_location
     retrieve_datatables('keyword_list' =>'')
 
-    respond_to do |format|
-      format.html #{render_subdomain}
-      format.xml  { render :xml => @datatables.to_xml }
+    respond_with @datatables do |format|
       format.rss {render :rss => @datatables}
     end
   end
@@ -27,9 +25,6 @@ class DatatablesController < ApplicationController
       redirect_to datatables_url
     else
       retrieve_datatables(query)
-      respond_to do |format|
-        format.html {render_subdomain}
-      end
     end
   end
 
@@ -49,7 +44,7 @@ class DatatablesController < ApplicationController
     store_location #in case we have to log in and come back here
     if @datatable.dataset.valid_request?(@subdomain_request)
       respond_to do |format|
-        format.html   { render_subdomain }
+        format.html
         format.xml
 #         format.ods do
 #           if csv_ok
@@ -106,16 +101,11 @@ class DatatablesController < ApplicationController
     @people = Person.all
     @units = Unit.all
 
-    respond_to do |format|
-      if @datatable.save
-        flash[:notice] = 'Datatable was successfully created.'
-        format.html { redirect_to datatable_url(@datatable) }
-        format.xml  { head :created, :location => datatable_url(@datatable) }
-      else
-        format.html { render_subdomain "new" }
-        format.xml  { render :xml => @datatable.errors.to_xml }
-      end
+    if @datatable.save
+      flash[:notice] = 'Datatable was successfully created.'
     end
+
+    respond_with @datatable
   end
 
   # PUT /datatables/1
@@ -126,28 +116,18 @@ class DatatablesController < ApplicationController
     @people = Person.all
     @units = Unit.all
 
-    respond_to do |format|
-      if @datatable.update_attributes(params[:datatable])
-        flash[:notice] = 'Datatable was successfully updated.'
-        format.html { redirect_to datatable_url(@datatable) }
-        format.xml  { head :ok }
-      else
-
-        format.html { render_subdomain "edit" }
-        format.xml  { render :xml => @datatable.errors.to_xml }
-      end
+    if @datatable.update_attributes(params[:datatable])
+      flash[:notice] = 'Datatable was successfully updated.'
     end
+
+    respond_with @datatable
   end
 
   # DELETE /datatables/1
   # DELETE /datatables/1.xml
   def destroy
     @datatable.destroy
-
-    respond_to do |format|
-      format.html { redirect_to datatables_url }
-      format.xml  { head :ok }
-    end
+    respond_with @datatable
   end
 
   #TODO only return the ones for the right website.

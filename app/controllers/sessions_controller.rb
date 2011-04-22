@@ -1,7 +1,6 @@
 class SessionsController < Clearance::SessionsController
   
   def new
-    render_subdomain
   end
 
   def create

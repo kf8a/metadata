@@ -40,10 +40,7 @@ class PeopleController < ApplicationController
   # GET /people/1
   # GET /people/1.xml
   def show
-    respond_to do |format|
-      format.html { render_subdomain }
-      format.xml  { render :xml => @person.to_xml }
-    end
+    respond_with @person
   end
 
   # GET /people/new
