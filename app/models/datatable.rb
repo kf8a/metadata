@@ -204,7 +204,7 @@ class Datatable < ActiveRecord::Base
   def data_source
     "\n# Data Source: http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}
 # The newest version of the data http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}.csv
-# Full EML Metadata: http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}.eml\n#"
+# Full EML Metadata: http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.dataset.id}.eml\n#"
   end
 
   def data_access_statement
