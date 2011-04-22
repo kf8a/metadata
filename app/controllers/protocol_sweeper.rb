@@ -20,7 +20,7 @@ class ProtocolSweeper < ActionController::Caching::Sweeper
 
   def expire_cache_for(protocol)
     expire_fragment(:controller => 'protocols', :action => 'show', :id => protocol )
-    expire_fragment(:contoller => 'protocols',:action => 'index') 
+    expire_fragment(:controller => 'protocols', :action => 'index') 
   end
 
   def expire_cache_for_linked_datatables(protocol)
