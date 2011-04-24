@@ -143,7 +143,7 @@ private
     custom_units = self.datatables.collect do | datatable |
       datatable.variates.collect do | variate |
         next unless variate.unit
-        next unless !variate.unit.in_eml
+        next if variate.unit.in_eml
         variate.unit
       end
     end
