@@ -15,7 +15,7 @@
 
       <% next unless t.include_datatables_from_study?(datatables, study) -%>
   
-      <%= render :partial => 'theme',  :locals => {:theme => t, :study => study, :datatables => datatables}%>
+      <%= render 'theme', :theme => t, :study => study, :datatables => datatables %>
 
     <% end -%>
 

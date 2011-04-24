@@ -120,9 +120,8 @@
       <!--
     	TODO: geographic coverage
     	-->
-    <%= render :partial => 'download_button', :locals => {:datatable => @datatable} %>
-
-    <%= render :partial => 'data_preview', :locals => {:datatable => @datatable} %>
+    <%= render 'download_button', :datatable => @datatable %>
+    <%= render 'data_preview',    :datatable => @datatable %>
   <% end %>
 <% else %>
   <% if @datatable.object.nil? %>

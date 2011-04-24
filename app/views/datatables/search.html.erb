@@ -3,13 +3,13 @@
     <%=raw  @website.data_catalog_intro %>
 </p>
 
-<%= render :partial => 'search_form' %>
+<%= render 'search_form' %>
 
 <ul class='quickTree'>
   <% @studies.each do |study| -%>
     <% next unless study.include_datatables?(@datatables)%>
     
-    <%= render :partial => 'study',  :locals => {:study => study}%>
+    <%= render 'study', :study => study %>
   <% end -%>
 </ul>
 

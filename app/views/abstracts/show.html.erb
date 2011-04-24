@@ -8,4 +8,4 @@
 <%=link_to 'Get PDF', download_abstract_path(@abstract) %><br/>
 <% end %>
 
-<%= render :partial => 'navbar', :locals => {:abstract => @abstract} %>
+<%= render 'navbar', :abstract => @abstract %>
