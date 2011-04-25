@@ -184,10 +184,6 @@ class DatatablesController < ApplicationController
 
   end
 
-  def get_datatable
-    @datatable = Datatable.find(params[:id])
-  end
-
   def retrieve_datatables(query)
     @default_value = 'Search for core areas, keywords or people'
     @themes = Theme.roots
