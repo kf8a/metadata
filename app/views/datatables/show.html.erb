@@ -124,12 +124,12 @@
     <%= render 'data_preview',    :datatable => datatable %>
   <% end %>
 <% else %>
-  <% if datatable.object.nil? %>
-    <p>Data Embargoed</p>
-  <% else %>
+  <% if datatable.object? %>
     <p>
       <%= link_to 'Data', datatable.data_url %> (on a different page)
     </p>
+  <% else %>
+    <p>Data Embargoed</p>
   <% end %>
 <% end %>
 
