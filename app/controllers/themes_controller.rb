@@ -14,7 +14,7 @@ class ThemesController < ApplicationController
         format.html { redirect_to themes_url }
 #        format.xml  { head :created, :location => theme_url(@theme) }
       else
-        format.html { render :action => "index" }
+        format.html { render "index" }
         format.xml  { render :xml => @theme.errors.to_xml }
       end
     end

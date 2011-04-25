@@ -44,30 +44,17 @@ class VariatesController < ApplicationController
   def create
     @variate = Variate.new(params[:variate])
 
-    respond_to do |format|
-      if @variate.save
-        flash[:notice] = 'Variate was successfully created.'
-        format.html { redirect_to variate_url(@variate) }
-        format.xml  { head :created, :location => variate_url(@variate) }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @variate.errors.to_xml }
-      end
+    if @variate.save
+      flash[:notice] = 'Variate was successfully created.'
     end
+    respond_with @variate
   end
 
   # PUT /variates/1
   # PUT /variates/1.xml
   def update
-    respond_to do |format|
-      if @variate.update_attributes(params[:variate])
-        flash[:notice] = 'Variate was successfully updated.'
-        format.html { redirect_to variate_url(@variate) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @variate.errors.to_xml }
-      end
+    if @variate.update_attributes(params[:variate])
+      flash[:notice] = 'Variate was successfully updated.'
     end
   end
 

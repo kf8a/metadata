@@ -20,7 +20,7 @@ class StudiesController < ApplicationController
         format.html { redirect_to datatables_url }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { render "edit" }
         format.xml  { render :xml => @study.errors.to_xml }
       end
     end
