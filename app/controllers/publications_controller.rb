@@ -85,37 +85,23 @@ class PublicationsController < ApplicationController
     publication = params[:publication]
     publication[:publication_type_id] = 1
     @publication = Publication.new(publication)
-
-    respond_to do |format|
-      if @publication.save
-        expire_action :action => :index
-
-        flash[:notice] = 'Publication was successfully created.'
-        format.html { redirect_to publication_url(@publication) }
-        format.xml  { render :xml => @publication, :status => :created, :location => @publication }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @publication.errors.to_xml }
-      end
+    if @publication.save
+      expire_action :action => :index
+      flash[:notice] = 'Publication was successfully created.'
     end
+    respond_with @publication
   end
 
   # PUT /publications/1
   # PUT /publications/1.xml
   def update
-    respond_to do |format|
-      if @publication.update_attributes(params[:publication])
-        expire_action :action => :index
-
-        flash[:notice] = 'Publication was successfully updated.'
-        format.html { redirect_to publication_url(@publication) }
-        format.xml  { head :ok }
-      else
-        get_form_data
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @publication.errors.to_xml }
-      end
+    if @publication.update_attributes(params[:publication])
+      expire_action :action => :index
+      flash[:notice] = 'Publication was successfully updated.'
+    else
+      get_form_data
     end
+    respond_with @publication
   end
 
   # DELETE /publications/1
