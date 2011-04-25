@@ -84,17 +84,10 @@ class DatasetsController < ApplicationController
   # POST /datasets.xml
   def create
     @dataset = Dataset.new(params[:dataset])
-
-    respond_to do |format|
-      if @dataset.save
-        flash[:notice] = 'Dataset was successfully created.'
-        format.html { redirect_to dataset_url(@dataset) }
-        format.xml  { head :created, :location => dataset_url(@dataset) }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @dataset.errors.to_xml }
-      end
+    if @dataset.save
+      flash[:notice] = 'Dataset was successfully created.'
     end
+    respond_with @dataset
   end
 
   # PUT /datasets/1
@@ -102,16 +95,10 @@ class DatasetsController < ApplicationController
   def update
     @sponsors = Sponsor.all.collect {|x| [x.name, x.id]}
     @websites = Website.all.collect {|x| [x.name, x.id]}
-    respond_to do |format|
-      if @dataset.update_attributes(params[:dataset])
-        flash[:notice] = 'Dataset was successfully updated.'
-        format.html { redirect_to dataset_url(@dataset) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @dataset.errors.to_xml }
-      end
+    if @dataset.update_attributes(params[:dataset])
+      flash[:notice] = 'Dataset was successfully updated.'
     end
+    respond_with @dataset
   end
 
   # DELETE /datasets/1
