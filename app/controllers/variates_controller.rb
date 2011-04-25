@@ -56,6 +56,7 @@ class VariatesController < ApplicationController
     if @variate.update_attributes(params[:variate])
       flash[:notice] = 'Variate was successfully updated.'
     end
+    respond_with @variate
   end
 
   # DELETE /variates/1
