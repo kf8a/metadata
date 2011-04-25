@@ -40,7 +40,7 @@ class AbstractsController < ApplicationController
         format.html { redirect_to meeting_url(@abstract.meeting) }
         format.xml  { head :created, :location => abstracts_url(@meeting) }
       else
-        format.html { render :action => "new" }
+        format.html { render "new" }
         format.xml  { render :xml => @abstract.errors.to_xml }
       end
     end
@@ -49,10 +49,7 @@ class AbstractsController < ApplicationController
   # GET meeting_abstracts/1
   # GET meeting_abstracts/1.xml
   def show
-    respond_to do |format|
-      format.html # show.rhtml
-      format.xml  { render :xml => @abstract.to_xml }
-    end
+    respond_with @abstract
   end
   
   # GET /meeting_abstract/1/edit
@@ -62,16 +59,10 @@ class AbstractsController < ApplicationController
   # PUT /meeting_abstracts/1
   # PUT /meeting_abstracts/1.xml
   def update
-    respond_to do |format|
-      if @abstract.update_attributes(params[:abstract])
-        flash[:notice] = 'Meeting abstract was successfully updated.'
-        format.html { redirect_to abstract_url(@abstract) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @abstract.errors.to_xml }
-      end
+    if @abstract.update_attributes(params[:abstract])
+      flash[:notice] = 'Meeting abstract was successfully updated.'
     end
+    respond_with @abstract
   end
   
   def destroy
