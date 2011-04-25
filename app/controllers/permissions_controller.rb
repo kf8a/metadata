@@ -20,11 +20,8 @@ class PermissionsController < ApplicationController
     flash[:notice] = 'No user with that email' unless user
     owner = current_user
     permission = Permission.find_by_user_id_and_datatable_id_and_owner_id(user, @datatable, owner)
-    if permission
-      permission.decision = "approved"
-    else
-      permission = Permission.new(:user => user, :datatable => @datatable, :owner => owner, :decision => "approved")
-    end
+    permission ||= Permission.new(:user => user, :datatable => @datatable, :owner => owner)
+    permission.decision = "approved"
 
     respond_to do |format|
       if permission.save
@@ -32,7 +29,7 @@ class PermissionsController < ApplicationController
         format.html { redirect_to permission_path(@datatable.id) }
         format.xml  { head :created, :location => permission_path(@datatable.id) }
       else
-        format.html { render :action => "new" }
+        format.html { render "new" }
         format.xml  { render :xml => permission.errors.to_xml }
       end
     end
