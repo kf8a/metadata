@@ -1,7 +1,7 @@
 class DatatablesController < ApplicationController
+  helper_method :datatable
 
   before_filter :admin?, :except => [:index, :show, :suggest, :search, :events, :qc] unless Rails.env == 'development'
-  before_filter :get_datatable, :only => [:show, :edit, :update, :destroy, :update_temporal_extent, :qc]
 
   protect_from_forgery :except => [:index, :show, :search]
   cache_sweeper :datatable_sweeper
@@ -37,12 +37,12 @@ class DatatablesController < ApplicationController
   # GET /datatables/1.xml
   # GET /datatables/1.csv
   def show
-    accessible_by_ip = trusted_ip? || !@datatable.is_restricted
-    csv_ok = accessible_by_ip && @datatable.can_be_downloaded_by?(current_user)
+    accessible_by_ip = trusted_ip? || !datatable.is_restricted
+    csv_ok = accessible_by_ip && datatable.can_be_downloaded_by?(current_user)
     @website = website
 
     store_location #in case we have to log in and come back here
-    if @datatable.dataset.valid_request?(@subdomain_request)
+    if datatable.dataset.valid_request?(@subdomain_request)
       respond_to do |format|
         format.html
         format.xml
@@ -63,7 +63,7 @@ class DatatablesController < ApplicationController
         end
         format.climdb do
           unless csv_ok
-            redirect_to datatable_url(@datatable)
+            redirect_to datatable_url(datatable)
           end
         end
       end
@@ -77,7 +77,6 @@ class DatatablesController < ApplicationController
 
   # GET /datatables/new
   def new
-    @datatable = Datatable.new
     @core_areas = CoreArea.by_name.collect {|x| [x.name, x.id]}
     @studies = Study.all.collect{|x| [x.name, x.id]}
     @people = Person.all
@@ -95,17 +94,16 @@ class DatatablesController < ApplicationController
   # POST /datatables
   # POST /datatables.xml
   def create
-    @datatable = Datatable.new(params[:datatable])
     @core_areas = CoreArea.by_name.collect {|x| [x.name, x.id]}
     @studies = Study.all.collect{|x| [x.name, x.id]}
     @people = Person.all
     @units = Unit.all
 
-    if @datatable.save
+    if datatable.save
       flash[:notice] = 'Datatable was successfully created.'
     end
 
-    respond_with @datatable
+    respond_with datatable
   end
 
   # PUT /datatables/1
@@ -116,18 +114,18 @@ class DatatablesController < ApplicationController
     @people = Person.all
     @units = Unit.all
 
-    if @datatable.update_attributes(params[:datatable])
+    if datatable.update_attributes(params[:datatable])
       flash[:notice] = 'Datatable was successfully updated.'
     end
 
-    respond_with @datatable
+    respond_with datatable
   end
 
   # DELETE /datatables/1
   # DELETE /datatables/1.xml
   def destroy
-    @datatable.destroy
-    respond_with @datatable
+    datatable.destroy
+    respond_with datatable
   end
 
   #TODO only return the ones for the right website.
@@ -145,8 +143,8 @@ class DatatablesController < ApplicationController
   end
 
   def update_temporal_extent
-    @datatable.update_temporal_extent
-    @datatable.save
+    datatable.update_temporal_extent
+    datatable.save
   end
 
   private
@@ -207,6 +205,10 @@ class DatatablesController < ApplicationController
 
     @studies = Study.find_all_roots_with_datatables(@datatables)
 
+  end
+
+  def datatable
+    @datatable ||= params[:id] ? Datatable.find(params[:id]) : Datatable.new(params[:datatable])
   end
 
 end

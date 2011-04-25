@@ -1,10 +1,10 @@
 <h1>Editing datatable</h1>
 
-<%= semantic_form_for @datatable, :html => { :multipart => true } do |form| %>
-  <%= render "shared/error_messages", :target => @datatable %>
-  <%= render :partial => 'form', :locals => { :form => form, :datatable => @datatable } %>
+<%= semantic_form_for datatable, :html => { :multipart => true } do |form| %>
+  <%= render "shared/error_messages", :target => datatable %>
+  <%= render 'form', :form => form, :datatable => datatable %>
   <%= form.buttons %>
 <% end %>
 
-<%= link_to 'Show', datatable_path(@datatable) %> |
+<%= link_to 'Show', datatable_path(datatable) %> |
 <%= link_to 'Back', datatables_path %>
