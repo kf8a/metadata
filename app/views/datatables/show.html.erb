@@ -1,53 +1,53 @@
 <% cache(:action_suffix => 'page') do %>
-  <h1><%=raw @datatable.title_and_years %></h1>
+  <h1><%=raw datatable.title_and_years %></h1>
 
   <p class='description'>
-    <%=raw textilize @datatable.description.presence %>
+    <%=raw textilize datatable.description.presence %>
   </p>
-  <%= @datatable.summary_graph %>
-  <%= @datatable.access_statement %>
+  <%= datatable.summary_graph %>
+  <%= datatable.access_statement %>
 
   <!-- TODO Temporary: use the default if sponsor is lter. -->
-  <% if @datatable.sponsor_name == 'lter' %>
+  <% if datatable.sponsor_name == 'lter' %>
     The <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use policy applies to the this dataset</a>
   <% else %>
-    The <%=link_to 'standard data use policy applies to the this dataset' , termsofuse_path(@datatable.dataset.sponsor)%>
+    The <%=link_to 'standard data use policy applies to the this dataset' , termsofuse_path(datatable.dataset.sponsor)%>
   <% end %>
 
 
   <div>
     <h2>Context:</h2>
     <div class='truncate'>
-      <%=raw textilize @datatable.dataset.try(:abstract) %>
+      <%=raw textilize datatable.dataset.try(:abstract) %>
     </div>
   </div>
 
   <table class='data-description'>
-    <% if @datatable.study %>
+    <% if datatable.study %>
       <tr>
         <td>Experiment:</td>
         <td>
-          <%= link_to_if @datatable.study_link_for(@website),
-              @datatable.study_name, @datatable.study_link_for(@website) %>
+          <%= link_to_if datatable.study_link_for(@website),
+              datatable.study_name, datatable.study_link_for(@website) %>
         </td>
       </tr>
     <% end %>
-    <% if @datatable.begin_date && @datatable.end_date %>
+    <% if datatable.begin_date && datatable.end_date %>
       <tr>
         <td>Temporal Coverage:</td>
-        <td><%= @datatable.begin_date %> to <%= @datatable.end_date %></td>
+        <td><%= datatable.begin_date %> to <%= datatable.end_date %></td>
       </tr>
     <% end %>
     <tr>
       <td>Datatable ID:</td>
-      <td><%= @datatable.name%></td>
+      <td><%= datatable.name %></td>
     </tr>
-    <%= render @datatable.dataset %>
-    <% if @datatable.related_tables.any? %>
+    <%= render datatable.dataset %>
+    <% if datatable.related_tables.any? %>
       <tr>
         <td>Related Tables:</td>
         <td><ul>
-          <% @datatable.related_tables.each do |table| %>
+          <% datatable.related_tables.each do |table| %>
             <li><%=link_to raw(table.title) , datatable_path(table) %></li>
           <% end %>
         </ul></td>
@@ -57,7 +57,7 @@
       <td>Personnel:</td>
       <td>
         <ul>
-          <% personnel = @datatable.personnel -%>
+          <% personnel = datatable.personnel -%>
           <% personnel.keys.each do |key| -%>
             <li>
               <%= link_to "#{key.full_name}", person_path(key.id)%>, <%= personnel[key].join(',') %>
@@ -66,27 +66,27 @@
         </ul>
       </td>
     </tr>
-    <% if @datatable.protocols_with_backup -%>
+    <% if datatable.protocols_with_backup -%>
       <tr>
         <td>Protocols</td>
         <td>
-          <% @datatable.protocols_with_backup.each do |protocol| %>
+          <% datatable.protocols_with_backup.each do |protocol| %>
             <%= link_to protocol.name, protocol_path(protocol)%>
           <% end %>
         </td>
       </tr>
     <% end -%>
-    <% if @datatable.keywords.any? && signed_in?%>
+    <% if datatable.keywords.any? && signed_in?%>
       <tr>
         <td>Keywords:</td>
-        <td><%= @datatable.keywords.join(', ')%></td>
+        <td><%= datatable.keywords.join(', ')%></td>
       </tr>
     <% end %>
     <tr>
       <td>Metadata</td>
       <td>
         <ul>
-          <li><%= link_to 'Complete EML', dataset_path(@datatable.dataset, :format => :eml) %></li>
+          <li><%= link_to 'Complete EML', dataset_path(datatable.dataset, :format => :eml) %></li>
         </ul>
       </td>
     </tr>
@@ -98,7 +98,7 @@
       <th>Description</th>
       <th>Units</th>
     </tr>
-    <% @datatable.variates.each do |variate| -%>
+    <% datatable.variates.each do |variate| -%>
       <tr>
         <td class='space-after'>
           <%= variate.name.gsub(/_/,' ') %>
@@ -115,23 +115,23 @@
 
 <% end %> 
 
-<% if @datatable.is_sql %>
-  <% if @datatable.values -%>
+<% if datatable.is_sql %>
+  <% if datatable.values -%>
       <!--
     	TODO: geographic coverage
     	-->
-    <%= render 'download_button', :datatable => @datatable %>
-    <%= render 'data_preview',    :datatable => @datatable %>
+    <%= render 'download_button', :datatable => datatable %>
+    <%= render 'data_preview',    :datatable => datatable %>
   <% end %>
 <% else %>
-  <% if @datatable.object.nil? %>
+  <% if datatable.object.nil? %>
     <p>Data Embargoed</p>
   <% else %>
     <p>
-      <%= link_to 'Data', @datatable.data_url %> (on a different page)
+      <%= link_to 'Data', datatable.data_url %> (on a different page)
     </p>
   <% end %>
 <% end %>
 
 <%= link_to 'Back to Data Catalog', datatables_path() %>&nbsp;&nbsp;
-<%= link_to 'Edit', edit_datatable_path(@datatable) if admin? %>
+<%= link_to 'Edit', edit_datatable_path(datatable) if admin? %>
