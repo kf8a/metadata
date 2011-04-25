@@ -1,7 +1,7 @@
 <h1>New Meeting Abstract</h1>
 
 <%= form_for(:abstract, :url =>abstracts_path) do |f| %>
-  <%= render "shared/error_messages", :target => @abstract %>
+  <%= render "shared/error_messages", :target => abstract %>
   <p>
     <%= f.hidden_field :meeting_id %>
   </p>
