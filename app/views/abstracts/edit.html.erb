@@ -1,6 +1,5 @@
 <h1>Editing Meeting Abstracts</h1>
-<%= form_for(:abstract, :url => abstract_path(abstract),
-             :html => { :method => :put , :multipart=>true}) do |f| %>
+<%= form_for abstract, :html => { :multipart=>true} do |f| %>
   <%= render "shared/error_messages", :target => abstract %>
   <%= render :partial=>'form', :locals => {:f => f } %>
   <p>
