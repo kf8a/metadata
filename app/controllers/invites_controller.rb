@@ -48,7 +48,7 @@ class InvitesController < ApplicationController
         format.html { redirect_to(@invite, :notice => 'Invite was successfully created.') }
         format.xml  { render :xml => @invite, :status => :created, :location => @invite }
       else
-        format.html { render :action => "new" }
+        format.html { render "new" }
         format.xml  { render :xml => @invite.errors, :status => :unprocessable_entity }
       end
     end
@@ -62,7 +62,7 @@ class InvitesController < ApplicationController
         format.html { redirect_to(@invite, :notice => 'Invite was successfully updated.') }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { render "edit" }
         format.xml  { render :xml => @invite.errors, :status => :unprocessable_entity }
       end
     end
