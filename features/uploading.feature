@@ -14,6 +14,9 @@ Scenario: An admin uploads an LTER file.
     And I follow the redirect
    Then I should see "Study was uploaded!"
 
+   When I go to the uploads page
+   Then I should see "Does Singing Cause Erosion?"
+
 Scenario: An uploader uploads a file in the GLBRC domain
   Given I am in the GLBRC subdomain
     And I am signed in as an uploader

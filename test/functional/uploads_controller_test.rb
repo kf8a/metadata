@@ -16,7 +16,6 @@ class UploadsControllerTest < ActionController::TestCase
     assert assigns(:upload)
   end
 
-  #TODO Make sure these next two are tested with an actual file uploaded, prob in cucumber
   test "should create upload" do
     assert_difference 'Upload.count' do
       post :create, :upload => {:title => 'Title', :abstract => 'Abstract', :owners => 'Me'}
