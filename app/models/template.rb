@@ -1,6 +1,6 @@
 class Template < ActiveRecord::Base
   belongs_to :website
-  
+
 end
 
 # == Schema Information
@@ -15,4 +15,3 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #
-

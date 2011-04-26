@@ -26,4 +26,3 @@ end
 #  updated_at         :datetime
 #  data_catalog_intro :text
 #
-

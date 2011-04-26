@@ -50,4 +50,3 @@ end
 #  active         :boolean         default(TRUE)
 #  deprecates     :integer
 #
-

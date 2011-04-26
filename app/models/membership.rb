@@ -11,4 +11,3 @@ end
 #  sponsor_id :integer
 #  user_id    :integer
 #
-

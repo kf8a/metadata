@@ -1,6 +1,6 @@
 class PageImage < ActiveRecord::Base
   belongs_to :page
-  
+
   has_attached_file :image
 end
 
@@ -17,4 +17,3 @@ end
 #  image_file_size    :integer
 #  image_updated_at   :datetime
 #
-

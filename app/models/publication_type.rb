@@ -9,4 +9,3 @@ end
 #  id   :integer         not null, primary key
 #  name :string(255)
 #
-

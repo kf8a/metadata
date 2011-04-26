@@ -40,4 +40,3 @@ end
 #  redeemed_at  :datetime
 #  glbrc_member :boolean
 #
-

@@ -56,4 +56,3 @@ end
 #  type                    :string(255)
 #  open_access             :boolean         default(FALSE)
 #
-

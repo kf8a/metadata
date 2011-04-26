@@ -103,4 +103,3 @@ end
 #  query                   :text
 #  variate_theme_id        :integer
 #
-

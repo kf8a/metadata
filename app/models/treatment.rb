@@ -13,4 +13,3 @@ end
 #  study_id    :integer
 #  weight      :integer
 #
-

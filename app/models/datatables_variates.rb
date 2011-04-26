@@ -7,4 +7,3 @@ end
 #
 #  id :integer         not null, primary key
 #
-

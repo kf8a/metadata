@@ -12,4 +12,3 @@ end
 #  protocol_id :integer
 #  weight      :integer
 #
-

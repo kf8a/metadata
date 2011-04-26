@@ -249,4 +249,3 @@ end
 #  sponsor_id   :integer
 #  website_id   :integer
 #
-

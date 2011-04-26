@@ -2,11 +2,11 @@ class Role < ActiveRecord::Base
   has_many :people, :through => :affiliations
   has_many :affiliations
   belongs_to :role_type
-  
+
   def emeritus?
     name =~ /^Emeritus/
   end
-  
+
   def committee?
     name =~ /Committee/ || name =~/Network Representatives/
   end
@@ -18,7 +18,7 @@ class Role < ActiveRecord::Base
   def committee_role_name
     name.singularize if committee?
   end
-  
+
 end
 
 # == Schema Information
@@ -32,4 +32,3 @@ end
 #  show_in_overview   :boolean         default(TRUE)
 #  show_in_detailview :boolean         default(TRUE)
 #
-

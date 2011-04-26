@@ -8,7 +8,7 @@ include REXML
 class Datatable < ActiveRecord::Base
   attr_protected :object
   attr_accessor :materialized_datatable_id
-  
+
   acts_as_taggable_on :keywords
 
   has_one                 :collection
@@ -252,10 +252,10 @@ class Datatable < ActiveRecord::Base
   def data_preview
     query =  self.object
     self.excerpt_limit = 5 unless self.excerpt_limit
-    query = query + " limit #{self.excerpt_limit}" 
+    query = query + " limit #{self.excerpt_limit}"
     ActiveRecord::Base.connection.execute(query)
   end
-  
+
 
   def perform_query
     query =  self.object
@@ -352,4 +352,3 @@ end
 #  summary_graph         :text
 #  event_query           :text
 #
-

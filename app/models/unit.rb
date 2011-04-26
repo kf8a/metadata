@@ -13,7 +13,7 @@ class Unit < ActiveRecord::Base
     # Delayed::Job.enqueue UnitUpdateJob.new(self)
   end
 
- 
+
 
   def update_dictionary
     # Delayed::Job.enqueue UnitDictionaryUpdateJob.new(self)
@@ -24,12 +24,12 @@ end
 #scenarios
 # 1) we need a list of available units
 #   Unit.all
-#     return units on hand 
+#     return units on hand
 #     and then query in the background for more units
 
 # 2) we need to retrieve a particular unit
 #   Unit.find
-#    
+#
 
 
 # == Schema Information
@@ -46,4 +46,3 @@ end
 #  parent_si              :string(255)
 #  multiplier_to_si       :float
 #
-

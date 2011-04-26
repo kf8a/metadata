@@ -95,4 +95,3 @@ end
 #  deceased         :boolean
 #  open_id          :string(255)
 #
-
