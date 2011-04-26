@@ -11,7 +11,7 @@ class CitationsController < ApplicationController
     @submitted_citations = citations.submitted
     @forthcoming_citations = citations.forthcoming
     date = params[:date].presence
-    @citations = citations.by_date(date) || citations.published
+    @citations = date ? citations.by_date(date) : citations.published
 
     index_responder
   end
@@ -32,7 +32,7 @@ class CitationsController < ApplicationController
     @submitted_citations = @citations.submitted
     @forthcoming_citations = @citations.forthcoming
     date = params[:date].presence
-    @citations = @citations.by_date(date) || @citations.published
+    @citations = date ? @citations.by_date(date) : @citations.published
 
     index_responder
   end
@@ -56,7 +56,7 @@ class CitationsController < ApplicationController
     @citation = website.citations.new(params[:citation])
     @citation.type = citation_class
     flash[:notice] = 'Citation was successfully created.' if @citation.save
-    
+
     respond_with @citation
   end
 
@@ -74,7 +74,7 @@ class CitationsController < ApplicationController
     deny_access and return unless citation.open_access || signed_in?
 
     path = citation.pdf.path(params[:style])
-    if Rails.env.production? 
+    if Rails.env.production?
       redirect_to(AWS::S3::S3Object.url_for(path, citation.pdf.bucket_name, :expires_in => 10.seconds))
     else
       send_file  path, :type => 'application/pdf', :disposition => 'inline'
@@ -86,7 +86,7 @@ class CitationsController < ApplicationController
 
   def bibliography
     date = params[:date].presence
-    @citations = Citation.by_date(date) || Citation.all
+    @citations = date ? Citation.by_date(date) : Citation.all
   end
 
   def destroy
@@ -108,7 +108,7 @@ class CitationsController < ApplicationController
       @title = 'GLBRC Sustainability Publications'
     end
   end
-  
+
   def index_responder
     respond_to do |format|
       format.html
