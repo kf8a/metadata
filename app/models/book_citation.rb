@@ -1,5 +1,9 @@
 class BookCitation < Citation
 
+  def book?
+    true
+  end
+  
   def formatted
     "#{author_and_year}. #{title}. #{page_numbers_book}#{editor_string}. #{publication}. #{publisher}, #{address}."
   end
