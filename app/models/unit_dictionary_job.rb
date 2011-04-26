@@ -14,7 +14,7 @@ class UnitUpdateJob < Struct.new(:unit)
     #  # 
     #  #   unit.save
     #  # end
-   end
+  end
 end
 
 class UnitDictionaryUpdateJob < Struct.new(:unit)

@@ -16,11 +16,11 @@ class Citation < ActiveRecord::Base
 
   if Rails.env.production?
     has_attached_file :pdf,
-                      :storage => :s3,
-                      :bucket => 'metadata_production',
-                      :path => "/citations/pdfs/:id/:style/:basename.:extension",
-                      :s3_credentials => File.join(Rails.root, 'config', 's3.yml'),
-                      :s3_permissions => 'authenticated-read'
+        :storage => :s3,
+        :bucket => 'metadata_production',
+        :path => "/citations/pdfs/:id/:style/:basename.:extension",
+        :s3_credentials => File.join(Rails.root, 'config', 's3.yml'),
+        :s3_permissions => 'authenticated-read'
   else
     has_attached_file :pdf, :url => "/citations/:id/download",
         :path => ":rails_root/assets/citations/:attachment/:id/:style/:basename.:extension"

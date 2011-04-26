@@ -48,7 +48,7 @@ class Person < ActiveRecord::Base
 
   def complete_address?
     !usa_address? ||
-      (city.present? && street_address.present? && postal_code.present? && locale.present?)
+        (city.present? && street_address.present? && postal_code.present? && locale.present?)
   end
 
   def address

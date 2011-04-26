@@ -17,7 +17,7 @@ class Theme < ActiveRecord::Base
   end
   
   def include_datatables?(test_datatables=[])
-     my_datatables = self_and_descendants_datatables
+    my_datatables = self_and_descendants_datatables
     (my_datatables & test_datatables).any?
   end
   

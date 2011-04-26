@@ -106,10 +106,10 @@ class Datatable < ActiveRecord::Base
 
   def can_be_downloaded_by?(user)
     !self.restricted? ||
-      user.try(:admin?) ||
-      self.owned_by?(user) ||
-      member?(user) ||
-      self.permitted?(user)
+        user.try(:admin?) ||
+        self.owned_by?(user) ||
+        member?(user) ||
+        self.permitted?(user)
   end
 
   def owned_by?(user)
@@ -136,7 +136,7 @@ class Datatable < ActiveRecord::Base
       {'start' => Date.parse(value['date']).rfc2822,
         'title' => value['title'],
         'description' => value['description'],
-       'durationEvent' => false }
+        'durationEvent' => false }
     end
 
     event_summary = events.inject do |event|
@@ -211,11 +211,11 @@ class Datatable < ActiveRecord::Base
     access_statement = dataset.sponsor.try(:data_use_statement)
     if access_statement
       access_statement.gsub(/.{1,60}(?:\s|\Z)/){($& + 5.chr)\
-        .gsub(/\n\005/,"\n")\
-        .gsub(/\005/,"\n")}\
-        .split(/\n/)\
-        .collect {|line| "# #{line}\n"}\
-        .join
+            .gsub(/\n\005/,"\n")\
+            .gsub(/\005/,"\n")}\
+          .split(/\n/)\
+          .collect {|line| "# #{line}\n"}\
+          .join
     else
       ''
     end
@@ -283,7 +283,7 @@ class Datatable < ActiveRecord::Base
     values = self.perform_query if self.is_sql
   end
 
-private
+  private
 
   def query_datatable_for_temporal_extent(query)
     values = ActiveRecord::Base.connection.execute(query)

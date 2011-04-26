@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   
   validates_presence_of     :email, :unless => :email_optional?
   validates_uniqueness_of   :email, :case_sensitive => false, :allow_blank => true, 
-        :message => "Sorry, this email account is already registered. Please sign up with a different email or <a href='/sign_in'>Sign In</a> using this email account"
+      :message => "Sorry, this email account is already registered. Please sign up with a different email or <a href='/sign_in'>Sign In</a> using this email account"
   validates_format_of       :email, :with => %r{.+@.+\..+}, :allow_blank => true
 
   validates_presence_of     :password, :unless => :password_optional?

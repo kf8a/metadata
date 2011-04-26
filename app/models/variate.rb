@@ -18,7 +18,7 @@ class Variate < ActiveRecord::Base
     self.unit.try(:human_name)
   end
 
-private
+  private
   def eml_measurement_scale
     measurement_scale_element = Element.new('measurementScale')
     scale = measurement_scale_element.add_element(measurement_scale)
@@ -48,7 +48,7 @@ private
     element.add_element('formatString').add_text(self.date_format)
     element.add_element('dateTimePrecision').add_text('86400')
     element.add_element('dateTimeDomain').add_element('bounds') \
-      .add_element('minimum', {'exclusive' => 'true'}).add_text('1987-4-18')
+        .add_element('minimum', {'exclusive' => 'true'}).add_text('1987-4-18')
 
   end
 

@@ -20,7 +20,7 @@ class Dataset < ActiveRecord::Base
   acts_as_taggable_on :keywords
 
   def to_label
-   "#{title} (#{dataset})"
+    "#{title} (#{dataset})"
   end
 
   def to_s
@@ -79,14 +79,14 @@ class Dataset < ActiveRecord::Base
     creator.add_element('positionName').add_text('Data Manager')
 
     [people, datatable_people].flatten.uniq.each do |person|
-        p = eml_dataset.add_element('associatedParty', {'id' => person.person, 'scope' => 'document'})
-        p.add_element eml_individual_name(person)
-        p.add_element address(person)
-        p.add_element('phone', {'phonetype' => 'phone'}).add_text(person.phone) if person.phone
-        p.add_element('phone',{'phonetype' => 'fax'}).add_text(person.fax) if person.fax
-        p.add_element('electronicMailAddress').add_text(person.email) if person.email
-        p.add_element('role').add_text(person.lter_roles.first.try(:name).try(:singularize))
-      end
+      p = eml_dataset.add_element('associatedParty', {'id' => person.person, 'scope' => 'document'})
+      p.add_element eml_individual_name(person)
+      p.add_element address(person)
+      p.add_element('phone', {'phonetype' => 'phone'}).add_text(person.phone) if person.phone
+      p.add_element('phone',{'phonetype' => 'fax'}).add_text(person.fax) if person.fax
+      p.add_element('electronicMailAddress').add_text(person.email) if person.email
+      p.add_element('role').add_text(person.lter_roles.first.try(:name).try(:singularize))
+    end
 
     eml_dataset.add_element('abstract').add_element('para').add_text(textilize(abstract))
     eml_dataset.add_element keyword_sets
@@ -126,18 +126,18 @@ class Dataset < ActiveRecord::Base
     {:begin_date => begin_date, :end_date => end_date}
   end
 
-   def update_temporal_extent
-     dates = temporal_extent
-     self.initiated = dates[:begin_date] if dates[:begin_date]
-     self.completed = dates[:end_date] if dates[:end_date]
-     save
-   end
+  def update_temporal_extent
+    dates = temporal_extent
+    self.initiated = dates[:begin_date] if dates[:begin_date]
+    self.completed = dates[:end_date] if dates[:end_date]
+    save
+  end
 
   def restricted?
     sponsor.try(:data_restricted?)
   end
 
-private
+  private
 
   def eml_custom_unit_list
     custom_units = self.datatables.collect do | datatable |
