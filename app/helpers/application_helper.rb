@@ -3,18 +3,18 @@ require 'redcloth'
 
 module ApplicationHelper
   def textilize(text)
-    text ? raw(RedCloth.new(text).to_html) : ''
-  end 
-  
+    raw(RedCloth.new(text.to_s).to_html)
+  end
+
   # use to strip out html tags when using truncate
   def strip_html_tags(string = '')
     string.gsub(/<\/?[^>]*>/,  "")
   end
-  
+
   def lter_roles
     Role.find_all_by_role_type_id(RoleType.find_by_name('lter'))
   end
-  
+
   def admin?
     current_user.try(:role) == 'admin'
   end
@@ -25,7 +25,7 @@ module ApplicationHelper
     plate = nil
     plate = website.layout(controller, page) if website
   end
-  
+
   def link_to_remove_fields(name, f)
       f.hidden_field(:_destroy) + link_to_function(name, "remove_fields(this)")
   end
