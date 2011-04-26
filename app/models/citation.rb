@@ -79,10 +79,6 @@ class Citation < ActiveRecord::Base
     end
   end
 
-  def Citation.by_type(type)
-    where(:type => type) if type
-  end
-
   def file_title
     "#{self.id}-#{self.title}-#{self.pub_year}"
   end
