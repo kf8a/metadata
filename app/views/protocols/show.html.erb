@@ -11,8 +11,8 @@
     <p>Replaces <%= link_to "#{Protocol.find(@protocol.deprecates)}", protocol_path(@protocol.deprecates) %></p>
   <% end -%>
   <p>
-  <%= "In use from "unless @protocol.in_use_from.nil? %><%= @protocol.in_use_from %> 
-  <%= " to " unless @protocol.in_use_to.nil? %><%= @protocol.in_use_to %>
+  <%= "In use from " if @protocol.in_use_from? %><%= @protocol.in_use_from %>
+  <%= " to " if @protocol.in_use_to? %><%= @protocol.in_use_to %>
   </p>
   <p>
   <%=raw textilize(@protocol.description) if @protocol.description %>
