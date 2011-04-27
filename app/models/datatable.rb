@@ -26,7 +26,8 @@ class Datatable < ActiveRecord::Base
   belongs_to              :theme
   has_many                :variates, :order => :weight
 
-  validates_presence_of :title, :dataset
+  validates :title,   :presence => true
+  validates :dataset, :presence => true
 
   accepts_nested_attributes_for :data_contributions, :allow_destroy => true
   accepts_nested_attributes_for :variates, :allow_destroy => true
