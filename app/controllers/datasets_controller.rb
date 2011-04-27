@@ -38,7 +38,7 @@ class DatasetsController < ApplicationController
 
     if @dataset.valid_request?(@subdomain_request)
       respond_with @dataset do |format|
-        format.eml { render :xml => @dataset.to_eml }
+        format.eml
       end
     else
       redirect_to datasets_url

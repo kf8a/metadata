@@ -45,8 +45,8 @@ class DatasetsControllerTest < ActionController::TestCase
 
     should respond_with :success
     should 'be the exact right eml' do
-      proper_eml = "xsi:schemaLocation='eml://ecoinformatics.org/eml-2.1.0 eml.xsd' xmlns:set='http://exslt.org/sets' xmlns:stmml='http://www.xml-cml.org/schema/stmml' system='KBS LTER' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><access authSystem='knb' order='allowFirst' scope='document'><allow><principal>uid=KBS,o=lter,dc=ecoinformatics,dc=org</principal><permission>all</permission></allow><allow><principal>public</principal><permission>read</permission></allow></access><dataset><title>KBS001</title><creator id='KBS LTER'><positionName>Data Manager</positionName></creator><abstract><para>&lt;p&gt;some new dataset&lt;/p&gt;</para></abstract><keywordSet><keyword keywordType='place'>LTER</keyword><keyword keywordType='place'>KBS</keyword><keyword keywordType='place'>Kellogg Biological Station</keyword><keyword keywordType='place'>Hickory Corners</keyword><keyword keywordType='place'>Michigan</keyword><keyword keywordType='place'>Great Lakes</keyword></keywordSet><contact><organizationName>Kellogg Biological Station</organizationName><positionName>Data Manager</positionName><address scope='document'><deliveryPoint>Kellogg Biological Station</deliveryPoint><deliveryPoint>3700 East Gull Lake Drive</deliveryPoint><city>Hickory Corners</city><administrativeArea>Mi</administrativeArea><postalCode>49060</postalCode><country>USA</country></address><electronicMailAddress>data.manager@kbs.msu.edu</electronicMailAddress><onlineUrl>http://lter.kbs.msu.edu</onlineUrl></contact></dataset><additionalMetadata><metadata><stmml:unitList xsi:schemaLocation='http://www.xml-cml.org/schema/stmml http://lter.kbs.msu.edu/Data/schemas/stmml.xsd'/></metadata></additionalMetadata></eml:eml>"
-      assert_includes response.body, proper_eml
+      proper_eml = @dataset.to_eml
+      assert_equal Hash.from_xml(response.body), Hash.from_xml(proper_eml)
     end
   end
 

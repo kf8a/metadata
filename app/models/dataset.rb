@@ -57,6 +57,10 @@ class Dataset < ActiveRecord::Base
     end
   end
 
+  def package_id
+    "knb-lter-kbs.#{metacat_id.nil? ? self.id : metacat_id}.#{version}"
+  end
+
   def to_eml
     emldoc = Document.new()
     root = emldoc.add_element('eml:eml')
