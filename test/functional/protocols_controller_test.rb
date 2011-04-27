@@ -4,9 +4,8 @@ class ProtocolsControllerTest < ActionController::TestCase
 
   context 'an admin user' do
     setup do
-      User.destroy_all
       generate_websites_and_protocols
-      @controller.current_user = Factory.create :admin_user
+      signed_in_as_admin
     end
 
     context 'GET: new' do
@@ -36,10 +35,13 @@ class ProtocolsControllerTest < ActionController::TestCase
 
     context 'POST :update' do
       setup do
-        put :update, :id => @protocol, :protocol => {}
+        put :update, :id => @protocol, :protocol => {:description => 'A brand new description'}
       end
 
       should redirect_to('the protocol page') {protocol_url(assigns(:protocol))}
+      should "record the user who changed the protocol" do
+        assert_equal @admin, @protocol.versions.last.user
+      end
     end
 
     context 'POST: update with version' do

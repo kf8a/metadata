@@ -59,6 +59,7 @@ class ProtocolsController < ApplicationController
   # PUT /protocols/1
   # PUT /protocols/1.xml
   def update
+    params[:protocol].merge!({:updated_by => current_user})
     get_all_websites
     if params[:new_version]
       old_protocol = Protocol.find(params[:id])

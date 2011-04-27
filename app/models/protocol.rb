@@ -1,4 +1,3 @@
-#TODO add an updated_by attribute to track who changed the protocol
 class Protocol < ActiveRecord::Base
   belongs_to :dataset
   has_and_belongs_to_many :websites

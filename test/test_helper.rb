@@ -35,7 +35,8 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 
   def signed_in_as_admin
-    @controller.current_user = User.find_by_role('admin') || Factory.create(:admin_user, :email => 'admin@example.com')
+    @admin = User.find_by_role('admin') || Factory.create(:admin_user, :email => 'admin@example.com')
+    @controller.current_user = @admin
   end
 
   def signed_in_as_normal_user
