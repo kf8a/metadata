@@ -8,12 +8,15 @@ class Theme < ActiveRecord::Base
   scope :by_name, :order => 'name'
 
   def datatables?(study=nil)
-    children_have_datatables = children.collect {|d| d.datatables?(study)}.include?(true)
-    i_have_datatables = datatables.any?
-    if study
-      i_have_datatables = datatables_in_study(study).any?
-    end
-    i_have_datatables || children_have_datatables
+    i_have_datatables?(study) || children_have_datatables?(study)
+  end
+
+  def i_have_datatables?(study=nil)
+    study ? datatables_in_study(study).any? : datatables.any?
+  end
+
+  def children_have_datatables?(study=nil)
+    children.collect {|d| d.datatables?(study)}.include?(true)
   end
 
   def include_datatables?(test_datatables=[])
