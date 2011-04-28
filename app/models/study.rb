@@ -20,7 +20,7 @@ class Study < ActiveRecord::Base
   end
 
   def self.find_all_with_datatables(tables = [], options = {})
-    self.all(options).collect {|x| x.include_datatables?(tables)  ? x : nil}.compact
+    all(options).keep_if { |study| study.include_datatables?(tables) }
   end
 
   def self.find_all_roots_with_datatables(tables=[])
