@@ -4,7 +4,7 @@ class DatasetsControllerTest < ActionController::TestCase
 
 
   def setup
-    @dataset = Factory.create(:dataset)
+    @dataset = Factory.create(:datatable).dataset
     Factory.create(:dataset)
 
     #TODO test with admin and non admin users
@@ -38,7 +38,7 @@ class DatasetsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  context 'GET :show the datatable in eml' do
+  context 'GET :show the dataset in eml' do
     setup do
       get :show, :id => @dataset, :format => :eml
     end
