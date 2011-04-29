@@ -24,7 +24,7 @@ class Study < ActiveRecord::Base
   end
 
   def self.find_all_roots_with_datatables(tables=[])
-    self.roots.order('weight').collect {|x| x.include_datatables?(tables) ? x : nil}.compact
+    self.roots.order('weight').keep_if {|study| study.include_datatables?(tables) }
   end
 
   private
