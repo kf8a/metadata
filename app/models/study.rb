@@ -30,7 +30,7 @@ class Study < ActiveRecord::Base
   private
 
   def self_and_descendants_datatables
-    descendants.collect {|d| d.datatables }.flatten + datatables
+    descendants.collect {|descendant| descendant.datatables }.flatten + datatables
   end
 end
 

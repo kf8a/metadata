@@ -16,7 +16,7 @@ class Theme < ActiveRecord::Base
   end
 
   def children_have_datatables?(study=nil)
-    children.collect {|d| d.datatables?(study)}.include?(true)
+    children.collect {|subtheme| subtheme.datatables?(study)}.include?(true)
   end
 
   def include_datatables?(test_datatables=[])
@@ -32,7 +32,7 @@ class Theme < ActiveRecord::Base
   end
 
   def self_and_descendants_datatables
-    my_datatables = descendants.collect {|d| d.datatables }.flatten
+    my_datatables = descendants.collect {|descendant| descendant.datatables }.flatten
     my_datatables + datatables
   end
 
