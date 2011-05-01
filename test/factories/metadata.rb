@@ -129,6 +129,7 @@ unless Factory.factories.include?(:affiliation) #prevent redefining these factor
     d.weight        100
     d.association   :theme
     d.association   :dataset
+    d.variates      [Factory.create(:variate)]
   end
 
   Factory.define :old_datatable, :parent => :datatable do |datatable|
