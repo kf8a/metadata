@@ -453,7 +453,7 @@ class DatatableTest < ActiveSupport::TestCase
 
       #TODO this is obviously brittle and should probably be redone with proper parsing
       should "be the exact right eml" do
-        assert_equal "<dataTable id='KBS001_001'><entityName>a really cool datatable</entityName><entityDescription>This is a datatable</entityDescription><physical><objectName>a really cool datatable</objectName><encodingMethod>None</encodingMethod><dataFormat><textFormat><numHeaderLines>4</numHeaderLines><attributeOrientation>column</attributeOrientation><simpleDelimited><fieldDelimiter>,</fieldDelimiter></simpleDelimited></textFormat></dataFormat><distribution><online><url/></online></distribution></physical><attributeList><attribute><attributeName>b</attributeName><attributeDefinition/></attribute><attribute><attributeName>a</attributeName><attributeDefinition/></attribute></attributeList></dataTable>", @eml.to_s
+        assert_equal "<dataTable id='KBS001_001'><entityName>a really cool datatable</entityName><entityDescription>This is a datatable</entityDescription><physical><objectName>a really cool datatable</objectName><encodingMethod>None</encodingMethod><dataFormat><textFormat><numHeaderLines>4</numHeaderLines><attributeOrientation>column</attributeOrientation><simpleDelimited><fieldDelimiter>,</fieldDelimiter></simpleDelimited></textFormat></dataFormat><distribution><online><url/></online></distribution></physical><attributeList><attribute><attributeName>date</attributeName><attributeDefinition/></attribute><attribute><attributeName>a</attributeName><attributeDefinition/></attribute><attribute><attributeName>b</attributeName><attributeDefinition/></attribute></attributeList></dataTable>", @eml.to_s
       end
     end
 
@@ -488,7 +488,9 @@ class DatatableTest < ActiveSupport::TestCase
       end
 
       should 'return the data in the right order' do
-        assert_equal '1', CSV.parse(@datatable.raw_csv)[1][0]
+        data = CSV.parse(@datatable.raw_csv)
+        b_column = data[0].index("b")
+        assert_equal '1', data[1][b_column]
       end
 
       context 'with comment' do
