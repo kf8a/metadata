@@ -5,6 +5,10 @@ class Variate < ActiveRecord::Base
   belongs_to :datatable
   belongs_to :unit
 
+  def valid_for_eml
+    measurement_scale.presence && description.presence
+  end
+
   def to_eml
     eml = Element.new('attribute')
     eml.add_element('attributeName').add_text(self.name)

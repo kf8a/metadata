@@ -11,14 +11,11 @@ xml.tag!("eml:eml",
   xml << render(:partial => 'access')
   xml.dataset do
     xml.title @dataset.title
-    xml.creator do
-      xml.id 'KBS LTER'
+    xml.creator 'id' => 'KBS LTER' do
       xml.positionName 'Data Manager'
     end
     [@dataset.people, @dataset.datatable_people].flatten.uniq.each do |person|
-      xml.associatedParty do
-        xml.id person.person
-        xml.scope 'document'
+      xml.associatedParty 'id' => person.person, 'scope' => 'document' do
         xml.individualName do
           xml.givenName person.given_name
           xml.surName person.sur_name
@@ -54,28 +51,32 @@ xml.tag!("eml:eml",
       xml.onlineUrl 'http://lter.kbs.msu.edu'
     end
     @dataset.datatables.each do |datatable|
-      xml << render(:partial => 'datatable', :locals => {:datatable => datatable})
+      if datatable.valid_for_eml
+        xml << render(:partial => 'datatable', :locals => {:datatable => datatable})
+      end
     end
   end
-  xml.additionalMetadata do
-    xml.metadata do
-      custom_units = @dataset.datatables.collect do | datatable |
-        datatable.variates.collect do | variate |
-          next unless variate.unit
-          next if variate.unit.in_eml
-          variate.unit
-        end
-      end
+  custom_units = @dataset.datatables.collect do | datatable |
+    datatable.variates.collect do | variate |
+      next unless variate.unit
+      next if variate.unit.in_eml
+      variate.unit
+    end
+  end.flatten.compact.uniq
+  if custom_units.present?
+    xml.additionalMetadata do
+      xml.metadata do
 
-      xml.tag!('stmml:unitList', 'xsi:schemaLocation' => "http://www.xml-cml.org/schema/stmml http://lter.kbs.msu.edu/Data/schemas/stmml.xsd")
-      logger.info custom_units
-      custom_units.flatten.compact.uniq.each do |unit|
-        xml.tag!('stmml:unit',
-            'id' => unit.name,
-            'multiplierToSI' => unit.multiplier_to_si,
-            'parentSI' => unit.parent_si,
-            'unitType' => unit.unit_type,
-            'name' => unit.name)
+        xml.tag!('stmml:unitList', 'xsi:schemaLocation' => " http://lter.kbs.msu.edu/Data/schemas/stmml.xsd")
+        logger.info custom_units
+        custom_units.each do |unit|
+          xml.tag!('stmml:unit',
+              'id' => unit.name,
+              'multiplierToSI' => unit.multiplier_to_si,
+              'parentSI' => unit.parent_si,
+              'unitType' => unit.unit_type,
+              'name' => unit.name)
+        end
       end
     end
   end

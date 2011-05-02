@@ -19,13 +19,9 @@ xml.dataTable 'id' => datatable.name do
       end
     end
   end
-  if datatable.variates.present?
-    xml.attributeList do
-      datatable.variates.each do |variate|
-        xml << render(:partial => 'variate', :locals => {:variate => variate})
-      end
+  xml.attributeList do
+    datatable.valid_variates.each do |variate|
+      xml << render(:partial => 'variate', :locals => {:variate => variate})
     end
-  else
-    xml.attributeList nil
   end
 end
