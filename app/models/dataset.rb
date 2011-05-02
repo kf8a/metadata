@@ -79,11 +79,14 @@ class Dataset < ActiveRecord::Base
 
     eml_dataset = emldoc.root.add_element('dataset')
     eml_dataset.add_element('title').add_text(title)
-    creator = eml_dataset.add_element('creator', {'id' => 'KBS LTER'})
+    creator = eml_dataset.add_element('creator')
+    creator.add_attribute('id', 'KBS LTER')
     creator.add_element('positionName').add_text('Data Manager')
 
     [people, datatable_people].flatten.uniq.each do |person|
-      p = eml_dataset.add_element('associatedParty', {'id' => person.person, 'scope' => 'document'})
+      p = eml_dataset.add_element('associatedParty')
+      p.add_attribute('id', person.person)
+      p.add_attribute('scope', 'document')
       p.add_element eml_individual_name(person)
       p.add_element address(person)
       p.add_element('phone', {'phonetype' => 'phone'}).add_text(person.phone) if person.phone
@@ -107,10 +110,14 @@ class Dataset < ActiveRecord::Base
     # end
 
     datatables.each do |datatable|
-      eml_dataset.add_element datatable.to_eml
+      if datatable.valid_for_eml
+        eml_dataset.add_element datatable.to_eml
+      end
     end
 
-    root.add_element('additionalMetadata').add_element('metadata').add eml_custom_unit_list
+    if custom_units.present?
+      root.add_element('additionalMetadata').add_element('metadata').add eml_custom_unit_list
+    end
     root.to_s
   end
 
@@ -141,17 +148,19 @@ class Dataset < ActiveRecord::Base
     sponsor.try(:data_restricted?)
   end
 
-  private
-
-  def eml_custom_unit_list
-    custom_units = self.datatables.collect do | datatable |
+  def custom_units
+    self.datatables.collect do | datatable |
       datatable.variates.collect do | variate |
         next unless variate.unit
         next if variate.unit.in_eml
         variate.unit
       end
-    end
+    end.flatten.compact.uniq
+  end
 
+  private
+
+  def eml_custom_unit_list
     e = Element.new('stmml:unitList')
     e.add_attribute('xsi:schemaLocation',"http://www.xml-cml.org/schema/stmml http://lter.kbs.msu.edu/Data/schemas/stmml.xsd")
 
