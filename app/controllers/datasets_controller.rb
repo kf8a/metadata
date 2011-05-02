@@ -21,7 +21,6 @@ class DatasetsController < ApplicationController
     @themes         = Theme.by_weight
     @datasets       = Dataset.all
     @studies        = collect_and_normalize_studies(@datasets)
-    @studies        = [@study] if @study
     @crumbs         = []
     respond_to do |format|
       format.html {redirect_to datatables_path}
