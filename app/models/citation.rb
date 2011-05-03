@@ -95,23 +95,28 @@ class Citation < ActiveRecord::Base
     entry = BibTeX::Entry.new
     entry.type = bibtex_type.to_s
     entry.key = "citation_#{id}"
-    entry[:abstract] = abstract.to_s
-    entry[:author] = authors.collect { |author| "#{author.given_name} #{author.middle_name} #{author.sur_name}"}.join(' and ')
-    entry[:editor] = editors.collect { |editor| "#{editor.given_name} #{editor.middle_name} #{editor.sur_name}"}.join(' and ')
-    entry[:title] = title.to_s
-    entry[:publisher] = publisher.to_s
-    entry[:year] = pub_year.to_s
-    entry[:address] = address.to_s
-    entry[:note] = notes.to_s
-    entry[:journal] = publication.to_s
-    entry[:pages] = page_numbers.to_s
-    entry[:volume] = volume.to_s
-    entry[:number] = issue.to_s
-    entry[:series] = series_title.to_s
-    entry[:isbn] = isbn.to_s
-    entry.fields.delete_if { |key, value| value == [""]}
+    entry << bib_hash
 
     entry
+  end
+
+  def bib_hash
+    hash = {
+      :abstract   => abstract,
+      :author     => authors.collect { |author| "#{author.given_name} #{author.middle_name} #{author.sur_name}"}.join(' and '),
+      :editor     => editors.collect { |editor| "#{editor.given_name} #{editor.middle_name} #{editor.sur_name}"}.join(' and '),
+      :title      => title,
+      :publisher  => publisher,
+      :year       => pub_year.to_s,
+      :address    => address,
+      :note       => notes,
+      :journal    => publication,
+      :pages      => page_numbers,
+      :volume     => volume,
+      :number     => issue,
+      :series     => series_title,
+      :isbn       => isbn}
+    hash.delete_if { |key, value| value.blank? }
   end
 
   def to_enw
