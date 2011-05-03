@@ -55,8 +55,8 @@ class DatasetsController < ApplicationController
     @studies = Study.by_weight
     @themes = Theme.by_weight
     @roles  = Role.find_all_by_role_type_id(RoleType.find_by_name('lter_dataset'))
-    @websites = Website.all.collect {|x| [x.name, x.id]}
-    @sponsors = Sponsor.all.collect {|x| [x.name, x.id]}
+    @websites = Website.all.collect {|website| [website.name, website.id]}
+    @sponsors = Sponsor.all.collect {|sponsor| [sponsor.name, sponsor.id]}
   end
   
   # POST /dataset/new_affiliation 
@@ -92,8 +92,8 @@ class DatasetsController < ApplicationController
   # PUT /datasets/1
   # PUT /datasets/1.xml
   def update
-    @sponsors = Sponsor.all.collect {|x| [x.name, x.id]}
-    @websites = Website.all.collect {|x| [x.name, x.id]}
+    @sponsors = Sponsor.all.collect {|sponsor| [sponsor.name, sponsor.id]}
+    @websites = Website.all.collect {|website| [website.name, website.id]}
     if @dataset.update_attributes(params[:dataset])
       flash[:notice] = 'Dataset was successfully updated.'
     end
@@ -143,7 +143,7 @@ class DatasetsController < ApplicationController
     @studies.flatten!
     @studies.compact!
     @studies.uniq!
-    @studies.sort! {|a,b| a.weight <=> b.weight}
+    @studies.sort_by! { |study| study.weight }
   end
   
   def get_dataset

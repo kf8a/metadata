@@ -5,7 +5,7 @@ class DatatablesController < ApplicationController
 
   protect_from_forgery :except => [:index, :show, :search]
   cache_sweeper :datatable_sweeper
-  caches_action :show, :expires_in => 1.day, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
+  caches_action :show, :expires_in => 1.day, :if => Proc.new { |controller| controller.request.format.csv? } # cache if it is a csv request
 
   # GET /datatables
   # GET /datatables.xml
@@ -77,16 +77,16 @@ class DatatablesController < ApplicationController
 
   # GET /datatables/new
   def new
-    @core_areas = CoreArea.by_name.collect {|x| [x.name, x.id]}
-    @studies = Study.all.collect{|x| [x.name, x.id]}
+    @core_areas = CoreArea.by_name.collect { |area| [area.name, area.id] }
+    @studies = Study.all.collect{ |study| [study.name, study.id] }
     @people = Person.all
     @units = Unit.all
   end
 
   # GET /datatables/1;edit
   def edit
-    @core_areas = CoreArea.by_name.collect {|x| [x.name, x.id]}
-    @studies = Study.all.collect{|x| [x.name, x.id]}
+    @core_areas = CoreArea.by_name.collect { |area| [area.name, area.id] }
+    @studies = Study.all.collect{ |study| [study.name, study.id] }
     @people = Person.all
     @units = Unit.all
   end
@@ -94,8 +94,8 @@ class DatatablesController < ApplicationController
   # POST /datatables
   # POST /datatables.xml
   def create
-    @core_areas = CoreArea.by_name.collect {|x| [x.name, x.id]}
-    @studies = Study.all.collect{|x| [x.name, x.id]}
+    @core_areas = CoreArea.by_name.collect { |area| [area.name, area.id] }
+    @studies = Study.all.collect{ |study| [study.name, study.id] }
     @people = Person.all
     @units = Unit.all
 
@@ -109,8 +109,8 @@ class DatatablesController < ApplicationController
   # PUT /datatables/1
   # PUT /datatables/1.xml
   def update
-    @core_areas = CoreArea.by_name.collect {|x| [x.name, x.id]}
-    @studies = Study.all.collect{|x| [x.name, x.id]}
+    @core_areas = CoreArea.by_name.collect { |area| [area.name, area.id] }
+    @studies = Study.all.collect{ |study| [study.name, study.id]}
     @people = Person.all
     @units = Unit.all
 
@@ -132,9 +132,9 @@ class DatatablesController < ApplicationController
   def suggest
     term = params[:term]
     #  list = Datatable.tags.all.collect {|x| x.name.downcase}
-    list = Person.find_all_with_dataset.collect {|x| x.sur_name.downcase}
-    list = list + Theme.all.collect {|x| x.name.downcase}
-    list = list + CoreArea.all.collect {|x| x.name.downcase}
+    list = Person.find_all_with_dataset.collect { |person| person.sur_name.downcase }
+    list = list + Theme.all.collect { |theme| theme.name.downcase }
+    list = list + CoreArea.all.collect { |area| area.name.downcase }
 
     keywords = list.compact.uniq.sort
     respond_to do |format|

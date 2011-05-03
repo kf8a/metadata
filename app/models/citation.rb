@@ -62,12 +62,12 @@ class Citation < ActiveRecord::Base
   end
 
   def Citation.to_enw(array_of_citations)
-    array_of_citations.collect {|x| x.to_enw}.join("\r\n\r\n")
+    array_of_citations.collect { |citation| citation.to_enw }.join("\r\n\r\n")
   end
 
   def Citation.to_bib(array_of_citations)
     bib = BibTeX::Bibliography.new
-    array_of_citations.each {|x| bib << x.to_bib}
+    array_of_citations.each {|citation| bib << citation.to_bib}
 
     bib.to_s
   end
@@ -131,8 +131,8 @@ class Citation < ActiveRecord::Base
   end
 
   def self.select_options
-    classes = descendants.map{ |c| c.to_s }.sort
-    classes.collect {|c| [c.gsub(/Citation/,''), c] }
+    classes = descendants.map{ |klass| klass.to_s }.sort
+    classes.collect { |klass| [klass.gsub(/Citation/,''), klass] }
   end
 
   private

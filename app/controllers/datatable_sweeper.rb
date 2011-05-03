@@ -28,8 +28,8 @@ class DatatableSweeper < ActionController::Caching::Sweeper
   end
 
   def expire_related_table_cache_for(datatable)
-    datatable.dataset.datatables.each do |d|
-      expire_cache_for(d)
+    datatable.dataset.datatables.each do |table|
+      expire_cache_for(table)
     end
   end
 

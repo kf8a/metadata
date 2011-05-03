@@ -8,15 +8,15 @@ class TemplatesController < ApplicationController
   end
   
   def show
-    @t = Template.find(params[:id])
+    @template = Template.find(params[:id])
   end
   
   def new
-    @t = Template.new
+    @template = Template.new
   end
   
   def create
-    respond_with(@t = Template.create(params[:template]))
+    respond_with(@template = Template.create(params[:template]))
   end
   
   def update

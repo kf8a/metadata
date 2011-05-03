@@ -84,15 +84,15 @@ class Dataset < ActiveRecord::Base
     creator.add_element('positionName').add_text('Data Manager')
 
     [people, datatable_people].flatten.uniq.each do |person|
-      p = eml_dataset.add_element('associatedParty')
-      p.add_attribute('id', person.person)
-      p.add_attribute('scope', 'document')
-      p.add_element eml_individual_name(person)
-      p.add_element address(person)
-      p.add_element('phone', {'phonetype' => 'phone'}).add_text(person.phone) if person.phone
-      p.add_element('phone',{'phonetype' => 'fax'}).add_text(person.fax) if person.fax
-      p.add_element('electronicMailAddress').add_text(person.email) if person.email
-      p.add_element('role').add_text(person.lter_roles.first.try(:name).try(:singularize))
+      party_element = eml_dataset.add_element('associatedParty')
+      party_element.add_attribute('id', person.person)
+      party_element.add_attribute('scope', 'document')
+      party_element.add_element eml_individual_name(person)
+      party_element.add_element address(person)
+      party_element.add_element('phone', {'phonetype' => 'phone'}).add_text(person.phone) if person.phone
+      party_element.add_element('phone',{'phonetype' => 'fax'}).add_text(person.fax) if person.fax
+      party_element.add_element('electronicMailAddress').add_text(person.email) if person.email
+      party_element.add_element('role').add_text(person.lter_roles.first.try(:name).try(:singularize))
     end
 
     eml_dataset.add_element('abstract').add_element('para').add_text(textilize(abstract))
@@ -161,8 +161,8 @@ class Dataset < ActiveRecord::Base
   private
 
   def eml_custom_unit_list
-    e = Element.new('stmml:unitList')
-    e.add_attribute('xsi:schemaLocation',"http://www.xml-cml.org/schema/stmml http://lter.kbs.msu.edu/Data/schemas/stmml.xsd")
+    list_element = Element.new('stmml:unitList')
+    list_element.add_attribute('xsi:schemaLocation',"http://www.xml-cml.org/schema/stmml http://lter.kbs.msu.edu/Data/schemas/stmml.xsd")
 
     logger.info custom_units
 
@@ -175,67 +175,67 @@ class Dataset < ActiveRecord::Base
       unit_element.attributes['unitType'] = unit.unit_type
 
       unit_element.attributes['name'] = unit.name
-      e.add_element unit_element
+      list_element.add_element unit_element
     end
-    return e
+    return list_element
   end
 
   def eml_individual_name(person)
-    i = Element.new('individualName')
-    i.add_element('givenName').add_text( person.given_name )
-    i.add_element('surName').add_text( person.sur_name )
-    return i
+    individual_name_element = Element.new('individualName')
+    individual_name_element.add_element('givenName').add_text( person.given_name )
+    individual_name_element.add_element('surName').add_text( person.sur_name )
+    return individual_name_element
   end
 
   def eml_access
-    a = Element.new('access')
-    a.add_attribute('scope','document')
-    a.add_attribute('order','allowFirst')
-    a.add_attribute('authSystem', 'knb')
-    a.add_element eml_allow('uid=KBS,o=lter,dc=ecoinformatics,dc=org', 'all')
-    a.add_element eml_allow('public','read')
-    return a
+    access_element = Element.new('access')
+    access_element.add_attribute('scope','document')
+    access_element.add_attribute('order','allowFirst')
+    access_element.add_attribute('authSystem', 'knb')
+    access_element.add_element eml_allow('uid=KBS,o=lter,dc=ecoinformatics,dc=org', 'all')
+    access_element.add_element eml_allow('public','read')
+    return access_element
   end
 
   def eml_allow(principal, permission)
-    a = Element.new('allow')
-    a.add_element('principal').add_text(principal)
-    a.add_element('permission').add_text(permission)
-    return a
+    allow_element = Element.new('allow')
+    allow_element.add_element('principal').add_text(principal)
+    allow_element.add_element('permission').add_text(permission)
+    return allow_element
   end
 
   def keyword_sets
-    k = Element.new('keywordSet')
+    keyword_set_element = Element.new('keywordSet')
     ['LTER','KBS','Kellogg Biological Station', 'Hickory Corners', 'Michigan', 'Great Lakes'].each do| keyword |
-      k.add_element('keyword', {'keywordType' => 'place'}).add_text(keyword)
+      keyword_set_element.add_element('keyword', {'keywordType' => 'place'}).add_text(keyword)
     end
-    return k
+    return keyword_set_element
   end
 
   def contact_info
-    i = Element.new('contact')
-    i.add_element('organizationName').add_text('Kellogg Biological Station')
-    i.add_element('positionName').add_text('Data Manager')
-    p = Person.new( :organization => 'Kellogg Biological Station',
+    contact_element = Element.new('contact')
+    contact_element.add_element('organizationName').add_text('Kellogg Biological Station')
+    contact_element.add_element('positionName').add_text('Data Manager')
+    kbs = Person.new( :organization => 'Kellogg Biological Station',
       :street_address => '3700 East Gull Lake Drive',
       :city => 'Hickory Corners',:locale => 'Mi',:postal_code => '49060',
       :country => 'USA')
-    a = i.add_element address(p)
-    i.add_element('electronicMailAddress').add_text('data.manager@kbs.msu.edu')
-    i.add_element('onlineUrl').add_text('http://lter.kbs.msu.edu')
-    return i
+    contact_element.add_element address(kbs)
+    contact_element.add_element('electronicMailAddress').add_text('data.manager@kbs.msu.edu')
+    contact_element.add_element('onlineUrl').add_text('http://lter.kbs.msu.edu')
+    return contact_element
   end
 
   def address(person)
-    a = Element.new('address')
-    a.add_attribute('scope','document')
-    a.add_element('deliveryPoint').add_text(person.organization) if person.organization
-    a.add_element('deliveryPoint').add_text(person.street_address) if person.street_address
-    a.add_element('city').add_text(person.city) if person.city
-    a.add_element('administrativeArea').add_text(person.locale) if person.locale
-    a.add_element('postalCode').add_text(person.postal_code) if person.postal_code
-    a.add_element('country').add_text(person.country) if person.country
-    return a
+    address_element = Element.new('address')
+    address_element.add_attribute('scope','document')
+    address_element.add_element('deliveryPoint').add_text(person.organization) if person.organization
+    address_element.add_element('deliveryPoint').add_text(person.street_address) if person.street_address
+    address_element.add_element('city').add_text(person.city) if person.city
+    address_element.add_element('administrativeArea').add_text(person.locale) if person.locale
+    address_element.add_element('postalCode').add_text(person.postal_code) if person.postal_code
+    address_element.add_element('country').add_text(person.country) if person.country
+    return address_element
   end
 end
 

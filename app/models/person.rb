@@ -60,7 +60,7 @@ class Person < ActiveRecord::Base
   end
 
   def self.find_all_with_dataset
-    people = Person.order('sur_name').collect {|x| x if x.has_dataset?}
+    people = Person.order('sur_name').collect { |person| person if person.has_dataset? }
     people.compact
   end
 

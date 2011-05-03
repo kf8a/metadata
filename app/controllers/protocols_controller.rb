@@ -34,13 +34,13 @@ class ProtocolsController < ApplicationController
   # GET /protocols/new
   def new
     @protocol = Protocol.new
-    @datasets = Dataset.find(:all).map {|x| [x.dataset, x.id]}
+    @datasets = Dataset.find(:all).map {|dataset| [dataset.dataset, dataset.id]}
     get_all_websites
   end
 
   # GET /protocols/1;edit
   def edit
-    @datasets = Dataset.find(:all).map {|x| [x.dataset, x.id]}
+    @datasets = Dataset.find(:all).map {|dataset| [dataset.dataset, dataset.id]}
     get_all_websites
   end
 

@@ -137,7 +137,7 @@ class PublicationsController < ApplicationController
   end
 
   def get_form_data
-    @publication_types = PublicationType.all.collect {|x| [x.name, x.id]}
+    @publication_types = PublicationType.all.collect {|type| [type.name, type.id]}
     @treatments = Treatment.all
   end
 

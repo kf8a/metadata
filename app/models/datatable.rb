@@ -80,15 +80,15 @@ class Datatable < ActiveRecord::Base
     compile_personnel(dataset.affiliations)
   end
 
-  def compile_personnel(source, h={})
+  def compile_personnel(source, personnel={})
     source.each do |contribution|
-      if h[contribution.person]
-        h[contribution.person].push((contribution.role.name))
+      if personnel[contribution.person]
+        personnel[contribution.person].push((contribution.role.name))
       else
-        h[contribution.person] = [contribution.role.name]
+        personnel[contribution.person] = [contribution.role.name]
       end
     end
-    h
+    personnel
   end
 
   def restricted?
@@ -181,10 +181,10 @@ class Datatable < ActiveRecord::Base
   def raw_csv
     values  = perform_query
     csv_string = CSV.generate do |csv|
-      csv << variates.collect {|v| v.name }
+      csv << variates.collect { |variate| variate.name }
       values.each do |row|
-        csv << variates.collect do |v|
-          row[v.name.downcase]
+        csv << variates.collect do |variate|
+          row[variate.name.downcase]
         end
       end
     end
@@ -304,23 +304,23 @@ class Datatable < ActiveRecord::Base
   end
 
   def eml_physical
-    p = Element.new('physical')
-    p.add_element('objectName').add_text(self.title)
-    p.add_element('encodingMethod').add_text('None')
-    dataformat = p.add_element('dataFormat').add_element('textFormat')
+    physical_element = Element.new('physical')
+    physical_element.add_element('objectName').add_text(self.title)
+    physical_element.add_element('encodingMethod').add_text('None')
+    dataformat = physical_element.add_element('dataFormat').add_element('textFormat')
     dataformat.add_element('numHeaderLines').add_text((data_access_statement.lines.to_a.size + 4).to_s)
     dataformat.add_element('attributeOrientation').add_text('column')
     dataformat.add_element('simpleDelimited').add_element('fieldDelimiter').add_text(',')
-    p.add_element('distribution').add_element('online').add_element('url').add_text(data_url)
-    return p
+    physical_element.add_element('distribution').add_element('online').add_element('url').add_text(data_url)
+    return physical_element
   end
 
   def eml_attributes
-    a = Element.new('attributeList')
+    attribute_list_element = Element.new('attributeList')
     self.variates.each do |variate|
-      a.add_element variate.to_eml
+      attribute_list_element.add_element variate.to_eml
     end
-    return a
+    return attribute_list_element
   end
 
 end

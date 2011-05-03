@@ -11,13 +11,13 @@ module PeopleHelper
   end
 
   def show_committee(committee,role)
-    i = 0
+    first_one = true
     html = "<li>#{committee}  "
     role.people.each do |person|
       next unless person.affiliations.find_by_role_id(role).title == committee
-      if i == 0
+      if first_one
         html += link_to "#{person.full_name}", person_path(person)
-        i += 1
+        first_one = false
       else
         html += ", "
         html += link_to "#{person.full_name}", person_path(person)
