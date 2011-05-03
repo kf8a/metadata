@@ -93,22 +93,23 @@ class Citation < ActiveRecord::Base
 
   def to_bib
     entry = BibTeX::Entry.new
-    entry.type = bibtex_type
+    entry.type = bibtex_type.to_s
     entry.key = "citation_#{id}"
-    entry[:abstract] = abstract if abstract.present?
+    entry[:abstract] = abstract.to_s
     entry[:author] = authors.collect { |author| "#{author.given_name} #{author.middle_name} #{author.sur_name}"}.join(' and ')
     entry[:editor] = editors.collect { |editor| "#{editor.given_name} #{editor.middle_name} #{editor.sur_name}"}.join(' and ')
-    entry[:title] = title if title.present?
-    entry[:publisher] = publisher if publisher.present?
-    entry[:year] = pub_year.to_s if pub_year.present?
-    entry[:address] = address if address.present?
-    entry[:note] = notes if notes.present?
-    entry[:journal] = publication if publication.present?
-    entry[:pages] = page_numbers if page_numbers.present?
-    entry[:volume] = volume if volume.present?
-    entry[:number] = issue if issue.present?
-    entry[:series] = series_title if series_title.present?
-    entry[:isbn] = isbn if isbn.present?
+    entry[:title] = title.to_s
+    entry[:publisher] = publisher.to_s
+    entry[:year] = pub_year.to_s
+    entry[:address] = address.to_s
+    entry[:note] = notes.to_s
+    entry[:journal] = publication.to_s
+    entry[:pages] = page_numbers.to_s
+    entry[:volume] = volume.to_s
+    entry[:number] = issue.to_s
+    entry[:series] = series_title.to_s
+    entry[:isbn] = isbn.to_s
+    entry.fields.delete_if { |key, value| value == [""]}
 
     entry
   end
