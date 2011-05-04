@@ -73,9 +73,10 @@ class Citation < ActiveRecord::Base
   end
 
   def Citation.sorted_by(sorter)
+    sorter.downcase!
     #Since primary author and date is default, it is already sorted that way
-    unless sorter.downcase == "primary author and date(default)"
-      order(sorter.downcase)
+    unless sorter == "primary author and date(default)"
+      order(sorter)
     end
   end
 
