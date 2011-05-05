@@ -1,4 +1,5 @@
 require File.expand_path('../../test_helper',__FILE__)
+require 'nokogiri'
 
 class VariateTest < ActiveSupport::TestCase
 
@@ -12,11 +13,11 @@ class VariateTest < ActiveSupport::TestCase
 
     context '#to_eml' do
       setup do
-        @to_eml = @variate.to_eml.to_s
+        @to_eml = Nokogiri::XML(@variate.to_eml)
       end
 
       should 'be successful' do
-        assert_equal "<attribute><attributeName>date</attributeName><attributeDefinition/></attribute>", @to_eml
+        assert @to_eml.present?
       end
     end
   end
@@ -28,11 +29,11 @@ class VariateTest < ActiveSupport::TestCase
 
     context '#to_eml' do
       setup do
-        @to_eml = @variate.to_eml.to_s
+        @to_eml = Nokogiri::XML(@variate.to_eml)
       end
 
       should 'include that description in attributeDefinition tags' do
-        assert @to_eml.include?('<attributeDefinition>A description</attributeDefinition>')
+        assert_equal 1, @to_eml.css('attribute attributeDefinition').count
       end
     end
   end
@@ -44,11 +45,11 @@ class VariateTest < ActiveSupport::TestCase
 
     context '#to_eml' do
       setup do
-        @to_eml = @variate.to_eml.to_s
+        @to_eml = Nokogiri::XML(@variate.to_eml)
       end
 
       should 'include the scale' do
-        assert @to_eml.include?('<measurementScale><interval><unit><customUnit/></unit><precision>1<!--default precision none specified--></precision><numericDomain><numberType/></numericDomain></interval></measurementScale>')
+        assert_equal 1, @to_eml.css('measurementScale interval').count
       end
     end
 
@@ -59,11 +60,12 @@ class VariateTest < ActiveSupport::TestCase
 
       context '#to_eml' do
         setup do
-          @to_eml = @variate.to_eml.to_s
+          @to_eml = Nokogiri::XML(@variate.to_eml)
         end
 
         should 'include the precision' do
-          assert @to_eml.include?('<precision>0.1</precision>')
+          assert_equal 1, @to_eml.css('precision').count
+          assert_equal '0.1', @to_eml.at_css('precision').text
         end
       end
     end
@@ -75,11 +77,12 @@ class VariateTest < ActiveSupport::TestCase
 
       context '#to_eml' do
         setup do
-          @to_eml = @variate.to_eml.to_s
+          @to_eml = Nokogiri::XML(@variate.to_eml)
         end
 
         should 'include the data type' do
-          assert @to_eml.include?('<numberType>Simple data</numberType>')
+          assert_equal 1, @to_eml.css('numberType').count
+          assert_equal 'Simple data', @to_eml.at_css('numberType').text
         end
       end
     end
@@ -92,11 +95,12 @@ class VariateTest < ActiveSupport::TestCase
 
       context '#to_eml' do
         setup do
-          @to_eml = @variate.to_eml.to_s
+          @to_eml = Nokogiri::XML(@variate.to_eml)
         end
 
         should 'include the scale' do
-          assert @to_eml.include?('<customUnit>Good name</customUnit>')
+          assert_equal 1, @to_eml.css('customUnit').count
+          assert_equal 'Good name', @to_eml.at_css('customUnit').text
         end
       end
 
@@ -107,11 +111,12 @@ class VariateTest < ActiveSupport::TestCase
 
         context '#to_eml' do
           setup do
-            @to_eml = @variate.to_eml.to_s
+            @to_eml = Nokogiri::XML(@variate.to_eml)
           end
 
           should 'include the scale' do
-            assert @to_eml.include?('<standardUnit>Good name</standardUnit>')
+            assert_equal 1, @to_eml.css('standardUnit').count
+            assert_equal 'Good name', @to_eml.at_css('standardUnit').text
           end
         end
       end
@@ -125,11 +130,11 @@ class VariateTest < ActiveSupport::TestCase
 
     context '#to_eml' do
       setup do
-        @to_eml = @variate.to_eml.to_s
+        @to_eml = Nokogiri::XML(@variate.to_eml)
       end
 
       should 'include the scale' do
-        assert @to_eml.include?('<measurementScale><ratio><unit/><precision>1<!--default precision none specified--></precision><numericDomain><numberType/></numericDomain></ratio></measurementScale>')
+        assert_equal 1, @to_eml.css('measurementScale ratio').count
       end
     end
 
@@ -140,11 +145,12 @@ class VariateTest < ActiveSupport::TestCase
 
       context '#to_eml' do
         setup do
-          @to_eml = @variate.to_eml.to_s
+          @to_eml = Nokogiri::XML(@variate.to_eml)
         end
 
         should 'include the precision' do
-          assert @to_eml.include?('<precision>0.2</precision>')
+          assert_equal 1, @to_eml.css('precision').count
+          assert_equal '0.2', @to_eml.at_css('precision').text
         end
       end
     end
@@ -156,11 +162,12 @@ class VariateTest < ActiveSupport::TestCase
 
       context '#to_eml' do
         setup do
-          @to_eml = @variate.to_eml.to_s
+          @to_eml = Nokogiri::XML(@variate.to_eml)
         end
 
         should 'include the data type' do
-          assert @to_eml.include?('<numberType>Better type</numberType>')
+          assert_equal 1, @to_eml.css('numberType').count
+          assert_equal 'Better type', @to_eml.at_css('numberType').text
         end
       end
     end
@@ -173,11 +180,11 @@ class VariateTest < ActiveSupport::TestCase
 
     context '#to_eml' do
       setup do
-        @to_eml = @variate.to_eml.to_s
+        @to_eml = Nokogiri::XML(@variate.to_eml)
       end
 
-    should 'include the scale' do
-        assert @to_eml.include?('<measurementScale><ordinal/></measurementScale>')
+      should 'include the scale' do
+        assert_equal 1, @to_eml.css('measurementScale ordinal').count
       end
     end
   end
@@ -189,11 +196,11 @@ class VariateTest < ActiveSupport::TestCase
 
     context '#to_eml' do
       setup do
-        @to_eml = @variate.to_eml.to_s
+        @to_eml = Nokogiri::XML(@variate.to_eml)
       end
 
       should 'include the scale' do
-        assert @to_eml.include?('<attributeDefinition/><measurementScale><nominal><nonNumericDomain><textDomain><definition/></textDomain></nonNumericDomain></nominal></measurementScale>')
+        assert_equal 1, @to_eml.css('measurementScale nominal nonNumericDomain textDomain').count
       end
     end
 
@@ -204,11 +211,11 @@ class VariateTest < ActiveSupport::TestCase
 
       context '#to_eml' do
         setup do
-          @to_eml = @variate.to_eml.to_s
+          @to_eml = Nokogiri::XML(@variate.to_eml)
         end
 
         should 'include the description' do
-          assert @to_eml.include?('<nominal><nonNumericDomain><textDomain><definition>A nominal description</definition></textDomain></nonNumericDomain></nominal>')
+          assert_equal 1, @to_eml.css('nominal nonNumericDomain textDomain definition').count
         end
       end
     end
@@ -221,11 +228,11 @@ class VariateTest < ActiveSupport::TestCase
 
     context '#to_eml' do
       setup do
-        @to_eml = @variate.to_eml.to_s
+        @to_eml = Nokogiri::XML(@variate.to_eml)
       end
 
-      should 'include the scale' do
-        assert @to_eml.include?("<measurementScale><dateTime><formatString/><dateTimePrecision>86400</dateTimePrecision><dateTimeDomain><bounds><minimum exclusive='true'>1987-4-18</minimum></bounds></dateTimeDomain></dateTime></measurementScale>")
+      should 'include a measurementScale element' do
+        assert_equal 1, @to_eml.css('measurementScale').count
       end
     end
 
@@ -236,11 +243,12 @@ class VariateTest < ActiveSupport::TestCase
 
       context '#to_eml' do
         setup do
-          @to_eml = @variate.to_eml.to_s
+          @to_eml = Nokogiri::XML(@variate.to_eml)
         end
 
-        should 'include the scale' do
-          assert @to_eml.include?('><formatString>Normal format</formatString>')
+        should 'include a formatString element' do
+          assert_equal 1, @to_eml.css('formatString').count
+          assert_equal 'Normal format', @to_eml.at_css('formatString').text
         end
       end
     end

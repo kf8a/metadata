@@ -1,6 +1,5 @@
-require 'rexml/document'
+require 'builder'
 
-include REXML
 class Dataset < ActiveRecord::Base
   has_many :datatables, :order => 'name'
   has_many :protocols, :conditions => 'active is true'
@@ -62,63 +61,147 @@ class Dataset < ActiveRecord::Base
   end
 
   def to_eml
-    emldoc = Document.new()
-    root = emldoc.add_element('eml:eml')
-    package_id = "knb-lter-kbs.#{metacat_id.nil? ? self.id : metacat_id}.#{version}"
+    xml = Builder::XmlMarkup.new
+    xml.instruct! :xml, :version => '1.0'
+    xml.tag!("eml:eml",
+        'xmlns:eml'           => 'eml://ecoinformatics.org/eml-2.1.0',
+        'xmlns:set'           => 'http://exslt.org/sets',
+        'xmlns:exslt'         => 'http://exslt.org/common',
+        'xmlns:stmml'         => 'http://www.xml-cml.org/schema/stmml',
+        'xmlns:xsi'           => 'http://www.w3.org/2001/XMLSchema-instance',
+        'xsi:schemaLocation'  => 'eml://ecoinformatics.org/eml-2.1.0 eml.xsd',
+        'packageId'           => package_id,
+        'system'              => 'KBS LTER') do
+      eml_access(xml)
+      xml.dataset do
+        xml.title title
+        xml.creator 'id' => 'KBS LTER' do
+          xml.positionName 'Data Manager'
+        end
+        [people, datatable_people].flatten.uniq.each do |person|
+          xml.associatedParty 'id' => person.person, 'scope' => 'document' do
+            xml.individualName do
+              xml.givenName person.given_name
+              xml.surName person.sur_name
+            end
+            address(xml, person)
+            if person.phone
+              xml.phone person.phone, 'phonetype' => 'phone'
+            end
+            if person.fax
+              xml.phone person.fax, 'phonetype' => 'fax'
+            end
+            xml.electronicMailAddress person.email if person.email
+            xml.role person.lter_roles.first.try(:name).try(:singularize)
+          end
+        end
+        xml.abstract do
+          xml.para textilize(abstract)
+        end
+        xml.keywordSet do
+          ['LTER','KBS','Kellogg Biological Station', 'Hickory Corners', 'Michigan', 'Great Lakes'].each do| keyword |
+            xml.keyword keyword, 'keywordType' => 'place'
+          end
+        end
+        xml.contact do
+          xml.organizationName 'Kellogg Biological Station'
+          xml.positionName 'Data Manager'
+          p = Person.new( :organization => 'Kellogg Biological Station',
+            :street_address => '3700 East Gull Lake Drive',
+            :city => 'Hickory Corners',:locale => 'Mi',:postal_code => '49060',
+            :country => 'USA')
+          address(xml, p)
+          xml.electronicMailAddress 'data.manager@kbs.msu.edu'
+          xml.onlineUrl 'http://lter.kbs.msu.edu'
+        end
+        datatables.each do |datatable|
+          if datatable.valid_for_eml
+            datatable.to_eml(xml)
+          end
+        end
+      end
+      custom_units = datatables.collect do | datatable |
+        datatable.variates.collect do | variate |
+          next unless variate.unit
+          next if variate.unit.in_eml
+          variate.unit
+        end
+      end.flatten.compact.uniq
+      if custom_units.present?
+        xml.additionalMetadata do
+          xml.metadata do
 
-    root.attributes['xmlns:eml']            = 'eml://ecoinformatics.org/eml-2.1.0'
-    root.attributes['xmlns:set']            = 'http://exslt.org/sets'
-    root.attributes['xmlns:exslt']          = 'http://exslt.org/common'
-    root.attributes['xmlns:stmml']          = 'http://www.xml-cml.org/schema/stmml'
-    root.attributes['xmlns:xsi']            = 'http://www.w3.org/2001/XMLSchema-instance'
-    root.attributes['xsi:schemaLocation']   = 'eml://ecoinformatics.org/eml-2.1.0 eml.xsd'
-    root.attributes['packageId']            =  package_id
-    root.attributes['system']               = 'KBS LTER'
-
-    root.add_element eml_access
-
-    eml_dataset = emldoc.root.add_element('dataset')
-    eml_dataset.add_element('title').add_text(title)
-    creator = eml_dataset.add_element('creator')
-    creator.add_attribute('id', 'KBS LTER')
-    creator.add_element('positionName').add_text('Data Manager')
-
-    [people, datatable_people].flatten.uniq.each do |person|
-      party_element = eml_dataset.add_element('associatedParty')
-      party_element.add_attribute('id', person.person)
-      party_element.add_attribute('scope', 'document')
-      party_element.add_element eml_individual_name(person)
-      party_element.add_element address(person)
-      party_element.add_element('phone', {'phonetype' => 'phone'}).add_text(person.phone) if person.phone
-      party_element.add_element('phone',{'phonetype' => 'fax'}).add_text(person.fax) if person.fax
-      party_element.add_element('electronicMailAddress').add_text(person.email) if person.email
-      party_element.add_element('role').add_text(person.lter_roles.first.try(:name).try(:singularize))
-    end
-
-    eml_dataset.add_element('abstract').add_element('para').add_text(textilize(abstract))
-    eml_dataset.add_element keyword_sets
-    eml_dataset.add_element contact_info
-
-    # unless initiated.nil? or completed.nil?
-    #   coverage = eml_dataset.add_element('coverage')
-    #   temporal_coverage = coverage.add_element('temporalCoverage')
-    #   range_of_dates = temporal_coverage.add_element('rangeOfDates')
-    #   begin_calendar_date = range_of_dates.add_element('beginDate').add_element('calendarDate')
-    #   end_calendar_date = range_of_dates.add_element('endDate').add_element('calendarDate')
-    #   begin_calendar_date.add_text(initiated.to_s)
-    #   end_calendar_date.add_text(completed.to_s)
-    # end
-
-    datatables.each do |datatable|
-      if datatable.valid_for_eml
-        eml_dataset.add_element datatable.to_eml
+            xml.tag!('stmml:unitList', 'xsi:schemaLocation' => " http://lter.kbs.msu.edu/Data/schemas/stmml.xsd")
+            logger.info custom_units
+            custom_units.each do |unit|
+              xml.tag!('stmml:unit',
+                  'id' => unit.name,
+                  'multiplierToSI' => unit.multiplier_to_si,
+                  'parentSI' => unit.parent_si,
+                  'unitType' => unit.unit_type,
+                  'name' => unit.name)
+            end
+          end
+        end
       end
     end
-
-    if custom_units.present?
-      root.add_element('additionalMetadata').add_element('metadata').add eml_custom_unit_list
-    end
-    root.to_s
+#    emldoc = Document.new()
+#    root = emldoc.add_element('eml:eml')
+#    package_id = "knb-lter-kbs.#{metacat_id.nil? ? self.id : metacat_id}.#{version}"
+#
+#    root.attributes['xmlns:eml']            = 'eml://ecoinformatics.org/eml-2.1.0'
+#    root.attributes['xmlns:set']            = 'http://exslt.org/sets'
+#    root.attributes['xmlns:exslt']          = 'http://exslt.org/common'
+#    root.attributes['xmlns:stmml']          = 'http://www.xml-cml.org/schema/stmml'
+#    root.attributes['xmlns:xsi']            = 'http://www.w3.org/2001/XMLSchema-instance'
+#    root.attributes['xsi:schemaLocation']   = 'eml://ecoinformatics.org/eml-2.1.0 eml.xsd'
+#    root.attributes['packageId']            =  package_id
+#    root.attributes['system']               = 'KBS LTER'
+#
+#    root.add_element eml_access
+#
+#    eml_dataset = emldoc.root.add_element('dataset')
+#    eml_dataset.add_element('title').add_text(title)
+#    creator = eml_dataset.add_element('creator')
+#    creator.add_attribute('id', 'KBS LTER')
+#    creator.add_element('positionName').add_text('Data Manager')
+#
+#    [people, datatable_people].flatten.uniq.each do |person|
+#      party_element = eml_dataset.add_element('associatedParty')
+#      party_element.add_attribute('id', person.person)
+#      party_element.add_attribute('scope', 'document')
+#      party_element.add_element eml_individual_name(person)
+#      party_element.add_element address(person)
+#      party_element.add_element('phone', {'phonetype' => 'phone'}).add_text(person.phone) if person.phone
+#      party_element.add_element('phone',{'phonetype' => 'fax'}).add_text(person.fax) if person.fax
+#      party_element.add_element('electronicMailAddress').add_text(person.email) if person.email
+#      party_element.add_element('role').add_text(person.lter_roles.first.try(:name).try(:singularize))
+#    end
+#
+#    eml_dataset.add_element('abstract').add_element('para').add_text(textilize(abstract))
+#    eml_dataset.add_element keyword_sets
+#    eml_dataset.add_element contact_info
+#
+#    # unless initiated.nil? or completed.nil?
+#    #   coverage = eml_dataset.add_element('coverage')
+#    #   temporal_coverage = coverage.add_element('temporalCoverage')
+#    #   range_of_dates = temporal_coverage.add_element('rangeOfDates')
+#    #   begin_calendar_date = range_of_dates.add_element('beginDate').add_element('calendarDate')
+#    #   end_calendar_date = range_of_dates.add_element('endDate').add_element('calendarDate')
+#    #   begin_calendar_date.add_text(initiated.to_s)
+#    #   end_calendar_date.add_text(completed.to_s)
+#    # end
+#
+#    datatables.each do |datatable|
+#      if datatable.valid_for_eml
+#        eml_dataset.add_element datatable.to_eml
+#      end
+#    end
+#
+#    if custom_units.present?
+#      root.add_element('additionalMetadata').add_element('metadata').add eml_custom_unit_list
+#    end
+#    root.to_s
   end
 
 
@@ -187,21 +270,29 @@ class Dataset < ActiveRecord::Base
     return individual_name_element
   end
 
-  def eml_access
-    access_element = Element.new('access')
-    access_element.add_attribute('scope','document')
-    access_element.add_attribute('order','allowFirst')
-    access_element.add_attribute('authSystem', 'knb')
-    access_element.add_element eml_allow('uid=KBS,o=lter,dc=ecoinformatics,dc=org', 'all')
-    access_element.add_element eml_allow('public','read')
-    return access_element
+  def eml_access(xml)
+    xml.access 'scope' => 'document', 'order' => 'allowFirst', 'authSystem' => 'knb' do
+      eml_allow(xml, 'uid=KBS,o=lter,dc=ecoinformatics,dc=org', 'all')
+      eml_allow(xml, 'public','read')
+    end
+#    access_element = Element.new('access')
+#    access_element.add_attribute('scope','document')
+#    access_element.add_attribute('order','allowFirst')
+#    access_element.add_attribute('authSystem', 'knb')
+#    access_element.add_element eml_allow('uid=KBS,o=lter,dc=ecoinformatics,dc=org', 'all')
+#    access_element.add_element eml_allow('public','read')
+#    return access_element
   end
 
-  def eml_allow(principal, permission)
-    allow_element = Element.new('allow')
-    allow_element.add_element('principal').add_text(principal)
-    allow_element.add_element('permission').add_text(permission)
-    return allow_element
+  def eml_allow(xml, principal, permission)
+    xml.allow do
+      xml.principal principal
+      xml.permission permission
+    end
+#    allow_element = Element.new('allow')
+#    allow_element.add_element('principal').add_text(principal)
+#    allow_element.add_element('permission').add_text(permission)
+#    return allow_element
   end
 
   def keyword_sets
@@ -226,16 +317,24 @@ class Dataset < ActiveRecord::Base
     return contact_element
   end
 
-  def address(person)
-    address_element = Element.new('address')
-    address_element.add_attribute('scope','document')
-    address_element.add_element('deliveryPoint').add_text(person.organization) if person.organization
-    address_element.add_element('deliveryPoint').add_text(person.street_address) if person.street_address
-    address_element.add_element('city').add_text(person.city) if person.city
-    address_element.add_element('administrativeArea').add_text(person.locale) if person.locale
-    address_element.add_element('postalCode').add_text(person.postal_code) if person.postal_code
-    address_element.add_element('country').add_text(person.country) if person.country
-    return address_element
+  def address(xml, person)
+    xml.address 'scope' => 'document' do
+      xml.deliveryPoint person.organization if person.organization
+      xml.deliveryPoint person.street_address if person.street_address
+      xml.city person.city if person.city
+      xml.administrativeArea person.locale if person.locale
+      xml.postalCode person.postal_code if person.postal_code
+      xml.country person.country if person.country
+    end
+#    address_element = Element.new('address')
+#    address_element.add_attribute('scope','document')
+#    address_element.add_element('deliveryPoint').add_text(person.organization) if person.organization
+#    address_element.add_element('deliveryPoint').add_text(person.street_address) if person.street_address
+#    address_element.add_element('city').add_text(person.city) if person.city
+#    address_element.add_element('administrativeArea').add_text(person.locale) if person.locale
+#    address_element.add_element('postalCode').add_text(person.postal_code) if person.postal_code
+#    address_element.add_element('country').add_text(person.country) if person.country
+#    return address_element
   end
 end
 

@@ -1,4 +1,5 @@
 require File.expand_path('../../test_helper',__FILE__)
+require 'nokogiri'
 
 class DatasetTest < ActiveSupport::TestCase
 
@@ -143,19 +144,31 @@ class DatasetTest < ActiveSupport::TestCase
   context 'eml generatation' do
     setup do
       @dataset = Factory.create(:dataset, :initiated => Date.today, :completed => Date.today)
-      @dataset_with_datatable = Factory.create(:dataset, :datatables  => [Factory.create(:datatable),  Factory.create(:datatable)])
+      @dataset_with_datatable = Factory.create(:datatable).dataset
     end
 
     should 'not be empty' do
-      refute @dataset.to_eml.nil?
-      refute @dataset_with_datatable.to_eml.nil?
+      assert @dataset.to_eml.present?
+      assert @dataset_with_datatable.to_eml.present?
+    end
+
+    should 'have a dataset element' do
+      eml_doc = Nokogiri::XML(@dataset.to_eml)
+      assert_equal 1, eml_doc.css('dataset').count
+    end
+
+    should 'have a dataTable element if it has a datatable' do
+      eml_doc = Nokogiri::XML(@dataset.to_eml)
+      assert_equal 0, eml_doc.css('dataTable').count
+      eml_doc_2 = Nokogiri::XML(@dataset_with_datatable.to_eml)
+      assert_equal @dataset_with_datatable.datatables.count, eml_doc_2.css('dataTable').count
     end
 
     #TODO This is obviously brittle and should be tested with a parser
-    should 'have the exact right eml generated' do
-      proper_eml = "xsi:schemaLocation='eml://ecoinformatics.org/eml-2.1.0 eml.xsd' xmlns:set='http://exslt.org/sets' xmlns:stmml='http://www.xml-cml.org/schema/stmml' system='KBS LTER' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><access authSystem='knb' order='allowFirst' scope='document'><allow><principal>uid=KBS,o=lter,dc=ecoinformatics,dc=org</principal><permission>all</permission></allow><allow><principal>public</principal><permission>read</permission></allow></access><dataset><title>KBS001</title><creator id='KBS LTER'><positionName>Data Manager</positionName></creator><abstract><para>&lt;p&gt;some new dataset&lt;/p&gt;</para></abstract><keywordSet><keyword keywordType='place'>LTER</keyword><keyword keywordType='place'>KBS</keyword><keyword keywordType='place'>Kellogg Biological Station</keyword><keyword keywordType='place'>Hickory Corners</keyword><keyword keywordType='place'>Michigan</keyword><keyword keywordType='place'>Great Lakes</keyword></keywordSet><contact><organizationName>Kellogg Biological Station</organizationName><positionName>Data Manager</positionName><address scope='document'><deliveryPoint>Kellogg Biological Station</deliveryPoint><deliveryPoint>3700 East Gull Lake Drive</deliveryPoint><city>Hickory Corners</city><administrativeArea>Mi</administrativeArea><postalCode>49060</postalCode><country>USA</country></address><electronicMailAddress>data.manager@kbs.msu.edu</electronicMailAddress><onlineUrl>http://lter.kbs.msu.edu</onlineUrl></contact></dataset></eml:eml>"
-      assert_includes @dataset.to_eml.to_s, proper_eml
-    end
+#    should 'have the exact right eml generated' do
+#      proper_eml = "xsi:schemaLocation='eml://ecoinformatics.org/eml-2.1.0 eml.xsd' xmlns:set='http://exslt.org/sets' xmlns:stmml='http://www.xml-cml.org/schema/stmml' system='KBS LTER' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><access authSystem='knb' order='allowFirst' scope='document'><allow><principal>uid=KBS,o=lter,dc=ecoinformatics,dc=org</principal><permission>all</permission></allow><allow><principal>public</principal><permission>read</permission></allow></access><dataset><title>KBS001</title><creator id='KBS LTER'><positionName>Data Manager</positionName></creator><abstract><para>&lt;p&gt;some new dataset&lt;/p&gt;</para></abstract><keywordSet><keyword keywordType='place'>LTER</keyword><keyword keywordType='place'>KBS</keyword><keyword keywordType='place'>Kellogg Biological Station</keyword><keyword keywordType='place'>Hickory Corners</keyword><keyword keywordType='place'>Michigan</keyword><keyword keywordType='place'>Great Lakes</keyword></keywordSet><contact><organizationName>Kellogg Biological Station</organizationName><positionName>Data Manager</positionName><address scope='document'><deliveryPoint>Kellogg Biological Station</deliveryPoint><deliveryPoint>3700 East Gull Lake Drive</deliveryPoint><city>Hickory Corners</city><administrativeArea>Mi</administrativeArea><postalCode>49060</postalCode><country>USA</country></address><electronicMailAddress>data.manager@kbs.msu.edu</electronicMailAddress><onlineUrl>http://lter.kbs.msu.edu</onlineUrl></contact></dataset></eml:eml>"
+#      assert_includes @dataset.to_eml.to_s, proper_eml
+#    end
 
     context 'dataset with protocols in the datatables' do
       setup do

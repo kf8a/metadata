@@ -9,13 +9,71 @@ class Variate < ActiveRecord::Base
     measurement_scale.presence && description.presence
   end
 
-  def to_eml
-    eml = Element.new('attribute')
-    eml.add_element('attributeName').add_text(self.name)
-    eml.add_element('attributeDefinition').add_text(self.description)
-    eml.add_element eml_measurement_scale if self.measurement_scale
-
-    eml
+  def to_eml(xml = Builder::XmlMarkup.new)
+    xml.attribute do
+      xml.attributeName name
+      xml.attributeDefinition description
+      xml.measurementScale do
+        xml.tag!(measurement_scale) do
+          case measurement_scale
+          when 'interval'
+            xml.unit do
+              if unit.try(:in_eml)
+                xml.standardUnit unit_name
+              else
+                xml.customUnit unit_name
+              end
+              if precision
+                xml.precision precision.to_s
+              else
+                xml.precision do
+                  '1'
+                  xml.comment!("default precision none specified")
+                end
+              end
+              xml.numericDomain do
+                xml.numberType data_type
+              end
+            end
+          when 'ratio'
+            xml.unit do
+              if precision
+                xml.precision precision.to_s
+              else
+                xml.precision do
+                  '1'
+                  xml.comment!("default precision none specified")
+                end
+              end
+              xml.numericDomain do
+                xml.numberType data_type
+              end
+            end
+          when 'ordinal'
+          when 'nominal'
+            xml.nonNumericDomain do
+              xml.textDomain do
+                xml.definition description
+              end
+            end
+          when 'dateTime'
+            xml.formatString date_format
+            xml.dateTimePrecision '86400'
+            xml.dateTimeDomain do
+              xml.bounds do
+                xml.minimum '1987-4-18', 'exclusive' => 'true'
+              end
+            end
+          end
+        end
+      end
+    end
+#    eml = Element.new('attribute')
+#    eml.add_element('attributeName').add_text(self.name)
+#    eml.add_element('attributeDefinition').add_text(self.description)
+#    eml.add_element eml_measurement_scale if self.measurement_scale
+#
+#    eml
   end
 
   def human_name

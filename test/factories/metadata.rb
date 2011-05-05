@@ -98,6 +98,8 @@ unless Factory.factories.include?(:affiliation) #prevent redefining these factor
 
   Factory.define :variate do |v|
     v.name 'date'
+    v.description 'generic variate'
+    v.measurement_scale 'dateTime'
   end
 
   Factory.define :venue_type do |v|

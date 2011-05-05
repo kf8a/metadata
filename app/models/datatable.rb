@@ -168,14 +168,41 @@ class Datatable < ActiveRecord::Base
     title + reply
   end
 
-  def to_eml
-    eml = Element.new('dataTable')
-    eml.add_attribute('id',name)
-    eml.add_element('entityName').add_text(title)
-    eml.add_element('entityDescription').add_text(description.gsub(/<\/?[^>]*>/, ""))
-    eml.add_element eml_physical
-    eml.add_element eml_attributes
-    return eml
+  def to_eml(xml = Builder::XmlMarkup.new)
+    xml.dataTable 'id' => name do
+    xml.entityName title
+    xml.entityDescription description.gsub(/<\/?[^>]*>/, "")
+    xml.physical do
+      xml.objectName title
+      xml.encodingMethod 'None'
+      xml.dataFormat do
+        xml.textFormat do
+          xml.numHeaderLines (data_access_statement.lines.to_a.size + 4).to_s
+          xml.attributeOrientation 'column'
+          xml.simpleDelimited do
+            xml.fieldDelimiter ','
+          end
+        end
+      end
+      xml.distribution do
+        xml.online do
+          xml.url data_url
+        end
+      end
+    end
+    xml.attributeList do
+      valid_variates.each do |variate|
+        variate.to_eml(xml)
+      end
+    end
+  end
+#    eml = Element.new('dataTable')
+#    eml.add_attribute('id',name)
+#    eml.add_element('entityName').add_text(title)
+#    eml.add_element('entityDescription').add_text(description.gsub(/<\/?[^>]*>/, ""))
+#    eml.add_element eml_physical
+#    eml.add_element eml_attributes
+#    return eml
   end
 
   def raw_csv
