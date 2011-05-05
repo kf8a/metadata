@@ -72,7 +72,7 @@ class Dataset < ActiveRecord::Base
         'xsi:schemaLocation'  => 'eml://ecoinformatics.org/eml-2.1.0 eml.xsd',
         'packageId'           => package_id,
         'system'              => 'KBS LTER') do
-      eml_access(xml)
+      eml_access
       xml.dataset do
         xml.title title
         xml.creator 'id' => 'KBS LTER' do
@@ -84,7 +84,7 @@ class Dataset < ActiveRecord::Base
               xml.givenName person.given_name
               xml.surName person.sur_name
             end
-            address(xml, person)
+            address(person)
             if person.phone
               xml.phone person.phone, 'phonetype' => 'phone'
             end
@@ -110,7 +110,7 @@ class Dataset < ActiveRecord::Base
             :street_address => '3700 East Gull Lake Drive',
             :city => 'Hickory Corners',:locale => 'Mi',:postal_code => '49060',
             :country => 'USA')
-          address(xml, p)
+          address(p)
           xml.electronicMailAddress 'data.manager@kbs.msu.edu'
           xml.onlineUrl 'http://lter.kbs.msu.edu'
         end
@@ -270,7 +270,8 @@ class Dataset < ActiveRecord::Base
     return individual_name_element
   end
 
-  def eml_access(xml)
+  def eml_access
+    xml = Builder::XmlMarkup.new
     xml.access 'scope' => 'document', 'order' => 'allowFirst', 'authSystem' => 'knb' do
       eml_allow(xml, 'uid=KBS,o=lter,dc=ecoinformatics,dc=org', 'all')
       eml_allow(xml, 'public','read')
@@ -317,7 +318,8 @@ class Dataset < ActiveRecord::Base
     return contact_element
   end
 
-  def address(xml, person)
+  def address(person)
+    xml = Builder::XmlMarkup.new
     xml.address 'scope' => 'document' do
       xml.deliveryPoint person.organization if person.organization
       xml.deliveryPoint person.street_address if person.street_address
