@@ -68,6 +68,43 @@ class Person < ActiveRecord::Base
     self.dataset_roles.size > 0
   end
 
+  def to_eml(eml)
+    eml.associatedParty 'id' => person.person, 'scope' => 'document' do
+      eml_individual_name
+      eml_address
+      if person.phone
+        eml.phone person.phone, 'phonetype' => 'phone'
+      end
+      if person.fax
+        eml.phone person.fax, 'phonetype' => 'fax'
+      end
+      eml.electronicMailAddress person.email if person.email
+      eml.role person.lter_roles.first.try(:name).try(:singularize)
+    end
+  end
+
+  def eml_individual_name
+    eml.individualName do
+      eml.givenName given_name
+      eml.surName sur_name
+    end
+  end
+
+  def eml_address
+    eml.address 'scope' => 'document' do
+      eml.deliveryPoint organization if organization
+      eml.deliveryPoint street_address if street_address
+      eml.city city if city
+      eml.administrativeArea locale if locale
+      eml.postalCode postal_code if postal_code
+      eml.country country if country
+    end
+  end
+
+  def eml
+    @eml ||= Builder::XmlMarkup.new
+  end
+
 end
 
 # == Schema Information
