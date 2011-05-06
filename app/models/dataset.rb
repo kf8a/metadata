@@ -94,20 +94,25 @@ class Dataset < ActiveRecord::Base
             datatable.to_eml(eml)
           end
         end
+        unless initiated.nil? or completed.nil?
+          eml.coverage do
+            eml.temporalCoverage do
+              eml.rangeOfDates do
+                eml.beginDate do
+                  eml.calendarDate initiated.to_s
+                end
+                eml.endDate do
+                  eml.calendarDate completed.to_s
+                end
+              end
+            end
+          end
+        end
       end
       if custom_units.present?
         eml_custom_unit_list
       end
     end
-    # unless initiated.nil? or completed.nil?
-    #   coverage = eml_dataset.add_element('coverage')
-    #   temporal_coverage = coverage.add_element('temporalCoverage')
-    #   range_of_dates = temporal_coverage.add_element('rangeOfDates')
-    #   begin_calendar_date = range_of_dates.add_element('beginDate').add_element('calendarDate')
-    #   end_calendar_date = range_of_dates.add_element('endDate').add_element('calendarDate')
-    #   begin_calendar_date.add_text(initiated.to_s)
-    #   end_calendar_date.add_text(completed.to_s)
-    # end
   end
 
 
