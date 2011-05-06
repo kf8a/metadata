@@ -60,13 +60,10 @@ class Dataset < ActiveRecord::Base
     "knb-lter-kbs.#{metacat_id.nil? ? self.id : metacat_id}.#{version}"
   end
 
-  def eml
-    @eml ||= Builder::XmlMarkup.new
-  end
-
   def to_eml
-    eml.instruct! :xml, :version => '1.0'
-    eml.tag!("eml:eml",
+    @eml = Builder::XmlMarkup.new
+    @eml.instruct! :xml, :version => '1.0'
+    @eml.tag!("eml:eml",
         'xmlns:eml'           => 'eml://ecoinformatics.org/eml-2.1.0',
         'xmlns:set'           => 'http://exslt.org/sets',
         'xmlns:exslt'         => 'http://exslt.org/common',
@@ -76,33 +73,33 @@ class Dataset < ActiveRecord::Base
         'packageId'           => package_id,
         'system'              => 'KBS LTER') do
       eml_access
-      eml.dataset do
-        eml.title title
-        eml.creator 'id' => 'KBS LTER' do
-          eml.positionName 'Data Manager'
+      @eml.dataset do
+        @eml.title title
+        @eml.creator 'id' => 'KBS LTER' do
+          @eml.positionName 'Data Manager'
         end
         [people, datatable_people].flatten.uniq.each do |person|
-          person.to_eml(eml)
+          person.to_eml(@eml)
         end
-        eml.abstract do
-          eml.para textilize(abstract)
+        @eml.abstract do
+          @eml.para textilize(abstract)
         end
         keyword_sets
         contact_info
         datatables.each do |datatable|
           if datatable.valid_for_eml
-            datatable.to_eml(eml)
+            datatable.to_eml(@eml)
           end
         end
         unless initiated.nil? or completed.nil?
-          eml.coverage do
-            eml.temporalCoverage do
-              eml.rangeOfDates do
-                eml.beginDate do
-                  eml.calendarDate initiated.to_s
+          @eml.coverage do
+            @eml.temporalCoverage do
+              @eml.rangeOfDates do
+                @eml.beginDate do
+                  @eml.calendarDate initiated.to_s
                 end
-                eml.endDate do
-                  eml.calendarDate completed.to_s
+                @eml.endDate do
+                  @eml.calendarDate completed.to_s
                 end
               end
             end
@@ -155,12 +152,12 @@ class Dataset < ActiveRecord::Base
   private
 
   def eml_custom_unit_list
-    eml.additionalMetadata do
-      eml.metadata do
-        eml.tag!('stmml:unitList', 'xsi:schemaLocation' => " http://lter.kbs.msu.edu/Data/schemas/stmml.xsd")
+    @eml.additionalMetadata do
+      @eml.metadata do
+        @eml.tag!('stmml:unitList', 'xsi:schemaLocation' => " http://lter.kbs.msu.edu/Data/schemas/stmml.xsd")
         logger.info custom_units
         custom_units.each do |unit|
-          eml.tag!('stmml:unit',
+          @eml.tag!('stmml:unit',
                   'id' => unit.name,
                   'multiplierToSI' => unit.multiplier_to_si,
                   'parentSI' => unit.parent_si,
@@ -172,38 +169,38 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_access
-    eml.access 'scope' => 'document', 'order' => 'allowFirst', 'authSystem' => 'knb' do
+    @eml.access 'scope' => 'document', 'order' => 'allowFirst', 'authSystem' => 'knb' do
       eml_allow('uid=KBS,o=lter,dc=ecoinformatics,dc=org', 'all')
       eml_allow('public','read')
     end
   end
 
   def eml_allow(principal, permission)
-    eml.allow do
-      eml.principal principal
-      eml.permission permission
+    @eml.allow do
+      @eml.principal principal
+      @eml.permission permission
     end
   end
 
   def keyword_sets
-    eml.keywordSet do
+    @eml.keywordSet do
       ['LTER','KBS','Kellogg Biological Station', 'Hickory Corners', 'Michigan', 'Great Lakes'].each do| keyword |
-        eml.keyword keyword, 'keywordType' => 'place'
+        @eml.keyword keyword, 'keywordType' => 'place'
       end
     end
   end
 
   def contact_info
-    eml.contact do
-      eml.organizationName 'Kellogg Biological Station'
-      eml.positionName 'Data Manager'
+    @eml.contact do
+      @eml.organizationName 'Kellogg Biological Station'
+      @eml.positionName 'Data Manager'
       p = Person.new( :organization => 'Kellogg Biological Station',
         :street_address => '3700 East Gull Lake Drive',
         :city => 'Hickory Corners',:locale => 'Mi',:postal_code => '49060',
         :country => 'USA')
       p.eml_address
-      eml.electronicMailAddress 'data.manager@kbs.msu.edu'
-      eml.onlineUrl 'http://lter.kbs.msu.edu'
+      @eml.electronicMailAddress 'data.manager@kbs.msu.edu'
+      @eml.onlineUrl 'http://lter.kbs.msu.edu'
     end
   end
 end
