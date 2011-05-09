@@ -169,40 +169,13 @@ class Datatable < ActiveRecord::Base
   end
 
   def to_eml(xml = Builder::XmlMarkup.new)
-    xml.dataTable 'id' => name do
-    xml.entityName title
-    xml.entityDescription description.gsub(/<\/?[^>]*>/, "")
-    xml.physical do
-      xml.objectName title
-      xml.encodingMethod 'None'
-      xml.dataFormat do
-        xml.textFormat do
-          xml.numHeaderLines (data_access_statement.lines.to_a.size + 4).to_s
-          xml.attributeOrientation 'column'
-          xml.simpleDelimited do
-            xml.fieldDelimiter ','
-          end
-        end
-      end
-      xml.distribution do
-        xml.online do
-          xml.url data_url
-        end
-      end
+    @eml = xml
+    @eml.dataTable 'id' => name do
+      @eml.entityName title
+      @eml.entityDescription description.gsub(/<\/?[^>]*>/, "")
+      eml_physical
+      eml_attributes
     end
-    xml.attributeList do
-      valid_variates.each do |variate|
-        variate.to_eml(xml)
-      end
-    end
-  end
-#    eml = Element.new('dataTable')
-#    eml.add_attribute('id',name)
-#    eml.add_element('entityName').add_text(title)
-#    eml.add_element('entityDescription').add_text(description.gsub(/<\/?[^>]*>/, ""))
-#    eml.add_element eml_physical
-#    eml.add_element eml_attributes
-#    return eml
   end
 
   def raw_csv
@@ -335,23 +308,32 @@ class Datatable < ActiveRecord::Base
   end
 
   def eml_physical
-    physical_element = Element.new('physical')
-    physical_element.add_element('objectName').add_text(self.title)
-    physical_element.add_element('encodingMethod').add_text('None')
-    dataformat = physical_element.add_element('dataFormat').add_element('textFormat')
-    dataformat.add_element('numHeaderLines').add_text((data_access_statement.lines.to_a.size + 4).to_s)
-    dataformat.add_element('attributeOrientation').add_text('column')
-    dataformat.add_element('simpleDelimited').add_element('fieldDelimiter').add_text(',')
-    physical_element.add_element('distribution').add_element('online').add_element('url').add_text(data_url)
-    return physical_element
+    @eml.physical do
+      @eml.objectName title
+      @eml.encodingMethod 'None'
+      @eml.dataFormat do
+        @eml.textFormat do
+          @eml.numHeaderLines (data_access_statement.lines.to_a.size + 4).to_s
+          @eml.attributeOrientation 'column'
+          @eml.simpleDelimited do
+            @eml.fieldDelimiter ','
+          end
+        end
+      end
+      @eml.distribution do
+        @eml.online do
+          @eml.url data_url
+        end
+      end
+    end
   end
 
   def eml_attributes
-    attribute_list_element = Element.new('attributeList')
-    self.variates.each do |variate|
-      attribute_list_element.add_element variate.to_eml
+    @eml.attributeList do
+      valid_variates.each do |variate|
+        variate.to_eml(@eml)
+      end
     end
-    return attribute_list_element
   end
 
 end
