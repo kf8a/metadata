@@ -202,9 +202,9 @@ class Datatable < ActiveRecord::Base
   end
 
   def data_source
-    "\n# Data Source: http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}
-# The newest version of the data http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.id}.csv
-# Full EML Metadata: http://#{sponsor_name}.kbs.msu.edu/datatables/#{self.dataset.id}.eml\n#"
+    "\n# Data Source: http://#{website_name}.kbs.msu.edu/datatables/#{self.id}
+# The newest version of the data http://#{website_name}.kbs.msu.edu/datatables/#{self.id}.csv
+# Full EML Metadata: http://#{website_name}.kbs.msu.edu/datatables/#{self.dataset.id}.eml\n#"
   end
 
   def data_access_statement
@@ -268,6 +268,10 @@ class Datatable < ActiveRecord::Base
 
   def sponsor_name
     dataset.sponsor.try(:name) || 'lter'
+  end
+
+  def website_name
+    dataset.website.try(:name) || 'lter'
   end
 
   def study_link_for(website)
