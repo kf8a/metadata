@@ -60,6 +60,10 @@ class Dataset < ActiveRecord::Base
     "knb-lter-kbs.#{metacat_id.nil? ? self.id : metacat_id}.#{version}"
   end
 
+  def datatable_protocols
+    datatables.collect {|datatable| datatable.protocols}
+  end
+
   def to_eml
     @eml = Builder::XmlMarkup.new
     @eml.instruct! :xml, :version => '1.0'
@@ -73,6 +77,9 @@ class Dataset < ActiveRecord::Base
         'packageId'           => package_id,
         'system'              => 'KBS LTER') do
       eml_access
+      (protocols + datatable_protocols).flatten.uniq.each do | protocol |
+        @eml.protocol 'id' => "protocol_#{protocol.id}"
+      end
       @eml.dataset do
         @eml.title title
         @eml.creator 'id' => 'KBS LTER' do

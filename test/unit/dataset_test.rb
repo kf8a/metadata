@@ -173,11 +173,14 @@ class DatasetTest < ActiveSupport::TestCase
 
     context 'dataset with protocols in the datatables' do
       setup do
-        protocol = Factory.create(:protocol)
-        @dataset.protocols << protocol
+        @protocol = Factory.create(:protocol, :dataset => @dataset)
+        @dataset.protocols << @protocol
       end
 
-      should 'have a methods section'
+      should "have a protocol section" do
+        eml_doc = Nokogiri::XML(@dataset.to_eml)
+        assert_equal 1, eml_doc.css('protocol').count
+      end
     end
   end
 
