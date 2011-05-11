@@ -77,50 +77,9 @@ class Dataset < ActiveRecord::Base
         'packageId'           => package_id,
         'system'              => 'KBS LTER') do
       eml_access
-      (protocols + datatable_protocols).flatten.uniq.each do | protocol |
-        @eml.protocol 'id' => "protocol_#{protocol.id}"
-      end
-      @eml.dataset do
-        @eml.title title
-        @eml.creator 'id' => 'KBS LTER' do
-          @eml.positionName 'Data Manager'
-        end
-        [people, datatable_people].flatten.uniq.each do |person|
-          person.to_eml(@eml)
-        end
-        @eml.abstract do
-          @eml.para textilize(abstract)
-        end
-        keyword_sets
-        contact_info
-        if protocols.present?
-          @eml.methods do
-            protocols.each { |protocol| protocol.to_eml_ref(@eml) }
-          end
-        end
-        datatables.each do |datatable|
-          if datatable.valid_for_eml
-            datatable.to_eml(@eml)
-          end
-        end
-        unless initiated.nil? or completed.nil?
-          @eml.coverage do
-            @eml.temporalCoverage do
-              @eml.rangeOfDates do
-                @eml.beginDate do
-                  @eml.calendarDate initiated.to_s
-                end
-                @eml.endDate do
-                  @eml.calendarDate completed.to_s
-                end
-              end
-            end
-          end
-        end
-      end
-      if custom_units.present?
-        eml_custom_unit_list
-      end
+      eml_protocols
+      eml_dataset
+      eml_custom_unit_list if custom_units.present?
     end
   end
 
@@ -193,6 +152,36 @@ class Dataset < ActiveRecord::Base
     end
   end
 
+  def eml_protocols
+    (protocols + datatable_protocols).flatten.uniq.each do | protocol |
+      @eml.protocol 'id' => "protocol_#{protocol.id}"
+    end
+  end
+
+  def eml_dataset
+    @eml.dataset do
+      @eml.title title
+      @eml.creator 'id' => 'KBS LTER' do
+        @eml.positionName 'Data Manager'
+      end
+      [people, datatable_people].flatten.uniq.each do |person|
+        person.to_eml(@eml)
+      end
+      @eml.abstract do
+        @eml.para textilize(abstract)
+      end
+      keyword_sets
+      contact_info
+      if protocols.present?
+        @eml.methods do
+          protocols.each { |protocol| protocol.to_eml_ref(@eml) }
+        end
+      end
+      datatables.each { |table| table.to_eml(@eml) if table.valid_for_eml }
+      eml_temporal_coverage if initiated.present? && completed.present?
+    end
+  end
+
   def keyword_sets
     @eml.keywordSet do
       ['LTER','KBS','Kellogg Biological Station', 'Hickory Corners', 'Michigan', 'Great Lakes'].each do| keyword |
@@ -212,6 +201,21 @@ class Dataset < ActiveRecord::Base
       p.eml_address
       @eml.electronicMailAddress 'data.manager@kbs.msu.edu'
       @eml.onlineUrl 'http://lter.kbs.msu.edu'
+    end
+  end
+
+  def eml_temporal_coverage
+    @eml.coverage do
+      @eml.temporalCoverage do
+        @eml.rangeOfDates do
+          @eml.beginDate do
+            @eml.calendarDate initiated.to_s
+          end
+          @eml.endDate do
+            @eml.calendarDate completed.to_s
+          end
+        end
+      end
     end
   end
 end
