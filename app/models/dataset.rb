@@ -93,6 +93,17 @@ class Dataset < ActiveRecord::Base
         end
         keyword_sets
         contact_info
+        if protocols.present?
+          @eml.methods do
+            protocols.each do |protocol|
+              @eml.methodStep do
+                @eml.protocol do
+                  @eml.references "protocol_#{protocol.id}"
+                end
+              end
+            end
+          end
+        end
         datatables.each do |datatable|
           if datatable.valid_for_eml
             datatable.to_eml(@eml)
