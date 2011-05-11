@@ -158,27 +158,45 @@ class Dataset < ActiveRecord::Base
     end
   end
 
+  def eml_dataset_protocols
+    @eml.methods do
+      protocols.each { |protocol| protocol.to_eml_ref(@eml) }
+    end
+  end
+
   def eml_dataset
     @eml.dataset do
-      @eml.title title
-      @eml.creator 'id' => 'KBS LTER' do
-        @eml.positionName 'Data Manager'
-      end
-      [people, datatable_people].flatten.uniq.each do |person|
-        person.to_eml(@eml)
-      end
-      @eml.abstract do
-        @eml.para textilize(abstract)
-      end
-      keyword_sets
+      eml_resource_group
       contact_info
-      if protocols.present?
-        @eml.methods do
-          protocols.each { |protocol| protocol.to_eml_ref(@eml) }
-        end
-      end
+      eml_dataset_protocols if protocols.present?
       datatables.each { |table| table.to_eml(@eml) if table.valid_for_eml }
-      eml_temporal_coverage if initiated.present? && completed.present?
+    end
+  end
+
+  def eml_resource_group
+    @eml.title title
+    eml_creator
+    eml_people
+    eml_abstract
+    keyword_sets
+    eml_coverage
+  end
+
+  def eml_creator
+    @eml.creator 'id' => 'KBS LTER' do
+      @eml.positionName 'Data Manager'
+    end
+  end
+
+  def eml_people
+    [people, datatable_people].flatten.uniq.each do |person|
+      person.to_eml(@eml)
+    end
+  end
+
+  def eml_abstract
+    @eml.abstract do
+      @eml.para textilize(abstract)
     end
   end
 
@@ -204,17 +222,17 @@ class Dataset < ActiveRecord::Base
     end
   end
 
-  def eml_temporal_coverage
+  def eml_coverage
     @eml.coverage do
-      @eml.temporalCoverage do
-        @eml.rangeOfDates do
-          @eml.beginDate do
-            @eml.calendarDate initiated.to_s
-          end
-          @eml.endDate do
-            @eml.calendarDate completed.to_s
-          end
-        end
+      eml_temporal_coverage if initiated.present? && completed.present?
+    end
+  end
+
+  def eml_temporal_coverage
+    @eml.temporalCoverage do
+      @eml.rangeOfDates do
+        @eml.beginDate { @eml.calendarDate initiated.to_s }
+        @eml.endDate   { @eml.calendarDate completed.to_s }
       end
     end
   end
