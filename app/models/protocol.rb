@@ -11,6 +11,14 @@ class Protocol < ActiveRecord::Base
     "#{self.title}"
   end
 
+  def to_eml_ref(xml = Builder::XmlMarkup.new)
+    xml.methodStep do
+      xml.protocol do
+        xml.references "protocol_#{self.id}"
+      end
+    end
+  end
+
   def deprecate!(other)
     other.active = false
     other.save

@@ -177,17 +177,7 @@ class Datatable < ActiveRecord::Base
     @eml.dataTable 'id' => name do
       @eml.entityName title
       @eml.entityDescription description.gsub(/<\/?[^>]*>/, "")
-      if non_dataset_protocols.present?
-        @eml.methods do
-          non_dataset_protocols.each do |protocol|
-            @eml.methodStep do
-              @eml.protocol do
-                @eml.references "protocol_#{protocol.id}"
-              end
-            end
-          end
-        end
-      end
+      eml_protocols if non_dataset_protocols.present?
       eml_physical
       eml_attributes
     end
@@ -319,6 +309,12 @@ class Datatable < ActiveRecord::Base
       [Time.parse(values[0]['min']).to_date,Time.parse(values[0]['max']).to_date]
     else # assume is a year
       [Time.parse(values[0]['min'].to_s + '-1-1').to_date,Time.parse(values[0]['max'].to_s + '-1-1').to_date ]
+    end
+  end
+
+  def eml_protocols
+    @eml.methods do
+      non_dataset_protocols.each { |protocol| protocol.to_eml_ref(@eml) }
     end
   end
 

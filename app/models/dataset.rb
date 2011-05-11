@@ -95,13 +95,7 @@ class Dataset < ActiveRecord::Base
         contact_info
         if protocols.present?
           @eml.methods do
-            protocols.each do |protocol|
-              @eml.methodStep do
-                @eml.protocol do
-                  @eml.references "protocol_#{protocol.id}"
-                end
-              end
-            end
+            protocols.each { |protocol| protocol.to_eml_ref(@eml) }
           end
         end
         datatables.each do |datatable|
