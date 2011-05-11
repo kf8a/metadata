@@ -451,10 +451,23 @@ class DatatableTest < ActiveSupport::TestCase
         assert @eml.to_s =~ /datatable/
       end
 
-      #TODO this is obviously brittle and should probably be redone with proper parsing
-      #should "be the exact right eml" do
-        #assert_equal "<dataTable id=\"KBS001_001\"><entityName>a really cool datatable</entityName><entityDescription>This is a datatable</entityDescription><physical><objectName>a really cool datatable</objectName><encodingMethod>None</encodingMethod><dataFormat><textFormat><numHeaderLines>4</numHeaderLines><attributeOrientation>column</attributeOrientation><simpleDelimited><fieldDelimiter>,</fieldDelimiter></simpleDelimited></textFormat></dataFormat><distribution><online><url></url></online></distribution></physical><attributeList><attribute><attributeName>date</attributeName><attributeDefinition>generic variate</attributeDefinition><measurementScale><dateTime><formatString></formatString><dateTimePrecision>86400</dateTimePrecision><dateTimeDomain><bounds><minimum exclusive=\"true\">1987-4-18</minimum></bounds></dateTimeDomain></dateTime></measurementScale></attribute></attributeList></dataTable>", @eml.to_s
-      #end
+      context '#to_eml' do
+        setup do
+          @to_eml = Nokogiri::XML(@datatable.to_eml)
+        end
+
+        should 'include the datatable id' do
+          assert_equal 1, @to_eml.css("dataTable##{@datatable.name}").count
+        end
+
+        should 'include an entityName element' do
+          assert_equal 'a really cool datatable', @to_eml.at_css('dataTable entityName').text
+        end
+
+        should 'include an entityDescription element' do
+          assert_equal 'This is a datatable', @to_eml.at_css('dataTable entityDescription').text
+        end
+      end
     end
 
     context 'climbdb format' do
