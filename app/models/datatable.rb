@@ -168,11 +168,26 @@ class Datatable < ActiveRecord::Base
     title + reply
   end
 
+  def non_dataset_protocols
+    protocols.reject { |protocol| dataset.protocols.include?(protocol) }.compact
+  end
+
   def to_eml(xml = Builder::XmlMarkup.new)
     @eml = xml
     @eml.dataTable 'id' => name do
       @eml.entityName title
       @eml.entityDescription description.gsub(/<\/?[^>]*>/, "")
+      if non_dataset_protocols.present?
+        @eml.methods do
+          non_dataset_protocols.each do |protocol|
+            @eml.methodStep do
+              @eml.protocol do
+                @eml.references "protocol_#{protocol.id}"
+              end
+            end
+          end
+        end
+      end
       eml_physical
       eml_attributes
     end

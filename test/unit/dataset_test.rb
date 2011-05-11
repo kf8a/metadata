@@ -144,7 +144,9 @@ class DatasetTest < ActiveSupport::TestCase
   context 'eml generatation' do
     setup do
       @dataset = Factory.create(:dataset, :initiated => Date.today, :completed => Date.today)
-      @dataset_with_datatable = Factory.create(:datatable).dataset
+      @datatable = Factory.create(:datatable)
+      @dataset_with_datatable = @datatable.dataset
+      assert @datatable.valid_for_eml
     end
 
     should 'not be empty' do
@@ -175,6 +177,8 @@ class DatasetTest < ActiveSupport::TestCase
       setup do
         @protocol = Factory.create(:protocol, :dataset => @dataset)
         @dataset.protocols << @protocol
+        @protocol2 = Factory.create(:protocol)
+        @datatable.protocols << @protocol2
       end
 
       should "have a top level protocol section" do
@@ -185,6 +189,11 @@ class DatasetTest < ActiveSupport::TestCase
       should "have a dataset methods methodStep protocol section" do
         eml_doc = Nokogiri::XML(@dataset.to_eml)
         assert_equal 1, eml_doc.css('dataset methods methodStep protocol').count
+      end
+
+      should 'have any extra protocols referenced in datatable' do
+        eml_doc = Nokogiri::XML(@dataset_with_datatable.to_eml)
+        assert_equal 1, eml_doc.css('dataTable methods methodStep protocol').count
       end
     end
   end

@@ -130,7 +130,6 @@ class Dataset < ActiveRecord::Base
     end
   end
 
-
   #temporal extent
   def temporal_extent
     begin_date = nil
