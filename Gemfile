@@ -31,9 +31,6 @@ gem 'parslet'
 # for creating bibtex formatted citations
 gem 'bibtex-ruby'
 
-#Gets rid of annoying UTF-8 string error in rack
-gem "escape_utils"
-
 gem 'metric_fu'
 
 gem 'jammit'
