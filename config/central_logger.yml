@@ -1,0 +1,12 @@
+production:
+   database: my_app
+   capsize: <%= 10.megabytes %>
+   host: localhost
+   port: 27017
+   replica_set: true
+
+development:
+  port: 3000
+
+test:
+  port: 3000

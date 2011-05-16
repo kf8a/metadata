@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   include Clearance::Authentication
+  include CentralLogger::Filter
 
   layout :site_layout
 
