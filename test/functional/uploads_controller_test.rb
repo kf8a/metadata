@@ -3,7 +3,17 @@ require File.expand_path('../../test_helper',__FILE__)
 class UploadsControllerTest < ActionController::TestCase
 
   def setup
-    @controller.current_user = User.new(:role=>'admin')
+    #TODO test as non-admin
+    signed_in_as_admin
+  end
+
+  context 'GET :index' do
+    setup do
+      get :index
+    end
+
+    should respond_with :success
+    should assign_to :uploads
   end
   
   test "should get new" do

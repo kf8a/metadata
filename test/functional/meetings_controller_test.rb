@@ -1,8 +1,5 @@
 require File.expand_path('../../test_helper',__FILE__)
 
-# Re-raise errors caught by the controller.
-class MeetingsController; def rescue_action(e) raise e end; end
-
 class MeetingsControllerTest < ActionController::TestCase
 
   def setup
@@ -120,6 +117,16 @@ class MeetingsControllerTest < ActionController::TestCase
       end
 
       should redirect_to("meetings page") {meetings_url}
+    end
+
+    context "DELETE :destroy abstract, js format" do
+      setup do
+        xhr :delete, :destroy, :id => @meeting
+      end
+
+      should_not render_with_layout
+      should_not respond_with(:redirect)
+      should respond_with(:success)
     end
   end
 

@@ -16,6 +16,14 @@ class ProtocolsControllerTest < ActionController::TestCase
       should respond_with(:success)
     end
 
+    context 'GET :edit' do
+      setup do
+        get :edit, :id => @protocol
+      end
+
+      should respond_with(:success)
+    end
+
     context 'POST: create' do
       setup do
         post :create, :protocol => {:dataset_id => 35 }
@@ -33,7 +41,7 @@ class ProtocolsControllerTest < ActionController::TestCase
       should redirect_to("the show page") {protocol_url(assigns(:protocol))}
     end
 
-    context 'POST :update' do
+    context 'PUT :update' do
       setup do
         put :update, :id => @protocol, :protocol => {:description => 'A brand new description'}
       end
