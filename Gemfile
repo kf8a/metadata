@@ -43,7 +43,7 @@ gem 'rack-offline'
 
 gem 'dalli'
 
-gem 'central_logger'
+#gem 'central_logger'
 
 group :development, :test  do
   # bundler requires these gems in development
