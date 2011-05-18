@@ -18,33 +18,22 @@ class PagesController < ApplicationController
   
   def create
     @page = Page.new(params[:page])
-
-    respond_to do |format|
-      if @page.save
-        flash[:notice] = 'Page was successfully created.'
-        format.html { redirect_to page_url(@page) }
-        format.xml  { head :created, :location => datatable_url(@page) }
-      else
-        format.html { render_subdomain "new" }
-        format.xml  { render :xml => @page.errors.to_xml }
-      end
+    if @page.save
+      flash[:notice] = 'Page was successfully created.'
     end
+
+    respond_with @page
   end
   
   def edit
   end
   
   def update
-    respond_to do |format|
-      if @page.update_attributes(params[:page])
-        flash[:notice] = 'Page was successfully updated.'
-        format.html { redirect_to page_url(@page) }
-        format.xml  { head :ok }
-      else
-        format.html { render_subdomain "edit" }
-        format.xml  { render :xml => @page.errors.to_xml }
-      end
+    if @page.update_attributes(params[:page])
+      flash[:notice] = 'Page was successfully updated.'
     end
+
+    respond_with @page
   end
   
   def destroy 

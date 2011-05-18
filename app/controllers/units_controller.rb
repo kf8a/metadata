@@ -13,16 +13,10 @@ class UnitsController < ApplicationController
   end
   
   def update
-    respond_to do |format|
-      if @unit.update_attributes(params[:unit])
-        flash[:notice] = 'Unit was succesfully updated'
-        format.html {redirect_to unit_url(@unit)}
-        format.xml {head :ok}
-      else
-        format.html {render :action => 'edit'}
-        format.xml { render :xml => @unit.errors.to_xml }
-      end
+    if @unit.update_attributes(params[:unit])
+      flash[:notice] = 'Unit was succesfully updated'
     end
+    respond_with @unit
   end
   
   def show

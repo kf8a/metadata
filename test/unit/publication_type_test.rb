@@ -7,3 +7,12 @@ class PublicationTypeTest < ActiveSupport::TestCase
     assert true
   end
 end
+
+# == Schema Information
+#
+# Table name: publication_types
+#
+#  id   :integer         not null, primary key
+#  name :string(255)
+#
+

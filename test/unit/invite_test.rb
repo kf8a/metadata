@@ -21,3 +21,18 @@ class InviteTest < ActiveSupport::TestCase
 
   end
 end
+
+# == Schema Information
+#
+# Table name: invites
+#
+#  id           :integer         not null, primary key
+#  firstname    :string(255)
+#  lastname     :string(255)
+#  email        :string(255)
+#  invite_code  :string(40)
+#  invited_at   :datetime
+#  redeemed_at  :datetime
+#  glbrc_member :boolean
+#
+

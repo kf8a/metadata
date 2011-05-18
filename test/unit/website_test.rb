@@ -38,3 +38,16 @@ class WebsiteTest < ActiveSupport::TestCase
 
   end
 end
+
+
+# == Schema Information
+#
+# Table name: websites
+#
+#  id                 :integer         not null, primary key
+#  name               :string(255)
+#  created_at         :datetime
+#  updated_at         :datetime
+#  data_catalog_intro :text
+#
+

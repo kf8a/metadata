@@ -1,1 +1,1 @@
-jQuery('#affiliations').append("<%= escape_javascript(render(:partial => 'new')) %>");  
+jQuery('#affiliations').append("<%= escape_javascript(render('new', :affiliation => @affiliation)) %>");  

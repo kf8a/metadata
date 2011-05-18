@@ -52,3 +52,8 @@ Given /^the datatable sponsored by "([^"]*)"$/ do |sponsor|
   datatable = Datatable.last
   datatable.dataset.sponsor.name = sponsor
 end
+
+Then /^I should see the old date$/ do
+  old_date = Time.now.year - 3
+  Then %{I should see "Old Datatable (#{old_date})"}
+end

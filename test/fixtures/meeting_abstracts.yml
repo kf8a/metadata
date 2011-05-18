@@ -2269,3 +2269,20 @@ meeting_abstracts_355:
   authors: "Ederson da Concei\xC3\xA7\xC3\xA3o, J., S. Smith, E. Susilawati, Q. Wang, J. Rodrigues, and J.M. Tiedje"
   abstract: The region around plant roots - the rhizosphere -harbors different microbial species which can fix nitrogen, protect plants against bacterial pathogens, produce plant growth factors and aid soil structure, thus providing for the overall promotion of plant growth. Managing these microbial communities can help to improve biomass production and decrease production costs as well. One of the steps toward reaching this goal is to know which species are present in the rhizosphere community and how environmental and plant factors affect microbial community structure. We studied bacterial communities in soils cultivated with several crops with potential to be used as biofuel crops, i.e. switchgrass, big blue stem, orchard grass, tall fescue, corn, soybean, canola and sunflower. Bulk and rhizosphere soil communities have been analyzed. 16S rRNA gene sequences have been amplified from community DNA with tagged-primers and sequenced by 454 technology, generating thousands of sequences that have been used for analysis of community structure and composition. Preliminary results from soils cultivated with switchgrass, big blue stem, orchard grass and tall fescue show that differences in bacterial community structure and composition were correlated to plant genotype and soil attributes, such as pH and nutrient concentrations. This correlation accounted for about 29% of the variation in the studied bacterial communities. Clearer differences were observed when rhizosphere soil was examined compared to bulk soil, which can be explained by the fact that the influence of plant genotype is stronger in the rhizosphere than in the bulk soil. Several phyla were found with Proteobacteria, Acidobacteria and Actinobacteria among the most abundant.
   meeting_id: "16"
+
+
+# == Schema Information
+#
+# Table name: meeting_abstracts
+#
+#  id               :integer         not null, primary key
+#  title            :text
+#  authors          :text
+#  abstract         :text
+#  meeting_id       :integer
+#  pdf_file_name    :string(255)
+#  pdf_content_type :string(255)
+#  pdf_file_size    :integer
+#  pdf_updated_at   :datetime
+#
+

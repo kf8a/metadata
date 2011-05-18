@@ -98,6 +98,8 @@ unless Factory.factories.include?(:affiliation) #prevent redefining these factor
 
   Factory.define :variate do |v|
     v.name 'date'
+    v.description 'generic variate'
+    v.measurement_scale 'dateTime'
   end
 
   Factory.define :venue_type do |v|
@@ -129,6 +131,11 @@ unless Factory.factories.include?(:affiliation) #prevent redefining these factor
     d.weight        100
     d.association   :theme
     d.association   :dataset
+    d.variates      [Factory.create(:variate)]
+  end
+
+  Factory.define :old_datatable, :parent => :datatable do |datatable|
+    datatable.object   %q{select now() - interval '3 year' as sample_date}
   end
 
   Factory.define :ownership do |o|

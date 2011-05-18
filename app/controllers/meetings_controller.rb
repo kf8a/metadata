@@ -27,11 +27,11 @@ class MeetingsController < ApplicationController
 
   def new
     @meeting = Meeting.new
-    @venues = VenueType.find(:all).collect {|x| [x.name, x.id]}
+    @venues = VenueType.find(:all).collect { |type| [type.name, type.id] }
   end
   
   def edit
-    @venues = VenueType.find(:all).collect {|x| [x.name, x.id]}
+    @venues = VenueType.find(:all).collect { |type| [type.name, type.id] }
   end
   
   def create
@@ -42,8 +42,8 @@ class MeetingsController < ApplicationController
         format.html { redirect_to meetings_url }
         format.xml  { head :created, :location => meeting_url(@meeting) }
       else
-        @venues = VenueType.find(:all).collect {|x| [x.name, x.id]}
-        format.html { render :action => "new" }
+        @venues = VenueType.find(:all).collect { |type| [type.name, type.id] }
+        format.html { render "new" }
         format.xml  { render :xml => @meeting.errors.to_xml }
       end
     end
@@ -56,8 +56,8 @@ class MeetingsController < ApplicationController
          format.html { redirect_to meeting_url(@meeting) }
          format.xml  { head :ok }
        else
-         @venues = VenueType.find(:all).collect {|x| [x.name, x.id]}
-         format.html { render :action => "edit" }
+         @venues = VenueType.find(:all).collect { |type| [type.name, type.id] }
+         format.html { render "edit" }
          format.xml  { render :xml => @meeting.errors.to_xml }
        end
      end

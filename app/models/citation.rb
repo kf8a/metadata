@@ -16,11 +16,11 @@ class Citation < ActiveRecord::Base
 
   if Rails.env.production?
     has_attached_file :pdf,
-                      :storage => :s3,
-                      :bucket => 'metadata_production',
-                      :path => "/citations/pdfs/:id/:style/:basename.:extension",
-                      :s3_credentials => File.join(Rails.root, 'config', 's3.yml'),
-                      :s3_permissions => 'authenticated-read'
+        :storage => :s3,
+        :bucket => 'metadata_production',
+        :path => "/citations/pdfs/:id/:style/:basename.:extension",
+        :s3_credentials => File.join(Rails.root, 'config', 's3.yml'),
+        :s3_permissions => 'authenticated-read'
   else
     has_attached_file :pdf, :url => "/citations/:id/download",
         :path => ":rails_root/assets/citations/:attachment/:id/:style/:basename.:extension"
@@ -62,25 +62,22 @@ class Citation < ActiveRecord::Base
   end
 
   def Citation.to_enw(array_of_citations)
-    array_of_citations.collect {|x| x.to_enw}.join("\r\n\r\n")
+    array_of_citations.collect { |citation| citation.to_enw }.join("\r\n\r\n")
   end
 
   def Citation.to_bib(array_of_citations)
     bib = BibTeX::Bibliography.new
-    array_of_citations.each {|x| bib << x.to_bib}
+    array_of_citations.each {|citation| bib << citation.to_bib}
 
     bib.to_s
   end
 
   def Citation.sorted_by(sorter)
+    sorter.downcase!
     #Since primary author and date is default, it is already sorted that way
-    unless sorter.downcase == "primary author and date(default)"
-      order(sorter.downcase)
+    unless sorter == "primary author and date(default)"
+      order(sorter)
     end
-  end
-
-  def Citation.by_type(type)
-    where(:type => type) if type
   end
 
   def file_title
@@ -88,7 +85,7 @@ class Citation < ActiveRecord::Base
   end
 
   def book?
-    type == BookCitation || citation_type.try(:name) == 'book'
+    citation_type.try(:name) == 'book'
   end
 
   def formatted
@@ -97,24 +94,30 @@ class Citation < ActiveRecord::Base
 
   def to_bib
     entry = BibTeX::Entry.new
-    entry.type = bibtex_type
+    entry.type = bibtex_type.to_s
     entry.key = "citation_#{id}"
-    entry[:abstract] = abstract if abstract.present?
-    entry[:author] = authors.collect { |author| "#{author.given_name} #{author.middle_name} #{author.sur_name}"}.join(' and ')
-    entry[:editor] = editors.collect { |editor| "#{editor.given_name} #{editor.middle_name} #{editor.sur_name}"}.join(' and ')
-    entry[:title] = title if title.present?
-    entry[:publisher] = publisher if publisher.present?
-    entry[:year] = pub_year.to_s if pub_year.present?
-    entry[:address] = address if address.present?
-    entry[:note] = notes if notes.present?
-    entry[:journal] = publication if publication.present?
-    entry[:pages] = page_numbers if page_numbers.present?
-    entry[:volume] = volume if volume.present?
-    entry[:number] = issue if issue.present?
-    entry[:series] = series_title if series_title.present?
-    entry[:isbn] = isbn if isbn.present?
+    entry << bib_hash
 
     entry
+  end
+
+  def bib_hash
+    hash = {
+      :abstract   => abstract,
+      :author     => authors.collect { |author| "#{author.given_name} #{author.middle_name} #{author.sur_name}"}.join(' and '),
+      :editor     => editors.collect { |editor| "#{editor.given_name} #{editor.middle_name} #{editor.sur_name}"}.join(' and '),
+      :title      => title,
+      :publisher  => publisher,
+      :year       => pub_year.to_s,
+      :address    => address,
+      :note       => notes,
+      :journal    => publication,
+      :pages      => page_numbers,
+      :volume     => volume,
+      :number     => issue,
+      :series     => series_title,
+      :isbn       => isbn}
+    hash.delete_if { |key, value| value.blank? }
   end
 
   def to_enw
@@ -133,10 +136,10 @@ class Citation < ActiveRecord::Base
     endnote += "\n%@ #{isbn}" if isbn
     endnote
   end
-  
+
   def self.select_options
-    classes = descendants.map{ |c| c.to_s }.sort
-    classes.collect {|c| [c.gsub(/Citation/,''), c] }
+    classes = descendants.map{ |klass| klass.to_s }.sort
+    classes.collect { |klass| [klass.gsub(/Citation/,''), klass] }
   end
 
   private
@@ -172,9 +175,7 @@ class Citation < ActiveRecord::Base
   end
 
   def page_numbers
-    if start_page_number.blank?
-      ""
-    elsif !ending_page_number.blank? && start_page_number != ending_page_number
+    if start_page_number.to_i < ending_page_number.to_i
       "#{start_page_number}-#{ending_page_number}"
     else
       "#{start_page_number}"
@@ -220,3 +221,42 @@ class Citation < ActiveRecord::Base
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: citations
+#
+#  id                      :integer         not null, primary key
+#  title                   :text
+#  abstract                :text
+#  pub_date                :date
+#  pub_year                :integer
+#  citation_type_id        :integer
+#  address                 :text
+#  notes                   :text
+#  publication             :string(255)
+#  start_page_number       :integer
+#  ending_page_number      :integer
+#  periodical_full_name    :text
+#  periodical_abbreviation :string(255)
+#  volume                  :string(255)
+#  issue                   :string(255)
+#  city                    :string(255)
+#  publisher               :string(255)
+#  secondary_title         :string(255)
+#  series_title            :string(255)
+#  isbn                    :string(255)
+#  doi                     :string(255)
+#  full_text               :text
+#  publisher_url           :string(255)
+#  website_id              :integer
+#  created_at              :datetime
+#  updated_at              :datetime
+#  pdf_file_name           :string(255)
+#  pdf_content_type        :string(255)
+#  pdf_file_size           :integer
+#  pdf_updated_at          :datetime
+#  state                   :string(255)
+#  type                    :string(255)
+#  open_access             :boolean         default(FALSE)
+#

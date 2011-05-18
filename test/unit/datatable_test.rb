@@ -450,6 +450,24 @@ class DatatableTest < ActiveSupport::TestCase
       should 'return an eml datatable fragment' do
         assert @eml.to_s =~ /datatable/
       end
+
+      context '#to_eml' do
+        setup do
+          @to_eml = Nokogiri::XML(@datatable.to_eml)
+        end
+
+        should 'include the datatable id' do
+          assert_equal 1, @to_eml.css("dataTable##{@datatable.name}").count
+        end
+
+        should 'include an entityName element' do
+          assert_equal 'a really cool datatable', @to_eml.at_css('dataTable entityName').text
+        end
+
+        should 'include an entityDescription element' do
+          assert_equal 'This is a datatable', @to_eml.at_css('dataTable entityDescription').text
+        end
+      end
     end
 
     context 'climbdb format' do
@@ -483,7 +501,9 @@ class DatatableTest < ActiveSupport::TestCase
       end
 
       should 'return the data in the right order' do
-        assert_equal '1', CSV.parse(@datatable.raw_csv)[1][0]
+        data = CSV.parse(@datatable.raw_csv)
+        b_column = data[0].index("b")
+        assert_equal '1', data[1][b_column]
       end
 
       context 'with comment' do
@@ -498,3 +518,41 @@ class DatatableTest < ActiveSupport::TestCase
   end
 
 end
+
+# == Schema Information
+#
+# Table name: datatables
+#
+#  id                    :integer         not null, primary key
+#  name                  :string(255)
+#  title                 :string(255)
+#  comments              :text
+#  dataset_id            :integer
+#  data_url              :string(255)
+#  connection_url        :string(255)
+#  driver                :string(255)
+#  is_restricted         :boolean
+#  description           :text
+#  object                :text
+#  metadata_url          :string(255)
+#  is_sql                :boolean
+#  update_frequency_days :integer
+#  last_updated_on       :date
+#  access_statement      :text
+#  excerpt_limit         :integer
+#  begin_date            :date
+#  end_date              :date
+#  on_web                :boolean         default(TRUE)
+#  theme_id              :integer
+#  core_area_id          :integer
+#  weight                :integer         default(100)
+#  study_id              :integer
+#  created_at            :datetime
+#  updated_at            :datetime
+#  is_secondary          :boolean         default(FALSE)
+#  is_utf_8              :boolean         default(FALSE)
+#  metadata_only         :boolean         default(FALSE)
+#  summary_graph         :text
+#  event_query           :text
+#
+

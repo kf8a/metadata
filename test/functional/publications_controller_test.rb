@@ -96,10 +96,25 @@ class PublicationsControllerTest < ActionController::TestCase
   end
   
   def test_should_destroy_publication
+    @publication = Factory.create(:publication)
     old_count = Publication.count
-    delete :destroy, :id => 18
+    delete :destroy, :id => @publication
     assert_equal old_count-1, Publication.count
     
     assert_redirected_to publications_path
+  end
+
+  context 'A publication exists. ' do
+    setup do
+      @publication = Factory.create(:publication)
+    end
+
+    context 'DELETE :destroy the publication in javascript' do
+      setup do
+        xhr :delete, :destroy, :id => @publication
+      end
+
+      should respond_with(:success)
+    end
   end
 end

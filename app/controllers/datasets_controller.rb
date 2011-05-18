@@ -21,7 +21,6 @@ class DatasetsController < ApplicationController
     @themes         = Theme.by_weight
     @datasets       = Dataset.all
     @studies        = collect_and_normalize_studies(@datasets)
-    @studies        = [@study] if @study
     @crumbs         = []
     respond_to do |format|
       format.html {redirect_to datatables_path}
@@ -37,10 +36,8 @@ class DatasetsController < ApplicationController
     @title    = @dataset.title
 
     if @dataset.valid_request?(@subdomain_request)
-      respond_to do |format|
-        format.html { render_subdomain }
+      respond_with @dataset do |format|
         format.eml { render :xml => @dataset.to_eml }
-        format.xml  { render :xml => @dataset.to_xml }
       end
     else
       redirect_to datasets_url
@@ -58,8 +55,8 @@ class DatasetsController < ApplicationController
     @studies = Study.by_weight
     @themes = Theme.by_weight
     @roles  = Role.find_all_by_role_type_id(RoleType.find_by_name('lter_dataset'))
-    @websites = Website.all.collect {|x| [x.name, x.id]}
-    @sponsors = Sponsor.all.collect {|x| [x.name, x.id]}
+    @websites = Website.all.collect {|website| [website.name, website.id]}
+    @sponsors = Sponsor.all.collect {|sponsor| [sponsor.name, sponsor.id]}
   end
   
   # POST /dataset/new_affiliation 
@@ -86,34 +83,21 @@ class DatasetsController < ApplicationController
   # POST /datasets.xml
   def create
     @dataset = Dataset.new(params[:dataset])
-
-    respond_to do |format|
-      if @dataset.save
-        flash[:notice] = 'Dataset was successfully created.'
-        format.html { redirect_to dataset_url(@dataset) }
-        format.xml  { head :created, :location => dataset_url(@dataset) }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @dataset.errors.to_xml }
-      end
+    if @dataset.save
+      flash[:notice] = 'Dataset was successfully created.'
     end
+    respond_with @dataset
   end
 
   # PUT /datasets/1
   # PUT /datasets/1.xml
   def update
-    @sponsors = Sponsor.all.collect {|x| [x.name, x.id]}
-    @websites = Website.all.collect {|x| [x.name, x.id]}
-    respond_to do |format|
-      if @dataset.update_attributes(params[:dataset])
-        flash[:notice] = 'Dataset was successfully updated.'
-        format.html { redirect_to dataset_url(@dataset) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @dataset.errors.to_xml }
-      end
+    @sponsors = Sponsor.all.collect {|sponsor| [sponsor.name, sponsor.id]}
+    @websites = Website.all.collect {|website| [website.name, website.id]}
+    if @dataset.update_attributes(params[:dataset])
+      flash[:notice] = 'Dataset was successfully updated.'
     end
+    respond_with @dataset
   end
 
   # DELETE /datasets/1
@@ -159,7 +143,7 @@ class DatasetsController < ApplicationController
     @studies.flatten!
     @studies.compact!
     @studies.uniq!
-    @studies.sort! {|a,b| a.weight <=> b.weight}
+    @studies.sort_by! { |study| study.weight }
   end
   
   def get_dataset

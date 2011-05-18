@@ -19,7 +19,6 @@ gem 'thinking-sphinx'
 gem 'liquid'
 gem 'clearance'
 gem 'formtastic'
-gem 'less'
 gem 'awesome_nested_set', :git => 'git://github.com/galetahub/awesome_nested_set.git'
 gem 'thin'
 gem 'jquery-rails', '>= 0.2.6'
@@ -31,9 +30,6 @@ gem 'parslet'
 
 # for creating bibtex formatted citations
 gem 'bibtex-ruby'
-
-#Gets rid of annoying UTF-8 string error in rack
-gem "escape_utils"
 
 gem 'metric_fu'
 
@@ -47,6 +43,8 @@ gem 'rack-offline'
 
 gem 'dalli'
 
+#gem 'central_logger'
+
 group :development, :test  do
   # bundler requires these gems in development
   # gem "rails-footnotes"
@@ -55,6 +53,7 @@ group :development, :test  do
   gem "shoulda"
   gem 'rspec-rails'
   gem "rspec"
+  gem "annotate"
 end
 
 group :test do

@@ -1,8 +1,8 @@
 <li><%= theme.name %>
   <ul>
-    <% datatables = theme.datatables_in_study(study, @datatables) -%>
-    <% datatables.sort! {|a,b| sprintf("%.5i",a.weight) + a.title <=> sprintf("%.5i",b.weight) + b.title}%>
-    <% datatables.each do |datatable| -%>
+    <% theme_datatables = theme.datatables_in_study(study, datatables) -%>
+    <% theme_datatables.sort! {|a,b| sprintf("%.5i",a.weight) + a.title <=> sprintf("%.5i",b.weight) + b.title}%>
+    <% theme_datatables.each do |datatable| -%>
       <li>
         <%=link_to raw(datatable.title_and_years), datatable_path(datatable) %>
           <span class='member-only'>
@@ -13,9 +13,9 @@
     
     <% theme.children.each do |t| -%>
 
-      <% next unless t.include_datatables_from_study?(@datatables, study) -%>
+      <% next unless t.include_datatables_from_study?(datatables, study) -%>
   
-      <%= render :partial => 'theme',  :locals => {:theme => t, :study => study}%>
+      <%= render 'theme', :theme => t, :study => study, :datatables => datatables %>
 
     <% end -%>
 

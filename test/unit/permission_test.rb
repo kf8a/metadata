@@ -92,7 +92,7 @@ class PermissionTest < ActiveSupport::TestCase
       owner2       = Factory :user
       Factory.create(:ownership, :user => owner2, :datatable => @datatable)
       @datatable.reload
-      assert @datatable.owners == [@owner, owner2]
+      assert_equal [@owner, owner2], @datatable.owners
 
       p1           = Permission.new
       p1.datatable = @datatable
@@ -131,3 +131,17 @@ class PermissionTest < ActiveSupport::TestCase
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: permissions
+#
+#  id           :integer         not null, primary key
+#  user_id      :integer
+#  datatable_id :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#  owner_id     :integer
+#  decision     :string(255)
+#
+

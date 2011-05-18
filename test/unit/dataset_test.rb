@@ -1,4 +1,5 @@
 require File.expand_path('../../test_helper',__FILE__)
+require 'nokogiri'
 
 class DatasetTest < ActiveSupport::TestCase
 
@@ -143,21 +144,57 @@ class DatasetTest < ActiveSupport::TestCase
   context 'eml generatation' do
     setup do
       @dataset = Factory.create(:dataset, :initiated => Date.today, :completed => Date.today)
-      @dataset_with_datatable = Factory.create(:dataset, :datatables  => [Factory.create(:datatable),  Factory.create(:datatable)])
+      @datatable = Factory.create(:datatable)
+      @dataset_with_datatable = @datatable.dataset
+      assert @datatable.valid_for_eml
     end
 
-    should 'be successful' do
-      refute @dataset.to_eml.nil?
-      refute @dataset_with_datatable.to_eml.nil?
+    should 'not be empty' do
+      assert @dataset.to_eml.present?
+      assert @dataset_with_datatable.to_eml.present?
+    end
+
+    should 'have a dataset element' do
+      eml_doc = Nokogiri::XML(@dataset.to_eml)
+      assert_equal 1, eml_doc.css('dataset').count
+    end
+
+    should 'have a dataTable element if it has a datatable' do
+      eml_doc = Nokogiri::XML(@dataset.to_eml)
+      assert_equal 0, eml_doc.css('dataTable').count
+      eml_doc_2 = Nokogiri::XML(@dataset_with_datatable.to_eml)
+      assert_equal @dataset_with_datatable.datatables.count, eml_doc_2.css('dataTable').count
+    end
+
+    should 'have a temporal coverage element within coverage' do
+      @dataset.initiated = Date.today - 1.year
+      @dataset.completed = Date.today
+      eml_doc = Nokogiri::XML(@dataset.to_eml)
+      assert_equal 1, eml_doc.css('coverage temporalCoverage').count
     end
 
     context 'dataset with protocols in the datatables' do
       setup do
-        protocol = Factory.create(:protocol)
-        @dataset.protocols << protocol
+        @protocol = Factory.create(:protocol, :dataset => @dataset)
+        @dataset.protocols << @protocol
+        @protocol2 = Factory.create(:protocol)
+        @datatable.protocols << @protocol2
       end
 
-      should 'have a methods section'
+      should "have a top level protocol section" do
+        eml_doc = Nokogiri::XML(@dataset.to_eml)
+        assert_equal 1, eml_doc.css("protocol#protocol_#{@protocol.id}").count
+      end
+
+      should "have a dataset methods methodStep protocol section" do
+        eml_doc = Nokogiri::XML(@dataset.to_eml)
+        assert_equal 1, eml_doc.css('dataset methods methodStep protocol').count
+      end
+
+      should 'have any extra protocols referenced in datatable' do
+        eml_doc = Nokogiri::XML(@dataset_with_datatable.to_eml)
+        assert_equal 1, eml_doc.css('dataTable methods methodStep protocol').count
+      end
     end
   end
 
@@ -225,3 +262,28 @@ class DatasetTest < ActiveSupport::TestCase
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: datasets
+#
+#  id           :integer         not null, primary key
+#  dataset      :string(255)
+#  title        :string(255)
+#  abstract     :text
+#  old_keywords :string(255)
+#  status       :string(255)
+#  initiated    :date
+#  completed    :date
+#  released     :date
+#  on_web       :boolean         default(TRUE)
+#  version      :integer
+#  core_dataset :boolean         default(FALSE)
+#  project_id   :integer
+#  metacat_id   :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#  sponsor_id   :integer
+#  website_id   :integer
+#
+

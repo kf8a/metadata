@@ -12,10 +12,7 @@ class ProtocolsController < ApplicationController
     @themes = Theme.roots
     @protocols = website.protocols.find(:all, :order => 'title', :conditions => ['active = true'])
 
-    respond_to do |format|
-      format.html { render_subdomain }
-      format.xml  { render :xml => @protocols.to_xml }
-    end
+    respond_with @protocols
   end
 
   # GET /protocols/1
@@ -24,11 +21,10 @@ class ProtocolsController < ApplicationController
     store_location
     @protocol = website.protocols.first(:conditions => ['id = ?', params[:id]])
 
-    respond_to do |format|
-      if @protocol
-        format.html { render_subdomain }
-        format.xml  { render :xml => @protocol.to_xml }
-      else
+    if @protocol
+      respond_with @protocol
+    else
+      respond_to do |format|
         format.html { redirect_to protocols_url}
         format.xml  { head :not_found}
       end
@@ -38,13 +34,13 @@ class ProtocolsController < ApplicationController
   # GET /protocols/new
   def new
     @protocol = Protocol.new
-    @datasets = Dataset.find(:all).map {|x| [x.dataset, x.id]}
+    @datasets = Dataset.find(:all).map {|dataset| [dataset.dataset, dataset.id]}
     get_all_websites
   end
 
   # GET /protocols/1;edit
   def edit
-    @datasets = Dataset.find(:all).map {|x| [x.dataset, x.id]}
+    @datasets = Dataset.find(:all).map {|dataset| [dataset.dataset, dataset.id]}
     get_all_websites
   end
 
@@ -53,39 +49,28 @@ class ProtocolsController < ApplicationController
   def create
     @protocol = Protocol.new(params[:protocol])
 
-    respond_to do |format|
-      if @protocol.save
-
-        flash[:notice] = 'Protocol was successfully created.'
-        format.html { redirect_to protocol_url(@protocol) }
-        format.xml  { head :created, :location => protocol_url(@protocol) }
-      else
-        format.html { render_subdomain "new" }
-        format.xml  { render :xml => @protocol.errors.to_xml }
-      end
+    if @protocol.save
+      flash[:notice] = 'Protocol was successfully created.'
     end
+
+    respond_with @protocol
   end
 
   # PUT /protocols/1
   # PUT /protocols/1.xml
   def update
+    params[:protocol].merge!({:updated_by => current_user})
     get_all_websites
-
-    respond_to do |format|
-      if params[:new_version]
-        old_protocol = Protocol.find(params[:id])
-        @protocol = Protocol.new(params[:protocol])
-        @protocol.deprecate!(old_protocol)
-      end
-      if @protocol.update_attributes(params[:protocol])
-        flash[:notice] = 'Protocol was successfully updated.'
-        format.html { redirect_to protocol_url(@protocol) }
-        format.xml  { head :ok }
-      else
-        format.html { render_subdomain "edit" }
-        format.xml  { render :xml => @protocol.errors.to_xml }
-      end
+    if params[:new_version]
+      old_protocol = Protocol.find(params[:id])
+      @protocol = Protocol.new(params[:protocol])
+      @protocol.deprecate!(old_protocol)
     end
+    if @protocol.update_attributes(params[:protocol])
+      flash[:notice] = 'Protocol was successfully updated.'
+    end
+
+    respond_with @protocol
   end
 
   # DELETE /protocols/1

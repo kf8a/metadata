@@ -8,7 +8,7 @@ module CitationFormat
   end
   
   def format_as_default
-    if has_given_name? and  has_middle_name?
+    if has_given_name? && has_middle_name?
       "#{sur_name}, #{given_name[0..0].upcase}. #{middle_name[0..0].upcase}."
     elsif has_given_name?
       "#{sur_name}, #{given_name[0..0].upcase}."
@@ -18,7 +18,7 @@ module CitationFormat
   end
 
   def format_as_natural
-    if has_given_name? and has_middle_name?
+    if has_given_name? && has_middle_name?
       "#{given_name[0..0].upcase}. #{middle_name[0..0].upcase}. #{sur_name}"
     elsif given_name
       "#{given_name[0..0].upcase}. #{sur_name}"
@@ -30,10 +30,10 @@ module CitationFormat
   private
   
   def has_given_name?
-    !(given_name.nil? || given_name.try(:empty?))
+    given_name.present?
   end
 
   def has_middle_name?
-    !(middle_name.nil? || middle_name.try(:empty?))
+    middle_name.present?
   end
 end

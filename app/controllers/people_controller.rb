@@ -40,10 +40,7 @@ class PeopleController < ApplicationController
   # GET /people/1
   # GET /people/1.xml
   def show
-    respond_to do |format|
-      format.html { render_subdomain }
-      format.xml  { render :xml => @person.to_xml }
-    end
+    respond_with @person
   end
 
   # GET /people/new
@@ -62,33 +59,19 @@ class PeopleController < ApplicationController
   # POST /people.xml
   def create
     @person = Person.new(params[:person])
-     
-    respond_to do |format|
-      if @person.save
-        flash[:notice] = 'Person was successfully created.'
-        format.html { redirect_to person_url(@person) }
-        format.xml  { head :created, :location => person_url(@person) }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @person.errors.to_xml }
-      end
+    if @person.save
+      flash[:notice] = 'Person was successfully created.'
     end
+    respond_with @person
   end
 
   # PUT /people/1
   # PUT /people/1.xml
   def update    
-    
-    respond_to do |format|
-      if @person.update_attributes(params[:person])
-        flash[:notice] = 'Person was successfully updated.'
-        format.html { redirect_to person_url(@person) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @person.errors.to_xml }
-      end
+    if @person.update_attributes(params[:person])
+      flash[:notice] = 'Person was successfully updated.'
     end
+    respond_with @person
   end
 
   # DELETE /people/1

@@ -8,7 +8,7 @@ include REXML
 class Datatable < ActiveRecord::Base
   attr_protected :object
   attr_accessor :materialized_datatable_id
-  
+
   acts_as_taggable_on :keywords
 
   has_one                 :collection
@@ -26,7 +26,8 @@ class Datatable < ActiveRecord::Base
   belongs_to              :theme
   has_many                :variates, :order => :weight
 
-  validates_presence_of :title, :dataset
+  validates :title,   :presence => true
+  validates :dataset, :presence => true
 
   accepts_nested_attributes_for :data_contributions, :allow_destroy => true
   accepts_nested_attributes_for :variates, :allow_destroy => true
@@ -51,6 +52,14 @@ class Datatable < ActiveRecord::Base
     #set_property :field_weights => {:keyword => 20, :theme => 20, :title => 10}
   end
 
+  def valid_for_eml
+    valid_variates.present?
+  end
+  
+  def valid_variates
+    self.variates.keep_if {|variate| variate.valid_for_eml}
+  end
+
   def protocols_with_backup
     protocols.presence || dataset.protocols.presence
   end
@@ -71,15 +80,15 @@ class Datatable < ActiveRecord::Base
     compile_personnel(dataset.affiliations)
   end
 
-  def compile_personnel(source, h={})
+  def compile_personnel(source, personnel={})
     source.each do |contribution|
-      if h[contribution.person]
-        h[contribution.person].push((contribution.role.name))
+      if personnel[contribution.person]
+        personnel[contribution.person].push((contribution.role.name))
       else
-        h[contribution.person] = [contribution.role.name]
+        personnel[contribution.person] = [contribution.role.name]
       end
     end
-    h
+    personnel
   end
 
   def restricted?
@@ -106,10 +115,10 @@ class Datatable < ActiveRecord::Base
 
   def can_be_downloaded_by?(user)
     !self.restricted? ||
-      user.try(:admin?) ||
-      self.owned_by?(user) ||
-      member?(user) ||
-      self.permitted?(user)
+        user.try(:admin?) ||
+        self.owned_by?(user) ||
+        member?(user) ||
+        self.permitted?(user)
   end
 
   def owned_by?(user)
@@ -136,7 +145,7 @@ class Datatable < ActiveRecord::Base
       {'start' => Date.parse(value['date']).rfc2822,
         'title' => value['title'],
         'description' => value['description'],
-       'durationEvent' => false }
+        'durationEvent' => false }
     end
 
     event_summary = events.inject do |event|
@@ -159,23 +168,28 @@ class Datatable < ActiveRecord::Base
     title + reply
   end
 
-  def to_eml
-    eml = Element.new('dataTable')
-    eml.add_attribute('id',name)
-    eml.add_element('entityName').add_text(title)
-    eml.add_element('entityDescription').add_text(description.gsub(/<\/?[^>]*>/, ""))
-    eml.add_element eml_physical
-    eml.add_element eml_attributes
-    return eml
+  def non_dataset_protocols
+    protocols.reject { |protocol| dataset.protocols.include?(protocol) }.compact
+  end
+
+  def to_eml(xml = Builder::XmlMarkup.new)
+    @eml = xml
+    @eml.dataTable 'id' => name do
+      @eml.entityName title
+      @eml.entityDescription description.gsub(/<\/?[^>]*>/, "")
+      eml_protocols if non_dataset_protocols.present?
+      eml_physical
+      eml_attributes
+    end
   end
 
   def raw_csv
     values  = perform_query
     csv_string = CSV.generate do |csv|
-      csv << variates.collect {|v| v.name }
+      csv << variates.collect { |variate| variate.name }
       values.each do |row|
-        csv << variates.collect do |v|
-          row[v.name.downcase]
+        csv << variates.collect do |variate|
+          row[variate.name.downcase]
         end
       end
     end
@@ -211,11 +225,11 @@ class Datatable < ActiveRecord::Base
     access_statement = dataset.sponsor.try(:data_use_statement)
     if access_statement
       access_statement.gsub(/.{1,60}(?:\s|\Z)/){($& + 5.chr)\
-        .gsub(/\n\005/,"\n")\
-        .gsub(/\005/,"\n")}\
-        .split(/\n/)\
-        .collect {|line| "# #{line}\n"}\
-        .join
+            .gsub(/\n\005/,"\n")\
+            .gsub(/\005/,"\n")}\
+          .split(/\n/)\
+          .collect {|line| "# #{line}\n"}\
+          .join
     else
       ''
     end
@@ -252,10 +266,10 @@ class Datatable < ActiveRecord::Base
   def data_preview
     query =  self.object
     self.excerpt_limit = 5 unless self.excerpt_limit
-    query = query + " limit #{self.excerpt_limit}" 
+    query = query + " limit #{self.excerpt_limit}"
     ActiveRecord::Base.connection.execute(query)
   end
-  
+
 
   def perform_query
     query =  self.object
@@ -287,7 +301,7 @@ class Datatable < ActiveRecord::Base
     values = self.perform_query if self.is_sql
   end
 
-private
+  private
 
   def query_datatable_for_temporal_extent(query)
     values = ActiveRecord::Base.connection.execute(query)
@@ -298,24 +312,76 @@ private
     end
   end
 
+  def eml_protocols
+    @eml.methods do
+      non_dataset_protocols.each { |protocol| protocol.to_eml_ref(@eml) }
+    end
+  end
+
   def eml_physical
-    p = Element.new('physical')
-    p.add_element('objectName').add_text(self.title)
-    p.add_element('encodingMethod').add_text('None')
-    dataformat = p.add_element('dataFormat').add_element('textFormat')
-    dataformat.add_element('numHeaderLines').add_text((data_access_statement.lines.to_a.size + 4).to_s)
-    dataformat.add_element('attributeOrientation').add_text('column')
-    dataformat.add_element('simpleDelimited').add_element('fieldDelimiter').add_text(',')
-    p.add_element('distribution').add_element('online').add_element('url').add_text(data_url)
-    return p
+    @eml.physical do
+      @eml.objectName title
+      @eml.encodingMethod 'None'
+      @eml.dataFormat do
+        @eml.textFormat do
+          @eml.numHeaderLines (data_access_statement.lines.to_a.size + 4).to_s
+          @eml.attributeOrientation 'column'
+          @eml.simpleDelimited do
+            @eml.fieldDelimiter ','
+          end
+        end
+      end
+      @eml.distribution do
+        @eml.online do
+          @eml.url data_url
+        end
+      end
+    end
   end
 
   def eml_attributes
-    a = Element.new('attributeList')
-    self.variates.each do |variate|
-      a.add_element variate.to_eml
+    @eml.attributeList do
+      valid_variates.each do |variate|
+        variate.to_eml(@eml)
+      end
     end
-    return a
   end
 
 end
+
+# == Schema Information
+#
+# Table name: datatables
+#
+#  id                    :integer         not null, primary key
+#  name                  :string(255)
+#  title                 :string(255)
+#  comments              :text
+#  dataset_id            :integer
+#  data_url              :string(255)
+#  connection_url        :string(255)
+#  driver                :string(255)
+#  is_restricted         :boolean
+#  description           :text
+#  object                :text
+#  metadata_url          :string(255)
+#  is_sql                :boolean
+#  update_frequency_days :integer
+#  last_updated_on       :date
+#  access_statement      :text
+#  excerpt_limit         :integer
+#  begin_date            :date
+#  end_date              :date
+#  on_web                :boolean         default(TRUE)
+#  theme_id              :integer
+#  core_area_id          :integer
+#  weight                :integer         default(100)
+#  study_id              :integer
+#  created_at            :datetime
+#  updated_at            :datetime
+#  is_secondary          :boolean         default(FALSE)
+#  is_utf_8              :boolean         default(FALSE)
+#  metadata_only         :boolean         default(FALSE)
+#  summary_graph         :text
+#  event_query           :text
+#

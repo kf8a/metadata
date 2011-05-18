@@ -1,0 +1,4 @@
+<%= form.inputs do %>
+  <%= form.input :begin_date, :label => 'from:', :end_year => Time.now.year, :start_year => 1887 %>
+  <%= form.input :end_date, :label => 'to', :end_year => Time.now.year, :start_year => 1887 %>
+<% end %>

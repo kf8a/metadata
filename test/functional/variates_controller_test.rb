@@ -22,6 +22,14 @@ class VariatesControllerTest < ActionController::TestCase
     get :new
     assert_response :success
   end
+
+  context 'GET :new in javascript' do
+    setup do
+      xhr :get, :new
+    end
+
+    should respond_with :success
+  end
   
   def test_should_create_variate
     old_count = Variate.count

@@ -3,18 +3,24 @@ UseModelAssociationCheck: { }
 UseScopeAccessCheck: { }
 AddModelVirtualAttributeCheck: { }
 ReplaceComplexCreationWithFactoryMethodCheck: { attribute_assignment_count: 2 }
-MoveModelLogicIntoModelCheck: { called_count: 4 }
+MoveModelLogicIntoModelCheck: { use_count: 4 }
 OveruseRouteCustomizationsCheck: { customize_count: 3 }
 NeedlessDeepNestingCheck: { nested_count: 2 }
-NotUseDefaultRouteCheck: { }
+NotUseDefaultRouteCheck: {  }
 KeepFindersOnTheirOwnModelCheck: { }
 LawOfDemeterCheck: { }
 UseObserverCheck: { }
 IsolateSeedDataCheck: { }
 AlwaysAddDbIndexCheck: { }
-UseBeforeFilterCheck: { }
+UseBeforeFilterCheck: { customize_count: 1 }
 MoveCodeIntoControllerCheck: { }
-MoveCodeIntoModelCheck: { }
+MoveCodeIntoModelCheck: { use_count: 2 }
 MoveCodeIntoHelperCheck: { array_count: 3 }
 ReplaceInstanceVariableWithLocalVariableCheck: { }
 DryBundlerInCapistranoCheck: { }
+UseSayWithTimeInMigrationsCheck: { }
+UseQueryAttributeCheck: { }
+RemoveTrailingWhitespaceCheck: { }
+UseMultipartAlternativeAsContentTypeOfEmailCheck: {}
+SimplifyRenderInViewsCheck: {}
+SimplifyRenderInControllersCheck: {}

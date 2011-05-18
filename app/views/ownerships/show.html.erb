@@ -7,7 +7,7 @@
   <% @datatable.owners.each do |owner| %>
     <li>
         <%= owner.email %>
-        <%= button_to "Revoke ownership from #{owner.email}", { 
+        <%= link_to "Revoke ownership from #{owner.email}", {
           :action => "revoke", 
           :datatable => @datatable.id, 
           :user => owner.id }, 

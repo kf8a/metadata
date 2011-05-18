@@ -4,7 +4,7 @@ class DatasetsControllerTest < ActionController::TestCase
 
 
   def setup
-    @dataset = Factory.create(:dataset)
+    @dataset = Factory.create(:datatable).dataset
     Factory.create(:dataset)
 
     #TODO test with admin and non admin users
@@ -36,6 +36,18 @@ class DatasetsControllerTest < ActionController::TestCase
   def test_should_show_dataset
     get :show, :id => @dataset
     assert_response :success
+  end
+
+  context 'GET :show the dataset in eml' do
+    setup do
+      get :show, :id => @dataset, :format => :eml
+    end
+
+    should respond_with :success
+    should 'be the exact right eml' do
+      proper_eml = @dataset.to_eml
+      assert_equal Hash.from_xml(response.body), Hash.from_xml(proper_eml)
+    end
   end
 
   context "an lter dataset" do

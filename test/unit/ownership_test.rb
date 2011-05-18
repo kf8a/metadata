@@ -22,3 +22,15 @@ class OwnershipTest < ActiveSupport::TestCase
     should validate_uniqueness_of(:user_id).scoped_to(:datatable_id)
   end
 end
+
+# == Schema Information
+#
+# Table name: ownerships
+#
+#  id           :integer         not null, primary key
+#  datatable_id :integer
+#  user_id      :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+

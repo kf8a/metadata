@@ -5,3 +5,12 @@ role_types_001:
 role_types_002: 
   id: "2"
   name: lter
+
+# == Schema Information
+#
+# Table name: role_types
+#
+#  id   :integer         not null, primary key
+#  name :string(255)
+#
+

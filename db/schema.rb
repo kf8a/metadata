@@ -24,9 +24,6 @@ ActiveRecord::Schema.define(:version => 20110419142830) do
   add_index "affiliations", ["person_id"], :name => "index_affiliations_on_person_id"
   add_index "affiliations", ["role_id"], :name => "index_affiliations_on_role_id"
 
-# Could not dump table "areas" because of following StandardError
-#   Unknown type 'geometry' for column 'the_geom'
-
   create_table "authors", :force => true do |t|
     t.string   "sur_name"
     t.string   "given_name"
@@ -79,87 +76,12 @@ ActiveRecord::Schema.define(:version => 20110419142830) do
     t.integer  "pdf_file_size"
     t.datetime "pdf_updated_at"
     t.string   "state"
-    t.boolean  "open_access",             :default => false
     t.string   "type"
+    t.boolean  "open_access",             :default => false
   end
 
   add_index "citations", ["citation_type_id"], :name => "index_citations_on_citation_type_id"
   add_index "citations", ["website_id"], :name => "index_citations_on_website_id"
-
-  create_table "cms_blocks", :force => true do |t|
-    t.integer  "cms_page_id"
-    t.string   "label"
-    t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "cms_blocks", ["cms_page_id", "label"], :name => "index_cms_blocks_on_cms_page_id_and_label"
-
-  create_table "cms_layouts", :force => true do |t|
-    t.integer  "cms_site_id"
-    t.integer  "parent_id"
-    t.string   "app_layout"
-    t.string   "label"
-    t.string   "slug"
-    t.text     "content"
-    t.text     "css"
-    t.text     "js"
-    t.integer  "position",    :default => 0, :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "cms_layouts", ["cms_site_id", "slug"], :name => "index_cms_layouts_on_cms_site_id_and_slug", :unique => true
-  add_index "cms_layouts", ["parent_id", "position"], :name => "index_cms_layouts_on_parent_id_and_position"
-
-  create_table "cms_pages", :force => true do |t|
-    t.integer  "cms_site_id"
-    t.integer  "cms_layout_id"
-    t.integer  "parent_id"
-    t.integer  "target_page_id"
-    t.string   "label"
-    t.string   "slug"
-    t.string   "full_path"
-    t.text     "content"
-    t.integer  "position",       :default => 0,    :null => false
-    t.integer  "children_count", :default => 0,    :null => false
-    t.boolean  "is_published",   :default => true, :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "cms_pages", ["cms_site_id", "full_path"], :name => "index_cms_pages_on_cms_site_id_and_full_path"
-  add_index "cms_pages", ["parent_id", "position"], :name => "index_cms_pages_on_parent_id_and_position"
-
-  create_table "cms_sites", :force => true do |t|
-    t.string "label"
-    t.string "hostname"
-  end
-
-  add_index "cms_sites", ["hostname"], :name => "index_cms_sites_on_hostname"
-
-  create_table "cms_snippets", :force => true do |t|
-    t.integer  "cms_site_id"
-    t.string   "label"
-    t.string   "slug"
-    t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "cms_snippets", ["cms_site_id", "slug"], :name => "index_cms_snippets_on_cms_site_id_and_slug", :unique => true
-
-  create_table "cms_uploads", :force => true do |t|
-    t.integer  "cms_site_id"
-    t.string   "file_file_name"
-    t.string   "file_content_type"
-    t.integer  "file_file_size"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "cms_uploads", ["cms_site_id", "file_file_name"], :name => "index_cms_uploads_on_cms_site_id_and_file_file_name"
 
   create_table "collections", :force => true do |t|
     t.datetime "created_at"
@@ -216,7 +138,7 @@ ActiveRecord::Schema.define(:version => 20110419142830) do
     t.date     "completed"
     t.date     "released"
     t.boolean  "on_web",       :default => true
-    t.integer  "version",      :default => 1
+    t.integer  "version"
     t.boolean  "core_dataset", :default => false
     t.integer  "project_id"
     t.integer  "metacat_id"
@@ -357,8 +279,12 @@ ActiveRecord::Schema.define(:version => 20110419142830) do
   add_index "invites", ["id", "email"], :name => "index_invites_on_id_and_email"
   add_index "invites", ["id", "invite_code"], :name => "index_invites_on_id_and_invite_code"
 
-# Could not dump table "locations" because of following StandardError
-#   Unknown type 'geometry' for column 'the_geom'
+  create_table "locations", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "log_hiresyieldmanagement", :id => false, :force => true do |t|
     t.date    "obsdate"
@@ -508,6 +434,14 @@ ActiveRecord::Schema.define(:version => 20110419142830) do
   add_index "permissions", ["datatable_id"], :name => "index_permissions_on_datatable_id"
   add_index "permissions", ["owner_id"], :name => "index_permissions_on_owner_id"
   add_index "permissions", ["user_id"], :name => "index_permissions_on_user_id"
+
+  create_table "plots", :force => true do |t|
+    t.string  "name"
+    t.integer "treatment_id"
+    t.integer "replicate"
+    t.integer "study_id"
+    t.string  "description"
+  end
 
   create_table "projects", :force => true do |t|
     t.string   "title"
@@ -737,13 +671,12 @@ ActiveRecord::Schema.define(:version => 20110419142830) do
   create_table "units", :force => true do |t|
     t.string  "name"
     t.text    "description"
-    t.boolean "in_eml",                                :default => false
+    t.boolean "in_eml",                 :default => false
     t.text    "definition"
     t.integer "deprecated_in_favor_of"
     t.string  "unit_type"
     t.string  "parent_si"
     t.float   "multiplier_to_si"
-    t.string  "abbreviation",           :limit => nil
   end
 
   add_index "units", ["name"], :name => "unit_names_key", :unique => true

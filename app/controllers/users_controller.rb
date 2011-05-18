@@ -17,7 +17,7 @@ class UsersController < Clearance::UsersController
       flash_notice_after_create
       redirect_to(url_after_create)
     else
-      render :template => 'users/new'
+      render 'users/new'
     end
   end
 

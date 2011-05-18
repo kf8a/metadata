@@ -8,9 +8,9 @@
                 datatable_path(datatable,:format => :ods),
                 :class => 'download-link' if false %>
       <%= link_to 'View as a Collection',
-                collection_path(datatable.collection) if @datatable.collection %>
+                collection_path(datatable.collection) if datatable.collection %>
       <%= link_to 'Permissions Management',
-                permission_path(datatable) if current_user.try(:owns?, @datatable)%>
+                permission_path(datatable) if current_user.try(:owns?, datatable)%>
       <%= link_to 'Owners Management',
                 ownership_path(datatable) if admin? %>
     <% else %>

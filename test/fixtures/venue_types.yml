@@ -8,3 +8,13 @@ venue_types_002:
 venue_types_003: 
   id: "3"
   name: other
+
+# == Schema Information
+#
+# Table name: venue_types
+#
+#  id          :integer         not null, primary key
+#  name        :string(255)
+#  description :text
+#
+

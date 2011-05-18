@@ -1,40 +1,40 @@
 <% if @person.only_emeritus? %>
-  <%= render :partial => 'emeritus', :locals => {:person => @person}%>
+  <%= render 'emeritus', :person => @person %>
 <% else %>
   <ul>
-  	<li class='person-name'><%= @person.given_name %> <%= @person.middle_name %>  <%= @person.sur_name %></li>
-  	<% if @person.title and @person.title.strip != '' -%>
-    	<li class='person_title'><%= @person.title %></li>
+    <li class='person-name'><%= @person.expanded_name %></li>
+    <% if @person.title? -%>
+      <li class='person_title'><%= @person.title %></li>
     <% end -%>
-  	<% if @person.sub_organization and @person.sub_organization.strip != '' -%>
-    	<li><%= @person.sub_organization %></li>
-  	<% end -%>
-  	<% if @person.organization and @person.organization.strip != '' -%>
-    	<li><%= @person.organization%></li>
-  	<% end -%>
-  	<% if @person.complete_address? %>
-    	<li class='address'><%= @person.address %></li>
-  	<% end -%>
+    <% if @person.sub_organization? -%>
+      <li><%= @person.sub_organization %></li>
+    <% end -%>
+    <% if @person.organization? -%>
+      <li><%= @person.organization%></li>
+    <% end -%>
+    <% if @person.complete_address? %>
+      <li class='address'><%= @person.address %></li>
+    <% end -%>
 	
-  	<% if @person.email and @person.email.strip != '' -%>
-    	<li class='person-email'><%=contact_link(@person.email) %></li>
-  	<% end -%>
-  	<% if @person.phone and @person.phone.strip != '' -%>
-    	<li>
+    <% if @person.email? -%>
+      <li class='person-email'><%=contact_link(@person.email) %></li>
+    <% end -%>
+    <% if @person.phone? -%>
+      <li>
       	<%= @person.phone %>
-    		<% if @person.fax and @person.fax.strip != '' %>
+        <% if @person.fax? %>
           | fax: <%= @person.fax %>
         <% end %>
-	    </li>
-	  <% end -%>
-	  <% if @person.url and @person.url.strip != ''-%>
-	    <li><%= link_to "#{@person.url.gsub(/http:\/\//,'')}", @person.url%></li>
-	  <% end -%>
+      </li>
+    <% end -%>
+    <% if @person.url? -%>
+      <li><%= link_to "#{@person.url.gsub(/http:\/\//,'')}", @person.url%></li>
+    <% end -%>
 
   </ul>
 
   <% committees = @person.get_committee_roles -%>
-  <% unless committees.empty? %>
+  <% if committees.present? %>
     <ul>
       Committees:
       <% committees.each do |committee| %>

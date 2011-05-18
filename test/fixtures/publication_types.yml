@@ -14,3 +14,12 @@ publication_types_004:
 publication_types_005: 
   id: "5"
   name: Occasional_Reports
+
+# == Schema Information
+#
+# Table name: publication_types
+#
+#  id   :integer         not null, primary key
+#  name :string(255)
+#
+

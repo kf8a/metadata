@@ -55,11 +55,11 @@ class Customizer
   end
 
   def limit_min
-    if self.new_limitby? then nil else @params[:limit_min] end
+    @params[:limit_min] unless self.new_limitby?
   end
 
   def limit_max
-    if self.new_limitby? then nil else @params[:limit_max] end
+    @params[:limit_max] unless self.new_limitby?
   end
 
   def limitrange
@@ -72,7 +72,7 @@ class Customizer
   end
 
   def contains
-    if self.new_limitby? then nil else @params[:contains] end
+    @params[:contains] unless self.new_limitby?
   end
 
   def oldlimitby
@@ -93,7 +93,6 @@ class Customizer
 
   def sorted_values
     values = @values.sort {|firstrow, secondrow| firstrow[self.sortby]<=>secondrow[self.sortby] rescue 0}
-    values = values.reverse if self.sort_direction == "Descending"
-    values
+    self.sort_direction == "Descending" ? values.reverse : values
   end
 end

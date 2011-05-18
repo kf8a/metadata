@@ -43,10 +43,10 @@ Metadata::Application.routes.draw do
       get :events
       get :suggest
       post :search
-      get :update_temporal_extent
     end
     member do
       get :qc
+      get :update_temporal_extent
     end
   end
   resources :invites

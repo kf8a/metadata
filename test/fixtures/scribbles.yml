@@ -95,3 +95,14 @@ scribbles_024:
   id: "62"
   person_id: "56"
   protocol_id: "26"
+
+# == Schema Information
+#
+# Table name: scribbles
+#
+#  id          :integer         not null, primary key
+#  person_id   :integer
+#  protocol_id :integer
+#  weight      :integer
+#
+

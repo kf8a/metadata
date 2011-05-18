@@ -1,3 +1,14 @@
 class Project < ActiveRecord::Base
   has_many :datasets
 end
+
+# == Schema Information
+#
+# Table name: projects
+#
+#  id         :integer         not null, primary key
+#  title      :string(255)
+#  abstract   :text
+#  created_at :datetime
+#  updated_at :datetime
+#

@@ -43,32 +43,19 @@ class ProjectsController < ApplicationController
   # POST /projects.xml
   def create
     @project = Project.new(params[:project])
-
-    respond_to do |format|
-      if @project.save
-        flash[:notice] = 'Project was successfully created.'
-        format.html { redirect_to(@project) }
-        format.xml  { render :xml => @project, :status => :created, :location => @project }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @project.errors, :status => :unprocessable_entity }
-      end
+    if @project.save
+      flash[:notice] = 'Project was successfully created.'
     end
+    respond_with @project
   end
 
   # PUT /projects/1
   # PUT /projects/1.xml
   def update
-    respond_to do |format|
-      if @project.update_attributes(params[:project])
-        flash[:notice] = 'Project was successfully updated.'
-        format.html { redirect_to(@project) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @project.errors, :status => :unprocessable_entity }
-      end
+    if @project.update_attributes(params[:project])
+      flash[:notice] = 'Project was successfully updated.'
     end
+    respond_with @project
   end
 
   # DELETE /projects/1

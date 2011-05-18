@@ -1,11 +1,11 @@
-<h1><%= @abstract.title %></h1>
+<h1><%= abstract.title %></h1>
 
-<p><%= @abstract.authors %></p>
+<p><%= abstract.authors %></p>
 
-<%= textilize(@abstract.abstract) %>
+<%= textilize(abstract.abstract) %>
 
-<% if @abstract.pdf.exists? %>
-<%=link_to 'Get PDF', download_abstract_path(@abstract) %><br/>
+<% if abstract.pdf.exists? %>
+  <%=link_to 'Get PDF', download_abstract_path(abstract) %><br/>
 <% end %>
 
-<%= render :partial => 'navbar', :locals => {:abstract => @abstract} %>
+<%= render 'navbar', :abstract => @abstract %>

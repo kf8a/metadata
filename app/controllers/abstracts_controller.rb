@@ -1,8 +1,8 @@
 #Controls pages dealing with abstracts of meetings
 class AbstractsController < ApplicationController
+  helper_method :abstract
 
   before_filter :admin?, :except => [:index, :show]  if Rails.env == 'production'
-  before_filter :get_abstract, :only => [:show, :edit, :update, :destroy]
   
   # GET meeting_abstracts
   # GET meeting_abstracts.xml
@@ -26,22 +26,20 @@ class AbstractsController < ApplicationController
   
   # GET meeting_abstracts/new?meeting=1
   def new
-    @abstract = Abstract.new
     meeting  = Meeting.find(params[:meeting])
-    @abstract.meeting_id = meeting.id
+    abstract.meeting_id = meeting.id
   end
   
   
   def create
-    @abstract = Abstract.new(params[:abstract])
     respond_to do |format|
-      if @abstract.save
+      if abstract.save
         flash[:notice] = 'Meeting Abstract was successfully created.'
-        format.html { redirect_to meeting_url(@abstract.meeting) }
-        format.xml  { head :created, :location => abstracts_url(@meeting) }
+        format.html { redirect_to meeting_url(abstract.meeting) }
+        format.xml  { head :created, :location => abstracts_url(abstract.meeting) }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @abstract.errors.to_xml }
+        format.html { render "new" }
+        format.xml  { render :xml => abstract.errors.to_xml }
       end
     end
   end
@@ -49,10 +47,7 @@ class AbstractsController < ApplicationController
   # GET meeting_abstracts/1
   # GET meeting_abstracts/1.xml
   def show
-    respond_to do |format|
-      format.html # show.rhtml
-      format.xml  { render :xml => @abstract.to_xml }
-    end
+    respond_with abstract
   end
   
   # GET /meeting_abstract/1/edit
@@ -62,32 +57,26 @@ class AbstractsController < ApplicationController
   # PUT /meeting_abstracts/1
   # PUT /meeting_abstracts/1.xml
   def update
+    if abstract.update_attributes(params[:abstract])
+      flash[:notice] = 'Meeting abstract was successfully updated.'
+    end
+    respond_with abstract
+  end
+  
+  def destroy
+    abstract.destroy
     respond_to do |format|
-      if @abstract.update_attributes(params[:abstract])
-        flash[:notice] = 'Meeting abstract was successfully updated.'
-        format.html { redirect_to abstract_url(@abstract) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @abstract.errors.to_xml }
+      format.html { redirect_to meetings_url }
+      format.xml  { head :ok }
+      format.js do
+        render :nothing => true
       end
     end
   end
   
-  def destroy
-    @abstract.destroy
-     respond_to do |format|
-       format.html { redirect_to meetings_url }
-       format.xml  { head :ok }
-       format.js do
-         render :nothing => true
-       end
-     end
-  end
-  
   private
   
-  def get_abstract
-    @abstract = Abstract.find(params[:id])  
+  def abstract
+    @abstract ||= params[:id] ? Abstract.find(params[:id]) : Abstract.new(params[:abstract])
   end
 end

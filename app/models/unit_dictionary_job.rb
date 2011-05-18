@@ -1,6 +1,6 @@
 #require 'UnitDictionary'
 
-class UnitUpdateJob < Struct.new(:unit) 
+class UnitUpdateJob < Struct.new(:unit)
   def perform
     # #updating units
     #  u = DictionaryUnit.find(unit.dictionary_id)
@@ -8,13 +8,13 @@ class UnitUpdateJob < Struct.new(:unit)
     #    u = DictionaryUnit.find(unit.name)
     #  end
     #  # if u
-    #  #   unit.update_attributes :description => u.description, 
+    #  #   unit.update_attributes :description => u.description,
     #  #                          :name        =>  u.name
-    #  #                          :deprecated_in_favor_of => u.deprecated_in_favor_of                             
-    #  # 
+    #  #                          :deprecated_in_favor_of => u.deprecated_in_favor_of
+    #  #
     #  #   unit.save
     #  # end
-   end
+  end
 end
 
 class UnitDictionaryUpdateJob < Struct.new(:unit)

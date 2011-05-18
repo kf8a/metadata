@@ -1,11 +1,11 @@
 class DatatablesController < ApplicationController
+  helper_method :datatable
 
   before_filter :admin?, :except => [:index, :show, :suggest, :search, :events, :qc] unless Rails.env == 'development'
-  before_filter :get_datatable, :only => [:show, :edit, :update, :destroy, :update_temporal_extent, :qc]
 
   protect_from_forgery :except => [:index, :show, :search]
   cache_sweeper :datatable_sweeper
-  caches_action :show, :expires_in => 1.day, :if => Proc.new { |c| c.request.format.csv? } # cache if it is a csv request
+  caches_action :show, :expires_in => 1.day, :private => false, :public => true, :if => Proc.new { |controller| controller.request.format.csv? } # cache if it is a csv request
 
   # GET /datatables
   # GET /datatables.xml
@@ -13,9 +13,7 @@ class DatatablesController < ApplicationController
     store_location
     retrieve_datatables('keyword_list' =>'')
 
-    respond_to do |format|
-      format.html {render_subdomain}
-      format.xml  { render :xml => @datatables.to_xml }
+    respond_with @datatables do |format|
       format.rss {render :rss => @datatables}
     end
   end
@@ -27,9 +25,6 @@ class DatatablesController < ApplicationController
       redirect_to datatables_url
     else
       retrieve_datatables(query)
-      respond_to do |format|
-        format.html {render_subdomain}
-      end
     end
   end
 
@@ -42,14 +37,14 @@ class DatatablesController < ApplicationController
   # GET /datatables/1.xml
   # GET /datatables/1.csv
   def show
-    accessible_by_ip = trusted_ip? || !@datatable.is_restricted
-    csv_ok = accessible_by_ip && @datatable.can_be_downloaded_by?(current_user)
+    accessible_by_ip = trusted_ip? || !datatable.is_restricted
+    csv_ok = accessible_by_ip && datatable.can_be_downloaded_by?(current_user)
     @website = website
 
     store_location #in case we have to log in and come back here
-    if @datatable.dataset.valid_request?(@subdomain_request)
+    if datatable.dataset.valid_request?(@subdomain_request)
       respond_to do |format|
-        format.html   { render_subdomain }
+        format.html
         format.xml
 #         format.ods do
 #           if csv_ok
@@ -68,7 +63,7 @@ class DatatablesController < ApplicationController
         end
         format.climdb do
           unless csv_ok
-            redirect_to datatable_url(@datatable)
+            redirect_to datatable_url(datatable)
           end
         end
       end
@@ -82,17 +77,16 @@ class DatatablesController < ApplicationController
 
   # GET /datatables/new
   def new
-    @datatable = Datatable.new
-    @core_areas = CoreArea.by_name.collect {|x| [x.name, x.id]}
-    @studies = Study.all.collect{|x| [x.name, x.id]}
+    @core_areas = CoreArea.by_name.collect { |area| [area.name, area.id] }
+    @studies = Study.all.collect{ |study| [study.name, study.id] }
     @people = Person.all
     @units = Unit.all
   end
 
   # GET /datatables/1;edit
   def edit
-    @core_areas = CoreArea.by_name.collect {|x| [x.name, x.id]}
-    @studies = Study.all.collect{|x| [x.name, x.id]}
+    @core_areas = CoreArea.by_name.collect { |area| [area.name, area.id] }
+    @studies = Study.all.collect{ |study| [study.name, study.id] }
     @people = Person.all
     @units = Unit.all
   end
@@ -100,63 +94,47 @@ class DatatablesController < ApplicationController
   # POST /datatables
   # POST /datatables.xml
   def create
-    @datatable = Datatable.new(params[:datatable])
-    @core_areas = CoreArea.by_name.collect {|x| [x.name, x.id]}
-    @studies = Study.all.collect{|x| [x.name, x.id]}
+    @core_areas = CoreArea.by_name.collect { |area| [area.name, area.id] }
+    @studies = Study.all.collect{ |study| [study.name, study.id] }
     @people = Person.all
     @units = Unit.all
 
-    respond_to do |format|
-      if @datatable.save
-        flash[:notice] = 'Datatable was successfully created.'
-        format.html { redirect_to datatable_url(@datatable) }
-        format.xml  { head :created, :location => datatable_url(@datatable) }
-      else
-        format.html { render_subdomain "new" }
-        format.xml  { render :xml => @datatable.errors.to_xml }
-      end
+    if datatable.save
+      flash[:notice] = 'Datatable was successfully created.'
     end
+
+    respond_with datatable
   end
 
   # PUT /datatables/1
   # PUT /datatables/1.xml
   def update
-    @core_areas = CoreArea.by_name.collect {|x| [x.name, x.id]}
-    @studies = Study.all.collect{|x| [x.name, x.id]}
+    @core_areas = CoreArea.by_name.collect { |area| [area.name, area.id] }
+    @studies = Study.all.collect{ |study| [study.name, study.id]}
     @people = Person.all
     @units = Unit.all
 
-    respond_to do |format|
-      if @datatable.update_attributes(params[:datatable])
-        flash[:notice] = 'Datatable was successfully updated.'
-        format.html { redirect_to datatable_url(@datatable) }
-        format.xml  { head :ok }
-      else
-
-        format.html { render_subdomain "edit" }
-        format.xml  { render :xml => @datatable.errors.to_xml }
-      end
+    if datatable.update_attributes(params[:datatable])
+      flash[:notice] = 'Datatable was successfully updated.'
     end
+
+    respond_with datatable
   end
 
   # DELETE /datatables/1
   # DELETE /datatables/1.xml
   def destroy
-    @datatable.destroy
-
-    respond_to do |format|
-      format.html { redirect_to datatables_url }
-      format.xml  { head :ok }
-    end
+    datatable.destroy
+    respond_with datatable
   end
 
   #TODO only return the ones for the right website.
   def suggest
     term = params[:term]
     #  list = Datatable.tags.all.collect {|x| x.name.downcase}
-    list = Person.find_all_with_dataset.collect {|x| x.sur_name.downcase}
-    list = list + Theme.all.collect {|x| x.name.downcase}
-    list = list + CoreArea.all.collect {|x| x.name.downcase}
+    list = Person.find_all_with_dataset.collect { |person| person.sur_name.downcase }
+    list = list + Theme.all.collect { |theme| theme.name.downcase }
+    list = list + CoreArea.all.collect { |area| area.name.downcase }
 
     keywords = list.compact.uniq.sort
     respond_to do |format|
@@ -165,11 +143,8 @@ class DatatablesController < ApplicationController
   end
 
   def update_temporal_extent
-    @datatable.update_temporal_extent
-    @datatable.save
-    respond_to do |format|
-      format.js {render :nothing => true}
-    end
+    datatable.update_temporal_extent
+    datatable.save
   end
 
   private
@@ -209,10 +184,6 @@ class DatatablesController < ApplicationController
 
   end
 
-  def get_datatable
-    @datatable = Datatable.find(params[:id])
-  end
-
   def retrieve_datatables(query)
     @default_value = 'Search for core areas, keywords or people'
     @themes = Theme.roots
@@ -230,6 +201,10 @@ class DatatablesController < ApplicationController
 
     @studies = Study.find_all_roots_with_datatables(@datatables)
 
+  end
+
+  def datatable
+    @datatable ||= params[:id] ? Datatable.find(params[:id]) : Datatable.new(params[:datatable])
   end
 
 end
