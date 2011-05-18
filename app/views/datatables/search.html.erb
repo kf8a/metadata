@@ -9,7 +9,7 @@
   <% @studies.each do |study| -%>
     <% next unless study.include_datatables?(@datatables)%>
     
-    <%= render 'study', :study => study, :themes => @themes, :datatables => @datatables %>
+    <%= render 'study', :locals => {:study => study, :themes => @themes, :datatables => @datatables} %>
   <% end -%>
 </ul>
 

@@ -19,6 +19,14 @@ module ApplicationHelper
     current_user.try(:role) == 'admin'
   end
 
+  def current_controller?(controller)
+    if controller_name == controller
+      'current-nav'
+    else
+      'not-current-nav'
+    end
+  end
+
   def get_liquid_template(domain, controller, page)
     website = Website.find_by_name(domain)
     website = Website.first unless website

@@ -18,10 +18,10 @@
     </div>
     <div id='navigation'>
       <ul>
-        <li><a href='/datatables'>Data Catalog</a></li>
-        <li><a href='/protocols'>Protocols</a></li>
-        <li><a href='/pages/1'>Experimental Layouts</a></li>
-        <li><a href='/citations'>Publications</a></li>
+        <li class="<%=current_controller?('datatables')%>"><a href='/datatables'>Data Catalog</a></li>
+        <li class="<%=current_controller?('protocols')%>"><a href='/protocols'>Protocols</a></li>
+        <li class="<%=current_controller?('pages')%>"><a href='/pages/1'>Experimental Layouts</a></li>
+        <li class="<%=current_controller?('publications')%>"><a href='/citations'>Publications</a></li>
       </ul>
     </div>
     <div id='footer'>
