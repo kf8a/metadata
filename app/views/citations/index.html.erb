@@ -6,12 +6,12 @@
 <h1 class='publication-section'>Submitted</h1>
 <p class='synopsis indent'>Papers still in review; contact the first author for further information.</p>
 <ul>
-  <%= render :partial => 'citation', :collection => @submitted_citations, :year => nil %>
+  <%= render :partial => 'citation', :collection => @submitted_citations, :locals => {:year => nil} %>
 </ul>
 <h1 class='publication-section'>Forthcoming</h1>
 <p class='synopsis indent'>Papers accepted but not yet published.</p>
 <ul>
-  <%= render :partial => 'citation', :collection => @forthcoming_citations, :year => nil %>
+  <%= render :partial => 'citation', :collection => @forthcoming_citations, :locals => {:year => nil} %>
 </ul>
 <h1 class='publication-section'>Published (alphabetical by year)</h1>
 <ul>

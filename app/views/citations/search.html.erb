@@ -6,5 +6,5 @@
 </p>
 <h1>Search Results for <%= @word %>: </h1>
 <ul>
-  <%= render @citations, :year => nil %>
+  <%= render :partial => 'citation', :collection => @citations, :locals => {:year => nil} %>
 </ul>
