@@ -1,4 +1,4 @@
-<p>To download copies of listed articles you must first 
+<p>To download copies of listed articles you must first
   <%= link_to_unless signed_in?, 'sign-in', sign_in_path %>
 </p>
 <%= render 'search_form', :word => @word, :type => @type, :sort_by => @sort_by %>
@@ -6,18 +6,18 @@
 <h1 class='publication-section'>Submitted</h1>
 <p class='synopsis indent'>Papers still in review; contact the first author for further information.</p>
 <ul>
-  <%= render @submitted_citations, :year => nil %>
+  <%= render :partial => 'citation', :collection => @submitted_citations, :locals => {:year => nil} %>
 </ul>
 <h1 class='publication-section'>Forthcoming</h1>
 <p class='synopsis indent'>Papers accepted but not yet published.</p>
 <ul>
-  <%= render @forthcoming_citations, :year => nil %>
+  <%= render :partial => 'citation', :collection => @forthcoming_citations, :locals => {:year => nil} %>
 </ul>
 <h1 class='publication-section'>Published (alphabetical by year)</h1>
 <ul>
 <% year = 0 -%>
 <% @citations.each do |citation| %>
-  <%= render citation, :year => year %>
+  <%= render :partial => 'citation', :locals => {:citation=>citation, :year => year} %>
   <% year = citation.pub_year.to_i -%>
 <% end %>
 </ul>

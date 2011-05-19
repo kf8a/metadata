@@ -8,6 +8,69 @@ class CitationsControllerTest < ActionController::TestCase
       @controller.current_user = nil
     end
 
+    context 'GET :index with an article citation' do
+      setup do
+        Citation.delete_all  #clear out other citations
+        author1 = Factory.create(:author, :sur_name => 'Zebedee', :seniority => 1)
+        author2 = Factory.create(:author, :sur_name => 'Alfred',  :seniority => 1)
+        website = Website.find_by_name("lter") || Factory.create(:website, :name => "lter")
+        @citation1 = ArticleCitation.new
+        @citation1.authors << Author.new( :sur_name => 'Loecke',
+                                       :given_name => 'T', :middle_name => 'D',
+                                       :seniority => 1)
+
+        @citation1.authors << Author.new(:sur_name => 'Robertson',
+                                      :given_name => 'G', :middle_name => 'P',
+                                      :seniority => 2)
+
+        @citation1.title = 'Soil resource heterogeneity in the form of aggregated litter alters maize productivity'
+        @citation1.publication = 'Plant and Soil'
+        @citation1.volume = '325'
+        @citation1.start_page_number = 231
+        @citation1.ending_page_number = 241
+        @citation1.pub_year = 2008
+        @citation1.abstract = 'An abstract of the article.'
+        @citation1.website = website
+      end
+
+      context 'submitted' do
+        setup do
+          @citation1.state = 'submitted'
+          assert @citation1.save
+          get :index
+        end
+        should respond_with(:success)
+        should "include the submitted article citation" do
+          assert assigns(:submitted_citations).include?(@citation1)
+       end
+      end
+
+      context 'forthcomming' do
+        setup do
+          @citation1.state = 'forthcoming'
+          assert @citation1.save
+          get :index
+        end
+        should respond_with(:success)
+        should "include the forthcoming article citation" do
+          assert assigns(:forthcoming_citations).include?(@citation1)
+       end
+      end
+
+      context 'published' do
+        setup do
+          @citation1.state = 'published'
+          assert @citation1.save
+          get :index
+        end
+        should respond_with(:success)
+        should "include the published article citation" do
+          assert assigns(:citations).include?(@citation1)
+       end
+
+      end
+    end
+
     context 'GET :index from anonymous user' do
       setup do
         Citation.delete_all  #clear out other citations
@@ -116,7 +179,7 @@ class CitationsControllerTest < ActionController::TestCase
         should respond_with :success
 
       end
-      
+
       context 'in bibtext format' do
         setup {get :show, :id=>@citation, :format => 'bib'}
         should respond_with :success
@@ -261,7 +324,7 @@ class CitationsControllerTest < ActionController::TestCase
       should 'create a citation for the website currently using' do
         assert_equal @website, Citation.find(assigns(:citation)).website
       end
-      
+
       should redirect_to('the citation page') { citation_url(assigns(:citation)) }
     end
 
@@ -275,7 +338,7 @@ class CitationsControllerTest < ActionController::TestCase
     end
 
     context 'POST: create with type' do
-      setup do 
+      setup do
         post :create, :citation => {:type => 'ArticleCitation'}
       end
 
