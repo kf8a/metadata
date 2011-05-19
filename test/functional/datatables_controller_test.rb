@@ -63,6 +63,8 @@ class DatatablesControllerTest < ActionController::TestCase
       should respond_with :success
     end
 
+    # TODO: this test does not actually test anything because there are no results returned. Maybe
+    # we need a mock here so we don't need to start thinking sphinks.
     context 'GET :search' do
       setup do
         get :search, :keyword_list=>'test'
