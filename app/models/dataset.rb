@@ -154,14 +154,22 @@ class Dataset < ActiveRecord::Base
 
   def eml_protocols
     (protocols + datatable_protocols).flatten.uniq.each do | protocol |
-      @eml.protocol 'id' => "protocol_#{protocol.id}"
+      @eml.protocol 'id' => "protocol_#{protocol.id}" do
+        @eml.title  protocol.title
+        eml_creator
+        @eml.distribution do
+          @eml.online do
+            @eml.url "http://#{website.name}.kbs.msu.edu/protocols/#{protocol.id}"
+          end
+        end
+      end
     end
   end
 
   def eml_dataset_protocols
-    @eml.methods do
-      protocols.each { |protocol| protocol.to_eml_ref(@eml) }
-    end
+    # @eml.methods do
+    #   protocols.each { |protocol| protocol.to_eml_ref(@eml) }
+    # end
   end
 
   def eml_dataset
