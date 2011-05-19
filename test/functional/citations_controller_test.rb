@@ -8,7 +8,7 @@ class CitationsControllerTest < ActionController::TestCase
       @controller.current_user = nil
     end
 
-    context 'GET :index with a submitted article citation' do
+    context 'GET :index with an article citation' do
       setup do
         Citation.delete_all  #clear out other citations
         author1 = Factory.create(:author, :sur_name => 'Zebedee', :seniority => 1)
@@ -31,14 +31,43 @@ class CitationsControllerTest < ActionController::TestCase
         @citation1.pub_year = 2008
         @citation1.abstract = 'An abstract of the article.'
         @citation1.website = website
-        @citation1.state = 'submitted'
-        assert @citation1.save
-        get :index
       end
 
-      should respond_with(:success)
-      should "include the submitted article citation" do
-        assert assigns(:submitted_citations).include?(@citation1)
+      context 'submitted' do
+        setup do
+          @citation1.state = 'submitted'
+          assert @citation1.save
+          get :index
+        end
+        should respond_with(:success)
+        should "include the submitted article citation" do
+          assert assigns(:submitted_citations).include?(@citation1)
+       end
+      end
+
+      context 'forthcomming' do
+        setup do
+          @citation1.state = 'forthcoming'
+          assert @citation1.save
+          get :index
+        end
+        should respond_with(:success)
+        should "include the forthcoming article citation" do
+          assert assigns(:forthcoming_citations).include?(@citation1)
+       end
+      end
+
+      context 'published' do
+        setup do
+          @citation1.state = 'published'
+          assert @citation1.save
+          get :index
+        end
+        should respond_with(:success)
+        should "include the published article citation" do
+          assert assigns(:citations).include?(@citation1)
+       end
+
       end
     end
 
