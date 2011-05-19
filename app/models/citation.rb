@@ -1,7 +1,9 @@
 require 'bibtex'
 
 class Citation < ActiveRecord::Base
-  include ActiveRecord::Transitions
+  include Workflow
+
+  workflow_column :state
 
   versioned :dependent => :tracking
 
@@ -43,16 +45,16 @@ class Citation < ActiveRecord::Base
   scope :submitted, where(:state => 'submitted').with_authors_by_sur_name_and_pub_year
   scope :forthcoming, where(:state => 'forthcoming').with_authors_by_sur_name_and_pub_year
 
-  state_machine do
-    state :submitted
-    state :forthcoming
-    state :published
-
-    event :accept do
-      transitions :to => :forthcoming, :from => [:submitted, :published]
+  workflow do
+    state :submitted do
+      event :accept, :transitions_to => :forthcoming
+      event :publish, :transitions_to => :published
     end
-    event :publish do
-      transitions :to => :published, :from => [:forthcoming, :submitted]
+    state :forthcoming do
+      event :publish, :transitions_to => :published
+    end
+    state :published do
+      event :accept, :transitions_to => :forthcoming
     end
   end
 

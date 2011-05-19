@@ -17,12 +17,13 @@ gem 'nokogiri'
 gem 'RedCloth', '4.2.4'
 gem 'thinking-sphinx'
 gem 'liquid'
-gem 'clearance'
+gem 'clearance', '=0.10.5'
 gem 'formtastic'
 gem 'awesome_nested_set', :git => 'git://github.com/galetahub/awesome_nested_set.git'
 gem 'thin'
 gem 'jquery-rails', '>= 0.2.6'
-gem "transitions", :require => ["transitions", "active_record/transitions"]
+
+gem 'workflow'
 
 gem 'friendly_id'
 

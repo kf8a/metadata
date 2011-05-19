@@ -333,7 +333,11 @@ class Datatable < ActiveRecord::Base
       end
       @eml.distribution do
         @eml.online do
-          @eml.url data_url
+          if is_sql
+            @eml.url "http://#{website_name}.kbs.msu.edu/datatables/#{self.id}.csv" 
+          else
+            @eml.url data_url
+          end
         end
       end
     end
