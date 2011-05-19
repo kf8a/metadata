@@ -1,18 +1,5 @@
 class BookCitation < Citation
 
-  state_machine do
-    state :submitted
-    state :forthcoming
-    state :published
-
-    event :accept do
-      transitions :to => :forthcoming, :from => [:submitted, :published]
-    end
-    event :publish do
-      transitions :to => :published, :from => [:forthcoming, :submitted]
-    end
-  end
-
   def book?
     true
   end
