@@ -1,5 +1,18 @@
 class ChapterCitation < Citation
 
+  state_machine do
+    state :submitted
+    state :forthcoming
+    state :published
+
+    event :accept do
+      transitions :to => :forthcoming, :from => [:submitted, :published]
+    end
+    event :publish do
+      transitions :to => :published, :from => [:forthcoming, :submitted]
+    end
+  end
+
   def formatted
     "#{author_and_year}. #{title}. #{publication} #{volume_and_page}".rstrip
   end
