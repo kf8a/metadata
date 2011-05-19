@@ -216,8 +216,8 @@ class Dataset < ActiveRecord::Base
         :street_address => '3700 East Gull Lake Drive',
         :city => 'Hickory Corners',:locale => 'Mi',:postal_code => '49060',
         :country => 'USA')
-      p.eml_address
-      @eml.electronicMailAddress 'data.manager@kbs.msu.edu'
+      p.eml_address(@eml)
+      @eml.electronicMailAddress 'lter.data.manager@kbs.msu.edu'
       @eml.onlineUrl 'http://lter.kbs.msu.edu'
     end
   end
