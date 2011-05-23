@@ -4,16 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
-#Temporary necessary: a fix for Rake 0.9.0
-
-module ::Metadata
-  class Application
-    include Rake::DSL
-  end
-end
-
-module ::RakeFileUtils
-  extend Rake::FileUtilsExt
-end
-
 Metadata::Application.load_tasks
