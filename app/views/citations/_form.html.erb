@@ -7,11 +7,8 @@
 <% end %>
 <h2>Authors</h2>
 <div id='authors'>
-  <%= form.inputs :for=> :authors do |f| %>
-    <%= render :partial => 'author_fields', :locals => {:f=>f} %>
-  <% end %>
+  <%= form.input :author_block, :as => :text %>
 </div>
-<%= link_to_add_fields "Add Author", form, :authors %>
 
 <h2>Editors</h2>
 <div id='editors'>

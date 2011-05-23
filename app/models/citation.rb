@@ -82,6 +82,14 @@ class Citation < ActiveRecord::Base
     end
   end
 
+  def author_block
+    true
+  end
+
+  def author_block=(string_of_authors = '')
+    true
+  end
+
   def file_title
     "#{self.id}-#{self.title}-#{self.pub_year}"
   end
