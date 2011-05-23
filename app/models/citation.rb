@@ -83,11 +83,33 @@ class Citation < ActiveRecord::Base
   end
 
   def author_block
-    true
+    ab = ''
+    authors.each do |author|
+      ab += "#{author.formatted}\n"
+    end
+
+    ab
   end
 
   def author_block=(string_of_authors = '')
-    true
+    current_seniority = 1
+    string_of_authors.each_line do |author_string|
+      if author_string.include?(',')
+        #figure out how parse
+      else
+        author_array = author_string.split
+        new_author = Author.new
+        new_author.given_name = author_array.slice!(0)
+        new_author.sur_name = author_array.slice!(-1)
+        new_author.middle_name = author_array.join(' ')
+      end
+
+      new_author.seniority = current_seniority
+      new_author.save
+      self.authors << new_author
+
+      current_seniority += 1
+    end
   end
 
   def file_title

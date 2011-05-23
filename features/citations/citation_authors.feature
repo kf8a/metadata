@@ -11,5 +11,5 @@ Feature: Citation Authors
     And   I am on the new citation page
     When  I fill in "Authors" with "Jonathon Jones"
     And   I press "Create"
-    Then  I should see "Jonathon Jones"
+    Then  I should see "Jones, J."
       And I should see "Download citation"

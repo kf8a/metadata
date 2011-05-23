@@ -365,10 +365,6 @@ class CitationsControllerTest < ActionController::TestCase
       should respond_with :success
       should assign_to(:citation)
 
-      should 'have an author' do
-        assert_select '#citation_authors_attributes_0_given_name'
-      end
-
       should 'have an editor' do
         assert_select '#citation_editors_attributes_0_given_name'
       end
