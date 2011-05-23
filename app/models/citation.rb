@@ -84,8 +84,8 @@ class Citation < ActiveRecord::Base
 
   def author_block
     ab = ''
-    authors.each do |author|
-      ab += "#{author.formatted}\n"
+    authors.order(:seniority).each do |author|
+      ab += "#{author.given_name} #{author.middle_name} #{author.sur_name}\n"
     end
 
     ab
