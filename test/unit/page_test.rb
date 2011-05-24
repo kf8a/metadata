@@ -5,6 +5,8 @@ class PageTest < ActiveSupport::TestCase
   should_accept_nested_attributes_for :page_images
 end
 
+
+
 # == Schema Information
 #
 # Table name: pages

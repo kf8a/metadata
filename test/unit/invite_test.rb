@@ -22,6 +22,8 @@ class InviteTest < ActiveSupport::TestCase
   end
 end
 
+
+
 # == Schema Information
 #
 # Table name: invites

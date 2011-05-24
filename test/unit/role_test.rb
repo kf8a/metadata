@@ -56,6 +56,8 @@ class RoleTest < ActiveSupport::TestCase
   end
 end
 
+
+
 # == Schema Information
 #
 # Table name: roles

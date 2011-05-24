@@ -105,6 +105,8 @@ roles_021:
   role_type_id: "2"
   seniority: "6"
 
+
+
 # == Schema Information
 #
 # Table name: roles

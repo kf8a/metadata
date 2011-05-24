@@ -285,6 +285,7 @@ class Citation < ActiveRecord::Base
   end
 end
 
+
 # == Schema Information
 #
 # Table name: citations
@@ -323,3 +324,4 @@ end
 #  type                    :string(255)
 #  open_access             :boolean         default(FALSE)
 #
+

@@ -353,6 +353,7 @@ class Datatable < ActiveRecord::Base
 
 end
 
+
 # == Schema Information
 #
 # Table name: datatables
@@ -389,3 +390,4 @@ end
 #  summary_graph         :text
 #  event_query           :text
 #
+

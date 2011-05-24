@@ -7,6 +7,8 @@ class PageImageTest < ActiveSupport::TestCase
   should have_attached_file(:image)
 end
 
+
+
 # == Schema Information
 #
 # Table name: page_images

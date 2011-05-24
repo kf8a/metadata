@@ -22,6 +22,7 @@ class Abstract < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: meeting_abstracts
@@ -36,3 +37,4 @@ end
 #  pdf_file_size    :integer
 #  pdf_updated_at   :datetime
 #
+

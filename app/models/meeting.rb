@@ -5,6 +5,7 @@ class Meeting < ActiveRecord::Base
   validates_presence_of :venue_type
 end
 
+
 # == Schema Information
 #
 # Table name: meetings
@@ -16,3 +17,4 @@ end
 #  venue_type_id :integer
 #  date_to       :date
 #
+

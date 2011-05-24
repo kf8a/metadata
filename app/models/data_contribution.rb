@@ -6,6 +6,7 @@ class DataContribution < ActiveRecord::Base
   validates_presence_of :role
 end
 
+
 # == Schema Information
 #
 # Table name: data_contributions
@@ -17,3 +18,4 @@ end
 #  created_at   :datetime
 #  updated_at   :datetime
 #
+

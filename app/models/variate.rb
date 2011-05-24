@@ -99,6 +99,7 @@ class Variate < ActiveRecord::Base
   end
 end
 
+
 # == Schema Information
 #
 # Table name: variates
@@ -119,3 +120,4 @@ end
 #  query                   :text
 #  variate_theme_id        :integer
 #
+

@@ -6,6 +6,8 @@ class SponsorTest < ActiveSupport::TestCase
   should have_many :memberships
 end
 
+
+
 # == Schema Information
 #
 # Table name: sponsors

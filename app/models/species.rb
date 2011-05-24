@@ -1,6 +1,7 @@
 class Species < ActiveRecord::Base
 end
 
+
 # == Schema Information
 #
 # Table name: species
@@ -15,3 +16,4 @@ end
 #  attribution           :string(255)
 #  woody                 :boolean
 #
+

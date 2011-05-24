@@ -2,6 +2,7 @@ class Project < ActiveRecord::Base
   has_many :datasets
 end
 
+
 # == Schema Information
 #
 # Table name: projects
@@ -12,3 +13,4 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #
+

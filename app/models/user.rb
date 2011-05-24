@@ -45,6 +45,7 @@ class User < ActiveRecord::Base
 
 end
 
+
 # == Schema Information
 #
 # Table name: users
@@ -61,3 +62,4 @@ end
 #  identity_url       :string(255)
 #  role               :string(255)
 #
+

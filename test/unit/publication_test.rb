@@ -34,6 +34,8 @@ class PublicationTest < ActiveSupport::TestCase
 
 end
 
+
+
 # == Schema Information
 #
 # Table name: publications

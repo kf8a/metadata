@@ -5,6 +5,8 @@ class TemplateTest < ActiveSupport::TestCase
  
 end
 
+
+
 # == Schema Information
 #
 # Table name: templates

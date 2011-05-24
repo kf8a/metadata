@@ -22,6 +22,7 @@ class Permission < ActiveRecord::Base
   end
 end
 
+
 # == Schema Information
 #
 # Table name: permissions
@@ -34,3 +35,4 @@ end
 #  owner_id     :integer
 #  decision     :string(255)
 #
+

@@ -4,6 +4,7 @@ class PageImage < ActiveRecord::Base
   has_attached_file :image
 end
 
+
 # == Schema Information
 #
 # Table name: page_images
@@ -17,3 +18,4 @@ end
 #  image_file_size    :integer
 #  image_updated_at   :datetime
 #
+

@@ -4,6 +4,8 @@ class AffiliationTest < ActiveSupport::TestCase
 
 end
 
+
+
 # == Schema Information
 #
 # Table name: affiliations

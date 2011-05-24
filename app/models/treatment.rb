@@ -3,6 +3,7 @@ class Treatment < ActiveRecord::Base
   has_and_belongs_to_many :publications, :order => 'citation'
 end
 
+
 # == Schema Information
 #
 # Table name: treatments
@@ -13,3 +14,4 @@ end
 #  study_id    :integer
 #  weight      :integer
 #
+

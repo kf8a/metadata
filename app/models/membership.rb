@@ -3,6 +3,7 @@ class Membership < ActiveRecord::Base
   belongs_to :user
 end
 
+
 # == Schema Information
 #
 # Table name: memberships
@@ -11,3 +12,4 @@ end
 #  sponsor_id :integer
 #  user_id    :integer
 #
+

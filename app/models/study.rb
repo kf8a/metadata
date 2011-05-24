@@ -34,6 +34,7 @@ class Study < ActiveRecord::Base
   end
 end
 
+
 # == Schema Information
 #
 # Table name: studies
@@ -49,3 +50,4 @@ end
 #  url         :string(255)
 #  code        :string(255)
 #
+

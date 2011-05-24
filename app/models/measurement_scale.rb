@@ -1,6 +1,7 @@
 class MeasurementScale < ActiveRecord::Base
 end
 
+
 # == Schema Information
 #
 # Table name: measurement_scales
@@ -9,3 +10,4 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #
+

@@ -8,6 +8,7 @@ class Editor < ActiveRecord::Base
   validates_presence_of :seniority
 end
 
+
 # == Schema Information
 #
 # Table name: editors
@@ -22,3 +23,4 @@ end
 #  created_at  :datetime
 #  updated_at  :datetime
 #
+

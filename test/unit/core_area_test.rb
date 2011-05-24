@@ -4,6 +4,8 @@ class CoreAreaTest < ActiveSupport::TestCase
   should have_many :datatables
 end
 
+
+
 # == Schema Information
 #
 # Table name: core_areas

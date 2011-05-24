@@ -20,6 +20,8 @@ class CollectionTest < ActiveSupport::TestCase
   end
 end
 
+
+
 # == Schema Information
 #
 # Table name: collections

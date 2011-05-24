@@ -18,6 +18,7 @@ class ArticleCitation < Citation
     publication.present? ? "%J #{publication}\n" : ""
   end
 end
+
 # == Schema Information
 #
 # Table name: citations
@@ -56,3 +57,4 @@ end
 #  type                    :string(255)
 #  open_access             :boolean         default(FALSE)
 #
+

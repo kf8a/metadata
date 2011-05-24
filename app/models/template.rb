@@ -3,6 +3,7 @@ class Template < ActiveRecord::Base
 
 end
 
+
 # == Schema Information
 #
 # Table name: templates
@@ -15,3 +16,4 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #
+

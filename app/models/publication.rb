@@ -15,6 +15,7 @@ class Publication < ActiveRecord::Base
   end
 end
 
+
 # == Schema Information
 #
 # Table name: publications
@@ -35,3 +36,4 @@ end
 #  width               :integer
 #  height              :integer
 #
+

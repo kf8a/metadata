@@ -27,6 +27,7 @@ class Invite < ActiveRecord::Base
   end
 end
 
+
 # == Schema Information
 #
 # Table name: invites
@@ -40,3 +41,4 @@ end
 #  redeemed_at  :datetime
 #  glbrc_member :boolean
 #
+

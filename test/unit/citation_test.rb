@@ -373,6 +373,8 @@ class CitationTest < ActiveSupport::TestCase
   end
 end
 
+
+
 # == Schema Information
 #
 # Table name: citations

@@ -8,6 +8,7 @@ class Ownership < ActiveRecord::Base
   validates_uniqueness_of :user_id, :scope => :datatable_id
 end
 
+
 # == Schema Information
 #
 # Table name: ownerships
@@ -18,3 +19,4 @@ end
 #  created_at   :datetime
 #  updated_at   :datetime
 #
+

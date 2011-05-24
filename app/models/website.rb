@@ -16,6 +16,7 @@ class Website < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: websites
@@ -26,3 +27,4 @@ end
 #  updated_at         :datetime
 #  data_catalog_intro :text
 #
+
