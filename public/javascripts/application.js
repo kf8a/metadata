@@ -48,7 +48,7 @@ jQuery(document).ready(function() {
     jQuery.get(url.concat(Math.random()));
 
     #Uses tokens for authors
-    jQuery('#citation_author_block').tokenInput('/authors.json', { crossDomain: false });
+    jQuery('#citation_author_block_input').tokenInput('/authors.json', { crossDomain: false });
 });
 
   function remove_fields(link) {
