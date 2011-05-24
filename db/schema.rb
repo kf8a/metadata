@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110419142830) do
+ActiveRecord::Schema.define(:version => 20110524012030) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20110419142830) do
     t.integer  "citation_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "suffix"
   end
 
   add_index "authors", ["citation_id"], :name => "index_authors_on_citation_id"

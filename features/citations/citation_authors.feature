@@ -27,7 +27,7 @@ Feature: Citation Authors
     And   I am on the new citation page
     When  I fill in "Authors" with "Martin Luther King, Jr."
     And   I press "Create"
-    Then  I should see "King, Jr., M. L."
+    Then  I should see "King, M. L., Jr."
       And I should see "Download citation"
 
   Scenario: Multiple author names in a text box
@@ -43,5 +43,6 @@ Feature: Citation Authors
       And I should see "M. L. King, Jr."
 
     When I follow "Edit"
+    Then show me the page
     Then I should see "Jonathon David Jones"
       And I should see "Martin Luther King, Jr."

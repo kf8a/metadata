@@ -85,7 +85,15 @@ class Citation < ActiveRecord::Base
   def author_block
     ab = ''
     authors.order(:seniority).each do |author|
-      ab += "#{author.given_name} #{author.middle_name} #{author.sur_name}\n"
+      ab += author.given_name if author.given_name.present?
+      if author.middle_name.present?
+        ab += " #{author.middle_name} "
+      end
+      ab += author.sur_name if author.sur_name.present?
+      if author.suffix.present?
+        ab += ", #{author.suffix}"
+      end
+      ab += "\n"
     end
 
     ab
@@ -102,13 +110,13 @@ class Citation < ActiveRecord::Base
         if author_array[0].include?(',')
           #It must be firstname, suffix: Martin, Jr.'
           new_author.given_name = author_array.slice!(0).delete(',')
-          new_author.sur_name = new_author.sur_name + ', ' + author_array.join(', ')
+          new_author.suffix = author_array.join(' ')
         else
           new_author.given_name = author_array.slice!(0)
           if author_array[-2].to_s.include?(',')
             #It must be middlename, suffix: Luther, Jr.'
-            new_author.sur_name = new_author.sur_name + ', ' + author_array.slice!(-1)
-            new_author.middle_name = author_array.join(' ')
+            new_author.suffix = author_array.slice!(-1)
+            new_author.middle_name = author_array.join(' ').delete(',')
           else
             new_author.middle_name = author_array.join(' ')
           end
@@ -117,7 +125,8 @@ class Citation < ActiveRecord::Base
         new_author.given_name = author_array.slice!(0)
         if author_array[-2].to_s.include?(',')
           #It must be sur_name, suffix: King, Jr.'
-          new_author.sur_name = "#{author_array.slice!(-2)} #{author_array.slice!(-1)}"
+          new_author.sur_name = author_array.slice!(-2).delete(',')
+          new_author.suffix = author_array.slice!(-1)
           new_author.middle_name = author_array.join(' ')
         else
         #assumes it is 'Jonathon David Jones'
