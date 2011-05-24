@@ -85,7 +85,6 @@ class Citation < ActiveRecord::Base
   def author_block
     ab = ''
     authors.order(:seniority).each do |author|
-      ab = 
       if author.given_name.present?
         ab += "#{author.given_name} "
       end
