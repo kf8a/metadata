@@ -94,14 +94,36 @@ class Citation < ActiveRecord::Base
   def author_block=(string_of_authors = '')
     current_seniority = 1
     string_of_authors.each_line do |author_string|
-      if author_string.include?(',')
-        #figure out how parse
+      author_array = author_string.split
+      new_author = Author.new
+      if author_array[0].include?(',')
+        #Last name is first: Jones, Jonathon
+        new_author.sur_name = author_array.slice!(0).delete(',')
+        if author_array[0].include?(',')
+          #It must be firstname, suffix: Martin, Jr.'
+          new_author.given_name = author_array.slice!(0).delete(',')
+          new_author.sur_name = new_author.sur_name + ', ' + author_array.join(', ')
+        else
+          new_author.given_name = author_array.slice!(0)
+          if author_array[-2].to_s.include?(',')
+            #It must be middlename, suffix: Luther, Jr.'
+            new_author.sur_name = new_author.sur_name + ', ' + author_array.slice!(-1)
+            new_author.middle_name = author_array.join(' ')
+          else
+            new_author.middle_name = author_array.join(' ')
+          end
+        end
       else
-        author_array = author_string.split
-        new_author = Author.new
         new_author.given_name = author_array.slice!(0)
-        new_author.sur_name = author_array.slice!(-1)
-        new_author.middle_name = author_array.join(' ')
+        if author_array[-2].to_s.include?(',')
+          #It must be sur_name, suffix: King, Jr.'
+          new_author.sur_name = "#{author_array.slice!(-2)} #{author_array.slice!(-1)}"
+          new_author.middle_name = author_array.join(' ')
+        else
+        #assumes it is 'Jonathon David Jones'
+          new_author.sur_name = author_array.slice!(-1)
+          new_author.middle_name = author_array.join(' ')
+        end
       end
 
       new_author.seniority = current_seniority
