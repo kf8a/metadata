@@ -1,11 +1,11 @@
-jQuery(document).ready(function() { 
+jQuery(document).ready(function() {
 	function geo_decode() {
 		var email  = jQuery('.person-email').get(0);
 		if ((email != undefined)) {
 			email_name = email.innerHTML.split(/ /)[0]
 			email_domain = email.innerHTML.split(/ /)[2]
 			email_string = [email_name, email_domain].join('@');
-      
+
 			//jQuery('#email').empty();
 			jQuery(email).replaceWith("<a id='email' href='mailto:"+email_string+"'>"+email_string+"</a>");
 		}
@@ -30,7 +30,7 @@ jQuery(document).ready(function() {
 			jQuery(this).text('[Expand All]');
 		});
 
-  
+
     //This sends a delete request and hides the containing element
     jQuery('.deleter').live('click', function(e) {
         e.preventDefault();
@@ -46,6 +46,9 @@ jQuery(document).ready(function() {
     // append a random number so that IE7 will actually make the call and not return a cached value
     url = "/users?"
     jQuery.get(url.concat(Math.random()));
+
+    #Uses tokens for authors
+    jQuery('#citation_author_block').tokenInput('/authors.json', { crossDomain: false });
 });
 
   function remove_fields(link) {

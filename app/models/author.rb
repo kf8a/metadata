@@ -6,6 +6,19 @@ class Author < ActiveRecord::Base
 
   validates_presence_of :seniority
 
+  def name
+    ab = ''
+    ab += self.given_name if self.given_name.present?
+    if self.middle_name.present?
+      ab += " #{self.middle_name} "
+    end
+    ab += self.sur_name if self.sur_name.present?
+    if self.suffix.present?
+      ab += ", #{self.suffix}"
+    end
+
+    ab
+  end
 end
 
 
@@ -24,4 +37,3 @@ end
 #  updated_at  :datetime
 #  suffix      :string(255)
 #
-
