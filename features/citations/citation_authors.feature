@@ -43,6 +43,5 @@ Feature: Citation Authors
       And I should see "M. L. King, Jr."
 
     When I follow "Edit"
-    Then show me the page
     Then I should see "Jonathon David Jones"
       And I should see "Martin Luther King, Jr."
