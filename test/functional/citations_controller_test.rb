@@ -391,6 +391,8 @@ class CitationsControllerTest < ActionController::TestCase
       should 'set the type to article' do
         assert_kind_of ArticleCitation, Citation.find(assigns(:citation).id)
       end
+
+      should 'clear the cache'
     end
 
     context 'DESTROY' do
