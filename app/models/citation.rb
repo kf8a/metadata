@@ -102,42 +102,50 @@ class Citation < ActiveRecord::Base
   def author_block=(string_of_authors = '')
     current_seniority = 1
     string_of_authors.each_line do |author_string|
-      author_array = author_string.split
-      new_author = Author.new
-      if author_array[0].include?(',')
-        #Last name is first: Jones, Jonathon
-        new_author.sur_name = author_array.slice!(0).delete(',')
+      if author_string[0].to_i == 0
+        author_array = author_string.split
+        new_author = Author.new
         if author_array[0].include?(',')
-          #It must be firstname, suffix: Martin, Jr.'
-          new_author.given_name = author_array.slice!(0).delete(',')
-          new_author.suffix = author_array.join(' ')
+          #Last name is first: Jones, Jonathon
+          new_author.sur_name = author_array.slice!(0).delete(',')
+          if author_array[0].include?(',')
+            #It must be firstname, suffix: Martin, Jr.'
+            new_author.given_name = author_array.slice!(0).delete(',')
+            new_author.suffix = author_array.join(' ')
+          else
+            new_author.given_name = author_array.slice!(0)
+            if author_array[-2].to_s.include?(',')
+              #It must be middlename, suffix: Luther, Jr.'
+              new_author.suffix = author_array.slice!(-1)
+              new_author.middle_name = author_array.join(' ').delete(',')
+            else
+              new_author.middle_name = author_array.join(' ')
+            end
+          end
         else
           new_author.given_name = author_array.slice!(0)
           if author_array[-2].to_s.include?(',')
-            #It must be middlename, suffix: Luther, Jr.'
+            #It must be sur_name, suffix: King, Jr.'
+            new_author.sur_name = author_array.slice!(-2).delete(',')
             new_author.suffix = author_array.slice!(-1)
-            new_author.middle_name = author_array.join(' ').delete(',')
+            new_author.middle_name = author_array.join(' ')
           else
+          #assumes it is 'Jonathon David Jones'
+            new_author.sur_name = author_array.slice!(-1)
             new_author.middle_name = author_array.join(' ')
           end
         end
+
+        new_author.seniority = current_seniority
+        new_author.save
+        self.authors << new_author
       else
-        new_author.given_name = author_array.slice!(0)
-        if author_array[-2].to_s.include?(',')
-          #It must be sur_name, suffix: King, Jr.'
-          new_author.sur_name = author_array.slice!(-2).delete(',')
-          new_author.suffix = author_array.slice!(-1)
-          new_author.middle_name = author_array.join(' ')
-        else
-        #assumes it is 'Jonathon David Jones'
-          new_author.sur_name = author_array.slice!(-1)
-          new_author.middle_name = author_array.join(' ')
+        #it is a token list
+        author_array = author_string.split(',')
+        author_array.each do |author_id|
+          self.authors << Author.find_by_id(author_string)
         end
       end
-
-      new_author.seniority = current_seniority
-      new_author.save
-      self.authors << new_author
 
       current_seniority += 1
     end
@@ -324,4 +332,3 @@ end
 #  type                    :string(255)
 #  open_access             :boolean         default(FALSE)
 #
-
