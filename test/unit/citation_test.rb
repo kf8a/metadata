@@ -386,11 +386,18 @@ class CitationTest < ActiveSupport::TestCase
     end
 
     should 'parse authors with double last names' do
-      author = Factory.create(:author, {:sur_name => 'Al Fasir', 
+      author = Factory.create(:author, {:sur_name => 'Al Fasir',
                                         :given_name=> 'John'})
       @cite.author_block = "Al Fasir, John"
-      assert_equal "Al Fasir, John", @cite_author_block
+      assert_equal "Al Fasir, John", @cite.author_block
       assert_equal "Al Fasir", @cite.authors[0].sur_name
+    end
+
+    should 'parse a normal author' do
+      @cite.author_block = "Jones, Jonathon"
+      @cite.save
+      assert_equal "Jones, Jonathon", @cite.author_block
+      assert_equal "Jones", @cite.authors[0].sur_name
     end
   end
 

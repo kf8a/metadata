@@ -84,20 +84,11 @@ class Citation < ActiveRecord::Base
 
   def author_block
     ab = ''
+    new_line_necessary = false
     authors.order(:seniority).each do |author|
-      if author.given_name.present?
-        ab += "#{author.given_name} "
-      end
-      if author.middle_name.present?
-        ab += "#{author.middle_name} "
-      end
-      if author.sur_name.present?
-        ab += "#{author.sur_name}"
-      end
-      if author.suffix.present?
-        ab += ", #{author.suffix}"
-      end
-      ab += "\n"
+      ab += author.name
+      ab += "\n" if new_line_necessary
+      new_line_necessary = true
     end
 
     ab

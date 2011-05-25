@@ -7,17 +7,21 @@ class Author < ActiveRecord::Base
   validates_presence_of :seniority
 
   def name
-    ab = ''
-    ab += self.given_name if self.given_name.present?
-    if self.middle_name.present?
-      ab += " #{self.middle_name} "
-    end
-    ab += self.sur_name if self.sur_name.present?
-    if self.suffix.present?
-      ab += ", #{self.suffix}"
+    if sur_name.present?
+      if middle_name.present? || given_name.present?
+        sur_text = "#{sur_name},"
+      else
+        sur_text = sur_name
+      end
+    else
+      sur_text = ''
     end
 
-    ab
+    given_text  = given_name.present?  ? " #{given_name}"  : ''
+    middle_text = middle_name.present? ? " #{middle_name}" : ''
+    suffix_text = suffix.present?      ? ", #{suffix}"     : ''
+
+    sur_text + given_text + middle_text + suffix_text
   end
 end
 
