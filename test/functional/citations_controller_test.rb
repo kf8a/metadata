@@ -391,8 +391,6 @@ class CitationsControllerTest < ActionController::TestCase
       should 'set the type to article' do
         assert_kind_of ArticleCitation, Citation.find(assigns(:citation).id)
       end
-
-      should 'clear the cache'
     end
 
     context 'DESTROY' do
@@ -403,5 +401,13 @@ class CitationsControllerTest < ActionController::TestCase
 
       should redirect_to('the citation index page') {citations_url() }
     end
+  end
+
+  def test_caching_and_expiring
+    @citation = Factory.create :citation
+    get :show, :id => @citation
+    assert @controller.fragment_exist?(:controller => "citations", :action => "show", :id => @citation)
+    put :update, :id => @citation, :citation => { :title => 'nothing' }
+    assert !@controller.fragment_exist?(:controller => "citations", :action => "show", :id => @citation)
   end
 end
