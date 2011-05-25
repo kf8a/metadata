@@ -122,6 +122,8 @@ class UserTest < ActiveSupport::TestCase
   
 end
 
+
+
 # == Schema Information
 #
 # Table name: users

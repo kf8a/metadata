@@ -246,6 +246,7 @@ class Dataset < ActiveRecord::Base
   end
 end
 
+
 # == Schema Information
 #
 # Table name: datasets
@@ -269,3 +270,4 @@ end
 #  sponsor_id   :integer
 #  website_id   :integer
 #
+

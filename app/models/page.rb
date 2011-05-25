@@ -4,6 +4,7 @@ class Page < ActiveRecord::Base
   accepts_nested_attributes_for :page_images
 end
 
+
 # == Schema Information
 #
 # Table name: pages
@@ -15,3 +16,4 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #
+

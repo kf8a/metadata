@@ -5,6 +5,7 @@ class Sponsor < ActiveRecord::Base
   has_friendly_id :name
 end
 
+
 # == Schema Information
 #
 # Table name: sponsors
@@ -16,3 +17,4 @@ end
 #  data_restricted    :boolean         default(FALSE)
 #  data_use_statement :text
 #
+

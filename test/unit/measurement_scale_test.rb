@@ -7,6 +7,8 @@ class MeasurementScaleTest < ActiveSupport::TestCase
   end
 end
 
+
+
 # == Schema Information
 #
 # Table name: measurement_scales

@@ -371,7 +371,22 @@ class CitationTest < ActiveSupport::TestCase
     end
 
   end
+  context 'a citation object with an author' do
+    setup do
+      @auth = Factory.create(:author)
+      @cite = Factory.create(:citation)
+      @cite.authors << @auth
+    end
+
+    should 'not have the author anymore after author_block= is called' do
+      assert @cite.authors.include?(@auth)
+      @cite.author_block = "Another Author"
+      refute @cite.authors.include?(@auth)
+    end
+  end
 end
+
+
 
 # == Schema Information
 #
@@ -411,4 +426,3 @@ end
 #  type                    :string(255)
 #  open_access             :boolean         default(FALSE)
 #
-

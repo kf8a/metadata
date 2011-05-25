@@ -5,6 +5,8 @@ class MembershipTest < ActiveSupport::TestCase
   should belong_to :user
 end
 
+
+
 # == Schema Information
 #
 # Table name: memberships

@@ -7,6 +7,7 @@ class PermissionRequest < ActiveRecord::Base
   validates_uniqueness_of :user_id, :scope => :datatable_id
 end
 
+
 # == Schema Information
 #
 # Table name: permission_requests
@@ -17,3 +18,4 @@ end
 #  created_at   :datetime
 #  updated_at   :datetime
 #
+

@@ -8,6 +8,8 @@ class RoleTypeTest < ActiveSupport::TestCase
   end
 end
 
+
+
 # == Schema Information
 #
 # Table name: role_types

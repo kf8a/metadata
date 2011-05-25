@@ -4,6 +4,7 @@ class Affiliation < ActiveRecord::Base
   belongs_to :dataset
 end
 
+
 # == Schema Information
 #
 # Table name: affiliations
@@ -15,3 +16,4 @@ end
 #  seniority  :integer
 #  title      :string(255)
 #
+

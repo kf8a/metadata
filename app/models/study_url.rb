@@ -4,6 +4,7 @@ class StudyUrl < ActiveRecord::Base
 
 end
 
+
 # == Schema Information
 #
 # Table name: study_urls
@@ -13,3 +14,4 @@ end
 #  study_id   :integer
 #  url        :string(255)
 #
+

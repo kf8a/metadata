@@ -45,6 +45,7 @@ class Theme < ActiveRecord::Base
   end
 end
 
+
 # == Schema Information
 #
 # Table name: themes
@@ -56,3 +57,4 @@ end
 #  lft       :integer
 #  rgt       :integer
 #
+

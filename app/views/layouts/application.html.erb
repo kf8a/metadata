@@ -4,11 +4,13 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <%= include_stylesheets :base, :media => 'screen,print' %>
   <%= yield :head %>
+  <%= stylesheet_link_tag 'token-input' %>
   <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" %>
   <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js" %>
   <script type='text/javascript'>jQuery.noConflict();</script>
   <%= include_javascripts :base %>
   <%= javascript_include_tag "less" %>
+  <%= javascript_include_tag 'jquery.tokeninput' %>
   <%= csrf_meta_tag %>
 </head>
 <body>

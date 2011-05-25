@@ -17,6 +17,6 @@ class CitationSweeper < ActionController::Caching::Sweeper
 
   def expire_cache_for(citation)
     expire_fragment(:controller => 'citations', :action => 'index')
-    expire_fragment(:controller=>'citations', :action=>'show', :id=>citation.id)
+    expire_fragment(:controller => 'citations', :action=> 'show', :id=>citation.id)
   end
 end

@@ -21,7 +21,7 @@ Download citation to
   <% end %>
 <% end %>
 <% if signed_in? and current_user.role == 'admin' %>
-  <%= button_to 'Edit', {:action=>'edit', :id=>@citation.id} %>
+  <%= link_to 'Edit', edit_citation_path(@citation) %>
   <%= button_to 'Delete', { :action => "destroy", :id => @citation.id },
     :confirm => "Are you sure?", :method => :delete  %>
-<% end %> 
+<% end %>

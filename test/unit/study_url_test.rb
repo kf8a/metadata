@@ -5,6 +5,8 @@ class StudyUrlTest < ActiveSupport::TestCase
   should belong_to :website
 end
 
+
+
 # == Schema Information
 #
 # Table name: study_urls

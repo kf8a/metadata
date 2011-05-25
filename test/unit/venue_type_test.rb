@@ -5,6 +5,8 @@ class VenueTypeTest < ActiveSupport::TestCase
   should validate_presence_of :name
 end
 
+
+
 # == Schema Information
 #
 # Table name: venue_types

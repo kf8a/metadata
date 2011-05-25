@@ -124,6 +124,8 @@ class ThemeTest < ActiveSupport::TestCase
 
 end
 
+
+
 # == Schema Information
 #
 # Table name: themes

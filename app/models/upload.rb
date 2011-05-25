@@ -1,6 +1,7 @@
 class Upload < ActiveRecord::Base
 end
 
+
 # == Schema Information
 #
 # Table name: uploads
@@ -13,3 +14,4 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #
+

@@ -6,6 +6,8 @@ class AbstractTest < ActiveSupport::TestCase
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: meeting_abstracts

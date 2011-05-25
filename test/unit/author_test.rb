@@ -53,6 +53,8 @@ class AuthorTest < ActiveSupport::TestCase
   end
 end
 
+
+
 # == Schema Information
 #
 # Table name: authors
@@ -66,5 +68,6 @@ end
 #  citation_id :integer
 #  created_at  :datetime
 #  updated_at  :datetime
+#  suffix      :string(255)
 #
 

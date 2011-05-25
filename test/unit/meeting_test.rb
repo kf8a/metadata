@@ -6,6 +6,8 @@ class MeetingTest < ActiveSupport::TestCase
   should validate_presence_of :venue_type
 end
 
+
+
 # == Schema Information
 #
 # Table name: meetings

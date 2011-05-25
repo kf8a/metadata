@@ -6,6 +6,8 @@ class EditorTest < ActiveSupport::TestCase
   should validate_presence_of 'seniority'
 end
 
+
+
 # == Schema Information
 #
 # Table name: editors

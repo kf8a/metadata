@@ -4,6 +4,8 @@ class CitationTypeTest < ActiveSupport::TestCase
   should have_many :citations
 end
 
+
+
 # == Schema Information
 #
 # Table name: citation_types

@@ -36,6 +36,7 @@ class Protocol < ActiveRecord::Base
   end
 end
 
+
 # == Schema Information
 #
 # Table name: protocols
@@ -57,3 +58,4 @@ end
 #  active         :boolean         default(TRUE)
 #  deprecates     :integer
 #
+

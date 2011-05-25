@@ -82,6 +82,80 @@ class Citation < ActiveRecord::Base
     end
   end
 
+  def author_block
+    ab = ''
+    authors.order(:seniority).each do |author|
+      if author.given_name.present?
+        ab += "#{author.given_name} "
+      end
+      if author.middle_name.present?
+        ab += "#{author.middle_name} "
+      end
+      if author.sur_name.present?
+        ab += "#{author.sur_name}"
+      end
+      if author.suffix.present?
+        ab += ", #{author.suffix}"
+      end
+      ab += "\n"
+    end
+
+    ab
+  end
+
+  def author_block=(string_of_authors = '')
+    self.authors = []
+    current_seniority = 1
+    string_of_authors.each_line do |author_string|
+      if author_string[0].to_i == 0
+        author_array = author_string.split
+        new_author = Author.new
+        if author_array[0].include?(',')
+          #Last name is first: Jones, Jonathon
+          new_author.sur_name = author_array.slice!(0).delete(',')
+          if author_array[0].include?(',')
+            #It must be firstname, suffix: Martin, Jr.'
+            new_author.given_name = author_array.slice!(0).delete(',')
+            new_author.suffix = author_array.join(' ')
+          else
+            new_author.given_name = author_array.slice!(0)
+            if author_array[-2].to_s.include?(',')
+              #It must be middlename, suffix: Luther, Jr.'
+              new_author.suffix = author_array.slice!(-1)
+              new_author.middle_name = author_array.join(' ').delete(',')
+            else
+              new_author.middle_name = author_array.join(' ')
+            end
+          end
+        else
+          new_author.given_name = author_array.slice!(0)
+          if author_array[-2].to_s.include?(',')
+            #It must be sur_name, suffix: King, Jr.'
+            new_author.sur_name = author_array.slice!(-2).delete(',')
+            new_author.suffix = author_array.slice!(-1)
+            new_author.middle_name = author_array.join(' ')
+          else
+          #assumes it is 'Jonathon David Jones'
+            new_author.sur_name = author_array.slice!(-1)
+            new_author.middle_name = author_array.join(' ')
+          end
+        end
+
+        new_author.seniority = current_seniority
+        new_author.save
+        self.authors << new_author
+      else
+        #it is a token list
+        author_array = author_string.split(',')
+        author_array.each do |author_id|
+          self.authors << Author.find_by_id(author_string)
+        end
+      end
+
+      current_seniority += 1
+    end
+  end
+
   def file_title
     "#{self.id}-#{self.title}-#{self.pub_year}"
   end
@@ -223,6 +297,7 @@ class Citation < ActiveRecord::Base
     end
   end
 end
+
 
 # == Schema Information
 #

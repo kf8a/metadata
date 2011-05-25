@@ -324,6 +324,25 @@ class DatatableTest < ActiveSupport::TestCase
       assert @old_data.end_date == Date.today - 3.years
     end
 
+    context '#title and years' do
+      should 'just be title if no years.' do
+        @datatable.begin_date = nil
+        @datatable.end_date = nil
+        assert_equal 'a really cool datatable', @datatable.title_and_years
+      end
+
+      should 'include only one year if end and begin are the same' do
+        @datatable.begin_date = '2/12/2003'.to_date
+        @datatable.end_date = '2/12/2003'.to_date
+        assert_equal "a really cool datatable (2003)", @datatable.title_and_years
+      end
+
+      should 'include both years if end and begin are different' do
+        @datatable.begin_date = '2/12/2003'.to_date
+        @datatable.end_date = '2/12/2004'.to_date
+        assert_equal "a really cool datatable (2003 to 2004)", @datatable.title_and_years
+      end
+    end
   end
 
   context 'datatable with range of dates' do
@@ -518,6 +537,7 @@ class DatatableTest < ActiveSupport::TestCase
   end
 
 end
+
 
 # == Schema Information
 #

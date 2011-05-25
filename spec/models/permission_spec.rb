@@ -11,6 +11,8 @@ describe Permission do
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: permissions

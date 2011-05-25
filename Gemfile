@@ -5,6 +5,7 @@ gem 'rails', '3.0.7'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'rake', '0.8.7'
 gem 'capistrano' #, :git=>'git://github.com/capistrano/capistrano.git'
 gem 'newrelic_rpm'
 gem 'pg'
@@ -67,9 +68,9 @@ group :test do
   gem 'remarkable_activerecord', '>=4.0.0.alpha2'
 
   #Cucumber stuff
-  gem 'capybara'
+  gem 'capybara', '0.4.1.2'
   gem "factory_girl"
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', '0.4.1'
   gem 'spork'
   gem 'launchy'
   gem 'database_cleaner'

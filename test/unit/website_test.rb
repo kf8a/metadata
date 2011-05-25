@@ -40,6 +40,8 @@ class WebsiteTest < ActiveSupport::TestCase
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: websites

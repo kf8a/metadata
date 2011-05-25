@@ -8,6 +8,8 @@ class TreatmentTest < ActiveSupport::TestCase
   end
 end
 
+
+
 # == Schema Information
 #
 # Table name: treatments

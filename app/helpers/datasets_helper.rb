@@ -5,9 +5,4 @@ module DatasetsHelper
     content_tag("div", "", :id => "#{object}_auto_complete", :class => "auto_complete") +
     auto_complete_field("#{object}", { :url => { :action => "auto_complete_for_#{object}" } }.update(completion_options))
   end
-
-  def eml_allow(principal, permission)
-    render(:partial => 'allow', :locals => {:principal => principal, :permission => permission})
-  end
-  
 end

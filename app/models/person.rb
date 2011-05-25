@@ -109,6 +109,7 @@ class Person < ActiveRecord::Base
 
 end
 
+
 # == Schema Information
 #
 # Table name: people
@@ -134,3 +135,4 @@ end
 #  deceased         :boolean
 #  open_id          :string(255)
 #
+

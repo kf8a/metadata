@@ -21,6 +21,7 @@ class Role < ActiveRecord::Base
 
 end
 
+
 # == Schema Information
 #
 # Table name: roles
@@ -32,3 +33,4 @@ end
 #  show_in_overview   :boolean         default(TRUE)
 #  show_in_detailview :boolean         default(TRUE)
 #
+
