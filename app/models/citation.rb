@@ -104,6 +104,7 @@ class Citation < ActiveRecord::Base
   end
 
   def author_block=(string_of_authors = '')
+    self.authors = []
     current_seniority = 1
     string_of_authors.each_line do |author_string|
       if author_string[0].to_i == 0
