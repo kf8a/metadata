@@ -406,8 +406,8 @@ class CitationsControllerTest < ActionController::TestCase
   def test_caching_and_expiring
     @citation = Factory.create :citation
     get :show, :id => @citation
-    assert @controller.fragment_exist?(:controller => "citations", :action => "show", :id => @citation)
+    assert @controller.fragment_exist?(:controller => "citations", :action => "index")
     put :update, :id => @citation, :citation => { :title => 'nothing' }
-    assert !@controller.fragment_exist?(:controller => "citations", :action => "show", :id => @citation)
+    assert !@controller.fragment_exist?(:controller => "citations", :action => "index")
   end
 end
