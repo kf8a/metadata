@@ -1,9 +1,9 @@
 <% content_for :head do %>
   <title>LTER: <%= controller.controller_name %>:<%= controller.action_name %></title>
-  <link rel="stylesheet/less" type="text/css" media="screen" href="stylesheets/lter_supplemental.less" />
+  <%= stylesheet_link_tag 'lter_supplemental.less', :rel => "stylesheet/less" %>
   <link rel="alternate" type="application/rss+xml" title="Data" href="/datatables.rss" />
 <% end %>
-  
+
 <% content_for :content do %>
   <%= render 'layouts/sign_in' %>
   <div id='branding'>
