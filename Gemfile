@@ -68,9 +68,9 @@ group :test do
   gem 'remarkable_activerecord', '>=4.0.0.alpha2'
 
   #Cucumber stuff
-  gem 'capybara'
+  gem 'capybara', '0.4.1.2'
   gem "factory_girl"
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', '0.4.1'
   gem 'spork'
   gem 'launchy'
   gem 'database_cleaner'
