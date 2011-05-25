@@ -408,7 +408,8 @@ class CitationsControllerTest < ActionController::TestCase
       get :index
       assert @controller.fragment_exist?(:controller => "citations", :action => "index")
       put :update, :id => @citation, :citation => { :title => 'nothing' }
-      assert Citation.find_by_title('title')
+      assert_equal @citation, assigns(:citation)
+      assert Citation.find_by_title('nothing')
       assert !@controller.fragment_exist?(:controller => "citations", :action => "index")
     end
 
