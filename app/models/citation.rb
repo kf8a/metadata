@@ -98,31 +98,8 @@ class Citation < ActiveRecord::Base
     self.authors = []
     current_seniority = 1
     string_of_authors.each_line do |author_string|
-      list_of_suffices = ['esq','esquire','jr','sr','2','i','ii','iii','iv','v','clu','chfc','cfp','md','phd']
-
       if author_string[0].to_i == 0
-        author_array = author_string.split(',')
-        new_author = Author.new
-        #Get suffices
-        suffix_text = ''
-        while author_array[-1].present? && list_of_suffices.include?(author_array[-1].downcase.delete('.').strip)
-          suffix_text = ', ' + author_array.slice!(-1).strip + suffix_text
-        end
-        new_author.suffix = suffix_text
-        if author_array.count == 1
-          #Must be first middle last
-          author_array = author_array[0].split
-          new_author.given_name = author_array.slice!(0)
-          new_author.sur_name = author_array.slice!(-1)
-          new_author.middle_name = author_array.join(' ')
-        else
-          #Must be last, first middle
-          new_author.sur_name = author_array.slice!(0)
-          author_array = author_array[0].split
-          new_author.given_name = author_array.slice!(0)
-          new_author.middle_name = author_array.join(' ')
-        end
-
+        new_author = Author.parse(author_string)
         new_author.seniority = current_seniority
         new_author.save
         self.authors << new_author
