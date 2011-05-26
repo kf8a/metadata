@@ -51,6 +51,24 @@ class AuthorTest < ActiveSupport::TestCase
       assert_equal 'B. K. Bond', @author1.formatted(:natural)
     end
   end
+  
+  context 'an author with a double last name' do
+    setup do 
+      @author = Factory :author, :sur_name => 'Al Fazier', :given_name => 'John'
+    end
+
+    should 'have the right name' do
+      assert_equal 'Al Fazier, John', @author.name
+    end
+
+    should 'be formated correctly as default' do
+      assert_equal 'Al Fazier, J.', @author.formatted
+    end
+
+    should 'be formated correctly as natural' do
+      assert_equal 'J. Al Fazier', @author.formatted(:natural)
+    end
+  end
 end
 
 
