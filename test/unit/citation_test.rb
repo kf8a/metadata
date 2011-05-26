@@ -389,7 +389,7 @@ class CitationTest < ActiveSupport::TestCase
       @cite.author_block = "Al Fasir, John"
       @cite.save
       assert_equal 'John', @cite.authors[0].given_name
-      assert_nil @cite.authors[0].middle_name
+      assert_equal '', @cite.authors[0].middle_name
       assert_equal "Al Fasir", @cite.authors[0].sur_name
       assert_equal "Al Fasir, John", @cite.author_block
     end
