@@ -69,6 +69,25 @@ class AuthorTest < ActiveSupport::TestCase
       assert_equal 'J. Al Fazier', @author.formatted(:natural)
     end
   end
+
+  context 'parsing an author string' do
+    context 'parsing reverse names' do
+      should 'parse Johnthon, Jones' do
+        author = Author.parse('Jones,Johnathon')
+        assert_equal 'Jones', author.sur_name
+        assert_equal 'Johnathon' author.given_name
+      end
+      should 'parse Al Fazier, John' do
+        author = Author.parse('Al Fazier, John')
+        assert_equal 'Al Fazier', author.sur_name
+        assert_equal 'John', author.given_name
+      end
+    end
+
+    context 'parsing forward names' do
+
+    end
+  end
 end
 
 
