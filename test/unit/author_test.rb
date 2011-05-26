@@ -1,4 +1,4 @@
-require File.expand_path('../../test_helper',__FILE__) 
+require File.expand_path('../../test_helper',__FILE__)
 
 class AuthorTest < ActiveSupport::TestCase
 
@@ -51,9 +51,9 @@ class AuthorTest < ActiveSupport::TestCase
       assert_equal 'B. K. Bond', @author1.formatted(:natural)
     end
   end
-  
+
   context 'an author with a double last name' do
-    setup do 
+    setup do
       @author = Factory :author, :sur_name => 'Al Fazier', :given_name => 'John'
     end
 
@@ -73,14 +73,16 @@ class AuthorTest < ActiveSupport::TestCase
   context 'parsing an author string' do
     context 'parsing reverse names' do
       should 'parse Jones, Johnathon' do
-        author = Author.parse('Jones, Johnathon')
+        author = Author.new
+        author.name = 'Jones, Johnathon'
         assert_equal 'Jones', author.sur_name
-        #assert_equal 'Johnathon' author.given_name
+        assert_equal 'Johnathon', author.given_name
       end
       should 'parse Al Fazier, John' do
-        author = Author.parse('Al Fazier, John')
+        author = Author.new
+        author.name = 'Al Fazier, John'
         assert_equal 'Al Fazier', author.sur_name
-        #assert_equal 'John', author.given_name
+        assert_equal 'John', author.given_name
       end
     end
 
@@ -107,4 +109,3 @@ end
 #  updated_at  :datetime
 #  suffix      :string(255)
 #
-

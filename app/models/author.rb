@@ -24,31 +24,28 @@ class Author < ActiveRecord::Base
     sur_text + given_text + middle_text + suffix_text
   end
 
-  def Author.parse(author_string)
+  def name=(author_string='')
     list_of_suffices = ['esq','esquire','jr','sr','2','i','ii','iii','iv','v','clu','chfc','cfp','md','phd']
     author_array = author_string.split(',')
-    new_author = Author.new
     #Get suffices
     suffix_text = ''
     while author_array[-1].present? && list_of_suffices.include?(author_array[-1].downcase.delete('.').strip)
       suffix_text = ', ' + author_array.slice!(-1).strip + suffix_text
     end
-    new_author.suffix = suffix_text
+    self.suffix = suffix_text
     if author_array.count == 1
       #Must be first middle last
       author_array = author_array[0].split
-      new_author.given_name = author_array.slice!(0)
-      new_author.sur_name = author_array.slice!(-1)
-      new_author.middle_name = author_array.join(' ')
+      self.given_name = author_array.slice!(0)
+      self.sur_name = author_array.slice!(-1)
+      self.middle_name = author_array.join(' ')
     else
       #Must be last, first middle
-      new_author.sur_name = author_array.slice!(0)
+      self.sur_name = author_array.slice!(0)
       author_array = author_array[0].split
-      new_author.given_name = author_array.slice!(0)
-      new_author.middle_name = author_array.join(' ')
+      self.given_name = author_array.slice!(0)
+      self.middle_name = author_array.join(' ')
     end
-
-    new_author
   end
 end
 
