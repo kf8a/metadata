@@ -105,14 +105,17 @@ class Citation < ActiveRecord::Base
         new_author.save
         self.authors << new_author
       else
-        #it is a token list
-        author_array = author_string.split(',')
-        author_array.each do |author_id|
-          self.authors << Author.find_by_id(author_string)
-        end
+        treat_as_token_list(author_string)
       end
 
       current_seniority += 1
+    end
+  end
+
+  def treat_as_token_list(author_string)
+    author_array = author_string.split(',')
+    author_array.each do |author_id|
+      self.authors << Author.find_by_id(author_id)
     end
   end
 
