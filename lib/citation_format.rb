@@ -28,7 +28,7 @@ module CitationFormat
   end
 
   def suffix_text
-    has_suffix? ? ", #{suffix}" : ''
+    has_suffix? ? suffix : ''
   end
 
   private

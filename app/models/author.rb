@@ -19,7 +19,7 @@ class Author < ActiveRecord::Base
 
     given_text  = given_name.present?  ? " #{given_name}"  : ''
     middle_text = middle_name.present? ? " #{middle_name}" : ''
-    suffix_text = suffix.present?      ? ", #{suffix}"     : ''
+    suffix_text = suffix.present?      ? suffix            : '' #proper suffix should already be in ', Jr.' form
 
     sur_text + given_text + middle_text + suffix_text
   end

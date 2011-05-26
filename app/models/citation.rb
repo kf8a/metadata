@@ -98,38 +98,29 @@ class Citation < ActiveRecord::Base
     self.authors = []
     current_seniority = 1
     string_of_authors.each_line do |author_string|
+      list_of_suffices = ['esq','esquire','jr','sr','2','i','ii','iii','iv','v','clu','chfc','cfp','md','phd']
+
       if author_string[0].to_i == 0
-        author_array = author_string.split
+        author_array = author_string.split(',')
         new_author = Author.new
-        if author_array[0].include?(',')
-          #Last name is first: Jones, Jonathon
-          new_author.sur_name = author_array.slice!(0).delete(',')
-          if author_array[0].include?(',')
-            #It must be firstname, suffix: Martin, Jr.'
-            new_author.given_name = author_array.slice!(0).delete(',')
-            new_author.suffix = author_array.join(' ')
-          else
-            new_author.given_name = author_array.slice!(0)
-            if author_array[-2].to_s.include?(',')
-              #It must be middlename, suffix: Luther, Jr.'
-              new_author.suffix = author_array.slice!(-1)
-              new_author.middle_name = author_array.join(' ').delete(',')
-            else
-              new_author.middle_name = author_array.join(' ')
-            end
-          end
-        else
+        #Get suffices
+        suffix_text = ''
+        while author_array[-1].present? && list_of_suffices.include?(author_array[-1].downcase.delete('.').strip)
+          suffix_text = ', ' + author_array.slice!(-1).strip + suffix_text
+        end
+        new_author.suffix = suffix_text
+        if author_array.count == 1
+          #Must be first middle last
+          author_array = author_array[0].split
           new_author.given_name = author_array.slice!(0)
-          if author_array[-2].to_s.include?(',')
-            #It must be sur_name, suffix: King, Jr.'
-            new_author.sur_name = author_array.slice!(-2).delete(',')
-            new_author.suffix = author_array.slice!(-1)
-            new_author.middle_name = author_array.join(' ')
-          else
-          #assumes it is 'Jonathon David Jones'
-            new_author.sur_name = author_array.slice!(-1)
-            new_author.middle_name = author_array.join(' ')
-          end
+          new_author.sur_name = author_array.slice!(-1)
+          new_author.middle_name = author_array.join(' ')
+        else
+          #Must be last, first middle
+          new_author.sur_name = author_array.slice!(0)
+          author_array = author_array[0].split
+          new_author.given_name = author_array.slice!(0)
+          new_author.middle_name = author_array.join(' ')
         end
 
         new_author.seniority = current_seniority
