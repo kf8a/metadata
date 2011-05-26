@@ -87,7 +87,21 @@ class AuthorTest < ActiveSupport::TestCase
     end
 
     context 'parsing forward names' do
+      should 'parse Jonathon Jones' do
+        author = Author.new
+        author.name = "Jonathon Jones"
+        assert_equal 'Jones', author.sur_name
+        assert_equal 'Jonathon', author.given_name
+      end
 
+      should 'parse Marting Luther King, Jr.' do
+        author = Author.new
+        author.name = "Martin Luther King, Jr."
+        assert_equal 'King', author.sur_name
+        assert_equal 'Martin', author.given_name
+        assert_equal 'Luther', author.middle_name
+        assert_equal ', Jr.', author.suffix
+      end
     end
   end
 end
