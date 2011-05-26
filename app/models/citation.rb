@@ -95,17 +95,14 @@ class Citation < ActiveRecord::Base
   end
 
   def author_block=(string_of_authors = '')
-    self.authors = []
+    self.authors.clear
     current_seniority = 1
     string_of_authors.each_line do |author_string|
-      if author_string[0].to_i == 0
-        new_author = Author.new
-        new_author.name = author_string
-        new_author.seniority = current_seniority
-        new_author.save
-        self.authors << new_author
-      else
+      if author_string[0].match('\d')
         treat_as_token_list(author_string)
+      else
+        self.authors << Author.create(:name      => author_string,
+                                      :seniority => current_seniority)
       end
 
       current_seniority += 1
