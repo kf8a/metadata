@@ -26,10 +26,10 @@ class Author < ActiveRecord::Base
 
   def Author.parse(author_string)
 
-    authors_array, suffix = author_string.split(',')
-    if ['jr.','sr.','i','ii','iii','iv','v','vi'].includes(suffix.downcase.strip)
+    # authors_array, suffix = author_string.split(',')
+    # if ['jr.','sr.','i','ii','iii','iv','v','vi'].include?(suffix.downcase.strip)
 
-    end
+    # end
     author_array = author_string.split
     new_author = Author.new
     if author_array[0].include?(',')
@@ -62,6 +62,7 @@ class Author < ActiveRecord::Base
         new_author.middle_name = author_array.join(' ')
       end
     end
+    new_author
   end
 end
 
