@@ -51,6 +51,43 @@ class AuthorTest < ActiveSupport::TestCase
       assert_equal 'B. K. Bond', @author1.formatted(:natural)
     end
   end
+  
+  context 'an author with a double last name' do
+    setup do 
+      @author = Factory :author, :sur_name => 'Al Fazier', :given_name => 'John'
+    end
+
+    should 'have the right name' do
+      assert_equal 'Al Fazier, John', @author.name
+    end
+
+    should 'be formated correctly as default' do
+      assert_equal 'Al Fazier, J.', @author.formatted
+    end
+
+    should 'be formated correctly as natural' do
+      assert_equal 'J. Al Fazier', @author.formatted(:natural)
+    end
+  end
+
+  context 'parsing an author string' do
+    context 'parsing reverse names' do
+      should 'parse Jones, Johnathon' do
+        author = Author.parse('Jones, Johnathon')
+        assert_equal 'Jones', author.sur_name
+        #assert_equal 'Johnathon' author.given_name
+      end
+      should 'parse Al Fazier, John' do
+        author = Author.parse('Al Fazier, John')
+        assert_equal 'Al Fazier', author.sur_name
+        #assert_equal 'John', author.given_name
+      end
+    end
+
+    context 'parsing forward names' do
+
+    end
+  end
 end
 
 

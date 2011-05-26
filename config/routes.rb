@@ -28,6 +28,11 @@ Metadata::Application.routes.draw do
 
   resources :article_citations, :controller=>'citations'
   resources :book_citations, :controller=>'citations'
+  resources :report_citations, :controller=>'citations'
+  resources :chapter_citations, :controller=>'citations'
+  resources :ebook_citations, :controller=>'citations'
+  resources :conference_citations, :controller => 'citations'
+  resources :thesis_citations, :controller => 'citations'
 
   resources :authors
   resources :collections

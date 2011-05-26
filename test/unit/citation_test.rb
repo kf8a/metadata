@@ -371,6 +371,7 @@ class CitationTest < ActiveSupport::TestCase
     end
 
   end
+
   context 'a citation object with an author' do
     setup do
       @auth = Factory.create(:author)
@@ -383,7 +384,24 @@ class CitationTest < ActiveSupport::TestCase
       @cite.author_block = "Another Author"
       refute @cite.authors.include?(@auth)
     end
+
+    should 'parse authors with double last names' do
+      @cite.author_block = "Al Fasir, John"
+      @cite.save
+      assert_equal 'John', @cite.authors[0].given_name
+      assert_nil @cite.authors[0].middle_name
+      assert_equal "Al Fasir", @cite.authors[0].sur_name
+      assert_equal "Al Fasir, John", @cite.author_block
+    end
+
+    should 'parse a normal author' do
+      @cite.author_block = "Jones, Jonathon"
+      @cite.save
+      assert_equal "Jones, Jonathon", @cite.author_block
+      assert_equal "Jones", @cite.authors[0].sur_name
+    end
   end
+
 end
 
 
