@@ -26,7 +26,7 @@ class Author < ActiveRecord::Base
 
   def Author.parse(author_string)
     list_of_suffices = ['esq','esquire','jr','sr','2','i','ii','iii','iv','v','clu','chfc','cfp','md','phd']
-    author_array = author_string.split
+    author_array = author_string.split(',')
     new_author = Author.new
     #Get suffices
     suffix_text = ''
