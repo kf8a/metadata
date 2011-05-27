@@ -49,6 +49,7 @@ class CitationsController < ApplicationController
 
   def new
     @citation = Citation.new
+    @citation.type = 'ArticleCitation'
   end
 
   def create
