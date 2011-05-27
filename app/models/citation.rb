@@ -83,15 +83,7 @@ class Citation < ActiveRecord::Base
   end
 
   def author_block
-    ab = ''
-    new_line_necessary = false
-    authors.order(:seniority).each do |author|
-      ab += "\n" if new_line_necessary
-      ab += author.name
-      new_line_necessary = true
-    end
-
-    ab
+    block(authors)
   end
 
   def author_block=(string_of_authors = '')
@@ -117,15 +109,7 @@ class Citation < ActiveRecord::Base
   end
 
   def editor_block
-    eb = ''
-    new_line_necessary = false
-    editors.order(:seniority).each do |editor|
-      eb += editor.name
-      eb += "\n" if new_line_necessary
-      new_line_necessary = true
-    end
-
-    eb
+    block(editors)
   end
 
   def editor_block=(string_of_editors = '')
@@ -291,6 +275,22 @@ class Citation < ActiveRecord::Base
     end
   end
 end
+
+private
+
+  def block(collection)
+    ab = ''
+    new_line_necessary = false
+    collection.order(:seniority).each do |member|
+      ab += "\n" if new_line_necessary
+      ab += member.name
+      new_line_necessary = true
+    end
+
+    ab
+  end
+
+
 
 
 # == Schema Information
