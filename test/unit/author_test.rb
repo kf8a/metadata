@@ -71,18 +71,41 @@ class AuthorTest < ActiveSupport::TestCase
   end
 
   context 'parsing an author string' do
+    setup do
+      @author = Author.new
+    end
     context 'parsing reverse names' do
+
       should 'parse Jones, Johnathon' do
-        author = Author.new
-        author.name = 'Jones, Johnathon'
-        assert_equal 'Jones', author.sur_name
-        assert_equal 'Johnathon', author.given_name
+        @author.name = 'Jones, Johnathon'
+        assert_equal 'Jones', @author.sur_name
+        assert_equal 'Johnathon', @author.given_name
       end
       should 'parse Al Fazier, John' do
-        author = Author.new
-        author.name = 'Al Fazier, John'
-        assert_equal 'Al Fazier', author.sur_name
-        assert_equal 'John', author.given_name
+        @author.name = 'Al Fazier, John'
+        assert_equal 'Al Fazier', @author.sur_name
+        assert_equal 'John', @author.given_name
+      end
+
+      should 'parse McDonalds, R. J.' do
+        @author.name = 'McDonalds, R. J.' 
+        assert_equal 'McDonalds', @author.sur_name
+        assert_equal 'R', @author.given_name
+        assert_equal 'J', @author.middle_name
+      end
+
+      should 'parse McDondalds, R.J.' do
+        @author.name = 'McDonalds, R.J.' 
+        assert_equal 'McDonalds', @author.sur_name
+        assert_equal 'R', @author.given_name
+        assert_equal 'J', @author.middle_name
+      end
+
+      should 'parse McDonads, Rob John Paul' do
+        @author.name = 'McDonalds, Rob John Paul' 
+        assert_equal 'McDonalds', @author.sur_name
+        assert_equal 'Rob', @author.given_name
+        assert_equal 'John Paul', @author.middle_name
       end
     end
 
