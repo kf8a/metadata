@@ -274,9 +274,6 @@ class Citation < ActiveRecord::Base
       " in #{eds}, eds"
     end
   end
-end
-
-private
 
   def block(collection)
     ab = ''
@@ -289,6 +286,7 @@ private
 
     ab
   end
+end
 
 
 
