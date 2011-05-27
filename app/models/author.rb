@@ -35,17 +35,18 @@ class Author < ActiveRecord::Base
     self.suffix = suffix_text
     if author_array.count == 1
       #Must be first middle last
-      author_array = author_array[0].split
+      author_array = author_array[0].split.collect {|x| x.split('.') }.flatten
       self.given_name = author_array.slice!(0)
       self.sur_name = author_array.slice!(-1)
       self.middle_name = author_array.join(' ')
     else
       #Must be last, first middle
       self.sur_name = author_array.slice!(0)
-      author_array = author_array[0].split
+      author_array = author_array[0].split.collect {|x| x.split('.') }.flatten
       self.given_name = author_array.slice!(0)
       self.middle_name = author_array.join(' ')
     end
+
   end
 end
 

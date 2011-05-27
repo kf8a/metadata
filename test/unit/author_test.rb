@@ -111,19 +111,38 @@ class AuthorTest < ActiveSupport::TestCase
 
     context 'parsing forward names' do
       should 'parse Jonathon Jones' do
-        author = Author.new
-        author.name = "Jonathon Jones"
-        assert_equal 'Jones', author.sur_name
-        assert_equal 'Jonathon', author.given_name
+        @author.name = "Jonathon Jones"
+        assert_equal 'Jones', @author.sur_name
+        assert_equal 'Jonathon', @author.given_name
       end
 
       should 'parse Marting Luther King, Jr.' do
-        author = Author.new
-        author.name = "Martin Luther King, Jr."
-        assert_equal 'King', author.sur_name
-        assert_equal 'Martin', author.given_name
-        assert_equal 'Luther', author.middle_name
-        assert_equal ', Jr.', author.suffix
+        @author.name = "Martin Luther King, Jr."
+        assert_equal 'King', @author.sur_name
+        assert_equal 'Martin', @author.given_name
+        assert_equal 'Luther', @author.middle_name
+        assert_equal ', Jr.', @author.suffix
+      end
+
+      should 'parse R.J. Paulson' do
+        @author.name = 'R.J. Paulson'
+        assert_equal 'Paulson', @author.sur_name
+        assert_equal 'R', @author.given_name
+        assert_equal 'J', @author.middle_name
+      end
+
+      should 'parse R J S Paulson' do
+        @author.name = 'R J S Paulson'
+        assert_equal 'Paulson', @author.sur_name
+        assert_equal 'R', @author.given_name
+        assert_equal 'J S', @author.middle_name
+      end
+
+      should 'parse R. J. S. Paulson' do
+        @author.name = 'R. J. S. Paulson' 
+        assert_equal 'Paulson', @author.sur_name
+        assert_equal 'R', @author.given_name
+        assert_equal 'J S', @author.middle_name
       end
     end
   end
