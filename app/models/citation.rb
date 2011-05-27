@@ -86,8 +86,8 @@ class Citation < ActiveRecord::Base
     ab = ''
     new_line_necessary = false
     authors.order(:seniority).each do |author|
-      ab += author.name
       ab += "\n" if new_line_necessary
+      ab += author.name
       new_line_necessary = true
     end
 
