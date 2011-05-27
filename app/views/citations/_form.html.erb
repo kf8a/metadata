@@ -7,12 +7,12 @@
 <% end %>
 <h2>Authors</h2>
 <%= form.inputs do %>
-  <%= form.input :author_block, :label => 'Authors', :as=>:text, :input_html => { :class => 'autogrow', :rows => 10 }%>
+  <%= form.input :author_block, :label => 'Authors', :as=>:text, :input_html => { :class => 'autogrow author_block', :rows => 10 }%>
 <% end %>
 <h2>Editors</h2>
 <div id='editors'>
   <%= form.inputs do %>
-    <%= form.input :editor_block, :label => 'Editors', :as => :text, :input_html => { :class => 'autogrow', :rows => 10}%>
+    <%= form.input :editor_block, :label => 'Editors', :as => :text, :input_html => { :class => 'autogrow author_block', :rows => 10}%>
   <% end %>
 </div>
 
