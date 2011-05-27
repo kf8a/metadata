@@ -116,6 +116,40 @@ class Citation < ActiveRecord::Base
     end
   end
 
+  def editor_block
+    eb = ''
+    new_line_necessary = false
+    editors.order(:seniority).each do |editor|
+      eb += editor.name
+      eb += "\n" if new_line_necessary
+      new_line_necessary = true
+    end
+
+    eb
+  end
+
+  def editor_block=(string_of_editors = '')
+    self.editors.clear
+    current_seniority = 1
+    string_of_editors.each_line do |editor_string|
+      if editor_string[0].match('\d')
+        treat_as_editor_token_list(editor_string)
+      else
+        self.editors << Editor.create(:name      => editor_string,
+                                      :seniority => current_seniority)
+      end
+
+      current_seniority += 1
+    end
+  end
+
+  def treat_as_editor_token_list(editor_string)
+    editor_array = editor_string.split(',')
+    editor_array.each do |editor_id|
+      self.editors << Editor.find_by_id(editor_id)
+    end
+  end
+
   def file_title
     "#{self.id}-#{self.title}-#{self.pub_year}"
   end

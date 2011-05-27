@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110524012030) do
+ActiveRecord::Schema.define(:version => 20110526202454) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -242,6 +242,7 @@ ActiveRecord::Schema.define(:version => 20110524012030) do
     t.integer  "citation_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "suffix"
   end
 
   create_table "eml_docs", :force => true do |t|
