@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110526202454) do
+ActiveRecord::Schema.define(:version => 20110527143940) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -748,6 +748,16 @@ ActiveRecord::Schema.define(:version => 20110526202454) do
   add_index "versions", ["user_id", "user_type"], :name => "index_versions_on_user_id_and_user_type"
   add_index "versions", ["user_name"], :name => "index_versions_on_user_name"
   add_index "versions", ["versioned_id", "versioned_type"], :name => "index_versions_on_versioned_id_and_versioned_type"
+
+  create_table "visualizations", :force => true do |t|
+    t.integer  "datatable_id"
+    t.string   "title"
+    t.text     "body"
+    t.text     "query"
+    t.string   "graph_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "websites", :force => true do |t|
     t.string   "name"

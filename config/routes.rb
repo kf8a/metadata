@@ -101,6 +101,8 @@ Metadata::Application.routes.draw do
   resources :uploads
   resources :variates
 
+  resources :visualizations, :only => 'show'
+
   match "/application.manifest" => Rails::Offline
 
   root :to => 'datatables#index'
