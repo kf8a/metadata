@@ -1,0 +1,11 @@
+require 'autotest/fsevent'
+
+Autotest.add_hook :initialize do |at|
+  # Gemfile.lock is causing cucumber to run infinitely. Don't watch it.
+  at.add_exception(%r{^\./Gemfile.lock})
+  at.add_exception(%r{^\./webrat.log})
+  at.add_exception(/^\.\/(rcov|coverage|\.git)/)
+  at.add_exception %r{^./tmp}  # ignore temp files, lest autotest will run again, and again...
+
+  at.add_mapping(%r{^lib/.*\.rb$}) {|f, _| Dir['spec/**/*.rb'] }
+end

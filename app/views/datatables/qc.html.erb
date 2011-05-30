@@ -1,3 +1,8 @@
-<h1>Quality Control for <%= datatable.name %></h1>
+<h1>Graphs for <%= datatable.name %></h1>
 
-<h2>Time Series Graphs</h2>
+<% datatable.visualizations.each do |visualization| %>
+  <h2><%= visualization.title %></h2>
+  <p><%= visualization.body %></p>
+  <div class = "<%=visualization.graph_type%>" id = "<%=visualization.id%>">
+  </div>
+<% end %>

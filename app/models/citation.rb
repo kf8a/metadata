@@ -83,35 +83,54 @@ class Citation < ActiveRecord::Base
   end
 
   def author_block
-    ab = ''
-    new_line_necessary = false
-    authors.order(:seniority).each do |author|
-      ab += author.name
-      ab += "\n" if new_line_necessary
-      new_line_necessary = true
-    end
-
-    ab
+    block(authors)
   end
 
   def author_block=(string_of_authors = '')
-    self.authors = []
+    self.authors.clear
     current_seniority = 1
     string_of_authors.each_line do |author_string|
-      if author_string[0].to_i == 0
-        new_author = Author.parse(author_string)
-        new_author.seniority = current_seniority
-        new_author.save
-        self.authors << new_author
+      if author_string[0].match('\d')
+        treat_as_token_list(author_string)
       else
-        #it is a token list
-        author_array = author_string.split(',')
-        author_array.each do |author_id|
-          self.authors << Author.find_by_id(author_string)
-        end
+        self.authors << Author.create(:name      => author_string,
+                                      :seniority => current_seniority)
       end
 
       current_seniority += 1
+    end
+  end
+
+  def treat_as_token_list(author_string)
+    author_array = author_string.split(',')
+    author_array.each do |author_id|
+      self.authors << Author.find_by_id(author_id)
+    end
+  end
+
+  def editor_block
+    block(editors)
+  end
+
+  def editor_block=(string_of_editors = '')
+    self.editors.clear
+    current_seniority = 1
+    string_of_editors.each_line do |editor_string|
+      if editor_string[0].match('\d')
+        treat_as_editor_token_list(editor_string)
+      else
+        self.editors << Editor.create(:name      => editor_string,
+                                      :seniority => current_seniority)
+      end
+
+      current_seniority += 1
+    end
+  end
+
+  def treat_as_editor_token_list(editor_string)
+    editor_array = editor_string.split(',')
+    editor_array.each do |editor_id|
+      self.editors << Editor.find_by_id(editor_id)
     end
   end
 
@@ -255,7 +274,21 @@ class Citation < ActiveRecord::Base
       " in #{eds}, eds"
     end
   end
+
+  def block(collection)
+    ab = ''
+    new_line_necessary = false
+    collection.order(:seniority).each do |member|
+      ab += "\n" if new_line_necessary
+      ab += member.name
+      new_line_necessary = true
+    end
+
+    ab
+  end
 end
+
+
 
 
 # == Schema Information

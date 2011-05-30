@@ -3,20 +3,18 @@
 <% end %>
 <%= form.inputs :doi %>
 <%= form.inputs do %>
-  <%= form.input :state, :as => :radio,  :collection => ['submitted','forthcomming','published'] %>
+  <%= form.input :state, :as => :radio,  :collection => ['submitted','forthcoming','published'] %>
 <% end %>
 <h2>Authors</h2>
 <%= form.inputs do %>
-  <%= form.input :author_block, :label => 'Authors', :as=>:text, :input_html => { :class => 'autogrow', :rows => 10 }%>
+  <%= form.input :author_block, :label => 'Authors', :as=>:text, :input_html => { :class => 'autogrow author_block', :rows => 10 }%>
 <% end %>
 <h2>Editors</h2>
 <div id='editors'>
-  <%= form.inputs :for => :editors do |f| %>
-    <%= render :partial => 'editor_fields', :locals => {:f=>f} %>
+  <%= form.inputs do %>
+    <%= form.input :editor_block, :label => 'Editors', :as => :text, :input_html => { :class => 'autogrow author_block', :rows => 10}%>
   <% end %>
 </div>
-<%= link_to_add_fields "Add Editors", form, :editors %>
-
 
 <%= form.inputs :title, :secondary_title, :series_title, :abstract, :pub_year, :pub_date, :publication,
     :start_page_number, :ending_page_number, :periodical_full_name,
