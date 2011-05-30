@@ -7,29 +7,6 @@ class Editor < ActiveRecord::Base
 
   validates_presence_of :seniority
 
-  def name=(editor_string='')
-    list_of_suffices = ['esq','esquire','jr','sr','2','i','ii','iii','iv','v','clu','chfc','cfp','md','phd']
-    editor_array = editor_string.split(',')
-    #Get suffices
-    suffix_text = ''
-    while editor_array[-1].present? && list_of_suffices.include?(editor_array[-1].downcase.delete('.').strip)
-      suffix_text = ', ' + editor_array.slice!(-1).strip + suffix_text
-    end
-    self.suffix = suffix_text
-    if editor_array.count == 1
-      #Must be first middle last
-      editor_array = editor_array[0].split
-      self.given_name = editor_array.slice!(0)
-      self.sur_name = editor_array.slice!(-1)
-      self.middle_name = editor_array.join(' ')
-    else
-      #Must be last, first middle
-      self.sur_name = editor_array.slice!(0)
-      editor_array = editor_array[0].split
-      self.given_name = editor_array.slice!(0)
-      self.middle_name = editor_array.join(' ')
-    end
-  end
 end
 
 
