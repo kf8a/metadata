@@ -87,24 +87,13 @@ class Citation < ActiveRecord::Base
   end
 
   def author_block=(string_of_authors = '')
-    self.authors.clear
-    current_seniority = 1
-    string_of_authors.each_line do |author_string|
-      if author_string[0].match('\d')
-        treat_as_token_list(author_string)
-      else
-        self.authors << Author.create(:name      => author_string,
-                                      :seniority => current_seniority)
-      end
-
-      current_seniority += 1
-    end
+    set_as_block('Author', string_of_authors)
   end
 
-  def treat_as_token_list(author_string)
-    author_array = author_string.split(',')
-    author_array.each do |author_id|
-      self.authors << Author.find_by_id(author_id)
+  def treat_as_token_list(name_of_class, token_string)
+    token_array = token_string.split(',')
+    token_array.each do |token|
+      self.send(name_of_class.tableize) << name_of_class.constantize.find_by_id(author_id)
     end
   end
 
@@ -113,25 +102,7 @@ class Citation < ActiveRecord::Base
   end
 
   def editor_block=(string_of_editors = '')
-    self.editors.clear
-    current_seniority = 1
-    string_of_editors.each_line do |editor_string|
-      if editor_string[0].match('\d')
-        treat_as_editor_token_list(editor_string)
-      else
-        self.editors << Editor.create(:name      => editor_string,
-                                      :seniority => current_seniority)
-      end
-
-      current_seniority += 1
-    end
-  end
-
-  def treat_as_editor_token_list(editor_string)
-    editor_array = editor_string.split(',')
-    editor_array.each do |editor_id|
-      self.editors << Editor.find_by_id(editor_id)
-    end
+    set_as_block('Editor', string_of_editors)
   end
 
   def file_title
@@ -285,6 +256,22 @@ class Citation < ActiveRecord::Base
     end
 
     ab
+  end
+
+  def set_as_block(name_of_class, string_of_names = '')
+    table_name = name_of_class.tableize
+    self.send(table_name).clear
+    current_seniority = 1
+    string_of_names.each_line do |name_string|
+      if name_string[0].match('\d')
+        treat_as_token_list(name_of_class, name_string)
+      else
+        self.send(table_name) << name_of_class.constantize.create(:name      => name_string,
+                                                      :seniority => current_seniority)
+      end
+
+      current_seniority += 1
+    end
   end
 end
 
