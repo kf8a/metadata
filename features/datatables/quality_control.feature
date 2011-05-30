@@ -14,4 +14,4 @@ Feature: Quality Control
      When I sign in as "bob@person.com/password"
       And I go to the quality control page for "QC Me"
      Then I should be on the quality control page for "QC Me"
-      And I should see "Time Series Graphs"
+      And I should see "Graphs for QC Me"
