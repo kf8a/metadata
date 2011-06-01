@@ -192,6 +192,7 @@ class DatatablesController < ApplicationController
     @keyword_list = nil if @keyword_list.empty? || @keyword_list == @default_value
 
     if @keyword_list
+
       @datatables = Datatable.search @keyword_list, :with => {:website => website.id}
     else
       @datatables = Datatable.
@@ -200,7 +201,6 @@ class DatatablesController < ApplicationController
     end
 
     @studies = Study.find_all_roots_with_datatables(@datatables)
-
   end
 
   def datatable

@@ -1,0 +1,6 @@
+<li>
+<%=link_to raw(datatable.title_and_years), datatable_path(datatable) %>
+<span class='member-only'>
+  <%= datatable.updated_at.to_date if datatable.updated_at %> 
+</span>
+</li>

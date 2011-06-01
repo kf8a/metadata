@@ -20,26 +20,9 @@
 </div>
 
 
-<ul class='quickTree'>
-  <% @studies.each do |study| -%>
-    <% next unless study.include_datatables?(@datatables)%>
-    
-    <%= render :partial => 'study',  :locals => {:study => study, :themes => @themes, :datatables => @datatables} %>
-  <% end -%>
-</ul>
 
-<% if signed_in? %>
-  <h3>Datatables</h3>
-  <ul>
-    <% @datatables.each do |datatable| %>
-      <% next if datatable.theme_id %>
-      <li><%= link_to datatable.title_and_years, datatable_path(datatable)%> <%=link_to "edit", edit_datatable_path(datatable)%>
-        <span class='updated_at'>
-          <%= datatable.updated_at.to_date if datatable.updated_at %> 
-        </span>
-      </li>
-    <% end -%>
-  </ul>
-<% end %>
+<ul class='quickTree'>
+  <%= render :partial => 'datatable', :collection => @datatables %>
+</ul>
 
 <%= link_to 'login', new_session_path %>

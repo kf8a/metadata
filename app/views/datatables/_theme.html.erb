@@ -3,12 +3,7 @@
     <% theme_datatables = theme.datatables_in_study(study, datatables) -%>
     <% theme_datatables.sort! {|a,b| sprintf("%.5i",a.weight) + a.title <=> sprintf("%.5i",b.weight) + b.title}%>
     <% theme_datatables.each do |datatable| -%>
-      <li>
-        <%=link_to raw(datatable.title_and_years), datatable_path(datatable) %>
-          <span class='member-only'>
-             <%= datatable.updated_at.to_date if datatable.updated_at %> 
-          </span>
-      </li>
+      <%= render :partial => 'datatable', :locals => {:datatable => datatable } %>
     <% end -%>
     
     <% theme.children.each do |t| -%>
