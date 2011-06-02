@@ -191,14 +191,14 @@ class DatatablesController < ApplicationController
     @keyword_list = query['keyword_list']
     @keyword_list = nil if @keyword_list.empty? || @keyword_list == @default_value
 
-    if @keyword_list
-
-      @datatables = Datatable.search @keyword_list, :with => {:website => website.id}
-    else
-      @datatables = Datatable.
-          joins('left join datasets on datasets.id = datatables.dataset_id').
-          where('is_secondary is false and website_id = ?', website.id).all
-    end
+    @datatables = 
+      if @keyword_list
+        Datatable.search @keyword_list, :with => {:website => website.id}
+      else
+        Datatable.
+            joins('left join datasets on datasets.id = datatables.dataset_id').
+            where('is_secondary is false and website_id = ?', website.id).all
+      end
 
     @studies = Study.find_all_roots_with_datatables(@datatables)
   end
