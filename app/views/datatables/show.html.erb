@@ -70,9 +70,11 @@
       <tr>
         <td>Protocols</td>
         <td>
+          <ul>
           <% datatable.protocols_with_backup.each do |protocol| %>
-            <%= link_to protocol.name, protocol_path(protocol)%>
+            <li><%= link_to protocol.title, protocol_path(protocol)%></li>
           <% end %>
+        </ul>
         </td>
       </tr>
     <% end -%>
