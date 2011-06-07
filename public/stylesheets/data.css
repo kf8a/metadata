@@ -176,7 +176,7 @@ a.edit:hover {
 	border-style: outset;
 	font-variant: small-caps;
 	text-align: center;
-	font-size: large;
+	font-size: medium;
 }
 
 #content a.download-link:hover {
@@ -224,6 +224,17 @@ li.study-title li {
 	padding-top: 3px;
 }
 
+#content table.protocols-table {
+	margin-top: 1.2em;
+	width: 100%;
+}
+
+
+#content table.protocols-table tbody tr th {
+	text-align: left;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
 
 #content table.variate-table {
 	margin-top: 1.2em;
@@ -279,6 +290,18 @@ table.data-description {
 .big {
 	font-size:large;
 }
+
+#download {
+  width: 50%;
+  float: right;
+}
+
+#protocols {
+  width:4em8%;
+  display: inline-block;
+  float: left;
+}
+
 
 .quickTree {
 	border-top-style: solid;

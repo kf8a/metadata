@@ -1,4 +1,4 @@
-<p>
+<div id='download'>
   <% unless datatable.metadata_only? %>
     <% if datatable.can_be_downloaded_by?(current_user) %>
       <%= link_to 'Download complete data table',
@@ -33,4 +33,4 @@
       <% end %>
     <% end %>
   <% end %>
-</p>
+</div>

@@ -42,7 +42,6 @@
       <td>Datatable ID:</td>
       <td><%= datatable.name %></td>
     </tr>
-    <%= render datatable.dataset %>
     <% if datatable.related_tables.any? %>
       <tr>
         <td>Related Tables:</td>
@@ -66,18 +65,6 @@
         </ul>
       </td>
     </tr>
-    <% if datatable.protocols_with_backup -%>
-      <tr>
-        <td>Protocols</td>
-        <td>
-          <ul>
-          <% datatable.protocols_with_backup.each do |protocol| %>
-            <li><%= link_to protocol.title, protocol_path(protocol)%></li>
-          <% end %>
-        </ul>
-        </td>
-      </tr>
-    <% end -%>
     <% if datatable.keywords.any? && signed_in?%>
       <tr>
         <td>Keywords:</td>
@@ -122,6 +109,7 @@
       <!--
     	TODO: geographic coverage
     	-->
+    <%= render 'protocols', :datatable => datatable %>
     <%= render 'download_button', :datatable => datatable %>
     <%= render 'data_preview',    :datatable => datatable %>
   <% end %>
