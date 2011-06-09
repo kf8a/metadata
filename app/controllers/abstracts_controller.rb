@@ -3,34 +3,31 @@ class AbstractsController < ApplicationController
   helper_method :abstract
 
   before_filter :admin?, :except => [:index, :show]  if Rails.env == 'production'
-  
+
   # GET meeting_abstracts
   # GET meeting_abstracts.xml
   def index
     @abstracts = Abstract.by_authors
-    respond_to do |format|
-      format.html # index.erb
-      format.xml { render :xml => @abstracts.to_xml}
-    end
+    respond_with @abstracts
   end
 
   def download
     head(:not_found) and return unless (abstract= Abstract.find_by_id(params[:id]))
     path = abstract.pdf.path(params[:style])
-    if Rails.env.production? 
+    if Rails.env.production?
       redirect_to(AWS::S3::S3Object.url_for(path, abstract.pdf.bucket_name, :expires_in => 10.seconds))
     else
       send_file  path, :type => 'application/pdf', :disposition => 'inline'
     end
   end
-  
+
   # GET meeting_abstracts/new?meeting=1
   def new
     meeting  = Meeting.find(params[:meeting])
     abstract.meeting_id = meeting.id
   end
-  
-  
+
+
   def create
     respond_to do |format|
       if abstract.save
@@ -49,7 +46,7 @@ class AbstractsController < ApplicationController
   def show
     respond_with abstract
   end
-  
+
   # GET /meeting_abstract/1/edit
   def edit
   end
@@ -62,7 +59,7 @@ class AbstractsController < ApplicationController
     end
     respond_with abstract
   end
-  
+
   def destroy
     abstract.destroy
     respond_to do |format|
@@ -73,9 +70,9 @@ class AbstractsController < ApplicationController
       end
     end
   end
-  
+
   private
-  
+
   def abstract
     @abstract ||= params[:id] ? Abstract.find(params[:id]) : Abstract.new(params[:abstract])
   end
