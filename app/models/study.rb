@@ -16,6 +16,7 @@ class Study < ActiveRecord::Base
 
   # returns true if one or more of the tables passed is part of the current study
   def include_datatables?(table_query = [])
+    table_query = table_query.to_a  # thinking sphinks does not return an array
     (self_and_descendants_datatables & table_query).any?
   end
 
