@@ -15,6 +15,7 @@ class StudyTest < ActiveSupport::TestCase
 
       @datatable  = Factory.create(:datatable, :study => @study)
       @datatable2 = Factory.create(:datatable, :study => @study2)
+      @datatable3 = Factory.create(:datatable, :study => @study)
     end
     
     should 'return true if queried for included datatables' do
@@ -26,15 +27,21 @@ class StudyTest < ActiveSupport::TestCase
     end
     
     should 'find only the studies that include the datatable' do
-      assert Study.find_all_with_datatables([@datatable]) == [@study]
+      assert_equal  [@study], Study.find_all_with_datatables([@datatable]) 
+      assert_equal @study, Study.find_all_with_datatables([@datatable, @datatable3])[0]
+
+      assert_equal  [@study], Study.find_all_roots_with_datatables([@datatable]) 
+      assert_equal  [@study2], Study.find_all_with_datatables([@datatable2]) 
+      assert_not_equal [@study2], Study.find_all_with_datatables([@datatable])
+      assert_not_equal [@study], Study.find_all_with_datatables([@datatable2])
     end
     
     
     should 'return the studies in the proper order' do
       studies = Study.find_all_with_datatables([@datatable, @datatable2], {:order => :weight})
-      assert studies.size == 2
-      assert studies[0] == @study2
-      assert studies[1] == @study
+      assert_equal 2, studies.size 
+      assert_equal @study2,  studies[0]
+      assert_equal @study,  studies[1] 
     end
   end
 
@@ -56,6 +63,10 @@ class StudyTest < ActiveSupport::TestCase
     should 'return only the root studies' do 
       assert Study.find_all_roots_with_datatables([@datatable]) == [@study]
     end
+  end
+
+  context 'querying for studies with thinking sphinks' do
+    it 'should behave just as when calling with arrays'
   end
   
   context 'return the right url for the website' do

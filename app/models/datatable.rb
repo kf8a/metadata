@@ -39,8 +39,8 @@ class Datatable < ActiveRecord::Base
     indexes title
     indexes description
     indexes theme.name, :as => :theme
-    indexes people.sur_name, :as => :datatable_sur_name
-    indexes people.given_name, :as => :datatable_given_name
+    indexes data_contributions.person.sur_name, :as => :datatable_sur_name
+    indexes data_contributions.person.given_name, :as => :datatable_given_name
     indexes dataset.affiliations.person.sur_name, :as => :sur_name
     indexes dataset.affiliations.person.given_name, :as => :given_name
     indexes taggings.tag.name, :as => :keyword_name
