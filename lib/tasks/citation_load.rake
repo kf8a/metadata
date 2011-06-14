@@ -6,7 +6,7 @@ require File.join(File.dirname(__FILE__), '../ris_nodes')
 
 namespace :citation do
   desc 'load ris citation file'
-  task :load, :file, :needs => :environment do |t, args|
+  task :load, [:file] => [:environment] do |t, args|
     parser = RISParser.new
 
     parser.consume_all_input = false
