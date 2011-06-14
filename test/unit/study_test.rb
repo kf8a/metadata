@@ -66,7 +66,7 @@ class StudyTest < ActiveSupport::TestCase
   end
 
   context 'querying for studies with thinking sphinks' do
-    it 'should behave just as when calling with arrays'
+    should 'should behave just as when calling with arrays'
   end
   
   context 'return the right url for the website' do

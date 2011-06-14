@@ -7,13 +7,6 @@ GIT
       activesupport (>= 3.0.0)
 
 GIT
-  remote: git://github.com/galetahub/awesome_nested_set.git
-  revision: 6c98d59faf3a9de4dc62ba2e34059189cd4799d4
-  specs:
-    awesome_nested_set (1.5.0)
-      activerecord (>= 3.0.0)
-
-GIT
   remote: https://github.com/kf8a/ruby-openid.git
   revision: c010cead260bce7a2707d8bbe7430c2121141103
   specs:
@@ -59,6 +52,8 @@ GEM
     annotate (2.4.0)
     arel (2.0.10)
     arrayfields (4.7.4)
+    awesome_nested_set (2.0.0)
+      activerecord (>= 3.0.0)
     aws-s3 (0.6.2)
       builder
       mime-types
@@ -308,7 +303,7 @@ DEPENDENCIES
   RedCloth (= 4.2.4)
   acts-as-taggable-on
   annotate
-  awesome_nested_set!
+  awesome_nested_set
   aws-s3
   bibtex-ruby
   capistrano
