@@ -6,7 +6,7 @@ class Publication < ActiveRecord::Base
 
   attr_accessible :year, :citation, :publication_type_id, :abstract, :year, :treatment_ids
 
-#  accepts_nested_attributes_for :treatments
+  accepts_nested_attributes_for :treatments
 
   validates_presence_of :citation
   validates_numericality_of :year, :on => :create, :message => "is not a number"

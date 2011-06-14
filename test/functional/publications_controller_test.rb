@@ -96,7 +96,7 @@ class PublicationsControllerTest < ActionController::TestCase
     should assign_to :publication
   end
 
-  context 'POST with treatment ids' do
+  context 'POST adding treatments' do
     setup do
       @publication = Factory.create(:publication)
       @treatment = Factory.create(:treatment)
@@ -107,6 +107,20 @@ class PublicationsControllerTest < ActionController::TestCase
 
     should 'have the treatment attached' do
       assert @publication.treatments.include?(@treatment)
+    end
+  end
+
+  context 'POST removing treatments' do
+    setup do
+      @publication = Factory.create(:publication)
+      @publication.treatments  << Factory.create(:treatment)
+      post :update, :id => @publication, :publication => {:treatment_ids => []}
+    end
+
+    should assign_to :publication
+
+    should 'not have the treatment attached' do
+      assert_equal 0,  @publication.treatments.size
     end
   end
   
