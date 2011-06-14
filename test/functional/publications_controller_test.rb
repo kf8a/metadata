@@ -114,13 +114,14 @@ class PublicationsControllerTest < ActionController::TestCase
     setup do
       @publication = Factory.create(:publication)
       @publication.treatments  << Factory.create(:treatment)
-      post :update, :id => @publication, :publication => {:treatment_ids => []}
+      post :update, :id => @publication, :publication => {}
     end
 
     should assign_to :publication
 
     should 'not have the treatment attached' do
-      assert_equal 0,  @publication.treatments.size
+      pub = Publication.find(@publication.id)
+      assert_equal 0,  pub.treatments.size
     end
   end
   
