@@ -95,6 +95,8 @@ class PublicationsController < ApplicationController
   # PUT /publications/1
   # PUT /publications/1.xml
   def update
+    @publication = Publication.find(params[:id])
+    @publication.treatments.clear
     if @publication.update_attributes(params[:publication])
       expire_action :action => :index
       flash[:notice] = 'Publication was successfully updated.'
