@@ -93,6 +93,36 @@ class PublicationsControllerTest < ActionController::TestCase
     should render_template :edit
     should assign_to :publication_types
     should assign_to :treatments
+    should assign_to :publication
+  end
+
+  context 'POST adding treatments' do
+    setup do
+      @publication = Factory.create(:publication)
+      @treatment = Factory.create(:treatment)
+      post :update, :id => @publication, :publication => {:treatment_ids => [@treatment.id]}
+    end
+
+    should assign_to :publication
+
+    should 'have the treatment attached' do
+      assert @publication.treatments.include?(@treatment)
+    end
+  end
+
+  context 'POST removing treatments' do
+    setup do
+      @publication = Factory.create(:publication)
+      @publication.treatments  << Factory.create(:treatment)
+      post :update, :id => @publication, :publication => {}
+    end
+
+    should assign_to :publication
+
+    should 'not have the treatment attached' do
+      pub = Publication.find(@publication.id)
+      assert_equal 0,  pub.treatments.size
+    end
   end
   
   def test_should_destroy_publication

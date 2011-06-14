@@ -1,11 +1,13 @@
 <%= form.inputs :name, :title, :dataset %>
 <%= form.inputs do %>
   <%= form.input :comments, :input_html => { :size => '60x5' } %>
-  <%= form.input :description, :input_html => { :size => '60x5' } %>
+  <%= form.input :description, :input_html => { :size => '60x10' } %>
   <%= form.input :keyword_list, :label => 'Keywords' %>
   <%= form.input :study, :label => 'Experiment' %>
-  <%= form.input :theme, :label => 'KBS Theme' %>
+  <%= form.input :theme, :label => 'KBS Theme', :collection=> Theme.order('lft ASC').all.collect {|x| [x.nested_name, x.id] }%>
   <%= form.input :core_area, :label => 'LTER Core Area' %>
+  <%= form.input :deprecation_notice %>
+  <%# <%= form.input :deprecated_in_favor_of, :collection => @datatable.supercession_candiates%>
 <% end %>
 
 <h2>Data Contributions</h2>

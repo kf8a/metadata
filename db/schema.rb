@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110527143940) do
+ActiveRecord::Schema.define(:version => 20110610165828) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -193,18 +193,20 @@ ActiveRecord::Schema.define(:version => 20110527143940) do
     t.integer  "excerpt_limit"
     t.date     "begin_date"
     t.date     "end_date"
-    t.boolean  "on_web",                :default => true
+    t.boolean  "on_web",                 :default => true
     t.integer  "theme_id"
     t.integer  "core_area_id"
-    t.integer  "weight",                :default => 100
+    t.integer  "weight",                 :default => 100
     t.integer  "study_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_secondary",          :default => false
-    t.boolean  "is_utf_8",              :default => false
-    t.boolean  "metadata_only",         :default => false
+    t.boolean  "is_secondary",           :default => false
+    t.boolean  "is_utf_8",               :default => false
+    t.boolean  "metadata_only",          :default => false
     t.text     "summary_graph"
     t.text     "event_query"
+    t.integer  "deprecated_in_fovor_of"
+    t.text     "deprecation_notice"
   end
 
   add_index "datatables", ["core_area_id"], :name => "index_datatables_on_core_area_id"

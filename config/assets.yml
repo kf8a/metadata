@@ -1,4 +1,3 @@
-embed_assets: datauri
 
 package_path: 'packages'
 javascript_compressor: closure

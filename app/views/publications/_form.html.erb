@@ -22,6 +22,6 @@
 <p>
 	Treatment associations:
 	<% treatments.each do |treatment| -%>
-		<%= treatment.name %><%= check_box_tag 'publications[treatment_ids][]', treatment.id, publication.treatments.include?(treatment) %>
+		<%= treatment.name %><%= check_box_tag 'publication[treatment_ids][]', treatment.id, publication.treatments.include?(treatment) %>
 	<% end -%>
 </p>
