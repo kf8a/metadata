@@ -301,6 +301,10 @@ class Datatable < ActiveRecord::Base
     values = nil
     values = self.perform_query if self.is_sql
   end
+  
+  def supercession_candidates
+    Datatables.where('id <> ?', id).all
+  end
 
   private
 

@@ -5,7 +5,7 @@ gem 'rails', '3.0.7'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'rake', '0.8.7'
+gem 'rake'
 gem 'capistrano' #, :git=>'git://github.com/capistrano/capistrano.git'
 gem 'newrelic_rpm'
 gem 'pg'
@@ -20,7 +20,8 @@ gem 'thinking-sphinx'
 gem 'liquid'
 gem 'clearance', '=0.10.5'
 gem 'formtastic'
-gem 'awesome_nested_set', :git => 'git://github.com/galetahub/awesome_nested_set.git'
+# can we go back to the collective idea branch of awesome_nested_set
+gem 'awesome_nested_set' #, :git => 'git://github.com/galetahub/awesome_nested_set.git'
 gem 'thin'
 gem 'jquery-rails', '>= 0.2.6'
 

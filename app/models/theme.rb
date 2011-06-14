@@ -7,6 +7,10 @@ class Theme < ActiveRecord::Base
   scope :by_weight, :order => :weight
   scope :by_name, :order => 'name'
 
+  def nested_name
+    '-' * level + name
+  end
+
   def datatables?(study=nil)
     i_have_datatables?(study) || children_have_datatables?(study)
   end

@@ -227,7 +227,7 @@ GEM
       activesupport (= 3.0.7)
       rake (>= 0.8.7)
       thor (~> 0.14.4)
-    rake (0.8.7)
+    rake (0.9.2)
     rcov (0.9.9)
     reek (1.2.8)
       ruby2ruby (~> 1.2)
@@ -336,7 +336,7 @@ DEPENDENCIES
   rack-offline
   rack-openid
   rails (= 3.0.7)
-  rake (= 0.8.7)
+  rake
   remarkable_activerecord (>= 4.0.0.alpha2)
   rspec
   rspec-rails
