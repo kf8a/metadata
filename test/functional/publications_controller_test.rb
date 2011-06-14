@@ -93,6 +93,21 @@ class PublicationsControllerTest < ActionController::TestCase
     should render_template :edit
     should assign_to :publication_types
     should assign_to :treatments
+    should assign_to :publication
+  end
+
+  context 'POST with treatment ids' do
+    setup do
+      @publication = Factory.create(:publication)
+      @treatment = Factory.create(:treatment)
+      post :update, :id => @publication, :publication => {:treatment_ids => [@treatment.id]}
+    end
+
+    should assign_to :publication
+
+    should 'have the treatment attached' do
+      assert @publication.treatments.include?(@treatment)
+    end
   end
   
   def test_should_destroy_publication

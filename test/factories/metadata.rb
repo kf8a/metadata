@@ -83,6 +83,9 @@ unless Factory.factories.include?(:affiliation) #prevent redefining these factor
   Factory.define :study_url do |s|
   end
 
+  Factory.define :treatment do |t|
+  end
+
   Factory.define :unit do |u|
   end
 
