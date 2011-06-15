@@ -58,8 +58,6 @@ Metadata::Application.routes.draw do
   resources :meetings
   resources :ownerships do
     collection do
-      post :add_another_user
-      post :add_another_datatable
       delete :revoke
     end
   end

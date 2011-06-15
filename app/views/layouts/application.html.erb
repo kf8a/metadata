@@ -5,6 +5,7 @@
   <%= include_stylesheets :base, :media => 'screen,print' %>
   <%= yield :head %>
   <%= stylesheet_link_tag 'token-input' %>
+  <%= stylesheet_link_tag 'jquery.comboselect' %>
   <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" %>
   <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js" %>
   <script type='text/javascript'>jQuery.noConflict();</script>
@@ -12,6 +13,8 @@
   <%= javascript_include_tag "less" %>
   <%= javascript_include_tag 'jquery.tokeninput' %>
   <%= javascript_include_tag 'protovis-d3.3' %>
+  <%= javascript_include_tag 'jquery.selso' %>
+  <%= javascript_include_tag 'jquery.comboselect' %>
   <%= csrf_meta_tag %>
 </head>
 <body>

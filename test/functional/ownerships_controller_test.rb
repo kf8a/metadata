@@ -98,7 +98,7 @@ class OwnershipsControllerTest < ActionController::TestCase
       context "and POST :create with a valid user" do
         setup do
           @user = Factory.create(:email_confirmed_user)
-          post :create, :datatable => @datatable, :user_1 => @user, :user_count => 1
+          post :create, :datatable => @datatable, 'users' => ["#{@user.id}"]
         end
 
         should redirect_to("the ownerships page") {ownerships_path}
@@ -109,7 +109,7 @@ class OwnershipsControllerTest < ActionController::TestCase
           @user_1 = Factory.create(:email_confirmed_user)
           @user_2 = Factory.create(:email_confirmed_user)
           @user_3 = Factory.create(:email_confirmed_user)
-          post :create, :datatable => @datatable, :user_1 => @user_1, :user_2 => @user_2, :user_3 => @user_3, :user_count => 3
+          post :create, :datatable => @datatable.id, 'users' => ["#{@user_1.id}", "#{@user_2.id}", "#{@user_3.id}"]
         end
 
         should redirect_to("the ownerships page") {ownerships_path}
@@ -128,7 +128,7 @@ class OwnershipsControllerTest < ActionController::TestCase
           @datatable_1 = Factory.create(:protected_datatable)
           @datatable_2 = Factory.create(:protected_datatable)
           @datatable_3 = Factory.create(:protected_datatable)
-          post :create, :datatable_1 => @datatable_1, :datatable_2 => @datatable_2, :datatable_3 => @datatable_3, :user_1 => @user_1, :user_2 => @user_2, :user_3 => @user_3, :user_count => 3, :datatable_count => 3
+          post :create, 'datatables' => ["#{@datatable_1.id}", "#{@datatable_2.id}", "#{@datatable_3.id}"], 'users' => ["#{@user_1.id}", "#{@user_2.id}", "#{@user_3.id}"]
         end
 
         should redirect_to("the ownerships page") {ownerships_path}

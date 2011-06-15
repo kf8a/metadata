@@ -1,4 +1,4 @@
-<p>Use this page to add owners to 
+<p>Use this page to add owners to
   <% if @datatable -%>
     <%= @datatable.name %>.
   <% else -%>
@@ -7,23 +7,13 @@
 </p>
 
 <%= form_for @ownership do %>
-  <%= label_tag 'user' %>
-  <div id="user_boxes">
-    <%= render :partial => 'userbox', :locals => {:users => @users, :user_count => @user_count}%>
-  </div>
-  <div id="user_counter">
-    <%= render :partial => 'usercounter', :locals => {:user_count => @user_count} %>
-  </div>
+  <%= label_tag 'users' %>
+  <%= select_tag 'users', options_from_collection_for_select(@users, 'id', 'email'), :class => 'myselect', :multiple => true %>
   <% if @datatable %>
     <%= hidden_field_tag 'datatable', @datatable.id %>
   <% else %>
     <%= label_tag 'datatables' %>
-    <div id="datatable_boxes">
-      <%= render :partial => 'datatablebox', :locals => {:datatables => @datatables, :datatable_count => @datatable_count} %>
-    </div>
-    <div id="datatable_counter">
-      <%= render :partial => 'datatablecounter', :locals => {:datatable_count => @datatable_count} %>
-    </div>
+    <%= select_tag 'datatables', options_from_collection_for_select(@datatables, 'id', 'name'), :class => 'myselect', :multiple => true %>
   <% end %>
   <%= submit_tag 'Add Owners' %>
 <% end %>
