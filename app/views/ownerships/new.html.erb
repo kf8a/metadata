@@ -7,12 +7,12 @@
 </p>
 
 <%= form_for @ownership do %>
-  <%= label_tag 'users' %>
+  <%= label_tag 'users', nil, :class => 'combo_select_label' %>
   <%= select_tag 'users', options_from_collection_for_select(@users, 'id', 'email'), :class => 'myselect', :multiple => true %>
   <% if @datatable %>
     <%= hidden_field_tag 'datatable', @datatable.id %>
   <% else %>
-    <%= label_tag 'datatables' %>
+    <%= label_tag 'datatables', nil, :class => 'combo_select_label' %>
     <%= select_tag 'datatables', options_from_collection_for_select(@datatables, 'id', 'name'), :class => 'myselect', :multiple => true %>
   <% end %>
   <%= submit_tag 'Add Owners' %>

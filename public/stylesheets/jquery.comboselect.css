@@ -1,9 +1,6 @@
-* {
+.combo_select_label, #myselect, #myotherselect {
 	font-family: verdana, arial, sans-serif;
 	font-size: 10px;
-}
-
-label, input, #myselect, #myotherselect {
 	display: block;
 	float: left;
 	width: 100px;
@@ -14,11 +11,15 @@ label, input, #myselect, #myotherselect {
 }
 
 input, #myselect, #myotherselect {
+	font-family: verdana, arial, sans-serif;
+	font-size: 10px;
 	text-align: left;
 	clear: right;
 }
 
 input[type="submit"], #go {
+	font-family: verdana, arial, sans-serif;
+	font-size: 10px;
 	width: auto;
 	clear: left;
 	margin-left: 120px;
@@ -26,6 +27,8 @@ input[type="submit"], #go {
 
 
 fieldset.comboselect {
+	font-family: verdana, arial, sans-serif;
+	font-size: 10px;
 	border: 0;
 	display: block;
 	float: left;
@@ -35,16 +38,22 @@ fieldset.comboselect {
 }
 
 fieldset.comboselect * {
+	font-family: verdana, arial, sans-serif;
+	font-size: 10px;
 	display: block;
 	float: left;
 	width: 40%;
 }
 
 fieldset.comboselect select {
+	font-family: verdana, arial, sans-serif;
+	font-size: 10px;
 	height: 100px;
 }
 
 fieldset.comboselect fieldset {
+	font-family: verdana, arial, sans-serif;
+	font-size: 10px;
 	border: 0;
 	width: 10%;
 	height: 100px;
@@ -53,12 +62,16 @@ fieldset.comboselect fieldset {
 }
 
 fieldset.comboselect fieldset input {
+	font-family: verdana, arial, sans-serif;
+	font-size: 10px;
 	width: 100%;
 	clear: left;
 	margin: 5px 0;
 }
 
 fieldset.comboselect select option {
+	font-family: verdana, arial, sans-serif;
+	font-size: 10px;
 	width: 100% !important;
 	border: 0;
 	border-bottom: 1px dotted #959DB7;
