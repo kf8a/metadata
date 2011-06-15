@@ -313,10 +313,11 @@ class Datatable < ActiveRecord::Base
 
   def query_datatable_for_temporal_extent(query)
     values = ActiveRecord::Base.connection.execute(query)
+    dates = values[0]
     if values[0].class == 'Date'
-      [Time.parse(values[0]['min']).to_date,Time.parse(values[0]['max']).to_date]
+      [Time.parse(dates['min']).to_date,Time.parse(dates['max']).to_date]
     else # assume is a year
-      [Time.parse(values[0]['min'].to_s + '-1-1').to_date,Time.parse(values[0]['max'].to_s + '-1-1').to_date ]
+      [Time.parse(dates['min'].to_s + '-1-1').to_date,Time.parse(dates['max'].to_s + '-1-1').to_date ]
     end
   end
 
@@ -326,19 +327,23 @@ class Datatable < ActiveRecord::Base
     end
   end
 
+  def eml_data_format
+    @eml.dataFormat do
+      @eml.textFormat do
+        @eml.numHeaderLines (data_access_statement.lines.to_a.size + 4).to_s
+        @eml.attributeOrientation 'column'
+        @eml.simpleDelimited do
+          @eml.fieldDelimiter ','
+        end
+      end
+    end
+  end
+
   def eml_physical
     @eml.physical do
       @eml.objectName title
       @eml.encodingMethod 'None'
-      @eml.dataFormat do
-        @eml.textFormat do
-          @eml.numHeaderLines (data_access_statement.lines.to_a.size + 4).to_s
-          @eml.attributeOrientation 'column'
-          @eml.simpleDelimited do
-            @eml.fieldDelimiter ','
-          end
-        end
-      end
+      eml_data_format
       @eml.distribution do
         @eml.online do
           if is_sql
