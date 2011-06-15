@@ -5,7 +5,7 @@
 <h1 class='publication-section'>Submitted</h1>
 <p class='synopsis indent'>Papers still in review; contact the first author for further information.</p>
 <ul>
-  <%= render :partial => 'citation', :collection => @submitted_citations, :locals => {:year => nil} %>
+  <%= render 'citation', :collection => @submitted_citations, :locals => {:year => nil} %>
 </ul>
 <h1 class='publication-section'>Forthcoming</h1>
 <p class='synopsis indent'>Papers accepted but not yet published.</p>
