@@ -1,0 +1,129 @@
+jQuery(document).ready(function() {
+  jQuery('.dot-graph').each(function() {
+      var id = jQuery(this).attr('id');
+      var current_div = this;
+      jQuery.getJSON("/visualizations/" + id, function(json) {
+        var dateFormat = pv.Format.date("%Y-%m-%d %H:%M:%S");
+        json.forEach(function(d) {d.datetime = dateFormat.parse(d.datetime)});
+        var h = 260;
+        var w = 360;
+        var margin = 40;
+        var y = pv.Scale.linear(json, function(d) { return d.value}).range(0,h);
+        var x = pv.Scale.linear(json, function(d){ return d.datetime}).range(0,w);
+        var vis = new pv.Panel()
+        .canvas(current_div)
+        .margin(margin)
+        .width(w)
+        .height(h);
+
+        vis.add(pv.Rule)
+          .data(y.ticks())
+          .strokeStyle("#eee")
+          .bottom(y)
+          .anchor("left").add(pv.Label).text(y.tickFormat);
+
+        vis.add(pv.Rule)
+          .data(x.ticks())
+          .strokeStyle("#eee")
+          .left(x)
+          .anchor("bottom").add(pv.Label).text(x.tickFormat);
+
+        vis.add(pv.Label)
+           .left(10 - margin)
+           .top(h/2)
+           .textAlign('center')
+           .textAngle(-Math.PI / 2)
+           .text('oops');
+
+        vis.add(pv.Dot)
+          .data(json)
+          .left(function(d) {return x(d.datetime) })
+          .bottom(function(d) { return y(d.value) })
+          .fillStyle("rgb(121,173,210)");
+
+        vis.root.render();
+      });
+    });
+
+    jQuery('.area-graph').each(function() {
+    var id = jQuery(this).attr('id');
+
+    var current_div = this;
+    jQuery.getJSON("/visualizations/" + id, function(json){
+      var dateFormat = pv.Format.date("%Y-%m-%d %H:%M:%S");
+      json.forEach(function(d) {d.datetime = dateFormat.parse(d.datetime)});
+      var h = 260;
+      var w = 360;
+      var y = pv.Scale.linear(json, function(d) { return d.value}).range(0,h);
+      var x = pv.Scale.linear(json, function(d){ return d.datetime}).range(0,w);
+      var vis = new pv.Panel()
+      .canvas(current_div)
+      .margin(40)
+      .width(w)
+      .height(h);
+
+      vis.add(pv.Rule)
+        .data(y.ticks())
+        .strokeStyle("#eee")
+        .bottom(y)
+        .anchor("left").add(pv.Label).text(y.tickFormat);
+
+      vis.add(pv.Rule)
+        .data(x.ticks())
+        .strokeStyle("#eee")
+        .left(x)
+        .anchor("bottom").add(pv.Label).text(x.tickFormat);
+
+      vis.add(pv.Area)
+        .data(json)
+        .left(function(d) {return x(d.datetime) })
+        .height(function(d) { return y(d.value) })
+        .fillStyle("rgb(121,173,210)")
+        .bottom(1);
+
+      vis.root.render();
+    });
+  });
+
+  jQuery('.bar-graph').each(function() {
+    var id = jQuery(this).attr('id');
+
+    var current_div = this;
+    jQuery.getJSON("/visualizations/" + id, function(json){
+      var dateFormat = pv.Format.date("%Y-%m-%d %H:%M:%S");
+      json.forEach(function(d) {d.datetime = dateFormat.parse(d.datetime)});
+      var h = 260,
+          w = 360,
+          y = pv.Scale.linear(json, function(d) { return d.value}).range(0,h),
+          x = pv.Scale.linear(json, function(d){ return d.datetime}).range(0,w);
+      var vis = new pv.Panel()
+      .canvas(current_div)
+      .margin(40)
+      .width(w)
+      .height(h);
+
+      vis.add(pv.Rule)
+        .data(y.ticks())
+        .strokeStyle("#eee")
+        .bottom(y)
+        .anchor("left").add(pv.Label).text(y.tickFormat);
+
+      vis.add(pv.Rule)
+        .data(x.ticks())
+        .strokeStyle("#eee")
+        .left(x)
+        .anchor("bottom").add(pv.Label).text(x.tickFormat);
+
+      vis.add(pv.Panel)
+      .add(pv.Bar)
+      .data(json)
+        .left(function(d) {return x(d.datetime) })
+        .height(function(d) { return y(d.value) })
+        .width(3)
+        .bottom(0);
+
+      vis.root.render();
+    });
+  });
+
+});
