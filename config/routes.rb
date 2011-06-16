@@ -75,11 +75,7 @@ Metadata::Application.routes.draw do
       put :deny
     end
   end
-  resources :permission_requests do
-    collection do
-      post :create
-    end
-  end
+  resources :permission_requests, :only => :create
   resources :projects
   resources :protocols
   resources :publications do
