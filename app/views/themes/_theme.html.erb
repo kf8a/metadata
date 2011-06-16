@@ -1,4 +1,7 @@
-<li id="<%= theme.id %>" class='theme_container'>
+<% unless theme.root? %>
+  <div class='droppable'></div>
+<% end %>
+<li id="<%= theme.id %>" class='theme_container', draggable='true'>
   <%= theme.name %>
   <input type='hidden' value="<%=theme.id %>">
 </li>
