@@ -70,7 +70,7 @@ Metadata::Application.routes.draw do
     end
   end
   resources :permissions do
-    member do
+    collection do
       put :deny
     end
   end
