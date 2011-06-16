@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110610165828) do
+ActiveRecord::Schema.define(:version => 20110616222204) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -759,6 +759,8 @@ ActiveRecord::Schema.define(:version => 20110610165828) do
     t.string   "graph_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "x_axis_label"
+    t.string   "y_axes_label"
   end
 
   create_table "websites", :force => true do |t|
