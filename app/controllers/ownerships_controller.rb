@@ -20,30 +20,15 @@ class OwnershipsController < ApplicationController
   end
 
   def create
-    user_ids = params[:users]
-    users = user_ids.collect do |user_id|
-      User.find(user_id)
-    end
+    users = params[:users]
     @datatable = Datatable.find(params[:datatable]) if params[:datatable]
-    unless @datatable
-      datatable_ids = params[:datatables]
-      datatables = datatable_ids.collect do |datatable_id|
-        Datatable.find(datatable_id)
-      end
+    datatables = @datatable ? [@datatable.id] : params[:datatables]
+    if users.present? && datatables.present?
+      Ownership.create_ownerships(users, datatables)
+      redirect_to ownerships_path
+    else
+      render 'new'
     end
-    users.each do |user|
-      if @datatable
-        ownership = Ownership.new(:user => user, :datatable => @datatable)
-        ownership.save
-      else
-        datatables.each do |table|
-          ownership = Ownership.new(:user => user, :datatable => table)
-          ownership.save
-        end
-      end
-    end
-
-    redirect_to ownerships_path
   end
 
   def revoke
