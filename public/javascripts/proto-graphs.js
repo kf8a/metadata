@@ -154,4 +154,88 @@ jQuery(document).ready(function() {
     });
   });
 
+
+  jQuery('.bubble-graph').each(function() {
+    var id = jQuery(this).attr('id');
+
+    var current_div = this;
+    jQuery.getJSON("/visualizations/" + id, function(data){
+
+      var nested = pv.nest(data)
+          .key(function(d) {return d.year})
+          .entries();
+          
+      var categories = pv.nest(data)
+        .key(function(d) {return d.category})
+        .entries();
+
+      var width      = 400;
+      var height     = 1000;
+      var leftMargin = 220;
+
+      var species = categories.map(function(d) {return d.key});
+      var speciesScale = pv.Scale.ordinal(species).split(0, height);
+      var yearScale = pv.Scale.linear(pv.min(data.map(function(d) {return d.year})),pv.max(data.map(function(d) {return d.year}))).range(0, width);
+      var biomassScale = pv.Scale.linear(0, pv.max(data.map(function(d) {return d.value}))).range(0,75);
+          
+      var activeDot = 0;
+
+      var human_number = pv.Format.number().fractionDigits(0,2)
+          
+      var vis = new pv.Panel()
+                    .canvas(current_div)
+                    .width(width)
+                    .height(height)
+                    .margin(50)
+                    .left(410)
+                    .event("mousemove", pv.Behavior.point());
+        
+        vis.add(pv.Rule)
+         .data(species)
+         .bottom(speciesScale)
+         .strokeStyle("#eee")
+         .anchor("left")
+         .add(pv.Label)
+         .left(-20)
+         .textAlign('right')
+         .font('10pt normal');
+        
+        vis.add(pv.Rule)
+          .data(yearScale.ticks())
+          .strokeStyle("#eee")
+          .left(yearScale)
+          .anchor('top')
+          .add(pv.Label);
+        
+        vis.add(pv.Rule)
+          .data(yearScale.ticks())
+          .strokeStyle("#eee")
+          .left(yearScale)
+          .anchor('bottom')
+          .add(pv.Label);
+          
+        vis.add(pv.Dot)
+          .data(data)
+          .bottom(function(d) {return speciesScale(d.category)})
+          .left(function(d) {return yearScale(d.year)})
+          .size(function(d) {return biomassScale(d.value)} )
+          .fillStyle(function() {return activeDot == this.index ? pv.rgb(250,230,5) : pv.rgb(250,230,5,0.2)})
+          .strokeStyle(pv.rgb(0,0,255,0.2));
+          
+          vis.add(pv.Dot)
+            .data(data)
+            .bottom(function(d) {return speciesScale(d.category)})
+            .left(function(d) {return yearScale(d.year)})
+            .radius(function() {return activeDot == this.index ? 1 : 0.2} )
+            .fillStyle('black')
+            .event("point", function() {activeDot = this.index; return vis})
+            .add(pv.Label)
+            .text(function(d) {return d.year + ": " + human_number(d.value) + " g/m2"})
+            .textAlign('center')
+            .visible(function() {return activeDot == this.index});
+
+       
+          vis.render();
+    });
+  });
 });

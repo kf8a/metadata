@@ -1,4 +1,4 @@
-// 3ec4c9b296db63c46643ed7db009f9cd188d4511
+// fba9dc272a443cf9fdb984676a7732a6a082f4c0
 /**
  * @class The built-in Array class.
  * @name Array
@@ -142,7 +142,7 @@ pv.version = {
    * @type number
    * @constant
    */
-  minor: 3
+  minor: 2
 };
 
 /**
@@ -863,9 +863,7 @@ pv.Format.number = function() {
       padf = "0", // default fraction pad
       padg = true, // whether group separator affects integer padding
       decimal = ".", // default decimal separator
-      group = ",", // default group separator
-      np = "\u2212", // default negative prefix
-      ns = ""; // default negative suffix
+      group = ","; // default group separator
 
   /** @private */
   function format(x) {
@@ -874,12 +872,12 @@ pv.Format.number = function() {
     var s = String(Math.abs(x)).split(".");
 
     /* Pad, truncate and group the integral part. */
-    var i = s[0];
+    var i = s[0], n = (x < 0) ? "-" : "";
     if (i.length > maxi) i = i.substring(i.length - maxi);
-    if (padg && (i.length < mini)) i = new Array(mini - i.length + 1).join(padi) + i;
+    if (padg && (i.length < mini)) i = n + new Array(mini - i.length + 1).join(padi) + i;
     if (i.length > 3) i = i.replace(/\B(?=(?:\d{3})+(?!\d))/g, group);
-    if (!padg && (i.length < mins)) i = new Array(mins - i.length + 1).join(padi) + i;
-    s[0] = x < 0 ? np + i + ns : i;
+    if (!padg && (i.length < mins)) i = new Array(mins - i.length + 1).join(padi) + n + i;
+    s[0] = i;
 
     /* Pad the fractional part. */
     var f = s[1] || "";
@@ -1047,23 +1045,6 @@ pv.Format.number = function() {
       return this;
     }
     return group;
-  };
-
-  /**
-   * Sets or gets the negative prefix and suffix. The default negative prefix is
-   * "&minus;", and the default negative suffix is the empty string.
-   *
-   * @param {string} [x] the negative prefix.
-   * @param {string} [y] the negative suffix.
-   * @returns {pv.Format.number} <tt>this</tt> or the current negative format.
-   */
-  format.negativeAffix = function(x, y) {
-    if (arguments.length) {
-      np = String(x || "");
-      ns = String(y || "");
-      return this;
-    }
-    return [np, ns];
   };
 
   return format;
@@ -1369,7 +1350,6 @@ pv.range = function(start, stop, step) {
   if (step == undefined) step = 1;
   if ((stop - start) / step == Infinity) throw new Error("range must be finite");
   var array = [], i = 0, j;
-  stop -= (stop - start) * 1e-10; // floating point precision!
   if (step < 0) {
     while ((j = start + step * i++) > stop) {
       array.push(j);
@@ -5714,7 +5694,7 @@ pv.SvgScene.dot = function(scenes) {
     if (!fill.opacity && !stroke.opacity) continue;
 
     /* points */
-    var radius = s.shapeRadius, path = null;
+    var radius = s.radius, path = null;
     switch (s.shape) {
       case "cross": {
         path = "M" + -radius + "," + -radius
@@ -5749,11 +5729,11 @@ pv.SvgScene.dot = function(scenes) {
         break;
       }
       case "tick": {
-        path = "M0,0L0," + -s.shapeSize;
+        path = "M0,0L0," + -s.size;
         break;
       }
       case "bar": {
-        path = "M0," + (s.shapeSize / 2) + "L0," + -(s.shapeSize / 2);
+        path = "M0," + (s.size / 2) + "L0," + -(s.size / 2);
         break;
       }
     }
@@ -5771,7 +5751,7 @@ pv.SvgScene.dot = function(scenes) {
     };
     if (path) {
       svg.transform = "translate(" + s.left + "," + s.top + ")";
-      if (s.shapeAngle) svg.transform += " rotate(" + 180 * s.shapeAngle / Math.PI + ")";
+      if (s.angle) svg.transform += " rotate(" + 180 * s.angle / Math.PI + ")";
       svg.d = path;
       e = this.expect(e, "path", svg);
     } else {
@@ -6468,8 +6448,7 @@ pv.Mark.prototype
     .property("title", String)
     .property("reverse", Boolean)
     .property("antialias", Boolean)
-    .property("events", String)
-    .property("id", String);
+    .property("events", String);
 
 /**
  * The mark type; a lower camelCase name. The type name controls rendering
@@ -6489,13 +6468,6 @@ pv.Mark.prototype
  *
  * @type pv.Mark
  * @name pv.Mark.prototype.proto
- */
-
-/**
- * The mark anchor target, possibly undefined.
- *
- * @type pv.Mark
- * @name pv.Mark.prototype.target
  */
 
 /**
@@ -6530,7 +6502,7 @@ pv.Mark.prototype.index = -1;
  * scale can be used to create scale-independent graphics. For example, to
  * define a dot that has a radius of 10 irrespective of any zooming, say:
  *
- * <pre>dot.shapeRadius(function() 10 / this.scale)</pre>
+ * <pre>dot.radius(function() 10 / this.scale)</pre>
  *
  * Note that the stroke width and font size are defined irrespective of scale
  * (i.e., in screen space) already. Also note that when a transform is applied
@@ -6675,15 +6647,6 @@ pv.Mark.prototype.scale = 1;
  */
 
 /**
- * The instance identifier, for correspondence across animated transitions. If
- * no identifier is specified, correspondence is determined using the mark
- * index. Identifiers are not global, but local to a given mark.
- *
- * @type String
- * @name pv.Mark.prototype.id
- */
-
-/**
  * Default properties for all mark types. By default, the data array is the
  * parent data as a single-element array; if the data property is not specified,
  * this causes each mark to be instantiated as a singleton with the parents
@@ -6711,7 +6674,6 @@ pv.Mark.prototype.defaults = new pv.Mark()
  */
 pv.Mark.prototype.extend = function(proto) {
   this.proto = proto;
-  this.target = proto.target;
   return this;
 };
 
@@ -6777,20 +6739,52 @@ pv.Mark.prototype.def = function(name, v) {
  * @returns {pv.Anchor} the new anchor.
  */
 pv.Mark.prototype.anchor = function(name) {
-  if (!name) name = "center"; // default anchor name
+  var target = this, scene;
+
+  /* Default anchor name. */
+  if (!name) name = "center";
+
+  /** @private Find the instances of target that match source. */
+  function instances(source) {
+    var mark = target, index = [];
+
+    /* Mirrored descent. */
+    while (!(scene = mark.scene)) {
+      source = source.parent;
+      index.push({index: source.index, childIndex: mark.childIndex});
+      mark = mark.parent;
+    }
+    while (index.length) {
+      var i = index.pop();
+      scene = scene[i.index].children[i.childIndex];
+    }
+
+    /*
+     * When the anchor target is also an ancestor, as in the case of adding
+     * to a panel anchor, only generate one instance per panel. Also, set
+     * the margins to zero, since they are offset by the enclosing panel.
+     */
+    if (target.hasOwnProperty("index")) {
+      var s = pv.extend(scene[target.index]);
+      s.right = s.top = s.left = s.bottom = 0;
+      return [s];
+    }
+    return scene;
+  }
+
   return new pv.Anchor(this)
     .name(name)
+    .def("$mark.anchor", function() {
+        scene = this.scene.target = instances(this);
+      })
     .data(function() {
-        return this.scene.target.map(function(s) { return s.data; });
+        return scene.map(function(s) { return s.data; });
       })
     .visible(function() {
-        return this.scene.target[this.index].visible;
-      })
-    .id(function() {
-        return this.scene.target[this.index].id;
+        return scene[this.index].visible;
       })
     .left(function() {
-        var s = this.scene.target[this.index], w = s.width || 0;
+        var s = scene[this.index], w = s.width || 0;
         switch (this.name()) {
           case "bottom":
           case "top":
@@ -6800,7 +6794,7 @@ pv.Mark.prototype.anchor = function(name) {
         return s.left + w;
       })
     .top(function() {
-        var s = this.scene.target[this.index], h = s.height || 0;
+        var s = scene[this.index], h = s.height || 0;
         switch (this.name()) {
           case "left":
           case "right":
@@ -6810,11 +6804,11 @@ pv.Mark.prototype.anchor = function(name) {
         return s.top + h;
       })
     .right(function() {
-        var s = this.scene.target[this.index];
+        var s = scene[this.index];
         return this.name() == "left" ? s.right + (s.width || 0) : null;
       })
     .bottom(function() {
-        var s = this.scene.target[this.index];
+        var s = scene[this.index];
         return this.name() == "top" ? s.bottom + (s.height || 0) : null;
       })
     .textAlign(function() {
@@ -6837,9 +6831,20 @@ pv.Mark.prototype.anchor = function(name) {
       });
 };
 
-/** @deprecated Replaced by {@link #target}. */
+/**
+ * Returns the anchor target of this mark, if it is derived from an anchor;
+ * otherwise returns null. For example, if a label is derived from a bar anchor,
+ *
+ * <pre>bar.anchor("top").add(pv.Label);</pre>
+ *
+ * then property functions on the label can refer to the bar via the
+ * <tt>anchorTarget</tt> method. This method is also useful for mark types
+ * defining properties on custom anchors.
+ *
+ * @returns {pv.Mark} the anchor target of this mark; possibly null.
+ */
 pv.Mark.prototype.anchorTarget = function() {
-  return this.target;
+  return this.proto.anchorTarget();
 };
 
 /**
@@ -6869,38 +6874,6 @@ pv.Mark.prototype.instance = function(defaultIndex) {
   var scene = this.scene || this.parent.instance(-1).children[this.childIndex],
       index = !arguments.length || this.hasOwnProperty("index") ? this.index : defaultIndex;
   return scene[index < 0 ? scene.length - 1 : index];
-};
-
-/**
- * @private Find the instances of this mark that match source.
- *
- * @see pv.Anchor
- */
-pv.Mark.prototype.instances = function(source) {
-  var mark = this, index = [], scene;
-
-  /* Mirrored descent. */
-  while (!(scene = mark.scene)) {
-    source = source.parent;
-    index.push({index: source.index, childIndex: mark.childIndex});
-    mark = mark.parent;
-  }
-  while (index.length) {
-    var i = index.pop();
-    scene = scene[i.index].children[i.childIndex];
-  }
-
-  /*
-   * When the anchor target is also an ancestor, as in the case of adding
-   * to a panel anchor, only generate one instance per panel. Also, set
-   * the margins to zero, since they are offset by the enclosing panel.
-   */
-  if (this.hasOwnProperty("index")) {
-    var s = pv.extend(scene[this.index]);
-    s.right = s.top = s.left = s.bottom = 0;
-    return [s];
-  }
-  return scene;
 };
 
 /**
@@ -7070,7 +7043,7 @@ pv.Mark.stack = [];
  * do not need to be queried during build.
  */
 pv.Mark.prototype.bind = function() {
-  var seen = {}, types = [[], [], [], []], data, required = [];
+  var seen = {}, types = [[], [], [], []], data, visible;
 
   /** Scans the proto chain for the specified mark. */
   function bind(mark) {
@@ -7082,7 +7055,7 @@ pv.Mark.prototype.bind = function() {
           seen[p.name] = p;
           switch (p.name) {
             case "data": data = p; break;
-            case "visible": case "id": required.push(p); break;
+            case "visible": visible = p; break;
             default: types[p.type].push(p); break;
           }
         }
@@ -7115,7 +7088,7 @@ pv.Mark.prototype.bind = function() {
     properties: seen,
     data: data,
     defs: defs,
-    required: required,
+    required: [visible],
     optional: pv.blend(types)
   };
 };
@@ -7144,7 +7117,7 @@ pv.Mark.prototype.bind = function() {
  * special. The <tt>data</tt> property is evaluated first; unlike the other
  * properties, the data stack is from the parent panel, rather than the current
  * mark, since the data is not defined until the data property is evaluated.
- * The <tt>visible</tt> property is subsequently evaluated for each instance;
+ * The <tt>visisble</tt> property is subsequently evaluated for each instance;
  * only if true will the {@link #buildInstance} method be called, evaluating
  * other properties and recursively building the scene graph.
  *
@@ -7166,9 +7139,6 @@ pv.Mark.prototype.build = function() {
       scene.parentIndex = this.parent.index;
     }
   }
-
-  /* Resolve anchor target. */
-  if (this.target) scene.target = this.target.instances(scene);
 
   /* Evaluate defs. */
   if (this.binds.defs.length) {
@@ -7273,13 +7243,9 @@ pv.Mark.prototype.buildImplied = function(s) {
   if (w == null) {
     w = width - (r = r || 0) - (l = l || 0);
   } else if (r == null) {
-    if (l == null) {
-      l = r = (width - w) / 2;
-    } else {
-      r = width - w - l;
-    }
+    r = width - w - (l = l || 0);
   } else if (l == null) {
-    l = width - w - r;
+    l = width - w - (r = r || 0);
   }
 
   /* Compute implied height, bottom and top. */
@@ -7287,13 +7253,9 @@ pv.Mark.prototype.buildImplied = function(s) {
   if (h == null) {
     h = height - (t = t || 0) - (b = b || 0);
   } else if (b == null) {
-    if (t == null) {
-      b = t = (height - h) / 2;
-    } else {
-      b = height - h - t;
-    }
+    b = height - h - (t = t || 0);
   } else if (t == null) {
-    t = height - h - b;
+    t = height - h - (b = b || 0);
   }
 
   s.left = l;
@@ -7481,14 +7443,6 @@ pv.Mark.dispatch = function(type, scene, index) {
     });
   return true;
 };
-
-pv.Mark.prototype.transition = function() {
-  return new pv.Transition(this);
-};
-
-pv.Mark.prototype.on = function(state) {
-  return this["$" + state] = new pv.Transient(this);
-};
 /**
  * Constructs a new mark anchor with default properties.
  *
@@ -7553,22 +7507,19 @@ pv.Anchor.prototype = pv.extend(pv.Mark)
  */
 
 /**
- * Sets the prototype of this anchor to the specified mark. Any properties not
- * defined on this mark may be inherited from the specified prototype mark, or
- * its prototype, and so on. The prototype mark need not be the same type of
- * mark as this mark. (Note that for inheritance to be useful, properties with
- * the same name on different mark types should have equivalent meaning.)
+ * Returns the anchor target of this mark, if it is derived from an anchor;
+ * otherwise returns null. For example, if a label is derived from a bar anchor,
  *
- * <p>This method differs slightly from the normal mark behavior in that the
- * anchor's target is preserved.
+ * <pre>bar.anchor("top").add(pv.Label);</pre>
  *
- * @param {pv.Mark} proto the new prototype.
- * @returns {pv.Anchor} this anchor.
- * @see pv.Mark#add
+ * then property functions on the label can refer to the bar via the
+ * <tt>anchorTarget</tt> method. This method is also useful for mark types
+ * defining properties on custom anchors.
+ *
+ * @returns {pv.Mark} the anchor target of this mark; possibly null.
  */
-pv.Anchor.prototype.extend = function(proto) {
-  this.proto = proto;
-  return this;
+pv.Anchor.prototype.anchorTarget = function() {
+  return this.target;
 };
 /**
  * Constructs a new area mark with default properties. Areas are not typically
@@ -7828,14 +7779,17 @@ pv.Area.prototype.buildInstance = function(s) {
 pv.Area.prototype.anchor = function(name) {
   var scene;
   return pv.Mark.prototype.anchor.call(this, name)
+    .def("$area.anchor", function() {
+        scene = this.scene.target;
+      })
     .interpolate(function() {
-       return this.scene.target[this.index].interpolate;
+       return scene[this.index].interpolate;
       })
     .eccentricity(function() {
-       return this.scene.target[this.index].eccentricity;
+       return scene[this.index].eccentricity;
       })
     .tension(function() {
-        return this.scene.target[this.index].tension;
+        return scene[this.index].tension;
       });
 };
 /**
@@ -7952,10 +7906,10 @@ pv.Dot = function() {
 };
 
 pv.Dot.prototype = pv.extend(pv.Mark)
+    .property("size", Number)
+    .property("radius", Number)
     .property("shape", String)
-    .property("shapeAngle", Number)
-    .property("shapeRadius", Number)
-    .property("shapeSize", Number)
+    .property("angle", Number)
     .property("lineWidth", Number)
     .property("strokeStyle", pv.color)
     .property("fillStyle", pv.color);
@@ -7963,23 +7917,22 @@ pv.Dot.prototype = pv.extend(pv.Mark)
 pv.Dot.prototype.type = "dot";
 
 /**
- * The size of the shape, in square pixels. Square pixels are used such that the
- * area of the shape is linearly proportional to the value of the
- * <tt>shapeSize</tt> property, facilitating representative encodings. This is
- * an alternative to using {@link #shapeRadius}.
+ * The size of the dot, in square pixels. Square pixels are used such that the
+ * area of the dot is linearly proportional to the value of the size property,
+ * facilitating representative encodings.
  *
- * @see #shapeRadius
+ * @see #radius
  * @type number
- * @name pv.Dot.prototype.shapeSize
+ * @name pv.Dot.prototype.size
  */
 
 /**
- * The radius of the shape, in pixels. This is an alternative to using
- * {@link #shapeSize}.
+ * The radius of the dot, in pixels. This is an alternative to using
+ * {@link #size}.
  *
- * @see #shapeSize
+ * @see #size
  * @type number
- * @name pv.Dot.prototype.shapeRadius
+ * @name pv.Dot.prototype.radius
  */
 
 /**
@@ -8008,11 +7961,11 @@ pv.Dot.prototype.type = "dot";
  */
 
 /**
- * The shape rotation angle, in radians. Used to rotate shapes, such as to turn
- * a cross into a plus.
+ * The rotation angle, in radians. Used to rotate shapes, such as to turn a
+ * cross into a plus.
  *
  * @type number
- * @name pv.Dot.prototype.shapeAngle
+ * @name pv.Dot.prototype.angle
  */
 
 /**
@@ -8045,12 +7998,13 @@ pv.Dot.prototype.type = "dot";
 
 /**
  * Default properties for dots. By default, there is no fill and the stroke
- * style is a categorical color. The default shape is "circle" with radius 4.5.
+ * style is a categorical color. The default shape is "circle" with size 20.
  *
  * @type pv.Dot
  */
 pv.Dot.prototype.defaults = new pv.Dot()
     .extend(pv.Mark.prototype.defaults)
+    .size(20)
     .shape("circle")
     .lineWidth(1.5)
     .strokeStyle(pv.Colors.category10().by(pv.parent));
@@ -8080,33 +8034,36 @@ pv.Dot.prototype.defaults = new pv.Dot()
 pv.Dot.prototype.anchor = function(name) {
   var scene;
   return pv.Mark.prototype.anchor.call(this, name)
+    .def("$wedge.anchor", function() {
+        scene = this.scene.target;
+      })
     .left(function() {
-        var s = this.scene.target[this.index];
+        var s = scene[this.index];
         switch (this.name()) {
           case "bottom":
           case "top":
           case "center": return s.left;
           case "left": return null;
         }
-        return s.left + s.shapeRadius;
+        return s.left + s.radius;
       })
     .right(function() {
-        var s = this.scene.target[this.index];
-        return this.name() == "left" ? s.right + s.shapeRadius : null;
+        var s = scene[this.index];
+        return this.name() == "left" ? s.right + s.radius : null;
       })
     .top(function() {
-        var s = this.scene.target[this.index];
+        var s = scene[this.index];
         switch (this.name()) {
           case "left":
           case "right":
           case "center": return s.top;
           case "top": return null;
         }
-        return s.top + s.shapeRadius;
+        return s.top + s.radius;
       })
     .bottom(function() {
-        var s = this.scene.target[this.index];
-        return this.name() == "top" ? s.bottom + s.shapeRadius : null;
+        var s = scene[this.index];
+        return this.name() == "top" ? s.bottom + s.radius : null;
       })
     .textAlign(function() {
         switch (this.name()) {
@@ -8130,17 +8087,8 @@ pv.Dot.prototype.anchor = function(name) {
 
 /** @private Sets radius based on size or vice versa. */
 pv.Dot.prototype.buildImplied = function(s) {
-  var r = s.shapeRadius, z = s.shapeSize;
-  if (r == null) {
-    if (z == null) {
-      s.shapeSize = 20.25;
-      s.shapeRadius = 4.5;
-    } else {
-      s.shapeRadius = Math.sqrt(z);
-    }
-  } else if (z == null) {
-    s.shapeSize = r * r;
-  }
+  if (s.radius == null) s.radius = Math.sqrt(s.size);
+  else if (s.size == null) s.size = s.radius * s.radius;
   pv.Mark.prototype.buildImplied.call(this, s);
 };
 /**
@@ -9234,9 +9182,13 @@ pv.Wedge.prototype.anchor = function(name) {
   function partial(s) { return s.innerRadius || s.angle < 2 * Math.PI; }
   function midRadius(s) { return (s.innerRadius + s.outerRadius) / 2; }
   function midAngle(s) { return (s.startAngle + s.endAngle) / 2; }
+  var scene;
   return pv.Mark.prototype.anchor.call(this, name)
+    .def("$wedge.anchor", function() {
+        scene = this.scene.target;
+      })
     .left(function() {
-        var s = this.scene.target[this.index];
+        var s = scene[this.index];
         if (partial(s)) switch (this.name()) {
           case "outer": return s.left + s.outerRadius * Math.cos(midAngle(s));
           case "inner": return s.left + s.innerRadius * Math.cos(midAngle(s));
@@ -9247,7 +9199,7 @@ pv.Wedge.prototype.anchor = function(name) {
         return s.left;
       })
     .top(function() {
-        var s = this.scene.target[this.index];
+        var s = scene[this.index];
         if (partial(s)) switch (this.name()) {
           case "outer": return s.top + s.outerRadius * Math.sin(midAngle(s));
           case "inner": return s.top + s.innerRadius * Math.sin(midAngle(s));
@@ -9258,7 +9210,7 @@ pv.Wedge.prototype.anchor = function(name) {
         return s.top;
       })
     .textAlign(function() {
-        var s = this.scene.target[this.index];
+        var s = scene[this.index];
         if (partial(s)) switch (this.name()) {
           case "outer": return pv.Wedge.upright(midAngle(s)) ? "right" : "left";
           case "inner": return pv.Wedge.upright(midAngle(s)) ? "left" : "right";
@@ -9266,7 +9218,7 @@ pv.Wedge.prototype.anchor = function(name) {
         return "center";
       })
     .textBaseline(function() {
-        var s = this.scene.target[this.index];
+        var s = scene[this.index];
         if (partial(s)) switch (this.name()) {
           case "start": return pv.Wedge.upright(s.startAngle) ? "top" : "bottom";
           case "end": return pv.Wedge.upright(s.endAngle) ? "bottom" : "top";
@@ -9274,7 +9226,7 @@ pv.Wedge.prototype.anchor = function(name) {
         return "middle";
       })
     .textAngle(function() {
-        var s = this.scene.target[this.index], a = 0;
+        var s = scene[this.index], a = 0;
         if (partial(s)) switch (this.name()) {
           case "center":
           case "inner":
@@ -9307,358 +9259,6 @@ pv.Wedge.prototype.buildImplied = function(s) {
   else if (s.endAngle == null) s.endAngle = s.startAngle + s.angle;
   pv.Mark.prototype.buildImplied.call(this, s);
 };
-/*
- * TERMS OF USE - EASING EQUATIONS
- *
- * Open source under the BSD License.
- *
- * Copyright 2001 Robert Penner
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * - Redistributions of source code must retain the above copyright notice, this
- *   list of conditions and the following disclaimer.
- *
- * - Redistributions in binary form must reproduce the above copyright notice,
- *   this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
- *
- * - Neither the name of the author nor the names of contributors may be used to
- *   endorse or promote products derived from this software without specific
- *   prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- */
-
-pv.Ease = (function() {
-
-  function reverse(f) {
-    return function(t) {
-      return 1 - f(1 - t);
-    };
-  }
-
-  function reflect(f) {
-    return function(t) {
-      return .5 * (t < .5 ? f(2 * t) : (2 - f(2 - 2 * t)));
-    };
-  }
-
-  function poly(e) {
-    return function(t) {
-      return t < 0 ? 0 : t > 1 ? 1 : Math.pow(t, e);
-    }
-  }
-
-  function sin(t) {
-    return 1 - Math.cos(t * Math.PI / 2);
-  }
-
-  function exp(t) {
-    return t ? Math.pow(2, 10 * (t - 1)) - 0.001 : 0;
-  }
-
-  function circle(t) {
-    return -(Math.sqrt(1 - t * t) - 1);
-  }
-
-  function elastic(a, p) {
-    var s;
-    if (!p) p = 0.45;
-    if (!a || a < 1) { a = 1; s = p / 4; }
-    else s = p / (2 * Math.PI) * Math.asin(1 / a);
-    return function(t) {
-      return t <= 0 || t >= 1 ? t
-          : -(a * Math.pow(2, 10 * (--t)) * Math.sin((t - s) * (2 * Math.PI) / p));
-    };
-  }
-
-  function back(s) {
-    if (!s) s = 1.70158;
-    return function(t) {
-      return t * t * ((s + 1) * t - s);
-    };
-  }
-
-  function bounce(t) {
-    return t < 1 / 2.75 ? 7.5625 * t * t
-        : t < 2 / 2.75 ? 7.5625 * (t -= 1.5 / 2.75) * t + .75
-        : t < 2.5 / 2.75 ? 7.5625 * (t -= 2.25 / 2.75) * t + .9375
-        : 7.5625 * (t -= 2.625 / 2.75) * t + .984375;
-  }
-
-  var quad = poly(2),
-      cubic = poly(3),
-      elasticDefault = elastic(),
-      backDefault = back();
-
-  var eases = {
-    "linear": pv.identity,
-    "quad-in": quad,
-    "quad-out": reverse(quad),
-    "quad-in-out": reflect(quad),
-    "quad-out-in": reflect(reverse(quad)),
-    "cubic-in": cubic,
-    "cubic-out": reverse(cubic),
-    "cubic-in-out": reflect(cubic),
-    "cubic-out-in": reflect(reverse(cubic)),
-    "sin-in": sin,
-    "sin-out": reverse(sin),
-    "sin-in-out": reflect(sin),
-    "sin-out-in": reflect(reverse(sin)),
-    "exp-in": exp,
-    "exp-out": reverse(exp),
-    "exp-in-out": reflect(exp),
-    "exp-out-in": reflect(reverse(exp)),
-    "circle-in": circle,
-    "circle-out": reverse(circle),
-    "circle-in-out": reflect(circle),
-    "circle-out-in": reflect(reverse(circle)),
-    "elastic-in": elasticDefault,
-    "elastic-out": reverse(elasticDefault),
-    "elastic-in-out": reflect(elasticDefault),
-    "elastic-out-in": reflect(reverse(elasticDefault)),
-    "back-in": backDefault,
-    "back-out": reverse(backDefault),
-    "back-in-out": reflect(backDefault),
-    "back-out-in": reflect(reverse(backDefault)),
-    "bounce-in": bounce,
-    "bounce-out": reverse(bounce),
-    "bounce-in-out": reflect(bounce),
-    "bounce-out-in": reflect(reverse(bounce))
-  };
-
-  pv.ease = function(f) {
-    return eases[f];
-  };
-
-  return {
-    reverse: reverse,
-    reflect: reflect,
-    linear: function() { return pv.identity; },
-    sin: function() { return sin; },
-    exp: function() { return exp; },
-    circle: function() { return circle; },
-    elastic: elastic,
-    back: back,
-    bounce: bounce,
-    poly: poly
-  };
-})();
-pv.Transition = function(mark) {
-  var that = this,
-      ease = pv.ease("cubic-in-out"),
-      duration = 250,
-      timer;
-
-  var interpolated = {
-    top: 1,
-    left: 1,
-    right: 1,
-    bottom: 1,
-    width: 1,
-    height: 1,
-    innerRadius: 1,
-    outerRadius: 1,
-    radius: 1,
-    startAngle: 1,
-    endAngle: 1,
-    angle: 1,
-    fillStyle: 1,
-    strokeStyle: 1,
-    lineWidth: 1,
-    eccentricity: 1,
-    tension: 1,
-    textAngle: 1,
-    textStyle: 1,
-    textMargin: 1
-  };
-
-  var defaults = new pv.Transient();
-
-  var none = pv.Color.transparent;
-
-  /** @private */
-  function ids(marks) {
-    var map = {};
-    for (var i = 0; i < marks.length; i++) {
-      var mark = marks[i];
-      if (mark.id) map[mark.id] = mark;
-    }
-    return map;
-  }
-
-  /** @private */
-  function interpolateProperty(list, name, before, after) {
-    if (name in interpolated) {
-      var i = pv.Scale.interpolator(before[name], after[name]);
-      var f = function(t) { before[name] = i(t); }
-    } else {
-      var f = function(t) { if (t > .5) before[name] = after[name]; }
-    }
-    f.next = list.head;
-    list.head = f;
-  }
-
-  /** @private */
-  function interpolateInstance(list, before, after) {
-    for (var name in before) {
-      if (name == "children") continue; // not a property
-      if (before[name] == after[name]) continue; // unchanged
-      interpolateProperty(list, name, before, after);
-    }
-    if (before.children) {
-      for (var j = 0; j < before.children.length; j++) {
-        interpolate(list, before.children[j], after.children[j]);
-      }
-    }
-  }
-
-  /** @private */
-  function interpolate(list, before, after) {
-    var mark = before.mark, bi = ids(before), ai = ids(after);
-    for (var i = 0; i < before.length; i++) {
-      var b = before[i], a = b.id ? ai[b.id] : after[i];
-      b.index = i;
-      if (!b.visible) continue;
-      if (!(a && a.visible)) {
-        var o = override(before, i, mark.$exit, after);
-
-        /*
-         * After the transition finishes, we need to do a little cleanup to
-         * insure that the final state of the scenegraph is consistent with the
-         * "after" render. For instances that were removed, we need to remove
-         * them from the scenegraph; for instances that became invisible, we
-         * need to mark them invisible. See the cleanup method for details.
-         */
-        b.transition = a ? 2 : (after.push(o), 1);
-        a = o;
-      }
-      interpolateInstance(list, b, a);
-    }
-    for (var i = 0; i < after.length; i++) {
-      var a = after[i], b = a.id ? bi[a.id] : before[i];
-      if (!(b && b.visible) && a.visible) {
-        var o = override(after, i, mark.$enter, before);
-        if (!b) before.push(o);
-        else before[b.index] = o;
-        interpolateInstance(list, o, a);
-      }
-    }
-  }
-
-  /** @private */
-  function override(scene, index, proto, other) {
-    var s = pv.extend(scene[index]),
-        m = scene.mark,
-        r = m.root.scene,
-        p = (proto || defaults).$properties,
-        t;
-
-    /* Correct the target reference, if this is an anchor. */
-    if (other.target && (t = other.target[other.length])) {
-      scene = pv.extend(scene);
-      scene.target = pv.extend(other.target);
-      scene.target[index] = t;
-    }
-
-    /* Determine the set of properties to evaluate. */
-    var seen = {};
-    for (var i = 0; i < p.length; i++) seen[p[i].name] = 1;
-    p = m.binds.optional
-        .filter(function(p) { return !(p.name in seen); })
-        .concat(p);
-
-    /* Evaluate the properties and update any implied ones. */
-    m.context(scene, index, function() {
-      this.buildProperties(s, p);
-      this.buildImplied(s);
-    });
-
-    /* Restore the root scene. This should probably be done by context(). */
-    m.root.scene = r;
-    return s;
-  }
-
-  /** @private */
-  function cleanup(scene) {
-    for (var i = 0, j = 0; i < scene.length; i++) {
-      var s = scene[i];
-      if (s.transition != 1) {
-        scene[j++] = s;
-        if (s.transition == 2) s.visible = false;
-        if (s.children) s.children.forEach(cleanup);
-      }
-    }
-    scene.length = j;
-  }
-
-  that.ease = function(x) {
-    return arguments.length
-        ? (ease = typeof x == "function" ? x : pv.ease(x), that)
-        : ease;
-  };
-
-  that.duration = function(x) {
-    return arguments.length
-        ? (duration = Number(x), that)
-        : duration;
-  };
-
-  that.start = function() {
-    // TODO allow partial rendering
-    if (mark.parent) fail();
-
-    // TODO allow parallel and sequenced transitions
-    if (mark.$transition) mark.$transition.stop();
-    mark.$transition = that;
-
-    // TODO clearing the scene like this forces total re-build
-    var i = pv.Mark.prototype.index, before = mark.scene, after;
-    mark.scene = null;
-    mark.bind();
-    mark.build();
-    after = mark.scene;
-    mark.scene = before;
-    pv.Mark.prototype.index = i;
-
-    var start = Date.now(), list = {};
-    interpolate(list, before, after);
-    timer = setInterval(function() {
-      var t = Math.max(0, Math.min(1, (Date.now() - start) / duration)),
-          e = ease(t);
-      for (var i = list.head; i; i = i.next) i(e);
-      if (t == 1) {
-        cleanup(mark.scene);
-        that.stop();
-      }
-      pv.Scene.updateAll(before);
-    }, 24);
-  };
-
-  that.stop = function() {
-    clearInterval(timer);
-  };
-};
-pv.Transient = function(mark) {
-  pv.Mark.call(this);
-  this.fillStyle(null).strokeStyle(null).textStyle(null);
-  this.on = function(state) { return mark.on(state); };
-};
-
-pv.Transient.prototype = pv.extend(pv.Mark);
 /**
  * Abstract; not implemented. There is no explicit constructor; this class
  * merely serves to document the attributes that are used on particles in
@@ -11092,6 +10692,7 @@ pv.Layout.Network.prototype = pv.extend(pv.Layout)
         return v.map(function(d, i) {
             if (typeof d != "object") d = {nodeValue: d};
             d.index = i;
+            d.linkDegree = 0;
             return d;
           });
       })
@@ -11128,9 +10729,6 @@ pv.Layout.Network.prototype.buildImplied = function(s) {
   pv.Layout.prototype.buildImplied.call(this, s);
   if (s.$id >= this.$id) return true;
   s.$id = this.$id;
-  s.nodes.forEach(function(d) {
-      d.linkDegree = 0;
-    });
   s.links.forEach(function(d) {
       var v = d.linkValue;
       (d.sourceNode || (d.sourceNode = s.nodes[d.source])).linkDegree += v;
@@ -12648,7 +12246,7 @@ pv.Layout.Pack = function() {
   pv.Layout.Hierarchy.call(this);
 
   this.node
-      .shapeRadius(function(n) { return n.radius; })
+      .radius(function(n) { return n.radius; })
       .strokeStyle("rgb(31, 119, 180)")
       .fillStyle("rgba(31, 119, 180, .25)");
 
@@ -14057,7 +13655,7 @@ pv.Layout.Rollup = function() {
   /* Render rollup nodes. */
   this.node
       .data(function() { return nodes; })
-      .shapeSize(function(d) { return d.nodes.length * 20; });
+      .size(function(d) { return d.nodes.length * 20; });
 
   /* Render rollup links. */
   this.link
@@ -14270,8 +13868,8 @@ pv.Layout.Matrix = function() {
   /* Labels are duplicated for top & left. */
   this.label
       .data(function() { return labels; })
-      .left(function() { return this.index & 1 ? dx * ((this.index >> 1) + .5) : 0; })
-      .top(function() { return this.index & 1 ? 0 : dy * ((this.index >> 1) + .5); })
+      .left(function() { return this.index & 1 ? dx * ((this.index >> 1) + .5) : null; })
+      .top(function() { return this.index & 1 ? null : dy * ((this.index >> 1) + .5); })
       .textMargin(4)
       .textAlign(function() { return this.index & 1 ? "left" : "right"; })
       .textAngle(function() { return this.index & 1 ? -Math.PI / 2 : 0; });
@@ -14454,7 +14052,7 @@ pv.Layout.Bullet = function() {
       .bottom(function(d) { return orient == "bottom" ? scale(d) : null; })
       .strokeStyle("black")
       .shape("bar")
-      .shapeAngle(function() { return horizontal ? 0 : Math.PI / 2; })
+      .angle(function() { return horizontal ? 0 : Math.PI / 2; })
       .parent = that;
 
   (this.tick = new pv.Mark())
