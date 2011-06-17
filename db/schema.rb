@@ -760,7 +760,7 @@ ActiveRecord::Schema.define(:version => 20110616222204) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "x_axis_label"
-    t.string   "y_axes_label"
+    t.string   "y_axis_label"
   end
 
   create_table "websites", :force => true do |t|

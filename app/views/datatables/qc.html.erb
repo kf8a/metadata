@@ -3,6 +3,6 @@
 <% datatable.visualizations.each do |visualization| %>
   <h2><%= visualization.title %></h2>
   <p><%= visualization.body %></p>
-  <div class = "<%=visualization.graph_type%>" id = "<%=visualization.id%>">
+  <div class = "<%=visualization.graph_type%>" id = "<%=visualization.id%>" data-ylabel="<%=visualization.y_axis_label%>">
   </div>
 <% end %>

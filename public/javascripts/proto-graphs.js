@@ -33,7 +33,7 @@ jQuery(document).ready(function() {
            .top(h/2)
            .textAlign('center')
            .textAngle(-Math.PI / 2)
-           .text('oops');
+           .text(jQuery(current_div).data('ylabel'));
 
         vis.add(pv.Dot)
           .data(json)
@@ -54,11 +54,12 @@ jQuery(document).ready(function() {
       json.forEach(function(d) {d.datetime = dateFormat.parse(d.datetime)});
       var h = 260;
       var w = 360;
+      var margin = 40;
       var y = pv.Scale.linear(json, function(d) { return d.value}).range(0,h);
       var x = pv.Scale.linear(json, function(d){ return d.datetime}).range(0,w);
       var vis = new pv.Panel()
       .canvas(current_div)
-      .margin(40)
+      .margin(margin)
       .width(w)
       .height(h);
 
@@ -73,6 +74,13 @@ jQuery(document).ready(function() {
         .strokeStyle("#eee")
         .left(x)
         .anchor("bottom").add(pv.Label).text(x.tickFormat);
+
+        vis.add(pv.Label)
+           .left(10 - margin)
+           .top(h/2)
+           .textAlign('center')
+           .textAngle(-Math.PI / 2)
+           .text(jQuery(current_div).data('ylabel'));
 
       vis.add(pv.Area)
         .data(json)
@@ -96,9 +104,10 @@ jQuery(document).ready(function() {
           w = 360,
           y = pv.Scale.linear(json, function(d) { return d.value}).range(0,h),
           x = pv.Scale.linear(json, function(d){ return d.datetime}).range(0,w);
+      var margin = 40;
       var vis = new pv.Panel()
       .canvas(current_div)
-      .margin(40)
+      .margin(margin)
       .width(w)
       .height(h);
 
@@ -113,6 +122,13 @@ jQuery(document).ready(function() {
         .strokeStyle("#eee")
         .left(x)
         .anchor("bottom").add(pv.Label).text(x.tickFormat);
+
+        vis.add(pv.Label)
+           .left(10 - margin)
+           .top(h/2)
+           .textAlign('center')
+           .textAngle(-Math.PI / 2)
+           .text(jQuery(current_div).data('ylabel'));
 
       vis.add(pv.Panel)
       .add(pv.Bar)
