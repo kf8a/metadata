@@ -1,4 +1,7 @@
 jQuery(document).ready(function() {
+  
+  var activeDot = 0;
+
   jQuery('.dot-graph').each(function() {
       var id = jQuery(this).attr('id');
       var current_div = this;
@@ -10,11 +13,14 @@ jQuery(document).ready(function() {
         var margin = 40;
         var y = pv.Scale.linear(json, function(d) { return d.value}).range(0,h);
         var x = pv.Scale.linear(json, function(d){ return d.datetime}).range(0,w);
+        var human_number = pv.Format.number().fractionDigits(0,2)
+      
         var vis = new pv.Panel()
-        .canvas(current_div)
-        .margin(margin)
-        .width(w)
-        .height(h);
+                        .canvas(current_div)
+                        .margin(margin)
+                        .width(w)
+                        .height(h)
+                        .event("mousemove", pv.Behavior.point());
 
         vis.add(pv.Rule)
           .data(y.ticks())
@@ -34,12 +40,18 @@ jQuery(document).ready(function() {
            .textAlign('center')
            .textAngle(-Math.PI / 2)
            .text(jQuery(current_div).data('ylabel'));
-
+        
+          /* .fillStyle( pv.rgb(121,173,210) ) */
         vis.add(pv.Dot)
           .data(json)
           .left(function(d) {return x(d.datetime) })
           .bottom(function(d) { return y(d.value) })
-          .fillStyle("rgb(121,173,210)");
+		      .fillStyle(function() {return activeDot == this.index ? pv.rgb(250,230,5) : pv.rgb(121,172,210,0.2)})
+          .event("point", function() {activeDot = this.index; return vis})
+          .add(pv.Label)
+          .text(function(d) {return human_number(d.value)})
+          .textAlign('center')
+          .visible(function() {return  activeDot == this.index} );
 
         vis.root.render();
       });

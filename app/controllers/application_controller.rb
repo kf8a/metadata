@@ -16,7 +16,10 @@ class ApplicationController < ActionController::Base
    LOCAL_IPS =/^127\.0\.0\.1$|^192\.231\.113\.|^192\.108\.190\.|^192\.108\.188\.|^192\.108\.191\./
 
    def trusted_ip?
-     LOCAL_IPS =~ request.remote_ip
+#     LOCAL_IPS =~ request.remote_ip
+     #
+     #     Don't trust any IP's
+    false
    end
 
   private
