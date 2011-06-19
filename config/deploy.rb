@@ -54,13 +54,13 @@ namespace :deploy do
     deploy.thin.stop
   end
   
- # after :deploy, :link_paperclip_storage, 
   after 'deploy:symlink', :link_production_db
   after 'deploy:symlink', :link_site_keys
   after 'deploy:symlink', :link_new_relic
   after 'deploy:symlink', :link_s3
   before 'deploy:symlink', :stop_sphinks
   after 'deploy:symlink', :update_sphinks
+  after 'deploy:symlink', :ensure_packages
   after 'deploy:symlink', :link_assets
 end
 
@@ -129,6 +129,11 @@ task :link_s3 do
   run "ln -nfs #{deploy_to}/shared/config/s3.yml #{release_path}/config/s3.yml"
 end
 
+desc 'ensure packages'
+task :ensure_packages do
+  run "cd #{release_path};bundle exec rake package_dreamhost_assets RAILS_ENV=production"
+end
+
 desc 'set asset host on production' 
 task :set_asset_host do
   run "sed -i 's/#config.action_controller.asset_host/config.action_controller.asset_host/' #{release_path}/config/environments/production.rb"
@@ -143,11 +148,3 @@ desc 'link mongo initializer'
 task :link_mongo do
   run "ln -nfs #{deploy_to}/shared/config/mongo.rb #{release_path}/config/initializers/mongo.rb"
 end
-
-# task :link_paperclip_storage, :roles => :app do
-#   %w{publications}.each do |share|
-#     run "rm -rf #{release_path}/public/#{share}"
-#     run "mkdir -p #{shared_path}/system/#{share}"
-#     run "ln -nfs #{shared_path}/system/#{share} #{release_path}/public/#{share}"
-#   end
-# end
