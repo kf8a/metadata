@@ -118,7 +118,6 @@ class Datatable < ActiveRecord::Base
     !self.restricted? ||
         user.try(:admin?) ||
         self.owned_by?(user) ||
-        member?(user) ||
         self.permitted?(user)
   end
 
