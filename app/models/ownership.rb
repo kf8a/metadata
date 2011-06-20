@@ -6,6 +6,15 @@ class Ownership < ActiveRecord::Base
   validates_presence_of :datatable
 
   validates_uniqueness_of :user_id, :scope => :datatable_id
+
+  def Ownership.create_ownerships(users, datatables)
+    users.each do |user|
+      datatables.each do |table|
+        ownership = Ownership.new(:user_id => user, :datatable_id => table)
+        ownership.save
+      end
+    end
+  end
 end
 
 
@@ -19,4 +28,3 @@ end
 #  created_at   :datetime
 #  updated_at   :datetime
 #
-

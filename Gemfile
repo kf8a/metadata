@@ -48,6 +48,10 @@ gem 'dalli'
 
 #gem 'central_logger'
 
+#for coffeescript
+gem 'therubyracer', :require => false
+gem 'barista'
+
 group :development, :test  do
   # bundler requires these gems in development
   # gem "rails-footnotes"

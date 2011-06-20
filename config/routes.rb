@@ -58,8 +58,6 @@ Metadata::Application.routes.draw do
   resources :meetings
   resources :ownerships do
     collection do
-      post :add_another_user
-      post :add_another_datatable
       delete :revoke
     end
   end
@@ -73,15 +71,10 @@ Metadata::Application.routes.draw do
   end
   resources :permissions do
     collection do
-      post :create
       put :deny
     end
   end
-  resources :permission_requests do
-    collection do
-      post :create
-    end
-  end
+  resources :permission_requests, :only => :create
   resources :projects
   resources :protocols
   resources :publications do
@@ -96,6 +89,9 @@ Metadata::Application.routes.draw do
 
   resources :studies
   resources :templates
+
+  post '/themes/:id/move_to/:parent_id' => 'themes#move_to'
+  post '/themes/:id/move_before/:parent_id' => 'themes#move_before'
   resources :themes
   resources :units
   resources :uploads

@@ -56,7 +56,7 @@ class Datatable < ActiveRecord::Base
   def valid_for_eml
     valid_variates.present?
   end
-  
+
   def valid_variates
     self.variates.keep_if {|variate| variate.valid_for_eml}
   end
@@ -236,19 +236,22 @@ class Datatable < ActiveRecord::Base
     end
   end
 
-  def temporal_extent
-    data_start_date = data_end_date = nil
-    if is_sql
-
-      values = ActiveRecord::Base.connection.execute(object)
-      date_field = case
+  def database_date_field
+    values = ActiveRecord::Base.connection.execute(object)
+    case
       when values.fields.member?('sample_date') then 'sample_date'
       when values.fields.member?('obs_date') then 'obs_date'
       when values.fields.member?('date') then 'date'
       when values.fields.member?('datetime') then 'datetime'
       when values.fields.member?('year') then 'year'
       when values.fields.member?('harvest_date') then 'harvest_date'
-      end
+    end
+  end
+
+  def temporal_extent
+    data_start_date = data_end_date = nil
+    if is_sql
+      date_field = database_date_field
       unless date_field.nil?
         query = "select max(#{date_field}), min(#{date_field}) from (#{object}) as t1"
         data_start_date, data_end_date = query_datatable_for_temporal_extent(query)
@@ -301,7 +304,7 @@ class Datatable < ActiveRecord::Base
     values = nil
     values = self.perform_query if self.is_sql
   end
-  
+
   def supercession_candidates
     Datatables.where('id <> ?', id).all
   end
@@ -310,10 +313,11 @@ class Datatable < ActiveRecord::Base
 
   def query_datatable_for_temporal_extent(query)
     values = ActiveRecord::Base.connection.execute(query)
+    dates = values[0]
     if values[0].class == 'Date'
-      [Time.parse(values[0]['min']).to_date,Time.parse(values[0]['max']).to_date]
+      [Time.parse(dates['min']).to_date,Time.parse(dates['max']).to_date]
     else # assume is a year
-      [Time.parse(values[0]['min'].to_s + '-1-1').to_date,Time.parse(values[0]['max'].to_s + '-1-1').to_date ]
+      [Time.parse(dates['min'].to_s + '-1-1').to_date,Time.parse(dates['max'].to_s + '-1-1').to_date ]
     end
   end
 
@@ -323,23 +327,27 @@ class Datatable < ActiveRecord::Base
     end
   end
 
+  def eml_data_format
+    @eml.dataFormat do
+      @eml.textFormat do
+        @eml.numHeaderLines (data_access_statement.lines.to_a.size + 4).to_s
+        @eml.attributeOrientation 'column'
+        @eml.simpleDelimited do
+          @eml.fieldDelimiter ','
+        end
+      end
+    end
+  end
+
   def eml_physical
     @eml.physical do
       @eml.objectName title
       @eml.encodingMethod 'None'
-      @eml.dataFormat do
-        @eml.textFormat do
-          @eml.numHeaderLines (data_access_statement.lines.to_a.size + 4).to_s
-          @eml.attributeOrientation 'column'
-          @eml.simpleDelimited do
-            @eml.fieldDelimiter ','
-          end
-        end
-      end
+      eml_data_format
       @eml.distribution do
         @eml.online do
           if is_sql
-            @eml.url "http://#{website_name}.kbs.msu.edu/datatables/#{self.id}.csv" 
+            @eml.url "http://#{website_name}.kbs.msu.edu/datatables/#{self.id}.csv"
           else
             @eml.url data_url
           end
@@ -395,4 +403,3 @@ end
 #  summary_graph         :text
 #  event_query           :text
 #
-

@@ -1,4 +1,9 @@
 jQuery(document).ready(function() {
+	jQuery('.myselect').comboselect();
+
+
+
+
 	function geo_decode() {
 		var email  = jQuery('.person-email').get(0);
 		if ((email != undefined)) {
