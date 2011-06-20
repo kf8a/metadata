@@ -89,6 +89,9 @@ Metadata::Application.routes.draw do
 
   resources :studies
   resources :templates
+
+  post '/themes/:id/move_to/:parent_id' => 'themes#move_to'
+  post '/themes/:id/move_before/:parent_id' => 'themes#move_before'
   resources :themes
   resources :units
   resources :uploads

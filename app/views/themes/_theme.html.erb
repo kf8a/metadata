@@ -1,7 +1,12 @@
-<% unless theme.root? %>
-  <div class='droppable'></div>
-<% end %>
-<li id="<%= theme.id %>" class='theme_container', draggable='true'>
-  <%= theme.name %>
+<div class='droppable'></div>
+<li>
+  <span id="<%= theme.id %>" draggable='true'>
+    <%= theme.name %>
+  </span>
   <input type='hidden' value="<%=theme.id %>">
+  <% if theme.children.present? %>
+    <ul>
+      <%= render theme.children %>
+    </ul>
+  <% end %>
 </li>
