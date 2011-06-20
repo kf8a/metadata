@@ -3,11 +3,11 @@ jQuery(document).ready ->
   sortedDrop = (event, ui) ->
     dragged = ui.draggable
     dragged_id = dragged.attr('id')
-    dropTarget = $(this).next().find('span[draggable=true]')
+    dropTarget = jQuery(this).next().find('span[draggable=true]')
     target_id = dropTarget.attr('id')
 
     jQuery.post('/themes/' + dragged_id + '/move_before/' + target_id, (data) ->
-      original = $(dropTarget).parent().parent().parent()
+      original = jQuery(dropTarget).parent().parent().parent()
       original.empty()
       original.before(data)
 
@@ -28,7 +28,7 @@ jQuery(document).ready ->
     target_id = this.id
 
     jQuery.post('/themes/' + dragged_id + '/move_to/' + target_id, (data) ->
-      original = $(dropTarget).parent()
+      original = jQuery(dropTarget).parent()
       original.empty()
       original.before(data)
 
