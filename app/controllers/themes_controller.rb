@@ -18,7 +18,7 @@ class ThemesController < ApplicationController
     child = Theme.find(params[:id])
     father = theme.parent
     child.move_to_left_of(theme) unless child == theme
-    render :partial => 'theme', :locals => {:area => father}
+    render :partial => 'theme', :locals => {:theme => father}
   end
 
   def create
