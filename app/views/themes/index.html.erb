@@ -1,8 +1,6 @@
 
 <div>
-  <ul>
-    <%= render @theme_roots %>
-  </ul>
+  <%= render 'theme_list', :theme_roots => @theme_roots %>
 </div>
 
 <%= form_for(:theme, :url => themes_path) do |f| %>
