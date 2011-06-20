@@ -53,7 +53,7 @@ namespace :deploy do
   task :stop, :roles => :app do
     deploy.thin.stop
   end
-  
+
   after 'deploy:symlink', :link_production_db
   after 'deploy:symlink', :link_site_keys
   after 'deploy:symlink', :link_new_relic
@@ -64,35 +64,37 @@ namespace :deploy do
   after 'deploy:symlink', :link_assets
 end
 
-task :staging do 
-  
+after :deploy, :compile_coffeescripts
+
+task :staging do
+
   set :host, 'sebewa'
-  
+
   role :app, "#{host}.kbs.msu.edu"
   role :web, "#{host}.kbs.msu.edu"
   role :db,  "#{host}.kbs.msu.edu", :primary => true
-  
+
 end
 
 task :master do
-  
+
   set :host, 'houghton'
-  
+
   role :app, "#{host}.kbs.msu.edu"
   role :web, "#{host}.kbs.msu.edu"
   role :db,  "#{host}.kbs.msu.edu", :primary => true
-  
+
 #  after 'deploy:symlink', :set_asset_host
 end
 
-task :production do 
-  
+task :production do
+
   set :host, 'gprpc37'
-  
+
   role :app, "#{host}.kbs.msu.edu", "gprpc28.kbs.msu.edu", "houghton.kbs.msu.edu" #, "35.8.163.71"
   role :web, "#{host}.kbs.msu.edu"
   role :db,  "#{host}.kbs.msu.edu", :primary => true
-  
+
 #  after 'deploy:symlink', :set_asset_host
   after "deploy:update", "newrelic:notice_deployment"
 end
@@ -134,7 +136,7 @@ task :ensure_packages do
   run "cd #{release_path};bundle exec rake package_dreamhost_assets RAILS_ENV=production"
 end
 
-desc 'set asset host on production' 
+desc 'set asset host on production'
 task :set_asset_host do
   run "sed -i 's/#config.action_controller.asset_host/config.action_controller.asset_host/' #{release_path}/config/environments/production.rb"
 end
@@ -147,4 +149,9 @@ end
 desc 'link mongo initializer'
 task :link_mongo do
   run "ln -nfs #{deploy_to}/shared/config/mongo.rb #{release_path}/config/initializers/mongo.rb"
+end
+
+desc 'compile coffeescripts'
+task :compile_coffeescripts do
+  run "cd #{current_path};bundle exec rake barista:brew"
 end
