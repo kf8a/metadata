@@ -42,27 +42,38 @@ module CitationFormat
     sur_name.to_s + given_and_middle + suffix_text
   end
 
-  def name=(name_string='')
-    name_array = name_string.split(',')
-    #Get suffices
+  def extract_suffix(name_array)
     suffix_text = ''
     while name_array[-1].present? && SUFFICES.include?(name_array[-1].downcase.delete('.').strip)
       suffix_text = ', ' + name_array.slice!(-1).strip + suffix_text
     end
     self.suffix = suffix_text
+
+    name_array
+  end
+
+  def name=(name_string='')
+    name_array = name_string.split(',')
+    name_array = extract_suffix(name_array)
     if name_array.count == 1
-      #Must be first middle last
-      name_array = name_array[0].split.collect {|x| x.split('.') }.flatten
-      self.given_name = name_array.slice!(0)
-      self.sur_name = name_array.slice!(-1)
-      self.middle_name = name_array.join(' ')
+      treat_as_first_middle_last(name_array)
     else
-      #Must be last, first middle
-      self.sur_name = name_array.slice!(0)
-      name_array = name_array[0].split.collect {|x| x.split('.') }.flatten
-      self.given_name = name_array.slice!(0)
-      self.middle_name = name_array.join(' ')
+      treat_as_last_first_middle(name_array)
     end
+  end
+
+  def treat_as_first_middle_last(name_array)
+    name_array = name_array[0].split.collect {|part| part.split('.') }.flatten
+    self.given_name = name_array.slice!(0)
+    self.sur_name = name_array.slice!(-1)
+    self.middle_name = name_array.join(' ')
+  end
+
+  def treat_as_last_first_middle(name_array)
+    self.sur_name = name_array.slice!(0)
+    name_array = name_array[0].split.collect {|part| part.split('.') }.flatten
+    self.given_name = name_array.slice!(0)
+    self.middle_name = name_array.join(' ')
   end
 
   private
