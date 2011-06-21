@@ -40,6 +40,15 @@ class ThemesController < ApplicationController
   end
 
   def update
-    render :nothing
+    theme = Theme.find(params[:id])
+    if theme.update_attributes(params[:theme])
+      flash[:notice] = 'Theme was successfully updated.'
+    end
+    redirect_to themes_url
   end
+
+  def edit
+    @theme = Theme.find(params[:id])
+  end
+
 end
