@@ -1,7 +1,7 @@
 <li>
   <div class='droppable'></div>
   <span id="<%= theme.id %>" draggable='true'>
-    <%= theme.name %>
+    <%= theme.name %> <%= link_to 'Edit', edit_theme_path(theme.id) %>
   </span>
   <input type='hidden' value="<%=theme.id %>">
   <% if theme.children.present? %>
