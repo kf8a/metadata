@@ -27,4 +27,14 @@ class ThemesControllerTest < ActionController::TestCase
     should redirect_to("the themes page") {themes_url}
     should set_the_flash
   end
+
+  context 'POST update' do
+    setup do
+      @theme = Factory.create(:theme)
+      post :update, :id => @theme
+    end
+
+    should redirect_to('the themes page') {themes_url}
+    should set_the_flash
+  end
 end
