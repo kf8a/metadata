@@ -153,5 +153,5 @@ end
 
 desc 'compile coffeescripts'
 task :compile_coffeescripts do
-  run "cd #{current_path};bundle exec rake barista:brew"
+  run "cd #{current_path};bundle exec rake barista:brew RAILS_ENV=production"
 end
