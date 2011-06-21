@@ -7,24 +7,24 @@ module CitationFormat
     end
   end
 
+  def first_initial
+    given_name[0..0].upcase
+  end
+
+  def middle_initial
+    middle_name[0..0].upcase
+  end
+
   def format_as_default
-    if has_given_name? && has_middle_name?
-      "#{sur_name}, #{given_name[0..0].upcase}. #{middle_name[0..0].upcase}.#{suffix_text}"
-    elsif has_given_name?
-      "#{sur_name}, #{given_name[0..0].upcase}.#{suffix_text}"
-    else
-      sur_name.to_s + suffix_text
-    end
+    given_name_part = has_given_name? ? ", #{first_initial}." : ""
+    middle_name_part = has_middle_name? ? " #{middle_initial}." : ""
+    sur_name.to_s + given_name_part + middle_name_part + suffix_text
   end
 
   def format_as_natural
-    if has_given_name? && has_middle_name?
-      "#{given_name[0..0].upcase}. #{middle_name[0..0].upcase}. #{sur_name}#{suffix_text}"
-    elsif given_name
-      "#{given_name[0..0].upcase}. #{sur_name}#{suffix_text}"
-    else
-      sur_name.to_s + suffix_text
-    end
+    given_name_part = has_given_name? ? "#{first_initial}. " : ""
+    middle_name_part = has_middle_name? ? "#{middle_initial}. " : ""
+    given_name_part + middle_name_part + sur_name.to_s + suffix_text
   end
 
   def suffix_text
@@ -32,21 +32,11 @@ module CitationFormat
   end
 
   def name
-    if sur_name.present?
-      if middle_name.present? || given_name.present?
-        sur_text = "#{sur_name},"
-      else
-        sur_text = sur_name
-      end
-    else
-      sur_text = ''
-    end
+    given  = " #{given_name}".presence
+    middle = " #{middle_name}".presence
+    given_and_middle = given || middle ? ", " + given.to_s + middle.to_s : ""
 
-    given_text  = given_name.present?  ? " #{given_name}"  : ''
-    middle_text = middle_name.present? ? " #{middle_name}" : ''
-    suffix_text = suffix.present?      ? suffix            : '' #proper suffix should already be in ', Jr.' form
-
-    sur_text + given_text + middle_text + suffix_text
+    sur_name.to_s + given_and_middle + suffix_text
   end
 
   def name=(name_string='')
