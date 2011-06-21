@@ -4,21 +4,21 @@
 
 <% @datatable.pending_requesters.each do |requester| %>
   <% if @datatable.deniers_of(requester).blank? %>
-    <p><%= requester.email %> has requested permission.</p>
+    <p><%= requester %> has requested permission.</p>
   <% else %>
     <p>
-      <%= requester.email %> has requested permission but it has been denied by:
+      <%= requester %> has requested permission but it has been denied by:
       <% @datatable.deniers_of(requester).each do |denier| %>
-        <%= denier.email %>
+        <%= denier %>
       <% end %>
     </p>
   <% end %>
-  <%= button_to "Grant permission to #{requester.email}", {
+  <%= button_to "Grant permission to #{requester}", {
       :action => "create",
       :id => @datatable.id,
       :email => requester.email },
       :method => :post %>
-  <%= button_to "Deny request for #{requester.email}", {
+  <%= button_to "Deny request for #{requester}", {
       :action => "deny",
       :id => @datatable.id,
       :email => requester.email },
@@ -26,17 +26,17 @@
 <% end %>
 <% @permitted_users.each do |user| %>
   <p>
-    <%= user.email %> has permission from you.
+    <%= user %> has permission from you.
   </p>
   <% @datatable.owners.each do |owner| %>
       <% next if owner == current_user %>
       <% if user.has_permission_from?(owner, @datatable) %>
-        <p><%= user.email %> has permission from <%= owner.email %></p>
+        <p><%= user %> has permission from <%= owner %></p>
       <% else %>
-        <p><%= user.email %> still needs permission from <%= owner.email %></p>
+        <p><%= user %> still needs permission from <%= owner %></p>
       <% end %>
   <% end %>
-  <%= button_to "Revoke permission from #{user.email}", {
+  <%= button_to "Revoke permission from #{user}", {
         :action => "destroy",
         :id => @datatable.id,
         :user => user.id },
