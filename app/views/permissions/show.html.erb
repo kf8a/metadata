@@ -3,16 +3,13 @@
 <%= link_to 'Add Permissions', new_permission_path(:datatable => @datatable) %>
 
 <% @datatable.pending_requesters.each do |requester| %>
-  <% if @datatable.deniers_of(requester).blank? %>
-    <p><%= requester %> has requested permission.</p>
-  <% else %>
-    <p>
-      <%= requester %> has requested permission but it has been denied by:
-      <% @datatable.deniers_of(requester).each do |denier| %>
-        <%= denier %>
-      <% end %>
-    </p>
-  <% end %>
+  <p>
+    <%= requester %> has requested permission
+    <% if @datatable.deniers_of(requester).present? %>
+      but it has been denied by: <%= @datatable.deniers_of(requester).join(', ') %>
+    <% end %>
+    .
+  </p>
   <%= button_to "Grant permission to #{requester}", {
       :action => "create",
       :id => @datatable.id,
