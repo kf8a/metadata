@@ -1,4 +1,7 @@
 module CitationFormat
+
+  SUFFICES = ['esq','esquire','jr','sr','2','i','ii','iii','iv','v','clu','chfc','cfp','md','phd']
+
   def formatted(option = :default)
     if option == :natural
       format_as_natural
@@ -7,24 +10,24 @@ module CitationFormat
     end
   end
 
+  def first_initial
+    given_name[0..0].upcase
+  end
+
+  def middle_initial
+    middle_name[0..0].upcase
+  end
+
   def format_as_default
-    if has_given_name? && has_middle_name?
-      "#{sur_name}, #{given_name[0..0].upcase}. #{middle_name[0..0].upcase}.#{suffix_text}"
-    elsif has_given_name?
-      "#{sur_name}, #{given_name[0..0].upcase}.#{suffix_text}"
-    else
-      sur_name.to_s + suffix_text
-    end
+    given_name_part = has_given_name? ? ", #{first_initial}." : ""
+    middle_name_part = has_middle_name? ? " #{middle_initial}." : ""
+    sur_name.to_s + given_name_part + middle_name_part + suffix_text
   end
 
   def format_as_natural
-    if has_given_name? && has_middle_name?
-      "#{given_name[0..0].upcase}. #{middle_name[0..0].upcase}. #{sur_name}#{suffix_text}"
-    elsif given_name
-      "#{given_name[0..0].upcase}. #{sur_name}#{suffix_text}"
-    else
-      sur_name.to_s + suffix_text
-    end
+    given_name_part = has_given_name? ? "#{first_initial}. " : ""
+    middle_name_part = has_middle_name? ? "#{middle_initial}. " : ""
+    given_name_part + middle_name_part + sur_name.to_s + suffix_text
   end
 
   def suffix_text
@@ -32,45 +35,45 @@ module CitationFormat
   end
 
   def name
-    if sur_name.present?
-      if middle_name.present? || given_name.present?
-        sur_text = "#{sur_name},"
-      else
-        sur_text = sur_name
-      end
-    else
-      sur_text = ''
-    end
+    given  = " #{given_name}".presence
+    middle = " #{middle_name}".presence
+    given_and_middle = given || middle ? "," + given.to_s + middle.to_s : ""
 
-    given_text  = given_name.present?  ? " #{given_name}"  : ''
-    middle_text = middle_name.present? ? " #{middle_name}" : ''
-    suffix_text = suffix.present?      ? suffix            : '' #proper suffix should already be in ', Jr.' form
-
-    sur_text + given_text + middle_text + suffix_text
+    sur_name.to_s + given_and_middle + suffix_text
   end
 
-  def name=(name_string='')
-    list_of_suffices = ['esq','esquire','jr','sr','2','i','ii','iii','iv','v','clu','chfc','cfp','md','phd']
-    name_array = name_string.split(',')
-    #Get suffices
+  def extract_suffix(name_array)
     suffix_text = ''
-    while name_array[-1].present? && list_of_suffices.include?(name_array[-1].downcase.delete('.').strip)
+    while name_array[-1].present? && SUFFICES.include?(name_array[-1].downcase.delete('.').strip)
       suffix_text = ', ' + name_array.slice!(-1).strip + suffix_text
     end
     self.suffix = suffix_text
+
+    name_array
+  end
+
+  def name=(name_string='')
+    name_array = name_string.split(',')
+    name_array = extract_suffix(name_array)
     if name_array.count == 1
-      #Must be first middle last
-      name_array = name_array[0].split.collect {|x| x.split('.') }.flatten
-      self.given_name = name_array.slice!(0)
-      self.sur_name = name_array.slice!(-1)
-      self.middle_name = name_array.join(' ')
+      treat_as_first_middle_last(name_array)
     else
-      #Must be last, first middle
-      self.sur_name = name_array.slice!(0)
-      name_array = name_array[0].split.collect {|x| x.split('.') }.flatten
-      self.given_name = name_array.slice!(0)
-      self.middle_name = name_array.join(' ')
+      treat_as_last_first_middle(name_array)
     end
+  end
+
+  def treat_as_first_middle_last(name_array)
+    name_array = name_array[0].split.collect {|part| part.split('.') }.flatten
+    self.given_name = name_array.slice!(0)
+    self.sur_name = name_array.slice!(-1)
+    self.middle_name = name_array.join(' ')
+  end
+
+  def treat_as_last_first_middle(name_array)
+    self.sur_name = name_array.slice!(0)
+    name_array = name_array[0].split.collect {|part| part.split('.') }.flatten
+    self.given_name = name_array.slice!(0)
+    self.middle_name = name_array.join(' ')
   end
 
   private
