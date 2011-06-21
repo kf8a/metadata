@@ -1,4 +1,7 @@
 module CitationFormat
+
+  SUFFICES = ['esq','esquire','jr','sr','2','i','ii','iii','iv','v','clu','chfc','cfp','md','phd']
+
   def formatted(option = :default)
     if option == :natural
       format_as_natural
@@ -34,17 +37,16 @@ module CitationFormat
   def name
     given  = " #{given_name}".presence
     middle = " #{middle_name}".presence
-    given_and_middle = given || middle ? ", " + given.to_s + middle.to_s : ""
+    given_and_middle = given || middle ? "," + given.to_s + middle.to_s : ""
 
     sur_name.to_s + given_and_middle + suffix_text
   end
 
   def name=(name_string='')
-    list_of_suffices = ['esq','esquire','jr','sr','2','i','ii','iii','iv','v','clu','chfc','cfp','md','phd']
     name_array = name_string.split(',')
     #Get suffices
     suffix_text = ''
-    while name_array[-1].present? && list_of_suffices.include?(name_array[-1].downcase.delete('.').strip)
+    while name_array[-1].present? && SUFFICES.include?(name_array[-1].downcase.delete('.').strip)
       suffix_text = ', ' + name_array.slice!(-1).strip + suffix_text
     end
     self.suffix = suffix_text
