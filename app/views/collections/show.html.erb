@@ -1,28 +1,28 @@
-<h1><%= @collection.datatable.title_and_years %></h1>
+<h1><%= @collection.title_and_years %></h1>
 
 <table class='data-description'>
-  <% if @collection.datatable.dataset.protocols.present? %>
+  <% if @collection.protocols.present? %>
     <tr>
       <td>Protocols</td>
       <td>
-        <% @collection.datatable.dataset.protocols.each do |protocol| %>
+        <% @collection.protocols.each do |protocol| %>
           <%= link_to protocol.name, protocol_path(protocol)%>
         <% end %>
       </td>
     </tr>
   <% end %>
 
-  <% if @collection.datatable.keywords.any? %>
+  <% if @collection.keywords.any? %>
     <tr>
       <td>Keywords:</td>
-      <td><%= @collection.datatable.keywords.join(', ')%></td>
+      <td><%= @collection.keywords.join(', ')%></td>
     </tr>
   <% end %>
   <tr>
     <td>Metadata</td>
     <td>
       <ul>
-        <li><%= link_to 'Complete EML', dataset_path(@collection.datatable.dataset, :format => :eml) %></li>
+        <li><%= link_to 'Complete EML', dataset_path(@collection.dataset, :format => :eml) %></li>
       </ul>
     </td>
   </tr>
@@ -34,7 +34,7 @@
     <th>Description</th>
     <th>Units</th>
   </tr>
-  <% @collection.datatable.variates.each do |variate| -%>
+  <% @collection.variates.each do |variate| -%>
     <tr>
       <td class='space-after'>
         <%= variate.name.gsub(/_/,' ') %>
@@ -57,7 +57,7 @@
     <table>
       <tr>
         <td><%= label_tag 'limitby', 'Limit display by field: '%></td>
-        <td><%= select_tag 'limitby', 
+        <td><%= select_tag 'limitby',
                 options_for_select(@customizer.limitoptions, @customizer.limitby) %></td>
       </tr>
       <% if @customizer.limitby %>
@@ -69,7 +69,7 @@
           <td><%= select_tag 'limit_max', options_for_select(@customizer.limitrange, @customizer.limit_max)%></td>
         </tr>
         <tr>
-          <td><%= label_tag 'conatins', "Where '#{@customizer.limitby.titleize}' contains: "%> </td>
+          <td><%= label_tag 'contains', "Where '#{@customizer.limitby.titleize}' contains: "%> </td>
           <td><%= text_field_tag 'contains'%> </td>
         </tr>
       <% end %>

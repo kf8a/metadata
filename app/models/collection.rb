@@ -3,18 +3,37 @@ class Collection < ActiveRecord::Base
 
   validates_presence_of :datatable
 
+  def dataset
+    self.datatable.dataset
+  end
+
+  def keywords
+    self.datatable.keywords
+  end
+
   def perform_query
-    query =  self.datatable.object
-    ActiveRecord::Base.connection.execute(query)
+    datatable.perform_query
+  end
+
+  def protocols
+    self.dataset.protocols
+  end
+
+  def title_and_years
+    self.datatable.title_and_years
   end
 
   def values
     @values ||= self.perform_query
   end
 
-  def title_and_years
-    self.datatable.title_and_years
+  def variates
+    self.datatable.variates
   end
+
+  private
+
+
 end
 
 
@@ -27,4 +46,3 @@ end
 #  updated_at   :datetime
 #  datatable_id :integer
 #
-
