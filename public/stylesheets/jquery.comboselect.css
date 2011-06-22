@@ -17,7 +17,7 @@ input, #myselect, #myotherselect {
 	clear: right;
 }
 
-input[type="submit"], #go {
+form.new_ownership > input[type="submit"], #go {
 	font-family: verdana, arial, sans-serif;
 	font-size: 10px;
 	width: auto;
