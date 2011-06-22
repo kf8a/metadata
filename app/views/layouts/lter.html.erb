@@ -14,9 +14,11 @@
     <div id="topcoloredbar">
       <div id='search'>
         <a href="/people">People</a>
-        <form action="http://www.google.com/u/ltersearch" method='get' id="searchform">
-          <input id='peoplesearch' type='text' name='q' maxlength='255' size='20' value="Search KBS LTER"/>
-        </form>
+						<form action="http://www.google.com/cse" id="google-search-form">
+						    <input name="cx" type="hidden" value="002874178145105834877:ao6juz4dn-k" />
+						    <input name="ie" type="hidden" value="UTF-8" />
+						    <input name="q" id='top-search-box' class="hint" type="text" value="Search KBS LTER..." onfocus="if (this.value == 'Search KBS LTER...') {this.value = ''; this.style.color = 'black';}" onblur="if (this.value == '') {this.value = 'Search KBS LTER...';this.style.color='#CCCCCC';}" />
+						</form>
       </div>
       <h2><a href='/'>The KBS LTER Site</a></h2>
     </div>
