@@ -4,6 +4,8 @@ class Treatment < ActiveRecord::Base
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: treatments

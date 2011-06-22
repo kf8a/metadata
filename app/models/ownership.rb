@@ -18,6 +18,7 @@ class Ownership < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: ownerships
@@ -28,3 +29,4 @@ end
 #  created_at   :datetime
 #  updated_at   :datetime
 #
+

@@ -24,6 +24,8 @@ end
 
 
 
+
+
 # == Schema Information
 #
 # Table name: invites

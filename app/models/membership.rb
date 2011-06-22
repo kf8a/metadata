@@ -4,6 +4,8 @@ class Membership < ActiveRecord::Base
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: memberships

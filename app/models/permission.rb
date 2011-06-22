@@ -23,6 +23,8 @@ class Permission < ActiveRecord::Base
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: permissions

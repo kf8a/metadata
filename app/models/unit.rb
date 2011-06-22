@@ -33,6 +33,8 @@ end
 
 
 
+
+
 # == Schema Information
 #
 # Table name: units
@@ -46,5 +48,6 @@ end
 #  unit_type              :string(255)
 #  parent_si              :string(255)
 #  multiplier_to_si       :float
+#  abbreviation           :string(255)
 #
 

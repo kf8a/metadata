@@ -37,6 +37,8 @@ class Protocol < ActiveRecord::Base
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: protocols

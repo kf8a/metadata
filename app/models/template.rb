@@ -4,6 +4,8 @@ class Template < ActiveRecord::Base
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: templates

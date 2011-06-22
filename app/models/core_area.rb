@@ -5,6 +5,8 @@ class CoreArea < ActiveRecord::Base
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: core_areas

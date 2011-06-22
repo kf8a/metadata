@@ -37,6 +37,7 @@ class Collection < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: collections
@@ -46,3 +47,4 @@ end
 #  updated_at   :datetime
 #  datatable_id :integer
 #
+

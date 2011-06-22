@@ -4,6 +4,8 @@ class Scribble < ActiveRecord::Base
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: scribbles

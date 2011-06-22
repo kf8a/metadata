@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110616222204) do
+ActiveRecord::Schema.define(:version => 20110622202236) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -23,9 +23,6 @@ ActiveRecord::Schema.define(:version => 20110616222204) do
   add_index "affiliations", ["dataset_id"], :name => "index_affiliations_on_dataset_id"
   add_index "affiliations", ["person_id"], :name => "index_affiliations_on_person_id"
   add_index "affiliations", ["role_id"], :name => "index_affiliations_on_role_id"
-
-# Could not dump table "areas" because of following StandardError
-#   Unknown type 'geometry' for column 'the_geom'
 
   create_table "authors", :force => true do |t|
     t.string   "sur_name"
@@ -193,20 +190,21 @@ ActiveRecord::Schema.define(:version => 20110616222204) do
     t.integer  "excerpt_limit"
     t.date     "begin_date"
     t.date     "end_date"
-    t.boolean  "on_web",                 :default => true
+    t.boolean  "on_web",                     :default => true
     t.integer  "theme_id"
     t.integer  "core_area_id"
-    t.integer  "weight",                 :default => 100
+    t.integer  "weight",                     :default => 100
     t.integer  "study_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_secondary",           :default => false
-    t.boolean  "is_utf_8",               :default => false
-    t.boolean  "metadata_only",          :default => false
+    t.boolean  "is_secondary",               :default => false
+    t.boolean  "is_utf_8",                   :default => false
+    t.boolean  "metadata_only",              :default => false
     t.text     "summary_graph"
     t.text     "event_query"
     t.integer  "deprecated_in_fovor_of"
     t.text     "deprecation_notice"
+    t.integer  "number_of_released_records"
   end
 
   add_index "datatables", ["core_area_id"], :name => "index_datatables_on_core_area_id"
@@ -286,8 +284,12 @@ ActiveRecord::Schema.define(:version => 20110616222204) do
   add_index "invites", ["id", "email"], :name => "index_invites_on_id_and_email"
   add_index "invites", ["id", "invite_code"], :name => "index_invites_on_id_and_invite_code"
 
-# Could not dump table "locations" because of following StandardError
-#   Unknown type 'geometry' for column 'the_geom'
+  create_table "locations", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "log_hiresyieldmanagement", :id => false, :force => true do |t|
     t.date    "obsdate"
@@ -437,6 +439,14 @@ ActiveRecord::Schema.define(:version => 20110616222204) do
   add_index "permissions", ["datatable_id"], :name => "index_permissions_on_datatable_id"
   add_index "permissions", ["owner_id"], :name => "index_permissions_on_owner_id"
   add_index "permissions", ["user_id"], :name => "index_permissions_on_user_id"
+
+  create_table "plots", :force => true do |t|
+    t.string  "name"
+    t.integer "treatment_id"
+    t.integer "replicate"
+    t.integer "study_id"
+    t.string  "description"
+  end
 
   create_table "projects", :force => true do |t|
     t.string   "title"
@@ -666,13 +676,13 @@ ActiveRecord::Schema.define(:version => 20110616222204) do
   create_table "units", :force => true do |t|
     t.string  "name"
     t.text    "description"
-    t.boolean "in_eml",                                :default => false
+    t.boolean "in_eml",                 :default => false
     t.text    "definition"
     t.integer "deprecated_in_favor_of"
     t.string  "unit_type"
     t.string  "parent_si"
     t.float   "multiplier_to_si"
-    t.string  "abbreviation",           :limit => nil
+    t.string  "abbreviation"
   end
 
   add_index "units", ["name"], :name => "unit_names_key", :unique => true

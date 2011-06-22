@@ -5,6 +5,8 @@ class PageImage < ActiveRecord::Base
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: page_images

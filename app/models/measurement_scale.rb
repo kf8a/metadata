@@ -2,6 +2,8 @@ class MeasurementScale < ActiveRecord::Base
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: measurement_scales

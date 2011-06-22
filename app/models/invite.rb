@@ -28,6 +28,8 @@ class Invite < ActiveRecord::Base
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: invites
