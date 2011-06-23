@@ -184,7 +184,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def raw_csv
-    values  = perform_query
+    values  = approved_data
     csv_string = CSV.generate do |csv|
       csv << variates.collect { |variate| variate.name }
       values.each do |row|
