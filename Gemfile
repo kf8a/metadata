@@ -52,6 +52,8 @@ gem 'dalli'
 gem 'therubyracer', :require => false
 gem 'barista'
 
+gem 'has_scope'
+
 group :development, :test  do
   # bundler requires these gems in development
   # gem "rails-footnotes"
