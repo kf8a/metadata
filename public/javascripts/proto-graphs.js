@@ -169,11 +169,12 @@ jQuery(document).ready(function() {
         .key(function(d) {return d.category})
         .entries();
 
+      var species = categories.map(function(d) {return d.key});
+
       var width      = 400;
-      var height     = 1000;
+      var height     = species.length * 14;
       var leftMargin = 220;
 
-      var species = categories.map(function(d) {return d.key});
       var speciesScale = pv.Scale.ordinal(species).split(0, height);
       var yearScale = pv.Scale.linear(pv.min(data.map(function(d) {return d.year})),pv.max(data.map(function(d) {return d.year}))).range(0, width);
       var biomassScale = pv.Scale.linear(0, pv.max(data.map(function(d) {return d.value}))).range(0,75);
