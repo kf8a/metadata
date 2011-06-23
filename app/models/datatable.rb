@@ -273,6 +273,11 @@ class Datatable < ActiveRecord::Base
     ActiveRecord::Base.connection.execute(query)
   end
 
+  def approved_data
+    query = self.object
+    query = query + " limit #{self.number_of_released_records}"
+    ActiveRecord::Base.connection.execute(query)
+  end
 
   def perform_query
     query =  self.object
@@ -406,4 +411,3 @@ end
 #  deprecation_notice         :text
 #  number_of_released_records :integer
 #
-
