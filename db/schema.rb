@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110622202236) do
+ActiveRecord::Schema.define(:version => 20110623191510) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -771,6 +771,7 @@ ActiveRecord::Schema.define(:version => 20110622202236) do
     t.datetime "updated_at"
     t.string   "x_axis_label"
     t.string   "y_axis_label"
+    t.integer  "weight"
   end
 
   create_table "websites", :force => true do |t|
