@@ -173,11 +173,10 @@ jQuery(document).ready(function() {
 
       var width      = 400;
       var height     = species.length * 14;
-      var leftMargin = 180;
 
-      var speciesScale = pv.Scale.ordinal(species).split(0, height);
+      var speciesScale = pv.Scale.ordinal(species.sort().reverse()).split(0, height);
       var yearScale = pv.Scale.linear(pv.min(data.map(function(d) {return d.year})),pv.max(data.map(function(d) {return d.year}))).range(0, width);
-      var biomassScale = pv.Scale.linear(0, pv.max(data.map(function(d) {return d.value}))).range(0,height);
+      var biomassScale = pv.Scale.linear(0, pv.max(data.map(function(d) {return d.value}))).range(0,height/2);
           
       var activeDot = 0;
 
@@ -187,7 +186,9 @@ jQuery(document).ready(function() {
                     .canvas(current_div)
                     .width(width)
                     .height(height)
-                    .margin(50)
+                    .right(50)
+                    .top(10)
+                    .bottom(20)
                     .left(380)
                     .event("mousemove", pv.Behavior.point());
         
