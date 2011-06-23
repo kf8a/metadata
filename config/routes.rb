@@ -52,6 +52,7 @@ Metadata::Application.routes.draw do
     member do
       get :qc
       get :update_temporal_extent
+      post :approve_records
     end
   end
   resources :invites

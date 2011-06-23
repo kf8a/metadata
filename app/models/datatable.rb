@@ -280,6 +280,14 @@ class Datatable < ActiveRecord::Base
     ActiveRecord::Base.connection.execute(query)
   end
 
+  def total_records
+    values.count
+  end
+
+  def approve_data
+    self.number_of_released_records = total_records
+  end
+
   def perform_query
     query =  self.object
     ActiveRecord::Base.connection.execute(query)

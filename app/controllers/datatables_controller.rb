@@ -147,6 +147,12 @@ class DatatablesController < ApplicationController
     datatable.save
   end
 
+  def approve_records
+    datatable.approve_data
+    datatable.save
+    redirect_to edit_datatable_path(datatable)
+  end
+
   private
 
   def set_title
@@ -191,7 +197,7 @@ class DatatablesController < ApplicationController
     @keyword_list = query['keyword_list']
     @keyword_list = nil if @keyword_list.empty? || @keyword_list == @default_value
 
-    @datatables = 
+    @datatables =
       if @keyword_list
         Datatable.search @keyword_list, :with => {:website => website.id}
       else
