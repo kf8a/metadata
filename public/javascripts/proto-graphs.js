@@ -173,7 +173,7 @@ jQuery(document).ready(function() {
 
       var width      = 400;
       var height     = species.length * 14;
-      var leftMargin = 220;
+      var leftMargin = 180;
 
       var speciesScale = pv.Scale.ordinal(species).split(0, height);
       var yearScale = pv.Scale.linear(pv.min(data.map(function(d) {return d.year})),pv.max(data.map(function(d) {return d.year}))).range(0, width);
@@ -188,7 +188,7 @@ jQuery(document).ready(function() {
                     .width(width)
                     .height(height)
                     .margin(50)
-                    .left(410)
+                    .left(380)
                     .event("mousemove", pv.Behavior.point());
         
         vis.add(pv.Rule)
