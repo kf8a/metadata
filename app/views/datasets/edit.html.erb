@@ -1,11 +1,9 @@
 <h1>Editing dataset <%=@dataset.dataset %></h1>
 
-<%= form_for(:dataset, :url => dataset_path(@dataset), :html => { :method => :put }) do |f| %>
+<%= semantic_form_for @dataset, :html => { :multipart => true } do |form| %>
   <%= render "shared/error_messages", :target => @dataset %>
-  <%= render :partial => 'form', :locals => {:f => f, :dataset => @dataset, :people => @people, :roles => @roles, :websites => @websites, :sponsors => @sponsors} %>
-  <p>
-    <%= submit_tag "Update" %>
-  </p>
+  <%= render 'form', :form => form, :datatable => @dataset %>
+  <%= form.buttons %>
 <% end %>
 
 <%= link_to 'Show', dataset_path(@dataset) %> |
