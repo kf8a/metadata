@@ -31,6 +31,9 @@ gem 'friendly_id'
 
 gem 'parslet'
 
+# for spreadsheet downloads
+gem 'spreadsheet'
+
 # for creating bibtex formatted citations
 gem 'bibtex-ruby'
 
