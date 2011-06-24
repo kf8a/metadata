@@ -19,7 +19,7 @@ GEM
       Platform (>= 0.4.0)
       open4
     Platform (0.4.0)
-    RedCloth (4.2.4)
+    RedCloth (4.2.7)
     Saikuro (1.1.0)
     abstract (1.0.0)
     actionmailer (3.0.9)
@@ -315,7 +315,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  RedCloth (= 4.2.4)
+  RedCloth
   acts-as-taggable-on
   annotate
   awesome_nested_set
