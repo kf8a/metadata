@@ -19,7 +19,7 @@ GEM
       Platform (>= 0.4.0)
       open4
     Platform (0.4.0)
-    RedCloth (4.2.4)
+    RedCloth (4.2.7)
     Saikuro (1.1.0)
     abstract (1.0.0)
     actionmailer (3.0.9)
@@ -263,6 +263,7 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       rspec (~> 2.6.0)
+    ruby-ole (1.2.11.1)
     ruby-progressbar (0.0.10)
     ruby2ruby (1.2.5)
       ruby_parser (~> 2.0)
@@ -283,6 +284,8 @@ GEM
     simplecov-html (0.4.5)
     single_test (0.4.0)
     spork (0.8.5)
+    spreadsheet (0.6.5.4)
+      ruby-ole (>= 1.0)
     sqlite3 (1.3.3)
     sqlite3-ruby (1.3.3)
       sqlite3 (>= 1.3.3)
@@ -312,7 +315,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  RedCloth (= 4.2.4)
+  RedCloth
   acts-as-taggable-on
   annotate
   awesome_nested_set
@@ -355,6 +358,7 @@ DEPENDENCIES
   simplecov-html
   single_test
   spork
+  spreadsheet
   sqlite3-ruby
   therubyracer
   thin

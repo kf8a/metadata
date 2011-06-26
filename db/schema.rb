@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110623191510) do
+ActiveRecord::Schema.define(:version => 20110624133951) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -673,6 +673,7 @@ ActiveRecord::Schema.define(:version => 20110623191510) do
     t.string  "parent_si"
     t.float   "multiplier_to_si"
     t.string  "abbreviation",           :limit => nil
+    t.string  "label"
   end
 
   add_index "units", ["name"], :name => "unit_names_key", :unique => true
