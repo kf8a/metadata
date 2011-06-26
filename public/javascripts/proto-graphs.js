@@ -176,7 +176,7 @@ jQuery(document).ready(function() {
 
       var speciesScale = pv.Scale.ordinal(species.sort().reverse()).split(0, height);
       var yearScale = pv.Scale.linear(pv.min(data.map(function(d) {return d.year})),pv.max(data.map(function(d) {return d.year}))).range(0, width);
-      var biomassScale = pv.Scale.linear(0, pv.max(data.map(function(d) {return d.value}))).range(0,height/2);
+      var biomassScale = pv.Scale.linear(0, pv.max(data.map(function(d) {return d.value}))).range(0,500);
           
       var activeDot = 0;
 

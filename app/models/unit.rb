@@ -6,7 +6,11 @@ class Unit < ActiveRecord::Base
   scope :not_in_eml, :conditions => ['in_eml is false']
 
   def human_name
-    name.gsub(/Per/,'/').downcase
+    if label
+      label.html_safe
+    else 
+      name.gsub(/Per/,'/').downcase
+    end
   end
 
   def update_job

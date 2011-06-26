@@ -3,6 +3,14 @@ require File.expand_path('../../test_helper',__FILE__)
 class UnitTest < ActiveSupport::TestCase
 
   context "human_name function" do
+    setup do 
+      @speed = Factory :unit, :name => "Feetpersecond", :label => 'ft/2'
+    end
+
+    should 'use the label if available' do
+      assert_equal 'ft/2', @speed.human_name
+    end
+
     context "and a name with one or more Pers in it" do
       setup do
         @speed = Factory.create(:unit, :name => "FeetPerSecond")

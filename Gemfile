@@ -15,7 +15,7 @@ gem 'acts-as-taggable-on'
 gem 'paperclip'
 gem 'aws-s3'
 gem 'nokogiri'
-gem 'RedCloth', '4.2.4'
+gem 'RedCloth'#, '4.2.4'
 gem 'thinking-sphinx'
 gem 'liquid'
 gem 'clearance', '=0.10.5'
@@ -30,6 +30,9 @@ gem 'workflow'
 gem 'friendly_id'
 
 gem 'parslet'
+
+# for spreadsheet downloads
+gem 'spreadsheet'
 
 # for creating bibtex formatted citations
 gem 'bibtex-ruby'

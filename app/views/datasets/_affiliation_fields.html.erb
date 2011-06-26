@@ -1,0 +1,6 @@
+<%= f.inputs do %>
+  <%= f.input :person, :label_method => :short_full_name, :collection => Person.order(:sur_name) %>
+  <%= f.input :role %>
+  <%= f.input :seniority %>
+  <%= link_to_remove_fields "Remove", f %>
+<% end %>
