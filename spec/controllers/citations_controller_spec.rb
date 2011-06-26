@@ -27,13 +27,20 @@ describe CitationsController do
         @citation1.pub_year = 2008
         @citation1.abstract = 'An abstract of the article.'
         @citation1.website = @website
+        @citation1.save
+        @citation1.publish!
   end
 
-  describe 'GET :filtered' do
+  describe 'GET :filtered, sort_by => id' do
     before(:each) do
-      get :filtered, :requested_subdomain => 'lter', :sort_by => 'id'
+      get :filtered, :requested_subdomain => 'lter', :sort_by => 'id', :type => 'ArticleCitation'
     end
 
     it { should render_template('filtered') }
+    it "should order the citations by id" do
+      assigns(:website).should == @website
+      correct_sorting = @website.citations.order('id')
+      assigns(:citations).all.should eq correct_sorting.all
+    end
   end
 end
