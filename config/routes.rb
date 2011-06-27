@@ -88,6 +88,8 @@ Metadata::Application.routes.draw do
   match '/termsofuse/:id' => "sponsors#show"
   match '/termsofuse' => 'sponsors#index'
 
+  post '/studies/:id/move_to/:parent_id' => 'studies#move_to'
+  post '/studies/:id/move_before/:parent_id' => 'studies#move_before'
   resources :studies
   resources :templates
 
