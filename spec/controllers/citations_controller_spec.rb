@@ -29,11 +29,14 @@ describe CitationsController do
         @citation1.website = @website
         @citation1.save
         @citation1.publish!
+
+    another_citation = Factory.create(:citation)
+    another_citation.publish!
   end
 
   describe 'GET :filtered, sort_by => id' do
     before(:each) do
-      get :filtered, :requested_subdomain => 'lter', :sort_by => 'id', :type => 'ArticleCitation'
+      get :filtered, :requested_subdomain => 'lter', :sort_by => 'id'
     end
 
     it { should render_template('filtered') }
