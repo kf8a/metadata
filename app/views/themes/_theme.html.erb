@@ -1,6 +1,6 @@
 <li>
   <div class='droppable'></div>
-  <span id="<%= theme.id %>" draggable='true'>
+  <span id="<%= theme.id %>" draggable='true' controller_name='themes'>
     <%= theme.name %> <%= link_to 'Edit', edit_theme_path(theme.id) %>
   </span>
   <input type='hidden' value="<%=theme.id %>">
