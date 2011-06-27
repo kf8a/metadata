@@ -1,4 +1,13 @@
-<li id="<%= study.id %>" class='sortable_container'>
-  <p><%= study.name %> <%= link_to 'edit', edit_study_path(study)%></p>
-  <input type='hidden' value="<%=study.id %>"/>
+<li class="sortable-container">
+  <div class='droppable'></div>
+  <span id="<%= study.id %>" draggable='true'>
+    <%= study.name %> <%= link_to 'edit', edit_study_path(study)%>
+    <p><%= study.synopsis %></p>
+  </span>
+  <input type='hidden' value="<%=study.id %>" />
+  <% if study.children.present? %>
+    <ul class="sortable-tree">
+      <%= render study_root.children %>
+    </ul>
+  <% end %>
 </li>

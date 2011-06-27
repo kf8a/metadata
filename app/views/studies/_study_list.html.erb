@@ -1,15 +1,3 @@
 <ul>
-  <% study_roots.each do |study_root| -%>
-    <div class="study-list">
-      <li class="sortable-container"><p><%= study_root.name %> <%= link_to 'edit', edit_study_path(study_root)%></p>
-        <input type='hidden' value="<%=study_root.id %>" />
-        <p><%= study_root.synopsis %></p>
-        <ul class="sortable-tree">
-          <% if study_root.descendants.length > 0 -%>
-            <%= render :partial => 'study', :collection => study_root.descendants %>
-          <% end -%>
-        </ul>
-      </li>
-    </div>
-  <% end -%>
+  <%= render study_roots %>
 </ul>
