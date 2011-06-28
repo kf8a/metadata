@@ -11,6 +11,7 @@ class Datatable < ActiveRecord::Base
 
   acts_as_taggable_on :keywords
 
+  has_and_belongs_to_many :citations
   has_one                 :collection
   belongs_to              :core_area
   belongs_to              :dataset

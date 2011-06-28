@@ -15,6 +15,12 @@
     <%= form.input :editor_block, :label => 'Editors', :as => :text, :input_html => { :class => 'autogrow author_block', :rows => 10}%>
   <% end %>
 </div>
+<h2>Datatables</h2>
+<div id='datatables'>
+    <%= form.inputs do %>
+      <%= form.input :datatables, :input_html => { :class => 'myselect' } %>
+    <% end %>
+</div>
 
 <%= form.inputs :title, :secondary_title, :series_title, :abstract, :pub_year, :pub_date, :publication,
     :start_page_number, :ending_page_number, :periodical_full_name,

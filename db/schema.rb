@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110624133951) do
+ActiveRecord::Schema.define(:version => 20110627142731) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -83,6 +83,11 @@ ActiveRecord::Schema.define(:version => 20110624133951) do
 
   add_index "citations", ["citation_type_id"], :name => "index_citations_on_citation_type_id"
   add_index "citations", ["website_id"], :name => "index_citations_on_website_id"
+
+  create_table "citations_datatables", :id => false, :force => true do |t|
+    t.integer "citation_id"
+    t.integer "datatable_id"
+  end
 
   create_table "collections", :force => true do |t|
     t.datetime "created_at"
@@ -682,7 +687,7 @@ ActiveRecord::Schema.define(:version => 20110624133951) do
     t.string  "unit_type"
     t.string  "parent_si"
     t.float   "multiplier_to_si"
-    t.string  "abbreviation",           :limit => nil
+    t.string  "abbreviation"
     t.string  "label"
   end
 

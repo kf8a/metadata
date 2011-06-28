@@ -13,6 +13,8 @@ class Citation < ActiveRecord::Base
   belongs_to :citation_type
   belongs_to :website
 
+  has_and_belongs_to_many :datatables
+
   accepts_nested_attributes_for :authors
   accepts_nested_attributes_for :editors
 
@@ -317,4 +319,3 @@ end
 #  open_access             :boolean         default(FALSE)
 #  type                    :string(255)
 #
-
