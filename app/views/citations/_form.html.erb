@@ -1,7 +1,3 @@
-<%= form.inputs :title, :secondary_title, :series_title, :abstract, :pub_year, :pub_date, :publication,
-    :start_page_number, :ending_page_number, :periodical_full_name,
-    :periodical_abbreviation, :volume, :issue, :isbn, :publisher_url,
-    :full_text, :publisher, :address, :city, :notes, :open_access %>
 
 <%= form.inputs do %>
   <%= form.input :type, :as => :select, :collection => Citation.select_options %>
@@ -20,10 +16,33 @@
     <%= form.input :editor_block, :label => 'Editors', :as => :text, :input_html => { :class => 'autogrow author_block', :rows => 10}%>
   <% end %>
 </div>
+
+<%= form.inputs do %>
+  <%= form.input :title, :input_html => {:rows => 2} %>
+  <%= form.input :secondary_title %>
+  <%= form.input :series_title %>
+  <%= form.input :abstract %>
+  <%= form.input :pub_year, :input_html => {:size=> 20}%>
+  <%= form.input :pub_date %>
+  <%= form.input :publication %>
+  <%= form.input :start_page_number, :input_html => {:size=>10}%>
+  <%= form.input :ending_page_number, :input_html =>{:size => 10} %>
+  <%= form.input :periodical_full_name, :input_html => {:rows => 2} %>
+  <%= form.input :periodical_abbreviation %>
+  <%= form.input :volume, :input_html => {:size=>10} %>
+  <%= form.input :issue, :input_html => {:size=>10} %>
+  <%= form.input :isbn, :input_html => {:size => 20 }%>
+  <%= form.input :publisher_url %>
+  <%= form.input :full_text %>
+  <%= form.input :publisher %>
+  <%=form.input :address, :input_html => {:rows => 3} %>
+<% end %>
+  <%= form.inputs :city, :notes, :open_access %>
+
 <h2>Datatables</h2>
 <div id='datatables'>
   <%= form.inputs do %>
-    <%= form.input :datatables, :input_html => { :class => 'myselect' } %>
+    <%= form.input :datatables, :input_html => { :class => 'myselect myselect-wide' } %>
   <% end %>
 </div>
 <h2>Treatment Areas</h2>
