@@ -5,6 +5,8 @@ class Affiliation < ActiveRecord::Base
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: affiliations

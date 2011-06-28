@@ -7,6 +7,8 @@ class DataContribution < ActiveRecord::Base
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: data_contributions

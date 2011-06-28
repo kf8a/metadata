@@ -452,7 +452,7 @@ class DatatableTest < ActiveSupport::TestCase
   context 'datatable formats' do
     setup do
       dataset = Factory.create(:dataset)
-      @datatable = Factory.create(:datatable, :dataset => dataset, :object=>"select now() as a, '1' as b")
+      @datatable = Factory.create(:datatable, :dataset => dataset, :object=>"select now() as a, '1' as b", :number_of_released_records => 1)
       @datatable.variates << [Variate.new(:name => 'a'), Variate.new(:name => 'b')]
     end
 
@@ -539,39 +539,44 @@ class DatatableTest < ActiveSupport::TestCase
 end
 
 
+
 # == Schema Information
 #
 # Table name: datatables
 #
-#  id                    :integer         not null, primary key
-#  name                  :string(255)
-#  title                 :string(255)
-#  comments              :text
-#  dataset_id            :integer
-#  data_url              :string(255)
-#  connection_url        :string(255)
-#  driver                :string(255)
-#  is_restricted         :boolean
-#  description           :text
-#  object                :text
-#  metadata_url          :string(255)
-#  is_sql                :boolean
-#  update_frequency_days :integer
-#  last_updated_on       :date
-#  access_statement      :text
-#  excerpt_limit         :integer
-#  begin_date            :date
-#  end_date              :date
-#  on_web                :boolean         default(TRUE)
-#  theme_id              :integer
-#  core_area_id          :integer
-#  weight                :integer         default(100)
-#  study_id              :integer
-#  created_at            :datetime
-#  updated_at            :datetime
-#  is_secondary          :boolean         default(FALSE)
-#  is_utf_8              :boolean         default(FALSE)
-#  metadata_only         :boolean         default(FALSE)
-#  summary_graph         :text
-#  event_query           :text
+#  id                         :integer         not null, primary key
+#  name                       :string(255)
+#  title                      :string(255)
+#  comments                   :text
+#  dataset_id                 :integer
+#  data_url                   :string(255)
+#  connection_url             :string(255)
+#  driver                     :string(255)
+#  is_restricted              :boolean
+#  description                :text
+#  object                     :text
+#  metadata_url               :string(255)
+#  is_sql                     :boolean
+#  update_frequency_days      :integer
+#  last_updated_on            :date
+#  access_statement           :text
+#  excerpt_limit              :integer
+#  begin_date                 :date
+#  end_date                   :date
+#  on_web                     :boolean         default(TRUE)
+#  theme_id                   :integer
+#  core_area_id               :integer
+#  weight                     :integer         default(100)
+#  study_id                   :integer
+#  created_at                 :datetime
+#  updated_at                 :datetime
+#  is_secondary               :boolean         default(FALSE)
+#  is_utf_8                   :boolean         default(FALSE)
+#  metadata_only              :boolean         default(FALSE)
+#  summary_graph              :text
+#  event_query                :text
+#  deprecated_in_fovor_of     :integer
+#  deprecation_notice         :text
+#  number_of_released_records :integer
 #
+

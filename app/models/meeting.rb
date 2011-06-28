@@ -6,6 +6,8 @@ class Meeting < ActiveRecord::Base
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: meetings

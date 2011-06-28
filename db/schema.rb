@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110624133951) do
+ActiveRecord::Schema.define(:version => 20110628041235) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -86,6 +86,16 @@ ActiveRecord::Schema.define(:version => 20110624133951) do
 
   add_index "citations", ["citation_type_id"], :name => "index_citations_on_citation_type_id"
   add_index "citations", ["website_id"], :name => "index_citations_on_website_id"
+
+  create_table "citations_datatables", :id => false, :force => true do |t|
+    t.integer "citation_id"
+    t.integer "datatable_id"
+  end
+
+  create_table "citations_treatments", :id => false, :force => true do |t|
+    t.integer "citation_id"
+    t.integer "treatment_id"
+  end
 
   create_table "collections", :force => true do |t|
     t.datetime "created_at"
@@ -193,20 +203,21 @@ ActiveRecord::Schema.define(:version => 20110624133951) do
     t.integer  "excerpt_limit"
     t.date     "begin_date"
     t.date     "end_date"
-    t.boolean  "on_web",                 :default => true
+    t.boolean  "on_web",                     :default => true
     t.integer  "theme_id"
     t.integer  "core_area_id"
-    t.integer  "weight",                 :default => 100
+    t.integer  "weight",                     :default => 100
     t.integer  "study_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_secondary",           :default => false
-    t.boolean  "is_utf_8",               :default => false
-    t.boolean  "metadata_only",          :default => false
+    t.boolean  "is_secondary",               :default => false
+    t.boolean  "is_utf_8",                   :default => false
+    t.boolean  "metadata_only",              :default => false
     t.text     "summary_graph"
     t.text     "event_query"
     t.integer  "deprecated_in_fovor_of"
     t.text     "deprecation_notice"
+    t.integer  "number_of_released_records"
   end
 
   add_index "datatables", ["core_area_id"], :name => "index_datatables_on_core_area_id"

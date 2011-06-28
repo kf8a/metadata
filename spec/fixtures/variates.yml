@@ -4,6 +4,8 @@ one:
     query: select '12-24-2004', 4
 
 
+
+
 # == Schema Information
 #
 # Table name: variates

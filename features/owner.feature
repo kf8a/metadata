@@ -22,6 +22,11 @@ Feature: Assign owners to datatables
     Then I should see "bill@person.com"
       And  "bill@person.com" should own the datatable "kbs001"
 
+    When I follow "Add Owner"
+      And I press "Add Owners"
+    Then I should see "bill@person.com"
+      And "bill@person.com" should own the datatable "kbs001"
+
     Scenario: An admin adds an owner to a datatable without selecting it first
     Given a user exists and is confirmed with an email of "admin@person.com"
       And "admin@person.com" is an administrator

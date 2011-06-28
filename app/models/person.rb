@@ -110,6 +110,8 @@ class Person < ActiveRecord::Base
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: people

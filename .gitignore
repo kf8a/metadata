@@ -23,4 +23,3 @@ coverage/
 *.swp
 lib/tasks/move_to_s3.rake
 *.komodoproject
-coffeescripts/

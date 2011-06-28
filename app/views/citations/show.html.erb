@@ -7,6 +7,22 @@
   <% if @citation.publisher_url %>
     <p><%= link_to @citation.publisher_url, @citation.publisher_url %></p>
   <% end %>
+  <% if @citation.datatables.present? %>
+    <p>Associated Datatables: </p>
+    <ol>
+      <% @citation.datatables.each do |datatable| %>
+        <li><%= link_to datatable.title, datatable %></li>
+      <% end %>
+    </ol>
+  <% end %>
+  <% if @citation.treatments.present? %>
+    <p>Associated Treatment Areas: </p>
+    <ol>
+      <% @citation.treatments.each do |treatment| %>
+        <li><%= treatment.name %></li>
+      <% end %>
+    </ol>
+  <% end %>
 <% end %>
 <p>
 Download citation to

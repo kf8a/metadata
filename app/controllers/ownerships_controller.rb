@@ -22,10 +22,15 @@ class OwnershipsController < ApplicationController
   def create
     users = params[:users]
     @datatable = Datatable.find(params[:datatable]) if params[:datatable]
+    overwrite = @datatable.present?
     datatables = @datatable ? [@datatable.id] : params[:datatables]
     if users.present? && datatables.present?
-      Ownership.create_ownerships(users, datatables)
-      redirect_to ownerships_path
+      Ownership.create_ownerships(users, datatables, overwrite)
+      if @datatable
+        redirect_to ownership_path(:id => @datatable.id)
+      else
+        redirect_to ownerships_path
+      end
     else
       render 'new'
     end
