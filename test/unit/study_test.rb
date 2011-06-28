@@ -84,6 +84,22 @@ class StudyTest < ActiveSupport::TestCase
       assert @study.study_url(@website_2) == 'somewhere else'
     end
   end
+
+  context 'deleting studies' do
+    setup do
+      @study      = Factory.create(:study)
+      @study.treatments << Factory.create(:treatment)
+    end
+
+    should 'not delete when it has a treatment in the study' do
+      assert_equal false, @study.destroy
+    end
+
+    should 'delete after removing the treatment' do
+      @study.treatments.clear
+      assert_equal @study, @study.destroy
+    end
+  end
 end
 
 
