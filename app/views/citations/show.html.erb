@@ -9,7 +9,19 @@
   <% end %>
   <% if @citation.datatables.present? %>
     <p>Associated Datatables: </p>
-    <%= @citation.datatables.collect {|datatable| datatable.title}.join(',') %>
+    <ol>
+      <% @citation.datatables.each do |datatable| %>
+        <li><%= link_to datatable.title, datatable %></li>
+      <% end %>
+    </ol>
+  <% end %>
+  <% if @citation.treatments.present? %>
+    <p>Associated Treatment Areas: </p>
+    <ol>
+      <% @citation.treatments.each do |treatment| %>
+        <li><%= treatment.name %></li>
+      <% end %>
+    </ol>
   <% end %>
 <% end %>
 <p>
