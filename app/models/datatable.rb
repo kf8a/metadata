@@ -276,8 +276,8 @@ class Datatable < ActiveRecord::Base
 
   def approved_data
     query = self.object
-    self.number_of_released_records ||= 5
-    query = query + " limit #{self.number_of_released_records}"
+    self.number_of_released_records ||= 0
+    query = query + " offset #{total_records - self.number_of_released_records}"
     ActiveRecord::Base.connection.execute(query)
   end
 
