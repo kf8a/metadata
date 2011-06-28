@@ -127,7 +127,7 @@ class DatatablesControllerTest < ActionController::TestCase
       should respond_with_content_type(:csv)
       should 'give a real climdb document' do
         #TODO This should really be parsed in some way
-        assert_equal "!date\n\n", response.body
+        assert_equal "!date\n", response.body
       end
     end
 
