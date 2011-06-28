@@ -197,7 +197,7 @@ class DatatablesController < ApplicationController
       else
         Datatable.
             joins('left join datasets on datasets.id = datatables.dataset_id').
-            where('is_secondary is false and website_id = ?', website.id).all
+            where('is_secondary is false and on_web is true and website_id = ?', website.id).all
       end
 
     @studies = Study.find_all_roots_with_datatables(@datatables)
