@@ -31,6 +31,7 @@ describe CitationsController do
 
     @another_citation = @website.citations.new
     @another_citation.authors << author1
+    @another_citation.pub_year = 2007
     @another_citation.save
     @another_citation.publish!
   end
@@ -46,6 +47,31 @@ describe CitationsController do
       correct_sorting = @website.citations.order('id').published
       correct_sorting.should include @another_citation
       assigns(:citations).all.should eq correct_sorting.all
+    end
+  end
+
+  describe 'GET :filtered, sort_by => pub_year' do
+    before(:each) do
+      get :filtered, :requested_subdomain => 'lter', :sort_by => 'pub_year'
+    end
+
+    it "should order the citations by pub_year" do
+      correct_sorting = @website.citations.order('pub_year').published
+      correct_sorting.should include @another_citation
+      assigns(:citations).all.should eq correct_sorting.all
+    end
+  end
+
+  describe 'GET :filtered, type => ArticleCitation' do
+    before(:each) do
+      get :filtered, :requested_subdomain => 'lter', :type => 'ArticleCitation'
+    end
+
+    it "should only include article citations" do
+      correct_list = @website.citations.by_type('ArticleCitation').published
+      correct_list.should include @citation1
+      correct_list.should_not include @another_citation
+      assigns(:citations).all.should eq correct_list.all
     end
   end
 end
