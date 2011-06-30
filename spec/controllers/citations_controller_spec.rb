@@ -29,9 +29,10 @@ describe CitationsController do
       @citation1.save
       @citation1.publish!
 
-    another_citation = @website.citations.new
-    another_citation.save
-    another_citation.publish!
+    @another_citation = @website.citations.new
+    @another_citation.authors << author1
+    @another_citation.save
+    @another_citation.publish!
   end
 
   describe 'GET :filtered, sort_by => id' do
@@ -43,6 +44,7 @@ describe CitationsController do
     it "should order the citations by id" do
       assigns(:website).should == @website
       correct_sorting = @website.citations.order('id').published
+      correct_sorting.should include @another_citation
       assigns(:citations).all.should eq correct_sorting.all
     end
   end
