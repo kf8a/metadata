@@ -29,7 +29,8 @@ class CitationsController < ApplicationController
   def filtered
     @type = params[:type]
     @sort_by = params[:sort_by]
-    @citations = website.citations.sorted_by(@sort_by)
+    @citations = website.citations
+    @citations = @citations.sorted_by(@sort_by) if @sort_by.present?
     @citations = @citations.by_type(@type) if @type.present?
     @submitted_citations = @citations.submitted
     @forthcoming_citations = @citations.forthcoming
