@@ -9,7 +9,7 @@ jQuery(document).ready(function() {
         var dateFormat = pv.Format.date("%Y-%m-%d %H:%M:%S");
         json.forEach(function(d) {d.datetime = dateFormat.parse(d.datetime)});
         var h = 260;
-        var w = 360;
+        var w = 660;
         var margin = 40;
         var y = pv.Scale.linear(json, function(d) { return d.value}).range(0,h);
         var x = pv.Scale.linear(json, function(d){ return d.datetime}).range(0,w);

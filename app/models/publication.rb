@@ -18,6 +18,8 @@ class Publication < ActiveRecord::Base
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: publications

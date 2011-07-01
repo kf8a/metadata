@@ -267,6 +267,8 @@ end
 
 
 
+
+
 # == Schema Information
 #
 # Table name: datasets
@@ -281,7 +283,7 @@ end
 #  completed    :date
 #  released     :date
 #  on_web       :boolean         default(TRUE)
-#  version      :integer
+#  version      :integer         default(1)
 #  core_dataset :boolean         default(FALSE)
 #  project_id   :integer
 #  metacat_id   :integer

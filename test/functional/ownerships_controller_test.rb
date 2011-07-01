@@ -101,7 +101,7 @@ class OwnershipsControllerTest < ActionController::TestCase
           post :create, :datatable => @datatable, 'users' => ["#{@user.id}"]
         end
 
-        should redirect_to("the ownerships page") {ownerships_path}
+        should redirect_to("the ownership page") {ownership_path(:id => @datatable.id)}
       end
 
       context "and POST :create with multiple users" do
@@ -112,7 +112,7 @@ class OwnershipsControllerTest < ActionController::TestCase
           post :create, :datatable => @datatable.id, 'users' => ["#{@user_1.id}", "#{@user_2.id}", "#{@user_3.id}"]
         end
 
-        should redirect_to("the ownerships page") {ownerships_path}
+        should redirect_to("the ownership page") {ownership_path(:id => @datatable.id)}
         should "make all the users own the datatable" do
           assert @user_1.owns?(@datatable)
           assert @user_2.owns?(@datatable)

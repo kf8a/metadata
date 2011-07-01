@@ -3,6 +3,8 @@ class CitationType < ActiveRecord::Base
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: citation_types

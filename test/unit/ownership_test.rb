@@ -25,6 +25,8 @@ end
 
 
 
+
+
 # == Schema Information
 #
 # Table name: ownerships

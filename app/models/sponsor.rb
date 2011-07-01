@@ -6,6 +6,8 @@ class Sponsor < ActiveRecord::Base
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: sponsors

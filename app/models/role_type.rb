@@ -5,6 +5,8 @@ class RoleType < ActiveRecord::Base
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: role_types

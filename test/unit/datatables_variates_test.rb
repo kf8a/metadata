@@ -10,6 +10,8 @@ end
 
 
 
+
+
 # == Schema Information
 #
 # Table name: datatables_variates

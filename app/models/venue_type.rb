@@ -6,6 +6,8 @@ class VenueType < ActiveRecord::Base
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: venue_types

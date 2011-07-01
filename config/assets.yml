@@ -8,6 +8,7 @@ javascripts:
   - public/javascripts/less.js
   - public/javascripts/jquery.tokeninput.js
   - public/javascripts/protovis-d3.2.js
+  - public/javascripts/proto-graphs.js
   - public/javascripts/jquery.truncator.js
   - public/javascripts/jquery.quickTree.js
   - public/javascripts/jquery.comboselect.js

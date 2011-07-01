@@ -19,6 +19,8 @@ class ArticleCitation < Citation
   end
 end
 
+
+
 # == Schema Information
 #
 # Table name: citations
@@ -54,7 +56,7 @@ end
 #  pdf_file_size           :integer
 #  pdf_updated_at          :datetime
 #  state                   :string(255)
-#  type                    :string(255)
 #  open_access             :boolean         default(FALSE)
+#  type                    :string(255)
 #
 

@@ -11,6 +11,7 @@ class Datatable < ActiveRecord::Base
 
   acts_as_taggable_on :keywords
 
+  has_and_belongs_to_many :citations
   has_one                 :collection
   belongs_to              :core_area
   belongs_to              :dataset
@@ -184,7 +185,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def raw_csv
-    values  = perform_query
+    values  = approved_data
     csv_string = CSV.generate do |csv|
       csv << variates.collect { |variate| variate.name }
       values.each do |row|
@@ -273,6 +274,20 @@ class Datatable < ActiveRecord::Base
     ActiveRecord::Base.connection.execute(query)
   end
 
+  def approved_data
+    query = self.object
+    self.number_of_released_records ||= total_records
+    query = query + " offset #{total_records - self.number_of_released_records}"
+    ActiveRecord::Base.connection.execute(query)
+  end
+
+  def total_records
+    values.count
+  end
+
+  def approve_data
+    self.number_of_released_records = total_records
+  end
 
   def perform_query
     query =  self.object
@@ -366,39 +381,43 @@ class Datatable < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: datatables
 #
-#  id                    :integer         not null, primary key
-#  name                  :string(255)
-#  title                 :string(255)
-#  comments              :text
-#  dataset_id            :integer
-#  data_url              :string(255)
-#  connection_url        :string(255)
-#  driver                :string(255)
-#  is_restricted         :boolean
-#  description           :text
-#  object                :text
-#  metadata_url          :string(255)
-#  is_sql                :boolean
-#  update_frequency_days :integer
-#  last_updated_on       :date
-#  access_statement      :text
-#  excerpt_limit         :integer
-#  begin_date            :date
-#  end_date              :date
-#  on_web                :boolean         default(TRUE)
-#  theme_id              :integer
-#  core_area_id          :integer
-#  weight                :integer         default(100)
-#  study_id              :integer
-#  created_at            :datetime
-#  updated_at            :datetime
-#  is_secondary          :boolean         default(FALSE)
-#  is_utf_8              :boolean         default(FALSE)
-#  metadata_only         :boolean         default(FALSE)
-#  summary_graph         :text
-#  event_query           :text
+#  id                         :integer         not null, primary key
+#  name                       :string(255)
+#  title                      :string(255)
+#  comments                   :text
+#  dataset_id                 :integer
+#  data_url                   :string(255)
+#  connection_url             :string(255)
+#  driver                     :string(255)
+#  is_restricted              :boolean
+#  description                :text
+#  object                     :text
+#  metadata_url               :string(255)
+#  is_sql                     :boolean
+#  update_frequency_days      :integer
+#  last_updated_on            :date
+#  access_statement           :text
+#  excerpt_limit              :integer
+#  begin_date                 :date
+#  end_date                   :date
+#  on_web                     :boolean         default(TRUE)
+#  theme_id                   :integer
+#  core_area_id               :integer
+#  weight                     :integer         default(100)
+#  study_id                   :integer
+#  created_at                 :datetime
+#  updated_at                 :datetime
+#  is_secondary               :boolean         default(FALSE)
+#  is_utf_8                   :boolean         default(FALSE)
+#  metadata_only              :boolean         default(FALSE)
+#  summary_graph              :text
+#  event_query                :text
+#  deprecated_in_fovor_of     :integer
+#  deprecation_notice         :text
+#  number_of_released_records :integer
 #

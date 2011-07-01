@@ -10,6 +10,8 @@ class Study < ActiveRecord::Base
   scope :by_weight, :order => 'weight'
   scope :by_id,     :order => 'id'
 
+  before_destroy :check_for_treatments
+
   def study_url(website)
     self.study_urls.where(:website_id => website.id).first.try(:url)
   end
@@ -33,7 +35,16 @@ class Study < ActiveRecord::Base
   def self_and_descendants_datatables
     descendants.collect {|descendant| descendant.datatables }.flatten + datatables
   end
+
+  def check_for_treatments
+    if treatments.count > 0
+      errors.add_to_base('Can not delete studies with active treatments')
+      return false
+    end
+  end
 end
+
+
 
 
 # == Schema Information

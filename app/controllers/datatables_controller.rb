@@ -147,6 +147,12 @@ class DatatablesController < ApplicationController
     datatable.save
   end
 
+  def approve_records
+    datatable.approve_data
+    datatable.save
+    redirect_to edit_datatable_path(datatable)
+  end
+
   private
 
   def set_title
@@ -191,13 +197,13 @@ class DatatablesController < ApplicationController
     @keyword_list = query['keyword_list']
     @keyword_list = nil if @keyword_list.empty? || @keyword_list == @default_value
 
-    @datatables = 
+    @datatables =
       if @keyword_list
         Datatable.search @keyword_list, :with => {:website => website.id}
       else
-        Datatable.
+        Datatable.where(:on_web => true).
             joins('left join datasets on datasets.id = datatables.dataset_id').
-            where('is_secondary is false and on_web is true and website_id = ?', website.id).all
+            where('is_secondary is false and website_id = ?', website.id).all
       end
 
     @studies = Study.find_all_roots_with_datatables(@datatables)

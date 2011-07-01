@@ -2,6 +2,8 @@ class DatatablesVariates < ActiveRecord::Base
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: datatables_variates

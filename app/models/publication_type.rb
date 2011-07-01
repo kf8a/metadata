@@ -3,6 +3,8 @@ class PublicationType < ActiveRecord::Base
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: publication_types

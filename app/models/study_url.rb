@@ -5,6 +5,8 @@ class StudyUrl < ActiveRecord::Base
 end
 
 
+
+
 # == Schema Information
 #
 # Table name: study_urls

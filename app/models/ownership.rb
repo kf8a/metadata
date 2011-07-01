@@ -7,7 +7,8 @@ class Ownership < ActiveRecord::Base
 
   validates_uniqueness_of :user_id, :scope => :datatable_id
 
-  def Ownership.create_ownerships(users, datatables)
+  def Ownership.create_ownerships(users, datatables, overwrite=false)
+    datatables.each { |datatable| destroy_all(:datatable_id => datatable) } if overwrite
     users.each do |user|
       datatables.each do |table|
         ownership = Ownership.new(:user_id => user, :datatable_id => table)
@@ -16,6 +17,7 @@ class Ownership < ActiveRecord::Base
     end
   end
 end
+
 
 
 # == Schema Information
