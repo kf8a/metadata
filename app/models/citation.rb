@@ -77,6 +77,10 @@ class Citation < ActiveRecord::Base
     bib.to_s
   end
 
+  def Citation.by_type(type)
+    where(:type => type)
+  end
+
   def Citation.sorted_by(sorter)
     sorter.downcase!
     #Since primary author and date is default, it is already sorted that way
