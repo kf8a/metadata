@@ -452,7 +452,7 @@ class DatatableTest < ActiveSupport::TestCase
   context 'datatable formats' do
     setup do
       dataset = Factory.create(:dataset)
-      @datatable = Factory.create(:datatable, :dataset => dataset, :object=>"select now() as a, '1' as b")
+      @datatable = Factory.create(:datatable, :dataset => dataset, :object=>"select now() as a, '1' as b", :number_of_released_records => 1)
       @datatable.variates << [Variate.new(:name => 'a'), Variate.new(:name => 'b')]
     end
 

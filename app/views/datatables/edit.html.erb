@@ -9,6 +9,4 @@
 <%= link_to 'Show', datatable_path(datatable) %> |
 <%= link_to 'Back', datatables_path %>
 
-<p>Currently, <%= datatable.number_of_released_records %> are approved out of <%= datatable.total_records %>.</p>
-
 <%= button_to 'Approve all current records', approve_records_datatable_path(datatable) %>
