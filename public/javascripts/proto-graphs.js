@@ -2,6 +2,27 @@ jQuery(document).ready(function() {
   
   var activeDot = -1;
 
+  jQuery('.focus-graph').each(function() {
+    var id = jQuery(this).attr('id');
+    var current_div = this;
+    jQuery.getJSON("/visualizations/" + id, function(json) {
+        var dateFormat = pv.Format.date("%Y-%m-%d %H:%M:%S");
+        json.forEach(function(d) {d.datetime = dateFormat.parse(d.datetime)});
+        var h1 = 300;
+        var h2 = 30;
+        var w = 660;
+        var margin = 40;
+        var startDate= new Date( pv.min(json, function(d) {return d.datetime }));
+        var endDate = new Date( pv.max(json, function(d) {return d.datetime }));
+        var minValue = pv.min(json, function(d) {return d.value});
+        var maxValue = pv.max(json, function(d) {return d.value});
+        var y = pv.Scale.linear(minValue, maxValue).range(0,h1);
+        var x = pv.Scale.linear(startDate,endDate).range(0,w);
+        var human_number = pv.Format.number().fractionDigits(0,2)
+    
+    });
+  };
+
   jQuery('.dot-graph').each(function() {
       var id = jQuery(this).attr('id');
       var current_div = this;
@@ -68,7 +89,7 @@ jQuery(document).ready(function() {
         vis.add(pv.Panel)
               .events('all')
               .event("mousedown", pv.Behavior.pan()) 
-              .event("mousewheel", pv.Behavior.zoom()) 
+              .event("mousewheel", pv.Behavior.zoom(1.2)) 
               .event("pan", transform) 
               .event("zoom", transform);
 
