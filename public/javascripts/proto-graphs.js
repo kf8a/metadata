@@ -1,6 +1,6 @@
 jQuery(document).ready(function() {
   
-  var activeDot = 0;
+  var activeDot = -1;
 
   jQuery('.dot-graph').each(function() {
       var id = jQuery(this).attr('id');
@@ -11,16 +11,21 @@ jQuery(document).ready(function() {
         var h = 260;
         var w = 660;
         var margin = 40;
-        var y = pv.Scale.linear(json, function(d) { return d.value}).range(0,h);
-        var x = pv.Scale.linear(json, function(d){ return d.datetime}).range(0,w);
+        var startDate= new Date( pv.min(json, function(d) {return d.datetime }));
+        var endDate = new Date( pv.max(json, function(d) {return d.datetime }));
+        var minValue = pv.min(json, function(d) {return d.value});
+        var maxValue = pv.max(json, function(d) {return d.value});
+        var y = pv.Scale.linear(minValue, maxValue).range(0,h);
+        var x = pv.Scale.linear(startDate,endDate).range(0,w);
         var human_number = pv.Format.number().fractionDigits(0,2)
       
         var vis = new pv.Panel()
-                        .canvas(current_div)
-                        .margin(margin)
-                        .width(w)
-                        .height(h)
-                        .event("mousemove", pv.Behavior.point());
+              .canvas(current_div)
+              .margin(margin)
+              .width(w)
+              .height(h)
+              .event('mouseout', function() { activeDot = -1; return vis;})
+              .event("mousemove", pv.Behavior.point());
 
         vis.add(pv.Rule)
           .data(y.ticks())
