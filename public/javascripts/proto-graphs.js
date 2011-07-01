@@ -19,6 +19,13 @@ jQuery(document).ready(function() {
         var x = pv.Scale.linear(startDate,endDate).range(0,w);
         var human_number = pv.Format.number().fractionDigits(0,2)
       
+        // pan and zoom handler 
+        function transform() { 
+          var t = this.transform().invert(); 
+          x.domain(x.invert(t.x + x(startDate) *t.k),x.invert(t.x + x(endDate) * t.k)); 
+          y.domain(y.invert(-t.y + y(minValue) *t.k), y.invert(-t.y + y(maxValue) * t.k)); 
+          vis.render(); 
+        } ;
         var vis = new pv.Panel()
               .canvas(current_div)
               .margin(margin)
@@ -58,9 +65,17 @@ jQuery(document).ready(function() {
           .textAlign('center')
           .visible(function() {return  activeDot == this.index} );
 
+        vis.add(pv.Panel)
+              .events('all')
+              .event("mousedown", pv.Behavior.pan()) 
+              .event("mousewheel", pv.Behavior.zoom()) 
+              .event("pan", transform) 
+              .event("zoom", transform);
+
         vis.root.render();
       });
     });
+
 
     jQuery('.area-graph').each(function() {
     var id = jQuery(this).attr('id');
