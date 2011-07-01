@@ -5,6 +5,10 @@ class CitationsController < ApplicationController
   before_filter :admin?, :only => [:new, :create, :edit, :update, :destroy] unless Rails.env == 'development'
   before_filter :get_citation, :only => [:show, :edit, :update, :destroy]
 
+  has_scope :by_type,   :as => :type
+  has_scope :sorted_by, :as => :sort_by
+  has_scope :by_date,   :as => :date
+
   def index
     store_location
     citations = website.citations
@@ -29,13 +33,10 @@ class CitationsController < ApplicationController
   def filtered
     @type = params[:type]
     @sort_by = params[:sort_by]
-    @citations = website.citations
-    @citations = @citations.sorted_by(@sort_by) if @sort_by.present?
-    @citations = @citations.by_type(@type) if @type.present?
+    @citations = apply_scopes(website.citations)
     @submitted_citations = @citations.submitted
     @forthcoming_citations = @citations.forthcoming
-    date = params[:date].presence
-    @citations = date ? @citations.by_date(date) : @citations.published
+    @citations = @citations.published
 
     index_responder
   end
