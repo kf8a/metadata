@@ -1,5 +1,5 @@
 <% cache do %>
-  <h1><%= link_to "#{@protocol.dataset}", @protocol.dataset if @protocol.dataset %>: <%=raw @protocol.title %></h1>
+  <h1><%= link_to "#{@protocol.dataset}: ", @protocol.dataset if @protocol.dataset %><%=raw @protocol.title %></h1>
   <p class='notice'>
     <% if @protocol.active? -%>
       Active
