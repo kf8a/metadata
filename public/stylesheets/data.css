@@ -49,6 +49,11 @@ label {
 	display: block;
 }
 
+#content .abstract_body ul{
+    list-style-type: disc;
+    margin-left: 2em;
+}
+
 #content ul.multicolumn {
 	margin: 0.1em;
 	-moz-column-width: 17em;
@@ -182,6 +187,9 @@ a.edit:hover {
 #content a.download-link:hover {
 	text-decoration: none;
 	border-style: inset;
+}
+
+ol.with-bullets {
 }
 
 li.study-index p {

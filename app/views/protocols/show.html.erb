@@ -1,5 +1,5 @@
 <% cache do %>
-  <h1><%= link_to "#{@protocol.dataset}", @protocol.dataset if @protocol.dataset %>: <%=raw @protocol.title %></h1>
+  <h1><%= link_to "#{@protocol.dataset}: ", @protocol.dataset if @protocol.dataset %><%=raw @protocol.title %></h1>
   <p class='notice'>
     <% if @protocol.active? -%>
       Active
@@ -14,25 +14,19 @@
   <%= "In use from " if @protocol.in_use_from? %><%= @protocol.in_use_from %>
   <%= " to " if @protocol.in_use_to? %><%= @protocol.in_use_to %>
   </p>
-  <p>
   <%=raw textilize(@protocol.description) if @protocol.description %>
-  </p>
   <h2>Abstract</h2>
-  <p>
   <%=raw textilize(@protocol.abstract) if @protocol.abstract%>
-  </p>
   <h2>Protocol</h2>
-  <p>
+  <div class='abstract_body'>
   <%=raw textilize(@protocol.body) if @protocol.body %>
-  </p>
-  <p>
+  </div>
 <% if @protocol.people.size > 1 %>Authors: <% else %>Author: <% end %>
   <ul>
     <% @protocol.people.each do |person| %>
       <li><%= link_to  "#{person.full_name}", person_path(person) %></li>
     <% end %>
   </ul>
-  </p>
   <h2>Datatables</h2>
   <% @protocol.datatables.each do |datatable| -%>
     <%= link_to datatable.to_label, datatable_path(datatable) %>
