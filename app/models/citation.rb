@@ -136,8 +136,8 @@ class Citation < ActiveRecord::Base
   def bib_hash
     hash = {
       :abstract   => abstract,
-      :author     => authors.collect { |author| "#{author.given_name} #{author.middle_name} #{author.sur_name}"}.join(' and '),
-      :editor     => editors.collect { |editor| "#{editor.given_name} #{editor.middle_name} #{editor.sur_name}"}.join(' and '),
+      :author     => authors.collect { |author| author.full_name }.join(' and '),
+      :editor     => editors.collect { |editor| editor.full_name }.join(' and '),
       :title      => title,
       :publisher  => publisher,
       :year       => pub_year.to_s,
