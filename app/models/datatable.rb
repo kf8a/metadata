@@ -328,11 +328,13 @@ class Datatable < ActiveRecord::Base
   def query_datatable_for_temporal_extent(query)
     values = ActiveRecord::Base.connection.execute(query)
     dates = values[0]
-    if values[0].class == 'Date'
-      [Time.parse(dates['min']).to_date,Time.parse(dates['max']).to_date]
-    else # assume is a year
-      [Time.parse(dates['min'].to_s + '-1-1').to_date,Time.parse(dates['max'].to_s + '-1-1').to_date ]
+    min, max = dates['min'], dates['max']
+    unless dates.class == 'Date' # assume is a year
+      min = min.to_s + '-1-1'
+      max = max.to_s + '-1-1'
     end
+
+    [Time.parse(min).to_date, Time.parse(max).to_date]
   end
 
   def eml_protocols
