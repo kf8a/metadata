@@ -98,7 +98,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def permitted?(user)
-    owners.present? && user.present? && owners.all? do |owner|
+    user.present? && owners.present? && owners.all? do |owner|
       user.has_permission_from?(owner, self)
     end
   end
