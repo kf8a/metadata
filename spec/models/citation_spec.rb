@@ -29,6 +29,7 @@ N2  - Adult Fisher 344 rats were subjected to a unilateral impact to the dorsal 
 ER  -
 
 HERE
-    Citation.from_ris(doc).should_not be_empty
+    citation = Citation.from_ris(doc)[0]
+    citation.should be_a ArticleCitation
   end
 end
