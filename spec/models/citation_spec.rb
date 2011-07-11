@@ -31,6 +31,11 @@ ER  -
 HERE
     citation = Citation.from_ris(doc)[0]
     citation.should be_a ArticleCitation
+    citation.author_block.should include('Baldwin, S A')
+    citation.author_block.should include('Fugaccia, I')
+    citation.author_block.should include('Brown, D R')
+    citation.author_block.should include('Brown, L V')
+    citation.author_block.should include('Scheff, S W')
   end
 
   it "should convert MGZN to ArticleCitation" do

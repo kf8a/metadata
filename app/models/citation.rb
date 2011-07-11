@@ -111,6 +111,9 @@ class Citation < ActiveRecord::Base
         Citation.new
       end
       citation.save
+      stanza[:authors].each_with_index do |author_name, index|
+        citation.authors.create(:name => author_name, :seniority => index)
+      end
       citation
     end
   end
