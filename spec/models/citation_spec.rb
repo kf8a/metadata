@@ -32,4 +32,15 @@ HERE
     citation = Citation.from_ris(doc)[0]
     citation.should be_a ArticleCitation
   end
+
+  it "should convert :type => :thesis to ThesisCitation" do
+    doc = <<HERE
+TY  - THES
+KW  - rat
+ER  -
+
+HERE
+    citation = Citation.from_ris(doc)[0]
+    citation.should be_a ThesisCitation
+  end
 end

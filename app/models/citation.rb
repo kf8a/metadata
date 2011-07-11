@@ -94,9 +94,13 @@ class Citation < ActiveRecord::Base
     trans = RisParser::RisParserTransform.new
     parsed_text = trans.apply(parser.parse(ris_text))
     parsed_text.collect do |stanza|
-      citation = Citation.new
-      if stanza[:type] == 'JOUR'
-        citation = ArticleCitation.new
+      citation = case stanza[:type]
+      when 'JOUR'
+        ArticleCitation.new
+      when 'THES'
+        ThesisCitation.new
+      else
+        Citation.new
       end
       citation.save
       citation
