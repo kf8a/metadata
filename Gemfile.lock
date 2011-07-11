@@ -8,7 +8,8 @@ GIT
 
 GIT
   remote: git://github.com/kf8a/ris_parser.git
-  revision: 2fc9b6e11a684eff62656a6244d4b2a633508148
+  revision: 119637d081373b98c5f66c0b1b52ed8b63fb99cb
+  branch: develop
   specs:
     ris_parser (0.0.1)
       parslet

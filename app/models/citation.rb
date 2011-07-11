@@ -89,6 +89,12 @@ class Citation < ActiveRecord::Base
     end
   end
 
+  def Citation.from_ris(ris_text)
+    parser = RisParser::RisParser.new
+    trans = RisParser::RisParserTransform.new
+    parsed_text = trans.apply(parser.parse(ris_text))
+  end
+
   def author_block
     block(authors)
   end
