@@ -118,6 +118,8 @@ class Citation < ActiveRecord::Base
           citation.pub_date = Date.parse(stanza[:primary_date])
         end
       end
+      citation.publication = stanza[:journal]
+      citation.volume = stanza[:volume]
       citation.save
       stanza[:authors].each_with_index do |author_name, index|
         citation.authors.create(:name => author_name, :seniority => index)

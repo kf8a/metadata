@@ -37,7 +37,9 @@ HERE
     citation.author_block.should include('Brown, L V')
     citation.author_block.should include('Scheff, S W')
     citation.title.should == "Blood-brain barrier breach following\ncortical contusion in the rat"
+    citation.publication.should == 'J.Neurosurg.'
     citation.pub_date.should == Date.parse('Mon, 01 Jan 1996')
+    citation.volume.should == '85'
   end
 
   it "should convert MGZN to ArticleCitation" do
