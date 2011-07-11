@@ -7,6 +7,13 @@ GIT
       activesupport (>= 3.0.0)
 
 GIT
+  remote: git://github.com/kf8a/ris_parser.git
+  revision: 2fc9b6e11a684eff62656a6244d4b2a633508148
+  specs:
+    ris_parser (0.0.1)
+      parslet
+
+GIT
   remote: https://github.com/kf8a/ruby-openid.git
   revision: c010cead260bce7a2707d8bbe7430c2121141103
   specs:
@@ -360,6 +367,7 @@ DEPENDENCIES
   rails (= 3.0.9)
   rake
   remarkable_activerecord (>= 4.0.0.alpha2)
+  ris_parser!
   rspec
   rspec-rails
   ruby-openid!
