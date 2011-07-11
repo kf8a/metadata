@@ -33,6 +33,17 @@ HERE
     citation.should be_a ArticleCitation
   end
 
+  it "should convert MGZN to ArticleCitation" do
+    doc = <<HERE
+TY  - MGZN
+KW  - rat
+ER  -
+
+HERE
+    citation = Citation.from_ris(doc)[0]
+    citation.should be_a ArticleCitation
+  end
+
   it "should convert :type => :thesis to ThesisCitation" do
     doc = <<HERE
 TY  - THES
@@ -42,5 +53,60 @@ ER  -
 HERE
     citation = Citation.from_ris(doc)[0]
     citation.should be_a ThesisCitation
+  end
+
+  it "should convert :type => :book to BookCitation" do
+    doc = <<HERE
+TY  - BOOK
+KW  - rat
+ER  -
+
+HERE
+    citation = Citation.from_ris(doc)[0]
+    citation.should be_a BookCitation
+  end
+
+  it "should convert :type => :chap to ChapterCitation" do
+    doc = <<HERE
+TY  - CHAP
+KW  - rat
+ER  -
+
+HERE
+    citation = Citation.from_ris(doc)[0]
+    citation.should be_a ChapterCitation
+  end
+
+  it "should convert :type => :conf to ConferenceCitation" do
+    doc = <<HERE
+TY  - CONF
+KW  - rat
+ER  -
+
+HERE
+    citation = Citation.from_ris(doc)[0]
+    citation.should be_a ConferenceCitation
+  end
+
+  it "should convert :type => :rprt to ReportCitation" do
+    doc = <<HERE
+TY  - RPRT
+KW  - rat
+ER  -
+
+HERE
+    citation = Citation.from_ris(doc)[0]
+    citation.should be_a ReportCitation
+  end
+
+  it "should convert :type => :gen to Citation" do
+    doc = <<HERE
+TY  - GEN
+KW  - rat
+ER  -
+
+HERE
+    citation = Citation.from_ris(doc)[0]
+    citation.should be_a Citation
   end
 end

@@ -95,8 +95,16 @@ class Citation < ActiveRecord::Base
     parsed_text = trans.apply(parser.parse(ris_text))
     parsed_text.collect do |stanza|
       citation = case stanza[:type]
-      when 'JOUR'
+      when 'JOUR', 'MGZN'
         ArticleCitation.new
+      when 'BOOK'
+        BookCitation.new
+      when 'CHAP'
+        ChapterCitation.new
+      when 'CONF'
+        ConferenceCitation.new
+      when 'RPRT'
+        ReportCitation.new
       when 'THES'
         ThesisCitation.new
       else
