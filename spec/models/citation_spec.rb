@@ -40,6 +40,8 @@ HERE
     citation.publication.should == 'J.Neurosurg.'
     citation.pub_date.should == Date.parse('Mon, 01 Jan 1996')
     citation.volume.should == '85'
+    citation.start_page_number.should == 476
+    citation.ending_page_number.should == 481
   end
 
   it "should convert MGZN to ArticleCitation" do

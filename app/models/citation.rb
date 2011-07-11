@@ -120,6 +120,8 @@ class Citation < ActiveRecord::Base
       end
       citation.publication = stanza[:journal]
       citation.volume = stanza[:volume]
+      citation.start_page_number = stanza[:start_page]
+      citation.ending_page_number = stanza[:end_page]
       citation.save
       stanza[:authors].each_with_index do |author_name, index|
         citation.authors.create(:name => author_name, :seniority => index)
