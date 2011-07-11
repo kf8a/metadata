@@ -6,7 +6,7 @@ class Variate < ActiveRecord::Base
   belongs_to :unit
 
   def valid_for_eml
-    measurement_scale.presence && description.presence
+    measurement_scale.present? && description.present?
   end
 
   def to_eml(xml = Builder::XmlMarkup.new)
@@ -122,4 +122,3 @@ end
 #  query                   :text
 #  variate_theme_id        :integer
 #
-
