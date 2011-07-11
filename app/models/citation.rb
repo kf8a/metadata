@@ -110,6 +110,14 @@ class Citation < ActiveRecord::Base
       else
         Citation.new
       end
+      citation.title = stanza[:title]
+      if stanza[:primary_date]
+        if stanza[:primary_date].to_i != 0 #it is just an integer string
+          citation.pub_date = Date.new(stanza[:primary_date].to_i)
+        else
+          citation.pub_date = Date.parse(stanza[:primary_date])
+        end
+      end
       citation.save
       stanza[:authors].each_with_index do |author_name, index|
         citation.authors.create(:name => author_name, :seniority => index)
