@@ -111,6 +111,8 @@ class Citation < ActiveRecord::Base
         Citation.new
       end
       citation.title = stanza[:title]
+      citation.secondary_title = stanza[:secondary_title]
+      citation.series_title = stanza[:series_title]
       if stanza[:primary_date]
         if stanza[:primary_date].to_i != 0 #it is just an integer string
           citation.pub_date = Date.new(stanza[:primary_date].to_i)
@@ -118,10 +120,13 @@ class Citation < ActiveRecord::Base
           citation.pub_date = Date.parse(stanza[:primary_date])
         end
       end
+      citation.pub_year = stanza[:pub_year]
       citation.publication = stanza[:journal]
       citation.volume = stanza[:volume]
-      citation.start_page_number = stanza[:start_page]
-      citation.ending_page_number = stanza[:end_page]
+      citation.start_page_number = stanza[:start_page].to_i == 0 ? nil : stanza[:start_page] #sometimes it is not a number
+      citation.ending_page_number = stanza[:end_page].to_i == 0 ? nil : stanza[:end_page]
+      citation.abstract = stanza[:abstract]
+      citation.doi = stanza[:doi]
       citation.save
       stanza[:authors].each_with_index do |author_name, index|
         citation.authors.create(:name => author_name, :seniority => index)
