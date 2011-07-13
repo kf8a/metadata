@@ -164,7 +164,7 @@ ID  - 907
 ER  -
 
 HERE
-    pdf_location = Rails.root.to_s + '/spec/models/lter_endnote/LTER.Data/PDF'
+    pdf_location = '/spec/models/lter_endnote/LTER.Data/PDF'
     citations = Citation.from_ris(doc, pdf_location)
     citations.count.should == 2
     first_citation = citations[0]

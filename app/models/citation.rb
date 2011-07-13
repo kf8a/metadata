@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'bibtex'
 
 class Citation < ActiveRecord::Base
@@ -128,8 +129,16 @@ class Citation < ActiveRecord::Base
       citation.abstract = stanza[:abstract]
       citation.doi = stanza[:doi]
       if pdf_folder && stanza[:pdf]
-        not_internal_path = stanza[:pdf].sub('internal-pdf://', '')
-        citation.pdf = File.open(pdf_folder + '/' + not_internal_path)
+        stanza[:pdf].each_line do |line|
+          not_internal_path = line.sub('internal-pdf://', '')
+          not_internal_path.strip!
+          real_path = Rails.root.to_s + '/' + pdf_folder + '/' + not_internal_path
+          if File.exist?(real_path)
+            citation.pdf = File.open(real_path)
+          else
+            p "No such file: #{real_path}"
+          end
+        end
       end
 
       citation.save
