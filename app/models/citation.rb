@@ -89,7 +89,7 @@ class Citation < ActiveRecord::Base
     end
   end
 
-  def Citation.from_ris(ris_text)
+  def Citation.from_ris(ris_text, pdf_folder = nil)
     parser = RisParser::RisParser.new
     trans = RisParser::RisParserTransform.new
     parsed_text = trans.apply(parser.parse(ris_text))
@@ -127,6 +127,11 @@ class Citation < ActiveRecord::Base
       citation.ending_page_number = stanza[:end_page].to_i == 0 ? nil : stanza[:end_page]
       citation.abstract = stanza[:abstract]
       citation.doi = stanza[:doi]
+      if pdf_folder && stanza[:pdf]
+        not_internal_path = stanza[:pdf].sub('internal-pdf://', '')
+        citation.pdf = File.open(pdf_folder + '/' + not_internal_path)
+      end
+
       citation.save
       stanza[:authors].each_with_index do |author_name, index|
         citation.authors.create(:name => author_name, :seniority => index)

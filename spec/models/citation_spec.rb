@@ -164,7 +164,8 @@ ID  - 907
 ER  -
 
 HERE
-    citations = Citation.from_ris(doc)
+    pdf_location = Rails.root.to_s + '/spec/models/lter_endnote/LTER.Data/PDF'
+    citations = Citation.from_ris(doc, pdf_location)
     citations.count.should == 2
     first_citation = citations[0]
     first_citation.should be_a ArticleCitation
@@ -184,5 +185,6 @@ HERE
     second_citation.secondary_title.should == "Soil Science Society of America Journal"
     second_citation.title.should == "Agricultural management and soil carbon storage in surface vs. deep layers"
     second_citation.volume.should == "75"
+    second_citation.pdf_file_size.should == 1073457
   end
 end
