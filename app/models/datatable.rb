@@ -93,6 +93,15 @@ class Datatable < ActiveRecord::Base
     personnel
   end
 
+  def related_keywords
+    #http://vocab.lternet.edu/webservice/keywordlist.php/all/csv
+    agent = Mechanize.new
+    keywords.collect do |keyword|
+      terms = agent.get("http://vocab.lternet.edu/webservice/keywordlist.php/all/csv/#{keyword}")
+      CSV.parse(terms)
+    end.flatten.sort.uniq
+  end
+
   def restricted?
     dataset.restricted?
   end
@@ -319,8 +328,26 @@ class Datatable < ActiveRecord::Base
     values = self.perform_query if self.is_sql
   end
 
+  # a datatable should not be superceded by itself
   def supercession_candidates
     Datatables.where('id <> ?', id).all
+  end
+
+
+  ## Utilites
+
+  #migrate dataset personel to datatables
+  def migrate_personel!
+    if data_contributions.empty?
+      dataset.affiliations.each do |affiliation|
+        contribution = DataContribution.new
+        contribution.person = affiliation.person
+        contribution.role = affiliation.role
+        contribution.seniority = affiliation.seniority
+   
+        data_contributions << contribution
+      end
+    end
   end
 
   private
