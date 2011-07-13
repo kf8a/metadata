@@ -536,6 +536,27 @@ class DatatableTest < ActiveSupport::TestCase
 
   end
 
+  context 'migrating personnel from dataset to datatable' do
+     setup do
+      dataset = Factory.create(:dataset)
+      @datatable = Factory.create(:datatable, :dataset => dataset, :object=>"select now() as a, '1' as b", :number_of_released_records => 1)
+      affiliation = Affiliation.new
+      @role = Factory.create(:role)
+      @person = Factory.create(:person)
+      affiliation.role = @role
+      affiliation.person = @person
+      affiliation.seniority = 1
+      dataset.affiliations << affiliation
+     end
+
+     should 'move the people with the roles intact' do
+       @datatable.migrate_personel!
+       assert_equal @person,  @datatable.data_contributions[0].person
+       assert_equal @role, @datatable.data_contributions[0].role
+       assert_equal 1, @datatable.data_contributions[0].seniority
+     end
+  end
+
 end
 
 

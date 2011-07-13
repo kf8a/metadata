@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110628041235) do
+ActiveRecord::Schema.define(:version => 20110713195943) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(:version => 20110628041235) do
     t.integer  "role_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "seniority"
   end
 
   add_index "data_contributions", ["datatable_id", "person_id", "role_id"], :name => "data_contributions_uniq_idx", :unique => true
