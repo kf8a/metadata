@@ -216,6 +216,7 @@ class DatatablesController < ApplicationController
 
 
   def can_download?
+    csv_ok = accessible_by_ip && datatable.can_be_downloaded_by?(current_user)
     unless csv_ok
       head :forbidden
       return false
