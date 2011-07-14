@@ -214,9 +214,12 @@ class DatatablesController < ApplicationController
     @datatable ||= params[:id] ? Datatable.find(params[:id]) : Datatable.new(params[:datatable])
   end
 
+  def csv_ok
+    accessible_by_ip = trusted_ip? || !datatable.is_restricted
+    accessible_by_ip && datatable.can_be_downloaded_by?(current_user)
+  end
 
   def can_download?
-    csv_ok = accessible_by_ip && datatable.can_be_downloaded_by?(current_user)
     unless csv_ok
       head :forbidden
       return false
