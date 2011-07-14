@@ -2,7 +2,7 @@ class DatatablesController < ApplicationController
   helper_method :datatable
 
   before_filter :admin?, :except => [:index, :show, :suggest, :search, :events, :qc] unless Rails.env == 'development'
-  before_filter :can_download?, :only=>[:show], :if Proc.new { |controller| controller.request.format.csv? } # run before filter to prevent non-members from downloading
+  before_filter :can_download?, :only=>[:show], :if => Proc.new { |controller| controller.request.format.csv? } # run before filter to prevent non-members from downloading
 
   protect_from_forgery :except => [:index, :show, :search]
   cache_sweeper :datatable_sweeper
