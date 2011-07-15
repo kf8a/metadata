@@ -107,5 +107,5 @@ Feature: Download data
   Scenario: An anonymous users types in the url for a protected datatable html view
     Given a protected datatable exists
      When I go to the datatable download page
-     Then I should see "You do not have permission to download this datatable"
+     Then I should get a response with status 403
       
