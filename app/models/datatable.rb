@@ -128,7 +128,7 @@ class Datatable < ActiveRecord::Base
     !self.restricted? ||
         user.try(:admin?) ||
         self.owned_by?(user) ||
-        (member?(user) && !self.restricted)  ||
+        member?(user)  ||
         self.permitted?(user)
   end
 
@@ -345,7 +345,7 @@ class Datatable < ActiveRecord::Base
         contribution.person = affiliation.person
         contribution.role = affiliation.role
         contribution.seniority = affiliation.seniority
-   
+
         data_contributions << contribution
       end
     end
