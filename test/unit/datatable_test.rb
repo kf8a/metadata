@@ -230,7 +230,7 @@ class DatatableTest < ActiveSupport::TestCase
       assert  @restricted_to_members.can_be_downloaded_by?(@owner)
       assert !@restricted_to_members.can_be_downloaded_by?(@denied_user)
 
-      assert !@restricted.can_be_downloaed_by?(@anonoymous_user)
+      assert !@restricted.can_be_downloaded_by?(@anonoymous_user)
       assert !@restricted.can_be_downloaded_by?(@member)
       assert !@restricted.can_be_downloaded_by(@denied_user)
       assert  @restricted.can_be_downloaded_by?(@admin)
