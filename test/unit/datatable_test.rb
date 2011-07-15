@@ -205,6 +205,11 @@ class DatatableTest < ActiveSupport::TestCase
         :user       => @denied_user,
         :owner      => @owner,
         :decision   => 'denied'
+
+       Factory :permission,
+         :datatable => @restricted,
+         :user      => @authorized_user,
+         :owner     => @owner
     end
 
     should 'tell if it needs to be restricted at all' do
@@ -232,7 +237,7 @@ class DatatableTest < ActiveSupport::TestCase
 
       assert !@restricted.can_be_downloaded_by?(@anonoymous_user)
       assert !@restricted.can_be_downloaded_by?(@member)
-      assert !@restricted.can_be_downloaded_by(@denied_user)
+      assert !@restricted.can_be_downloaded_by?(@denied_user)
       assert  @restricted.can_be_downloaded_by?(@admin)
       assert  @restricted.can_be_downloaded_by?(@owner)
       assert  @restricted.can_be_downloaded_by?(@authorized_user)
