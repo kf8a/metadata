@@ -147,8 +147,8 @@ class DatatableTest < ActiveSupport::TestCase
     end
 
     should 'tell if it needs to be restricted at all' do
-      assert !@unrestricted.restricted?
-      assert  @restricted.restricted?
+      assert !@unrestricted.restricted_to_members?
+      assert  @restricted.restricted_to_members?
     end
 
     should 'allow restrict datatables to be permitted' do
@@ -186,25 +186,35 @@ class DatatableTest < ActiveSupport::TestCase
 
       @unrestricted = Factory  :datatable
 
-      @restricted = Factory :datatable,
+      @restricted_to_members = Factory :datatable,
         :dataset    => dataset,
         :owners => [@owner]
 
+      @restricted = Factory :datatable,
+        :dataset => dataset,
+        :is_restricted => true,
+        :owners => [@owner]
+
       Factory :permission,
-        :datatable  => @restricted,
+        :datatable  => @restricted_to_members,
         :user       => @authorized_user,
         :owner      => @owner
 
       Factory :permission,
-        :datatable  => @restricted,
+        :datatable  => @restricted_to_members,
         :user       => @denied_user,
         :owner      => @owner,
         :decision   => 'denied'
+
+       Factory :permission,
+         :datatable => @restricted,
+         :user      => @authorized_user,
+         :owner     => @owner
     end
 
     should 'tell if it needs to be restricted at all' do
-      assert !@unrestricted.restricted?
-      assert @restricted.restricted?
+      assert !@unrestricted.restricted_to_members?
+      assert @restricted_to_members.restricted_to_members?
     end
 
     should 'allow anyone to download unrestricted datatables' do
@@ -217,23 +227,30 @@ class DatatableTest < ActiveSupport::TestCase
     end
 
     should 'only allow authorized users to download restricted datatables' do
-      assert !@restricted.can_be_downloaded_by?(@anonymous_user)
-      assert !@restricted.can_be_downloaded_by?(@unauthorized_user)
-      assert  @restricted.can_be_downloaded_by?(@authorized_user)
-      assert  @restricted.can_be_downloaded_by?(@admin)
+      assert !@restricted_to_members.can_be_downloaded_by?(@anonymous_user)
+      assert !@restricted_to_members.can_be_downloaded_by?(@unauthorized_user)
+      assert  @restricted_to_members.can_be_downloaded_by?(@authorized_user)
+      assert  @restricted_to_members.can_be_downloaded_by?(@admin)
+      assert  @restricted_to_members.can_be_downloaded_by?(@member)
+      assert  @restricted_to_members.can_be_downloaded_by?(@owner)
+      assert !@restricted_to_members.can_be_downloaded_by?(@denied_user)
+
+      assert !@restricted.can_be_downloaded_by?(@anonoymous_user)
       assert !@restricted.can_be_downloaded_by?(@member)
-      assert  @restricted.can_be_downloaded_by?(@owner)
       assert !@restricted.can_be_downloaded_by?(@denied_user)
+      assert  @restricted.can_be_downloaded_by?(@admin)
+      assert  @restricted.can_be_downloaded_by?(@owner)
+      assert  @restricted.can_be_downloaded_by?(@authorized_user)
     end
 
     should 'return the owner that denied user on #deniers_of' do
-      assert_equal [@owner], @restricted.deniers_of(@denied_user)
-      assert_equal [], @restricted.deniers_of(@authorized_user)
+      assert_equal [@owner], @restricted_to_members.deniers_of(@denied_user)
+      assert_equal [], @restricted_to_members.deniers_of(@authorized_user)
     end
 
     should 'authorized table should have the right owner' do
-      assert @restricted.owners.size == 1
-      assert @restricted.owners.include?(@owner)
+      assert @restricted_to_members.owners.size == 1
+      assert @restricted_to_members.owners.include?(@owner)
     end
   end
 
