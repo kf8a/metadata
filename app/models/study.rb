@@ -38,7 +38,7 @@ class Study < ActiveRecord::Base
 
   def check_for_treatments
     if treatments.count > 0
-      errors[:base] << 'Can not delete studies with active treatments'
+      errors.add(:base, 'Can not delete studies with active treatments')
       return false
     end
   end

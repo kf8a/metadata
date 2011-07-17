@@ -102,8 +102,8 @@ class Datatable < ActiveRecord::Base
     end.flatten.sort.uniq
   end
 
-  def restricted?
-    dataset.restricted?
+  def restricted_to_members?
+    dataset.restricted_to_members?
   end
 
   def permitted?(user)
@@ -125,11 +125,17 @@ class Datatable < ActiveRecord::Base
   end
 
   def can_be_downloaded_by?(user)
-    !self.restricted? ||
+    if self.is_restricted
         user.try(:admin?) ||
-        self.owned_by?(user) ||
-        member?(user)  ||
-        self.permitted?(user)
+        permitted?(user) ||
+        owned_by?(user)
+    else
+      !restricted_to_members? ||
+          user.try(:admin?) ||
+          permitted?(user) ||
+          owned_by?(user) ||
+          member?(user)
+    end
   end
 
   def owned_by?(user)

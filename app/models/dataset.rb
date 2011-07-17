@@ -105,7 +105,7 @@ class Dataset < ActiveRecord::Base
     save
   end
 
-  def restricted?
+  def restricted_to_members?
     sponsor.try(:data_restricted?)
   end
 
