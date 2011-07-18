@@ -118,19 +118,24 @@ class Citation < ActiveRecord::Base
     end
   end
 
+  def get_attribute_from_ris_stanza(stanza, attribute_name, ris_name=nil)
+    ris_name = attribute_name.to_sym unless ris_name
+    self.send(attribute_name + "=", stanza[ris_name])
+  end
+
   def Citation.citation_from_ris_stanza(stanza, pdf_folder)
     citation = type_from_ris_type(stanza[:type]).new
-    citation.title = stanza[:title]
-    citation.secondary_title = stanza[:secondary_title]
-    citation.series_title = stanza[:series_title]
-    citation.date_from_ris_date(stanza[:primary_date]) if stanza[:primary_date].present?
-    citation.pub_year = stanza[:pub_year]
-    citation.publication = stanza[:journal]
-    citation.volume = stanza[:volume]
-    citation.start_page_number = stanza[:start_page].to_i == 0 ? nil : stanza[:start_page] #sometimes it is not a number
-    citation.ending_page_number = stanza[:end_page].to_i == 0 ? nil : stanza[:end_page]
-    citation.abstract = stanza[:abstract]
-    citation.doi = stanza[:doi]
+    citation.get_attribute_from_ris_stanza(stanza, 'title')
+    citation.get_attribute_from_ris_stanza(stanza, 'secondary_title')
+    citation.get_attribute_from_ris_stanza(stanza, 'series_title')
+    citation.get_attribute_from_ris_stanza(stanza, 'pub_year')
+    citation.get_attribute_from_ris_stanza(stanza, 'publication', :journal)
+    citation.get_attribute_from_ris_stanza(stanza, 'volume')
+    citation.get_attribute_from_ris_stanza(stanza, 'abstract')
+    citation.get_attribute_from_ris_stanza(stanza, 'doi')
+    citation.date_from_ris_date(stanza[:primary_date]) if stanza[:primary_date]
+    citation.start_page_number = stanza[:start_page] unless stanza[:start_page].to_i == 0 #sometimes it is not a number
+    citation.ending_page_number = stanza[:end_page] unless stanza[:end_page].to_i == 0
     citation.pdf_from_ris_pdf(stanza[:pdf], pdf_folder) if pdf_folder && stanza[:pdf]
 
     citation.save
