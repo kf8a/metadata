@@ -25,6 +25,13 @@ Given /^"([^"]*)" is a "([^"]*)" member$/ do |email, sponsor_name|
   user.sponsors << sponsor
 end
 
+Then /^"([^"]*)" should be a "([^"]*)" member$/ do |email, sponsor_name|
+  user = User.find_by_email(email)
+  sponsor = Sponsor.find_by_name(sponsor_name)
+  assert sponsor
+  assert user.sponsors.include?(sponsor)
+end
+
 Given /^I am signed out$/ do
   Given %{I am on the sign out page}
 end
