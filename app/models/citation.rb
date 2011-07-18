@@ -114,24 +114,28 @@ class Citation < ActiveRecord::Base
     trans = RisParser::RisParserTransform.new
     parsed_text = trans.apply(parser.parse(ris_text))
     parsed_text.collect do |stanza|
-      citation = type_from_ris_type(stanza[:type]).new
-      citation.title = stanza[:title]
-      citation.secondary_title = stanza[:secondary_title]
-      citation.series_title = stanza[:series_title]
-      citation.date_from_ris_date(stanza[:primary_date]) if stanza[:primary_date].present?
-      citation.pub_year = stanza[:pub_year]
-      citation.publication = stanza[:journal]
-      citation.volume = stanza[:volume]
-      citation.start_page_number = stanza[:start_page].to_i == 0 ? nil : stanza[:start_page] #sometimes it is not a number
-      citation.ending_page_number = stanza[:end_page].to_i == 0 ? nil : stanza[:end_page]
-      citation.abstract = stanza[:abstract]
-      citation.doi = stanza[:doi]
-      citation.pdf_from_ris_pdf(stanza[:pdf], pdf_folder) if pdf_folder && stanza[:pdf]
-
-      citation.save
-      citation.authors_from_ris_authors(stanza[:authors])
-      citation
+      citation_from_ris_stanza(stanza, pdf_folder)
     end
+  end
+
+  def Citation.citation_from_ris_stanza(stanza, pdf_folder)
+    citation = type_from_ris_type(stanza[:type]).new
+    citation.title = stanza[:title]
+    citation.secondary_title = stanza[:secondary_title]
+    citation.series_title = stanza[:series_title]
+    citation.date_from_ris_date(stanza[:primary_date]) if stanza[:primary_date].present?
+    citation.pub_year = stanza[:pub_year]
+    citation.publication = stanza[:journal]
+    citation.volume = stanza[:volume]
+    citation.start_page_number = stanza[:start_page].to_i == 0 ? nil : stanza[:start_page] #sometimes it is not a number
+    citation.ending_page_number = stanza[:end_page].to_i == 0 ? nil : stanza[:end_page]
+    citation.abstract = stanza[:abstract]
+    citation.doi = stanza[:doi]
+    citation.pdf_from_ris_pdf(stanza[:pdf], pdf_folder) if pdf_folder && stanza[:pdf]
+
+    citation.save
+    citation.authors_from_ris_authors(stanza[:authors])
+    citation
   end
 
   def date_from_ris_date(ris_date)
