@@ -41,6 +41,7 @@ Feature: Invite users and pre assign them to sponsors
     When I go to the invites page
      And I follow "Send Invite"
     Then an invite message should be sent to "sam@person.com"
+    When I sign out
     When I follow the invite link sent to "sam@person.com"
      And I fill in "user_email" with "sam@person.com"
      And I fill in "user_password" with "password"
