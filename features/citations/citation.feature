@@ -43,6 +43,8 @@ Feature: Citation viewing and downloading
 
     When I follow "Edit"
       And I fill in "Title" with "New Title"
+      And I fill in "Doi" with "123"
       And I press "Update"
       And I go to the citation page
     Then I should see "New Title"
+    And I should see "123"
