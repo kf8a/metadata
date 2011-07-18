@@ -90,27 +90,31 @@ class Citation < ActiveRecord::Base
     end
   end
 
+  def Citation.type_from_ris_type(type)
+    case type
+    when 'JOUR', 'MGZN'
+      ArticleCitation
+    when 'BOOK'
+      BookCitation
+    when 'CHAP'
+      ChapterCitation
+    when 'CONF'
+      ConferenceCitation
+    when 'RPRT'
+      ReportCitation
+    when 'THES'
+      ThesisCitation
+    else
+      Citation
+    end
+  end
+
   def Citation.from_ris(ris_text, pdf_folder = nil)
     parser = RisParser::RisParser.new
     trans = RisParser::RisParserTransform.new
     parsed_text = trans.apply(parser.parse(ris_text))
     parsed_text.collect do |stanza|
-      citation = case stanza[:type]
-      when 'JOUR', 'MGZN'
-        ArticleCitation.new
-      when 'BOOK'
-        BookCitation.new
-      when 'CHAP'
-        ChapterCitation.new
-      when 'CONF'
-        ConferenceCitation.new
-      when 'RPRT'
-        ReportCitation.new
-      when 'THES'
-        ThesisCitation.new
-      else
-        Citation.new
-      end
+      citation = type_from_ris_type(stanza[:type]).new
       citation.title = stanza[:title]
       citation.secondary_title = stanza[:secondary_title]
       citation.series_title = stanza[:series_title]
