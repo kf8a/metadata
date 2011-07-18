@@ -28,7 +28,10 @@ end
 Then /^"([^"]*)" should be a "([^"]*)" member$/ do |email, sponsor_name|
   user = User.find_by_email(email)
   sponsor = Sponsor.find_by_name(sponsor_name)
-  assert sponsor
+  assert sponsor.present?
+  membership = Membership.find_by_user_id_and_sponsor_id(user, sponsor)
+  assert membership.present?
+  assert user.memberships.include?(membership)
   assert user.sponsors.include?(sponsor)
 end
 

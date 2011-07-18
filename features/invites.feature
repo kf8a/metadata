@@ -26,7 +26,7 @@ Feature: Invite users and pre assign them to sponsors
      And I fill in "user_password_confirmation" with "password"
      And I press "Sign up"
     Then I should see "You are now signed up"
-     And "sam@person.com" is a "glbrc" member
+     And "sam@person.com" should be a "glbrc" member
 
   Scenario: Testing the whole process in one go
     Given I am in the GLBRC subdomain

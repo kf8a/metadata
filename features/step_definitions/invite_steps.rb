@@ -27,5 +27,5 @@ end
 When /^I follow the invite link sent to "([^"]*)"$/ do |email|
   invite = Invite.find_by_email(email)
   assert !invite.nil?
-  visit new_user_path(:invite_code => invite.invite_code)
+  visit redeem_invitation_url(invite.invite_code)
 end
