@@ -129,9 +129,7 @@ class Citation < ActiveRecord::Base
       citation.pdf_from_ris_pdf(stanza[:pdf], pdf_folder) if pdf_folder && stanza[:pdf]
 
       citation.save
-      stanza[:authors].each_with_index do |author_name, index|
-        citation.authors.create(:name => author_name, :seniority => index)
-      end
+      citation.authors_from_ris_authors(stanza[:authors])
       citation
     end
   end
@@ -154,6 +152,12 @@ class Citation < ActiveRecord::Base
       else
         p "No such file: #{real_path}"
       end
+    end
+  end
+
+  def authors_from_ris_authors(ris_authors)
+    ris_authors.each_with_index do |author_name, index|
+      self.authors.create(:name => author_name, :seniority => index)
     end
   end
 
