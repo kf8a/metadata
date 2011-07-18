@@ -45,7 +45,7 @@ class CitationsControllerTest < ActionController::TestCase
        end
       end
 
-      context 'forthcomming' do
+      context 'forthcoming' do
         setup do
           @citation1.state = 'forthcoming'
           assert @citation1.save
@@ -225,6 +225,8 @@ class CitationsControllerTest < ActionController::TestCase
       end
 
       should redirect_to('the sign in path') { sign_in_path }
+      should_not assign_to(:citation)
+      
     end
 
     context 'DELETE' do
@@ -369,7 +371,8 @@ class CitationsControllerTest < ActionController::TestCase
     context 'POST: update' do
       setup do
         citation = Factory.create :citation
-        post :update, :id => citation.id, :citation => {:title => 'nothing', :type=>'ArticleCitation' }
+        post :update, :id => citation.id, :citation => {:title => 'nothing', 
+                                                        :type=>'ArticleCitation' }
       end
 
       should redirect_to('the citation page') {citation_url(assigns(:citation))}
