@@ -118,13 +118,7 @@ class Citation < ActiveRecord::Base
       citation.title = stanza[:title]
       citation.secondary_title = stanza[:secondary_title]
       citation.series_title = stanza[:series_title]
-      if stanza[:primary_date]
-        if stanza[:primary_date].to_i != 0 #it is just an integer string
-          citation.pub_date = Date.new(stanza[:primary_date].to_i)
-        else
-          citation.pub_date = Date.parse(stanza[:primary_date])
-        end
-      end
+      citation.date_from_ris_date(stanza[:primary_date]) if stanza[:primary_date].present?
       citation.pub_year = stanza[:pub_year]
       citation.publication = stanza[:journal]
       citation.volume = stanza[:volume]
@@ -150,6 +144,14 @@ class Citation < ActiveRecord::Base
         citation.authors.create(:name => author_name, :seniority => index)
       end
       citation
+    end
+  end
+
+  def date_from_ris_date(ris_date)
+    if ris_date.to_i != 0 #it is just an integer string
+      self.pub_date = Date.new(ris_date.to_i)
+    else
+      self.pub_date = Date.parse(ris_date)
     end
   end
 
