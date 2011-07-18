@@ -126,18 +126,7 @@ class Citation < ActiveRecord::Base
       citation.ending_page_number = stanza[:end_page].to_i == 0 ? nil : stanza[:end_page]
       citation.abstract = stanza[:abstract]
       citation.doi = stanza[:doi]
-      if pdf_folder && stanza[:pdf]
-        stanza[:pdf].each_line do |line|
-          not_internal_path = line.sub('internal-pdf://', '')
-          not_internal_path.strip!
-          real_path = Rails.root.to_s + '/' + pdf_folder + '/' + not_internal_path
-          if File.exist?(real_path)
-            citation.pdf = File.open(real_path)
-          else
-            p "No such file: #{real_path}"
-          end
-        end
-      end
+      citation.pdf_from_ris_pdf(stanza[:pdf], pdf_folder) if pdf_folder && stanza[:pdf]
 
       citation.save
       stanza[:authors].each_with_index do |author_name, index|
@@ -152,6 +141,19 @@ class Citation < ActiveRecord::Base
       self.pub_date = Date.new(ris_date.to_i)
     else
       self.pub_date = Date.parse(ris_date)
+    end
+  end
+
+  def pdf_from_ris_pdf(ris_pdf, pdf_folder)
+    ris_pdf.each_line do |line|
+      not_internal_path = line.sub('internal-pdf://', '')
+      not_internal_path.strip!
+      real_path = Rails.root.to_s + '/' + pdf_folder + '/' + not_internal_path
+      if File.exist?(real_path)
+        self.pdf = File.open(real_path)
+      else
+        p "No such file: #{real_path}"
+      end
     end
   end
 
