@@ -241,12 +241,8 @@ class Citation < ActiveRecord::Base
   end
 
   def to_enw
-    endnote = "%0 "
-    endnote += endnote_type
-    endnote += "%T #{title}\n"
-    endnote += authors.to_enw
-    endnote += editors.to_enw
-    endnote += endnote_publication_data
+    endnote = "%0 " + endnote_type + "%T #{title}\n"
+    endnote += authors.to_enw + editors.to_enw + endnote_publication_data
     endnote += "%V #{volume}\n" if volume.present?
     endnote += "%P #{start_page_number}-#{ending_page_number}\n" if start_page_number
     endnote += "%D #{pub_year}" if pub_year
