@@ -244,8 +244,8 @@ class Citation < ActiveRecord::Base
     endnote = "%0 "
     endnote += endnote_type
     endnote += "%T #{title}\n"
-    authors.each { |author| endnote += "%A #{author.formatted}\n" }
-    editors.each { |editor| endnote += "%E #{editor.formatted}\n" }
+    endnote += authors.to_enw
+    endnote += editors.to_enw
     endnote += endnote_publication_data
     endnote += "%V #{volume}\n" if volume.present?
     endnote += "%P #{start_page_number}-#{ending_page_number}\n" if start_page_number
