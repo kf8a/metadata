@@ -123,16 +123,23 @@ class Citation < ActiveRecord::Base
     self.send(attribute_name + "=", stanza[ris_name])
   end
 
+  def get_attributes_from_ris_stanza(stanza, attribute_array)
+    attribute_array.each do |attribute_name|
+      get_attribute_from_ris_stanza(stanza, attribute_name)
+    end
+  end
+
   def Citation.citation_from_ris_stanza(stanza, pdf_folder)
     citation = type_from_ris_type(stanza[:type]).new
-    citation.get_attribute_from_ris_stanza(stanza, 'title')
-    citation.get_attribute_from_ris_stanza(stanza, 'secondary_title')
-    citation.get_attribute_from_ris_stanza(stanza, 'series_title')
-    citation.get_attribute_from_ris_stanza(stanza, 'pub_year')
+    same_name_attributes = ['title',
+                            'secondary_title',
+                            'series_title',
+                            'pub_year',
+                            'volume',
+                            'abstract',
+                            'doi']
+    citation.get_attributes_from_ris_stanza(stanza, same_name_attributes)
     citation.get_attribute_from_ris_stanza(stanza, 'publication', :journal)
-    citation.get_attribute_from_ris_stanza(stanza, 'volume')
-    citation.get_attribute_from_ris_stanza(stanza, 'abstract')
-    citation.get_attribute_from_ris_stanza(stanza, 'doi')
     citation.date_from_ris_date(stanza[:primary_date]) if stanza[:primary_date]
     citation.start_page_number = stanza[:start_page] unless stanza[:start_page].to_i == 0 #sometimes it is not a number
     citation.ending_page_number = stanza[:end_page] unless stanza[:end_page].to_i == 0
