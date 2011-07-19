@@ -241,16 +241,18 @@ class Citation < ActiveRecord::Base
   end
 
   def to_enw
-    endnote = "%0 " + endnote_type + "%T #{title}\n"
-    endnote += authors.to_enw + editors.to_enw + endnote_publication_data
-    endnote += "%V #{volume}\n" if volume.present?
-    endnote += "%P #{start_page_number}-#{ending_page_number}\n" if start_page_number
-    endnote += "%D #{pub_year}" if pub_year
-    endnote += "\n%X #{abstract}" if abstract
-    endnote += "\n%R #{doi}" if doi
-    endnote += "\n%U #{publisher_url}" if publisher_url
-    endnote += "\n%@ #{isbn}" if isbn
-    endnote
+    endnote = "%0 #{endnote_type}"
+    endnote += title_to_enw
+    endnote += authors.to_enw
+    endnote += editors.to_enw
+    endnote += endnote_publication_data
+    endnote += volume_to_enw
+    endnote += page_numbers_to_enw
+    endnote += pub_year_to_enw
+    endnote += abstract_to_enw
+    endnote += doi_to_enw
+    endnote += publisher_url_to_enw
+    endnote += isbn_to_enw
   end
 
   def self.select_options
@@ -290,6 +292,10 @@ class Citation < ActiveRecord::Base
     end
   end
 
+  def volume_to_enw
+    volume.present? ? "%V #{volume}\n" : ""
+  end
+
   def page_numbers
     if start_page_number.to_i < ending_page_number.to_i
       "#{start_page_number}-#{ending_page_number}"
@@ -310,6 +316,34 @@ class Citation < ActiveRecord::Base
     else
       "Page #{page_numbers}"
     end
+  end
+
+  def page_numbers_to_enw
+    page_numbers.blank? ? "" : "%P #{page_numbers}\n"
+  end
+
+  def pub_year_to_enw
+    "%D #{pub_year}"
+  end
+
+  def abstract_to_enw
+    abstract? ? "\n%X #{abstract}" : ""
+  end
+
+  def doi_to_enw
+    doi? ? "\n%R #{doi}" : ""
+  end
+
+  def isbn_to_enw
+    isbn? ? "\n%@ #{isbn}" : ""
+  end
+
+  def publisher_url_to_enw
+    publisher_url? ? "\n%U #{publisher_url}" : ""
+  end
+
+  def title_to_enw
+    "%T #{title}\n"
   end
 
   def author_and_year
