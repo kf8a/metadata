@@ -1,31 +1,30 @@
 class PermissionsController < ApplicationController
 
-  before_filter :require_datatable, :require_owner, :except => [:index] 
-  
+  before_filter :require_datatable, :require_owner, :except => [:index]
+
   def index
     @datatables = current_user.try(:datatables)
   end
-  
+
   def show
     owner = current_user
     @permissions = Permission.where(:owner_id => owner.id, :datatable_id => @datatable.id)
     @permitted_users = @permissions.permitted_users
   end
-  
+
   def new
   end
-  
+
   def create
     user = User.find_by_email(params[:email])
     flash[:notice] = 'No user with that email' unless user
-    owner = current_user
-    permission = Permission.find_by_user_id_and_datatable_id_and_owner_id(user, @datatable, owner)
-    permission ||= Permission.new(:user => user, :datatable => @datatable, :owner => owner)
+    permissions = Permission.where(:user_id => user, :datatable_id => @datatable, :owner_id => current_user)
+    permission = permissions.first || permissions.new
     permission.decision = "approved"
 
     respond_to do |format|
       if permission.save
-        flash[:notice] = 'Permission has been granted to ' + user.email
+        flash[:notice] = "Permission has been granted to #{user}"
         format.html { redirect_to permission_path(@datatable.id) }
         format.xml  { head :created, :location => permission_path(@datatable.id) }
       else
@@ -34,7 +33,7 @@ class PermissionsController < ApplicationController
       end
     end
   end
-  
+
   def destroy
     user = User.find(params[:user])
     owner = current_user
@@ -49,7 +48,7 @@ class PermissionsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   def deny
     user = User.find_by_email(params[:email])
     owner = current_user
@@ -67,9 +66,9 @@ class PermissionsController < ApplicationController
       format.xml { head :ok }
     end
   end
-  
+
   private
-  
+
   def require_datatable
     @datatable = Datatable.find(params[:id]) if params[:id]
     @datatable = Datatable.find(params[:datatable]) if params[:datatable]
