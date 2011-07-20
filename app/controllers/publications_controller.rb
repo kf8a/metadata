@@ -16,34 +16,22 @@ class PublicationsController < ApplicationController
       @pub_type = ''
       publication_types = PublicationType.all
     end
-    @pub_type =  @pub_type.gsub(/_/,' ') unless @pub_type.blank?
-    conditions = 'publication_type_id in (?) and publication_type_id < 6 '
-    order = 'year desc, citation'
-    @decoration = 'by year'
-    if params[:alphabetical]
-      @alphabetical = true
-      order = 'citation'
-      @decoration = 'by Author'
-    end
+    @pub_type.gsub!(/_/,' ')
+    conditions    = 'publication_type_id in (?) and publication_type_id < 6 '
+    @alphabetical = params[:alphabetical]
+    order         = @alphabetical ? 'citation'  : 'year desc, citation'
+    @decoration   = @alphabetical ? 'by Author' : 'by year'
 
     if params[:treatment]
       @alphabetical = true
-      treatment = Treatment.find(params[:treatment])
+      treatment     = Treatment.find(params[:treatment])
       @publications = treatment.publications
-      @decoration = "from #{treatment.name}: #{treatment.description}"
+      @decoration   = "from #{treatment.name}: #{treatment.description}"
     else
       @publications = Publication.order(order).where(conditions, publication_types)
     end
 
-    if @word
-      @publications = Publication.find_by_word(@word)
-    end
-
-
-    respond_to do |format|
-      format.html # index.rhtml
-      format.xml  { render :xml => @publications.to_xml }
-    end
+    @publications = Publication.find_by_word(@word) if @word
   end
 
   def index_by_treatment
