@@ -261,7 +261,7 @@ jQuery(document).ready(function() {
     });
   });
 
-  jQuery('.catogory-bubble-graph').each(function() {
+  jQuery('.category-bubble-graph').each(function() {
     var id = jQuery(this).attr('id');
 
     var current_div = this;
@@ -299,7 +299,7 @@ jQuery(document).ready(function() {
                     .width(width)
                     .height(height)
                     .right(50)
-                    .top(10)
+                    .top(150)
                     .bottom(20)
                     .left(380)
                     .event("mousemove", pv.Behavior.point());
@@ -315,23 +315,18 @@ jQuery(document).ready(function() {
          .font('10pt normal');
         
         vis.add(pv.Rule)
-          .data(treatmentsScale.ticks())
+          .data(treatments)
           .strokeStyle("#eee")
-          .left(yearScale)
+          .left(treatmentsScale)
           .anchor('top')
-          .add(pv.Label);
+          .add(pv.Label)
+          .textAngle(-Math.PI / 2 + 0.3)
+          .textAlign('left');
         
-        vis.add(pv.Rule)
-          .data(treatmentsScale.ticks())
-          .strokeStyle("#eee")
-          .left(treatmetnsScale)
-          .anchor('bottom')
-          .add(pv.Label);
-          
         vis.add(pv.Dot)
           .data(data)
           .bottom(function(d) {return speciesScale(d.category)})
-          .left(function(d) {return treatmentsScale(d.year)})
+          .left(function(d) {return treatmentsScale(d.treatment)})
           .size(function(d) {return biomassScale(d.value)} )
           .fillStyle(function() {return activeDot == this.index ? pv.rgb(250,230,5) : pv.rgb(250,230,5,0.2)})
           .strokeStyle(pv.rgb(0,0,255,0.2));
@@ -339,12 +334,12 @@ jQuery(document).ready(function() {
           vis.add(pv.Dot)
             .data(data)
             .bottom(function(d) {return speciesScale(d.category)})
-            .left(function(d) {return treatmentsScale(d.year)})
+            .left(function(d) {return treatmentsScale(d.treatment)})
             .radius(function() {return activeDot == this.index ? 1 : 0.2} )
             .fillStyle('black')
             .event("point", function() {activeDot = this.index; return vis})
             .add(pv.Label)
-            .text(function(d) {return d.treatment + ": " + human_number(d.value) + " g/m2"})
+            .text(function(d) {return human_number(d.value) + " g/m2"})
             .textAlign('center')
             .visible(function() {return activeDot == this.index});
 
