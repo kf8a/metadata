@@ -19,4 +19,12 @@ class DataContributionsControllerTest < ActionController::TestCase
     should render_template :new
   end
 
+  context "GET :new, :format => :js" do
+    setup do
+      get :new, :format => :js
+    end
+
+    should respond_with :success
+  end
+
 end
