@@ -59,6 +59,8 @@ gem 'has_scope'
 
 gem 'ris_parser', :git => 'git://github.com/kf8a/ris_parser.git', :branch => 'develop'
 
+gem 'exception_notification'
+
 group :development, :test  do
   # bundler requires these gems in development
   # gem "rails-footnotes"
