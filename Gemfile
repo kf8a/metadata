@@ -83,7 +83,6 @@ group :test do
 
   #Cucumber stuff
   gem 'capybara', '0.4.1.2'
-  gem "factory_girl"
   gem 'cucumber-rails', '0.4.1'
   gem 'spork'
   gem 'launchy'
