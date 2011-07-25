@@ -1,183 +1,181 @@
-unless Factory.factories.include?(:affiliation) #prevent redefining these factories
+FactoryGirl.define do
 
   #Independent factories#########
-  Factory.define :affiliation do |affiliate|
+  factory :affiliation do
   end
 
-  Factory.define :author do |author|
-    author.seniority  1
+  factory :author do
+    seniority  1
   end
 
-  Factory.define :editor do |editor|
-    editor.seniority 1
+  factory :editor do
+    seniority  1
   end
 
-  Factory.define :citation do |cite|
-    cite.website   Website.find_by_name('lter')
+  factory :citation do
+    website   Website.find_by_name('lter')
   end
 
-  Factory.define :article_citation do |cite|
+  factory :article_citation do
   end
 
-  Factory.define :book_citation do |cite|
+  factory :book_citation do
   end
 
-  Factory.define :citation_type do |cite_type|
+  factory :citation_type do
   end
 
-  Factory.define :dataset do |d|
-    d.title 'KBS001'
-    d.abstract 'some new dataset'
+  factory :invite do
+    sequence(:email) {|n| "person#{n}@example.com" }
   end
 
-  Factory.define :invite do |i|
-    i.sequence(:email) {|n| "person#{n}@example.com" }
+  factory :page do
   end
 
-  Factory.define :page do |p|
+  factory :permission do
   end
 
-  Factory.define :permission do |p|
+  factory :permission_request do
   end
 
-  Factory.define :permission_request do |p|
+  factory :person do
+    sur_name    'bauer'
+    given_name  'bill'
   end
 
-  Factory.define :person do |p|
-    p.sur_name 'bauer'
-    p.given_name 'bill'
+  factory :project do
   end
 
-  Factory.define :project do |p|
+  factory :publication do
+    citation            'bogus data, brown and company'
+    abstract            'something in here'
+    year                2000
+    publication_type_id 1
   end
 
-  Factory.define :publication do |p|
-    p.citation            'bogus data, brown and company'
-    p.abstract            'something in here'
-    p.year                2000
-    p.publication_type_id 1
+  factory :publication_type do
   end
 
-  Factory.define :publication_type do |p|
+  factory :role_type do
   end
 
-  Factory.define :role do |r|
-    r.name 'Emeritus Investigators'
+  factory :species do
   end
 
-  Factory.define :role_type do |r|
+  factory :sponsor do
+    name    'LTER'
 
+    factory :restricted_sponsor do
+      data_restricted   true
+    end
   end
 
-  Factory.define :species do |s|
+  factory :study do
+    name    'LTER'
   end
 
-  Factory.define :sponsor do |s|
-    s.name    'LTER'
+  factory :study_url do
   end
 
-  Factory.define :study do |s|
-    s.name 'LTER'
+  factory :treatment do
   end
 
-  Factory.define :study_url do |s|
+  factory :unit do
   end
 
-  Factory.define :treatment do |t|
+  factory :upload do
   end
 
-  Factory.define :unit do |u|
+  factory :template do
   end
 
-  Factory.define :upload do |u|
+  factory :theme do
+    name  'Agronomic'
   end
 
-  Factory.define :template do |t|
+  factory :variate do
+    name              'date'
+    description       'generic variate'
+    measurement_scale 'dateTime'
   end
 
-  Factory.define :theme do |t|
-    t.name  'Agronomic'
+  factory :venue_type do
+    name  'Venue Name'
   end
 
-  Factory.define :variate do |v|
-    v.name 'date'
-    v.description 'generic variate'
-    v.measurement_scale 'dateTime'
-  end
-
-  Factory.define :venue_type do |v|
-    v.name  'Venue Name'
-  end
-
-  Factory.define :website do |w|
-    w.name 'Name'
+  factory :website do
+    name 'Name'
   end
 
   #Dependent factories##########
 
-  Factory.define :lter_role, :parent => :role do |role|
-    role.role_type    RoleType.find_by_name('lter') || Factory.create(:role_type, :name => 'lter')
+  factory :role do
+    name 'Emeritus Investigators'
+
+    factory :lter_role do
+      role_type    RoleType.find_by_name('lter') || FactoryGirl.create(:role_type, :name => 'lter')
+    end
   end
 
-  Factory.define :protocol do |p|
-    p.name  'Proto1'
-    p.version_tag  0
-    p.dataset Factory.create(:dataset)
+  factory :dataset do
+    title     'KBS001'
+    abstract  'some new dataset'
+
+    factory :restricted_dataset do |dataset|
+      association :sponsor, :factory => :restricted_sponsor
+    end
   end
 
-  Factory.define :datatable do |d|
-    d.name          'KBS001_001'
-    d.title         'a really cool datatable'
-    d.object        "select 1 as sample_date"
-    d.is_sql         true
-    d.description   'This is a datatable'
-    d.weight        100
-    d.association   :theme
-    d.association   :dataset
-    d.variates      [Factory.create(:variate)]
+  factory :protocol do
+    name          'Proto1'
+    version_tag   0
+    dataset       FactoryGirl.create(:dataset)
   end
 
-  Factory.define :old_datatable, :parent => :datatable do |datatable|
-    datatable.object   %q{select now() - interval '3 year' as sample_date}
+  factory :datatable do
+    name          'KBS001_001'
+    title         'a really cool datatable'
+    object        "select 1 as sample_date"
+    is_sql         true
+    description   'This is a datatable'
+    weight        100
+    theme
+    dataset
+    variates      [FactoryGirl.create(:variate)]
+
+    factory :public_datatable do
+    end
+
+    factory :protected_datatable do
+      association :dataset, :factory => :restricted_dataset
+    end
+
+    factory :old_datatable do
+      object   %q{select now() - interval '3 year' as sample_date}
+    end
   end
 
-  Factory.define :ownership do |o|
-    o.association  :datatable
-    o.association  :user
+  factory :ownership do
+    datatable
+    user
   end
 
-  Factory.define :data_contribution do |d|
-    d.association   :person
-    d.association    :role
-    d.association   :datatable
+  factory :data_contribution do
+    person
+    role
+    datatable
   end
 
-  Factory.define :public_datatable, :parent => :datatable do |datatable|
+  factory :meeting do
+    venue_type_id   1
   end
 
-  Factory.define :meeting do |m|
-    m.venue_type_id   1
+  factory :collection do
+    datatable   FactoryGirl.create(:datatable)
   end
 
-  Factory.define :restricted_sponsor, :parent => :sponsor do |sponsor|
-    sponsor.data_restricted   true
+  factory :abstract do
+    abstract  'A quick little discussion of the meeting.'
+    meeting
   end
-
-  Factory.define :restricted_dataset, :parent => :dataset do |dataset|
-    dataset.association   :sponsor, :factory => :restricted_sponsor
-  end
-
-  Factory.define :protected_datatable, :parent => :datatable do |datatable|
-    datatable.association   :dataset, :factory => :restricted_dataset
-  end
-
-  Factory.define :collection do |c|
-    c.datatable   Factory.create(:datatable)
-  end
-
-  Factory.define :abstract do |a|
-    a.abstract  'A quick little discussion of the meeting.'
-    a.association   :meeting
-  end
-
 end
