@@ -260,4 +260,91 @@ jQuery(document).ready(function() {
           vis.render();
     });
   });
+
+  jQuery('.category-bubble-graph').each(function() {
+    var id = jQuery(this).attr('id');
+
+    var current_div = this;
+    jQuery.getJSON("/visualizations/" + id, function(data){
+
+      var nested = pv.nest(data)
+          .key(function(d) {return d.year})
+          .entries();
+          
+      var categories = pv.nest(data)
+        .key(function(d) {return d.category})
+        .entries();
+
+      var species = categories.map(function(d) {return d.key});
+
+      var treatments = pv.nest(data)
+         .key(function(d) {return d.treatment})
+         .entries();
+
+      var treatments = treatments.map(function(d) {return d.key});
+
+      var width      = 400;
+      var height     = species.length * 14;
+
+      var speciesScale = pv.Scale.ordinal(species.sort().reverse()).split(0, height);
+      var treatmentsScale = pv.Scale.ordinal(treatments.sort().reverse()).split(0, width);
+      var biomassScale = pv.Scale.linear(0, pv.max(data.map(function(d) {return d.value}))).range(0,500);
+          
+      var activeDot = 0;
+
+      var human_number = pv.Format.number().fractionDigits(0,2)
+          
+      var vis = new pv.Panel()
+                    .canvas(current_div)
+                    .width(width)
+                    .height(height)
+                    .right(50)
+                    .top(150)
+                    .bottom(20)
+                    .left(380)
+                    .event("mousemove", pv.Behavior.point());
+        
+        vis.add(pv.Rule)
+         .data(species)
+         .bottom(speciesScale)
+         .strokeStyle("#eee")
+         .anchor("left")
+         .add(pv.Label)
+         .left(-20)
+         .textAlign('right')
+         .font('10pt normal');
+        
+        vis.add(pv.Rule)
+          .data(treatments)
+          .strokeStyle("#eee")
+          .left(treatmentsScale)
+          .anchor('top')
+          .add(pv.Label)
+          .textAngle(-Math.PI / 2 + 0.3)
+          .textAlign('left');
+        
+        vis.add(pv.Dot)
+          .data(data)
+          .bottom(function(d) {return speciesScale(d.category)})
+          .left(function(d) {return treatmentsScale(d.treatment)})
+          .size(function(d) {return biomassScale(d.value)} )
+          .fillStyle(function() {return activeDot == this.index ? pv.rgb(250,230,5) : pv.rgb(250,230,5,0.2)})
+          .strokeStyle(pv.rgb(0,0,255,0.2));
+          
+          vis.add(pv.Dot)
+            .data(data)
+            .bottom(function(d) {return speciesScale(d.category)})
+            .left(function(d) {return treatmentsScale(d.treatment)})
+            .radius(function() {return activeDot == this.index ? 1 : 0.2} )
+            .fillStyle('black')
+            .event("point", function() {activeDot = this.index; return vis})
+            .add(pv.Label)
+            .text(function(d) {return human_number(d.value) + " g/m2"})
+            .textAlign('center')
+            .visible(function() {return activeDot == this.index});
+
+       
+          vis.render();
+    });
+  });
 });
