@@ -32,6 +32,11 @@ class OwnershipsController < ApplicationController
         redirect_to ownerships_path
       end
     else
+      @datatables = Datatable.by_name unless @datatable
+      @users = User.by_email
+      @ownership = Ownership.new
+      @user_count = 1
+      @datatable_count = 1 unless @datatable
       render 'new'
     end
   end
