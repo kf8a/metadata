@@ -103,6 +103,10 @@ FactoryGirl.define do
     name  'Venue Name'
   end
 
+  factory :visualization do
+    query        "select 1 as sample_date"
+  end
+
   factory :website do
     name 'Name'
   end
