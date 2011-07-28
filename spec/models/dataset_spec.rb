@@ -11,13 +11,20 @@ describe Dataset do
   it "should create a new instance given valid attributes" do
     Dataset.create!(@valid_attributes)
   end
-  
+
   it "should belong to a project" do
     dataset = Dataset.create!(@valid_attributes)
     dataset.project = Project.new
     dataset.save
   end
-end  
+
+  it "should create consistent eml content when inported and exported" do
+    dataset = Dataset.create!(@valid_attributes)
+    eml_content = dataset.to_eml
+    imported_dataset = Datatable.from_eml(eml_content)
+    imported_dataset.to_eml.should == eml_content
+  end
+end
 
 
 
@@ -46,4 +53,3 @@ end
 #  sponsor_id   :integer
 #  website_id   :integer
 #
-
