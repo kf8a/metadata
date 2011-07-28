@@ -18,6 +18,10 @@ class Dataset < ActiveRecord::Base
 
   acts_as_taggable_on :keywords
 
+  def Dataset.from_eml(eml_text)
+    
+  end
+
   def to_label
     "#{title} (#{dataset})"
   end
@@ -272,4 +276,3 @@ end
 #  sponsor_id   :integer
 #  website_id   :integer
 #
-
