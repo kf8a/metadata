@@ -18,11 +18,30 @@ describe Dataset do
     dataset.save
   end
 
-  it "should create consistent eml content when inported and exported" do
-    dataset = Dataset.create!(@valid_attributes)
-    eml_content = dataset.to_eml
-    imported_dataset = Datatable.from_eml(eml_content)
-    imported_dataset.to_eml.should == eml_content
+  describe "eml importation" do
+    before(:each) do
+      dataset = Factory.create(:dataset, :initiated => Date.today, :completed => Date.today)
+      datatable = Factory.create(:datatable)
+      @dataset_with_datatable = datatable.dataset
+      assert datatable.valid_for_eml
+    end
+
+    it "should create consistent eml content when imported and exported" do
+      eml_content = @dataset_with_datatable.to_eml
+      imported_dataset = Dataset.from_eml(eml_content)
+      imported_dataset.should be_a Dataset
+      #imported_dataset.to_eml.should == eml_content
+    end
+
+    it "should import protocols" do
+      new_protocol = FactoryGirl.create(:protocol)
+      @dataset_with_datatable.protocols << new_protocol
+      @dataset_with_datatable.website = Website.first
+      @dataset_with_datatable.save
+      eml_content = @dataset_with_datatable.to_eml
+      imported_dataset = Dataset.from_eml(eml_content)
+      imported_dataset.protocols.should include(new_protocol)
+    end
   end
 end
 

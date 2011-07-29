@@ -18,8 +18,26 @@ class Dataset < ActiveRecord::Base
 
   acts_as_taggable_on :keywords
 
-  def Dataset.from_eml(eml_text)
-    
+  def self.from_eml(eml_text)
+    eml_doc = Nokogiri::XML(eml_text)
+    dataset = self.new
+    eml_doc.css('protocol').each do |protocol_eml|
+      prot_id = protocol_eml.attributes['id'].value.gsub('protocol_', '')
+      protocol = Protocol.find_by_id(prot_id)
+      if protocol
+        dataset.protocols << protocol
+      else
+        protocol_title = protocol_eml.css('title').text
+        protocol = Protocol.find_or_create_by_title(protocol_title)
+        dataset.protocols << protocol
+      end
+    end
+
+    dataset
+
+    #  eml_dataset
+    #  eml_custom_unit_list if custom_units.present?
+    #end
   end
 
   def to_label
@@ -201,7 +219,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_people
-    [people, datatable_people].flatten.uniq.each do |person|
+    [people, datatable_people].flatten.uniq.compact.each do |person|
       person.to_eml(@eml)
     end
   end
