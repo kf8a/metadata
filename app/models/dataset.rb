@@ -33,14 +33,12 @@ class Dataset < ActiveRecord::Base
       end
     end
 
-    dataset.title = eml_doc.css('title').text
+    dataset.title = eml_doc.css('dataset title').text
+    dataset.abstract = eml_doc.css('dataset abstract para').text
+    dataset.initiated = eml_doc.css('dataset temporalCoverage rangeOfDates beginDate calendarDate').text
+    dataset.completed = eml_doc.css('dataset temporalCoverage rangeOfDates endDate calendarDate').text
 
-    #@eml.title title
-    #eml_creator
     #eml_people
-    #eml_abstract
-    #keyword_sets
-    #eml_coverage
 
     #@eml.dataset do
     #  eml_resource_group
@@ -52,7 +50,6 @@ class Dataset < ActiveRecord::Base
     dataset
 
     #  eml_custom_unit_list if custom_units.present?
-    #end
   end
 
   def to_label

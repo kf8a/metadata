@@ -49,6 +49,22 @@ describe Dataset do
       imported_dataset = Dataset.from_eml(eml_content)
       imported_dataset.title.should == "The right title"
     end
+
+    it "should import the right abstract" do
+      @dataset_with_datatable.abstract = "The right abstract"
+      eml_content = @dataset_with_datatable.to_eml
+      imported_dataset = Dataset.from_eml(eml_content)
+      imported_dataset.abstract.should == "<p>The right abstract</p>" #it will be textilized
+    end
+
+    it "should import the right dates" do
+      @dataset_with_datatable.initiated = Date.parse("1-2-1988")
+      @dataset_with_datatable.completed = Date.parse("3-4-1990")
+      eml_content = @dataset_with_datatable.to_eml
+      imported_dataset = Dataset.from_eml(eml_content)
+      imported_dataset.initiated.should == @dataset_with_datatable.initiated
+      imported_dataset.completed.should == @dataset_with_datatable.completed
+    end
   end
 end
 
