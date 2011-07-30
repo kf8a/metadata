@@ -33,9 +33,24 @@ class Dataset < ActiveRecord::Base
       end
     end
 
+    dataset.title = eml_doc.css('title').text
+
+    #@eml.title title
+    #eml_creator
+    #eml_people
+    #eml_abstract
+    #keyword_sets
+    #eml_coverage
+
+    #@eml.dataset do
+    #  eml_resource_group
+    #  contact_info
+    #  eml_dataset_protocols if protocols.present?
+    #  datatables.each { |table| table.to_eml(@eml) if table.valid_for_eml }
+    #end
+
     dataset
 
-    #  eml_dataset
     #  eml_custom_unit_list if custom_units.present?
     #end
   end

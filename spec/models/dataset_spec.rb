@@ -42,6 +42,13 @@ describe Dataset do
       imported_dataset = Dataset.from_eml(eml_content)
       imported_dataset.protocols.should include(new_protocol)
     end
+
+    it "should import the right title" do
+      @dataset_with_datatable.title = "The right title"
+      eml_content = @dataset_with_datatable.to_eml
+      imported_dataset = Dataset.from_eml(eml_content)
+      imported_dataset.title.should == "The right title"
+    end
   end
 end
 
