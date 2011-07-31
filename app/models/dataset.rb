@@ -38,12 +38,33 @@ class Dataset < ActiveRecord::Base
     dataset.initiated = eml_doc.css('dataset temporalCoverage rangeOfDates beginDate calendarDate').text
     dataset.completed = eml_doc.css('dataset temporalCoverage rangeOfDates endDate calendarDate').text
 
-    #eml_people
+    eml_doc.css('dataset associatedParty').each do |person_eml|
+      person_id = person_eml.attributes['id'].value
+      person = Person.find_by_id(person_id)
+      if person
+        dataset.people << person
+      else
+        person = Person.new
+        person.given_name = person_eml.css('individualName givenName').text
+        person.sur_name = person_eml.css('individualName surName').text
+        person.organization = person_eml.css('address deliveryPoint').text
+        person.street_address = person_eml.css('address deliveryPoint').text #TODO should these really be the same?
+        person.city = person_eml.css('address city').text
+        person.locale = person_eml.css('address administrativeArea').text
+        person.postal_code = person_eml.css('address postalCode').text
+        person.country = person_eml.css('address country').text
+        person.phone = person_eml.css('phone').text
+        person.fax = person_eml.css('fax').text
+        person.email = person_eml.css('electronicMailAddress').text
+        role_name = person_eml.css('role').text.pluralize
+        role_to_add = Role.find_by_name(role_name)
+        person.lter_roles << role_to_add if role_to_add.present?
+        dataset.people << person
+      end
+    end
 
     #@eml.dataset do
     #  eml_resource_group
-    #  contact_info
-    #  eml_dataset_protocols if protocols.present?
     #  datatables.each { |table| table.to_eml(@eml) if table.valid_for_eml }
     #end
 
@@ -61,7 +82,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def datatable_people
-    datatables.collect { |table| table.personnel.keys }.flatten
+    datatables.collect { |table| table.datatable_personnel.keys }.flatten
   end
 
   def valid_request?(subdomain)

@@ -69,7 +69,7 @@ class Person < ActiveRecord::Base
   end
 
   def to_eml(eml)
-    eml.associatedParty 'id' => person, 'scope' => 'document' do
+    eml.associatedParty 'id' => id, 'scope' => 'document' do
       eml_individual_name(eml)
       eml_address(eml)
       if phone
@@ -137,4 +137,3 @@ end
 #  deceased         :boolean
 #  open_id          :string(255)
 #
-

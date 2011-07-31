@@ -65,6 +65,15 @@ describe Dataset do
       imported_dataset.initiated.should == @dataset_with_datatable.initiated
       imported_dataset.completed.should == @dataset_with_datatable.completed
     end
+
+    it "should import the right people" do
+      jon = FactoryGirl.create(:person, :given_name => 'jon')
+      @dataset_with_datatable.people << jon
+      assert @dataset_with_datatable.save
+      eml_content = @dataset_with_datatable.to_eml
+      imported_dataset = Dataset.from_eml(eml_content)
+      imported_dataset.people.should include(jon)
+    end
   end
 end
 
