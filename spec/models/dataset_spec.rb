@@ -26,11 +26,10 @@ describe Dataset do
       assert datatable.valid_for_eml
     end
 
-    it "should create consistent eml content when imported and exported" do
+    it "should create a dataset from eml" do
       eml_content = @dataset_with_datatable.to_eml
       imported_dataset = Dataset.from_eml(eml_content)
       imported_dataset.should be_a Dataset
-      #imported_dataset.to_eml.should == eml_content
     end
 
     it "should import protocols" do
@@ -74,11 +73,14 @@ describe Dataset do
       imported_dataset = Dataset.from_eml(eml_content)
       imported_dataset.people.should include(jon)
     end
+
+    it "should import the right datatable" do
+      eml_content = @dataset_with_datatable.to_eml
+      imported_dataset = Dataset.from_eml(eml_content)
+      imported_dataset.datatables.should == @dataset_with_datatable.datatables
+    end
   end
 end
-
-
-
 
 
 # == Schema Information

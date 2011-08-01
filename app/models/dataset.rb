@@ -63,11 +63,44 @@ class Dataset < ActiveRecord::Base
       end
     end
 
-    #@eml.dataset do
-    #  eml_resource_group
-    #  datatables.each { |table| table.to_eml(@eml) if table.valid_for_eml }
-    #end
+    eml_doc.css('dataset dataTable').each do |datatable_eml|
+      table_id = datatable_eml.css('physical distribution online url').text.split('/')[-1].gsub('.csv', '')
+      table = Datatable.find_by_id(table_id.to_i)
+      if table.present?
+        dataset.datatables << table
+      else
+        table = Datatable.new
+        table_name = datatable_eml.attributes['id'].value
+        table.title = datatable_eml.css('entityName').text
+        table.description = datatable_eml.css('entityDescription').text
+        table.data_url = datatable_eml.css('physical distribution online url').text
+        datatable_eml.css('methods methodStep').each do |protocol_eml|
+          protocol_id = protocol_eml.css('protocol references').text.gsub('protocol_', '')
+          protocol = Protocol.find_by_id(protocol_id)
+          table.protocols << protocol if protocol.present?
+        end
 
+        datatable_eml.css('attributeList attribute').each do |variate_eml|
+          variate_name = variate_eml.css('attributeName').text
+          variate = Variate.find_by_name(variate_name)
+          if variate.present?
+            datatable.variates << variate
+          else
+            variate = Variate.new
+            variate.name = variate_name
+            variate.description = variate_eml.css('attributeDefinition').text
+            #TODO add the scale
+            variate.save
+            datatable.variates << variate
+          end
+        end
+
+        datatable.save
+        dataset.datatables << datatable
+      end
+    end
+    dataset.save
+    
     dataset
 
     #  eml_custom_unit_list if custom_units.present?
