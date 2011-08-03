@@ -11,8 +11,7 @@ class Protocol < ActiveRecord::Base
     "#{self.title}"
   end
 
-  def self.from_eml(eml_element)
-    protocol_eml = eml_element
+  def self.from_eml(protocol_eml)
     prot_id = protocol_eml.attributes['id'].value.gsub('protocol_', '')
     protocol = Protocol.find_by_id(prot_id)
     unless protocol.present?
