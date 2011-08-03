@@ -11,6 +11,33 @@ class Protocol < ActiveRecord::Base
     "#{self.title}"
   end
 
+  def self.from_eml(eml_element)
+    protocol_eml = eml_element
+    prot_id = protocol_eml.attributes['id'].value.gsub('protocol_', '')
+    protocol = Protocol.find_by_id(prot_id)
+    unless protocol.present?
+      protocol_title = protocol_eml.css('title').text
+      protocol = Protocol.find_or_create_by_title(protocol_title)
+      protocol.save
+    end
+
+    protocol
+  end
+
+  def to_eml(xml = Builder::XmlMarkup.new)
+    @eml = xml
+    @eml.protocol 'id' => "protocol_#{id}" do
+      @eml.title  title
+      eml_creator
+      @eml.distribution do
+        @eml.online do
+          website_name = dataset.try(:website).try(:name) || websites.first
+          @eml.url "http://#{website_name}.kbs.msu.edu/protocols/#{id}"
+        end
+      end
+    end
+  end
+
   def to_eml_ref(xml = Builder::XmlMarkup.new)
     xml.methodStep do
       xml.protocol do
@@ -34,10 +61,16 @@ class Protocol < ActiveRecord::Base
   def dataset_description
     self.dataset.try(:dataset)
   end
+
+
+  private
+
+  def eml_creator
+    @eml.creator 'id' => 'KBS LTER' do
+      @eml.positionName 'Data Manager'
+    end
+  end
 end
-
-
-
 
 # == Schema Information
 #
@@ -60,4 +93,3 @@ end
 #  active         :boolean         default(TRUE)
 #  deprecates     :integer
 #
-

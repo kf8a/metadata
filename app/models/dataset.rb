@@ -22,15 +22,7 @@ class Dataset < ActiveRecord::Base
     eml_doc = Nokogiri::XML(eml_text)
     dataset = self.new
     eml_doc.css('protocol').each do |protocol_eml|
-      prot_id = protocol_eml.attributes['id'].value.gsub('protocol_', '')
-      protocol = Protocol.find_by_id(prot_id)
-      if protocol
-        dataset.protocols << protocol
-      else
-        protocol_title = protocol_eml.css('title').text
-        protocol = Protocol.find_or_create_by_title(protocol_title)
-        dataset.protocols << protocol
-      end
+      dataset.protocols << Protocol.from_eml(protocol_eml)
     end
 
     dataset.title = eml_doc.css('dataset title').text
@@ -100,7 +92,7 @@ class Dataset < ActiveRecord::Base
       end
     end
     dataset.save
-    
+
     dataset
 
     #  eml_custom_unit_list if custom_units.present?
@@ -242,15 +234,7 @@ class Dataset < ActiveRecord::Base
 
   def eml_protocols
     (protocols + datatable_protocols).flatten.uniq.each do | protocol |
-      @eml.protocol 'id' => "protocol_#{protocol.id}" do
-        @eml.title  protocol.title
-        eml_creator
-        @eml.distribution do
-          @eml.online do
-            @eml.url "http://#{website.name}.kbs.msu.edu/protocols/#{protocol.id}"
-          end
-        end
-      end
+      protocol.to_eml(@eml)
     end
   end
 
