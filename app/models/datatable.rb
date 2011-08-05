@@ -54,6 +54,42 @@ class Datatable < ActiveRecord::Base
     #set_property :field_weights => {:keyword => 20, :theme => 20, :title => 10}
   end
 
+  def self.from_eml(datatable_eml)
+    table_id = datatable_eml.css('physical distribution online url').text.split('/')[-1].gsub('.csv', '')
+    table = Datatable.find_by_id(table_id.to_i)
+    unless table.present?
+      table = Datatable.new
+      table_name = datatable_eml.attributes['id'].value
+      table.title = datatable_eml.css('entityName').text
+      table.description = datatable_eml.css('entityDescription').text
+      table.data_url = datatable_eml.css('physical distribution online url').text
+      datatable_eml.css('methods methodStep').each do |protocol_eml|
+        protocol_id = protocol_eml.css('protocol references').text.gsub('protocol_', '')
+        protocol = Protocol.find_by_id(protocol_id)
+        table.protocols << protocol if protocol.present?
+      end
+
+      datatable_eml.css('attributeList attribute').each do |variate_eml|
+        variate_name = variate_eml.css('attributeName').text
+        variate = Variate.find_by_name(variate_name)
+        if variate.present?
+          datatable.variates << variate
+        else
+          variate = Variate.new
+          variate.name = variate_name
+          variate.description = variate_eml.css('attributeDefinition').text
+          #TODO add the scale
+          variate.save
+          datatable.variates << variate
+        end
+      end
+
+      table.save
+    end
+
+    table
+  end
+
   def valid_for_eml
     valid_variates.present?
   end
