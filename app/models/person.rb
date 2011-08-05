@@ -27,12 +27,19 @@ class Person < ActiveRecord::Base
       person.locale = person_eml.css('address administrativeArea').text
       person.postal_code = person_eml.css('address postalCode').text
       person.country = person_eml.css('address country').text
-      person.phone = person_eml.css('phone').text
-      person.fax = person_eml.css('fax').text
+
+      person_eml.css('phone').each do |phone_eml|
+        if phone_eml.attributes['phonetype'].value == 'phone'
+          person.phone = phone_eml.text
+        elsif phone_eml.attributes['phonetype'].value == 'fax'
+          person.fax = phone_eml.text
+        end
+      end
+
       person.email = person_eml.css('electronicMailAddress').text
-      role_name = person_eml.css('role').text.pluralize
+      role_name = person_eml.css('role').text
       role_to_add = Role.find_by_name(role_name)
-      person.lter_roles << role_to_add if role_to_add.present?
+      Affiliation.create!(:person => person, :role => role_to_add) if role_to_add.present?
       person.save
     end
 
