@@ -59,7 +59,7 @@ class Datatable < ActiveRecord::Base
     table = Datatable.find_by_id(table_id.to_i)
     unless table.present?
       table = Datatable.new
-      table_name = datatable_eml.attributes['id'].value
+      table.name = datatable_eml.attributes['id'].value
       table.title = datatable_eml.css('entityName').text
       table.description = datatable_eml.css('entityDescription').text
       table.data_url = datatable_eml.css('physical distribution online url').text
@@ -73,14 +73,14 @@ class Datatable < ActiveRecord::Base
         variate_name = variate_eml.css('attributeName').text
         variate = Variate.find_by_name(variate_name)
         if variate.present?
-          datatable.variates << variate
+          table.variates << variate
         else
           variate = Variate.new
           variate.name = variate_name
           variate.description = variate_eml.css('attributeDefinition').text
           #TODO add the scale
           variate.save
-          datatable.variates << variate
+          table.variates << variate
         end
       end
 
