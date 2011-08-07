@@ -70,18 +70,7 @@ class Datatable < ActiveRecord::Base
       end
 
       datatable_eml.css('attributeList attribute').each do |variate_eml|
-        variate_name = variate_eml.css('attributeName').text
-        variate = Variate.find_by_name(variate_name)
-        if variate.present?
-          table.variates << variate
-        else
-          variate = Variate.new
-          variate.name = variate_name
-          variate.description = variate_eml.css('attributeDefinition').text
-          #TODO add the scale
-          variate.save
-          table.variates << variate
-        end
+        table.variates << Variate.from_eml(variate_eml)
       end
 
       table.save
