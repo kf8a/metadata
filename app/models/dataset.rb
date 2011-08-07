@@ -19,22 +19,23 @@ class Dataset < ActiveRecord::Base
   acts_as_taggable_on :keywords
 
   def self.from_eml(eml_text)
-    eml_doc = Nokogiri::XML(eml_text).css('dataset')
+    eml_doc = Nokogiri::XML(eml_text)
+    dataset_eml = eml_doc.css('dataset')
     dataset = self.new
-    dataset.title = eml_doc.css('title').text
-    dataset.abstract = eml_doc.css('abstract para').text
-    dataset.initiated = eml_doc.css('temporalCoverage rangeOfDates beginDate calendarDate').text
-    dataset.completed = eml_doc.css('temporalCoverage rangeOfDates endDate calendarDate').text
+    dataset.title = dataset_eml.css('title').text
+    dataset.abstract = dataset_eml.css('abstract para').text
+    dataset.initiated = dataset_eml.css('temporalCoverage rangeOfDates beginDate calendarDate').text
+    dataset.completed = dataset_eml.css('temporalCoverage rangeOfDates endDate calendarDate').text
 
     eml_doc.css('protocol').each do |protocol_eml|
       dataset.protocols << Protocol.from_eml(protocol_eml)
     end
 
-    eml_doc.css('associatedParty').each do |person_eml|
+    dataset_eml.css('associatedParty').each do |person_eml|
       dataset.people << Person.from_eml(person_eml)
     end
 
-    eml_doc.css('dataTable').each do |datatable_eml|
+    dataset_eml.css('dataTable').each do |datatable_eml|
       dataset.datatables << Datatable.from_eml(datatable_eml)
     end
 
