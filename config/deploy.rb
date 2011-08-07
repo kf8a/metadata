@@ -42,6 +42,7 @@ namespace :deploy do
   desc "Custom restart task for thin cluster"
   task :restart, :roles => :app, :except => { :no_release => true } do
     deploy.thin.restart
+    restart_sphinks
   end
 
   desc "Custom start task for thin cluster"
@@ -89,9 +90,9 @@ end
 
 task :production do
 
-  set :host, 'gprpc37'
+  set :host, 'houghton'
 
-  role :app, "#{host}.kbs.msu.edu", "gprpc28.kbs.msu.edu", "houghton.kbs.msu.edu" #, "35.8.163.71"
+  role :app, "#{host}.kbs.msu.edu", "gprpc28.kbs.msu.edu" 
   role :web, "#{host}.kbs.msu.edu"
   role :db,  "#{host}.kbs.msu.edu", :primary => true
 
@@ -109,6 +110,11 @@ task :update_sphinks do
   run "cd #{release_path};bundle exec rake ts:index RAILS_ENV=production"
   run "cd #{release_path};chmod go-r config/production.sphinx.conf"
   run "cd #{release_path};bundle exec rake ts:start RAILS_ENV=production"
+end
+
+desc 'Restart spinks'
+task :restart_sphinks do
+  run "cd #{current_path};bundle exec rake ts:restart RAILS_ENV=production"
 end
 
 desc "Link in the production database.yml"
