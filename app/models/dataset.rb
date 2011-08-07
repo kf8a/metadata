@@ -18,6 +18,34 @@ class Dataset < ActiveRecord::Base
 
   acts_as_taggable_on :keywords
 
+  def self.from_eml(eml_text)
+    eml_doc = Nokogiri::XML(eml_text)
+    dataset_eml = eml_doc.css('dataset')
+    dataset = self.new
+    dataset.title = dataset_eml.css('title').text
+    dataset.abstract = dataset_eml.css('abstract para').text
+    dataset.initiated = dataset_eml.css('temporalCoverage rangeOfDates beginDate calendarDate').text
+    dataset.completed = dataset_eml.css('temporalCoverage rangeOfDates endDate calendarDate').text
+
+    eml_doc.css('protocol').each do |protocol_eml|
+      dataset.protocols << Protocol.from_eml(protocol_eml)
+    end
+
+    dataset_eml.css('associatedParty').each do |person_eml|
+      dataset.people << Person.from_eml(person_eml)
+    end
+
+    dataset_eml.css('dataTable').each do |datatable_eml|
+      dataset.datatables << Datatable.from_eml(datatable_eml)
+    end
+
+    dataset.save
+
+    dataset
+
+    #  eml_custom_unit_list if custom_units.present?
+  end
+
   def to_label
     "#{title} (#{dataset})"
   end
@@ -27,7 +55,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def datatable_people
-    datatables.collect { |table| table.personnel.keys }.flatten
+    datatables.collect { |table| table.datatable_personnel.keys }.flatten
   end
 
   def valid_request?(subdomain)
@@ -154,15 +182,7 @@ class Dataset < ActiveRecord::Base
 
   def eml_protocols
     (protocols + datatable_protocols).flatten.uniq.each do | protocol |
-      @eml.protocol 'id' => "protocol_#{protocol.id}" do
-        @eml.title  protocol.title
-        eml_creator
-        @eml.distribution do
-          @eml.online do
-            @eml.url "http://#{website.name}.kbs.msu.edu/protocols/#{protocol.id}"
-          end
-        end
-      end
+      protocol.to_eml(@eml)
     end
   end
 
@@ -197,7 +217,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_people
-    [people, datatable_people].flatten.uniq.each do |person|
+    [people, datatable_people].flatten.uniq.compact.each do |person|
       person.to_eml(@eml)
     end
   end
@@ -272,4 +292,3 @@ end
 #  sponsor_id   :integer
 #  website_id   :integer
 #
-

@@ -5,6 +5,20 @@ class Variate < ActiveRecord::Base
   belongs_to :datatable
   belongs_to :unit
 
+  def self.from_eml(variate_eml)
+    variate_name = variate_eml.css('attributeName').text
+    variate = Variate.find_by_name(variate_name)
+    unless variate.present?
+      variate = Variate.new
+      variate.name = variate_name
+      variate.description = variate_eml.css('attributeDefinition').text
+      #TODO add the scale
+      variate.save
+    end
+
+    variate
+  end
+
   def valid_for_eml
     measurement_scale.present? && description.present?
   end

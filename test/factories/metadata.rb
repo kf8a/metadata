@@ -117,7 +117,7 @@ FactoryGirl.define do
     name 'Emeritus Investigators'
 
     factory :lter_role do
-      role_type    RoleType.find_by_name('lter') || FactoryGirl.create(:role_type, :name => 'lter')
+      role_type    { RoleType.find_by_name('lter') || FactoryGirl.create(:role_type, :name => 'lter') }
     end
   end
 
