@@ -3,15 +3,15 @@ class DatasetsController < ApplicationController
   before_filter :allow_on_web
   before_filter :admin?, :except => [:index, :show ] if Rails.env == 'production'
   before_filter :get_dataset, :only => [:show, :edit, :update, :destroy]
-  
+
   #layout proc {|controller| controller.request.format == :eml ? false : 'application'}
-  
+
   # POST /dataset
   def upload
     file = params[:file]
     @dataset = Dataset.new
   end
-  
+
   # GET /datasets
   # GET /datasets.xml
   def index
@@ -58,21 +58,21 @@ class DatasetsController < ApplicationController
     @websites = Website.all.collect {|website| [website.name, website.id]}
     @sponsors = Sponsor.all.collect {|sponsor| [sponsor.name, sponsor.id]}
   end
-  
-  # POST /dataset/new_affiliation 
+
+  # POST /dataset/new_affiliation
   def set_affiliation_for
     @affiliation = Affiliation.new
     people = Person.by_sur_name_asc
     roles = Role.find_all_by_role_type_id(RoleType.find_by_name('lter_dataset'))
-    
+
     respond_to do |format|
       format.html
       format.js do
         render :update do |page|
-          page.insert_html :bottom, 'affiliations', 
-            :partial  => "affiliation", 
-            :locals   => {:roles        => roles, 
-                          :people       => people, 
+          page.insert_html :bottom, 'affiliations',
+            :partial  => "affiliation",
+            :locals   => {:roles        => roles,
+                          :people       => people,
                           :affiliation  => @affiliation}
         end
       end
@@ -82,7 +82,11 @@ class DatasetsController < ApplicationController
   # POST /datasets
   # POST /datasets.xml
   def create
-    @dataset = Dataset.new(params[:dataset])
+    if params[:dataset][:eml_file].present?
+      @dataset = Dataset.from_eml_file(params[:dataset][:eml_file])
+    else
+      @dataset = Dataset.new(params[:dataset])
+    end
     if @dataset.save
       flash[:notice] = 'Dataset was successfully created.'
     end
@@ -125,7 +129,7 @@ class DatasetsController < ApplicationController
     crumb.name = 'Data Catalog: Datasets'
     @crumbs << crumb
   end
-  
+
   def allow_on_web
     return unless params[:id]
     if params[:id] =~ /KBS\d\d\d/
@@ -134,7 +138,7 @@ class DatasetsController < ApplicationController
     dataset = Dataset.find(params[:id])
     dataset.on_web
   end
-  
+
   def collect_and_normalize_studies(datasets)
     @studies = datasets.collect do |dataset|
       next unless dataset.on_web
@@ -145,7 +149,7 @@ class DatasetsController < ApplicationController
     @studies.uniq!
     @studies.sort_by! { |study| study.weight }
   end
-  
+
   def get_dataset
     @dataset  = Dataset.find(params[:id])
   end

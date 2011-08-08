@@ -18,6 +18,10 @@ class Dataset < ActiveRecord::Base
 
   acts_as_taggable_on :keywords
 
+  def self.from_eml_file(file)
+    from_eml(file.read)
+  end
+
   def self.from_eml(eml_text)
     eml_doc = Nokogiri::XML(eml_text)
     dataset_eml = eml_doc.css('dataset')
