@@ -17,12 +17,16 @@ describe Variate do
     it "should import new variates" do
       eml_content = @variate.to_eml
       variate_id = @variate.id
+      right_scale = @variate.measurement_scale
       @variate.destroy
       assert !Variate.exists?(variate_id)
       eml_element = Nokogiri::XML(eml_content).css('attribute').first
       imported_variate = Variate.from_eml(eml_element)
       imported_variate.name.should == 'EMLVariate'
       imported_variate.description.should == 'A variate test of eml'
+      imported_variate.measurement_scale.should == right_scale
     end
+
+    #TODO add tests for all of the different format types converting from EML
   end
 end
