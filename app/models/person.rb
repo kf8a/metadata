@@ -14,6 +14,38 @@ class Person < ActiveRecord::Base
   scope :by_sur_name, :order => 'sur_name'
   scope :by_sur_name_asc, :order => 'sur_name ASC'
 
+  def self.from_eml(person_eml)
+    person_id = person_eml.attributes['id'].value
+    person = Person.find_by_id(person_id)
+    unless person
+      person = Person.new
+      person.given_name = person_eml.css('individualName givenName').text
+      person.sur_name = person_eml.css('individualName surName').text
+      person.organization = person_eml.css('address deliveryPoint').text
+      person.street_address = person_eml.css('address deliveryPoint').text #TODO should these really be the same?
+      person.city = person_eml.css('address city').text
+      person.locale = person_eml.css('address administrativeArea').text
+      person.postal_code = person_eml.css('address postalCode').text
+      person.country = person_eml.css('address country').text
+
+      person_eml.css('phone').each do |phone_eml|
+        if phone_eml.attributes['phonetype'].value == 'phone'
+          person.phone = phone_eml.text
+        elsif phone_eml.attributes['phonetype'].value == 'fax'
+          person.fax = phone_eml.text
+        end
+      end
+
+      person.email = person_eml.css('electronicMailAddress').text
+      role_name = person_eml.css('role').text
+      role_to_add = Role.find_by_name(role_name)
+      Affiliation.create!(:person => person, :role => role_to_add) if role_to_add.present?
+      person.save
+    end
+
+    person
+  end
+
   def get_committee_roles
     lter_roles.collect { |role| role.committee_role_name }.compact
   end
@@ -68,8 +100,8 @@ class Person < ActiveRecord::Base
     self.dataset_roles.size > 0
   end
 
-  def to_eml(eml)
-    eml.associatedParty 'id' => person, 'scope' => 'document' do
+  def to_eml(eml = Builder::XmlMarkup.new)
+    eml.associatedParty 'id' => id, 'scope' => 'document' do
       eml_individual_name(eml)
       eml_address(eml)
       if phone
@@ -137,4 +169,3 @@ end
 #  deceased         :boolean
 #  open_id          :string(255)
 #
-

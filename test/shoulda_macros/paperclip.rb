@@ -109,7 +109,7 @@ if defined?(ActionController::Integration::Session)
   end
 end
 
-class Factory
+class FactoryGirl::Factory
   include Paperclip::Shoulda  #:nodoc:
 end
 

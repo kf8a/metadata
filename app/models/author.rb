@@ -6,6 +6,14 @@ class Author < ActiveRecord::Base
 
   validates_presence_of :seniority
 
+  def Author.to_enw
+    all.collect { |author| author.to_enw }.join
+  end
+
+  def to_enw
+    "%A #{formatted}\n"
+  end
+
 end
 
 
@@ -25,4 +33,3 @@ end
 #  updated_at  :datetime
 #  suffix      :string(255)
 #
-

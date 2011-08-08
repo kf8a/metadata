@@ -95,6 +95,13 @@ class OwnershipsControllerTest < ActionController::TestCase
         should assign_to(:ownership)
       end
 
+      context "and POST :create with no users" do
+        setup do
+          post :create, :datatable => @datatable
+        end
+
+        should render_template 'new'
+      end
       context "and POST :create with a valid user" do
         setup do
           @user = Factory.create(:email_confirmed_user)

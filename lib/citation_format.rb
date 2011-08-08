@@ -10,6 +10,12 @@ module CitationFormat
     end
   end
 
+  def full_name
+    given_name_part = has_given_name? ? given_name + " " : ""
+    middle_name_part = has_middle_name? ? middle_name + " " : ""
+    given_name_part + middle_name_part + sur_name + suffix_text
+  end
+
   def first_initial
     given_name[0..0].upcase
   end

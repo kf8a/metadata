@@ -54,6 +54,31 @@ class Datatable < ActiveRecord::Base
     #set_property :field_weights => {:keyword => 20, :theme => 20, :title => 10}
   end
 
+  def self.from_eml(datatable_eml)
+    table_id = datatable_eml.css('physical distribution online url').text.split('/')[-1].gsub('.csv', '')
+    table = Datatable.find_by_id(table_id.to_i)
+    unless table.present?
+      table = Datatable.new
+      table.name = datatable_eml.attributes['id'].value
+      table.title = datatable_eml.css('entityName').text
+      table.description = datatable_eml.css('entityDescription').text
+      table.data_url = datatable_eml.css('physical distribution online url').text
+      datatable_eml.css('methods methodStep').each do |protocol_eml|
+        protocol_id = protocol_eml.css('protocol references').text.gsub('protocol_', '')
+        protocol = Protocol.find_by_id(protocol_id)
+        table.protocols << protocol if protocol.present?
+      end
+
+      datatable_eml.css('attributeList attribute').each do |variate_eml|
+        table.variates << Variate.from_eml(variate_eml)
+      end
+
+      table.save
+    end
+
+    table
+  end
+
   def valid_for_eml
     valid_variates.present?
   end
@@ -107,7 +132,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def permitted?(user)
-    owners.present? && user.present? && owners.all? do |owner|
+    user.present? && owners.present? && owners.all? do |owner|
       user.has_permission_from?(owner, self)
     end
   end
@@ -126,15 +151,16 @@ class Datatable < ActiveRecord::Base
 
   def can_be_downloaded_by?(user)
     if self.is_restricted
-        user.try(:admin?) || 
-        permitted?(user) || 
-        owned_by?(user)
+      user.try(:admin?) ||
+      permitted?(user) ||
+      owned_by?(user)
+    elsif restricted_to_members?
+      user.try(:admin?) ||
+      permitted?(user) ||
+      owned_by?(user) ||
+      member?(user)
     else
-      !restricted_to_members? || 
-          user.try(:admin?) || 
-          permitted?(user) || 
-          owned_by?(user) || 
-          member?(user)
+      true
     end
   end
 
@@ -351,7 +377,7 @@ class Datatable < ActiveRecord::Base
         contribution.person = affiliation.person
         contribution.role = affiliation.role
         contribution.seniority = affiliation.seniority
-   
+
         data_contributions << contribution
       end
     end
@@ -362,11 +388,13 @@ class Datatable < ActiveRecord::Base
   def query_datatable_for_temporal_extent(query)
     values = ActiveRecord::Base.connection.execute(query)
     dates = values[0]
-    if values[0].class == 'Date'
-      [Time.parse(dates['min']).to_date,Time.parse(dates['max']).to_date]
-    else # assume is a year
-      [Time.parse(dates['min'].to_s + '-1-1').to_date,Time.parse(dates['max'].to_s + '-1-1').to_date ]
+    min, max = dates['min'], dates['max']
+    unless dates.class == 'Date' # assume is a year
+      min = min.to_s + '-1-1'
+      max = max.to_s + '-1-1'
     end
+
+    [Time.parse(min).to_date, Time.parse(max).to_date]
   end
 
   def eml_protocols

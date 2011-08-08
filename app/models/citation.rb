@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'bibtex'
 
 class Citation < ActiveRecord::Base
@@ -77,11 +78,102 @@ class Citation < ActiveRecord::Base
     bib.to_s
   end
 
+  def Citation.by_type(type)
+    where(:type => type)
+  end
+
   def Citation.sorted_by(sorter)
     sorter.downcase!
     #Since primary author and date is default, it is already sorted that way
     unless sorter == "primary author and date(default)"
       order(sorter)
+    end
+  end
+
+  def Citation.type_from_ris_type(type)
+    case type
+    when 'JOUR', 'MGZN'
+      ArticleCitation
+    when 'BOOK'
+      BookCitation
+    when 'CHAP'
+      ChapterCitation
+    when 'CONF'
+      ConferenceCitation
+    when 'RPRT'
+      ReportCitation
+    when 'THES'
+      ThesisCitation
+    else
+      Citation
+    end
+  end
+
+  def Citation.from_ris(ris_text, pdf_folder = nil)
+    parser = RisParser::RisParser.new
+    trans = RisParser::RisParserTransform.new
+    parsed_text = trans.apply(parser.parse(ris_text))
+    parsed_text.collect do |stanza|
+      citation_from_ris_stanza(stanza, pdf_folder)
+    end
+  end
+
+  def get_attribute_from_ris_stanza(stanza, attribute_name, ris_name=nil)
+    ris_name = attribute_name.to_sym unless ris_name
+    self.send(attribute_name + "=", stanza[ris_name])
+  end
+
+  def get_attributes_from_ris_stanza(stanza, attribute_array)
+    attribute_array.each do |attribute_name|
+      get_attribute_from_ris_stanza(stanza, attribute_name)
+    end
+  end
+
+  def Citation.citation_from_ris_stanza(stanza, pdf_folder)
+    citation = type_from_ris_type(stanza[:type]).new
+    same_name_attributes = ['title',
+                            'secondary_title',
+                            'series_title',
+                            'pub_year',
+                            'volume',
+                            'abstract',
+                            'doi']
+    citation.get_attributes_from_ris_stanza(stanza, same_name_attributes)
+    citation.get_attribute_from_ris_stanza(stanza, 'publication', :journal)
+    citation.date_from_ris_date(stanza[:primary_date]) if stanza[:primary_date]
+    citation.start_page_number = stanza[:start_page] unless stanza[:start_page].to_i == 0 #sometimes it is not a number
+    citation.ending_page_number = stanza[:end_page] unless stanza[:end_page].to_i == 0
+    citation.pdf_from_ris_pdf(stanza[:pdf], pdf_folder) if pdf_folder && stanza[:pdf]
+
+    citation.save
+    citation.authors_from_ris_authors(stanza[:authors])
+    citation
+  end
+
+  def date_from_ris_date(ris_date)
+    if ris_date.to_i != 0 #it is just an integer string
+      self.pub_date = Date.new(ris_date.to_i)
+    else
+      self.pub_date = Date.parse(ris_date)
+    end
+  end
+
+  def pdf_from_ris_pdf(ris_pdf, pdf_folder)
+    ris_pdf.each_line do |line|
+      not_internal_path = line.sub('internal-pdf://', '')
+      not_internal_path.strip!
+      real_path = Rails.root.to_s + '/' + pdf_folder + '/' + not_internal_path
+      if File.exist?(real_path)
+        self.pdf = File.open(real_path)
+      else
+        p "No such file: #{real_path}"
+      end
+    end
+  end
+
+  def authors_from_ris_authors(ris_authors)
+    ris_authors.each_with_index do |author_name, index|
+      self.authors.create(:name => author_name, :seniority => index)
     end
   end
 
@@ -132,8 +224,8 @@ class Citation < ActiveRecord::Base
   def bib_hash
     hash = {
       :abstract   => abstract,
-      :author     => authors.collect { |author| "#{author.given_name} #{author.middle_name} #{author.sur_name}"}.join(' and '),
-      :editor     => editors.collect { |editor| "#{editor.given_name} #{editor.middle_name} #{editor.sur_name}"}.join(' and '),
+      :author     => authors.collect { |author| author.full_name }.join(' and '),
+      :editor     => editors.collect { |editor| editor.full_name }.join(' and '),
       :title      => title,
       :publisher  => publisher,
       :year       => pub_year.to_s,
@@ -149,20 +241,18 @@ class Citation < ActiveRecord::Base
   end
 
   def to_enw
-    endnote = "%0 "
-    endnote += endnote_type
-    endnote += "%T #{title}\n"
-    authors.each { |author| endnote += "%A #{author.formatted}\n" }
-    editors.each { |editor| endnote += "%E #{editor.formatted}\n" }
+    endnote = "%0 #{endnote_type}"
+    endnote += title_to_enw
+    endnote += authors.to_enw
+    endnote += editors.to_enw
     endnote += endnote_publication_data
-    endnote += "%V #{volume}\n" if volume.present?
-    endnote += "%P #{start_page_number}-#{ending_page_number}\n" if start_page_number
-    endnote += "%D #{pub_year}" if pub_year
-    endnote += "\n%X #{abstract}" if abstract
-    endnote += "\n%R #{doi}" if doi
-    endnote += "\n%U #{publisher_url}" if publisher_url
-    endnote += "\n%@ #{isbn}" if isbn
-    endnote
+    endnote += volume_to_enw
+    endnote += page_numbers_to_enw
+    endnote += pub_year_to_enw
+    endnote += abstract_to_enw
+    endnote += doi_to_enw
+    endnote += publisher_url_to_enw
+    endnote += isbn_to_enw
   end
 
   def self.select_options
@@ -202,6 +292,10 @@ class Citation < ActiveRecord::Base
     end
   end
 
+  def volume_to_enw
+    volume.present? ? "%V #{volume}\n" : ""
+  end
+
   def page_numbers
     if start_page_number.to_i < ending_page_number.to_i
       "#{start_page_number}-#{ending_page_number}"
@@ -222,6 +316,34 @@ class Citation < ActiveRecord::Base
     else
       "Page #{page_numbers}"
     end
+  end
+
+  def page_numbers_to_enw
+    page_numbers.blank? ? "" : "%P #{page_numbers}\n"
+  end
+
+  def pub_year_to_enw
+    "%D #{pub_year}"
+  end
+
+  def abstract_to_enw
+    abstract? ? "\n%X #{abstract}" : ""
+  end
+
+  def doi_to_enw
+    doi? ? "\n%R #{doi}" : ""
+  end
+
+  def isbn_to_enw
+    isbn? ? "\n%@ #{isbn}" : ""
+  end
+
+  def publisher_url_to_enw
+    publisher_url? ? "\n%U #{publisher_url}" : ""
+  end
+
+  def title_to_enw
+    "%T #{title}\n"
   end
 
   def author_and_year

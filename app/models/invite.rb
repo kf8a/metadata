@@ -8,7 +8,7 @@ class Invite < ActiveRecord::Base
   scope :unsent_invitations, :conditions => {:redeemed_at => nil, :invite_code => nil}
 
   def invited?
-    !!self.invite_code && !!self.invited_at
+    self.invite_code.present? && self.invited_at.present?
   end
 
   def invite!
@@ -43,4 +43,3 @@ end
 #  redeemed_at  :datetime
 #  glbrc_member :boolean
 #
-

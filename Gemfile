@@ -57,6 +57,10 @@ gem 'barista'
 
 gem 'has_scope'
 
+gem 'ris_parser', :git => 'git://github.com/kf8a/ris_parser.git', :branch => 'develop'
+
+gem 'exception_notification'
+
 group :development, :test  do
   # bundler requires these gems in development
   # gem "rails-footnotes"
@@ -79,7 +83,6 @@ group :test do
 
   #Cucumber stuff
   gem 'capybara', '0.4.1.2'
-  gem "factory_girl"
   gem 'cucumber-rails', '0.4.1'
   gem 'spork'
   gem 'launchy'

@@ -7,6 +7,13 @@ class Editor < ActiveRecord::Base
 
   validates_presence_of :seniority
 
+  def Editor.to_enw
+    all.collect { |editor| editor.to_enw }.join
+  end
+
+  def to_enw
+    "%E #{formatted}\n"
+  end
 end
 
 
@@ -26,4 +33,3 @@ end
 #  updated_at  :datetime
 #  suffix      :string(255)
 #
-

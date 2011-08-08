@@ -617,4 +617,3 @@ end
 #  deprecation_notice         :text
 #  number_of_released_records :integer
 #
-

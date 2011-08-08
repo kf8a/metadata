@@ -4,6 +4,10 @@ class CitationsController < ApplicationController
   cache_sweeper :citation_sweeper
   before_filter :admin?, :only => [:new, :create, :edit, :update, :destroy] unless Rails.env == 'development'
 
+  has_scope :by_type,   :as => :type
+  has_scope :sorted_by, :as => :sort_by
+  has_scope :by_date,   :as => :date
+
   def index
     store_location
     citations = website.citations
@@ -26,12 +30,12 @@ class CitationsController < ApplicationController
   end
 
   def filtered
-    @type, @sort_by = params[:type], params[:sort_by]
-    @citations = website.citations.sorted_by(@sort_by).by_type(@type)
+    @type = params[:type]
+    @sort_by = params[:sort_by]
+    @citations = apply_scopes(website.citations)
     @submitted_citations = @citations.submitted
     @forthcoming_citations = @citations.forthcoming
-    date = params[:date].presence
-    @citations = date ? @citations.by_date(date) : @citations.published
+    @citations = @citations.published
 
     index_responder
   end

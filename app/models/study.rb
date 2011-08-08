@@ -62,4 +62,3 @@ end
 #  url         :string(255)
 #  code        :string(255)
 #
-
