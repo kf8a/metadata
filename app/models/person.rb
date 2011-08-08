@@ -67,7 +67,7 @@ class Person < ActiveRecord::Base
   end
 
   def full_name
-    normal_given_name + " "  + sur_name
+    "#{normal_given_name} #{sur_name}"
   end
 
   def last_name_first
