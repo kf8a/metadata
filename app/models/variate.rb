@@ -32,7 +32,7 @@ class Variate < ActiveRecord::Base
         variate.measurement_scale = 'ordinal'
       elsif variate_eml.css('measurementScale nominal').count == 1
         variate.measurement_scale = 'nominal'
-        variate.description = variate_eml.css('definition').first.text
+        variate.description = variate_eml.css('definition').first.text if variate.description.blank?
       elsif variate_eml.css('measurementScale dateTime').count == 1
         variate.measurement_scale = 'dateTime'
         variate.date_format = variate_eml.css('formatString').first.text
