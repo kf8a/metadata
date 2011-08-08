@@ -185,6 +185,22 @@ class PersonTest < ActiveSupport::TestCase
   end
 
   #TODO a test needs to be written for find_all_with_dataset
+  
+  # personnelDB
+  context 'lter_personelDB updates' do
+    setup do 
+      @person = Factory.create(:person)
+    end
+    
+    should 'respond to to_lter_personneldb' do
+      assert @person.responds_to('to_lter_personneldb')
+    end
+
+    should 'return a basic valid xml structure' do
+    
+    end
+
+  end
 end
 
 
