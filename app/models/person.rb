@@ -29,10 +29,12 @@ class Person < ActiveRecord::Base
       person.country = person_eml.css('address country').text
 
       person_eml.css('phone').each do |phone_eml|
-        if phone_eml.attributes['phonetype'].value == 'phone'
-          person.phone = phone_eml.text
-        elsif phone_eml.attributes['phonetype'].value == 'fax'
-          person.fax = phone_eml.text
+        phone_number = phone_eml.text
+        phone_type = phone_eml.attributes['phonetype'].value
+        if phone_type == 'phone'
+          person.phone = phone_number
+        elsif phone_type == 'fax'
+          person.fax = phone_number
         end
       end
 
