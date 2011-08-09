@@ -1,4 +1,6 @@
 require 'builder'
+require 'nokogiri'
+require 'open-uri'
 
 class Dataset < ActiveRecord::Base
   has_many :datatables, :order => 'name'
@@ -23,7 +25,11 @@ class Dataset < ActiveRecord::Base
   end
 
   def self.from_eml(eml_text)
-    eml_doc = Nokogiri::XML(eml_text)
+    if eml_text.start_with?('http://')
+      eml_doc = Nokogiri::XML(open(eml_text))
+    else
+      eml_doc = Nokogiri::XML(eml_text)
+    end
     dataset_eml = eml_doc.css('dataset')
     dataset = self.new
     dataset.title = dataset_eml.css('title').text

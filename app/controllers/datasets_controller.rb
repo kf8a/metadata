@@ -82,7 +82,9 @@ class DatasetsController < ApplicationController
   # POST /datasets
   # POST /datasets.xml
   def create
-    if params[:dataset][:eml_file].present?
+    if params[:eml_link].present?
+      @dataset = Dataset.from_eml(params[:eml_link])
+    elsif params[:dataset][:eml_file].present?
       @dataset = Dataset.from_eml_file(params[:dataset][:eml_file])
     else
       @dataset = Dataset.new(params[:dataset])
