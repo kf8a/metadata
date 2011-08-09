@@ -79,6 +79,12 @@ describe Dataset do
       imported_dataset = Dataset.from_eml(eml_content)
       imported_dataset.datatables.should == @dataset_with_datatable.datatables
     end
+
+    it "should import a dataset from a website" do
+      uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-nwt.419.3'
+      imported_dataset = Dataset.from_eml(uri)
+      imported_dataset.should be_a Dataset
+    end
   end
 end
 

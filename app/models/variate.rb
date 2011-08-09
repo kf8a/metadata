@@ -26,7 +26,7 @@ class Variate < ActiveRecord::Base
         variate.data_type = variate_eml.css('numberType').first.text
       elsif variate_eml.css('measurementScale ratio').count == 1
         variate.measurement_scale = 'ratio'
-        variate.precision = variate_eml.css('precision').first.text.to_f
+        variate.precision = variate_eml.css('precision').first.try(:text).try(:to_f)
         variate.data_type = variate_eml.css('numberType').first.text
       elsif variate_eml.css('measurementScale ordinal').count == 1
         variate.measurement_scale = 'ordinal'

@@ -56,11 +56,11 @@ class Datatable < ActiveRecord::Base
 
   def self.from_eml(datatable_eml)
     url = datatable_eml.css('physical distribution online url').text
-    table_id = url.split('/')[-1].gsub('.csv', '') #TODO fix this in case url is empty
+    table_id = url.split('/')[-1].to_s.gsub('.csv', '')
     table = Datatable.find_by_id(table_id.to_i)
     unless table.present?
       table = Datatable.new
-      table.name = datatable_eml.attributes['id'].value
+      table.name = datatable_eml.attributes['id'].try(:value)
       table.title = datatable_eml.css('entityName').text
       table.description = datatable_eml.css('entityDescription').text
       table.data_url = url
