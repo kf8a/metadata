@@ -209,7 +209,6 @@ class Dataset < ActiveRecord::Base
   def eml_dataset
     @eml.dataset do
       eml_resource_group
-      eml_keywords
       contact_info
       eml_dataset_protocols if protocols.present?
       datatables.each { |table| table.to_eml(@eml) if table.valid_for_eml }
@@ -217,9 +216,11 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_keywords
-    @eml.keywordSet do
-      keyword_list.each do |keyword_tag|
-        @eml.keyword keyword_tag.to_s
+    if keyword_list.present?
+      @eml.keywordSet do
+        keyword_list.each do |keyword_tag|
+          @eml.keyword keyword_tag.to_s
+        end
       end
     end
   end
@@ -230,6 +231,7 @@ class Dataset < ActiveRecord::Base
     eml_people
     eml_abstract
     keyword_sets
+    eml_keywords
     eml_coverage
   end
 
