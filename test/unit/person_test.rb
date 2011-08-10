@@ -24,8 +24,14 @@ class PersonTest < ActiveSupport::TestCase
       should 'include an individualName element' do
         assert_equal 1, @parsed_eml.css('associatedParty individualName').count
       end
+
+      should 'not include an empty deliveryPoint' do
+        assert_equal 1, @parsed_eml.css('deliveryPoint').count
+      end
     end
+
   end
+
   context 'a person with some lter_roles' do
     setup do
       @first_role = Factory.create(:lter_role, :name => 'Creators')
@@ -206,6 +212,22 @@ class PersonTest < ActiveSupport::TestCase
   end
 
   #TODO a test needs to be written for find_all_with_dataset
+  
+  # personnelDB
+  context 'lter_personelDB updates' do
+    setup do 
+      @person = Factory.create(:person)
+    end
+    
+    should 'respond to to_lter_personneldb' do
+      assert @person.respond_to?('to_lter_personneldb')
+    end
+
+    should 'return a basic valid xml structure' do
+    
+    end
+
+  end
 end
 
 
