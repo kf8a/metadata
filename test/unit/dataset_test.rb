@@ -160,7 +160,7 @@ class DatasetTest < ActiveSupport::TestCase
         xsd = Nokogiri::XML::Schema(File.read("eml.xsd"))
       end
       doc = Nokogiri::XML(@dataset.to_eml)
-      assert_equal 0,  xsd.validate(doc).size
+      assert_equal [],  xsd.validate(doc)
     end
 
     should 'have a dataset element' do
@@ -301,4 +301,3 @@ end
 #  sponsor_id   :integer
 #  website_id   :integer
 #
-
