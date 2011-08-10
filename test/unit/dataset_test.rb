@@ -154,6 +154,13 @@ class DatasetTest < ActiveSupport::TestCase
       assert @dataset_with_datatable.to_eml.present?
     end
 
+    should 'follow the eml schema' do
+
+      xsd = Nokogiri::XML::Schema(File.read())
+      doc = @dataset.to_eml
+      asset_equal 0,  xsd.validate(doc).errors
+    end
+
     should 'have a dataset element' do
       eml_doc = Nokogiri::XML(@dataset.to_eml)
       assert_equal 1, eml_doc.css('dataset').count
