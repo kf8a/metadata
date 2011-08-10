@@ -129,12 +129,12 @@ class Person < ActiveRecord::Base
 
   def eml_address(eml)
     eml.address 'scope' => 'document' do
-      eml.deliveryPoint organization if organization
-      eml.deliveryPoint street_address if street_address
-      eml.city city if city
-      eml.administrativeArea locale if locale
-      eml.postalCode postal_code if postal_code
-      eml.country country if country
+      eml.deliveryPoint organization unless organization.try(:empty?)
+      eml.deliveryPoint street_address unless street_address.try(:empty?)
+      eml.city city unless city.try(:empty?)
+      eml.administrativeArea locale unless locale.try(:empty?)
+      eml.postalCode postal_code unless postal_code.try(:empty?)
+      eml.country country unless country.try(:empty?)
     end
     eml
   end

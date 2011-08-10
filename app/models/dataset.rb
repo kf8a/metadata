@@ -208,8 +208,8 @@ class Dataset < ActiveRecord::Base
 
   def eml_dataset
     @eml.dataset do
-      eml_keywords
       eml_resource_group
+      eml_keywords
       contact_info
       eml_dataset_protocols if protocols.present?
       datatables.each { |table| table.to_eml(@eml) if table.valid_for_eml }

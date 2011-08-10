@@ -154,6 +154,15 @@ class DatasetTest < ActiveSupport::TestCase
       assert @dataset_with_datatable.to_eml.present?
     end
 
+    should 'follow the eml schema' do
+      xsd = nil
+      Dir.chdir("#{Rails.root}/test/data/eml-2.1.0") do
+        xsd = Nokogiri::XML::Schema(File.read("eml.xsd"))
+      end
+      doc = Nokogiri::XML(@dataset.to_eml)
+      assert_equal 0,  xsd.validate(doc).size
+    end
+
     should 'have a dataset element' do
       eml_doc = Nokogiri::XML(@dataset.to_eml)
       assert_equal 1, eml_doc.css('dataset').count

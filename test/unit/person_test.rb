@@ -7,7 +7,7 @@ class PersonTest < ActiveSupport::TestCase
 
   context 'a person' do
     setup do
-      @person = FactoryGirl.create(:person)
+      @person = FactoryGirl.create(:person, :street_address=> '34 main st. ', :organization => '')
     end
 
     context 'converted to eml' do
