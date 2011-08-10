@@ -155,9 +155,12 @@ class DatasetTest < ActiveSupport::TestCase
     end
 
     should 'follow the eml schema' do
-      xsd = Nokogiri::XML::Schema(File.read("#{Rails.root}/test/data/eml-2.1.0/eml.xsd"))
-      doc = @dataset.to_eml
-      asset_equal 0,  xsd.validate(doc).errors
+      xsd = nil
+      Dir.chdir("#{Rails.root}/test/data/eml-2.1.0") do
+        xsd = Nokogiri::XML::Schema(File.read("eml.xsd"))
+      end
+      doc = Nokogiri::XML(@dataset.to_eml)
+      asset_equal 0,  xsd.validate(doc).size
     end
 
     should 'have a dataset element' do
