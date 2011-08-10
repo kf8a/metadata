@@ -6,4 +6,23 @@
   <%= form.buttons %>
 <% end %>
 
+<h2>Or import a dataset from an EML file: </h2>
+
+<%= form_for @dataset, :html => { :multipart => true } do |f| %>
+  <p>
+    <label for='dataset_eml_file'>EML File</label>
+    <%= f.file_field :eml_file %>
+  </p>
+  <p>
+    OR
+  </p>
+  <p>
+    <label for='eml_link'>EML link</label>
+    <%= url_field_tag :eml_link %>
+  </p>
+  <p>
+    <%= submit_tag "Create from EML file" %>
+  </p>
+<% end %>
+
 <%= link_to 'Back', datasets_path %>

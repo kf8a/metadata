@@ -5,8 +5,47 @@ class Variate < ActiveRecord::Base
   belongs_to :datatable
   belongs_to :unit
 
+  def self.from_eml(variate_eml)
+    variate_name = variate_eml.css('attributeName').text
+    variate = Variate.find_by_name(variate_name)
+    unless variate.present?
+      variate = Variate.new
+      variate.name = variate_name
+      variate.description = variate_eml.css('attributeDefinition').text
+      if variate_eml.css('measurementScale interval').count == 1
+        variate.measurement_scale = 'interval'
+        unit_eml = variate_eml.css('measurementScale interval unit').first
+        if unit_eml.css('standardUnit').count == 1
+          unit_name = unit_eml.css('standardUnit').first.text
+          unit = Unit.find_or_create_by_name_and_in_eml(unit_name, true)
+        else
+          unit_name = unit_eml.css('customUnit').first.text
+          unit = Unit.find_or_create_by_name_and_in_eml(unit_name, false)
+        end
+        variate.precision = variate_eml.css('precision').first.text.to_f
+        variate.data_type = variate_eml.css('numberType').first.text
+      elsif variate_eml.css('measurementScale ratio').count == 1
+        variate.measurement_scale = 'ratio'
+        variate.precision = variate_eml.css('precision').first.try(:text).try(:to_f)
+        variate.data_type = variate_eml.css('numberType').first.text
+      elsif variate_eml.css('measurementScale ordinal').count == 1
+        variate.measurement_scale = 'ordinal'
+      elsif variate_eml.css('measurementScale nominal').count == 1
+        variate.measurement_scale = 'nominal'
+        variate.description = variate_eml.css('definition').first.text if variate.description.blank?
+      elsif variate_eml.css('measurementScale dateTime').count == 1
+        variate.measurement_scale = 'dateTime'
+        variate.date_format = variate_eml.css('formatString').first.text
+      end
+
+      variate.save
+    end
+
+    variate
+  end
+
   def valid_for_eml
-    measurement_scale.presence && description.presence
+    measurement_scale.present? && description.present?
   end
 
   def to_eml(xml = Builder::XmlMarkup.new)
@@ -122,4 +161,3 @@ end
 #  query                   :text
 #  variate_theme_id        :integer
 #
-

@@ -12,7 +12,5 @@ Feature: Download data
     Given an old datatable exists with title: "Old Datatable", number_of_released_records: 0
     When I go to the datatable page
       And I follow "Edit"
-    Then I should see "Currently, 0 are approved out of 1"
 
     When I press "Approve all current records"
-    Then I should see "Currently, 1 are approved out of 1"

@@ -93,13 +93,13 @@ class DatatablesControllerTest < ActionController::TestCase
         @sponsor  = Factory.create :sponsor, :data_use_statement => 'smoke em if you got em'
         dataset   = Factory.create :dataset, :sponsor => @sponsor
         datatable = Factory.create :datatable, :dataset => dataset
-        
+
         get :show, :id => datatable, :version => 0
       end
 
       should respond_with :success
     end
-    
+
     context 'GET :edit' do
       setup do
         get :edit, :id => @table
@@ -127,7 +127,7 @@ class DatatablesControllerTest < ActionController::TestCase
       should respond_with_content_type(:csv)
       should 'give a real climdb document' do
         #TODO This should really be parsed in some way
-        assert_equal "!date\n", response.body
+        assert_equal "!date", response.body.strip
       end
     end
 

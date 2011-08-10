@@ -1,4 +1,6 @@
 require 'builder'
+require 'nokogiri'
+require 'open-uri'
 
 class Dataset < ActiveRecord::Base
   has_many :datatables, :order => 'name'
@@ -18,6 +20,46 @@ class Dataset < ActiveRecord::Base
 
   acts_as_taggable_on :keywords
 
+  def self.from_eml_file(file)
+    from_eml(file.read)
+  end
+
+  def self.from_eml(eml_text)
+    if eml_text.start_with?('http://')
+      eml_doc = Nokogiri::XML(open(eml_text))
+    else
+      eml_doc = Nokogiri::XML(eml_text)
+    end
+    dataset_eml = eml_doc.css('dataset')
+    dataset = self.new
+    dataset.title = dataset_eml.css('title').text
+    dataset.abstract = dataset_eml.css('abstract para').text
+    dataset.initiated = dataset_eml.css('temporalCoverage rangeOfDates beginDate calendarDate').text
+    dataset.completed = dataset_eml.css('temporalCoverage rangeOfDates endDate calendarDate').text
+
+    eml_doc.css('protocol').each do |protocol_eml|
+      dataset.protocols << Protocol.from_eml(protocol_eml)
+    end
+
+    dataset_eml.css('associatedParty').each do |person_eml|
+      dataset.people << Person.from_eml(person_eml)
+    end
+
+    dataset_eml.css('dataTable').each do |datatable_eml|
+      dataset.datatables << Datatable.from_eml(datatable_eml)
+    end
+
+    dataset_eml.css('keywordSet keyword').each do |keyword_eml|
+      dataset.keyword_list << keyword_eml.text
+    end
+
+    dataset.save
+
+    dataset
+
+    #  eml_custom_unit_list if custom_units.present?
+  end
+
   def to_label
     "#{title} (#{dataset})"
   end
@@ -27,7 +69,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def datatable_people
-    datatables.collect { |table| table.personnel.keys }.flatten
+    datatables.collect { |table| table.datatable_personnel.keys }.flatten
   end
 
   def valid_request?(subdomain)
@@ -154,15 +196,7 @@ class Dataset < ActiveRecord::Base
 
   def eml_protocols
     (protocols + datatable_protocols).flatten.uniq.each do | protocol |
-      @eml.protocol 'id' => "protocol_#{protocol.id}" do
-        @eml.title  protocol.title
-        eml_creator
-        @eml.distribution do
-          @eml.online do
-            @eml.url "http://#{website.name}.kbs.msu.edu/protocols/#{protocol.id}"
-          end
-        end
-      end
+      protocol.to_eml(@eml)
     end
   end
 
@@ -174,10 +208,19 @@ class Dataset < ActiveRecord::Base
 
   def eml_dataset
     @eml.dataset do
+      eml_keywords
       eml_resource_group
       contact_info
       eml_dataset_protocols if protocols.present?
       datatables.each { |table| table.to_eml(@eml) if table.valid_for_eml }
+    end
+  end
+
+  def eml_keywords
+    @eml.keywordSet do
+      keyword_list.each do |keyword_tag|
+        @eml.keyword keyword_tag.to_s
+      end
     end
   end
 
@@ -197,7 +240,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_people
-    [people, datatable_people].flatten.uniq.each do |person|
+    [people, datatable_people].flatten.uniq.compact.each do |person|
       person.to_eml(@eml)
     end
   end
@@ -272,4 +315,3 @@ end
 #  sponsor_id   :integer
 #  website_id   :integer
 #
-
