@@ -28,13 +28,7 @@ class Person < ActiveRecord::Base
       person.postal_code = person_eml.css('address postalCode').text
       person.country = person_eml.css('address country').text
 
-      person_eml.css('phone').each do |phone_eml|
-        if phone_eml.attributes['phonetype'].value == 'phone'
-          person.phone = phone_eml.text
-        elsif phone_eml.attributes['phonetype'].value == 'fax'
-          person.fax = phone_eml.text
-        end
-      end
+      person_eml.css('phone').each { |phone_eml| person.phone_from_eml(phone_eml) }
 
       person.email = person_eml.css('electronicMailAddress').text
       role_name = person_eml.css('role').text
@@ -44,6 +38,16 @@ class Person < ActiveRecord::Base
     end
 
     person
+  end
+
+  def phone_from_eml(phone_eml)
+    phone_number = phone_eml.text
+    phone_type = phone_eml.attributes['phonetype'].value
+    if phone_type == 'phone'
+      self.phone = phone_number
+    elsif phone_type == 'fax'
+      self.fax = phone_number
+    end
   end
 
   def get_committee_roles
@@ -63,7 +67,7 @@ class Person < ActiveRecord::Base
   end
 
   def full_name
-    normal_given_name + " "  + sur_name
+    "#{normal_given_name} #{sur_name}"
   end
 
   def last_name_first
