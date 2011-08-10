@@ -134,8 +134,6 @@ class DatasetsControllerTest < ActionController::TestCase
   context "eml harvester document is used as parameter for index" do
     setup do
       @dataset = Factory.create(:dataset)
-      website  = Factory.create(:website, :name=>'lter')
-      @dataset.website = website
       get :index, :Dataset => @dataset
     end
 

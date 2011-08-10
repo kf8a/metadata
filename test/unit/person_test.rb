@@ -24,11 +24,12 @@ class PersonTest < ActiveSupport::TestCase
       should 'include an individualName element' do
         assert_equal 1, @parsed_eml.css('associatedParty individualName').count
       end
+
+      should 'not include an empty deliveryPoint' do
+        assert_equal 1, @parsed_eml.css('deliveryPoint').count
+      end
     end
 
-    should 'not include an empty deliveryPoint' do
-      assert_equal 1, @parsed_eml.css('deliveryPoint').count
-    end
   end
 
   context 'a person with some lter_roles' do
