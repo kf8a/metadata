@@ -49,6 +49,10 @@ class Dataset < ActiveRecord::Base
       dataset.datatables << Datatable.from_eml(datatable_eml)
     end
 
+    dataset_eml.css('keywordSet keyword').each do |keyword_eml|
+      dataset.keyword_list << keyword_eml.text
+    end
+
     dataset.save
 
     dataset
@@ -204,10 +208,19 @@ class Dataset < ActiveRecord::Base
 
   def eml_dataset
     @eml.dataset do
+      eml_keywords
       eml_resource_group
       contact_info
       eml_dataset_protocols if protocols.present?
       datatables.each { |table| table.to_eml(@eml) if table.valid_for_eml }
+    end
+  end
+
+  def eml_keywords
+    @eml.keywordSet do
+      keyword_list.each do |keyword_tag|
+        @eml.keyword keyword_tag.to_s
+      end
     end
   end
 
