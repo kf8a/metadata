@@ -25,7 +25,12 @@ class PersonTest < ActiveSupport::TestCase
         assert_equal 1, @parsed_eml.css('associatedParty individualName').count
       end
     end
+
+    should 'not include an empty deliveryPoint' do
+      assert_equal 1, @parsed_eml.css('deliveryPoint').count
+    end
   end
+
   context 'a person with some lter_roles' do
     setup do
       @first_role = Factory.create(:lter_role, :name => 'Creators')
@@ -214,7 +219,7 @@ class PersonTest < ActiveSupport::TestCase
     end
     
     should 'respond to to_lter_personneldb' do
-      assert @person.responds_to('to_lter_personneldb')
+      assert @person.respond_to?('to_lter_personneldb')
     end
 
     should 'return a basic valid xml structure' do

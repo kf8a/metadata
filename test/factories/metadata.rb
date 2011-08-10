@@ -41,6 +41,7 @@ FactoryGirl.define do
   factory :person do
     sur_name    'bauer'
     given_name  'bill'
+    city        'hickory corners'
   end
 
   factory :project do
