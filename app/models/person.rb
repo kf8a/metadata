@@ -139,6 +139,10 @@ class Person < ActiveRecord::Base
     @eml ||= Builder::XmlMarkup.new
   end
 
+  def to_lter_personneldb
+    #TODO fill this in
+  end
+
 end
 
 
