@@ -276,8 +276,10 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_coverage
+    if initiated.present? && completed.present?
     @eml.coverage do
-      eml_temporal_coverage if initiated.present? && completed.present?
+      eml_temporal_coverage 
+    end
     end
   end
 

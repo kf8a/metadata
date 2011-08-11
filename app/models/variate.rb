@@ -64,6 +64,8 @@ class Variate < ActiveRecord::Base
   private
   def eml_measurement_scale
     @eml.measurementScale do
+      self.measurement_scale = 'dateTime' if measurement_scale == 'datetime'
+    
       @eml.tag!(measurement_scale) do
         case self.measurement_scale
         when 'interval' then eml_interval
@@ -89,7 +91,7 @@ class Variate < ActiveRecord::Base
   end
 
   def eml_date_time
-    @eml.formatString date_format
+    @eml.formatString date_format.empty? ? 'YYYY-MM-DD' : date_format
     @eml.dateTimePrecision '86400'
     @eml.dateTimeDomain do
       @eml.bounds do
@@ -114,28 +116,17 @@ class Variate < ActiveRecord::Base
   end
 
   def eml_ratio
-    @eml.unit do
-      eml_precision_and_number_type
-    end
+    @eml.unit
+    eml_precision_and_number_type
   end
 
   def eml_precision_and_number_type
-    self.precision ? eml_precision : default_eml_precision
+    @eml.precision precision.to_s if precision
     @eml.numericDomain do
       @eml.numberType data_type
     end
   end
 
-  def eml_precision
-    @eml.precision precision.to_s
-  end
-
-  def default_eml_precision
-    @eml.precision do
-      '1'
-      @eml.comment!("default precision none specified")
-    end
-  end
 end
 
 
