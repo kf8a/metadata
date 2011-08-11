@@ -71,7 +71,7 @@ describe Dataset do
       assert @dataset_with_datatable.save
       eml_content = @dataset_with_datatable.to_eml
       imported_dataset = Dataset.from_eml(eml_content)
-      imported_dataset.people.should include(jon)
+      imported_dataset.people.where(:given_name => 'jon').should_not be_empty
     end
 
     it "should import the right datatable" do

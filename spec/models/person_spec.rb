@@ -11,7 +11,7 @@ describe Person do
       eml_content = @person.to_eml
       eml_element = Nokogiri::XML(eml_content).css('associatedParty').first
       imported_person = Person.from_eml(eml_element)
-      imported_person.should == @person
+      imported_person.given_name.should == @person.given_name
     end
 
     it "should import new people" do
