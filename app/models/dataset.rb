@@ -209,7 +209,6 @@ class Dataset < ActiveRecord::Base
   def eml_dataset
     @eml.dataset do
       eml_resource_group
-      eml_keywords
       contact_info
       eml_dataset_protocols if protocols.present?
       datatables.each { |table| table.to_eml(@eml) if table.valid_for_eml }
@@ -274,8 +273,10 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_coverage
+    if initiated.present? && completed.present?
     @eml.coverage do
-      eml_temporal_coverage if initiated.present? && completed.present?
+      eml_temporal_coverage 
+    end
     end
   end
 
