@@ -105,7 +105,7 @@ class Person < ActiveRecord::Base
   end
 
   def to_eml(eml = Builder::XmlMarkup.new)
-    eml.associatedParty 'id' => id, 'scope' => 'document' do
+    eml.associatedParty do
       eml_individual_name(eml)
       eml_address(eml)
       if phone
@@ -128,7 +128,7 @@ class Person < ActiveRecord::Base
   end
 
   def eml_address(eml)
-    eml.address 'scope' => 'document' do
+    eml.address  do
       eml.deliveryPoint organization unless organization.try(:empty?)
       eml.deliveryPoint street_address unless street_address.try(:empty?)
       eml.city city unless city.try(:empty?)
