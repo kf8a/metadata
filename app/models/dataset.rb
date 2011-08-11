@@ -216,9 +216,11 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_keywords
-    @eml.keywordSet do
-      keyword_list.each do |keyword_tag|
-        @eml.keyword keyword_tag.to_s
+    if keyword_list.present?
+      @eml.keywordSet do
+        keyword_list.each do |keyword_tag|
+          @eml.keyword keyword_tag.to_s
+        end
       end
     end
   end
@@ -229,6 +231,7 @@ class Dataset < ActiveRecord::Base
     eml_people
     eml_abstract
     keyword_sets
+    eml_keywords
     eml_coverage
   end
 

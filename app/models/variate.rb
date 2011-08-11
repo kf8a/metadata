@@ -116,7 +116,7 @@ class Variate < ActiveRecord::Base
   end
 
   def eml_ratio
-    @eml.unit
+    @eml_unit
     eml_precision_and_number_type
   end
 

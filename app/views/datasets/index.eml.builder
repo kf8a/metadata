@@ -10,7 +10,7 @@ xml.hrv:harvestList, 'xmlns:hrv' => 'eml://ecoinformatics.org/harvestList' do
         xml.identifier dataset.metacat_id.nil? ? dataset.id : dataset.metacat_id 
         xml.revision dataset.version
       end
-      xml.documentType "eml://ecoinformatics.org/eml-2.0.0"
+      xml.documentType "eml://ecoinformatics.org/eml-2.1.0"
       xml.documentURL  url_for(:controller => 'datasets', :action => 'show', :id => dataset, :format => :eml, :host => 'sebewa.kbs.msu.edu') 
     end
 
