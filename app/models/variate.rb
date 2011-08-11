@@ -65,7 +65,7 @@ class Variate < ActiveRecord::Base
   def eml_measurement_scale
     @eml.measurementScale do
       self.measurement_scale = 'dateTime' if measurement_scale == 'datetime'
-    
+
       @eml.tag!(measurement_scale) do
         case self.measurement_scale
         when 'interval' then eml_interval
@@ -91,7 +91,7 @@ class Variate < ActiveRecord::Base
   end
 
   def eml_date_time
-    @eml.formatString date_format.empty? ? 'YYYY-MM-DD' : date_format
+    @eml.formatString date_format.blank? ? 'YYYY-MM-DD' : date_format
     @eml.dateTimePrecision '86400'
     @eml.dateTimeDomain do
       @eml.bounds do
