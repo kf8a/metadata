@@ -111,10 +111,8 @@ class Variate < ActiveRecord::Base
   end
 
   def eml_interval
-    @eml.unit do
-      eml_unit
-      eml_precision_and_number_type
-    end
+    eml_unit
+    eml_precision_and_number_type
   end
 
   def eml_ratio
