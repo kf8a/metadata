@@ -79,10 +79,12 @@ class Variate < ActiveRecord::Base
   end
 
   def eml_unit
-    if unit.try(:in_eml)
-      @eml.standardUnit unit_name
-    else
-      @eml.customUnit unit_name
+    @eml.unit do 
+      if unit.try(:in_eml)
+        @eml.standardUnit unit_name
+      else
+        @eml.customUnit unit_name
+      end
     end
   end
 
