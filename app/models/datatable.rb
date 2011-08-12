@@ -220,7 +220,7 @@ class Datatable < ActiveRecord::Base
     @eml = xml
     @eml.dataTable 'id' => name do
       @eml.entityName title
-      @eml.entityDescription description.gsub(/<\/?[^>]*>/, "")
+      @eml.entityDescription description.gsub(/<\/?[^>]*>/, "") unless description.empty?
       eml_protocols if non_dataset_protocols.present?
       eml_physical
       eml_attributes
