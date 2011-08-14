@@ -222,7 +222,7 @@ class Datatable < ActiveRecord::Base
       @eml.entityName title
       if description 
         text =  description.gsub(/<\/?[^>]*>/, "") 
-        @eml.entityDescription unless text.strip.empty?
+        @eml.entityDescription text unless text.strip.empty?
       end
 #      eml_protocols if non_dataset_protocols.present?
       eml_physical
