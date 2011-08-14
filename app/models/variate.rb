@@ -79,10 +79,12 @@ class Variate < ActiveRecord::Base
   end
 
   def eml_unit
-    if unit.try(:in_eml)
-      @eml.standardUnit unit_name
-    else
-      @eml.customUnit unit_name
+    @eml.unit do 
+      if unit.try(:in_eml)
+        @eml.standardUnit unit_name
+      else
+        @eml.customUnit unit_name
+      end
     end
   end
 
@@ -109,14 +111,12 @@ class Variate < ActiveRecord::Base
   end
 
   def eml_interval
-    @eml.unit do
-      eml_unit
-      eml_precision_and_number_type
-    end
+    eml_unit
+    eml_precision_and_number_type
   end
 
   def eml_ratio
-    @eml_unit
+    eml_unit
     eml_precision_and_number_type
   end
 
