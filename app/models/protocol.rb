@@ -25,7 +25,7 @@ class Protocol < ActiveRecord::Base
 
   def to_eml(xml = Builder::XmlMarkup.new)
     @eml = xml
-    @eml.protocol 'id' => "protocol_#{id}" do
+    @eml.methods 'id' => "protocol_#{id}" do
       @eml.title  title
       eml_creator
       @eml.distribution do
