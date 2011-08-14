@@ -133,7 +133,7 @@ class Person < ActiveRecord::Base
       eml.deliveryPoint street_address  if street_address and !street_address.empty?
       eml.city city if city and !city.empty?
       eml.administrativeArea locale if locale and ! locale.empty?
-      eml.postalCode postal_code if postal_code
+      eml.postalCode postal_code if postal_code and !postal_code.empty?
       eml.country country if country and !country.empty? 
     end
     eml
