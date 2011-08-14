@@ -121,8 +121,8 @@ class Person < ActiveRecord::Base
 
   def eml_individual_name(eml)
     eml.individualName do
-      eml.givenName given_name
-      eml.surName sur_name
+      eml.givenName given_name unless given_name.try(:empty?)
+      eml.surName sur_name unless sur_name.try(:empty?)
     end
     eml
   end
