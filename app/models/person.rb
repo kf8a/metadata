@@ -121,20 +121,20 @@ class Person < ActiveRecord::Base
 
   def eml_individual_name(eml)
     eml.individualName do
-      eml.givenName given_name unless given_name.try(:empty?)
-      eml.surName sur_name unless sur_name.try(:empty?)
+      eml.givenName given_name if given_name
+      eml.surName sur_name if sur_name
     end
     eml
   end
 
   def eml_address(eml)
     eml.address  do
-      eml.deliveryPoint organization unless organization.try(:empty?)
-      eml.deliveryPoint street_address unless street_address.try(:empty?)
-      eml.city city unless city.try(:empty?)
-      eml.administrativeArea locale unless locale.try(:empty?)
-      eml.postalCode postal_code unless postal_code.try(:empty?)
-      eml.country country unless country.try(:empty?)
+      eml.deliveryPoint organization if organization
+      eml.deliveryPoint street_address  if street_address
+      eml.city city if city
+      eml.administrativeArea locale if locale
+      eml.postalCode postal_code if postal_code
+      eml.country country if country
     end
     eml
   end
