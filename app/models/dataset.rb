@@ -236,7 +236,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_creator
-    @eml.creator 'id' => 'KBS LTER' do
+    @eml.creator do
       @eml.positionName 'Data Manager'
     end
   end
