@@ -200,9 +200,9 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_dataset_protocols
-    @eml.methods do
-      protocols.each { |protocol| protocol.to_eml_ref(@eml) }
-    end
+    # @eml.methods do
+    #   protocols.each { |protocol| protocol.to_eml_ref(@eml) }
+    # end
   end
 
   def eml_dataset

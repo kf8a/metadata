@@ -399,9 +399,9 @@ class Datatable < ActiveRecord::Base
   end
 
   def eml_protocols
-    @eml.methods do
-      non_dataset_protocols.each { |protocol| protocol.to_eml_ref(@eml) }
-    end
+    # @eml.methods do
+    #   non_dataset_protocols.each { |protocol| protocol.to_eml_ref(@eml) }
+    # end
   end
 
   def eml_data_format
