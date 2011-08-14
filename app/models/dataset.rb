@@ -119,8 +119,8 @@ class Dataset < ActiveRecord::Base
         'packageId'           => package_id,
         'system'              => 'KBS LTER') do
       eml_access
-      eml_protocols
       eml_dataset
+      eml_protocols
       eml_custom_unit_list if custom_units.present?
     end
   end
