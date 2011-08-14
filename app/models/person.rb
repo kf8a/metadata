@@ -134,7 +134,7 @@ class Person < ActiveRecord::Base
       eml.city city if city
       eml.administrativeArea locale if locale
       eml.postalCode postal_code if postal_code
-      eml.country country if country
+      eml.country country unless country.empty?
     end
     eml
   end
