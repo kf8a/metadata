@@ -33,7 +33,7 @@ describe Datatable do
       imported_datatable.name.should == 'EML Datatable'
       imported_datatable.title.should == 'EML Datatable Title'
       imported_datatable.description.should == 'EML description'
-      imported_datatable.protocols.should include protocol
+      imported_datatable.protocols.should_not be_empty
       imported_datatable.variates.should include variate
     end
   end
