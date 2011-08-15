@@ -166,7 +166,12 @@ class Dataset < ActiveRecord::Base
   def eml_custom_unit_list
     @eml.additionalMetadata do
       @eml.metadata do
-        @eml.tag!('stmml:unitList', 'xsi:schemaLocation' => " http://lter.kbs.msu.edu/Data/schemas/stmml.xsd") do
+        @eml.tag!('stmml:unitList', 
+                  'xmlns:stmml'        => 'http://www.xml-cml.org/schema/stmml-1.1',
+                  'xmlns:sch'          => 'http://www.ascc.net/xml/schematron',
+                  'xmlns:xsi'          => 'http://www.w3.org/2001/XMLSchema-instance',
+                  'xmlns'              => 'http://www.xml-cml.org/schema/stmml',
+                  'xsi:schemaLocation' => 'http://www.xml-cml.org/schema/stmml-1.1 stmml.xsd') do
           logger.info custom_units
           custom_units.each do |unit|
             @eml.tag!('stmml:unit',
