@@ -94,7 +94,7 @@ describe Dataset do
       imported_dataset.keyword_list.should == ['NWT', 'Niwot Ridge LTER Site', 'LTER', 'Colorado', 'aboveground', 'alpine', 'biomass', 'community change', 'fertilization plot', 'mineralization', 'nitrification', 'nitrogen deposition', 'npp', 'production', 'dry meadow', 'nitrogen cycling', 'primary productivity', 'vascular']
       datatable = imported_dataset.datatables.first
       datatable.title.should == 'aboveground_biomass_246_plots.wb'
-      datatable.protocols.all.should_not be_empty
+      datatable.variates.all.should_not be_empty
     end
   end
 end
