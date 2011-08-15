@@ -30,6 +30,7 @@ class Datatable < ActiveRecord::Base
 
   validates :title,   :presence => true
   validates :dataset, :presence => true
+  validates_uniqueness_of :name
 
   accepts_nested_attributes_for :data_contributions, :allow_destroy => true
   accepts_nested_attributes_for :variates, :allow_destroy => true
