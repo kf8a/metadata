@@ -15,13 +15,6 @@ class Variate < ActiveRecord::Base
       if variate_eml.css('measurementScale interval').count == 1
         variate.measurement_scale = 'interval'
         unit_eml = variate_eml.css('measurementScale interval unit').first
-        if unit_eml.css('standardUnit').count == 1
-          unit_name = unit_eml.css('standardUnit').first.text
-          unit = Unit.find_or_create_by_name_and_in_eml(unit_name, true)
-        else
-          unit_name = unit_eml.css('customUnit').first.text
-          unit = Unit.find_or_create_by_name_and_in_eml(unit_name, false)
-        end
         variate.precision = variate_eml.css('precision').first.text.to_f
         variate.data_type = variate_eml.css('numberType').first.text
       elsif variate_eml.css('measurementScale ratio').count == 1
@@ -36,6 +29,14 @@ class Variate < ActiveRecord::Base
       elsif variate_eml.css('measurementScale dateTime').count == 1 || variate_eml.css('measurementScale datetime').count == 1
         variate.measurement_scale = 'dateTime'
         variate.date_format = variate_eml.css('formatString').first.text
+      end
+
+      if variate_eml.css('standardUnit').count == 1
+        unit_name = variate_eml.css('standardUnit').first.text
+        variate.unit = Unit.find_or_create_by_name_and_in_eml(unit_name, true)
+      elsif variate_eml.css('customUnit').count == 1
+        unit_name = variate_eml.css('customUnit').first.text
+        variate.unit = Unit.find_or_create_by_name_and_in_eml(unit_name, false)
       end
 
       variate.save

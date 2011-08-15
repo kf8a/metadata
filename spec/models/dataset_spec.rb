@@ -98,6 +98,28 @@ describe Dataset do
       year_variate = datatable.variates.where(:name => 'year').first
       year_variate.should be_a Variate
       year_variate.measurement_scale.should == 'dateTime'
+      year_variate.description.should == 'year'
+      year_variate.date_format.should == 'YYYY'
+      id_variate = datatable.variates.where(:name => 'identification code').first
+      id_variate.should be_a Variate
+      id_variate.measurement_scale.should == 'nominal'
+      id_variate.description.should == 'identification code'
+      block_variate = datatable.variates.where(:name => 'block').first
+      block_variate.should be_a Variate
+      block_variate.measurement_scale.should == 'nominal'
+      block_variate.description.should == 'block'
+      treatment_variate = datatable.variates.where(:name => 'treatment').first
+      treatment_variate.should be_a Variate
+      treatment_variate.measurement_scale.should == 'nominal'
+      treatment_variate.description.should == 'treatment'
+      plot_variate = datatable.variates.where(:name => 'plot').first
+      plot_variate.should be_a Variate
+      plot_variate.measurement_scale.should == 'nominal'
+      plot_variate.description.should == 'plot'
+      kobresia_variate = datatable.variates.where(:name => 'Kobresia myosuroides aboveground biomass').first
+      kobresia_variate.should be_a Variate
+      kobresia_variate.measurement_scale.should == 'ratio'
+      kobresia_variate.unit.name.should == 'gramsPerSquareMeter'
     end
   end
 end
