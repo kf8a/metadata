@@ -165,15 +165,16 @@ class Dataset < ActiveRecord::Base
   def eml_custom_unit_list
     @eml.additionalMetadata do
       @eml.metadata do
-        @eml.tag!('stmml:unitList', 'xsi:schemaLocation' => " http://lter.kbs.msu.edu/Data/schemas/stmml.xsd")
-        logger.info custom_units
-        custom_units.each do |unit|
-          @eml.tag!('stmml:unit',
-                  'id' => unit.name,
-                  'multiplierToSI' => unit.multiplier_to_si,
-                  'parentSI' => unit.parent_si,
-                  'unitType' => unit.unit_type,
-                  'name' => unit.name)
+        @eml.tag!('stmml:unitList', 'xsi:schemaLocation' => " http://lter.kbs.msu.edu/Data/schemas/stmml.xsd") do
+          logger.info custom_units
+          custom_units.each do |unit|
+            @eml.tag!('stmml:unit',
+                      'id' => unit.name,
+                      'multiplierToSI' => unit.multiplier_to_si,
+                      'parentSI' => unit.parent_si,
+                      'unitType' => unit.unit_type,
+                      'name' => unit.name)
+          end
         end
       end
     end
