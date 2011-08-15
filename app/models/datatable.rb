@@ -60,21 +60,7 @@ class Datatable < ActiveRecord::Base
     table = Datatable.find_by_id(table_id.to_i)
     unless table.present?
       table = Datatable.new
-      table.name = datatable_eml.attributes['id'].try(:value)
-      table.title = datatable_eml.css('entityName').text
-      table.description = datatable_eml.css('entityDescription').text
-      table.data_url = url
-      datatable_eml.css('methods methodStep').each do |protocol_eml|
-        protocol_id = protocol_eml.css('protocol references').text.gsub('protocol_', '')
-        protocol = Protocol.find_by_id(protocol_id)
-        table.protocols << protocol if protocol.present?
-      end
-
-      datatable_eml.css('attributeList attribute').each do |variate_eml|
-        table.variates << Variate.from_eml(variate_eml)
-      end
-
-      table.save
+      table.from_eml(datatable_eml)
     end
 
     table
