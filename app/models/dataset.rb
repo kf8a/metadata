@@ -213,23 +213,17 @@ class Dataset < ActiveRecord::Base
     end
   end
 
-  def eml_protocols
+  def eml_methods
     (protocols + datatable_protocols).flatten.uniq.each do | protocol |
       protocol.to_eml(@eml)
     end
-  end
-
-  def eml_dataset_protocols
-    # @eml.methods do
-    #   protocols.each { |protocol| protocol.to_eml_ref(@eml) }
-    # end
   end
 
   def eml_dataset
     @eml.dataset do
       eml_resource_group
       contact_info
-      eml_dataset_protocols if protocols.present?
+      eml_methods
       datatables.each { |table| table.to_eml(@eml) if table.valid_for_eml }
     end
   end
