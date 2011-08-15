@@ -114,27 +114,27 @@ class Person < ActiveRecord::Base
       if fax
         eml.phone fax, 'phonetype' => 'fax'
       end
-      eml.electronicMailAddress email if email and !email.empty?
+      eml.electronicMailAddress email  unless email.blank?
       eml.role lter_roles.first.try(:name).try(:singularize)
     end
   end
 
   def eml_individual_name(eml)
     eml.individualName do
-      eml.givenName given_name if given_name
-      eml.surName sur_name if sur_name
+      eml.givenName given_name unless given_name.blank?
+      eml.surName sur_name  unless sur_name.blank?
     end
     eml
   end
 
   def eml_address(eml)
     eml.address  do
-      eml.deliveryPoint organization if organization and !organization.empty?
-      eml.deliveryPoint street_address  if street_address and !street_address.empty?
-      eml.city city if city and !city.empty?
-      eml.administrativeArea locale if locale and ! locale.empty?
-      eml.postalCode postal_code if postal_code and !postal_code.empty?
-      eml.country country if country and !country.empty? 
+      eml.deliveryPoint organization unless organization.blank?
+      eml.deliveryPoint street_address  unless street_address.blank?
+      eml.city city  unless city.blank?
+      eml.administrativeArea locale unless locale.blank?
+      eml.postalCode postal_code unless postal_code.blank?
+      eml.country country unless country.blank?
     end
     eml
   end
