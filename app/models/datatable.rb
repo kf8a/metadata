@@ -30,6 +30,7 @@ class Datatable < ActiveRecord::Base
 
   validates :title,   :presence => true
   validates :dataset, :presence => true
+  validates_uniqueness_of :name
 
   accepts_nested_attributes_for :data_contributions, :allow_destroy => true
   accepts_nested_attributes_for :variates, :allow_destroy => true
@@ -220,8 +221,11 @@ class Datatable < ActiveRecord::Base
     @eml = xml
     @eml.dataTable 'id' => name do
       @eml.entityName title
-      @eml.entityDescription description.gsub(/<\/?[^>]*>/, "") unless description.empty?
-      eml_protocols if non_dataset_protocols.present?
+      if description 
+        text =  description.gsub(/<\/?[^>]*>/, "") 
+        @eml.entityDescription text unless text.strip.empty?
+      end
+#      eml_protocols if non_dataset_protocols.present?
       eml_physical
       eml_attributes
     end
@@ -399,9 +403,9 @@ class Datatable < ActiveRecord::Base
   end
 
   def eml_protocols
-    @eml.methods do
-      non_dataset_protocols.each { |protocol| protocol.to_eml_ref(@eml) }
-    end
+    # @eml.methods do
+    #   non_dataset_protocols.each { |protocol| protocol.to_eml_ref(@eml) }
+    # end
   end
 
   def eml_data_format

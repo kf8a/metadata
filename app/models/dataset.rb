@@ -15,6 +15,7 @@ class Dataset < ActiveRecord::Base
   belongs_to :website
 
   validates_presence_of :abstract
+  validates_uniqueness_of :dataset
 
   accepts_nested_attributes_for :affiliations, :allow_destroy => true
 
@@ -119,7 +120,6 @@ class Dataset < ActiveRecord::Base
         'packageId'           => package_id,
         'system'              => 'KBS LTER') do
       eml_access
-      eml_protocols
       eml_dataset
       eml_custom_unit_list if custom_units.present?
     end
@@ -166,15 +166,21 @@ class Dataset < ActiveRecord::Base
   def eml_custom_unit_list
     @eml.additionalMetadata do
       @eml.metadata do
-        @eml.tag!('stmml:unitList', 'xsi:schemaLocation' => " http://lter.kbs.msu.edu/Data/schemas/stmml.xsd")
-        logger.info custom_units
-        custom_units.each do |unit|
-          @eml.tag!('stmml:unit',
-                  'id' => unit.name,
-                  'multiplierToSI' => unit.multiplier_to_si,
-                  'parentSI' => unit.parent_si,
-                  'unitType' => unit.unit_type,
-                  'name' => unit.name)
+        @eml.tag!('stmml:unitList', 
+                  'xmlns:stmml'        => 'http://www.xml-cml.org/schema/stmml-1.1',
+                  'xmlns:sch'          => 'http://www.ascc.net/xml/schematron',
+                  'xmlns:xsi'          => 'http://www.w3.org/2001/XMLSchema-instance',
+                  'xmlns'              => 'http://www.xml-cml.org/schema/stmml',
+                  'xsi:schemaLocation' => 'http://www.xml-cml.org/schema/stmml-1.1 stmml.xsd') do
+          logger.info custom_units
+          custom_units.each do |unit|
+            @eml.tag!('stmml:unit',
+                      'id' => unit.name,
+                      'multiplierToSI' => unit.multiplier_to_si,
+                      'parentSI' => unit.parent_si,
+                      'unitType' => unit.unit_type,
+                      'name' => unit.name)
+          end
         end
       end
     end
@@ -236,7 +242,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_creator
-    @eml.creator 'id' => 'KBS LTER' do
+    @eml.creator do
       @eml.positionName 'Data Manager'
     end
   end
