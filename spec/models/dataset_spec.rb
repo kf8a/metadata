@@ -77,7 +77,12 @@ describe Dataset do
     it "should import the right datatable" do
       eml_content = @dataset_with_datatable.to_eml
       imported_dataset = Dataset.from_eml(eml_content)
-      imported_dataset.datatables.should == @dataset_with_datatable.datatables
+      new_datatable_attributes = imported_dataset.datatables.first.attributes
+      old_datatable_attributes = @dataset_with_datatable.datatables.first.attributes
+      keys_to_ignore = ['id', 'is_sql', 'data_url', 'dataset_id', 'object', 'theme_id', 'created_at', 'updated_at']
+      new_datatable_attributes.delete_if {|key, value| keys_to_ignore.include?(key) }
+      old_datatable_attributes.delete_if {|key, value| keys_to_ignore.include?(key) }
+      new_datatable_attributes.should == old_datatable_attributes
     end
 
     it "should import a dataset from a website" do
@@ -89,6 +94,7 @@ describe Dataset do
       imported_dataset.keyword_list.should == ['NWT', 'Niwot Ridge LTER Site', 'LTER', 'Colorado', 'aboveground', 'alpine', 'biomass', 'community change', 'fertilization plot', 'mineralization', 'nitrification', 'nitrogen deposition', 'npp', 'production', 'dry meadow', 'nitrogen cycling', 'primary productivity', 'vascular']
       datatable = imported_dataset.datatables.first
       datatable.title.should == 'aboveground_biomass_246_plots.wb'
+      datatable.protocols.all.should_not be_empty
     end
   end
 end

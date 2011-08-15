@@ -23,6 +23,8 @@ describe Protocol do
       eml_element = Nokogiri::XML(eml_content).css('protocol').first
       imported_protocol = Protocol.from_eml(eml_element)
       imported_protocol.title.should == "A sweet title"
+      imported_protocol.should be_valid
+      assert imported_protocol.save
     end
   end
 end

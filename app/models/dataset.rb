@@ -36,6 +36,7 @@ class Dataset < ActiveRecord::Base
     dataset.abstract = dataset_eml.css('abstract para').text
     dataset.initiated = dataset_eml.css('temporalCoverage rangeOfDates beginDate calendarDate').text
     dataset.completed = dataset_eml.css('temporalCoverage rangeOfDates endDate calendarDate').text
+    dataset.save
 
     eml_doc.css('protocol').each do |protocol_eml|
       dataset.protocols << Protocol.from_eml(protocol_eml)
@@ -46,7 +47,8 @@ class Dataset < ActiveRecord::Base
     end
 
     dataset_eml.css('dataTable').each do |datatable_eml|
-      dataset.datatables << Datatable.from_eml(datatable_eml)
+      table = dataset.datatables.new
+      table.from_eml(datatable_eml)
     end
 
     dataset_eml.css('keywordSet keyword').each do |keyword_eml|
@@ -278,7 +280,7 @@ class Dataset < ActiveRecord::Base
   def eml_coverage
     if initiated.present? && completed.present?
     @eml.coverage do
-      eml_temporal_coverage 
+      eml_temporal_coverage
     end
     end
   end
