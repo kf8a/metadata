@@ -174,12 +174,25 @@ class Dataset < ActiveRecord::Base
                   'xsi:schemaLocation' => 'http://www.xml-cml.org/schema/stmml-1.1 stmml.xsd') do
           logger.info custom_units
           custom_units.each do |unit|
-            @eml.tag!('stmml:unit',
-                      'id' => unit.name,
-                      'multiplierToSI' => unit.multiplier_to_si,
-                      'parentSI' => unit.parent_si,
-                      'unitType' => unit.unit_type,
-                      'name' => unit.name)
+            case unit
+            when unit.multiplier_to_si  && unit.parent_si  &&  unit.unit_type then
+              @eml.tag!('stmml:unit',
+                        'id' => unit.name,
+                        'multiplierToSI' => unit.multiplier_to_si,
+                        'parentSI' => unit.parent_si,
+                        'unitType' => unit.unit_type,
+                        'name' => unit.name)
+            when unit.multiplier_to_si && unit.parent_si then
+              @eml.tag!('stmml:unit',
+                        'id' => unit.name,
+                        'multiplierToSI' => unit.multiplier_to_si,
+                        'parentSI' => unit.parent_si,
+                        'name' => unit.name)
+            else
+              @eml.tag!('stmml:unit',
+                        'id' => unit.name,
+                        'name' => unit.name)
+            end
           end
         end
       end
