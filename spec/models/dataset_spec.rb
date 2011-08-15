@@ -95,6 +95,9 @@ describe Dataset do
       datatable = imported_dataset.datatables.first
       datatable.title.should == 'aboveground_biomass_246_plots.wb'
       datatable.variates.all.should_not be_empty
+      year_variate = datatable.variates.where(:name => 'year').first
+      year_variate.should be_a Variate
+      year_variate.measurement_scale.should == 'dateTime'
     end
   end
 end
