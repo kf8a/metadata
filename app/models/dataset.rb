@@ -15,6 +15,7 @@ class Dataset < ActiveRecord::Base
   belongs_to :website
 
   validates_presence_of :abstract
+  validates_uniqueness_of :dataset
 
   accepts_nested_attributes_for :affiliations, :allow_destroy => true
 
