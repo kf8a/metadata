@@ -114,7 +114,7 @@ class Person < ActiveRecord::Base
       if fax
         eml.phone fax, 'phonetype' => 'fax'
       end
-      eml.electronicMailAddress email if email
+      eml.electronicMailAddress email if email and !email.empty?
       eml.role lter_roles.first.try(:name).try(:singularize)
     end
   end
