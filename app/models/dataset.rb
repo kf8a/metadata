@@ -39,7 +39,7 @@ class Dataset < ActiveRecord::Base
     dataset.completed = dataset_eml.css('temporalCoverage rangeOfDates endDate calendarDate').text
     dataset.save
 
-    eml_doc.css('protocol').each do |protocol_eml|
+    eml_doc.css('methods').each do |protocol_eml|
       dataset.protocols << Protocol.from_eml(protocol_eml)
     end
 
@@ -168,7 +168,7 @@ class Dataset < ActiveRecord::Base
   def eml_custom_unit_list
     @eml.additionalMetadata do
       @eml.metadata do
-        @eml.tag!('stmml:unitList', 
+        @eml.tag!('stmml:unitList',
                   'xmlns:stmml'        => 'http://www.xml-cml.org/schema/stmml-1.1',
                   'xmlns:sch'          => 'http://www.ascc.net/xml/schematron',
                   'xmlns:xsi'          => 'http://www.w3.org/2001/XMLSchema-instance',
