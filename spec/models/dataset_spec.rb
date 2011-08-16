@@ -75,10 +75,14 @@ describe Dataset do
     end
 
     it "should import the right datatable" do
+      @dataset_with_datatable.datatables.collect{ |table| table.valid_for_eml }.should == [true]
       eml_content = @dataset_with_datatable.to_eml
-      imported_dataset = Dataset.from_eml(eml_content)
-      new_datatable_attributes = imported_dataset.datatables.first.attributes
       old_datatable_attributes = @dataset_with_datatable.datatables.first.attributes
+      @dataset_with_datatable.datatables.each {|table| table.destroy}
+      @dataset_with_datatable.destroy
+      imported_dataset = Dataset.from_eml(eml_content)
+      imported_dataset.should be_valid
+      new_datatable_attributes = imported_dataset.datatables.first.attributes
       keys_to_ignore = ['id', 'is_sql', 'data_url', 'dataset_id', 'object', 'theme_id', 'created_at', 'updated_at']
       new_datatable_attributes.delete_if {|key, value| keys_to_ignore.include?(key) }
       old_datatable_attributes.delete_if {|key, value| keys_to_ignore.include?(key) }
