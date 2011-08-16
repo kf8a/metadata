@@ -16,7 +16,7 @@ class Person < ActiveRecord::Base
 
   def self.from_eml(person_eml)
     person = Person.new
-    person.given_name = person_eml.css('individualName givenName').text
+    person.given_name = person_eml.css('individualName givenName').collect{ |element| element.text }.join(' ')
     person.sur_name = person_eml.css('individualName surName').text
     person.organization = person_eml.css('address deliveryPoint').text
     person.street_address = person_eml.css('address deliveryPoint').text #TODO should these really be the same?
