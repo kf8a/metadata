@@ -12,7 +12,7 @@ class Protocol < ActiveRecord::Base
   end
 
   def self.from_eml(protocol_eml)
-    prot_id = protocol_eml.attributes['id'].value.gsub('protocol_', '')
+    prot_id = protocol_eml.attributes['id'].try(:value).try(:gsub, 'protocol_', '')
     protocol = Protocol.find_by_id(prot_id)
     unless protocol.present?
       protocol_title = protocol_eml.css('title').text
