@@ -18,8 +18,8 @@ class Person < ActiveRecord::Base
     person = Person.new
     person.given_name = person_eml.css('individualName givenName').collect{ |element| element.text }.join(' ')
     person.sur_name = person_eml.css('individualName surName').text
-    person.organization = person_eml.css('address deliveryPoint').text
-    person.street_address = person_eml.css('address deliveryPoint').text #TODO should these really be the same?
+    person.organization = person_eml.css('organizationName').text
+    person.street_address = person_eml.css('address deliveryPoint').text
     person.city = person_eml.css('address city').text
     person.locale = person_eml.css('address administrativeArea').text
     person.postal_code = person_eml.css('address postalCode').text
@@ -103,6 +103,7 @@ class Person < ActiveRecord::Base
   def to_eml(eml = Builder::XmlMarkup.new)
     eml.associatedParty do
       eml_individual_name(eml)
+      eml.organizationName organization unless organization.blank?
       eml_address(eml)
       if phone
         eml.phone phone, 'phonetype' => 'phone'
@@ -125,7 +126,6 @@ class Person < ActiveRecord::Base
 
   def eml_address(eml)
     eml.address  do
-      eml.deliveryPoint organization unless organization.blank?
       eml.deliveryPoint street_address  unless street_address.blank?
       eml.city city  unless city.blank?
       eml.administrativeArea locale unless locale.blank?

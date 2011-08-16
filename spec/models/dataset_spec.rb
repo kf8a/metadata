@@ -100,6 +100,8 @@ describe Dataset do
       imported_person = imported_dataset.people.first
       imported_person.sur_name.should == "Lee"
       imported_person.given_name.should == 'Rosalynn Y.'
+      imported_person.organization.should == 'University of Georgia'
+      imported_person.email.should == 'rosalynn@uga.edu'
       datatable = imported_dataset.datatables.first
       datatable.title.should == 'ALG-GCED-0304c'
       datatable.variates.all.should_not be_empty
