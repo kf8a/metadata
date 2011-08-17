@@ -194,7 +194,7 @@ class DatasetTest < ActiveSupport::TestCase
 
       should "have a top level protocol section" do
         eml_doc = Nokogiri::XML(@dataset.to_eml)
-        assert_equal 1, eml_doc.css("methods#protocol_#{@protocol.id}").count
+        assert_equal 1, eml_doc.css("methods methodStep protocol#protocol_#{@protocol.id}").count
       end
 
       # should "have a dataset methods methodStep protocol section" do
