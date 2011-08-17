@@ -33,7 +33,7 @@ class Protocol < ActiveRecord::Base
         eml_creator
         @eml.distribution do
           @eml.online do
-            website_name = dataset.try(:website).try(:name) || websites.first
+            website_name = dataset.try(:website).try(:name) || websites.first.try(:name)
             @eml.url "http://#{website_name}.kbs.msu.edu/protocols/#{id}"
           end
         end
