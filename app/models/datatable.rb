@@ -418,9 +418,11 @@ class Datatable < ActiveRecord::Base
     @eml.dataFormat do
       @eml.textFormat do
         @eml.numHeaderLines (data_access_statement.lines.to_a.size + 4).to_s
+        @eml.recordDelimiter "\n"
         @eml.attributeOrientation 'column'
         @eml.simpleDelimited do
           @eml.fieldDelimiter ','
+          @eml.quoteCharacter '"'
         end
       end
     end
