@@ -118,7 +118,7 @@ class Dataset < ActiveRecord::Base
         'xmlns:exslt'         => 'http://exslt.org/common',
         'xmlns:stmml'         => 'http://www.xml-cml.org/schema/stmml',
         'xmlns:xsi'           => 'http://www.w3.org/2001/XMLSchema-instance',
-        'xsi:schemaLocation'  => 'eml://ecoinformatics.org/eml-2.1.0 eml.xsd',
+        'xsi:schemaLocation'  => 'eml://ecoinformatics.org/eml-2.1.0 http://nis.lternet.edu/schemas/EML/eml-2.1.0/eml.xsd',
         'packageId'           => package_id,
         'system'              => 'KBS LTER') do
       eml_access
