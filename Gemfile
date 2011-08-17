@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.9'
+gem 'rails', '3.0.10'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -60,6 +60,8 @@ gem 'has_scope'
 #gem 'ris_parser', :git => 'git://github.com/kf8a/ris_parser.git', :branch => 'develop'
 
 gem 'exception_notification'
+
+gem 'unicorn'
 
 group :development, :test  do
   # bundler requires these gems in development
