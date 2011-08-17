@@ -214,8 +214,13 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_methods
-    (protocols + datatable_protocols).flatten.uniq.each do | protocol |
-      protocol.to_eml(@eml)
+    protocol_list = (protocols + datatable_protocols).flatten.uniq
+    if protocol_list.size > 0
+      @eml.methods do
+        protocol_list.each do | protocol |
+          protocol.to_eml(@eml)
+        end
+      end
     end
   end
 

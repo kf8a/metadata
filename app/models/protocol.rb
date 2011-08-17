@@ -25,18 +25,16 @@ class Protocol < ActiveRecord::Base
 
   def to_eml(xml = Builder::XmlMarkup.new)
     @eml = xml
-    @eml.methods do
-      @eml.methodStep do
-        @eml.description abstract
-        @eml.protocol 'id' => "protocol_#{id}" do
+    @eml.methodStep do
+      @eml.description abstract
+      @eml.protocol 'id' => "protocol_#{id}" do
 
-          @eml.title  title
-          eml_creator
-          @eml.distribution do
-            @eml.online do
-              website_name = dataset.try(:website).try(:name) || websites.first
-              @eml.url "http://#{website_name}.kbs.msu.edu/protocols/#{id}"
-            end
+        @eml.title  title
+        eml_creator
+        @eml.distribution do
+          @eml.online do
+            website_name = dataset.try(:website).try(:name) || websites.first
+            @eml.url "http://#{website_name}.kbs.msu.edu/protocols/#{id}"
           end
         end
       end
