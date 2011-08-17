@@ -39,8 +39,9 @@ class Dataset < ActiveRecord::Base
     dataset.completed = dataset_eml.css('temporalCoverage rangeOfDates endDate calendarDate').text
     dataset.save
 
-    eml_doc.css('methods').each do |protocol_eml|
-      dataset.protocols << Protocol.from_eml(protocol_eml)
+    eml_doc.css('methods methodStep').each do |protocol_eml|
+      protocol_to_add = Protocol.from_eml(protocol_eml)
+      dataset.protocols << protocol_to_add if protocol_to_add
     end
 
     dataset_eml.css('associatedParty').each do |person_eml|

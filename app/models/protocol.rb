@@ -11,16 +11,19 @@ class Protocol < ActiveRecord::Base
     "#{self.title}"
   end
 
-  def self.from_eml(protocol_eml)
-    prot_id = protocol_eml.attributes['id'].try(:value).try(:gsub, 'protocol_', '')
-    protocol = Protocol.find_by_id(prot_id)
-    unless protocol.present?
-      protocol_title = protocol_eml.css('title').text
-      protocol = Protocol.find_or_create_by_title(protocol_title)
-      protocol.save
-    end
+  def self.from_eml(method_eml)
+    protocol_eml = method_eml.css('protocol').first
+    if protocol_eml
+      prot_id = protocol_eml.attributes['id'].try(:value).try(:gsub, 'protocol_', '')
+      protocol = Protocol.find_by_id(prot_id)
+      unless protocol.present?
+        protocol_title = protocol_eml.css('title').text
+        protocol = Protocol.find_or_create_by_title(protocol_title)
+        protocol.save
+      end
 
-    protocol
+      protocol
+    end
   end
 
   def to_eml(xml = Builder::XmlMarkup.new)
