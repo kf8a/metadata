@@ -17,8 +17,9 @@ class Protocol < ActiveRecord::Base
       prot_id = protocol_eml.attributes['id'].try(:value).try(:gsub, 'protocol_', '')
       protocol = Protocol.find_by_id(prot_id)
       unless protocol.present?
-        protocol_title = protocol_eml.css('title').text
-        protocol = Protocol.find_or_create_by_title(protocol_title)
+        protocol = Protocol.new
+        protocol.title = protocol_eml.css('title').text
+        protocol.abstract = method_eml.css('abstract').text
         protocol.save
       end
 
