@@ -2,6 +2,7 @@ class Person < ActiveRecord::Base
   has_many :affiliations
   has_many :lter_roles, :through => :affiliations, :conditions => ['role_type_id = ?', RoleType.find_by_name('lter')], :source => :role
   has_many :dataset_roles, :through => :affiliations, :conditions => ['role_type_id = ?', RoleType.find_by_name('lter_dataset')], :source => :role
+  has_many :roles, :through => :affiliations
   has_many :datasets, :through => :affiliations,  :source => :dataset
   has_many :scribbles
   has_many :protocols, :through => :scribbles
@@ -29,7 +30,7 @@ class Person < ActiveRecord::Base
 
     person.email = person_eml.css('electronicMailAddress').text
     role_name = person_eml.css('role').text
-    role_to_add = Role.find_by_name(role_name)
+    role_to_add = Role.find_or_create_by_name(role_name)
     Affiliation.create!(:person => person, :role => role_to_add) if role_to_add.present?
     person.save
 
