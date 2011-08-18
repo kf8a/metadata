@@ -106,32 +106,55 @@ describe Dataset do
       datatable = imported_dataset.datatables.first
       datatable.title.should == 'ALG-GCED-0304c'
       datatable.variates.all.should_not be_empty
-      datatable.variates.first.name.should == 'Year'
-    #  year_variate = datatable.variates.where(:name => 'year').first
-    #  year_variate.should be_a Variate
-    #  year_variate.measurement_scale.should == 'dateTime'
-    #  year_variate.description.should == 'year'
-    #  year_variate.date_format.should == 'YYYY'
-    #  id_variate = datatable.variates.where(:name => 'identification code').first
-    #  id_variate.should be_a Variate
-    #  id_variate.measurement_scale.should == 'nominal'
-    #  id_variate.description.should == 'identification code'
-    #  block_variate = datatable.variates.where(:name => 'block').first
-    #  block_variate.should be_a Variate
-    #  block_variate.measurement_scale.should == 'nominal'
-    #  block_variate.description.should == 'block'
-    #  treatment_variate = datatable.variates.where(:name => 'treatment').first
-    #  treatment_variate.should be_a Variate
-    #  treatment_variate.measurement_scale.should == 'nominal'
-    #  treatment_variate.description.should == 'treatment'
-    #  plot_variate = datatable.variates.where(:name => 'plot').first
-    #  plot_variate.should be_a Variate
-    #  plot_variate.measurement_scale.should == 'nominal'
-    #  plot_variate.description.should == 'plot'
-    #  kobresia_variate = datatable.variates.where(:name => 'Kobresia myosuroides aboveground biomass').first
-    #  kobresia_variate.should be_a Variate
-    #  kobresia_variate.measurement_scale.should == 'ratio'
-    #  kobresia_variate.unit.name.should == 'gramsPerSquareMeter'
+      year_variate = datatable.variates.where(:name => 'Year').first
+      year_variate.should be_a Variate
+      year_variate.description.should == 'Year of sample collection'
+      year_variate.measurement_scale.should == 'dateTime'
+      year_variate.date_format.should == 'YYYY'
+      month_variate = datatable.variates.where(:name => 'Month').first
+      month_variate.should be_a Variate
+      month_variate.description.should == 'Month of sample collection'
+      month_variate.measurement_scale.should == 'dateTime'
+      month_variate.date_format.should == 'MM'
+      day_variate = datatable.variates.where(:name => 'Day').first
+      day_variate.should be_a Variate
+      day_variate.description.should == 'Day of sample collection'
+      day_variate.measurement_scale.should == 'dateTime'
+      day_variate.date_format.should == 'DD'
+      station_variate = datatable.variates.where(:name => 'Station').first
+      station_variate.should be_a Variate
+      station_variate.description.should == 'Site location code'
+      station_variate.measurement_scale.should == 'nominal'
+      zone_variate = datatable.variates.where(:name => 'Zone').first
+      zone_variate.should be_a Variate
+      zone_variate.description.should == 'Site location zone'
+      zone_variate.measurement_scale.should == 'nominal'
+      replicate_variate = datatable.variates.where(:name => 'Replicate').first
+      replicate_variate.should be_a Variate
+      replicate_variate.description.should == 'Sample replicate (number = sample number from across the station, letter = replication at a particular number area)'
+      replicate_variate.measurement_scale.should == 'nominal'
+      chl_variate = datatable.variates.where(:name => 'Chl_a_Conc').first
+      chl_variate.should be_a Variate
+      chl_variate.description.should == 'Surface sediment chlorophyll a concentration'
+      chl_variate.measurement_scale.should == 'ratio'
+      chl_unit = chl_variate.unit
+      chl_unit.name.should == 'milligramsPerSquareMeter'
+      chl_variate.precision.should == 0.1
+      sed_dens_variate = datatable.variates.where(:name => 'Sed_Density').first
+      sed_dens_variate.description.should == 'Surface sediment density (grams wet sediment per volume)'
+      sed_dens_variate.measurement_scale.should == 'ratio'
+      sed_dens_variate.unit.name.should == 'gramsPerCubicCentimeter'
+      sed_dens_variate.precision.should == 0.01
+      sed_poros_variate = datatable.variates.where(:name => 'Sed_Porosity').first
+      sed_poros_variate.description.should == 'Surface sediment porosity (grams water per gram wet sediment)'
+      sed_poros_variate.measurement_scale.should == 'ratio'
+      sed_poros_variate.unit.name.should == 'dimensionless'
+      sed_poros_variate.precision.should == 0.01
+      org_variate = datatable.variates.where(:name => 'Organic_Content').first
+      org_variate.description.should == 'Organic content (grams per gram dry sediment)'
+      org_variate.measurement_scale.should == 'ratio'
+      org_variate.unit.name.should == 'dimensionless'
+      org_variate.precision.should == 0.01
     end
   end
 
