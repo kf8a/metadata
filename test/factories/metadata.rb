@@ -98,6 +98,7 @@ FactoryGirl.define do
     name              'date'
     description       'generic variate'
     measurement_scale 'dateTime'
+    date_format       'YYYY-MM-DD'
   end
 
   factory :venue_type do

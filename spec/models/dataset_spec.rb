@@ -1,3 +1,5 @@
+# coding: utf-8
+
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Dataset do
@@ -163,6 +165,87 @@ describe Dataset do
     error_set = Dataset.from_eml(uri)
     error_set.should_not be_a Dataset
     error_set.first.to_s.should == "Element '{eml://ecoinformatics.org/eml-2.0.1}eml': No matching global declaration available for the validation root."
+  end
+
+  it "should import another eml url" do
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-hfr.113.24'
+    dataset = Dataset.from_eml(uri)
+    dataset.should be_a Dataset
+    dataset.title.should == 'Ants Under Climate Change'
+    dataset.abstract.should == %Q{Experimental field studies are needed to understand the consequences of global climatic changefor local community structure and associated ecosystem processes. We are using 5-m diameter open-top environmental chambers and 1m pvc minichambers to simultaneously manipulate air and soil temperatures at the Harvard Forest and at the Duke Forest in North Carolina. These field manipulations are designed to reveal the effects of temperature increases on the populations, communities, and associated ecosystem services of assemblages of ground-foraging ants. Ants are a model taxon for studying effects of global climatic change because they comprise the dominant fraction of animal biomass in many terrestrial communities and because they provide essential ecosystem services, including soil turnover, decomposition, and seed dispersal. The experiment is designed to test three predictions: 1. Projected atmospheric warming will lead to declines in ant species’ abundances at the warmer, southern extent of their ranges in the US. Conversely, projected atmospheric warming will lead to increases in abundance or range extensions of ant species at the cooler, northern extent of their ranges in the US. 2. Warming will change the relative abundance and composition of ant communities, and will lead to the loss of ant biodiversity. 3. Warming will potentially diminish ecosystem processes and services provided by ants, particularly with respect to the dispersal of seeds. To explore these, we are conducting two experiments. In one experiment, twelve open-top chambers at each site which will each be exposed air temperatures ranging from 1.5 to 7 deg C above ambient; soil temperatures will be increased simultaneously from 0 to ~ 2 deg C. After an initial year of pre-intervention measurements, the experiment will run for 3 consecutive years of continuous warming. In the second experiment, shade cloth and plastic greenhouse sheeting will be used to increase or decrease temperature by 0.5 deg C in sixty minichambers. The minichamber experiment was conducted in 2009 and will continue into 2010. The response variables measured in both experiments include ant activity, population densities and colony sizes of focal species, ant community diversity and species composition, and rates of seed dispersal and predation as mediated by ants.}
+    dataset.keyword_list.should == ["ants", "assembly rules", "climate change", "warming"]
+    person = dataset.people.where(:sur_name => "Boudreau").first
+    person.given_name.should == "Mark"
+    person.roles.where(:name => "Researcher").all.should_not be_empty
+    gotelli = dataset.people.where(:sur_name => 'Gotelli').first
+    gotelli.given_name.should == "Nicholas"
+    gotelli.roles.where(:name => "Researcher").all.should_not be_empty
+    mccoy = dataset.people.where(:sur_name => 'McCoy').first
+    mccoy.given_name.should == "Neil"
+    mccoy.roles.where(:name => "Researcher").all.should_not be_empty
+    pelini = dataset.people.where(:sur_name => 'Pelini').first
+    pelini.given_name.should == "Shannon"
+    pelini.roles.where(:name => "Researcher").all.should_not be_empty
+    sanders = dataset.people.where(:sur_name => 'Sanders').first
+    sanders.given_name.should == "Nathan"
+    sanders.roles.where(:name => "Researcher").all.should_not be_empty
+    chamber_datatable = dataset.datatables.where(:title => 'hf113-01-hf-chamber.csv').first
+    chamber_datatable.description.should == 'HF chamber data'
+    chamber_datatable.variates.should_not be_empty
+    datetime = chamber_datatable.variates.where(:name => 'datetime').first
+    datetime.description.should == 'time stamp'
+    datetime.measurement_scale.should == 'measurementScale'
+    datetime.date_format.should == 'MM/DD/YYYY hh:mm'
+      #datatable.variates.all.should_not be_empty
+      #year_variate = datatable.variates.where(:name => 'Year').first
+      #year_variate.should be_a Variate
+      #year_variate.description.should == 'Year of sample collection'
+      #year_variate.measurement_scale.should == 'dateTime'
+      #year_variate.date_format.should == 'YYYY'
+      #month_variate = datatable.variates.where(:name => 'Month').first
+      #month_variate.should be_a Variate
+      #month_variate.description.should == 'Month of sample collection'
+      #month_variate.measurement_scale.should == 'dateTime'
+      #month_variate.date_format.should == 'MM'
+      #day_variate = datatable.variates.where(:name => 'Day').first
+      #day_variate.should be_a Variate
+      #day_variate.description.should == 'Day of sample collection'
+      #day_variate.measurement_scale.should == 'dateTime'
+      #day_variate.date_format.should == 'DD'
+      #station_variate = datatable.variates.where(:name => 'Station').first
+      #station_variate.should be_a Variate
+      #station_variate.description.should == 'Site location code'
+      #station_variate.measurement_scale.should == 'nominal'
+      #zone_variate = datatable.variates.where(:name => 'Zone').first
+      #zone_variate.should be_a Variate
+      #zone_variate.description.should == 'Site location zone'
+      #zone_variate.measurement_scale.should == 'nominal'
+      #replicate_variate = datatable.variates.where(:name => 'Replicate').first
+      #replicate_variate.should be_a Variate
+      #replicate_variate.description.should == 'Sample replicate (number = sample number from across the station, letter = replication at a particular number area)'
+      #replicate_variate.measurement_scale.should == 'nominal'
+      #chl_variate = datatable.variates.where(:name => 'Chl_a_Conc').first
+      #chl_variate.should be_a Variate
+      #chl_variate.description.should == 'Surface sediment chlorophyll a concentration'
+      #chl_variate.measurement_scale.should == 'ratio'
+      #chl_unit = chl_variate.unit
+      #chl_unit.name.should == 'milligramsPerSquareMeter'
+      #chl_variate.precision.should == 0.1
+      #sed_dens_variate = datatable.variates.where(:name => 'Sed_Density').first
+      #sed_dens_variate.description.should == 'Surface sediment density (grams wet sediment per volume)'
+      #sed_dens_variate.measurement_scale.should == 'ratio'
+      #sed_dens_variate.unit.name.should == 'gramsPerCubicCentimeter'
+      #sed_dens_variate.precision.should == 0.01
+      #sed_poros_variate = datatable.variates.where(:name => 'Sed_Porosity').first
+      #sed_poros_variate.description.should == 'Surface sediment porosity (grams water per gram wet sediment)'
+      #sed_poros_variate.measurement_scale.should == 'ratio'
+      #sed_poros_variate.unit.name.should == 'dimensionless'
+      #sed_poros_variate.precision.should == 0.01
+      #org_variate = datatable.variates.where(:name => 'Organic_Content').first
+      #org_variate.description.should == 'Organic content (grams per gram dry sediment)'
+      #org_variate.measurement_scale.should == 'ratio'
+      #org_variate.unit.name.should == 'dimensionless'
+      #org_variate.precision.should == 0.01
   end
 
   def valid_eml_doc?(eml_content)
