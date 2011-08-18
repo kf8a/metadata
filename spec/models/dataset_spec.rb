@@ -158,6 +158,13 @@ describe Dataset do
     end
   end
 
+  it "should not import from an invalid eml url" do
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-bnz.81.8'
+    error_set = Dataset.from_eml(uri)
+    error_set.should_not be_a Dataset
+    error_set.first.to_s.should == "Element '{eml://ecoinformatics.org/eml-2.0.1}eml': No matching global declaration available for the validation root."
+  end
+
   def valid_eml_doc?(eml_content)
     xsd = nil
     Dir.chdir("#{Rails.root}/test/data/eml-2.1.0") do
