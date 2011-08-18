@@ -84,6 +84,10 @@ class DatasetsController < ApplicationController
   def create
     if params[:eml_link].present?
       @dataset = Dataset.from_eml(params[:eml_link])
+      unless @dataset.class == Dataset #if not a Dataset, it will be an array of errors
+        flash[:notice] = "Eml import had errors: " + @dataset.collect{|error| error.to_s}.join(' ')
+        @dataset = Dataset.new
+      end
     elsif params[:dataset][:eml_file].present?
       @dataset = Dataset.from_eml_file(params[:dataset][:eml_file])
     else
