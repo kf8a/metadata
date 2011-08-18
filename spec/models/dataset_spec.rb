@@ -89,9 +89,9 @@ describe Dataset do
       new_datatable_attributes.should == old_datatable_attributes
     end
 
-    #TODO: This particular eml is invalid, so redo with a different example eml
     it "should import a dataset from a website" do
       uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-gce.113.13'
+      valid_eml_doc?(uri)
       imported_dataset = Dataset.from_eml(uri)
       imported_dataset.should be_a Dataset
       imported_dataset.title.should == %Q{Benthic chlorophyll, density, porosity, and organic content concentrations and gross oxygenic photosynthesis rates in surficial estuarine intertidal sediments at sites on Sapelo Island and near the Satilla River from January, April, June and July 2001}
@@ -133,6 +133,19 @@ describe Dataset do
     #  kobresia_variate.measurement_scale.should == 'ratio'
     #  kobresia_variate.unit.name.should == 'gramsPerSquareMeter'
     end
+  end
+
+  def valid_eml_doc?(eml_content)
+    xsd = nil
+    Dir.chdir("#{Rails.root}/test/data/eml-2.1.0") do
+      xsd = Nokogiri::XML::Schema(File.read("eml.xsd"))
+    end
+    if eml_content.start_with?('http://')
+      doc = Nokogiri::XML(open(eml_content))
+    else
+      doc = Nokogiri::XML(eml_content)
+    end
+    assert_equal [],  xsd.validate(doc) #we need to make sure the document is valid before trying to import it.
   end
 end
 
