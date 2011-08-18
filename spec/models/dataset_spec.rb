@@ -33,7 +33,7 @@ describe Dataset do
     end
 
     it "should import protocols" do
-      new_protocol = FactoryGirl.create(:protocol)
+      new_protocol = FactoryGirl.create(:protocol, :title => 'EML Protocol')
       @dataset_with_datatable.protocols << new_protocol
       @dataset_with_datatable.website = Website.first
       @dataset_with_datatable.save

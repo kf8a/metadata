@@ -185,7 +185,7 @@ class DatasetTest < ActiveSupport::TestCase
     context 'dataset with protocols in the datatables' do
       setup do
         website = Factory.create(:website, :name => 'cool_website')
-        @protocol = Factory.create(:protocol, :dataset => @dataset)
+        @protocol = Factory.create(:protocol, :dataset => @dataset, :title => 'cool protocol')
         @dataset.protocols << @protocol
         @dataset.website = website
         @protocol2 = Factory.create(:protocol)

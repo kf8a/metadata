@@ -27,6 +27,10 @@ class Protocol < ActiveRecord::Base
     end
   end
 
+  def valid_for_eml?
+    title.present?
+  end
+
   def to_eml(xml = Builder::XmlMarkup.new)
     @eml = xml
     @eml.methodStep do
