@@ -2,6 +2,7 @@ class Person < ActiveRecord::Base
   has_many :affiliations
   has_many :lter_roles, :through => :affiliations, :conditions => ['role_type_id = ?', RoleType.find_by_name('lter')], :source => :role
   has_many :dataset_roles, :through => :affiliations, :conditions => ['role_type_id = ?', RoleType.find_by_name('lter_dataset')], :source => :role
+  has_many :roles, :through => :affiliations
   has_many :datasets, :through => :affiliations,  :source => :dataset
   has_many :scribbles
   has_many :protocols, :through => :scribbles
@@ -15,27 +16,23 @@ class Person < ActiveRecord::Base
   scope :by_sur_name_asc, :order => 'sur_name ASC'
 
   def self.from_eml(person_eml)
-    person_id = person_eml.attributes['id'].value
-    person = Person.find_by_id(person_id)
-    unless person
-      person = Person.new
-      person.given_name = person_eml.css('individualName givenName').text
-      person.sur_name = person_eml.css('individualName surName').text
-      person.organization = person_eml.css('address deliveryPoint').text
-      person.street_address = person_eml.css('address deliveryPoint').text #TODO should these really be the same?
-      person.city = person_eml.css('address city').text
-      person.locale = person_eml.css('address administrativeArea').text
-      person.postal_code = person_eml.css('address postalCode').text
-      person.country = person_eml.css('address country').text
+    person = Person.new
+    person.given_name = person_eml.css('individualName givenName').collect{ |element| element.text }.join(' ')
+    person.sur_name = person_eml.css('individualName surName').text
+    person.organization = person_eml.css('organizationName').text
+    person.street_address = person_eml.css('address deliveryPoint').text
+    person.city = person_eml.css('address city').text
+    person.locale = person_eml.css('address administrativeArea').text
+    person.postal_code = person_eml.css('address postalCode').text
+    person.country = person_eml.css('address country').text
 
-      person_eml.css('phone').each { |phone_eml| person.phone_from_eml(phone_eml) }
+    person_eml.css('phone').each { |phone_eml| person.phone_from_eml(phone_eml) }
 
-      person.email = person_eml.css('electronicMailAddress').text
-      role_name = person_eml.css('role').text
-      role_to_add = Role.find_by_name(role_name)
-      Affiliation.create!(:person => person, :role => role_to_add) if role_to_add.present?
-      person.save
-    end
+    person.email = person_eml.css('electronicMailAddress').text
+    role_name = person_eml.css('role').text
+    role_to_add = Role.find_or_create_by_name(role_name)
+    Affiliation.create!(:person => person, :role => role_to_add) if role_to_add.present?
+    person.save
 
     person
   end
@@ -107,6 +104,7 @@ class Person < ActiveRecord::Base
   def to_eml(eml = Builder::XmlMarkup.new)
     eml.associatedParty do
       eml_individual_name(eml)
+      eml.organizationName organization unless organization.blank?
       eml_address(eml)
       if phone
         eml.phone phone, 'phonetype' => 'phone'
@@ -129,7 +127,6 @@ class Person < ActiveRecord::Base
 
   def eml_address(eml)
     eml.address  do
-      eml.deliveryPoint organization unless organization.blank?
       eml.deliveryPoint street_address  unless street_address.blank?
       eml.city city  unless city.blank?
       eml.administrativeArea locale unless locale.blank?
@@ -141,6 +138,10 @@ class Person < ActiveRecord::Base
 
   def eml
     @eml ||= Builder::XmlMarkup.new
+  end
+
+  def to_lter_personneldb
+    #TODO fill this in
   end
 
 end

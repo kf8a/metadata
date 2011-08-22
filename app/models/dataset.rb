@@ -31,32 +31,44 @@ class Dataset < ActiveRecord::Base
     else
       eml_doc = Nokogiri::XML(eml_text)
     end
-    dataset_eml = eml_doc.css('dataset')
-    dataset = self.new
-    dataset.title = dataset_eml.css('title').text
-    dataset.abstract = dataset_eml.css('abstract para').text
-    dataset.initiated = dataset_eml.css('temporalCoverage rangeOfDates beginDate calendarDate').text
-    dataset.completed = dataset_eml.css('temporalCoverage rangeOfDates endDate calendarDate').text
-
-    eml_doc.css('protocol').each do |protocol_eml|
-      dataset.protocols << Protocol.from_eml(protocol_eml)
+    xsd = nil
+    Dir.chdir("#{Rails.root}/test/data/eml-2.1.0") do
+      xsd = Nokogiri::XML::Schema(File.read("eml.xsd"))
     end
+    validation_errors = xsd.validate(eml_doc)
+    if validation_errors == [] #this is an array of the errors
+      dataset_eml = eml_doc.css('dataset')
+      dataset = self.new
+      dataset.title = dataset_eml.css('title').first.text
+      dataset.abstract = dataset_eml.css('abstract para').text
+      dataset.initiated = dataset_eml.css('temporalCoverage rangeOfDates beginDate calendarDate').text
+      dataset.completed = dataset_eml.css('temporalCoverage rangeOfDates endDate calendarDate').text
+      dataset.save
 
-    dataset_eml.css('associatedParty').each do |person_eml|
-      dataset.people << Person.from_eml(person_eml)
+      eml_doc.css('methods methodStep').each do |protocol_eml|
+        protocol_to_add = Protocol.from_eml(protocol_eml)
+        dataset.protocols << protocol_to_add if protocol_to_add
+      end
+
+      dataset_eml.css('associatedParty').each do |person_eml|
+        dataset.people << Person.from_eml(person_eml)
+      end
+
+      dataset_eml.css('dataTable').each do |datatable_eml|
+        table = dataset.datatables.new
+        table.from_eml(datatable_eml)
+      end
+
+      dataset_eml.css('keywordSet keyword').each do |keyword_eml|
+        dataset.keyword_list << keyword_eml.text
+      end
+
+      dataset.save
+
+      dataset
+    else
+      validation_errors
     end
-
-    dataset_eml.css('dataTable').each do |datatable_eml|
-      dataset.datatables << Datatable.from_eml(datatable_eml)
-    end
-
-    dataset_eml.css('keywordSet keyword').each do |keyword_eml|
-      dataset.keyword_list << keyword_eml.text
-    end
-
-    dataset.save
-
-    dataset
 
     #  eml_custom_unit_list if custom_units.present?
   end
@@ -116,7 +128,7 @@ class Dataset < ActiveRecord::Base
         'xmlns:exslt'         => 'http://exslt.org/common',
         'xmlns:stmml'         => 'http://www.xml-cml.org/schema/stmml',
         'xmlns:xsi'           => 'http://www.w3.org/2001/XMLSchema-instance',
-        'xsi:schemaLocation'  => 'eml://ecoinformatics.org/eml-2.1.0 eml.xsd',
+        'xsi:schemaLocation'  => 'eml://ecoinformatics.org/eml-2.1.0 http://nis.lternet.edu/schemas/EML/eml-2.1.0/eml.xsd',
         'packageId'           => package_id,
         'system'              => 'KBS LTER') do
       eml_access
@@ -166,7 +178,7 @@ class Dataset < ActiveRecord::Base
   def eml_custom_unit_list
     @eml.additionalMetadata do
       @eml.metadata do
-        @eml.tag!('stmml:unitList', 
+        @eml.tag!('stmml:unitList',
                   'xmlns:stmml'        => 'http://www.xml-cml.org/schema/stmml-1.1',
                   'xmlns:sch'          => 'http://www.ascc.net/xml/schematron',
                   'xmlns:xsi'          => 'http://www.w3.org/2001/XMLSchema-instance',
@@ -213,11 +225,14 @@ class Dataset < ActiveRecord::Base
     end
   end
 
+  def eml_protocols
+    (protocols + datatable_protocols).flatten.uniq.keep_if { |protocol| protocol.valid_for_eml? }
+  end
+
   def eml_methods
-    protocol_list = (protocols + datatable_protocols).flatten.uniq
-    if protocol_list.size > 0
+    if eml_protocols.size > 0
       @eml.methods do
-        protocol_list.each do | protocol |
+        eml_protocols.each do | protocol |
           protocol.to_eml(@eml)
         end
       end
@@ -296,7 +311,7 @@ class Dataset < ActiveRecord::Base
   def eml_coverage
     if initiated.present? && completed.present?
     @eml.coverage do
-      eml_temporal_coverage 
+      eml_temporal_coverage
     end
     end
   end
