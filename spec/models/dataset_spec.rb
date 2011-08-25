@@ -194,7 +194,7 @@ describe Dataset do
     chamber_datatable.variates.should_not be_empty
     datetime = chamber_datatable.variates.where(:name => 'datetime').first
     datetime.description.should == 'time stamp'
-    datetime.measurement_scale.should == 'measurementScale'
+    datetime.measurement_scale.should == 'dateTime'
     datetime.date_format.should == 'MM/DD/YYYY hh:mm'
       #datatable.variates.all.should_not be_empty
       #year_variate = datatable.variates.where(:name => 'Year').first
