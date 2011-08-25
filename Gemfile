@@ -23,6 +23,8 @@ gem 'formtastic'
 # can we go back to the collective idea branch of awesome_nested_set
 gem 'awesome_nested_set' #, :git => 'git://github.com/galetahub/awesome_nested_set.git'
 gem 'thin'
+gem 'unicorn'
+
 gem 'jquery-rails', '>= 0.2.6'
 
 gem 'workflow'
@@ -57,11 +59,9 @@ gem 'barista'
 
 gem 'has_scope'
 
-#gem 'ris_parser', :git => 'git://github.com/kf8a/ris_parser.git', :branch => 'develop'
+gem 'ris_parser', :git => 'git://github.com/kf8a/ris_parser.git', :branch => 'develop'
 
 gem 'exception_notification'
-
-gem 'unicorn'
 
 group :development, :test  do
   # bundler requires these gems in development
@@ -84,8 +84,8 @@ group :test do
   gem 'remarkable_activerecord', '>=4.0.0.alpha2'
 
   #Cucumber stuff
-  gem 'capybara', '0.4.1.2'
-  gem 'cucumber-rails', '0.4.1'
+  gem 'capybara' #, '0.4.1.2'
+  gem 'cucumber-rails' #, '0.4.1'
   gem 'spork'
   gem 'launchy'
   gem 'database_cleaner'

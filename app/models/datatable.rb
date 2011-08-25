@@ -254,11 +254,15 @@ class Datatable < ActiveRecord::Base
     # stupid microsofts
     csv_string = raw_csv.force_encoding("UTF-8")
     result = ""
-    result = data_access_statement + data_source + data_comments + csv_string
+    result =  header + csv_string
     if is_utf_8
       result = Iconv.conv('utf-16','utf-8', result)
     end
     result
+  end
+
+  def header
+    data_access_statement + data_source + data_comments
   end
 
   def to_climdb
@@ -417,7 +421,7 @@ class Datatable < ActiveRecord::Base
   def eml_data_format
     @eml.dataFormat do
       @eml.textFormat do
-        @eml.numHeaderLines (data_access_statement.lines.to_a.size + 4).to_s
+        @eml.numHeaderLines (header.lines.to_a.size).to_s
         @eml.recordDelimiter "\n"
         @eml.attributeOrientation 'column'
         @eml.simpleDelimited do

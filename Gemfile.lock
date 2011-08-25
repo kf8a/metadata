@@ -7,6 +7,14 @@ GIT
       activesupport (>= 3.0.0)
 
 GIT
+  remote: git://github.com/kf8a/ris_parser.git
+  revision: d9f56a7fe68b696dbaf21d2bfd29b5ce539acbbe
+  branch: develop
+  specs:
+    ris_parser (0.0.1)
+      parslet
+
+GIT
   remote: https://github.com/kf8a/ruby-openid.git
   revision: c010cead260bce7a2707d8bbe7430c2121141103
   specs:
@@ -71,16 +79,13 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
-    capybara (0.4.1.2)
-      celerity (>= 0.7.9)
-      culerity (>= 0.2.4)
+    capybara (1.0.1)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
-      selenium-webdriver (>= 0.0.27)
-      xpath (~> 0.1.3)
-    celerity (0.8.9)
+      selenium-webdriver (~> 2.0)
+      xpath (~> 0.1.4)
     childprocess (0.2.1)
       ffi (~> 1.0.6)
     chronic (0.3.0)
@@ -94,7 +99,7 @@ GEM
     clearance (0.10.5)
       diesel (~> 0.1.4)
       rails (~> 3.0.0)
-    cocaine (0.1.0)
+    cocaine (0.2.0)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
@@ -106,11 +111,10 @@ GEM
       gherkin (~> 2.4.5)
       json (>= 1.4.6)
       term-ansicolor (>= 1.0.5)
-    cucumber-rails (0.4.1)
-      cucumber (>= 0.10.1)
-      nokogiri (>= 1.4.4)
-      rack-test (>= 0.5.7)
-    culerity (0.2.15)
+    cucumber-rails (1.0.2)
+      capybara (>= 1.0.0)
+      cucumber (~> 1.0.0)
+      nokogiri (>= 1.4.6)
     daemons (1.1.4)
     dalli (1.0.5)
     database_cleaner (0.6.7)
@@ -140,7 +144,7 @@ GEM
       i18n (~> 0.4)
     friendly_id (3.2.1.1)
       babosa (~> 0.3.0)
-    gherkin (2.4.7)
+    gherkin (2.4.11)
       json (>= 1.4.6)
     haml (3.1.2)
     has_scope (0.5.1)
@@ -334,9 +338,9 @@ DEPENDENCIES
   barista
   bibtex-ruby
   capistrano
-  capybara (= 0.4.1.2)
+  capybara
   clearance (= 0.10.5)
-  cucumber-rails (= 0.4.1)
+  cucumber-rails
   dalli
   database_cleaner
   exception_notification
@@ -361,6 +365,7 @@ DEPENDENCIES
   rails (= 3.0.10)
   rake
   remarkable_activerecord (>= 4.0.0.alpha2)
+  ris_parser!
   rspec
   rspec-rails
   ruby-openid!
