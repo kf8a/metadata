@@ -11,7 +11,7 @@ xml.hrv:harvestList, 'xmlns:hrv' => 'eml://ecoinformatics.org/harvestList' do
         xml.revision dataset.version
       end
       xml.documentType "eml://ecoinformatics.org/eml-2.1.0"
-      xml.documentURL  url_for(:controller => 'datasets', :action => 'show', :id => dataset, :format => :eml, :host => 'sebewa.kbs.msu.edu') 
+      xml.documentURL  url_for(:controller => 'datasets', :action => 'show', :id => dataset, :format => :eml, :host => 'lter.kbs.msu.edu') 
     end
 
   end
