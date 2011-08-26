@@ -89,6 +89,10 @@ class DatasetsController < ApplicationController
     else
       @dataset = Dataset.new(params[:dataset])
     end
+    unless @dataset.class == Dataset #if not a Dataset, it will be an array of errors
+      flash[:notice] = "Eml import had errors: " + @dataset.collect{|error| error.to_s}.join(' ')
+      @dataset = Dataset.new
+    end
     if @dataset.save
       flash[:notice] = 'Dataset was successfully created.'
     end

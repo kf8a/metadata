@@ -98,6 +98,7 @@ FactoryGirl.define do
     name              'date'
     description       'generic variate'
     measurement_scale 'dateTime'
+    date_format       'YYYY-MM-DD'
   end
 
   factory :venue_type do
@@ -122,9 +123,14 @@ FactoryGirl.define do
     end
   end
 
+  sequence :dataset_text do |n|
+    "uniquedataset#{n}"
+  end
+
   factory :dataset do
     title     'KBS001'
     abstract  'some new dataset'
+    dataset   { Factory.next(:dataset_text) }
 
     factory :restricted_dataset do |dataset|
       association :sponsor, :factory => :restricted_sponsor
@@ -134,11 +140,15 @@ FactoryGirl.define do
   factory :protocol do
     name          'Proto1'
     version_tag   0
-    dataset       FactoryGirl.create(:dataset)
+    dataset       { FactoryGirl.create(:dataset) }
+  end
+
+  sequence :name do |n|
+    "KBS001_#{n}"
   end
 
   factory :datatable do
-    name          'KBS001_001'
+    name
     title         'a really cool datatable'
     object        "select 1 as sample_date"
     is_sql         true
@@ -176,7 +186,7 @@ FactoryGirl.define do
   end
 
   factory :collection do
-    datatable   FactoryGirl.create(:datatable)
+    datatable
   end
 
   factory :abstract do

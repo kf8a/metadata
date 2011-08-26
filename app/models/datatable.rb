@@ -61,24 +61,30 @@ class Datatable < ActiveRecord::Base
     table = Datatable.find_by_id(table_id.to_i)
     unless table.present?
       table = Datatable.new
-      table.name = datatable_eml.attributes['id'].try(:value)
-      table.title = datatable_eml.css('entityName').text
-      table.description = datatable_eml.css('entityDescription').text
-      table.data_url = url
-      datatable_eml.css('methods methodStep').each do |protocol_eml|
-        protocol_id = protocol_eml.css('protocol references').text.gsub('protocol_', '')
-        protocol = Protocol.find_by_id(protocol_id)
-        table.protocols << protocol if protocol.present?
-      end
-
-      datatable_eml.css('attributeList attribute').each do |variate_eml|
-        table.variates << Variate.from_eml(variate_eml)
-      end
-
-      table.save
+      table.from_eml(datatable_eml)
     end
 
     table
+  end
+
+  def from_eml(datatable_eml)
+    self.name = datatable_eml.attributes['id'].try(:value)
+    self.title = datatable_eml.css('entityName').text
+    self.description = datatable_eml.css('entityDescription').text
+    self.data_url = datatable_eml.css('physical distribution online url').text
+    datatable_eml.css('methods methodStep').each do |protocol_eml|
+      protocol_id = protocol_eml.css('protocol references').text.gsub('protocol_', '')
+      protocol = Protocol.find_by_id(protocol_id)
+      self.protocols << protocol if protocol.present?
+    end
+
+    datatable_eml.css('attributeList attribute').each do |variate_eml|
+      self.variates << Variate.from_eml(variate_eml)
+    end
+
+    self.save
+
+    self
   end
 
   def valid_for_eml
@@ -248,11 +254,15 @@ class Datatable < ActiveRecord::Base
     # stupid microsofts
     csv_string = raw_csv.force_encoding("UTF-8")
     result = ""
-    result = data_access_statement + data_source + data_comments + csv_string
+    result =  header + csv_string
     if is_utf_8
       result = Iconv.conv('utf-16','utf-8', result)
     end
     result
+  end
+
+  def header
+    data_access_statement + data_source + data_comments
   end
 
   def to_climdb
@@ -411,7 +421,7 @@ class Datatable < ActiveRecord::Base
   def eml_data_format
     @eml.dataFormat do
       @eml.textFormat do
-        @eml.numHeaderLines (data_access_statement.lines.to_a.size + 4).to_s
+        @eml.numHeaderLines (header.lines.to_a.size).to_s
         @eml.recordDelimiter "\n"
         @eml.attributeOrientation 'column'
         @eml.simpleDelimited do

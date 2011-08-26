@@ -11,7 +11,11 @@ describe Variate do
       eml_content = @variate.to_eml
       eml_element = Nokogiri::XML(eml_content).css('attribute').first
       imported_variate = Variate.from_eml(eml_element)
-      imported_variate.should == @variate
+      variate_attributes = @variate.attributes
+      variate_attributes.delete('id')
+      imported_attributes = imported_variate.attributes
+      imported_attributes.delete('id')
+      imported_attributes.should == variate_attributes
     end
 
     it "should import new variates" do

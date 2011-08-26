@@ -288,8 +288,13 @@ class DatatablesControllerTest < ActionController::TestCase
   end
 
   def test_should_create_datatable
+    assert_nil Datatable.find_by_name('a unique name')
+    dataset = FactoryGirl.create(:dataset)
+    datatable = Datatable.new(:title => 'soil pH', :dataset_id => dataset.id, :name => 'a unique name')
+    datatable.valid?
+    assert_equal datatable.errors, {}
     old_count = Datatable.count
-    post :create, :datatable => {:title => 'soil pH', :dataset_id => 1 }
+    post :create, :datatable => {:title => 'soil pH', :dataset_id => dataset.id, :name => 'a unique name' }
     assert_equal old_count+1, Datatable.count
 
     assert_redirected_to datatable_path(assigns(:datatable))
