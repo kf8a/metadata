@@ -233,6 +233,16 @@ describe Dataset do
     lat.precision.should == 0.0000000001
   end
 
+  it 'should work with a few other eml docs' do
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-ntl.218.6'
+    errors = Dataset.from_eml(uri)
+    errors.first.to_s.should == "Element '{eml://ecoinformatics.org/eml-2.0.1}eml': No matching global declaration available for the validation root."
+
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-vcr.174.5'
+    dataset = Dataset.from_eml(uri)
+    dataset.title.should == 'Biomass of benthic macroalgae in Virginia Coastal Bays'
+  end
+
   def valid_eml_doc?(eml_content)
     xsd = nil
     Dir.chdir("#{Rails.root}/test/data/eml-2.1.0") do
