@@ -59,7 +59,7 @@ gem 'barista'
 
 gem 'has_scope'
 
-gem 'ris_parser', :git => 'git://github.com/kf8a/ris_parser.git', :branch => 'develop'
+gem 'ris_parser', :git => 'git://github.com/kf8a/ris_parser.git'
 
 gem 'exception_notification'
 
