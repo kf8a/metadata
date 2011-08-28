@@ -241,6 +241,47 @@ describe Dataset do
     uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-vcr.174.5'
     dataset = Dataset.from_eml(uri)
     dataset.title.should == 'Biomass of benthic macroalgae in Virginia Coastal Bays'
+
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-ntl.160.3'
+    errors = Dataset.from_eml(uri)
+    errors.first.to_s.should == "Element '{eml://ecoinformatics.org/eml-2.0.1}eml': No matching global declaration available for the validation root."
+
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-hfr.152.2'
+    dataset = Dataset.from_eml(uri)
+    dataset.title.should == 'Detection Histories for Hemlock Woolly Adelgid Infestations at Cadwell Forest'
+
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-pie.19.4'
+    errors = Dataset.from_eml(uri)
+    errors.first.to_s.should == "Element '{eml://ecoinformatics.org/eml-2.0.1}eml': No matching global declaration available for the validation root."
+
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-ntl.93.5'
+    errors = Dataset.from_eml(uri)
+    errors.first.to_s.should == "Element '{eml://ecoinformatics.org/eml-2.0.1}eml': No matching global declaration available for the validation root."
+
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-hfr.81.10'
+    dataset = Dataset.from_eml(uri)
+    dataset.title.should == "Landscape Response to Hemlock Woolly Adelgid in Southern New England"
+
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-bnz.83.8'
+    errors = Dataset.from_eml(uri)
+    errors.first.to_s.should == "Element '{eml://ecoinformatics.org/eml-2.0.1}eml': No matching global declaration available for the validation root."
+
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-sgs.6.1'
+    errors = Dataset.from_eml(uri)
+    errors.first.to_s.should == "Element '{eml://ecoinformatics.org/eml-2.0.1}eml': No matching global declaration available for the validation root."
+
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-sgs.7.1'
+    errors = Dataset.from_eml(uri)
+    errors.first.to_s.should == "Element '{eml://ecoinformatics.org/eml-2.0.1}eml': No matching global declaration available for the validation root."
+
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-and.4033.4'
+    errors = Dataset.from_eml(uri)
+    errors.first.to_s.should == "Element '{eml://ecoinformatics.org/eml-2.0.0}eml': No matching global declaration available for the validation root."
+
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-and.4027.7'
+    valid_eml_doc?(uri)
+    dataset = Dataset.from_eml(uri)
+    dataset.title.should == "Aquatic Vertebrate Population Study, Mack Creek, Andrews Experimental Forest"
   end
 
   def valid_eml_doc?(eml_content)

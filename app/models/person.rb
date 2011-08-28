@@ -39,7 +39,7 @@ class Person < ActiveRecord::Base
 
   def phone_from_eml(phone_eml)
     phone_number = phone_eml.text
-    phone_type = phone_eml.attributes['phonetype'].value
+    phone_type = phone_eml.attributes['phonetype'].try(:value)
     if phone_type == 'phone'
       self.phone = phone_number
     elsif phone_type == 'fax'
