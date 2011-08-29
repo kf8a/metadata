@@ -36,11 +36,8 @@ class Dataset < ActiveRecord::Base
       xsd = Nokogiri::XML::Schema(File.read("eml.xsd"))
     end
     validation_errors = xsd.validate(eml_doc)
-    if validation_errors.empty?
-      self.new.from_eml(eml_doc)
-    else
-      validation_errors
-    end
+    
+    validation_errors.presence || self.new.from_eml(eml_doc)
   end
 
   def from_eml(eml_doc)
