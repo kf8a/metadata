@@ -52,10 +52,20 @@ class Dataset < ActiveRecord::Base
     self.completed = dataset_eml.css('temporalCoverage rangeOfDates endDate calendarDate').text
     save
 
+    associated_models_from_eml(eml_doc)
+
+    save
+
+    self
+  end
+
+  def associated_models_from_eml(eml_doc)
     eml_doc.css('methods methodStep').each do |protocol_eml|
       protocol_to_add = Protocol.from_eml(protocol_eml)
       self.protocols << protocol_to_add if protocol_to_add
     end
+
+    dataset_eml = eml_doc.css('dataset')
 
     dataset_eml.css('associatedParty').each do |person_eml|
       self.people << Person.from_eml(person_eml)
@@ -69,10 +79,6 @@ class Dataset < ActiveRecord::Base
     dataset_eml.css('keywordSet keyword').each do |keyword_eml|
       self.keyword_list << keyword_eml.text
     end
-
-    save
-
-    self
   end
 
   def to_label
