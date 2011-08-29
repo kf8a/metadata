@@ -37,14 +37,10 @@ class Dataset < ActiveRecord::Base
     end
     validation_errors = xsd.validate(eml_doc)
     if validation_errors.empty?
-      dataset = self.new
-      dataset.from_eml(eml_doc)
-
+      self.new.from_eml(eml_doc)
     else
       validation_errors
     end
-
-    #  eml_custom_unit_list if custom_units.present?
   end
 
   def from_eml(eml_doc)
