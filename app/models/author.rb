@@ -1,4 +1,5 @@
 require 'citation_format'
+
 class Author < ActiveRecord::Base
   include CitationFormat
 

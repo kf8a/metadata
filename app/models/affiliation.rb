@@ -18,4 +18,3 @@ end
 #  seniority  :integer
 #  title      :string(255)
 #
-
