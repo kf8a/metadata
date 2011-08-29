@@ -45,18 +45,19 @@ class Dataset < ActiveRecord::Base
   end
 
   def from_eml(eml_doc)
+    basic_attributes_from_eml(eml_doc)
+    associated_models_from_eml(eml_doc)
+
+    self
+  end
+
+  def basic_attributes_from_eml(eml_doc)
     dataset_eml = eml_doc.css('dataset')
     self.title = dataset_eml.css('title').first.text
     self.abstract = dataset_eml.css('abstract para').text
     self.initiated = dataset_eml.css('temporalCoverage rangeOfDates beginDate calendarDate').text
     self.completed = dataset_eml.css('temporalCoverage rangeOfDates endDate calendarDate').text
     save
-
-    associated_models_from_eml(eml_doc)
-
-    save
-
-    self
   end
 
   def associated_models_from_eml(eml_doc)
@@ -78,6 +79,8 @@ class Dataset < ActiveRecord::Base
     dataset_eml.css('keywordSet keyword').each do |keyword_eml|
       self.keyword_list << keyword_eml.text
     end
+
+    save
   end
 
   def to_label
