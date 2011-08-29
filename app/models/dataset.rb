@@ -36,41 +36,46 @@ class Dataset < ActiveRecord::Base
       xsd = Nokogiri::XML::Schema(File.read("eml.xsd"))
     end
     validation_errors = xsd.validate(eml_doc)
-    if validation_errors == [] #this is an array of the errors
-      dataset_eml = eml_doc.css('dataset')
+    if validation_errors.empty?
       dataset = self.new
-      dataset.title = dataset_eml.css('title').first.text
-      dataset.abstract = dataset_eml.css('abstract para').text
-      dataset.initiated = dataset_eml.css('temporalCoverage rangeOfDates beginDate calendarDate').text
-      dataset.completed = dataset_eml.css('temporalCoverage rangeOfDates endDate calendarDate').text
-      dataset.save
+      dataset.from_eml(eml_doc)
 
-      eml_doc.css('methods methodStep').each do |protocol_eml|
-        protocol_to_add = Protocol.from_eml(protocol_eml)
-        dataset.protocols << protocol_to_add if protocol_to_add
-      end
-
-      dataset_eml.css('associatedParty').each do |person_eml|
-        dataset.people << Person.from_eml(person_eml)
-      end
-
-      dataset_eml.css('dataTable').each do |datatable_eml|
-        table = dataset.datatables.new
-        table.from_eml(datatable_eml)
-      end
-
-      dataset_eml.css('keywordSet keyword').each do |keyword_eml|
-        dataset.keyword_list << keyword_eml.text
-      end
-
-      dataset.save
-
-      dataset
     else
       validation_errors
     end
 
     #  eml_custom_unit_list if custom_units.present?
+  end
+
+  def from_eml(eml_doc)
+    dataset_eml = eml_doc.css('dataset')
+    self.title = dataset_eml.css('title').first.text
+    self.abstract = dataset_eml.css('abstract para').text
+    self.initiated = dataset_eml.css('temporalCoverage rangeOfDates beginDate calendarDate').text
+    self.completed = dataset_eml.css('temporalCoverage rangeOfDates endDate calendarDate').text
+    save
+
+    eml_doc.css('methods methodStep').each do |protocol_eml|
+      protocol_to_add = Protocol.from_eml(protocol_eml)
+      self.protocols << protocol_to_add if protocol_to_add
+    end
+
+    dataset_eml.css('associatedParty').each do |person_eml|
+      self.people << Person.from_eml(person_eml)
+    end
+
+    dataset_eml.css('dataTable').each do |datatable_eml|
+      table = self.datatables.new
+      table.from_eml(datatable_eml)
+    end
+
+    dataset_eml.css('keywordSet keyword').each do |keyword_eml|
+      self.keyword_list << keyword_eml.text
+    end
+
+    save
+
+    self
   end
 
   def to_label
@@ -100,16 +105,16 @@ class Dataset < ActiveRecord::Base
   end
 
   #unpack and populate datatables and variates
-  def from_eml(dataset)
-    dataset.elements.each do |element|
-      self.send(element.name, element.value)
-    end
-    dataset.elements['//dataTable'].each do |datatable|
-      dtable = DataTable.new
-      dtable.from_eml(datatable)
-      datatables << dtable
-    end
-  end
+  #def from_eml(dataset)
+  #  dataset.elements.each do |element|
+  #    self.send(element.name, element.value)
+  #  end
+  #  dataset.elements['//dataTable'].each do |datatable|
+  #    dtable = DataTable.new
+  #    dtable.from_eml(datatable)
+  #    datatables << dtable
+  #  end
+  #end
 
   def package_id
     "knb-lter-kbs.#{metacat_id.nil? ? self.id : metacat_id}.#{version}"
