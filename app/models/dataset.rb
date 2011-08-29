@@ -72,8 +72,7 @@ class Dataset < ActiveRecord::Base
     end
 
     dataset_eml.css('dataTable').each do |datatable_eml|
-      table = self.datatables.new
-      table.from_eml(datatable_eml)
+      self.datatables.new.from_eml(datatable_eml)
     end
 
     dataset_eml.css('keywordSet keyword').each do |keyword_eml|
