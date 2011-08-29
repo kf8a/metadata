@@ -31,13 +31,17 @@ class Dataset < ActiveRecord::Base
     else
       eml_doc = Nokogiri::XML(eml_text)
     end
+
+    validation_errors(eml_doc).presence || self.new.from_eml(eml_doc)
+  end
+
+  def self.validation_errors(eml_doc)
     xsd = nil
     Dir.chdir("#{Rails.root}/test/data/eml-2.1.0") do
       xsd = Nokogiri::XML::Schema(File.read("eml.xsd"))
     end
-    validation_errors = xsd.validate(eml_doc)
-    
-    validation_errors.presence || self.new.from_eml(eml_doc)
+
+    xsd.validate(eml_doc)
   end
 
   def from_eml(eml_doc)
