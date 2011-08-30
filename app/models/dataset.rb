@@ -45,14 +45,14 @@ class Dataset < ActiveRecord::Base
   end
 
   def from_eml(eml_doc)
-    basic_attributes_from_eml(eml_doc)
-    associated_models_from_eml(eml_doc)
+    dataset_eml = eml_doc.css('dataset').first
+    basic_attributes_from_eml(dataset_eml)
+    associated_models_from_eml(dataset_eml)
 
     self
   end
 
-  def basic_attributes_from_eml(eml_doc)
-    dataset_eml = eml_doc.css('dataset')
+  def basic_attributes_from_eml(dataset_eml)
     self.title = dataset_eml.css('title').first.text
     self.abstract = dataset_eml.css('abstract para').text
     self.initiated = dataset_eml.css('temporalCoverage rangeOfDates beginDate calendarDate').text
@@ -60,12 +60,10 @@ class Dataset < ActiveRecord::Base
     save
   end
 
-  def associated_models_from_eml(eml_doc)
-    eml_doc.css('methods methodStep protocol').each do |protocol_eml|
+  def associated_models_from_eml(dataset_eml)
+    dataset_eml.parent.css('methods methodStep protocol').each do |protocol_eml|
       self.protocols << Protocol.from_eml(protocol_eml)
     end
-
-    dataset_eml = eml_doc.css('dataset')
 
     dataset_eml.css('associatedParty').each do |person_eml|
       self.people << Person.from_eml(person_eml)
