@@ -3,19 +3,19 @@ require 'nokogiri'
 require 'open-uri'
 
 class Dataset < ActiveRecord::Base
-  has_many :datatables, :order => 'name'
-  has_many :protocols, :conditions => 'active is true'
-  has_many :people, :through => :affiliations
-  has_many :affiliations, :order => 'seniority'
-  has_many :roles, :through => :affiliations, :uniq => true
-  has_and_belongs_to_many :themes
-  belongs_to :project
+  has_many                :affiliations, order:      'seniority'
+  has_many                :datatables,   order:      'name'
+  has_many                :people,       through:    :affiliations
+  belongs_to              :project
+  has_many                :protocols,    conditions: 'active is true'
+  has_many                :roles,        through:    :affiliations, uniq: true
+  belongs_to              :sponsor
   has_and_belongs_to_many :studies
-  belongs_to :sponsor
-  belongs_to :website
+  has_and_belongs_to_many :themes
+  belongs_to              :website
 
-  validates_presence_of :abstract
-  validates_uniqueness_of :dataset
+  validates :abstract, :presence   => true
+  validates :dataset,  :uniqueness => true
 
   accepts_nested_attributes_for :affiliations, :allow_destroy => true
 
@@ -132,7 +132,7 @@ class Dataset < ActiveRecord::Base
 
   def to_eml
     @eml = Builder::XmlMarkup.new
-    @eml.instruct! :xml, :version => '1.0'
+    @eml.instruct! :xml, version: '1.0'
     @eml.tag!('eml:eml',
         'xmlns:eml'           => 'eml://ecoinformatics.org/eml-2.1.0',
         'xmlns:set'           => 'http://exslt.org/sets',
@@ -198,21 +198,21 @@ class Dataset < ActiveRecord::Base
             case unit
             when unit.multiplier_to_si  && unit.parent_si  &&  unit.unit_type then
               @eml.tag!('stmml:unit',
-                        'id' => unit.name,
-                        'multiplierToSI' => unit.multiplier_to_si,
-                        'parentSI' => unit.parent_si,
-                        'unitType' => unit.unit_type,
-                        'name' => unit.name)
+                        id:             unit.name,
+                        multiplierToSI: unit.multiplier_to_si,
+                        parentSI:       unit.parent_si,
+                        unitType:       unit.unit_type,
+                        name:           unit.name)
             when unit.multiplier_to_si && unit.parent_si then
               @eml.tag!('stmml:unit',
-                        'id' => unit.name,
-                        'multiplierToSI' => unit.multiplier_to_si,
-                        'parentSI' => unit.parent_si,
-                        'name' => unit.name)
+                        id:             unit.name,
+                        multiplierToSI: unit.multiplier_to_si,
+                        parentSI:       unit.parent_si,
+                        name:           unit.name)
             else
               @eml.tag!('stmml:unit',
-                        'id' => unit.name,
-                        'name' => unit.name)
+                        id:   unit.name,
+                        name: unit.name)
             end
           end
         end
@@ -221,7 +221,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_access
-    @eml.access 'scope' => 'document', 'order' => 'allowFirst', 'authSystem' => 'knb' do
+    @eml.access scope: 'document', order: 'allowFirst', authSystem: 'knb' do
       eml_allow('uid=KBS,o=lter,dc=ecoinformatics,dc=org', 'all')
       eml_allow('public','read')
     end
@@ -298,7 +298,7 @@ class Dataset < ActiveRecord::Base
   def keyword_sets
     @eml.keywordSet do
       ['LTER','KBS','Kellogg Biological Station', 'Hickory Corners', 'Michigan', 'Great Lakes'].each do| keyword |
-        @eml.keyword keyword, 'keywordType' => 'place'
+        @eml.keyword keyword, keywordType: 'place'
       end
     end
   end
@@ -307,10 +307,12 @@ class Dataset < ActiveRecord::Base
     @eml.contact do
       @eml.organizationName 'Kellogg Biological Station'
       @eml.positionName 'Data Manager'
-      p = Person.new( :organization => 'Kellogg Biological Station',
-        :street_address => '3700 East Gull Lake Drive',
-        :city => 'Hickory Corners',:locale => 'Mi',:postal_code => '49060',
-        :country => 'USA')
+      p = Person.new( organization:   'Kellogg Biological Station',
+                      street_address: '3700 East Gull Lake Drive',
+                      city:           'Hickory Corners',
+                      locale:         'Mi',
+                      postal_code:    '49060',
+                      country:        'USA')
       p.eml_address(@eml)
       @eml.electronicMailAddress 'lter.data.manager@kbs.msu.edu'
       @eml.onlineUrl 'http://lter.kbs.msu.edu'
