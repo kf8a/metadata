@@ -109,11 +109,23 @@ class Citation < ActiveRecord::Base
     end
   end
 
+  def page_number_from_ris(start_page, end_page)
+    if end_page.blank?
+      if start_page =~ /(\d+)-(\d+)/ 
+        start_page = $1
+        end_page = $2
+      end
+    end
+    self.start_page_number = start_page
+    self.ending_page_number = end_page
+  end
+
   def Citation.from_ris(ris_text, pdf_folder = nil)
     parser = RisParser::RisParser.new
     trans = RisParser::RisParserTransform.new
     parsed_text = trans.apply(parser.parse(ris_text))
     parsed_text.collect do |stanza|
+      logger.info stanza
       citation_from_ris_stanza(stanza, pdf_folder)
     end
   end
@@ -141,14 +153,14 @@ class Citation < ActiveRecord::Base
     citation.get_attributes_from_ris_stanza(stanza, same_name_attributes)
     citation.get_attribute_from_ris_stanza(stanza, 'publication', :journal)
     citation.date_from_ris_date(stanza[:primary_date]) if stanza[:primary_date]
-    citation.start_page_number = stanza[:start_page] unless stanza[:start_page].to_i == 0 #sometimes it is not a number
-    citation.ending_page_number = stanza[:end_page] unless stanza[:end_page].to_i == 0
+    citation.page_number_from_ris( stanza[:start_page], stanza[:end_page]) 
     citation.pdf_from_ris_pdf(stanza[:pdf], pdf_folder) if pdf_folder && stanza[:pdf]
 
     citation.save
     citation.authors_from_ris_authors(stanza[:authors])
     citation
   end
+
 
   def date_from_ris_date(ris_date)
     if ris_date.to_i != 0 #it is just an integer string

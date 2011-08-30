@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110713195943) do
+ActiveRecord::Schema.define(:version => 20110830122320) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -58,8 +59,8 @@ ActiveRecord::Schema.define(:version => 20110713195943) do
     t.text     "address"
     t.text     "notes"
     t.string   "publication"
-    t.integer  "start_page_number"
-    t.integer  "ending_page_number"
+    t.string   "start_page_number"
+    t.string   "ending_page_number"
     t.text     "periodical_full_name"
     t.string   "periodical_abbreviation"
     t.string   "volume"
