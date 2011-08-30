@@ -194,58 +194,94 @@ describe Dataset do
     chamber_datatable.variates.should_not be_empty
     datetime = chamber_datatable.variates.where(:name => 'datetime').first
     datetime.description.should == 'time stamp'
-    datetime.measurement_scale.should == 'measurementScale'
+    datetime.measurement_scale.should == 'dateTime'
     datetime.date_format.should == 'MM/DD/YYYY hh:mm'
-      #datatable.variates.all.should_not be_empty
-      #year_variate = datatable.variates.where(:name => 'Year').first
-      #year_variate.should be_a Variate
-      #year_variate.description.should == 'Year of sample collection'
-      #year_variate.measurement_scale.should == 'dateTime'
-      #year_variate.date_format.should == 'YYYY'
-      #month_variate = datatable.variates.where(:name => 'Month').first
-      #month_variate.should be_a Variate
-      #month_variate.description.should == 'Month of sample collection'
-      #month_variate.measurement_scale.should == 'dateTime'
-      #month_variate.date_format.should == 'MM'
-      #day_variate = datatable.variates.where(:name => 'Day').first
-      #day_variate.should be_a Variate
-      #day_variate.description.should == 'Day of sample collection'
-      #day_variate.measurement_scale.should == 'dateTime'
-      #day_variate.date_format.should == 'DD'
-      #station_variate = datatable.variates.where(:name => 'Station').first
-      #station_variate.should be_a Variate
-      #station_variate.description.should == 'Site location code'
-      #station_variate.measurement_scale.should == 'nominal'
-      #zone_variate = datatable.variates.where(:name => 'Zone').first
-      #zone_variate.should be_a Variate
-      #zone_variate.description.should == 'Site location zone'
-      #zone_variate.measurement_scale.should == 'nominal'
-      #replicate_variate = datatable.variates.where(:name => 'Replicate').first
-      #replicate_variate.should be_a Variate
-      #replicate_variate.description.should == 'Sample replicate (number = sample number from across the station, letter = replication at a particular number area)'
-      #replicate_variate.measurement_scale.should == 'nominal'
-      #chl_variate = datatable.variates.where(:name => 'Chl_a_Conc').first
-      #chl_variate.should be_a Variate
-      #chl_variate.description.should == 'Surface sediment chlorophyll a concentration'
-      #chl_variate.measurement_scale.should == 'ratio'
-      #chl_unit = chl_variate.unit
-      #chl_unit.name.should == 'milligramsPerSquareMeter'
-      #chl_variate.precision.should == 0.1
-      #sed_dens_variate = datatable.variates.where(:name => 'Sed_Density').first
-      #sed_dens_variate.description.should == 'Surface sediment density (grams wet sediment per volume)'
-      #sed_dens_variate.measurement_scale.should == 'ratio'
-      #sed_dens_variate.unit.name.should == 'gramsPerCubicCentimeter'
-      #sed_dens_variate.precision.should == 0.01
-      #sed_poros_variate = datatable.variates.where(:name => 'Sed_Porosity').first
-      #sed_poros_variate.description.should == 'Surface sediment porosity (grams water per gram wet sediment)'
-      #sed_poros_variate.measurement_scale.should == 'ratio'
-      #sed_poros_variate.unit.name.should == 'dimensionless'
-      #sed_poros_variate.precision.should == 0.01
-      #org_variate = datatable.variates.where(:name => 'Organic_Content').first
-      #org_variate.description.should == 'Organic content (grams per gram dry sediment)'
-      #org_variate.measurement_scale.should == 'ratio'
-      #org_variate.unit.name.should == 'dimensionless'
-      #org_variate.precision.should == 0.01
+    julian_day = chamber_datatable.variates.where(:name => 'JD').first
+    julian_day.description.should == 'Julian Day'
+    julian_day.measurement_scale.should == 'dateTime'
+    julian_day.date_format.should == 'DDD'
+    chamber_number = chamber_datatable.variates.where(:name => 'Chamber').first
+    chamber_number.description.should == 'chamber number (1-12)'
+    chamber_number.measurement_scale.should == 'nominal'
+    cat_avg = chamber_datatable.variates.where(:name => 'CAT1_Avg').first
+    cat_avg.description.should == 'chamber air temperature 1 -average'
+    cat_avg.measurement_scale.should == 'ratio'
+    cat_avg.unit.name.should == 'celsius'
+    cat_avg.precision.should == 0.001
+    cq_avg = chamber_datatable.variates.where(:name => 'CQ_Avg').first
+    cq_avg.description.should == 'chamber quantum sensor flux density - average'
+    cq_avg.measurement_scale.should == 'ratio'
+    cq_avg.unit.name.should == 'micromolePerMeterSquaredPerSecond'
+    cq_avg.precision.should == 0.001
+    chamber_datatable_2 = dataset.datatables.where(:title => 'hf113-02-hf-chamber-since-2009.csv').first
+    chamber_datatable_2.should be_a Datatable
+    plate_datatable = dataset.datatables.where(:title => 'hf113-04-hf-hfp.csv').first
+    plate_avg = plate_datatable.variates.where(:name => 'SHF_Avg(1)').first
+    plate_avg.precision.should == 0.000001
+    propane_datatable = dataset.datatables.where(:title => 'hf113-07-hf-propane-hourly.csv').first
+    ants_high = propane_datatable.variates.where(:name => 'Ants1_high_Avg').first
+    ants_high.description.should == 'average water temperature of supply on Ants Block #1'
+    thermal_datatable = dataset.datatables.where(:title => 'hf113-23-hf-thermal.csv').first
+    length = thermal_datatable.variates.where(:name => 'Length').first
+    length.description.should == %Q{body length, quantified as Weber's length (see Brown WL (1953) Revisionary studies in the ant tribe Dacetini. Am Midl Nat 50:1-137)}
+    twc = thermal_datatable.variates.where(:name => 'TWC').first
+    twc.description.should == %Q{total water content, calculated as (( Live mass - Dry mass ) × 100 ) / Live mass (see Schilman PE, Lighton JRB, Holway DA (2007) Water balance in the Argentine ant (Linepithema humile) compared with five common native ant species from southern California. Physiol Entomol 32 (1):1-7.)}
+    twc.precision.should == 0.000000001
+    barcode_datatable = dataset.datatables.where(:title => 'hf113-30-hf-spider-barcode.csv').first
+    lat = barcode_datatable.variates.where(:name => 'Lat').first
+    lat.measurement_scale.should == 'interval'
+    lat.precision.should == 0.0000000001
+  end
+
+  it 'should work with a few other eml docs' do
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-ntl.218.6'
+    errors = Dataset.from_eml(uri)
+    errors.first.to_s.should == "Element '{eml://ecoinformatics.org/eml-2.0.1}eml': No matching global declaration available for the validation root."
+
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-vcr.174.5'
+    dataset = Dataset.from_eml(uri)
+    dataset.title.should == 'Biomass of benthic macroalgae in Virginia Coastal Bays'
+
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-ntl.160.3'
+    errors = Dataset.from_eml(uri)
+    errors.first.to_s.should == "Element '{eml://ecoinformatics.org/eml-2.0.1}eml': No matching global declaration available for the validation root."
+
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-hfr.152.2'
+    dataset = Dataset.from_eml(uri)
+    dataset.title.should == 'Detection Histories for Hemlock Woolly Adelgid Infestations at Cadwell Forest'
+
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-pie.19.4'
+    errors = Dataset.from_eml(uri)
+    errors.first.to_s.should == "Element '{eml://ecoinformatics.org/eml-2.0.1}eml': No matching global declaration available for the validation root."
+
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-ntl.93.5'
+    errors = Dataset.from_eml(uri)
+    errors.first.to_s.should == "Element '{eml://ecoinformatics.org/eml-2.0.1}eml': No matching global declaration available for the validation root."
+
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-hfr.81.10'
+    dataset = Dataset.from_eml(uri)
+    dataset.title.should == "Landscape Response to Hemlock Woolly Adelgid in Southern New England"
+
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-bnz.83.8'
+    errors = Dataset.from_eml(uri)
+    errors.first.to_s.should == "Element '{eml://ecoinformatics.org/eml-2.0.1}eml': No matching global declaration available for the validation root."
+
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-sgs.6.1'
+    errors = Dataset.from_eml(uri)
+    errors.first.to_s.should == "Element '{eml://ecoinformatics.org/eml-2.0.1}eml': No matching global declaration available for the validation root."
+
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-sgs.7.1'
+    errors = Dataset.from_eml(uri)
+    errors.first.to_s.should == "Element '{eml://ecoinformatics.org/eml-2.0.1}eml': No matching global declaration available for the validation root."
+
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-and.4033.4'
+    errors = Dataset.from_eml(uri)
+    errors.first.to_s.should == "Element '{eml://ecoinformatics.org/eml-2.0.0}eml': No matching global declaration available for the validation root."
+
+    uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-and.4027.7'
+    valid_eml_doc?(uri)
+    dataset = Dataset.from_eml(uri)
+    dataset.title.should == "Aquatic Vertebrate Population Study, Mack Creek, Andrews Experimental Forest"
   end
 
   def valid_eml_doc?(eml_content)
