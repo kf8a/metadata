@@ -61,10 +61,8 @@ class Dataset < ActiveRecord::Base
   end
 
   def associated_models_from_eml(eml_doc)
-    eml_doc.css('methods methodStep').each do |method_eml|
-      if method_eml.css('protocol').any?
-        self.protocols << Protocol.from_eml(method_eml)
-      end
+    eml_doc.css('methods methodStep protocol').each do |protocol_eml|
+      self.protocols << Protocol.from_eml(protocol_eml)
     end
 
     dataset_eml = eml_doc.css('dataset')

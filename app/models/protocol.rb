@@ -11,13 +11,12 @@ class Protocol < ActiveRecord::Base
     "#{self.title}"
   end
 
-  def self.from_eml(method_eml)
-    protocol_eml = method_eml.css('protocol').first
+  def self.from_eml(protocol_eml)
     prot_id = protocol_eml.attributes['id'].try(:value).try(:gsub, 'protocol_', '')
     protocol = find_by_id(prot_id) || new
     if protocol.new_record?
       protocol.title = protocol_eml.css('title').text
-      protocol.abstract = method_eml.css('abstract').text
+      protocol.abstract = protocol_eml.parent.css('abstract').text
       protocol.save
     end
 
