@@ -14,10 +14,10 @@ class Dataset < ActiveRecord::Base
   has_and_belongs_to_many :themes
   belongs_to              :website
 
-  validates :abstract, :presence   => true
-  validates :dataset,  :uniqueness => true
+  validates :abstract, presence:   true
+  validates :dataset,  uniqueness: true
 
-  accepts_nested_attributes_for :affiliations, :allow_destroy => true
+  accepts_nested_attributes_for :affiliations, allow_destroy: true
 
   acts_as_taggable_on :keywords
 
