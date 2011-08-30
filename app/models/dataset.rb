@@ -38,7 +38,7 @@ class Dataset < ActiveRecord::Base
   def self.validation_errors(eml_doc)
     xsd = nil
     Dir.chdir("#{Rails.root}/test/data/eml-2.1.0") do
-      xsd = Nokogiri::XML::Schema(File.read("eml.xsd"))
+      xsd = Nokogiri::XML::Schema(File.read('eml.xsd'))
     end
 
     xsd.validate(eml_doc)
@@ -107,7 +107,7 @@ class Dataset < ActiveRecord::Base
   def within_interval?(start_date, end_date)
     sdate = start_date.to_date
     edate = end_date.to_date
-    !datatables.index { |table| table.within_interval?(sdate, edate) }.blank?
+    datatables.index { |table| table.within_interval?(sdate, edate) }.present?
   end
 
   #unpack and populate datatables and variates
@@ -123,7 +123,7 @@ class Dataset < ActiveRecord::Base
   #end
 
   def package_id
-    "knb-lter-kbs.#{metacat_id.nil? ? self.id : metacat_id}.#{version}"
+    "knb-lter-kbs.#{metacat_id || self.id}.#{version}"
   end
 
   def datatable_protocols
@@ -133,7 +133,7 @@ class Dataset < ActiveRecord::Base
   def to_eml
     @eml = Builder::XmlMarkup.new
     @eml.instruct! :xml, :version => '1.0'
-    @eml.tag!("eml:eml",
+    @eml.tag!('eml:eml',
         'xmlns:eml'           => 'eml://ecoinformatics.org/eml-2.1.0',
         'xmlns:set'           => 'http://exslt.org/sets',
         'xmlns:exslt'         => 'http://exslt.org/common',
@@ -150,15 +150,13 @@ class Dataset < ActiveRecord::Base
 
   #temporal extent
   def temporal_extent
-    begin_date = nil
-    end_date = nil
+    begin_date, end_date = nil
     datatables.each do |datatable |
       dates = datatable.temporal_extent
       datatable.update_temporal_extent
-      next if dates[:begin_date].nil?
-      next if dates[:end_date].nil?
-      begin_date = dates[:begin_date] if begin_date.nil? || begin_date > dates[:begin_date]
-      end_date = dates[:end_date] if end_date.nil? || end_date < dates[:end_date]
+      next unless dates[:begin_date] && dates[:end_date]
+      begin_date = dates[:begin_date] unless begin_date.try(:<, dates[:begin_date])
+      end_date   = dates[:end_date]   unless end_date.try(:>, dates[:end_date])
     end
     {:begin_date => begin_date, :end_date => end_date}
   end
