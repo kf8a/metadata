@@ -59,7 +59,7 @@ gem 'barista'
 
 gem 'has_scope'
 
-gem 'ris_parser', :git => 'git://github.com/kf8a/ris_parser.git', :branch => 'develop'
+gem 'ris_parser', :git => 'git://github.com/kf8a/ris_parser.git'
 
 gem 'exception_notification'
 
@@ -84,7 +84,7 @@ group :test do
   gem 'remarkable_activerecord', '>=4.0.0.alpha2'
 
   #Cucumber stuff
-  gem 'capybara' #, '0.4.1.2'
+  gem 'capybara', '0.4.1.2'
   gem 'cucumber-rails' #, '0.4.1'
   gem 'spork'
   gem 'launchy'
