@@ -53,7 +53,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def basic_attributes_from_eml(dataset_eml)
-    self.title = dataset_eml.css('title').first.text
+    self.title = dataset_eml.at_css('title').text
     self.abstract = dataset_eml.css('abstract para').text
     self.initiated = dataset_eml.css('temporalCoverage rangeOfDates beginDate calendarDate').text
     self.completed = dataset_eml.css('temporalCoverage rangeOfDates endDate calendarDate').text
