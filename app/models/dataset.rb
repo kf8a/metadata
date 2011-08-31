@@ -151,8 +151,8 @@ class Dataset < ActiveRecord::Base
       dates = datatable.temporal_extent
       datatable.update_temporal_extent
       next unless dates[:begin_date] && dates[:end_date]
-      begin_date = dates[:begin_date] unless begin_date.try(:<, dates[:begin_date])
-      end_date   = dates[:end_date]   unless end_date.try(:>, dates[:end_date])
+      begin_date = [begin_date, dates[:begin_date]].compact.min
+      end_date   = [end_date, dates[:end_date]].compact.max
     end
     {:begin_date => begin_date, :end_date => end_date}
   end
