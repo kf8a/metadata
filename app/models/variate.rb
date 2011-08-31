@@ -9,30 +9,18 @@ class Variate < ActiveRecord::Base
     variate = Variate.new
     variate.name = variate_eml.css('attributeName').text
     variate.description = variate_eml.css('attributeDefinition').text
-    if variate_eml.css('measurementScale interval').count == 1
-      variate.measurement_scale = 'interval'
-      unit_eml = variate_eml.css('measurementScale interval unit').first
-      variate.precision = variate_eml.css('precision').first.try(:text).try(:to_f)
-      variate.data_type = variate_eml.css('numberType').first.text
-    elsif variate_eml.css('measurementScale ratio').count == 1
-      variate.measurement_scale = 'ratio'
-      variate.precision = variate_eml.css('precision').first.try(:text).try(:to_f)
-      variate.data_type = variate_eml.css('numberType').first.text
-    elsif variate_eml.css('measurementScale ordinal').count == 1
-      variate.measurement_scale = 'ordinal'
-    elsif variate_eml.css('measurementScale nominal').count == 1
-      variate.measurement_scale = 'nominal'
-      variate.description = variate_eml.css('definition').first.text if variate.description.blank?
-    elsif variate_eml.css('measurementScale dateTime').count == 1
-      variate.measurement_scale = 'dateTime'
-      variate.date_format = variate_eml.css('formatString').first.text
-    end
+    variate.measurement_scale = variate_eml.at_css('measurementScale').at_css('nominal, ordinal, interval, ratio, dateTime').name
 
-    if variate_eml.css('standardUnit').count == 1
-      unit_name = variate_eml.css('standardUnit').first.text
+    variate.precision   = variate_eml.at_css('precision').try(:text).try(:to_f)
+    variate.data_type   = variate_eml.at_css('numberType').try(:text)
+    variate.description = variate_eml.at_css('definition').try(:text) if variate.description.blank?
+    variate.date_format = variate_eml.at_css('formatString').try(:text)
+
+    if variate_eml.at_css('standardUnit')
+      unit_name = variate_eml.at_css('standardUnit').text
       variate.unit = Unit.find_or_create_by_name_and_in_eml(unit_name, true)
-    elsif variate_eml.css('customUnit').count == 1
-      unit_name = variate_eml.css('customUnit').first.text
+    elsif variate_eml.at_css('customUnit')
+      unit_name = variate_eml.at_css('customUnit').text
       variate.unit = Unit.find_or_create_by_name_and_in_eml(unit_name, false)
     end
 
