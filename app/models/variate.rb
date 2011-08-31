@@ -7,26 +7,30 @@ class Variate < ActiveRecord::Base
 
   def self.from_eml(variate_eml)
     variate = Variate.new
-    variate.name = variate_eml.css('attributeName').text
-    variate.description = variate_eml.css('attributeDefinition').text
-    variate.measurement_scale = variate_eml.at_css('measurementScale').at_css('nominal, ordinal, interval, ratio, dateTime').name
-
-    variate.precision   = variate_eml.at_css('precision').try(:text).try(:to_f)
-    variate.data_type   = variate_eml.at_css('numberType').try(:text)
-    variate.description = variate_eml.at_css('definition').try(:text) if variate.description.blank?
-    variate.date_format = variate_eml.at_css('formatString').try(:text)
-
-    if variate_eml.at_css('standardUnit')
-      unit_name = variate_eml.at_css('standardUnit').text
-      variate.unit = Unit.find_or_create_by_name_and_in_eml(unit_name, true)
-    elsif variate_eml.at_css('customUnit')
-      unit_name = variate_eml.at_css('customUnit').text
-      variate.unit = Unit.find_or_create_by_name_and_in_eml(unit_name, false)
-    end
-
+    variate.set_attributes_from_eml(variate_eml)
+    variate.set_unit_from_eml(variate_eml)
     variate.save
 
     variate
+  end
+
+  def set_attributes_from_eml(variate_eml)
+    self.name              = variate_eml.css('attributeName').text
+    self.description       = variate_eml.at_css('attributeDefinition, definition').text
+    self.measurement_scale = variate_eml.at_css('measurementScale').at_css('nominal, ordinal, interval, ratio, dateTime').name
+    self.precision         = variate_eml.at_css('precision').try(:text).try(:to_f)
+    self.data_type         = variate_eml.at_css('numberType').try(:text)
+    self.date_format       = variate_eml.at_css('formatString').try(:text)
+  end
+
+  def set_unit_from_eml(variate_eml)
+    if variate_eml.at_css('standardUnit')
+      unit_name = variate_eml.at_css('standardUnit').text
+      self.unit = Unit.find_or_create_by_name_and_in_eml(unit_name, true)
+    elsif variate_eml.at_css('customUnit')
+      unit_name = variate_eml.at_css('customUnit').text
+      self.unit = Unit.find_or_create_by_name_and_in_eml(unit_name, false)
+    end
   end
 
   def valid_for_eml
