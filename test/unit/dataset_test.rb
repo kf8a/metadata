@@ -146,7 +146,7 @@ class DatasetTest < ActiveSupport::TestCase
       @dataset = Factory.create(:dataset, :initiated => Date.today, :completed => Date.today)
       @datatable = Factory.create(:datatable)
       @dataset_with_datatable = @datatable.dataset
-      assert @datatable.valid_for_eml
+      assert @datatable.valid_for_eml?
     end
 
     should 'not be empty' do

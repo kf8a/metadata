@@ -90,7 +90,7 @@ class Datatable < ActiveRecord::Base
     end
   end
 
-  def valid_for_eml
+  def valid_for_eml?
     valid_variates.present?
   end
 

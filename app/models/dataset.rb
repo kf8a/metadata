@@ -249,7 +249,7 @@ class Dataset < ActiveRecord::Base
       eml_resource_group
       contact_info
       eml_methods
-      datatables.each { |table| table.to_eml(@eml) if table.valid_for_eml }
+      datatables.each { |table| table.to_eml(@eml) if table.valid_for_eml? }
     end
   end
 
