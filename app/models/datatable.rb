@@ -72,6 +72,13 @@ class Datatable < ActiveRecord::Base
     self.title = datatable_eml.css('entityName').text
     self.description = datatable_eml.css('entityDescription').text
     self.data_url = datatable_eml.css('physical distribution online url').text
+    associated_models_from_eml(datatable_eml)
+    self.save
+
+    self
+  end
+
+  def associated_models_from_eml(datatable_eml)
     datatable_eml.css('methods methodStep').each do |protocol_eml|
       protocol_id = protocol_eml.css('protocol references').text.gsub('protocol_', '')
       protocol = Protocol.find_by_id(protocol_id)
@@ -81,10 +88,6 @@ class Datatable < ActiveRecord::Base
     datatable_eml.css('attributeList attribute').each do |variate_eml|
       self.variates << Variate.from_eml(variate_eml)
     end
-
-    self.save
-
-    self
   end
 
   def valid_for_eml
@@ -227,8 +230,8 @@ class Datatable < ActiveRecord::Base
     @eml = xml
     @eml.dataTable 'id' => name do
       @eml.entityName title
-      if description 
-        text =  description.gsub(/<\/?[^>]*>/, "") 
+      if description
+        text =  description.gsub(/<\/?[^>]*>/, "")
         @eml.entityDescription text unless text.strip.empty?
       end
 #      eml_protocols if non_dataset_protocols.present?
