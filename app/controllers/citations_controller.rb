@@ -73,7 +73,7 @@ class CitationsController < ApplicationController
     @citation = Citation.find(params[:id])
     @citation.type = params[:citation].try(:delete, 'type')
     @citation.update_attributes(params[:citation])
-    respond_with @citation
+    respond_with @citation, :location=>citation_url
   end
 
   def download
@@ -100,7 +100,7 @@ class CitationsController < ApplicationController
     @citation = Citation.find(params[:id])
     @citation.destroy
 
-    respond_with @citation
+    respond_with @citation, :location=>citations_url
   end
 
   private
