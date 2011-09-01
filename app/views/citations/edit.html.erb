@@ -1,4 +1,4 @@
-<%= semantic_form_for @citation, :url=> citation_path(@citation), :html => { :multipart => true } do |form| %>
+<%= semantic_form_for @citation, :as => :citation, :url=> citation_path(@citation), :html => { :multipart => true } do |form| %>
   <%= render :partial => 'form', :locals => {:form => form } %>
   <%= form.buttons %>
 <% end %>
