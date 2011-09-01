@@ -11,10 +11,10 @@ class CitationsController < ApplicationController
   def index
     store_location
     citations = website.citations
-    @submitted_citations = citations.submitted
-    @forthcoming_citations = citations.forthcoming
+    @submitted_citations = citations.includes(:authors).submitted
+    @forthcoming_citations = citations.includes(:authors).forthcoming
     date = params[:date].presence
-    @citations = date ? citations.by_date(date) : citations.published
+    @citations = date ? citations.by_date(date) : citations.includes(:authors).published
 
     index_responder
   end
