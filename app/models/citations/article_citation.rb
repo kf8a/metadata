@@ -7,7 +7,7 @@ class ArticleCitation < Citation
   private
 
   def journal
-    publication || secondary_title 
+    self.publication.blank? ? self.secondary_title : self.publication
   end
 
   def bibtex_type
