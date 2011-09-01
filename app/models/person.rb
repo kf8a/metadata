@@ -17,24 +17,30 @@ class Person < ActiveRecord::Base
 
   def self.from_eml(person_eml)
     person = Person.new
-    person.given_name = person_eml.css('individualName givenName').collect{ |element| element.text }.join(' ')
-    person.sur_name = person_eml.css('individualName surName').text
-    person.organization = person_eml.css('organizationName').text
-    person.street_address = person_eml.css('address deliveryPoint').text
-    person.city = person_eml.css('address city').text
-    person.locale = person_eml.css('address administrativeArea').text
-    person.postal_code = person_eml.css('address postalCode').text
-    person.country = person_eml.css('address country').text
-
-    person_eml.css('phone').each { |phone_eml| person.phone_from_eml(phone_eml) }
-
-    person.email = person_eml.css('electronicMailAddress').text
-    role_name = person_eml.css('role').text
-    role_to_add = Role.find_or_create_by_name(role_name)
-    Affiliation.create!(:person => person, :role => role_to_add) if role_to_add.present?
+    person.from_eml(person_eml)
     person.save
 
     person
+  end
+
+  def from_eml(person_eml)
+    self.given_name = person_eml.css('individualName givenName').collect{ |element| element.text }.join(' ')
+    self.sur_name = person_eml.css('individualName surName').text
+    self.organization = person_eml.css('organizationName').text
+    self.street_address = person_eml.css('address deliveryPoint').text
+
+    self.city = person_eml.css('address city').text
+    self.locale = person_eml.css('address administrativeArea').text
+    self.postal_code = person_eml.css('address postalCode').text
+    self.country = person_eml.css('address country').text
+
+    person_eml.css('phone').each { |phone_eml| phone_from_eml(phone_eml) }
+
+    self.email = person_eml.css('electronicMailAddress').text
+    save
+    role_name = person_eml.css('role').text
+    role_to_add = Role.find_or_create_by_name(role_name)
+    self.affiliations.create!(:role => role_to_add) if role_to_add.present?
   end
 
   def phone_from_eml(phone_eml)
