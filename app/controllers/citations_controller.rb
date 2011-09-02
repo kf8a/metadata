@@ -42,6 +42,7 @@ class CitationsController < ApplicationController
 
   def show
     @citation = Citation.find(params[:id])
+    @website = website
     store_location
     file_title = @citation.file_title
     respond_to do |format|
