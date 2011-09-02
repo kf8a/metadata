@@ -28,10 +28,10 @@ class Person < ActiveRecord::Base
   end
 
   def basic_attributes_from_eml(person_eml)
-    self.given_name = person_eml.css('individualName givenName').collect{ |element| element.text }.join(' ')
-    self.sur_name = person_eml.css('individualName surName').text
+    self.given_name   = person_eml.css('individualName givenName').collect{ |element| element.text }.join(' ')
+    self.sur_name     = person_eml.css('individualName surName').text
     self.organization = person_eml.css('organizationName').text
-    self.email = person_eml.css('electronicMailAddress').text
+    self.email        = person_eml.css('electronicMailAddress').text
   end
 
   def role_from_name(role_name)
@@ -41,10 +41,10 @@ class Person < ActiveRecord::Base
 
   def address_from_eml(address_eml)
     self.street_address = address_eml.css('deliveryPoint').text
-    self.city = address_eml.css('city').text
-    self.locale = address_eml.css('administrativeArea').text
-    self.postal_code = address_eml.css('postalCode').text
-    self.country = address_eml.css('country').text
+    self.city           = address_eml.css('city').text
+    self.locale         = address_eml.css('administrativeArea').text
+    self.postal_code    = address_eml.css('postalCode').text
+    self.country        = address_eml.css('country').text
   end
 
   def phone_from_eml(phone_eml)
