@@ -8,8 +8,8 @@ class Citation < ActiveRecord::Base
 
   versioned :dependent => :tracking
 
-  has_many :authors, :order => :seniority
-  has_many :editors, :order => :seniority
+  has_many :authors, :order => :seniority, :dependent => :destroy
+  has_many :editors, :order => :seniority, :dependent => :destroy
 
   belongs_to :citation_type
   belongs_to :website
@@ -398,7 +398,7 @@ class Citation < ActiveRecord::Base
   def set_as_block(name_of_class, string_of_names = '')
     table_name = name_of_class.tableize
     self.send(table_name).clear
-    current_seniority = 1
+    current_seniority = 1   #TODO should this be zero based?
     string_of_names.each_line do |name_string|
       if name_string[0].match('\d')
         treat_as_token_list(name_of_class, name_string)
