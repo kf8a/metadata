@@ -32,6 +32,7 @@ class Citation < ActiveRecord::Base
         :path => ":rails_root/assets/citations/:attachment/:id/:style/:basename.:extension"
   end
 
+  # For thinking_sphinks
   define_index do
     indexes title
     indexes abstract
@@ -45,9 +46,12 @@ class Citation < ActiveRecord::Base
       joins(:authors).where(:authors => {:seniority => 1}).
       order('pub_year desc, authors.sur_name')
 
-  scope :published, where(:state => 'published').with_authors_by_sur_name_and_pub_year
-  scope :submitted, where(:state => 'submitted').with_authors_by_sur_name_and_pub_year
+  scope :published,   where(:state => 'published').with_authors_by_sur_name_and_pub_year
+  scope :submitted,   where(:state => 'submitted').with_authors_by_sur_name_and_pub_year
   scope :forthcoming, where(:state => 'forthcoming').with_authors_by_sur_name_and_pub_year
+
+  scope :next, lambda { |p| {:conditions => ["id > ?", p.id], :limit => 1, :order => "id"} }
+  scope :previous, lambda { |p| {:conditions => ["id < ?", p.id], :limit => 1, :order => "id desc"} }
 
   workflow do
     state :submitted do
