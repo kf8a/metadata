@@ -6,6 +6,10 @@ class ChapterCitation < Citation
 
   private
 
+  def book
+    publication.blank? ? secondary_title : publication
+  end
+
   def bibtex_type
     :thesis
   end
