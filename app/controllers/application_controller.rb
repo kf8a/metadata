@@ -1,4 +1,4 @@
-require 'liquid_resolver'
+#require 'liquid_resolver'
 require 'subdomain_resolver'
 
 class ApplicationController < ActionController::Base
@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
 
   def extra_views
     prepend_view_path SubdomainResolver.new(@subdomain_request)
-    prepend_view_path LiquidResolver.new(@subdomain_request)
+#    prepend_view_path LiquidResolver.new(@subdomain_request)
   end
 
   def admin?
