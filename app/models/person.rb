@@ -20,12 +20,7 @@ class Person < ActiveRecord::Base
     person.given_name = person_eml.css('individualName givenName').collect{ |element| element.text }.join(' ')
     person.sur_name = person_eml.css('individualName surName').text
     person.organization = person_eml.css('organizationName').text
-    person.street_address = person_eml.css('address deliveryPoint').text
-    person.city = person_eml.css('address city').text
-    person.locale = person_eml.css('address administrativeArea').text
-    person.postal_code = person_eml.css('address postalCode').text
-    person.country = person_eml.css('address country').text
-
+    person.address_from_eml(person_eml.css('address'))
     person_eml.css('phone').each { |phone_eml| person.phone_from_eml(phone_eml) }
 
     person.email = person_eml.css('electronicMailAddress').text
@@ -35,6 +30,14 @@ class Person < ActiveRecord::Base
     person.save
 
     person
+  end
+
+  def address_from_eml(address_eml)
+    self.street_address = address_eml.css('deliveryPoint').text
+    self.city = address_eml.css('city').text
+    self.locale = address_eml.css('administrativeArea').text
+    self.postal_code = address_eml.css('postalCode').text
+    self.country = address_eml.css('country').text
   end
 
   def phone_from_eml(phone_eml)
