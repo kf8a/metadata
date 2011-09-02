@@ -9,7 +9,7 @@ class Publication < ActiveRecord::Base
   accepts_nested_attributes_for :treatments
 
   validates_presence_of :citation
-  validates_numericality_of :year, :on => :create, :message => "is not a number"
+  validates_numericality_of :year, :on => :create, :message => 'is not a number'
 
   def Publication.find_by_word(word)
     word = '%'+word+'%'
@@ -40,4 +40,3 @@ end
 #  width               :integer
 #  height              :integer
 #
-

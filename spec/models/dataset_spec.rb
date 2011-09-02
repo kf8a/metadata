@@ -25,7 +25,7 @@ describe Dataset do
       dataset = Factory.create(:dataset, :initiated => Date.today, :completed => Date.today)
       datatable = Factory.create(:datatable)
       @dataset_with_datatable = datatable.dataset
-      assert datatable.valid_for_eml
+      assert datatable.valid_for_eml?
     end
 
     it "should create a dataset from eml" do
@@ -77,7 +77,7 @@ describe Dataset do
     end
 
     it "should import the right datatable" do
-      @dataset_with_datatable.datatables.collect{ |table| table.valid_for_eml }.should == [true]
+      @dataset_with_datatable.datatables.collect{ |table| table.valid_for_eml? }.should == [true]
       eml_content = @dataset_with_datatable.to_eml
       old_datatable_attributes = @dataset_with_datatable.datatables.first.attributes
       @dataset_with_datatable.datatables.each {|table| table.destroy}

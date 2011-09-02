@@ -3,21 +3,21 @@ require 'nokogiri'
 require 'open-uri'
 
 class Dataset < ActiveRecord::Base
-  has_many :datatables, :order => 'name'
-  has_many :protocols, :conditions => 'active is true'
-  has_many :people, :through => :affiliations
-  has_many :affiliations, :order => 'seniority'
-  has_many :roles, :through => :affiliations, :uniq => true
-  has_and_belongs_to_many :themes
-  belongs_to :project
+  has_many                :affiliations, order:      'seniority'
+  has_many                :datatables,   order:      'name'
+  has_many                :people,       through:    :affiliations
+  belongs_to              :project
+  has_many                :protocols,    conditions: 'active is true'
+  has_many                :roles,        through:    :affiliations, uniq: true
+  belongs_to              :sponsor
   has_and_belongs_to_many :studies
-  belongs_to :sponsor
-  belongs_to :website
+  has_and_belongs_to_many :themes
+  belongs_to              :website
 
-  validates_presence_of :abstract
-  validates_uniqueness_of :dataset
+  validates :abstract, presence:   true
+  validates :dataset,  uniqueness: true
 
-  accepts_nested_attributes_for :affiliations, :allow_destroy => true
+  accepts_nested_attributes_for :affiliations, allow_destroy: true
 
   acts_as_taggable_on :keywords
 
@@ -38,50 +38,18 @@ class Dataset < ActiveRecord::Base
   def self.validation_errors(eml_doc)
     xsd = nil
     Dir.chdir("#{Rails.root}/test/data/eml-2.1.0") do
-      xsd = Nokogiri::XML::Schema(File.read("eml.xsd"))
+      xsd = Nokogiri::XML::Schema(File.read('eml.xsd'))
     end
 
     xsd.validate(eml_doc)
   end
 
   def from_eml(eml_doc)
-    basic_attributes_from_eml(eml_doc)
-    associated_models_from_eml(eml_doc)
+    dataset_eml = eml_doc.css('dataset').first
+    basic_attributes_from_eml(dataset_eml)
+    associated_models_from_eml(dataset_eml)
 
     self
-  end
-
-  def basic_attributes_from_eml(eml_doc)
-    dataset_eml = eml_doc.css('dataset')
-    self.title = dataset_eml.css('title').first.text
-    self.abstract = dataset_eml.css('abstract para').text
-    self.initiated = dataset_eml.css('temporalCoverage rangeOfDates beginDate calendarDate').text
-    self.completed = dataset_eml.css('temporalCoverage rangeOfDates endDate calendarDate').text
-    save
-  end
-
-  def associated_models_from_eml(eml_doc)
-    eml_doc.css('methods methodStep').each do |method_eml|
-      if method_eml.css('protocol').any?
-        self.protocols << Protocol.from_eml(method_eml)
-      end
-    end
-
-    dataset_eml = eml_doc.css('dataset')
-
-    dataset_eml.css('associatedParty').each do |person_eml|
-      self.people << Person.from_eml(person_eml)
-    end
-
-    dataset_eml.css('dataTable').each do |datatable_eml|
-      self.datatables.new.from_eml(datatable_eml)
-    end
-
-    dataset_eml.css('keywordSet keyword').each do |keyword_eml|
-      self.keyword_list << keyword_eml.text
-    end
-
-    save
   end
 
   def to_label
@@ -107,7 +75,7 @@ class Dataset < ActiveRecord::Base
   def within_interval?(start_date, end_date)
     sdate = start_date.to_date
     edate = end_date.to_date
-    !datatables.index { |table| table.within_interval?(sdate, edate) }.blank?
+    datatables.index { |table| table.within_interval?(sdate, edate) }.present?
   end
 
   #unpack and populate datatables and variates
@@ -123,7 +91,7 @@ class Dataset < ActiveRecord::Base
   #end
 
   def package_id
-    "knb-lter-kbs.#{metacat_id.nil? ? self.id : metacat_id}.#{version}"
+    "knb-lter-kbs.#{metacat_id || self.id}.#{version}"
   end
 
   def datatable_protocols
@@ -132,8 +100,8 @@ class Dataset < ActiveRecord::Base
 
   def to_eml
     @eml = Builder::XmlMarkup.new
-    @eml.instruct! :xml, :version => '1.0'
-    @eml.tag!("eml:eml",
+    @eml.instruct! :xml, version: '1.0'
+    @eml.tag!('eml:eml',
         'xmlns:eml'           => 'eml://ecoinformatics.org/eml-2.1.0',
         'xmlns:set'           => 'http://exslt.org/sets',
         'xmlns:exslt'         => 'http://exslt.org/common',
@@ -150,15 +118,13 @@ class Dataset < ActiveRecord::Base
 
   #temporal extent
   def temporal_extent
-    begin_date = nil
-    end_date = nil
+    begin_date, end_date = nil
     datatables.each do |datatable |
       dates = datatable.temporal_extent
       datatable.update_temporal_extent
-      next if dates[:begin_date].nil?
-      next if dates[:end_date].nil?
-      begin_date = dates[:begin_date] if begin_date.nil? || begin_date > dates[:begin_date]
-      end_date = dates[:end_date] if end_date.nil? || end_date < dates[:end_date]
+      next unless dates[:begin_date] && dates[:end_date]
+      begin_date = [begin_date, dates[:begin_date]].compact.min
+      end_date   = [end_date, dates[:end_date]].compact.max
     end
     {:begin_date => begin_date, :end_date => end_date}
   end
@@ -200,21 +166,21 @@ class Dataset < ActiveRecord::Base
             case unit
             when unit.multiplier_to_si  && unit.parent_si  &&  unit.unit_type then
               @eml.tag!('stmml:unit',
-                        'id' => unit.name,
-                        'multiplierToSI' => unit.multiplier_to_si,
-                        'parentSI' => unit.parent_si,
-                        'unitType' => unit.unit_type,
-                        'name' => unit.name)
+                        id:             unit.name,
+                        multiplierToSI: unit.multiplier_to_si,
+                        parentSI:       unit.parent_si,
+                        unitType:       unit.unit_type,
+                        name:           unit.name)
             when unit.multiplier_to_si && unit.parent_si then
               @eml.tag!('stmml:unit',
-                        'id' => unit.name,
-                        'multiplierToSI' => unit.multiplier_to_si,
-                        'parentSI' => unit.parent_si,
-                        'name' => unit.name)
+                        id:             unit.name,
+                        multiplierToSI: unit.multiplier_to_si,
+                        parentSI:       unit.parent_si,
+                        name:           unit.name)
             else
               @eml.tag!('stmml:unit',
-                        'id' => unit.name,
-                        'name' => unit.name)
+                        id:   unit.name,
+                        name: unit.name)
             end
           end
         end
@@ -223,7 +189,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_access
-    @eml.access 'scope' => 'document', 'order' => 'allowFirst', 'authSystem' => 'knb' do
+    @eml.access scope: 'document', order: 'allowFirst', authSystem: 'knb' do
       eml_allow('uid=KBS,o=lter,dc=ecoinformatics,dc=org', 'all')
       eml_allow('public','read')
     end
@@ -255,7 +221,7 @@ class Dataset < ActiveRecord::Base
       eml_resource_group
       contact_info
       eml_methods
-      datatables.each { |table| table.to_eml(@eml) if table.valid_for_eml }
+      datatables.each { |table| table.to_eml(@eml) if table.valid_for_eml? }
     end
   end
 
@@ -300,7 +266,7 @@ class Dataset < ActiveRecord::Base
   def keyword_sets
     @eml.keywordSet do
       ['LTER','KBS','Kellogg Biological Station', 'Hickory Corners', 'Michigan', 'Great Lakes'].each do| keyword |
-        @eml.keyword keyword, 'keywordType' => 'place'
+        @eml.keyword keyword, keywordType: 'place'
       end
     end
   end
@@ -309,10 +275,12 @@ class Dataset < ActiveRecord::Base
     @eml.contact do
       @eml.organizationName 'Kellogg Biological Station'
       @eml.positionName 'Data Manager'
-      p = Person.new( :organization => 'Kellogg Biological Station',
-        :street_address => '3700 East Gull Lake Drive',
-        :city => 'Hickory Corners',:locale => 'Mi',:postal_code => '49060',
-        :country => 'USA')
+      p = Person.new( organization:   'Kellogg Biological Station',
+                      street_address: '3700 East Gull Lake Drive',
+                      city:           'Hickory Corners',
+                      locale:         'Mi',
+                      postal_code:    '49060',
+                      country:        'USA')
       p.eml_address(@eml)
       @eml.electronicMailAddress 'lter.data.manager@kbs.msu.edu'
       @eml.onlineUrl 'http://lter.kbs.msu.edu'
@@ -334,6 +302,43 @@ class Dataset < ActiveRecord::Base
         @eml.endDate   { @eml.calendarDate completed.to_s }
       end
     end
+  end
+
+  def self.validation_errors(eml_doc)
+    xsd = nil
+    Dir.chdir("#{Rails.root}/test/data/eml-2.1.0") do
+      xsd = Nokogiri::XML::Schema(File.read("eml.xsd"))
+    end
+
+    xsd.validate(eml_doc)
+  end
+
+  def basic_attributes_from_eml(dataset_eml)
+    self.title = dataset_eml.at_css('title').text
+    self.abstract = dataset_eml.css('abstract para').text
+    self.initiated = dataset_eml.css('temporalCoverage rangeOfDates beginDate calendarDate').text
+    self.completed = dataset_eml.css('temporalCoverage rangeOfDates endDate calendarDate').text
+    save
+  end
+
+  def associated_models_from_eml(dataset_eml)
+    dataset_eml.parent.css('methods methodStep protocol').each do |protocol_eml|
+      self.protocols << Protocol.from_eml(protocol_eml)
+    end
+
+    dataset_eml.css('associatedParty').each do |person_eml|
+      self.people << Person.from_eml(person_eml)
+    end
+
+    dataset_eml.css('dataTable').each do |datatable_eml|
+      self.datatables.new.from_eml(datatable_eml)
+    end
+
+    dataset_eml.css('keywordSet keyword').each do |keyword_eml|
+      self.keyword_list << keyword_eml.text
+    end
+
+    save
   end
 end
 
