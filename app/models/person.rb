@@ -17,19 +17,26 @@ class Person < ActiveRecord::Base
 
   def self.from_eml(person_eml)
     person = Person.new
-    person.given_name = person_eml.css('individualName givenName').collect{ |element| element.text }.join(' ')
-    person.sur_name = person_eml.css('individualName surName').text
-    person.organization = person_eml.css('organizationName').text
+    person.basic_attributes_from_eml(person_eml)
     person.address_from_eml(person_eml.css('address'))
     person_eml.css('phone').each { |phone_eml| person.phone_from_eml(phone_eml) }
+    person.role_from_name(person_eml.css('role').text)
 
-    person.email = person_eml.css('electronicMailAddress').text
-    role_name = person_eml.css('role').text
-    role_to_add = Role.find_or_create_by_name(role_name)
-    Affiliation.create!(:person => person, :role => role_to_add) if role_to_add.present?
     person.save
 
     person
+  end
+
+  def basic_attributes_from_eml(person_eml)
+    self.given_name = person_eml.css('individualName givenName').collect{ |element| element.text }.join(' ')
+    self.sur_name = person_eml.css('individualName surName').text
+    self.organization = person_eml.css('organizationName').text
+    self.email = person_eml.css('electronicMailAddress').text
+  end
+
+  def role_from_name(role_name)
+    role_to_add = Role.find_or_create_by_name(role_name)
+    Affiliation.create!(:person => self, :role => role_to_add) if role_to_add.present?
   end
 
   def address_from_eml(address_eml)
