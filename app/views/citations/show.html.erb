@@ -36,6 +36,9 @@ Download citation to
     <%= link_to 'Sign in to download PDF', sign_in_path, :class=>'download-link'  %>
   <% end %>
 <% end %>
+
+<%= link_to 'back to index', citations_path %>
+
 <% if signed_in? and current_user.role == 'admin' %>
   <%= link_to 'Edit', edit_citation_path(@citation) %>
   <%= button_to 'Delete', { :action => "destroy", :id => @citation.id },
