@@ -79,20 +79,24 @@ end
 
 task :master do
 
-  set :host, 'houghton'
+  set :host, 'gprpc28'
 
   role :app, "#{host}.kbs.msu.edu"
-  role :web, "#{host}.kbs.msu.edu"
-  role :db,  "#{host}.kbs.msu.edu", :primary => true
 
 #  after 'deploy:symlink', :set_asset_host
+end
+
+task :kalkaska do
+  set :host, 'kalkaska'
+
+  role :app, "#{host}.kbs.msu.edu"
 end
 
 task :production do
 
   set :host, 'houghton'
 
-  role :app, "#{host}.kbs.msu.edu", "gprpc28.kbs.msu.edu" 
+  role :app, "#{host}.kbs.msu.edu", "gprpc28.kbs.msu.edu", 'kalkaska.kbs.msu.edu'
   role :web, "#{host}.kbs.msu.edu"
   role :db,  "#{host}.kbs.msu.edu", :primary => true
 
