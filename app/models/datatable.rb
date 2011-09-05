@@ -75,8 +75,7 @@ class Datatable < ActiveRecord::Base
   def associated_models_from_eml(datatable_eml)
     datatable_eml.css('methods methodStep').each do |protocol_eml|
       protocol_id = protocol_eml.css('protocol references').text.gsub('protocol_', '')
-      protocol = Protocol.find_by_id(protocol_id)
-      self.protocols << protocol if protocol.present?
+      self.protocols << Protocol.where(:id => protocol_id)
     end
 
     datatable_eml.css('attributeList attribute').each do |variate_eml|
