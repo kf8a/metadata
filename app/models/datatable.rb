@@ -84,11 +84,11 @@ class Datatable < ActiveRecord::Base
   end
 
   def valid_for_eml?
-    valid_variates.present?
+    valid_variates.any?
   end
 
   def valid_variates
-    self.variates.keep_if {|variate| variate.valid_for_eml}
+    self.variates.valid_for_eml
   end
 
   def protocols_with_backup
