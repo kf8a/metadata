@@ -69,6 +69,15 @@ label {
 	-webkit-column-width: 20em;
 }
 
+#content .pub_year {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 0.5em;
+  padding-left: 0.5em;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+}
+
 li ul li {
 	padding-left: 1.5em;
 	margin-bottom: 0.1em;
