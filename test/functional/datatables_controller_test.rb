@@ -262,21 +262,21 @@ class DatatablesControllerTest < ActionController::TestCase
     end
   end
 
-  test "index should get the template in the database if there is one" do
-    lter_website = Website.find_by_name('lter')
-    index_layout = Factory.create(:template,
-                    :website_id => lter_website.id,
-                    :controller => 'datatables',
-                    :action     => 'index',
-                    :layout     => '<h3 id="correct">LTER test index page</h3>')
-    assert lter_website
-    assert index_layout
-    assert lter_website.layout('datatables', 'index')
-    assert Website.find_by_name('lter')
-    assert Website.find_by_name('lter').layout('datatables', 'index')
-    get :index, :requested_subdomain => 'lter'
-    assert_select 'h3#correct'
-  end
+  # test "index should get the template in the database if there is one" do
+  #   lter_website = Website.find_by_name('lter')
+  #   index_layout = Factory.create(:template,
+  #                   :website_id => lter_website.id,
+  #                   :controller => 'datatables',
+  #                   :action     => 'index',
+  #                   :layout     => '<h3 id="correct">LTER test index page</h3>')
+  #   assert lter_website
+  #   assert index_layout
+  #   assert lter_website.layout('datatables', 'index')
+  #   assert Website.find_by_name('lter')
+  #   assert Website.find_by_name('lter').layout('datatables', 'index')
+  #   get :index, :requested_subdomain => 'lter'
+  #   assert_select 'h3#correct'
+  # end
 
   test "index should get the template in app/views if no db template" do
     lter_website = Website.find_by_name('lter')
@@ -315,21 +315,21 @@ class DatatablesControllerTest < ActionController::TestCase
 #    assert_equal @table.to_csv, file_cache.read("csv_#{@table.id}")
 #  end
 
-  test "show should get the template in the database if there is one" do
-    lter_website = Website.find_by_name('lter')
-    index_layout = Factory.create(:template,
-                    :website_id => lter_website.id,
-                    :controller => 'datatables',
-                    :action     => 'show',
-                    :layout     => '<h3 id="correct">LTER test show page</h3>')
-    assert lter_website
-    assert index_layout
-    assert lter_website.layout('datatables', 'show')
-    assert Website.find_by_name('lter')
-    assert Website.find_by_name('lter').layout('datatables', 'show')
-    get :show, :id => @table, :requested_subdomain => 'lter'
-    assert_select 'h3#correct'
-  end
+  # test "show should get the template in the database if there is one" do
+  #   lter_website = Website.find_by_name('lter')
+  #   index_layout = Factory.create(:template,
+  #                   :website_id => lter_website.id,
+  #                   :controller => 'datatables',
+  #                   :action     => 'show',
+  #                   :layout     => '<h3 id="correct">LTER test show page</h3>')
+  #   assert lter_website
+  #   assert index_layout
+  #   assert lter_website.layout('datatables', 'show')
+  #   assert Website.find_by_name('lter')
+  #   assert Website.find_by_name('lter').layout('datatables', 'show')
+  #   get :show, :id => @table, :requested_subdomain => 'lter'
+  #   assert_select 'h3#correct'
+  # end
 
   test "show should get the template in app/views if no db template" do
     lter_website = Website.find_by_name('lter')
