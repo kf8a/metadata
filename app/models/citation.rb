@@ -367,7 +367,9 @@ class Citation < ActiveRecord::Base
   end
 
   def author_string
-    if authors.length > 1
+    if authors.length > 3
+      return authors.first.formatted + ', et.al. '
+    elsif authors.length > 1
       last_author = authors.pop
       author_array = authors.collect {|author| "#{author.formatted}"}
       author_array.push("#{last_author.formatted(:natural)}.")

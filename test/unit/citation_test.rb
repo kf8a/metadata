@@ -372,6 +372,7 @@ class CitationTest < ActiveSupport::TestCase
 
   end
 
+
   context 'a citation object with an author' do
     setup do
       @auth = Factory.create(:author)
@@ -402,6 +403,21 @@ class CitationTest < ActiveSupport::TestCase
     end
   end
 
+  context 'a citation object with many authors' do
+    setup do
+      @cite = Factory.create(:citation)
+      authors = []
+      4.times do 
+        authors << Factory.create(:author, :given_name=>'Jon', :sur_name => 'Jones')
+      end
+      @cite.authors << authors
+    end
+
+    should 'use et. al. in the style' do
+      assert_match( /, et\.al\./, @cite.formatted)
+    end
+
+  end
 end
 
 
