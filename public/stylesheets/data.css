@@ -72,8 +72,8 @@ label {
 #content .pub_year {
   font-weight: bold;
   font-size: 1.1em;
-  margin-bottom: 0.5em;
-  padding-left: 0.5em;
+  margin-bottom: 1.4em;
+  text-align: right;
   border-bottom-style: solid;
   border-bottom-width: 2px;
 }
