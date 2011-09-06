@@ -305,7 +305,7 @@ class Datatable < ActiveRecord::Base
     data_start_date = data_end_date = nil
     if is_sql
       date_field = database_date_field
-      unless date_field.nil?
+      if date_field
         query = "select max(#{date_field}), min(#{date_field}) from (#{object}) as t1"
         data_start_date, data_end_date = query_datatable_for_temporal_extent(query)
       end
@@ -321,16 +321,14 @@ class Datatable < ActiveRecord::Base
   end
 
   def data_preview
-    query =  self.object
-    self.excerpt_limit = 5 unless self.excerpt_limit
-    query = query + " limit #{self.excerpt_limit}"
+    self.excerpt_limit ||= 5
+    query = self.object + " limit #{self.excerpt_limit}"
     ActiveRecord::Base.connection.execute(query)
   end
 
   def approved_data
-    query = self.object
     self.number_of_released_records ||= total_records
-    query = query + " offset #{total_records - self.number_of_released_records}"
+    query = self.object + " offset #{total_records - self.number_of_released_records}"
     ActiveRecord::Base.connection.execute(query)
   end
 
