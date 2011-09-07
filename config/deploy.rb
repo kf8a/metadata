@@ -25,7 +25,7 @@ ssh_options[:forward_agent] = true
 
 set :unicorn_binary, "/usr/local/bin/unicorn"
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
-set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
+set :unicorn_pid, "/var/u/apps/metadata/shared/pids/unicorn.pid"
 
 before :deploy do
   unless exists?(:host)
@@ -34,56 +34,31 @@ before :deploy do
 end
 
 namespace :deploy do
-  namespace :unicorn do
-    desc "start unicorn appserver"
-     task :start, :roles => :app, :except => { :no_release => true } do 
-        run "cd #{current_path} && #{try_sudo} #{unicorn_binary}  -c #{unicorn_config} --env  #{rails_env} -D"
-     end
-     desc "stop unicorn appserver"
-     task :stop, :roles => :app, :except => { :no_release => true } do 
-       run "#{try_sudo} kill `cat #{unicorn_pid}`"
-     end
-     desc "gracefully stop unicorn appserver"
-     task :graceful_stop, :roles => :app, :except => { :no_release => true } do
-       run "#{try_sudo} kill -s QUIT `cat #{unicorn_pid}`"
-     end
-     desc "reload unicorn appserver"
-     task :reload, :roles => :app, :except => { :no_release => true } do
-       run "#{try_sudo} kill -s USR2 `cat #{unicorn_pid}`"
-     end
-     desc "restart unicorn appserver"
-     task :restart, :roles => :app, :except => { :no_release => true } do
-       stop
-       start
-     end
+  desc "start unicorn appserver"
+  task :start, :roles => :app, :except => { :no_release => true } do 
+    run "cd #{current_path} && bundle exec  #{unicorn_binary}  -c #{unicorn_config} --env  #{rails_env} -D"
   end
-
-  namespace :thin do
-    [:stop, :start, :restart].each do |t|
-      desc "#{t.to_s.capitalize} the thin appserver"
-      task t, :roles => :app do
-        invoke_command "cd #{current_path};bundle exec thin -C /etc/thin/metadata.yml #{t.to_s}"
-      end
-    end
+  desc "stop unicorn appserver"
+  task :stop, :roles => :app, :except => { :no_release => true } do 
+    run "#{try_sudo} kill `cat #{unicorn_pid}`"
   end
-
-  desc "Custom restart task for thin cluster"
+  desc "gracefully stop unicorn appserver"
+  task :graceful_stop, :roles => :app, :except => { :no_release => true } do
+    run "#{try_sudo} kill -s QUIT `cat #{unicorn_pid}`"
+  end
+  desc "reload unicorn appserver"
+  task :reload, :roles => :app, :except => { :no_release => true } do
+    run "#{try_sudo} kill -s USR2 `cat #{unicorn_pid}`"
+  end
+  desc "restart unicorn appserver"
   task :restart, :roles => :app, :except => { :no_release => true } do
-    deploy.thin.restart
+    stop
+    start
     restart_sphinks
   end
 
-  desc "Custom start task for thin cluster"
-  task :start, :roles => :app do
-    deploy.thin.start
-  end
-
-  desc "Custom stop task for thin cluster"
-  task :stop, :roles => :app do
-    deploy.thin.stop
-  end
-
   after 'deploy:symlink', :link_production_db
+  after 'deploy:symlink', :link_unicorn
   after 'deploy:symlink', :link_site_keys
   after 'deploy:symlink', :link_new_relic
   after 'deploy:symlink', :link_s3
@@ -167,6 +142,11 @@ end
 desc "Link in the s3 credentials"
 task :link_s3 do
   run "ln -nfs #{deploy_to}/shared/config/s3.yml #{release_path}/config/s3.yml"
+end
+
+desc "link unicorn.rb"
+task :link_unicorn do
+  run "ln -nfs #{deploy_to}/shared/config/unicorn.rb #{release_path}/config/unicorn.rb"
 end
 
 desc 'ensure packages'

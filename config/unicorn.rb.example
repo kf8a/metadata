@@ -1,0 +1,7 @@
+#example config
+worker_processes 12
+listen 4060
+pid "/var/u/apps/metadata/shared/pids/unicorn.pid"
+stderr_path "/var/u/apps/metadata/shared/log/unicorn.log"
+stdout_path "/var/u/apps/metadata/shared/log/unicorn.log"
+timeout 10000
