@@ -5,6 +5,8 @@ class Variate < ActiveRecord::Base
   belongs_to :datatable
   belongs_to :unit
 
+  scope :valid_for_eml, where("measurement_scale != '' AND description != ''")
+
   def self.from_eml(variate_eml)
     variate = Variate.new
     variate.set_attributes_from_eml(variate_eml)
@@ -31,10 +33,6 @@ class Variate < ActiveRecord::Base
       unit_name = variate_eml.at_css('customUnit').text
       self.unit = Unit.find_or_create_by_name_and_in_eml(unit_name, false)
     end
-  end
-
-  def valid_for_eml
-    measurement_scale.present? && description.present?
   end
 
   def to_eml(xml = Builder::XmlMarkup.new)
