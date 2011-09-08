@@ -7,6 +7,8 @@ class PublicationsController < ApplicationController
   # GET /publications
   # GET /publications.xml
   def index
+    expires_in 60.minutes, :public=>true
+
     @crumbs = []
     @pub_type = params[:type]
     @word = params[:word]

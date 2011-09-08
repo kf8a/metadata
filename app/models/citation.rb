@@ -32,7 +32,7 @@ class Citation < ActiveRecord::Base
         :path => ":rails_root/assets/citations/:attachment/:id/:style/:basename.:extension"
   end
 
-  # For thinking_sphinks
+  # define indexes for thinking_sphinks
   define_index do
     indexes title
     indexes abstract
@@ -49,6 +49,8 @@ class Citation < ActiveRecord::Base
   scope :published,   where(:state => 'published').with_authors_by_sur_name_and_pub_year
   scope :submitted,   where(:state => 'submitted').with_authors_by_sur_name_and_pub_year
   scope :forthcoming, where(:state => 'forthcoming').with_authors_by_sur_name_and_pub_year
+
+  scope :books, where(:type => 'book')
 
   scope :next, lambda { |p| {:conditions => ["id > ?", p.id], :limit => 1, :order => "id"} }
   scope :previous, lambda { |p| {:conditions => ["id < ?", p.id], :limit => 1, :order => "id desc"} }
@@ -410,7 +412,7 @@ class Citation < ActiveRecord::Base
         treat_as_token_list(name_of_class, name_string)
       else
         self.send(table_name) << name_of_class.constantize.create(:name      => name_string,
-                                                      :seniority => current_seniority)
+                                                                  :seniority => current_seniority)
       end
 
       current_seniority += 1

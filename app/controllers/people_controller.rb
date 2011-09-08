@@ -10,6 +10,8 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.xml
   def index
+    expires_in 60.minutes, :public=>true
+
     @roles = RoleType.find_by_name('lter').roles.order('seniority').where('name not like ?','Emeritus%')
     respond_to do |format|
       format.html # index.rhtml
