@@ -11,11 +11,11 @@ class ChapterCitation < Citation
   end
 
   def bibtex_type
-    :thesis
+    :chapter
   end
 
   def endnote_type
-    "Thesis\n"
+    "ChapterCitation\n"
   end
 
   def endnote_publication_data

@@ -10,11 +10,21 @@ class CitationsController < ApplicationController
 
   def index
     store_location
-    citations = website.citations
-    @submitted_citations = citations.includes(:authors).submitted
-    @forthcoming_citations = citations.includes(:authors).forthcoming
+    case params[:type]
+    when 'article' 
+      citations = [website.article_citations]
+    when 'book'
+      citations = [website.book_citations, website.chapter_citations]
+    when 'thesis'
+      citations = [website.thesis_citations]
+    else 
+      citations = [website.citations]
+    end
+ 
+    @submitted_citations = citations.collect {|c| c.includes(:authors).submitted}.flatten
+    @forthcoming_citations = citations.collect {|c| c.includes(:authors).forthcoming}.flatten
     date = params[:date].presence
-    @citations = date ? citations.by_date(date) : citations.includes(:authors).published
+    @citations = date ? citations.collect {|c| c.by_date(date)}.flatten : citations.collect {|c| c.includes(:authors).published}.flatten
 
     index_responder
   end

@@ -64,7 +64,7 @@ class ApplicationControllerTest < ActionController::TestCase
 #    context "template choose function" do
 #      setup do
 #        signed_in_as_admin
-#        Factory.create(:role_type, :name => 'lter') unless RoleType.find_by_name('lter')
+#        FactoryGirl.create(:role_type, :name => 'lter') unless RoleType.find_by_name('lter')
 #      end
 #
 #      context "when a subdomain is requested which exists" do
@@ -88,7 +88,7 @@ class ApplicationControllerTest < ActionController::TestCase
 #      context "when a template is in the database" do
 #        setup do
 #          lter_website = Website.find_by_name('lter')
-#          Factory.create(:template,
+#          FactoryGirl.create(:template,
 #                    :website_id => lter_website.id,
 #                    :controller => 'datatables',
 #                    :action     => 'index',

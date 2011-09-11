@@ -3,9 +3,9 @@ require File.expand_path('../../test_helper',__FILE__)
 class DatatablesControllerTest < ActionController::TestCase
 
   def setup
-    @table = Factory.create(:datatable, :dataset => Factory.create(:dataset))
+    @table = FactoryGirl.create(:datatable, :dataset => FactoryGirl.create(:dataset))
 
-    Factory.create(:datatable, :dataset => Factory.create(:dataset))
+    FactoryGirl.create(:datatable, :dataset => FactoryGirl.create(:dataset))
 
     #TODO test with admin and non admin users
     signed_in_as_admin
@@ -54,9 +54,9 @@ class DatatablesControllerTest < ActionController::TestCase
 
     context 'GET :events' do
       setup do
-        @sponsor  = Factory.create :sponsor, :data_use_statement => 'smoke em if you got em'
-        dataset   = Factory.create :dataset, :sponsor => @sponsor
-        datatable = Factory.create :datatable, :dataset => dataset
+        @sponsor  = FactoryGirl.create :sponsor, :data_use_statement => 'smoke em if you got em'
+        dataset   = FactoryGirl.create :dataset, :sponsor => @sponsor
+        datatable = FactoryGirl.create :datatable, :dataset => dataset
         get :events, :id => datatable, :format => :json
       end
 
@@ -74,9 +74,9 @@ class DatatablesControllerTest < ActionController::TestCase
 
     context 'GET :show' do
       setup do
-        @sponsor  = Factory.create :sponsor, :name=>'glbrc', :data_use_statement => 'smoke em if you got em'
-        dataset   = Factory.create :dataset, :sponsor => @sponsor
-        datatable = Factory.create :datatable, :dataset => dataset
+        @sponsor  = FactoryGirl.create :sponsor, :name=>'glbrc', :data_use_statement => 'smoke em if you got em'
+        dataset   = FactoryGirl.create :dataset, :sponsor => @sponsor
+        datatable = FactoryGirl.create :datatable, :dataset => dataset
 
         get :show, :id => datatable
       end
@@ -90,9 +90,9 @@ class DatatablesControllerTest < ActionController::TestCase
 
     context 'GET :show with version' do
       setup do
-        @sponsor  = Factory.create :sponsor, :data_use_statement => 'smoke em if you got em'
-        dataset   = Factory.create :dataset, :sponsor => @sponsor
-        datatable = Factory.create :datatable, :dataset => dataset
+        @sponsor  = FactoryGirl.create :sponsor, :data_use_statement => 'smoke em if you got em'
+        dataset   = FactoryGirl.create :dataset, :sponsor => @sponsor
+        datatable = FactoryGirl.create :datatable, :dataset => dataset
 
         get :show, :id => datatable, :version => 0
       end
@@ -119,8 +119,8 @@ class DatatablesControllerTest < ActionController::TestCase
 
     context 'GET /datatables/1.climdb' do
       setup do
-        table = Factory.create(:datatable, :description=>nil,
-                                :dataset => Factory.create(:dataset))
+        table = FactoryGirl.create(:datatable, :description=>nil,
+                                :dataset => FactoryGirl.create(:dataset))
         get :show,  :id => table, :format => 'climdb'
       end
 
@@ -133,7 +133,7 @@ class DatatablesControllerTest < ActionController::TestCase
 
     context "show in climdb a restricted datatable on an untrusted ip" do
       setup do
-        @restricted_datatable = Factory.create(:datatable,
+        @restricted_datatable = FactoryGirl.create(:datatable,
                                                 :is_restricted => true)
         @request[:remote_ip] = '142.222.1.2'
         get :show, :id => @restricted_datatable, :format => "climdb"
@@ -145,8 +145,8 @@ class DatatablesControllerTest < ActionController::TestCase
     context "GET :show / 'glbrc' subdomain but lter datatable" do
       setup do
         lter_website = Website.find_by_name('lter')
-        lter_website = Factory.create(:website, :name => 'lter') unless lter_website
-        @lterdatatable = Factory.create(:datatable, :dataset => Factory.create(:dataset, :website => lter_website))
+        lter_website = FactoryGirl.create(:website, :name => 'lter') unless lter_website
+        @lterdatatable = FactoryGirl.create(:datatable, :dataset => FactoryGirl.create(:dataset, :website => lter_website))
         get :show, :id => @lterdatatable, :requested_subdomain => 'glbrc'
       end
 
@@ -200,7 +200,7 @@ class DatatablesControllerTest < ActionController::TestCase
 
     context 'GET :show in the default domain' do
       setup do
-        @datatable = Factory.create :datatable, :dataset => Factory.create(:dataset),
+        @datatable = FactoryGirl.create :datatable, :dataset => FactoryGirl.create(:dataset),
                                     :description => 'This is the first abstract'
         get :show, :id => @datatable
       end
@@ -240,7 +240,7 @@ class DatatablesControllerTest < ActionController::TestCase
 
   context 'GET :show in the subdomain' do
     setup do
-      @datatable = Factory.create :datatable, :dataset => Factory.create(:dataset),
+      @datatable = FactoryGirl.create :datatable, :dataset => FactoryGirl.create(:dataset),
                                   :description => 'This is the first abstract'
       get :show, :id => @datatable, :requested_subdomain => 'glbrc'
     end
@@ -265,7 +265,7 @@ class DatatablesControllerTest < ActionController::TestCase
 #TODO Uncomment this when we start using templating in the database
   #test "index should get the template in the database if there is one" do
   #  lter_website = Website.find_by_name('lter')
-  #  index_layout = Factory.create(:template,
+  #  index_layout = FactoryGirl.create(:template,
   #                  :website_id => lter_website.id,
   #                  :controller => 'datatables',
   #                  :action     => 'index',
@@ -319,7 +319,7 @@ class DatatablesControllerTest < ActionController::TestCase
 #TODO Uncomment this when we start using templating in the database
   #test "show should get the template in the database if there is one" do
   #  lter_website = Website.find_by_name('lter')
-  #  index_layout = Factory.create(:template,
+  #  index_layout = FactoryGirl.create(:template,
   #                  :website_id => lter_website.id,
   #                  :controller => 'datatables',
   #                  :action     => 'show',
@@ -381,7 +381,7 @@ class DatatablesControllerTest < ActionController::TestCase
 
   context 'a datatable without description' do
     setup do
-      @table = Factory.create(:datatable, :description=>nil, :dataset => Factory.create(:dataset))
+      @table = FactoryGirl.create(:datatable, :description=>nil, :dataset => FactoryGirl.create(:dataset))
       get :show,  :id => @table
     end
 
@@ -407,7 +407,7 @@ class DatatablesControllerTest < ActionController::TestCase
   end
 
   def test_caching_and_expiring
-    @datatable = Factory.create :datatable, :dataset => Factory.create(:dataset),
+    @datatable = FactoryGirl.create :datatable, :dataset => FactoryGirl.create(:dataset),
                                   :description => 'This is the first abstract'
     get :show, :id => @datatable
     assert @datatable.is_sql
@@ -420,7 +420,7 @@ class DatatablesControllerTest < ActionController::TestCase
   end
 
   def test_expiring_in_one_day
-    @datatable = Factory.create :datatable, :dataset => Factory.create(:dataset),
+    @datatable = FactoryGirl.create :datatable, :dataset => FactoryGirl.create(:dataset),
                                   :description => 'This is the first abstract'
     get :show, :id => @datatable
     assert @datatable.is_sql

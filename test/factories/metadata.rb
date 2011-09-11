@@ -22,6 +22,12 @@ FactoryGirl.define do
   factory :book_citation do
   end
 
+  factory :chapter_citation do
+  end
+
+  factory :thesis_citation do
+  end
+
   factory :citation_type do
   end
 

@@ -11,9 +11,9 @@ class CitationsControllerTest < ActionController::TestCase
     context 'GET :index with an article citation' do
       setup do
         Citation.delete_all  #clear out other citations
-        author1 = Factory.create(:author, :sur_name => 'Zebedee', :seniority => 1)
-        author2 = Factory.create(:author, :sur_name => 'Alfred',  :seniority => 1)
-        website = Website.find_by_name("lter") || Factory.create(:website, :name => "lter")
+        author1 = FactoryGirl.create(:author, :sur_name => 'Zebedee', :seniority => 1)
+        author2 = FactoryGirl.create(:author, :sur_name => 'Alfred',  :seniority => 1)
+        website = Website.find_by_name("lter") || FactoryGirl.create(:website, :name => "lter")
         @citation1 = ArticleCitation.new
         @citation1.authors << Author.new( :sur_name => 'Loecke',
                                        :given_name => 'T', :middle_name => 'D',
@@ -74,13 +74,25 @@ class CitationsControllerTest < ActionController::TestCase
     context 'GET :index from anonymous user' do
       setup do
         Citation.delete_all  #clear out other citations
-        author1 = Factory.create(:author, :sur_name => 'Zebedee', :seniority => 1)
-        author2 = Factory.create(:author, :sur_name => 'Alfred',  :seniority => 1)
-        website = Website.find_by_name("lter") || Factory.create(:website, :name => "lter")
-        @citation1 = Factory.create(:citation, :website => website,
-          :authors => [author1], :title => 'citation1', :pub_year => 2010, :state => 'published')
-        @citation2 = Factory.create(:citation, :website => website,
-          :authors => [author2], :title => 'citation2', :pub_year => 2010, :state => 'published')
+        author1 = FactoryGirl.create(:author, :sur_name => 'Zebedee', :seniority => 1)
+        author2 = FactoryGirl.create(:author, :sur_name => 'Alfred',  :seniority => 1)
+        author3 = FactoryGirl.create(:author, :sur_name => 'Babbit',  :seniority => 1)
+        author4 = FactoryGirl.create(:author, :sur_name => 'Bob',     :seniority => 1)
+        website = Website.find_by_name("lter") || FactoryGirl.create(:website, :name => "lter")
+        @citation1 = FactoryGirl.create(:article_citation, :website => website,
+                                        :authors => [author1], :title => 'citation1', :pub_year => 2010, 
+                                        :state => 'published')
+        @citation2 = FactoryGirl.create(:book_citation, :website => website,
+                                        :authors => [author2], :title => 'citation2', :pub_year => 2010, 
+                                        :state => 'published')
+        @citation3 = FactoryGirl.create(:chapter_citation, :website => website,
+                                        :authors => [author3], :title => 'citation3', :pub_year => 2010,
+                                        :state => 'published' )
+        @citation4 = FactoryGirl.create(:thesis_citation, :website => website,
+                                        :authors => [author4], :title => 'citation4', :pub_year => 2010,
+                                        :state => 'published' )
+
+        @test = website
         get :index
       end
 
@@ -89,11 +101,15 @@ class CitationsControllerTest < ActionController::TestCase
 
       should render_with_layout 'lter'
 
+      should 'return 4 citations' do
+        citations = assigns(:citations)
+        assert_equal 4, citations.size
+      end
+
       should 'return the citations in order of author last name' do
         citations = assigns(:citations)
-        assert_equal 2, citations.size
-        assert_equal @citation2, citations[0]
-        assert_equal @citation1,  citations[1]
+        assert_equal @citation2, citations.first
+        assert_equal @citation1,  citations.last
       end
 
       context 'in endnote format' do
@@ -115,8 +131,8 @@ class CitationsControllerTest < ActionController::TestCase
         end
         should respond_with :success
         should assign_to :citations
-        should 'not have any citations since the date is in the future' do
-          assert_equal 2, assigns(:citations).size
+        should 'have all citations since the date is in the past' do
+          assert_equal 4, assigns(:citations).size
         end
       end
 
@@ -132,7 +148,53 @@ class CitationsControllerTest < ActionController::TestCase
         end
       end
 
+      context 'with type article' do
+        setup do
+          get :index , :type => 'article'
+        end
+
+        should respond_with :success
+        should assign_to :citations
+
+        should 'only include article citations' do
+          citations = assigns(:citations)
+          assert_equal 'ArticleCitation',  citations.collect {|x| x.class.name}.sort.uniq.first
+        end
+      end
+
+      context 'with type book' do
+        setup do
+          get :index, :type => 'book'
+        end
+
+        should respond_with :success
+        should assign_to :citations
+
+        should 'only include book citations' do
+          citations = assigns(:citations)
+          class_names = citations.collect {|x| x.class.name}
+          assert_includes class_names, 'BookCitation' 
+          assert_includes class_names, 'ChapterCitation'
+          refute_includes class_names, 'ArticleCitation'
+        end
+      end
+
+      context 'with type thesis' do
+        setup { get :index, :type => 'thesis' }
+
+        should respond_with :success
+        should assign_to :citations
+
+        should 'only include thesis citaitons' do
+          citations = assigns(:citations)
+          class_names = citations.collect {|x| x.class.name}
+          assert_includes class_names, 'ThesisCitation' 
+          refute_includes class_names, 'ChapterCitation'
+          refute_includes class_names, 'ArticleCitation'
+        end
+      end
     end
+
 
     context 'GET :index from glbrc' do
       setup do
@@ -148,7 +210,7 @@ class CitationsControllerTest < ActionController::TestCase
 
     context 'GET :download' do
       setup do
-        @citation = Factory :citation
+        @citation = FactoryGirl.create :citation
         get :download, :id => @citation
       end
 
@@ -157,7 +219,7 @@ class CitationsControllerTest < ActionController::TestCase
 
     context 'GET: download an open access publication' do
       setup do
-        @citation= Factory :citation
+        @citation= FactoryGirl.create :citation
         @citation.open_access = true
 
         get :download, :id => @citation
@@ -168,7 +230,7 @@ class CitationsControllerTest < ActionController::TestCase
 
     context 'GET :show' do
       setup do
-        @citation = Factory :citation, :abstract => '*Something*', :title => 'article'
+        @citation = FactoryGirl.create :citation, :abstract => '*Something*', :title => 'article'
         get :show, :id => @citation
       end
 
@@ -211,7 +273,7 @@ class CitationsControllerTest < ActionController::TestCase
 
     context 'GET: edit' do
       setup do
-        citation = Factory.create :citation
+        citation = FactoryGirl.create :citation
         post :edit, :id => citation
       end
 
@@ -220,7 +282,7 @@ class CitationsControllerTest < ActionController::TestCase
 
     context 'POST: update' do
       setup do
-        @citation = Factory.create :citation
+        @citation = FactoryGirl.create :citation
         post :update, :id => @citation, :title => 'nothing'
       end
 
@@ -231,7 +293,7 @@ class CitationsControllerTest < ActionController::TestCase
 
     context 'DELETE' do
       setup do
-        citation = Factory :citation
+        citation = FactoryGirl.create :citation
         post :destroy, :id => citation
       end
 
@@ -275,7 +337,7 @@ class CitationsControllerTest < ActionController::TestCase
 
     context 'GET: edit' do
       setup do
-        @citation = Factory.create :citation
+        @citation = FactoryGirl.create :citation
         get :edit, :id => @citation
       end
 
@@ -284,7 +346,7 @@ class CitationsControllerTest < ActionController::TestCase
 
     context 'POST: update' do
       setup do
-        @citation = Factory.create :citation
+        @citation = FactoryGirl.create :citation
         post :update, :id => @citation, :title=>'nothing'
       end
 
@@ -293,7 +355,7 @@ class CitationsControllerTest < ActionController::TestCase
 
     context 'DELETE' do
       setup do
-        citation = Factory :citation
+        citation = FactoryGirl.create :citation
         post :destroy, :id => citation
       end
 
@@ -358,9 +420,9 @@ class CitationsControllerTest < ActionController::TestCase
 
     context 'GET: edit' do
       setup do
-        citation = Factory.create :citation
-        citation.authors = [Factory.create(:author), Factory.create(:author)]
-        citation.editors = [Factory.create(:editor), Factory.create(:editor)]
+        citation = FactoryGirl.create :citation
+        citation.authors = [FactoryGirl.create(:author), FactoryGirl.create(:author)]
+        citation.editors = [FactoryGirl.create(:editor), FactoryGirl.create(:editor)]
         get :edit, :id => citation
       end
 
@@ -370,7 +432,7 @@ class CitationsControllerTest < ActionController::TestCase
 
     context 'POST: update' do
       setup do
-        citation = Factory.create :citation
+        citation = FactoryGirl.create :citation
         post :update, :id => citation.id, :citation => {:title => 'nothing', 
                                                         :type=>'ArticleCitation' }
       end
@@ -393,7 +455,7 @@ class CitationsControllerTest < ActionController::TestCase
 
     context 'DESTROY' do
       setup do
-        @citation = Factory.create :citation
+        @citation = FactoryGirl.create :citation
         post :destroy, :id => @citation
       end
 
@@ -402,7 +464,7 @@ class CitationsControllerTest < ActionController::TestCase
 
     should 'test_caching_and_expiring_for_update' do
       Rails.cache.clear
-      @citation = Factory.create :citation
+      @citation = FactoryGirl.create :citation
       get :index
       assert @controller.fragment_exist?(:controller => "citations", :action => "index")
       put :update, :id => @citation, :citation => { :title => 'nothing' }

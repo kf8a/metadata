@@ -6,6 +6,11 @@ class Website < ActiveRecord::Base
   has_many :study_urls
   has_many :citations
 
+  has_many :article_citations
+  has_many :book_citations
+  has_many :chapter_citations
+  has_many :thesis_citations
+
   validates_uniqueness_of :name
   validates_presence_of :name
 
