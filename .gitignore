@@ -1,3 +1,4 @@
+*emfile.lock
 db/meta_*
 .yardoc
 db/*.sqlite3

@@ -12,7 +12,7 @@ gem 'pg'
 gem 'ruby-openid', :git => 'https://github.com/kf8a/ruby-openid.git'
 gem 'rack-openid'
 gem 'acts-as-taggable-on'
-gem 'paperclip'
+gem 'paperclip' #, '=2.3.16'
 gem 'aws-s3'
 gem 'nokogiri'
 gem 'RedCloth'#, '4.2.4'
@@ -34,7 +34,7 @@ gem 'friendly_id'
 gem 'parslet'
 
 # for spreadsheet downloads
-gem 'spreadsheet'
+#gem 'spreadsheet'
 
 # for creating bibtex formatted citations
 gem 'bibtex-ruby'
