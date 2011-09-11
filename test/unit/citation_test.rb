@@ -375,7 +375,7 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'a citation object with an author' do
     setup do
-      @auth = Factory.create(:author)
+      @auth = Factory.create(:author, :sur_name=>'Babbit', :given_name=>'Bob')
       @cite = Factory.create(:citation)
       @cite.authors << @auth
     end
@@ -401,6 +401,20 @@ class CitationTest < ActiveSupport::TestCase
       assert_equal "Jones, Jonathon", @cite.author_block
       assert_equal "Jones", @cite.authors[0].sur_name
     end
+
+    #TODO: figure out a way to keep the id's with the authors so they can be just updated and do not need
+    # to be replaced.
+    # should 'keep the same author record when updating' do
+    #   @cite.author_block = 'Babbit, Bob'
+    #   @cite.save
+    #   assert_equal @auth, @cite.authors[0]
+    # end
+
+    # should 'keep the same author when abbreviated' do
+    #   @cite.author_block = 'Babbit, B.'
+    #   @cite.save
+    #   assert_equal @auth, @cite.authors[0]
+    # end
   end
 
   context 'a citation object with many authors' do
