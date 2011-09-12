@@ -4,8 +4,8 @@ class BookCitation < Citation
     true
   end
 
-  def formatted
-    "#{author_and_year}. #{title}. #{page_numbers_book}#{editor_string}. #{publication}. #{publisher}, #{address}."
+  def formatted(options={})
+    "#{author_and_year(options)}. #{title}. #{page_numbers_book}#{editor_string}. #{publication}. #{publisher}, #{address}."
   end
 
   private

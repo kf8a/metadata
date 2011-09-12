@@ -1,7 +1,7 @@
 class ConferenceCitation < Citation
 
-  def formatted
-    "#{author_and_year}. #{title}. #{publication} #{volume_and_page}".rstrip
+  def formatted(options={})
+    "#{author_and_year(options)}. #{title}. #{publication} #{volume_and_page}".rstrip
   end
 
   private

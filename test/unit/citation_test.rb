@@ -431,6 +431,10 @@ class CitationTest < ActiveSupport::TestCase
       assert_match( /, et\.al\./, @cite.formatted)
     end
 
+    should 'use all authors if called with long_formatted' do
+      refute_match(/et\.al/, @cite.formatted(:long=>true))
+    end
+
   end
 end
 

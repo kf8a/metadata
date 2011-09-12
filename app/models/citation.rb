@@ -226,8 +226,8 @@ class Citation < ActiveRecord::Base
     citation_type.try(:name) == 'book'
   end
 
-  def formatted
-    book? ? formatted_book : formatted_article
+  def formatted(options={})
+    book? ? formatted_book(options) : formatted_article(options)
   end
 
   def to_bib
@@ -296,8 +296,8 @@ class Citation < ActiveRecord::Base
     end
   end
 
-  def formatted_article
-    "#{author_and_year}. #{title}. #{publication} #{volume_and_page}".rstrip
+  def formatted_article(options={})
+    "#{author_and_year(options)}. #{title}. #{publication} #{volume_and_page}".rstrip
   end
 
   def volume_and_page
@@ -364,14 +364,24 @@ class Citation < ActiveRecord::Base
     "%T #{title}\n"
   end
 
-  def author_and_year
-    authors.empty? ? "#{pub_year}" : "#{author_string} #{pub_year}"
+  def author_and_year(options={})
+    if options[:long]
+      authors.empty? ? "#{pub_year}" : "#{author_string} #{pub_year}"
+    else
+      authors.empty? ? "#{pub_year}" : "#{short_author_string} #{pub_year}"
+    end
+  end
+
+  def short_author_string
+    if authors.length > 3
+      return authors.first.formatted + ', et.al. '
+    else 
+      author_string
+    end
   end
 
   def author_string
-    if authors.length > 3
-      return authors.first.formatted + ', et.al. '
-    elsif authors.length > 1
+    if authors.length > 1
       last_author = authors.pop
       author_array = authors.collect {|author| "#{author.formatted}"}
       author_array.push("#{last_author.formatted(:natural)}.")

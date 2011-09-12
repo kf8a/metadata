@@ -1,7 +1,7 @@
 class ArticleCitation < Citation
 
-  def formatted
-    "#{author_and_year}. #{title}. #{journal} #{volume_and_page}".rstrip
+  def formatted(options={})
+    "#{author_and_year(options)}. #{title}. #{journal} #{volume_and_page}".rstrip
   end
 
   private
