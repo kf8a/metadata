@@ -24,6 +24,7 @@ class DatatableSweeper < ActionController::Caching::Sweeper
     expire_fragment(:controller => 'datatables', :action => 'show',  :action_suffix => 'page', :id => datatable)
     expire_fragment(:controller => 'datatables', :action => 'show',  :action_suffix => 'data', :id => datatable)
     expire_action(:controller => 'datatables', :action => 'show', :id => datatable, :format => 'csv')
+    expire_action(:controller => 'datatables', :action => 'show', :id => datatable, :format => 'climdb')
     expire_csv_cache(datatable)
   end
 
