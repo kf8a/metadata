@@ -258,7 +258,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def header
-    data_access_statement + data_source + data_comments
+    data_access_statement + data_source + data_comments + 1
   end
 
   def to_climdb

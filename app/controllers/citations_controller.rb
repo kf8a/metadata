@@ -17,8 +17,12 @@ class CitationsController < ApplicationController
       citations = [website.book_citations, website.chapter_citations]
     when 'thesis'
       citations = [website.thesis_citations]
-    else 
+    when 'report'
+      citations = [website.report_citations]
+    when 'all'
       citations = [website.citations]
+    else 
+      citations = [website.article_citations, website.book_citation, website.chapter_citations, website.thesis_citations]
     end
  
     @submitted_citations = citations.collect {|c| c.includes(:authors).submitted}.flatten
