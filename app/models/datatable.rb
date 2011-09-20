@@ -258,7 +258,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def header
-    data_access_statement + data_source + data_comments + 1
+    data_access_statement + data_source + data_comments
   end
 
   def to_climdb
@@ -415,7 +415,7 @@ class Datatable < ActiveRecord::Base
   def eml_data_format
     @eml.dataFormat do
       @eml.textFormat do
-        @eml.numHeaderLines (header.lines.to_a.size).to_s
+        @eml.numHeaderLines (header.lines.to_a.size + 1).to_s 
         @eml.recordDelimiter "\n"
         @eml.attributeOrientation 'column'
         @eml.simpleDelimited do
