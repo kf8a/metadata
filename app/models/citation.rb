@@ -115,13 +115,14 @@ class Citation < ActiveRecord::Base
     end
   end
 
+  #TODO don't even try to parse the page number
   def page_number_from_ris(start_page, end_page)
-    if end_page.blank?
-      if start_page =~ /(\d+)-(\d+)/ 
-        start_page = $1
-        end_page = $2
-      end
-    end
+    # if end_page.blank?
+    #   if start_page =~ /(\d+)-(\d+)/ 
+    #     start_page = $1
+    #     end_page = $2
+    #   end
+    # end
     self.start_page_number = start_page
     self.ending_page_number = end_page
   end
@@ -300,6 +301,8 @@ class Citation < ActiveRecord::Base
     "#{author_and_year(options)}. #{title}. #{publication} #{volume_and_page}".rstrip
   end
 
+  #TODO override in the chapter citation to put out pages 
+  # even without a volume.
   def volume_and_page
     if volume.blank?
       ""
@@ -364,6 +367,7 @@ class Citation < ActiveRecord::Base
     "%T #{title}\n"
   end
 
+  #TODO if pub_year is empty don't add a dot
   def author_and_year(options={})
     if options[:long]
       authors.empty? ? "#{pub_year}" : "#{author_string} #{pub_year}"
@@ -380,11 +384,15 @@ class Citation < ActiveRecord::Base
     end
   end
 
+  # use natural order for second and subsequent authors
+  # 
   def author_string
     if authors.length > 1
       last_author = authors.pop
-      author_array = authors.collect {|author| "#{author.formatted}"}
+      first_author = authors.shift
+      author_array = authors.collect {|author| "#{author.formatted(:natural)}"}
       author_array.push("#{last_author.formatted(:natural)}.")
+      author_array.unshift("#{first_author.formatted}")
     else
       author_array = [authors.first.formatted]
     end

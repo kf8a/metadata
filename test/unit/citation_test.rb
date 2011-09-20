@@ -435,6 +435,10 @@ class CitationTest < ActiveSupport::TestCase
       refute_match(/et\.al/, @cite.formatted(:long=>true))
     end
 
+    should 'use natural order for second and subsequent authors in long format' do
+      assert_match /Jones, J., J. Jones, J. Jones/, @cite.formatted(:long=>true)
+    end
+
   end
 end
 

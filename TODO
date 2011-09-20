@@ -1,3 +1,8 @@
+TODO add "in press" state to citations. if in press show "in press" in citations
+TODO show DOI if no volume. 
+
+TODO ris_parser check page range parsing  with em and en dashes
+
 TODO figure out why the javascript for the keyworder responds differently on lter and glbrc
 TODO mail permission requests to lead investigators 
 TODO check delete people
