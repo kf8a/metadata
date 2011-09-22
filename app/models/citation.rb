@@ -292,7 +292,7 @@ class Citation < ActiveRecord::Base
   end
 
   def formatted_article(options={})
-    "#{author_and_year(options)}. #{title}. #{publication} #{volume_and_page}".rstrip
+    "#{author_and_year(options)} #{title}. #{publication} #{volume_and_page}".rstrip
   end
 
   def volume_and_page
@@ -321,8 +321,8 @@ class Citation < ActiveRecord::Base
     end
   end
 
-  def formatted_book
-    "#{author_and_year}. #{title}. #{page_numbers_book}#{editor_string}. #{publication}. #{publisher}, #{address}."
+  def formatted_book(options={})
+    "#{author_and_year(options)} #{title}. #{page_numbers_book}#{editor_string}. #{publication}. #{publisher}, #{address}."
   end
 
   def page_numbers_book
@@ -363,12 +363,16 @@ class Citation < ActiveRecord::Base
     "%T #{title}\n"
   end
 
+  def pub_year_with_punctuation 
+    pub_year ?  "#{pub_year}." : ""
+  end
+
   #TODO if pub_year is empty don't add a dot
   def author_and_year(options={})
     if options[:long]
-      authors.empty? ? "#{pub_year}" : "#{author_string} #{pub_year}"
+      authors.empty? ? "#{pub_year_with_punctuation}" : "#{author_string} #{pub_year_with_punctuation}".rstrip
     else
-      authors.empty? ? "#{pub_year}" : "#{short_author_string} #{pub_year}"
+      authors.empty? ? "#{pub_year_with_punctuation}" : "#{short_author_string} #{pub_year_with_punctuation}".rstrip
     end
   end
 

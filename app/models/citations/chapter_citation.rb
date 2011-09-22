@@ -1,7 +1,7 @@
 class ChapterCitation < Citation
 
   def formatted(options={})
-    "#{author_and_year(options)}. #{title}. #{publication}, #{volume_and_page}".rstrip
+    "#{author_and_year(options)} #{title}. #{publication}, #{volume_and_page}".rstrip
   end
 
   def volume_and_page

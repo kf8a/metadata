@@ -383,6 +383,17 @@ class CitationTest < ActiveSupport::TestCase
     end
   end
 
+  context 'a citation with no pub year' do
+    setup do
+      auth = FactoryGirl.create(:author, :sur_name=>'Babbit', :given_name=>'Bob')
+      @cite = FactoryGirl.create(:citation, :title => 'A title', :authors => [auth])
+    end
+
+    should 'not have a dot after the pub year' do
+      assert_equal 'Babbit, B. A title.', @cite.formatted
+    end
+  end
+
   context 'a citation object with an author' do
     setup do
       @auth = FactoryGirl.create(:author, :sur_name=>'Babbit', :given_name=>'Bob')
