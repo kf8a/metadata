@@ -367,7 +367,6 @@ class Citation < ActiveRecord::Base
     pub_year ?  "#{pub_year}." : ""
   end
 
-  #TODO if pub_year is empty don't add a dot
   def author_and_year(options={})
     if options[:long]
       authors.empty? ? "#{pub_year_with_punctuation}" : "#{author_string} #{pub_year_with_punctuation}".rstrip
