@@ -11,10 +11,10 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'Some citations exist at different dates' do
     setup do
-      @oldcitation = Factory.create(:citation, :title => 'Old Citation')
+      @oldcitation = FactoryGirl.create(:citation, :title => 'Old Citation')
       @oldcitation.updated_at = Date.civil(2000, 1, 1)
       @oldcitation.save
-      @newcitation = Factory.create(:citation, :title => 'New Citation')
+      @newcitation = FactoryGirl.create(:citation, :title => 'New Citation')
       @newcitation.updated_at = Date.civil(2002, 1, 1)
       @newcitation.save
     end
@@ -373,10 +373,20 @@ class CitationTest < ActiveSupport::TestCase
   end
 
 
+  context 'a citation with a doi but no volume' do 
+    setup do
+      @cite = FactoryGirl.create(:citation, :doi => 'my_doi_string')
+    end
+
+    should 'display the doi in the formatted citation' do
+      assert_match /my_doi_string/, @cite.formatted
+    end
+  end
+
   context 'a citation object with an author' do
     setup do
-      @auth = Factory.create(:author, :sur_name=>'Babbit', :given_name=>'Bob')
-      @cite = Factory.create(:citation)
+      @auth = FactoryGirl.create(:author, :sur_name=>'Babbit', :given_name=>'Bob')
+      @cite = FactoryGirl.create(:citation)
       @cite.authors << @auth
     end
 
@@ -419,10 +429,10 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'a citation object with many authors' do
     setup do
-      @cite = Factory.create(:citation)
+      @cite = FactoryGirl.create(:citation)
       authors = []
       4.times do 
-        authors << Factory.create(:author, :given_name=>'Jon', :sur_name => 'Jones')
+        authors << FactoryGirl.create(:author, :given_name=>'Jon', :sur_name => 'Jones')
       end
       @cite.authors << authors
     end

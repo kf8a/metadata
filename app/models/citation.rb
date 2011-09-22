@@ -115,14 +115,8 @@ class Citation < ActiveRecord::Base
     end
   end
 
-  #TODO don't even try to parse the page number
+  # don't even try to parse the page number
   def page_number_from_ris(start_page, end_page)
-    # if end_page.blank?
-    #   if start_page =~ /(\d+)-(\d+)/ 
-    #     start_page = $1
-    #     end_page = $2
-    #   end
-    # end
     self.start_page_number = start_page
     self.ending_page_number = end_page
   end
@@ -301,11 +295,13 @@ class Citation < ActiveRecord::Base
     "#{author_and_year(options)}. #{title}. #{publication} #{volume_and_page}".rstrip
   end
 
-  #TODO override in the chapter citation to put out pages 
-  # even without a volume.
   def volume_and_page
     if volume.blank?
-      ""
+      if self.doi.blank?
+        ""
+      else
+        "doi: #{self.doi}"
+      end
     elsif page_numbers.blank?
       "#{volume}."
     else

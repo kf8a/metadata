@@ -1,7 +1,21 @@
 class ChapterCitation < Citation
 
   def formatted(options={})
-    "#{author_and_year(options)}. #{title}. #{publication} #{volume_and_page}".rstrip
+    "#{author_and_year(options)}. #{title}. #{publication}, #{volume_and_page}".rstrip
+  end
+
+  def volume_and_page
+    if volume.blank?
+      if page_numbers.blank?
+        ""
+      else
+        "pages #{page_numbers}."
+      end
+    elsif page_numbers.blank?
+      "#{volume}."
+    else
+      "vol #{volume}, pages #{page_numbers}."
+    end
   end
 
   private
@@ -15,7 +29,7 @@ class ChapterCitation < Citation
   end
 
   def endnote_type
-    "ChapterCitation\n"
+    "CHAP\n"
   end
 
   def endnote_publication_data
