@@ -19,7 +19,6 @@ gem 'clearance', '=0.10.5'
 gem 'formtastic'
 # can we go back to the collective idea branch of awesome_nested_set
 gem 'awesome_nested_set' #, :git => 'git://github.com/galetahub/awesome_nested_set.git'
-gem 'will_paginate'
 
 gem 'thin'
 gem 'unicorn'
