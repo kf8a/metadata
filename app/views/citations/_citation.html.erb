@@ -1,3 +1,4 @@
+<% cache(:action=>'index', :action_suffix => "citation_#{citation.id}") do %>
 <div id=<%= citation.id %> >
   <li class='citation'>
       <% unless year.nil? %>
@@ -28,3 +29,4 @@
 
   </li>
 </div>
+<% end %>
