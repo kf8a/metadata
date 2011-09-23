@@ -8,18 +8,23 @@
       <p>
       <%=raw citation.formatted %>
       </p>
-    <div class='non-member'>
-      <% if citation.pdf.exists? -%>
+      
+    <% if citation.pdf.exists? %>
+      <div class='non-member'>
         <%= link_to 'abstract + pdf', citation_path(citation) %>
-      <% else -%>
+      </div>
+      <div class='member-only'>
         <%= link_to 'abstract', citation_path(citation) %>
-      <% end -%>
-    </div>
-    <div class='member-only'>
-      <%= link_to 'abstract', citation_path(citation) %>
-      <% if citation.pdf.exists? %>
         <%= link_to 'pdf', download_citation_path(citation)%>
-      <% end %>
-    </div>
+      </div>
+    <% else %>
+      <div class='non-member'>
+        <%= link_to 'abstract', citation_path(citation) %>
+      </div>
+      <div class='member-only'>
+        <%= link_to 'abstract', citation_path(citation) %>
+      </div>
+    <% end %>
+
   </li>
 </div>
