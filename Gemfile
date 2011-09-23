@@ -2,11 +2,8 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.10'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
 gem 'rake'
-gem 'capistrano' #, :git=>'git://github.com/capistrano/capistrano.git'
+gem 'capistrano' 
 gem 'newrelic_rpm'
 gem 'pg'
 gem 'ruby-openid', :git => 'https://github.com/kf8a/ruby-openid.git'
@@ -22,6 +19,8 @@ gem 'clearance', '=0.10.5'
 gem 'formtastic'
 # can we go back to the collective idea branch of awesome_nested_set
 gem 'awesome_nested_set' #, :git => 'git://github.com/galetahub/awesome_nested_set.git'
+gem 'will_paginate'
+
 gem 'thin'
 gem 'unicorn'
 
@@ -72,6 +71,7 @@ group :development, :test  do
   gem 'rspec-rails'
   gem "rspec"
   gem "annotate"
+  gem 'spork'
 end
 
 group :test do
@@ -80,7 +80,7 @@ group :test do
   gem 'simplecov-html'
 
   #gem "shoulda-matchers" # to use rspec like syntax
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', :require => false
   gem 'remarkable_activerecord', '>=4.0.0.alpha2'
 
   #Cucumber stuff

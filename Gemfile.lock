@@ -325,6 +325,7 @@ GEM
       kgio (~> 2.4)
       rack
       raindrops (~> 0.6)
+    will_paginate (3.0.0)
     workflow (0.8.1)
     xml-simple (1.1.0)
     xpath (0.1.4)
@@ -387,4 +388,5 @@ DEPENDENCIES
   thinking-sphinx
   unicorn
   vestal_versions!
+  will_paginate
   workflow
