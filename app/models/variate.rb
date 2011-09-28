@@ -81,7 +81,7 @@ class Variate < ActiveRecord::Base
 
   def eml_date_time
     @eml.formatString date_format.blank? ? 'YYYY-MM-DD' : date_format
-    @eml.dateTimePrecision '86400'
+    @eml.dateTimePrecision '1'
     @eml.dateTimeDomain do
       @eml.bounds do
         @eml.minimum '1987-4-18', 'exclusive' => 'true'
