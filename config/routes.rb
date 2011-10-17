@@ -26,6 +26,7 @@ Metadata::Application.routes.draw do
     end
   end
 
+  resources :climdb, :only=> :index  # since climdb can only handle one url per site
   resources :authors
   resources :collections
   resources :data_contributions
