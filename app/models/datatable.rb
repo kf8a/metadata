@@ -26,7 +26,7 @@ class Datatable < ActiveRecord::Base
   belongs_to              :study
   belongs_to              :theme
   has_many                :variates, :order => :weight
-  has_many                :visualizations
+  has_many                :visualizations, :oder => :weight
 
   validates :title,   :presence => true
   validates :dataset, :presence => true
