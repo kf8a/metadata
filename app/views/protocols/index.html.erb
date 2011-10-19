@@ -15,21 +15,6 @@
     </ul>
   <% end %>
 
-  <% @themes.each do |theme| -%>
-    <% next if theme.datatables? -%>
-    <h2><%= theme.name %></h2>
-      <ul>
-      <% theme.datasets.each do |dataset| -%>
-      <% next unless dataset.on_web %>
-        <% dataset.protocols.each do |protocol| -%>
-          <li>
-            <%= link_to "#{protocol.title}", protocol_path(protocol) %> 
-          </li>
-        <% end -%>
-      <% end -%>
-      </ul>
-  <% end -%>
-
   <ul>
   <% @untagged_protocols.each do |protocol|%>
     <li>

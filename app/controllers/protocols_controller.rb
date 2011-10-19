@@ -15,7 +15,7 @@ class ProtocolsController < ApplicationController
     @protocol_themes = website.protocols.all_tag_counts(:on=>:themes).order('name')
     @experiment_protocols = website.protocols.tagged_with(:experiments).where(:active => true).order('title')
 
-    @untagged_protocols = Protocol.all.collect {|e| e if e.theme_list.blank? }.compact
+    @untagged_protocols = Protocol.where(:active=>true).all.collect {|e| e if e.theme_list.blank? }.compact
 
     respond_with @protocols
   end
