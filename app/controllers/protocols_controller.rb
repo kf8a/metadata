@@ -9,7 +9,6 @@ class ProtocolsController < ApplicationController
   # GET /protocols.xml
   def index
     store_location
-    @themes = Theme.roots
     @website = website
 
     @protocols = website.protocols.find(:all, :order => 'title', :conditions => ['active = true'])
