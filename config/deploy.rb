@@ -27,6 +27,10 @@ set :unicorn_binary, "/usr/local/bin/unicorn"
 set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "/var/u/apps/metadata/shared/pids/unicorn.pid"
 
+def remote_file_exists?(full_path)
+    'true' ==  capture("if [ -e #{full_path} ]; then echo 'true'; fi").strip
+end
+
 before :deploy do
   unless exists?(:host)
     raise "Please invoke me like `cap stage deploy` where stage is production/staging"
@@ -34,7 +38,7 @@ before :deploy do
 end
 
 namespace :deploy do
-  desc "start unicorn appserver"
+  desc "start unicorn appserves remote_file_exists?('/dev/null')"
   task :start, :roles => :app, :except => { :no_release => true } do 
     run "cd #{current_path} && bundle exec  #{unicorn_binary}  -c #{unicorn_config} --env  #{rails_env} -D"
   end
@@ -44,7 +48,9 @@ namespace :deploy do
   end
   desc "gracefully stop unicorn appserver"
   task :graceful_stop, :roles => :app, :except => { :no_release => true } do
-    run "#{try_sudo} kill -s QUIT `cat #{unicorn_pid}`"
+    if remote_file_exists?(unicorn_pid) 
+      run "#{try_sudo} kill -s QUIT `cat #{unicorn_pid}`"
+    end
   end
   desc "reload unicorn appserver"
   task :reload, :roles => :app, :except => { :no_release => true } do
@@ -85,21 +91,25 @@ task :master do
   set :host, 'gprpc28'
 
   role :app, "#{host}.kbs.msu.edu"
+  role :db,  "#{host}.kbs.msu.edu", :primary=>true
 
 #  after 'deploy:symlink', :set_asset_host
 end
 
 task :kalkaska do
   set :host, 'kalkaska'
-
   role :app, "#{host}.kbs.msu.edu"
 end
 
+task :houghton do
+  set :host, 'houghton'
+  role :app, "#{host}.kbs.msu.edu"
+end
 task :production do
 
   set :host, 'houghton'
 
-  role :app, "#{host}.kbs.msu.edu", "gprpc28.kbs.msu.edu", 'kalkaska.kbs.msu.edu'
+  role :app, "#{host}.kbs.msu.edu" #, "gprpc28.kbs.msu.edu", 'kalkaska.kbs.msu.edu'
   role :web, "#{host}.kbs.msu.edu"
   role :db,  "#{host}.kbs.msu.edu", :primary => true
 
