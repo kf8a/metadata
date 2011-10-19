@@ -1,4 +1,5 @@
 class Protocol < ActiveRecord::Base
+  acts_as_taggable_on :themes
   belongs_to :dataset
   has_and_belongs_to_many :websites
   has_and_belongs_to_many :datatables
