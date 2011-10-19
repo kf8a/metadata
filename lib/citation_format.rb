@@ -1,6 +1,6 @@
 module CitationFormat
 
-  SUFFICES = ['esq','esquire','jr','sr','2','i','ii','iii','iv','clu','chfc','cfp','md','phd']
+  SUFFICES = ['esq','esquire','jr','sr','clu','chfc','cfp','md','phd']
 
   def formatted(option = :default)
     if option == :natural
