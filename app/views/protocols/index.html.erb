@@ -17,8 +17,11 @@
     </ul>
   <% end %>
 
+<% end %>
+
+<% if signed_in? and current_user.role == 'admin' %>
   <ul>
-  <% @untagged_protocols.each do |protocol|%>
+  <% @untagged_protocols.each do |protocol| %>
     <li>
       <%= link_to raw("#{protocol.title}"), protocol_path(protocol) %>
     </li>
