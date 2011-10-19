@@ -7,7 +7,7 @@
     <% next if theme.name == 'experiments' %>
     <h2><%= theme.name.humanize %></h2>
     <ul>
-    <% Protocol.tagged_with(theme).order(:title).where(:active=>true).each do | protocol| %>
+    <% @website.protocols.tagged_with(theme).order(:title).where(:active=>true).each do | protocol| %>
       <li>
       <%=link_to(raw("#{protocol.title}"), protocol_path(protocol)) %>
       </li>
