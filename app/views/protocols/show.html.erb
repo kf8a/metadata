@@ -28,9 +28,11 @@
     <% end %>
   </ul>
   <h2>Datatables</h2>
+  <ol>
   <% @protocol.datatables.each do |datatable| -%>
-    <%= link_to datatable.to_label, datatable_path(datatable) %>
+    <li><%= link_to datatable.to_label, datatable_path(datatable) %></li>
   <% end -%>
+  </ol>
 
   <p>
   <%= link_to 'Edit', edit_protocol_path(@protocol) %> |
