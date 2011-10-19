@@ -1,8 +1,10 @@
 <% cache do %>
   <h2>Experiment Protocols</h2>
+  <ul>
   <% @experiment_protocols.each do |protocol| %>
-    <%= link_to "#{protocol.title}", protocol_path(protocol) %> 
+    <li><%= link_to "#{protocol.title}", protocol_path(protocol) %> </li>
   <% end %>
+  </ul>
   <% @protocol_themes.each do |theme| %>
     <% next if theme.name == 'experiments' %>
     <h2><%= theme.name.humanize %></h2>
