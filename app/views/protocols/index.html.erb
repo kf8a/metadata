@@ -9,7 +9,7 @@
     <ul>
     <% Protocol.tagged_with(theme).order(:title).where(:active=>true).each do | protocol| %>
       <li>
-       <%= link_to "#{protocol.title}", protocol_path(protocol) %>
+      <%=link_to(raw("#{protocol.title}"), protocol_path(protocol)) %>
       </li>
     <% end %> 
     </ul>
@@ -18,7 +18,7 @@
   <ul>
   <% @untagged_protocols.each do |protocol|%>
     <li>
-      <%= link_to "#{protocol.title}", protocol_path(protocol) %>
+      <%= link_to raw("#{protocol.title}"), protocol_path(protocol) %>
     </li>
   <% end %> 
   </ul>
