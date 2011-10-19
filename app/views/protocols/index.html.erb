@@ -1,18 +1,41 @@
 <% cache do %>
-<% @themes.each do |theme| -%>
-  <% next if theme.datatables? -%>
-	<h2><%= theme.name %></h2>
-		<ul>
-		<% theme.datasets.each do |dataset| -%>
-		<% next unless dataset.on_web %>
-      <% dataset.protocols.each do |protocol| -%>
-        <li>
-          <%= link_to "#{protocol.title}", protocol_path(protocol) %> 
-        </li>
-      <% end -%>
-		<% end -%>
-		</ul>
-<% end -%>
+  <h2>Experiment Protocols</h2>
+  <% @experiment_protocols.each do |protocol| %>
+    <%= link_to "#{protocol.title}", protocol_path(protocol) %> 
+  <% end %>
+  <% @protocol_themes.each do |theme| %>
+    <% next if theme.name == 'experiments' %>
+    <h2><%= theme.name.humanize %></h2>
+    <ul>
+    <% Protocol.tagged_with(theme).order(:title).where(:active=>true).each do | protocol| %>
+      <li>
+       <%= link_to "#{protocol.title}", protocol_path(protocol) %>
+      </li>
+    <% end %> 
+    </ul>
+  <% end %>
 
+  <% @themes.each do |theme| -%>
+    <% next if theme.datatables? -%>
+    <h2><%= theme.name %></h2>
+      <ul>
+      <% theme.datasets.each do |dataset| -%>
+      <% next unless dataset.on_web %>
+        <% dataset.protocols.each do |protocol| -%>
+          <li>
+            <%= link_to "#{protocol.title}", protocol_path(protocol) %> 
+          </li>
+        <% end -%>
+      <% end -%>
+      </ul>
+  <% end -%>
+
+  <ul>
+  <% @untagged_protocols.each do |protocol|%>
+    <li>
+      <%= link_to "#{protocol.title}", protocol_path(protocol) %>
+    </li>
+  <% end %> 
+  </ul>
 <%= link_to 'New protocol', new_protocol_path %>
 <% end %>

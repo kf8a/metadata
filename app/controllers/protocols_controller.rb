@@ -10,7 +10,12 @@ class ProtocolsController < ApplicationController
   def index
     store_location
     @themes = Theme.roots
+
     @protocols = website.protocols.find(:all, :order => 'title', :conditions => ['active = true'])
+    @protocol_themes = website.protocols.all_tag_counts(:on=>:themes).order('name')
+    @experiment_protocols = website.protocols.tagged_with(:experiments).where(:active => true).order('title')
+
+    @untagged_protocols = Protocol.all.collect {|e| e if e.theme_list.blank? }.compact
 
     respond_with @protocols
   end
