@@ -324,7 +324,7 @@ class CitationsControllerTest < ActionController::TestCase
         get :new
       end
 
-      should redirect_to('the sign in path') { sign_in_path }
+      should redirect_to('/') { root_path }
     end
 
     context 'POST: create' do
@@ -332,7 +332,7 @@ class CitationsControllerTest < ActionController::TestCase
         post :create
       end
 
-      should redirect_to('the sign in path') { sign_in_path }
+      should redirect_to('/') { root_path }
     end
 
     context 'GET: edit' do
@@ -341,7 +341,7 @@ class CitationsControllerTest < ActionController::TestCase
         get :edit, :id => @citation
       end
 
-      should redirect_to('the sign in path') { sign_in_path }
+      should redirect_to('/') { root_path }
     end
 
     context 'POST: update' do
@@ -350,7 +350,7 @@ class CitationsControllerTest < ActionController::TestCase
         post :update, :id => @citation, :title=>'nothing'
       end
 
-      should redirect_to('the sign in path') { sign_in_path }
+      should redirect_to('/') { root_path }
     end
 
     context 'DELETE' do
@@ -359,7 +359,7 @@ class CitationsControllerTest < ActionController::TestCase
         post :destroy, :id => citation
       end
 
-      should redirect_to('the sign in path') { sign_in_path }
+      should redirect_to('/') { root_path }
     end
   end
 

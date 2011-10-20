@@ -1,6 +1,6 @@
 class PermissionRequestsController < ApplicationController
 
-  before_filter :authenticate
+  before_filter :authorize
   
   def create
     user = current_user
