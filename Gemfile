@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.17'
+gem 'rails', '3.1.1'
 
 gem 'rake'
 gem 'capistrano' 
@@ -40,12 +40,12 @@ gem 'parslet'
 # for creating bibtex formatted citations
 gem 'bibtex-ruby'
 
-gem 'metric_fu'
+#gem 'metric_fu'
 
 gem 'jammit'
 
 # versioning support for protocols
-gem 'vestal_versions', :git => 'git://github.com/adamcooper/vestal_versions'
+gem 'vestal_versions', :git => 'git://github.com/zapnap/vestal_versions.git' # :git => 'git://github.com/adamcooper/vestal_versions'
 
 # offile manifest
 gem 'rack-offline'
@@ -54,7 +54,7 @@ gem 'dalli'
 
 #gem 'central_logger'
 
-gem "sitemap_generator", "~> 3.1.1"
+#gem "sitemap_generator", "~> 3.1.1"
 
 #for coffeescript
 gem 'therubyracer', :require => false
@@ -74,8 +74,7 @@ group :development, :test  do
   gem "shoulda"
   gem 'rspec-rails'
   gem "rspec"
-  gem "annotate"
-  gem 'spork'
+#  gem "annotate"
 end
 
 group :test do
@@ -85,13 +84,13 @@ group :test do
 
   gem "shoulda-matchers" # to use rspec like syntax
   gem 'factory_girl_rails', :require => false
-  gem 'remarkable_activerecord', '>=4.0.0.alpha2'
+#  gem 'remarkable_activerecord', '>=4.0.0.alpha2'
 
   #Cucumber stuff
-  gem 'capybara', '0.4.1.2'
-  gem 'cucumber-rails' , :require => false
-  gem 'spork'
-  gem 'launchy'
-  gem 'database_cleaner'
-  gem 'pickle'
+#  gem 'capybara', '0.4.1.2'
+#  gem 'cucumber-rails' , :require => false
+#  gem 'spork'
+#  gem 'launchy'
+#  gem 'database_cleaner'
+#  gem 'pickle'
 end

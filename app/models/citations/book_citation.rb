@@ -1,4 +1,4 @@
-class BookCitation < Citation
+class Citations::BookCitation < Citation
 
   def book?
     true

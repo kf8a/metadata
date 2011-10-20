@@ -1,4 +1,4 @@
-class ArticleCitation < Citation
+class Citations::ArticleCitation < Citation
 
   def formatted(options={})
     "#{author_and_year(options)} #{title_and_punctuation} #{journal} #{volume_and_page}".rstrip

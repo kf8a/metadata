@@ -1,4 +1,4 @@
-class ChapterCitation < Citation
+class Citations::ChapterCitation < Citation
 
   def formatted(options={})
     "#{author_and_year(options)} #{title_and_punctuation} #{volume_and_page} in #{eds} #{book}. #{publisher}#{address_and_city}."
