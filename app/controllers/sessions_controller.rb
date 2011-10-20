@@ -43,7 +43,7 @@ class SessionsController < Clearance::SessionsController
           end
         end
 
-        sign_user_in(@user)
+        sign_in(@user)
         redirect_back_or url_after_create
       else
         deny_access(result.message ||
