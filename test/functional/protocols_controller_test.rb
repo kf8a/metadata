@@ -105,8 +105,6 @@ class ProtocolsControllerTest < ActionController::TestCase
         get :index, :requested_subdomain => 'glbrc'
       end
 
-      should render_template 'glbrc_index'
-
       should 'only have glbrc protocols' do
         assert assigns(:protocols) == [@glbrc_protocol]
       end
