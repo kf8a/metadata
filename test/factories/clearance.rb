@@ -6,7 +6,6 @@ FactoryGirl.define do
   factory :user do
     email
     password                { "password" }
-    password_confirmation   { "password" }
 
     factory :email_confirmed_user do
       email_confirmed       true

@@ -1,9 +1,6 @@
 # Members who are able to log in and do things on the site.
 class User < ActiveRecord::Base
-  extend Clearance::User::ClassMethods
-  include Clearance::User::InstanceMethods
-  include Clearance::User::AttrAccessor
-  include Clearance::User::Callbacks
+  include Clearance::User
 
   ROLES = %w[admin editor uploader]
 
