@@ -2,10 +2,11 @@ require 'simplecov'
 SimpleCov.start 'rails'
 
 ENV["RAILS_ENV"] = "test"
-require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
+require File.expand_path(File.dirname(__FILE__) + "../../config/environment")
 require 'rails/test_help'
 require 'shoulda'
 require 'factory_girl'
+Factory.find_definitions
 require Rails.root.join('test', 'shoulda_macros', 'paperclip')
 
 require "#{Rails.root}/db/seeds.rb"
