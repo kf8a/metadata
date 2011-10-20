@@ -73,9 +73,12 @@
     
       <th>Title</th>
       <th>Seniority</th>
+      <th>Research Interest</th>
+      <th>Supervisor</th>
       <th>Delete</th>
     </tr>
     <% @person.affiliations.each do |affiliation| %>
+		  <%= hidden_field_tag 'person[affiliations_attributes][][id]', affiliation.id %>
       <tr>
         <td>
           <%= select_tag 'person[affiliations_attributes][][role_id]',
@@ -86,7 +89,12 @@
         </td>
         <td>
           <%= text_field_tag 'person[affiliations_attributes][][seniority]', affiliation.seniority, :size => 5 %>
-		<%= hidden_field_tag 'person[affiliations_attributes][][id]', affiliation.id %>
+        </td>
+        <td>
+          <%= text_field_tag 'person[affiliations_attributes][][research_interest]', affiliation.research_interest %>
+        </td>
+        <td>
+          <%= text_field_tag 'person[affiliations_attributes][][supervisor]', affiliation.supervisor %>
         </td>
         <td>
           <%= check_box_tag 'person[affiliations_attributes][][_destroy]' %>
