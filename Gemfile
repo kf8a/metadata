@@ -6,7 +6,7 @@ gem 'rake'
 gem 'capistrano' 
 gem 'newrelic_rpm'
 gem 'pg'
-gem 'clearance', '=0.13.0'
+gem 'clearance'
 gem 'ruby-openid', :git => 'https://github.com/kf8a/ruby-openid.git'
 gem 'rack-openid'
 gem 'acts-as-taggable-on'
@@ -71,7 +71,7 @@ group :development, :test  do
   # gem "rails-footnotes"
   gem 'sqlite3-ruby'
   gem 'silent-postgres'
-  gem "shoulda"
+  gem "shoulda", :git => 'git://github.com/thoughtbot/shoulda.git' 
   gem 'rspec-rails'
   gem "rspec"
 #  gem "annotate"
@@ -87,10 +87,10 @@ group :test do
 #  gem 'remarkable_activerecord', '>=4.0.0.alpha2'
 
   #Cucumber stuff
-#  gem 'capybara', '0.4.1.2'
-#  gem 'cucumber-rails' , :require => false
-#  gem 'spork'
-#  gem 'launchy'
-#  gem 'database_cleaner'
-#  gem 'pickle'
+  gem 'capybara', '0.4.1.2'
+  gem 'cucumber-rails' , :require => false
+  gem 'spork'
+  gem 'launchy'
+  gem 'database_cleaner'
+  gem 'pickle'
 end
