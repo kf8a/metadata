@@ -23,7 +23,7 @@ class DatatableTest < ActiveSupport::TestCase
   context 'datatable' do
     setup do
       @datatable = Factory :datatable
-      assert_valid @datatable
+      assert(@datatable.valid?)
     end
 
     context 'which has a title and name' do

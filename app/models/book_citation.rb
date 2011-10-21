@@ -1,24 +1,34 @@
-class Citations::ThesisCitation < Citation
+class BookCitation < Citation
+
+  def book?
+    true
+  end
 
   def formatted(options={})
-    "#{author_and_year(options)} #{title_and_punctuation} #{series_title}, #{publisher}, #{address}."
+    "#{author_and_year(options)} #{title_and_punctuation} #{page_numbers_book} #{editor_string} #{publication} #{publisher} #{address_and_city}"
   end
 
   private
 
   def bibtex_type
-    :thesis
+    :book
   end
 
   def endnote_type
-    "Thesis\n"
+    "Book Section\n"
   end
 
   def endnote_publication_data
-    publication.present? ? "%J #{publication}\n" : ""
+    "%B #{publication}\n" + "%I #{publisher}\n" + "%C #{address}\n"
+  end
+
+  def address_and_city
+    ", #{address} #{city}" if address or city
+  end
+
+  def publisher_and_punctuation
   end
 end
-
 
 
 

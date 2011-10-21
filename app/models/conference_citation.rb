@@ -1,4 +1,4 @@
-class Citations::ConferenceCitation < Citation
+class ConferenceCitation < Citation
 
   def formatted(options={})
     "#{author_and_year(options)} #{title_and_punctuation} #{publication} #{volume_and_page}".rstrip

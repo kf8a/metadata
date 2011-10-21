@@ -125,7 +125,7 @@ class Person < ActiveRecord::Base
 private
 
   def eml
-    @eml ||= Builder::XmlMarkup.new
+    @eml ||= ::Builder::XmlMarkup.new
   end
 
   def eml_individual_name(eml)

@@ -110,7 +110,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def to_eml
-    @eml = Builder::XmlMarkup.new
+    @eml = ::Builder::XmlMarkup.new
     @eml.instruct! :xml, version: '1.0'
     @eml.tag!('eml:eml',
         'xmlns:eml'           => 'eml://ecoinformatics.org/eml-2.1.0',

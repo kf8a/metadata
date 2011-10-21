@@ -35,7 +35,7 @@ class Variate < ActiveRecord::Base
     end
   end
 
-  def to_eml(xml = Builder::XmlMarkup.new)
+  def to_eml(xml = ::Builder::XmlMarkup.new)
     @eml = xml
     @eml.attribute do
       @eml.attributeName name

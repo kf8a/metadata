@@ -239,7 +239,7 @@ class Datatable < ActiveRecord::Base
     protocols.reject { |protocol| dataset.protocols.include?(protocol) }.compact
   end
 
-  def to_eml(xml = Builder::XmlMarkup.new)
+  def to_eml(xml = ::Builder::XmlMarkup.new)
     @eml = xml
     @eml.dataTable 'id' => name do
       @eml.entityName title

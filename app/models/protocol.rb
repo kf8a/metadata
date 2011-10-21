@@ -30,7 +30,7 @@ class Protocol < ActiveRecord::Base
     title.present?
   end
 
-  def to_eml(xml = Builder::XmlMarkup.new)
+  def to_eml(xml = ::Builder::XmlMarkup.new)
     @eml = xml
     @eml.methodStep do
       @eml.description EML.text_sanitize(abstract)
@@ -49,7 +49,7 @@ class Protocol < ActiveRecord::Base
     end
   end
 
-  def to_eml_ref(xml = Builder::XmlMarkup.new)
+  def to_eml_ref(xml = ::Builder::XmlMarkup.new)
     # xml.methodStep do
     #   xml.protocol do
     #     xml.references "protocol_#{self.id}"

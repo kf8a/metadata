@@ -1,24 +1,28 @@
-class Citations::ReportCitation < Citation
+class ArticleCitation < Citation
 
   def formatted(options={})
-    "#{author_and_year(options)} #{title_and_punctuation} #{publication} #{volume_and_page}".rstrip
+    "#{author_and_year(options)} #{title_and_punctuation} #{journal} #{volume_and_page}".rstrip
   end
 
   private
 
+  def journal
+    self.publication.blank? ? self.secondary_title : self.publication
+  end
+
   def bibtex_type
-    :thesis
+    :article
   end
 
   def endnote_type
-    "Thesis\n"
+    "Journal Article\n"
   end
 
   def endnote_publication_data
     publication.present? ? "%J #{publication}\n" : ""
   end
-end
 
+end
 
 
 
