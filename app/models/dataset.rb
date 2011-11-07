@@ -1,6 +1,7 @@
 require 'builder'
 require 'nokogiri'
 require 'open-uri'
+require 'eml'
 
 class Dataset < ActiveRecord::Base
   has_many                :affiliations, order:      'seniority'
@@ -243,13 +244,6 @@ class Dataset < ActiveRecord::Base
     eml_coverage
   end
 
-  def eml_sanitize(text)
-   doc = Nokogiri::HTML(text)
-   doc.css('script').each {|node| node.remove }
-   doc.css('link').each {|node| node.remove }
-   doc.text.squeeze(" ").squeeze("\n")
-  end
-
   def eml_creator
     @eml.creator do
       @eml.positionName 'Data Manager'
@@ -264,7 +258,7 @@ class Dataset < ActiveRecord::Base
 
   def eml_abstract
     @eml.abstract do
-      @eml.para eml_sanitize(textilize(abstract))
+      @eml.para EML.text_sanitize(textilize(abstract))
     end
   end
 

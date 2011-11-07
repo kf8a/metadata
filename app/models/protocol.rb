@@ -1,3 +1,5 @@
+require 'eml'
+
 class Protocol < ActiveRecord::Base
   acts_as_taggable_on :themes
   belongs_to :dataset
@@ -31,7 +33,7 @@ class Protocol < ActiveRecord::Base
   def to_eml(xml = Builder::XmlMarkup.new)
     @eml = xml
     @eml.methodStep do
-      @eml.description abstract
+      @eml.description EML.text_sanitize(abstract)
       @eml.protocol 'id' => "protocol_#{id}" do
 
         @eml.title  title
