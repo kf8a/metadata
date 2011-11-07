@@ -243,6 +243,13 @@ class Dataset < ActiveRecord::Base
     eml_coverage
   end
 
+  def eml_sanitize(text)
+   doc = Nokogiri::HTML(text)
+   doc.css('script').each {|node| node.remove }
+   doc.css('link').each {|node| node.remove }
+   doc.text.squeeze(" ").squeeze("\n")
+  end
+
   def eml_creator
     @eml.creator do
       @eml.positionName 'Data Manager'
@@ -257,7 +264,7 @@ class Dataset < ActiveRecord::Base
 
   def eml_abstract
     @eml.abstract do
-      @eml.para textilize(abstract)
+      @eml.para eml_sanitize(textilize(abstract))
     end
   end
 

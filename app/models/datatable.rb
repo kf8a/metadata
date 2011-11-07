@@ -225,12 +225,19 @@ class Datatable < ActiveRecord::Base
       @eml.entityName title
       if description
         text =  description.gsub(/<\/?[^>]*>/, "")
-        @eml.entityDescription text unless text.strip.empty?
+        @eml.entityDescription eml_sanitize(text) unless text.strip.empty?
       end
 #      eml_protocols if non_dataset_protocols.present?
       eml_physical
       eml_attributes
     end
+  end
+
+  def eml_sanitize(text)
+   doc = Nokogiri::HTML(text)
+   doc.css('script').each {|node| node.remove }
+   doc.css('link').each {|node| node.remove }
+   doc.text.squeeze(" ").squeeze("\n")
   end
 
   def raw_csv
