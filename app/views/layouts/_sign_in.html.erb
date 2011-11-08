@@ -1,7 +1,7 @@
 <div id="sign-in-wrapper">
   <div id='sign-in'>
     <% if signed_in? %>
-      <%= link_to 'Sign Out', sign_out_url(:only_path => true) %>
+      <%= link_to 'Sign Out', sign_out_url(:only_path => true), :method=> :delete %>
     <% else %>
       <%= link_to 'Sign In', sign_in_url(:only_path => true) %>
     <% end %>
