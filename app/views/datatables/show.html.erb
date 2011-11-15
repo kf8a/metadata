@@ -114,7 +114,7 @@
     	TODO: geographic coverage
     	-->
     <%= render 'protocols', :datatable => datatable %>
-    <%= render 'download_button', :datatable => datatable %>
+    <%= render 'download_button', :datatable => datatable, :website => @website %>
     <%= render 'data_preview',    :datatable => datatable %>
   <% end %>
 <% else %>

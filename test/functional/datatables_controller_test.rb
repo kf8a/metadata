@@ -249,6 +249,9 @@ class DatatablesControllerTest < ActionController::TestCase
       assert_select "p", "This is the first abstract"
     end
 
+    should 'include the website.name in the email that is sent when requesting data' do
+    end
+
     context 'changing the description' do
       setup do
         put :update, :id => @datatable, :datatable => {:description => 'This is a new abstract'}
