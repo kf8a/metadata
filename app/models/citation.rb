@@ -313,6 +313,15 @@ class Citation < ActiveRecord::Base
     volume.present? ? "%V #{volume}\n" : ""
   end
 
+  def title_and_punctuation
+    self.title.rstrip!
+    if (title =~ /[\?\!\.]$/)
+      title
+    else
+      title + '.'
+    end
+  end
+
   def page_numbers
     if start_page_number.to_i < ending_page_number.to_i
       "#{start_page_number}-#{ending_page_number}"

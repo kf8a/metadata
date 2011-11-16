@@ -1,7 +1,7 @@
 class EbookCitation < Citation
 
   def formatted(options={})
-    "#{author_and_year(options)}. #{title}. #{publication} #{volume_and_page}".rstrip
+    "#{author_and_year(options)}. #{title_and_punctuation} #{publication} #{volume_and_page}".rstrip
   end
 
   private

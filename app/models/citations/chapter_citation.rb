@@ -1,7 +1,7 @@
 class ChapterCitation < Citation
 
   def formatted(options={})
-    "#{author_and_year(options)} #{title}. in #{eds} #{book}, #{volume_and_page}".rstrip
+    "#{author_and_year(options)} #{title_and_punctuation} in #{eds} #{book}, #{volume_and_page}".rstrip
   end
 
   def volume_and_page
@@ -22,7 +22,9 @@ class ChapterCitation < Citation
 
   def eds
     ed = editors.collect {|e| e.formatted(:natural) }.to_sentence
-    if editors.size > 1
+    if editors.size == 0
+      ''
+    elsif editors.size > 1
       ed << ', eds.'
     else
       ed << ', ed.'
