@@ -39,8 +39,9 @@ class DatatablesController < ApplicationController
   # GET /datatables/1.xml
   # GET /datatables/1.csv
   def show
-    accessible_by_ip = trusted_ip? || !datatable.is_restricted
-    csv_ok = accessible_by_ip && datatable.can_be_downloaded_by?(current_user)
+#    accessible_by_ip = trusted_ip? || !datatable.is_restricted
+#    csv_ok = accessible_by_ip && datatable.can_be_downloaded_by?(current_user)
+    csv_ok = datatable.can_be_downloaded_by?(current_user)
     @website = website
 
     store_location #in case we have to log in and come back here
