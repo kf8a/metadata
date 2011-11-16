@@ -42,6 +42,9 @@ class Citation < ActiveRecord::Base
 
   attr_protected :pdf_file_name, :pdf_content_type, :pdf_size
 
+  # the REAL publications not just reports
+  scope :publications, where(%q{type != 'ConferenceCitation'})
+
   scope :with_authors_by_sur_name_and_pub_year,
       joins(:authors).where(:authors => {:seniority => 1}).
       order('pub_year desc, authors.sur_name')
