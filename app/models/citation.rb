@@ -295,7 +295,7 @@ class Citation < ActiveRecord::Base
   end
 
   def formatted_article(options={})
-    "#{author_and_year(options)} #{title}. #{publication} #{volume_and_page}".rstrip
+    "#{author_and_year(options)} #{title_and_punctuation} #{publication} #{volume_and_page}".rstrip
   end
 
   def volume_and_page
@@ -334,7 +334,7 @@ class Citation < ActiveRecord::Base
   end
 
   def formatted_book(options={})
-    "#{author_and_year(options)} #{title}. #{page_numbers_book}#{editor_string}. #{publication}. #{publisher}, #{address}."
+    "#{author_and_year(options)} #{title_and_punctuation}. #{page_numbers_book}#{editor_string}. #{publication}. #{publisher}, #{address}."
   end
 
   def page_numbers_book
