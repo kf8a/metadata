@@ -10,7 +10,8 @@ class CitationsController < ApplicationController
 
   def index
     store_location
-    case params[:type]
+    @type = params[:type]
+    case @type
     when 'article' 
       citations = [website.article_citations]
     when 'book'
@@ -20,6 +21,7 @@ class CitationsController < ApplicationController
     when 'report'
       citations = [website.report_citations]
     else 
+      @type = nil
 #      citations = [website.article_citations, website.book_citations, website.chapter_citations, website.thesis_citations]
       citations = [website.citations.publications]
     end
