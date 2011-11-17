@@ -1,7 +1,7 @@
 class ChapterCitation < Citation
 
   def formatted(options={})
-    "#{author_and_year(options)} #{title_and_punctuation} IN #{eds} #{book}, #{volume_and_page}".rstrip
+    "#{author_and_year(options)} #{title_and_punctuation} IN #{eds} #{book}, #{volume_and_page} #{publisher}#{address_and_city}"
   end
 
   def volume_and_page
@@ -34,6 +34,10 @@ class ChapterCitation < Citation
 
   def book
     publication.blank? ? secondary_title : publication
+  end
+
+  def address_and_city
+    ", #{address} #{city}" if address or city
   end
 
   def bibtex_type
