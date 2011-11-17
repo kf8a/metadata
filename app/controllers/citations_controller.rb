@@ -15,7 +15,7 @@ class CitationsController < ApplicationController
       citations = [website.article_citations]
       @type = 'ArticleCitation'
     when 'book'
-      citations = [website.book_citations, website.chapter_citations]
+      citations = [website.citations.bookish]
       @type = 'BookCitation'
     when 'thesis'
       citations = [website.thesis_citations]

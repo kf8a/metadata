@@ -45,6 +45,8 @@ class Citation < ActiveRecord::Base
   # the REAL publications not just reports
   scope :publications, where(%q{type != 'ConferenceCitation'})
 
+  scope :bookish, where(%q{type in ('BookCitation', 'ChapterCitation')})
+
   scope :with_authors_by_sur_name_and_pub_year,
       joins(:authors).where(:authors => {:seniority => 1}).
       order('pub_year desc, authors.sur_name')
