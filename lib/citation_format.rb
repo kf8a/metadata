@@ -60,7 +60,7 @@ module CitationFormat
 
   def name=(name_string='')
     if name_string.match(/^_/) 
-      self.sur_name = name_string
+      self.sur_name = name_string[1..-1]
     else
       name_array = name_string.split(',')
       name_array = extract_suffix(name_array)
