@@ -59,12 +59,16 @@ module CitationFormat
   end
 
   def name=(name_string='')
-    name_array = name_string.split(',')
-    name_array = extract_suffix(name_array)
-    if name_array.count == 1
-      treat_as_first_middle_last(name_array)
+    if name_string.match(/^_/) 
+      self.sur_name = name_string
     else
-      treat_as_last_first_middle(name_array)
+      name_array = name_string.split(',')
+      name_array = extract_suffix(name_array)
+      if name_array.count == 1
+        treat_as_first_middle_last(name_array)
+      else
+        treat_as_last_first_middle(name_array)
+      end
     end
   end
 

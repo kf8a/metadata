@@ -77,6 +77,13 @@ class AuthorTest < ActiveSupport::TestCase
         assert_equal 'J S', @author.middle_name
       end
     end
+
+    context 'escaping names' do
+      should 'parse _National Research Council' do
+        @author.name = '_National Research Council'
+        assert_equal 'National Research Council', @author.sur_name
+      end
+    end
   end
 end
 
