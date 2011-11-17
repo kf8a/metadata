@@ -19,6 +19,7 @@ class CitationSweeper < ActionController::Caching::Sweeper
     expire_fragment(:controller => 'citations', :action => 'index')
     expire_fragment(:controller => 'citations', :action => 'index', :action_sufix => 'thesis')
     expire_fragment(:controller => 'citations', :action => 'index', :action_sufix => 'book')
+    expire_fragment(:controller => 'citations', :action => 'index', :action_sufix => 'chapter')
     expire_fragment(:controller => 'citations', :action => 'index', :action_sufix => 'article')
     expire_fragment(:controller => 'citations', :action => 'index', :action_sufix => 'report')
     expire_fragment(:controller => 'citations', :action => 'index', :action_suffix => "citation_#{citation.id}")
