@@ -1,7 +1,7 @@
 class ThesisCitation < Citation
 
   def formatted(options={})
-    "#{author_and_year(options)} #{title_and_punctuation} #{series_title} #{publisher} #{address}".rstrip
+    "#{author_and_year(options)} #{title_and_punctuation} #{series_title}, #{publisher}, #{address}."
   end
 
   private
