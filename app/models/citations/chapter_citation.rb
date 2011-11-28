@@ -1,7 +1,7 @@
 class ChapterCitation < Citation
 
   def formatted(options={})
-    "#{author_and_year(options)} #{title_and_punctuation} IN #{eds} #{book}, #{volume_and_page} #{publisher}#{address_and_city}"
+    "#{author_and_year(options)} #{title_and_punctuation} #{volume_and_page} IN #{eds} #{book}. #{publisher}#{address_and_city}"
   end
 
   def volume_and_page

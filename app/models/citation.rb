@@ -319,7 +319,7 @@ class Citation < ActiveRecord::Base
   end
 
   def title_and_punctuation
-    self.title.rstrip!
+    return '' unless self.title
     if (title =~ /[\?\!\.]$/)
       title
     else
