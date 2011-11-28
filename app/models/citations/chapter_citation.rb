@@ -9,12 +9,12 @@ class ChapterCitation < Citation
       if page_numbers.blank?
         ""
       else
-        "pages #{page_numbers}."
+        "Pages #{page_numbers}."
       end
     elsif page_numbers.blank?
       "#{volume}."
     else
-      "vol #{volume}, pages #{page_numbers}."
+      "Vol #{volume}, Pages #{page_numbers}."
     end
   end
 
