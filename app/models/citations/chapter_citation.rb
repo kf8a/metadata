@@ -1,7 +1,7 @@
 class ChapterCitation < Citation
 
   def formatted(options={})
-    "#{author_and_year(options)} #{title_and_punctuation} #{volume_and_page} in #{eds} #{book}. #{publisher}#{address_and_city}"
+    "#{author_and_year(options)} #{title_and_punctuation} #{volume_and_page} in #{eds} #{book}. #{publisher}#{address_and_city}."
   end
 
   def volume_and_page
@@ -9,12 +9,12 @@ class ChapterCitation < Citation
       if page_numbers.blank?
         ""
       else
-        "Pages #{page_numbers}."
+        "Pages #{page_numbers}"
       end
     elsif page_numbers.blank?
-      "#{volume}."
+      "#{volume}"
     else
-      "Vol #{volume}, Pages #{page_numbers}."
+      "Vol #{volume}, Pages #{page_numbers}"
     end
   end
 
