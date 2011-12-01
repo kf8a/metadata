@@ -259,7 +259,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def header
-    data_access_statement + data_source + data_comments
+    data_access_statement + "#\n#\n" + data_source + "\n#\n#        DATATABLE CORRECTIONS AND COMMENTS\n" + data_comments + "#\n#\n"
   end
 
   def to_climdb
