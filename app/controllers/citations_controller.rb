@@ -42,7 +42,7 @@ class CitationsController < ApplicationController
     if @word.empty?
       redirect_to citations_url
     else
-      @citations = Citation.search @word, :with => { :website_id => website.id }
+      @citations = Citation.search @word, :with => { :website_id => website.id }, :star => true
       index_responder
     end
   end
