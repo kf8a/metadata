@@ -69,12 +69,10 @@
         </ul>
       </td>
     </tr>
-    <% if datatable.keywords.any? && signed_in?%>
-      <tr>
-        <td>Keywords:</td>
-        <td><%= datatable.keywords.join(', ')%></td>
-      </tr>
-    <% end %>
+    <tr>
+      <td>Last Updated</td>
+      <td><%= distance_of_time_in_words_to_now @datatable.updated_at%> ago (on <%= @datatable.updated_at.strftime("%Y-%m-%d")%>)</td>
+    </tr>
     <tr>
       <td>Metadata</td>
       <td>
