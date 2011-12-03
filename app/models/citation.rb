@@ -38,6 +38,8 @@ class Citation < ActiveRecord::Base
     indexes abstract
     indexes authors.sur_name, :as => :authors
     has website_id
+    set_property :enable_star => 1
+    set_property :min_infix_len => 3
   end
 
   attr_protected :pdf_file_name, :pdf_content_type, :pdf_size
