@@ -13,6 +13,13 @@ css.hidden {
   display: none;
 }
 
+.highlight {
+  margin-top: 0.9em;
+  text-align: right;
+  font-weight: bold;
+}
+
+
 #content h1 {
 	font-size: 1.2em;
 	font-weight: bold;
