@@ -39,6 +39,7 @@
     <%= render :file => "#{Rails.root}/public/system/navigation.html"%>
     <% if controller.controller_name == 'datasets' || controller.controller_name == 'datatables' || controller.controller_name == 'protocols' %>
       <%= render :file => "#{Rails.root}/public/system/network_db.html"%>
+      <%= render :file => "#{Rails.root}/public/system/glbrc.html"%>
     <% end %>
   </div>
   <div id='footer'>
