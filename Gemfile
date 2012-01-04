@@ -20,7 +20,6 @@ gem 'formtastic'
 # can we go back to the collective idea branch of awesome_nested_set
 gem 'awesome_nested_set' #, :git => 'git://github.com/galetahub/awesome_nested_set.git'
 
-gem 'thin'
 gem 'unicorn'
 
 gem 'jquery-rails', '>= 0.2.6'
@@ -78,7 +77,7 @@ group :test do
   gem 'simplecov'
   gem 'simplecov-html'
 
-  #gem "shoulda-matchers" # to use rspec like syntax
+  gem "shoulda-matchers" # to use rspec like syntax
   gem 'factory_girl_rails', :require => false
   gem 'remarkable_activerecord', '>=4.0.0.alpha2'
 
@@ -89,5 +88,4 @@ group :test do
   gem 'launchy'
   gem 'database_cleaner'
   gem 'pickle'
-  gem 'single_test'
 end
