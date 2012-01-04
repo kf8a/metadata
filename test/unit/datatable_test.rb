@@ -537,7 +537,7 @@ class DatatableTest < ActiveSupport::TestCase
       end
 
       should 'return the data in the right order' do
-        data = CSV.parse(@datatable.raw_csv)
+        data = CSV.parse(@datatable.approved_csv)
         b_column = data[0].index("b")
         assert_equal '1', data[1][b_column]
       end

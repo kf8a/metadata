@@ -1,1 +1,5 @@
-<%=raw @datatable.to_csv %>
+<% if admin? %>
+  <%= raw @datatable.raw_csv %>
+<% else %>
+  <%=raw @datatable.to_csv %>
+<% end %>

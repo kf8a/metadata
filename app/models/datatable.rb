@@ -235,7 +235,14 @@ class Datatable < ActiveRecord::Base
   end
 
   def raw_csv
-    values  = approved_data
+    convert_to_csv(all_data)
+  end
+
+  def approved_csv
+    convert_to_csv(approved_data)
+  end
+
+  def convert_to_csv(values)
     csv_string = CSV.generate do |csv|
       csv << variates.collect { |variate| variate.name }
       values.each do |row|
@@ -249,7 +256,7 @@ class Datatable < ActiveRecord::Base
 
   def to_csv
     # stupid microsofts
-    csv_string = raw_csv.force_encoding("UTF-8")
+    csv_string = approved_csv.force_encoding("UTF-8")
     result = ""
     result =  header + csv_string
     if is_utf_8
@@ -259,7 +266,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def header
-    data_access_statement + "#\n#\n" + data_source + "\n#\n#        DATATABLE CORRECTIONS AND COMMENTS\n" + data_comments + "#\n#\n"
+    data_access_statement + "#\n#\n" + data_source +  data_comments + "#\n#\n"
   end
 
   def to_climdb
@@ -267,7 +274,11 @@ class Datatable < ActiveRecord::Base
   end
 
   def data_comments
-    comments ?  comments.gsub(/^/,'#') + "\n" : ''
+    if comments
+      "\n#\n#        DATATABLE CORRECTIONS AND COMMENTS\n" + comments.gsub(/^/,'#') + "\n"
+    else
+      ''
+    end
   end
 
   def data_source
@@ -331,6 +342,10 @@ class Datatable < ActiveRecord::Base
     self.number_of_released_records ||= total_records
     query = self.object + " offset #{total_records - self.number_of_released_records}"
     ActiveRecord::Base.connection.execute(query)
+  end
+
+  def all_data
+    ActiveRecord::Base.connection.execute(self.object)
   end
 
   def total_records
