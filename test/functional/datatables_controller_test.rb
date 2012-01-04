@@ -200,8 +200,10 @@ class DatatablesControllerTest < ActionController::TestCase
 
     context 'GET :show in the default domain' do
       setup do
-        @datatable = FactoryGirl.create :datatable, :dataset => FactoryGirl.create(:dataset),
-                                    :description => 'This is the first abstract'
+        sponsor     = FactoryGirl.create :sponsor, :name=>'lter'
+        dataset     = FactoryGirl.create :dataset, :sponsor => sponsor
+        @datatable  = FactoryGirl.create :datatable, :dataset => dataset,
+                                          :description => 'This is the first abstract'
         get :show, :id => @datatable
       end
 
