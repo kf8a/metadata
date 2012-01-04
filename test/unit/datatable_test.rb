@@ -546,7 +546,7 @@ class DatatableTest < ActiveSupport::TestCase
         setup  {@datatable.comments = "something\nand something else"}
 
         should 'return a commented out version of the comment' do
-          assert_equal "#something\n#and something else\n", @datatable.data_comments
+          assert_equal "\n#\n#        DATATABLE CORRECTIONS AND COMMENTS\n#something\n#and something else\n", @datatable.data_comments
         end
       end
     end

@@ -107,7 +107,7 @@
 <% end %> 
 
 <% if datatable.is_sql %>
-  <% if datatable.dataset.sponsor.name == 'glbrc' %>
+  <% if datatable.dataset.try(:sponsor).try(:name) == 'glbrc' %>
     <p class='highlight'>GLBRC data is not yet publicly available.</p>
   <% end %>
   <% if datatable.values -%>
