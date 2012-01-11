@@ -259,9 +259,9 @@ class Datatable < ActiveRecord::Base
     csv_string = approved_csv.force_encoding("UTF-8")
     result = ""
     result =  header + csv_string
-    if is_utf_8
-      result = Iconv.conv('utf-16','utf-8', result)
-    end
+    # if is_utf_8
+    #   result = Iconv.conv('utf-16','utf-8', result)
+    # end
     result
   end
 
