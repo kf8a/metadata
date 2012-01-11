@@ -252,7 +252,7 @@ jQuery(document).ready(function() {
             .fillStyle('black')
             .event("point", function() {activeDot = this.index; return vis})
             .add(pv.Label)
-            .text(function(d) {return d.year + ": " + human_number(d.value) + " g/m2"})
+            .text(function(d) {return d.year + ": " + human_number(d.value)})
             .textAlign('center')
             .visible(function() {return activeDot == this.index});
 
