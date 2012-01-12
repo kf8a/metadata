@@ -1,5 +1,5 @@
 <% if admin? %>
-  %=raw @datatable.raw_csv %>
+  <%=raw @datatable.raw_csv %>
 <% else %>
   <% cache do %>
     <%=raw @datatable.to_csv %>
