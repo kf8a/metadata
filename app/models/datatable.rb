@@ -334,7 +334,8 @@ class Datatable < ActiveRecord::Base
 
   def data_preview
     self.excerpt_limit ||= 5
-    query = self.object + " limit #{self.excerpt_limit}"
+    self.number_of_released_records ||= total_records
+    query = self.object + " offset #{total_records - self.number_of_released_records}" + " limit #{self.excerpt_limit}"
     ActiveRecord::Base.connection.execute(query)
   end
 
