@@ -27,9 +27,11 @@
                     :onclick => remote_function(:url => {:controller => 'permission_requests', :action => 'create', :datatable => datatable.id}) %>
         <% end %>
       <% else %>
+        <% if datatable.dataset.try(:sponsor).try(:name) == 'glbrc' %>
+          <p class='highlight'>GLBRC data is not yet publicly available.</p>
+        <% end %>
         <%= link_to 'Sign in to request the data',
-                  sign_in_path,
-                    :class => 'download-link' %> 
+                  sign_in_path, :class => 'download-link' %> 
       <% end %>
     <% end %>
   <% end %>

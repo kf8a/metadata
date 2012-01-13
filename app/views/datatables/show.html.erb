@@ -107,9 +107,6 @@
 <% end %> 
 
 <% if datatable.is_sql %>
-  <% if datatable.dataset.try(:sponsor).try(:name) == 'glbrc' %>
-    <p class='highlight'>GLBRC data is not yet publicly available.</p>
-  <% end %>
   <% if datatable.values -%>
       <!--
     	TODO: geographic coverage
