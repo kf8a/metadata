@@ -304,6 +304,10 @@ class DatatableTest < ActiveSupport::TestCase
       dataset     = Factory :dataset, :sponsor => sponsor
       @datatable  = Factory :datatable, :dataset => dataset
 
+      restricted_sponsor     = Factory :sponsor, :data_restricted => true
+      restricted_dataset     = Factory :dataset, :sponsor => restricted_sponsor
+      @restricted_datatable  = Factory :datatable, :dataset => restricted_dataset
+
       @anonymous_user     = nil
       @admin              = Factory :user, :email => 'admin@person.com', :role => 'admin'
       @non_member         = Factory :user, :email => 'non_member@person.com'
@@ -325,6 +329,13 @@ class DatatableTest < ActiveSupport::TestCase
     should 'not allow non members' do
       assert !@datatable.can_be_qcd_by?(@non_member)
     end
+
+    should 'not allow outside datatables' do
+      assert !@restricted_datatable.can_be_qcd_by?(@member)
+      assert !@restricted_datatable.can_be_qcd_by?(@non_member)
+      assert !@restricted_datatable.can_be_qcd_by?(@anonymous_user)
+    end
+
   end
 
   context 'datatable with sample_date' do
