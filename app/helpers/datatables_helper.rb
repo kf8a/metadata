@@ -6,6 +6,10 @@ module DatatablesHelper
     emails << 'poonam31@msu.edu'
     emails.join(',')
   end
+
+  def ok_to_qc?(datatable)
+    datatable.can_be_qcd_by?(current_user)
+  end
   
   def options_for_measurement_scale(variate)
     options_for_select(['nominal','interval','ratio', 'datetime'],

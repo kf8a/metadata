@@ -297,6 +297,36 @@ class DatatableTest < ActiveSupport::TestCase
 
   end
 
+
+  context 'getting unreleased data for qc purposes in the LTER sponsor' do
+    setup do
+      sponsor     = Factory :sponsor, :name => 'lter'
+      dataset     = Factory :dataset, :sponsor => sponsor
+      @datatable  = Factory :datatable, :dataset => dataset
+
+      @anonymous_user     = nil
+      @admin              = Factory :user, :email => 'admin@person.com', :role => 'admin'
+      @non_member         = Factory :user, :email => 'non_member@person.com'
+      @member             = Factory :user, :email => 'member@person.com', :sponsors => [sponsor]
+    end
+    
+    should 'allow admins' do
+      assert @datatable.can_be_qcd_by?(@admin)
+    end
+
+    should 'allow members' do
+      assert @datatable.can_be_qcd_by?(@member)
+    end
+
+    should 'not allow anonymous users' do
+      assert !@datatable.can_be_qcd_by?(@anonymous_user)
+    end
+
+    should 'not allow non members' do
+      assert !@datatable.can_be_qcd_by?(@non_member)
+    end
+  end
+
   context 'datatable with sample_date' do
     setup do
       @datatable = Factory.create(:datatable, :object => %q{select now() as sample_date} )

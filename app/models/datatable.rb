@@ -154,6 +154,16 @@ class Datatable < ActiveRecord::Base
     permissions.where(:user_id => user, :decision => 'denied').collect(&:owner)
   end
 
+  def can_be_qcd_by?(user)
+    if dataset.sponsor.name == 'lter'
+      user.try(:admin?) || member?(user)
+    elsif dataset.sponsor.name == 'glbrc'
+      user.try(:admin?) || owned_by?(user)
+    else
+      false
+    end
+  end
+
   def can_be_downloaded_by?(user)
     if self.is_restricted
       user.try(:admin?) ||
