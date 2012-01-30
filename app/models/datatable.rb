@@ -442,7 +442,7 @@ class Datatable < ActiveRecord::Base
   def eml_data_format
     @eml.dataFormat do
       @eml.textFormat do
-        @eml.numHeaderLines (header.lines.to_a.size + 1).to_s 
+        @eml.numHeaderLines (header.lines.to_a.size + 2).to_s 
         @eml.recordDelimiter "\n"
         @eml.attributeOrientation 'column'
         @eml.simpleDelimited do
