@@ -447,6 +447,7 @@ class Datatable < ActiveRecord::Base
         @eml.attributeOrientation 'column'
         @eml.simpleDelimited do
           @eml.fieldDelimiter ','
+          @eml.collapseDelimiters, 'no'
           @eml.quoteCharacter '"'
         end
       end
