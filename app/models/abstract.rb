@@ -1,10 +1,10 @@
 class Abstract < ActiveRecord::Base
-  set_table_name 'meeting_abstracts'
   belongs_to :meeting
 
   validates_presence_of :meeting
   validates_presence_of :abstract
 
+  self.table_name = 'meeting_abstracts'
 
   if Rails.env.production?
     has_attached_file :pdf,
