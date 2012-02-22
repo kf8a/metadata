@@ -82,8 +82,8 @@ class MeetingsController < ApplicationController
     meeting = Meeting.find(params[:id])
     venue = meeting.venue_type
     
-    crumb.url = url_for(:controller => 'meetings', :location  => venue.name)
-  #  crumb.url = "/meetings/?location=#{venue.name}"
+    #crumb.url = url_for(:controller => 'meetings', :location  => venue.name)
+    crumb.url = "/meetings/?location=#{venue.name}"
   
     crumb.name = venue.name.capitalize + ' Meeting'
     @crumbs << crumb
