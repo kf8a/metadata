@@ -257,10 +257,7 @@ class Dataset < ActiveRecord::Base
         @eml.positionName 'Data Manager'
       else
         creators.each do |person|
-          @eml.individualName do
-            @eml.givenName person.given_name unless person.given_name.blank?
-            @eml.surName person.sur_name  unless person.sur_name.blank?
-          end
+          person.eml_party(@eml)
         end
       end
     end

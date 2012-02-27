@@ -87,18 +87,22 @@ class Person < ActiveRecord::Base
 
   def to_eml(eml = Builder::XmlMarkup.new)
     eml.associatedParty do
-      eml_individual_name(eml)
-      eml.organizationName organization unless organization.blank?
-      eml_address(eml)
-      if phone
-        eml.phone phone, 'phonetype' => 'phone'
-      end
-      if fax
-        eml.phone fax, 'phonetype' => 'fax'
-      end
-      eml.electronicMailAddress email  unless email.blank?
-      eml.role lter_roles.first.try(:name).try(:singularize)
+      eml_party(eml)
     end
+  end
+
+  def eml_party(eml)
+    eml_individual_name(eml)
+    eml.organizationName organization unless organization.blank?
+    eml_address(eml)
+    if phone
+      eml.phone phone, 'phonetype' => 'phone'
+    end
+    if fax
+      eml.phone fax, 'phonetype' => 'fax'
+    end
+    eml.electronicMailAddress email  unless email.blank?
+    # eml.role lter_roles.first.try(:name).try(:singularize)
   end
 
   def eml_address(eml)
