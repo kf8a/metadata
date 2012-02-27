@@ -107,7 +107,7 @@ class Datatable < ActiveRecord::Base
   def datatable_personnel
     compile_personnel(data_contributions)
   end
-
+  
   def dataset_personnel
     compile_personnel(dataset.affiliations)
   end
@@ -121,6 +121,11 @@ class Datatable < ActiveRecord::Base
       end
     end
     personnel
+  end
+
+  def leads
+    lead_investigator = Role.find_by_name('lead investigator')
+    data_contributions.collect { |affiliation| affiliation.person if affiliation.role == lead_investigator }.compact
   end
 
   def related_keywords
@@ -344,15 +349,19 @@ class Datatable < ActiveRecord::Base
 
   def data_preview
     self.excerpt_limit ||= 5
-    self.number_of_released_records ||= total_records
-    query = self.object + " offset #{total_records - self.number_of_released_records}" + " limit #{self.excerpt_limit}"
+    query = self.object + " offset #{offset}" + " limit #{self.excerpt_limit}"
     ActiveRecord::Base.connection.execute(query)
   end
 
   def approved_data
-    self.number_of_released_records ||= total_records
     query = self.object + " offset #{total_records - self.number_of_released_records}"
     ActiveRecord::Base.connection.execute(query)
+  end
+
+  def offset
+    self.number_of_released_records ||= total_records
+    result = total_records - number_of_released_records
+    result < 0 ? 0 :result
   end
 
   def all_data

@@ -65,6 +65,11 @@ class Dataset < ActiveRecord::Base
     datatables.collect { |table| table.datatable_personnel.keys }.flatten
   end
 
+  def leads
+    lead_investigator = Role.find_by_name('lead investigator')
+    affiliations.collect {|affiliation| affiliation.person if affiliation.role == lead_investigator}
+  end
+
   def valid_request?(subdomain)
     website_name.blank? || (website_name == subdomain)
   end
@@ -246,7 +251,18 @@ class Dataset < ActiveRecord::Base
 
   def eml_creator
     @eml.creator do
-      @eml.positionName 'Data Manager'
+      datatable_leads = datatables.collect {|x| x.leads}.compact
+      creators = [leads, datatable_leads].flatten.uniq.compact
+      if creators.empty?
+        @eml.positionName 'Data Manager'
+      else
+        creators.each do |person|
+          @eml.individualName do
+            @eml.givenName person.given_name unless person.given_name.blank?
+            @eml.surName person.sur_name  unless person.sur_name.blank?
+          end
+        end
+      end
     end
   end
 
