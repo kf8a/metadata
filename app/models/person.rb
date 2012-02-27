@@ -88,6 +88,7 @@ class Person < ActiveRecord::Base
   def to_eml(eml = Builder::XmlMarkup.new)
     eml.associatedParty do
       eml_party(eml)
+      eml.role lter_roles.first.try(:name).try(:singularize)
     end
   end
 
@@ -102,7 +103,6 @@ class Person < ActiveRecord::Base
       eml.phone fax, 'phonetype' => 'fax'
     end
     eml.electronicMailAddress email  unless email.blank?
-    # eml.role lter_roles.first.try(:name).try(:singularize)
   end
 
   def eml_address(eml)
