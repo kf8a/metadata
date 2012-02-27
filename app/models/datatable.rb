@@ -123,6 +123,10 @@ class Datatable < ActiveRecord::Base
     personnel
   end
 
+  def which_roles(person)
+    data_contributions.collect {|affiliation | affiliation.role if affiliation.person == person }.compact
+  end
+
   def leads
     lead_investigator = Role.find_by_name('lead investigator')
     data_contributions.collect { |affiliation| affiliation.person if affiliation.role == lead_investigator }.compact

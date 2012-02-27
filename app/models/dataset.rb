@@ -65,9 +65,13 @@ class Dataset < ActiveRecord::Base
     datatables.collect { |table| table.datatable_personnel.keys }.flatten
   end
 
+  def which_roles(person)
+    affiliations.collect {|affiliation | affiliation.role if affiliation.person == person }.compact
+  end
+
   def leads
     lead_investigator = Role.find_by_name('lead investigator')
-    affiliations.collect {|affiliation| affiliation.person if affiliation.role == lead_investigator}
+    affiliations.collect {|affiliation| affiliation.person if affiliation.role == lead_investigator}.compact
   end
 
   def valid_request?(subdomain)
@@ -265,7 +269,10 @@ class Dataset < ActiveRecord::Base
 
   def eml_people
     [people, datatable_people].flatten.uniq.compact.each do |person|
-      person.to_eml(@eml)
+      role = datatables.collect {|x| x.which_roles(person)}.flatten.compact.first
+      role = which_roles(person).first unless role
+      role_name = role.name if role
+      person.to_eml(@eml, role_name)
     end
   end
 

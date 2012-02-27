@@ -85,10 +85,10 @@ class Person < ActiveRecord::Base
     self.dataset_roles.size > 0
   end
 
-  def to_eml(eml = Builder::XmlMarkup.new)
+  def to_eml(eml = Builder::XmlMarkup.new, role= 'Investigator')
     eml.associatedParty do
       eml_party(eml)
-      eml.role lter_roles.first.try(:name).try(:singularize)
+      eml.role role
     end
   end
 
