@@ -254,18 +254,18 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_creator
-    @eml.creator do
       datatable_leads = datatables.collect {|x| x.leads}.compact
       creators = [leads, datatable_leads].flatten.uniq.compact
       if creators.empty?
-        @eml.positionName 'Data Manager'
+        @eml.creator do 
+          @eml.positionName 'Data Manager'
+        end
       else
         creators.each do |person|
-          @eml.party do
+          @eml.creator do
             person.eml_party(@eml)
           end
         end
-      end
     end
   end
 
