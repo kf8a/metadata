@@ -229,6 +229,7 @@ class Dataset < ActiveRecord::Base
     @eml.dataset do
       eml_resource_group
       contact_info
+      @eml.publisher "KBS LTER"
       eml_methods
       datatables.each { |table| table.to_eml(@eml) if table.valid_for_eml? }
     end
@@ -253,7 +254,6 @@ class Dataset < ActiveRecord::Base
     keyword_sets
     eml_keywords
     eml_coverage
-    @eml.publisher "KBS LTER"
   end
 
   def eml_creator
