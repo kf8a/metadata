@@ -261,7 +261,9 @@ class Dataset < ActiveRecord::Base
         @eml.positionName 'Data Manager'
       else
         creators.each do |person|
-          person.eml_party(@eml)
+          @eml.party do
+            person.eml_party(@eml)
+          end
         end
       end
     end
