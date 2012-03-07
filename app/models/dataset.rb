@@ -229,7 +229,9 @@ class Dataset < ActiveRecord::Base
     @eml.dataset do
       eml_resource_group
       contact_info
-      @eml.publisher "KBS LTER"
+      @eml.publisher do
+        @eml.organizationName "KBS LTER"
+      end
       eml_methods
       datatables.each { |table| table.to_eml(@eml) if table.valid_for_eml? }
     end
