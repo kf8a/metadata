@@ -1,6 +1,7 @@
 require 'builder'
 require 'nokogiri'
 require 'open-uri'
+require 'date'
 require 'eml'
 
 class Dataset < ActiveRecord::Base
@@ -274,9 +275,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_pubdate
-    @eml.pubDate do
-      Date.today.to_s
-    end
+    @eml.pubDate Date.today
   end
 
   def eml_people
