@@ -247,10 +247,14 @@ class Dataset < ActiveRecord::Base
     @eml.title title
     eml_creator
     eml_people
+    eml_pubdate
     eml_abstract
     keyword_sets
     eml_keywords
     eml_coverage
+    @eml.publisher do
+      "KBS LTER"
+    end
   end
 
   def eml_creator
@@ -266,6 +270,12 @@ class Dataset < ActiveRecord::Base
             person.eml_party(@eml)
           end
         end
+    end
+  end
+
+  def eml_pubdate
+    @eml.pubDate do
+      Date.today.to_s
     end
   end
 
