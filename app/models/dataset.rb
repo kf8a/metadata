@@ -253,9 +253,7 @@ class Dataset < ActiveRecord::Base
     keyword_sets
     eml_keywords
     eml_coverage
-    @eml.publisher do
-      "KBS LTER"
-    end
+    @eml.publisher "KBS LTER"
   end
 
   def eml_creator
