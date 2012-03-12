@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   validates_presence_of     :password, :unless => :password_optional?
   validates_confirmation_of :password
 
-  attr_protected :role
+  attr_protected :role, :identity_url
 
   has_many :permissions
   has_many :ownerships
