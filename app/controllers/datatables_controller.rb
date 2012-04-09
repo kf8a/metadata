@@ -44,6 +44,7 @@ class DatatablesController < ApplicationController
 #    csv_ok = datatable.can_be_downloaded_by?(current_user)
     @website = website
 
+    fresh_when etag: [datatable, current_user]
     store_location #in case we have to log in and come back here
     if datatable.dataset.valid_request?(@subdomain_request)
       respond_to do |format|
