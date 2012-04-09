@@ -38,6 +38,7 @@ class DatatablesController < ApplicationController
   # GET /datatables/1.xml
   # GET /datatables/1.csv
   def show
+    expires_in 5.minutes
 #    accessible_by_ip = trusted_ip? || !datatable.is_restricted
 #    csv_ok = accessible_by_ip && datatable.can_be_downloaded_by?(current_user)
 #    csv_ok = datatable.can_be_downloaded_by?(current_user)
