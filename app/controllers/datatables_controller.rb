@@ -44,30 +44,31 @@ class DatatablesController < ApplicationController
 #    csv_ok = datatable.can_be_downloaded_by?(current_user)
     @website = website
 
-    fresh_when etag: [datatable, current_user]
     store_location #in case we have to log in and come back here
     if datatable.dataset.valid_request?(@subdomain_request)
-      respond_to do |format|
-        format.html
-        format.xml
-#         format.ods do
-#           if csv_ok
-#             render :text => @datatable.to_ods
-#           else
-#             redirect_to datatable_url(@datatable)
-#           end
-#         end
-        format.csv do
-                       # TODO renable after we have a common place for this cache
-#            file_cache = ActiveSupport::Cache.lookup_store(:file_store, 'tmp/cache')
-#            render :text => file_cache.fetch("csv_#{@datatable.id}") { @datatable.to_csv }
-          unless csv_ok
-            render :text => "You do not have permission to download this datatable"
+      if stale? etag: datatable
+        respond_to do |format|
+          format.html
+          format.xml
+  #         format.ods do
+  #           if csv_ok
+  #             render :text => @datatable.to_ods
+  #           else
+  #             redirect_to datatable_url(@datatable)
+  #           end
+  #         end
+          format.csv do
+  # TODO renable after we have a common place for this cache
+  #            file_cache = ActiveSupport::Cache.lookup_store(:file_store, 'tmp/cache')
+  #            render :text => file_cache.fetch("csv_#{@datatable.id}") { @datatable.to_csv }
+            unless csv_ok
+              render :text => "You do not have permission to download this datatable"
+            end
           end
-        end
-        format.climdb do
-          unless csv_ok
-            redirect_to datatable_url(datatable)
+          format.climdb do
+            unless csv_ok
+              redirect_to datatable_url(datatable)
+            end
           end
         end
       end
