@@ -9,7 +9,7 @@ class CitationsController < ApplicationController
   has_scope :by_date,   :as => :date
 
   def index
-    expires_in 60.minutes, :public=>true
+    expires_in 6.minutes, :public=>true
     store_location
     case params[:type]
     when 'article' 
