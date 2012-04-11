@@ -189,7 +189,7 @@ GEM
       roodi (>= 2.1.0)
       syntax
     mime-types (1.16)
-    mocha (0.10.0)
+    mocha (0.10.4)
       metaclass (~> 0.0.1)
     multi_json (1.0.3)
     net-scp (1.0.4)
@@ -209,7 +209,7 @@ GEM
       mime-types
     parslet (1.2.1)
       blankslate (~> 2.0)
-    pg (0.12.2)
+    pg (0.13.2)
     pickle (0.4.8)
       cucumber (>= 0.8)
       rake
