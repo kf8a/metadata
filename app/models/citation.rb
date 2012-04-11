@@ -384,13 +384,12 @@ class Citation < ActiveRecord::Base
     pub_year ?  "#{pub_year}." : ""
   end
 
-  # Phil want's to display the long author form everywhere
   def author_and_year(options={})
-    # if options[:long]
+    if options[:long]
       authors.empty? ? "#{pub_year_with_punctuation}" : "#{author_string} #{pub_year_with_punctuation}".rstrip
-    # else
-    #   authors.empty? ? "#{pub_year_with_punctuation}" : "#{short_author_string} #{pub_year_with_punctuation}".rstrip
-    # end
+    else
+      authors.empty? ? "#{pub_year_with_punctuation}" : "#{short_author_string} #{pub_year_with_punctuation}".rstrip
+    end
   end
 
   def short_author_string
