@@ -166,10 +166,8 @@ class Dataset < ActiveRecord::Base
       @eml.metadata do
         @eml.tag!('stmml:unitList',
                   'xmlns:stmml'        => 'http://www.xml-cml.org/schema/stmml-1.1',
-                  'xmlns:sch'          => 'http://www.ascc.net/xml/schematron',
-                  'xmlns:xsi'          => 'http://www.w3.org/2001/XMLSchema-instance',
                   'xmlns'              => 'http://www.xml-cml.org/schema/stmml',
-                  'xsi:schemaLocation' => 'http://www.xml-cml.org/schema/stmml-1.1 stmml.xsd') do
+                  'xsi:schemaLocation' => 'http://www.xml-cml.org/schema/stmml-1.1 http://nis.lternet.edu/schemas/EML/eml-2.1.0/stmml.xsd') do
           logger.info custom_units
           custom_units.each do |unit|
             case unit
