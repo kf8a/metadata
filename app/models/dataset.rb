@@ -198,7 +198,9 @@ class Dataset < ActiveRecord::Base
   def eml_access
     @eml.access scope: 'document', order: 'allowFirst', authSystem: 'knb' do
       eml_allow('uid=KBS,o=lter,dc=ecoinformatics,dc=org', 'all')
-      eml_allow('public','read')
+      if on_web
+        eml_allow('public','read')
+      end
     end
   end
 
