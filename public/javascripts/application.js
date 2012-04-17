@@ -13,7 +13,7 @@ jQuery(document).ready(function() {
 	};
 
 	// truncate long contexts on datatable pages
-	jQuery('.truncate').truncate({max_length: 500});
+	jQuery('.truncate').truncate({max_length: 300});
 
 	geo_decode();
 
