@@ -7,6 +7,7 @@ jQuery(document).ready(function() {
       var current_div = this;
       jQuery.getJSON("/visualizations/" + id, function(json) {
         var dateFormat = pv.Format.date("%Y-%m-%d %H:%M:%S");
+        var shortDateFormat = pv.Format.date("%Y-%m-%d");
         json.forEach(function(d) {d.datetime = dateFormat.parse(d.datetime)});
         var h = 260;
         var w = 660;
@@ -20,12 +21,12 @@ jQuery(document).ready(function() {
         var human_number = pv.Format.number().fractionDigits(0,2)
       
         // pan and zoom handler 
-        function transform() { 
-          var t = this.transform().invert(); 
-          x.domain(x.invert(t.x + x(startDate) *t.k),x.invert(t.x + x(endDate) * t.k)); 
-          y.domain(y.invert(-t.y + y(minValue) *t.k), y.invert(-t.y + y(maxValue) * t.k)); 
-          vis.render(); 
-        } ;
+        // function transform() { 
+        //   var t = this.transform().invert(); 
+        //   x.domain(x.invert(t.x + x(startDate) *t.k),x.invert(t.x + x(endDate) * t.k)); 
+        //   y.domain(y.invert(-t.y + y(minValue) *t.k), y.invert(-t.y + y(maxValue) * t.k)); 
+        //   vis.render(); 
+        // } ;
         var vis = new pv.Panel()
               .canvas(current_div)
               .margin(margin)
@@ -61,16 +62,16 @@ jQuery(document).ready(function() {
 		      .fillStyle(function() {return activeDot == this.index ? pv.rgb(250,230,5) : pv.rgb(121,172,210,0.2)})
           .event("point", function() {activeDot = this.index; return vis})
           .add(pv.Label)
-          .text(function(d) {return human_number(d.value)})
+          .text(function(d) {return human_number(d.value) + " "  + shortDateFormat(d.datetime)})
           .textAlign('center')
           .visible(function() {return  activeDot == this.index} );
 
-        vis.add(pv.Panel)
-              .events('all')
-              .event("mousedown", pv.Behavior.pan()) 
-              .event("mousewheel", pv.Behavior.zoom(1.2)) 
-              .event("pan", transform) 
-              .event("zoom", transform);
+        // vis.add(pv.Panel)
+        //       .events('all')
+        //       .event("mousedown", pv.Behavior.pan()) 
+        //       .event("mousewheel", pv.Behavior.zoom(1.2)) 
+        //       .event("pan", transform) 
+        //       .event("zoom", transform);
 
         vis.root.render();
       });
