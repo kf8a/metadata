@@ -60,12 +60,10 @@ class DatatablesController < ApplicationController
   #           end
   #         end
           format.csv do
-  # TODO renable after we have a common place for this cache
-  #            file_cache = ActiveSupport::Cache.lookup_store(:file_store, 'tmp/cache')
-  #            render :text => file_cache.fetch("csv_#{@datatable.id}") { @datatable.to_csv }
             unless csv_ok
               render :text => "You do not have permission to download this datatable"
             end
+            # render show.csv.erb
           end
           format.climdb do
             unless csv_ok
