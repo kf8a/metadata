@@ -373,8 +373,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def get_csv_data(query)
-    result = ActiveRecord::Base.connection.execute(query + 'limit 0') 
-    p result
+    result = ActiveRecord::Base.connection.execute(query + 'limit 0')
   end
 
   def offset
