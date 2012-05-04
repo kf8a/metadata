@@ -1,7 +1,7 @@
 <% if admin?  || ok_to_qc?(@datatable) %>
   <%=raw @datatable.raw_csv %>
 <% else %>  
-  <% cache do %>
+  <% cache :expires_in => 1.day do %>
     <%=raw @datatable.to_csv %>
   <% end %>
 <% end %>
