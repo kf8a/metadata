@@ -59,19 +59,20 @@ namespace :deploy do
   desc "restart unicorn appserver"
   task :restart, :roles => :app, :except => { :no_release => true } do
     stop
+    sleep(2)  # to allow the unicorn to die
     start
     restart_sphinks
   end
 
-  after 'deploy:symlink', :link_production_db
-  after 'deploy:symlink', :link_unicorn
-  after 'deploy:symlink', :link_site_keys
-  after 'deploy:symlink', :link_new_relic
-  after 'deploy:symlink', :link_s3
-  before 'deploy:symlink', :stop_sphinks
-  after 'deploy:symlink', :update_sphinks
-  after 'deploy:symlink', :ensure_packages
-  after 'deploy:symlink', :link_assets
+  after 'deploy:finalize_update', :link_production_db
+  after 'deploy:finalize_update', :link_unicorn
+  after 'deploy:finalize_update', :link_site_keys
+  after 'deploy:finalize_update', :link_new_relic
+  after 'deploy:finalize_update', :link_s3
+  before 'deploy', :stop_sphinks
+  after 'deploy:finalize_update', :update_sphinks
+  # after 'update', :ensure_packages
+  # after 'update', :link_assets
 end
 
 after :deploy, :compile_coffeescripts
