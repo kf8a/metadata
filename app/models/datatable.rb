@@ -368,7 +368,6 @@ class Datatable < ActiveRecord::Base
   end
 
   def all_data
-    get_csv_data
     ActiveRecord::Base.connection.execute(self.object)
   end
 
