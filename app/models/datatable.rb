@@ -360,21 +360,27 @@ class Datatable < ActiveRecord::Base
 
   def approved_data
     if self.number_of_released_records
-      query = self.object + " offset #{total_records - self.number_of_released_records}"
+      query = self.object + " offset #{offset}"
     else
       query = self.object
     end
     ActiveRecord::Base.connection.execute(query)
   end
 
+  def all_data
+    get_csv_data
+    ActiveRecord::Base.connection.execute(self.object)
+  end
+
+  def get_csv_data(query)
+    result = ActiveRecord::Base.connection.execute(query + 'limit 0') 
+    p result
+  end
+
   def offset
     self.number_of_released_records ||= total_records
     result = total_records - number_of_released_records
     result < 0 ? 0 :result
-  end
-
-  def all_data
-    ActiveRecord::Base.connection.execute(self.object)
   end
 
   def total_records
