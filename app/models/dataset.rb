@@ -262,9 +262,9 @@ class Dataset < ActiveRecord::Base
    starting = self.initiated
    ending   = self.completed
    if starting && ending
-     "(#{starting.year} to #{ending.year})"
+     " (#{starting.year} to #{ending.year})"
    elsif starting
-     "(#startring.year})"
+     " (#{starting.year})"
    else
      ""
    end
