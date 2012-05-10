@@ -248,7 +248,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_resource_group
-    @eml.title title
+    @eml.title title + date_range
     eml_creator
     eml_people
     eml_pubdate
@@ -256,6 +256,18 @@ class Dataset < ActiveRecord::Base
     keyword_sets
     eml_keywords
     eml_coverage
+  end
+
+  def date_range
+   starting = self.initiated
+   ending   = self.completed
+   if starting && ending
+     "(#{starting.year} to #{ending.year})"
+   elsif starting
+     "(#startring.year})"
+   else
+     ""
+   end
   end
 
   def eml_creator
