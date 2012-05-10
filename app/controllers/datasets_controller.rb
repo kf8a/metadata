@@ -23,7 +23,7 @@ class DatasetsController < ApplicationController
     @studies        = collect_and_normalize_studies(@datasets)
     @crumbs         = []
     respond_to do |format|
-      format.html {redirect_to datatables_path}
+      format.html #{redirect_to datatables_path}
       format.xml  { render :xml => @datasets.to_xml }
       format.eml { render :eml => @datasets }
     end
