@@ -465,6 +465,7 @@ class Datatable < ActiveRecord::Base
     @eml.dataFormat do
       @eml.textFormat do
         @eml.numHeaderLines (header.lines.to_a.size + 2).to_s 
+        @eml.numFooterLines 1
         @eml.recordDelimiter '\n'
         @eml.attributeOrientation 'column'
         @eml.simpleDelimited do
