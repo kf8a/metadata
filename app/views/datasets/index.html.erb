@@ -18,7 +18,7 @@
           <li><%= creator.full_name %></li>
         <% end %>
       </ul>
-      <%= link_to  'Edit', edit_dataset_path(dataset), {:class => 'edit'} if signed_in? %>
+      <%= link_to  'Edit', edit_dataset_path(dataset) if signed_in? %>
     </dl>
   <% end %>
 </dl>
