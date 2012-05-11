@@ -159,6 +159,11 @@ class Dataset < ActiveRecord::Base
     end.flatten.compact.uniq
   end
 
+  def creators
+    datatable_leads = datatables.collect {|x| x.leads}.compact
+    [leads, datatable_leads].flatten.uniq.compact
+  end
+
   private
 
   def eml_custom_unit_list
@@ -259,20 +264,20 @@ class Dataset < ActiveRecord::Base
   end
 
   def date_range
-   starting = self.initiated
-   ending   = self.completed
-   if starting && ending
-     " (#{starting.year} to #{ending.year})"
-   elsif starting
-     " (#{starting.year})"
-   else
-     ""
-   end
+    daterange = temporal_extent
+    starting = daterange[:begin_date]
+    ending   = daterange[:end_date]
+    if starting && ending
+      " (#{starting.year} to #{ending.year})"
+    elsif starting
+      " (#{starting.year})"
+    else
+      ""
+    end
   end
 
+
   def eml_creator
-      datatable_leads = datatables.collect {|x| x.leads}.compact
-      creators = [leads, datatable_leads].flatten.uniq.compact
       if creators.empty?
         @eml.creator do 
           @eml.positionName 'Data Manager'
