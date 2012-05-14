@@ -335,10 +335,19 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_coverage
-    if initiated.present? && completed.present?
-    @eml.coverage do
-      eml_temporal_coverage
-    end
+    @eml.coverage do 
+      @eml.geographicCoverage do
+        @eml.geographicDescription 'The areas around the Kellog Biological Station in southwest Michigan'
+        @eml.boundingCoordinates do
+          @eml.westBoundingCoordinate -85.404699
+          @eml.eastBoundingCoordinate -85.366857
+          @eml.northBoundingCoordinate 42.420265
+          @eml.southBoundingCoordinate 42.391019
+        end
+      end
+      if initiated.present? && completed.present?
+        eml_temporal_coverage
+      end
     end
   end
 
