@@ -306,7 +306,17 @@ class Dataset < ActiveRecord::Base
 
   def eml_abstract
     @eml.abstract do
-      @eml.para EML.text_sanitize(textilize(abstract))
+      @eml.section do 
+        @eml.title 'Dataset Abstract'
+        @eml.para EML.text_sanitize(textilize(abstract))
+      end
+      @eml.section do
+        @eml.title 'Datatable Abstracts'
+        datatables.each do |datatable|
+          @eml.para datatable.description
+        end
+      end
+      @eml.para
     end
   end
 
