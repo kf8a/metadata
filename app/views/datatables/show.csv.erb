@@ -2,6 +2,6 @@
   <%=raw @datatable.raw_csv %>
 <% else -%>  
   <% cache :expires_in => 1.day do %>
-    <%=raw @datatable.to_csv %>
+<%=raw @datatable.to_csv %>
   <% end -%>
 <% end -%>
