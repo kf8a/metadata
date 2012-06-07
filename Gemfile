@@ -22,7 +22,7 @@ gem 'awesome_nested_set' #, :git => 'git://github.com/galetahub/awesome_nested_s
 
 gem 'unicorn'
 
-gem 'jquery-rails', '>= 0.2.6'
+gem 'jquery-rails' #, '>= 1.0.12'
 
 gem 'workflow'
 
@@ -83,7 +83,7 @@ group :test do
 
   #Cucumber stuff
   gem 'capybara', '0.4.1.2'
-  gem 'cucumber-rails' 
+  gem 'cucumber-rails', :require => false
   gem 'spork'
   gem 'launchy'
   gem 'database_cleaner'

@@ -1,63 +1,67 @@
-<% content_for :head do %>
-  <title>LTER: <%= controller.controller_name %>:<%= controller.action_name %></title>
-  <%= stylesheet_link_tag 'lter_supplemental.less', :rel => "stylesheet/less" %>
-  <link rel="alternate" type="application/rss+xml" title="Data" href="/datatables.rss" />
-<% end %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>KBS LTER <%= @controller.controller_name.upcase %></title>
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="http://www.hunter-gill.com/wp-content/themes/msu-kbs/lib/css/normalize.css" type="text/css" media="screen" />
+    <link rel="Shortcut Icon" href="http://www.hunter-gill.com/wp-content/themes/msu-kbs/images/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="http://www.hunter-gill.com/wp-content/themes/msu-kbs/style.css" type="text/css" media="screen" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="canonical" href="http://lter.kbs.msu.edu/datatables/" />
+    <script type='text/javascript' src='http://www.hunter-gill.com/wp-includes/js/jquery/jquery.js?ver=1.7.1'></script>
+    <%= csrf_meta_tag unless response.cache_control[:public] %>
+    <%= stylesheet_link_tag 'data.less', :rel => "stylesheet/less" %>
+    <%= stylesheet_link_tag 'lter_supplemental.less', :rel => "stylesheet/less" %>
+    <%= include_stylesheets :base, :media => 'screen,print' %>
+    <%= include_javascripts :base %>
 
-<% content_for :content do %>
-  <%= render 'layouts/sign_in' %>
-  <div id='branding'>
-    <a id='msu_logo' href="http://www.msu.edu">
-      <%= image_tag('common/logo_msu_pos_122.gif', :alt => 'Michigan State University Logo')%>
-    </a>
-    <h1><%= @title %></h1>
-    <div id="topcoloredbar">
-      <div id='search'>
-        <a href="/people">People</a>
-						<form action="http://www.google.com/cse" id="google-search-form">
-						    <input name="cx" type="hidden" value="002874178145105834877:ao6juz4dn-k" />
-						    <input name="ie" type="hidden" value="UTF-8" />
-						    <input name="q" id='top-search-box' class="hint" type="text" value="Search KBS LTER..." onfocus="if (this.value == 'Search KBS LTER...') {this.value = ''; this.style.color = 'black';}" onblur="if (this.value == '') {this.value = 'Search KBS LTER...';this.style.color='#CCCCCC';}" />
-						</form>
-      </div>
-      <h2><a href='/'>The KBS LTER Site</a></h2>
-    </div>
-  </div>
-  <div id='content'>
-    <p style="color: green"><%= flash[:notice] %></p>
-    <ul id=crumbs>
-      <li><a href='/'>Home</a></li>
-      <% @crumbs.each do |crumb| %>
-        <li> >
-          <%= link_to_if crumb.url, "#{crumb.name}", crumb.url  %>
-        </li>
-      <% end %>
-    </ul>
-    <%= yield  %>
-  </div>
-  <div id='navigation'>
-    <%= render :file => "#{Rails.root}/public/system/navigation.html"%>
-    <% if controller.controller_name == 'datasets' || controller.controller_name == 'datatables' || controller.controller_name == 'protocols' %>
-      <%= render :file => "#{Rails.root}/public/system/network_db.html"%>
-      <%= render :file => "#{Rails.root}/public/system/glbrc.html"%>
-    <% end %>
-  </div>
-  <div id='footer'>
-    <%= render :file  => "#{Rails.root}/public/system/footer.html"%>
-  </div>
-<% end %>
-
-<% content_for :bottom_scripts do %>
-  <script type="text/javascript">
-    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-  </script>
-  <script type="text/javascript">
-    try {
-    var pageTracker = _gat._getTracker("UA-379552-5");
-    pageTracker._trackPageview();
-    } catch(err) {}
-  </script>
-<% end %>
-
-<%= render :file => 'layouts/application' %>
+    <%# <script type='text/javascript'>jQuery.noConflict();</script> %>
+    <script type="text/javascript">
+      jQuery(document).ready(function() {
+          jQuery.fn.cleardefault = function() {
+          return this.focus(function() {
+            if( this.value == this.defaultValue ) {
+            this.value = "";
+            }
+            }).blur(function() {
+              if( !this.value.length ) {
+              this.value = this.defaultValue;
+              }
+              });
+          };
+          jQuery(".clearit input, .clearit textarea").cleardefault();
+          });
+        </script>
+      </head>
+      <body class="page page-id-110 page-template page-template-page_gallery-php header-image full-width-content">
+        <div id="wrap">
+          <%= render :file => "#{Rails.root}/public/system/header.html" %>
+          <%= render :file => "#{Rails.root}/public/system/nav.html" %>
+          <div id="inner" class='metadata'>
+            <div class="wrap">	
+              <div id="content-sidebar-wrap">
+              </div><!-- end #content-sidebar-wrap -->
+              <div id='metadata'>
+              <%= yield %>
+            </div>
+            </div><!-- end .wrap -->
+          </div><!-- end #inner -->
+        </div><!-- end #wrap -->
+        <%= render :file => '/public/system/footer.html' %>
+        <script type='text/javascript' src='http://www.hunter-gill.com/wp-content/themes/genesis/lib/js/menu/superfish.js?ver=1.4.8'></script>
+        <script type='text/javascript' src='http://www.hunter-gill.com/wp-content/themes/genesis/lib/js/menu/superfish.args.js?ver=1.8.1'></script>
+        <script type="text/javascript">
+          var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+          document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-379552-5");
+              pageTracker._trackPageview();
+            } catch(err) {}
+</script>
+        </body>
+      </html>

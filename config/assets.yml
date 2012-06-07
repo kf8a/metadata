@@ -14,19 +14,14 @@ javascripts:
   - public/javascripts/jquery.comboselect.js
   - public/javascripts/jquery.selso.js
   - public/javascripts/jquery.combo-select-init.js
-  - public/javascripts/drop_and_drag.js
+  # - public/javascripts/drop_and_drag.js
   - public/javascripts/application.js
 
 stylesheets: 
   base: 
   - public/stylesheets/formtastic.css
   - public/stylesheets/formtastic_changes.css
-  - public/stylesheets/scaffold.css
-  - public/stylesheets/branding.css
-  - public/stylesheets/navigation.css
-  - public/stylesheets/data.css
-  - public/stylesheets/kbs.css
   - public/stylesheets/token-input.css
   - public/stylesheets/token-input.css
   - public/stylesheets/jquery.comboselect.css
-  - public/stylesheets/drop_and_drag.css
+  # - public/stylesheets/drop_and_drag.css
