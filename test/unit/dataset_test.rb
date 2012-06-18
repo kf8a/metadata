@@ -160,6 +160,7 @@ class DatasetTest < ActiveSupport::TestCase
         xsd = Nokogiri::XML::Schema(File.read("eml.xsd"))
       end
       doc = Nokogiri::XML(@dataset.to_eml)
+      p doc.to_xml
       assert_equal [],  xsd.validate(doc)
     end
 
