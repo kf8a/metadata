@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.10'
+gem 'rails', '3.0.15'
 
 gem 'rake'
 gem 'capistrano' 
@@ -83,7 +83,7 @@ group :test do
 
   #Cucumber stuff
   gem 'capybara', '0.4.1.2'
-  gem 'cucumber-rails' 
+  gem 'cucumber-rails' , :require => false
   gem 'spork'
   gem 'launchy'
   gem 'database_cleaner'
