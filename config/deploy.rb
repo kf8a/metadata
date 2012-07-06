@@ -58,12 +58,14 @@ namespace :deploy do
   end
   desc "restart unicorn appserver"
   task :restart, :roles => :app, :except => { :no_release => true } do
+    update_nav
     stop
     sleep(2)  # to allow the unicorn to die
     start
     restart_sphinks
   end
 
+  after 'deploy:finalize_update', :update_nav
   after 'deploy:finalize_update', :link_production_db
   after 'deploy:finalize_update', :link_unicorn
   after 'deploy:finalize_update', :link_site_keys
@@ -109,6 +111,7 @@ task :houghton do
   set :host, 'houghton'
   role :app, "#{host}.kbs.msu.edu"
 end
+
 task :production do
 
   set :host, 'houghton'
@@ -136,6 +139,13 @@ end
 desc 'Restart spinks'
 task :restart_sphinks do
   run "cd #{current_path};bundle exec rake ts:restart RAILS_ENV=production"
+end
+
+desc 'update menus, headers and footers'
+task :update_nav do
+  run "cd #{current_path}/shared/system;curl http://lter.kbs.msu.edu/export/nav -o nav.html"
+  run "cd #{current_path}/shared/system;curl http://lter.kbs.msu.edu/export/footer -o footer.html"
+  run "cd #{current_path}/shared/system;curl http://lter.kbs.msu.edu/export/header -o header.html"
 end
 
 desc "Link in the production database.yml"
