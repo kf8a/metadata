@@ -22,7 +22,7 @@ gem 'awesome_nested_set' #, :git => 'git://github.com/galetahub/awesome_nested_s
 
 gem 'unicorn'
 
-gem 'jquery-rails', '>= 0.2.6'
+gem 'jquery-rails' #, '>= 1.0.12'
 
 gem 'workflow'
 

@@ -80,6 +80,9 @@ after :deploy, :compile_coffeescripts
 task :staging do
 
   set :host, 'sebewa'
+  set :repository,  "/Users/bohms/code/metadata"
+  set :branch, "wordpress"
+  set :deploy_via, :copy
 
   role :app, "#{host}.kbs.msu.edu"
   role :web, "#{host}.kbs.msu.edu"
