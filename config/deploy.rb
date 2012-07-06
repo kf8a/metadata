@@ -125,9 +125,9 @@ end
 
 desc 'Update sphinks'
 task :update_sphinks do
-  run "cd #{release_path};bundle exec rake ts:index RAILS_ENV=production"
-  run "cd #{release_path};chmod go-r config/production.sphinx.conf"
-  run "cd #{release_path};bundle exec rake ts:start RAILS_ENV=production"
+  run "cd #{current_path};bundle exec rake ts:index RAILS_ENV=production"
+  run "cd #{current_path};chmod go-r config/production.sphinx.conf"
+  run "cd #{current_path};bundle exec rake ts:start RAILS_ENV=production"
 end
 
 desc 'Restart spinks'
