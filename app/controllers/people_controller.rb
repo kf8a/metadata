@@ -5,7 +5,7 @@ class PeopleController < ApplicationController
   before_filter :get_people, :only => [:index, :alphabetical, :emeritus, :show_all]
   
   cache_sweeper :people_sweeper
-  caches_action :index, :alphabetical, :emeritus
+#  caches_action :index, :alphabetical, :emeritus
 
   # GET /people
   # GET /people.xml
