@@ -22,6 +22,13 @@ stylesheets:
   - public/stylesheets/formtastic.css
   - public/stylesheets/formtastic_changes.css
   - public/stylesheets/token-input.css
-  - public/stylesheets/token-input.css
+  - public/stylesheets/token-input-mac.css
   - public/stylesheets/jquery.comboselect.css
   # - public/stylesheets/drop_and_drag.css
+  glbrc:
+  - public/stylesheets/branding.css
+  - public/stylesheets/kbs.css
+  - public/stylesheets/i7-and-down.css
+  - public/stylesheets/scaffold.css
+  - public/stylesheets/navigation.css
+ 
