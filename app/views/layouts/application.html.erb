@@ -10,7 +10,7 @@
   <%= include_javascripts :base %>
   <%= csrf_meta_tag unless response.cache_control[:public] %>
 </head>
-<body class="page page-id-98 page-parent page-template-default header-image content-sidebar">
+<body>
   <%= yield :content %>
 
   <%= debug(params) if Rails.env.development? %>
