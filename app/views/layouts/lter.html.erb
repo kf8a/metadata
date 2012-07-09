@@ -13,7 +13,7 @@
   <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" %>
   <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js" %>
   <script type='text/javascript'>jQuery.noConflict();</script>
-  <script type="text/javascript" src="http://www.google.com/uds/?file=ads&amp;v=3&amp;packages=search&amp;async=2"></script>
+  <script type="text/javascript" src="http://www.google.com/jsapi?ver=3.4"></script>
     <%= csrf_meta_tag unless response.cache_control[:public] %>
     <%= stylesheet_link_tag 'data.less', :rel => "stylesheet/less" %>
     <%= stylesheet_link_tag 'lter_supplemental.less', :rel => "stylesheet/less" %>

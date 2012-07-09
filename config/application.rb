@@ -39,7 +39,7 @@ module Metadata
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
-    config.cache_store = :file_store, "tmp/cache"
+    #config.cache_store = :file_store, "tmp/cache"
   end
 end
 
