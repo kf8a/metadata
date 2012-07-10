@@ -3,7 +3,7 @@ package_path: 'packages'
 javascript_compressor: closure
 
 javascripts: 
-  base: 
+  base1: 
   - public/javascripts/rails.js
   - public/javascripts/less.js
   - public/javascripts/jquery.tokeninput.js
