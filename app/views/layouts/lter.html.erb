@@ -19,7 +19,7 @@
     <%= csrf_meta_tag unless response.cache_control[:public] %>
     <%= stylesheet_link_tag 'data.less', :rel => "stylesheet/less" %>
     <%= stylesheet_link_tag 'lter_supplemental.less', :rel => "stylesheet/less" %>
-    <%= include_stylesheets :base1, :media => 'screen,print' %>
+    <%= include_stylesheets :base, :media => 'screen,print' %>
     <%= include_javascripts :base %>
 
     <%# <script type='text/javascript'>jQuery.noConflict();</script> %>
