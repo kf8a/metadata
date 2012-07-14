@@ -1,4 +1,3 @@
-require 'strip_empty_sessions'
 Metadata::Application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
 
@@ -55,6 +54,4 @@ Metadata::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-
-  config.middleware.insert_before ActiveRecord::SessionStore, 'StripEmptySessions', :key => config.secret_token, :path => "/", :httponly => true
 end
