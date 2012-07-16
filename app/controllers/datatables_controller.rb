@@ -150,6 +150,7 @@ class DatatablesController < ApplicationController
   def update_temporal_extent
     datatable.update_temporal_extent
     datatable.save
+    render :nothing => true
   end
 
   def approve_records
