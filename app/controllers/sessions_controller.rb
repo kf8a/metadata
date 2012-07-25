@@ -11,6 +11,13 @@ class SessionsController < Clearance::SessionsController
     if using_open_id?
       authenticate_with_openid
     else
+      # set the default user if blank or 'lter'
+      if params[:session]
+        session = params[:session]
+        if session[:email].empty? or session[:email].downcase == 'lter'
+          params[:session][:email] = 'lter@kbs.edu'
+        end
+      end
       super    # let clearance handle it
     end
   end
