@@ -7,4 +7,4 @@ test:
 production:
   enable_star: 1
   min_infix_len: 1
-  pid_file: "/var/u/apps/metadata/shared/pid/searchd.pid"
+  pid_file: "/var/u/apps/metadata/shared/pids/searchd.pid"
