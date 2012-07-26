@@ -6,7 +6,7 @@ gem 'rake'
 gem 'capistrano' 
 gem 'newrelic_rpm'
 gem 'pg'
-gem 'clearance' 
+gem 'clearance', '=0.13.0'
 gem 'ruby-openid', :git => 'https://github.com/kf8a/ruby-openid.git'
 gem 'rack-openid'
 gem 'acts-as-taggable-on'
@@ -19,6 +19,8 @@ gem 'liquid'
 gem 'formtastic'
 # can we go back to the collective idea branch of awesome_nested_set
 gem 'awesome_nested_set' #, :git => 'git://github.com/galetahub/awesome_nested_set.git'
+
+#gem 'acts_as_textcaptcha'
 
 gem 'unicorn'
 
@@ -49,6 +51,8 @@ gem 'rack-offline'
 gem 'dalli'
 
 #gem 'central_logger'
+
+gem "sitemap_generator", "~> 3.1.1"
 
 #for coffeescript
 gem 'therubyracer', :require => false
