@@ -4,7 +4,7 @@ javascript_compressor: closure
 
 javascripts: 
   base: 
-  - public/javascripts/rails.js
+  - public/javascripts/jquery_ujs.js
   - public/javascripts/less.js
   - public/javascripts/jquery.tokeninput.js
   - public/javascripts/protovis-d3.2.js
@@ -28,7 +28,6 @@ stylesheets:
   glbrc:
   - public/stylesheets/branding.css
   - public/stylesheets/kbs.css
-  - public/stylesheets/i7-and-down.css
   - public/stylesheets/scaffold.css
   - public/stylesheets/navigation.css
  

@@ -34,9 +34,6 @@ Download citation to
     <%=link_to 'Get PDF', download_citation_path(@citation), :class=>'download-link'%>
   <% else %>
     <%= link_to 'Sign in to download PDF', sign_in_path, :class=>'download-link'  %>
-    <div>
-      <%= mail_to "schuett2@msu.edu", 'Request this publication', :encode=>'javascript', :subject => 'Publication request', :body => "Greetings,\nI would like to request the publication: #{@citation.formatted}" %>
-    </div>
   <% end %>
 <% end %>
 
