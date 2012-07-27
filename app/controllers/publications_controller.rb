@@ -57,44 +57,44 @@ class PublicationsController < ApplicationController
     end
   end
 
-  # GET /publications/new
-  def new
-    @publication = Publication.new
-    get_form_data
-  end
+  # # GET /publications/new
+  # def new
+  #   @publication = Publication.new
+  #   get_form_data
+  # end
 
-  # GET /publications/1;edit
-  def edit
-    get_form_data
-  end
+  # # GET /publications/1;edit
+  # def edit
+  #   get_form_data
+  # end
 
-  # POST /publications
-  # POST /publications.xml
-  def create
-    get_form_data
-    publication = params[:publication]
-    publication[:publication_type_id] = 1
-    @publication = Publication.new(publication)
-    if @publication.save
-      expire_action :action => :index
-      flash[:notice] = 'Publication was successfully created.'
-    end
-    respond_with @publication
-  end
+  # # POST /publications
+  # # POST /publications.xml
+  # def create
+  #   get_form_data
+  #   publication = params[:publication]
+  #   publication[:publication_type_id] = 1
+  #   @publication = Publication.new(publication)
+  #   if @publication.save
+  #     expire_action :action => :index
+  #     flash[:notice] = 'Publication was successfully created.'
+  #   end
+  #   respond_with @publication
+  # end
 
-  # PUT /publications/1
-  # PUT /publications/1.xml
-  def update
-    @publication = Publication.find(params[:id])
-    @publication.treatments.clear
-    if @publication.update_attributes(params[:publication])
-      expire_action :action => :index
-      flash[:notice] = 'Publication was successfully updated.'
-    else
-      get_form_data
-    end
-    respond_with @publication
-  end
+  # # PUT /publications/1
+  # # PUT /publications/1.xml
+  # def update
+  #   @publication = Publication.find(params[:id])
+  #   @publication.treatments.clear
+  #   if @publication.update_attributes(params[:publication])
+  #     expire_action :action => :index
+  #     flash[:notice] = 'Publication was successfully updated.'
+  #   else
+  #     get_form_data
+  #   end
+  #   respond_with @publication
+  # end
 
   # DELETE /publications/1
   # DELETE /publications/1.xml
