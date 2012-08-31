@@ -37,6 +37,7 @@ class Citation < ActiveRecord::Base
     indexes title
     indexes abstract
     indexes authors.sur_name, :as => :authors
+    indexes publication
     has website_id
     set_property :enable_star => 1
     set_property :min_infix_len => 1
