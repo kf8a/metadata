@@ -419,9 +419,11 @@ class DatatablesControllerTest < ActionController::TestCase
     assert @datatable.values
     assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'page', :id => @datatable)
     assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'data', :id => @datatable)
+    assert @controller.fragment_exist?(:controller => 'datatables', :action => 'show', :format => 'csv', :id => @datatable)
     put :update, :id => @datatable, :datatable => { }
     assert !@controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'page', :id => @datatable)
     assert !@controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'data', :id => @datatable)
+    assert !@controller.fragment_exist?(:controller => 'datatables', :action => 'show', :format => 'csv', :id => @datatable)
   end
 
   def test_expiring_in_one_day
