@@ -11,7 +11,7 @@ class PermissionRequestsControllerTest < ActionController::TestCase
 
     context "and not signed in at all" do
       setup do
-        @controller.current_user = nil
+        sign_out
       end
 
       context "POST :create" do

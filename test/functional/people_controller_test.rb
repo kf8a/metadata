@@ -4,9 +4,6 @@ class PeopleControllerTest < ActionController::TestCase
   fixtures :people, :role_types, :roles,  :affiliations
 
   context 'not signed in' do
-     setup do
-       @controller.current_user = nil
-     end
 
      context "and GET :index" do
        setup do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110830122320) do
+ActiveRecord::Schema.define(:version => 20120905200040) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -19,6 +19,10 @@ ActiveRecord::Schema.define(:version => 20110830122320) do
     t.integer "dataset_id"
     t.integer "seniority"
     t.string  "title"
+    t.string  "supervisor"
+    t.date    "started_on"
+    t.date    "left_on"
+    t.string  "research_interest"
   end
 
   add_index "affiliations", ["dataset_id"], :name => "index_affiliations_on_dataset_id"
@@ -783,6 +787,7 @@ ActiveRecord::Schema.define(:version => 20110830122320) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "data_catalog_intro"
+    t.text     "url"
   end
 
 end

@@ -6,6 +6,7 @@ require File.expand_path(File.dirname(__FILE__) + "../../config/environment")
 require 'rails/test_help'
 require 'shoulda'
 require 'factory_girl'
+require 'clearance/testing'
 FactoryGirl.find_definitions
 require Rails.root.join('test', 'shoulda_macros', 'paperclip')
 
@@ -36,12 +37,13 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 
   def signed_in_as_admin
-    @admin = User.find_by_role('admin') || FactoryGirl.create(:admin_user, :email => 'admin@example.com')
-    @controller.current_user = @admin
+    admin = User.find_by_role('admin') || FactoryGirl.create(:admin_user, :email => 'admin@example.com')
+    sign_in_as(admin)
   end
 
   def signed_in_as_normal_user
-    @controller.current_user = User.find_by_role('') || FactoryGirl.create(:user, :email => 'normal_user@example.com')
+    user = User.find_by_role('') || FactoryGirl.create(:user, :email => 'normal_user@example.com')
+    sign_in_as(user)
   end
 
   def self.should_have_attached_file(attachment)

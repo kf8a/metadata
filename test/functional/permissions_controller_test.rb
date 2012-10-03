@@ -69,7 +69,7 @@ class PermissionsControllerTest < ActionController::TestCase
     
     context ", signed in as the owner" do
       setup do
-        @controller.current_user = @owner
+        sign_in_as(@owner)
       end
       
       context "and GET :index" do
