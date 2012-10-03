@@ -1,5 +1,6 @@
 require "bundler/capistrano"
 require 'new_relic/recipes'
+require 'thinking_sphinx/deploy/capistrano'
 
 set :application, "metadata"
 
@@ -58,11 +59,10 @@ namespace :deploy do
   end
   desc "restart unicorn appserver"
   task :restart, :roles => :app, :except => { :no_release => true } do
-    update_nav
+   # update_nav
     stop
     sleep(2)  # to allow the unicorn to die
     start
-    restart_sphinks
   end
 
   after 'deploy:finalize_update', :update_nav
@@ -71,8 +71,7 @@ namespace :deploy do
   after 'deploy:finalize_update', :link_site_keys
   after 'deploy:finalize_update', :link_new_relic
   after 'deploy:finalize_update', :link_s3
-  before 'deploy', :stop_sphinks
-  after 'deploy:finalize_update', :update_sphinks
+  after 'deploy', :lock_sphinks
   # after 'update', :ensure_packages
   # after 'update', :link_assets
 end
@@ -83,7 +82,7 @@ task :staging do
 
   set :host, 'sebewa'
   set :repository,  "/Users/bohms/code/metadata"
-  set :branch, "wordpress"
+  set :branch, "master"
   set :deploy_via, :copy
 
   role :app, "#{host}.kbs.msu.edu"
@@ -124,28 +123,28 @@ task :production do
   after "deploy:update", "newrelic:notice_deployment"
 end
 
-desc 'stop sphinks'
-task :stop_sphinks do
-  run "cd #{current_path};bundle exec rake ts:stop RAILS_ENV=production"
+before 'deploy:update_code', 'thinking_sphinx:stop'
+after 'deploy:update_code', 'thinking_sphinx:start'
+
+namespace :sphinx do
+  desc "Symlink Sphinx indexes"
+  task :symlink_indexes, :roles => [:app] do
+    run "ln -nfs #{shared_path}/db/sphinx #{release_path}/db/sphinx"
+  end
 end
 
-desc 'Update sphinks'
-task :update_sphinks do
-  run "cd #{current_path};bundle exec rake ts:index RAILS_ENV=production"
-  run "cd #{current_path};chmod go-r config/production.sphinx.conf"
-  run "cd #{current_path};bundle exec rake ts:start RAILS_ENV=production"
+after 'deploy:finalize_update', 'sphinx:symlink_indexes'
+
+task :lock_sphinks do
+   run "cd #{current_path};chmod go-r config/production.sphinx.conf"
 end
 
-desc 'Restart spinks'
-task :restart_sphinks do
-  run "cd #{current_path};bundle exec rake ts:restart RAILS_ENV=production"
-end
 
 desc 'update menus, headers and footers'
 task :update_nav do
-  run "cd #{current_path}/shared/system;curl http://lter.kbs.msu.edu/export/nav -o nav.html"
-  run "cd #{current_path}/shared/system;curl http://lter.kbs.msu.edu/export/footer -o footer.html"
-  run "cd #{current_path}/shared/system;curl http://lter.kbs.msu.edu/export/header -o header.html"
+  run "cd #{release_path}/public;curl http://lter.kbs.msu.edu/export/nav/ -o nav.html -s"
+  run "cd #{release_path}/public;curl http://lter.kbs.msu.edu/export/footer/ -o footer.html -s"
+  run "cd #{release_path}/public;curl http://lter.kbs.msu.edu/export/header/ -o header.html -s"
 end
 
 desc "Link in the production database.yml"
@@ -192,6 +191,13 @@ end
 desc 'link mongo initializer'
 task :link_mongo do
   run "ln -nfs #{deploy_to}/shared/config/mongo.rb #{release_path}/config/initializers/mongo.rb"
+end
+
+desc 'update navigation'
+task :update_header do
+  run "cd #{current_path}/public;curl http://lter.kbs.msu.edu/export/nav/ -o nav.html -s"
+  run "cd #{current_path}/public;curl http://lter.kbs.msu.edu/export/footer/ -o footer.html -s"
+  run "cd #{current_path}/public;curl http://lter.kbs.msu.edu/export/header/ -o header.html -s"
 end
 
 desc 'compile coffeescripts'

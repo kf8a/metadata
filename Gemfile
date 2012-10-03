@@ -23,6 +23,8 @@ gem 'awesome_nested_set' #, :git => 'git://github.com/galetahub/awesome_nested_s
 #gem 'acts_as_textcaptcha'
 
 gem 'unicorn'
+#gem 'puma'
+
 
 gem 'jquery-rails' #, '>= 1.0.12'
 

@@ -150,6 +150,7 @@ class DatatablesController < ApplicationController
   def update_temporal_extent
     datatable.update_temporal_extent
     datatable.save
+    #TODO write test to make sure the js fragment get's rendered
     respond_to do |format|
       format.json 
       format.html {render :nothing => true}
