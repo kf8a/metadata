@@ -29,6 +29,10 @@ class CitationsController < ApplicationController
 #      citations = [website.article_citations, website.book_citations, website.chapter_citations, website.thesis_citations]
       citations = [website.citations.publications]
     end
+
+    if params[:treatment]
+      citations = [Citation.from_website(website.id).by_treatment(params[:treatment])]
+    end
  
     @submitted_citations = citations.collect {|c| c.includes(:authors).submitted}.flatten
     @forthcoming_citations = citations.collect {|c| c.includes(:authors).forthcoming}.flatten

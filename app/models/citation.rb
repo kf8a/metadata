@@ -15,7 +15,7 @@ class Citation < ActiveRecord::Base
   belongs_to :website
 
   has_and_belongs_to_many :datatables
-  has_and_belongs_to_many :treatments
+  has_and_belongs_to_many  :treatments 
 
   accepts_nested_attributes_for :authors
   accepts_nested_attributes_for :editors
@@ -45,7 +45,7 @@ class Citation < ActiveRecord::Base
 
   attr_protected :pdf_file_name, :pdf_content_type, :pdf_size
 
-  # the REAL publications not just reports
+  # the REAL publications not including reports
   scope :publications, where(%q{type != 'ConferenceCitation'})
 
   scope :bookish, where(%q{type in ('BookCitation', 'ChapterCitation')})
@@ -74,6 +74,14 @@ class Citation < ActiveRecord::Base
     state :published do
       event :accept, :transitions_to => :forthcoming
     end
+  end
+
+  def Citation.by_treatment(treatment)
+    includes(:treatments).where('treatments.name = ?', treatment)
+  end
+
+  def Citation.from_website(website_id)
+    where(:website_id => website_id)
   end
 
   def Citation.by_date(date)
