@@ -7,7 +7,7 @@ require 'rails/test_help'
 require 'shoulda'
 require 'factory_girl'
 require 'clearance/testing'
-FactoryGirl.find_definitions
+FactoryGirl.reload
 require Rails.root.join('test', 'shoulda_macros', 'paperclip')
 
 require "#{Rails.root}/db/seeds.rb"
