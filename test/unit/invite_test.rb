@@ -3,7 +3,7 @@ require File.expand_path('../../test_helper',__FILE__)
 class InviteTest < ActiveSupport::TestCase
 
   setup do
-    Factory.create(:invite)
+    FactoryGirl.create(:invite)
   end
 
   should validate_presence_of(:email).with_message("can't be blank")
@@ -11,7 +11,7 @@ class InviteTest < ActiveSupport::TestCase
 
   context 'inviting' do
     setup do
-      @invite = Factory.create(:invite)
+      @invite = FactoryGirl.create(:invite)
     end
 
     should 'be invited' do

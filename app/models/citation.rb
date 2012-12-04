@@ -430,7 +430,7 @@ class Citation < ActiveRecord::Base
     else
       editor_array = editors.collect { |editor| editor.formatted(:natural) }
       eds = editor_array.to_sentence(:two_words_connector => ', and ')
-      " in #{eds}, eds"
+      " in #{eds}, eds."
     end
   end
 

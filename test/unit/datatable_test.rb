@@ -22,7 +22,7 @@ class DatatableTest < ActiveSupport::TestCase
 
   context 'datatable' do
     setup do
-      @datatable = Factory :datatable
+      @datatable = FactoryGirl.build :datatable
       assert(@datatable.valid?)
     end
 
@@ -39,8 +39,8 @@ class DatatableTest < ActiveSupport::TestCase
 
     context 'which has datatable personnel' do
       setup do
-        @person1 = Factory.create(:person, :sur_name => 'Datatableman')
-        @person2 = Factory.create(:person, :sur_name => 'Datatablewoman')
+        @person1 = FactoryGirl.create(:person, :sur_name => 'Datatableman')
+        @person2 = FactoryGirl.create(:person, :sur_name => 'Datatablewoman')
         @datatable.stubs(:datatable_personnel).returns([@person1, @person2])
       end
 
@@ -51,8 +51,8 @@ class DatatableTest < ActiveSupport::TestCase
 
     context 'which has no datatable personnel but does have dataset personnel' do
       setup do
-        @person1 = Factory.create(:person, :sur_name => 'Datatableman')
-        @person2 = Factory.create(:person, :sur_name => 'Datatablewoman')
+        @person1 = FactoryGirl.create(:person, :sur_name => 'Datatableman')
+        @person2 = FactoryGirl.create(:person, :sur_name => 'Datatablewoman')
         @datatable.stubs(:datatable_personnel).returns([])
         @datatable.stubs(:dataset_personnel).returns([@person1, @person2])
       end
@@ -90,17 +90,17 @@ class DatatableTest < ActiveSupport::TestCase
 
   context 'datatable personnel' do
     setup do
-      dataset = Factory :dataset
-      @datatable = Factory :datatable, :dataset => dataset
+      dataset = FactoryGirl.build :dataset
+      @datatable = FactoryGirl.build :datatable, :dataset => dataset
     end
 
     should 'be able to add contributors' do
-      person = Factory.create(:person)
-      assert @datatable.data_contributions << [Factory.create(:data_contribution, :datatable => @datatable, :person => person)]
-      different_role = Factory.create(:role, :name => 'AnotherRole')
-      @datatable.data_contributions << [Factory.create(:data_contribution, :datatable => @datatable, :person => person, :role => different_role)]
-      another_person = Factory.create(:person, :sur_name => 'Testerman')
-      @datatable.data_contributions << [Factory.create(:data_contribution, :datatable => @datatable, :person => another_person)]
+      person = FactoryGirl.create(:person)
+      assert @datatable.data_contributions << [FactoryGirl.create(:data_contribution, :datatable => @datatable, :person => person)]
+      different_role = FactoryGirl.create(:role, :name => 'AnotherRole')
+      @datatable.data_contributions << [FactoryGirl.create(:data_contribution, :datatable => @datatable, :person => person, :role => different_role)]
+      another_person = FactoryGirl.create(:person, :sur_name => 'Testerman')
+      @datatable.data_contributions << [FactoryGirl.create(:data_contribution, :datatable => @datatable, :person => another_person)]
       assert_equal 2, @datatable.datatable_personnel[person].count
       assert_equal ["Emeritus Investigators", "AnotherRole"], @datatable.datatable_personnel[person]
       assert_equal ["Emeritus Investigators"], @datatable.datatable_personnel[another_person]
@@ -109,11 +109,11 @@ class DatatableTest < ActiveSupport::TestCase
 
   context 'datatable with and without sponsors' do
     setup do
-      sponsor = Factory.create :sponsor, :data_use_statement => 'Use it', :name => 'GLBRC'
-      dataset_with_sponsor = Factory :dataset, :sponsor => sponsor
-      dataset_without_sponsor = Factory :dataset, :sponsor => nil
-      @datatable = Factory :datatable, :dataset => dataset_with_sponsor
-      @datatable_without_sponsor = Factory :datatable, :dataset => dataset_without_sponsor
+      sponsor = FactoryGirl.create :sponsor, :data_use_statement => 'Use it', :name => 'GLBRC'
+      dataset_with_sponsor = FactoryGirl.build :dataset, :sponsor => sponsor
+      dataset_without_sponsor = FactoryGirl.build :dataset, :sponsor => nil
+      @datatable = FactoryGirl.build :datatable, :dataset => dataset_with_sponsor
+      @datatable_without_sponsor = FactoryGirl.build :datatable, :dataset => dataset_without_sponsor
     end
 
 
@@ -125,7 +125,7 @@ class DatatableTest < ActiveSupport::TestCase
 
   context 'a datatable with an event query' do
     setup do
-      @datatable = Factory :datatable, :object=>'select now()'
+      @datatable = FactoryGirl.build :datatable, :object=>'select now()'
     end
 
     should 'return a an array of events'
@@ -135,14 +135,14 @@ class DatatableTest < ActiveSupport::TestCase
   context 'datatable without owners and permissions' do
     setup do
       @anonymous_user     = nil
-      @unauthorized_user  = Factory :user, :email => 'unauthorized@person.com'
-      @admin              = Factory :user, :email => 'admin@person.com', :role => 'admin'
+      @unauthorized_user  = FactoryGirl.build :user, :email => 'unauthorized@person.com'
+      @admin              = FactoryGirl.build :user, :email => 'admin@person.com', :role => 'admin'
 
-      @unrestricted = Factory  :datatable
+      @unrestricted = FactoryGirl.build  :datatable
 
-      sponsor = Factory :sponsor, :data_restricted => true
-      dataset = Factory :dataset, :sponsor => sponsor
-      @restricted = Factory :datatable,
+      sponsor = FactoryGirl.build :sponsor, :data_restricted => true
+      dataset = FactoryGirl.build :dataset, :sponsor => sponsor
+      @restricted = FactoryGirl.build :datatable,
         :dataset    => dataset
     end
 
@@ -173,40 +173,37 @@ class DatatableTest < ActiveSupport::TestCase
 
   context 'using datatable permissions' do
     setup do
-      sponsor = Factory :sponsor, :data_restricted => true
-      dataset = Factory :dataset, :sponsor => sponsor
+      sponsor = FactoryGirl.create :sponsor, :data_restricted => true
+      dataset = FactoryGirl.create :dataset, :sponsor => sponsor
 
       @anonymous_user     = nil
-      @unauthorized_user  = Factory :user, :email => 'unauthorized@person.com'
-      @authorized_user    = Factory :user, :email => 'authorized@person.com'
-      @owner              = Factory :user, :email => 'owner@person.com'
-      @admin              = Factory :user, :email => 'admin@person.com', :role => 'admin'
-      @member             = Factory :user, :email => 'member@person.com', :sponsors => [sponsor]
-      @denied_user        = Factory :user, :email => 'denied@perso.com'
+      @unauthorized_user  = FactoryGirl.create :user, :email => 'unauthorized@person.com'
+      @authorized_user    = FactoryGirl.create :user, :email => 'authorized@person.com'
+      @owner              = FactoryGirl.create :user, :email => 'owner@person.com'
+      @admin              = FactoryGirl.create :user, :email => 'admin@person.com', :role => 'admin'
+      @member             = FactoryGirl.create :user, :email => 'member@person.com', :sponsors => [sponsor]
+      @denied_user        = FactoryGirl.create :user, :email => 'denied@perso.com'
 
-      @unrestricted = Factory  :datatable
+      @unrestricted = FactoryGirl.create :datatable
 
-      @restricted_to_members = Factory :datatable,
-        :dataset    => dataset,
-        :owners => [@owner]
+      @restricted_to_members = FactoryGirl.create :datatable, :dataset    => dataset
+      @restricted_to_members.owners = [@owner]
 
-      @restricted = Factory :datatable,
-        :dataset => dataset,
-        :is_restricted => true,
-        :owners => [@owner]
+      @restricted = FactoryGirl.create :datatable, :dataset => dataset, :is_restricted => true
+      @restricted.owners = [@owner]
 
-      Factory :permission,
+      FactoryGirl.create :permission,
         :datatable  => @restricted_to_members,
         :user       => @authorized_user,
         :owner      => @owner
 
-      Factory :permission,
+      FactoryGirl.create :permission,
         :datatable  => @restricted_to_members,
         :user       => @denied_user,
         :owner      => @owner,
         :decision   => 'denied'
 
-       Factory :permission,
+       FactoryGirl.create :permission,
          :datatable => @restricted,
          :user      => @authorized_user,
          :owner     => @owner
@@ -256,18 +253,20 @@ class DatatableTest < ActiveSupport::TestCase
 
   context 'A datatable with permission requests' do
     setup do
-      @owner  = Factory :user, :email => 'owner@person.com'
-      @user   = Factory :user, :email => 'user@person.com'
-      @other  = Factory :user, :email => 'other@person.com'
-      @permitted_user = Factory :user, :email => 'permitted@person.com'
+      @owner  = FactoryGirl.create :user, :email => 'owner@person.com'
+      @user   = FactoryGirl.create :user, :email => 'user@person.com'
+      @other  = FactoryGirl.create :user, :email => 'other@person.com'
+      @permitted_user = FactoryGirl.create :user, :email => 'permitted@person.com'
 
-      sponsor     = Factory :sponsor, :data_restricted => true
-      dataset     = Factory :dataset, :sponsor => sponsor
-      @datatable  = Factory :datatable, :owners => [@owner]
+      sponsor     = FactoryGirl.create :sponsor, :data_restricted => true
+      dataset     = FactoryGirl.create :dataset, :sponsor => sponsor
+      @datatable  = FactoryGirl.create :datatable, :dataset => dataset
+      @datatable.owners = [@owner]
 
-      Factory.create(:permission_request, :user => @user, :datatable => @datatable)
-      Factory.create(:permission_request, :user => @permitted_user, :datatable => @datatable)
-      Factory.create(:permission, :owner => @owner, :datatable => @datatable, :user => @permitted_user)
+
+      FactoryGirl.create(:permission_request, :user => @user, :datatable => @datatable)
+      FactoryGirl.create(:permission_request, :user => @permitted_user, :datatable => @datatable)
+      FactoryGirl.create(:permission, :owner => @owner, :datatable => @datatable, :user => @permitted_user)
     end
 
     context '#pending_requesters' do
@@ -300,18 +299,18 @@ class DatatableTest < ActiveSupport::TestCase
 
   context 'getting unreleased data for qc purposes in the LTER sponsor' do
     setup do
-      sponsor     = Factory :sponsor, :name => 'lter'
-      dataset     = Factory :dataset, :sponsor => sponsor
-      @datatable  = Factory :datatable, :dataset => dataset
+      sponsor     = FactoryGirl.build :sponsor, :name => 'lter'
+      dataset     = FactoryGirl.build :dataset, :sponsor => sponsor
+      @datatable  = FactoryGirl.build :datatable, :dataset => dataset
 
-      restricted_sponsor     = Factory :sponsor, :data_restricted => true
-      restricted_dataset     = Factory :dataset, :sponsor => restricted_sponsor
-      @restricted_datatable  = Factory :datatable, :dataset => restricted_dataset
+      restricted_sponsor     = FactoryGirl.build :sponsor, :data_restricted => true
+      restricted_dataset     = FactoryGirl.build :dataset, :sponsor => restricted_sponsor
+      @restricted_datatable  = FactoryGirl.build :datatable, :dataset => restricted_dataset
 
       @anonymous_user     = nil
-      @admin              = Factory :user, :email => 'admin@person.com', :role => 'admin'
-      @non_member         = Factory :user, :email => 'non_member@person.com'
-      @member             = Factory :user, :email => 'member@person.com', :sponsors => [sponsor]
+      @admin              = FactoryGirl.build :user, :email => 'admin@person.com', :role => 'admin'
+      @non_member         = FactoryGirl.build :user, :email => 'non_member@person.com'
+      @member             = FactoryGirl.build :user, :email => 'member@person.com', :sponsors => [sponsor]
     end
     
     should 'allow admins' do
@@ -340,8 +339,8 @@ class DatatableTest < ActiveSupport::TestCase
 
   context 'datatable with sample_date' do
     setup do
-      @datatable = Factory.create(:datatable, :object => %q{select now() as sample_date} )
-      @old_data = Factory.create(:datatable, :object => %q{select now() - interval '3 year' as sample_date})
+      @datatable = FactoryGirl.create(:datatable, :object => %q{select now() as sample_date} )
+      @old_data = FactoryGirl.create(:datatable, :object => %q{select now() - interval '3 year' as sample_date})
     end
 
 
@@ -405,7 +404,7 @@ class DatatableTest < ActiveSupport::TestCase
 
   context 'datatable with range of dates' do
     setup do
-      @datatable = Factory.create(:datatable, :object => %q{select current_date + (random() * n)::integer as sample_date from generate_series(0,11) n})
+      @datatable = FactoryGirl.create(:datatable, :object => %q{select current_date + (random() * n)::integer as sample_date from generate_series(0,11) n})
     end
 
     should 'have the begin_date before the end_date' do
@@ -416,7 +415,7 @@ class DatatableTest < ActiveSupport::TestCase
 
   context 'datatable without sample_date' do
     setup do
-      @datatable = Factory.create(:datatable)
+      @datatable = FactoryGirl.create(:datatable)
       @datatable.object = 'select 1 as treatment'
     end
 
@@ -434,9 +433,9 @@ class DatatableTest < ActiveSupport::TestCase
 
   context 'datatable with different date representations' do
     setup do
-      obs_date = Factory.create(:datatable, :object => %Q{select date '#{Date.today}' as obs_date})
-      datetime = Factory.create(:datatable, :object => %Q{select date '#{Date.today}'as datetime})
-      date = Factory.create(:datatable, :object => %Q{select date '#{Date.today}' as date})
+      obs_date = FactoryGirl.create(:datatable, :object => %Q{select date '#{Date.today}' as obs_date})
+      datetime = FactoryGirl.create(:datatable, :object => %Q{select date '#{Date.today}'as datetime})
+      date = FactoryGirl.create(:datatable, :object => %Q{select date '#{Date.today}' as date})
       @date_representations = [obs_date, datetime, date]
     end
 
@@ -478,11 +477,11 @@ class DatatableTest < ActiveSupport::TestCase
 
   context 'datatable with year' do
     setup do
-      @year = Factory.create(:datatable, :object => "select #{Time.now.year} as year")
+      @year = FactoryGirl.build :datatable, :object => "select #{Time.now.year} as year"
     end
 
     should 'return true if interval includes today' do
-        assert @year.within_interval?(Date.today - 1.year, Date.today + 1.day)
+      assert @year.within_interval?(Date.today - 1.year, Date.today + 1.day)
     end
 
     should 'return false if the interval is later than the data times' do
@@ -509,14 +508,14 @@ class DatatableTest < ActiveSupport::TestCase
 
   context 'datatable formats' do
     setup do
-      dataset = Factory.create(:dataset)
-      @datatable = Factory.create(:datatable, :dataset => dataset, :object=>"select now() as a, '1' as b", :number_of_released_records => 1)
+      dataset = FactoryGirl.create(:dataset)
+      @datatable = FactoryGirl.create(:datatable, :dataset => dataset, :object=>"select now() as a, '1' as b", :number_of_released_records => 1)
       @datatable.variates << [Variate.new(:name => 'a'), Variate.new(:name => 'b')]
     end
 
     context 'eml format' do
       setup  do
-        @datatable.protocols << Factory.create(:protocol)
+        @datatable.protocols << FactoryGirl.create(:protocol)
         @eml = @datatable.to_eml
       end
 
@@ -596,11 +595,11 @@ class DatatableTest < ActiveSupport::TestCase
 
   context 'migrating personnel from dataset to datatable' do
      setup do
-      dataset = Factory.create(:dataset)
-      @datatable = Factory.create(:datatable, :dataset => dataset, :object=>"select now() as a, '1' as b", :number_of_released_records => 1)
+      dataset = FactoryGirl.create(:dataset)
+      @datatable = FactoryGirl.create(:datatable, :dataset => dataset, :object=>"select now() as a, '1' as b", :number_of_released_records => 1)
       affiliation = Affiliation.new
-      @role = Factory.create(:role)
-      @person = Factory.create(:person)
+      @role = FactoryGirl.create(:role)
+      @person = FactoryGirl.create(:person)
       affiliation.role = @role
       affiliation.person = @person
       affiliation.seniority = 1

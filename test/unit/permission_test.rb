@@ -11,11 +11,12 @@ class PermissionTest < ActiveSupport::TestCase
 
   context 'basic permissions' do
     setup do
-      user        = Factory :user
-      owner       = Factory :user
-      datatable   = Factory :datatable, :owners => [owner]
+      user        = FactoryGirl.create :user
+      owner       = FactoryGirl.create :user
+      datatable   = FactoryGirl.create :datatable
+      datatable.owners = [owner]
 
-      @permission = Factory.build :permission,
+      @permission = FactoryGirl.build :permission,
         :datatable  => datatable,
         :user       => user,
         :owner      => owner
@@ -29,14 +30,15 @@ class PermissionTest < ActiveSupport::TestCase
 
   context 'setting permissions' do
     setup do
-      @owner      = Factory :user
-      @datatable  = Factory :datatable, :owners => [@owner]
+      @owner      = FactoryGirl.create :user
+      @datatable  = FactoryGirl.create :datatable
+      @datatable.owners = [@owner]
     end
 
     should 'allow the owner to give users permission' do
       p           = Permission.new({:datatable => @datatable})
       p.owner     = @owner
-      p.user      = Factory :user
+      p.user      = FactoryGirl.build :user
 
       assert p.valid?
     end
@@ -44,15 +46,15 @@ class PermissionTest < ActiveSupport::TestCase
     should 'not allow a non owner to give users permission' do
       p           = Permission.new
       p.datatable = @datatable
-      p.owner     = Factory :user
-      p.user      = Factory :user
+      p.owner     = FactoryGirl.create(:user)
+      p.user      = FactoryGirl.create(:user)
 
       assert !p.valid?
       assert_equal ['owners only'], p.errors[:base]
     end
 
     should 'not allow permissions to be set more than once' do
-      user         = Factory :user
+      user         = FactoryGirl.create(:user)
 
       p1           = Permission.new
       p1.datatable = @datatable
@@ -72,7 +74,7 @@ class PermissionTest < ActiveSupport::TestCase
     end
 
     should 'allow permissions to be updated' do
-      user         = Factory :user
+      user         = FactoryGirl.build :user
 
       p1           = Permission.new
       p1.datatable = @datatable
@@ -87,10 +89,10 @@ class PermissionTest < ActiveSupport::TestCase
     end
 
     should 'allow permissions from multiple owners' do
-      user         = Factory :user
+      user         = FactoryGirl.build :user
 
-      owner2       = Factory :user
-      Factory.create(:ownership, :user => owner2, :datatable => @datatable)
+      owner2       = FactoryGirl.build :user
+      FactoryGirl.build :ownership, :user => owner2, :datatable => @datatable
       @datatable.reload
       assert_equal [@owner, owner2], @datatable.owners
 
@@ -112,17 +114,19 @@ class PermissionTest < ActiveSupport::TestCase
 
   context 'Person.permitted_users' do
     should 'list all undenied users' do
-      user1 = Factory :user
-      user2 = Factory :user
-      user3 = Factory :user
-      user4 = Factory :user
-      owner1 = Factory :user
-      owner2 = Factory :user
-      datatable1  = Factory :datatable, :owners => [owner1]
-      datatable2  = Factory :datatable, :owners => [owner2]
-      Factory :permission, :owner => owner1, :datatable => datatable1, :user => user1
-      Factory :permission, :owner => owner1, :datatable => datatable1, :user => user2, :decision => 'denied'
-      Factory :permission, :owner => owner2, :datatable => datatable2, :user => user4
+      user1 = FactoryGirl.create(:user)
+      user2 = FactoryGirl.create(:user)
+      user3 = FactoryGirl.create(:user)
+      user4 = FactoryGirl.create(:user)
+      owner1 = FactoryGirl.build :user
+      owner2 = FactoryGirl.build :user
+      datatable1  = FactoryGirl.create :datatable
+      datatable1.owners = [owner1]
+      datatable2  = FactoryGirl.create :datatable
+      datatable2.owners = [owner2]
+      FactoryGirl.create(:permission, :owner => owner1, :datatable => datatable1, :user => user1)
+      FactoryGirl.create(:permission, :owner => owner1, :datatable => datatable1, :user => user2, :decision => 'denied')
+      FactoryGirl.create(:permission, :owner => owner2, :datatable => datatable2, :user => user4)
 
       assert Permission.permitted_users.include?(user1)
       assert !Permission.permitted_users.include?(user2)

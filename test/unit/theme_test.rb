@@ -7,12 +7,12 @@ class ThemeTest < ActiveSupport::TestCase
   context 'themes querying for datatables' do
 
     setup do 
-      @study = Factory.create(:study)
-      @datatable = Factory.create(:datatable, :study => @study)
+      @study = FactoryGirl.create(:study)
+      @datatable = FactoryGirl.create(:datatable, :study => @study)
 
-      @theme = Factory.create(:theme)
-      @sub_theme = Factory.create(:theme)
-      @sub_sub_theme = Factory.create(:theme)
+      @theme = FactoryGirl.create(:theme)
+      @sub_theme = FactoryGirl.create(:theme)
+      @sub_sub_theme = FactoryGirl.create(:theme)
 
       @sub_theme.move_to_child_of(@theme)
       @sub_sub_theme.move_to_child_of(@sub_theme)
@@ -53,13 +53,13 @@ class ThemeTest < ActiveSupport::TestCase
     should 'return false if a datatable is in a different study' do
       @datatable.theme = @theme
       assert @datatable.save
-      study = Factory.create(:study)
+      study = FactoryGirl.create(:study)
       assert !@theme.datatables?(study)
     end
 
     context 'include_datatables?' do
       should 'return false if the datatable is not in the current theme' do
-        datatable = Factory.create(:datatable)
+        datatable = FactoryGirl.create(:datatable)
         assert !@theme.include_datatables?([datatable])
       end
 
@@ -73,7 +73,7 @@ class ThemeTest < ActiveSupport::TestCase
       context 'include_datatables_from_study' do
         setup do
           @datatable.theme = @theme
-          study = Factory.create(:study)
+          study = FactoryGirl.create(:study)
           assert @datatable.save
         end
 
@@ -101,8 +101,8 @@ class ThemeTest < ActiveSupport::TestCase
         setup do
           @datatable.theme = @theme
           assert @datatable.save
-          @datatable2 = Factory.create(:datatable, :study => @study, :theme => @theme)
-          @outside_datatable = Factory.create(:datatable, :theme => @theme)
+          @datatable2 = FactoryGirl.create(:datatable, :study => @study, :theme => @theme)
+          @outside_datatable = FactoryGirl.create(:datatable, :theme => @theme)
         end
 
         should "show all of the datatables in the study" do

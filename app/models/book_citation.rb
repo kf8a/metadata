@@ -5,7 +5,7 @@ class BookCitation < Citation
   end
 
   def formatted(options={})
-    "#{author_and_year(options)} #{title_and_punctuation} #{page_numbers_book} #{editor_string} #{publication} #{publisher} #{address_and_city}"
+    "#{author_and_year(options)} #{title_and_punctuation} #{page_numbers_book} #{editor_string} #{publication}. #{publisher}#{address_and_city}"
   end
 
   private
@@ -23,7 +23,13 @@ class BookCitation < Citation
   end
 
   def address_and_city
-    ", #{address} #{city}" if address or city
+    if address and city
+      ", #{address} #{city}"
+    elsif address
+      ", #{address}"
+    elsif city
+      ", #{city}"
+    end
   end
 
   def publisher_and_punctuation

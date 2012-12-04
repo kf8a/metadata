@@ -8,14 +8,14 @@ class StudyTest < ActiveSupport::TestCase
 
   context 'querying for datatables' do
     setup do
-      theme = Factory.create(:theme)
-      @study = Factory.create(:study, :weight => 200)
-      2.times {Factory.create(:study) }
-      @study2 = Factory.create(:study, :weight=>100)
+      theme = FactoryGirl.create(:theme)
+      @study = FactoryGirl.create(:study, :weight => 200)
+      2.times {FactoryGirl.create(:study) }
+      @study2 = FactoryGirl.create(:study, :weight=>100)
 
-      @datatable  = Factory.create(:datatable, :study => @study)
-      @datatable2 = Factory.create(:datatable, :study => @study2)
-      @datatable3 = Factory.create(:datatable, :study => @study)
+      @datatable  = FactoryGirl.create(:datatable, :study => @study)
+      @datatable2 = FactoryGirl.create(:datatable, :study => @study2)
+      @datatable3 = FactoryGirl.create(:datatable, :study => @study)
     end
 
     should 'return true if queried for included datatables' do
@@ -23,7 +23,7 @@ class StudyTest < ActiveSupport::TestCase
     end
 
     should 'return false if queried for a non affiliated datatable' do
-      assert  !@study.include_datatables?([Factory.create(:datatable)])
+      assert  !@study.include_datatables?([FactoryGirl.create(:datatable)])
     end
 
     should 'find only the studies that include the datatable' do
@@ -47,13 +47,13 @@ class StudyTest < ActiveSupport::TestCase
 
   context 'querying for datatables with nested studies' do
     setup do
-      @study = Factory.create(:study)
+      @study = FactoryGirl.create(:study)
       #create a second root study
-      Factory.create(:study)
-      @child_study = Factory.create(:study)
+      FactoryGirl.create(:study)
+      @child_study = FactoryGirl.create(:study)
       @child_study.move_to_child_of(@study)
 
-      @datatable = Factory.create(:datatable, :study => @child_study)
+      @datatable = FactoryGirl.create(:datatable, :study => @child_study)
     end
 
     should 'should return true for the parent study if the dataset is in the child study' do
@@ -71,11 +71,11 @@ class StudyTest < ActiveSupport::TestCase
 
   context 'return the right url for the website' do
     setup do
-      @study      = Factory.create(:study)
-      @website_1  = Factory.create(:website, :name => 'first')
-      @website_2  = Factory.create(:website, :name => 'second')
-      study_url_1 = Factory.create(:study_url, :url => 'somewhere', :website => @website_1)
-      study_url_2 = Factory.create(:study_url, :url => 'somewhere else', :website => @website_2)
+      @study      = FactoryGirl.create(:study)
+      @website_1  = FactoryGirl.create(:website, :name => 'first')
+      @website_2  = FactoryGirl.create(:website, :name => 'second')
+      study_url_1 = FactoryGirl.create(:study_url, :url => 'somewhere', :website => @website_1)
+      study_url_2 = FactoryGirl.create(:study_url, :url => 'somewhere else', :website => @website_2)
       @study.study_urls << [study_url_1, study_url_2]
     end
 
@@ -87,8 +87,8 @@ class StudyTest < ActiveSupport::TestCase
 
   context 'deleting studies' do
     setup do
-      @study      = Factory.create(:study)
-      @study.treatments << Factory.create(:treatment)
+      @study      = FactoryGirl.create(:study)
+      @study.treatments << FactoryGirl.create(:treatment)
     end
 
     should 'not delete when it has a treatment in the study' do

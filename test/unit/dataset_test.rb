@@ -13,7 +13,7 @@ class DatasetTest < ActiveSupport::TestCase
 
   context 'dataset' do
     setup do
-      @dataset = Factory.create(:dataset)
+      @dataset = FactoryGirl.create(:dataset)
     end
 
     should 'respond to update_temporal_extent' do
@@ -27,7 +27,7 @@ class DatasetTest < ActiveSupport::TestCase
 
   context 'to_label function' do
     setup do
-      @dataset = Factory.create(:dataset, :title => 'LabelTitle', :dataset => 'Label Dataset')
+      @dataset = FactoryGirl.create(:dataset, :title => 'LabelTitle', :dataset => 'Label Dataset')
     end
 
     should "provide the title and dataset" do
@@ -39,17 +39,17 @@ class DatasetTest < ActiveSupport::TestCase
   context 'datatable_people function' do
     context 'for a dataset with datatables and people' do
       setup do
-        @dataset = Factory.create(:dataset)
-        datatable1 = Factory.create(:datatable, :dataset => @dataset)
+        @dataset = FactoryGirl.create(:dataset)
+        datatable1 = FactoryGirl.create(:datatable, :dataset => @dataset)
         @dataset.reload
-        datatable2 = Factory.create(:datatable, :dataset => @dataset)
+        datatable2 = FactoryGirl.create(:datatable, :dataset => @dataset)
         @dataset.reload
-        @person1 = Factory.create(:person, :given_name => "Angela")
-        @person2 = Factory.create(:person, :given_name => "Bob")
-        assert DataContribution.create(:datatable => datatable1, :person => @person1, :role => Factory.create(:role))
+        @person1 = FactoryGirl.create(:person, :given_name => "Angela")
+        @person2 = FactoryGirl.create(:person, :given_name => "Bob")
+        assert DataContribution.create(:datatable => datatable1, :person => @person1, :role => FactoryGirl.create(:role))
         datatable1.reload
         @dataset.reload
-        assert DataContribution.create(:datatable => datatable2, :person => @person2, :role => Factory.create(:role))
+        assert DataContribution.create(:datatable => datatable2, :person => @person2, :role => FactoryGirl.create(:role))
         datatable2.reload
         @dataset.reload
       end
@@ -65,7 +65,7 @@ class DatasetTest < ActiveSupport::TestCase
   context 'valid_request function' do
     context 'for a dataset with no website' do
       setup do
-        @dataset = Factory.create(:dataset, :website => nil)
+        @dataset = FactoryGirl.create(:dataset, :website => nil)
       end
 
       should 'be true for any subdomain' do
@@ -77,8 +77,8 @@ class DatasetTest < ActiveSupport::TestCase
 
     context 'for a dataset with a website' do
       setup do
-        @website = Factory.create(:website, :name => 'cool_website')
-        @dataset = Factory.create(:dataset, :website => @website)
+        @website = FactoryGirl.create(:website, :name => 'cool_website')
+        @dataset = FactoryGirl.create(:dataset, :website => @website)
       end
 
       should 'only be true for that website as subdomain' do
@@ -91,8 +91,8 @@ class DatasetTest < ActiveSupport::TestCase
 
   context 'no temporal extent' do
     setup do
-      @dataset = Factory.create(:dataset, :initiated => '2000-1-1',
-        :datatables => [Factory.create(:datatable, :object => 'select 1')])
+      @dataset = FactoryGirl.create(:dataset, :initiated => '2000-1-1',
+        :datatables => [FactoryGirl.create(:datatable, :object => 'select 1')])
     end
 
     should 'not update temporal extent if extent is missing' do
@@ -104,11 +104,10 @@ class DatasetTest < ActiveSupport::TestCase
 
   context 'Current Temporal Extent' do
     setup do
-      @dataset = Factory.create(:dataset,
-        :datatables  => [Factory.create(:datatable, :object => 'select 1'),
-                         Factory.create(:datatable,
-                         :object => "select now() as sample_date"),
-                         Factory.create(:datatable, :object => 'select 1')])
+      @dataset = FactoryGirl.create(:dataset,
+        :datatables  => [FactoryGirl.create(:datatable, :object => 'select 1'),
+                         FactoryGirl.create(:datatable, :object => "select now() as sample_date"),
+                         FactoryGirl.create(:datatable, :object => 'select 1')])
     end
 
     should 'be today' do
@@ -128,9 +127,9 @@ class DatasetTest < ActiveSupport::TestCase
 
   context 'past temporal extent' do
     setup do
-      @dataset = Factory.create(:dataset,
-        :datatables  => [Factory.create(:datatable, :object => 'select now() as sample_date'),
-                         Factory.create(:datatable,
+      @dataset = FactoryGirl.create(:dataset,
+        :datatables  => [FactoryGirl.create(:datatable, :object => 'select now() as sample_date'),
+                         FactoryGirl.create(:datatable,
                          :object => "select now() - interval '1 year' as sample_date")])
     end
 
@@ -143,9 +142,9 @@ class DatasetTest < ActiveSupport::TestCase
 
   context 'eml generatation' do
     setup do
-      @dataset = Factory.create(:dataset, :initiated => Date.today, :completed => Date.today)
-      @datatable = Factory.create(:datatable)
-      @dataset_with_datatable = @datatable.dataset
+      @dataset = FactoryGirl.create(:dataset, :initiated => Date.today, :completed => Date.today)
+      @datatable = FactoryGirl.create(:datatable)
+      @dataset_with_datatable = @datatable.dataset = @dataset
       assert @datatable.valid_for_eml?
     end
 
@@ -160,7 +159,6 @@ class DatasetTest < ActiveSupport::TestCase
         xsd = Nokogiri::XML::Schema(File.read("eml.xsd"))
       end
       doc = Nokogiri::XML(@dataset.to_eml)
-      p doc.to_xml
       assert_equal [],  xsd.validate(doc)
     end
 
@@ -185,11 +183,11 @@ class DatasetTest < ActiveSupport::TestCase
 
     context 'dataset with protocols in the datatables' do
       setup do
-        website = Factory.create(:website, :name => 'cool_website')
-        @protocol = Factory.create(:protocol, :dataset => @dataset, :title => 'cool protocol')
+        website = FactoryGirl.create(:website, :name => 'cool_website')
+        @protocol = FactoryGirl.create(:protocol, :dataset => @dataset, :title => 'cool protocol')
         @dataset.protocols << @protocol
         @dataset.website = website
-        @protocol2 = Factory.create(:protocol)
+        @protocol2 = FactoryGirl.create(:protocol)
         @datatable.protocols << @protocol2
       end
 
@@ -212,7 +210,7 @@ class DatasetTest < ActiveSupport::TestCase
 
   context 'set affiliations' do
     setup do
-      @dataset = Factory.create(:dataset)
+      @dataset = FactoryGirl.create(:dataset)
     end
 
     should 'be able to add a affiliation when none exists' do
@@ -251,15 +249,15 @@ class DatasetTest < ActiveSupport::TestCase
 
   context "within_interval? function" do
     setup do
-      @dataset = Factory.create(:dataset)
+      @dataset = FactoryGirl.create(:dataset)
     end
 
     context "and two datatables" do
       setup do
-        Factory.create(:datatable, :dataset => @dataset,
+        FactoryGirl.create(:datatable, :dataset => @dataset,
           :object => 'select now() as sample_date',
           :begin_date => (Date.today - 7),   :end_date => (Date.today - 4))
-        Factory.create(:datatable, :dataset => @dataset,
+        FactoryGirl.create(:datatable, :dataset => @dataset,
           :object => %q{select now() - interval '1 year' as sample_date},
           :begin_date => (Date.today - 365), :end_date => (Date.today - 364))
       end

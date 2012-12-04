@@ -8,7 +8,7 @@ class ProtocolTest < ActiveSupport::TestCase
     setup do
       @website = Website.find_by_name('lter')
       @website2 = Website.find_by_name('glbrc')
-      @protocol = Factory.create(:protocol)
+      @protocol = FactoryGirl.create(:protocol)
     end
 
     should 'save websites' do
@@ -29,8 +29,8 @@ class ProtocolTest < ActiveSupport::TestCase
 
   context 'deprecating a protocol' do
     setup do
-      @protocol = Factory.create(:protocol, :version_tag => 4)
-      @new_protocol = Factory.create(:protocol)
+      @protocol = FactoryGirl.create(:protocol, :version_tag => 4)
+      @new_protocol = FactoryGirl.create(:protocol)
       @new_protocol.deprecate!(@protocol)
       @protocol.reload
     end

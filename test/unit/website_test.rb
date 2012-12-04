@@ -15,15 +15,15 @@ class WebsiteTest < ActiveSupport::TestCase
     
   context 'website' do
     setup do
-      @template = Factory.create(:template,  :controller => 'datatable', 
+      @template = FactoryGirl.create(:template,  :controller => 'datatable', 
                                                 :action => 'show', 
                                                 :layout => 'Hi')
-      @website = Factory.create(:website, :templates => [@template])
+      @website = FactoryGirl.create(:website, :templates => [@template])
   
       @website.save
       @template.save
 
-      Factory.create(:template, :controller => 'datatable', 
+      FactoryGirl.create(:template, :controller => 'datatable', 
                                 :action => 'show',
                                 :website_id => 2,
                                 :layout => 'nothing').save

@@ -1,8 +1,10 @@
 class Sponsor < ActiveRecord::Base
+  extend FriendlyId
+
   has_many :datasets
   has_many :memberships
 
-  has_friendly_id :name
+  friendly_id :name
 end
 
 

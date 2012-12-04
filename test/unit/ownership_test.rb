@@ -16,7 +16,7 @@ class OwnershipTest < ActiveSupport::TestCase
   context 'An ownership exists' do
     setup do
       User.destroy_all
-      Factory.create(:ownership)
+      FactoryGirl.create(:ownership)
     end
 
     should validate_uniqueness_of(:user_id).scoped_to(:datatable_id)

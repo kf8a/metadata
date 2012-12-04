@@ -107,7 +107,7 @@ class Datatable < ActiveRecord::Base
   def datatable_personnel
     compile_personnel(data_contributions)
   end
-  
+
   def dataset_personnel
     compile_personnel(dataset.affiliations)
   end
@@ -447,9 +447,11 @@ class Datatable < ActiveRecord::Base
     values = ActiveRecord::Base.connection.execute(query)
     dates = values[0]
     min, max = dates['min'], dates['max']
-    unless dates.class == 'Date' # assume is a year
-      min = min.to_s + '-1-1'
-      max = max.to_s + '-1-1'
+    if min.length == 4  # assume is a year
+      min = min + '-1-1'
+    end
+    if max.length == 4
+      max = max + '-1-1'
     end
 
     [Time.parse(min).to_date, Time.parse(max).to_date]

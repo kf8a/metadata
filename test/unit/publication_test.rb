@@ -4,8 +4,8 @@ class PublicationTest < ActiveSupport::TestCase
   
   context 'finding publications by words' do
     setup do
-      @pub = Factory.create(:publication)
-      @other_pub = Factory.create(:publication, :citation => 'bohms', :abstract => 'nothing really')
+      @pub = FactoryGirl.create(:publication)
+      @other_pub = FactoryGirl.create(:publication, :citation => 'bohms', :abstract => 'nothing really')
     end
     
     should 'return one record if called with word = bogus' do

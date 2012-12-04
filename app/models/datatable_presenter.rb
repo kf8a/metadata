@@ -1,0 +1,3 @@
+class DatatablePresenter
+  
+end

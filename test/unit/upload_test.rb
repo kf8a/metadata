@@ -3,7 +3,7 @@ require File.expand_path('../../test_helper',__FILE__)
 class UploadTest < ActiveSupport::TestCase
   context 'saving' do 
     setup do
-      @upload = Factory.create(:upload)
+      @upload = FactoryGirl.create(:upload)
       @good_data = @upload
     end
     

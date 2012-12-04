@@ -28,7 +28,9 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'a generic citation with a single author' do
     setup do
-      @citation = Factory :citation
+      # we are testing the workflow so we need actually create a citation
+      @citation = FactoryGirl.create :citation
+
       @citation.authors << Author.new(:sur_name => 'Robertson',
                                       :given_name => 'G', :middle_name => 'P',
                                       :seniority => 1)
@@ -57,7 +59,7 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'a citation object with zero authors' do
     setup do
-      @citation = Factory :citation
+      @citation = FactoryGirl.build :citation
       @citation.authors = []
 
       @citation.title = 'Long-term ecological research: Re-inventing network science'
@@ -181,7 +183,7 @@ class CitationTest < ActiveSupport::TestCase
     end
 
     should 'be formatted correctly' do
-      result = 'Robertson, G. P., and A. S. Grandy. 2006. Soil system management in temperate regions. Pages 27-39  in N. Uphoff, A. S. Ball, and J. Thies, eds. Biological Approaches to Sustainable Soil Systems. CRC Press, Taylor and Francis Group, Boca Raton, Florida, USA.'
+      result = 'Robertson, G. P., and A. S. Grandy. 2006. Soil system management in temperate regions. Pages 27-39  in N. Uphoff, A. S. Ball, and J. Thies, eds. Biological Approaches to Sustainable Soil Systems. CRC Press, Taylor and Francis Group, Boca Raton, Florida, USA'
       assert_equal result, @citation.formatted
     end
 
@@ -340,7 +342,7 @@ class CitationTest < ActiveSupport::TestCase
     end
 
     should 'be formatted correctly' do
-      result = "Robertson, G. P., and A. S. Grandy. 2006. Soil system management in temperate regions. Pages 27-39  in N. Uphoff, and A. S. Ball, eds. Biological Approaches to Sustainable Soil Systems. CRC Press, Taylor and Francis Group, Boca Raton, Florida, USA."
+      result = "Robertson, G. P., and A. S. Grandy. 2006. Soil system management in temperate regions. Pages 27-39  in N. Uphoff, and A. S. Ball, eds. Biological Approaches to Sustainable Soil Systems. CRC Press, Taylor and Francis Group, Boca Raton, Florida, USA"
       assert_equal result, @citation.formatted
     end
 
@@ -375,7 +377,7 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'a citation with a doi but no volume' do 
     setup do
-      @cite = FactoryGirl.create(:citation, :doi => 'my_doi_string')
+      @cite = FactoryGirl.build :citation, :doi => 'my_doi_string'
     end
 
     should 'display the doi in the formatted citation' do
@@ -385,8 +387,8 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'a citation with no pub year' do
     setup do
-      auth = FactoryGirl.create(:author, :sur_name=>'Babbit', :given_name=>'Bob')
-      @cite = FactoryGirl.create(:citation, :title => 'A title', :authors => [auth])
+      auth  = FactoryGirl.build :author, :sur_name=>'Babbit', :given_name=>'Bob'
+      @cite = FactoryGirl.build :citation, :title => 'A title', :authors => [auth]
     end
 
     should 'not have a dot after the pub year' do
@@ -396,8 +398,8 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'a citation object with an author' do
     setup do
-      @auth = FactoryGirl.create(:author, :sur_name=>'Babbit', :given_name=>'Bob')
-      @cite = FactoryGirl.create(:citation)
+      @auth = FactoryGirl.build :author, :sur_name=>'Babbit', :given_name=>'Bob'
+      @cite = FactoryGirl.build :citation
       @cite.authors << @auth
     end
 
@@ -440,10 +442,10 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'a citation object with many authors' do
     setup do
-      @cite = FactoryGirl.create(:citation)
+      @cite = FactoryGirl.build(:citation)
       authors = []
       4.times do 
-        authors << FactoryGirl.create(:author, :given_name=>'Jon', :sur_name => 'Jones')
+        authors << FactoryGirl.build(:author, :given_name=>'Jon', :sur_name => 'Jones')
       end
       @cite.authors << authors
     end
