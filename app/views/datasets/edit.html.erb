@@ -3,7 +3,7 @@
 <%= semantic_form_for @dataset, :html => { :multipart => true } do |form| %>
   <%= render "shared/error_messages", :target => @dataset %>
   <%= render 'form', :form => form, :datatable => @dataset %>
-  <%= form.buttons %>
+  <%= form.actions %>
 <% end %>
 
 <%= link_to 'Show', dataset_path(@dataset) %> |

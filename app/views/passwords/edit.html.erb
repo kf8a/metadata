@@ -18,8 +18,8 @@
     <%= form.input :password_confirmation, :as => :password,
                    :label => "Confirm password" %>
   <% end -%>
-  <%= form.buttons do -%>
-    <%= form.commit_button "Save this password" %>
+  <%= form.actions do -%>
+    <%= form.action :submit, :label => "Save this password" %>
   <% end -%>
 <% end %>
 

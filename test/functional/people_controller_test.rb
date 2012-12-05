@@ -87,7 +87,7 @@ class PeopleControllerTest < ActionController::TestCase
 
   context "GET :show for a person" do
     setup do
-      @person = Factory.create(:person)
+      @person = FactoryGirl.create(:person)
       get :show, :id => @person
     end
 
@@ -101,7 +101,7 @@ class PeopleControllerTest < ActionController::TestCase
 
   context "GET: show for subdomain glbrc" do
     setup do
-       @person = Factory.create(:person)
+       @person = FactoryGirl.create(:person)
       get :show, :id => @person, :requested_subdomain => 'glbrc'
     end
 
@@ -114,7 +114,7 @@ class PeopleControllerTest < ActionController::TestCase
 
   context "GET: show for subdomain lter" do
     setup do
-      @person = Factory.create(:person)
+      @person = FactoryGirl.create(:person)
       get :show, :id => @person, :requested_subdomain => 'lter'
     end
 

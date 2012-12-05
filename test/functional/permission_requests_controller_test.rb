@@ -4,9 +4,9 @@ class PermissionRequestsControllerTest < ActionController::TestCase
 
   context "a protected and owned datatable" do
     setup do
-      @datatable = Factory.create(:protected_datatable)
-      @owner = Factory.create(:email_confirmed_user)
-      Factory.create(:ownership, :user => @owner, :datatable => @datatable)
+      @datatable = FactoryGirl.create(:protected_datatable)
+      @owner = FactoryGirl.create(:email_confirmed_user)
+      FactoryGirl.create(:ownership, :user => @owner, :datatable => @datatable)
     end
 
     context "and not signed in at all" do
@@ -27,7 +27,7 @@ class PermissionRequestsControllerTest < ActionController::TestCase
 
     context "and signed in as a valid user" do
       setup do
-        @user = Factory.create(:email_confirmed_user)
+        @user = FactoryGirl.create(:email_confirmed_user)
         @controller.current_user = @user
       end
 

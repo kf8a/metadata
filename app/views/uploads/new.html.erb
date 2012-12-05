@@ -2,11 +2,9 @@
   <%= form.inputs do -%>
     <%= form.input :title, :label => "Data Table Title" %>
     <%= form.input :abstract, :as => :text, :label => 'Abstract' , :input_html =>{ :size =>"30x10" }%>
-    <%= form.input :owners, :label => "Responsible PI's" %>
-    <%= form.input :file, :as => :file %>
   <% end -%>
-  <%= form.buttons do -%>
-    <%= form.commit_button "Submit" %>
+  <%= form.actions do -%>
+    <%= form.action :submit %>
   <% end -%>
 <% end -%>
 

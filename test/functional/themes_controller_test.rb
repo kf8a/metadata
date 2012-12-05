@@ -5,12 +5,12 @@ class ThemesControllerTest < ActionController::TestCase
   def setup
 
     #TODO test with admin and non admin users
-    @controller.current_user = Factory.create :admin_user
+    @controller.current_user = FactoryGirl.create :admin_user
   end
 
   context 'GET index' do
     setup do
-      @theme = Factory.create(:theme)
+      @theme = FactoryGirl.create(:theme)
       get :index
     end
     
@@ -30,7 +30,7 @@ class ThemesControllerTest < ActionController::TestCase
 
   context 'POST update' do
     setup do
-      @theme = Factory.create(:theme)
+      @theme = FactoryGirl.create(:theme)
       post :update, :id => @theme
     end
 

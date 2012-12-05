@@ -1,5 +1,4 @@
 FactoryGirl.define do
-
   #Independent factories#########
   factory :affiliation do
   end
@@ -136,7 +135,7 @@ FactoryGirl.define do
   factory :dataset do
     title     'KBS001'
     abstract  'some new dataset'
-    dataset   { Factory.next(:dataset_text) }
+    dataset   { FactoryGirl.generate(:dataset_text) }
 
     factory :restricted_dataset do |dataset|
       association :sponsor, :factory => :restricted_sponsor
@@ -156,7 +155,7 @@ FactoryGirl.define do
   factory :datatable do
     name
     title         'a really cool datatable'
-    object        "select 1 as sample_date"
+    object        "select now() as sample_date"
     is_sql         true
     description   'This is a datatable'
     weight        100

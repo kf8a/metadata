@@ -13,8 +13,8 @@
   <%= hidden_field_tag :invite_code, @invite_code %>
   
   <%= render :partial => "/users/inputs", :locals => { :form => form } %>
-  <%= form.buttons do %>
-    <%= form.commit_button "Sign up" %>
+  <%= form.actions do %>
+    <%= form.action :submit, :label => "Sign up" %>
   <% end %>
 <% end %>
 

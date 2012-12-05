@@ -4,21 +4,21 @@ class StudiesControllerTest < ActionController::TestCase
 
   context 'with an admin user' do
     setup do 
-      sign_in_as(Factory.create :admin_user)
+      sign_in_as(FactoryGirl.create :admin_user)
     end
-    
+
     context "on GET to :index" do
       setup do
         get :index
       end
-      
+
       should respond_with :success
       should assign_to :study_roots
     end
-    
+
     context 'on GET to :edit' do
       setup do
-        @study = Factory.create(:study, :id => 3)
+        @study = FactoryGirl.create(:study, :id => 3)
         get :edit, :id => 3
       end
 
@@ -28,7 +28,7 @@ class StudiesControllerTest < ActionController::TestCase
 
     context 'on POST to :update' do
       setup do
-        @study = Factory.create(:study, :id => 3)
+        @study = FactoryGirl.create(:study, :id => 3)
         post :update, :id => 3
       end
 

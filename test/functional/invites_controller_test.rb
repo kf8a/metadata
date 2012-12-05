@@ -5,7 +5,7 @@ class InvitesControllerTest < ActionController::TestCase
   context 'as an admin' do
     setup do
       signed_in_as_admin
-      @invite = Factory.create :invite
+      @invite = FactoryGirl.create :invite
     end
 
     context 'GET :index' do
@@ -43,7 +43,7 @@ class InvitesControllerTest < ActionController::TestCase
 
     context 'POST :create' do
       setup do
-        post :create, :invite => { :email => Factory.next(:email) }
+        post :create, :invite => { :email => FactoryGirl.generate(:email) }
       end
 
       should 'redirect to show page' do

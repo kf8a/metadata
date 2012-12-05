@@ -1,10 +1,10 @@
 require File.expand_path('../../test_helper',__FILE__)
-require 'abstracts_controller'
+#require 'abstracts_controller'
 
 class AbstractsControllerTest < ActionController::TestCase
 
   def setup
-    @meeting = Factory.create(:meeting)
+    @meeting = FactoryGirl.create(:meeting)
 
     #TODO test with admin and non admin users
     signed_in_as_admin
@@ -50,7 +50,7 @@ class AbstractsControllerTest < ActionController::TestCase
 
   context "on GET to :show for an abstract" do
     setup do
-      @abstract = Factory.create(:abstract)
+      @abstract = FactoryGirl.create(:abstract)
       get :show, :id => @abstract
     end
 
@@ -59,7 +59,7 @@ class AbstractsControllerTest < ActionController::TestCase
 
   context "on GET to :edit for an abstract" do
     setup do
-      @abstract = Factory.create(:abstract)
+      @abstract = FactoryGirl.create(:abstract)
       get :edit, :id => @abstract
     end
 
@@ -68,7 +68,7 @@ class AbstractsControllerTest < ActionController::TestCase
 
   context "on PUT :update for an abstract" do
     setup do
-      @abstract = Factory.create(:abstract, :abstract => "The old boring abstract")
+      @abstract = FactoryGirl.create(:abstract, :abstract => "The old boring abstract")
     end
 
     context "with a valid change" do
@@ -94,7 +94,7 @@ class AbstractsControllerTest < ActionController::TestCase
 
   context "an abstract which exists" do
     setup do
-      @abstract = Factory.create(:abstract)
+      @abstract = FactoryGirl.create(:abstract)
     end
 
     context "on DELETE :destroy for the abstract" do

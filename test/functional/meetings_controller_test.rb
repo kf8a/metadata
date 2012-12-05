@@ -6,8 +6,8 @@ class MeetingsControllerTest < ActionController::TestCase
 
     #TODO test with admin and non admin users
     signed_in_as_admin
-    @venue_type = Factory :venue_type
-    @meeting = Factory :meeting
+    @venue_type = FactoryGirl.create :venue_type
+    @meeting = FactoryGirl.create :meeting
     @meeting.venue_type = @venue_type
   end
 
@@ -27,7 +27,7 @@ class MeetingsControllerTest < ActionController::TestCase
 
   context "on GET to :show for a meeting" do
     setup do
-      @meeting = Factory.create(:meeting)
+      @meeting = FactoryGirl.create :meeting
       get :show, :id => @meeting
     end
 
@@ -47,7 +47,7 @@ class MeetingsControllerTest < ActionController::TestCase
 
   context "on GET to :edit for a meeting" do
     setup do
-      @meeting = Factory.create(:meeting)
+      @meeting = FactoryGirl.create :meeting
       get :edit, :id => @meeting
     end
 
@@ -59,7 +59,7 @@ class MeetingsControllerTest < ActionController::TestCase
 
   context "on POST to :create with valid parameters" do
     setup do
-      venue = Factory.create(:venue_type)
+      venue = FactoryGirl.create :venue_type
       post :create, :meeting => {:venue_type_id => venue.id}
     end
 
@@ -81,7 +81,7 @@ class MeetingsControllerTest < ActionController::TestCase
 
   context "on PUT :update for a meeting" do
     setup do
-      @meeting = Factory.create(:meeting, :title => "The old boring title")
+      @meeting = FactoryGirl.create :meeting, :title => "The old boring title"
     end
 
     context "with a valid change" do
@@ -108,7 +108,7 @@ class MeetingsControllerTest < ActionController::TestCase
 
   context "a meeting which exists" do
     setup do
-      @meeting = Factory.create(:meeting)
+      @meeting = FactoryGirl.create(:meeting)
     end
 
     context "on DELETE :destroy for the abstract" do

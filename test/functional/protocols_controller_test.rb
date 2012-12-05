@@ -33,7 +33,7 @@ class ProtocolsControllerTest < ActionController::TestCase
 
     context 'POST with website' do
       setup do
-        @protocol = Factory.create(:protocol)
+        @protocol = FactoryGirl.create(:protocol)
         post :create, :id => @protocol, :websites=>['2']
       end
 
@@ -163,11 +163,11 @@ class ProtocolsControllerTest < ActionController::TestCase
 
   def generate_websites_and_protocols
     @website = Website.find_by_name('lter')
-    @protocol = Factory.create(:protocol, :title => 'lter_protocol')
+    @protocol = FactoryGirl.create(:protocol, :title => 'lter_protocol')
     @website.protocols << @protocol
     
     @glbrc_website = Website.find_by_name('glbrc')
-    @glbrc_protocol = Factory.create(:protocol, :title => 'glbrc protocol')
+    @glbrc_protocol = FactoryGirl.create(:protocol, :title => 'glbrc protocol')
     @glbrc_website.protocols << @glbrc_protocol
   end
 

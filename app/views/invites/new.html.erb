@@ -4,7 +4,7 @@
   <%= render "shared/error_messages", :target => @invite %>
   
   <%= invite.inputs :firstname, :lastname, :email, :glbrc_member %>
-  <%= invite.buttons %>
+  <%= invite.actions %>
 <% end %>
 
 <%= link_to 'Back', invites_path %>

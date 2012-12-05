@@ -288,7 +288,7 @@ class CitationsControllerTest < ActionController::TestCase
 
       should redirect_to('the sign in path') { sign_in_path }
       should_not assign_to(:citation)
-      
+
     end
 
     context 'DELETE' do
@@ -390,15 +390,6 @@ class CitationsControllerTest < ActionController::TestCase
       end
 
       should redirect_to('the citation page') { citation_url(assigns(:citation)) }
-    end
-
-    context 'POST: create with attachment' do
-      setup do
-        post :create, :citation => {:pdf => 'testing'}
-      end
-
-      should redirect_to('the citation page') {citation_url(assigns(:citation))}
-
     end
 
     context 'POST: create with type' do

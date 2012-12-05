@@ -29,7 +29,7 @@ class AffiliationsControllerTest < ActionController::TestCase
 
   context 'an affiliation exists.' do
     setup do
-      @affiliation = Factory.create(:affiliation)
+      @affiliation = FactoryGirl.create(:affiliation)
     end
 
     context "PUT :update to affiliation with valid attributes" do

@@ -14,17 +14,10 @@ gem 'paperclip'
 gem 'aws-s3'
 gem 'nokogiri'
 gem 'RedCloth'
-gem 'thinking-sphinx'
 gem 'liquid'
 gem 'formtastic'
 # can we go back to the collective idea branch of awesome_nested_set
 gem 'awesome_nested_set' #, :git => 'git://github.com/galetahub/awesome_nested_set.git'
-
-#gem 'acts_as_textcaptcha'
-
-gem 'unicorn'
-#gem 'puma'
-
 
 gem 'jquery-rails' #, '>= 1.0.12'
 
@@ -56,7 +49,6 @@ gem 'dalli'
 
 #gem 'central_logger'
 
-#gem "sitemap_generator", "~> 3.1.1"
 
 #for coffeescript
 gem 'therubyracer', :require => false
@@ -66,7 +58,15 @@ gem 'has_scope'
 
 gem 'ris_parser', :git => 'git://github.com/kf8a/ris_parser.git'
 
-gem 'exception_notification'
+gem 'thinking-sphinx'
+
+group :production do
+  #gem "sitemap_generator", "~> 3.1.1"
+  gem 'exception_notification'
+  gem 'unicorn'
+  #gem 'puma'
+end
+
 
 group :development, :test  do
   # bundler requires these gems in development

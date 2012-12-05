@@ -4,7 +4,7 @@ class TemplatesControllerTest < ActionController::TestCase
 
   context 'as an admin user' do
     setup do
-      @controller.current_user = Factory.create :admin_user
+      @controller.current_user = FactoryGirl.create :admin_user
     end
     context 'on GET to :index' do
       setup do 
@@ -27,7 +27,7 @@ class TemplatesControllerTest < ActionController::TestCase
 
     context 'on GET to :show' do
       setup do
-        template = Factory.create(:template)
+        template = FactoryGirl.create(:template)
         get :show, :id => template.id
       end
 

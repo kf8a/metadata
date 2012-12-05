@@ -24,8 +24,8 @@
     <%= form.input :openid_url, :required => false,  :wrapper_html => { :class => "openid" } %>
    
   <% end %>
-  <%= form.buttons do %>
-    <%= form.commit_button "Sign in" %>
+  <%= form.actions do %>
+    <%= form.action :submit, "Sign in" %>
   <% end %>
 <% end %>
 

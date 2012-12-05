@@ -9,7 +9,7 @@ class PagesControllerTest < ActionController::TestCase
 
     context 'GET :show' do
       setup do
-        @page = Factory.create :page
+        @page = FactoryGirl.create :page
         get :show, :id => @page
       end
 
@@ -34,7 +34,7 @@ class PagesControllerTest < ActionController::TestCase
 
     context 'GET: edit' do
       setup do
-        page = Factory.create :page
+        page = FactoryGirl.create :page
         get :edit, :id=> page
       end
 
@@ -43,7 +43,7 @@ class PagesControllerTest < ActionController::TestCase
 
     context 'POST :update' do
       setup do
-        @page = Factory.create :page
+        @page = FactoryGirl.create :page
         post :update, :id => @page, :title => 'something else'
       end
 
@@ -62,7 +62,7 @@ class PagesControllerTest < ActionController::TestCase
 
     context 'DELETE :destroy' do
       setup do
-        @page = Factory.create :page
+        @page = FactoryGirl.create :page
         delete :destroy, :id => @page
       end
 
@@ -85,7 +85,7 @@ class PagesControllerTest < ActionController::TestCase
 
     context 'GET :show' do
       setup do
-        @page = Factory.create(:page)
+        @page = FactoryGirl.create(:page)
         get :show, :id => @page
       end
 
@@ -102,7 +102,7 @@ class PagesControllerTest < ActionController::TestCase
 
     context 'POST :update' do
       setup do
-        @page = Factory.create :page
+        @page = FactoryGirl.create :page
         post :update, :id => @page, :title => 'something else'
       end
 

@@ -95,7 +95,7 @@ Metadata::Application.routes.draw do
 
   resources :visualizations, :only => 'show'
 
-  match "/application.manifest" => Rails::Offline
+#  match "/application.manifest" => Rails::Offline
 
   root :to => 'datatables#index'
   match ':controller/service.wsdl' => '#wsdl'

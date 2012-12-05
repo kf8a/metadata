@@ -4,8 +4,8 @@ class DatasetsControllerTest < ActionController::TestCase
 
 
   def setup
-    @dataset = Factory.create(:datatable).dataset
-    Factory.create(:dataset)
+    @dataset = FactoryGirl.create(:datatable).dataset
+    FactoryGirl.create(:dataset)
 
     #TODO test with admin and non admin users
     signed_in_as_admin
@@ -53,8 +53,8 @@ class DatasetsControllerTest < ActionController::TestCase
   context "an lter dataset" do
     setup do
       lter_website = Website.find_by_name('lter')
-      lter_website = Factory.create(:website, :name => 'lter') unless lter_website
-      @lterdataset = Factory.create(:dataset, :website => lter_website)
+      lter_website = FactoryGirl.create(:website, :name => 'lter') unless lter_website
+      @lterdataset = FactoryGirl.create(:dataset, :website => lter_website)
     end
 
     context "GET :show the dataset / 'glbrc' subdomain" do
@@ -106,8 +106,8 @@ class DatasetsControllerTest < ActionController::TestCase
 
   context 'GET index' do
     setup do
-      @dataset = Factory.create(:dataset)
-      Factory.create(:dataset)
+      @dataset = FactoryGirl.create(:dataset)
+      FactoryGirl.create(:dataset)
 
       get :index
     end
@@ -124,7 +124,7 @@ class DatasetsControllerTest < ActionController::TestCase
 
   context 'eml harvester document' do
     setup do
-      @dataset = Factory.create(:dataset)
+      @dataset = FactoryGirl.create(:dataset)
       get :index, :format => :eml
     end
 
@@ -133,7 +133,7 @@ class DatasetsControllerTest < ActionController::TestCase
 
   context "eml harvester document is used as parameter for index" do
     setup do
-      @dataset = Factory.create(:dataset)
+      @dataset = FactoryGirl.create(:dataset)
       get :index, :Dataset => @dataset
     end
 

@@ -4,9 +4,9 @@ class OwnershipsControllerTest < ActionController::TestCase
 
   context "a protected and owned datatable" do
     setup do
-      @datatable = Factory.create(:protected_datatable)
-      @owner = Factory.create(:email_confirmed_user)
-      Factory.create(:ownership, :user => @owner, :datatable => @datatable)
+      @datatable = FactoryGirl.create(:protected_datatable)
+      @owner = FactoryGirl.create(:email_confirmed_user)
+      FactoryGirl.create(:ownership, :user => @owner, :datatable => @datatable)
     end
 
     context "and not signed in at all" do
@@ -104,7 +104,7 @@ class OwnershipsControllerTest < ActionController::TestCase
       end
       context "and POST :create with a valid user" do
         setup do
-          @user = Factory.create(:email_confirmed_user)
+          @user = FactoryGirl.create(:email_confirmed_user)
           post :create, :datatable => @datatable, 'users' => ["#{@user.id}"]
         end
 
@@ -113,9 +113,9 @@ class OwnershipsControllerTest < ActionController::TestCase
 
       context "and POST :create with multiple users" do
         setup do
-          @user_1 = Factory.create(:email_confirmed_user)
-          @user_2 = Factory.create(:email_confirmed_user)
-          @user_3 = Factory.create(:email_confirmed_user)
+          @user_1 = FactoryGirl.create(:email_confirmed_user)
+          @user_2 = FactoryGirl.create(:email_confirmed_user)
+          @user_3 = FactoryGirl.create(:email_confirmed_user)
           post :create, :datatable => @datatable.id, 'users' => ["#{@user_1.id}", "#{@user_2.id}", "#{@user_3.id}"]
         end
 
@@ -129,12 +129,12 @@ class OwnershipsControllerTest < ActionController::TestCase
 
       context "and POST :create with multiple users and datatables" do
         setup do
-          @user_1 = Factory.create(:email_confirmed_user)
-          @user_2 = Factory.create(:email_confirmed_user)
-          @user_3 = Factory.create(:email_confirmed_user)
-          @datatable_1 = Factory.create(:protected_datatable)
-          @datatable_2 = Factory.create(:protected_datatable)
-          @datatable_3 = Factory.create(:protected_datatable)
+          @user_1 = FactoryGirl.create(:email_confirmed_user)
+          @user_2 = FactoryGirl.create(:email_confirmed_user)
+          @user_3 = FactoryGirl.create(:email_confirmed_user)
+          @datatable_1 = FactoryGirl.create(:protected_datatable)
+          @datatable_2 = FactoryGirl.create(:protected_datatable)
+          @datatable_3 = FactoryGirl.create(:protected_datatable)
           post :create, 'datatables' => ["#{@datatable_1.id}", "#{@datatable_2.id}", "#{@datatable_3.id}"], 'users' => ["#{@user_1.id}", "#{@user_2.id}", "#{@user_3.id}"]
         end
 
@@ -154,8 +154,8 @@ class OwnershipsControllerTest < ActionController::TestCase
 
       context "and a user owns the datatable" do
         setup do
-          @user = Factory.create(:email_confirmed_user)
-          Factory.create(:ownership,
+          @user = FactoryGirl.create(:email_confirmed_user)
+          FactoryGirl.create(:ownership,
                           :user => @user,
                           :datatable => @datatable)
         end
