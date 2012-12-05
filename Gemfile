@@ -33,8 +33,6 @@ gem 'parslet'
 # for creating bibtex formatted citations
 gem 'bibtex-ruby'
 
-#gem 'metric_fu'
-
 gem 'jammit'
 
 # versioning support for protocols
