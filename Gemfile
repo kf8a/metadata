@@ -65,15 +65,19 @@ group :production do
   #gem 'puma'
 end
 
+group :assets do
+  gem 'sass-rails', "  ~> 3.2.3"
+  gem 'coffee-rails', "~> 3.2.1"
+  gem 'uglifier', '>= 1.0.3'
+end
+
 
 group :development, :test  do
   # bundler requires these gems in development
   # gem "rails-footnotes"
   gem 'sqlite3-ruby'
-#  gem 'silent-postgres'
   gem "shoulda", :git => 'git://github.com/thoughtbot/shoulda.git' 
   gem 'rspec-rails'
-#  gem "rspec"
 #  gem "annotate"
 end
 
