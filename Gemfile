@@ -11,7 +11,7 @@ gem 'ruby-openid', :git => 'https://github.com/kf8a/ruby-openid.git'
 gem 'rack-openid'
 gem 'acts-as-taggable-on'
 gem 'paperclip' 
-gem 'aws-s3'
+#gem 'aws-s3'
 gem 'nokogiri'
 gem 'RedCloth'
 gem 'liquid'
@@ -89,7 +89,7 @@ group :test do
 
   gem "shoulda-matchers" # to use rspec like syntax
   gem 'factory_girl_rails' #, :require => false
-#  gem 'remarkable_activerecord', '>=4.0.0.alpha2'
+  # gem 'remarkable_activerecord', '>=4.0.0.alpha2'
 
   #Cucumber stuff
   gem 'capybara', '0.4.1.2'
