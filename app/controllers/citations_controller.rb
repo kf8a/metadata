@@ -9,7 +9,7 @@ class CitationsController < ApplicationController
   has_scope :by_date,   :as => :date
 
   def index
-    expires_in 6.minutes, :public=>true
+    # expires_in 6.minutes, :public=>true
     store_location
     case params[:type]
     when 'article' 
@@ -34,12 +34,26 @@ class CitationsController < ApplicationController
       citations = [Citation.from_website(website.id).by_treatment(params[:treatment])]
     end
  
+    cache_key = []
+    cache_key << params[:type] << params[:treatment]
+    @cache_key = cache_key.join('-')
+
     @submitted_citations = citations.collect {|c| c.includes(:authors).submitted}.flatten
     @forthcoming_citations = citations.collect {|c| c.includes(:authors).forthcoming}.flatten
     date = params[:date].presence
     @citations = date ? citations.collect {|c| c.by_date(date)}.flatten : citations.collect {|c| c.includes(:authors).published}.flatten
 
     index_responder
+  end
+
+  def index_by_treatment
+    @studies = Study.by_id
+
+    #@treatments  = Treatment.find(:all, :order => 'priority')
+    respond_to do |format|
+      format.html 
+      format.xml {render  :xml => @studies.to_xml}
+    end
   end
 
   def search

@@ -2,12 +2,14 @@
   <%= link_to_unless signed_in?, 'sign-in', sign_in_path %>
 </p>
 <%= render 'search_form', :word => @word, :type => @type, :sort_by => @sort_by %>
-<% cache :action=>'index',:action_suffix => @type do %>
+<% cache :action=>'index',:action_suffix => @cache_key do %>
+  <% if @forthcoming_citations.present? %>
 <h1 class='publication-section'>Forthcoming</h1>
 <p class='synopsis indent'>Papers accepted but not yet published.</p>
 <ul>
   <%= render :partial => 'citation', :collection => @forthcoming_citations, :locals => {:year => nil} %>
 </ul>
+<% end %>
 <h1 class='publication-section'>Published (alphabetical by year)</h1>
 <ul>
 <% year = 0 -%>

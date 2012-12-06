@@ -23,6 +23,7 @@ Metadata::Application.routes.draw do
       get :biblio
       get :search
       get :filtered
+      get :index_by_treatment
     end
   end
 
@@ -94,8 +95,6 @@ Metadata::Application.routes.draw do
   resources :variates
 
   resources :visualizations, :only => 'show'
-
-#  match "/application.manifest" => Rails::Offline
 
   root :to => 'datatables#index'
   match ':controller/service.wsdl' => '#wsdl'

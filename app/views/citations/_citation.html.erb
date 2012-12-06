@@ -9,7 +9,7 @@
         <p>
         <%=raw citation.formatted(:long=>true) %>
         </p>
-        
+
       <% if citation.pdf.exists? %>
         <div class='non-member'>
           <%= link_to 'abstract + pdf', citation_path(citation) %>
