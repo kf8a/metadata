@@ -413,14 +413,15 @@ class Citation < ActiveRecord::Base
   # use natural order for second and subsequent authors
   # 
   def author_string
-    if authors.length > 1
-      last_author = authors.pop
-      first_author = authors.shift
-      author_array = authors.collect {|author| "#{author.formatted(:natural)}"}
+    my_authors = authors.all
+    if my_authors.length > 1
+      last_author = my_authors.pop
+      first_author = my_authors.shift
+      author_array = my_authors.collect {|author| "#{author.formatted(:natural)}"}
       author_array.push("#{last_author.formatted(:natural)}.")
       author_array.unshift("#{first_author.formatted}")
     else
-      author_array = [authors.first.formatted]
+      author_array = [my_authors.first.formatted]
     end
     author_array.to_sentence(:two_words_connector => ', and ')
   end
