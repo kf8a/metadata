@@ -5,7 +5,8 @@ class ProtocolsControllerTest < ActionController::TestCase
   context 'an admin user' do
     setup do
       generate_websites_and_protocols
-      signed_in_as_admin
+      @admin = FactoryGirl.create  :admin_user
+      sign_in_as(@admin)
     end
 
     context 'GET: new' do
@@ -37,7 +38,10 @@ class ProtocolsControllerTest < ActionController::TestCase
         post :create, :id => @protocol, :websites=>['2']
       end
 
-      should assign_to :protocol
+      should 'assign to protocol ' do
+        assert assigns(:protocol)
+      end
+
       should redirect_to("the show page") {protocol_url(assigns(:protocol))}
     end
 
@@ -165,7 +169,7 @@ class ProtocolsControllerTest < ActionController::TestCase
     @website = Website.find_by_name('lter')
     @protocol = FactoryGirl.create(:protocol, :title => 'lter_protocol')
     @website.protocols << @protocol
-    
+
     @glbrc_website = Website.find_by_name('glbrc')
     @glbrc_protocol = FactoryGirl.create(:protocol, :title => 'glbrc protocol')
     @glbrc_website.protocols << @glbrc_protocol

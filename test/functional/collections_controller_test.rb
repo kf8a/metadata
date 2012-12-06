@@ -18,6 +18,8 @@ class CollectionsControllerTest < ActionController::TestCase
     end
 
     should respond_with :success
-    should assign_to(:collection).with(@collection)
+    should 'assign to collection' do
+      assert_equal @collection, assigns(:collection)
+    end
   end
 end

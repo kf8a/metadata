@@ -88,8 +88,12 @@ class PermissionsControllerTest < ActionController::TestCase
 
         should respond_with :success
         should render_template 'show'
-        should assign_to(:datatable).with(@datatable)
-        should assign_to(:permitted_users)
+        should 'assign to datatable' do
+          assert_equal @datatable, assigns(:datatable)
+        end
+        should 'assing to permitted_users' do
+          assert assigns(:permitted_users)
+        end
       end
 
       context "and GET :new permission for the datatable" do
@@ -99,7 +103,9 @@ class PermissionsControllerTest < ActionController::TestCase
 
         should respond_with :success
         should render_template 'new'
-        should assign_to(:datatable).with(@datatable)
+        should 'assign to datatable' do
+          assert_equal @datatable, assigns(:datatable)
+        end
       end
 
       context "and GET :new with invalid datatable param" do

@@ -46,7 +46,7 @@ class DatatablesControllerTest < ActionController::TestCase
         get :index, :requested_subdomain => 'glbrc'
       end
 
-      should render_template 'glbrc_index'
+      should render_template 'layout/glbrc'
       should "create index cache" do
         assert @controller.fragment_exist?(:controller => "datatables", :action => "index", :action_suffix => "glbrc")
       end
@@ -297,7 +297,7 @@ class DatatablesControllerTest < ActionController::TestCase
     assert_nil Datatable.find_by_name('a unique name')
     dataset = FactoryGirl.create(:dataset)
     datatable = Datatable.new(:title => 'soil pH', :dataset_id => dataset.id, :name => 'a unique name')
-    datatable.valid?
+    assert datatable.valid?
     assert_equal datatable.errors, {}
     old_count = Datatable.count
     post :create, :datatable => {:title => 'soil pH', :dataset_id => dataset.id, :name => 'a unique name' }

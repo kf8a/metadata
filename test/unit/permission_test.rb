@@ -89,10 +89,10 @@ class PermissionTest < ActiveSupport::TestCase
     end
 
     should 'allow permissions from multiple owners' do
-      user         = FactoryGirl.build :user
+      user         = FactoryGirl.create :user
 
-      owner2       = FactoryGirl.build :user
-      FactoryGirl.build :ownership, :user => owner2, :datatable => @datatable
+      owner2       = FactoryGirl.create :user
+      FactoryGirl.create :ownership, :user => owner2, :datatable => @datatable
       @datatable.reload
       assert_equal [@owner, owner2], @datatable.owners
 

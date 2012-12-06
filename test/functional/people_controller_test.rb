@@ -5,6 +5,10 @@ class PeopleControllerTest < ActionController::TestCase
 
   context 'not signed in' do
 
+    setup do
+      sign_out
+    end
+
      context "and GET :index" do
        setup do
          get :index

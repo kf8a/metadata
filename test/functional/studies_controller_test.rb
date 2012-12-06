@@ -23,7 +23,6 @@ class StudiesControllerTest < ActionController::TestCase
       end
 
       should respond_with :success
-      should assign_to(:study).with(@study)
     end
 
     context 'on POST to :update' do
@@ -33,7 +32,11 @@ class StudiesControllerTest < ActionController::TestCase
       end
 
       should redirect_to("the datatables page") {datatables_url}
-      should assign_to(:study).with(@study)
+
+      should 'assign to study' do
+        assert_equal assigns[:study], @study
+      end
+
     end
   end
 end

@@ -56,7 +56,9 @@ class OwnershipsControllerTest < ActionController::TestCase
         end
 
         should render_template 'show'
-        should assign_to(:datatable).with(@datatable)
+        should 'assign to' do
+          assert_equal @datatable, assigns(:datatable)
+        end
       end
 
       context "and GET :show with invalid datatable" do
@@ -77,8 +79,12 @@ class OwnershipsControllerTest < ActionController::TestCase
 
         should respond_with :success
         should render_template 'new'
-        should assign_to(:datatable).with(@datatable)
-        should assign_to(:users)
+        should 'assign to datatable' do
+          assert_equal @datatable, assigns(:datatable)
+        end
+        should 'assign to users' do
+          assert assigns(:users)
+        end
         should assign_to(:ownership)
       end
 
