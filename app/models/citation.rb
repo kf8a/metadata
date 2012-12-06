@@ -1,4 +1,4 @@
-# coding: utf-8
+# encoding: utf-8
 require 'bibtex'
 
 class Citation < ActiveRecord::Base

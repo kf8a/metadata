@@ -1,3 +1,4 @@
+# encoding: utf-8
 #require 'liquid_resolver'
 require 'subdomain_resolver'
 

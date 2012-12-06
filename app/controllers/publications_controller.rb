@@ -1,3 +1,4 @@
+# encoding: utf-8
 class PublicationsController < ApplicationController
 
   before_filter :admin?, :except => [:index, :show, :index_by_treatment]  if Rails.env == 'production'
