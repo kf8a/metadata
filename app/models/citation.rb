@@ -78,7 +78,7 @@ class Citation < ActiveRecord::Base
   end
 
   def Citation.by_treatment(treatment)
-    includes(:treatments).where('treatments.name = ?', treatment)
+    includes(:treatments).where('treatments.id = ?', treatment)
   end
 
   def Citation.from_website(website_id)
