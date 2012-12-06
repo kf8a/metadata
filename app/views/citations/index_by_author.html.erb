@@ -1,0 +1,12 @@
+<p>To download copies of listed articles you must first
+  <%= link_to_unless signed_in?, 'sign-in', sign_in_path %>
+</p>
+<%= render 'search_form', :word => @word, :type => @type, :sort_by => @sort_by %>
+<% cache :action=>'index',:action_suffix => @cache_key do %>
+<h1 class='publication-section'>Published (alphabetical by year)</h1>
+<ul>
+<% @citations.each do |citation| %>
+  <%= render 'citation', :citation=>citation, :year => nil%>
+<% end %>
+</ul>
+<% end %>

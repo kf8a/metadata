@@ -24,6 +24,7 @@ Metadata::Application.routes.draw do
       get :search
       get :filtered
       get :index_by_treatment
+      get :index_by_author
     end
   end
 

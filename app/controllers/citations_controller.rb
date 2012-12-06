@@ -1,3 +1,4 @@
+# encoding: utf-8
 class CitationsController < ApplicationController
   respond_to :html, :xml, :json
   layout :site_layout
@@ -9,7 +10,6 @@ class CitationsController < ApplicationController
   has_scope :by_date,   :as => :date
 
   def index
-    # expires_in 6.minutes, :public=>true
     store_location
     case params[:type]
     when 'article' 
@@ -26,7 +26,7 @@ class CitationsController < ApplicationController
       @type = 'ReportCitation'
     else 
       @type = nil
-#      citations = [website.article_citations, website.book_citations, website.chapter_citations, website.thesis_citations]
+      # citations = [website.article_citations, website.book_citations, website.chapter_citations, website.thesis_citations]
       citations = [website.citations.publications]
     end
 
@@ -54,6 +54,12 @@ class CitationsController < ApplicationController
       format.html 
       format.xml {render  :xml => @studies.to_xml}
     end
+  end
+
+  def index_by_author
+      citations = [website.citations.publications]
+      @citations = citations.collect {|c| c.includes(:authors).published}.flatten.sort {|a,b| a.authors.first.try(:sur_name) <=> b.authors.first.try(:sur_name) }
+      index_responder
   end
 
   def search
