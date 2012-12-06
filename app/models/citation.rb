@@ -43,6 +43,7 @@ class Citation < ActiveRecord::Base
     set_property :min_infix_len => 1
   end
 
+  attr_accessible :tag
   attr_protected :pdf_file_name, :pdf_content_type, :pdf_size
 
   # the REAL publications not including reports

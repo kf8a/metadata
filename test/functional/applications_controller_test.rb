@@ -43,7 +43,9 @@ class ApplicationControllerTest < ActionController::TestCase
 
       context "when a non-admin is logged in" do
         setup do
-          @controller.current_user = User.new(:role => 'notadmin')
+          user = User.new()
+          user.role = 'nonadmin'
+          @controller.current_user = user
           get :testadmin
         end
 

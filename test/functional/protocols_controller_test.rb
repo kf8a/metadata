@@ -75,13 +75,6 @@ class ProtocolsControllerTest < ActionController::TestCase
 
     end
 
-    context 'DESTROY' do
-      setup do
-        delete :destroy, :id => @protocol
-      end
-
-      should redirect_to('the index page') {protocols_path}
-    end
   end
 
   context 'a anonymous user' do

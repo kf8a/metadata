@@ -78,17 +78,6 @@ class ProtocolsController < ApplicationController
     respond_with @protocol
   end
 
-  # DELETE /protocols/1
-  # DELETE /protocols/1.xml
-  def destroy
-    @protocol.destroy
-
-    respond_to do |format|
-      format.html { redirect_to protocols_url }
-      format.xml  { head :ok }
-    end
-  end
-  
   private
 
   def set_title
