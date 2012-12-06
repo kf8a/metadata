@@ -62,6 +62,7 @@ group :production do
   #gem "sitemap_generator", "~> 3.1.1"
   gem 'exception_notification'
   gem 'unicorn'
+  gem 'aws-sdk'
   #gem 'puma'
 end
 
