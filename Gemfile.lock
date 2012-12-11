@@ -142,6 +142,8 @@ GEM
     faraday_middleware (0.9.0)
       faraday (>= 0.7.4, < 0.9)
     ffi (1.2.0)
+    foreigner (1.2.1)
+      activerecord (>= 3.0.0)
     formtastic (2.2.1)
       actionpack (>= 3.0)
     friendly_id (4.0.9)
@@ -338,6 +340,7 @@ DEPENDENCIES
   database_cleaner
   exception_notification
   factory_girl_rails
+  foreigner
   formtastic
   friendly_id
   has_scope
