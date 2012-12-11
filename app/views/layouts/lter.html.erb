@@ -48,10 +48,10 @@
           <div id="inner" class="metadata <%= controller.controller_name %> <%= controller.action_name%>">
             <div class="wrap">	
               <div id="content-sidebar-wrap">
+                <article id='metadata' class='hfeed'>
+                <%= yield %>
+                </article>
               </div><!-- end #content-sidebar-wrap -->
-              <div id='metadata'>
-              <%= yield %>
-            </div>
             </div><!-- end .wrap -->
           </div><!-- end #inner -->
         </div><!-- end #wrap -->

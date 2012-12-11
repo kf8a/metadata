@@ -1,4 +1,9 @@
 <% cache(:action_suffix => 'page') do %>
+  <%= render 'shared/breadcrumbs',
+    :crumbs => [{:name => controller_name.upcase, :url =>  url_for(:controller => controller_name, :action => 'index')},
+      {:name => datatable.title.upcase}] %>
+
+  <div class='page type-page hfeed'>
   <h1><%=raw datatable.title %></h1>
 
   <p class='description'>
@@ -127,3 +132,4 @@
 
 <%= link_to 'Back to Data Catalog', datatables_path() %>&nbsp;&nbsp;
 <%= link_to 'Edit', edit_datatable_path(datatable) if admin? %>
+</div>

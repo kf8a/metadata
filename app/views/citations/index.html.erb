@@ -1,3 +1,4 @@
+<%= render 'shared/breadcrumbs', :crumbs => [{:name => controller_name.upcase}] %>
 <p>To download copies of listed articles you must first
   <%= link_to_unless signed_in?, 'sign-in', sign_in_path %>
 </p>

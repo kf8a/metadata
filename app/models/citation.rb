@@ -290,6 +290,14 @@ class Citation < ActiveRecord::Base
     classes.collect { |klass| [klass.gsub(/Citation/,''), klass] }
   end
 
+  def short_author_string
+    if authors.length > 3
+      return authors.first.formatted + ', et.al. '
+    else 
+      author_string
+    end
+  end
+
   private
 
   def bibtex_type
@@ -399,14 +407,6 @@ class Citation < ActiveRecord::Base
       authors.empty? ? "#{pub_year_with_punctuation}" : "#{author_string} #{pub_year_with_punctuation}".rstrip
     else
       authors.empty? ? "#{pub_year_with_punctuation}" : "#{short_author_string} #{pub_year_with_punctuation}".rstrip
-    end
-  end
-
-  def short_author_string
-    if authors.length > 3
-      return authors.first.formatted + ', et.al. '
-    else 
-      author_string
     end
   end
 

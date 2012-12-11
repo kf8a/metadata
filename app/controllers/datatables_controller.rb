@@ -10,11 +10,11 @@ class DatatablesController < ApplicationController
   # GET /datatables
   # GET /datatables.xml
   def index
-    expires_in 6.minutes, :public=>true
+    # expires_in 6.minutes, :public=>true
     store_location
     retrieve_datatables('keyword_list' =>'')
 
-    if stale? etag: @datatables
+    if Rails.env == 'production' and stale? etag: @datatables
       respond_with @datatables do |format|
         format.rss {render :rss => @datatables}
       end
@@ -48,7 +48,7 @@ class DatatablesController < ApplicationController
 
     store_location #in case we have to log in and come back here
     if datatable.dataset.valid_request?(@subdomain_request)
-      if stale? etag: [datatable, current_user]
+      if Rails.env=='production' and stale? etag: [datatable, current_user]
         respond_to do |format|
           format.html
           format.xml

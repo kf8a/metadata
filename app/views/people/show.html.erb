@@ -1,3 +1,7 @@
+<%= render 'shared/breadcrumbs',
+  :crumbs => [{:name => controller_name.upcase, :url =>  url_for(:controller => controller_name, :action => 'index')},
+    {:name => @person.full_name.upcase}] %>
+
 <% if @person.only_emeritus? %>
   <%= render 'emeritus', :person => @person %>
 <% else %>

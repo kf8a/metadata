@@ -1,4 +1,7 @@
 <% cache do %>
+  <%= render 'shared/breadcrumbs',
+    :crumbs => [{:name => controller_name.upcase, :url =>  url_for(:controller => controller_name, :action => 'index')},
+      {:name => @citation.short_author_string.upcase}] %>
   <h3><%= raw @citation.formatted(:long=>true)  %></h3>
   <p><%=raw textilize(@citation.abstract) %></p>
   <% if @citation.doi %>

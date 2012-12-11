@@ -2,7 +2,6 @@
 
 require 'rexml/document'
 require 'csv'
-require 'iconv'
 require 'eml'
 include REXML
 
@@ -280,7 +279,7 @@ class Datatable < ActiveRecord::Base
     result = ""
     result =  header + csv_string
     # if is_utf_8
-    #   result = Iconv.conv('utf-16','utf-8', result)
+    #   result = result.encode('utf-16','utf-8')
     # end
     result
   end

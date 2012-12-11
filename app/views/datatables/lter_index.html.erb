@@ -1,4 +1,6 @@
 <% cache(:action_suffix => "lter") do %>
+  <%= render 'shared/breadcrumbs', :crumbs => [{:name => controller_name.upcase}] %>
+  <div class='page type-page hfeed'>
   <h1>Table of Contents</h1>
 
   <p id='datatable-intro'>
@@ -14,6 +16,7 @@
       <%= render 'study', :study => study, :themes => @themes, :datatables => @datatables %>
     <% end -%>
   </ul>
+</div>
 <% end %>
 
 <% if admin? %>

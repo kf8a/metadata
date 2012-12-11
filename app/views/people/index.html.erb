@@ -1,3 +1,4 @@
+<%= render 'shared/breadcrumbs', :crumbs => [{:name => controller_name.upcase}] %>
 <p>categorical <%= link_to 'alphabetical', {:action => :alphabetical} %></p>
 
 <% @roles.each do |role| -%>

@@ -1,3 +1,6 @@
+<%= render 'shared/breadcrumbs',
+  :crumbs => [{:name => controller_name.upcase, :url =>  url_for(:controller => controller_name, :action => 'index')},
+    {:name => @protocol.title.upcase}] %>
 <% cache do %>
   <h1><%= link_to "#{@protocol.dataset}: ", @protocol.dataset if @protocol.dataset %><%=raw @protocol.title %></h1>
   <p class='notice'>
