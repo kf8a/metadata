@@ -13,6 +13,7 @@ FactoryGirl.define do
 
   factory :citation do
     website   Website.find_by_name('lter')
+    authors   [FactoryGirl.build(:author)]
   end
 
   factory :article_citation do

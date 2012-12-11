@@ -42,10 +42,14 @@ Download citation to
 
 <%= link_to 'back to index', citations_path %>
 
-<% if signed_in? and current_user.role == 'admin' %>
-  <%= link_to 'Previous', citation_path(@website.citations.previous(@citation).first) %>
+<% if signed_in? and current_user.role == 'admin' or Rails.env == 'development' -%>
+  <% if @website.citations.first != @citation -%>
+    <%= link_to 'Previous', citation_path(@website.citations.previous(@citation).first) %>
+  <% end -%>
   <%= link_to 'Edit', edit_citation_path(@citation) %>
-  <%= link_to 'Next', citation_path(@website.citations.next(@citation).first) %>
+  <% if @website.citations.last != @citation -%>
+    <%= link_to 'Next', citation_path(@website.citations.next(@citation).first) %>
+  <% end -%>
   <%= button_to 'Delete', { :action => "destroy", :id => @citation.id },
     :confirm => "Are you sure?", :method => :delete  %>
 <% end %>

@@ -20,6 +20,8 @@ class Citation < ActiveRecord::Base
   accepts_nested_attributes_for :authors
   accepts_nested_attributes_for :editors
 
+  validates_presence_of :authors
+
   if Rails.env.production?
     has_attached_file :pdf,
         :storage => :s3,
@@ -89,6 +91,7 @@ class Citation < ActiveRecord::Base
     query_date = Date.civil(date['year'].to_i,date['month'].to_i,date['day'].to_i)
     where('updated_at > ?', query_date)
   end
+
 
   def Citation.to_enw(array_of_citations)
     array_of_citations.collect { |citation| citation.to_enw }.join("\r\n\r\n")
@@ -293,8 +296,10 @@ class Citation < ActiveRecord::Base
   def short_author_string
     if authors.length > 3
       return authors.first.formatted + ', et.al. '
-    else 
+    elsif authors.length > 0
       author_string
+    else
+      ''
     end
   end
 
@@ -421,7 +426,7 @@ class Citation < ActiveRecord::Base
       author_array.push("#{last_author.formatted(:natural)}.")
       author_array.unshift("#{first_author.formatted}")
     else
-      author_array = [my_authors.first.formatted]
+      author_array = [authors.first.formatted]
     end
     author_array.to_sentence(:two_words_connector => ', and ')
   end
