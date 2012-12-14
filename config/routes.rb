@@ -76,6 +76,7 @@ Metadata::Application.routes.draw do
   resources :publications do
     collection do
       get :index_by_treatment
+      get :remaining
     end
   end
 

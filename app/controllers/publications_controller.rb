@@ -37,6 +37,10 @@ class PublicationsController < ApplicationController
     @publications = Publication.find_by_word(@word) if @word
   end
 
+  def remaining
+    @publications = Publication.where(:deprecated => false).all
+  end
+
   def index_by_treatment
     @studies = Study.by_id
 
