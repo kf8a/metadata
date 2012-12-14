@@ -382,7 +382,7 @@ class CitationsControllerTest < ActionController::TestCase
 
     context 'POST: create' do
       setup do
-        post :create
+        post :create,:citation => {:author_block => 'Jim Jones'}
       end
 
       should 'create a citation for the website currently using' do
@@ -394,7 +394,7 @@ class CitationsControllerTest < ActionController::TestCase
 
     context 'POST: create with type' do
       setup do
-        post :create, :citation => {:type => 'ArticleCitation'}
+        post :create, :citation => {:type => 'ArticleCitation', :author_block => 'Jim Jones'}
       end
 
       should assign_to(:citation)
@@ -428,8 +428,8 @@ class CitationsControllerTest < ActionController::TestCase
                                                         :type=>'ArticleCitation' }
       end
 
-      should redirect_to('the citation page') {citation_url(assigns(:citation))}
       should assign_to(:citation)
+      should respond_with :success
 
       should 'assign a type of ArticleCitation' do
         assert_equal 'ArticleCitation', assigns(:citation).type
@@ -437,10 +437,6 @@ class CitationsControllerTest < ActionController::TestCase
 
       should 'actually save the title' do
         assert_equal 'nothing', assigns(:citation).title
-      end
-
-      should 'set the type to article' do
-        assert_kind_of ArticleCitation, Citation.find(assigns(:citation).id)
       end
     end
 
@@ -457,7 +453,7 @@ class CitationsControllerTest < ActionController::TestCase
       Rails.cache.clear
       @citation = FactoryGirl.create :citation
       get :index
-      assert @controller.fragment_exist?(:controller => "citations", :action => "index")
+      assert @controller.fragment_exist?(:action => "index", :action_suffix=>'-')
       put :update, :id => @citation, :citation => { :title => 'nothing' }
       assert_equal @citation, assigns(:citation)
       assert Citation.find_by_title('nothing')
@@ -467,7 +463,7 @@ class CitationsControllerTest < ActionController::TestCase
     should 'test_caching_and_expiring_for_create' do
       Rails.cache.clear
       get :index
-      assert @controller.fragment_exist?(:controller => "citations", :action => "index")
+      assert @controller.fragment_exist?(:controller => "citations", :action => "index", :action_suffix => '')
       post :create, :citation => { :title => 'a brand new citation' }
       assert Citation.find_by_title('a brand new citation')
       assert !@controller.fragment_exist?(:controller => "citations", :action => "index")

@@ -35,6 +35,7 @@ class DatatablesControllerTest < ActionController::TestCase
         get :index, :requested_subdomain => 'lter'
       end
 
+      should render_with_layout 'layout/lter'
       should render_template 'lter_index'
       should "create index cache" do
         assert @controller.fragment_exist?(:controller => "datatables", :action => "index", :action_suffix => "lter")
@@ -300,7 +301,7 @@ class DatatablesControllerTest < ActionController::TestCase
     assert datatable.valid?
     assert_equal datatable.errors, {}
     old_count = Datatable.count
-    post :create, :datatable => {:title => 'soil pH', :dataset_id => dataset.id, :name => 'a unique name' }
+    post :create, :datatable => {:title => 'soil pH 2', :dataset_id => dataset.id, :name => 'a unique name' }
     assert_equal old_count+1, Datatable.count
 
     assert_redirected_to datatable_path(assigns(:datatable))
