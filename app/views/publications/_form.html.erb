@@ -1,27 +1,16 @@
 <p>
-	<label for='publication_year'>Year</label>
-	<%= f.text_field :year%>
+<%= @publication.citation  %>
 </p>
 <p>
-	<label for='publication_citation'>Citation</label>
-	<%= f.text_area :citation , :size => '50x5'%>
+	<%= @publication.abstract %>
 </p>
 <p>
-	<label for='publication_type'>Publication Type</label>
-	<%= f.select :publication_type_id, publication_types %>
+Treatments used:
+	<% @publication.treatments.each do |treatment| -%>
+	<%= treatment.name %>&nbsp;
+	<% end %>
 </p>
 <p>
-	<label for='publication_abstract'>Abstract</label>
-	<%= f.text_area :abstract, :size => '60x20'%>
-</p>
-<p>
-	<label for='publication_article'>Article:  <%= link_to publication.filename, publication.public_filename if publication.filename %></label>
-	<%= f.file_field :uploaded_data %>
-</p>
-
-<p>
-	Treatment associations:
-	<% treatments.each do |treatment| -%>
-		<%= treatment.name %><%= check_box_tag 'publication[treatment_ids][]', treatment.id, publication.treatments.include?(treatment) %>
-	<% end -%>
+<label> Deprecated </label>
+<%= f.check_box :deprecated  %>
 </p>
