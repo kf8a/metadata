@@ -1,0 +1,6 @@
+<% @publications.each do |pub| %>
+  <p>
+  <%= pub.citation %>
+  <%= link_to 'edit', edit_publication_path(pub) %>
+  </p>
+<% end %> 

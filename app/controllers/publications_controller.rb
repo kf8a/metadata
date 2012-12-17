@@ -89,35 +89,36 @@ class PublicationsController < ApplicationController
 
   # # PUT /publications/1
   # # PUT /publications/1.xml
-  # def update
-  #   @publication = Publication.find(params[:id])
-  #   @publication.treatments.clear
-  #   if @publication.update_attributes(params[:publication])
-  #     expire_action :action => :index
-  #     flash[:notice] = 'Publication was successfully updated.'
-  #   else
-  #     get_form_data
-  #   end
-  #   respond_with @publication
-  # end
+  def update
+    @publication = Publication.find(params[:id])
+    @publication.deprecated = params[:publication][:deprecated]
+    # @publication.treatments.clear
+    if @publication.save
+      # expire_action :action => :index
+      flash[:notice] = 'Publication was successfully updated.'
+    else
+      get_form_data
+    end
+    redirect_to :action => :remaining
+  end
 
   # DELETE /publications/1
   # DELETE /publications/1.xml
-  def destroy
-    @publication.destroy
+  # def destroy
+  #   @publication.destroy
 
-    expire_action :action => :index
+  #   expire_action :action => :index
 
-    respond_to do |format|
-      format.html { redirect_to publications_url }
-      # format.js  do
-      #   render :update do |page|
-      #     page.visual_effect :fade, @publication
-      #   end
-      # end
-      format.xml  { head :ok }
-    end
-  end
+  #   respond_to do |format|
+  #     format.html { redirect_to publications_url }
+  #     # format.js  do
+  #     #   render :update do |page|
+  #     #     page.visual_effect :fade, @publication
+  #     #   end
+  #     # end
+  #     format.xml  { head :ok }
+  #   end
+  # end
 
   private
 
