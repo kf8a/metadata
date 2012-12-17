@@ -38,7 +38,7 @@ class PublicationsController < ApplicationController
   end
 
   def remaining
-    @publications = Publication.where(:deprecated => false).all
+    @publications = Publication.where('publication_type_id <> 6').where(:deprecated => false)
   end
 
   def index_by_treatment
