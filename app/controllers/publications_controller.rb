@@ -38,7 +38,7 @@ class PublicationsController < ApplicationController
   end
 
   def remaining
-    @publications = Publication.where('publication_type_id <> 6').where(:deprecated => false).where('abstract is not null')
+    @publications = Publication.where('publication_type_id <> 6').where(:deprecated => false).joins('join publications_treatments on publications_treatments.publication_id=publications.id').where('abstract is not null').uniq
   end
 
   def index_by_treatment
