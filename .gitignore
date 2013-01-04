@@ -1,6 +1,7 @@
 *emfile.lock
 db/meta_*
 .yardoc
+.bin/
 db/*.sqlite3
 db/sphinx
 log/
