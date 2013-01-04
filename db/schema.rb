@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120905200040) do
+ActiveRecord::Schema.define(:version => 20121210165342) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -31,6 +31,15 @@ ActiveRecord::Schema.define(:version => 20120905200040) do
 
 # Could not dump table "areas" because of following StandardError
 #   Unknown type 'geometry' for column 'the_geom'
+
+# Could not dump table "areas_temporary" because of following StandardError
+#   Unknown type 'geometry' for column 'the_geom'
+
+  create_table "auditlog", :id => false, :force => true do |t|
+    t.integer  "datatable_id"
+    t.datetime "datetime"
+    t.text     "message"
+  end
 
   create_table "authors", :force => true do |t|
     t.string   "sur_name"
@@ -228,12 +237,13 @@ ActiveRecord::Schema.define(:version => 20120905200040) do
 
   add_index "datatables", ["core_area_id"], :name => "index_datatables_on_core_area_id"
   add_index "datatables", ["dataset_id"], :name => "index_datatables_on_dataset_id"
+  add_index "datatables", ["name"], :name => "datatables_name_key", :unique => true
   add_index "datatables", ["study_id"], :name => "index_datatables_on_study_id"
   add_index "datatables", ["theme_id"], :name => "index_datatables_on_theme_id"
 
   create_table "datatables_protocols", :id => false, :force => true do |t|
-    t.integer "datatable_id"
-    t.integer "protocol_id"
+    t.integer "datatable_id", :null => false
+    t.integer "protocol_id",  :null => false
   end
 
   add_index "datatables_protocols", ["datatable_id"], :name => "index_datatables_protocols_on_datatable_id"
@@ -288,6 +298,9 @@ ActiveRecord::Schema.define(:version => 20120905200040) do
     t.integer "coord_dimension",                  :null => false
     t.integer "srid",                             :null => false
     t.string  "type",              :limit => 30,  :null => false
+  end
+
+  create_table "glbrc_scaleup", :id => false, :force => true do |t|
   end
 
   create_table "invites", :force => true do |t|
@@ -430,6 +443,7 @@ ActiveRecord::Schema.define(:version => 20120905200040) do
     t.string  "url"
     t.boolean "deceased"
     t.string  "open_id"
+    t.boolean "is_postdoc"
   end
 
   create_table "permission_requests", :force => true do |t|
@@ -465,7 +479,7 @@ ActiveRecord::Schema.define(:version => 20120905200040) do
   create_table "protocols", :force => true do |t|
     t.string  "name"
     t.string  "title"
-    t.integer "version_tag"
+    t.integer "version_tag",    :default => 1
     t.date    "in_use_from"
     t.date    "in_use_to"
     t.text    "description"
@@ -691,6 +705,7 @@ ActiveRecord::Schema.define(:version => 20120905200040) do
     t.float   "multiplier_to_si"
     t.string  "abbreviation",           :limit => nil
     t.string  "label"
+    t.float   "offset_to_si"
   end
 
   add_index "units", ["name"], :name => "unit_names_key", :unique => true
@@ -789,5 +804,13 @@ ActiveRecord::Schema.define(:version => 20120905200040) do
     t.text     "data_catalog_intro"
     t.text     "url"
   end
+
+  add_foreign_key "authors", "citations", :name => "authors_citation_id_fkey"
+
+  add_foreign_key "datatables", "datasets", :name => "datasets_datatables"
+
+  add_foreign_key "editors", "citations", :name => "editors_citation_id_fkey"
+
+  add_foreign_key "variates", "units", :name => "variates_unit_id_fkey"
 
 end

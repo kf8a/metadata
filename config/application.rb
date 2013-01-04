@@ -41,6 +41,8 @@ module Metadata
 
     config.cache_store = :file_store, "tmp/cache"
 
+    config.active_record.schema_format = :sql
+
     # Enable the asset pipeline
     # config.assets.enabled = true
   end
