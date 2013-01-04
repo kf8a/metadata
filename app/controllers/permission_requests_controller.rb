@@ -1,7 +1,9 @@
 class PermissionRequestsController < ApplicationController
 
   before_filter :authorize
-  
+
+  respond_to :js
+
   def create
     user = current_user
     @datatable = Datatable.find(params[:datatable])

@@ -22,9 +22,10 @@
                     'Request Data',
                     :body => "Thanks for your interest in the  GLBRC data. This email is addressed to the Lead Investigators of the data table that you requested. Please let them know how you would like to use the data and what institution you are from. The lead investigators plan to respond promptly to requests. If you do not receive an email within the next several days then you are welcome to contact the GLBRC data coordinator (glbrc.data@kbs.msu.edu) so she can follow up on your request.\nData requested: http://#{website.name}.kbs.msu.edu#{url_for(datatable)}",
                     :subject => 'GLBRC data request',
-                    :class => 'download-link',
                     :encode => 'hex',
-                    :id => 'premission-request'%>
+                    :class => 'download-link',
+                    :data => {:datatableid => datatable.id},
+                    :id => 'permission-request'%>
                     <%# remote_function(:url => {:controller => 'permission_requests', :action => 'create', :datatable => datatable.id}) %1> %>
         <% end %>
       <% else %>

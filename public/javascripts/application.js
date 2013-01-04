@@ -17,6 +17,13 @@ jQuery(document).ready(function() {
 
 	geo_decode();
 
+  // add post to permission controller
+  jQuery('#permission-request').bind('click', function() {
+    console.log(jQuery(this).data('datatableid'));
+    jQuery.post('/permission_requests',
+        {datatable: jQuery(this).data('datatableid')});
+  });
+
 	jQuery('.quickTree').quickTree();
 	jQuery('.collapsable').collapseDiv();
 
