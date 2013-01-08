@@ -93,7 +93,7 @@ class DatatablesController < ApplicationController
     @core_areas = CoreArea.by_name.collect { |area| [area.name, area.id] }
     @studies = Study.all.collect{ |study| [study.name, study.id] }
     @people = Person.all
-    @units = Unit.all
+    # @units = Unit.order(:name).all
   end
 
   # POST /datatables
