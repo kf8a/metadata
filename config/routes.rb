@@ -24,7 +24,10 @@ Metadata::Application.routes.draw do
       get :search
       get :filtered
       get :index_by_treatment
+      get 'index_by_treatment/:treatment', :action => :index
       get :index_by_author
+      get :index_by_type
+      get 'index_by_type/:type', :action => :index
     end
   end
 
@@ -73,10 +76,10 @@ Metadata::Application.routes.draw do
   resources :permission_requests, :only => :create
   resources :projects
   resources :protocols
+
   resources :publications do
-    collection do
+    collection do 
       get :index_by_treatment
-      get :remaining
     end
   end
 

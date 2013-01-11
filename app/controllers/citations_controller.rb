@@ -33,10 +33,6 @@ class CitationsController < ApplicationController
     if params[:treatment]
       citations = [Citation.from_website(website.id).by_treatment(params[:treatment])]
     end
- 
-    cache_key = []
-    cache_key << params[:type] << params[:treatment]
-    @cache_key = cache_key.join('-')
 
     @submitted_citations = citations.collect {|c| c.includes(:authors).submitted}.flatten
     @forthcoming_citations = citations.collect {|c| c.includes(:authors).forthcoming}.flatten
