@@ -2,7 +2,8 @@ require 'eml'
 
 class Protocol < ActiveRecord::Base
   attr_accessible  :theme_list, :title, :description, :updated_by, :body, :abstract, :dataset_id,
-      :in_use_from, :in_use_to, :tag
+      :in_use_from, :in_use_to, :tag, :website_ids, :name, :person_ids, :datatable_ids, :change_summary
+
   acts_as_taggable_on :themes
   belongs_to :dataset
   has_and_belongs_to_many :websites
