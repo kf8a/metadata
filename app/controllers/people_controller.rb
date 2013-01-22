@@ -1,9 +1,9 @@
 class PeopleController < ApplicationController
-  
+  helper_method :people, :person
   before_filter :admin?, :except => [:index, :show, :alphabetical, :emeritus] unless Rails.env == 'development'
-  before_filter :get_person, :only => [:show, :edit, :update, :destroy]
-  before_filter :get_people, :only => [:index, :alphabetical, :emeritus, :show_all]
-  
+  # before_filter :get_person, :only => [:show, :edit, :update, :destroy]
+  # before_filter :get_people, :only => [:index, :alphabetical, :emeritus, :show_all]
+
   cache_sweeper :people_sweeper
   caches_action :index, :alphabetical, :emeritus
 
@@ -17,28 +17,27 @@ class PeopleController < ApplicationController
       format.html # index.rhtml
       format.xml  { render :xml => @people.to_xml }
     end
-  end  
-  
+  end
+
   def alphabetical
     @title = 'KBS LTER Directory (alphabetical)'
     respond_to do |format|
       format.html # index.rhtml
       format.xml  { render :xml => @people.to_xml }
     end
-  end  
-  
+  end
+
   def emeritus
     @roles = RoleType.find_by_name('lter').roles.order('seniority').where('name like ?','Emeritus%')
     respond_to do |format|
       format.html # emeritus.rhtml
       format.xml  { render :xml => @people.to_xml }
     end
-    
   end
 
   def show_all
   end
-  
+
   # GET /people/1
   # GET /people/1.xml
   def show
@@ -86,7 +85,7 @@ class PeopleController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   private 
   def set_title
     if @subdomain_request == "lter"
@@ -95,12 +94,12 @@ class PeopleController < ApplicationController
       @title = 'GLBRC Directory'
     end
   end
-  
-  def get_people
-    @people = Person.by_sur_name
+
+  def people
+    Person.by_sur_name
   end
-  
-  def get_person
-    @person = Person.find(params[:id])
+
+  def person
+    Person.find(params[:id])
   end
 end

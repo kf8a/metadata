@@ -1,43 +1,43 @@
 <%= render 'shared/breadcrumbs',
   :crumbs => [{:name => controller_name.upcase, :url =>  url_for(:controller => controller_name, :action => 'index')},
-    {:name => @person.full_name.upcase}] %>
+    {:name => person.full_name.upcase}] %>
 
-<% if @person.only_emeritus? %>
-  <%= render 'emeritus', :person => @person %>
+<% if person.only_emeritus? %>
+  <%= render 'emeritus', :person => person %>
 <% else %>
   <ul>
-    <li class='person-name'><%= @person.expanded_name %></li>
-    <% if @person.title? -%>
-      <li class='person_title'><%= @person.title %></li>
+    <li class='person-name'><%= person.expanded_name %></li>
+    <% if person.title? -%>
+      <li class='person_title'><%= person.title %></li>
     <% end -%>
-    <% if @person.sub_organization? -%>
-      <li><%= @person.sub_organization %></li>
+    <% if person.sub_organization? -%>
+      <li><%= person.sub_organization %></li>
     <% end -%>
-    <% if @person.organization? -%>
-      <li><%= @person.organization%></li>
+    <% if person.organization? -%>
+      <li><%= person.organization%></li>
     <% end -%>
-    <% if @person.complete_address? %>
-      <li class='address'><%= @person.address %></li>
+    <% if person.complete_address? %>
+      <li class='address'><%= person.address %></li>
     <% end -%>
 	
-    <% if @person.email? -%>
-      <li class='person-email'><%=contact_link(@person.email) %></li>
+    <% if person.email? -%>
+      <li class='person-email'><%=contact_link(person.email) %></li>
     <% end -%>
-    <% if @person.phone? -%>
+    <% if person.phone? -%>
       <li>
-      	<%= @person.phone %>
-        <% if @person.fax? %>
-          | fax: <%= @person.fax %>
+      	<%= person.phone %>
+        <% if person.fax? %>
+          | fax: <%= person.fax %>
         <% end %>
       </li>
     <% end -%>
-    <% if @person.url? -%>
-      <li><%= link_to "#{@person.url.gsub(/http:\/\//,'')}", @person.url%></li>
+    <% if person.url? -%>
+      <li><%= link_to "#{person.url.gsub(/http:\/\//,'')}", person.url%></li>
     <% end -%>
 
   </ul>
 
-  <% committees = @person.get_committee_roles -%>
+  <% committees = person.get_committee_roles -%>
   <% if committees.present? %>
     <ul>
       Committees:
@@ -48,6 +48,6 @@
   <% end %>
 <% end %>
 	
-<%= link_to 'Edit', edit_person_path(@person) if signed_in? %> |
-<%= link_to 'Delete', person_path(@person), :method => 'post', :confirm => 'Are you sure?' if signed_in? %>
+<%= link_to 'Edit', edit_person_path(person) if signed_in? %> |
+<%= link_to 'Delete', person_path(person), :method => 'post', :confirm => 'Are you sure?' if signed_in? %>
 <%= link_to 'Back', people_path %>
