@@ -16,14 +16,16 @@ gem 'nokogiri'
 gem 'RedCloth'
 gem 'liquid'
 gem 'formtastic'
+gem 'simple_form'
+gem 'country_select'
 # can we go back to the collective idea branch of awesome_nested_set
 gem 'awesome_nested_set' #, :git => 'git://github.com/galetahub/awesome_nested_set.git'
 
-gem 'jquery-rails' #, '>= 1.0.12'
+gem 'jquery-rails' 
 
 gem 'workflow'
 
-gem 'friendly_id'
+#gem 'friendly_id'
 
 gem 'parslet'
 
@@ -40,9 +42,6 @@ gem 'vestal_versions', :git => 'git://github.com/milkfarm/vestal_versions.git'
 # :git => 'git://github.com/zapnap/vestal_versions.git' 
 # :git => 'git://github.com/adamcooper/vestal_versions'
 
-# offile manifest
-# gem 'rack-offline'
-
 gem 'dalli'
 
 #gem 'central_logger'
@@ -50,13 +49,15 @@ gem 'dalli'
 
 #for coffeescript
 gem 'therubyracer', :require => false
-gem 'barista'
+# gem 'barista'
 
 gem 'has_scope'
 
 gem 'ris_parser', :git => 'git://github.com/kf8a/ris_parser.git'
 
 gem 'thinking-sphinx'
+
+#gem 'cache_digests'
 
 group :production do
   #gem "sitemap_generator", "~> 3.1.1"
@@ -67,6 +68,7 @@ group :production do
 end
 
 group :assets do
+	gem 'less-rails'
   gem 'sass-rails', "  ~> 3.2.3"
   gem 'coffee-rails', "~> 3.2.1"
   gem 'uglifier', '>= 1.0.3'
