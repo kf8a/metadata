@@ -1,9 +1,9 @@
 <div id="sign-in-wrapper">
-  <div id='sign-in' class='rounded-corners'>
+  <div id='sign-in' class='bottom-rounded-corners'>
     <% if signed_in? %>
-      <%= link_to 'Sign Out', sign_out_url(:only_path => true), :method=> :delete %>
+      <%= link_to 'Sign Out', sign_out_url(:only_path => true), :method=> :delete, :class => 'bottom-rounded-corners' %>
     <% else %>
-      <%= link_to 'Sign In', sign_in_url(:only_path => true) %>
+      <%= link_to 'Sign In', sign_in_url(:only_path => true), :class => 'bottom-rounded-corners' %>
     <% end %>
   </div>
 </div>

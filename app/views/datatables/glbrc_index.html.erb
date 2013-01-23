@@ -6,11 +6,10 @@
   <%= textilize @sponsor.data_use_statement if @sponsor %>
 
   <div id='search-form'>
-    <%= form_tag('/datatables/search') do %>
-    
+    <%= form_tag '/datatables/search', :class => 'rounded-corners' do %>
       <div id='keyword-search'>
         <%= text_field_tag :keyword_list, @keyword_list || @default_value , {:id => 'keyworder'}  %>
-      </div>  
+      </div>
       <div id='search-submit'>
         <%= submit_tag "Search Datacatalog"%>
       </div>
