@@ -24,8 +24,17 @@ Metadata::Application.configure do
   # Use a different logger for distributed setups
   # config.logger = SyslogLogger.new
 
+  # Compress JavaScript and CSS
+  config.assets.compress = true
+
+  # Don't fallback to assets pipeline
+  config.assets.compile = false
+
+  # Generate digests for assets URLs
+  config.assets.digest = true
+
   # Use a different cache store in production
-#  config.cache_store = :mem_cache_store, "thetford.kbs.msu.edu", {:compress => :true}
+  # config.cache_store = :mem_cache_store, "thetford.kbs.msu.edu", {:compress => :true}
   config.cache_store = :dalli_store, "kalkaska.kbs.msu.edu", {:compress => true, :compress_threshold => 64*1024}
 
 
