@@ -1,4 +1,5 @@
 require "bundler/capistrano"
+load 'deploy/assets'
 require 'new_relic/recipes'
 require 'thinking_sphinx/deploy/capistrano'
 
