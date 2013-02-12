@@ -4,7 +4,7 @@ class Sponsor < ActiveRecord::Base
   has_many :datasets
   has_many :memberships
 
-  friendly_id :name
+  # friendly_id :name
 end
 
 
