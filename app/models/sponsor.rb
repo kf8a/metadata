@@ -1,5 +1,5 @@
 class Sponsor < ActiveRecord::Base
-  extend FriendlyId
+  # extend FriendlyId
 
   has_many :datasets
   has_many :memberships
