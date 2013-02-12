@@ -3,7 +3,6 @@
   <%= link_to_unless signed_in?, 'sign-in', sign_in_path %>
 </p>
 <%= render 'search_form', :word => @word, :type => @type, :sort_by => @sort_by %>
-<% cache :action=>'index' do %>
   <h1 class='publication-section'>Submitted</h1>
   <p class='synopsis indent'>Papers still in review; contact the first author for further information.</p>
   <ul>
@@ -22,4 +21,3 @@
       <% year = citation.pub_year.to_i -%>
     <% end %>
   </ul>
-<% end %>

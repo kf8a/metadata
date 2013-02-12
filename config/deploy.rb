@@ -77,8 +77,6 @@ namespace :deploy do
   # after 'update', :link_assets
 end
 
-after :deploy, :compile_coffeescripts
-
 task :staging do
 
   set :host, 'sebewa'
@@ -199,9 +197,4 @@ task :update_header do
   run "cd #{current_path}/public;curl http://lter.kbs.msu.edu/export/nav/ -o nav.html -s"
   run "cd #{current_path}/public;curl http://lter.kbs.msu.edu/export/footer/ -o footer.html -s"
   run "cd #{current_path}/public;curl http://lter.kbs.msu.edu/export/header/ -o header.html -s"
-end
-
-desc 'compile coffeescripts'
-task :compile_coffeescripts do
-  run "cd #{current_path};bundle exec rake barista:brew RAILS_ENV=production"
 end
