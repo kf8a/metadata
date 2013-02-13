@@ -25,7 +25,7 @@ gem 'jquery-rails'
 
 gem 'workflow'
 
-#gem 'friendly_id'
+gem 'friendly_id'
 
 gem 'parslet'
 
@@ -35,7 +35,7 @@ gem 'parslet'
 # for creating bibtex formatted citations
 gem 'bibtex-ruby'
 
-gem 'jammit'
+#gem 'jammit'
 
 # versioning support for protocols
 gem 'vestal_versions', :git => 'git://github.com/milkfarm/vestal_versions.git'
