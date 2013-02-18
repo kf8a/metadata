@@ -45,11 +45,13 @@
           <%= render :file => "#{Rails.root}/public/nav", :formats => [:html] %>
           <div id="inner" class="metadata <%= controller.controller_name %> <%= controller.action_name%>">
             <div class="wrap">	
-              <div id="content-sidebar-wrap">
-                <article id='metadata' class='hfeed'>
-                <%= yield %>
-                </article>
-              </div><!-- end #content-sidebar-wrap -->
+              <div id="content">
+                <div id="content-sidebar-wrap">
+                  <article id='metadata' class='hfeed'>
+                  <%= yield %>
+                  </article>
+                </div><!-- end #content-sidebar-wrap -->
+              </div>
             </div><!-- end .wrap -->
           </div><!-- end #inner -->
         </div><!-- end #wrap -->
