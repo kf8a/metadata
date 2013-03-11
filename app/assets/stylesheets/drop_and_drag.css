@@ -1,0 +1,13 @@
+*[draggable=true] {
+  -moz-user-select:none;
+  -khtml-user-drag: element;
+  cursor: move;
+}
+
+.hovered {
+  background-color: grey;
+}
+
+div.droppable {
+  height: 4px;
+}
