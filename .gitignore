@@ -19,7 +19,6 @@ config/newrelic.yml
 rcov/
 nbproject/
 config/development.sphinx.conf
-assets/
 coverage/
 .bundle
 *.swp
@@ -30,3 +29,4 @@ config/initializers/secret_token.rb
 config/initializers/site_keys.rb
 public/packages/
 .sass-cache/
+package.box
