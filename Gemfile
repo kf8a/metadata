@@ -4,7 +4,6 @@ gem 'rails', '3.2.12'
 
 gem 'rake'
 gem 'capistrano' 
-gem 'newrelic_rpm'
 gem 'pg'
 gem 'foreigner'
 gem 'clearance', '1.0.0.rc4'
@@ -46,11 +45,6 @@ gem 'dalli'
 
 #gem 'central_logger'
 
-
-#for coffeescript
-gem 'therubyracer', :require => false
-# gem 'barista'
-
 gem 'has_scope'
 
 gem 'ris_parser', :git => 'git://github.com/kf8a/ris_parser.git'
@@ -65,9 +59,11 @@ group :production do
   gem 'unicorn'
   gem 'aws-sdk'
   #gem 'puma'
+ # gem 'newrelic_rpm'
 end
 
 group :assets do
+  gem 'therubyracer', :require => false
 	gem 'less-rails'
   gem 'sass-rails', "  ~> 3.2.3"
   gem 'coffee-rails', "~> 3.2.1"
@@ -76,22 +72,19 @@ end
 
 
 group :development, :test  do
-  # bundler requires these gems in development
-  # gem "rails-footnotes"
   gem 'sqlite3-ruby'
   gem "shoulda", :git => 'git://github.com/thoughtbot/shoulda.git' 
   gem 'rspec-rails'
-#  gem "annotate"
+  gem "annotate"
 end
 
 group :test do
-  gem 'mocha'
+  #gem 'mocha'
   gem 'simplecov'
   gem 'simplecov-html'
 
   gem "shoulda-matchers" # to use rspec like syntax
   gem 'factory_girl_rails' #, :require => false
-  # gem 'remarkable_activerecord', '>=4.0.0.alpha2'
 
   #Cucumber stuff
   gem 'capybara', '0.4.1.2'

@@ -1,5 +1,4 @@
 require "bundler/capistrano"
-load 'deploy/assets'
 require 'new_relic/recipes'
 require 'thinking_sphinx/deploy/capistrano'
 
@@ -102,24 +101,14 @@ end
 
 task :kalkaska do
   set :host, 'kalkaska'
+  role :web, "#{host}.kbs.msu.edu"
   role :app, "#{host}.kbs.msu.edu"
+  role :db, "#{host}.kbs.msu.edu"
 end
 
 task :houghton do
   set :host, 'houghton'
   role :app, "#{host}.kbs.msu.edu"
-end
-
-task :production do
-
-  set :host, 'houghton'
-
-  role :app, "#{host}.kbs.msu.edu" #, "gprpc28.kbs.msu.edu", 'kalkaska.kbs.msu.edu'
-  role :web, "#{host}.kbs.msu.edu"
-  role :db,  "#{host}.kbs.msu.edu", :primary => true
-
-#  after 'deploy:symlink', :set_asset_host
-  after "deploy:update", "newrelic:notice_deployment"
 end
 
 before 'deploy:update_code', 'thinking_sphinx:stop'
