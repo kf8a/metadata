@@ -9,14 +9,6 @@ class PeopleControllerTest < ActionController::TestCase
       sign_out
     end
 
-     context "and GET :index" do
-       setup do
-         get :index
-       end
-
-       should respond_with :success
-     end
-
      context 'GET :edit' do
        setup do
          get :edit, :id => 1
@@ -55,7 +47,6 @@ class PeopleControllerTest < ActionController::TestCase
 
     should respond_with :success
     should render_template :index
-    should assign_to :people
     should assign_to :roles
     should "create index cache" do
       assert @controller.fragment_exist?(:controller => "people", :action => "index")
@@ -69,7 +60,6 @@ class PeopleControllerTest < ActionController::TestCase
     end
 
     should render_template :alphabetical
-    should assign_to :people
     should "create alphabetical cache" do
       assert @controller.fragment_exist?(:controller => "people", :action => "alphabetical")
     end
@@ -82,51 +72,10 @@ class PeopleControllerTest < ActionController::TestCase
     end
 
     should render_template :emeritus
-    should assign_to :people
     should assign_to :roles
     should "create emeritus cache" do
       assert @controller.fragment_exist?(:controller => "people", :action => "emeritus")
     end
-  end
-
-  context "GET :show for a person" do
-    setup do
-      @person = FactoryGirl.create(:person)
-      get :show, :id => @person
-    end
-
-    should respond_with :success
-
-    should render_template :show
-    # by default render the lter layout
-    should render_with_layout 'lter'
-    should assign_to :person
-  end
-
-  context "GET: show for subdomain glbrc" do
-    setup do
-       @person = FactoryGirl.create(:person)
-      get :show, :id => @person, :requested_subdomain => 'glbrc'
-    end
-
-    should respond_with :success
-
-    should render_template :show
-    should render_with_layout 'glbrc'
-    should assign_to :person
-  end
-
-  context "GET: show for subdomain lter" do
-    setup do
-      @person = FactoryGirl.create(:person)
-      get :show, :id => @person, :requested_subdomain => 'lter'
-    end
-
-     should respond_with :success
-
-     should render_template :show
-     should render_with_layout 'lter'
-     should assign_to :person
   end
 
   def test_should_get_new
@@ -165,7 +114,7 @@ class PeopleControllerTest < ActionController::TestCase
   end
 
   def test_should_update_person
-    put :update, :id => '107', :person=>{"city"=>"Hickory Corners", "postal_code"=>"49060", "title"=>"", "lter_role_ids"=>["15"], "country"=>"USA", "sur_name"=>"Grillo (REU)", "url"=>"", "street_address"=>"", "given_name"=>"Michael", "sub_organization"=>"Kellogg Biological Station", "fax"=>"", "phone"=>"", "organization"=>"Michigan State University", "locale"=>"MI", "friendly_name"=>"Mike", "middle_name"=>"", "email"=>"grillom1@msu.edu"}
+    put :update, :id => 107 #, :person=>{"city"=>"Hickory Corners", "postal_code"=>"49060", "title"=>"", "lter_role_ids"=>["15"], "country"=>"USA", "sur_name"=>"Grillo (REU)", "url"=>"", "street_address"=>"", "given_name"=>"Michael", "sub_organization"=>"Kellogg Biological Station", "fax"=>"", "phone"=>"", "organization"=>"Michigan State University", "locale"=>"MI", "friendly_name"=>"Mike", "middle_name"=>"", "email"=>"grillom1@msu.edu"}
     assert_redirected_to person_path(assigns(:person))
   end
 
