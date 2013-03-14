@@ -1,12 +1,12 @@
 <h1>Editing person</h1>
 
-<%= form_for(:person, :url => person_path(@person), :html => { :method => :put }) do |f| %>
-  <%= render "shared/error_messages", :target => @person %>
-  <%= render :partial => 'form', :locals => {:f => f, :person => @person} %>
+<%= simple_form_for person do |f| %>
+  <%= render "shared/error_messages", :target => person %>
+  <%= render 'form', :f => f %>
   <p>
     <%= submit_tag "Update" %>
   </p>
 <% end %>
 
-<%= link_to 'Show', person_path(@person) %> |
+<%= link_to 'Show', person_path(person) %> |
 <%= link_to 'Back', people_path %>

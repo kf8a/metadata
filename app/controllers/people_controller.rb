@@ -15,7 +15,6 @@ class PeopleController < ApplicationController
     @roles = RoleType.find_by_name('lter').roles.order('seniority').where('name not like ?','Emeritus%')
     respond_to do |format|
       format.html # index.rhtml
-      format.xml  { render :xml => @people.to_xml }
     end
   end
 
@@ -23,7 +22,6 @@ class PeopleController < ApplicationController
     @title = 'KBS LTER Directory (alphabetical)'
     respond_to do |format|
       format.html # index.rhtml
-      format.xml  { render :xml => @people.to_xml }
     end
   end
 
@@ -31,7 +29,6 @@ class PeopleController < ApplicationController
     @roles = RoleType.find_by_name('lter').roles.order('seniority').where('name like ?','Emeritus%')
     respond_to do |format|
       format.html # emeritus.rhtml
-      format.xml  { render :xml => @people.to_xml }
     end
   end
 
@@ -41,7 +38,7 @@ class PeopleController < ApplicationController
   # GET /people/1
   # GET /people/1.xml
   def show
-    respond_with @person
+    respond_with person
   end
 
   # GET /people/new
@@ -50,9 +47,9 @@ class PeopleController < ApplicationController
     @roles = Role.find_all_by_role_type_id(RoleType.find_by_name('lter'))
   end
 
-  # GET /people/1;edit
+  # GET /people/1/edit
   def edit
-    @title = 'Edit ' + @person.full_name
+    @title = 'Edit ' + person.full_name
     @roles = Role.find_all_by_role_type_id(RoleType.find_by_name('lter'))
   end
 
@@ -68,17 +65,17 @@ class PeopleController < ApplicationController
 
   # PUT /people/1
   # PUT /people/1.xml
-  def update    
-    if @person.update_attributes(params[:person])
+  def update
+    if person.update_attributes(params[:person])
       flash[:notice] = 'Person was successfully updated.'
     end
-    respond_with @person
+    respond_with person
   end
 
   # DELETE /people/1
   # DELETE /people/1.xml
   def destroy
-    @person.destroy
+    person.destroy
 
     respond_to do |format|
       format.html { redirect_to people_url }
