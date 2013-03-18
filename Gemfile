@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.13'
 
 gem 'rake'
 gem 'capistrano' 
@@ -17,6 +17,7 @@ gem 'liquid'
 gem 'formtastic'
 gem 'simple_form'
 gem 'country_select'
+
 # can we go back to the collective idea branch of awesome_nested_set
 gem 'awesome_nested_set' #, :git => 'git://github.com/galetahub/awesome_nested_set.git'
 
@@ -58,7 +59,6 @@ group :production do
   gem 'exception_notification'
   gem 'unicorn'
   gem 'aws-sdk'
-  #gem 'puma'
  # gem 'newrelic_rpm'
 end
 
@@ -79,7 +79,6 @@ group :development, :test  do
 end
 
 group :test do
-  #gem 'mocha'
   gem 'simplecov'
   gem 'simplecov-html'
 
