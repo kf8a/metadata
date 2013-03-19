@@ -25,7 +25,7 @@ Metadata::Application.configure do
   # config.logger = SyslogLogger.new
 
   # Compress JavaScript and CSS
-  config.assets.compress = true
+  config.assets.compress = false #true
 
   # Don't fallback to assets pipeline
   config.assets.compile = false
