@@ -11,12 +11,12 @@ jQuery.autocomplete = function(input, options) {
 	// Create results
 	var results = document.createElement("div");
 	// Create jQuery object for results
-	var $results = $(results);
+	var $results = jQuery(results);
 	$results.hide().addClass(options.resultsClass).css("position", "absolute");
 	if( options.width > 0 ) $results.css("width", options.width);
 
 	// Add to body element
-	$("body").append(results);
+	jQuery("body").append(results);
 
 	input.autocompleter = me;
 
