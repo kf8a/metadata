@@ -260,9 +260,17 @@ class Datatable < ActiveRecord::Base
     convert_to_csv(approved_data)
   end
 
+  def variate_names
+    variates.collect {|variate| variate.try(:name)}
+  end
+
+  def completed
+    dataset.try(:completed)
+  end
+
   def convert_to_csv(values)
     csv_string = CSV.generate do |csv|
-      vars = variates.collect {|variate| variate.name.downcase }
+      vars = variate_names 
       csv << variates.collect { |variate| variate.name }
       values.each do |row|
         csv << vars.collect do |variate|
