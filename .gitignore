@@ -29,3 +29,5 @@ lib/tasks/move_to_s3.rake
 config/initializers/secret_token.rb
 config/initializers/site_keys.rb
 .sass-cache/
+assets/
+shared/
