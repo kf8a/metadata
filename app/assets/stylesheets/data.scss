@@ -246,7 +246,6 @@
     border-bottom-width: 1px;
   }
 
-
   table.variate-table tbody tr th {
     border-bottom-style: solid;
     border-bottom-width: 1px;
@@ -275,6 +274,7 @@
   div.collapsable {
     padding-bottom:1em;
   }
+
   div.collapsable h2{
     font-size: small;
     font-weight: normal;
@@ -299,19 +299,20 @@
   }
 
   #protocols {
-    width:4em8%;
+    width:4em;
     display: inline-block;
     float: left;
   }
 
-  .tree * {margin:0; padding:0;}
+  // .tree * {margin:0; padding:0;}
+  .tree a { text-decoration: none;}
   .tree li {list-style:none; padding-left:21px;}
   .tree li.root {padding-left:0;}
   .tree li li { background-repeat:no-repeat 17px center; margin-left:10px; padding-left:31px;}
   .tree li li.root {padding-left:10px; }
   /* .tree li li.root.last {background:none; } */
   .tree li li.last {}
-  .expand {background:url(/assets/plus_minus.png) no-repeat;  display:block; padding:0 10px 0 0; text-indent:16px;}
+  .expand {background:url('/assets/plus_minus.png') no-repeat; padding:0 20px 0 0; text-indent:16px;}
   .contract {background-position:0 -16px;}
   .expand:hover {cursor:pointer;}
 }

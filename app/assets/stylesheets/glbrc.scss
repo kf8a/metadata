@@ -8,6 +8,7 @@ $text-color: black;
 $menu-height: 3em;
 $menu-width: 10em;
 
+
 .rounded-corners {
 	border-radius: 10px;
 	-moz-border-radius:10px;
@@ -52,6 +53,11 @@ $menu-width: 10em;
 
 #glbrc {
 
+  ul { 
+    margin:0; 
+    padding:0; 
+  }
+
   .breadcrumb {
     display: none;
   }
@@ -69,6 +75,7 @@ $menu-width: 10em;
 		a {
 			background-color: $light-blue;
 			color: white;
+      text-decorations: none;
 			padding: 10px;
 			
 			:hover {
@@ -123,12 +130,12 @@ $menu-width: 10em;
 			
 			a {
 				display: block;
+        text-decoration: none;
 				width: $menu-width;
 				height: $menu-height;
       }				
       :hover {
         background-color: $light-blue;
-        text-decoration: none;
         color: white;
       }
 		}
@@ -279,10 +286,10 @@ $menu-width: 10em;
 		color:grey;
 	}
 
-
 	#content {
 		width: 650px;
 		float:none;
+	  padding-left: 15px;
 		
 		h1 {
 			font-size: 1.2em;
@@ -433,15 +440,10 @@ $menu-width: 10em;
 	}
 
 
-	#network-databases h2 {
-		font-size: small;
-		margin-bottom:0.5em;
-	}
-
-	#search-form {
-		padding: 10px;
-		background-color: $light-blue;
-	}
+  #glbrc-search-form {
+    padding: 10px;
+    background-color: $light-blue;
+    }
 
 // These next two are really the same and should share a name
   #word {
@@ -515,17 +517,4 @@ $menu-width: 10em;
 		padding-right:2em;
 	}
 
-	.quickTree {
-		border-top-style: solid;
-	}
-
-	tree * {margin:0; padding:0;}
-	.tree li {list-style:none; padding-left:21px;}
-	.tree li.root {padding-left:0;}
-	.tree li li { no-repeat: 17px center; margin-left:10px; padding-left:31px;}
-	.tree li li.root {padding-left:10px; }
-	.tree li li.root.last {background:none; }
-	.tree li li.last {}
-	.expand {background:url(/images/plus_minus.png) no-repeat;  display:block; padding:0 10px 0 0; text-indent:16px;}
-	.contract {background-position:0 -16px; }
 }
