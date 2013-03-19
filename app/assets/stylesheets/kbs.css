@@ -1,0 +1,40 @@
+#content {
+	width: 540px;		/* content width */
+	float: right;		/* content on the right */
+	font-size: 1em;
+	padding-left: 15px;
+}
+
+#content ul {
+	list-style: none;
+	margin-left: 0;
+	padding-left: 0;
+}
+#wrapper {
+	width: 700px;
+}
+
+#footer {
+	clear: both;
+	width: 700px;
+}
+
+img {
+	border: none;
+}
+
+
+a:link {
+	color:blue;
+	text-decoration: none;
+}
+
+a:link:hover {
+	text-decoration: underline;
+	background-color: white;;
+}
+
+p {
+	font-size: 1em;
+	margin-top: 5px;
+}
