@@ -28,10 +28,4 @@ lib/tasks/move_to_s3.rake
 .autotest
 config/initializers/secret_token.rb
 config/initializers/site_keys.rb
-public/packages/
 .sass-cache/
-package.box
-bootstrap
-cookbooks
-public/wp-content
-.vagrant
