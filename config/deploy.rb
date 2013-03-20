@@ -1,5 +1,5 @@
 require "bundler/capistrano"
-require 'new_relic/recipes'
+#require 'new_relic/recipes'
 require 'thinking_sphinx/deploy/capistrano'
 
 set :application, "metadata"
@@ -25,7 +25,8 @@ set :deploy_via, :remote_cache
 ssh_options[:forward_agent] = true
 
 set :unicorn_binary, "/usr/local/bin/unicorn"
-set :unicorn_config, "#{current_path}/config/unicorn.rb"
+# set :unicorn_config, "#{current_path}/config/unicorn.rb"
+set :unicorn_config, "/etc/unicorn/#{application}"
 set :unicorn_pid, "/var/u/apps/metadata/shared/pids/unicorn.pid"
 
 def remote_file_exists?(full_path)
@@ -67,25 +68,32 @@ namespace :deploy do
 
   after 'deploy:finalize_update', :update_nav
   after 'deploy:finalize_update', :link_production_db
-  after 'deploy:finalize_update', :link_unicorn
+#  after 'deploy:finalize_update', :link_unicorn
   after 'deploy:finalize_update', :link_site_keys
   after 'deploy:finalize_update', :link_new_relic
   after 'deploy:finalize_update', :link_s3
   after 'deploy', :lock_sphinks
-  # after 'update', :ensure_packages
-  # after 'update', :link_assets
+
+  namespace :assets do
+    desc "Precompile assets on local machine and upload them to the server."
+    task :precompile, roles: :web, except: {no_release: true} do
+      run_locally "bundle exec rake assets:precompile"
+      find_servers_for_task(current_task).each do |server|
+        run_locally "rsync -vr --exclude='.DS_Store' public/assets #{user}@#{server.host}:#{shared_path}/"
+      end
+    end
+  end
+
 end
 
 task :staging do
 
-  set :host, 'sebewa'
-  set :repository,  "/Users/bohms/code/metadata"
-  set :branch, "master"
-  set :deploy_via, :copy
+  # set :host, '192.168.33.10'
+  set :host, "projectlog.kbs.msu.edu"
 
-  role :app, "#{host}.kbs.msu.edu"
-  role :web, "#{host}.kbs.msu.edu"
-  role :db,  "#{host}.kbs.msu.edu", :primary => true
+  role :app, host
+  role :web, host
+  role :db,  host, :primary => true
 
 end
 
@@ -158,12 +166,8 @@ end
 
 desc "link unicorn.rb"
 task :link_unicorn do
-  run "ln -nfs #{deploy_to}/shared/config/unicorn.rb #{release_path}/config/unicorn.rb"
-end
-
-desc 'ensure packages'
-task :ensure_packages do
-  run "cd #{release_path};bundle exec rake package_dreamhost_assets RAILS_ENV=production"
+  # run "ln -nfs /etc/unicorn/#{application} #{release_path}/config/unicorn.rb"
+  run "ln -nfs "#{deploy_to}/shared/config/unicorn.rb #{release_path}/config/unicorn.rb"
 end
 
 desc 'set asset host on production'
@@ -174,16 +178,4 @@ end
 desc 'link asset directory'
 task :link_assets do
   run "ln -nfs #{deploy_to}/shared/assets #{release_path}"
-end
-
-desc 'link mongo initializer'
-task :link_mongo do
-  run "ln -nfs #{deploy_to}/shared/config/mongo.rb #{release_path}/config/initializers/mongo.rb"
-end
-
-desc 'update navigation'
-task :update_header do
-  run "cd #{current_path}/public;curl http://lter.kbs.msu.edu/export/nav/ -o nav.html -s"
-  run "cd #{current_path}/public;curl http://lter.kbs.msu.edu/export/footer/ -o footer.html -s"
-  run "cd #{current_path}/public;curl http://lter.kbs.msu.edu/export/header/ -o header.html -s"
 end

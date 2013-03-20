@@ -11,6 +11,7 @@ doc/*
 metadata.sql
 public/datatables
 public/*.html
+public/assets
 .DStore
 .DS_Store
 tmp/
@@ -29,5 +30,4 @@ lib/tasks/move_to_s3.rake
 config/initializers/secret_token.rb
 config/initializers/site_keys.rb
 .sass-cache/
-assets/
 shared/
