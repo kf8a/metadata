@@ -1,11 +1,11 @@
-body { background-color: #fff; color: #333; }
+/* body { background-color: #fff; color: #333; } */
 
-body, p, ol, ul, td {
-	font-family: Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif;
+/* body, p, ol, ul, td { */
+/* 	font-family: Arial, "Helvetica Neue", Helvetica, Geneva, sans-serif; */
 	
-  font-size:   13px;
+/*   font-size:   13px; */
 /*  line-height: 18px;
-*/}
+/* } */
 
 pre {
   background-color: #eee;
