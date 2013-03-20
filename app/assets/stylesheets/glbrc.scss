@@ -115,6 +115,9 @@ $menu-width: 10em;
 		left: 1px;
 		top: 1px;
 		font-weight: bold;
+	  margin-top: 2em;
+	  margin-bottom: 1em;
+    margin-left: 3em;
 		
 		ul li {
 			list-style-type: none;
@@ -251,7 +254,6 @@ $menu-width: 10em;
 
 	.study-title {
 		background-color: white;
-		font-size: 1.2em;
 		font-weight: bold;
 		color: $title-color;
 		margin: 2px;
@@ -521,5 +523,10 @@ $menu-width: 10em;
 	.space-after {
 		padding-right:2em;
 	}
+
+  .quickTree {
+    border-top-style: solid;
+    margin-top: 1em;
+  }
 
 }
