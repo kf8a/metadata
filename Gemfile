@@ -52,7 +52,7 @@ gem 'ris_parser', :git => 'git://github.com/kf8a/ris_parser.git'
 
 gem 'thinking-sphinx'
 
-#gem 'cache_digests'
+gem 'cache_digests'
 
 group :production do
   #gem "sitemap_generator", "~> 3.1.1"
@@ -72,6 +72,7 @@ end
 
 
 group :development, :test  do
+  gem 'meta_request'
   gem 'sqlite3-ruby'
   gem "shoulda", :git => 'git://github.com/thoughtbot/shoulda.git' 
   gem 'rspec-rails'
