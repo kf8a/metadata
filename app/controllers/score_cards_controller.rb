@@ -1,5 +1,6 @@
 class ScoreCardsController < ApplicationController
   def index
-    @datatables = Datatable.includes(:dataset).where(:is_sql => true).where('datasets.website_id = 1').limit(25).all
+    limit = params[:limit] || 25
+    @datatables = Datatable.includes(:dataset).where(:is_sql => true).where('datasets.website_id = 1').limit(limit.to_i).all
   end
 end

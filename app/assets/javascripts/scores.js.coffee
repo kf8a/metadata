@@ -1,17 +1,21 @@
 class ScoreGraph
   render: (el) ->
     data = $(el).data('scores')
+    return if 'null' == data
 
     width = 1000
 
     x = d3.scale.linear()
-      .domain([1980,2015])
+      .domain([1980,2014])
       .range([0,width])
       .clamp(true)
 
+    max_count = d3.max(data, (d) -> d.count )
+    console.log(max_count)
+
     z = d3.scale.sqrt()
       .domain([0,1])
-      .range(['white','green'])
+      .range(['white','limegreen'])
 
     svg = d3.select(el)
       .append('svg:svg')
@@ -27,14 +31,14 @@ class ScoreGraph
       .attr('cx', (d) -> x(d.year))
       .attr('r', 14)
       .attr('stroke', 'black')
-      .attr('fill', (d) -> z(d.score))
+      .attr('fill', (d) -> z(d.count/max_count))
 
     svg.selectAll('year')
       .data(data)
       .enter().append('text')
       .attr('class','year')
       .attr('x', (d) -> x(d.year))
-      .attr('dx', -8)
+      .attr('dx', -7)
       .attr('y', 19)
       .text((d) -> d.year.toString().substr(-2))
 

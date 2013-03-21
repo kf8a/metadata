@@ -1,7 +1,7 @@
 <div>
-  <h2><%= score.title %></h2>
+  <h2><%= score.title %></h2> <%= score.completed %>
   <div class='score-data' data-scores= <%= ScoreCard.new.score(score).to_json %>></div>
   <p>
-  <%= score.description %>
+  <%=raw score.description %>
   </p>
 </div>

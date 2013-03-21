@@ -18,7 +18,6 @@ class ScoreCard
     @db_connection
   end
 
-
   def score(datatable)
     return if [309, 300, 301,175, 127,82].include? datatable.id
     result = {}
@@ -29,8 +28,8 @@ class ScoreCard
 
     if time_key
       result = data(datatable,time_key)
-      # result = fill_to_present(result) unless datatable.completed
-      relativize(result)
+      result = fill_to_present(result) unless datatable.completed
+      result
     else
       []
     end
@@ -48,27 +47,20 @@ class ScoreCard
       query_result = []
     end
     query_result.collect do |row|
-      {:year => row['year'].to_i, :score => row['count'].to_f}
-    end
-  end
-
-  def relativize(data)
-    return data if data.empty?
-    max_count = data.max {|a,b| a[:score] <=> b[:score] }[:score].to_f
-    return data if 0 == max_count
-    data.collect do |datum|
-      {:year => datum[:year], :score=> datum[:score].to_f/max_count}
+      {:year => row['year'].to_i, :count => row['count'].to_f}
     end
   end
 
   def fill_to_present(data)
-    max_year = data.keys.max
-    max_year = max_year[1] + 1
-    current_year = Time.now().year
-    (max_year..current_year).each do |year|
-      data[year] = 0
-    end
-    data
+    return if data.empty?
+    max_year = data.max {|a,b| a[:year] <=> b[:year]}[:year].to_i
+    max_year += 1
+    add_years = (max_year..current_year).collect { |year| {:year => year, :count => 0} }
+    add_years + data
+  end
+
+  def current_year
+    Time.now().year
   end
 
   def self.all
