@@ -1,12 +1,13 @@
 class ScoreGraph
   render: (el) ->
     data = $(el).data('scores')
-    return if 'null' == data
+    console.log(data)
+    return unless data?
 
-    width = 1000
+    width = 900
 
     x = d3.scale.linear()
-      .domain([1980,2014])
+      .domain([1988,2014])
       .range([0,width])
       .clamp(true)
 

@@ -1,5 +1,5 @@
 <div>
-  <h2><%= score.title %></h2> <%= score.completed %>
+  <h2><%= link_to score.title, datatable_path(score) %></h2> <%= score.completed %>
   <div class='score-data' data-scores= <%= ScoreCard.new.score(score).to_json %>></div>
   <p>
   <%=raw score.description %>
