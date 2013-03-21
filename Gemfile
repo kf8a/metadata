@@ -35,8 +35,6 @@ gem 'parslet'
 # for creating bibtex formatted citations
 gem 'bibtex-ruby'
 
-#gem 'jammit'
-
 # versioning support for protocols
 gem 'vestal_versions', :git => 'git://github.com/milkfarm/vestal_versions.git'
 # :git => 'git://github.com/zapnap/vestal_versions.git' 
@@ -65,18 +63,19 @@ end
 group :assets do
   gem 'therubyracer', :require => false
 	gem 'less-rails'
-  gem 'sass-rails', "  ~> 3.2.3"
+  gem 'sass-rails', "~> 3.2.3"
   gem 'coffee-rails', "~> 3.2.1"
   gem 'uglifier', '>= 1.0.3'
 end
 
-
 group :development, :test  do
   gem 'meta_request'
-  gem 'sqlite3-ruby'
-  gem "shoulda", :git => 'git://github.com/thoughtbot/shoulda.git' 
   gem 'rspec-rails'
+  gem 'rspec'
+  gem "shoulda", :git => 'git://github.com/thoughtbot/shoulda.git' 
   gem "annotate"
+
+  gem 'sqlite3-ruby'
 end
 
 group :test do
@@ -87,10 +86,9 @@ group :test do
   gem 'factory_girl_rails' #, :require => false
 
   #Cucumber stuff
-  gem 'capybara', '0.4.1.2'
+  gem 'capybara'
   gem 'cucumber-rails' , :require => false
   gem 'spork'
-  gem 'launchy'
+  # gem 'launchy'
   gem 'database_cleaner'
-  gem 'pickle'
 end
