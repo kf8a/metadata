@@ -7,7 +7,7 @@ class ScoreGraph
     width = 800
 
     x = d3.scale.linear()
-      .domain([1988,2014])
+      .domain([1987,2014])
       .range([0,width])
       .clamp(true)
 
