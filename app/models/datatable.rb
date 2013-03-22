@@ -37,6 +37,8 @@ class Datatable < ActiveRecord::Base
 
   scope :by_name, :order => 'name'
 
+  include Workflow
+
   workflow do
     state :active do
       event :complete, :transitions_to => :completed
