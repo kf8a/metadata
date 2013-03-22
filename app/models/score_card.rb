@@ -33,7 +33,7 @@ class ScoreCard
       update_frequency = 365 unless update_frequency
       update_frequency_years = update_frequency / 365
       update_frequency_years = 1 if 0 == update_frequency_years
-      result = fill_to_present(result, update_frequency_years) unless datatable.completed
+      result = fill_to_present(result, update_frequency_years) unless 'completed' == datatable.status
       result
     else
       []

@@ -1,7 +1,6 @@
 class ScoreGraph
   render: (el) ->
     data = $(el).data('scores')
-    console.log(data)
     return unless data?
 
     width = 800
@@ -12,7 +11,6 @@ class ScoreGraph
       .clamp(true)
 
     max_count = d3.max(data, (d) -> d.count )
-    console.log(max_count)
 
     z = d3.scale.sqrt()
       .domain([0,1])
@@ -24,9 +22,11 @@ class ScoreGraph
       .attr('width', width)
       .attr('height', 30)
 
+
     svg.selectAll('circle')
       .data(data)
-      .enter().append('circle')
+      .enter()
+      .append('circle')
       .attr('class','circle')
       .attr('cy',15)
       .attr('cx', (d) -> x(d.year))
@@ -42,6 +42,18 @@ class ScoreGraph
       .attr('dx', -7)
       .attr('y', 19)
       .text((d) -> d.year.toString().substr(-2))
+
+    years = d3.range(1988,2013)
+
+    svg.selectAll('dots')
+      .data(years)
+      .enter()
+      .append('circle')
+      .attr('class','dots')
+      .attr('cy',15)
+      .attr('cx', (d) -> x(d))
+      .attr('r', 2)
+      .attr('fill', 'grey')
 
 jQuery -> 
   graph = new ScoreGraph

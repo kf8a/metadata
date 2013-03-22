@@ -268,6 +268,10 @@ class Datatable < ActiveRecord::Base
     dataset.try(:completed)
   end
 
+  def status
+    dataset.try(:status)
+  end
+
   def convert_to_csv(values)
     csv_string = CSV.generate do |csv|
       vars = variate_names 

@@ -6,7 +6,7 @@ require 'eml'
 
 class Dataset < ActiveRecord::Base
   has_many                :affiliations, order:      'seniority'
-  has_many                :datatables,   order:      'name'
+  has_many                :datatables,   order:      'name', :dependent => :nullify
   has_many                :people,       through:    :affiliations
   belongs_to              :project
   has_many                :protocols,    conditions: 'active is true'
@@ -140,7 +140,7 @@ class Dataset < ActiveRecord::Base
   def update_temporal_extent
     dates = temporal_extent
     self.initiated = dates[:begin_date] if dates[:begin_date]
-    self.completed = dates[:end_date] if dates[:end_date]
+    self.date_end_date = dates[:end_date] if dates[:end_date]
     save
   end
 
