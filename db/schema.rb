@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121210165342) do
+ActiveRecord::Schema.define(:version => 20130322124353) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -34,6 +34,12 @@ ActiveRecord::Schema.define(:version => 20121210165342) do
 
 # Could not dump table "areas_temporary" because of following StandardError
 #   Unknown type 'geometry' for column 'the_geom'
+
+  create_table "auditlog", :id => false, :force => true do |t|
+    t.integer  "datatable_id"
+    t.datetime "datetime"
+    t.text     "message"
+  end
 
   create_table "authors", :force => true do |t|
     t.string   "sur_name"
@@ -169,7 +175,6 @@ ActiveRecord::Schema.define(:version => 20121210165342) do
     t.datetime "updated_at"
     t.integer  "sponsor_id"
     t.integer  "website_id"
-    t.boolean  "pasta_ready",  :default => false
   end
 
   add_index "datasets", ["dataset"], :name => "datasets_dataset_key", :unique => true
@@ -228,6 +233,7 @@ ActiveRecord::Schema.define(:version => 20121210165342) do
     t.integer  "deprecated_in_fovor_of"
     t.text     "deprecation_notice"
     t.integer  "number_of_released_records"
+    t.text     "scores"
   end
 
   add_index "datatables", ["core_area_id"], :name => "index_datatables_on_core_area_id"
@@ -310,21 +316,6 @@ ActiveRecord::Schema.define(:version => 20121210165342) do
 
   add_index "invites", ["id", "email"], :name => "index_invites_on_id_and_email"
   add_index "invites", ["id", "invite_code"], :name => "index_invites_on_id_and_invite_code"
-
-  create_table "kbs021_base_cache", :id => false, :force => true do |t|
-    t.float   "year"
-    t.string  "campaign",         :limit => nil
-    t.date    "sample_date"
-    t.string  "treatment",        :limit => nil
-    t.string  "replicate",        :limit => nil
-    t.boolean "release_nitrate"
-    t.boolean "release_ammonium"
-    t.float   "avgofno3ppm"
-    t.float   "avgofnh4ppm"
-    t.decimal "m"
-    t.decimal "d"
-    t.decimal "v"
-  end
 
 # Could not dump table "locations" because of following StandardError
 #   Unknown type 'geometry' for column 'the_geom'
@@ -817,14 +808,12 @@ ActiveRecord::Schema.define(:version => 20121210165342) do
   end
 
   add_foreign_key "affiliations", "people", :name => "affiliations_person_id_fkey"
-  add_foreign_key "affiliations", "roles", :name => "affiliations_role_id_fkey1"
+  add_foreign_key "affiliations", "roles", :name => "affiliations_role_id_fkey"
 
-  add_foreign_key "authors", "citations", :name => "authors_citation_id_fk"
   add_foreign_key "authors", "citations", :name => "authors_citation_id_fkey"
 
-  add_foreign_key "datatables", "datasets", :name => "datatables_dataset_id_fkey", :dependent => :restrict
+  add_foreign_key "datatables", "datasets", :name => "datasets_datatables"
 
-  add_foreign_key "editors", "citations", :name => "editors_citation_id_fk"
   add_foreign_key "editors", "citations", :name => "editors_citation_id_fkey"
 
   add_foreign_key "variates", "units", :name => "variates_unit_id_fkey"
