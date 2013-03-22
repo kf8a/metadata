@@ -1,8 +1,24 @@
 <div class='score'>
-  <h2 class='title'><%= link_to score.title, datatable_path(score) %></h2> 
-  <div>
-  <%=raw score.description %>
-  <%= score.completed %>
+  <div class='one-half first'>
+    <h2 class='title'><%= link_to "#{score.dataset.website.try(:name).upcase} :  #{score.study.try(:name)} : #{raw(score.title)}", datatable_path(score) %></h2>
+</div>
+  <div class='one-half first'>
+    <p>
+    <%=raw truncate(score.description, :length => 500) %> 
+    </p>
+    <p>
+    <% if score.completed %>
+      Completed: <%= score.completed %>
+    <% end %>
+    </p>
+</div>
+<div class='one-half'>
+  <p>
+    <% score.variates.each do |variate| %>
+     <%= variate.name %>, 
+    <% end %>
+    </p>
 </div>
   <div class='score-data' data-scores= <%= score.scores %>></div>
+<div class='clear-line'></div>
 </div>

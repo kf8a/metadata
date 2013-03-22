@@ -4,7 +4,7 @@ class ScoreGraph
     console.log(data)
     return unless data?
 
-    width = 900
+    width = 800
 
     x = d3.scale.linear()
       .domain([1988,2014])
