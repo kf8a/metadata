@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130322164703) do
+ActiveRecord::Schema.define(:version => 20130322204214) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -166,15 +166,16 @@ ActiveRecord::Schema.define(:version => 20130322164703) do
     t.date     "initiated"
     t.date     "completed"
     t.date     "released"
-    t.boolean  "on_web",       :default => true
-    t.integer  "version",      :default => 1
-    t.boolean  "core_dataset", :default => false
+    t.boolean  "on_web",        :default => true
+    t.integer  "version",       :default => 1
+    t.boolean  "core_dataset",  :default => false
     t.integer  "project_id"
     t.integer  "metacat_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "sponsor_id"
     t.integer  "website_id"
+    t.date     "data_end_date"
   end
 
   add_index "datasets", ["dataset"], :name => "datasets_dataset_key", :unique => true
@@ -235,6 +236,7 @@ ActiveRecord::Schema.define(:version => 20130322164703) do
     t.integer  "number_of_released_records"
     t.text     "scores"
     t.date     "completed_on"
+    t.text     "workflow_state"
   end
 
   add_index "datatables", ["core_area_id"], :name => "index_datatables_on_core_area_id"
