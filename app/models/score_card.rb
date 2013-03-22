@@ -19,6 +19,7 @@ class ScoreCard
   end
 
   def score(datatable)
+    # exclude climdb datatables and archive
     return if [309, 300, 301,175, 127,82].include? datatable.id
     result = {}
     time_key = datatable.variate_names.grep(/year/i).first
@@ -63,13 +64,12 @@ class ScoreCard
     Time.now().year
   end
 
-  def self.all
-    Datatable.where(:is_sql => true).all.collect do |datatable|
-      next unless datatable.dataset.sponsor_id == 1
-      # exclude climdb datatables and archive
-      score = ScoreCard.new
-      score.score(datatable)
-    end.compact
+  def self.update_all
+    score = ScoreCard.new
+    Datatable.where(:is_sql => true).all.each do |datatable|
+      datatable.scores  = score.score(datatable).to_json
+      datatable.save
+    end
   end
 
   # send all of the scores to a csv file

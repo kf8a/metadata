@@ -4,5 +4,5 @@
   <%=raw score.description %>
   <%= score.completed %>
 </div>
-  <div class='score-data' data-scores= <%= ScoreCard.new.score(score).to_json %>></div>
+  <div class='score-data' data-scores= <%= score.scores %>></div>
 </div>

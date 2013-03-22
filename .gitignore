@@ -25,7 +25,6 @@ coverage/
 .bundle
 *.swp
 lib/tasks/move_to_s3.rake
-*.komodoproject
 .autotest
 config/initializers/secret_token.rb
 config/initializers/site_keys.rb
