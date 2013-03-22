@@ -29,7 +29,8 @@ class ScoreCard
 
     if time_key
       result = data(datatable,time_key)
-      result = fill_to_present(result) unless datatable.completed
+      update_frequency_years = datatable.update_frequency_days/365
+      result = fill_to_present(result, update_frequency_years) unless datatable.completed
       result
     else
       []
@@ -52,11 +53,11 @@ class ScoreCard
     end
   end
 
-  def fill_to_present(data)
+  def fill_to_present(data, update_frequency_years = 1)
     return if data.empty?
     max_year = data.max {|a,b| a[:year] <=> b[:year]}[:year].to_i
-    max_year += 1
-    add_years = (max_year..current_year).collect { |year| {:year => year, :count => 0} }
+    max_year += update_frequency_years
+    add_years = (max_year..current_year).step(update_frequency_years).collect { |year| {:year => year, :count => 0} }
     add_years + data
   end
 
