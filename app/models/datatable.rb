@@ -37,6 +37,28 @@ class Datatable < ActiveRecord::Base
 
   scope :by_name, :order => 'name'
 
+  workflow do
+    state :active do
+      event :complete, :transitions_to => :completed
+      event :mark_deleted,  :transitions_to => :deleted
+    end
+    state :completed do
+      event :revert, :transitions_to => :active
+      event :mark_deleted,  :transitions_to => :deleted
+    end
+    state :deleted do
+      event :revert, :transitions_to => :active
+    end
+  end
+
+  def revert
+    completed_on = nil
+  end
+
+  def complete
+    completed_on = Date.today
+  end
+
   define_index do
     indexes title
     indexes description
