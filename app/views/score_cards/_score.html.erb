@@ -1,7 +1,8 @@
-<div>
-  <h2><%= link_to score.title, datatable_path(score) %></h2> <%= score.completed %>
-  <div class='score-data' data-scores= <%= ScoreCard.new.score(score).to_json %>></div>
-  <p>
+<div class='score'>
+  <h2 class='title'><%= link_to score.title, datatable_path(score) %></h2> 
+  <div>
   <%=raw score.description %>
-  </p>
+  <%= score.completed %>
+</div>
+  <div class='score-data' data-scores= <%= ScoreCard.new.score(score).to_json %>></div>
 </div>

@@ -2,3 +2,18 @@
   font-size: small;
   font-weight: bold;
 }
+
+#inner.score-cards {
+    background: none;
+  }
+
+.score {
+  margin-bottom: 12px;
+
+  .title {
+    a {
+    font-size: 14px;
+    font-weight: bold;
+  }
+  }
+}
