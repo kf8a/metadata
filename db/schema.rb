@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130322124353) do
+ActiveRecord::Schema.define(:version => 20130322164703) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -234,6 +234,7 @@ ActiveRecord::Schema.define(:version => 20130322124353) do
     t.text     "deprecation_notice"
     t.integer  "number_of_released_records"
     t.text     "scores"
+    t.date     "completed_on"
   end
 
   add_index "datatables", ["core_area_id"], :name => "index_datatables_on_core_area_id"
