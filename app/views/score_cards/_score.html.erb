@@ -9,7 +9,7 @@
     <%=raw truncate(score.description, :length => 500) %> 
     </p>
     <p>
-    <% if score.completed %>
+    <% if score.status == 'completed' %>
       Completed: <%= score.completed %>
     <% end %>
     </p>
