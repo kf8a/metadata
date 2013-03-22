@@ -29,7 +29,9 @@ class ScoreCard
 
     if time_key
       result = data(datatable,time_key)
-      update_frequency_years = datatable.update_frequency_days/365
+      update_frequency = datatable.update_frequency_days
+      update_frequency = 365 unless update_frequency
+      update_frequency_years = update_frequency/365
       result = fill_to_present(result, update_frequency_years) unless datatable.completed
       result
     else
