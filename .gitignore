@@ -30,3 +30,4 @@ config/initializers/secret_token.rb
 config/initializers/site_keys.rb
 .sass-cache/
 shared/
+uploaded_files

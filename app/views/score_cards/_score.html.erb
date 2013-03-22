@@ -1,7 +1,7 @@
 <div class='score'>
   <div class='one-half first'>
     <h2 class='title'><%= link_to "#{score.dataset.website.try(:name).upcase} :  #{score.study.try(:name)} : #{raw(score.title)}", datatable_path(score) %></h2>
-</div>
+  </div>
   <div class='one-half first'>
     <p>
     <%=raw truncate(score.description, :length => 500) %> 
@@ -13,7 +13,7 @@
     </p>
 </div>
 <div class='one-half'>
-  <p>
+  <p><em>Variates</em>: 
     <% score.variates.each do |variate| %>
      <%= variate.name %>, 
     <% end %>
