@@ -101,7 +101,7 @@ Metadata::Application.routes.draw do
   resources :variates
 
   resources :visualizations, :only => 'show'
-  resources :score_cards, :only => 'index'
+  resources :score_cards, :only => ['index', 'show']
 
   root :to => 'datatables#index'
   match ':controller/service.wsdl' => '#wsdl'

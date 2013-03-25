@@ -12,4 +12,8 @@ class ScoreCardsController < ApplicationController
                               .order(:study_id).order(:theme_id)
     end
   end
+
+  def show
+    @datatable = Datatable.find(params[:id])
+  end
 end
