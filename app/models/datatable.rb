@@ -293,7 +293,11 @@ class Datatable < ActiveRecord::Base
   end
 
   def status
-    dataset.try(:status)
+    if workflow_state
+      workflow_state
+    else
+      dataset.try(:status)
+    end
   end
 
   def convert_to_csv(values)
