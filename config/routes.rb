@@ -1,5 +1,4 @@
 Metadata::Application.routes.draw do
-  mount Mercury::Engine => '/'
 
   match '/send_invitation/:id' => 'invites#send_invitation', :as => :send_invitation
   match '/signup/:invite_code' => 'users#new', :as => :redeem_invitation

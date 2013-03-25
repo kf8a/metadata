@@ -18,7 +18,7 @@ gem 'formtastic'
 gem 'simple_form'
 gem 'country_select'
 
-gem 'mercury-rails'
+#gem 'mercury-rails'
 
 # can we go back to the collective idea branch of awesome_nested_set
 gem 'awesome_nested_set' #, :git => 'git://github.com/galetahub/awesome_nested_set.git'
