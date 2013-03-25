@@ -48,12 +48,9 @@ Metadata::Application.configure do
   #     "/release-#{RELEASE_NUMBER}#{asset_path}"
   #   }
   # Enable serving of images, stylesheets, and javascripts from an asset server
-  #config.action_controller.asset_host = "http://lter.kbs.msu.edu/dynamic"
-  
-  config.action_mailer.smtp_settings = {
-    :enable_starttls_auto => true,  
-    :openssl_verify_mode  => 'none' 
-  }
+  # config.action_controller.asset_host = "http://lter.kbs.msu.edu/"
+
+  config.action_mailer.delivery_method = :sendmail
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
