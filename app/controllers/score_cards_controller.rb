@@ -9,7 +9,7 @@ class ScoreCardsController < ApplicationController
     else
       @datatables = Datatable.includes(:dataset).where(:is_sql => true).where('datasets.website_id = 1')
                               .where(:on_web => on_web).where('datasets.status = ?', status)
-                              .order(:study_id).order(:theme_id)
+                              .order(:study_id).order(:theme_id).order(:id)
     end
   end
 
