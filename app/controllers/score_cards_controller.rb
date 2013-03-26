@@ -2,8 +2,9 @@ class ScoreCardsController < ApplicationController
   def index
     # @datatables = Study.includes(:datatables).where('datatables.is_sql is true').where(:code => 'MSCE')
 
-    on_web = params[:on_web] || true
-    status = params[:status] || 'active'
+    on_web   = params[:on_web] || true
+    status   = params[:status] || 'active'
+    website  = params[:website] || 'lter'
     study_id = params[:study_id]
 
     if 'glbrc' == website
