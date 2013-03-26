@@ -6,9 +6,9 @@
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="/wp-content/themes/msu-kbs/lib/css/normalize.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/wp-content/themes/msu-kbs/lib/css/normalize.css" type="text/css" />
     <link rel="Shortcut Icon" href="/wp-content/themes/msu-kbs/images/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/wp-content/themes/msu-kbs/style.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/wp-content/themes/msu-kbs/style.css" type="text/css" />
     <link rel="stylesheet" id="gsc_style-css" href="http://lter.kbs.msu.edu/wp-content/plugins/google-custom-search/css/smoothness/jquery-ui-1.7.3.custom.css?ver=3.4" type="text/css" media="all">
     <link rel='stylesheet' href='http://lter.kbs.msu.edu/wp-content/plugins/google-custom-search/css/gsc-no-search-button.css?ver=3.4'/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -19,7 +19,7 @@
   <script src="http://d3js.org/d3.v3.min.js"></script>
     <%= csrf_meta_tag unless response.cache_control[:public] %>
     <%= javascript_include_tag :application %>
-    <%= stylesheet_link_tag :application %>
+    <%= stylesheet_link_tag :application, :media => 'all'%>
 
     <script type="text/javascript">
       jQuery(document).ready(function() {
