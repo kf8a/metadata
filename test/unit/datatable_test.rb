@@ -597,12 +597,13 @@ class DatatableTest < ActiveSupport::TestCase
      setup do
       dataset = FactoryGirl.create(:dataset)
       @datatable = FactoryGirl.create(:datatable, :dataset => dataset, :object=>"select now() as a, '1' as b", :number_of_released_records => 1)
-      affiliation = Affiliation.new
+      affiliation = Affiliation.create
       @role = FactoryGirl.create(:role)
       @person = FactoryGirl.create(:person)
       affiliation.role = @role
       affiliation.person = @person
       affiliation.seniority = 1
+      affiliation.save
       dataset.affiliations << affiliation
      end
 

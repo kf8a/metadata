@@ -140,7 +140,7 @@ class Dataset < ActiveRecord::Base
   def update_temporal_extent
     dates = temporal_extent
     self.initiated = dates[:begin_date] if dates[:begin_date]
-    self.date_end_date = dates[:end_date] if dates[:end_date]
+    self.data_end_date = dates[:end_date] if dates[:end_date]
     save
   end
 

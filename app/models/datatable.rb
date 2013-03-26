@@ -397,13 +397,16 @@ class Datatable < ActiveRecord::Base
     ActiveRecord::Base.connection.execute(query)
   end
 
-  def approved_data
+  def approved_data_query
+    query = self.object
     if self.number_of_released_records
-      query = self.object + " offset #{offset}"
-    else
-      query = self.object
+      query = query + " offset #{offset}"
     end
-    ActiveRecord::Base.connection.execute(query)
+    query
+  end
+
+  def approved_data
+    ActiveRecord::Base.connection.execute(approved_data_query)
   end
 
   def all_data

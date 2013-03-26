@@ -120,7 +120,7 @@ class DatasetTest < ActiveSupport::TestCase
       @dataset.update_temporal_extent
       @dataset.reload #make sure it updates in the database
       assert_equal Date.today, @dataset.initiated
-      assert_equal Date.today, @dataset.completed
+      assert_equal Date.today, @dataset.data_end_date
     end
 
   end
@@ -210,6 +210,7 @@ class DatasetTest < ActiveSupport::TestCase
 
   context 'set affiliations' do
     setup do
+      @person  = FactoryGirl.create(:person)
       @dataset = FactoryGirl.create(:dataset)
     end
 
@@ -238,8 +239,7 @@ class DatasetTest < ActiveSupport::TestCase
        "completed(2i)"=>"10",
        "completed(3i)"=>"9",
        "core_dataset"=>"1",
-       "affiliations_attributes"=>[{"person_id"=>"158",
-       "seniority"=>"1"}]},
+       "affiliations_attributes"=>[{"person_id"=>@person.id, "seniority"=>"1"}]},
        "commit"=>"Update",
        "id"=>"16"}
 
