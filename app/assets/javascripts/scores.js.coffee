@@ -1,4 +1,11 @@
 class ScoreGraph
+
+  score: (data, max_count) ->
+    if d.count < d.approved
+      - d.approved/max_count
+    else
+      d.count/max_count
+
   render: (el) ->
     data = $(el).data('scores')
     return unless data?
@@ -12,9 +19,15 @@ class ScoreGraph
 
     max_count = d3.max(data, (d) -> d.count )
 
+    data.forEach( (d) ->
+      if d.count > d.approved
+        d.score =  (d.approved - d.count)/max_count
+      else
+        d.score = d.count/max_count)
+
     z = d3.scale.sqrt()
-      .domain([0,1])
-      .range(['white','limegreen'])
+      .domain([-1, 0,1])
+      .range(['red','white','limegreen'])
 
     svg = d3.select(el)
       .append('svg:svg')
@@ -32,7 +45,7 @@ class ScoreGraph
       .attr('cx', (d) -> x(d.year))
       .attr('r', 14)
       .attr('stroke', 'black')
-      .attr('fill', (d) -> z(d.count/max_count))
+      .attr('fill', (d) -> z(d.score))
 
     svg.selectAll('year')
       .data(data)

@@ -29,36 +29,55 @@ class ScoreCard
 
     if time_key
       result = data(datatable,time_key)
-      update_frequency = datatable.update_frequency_days
-      update_frequency = 365 unless update_frequency
-      update_frequency_years = update_frequency / 365
-      update_frequency_years = 1 if 0 == update_frequency_years
-      result = fill_to_present(result, update_frequency_years) unless 'completed' == datatable.status
+
+      result = fill_to_present(result, update_frequency_years(datatable)) unless 'completed' == datatable.status
       result
     else
       []
     end
   end
 
+  def update_frequency_years(datatable)
+    update_frequency = datatable.update_frequency_days || 365
+    update_frequency = update_frequency / 365
+    update_frequency = 1 if 0 == update_frequency
+    update_frequency
+  end
+
   def data(datatable, time_key)
     if time_key =~ /year/i
       query = "select #{time_key} as year, count(*) from (#{datatable.object}) as t1 group by #{time_key}"
+      approved_query = "select #{time_key} as year, count(*) from (#{datatable.approved_data_query}) as t1 group by #{time_key}"
     else
       query = "select date_part('year',#{time_key}) as year, count(*) from (#{datatable.object}) as t1 group by date_part('year',#{time_key})"
+      approved_query = "select date_part('year',#{time_key}) as year, count(*) from (#{datatable.approved_data_query}) as t1 group by date_part('year',#{time_key})"
     end
     begin
-    query_result = db_connection.execute(query)
-    rescue Exception
+      query_result    = db_connection.execute(query)
+      approved_result = db_connection.execute(approved_query)
+
+    rescue Exception => e
       query_result = []
+      approved_result = []
     end
-    query_result.collect do |row|
+    result = query_result.collect do |row|
       {:year => row['year'].to_i, :count => row['count'].to_f}
+    end
+    approved_result.collect do |row|
+      r = result.index {|x| x[:year] == row['year'].to_i}
+      if r
+        result[r][:approved] = row['count'].to_f
+        result[r]
+      else
+        {:year => row['year'].to_i, :count => 0, :approved => row['count'].to_f}
+      end
     end
   end
 
   def fill_to_present(data, update_frequency_years = 1)
     return if data.empty?
-    max_year = data.max {|a,b| a[:year] <=> b[:year]}[:year].to_i
+    max_year_record = data.max {|a,b| a[:year] <=> b[:year]}
+    max_year = max_year_record[:year].to_i
     max_year += update_frequency_years
     add_years = (max_year..current_year).step(update_frequency_years).collect { |year| {:year => year, :count => 0} }
     add_years + data
