@@ -1,1 +1,4 @@
+<% Study.order(:id).all.each do |study| %>
+  <%= link_to study.name, "#{request.path}?study_id=#{study.id}" %> : 
+<% end %>
 <%= render :partial => 'score', :collection => @datatables %>

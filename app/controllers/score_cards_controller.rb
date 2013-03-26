@@ -4,12 +4,17 @@ class ScoreCardsController < ApplicationController
 
     on_web = params[:on_web] || true
     status = params[:status] || 'active'
+    study_id = params[:study_id]
+
     if 'glbrc' == website
       @datatables = Datatable.includes(:dataset).where(:is_sql => true).where('datasets.website_id = 2')
     else
       @datatables = Datatable.includes(:dataset).where(:is_sql => true).where('datasets.website_id = 1')
                               .where(:on_web => on_web).where('datasets.status = ?', status)
                               .order(:study_id).order(:theme_id).order('datatables.id')
+      if study_id
+        @datatables = @datatables.where(:study_id => study_id)
+      end
     end
   end
 
