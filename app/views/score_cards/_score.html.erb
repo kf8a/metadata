@@ -1,7 +1,7 @@
 <div class='score'>
   <div class='one-half first'>
     <h2 class='title'>
-      <%= link_to "#{score.dataset.website.try(:name).upcase} :  #{score.study.try(:name)} : #{raw(score.title)}", datatable_path(score) %>
+      <%= link_to "#{score.study.try(:name)} : #{raw(score.title)}", datatable_path(score) %>
     </h2>
   </div>
   <div class='one-half first'>
