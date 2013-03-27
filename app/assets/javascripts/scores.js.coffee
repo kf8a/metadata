@@ -27,7 +27,7 @@ class ScoreGraph
 
     z = d3.scale.sqrt()
       .domain([-1, 0,1])
-      .range(['red','white','limegreen'])
+      .range(['blue','white','limegreen'])
 
     svg = d3.select(el)
       .append('svg:svg')
