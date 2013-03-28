@@ -54,11 +54,13 @@ class Datatable < ActiveRecord::Base
   end
 
   def revert
-    completed_on = nil
+    self.completed_on = nil
+    save
   end
 
   def complete
-    completed_on = Date.today
+    self.completed_on = Date.today
+    save
   end
 
   define_index do
