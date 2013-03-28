@@ -131,12 +131,13 @@ class DatatablesController < ApplicationController
   #TODO only return the ones for the right website.
   def suggest
     term = params[:term]
-    #  list = Datatable.tags.all.collect {|x| x.name.downcase}
-    list = Person.find_all_with_dataset.collect { |person| person.sur_name.downcase }
-    list = list + Theme.all.collect { |theme| theme.name.downcase }
-    list = list + CoreArea.all.collect { |area| area.name.downcase }
 
-    keywords = list.compact.uniq.sort
+    list = ActsAsTaggableOn::Tag.where("lower(name) like ?", term.downcase + '%').select("DISTINCT tags.name")
+    list = list + Person.where('lower(sur_name) like ?', term.downcase + '%').select('DISTINCT sur_name as name')
+    list = list + Theme.where('lower(name) like ?', term.downcase + '%').select('DISTINCT name')
+    list = list + CoreArea.where('lower(name) like ?', term.downcase + '%').select('DISTINCT name')
+
+    keywords = list.collect {|x| x.name.downcase }.sort.uniq
     respond_to do |format|
       format.json {render :json => keywords}
     end
