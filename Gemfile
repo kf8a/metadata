@@ -6,7 +6,7 @@ gem 'rake'
 gem 'capistrano' 
 gem 'pg'
 gem 'foreigner'
-gem 'clearance', '1.0.0.rc4'
+gem 'clearance', '1.0.0.rc7'
 gem 'ruby-openid', :git => 'https://github.com/kf8a/ruby-openid.git'
 gem 'rack-openid'
 gem 'acts-as-taggable-on'
@@ -56,7 +56,7 @@ gem 'cache_digests'
 
 group :production do
   #gem "sitemap_generator", "~> 3.1.1"
-  gem 'exception_notification'
+  # gem 'exception_notification'
   gem 'unicorn'
   gem 'aws-sdk'
  # gem 'newrelic_rpm'
@@ -77,7 +77,7 @@ group :development, :test  do
   gem "shoulda", :git => 'git://github.com/thoughtbot/shoulda.git' 
   gem "annotate"
 
-  gem 'sqlite3-ruby'
+  gem 'sqlite3'
 end
 
 group :test do
