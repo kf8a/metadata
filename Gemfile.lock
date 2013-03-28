@@ -77,8 +77,6 @@ GEM
     bourne (1.4.0)
       mocha (~> 0.13.2)
     builder (3.0.4)
-    cache_digests (0.2.0)
-      actionpack (>= 3.2)
     capistrano (2.14.2)
       highline
       net-scp (>= 1.0.0)
@@ -302,7 +300,6 @@ DEPENDENCIES
   awesome_nested_set
   aws-sdk
   bibtex-ruby
-  cache_digests
   capistrano
   capybara
   clearance (= 1.0.0.rc7)
