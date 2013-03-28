@@ -97,7 +97,6 @@ class CitationsControllerTest < ActionController::TestCase
       end
 
       should respond_with :success
-      should assign_to :citations
 
       should render_with_layout 'lter'
 
@@ -114,13 +113,11 @@ class CitationsControllerTest < ActionController::TestCase
 
       context 'in endnote format' do
         setup {get :index, :format=>:enw}
-        should assign_to :citations
         should respond_with :success
       end
 
       context 'as an rss feed' do
         setup {get :index, :format => :rss}
-        should assign_to :citations
         should respond_with :success
       end
 
@@ -130,7 +127,6 @@ class CitationsControllerTest < ActionController::TestCase
           get :index, :date=>{:year=>"#{date.year - 1}", :month=>'4', :day => '16'}
         end
         should respond_with :success
-        should assign_to :citations
         should 'have all citations since the date is in the past' do
           assert_equal 4, assigns(:citations).size
         end
@@ -142,7 +138,6 @@ class CitationsControllerTest < ActionController::TestCase
           get :index, :date=>{:year=>"#{date.year + 1}", :month=>'4', :day => '16'}
         end
         should respond_with :success
-        should assign_to :citations
         should 'not have any citations since the date is in the future' do
           assert_equal 0, assigns(:citations).size
         end
@@ -154,7 +149,6 @@ class CitationsControllerTest < ActionController::TestCase
         end
 
         should respond_with :success
-        should assign_to :citations
 
         should 'only include article citations' do
           citations = assigns(:citations)
@@ -168,7 +162,6 @@ class CitationsControllerTest < ActionController::TestCase
         end
 
         should respond_with :success
-        should assign_to :citations
 
         should 'only include book citations' do
           citations = assigns(:citations)
@@ -183,7 +176,6 @@ class CitationsControllerTest < ActionController::TestCase
         setup { get :index, :type => 'thesis' }
 
         should respond_with :success
-        should assign_to :citations
 
         should 'only include thesis citaitons' do
           citations = assigns(:citations)
@@ -202,7 +194,6 @@ class CitationsControllerTest < ActionController::TestCase
       end
 
       should respond_with :success
-      should assign_to :citations
 
       should render_with_layout 'glbrc'
 
@@ -245,7 +236,6 @@ class CitationsControllerTest < ActionController::TestCase
       context 'in bibtext format' do
         setup {get :show, :id=>@citation, :format => 'bib'}
         should respond_with :success
-        should assign_to :citation
       end
     end
 
@@ -287,7 +277,6 @@ class CitationsControllerTest < ActionController::TestCase
       end
 
       should redirect_to('the sign in path') { sign_in_path }
-      should_not assign_to(:citation)
 
     end
 
@@ -316,7 +305,6 @@ class CitationsControllerTest < ActionController::TestCase
       end
 
       should respond_with :success
-      should assign_to :citations
     end
 
     context 'GET: new' do
@@ -376,7 +364,6 @@ class CitationsControllerTest < ActionController::TestCase
       end
 
       should respond_with :success
-      should assign_to :citations
 
     end
 
@@ -397,7 +384,6 @@ class CitationsControllerTest < ActionController::TestCase
         post :create, :citation => {:type => 'ArticleCitation', :author_block => 'Jim Jones'}
       end
 
-      should assign_to(:citation)
       should redirect_to('the citation show page') {citation_url(assigns(:citation))}
 
       should 'have a type of ArticleCitation' do
@@ -418,7 +404,6 @@ class CitationsControllerTest < ActionController::TestCase
       end
 
       should respond_with :success
-      should assign_to(:citation)
     end
 
     context 'POST: update' do
@@ -428,7 +413,6 @@ class CitationsControllerTest < ActionController::TestCase
                                                         :type=>'ArticleCitation' }
       end
 
-      should assign_to(:citation)
       should respond_with :success
 
       should 'assign a type of ArticleCitation' do

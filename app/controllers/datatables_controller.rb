@@ -1,7 +1,7 @@
 class DatatablesController < ApplicationController
   helper_method :datatable
 
-  before_filter :admin?, :except => [:index, :show, :suggest, :search, :events, :qc] unless Rails.env == 'development'
+  before_filter :admin?, :except => [:index, :show, :suggest, :search, :qc] unless Rails.env == 'development'
   before_filter :can_download?, :only=>[:show], :if => Proc.new { |controller| controller.request.format.csv? } # run before filter to prevent non-members from downloading
 
   protect_from_forgery :except => [:index, :show, :search]
@@ -29,11 +29,6 @@ class DatatablesController < ApplicationController
     else
       retrieve_datatables(query)
     end
-  end
-
-  def events
-    datatable = Datatable.find(params[:id])
-    render :json => datatable.events
   end
 
   # GET /datatables/1

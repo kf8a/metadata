@@ -74,14 +74,6 @@ class DatatableTest < ActiveSupport::TestCase
       assert @datatable.respond_to?('update_temporal_extent')
     end
 
-    should 'respond to events' do
-      assert @datatable.respond_to?('events')
-    end
-
-    should 'return events as a string' do
-      assert_kind_of String, @datatable.events
-    end
-
     should 'respond to study' do
       assert_respond_to @datatable, 'study'
     end
@@ -121,15 +113,6 @@ class DatatableTest < ActiveSupport::TestCase
       assert @datatable.data_access_statement                 =~ /Use it/
       assert @datatable_without_sponsor.data_access_statement == ''
     end
-  end
-
-  context 'a datatable with an event query' do
-    setup do
-      @datatable = FactoryGirl.build :datatable, :object=>'select now()'
-    end
-
-    should 'return a an array of events'
-
   end
 
   context 'datatable without owners and permissions' do

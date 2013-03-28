@@ -53,17 +53,6 @@ class DatatablesControllerTest < ActionController::TestCase
       end
     end
 
-    context 'GET :events' do
-      setup do
-        @sponsor  = FactoryGirl.create :sponsor, :data_use_statement => 'smoke em if you got em'
-        dataset   = FactoryGirl.create :dataset, :sponsor => @sponsor
-        datatable = FactoryGirl.create :datatable, :dataset => dataset
-        get :events, :id => datatable, :format => :json
-      end
-
-      should respond_with :success
-    end
-
     # TODO: this test does not actually test anything because there are no results returned. Maybe
     # we need a mock here so we don't need to start thinking sphinks.
     context 'GET :search' do
