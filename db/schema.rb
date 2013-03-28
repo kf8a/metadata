@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130322204214) do
+ActiveRecord::Schema.define(:version => 20130328142628) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -230,7 +230,6 @@ ActiveRecord::Schema.define(:version => 20130322204214) do
     t.boolean  "is_utf_8",                   :default => false
     t.boolean  "metadata_only",              :default => false
     t.text     "summary_graph"
-    t.text     "event_query"
     t.integer  "deprecated_in_fovor_of"
     t.text     "deprecation_notice"
     t.integer  "number_of_released_records"
@@ -282,16 +281,6 @@ ActiveRecord::Schema.define(:version => 20130322204214) do
   end
 
   create_table "eml_docs", :force => true do |t|
-  end
-
-  create_table "events", :force => true do |t|
-    t.string   "title"
-    t.datetime "start"
-    t.datetime "end"
-    t.text     "caption"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "geometry_columns", :id => false, :force => true do |t|

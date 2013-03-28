@@ -44,7 +44,6 @@ Metadata::Application.routes.draw do
   resources :datatables do
     collection do
       get :auto_complete_for_datatable_keyword_list
-      get :events
       get :suggest
       post :search
     end
