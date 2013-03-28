@@ -5,7 +5,7 @@ require 'subdomain_resolver'
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  include Clearance::Authentication
+  include Clearance::Controller
 #  include CentralLogger::Filter
 
   layout :site_layout
