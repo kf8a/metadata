@@ -5,7 +5,7 @@
 
 <%= render 'search_form' %>
 
-<ul class='quickTree'>
+<ul>
   <% @studies.each do |study| -%>
     <% next unless study.include_datatables?(@datatables)%>
 
