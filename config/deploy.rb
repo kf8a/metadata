@@ -74,15 +74,16 @@ namespace :deploy do
   after 'deploy:finalize_update', :link_s3
   after 'deploy', :lock_sphinks
 
-  # namespace :assets do
-  #   desc "Precompile assets on local machine and upload them to the server."
-  #   task :precompile, roles: :web, except: {no_release: true} do
-  #     run_locally "bundle exec rake assets:precompile"
-  #     find_servers_for_task(current_task).each do |server|
-  #       run_locally "rsync -vr --exclude='.DS_Store' public/assets #{user}@#{server.host}:#{shared_path}/"
-  #     end
-  #   end
-  # end
+  namespace :assets do
+    desc "Precompile assets on local machine and upload them to the server."
+    task :precompile, roles: :web, except: {no_release: true} do
+      run_locally "bundle exec rake assets:precompile"
+      find_servers_for_task(current_task).each do |server|
+        run_locally "rsync -vr --exclude='.DS_Store' public/assets #{user}@#{server.host}:#{shared_path}/"
+        run_locally "rsync -vr --exclude='.DS_Store' public/assets #{asset_host}:#{asset_path}/"
+      end
+    end
+  end
 
 end
 
@@ -90,6 +91,8 @@ task :staging do
 
   # set :host, '192.168.33.10'
   set :host, "projectlog.kbs.msu.edu"
+  set :asset_host, 'hillsdale.kbs.msu.edu'
+  set :asset_path, '/var/www/lter/metadata-assets'
 
   role :app, host
   role :web, host

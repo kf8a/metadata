@@ -1,6 +1,6 @@
-# development:
-#   enable_star: 1
-#   min_infix_len: 1
+development:
+  enable_star: 1
+  min_infix_len: 1
 test:
   enable_star: 1
   min_infix_len: 1
