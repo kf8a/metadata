@@ -53,16 +53,6 @@ FactoryGirl.define do
   factory :project do
   end
 
-  factory :publication do
-    citation            'bogus data, brown and company'
-    abstract            'something in here'
-    year                2000
-    publication_type_id 1
-  end
-
-  factory :publication_type do
-  end
-
   factory :role_type do
   end
 

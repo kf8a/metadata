@@ -1,7 +1,0 @@
-<h1>WOW only <%= @publications.count %> publications left</h1>
-<% @publications.each do |pub| %>
-  <p>
-  <%= pub.citation %>
-  <%= link_to 'edit', edit_publication_path(pub) %>
-  </p>
-<% end %> 
