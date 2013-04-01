@@ -259,6 +259,10 @@
     width: 100%;
     border-top-style: solid;
     border-top-width: 1px;
+
+    ul {
+      list-style-type: none;
+    }
   }
 
   .data-description tr td:first-child{
