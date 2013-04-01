@@ -5,16 +5,16 @@
 <%= render 'search_form', :word => @word, :type => @type, :sort_by => @sort_by %>
   <h1 class='publication-section'>Submitted</h1>
   <p class='synopsis indent'>Papers still in review; contact the first author for further information.</p>
-  <ul>
+  <ul class='citations'>
     <%= render :partial => 'citation', :collection => @submitted_citations, :locals => {:year => nil} %>
   </ul>
   <h1 class='publication-section'>Forthcoming</h1>
   <p class='synopsis indent'>Papers accepted but not yet published.</p>
-  <ul>
+  <ul class='citations'>
     <%= render :partial => 'citation', :collection => @forthcoming_citations, :locals => {:year => nil} %>
   </ul>
   <h1 class='publication-section'>Published (alphabetical by year)</h1>
-  <ul>
+  <ul class='citations'>
     <% year = 0 -%>
     <% @citations.each do |citation| %>
       <%= render 'citation', :citation=>citation, :year => year %>

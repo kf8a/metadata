@@ -5,12 +5,12 @@
   <% if @forthcoming_citations.present? %>
 <h1 class='publication-section'>Forthcoming</h1>
 <p class='synopsis indent'>Papers accepted but not yet published.</p>
-<ul>
+ <ul class='citations'>
   <%= render :partial => 'citation', :collection => @forthcoming_citations, :locals => {:year => nil} %>
 </ul>
 <% end %>
 <h1 class='publication-section'>Published (alphabetical by year)</h1>
-<ul>
+<ul class='citations'>
 <% year = 0 -%>
 <% @citations.each do |citation| %>
   <%= render 'citation', :citation=>citation, :year => year %>

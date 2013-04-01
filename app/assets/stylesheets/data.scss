@@ -87,13 +87,18 @@
     -webkit-column-width: 20em;
   }
 
-  .pub_year {
+  ul.citations {
+    list-style-type: none;
+  }
+
+  .pub-year {
     font-weight: bold;
     font-size: 1.1em;
     margin-bottom: 1.4em;
     text-align: right;
     border-bottom-style: solid;
     border-bottom-width: 2px;
+    padding-right: 10px;
   }
 
   li ul li {

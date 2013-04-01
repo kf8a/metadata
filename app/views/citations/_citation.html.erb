@@ -2,7 +2,7 @@
   <li class='citation'>
       <% unless year.nil? %>
         <% if citation.pub_year.to_i != year  -%>
-            <div class='pub_year'><%= citation.pub_year %></div>
+            <div class='pub-year'><%= citation.pub_year %></div>
         <% end %>
       <% end %>
       <% cache(:action=>'index', :action_suffix => "citation_#{citation.id}") do %>
