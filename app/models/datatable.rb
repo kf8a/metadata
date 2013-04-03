@@ -288,7 +288,7 @@ class Datatable < ActiveRecord::Base
   def convert_to_csv(values)
     csv_string = CSV.generate do |csv|
       vars = variate_names 
-      csv << variates.collect { |variate| variate.name.downcase}
+      csv << variates.collect { |variate| variate.name}
       values.each do |row|
         csv << vars.collect do |variate|
           row[variate.downcase]

@@ -570,7 +570,7 @@ class DatatableTest < ActiveSupport::TestCase
         @datatable.variates = [Variate.new(:name => 'a'), Variate.new(:name => 'B')]
         @datatable.save
         data = CSV.parse(@datatable.approved_csv)
-        b_column = data[0].index("b")
+        b_column = data[0].index("B")
         assert_equal '1', data[1][b_column]
       end
 
