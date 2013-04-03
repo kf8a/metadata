@@ -288,10 +288,10 @@ class Datatable < ActiveRecord::Base
   def convert_to_csv(values)
     csv_string = CSV.generate do |csv|
       vars = variate_names 
-      csv << variates.collect { |variate| variate.name }
+      csv << variates.collect { |variate| variate.name.downcase}
       values.each do |row|
         csv << vars.collect do |variate|
-          row[variate]
+          row[variate.downcase]
         end
       end
     end
@@ -302,11 +302,7 @@ class Datatable < ActiveRecord::Base
     # stupid microsofts
     csv_string = approved_csv.force_encoding("UTF-8")
     result = ""
-    result =  header + csv_string
-    # if is_utf_8
-    #   result = result.encode('utf-16','utf-8')
-    # end
-    result
+    header + csv_string
   end
 
   def header
