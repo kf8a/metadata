@@ -574,13 +574,14 @@ class DatatableTest < ActiveSupport::TestCase
         assert_equal '1', data[1][b_column]
       end
 
-      should 'return data even if the query names are capitalized' do
-        pending 'wait until we need it'
-        # @datatable.object = %q{select now() as a, '1' as "B"}
-        # @datatable.save
-        # data = CSV.parse(@datatable.approved_csv)
-        # b_column = data[0].index("b")
-        # assert_equal '1', data[1][b_column]
+      should 'return data if the query names are capitalized' do
+        @datatable.object = %q{select now() as a, '1' as "B"}
+        @datatable.variates = [Variate.new(:name => 'a'), Variate.new(:name => 'B')]
+
+        @datatable.save
+        data = CSV.parse(@datatable.approved_csv)
+        b_column = data[0].index('B')
+        assert_equal '1', data[1][b_column]
       end
 
       context 'with comment' do
