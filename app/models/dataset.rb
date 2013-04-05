@@ -311,10 +311,12 @@ class Dataset < ActiveRecord::Base
             @eml.title 'Dataset Abstract'
             @eml.para EML.text_sanitize(textilize(abstract))
           end
-          @eml.section do
-            @eml.title 'Datatable Abstracts'
-            datatables.each do |datatable|
-              @eml.para datatable.description
+          if datatables.size > 0
+            @eml.section do
+              @eml.title 'Datatable Abstracts'
+              datatables.each do |datatable|
+                @eml.para datatable.description
+              end
             end
           end
         end
