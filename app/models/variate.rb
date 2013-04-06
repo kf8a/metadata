@@ -2,7 +2,7 @@ require 'rexml/document'
 include REXML
 
 class Variate < ActiveRecord::Base
-  belongs_to :datatable
+  belongs_to :datatable, :touch => true
   belongs_to :unit
 
   scope :valid_for_eml, where("measurement_scale != '' AND description != ''")
