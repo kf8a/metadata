@@ -23,6 +23,7 @@
   <div>
     <h2>Context:</h2>
     <div class='truncate'>
+      This datatable is part of the dataset <%= link_to datatable.dataset.title, dataset_url(datatable.dataset.id) %>.
       <%=raw textilize datatable.dataset.try(:abstract) %>
     </div>
   </div>
