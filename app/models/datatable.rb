@@ -74,6 +74,7 @@ class Datatable < ActiveRecord::Base
     indexes taggings.tag.name, :as => :keyword_name
     indexes dataset.title, :as => :dataset_title
     indexes dataset.dataset, :as => :dataset_identifier
+    indexes core_area.name, :as  => :core_area
     indexes name
     has dataset.website_id, :as => :website
     where "datatables.on_web is true and datasets.on_web"
