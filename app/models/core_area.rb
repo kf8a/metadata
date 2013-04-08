@@ -4,9 +4,6 @@ class CoreArea < ActiveRecord::Base
   scope :by_name, :order => 'name'
 end
 
-
-
-
 # == Schema Information
 #
 # Table name: core_areas
