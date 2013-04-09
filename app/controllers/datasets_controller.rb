@@ -19,7 +19,7 @@ class DatasetsController < ApplicationController
     @keyword_list   = params['keyword_list']
     @people         = Person.find_all_with_dataset
     @themes         = Theme.by_weight
-    @datasets       = Dataset.where(:on_web => true).all
+    @datasets       = Dataset.where(:on_web => true).where(:website_id => website.id)
     @studies        = collect_and_normalize_studies(@datasets)
     @crumbs         = []
     respond_to do |format|
