@@ -3,7 +3,7 @@ xml.hrv:harvestList, 'xmlns:hrv' => 'eml://ecoinformatics.org/harvestList' do
 
   @datasets.each do |dataset|
     next unless dataset.website
-    next unless dataset.website.name == 'lter'
+    next if dataset.sponsor.data_restricted
     xml.document do
       xml.docid do
         xml.scope "knb-lter-kbs"
