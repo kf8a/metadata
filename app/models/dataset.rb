@@ -237,7 +237,7 @@ class Dataset < ActiveRecord::Base
         @eml.organizationName "KBS LTER"
       end
       eml_methods
-      datatables.each { |table| table.to_eml(@eml) if table.valid_for_eml? }
+      datatables.each { |table| table.to_eml(@eml) if table.on_web && table.valid_for_eml? }
     end
   end
 
