@@ -41,15 +41,15 @@ class Datatable < ActiveRecord::Base
 
   workflow do
     state :active do
-      event :complete, :transitions_to => :completed
+      event :complete,      :transitions_to => :completed
       event :mark_deleted,  :transitions_to => :deleted
     end
     state :completed do
-      event :revert, :transitions_to => :active
+      event :revert,        :transitions_to => :active
       event :mark_deleted,  :transitions_to => :deleted
     end
     state :deleted do
-      event :revert, :transitions_to => :active
+      event :revert,        :transitions_to => :active
     end
   end
 
