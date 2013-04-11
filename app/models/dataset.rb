@@ -230,7 +230,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_dataset
-    @eml.dataset do
+    @eml.dataset 'id' => Rails.application.routes.url_helpers.dataset_path(self, :format => 'eml') do
       eml_resource_group
       contact_info
       @eml.publisher do
