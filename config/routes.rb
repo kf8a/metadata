@@ -4,9 +4,6 @@ Metadata::Application.routes.draw do
   match '/signup/:invite_code' => 'users#new', :as => :redeem_invitation
   resource :session, :controller => 'sessions'
   resource :users
-  # match 'sign_in' => 'sessions#new', :as => :sign_in
-  # match 'sign_out' => 'sessions#destroy', :as => :sign_out
-  # match 'sign_up' => 'users#new', :as => :sign_up
 
   resources :abstracts do
     member do
@@ -41,6 +38,8 @@ Metadata::Application.routes.draw do
       post :set_affiliation_for
     end
   end
+  match 'knb/*id' => 'datasets#knb'
+
   resources :datatables do
     collection do
       get :auto_complete_for_datatable_keyword_list
