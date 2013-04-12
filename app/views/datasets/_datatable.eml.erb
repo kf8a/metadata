@@ -1,0 +1,47 @@
+<dataTable id='<%=datatable_url(datatable, :format => 'eml') %>'>
+  <entityName><%= datatable.title %></entityName>
+  <% if datatable.description.present? %>
+  <entityDescription>
+    <%= datatable.description.gsub(/<\/?[^>]*>/, "") %>
+  </entityDescription>
+  <% end %>
+
+  <!-- eml_physical -->
+  <physical>
+    <objectName><%= datatable.title %></objectName>
+    <encodingMethod>None</encodingMethod>
+
+    <!-- eml_data_format -->
+    <dataFormat>
+      <textFormat>
+        <numHeaderLines>
+          <%= datatable.header.lines.size + 2 %>
+        </numHeaderLines>
+        <numFooterLines>1</numFooterLines>
+        <recordDelimiter>\n</recordDelimiter>
+        <attributeOrientation>column</attributeOrientation>
+        <simpleDelimited>
+          <fieldDelimiter>,</fieldDelimiter>
+          <collapseDelimiters>no</collapseDelimiters>
+          <quoteCharacter>"</quoteCharacter>
+        </simpleDelimited>
+      </textFormat>
+    </dataFormat>
+
+
+    <online>
+      <url>
+        http://<%= datatable.website_name %>.kbs.msu.edu/datatables/<%= datatable.id %>.csv
+      </url>
+    </online>
+  </physical>
+
+  <!-- eml_attributes -->
+  <attributeList>
+    <% datatable.variates.each do |variate| %>
+    <%= render :partial => 'variate', :locals => {:variate => variate}, :format => 'eml' %>
+    <% end %>
+  </attributeList>
+
+</dataTable>
+

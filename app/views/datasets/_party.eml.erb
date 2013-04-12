@@ -1,0 +1,37 @@
+<individualName>
+<% unless person.given_name.blank? %>
+  <givenName><%= person.given_name %></givenName>
+<% end %>
+<% unless person.sur_name.blank? %>
+  <surName><%= person.sur_name %></surName>
+<% end %>
+</individualName>
+<% unless person.organization.blank? %>
+  <organizationName><%= person.organization %></organizationName>
+<% end %>
+<addresses>
+<% unless person.street_address.blank? %>
+  <delivertyPoint><%= person.street_address %></delivertyPoint>
+<% end %>
+<% unless person.city.blank? %>
+  <city><%= person.city %></city>
+<% end %>
+<% unless person.locale.blank? %>
+  <administrativeArea><%= person.locale %></administrativeArea>
+<% end %>
+<% unless person.postal_code.blank? %>
+  <postalCode><%= person.postal_code %></postalCode>
+<% end %>
+<% unless person.country.blank? %>
+  <country><%= person.country %></country>
+<% end %>
+</addresses>
+<% if person.phone %>
+  <phone type='phone'><%= person.phone %></phone>
+<% end%>
+<% if person.fax %>
+  <phone type='fax'><%= person.fax %></phone>
+<% end %>
+<% unless person.email.blank? %>
+  <electronicMailAddress><%= person.email %></electronicMailAddress>
+<% end %>
