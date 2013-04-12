@@ -127,7 +127,7 @@ class Dataset < ActiveRecord::Base
 
   def temporal_extent
     begin_date, end_date = nil
-    datatables.each do |datatable |
+    datatables.where(:on_web => true).each do |datatable |
       dates = datatable.temporal_extent
       datatable.update_temporal_extent
       next unless dates[:begin_date] && dates[:end_date]
@@ -142,6 +142,14 @@ class Dataset < ActiveRecord::Base
     self.initiated = dates[:begin_date] if dates[:begin_date]
     self.data_end_date = dates[:end_date] if dates[:end_date]
     save
+  end
+
+  def begin_date
+    self.initiated || '1988-1-1'
+  end
+
+  def end_date
+    self.data_end_date || Date.today
   end
 
   def restricted_to_members?
@@ -163,7 +171,7 @@ class Dataset < ActiveRecord::Base
     [leads, datatable_leads].flatten.uniq.compact
   end
 
-  private
+#  private
 
   def eml_custom_unit_list
     @eml.additionalMetadata do
@@ -294,6 +302,15 @@ class Dataset < ActiveRecord::Base
     @eml.pubDate Date.today
   end
 
+  def people
+    [people, datatable_people].flatten.uniq.compact.collect do |person|
+      role = datatables.collect {|x| x.which_roles(person)}.flatten.compact.first
+      role = which_roles(person).first unless role
+      role_name = role.name if role
+      {:person => person, :role => role_name }
+    end
+  end
+
   def eml_people
     [people, datatable_people].flatten.uniq.compact.each do |person|
       role = datatables.collect {|x| x.which_roles(person)}.flatten.compact.first
@@ -322,6 +339,11 @@ class Dataset < ActiveRecord::Base
         end
       end
     end
+  end
+
+  def place_keyword_set
+    ['LTER','KBS','Kellogg Biological Station',
+      'Hickory Corners', 'Michigan', 'Great Lakes']
   end
 
   def keyword_sets
