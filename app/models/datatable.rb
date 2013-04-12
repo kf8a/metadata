@@ -295,9 +295,7 @@ class Datatable < ActiveRecord::Base
         vars =  variates.collect {|variate| variate.name.downcase }
       end
       values.each do |row|
-        csv << vars.collect do |variate|
-          row[variate]
-        end
+        csv << vars.collect { |variate| row[variate] }
       end
     end
     csv_string
@@ -502,6 +500,7 @@ class Datatable < ActiveRecord::Base
           @eml.fieldDelimiter ','
           @eml.collapseDelimiters 'no'
           @eml.quoteCharacter '"'
+          @eml.literalCharacter '"'
         end
       end
     end

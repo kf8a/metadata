@@ -171,7 +171,7 @@ class Dataset < ActiveRecord::Base
     [leads, datatable_leads].flatten.uniq.compact
   end
 
-private
+#private
 
   def eml_custom_unit_list
     @eml.additionalMetadata do
