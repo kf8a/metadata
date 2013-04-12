@@ -106,7 +106,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def datatable_protocols
-    datatables.collect {|datatable| datatable.protocols}
+    datatables.where(:on_web => true).collect {|datatable| datatable.protocols}
   end
 
   def to_eml
