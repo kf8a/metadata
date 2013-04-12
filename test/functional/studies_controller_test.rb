@@ -13,7 +13,6 @@ class StudiesControllerTest < ActionController::TestCase
       end
 
       should respond_with :success
-      should assign_to :study_roots
     end
 
     context 'on GET to :edit' do

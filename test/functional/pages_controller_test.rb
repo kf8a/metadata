@@ -47,7 +47,6 @@ class PagesControllerTest < ActionController::TestCase
         post :update, :id => @page, :title => 'something else'
       end
 
-      should assign_to(:page)
       should redirect_to('the show page') {page_url(assigns(:page))}
     end
 
@@ -56,7 +55,6 @@ class PagesControllerTest < ActionController::TestCase
         put :create
       end
 
-      should assign_to(:page)
       should redirect_to("the show page") {page_url(assigns(:page))}
     end
 

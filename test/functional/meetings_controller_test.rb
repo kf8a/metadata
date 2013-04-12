@@ -20,8 +20,6 @@ class MeetingsControllerTest < ActionController::TestCase
       get :index
     end
 
-    should assign_to :meetings
-    should assign_to :title
     should render_template :index
   end
 
@@ -31,7 +29,6 @@ class MeetingsControllerTest < ActionController::TestCase
       get :show, :id => @meeting
     end
 
-    should assign_to :meeting
     should render_template :show
   end
 
@@ -40,8 +37,6 @@ class MeetingsControllerTest < ActionController::TestCase
       get :new
     end
 
-    should assign_to :meeting
-    should assign_to :venues
     should render_template :new
   end
 
@@ -51,8 +46,6 @@ class MeetingsControllerTest < ActionController::TestCase
       get :edit, :id => @meeting
     end
 
-    should assign_to :meeting
-    should assign_to :venues
     should render_template :edit
   end
 
@@ -63,7 +56,6 @@ class MeetingsControllerTest < ActionController::TestCase
       post :create, :meeting => {:venue_type_id => venue.id}
     end
 
-    should assign_to :meeting
     should redirect_to("the meetings page") {meetings_url}
     should set_the_flash
   end
@@ -73,8 +65,6 @@ class MeetingsControllerTest < ActionController::TestCase
       post :create, :meeting => {:venue_type_id => nil}
     end
 
-    should assign_to :meeting
-    should assign_to :venues
     should render_template :new
     should_not set_the_flash
   end
@@ -100,7 +90,6 @@ class MeetingsControllerTest < ActionController::TestCase
         put :update, :id => @meeting, :meeting => {:venue_type => nil}
       end
 
-      should assign_to :venues
       should_not set_the_flash
       should render_template :edit
     end

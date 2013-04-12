@@ -112,10 +112,6 @@ class DatasetsControllerTest < ActionController::TestCase
       get :index
     end
 
-    should assign_to :datasets
-    should assign_to :people
-    should assign_to :themes
-
     should redirect_to('the datatable page') {datatables_path}
     should_not set_the_flash
 

@@ -47,7 +47,6 @@ class PeopleControllerTest < ActionController::TestCase
 
     should respond_with :success
     should render_template :index
-    should assign_to :roles
     should "create index cache" do
       assert @controller.fragment_exist?(:controller => "people", :action => "index")
     end
@@ -72,7 +71,6 @@ class PeopleControllerTest < ActionController::TestCase
     end
 
     should render_template :emeritus
-    should assign_to :roles
     should "create emeritus cache" do
       assert @controller.fragment_exist?(:controller => "people", :action => "emeritus")
     end

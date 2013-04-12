@@ -13,17 +13,15 @@ class ThemesControllerTest < ActionController::TestCase
       @theme = FactoryGirl.create(:theme)
       get :index
     end
-    
-    should assign_to :theme_roots
+
     should respond_with :success
   end
-  
+
   context "POST create" do
     setup do
       post :create
     end
-    
-    should assign_to :theme
+
     should redirect_to("the themes page") {themes_url}
     should set_the_flash
   end

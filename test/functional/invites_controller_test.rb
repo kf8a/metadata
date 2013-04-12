@@ -14,7 +14,6 @@ class InvitesControllerTest < ActionController::TestCase
       end
 
       should respond_with :success
-      should assign_to(:invites)
     end
 
     context 'GET :show' do

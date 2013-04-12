@@ -13,9 +13,8 @@ class UploadsControllerTest < ActionController::TestCase
     end
 
     should respond_with :success
-    should assign_to :uploads
   end
-  
+
   test "should get new" do
     get :new
     assert_response :success

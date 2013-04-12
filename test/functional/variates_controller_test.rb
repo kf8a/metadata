@@ -15,7 +15,6 @@ class VariatesControllerTest < ActionController::TestCase
       end
 
       should respond_with :success
-      should assign_to :variates
     end
 
     context 'GET :new' do

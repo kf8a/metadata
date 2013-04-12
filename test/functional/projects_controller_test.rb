@@ -15,8 +15,7 @@ class ProjectsControllerTest < ActionController::TestCase
     setup do
       get :index
     end
-    
-    should assign_to :projects
+
     should render_template :index
   end
   
@@ -27,7 +26,6 @@ class ProjectsControllerTest < ActionController::TestCase
     end
 
     should render_template :show
-    should assign_to :project
   end
 
   context "on GET to :new" do
@@ -35,8 +33,6 @@ class ProjectsControllerTest < ActionController::TestCase
       get :new
     end
 
-    should assign_to :project
-    should assign_to :datasets
     should render_template :new
   end
   
@@ -45,10 +41,8 @@ class ProjectsControllerTest < ActionController::TestCase
       @project = FactoryGirl.create(:project)
       get :edit, :id => @project
     end
-    
+
     should render_template :edit
-    should assign_to :project
-    should assign_to :datasets
   end
 
   context "on POST to :create for a valid project" do  
@@ -73,7 +67,6 @@ class ProjectsControllerTest < ActionController::TestCase
         put :update, :id => @project, :project => {:title => "A new title"}
       end
 
-      should assign_to :project
       should set_the_flash
       should redirect_to("the project's show page") {project_url(@project)}
     end
@@ -91,7 +84,6 @@ class ProjectsControllerTest < ActionController::TestCase
         delete :destroy, :id => @project
       end
 
-      should assign_to :project
       should redirect_to("projects page") {projects_url}
     end
   end

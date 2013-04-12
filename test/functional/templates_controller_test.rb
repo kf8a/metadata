@@ -12,7 +12,6 @@ class TemplatesControllerTest < ActionController::TestCase
       end
 
       should respond_with :success
-      should assign_to :templates
       should render_template :index
     end
 

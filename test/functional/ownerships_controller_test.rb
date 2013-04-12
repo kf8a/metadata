@@ -85,7 +85,6 @@ class OwnershipsControllerTest < ActionController::TestCase
         should 'assign to users' do
           assert assigns(:users)
         end
-        should assign_to(:ownership)
       end
 
       context "and GET :new with no datatable param" do
@@ -95,10 +94,6 @@ class OwnershipsControllerTest < ActionController::TestCase
 
         should respond_with :success
         should render_template 'new'
-        should_not assign_to(:datatable)
-        should assign_to(:datatables)
-        should assign_to(:users)
-        should assign_to(:ownership)
       end
 
       context "and POST :create with no users" do
