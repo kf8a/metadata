@@ -171,7 +171,7 @@ class Dataset < ActiveRecord::Base
     [leads, datatable_leads].flatten.uniq.compact
   end
 
-#  private
+private
 
   def eml_custom_unit_list
     @eml.additionalMetadata do
@@ -300,15 +300,6 @@ class Dataset < ActiveRecord::Base
 
   def eml_pubdate
     @eml.pubDate Date.today
-  end
-
-  def people
-    [people, datatable_people].flatten.uniq.compact.collect do |person|
-      role = datatables.collect {|x| x.which_roles(person)}.flatten.compact.first
-      role = which_roles(person).first unless role
-      role_name = role.name if role
-      {:person => person, :role => role_name }
-    end
   end
 
   def eml_people
