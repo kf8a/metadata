@@ -322,7 +322,7 @@ class Dataset < ActiveRecord::Base
           if datatables.size > 0
             @eml.section do
               @eml.title 'Datatable Abstracts'
-              datatables.each do |datatable|
+              datatables.where(:on_web => true).each do |datatable|
                 @eml.para datatable.description
               end
             end
