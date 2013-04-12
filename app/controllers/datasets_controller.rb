@@ -1,6 +1,6 @@
 class DatasetsController < ApplicationController
 
-  before_filter :allow_on_web
+  before_filter :allow_on_web, :except => [:knb]
   before_filter :admin?, :except => [:index, :show ] if Rails.env == 'production'
   before_filter :get_dataset, :only => [:show, :edit, :update, :destroy]
 
@@ -33,7 +33,7 @@ class DatasetsController < ApplicationController
   # GET /datasets/1.xml
   # GET /dataset/1.eml
   def show
-    @title    = @dataset.title
+    @title = @dataset.title
 
     if @dataset.valid_request?(@subdomain_request)
       respond_with @dataset do |format|
@@ -43,6 +43,13 @@ class DatasetsController < ApplicationController
     else
       redirect_to datasets_url
     end
+  end
+
+  def knb
+    scopre, identifier = params[:id].split(/\./)
+    @dataset = Dataset.where(:metacat_id => identifier).first
+    @dataset = Dataset.where(:id => identifer).first unless @dataset
+    redirect_to @dataset
   end
 
   # GET /datasets/new
