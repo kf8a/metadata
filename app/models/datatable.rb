@@ -250,7 +250,7 @@ class Datatable < ActiveRecord::Base
 
   def to_eml(xml = ::Builder::XmlMarkup.new)
     @eml = xml
-    @eml.dataTable 'id' => Rails.application.routes.url_helpers.datatable_path(self, :format => 'eml') do
+    @eml.dataTable 'id' => Rails.application.routes.url_helpers.datatable_path(self) do
       @eml.entityName title
       if description
         text =  description.gsub(/<\/?[^>]*>/, "")
