@@ -1,5 +1,30 @@
 <attribute>
   <attributeName><%= variate.name %></attributeName>
   <attributeDefinition><%= variate.description %></attributeDefinition>
-  <!-- eml_measurement_scale -->
+
+  <measurementScale>
+    <% case variate.measurement_scale %>
+    <% when 'interval' then %>
+    <% when 'ratio' then %>
+      <unit>
+      </unit>
+      <% if variate.precision %>
+        <precision><%= variate.precision %></precision>
+      <% end %>
+      <numericDomain>
+        <numberType>
+          ratio
+        </numberType>
+      </numericDomain>
+      eml_precision_and_number_type
+    <% when 'ordinal' then %>
+    <% when 'nominal' then %>
+      <nonNumericDomain>
+      <textDomain>
+      <%=variate.description %>
+      </textDomain>
+      </nonNumericDomain>
+    <% when 'datetime' then %>
+    <% end %>
+  </measurementScale>
 </attribute>

@@ -2,12 +2,12 @@
   <description><%= protocol.abstract %></description>
   <protocol id='protocol_<%= protocol.id %>'>
     <title><%= protocol.title %></title>
-    <!-- eml_creator -->
+
+    <%= render :partial => 'creator', :locals => {:creators => protocol.people}, :format => 'eml'  %>
+
     <distribution>
       <online>
-        <url>
-          http://<%=website_name%>.kbs.msu.edu/protocols/<%=protocol.id%>
-        </url>
+        <url> <%= protocol_url(protocol) %> </url>
       </online>
     </distribution>
   </protocol>

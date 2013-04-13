@@ -1,0 +1,9 @@
+<creator>
+<% if creators.empty? %>
+  <positionName>Data Manager</positionName>
+<% else %>
+  <% creators.each do |person| %>
+    <%= render :partial => 'party', :locals => {:person => person}, :format => :eml %>
+  <% end %>
+<% end %>
+</creator>

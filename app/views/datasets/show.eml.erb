@@ -12,15 +12,8 @@
   </access>
   <dataset id="<%= dataset_url(@dataset, :format => 'eml') %>">
     <title><%= @dataset.title + @dataset.date_range %></title>
-    <creator>
-      <% if @dataset.creators.empty? %>
-      <positionName>Data Manager</positionName>
-      <% else %>
-      <% @dataset.creators.each do |person| %>
-      <%= render :partial => 'party', :locals => {:person => person}, :format => :eml %>
-      <% end %>
-      <% end %>
-    </creator>
+    <%= render :partial => 'creator', :locals => {:creators => @dataset.creators}, :format => 'eml' %>
+
     <!-- <eml_people></eml_people> -->
 
     <!-- eml_pubdate -->
@@ -99,7 +92,7 @@
     <% if @dataset.protocols.size > 0 %>
     <methods>
       <% @dataset.protocols.each do |protocol| %>
-      <%= render :partial => 'protocol', :format => 'eml' %>
+        <%= render :partial => 'protocol', :locals => {:protocol => protocol}, :format => 'eml' %>
       <% end %>
     </methods>
     <% end %>
