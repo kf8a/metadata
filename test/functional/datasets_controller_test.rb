@@ -44,10 +44,6 @@ class DatasetsControllerTest < ActionController::TestCase
     end
 
     should respond_with :success
-    should 'be the exact right eml' do
-      proper_eml = @dataset.to_eml
-      assert_equal Hash.from_xml(response.body), Hash.from_xml(proper_eml)
-    end
   end
 
   context "an lter dataset" do
