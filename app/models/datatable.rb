@@ -500,7 +500,7 @@ class Datatable < ActiveRecord::Base
           @eml.fieldDelimiter ','
           @eml.collapseDelimiters 'no'
           @eml.quoteCharacter '"'
-          @eml.literalCharacter '\'
+          @eml.literalCharacter '\\'
         end
       end
     end
@@ -509,7 +509,7 @@ class Datatable < ActiveRecord::Base
   def eml_physical
     @eml.physical do
       @eml.objectName title
-      @eml.encodingMethod 'None'
+      @eml.encodingMethod "None"
       eml_data_format
       @eml.distribution do
         @eml.online do
