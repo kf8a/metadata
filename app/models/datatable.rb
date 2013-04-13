@@ -500,7 +500,7 @@ class Datatable < ActiveRecord::Base
           @eml.fieldDelimiter ','
           @eml.collapseDelimiters 'no'
           @eml.quoteCharacter '"'
-          @eml.literalCharacter '"'
+          @eml.literalCharacter '\'
         end
       end
     end
