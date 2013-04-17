@@ -3,9 +3,7 @@
     <% theme_datatables = theme.datatables_in_study(study, datatables) -%>
     <% theme_datatables.sort! {|a,b| sprintf("%.5i",a.weight) + a.title <=> sprintf("%.5i",b.weight) + b.title}-%>
     <%= render theme_datatables %>
-
     <% theme.children.each do |t| -%>
-
       <% next unless t.include_datatables_from_study?(datatables, study) -%>
       <%= render 'theme', :theme => t, :study => study, :datatables => datatables %>
     <% end -%>
