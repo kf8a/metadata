@@ -10,12 +10,12 @@ module DatatablesHelper
   def ok_to_qc?(datatable)
     datatable.can_be_qcd_by?(current_user)
   end
-  
+
   def options_for_measurement_scale(variate)
     options_for_select(['nominal','interval','ratio', 'datetime'],
         variate.measurement_scale)
   end
-  
+
   def options_for_data_type(variate)
     options_for_select(['text','datetime','integer','real','text'],
         variate.data_type)
