@@ -316,12 +316,17 @@ class Datatable < ActiveRecord::Base
   end
 
   def header
-    data_access_statement + "#\n#\n" + data_source +  data_comments + "#\n#\n"
+    terms_of_use + data_source +  data_comments + "#\n#\n"
   end
 
   def to_climdb
     "!#{raw_csv}"
   end
+
+  def terms_of_use
+    "# These Data are copyrighted and use in a publication requires permission \n# as detailed in our Terms of use:  http://lter.kbs.msu.edu/data/terms-of-use/\n#\n"
+  end
+
 
   def data_comments
     if comments
