@@ -274,6 +274,12 @@ class Datatable < ActiveRecord::Base
     variates.collect {|variate| variate.try(:name)}
   end
 
+  def variate_units
+    units = variates.collect {|variate| variate.unit.name if variate.unit }
+    units[0] = "##{units[0]}"
+    units
+  end
+
   def completed
     dataset.try(:completed)
   end
@@ -289,7 +295,8 @@ class Datatable < ActiveRecord::Base
   def convert_to_csv(values)
     csv_string = CSV.generate do |csv|
       vars = variate_names
-      csv << variates.collect { |variate| variate.name}
+      csv << vars
+      csv << variate_units
       fields = values.fields
       unless fields.join(' ') =~ /[A-Z]/
         vars =  variates.collect {|variate| variate.name.downcase }
@@ -492,7 +499,7 @@ class Datatable < ActiveRecord::Base
   def eml_data_format
     @eml.dataFormat do
       @eml.textFormat do
-        @eml.numHeaderLines (header.lines.to_a.size + 2).to_s 
+        @eml.numHeaderLines (header.lines.to_a.size + 3).to_s 
         @eml.numFooterLines 1
         @eml.recordDelimiter '\n'
         @eml.attributeOrientation 'column'
