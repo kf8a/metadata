@@ -63,15 +63,13 @@ class ScoreCard
     result = query_result.collect do |row|
       {:year => row['year'].to_i, :count => row['count'].to_f}
     end
-    approved_result.collect do |row|
+
+    approved_result.each do |row|
       r = result.index {|x| x[:year] == row['year'].to_i}
-      if r
-        result[r][:approved] = row['count'].to_f
-        result[r]
-      else
-        {:year => row['year'].to_i, :count => 0, :approved => row['count'].to_f}
-      end
+      result[r][:approved] = row['count'].to_f
     end
+
+    result
   end
 
   def fill_to_present(data, update_frequency_years = 1)
