@@ -324,36 +324,28 @@ class Datatable < ActiveRecord::Base
   end
 
   def terms_of_use
-    "# These Data are copyrighted and use in a publication requires permission \n# as detailed in our Terms of use:  http://lter.kbs.msu.edu/data/terms-of-use/\n#\n"
+    <<-END
+# These Data are copyrighted and use in a publication requires permission
+# as detailed in our Terms of use:  http://lter.kbs.msu.edu/data/terms-of-use/
+#
+  END
   end
-
 
   def data_comments
     if comments
-      "\n#\n#        DATATABLE CORRECTIONS AND COMMENTS\n" + comments.gsub(/^/,'#') + "\n"
+      "#\n#        DATATABLE CORRECTIONS AND COMMENTS\n" + comments.gsub(/^/,'#') + "\n"
     else
-      ''
+      "\n#"
     end
   end
 
   def data_source
-    "# Data Source: http://#{website_name}.kbs.msu.edu/datatables/#{self.id}
+    <<-END
+# Data Source: http://#{website_name}.kbs.msu.edu/datatables/#{self.id}
 # The newest version of the data http://#{website_name}.kbs.msu.edu/datatables/#{self.id}.csv
-# Full EML Metadata: http://#{website_name}.kbs.msu.edu/datatables/#{self.dataset.id}.eml\n#"
-  end
-
-  def data_access_statement
-    access_statement = dataset.sponsor.try(:data_use_statement)
-    if access_statement
-      access_statement.gsub(/.{1,60}(?:\s|\Z)/){($& + 5.chr)\
-            .gsub(/\n\005/,"\n")\
-            .gsub(/\005/,"\n")}\
-          .split(/\n/)\
-          .collect {|line| "# #{line}\n"}\
-          .join
-    else
-      ''
-    end
+# Full EML Metadata: http://#{website_name}.kbs.msu.edu/datatables/#{self.dataset.id}.eml
+# 
+    END
   end
 
   def database_date_field
