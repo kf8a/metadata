@@ -28,16 +28,6 @@
           <%= textilize(@dataset.abstract) %>
         </para>
       </section>
-      <% if @dataset.datatables.size > 0 %>
-      <section>
-        <title>Datatable Abstracts</title>
-        <% @dataset.datatables.each do |datatable| %>
-          <para>
-            <%= datatable.description %>
-          </para>
-        <% end %>
-      </section>
-      <% end %>
     </abstract>
     <% end -%>
 
