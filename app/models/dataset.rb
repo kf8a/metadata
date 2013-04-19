@@ -129,7 +129,6 @@ class Dataset < ActiveRecord::Base
     begin_date, end_date = nil
     datatables.where(:on_web => true).each do |datatable |
       dates = datatable.temporal_extent
-      datatable.update_temporal_extent
       next unless dates[:begin_date] && dates[:end_date]
       begin_date = [begin_date, dates[:begin_date]].compact.min
       end_date   = [end_date, dates[:end_date]].compact.max
@@ -318,14 +317,6 @@ class Dataset < ActiveRecord::Base
           @eml.section do 
             @eml.title 'Dataset Abstract'
             @eml.para EML.text_sanitize(textilize(abstract))
-          end
-          if datatables.size > 0
-            @eml.section do
-              @eml.title 'Datatable Abstracts'
-              datatables.where(:on_web => true).each do |datatable|
-                @eml.para datatable.description
-              end
-            end
           end
         end
       end

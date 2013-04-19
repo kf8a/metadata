@@ -251,9 +251,10 @@ class Datatable < ActiveRecord::Base
   def to_eml(xml = ::Builder::XmlMarkup.new)
     @eml = xml
     @eml.dataTable 'id' => Rails.application.routes.url_helpers.datatable_path(self) do
-      @eml.entityName title
+      @eml.entityName "Kellogg Biological Station LTER: #{title}"
       if description
         text =  description.gsub(/<\/?[^>]*>/, "")
+        text += "\n#{website_name}/datatables/#{id}"
         @eml.entityDescription EML.text_sanitize(text) unless text.strip.empty?
       end
 #      eml_protocols if non_dataset_protocols.present?
@@ -377,6 +378,7 @@ class Datatable < ActiveRecord::Base
     self.begin_date = dates[:begin_date] if dates[:begin_date]
     self.end_date = dates[:end_date] if dates[:end_date]
     save
+    dataset.update_temporal_extent
   end
 
   def data_preview
@@ -449,6 +451,10 @@ class Datatable < ActiveRecord::Base
     values = self.perform_query if self.is_sql
   end
 
+  def number_of_header_lines
+    header.lines.to_a.size + 3
+  end
+
   # a datatable should not be superceded by itself
   def supercession_candidates
     Datatables.where('id <> ?', id).all
@@ -496,7 +502,7 @@ class Datatable < ActiveRecord::Base
   def eml_data_format
     @eml.dataFormat do
       @eml.textFormat do
-        @eml.numHeaderLines (header.lines.to_a.size + 3).to_s 
+        @eml.numHeaderLines number_of_header_lines.to_s
         @eml.numFooterLines 1
         @eml.recordDelimiter '\n'
         @eml.attributeOrientation 'column'

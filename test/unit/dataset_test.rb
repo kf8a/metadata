@@ -107,19 +107,13 @@ class DatasetTest < ActiveSupport::TestCase
       @dataset = FactoryGirl.create(:dataset,
         :datatables  => [FactoryGirl.create(:datatable, :object => 'select 1'),
                          FactoryGirl.create(:datatable, :object => "select now() as sample_date"),
-                         FactoryGirl.create(:datatable, :object => 'select 1')])
-    end
-
-    should 'be today' do
-      dates = @dataset.temporal_extent
-      assert_equal Date.today, dates[:begin_date]
-      assert_equal Date.today, dates[:end_date]
+                         FactoryGirl.create(:datatable, :object => "select '2000-1-1'::date as sample_date")])
     end
 
     should 'update temporal extent to today' do
       @dataset.update_temporal_extent
       @dataset.reload #make sure it updates in the database
-      assert_equal Date.today, @dataset.initiated
+      assert_equal Date.new(2000,1,1), @dataset.initiated
       assert_equal Date.today, @dataset.data_end_date
     end
 

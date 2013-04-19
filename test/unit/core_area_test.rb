@@ -1,7 +1,7 @@
 require File.expand_path('../../test_helper',__FILE__) 
 
 class CoreAreaTest < ActiveSupport::TestCase
-  should have_many :datatables
+  should have_and_belong_to_many :datatables
 end
 
 

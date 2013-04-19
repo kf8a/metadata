@@ -11,7 +11,7 @@
     </allow>
   </access>
   <dataset id="<%= dataset_url(@dataset, :format => 'eml') %>">
-    <title><%= @dataset.title + @dataset.date_range %></title>
+    <title>Kellogg Biological Station LTER: <%= @dataset.title + @dataset.date_range %></title>
     <%= render :partial => 'creator', :locals => {:creators => @dataset.creators}, :format => 'eml' %>
 
     <!-- <eml_people></eml_people> -->

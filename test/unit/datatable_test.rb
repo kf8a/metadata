@@ -3,7 +3,7 @@ require File.expand_path('../../test_helper',__FILE__)
 class DatatableTest < ActiveSupport::TestCase
 
   should have_one                 :collection
-  should belong_to                :core_area
+  should have_and_belong_to_many  :core_areas
   should belong_to                :dataset
   should have_many                :data_contributions
   should have_many                :owners
@@ -62,16 +62,8 @@ class DatatableTest < ActiveSupport::TestCase
       end
     end
 
-    should 'respond to temporal_extent' do
-      assert @datatable.respond_to?('temporal_extent')
-    end
-
     should 'respond_to has_data_in_interval?' do
       assert @datatable.respond_to?('within_interval?')
-    end
-
-    should 'respond to update_temporal_extent' do
-      assert @datatable.respond_to?('update_temporal_extent')
     end
 
     should 'respond to study' do
@@ -108,11 +100,6 @@ class DatatableTest < ActiveSupport::TestCase
       @datatable_without_sponsor = FactoryGirl.build :datatable, :dataset => dataset_without_sponsor
     end
 
-
-    should 'retrieve data access statement' do
-      assert @datatable.data_access_statement                 =~ /Use it/
-      assert @datatable_without_sponsor.data_access_statement == ''
-    end
   end
 
   context 'datatable without owners and permissions' do
@@ -362,6 +349,9 @@ class DatatableTest < ActiveSupport::TestCase
       @old_data.update_temporal_extent
       assert @old_data.begin_date == Date.today - 3.years
       assert @old_data.end_date == Date.today - 3.years
+
+      assert @old_data.dataset.initiated = Date.today - 3.years
+      assert @old_data.dataset.data_end_date = Date.today - 3.years
     end
 
     context '#title and years' do
@@ -515,16 +505,12 @@ class DatatableTest < ActiveSupport::TestCase
           @to_eml = Nokogiri::XML(@datatable.to_eml)
         end
 
-        should 'include the datatable id' do
-          assert_equal 1, @to_eml.css("dataTable##{@datatable.name}").count
-        end
-
         should 'include an entityName element' do
-          assert_equal 'a really cool datatable', @to_eml.at_css('dataTable entityName').text
+          assert_equal 'Kellogg Biological Station LTER: a really cool datatable', @to_eml.at_css('dataTable entityName').text
         end
 
         should 'include an entityDescription element' do
-          assert_equal 'This is a datatable', @to_eml.at_css('dataTable entityDescription').text
+          assert @to_eml.at_css('dataTable entityDescription').text =~ /This is a datatable/
         end
       end
     end
@@ -562,16 +548,15 @@ class DatatableTest < ActiveSupport::TestCase
       should 'return the data in the right order' do
         data = CSV.parse(@datatable.approved_csv)
         b_column = data[0].index("b")
-        assert_equal '1', data[1][b_column]
+        assert_equal '1', data[2][b_column]
       end
 
       should 'return data even if the variate names are capitalized' do
-       # @datatable.object = %q{select now() as a, '1' as "B"}
         @datatable.variates = [Variate.new(:name => 'a'), Variate.new(:name => 'B')]
         @datatable.save
         data = CSV.parse(@datatable.approved_csv)
         b_column = data[0].index("B")
-        assert_equal '1', data[1][b_column]
+        assert_equal '1', data[2][b_column]
       end
 
       should 'return data if the query names are capitalized' do
@@ -581,14 +566,14 @@ class DatatableTest < ActiveSupport::TestCase
         @datatable.save
         data = CSV.parse(@datatable.approved_csv)
         b_column = data[0].index('B')
-        assert_equal '1', data[1][b_column]
+        assert_equal '1', data[2][b_column]
       end
 
       context 'with comment' do
         setup  {@datatable.comments = "something\nand something else"}
 
         should 'return a commented out version of the comment' do
-          assert_equal "\n#\n#        DATATABLE CORRECTIONS AND COMMENTS\n#something\n#and something else\n", @datatable.data_comments
+          assert_equal "#\n#        DATATABLE CORRECTIONS AND COMMENTS\n#something\n#and something else\n", @datatable.data_comments
         end
       end
     end
