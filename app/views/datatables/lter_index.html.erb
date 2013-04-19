@@ -1,3 +1,23 @@
+<% if @area %>
+  <%= render 'shared/breadcrumbs', :crumbs => [{:name => controller_name.upcase}] %>
+  <div class='page type-page hfeed'>
+  <h1>Table of Contents</h1>
+
+  <p id='datatable-intro'>
+    <%=raw  @website.data_catalog_intro %>
+  </p>
+
+  <%= render 'search_form' %>
+
+  <ul class='quickTree'>
+    <% @studies.each do |study| -%>
+      <% next unless study.include_datatables?(@datatables)%>
+
+      <%= render 'study', :study => study, :themes => @themes, :datatables => @datatables %>
+    <% end -%>
+  </ul>
+</div>
+<% else %>
 <% cache(:action_suffix => "lter") do %>
   <%= render 'shared/breadcrumbs', :crumbs => [{:name => controller_name.upcase}] %>
   <div class='page type-page hfeed'>
@@ -17,6 +37,7 @@
     <% end -%>
   </ul>
 </div>
+<% end %>
 <% end %>
 
 <% if admin? %>
