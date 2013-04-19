@@ -11,6 +11,7 @@ class DatatablesController < ApplicationController
   # GET /datatables.xml
   def index
     # expires_in 6.minutes, :public=>true
+    @area = params[:area]
     store_location
     retrieve_datatables('keyword_list' =>'')
 
