@@ -17,7 +17,7 @@
 	<% @dataset.datatables.each do |datatable| %>
 	  <% next unless datatable.on_web %>
 		<dt><%= link_to datatable.name, datatable_path(datatable) %> <%= datatable.title %></dt>
-		<dd><%=raw truncate(datatable.description,{:length=>100}) %></dd>
+		<dd><%=raw datatable.description %></dd>
 	<% end %>
 </dl>
 <h2>Protocols</h2>
