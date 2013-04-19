@@ -52,6 +52,11 @@
       <td>Datatable ID:</td>
       <td><%= datatable.name %>.<%=datatable.dataset.version %></td>
     </tr>
+    <% if datatable.core_areas %>
+      <tr>
+        <td>Core Areas</td>
+        <td><%= datatable.core_areas.all.collect {|x| x.name }.join(',') %></td>
+    <% end %>
     <% if datatable.related_tables.any? %>
       <tr>
         <td>Related Tables:</td>
