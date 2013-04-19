@@ -7,8 +7,6 @@
 	<li>Status: <%= @dataset.status %></li>
 	<li>Temporal Coverage  <%= @dataset.initiated %> to <%= @dataset.completed %></li>
 </ul>
-<h2>Keywords</h2>
-<p><%= @dataset.keyword_list %></p>
 <h2>Tables</h2>
 <dl>
   <% unless  @dataset.datatables.size > 0 %>
@@ -24,19 +22,6 @@
 <ul>
 	<% @dataset.protocols.each do |protocol| -%>
 	<li><%= link_to "#{protocol.name} #{protocol.version}", protocol_path(protocol) %> <%= protocol.title %></li>
-	<% end -%>
-</ul>
-<h2>Personnel</h2>
-<ul>
-	<% @dataset.roles.each do |role| %>
-	<li> <%= role.name.capitalize.pluralize %>
-		<ul>
-	<% @dataset.affiliations.each do |affiliation| -%>
-	<li><%= link_to "#{affiliation.person.full_name}", person_path(affiliation.person.id) if affiliation.role == role %>
-	</li>
-	<% end -%>
-		</ul>
-	</li>
 	<% end -%>
 </ul>
 <%= link_to 'eml', dataset_path(@dataset, :format => :eml) %> |
