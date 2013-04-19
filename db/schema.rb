@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130328142628) do
+ActiveRecord::Schema.define(:version => 20130419193128) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -125,6 +125,11 @@ ActiveRecord::Schema.define(:version => 20130328142628) do
 
   create_table "core_areas", :force => true do |t|
     t.string "name"
+  end
+
+  create_table "core_areas_datatables", :force => true do |t|
+    t.integer "core_area_id"
+    t.integer "datatable_id"
   end
 
   create_table "data_contributions", :force => true do |t|

@@ -5,7 +5,7 @@
   <%= form.input :keyword_list, :label => 'Keywords' %>
   <%= form.input :study, :label => 'Experiment' %>
   <%= form.input :theme, :label => 'KBS Theme', :collection=> Theme.order('lft ASC').all.collect {|x| [x.nested_name, x.id] }%>
-  <%= form.input :core_area, :label => 'LTER Core Area' %>
+  <%= form.input :core_areas, :label => 'LTER Core Areas' %>
   <%= form.input :deprecation_notice %>
   <%# <%= form.input :deprecated_in_favor_of, :collection => @datatable.supercession_candiates%>
 <% end %>

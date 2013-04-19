@@ -13,7 +13,7 @@ class Datatable < ActiveRecord::Base
 
   has_and_belongs_to_many :citations
   has_one                 :collection
-  belongs_to              :core_area
+  has_and_belongs_to_many :core_areas
   belongs_to              :dataset
   has_many                :data_contributions
   has_many                :owners, :through => :ownerships, :source => :user

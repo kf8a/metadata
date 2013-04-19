@@ -1,5 +1,5 @@
 class CoreArea < ActiveRecord::Base
-  has_many :datatables
+  has_and_belongs_to_many :datatables
 
   scope :by_name, :order => 'name'
 end
