@@ -12,16 +12,8 @@
   <%= datatable.summary_graph %>
   <%= datatable.access_statement %>
 
-  <!-- TODO Temporary: use the default if sponsor is lter. -->
-  <% if datatable.sponsor_name == 'lter' %>
-    The <a href='http://lter.kbs.msu.edu/data/terms_of_use.php'>standard data use policy applies to the this dataset</a>
-  <% else %>
-    The <%=link_to 'standard data use policy applies to the this dataset' , termsofuse_path(datatable.dataset.sponsor)%>
-  <% end %>
-
-
   <div>
-    <h2>Context:</h2>
+    <h4>Context:</h4>
     <div class='truncate'>
       This datatable is part of the <%= link_to datatable.dataset.title, dataset_url(datatable.dataset.id) %> dataset.
       <%=raw textilize datatable.dataset.try(:abstract) %>
