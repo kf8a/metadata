@@ -2,7 +2,7 @@
 <%=link_to raw(datatable.title_and_years), datatable_path(datatable) %> 
 <% if @area %>
 <span class='core-areas'>
-  <%= CoreArea.all.collect {|x| datatable.core_areas.all.include?(x) ? x.name.first : "&nbsp;" }.join("-").html_safe %>
+  <%= CoreArea.all.collect {|x| datatable.core_areas.all.include?(x) ? x.name[0..1]: "&nbsp;&nbsp;" }.join("-").html_safe %>
 </span>
 <% end %>
 </li>
