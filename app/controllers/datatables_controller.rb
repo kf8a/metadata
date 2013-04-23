@@ -41,20 +41,21 @@ class DatatablesController < ApplicationController
 
     store_location #in case we have to log in and come back here
     if datatable.dataset.valid_request?(@subdomain_request)
-      if Rails.env=='production' and stale? etag: [datatable, current_user]
-        respond_to do |format|
-          format.html
-          format.xml
-          format.csv do
-            unless csv_ok
-              render :text => "You do not have permission to download this datatable"
-            end
-            # render show.csv.erb
+      respond_to do |format|
+        format.html
+        format.xml
+        format.csv do
+          unless csv_ok
+            render :text => "You do not have permission to download this datatable"
           end
-          format.climdb do
-            unless csv_ok
-              redirect_to datatable_url(datatable)
-            end
+          if datatable.csv_cache.exists?
+            redirect_to datatable.csv_cache.url
+          end
+          # render show.csv.erb
+        end
+        format.climdb do
+          unless csv_ok
+            redirect_to datatable_url(datatable)
           end
         end
       end
