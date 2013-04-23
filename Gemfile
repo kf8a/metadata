@@ -53,6 +53,7 @@ gem 'ris_parser', :git => 'git://github.com/kf8a/ris_parser.git'
 gem 'thinking-sphinx', '2.0.10'
 # gem 'cache_digests'
 
+
 group :production do
   #gem "sitemap_generator", "~> 3.1.1"
   # gem 'exception_notification'
