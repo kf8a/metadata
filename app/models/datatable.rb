@@ -37,6 +37,18 @@ class Datatable < ActiveRecord::Base
 
   scope :by_name, :order => 'name'
 
+  if Rails.env.production?
+    has_attached_file :csv_cache,
+        :storage => :s3,
+        :bucket => 'metadata_production',
+        :path => "/datatables/csv/:id.:extension",
+        :s3_credentials => File.join(Rails.root, 'config', 's3.yml'),
+        :s3_permissions => 'authenticated-read'
+  else
+    has_attached_file :csv_cache, :url => "/datatables/:id/download",
+        :path => ":rails_root/uploads/datatables/:attachment/:id.:extension"
+  end
+
   include Workflow
 
   workflow do
@@ -165,6 +177,21 @@ class Datatable < ActiveRecord::Base
       terms = agent.get("http://vocab.lternet.edu/webservice/keywordlist.php/all/csv/#{keyword}")
       CSV.parse(terms)
     end.flatten.sort.uniq
+  end
+
+  # publishing
+  def publish
+    begin
+      file = Tempfile.new('csv_cache')
+      file << self.approved_csv
+      self.csv_cache = file
+      self.csv_cache_file_name = "#{id}.csv"
+      self.csv_cache_content_type = 'text/csv'
+      save!
+    ensure
+      file.close
+      file.unlink
+    end
   end
 
   def restricted_to_members?

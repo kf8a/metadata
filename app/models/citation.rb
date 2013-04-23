@@ -31,7 +31,7 @@ class Citation < ActiveRecord::Base
         :s3_permissions => 'authenticated-read'
   else
     has_attached_file :pdf, :url => "/citations/:id/download",
-        :path => ":rails_root/assets/citations/:attachment/:id/:style/:basename.:extension"
+        :path => ":rails_root/uploads/citations/:attachment/:id/:style/:basename.:extension"
   end
 
   # define indexes for thinking_sphinks

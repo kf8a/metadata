@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419193128) do
+ActiveRecord::Schema.define(:version => 20130423132337) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -236,6 +236,10 @@ ActiveRecord::Schema.define(:version => 20130419193128) do
     t.text     "scores"
     t.date     "completed_on"
     t.text     "workflow_state"
+    t.string   "csv_cache_file_name"
+    t.string   "csv_cache_content_type"
+    t.integer  "csv_cache_file_size"
+    t.datetime "csv_cache_updated_at"
   end
 
   add_index "datatables", ["core_area_id"], :name => "index_datatables_on_core_area_id"

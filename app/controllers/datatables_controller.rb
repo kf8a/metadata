@@ -45,13 +45,6 @@ class DatatablesController < ApplicationController
         respond_to do |format|
           format.html
           format.xml
-  #         format.ods do
-  #           if csv_ok
-  #             render :text => @datatable.to_ods
-  #           else
-  #             redirect_to datatable_url(@datatable)
-  #           end
-  #         end
           format.csv do
             unless csv_ok
               render :text => "You do not have permission to download this datatable"
@@ -72,6 +65,13 @@ class DatatablesController < ApplicationController
 
   def qc
   end
+
+  # PUT publish
+  def publish
+    datatable.publish
+    render :nothing => true
+  end
+
 
   # GET /datatables/new
   def new
