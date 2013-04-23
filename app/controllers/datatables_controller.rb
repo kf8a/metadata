@@ -49,7 +49,12 @@ class DatatablesController < ApplicationController
             render :text => "You do not have permission to download this datatable"
           end
           if datatable.csv_cache.exists?
-            redirect_to download_datatable_path(datatable)
+            if Rails.env.production?
+              redirect_to(datatable.csv_cache.s3_object(params[:style]).url_for(:read ,:secure => true, :expires_in => 60.seconds).to_s)
+            else
+              path = datatable.csv_cache.path(params[:style])
+              send_file  path, :type => 'text/csv', :disposition => 'inline'
+            end
           end
           # render show.csv.erb
         end
@@ -61,18 +66,6 @@ class DatatablesController < ApplicationController
       end
     else
       redirect_to datatables_url
-    end
-  end
-
-  def download
-    head(:not_found) and return unless (datatable = Datatable.find_by_id(params[:id]))
-    head(:not_found) and return unless datatable.csv_cache.exists?
-
-    if Rails.env.production?
-      redirect_to(datatable.csv_cache.s3_object(params[:style]).url_for(:read ,:secure => true, :expires_in => 60.seconds).to_s)
-    else
-      path = datatable.csv_cache.path(params[:style])
-      send_file  path, :type => 'text/csv', :disposition => 'inline'
     end
   end
 

@@ -51,7 +51,6 @@ Metadata::Application.routes.draw do
       get :update_temporal_extent
       post :approve_records
       put :publish
-      get :download
     end
   end
   resources :invites
