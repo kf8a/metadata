@@ -51,6 +51,7 @@ Metadata::Application.routes.draw do
       get :update_temporal_extent
       post :approve_records
       put :publish
+      get :download
     end
   end
   resources :invites
@@ -76,12 +77,6 @@ Metadata::Application.routes.draw do
   resources :permission_requests, :only => :create
   resources :projects
   resources :protocols
-
-  resources :publications do
-    collection do 
-      get :index_by_treatment
-    end
-  end
 
   resources :sponsors, :as => 'termsofuse'
   match '/termsofuse/:id' => "sponsors#show"
