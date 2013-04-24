@@ -2,7 +2,7 @@ class DatatablesController < ApplicationController
   helper_method :datatable
 
   before_filter :admin?, :except => [:index, :show, :suggest, :search, :qc] unless Rails.env == 'development'
-  before_filter :can_download?, :only=>[:show], :if => Proc.new { |controller| controller.request.format.csv? } # run before filter to prevent non-members from downloading
+  before_filter :can_download?, :only=>[:show], :if => Proc.new { |controller| controller.request.format.csv? || controller.request.format.fasta? } # run before filter to prevent non-members from downloading
 
   protect_from_forgery :except => [:index, :show, :search]
   cache_sweeper :datatable_sweeper
@@ -44,11 +44,12 @@ class DatatablesController < ApplicationController
       respond_to do |format|
         format.html
         format.xml
+        format.fasta
         format.csv do
           unless csv_ok
             render :text => "You do not have permission to download this datatable"
           end
-          if datatable.csv_cache.exists?
+          if datatable.csv_cache.exists? && !admin?
             if Rails.env.production?
               redirect_to(datatable.csv_cache.s3_object(params[:style]).url_for(:read ,:secure => true, :expires_in => 60.seconds).to_s)
             else

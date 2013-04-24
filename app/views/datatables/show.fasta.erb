@@ -1,0 +1,4 @@
+<% @datatable.approved_data.each do |row| -%>
+><%= Digest::SHA1.hexdigest(row.values.join(''))[0..7] %> <%= row.values.join(' ')[0..60] %>
+<%= row['sequence'].gsub(/(.{1,#{80}})/, "\\1\n") -%>
+<% end -%>
