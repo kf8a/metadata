@@ -13,15 +13,15 @@
           <% end %>
         </tr>
         <% datatable.data_preview.each do  |row| %>
-          <tr  class="<%= cycle('even','odd') -%>">
+          <tr class="<%= cycle('even','odd') -%>">
             <% fieldlist.each do |key| %>
               <td align='right'>
                 <%= row[key] %>
               </td>
             <% end %>
           </tr>
-        <% end %>
-        <% datatable.data_preview.clear %>
+        <% end -%>
+        <% datatable.data_preview.clear -%>
       </table>
     </div>
   </div>

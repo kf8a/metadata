@@ -409,9 +409,12 @@ class Datatable < ActiveRecord::Base
   end
 
   def data_preview
-    self.excerpt_limit ||= 5
-    query = self.object + " offset #{offset}" + " limit #{self.excerpt_limit}"
-    ActiveRecord::Base.connection.execute(query)
+    unless @data_preview
+      limit = self.excerpt_limit || 5
+      query = "#{self.object}  offset #{offset} limit #{limit}"
+      @data_preview = ActiveRecord::Base.connection.execute(query)
+    end
+    @data_preview
   end
 
   def approved_data_query
@@ -441,7 +444,12 @@ class Datatable < ActiveRecord::Base
   end
 
   def total_records
-    values.count
+    unless @total_records
+      query = "select count(*) as count from (#{self.object}) as t1"
+      result = ActiveRecord::Base.connection.execute(query).first
+      @total_records = result['count'].to_i
+    end
+    @total_records
   end
 
   def approve_data

@@ -116,14 +116,12 @@
 <% end %> 
 
 <% if datatable.is_sql %>
-  <% if datatable.values -%>
-      <!--
-    	TODO: geographic coverage
-    	-->
-    <%= render 'protocols', :datatable => datatable %>
-    <%= render 'download_button', :datatable => datatable, :website => @website %>
-    <%= render 'data_preview',    :datatable => datatable %>
-  <% end %>
+  <!--
+  TODO: geographic coverage
+  -->
+  <%= render 'protocols', :datatable => datatable %>
+  <%= render 'download_button', :datatable => datatable, :website => @website %>
+  <%= render 'data_preview',   :datatable => datatable %>
 <% else %>
   <% if datatable.object? %>
     <p>
