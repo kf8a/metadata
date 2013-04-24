@@ -5,7 +5,7 @@ class BookCitation < Citation
   end
 
   def formatted(options={})
-    "#{author_and_year(options)} #{title_and_punctuation} #{page_numbers_book} #{editor_string} #{publication}. #{publisher}#{address_and_city}"
+    "#{author_and_year(options)} #{title_and_punctuation} #{page_numbers_book} #{editor_string} #{publication_string} #{publisher}#{address_and_city}"
   end
 
   private
@@ -20,6 +20,12 @@ class BookCitation < Citation
 
   def endnote_publication_data
     "%B #{publication}\n" + "%I #{publisher}\n" + "%C #{address}\n"
+  end
+
+  def publication_string
+    if publication
+      "#{publication}."
+    end
   end
 
   def address_and_city
