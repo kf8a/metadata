@@ -1,8 +1,8 @@
 <h1><%= @dataset.dataset %>:<%= @dataset.title %> 
 </h1>
-<p>
+<div class='description'>
 	<%= textilize @dataset.abstract %>
-</p>
+</div>
 <ul>
 	<li>Status: <%= @dataset.status %></li>
 	<li>Temporal Coverage  <%= @dataset.initiated %> to <%= @dataset.completed %></li>

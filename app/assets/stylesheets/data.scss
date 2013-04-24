@@ -56,6 +56,13 @@
     margin-top: 14px;
   }
 
+  .description {
+    ol, ul {
+      margin: 5px;
+      padding-left: 3em;
+    }
+  }
+
   ul label {
     display: inline;
     font-weight: bold;

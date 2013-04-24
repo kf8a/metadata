@@ -6,14 +6,10 @@
   <div class='page type-page hfeed'>
   <h1><%=raw datatable.title %></h1>
 
-  <p class='description'>
+  <div class='description'>
     <%=raw textilize datatable.description.presence %>
-  </p>
-  <%= datatable.summary_graph %>
-  <%= datatable.access_statement %>
+    <%= datatable.access_statement %>
 
-  <div>
-    <h4>Context:</h4>
     <div class='truncate'>
       This datatable is part of the <%= link_to datatable.dataset.title, dataset_url(datatable.dataset.id) %> dataset.
       <%=raw textilize datatable.dataset.try(:abstract) %>
