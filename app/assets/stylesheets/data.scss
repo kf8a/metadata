@@ -57,6 +57,9 @@
   }
 
   .description {
+    p {
+      margin: 1em 0;
+    }
     ol, ul {
       margin: 5px;
       padding-left: 3em;
