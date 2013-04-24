@@ -58,8 +58,8 @@ class DatatablesController < ApplicationController
                 send_file  path, :type => 'text/csv', :disposition => 'inline'
               end
             end
+            # render show.csv.erb
           end
-          # render show.csv.erb
         end
         format.climdb do
           unless csv_ok
