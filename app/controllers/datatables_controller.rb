@@ -49,7 +49,7 @@ class DatatablesController < ApplicationController
           unless csv_ok
             render :text => "You do not have permission to download this datatable"
           end
-          unless admin?
+          unless current_user.try(:role) == 'admin'
             if datatable.csv_cache.exists?
               if Rails.env.production?
                 redirect_to(datatable.csv_cache.s3_object(params[:style]).url_for(:read ,:secure => true, :expires_in => 60.seconds).to_s)
