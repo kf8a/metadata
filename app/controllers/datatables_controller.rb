@@ -48,16 +48,17 @@ class DatatablesController < ApplicationController
         format.csv do
           unless csv_ok
             render :text => "You do not have permission to download this datatable"
-          end
-          if datatable.csv_cache.exists? && !admin?
-            if Rails.env.production?
-              redirect_to(datatable.csv_cache.s3_object(params[:style]).url_for(:read ,:secure => true, :expires_in => 60.seconds).to_s)
-            else
-              path = datatable.csv_cache.path(params[:style])
-              send_file  path, :type => 'text/csv', :disposition => 'inline'
+            unless admin?
+              if datatable.csv_cache.exists?
+                if Rails.env.production?
+                  redirect_to(datatable.csv_cache.s3_object(params[:style]).url_for(:read ,:secure => true, :expires_in => 60.seconds).to_s)
+                else
+                  path = datatable.csv_cache.path(params[:style])
+                  send_file  path, :type => 'text/csv', :disposition => 'inline'
+                end
+              end
             end
-          end
-          # render show.csv.erb
+            # render show.csv.erb
         end
         format.climdb do
           unless csv_ok
