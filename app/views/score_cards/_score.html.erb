@@ -5,9 +5,12 @@
     </h2>
   </div>
   <div class='one-half first'>
-    <p>
-    <%=raw truncate(score.description, :length => 500) %> 
-    </p>
+    <div class='description truncate'>
+      <%=raw score.description %> 
+
+      <% part_of_text = "Part of the " + link_to(score.dataset.title, dataset_url(score.dataset.id)) +  " dataset. " %>
+      <%=raw textilize("#{part_of_text}  #{score.dataset.try(:abstract)}") %>
+    </div>
     <p>
     <% if score.status == 'completed' %>
       Completed: <%= score.completed %>
