@@ -194,6 +194,10 @@ class Datatable < ActiveRecord::Base
     end
   end
 
+  def retract
+    csv_cache.destroy
+  end
+
   def restricted_to_members?
     dataset.restricted_to_members?
   end
