@@ -262,13 +262,14 @@ class Datatable < ActiveRecord::Base
     return title if (self.begin_date.nil? or self.end_date.nil?)
     year_end = end_date.year
     year_start = begin_date.year
-    reply = ""
+    years = ""
+    final = completed? ? "final " : ""
     if year_end == year_start
-      reply = " (#{year_start})"
+        years = " (#{final}#{year_start})"
     else
-      reply = " (#{year_start} to #{ year_end > Time.now.year - 3 ? 'present': year_end})"
+        years = " (#{year_start} to #{final}#{ year_end > Time.now.year - 3 ? 'present': year_end})"
     end
-    title + reply
+    title + years
   end
 
   def non_dataset_protocols
