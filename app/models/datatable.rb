@@ -257,7 +257,6 @@ class Datatable < ActiveRecord::Base
         extent[:begin_date] >= start_date && extent[:end_date] <= end_date
   end
 
-  #TODO create a completed flag and use the actual end year if present
   def title_and_years
     return title if (self.begin_date.nil? or self.end_date.nil?)
     year_end = end_date.year
