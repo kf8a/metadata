@@ -259,7 +259,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_resource_group
-    @eml.title title + "at the Kellogg Biological Station, Hickory Corners, MI " + date_range
+    @eml.title title + " at the Kellogg Biological Station, Hickory Corners, MI " + date_range
     eml_creator
     eml_people
     eml_pubdate
