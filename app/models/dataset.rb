@@ -128,7 +128,7 @@ class Dataset < ActiveRecord::Base
   def temporal_extent
     begin_date, end_date = nil
     datatables.where(:on_web => true).each do |datatable |
-      dates = datatable.temporal_extent
+      dates = {:begin_date => datatable.begin_date, :end_date => datatable.end_date }
       next unless dates[:begin_date] && dates[:end_date]
       begin_date = [begin_date, dates[:begin_date]].compact.min
       end_date   = [end_date, dates[:end_date]].compact.max
@@ -338,9 +338,12 @@ class Dataset < ActiveRecord::Base
         @eml.keyword keyword, keywordType: 'place'
       end
     end
-    @eml.keywordSet do
-      datatables.collect {|x| x.keyword_names}.flatten.uniq.each do |keyword|
-        @eml.keyword keyword
+    datatable_keywords = datatables.collect {|x| x.keyword_names}.flatten.uniq
+    unless datatable_keywords.empty?
+      @eml.keywordSet do
+        datatable_keywords.each do |keyword|
+          @eml.keyword keyword
+        end
       end
     end
   end
