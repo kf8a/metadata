@@ -170,6 +170,10 @@ class Datatable < ActiveRecord::Base
     data_contributions.collect { |affiliation| affiliation.person if affiliation.role == lead_investigator }.compact
   end
 
+
+  def keyword_names
+    keywords.collect {|x| x.name}
+  end
   def related_keywords
     #http://vocab.lternet.edu/webservice/keywordlist.php/all/csv
     agent = Mechanize.new

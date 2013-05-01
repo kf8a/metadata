@@ -259,7 +259,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_resource_group
-    @eml.title title + date_range
+    @eml.title title + experiment_and_site + date_range
     eml_creator
     eml_people
     eml_pubdate
@@ -267,6 +267,11 @@ class Dataset < ActiveRecord::Base
     keyword_sets
     eml_keywords
     eml_coverage
+  end
+
+  def experiment_and_site
+    experiments = datatables.collect {|x| x.study.name }.uniq
+    " on the #{experiments.to_sentence} at the Kellogg Biological Station, Hickory Corners, MI "
   end
 
   def date_range
@@ -324,14 +329,18 @@ class Dataset < ActiveRecord::Base
   end
 
   def place_keyword_set
-    ['LTER','KBS','Kellogg Biological Station',
-      'Hickory Corners', 'Michigan', 'Great Lakes']
+    ['LTER','KBS','Kellogg Biological Station', 'Hickory Corners', 'Michigan', 'Great Lakes']
   end
 
   def keyword_sets
     @eml.keywordSet do
-      ['LTER','KBS','Kellogg Biological Station', 'Hickory Corners', 'Michigan', 'Great Lakes'].each do| keyword |
+      place_keyword_set.each do| keyword |
         @eml.keyword keyword, keywordType: 'place'
+      end
+    end
+    @eml.keywordSet do
+      datatables.collect {|x| x.keyword_names}.flatten.uniq.each do |keyword|
+        @eml.keyword keyword
       end
     end
   end
