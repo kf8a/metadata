@@ -200,6 +200,7 @@ class Datatable < ActiveRecord::Base
 
   def retract
     csv_cache.destroy
+    save
   end
 
   def restricted_to_members?

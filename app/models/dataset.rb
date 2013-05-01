@@ -62,6 +62,11 @@ class Dataset < ActiveRecord::Base
     "#{dataset}"
   end
 
+  def increment_version
+    version = version + 1
+    save
+  end
+
   def datatable_people
     datatables.collect { |table| table.datatable_personnel.keys }.flatten
   end
