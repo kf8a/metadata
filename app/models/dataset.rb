@@ -259,7 +259,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_resource_group
-    @eml.title title + experiment_and_site + date_range
+    @eml.title title + "at the Kellogg Biological Station, Hickory Corners, MI " + date_range
     eml_creator
     eml_people
     eml_pubdate
@@ -267,11 +267,6 @@ class Dataset < ActiveRecord::Base
     keyword_sets
     eml_keywords
     eml_coverage
-  end
-
-  def experiment_and_site
-    experiments = datatables.collect {|x| x.study.name }.uniq
-    " on the #{experiments.to_sentence} at the Kellogg Biological Station, Hickory Corners, MI "
   end
 
   def date_range
