@@ -271,11 +271,10 @@ class Datatable < ActiveRecord::Base
     year_end = end_date.year
     year_start = begin_date.year
     years = ""
-    final = completed? ? "final " : ""
     if year_end == year_start
-        years = " (#{final}#{year_start})"
+        years = " (#{year_start})"
     else
-        years = " (#{year_start} to #{final}#{ year_end > Time.now.year - 3 ? 'present': year_end})"
+        years = " (#{year_start} to #{ year_end > Time.now.year - 3 ? 'present': year_end})"
     end
     title + years
   end
