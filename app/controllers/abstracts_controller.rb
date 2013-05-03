@@ -2,7 +2,7 @@
 class AbstractsController < ApplicationController
   helper_method :abstract
 
-  before_filter :admin?, :except => [:index, :show]  if Rails.env == 'production'
+  before_filter :admin?, :except => [:index, :show, :download]  if Rails.env == 'production'
 
   # GET meeting_abstracts
   # GET meeting_abstracts.xml
