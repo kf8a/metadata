@@ -37,15 +37,17 @@
 
   </ul>
 
-  <% committees = person.get_committee_roles -%>
-  <% if committees.present? %>
-    <ul>
-      Committees:
-      <% committees.each do |committee| %>
-        <li><%= committee%></li>
-      <% end %>
-    </ul>
-  <% end %>
+  <div class='committee'>
+    <% committees = person.get_committee_roles -%>
+    <% if committees.present? %>
+      <ul class='person-card'>
+        Committees:
+        <% committees.each do |committee| %>
+          <li><%= committee%></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
 <% end %>
 	
 <%= link_to 'Edit', edit_person_path(person) if signed_in? %> |
