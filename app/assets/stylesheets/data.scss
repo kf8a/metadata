@@ -9,7 +9,12 @@
 #metadata {
   padding-right: 10px;
 }
+
 .metadata {
+  ul.person-card {
+    list-style-type: none;
+  }
+
   css.hidden {
     visibility: hidden;
   height: 0px;
