@@ -49,7 +49,7 @@ class Citation < ActiveRecord::Base
   attr_protected :pdf_file_name, :pdf_content_type, :pdf_size
 
   # the REAL publications not including reports
-  scope :publications, where(%q{type != 'ConferenceCitation'})
+  scope :publications, where(%q{type != 'ConferenceCitation'}).where(%q{type != 'ReportCitation'})
 
   scope :bookish, where(%q{type in ('BookCitation', 'ChapterCitation')})
 
