@@ -1,7 +1,7 @@
+<p>To download copies of articles that are not open-access you will be asked to sign in when you request the pdf copy (instructions provided).</p>
 <p>
 <%= render 'search_form', :word => @word, :type => @type, :sort_by => @sort_by %>
 </p>
-<p>To download copies of articles that are not open-access you will be asked to sign in when you request the pdf copy (instructions provided).
   <%= link_to_unless signed_in?, 'sign-in', sign_in_path %>
 </p>
 <h1>Search Results for <%= @word %>: </h1>
