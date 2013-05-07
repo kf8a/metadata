@@ -17,21 +17,18 @@
     <%= f.input :url, :label => 'Website' %>
 </div>
 
-<%= f.simple_fields_for :affiliations do |affiliation_form| %>
+<table id='affiliations'>
+  <tr>
+    <th>Role</th>
 
-  <table id='affiliations'>
-    <tr>
-      <th>Role</th>
-
-      <th>Title</th>
-      <th>Seniority</th>
-      <th>Research Interest</th>
-      <th>Supervisor</th>
-      <th>Delete</th>
-    </tr>
-    <% person.affiliations.each do |affiliation| %>
-      <%= render 'affiliation_fields', f: affiliation_form %>
-    <% end %>
-  </table>
-  <%= link_to_add_fields "Add Role", f, :affiliations %>
-<% end%>
+    <th>Title</th>
+    <th>Seniority</th>
+    <th>Research Interest</th>
+    <th>Supervisor</th>
+    <th>Delete</th>
+  </tr>
+  <%= f.simple_fields_for :affiliations do |builder| %>
+    <%= render 'affiliation_fields', f: builder %>
+  <% end%>
+</table>
+ <%= link_to_add_fields "Add Role", f, :affiliations %>
