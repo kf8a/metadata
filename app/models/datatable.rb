@@ -274,9 +274,15 @@ class Datatable < ActiveRecord::Base
     if year_end == year_start
         years = " (#{year_start})"
     else
-        years = " (#{year_start} to #{ year_end > Time.now.year - 3 ? 'present': year_end})"
+        years = " (#{year_start} to #{ finished? ? 'present': year_end})"
     end
     title + years
+  end
+
+  def finished?
+    next_expected_update = update_frequency_days.present? ? update_frequency_days : 365
+    expected_update = end_date.year + next_expected_update/265 + 2
+    expected_update > Time.now.year
   end
 
   def non_dataset_protocols

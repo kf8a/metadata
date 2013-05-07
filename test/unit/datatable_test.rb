@@ -372,6 +372,21 @@ class DatatableTest < ActiveSupport::TestCase
         @datatable.end_date = '2/12/2004'.to_date
         assert_equal "a really cool datatable (2003 to 2004)", @datatable.title_and_years
       end
+
+      should 'say to present if within the last 2 years' do 
+        started_on = (Time.now() - 1.year).to_date
+        @datatable.begin_date = started_on
+        @datatable.end_date = Time.now().to_date
+        assert_equal "a really cool datatable (#{started_on.year} to present)", @datatable.title_and_years
+      end
+
+      should 'say to present if within 2 years of the expected sample' do
+        @datatable.begin_date = '2/12/2003'.to_date
+        @datatable.end_date = '2/12/2004'.to_date
+        @datatable.update_frequency_days = 24000
+
+        assert_equal "a really cool datatable (2003 to present)", @datatable.title_and_years
+      end
     end
   end
 
