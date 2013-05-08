@@ -1,4 +1,5 @@
-<div class='twocolumn'>
+<div>
+  <div class='one-half first'>
     <%= f.input :sur_name %>
     <%= f.input :middle_name %>
     <%= f.input :given_name %>
@@ -6,6 +7,8 @@
     <%= f.input :title %>
     <%= f.input :organization %>
     <%= f.input :sub_organization %>
+  </div>
+  <div class='one-half'>
     <%= f.input :street_address %>
     <%= f.input :city %>
     <%= f.input :locale %>
@@ -15,8 +18,10 @@
     <%= f.input :fax, :label  => 'Fax Number' %>
     <%= f.input :email %>
     <%= f.input :url, :label => 'Website' %>
+  </div>
 </div>
 
+<div>
 <table id='affiliations'>
   <tr>
     <th>Role</th>
@@ -32,3 +37,4 @@
   <% end%>
 </table>
  <%= link_to_add_fields "Add Role", f, :affiliations %>
+ </div>
