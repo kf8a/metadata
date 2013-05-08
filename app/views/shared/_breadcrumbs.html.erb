@@ -2,7 +2,12 @@
 <a href='/'>HOME</a>
 <% last = crumbs.pop %>
 <% crumbs.each do | crumb | -%>
- &gt; <%= link_to raw(crumb[:name].upcase), crumb[:url] %>
+  &gt;
+  <% if crumb[:url] -%>
+  <%= link_to raw(crumb[:name].upcase), crumb[:url] %>
+<% else -%>
+  <%= raw(crumb[:name].upcase) %>
+<% end -%>
 <% end -%>
  &gt; <%= raw(last[:name].upcase) %>
 </div>

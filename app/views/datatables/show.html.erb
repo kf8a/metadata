@@ -1,10 +1,11 @@
 <% cache(:action_suffix => 'page') do %>
   <%= render 'shared/breadcrumbs',
     :crumbs => [{:name => controller_name.upcase, :url =>  url_for(:controller => controller_name, :action => 'index')},
+      {:name => datatable.study_name },
       {:name => datatable.title.upcase}] %>
 
   <div class='page type-page hfeed'>
-  <h1><%=raw datatable.title %></h1>
+    <h1> <%=raw datatable.title %> </h1>
 
   <div class='description'>
     <%=raw textilize datatable.description.presence %>
@@ -29,7 +30,13 @@
     <% if datatable.begin_date && datatable.end_date %>
       <tr>
         <td>Temporal Coverage:</td>
-        <td><%= datatable.begin_date %> to <%= datatable.end_date %></td>
+        <td>
+          <% if datatable.begin_date.strftime("%B %Y") == datatable.end_date.strftime('%B %Y') -%>
+          <%= datatable.begin_date.strftime("%B %Y") %>
+          <% else -%>
+          <%= datatable.begin_date.strftime("%B %Y") %> to <%= datatable.end_date.strftime('%B %Y') %>
+        <% end -%>
+        </td>
       </tr>
     <% end %>
     <tr>
@@ -70,7 +77,7 @@
     </tr>
     <tr>
       <td>Last Updated</td>
-      <td> <%= @datatable.dataset.updated_at.strftime("%Y-%m-%d")%></td>
+      <td> <%= @datatable.dataset.updated_at.strftime('%Y-%m-%d') %></td>
     </tr>
     <% if @datatable.completed? %>
       <tr>
@@ -82,14 +89,6 @@
         </td>
       </tr>
     <% end %>
-    <tr>
-      <td>Metadata</td>
-      <td>
-        <ul>
-          <li><%= link_to 'Complete EML', dataset_path(datatable.dataset, :format => :eml) %></li>
-        </ul>
-      </td>
-    </tr>
   </table>
 
   <table class='variate-table'>
@@ -134,4 +133,5 @@
 
 <%= link_to 'Back to Data Catalog', datatables_path() %>&nbsp;&nbsp;
 <%= link_to 'Edit', edit_datatable_path(datatable) if admin? %>
+<%= link_to 'EML formatted metadata', dataset_path(datatable.dataset,:format => :eml) %>
 </div>
