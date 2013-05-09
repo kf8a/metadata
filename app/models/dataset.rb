@@ -175,6 +175,10 @@ class Dataset < ActiveRecord::Base
     [leads, datatable_leads].flatten.uniq.compact
   end
 
+  def core_areas
+    datatables.map {|x| x.core_areas }.flatten.uniq
+  end
+
 #private
 
   def eml_custom_unit_list
@@ -253,15 +257,6 @@ class Dataset < ActiveRecord::Base
     end
   end
 
-  def eml_keywords
-    if keyword_list.present?
-      @eml.keywordSet do
-        keyword_list.each do |keyword_tag|
-          @eml.keyword keyword_tag.to_s
-        end
-      end
-    end
-  end
 
   def eml_resource_group
     @eml.title title + " at the Kellogg Biological Station, Hickory Corners, MI " + date_range
@@ -269,11 +264,17 @@ class Dataset < ActiveRecord::Base
     eml_people
     eml_pubdate
     eml_abstract
-    keyword_sets
-    eml_keywords
+    eml_keyword_sets
+    eml_intellectual_rights
     eml_coverage
   end
 
+  def eml_intellectual_rights
+    @eml.intellectualRights do
+      @eml.para "Data in the KBS LTER core database may not be published without written permission of the lead investigator or project director. These restrictions are intended mainly to preserve the primary investigators' rights to first publication and to ensure that data users are aware of the limitations that may be associated with any specific data set. These restrictions apply to both the baseline data set and to the data sets associated with specific LTER-supported subprojects."
+        @eml.para "All publications of KBS data and images must acknowledge KBS LTER support."
+    end
+  end
   def date_range
     daterange = temporal_extent
     starting = daterange[:begin_date]
@@ -286,7 +287,6 @@ class Dataset < ActiveRecord::Base
       ""
     end
   end
-
 
   def eml_creator
       if creators.empty?
@@ -322,6 +322,7 @@ class Dataset < ActiveRecord::Base
           @eml.section do 
             @eml.title 'Dataset Abstract'
             @eml.para EML.text_sanitize(textilize(abstract))
+            @eml.para "original data source http://lter.kbs.msu.edu/dataset/#{id}"
           end
         end
       end
@@ -332,7 +333,7 @@ class Dataset < ActiveRecord::Base
     ['LTER','KBS','Kellogg Biological Station', 'Hickory Corners', 'Michigan', 'Great Lakes']
   end
 
-  def keyword_sets
+  def eml_keyword_sets
     @eml.keywordSet do
       place_keyword_set.each do| keyword |
         @eml.keyword keyword, keywordType: 'place'
@@ -343,6 +344,21 @@ class Dataset < ActiveRecord::Base
       @eml.keywordSet do
         datatable_keywords.each do |keyword|
           @eml.keyword keyword
+        end
+      end
+    end
+    if core_areas.present?
+      @eml.keywordSet do
+        core_areas.each do |keyword|
+          @eml.keyword  keyword.name
+        end
+        @eml.keywordThesaurus 'LTER Core Research Area'
+      end
+    end
+    if keyword_list.present?
+      @eml.keywordSet do
+        keyword_list.each do |keyword_tag|
+          @eml.keyword keyword_tag.to_s
         end
       end
     end
@@ -375,7 +391,7 @@ class Dataset < ActiveRecord::Base
           @eml.southBoundingCoordinate 42.391019
         end
       end
-      if initiated.present? && completed.present?
+      if initiated.present? && data_end_date.present?
         eml_temporal_coverage
       end
     end
@@ -385,7 +401,7 @@ class Dataset < ActiveRecord::Base
     @eml.temporalCoverage do
       @eml.rangeOfDates do
         @eml.beginDate { @eml.calendarDate initiated.to_s }
-        @eml.endDate   { @eml.calendarDate completed.to_s }
+        @eml.endDate   { @eml.calendarDate data_end_date.to_s }
       end
     end
   end

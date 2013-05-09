@@ -295,7 +295,6 @@ class Datatable < ActiveRecord::Base
       @eml.entityName "Kellogg Biological Station LTER: #{title}"
       if description
         text =  description.gsub(/<\/?[^>]*>/, "")
-        text += "\n#{website_name}/datatables/#{id}"
         @eml.entityDescription EML.text_sanitize(text) unless text.strip.empty?
       end
 #      eml_protocols if non_dataset_protocols.present?
