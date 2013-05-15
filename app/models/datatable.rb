@@ -303,8 +303,8 @@ class Datatable < ActiveRecord::Base
     end
   end
 
-  def raw_csv
-    convert_to_csv(all_data)
+  def raw_csv(units=true)
+    convert_to_csv(all_data, units)
   end
 
   def approved_csv
@@ -333,11 +333,14 @@ class Datatable < ActiveRecord::Base
     end
   end
 
-  def convert_to_csv(values)
+
+  def convert_to_csv(values, units=true)
     csv_string = CSV.generate do |csv|
       vars = variate_names
       csv << vars
-      csv << variate_units
+      if units
+        csv << variate_units
+      end
       fields = values.fields
       unless fields.join(' ') =~ /[A-Z]/
         vars =  variates.collect {|variate| variate.name.downcase }
@@ -361,7 +364,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def to_climdb
-    "!#{raw_csv}"
+    "!#{raw_csv(false)}" # no units
   end
 
   def terms_of_use
