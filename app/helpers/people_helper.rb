@@ -14,8 +14,7 @@ module PeopleHelper
     first_one = true
     html = "<li>#{committee}  "
     role.people.each do |person|
-      affiliation = person.affiliations.where(:role_id => role).where(:title => committee)
-      next unless affiliation.empty?
+      next unless person.affiliations.find_by_role_id(role).title == committee
       if first_one
         html += link_to "#{person.full_name}", person_path(person)
         first_one = false
