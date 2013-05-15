@@ -8,7 +8,7 @@ class Affiliation < ActiveRecord::Base
   end
 
   def self.committees
-    joins(:role).where(%q{roles.name like '%Committee%' or name like '%Network Representative%'})
+    joins(:role).where(%q{roles.name like '%Committee%' or name like '%Network Representative%'}).order('seniority')
   end
 end
 
