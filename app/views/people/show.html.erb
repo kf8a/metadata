@@ -38,12 +38,12 @@
   </ul>
 
   <div class='committee'>
-    <% committees = person.get_committee_roles -%>
+    <% committees = person.affiliations.lter.committees -%>
     <% if committees.present? %>
       <ul class='person-card'>
         Committees:
         <% committees.each do |committee| %>
-          <li><%= committee%></li>
+          <li><%= committee.role.committee_role_name %> <% if committee.title.present? %> (<%= committee.title %>) <% end %> </li>
         <% end %>
       </ul>
     <% end %>

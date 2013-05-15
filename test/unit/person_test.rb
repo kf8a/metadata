@@ -48,9 +48,9 @@ class PersonTest < ActiveSupport::TestCase
         @person.lter_roles << @second_committee
       end
 
-      context '#get_committee_roles' do
+      context '#get_committee_role names' do
         setup do
-          @result = @person.get_committee_roles
+          @result = @person.get_committee_role_names
         end
 
         should 'return only the committee role names' do

@@ -1,6 +1,6 @@
 class Person < ActiveRecord::Base
   has_many :affiliations, :dependent => :destroy
-  has_many :lter_roles, :through => :affiliations, :conditions => ['role_type_id = ?', RoleType.find_by_name('lter')], :source => :role
+  has_many :lter_roles, :through => :affiliations, :conditions => ['role_type_id = ?', RoleType.where(:name => 'lter').first], :source => :role
   has_many :dataset_roles, :through => :affiliations, :conditions => ['role_type_id = ?', RoleType.find_by_name('lter_dataset')], :source => :role
   has_many :roles, :through => :affiliations
   has_many :datasets, :through => :affiliations,  :source => :dataset
@@ -34,7 +34,11 @@ class Person < ActiveRecord::Base
   end
 
   def get_committee_roles
-    lter_roles.collect { |role| role.committee_role_name }.compact
+    affiliations.lter.committees
+  end
+
+  def get_committee_role_names
+    affiliations.lter.committees.collect {|affiliation| affiliation.role.committee_role_name }.compact
   end
 
   def only_emeritus?
