@@ -5,10 +5,16 @@
 	<h2><%= role.name %></h2>
 	<% if role.id == 23 then %>
 	  <ul>
+      <%=raw show_committee('Executive board', role) %>
 	    <%=raw show_committee('Science Council',role) %>
 	    <%=raw show_committee('Education Committee',role) %>
       <%=raw show_committee('Communication Committee', role) %>
+      <%=raw show_committee('Social and Economic Science',role) %>
+      <%=raw show_committee('Publications', role) %>
+      <%=raw show_committee('Climate', role) %>
+      <%=raw show_committee('US ILTER',role) %>
 	    <%=raw show_committee('Graduate Student Committee',role) %>
+      <%=raw show_committee('Network Information System Advisory Committee',role) %>
 	    <%=raw show_committee('Information Management Committee',role) %>
 	  </ul>
 	<% else %>
