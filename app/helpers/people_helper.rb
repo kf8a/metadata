@@ -13,9 +13,9 @@ module PeopleHelper
   def show_committee(committee,role)
     first_one = true
     html = "<li>#{committee}  "
-    role.people.each do |person|
-      affiliation = person.affiliations.where(:role_id => role).where(:title => committee)
-      next unless affiliation.empty?
+    committee_affiliations = role.people.collect {|x| x.affiliations.where(:role_id => role).where(:title => committee)}.flatten.uniq
+    committee_people = committee_affiliations.collect {|x| x.person }
+    committee_people.each do |person|
       if first_one
         html += link_to "#{person.full_name}", person_path(person)
         first_one = false
