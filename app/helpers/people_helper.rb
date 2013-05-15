@@ -17,7 +17,7 @@ module PeopleHelper
 
   def show_committee(committee,role)
     first_one = true
-    html = "<li>#{committee}  "
+    html = "<li>#{committee}:  "
     committee_people = committee_affiliations(committee, role).collect {|x| x.person }
     committee_people.each do |person|
       if first_one
