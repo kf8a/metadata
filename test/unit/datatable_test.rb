@@ -387,6 +387,15 @@ class DatatableTest < ActiveSupport::TestCase
 
         assert_equal "a really cool datatable (2003 to present)", @datatable.title_and_years
       end
+
+      should 'give the end date if complted' do
+        started_on = (Time.now() - 1.year).to_date
+        @datatable.begin_date = started_on
+        @datatable.end_date = Time.now().to_date
+        @datatable.complete!
+
+        assert_equal "a really cool datatable (#{started_on.year} to #{Time.now().to_date.year})", @datatable.title_and_years
+      end
     end
   end
 
