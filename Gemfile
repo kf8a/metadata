@@ -85,12 +85,12 @@ group :test do
   gem 'simplecov-html'
 
   gem "shoulda-matchers" # to use rspec like syntax
-  gem 'factory_girl_rails' #, :require => false
+  gem 'factory_girl_rails'
 
   #Cucumber stuff
   gem 'capybara'
   gem 'cucumber-rails' , :require => false
-  gem 'spork'
-  # gem 'launchy'
-  gem 'database_cleaner'
+  gem 'pickle'
+#  gem 'spork'
+#  gem 'database_cleaner'
 end
