@@ -1,4 +1,5 @@
 class DatasetsController < ApplicationController
+  helper_method :dataset
 
   before_filter :allow_on_web, :except => [:knb]
   before_filter :admin?, :except => [:index, :show ] if Rails.env == 'production'
@@ -164,7 +165,11 @@ class DatasetsController < ApplicationController
     @studies.sort_by! { |study| study.weight }
   end
 
+  def dataset
+    Dataset.find(params[:id])
+  end
+
   def get_dataset
-    @dataset  = Dataset.find(params[:id])
+    @dataset  = dataset
   end
 end
