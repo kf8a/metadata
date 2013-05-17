@@ -7,17 +7,25 @@
 	<li>Status: <%= @dataset.status %></li>
 	<li>Temporal Coverage  <%= @dataset.initiated %> to <%= @dataset.data_end_date %></li>
 </ul>
+<% if @dataset.datatables.any? -%>
 <h2>Tables</h2>
 <dl>
-  <% unless  @dataset.datatables.size > 0 %>
-    <dd>No data available yet</dd>
-  <% end %>
 	<% @dataset.datatables.each do |datatable| %>
 	  <% next unless datatable.on_web %>
 		<dt><%= link_to datatable.name, datatable_path(datatable) %> <%= datatable.title %></dt>
 		<dd><%=raw datatable.description %></dd>
 	<% end %>
 </dl>
+<% end -%>
+<% if @dataset.dataset_files.any? -%>
+  <h2>Files</h2>
+  <dl>
+    <% @dataset.dataset_files.each do |file| -%>
+      <dt><%= link_to file.data_file_name, dataset_file_path(file) %></dt>
+      <dd><%= file.name %></dd>
+    <% end -%>
+  </dl>
+  <% end -%>
 <h2>Protocols</h2>
 <ul>
 	<% @dataset.protocols.each do |protocol| -%>

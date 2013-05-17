@@ -62,6 +62,18 @@
         </ul></td>
       </tr>
     <% end -%>
+    <% if datatable.related_files.any? -%>
+      <tr>
+        <td>Related Files:</td>
+        <td>
+          <ul>
+            <% datatable.related_files.each do |file| -%>
+              <li><%= link_to file.data_file_name, dataset_file_path(file) %></li>
+            <% end -%>
+          </ul>
+        </td>
+      </tr>
+    <% end -%>
     <tr>
       <td>Personnel:</td>
       <td>

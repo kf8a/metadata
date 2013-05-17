@@ -12,7 +12,6 @@ Metadata::Application.routes.draw do
   end
   resources :affiliations
 
-
   resources :citations do
     member do
       get :download
@@ -33,6 +32,7 @@ Metadata::Application.routes.draw do
   resources :authors
   resources :collections
   resources :data_contributions
+  resources :dataset_files, :only => :show
   resources :datasets do
     collection do
       post :set_affiliation_for

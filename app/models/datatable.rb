@@ -482,6 +482,10 @@ class Datatable < ActiveRecord::Base
     self.dataset.datatables - [self]
   end
 
+  def related_files
+    self.dataset.dataset_files
+  end
+
   def sponsor_name
     dataset.sponsor.try(:name) || 'lter'
   end
