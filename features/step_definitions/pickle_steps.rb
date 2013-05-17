@@ -4,16 +4,16 @@
 Given(/^#{capture_model} exists?(?: with #{capture_fields})?$/) do |name, fields|
   create_model(name, fields)
 end
-#
-## create n models
-#Given(/^(\d+) #{capture_plural_factory} exist(?: with #{capture_fields})?$/) do |count, plural_factory, fields|
-#  count.to_i.times { create_model(plural_factory.singularize, fields) }
-#end
-#
-## create models from a table
-#Given(/^the following #{capture_plural_factory} exists?:?$/) do |plural_factory, table|
-#  create_models_from_table(plural_factory, table)
-#end
+
+# create n models
+Given(/^(\d+) #{capture_plural_factory} exist(?: with #{capture_fields})?$/) do |count, plural_factory, fields|
+  count.to_i.times { create_model(plural_factory.singularize, fields) }
+end
+
+# create models from a table
+Given(/^the following #{capture_plural_factory} exists?:?$/) do |plural_factory, table|
+  create_models_from_table(plural_factory, table)
+end
 
 # find a model
 Then(/^#{capture_model} should exist(?: with #{capture_fields})?$/) do |name, fields|
@@ -60,25 +60,23 @@ Then(/^#{capture_model} should not be #{capture_model}(?:'s)? (\w+)$/) do |targe
   model!(owner).send(association).should_not == model!(target)
 end
 
-#This currently produces a "too long REGEXP" error
 # assert model.predicate? 
-#Then(/^#{capture_model} should (?:be|have) (?:an? )?#{capture_predicate}$/) do |name, predicate|
-#  if model!(name).respond_to?("has_#{predicate.gsub(' ', '_')}")
-#    model!(name).should send("have_#{predicate.gsub(' ', '_')}")
-#  else
-#    model!(name).should send("be_#{predicate.gsub(' ', '_')}")
-#  end
-#end
+Then(/^#{capture_model} should (?:be|have) (?:an? )?#{capture_predicate}$/) do |name, predicate|
+  if model!(name).respond_to?("has_#{predicate.gsub(' ', '_')}")
+    model!(name).should send("have_#{predicate.gsub(' ', '_')}")
+  else
+    model!(name).should send("be_#{predicate.gsub(' ', '_')}")
+  end
+end
 
-#This currently produces a "too long REGEXP" error
 # assert not model.predicate?
-#Then(/^#{capture_model} should not (?:be|have) (?:an? )?#{capture_predicate}$/) do |name, predicate|
-#  if model!(name).respond_to?("has_#{predicate.gsub(' ', '_')}")
-#    model!(name).should_not send("have_#{predicate.gsub(' ', '_')}")
-#  else
-#    model!(name).should_not send("be_#{predicate.gsub(' ', '_')}")
-#  end
-#end
+Then(/^#{capture_model} should not (?:be|have) (?:an? )?#{capture_predicate}$/) do |name, predicate|
+  if model!(name).respond_to?("has_#{predicate.gsub(' ', '_')}")
+    model!(name).should_not send("have_#{predicate.gsub(' ', '_')}")
+  else
+    model!(name).should_not send("be_#{predicate.gsub(' ', '_')}")
+  end
+end
 
 # model.attribute.should eql(value)
 # model.attribute.should_not eql(value)

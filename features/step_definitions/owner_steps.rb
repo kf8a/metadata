@@ -1,13 +1,13 @@
 Given /^"([^"]*)" owns the datatable named "([^"]*)"$/ do |email, name|
   owner = User.find_by_email(email)
   datatable = Datatable.find_by_name(name)
-  Factory.create(:ownership, :user => owner, :datatable => datatable)
+  FactoryGirl.create(:ownership, :user => owner, :datatable => datatable)
 end
 
 Given /^"([^"]*)" owns the datatable$/ do |email|
   owner = User.find_by_email(email)
   datatable = Datatable.last
-  Factory.create(:ownership, :user => owner, :datatable => datatable)
+  FactoryGirl.create(:ownership, :user => owner, :datatable => datatable)
 end
 
 Given /^"([^"]*)" does not own the datatable$/ do |email|
@@ -25,7 +25,7 @@ end
 
 Then /^"([^"]*)" should not own the datatable "([^"]*)"$/ do |email, name|
   user = User.find_by_email(email)
-  user = Factory.create(:email_confirmed_user, :email => email) unless user
+  user = FactoryGirl.create(:email_confirmed_user, :email => email) unless user
   datatable = Datatable.find_by_name(name)
   assert !user.owns?(datatable)
 end
