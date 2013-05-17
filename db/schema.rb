@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130423132337) do
+ActiveRecord::Schema.define(:version => 20130516232103) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -155,6 +155,17 @@ ActiveRecord::Schema.define(:version => 20130423132337) do
   end
 
   add_index "datafiles", ["person_id"], :name => "index_datafiles_on_person_id"
+
+  create_table "dataset_files", :force => true do |t|
+    t.text     "name"
+    t.integer  "dataset_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "data_file_name"
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.datetime "data_updated_at"
+  end
 
   create_table "datasets", :force => true do |t|
     t.string   "dataset"
