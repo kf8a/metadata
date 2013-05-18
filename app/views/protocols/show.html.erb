@@ -18,8 +18,10 @@
   <%= " to " if @protocol.in_use_to? %><%= @protocol.in_use_to %>
   </p>
   <%=raw textilize(@protocol.description) if @protocol.description %>
-  <h2>Abstract</h2>
-  <%=raw textilize(@protocol.abstract) if @protocol.abstract%>
+  <% if @protocol.abstract.present? -%>
+    <h2>Abstract</h2>
+    <%=raw textilize(@protocol.abstract) if @protocol.abstract%>
+  <% end -%>
   <h2>Protocol</h2>
   <div class='abstract_body'>
   <%=raw textilize(@protocol.body) if @protocol.body %>
