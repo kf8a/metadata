@@ -1,6 +1,11 @@
 class DatasetFilesController < ApplicationController
   def show 
     dataset_file = DatasetFile.find(params[:id])
-    send_file dataset_file.data.path(params[:style]), :filename => dataset_file.data_file_name
+    path = dataset_file.pdf.path(params[:style])
+    if Rails.env.production?
+      redirect_to(citation.pdf.s3_object(params[:style]).url_for(:read ,:secure => true, :expires_in => 10.seconds).to_s)
+    else
+      send_file  path, :type => 'application/pdf', :disposition => 'inline'
+    end
   end
 end
