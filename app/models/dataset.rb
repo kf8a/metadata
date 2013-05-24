@@ -324,7 +324,7 @@ class Dataset < ActiveRecord::Base
           @eml.section do 
             @eml.title 'Dataset Abstract'
             @eml.para EML.text_sanitize(textilize(abstract))
-            @eml.para "original data source http://lter.kbs.msu.edu/dataset/#{id}"
+            @eml.para "original data source http://lter.kbs.msu.edu/datasets/#{id}"
           end
         end
       end
