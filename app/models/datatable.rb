@@ -225,10 +225,18 @@ class Datatable < ActiveRecord::Base
     permissions.where(:user_id => user, :decision => 'denied').collect(&:owner)
   end
 
+  def sponsor
+    dataset.sponsor
+  end
+
+  def sponsor_name
+    sponsor.name
+  end
+
   def can_be_qcd_by?(user)
-    if dataset.sponsor.name == 'lter'
+    if sponsor_name == 'lter'
       user.try(:admin?) || member?(user)
-    elsif dataset.sponsor.name == 'glbrc'
+    elsif sponsor_name == 'glbrc'
       user.try(:admin?) || owned_by?(user)
     else
       false
