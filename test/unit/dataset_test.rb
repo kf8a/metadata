@@ -106,13 +106,12 @@ class DatasetTest < ActiveSupport::TestCase
     setup do
       @dataset = FactoryGirl.create(:dataset,
         :datatables  => [FactoryGirl.create(:datatable, :object => 'select 1'),
-                         FactoryGirl.create(:datatable, :object => "select now() as sample_date"),
-                         FactoryGirl.create(:datatable, :object => "select '2000-1-1'::date as sample_date")])
+          FactoryGirl.create(:datatable, :begin_date => Date.today, :end_date => Date.today),
+          FactoryGirl.create(:datatable, :begin_date => '2000-1-1', :end_date => Date.today)])
     end
 
     should 'update temporal extent to today' do
       @dataset.update_temporal_extent
-      @dataset.reload #make sure it updates in the database
       assert_equal Date.new(2000,1,1), @dataset.initiated
       assert_equal Date.today, @dataset.data_end_date
     end
@@ -122,9 +121,10 @@ class DatasetTest < ActiveSupport::TestCase
   context 'past temporal extent' do
     setup do
       @dataset = FactoryGirl.create(:dataset,
-        :datatables  => [FactoryGirl.create(:datatable, :object => 'select now() as sample_date'),
-                         FactoryGirl.create(:datatable,
-                         :object => "select now() - interval '1 year' as sample_date")])
+                                    :datatables  => [
+                                      FactoryGirl.create(:datatable, :begin_date => Date.today, :end_date=> Date.today), 
+                                      FactoryGirl.create(:datatable, :begin_date => Date.today - 1.year, :end_date => Date.today - 1.month)
+      ])
     end
 
     should 'be today to a year ago' do
@@ -170,7 +170,7 @@ class DatasetTest < ActiveSupport::TestCase
 
     should 'have a temporal coverage element within coverage' do
       @dataset.initiated = Date.today - 1.year
-      @dataset.completed = Date.today
+      @dataset.data_end_date = Date.today
       eml_doc = Nokogiri::XML(@dataset.to_eml)
       assert_equal 1, eml_doc.css('coverage temporalCoverage').count
     end
