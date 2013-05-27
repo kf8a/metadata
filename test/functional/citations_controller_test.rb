@@ -432,26 +432,5 @@ class CitationsControllerTest < ActionController::TestCase
 
       should redirect_to('the citation index page') {citations_url() }
     end
-
-    should 'test_caching_and_expiring_for_update' do
-      Rails.cache.clear
-      @citation = FactoryGirl.create :citation
-      get :index
-      assert @controller.fragment_exist?(:action => "index", :action_suffix=>'-')
-      put :update, :id => @citation, :citation => { :title => 'nothing' }
-      assert_equal @citation, assigns(:citation)
-      assert Citation.find_by_title('nothing')
-      assert !@controller.fragment_exist?(:controller => "citations", :action => "index")
-    end
-
-    should 'test_caching_and_expiring_for_create' do
-      Rails.cache.clear
-      get :index
-      assert @controller.fragment_exist?(:controller => "citations", :action => "index", :action_suffix => '')
-      post :create, :citation => { :title => 'a brand new citation' }
-      assert Citation.find_by_title('a brand new citation')
-      assert !@controller.fragment_exist?(:controller => "citations", :action => "index")
-    end
-
   end
 end

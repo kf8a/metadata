@@ -112,7 +112,6 @@ class DatatablesControllerTest < ActionController::TestCase
         get :show,  :id => table, :format => 'climdb'
       end
 
-      should respond_with_content_type(:csv)
       should 'give a real climdb document' do
         #TODO This should really be parsed in some way
         assert_equal "!date", response.body.strip

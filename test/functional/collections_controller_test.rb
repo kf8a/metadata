@@ -8,7 +8,6 @@ class CollectionsControllerTest < ActionController::TestCase
     end
 
     should respond_with :success
-    should assign_to :collections
   end
 
   context "GET :show" do
