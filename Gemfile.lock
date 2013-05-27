@@ -6,12 +6,12 @@ GIT
       parslet
 
 GIT
-  remote: git://github.com/milkfarm/vestal_versions.git
-  revision: a82dcd6dff2fd507f4a269eabd2814786c9aa42a
+  remote: git://github.com/laserlemon/vestal_versions
+  revision: c7aa512666b22e1a47b4fb36bb1679cb847a532e
   specs:
-    vestal_versions (1.2.2)
-      activerecord (>= 3.0.0)
-      activesupport (>= 3.0.0)
+    vestal_versions (1.2.3)
+      activerecord (~> 3.0)
+      activesupport (~> 3.0)
 
 GIT
   remote: git://github.com/thoughtbot/shoulda.git
