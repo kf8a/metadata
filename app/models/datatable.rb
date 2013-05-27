@@ -527,20 +527,6 @@ class Datatable < ActiveRecord::Base
 
   ## Utilites
 
-  #migrate dataset personel to datatables
-  def migrate_personel!
-    if data_contributions.empty?
-      dataset.affiliations.each do |affiliation|
-        contribution = DataContribution.new
-        contribution.person = affiliation.person
-        contribution.role = affiliation.role
-        contribution.seniority = affiliation.seniority
-
-        data_contributions << contribution
-      end
-    end
-  end
-
   private
 
   def query_datatable_for_temporal_extent(query)
