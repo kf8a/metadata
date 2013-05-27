@@ -135,12 +135,6 @@ class Citation < ActiveRecord::Base
     end
   end
 
-  # don't even try to parse the page number
-  def page_number_from_ris(start_page, end_page)
-    self.start_page_number = start_page
-    self.ending_page_number = end_page
-  end
-
   def Citation.from_ris(ris_text, pdf_folder = nil)
     parser = RisParser::RisParser.new
     trans = RisParser::RisParserTransform.new
@@ -149,6 +143,12 @@ class Citation < ActiveRecord::Base
       logger.info stanza
       citation_from_ris_stanza(stanza, pdf_folder)
     end
+  end
+
+  # don't even try to parse the page number
+  def page_number_from_ris(start_page, end_page)
+    self.start_page_number = start_page
+    self.ending_page_number = end_page
   end
 
   def get_attribute_from_ris_stanza(stanza, attribute_name, ris_name=nil)
@@ -274,18 +274,10 @@ class Citation < ActiveRecord::Base
   end
 
   def to_enw
-    endnote = "%0 #{endnote_type}"
-    endnote += title_to_enw
-    endnote += authors.to_enw
-    endnote += editors.to_enw
-    endnote += endnote_publication_data
-    endnote += volume_to_enw
-    endnote += page_numbers_to_enw
-    endnote += pub_year_to_enw
-    endnote += abstract_to_enw
-    endnote += doi_to_enw
-    endnote += publisher_url_to_enw
-    endnote += isbn_to_enw
+    endnote = "%0 #{endnote_type}#{title_to_enw}#{authors.to_enw}#{editors.to_enw}#{endnote_publication_data}"
+    endnote += "#{volume_to_enw}#{page_numbers_to_enw}#{pub_year_to_enw}#{abstract_to_enw}#{doi_to_enw}"
+    endnote += "#{publisher_url_to_enw}#{isbn_to_enw}"
+    endnote
   end
 
   def self.select_options
