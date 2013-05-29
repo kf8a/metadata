@@ -385,7 +385,7 @@ class Dataset < ActiveRecord::Base
   def eml_coverage
     @eml.coverage do 
       @eml.geographicCoverage do
-        @eml.geographicDescription 'The areas around the Kellog Biological Station in southwest Michigan'
+        @eml.geographicDescription 'The areas around the Kellogg Biological Station in southwest Michigan'
         @eml.boundingCoordinates do
           @eml.westBoundingCoordinate -85.404699
           @eml.eastBoundingCoordinate -85.366857
