@@ -6,7 +6,7 @@ class MeetingsController < ApplicationController
   def index
     venue = 1 # KBS
     venue = 2 if params[:location] == 'national'
-    
+
     @venue = VenueType.find(venue)
     @meetings = @venue.meetings
     @title = @venue.name.humanize + "  Meetings"
@@ -29,11 +29,11 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.new
     @venues = VenueType.find(:all).collect { |type| [type.name, type.id] }
   end
-  
+
   def edit
     @venues = VenueType.find(:all).collect { |type| [type.name, type.id] }
   end
-  
+
   def create
     @meeting = Meeting.new(params[:meeting])
     respond_to do |format|
@@ -48,7 +48,7 @@ class MeetingsController < ApplicationController
       end
     end
   end
-  
+
   def update
     respond_to do |format|
        if @meeting.update_attributes(params[:meeting])
@@ -62,18 +62,16 @@ class MeetingsController < ApplicationController
        end
      end
   end
-  
+
   def destroy
     @meeting.destroy
      respond_to do |format|
        format.html { redirect_to meetings_url }
        format.xml  { head :ok }
-       format.js do 
-         render :nothing => true
-       end
+       format.js   { render :nothing => true }
      end
   end
-  
+
   private
   def set_crumbs
     crumb = Struct::Crumb.new
@@ -81,15 +79,19 @@ class MeetingsController < ApplicationController
     return unless params[:id]
     meeting = Meeting.find(params[:id])
     venue = meeting.venue_type
-    
+
     #crumb.url = url_for(:controller => 'meetings', :location  => venue.name)
     crumb.url = "/meetings/?location=#{venue.name}"
-  
+
     crumb.name = venue.name.capitalize + ' Meeting'
     @crumbs << crumb
   end
-  
+
   def get_meeting
-    @meeting = Meeting.find(params[:id])
+    @meeting = meeting
+  end
+
+  def meeting
+    Meeting.find(params[:id])
   end
 end
