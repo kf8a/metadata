@@ -301,7 +301,7 @@ class Datatable < ActiveRecord::Base
   def to_eml(xml = ::Builder::XmlMarkup.new)
     @eml = xml
     @eml.dataTable 'id' => Rails.application.routes.url_helpers.datatable_path(self) do
-      @eml.entityName "Kellogg Biological Station LTER: #{title} (#{name#}"
+      @eml.entityName "Kellogg Biological Station LTER: #{title} (#{name})"
       if description
         text =  description.gsub(/<\/?[^>]*>/, "")
         @eml.entityDescription EML.text_sanitize(text) unless text.strip.empty?
