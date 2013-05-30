@@ -4,8 +4,7 @@ Feature: Protocols should exists in several versions
   I want to see older version of the protocol
 
   Scenario: a protocol is updated to a new version
-    Given I am in the GLBRC subdomain
-    And I am signed in as an administrator
+    Given I am signed in as an administrator
     And a protocol exists with title: "old protocol"
     And I go to the protocol's edit page
     And I fill in "Title" with "new protocol"

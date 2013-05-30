@@ -6,21 +6,21 @@ Feature: Sign in
     Scenario: User is not signed up
       Given no user exists with an email of "email@person.com"
       When I go to the sign in page
-      And I sign in as "email@person.com/password"
+      And I sign in as "email@person.com"
       Then I should see "Bad email or password"
       And I should be signed out
 
    Scenario: User enters wrong password
-      Given I am signed up as "email@person.com/password"
+      Given I am signed up as "email@person.com"
       When I go to the sign in page
-      And I sign in as "email@person.com/wrongpassword"
+      And I sign in as "email@person.com' with 'wrongpassword"
       Then I should see "Bad email or password"
       And I should be signed out
 
    Scenario: User signs in successfully
-      Given I am signed up as "email@person.com/password"
+      Given I am signed up as "email@person.com"
       When I go to the sign in page
-      And I sign in as "email@person.com/password"
+      And I sign in as "email@person.com"
       Then I should be signed in
       When I return next time
       Then I should be signed in
