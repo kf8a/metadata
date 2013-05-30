@@ -93,5 +93,6 @@ group :test do
   gem 'cucumber-rails' , :require => false
   gem 'pickle'
 #  gem 'spork'
-#  gem 'database_cleaner'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
