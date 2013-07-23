@@ -530,7 +530,7 @@ class DatatableTest < ActiveSupport::TestCase
         end
 
         should 'include an entityName element' do
-          assert_equal 'Kellogg Biological Station LTER: a really cool datatable', @to_eml.at_css('dataTable entityName').text
+          assert_equal 'Kellogg Biological Station LTER: a really cool datatable (KBS001_34)', @to_eml.at_css('dataTable entityName').text
         end
 
         should 'include an entityDescription element' do

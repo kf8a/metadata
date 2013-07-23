@@ -256,10 +256,6 @@ GEM
     simple_form (2.1.0)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
-    simplecov (0.7.1)
-      multi_json (~> 1.0)
-      simplecov-html (~> 0.7.1)
-    simplecov-html (0.7.1)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -336,8 +332,6 @@ DEPENDENCIES
   shoulda!
   shoulda-matchers
   simple_form
-  simplecov
-  simplecov-html
   sqlite3
   therubyracer
   thinking-sphinx (= 2.0.10)

@@ -40,8 +40,6 @@ gem 'bibtex-ruby'
 # versioning support for protocols
 gem 'vestal_versions', :git => 'git://github.com/laserlemon/vestal_versions'
 # gem 'vestal_versions', :git => 'git://github.com/milkfarm/vestal_versions.git'
-# :git => 'git://github.com/zapnap/vestal_versions.git' 
-# :git => 'git://github.com/adamcooper/vestal_versions'
 
 gem 'dalli'
 
@@ -82,9 +80,6 @@ group :development, :test  do
 end
 
 group :test do
-  gem 'simplecov'
-  gem 'simplecov-html'
-
   gem "shoulda-matchers" # to use rspec like syntax
   gem 'factory_girl_rails'
 
