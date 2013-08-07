@@ -4,26 +4,6 @@
       <%= link_to "#{score.study.try(:name)} : #{raw(score.title)}", datatable_path(score) %>
     </h2>
   </div>
-  <div class='one-half first'>
-    <div class='description truncate'>
-      <%=raw score.description %> 
-
-      <% part_of_text = "Part of the " + link_to(score.dataset.title, dataset_url(score.dataset.id)) +  " dataset. " %>
-      <%=raw textilize("#{part_of_text}  #{score.dataset.try(:abstract)}") %>
-    </div>
-    <p>
-    <% if score.status == 'completed' %>
-      Completed: <%= score.completed %>
-    <% end %>
-    </p>
-</div>
-<div class='one-half'>
-  <p><em>Variates</em>: 
-    <% score.variates.each do |variate| %>
-     <%= variate.name %>, 
-    <% end %>
-    </p>
-</div>
   <div class='score-data' data-scores= <%= score.scores %>></div>
 <div class='clear-line'></div>
 </div>
