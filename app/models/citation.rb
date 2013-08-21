@@ -68,14 +68,18 @@ class Citation < ActiveRecord::Base
 
   workflow do
     state :submitted do
-      event :accept, :transitions_to => :forthcoming
+      event :accept,  :transitions_to => :forthcoming
+      event :draft,   :transitions_to => :draft
       event :publish, :transitions_to => :published
+    end
+    state :draft do
+      event :submit,  :transitions_to => :submitted
     end
     state :forthcoming do
       event :publish, :transitions_to => :published
     end
     state :published do
-      event :accept, :transitions_to => :forthcoming
+      event :accept,  :transitions_to => :forthcoming
     end
   end
 
@@ -241,9 +245,9 @@ class Citation < ActiveRecord::Base
     citation_type.try(:name) == 'book'
   end
 
-  def formatted(options={})
-    book? ? formatted_book(options) : formatted_article(options)
-  end
+  # def formatted(options={})
+  #   book? ? formatted_book(options) : formatted_article(options)
+  # end
 
   def to_bib
     entry = BibTeX::Entry.new
@@ -295,6 +299,10 @@ class Citation < ActiveRecord::Base
     end
   end
 
+  def formatted(options={})
+    "#{author_and_year(options)} #{title_and_punctuation} #{publication} #{volume_and_page}".rstrip
+  end
+
   private
 
   def bibtex_type
@@ -313,9 +321,6 @@ class Citation < ActiveRecord::Base
     end
   end
 
-  def formatted_article(options={})
-    "#{author_and_year(options)} #{title_and_punctuation} #{publication} #{volume_and_page}".rstrip
-  end
 
   def volume_and_page
     if volume.blank?
@@ -351,10 +356,6 @@ class Citation < ActiveRecord::Base
     else
       "#{start_page_number}"
     end
-  end
-
-  def formatted_book(options={})
-    "#{author_and_year(options)} #{title_and_punctuation}. #{page_numbers_book}#{editor_string}. #{publication}. #{publisher}, #{address}."
   end
 
   def page_numbers_book

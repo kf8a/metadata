@@ -1,9 +1,5 @@
 class ReportCitation < Citation
 
-  def formatted(options={})
-    "#{author_and_year(options)} #{title_and_punctuation} #{publication} #{volume_and_page}".rstrip
-  end
-
   private
 
   def bibtex_type
