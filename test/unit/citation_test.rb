@@ -96,7 +96,8 @@ class CitationTest < ActiveSupport::TestCase
 %V 325
 %P 231-241
 %D 2008
-%X An abstract of the article."
+%X An abstract of the article.
+%M KBS.#{@citation.id}"
     assert_equal result, @citation.to_enw
     end
 
@@ -180,7 +181,8 @@ class CitationTest < ActiveSupport::TestCase
 %I CRC Press, Taylor and Francis Group
 %C Boca Raton, Florida, USA
 %P 27-39
-%D 2006"
+%D 2006
+%M KBS.#{@citation.id}"
 
       assert_equal result, @citation.to_enw
     end
@@ -234,7 +236,8 @@ class CitationTest < ActiveSupport::TestCase
       result = "%0 Journal Article
 %T Implications of LCA accounting methods in a corn and corn stover to ethanol system
 %A Kaufman, A. S.
-%D 2009"
+%D 2009
+%M KBS.#{@citation.id}"
 
     assert_equal result, @citation.to_enw
     end

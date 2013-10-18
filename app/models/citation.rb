@@ -281,6 +281,7 @@ class Citation < ActiveRecord::Base
     endnote = "%0 #{endnote_type}#{title_to_enw}#{authors.to_enw}#{editors.to_enw}#{endnote_publication_data}"
     endnote += "#{volume_to_enw}#{page_numbers_to_enw}#{pub_year_to_enw}#{abstract_to_enw}#{doi_to_enw}"
     endnote += "#{publisher_url_to_enw}#{isbn_to_enw}"
+    endnote += "#{accession_number_to_enw}"
     endnote
   end
 
@@ -338,6 +339,10 @@ class Citation < ActiveRecord::Base
 
   def volume_to_enw
     volume.present? ? "%V #{volume}\n" : ""
+  end
+
+  def accession_number_to_enw
+    "\n%M KBS.#{id}"
   end
 
   def title_and_punctuation
