@@ -282,6 +282,7 @@ class Citation < ActiveRecord::Base
     endnote += "#{volume_to_enw}#{page_numbers_to_enw}#{pub_year_to_enw}#{abstract_to_enw}#{doi_to_enw}"
     endnote += "#{publisher_url_to_enw}#{isbn_to_enw}"
     endnote += "#{accession_number_to_enw}"
+    endnote +=  "\n"
     endnote
   end
 

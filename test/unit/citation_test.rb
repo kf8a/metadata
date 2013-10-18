@@ -97,7 +97,7 @@ class CitationTest < ActiveSupport::TestCase
 %P 231-241
 %D 2008
 %X An abstract of the article.
-%M KBS.#{@citation.id}"
+%M KBS.#{@citation.id}\n"
     assert_equal result, @citation.to_enw
     end
 
@@ -182,7 +182,7 @@ class CitationTest < ActiveSupport::TestCase
 %C Boca Raton, Florida, USA
 %P 27-39
 %D 2006
-%M KBS.#{@citation.id}"
+%M KBS.#{@citation.id}\n"
 
       assert_equal result, @citation.to_enw
     end
@@ -237,7 +237,7 @@ class CitationTest < ActiveSupport::TestCase
 %T Implications of LCA accounting methods in a corn and corn stover to ethanol system
 %A Kaufman, A. S.
 %D 2009
-%M KBS.#{@citation.id}"
+%M KBS.#{@citation.id}\n"
 
     assert_equal result, @citation.to_enw
     end
