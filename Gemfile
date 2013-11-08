@@ -18,6 +18,7 @@ gem 'liquid'
 gem 'formtastic'
 gem 'simple_form'
 gem 'country_select'
+gem 'cube-ruby'
 
 #gem 'mercury-rails'
 
