@@ -15,7 +15,7 @@ class Citation < ActiveRecord::Base
   belongs_to :website
 
   has_and_belongs_to_many :datatables
-  has_and_belongs_to_many  :treatments 
+  has_and_belongs_to_many :treatments,  conditions: { use_in_citations: true }
 
   accepts_nested_attributes_for :authors
   accepts_nested_attributes_for :editors

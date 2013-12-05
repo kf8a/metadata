@@ -16,6 +16,10 @@ class Study < ActiveRecord::Base
     self.study_urls.where(:website_id => website.id).first.try(:url)
   end
 
+  def citation_treatments
+    treatments.where(:use_in_citations => true)
+  end
+
   # returns true if one or more of the tables passed is part of the current study
   def include_datatables?(table_query = [])
     table_query = table_query.to_a  # thinking sphinks does not return an array

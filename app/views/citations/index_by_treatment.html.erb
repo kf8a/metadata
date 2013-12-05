@@ -4,10 +4,10 @@
 <ul>
   <% @studies.each do |study| -%>
     <li class='top-level'>
-      <% if study.treatments.size > 1 %>
+    <% if study.citation_treatments.size > 1 %>
         <%= study.name %>
         <ul>
-          <% study.treatments.each  do |treatment| -%>
+          <% study.citation_treatments.each  do |treatment| -%>
             <li>
               <%= link_to "#{treatment.name} #{treatment.description}", {:action => :index, :treatment => treatment} %>
             </li>

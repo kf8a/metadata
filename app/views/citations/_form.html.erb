@@ -4,7 +4,7 @@
 <% end %>
 <%= form.inputs :doi %>
 <%= form.inputs do %>
-  <%= form.input :state, :as => :radio,  :collection => ['submitted','forthcoming','published'] %>
+  <%= form.input :state, :as => :radio,  :collection => ['draft', 'submitted','forthcoming','published'] %>
 <% end %>
 <h2>Authors</h2>
 <%= form.inputs do %>
