@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130516232103) do
+ActiveRecord::Schema.define(:version => 20131205151150) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -631,17 +631,6 @@ ActiveRecord::Schema.define(:version => 20130516232103) do
     t.string  "proj4text", :limit => 2048
   end
 
-  create_table "species", :force => true do |t|
-    t.string  "species"
-    t.string  "genus"
-    t.string  "family"
-    t.string  "code"
-    t.string  "common_name"
-    t.string  "alternate_common_name"
-    t.string  "attribution"
-    t.boolean "woody"
-  end
-
   create_table "sponsors", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -714,6 +703,12 @@ ActiveRecord::Schema.define(:version => 20130516232103) do
     t.text    "description"
     t.integer "study_id"
     t.integer "weight"
+    t.text    "deprecated_names"
+    t.text    "management"
+    t.text    "dominant_plants"
+    t.date    "start_date"
+    t.date    "end_date"
+    t.boolean "use_in_citations", :default => true
   end
 
   add_index "treatments", ["study_id"], :name => "index_treatments_on_study_id"
