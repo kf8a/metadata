@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.15'
+gem 'rails', '3.2.16'
 
 gem 'rake'
 gem 'capistrano' 
@@ -83,6 +83,7 @@ end
 
 group :test do
   gem "shoulda-matchers" # to use rspec like syntax
+  gem 'factory_girl'
   gem 'factory_girl_rails'
 
   #Cucumber stuff
