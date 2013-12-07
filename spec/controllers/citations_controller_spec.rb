@@ -7,8 +7,8 @@ describe CitationsController do
     @website = Website.find_or_create_by_name('lter')
     @controller.current_user = nil
 
-      author1 = Factory.create(:author, :sur_name => 'Zebedee', :seniority => 1)
-      author2 = Factory.create(:author, :sur_name => 'Alfred',  :seniority => 1)
+      author1 = FactoryGirl.create(:author, :sur_name => 'Zebedee', :seniority => 1)
+      author2 = FactoryGirl.create(:author, :sur_name => 'Alfred',  :seniority => 1)
       @citation1 = ArticleCitation.new
       @citation1.authors << Author.new( :sur_name => 'Loecke',
                                      :given_name => 'T', :middle_name => 'D',

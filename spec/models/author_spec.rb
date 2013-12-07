@@ -6,8 +6,8 @@ describe Author do
 
   context 'an author with a last name' do
     before(:each) do
-      @author1 = Factory :author, :sur_name => 'Bond'
-      @author2 = Factory :author, :sur_name => 'Bond', :given_name => ''
+      @author1 = FactoryGirl.create :author, :sur_name => 'Bond'
+      @author2 = FactoryGirl.create :author, :sur_name => 'Bond', :given_name => ''
     end
 
     it 'is formatted as the last name' do
@@ -22,8 +22,8 @@ describe Author do
 
   context 'an author with a first and last name' do
     before(:each) do
-      @author1 = Factory :author, :sur_name => 'Bond', :given_name => 'Bill'
-      @author2 = Factory :author, :sur_name => 'Bond', :given_name => 'B.'
+      @author1 = FactoryGirl.create :author, :sur_name => 'Bond', :given_name => 'Bill'
+      @author2 = FactoryGirl.create :author, :sur_name => 'Bond', :given_name => 'B.'
     end
 
     it 'is formatted correctly by default' do
@@ -39,7 +39,7 @@ describe Author do
 
   context 'an author with a middle name' do
     before do
-      @author1 = Factory :author, :sur_name => 'Bond', :given_name => 'Bill', :middle_name => 'karl'
+      @author1 = FactoryGirl.create :author, :sur_name => 'Bond', :given_name => 'Bill', :middle_name => 'karl'
     end
 
     it 'is formatted as default' do
@@ -53,7 +53,7 @@ describe Author do
 
   context 'an author with a double last name' do
     before do
-      @author = Factory :author, :sur_name => 'Al Fazier', :given_name => 'John'
+      @author = FactoryGirl.create :author, :sur_name => 'Al Fazier', :given_name => 'John'
     end
 
     it 'has the right name' do

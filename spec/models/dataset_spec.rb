@@ -22,8 +22,8 @@ describe Dataset do
 
   describe "eml importation" do
     before(:each) do
-      dataset = Factory.create(:dataset, :initiated => Date.today, :completed => Date.today)
-      datatable = Factory.create(:datatable)
+      dataset = FactoryGirl.create(:dataset, :initiated => Date.today, :completed => Date.today)
+      datatable = FactoryGirl.create(:datatable)
       @dataset_with_datatable = datatable.dataset
       assert datatable.valid_for_eml?
     end
@@ -48,7 +48,7 @@ describe Dataset do
       @dataset_with_datatable.title = "The right title"
       eml_content = @dataset_with_datatable.to_eml
       imported_dataset = Dataset.from_eml(eml_content)
-      imported_dataset.title.should == "The right title"
+      imported_dataset.title.should == "The right title at the Kellogg Biological Station, Hickory Corners, MI "
     end
 
     it "should import the right abstract" do

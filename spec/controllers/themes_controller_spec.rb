@@ -4,12 +4,12 @@ describe ThemesController do
   render_views
 
   before(:each) do
-    @controller.current_user = Factory.create :admin_user
+    @controller.current_user = FactoryGirl.create :admin_user
   end
 
   describe 'GET :index' do
     before(:each) do
-      @theme = Factory.create :theme
+      @theme = FactoryGirl.create :theme
       get :index
     end
 
@@ -19,8 +19,8 @@ describe ThemesController do
 
   describe 'POST :move_to' do
     before(:each) do
-      @theme = Factory.create :theme
-      @another_theme = Factory.create :theme
+      @theme = FactoryGirl.create :theme
+      @another_theme = FactoryGirl.create :theme
       post :move_to, {:id=> @theme.id, :parent_id => @another_theme.id}
     end
 
@@ -32,8 +32,8 @@ describe ThemesController do
 
   describe 'POST :move_before' do
     before(:each) do
-      @theme = Factory.create :theme
-      @another_theme = Factory.create :theme
+      @theme = FactoryGirl.create :theme
+      @another_theme = FactoryGirl.create :theme
       post :move_before, {:id=> @theme.id, :parent_id => @another_theme.id}
     end
 

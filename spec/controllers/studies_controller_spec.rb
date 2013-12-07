@@ -4,12 +4,12 @@ describe StudiesController do
   render_views
 
   before(:each) do
-    @controller.current_user = Factory.create :admin_user
+    @controller.current_user = FactoryGirl.create :admin_user
   end
 
   describe 'GET :index' do
     before(:each) do
-      @study = Factory.create :study
+      @study = FactoryGirl.create :study
       get :index
     end
 
@@ -19,8 +19,8 @@ describe StudiesController do
 
   describe 'POST :move_to' do
     before(:each) do
-      @study = Factory.create :study
-      @another_study = Factory.create :study
+      @study = FactoryGirl.create :study
+      @another_study = FactoryGirl.create :study
       post :move_to, {:id=> @study.id, :parent_id => @another_study.id}
     end
 
@@ -32,8 +32,8 @@ describe StudiesController do
 
   describe 'POST :move_before' do
     before(:each) do
-      @study = Factory.create :study
-      @another_study = Factory.create :study
+      @study = FactoryGirl.create :study
+      @another_study = FactoryGirl.create :study
       post :move_before, {:id=> @study.id, :parent_id => @another_study.id}
     end
 
