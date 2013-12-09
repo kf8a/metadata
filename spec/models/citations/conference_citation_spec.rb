@@ -8,7 +8,7 @@ describe ConferenceCitation do
 
   it 'should be formatted correctly' do
     conference = ConferenceCitation.new
-    conference.stub(:author_and_year) { 'Jones 1981' }
+    conference.stub(:author_and_year) { 'Jones 1981.' }
     conference.stub(:title) { 'Chapter 10' }
     conference.stub(:publication) { 'Lifetime Books' }
     conference.stub(:volume_and_page) { '2, 1-10' }
