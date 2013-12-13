@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131205151150) do
+ActiveRecord::Schema.define(:version => 20131213162905) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -649,6 +649,7 @@ ActiveRecord::Schema.define(:version => 20131205151150) do
     t.text    "synopsis"
     t.string  "url"
     t.string  "code"
+    t.text    "warning"
   end
 
   add_index "studies", ["parent_id"], :name => "index_studies_on_parent_id"
