@@ -15,7 +15,7 @@
     <div class='truncate'>
       <%=raw textilize( part_of_text + datatable.dataset.try(:abstract)) %>
     </div>
-    <% unless datatable.study.warning.empty? %>
+    <% unless datatable.study.warning.try(:empty?) %>
       <h4>Note<h4>
       <p><%= datatable.study.warning %></p>
     <% end %>
