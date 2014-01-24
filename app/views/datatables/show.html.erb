@@ -93,7 +93,7 @@
     </tr>
     <tr>
       <td>Last Updated</td>
-      <td> <%= @datatable.dataset.updated_at.strftime('%Y-%m-%d') %></td>
+      <td> <%= @datatable.updated_at.strftime('%Y-%m-%d') %></td>
     </tr>
     <% if @datatable.completed? %>
       <tr>
