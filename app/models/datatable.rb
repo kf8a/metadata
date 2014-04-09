@@ -312,14 +312,6 @@ class Datatable < ActiveRecord::Base
     end
   end
 
-  def raw_csv(units=true)
-    convert_to_csv(all_data, units)
-  end
-
-  def approved_csv
-    convert_to_csv(approved_data)
-  end
-
   def variate_names
     variates.collect {|variate| variate.try(:name)}
   end
@@ -342,6 +334,13 @@ class Datatable < ActiveRecord::Base
     end
   end
 
+  def raw_csv(units=true)
+    convert_to_csv(all_data, units)
+  end
+
+  def approved_csv
+    convert_to_csv(approved_data)
+  end
 
   def convert_to_csv(values, units=true)
     csv_string = CSV.generate do |csv|
