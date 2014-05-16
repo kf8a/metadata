@@ -3,6 +3,7 @@ class DatatablesController < ApplicationController
 
   before_filter :admin?, :except => [:index, :show, :suggest, :search, :qc] unless Rails.env == 'development'
   before_filter :can_download?, :only=>[:show], :if => Proc.new { |controller| controller.request.format.csv? || controller.request.format.fasta? } # run before filter to prevent non-members from downloading
+  # before_filter :reject_robots
 
   protect_from_forgery :except => [:index, :show, :search]
   cache_sweeper :datatable_sweeper
@@ -236,4 +237,10 @@ class DatatablesController < ApplicationController
       return false
     end
   end
+
+  # def reject_robots
+  #   if params[:id] == 'robots'
+  #     render :status => 404
+  #   end
+  # end
 end

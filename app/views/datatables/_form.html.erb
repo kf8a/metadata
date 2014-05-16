@@ -41,3 +41,4 @@
   <% end %>
 </div>
 <%= link_to_add_fields "Add Variate", form, :variates %>
+<%= link_to "Publish", publish_datatable_path(datatable), remote: true, method: :put %>
