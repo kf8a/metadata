@@ -3,13 +3,21 @@
     :crumbs => [{:name => controller_name.upcase, :url =>  url_for(:controller => controller_name, :action => 'index')},
       {:name => @citation.short_author_string.upcase}] %>
   <h3><%= raw @citation.formatted(:long=>true)  %></h3>
-  <p><%=raw textilize(@citation.abstract) %></p>
+  <p>
+  <% if @citation.doi %>
+    <div class="altimetrics">
+      <div data-badge-type="donut" data-doi=<%=@citation.doi%> data-hide-no-mentions="true" class="altmetric-embed"></div>
+    </div>
+  <% end %>
+  <%=raw textilize(@citation.abstract) %></p>
   <% if @citation.doi %>
     <p>DOI: <a href="http://dx.doi.org/<%= @citation.doi %>"><%= @citation.doi %></a></p>
   <% end %>
   <% if @citation.publisher_url %>
     <p><%= link_to @citation.publisher_url, @citation.publisher_url %></p>
   <% end %>
+
+
   <% if @citation.datatables.present? %>
     <p>Associated Datatables: </p>
     <ol>
@@ -41,6 +49,8 @@ Download citation to
 <% end %>
 
 <%= link_to 'back to index', citations_path %>
+
+<script type='text/javascript' src='https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script>
 
 <% if signed_in? and current_user.role == 'admin' or Rails.env == 'development' -%>
   <% if @website.citations.first != @citation -%>
