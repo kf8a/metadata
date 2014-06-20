@@ -24,9 +24,8 @@ set :deploy_via, :remote_cache
 
 ssh_options[:forward_agent] = true
 
-set :unicorn_binary, "/usr/local/bin/unicorn"
-# set :unicorn_config, "#{current_path}/config/unicorn.rb"
-set :unicorn_config, "/etc/unicorn/#{application}"
+set :unicorn_binary, "unicorn"
+set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, "/var/u/apps/metadata/shared/pids/unicorn.pid"
 
 def remote_file_exists?(full_path)
@@ -68,11 +67,11 @@ namespace :deploy do
 
   after 'deploy:finalize_update', :update_nav
   after 'deploy:finalize_update', :link_production_db
-#  after 'deploy:finalize_update', :link_unicorn
+  after 'deploy:finalize_update', :link_unicorn
   after 'deploy:finalize_update', :link_site_keys
   after 'deploy:finalize_update', :link_new_relic
   after 'deploy:finalize_update', :link_s3
-  after 'deploy', :lock_sphinks
+  #after 'deploy', :lock_sphinks
 
   namespace :assets do
     desc "Precompile assets on local machine and upload them to the server."
@@ -88,36 +87,33 @@ namespace :deploy do
 
 end
 
-task :staging do
-
-  # set :host, '192.168.33.10'
-  set :host, "projectlog.kbs.msu.edu"
-  set :asset_host, 'hillsdale.kbs.msu.edu'
-  set :asset_path, '/var/www/lter/metadata-assets'
-
-  role :app, host
-  role :web, host
-  role :db,  host, :primary => true
-
-end
-
 task :master do
 
   set :host, 'gprpc28'
 
   role :app, "#{host}.kbs.msu.edu"
+  role :web, "#{host}.kbs.msu.edu"
   role :db,  "#{host}.kbs.msu.edu", :primary=>true
 
 #  after 'deploy:symlink', :set_asset_host
 end
 
-task :kalkaska do
-  set :host, 'kalkaska'
+task :oshtemo do
+  set :host, 'oshtemo.kbs.msu.edu'
   set :asset_host, 'hillsdale.kbs.msu.edu'
   set :asset_path, '/var/www/lter/metadata-assets'
-  role :web, "#{host}.kbs.msu.edu"
-  role :app, "#{host}.kbs.msu.edu"
-  role :db, "kalkaska.kbs.msu.edu", :primary => true
+  role :web, "#{host}"
+  role :app, "#{host}"
+  role :db, "#{host}", :primary => true
+end
+
+task :kalkaska do
+  set :host, 'kalkaska.css.msu.edu'
+  set :asset_host, 'hillsdale.kbs.msu.edu'
+  set :asset_path, '/var/www/lter/metadata-assets'
+  role :web, "#{host}"
+  role :app, "#{host}"
+  role :db, "#{host}", :primary => true
 end
 
 task :houghton do
@@ -125,8 +121,8 @@ task :houghton do
   role :app, "#{host}.kbs.msu.edu"
 end
 
-before 'deploy:update_code', 'thinking_sphinx:stop'
-after 'deploy:update_code', 'thinking_sphinx:start'
+#before 'deploy:update_code', 'thinking_sphinx:stop'
+#after 'deploy:update_code', 'thinking_sphinx:start'
 
 namespace :sphinx do
   desc "Symlink Sphinx indexes"
@@ -173,7 +169,7 @@ end
 desc "link unicorn.rb"
 task :link_unicorn do
   # run "ln -nfs /etc/unicorn/#{application} #{release_path}/config/unicorn.rb"
-  run "ln -nfs "#{deploy_to}/shared/config/unicorn.rb #{release_path}/config/unicorn.rb"
+  run "ln -nfs #{deploy_to}/shared/config/unicorn.rb #{release_path}/config/unicorn.rb"
 end
 
 desc 'set asset host on production'
