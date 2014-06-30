@@ -54,7 +54,7 @@ class CitationsController < ApplicationController
 
   def index_by_author
       citations = [website.citations.publications]
-      @citations = citations.collect {|c| c.includes(:authors).published}.flatten.sort {|a,b| a.authors.first.try(:sur_name) <=> b.authors.first.try(:sur_name) }
+      @citations = citations.collect {|c| c.includes(:authors).published}.flatten.sort {|a,b| a.formatted <=> b.formatted }
       index_responder
   end
 
