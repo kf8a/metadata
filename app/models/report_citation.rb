@@ -7,7 +7,7 @@ class ReportCitation < Citation
   end
 
   def endnote_type
-    "Thesis\n"
+    "Report\n"
   end
 
   def endnote_publication_data
