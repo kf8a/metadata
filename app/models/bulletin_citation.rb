@@ -1,55 +1,33 @@
-class ChapterCitation < Citation
+class BulletinCitation < Citation
 
   def formatted(options={})
-    "#{author_and_year(options)} #{title_and_punctuation} #{volume_and_page} in #{eds}#{book}#{publisher}#{address_and_city}."
-  end
-
-  def volume_and_page
-    if volume.blank?
-      if page_numbers.blank?
-        ""
-      else
-        "Pages #{page_numbers}"
-      end
-    elsif page_numbers.blank?
-      "#{volume}"
-    else
-      "Vol #{volume}, Pages #{page_numbers}"
-    end
+    "#{author_and_year(options)} #{title_and_punctuation} #{editor_string}#{publication_string}#{volume_and_page}#{publisher}#{address_and_city}"
   end
 
   private
 
-  def eds
-    ed = editors.collect {|e| e.formatted(:natural) }.to_sentence
-    if editors.size == 0
-      ''
-    elsif editors.size > 1
-      ed << ', eds.'
-    else
-      ed << ', ed.'
-    end
-    ed
-  end
-
-  def book
-    publication.blank? ? secondary_title : publication
-  end
-
-  def address_and_city
-    ", #{address} #{city}" if address or city
-  end
-
   def bibtex_type
-    :chapter
+    :report
   end
 
   def endnote_type
-    "CHAP\n"
+    "Report\n"
   end
 
   def endnote_publication_data
     publication.present? ? "%J #{publication}\n" : ""
+  end
+
+  def publication_string
+    if publication.present?
+      publication + ". "
+    end
+  end
+
+  def address_and_city
+    if city.present?
+      city
+    end
   end
 end
 
