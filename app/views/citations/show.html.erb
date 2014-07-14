@@ -4,7 +4,7 @@
       {:name => @citation.short_author_string.upcase}] %>
   <h3><%= raw @citation.formatted(:long=>true)  %></h3>
   <p>
-  <% if @citation.doi %>
+  <% if @citation.doi.present? %>
     <div class="altimetrics">
       <div data-badge-type="donut" data-doi=<%=@citation.doi%> data-hide-no-mentions="true" class="altmetric-embed"></div>
     </div>
@@ -14,7 +14,7 @@
     <p>DOI: <a href="http://dx.doi.org/<%= @citation.doi %>"><%= @citation.doi %></a></p>
   <% end %>
   <% if @citation.publisher_url %>
-    <p><%= link_to @citation.publisher_url, @citation.publisher_url %></p>
+    <p><%= link_to "vist the Publishers website", @citation.publisher_url %></p>
   <% end %>
 
 
