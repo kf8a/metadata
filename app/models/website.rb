@@ -11,6 +11,7 @@ class Website < ActiveRecord::Base
   has_many :chapter_citations
   has_many :thesis_citations
   has_many :report_citations
+  has_many :bulletin_citations
 
   validates_uniqueness_of :name
   validates_presence_of :name

@@ -1,7 +1,7 @@
 class BulletinCitation < Citation
 
   def formatted(options={})
-    "#{author_and_year(options)} #{title_and_punctuation} #{editor_string}#{publication_string}#{volume_and_page}#{publisher}#{address_and_city}"
+    "#{author_and_year(options)} #{title_and_punctuation} #{editor_string}#{publication_string}#{volume_and_page}#{publisher_string}#{address_and_city}"
   end
 
   private
@@ -18,9 +18,15 @@ class BulletinCitation < Citation
     publication.present? ? "%J #{publication}\n" : ""
   end
 
+  def publisher_string
+    if publisher.present?
+      publisher + ", "
+    end
+  end
+
   def publication_string
     if publication.present?
-      publication + ". "
+      publication + ", "
     end
   end
 

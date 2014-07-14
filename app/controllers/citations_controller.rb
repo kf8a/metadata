@@ -24,6 +24,9 @@ class CitationsController < ApplicationController
     when 'report'
       citations = [website.report_citations]
       @type = 'ReportCitation'
+    when 'bulletin'
+      citations = [website.bulletin_citations]
+      @type = 'BulletinCitation'
     else 
       @type = nil
       # citations = [website.article_citations, website.book_citations, website.chapter_citations, website.thesis_citations]
