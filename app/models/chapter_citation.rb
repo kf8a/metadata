@@ -25,9 +25,9 @@ class ChapterCitation < Citation
     if editors.size == 0
       ''
     elsif editors.size > 1
-      ed << ', eds.'
+      ed << ', eds. '
     else
-      ed << ', ed.'
+      ed << ', ed. '
     end
     ed
   end
