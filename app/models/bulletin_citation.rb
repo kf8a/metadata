@@ -11,7 +11,7 @@ class BulletinCitation < Citation
   end
 
   def endnote_type
-    "Report\n"
+    "Pamphlet\n"
   end
 
   def endnote_publication_data
