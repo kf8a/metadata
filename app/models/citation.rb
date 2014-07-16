@@ -280,7 +280,7 @@ class Citation < ActiveRecord::Base
   def to_enw
     endnote = "%0 #{endnote_type}#{title_to_enw}#{authors.to_enw}#{editors.to_enw}#{endnote_publication_data}"
     endnote += "#{volume_to_enw}#{page_numbers_to_enw}#{pub_year_to_enw}#{abstract_to_enw}#{doi_to_enw}"
-    endnote += "#{publication_to_enw}#{publisher_to_enw}#{publisher_url_to_enw}#{isbn_to_enw}#{city_to_enw}"
+    endnote += "#{publisher_to_enw}#{publisher_url_to_enw}#{isbn_to_enw}#{city_to_enw}"
     endnote += "#{accession_number_to_enw}"
     endnote +=  "\n"
     endnote
@@ -392,10 +392,6 @@ class Citation < ActiveRecord::Base
 
   def isbn_to_enw
     isbn? ? "\n%@ #{isbn}" : ""
-  end
-
-  def publication_to_enw
-    publication ? "\n%J #{publication}" : ""
   end
 
   def publisher_to_enw
