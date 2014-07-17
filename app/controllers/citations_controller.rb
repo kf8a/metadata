@@ -66,7 +66,7 @@ class CitationsController < ApplicationController
     if @word.empty?
       redirect_to citations_url
     else
-      @citations = Citation.search @word, :with => { :website_id => website.id }, :star => true, :per_page => 500
+      @citations = Citation.search @word, with: { website_id: website.id }, order: "pub_year desc", star: true, per_page: 500
       index_responder
     end
   end

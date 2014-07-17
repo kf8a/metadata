@@ -51,7 +51,8 @@ gem 'has_scope'
 
 gem 'ris_parser', :git => 'git://github.com/kf8a/ris_parser.git'
 
-gem 'thinking-sphinx', '2.0.10'
+gem 'thinking-sphinx' #, '2.0.10'
+gem 'mysql2'
 # gem 'cache_digests'
 
 
