@@ -11,9 +11,7 @@ module CitationFormat
   end
 
   def full_name
-    given_name_part = has_given_name? ? given_name + " " : ""
-    middle_name_part = has_middle_name? ? middle_name + " " : ""
-    given_name_part + middle_name_part + sur_name + suffix_text
+    given_name_part + middle_name_part + sur_name_part + suffix_text
   end
 
   def first_initial
@@ -88,12 +86,28 @@ module CitationFormat
 
   private
 
+  def given_name_part
+    has_given_name? ? given_name + " " : ""
+  end
+
+  def middle_name_part
+    has_middle_name? ? middle_name + " " : ""
+  end
+  
+  def sur_name_part
+    has_sur_name? ? sur_name + " " : ""
+  end
+
   def has_given_name?
     given_name.present?
   end
 
   def has_middle_name?
     middle_name.present?
+  end
+
+  def has_sur_name?
+    sur_name.present?
   end
 
   def has_suffix?
