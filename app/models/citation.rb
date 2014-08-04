@@ -262,7 +262,7 @@ class Citation < ActiveRecord::Base
       :volume     => volume,
       :number     => issue,
       :series     => series_title,
-      :doi        => doi
+      :doi        => doi,
       :isbn       => isbn}
     hash.delete_if { |key, value| value.blank? }
   end
