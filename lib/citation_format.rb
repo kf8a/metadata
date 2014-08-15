@@ -95,7 +95,7 @@ module CitationFormat
   end
   
   def sur_name_part
-    has_sur_name? ? sur_name + " " : ""
+    has_sur_name? ? sur_name : ""
   end
 
   def has_given_name?

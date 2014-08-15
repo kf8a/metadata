@@ -119,7 +119,7 @@ class CitationTest < ActiveSupport::TestCase
       end
 
       should 'have right authors' do
-        assert_equal 'T D Loecke and G P Robertson', @entry.author
+        assert_equal 'T D Loecke and G P Robertson', @entry.author.to_s
       end
 
       should 'have right abstract' do
@@ -165,7 +165,7 @@ class CitationTest < ActiveSupport::TestCase
     end
 
     should 'be formatted correctly' do
-      result = 'Robertson, G. P., and A. S. Grandy. 2006. Soil system management in temperate regions. Pages 27-39  in N. Uphoff, A. S. Ball, and J. Thies, eds. Biological Approaches to Sustainable Soil Systems. CRC Press, Taylor and Francis Group, Boca Raton, Florida, USA'
+      result = 'Robertson, G. P., and A. S. Grandy. 2006. Soil system management in temperate regions. Pages 27-39 in N. Uphoff, A. S. Ball, and J. Thies, eds. Biological Approaches to Sustainable Soil Systems. CRC Press, Taylor and Francis Group, Boca Raton, Florida, USA'
       assert_equal result, @citation.formatted
     end
 
@@ -182,6 +182,7 @@ class CitationTest < ActiveSupport::TestCase
 %C Boca Raton, Florida, USA
 %P 27-39
 %D 2006
+%I CRC Press, Taylor and Francis Group
 %M KBS.#{@citation.id}\n"
 
       assert_equal result, @citation.to_enw
@@ -326,7 +327,7 @@ class CitationTest < ActiveSupport::TestCase
     end
 
     should 'be formatted correctly' do
-      result = "Robertson, G. P., and A. S. Grandy. 2006. Soil system management in temperate regions. Pages 27-39  in N. Uphoff, and A. S. Ball, eds. Biological Approaches to Sustainable Soil Systems. CRC Press, Taylor and Francis Group, Boca Raton, Florida, USA"
+      result = "Robertson, G. P., and A. S. Grandy. 2006. Soil system management in temperate regions. Pages 27-39 in N. Uphoff, and A. S. Ball, eds. Biological Approaches to Sustainable Soil Systems. CRC Press, Taylor and Francis Group, Boca Raton, Florida, USA"
       assert_equal result, @citation.formatted
     end
 
