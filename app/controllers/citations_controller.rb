@@ -126,7 +126,7 @@ class CitationsController < ApplicationController
     path = citation.pdf.path(params[:style])
     if Rails.env.production?
       if citation.open_access
-        redirect_to(citation.pdf.s3_object(params[:style]).url_for(:read ,:secure => true).to_s)
+        redirect_to(citation.pdf.s3_object(params[:style]).public_url.to_s)
       else
         redirect_to(citation.pdf.s3_object(params[:style]).url_for(:read ,:secure => true, :expires_in => 10.seconds).to_s)
       end
