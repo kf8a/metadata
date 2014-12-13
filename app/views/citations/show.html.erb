@@ -13,7 +13,7 @@
   <% if @citation.doi %>
     <p>DOI: <a href="http://dx.doi.org/<%= @citation.doi %>"><%= @citation.doi %></a></p>
   <% end %>
-  <% unless @citation.publisher_url.empty? %>
+  <% unless @citation.publisher_url.try(:empty?) %>
     <p><%= link_to "vist the Publishers website", @citation.publisher_url %></p>
   <% end %>
 

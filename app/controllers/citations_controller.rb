@@ -125,7 +125,11 @@ class CitationsController < ApplicationController
 
     path = citation.pdf.path(params[:style])
     if Rails.env.production?
-      redirect_to(citation.pdf.s3_object(params[:style]).url_for(:read ,:secure => true, :expires_in => 10.seconds).to_s)
+      if citation.open_access
+        redirect_to(citation.pdf.s3_object(params[:style]).url_for(:read ,:secure => true).to_s)
+      else
+        redirect_to(citation.pdf.s3_object(params[:style]).url_for(:read ,:secure => true, :expires_in => 10.seconds).to_s)
+      end
     else
       send_file  path, :type => 'application/pdf', :disposition => 'inline'
     end
