@@ -27,7 +27,7 @@ class Citation < ActiveRecord::Base
 
     has_attached_file :pdf,
         :storage => :s3,
-        :bucket => 'metadata_production',
+        :bucket => 'metadata-production',
         :path => "/citations/pdfs/:id/:style/:basename.:extension",
         :s3_credentials => File.join(Rails.root, 'config', 's3.yml'),
         :s3_permissions => 'authenticated-read'
