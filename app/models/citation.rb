@@ -23,6 +23,8 @@ class Citation < ActiveRecord::Base
   validates_presence_of :authors
 
   if Rails.env.production?
+    after_save :check_for_open_access_paper
+
     has_attached_file :pdf,
         :storage => :s3,
         :bucket => 'metadata_production',
@@ -461,6 +463,26 @@ class Citation < ActiveRecord::Base
       end
 
       current_seniority += 1
+    end
+  end
+
+  def make_pdf_public
+    self.pdf.s3_object.acl = :public_read
+  end
+
+  def make_pdf_private
+    self.pdf.s3_object.acl = :authenticated_read
+  end
+
+  protected
+
+  def check_for_open_access_paper
+    if pdf.try(:s3_object)
+      if open_access
+        make_pdf_public
+      else
+        make_pdf_private
+      end
     end
   end
 end
