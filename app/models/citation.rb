@@ -297,6 +297,14 @@ class Citation < ActiveRecord::Base
     "#{author_and_year(options)} #{title_and_punctuation} #{publication} #{volume_and_page}".rstrip
   end
 
+  def make_pdf_public
+    self.pdf.s3_object.acl = :public_read
+  end
+
+  def make_pdf_private
+    self.pdf.s3_object.acl = :authenticated_read
+  end
+
   private
 
   def bibtex_type
@@ -466,13 +474,6 @@ class Citation < ActiveRecord::Base
     end
   end
 
-  def make_pdf_public
-    self.pdf.s3_object.acl = :public_read
-  end
-
-  def make_pdf_private
-    self.pdf.s3_object.acl = :authenticated_read
-  end
 
   protected
 
