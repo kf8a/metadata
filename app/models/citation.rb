@@ -478,13 +478,11 @@ class Citation < ActiveRecord::Base
   protected
 
   def check_for_open_access_paper
-    if pdf
-      if pdf.try(:s3_object)
-        if open_access
-          make_pdf_public
-        else
-          make_pdf_private
-        end
+    if pdf.exists?
+      if open_access
+        make_pdf_public
+      else
+        make_pdf_private
       end
     end
   end
