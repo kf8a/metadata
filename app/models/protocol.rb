@@ -13,6 +13,18 @@ class Protocol < ActiveRecord::Base
 
   versioned :dependent => :tracking
 
+  if Rails.env.production?
+    has_attached_file :pdf,
+        :storage => :s3,
+        :bucket => 'metadata-production',
+        :path => "/protocols/pdfs/:id/:style/:basename.:extension",
+        :s3_credentials => File.join(Rails.root, 'config', 's3.yml'),
+        :s3_permissions => 'public-read'
+  else
+    has_attached_file :pdf, :url => "/citations/:id/download",
+        :path => ":rails_root/uploads/protocols/:attachment/:id/:style/:basename.:extension"
+  end
+
   def to_s
     "#{self.title}"
   end
