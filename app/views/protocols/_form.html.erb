@@ -12,5 +12,7 @@
 <%= form.input :datatables, :collection=>Datatable.find(:all, :order=>'title'), :as => :check_boxes, :wrapper_html=>{:class => 'scroll_checkboxes'} %>
 <%= form.input :dataset, :collection => Dataset.all, :include_blank => true %>
 <%= form.input :change_summary, :input_html => {:rows =>2}%>
+
+<%= form.inputs :pdf , :as => :file %>
 <% end %>
 <%= check_box_tag :new_version %> Consider this a new Version
