@@ -39,6 +39,13 @@
   <% end -%>
   </ol>
 
+<% if @protocol.pdf.exists? %>
+  <% if signed_in? or @protocol.open_access %>
+    <%=link_to 'Get PDF', download_protocol_path(@protocol), :class=>'download-link'%>
+  <% else %>
+    <%= link_to 'Sign in to download PDF', sign_in_path, :class=>'download-link'  %>
+  <% end %>
+<% end %>
   <p>
   <%= link_to 'Edit', edit_protocol_path(@protocol) %> |
   <%= link_to 'Back', protocols_path %>
