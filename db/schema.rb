@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140206152903) do
+ActiveRecord::Schema.define(:version => 20150112164039) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -28,12 +28,6 @@ ActiveRecord::Schema.define(:version => 20140206152903) do
   add_index "affiliations", ["dataset_id"], :name => "index_affiliations_on_dataset_id"
   add_index "affiliations", ["person_id"], :name => "index_affiliations_on_person_id"
   add_index "affiliations", ["role_id"], :name => "index_affiliations_on_role_id"
-
-# Could not dump table "areas" because of following StandardError
-#   Unknown type 'geometry' for column 'the_geom'
-
-# Could not dump table "areas_temporary" because of following StandardError
-#   Unknown type 'geometry' for column 'the_geom'
 
   create_table "authors", :force => true do |t|
     t.string   "sur_name"
@@ -308,9 +302,6 @@ ActiveRecord::Schema.define(:version => 20140206152903) do
     t.string  "type",              :limit => 30,  :null => false
   end
 
-  create_table "glbrc_scaleup", :id => false, :force => true do |t|
-  end
-
   create_table "invites", :force => true do |t|
     t.string   "firstname"
     t.string   "lastname"
@@ -323,31 +314,6 @@ ActiveRecord::Schema.define(:version => 20140206152903) do
 
   add_index "invites", ["id", "email"], :name => "index_invites_on_id_and_email"
   add_index "invites", ["id", "invite_code"], :name => "index_invites_on_id_and_invite_code"
-
-  create_table "kbs021_base_cache", :id => false, :force => true do |t|
-    t.float   "year"
-    t.string  "campaign",         :limit => nil
-    t.date    "sample_date"
-    t.string  "treatment",        :limit => nil
-    t.string  "replicate",        :limit => nil
-    t.boolean "release_nitrate"
-    t.boolean "release_ammonium"
-    t.float   "avgofno3ppm"
-    t.float   "avgofnh4ppm"
-    t.decimal "m"
-    t.decimal "d"
-    t.decimal "v"
-  end
-
-# Could not dump table "locations" because of following StandardError
-#   Unknown type 'geometry' for column 'the_geom'
-
-  create_table "log_hiresyieldmanagement", :id => false, :force => true do |t|
-    t.date    "obsdate"
-    t.integer "obsnumber"
-    t.string  "author"
-    t.text    "observation"
-  end
 
   create_table "measurement_scales", :force => true do |t|
     t.datetime "created_at"
@@ -469,6 +435,8 @@ ActiveRecord::Schema.define(:version => 20140206152903) do
     t.boolean "is_postdoc"
   end
 
+  add_index "people", ["sur_name", "given_name", "middle_name", "friendly_name"], :name => "people_sur_name_given_name_middle_name_friendly_name_key", :unique => true
+
   create_table "permission_requests", :force => true do |t|
     t.integer  "datatable_id"
     t.integer  "user_id"
@@ -500,21 +468,25 @@ ActiveRecord::Schema.define(:version => 20140206152903) do
   end
 
   create_table "protocols", :force => true do |t|
-    t.string  "name"
-    t.string  "title"
-    t.integer "version_tag",    :default => 1
-    t.date    "in_use_from"
-    t.date    "in_use_to"
-    t.text    "description"
-    t.text    "abstract"
-    t.text    "body"
-    t.integer "person_id"
-    t.date    "created_on"
-    t.date    "updated_on"
-    t.text    "change_summary"
-    t.integer "dataset_id"
-    t.boolean "active",         :default => true
-    t.integer "deprecates"
+    t.string   "name"
+    t.string   "title"
+    t.integer  "version_tag",      :default => 1
+    t.date     "in_use_from"
+    t.date     "in_use_to"
+    t.text     "description"
+    t.text     "abstract"
+    t.text     "body"
+    t.integer  "person_id"
+    t.date     "created_on"
+    t.date     "updated_on"
+    t.text     "change_summary"
+    t.integer  "dataset_id"
+    t.boolean  "active",           :default => true
+    t.integer  "deprecates"
+    t.string   "pdf_file_name"
+    t.string   "pdf_content_type"
+    t.integer  "pdf_file_size"
+    t.datetime "pdf_updated_at"
   end
 
   add_index "protocols", ["dataset_id"], :name => "index_protocols_on_dataset_id"
@@ -838,6 +810,7 @@ ActiveRecord::Schema.define(:version => 20140206152903) do
   add_foreign_key "editors", "citations", :name => "editors_citation_id_fk"
   add_foreign_key "editors", "citations", :name => "editors_citation_id_fkey"
 
+  add_foreign_key "variates", "datatables", :name => "variates_datatable_id_fkey"
   add_foreign_key "variates", "units", :name => "variates_unit_id_fkey"
 
 end
