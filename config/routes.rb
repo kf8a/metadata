@@ -75,7 +75,11 @@ Metadata::Application.routes.draw do
   end
   resources :permission_requests, :only => :create
   resources :projects
-  resources :protocols
+  resources :protocols do
+    member do
+      get :download
+    end
+  end
 
   resources :sponsors, :as => 'termsofuse'
   match '/termsofuse/:id' => "sponsors#show"

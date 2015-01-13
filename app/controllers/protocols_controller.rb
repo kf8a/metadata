@@ -78,6 +78,16 @@ class ProtocolsController < ApplicationController
     respond_with @protocol
   end
 
+  def download
+    head(:not_found) and return unless (protocol = Protocol.find_by_id(params[:id]))
+    path = protocol.pdf.path(params[:style])
+    if Rails.env.production?
+        redirect_to(protocol.pdf.s3_object(params[:style]).url_for(:read ,:secure => true, :expires_in => 10.seconds).to_s)
+    else
+      send_file  path, :type => 'application/pdf', :disposition => 'inline'
+    end
+  end
+
   private
 
   def set_title
@@ -92,15 +102,15 @@ class ProtocolsController < ApplicationController
     crumb.name = 'Data Catalog: Protocols'
     @crumbs << crumb
   end
-  
+
   def get_all_websites
     @websites = Website.all
   end
-  
+
   def find_website
- 
+
   end
-  
+
   def get_protocol
     @protocol = Protocol.find(params[:id])
   end
