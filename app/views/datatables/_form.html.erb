@@ -40,5 +40,13 @@
     <%= render :partial => 'variate_fields', :locals => {:f => f} %>
   <% end %>
 </div>
+
+
 <%= link_to_add_fields "Add Variate", form, :variates %>
+<div>
+<h2>Object</h2>
+<%= datatable.object %>
+</div>
+<div>
 <%= link_to "Publish", publish_datatable_path(datatable), remote: true, method: :put %>
+</div>
