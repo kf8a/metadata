@@ -23,7 +23,7 @@ class Citation < ActiveRecord::Base
   validates_presence_of :authors
 
   if Rails.env.production?
-    after_save :check_for_open_access_paper
+    after_commit :check_for_open_access_paper
 
     has_attached_file :pdf,
         :storage => :s3,
