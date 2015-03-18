@@ -1,0 +1,15 @@
+<%= render 'shared/breadcrumbs', :crumbs => [{:name => controller_name.upcase}] %>
+<p>To download copies of articles that are not open-access you will be asked to Sign In when you request the pdf copy (instructions provided).
+<% unless signed_in? -%>
+  <%= link_to 'sign-in',  sign_in_path %>
+<% end -%>
+</p>
+<%= render 'search_form', :word => @word, :type => @type, :sort_by => @sort_by %>
+  <h1 class='publication-section'>Submitted(alphabetical by year)</h1>
+  <ul class='citations'>
+    <% year = 0 -%>
+    <% @citations.each do |citation| %>
+      <%= render 'citation', :citation=>citation, :year => year %>
+      <% year = citation.pub_year.to_i -%>
+    <% end %>
+  </ul>

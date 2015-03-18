@@ -45,6 +45,12 @@ class CitationsController < ApplicationController
     index_responder
   end
 
+  def submitted 
+      citations = [website.citations.publications]
+      @citations = citations.collect {|c| c.includes(:authors).submitted}.flatten
+      index_responder
+  end
+
   def index_by_treatment
     @studies = Study.by_id
 
