@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150112164039) do
+ActiveRecord::Schema.define(:version => 20150422193942) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -339,6 +339,7 @@ ActiveRecord::Schema.define(:version => 20150112164039) do
     t.text    "announcement"
     t.integer "venue_type_id"
     t.date    "date_to"
+    t.text    "author_affiliations"
   end
 
   add_index "meetings", ["venue_type_id"], :name => "index_meetings_on_venue_type_id"
