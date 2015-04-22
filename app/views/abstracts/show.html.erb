@@ -1,6 +1,9 @@
 <%= render 'shared/breadcrumbs',
-  :crumbs => [{:name => controller_name.upcase, :url =>  url_for(:controller => controller_name, :action => 'index')},
-    {:name => "#{@abstract.meeting.date.year} #{@abstract.meeting.title}"}] %>
+  :crumbs => [{:name => controller_name.upcase, :url =>  url_for(:controller => 'meetings', :action => 'index')},
+    {:name => "#{abstract.meeting.date.year} #{abstract.meeting.title}", :url => url_for(:controller => 'meetings', :action => 'show', :id=> abstract.meeting.id)},
+    {:name => "#{abstract.authors}"}
+
+] %>
   <div class='page type-page hfeed'>
 
     <h1 class='entry-title'><%= abstract.title %></h1>
