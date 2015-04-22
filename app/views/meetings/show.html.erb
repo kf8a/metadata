@@ -1,30 +1,38 @@
-<h1><%= @meeting.title %></h1>
 
-<% if @meeting.announcement %>
-  <%= textilize(@meeting.announcement) %>
-<% end %>
-<% if @meeting.abstracts.size > 0 %>
-  <h3>Presentation Titles</h3><p>Please click on titles for abstracts.</p>
-<% end %>
-<div id="abstracts">
-  <ul>
-    <% @meeting.abstracts.each do | abstract| %>
-      <li id="abstract_<%= abstract.id %>" class="citation">
-        <%= truncate(abstract.authors, :length=>80) %>
-        <%= link_to "#{abstract.title}", abstract_path(abstract) %>
-        <% if abstract.pdf.exists? %>
-         <%=link_to 'pdf', download_abstract_path(abstract) %>
-       <% end %>
-      
-        <% if admin? %>
-          <%= link_to 'Edit', edit_abstract_path(abstract) %>
-          <%= link_to image_tag("trash.gif"), abstract_path(abstract), 
+  <%= render 'shared/breadcrumbs',
+    :crumbs => [{:name => controller_name.upcase, :url =>  url_for(:controller => controller_name, :action => 'index')},
+      {:name => "#{@meeting.date.year} #{@meeting.title}"}] %>
+<div class='page type-page hfeed'>
+    <h1 class='entry-title'><%= @meeting.date.year %> <%= @meeting.title %></h1>
+
+  <div class="entry-content">
+    <% if @meeting.announcement %>
+      <%= textilize(@meeting.announcement) %>
+    <% end %>
+    <% if @meeting.abstracts.size > 0 %>
+      <h3>Presentation Titles</h3><p>Please click on titles for abstracts.</p>
+    <% end %>
+    <div id="abstracts">
+      <ul>
+        <% @meeting.abstracts.each do | abstract| %>
+          <li id="abstract_<%= abstract.id %>" class="citation">
+          <%= truncate(abstract.authors, :length=>80) %>
+          <%= link_to "#{abstract.title}", abstract_path(abstract) %>
+          <% if abstract.pdf.exists? %>
+            <%=link_to 'pdf', download_abstract_path(abstract) %>
+          <% end %>
+
+          <% if admin? %>
+            <%= link_to 'Edit', edit_abstract_path(abstract) %>
+            <%= link_to image_tag("trash.gif"), abstract_path(abstract), 
               :confirm => 'Are you sure?',
               :class => 'deleter' %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-</div>
-<p><%= @meeting.date.to_s %></p>
-<p><%= link_to 'Add abstract', new_abstract_path({:meeting => @meeting.id}) if admin? %></p>
+            <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <p><%= @meeting.date.to_s %></p>
+      <p><%= link_to 'Add abstract', new_abstract_path({:meeting => @meeting.id}) if admin? %></p>
+    </div>
+  </div>
