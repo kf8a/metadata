@@ -1,11 +1,19 @@
-<h1><%= abstract.title %></h1>
+<%= render 'shared/breadcrumbs',
+  :crumbs => [{:name => controller_name.upcase, :url =>  url_for(:controller => controller_name, :action => 'index')},
+    {:name => "#{@abstract.meeting.date.year} #{@abstract.meeting.title}"}] %>
+  <div class='page type-page hfeed'>
 
-<p><%= abstract.authors %></p>
+    <h1 class='entry-title'><%= abstract.title %></h1>
 
-<%= textilize(abstract.abstract) %>
+    <div class="entry-content">
+      <p><%= abstract.authors %></p>
 
-<% if abstract.pdf.exists? %>
-  <%=link_to 'Get PDF', download_abstract_path(abstract) %><br/>
-<% end %>
+      <%= textilize(abstract.abstract) %>
 
-<%= render 'navbar', :abstract => @abstract %>
+      <% if abstract.pdf.exists? %>
+        <%=link_to 'Get PDF', download_abstract_path(abstract) %><br/>
+      <% end %>
+
+      <%= render 'navbar', :abstract => @abstract %>
+    </div>
+  </div>
