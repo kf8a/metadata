@@ -1,10 +1,11 @@
-<h1><%= @venue.name.capitalize %> Meetings</h1>
+<h1 class='entry-title'><%= @venue.name.upcase%> MEETINGS</h1>
+<div class="entry-content">
 
 <p><%= @venue.description %></p>
 <p>Abstracts from past and current meetings are available below:</p>
 <ul>
 <% @meetings.each do |meeting| %>
-	<li id="meeting_<%=meeting.id%>"><%=link_to "#{meeting.title}", meeting_path(meeting) %> <%= meeting.date.to_s %>
+  <li id="meeting_<%=meeting.id%>"><%=link_to "#{meeting.date.year} #{meeting.title}", meeting_path(meeting) %>
           <% if signed_in? %>
             <%= link_to 'edit', edit_meeting_path(meeting), {:class => 'edit'} %>
             <%= link_to image_tag("trash.gif"), meeting,
@@ -16,3 +17,4 @@
 </ul>
 
 <%= link_to 'new meeting', new_meeting_path() if signed_in? %>
+</div>
