@@ -36,6 +36,8 @@ class Citation < ActiveRecord::Base
         :path => ":rails_root/uploads/citations/:attachment/:id/:style/:basename.:extension"
   end
 
+  before_post_process :transliterate_file_name
+
   # attr_accessible :Tag, :title, :abstract, 
   attr_protected :pdf_file_name, :pdf_content_type, :pdf_size
 
@@ -474,6 +476,13 @@ class Citation < ActiveRecord::Base
     end
   end
 
+  def transliterate(str)
+    str.gsub(/_/,'-')
+  end
+
+  def transliterate_file_name
+    self.pdf.instance_write(:file_name, "#{transliterate(pdf_file_name)}")
+  end
 
   protected
 
@@ -486,6 +495,8 @@ class Citation < ActiveRecord::Base
       end
     end
   end
+
+
 end
 
 
