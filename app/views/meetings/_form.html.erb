@@ -1,19 +1,19 @@
-<p>
+<fieldset>
   <%= f.label      :title %>
-  <%= f.text_field :title size => '500'%>
-</p>
-<p>
+  <%= f.text_field :title size => '150'%>
+</fieldset>
+<fieldset>
   <%= f.label       :date, 'Start Date' %>
   <%= f.date_select :date %>
-</p>
-<p>
+</fieldset>
+<fieldset>
   <%= f.label       :date_to, 'End Date' %>
   <%= f.date_select :date_to %>
-</p>
-<p>
+</fieldset>
+<fieldset>
   <%= f.select :venue_type_id, venues %>
-</p>
-<p>
+</fieldset>
+<fieldset>
   <%= f.label     :announcement %>
-  <%= f.text_area :announcement, :size => '500x20'%>
-</p>
+  <%= f.text_area :announcement, :size = '150x20'%>
+</fieldset>
