@@ -1,5 +1,5 @@
 <%= render 'shared/breadcrumbs',
-  :crumbs => [{:name => controller_name.upcase, :url =>  url_for(:controller => 'meetings', :action => 'index')},
+  :crumbs => [{:name => "MEETINGS", :url =>  url_for(:controller => 'meetings', :action => 'index')},
     {:name => "#{abstract.meeting.date.year} #{abstract.meeting.title}", :url => url_for(:controller => 'meetings', :action => 'show', :id=> abstract.meeting.id)},
     {:name => "#{abstract.authors}"}
 
