@@ -1,9 +1,9 @@
 class AddAffiliationsForMeetingAuthors < ActiveRecord::Migration
   def up
-    add_column :meetings, :author_affiliations, :text
+    add_column :meeting_abstracts, :author_affiliations, :text
   end
 
   def down
-    drop_column :meetings, :author_affiliations, :text
+    remove_column :meeting_abstracts, :author_affiliations
   end
 end
