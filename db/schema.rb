@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150422193942) do
+ActiveRecord::Schema.define(:version => 20150423142030) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -320,6 +320,13 @@ ActiveRecord::Schema.define(:version => 20150422193942) do
     t.datetime "updated_at"
   end
 
+  create_table "meeting_abstract_types", :force => true do |t|
+    t.text     "name"
+    t.integer  "order"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "meeting_abstracts", :force => true do |t|
     t.text     "title"
     t.text     "authors"
@@ -329,6 +336,8 @@ ActiveRecord::Schema.define(:version => 20150422193942) do
     t.string   "pdf_content_type"
     t.integer  "pdf_file_size"
     t.datetime "pdf_updated_at"
+    t.text     "author_affiliations"
+    t.integer  "meeting_abstract_type_id"
   end
 
   add_index "meeting_abstracts", ["meeting_id"], :name => "index_meeting_abstracts_on_meeting_id"
@@ -339,7 +348,6 @@ ActiveRecord::Schema.define(:version => 20150422193942) do
     t.text    "announcement"
     t.integer "venue_type_id"
     t.date    "date_to"
-    t.text    "author_affiliations"
   end
 
   add_index "meetings", ["venue_type_id"], :name => "index_meetings_on_venue_type_id"

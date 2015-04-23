@@ -1,4 +1,5 @@
 class Abstract < ActiveRecord::Base
+  belongs_to :meeting_abstract_type
   belongs_to :meeting
 
   validates_presence_of :meeting
