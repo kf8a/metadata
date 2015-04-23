@@ -1,6 +1,6 @@
 require "bundler/capistrano"
 #require 'new_relic/recipes'
-require 'thinking_sphinx/deploy/capistrano'
+require 'thinking_sphinx/capistrano'
 
 set :application, "metadata"
 
@@ -65,7 +65,7 @@ namespace :deploy do
     start
   end
 
-  after 'deploy:finalize_update', :update_nav
+  after 'deploy:finalize_update', :create_nav
   after 'deploy:finalize_update', :link_production_db
   after 'deploy:finalize_update', :link_unicorn
   after 'deploy:finalize_update', :link_site_keys
@@ -140,6 +140,11 @@ end
 
 desc 'update menus, headers and footers'
 task :update_nav do
+  run "cd #{current_path}/public;curl http://lter.kbs.msu.edu/export/nav/ -o nav.html -s"
+  run "cd #{current_path}/public;curl http://lter.kbs.msu.edu/export/footer/ -o footer.html -s"
+  run "cd #{current_path}/public;curl http://lter.kbs.msu.edu/export/header/ -o header.html -s"
+end
+task :create_nav do
   run "cd #{release_path}/public;curl http://lter.kbs.msu.edu/export/nav/ -o nav.html -s"
   run "cd #{release_path}/public;curl http://lter.kbs.msu.edu/export/footer/ -o footer.html -s"
   run "cd #{release_path}/public;curl http://lter.kbs.msu.edu/export/header/ -o header.html -s"
