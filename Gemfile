@@ -56,8 +56,8 @@ gem 'mysql2'
 # gem 'cache_digests'
 
 
+gem "sitemap_generator" #, "~> 3.1.1"
 group :production do
-  #gem "sitemap_generator", "~> 3.1.1"
   # gem 'exception_notification'
   gem 'unicorn'
   gem 'aws-sdk'

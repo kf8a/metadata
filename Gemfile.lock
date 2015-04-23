@@ -264,6 +264,8 @@ GEM
     simple_form (2.1.0)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
+    sitemap_generator (5.0.5)
+      builder
     sprockets (2.2.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -348,6 +350,7 @@ DEPENDENCIES
   shoulda!
   shoulda-matchers
   simple_form
+  sitemap_generator
   sqlite3
   therubyracer
   thinking-sphinx
