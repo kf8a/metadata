@@ -116,11 +116,6 @@ task :kalkaska do
   role :db, "#{host}", :primary => true
 end
 
-task :houghton do
-  set :host, 'houghton'
-  role :app, "#{host}.kbs.msu.edu"
-end
-
 #before 'deploy:update_code', 'thinking_sphinx:stop'
 #after 'deploy:update_code', 'thinking_sphinx:start'
 
@@ -201,5 +196,8 @@ end
 
 desc 'update sitemap'
 task :update_sitemap do
-  run "cd #{current_path};bundle exec rake sitemap:refresh RAILS_ENV=production"
+  run "cd #{current_path};bundle exec rake sitemap:create RAILS_ENV=production"
+  run_locally "scp #{user}@#{server.host}:#{current_path}/public/sitemap.xml.gz ."
+  run_locally "scp sitemap.xml.gz #{asset_host}:#{asset_path}/rails-sitemap.xml.gz"
+  # run "cd #{current_path};bundle exec rake sitemap:refresh RAILS_ENV=production"
 end
