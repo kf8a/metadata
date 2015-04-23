@@ -3,6 +3,16 @@ class Meeting < ActiveRecord::Base
   belongs_to :venue_type
 
   validates_presence_of :venue_type
+
+  def poster_abstracts
+    type = MeetingAbstractType.where(name: "Poster").first
+    abstracts.where(meeting_abstract_type_id: type.id)
+  end
+
+  def presentation_abstracts
+    type = MeetingAbstractType.where(name: "Presentation").first
+    abstracts.where(meeting_abstract_type_id: type.id)
+  end
 end
 
 
