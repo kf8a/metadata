@@ -198,3 +198,8 @@ desc 'update scores'
 task :update_scores do
   run "cd #{current_path};bundle exec rake scores:update RAILS_ENV=production"
 end
+
+desc 'update sitemap'
+task :update_sitemap do
+  run "cd #{current_path};bundle exec rake sitemap:refresh RAILS_ENV=production"
+end
