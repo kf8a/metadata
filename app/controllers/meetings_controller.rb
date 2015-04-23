@@ -4,12 +4,15 @@ class MeetingsController < ApplicationController
   before_filter :get_meeting, :only => [:show, :edit, :update, :destroy]
 
   def index
-    venue = 1 # KBS
-    venue = 2 if params[:location] == 'national'
+    # venue = 1 # KBS
+    # venue = 2 if params[:location] == 'national'
 
-    @venue = VenueType.find(venue)
-    @meetings = @venue.meetings
-    @title = @venue.name.humanize + "  Meetings"
+    @local_venue = VenueType.find(1)
+    @local_meetings = @local_venue.meetings
+
+    @national_venue = VenueType.find(2)
+    @national_meetings = @national_venue.meetings
+
     respond_to do |format|
       format.html #index.html
       format.xml { render :xml => @meetings.to_xml}
