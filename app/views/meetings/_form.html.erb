@@ -1,6 +1,6 @@
 <p>
   <%= f.label      :title %>
-  <%= f.text_field :title %>
+  <%= f.text_field :title size => '500'%>
 </p>
 <p>
   <%= f.label       :date, 'Start Date' %>
@@ -14,6 +14,8 @@
   <%= f.select :venue_type_id, venues %>
 </p>
 <p>
+</p>
+<p>
   <%= f.label     :announcement %>
-  <%= f.text_area :announcement, :size => '60x20'%>
+  <%= f.text_area :announcement, :size => '500x20'%>
 </p>
