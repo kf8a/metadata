@@ -49,6 +49,7 @@ class AbstractsController < ApplicationController
 
   # GET /meeting_abstract/1/edit
   def edit
+    @abstract_types = MeetingAbstractType.all.collect { |type| [type.name, type.id]}
   end
 
   # PUT /meeting_abstracts/1

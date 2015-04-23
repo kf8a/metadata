@@ -1,4 +1,8 @@
 <p>
+  <label for='abstract_type_id'>Type of abstract</label><br/>
+  <%= f.select :meeting_abstract_type_id, @abstract_types %>
+</p>
+<p>
   <label for='abstract_title'>Title</label><br/>
   <%= f.text_area :title, :size => '500x3' %>
 </p>
