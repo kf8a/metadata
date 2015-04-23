@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150423142030) do
+ActiveRecord::Schema.define(:version => 20150423171537) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -422,26 +422,28 @@ ActiveRecord::Schema.define(:version => 20150423142030) do
   end
 
   create_table "people", :force => true do |t|
-    t.string  "person"
-    t.string  "sur_name"
-    t.string  "given_name"
-    t.string  "middle_name"
-    t.string  "friendly_name"
-    t.string  "title"
-    t.string  "sub_organization"
-    t.string  "organization"
-    t.string  "street_address"
-    t.string  "city"
-    t.string  "locale"
-    t.string  "country"
-    t.string  "postal_code"
-    t.string  "phone"
-    t.string  "fax"
-    t.string  "email"
-    t.string  "url"
-    t.boolean "deceased"
-    t.string  "open_id"
-    t.boolean "is_postdoc"
+    t.string   "person"
+    t.string   "sur_name"
+    t.string   "given_name"
+    t.string   "middle_name"
+    t.string   "friendly_name"
+    t.string   "title"
+    t.string   "sub_organization"
+    t.string   "organization"
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "locale"
+    t.string   "country"
+    t.string   "postal_code"
+    t.string   "phone"
+    t.string   "fax"
+    t.string   "email"
+    t.string   "url"
+    t.boolean  "deceased"
+    t.string   "open_id"
+    t.boolean  "is_postdoc"
+    t.datetime "updated_at"
+    t.datetime "created_at"
   end
 
   add_index "people", ["sur_name", "given_name", "middle_name", "friendly_name"], :name => "people_sur_name_given_name_middle_name_friendly_name_key", :unique => true

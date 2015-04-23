@@ -35,7 +35,7 @@ SitemapGenerator::Sitemap.create do
   end
   add people_path, :priority => 0.7
   Person.find_each do |person|
-    add person_path(person) #, :lastmod => person.updated_at
+    add person_path(person), :lastmod => person.updated_at
   end
   add citations_path :priority => 0.7
   website.citations.each do |citation|
@@ -43,6 +43,6 @@ SitemapGenerator::Sitemap.create do
   end
   add protocols_path, :priority => 0.7
   website.protocols.each do |protocol|
-    add protocol_path(protocol) #, :lastmod => protocol.updated_at
+    add protocol_path(protocol), :lastmod => protocol.updated_on
   end
 end
