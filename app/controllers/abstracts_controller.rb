@@ -25,6 +25,7 @@ class AbstractsController < ApplicationController
   def new
     meeting  = Meeting.find(params[:meeting])
     abstract.meeting_id = meeting.id
+    @abstract_types = MeetingAbstractType.all.collect { |type| [type.name, type.id]}
   end
 
 
