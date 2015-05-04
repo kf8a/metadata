@@ -9,10 +9,10 @@
     <h1 class='entry-title'><%= abstract.title %></h1>
 
     <div class="entry-content">
-      <p><%= abstract.authors %></p>
-      <p><%= abstract.author_affiliations %></p>
+      <p><%= abstract.authors %><br/>
+      <%= abstract.author_affiliations %></p>
 
-      <p>Presented at the <%= abstract.meeting.title %> (<%= abstract.meeting.date %> - <%= abstract.meeting.date_to %>)</p>
+      <p>Presented at the <%= abstract.meeting.title %> (<%= abstract.meeting.date %> to <%= abstract.meeting.date_to %>)</p>
 
       <%= textilize(abstract.abstract) %>
 
