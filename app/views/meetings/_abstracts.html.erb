@@ -3,7 +3,7 @@
 <%= abstract.title %>
 <%= link_to "abstract", abstract_path(abstract) %>
 <% if abstract.pdf.exists? %>
-  <%=link_to abstract.abstract_type.name.downcase , download_abstract_path(abstract) %>
+  <%=link_to abstract.meeting_abstract_type.name.downcase , download_abstract_path(abstract) %>
 <% end %>
 
 <% if admin? %>
