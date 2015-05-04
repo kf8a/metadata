@@ -10,11 +10,14 @@
 
     <div class="entry-content">
       <p><%= abstract.authors %></p>
+      <p><%= abstract.author_affiliations %></p>
+
+      <p>Presented at the <%= abstract.meeting.title %> (<%= abstract.meeting.date %> - <%= abstract.meeting.date_to %>)</p>
 
       <%= textilize(abstract.abstract) %>
 
       <% if abstract.pdf.exists? %>
-        <%=link_to 'Get PDF', download_abstract_path(abstract) %><br/>
+        <%=link_to "Get #{abstract.meeting_abstract_type.name.downcase}", download_abstract_path(abstract) %><br/>
       <% end %>
 
       <%= render 'navbar', :abstract => @abstract %>
