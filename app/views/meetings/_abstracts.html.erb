@@ -1,8 +1,9 @@
 <li id="abstract_<%= abstract.id %>" class="citation">
 <%= truncate(abstract.authors, :length=>80) %>
-<%= link_to "#{abstract.title}", abstract_path(abstract) %>
+<%= abstract.title %>
+<%= link_to "abstract", abstract_path(abstract) %>
 <% if abstract.pdf.exists? %>
-  <%=link_to 'pdf', download_abstract_path(abstract) %>
+  <%=link_to 'poster', download_abstract_path(abstract) %>
 <% end %>
 
 <% if admin? %>
