@@ -73,6 +73,8 @@ group :assets do
 end
 
 group :development, :test  do
+  gem 'minitest'
+  gem 'test-unit'
   gem 'meta_request'
   gem 'rspec-rails'
   gem 'rspec'
