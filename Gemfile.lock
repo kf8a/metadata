@@ -161,7 +161,6 @@ GEM
       actionpack (>= 3.1)
       less (~> 2.2.0)
     libv8 (3.16.14.7)
-    liquid (2.4.1)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -333,7 +332,6 @@ DEPENDENCIES
   has_scope
   jquery-rails
   less-rails
-  liquid
   meta_request
   minitest
   mysql2
