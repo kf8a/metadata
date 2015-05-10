@@ -86,21 +86,6 @@ class ApplicationControllerTest < ActionController::TestCase
 #        should respond_with(:success)
 #        should render_template "people/index"
 #      end
-#
-#      context "when a template is in the database" do
-#        setup do
-#          lter_website = Website.find_by_name('lter')
-#          FactoryGirl.create(:template,
-#                    :website_id => lter_website.id,
-#                    :controller => 'datatables',
-#                    :action     => 'index',
-#                    :layout     => '<h3 id="correct">testpagechoose</h3>')
-#          get :testpagechoose, :sub => "lter", :cont => "datatables", :page_req => "index"
-#        end
-#
-#        should respond_with(:success)
-#        should render_template "datatables/liquid_index"
-#      end
 #    end
   end
 end

@@ -27,13 +27,6 @@ module ApplicationHelper
     end
   end
 
-  def get_liquid_template(domain, controller, page)
-    website = Website.find_by_name(domain)
-    website = Website.first unless website
-    plate = nil
-    plate = website.layout(controller, page) if website
-  end
-
   def link_to_remove_fields(name, form)
       form.hidden_field(:_destroy) + link_to_function(name, "remove_fields(this)")
   end
