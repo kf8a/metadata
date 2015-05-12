@@ -15,7 +15,7 @@ class BookCitation < Citation
   end
 
   def endnote_type
-    "Book Section\n"
+    "Book\n"
   end
 
   def endnote_publication_data
