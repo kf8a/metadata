@@ -37,13 +37,13 @@ class ChapterCitation < Citation
   end
 
   def book_string
-    unless book.blank?
+    if book.present?
       book + ". "
     end
   end
 
   def address_and_city
-    ", #{address} #{city}" if address or city
+    ", #{address} #{city}" if address.present? or city.present?
   end
 
   def bibtex_type
