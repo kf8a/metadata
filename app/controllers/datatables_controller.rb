@@ -205,7 +205,7 @@ class DatatablesController < ApplicationController
   end
 
   def retrieve_datatables(query)
-    @default_value = 'Search for core areas, keywords or people'
+    @default_value = 'Search for... '
     @themes = Theme.roots
 
     @keyword_list = query['keyword_list']
