@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150423171537) do
+ActiveRecord::Schema.define(:version => 20150611164752) do
 
   create_table "affiliations", :force => true do |t|
     t.integer "person_id"
@@ -82,8 +82,9 @@ ActiveRecord::Schema.define(:version => 20150423171537) do
     t.integer  "pdf_file_size"
     t.datetime "pdf_updated_at"
     t.string   "state"
-    t.boolean  "open_access",             :default => false
+    t.boolean  "open_access",              :default => false
     t.string   "type"
+    t.boolean  "has_lter_acknowledgement"
   end
 
   add_index "citations", ["citation_type_id"], :name => "index_citations_on_citation_type_id"
