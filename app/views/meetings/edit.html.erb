@@ -8,5 +8,6 @@
   </p>
 <% end %>
 
+<%= link_to "add abstract", new_abstract_path(meeting: @meeting)%>
 <%= link_to 'Show', meeting_path(@meeting) %>
 <%= link_to 'Back', meetings_path %>
