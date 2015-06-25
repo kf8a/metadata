@@ -1,5 +1,7 @@
 <h1>Edit Meeting</h1>
 
+<%= link_to "add abstract", new_abstract_path(meeting: @meeting)%>
+
 <%= form_for(:meeting, :url => meeting_path(@meeting), :html => { :method => :put }) do |f| %>
   <%= render "shared/error_messages", :target => @meeting %>
   <%= render :partial=>"form" , :locals=>{:f => f, :venues => @venues}%>
@@ -8,6 +10,5 @@
   </p>
 <% end %>
 
-<%= link_to "add abstract", new_abstract_path(meeting: @meeting)%>
 <%= link_to 'Show', meeting_path(@meeting) %>
 <%= link_to 'Back', meetings_path %>
