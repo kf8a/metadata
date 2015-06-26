@@ -30,6 +30,7 @@ class AbstractsController < ApplicationController
 
 
   def create
+    @abstract_types = MeetingAbstractType.all.collect { |type| [type.name, type.id]}
     respond_to do |format|
       if abstract.save
         flash[:notice] = 'Meeting Abstract was successfully created.'
