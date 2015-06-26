@@ -3,7 +3,6 @@ class Abstract < ActiveRecord::Base
   belongs_to :meeting
 
   validates_presence_of :meeting
-  validates_presence_of :abstract
 
   self.table_name = 'meeting_abstracts'
 
