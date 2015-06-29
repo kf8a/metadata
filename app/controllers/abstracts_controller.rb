@@ -34,8 +34,11 @@ class AbstractsController < ApplicationController
     respond_to do |format|
       if abstract.save
         flash[:notice] = 'Meeting Abstract was successfully created.'
-        format.html { redirect_to meeting_url(abstract.meeting) }
-        format.xml  { head :created, :location => abstracts_url(abstract.meeting) }
+        if abstract.meeting_abstract_type == MeetingAbstractType.where(name: "Presentation").first
+          format.html { redirect_to abstract_url(abstract) }
+        else
+          format.html { redirect_to meeting_url(abstract.meeting) }
+        end
       else
         format.html { render "new" }
         format.xml  { render :xml => abstract.errors.to_xml }
