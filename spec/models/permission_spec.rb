@@ -5,9 +5,9 @@ describe Permission do
     @permission = Permission.new
   end
 
-  it { should validate_associated :user }
-  it { should validate_associated :datatable }
-  it { should validate_associated :owner }
+  it { should validate_presence_of :user }
+  it { should validate_presence_of :datatable }
+  it { should validate_presence_of :owner }
 end
 
 
