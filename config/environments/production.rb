@@ -66,4 +66,12 @@ Metadata::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+    :email => {
+    :email_prefix => "[METADATA] ",
+    :sender_address => %{"notifier" <notifier@oshtemo.kbs.msu.edu>},
+    :exception_recipients => %w{bohms@msu.edu}
+  }
+
 end

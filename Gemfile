@@ -19,6 +19,8 @@ gem 'simple_form'
 gem 'country_select'
 gem 'cube-ruby'
 
+gem 'exception_notification'
+
 #gem 'mercury-rails'
 
 # can we go back to the collective idea branch of awesome_nested_set
