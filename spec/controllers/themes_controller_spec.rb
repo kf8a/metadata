@@ -14,7 +14,7 @@ describe ThemesController do
     end
 
     it { should render_template 'index' }
-    it { should assign_to :theme_roots }
+    it { assigns :theme_roots }
   end
 
   describe 'POST :move_to' do

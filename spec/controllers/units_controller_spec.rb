@@ -17,7 +17,7 @@ describe UnitsController do
       get :index
     end
     it {should respond_with :success }
-    it {should assign_to(:units) }
+    it {assigns(:units) }
   end
 
   context 'GET :edit' do
@@ -25,7 +25,7 @@ describe UnitsController do
       get :edit, :id => @unit
     end
     it {should respond_with :success }
-    it {should assign_to(:unit).with(@unit) }
+    it {assigns(:unit) }
   end
 
   context 'PUT :update' do
@@ -34,7 +34,7 @@ describe UnitsController do
       put :update, :id=>1
     end
     it {should redirect_to units_url }
-    it {should assign_to(:unit).with(@unit) }
+    it {assigns(:unit) }
   end
 
   context 'GET :show' do
@@ -42,6 +42,6 @@ describe UnitsController do
       get :show, :id=>@unit
     end
     it {should respond_with :success }
-    it {should assign_to(:unit).with(@unit) }
+    it {assigns(:unit) }
   end
 end
