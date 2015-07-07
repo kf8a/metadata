@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.22'
+gem 'rails', '~>4.2'
 
 gem 'rake'
 gem 'capistrano' 
@@ -52,12 +52,12 @@ gem 'has_scope'
 
 gem 'ris_parser', :git => 'git://github.com/kf8a/ris_parser.git'
 
-gem 'thinking-sphinx' #, '2.0.10'
+gem 'thinking-sphinx'
 gem 'mysql2'
 # gem 'cache_digests'
 
 
-gem "sitemap_generator" #, "~> 3.1.1"
+gem "sitemap_generator"
 group :production do
   # gem 'exception_notification'
   gem 'unicorn'
@@ -68,9 +68,9 @@ end
 group :assets do
   gem 'therubyracer', :require => false
 	gem 'less-rails'
-  gem 'sass-rails', "~> 3.2.3"
-  gem 'coffee-rails', "~> 3.2.1"
-  gem 'uglifier', '>= 1.0.3'
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'uglifier'
 end
 
 group :development, :test  do
