@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(:version => 20150617005803) do
     t.boolean  "open_access",              :default => false
     t.string   "type"
     t.boolean  "has_lter_acknowledgement"
-    t.text     "annotation"
+    t.string   "annotation"
   end
 
   add_index "citations", ["citation_type_id"], :name => "index_citations_on_citation_type_id"
@@ -704,13 +704,13 @@ ActiveRecord::Schema.define(:version => 20150617005803) do
   create_table "units", :force => true do |t|
     t.string  "name"
     t.text    "description"
-    t.boolean "in_eml",                                :default => false
+    t.boolean "in_eml",                 :default => false
     t.text    "definition"
     t.integer "deprecated_in_favor_of"
     t.string  "unit_type"
     t.string  "parent_si"
     t.float   "multiplier_to_si"
-    t.string  "abbreviation",           :limit => nil
+    t.string  "abbreviation"
     t.string  "label"
     t.float   "offset_to_si"
   end
