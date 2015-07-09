@@ -5,7 +5,7 @@ class Variate < ActiveRecord::Base
   belongs_to :datatable, :touch => true
   belongs_to :unit
 
-  scope :valid_for_eml, where("measurement_scale != '' AND description != ''")
+  scope :valid_for_eml, -> { where("measurement_scale != '' AND description != ''") }
 
   def self.from_eml(variate_eml)
     variate = Variate.new
