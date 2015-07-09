@@ -44,8 +44,7 @@ gem 'parslet'
 gem 'bibtex-ruby'
 
 # versioning support for protocols
-gem 'vestal_versions', :git => 'git://github.com/laserlemon/vestal_versions'
-# gem 'vestal_versions', :git => 'git://github.com/milkfarm/vestal_versions.git'
+gem 'vestal_versions', :git => 'git://github.com/R1V3R5/vestal_versions'
 
 gem 'dalli'
 
