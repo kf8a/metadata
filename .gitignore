@@ -2,7 +2,6 @@
 db/meta_*
 .yardoc
 .bin/
-bin/
 db/*.sqlite3
 db/sphinx
 log/

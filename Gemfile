@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '~>4.2'
 
+gem 'activerecord-session_store'
+
 gem 'rake'
 gem 'capistrano' 
 gem 'pg'
@@ -57,11 +59,11 @@ gem 'mysql2'
 # gem 'cache_digests'
 
 
+gem 'aws-sdk'
 gem "sitemap_generator"
 group :production do
   # gem 'exception_notification'
   gem 'unicorn'
-  gem 'aws-sdk'
  # gem 'newrelic_rpm'
 end
 
