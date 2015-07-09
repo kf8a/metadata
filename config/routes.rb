@@ -1,7 +1,7 @@
 Metadata::Application.routes.draw do
 
-  match '/send_invitation/:id' => 'invites#send_invitation', :as => :send_invitation
-  match '/signup/:invite_code' => 'users#new', :as => :redeem_invitation
+  match '/send_invitation/:id' => 'invites#send_invitation', :as => :send_invitation, via: [:get]
+  match '/signup/:invite_code' => 'users#new', :as => :redeem_invitation, via: [:get]
   resource :session, :controller => 'sessions'
   resource :users
 
@@ -39,7 +39,7 @@ Metadata::Application.routes.draw do
       post :set_affiliation_for
     end
   end
-  match 'knb/*id' => 'datasets#knb'
+  match 'knb/*id' => 'datasets#knb', via: [:get]
 
   resources :datatables do
     collection do
@@ -83,8 +83,8 @@ Metadata::Application.routes.draw do
   end
 
   resources :sponsors, :as => 'termsofuse'
-  match '/termsofuse/:id' => "sponsors#show"
-  match '/termsofuse' => 'sponsors#index'
+  match '/termsofuse/:id' => "sponsors#show", via: [:get]
+  match '/termsofuse' => 'sponsors#index', via: [:get]
 
   post '/studies/:id/move_to/:parent_id' => 'studies#move_to'
   post '/studies/:id/move_before/:parent_id' => 'studies#move_before'
@@ -102,12 +102,11 @@ Metadata::Application.routes.draw do
   resources :score_cards, :only => ['index', 'show']
 
   root :to => 'datatables#index'
-  match ':controller/service.wsdl' => '#wsdl'
 
   if Rails.env == 'test'
-    match 'application_controller_test/foo/testadmin' => 'application_controller_test/foo#testadmin'
-    match 'application_controller_test/foo/testpagechoose' => 'application_controller_test/foo#testpagechoose'
-    match 'application_controller_test/foo/alphabetical' => 'application_controller_test/foo#alphabetical'
-    match 'application_controller_test/foo/emeritus' => 'application_controller_test/foo#emeritus'
+    match 'application_controller_test/foo/testadmin' => 'application_controller_test/foo#testadmin', via: [:get]
+    match 'application_controller_test/foo/testpagechoose' => 'application_controller_test/foo#testpagechoose', via: [:get]
+    match 'application_controller_test/foo/alphabetical' => 'application_controller_test/foo#alphabetical', via: [:get]
+    match 'application_controller_test/foo/emeritus' => 'application_controller_test/foo#emeritus', via: [:get]
   end
 end
