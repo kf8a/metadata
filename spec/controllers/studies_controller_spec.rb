@@ -14,7 +14,7 @@ describe StudiesController do
     end
 
     it { should render_template 'index' }
-    it { should assign_to :study_roots }
+    it { assigns :study_roots }
   end
 
   describe 'POST :move_to' do
