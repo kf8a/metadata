@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe VisualizationsController do
+describe VisualizationsController, type: :controller  do
   describe 'A visualization exists.' do
     before(:each) do
       @visualization = FactoryGirl.create(:visualization)

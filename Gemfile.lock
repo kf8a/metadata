@@ -266,6 +266,8 @@ GEM
     raindrops (0.14.0)
     rake (10.4.2)
     ref (1.0.5)
+    responders (2.1.0)
+      railties (>= 4.2.0, < 5)
     riddle (1.5.12)
     rspec (3.3.0)
       rspec-core (~> 3.3.0)
@@ -394,6 +396,7 @@ DEPENDENCIES
   rack-openid
   rails (~> 4.2)
   rake
+  responders
   ris_parser!
   rspec
   rspec-rails

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ThemesController do
+describe ThemesController, type: :controller  do
   render_views
 
   before(:each) do

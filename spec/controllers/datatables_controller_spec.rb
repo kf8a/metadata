@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe DatatablesController do
+describe DatatablesController, type: :controller  do
 
   def mock_datatable(stubs={})
     @mock_datatable ||= stub_model(Datatable)

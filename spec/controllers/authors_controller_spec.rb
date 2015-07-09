@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe AuthorsController do
+describe AuthorsController, type: :controller  do
   render_views
 
   before(:each) do

@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '~>4.2'
 
 gem 'activerecord-session_store'
+gem 'responders'
 
 gem 'rake'
 gem 'capistrano' 

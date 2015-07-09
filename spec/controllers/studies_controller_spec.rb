@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe StudiesController do
+describe StudiesController, type: :controller  do
   render_views
 
   before(:each) do

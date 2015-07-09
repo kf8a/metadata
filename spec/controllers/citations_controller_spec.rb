@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CitationsController do
+describe CitationsController, type: :controller  do
   render_views
 
   before(:each) do

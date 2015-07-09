@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe DatasetsController do
+describe DatasetsController, type: :controller  do
   render_views
 
   # describe 'POST :create with an eml_link' do
