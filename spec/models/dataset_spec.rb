@@ -69,7 +69,9 @@ describe Dataset do
 
     it "should import the right people" do
       jon = FactoryGirl.create(:person, :given_name => 'jon')
-      @dataset_with_datatable.people << jon
+
+      @dataset_with_datatable.datatables.first.people << jon
+
       assert @dataset_with_datatable.save
       eml_content = @dataset_with_datatable.to_eml
       imported_dataset = Dataset.from_eml(eml_content)
