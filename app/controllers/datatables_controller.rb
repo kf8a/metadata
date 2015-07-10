@@ -6,7 +6,6 @@ class DatatablesController < ApplicationController
   # before_filter :reject_robots
 
   protect_from_forgery :except => [:index, :show, :search]
-  cache_sweeper :datatable_sweeper
 
   # GET /datatables
   # GET /datatables.xml

@@ -2,7 +2,6 @@
 class CitationsController < ApplicationController
   respond_to :html, :xml, :json
   layout :site_layout
-  cache_sweeper :citation_sweeper
   before_filter :admin?, :only => [:new, :create, :edit, :update, :destroy] unless Rails.env == 'development'
 
   has_scope :by_type,   :as => :type

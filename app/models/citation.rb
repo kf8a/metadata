@@ -8,8 +8,8 @@ class Citation < ActiveRecord::Base
 
   versioned :dependent => :tracking
 
-  has_many :authors, :order => :seniority, :dependent => :destroy
-  has_many :editors, :order => :seniority, :dependent => :destroy
+  has_many :authors, -> { order(:seniority)} , :dependent => :destroy
+  has_many :editors, -> { order(:seniority)}, :dependent => :destroy
 
   belongs_to :citation_type
   belongs_to :website
@@ -39,22 +39,21 @@ class Citation < ActiveRecord::Base
   before_post_process :transliterate_file_name
 
   # attr_accessible :Tag, :title, :abstract, 
-  attr_protected :pdf_file_name, :pdf_content_type, :pdf_size
+  # attr_protected :pdf_file_name, :pdf_content_type, :pdf_size
 
   # the REAL publications not including reports
-  scope :publications, where(%q{type != 'ConferenceCitation'}).where(%q{type != 'BulletinCitation'})
+  scope :publications, -> { where(%q{type != 'ConferenceCitation'}).where(%q{type != 'BulletinCitation'}) }
 
-  scope :bookish, where(%q{type in ('BookCitation', 'ChapterCitation')})
+  scope :bookish, -> { where(%q{type in ('BookCitation', 'ChapterCitation')}) }
 
-  scope :with_authors_by_sur_name_and_pub_year,
-      joins(:authors).where(:authors => {:seniority => 1}).
-      order('pub_year desc, authors.sur_name')
+  scope :with_authors_by_sur_name_and_pub_year, -> { joins(:authors).where(:authors => {:seniority => 1}).
+    order('pub_year desc, authors.sur_name') }
 
-  scope :published,   where(:state => 'published').with_authors_by_sur_name_and_pub_year
-  scope :submitted,   where(:state => 'submitted').with_authors_by_sur_name_and_pub_year
-  scope :forthcoming, where(:state => 'forthcoming').with_authors_by_sur_name_and_pub_year
+  scope :published,   -> { where(:state => 'published').with_authors_by_sur_name_and_pub_year }
+  scope :submitted,   -> { where(:state => 'submitted').with_authors_by_sur_name_and_pub_year }
+  scope :forthcoming, -> { where(:state => 'forthcoming').with_authors_by_sur_name_and_pub_year }
 
-  scope :books, where(:type => 'book')
+  scope :books, -> { where(:type => 'book') }
 
   scope :next, lambda { |p| {:conditions => ["id > ?", p.id], :limit => 1, :order => "id"} }
   scope :previous, lambda { |p| {:conditions => ["id < ?", p.id], :limit => 1, :order => "id desc"} }

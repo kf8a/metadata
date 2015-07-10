@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~>4.2'
+gem 'rails', '~>4.0'
 
 gem 'activerecord-session_store'
 gem 'responders'
@@ -80,6 +80,7 @@ group :development, :test  do
   gem 'test-unit'
   gem 'meta_request'
   gem 'rspec-rails'
+  gem 'rspec-its'
   gem 'rspec'
   gem "shoulda", :git => 'git://github.com/thoughtbot/shoulda.git' 
   gem "annotate"

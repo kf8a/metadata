@@ -278,6 +278,9 @@ GEM
     rspec-expectations (3.3.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.3.0)
+    rspec-its (1.2.0)
+      rspec-core (>= 3.0.0)
+      rspec-expectations (>= 3.0.0)
     rspec-mocks (3.3.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.3.0)
@@ -394,11 +397,12 @@ DEPENDENCIES
   pg
   pickle
   rack-openid
-  rails (~> 4.2)
+  rails (~> 4.0)
   rake
   responders
   ris_parser!
   rspec
+  rspec-its
   rspec-rails
   ruby-openid!
   sass-rails

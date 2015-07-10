@@ -18,7 +18,9 @@ class Abstract < ActiveRecord::Base
         :path => ':rails_root/assets/abstracts/:attachment/:id/:style/:basename.:extension'
   end
 
-  scope :by_authors, :order=> :authors
+  def self.by_authors
+   order :authors 
+  end
 end
 
 
