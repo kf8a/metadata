@@ -5,12 +5,12 @@ require 'date'
 require 'eml'
 
 class Dataset < ActiveRecord::Base
-  has_many                :affiliations, order:      'seniority'
-  has_many                :datatables,   order:      'name', :dependent => :nullify
+  has_many                :affiliations, -> { order 'seniority' }
+  has_many                :datatables,   -> { order 'name'} , :dependent => :nullify
   has_many                :people,       through:    :affiliations
   belongs_to              :project
-  has_many                :protocols,    conditions: 'active is true'
-  has_many                :roles,        through:    :affiliations, uniq: true
+  has_many                :protocols,    -> {where 'active is true' }
+  has_many                :roles,        -> {uniq() } , through: :affiliations
   belongs_to              :sponsor
   has_and_belongs_to_many :studies
   has_and_belongs_to_many :themes
