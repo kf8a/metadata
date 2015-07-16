@@ -426,7 +426,7 @@ class Citation < ActiveRecord::Base
   # use natural order for second and subsequent authors
   # 
   def author_string
-    my_authors = authors.all
+    my_authors = authors.all.to_a
     if my_authors.length > 1
       last_author = my_authors.pop
       first_author = my_authors.shift

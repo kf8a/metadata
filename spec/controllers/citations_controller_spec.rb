@@ -4,7 +4,7 @@ describe CitationsController, type: :controller  do
   render_views
 
   before(:each) do
-    @website = Website.find_or_create_by_name('lter')
+    @website = Website.find_or_create_by(name: 'lter')
     @controller.current_user = nil
 
       author1 = FactoryGirl.create(:author, :sur_name => 'Zebedee', :seniority => 1)
@@ -43,10 +43,10 @@ describe CitationsController, type: :controller  do
 
     it { should render_template('filtered') }
     it "should order the citations by id" do
-      assigns(:website).should == @website
+      expect(assigns(:website)).to eq @website
       correct_sorting = @website.citations.order('id').published
-      correct_sorting.should include @another_citation
-      assigns(:citations).all.should eq correct_sorting.all
+      expect(correct_sorting).to include @another_citation
+      expect(assigns(:citations).all).to eq correct_sorting.all
     end
   end
 
@@ -57,8 +57,8 @@ describe CitationsController, type: :controller  do
 
     it "should order the citations by pub_year" do
       correct_sorting = @website.citations.order('pub_year').published
-      correct_sorting.should include @another_citation
-      assigns(:citations).all.should eq correct_sorting.all
+      expect(correct_sorting).to include @another_citation
+      expect(assigns(:citations).all).to eq correct_sorting.all
     end
   end
 
@@ -69,9 +69,9 @@ describe CitationsController, type: :controller  do
 
     it "should only include article citations" do
       correct_list = @website.citations.by_type('ArticleCitation').published
-      correct_list.should include @citation1
-      correct_list.should_not include @another_citation
-      assigns(:citations).all.should eq correct_list.all
+      expect(correct_list).to include @citation1
+      expect(correct_list).to_not include @another_citation
+      expect(assigns(:citations).all).to eq correct_list.all
     end
   end
 end
