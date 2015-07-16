@@ -87,17 +87,6 @@ namespace :deploy do
 
 end
 
-task :master do
-
-  set :host, 'gprpc28'
-
-  role :app, "#{host}.kbs.msu.edu"
-  role :web, "#{host}.kbs.msu.edu"
-  role :db,  "#{host}.kbs.msu.edu", :primary=>true
-
-#  after 'deploy:symlink', :set_asset_host
-end
-
 task :oshtemo do
   set :host, 'oshtemo.kbs.msu.edu'
   set :asset_host, 'hillsdale.kbs.msu.edu'
@@ -116,8 +105,8 @@ task :kalkaska do
   role :db, "#{host}", :primary => true
 end
 
-#before 'deploy:update_code', 'thinking_sphinx:stop'
-#after 'deploy:update_code', 'thinking_sphinx:start'
+before 'deploy:update_code', 'thinking_sphinx:stop'
+after 'deploy:finalize_update', 'thinking_sphinx:start'
 
 namespace :sphinx do
   desc "Symlink Sphinx indexes"
