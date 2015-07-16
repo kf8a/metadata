@@ -28,7 +28,7 @@ describe PeopleController, type: :controller  do
         end
 
         it 'uses the lter template' do
-          response.should render_template('lter')
+          expect(response).to render_template('lter')
         end
       end
 
@@ -43,11 +43,11 @@ describe PeopleController, type: :controller  do
         end
 
         it 'renders show' do
-          response.should render_template("show")
+          expect(response).to render_template("show")
         end
 
         it 'uses the glbrc template' do
-          response.should render_template('glbrc')
+          expect(response).to render_template('glbrc')
         end
       end
 
@@ -61,11 +61,11 @@ describe PeopleController, type: :controller  do
         end
 
         it 'renders show' do
-          response.should render_template("show")
+          expect(response).to render_template("show")
         end
 
         it 'uses the lter template' do
-          response.should render_template('lter')
+          expect(response).to render_template('lter')
         end
       end
     end
