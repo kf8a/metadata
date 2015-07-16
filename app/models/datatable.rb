@@ -388,8 +388,8 @@ class Datatable < ActiveRecord::Base
       when values.fields.member?('obs_date') then 'obs_date'
       when values.fields.member?('date') then 'date'
       when values.fields.member?('datetime') then 'datetime'
-      when values.fields.member?('year') then 'year'
       when values.fields.member?('harvest_date') then 'harvest_date'
+      when values.fields.member?('year') then 'year'
     end
   end
 
