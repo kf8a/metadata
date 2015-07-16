@@ -1,7 +1,7 @@
 class Person < ActiveRecord::Base
   has_many :affiliations, :dependent => :destroy
-  has_many :lter_roles, :through => :affiliations, :conditions => ['role_type_id = ?', RoleType.where(:name => 'lter').first], :source => :role
-  has_many :dataset_roles, :through => :affiliations, :conditions => ['role_type_id = ?', RoleType.find_by_name('lter_dataset')], :source => :role
+  has_many :lter_roles, -> { where(['role_type_id = ?', RoleType.where(:name => 'lter').first])} , :source => :role, :through => :affiliations
+  has_many :dataset_roles, -> {where ['role_type_id = ?', RoleType.find_by_name('lter_dataset')] }, :through => :affiliations, :source => :role
   has_many :roles, :through => :affiliations
   has_many :datasets, :through => :affiliations,  :source => :dataset
   has_many :scribbles
@@ -10,12 +10,12 @@ class Person < ActiveRecord::Base
   has_many :data_contributions
   has_many :datatables, :through => :data_contributions
 
-  attr_protected :identity_url
+  # attr_protected :identity_url
 
   accepts_nested_attributes_for :affiliations, :allow_destroy => true
 
-  scope :by_sur_name, :order => 'sur_name'
-  scope :by_sur_name_asc, :order => 'sur_name ASC'
+  scope :by_sur_name, -> {order 'sur_name'}
+  scope :by_sur_name_asc, -> { order 'sur_name ASC' }
 
   def self.from_eml(person_eml)
     person = Person.new

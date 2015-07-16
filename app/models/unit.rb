@@ -3,7 +3,7 @@ class Unit < ActiveRecord::Base
 
   after_find :update_job
   #  after_find :update_dictionary
-  scope :not_in_eml, :conditions => ['in_eml is false']
+  scope :not_in_eml, -> { where 'in_eml is false' }
 
   def human_name
     if label
