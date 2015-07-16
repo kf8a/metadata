@@ -7,8 +7,8 @@ class Study < ActiveRecord::Base
 
   acts_as_nested_set
 
-  scope :by_weight, :order => 'weight'
-  scope :by_id,     :order => 'id'
+  scope :by_weight, -> {order 'weight' }
+  scope :by_id,     -> {order 'id' }
 
   before_destroy :check_for_treatments
 
