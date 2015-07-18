@@ -43,7 +43,7 @@ describe PeopleController, type: :controller  do
         end
 
         it 'renders show' do
-          expect(response).to render_template("show")
+          expect(response).to render_template("glbrc_show")
         end
 
         it 'uses the glbrc template' do
