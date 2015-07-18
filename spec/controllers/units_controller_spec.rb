@@ -3,13 +3,14 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe UnitsController, type: :controller  do
 
   before do
-    user = double(:user).stub(:admin?).and_return(:true)
+    user = User.new
+    allow(user).to receive(:admin?).and_return(:true)
     @controller.current_user = user
 
     @unit = Unit.new
-    @unit.stub(:id).and_return(1)
-    @unit.stub(:save).and_return(true)
-    Unit.stub(:find).with('1').and_return(@unit)
+    allow(@unit).to receive(:id).and_return(1)
+    allow(@unit).to receive(:save).and_return(true)
+    allow(Unit).to receive(:find).with('1').and_return(@unit)
   end
 
   context 'GET :index' do
@@ -30,7 +31,7 @@ describe UnitsController, type: :controller  do
 
   context 'PUT :update' do
     before do
-      @unit.stub(:update_attributes).and_return(true)
+      allow(@unit).to receive(:update_attributes).and_return(true)
       put :update, :id=>1
     end
     it {should redirect_to units_url }
