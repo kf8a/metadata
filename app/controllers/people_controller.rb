@@ -9,7 +9,10 @@ class PeopleController < ApplicationController
   def index
     # expires_in 6.minutes, :public=>true
 
-    @roles = RoleType.find_by_name('lter').roles.order('seniority').where('name not like ?','Emeritus%')
+    roleType = RoleType.find_by(name: 'lter')
+    if roleType
+      @roles = roleType.roles.order('seniority').where('name not like ?','Emeritus%')
+    end
     respond_to do |format|
       format.html # index.rhtml
     end
