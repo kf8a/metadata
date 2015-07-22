@@ -379,7 +379,6 @@ DEPENDENCIES
   dalli
   database_cleaner
   exception_notification
-  factory_girl
   factory_girl_rails
   foreigner
   formtastic
