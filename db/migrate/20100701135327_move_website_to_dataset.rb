@@ -2,7 +2,7 @@ class MoveWebsiteToDataset < ActiveRecord::Migration
   def self.up
     add_column :datasets, :website_id, :integer
     add_column :websites, :dataset_id, :integer
-    
+
     remove_column :datatables, :website_id
   end
 

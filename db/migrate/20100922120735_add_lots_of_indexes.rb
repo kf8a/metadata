@@ -8,12 +8,8 @@ class AddLotsOfIndexes < ActiveRecord::Migration
     add_index :citations,               :citation_type_id
     add_index :citations,               :website_id
     add_index :collections,             :datatable_id
-    add_index :columns,                 :datatable_id
-    add_index :columns,                 :variate_id
-    add_index :datafiles,               :person_id
     add_index :datasets,                :project_id
     add_index :datasets,                :metacat_id
-    add_index :datasets,                :sponsor_id
     add_index :datasets,                :website_id
     add_index :datasets_studies,        :dataset_id
     add_index :datasets_studies,        :study_id
@@ -37,8 +33,6 @@ class AddLotsOfIndexes < ActiveRecord::Migration
     add_index :permissions,             :owner_id
     add_index :protocols,               :person_id
     add_index :protocols,               :dataset_id
-    add_index :protocols_sponsors,      :protocol_id
-    add_index :protocols_sponsors,      :sponsor_id
     add_index :protocols_websites,      :protocol_id
     add_index :protocols_websites,      :website_id
     add_index :publications,            :publication_type_id
@@ -56,7 +50,6 @@ class AddLotsOfIndexes < ActiveRecord::Migration
     add_index :treatments,              :study_id
     add_index :variates,                :datatable_id
     add_index :variates,                :unit_id
-    add_index :variates,                :variate_theme_id
   end
 
   def self.down
@@ -68,12 +61,8 @@ class AddLotsOfIndexes < ActiveRecord::Migration
     remove_index :citations,               :citation_type_id
     remove_index :citations,               :website_id
     remove_index :collections,             :datatable_id
-    remove_index :columns,                 :datatable_id
-    remove_index :columns,                 :variate_id
-    remove_index :datafiles,               :person_id
     remove_index :datasets,                :project_id
     remove_index :datasets,                :metacat_id
-    remove_index :datasets,                :sponsor_id
     remove_index :datasets,                :website_id
     remove_index :datasets_studies,        :dataset_id
     remove_index :datasets_studies,        :study_id
@@ -99,8 +88,6 @@ class AddLotsOfIndexes < ActiveRecord::Migration
     remove_index :plots,                   :study_id
     remove_index :protocols,               :person_id
     remove_index :protocols,               :dataset_id
-    remove_index :protocols_sponsors,      :protocol_id
-    remove_index :protocols_sponsors,      :sponsor_id
     remove_index :protocols_websites,      :protocol_id
     remove_index :protocols_websites,      :website_id
     remove_index :publications,            :publication_type_id
@@ -118,6 +105,5 @@ class AddLotsOfIndexes < ActiveRecord::Migration
     remove_index :treatments,              :study_id
     remove_index :variates,                :datatable_id
     remove_index :variates,                :unit_id
-    remove_index :variates,                :variate_theme_id
   end
 end

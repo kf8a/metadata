@@ -6,7 +6,7 @@ class CreateScribbles < ActiveRecord::Migration
       t.integer :order
     end
     Scribble.reset_column_information
-    protocols = Protocol.find(:all)
+    protocols = Protocol.all
     protocols.each do |protocol|
       Scribble.create({:protocol_id => protocol.id, 
           :person_id => protocol.person_id, :order => 1})
