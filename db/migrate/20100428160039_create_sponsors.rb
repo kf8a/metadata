@@ -4,11 +4,11 @@ class CreateSponsors < ActiveRecord::Migration
       t.string  :name
       t.timestamps
     end
-    add_column :datasets, :sonsor_id, :integer
+    add_column :datasets, :sponsor_id, :integer
   end
 
   def self.down
-    remove_column :datasets, :sonsor_id
+    remove_column :datasets, :sponsor_id
     drop_table :sponsors
   end
 end
