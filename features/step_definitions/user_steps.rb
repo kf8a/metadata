@@ -5,18 +5,18 @@ end
 Given /^I am signed in as a normal user$/ do
   @user = FactoryGirl.create :email_confirmed_user, :email => "normal@person.com"
   @user.role = "normal"
-  When %{I sign in as "normal@person.com/password"}
+  step %{I sign in as "normal@person.com/password"}
 end
 
 Given /^I am signed in as an administrator$/ do
   @user = User.find_by_email('admin@person.com') || FactoryGirl.create(:admin_user, :email => "admin@person.com")
-  When %{I sign in as "admin@person.com/password"}
+  step %{I sign in as "admin@person.com/password"}
 end
 
 Given /^I am signed in as an uploader$/ do
   @user = User.find_by_email('uploader@person.com') || FactoryGirl.create(:email_confirmed_user, :email => "uploader@person.com")
   @user.role = "uploader"
-  When %{I sign in as "uploader@person.com/password"}
+  step %{I sign in as "uploader@person.com/password"}
 end
 
 Given /^"([^"]*)" is a "([^"]*)" member$/ do |email, sponsor_name|

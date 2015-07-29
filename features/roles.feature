@@ -20,5 +20,5 @@ Scenario: An anonymous user wants to edit
 Scenario: An admin user wants to edit
   Given I am signed in as an administrator
     And a public datatable exists
-  When  I go to the datatable page
-  Then  I should see "Edit"
+  When  I go to the datatable edit page
+  Then  I should be on the datatable edit page

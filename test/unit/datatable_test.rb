@@ -41,7 +41,9 @@ class DatatableTest < ActiveSupport::TestCase
       setup do
         @person1 = FactoryGirl.create(:person, :sur_name => 'Datatableman')
         @person2 = FactoryGirl.create(:person, :sur_name => 'Datatablewoman')
-        @datatable.stubs(:datatable_personnel).returns([@person1, @person2])
+        @role = FactoryGirl.create(:role)
+        @datatable.data_contributions << DataContribution.create(person:@person1, role: @role)
+        @datatable.data_contributions << DataContribution.create(person: @person2, role: @role)
       end
 
       should 'return those personnel on #personnel' do
@@ -53,8 +55,9 @@ class DatatableTest < ActiveSupport::TestCase
       setup do
         @person1 = FactoryGirl.create(:person, :sur_name => 'Datatableman')
         @person2 = FactoryGirl.create(:person, :sur_name => 'Datatablewoman')
-        @datatable.stubs(:datatable_personnel).returns([])
-        @datatable.stubs(:dataset_personnel).returns([@person1, @person2])
+        dataset = FactoryGirl.create(:dataset)
+        dataset.personnel = [@perons1, @person2]
+        @datatable.dataset = dataset
       end
 
       should 'return the dataset personnel' do

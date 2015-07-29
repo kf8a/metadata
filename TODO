@@ -11,6 +11,8 @@ TODO check autocompleter in the datatable edit
 TODO add display units to unit table
 TODO check on keyword list in datasets the keyword form field caused an application error when submitting the form
 
+TODO only show latest protocol on the data page.
+
 dataset to check
 4, 49, 79
 108 length of table name
@@ -22,3 +24,24 @@ http://lter.kbs.msu.edu/datasets/13.eml
 http://lter.kbs.msu.edu/datasets/15.eml invertebrates no data
 http://lter.kbs.msu.edu/datasets/65.eml crash!
 
+
+Check on abstract loading error 
+Processing by AbstractsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"[FILTERED]", "abstract"=>{"meeting_id"=>"26", "meeting_abstract_type_id"=>"2", "title"=>"On the receiving end: Ecology of streams draining agricultural landscapes", "authors"=>"Emily Stanley", "author_affiliations"=>"University of Wisconsin, Madison WI", "abstract"=>"", "pdf"=>#<ActionDispatch::Http::UploadedFile:0x007f4fe1fca390 @original_filename="everydayrailsrspec-sample.pdf", @content_type="application/pdf", @headers="Content-Disposition: form-data; name=\"abstract[pdf]\"; filename=\"everydayrailsrspec-sample.pdf\"\r\nContent-Type: application/pdf\r\n", @tempfile=#<Tempfile:/tmp/RackMultipart20150626-21560-15z14s8>>}, "commit"=>"Create"}
+  Rendered shared/_error_messages.html.erb (1.6ms)
+  Rendered abstracts/_form.html.erb (1.9ms)
+  Rendered abstracts/new.html.erb within layouts/lter (6.7ms)
+Completed 500 Internal Server Error in 54.3ms
+
+ActionView::Template::Error (undefined method `empty?' for nil:NilClass):
+    1: <fieldset>
+    2:   <label for='abstract_type_id'>Type of abstract</label>
+    3:   <%= f.select :meeting_abstract_type_id, @abstract_types %>
+    4: </fieldset>
+    5: <fieldset>
+    6:   <label for='abstract_title'>Title</label>
+  app/views/abstracts/_form.html.erb:3:in `_app_views_abstracts__form_html_erb___4429135359213721116_69990612492240'
+  app/views/abstracts/new.html.erb:8:in `block in _app_views_abstracts_new_html_erb___2875434538340930438_69990590899660'
+  app/views/abstracts/new.html.erb:3:in `_app_views_abstracts_new_html_erb___2875434538340930438_69990590899660'
+  app/controllers/abstracts_controller.rb:39:in `block (2 levels) in create'
+  app/controllers/abstracts_controller.rb:33:in `create')

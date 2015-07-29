@@ -9,7 +9,7 @@ describe Datatable do
   describe 'publishing' do
 
     before do
-      @datatable.stub(:approved_csv).and_return('something')
+      allow(@datatable).to receive(:approved_csv).and_return('something')
       @datatable.publish
     end
 

@@ -151,9 +151,9 @@ FactoryGirl.define do
     is_sql         true
     description   'This is a datatable'
     weight        100
-    theme
+    theme_id      [FactoryGirl.create(:theme)]
     dataset
-    variates      [FactoryGirl.create(:variate)]
+    # variates      [FactoryGirl.create(:variate)]
 
     factory :public_datatable do
     end

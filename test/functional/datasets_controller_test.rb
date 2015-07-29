@@ -30,7 +30,7 @@ class DatasetsControllerTest < ActionController::TestCase
     end
 
     should render_template :new
-    should_not set_the_flash
+    should_not set_flash
   end
 
   def test_should_show_dataset
@@ -79,7 +79,7 @@ class DatasetsControllerTest < ActionController::TestCase
   end
 
   def test_should_update_dataset
-    put :update, :id => @dataset, :dataset => { }
+    put :update, :id => @dataset, :dataset => {title: "Title updated" }
     assert_redirected_to dataset_path(assigns(:dataset))
   end
 
@@ -89,7 +89,7 @@ class DatasetsControllerTest < ActionController::TestCase
     end
 
     should render_template :edit
-    should_not set_the_flash
+    should_not set_flash
   end
 
   def test_should_destroy_dataset
@@ -109,7 +109,7 @@ class DatasetsControllerTest < ActionController::TestCase
     end
 
     should redirect_to('the datatable page') {datatables_path}
-    should_not set_the_flash
+    should_not set_flash
 
   end
 

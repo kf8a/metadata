@@ -32,10 +32,10 @@ describe DatatablesController, type: :controller  do
 
   describe 'responding to publish request' do
     it 'should publish' do
-      datatable = stub_model(Datatable)
-      datatable.stub(:object).and_return('select now() as sample_date')
-      datatable.stub(:save!).and_return(true)
-      Datatable.should_receive(:find).with('1').at_least(1).and_return(datatable)
+      datatable = Datatable.new
+      allow(datatable).to receive(:object).and_return('select now() as sample_date')
+      allow(datatable).to receive(:save!).and_return(true)
+      expect(Datatable).to receive(:find).with('1').at_least(1).and_return(datatable)
       put :publish, :id => "1"
       response.code.should eq("200")
     end
