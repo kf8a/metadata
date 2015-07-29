@@ -9,9 +9,9 @@ gem 'rake'
 gem 'capistrano' 
 gem 'pg'
 gem 'clearance', '1.0.0.rc7'
-gem 'ruby-openid', :git => 'https://github.com/kf8a/ruby-openid.git'
-gem 'rack-openid'
-gem 'open_id_authentication'
+#gem 'ruby-openid', :git => 'https://github.com/kf8a/ruby-openid.git'
+#gem 'rack-openid'
+#gem 'open_id_authentication'
 gem 'acts-as-taggable-on'
 gem 'paperclip' 
 gem 'nokogiri'
@@ -20,8 +20,6 @@ gem 'formtastic'
 gem 'simple_form'
 gem 'country_select'
 gem 'cube-ruby'
-
-gem 'exception_notification'
 
 #gem 'mercury-rails'
 
@@ -55,41 +53,36 @@ gem 'ris_parser', :git => 'git://github.com/kf8a/ris_parser.git'
 
 gem 'thinking-sphinx'
 gem 'mysql2'
-# gem 'cache_digests'
-
 
 gem 'aws-sdk'
 gem "sitemap_generator"
 group :production do
-  # gem 'exception_notification'
+  gem 'exception_notification'
   gem 'unicorn'
  # gem 'newrelic_rpm'
 end
 
-group :assets do
-  gem 'therubyracer', :require => false
-	gem 'less-rails'
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'uglifier'
-end
+gem 'therubyracer', :require => false
+gem 'less-rails'
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier'
 
 group :development, :test  do
-  gem 'minitest'
-  gem 'test-unit'
+  gem "byebug"
+  gem "spring"
+  gem "web-console", '~> 2.0'
+#  gem 'minitest'
+#  gem 'test-unit'
   gem 'meta_request'
   gem 'rspec-rails'
   gem 'rspec-its'
-  gem 'rspec'
-  gem "shoulda", :git => 'git://github.com/thoughtbot/shoulda.git' 
   gem "annotate"
-
-  gem 'sqlite3'
 end
 
 group :test do
+  gem "shoulda", :git => 'git://github.com/thoughtbot/shoulda.git' 
   gem "shoulda-matchers" # to use rspec like syntax
-#  gem 'factory_girl'
   gem 'factory_girl_rails'
 
   #Cucumber stuff
