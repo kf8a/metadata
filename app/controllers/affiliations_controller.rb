@@ -1,7 +1,8 @@
 class AffiliationsController < ApplicationController
 
   before_filter :admin?, :except => [:index, :show] unless Rails.env == 'development'
-  before_filter :get_affiliation, :only => [:show, :edit, :update, :destroy]
+  helper_method :affiliation
+  # before_filter :get_affiliation, :only => [:show, :edit, :update, :destroy]
 
   def index
     @affiliations = Affiliation.all
@@ -14,10 +15,10 @@ class AffiliationsController < ApplicationController
   end
 
   def update
-    if @affiliation.update_attributes(params[:affiliation])
+    if affiliation.update_attributes(affiliation_params)
       flash[:notice] = 'Affiliation was successfully updated.'
     end
-    respond_with @affiliation
+    respond_with affiliation
   end
 
   # GET /affiliations/new
@@ -30,7 +31,7 @@ class AffiliationsController < ApplicationController
   end
 
   def create
-    @affiliation = Affiliation.new(params[:affiliation])
+    @affiliation = Affiliation.new(affiliation_params)
 
     if @affiliation.save
       flash[:notice] = 'Affiliation was successfully created.'
@@ -40,14 +41,19 @@ class AffiliationsController < ApplicationController
   end
 
   def destroy
-    @affiliation.destroy
+    affiliation.destroy
     flash[:notice] = 'Affiliation was successfully destroyed.'
     redirect_to 'index'
   end
 
   private ###########################################
 
-  def get_affiliation
-    @affiliation = Affiliation.find(params[:id])
+  def affiliation
+    Affiliation.find(params[:id])
   end
+
+  def affiliation_params
+    params.require(:affiliation).permit(:person_id, :role_id, :dataset_id, :seniority, :title)
+  end
+
 end

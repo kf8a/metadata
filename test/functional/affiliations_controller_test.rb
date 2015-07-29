@@ -21,7 +21,7 @@ class AffiliationsControllerTest < ActionController::TestCase
 
   context 'on POST :create' do
     setup do
-      post :create, :affiliation => {}
+      post :create, affiliation: {person_id: 1, role_id: 1}
     end
 
     should redirect_to("the affiliation page") {affiliation_url(assigns(:affiliation))}
@@ -34,11 +34,11 @@ class AffiliationsControllerTest < ActionController::TestCase
 
     context "PUT :update to affiliation with valid attributes" do
       setup do
-        put :update, :id => @affiliation, :affiliation => {}
+        put :update, id: @affiliation, affiliation: {person_id: 1}
       end
 
       should redirect_to("the affiliation page") {affiliation_url(@affiliation)}
-      should set_the_flash
+      should set_flash
     end
   end
 end
