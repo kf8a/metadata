@@ -1,9 +1,9 @@
 <h2>Create a new page</h2>
 
-<%= semantic_form_for @page do |form| %>
+<%= simple_form_for @page do |form| %>
   <%= render "shared/error_messages", :target => @page %>
 
   <%= render :partial => 'inputs',  :locals => { :form => form }  %>
   
-  <%= form.actions :submit %>
+  <%= form.button :submit %>
 <% end %>

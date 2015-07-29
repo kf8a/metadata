@@ -9,8 +9,8 @@ class PagesControllerTest < ActionController::TestCase
 
     context 'GET :show' do
       setup do
-        @page = FactoryGirl.create :page
-        get :show, :id => @page
+        @page = FactoryGirl.create :page, {title: "SHOW page"}
+        get :show, id: @page
       end
 
       should respond_with :success
@@ -35,7 +35,7 @@ class PagesControllerTest < ActionController::TestCase
     context 'GET: edit' do
       setup do
         page = FactoryGirl.create :page
-        get :edit, :id=> page
+        get :edit, id: page, page: {title: "EDITED page"}
       end
 
       should respond_with :success
@@ -44,7 +44,7 @@ class PagesControllerTest < ActionController::TestCase
     context 'POST :update' do
       setup do
         @page = FactoryGirl.create :page
-        post :update, :id => @page, :title => 'something else'
+        post :update, :id => @page, page: {title: 'something else'}
       end
 
       should redirect_to('the show page') {page_url(assigns(:page))}
@@ -52,7 +52,7 @@ class PagesControllerTest < ActionController::TestCase
 
     context 'PUT :create' do
       setup do
-        put :create
+        put :create, page: {title: "New page created"}
       end
 
       should redirect_to("the show page") {page_url(assigns(:page))}
