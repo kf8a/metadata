@@ -47,11 +47,11 @@ class ProjectsControllerTest < ActionController::TestCase
 
   context "on POST to :create for a valid project" do  
     setup do
-      post :create, :project => {}
+      post :create, project: {title: "New project"}
     end
 
     should redirect_to("the project's page") {project_url(assigns(:project))}
-    should set_the_flash
+    should set_flash
   end
 
   #A test should be made for trying to create an invalid project once invalid projects are possible.
@@ -67,7 +67,7 @@ class ProjectsControllerTest < ActionController::TestCase
         put :update, :id => @project, :project => {:title => "A new title"}
       end
 
-      should set_the_flash
+      should set_flash
       should redirect_to("the project's show page") {project_url(@project)}
     end
   end

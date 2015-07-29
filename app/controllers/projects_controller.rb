@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_filter :admin?, :except => [:index, :show]  if Rails.env == 'production'
   before_filter :get_project, :only => [:show, :edit, :update, :destroy]
-  
+
   # GET /projects
   # GET /projects.xml
   def index
@@ -42,7 +42,7 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.xml
   def create
-    @project = Project.new(params[:project])
+    @project = Project.new(project_params)
     if @project.save
       flash[:notice] = 'Project was successfully created.'
     end
@@ -52,7 +52,7 @@ class ProjectsController < ApplicationController
   # PUT /projects/1
   # PUT /projects/1.xml
   def update
-    if @project.update_attributes(params[:project])
+    if @project.update_attributes(project_params)
       flash[:notice] = 'Project was successfully updated.'
     end
     respond_with @project
@@ -68,10 +68,14 @@ class ProjectsController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   private
-  
+
   def get_project
     @project = Project.find(params[:id])
+  end
+
+  def project_params
+    params.require(:project).permit(:title, :abstract)
   end
 end
