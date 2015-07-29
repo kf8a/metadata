@@ -37,7 +37,7 @@ class PermissionsController < ApplicationController
   def destroy
     user = User.find(params[:user])
     owner = current_user
-    permissions = Permission.find_all_by_user_id_and_datatable_id_and_owner_id(user.id, @datatable.id, owner.id)
+    permissions = Permission.where(user_id: user.id, datatable_id: @datatable.id, owner_id: owner.id)
     permissions.each do |permission|
       permission.destroy
     end
