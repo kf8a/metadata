@@ -19,7 +19,7 @@ class UploadsControllerTest < ActionController::TestCase
     get :new
     assert_response :success
   end
-  
+
   test "should assign upload in new" do
     get :new
     assert assigns(:upload)
@@ -30,19 +30,19 @@ class UploadsControllerTest < ActionController::TestCase
       post :create, :upload => {:title => 'Title', :abstract => 'Abstract', :owners => 'Me'}
     end
   end
-  
+
   test "should show an upload" do
     post :create, :upload => {:title => 'Title', :abstract => 'Abstract', :owners => 'Me'}
-    @upload = Upload.find(:first)
+    @upload = Upload.first
     get :show, :id => @upload.id
     assert_response :success
   end
-  
+
   context 'GET :new in the glbrc subdomain' do
     setup do
       get :new, :requested_subdomain => 'glbrc'
     end
-    
+
     should render_template 'new'
     should render_with_layout(:glbrc)
   end
