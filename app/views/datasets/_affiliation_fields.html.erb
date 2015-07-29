@@ -1,6 +1,4 @@
-<%= f.inputs do %>
-  <%= f.input :person, :member_label => :short_full_name, :collection => Person.order(:sur_name) %>
-  <%= f.input :role %>
-  <%= f.input :seniority %>
-  <%= link_to_remove_fields "Remove", f %>
-<% end %>
+<%= f.input :person, collection: Person.order(:sur_name).all %>
+<%= f.input :role %>
+<%= f.input :seniority %>
+<%= link_to_remove_fields "Remove", f %>

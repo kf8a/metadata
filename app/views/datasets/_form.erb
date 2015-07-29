@@ -1,14 +1,24 @@
-<%= form.inputs :dataset, :title, :abstract, :website, :sponsor, :status, :initiated, :completed, :core_dataset, :on_web, :keyword_list %>
+<%= form.input :dataset %>
+<%= form.input :title %>
+<%= form.input :abstract %>
+<%= form.input :website %>
+<%= form.input :sponsor %>
+<%= form.input :status %>
+<%= form.input :initiated %>
+<%= form.input :completed %>
+<%= form.input :core_dataset %>
+<%= form.input :on_web %>
+<%= form.input :keyword_list %>
 
 <div id = 'dataset_files'>
-  <%= form.inputs :for => :dataset_files do |f| %>
+  <%= form.simple_fields_for :dataset_files do |f| %>
     <%= render :partial => 'dataset_file_fields', :locals => {:f => f} %>
   <% end %>
 </div>
 <%= link_to_add_fields "Add File", form, :dataset_files %>
 
 <div id = 'affiliations'>
-    <%= form.inputs :for => :affiliations do |f| %>
+    <%= form.simple_fields_for :affiliations do |f| %>
       <%= render :partial => 'affiliation_fields', :locals => {:f => f} %>
     <% end %>
 </div>
