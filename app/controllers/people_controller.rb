@@ -45,8 +45,6 @@ class PeopleController < ApplicationController
     @roles = lter_roles 
   end
 
-
-
   # GET /people/1/edit
   def edit
     @title = 'Edit ' + person.full_name
