@@ -1,5 +1,9 @@
-<%= semantic_form_for @template do |form|%>
+<%= simple_form_for @template do |form|%>
   
-  <%= form.inputs %>
-  <%= form.actions %>
+  <%= form.input :website %>
+  <%= form.input :controller %>
+  <%= form.input :action %>
+  <%= form.input :layout %>
+
+  <%= form.button :submit %>
 <% end %>
