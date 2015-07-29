@@ -191,25 +191,6 @@ class PersonTest < ActiveSupport::TestCase
     end
   end
 
-  context 'Some people have a dataset role, others do not. ' do
-    setup do
-      data_role = FactoryGirl.create(:role)
-      @dataperson1 = FactoryGirl.create(:person, :sur_name => 'Jones')
-      @dataperson1.expects(:dataset_roles).returns([data_role])
-      @dataperson2 = FactoryGirl.create(:person, :sur_name => 'Smith')
-      @dataperson2.expects(:dataset_roles).returns([data_role])
-      @nodataperson = FactoryGirl.create(:person, :sur_name => 'Nodata')
-    end
-
-    context '#has_dataset?' do
-      should "return true for those with dataset roles, false for others" do
-        assert @dataperson1.has_dataset?
-        assert @dataperson2.has_dataset?
-        assert !@nodataperson.has_dataset?
-      end
-    end
-  end
-
   #TODO a test needs to be written for find_all_with_dataset
 
   # personnelDB

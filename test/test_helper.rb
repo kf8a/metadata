@@ -4,8 +4,9 @@ require 'rails/test_help'
 require 'shoulda'
 require 'factory_girl'
 require 'clearance/testing'
+require "paperclip/matchers"
+
 FactoryGirl.reload
-require Rails.root.join('test', 'shoulda_macros', 'paperclip')
 
 require "#{Rails.root}/db/seeds.rb"
 
@@ -73,7 +74,8 @@ class ActiveSupport::TestCase
   # end
 end
 
-unless defined?(Test::Unit::AssertionFailedError)
-  class Test::Unit::AssertionFailedError < ActiveSupport::TestCase::Assertion
-  end
+class ActiveSupport::TestCase
+  extend Paperclip::Shoulda::Matchers
+
+  #...other initializers...#
 end

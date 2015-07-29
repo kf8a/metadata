@@ -8,9 +8,26 @@ describe Person do
       affiliation = FactoryGirl.create :affiliation
       affiliation.person = person
       affiliation.save
-      person.affiliations.size.should == 1
+      expect(person.affiliations.size).to eq 1
       person.destroy
-      expect { Affiliation.find(affiliation) }.to raise_error(ActiveRecord::RecordNotFound)
+      expect { Affiliation.find(affiliation.id) }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+  end
+
+  describe 'Some people have a dataset role, others do not. ' do
+    before(:each) do
+      data_role = FactoryGirl.create(:role)
+      @dataperson1 = FactoryGirl.create(:person, :sur_name => 'Jones')
+      allow(@dataperson1).to receive(:dataset_roles).and_return([data_role])
+      @dataperson2 = FactoryGirl.create(:person, :sur_name => 'Smith')
+      allow(@dataperson2).to receive(:dataset_roles).and_return([data_role])
+      @nodataperson = FactoryGirl.create(:person, :sur_name => 'Nodata')
+    end
+
+    it "return true for those with dataset roles, false for others" do
+      expect(@dataperson1.has_dataset?).to be_truthy
+      expect(@dataperson2.has_dataset?).to be_truthy
+      expect(!@nodataperson.has_dataset?).to be_truthy
     end
   end
 
