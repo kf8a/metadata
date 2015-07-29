@@ -60,7 +60,7 @@ class AbstractsController < ApplicationController
   # PUT /meeting_abstracts/1
   # PUT /meeting_abstracts/1.xml
   def update
-    if abstract.update_attributes(params[:abstract])
+    if abstract.update_attributes(abstract_params)
       flash[:notice] = 'Meeting abstract was successfully updated.'
     end
     respond_with abstract
@@ -80,6 +80,10 @@ class AbstractsController < ApplicationController
   private
 
   def abstract
-    @abstract ||= params[:id] ? Abstract.find(params[:id]) : Abstract.new(params[:abstract])
+    @abstract ||= params[:id] ? Abstract.find(params[:id]) : Abstract.new(abstract_params)
+  end
+
+  def abstract_params
+    params.require(:abstract).permit(:title, :authors, :abstract, :meeting_id, :pdf_file)
   end
 end

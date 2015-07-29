@@ -24,9 +24,6 @@ class Abstract < ActiveRecord::Base
 end
 
 
-
-
-
 # == Schema Information
 #
 # Table name: meeting_abstracts

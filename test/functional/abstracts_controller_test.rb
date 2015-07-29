@@ -36,8 +36,8 @@ class AbstractsControllerTest < ActionController::TestCase
       post :create, :abstract => {:abstract => 'A valid abstract', :meeting_id => @meeting.id}
     end
 
-    should redirect_to("the abstract's meeting page") {meeting_url(@meeting)}
-    should set_the_flash
+    should redirect_to("the abstract page") {abstract_url(assigns(:abstract))}
+    should set_flash
   end
 
   context "on POST to :create for an invalid abstract" do
@@ -77,7 +77,7 @@ class AbstractsControllerTest < ActionController::TestCase
         put :update, :id => @abstract, :abstract => {:abstract => "A whole new abstract"}
       end
 
-      should set_the_flash
+      should set_flash
       should redirect_to("the abstract's show page") {abstract_url(@abstract)}
     end
 
@@ -87,7 +87,7 @@ class AbstractsControllerTest < ActionController::TestCase
         put :update, :id => @abstract, :abstract => {:abstract => nil}
       end
 
-      should_not set_the_flash
+      should_not set_flash
       should render_template :edit
     end
   end
