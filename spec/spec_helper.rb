@@ -7,6 +7,8 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'clearance/testing'
 require 'factory_girl'
+require "paperclip/matchers"
+
 FactoryGirl.reload
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -25,3 +27,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 end
 
+def signed_in_as_admin
+  admin = User.find_by_role('admin') || FactoryGirl.create(:admin_user, :email => 'admin@example.com')
+  sign_in_as(admin)
+end

@@ -1,8 +1,6 @@
 class PeopleController < ApplicationController
   helper_method :people, :person
   before_filter :admin?, :except => [:index, :show, :alphabetical, :emeritus] unless Rails.env == 'development'
-  # before_filter :get_person, :only => [:show, :edit, :update, :destroy]
-  # before_filter :get_people, :only => [:index, :alphabetical, :emeritus, :show_all]
 
   # GET /people
   # GET /people.xml
@@ -44,19 +42,21 @@ class PeopleController < ApplicationController
   # GET /people/new
   def new
     @person = Person.new
-    @roles = Role.find_all_by_role_type_id(RoleType.find_by_name('lter'))
+    @roles = lter_roles 
   end
+
+
 
   # GET /people/1/edit
   def edit
     @title = 'Edit ' + person.full_name
-    @roles = Role.find_all_by_role_type_id(RoleType.find_by_name('lter'))
+    @roles = lter_roles
   end
 
   # POST /people
   # POST /people.xml
   def create
-    @person = Person.new(params[:person])
+    @person = Person.new(person_params)
     if @person.save
       flash[:notice] = 'Person was successfully created.'
     end
@@ -66,7 +66,7 @@ class PeopleController < ApplicationController
   # PUT /people/1
   # PUT /people/1.xml
   def update
-    if person.update_attributes(params[:person])
+    if person.update_attributes(person_params)
       flash[:notice] = 'Person was successfully updated.'
     end
     respond_with person
@@ -98,5 +98,17 @@ class PeopleController < ApplicationController
 
   def person
     Person.find(params[:id])
+  end
+
+  def person_params
+    params.require(:person).permit(:sur_name, :given_name, :middle_name, :title, :organization,
+                                   :sub_organization, :street_address, :city, :locale, 
+                                   :country, :postal_code, :phone, :fax, :email, 
+                                   :url, :deceased, lter_role_ids: [])
+
+  end
+
+  def lter_roles
+    Role.where(role_type_id: RoleType.where(name: 'lter').first)
   end
 end
