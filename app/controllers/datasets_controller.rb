@@ -63,7 +63,7 @@ class DatasetsController < ApplicationController
     @people   = Person.by_sur_name
     @studies = Study.by_weight
     @themes = Theme.by_weight
-    @roles  = Role.find_all_by_role_type_id(RoleType.find_by_name('lter_dataset'))
+    @roles  = dataset_roles 
     @websites = Website.all.collect {|website| [website.name, website.id]}
     @sponsors = Sponsor.all.collect {|sponsor| [sponsor.name, sponsor.id]}
   end
@@ -72,7 +72,7 @@ class DatasetsController < ApplicationController
   def set_affiliation_for
     @affiliation = Affiliation.new
     people = Person.by_sur_name_asc
-    roles = Role.find_all_by_role_type_id(RoleType.find_by_name('lter_dataset'))
+    roles = dataset_roles
 
     respond_to do |format|
       format.html
@@ -96,7 +96,7 @@ class DatasetsController < ApplicationController
     elsif params[:dataset][:eml_file].present?
       @dataset = Dataset.from_eml_file(params[:dataset][:eml_file])
     else
-      @dataset = Dataset.new(params[:dataset])
+      @dataset = Dataset.new(dataset_params)
     end
     unless @dataset.class == Dataset #if not a Dataset, it will be an array of errors
       flash[:notice] = "Eml import had errors: " + @dataset.collect{|error| error.to_s}.join(' ')
@@ -113,7 +113,7 @@ class DatasetsController < ApplicationController
   def update
     @sponsors = Sponsor.all.collect {|sponsor| [sponsor.name, sponsor.id]}
     @websites = Website.all.collect {|website| [website.name, website.id]}
-    if @dataset.update_attributes(params[:dataset])
+    if @dataset.update_attributes(dataset_params)
       flash[:notice] = 'Dataset was successfully updated.'
     end
     respond_with @dataset
@@ -172,4 +172,14 @@ class DatasetsController < ApplicationController
   def get_dataset
     @dataset  = dataset
   end
+
+  def dataset_params
+    params.require(:dataset).permit(:dataset, :title, :abstract, :status, :initiated, :completed, :released,
+                                   :on_web, :core_dataset, :project_id, :metacat_id, :sponsor_id, :website_id)
+  end
+
+  def dataset_roles
+    Role.where(role_type_id: RoleType.where(name: 'lter_dataset').first)
+  end
+
 end

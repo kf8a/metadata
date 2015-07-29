@@ -6,8 +6,8 @@ require 'eml'
 include REXML
 
 class Datatable < ActiveRecord::Base
-  attr_protected :object
-  attr_accessor :materialized_datatable_id
+  # attr_protected :object
+  # attr_accessor :materialized_datatable_id
 
   acts_as_taggable_on :keywords
 
@@ -25,8 +25,8 @@ class Datatable < ActiveRecord::Base
   has_and_belongs_to_many :protocols
   belongs_to              :study
   belongs_to              :theme
-  has_many                :variates, :order => :weight
-  has_many                :visualizations, :order => :weight
+  has_many                :variates, -> {order :weight}
+  has_many                :visualizations, -> {order :weight}
 
   validates :title,   :presence => true
   validates :dataset, :presence => true
@@ -35,7 +35,9 @@ class Datatable < ActiveRecord::Base
   accepts_nested_attributes_for :data_contributions, :allow_destroy => true
   accepts_nested_attributes_for :variates, :allow_destroy => true
 
-  scope :by_name, :order => 'name'
+
+  scope :by_name, -> {order :name}
+
 
   if Rails.env.production?
     has_attached_file :csv_cache,
@@ -48,6 +50,10 @@ class Datatable < ActiveRecord::Base
     has_attached_file :csv_cache, :url => "/datatables/:id/download",
         :path => ":rails_root/uploads/datatables/:attachment/:id.:extension"
   end
+
+  validates_attachment_file_name :csv_cache, :matches => [/csv\Z/ ]
+
+  # do_not_validate_attachment_file_type :csv_cache
 
   include Workflow
 
@@ -134,9 +140,9 @@ class Datatable < ActiveRecord::Base
   def compile_personnel(source, personnel={})
     source.each do |contribution|
       if personnel[contribution.person]
-        personnel[contribution.person].push((contribution.role.name))
+        personnel[contribution.person].push((contribution.role.try(:name)))
       else
-        personnel[contribution.person] = [contribution.role.name]
+        personnel[contribution.person] = [contribution.role.try(:name)].to_a
       end
     end
     personnel

@@ -1,6 +1,6 @@
 class DatasetFile < ActiveRecord::Base
   belongs_to :dataset
-  attr_accessible :name, :data
+#  attr_accessible :name, :data
 
   if Rails.env.production?
     has_attached_file :data,
