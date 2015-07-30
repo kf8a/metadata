@@ -6,7 +6,7 @@ class SessionsControllerTest < ActionController::TestCase
     context 'create' do
       setup do
        @user = FactoryGirl.create:user, :email => 'lter@lter.edu', :password => 'lter'
-        post :create, :session => {:email => 'lter@lter.edu', :password => 'lter', :openid_url => ''}
+        post :create, :session => {:email => 'lter@lter.edu', :password => 'lter'}
       end
       should 'sign in the user' do
         assert_equal @user, @controller.current_user
