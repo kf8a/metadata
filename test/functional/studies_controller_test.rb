@@ -27,7 +27,7 @@ class StudiesControllerTest < ActionController::TestCase
     context 'on POST to :update' do
       setup do
         @study = FactoryGirl.create(:study, :id => 3)
-        post :update, :id => 3
+        post :update, :id => 3, study: {title: "New Title"}
       end
 
       should redirect_to("the datatables page") {datatables_url}

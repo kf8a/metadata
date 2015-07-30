@@ -34,7 +34,7 @@ class StudiesController < ApplicationController
    # POST /studies/1
   def update
     respond_to do |format|
-      if @study.update_attributes(params[:study])
+      if @study.update_attributes(study_params)
         flash[:notice] = 'Study was successfully updated.'
         format.html { redirect_to datatables_url }
         format.xml  { head :ok }
@@ -49,5 +49,9 @@ class StudiesController < ApplicationController
 
   def get_study
     @study = Study.find(params[:id])
+  end
+
+  def study_params
+    params.require(:study).permit(:name, :description, :weight,:synopsis, :url, :code )
   end
 end
