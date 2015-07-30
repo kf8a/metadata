@@ -2,6 +2,7 @@ class MeetingsController < ApplicationController
 
   before_filter :admin?, :except => [:index, :show]  if Rails.env == 'production'
   before_filter :get_meeting, :only => [:show, :edit, :update, :destroy]
+  helper_method :venues
 
   def index
     # venue = 1 # KBS
@@ -23,29 +24,26 @@ class MeetingsController < ApplicationController
   # GET /meeting/1.xml
   def show
     respond_to do |format|
-      format.html # show.rhtml
+      format.html
       format.xml  { render :xml => @person.to_xml }
     end
   end
 
   def new
     @meeting = Meeting.new
-    @venues = VenueType.find(:all).collect { |type| [type.name, type.id] }
   end
 
   def edit
-    @venues = VenueType.find(:all).collect { |type| [type.name, type.id] }
   end
 
   def create
-    @meeting = Meeting.new(params[:meeting])
+    @meeting = Meeting.new(meeting_params)
     respond_to do |format|
       if @meeting.save
         flash[:notice] = 'Meeting was successfully created.'
         format.html { redirect_to meetings_url }
         format.xml  { head :created, :location => meeting_url(@meeting) }
       else
-        @venues = VenueType.find(:all).collect { |type| [type.name, type.id] }
         format.html { render "new" }
         format.xml  { render :xml => @meeting.errors.to_xml }
       end
@@ -54,7 +52,7 @@ class MeetingsController < ApplicationController
 
   def update
     respond_to do |format|
-       if @meeting.update_attributes(params[:meeting])
+       if @meeting.update_attributes(meeting_params)
          flash[:notice] = 'Meetings was successfully updated.'
          format.html { redirect_to meeting_url(@meeting) }
          format.xml  { head :ok }
@@ -96,5 +94,14 @@ class MeetingsController < ApplicationController
 
   def meeting
     Meeting.find(params[:id])
+  end
+
+  def venues
+    VenueType.pluck(:name, :id)
+  end
+
+  def meeting_params
+    params.require(:meeting).permit(:date, :title, :announcement, 
+                                    :venue_type_id,:date_to )
   end
 end

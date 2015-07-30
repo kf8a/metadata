@@ -2,7 +2,7 @@
 
 <%= form_for(:meeting, :url => meetings_path) do |f| %>
   <%= render "shared/error_messages", :target => @meeting %>
-  <%= render :partial=>"form" , :locals=>{:f => f, :venues => @venues}%>
+  <%= render :partial=>"form" , :locals=>{:f => f, :venues => venues}%>
   <p>
     <%= submit_tag "Create" %>
   </p>

@@ -180,6 +180,7 @@ FactoryGirl.define do
 
   factory :meeting do
     venue_type_id   1
+    date Date.today
   end
 
   factory :collection do

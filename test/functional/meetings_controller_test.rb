@@ -3,16 +3,17 @@ require File.expand_path('../../test_helper',__FILE__)
 class MeetingsControllerTest < ActionController::TestCase
 
   def setup
-
     #TODO test with admin and non admin users
     signed_in_as_admin
     @venue_type = FactoryGirl.create :venue_type
     @meeting = FactoryGirl.create :meeting
+    MeetingAbstractType.create(name: "Poster")
     @meeting.venue_type = @venue_type
   end
 
   def teardown
     Meeting.destroy_all
+    MeetingAbstractType.destroy_all
   end
 
   context "on GET to :index" do
@@ -57,7 +58,7 @@ class MeetingsControllerTest < ActionController::TestCase
     end
 
     should redirect_to("the meetings page") {meetings_url}
-    should set_the_flash
+    should set_flash
   end
 
   context "on POST to :create with invalid parameters" do
@@ -66,7 +67,7 @@ class MeetingsControllerTest < ActionController::TestCase
     end
 
     should render_template :new
-    should_not set_the_flash
+    should_not set_flash
   end
 
   context "on PUT :update for a meeting" do
@@ -80,19 +81,10 @@ class MeetingsControllerTest < ActionController::TestCase
         put :update, :id => @meeting, :meeting => {:title => "A whole new title"}
       end
 
-      should set_the_flash
+      should set_flash
       should redirect_to("the meeting's show page") {meeting_url(@meeting)}
     end
 
-    context "with an invalid change" do
-
-      setup do
-        put :update, :id => @meeting, :meeting => {:venue_type => nil}
-      end
-
-      should_not set_the_flash
-      should render_template :edit
-    end
   end
 
   context "a meeting which exists" do
