@@ -23,14 +23,14 @@ class AbstractsController < ApplicationController
 
   # GET meeting_abstracts/new?meeting=1
   def new
-    meeting  = Meeting.find(params[:meeting])
+    meeting  = Meeting.find(params[:meeting_id])
     abstract.meeting_id = meeting.id
-    @abstract_types = MeetingAbstractType.all.collect { |type| [type.name, type.id]}
+    @abstract_types = MeetingAbstractType.pluck(:name, :id)
   end
 
 
   def create
-    @abstract_types = MeetingAbstractType.all.collect { |type| [type.name, type.id]}
+    @abstract_types = MeetingAbstractType.pluck(:name, :id)
     respond_to do |format|
       if abstract.save
         flash[:notice] = 'Meeting Abstract was successfully created.'
@@ -84,6 +84,6 @@ class AbstractsController < ApplicationController
   end
 
   def abstract_params
-    params.require(:abstract).permit(:title, :authors, :abstract, :meeting_id, :pdf_file)
+    params.permit(:title, :authors, :abstract, :meeting_id, :pdf_file)
   end
 end
