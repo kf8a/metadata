@@ -1,7 +1,7 @@
 class UsersController < Clearance::UsersController
 
   def create
-    @user = User.new params[:user]
+    @user = User.new user_params
     @invite = Invite.find_redeemable(params[:invite_code])
 
     if @user.save
@@ -25,5 +25,11 @@ class UsersController < Clearance::UsersController
   end
 
   def show
+  end
+
+  private 
+
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation)
   end
 end

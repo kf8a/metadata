@@ -24,8 +24,8 @@ class UsersControllerTest < ActionController::TestCase
 
   context 'try to set the role yourself' do
     setup do
-      get :create, :email => FactoryGirl.generate(:email), :password => 'password', 
-          :password_confirmation => 'password', :role => 'admin'
+      get :create, user: {:email => FactoryGirl.generate(:email), :password => 'password', 
+          :password_confirmation => 'password', :role => 'admin'}
     end
 
     should 'fail' do 
