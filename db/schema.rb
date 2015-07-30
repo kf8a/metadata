@@ -216,6 +216,7 @@ ActiveRecord::Schema.define(version: 20150617005803) do
     t.integer  "deprecated_in_fovor_of"
     t.text     "deprecation_notice"
     t.integer  "number_of_released_records"
+    t.text     "access_statement"
     t.text     "scores"
     t.date     "completed_on"
     t.text     "workflow_state"
