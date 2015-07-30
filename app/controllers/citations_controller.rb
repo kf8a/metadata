@@ -107,7 +107,7 @@ class CitationsController < ApplicationController
 
   def create
     citation_class = params[:citation].try(:delete, :type)
-    @citation = website.citations.new(params[:citation])
+    @citation = website.citations.new(citation_params)
     @citation.type = citation_class
     flash[:notice] = 'Citation was successfully created.' if @citation.save
 
@@ -121,7 +121,7 @@ class CitationsController < ApplicationController
   def update
     @citation = Citation.find(params[:id])
     @citation.type = params[:citation].try(:delete, 'type')
-    @citation.update_attributes(params[:citation])
+    @citation.update_attributes(citation_params)
     respond_with @citation, :location=>citation_url
   end
 
@@ -175,5 +175,14 @@ class CitationsController < ApplicationController
       format.bib { send_data Citation.to_bib(@citations), :filename=>'glbdrc.bib' }
       format.rss { render :layout => false } #index.rss.builder
     end
+  end
+
+  def citation_params
+    params.require(:citation).permit(:title, :abstract, :pub_date, :pub_year,
+                                    :citation_type_id, :address, :notes, :publication,
+                                    :start_page_number, :ending_page_number, :periodical_full_name,
+                                    :periodical_abbreviation, :volume, :issue, :city, :publisher,
+                                    :secondary_title, :series_title, :isbn, :doi, :full_text,
+                                    :publisher_url, :website_id, :pdf, :state, :open_access, :type)
   end
 end

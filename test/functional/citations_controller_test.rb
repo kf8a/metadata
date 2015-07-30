@@ -4,7 +4,7 @@ class CitationsControllerTest < ActionController::TestCase
 
   context 'anonymous user' do
     setup do
-      @website = Website.find_or_create_by_name('lter')
+      @website = Website.where(name: 'lter').first_or_create
       @controller.current_user = nil
     end
 
@@ -295,7 +295,7 @@ class CitationsControllerTest < ActionController::TestCase
   context 'signed in user' do
 
     setup do
-      @website = Website.find_or_create_by_name('lter')
+      @website = Website.where(name: 'lter').first_or_create
       signed_in_as_normal_user
     end
 
@@ -354,7 +354,7 @@ class CitationsControllerTest < ActionController::TestCase
   context 'signed in as admin' do
 
     setup do
-      @website = Website.find_or_create_by_name('lter')
+      @website = Website.where(name: 'lter').first_or_create
       signed_in_as_admin
     end
 
@@ -373,7 +373,7 @@ class CitationsControllerTest < ActionController::TestCase
       end
 
       should 'create a citation for the website currently using' do
-        assert_equal @website, Citation.find(assigns(:citation)).website
+        assert_equal @website, assigns(:citation).website
       end
 
       should redirect_to('the citation page') { citation_url(assigns(:citation)) }
@@ -391,7 +391,7 @@ class CitationsControllerTest < ActionController::TestCase
       end
 
       should 'be an article' do
-        assert_kind_of ArticleCitation, Citation.find(assigns(:citation).id)
+        assert_kind_of ArticleCitation, assigns(:citation)
       end
     end
 
