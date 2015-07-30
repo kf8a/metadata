@@ -44,10 +44,10 @@ class PagesControllerTest < ActionController::TestCase
     context 'POST :update' do
       setup do
         @page = FactoryGirl.create :page
-        post :update, :id => @page, page: {title: 'something else'}
+        post :update, id: @page.id, page: {title: 'something else'}
       end
 
-      should redirect_to('the show page') {page_url(assigns(:page))}
+      should redirect_to('the show page') {page_url(@page)}
     end
 
     context 'PUT :create' do

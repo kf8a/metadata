@@ -27,6 +27,7 @@ class PagesController < ApplicationController
   end
 
   def edit
+    @page = page
   end
 
   def update
@@ -34,7 +35,7 @@ class PagesController < ApplicationController
       flash[:notice] = 'Page was successfully updated.'
     end
 
-    respond_with @page
+    respond_with page
   end
 
   def destroy 
