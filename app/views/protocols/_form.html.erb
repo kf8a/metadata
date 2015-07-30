@@ -1,4 +1,3 @@
-<%= form.inputs do %>
 <%= form.input :websites, :as => :check_boxes %>
 <%= form.input :name, :hint => 'a short name following the kbs convention' %>
 <%= form.input :title, :size=> 60, :hint => 'A descriptive title of the protocol', :input_html => { :size => 60 }  %>
@@ -9,10 +8,9 @@
 <%= form.input :abstract %>
 <%= form.input :body, :input_html => {:rows => 50} %>
 <%= form.input :people, :collection=>Person.by_sur_name, :as => :check_boxes, :wrapper_html => {:class => 'scroll_checkboxes'} %>
-<%= form.input :datatables, :collection=>Datatable.find(:all, :order=>'title'), :as => :check_boxes, :wrapper_html=>{:class => 'scroll_checkboxes'} %>
+<%= form.input :datatables, :collection=>Datatable.order('title'), :as => :check_boxes, :wrapper_html=>{:class => 'scroll_checkboxes'} %>
 <%= form.input :dataset, :collection => Dataset.all, :include_blank => true %>
 <%= form.input :change_summary, :input_html => {:rows =>2}%>
 
-<%= form.inputs :pdf , :as => :file %>
-<% end %>
+<%= form.input :pdf , :as => :file %>
 <%= check_box_tag :new_version %> Consider this a new Version

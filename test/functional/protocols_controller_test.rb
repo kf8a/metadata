@@ -19,7 +19,7 @@ class ProtocolsControllerTest < ActionController::TestCase
 
     context 'GET :edit' do
       setup do
-        get :edit, :id => @protocol
+        get :edit, id: @protocol
       end
 
       should respond_with(:success)
@@ -27,15 +27,14 @@ class ProtocolsControllerTest < ActionController::TestCase
 
     context 'POST: create' do
       setup do
-        post :create, :protocol => {:dataset_id => 35 }
+        post :create, protocol: {:dataset_id => 35 }
       end
      should redirect_to('the protocol show page') {protocol_path(assigns(:protocol))}
     end
 
     context 'POST with website' do
       setup do
-        @protocol = FactoryGirl.create(:protocol)
-        post :create, :id => @protocol, :websites=>['2']
+        post :create, protocol: {websites: ['2']}
       end
 
       should 'assign to protocol ' do
@@ -47,7 +46,7 @@ class ProtocolsControllerTest < ActionController::TestCase
 
     context 'PUT :update' do
       setup do
-        put :update, :id => @protocol, :protocol => {:description => 'A brand new description'}
+        put :update, id: @protocol, protocol: {:description => 'A brand new description'}
       end
 
       should redirect_to('the protocol page') {protocol_url(assigns(:protocol))}
@@ -58,7 +57,7 @@ class ProtocolsControllerTest < ActionController::TestCase
 
     context 'POST: update with version' do
       setup do 
-        put :update, :id => @protocol, :protocol => {:title => 'new protocol'}, :new_version => "1"
+        put :update, id: @protocol, protocol: {:title => 'new protocol'}, :new_version => "1"
       end
 
       should 'create a new protocol' do
@@ -68,7 +67,7 @@ class ProtocolsControllerTest < ActionController::TestCase
       should 'depreate the old protocol' do
         assert_equal @protocol.id, assigns(:protocol).deprecates
         assert_equal true, assigns(:protocol).active?
-        assert_equal false, Protocol.find(@protocol).active?
+        assert_equal false, Protocol.find(@protocol.id).active?
       end
 
       should redirect_to('the new protocol') {protocol_path(assigns(:protocol))}
