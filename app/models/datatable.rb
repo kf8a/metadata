@@ -7,7 +7,7 @@ include REXML
 
 class Datatable < ActiveRecord::Base
   # attr_protected :object
-  # attr_accessor :materialized_datatable_id
+  attr_accessor :materialized_datatable_id
 
   acts_as_taggable_on :keywords
 

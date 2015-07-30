@@ -167,11 +167,11 @@ class DatatablesControllerTest < ActionController::TestCase
 
     context "trying to create datatable with invalid parameters" do
       setup do
-        post :create, :datatable => {:title => nil}
+        post :create, datatable: {:title => nil}
       end
 
       should render_template "new"
-      should_not set_the_flash
+      should_not set_flash
     end
 
     context 'GET :show in the default domain' do
@@ -275,7 +275,7 @@ class DatatablesControllerTest < ActionController::TestCase
     end
 
     should render_template "edit"
-    should_not set_the_flash
+    should_not set_flash
   end
 
   def test_should_destroy_datatable
@@ -302,7 +302,7 @@ class DatatablesControllerTest < ActionController::TestCase
     end
 
     should redirect_to("datatables index") {datatables_url}
-    should_not set_the_flash
+    should_not set_flash
   end
 
   context "GET search with empty search parameters" do

@@ -106,6 +106,7 @@ class DatatablesController < ApplicationController
     @people = Person.all
     @units = Unit.all
 
+    datatable.create(datatable_params)
     if datatable.save
       flash[:notice] = 'Datatable was successfully created.'
     end
@@ -121,7 +122,7 @@ class DatatablesController < ApplicationController
     @people = Person.all
     @units = Unit.all
 
-    if datatable.update_attributes(params[:datatable])
+    if datatable.update_attributes(datatable_params)
       flash[:notice] = 'Datatable was successfully updated.'
     end
 
@@ -187,6 +188,7 @@ class DatatablesController < ApplicationController
 
     return unless params[:id]
 
+    #TODO this next line might not be needed
     datatable  = Datatable.find(params[:id])
 
     if datatable.study
@@ -195,11 +197,6 @@ class DatatablesController < ApplicationController
       crumb.name = study.name
       @crumbs << crumb
     end
-    # crumb = Struct::Crumb.new
-    #
-    # crumb.url =  dataset_path(datatable.dataset)
-    # crumb.name = datatable.dataset.title
-    # @crumbs << crumb
 
   end
 
@@ -237,9 +234,17 @@ class DatatablesController < ApplicationController
     end
   end
 
+  def datatable_params
+    params.require(:datatable).permit(:name, :title, :comments, :dataset_id, :data_url, :is_restricted,
+                                      :description, :begin_date, :end_date, :on_web,
+                                     :theme_id, :core_area_id, :weight, :study_id, :deprecation_notice,
+                                     :is_secondary)
+  end
+
   # def reject_robots
   #   if params[:id] == 'robots'
   #     render :status => 404
   #   end
   # end
+  
 end
