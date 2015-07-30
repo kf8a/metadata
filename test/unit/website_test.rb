@@ -31,15 +31,10 @@ class WebsiteTest < ActiveSupport::TestCase
 
     # This needs to have a record in the database before it will pass
     should validate_uniqueness_of :name
-    
-    should 'find a template' do
-      assert !@website.layout('datatable', 'show').nil?
-    end
 
-    should 'find the right template' do
-      assert @website.layout('datatable', 'show').kind_of?(Liquid::Template)
-      assert Liquid::Template.parse(@template.layout).render == @website.layout('datatable', 'show').render
-    end
+    # should 'find a template' do
+    #   assert !@website.layout('datatable', 'show').nil?
+    # end
 
   end
 end

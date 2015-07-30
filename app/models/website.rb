@@ -16,10 +16,10 @@ class Website < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_presence_of :name
 
-  def layout(controller, action)
-    template = self.templates.find_by_controller_and_action(controller, action)
-    Liquid::Template.parse(template.layout) if template
-  end
+  # def layout(controller, action)
+  #   template = self.templates.where(controller: controller, action: action)
+  #   Liquid::Template.parse(template.layout) if template
+  # end
 end
 
 
