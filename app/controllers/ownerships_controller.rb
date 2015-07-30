@@ -44,7 +44,7 @@ class OwnershipsController < ApplicationController
   def revoke
     user = User.find(params[:user])
     datatable = Datatable.find(params[:datatable])
-    ownerships = Ownership.find_all_by_user_id_and_datatable_id(user, datatable)
+    ownerships = Ownership.where(user_id: user, datatable_id: datatable)
     ownerships.each do |ownership|
       ownership.destroy
     end
