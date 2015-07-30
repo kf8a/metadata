@@ -61,7 +61,7 @@ class InvitesControllerTest < ActionController::TestCase
 
     context 'PUT :update' do
       setup do
-        put :update, :id => @invite, :invite => {}
+        put :update, :id => @invite, :invite => {email: "bob@gmail.com"}
       end
 
       should 'redirect to the show page' do

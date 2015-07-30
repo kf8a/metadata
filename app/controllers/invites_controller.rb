@@ -41,7 +41,7 @@ class InvitesController < ApplicationController
   # POST /invites
   # POST /invites.xml
   def create
-    @invite = Invite.new(params[:invite])
+    @invite = Invite.new(invite_params)
 
     respond_to do |format|
       if @invite.save
@@ -58,7 +58,7 @@ class InvitesController < ApplicationController
   # PUT /invites/1.xml
   def update
     respond_to do |format|
-      if @invite.update_attributes(params[:invite])
+      if @invite.update_attributes(invite_params)
         format.html { redirect_to(@invite, :notice => 'Invite was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -90,6 +90,10 @@ class InvitesController < ApplicationController
   
   def get_invite
     @invite = Invite.find(params[:id])
+  end
+
+  def invite_params
+    params.require(:invite).permit(:firstname, :lastname, :email)
   end
 
 end
