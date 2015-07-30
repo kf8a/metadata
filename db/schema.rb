@@ -645,6 +645,7 @@ ActiveRecord::Schema.define(version: 20150617005803) do
     t.text    "description"
     t.integer "study_id"
     t.integer "weight"
+    t.boolean "use_in_citations", default: true
   end
 
   add_index "treatments", ["study_id"], name: "index_treatments_on_study_id", using: :btree

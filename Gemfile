@@ -86,10 +86,9 @@ group :test do
   gem 'factory_girl_rails'
 
   #Cucumber stuff
-  gem 'capybara'
-  gem 'cucumber-rails' , :require => false
-  gem 'pickle'
-#  gem 'spork'
-  gem 'selenium-webdriver'
+#  gem 'capybara'
+#  gem 'cucumber-rails' , :require => false
+#  gem 'pickle'
+#  gem 'selenium-webdriver'
   gem 'database_cleaner'
 end
