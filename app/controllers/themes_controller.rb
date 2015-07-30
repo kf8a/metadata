@@ -26,12 +26,11 @@ class ThemesController < ApplicationController
   end
 
   def create
-    @theme = Theme.create(params[:theme])
+    @theme = Theme.create(theme_params)
     respond_to do |format|
       if @theme.save
         flash[:notice] = 'Theme was successfully created.'
         format.html { redirect_to themes_url }
-#        format.xml  { head :created, :location => theme_url(@theme) }
       else
         format.html { render "index" }
         format.xml  { render :xml => @theme.errors.to_xml }
@@ -41,7 +40,7 @@ class ThemesController < ApplicationController
 
   def update
     theme = Theme.find(params[:id])
-    if theme.update_attributes(params[:theme])
+    if theme.update_attributes(theme_params)
       flash[:notice] = 'Theme was successfully updated.'
     end
     redirect_to themes_url
@@ -51,4 +50,8 @@ class ThemesController < ApplicationController
     @theme = Theme.find(params[:id])
   end
 
+  private
+  def theme_params
+    params.require(:theme).permit(:name, :weight)
+  end
 end

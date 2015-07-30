@@ -19,20 +19,20 @@ class ThemesControllerTest < ActionController::TestCase
 
   context "POST create" do
     setup do
-      post :create
+      post :create, theme: {name: "One theme"}
     end
 
     should redirect_to("the themes page") {themes_url}
-    should set_the_flash
+    should set_flash
   end
 
   context 'POST update' do
     setup do
       @theme = FactoryGirl.create(:theme)
-      post :update, :id => @theme
+      post :update, id: @theme, theme: {name: "new title"}
     end
 
     should redirect_to('the themes page') {themes_url}
-    should set_the_flash
+    should set_flash
   end
 end
