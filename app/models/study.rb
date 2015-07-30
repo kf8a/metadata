@@ -26,8 +26,8 @@ class Study < ActiveRecord::Base
     (self_and_descendants_datatables & table_query).any?
   end
 
-  def self.find_all_with_datatables(tables = [], options = {})
-    all(options).keep_if { |study| study.include_datatables?(tables) }
+  def self.find_all_with_datatables(tables = [])
+    all.to_a.keep_if { |study| study.include_datatables?(tables) }
   end
 
   def self.find_all_roots_with_datatables(tables=[])

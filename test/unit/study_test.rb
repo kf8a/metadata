@@ -37,12 +37,6 @@ class StudyTest < ActiveSupport::TestCase
     end
 
 
-    should 'return the studies in the proper order' do
-      studies = Study.find_all_with_datatables([@datatable, @datatable2], {:order => :weight})
-      assert_equal 2, studies.size
-      assert_equal @study2,  studies[0]
-      assert_equal @study,  studies[1]
-    end
   end
 
   context 'querying for datatables with nested studies' do
