@@ -2,7 +2,7 @@ require File.expand_path('../../test_helper',__FILE__)
 
 class CitationsControllerTest < ActionController::TestCase
 
-  context 'signed in user' do
+  context 'signed in as an normal user' do
 
     setup do
       @website = Website.where(name: 'lter').first_or_create
@@ -100,9 +100,6 @@ class CitationsControllerTest < ActionController::TestCase
         assert_equal 'ArticleCitation', assigns(:citation).type
       end
 
-      should 'be an article' do
-        assert_kind_of ArticleCitation, assigns(:citation)
-      end
     end
 
     context 'GET: edit' do
@@ -123,7 +120,7 @@ class CitationsControllerTest < ActionController::TestCase
                                                         :type=>'ArticleCitation' }
       end
 
-      should respond_with :success
+      should redirect_to('the citation show page') {citation_url(assigns(:citation))}
 
       should 'assign a type of ArticleCitation' do
         assert_equal 'ArticleCitation', assigns(:citation).type

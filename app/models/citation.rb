@@ -476,7 +476,7 @@ class Citation < ActiveRecord::Base
   end
 
   def transliterate(str)
-    str.gsub(/_/,'-')
+    str.gsub(/_/,'-').gsub(/ /,'-')
   end
 
   def transliterate_file_name

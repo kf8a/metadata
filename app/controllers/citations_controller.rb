@@ -178,7 +178,7 @@ class CitationsController < ApplicationController
   end
 
   def citation_params
-    params.require(:citation).permit(:title, :abstract, :pub_date, :pub_year,
+    params.require(:citation).permit(:title, :abstract, :pub_date, :pub_year, :author_block,
                                     :citation_type_id, :address, :notes, :publication,
                                     :start_page_number, :ending_page_number, :periodical_full_name,
                                     :periodical_abbreviation, :volume, :issue, :city, :publisher,
