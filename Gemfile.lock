@@ -69,7 +69,7 @@ GEM
     annotate (2.6.10)
       activerecord (>= 3.2, <= 4.3)
       rake (~> 10.4)
-    arel (6.0.0)
+    arel (6.0.2)
     awesome_nested_set (3.0.2)
       activerecord (>= 4.0.0, < 5)
     aws-sdk (2.1.2)
@@ -79,8 +79,6 @@ GEM
     aws-sdk-resources (2.1.2)
       aws-sdk-core (= 2.1.2)
     bcrypt (3.1.10)
-    bcrypt-ruby (3.1.5)
-      bcrypt (>= 3.1.3)
     bibtex-ruby (4.0.14)
       latex-decode (~> 0.0)
     binding_of_caller (0.7.2)
@@ -94,10 +92,10 @@ GEM
       i18n
       rake (>= 10.0.0)
       sshkit (~> 1.3)
-    clearance (1.0.0.rc7)
-      bcrypt-ruby
-      email_validator
-      rails (>= 3.0)
+    clearance (1.10.1)
+      bcrypt
+      email_validator (~> 1.4)
+      rails (>= 3.1)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.7)
@@ -326,7 +324,7 @@ DEPENDENCIES
   bibtex-ruby
   byebug
   capistrano
-  clearance (= 1.0.0.rc7)
+  clearance
   coffee-rails
   country_select
   cube-ruby
