@@ -1,5 +1,5 @@
-<%= form.inputs :title, :dataset %>
-<%= form.inputs do %>
+<%= form.input :title %>
+<%= form.input :dataset %>
   <%= form.input :comments, :input_html => { :size => '150x5' } %>
   <%= form.input :description, :input_html => { :size => '150x10' } %>
   <%= form.input :keyword_list, :label => 'Keywords' %>
@@ -8,11 +8,10 @@
   <%= form.input :core_areas, :label => 'LTER Core Areas', :input_html => {:size => '5'} %>
   <%= form.input :deprecation_notice, :input_html => {:size => '150x2'} %>
   <%# <%= form.input :deprecated_in_favor_of, :collection => @datatable.supercession_candiates%>
-<% end %>
 
 <h2>Data Contributions</h2>
 <div id='data_contributions'>
-  <%= form.inputs :for => :data_contributions do |f| %>
+  <%= simple_fields_for :data_contributions do |f| %>
     <%= render :partial => 'data_contribution_fields', :locals => {:f => f} %>
   <% end %>
 </div>
@@ -20,23 +19,22 @@
 
 <h2>Temporal Coverage</h2>
 <div id="temporal_coverage">
-  <%= render :partial => 'temporal_coverage', :locals => {:form => form} %>
+  <%= form.input :begin_date, :label => 'from:', :end_year => Time.now.year, :start_year => 1887 %>
+  <%= form.input :end_date, :label => 'to', :end_year => Time.now.year, :start_year => 1887 %>
 </div>
 <% unless datatable.new_record? %>
   <%= link_to "Update Temporal Coverage", update_temporal_extent_datatable_path(datatable), :remote => true %>
 <% end %>
 
-<%= form.inputs do %>
-  <%= form.input :weight %>
-  <%= form.input :update_frequency_days, :label => 'Expected Update Frequency (days)' %>
-  <%= form.input :on_web %>
-  <%= form.input :is_restricted, :label => 'Restricted (only downloadable by the owner)' %>
-  <%= form.input :is_secondary, :label => 'Secondary Table' %>
-<% end %>
+<%= form.input :weight %>
+<%= form.input :update_frequency_days, :label => 'Expected Update Frequency (days)' %>
+<%= form.input :on_web %>
+<%= form.input :is_restricted, :label => 'Restricted (only downloadable by the owner)' %>
+<%= form.input :is_secondary, :label => 'Secondary Table' %>
 
 <h2>Variates</h2>
 <div id="variates">
-  <%= form.inputs :for => :variates do |f| %>
+  <%= simple_fields_for :variates do |f| %>
     <%= render :partial => 'variate_fields', :locals => {:f => f} %>
   <% end %>
 </div>

@@ -5,6 +5,7 @@ class DatatablesController < ApplicationController
   before_filter :can_download?, :only=>[:show], :if => Proc.new { |controller| controller.request.format.csv? || controller.request.format.fasta? } # run before filter to prevent non-members from downloading
   # before_filter :reject_robots
 
+  helper_method :datatable
   protect_from_forgery :except => [:index, :show, :search]
 
   # GET /datatables

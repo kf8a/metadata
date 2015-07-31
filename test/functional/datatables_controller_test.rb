@@ -12,7 +12,6 @@ class DatatablesControllerTest < ActionController::TestCase
   end
 
   def teardown
-    @controller.expire_fragment(:controller => "datatables", :action => "index", :action_suffix => "lter")
     Website.destroy_all
     Template.destroy_all
   end
@@ -36,9 +35,6 @@ class DatatablesControllerTest < ActionController::TestCase
       end
 
       should render_with_layout :lter
-      should "create index cache" do
-        assert @controller.fragment_exist?(:controller => "datatables", :action => "index", :action_suffix => "lter")
-      end
     end
 
     context "GET :index / 'glbrc' subdomain" do
@@ -46,9 +42,6 @@ class DatatablesControllerTest < ActionController::TestCase
         get :index, :requested_subdomain => 'glbrc'
       end
 
-      should "create index cache" do
-        assert @controller.fragment_exist?(:controller => "datatables", :action => "index", :action_suffix => "glbrc")
-      end
     end
 
     # TODO: this test does not actually test anything because there are no results returned. Maybe
@@ -72,7 +65,7 @@ class DatatablesControllerTest < ActionController::TestCase
       should respond_with :success
 
       should 'include the link to the sponsors data use statement' do
-        assert_select "a[href$=/sponsors/#{@sponsor.id}]"
+        assert_select "a[href$=\/sponsors\\/#{@sponsor.id}]"
       end
     end
 
@@ -167,7 +160,7 @@ class DatatablesControllerTest < ActionController::TestCase
 
     context "trying to create datatable with invalid parameters" do
       setup do
-        post :create, datatable: {:title => nil}
+        post :create, datatable: {title: nil, abstract: "something else"}
       end
 
       should render_template "new"
@@ -189,9 +182,6 @@ class DatatablesControllerTest < ActionController::TestCase
         assert_select "p", "This is the first abstract"
       end
 
-      should "create show cache" do
-        assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'page', :id => @datatable)
-      end
 
       #TODO figure out what fails here
       # context 'changing the description' do
@@ -311,42 +301,6 @@ class DatatablesControllerTest < ActionController::TestCase
     end
 
     should redirect_to("datatables index") {datatables_url}
-  end
-
-  def test_caching_and_expiring
-    caching = ActionController::Base.perform_caching
-    ActionController::Base.perform_caching = true
-    @datatable = FactoryGirl.create(:datatable, 
-                                    :dataset => FactoryGirl.create(:dataset, 
-                                                                   :sponsor => FactoryGirl.create(:sponsor)),
-                                    :description => 'This is the first abstract')
-    get :show, :id => @datatable
-    get :show, :id => @datatable, :format => :csv
-    assert @datatable.is_sql
-    assert @datatable.values
-    assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'page', :id => @datatable)
-    assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'data', :id => @datatable)
-    # assert @controller.fragment_exist?(:controller => 'datatables', :action => 'show', :action_suffix => 'csv', :id => @datatable)
-    put :update, :id => @datatable, :datatable => { }
-    assert !@controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'page', :id => @datatable)
-    assert !@controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'data', :id => @datatable)
-    # assert !@controller.fragment_exist?(:controller => 'datatables', :action => 'show', :format => 'csv', :id => @datatable)
-  ensure
-    ActionController::Base.perform_caching = caching
-  end
-
-  def test_expiring_in_one_day
-    @datatable = FactoryGirl.create :datatable, :dataset => FactoryGirl.create(:dataset,
-                                                                              :sponsor => FactoryGirl.create(:sponsor)),
-                                  :description => 'This is the first abstract'
-    get :show, :id => @datatable
-    assert @datatable.is_sql
-    assert @datatable.values
-    assert @controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'data', :id => @datatable)
-    future_time = Time.now + 1.day
-    Time.stubs(:now).returns(future_time)
-    assert !@controller.fragment_exist?(:controller => "datatables", :action => "show", :action_suffix => 'data', :id => @datatable)
-    Time.unstub(:now) #otherwise all future tests think it's tomorrow
   end
 
   #Actual testing of the search function, with a real search, requires Sphinx I think. That seems like too much of a pain to have on always for the test suite. It will have to be tested manually.
