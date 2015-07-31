@@ -11,7 +11,7 @@ class PermissionsControllerTest < ActionController::TestCase
 
     context "and not signed in at all" do
       setup do
-        @controller.current_user = nil
+        sign_out
       end
 
       context "and GET :index" do
@@ -36,7 +36,7 @@ class PermissionsControllerTest < ActionController::TestCase
     context ", signed in as non-owner" do
       setup do
         @nonowner = FactoryGirl.create(:email_confirmed_user)
-        @controller.current_user = @nonowner
+        sign_in_as(@nonowner)
       end
 
       context "and GET :new permission for the datatable" do

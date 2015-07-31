@@ -70,7 +70,7 @@ class PagesControllerTest < ActionController::TestCase
 
   context 'as a regular user' do
     setup do
-      @controller.current_user = nil
+      sign_out
     end
 
     context 'GET: index' do

@@ -79,7 +79,7 @@ class ProtocolsControllerTest < ActionController::TestCase
   context 'a anonymous user' do
     setup do
       generate_websites_and_protocols
-      @controller.current_user = nil
+      sign_out
     end
 
     context 'GET: index in lter (default) subdomain' do

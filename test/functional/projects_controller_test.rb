@@ -3,8 +3,8 @@ require File.expand_path('../../test_helper',__FILE__)
 class ProjectsControllerTest < ActionController::TestCase
 
   def setup
-    #TODO test with admin and non admin users
-    @controller.current_user = FactoryGirl.create :admin_user
+    #TODO test with non admin users
+    signed_in_as_admin
   end
   
   def teardown

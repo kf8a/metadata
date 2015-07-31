@@ -1,6 +1,6 @@
 class PermissionRequestsController < ApplicationController
 
-  before_filter :authorize
+  before_filter :require_login
 
   respond_to :js
 

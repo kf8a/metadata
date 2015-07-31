@@ -1,6 +1,6 @@
 class ThemesController < ApplicationController
 
-  before_filter :admin?, :except => [:index, :show]  if Rails.env == 'production'
+  before_filter :admin?, :except => [:index, :show]
 
   def index
     @theme_roots = Theme.roots

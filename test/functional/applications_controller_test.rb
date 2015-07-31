@@ -1,4 +1,4 @@
-require 'test_helper'
+require File.expand_path('../../test_helper',__FILE__) 
 require 'application_controller'
 
 class ApplicationControllerTest < ActionController::TestCase
@@ -34,7 +34,7 @@ class ApplicationControllerTest < ActionController::TestCase
 
       context "when nobody is logged in" do
         setup do
-          @controller.current_user = nil
+          sign_out
           get :testadmin
         end
 
@@ -45,7 +45,7 @@ class ApplicationControllerTest < ActionController::TestCase
         setup do
           user = User.new()
           user.role = 'nonadmin'
-          @controller.current_user = user
+          sign_in_as(user)
           get :testadmin
         end
 

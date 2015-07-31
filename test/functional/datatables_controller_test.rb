@@ -19,7 +19,7 @@ class DatatablesControllerTest < ActionController::TestCase
 
   context 'an unsigned in user' do
     setup do
-      @controller.current_user = nil
+      sign_out
     end
 
     context "GET :index" do

@@ -11,7 +11,7 @@ class OwnershipsControllerTest < ActionController::TestCase
 
     context "and not signed in at all" do
       setup do
-        @controller.current_user = nil
+        sign_out
       end
 
       context "and GET :index" do

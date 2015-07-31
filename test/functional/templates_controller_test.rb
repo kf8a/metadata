@@ -4,7 +4,7 @@ class TemplatesControllerTest < ActionController::TestCase
 
   context 'as an admin user' do
     setup do
-      @controller.current_user = FactoryGirl.create :admin_user
+      signed_in_as_admin
     end
     context 'on GET to :index' do
       setup do 

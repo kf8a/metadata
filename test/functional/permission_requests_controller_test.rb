@@ -28,7 +28,7 @@ class PermissionRequestsControllerTest < ActionController::TestCase
     context "and signed in as a valid user" do
       setup do
         @user = FactoryGirl.create(:email_confirmed_user)
-        @controller.current_user = @user
+        sign_in_as(@user)
       end
 
       context "POST :create" do
