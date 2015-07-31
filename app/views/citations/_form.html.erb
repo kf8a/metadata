@@ -1,23 +1,14 @@
 
-<%= form.inputs do %>
   <%= form.input :type, :as => :select, :collection => Citation.select_options %>
-<% end %>
-<%= form.inputs :doi %>
-<%= form.inputs do %>
-  <%= form.input :state, :as => :radio,  :collection => ['draft', 'submitted','forthcoming','published'] %>
-<% end %>
+<%= form.input :doi %>
+  <%= form.input :state, :collection => ['draft', 'submitted','forthcoming','published'] %>
 <h2>Authors</h2>
-<%= form.inputs do %>
   <%= form.input :author_block, :label => 'Authors', :as=>:text, :input_html => { :class => 'autogrow author_block', :rows => 10 }%>
-<% end %>
 <h2>Editors</h2>
 <div id='editors'>
-  <%= form.inputs do %>
     <%= form.input :editor_block, :label => 'Editors', :as => :text, :input_html => { :class => 'autogrow author_block', :rows => 10}%>
-  <% end %>
 </div>
 
-<%= form.inputs do %>
   <%= form.input :title, :input_html => {:rows => 2} %>
   <%= form.input :secondary_title %>
   <%= form.input :series_title %>
@@ -36,22 +27,20 @@
   <%= form.input :full_text %>
   <%= form.input :publisher %>
   <%=form.input :address, :input_html => {:rows => 3} %>
-<% end %>
-  <%= form.inputs :city, :notes, :open_access, :has_lter_acknowledgement %>
+  <%= form.input :city %>
+  <%= form.input :notes %>
+  <%= form.input :open_access %>
+  <%= form.input :has_lter_acknowledgement %>
 
 <h2>Datatables</h2>
 <div id='datatables'>
-  <%= form.inputs do %>
     <%= form.input :datatables, :input_html => { :class => 'myselect myselect-wide' } %>
-  <% end %>
 </div>
 <h2>Treatment Areas</h2>
 <div id='treatments'>
-  <%= form.inputs do %>
     <%= form.input :treatments, :input_html => { :class => 'myselect' } %>
-  <% end %>
 </div>
 
-<%= form.inputs :annotation %>
+<%= form.input :annotation %>
 
-<%= form.inputs :pdf , :as => :file%>
+<%= form.input :pdf , :as => :file%>
