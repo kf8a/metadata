@@ -51,20 +51,6 @@ class DatatableTest < ActiveSupport::TestCase
       end
     end
 
-    context 'which has no datatable personnel but does have dataset personnel' do
-      setup do
-        @person1 = FactoryGirl.create(:person, :sur_name => 'Datatableman')
-        @person2 = FactoryGirl.create(:person, :sur_name => 'Datatablewoman')
-        dataset = FactoryGirl.create(:dataset)
-        dataset.personnel = [@perons1, @person2]
-        @datatable.dataset = dataset
-      end
-
-      should 'return the dataset personnel' do
-        assert_equal [@person1, @person2], @datatable.personnel
-      end
-    end
-
     should 'respond_to has_data_in_interval?' do
       assert @datatable.respond_to?('within_interval?')
     end
@@ -533,7 +519,7 @@ class DatatableTest < ActiveSupport::TestCase
         end
 
         should 'include an entityName element' do
-          assert_equal 'Kellogg Biological Station LTER: a really cool datatable (KBS001_34)', @to_eml.at_css('dataTable entityName').text
+          assert_equal "Kellogg Biological Station LTER: a really cool datatable (#{@datatable.name})", @to_eml.at_css('dataTable entityName').text
         end
 
         should 'include an entityDescription element' do

@@ -52,7 +52,7 @@ class CitationTest < ActiveSupport::TestCase
     end
 
     should 'have one author' do
-      assert_equal 1, @citation.authors.all.count
+      assert_equal 1, @citation.authors.count
     end
 
     should 'be formatted as default' do
@@ -170,7 +170,7 @@ class CitationTest < ActiveSupport::TestCase
     end
 
     should 'be exported as endnote' do
-      result = "%0 Book Section
+      result = "%0 Book
 %T Soil system management in temperate regions
 %A Robertson, G. P.
 %A Grandy, A. S.

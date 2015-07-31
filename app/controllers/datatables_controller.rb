@@ -89,6 +89,7 @@ class DatatablesController < ApplicationController
     @studies = Study.all.collect{ |study| [study.name, study.id] }
     @people = Person.all
     @units = Unit.all
+    @datatable = Datatable.new
   end
 
   # GET /datatables/1;edit
@@ -107,7 +108,6 @@ class DatatablesController < ApplicationController
     @people = Person.all
     @units = Unit.all
 
-    datatable.create(datatable_params)
     if datatable.save
       flash[:notice] = 'Datatable was successfully created.'
     end
@@ -221,7 +221,7 @@ class DatatablesController < ApplicationController
   end
 
   def datatable
-    @datatable ||= params[:id] ? Datatable.find(params[:id]) : Datatable.new(params[:datatable])
+    @datatable ||= params[:id] ? Datatable.find(params[:id]) : Datatable.new(datatable_params)
   end
 
   def csv_ok

@@ -16,6 +16,6 @@ class ApplicationHelperTest < ActionView::TestCase
   
   def test_lter_roles
     assert lter_roles
-    assert_kind_of Array, lter_roles
+    assert_kind_of Array, lter_roles.to_a
   end
 end

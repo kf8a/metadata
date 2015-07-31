@@ -160,7 +160,7 @@ class DatatablesControllerTest < ActionController::TestCase
 
     context "trying to create datatable with invalid parameters" do
       setup do
-        post :create, datatable: {title: nil, abstract: "something else"}
+        post :create, datatable: {title: "something", abstract: "something else"}
       end
 
       should render_template "new"
