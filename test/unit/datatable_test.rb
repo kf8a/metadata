@@ -508,6 +508,10 @@ class DatatableTest < ActiveSupport::TestCase
         @eml = @datatable.to_eml
       end
 
+      should 'say that is it valid for eml' do
+        assert @datatable.valid_for_eml?
+      end
+
       should 'return respond to to_eml' do
         assert @datatable.respond_to?('to_eml')
       end
