@@ -152,9 +152,10 @@ class DatatableTest < ActiveSupport::TestCase
       @restricted.owners = [@owner]
 
       FactoryGirl.create :permission,
-        :datatable  => @restricted_to_members,
-        :user       => @authorized_user,
-        :owner      => @owner
+        datatable: @restricted_to_members,
+        user: @authorized_user,
+        owner: @owner,
+        decision: "approved"
 
       FactoryGirl.create :permission,
         :datatable  => @restricted_to_members,
@@ -162,10 +163,12 @@ class DatatableTest < ActiveSupport::TestCase
         :owner      => @owner,
         :decision   => 'denied'
 
-       FactoryGirl.create :permission,
-         :datatable => @restricted,
-         :user      => @authorized_user,
-         :owner     => @owner
+      FactoryGirl.create :permission,
+        datatable: @restricted,
+        user:  @authorized_user,
+        owner: @owner,
+        decision: "approved"
+
     end
 
     should 'tell if it needs to be restricted at all' do
@@ -225,7 +228,7 @@ class DatatableTest < ActiveSupport::TestCase
 
       FactoryGirl.create(:permission_request, :user => @user, :datatable => @datatable)
       FactoryGirl.create(:permission_request, :user => @permitted_user, :datatable => @datatable)
-      FactoryGirl.create(:permission, :owner => @owner, :datatable => @datatable, :user => @permitted_user)
+      FactoryGirl.create(:permission, owner: @owner, datatable: @datatable, user: @permitted_user, decision: "approved")
     end
 
     context '#pending_requesters' do
