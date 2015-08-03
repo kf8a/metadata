@@ -1,43 +1,48 @@
+<%= form.inputs do %>
 <%= form.input :title %>
 <%= form.input :dataset %>
-  <%= form.input :comments, :input_html => { :size => '150x5' } %>
-  <%= form.input :description, :input_html => { :size => '150x10' } %>
-  <%= form.input :keyword_list, :label => 'Keywords' %>
-  <%= form.input :study, :label => 'Experiment' %>
-  <%= form.input :theme, :label => 'KBS Theme', :collection=> Theme.order('lft ASC').all.collect {|x| [x.nested_name, x.id] }%>
-  <%= form.input :core_areas, :label => 'LTER Core Areas', :input_html => {:size => '5'} %>
-  <%= form.input :deprecation_notice, :input_html => {:size => '150x2'} %>
-  <%# <%= form.input :deprecated_in_favor_of, :collection => @datatable.supercession_candiates%>
+<%= form.input :comments, :input_html => { :size => '150x5' } %>
+<%= form.input :description, :input_html => { :size => '150x10' } %>
+<%= form.input :keyword_list, :label => 'Keywords' %>
+<%= form.input :study, :label => 'Experiment' %>
+<%= form.input :theme, :label => 'KBS Theme', :collection=> Theme.order('lft ASC').all.collect {|x| [x.nested_name, x.id] }%>
+<%= form.input :core_areas, :label => 'LTER Core Areas', :input_html => {:size => '5'} %>
+<%= form.input :deprecation_notice, :input_html => {:size => '150x2'} %>
+<%# <%= form.input :deprecated_in_favor_of, :collection => @datatable.supercession_candiates%>
+<% end %>
 
-<h2>Data Contributions</h2>
+<%= form.inputs do %>
 <div id='data_contributions'>
-  <%= simple_fields_for :data_contributions do |f| %>
+  <%= form.semantic_fields_for :data_contributions do |f| %>
     <%= render :partial => 'data_contribution_fields', :locals => {:f => f} %>
   <% end %>
 </div>
 <%= link_to_add_fields "Add Person", form, :data_contributions %>
+<% end %>
 
-<h2>Temporal Coverage</h2>
-<div id="temporal_coverage">
-  <%= form.input :begin_date, :label => 'from:', :end_year => Time.now.year, :start_year => 1887 %>
-  <%= form.input :end_date, :label => 'to', :end_year => Time.now.year, :start_year => 1887 %>
-</div>
+<%= form.inputs name: "Temporal Coverage" do %>
+  <%= form.input :begin_date, :label => 'from:', :end_year => Time.now.year, :start_year => 1887, as: :date_picker %>
+  <%= form.input :end_date, :label => 'to', :end_year => Time.now.year, :start_year => 1887, as: :date_picker  %>
 <% unless datatable.new_record? %>
   <%= link_to "Update Temporal Coverage", update_temporal_extent_datatable_path(datatable), :remote => true %>
 <% end %>
+<% end %>
 
+<%= form.inputs do %>
 <%= form.input :weight %>
 <%= form.input :update_frequency_days, :label => 'Expected Update Frequency (days)' %>
 <%= form.input :on_web %>
 <%= form.input :is_restricted, :label => 'Restricted (only downloadable by the owner)' %>
 <%= form.input :is_secondary, :label => 'Secondary Table' %>
+<% end %>
 
-<h2>Variates</h2>
+<%= form.inputs name: "Variates" do %>
 <div id="variates">
-  <%= simple_fields_for :variates do |f| %>
+  <%= form.semantic_fields_for :variates do |f| %>
     <%= render :partial => 'variate_fields', :locals => {:f => f} %>
   <% end %>
 </div>
+<% end %>
 
 
 <%= link_to_add_fields "Add Variate", form, :variates %>

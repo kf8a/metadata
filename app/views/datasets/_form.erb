@@ -1,25 +1,31 @@
+<%= form.inputs do %>
 <%= form.input :dataset %>
 <%= form.input :title %>
 <%= form.input :abstract %>
 <%= form.input :website %>
 <%= form.input :sponsor %>
 <%= form.input :status %>
-<%= form.input :initiated %>
-<%= form.input :completed %>
+<%= form.input :initiated, as: :date_picker, include_blank: true %>
+<%= form.input :completed, as: :date_picker, include_blank: true %>
 <%= form.input :core_dataset %>
 <%= form.input :on_web %>
 <%= form.input :keyword_list %>
+<% end %>
 
+<%= form.inputs do %>
 <div id = 'dataset_files'>
-  <%= form.simple_fields_for :dataset_files do |f| %>
+  <%= form.semantic_fields_for :dataset_files do |f| %>
     <%= render :partial => 'dataset_file_fields', :locals => {:f => f} %>
   <% end %>
 </div>
 <%= link_to_add_fields "Add File", form, :dataset_files %>
+<% end %>
 
+<%= form.inputs do %>
 <div id = 'affiliations'>
-    <%= form.simple_fields_for :affiliations do |f| %>
+    <%= form.semantic_fields_for :affiliations do |f| %>
       <%= render :partial => 'affiliation_fields', :locals => {:f => f} %>
     <% end %>
 </div>
 <%= link_to_add_fields "Add Person", form, :affiliations %>
+<% end %>
