@@ -1,3 +1,4 @@
+#TODO evaluate if we need this
 class Template < ActiveRecord::Base
   belongs_to :website
 
