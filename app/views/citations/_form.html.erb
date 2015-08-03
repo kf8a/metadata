@@ -1,14 +1,16 @@
-
+<%= form.inputs do %>
   <%= form.input :type, :as => :select, :collection => Citation.select_options %>
-<%= form.input :doi %>
+  <%= form.input :doi %>
   <%= form.input :state, :collection => ['draft', 'submitted','forthcoming','published'] %>
-<h2>Authors</h2>
+  <h2>Authors</h2>
   <%= form.input :author_block, :label => 'Authors', :as=>:text, :input_html => { :class => 'autogrow author_block', :rows => 10 }%>
-<h2>Editors</h2>
-<div id='editors'>
+  <h2>Editors</h2>
+  <div id='editors'>
     <%= form.input :editor_block, :label => 'Editors', :as => :text, :input_html => { :class => 'autogrow author_block', :rows => 10}%>
-</div>
+  </div>
+<% end %>
 
+<%= form.inputs do %>
   <%= form.input :title, :input_html => {:rows => 2} %>
   <%= form.input :secondary_title %>
   <%= form.input :series_title %>
@@ -31,15 +33,20 @@
   <%= form.input :notes %>
   <%= form.input :open_access %>
   <%= form.input :has_lter_acknowledgement %>
+<% end %>
 
+<%= form.inputs name: "Datatables" do %>
 <h2>Datatables</h2>
 <div id='datatables'>
     <%= form.input :datatables, :input_html => { :class => 'myselect myselect-wide' } %>
 </div>
+<% end %>
+<%= form.inputs name: "Treatment Areas" do %>
 <h2>Treatment Areas</h2>
 <div id='treatments'>
     <%= form.input :treatments, :input_html => { :class => 'myselect' } %>
 </div>
+<% end %>
 
 <%= form.input :annotation %>
 

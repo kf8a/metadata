@@ -1,6 +1,6 @@
 <h1>Editing protocol</h1>
 
-<%= simple_form_for @protocol,:html => { :multipart => true } do |form| %>
+<%= semantic_form_for @protocol,:html => { :multipart => true } do |form| %>
   <%= render "shared/error_messages", :target => @protocol %>
   <%= render :partial => 'form', :locals => {:form => form, :websites => @websites, :people => @people, :datasets => @datasets } %>
   <%= form.button :submit %>

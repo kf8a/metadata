@@ -13,7 +13,7 @@
    <%= link_to "Sign up", sign_up_path %>
 </div>
 
-<%= simple_form_for :session, :url => session_path do |form| %>
+<%= semantic_form_for :session, :url => session_path do |form| %>
   <%= form.inputs do %>
 
     <%= form.input :email, :as => :email, :label => 'Username (Email)',  :required => false %>

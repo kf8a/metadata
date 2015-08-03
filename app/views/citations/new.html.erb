@@ -1,4 +1,4 @@
-<%= simple_form_for @citation, :class=>'Citation', :html => { :multipart => true } do |form| %>
+<%= semantic_form_for @citation, :class=>'Citation', :html => { :multipart => true } do |form| %>
   <%= render :partial => 'form', :locals => {:form => form } %>
-  <%= form.button :submit %>
+  <%= form.action :submit %>
 <% end %>
