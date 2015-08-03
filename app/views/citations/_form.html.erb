@@ -2,12 +2,12 @@
   <%= form.input :type, :as => :select, :collection => Citation.select_options %>
   <%= form.input :doi %>
   <%= form.input :state, :collection => ['draft', 'submitted','forthcoming','published'] %>
-  <h2>Authors</h2>
+<% end %>
+<%= form.inputs do %>
   <%= form.input :author_block, :label => 'Authors', :as=>:text, :input_html => { :class => 'autogrow author_block', :rows => 10 }%>
-  <h2>Editors</h2>
-  <div id='editors'>
+<% end %>
+<%= form.inputs do %>
     <%= form.input :editor_block, :label => 'Editors', :as => :text, :input_html => { :class => 'autogrow author_block', :rows => 10}%>
-  </div>
 <% end %>
 
 <%= form.inputs do %>
@@ -16,7 +16,7 @@
   <%= form.input :series_title %>
   <%= form.input :abstract %>
   <%= form.input :pub_year, :input_html => {:size=> 20}%>
-  <%= form.input :pub_date %>
+  <%= form.input :pub_date, as: :date_picker %>
   <%= form.input :publication %>
   <%= form.input :start_page_number, :input_html => {:size=>10}%>
   <%= form.input :ending_page_number, :input_html =>{:size => 10} %>
@@ -35,19 +35,19 @@
   <%= form.input :has_lter_acknowledgement %>
 <% end %>
 
+<%= form.inputs do %>
+<%= form.input :annotation %>
+
+<%= form.input :pdf , :as => :file%>
+<% end %>
+
 <%= form.inputs name: "Datatables" do %>
-<h2>Datatables</h2>
 <div id='datatables'>
     <%= form.input :datatables, :input_html => { :class => 'myselect myselect-wide' } %>
 </div>
 <% end %>
 <%= form.inputs name: "Treatment Areas" do %>
-<h2>Treatment Areas</h2>
 <div id='treatments'>
     <%= form.input :treatments, :input_html => { :class => 'myselect' } %>
 </div>
 <% end %>
-
-<%= form.input :annotation %>
-
-<%= form.input :pdf , :as => :file%>
