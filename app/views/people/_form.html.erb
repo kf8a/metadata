@@ -1,5 +1,6 @@
 <div class='row'>
   <div class='one-half first'>
+    <%= f.inputs do %>
     <%= f.input :sur_name %>
     <%= f.input :middle_name %>
     <%= f.input :given_name %>
@@ -7,17 +8,20 @@
     <%= f.input :title %>
     <%= f.input :organization %>
     <%= f.input :sub_organization %>
+  <% end %>
   </div>
   <div class='one-half'>
+    <%= f.inputs do %>
     <%= f.input :street_address %>
     <%= f.input :city %>
     <%= f.input :locale %>
-    <%= f.input :country %>
+    <%= f.input :country, priority_countries: ["US", "GB", "AU"]   %>
     <%= f.input :postal_code %>
     <%= f.input :phone, :label => 'Phone Number' %>
     <%= f.input :fax, :label  => 'Fax Number' %>
     <%= f.input :email %>
     <%= f.input :url, :label => 'Website' %>
+  <% end %>
   </div>
 </div>
 
@@ -32,7 +36,7 @@
     <th>Supervisor</th>
     <th>Delete</th>
   </tr>
-  <%= f.simple_fields_for :affiliations do |builder| %>
+  <%= f.semantic_fields_for :affiliations do |builder| %>
     <%= render 'affiliation_fields', f: builder %>
   <% end%>
 </table>
