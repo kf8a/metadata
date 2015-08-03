@@ -38,7 +38,7 @@ class PermissionTest < ActiveSupport::TestCase
     should 'allow the owner to give users permission' do
       p           = Permission.new({:datatable => @datatable})
       p.owner     = @owner
-      p.user      = FactoryGirl.build :user
+      p.user      = FactoryGirl.create :user
 
       assert p.valid?
     end
@@ -74,7 +74,7 @@ class PermissionTest < ActiveSupport::TestCase
     end
 
     should 'allow permissions to be updated' do
-      user         = FactoryGirl.build :user
+      user         = FactoryGirl.create :user
 
       p1           = Permission.new
       p1.datatable = @datatable
@@ -124,9 +124,9 @@ class PermissionTest < ActiveSupport::TestCase
       datatable1.owners = [owner1]
       datatable2  = FactoryGirl.create :datatable
       datatable2.owners = [owner2]
-      FactoryGirl.create(:permission, :owner => owner1, :datatable => datatable1, :user => user1)
+      FactoryGirl.create(:permission, :owner => owner1, :datatable => datatable1, :user => user1, decision: "approved")
       FactoryGirl.create(:permission, :owner => owner1, :datatable => datatable1, :user => user2, :decision => 'denied')
-      FactoryGirl.create(:permission, :owner => owner2, :datatable => datatable2, :user => user4)
+      FactoryGirl.create(:permission, :owner => owner2, :datatable => datatable2, :user => user4, decision: "approved")
 
       assert Permission.permitted_users.include?(user1)
       assert !Permission.permitted_users.include?(user2)

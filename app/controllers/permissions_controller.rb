@@ -18,8 +18,10 @@ class PermissionsController < ApplicationController
   def create
     user = User.find_by_email(params[:email])
     flash[:notice] = 'No user with that email' unless user
-    permissions = Permission.where(:user_id => user, :datatable_id => @datatable, :owner_id => current_user)
-    permission = permissions.first || permissions.new
+    permission = Permission.where(:user_id => user, :datatable_id => @datatable, :owner_id => current_user.id).first || Permission.new
+    permission.datatable_id = @datatable.id
+    permission.user = user
+    permission.owner = current_user
     permission.decision = "approved"
 
     respond_to do |format|
@@ -52,7 +54,7 @@ class PermissionsController < ApplicationController
   def deny
     user = User.find_by_email(params[:email])
     owner = current_user
-    permission = Permission.find_by_user_id_and_datatable_id_and_owner_id(user, @datatable, owner)
+    permission = Permission.where(user_id: user, datatable_id: @datatable, owner_id: owner).first
     if permission
       permission.decision = "denied"
     else
@@ -71,7 +73,9 @@ class PermissionsController < ApplicationController
 
   def require_datatable
     @datatable = Datatable.find(params[:id]) if params[:id]
-    @datatable = Datatable.find(params[:datatable]) if params[:datatable]
+    unless @datatable
+      @datatable = Datatable.find(params[:datatable]) if params[:datatable]
+    end
     unless @datatable
       flash[:notice] = "You must select a valid datatable to grant permissions"
       redirect_to :action => :index

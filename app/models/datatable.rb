@@ -231,7 +231,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def can_be_downloaded_by?(user)
-    if self.is_restricted
+    if self.is_restricted?
       user.try(:admin?) ||
       permitted?(user) ||
       owned_by?(user)

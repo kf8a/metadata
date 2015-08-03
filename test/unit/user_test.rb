@@ -89,7 +89,7 @@ class UserTest < ActiveSupport::TestCase
       @datatable = FactoryGirl.create(:protected_datatable)
       @owner = FactoryGirl.create(:email_confirmed_user)
       FactoryGirl.create(:ownership, :user => @owner, :datatable => @datatable)
-      FactoryGirl.create(:permission, :user => @user, :owner => @owner, :datatable => @datatable)
+      FactoryGirl.create(:permission, user: @user, owner: @owner, datatable: @datatable, decision: "approved")
     end
 
     context '#has_permission_from?' do
