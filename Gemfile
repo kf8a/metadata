@@ -13,7 +13,7 @@ gem 'acts-as-taggable-on'
 gem 'paperclip' 
 gem 'nokogiri'
 gem 'RedCloth'
-gem 'simple_form'
+gem 'formtastic'
 gem 'country_select'
 gem 'cube-ruby'
 
