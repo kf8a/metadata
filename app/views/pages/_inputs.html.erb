@@ -1,3 +1,5 @@
-<%= form.input :title %>
-<%= form.input :body %>
-<%= form.input :url, :hint => "Created automatically if left blank" %>
+<%= form.inputs do %>
+  <%= form.input :title %>
+  <%= form.input :body %>
+  <%= form.input :url, :hint => "Created automatically if left blank" %>
+<% end %>
