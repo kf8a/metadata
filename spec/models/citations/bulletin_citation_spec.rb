@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe BulletinCitation do
   its(:bibtex_type) { should == :report}

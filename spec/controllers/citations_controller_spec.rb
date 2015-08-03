@@ -159,7 +159,7 @@ describe CitationsController, type: :controller  do
   describe 'filtering of citations' do
     before(:each) do
       @website = Website.find_or_create_by(name: 'lter')
-      @controller.current_user = nil
+      sign_out
 
       author1 = FactoryGirl.create(:author, :sur_name => 'Zebedee', :seniority => 1)
       author2 = FactoryGirl.create(:author, :sur_name => 'Alfred',  :seniority => 1)

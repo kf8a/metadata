@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe VisualizationsController, type: :controller  do
   describe 'A visualization exists.' do

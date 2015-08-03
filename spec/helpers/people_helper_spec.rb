@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe PeopleHelper, type: :helper do
   describe "#contact_link" do
