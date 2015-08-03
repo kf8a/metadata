@@ -153,7 +153,7 @@ FactoryGirl.define do
     weight        100
     theme_id      [FactoryGirl.create(:theme)]
     dataset
-    # variates      [FactoryGirl.create(:variate)]
+    variates      [FactoryGirl.create(:variate)]
 
     factory :public_datatable do
     end
