@@ -5,7 +5,7 @@ describe UnitsController, type: :controller  do
   before do
     user = User.new
     allow(user).to receive(:admin?).and_return(:true)
-    @controller.current_user = user
+    sign_in_as(user)
 
     @unit = Unit.new
     allow(@unit).to receive(:id).and_return(1)

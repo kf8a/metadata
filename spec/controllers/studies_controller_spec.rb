@@ -4,7 +4,8 @@ describe StudiesController, type: :controller  do
   render_views
 
   before(:each) do
-    @controller.current_user = FactoryGirl.create :admin_user
+    sign_in_as(FactoryGirl.create :admin_user)
+    # @controller.current_user = FactoryGirl.create :admin_user
   end
 
   describe 'GET :index' do
