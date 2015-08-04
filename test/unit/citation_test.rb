@@ -38,6 +38,7 @@ class CitationTest < ActiveSupport::TestCase
       @citation.title = 'Long-term ecological research: Re-inventing network science'
       @citation.publication = 'Frontiers in Ecology and the Environment'
       @citation.volume = '6'
+      @citation.type = "ArticleCitation"
       @citation.start_page_number = 281
       @citation.ending_page_number = 281
       @citation.pub_year = 2008
@@ -52,7 +53,7 @@ class CitationTest < ActiveSupport::TestCase
     end
 
     should 'have one author' do
-      assert_equal 1, @citation.authors.count
+      assert_equal 1, @citation.authors.size
     end
 
     should 'be formatted as default' do
@@ -427,12 +428,11 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'a citation object with many authors' do
     setup do
-      @cite = FactoryGirl.build(:citation)
-      authors = []
+      @cite = FactoryGirl.create(:citation)
+      @cite.authors = []
       4.times do 
-        authors << FactoryGirl.build(:author, :given_name=>'Jon', :sur_name => 'Jones')
+        @cite.authors << FactoryGirl.build(:author, :given_name=>'Jon', :sur_name => 'Jones')
       end
-      @cite.authors << authors
       @cite.save
     end
 

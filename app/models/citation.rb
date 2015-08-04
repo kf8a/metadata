@@ -237,9 +237,9 @@ class Citation < ActiveRecord::Base
     citation_type.try(:name) == 'book'
   end
 
-  # def formatted(options={})
-  #   book? ? formatted_book(options) : formatted_article(options)
-  # end
+  def formatted(options={})
+    book? ? formatted_book(options) : formatted_article(options)
+  end
 
   def to_bib
     entry = BibTeX::Entry.new
@@ -426,7 +426,7 @@ class Citation < ActiveRecord::Base
   # use natural order for second and subsequent authors
   # 
   def author_string
-    my_authors = authors.all.to_a
+    my_authors = self.authors.to_a
     if my_authors.length > 1
       last_author = my_authors.pop
       first_author = my_authors.shift
