@@ -19,8 +19,7 @@ gem 'cube-ruby'
 
 #gem 'mercury-rails'
 
-# can we go back to the collective idea branch of awesome_nested_set
-gem 'awesome_nested_set' #, :git => 'git://github.com/galetahub/awesome_nested_set.git'
+gem 'awesome_nested_set'
 
 gem 'jquery-rails' 
 
