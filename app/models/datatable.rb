@@ -321,6 +321,26 @@ class Datatable < ActiveRecord::Base
     end
   end
 
+  def self.csv_header
+    # title 
+    # data source
+    # metadata source
+    terms_of_use
+    # comments
+    # variate table
+    CSV::Row.new([:time, :store, :amount], ['Time', 'Store', 'Amount'], true)
+  end
+
+  def to_csv_row
+    CSV::Row.new(title: title, store: store.name, amount: amount)
+  end
+
+  def self.find_in_batches(batch_size, &block)
+    find_each(batch_size: batch_size) do |data|
+      yield data
+    end
+  end
+
   def raw_csv(units=true)
     convert_to_csv(all_data, units)
   end
@@ -437,15 +457,11 @@ class Datatable < ActiveRecord::Base
   end
 
   def approved_data
-    ActiveRecord::Base.connection.execute(approved_data_query)
+    DataQuery.find(approved_data_query)
   end
 
   def all_data
-    ActiveRecord::Base.connection.execute(self.object)
-  end
-
-  def get_csv_data(query)
-    result = ActiveRecord::Base.connection.execute(query + 'limit 0')
+    DataQuery.find(self.object)
   end
 
   def offset

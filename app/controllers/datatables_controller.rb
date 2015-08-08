@@ -59,8 +59,14 @@ class DatatablesController < ApplicationController
                 send_file  path, :type => 'text/csv', :disposition => 'inline'
               end
             end
-            # render show.csv.erb
           end
+          # render show.csv.erb
+
+          # if current_user.try(:role) == 'admin'
+          #   render_admin_csv
+          # else
+          #   render_csv
+          # end
         end
         format.climdb do
           unless csv_ok
@@ -242,10 +248,53 @@ class DatatablesController < ApplicationController
                                      :is_secondary)
   end
 
+  private
+
+  def render_csv
+    set_file_headers
+    set_streaming_headers
+
+    response.status = 200
+    self.response_body = csv_data
+  end
+
+  def render_admin_csv
+    set_file_headers
+    set_streaming_headers
+
+    response.status = 200
+    self.response_body = csv_admin_data
+  end
+
+  def set_file_headers
+    file_name = "#{@datatable.title}.csv"
+    headers["Content-Type"] = "text/csv"
+    headers["Content-disposition"] = "attachment; filename=\"#{file_name}\""
+  end
+
+  def set_streaming_headers
+    #nginx doc: Setting this to "no" will allow unbuffered responses suitable for Comet and HTTP streaming applications
+    headers['X-Accel-Buffering'] = 'no'
+
+    headers["Cache-Control"] ||= "no-cache"
+    headers.delete("Content-Length")
+  end
+
+  def csv_data
+    Enumerator.new do |line|
+      line << Datatable.csv_headers.to_s
+
+      Datatable.find_in_batches(){ |datatable|  line << datatable.to_csv_row.to_s }
+    end
+  end
+
+  def csv_admin_data
+  end
+
   # def reject_robots
   #   if params[:id] == 'robots'
   #     render :status => 404
   #   end
   # end
-  
+
 end
