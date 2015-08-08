@@ -30,3 +30,5 @@ config/initializers/site_keys.rb
 .sass-cache/
 uploaded_files
 uploads/*
+sandi_meter
+public/metadata-assets/
