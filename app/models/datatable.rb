@@ -321,24 +321,20 @@ class Datatable < ActiveRecord::Base
     end
   end
 
-  def self.csv_header
-    # title 
-    # data source
-    # metadata source
-    terms_of_use
-    # comments
-    # variate table
-    CSV::Row.new([:time, :store, :amount], ['Time', 'Store', 'Amount'], true)
+  def csv_headers
+    [
+    "# #{title}\n",
+    data_source,
+    terms_of_use,
+    data_comments
+    #variate_table,
+    column_names,
+    #column_units
+    ].join
   end
 
-  def to_csv_row
-    CSV::Row.new(title: title, store: store.name, amount: amount)
-  end
-
-  def self.find_in_batches(batch_size, &block)
-    find_each(batch_size: batch_size) do |data|
-      yield data
-    end
+  def column_names
+    DataQuery.column_names(query)
   end
 
   def raw_csv(units=true)
@@ -386,6 +382,7 @@ class Datatable < ActiveRecord::Base
     <<-END
 # These Data are copyrighted and use in a publication requires permission
 # as detailed in our Terms of use:  http://lter.kbs.msu.edu/data/terms-of-use/
+# Use of the data constitues acceptence of the terms.
 #
   END
   end
@@ -400,7 +397,8 @@ class Datatable < ActiveRecord::Base
 
   def data_source
     <<-END
-# Data Source: http://#{website_name}.kbs.msu.edu/datatables/#{self.id}
+#
+# Original Data Source: http://#{website_name}.kbs.msu.edu/datatables/#{self.id}
 # The newest version of the data http://#{website_name}.kbs.msu.edu/datatables/#{self.id}.csv
 # Full EML Metadata: http://#{website_name}.kbs.msu.edu/datatables/#{self.dataset.id}.eml
 # 
