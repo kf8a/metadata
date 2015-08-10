@@ -326,15 +326,21 @@ class Datatable < ActiveRecord::Base
     "# #{title}\n",
     data_source,
     terms_of_use,
-    data_comments
-    #variate_table,
-    column_names,
-    #column_units
+    variate_table,
+    data_comments,
+    variate_names.join(",") + "\n",
+    variate_units.join(",") + "\n"
     ].join
   end
 
-  def column_names
-    DataQuery.column_names(query)
+  def variate_table
+    result = "#     VARIATE TABLE\n"
+    result += variates.collect do |variate| 
+      unit = variate.try(:unit)
+      "# " + [variate.try(:name), unit.try(:name), variate.try(:description)].join("\t") + "\n"
+    end.join
+    result += "#\n"
+    result
   end
 
   def raw_csv(units=true)

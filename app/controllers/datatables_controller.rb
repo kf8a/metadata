@@ -50,22 +50,22 @@ class DatatablesController < ApplicationController
           unless csv_ok
             render :text => "You do not have permission to download this datatable"
           end
-          unless current_user.try(:role) == 'admin'
-            if datatable.csv_cache.exists?
-              if Rails.env.production?
-                redirect_to(datatable.csv_cache.s3_object(params[:style]).url_for(:read ,:secure => true, :expires_in => 60.seconds).to_s)
-              else
-                path = datatable.csv_cache.path(params[:style])
-                send_file  path, :type => 'text/csv', :disposition => 'inline'
-              end
-            end
-          end
+          # unless current_user.try(:role) == 'admin'
+          #   if datatable.csv_cache.exists?
+          #     if Rails.env.production?
+          #       redirect_to(datatable.csv_cache.s3_object(params[:style]).url_for(:read ,:secure => true, :expires_in => 60.seconds).to_s)
+          #     else
+          #       path = datatable.csv_cache.path(params[:style])
+          #       send_file  path, :type => 'text/csv', :disposition => 'inline'
+          #     end
+          #   end
+          # end
           # render show.csv.erb
 
           # if current_user.try(:role) == 'admin'
           #   render_admin_csv
           # else
-          #   render_csv
+            render_csv
           # end
         end
         format.climdb do
@@ -267,7 +267,7 @@ class DatatablesController < ApplicationController
   end
 
   def set_file_headers
-    file_name = "#{@datatable.title}.csv"
+    file_name = "#{@datatable.title.gsub(/ /,'+')}.csv"
     headers["Content-Type"] = "text/csv"
     headers["Content-disposition"] = "attachment; filename=\"#{file_name}\""
   end
@@ -282,9 +282,11 @@ class DatatablesController < ApplicationController
 
   def csv_data
     Enumerator.new do |line|
-      line << Datatable.csv_headers.to_s
+      line << @datatable.csv_headers.to_s
 
-      Datatable.find_in_batches(){ |datatable|  line << datatable.to_csv_row.to_s }
+      DataQuery.find_in_batches_as_csv(@datatable.approved_data_query) do |data|
+        line << data.to_s
+      end
     end
   end
 

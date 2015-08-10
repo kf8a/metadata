@@ -1,5 +1,0 @@
-<% if admin?  || ok_to_qc?(@datatable) -%>
-  <%=raw @datatable.raw_csv %>
-<% else -%>  
-    <%=raw @datatable.to_csv %>
-<% end -%>
