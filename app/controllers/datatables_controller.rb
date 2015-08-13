@@ -62,11 +62,11 @@ class DatatablesController < ApplicationController
           # end
           # render show.csv.erb
 
-          # if current_user.try(:role) == 'admin'
-          #   render_admin_csv
-          # else
+          if current_user.try(:role) == 'admin'
+            render_admin_csv
+          else
             render_csv
-          # end
+          end
         end
         format.climdb do
           unless csv_ok
@@ -291,6 +291,13 @@ class DatatablesController < ApplicationController
   end
 
   def csv_admin_data
+    Enumerator.new do |line|
+      line << @datatable.csv_headers.to_s
+
+      DataQuery.find_in_batches_as_csv(@datatable.object) do |data|
+        line << data.to_s
+      end
+    end
   end
 
   # def reject_robots
