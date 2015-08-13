@@ -6,7 +6,7 @@ gem 'activerecord-session_store'
 gem 'responders'
 
 gem 'rake'
-gem 'capistrano' 
+gem 'capistrano', '~>2'
 gem 'pg'
 gem 'clearance'
 gem 'acts-as-taggable-on'
