@@ -105,6 +105,14 @@ task :kalkaska do
   role :db, "#{host}", :primary => true
 end
 
+task :staging do
+  set :host, 'houghton.kbs.msu.edu'
+  set :asset_host, 'houghton.kbs.msu.edu'
+  role :web, "#{host}"
+  role :app, "#{host}"
+  role :db, "#{host}", :primary => true
+end
+
 before 'deploy:update_code', 'thinking_sphinx:stop'
 after 'deploy:finalize_update', 'thinking_sphinx:start'
 
