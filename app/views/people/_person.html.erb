@@ -1,3 +1,3 @@
-<% cache(person) %>
+<% cache(person) do %>
 <li><%= link_to "#{person.full_name}", person_path(person) %></li>
 <% end %>
