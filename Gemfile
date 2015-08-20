@@ -23,6 +23,10 @@ gem 'awesome_nested_set'
 
 gem 'jquery-rails' 
 
+#TODO remove as soon as possible
+gem 'net-ssh', '!= 2.10.0'
+
+
 gem 'workflow'
 
 gem 'friendly_id'
