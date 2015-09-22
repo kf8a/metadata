@@ -1,0 +1,55 @@
+---
+
+- hosts: rails
+
+  tasks:
+  - name: ensure deploy user exists
+    user: name='deploy'
+
+  - name: Make sure /var/u/apps exists
+    file: path=/var/u/apps owner=deploy group=deploy state=directory
+
+  - name: ensure postgresql dev is installed
+    apt: pkg=postgresql-server-dev-all state=installed
+
+  - name: ensure nokogiri pre-requisites are installed
+    apt: pkg=libxml2-dev,libxml2,libxslt1-dev,libxslt1.1 state=installed
+
+  - name: ensure curl is available
+    apt: pkg=curl state=present
+
+  - apt: pkg=ruby-full,bundler state=latest
+
+  - file: path=/var/u/apps/metadata/releases group=deploy owner=deploy state=directory
+
+  - file: path=/var/u/apps/metadata/shared/{{item.dir }} group=deploy owner=deploy state=directory
+    with_items:
+      - { dir: "config"}
+      - { dir: "pids" }
+      - { dir: "log" }
+      - { dir: "system" }
+      - { dir: "assets" }
+      - { dir: "bundle" }
+      - { dir: "cached-copy" }
+
+  - copy: src=private/config/{{item.file }} dest=/var/u/apps/metadata/shared/config/{{item.file }} owner=deploy group=deploy mode=600
+    with_items:
+      - { file: "database.yml" }
+      - { file: "s3.yml" }
+      - { file: "secret_token.rb" }
+      - { file: "site_keys.rb" }
+      - { file: "unicorn.rb" }
+
+
+  - apt: pkg=nginx-full state=latest
+
+  - copy: src="nginx/metadata.conf" dest="/etc/nginx/sites-available/metadata.conf"
+  - file: src=/etc/nginx/sites-available/metadata.conf dest=/etc/nginx/sites-enabled/metadata.conf state=link
+    notify:
+      restart nginx
+
+  - ufw: rule=allow port=4060
+
+  handlers:
+  - name: restart nginx
+    service: name=nginx state=restarted
