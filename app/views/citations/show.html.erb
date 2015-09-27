@@ -17,6 +17,12 @@
     <p><%= link_to "vist the Publishers website", @citation.publisher_url %></p>
   <% end %>
 
+  <% if @citation.data_url.present? %>
+    <p>
+    Data URL: <a href=""<%= @citation.data_url %>""><%= @citation.data_url %></a>
+    </p>
+  <% end %>
+
 
   <% if @citation.datatables.present? %>
     <p>Associated Datatables: </p>
