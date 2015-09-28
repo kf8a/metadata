@@ -89,7 +89,7 @@ class CitationsController < ApplicationController
   end
 
   def show
-    @citation = Citation.find(params[:id])
+    @citation = Citation.find(params[:id].to_i)
     @website = website
     store_location
     file_title = @citation.file_title
