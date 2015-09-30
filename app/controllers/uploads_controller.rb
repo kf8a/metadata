@@ -1,6 +1,7 @@
 class UploadsController < ApplicationController
 
-  before_filter :can_upload?, :except => [:index, :show]  unless Rails.env == 'development'
+  before_filter :admin?, except: [:index, show]
+  before_filter :can_upload?, :except => [:index, :show]
 
   def index
     @uploads = Upload.all
@@ -12,9 +13,9 @@ class UploadsController < ApplicationController
 
   def create
     @upload = Upload.new(uploads_params)
-    if @upload.save
-      flash[:notice] = 'Study was uploaded!'
-    end
+    # if @upload.save
+    #   flash[:notice] = 'Study was uploaded!'
+    # end
     respond_with @upload
   end
 
@@ -29,7 +30,10 @@ class UploadsController < ApplicationController
   private
 
   def can_upload?
-    current_user.try(:role) == 'admin' || current_user.try(:role) == 'uploader'
+    if current_user.try(:role) == 'admin' || current_user.try(:role) == 'uploader'
+      deny_access
+      return false
+    end
   end
 
   def set_title
