@@ -2,6 +2,10 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <% if content_for?(:head) %>
+      <%= yield(:head) %>
+    <% end %>
+
     <title>KBS LTER <%= controller.controller_name.upcase %></title>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

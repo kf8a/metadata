@@ -1,4 +1,19 @@
 <% cache do %>
+  <% content_for :head do %>
+    <meta name="citation_title" content="<%=@citation.title%>">
+    <% @citation.authors.each do |author| %>
+    <meta name="citation_author" content="<%=author.name%>"  >
+    <% end %>
+    <meta name="citation_publication_date" content="">
+    <meta name="citation_journal_title" content="<%=@citation.publication%>">
+    <meta name="citation_volume" content="<%=@citation.volume%>">
+    <meta name="citation_issue" content="<%=@citation.issue%>">
+    <meta name="citation_firstpage" content="<%=@citation.start_page_number%>">
+    <meta name="citation_lastpage" content="<%=@citation.ending_page_number%>">
+    <meta name="citation_pdf_url" content="<%= download_citation_path(@citation) %>">
+
+    <% end %>
+
   <%= render 'shared/breadcrumbs',
     :crumbs => [{:name => controller_name.upcase, :url =>  url_for(:controller => controller_name, :action => 'index')},
       {:name => @citation.short_author_string.upcase}] %>
