@@ -4,14 +4,15 @@
     <% @citation.authors.each do |author| %>
     <meta name="citation_author" content="<%=author.name%>"  >
     <% end %>
-    <meta name="citation_publication_date" content="">
+    <meta name="citation_publication_date" content="<%=@citation.pub_year%>">
+    <meta name="citation_doi" contents="<%=@citation.doi %>">
     <meta name="citation_journal_title" content="<%=@citation.publication%>">
     <meta name="citation_volume" content="<%=@citation.volume%>">
     <meta name="citation_issue" content="<%=@citation.issue%>">
     <meta name="citation_firstpage" content="<%=@citation.start_page_number%>">
     <meta name="citation_lastpage" content="<%=@citation.ending_page_number%>">
     <% if @citation.open_access? %>
-      <meta name="citation_pdf_url" content="<%= download_citation_path(@citation) %>">
+      <meta name="citation_pdf_url" content="<%= download_citation_url(@citation) %>">
     <% end %>
   <% end %>
 
