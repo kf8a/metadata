@@ -10,9 +10,10 @@
     <meta name="citation_issue" content="<%=@citation.issue%>">
     <meta name="citation_firstpage" content="<%=@citation.start_page_number%>">
     <meta name="citation_lastpage" content="<%=@citation.ending_page_number%>">
-    <meta name="citation_pdf_url" content="<%= download_citation_path(@citation) %>">
-
+    <% if @citation.open_access? %>
+      <meta name="citation_pdf_url" content="<%= download_citation_path(@citation) %>">
     <% end %>
+  <% end %>
 
   <%= render 'shared/breadcrumbs',
     :crumbs => [{:name => controller_name.upcase, :url =>  url_for(:controller => controller_name, :action => 'index')},
