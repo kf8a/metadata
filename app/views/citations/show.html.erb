@@ -1,88 +1,89 @@
-<% cache do %>
-  <% content_for :head do %>
-    <meta name="citation_title" content="<%=@citation.title%>">
-    <% @citation.authors.each do |author| %>
+<% content_for :head do %>
+  <meta name="citation_title" content="<%=@citation.title%>">
+  <% @citation.authors.each do |author| %>
     <meta name="citation_author" content="<%=author.name%>"  >
-    <% end %>
-    <meta name="citation_publication_date" content="<%=@citation.pub_year%>">
-    <meta name="citation_doi" contents="<%=@citation.doi %>">
-    <meta name="citation_journal_title" content="<%=@citation.publication%>">
-    <meta name="citation_volume" content="<%=@citation.volume%>">
-    <meta name="citation_issue" content="<%=@citation.issue%>">
-    <meta name="citation_firstpage" content="<%=@citation.start_page_number%>">
-    <meta name="citation_lastpage" content="<%=@citation.ending_page_number%>">
-    <% if @citation.open_access? %>
-      <meta name="citation_pdf_url" content="<%= download_citation_url(@citation) %>">
-    <% end %>
   <% end %>
+  <meta name="citation_publication_date" content="<%=@citation.pub_year%>">
+  <meta name="citation_doi" contents="<%=@citation.doi %>">
+  <meta name="citation_journal_title" content="<%=@citation.publication%>">
+  <meta name="citation_volume" content="<%=@citation.volume%>">
+  <meta name="citation_issue" content="<%=@citation.issue%>">
+  <meta name="citation_firstpage" content="<%=@citation.start_page_number%>">
+  <meta name="citation_lastpage" content="<%=@citation.ending_page_number%>">
+  <% if @citation.open_access? %>
+    <meta name="citation_pdf_url" content="<%= download_citation_url(@citation) %>">
+  <% end %>
+  <title>LTER Citations - <%=@citation.formatted%></title>
+<% end %>
+<% cache do %>
 
   <%= render 'shared/breadcrumbs',
     :crumbs => [{:name => controller_name.upcase, :url =>  url_for(:controller => controller_name, :action => 'index')},
       {:name => @citation.short_author_string.upcase}] %>
-  <h3><%= raw @citation.formatted(:long=>true)  %></h3>
-  <p>
-  <% if @citation.doi.present? %>
-    <div class="altimetrics">
-      <div data-badge-type="donut" data-doi=<%=@citation.doi%> data-hide-no-mentions="true" class="altmetric-embed"></div>
-    </div>
-  <% end %>
-  <%=raw textilize(@citation.abstract) %></p>
-  <% if @citation.doi %>
-    <p>DOI: <a href="http://dx.doi.org/<%= @citation.doi %>"><%= @citation.doi %></a></p>
-  <% end %>
-  <% unless @citation.publisher_url.try(:empty?) %>
-    <p><%= link_to "vist the Publishers website", @citation.publisher_url %></p>
-  <% end %>
+      <h3><%= raw @citation.formatted(:long=>true)  %></h3>
+      <p>
+      <% if @citation.doi.present? %>
+        <div class="altimetrics">
+          <div data-badge-type="donut" data-doi=<%=@citation.doi%> data-hide-no-mentions="true" class="altmetric-embed"></div>
+        </div>
+      <% end %>
+      <%=raw textilize(@citation.abstract) %></p>
+      <% if @citation.doi %>
+        <p>DOI: <a href="http://dx.doi.org/<%= @citation.doi %>"><%= @citation.doi %></a></p>
+      <% end %>
+      <% unless @citation.publisher_url.try(:empty?) %>
+        <p><%= link_to "vist the Publishers website", @citation.publisher_url %></p>
+      <% end %>
 
-  <% if @citation.data_url.present? %>
+      <% if @citation.data_url.present? %>
+        <p>
+        Data URL: <a href=""<%= @citation.data_url %>""><%= @citation.data_url %></a>
+        </p>
+      <% end %>
+
+
+      <% if @citation.datatables.present? %>
+        <p>Associated Datatables: </p>
+        <ol>
+          <% @citation.datatables.each do |datatable| %>
+            <li><%= link_to datatable.title, datatable %></li>
+          <% end %>
+        </ol>
+      <% end %>
+      <% if @citation.treatments.present? %>
+        <p>Associated Treatment Areas: </p>
+        <ol>
+          <% @citation.treatments.each do |treatment| %>
+            <li><%= treatment.name %></li>
+          <% end %>
+        </ol>
+      <% end %>
+    <% end %>
     <p>
-    Data URL: <a href=""<%= @citation.data_url %>""><%= @citation.data_url %></a>
+    Download citation to
+    <%= link_to 'endnote', citation_path(@citation, :format=>'enw') %>
+    <%= link_to 'bibtex',  citation_path(@citation, :format=>'bib') %>
     </p>
-  <% end %>
-
-
-  <% if @citation.datatables.present? %>
-    <p>Associated Datatables: </p>
-    <ol>
-      <% @citation.datatables.each do |datatable| %>
-        <li><%= link_to datatable.title, datatable %></li>
+    <% if @citation.pdf.exists? %>
+      <% if signed_in? or @citation.open_access %>
+        <%=link_to 'Get PDF', download_citation_path(@citation), :class=>'download-link'%>
+      <% else %>
+        <%= link_to 'Sign in to download PDF', sign_in_path, :class=>'download-link'  %>
       <% end %>
-    </ol>
-  <% end %>
-  <% if @citation.treatments.present? %>
-    <p>Associated Treatment Areas: </p>
-    <ol>
-      <% @citation.treatments.each do |treatment| %>
-        <li><%= treatment.name %></li>
+    <% end %>
+
+    <%= link_to 'back to index', citations_path %>
+
+    <script type='text/javascript' src='https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script>
+
+    <% if signed_in? and current_user.role == 'admin' or Rails.env == 'development' -%>
+      <% if @website.citations.first != @citation -%>
+        <%= link_to 'Previous', citation_path(@website.citations.previous(@citation).first) %>
+      <% end -%>
+      <%= link_to 'Edit', edit_citation_path(@citation) %>
+      <% if @website.citations.last != @citation -%>
+        <%= link_to 'Next', citation_path(@website.citations.next(@citation).first) %>
+      <% end -%>
+      <%= button_to 'Delete', { :action => "destroy", :id => @citation.id },
+        :confirm => "Are you sure?", :method => :delete  %>
       <% end %>
-    </ol>
-  <% end %>
-<% end %>
-<p>
-Download citation to
-<%= link_to 'endnote', citation_path(@citation, :format=>'enw') %>
-<%= link_to 'bibtex',  citation_path(@citation, :format=>'bib') %>
-</p>
-<% if @citation.pdf.exists? %>
-  <% if signed_in? or @citation.open_access %>
-    <%=link_to 'Get PDF', download_citation_path(@citation), :class=>'download-link'%>
-  <% else %>
-    <%= link_to 'Sign in to download PDF', sign_in_path, :class=>'download-link'  %>
-  <% end %>
-<% end %>
-
-<%= link_to 'back to index', citations_path %>
-
-<script type='text/javascript' src='https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script>
-
-<% if signed_in? and current_user.role == 'admin' or Rails.env == 'development' -%>
-  <% if @website.citations.first != @citation -%>
-    <%= link_to 'Previous', citation_path(@website.citations.previous(@citation).first) %>
-  <% end -%>
-  <%= link_to 'Edit', edit_citation_path(@citation) %>
-  <% if @website.citations.last != @citation -%>
-    <%= link_to 'Next', citation_path(@website.citations.next(@citation).first) %>
-  <% end -%>
-  <%= button_to 'Delete', { :action => "destroy", :id => @citation.id },
-    :confirm => "Are you sure?", :method => :delete  %>
-<% end %>
