@@ -1,3 +1,6 @@
+<% content_for :head do %>
+  <title>Dataset - %<= @dataset.title %></title>
+<% end %>
 <%= render 'shared/breadcrumbs',
   :crumbs => [{:name => 'DATATABLES', :url =>  url_for(:controller => 'datatables', :action => 'index')},
     {:name => dataset.title.upcase}] %>

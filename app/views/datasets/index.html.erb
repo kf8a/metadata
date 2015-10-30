@@ -1,3 +1,6 @@
+<% content_for :head do %>
+  <title>Datasets</title>
+<% end %>
 <dl id='all datasets'>
   <% @datasets.each do |dataset| %>
     <% next unless dataset.on_web %>

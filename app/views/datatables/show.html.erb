@@ -1,3 +1,6 @@
+<% content_for :head do %>
+  <title>KBS LTER Datatable - <%= datatable.title %></title>
+<% end %>
 <% cache([datatable, datatable.dataset]) do %>
   <%= render 'shared/breadcrumbs',
     :crumbs => [{:name => controller_name.upcase, :url =>  url_for(:controller => controller_name, :action => 'index')},
