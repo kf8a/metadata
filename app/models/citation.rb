@@ -8,8 +8,8 @@ class Citation < ActiveRecord::Base
 
   versioned :dependent => :tracking
 
-  has_many :authors, -> { order(:seniority)} , :dependent => :destroy
-  has_many :editors, -> { order(:seniority)}, :dependent => :destroy
+  has_many :authors, -> { order(:seniority)}, dependent: :destroy
+  has_many :editors, -> { order(:seniority)}, dependent: :destroy
 
   belongs_to :citation_type
   belongs_to :website
@@ -436,7 +436,7 @@ class Citation < ActiveRecord::Base
     else
       author_array = [authors.first.formatted]
     end
-    author_array.to_sentence(:two_words_connector => ', and ')
+    author_array.to_sentence
   end
 
   def editor_string

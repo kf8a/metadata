@@ -37,17 +37,17 @@ class CitationsController < ApplicationController
       citations = [Citation.from_website(website.id).by_treatment(params[:treatment])]
     end
 
-    @submitted_citations = citations.collect {|c| c.includes(:authors).submitted}.flatten
-    @forthcoming_citations = citations.collect {|c| c.includes(:authors).forthcoming}.flatten
+    @submitted_citations = citations.collect {|c| c.submitted}.flatten
+    @forthcoming_citations = citations.collect {|c| c.forthcoming}.flatten
     date = params[:date].presence
-    @citations = date ? citations.collect {|c| c.by_date(date)}.flatten : citations.collect {|c| c.includes(:authors).published}.flatten
+    @citations = date ? citations.collect {|c| c.by_date(date)}.flatten : citations.collect {|c| c.published}.flatten
 
     index_responder
   end
 
   def submitted 
       citations = [website.citations.publications]
-      @citations = citations.collect {|c| c.includes(:authors).submitted}.flatten
+      @citations = citations.collect {|c| c.submitted}.flatten
       index_responder
   end
 
