@@ -8,7 +8,7 @@
       <% end %>
       <% cache(:action=>'index', :action_suffix => "citation_#{citation.id}") do %>
         <p>
-        <%=citation.formatted %>
+        <%=citation.formatted(long: true) %>
         </p>
 
       <% if citation.pdf.exists? %>
