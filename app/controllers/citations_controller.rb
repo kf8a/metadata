@@ -184,6 +184,7 @@ class CitationsController < ApplicationController
                                     :periodical_abbreviation, :volume, :issue, :city, :publisher,
                                     :secondary_title, :series_title, :isbn, :doi, :full_text,
                                     :publisher_url, :website_id, :pdf, :state, :open_access, :type,
-                                    :has_lter_acknowledgement,:annotation, :data_url)
+                                    :has_lter_acknowledgement,:annotation, :data_url,
+                                    datatable_ids: [], treatment_ids:[])
   end
 end
