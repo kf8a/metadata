@@ -71,6 +71,8 @@ namespace :deploy do
   after 'deploy:finalize_update', :link_site_keys
   after 'deploy:finalize_update', :link_new_relic
   after 'deploy:finalize_update', :link_s3
+  after 'deploy', 'thinking_sphinx:rebuild'
+  # after 'deploy:finalize_update', :update_asset_host
   #after 'deploy', :lock_sphinks
 
   namespace :assets do
@@ -79,7 +81,7 @@ namespace :deploy do
       run_locally "bundle exec rake assets:clean"
       run_locally "bundle exec rake assets:precompile"
       find_servers_for_task(current_task).each do |server|
-        run_locally "rsync -vr --exclude='.DS_Store' public/assets #{user}@#{server.host}:#{shared_path}/"
+        # run_locally "rsync -vr --exclude='.DS_Store' public/assets #{user}@#{server.host}:#{shared_path}/"
         run_locally "rsync -vr --exclude='.DS_Store' public/assets #{asset_host}:#{asset_path}/"
       end
     end
@@ -107,7 +109,9 @@ end
 
 task :staging do
   set :host, 'houghton.kbs.msu.edu'
-  set :asset_host, 'houghton.kbs.msu.edu'
+  set :asset_host, 'hillsdale.kbs.msu.edu'
+  set :asset_path, '/var/www/lter/metadata-assets'
+  set :public_asset_host, 'lter.kbs.msu.edu'
   role :web, "#{host}"
   role :app, "#{host}"
   role :db, "#{host}", :primary => true
@@ -169,10 +173,11 @@ task :link_unicorn do
   run "ln -nfs #{deploy_to}/shared/config/unicorn.rb #{release_path}/config/unicorn.rb"
 end
 
-desc 'set asset host on production'
-task :set_asset_host do
-  run "sed -i 's/#config.action_controller.asset_host/config.action_controller.asset_host/' #{release_path}/config/environments/production.rb"
-end
+# desc 'set asset host on production'
+# task :update_asset_host do
+#   # run "sed -i %Q{s/# config.action_controller.asset_host = 'http:\/\/assets.example.com'/config.action_controller.asset_host=/http://#{public_asset_host}} #{release_path}/config/environments/production.rb"
+#   run "sed -i  %Q{s/# config.action_controller.asset_host = 'http:\/\/assets.example.com'/config.action_controller.asset_host = 'http:\/\/lter.kbs.msu.edu\/metadata-assets\/'/}  #{release_path}/config/environments/production.rb"
+# end
 
 desc 'link asset directory'
 task :link_assets do
