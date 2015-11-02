@@ -122,6 +122,7 @@ class CitationsController < ApplicationController
     @citation = Citation.find(params[:id])
     @citation.type = params[:citation].try(:delete, 'type')
     @citation.update_attributes(citation_params)
+    @citation.touch
     respond_with @citation, :location=>citation_url
   end
 

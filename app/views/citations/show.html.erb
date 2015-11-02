@@ -15,7 +15,7 @@
   <% end %>
   <title>LTER Publications - <%=@citation.formatted%></title>
 <% end %>
-<% cache (@citation) do %>
+<% cache(@citation) do %>
 
   <%= render 'shared/breadcrumbs',
     :crumbs => [{:name => controller_name.upcase, :url =>  url_for(:controller => controller_name, :action => 'index')},
