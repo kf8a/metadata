@@ -17,7 +17,7 @@
         </div>
         <div class='member-only'>
           <%= link_to 'abstract', citation_path(citation) %>
-          <%= link_to 'pdf', download_citation_path(citation)%>
+          <%= link_to 'pdf', publication_url(citation)%>
         </div>
       <% else %>
         <div class='non-member'>

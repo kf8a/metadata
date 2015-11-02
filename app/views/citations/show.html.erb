@@ -11,7 +11,7 @@
   <meta name="citation_firstpage" content="<%=@citation.start_page_number%>">
   <meta name="citation_lastpage" content="<%=@citation.ending_page_number%>">
   <% if @citation.open_access? %>
-    <meta name="citation_pdf_url" content="<%= download_citation_url(@citation) %>">
+    <meta name="citation_pdf_url" content="<%= publication_url(@citation) %>">
   <% end %>
   <title>LTER Publications - <%=@citation.formatted%></title>
 <% end %>
@@ -66,7 +66,7 @@
     </p>
     <% if @citation.pdf.exists? %>
       <% if signed_in? or @citation.open_access %>
-        <%=link_to 'Get PDF', download_citation_path(@citation), :class=>'download-link'%>
+        <%=link_to 'Get PDF', publication_url(@citation), :class=>'download-link'%>
       <% else %>
         <%= link_to 'Sign in to download PDF', sign_in_path, :class=>'download-link'  %>
       <% end %>
