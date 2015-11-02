@@ -183,6 +183,7 @@ class CitationsController < ApplicationController
                                     :start_page_number, :ending_page_number, :periodical_full_name,
                                     :periodical_abbreviation, :volume, :issue, :city, :publisher,
                                     :secondary_title, :series_title, :isbn, :doi, :full_text,
-                                    :publisher_url, :website_id, :pdf, :state, :open_access, :type)
+                                    :publisher_url, :website_id, :pdf, :state, :open_access, :type,
+                                    :has_lter_acknowledgement,:annotation, :data_url)
   end
 end
