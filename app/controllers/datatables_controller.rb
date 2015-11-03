@@ -245,7 +245,8 @@ class DatatablesController < ApplicationController
     params.require(:datatable).permit(:name, :title, :comments, :dataset_id, :data_url, :is_restricted,
                                       :description, :begin_date, :end_date, :on_web,
                                      :theme_id, :core_area_id, :weight, :study_id, :deprecation_notice,
-                                     :is_secondary)
+                                     core_area_ids: [],
+                                     :is_secondary, variates_attributes:[], data_contributions_attributes: [])
   end
 
   private
