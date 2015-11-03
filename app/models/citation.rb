@@ -37,7 +37,7 @@ class Citation < ActiveRecord::Base
         :path => ":rails_root/uploads/citations/:attachment/:id/:style/:basename.:extension"
   end
 
-  validates_attachment_content_type :pdf, content_type: ["application/pdf"]
+  validates_attachment_content_type :pdf, content_type: /pdf/
   before_post_process :transliterate_file_name
 
   # attr_accessible :Tag, :title, :abstract, 
