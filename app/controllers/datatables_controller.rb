@@ -242,10 +242,13 @@ class DatatablesController < ApplicationController
   end
 
   def datatable_params
-    params.require(:datatable).permit(:name, :title, :comments, :dataset_id, :data_url, :is_restricted,
-                                      :description, :begin_date, :end_date, :on_web,
-                                     :theme_id, :core_area_id, :weight, :study_id, :deprecation_notice,
-                                     :is_secondary, core_area_ids:[] , variates_attributes:[], data_contributions_attributes: [])
+    params.require(:datatable).permit(:name, :title, :comments, :dataset_id, :data_url, :is_restricted, :is_secondary,
+                                      :description, :begin_date, :end_date, :on_web, :keyword_list,
+                                     :theme_id, :weight, :study_id, :deprecation_notice, :update_frequency_days,
+                                     :is_secondary, {core_area_ids:[]}, 
+                                     {variates_attributes: [ [:name, :weight, :description, :unit_id, :measurement_scale, :data_type, :max_valid, 
+                                         :min_valid, :date_format, :precision, :missing_value_indicator, :_destroy, :id] ]} , 
+                                         {data_contributions_attributes: [[:person_id, :role_id, :_destroy, :id] ]})
   end
 
   private
