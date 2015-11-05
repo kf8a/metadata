@@ -1,5 +1,7 @@
 # encoding: utf-8
 class CitationsController < ApplicationController
+  protect_from_forgery except: :download
+
   respond_to :html, :xml, :json
   layout :site_layout
   before_filter :admin?, :only => [:new, :create, :edit, :update, :destroy] unless Rails.env == 'development'
