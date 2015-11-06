@@ -11,6 +11,7 @@ class Study < ActiveRecord::Base
   scope :by_id,     -> {order 'id' }
 
   before_destroy :check_for_treatments
+  after_touch :touch_parent
 
   def study_url(website)
     self.study_urls.where(:website_id => website.id).first.try(:url)
@@ -46,9 +47,11 @@ class Study < ActiveRecord::Base
       return false
     end
   end
+
+  def touch_parent
+    self.parent.try(:touch)
+  end
 end
-
-
 
 
 # == Schema Information

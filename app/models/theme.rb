@@ -7,6 +7,8 @@ class Theme < ActiveRecord::Base
   scope :by_weight, -> {order :weight}
   scope :by_name, -> { order 'name'}
 
+  after_touch :update_parent
+
   def nested_name
     '-' * level + name
   end
@@ -46,6 +48,12 @@ class Theme < ActiveRecord::Base
     else
       datatables.collect {|table| table if table.study == study }.compact
     end
+  end
+
+  private
+
+  def update_parent
+    self.parent.try(:touch)
   end
 end
 
