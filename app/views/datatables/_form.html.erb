@@ -50,8 +50,3 @@
 <h2>Object</h2>
 <%= datatable.object %>
 </div>
-<div>
-  <% unless datatable.new_record? %>
-    <%= link_to "Publish", publish_datatable_path(datatable), remote: true, method: :put %>
-  <% end %>
-</div>
