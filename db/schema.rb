@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150930224832) do
+ActiveRecord::Schema.define(version: 20151106193053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -629,18 +629,20 @@ ActiveRecord::Schema.define(version: 20150930224832) do
   end
 
   create_table "studies", force: :cascade do |t|
-    t.string  "name",        limit: 255
-    t.text    "description"
-    t.integer "weight"
-    t.integer "parent_id"
-    t.integer "lft"
-    t.integer "rgt"
-    t.text    "synopsis"
-    t.string  "url",         limit: 255
-    t.string  "code",        limit: 255
-    t.text    "warning"
-    t.text    "source"
-    t.text    "old_names"
+    t.string   "name",        limit: 255
+    t.text     "description"
+    t.integer  "weight"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.text     "synopsis"
+    t.string   "url",         limit: 255
+    t.string   "code",        limit: 255
+    t.text     "warning"
+    t.text     "source"
+    t.text     "old_names"
+    t.datetime "updated_at"
+    t.datetime "created_at"
   end
 
   add_index "studies", ["parent_id"], name: "index_studies_on_parent_id", using: :btree
@@ -661,13 +663,16 @@ ActiveRecord::Schema.define(version: 20150930224832) do
     t.datetime "created_at"
   end
 
-  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
   add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
   add_index "taggings", ["tagger_id"], name: "index_taggings_on_tagger_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
-    t.string "name", limit: 255
+    t.string  "name",           limit: 255
+    t.integer "taggings_count",             default: 0
   end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "templates", force: :cascade do |t|
     t.integer  "website_id"
@@ -681,11 +686,13 @@ ActiveRecord::Schema.define(version: 20150930224832) do
   add_index "templates", ["website_id"], name: "index_templates_on_website_id", using: :btree
 
   create_table "themes", force: :cascade do |t|
-    t.string  "name",      limit: 255
-    t.integer "weight"
-    t.integer "parent_id"
-    t.integer "lft"
-    t.integer "rgt"
+    t.string   "name",       limit: 255
+    t.integer  "weight"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.datetime "updated_at"
+    t.datetime "created_at"
   end
 
   add_index "themes", ["parent_id"], name: "index_themes_on_parent_id", using: :btree
