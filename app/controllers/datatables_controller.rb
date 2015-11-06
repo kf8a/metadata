@@ -11,12 +11,11 @@ class DatatablesController < ApplicationController
   # GET /datatables
   # GET /datatables.xml
   def index
-    # expires_in 6.minutes, :public=>true
     @area = params[:area]
     store_location
     retrieve_datatables('keyword_list' =>'')
 
-    if Rails.env == 'production' and stale? etag: @datatables
+    if Rails.env == 'production' #and stale? etag: @datatables
       respond_with @datatables do |format|
         format.rss {render :rss => @datatables}
       end
@@ -270,7 +269,7 @@ class DatatablesController < ApplicationController
   end
 
   def set_file_headers
-    file_name = "#{@datatable.title.gsub(/ /,'+')}.csv"
+    file_name = "#{@datatable.id}-#{@datatable.title.gsub(/ /,'+')}.csv"
     headers["Content-Type"] = "text/csv"
     headers["Content-disposition"] = "attachment; filename=\"#{file_name}\""
   end
