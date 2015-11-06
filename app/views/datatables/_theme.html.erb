@@ -1,3 +1,4 @@
+<% cache(theme) do %>
 <li><%= theme.name %>
   <ul>
     <% theme_datatables = theme.datatables_in_study(study, datatables) -%>
@@ -9,3 +10,4 @@
     <% end -%>
   </ul>
 </li>
+<% end %>

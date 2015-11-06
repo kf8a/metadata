@@ -1,3 +1,4 @@
+<% cache(study) do %>
 <li class='study-title' id='study_<%=study.id%>'><%= study.name %>
   <% unless  study.synopsis == '' -%>
     <p><%=raw study.synopsis%></p>
@@ -15,3 +16,4 @@
     <% end -%>
   </ul>
 </li>
+<% end %>
