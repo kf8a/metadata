@@ -14,7 +14,7 @@ class Datatable < ActiveRecord::Base
   has_and_belongs_to_many :citations
   has_one                 :collection
   has_and_belongs_to_many :core_areas
-  belongs_to              :dataset
+  belongs_to              :dataset, touch: true
   has_many                :data_contributions
   has_many                :owners, :through => :ownerships, :source => :user
   has_many                :ownerships
@@ -23,8 +23,8 @@ class Datatable < ActiveRecord::Base
   has_many                :permissions
   has_many                :requesters, :through => :permission_requests, :source => :user
   has_and_belongs_to_many :protocols
-  belongs_to              :study
-  belongs_to              :theme
+  belongs_to              :study, touch: true
+  belongs_to              :theme, touch: true
   has_many                :variates, -> {order :weight}
   has_many                :visualizations, -> {order :weight}
 
