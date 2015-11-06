@@ -114,6 +114,9 @@ class DatatablesController < ApplicationController
     @units = Unit.all
 
     if datatable.save
+      datatable.theme.touch
+      datatable.study.touch
+      datatable.dataset.touch
       flash[:notice] = 'Datatable was successfully created.'
     end
 

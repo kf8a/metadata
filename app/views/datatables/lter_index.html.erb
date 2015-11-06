@@ -25,7 +25,6 @@
   </ul>
 </div>
 <% else %>
-<% cache(:action_suffix => "lter") do %>
   <%= render 'shared/breadcrumbs', :crumbs => [{:name => controller_name.upcase}] %>
   <div class='page type-page hfeed'>
   <h1>KBS LTER Data Tables</h1>
@@ -44,7 +43,6 @@
     <% end -%>
   </ul>
 </div>
-<% end %>
 <% end %>
 
 <% if admin? %>
