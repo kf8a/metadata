@@ -218,7 +218,8 @@ class DatatablesController < ApplicationController
         Datatable.search @keyword_list, :with => {:website => website.id}
       else
         Datatable.where(:on_web => true).
-            joins('left join datasets on datasets.id = datatables.dataset_id').
+          includes(:dataset).references(:dataset).
+            # joins('left join datasets on datasets.id = datatables.dataset_id').
             where('is_secondary is false and website_id = ?', website.id)
       end
 
