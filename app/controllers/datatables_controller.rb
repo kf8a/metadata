@@ -11,6 +11,7 @@ class DatatablesController < ApplicationController
   # GET /datatables
   # GET /datatables.xml
   def index
+    @website = website
     @area = params[:area]
     store_location
     retrieve_datatables('keyword_list' =>'')
