@@ -1,4 +1,3 @@
-<% cache(study, website) do %>
 <li class='study-title' id='study_<%=study.id%>'><%= study.name %>
   <% unless  study.synopsis == '' -%>
     <p><%=raw study.synopsis%></p>
@@ -6,14 +5,13 @@
   <ul>
     <% study.children.each do |s| %>
       <% next unless s.include_datatables?(datatables) -%>
-      <%= render 'study', study: s, datatables: datatables, themes: themes, website: website %>
+      <%= render 'study', :study => s, :datatables => datatables, :themes => themes %>
     <% end -%>
   </ul>
   <ul>
     <% themes.each do |theme| -%>
       <% next unless theme.include_datatables_from_study?(datatables, study) -%>
-      <%= render 'theme', theme: theme, study: study, datatables: datatables, website: website %>
+      <%= render 'theme', :theme => theme, :study => study, :datatables => datatables %>
     <% end -%>
   </ul>
 </li>
-<% end %>

@@ -1,5 +1,3 @@
-<% cache(theme, website) do %>
-  <%= debug website %>
 <li><%= theme.name %>
   <ul>
     <% theme_datatables = theme.datatables_in_study(study, datatables) -%>
@@ -7,8 +5,7 @@
     <%= render theme_datatables %>
     <% theme.children.each do |t| -%>
       <% next unless t.include_datatables_from_study?(datatables, study) -%>
-      <%= render 'theme', theme: t, study: study, datatables: datatables, website: website %>
+      <%= render 'theme', :theme => t, :study => study, :datatables => datatables %>
     <% end -%>
   </ul>
 </li>
-<% end %>
