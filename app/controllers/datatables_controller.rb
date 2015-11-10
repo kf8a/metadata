@@ -24,6 +24,7 @@ class DatatablesController < ApplicationController
   end
 
   def search
+    @website = website
     query =  {'keyword_list' => ''}
     query.merge!(params)
     if query['keyword_list'].empty?
