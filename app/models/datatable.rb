@@ -397,9 +397,8 @@ class Datatable < ActiveRecord::Base
     if comments
       "#\n#        DATA TABLE CORRECTIONS AND COMMENTS\n" + comments.gsub(/^/,'#') + "\n"
     else
-      "\n#"
+      "\n"
     end
-    "\n"
   end
 
   def data_source
