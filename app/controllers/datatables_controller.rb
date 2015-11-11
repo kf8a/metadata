@@ -271,7 +271,7 @@ class DatatablesController < ApplicationController
   end
 
   def set_file_headers
-    file_name = "#{@datatable.id}-#{@datatable.title.gsub(/\W/,'+').squeeze('+')}.csv"
+    file_name = "#{@datatable.id}-#{@datatable.title.strip.gsub(/\W/,'+').squeeze('+')}.csv"
     headers["Content-Type"] = "text/csv"
     headers["Content-disposition"] = "attachment; filename=\"#{file_name}\""
   end
