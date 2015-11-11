@@ -388,17 +388,18 @@ class Datatable < ActiveRecord::Base
     <<-END
 # These Data are copyrighted and use in a publication requires permission
 # as detailed in our Terms of use:  http://lter.kbs.msu.edu/data/terms-of-use/
-# Use of the data constitues acceptence of the terms.
+# Use of the data constitutes acceptance of the terms.
 #
   END
   end
 
   def data_comments
     if comments
-      "#\n#        DATATABLE CORRECTIONS AND COMMENTS\n" + comments.gsub(/^/,'#') + "\n"
+      "#\n#        DATA TABLE CORRECTIONS AND COMMENTS\n" + comments.gsub(/^/,'#') + "\n"
     else
       "\n#"
     end
+    "\n#"
   end
 
   def data_source
