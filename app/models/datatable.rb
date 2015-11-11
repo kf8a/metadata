@@ -399,7 +399,7 @@ class Datatable < ActiveRecord::Base
     else
       "\n#"
     end
-    "\n#"
+    "\n"
   end
 
   def data_source
