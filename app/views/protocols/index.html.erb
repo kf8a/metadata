@@ -2,7 +2,6 @@
   <title>Protocols</title>
 <% end %>
 <%= render 'shared/breadcrumbs', :crumbs => [{:name => controller_name.upcase}] %>
-<% cache do %>
   <h2>Experiment Protocols</h2>
   <ul>
   <% @experiment_protocols.each do |protocol| %>
@@ -20,8 +19,6 @@
     <% end %> 
     </ul>
   <% end %>
-
-<% end %>
 
 <% if signed_in? and current_user.role == 'admin' %>
   <ul>
