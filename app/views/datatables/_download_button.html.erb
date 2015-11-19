@@ -9,7 +9,7 @@
                 :class => 'download-link' if false %>
       <%= link_to 'View as a Collection',
                 collection_path(datatable.collection) if datatable.collection %>
-      The <%=link_to 'standard data use policy applies to the this dataset' , termsofuse_path(datatable.dataset.sponsor)%>
+      The <%=link_to 'standard data use policy applies to the this dataset' , datatable.dataset.sponsor.terms_of_use_path%>
       <%= link_to 'Permissions Management',
                 permission_path(datatable) if current_user.try(:owns?, datatable)%>
       <%= link_to 'Owners Management',

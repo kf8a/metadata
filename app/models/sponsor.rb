@@ -5,6 +5,13 @@ class Sponsor < ActiveRecord::Base
   has_many :memberships
 
   # friendly_id :name
+  def terms_of_use_path
+    if terms_of_use_url.blank?
+      "/sponsor/#{id}"
+    else
+      terms_of_use_url
+    end
+  end
 end
 
 
