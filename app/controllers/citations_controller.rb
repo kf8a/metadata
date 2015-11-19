@@ -136,7 +136,7 @@ class CitationsController < ApplicationController
     if Rails.env.production?
       if citation.open_access
         #TODO make this work accross domains not just with lter
-        redirect_to("https://lter.kbs.msu.edu/open-access"+ citation.pdf.path.gsub(/ /, '+'))
+        redirect_to("https://lter.kbs.msu.edu/open-access"+ citation.pdf.path.gsub(/ /, '+').gsub(/\.(?!\w{3}$)/, '+'))
         #redirect_to(citation.pdf.s3_object(params[:style]).public_url.to_s)
       else
         redirect_to(citation.pdf.s3_object(params[:style]).url_for(:read ,:secure => true, :expires_in => 10.seconds).to_s)
