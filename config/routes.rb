@@ -14,8 +14,8 @@ Metadata::Application.routes.draw do
 
   resources :citations do
     member do
-      get :download
       get 'download/:filename', to: 'citations#download'
+      get :download
     end
     collection do
       get :biblio
