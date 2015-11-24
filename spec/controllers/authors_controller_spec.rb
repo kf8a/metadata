@@ -4,7 +4,7 @@ describe AuthorsController, type: :controller  do
   render_views
 
   before(:each) do
-    @controller.current_user = FactoryGirl.create :admin_user
+    sign_in
   end
 
   describe 'GET :index, :format => :json' do
@@ -13,6 +13,6 @@ describe AuthorsController, type: :controller  do
       get :index, :format => :json
     end
 
-    it { response.status.should == 200 }
+    it { expect(response.status).to eq 200 }
   end
 end
