@@ -20,7 +20,9 @@
     </ul>
   <% end %>
 
-<% if signed_in? and current_user.role == 'admin' %>
+  <% if admin? %>
+  <br/><hr/>
+  <h3>Untagged Protocols</h3>
   <ul>
   <% @untagged_protocols.each do |protocol| %>
     <li>
@@ -28,5 +30,15 @@
     </li>
   <% end %> 
   </ul>
+  <br/>
+  <h3>Retired Protocols</h3>
+  <ul>
+  <% @retired_protocols.each do |protocol| %>
+    <li>
+      <%= link_to raw("#{protocol.title}"), protocol_path(protocol) %>
+    </li>
+  <% end %> 
+  </ul>
+  <br/>
 <%= link_to 'New protocol', new_protocol_path %>
 <% end %>
