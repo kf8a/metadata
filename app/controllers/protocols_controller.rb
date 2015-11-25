@@ -115,7 +115,7 @@ class ProtocolsController < ApplicationController
   end
 
   def protocol_params
-    params.require(:protocol).permit( :theme_list, :title, :description, :updated_by, 
+    params.require(:protocol).permit( :theme_list, :title, :description, :updated_by, :active,
                                     :body, :abstract, :dataset_id, :in_use_from, :in_use_to, 
                                     :tag, :website_ids, :name, {person_ids: []}, 
                                     {website_ids:[]}, {datatable_ids: []},

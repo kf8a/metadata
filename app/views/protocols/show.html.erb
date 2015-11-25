@@ -10,7 +10,11 @@
     <% if @protocol.active? -%>
       Active
     <% else -%>
-      Replaced by: <%= link_to "#{@protocol.replaced_by}", @protocol.replaced_by %>
+      <% if @protocol.replaced_by.blank? -%>
+        Retired
+      <% else -%>
+        Replaced by: <%= link_to "#{@protocol.replaced_by}", @protocol.replaced_by %>
+      <% end -%>
     <% end -%>
   </p>
   <% if @protocol.deprecates -%>
