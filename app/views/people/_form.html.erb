@@ -27,15 +27,6 @@
 
 <div class='row clear'>
 <table id='affiliations'>
-  <tr>
-    <th>Role</th>
-
-    <th>Title</th>
-    <th>Seniority</th>
-    <th>Research Interest</th>
-    <th>Supervisor</th>
-    <th>Delete</th>
-  </tr>
   <%= f.semantic_fields_for :affiliations do |builder| %>
     <%= render 'affiliation_fields', f: builder %>
   <% end%>

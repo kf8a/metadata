@@ -1,8 +1,24 @@
 <tr>
+  <th>Role</th>
+  <th>Title</th>
+  <th>Seniority</th>
+  <th>Research Interest</th>
+</tr>
+<tr>
   <td><%= f.select :role_id, lter_roles.map {|x| [x.name[0..30], x.id] }, include_blank: true %></td>
   <td><%= f.text_field :title %></td>
-  <td><%= f.text_field :seniority %></td>
+  <td><%= f.text_field :seniority%></td>
   <td><%= f.text_field :research_interest %></td>
+</tr>
+<tr>
+  <th>Supervisor</th>
+  <th>Arrived on</th>
+  <th>Departed on</th>
+  <th>Delete</th>
+</tr>
+<tr>
   <td><%= f.text_field :supervisor %></td>
+  <td><%= f.date_field :started_on %></td>
+  <td><%= f.date_field :left_on %></td>
   <td><%= f.check_box :_destroy %></td>
 </tr>
