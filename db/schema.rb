@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151119164655) do
+ActiveRecord::Schema.define(version: 20151129234644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "fuzzystrmatch"
 
   create_table "affiliations", force: :cascade do |t|
     t.integer "person_id"
@@ -251,6 +252,7 @@ ActiveRecord::Schema.define(version: 20151119164655) do
     t.string   "csv_cache_content_type",     limit: 255
     t.integer  "csv_cache_file_size"
     t.datetime "csv_cache_updated_at"
+    t.integer  "update_cache_days"
   end
 
   add_index "datatables", ["core_area_id"], name: "index_datatables_on_core_area_id", using: :btree
@@ -296,16 +298,6 @@ ActiveRecord::Schema.define(version: 20151119164655) do
   end
 
   create_table "eml_docs", force: :cascade do |t|
-  end
-
-  create_table "geometry_columns", id: false, force: :cascade do |t|
-    t.string  "f_table_catalog",   limit: 256, null: false
-    t.string  "f_table_schema",    limit: 256, null: false
-    t.string  "f_table_name",      limit: 256, null: false
-    t.string  "f_geometry_column", limit: 256, null: false
-    t.integer "coord_dimension",               null: false
-    t.integer "srid",                          null: false
-    t.string  "type",              limit: 30,  null: false
   end
 
   create_table "invites", force: :cascade do |t|
@@ -565,6 +557,11 @@ ActiveRecord::Schema.define(version: 20151119164655) do
     t.string "description", limit: 255
   end
 
+  create_table "replication_check", id: false, force: :cascade do |t|
+    t.integer  "id",    default: "nextval('replication_check_id_seq'::regclass)", null: false
+    t.datetime "value"
+  end
+
   create_table "role_types", force: :cascade do |t|
     t.string "name", limit: 255
   end
@@ -575,6 +572,8 @@ ActiveRecord::Schema.define(version: 20151119164655) do
     t.integer "seniority"
     t.boolean "show_in_overview",               default: true
     t.boolean "show_in_detailview",             default: true
+    t.date    "arrived_on"
+    t.date    "departed_on"
   end
 
   add_index "roles", ["role_type_id"], name: "index_roles_on_role_type_id", using: :btree
@@ -611,13 +610,6 @@ ActiveRecord::Schema.define(version: 20151119164655) do
 
   create_table "sources", force: :cascade do |t|
     t.string "title", limit: 255
-  end
-
-  create_table "spatial_ref_sys", primary_key: "srid", force: :cascade do |t|
-    t.string  "auth_name", limit: 256
-    t.integer "auth_srid"
-    t.string  "srtext",    limit: 2048
-    t.string  "proj4text", limit: 2048
   end
 
   create_table "sponsors", force: :cascade do |t|
@@ -743,6 +735,7 @@ ActiveRecord::Schema.define(version: 20151119164655) do
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
+  add_index "users", ["email"], name: "users_email_key", unique: true, using: :btree
   add_index "users", ["id", "confirmation_token"], name: "index_users_on_id_and_confirmation_token", using: :btree
   add_index "users", ["identity_url"], name: "index_users_on_identity_url", unique: true, using: :btree
   add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
