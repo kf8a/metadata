@@ -22,7 +22,7 @@
   <ul class='citations'>
     <% year = 0 -%>
     <% @citations.each do |citation| %>
-      <%= render 'citation', :citation=>citation, :year => year %>
+      <%= render partial: 'citation', :citation=>citation, :year => year %>
       <% year = citation.pub_year.to_i -%>
     <% end %>
   </ul>
