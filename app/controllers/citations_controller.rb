@@ -79,6 +79,11 @@ class CitationsController < ApplicationController
     end
   end
 
+  def find_by_doi
+    doi = params[:doi]
+    
+  end
+
   def filtered
     @type = params[:type]
     @sort_by = params[:sort_by]

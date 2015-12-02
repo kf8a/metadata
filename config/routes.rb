@@ -20,6 +20,7 @@ Metadata::Application.routes.draw do
     collection do
       get :biblio
       get :search
+      get :find_by_doi
       get :filtered
       get :submitted
       get :index_by_treatment
