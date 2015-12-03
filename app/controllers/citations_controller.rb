@@ -80,8 +80,7 @@ class CitationsController < ApplicationController
   end
 
   def find_by_doi
-    doi = params[:doi]
-    
+    @citation = CitationFactory.from_doi(params[:doi])
   end
 
   def filtered
