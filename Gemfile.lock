@@ -7,15 +7,6 @@ GIT
       activesupport (>= 3.0.0)
 
 GIT
-  remote: git://github.com/kf8a/doi.git
-  revision: 05f2a9399a76822dabece80b4163336ab4077c40
-  specs:
-    doi (0.0.1)
-      json (~> 1.8)
-      nokogiri (~> 1.6)
-      typhoeus (~> 0.7)
-
-GIT
   remote: git://github.com/kf8a/ris_parser.git
   revision: 410b27def4835b8b9b697690282ff3df4803ae68
   specs:
@@ -132,8 +123,6 @@ GEM
     email_validator (1.6.0)
       activemodel
     erubis (2.7.0)
-    ethon (0.8.0)
-      ffi (>= 1.3.0)
     exception_notification (4.1.1)
       actionmailer (>= 3.0.4)
       activesupport (>= 3.0.4)
@@ -143,7 +132,6 @@ GEM
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
-    ffi (1.9.10)
     formtastic (3.1.3)
       actionpack (>= 3.2.13)
     friendly_id (5.1.0)
@@ -298,8 +286,6 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.1)
-    typhoeus (0.8.0)
-      ethon (>= 0.8.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.2)
@@ -337,7 +323,6 @@ DEPENDENCIES
   cube-ruby
   dalli
   database_cleaner
-  doi!
   exception_notification
   factory_girl_rails
   formtastic

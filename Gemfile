@@ -17,7 +17,7 @@ gem 'formtastic'
 gem 'country_select'
 gem 'cube-ruby'
 
-gem 'doi', :git => 'git://github.com/kf8a/doi.git'
+#gem 'doi', :git => 'git://github.com/kf8a/doi.git'
 
 #gem 'mercury-rails'
 
