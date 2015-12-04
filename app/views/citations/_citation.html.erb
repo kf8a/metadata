@@ -5,7 +5,7 @@
             <div class='pub-year'><%= citation.pub_year %></div>
         <% end %>
       <% end %>
-      <% cache(citation) do %>
+      <% cache(citation, action: 'index') do %>
         <p>
         <%=citation.formatted(long: true) %>
         </p>
