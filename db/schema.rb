@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151129234644) do
+ActiveRecord::Schema.define(version: 20151204212403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -497,6 +497,8 @@ ActiveRecord::Schema.define(version: 20151129234644) do
     t.string   "pdf_content_type", limit: 255
     t.integer  "pdf_file_size"
     t.datetime "pdf_updated_at"
+    t.datetime "updated_at"
+    t.datetime "created_at"
   end
 
   add_index "protocols", ["dataset_id"], name: "index_protocols_on_dataset_id", using: :btree
