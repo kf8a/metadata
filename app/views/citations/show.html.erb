@@ -22,13 +22,8 @@
       {:name => @citation.short_author_string.upcase}] %>
       <h3><%= raw @citation.formatted(:long=>true)  %></h3>
       <p>
-      <% if @citation.doi.present? %>
-        <div class="altimetrics">
-          <div data-badge-type="donut" data-doi=<%=@citation.doi%> data-hide-no-mentions="true" class="altmetric-embed"></div>
-        </div>
-      <% end %>
       <%=raw textilize(@citation.abstract) %></p>
-      <% if @citation.doi %>
+      <% unless @citation.doi.empty? %>
         <p>DOI: <a href="http://dx.doi.org/<%= @citation.doi %>"><%= @citation.doi %></a></p>
       <% end %>
       <% unless @citation.publisher_url.try(:empty?) %>
