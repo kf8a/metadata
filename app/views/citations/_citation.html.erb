@@ -13,17 +13,31 @@
       <% if citation.pdf.exists? %>
         <div class='non-member'>
           <%= link_to 'abstract + pdf', citation_path(citation) %>
+
+          <% if citation.data_url.present? %>
+            <%= link_to 'data', citation.data_url %>
+          <% end %>
         </div>
         <div class='member-only'>
           <%= link_to 'abstract', citation_path(citation) %>
           <%= link_to 'pdf', publication_url(citation)%>
+
+          <% if citation.data_url.present? %>
+            <%= link_to 'data', citation.data_url %>
+          <% end %>
         </div>
       <% else %>
         <div class='non-member'>
           <%= link_to 'abstract', citation_path(citation) %>
+          <% if citation.data_url.present? %>
+            <%= link_to 'data', citation.data_url %>
+          <% end %>
         </div>
         <div class='member-only'>
           <%= link_to 'abstract', citation_path(citation) %>
+          <% if citation.data_url.present? %>
+            <%= link_to 'data', citation.data_url %>
+          <% end %>
         </div>
       <% end %>
     <% end %>
