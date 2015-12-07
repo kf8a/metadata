@@ -69,8 +69,6 @@
 
     <%= link_to 'back to index', citations_path %>
 
-    <script type='text/javascript' src='https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script>
-
     <% if signed_in? and current_user.role == 'admin' or Rails.env == 'development' -%>
       <% if @website.citations.first != @citation -%>
         <%= link_to 'Previous', citation_path(@website.citations.previous(@citation).first) %>
