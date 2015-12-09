@@ -70,7 +70,10 @@ class CitationsController < ApplicationController
   end
 
   def search
-    @word = params[:word].sub(/\?|~|\\|\*|@|(?:=>)/, "")
+    @word = params[:word]
+    if @word.present?
+      @word.sub!(/\?|~|\\|\*|@|(?:=>)/, "")
+    end
     if @word.empty?
       redirect_to citations_url
     else
