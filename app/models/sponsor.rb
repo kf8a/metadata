@@ -7,7 +7,7 @@ class Sponsor < ActiveRecord::Base
   # friendly_id :name
   def terms_of_use_path
     if terms_of_use_url.blank?
-      "/sponsor/#{id}"
+      "/sponsors/#{id}"
     else
       terms_of_use_url
     end
