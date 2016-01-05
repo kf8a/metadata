@@ -29,7 +29,7 @@ gem 'jquery-rails'
 
 gem 'workflow'
 
-gem 'friendly_id'
+#gem 'friendly_id'
 
 gem 'parslet'
 
@@ -72,8 +72,10 @@ group :development, :test  do
   gem "byebug"
   gem "spring"
   gem "web-console", '~> 2.0'
-#  gem 'minitest'
-#  gem 'test-unit'
+  gem 'minitest'
+  gem 'minitest-reporters', '>= 0.5.0'
+
+  gem 'test-unit'
   gem 'meta_request'
   gem 'rspec-rails'
   gem 'rspec-its'
@@ -84,6 +86,7 @@ group :test do
   gem "shoulda", :git => 'git://github.com/thoughtbot/shoulda.git' 
   gem "shoulda-matchers" # to use rspec like syntax
   gem 'factory_girl_rails'
+
 
   #Cucumber stuff
 #  gem 'capybara'
