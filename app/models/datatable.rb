@@ -535,16 +535,21 @@ class Datatable < ActiveRecord::Base
 
   private
 
+  def convert_year_to_date(year)
+    year + '-1-1'
+  end
+
+  def is_year?(year)
+    # assume its a year if there are only 4 characters
+    4 == year.length
+  end
+
   def query_datatable_for_temporal_extent(query)
     values = ActiveRecord::Base.connection.execute(query)
     dates = values[0]
     min, max = dates['min'], dates['max']
-    if min.length == 4  # assume is a year
-      min = min + '-1-1'
-    end
-    if max.length == 4
-      max = max + '-1-1'
-    end
+    min = convert_year_to_date(min) if is_year?(min)
+    max = convert_year_to_date(max) if is_year?(max)
 
     [Time.parse(min).to_date, Time.parse(max).to_date]
   end
