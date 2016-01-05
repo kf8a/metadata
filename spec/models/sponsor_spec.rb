@@ -8,6 +8,6 @@ describe Sponsor do
 
   it 'defaults to the sponsor url if the term_of_use_url is missing' do
     sponsor = FactoryGirl.create :sponsor, data_use_statement: "USE" 
-    expect(sponsor.terms_of_use_path).to eq "/sponsor/#{sponsor.id}"
+    expect(sponsor.terms_of_use_path).to eq "/sponsors/#{sponsor.id}"
   end
 end
