@@ -76,7 +76,7 @@ describe DatatablesController, type: :controller  do
   describe "responding to GET new" do
 
     it "should expose a new datatable as @datatable" do
-      Datatable.should_receive(:new).and_return(mock_datatable)
+      allow(Datatable).to receive(:new).and_return(mock_datatable)
       get :new
       expect(assigns[:datatable]).to eq(mock_datatable)
     end
