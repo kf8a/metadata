@@ -267,7 +267,7 @@ class DatatablesController < ApplicationController
     set_streaming_headers
 
     response.status = 200
-    self.response_body = csv_admin_data
+    self.response_body = csv_data(@datatable.object)
   end
 
   def set_file_headers
@@ -284,25 +284,16 @@ class DatatablesController < ApplicationController
     headers.delete("Content-Length")
   end
 
-  def csv_data
+  def csv_data(query= @datatable.approved_data_query)
     Enumerator.new do |line|
       line << @datatable.csv_headers.to_s
 
-      DataQuery.find_in_batches_as_csv(@datatable.approved_data_query) do |data|
+      DataQuery.find_in_batches_as_csv(query) do |data|
         line << data.to_s
       end
     end
   end
-
-  def csv_admin_data
-    Enumerator.new do |line|
-      line << @datatable.csv_headers.to_s
-
-      DataQuery.find_in_batches_as_csv(@datatable.object) do |data|
-        line << data.to_s
-      end
-    end
-  end
+  
 
   # def reject_robots
   #   if params[:id] == 'robots'
