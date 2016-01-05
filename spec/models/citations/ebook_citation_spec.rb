@@ -12,6 +12,6 @@ describe EbookCitation do
     ebook.stub(:title) { 'Chapter 10' }
     ebook.stub(:publication) { 'Lifetime Books' }
     ebook.stub(:volume_and_page) { '2, 1-10' }
-    ebook.formatted.should == "Jones 1981. Chapter 10. Lifetime Books 2, 1-10"
+    expect(ebook.formatted).to eq "Jones 1981. Chapter 10. Lifetime Books 2, 1-10"
   end
 end

@@ -13,7 +13,7 @@ describe BulletinCitation do
     report.stub(:publisher) {"Michigan State University"}
     report.stub(:city) {'East Lansing, Michigan, USA'}
     report.stub(:publication) {'MSU Extension Bulletin E-3208'}
-    report.formatted.should == "Snapp, S. S., and V. L. Morrone. 2014. Perennial wheat. MSU Extension Bulletin E-3208, Michigan State University, East Lansing, Michigan, USA."
+    expect(report.formatted).to eq "Snapp, S. S., and V. L. Morrone. 2014. Perennial wheat. MSU Extension Bulletin E-3208, Michigan State University, East Lansing, Michigan, USA."
   end
 end
 

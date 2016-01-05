@@ -11,7 +11,7 @@ describe Protocol do
       eml_content = @protocol.to_eml
       eml_element = Nokogiri::XML(eml_content).css('methodStep protocol').first
       imported_protocol = Protocol.from_eml(eml_element)
-      imported_protocol.should == @protocol
+      expect(imported_protocol).to eq @protocol
     end
 
     it "should import new protocols" do
@@ -22,8 +22,8 @@ describe Protocol do
       assert !Protocol.exists?(protocol_id)
       eml_element = Nokogiri::XML(eml_content).css('methodStep protocol').first
       imported_protocol = Protocol.from_eml(eml_element)
-      imported_protocol.title.should == "A sweet title"
-      imported_protocol.should be_valid
+      expect(imported_protocol.title).to eq "A sweet title"
+      expect(imported_protocol).to be_valid
       assert imported_protocol.save
     end
   end

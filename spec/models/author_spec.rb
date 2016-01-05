@@ -11,12 +11,12 @@ describe Author do
     end
 
     it 'is formatted as the last name' do
-      @author1.formatted.should == 'Bond'
-      @author2.formatted.should == 'Bond'
+      expect(@author1.formatted).to eq 'Bond'
+      expect(@author2.formatted).to eq 'Bond'
     end
 
     it 'is formatted as last name with the natural order' do
-      @author1.formatted(:natural).should == 'Bond'
+      expect(@author1.formatted(:natural)).to eq 'Bond'
     end
   end
 
@@ -27,13 +27,13 @@ describe Author do
     end
 
     it 'is formatted correctly by default' do
-      @author1.formatted.should == 'Bond, B.'
-      @author2.formatted.should == 'Bond, B.'
+      expect(@author1.formatted).to eq 'Bond, B.'
+      expect(@author2.formatted).to eq 'Bond, B.'
     end
 
     it 'is formatted correctly as natural' do
-      @author1.formatted(:natural).should == 'B. Bond'
-      @author2.formatted(:natural).should == 'B. Bond'
+      expect(@author1.formatted(:natural)).to eq 'B. Bond'
+      expect(@author2.formatted(:natural)).to eq 'B. Bond'
     end
   end
 
@@ -43,11 +43,11 @@ describe Author do
     end
 
     it 'is formatted as default' do
-      @author1.formatted.should == 'Bond, B. K.'
+      expect(@author1.formatted).to eq 'Bond, B. K.'
     end
 
     it 'is formatted as natural' do
-      @author1.formatted(:natural).should == 'B. K. Bond'
+      expect(@author1.formatted(:natural)).to eq 'B. K. Bond'
     end
   end
 
@@ -57,15 +57,15 @@ describe Author do
     end
 
     it 'has the right name' do
-      @author.name.should == 'Al Fazier, John'
+      expect(@author.name).to eq 'Al Fazier, John'
     end
 
     it 'is formatted as default' do
-      @author.formatted.should == 'Al Fazier, J.'
+      expect(@author.formatted).to eq 'Al Fazier, J.'
     end
 
     it 'is formatted as natural' do
-      @author.formatted(:natural).should == 'J. Al Fazier'
+      expect(@author.formatted(:natural)).to eq 'J. Al Fazier'
     end
   
   end

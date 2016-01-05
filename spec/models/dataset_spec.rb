@@ -29,7 +29,7 @@ describe Dataset do
     it "should create a dataset from eml" do
       eml_content = @dataset_with_datatable.to_eml
       imported_dataset = Dataset.from_eml(eml_content)
-      imported_dataset.should be_a Dataset
+      expect(imported_dataset).to be_a Dataset
     end
 
     it "should import protocols" do
@@ -39,21 +39,21 @@ describe Dataset do
       @dataset_with_datatable.save
       eml_content = @dataset_with_datatable.to_eml
       imported_dataset = Dataset.from_eml(eml_content)
-      imported_dataset.protocols.should include(new_protocol)
+      expect(imported_dataset.protocols).to include(new_protocol)
     end
 
     it "should import the right title" do
       @dataset_with_datatable.title = "The right title"
       eml_content = @dataset_with_datatable.to_eml
       imported_dataset = Dataset.from_eml(eml_content)
-      imported_dataset.title.should == "The right title at the Kellogg Biological Station, Hickory Corners, MI "
+      expect(imported_dataset.title).to eq "The right title at the Kellogg Biological Station, Hickory Corners, MI "
     end
 
     it "should import the right abstract" do
       @dataset_with_datatable.abstract = "The right abstract"
       eml_content = @dataset_with_datatable.to_eml
       imported_dataset = Dataset.from_eml(eml_content)
-      imported_dataset.abstract.should =~ /The right abstract/ #it will be textilized
+      expect(imported_dataset.abstract).to match /The right abstract/ #it will be textilized
     end
 
     it "should import the right dates" do
@@ -61,8 +61,8 @@ describe Dataset do
       @dataset_with_datatable.completed = Date.parse("3-4-1990")
       eml_content = @dataset_with_datatable.to_eml
       imported_dataset = Dataset.from_eml(eml_content)
-      imported_dataset.initiated.should == @dataset_with_datatable.initiated
-      imported_dataset.completed.should == @dataset_with_datatable.completed
+      expect(imported_dataset.initiated).to eq @dataset_with_datatable.initiated
+      expect(imported_dataset.completed).to eq @dataset_with_datatable.completed
     end
 
     it "should import the right people" do
@@ -73,22 +73,22 @@ describe Dataset do
       assert @dataset_with_datatable.save
       eml_content = @dataset_with_datatable.to_eml
       imported_dataset = Dataset.from_eml(eml_content)
-      imported_dataset.people.where(:given_name => 'jon').should_not be_empty
+      expect(imported_dataset.people.where(:given_name => 'jon')).to_not be_empty
     end
 
     it "should import the right datatable" do
-      @dataset_with_datatable.datatables.collect{ |table| table.valid_for_eml? }.should == [true]
+      expect(@dataset_with_datatable.datatables.collect{ |table| table.valid_for_eml? }).to eq [true]
       eml_content = @dataset_with_datatable.to_eml
       old_datatable_attributes = @dataset_with_datatable.datatables.first.attributes
       @dataset_with_datatable.datatables.each {|table| table.destroy}
       @dataset_with_datatable.destroy
       imported_dataset = Dataset.from_eml(eml_content)
-      imported_dataset.should be_valid
+      expect(imported_dataset).to be_valid
       new_datatable_attributes = imported_dataset.datatables.first.attributes
       keys_to_ignore = ['id', 'is_sql', 'data_url', 'dataset_id', 'object', 'theme_id', 'created_at', 'updated_at']
       new_datatable_attributes.delete_if {|key, value| keys_to_ignore.include?(key) }
       old_datatable_attributes.delete_if {|key, value| keys_to_ignore.include?(key) }
-      new_datatable_attributes.should == old_datatable_attributes
+      expect(new_datatable_attributes).to eq old_datatable_attributes
     end
 
     # it "should import a dataset from a website" do

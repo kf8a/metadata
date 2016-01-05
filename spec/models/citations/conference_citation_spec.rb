@@ -12,6 +12,6 @@ describe ConferenceCitation do
     conference.stub(:title) { 'Chapter 10' }
     conference.stub(:publication) { 'Lifetime Books' }
     conference.stub(:volume_and_page) { '2, 1-10' }
-    conference.formatted.should == "Jones 1981. Chapter 10. Lifetime Books 2, 1-10"
+    expect(conference.formatted).to eq "Jones 1981. Chapter 10. Lifetime Books 2, 1-10"
   end
 end

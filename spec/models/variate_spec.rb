@@ -15,7 +15,7 @@ describe Variate do
       variate_attributes.delete('id')
       imported_attributes = imported_variate.attributes
       imported_attributes.delete('id')
-      imported_attributes.should == variate_attributes
+      expect(imported_attributes).to eq variate_attributes
     end
 
     it "should import new variates" do
@@ -26,9 +26,9 @@ describe Variate do
       assert !Variate.exists?(variate_id)
       eml_element = Nokogiri::XML(eml_content).css('attribute').first
       imported_variate = Variate.from_eml(eml_element)
-      imported_variate.name.should == 'EMLVariate'
-      imported_variate.description.should == 'A variate test of eml'
-      imported_variate.measurement_scale.should == right_scale
+      expect(imported_variate.name).to eq 'EMLVariate'
+      expect(imported_variate.description).to eq 'A variate test of eml'
+      expect(imported_variate.measurement_scale).to eq right_scale
     end
 
     #TODO add tests for all of the different format types converting from EML
