@@ -8,10 +8,10 @@ describe EbookCitation do
 
   it 'should be formatted correctly' do
     ebook = EbookCitation.new
-    ebook.stub(:author_and_year) { 'Jones 1981.' }
-    ebook.stub(:title) { 'Chapter 10' }
-    ebook.stub(:publication) { 'Lifetime Books' }
-    ebook.stub(:volume_and_page) { '2, 1-10' }
+    allow(ebook).to receive(:author_and_year).and_return 'Jones 1981.'
+    allow(ebook).to receive(:title).and_return 'Chapter 10'
+    allow(ebook).to receive(:publication).and_return 'Lifetime Books'
+    allow(ebook).to receive(:volume_and_page).and_return '2, 1-10'
     expect(ebook.formatted).to eq "Jones 1981. Chapter 10. Lifetime Books 2, 1-10"
   end
 end

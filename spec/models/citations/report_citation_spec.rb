@@ -8,28 +8,28 @@ describe ReportCitation do
 
   it 'should be formatted correctly' do
     report = ReportCitation.new
-    report.stub(:author_and_year) { 'Jones 1981.' }
-    report.stub(:title) { 'Chapter 10' }
-    report.stub(:publication) { 'Lifetime Books' }
-    report.stub(:volume_and_page) { '2, 1-10' }
+    allow(report).to receive(:author_and_year).and_return 'Jones 1981.'
+    allow(report).to receive(:title).and_return 'Chapter 10'
+    allow(report).to receive(:publication).and_return 'Lifetime Books'
+    allow(report).to receive(:volume_and_page).and_return '2, 1-10'
     expect(report.formatted).to eq "Jones 1981. Chapter 10. Lifetime Books. 2, 1-10."
   end
 
   it 'should be formatted correctly' do
     report = ReportCitation.new
-    report.stub(:author_and_year) {'Millar, N., G. P. Robertson, A. Diamant, R. J. Gehl, P. R. Grace, and J. P. Hoben. 2013.'}
-    report.stub(:title) {'Quantifying N2O emissions reductions in US agricultural crops through N fertilizer rate reduction'}
-    report.stub(:city) {'Washington, DC, USA'}
-    report.stub(:publication) {'Verified Carbon Standard'}
+    allow(report).to receive(:author_and_year).and_return 'Millar, N., G. P. Robertson, A. Diamant, R. J. Gehl, P. R. Grace, and J. P. Hoben. 2013.'
+    allow(report).to receive(:title).and_return 'Quantifying N2O emissions reductions in US agricultural crops through N fertilizer rate reduction'
+    allow(report).to receive(:city).and_return 'Washington, DC, USA'
+    allow(report).to receive(:publication).and_return 'Verified Carbon Standard'
     expect(report.formatted).to eq "Millar, N., G. P. Robertson, A. Diamant, R. J. Gehl, P. R. Grace, and J. P. Hoben. 2013. Quantifying N2O emissions reductions in US agricultural crops through N fertilizer rate reduction. Verified Carbon Standard. Washington, DC, USA."
   end
 
   it 'should format a report with a publisher correctly' do
     report = ReportCitation.new
-    report.stub(:author_and_year) {"Eagle, A. J., L. R. Henry, L. P. Olander, K. Haugen-Kozyra, N. Millar, and G. P. Robertson. 2012."}
-    report.stub(:title) {"Greenhouse gas mitigation potential of agricultural land management in the United States: a synthesis of the literature. Third Edition"}
-    report.stub(:city) {"Durham, North Carolina, USA"}
-    report.stub(:publisher) {"Nicholas Institute for Environmental Policy Solutions"}
+    allow(report).to receive(:author_and_year).and_return "Eagle, A. J., L. R. Henry, L. P. Olander, K. Haugen-Kozyra, N. Millar, and G. P. Robertson. 2012."
+    allow(report).to receive(:title).and_return "Greenhouse gas mitigation potential of agricultural land management in the United States: a synthesis of the literature. Third Edition"
+    allow(report).to receive(:city).and_return "Durham, North Carolina, USA"
+    allow(report).to receive(:publisher).and_return "Nicholas Institute for Environmental Policy Solutions"
     expect(report.formatted).to eq "Eagle, A. J., L. R. Henry, L. P. Olander, K. Haugen-Kozyra, N. Millar, and G. P. Robertson. 2012. Greenhouse gas mitigation potential of agricultural land management in the United States: a synthesis of the literature. Third Edition. Nicholas Institute for Environmental Policy Solutions, Durham, North Carolina, USA."
   end
 end

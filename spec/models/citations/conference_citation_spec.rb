@@ -8,10 +8,10 @@ describe ConferenceCitation do
 
   it 'should be formatted correctly' do
     conference = ConferenceCitation.new
-    conference.stub(:author_and_year) { 'Jones 1981.' }
-    conference.stub(:title) { 'Chapter 10' }
-    conference.stub(:publication) { 'Lifetime Books' }
-    conference.stub(:volume_and_page) { '2, 1-10' }
+    allow(conference).to receive(:author_and_year).and_return  'Jones 1981.'
+    allow(conference).to receive(:title).and_return  'Chapter 10'
+    allow(conference).to receive(:publication).and_return 'Lifetime Books'
+    allow(conference).to receive(:volume_and_page).and_return '2, 1-10'
     expect(conference.formatted).to eq "Jones 1981. Chapter 10. Lifetime Books 2, 1-10"
   end
 end
