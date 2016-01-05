@@ -3,18 +3,18 @@ require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 describe DatatablesController, type: :controller  do
 
   def mock_datatable(stubs={})
-    @mock_datatable ||= stub_model(Datatable)
-    @mock_datatable.should_receive(:dataset).at_least(1).and_return(mock_dataset)
-    @mock_datatable.should_receive(:is_sql).and_return(:true)
-    @mock_datatable.should_receive(:is_restricted).and_return(:false)
-    @mock_datatable.should_receive(:object).and_return("select * from datatables")
-    @mock_datatable.should_receive(:study)
-    @mock_dataset.should_receive(:title).and_return('title')
+    @mock_datatable ||= double(Datatable)
+    allow(@mock_datatable).to receive(:dataset).at_least(1).and_return(mock_dataset)
+    allow(@mock_datatable).to receive(:is_sql).and_return(:true)
+    allow(@mock_datatable).to receive(:is_restricted).and_return(:false)
+    allow(@mock_datatable).to receive(:object).and_return("select * from datatables")
+    allow(@mock_datatable).to receive(:study)
+    allow(@mock_dataset).to receive(:title).and_return('title')
     @mock_datatable
   end
 
   def mock_dataset(stubs={})
-    @mock_dataset ||= stub_model(Dataset)
+    @mock_dataset ||= double(Dataset)
   end
 
   before do
@@ -26,7 +26,7 @@ describe DatatablesController, type: :controller  do
 
     it "should return an empty array" do
       get :index
-      assigns[:datatables].should == []
+      expect(assigns[:datatables]).to  eq []
     end
   end
 
@@ -37,17 +37,18 @@ describe DatatablesController, type: :controller  do
       allow(datatable).to receive(:save!).and_return(true)
       expect(Datatable).to receive(:find).with('1').at_least(1).and_return(datatable)
       put :publish, :id => "1"
-      response.code.should eq("200")
+      expect(response.code).to eq "200"
     end
   end
 
-  # describe "responding to GET show" do
+  describe "responding to GET show" do
 
-  #   it "should expose the requested datatable as @datatable" do
-  #     Datatable.should_receive(:find).with("37").at_least(1).and_return(mock_datatable)
-  #     get :show, :id => "37"
-  #     assigns[:datatable].should equal(mock_datatable)
-  #   end
+    it "should expose the requested datatable as @datatable" do
+      allow(Datatable).to receive(:find).with("37").at_least(1).and_return(mock_datatable)
+      allow(Datatable).to receive(:valid_request?)
+      get :show, :id => "37"
+      expect(assigns[:datatable]).to eq(mock_datatable)
+    end
 
   #   describe "with mime type of xml" do
 
@@ -193,7 +194,7 @@ describe DatatablesController, type: :controller  do
 
   #   end
 
-  # end
+  end
 
   # describe "responding to DELETE destroy" do
 
