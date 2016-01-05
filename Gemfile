@@ -29,8 +29,6 @@ gem 'jquery-rails'
 
 gem 'workflow'
 
-#gem 'friendly_id'
-
 gem 'parslet'
 
 # for spreadsheet downloads
