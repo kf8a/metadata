@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 describe DatatablesController, type: :controller  do
 
   def mock_datatable(stubs={})
-    @mock_datatable ||= double(Datatable)
+    @mock_datatable ||= double(Datatable).as_null_object
     allow(@mock_datatable).to receive(:dataset).at_least(1).and_return(mock_dataset)
     allow(@mock_datatable).to receive(:is_sql).and_return(:true)
     allow(@mock_datatable).to receive(:is_restricted).and_return(:false)
@@ -14,7 +14,7 @@ describe DatatablesController, type: :controller  do
   end
 
   def mock_dataset(stubs={})
-    @mock_dataset ||= double(Dataset)
+    @mock_dataset ||= double(Dataset).as_null_object
   end
 
   before do
@@ -45,7 +45,6 @@ describe DatatablesController, type: :controller  do
 
     it "should expose the requested datatable as @datatable" do
       allow(Datatable).to receive(:find).with("37").at_least(1).and_return(mock_datatable)
-      allow(Datatable).to receive(:valid_request?)
       get :show, :id => "37"
       expect(assigns[:datatable]).to eq(mock_datatable)
     end
@@ -74,15 +73,15 @@ describe DatatablesController, type: :controller  do
 
   # end
 
-  # describe "responding to GET new" do
+  describe "responding to GET new" do
 
-  #   it "should expose a new datatable as @datatable" do
-  #     Datatable.should_receive(:new).and_return(mock_datatable)
-  #     get :new
-  #     assigns[:datatable].should equal(mock_datatable)
-  #   end
+    it "should expose a new datatable as @datatable" do
+      Datatable.should_receive(:new).and_return(mock_datatable)
+      get :new
+      expect(assigns[:datatable]).to eq(mock_datatable)
+    end
 
-  # end
+  end
 
   # describe "responding to GET edit" do
 
