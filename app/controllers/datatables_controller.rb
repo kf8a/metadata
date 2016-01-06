@@ -38,30 +38,18 @@ class DatatablesController < ApplicationController
   # GET /datatables/1.xml
   # GET /datatables/1.csv
   def show
-    #expires_in 5.minutes
+    expires_in 5.minutes
     @website = website
 
     store_location #in case we have to log in and come back here
     if datatable.dataset.valid_request?(@subdomain_request)
       respond_to do |format|
         format.html
-        format.xml
         format.fasta
         format.csv do
           unless csv_ok
             render :text => "You do not have permission to download this datatable"
           end
-          # unless current_user.try(:role) == 'admin'
-          #   if datatable.csv_cache.exists?
-          #     if Rails.env.production?
-          #       redirect_to(datatable.csv_cache.s3_object(params[:style]).url_for(:read ,:secure => true, :expires_in => 60.seconds).to_s)
-          #     else
-          #       path = datatable.csv_cache.path(params[:style])
-          #       send_file  path, :type => 'text/csv', :disposition => 'inline'
-          #     end
-          #   end
-          # end
-          # render show.csv.erb
 
           if current_user.try(:role) == 'admin'
             render_admin_csv

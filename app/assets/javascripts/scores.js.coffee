@@ -12,8 +12,9 @@ class ScoreGraph
 
     width = 800
 
+    current_year = new Date().getFullYear()
     x = d3.scale.linear()
-      .domain([1987,2014])
+      .domain([1987,current_year])
       .range([0,width])
       .clamp(true)
 
