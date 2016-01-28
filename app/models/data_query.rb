@@ -6,7 +6,7 @@ class DataQuery
     options.assert_valid_keys(:start, :batch_size)
 
     start = options[:start]
-    batch_size = options[:batch_size] || 200
+    batch_size = options[:batch_size] || 500
 
     count = ActiveRecord::Base.connection.execute("Select count(*) as c from (#{query}) as foo").values.flatten.first.to_i
     (0..count).step(batch_size) do |offset|
