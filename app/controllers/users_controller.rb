@@ -1,5 +1,5 @@
 class UsersController < Clearance::UsersController
-  protect_from_forgery,  except: [:show]
+  protect_from_forgery :except => :show
 
   def create
     @user = User.new user_params
