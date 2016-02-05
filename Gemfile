@@ -66,6 +66,8 @@ gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
 
+gem 'prometheus-client', '~> 0.4.2'
+
 group :development, :test  do
   gem "byebug"
   gem "spring"
