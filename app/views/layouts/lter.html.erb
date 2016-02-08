@@ -9,22 +9,14 @@
     <!--[if lt IE 9]>
     <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link rel='stylesheet' href='https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css' type='text/css'>
-    <link rel="stylesheet" href="/wp-content/themes/msu-kbs/lib/css/normalize.css" type="text/css" />
-    <link rel="Shortcut Icon" href="/wp-content/themes/msu-kbs/images/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/wp-content/themes/msu-kbs/style.css" type="text/css" />
-    <link rel="stylesheet" id="gsc_style-css" href="https://lter.kbs.msu.edu/wp-content/plugins/google-custom-search/css/smoothness/jquery-ui-1.7.3.custom.css?ver=3.4" type="text/css" media="all">
-    <link rel='stylesheet' href='https://lter.kbs.msu.edu/wp-content/plugins/google-custom-search/css/gsc-no-search-button.css?ver=3.4'/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" %>
-  <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js" %>
-  <script async type="text/javascript" src="https://www.google.com/jsapi?ver=3.4"></script>
-  <script async type="text/javascript" src="https://lter.kbs.msu.edu/wp-content/plugins/google-custom-search/js/gsc.js?ver=3.4"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" ></script>
+    <script async type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js"></script>
+    <script async type="text/javascript" src="https://www.google.com/jsapi?ver=3.4"></script>
+    <script async type="text/javascript" src="https://lter.kbs.msu.edu/wp-content/plugins/google-custom-search/js/gsc.js?ver=3.4"></script>
     <%= csrf_meta_tag unless response.cache_control[:public] %>
-    <%= javascript_include_tag "application" %>
-    <%= stylesheet_link_tag "application", :media => 'all'%>
 
-    <script type="text/javascript">
+    <script async type="text/javascript">
       jQuery(document).ready(function() {
           jQuery.fn.cleardefault = function() {
           return this.focus(function() {
@@ -39,17 +31,6 @@
           };
           jQuery(".clearit input, .clearit textarea").cleardefault();
           });
-        </script>
-        <script>
-          var _prum = [['id', '54919125abe53d77261dbb63'],
-          ['mark', 'firstbyte', (new Date()).getTime()]];
-          (function() {
-          var s = document.getElementsByTagName('script')[0]
-          , p = document.createElement('script');
-          p.async = 'async';
-          p.src = '//rum-static.pingdom.net/prum.min.js';
-          s.parentNode.insertBefore(p, s);
-          })();
         </script>
       </head>
       <body class="page page-template page-template-page_gallery-php header-image full-width-content">
@@ -69,17 +50,25 @@
           </div><!-- end #inner -->
         </div><!-- end #wrap -->
         <%= render :file => "#{Rails.root}/public/footer", :formats => [:html] %>
-        <script type='text/javascript' src='/wp-content/themes/genesis/lib/js/menu/superfish.js?ver=1.4.8'></script>
-        <script type='text/javascript' src='/wp-content/themes/genesis/lib/js/menu/superfish.args.js?ver=1.8.1'></script>
-        <script type="text/javascript">
+        <%= javascript_include_tag "application" %>
+        <script async type='text/javascript' src='/wp-content/themes/genesis/lib/js/menu/superfish.js?ver=1.4.8'></script>
+        <script async type='text/javascript' src='/wp-content/themes/genesis/lib/js/menu/superfish.args.js?ver=1.8.1'></script>
+        <script async type="text/javascript">
           var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
           document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
-          <script type="text/javascript">
+          <script async type="text/javascript">
             try {
               var pageTracker = _gat._getTracker("UA-379552-5");
               pageTracker._trackPageview();
             } catch(err) {}
           </script>
+          <link rel='stylesheet' href='https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css' type='text/css'>
+          <link rel="stylesheet" href="/wp-content/themes/msu-kbs/lib/css/normalize.css" type="text/css" />
+          <link rel="Shortcut Icon" href="/wp-content/themes/msu-kbs/images/favicon.ico" type="image/x-icon" />
+          <link rel="stylesheet" href="/wp-content/themes/msu-kbs/style.css" type="text/css" />
+          <link rel="stylesheet" id="gsc_style-css" href="https://lter.kbs.msu.edu/wp-content/plugins/google-custom-search/css/smoothness/jquery-ui-1.7.3.custom.css?ver=3.4" type="text/css" media="all">
+          <link rel='stylesheet' href='https://lter.kbs.msu.edu/wp-content/plugins/google-custom-search/css/gsc-no-search-button.css?ver=3.4'/>
+    <%= stylesheet_link_tag "application", :media => 'all'%>
         </body>
       </html>
