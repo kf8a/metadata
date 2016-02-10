@@ -35,6 +35,8 @@
 
   <%= render 'search_form' %>
 
+
+  <% cache([@studies, @website]) do %>
   <ul class='quickTree'>
     <% @studies.each do |study| -%>
       <% next unless study.include_datatables?(@datatables)%>
@@ -42,6 +44,7 @@
       <%= render 'study', study: study, themes: @themes, datatables: @datatables, website: @website %>
     <% end -%>
   </ul>
+  <% end %>
 </div>
 <% end %>
 
