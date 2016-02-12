@@ -67,11 +67,11 @@ gem 'coffee-rails'
 gem 'uglifier'
 
 gem 'prometheus-client', '~> 0.4.2'
+gem 'web-console', group: :development
 
 group :development, :test  do
   gem "byebug"
   gem "spring"
-  gem "web-console", '~> 2.0'
   gem 'minitest'
   gem 'minitest-reporters', '>= 0.5.0'
 
