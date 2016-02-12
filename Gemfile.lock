@@ -139,9 +139,7 @@ GEM
     git-version-bump (0.15.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
-    has_scope (0.7.0)
-      actionpack (>= 4.1, < 5.1)
-      activesupport (>= 4.1, < 5.1)
+    has_scope (0.5.1)
     highline (1.7.8)
     i18n (0.7.0)
     i18n_data (0.7.0)
@@ -339,7 +337,7 @@ DEPENDENCIES
   exception_notification
   factory_girl_rails
   formtastic
-  has_scope
+  has_scope (< 0.6)
   jquery-rails
   less-rails
   meta_request

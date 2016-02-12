@@ -44,7 +44,7 @@ gem 'dalli'
 
 #gem 'central_logger'
 
-gem 'has_scope'
+gem 'has_scope', '<0.6'
 
 gem 'ris_parser', :git => 'git://github.com/kf8a/ris_parser.git'
 
