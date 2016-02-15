@@ -82,11 +82,15 @@ namespace :deploy do
       run_locally "bundle exec rake assets:precompile RAILS_ENV=production"
       run "cd #{current_path} && bundle exec rake assets:precompile RAILS_ENV=production"
       find_servers_for_task(current_task).each do |server|
-        run_locally "rsync -vr --exclude='.DS_Store' public/assets #{user}@#{server.host}:#{shared_path}/"
+        run_locally "rsync -vr --exclude='.DS_Store' public/assets hillsdale.kbs.msu.edu:/var/www/lter/metadata-assets/"
       end
     end
   end
 
+  desc "upload configs"
+  task :upload_configs do
+    run "mkdir -p #{shared_path}/config"
+  end
 end
 
 task :oshtemo do
@@ -207,3 +211,4 @@ task :update_sitemap do
   run_locally "scp sitemap.xml.gz #{asset_host}:#{asset_path}/rails-sitemap.xml.gz"
   # run "cd #{current_path};bundle exec rake sitemap:refresh RAILS_ENV=production"
 end
+
