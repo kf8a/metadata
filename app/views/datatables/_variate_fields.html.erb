@@ -3,8 +3,8 @@
   <%= f.input :weight, :input_html => { :size => 5 } %>
   <%= f.input :description, :input_html => {:size => '60x5'} %>
   <%= f.input :unit, :collection => Unit.order(:name) %>
-  <%= f.input :measurement_scale, :collection => ['nominal', 'interval', 'ratio', 'datetime'], selected: 'nominal' %>
-  <%= f.input :data_type, :collection => ['text','datetime','integer','real'], selected: 'text' %>
+  <%= f.input :measurement_scale, :collection => ['nominal', 'interval', 'ratio', 'datetime'] %>
+  <%= f.input :data_type, :collection => ['text','datetime','integer','real'] %>
   <%= f.input :max_valid %>
   <%= f.input :min_valid %>
   <%= f.input :date_format %>
