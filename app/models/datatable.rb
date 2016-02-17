@@ -369,17 +369,6 @@ class Datatable < ActiveRecord::Base
     csv_string
   end
 
-  # def to_csv
-  #   # stupid microsofts
-  #   csv_string = approved_csv.force_encoding("UTF-8")
-  #   result = ""
-  #   header + csv_string
-  # end
-
-  # def header
-  #   terms_of_use + data_source +  data_comments + "#\n#\n"
-  # end
-
   def to_climdb
     "!#{raw_csv(false)}" # no units
   end
