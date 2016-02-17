@@ -2,7 +2,7 @@ xml.instruct! :xml, :version => '1.0'
 xml.hrv:harvestList, 'xmlns:hrv' => 'eml://ecoinformatics.org/harvestList' do
 
   @datasets.each do |dataset|
-    next unless dataset.website
+    next unless dataset.website && dataset.pasta_ready
     next if dataset.sponsor.data_restricted
     xml.document do
       xml.docid do
