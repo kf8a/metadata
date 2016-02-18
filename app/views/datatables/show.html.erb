@@ -145,7 +145,8 @@
 <% else %>
   <% if datatable.object? %>
     <p>
-      <%= link_to 'Data', datatable.data_url %> (on a different page)
+    <hr/>
+      <%= link_to 'Data (on a different site)', datatable.data_url, class: "download-link" %>
     </p>
   <% else %>
     <p>Data Embargoed</p>
