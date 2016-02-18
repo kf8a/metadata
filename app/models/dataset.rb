@@ -120,10 +120,10 @@ class Dataset < ActiveRecord::Base
     @eml = ::Builder::XmlMarkup.new
     @eml.instruct! :xml, version: '1.0'
     @eml.tag!('eml:eml',
-        'xmlns:eml'           => 'eml://ecoinformatics.org/eml-2.1.0',
+        'xmlns:eml'           => 'eml://ecoinformatics.org/eml-2.1.1',
         'xmlns:stmml'         => 'http://www.xml-cml.org/schema/stmml-1.1',
         'xmlns:xsi'           => 'http://www.w3.org/2001/XMLSchema-instance',
-        'xsi:schemaLocation'  => 'eml://ecoinformatics.org/eml-2.1.0 http://nis.lternet.edu/schemas/EML/eml-2.1.0/eml.xsd',
+        'xsi:schemaLocation'  => 'eml://ecoinformatics.org/eml-2.1.1 http://lter.kbs.msu.edu/docs/eml.xsd',
         'packageId'           => package_id,
         'system'              => 'KBS LTER') do
       eml_access
