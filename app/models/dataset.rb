@@ -25,6 +25,10 @@ class Dataset < ActiveRecord::Base
 
   acts_as_taggable_on :keywords
 
+  after_touch do
+    increment_version
+  end
+
   def self.from_eml_file(file)
     from_eml(file.read)
   end
