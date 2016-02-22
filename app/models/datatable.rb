@@ -568,7 +568,7 @@ class Datatable < ActiveRecord::Base
 
   def eml_physical
     @eml.physical do
-      @eml.objectName title
+      @eml.objectName title.gsub(/ /, '+')
       @eml.encodingMethod "None"
       eml_data_format
       @eml.distribution do
