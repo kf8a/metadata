@@ -69,7 +69,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def increment_version
-    version = version + 1
+    self.version = self.version + 1
     save
   end
 
