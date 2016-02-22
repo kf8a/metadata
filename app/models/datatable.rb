@@ -430,7 +430,6 @@ class Datatable < ActiveRecord::Base
     self.end_date = dates[:end_date] if dates[:end_date]
     save
     dataset.update_temporal_extent
-    dataset.save
   end
 
   def data_preview
