@@ -12,7 +12,7 @@ class Editor < ActiveRecord::Base
   end
 
   def to_enw
-    "%E #{formatted}\n"
+    "\n%E #{formatted}"
   end
 end
 

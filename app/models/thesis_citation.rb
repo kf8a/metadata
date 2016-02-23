@@ -23,10 +23,6 @@ class ThesisCitation < Citation
   def endnote_type
     "Thesis\n"
   end
-
-  def endnote_publication_data
-    publication.present? ? "%J #{publication}\n" : ""
-  end
 end
 
 

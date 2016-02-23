@@ -12,7 +12,7 @@ class Author < ActiveRecord::Base
   end
 
   def to_enw
-    "%A #{formatted}\n"
+    "\n%A #{formatted}"
   end
 
 end

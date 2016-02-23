@@ -62,6 +62,40 @@ class CitationTest < ActiveSupport::TestCase
     end
   end
 
+  context 'a citation object with out a pub year' do
+    setup do
+      @citation = ArticleCitation.new
+      @citation.authors << Author.new( :sur_name => 'Loecke',
+                                       :given_name => 'T', :middle_name => 'D',
+                                       :seniority => 1)
+
+      @citation.authors << Author.new(:sur_name => 'Robertson',
+                                      :given_name => 'G', :middle_name => 'P',
+                                      :seniority => 2)
+
+      @citation.title = 'Soil resource heterogeneity in the form of aggregated litter alters maize productivity'
+      @citation.publication = 'Plant and Soil'
+      @citation.volume = '325'
+      @citation.start_page_number = 231
+      @citation.ending_page_number = 241
+      @citation.abstract = 'An abstract of the article.'
+      @citation.save
+    end
+
+    should 'be exported to endnote' do
+      result = "%0 Journal Article
+%T Soil resource heterogeneity in the form of aggregated litter alters maize productivity
+%A Loecke, T. D.
+%A Robertson, G. P.
+%J Plant and Soil
+%V 325
+%P 231-241
+%X An abstract of the article.
+%M KBS.#{@citation.id}\n"
+    assert_equal result, @citation.to_enw
+    end
+  end
+
   context 'a citation object with multiple authors' do
     setup do
       @citation = ArticleCitation.new

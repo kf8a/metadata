@@ -93,7 +93,7 @@ class Citation < ActiveRecord::Base
 
 
   def Citation.to_enw(array_of_citations)
-    array_of_citations.collect { |citation| citation.to_enw }.join("\r\n\r\n")
+    array_of_citations.collect { |citation| citation.to_enw }.join("\n") + "\n"
   end
 
   def Citation.to_bib(array_of_citations)
@@ -321,9 +321,9 @@ class Citation < ActiveRecord::Base
 
   def endnote_publication_data
     if book?
-      "%B #{publication}\n" + "%I #{publisher}\n" + "%C #{address}\n"
+      "\n%B #{publication}" + "\n%I #{publisher}" + "\n%C #{address}"
     else
-      publication.present? ? "%J #{publication}\n" : ""
+      publication.present? ? "\n%J #{publication}" : ""
     end
   end
 
@@ -343,7 +343,7 @@ class Citation < ActiveRecord::Base
   end
 
   def volume_to_enw
-    volume.present? ? "%V #{volume}\n" : ""
+    volume.present? ? "\n%V #{volume}" : ""
   end
 
   def accession_number_to_enw
@@ -379,15 +379,16 @@ class Citation < ActiveRecord::Base
   end
 
   def page_numbers_to_enw
-    page_numbers.blank? ? "" : "%P #{page_numbers}\n"
+    page_numbers.blank? ? "" : "\n%P #{page_numbers}"
   end
 
   def pub_year_to_enw
-    "%D #{pub_year}"
+    pub_year? ? "\n%D #{pub_year}" : ""
   end
 
+  # add Abstract first removing any line endings
   def abstract_to_enw
-    abstract? ? "\n%X #{abstract}" : ""
+    abstract? ? "\n%X #{abstract.delete("\n").delete("\r")}" : ""
   end
 
   def doi_to_enw
@@ -411,7 +412,7 @@ class Citation < ActiveRecord::Base
   end
 
   def title_to_enw
-    "%T #{title}\n"
+    "%T #{title}"
   end
 
   def pub_year_with_punctuation 

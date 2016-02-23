@@ -54,9 +54,6 @@ class ChapterCitation < Citation
     "CHAP\n"
   end
 
-  def endnote_publication_data
-    publication.present? ? "%J #{publication}\n" : ""
-  end
 end
 
 

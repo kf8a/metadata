@@ -14,10 +14,6 @@ class BulletinCitation < Citation
     "Pamphlet\n"
   end
 
-  def endnote_publication_data
-    publication.present? ? "%J #{publication}\n" : ""
-  end
-
   def publisher_string
     if publisher.present?
       publisher + ", "

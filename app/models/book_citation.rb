@@ -18,10 +18,6 @@ class BookCitation < Citation
     "Book\n"
   end
 
-  def endnote_publication_data
-    "%B #{publication}\n" + "%I #{publisher}\n" + "%C #{address}\n"
-  end
-
   def publication_string
     if publication.present?
       "#{publication}. "
