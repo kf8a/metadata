@@ -11,7 +11,11 @@ Design
 The system is modeled loosely on the EML schemas dataset, datatable, person and protocol modules. Datatables are the central feature
 linking the other parts of the system togther. Multiple, hopefully related,  datatables are contained within a dataset. While both datasets
 and datatables can have personel and protocols, we are migrating to the linking personel and protocols with datatables and then
-computing the values for the datasets from the datatables.
+computing the values for the datasets from the datatables. The main parts of the system are:
+
+# Datasets
+
+Datasets are the containser of 
 
 Setup
 -----
