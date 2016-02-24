@@ -5,8 +5,6 @@ db/meta_*
 db/*.sqlite3
 db/sphinx
 log/
-doc/*.dot
-doc/*
 metadata.sql
 public/datatables
 public/*.html

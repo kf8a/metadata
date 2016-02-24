@@ -1,0 +1,2011 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Citation
+  
+    &mdash; Documentation by YARD 0.8.7.6
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!Citation.html";
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (C)</a> &raquo;
+    
+    
+    <span class="title">Citation</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><h1>Class: Citation
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">ActiveRecord::Base</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveRecord::Base</li>
+          
+            <li class="next">Citation</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+      <dt class="r2">Includes:</dt>
+      <dd class="r2">Workflow</dd>
+      
+    
+  
+  
+  
+    <dt class="r1 last">Defined in:</dt>
+    <dd class="r1 last">app/models/citation.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<div id="subclasses">
+  <h2>Direct Known Subclasses</h2>
+  <p class="children"><span class='object_link'><a href="ArticleCitation.html" title="ArticleCitation (class)">ArticleCitation</a></span>, <span class='object_link'><a href="BookCitation.html" title="BookCitation (class)">BookCitation</a></span>, <span class='object_link'><a href="BulletinCitation.html" title="BulletinCitation (class)">BulletinCitation</a></span>, <span class='object_link'><a href="ChapterCitation.html" title="ChapterCitation (class)">ChapterCitation</a></span>, <span class='object_link'><a href="ConferenceCitation.html" title="ConferenceCitation (class)">ConferenceCitation</a></span>, <span class='object_link'><a href="EbookCitation.html" title="EbookCitation (class)">EbookCitation</a></span>, <span class='object_link'><a href="ReportCitation.html" title="ReportCitation (class)">ReportCitation</a></span>, <span class='object_link'><a href="ThesisCitation.html" title="ThesisCitation (class)">ThesisCitation</a></span></p>
+</div>
+
+
+
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#by_date-class_method" title="by_date (class method)">+ (Object) <strong>by_date</strong>(date) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#by_treatment-class_method" title="by_treatment (class method)">+ (Object) <strong>by_treatment</strong>(treatment) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#by_type-class_method" title="by_type (class method)">+ (Object) <strong>by_type</strong>(type) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#citation_from_ris_stanza-class_method" title="citation_from_ris_stanza (class method)">+ (Object) <strong>citation_from_ris_stanza</strong>(stanza, pdf_folder) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#from_ris-class_method" title="from_ris (class method)">+ (Object) <strong>from_ris</strong>(ris_text, pdf_folder = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#from_website-class_method" title="from_website (class method)">+ (Object) <strong>from_website</strong>(website_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#select_options-class_method" title="select_options (class method)">+ (Object) <strong>select_options</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sorted_by-class_method" title="sorted_by (class method)">+ (Object) <strong>sorted_by</strong>(sorter) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_bib-class_method" title="to_bib (class method)">+ (Object) <strong>to_bib</strong>(array_of_citations) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_enw-class_method" title="to_enw (class method)">+ (Object) <strong>to_enw</strong>(array_of_citations) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#type_from_ris_type-class_method" title="type_from_ris_type (class method)">+ (Object) <strong>type_from_ris_type</strong>(type) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#author_block-instance_method" title="#author_block (instance method)">- (Object) <strong>author_block</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#author_block%3D-instance_method" title="#author_block= (instance method)">- (Object) <strong>author_block=</strong>(string_of_authors = &#39;&#39;) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#authors_from_ris_authors-instance_method" title="#authors_from_ris_authors (instance method)">- (Object) <strong>authors_from_ris_authors</strong>(ris_authors) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#bib_hash-instance_method" title="#bib_hash (instance method)">- (Object) <strong>bib_hash</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#book%3F-instance_method" title="#book? (instance method)">- (Boolean) <strong>book?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#date_from_ris_date-instance_method" title="#date_from_ris_date (instance method)">- (Object) <strong>date_from_ris_date</strong>(ris_date) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#editor_block-instance_method" title="#editor_block (instance method)">- (Object) <strong>editor_block</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#editor_block%3D-instance_method" title="#editor_block= (instance method)">- (Object) <strong>editor_block=</strong>(string_of_editors = &#39;&#39;) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#file_title-instance_method" title="#file_title (instance method)">- (Object) <strong>file_title</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#formatted-instance_method" title="#formatted (instance method)">- (Object) <strong>formatted</strong>(options = {}) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_attribute_from_ris_stanza-instance_method" title="#get_attribute_from_ris_stanza (instance method)">- (Object) <strong>get_attribute_from_ris_stanza</strong>(stanza, attribute_name, ris_name = nil) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_attributes_from_ris_stanza-instance_method" title="#get_attributes_from_ris_stanza (instance method)">- (Object) <strong>get_attributes_from_ris_stanza</strong>(stanza, attribute_array) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#make_pdf_private-instance_method" title="#make_pdf_private (instance method)">- (Object) <strong>make_pdf_private</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#make_pdf_public-instance_method" title="#make_pdf_public (instance method)">- (Object) <strong>make_pdf_public</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#page_number_from_ris-instance_method" title="#page_number_from_ris (instance method)">- (Object) <strong>page_number_from_ris</strong>(start_page, end_page) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>don&#39;t even try to parse the page number.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pdf_from_ris_pdf-instance_method" title="#pdf_from_ris_pdf (instance method)">- (Object) <strong>pdf_from_ris_pdf</strong>(ris_pdf, pdf_folder) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#short_author_string-instance_method" title="#short_author_string (instance method)">- (Object) <strong>short_author_string</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_bib-instance_method" title="#to_bib (instance method)">- (Object) <strong>to_bib</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_enw-instance_method" title="#to_enw (instance method)">- (Object) <strong>to_enw</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#treat_as_token_list-instance_method" title="#treat_as_token_list (instance method)">- (Object) <strong>treat_as_token_list</strong>(name_of_class, token_string) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="by_date-class_method">
+  
+    + (<tt>Object</tt>) <strong>by_date</strong>(date) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+89
+90
+91
+92</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 89</span>
+
+<span class='kw'>def</span> <span class='const'>Citation</span><span class='period'>.</span><span class='id identifier rubyid_by_date'>by_date</span><span class='lparen'>(</span><span class='id identifier rubyid_date'>date</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_query_date'>query_date</span> <span class='op'>=</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_civil'>civil</span><span class='lparen'>(</span><span class='id identifier rubyid_date'>date</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>year</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='comma'>,</span><span class='id identifier rubyid_date'>date</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>month</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='comma'>,</span><span class='id identifier rubyid_date'>date</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>day</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>updated_at &gt; ?</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_query_date'>query_date</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="by_treatment-class_method">
+  
+    + (<tt>Object</tt>) <strong>by_treatment</strong>(treatment) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+81
+82
+83</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 81</span>
+
+<span class='kw'>def</span> <span class='const'>Citation</span><span class='period'>.</span><span class='id identifier rubyid_by_treatment'>by_treatment</span><span class='lparen'>(</span><span class='id identifier rubyid_treatment'>treatment</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_includes'>includes</span><span class='lparen'>(</span><span class='symbol'>:treatments</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_references'>references</span><span class='lparen'>(</span><span class='symbol'>:treatments</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>treatments.id = ?</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_treatment'>treatment</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="by_type-class_method">
+  
+    + (<tt>Object</tt>) <strong>by_type</strong>(type) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+106
+107
+108</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 106</span>
+
+<span class='kw'>def</span> <span class='const'>Citation</span><span class='period'>.</span><span class='id identifier rubyid_by_type'>by_type</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:type</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_type'>type</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="citation_from_ris_stanza-class_method">
+  
+    + (<tt>Object</tt>) <strong>citation_from_ris_stanza</strong>(stanza, pdf_folder) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 164</span>
+
+<span class='kw'>def</span> <span class='const'>Citation</span><span class='period'>.</span><span class='id identifier rubyid_citation_from_ris_stanza'>citation_from_ris_stanza</span><span class='lparen'>(</span><span class='id identifier rubyid_stanza'>stanza</span><span class='comma'>,</span> <span class='id identifier rubyid_pdf_folder'>pdf_folder</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_citation'>citation</span> <span class='op'>=</span> <span class='id identifier rubyid_type_from_ris_type'>type_from_ris_type</span><span class='lparen'>(</span><span class='id identifier rubyid_stanza'>stanza</span><span class='lbracket'>[</span><span class='symbol'>:type</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='id identifier rubyid_same_name_attributes'>same_name_attributes</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>title</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                          <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>secondary_title</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                          <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>series_title</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                          <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>pub_year</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                          <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>volume</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                          <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>abstract</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+                          <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>doi</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_citation'>citation</span><span class='period'>.</span><span class='id identifier rubyid_get_attributes_from_ris_stanza'>get_attributes_from_ris_stanza</span><span class='lparen'>(</span><span class='id identifier rubyid_stanza'>stanza</span><span class='comma'>,</span> <span class='id identifier rubyid_same_name_attributes'>same_name_attributes</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_citation'>citation</span><span class='period'>.</span><span class='id identifier rubyid_get_attribute_from_ris_stanza'>get_attribute_from_ris_stanza</span><span class='lparen'>(</span><span class='id identifier rubyid_stanza'>stanza</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>publication</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='symbol'>:journal</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_citation'>citation</span><span class='period'>.</span><span class='id identifier rubyid_date_from_ris_date'>date_from_ris_date</span><span class='lparen'>(</span><span class='id identifier rubyid_stanza'>stanza</span><span class='lbracket'>[</span><span class='symbol'>:primary_date</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_stanza'>stanza</span><span class='lbracket'>[</span><span class='symbol'>:primary_date</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_citation'>citation</span><span class='period'>.</span><span class='id identifier rubyid_page_number_from_ris'>page_number_from_ris</span><span class='lparen'>(</span> <span class='id identifier rubyid_stanza'>stanza</span><span class='lbracket'>[</span><span class='symbol'>:start_page</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_stanza'>stanza</span><span class='lbracket'>[</span><span class='symbol'>:end_page</span><span class='rbracket'>]</span><span class='rparen'>)</span> 
+  <span class='id identifier rubyid_citation'>citation</span><span class='period'>.</span><span class='id identifier rubyid_pdf_from_ris_pdf'>pdf_from_ris_pdf</span><span class='lparen'>(</span><span class='id identifier rubyid_stanza'>stanza</span><span class='lbracket'>[</span><span class='symbol'>:pdf</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_pdf_folder'>pdf_folder</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_pdf_folder'>pdf_folder</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_stanza'>stanza</span><span class='lbracket'>[</span><span class='symbol'>:pdf</span><span class='rbracket'>]</span>
+
+  <span class='id identifier rubyid_citation'>citation</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+  <span class='id identifier rubyid_citation'>citation</span><span class='period'>.</span><span class='id identifier rubyid_authors_from_ris_authors'>authors_from_ris_authors</span><span class='lparen'>(</span><span class='id identifier rubyid_stanza'>stanza</span><span class='lbracket'>[</span><span class='symbol'>:authors</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_citation'>citation</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="from_ris-class_method">
+  
+    + (<tt>Object</tt>) <strong>from_ris</strong>(ris_text, pdf_folder = nil) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+137
+138
+139
+140
+141
+142
+143
+144
+145</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 137</span>
+
+<span class='kw'>def</span> <span class='const'>Citation</span><span class='period'>.</span><span class='id identifier rubyid_from_ris'>from_ris</span><span class='lparen'>(</span><span class='id identifier rubyid_ris_text'>ris_text</span><span class='comma'>,</span> <span class='id identifier rubyid_pdf_folder'>pdf_folder</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_parser'>parser</span> <span class='op'>=</span> <span class='const'>RisParser</span><span class='op'>::</span><span class='const'>RisParser</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='id identifier rubyid_trans'>trans</span> <span class='op'>=</span> <span class='const'>RisParser</span><span class='op'>::</span><span class='const'>RisParserTransform</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='id identifier rubyid_parsed_text'>parsed_text</span> <span class='op'>=</span> <span class='id identifier rubyid_trans'>trans</span><span class='period'>.</span><span class='id identifier rubyid_apply'>apply</span><span class='lparen'>(</span><span class='id identifier rubyid_parser'>parser</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_ris_text'>ris_text</span><span class='rparen'>)</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_parsed_text'>parsed_text</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_stanza'>stanza</span><span class='op'>|</span>
+    <span class='id identifier rubyid_logger'>logger</span><span class='period'>.</span><span class='id identifier rubyid_info'>info</span> <span class='id identifier rubyid_stanza'>stanza</span>
+    <span class='id identifier rubyid_citation_from_ris_stanza'>citation_from_ris_stanza</span><span class='lparen'>(</span><span class='id identifier rubyid_stanza'>stanza</span><span class='comma'>,</span> <span class='id identifier rubyid_pdf_folder'>pdf_folder</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="from_website-class_method">
+  
+    + (<tt>Object</tt>) <strong>from_website</strong>(website_id) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+85
+86
+87</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 85</span>
+
+<span class='kw'>def</span> <span class='const'>Citation</span><span class='period'>.</span><span class='id identifier rubyid_from_website'>from_website</span><span class='lparen'>(</span><span class='id identifier rubyid_website_id'>website_id</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='label'>website_id:</span> <span class='id identifier rubyid_website_id'>website_id</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="select_options-class_method">
+  
+    + (<tt>Object</tt>) <strong>select_options</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+285
+286
+287
+288</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 285</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_select_options'>select_options</span>
+  <span class='id identifier rubyid_classes'>classes</span> <span class='op'>=</span> <span class='id identifier rubyid_descendants'>descendants</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_klass'>klass</span><span class='op'>|</span> <span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_sort'>sort</span>
+  <span class='id identifier rubyid_classes'>classes</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_klass'>klass</span><span class='op'>|</span> <span class='lbracket'>[</span><span class='id identifier rubyid_klass'>klass</span><span class='period'>.</span><span class='id identifier rubyid_gsub'>gsub</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>Citation</span><span class='regexp_end'>/</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_klass'>klass</span><span class='rbracket'>]</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="sorted_by-class_method">
+  
+    + (<tt>Object</tt>) <strong>sorted_by</strong>(sorter) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+110
+111
+112
+113
+114
+115
+116</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 110</span>
+
+<span class='kw'>def</span> <span class='const'>Citation</span><span class='period'>.</span><span class='id identifier rubyid_sorted_by'>sorted_by</span><span class='lparen'>(</span><span class='id identifier rubyid_sorter'>sorter</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_sorter'>sorter</span><span class='period'>.</span><span class='id identifier rubyid_downcase!'>downcase!</span>
+  <span class='comment'>#Since primary author and date is default, it is already sorted that way
+</span>  <span class='kw'>unless</span> <span class='id identifier rubyid_sorter'>sorter</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>primary author and date(default)</span><span class='tstring_end'>&quot;</span></span>
+    <span class='id identifier rubyid_order'>order</span><span class='lparen'>(</span><span class='id identifier rubyid_sorter'>sorter</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_bib-class_method">
+  
+    + (<tt>Object</tt>) <strong>to_bib</strong>(array_of_citations) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+99
+100
+101
+102
+103
+104</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 99</span>
+
+<span class='kw'>def</span> <span class='const'>Citation</span><span class='period'>.</span><span class='id identifier rubyid_to_bib'>to_bib</span><span class='lparen'>(</span><span class='id identifier rubyid_array_of_citations'>array_of_citations</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_bib'>bib</span> <span class='op'>=</span> <span class='const'>BibTeX</span><span class='op'>::</span><span class='const'>Bibliography</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='id identifier rubyid_array_of_citations'>array_of_citations</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_citation'>citation</span><span class='op'>|</span> <span class='id identifier rubyid_bib'>bib</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_citation'>citation</span><span class='period'>.</span><span class='id identifier rubyid_to_bib'>to_bib</span><span class='rbrace'>}</span>
+
+  <span class='id identifier rubyid_bib'>bib</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_enw-class_method">
+  
+    + (<tt>Object</tt>) <strong>to_enw</strong>(array_of_citations) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+95
+96
+97</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 95</span>
+
+<span class='kw'>def</span> <span class='const'>Citation</span><span class='period'>.</span><span class='id identifier rubyid_to_enw'>to_enw</span><span class='lparen'>(</span><span class='id identifier rubyid_array_of_citations'>array_of_citations</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_array_of_citations'>array_of_citations</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_citation'>citation</span><span class='op'>|</span> <span class='id identifier rubyid_citation'>citation</span><span class='period'>.</span><span class='id identifier rubyid_to_enw'>to_enw</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="type_from_ris_type-class_method">
+  
+    + (<tt>Object</tt>) <strong>type_from_ris_type</strong>(type) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 118</span>
+
+<span class='kw'>def</span> <span class='const'>Citation</span><span class='period'>.</span><span class='id identifier rubyid_type_from_ris_type'>type_from_ris_type</span><span class='lparen'>(</span><span class='id identifier rubyid_type'>type</span><span class='rparen'>)</span>
+  <span class='kw'>case</span> <span class='id identifier rubyid_type'>type</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>JOUR</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>MGZN</span><span class='tstring_end'>&#39;</span></span>
+    <span class='const'>ArticleCitation</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>BOOK</span><span class='tstring_end'>&#39;</span></span>
+    <span class='const'>BookCitation</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>CHAP</span><span class='tstring_end'>&#39;</span></span>
+    <span class='const'>ChapterCitation</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>CONF</span><span class='tstring_end'>&#39;</span></span>
+    <span class='const'>ConferenceCitation</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>RPRT</span><span class='tstring_end'>&#39;</span></span>
+    <span class='const'>ReportCitation</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>THES</span><span class='tstring_end'>&#39;</span></span>
+    <span class='const'>ThesisCitation</span>
+  <span class='kw'>else</span>
+    <span class='const'>Citation</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="author_block-instance_method">
+  
+    - (<tt>Object</tt>) <strong>author_block</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+212
+213
+214</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 212</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_author_block'>author_block</span>
+  <span class='id identifier rubyid_block'>block</span><span class='lparen'>(</span><span class='id identifier rubyid_authors'>authors</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="author_block=-instance_method">
+  
+    - (<tt>Object</tt>) <strong>author_block=</strong>(string_of_authors = &#39;&#39;) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+216
+217
+218</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 216</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_author_block='>author_block=</span><span class='lparen'>(</span><span class='id identifier rubyid_string_of_authors'>string_of_authors</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_set_as_block'>set_as_block</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Author</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_string_of_authors'>string_of_authors</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="authors_from_ris_authors-instance_method">
+  
+    - (<tt>Object</tt>) <strong>authors_from_ris_authors</strong>(ris_authors) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+206
+207
+208
+209
+210</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 206</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_authors_from_ris_authors'>authors_from_ris_authors</span><span class='lparen'>(</span><span class='id identifier rubyid_ris_authors'>ris_authors</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_ris_authors'>ris_authors</span><span class='period'>.</span><span class='id identifier rubyid_each_with_index'>each_with_index</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_author_name'>author_name</span><span class='comma'>,</span> <span class='id identifier rubyid_index'>index</span><span class='op'>|</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_authors'>authors</span><span class='period'>.</span><span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span><span class='symbol'>:name</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_author_name'>author_name</span><span class='comma'>,</span> <span class='symbol'>:seniority</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_index'>index</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="bib_hash-instance_method">
+  
+    - (<tt>Object</tt>) <strong>bib_hash</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 256</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_bib_hash'>bib_hash</span>
+  <span class='id identifier rubyid_hash'>hash</span> <span class='op'>=</span> <span class='lbrace'>{</span>
+    <span class='symbol'>:abstract</span>   <span class='op'>=&gt;</span> <span class='id identifier rubyid_abstract'>abstract</span><span class='comma'>,</span>
+    <span class='symbol'>:author</span>     <span class='op'>=&gt;</span> <span class='id identifier rubyid_authors'>authors</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_author'>author</span><span class='op'>|</span> <span class='id identifier rubyid_author'>author</span><span class='period'>.</span><span class='id identifier rubyid_full_name'>full_name</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> and </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='symbol'>:editor</span>     <span class='op'>=&gt;</span> <span class='id identifier rubyid_editors'>editors</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_editor'>editor</span><span class='op'>|</span> <span class='id identifier rubyid_editor'>editor</span><span class='period'>.</span><span class='id identifier rubyid_full_name'>full_name</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'> and </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='comma'>,</span>
+    <span class='symbol'>:title</span>      <span class='op'>=&gt;</span> <span class='id identifier rubyid_title'>title</span><span class='comma'>,</span>
+    <span class='symbol'>:publisher</span>  <span class='op'>=&gt;</span> <span class='id identifier rubyid_publisher'>publisher</span><span class='comma'>,</span>
+    <span class='symbol'>:year</span>       <span class='op'>=&gt;</span> <span class='id identifier rubyid_pub_year'>pub_year</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span>
+    <span class='symbol'>:address</span>    <span class='op'>=&gt;</span> <span class='id identifier rubyid_address'>address</span><span class='comma'>,</span>
+    <span class='symbol'>:note</span>       <span class='op'>=&gt;</span> <span class='id identifier rubyid_notes'>notes</span><span class='comma'>,</span>
+    <span class='symbol'>:journal</span>    <span class='op'>=&gt;</span> <span class='id identifier rubyid_publication'>publication</span><span class='comma'>,</span>
+    <span class='symbol'>:pages</span>      <span class='op'>=&gt;</span> <span class='id identifier rubyid_page_numbers'>page_numbers</span><span class='comma'>,</span>
+    <span class='symbol'>:volume</span>     <span class='op'>=&gt;</span> <span class='id identifier rubyid_volume'>volume</span><span class='comma'>,</span>
+    <span class='symbol'>:number</span>     <span class='op'>=&gt;</span> <span class='id identifier rubyid_issue'>issue</span><span class='comma'>,</span>
+    <span class='symbol'>:series</span>     <span class='op'>=&gt;</span> <span class='id identifier rubyid_series_title'>series_title</span><span class='comma'>,</span>
+    <span class='symbol'>:doi</span>        <span class='op'>=&gt;</span> <span class='id identifier rubyid_doi'>doi</span><span class='comma'>,</span>
+    <span class='symbol'>:isbn</span>       <span class='op'>=&gt;</span> <span class='id identifier rubyid_isbn'>isbn</span><span class='rbrace'>}</span>
+  <span class='id identifier rubyid_hash'>hash</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='op'>|</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_blank?'>blank?</span> <span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="book?-instance_method">
+  
+    - (<tt>Boolean</tt>) <strong>book?</strong> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+239
+240
+241</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 239</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_book?'>book?</span>
+  <span class='id identifier rubyid_citation_type'>citation_type</span><span class='period'>.</span><span class='id identifier rubyid_try'>try</span><span class='lparen'>(</span><span class='symbol'>:name</span><span class='rparen'>)</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>book</span><span class='tstring_end'>&#39;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="date_from_ris_date-instance_method">
+  
+    - (<tt>Object</tt>) <strong>date_from_ris_date</strong>(ris_date) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+185
+186
+187
+188
+189
+190
+191</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 185</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_date_from_ris_date'>date_from_ris_date</span><span class='lparen'>(</span><span class='id identifier rubyid_ris_date'>ris_date</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_ris_date'>ris_date</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>!=</span> <span class='int'>0</span> <span class='comment'>#it is just an integer string
+</span>    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_pub_date'>pub_date</span> <span class='op'>=</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_ris_date'>ris_date</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span>
+  <span class='kw'>else</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_pub_date'>pub_date</span> <span class='op'>=</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_ris_date'>ris_date</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="editor_block-instance_method">
+  
+    - (<tt>Object</tt>) <strong>editor_block</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+227
+228
+229</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 227</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_editor_block'>editor_block</span>
+  <span class='id identifier rubyid_block'>block</span><span class='lparen'>(</span><span class='id identifier rubyid_editors'>editors</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="editor_block=-instance_method">
+  
+    - (<tt>Object</tt>) <strong>editor_block=</strong>(string_of_editors = &#39;&#39;) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+231
+232
+233</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 231</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_editor_block='>editor_block=</span><span class='lparen'>(</span><span class='id identifier rubyid_string_of_editors'>string_of_editors</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_set_as_block'>set_as_block</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Editor</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_string_of_editors'>string_of_editors</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="file_title-instance_method">
+  
+    - (<tt>Object</tt>) <strong>file_title</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+235
+236
+237</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 235</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_file_title'>file_title</span>
+  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='embexpr_end'>}</span><span class='tstring_content'>-</span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span><span class='embexpr_end'>}</span><span class='tstring_content'>-</span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_pub_year'>pub_year</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="formatted-instance_method">
+  
+    - (<tt>Object</tt>) <strong>formatted</strong>(options = {}) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+243
+244
+245</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 243</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_formatted'>formatted</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_book?'>book?</span> <span class='op'>?</span> <span class='id identifier rubyid_formatted_book'>formatted_book</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_formatted_article'>formatted_article</span><span class='lparen'>(</span><span class='id identifier rubyid_options'>options</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_attribute_from_ris_stanza-instance_method">
+  
+    - (<tt>Object</tt>) <strong>get_attribute_from_ris_stanza</strong>(stanza, attribute_name, ris_name = nil) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+153
+154
+155
+156</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 153</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_get_attribute_from_ris_stanza'>get_attribute_from_ris_stanza</span><span class='lparen'>(</span><span class='id identifier rubyid_stanza'>stanza</span><span class='comma'>,</span> <span class='id identifier rubyid_attribute_name'>attribute_name</span><span class='comma'>,</span> <span class='id identifier rubyid_ris_name'>ris_name</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_ris_name'>ris_name</span> <span class='op'>=</span> <span class='id identifier rubyid_attribute_name'>attribute_name</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span> <span class='kw'>unless</span> <span class='id identifier rubyid_ris_name'>ris_name</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_attribute_name'>attribute_name</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>=</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_stanza'>stanza</span><span class='lbracket'>[</span><span class='id identifier rubyid_ris_name'>ris_name</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="get_attributes_from_ris_stanza-instance_method">
+  
+    - (<tt>Object</tt>) <strong>get_attributes_from_ris_stanza</strong>(stanza, attribute_array) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+158
+159
+160
+161
+162</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 158</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_get_attributes_from_ris_stanza'>get_attributes_from_ris_stanza</span><span class='lparen'>(</span><span class='id identifier rubyid_stanza'>stanza</span><span class='comma'>,</span> <span class='id identifier rubyid_attribute_array'>attribute_array</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_attribute_array'>attribute_array</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_attribute_name'>attribute_name</span><span class='op'>|</span>
+    <span class='id identifier rubyid_get_attribute_from_ris_stanza'>get_attribute_from_ris_stanza</span><span class='lparen'>(</span><span class='id identifier rubyid_stanza'>stanza</span><span class='comma'>,</span> <span class='id identifier rubyid_attribute_name'>attribute_name</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="make_pdf_private-instance_method">
+  
+    - (<tt>Object</tt>) <strong>make_pdf_private</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+308
+309
+310</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 308</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_make_pdf_private'>make_pdf_private</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_pdf'>pdf</span><span class='period'>.</span><span class='id identifier rubyid_s3_object'>s3_object</span><span class='period'>.</span><span class='id identifier rubyid_acl'>acl</span> <span class='op'>=</span> <span class='symbol'>:authenticated_read</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="make_pdf_public-instance_method">
+  
+    - (<tt>Object</tt>) <strong>make_pdf_public</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+304
+305
+306</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 304</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_make_pdf_public'>make_pdf_public</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_pdf'>pdf</span><span class='period'>.</span><span class='id identifier rubyid_s3_object'>s3_object</span><span class='period'>.</span><span class='id identifier rubyid_acl'>acl</span> <span class='op'>=</span> <span class='symbol'>:public_read</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="page_number_from_ris-instance_method">
+  
+    - (<tt>Object</tt>) <strong>page_number_from_ris</strong>(start_page, end_page) 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>don&#39;t even try to parse the page number</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+148
+149
+150
+151</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 148</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_page_number_from_ris'>page_number_from_ris</span><span class='lparen'>(</span><span class='id identifier rubyid_start_page'>start_page</span><span class='comma'>,</span> <span class='id identifier rubyid_end_page'>end_page</span><span class='rparen'>)</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_start_page_number'>start_page_number</span> <span class='op'>=</span> <span class='id identifier rubyid_start_page'>start_page</span>
+  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_ending_page_number'>ending_page_number</span> <span class='op'>=</span> <span class='id identifier rubyid_end_page'>end_page</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pdf_from_ris_pdf-instance_method">
+  
+    - (<tt>Object</tt>) <strong>pdf_from_ris_pdf</strong>(ris_pdf, pdf_folder) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 193</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_pdf_from_ris_pdf'>pdf_from_ris_pdf</span><span class='lparen'>(</span><span class='id identifier rubyid_ris_pdf'>ris_pdf</span><span class='comma'>,</span> <span class='id identifier rubyid_pdf_folder'>pdf_folder</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_ris_pdf'>ris_pdf</span><span class='period'>.</span><span class='id identifier rubyid_each_line'>each_line</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_line'>line</span><span class='op'>|</span>
+    <span class='id identifier rubyid_not_internal_path'>not_internal_path</span> <span class='op'>=</span> <span class='id identifier rubyid_line'>line</span><span class='period'>.</span><span class='id identifier rubyid_sub'>sub</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>internal-pdf://</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+    <span class='id identifier rubyid_not_internal_path'>not_internal_path</span><span class='period'>.</span><span class='id identifier rubyid_strip!'>strip!</span>
+    <span class='id identifier rubyid_real_path'>real_path</span> <span class='op'>=</span> <span class='const'>Rails</span><span class='period'>.</span><span class='id identifier rubyid_root'>root</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/</span><span class='tstring_end'>&#39;</span></span> <span class='op'>+</span> <span class='id identifier rubyid_pdf_folder'>pdf_folder</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/</span><span class='tstring_end'>&#39;</span></span> <span class='op'>+</span> <span class='id identifier rubyid_not_internal_path'>not_internal_path</span>
+    <span class='kw'>if</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_exist?'>exist?</span><span class='lparen'>(</span><span class='id identifier rubyid_real_path'>real_path</span><span class='rparen'>)</span>
+      <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_pdf'>pdf</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='id identifier rubyid_real_path'>real_path</span><span class='rparen'>)</span>
+    <span class='kw'>else</span>
+      <span class='id identifier rubyid_p'>p</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No such file: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_real_path'>real_path</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="short_author_string-instance_method">
+  
+    - (<tt>Object</tt>) <strong>short_author_string</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+290
+291
+292
+293
+294
+295
+296
+297
+298</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 290</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_short_author_string'>short_author_string</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_authors'>authors</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;</span> <span class='int'>3</span>
+    <span class='kw'>return</span> <span class='id identifier rubyid_authors'>authors</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span><span class='period'>.</span><span class='id identifier rubyid_formatted'>formatted</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>, et.al. </span><span class='tstring_end'>&#39;</span></span>
+  <span class='kw'>elsif</span> <span class='id identifier rubyid_authors'>authors</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;</span> <span class='int'>0</span>
+    <span class='id identifier rubyid_author_string'>author_string</span>
+  <span class='kw'>else</span>
+    <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_bib-instance_method">
+  
+    - (<tt>Object</tt>) <strong>to_bib</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+247
+248
+249
+250
+251
+252
+253
+254</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 247</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_bib'>to_bib</span>
+  <span class='id identifier rubyid_entry'>entry</span> <span class='op'>=</span> <span class='const'>BibTeX</span><span class='op'>::</span><span class='const'>Entry</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_type'>type</span> <span class='op'>=</span> <span class='id identifier rubyid_bibtex_type'>bibtex_type</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_key'>key</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>citation_</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_id'>id</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_entry'>entry</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_bib_hash'>bib_hash</span>
+
+  <span class='id identifier rubyid_entry'>entry</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_enw-instance_method">
+  
+    - (<tt>Object</tt>) <strong>to_enw</strong> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+276
+277
+278
+279
+280
+281
+282
+283</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 276</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_enw'>to_enw</span>
+  <span class='id identifier rubyid_endnote'>endnote</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>%0 </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_endnote_type'>endnote_type</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_title_to_enw'>title_to_enw</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_authors'>authors</span><span class='period'>.</span><span class='id identifier rubyid_to_enw'>to_enw</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_editors'>editors</span><span class='period'>.</span><span class='id identifier rubyid_to_enw'>to_enw</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_endnote_publication_data'>endnote_publication_data</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_endnote'>endnote</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_volume_to_enw'>volume_to_enw</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_page_numbers_to_enw'>page_numbers_to_enw</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_pub_year_to_enw'>pub_year_to_enw</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_abstract_to_enw'>abstract_to_enw</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_doi_to_enw'>doi_to_enw</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_endnote'>endnote</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_publisher_to_enw'>publisher_to_enw</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_publisher_url_to_enw'>publisher_url_to_enw</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_isbn_to_enw'>isbn_to_enw</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_city_to_enw'>city_to_enw</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_endnote'>endnote</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_accession_number_to_enw'>accession_number_to_enw</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_endnote'>endnote</span> <span class='op'>+=</span>  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n</span><span class='tstring_end'>&quot;</span></span>
+  <span class='id identifier rubyid_endnote'>endnote</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="treat_as_token_list-instance_method">
+  
+    - (<tt>Object</tt>) <strong>treat_as_token_list</strong>(name_of_class, token_string) 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+220
+221
+222
+223
+224
+225</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/citation.rb', line 220</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_treat_as_token_list'>treat_as_token_list</span><span class='lparen'>(</span><span class='id identifier rubyid_name_of_class'>name_of_class</span><span class='comma'>,</span> <span class='id identifier rubyid_token_string'>token_string</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_token_array'>token_array</span> <span class='op'>=</span> <span class='id identifier rubyid_token_string'>token_string</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>,</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_token_array'>token_array</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_token'>token</span><span class='op'>|</span>
+    <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_name_of_class'>name_of_class</span><span class='period'>.</span><span class='id identifier rubyid_tableize'>tableize</span><span class='rparen'>)</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_name_of_class'>name_of_class</span><span class='period'>.</span><span class='id identifier rubyid_constantize'>constantize</span><span class='period'>.</span><span class='id identifier rubyid_find_by_id'>find_by_id</span><span class='lparen'>(</span><span class='id identifier rubyid_author_id'>author_id</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+    <div id="footer">
+  Generated on Wed Feb 24 11:10:07 2016 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.6 (ruby-2.3.0).
+</div>
+
+  </body>
+</html>
