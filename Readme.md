@@ -1,7 +1,7 @@
 The KBS LTER Data Catalog System
 ===========================
 
-The program that powers the data catalog system used by the Kellogg Biological Station Long Term Ecological Research Program. http://lter.kbs.msu.edu/datatables
+This is the rails program that powers the data catalog system used by the Kellogg Biological Station Long Term Ecological Research Program. http://lter.kbs.msu.edu/datatables
 
 Copyright @2010 Michigan State Trustees
 
