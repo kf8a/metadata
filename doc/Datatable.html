@@ -135,7 +135,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>attr_protected :object.</p>
+<p>Returns the value of attribute materialized_datatable_id.</p>
 </div></span>
   
 </li>
@@ -884,7 +884,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>checks if the user has the right to perform the action.</p>
+</div></span>
   
 </li>
 
@@ -951,7 +953,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>publishing.</p>
+<p>publish a dataset to S3 for caching.</p>
 </div></span>
   
 </li>
@@ -1106,7 +1108,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>remove a dataset from S3 caching.</p>
+</div></span>
   
 </li>
 
@@ -1664,7 +1668,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>attr_protected :object</p>
+<p>Returns the value of attribute materialized_datatable_id</p>
 
 
   </div>
@@ -1678,12 +1682,12 @@
       <pre class="lines">
 
 
+9
 10
-11
-12</pre>
+11</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 10</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 9</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_materialized_datatable_id'>materialized_datatable_id</span>
   <span class='ivar'>@materialized_datatable_id</span>
@@ -1715,14 +1719,14 @@
       <pre class="lines">
 
 
+83
 84
 85
 86
-87
-88</pre>
+87</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 84</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 83</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_from_eml'>from_eml</span><span class='lparen'>(</span><span class='id identifier rubyid_datatable_eml'>datatable_eml</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_url'>url</span> <span class='op'>=</span> <span class='id identifier rubyid_datatable_eml'>datatable_eml</span><span class='period'>.</span><span class='id identifier rubyid_css'>css</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>physical distribution online url</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_text'>text</span>
@@ -1755,12 +1759,12 @@
       <pre class="lines">
 
 
-456
-457
-458</pre>
+459
+460
+461</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 456</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 459</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_all_data'>all_data</span>
   <span class='const'>DataQuery</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_object'>object</span><span class='rparen'>)</span>
@@ -1785,12 +1789,12 @@
       <pre class="lines">
 
 
-475
-476
-477</pre>
+478
+479
+480</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 475</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 478</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_approve_data'>approve_data</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_number_of_released_records'>number_of_released_records</span> <span class='op'>=</span> <span class='id identifier rubyid_total_records'>total_records</span>
@@ -1815,12 +1819,12 @@
       <pre class="lines">
 
 
-350
-351
-352</pre>
+353
+354
+355</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 350</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 353</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_approved_csv'>approved_csv</span>
   <span class='id identifier rubyid_convert_to_csv'>convert_to_csv</span><span class='lparen'>(</span><span class='id identifier rubyid_approved_data'>approved_data</span><span class='rparen'>)</span>
@@ -1845,12 +1849,12 @@
       <pre class="lines">
 
 
-452
-453
-454</pre>
+455
+456
+457</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 452</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 455</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_approved_data'>approved_data</span>
   <span class='const'>DataQuery</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_approved_data_query'>approved_data_query</span><span class='rparen'>)</span>
@@ -1875,16 +1879,16 @@
       <pre class="lines">
 
 
-444
-445
-446
 447
 448
 449
-450</pre>
+450
+451
+452
+453</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 444</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 447</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_approved_data_query'>approved_data_query</span>
   <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_object'>object</span>
@@ -1913,6 +1917,7 @@
       <pre class="lines">
 
 
+100
 101
 102
 103
@@ -1921,11 +1926,10 @@
 106
 107
 108
-109
-110</pre>
+109</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 101</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 100</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_associated_models_from_eml'>associated_models_from_eml</span><span class='lparen'>(</span><span class='id identifier rubyid_datatable_eml'>datatable_eml</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_datatable_eml'>datatable_eml</span><span class='period'>.</span><span class='id identifier rubyid_css'>css</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>methods methodStep</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_protocol_eml'>protocol_eml</span><span class='op'>|</span>
@@ -1979,9 +1983,6 @@
       <pre class="lines">
 
 
-233
-234
-235
 236
 237
 238
@@ -1992,10 +1993,13 @@
 243
 244
 245
-246</pre>
+246
+247
+248
+249</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 233</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 236</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_can_be_downloaded_by?'>can_be_downloaded_by?</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_is_restricted?'>is_restricted?</span>
@@ -2053,18 +2057,18 @@
       <pre class="lines">
 
 
-223
-224
-225
 226
 227
 228
 229
 230
-231</pre>
+231
+232
+233
+234</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 223</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 226</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_can_be_qcd_by?'>can_be_qcd_by?</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_sponsor_name'>sponsor_name</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>lter</span><span class='tstring_end'>&#39;</span></span>
@@ -2095,6 +2099,7 @@
       <pre class="lines">
 
 
+139
 140
 141
 142
@@ -2103,11 +2108,10 @@
 145
 146
 147
-148
-149</pre>
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 140</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 139</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_compile_personnel'>compile_personnel</span><span class='lparen'>(</span><span class='id identifier rubyid_source'>source</span><span class='comma'>,</span> <span class='id identifier rubyid_personnel'>personnel</span><span class='op'>=</span><span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_source'>source</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_contribution'>contribution</span><span class='op'>|</span>
@@ -2139,13 +2143,13 @@
       <pre class="lines">
 
 
+78
 79
 80
-81
-82</pre>
+81</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 78</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_complete'>complete</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_completed_on'>completed_on</span> <span class='op'>=</span> <span class='const'>Date</span><span class='period'>.</span><span class='id identifier rubyid_today'>today</span>
@@ -2171,12 +2175,12 @@
       <pre class="lines">
 
 
-312
-313
-314</pre>
+315
+316
+317</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 312</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 315</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_completed'>completed</span>
   <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_try'>try</span><span class='lparen'>(</span><span class='symbol'>:completed</span><span class='rparen'>)</span>
@@ -2201,9 +2205,6 @@
       <pre class="lines">
 
 
-354
-355
-356
 357
 358
 359
@@ -2217,10 +2218,13 @@
 367
 368
 369
-370</pre>
+370
+371
+372
+373</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 354</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 357</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_convert_to_csv'>convert_to_csv</span><span class='lparen'>(</span><span class='id identifier rubyid_values'>values</span><span class='comma'>,</span> <span class='id identifier rubyid_units'>units</span><span class='op'>=</span><span class='kw'>true</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_csv_string'>csv_string</span> <span class='op'>=</span> <span class='const'>CSV</span><span class='period'>.</span><span class='id identifier rubyid_generate'>generate</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_csv'>csv</span><span class='op'>|</span>
@@ -2259,9 +2263,6 @@
       <pre class="lines">
 
 
-324
-325
-326
 327
 328
 329
@@ -2269,10 +2270,13 @@
 331
 332
 333
-334</pre>
+334
+335
+336
+337</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 324</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 327</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_csv_headers'>csv_headers</span>
   <span class='lbracket'>[</span>
@@ -2305,16 +2309,16 @@
       <pre class="lines">
 
 
-385
-386
-387
 388
 389
 390
-391</pre>
+391
+392
+393
+394</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 385</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 388</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_data_comments'>data_comments</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_comments'>comments</span>
@@ -2343,17 +2347,17 @@
       <pre class="lines">
 
 
-435
-436
-437
 438
 439
 440
 441
-442</pre>
+442
+443
+444
+445</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 435</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 438</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_data_preview'>data_preview</span>
   <span class='kw'>unless</span> <span class='ivar'>@data_preview</span>
@@ -2383,18 +2387,18 @@
       <pre class="lines">
 
 
-393
-394
-395
 396
 397
 398
 399
 400
-401</pre>
+401
+402
+403
+404</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 393</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 396</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_data_source'>data_source</span>
   <span class='heredoc_beg'>&lt;&lt;-END</span>
@@ -2425,9 +2429,6 @@
       <pre class="lines">
 
 
-403
-404
-405
 406
 407
 408
@@ -2435,10 +2436,13 @@
 410
 411
 412
-413</pre>
+413
+414
+415
+416</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 403</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 406</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_database_date_field'>database_date_field</span>
   <span class='id identifier rubyid_values'>values</span> <span class='op'>=</span> <span class='const'>ActiveRecord</span><span class='op'>::</span><span class='const'>Base</span><span class='period'>.</span><span class='id identifier rubyid_connection'>connection</span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span><span class='lparen'>(</span><span class='id identifier rubyid_object'>object</span><span class='rparen'>)</span>
@@ -2471,12 +2475,12 @@
       <pre class="lines">
 
 
+135
 136
-137
-138</pre>
+137</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 136</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 135</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_dataset_personnel'>dataset_personnel</span>
   <span class='id identifier rubyid_compile_personnel'>compile_personnel</span><span class='lparen'>(</span><span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_affiliations'>affiliations</span><span class='rparen'>)</span>
@@ -2501,12 +2505,12 @@
       <pre class="lines">
 
 
+131
 132
-133
-134</pre>
+133</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 132</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 131</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_datatable_personnel'>datatable_personnel</span>
   <span class='id identifier rubyid_compile_personnel'>compile_personnel</span><span class='lparen'>(</span><span class='id identifier rubyid_data_contributions'>data_contributions</span><span class='rparen'>)</span>
@@ -2531,12 +2535,12 @@
       <pre class="lines">
 
 
-211
-212
-213</pre>
+214
+215
+216</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 211</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 214</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_deniers_of'>deniers_of</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_permissions'>permissions</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:user_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_user'>user</span><span class='comma'>,</span> <span class='symbol'>:decision</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>denied</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:owner</span><span class='rparen'>)</span>
@@ -2561,6 +2565,7 @@
       <pre class="lines">
 
 
+89
 90
 91
 92
@@ -2569,11 +2574,10 @@
 95
 96
 97
-98
-99</pre>
+98</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 90</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 89</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_from_eml'>from_eml</span><span class='lparen'>(</span><span class='id identifier rubyid_datatable_eml'>datatable_eml</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='id identifier rubyid_datatable_eml'>datatable_eml</span><span class='period'>.</span><span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>id</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_try'>try</span><span class='lparen'>(</span><span class='symbol'>:value</span><span class='rparen'>)</span>
@@ -2605,12 +2609,12 @@
       <pre class="lines">
 
 
+160
 161
-162
-163</pre>
+162</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 161</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 160</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_keyword_names'>keyword_names</span>
   <span class='id identifier rubyid_keywords'>keywords</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_x'>x</span><span class='op'>|</span> <span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span><span class='rbrace'>}</span>
@@ -2635,13 +2639,13 @@
       <pre class="lines">
 
 
+154
 155
 156
-157
-158</pre>
+157</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 155</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 154</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_leads'>leads</span>
   <span class='id identifier rubyid_lead_investigator'>lead_investigator</span> <span class='op'>=</span> <span class='const'>Role</span><span class='period'>.</span><span class='id identifier rubyid_find_by_name'>find_by_name</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>lead investigator</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
@@ -2689,13 +2693,13 @@
       <pre class="lines">
 
 
-252
-253
-254
-255</pre>
+255
+256
+257
+258</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 252</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 255</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_member?'>member?</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_sponsors'>sponsors</span> <span class='op'>=</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_try'>try</span><span class='lparen'>(</span><span class='symbol'>:sponsors</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span>
@@ -2721,12 +2725,12 @@
       <pre class="lines">
 
 
-284
-285
-286</pre>
+287
+288
+289</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 284</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 287</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_non_dataset_protocols'>non_dataset_protocols</span>
   <span class='id identifier rubyid_protocols'>protocols</span><span class='period'>.</span><span class='id identifier rubyid_reject'>reject</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_protocol'>protocol</span><span class='op'>|</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_protocols'>protocols</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_protocol'>protocol</span><span class='rparen'>)</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span>
@@ -2751,12 +2755,12 @@
       <pre class="lines">
 
 
-513
-514
-515</pre>
+516
+517
+518</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 513</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 516</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_number_of_header_lines'>number_of_header_lines</span>
   <span class='id identifier rubyid_csv_headers'>csv_headers</span><span class='period'>.</span><span class='id identifier rubyid_lines'>lines</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span><span class='period'>.</span><span class='id identifier rubyid_size'>size</span>
@@ -2781,14 +2785,14 @@
       <pre class="lines">
 
 
-460
-461
-462
 463
-464</pre>
+464
+465
+466
+467</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 460</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 463</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_offset'>offset</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_number_of_released_records'>number_of_released_records</span> <span class='op'>||=</span> <span class='id identifier rubyid_total_records'>total_records</span>
@@ -2837,15 +2841,15 @@
       <pre class="lines">
 
 
-277
-278
-279
 280
 281
-282</pre>
+282
+283
+284
+285</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 277</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 280</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_ongoing?'>ongoing?</span>
   <span class='kw'>return</span> <span class='kw'>false</span> <span class='kw'>if</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_completed?'>completed?</span>
@@ -2895,12 +2899,12 @@
       <pre class="lines">
 
 
-248
-249
-250</pre>
+251
+252
+253</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 248</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 251</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_owned_by?'>owned_by?</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_owners'>owners</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
@@ -2925,12 +2929,12 @@
       <pre class="lines">
 
 
-203
-204
-205</pre>
+206
+207
+208</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 203</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 206</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_pending_requesters'>pending_requesters</span>
   <span class='id identifier rubyid_requesters'>requesters</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_user'>user</span><span class='op'>|</span> <span class='id identifier rubyid_user'>user</span> <span class='kw'>unless</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_permitted?'>permitted?</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span>
@@ -2955,13 +2959,13 @@
       <pre class="lines">
 
 
-479
-480
-481
-482</pre>
+482
+483
+484
+485</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 479</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 482</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_perform_query'>perform_query</span>
   <span class='id identifier rubyid_query'>query</span> <span class='op'>=</span>  <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_object'>object</span>
@@ -2984,11 +2988,33 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+<p>checks if the user has the right to perform the action</p>
+
 
   </div>
 </div>
 <div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
   
+    <li>
+      
+        <span class='name'>user</span>
+      
+      
+        <span class='type'>(<tt>user</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the user object to be queried</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -2998,6 +3024,11 @@
         <span class='type'>(<tt>Boolean</tt>)</span>
       
       
+      
+        &mdash;
+        <div class='inline'>
+<p>true if the action is allowed and false if not</p>
+</div>
       
     </li>
   
@@ -3009,14 +3040,14 @@
       <pre class="lines">
 
 
-197
-198
-199
 200
-201</pre>
+201
+202
+203
+204</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 197</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 200</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_permitted?'>permitted?</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_present?'>present?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_owners'>owners</span><span class='period'>.</span><span class='id identifier rubyid_present?'>present?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_owners'>owners</span><span class='period'>.</span><span class='id identifier rubyid_all?'>all?</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_owner'>owner</span><span class='op'>|</span>
@@ -3043,12 +3074,12 @@
       <pre class="lines">
 
 
+127
 128
-129
-130</pre>
+129</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 128</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 127</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_personnel'>personnel</span>
   <span class='id identifier rubyid_datatable_personnel'>datatable_personnel</span><span class='period'>.</span><span class='id identifier rubyid_presence'>presence</span> <span class='op'>||</span> <span class='id identifier rubyid_dataset_personnel'>dataset_personnel</span>
@@ -3073,12 +3104,12 @@
       <pre class="lines">
 
 
+119
 120
-121
-122</pre>
+121</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 120</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 119</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_protocols_with_backup'>protocols_with_backup</span>
   <span class='id identifier rubyid_protocols'>protocols</span><span class='period'>.</span><span class='id identifier rubyid_presence'>presence</span> <span class='op'>||</span> <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_protocols'>protocols</span><span class='period'>.</span><span class='id identifier rubyid_presence'>presence</span>
@@ -3100,7 +3131,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>publishing</p>
+<p>publish a dataset to S3 for caching</p>
 
 
   </div>
@@ -3114,6 +3145,7 @@
       <pre class="lines">
 
 
+173
 174
 175
 176
@@ -3125,11 +3157,10 @@
 182
 183
 184
-185
-186</pre>
+185</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 174</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 173</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_publish'>publish</span>
   <span class='kw'>begin</span>
@@ -3164,12 +3195,12 @@
       <pre class="lines">
 
 
-346
-347
-348</pre>
+349
+350
+351</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 346</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 349</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_raw_csv'>raw_csv</span><span class='lparen'>(</span><span class='id identifier rubyid_units'>units</span><span class='op'>=</span><span class='kw'>true</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_convert_to_csv'>convert_to_csv</span><span class='lparen'>(</span><span class='id identifier rubyid_all_data'>all_data</span><span class='comma'>,</span> <span class='id identifier rubyid_units'>units</span><span class='rparen'>)</span>
@@ -3194,12 +3225,12 @@
       <pre class="lines">
 
 
-488
-489
-490</pre>
+491
+492
+493</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 488</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 491</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_related_files'>related_files</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_dataset_files'>dataset_files</span>
@@ -3224,17 +3255,17 @@
       <pre class="lines">
 
 
+163
 164
 165
 166
 167
 168
 169
-170
-171</pre>
+170</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 164</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 163</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_related_keywords'>related_keywords</span>
   <span class='comment'>#http://vocab.lternet.edu/webservice/keywordlist.php/all/csv
@@ -3264,12 +3295,12 @@
       <pre class="lines">
 
 
-484
-485
-486</pre>
+487
+488
+489</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 484</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 487</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_related_tables'>related_tables</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_datatables'>datatables</span> <span class='op'>-</span> <span class='lbracket'>[</span><span class='kw'>self</span><span class='rbracket'>]</span>
@@ -3316,12 +3347,12 @@
       <pre class="lines">
 
 
-207
-208
-209</pre>
+210
+211
+212</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 207</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 210</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_requested_by?'>requested_by?</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_requesters'>requesters</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
@@ -3392,7 +3423,18 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>remove a dataset from S3 caching</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -3430,13 +3472,13 @@
       <pre class="lines">
 
 
+73
 74
 75
-76
-77</pre>
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 74</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 73</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_revert'>revert</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_completed_on'>completed_on</span> <span class='op'>=</span> <span class='kw'>nil</span>
@@ -3462,12 +3504,12 @@
       <pre class="lines">
 
 
-215
-216
-217</pre>
+218
+219
+220</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 215</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 218</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_sponsor'>sponsor</span>
   <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_sponsor'>sponsor</span>
@@ -3492,12 +3534,12 @@
       <pre class="lines">
 
 
-219
-220
-221</pre>
+222
+223
+224</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 219</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 222</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_sponsor_name'>sponsor_name</span>
   <span class='id identifier rubyid_sponsor'>sponsor</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
@@ -3522,16 +3564,16 @@
       <pre class="lines">
 
 
-316
-317
-318
 319
 320
 321
-322</pre>
+322
+323
+324
+325</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 316</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 319</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_status'>status</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_workflow_state'>workflow_state</span>
@@ -3560,12 +3602,12 @@
       <pre class="lines">
 
 
-500
-501
-502</pre>
+503
+504
+505</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 500</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 503</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_study_link_for'>study_link_for</span><span class='lparen'>(</span><span class='id identifier rubyid_website'>website</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_study'>study</span><span class='period'>.</span><span class='id identifier rubyid_try'>try</span><span class='lparen'>(</span><span class='symbol'>:study_url</span><span class='comma'>,</span> <span class='id identifier rubyid_website'>website</span><span class='rparen'>)</span>
@@ -3590,12 +3632,12 @@
       <pre class="lines">
 
 
-504
-505
-506</pre>
+507
+508
+509</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 504</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 507</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_study_name'>study_name</span>
   <span class='id identifier rubyid_study'>study</span><span class='period'>.</span><span class='id identifier rubyid_try'>try</span><span class='lparen'>(</span><span class='symbol'>:name</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
@@ -3631,12 +3673,12 @@
       <pre class="lines">
 
 
-518
-519
-520</pre>
+521
+522
+523</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 518</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 521</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_supercession_candidates'>supercession_candidates</span>
   <span class='const'>Datatables</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>id &lt;&gt; ?</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
@@ -3661,9 +3703,6 @@
       <pre class="lines">
 
 
-415
-416
-417
 418
 419
 420
@@ -3671,10 +3710,13 @@
 422
 423
 424
-425</pre>
+425
+426
+427
+428</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 415</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 418</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_temporal_extent'>temporal_extent</span>
   <span class='id identifier rubyid_data_start_date'>data_start_date</span> <span class='op'>=</span> <span class='id identifier rubyid_data_end_date'>data_end_date</span> <span class='op'>=</span> <span class='kw'>nil</span>
@@ -3707,17 +3749,17 @@
       <pre class="lines">
 
 
-376
-377
-378
 379
 380
 381
 382
-383</pre>
+383
+384
+385
+386</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 376</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 379</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_terms_of_use'>terms_of_use</span>
   <span class='heredoc_beg'>&lt;&lt;-END</span>
@@ -3747,9 +3789,6 @@
       <pre class="lines">
 
 
-264
-265
-266
 267
 268
 269
@@ -3758,10 +3797,13 @@
 272
 273
 274
-275</pre>
+275
+276
+277
+278</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 264</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 267</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_title_and_years'>title_and_years</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_title'>title</span> <span class='kw'>if</span> <span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_begin_date'>begin_date</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='kw'>or</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_end_date'>end_date</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
@@ -3795,12 +3837,12 @@
       <pre class="lines">
 
 
-372
-373
-374</pre>
+375
+376
+377</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 372</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 375</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_climdb'>to_climdb</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>!</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_raw_csv'>raw_csv</span><span class='lparen'>(</span><span class='kw'>false</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='comment'># no units
@@ -3825,9 +3867,6 @@
       <pre class="lines">
 
 
-288
-289
-290
 291
 292
 293
@@ -3837,10 +3876,13 @@
 297
 298
 299
-300</pre>
+300
+301
+302
+303</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 288</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 291</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_eml'>to_eml</span><span class='lparen'>(</span><span class='id identifier rubyid_xml'>xml</span> <span class='op'>=</span> <span class='op'>::</span><span class='const'>Builder</span><span class='op'>::</span><span class='const'>XmlMarkup</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='rparen'>)</span>
   <span class='ivar'>@eml</span> <span class='op'>=</span> <span class='id identifier rubyid_xml'>xml</span>
@@ -3875,12 +3917,12 @@
       <pre class="lines">
 
 
+123
 124
-125
-126</pre>
+125</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 124</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 123</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_label'>to_label</span>
   <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_title'>title</span><span class='embexpr_end'>}</span><span class='tstring_content'> (</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_name'>name</span><span class='embexpr_end'>}</span><span class='tstring_content'>)</span><span class='tstring_end'>&quot;</span></span>
@@ -3905,17 +3947,17 @@
       <pre class="lines">
 
 
-466
-467
-468
 469
 470
 471
 472
-473</pre>
+473
+474
+475
+476</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 466</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 469</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_total_records'>total_records</span>
   <span class='kw'>unless</span> <span class='ivar'>@total_records</span>
@@ -3945,16 +3987,16 @@
       <pre class="lines">
 
 
-427
-428
-429
 430
 431
 432
-433</pre>
+433
+434
+435
+436</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 427</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 430</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update_temporal_extent'>update_temporal_extent</span>
   <span class='id identifier rubyid_dates'>dates</span> <span class='op'>=</span> <span class='id identifier rubyid_temporal_extent'>temporal_extent</span>
@@ -4005,12 +4047,12 @@
       <pre class="lines">
 
 
+111
 112
-113
-114</pre>
+113</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 112</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 111</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_valid_for_eml?'>valid_for_eml?</span>
   <span class='id identifier rubyid_valid_variates'>valid_variates</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span>
@@ -4035,12 +4077,12 @@
       <pre class="lines">
 
 
+115
 116
-117
-118</pre>
+117</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 116</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 115</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_valid_variates'>valid_variates</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_variates'>variates</span><span class='period'>.</span><span class='id identifier rubyid_valid_for_eml'>valid_for_eml</span>
@@ -4065,13 +4107,13 @@
       <pre class="lines">
 
 
-508
-509
-510
-511</pre>
+511
+512
+513
+514</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 508</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 511</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_values'>values</span>
   <span class='id identifier rubyid_values'>values</span> <span class='op'>=</span> <span class='kw'>nil</span>
@@ -4097,12 +4139,12 @@
       <pre class="lines">
 
 
-302
-303
-304</pre>
+305
+306
+307</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 302</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 305</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_variate_names'>variate_names</span>
   <span class='id identifier rubyid_variates'>variates</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_variate'>variate</span><span class='op'>|</span> <span class='id identifier rubyid_variate'>variate</span><span class='period'>.</span><span class='id identifier rubyid_try'>try</span><span class='lparen'>(</span><span class='symbol'>:name</span><span class='rparen'>)</span><span class='rbrace'>}</span>
@@ -4127,18 +4169,18 @@
       <pre class="lines">
 
 
-336
-337
-338
 339
 340
 341
 342
 343
-344</pre>
+344
+345
+346
+347</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 336</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 339</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_variate_table'>variate_table</span>
   <span class='id identifier rubyid_result'>result</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>#     VARIATE TABLE\n</span><span class='tstring_end'>&quot;</span></span>
@@ -4169,14 +4211,14 @@
       <pre class="lines">
 
 
-306
-307
-308
 309
-310</pre>
+310
+311
+312
+313</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 306</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 309</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_variate_units'>variate_units</span>
   <span class='id identifier rubyid_units'>units</span> <span class='op'>=</span> <span class='id identifier rubyid_variates'>variates</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_variate'>variate</span><span class='op'>|</span> <span class='id identifier rubyid_variate'>variate</span><span class='period'>.</span><span class='id identifier rubyid_unit'>unit</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='kw'>if</span> <span class='id identifier rubyid_variate'>variate</span><span class='period'>.</span><span class='id identifier rubyid_unit'>unit</span> <span class='rbrace'>}</span>
@@ -4203,12 +4245,12 @@
       <pre class="lines">
 
 
-496
-497
-498</pre>
+499
+500
+501</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 496</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 499</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_website_name'>website_name</span>
   <span class='id identifier rubyid_dataset'>dataset</span><span class='period'>.</span><span class='id identifier rubyid_website'>website</span><span class='period'>.</span><span class='id identifier rubyid_try'>try</span><span class='lparen'>(</span><span class='symbol'>:name</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>lter</span><span class='tstring_end'>&#39;</span></span>
@@ -4233,12 +4275,12 @@
       <pre class="lines">
 
 
+150
 151
-152
-153</pre>
+152</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 151</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 150</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_which_roles'>which_roles</span><span class='lparen'>(</span><span class='id identifier rubyid_person'>person</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_data_contributions'>data_contributions</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span> <span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_affiliation'>affiliation</span> <span class='op'>|</span> <span class='id identifier rubyid_affiliation'>affiliation</span><span class='period'>.</span><span class='id identifier rubyid_role'>role</span> <span class='kw'>if</span> <span class='id identifier rubyid_affiliation'>affiliation</span><span class='period'>.</span><span class='id identifier rubyid_person'>person</span> <span class='op'>==</span> <span class='id identifier rubyid_person'>person</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span>
@@ -4285,15 +4327,15 @@
       <pre class="lines">
 
 
-257
-258
-259
 260
 261
-262</pre>
+262
+263
+264
+265</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 257</span>
+      <pre class="code"><span class="info file"># File 'app/models/datatable.rb', line 260</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_within_interval?'>within_interval?</span><span class='lparen'>(</span><span class='id identifier rubyid_start_date'>start_date</span><span class='comma'>,</span> <span class='id identifier rubyid_end_date'>end_date</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_extent'>extent</span> <span class='op'>=</span> <span class='id identifier rubyid_temporal_extent'>temporal_extent</span>
@@ -4311,7 +4353,7 @@
 </div>
 
     <div id="footer">
-  Generated on Wed Feb 24 11:10:06 2016 by
+  Generated on Wed Feb 24 11:18:58 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.0).
 </div>
