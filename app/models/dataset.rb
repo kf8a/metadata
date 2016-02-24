@@ -162,6 +162,17 @@ class Dataset < ActiveRecord::Base
     self.data_end_date || Date.today
   end
 
+  # Return the bounding coordinates of all of the datatables in the dataset
+  # @return a hash with  {eastBoundingCoordinate:, westBoundingCoordinate: , northBoundingCoordinate:, southBoundingCoordinate:}
+  def boundingCoordinates
+    {
+      westBoundingCoordinate: -85.404699,
+      eastBoundingCoordinate: -85.366857,
+      northBoundingCoordinate: 42.420265,
+      southBoundingCoordinate: 42.391019
+    }
+  end
+
   def restricted_to_members?
     sponsor.try(:data_restricted?)
   end
@@ -392,10 +403,10 @@ class Dataset < ActiveRecord::Base
       @eml.geographicCoverage do
         @eml.geographicDescription 'The areas around the Kellogg Biological Station in southwest Michigan'
         @eml.boundingCoordinates do
-          @eml.westBoundingCoordinate -85.404699
-          @eml.eastBoundingCoordinate -85.366857
-          @eml.northBoundingCoordinate 42.420265
-          @eml.southBoundingCoordinate 42.391019
+          @eml.westBoundingCoordinate boundingCoordinates[:westBoundingCoordinate]
+          @eml.eastBoundingCoordinate boundingCoordinates[:eastBoundingCoordinate]
+          @eml.northBoundingCoordinate boundingCoordinates[:northBoundingCoordinate]
+          @eml.southBoundingCoordinate boundingCoordinates[:southBoundingCoordinate]
         end
       end
       if initiated.present? && data_end_date.present?
