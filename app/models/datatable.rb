@@ -6,7 +6,6 @@ require 'eml'
 include REXML
 
 class Datatable < ActiveRecord::Base
-  # attr_protected :object
   attr_accessor :materialized_datatable_id
 
   acts_as_taggable_on :keywords
@@ -170,7 +169,7 @@ class Datatable < ActiveRecord::Base
     end.flatten.sort.uniq
   end
 
-  # publishing
+  # publish a dataset to S3 for caching
   def publish
     begin
       file = Tempfile.new('csv_cache')
@@ -185,6 +184,7 @@ class Datatable < ActiveRecord::Base
     end
   end
 
+  # remove a dataset from S3 caching
   def retract
     csv_cache.destroy
     save
@@ -194,6 +194,9 @@ class Datatable < ActiveRecord::Base
     dataset.restricted_to_members?
   end
 
+  # checks if the user has the right to perform the action
+  # @param user [user] the user object to be queried
+  # @return true if the action is allowed and false if not
   def permitted?(user)
     user.present? && owners.present? && owners.all? do |owner|
       user.has_permission_from?(owner, self)
