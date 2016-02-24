@@ -5,6 +5,9 @@ This is the rails program that powers the data catalog system used by the Kellog
 
 Copyright @2010 Michigan State Trustees
 
+Features
+--------
+
 Design
 -----
 
@@ -27,10 +30,15 @@ The system is modeled loosely on the [EML schema](https://knb.ecoinformatics.org
 - Person
 
   The Person model represents a person. It is associated through the association table with datasets, datatables, and protocols. Persons can have several roles.
-  
+
 - Citation
 
   The Citation model represents a publication such as a journal article.
+
+Prerequisites
+------------
+
+A Rails compatible database and driver, libxml and libxslt for [nokogiri](http://www.nokogiri.org/). The search functionality depends on the [sphinx](http://sphinxsearch.com/) search daemon. [Thinking sphinx](http://freelancing-gods.com/thinking-sphinx/) requires libmysqlclient-dev to be installed.
 
 Setup
 -----
