@@ -82,6 +82,6 @@ Rails.application.configure do
     :email => {
     :email_prefix => "[METADATA] ",
     :sender_address => %{"notifier" <notifier@oshtemo.kbs.msu.edu>},
-    :exception_recipients => %w{bohms@msu.edu}
+    :exception_recipients => %w{bohms@fastmail.com}
   }
 end
