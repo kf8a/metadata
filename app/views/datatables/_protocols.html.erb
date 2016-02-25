@@ -6,7 +6,7 @@
   </tr>
   <% datatable.protocols_with_backup.each do |protocol| %>
     <tr>
-      <td><%=link_to truncate(protocol.title,:length=>80).html_safe, protocol_path(protocol)%></td>
+      <td><%=link_to protocol.title.html_safe, protocol_path(protocol)%></td>
     </tr>
   <% end %>
 </table>

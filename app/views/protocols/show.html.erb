@@ -42,7 +42,7 @@
   <h2>Datatables</h2>
   <ol>
   <% @protocol.datatables.each do |datatable| -%>
-    <li><%= link_to datatable.to_label, datatable_url(datatable, :host => datatable.dataset.website.url) %></li>
+    <li><%= link_to datatable.to_label.safe_html, datatable_url(datatable, :host => datatable.dataset.website.url) %></li>
   <% end -%>
   </ol>
 
