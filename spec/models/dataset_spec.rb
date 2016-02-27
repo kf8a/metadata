@@ -80,6 +80,7 @@ describe Dataset do
       expect(@dataset_with_datatable.datatables.collect{ |table| table.valid_for_eml? }).to eq [true]
       eml_content = @dataset_with_datatable.to_eml
       old_datatable_attributes = @dataset_with_datatable.datatables.first.attributes
+      @dataset_with_datatable.datatables.each {|table| table.variates.each {|var| var.destroy }}
       @dataset_with_datatable.datatables.each {|table| table.destroy}
       @dataset_with_datatable.destroy
       imported_dataset = Dataset.from_eml(eml_content)

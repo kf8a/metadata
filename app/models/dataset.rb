@@ -34,21 +34,21 @@ class Dataset < ActiveRecord::Base
   end
 
   def self.from_eml(eml_text)
+    eml_doc = nil
     if eml_text.start_with?('http://')
       eml_doc = Nokogiri::XML(open(eml_text))
     else
       eml_doc = Nokogiri::XML(eml_text)
     end
-
-    validation_errors(eml_doc).presence || self.new.from_eml(eml_doc)
+    # get_validation_errors(eml_doc).presence || 
+    self.new.from_eml(eml_doc)
   end
 
-  def self.validation_errors(eml_doc)
+  def self.get_validation_errors(eml_doc)
     xsd = nil
     Dir.chdir("#{Rails.root}/test/data/eml-2.1.0") do
       xsd = Nokogiri::XML::Schema(File.read('eml.xsd'))
     end
-
     xsd.validate(eml_doc)
   end
 
@@ -56,7 +56,6 @@ class Dataset < ActiveRecord::Base
     dataset_eml = eml_doc.css('dataset').first
     basic_attributes_from_eml(dataset_eml)
     associated_models_from_eml(dataset_eml)
-
     self
   end
 
