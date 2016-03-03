@@ -525,6 +525,11 @@ class Datatable < ActiveRecord::Base
 
   ## Utilites
 
+  def release_all_current_records
+    self.number_of_released_records = perform_query.count
+    self.save
+  end
+
   private
 
   def convert_year_to_date(year)
