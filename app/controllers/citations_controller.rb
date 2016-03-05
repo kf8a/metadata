@@ -35,7 +35,8 @@ class CitationsController < ApplicationController
     end
 
     if params[:treatment]
-      @study= Study.find(params[:treatment])
+      treatment =  Treatment.find(params[:treatment])
+      @study= treatment.study
       citations = [Citation.from_website(website.id).by_treatment(params[:treatment])]
     end
 
