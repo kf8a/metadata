@@ -47,11 +47,11 @@
       <% end %>
       <% if @citation.treatments.present? %>
         <p>Associated Treatment Areas: </p>
-        <ol>
+        <p>
           <% @citation.treatments.each do |treatment| %>
-            <li><%= treatment.name %></li>
+            <%= treatment.name %>
           <% end %>
-        </ol>
+        </p>
       <% end %>
     <% end %>
     <p>
