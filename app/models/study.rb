@@ -21,6 +21,7 @@ class Study < ActiveRecord::Base
     treatments.where(:use_in_citations => true)
   end
 
+  # check if there is more than one treatment associated with this study
   def citation_treatments? 
     citation_treatments.size > 1
   end

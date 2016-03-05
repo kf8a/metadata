@@ -3,6 +3,7 @@
 <p>Please click on an experiment or treatment name to list LTER articles that  have reported results from that site.</p>
 <ul>
   <% @studies.each do |study| -%>
+    <% next unless Citation.from_website(1).by_treatment(study.treatments.first).all.size > 0 -%>
     <li class='top-level'>
     <% if study.citation_treatments? %>
         <%= study.name %>
@@ -14,7 +15,7 @@
           <% end -%>
         </ul>
       <% else -%>
-        <%= link_to study.name,  {:action => :index, :treatment => study.treatments.first} %>
+          <%= link_to study.name,  {:action => :index, :treatment => study.treatments.first} %>
       <% end -%>
     </li>
   <% end -%>
