@@ -4,7 +4,7 @@
 <ul>
   <% @studies.each do |study| -%>
     <li class='top-level'>
-    <% if study.citation_treatments.size > 1 %>
+    <% if study.citation_treatments? %>
         <%= study.name %>
         <ul>
           <% study.citation_treatments.each  do |treatment| -%>

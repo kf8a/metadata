@@ -21,6 +21,10 @@ class Study < ActiveRecord::Base
     treatments.where(:use_in_citations => true)
   end
 
+  def citation_treatments? 
+    citation_treatments.size > 1
+  end
+
   # returns true if one or more of the tables passed is part of the current study
   def include_datatables?(table_query = [])
     table_query = table_query.to_a  # thinking sphinks does not return an array
