@@ -35,14 +35,8 @@ class CitationsController < ApplicationController
     end
 
     if params[:treatment]
-      @treatment = Treatment.find(params[:treatment])
-      @study= @treatment.study
+      @study= Study.find(params[:treatment])
       citations = [Citation.from_website(website.id).by_treatment(params[:treatment])]
-    end
-
-    if params[:study]
-      @study= Study.find(params[:study])
-      citations = [Citation.from_website(website.id).by_treatment(params[:study])]
     end
 
     @submitted_citations = citations.collect {|c| c.submitted}.flatten
@@ -165,7 +159,6 @@ class CitationsController < ApplicationController
   def bibliography
     date = params[:date].presence
     @citations = date ? Citation.by_date(date) : Citation.all
-    # @citations.keep_if {|c| c.pub_date }
   end
 
   def destroy

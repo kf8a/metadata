@@ -9,12 +9,12 @@
         <ul>
           <% study.citation_treatments.each  do |treatment| -%>
             <li>
-              <%= link_to "#{treatment.name} #{treatment.description}", {action: :index, treatment: treatment} %>
+              <%= link_to "#{treatment.name} #{treatment.description}", {:action => :index, :treatment => treatment} %>
             </li>
           <% end -%>
         </ul>
       <% else -%>
-        <%= link_to study.name,  {action: :index, study: study} %>
+        <%= link_to study.name,  {:action => :index, :treatment => study.treatments.first} %>
       <% end -%>
     </li>
   <% end -%>
