@@ -24,7 +24,6 @@ Metadata::Application.routes.draw do
       get :filtered
       get :submitted
       get :index_by_treatment
-      get 'index_by_treatment/:treatment', :action => :index
       get :index_by_author
       get :index_by_type
       get 'index_by_type/:type', :action => :index

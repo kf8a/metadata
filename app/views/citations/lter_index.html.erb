@@ -22,7 +22,7 @@
 </ul>
 <% end %>
 <% if @study %>
-  <h1 class='publication-section'>Published from the <%= link_to @study.name, @study.url %> (alphabetical by year)</h1>
+  <h1 class='publication-section'>Published from the <%= link_to @study.name, @study.url %> <%= @treatment.try(:name) %> (alphabetical by year)</h1>
 <% else %>
 <h1 class='publication-section'>Published (alphabetical by year)</h1>
 <% end %>
