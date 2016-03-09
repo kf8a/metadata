@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.5'
+gem 'rails', '~>4.2.5'
 
 gem 'activerecord-session_store'
 gem 'responders'
 
-gem 'rake'
+gem 'rake', '< 11.0'
 gem 'capistrano', '~>2'
 gem 'pg'
 gem 'clearance'
