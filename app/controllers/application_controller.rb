@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'subdomain_resolver'
 
 class ApplicationController < ActionController::Base
