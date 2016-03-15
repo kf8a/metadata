@@ -66,7 +66,10 @@ describe Dataset do
     end
 
     it "should import the right people" do
+      role = FactoryGirl.create(:role, name: 'tester')
       jon = FactoryGirl.create(:person, :given_name => 'jon')
+      jon.roles << role
+      expect(jon).to be_valid
 
       @dataset_with_datatable.datatables.first.people << jon
 
@@ -86,7 +89,7 @@ describe Dataset do
       imported_dataset = Dataset.from_eml(eml_content)
       expect(imported_dataset).to be_valid
       new_datatable_attributes = imported_dataset.datatables.first.attributes
-      keys_to_ignore = ['id', 'is_sql', 'data_url', 'dataset_id', 'object', 'theme_id', 'created_at', 'updated_at']
+      keys_to_ignore = ['title','id', 'is_sql', 'data_url', 'dataset_id', 'object', 'theme_id', 'created_at', 'updated_at']
       new_datatable_attributes.delete_if {|key, value| keys_to_ignore.include?(key) }
       old_datatable_attributes.delete_if {|key, value| keys_to_ignore.include?(key) }
       expect(new_datatable_attributes).to eq old_datatable_attributes
