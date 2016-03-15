@@ -10,6 +10,6 @@ class SubdomainResolver < ::ActionView::FileSystemResolver
 
   def find_templates(name, prefix, partial, details, outside_app_allowed = false)
     new_name = @subdomain + "_" + name
-    super(new_name, prefix, partial, details,outside_app_allowed)
+    super(new_name, prefix, partial, details, outside_app_allowed)
   end
 end
