@@ -30,9 +30,15 @@
     <%=raw textilize(@protocol.abstract) if @protocol.abstract%>
   <% end -%>
   <h2>Protocol</h2>
-  <div class='abstract_body'>
-  <%=raw textilize(@protocol.body) if @protocol.body %>
-  </div>
+  <% if !@protocol.body.empty? %>
+    <div class='abstract_body'>
+      <%=raw textilize(@protocol.body) if @protocol.body %>
+    </div>
+  <% end %>
+  <% if @protocol.pdf.exists? %>
+    <%=link_to 'Get PDF', download_protocol_path(@protocol), :class=>'download-link'%>
+  <% end %>
+
 <% if @protocol.people.size > 1 %>Authors: <% else %>Author: <% end %>
   <ul>
     <% @protocol.people.each do |person| %>
@@ -46,9 +52,6 @@
   <% end -%>
   </ol>
 
-<% if @protocol.pdf.exists? %>
-    <%=link_to 'Get PDF', download_protocol_path(@protocol), :class=>'download-link'%>
-<% end %>
   <p>
   <%= link_to 'Edit', edit_protocol_path(@protocol) %> |
   <%= link_to 'Back', protocols_path %>

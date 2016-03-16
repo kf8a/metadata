@@ -11,6 +11,7 @@ class Protocol < ActiveRecord::Base
 
   versioned :dependent => :tracking
 
+
   if Rails.env.production?
     has_attached_file :pdf,
         :storage => :s3,
@@ -22,6 +23,8 @@ class Protocol < ActiveRecord::Base
     has_attached_file :pdf, :url => "/citations/:id/download",
         :path => ":rails_root/uploads/protocols/:attachment/:id/:style/:basename.:extension"
   end
+
+  validates_attachment :pdf , content_type: { content_type: ["application/pdf"] }
 
   def to_s
     "#{self.title}"
