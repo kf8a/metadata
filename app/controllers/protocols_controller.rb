@@ -1,6 +1,6 @@
 class ProtocolsController < ApplicationController
 
-  before_filter :admin?, :except => [:index, :show]  if Rails.env != 'development'
+  before_filter :admin?, :except => [:index, :show, :download]  if Rails.env != 'development'
   before_filter :get_protocol, :only => [:edit, :update, :destroy]
 
   # GET /protocols
