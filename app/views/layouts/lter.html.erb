@@ -10,12 +10,12 @@
     <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="/wp-content/themes/msu-kbs/lib/css/normalize.css" type="text/css" />
-    <link rel="stylesheet" href="/wp-content/themes/msu-kbs/style.css" type="text/css" />
+    <link rel="stylesheet" href="https://lter.kbs.msu.edu/wp-content/themes/msu-kbs/lib/css/normalize.css" type="text/css" />
+    <link rel="stylesheet" href="https://lter.kbs.msu.edu/wp-content/themes/msu-kbs/style.css" type="text/css" />
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" ></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi?ver=4.4.2"></script>
     <script async type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js"></script>
-    <script async type="text/javascript" src="https://www.google.com/jsapi?ver=3.4"></script>
-    <script async type="text/javascript" src="https://lter.kbs.msu.edu/wp-content/plugins/google-custom-search/js/gsc.js?ver=3.4"></script>
+    <script async type="text/javascript" src="https://lter.kbs.msu.edu/wp-content/plugins/google-custom-search/js/gsc.js?ver=4.4.2"></script>
     <%= stylesheet_link_tag "application", :media => 'all'%>
     <%= csrf_meta_tag unless response.cache_control[:public] %>
 
@@ -69,10 +69,12 @@
         </script>
         <!-- End Google Analytics -->
 
-          <link rel='stylesheet' href='https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css' type='text/css'>
-          <link rel="stylesheet" id="gsc_style-css" href="https://lter.kbs.msu.edu/wp-content/plugins/google-custom-search/css/smoothness/jquery-ui-1.7.3.custom.css?ver=3.4" type="text/css" media="all">
-          <link rel='stylesheet' href='https://lter.kbs.msu.edu/wp-content/plugins/google-custom-search/css/gsc-no-search-button.css?ver=3.4'/>
-          <link rel="Shortcut Icon" href="/wp-content/themes/msu-kbs/images/favicon.ico" type="image/x-icon" />
+          <link rel='stylesheet' href='https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.min.css' type='text/css'>
+          <link rel="stylesheet" id="gsc_style-css" href="https://lter.kbs.msu.edu/wp-content/plugins/google-custom-search/css/smoothness/jquery-ui.theme.min.css?ver=4.4.2" type="text/css" media="all">
+          <link rel="stylesheet" id="gsc_style_search_bar-css" href="https://www.google.com/cse/style/look/minimalist.css?ver=4.4.2" type="text/css" media="all">
+          <link rel="stylesheet" id="gsc_style_search_bar_more-css" href="https://lter.kbs.msu.edu/wp-content/plugins/google-custom-search/css/gsc.css?ver=4.4.2" type="text/css" media="all">
+          <link rel="stylesheet" id="gsc_style_search_bar_even_more-css" href="http://lter.kbs.msu.edu/wp-content/plugins/google-custom-search/css/gsc-no-search-button.css?ver=4.4.2" type="text/css" media="all">
+          <link rel="Shortcut Icon" href="https://lter.kbs.msu.edu/wp-content/themes/msu-kbs/images/favicon.ico" type="image/x-icon" />
     <%= stylesheet_link_tag "application", :media => 'all'%>
         </body>
       </html>
