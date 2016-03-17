@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <meta name=viewport content="width=device-width, initial-scale=1">
 
-  <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" %>
+  <script async type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" ></script>
   <%= yield :head %>
   <%= csrf_meta_tag unless response.cache_control[:public] %>
 </head>
