@@ -4,6 +4,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <meta name=viewport content="width=device-width, initial-scale=1">
 
+  <%= stylesheet_link_tag :application %>
+  <%= javascript_include_tag :application, :async => true %>
+  <script async type="text/javascript" src="https://www.google.com/jsapi?ver=3.4"></script>
   <script async type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" ></script>
   <%= yield :head %>
   <%= csrf_meta_tag unless response.cache_control[:public] %>
@@ -16,8 +19,5 @@
 
   <%= yield :bottom_scripts %>
 
-  <%= stylesheet_link_tag :application %>
-  <%= javascript_include_tag :application %>
-  <script async type="text/javascript" src="https://www.google.com/jsapi?ver=3.4"></script>
 </body>
 </html>
