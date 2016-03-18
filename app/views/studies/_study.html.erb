@@ -2,7 +2,12 @@
   <div class='droppable'></div>
   <span id="<%= study.id %>" draggable='true' controller_name='studies'>
     <%= study.name %> <%= link_to 'edit', edit_study_path(study)%>
-    <p><%= study.synopsis %></p>
+    <p><%=raw  study.synopsis %></p>
+    <p>
+    <% study.treatments.each do |treatment|%>
+      <%= treatment.name %>
+    <%end %>
+    </p>
   </span>
   <input type='hidden' value="<%=study.id %>" />
   <% if study.children.present? %>
