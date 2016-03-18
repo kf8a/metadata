@@ -89,7 +89,7 @@ describe Dataset do
       imported_dataset = Dataset.from_eml(eml_content)
       expect(imported_dataset).to be_valid
       new_datatable_attributes = imported_dataset.datatables.first.attributes
-      keys_to_ignore = ['title','id', 'is_sql', 'data_url', 'dataset_id', 'object', 'theme_id', 'created_at', 'updated_at']
+      keys_to_ignore = ['title','id', 'is_sql', 'data_url', 'dataset_id', 'object', 'theme_id', 'created_at', 'updated_at', 'name']
       new_datatable_attributes.delete_if {|key, value| keys_to_ignore.include?(key) }
       old_datatable_attributes.delete_if {|key, value| keys_to_ignore.include?(key) }
       expect(new_datatable_attributes).to eq old_datatable_attributes
