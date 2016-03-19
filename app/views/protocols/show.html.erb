@@ -30,7 +30,7 @@
     <%=raw textilize(@protocol.abstract) if @protocol.abstract%>
   <% end -%>
   <h2>Protocol</h2>
-  <% if !@protocol.body.empty? %>
+  <% if @protocol.body.present? %>
     <div class='abstract_body'>
       <%=raw textilize(@protocol.body) if @protocol.body %>
     </div>
