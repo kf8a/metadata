@@ -5,9 +5,9 @@
   <meta name=viewport content="width=device-width, initial-scale=1">
 
   <%= stylesheet_link_tag :application %>
-  <%= javascript_include_tag :application, :async => true %>
   <script async type="text/javascript" src="https://www.google.com/jsapi?ver=3.4"></script>
   <script async type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" ></script>
+  <%= javascript_include_tag :application, :async => true %>
   <%= yield :head %>
   <%= csrf_meta_tag unless response.cache_control[:public] %>
 </head>
