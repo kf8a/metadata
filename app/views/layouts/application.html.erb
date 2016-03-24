@@ -7,7 +7,7 @@
   <%= stylesheet_link_tag :application %>
   <script async type="text/javascript" src="https://www.google.com/jsapi?ver=3.4"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" ></script>
-  <%= javascript_include_tag :application, :async => true %>
+  <%= javascript_include_tag :application %>
   <%= yield :head %>
   <%= csrf_meta_tag unless response.cache_control[:public] %>
 </head>
