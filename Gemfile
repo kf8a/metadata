@@ -64,7 +64,7 @@ gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
 
-gem 'prometheus-client', '~> 0.4.2'
+gem 'prometheus-client' #, '~> 0.4.2'
 gem 'web-console', group: :development
 
 group :development, :test  do
