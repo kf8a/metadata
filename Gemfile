@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~>4.2.5'
+gem 'rails', '~>4.2'
 
 gem 'activerecord-session_store'
 gem 'responders'
@@ -18,8 +18,6 @@ gem 'country_select'
 gem 'cube-ruby'
 
 #gem 'doi', :git => 'git://github.com/kf8a/doi.git'
-
-#gem 'mercury-rails'
 
 gem 'awesome_nested_set'
 
