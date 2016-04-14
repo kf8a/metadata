@@ -40,13 +40,13 @@
   <% end %>
 
 <% if @protocol.people.size > 1 %>Authors: <% else %>Author: <% end %>
-  <ul>
+  <ul class='bulleted'>
     <% @protocol.people.each do |person| %>
       <li><%= link_to  "#{person.full_name}", person_path(person) %></li>
     <% end %>
   </ul>
   <h2>Datatables</h2>
-  <ol>
+  <ul class='bulleted'>
   <% @protocol.datatables.each do |datatable| -%>
     <li><%= link_to raw(datatable.to_label), datatable_url(datatable, :host => datatable.dataset.website.url) %></li>
   <% end -%>
