@@ -24,7 +24,7 @@ class VariateTest < ActiveSupport::TestCase
 
   context 'A variate with a description' do
     setup do
-      @variate = FactoryGirl.create(:variate, :description => 'A description')
+      @variate = FactoryGirl.create(:variate, description: 'A description')
     end
 
     context '#to_eml' do
@@ -40,7 +40,7 @@ class VariateTest < ActiveSupport::TestCase
 
   context 'A variate with an interval measurement scale' do
     setup do
-      @variate = FactoryGirl.create(:variate, :measurement_scale => 'interval')
+      @variate = FactoryGirl.create(:variate, measurement_scale: 'interval')
     end
 
     context '#to_eml' do
@@ -89,7 +89,7 @@ class VariateTest < ActiveSupport::TestCase
 
     context 'and belongs to a unit' do
       setup do
-        @unit = FactoryGirl.create(:unit, :name => 'Good name')
+        @unit = FactoryGirl.create(:unit, name: 'Good name')
         @variate.unit = @unit
       end
 
@@ -125,7 +125,7 @@ class VariateTest < ActiveSupport::TestCase
 
   context 'A variate with a ratio measurement scale' do
     setup do
-      @variate = FactoryGirl.create(:variate, :measurement_scale => 'ratio')
+      @variate = FactoryGirl.create(:variate, measurement_scale: 'ratio')
     end
 
     context '#to_eml' do
@@ -175,7 +175,7 @@ class VariateTest < ActiveSupport::TestCase
 
   context 'A variate with an ordinal measurement scale' do
     setup do
-      @variate = FactoryGirl.create(:variate, :measurement_scale => 'ordinal')
+      @variate = FactoryGirl.create(:variate, measurement_scale: 'ordinal')
     end
 
     context '#to_eml' do
@@ -191,7 +191,7 @@ class VariateTest < ActiveSupport::TestCase
 
   context 'A variate with a nominal measurement scale' do
     setup do
-      @variate = FactoryGirl.create(:variate, :measurement_scale => 'nominal')
+      @variate = FactoryGirl.create(:variate, measurement_scale: 'nominal')
     end
 
     context '#to_eml' do
@@ -223,7 +223,7 @@ class VariateTest < ActiveSupport::TestCase
 
   context 'A variate with a date time measurement scale' do
     setup do
-      @variate = FactoryGirl.create(:variate, :measurement_scale => 'dateTime')
+      @variate = FactoryGirl.create(:variate, measurement_scale: 'dateTime')
     end
 
     context '#to_eml' do
@@ -255,10 +255,6 @@ class VariateTest < ActiveSupport::TestCase
   end
 end
 
-
-
-
-
 # == Schema Information
 #
 # Table name: variates
@@ -279,4 +275,3 @@ end
 #  query                   :text
 #  variate_theme_id        :integer
 #
-

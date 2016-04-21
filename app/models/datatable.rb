@@ -15,24 +15,24 @@ class Datatable < ActiveRecord::Base
   has_and_belongs_to_many :core_areas
   belongs_to              :dataset, touch: true
   has_many                :data_contributions
-  has_many                :owners, :through => :ownerships, :source => :user
+  has_many                :owners, through: :ownerships, source: :user
   has_many                :ownerships
-  has_many                :people, :through => :data_contributions
+  has_many                :people, through: :data_contributions
   has_many                :permission_requests
   has_many                :permissions
-  has_many                :requesters, :through => :permission_requests, :source => :user
+  has_many                :requesters, through: :permission_requests, source: :user
   has_and_belongs_to_many :protocols
   belongs_to              :study, touch: true
   belongs_to              :theme, touch: true
   has_many                :variates, -> {order :weight}
   has_many                :visualizations, -> {order :weight}
 
-  validates :title,   :presence => true
-  validates :dataset, :presence => true
+  validates :title,   presence: true
+  validates :dataset, presence: true
   validates_uniqueness_of :name
 
-  accepts_nested_attributes_for :data_contributions, :allow_destroy => true
-  accepts_nested_attributes_for :variates, :allow_destroy => true
+  accepts_nested_attributes_for :data_contributions, allow_destroy: true
+  accepts_nested_attributes_for :variates, allow_destroy: true
 
 
   scope :by_name, -> {order :name}
@@ -50,7 +50,7 @@ class Datatable < ActiveRecord::Base
         :path => ":rails_root/uploads/datatables/:attachment/:id.:extension"
   end
 
-  validates_attachment_file_name :csv_cache, :matches => [/csv\Z/ ]
+  validates_attachment_file_name :csv_cache, matches: [/csv\Z/ ]
 
   # do_not_validate_attachment_file_type :csv_cache
 
@@ -58,15 +58,15 @@ class Datatable < ActiveRecord::Base
 
   workflow do
     state :active do
-      event :complete,      :transitions_to => :completed
-      event :mark_deleted,  :transitions_to => :deleted
+      event :complete,      transitions_to: :completed
+      event :mark_deleted,  transitions_to: :deleted
     end
     state :completed do
-      event :revert,        :transitions_to => :active
-      event :mark_deleted,  :transitions_to => :deleted
+      event :revert,        transitions_to: :active
+      event :mark_deleted,  transitions_to: :deleted
     end
     state :deleted do
-      event :revert,        :transitions_to => :active
+      event :revert,        transitions_to: :active
     end
   end
 
@@ -577,12 +577,12 @@ class Datatable < ActiveRecord::Base
   def eml_physical
     @eml.physical do
       @eml.objectName title.gsub(/ /, '+')
-      @eml.encodingMethod "None"
+      @eml.encodingMethod 'None'
       eml_data_format
       @eml.distribution do
         @eml.online do
           if is_sql
-            @eml.url "http://#{website_name}.kbs.msu.edu/datatables/#{self.id}.csv"
+            @eml.url "http://#{website_name}.kbs.msu.edu/datatables/#{id}.csv"
           else
             @eml.url data_url
           end
@@ -598,10 +598,7 @@ class Datatable < ActiveRecord::Base
       end
     end
   end
-
 end
-
-
 
 # == Schema Information
 #
