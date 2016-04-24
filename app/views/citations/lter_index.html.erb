@@ -1,5 +1,5 @@
 <% content_for :head do %>
-  <title>Publications</title>
+  <title><Publications <%= humanize_citation_type(@type)%></title>
 <% end %>
 <p>To download copies of articles that are not open-access you will be asked to sign in when you request the pdf copy (instructions provided).
 </p>
@@ -12,9 +12,9 @@
 
   <% if @forthcoming_citations.present? %>
   <% if @study %>
-    <h1 class='publication-section'>Forthcoming from the <%= @study.name %></h1>
+    <h1 class='publication-section'>Forthcoming <%= humanize_citation_type(@type)%> from the <%= @study.name %></h1>
 <% else %>
-<h1 class='publication-section'>Forthcoming</h1>
+  <h1 class='publication-section'>Forthcoming <%= humanize_citation_type(@type)%> </h1>
 <% end %>
 <p class='synopsis indent'>Papers accepted but not yet published.</p>
  <ul class='citations'>
@@ -22,9 +22,9 @@
 </ul>
 <% end %>
 <% if @study %>
-  <h1 class='publication-section'>Published from the <%= link_to @study.name, @study.url %> <%= @treatment.try(:name) %> (alphabetical by year)</h1>
+  <h1 class='publication-section'>Published <%= humanize_citation_type(@type) %> from the <%= link_to @study.name, @study.url %> <%= @treatment.try(:name) %> (alphabetical by year)</h1>
 <% else %>
-<h1 class='publication-section'>Published (alphabetical by year)</h1>
+  <h1 class='publication-section'>Published <%= humanize_citation_type(@type)%> (alphabetical by year)</h1>
 <% end %>
 <ul class='citations'>
 <% year = 0 -%>

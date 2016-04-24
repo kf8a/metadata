@@ -6,4 +6,15 @@ module CitationsHelper
       download_citation_url(citation)
     end
   end
+
+  def humanize_citation_type(type)
+    case type
+    when 'ThesisCitation' then 'Dissertations'
+    when 'BulletinCitation' then 'Extension Bulletins'
+    when 'ReportCitation' then 'Reports'
+    when 'BookCitation' then 'Books and Book chapters'
+    when 'ArticleCitation' then 'Journal Articles'
+    else 'Publications'
+    end
+  end
 end
