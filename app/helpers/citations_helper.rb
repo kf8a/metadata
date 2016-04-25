@@ -9,8 +9,8 @@ module CitationsHelper
 
   def humanize_citation_type(type)
     case type
-    when 'ThesisCitation' then 'Dissertations'
-    when 'BulletinCitation' then 'Extension Bulletins'
+    when 'ThesisCitation' then 'Dissertations only'
+    when 'BulletinCitation' then 'Extension Bulletins only'
     when 'ReportCitation' then 'Reports'
     when 'BookCitation' then 'Books and Book chapters'
     when 'ArticleCitation' then 'Journal Articles'
