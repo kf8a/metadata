@@ -13,18 +13,14 @@ class Website < ActiveRecord::Base
   has_many :report_citations
   has_many :bulletin_citations
 
-  validates_uniqueness_of :name
-  validates_presence_of :name
+  validates :name, uniqueness: true
+  validates :name, presence: true
 
   # def layout(controller, action)
   #   template = self.templates.where(controller: controller, action: action)
   #   Liquid::Template.parse(template.layout) if template
   # end
 end
-
-
-
-
 
 # == Schema Information
 #
@@ -36,4 +32,3 @@ end
 #  updated_at         :datetime
 #  data_catalog_intro :text
 #
-

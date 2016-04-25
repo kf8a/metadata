@@ -5,9 +5,6 @@ class VenueType < ActiveRecord::Base
   validates_presence_of :name
 end
 
-
-
-
 # == Schema Information
 #
 # Table name: venue_types
@@ -16,4 +13,3 @@ end
 #  name        :string(255)
 #  description :text
 #
-

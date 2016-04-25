@@ -1,7 +1,6 @@
-require File.expand_path('../../test_helper',__FILE__)
+require File.expand_path('../../test_helper', __FILE__)
 
 class UserTest < ActiveSupport::TestCase
-
   setup do
     @user = FactoryGirl.create(:user)
   end
@@ -44,40 +43,38 @@ class UserTest < ActiveSupport::TestCase
 
   context 'membership in sponsors' do
     setup do
-
       @user = FactoryGirl.create :user
     end
 
     should 'accept membership in a sponsor' do
-      sponsor = FactoryGirl.create :sponsor, :data_use_statement => 'Use it', :name => 'GLBRC'
+      sponsor = FactoryGirl.create :sponsor, data_use_statement: 'Use it', name: 'GLBRC'
       assert @user.sponsors << [sponsor]
     end
-
   end
 
-  context "the owns(datatable) function" do
-    context "with a protected datatable" do
+  context 'the owns(datatable) function' do
+    context 'with a protected datatable' do
       setup do
         @datatable = FactoryGirl.create(:protected_datatable)
       end
 
-      context "and an owner" do
+      context 'and an owner' do
         setup do
           @owner = FactoryGirl.create(:email_confirmed_user)
-          FactoryGirl.create(:ownership, :user => @owner, :datatable => @datatable)
+          FactoryGirl.create(:ownership, user: @owner, datatable: @datatable)
         end
 
-        should "own the datatable" do
+        should 'own the datatable' do
           assert @owner.owns?(@datatable)
         end
       end
 
-      context "and a non-owner" do
+      context 'and a non-owner' do
         setup do
           @nonowner = FactoryGirl.create(:email_confirmed_user)
         end
 
-        should "not own the datatable" do
+        should 'not own the datatable' do
           assert ! @nonowner.owns?(@datatable)
         end
       end
@@ -88,8 +85,12 @@ class UserTest < ActiveSupport::TestCase
     setup do
       @datatable = FactoryGirl.create(:protected_datatable)
       @owner = FactoryGirl.create(:email_confirmed_user)
-      FactoryGirl.create(:ownership, :user => @owner, :datatable => @datatable)
-      FactoryGirl.create(:permission, user: @user, owner: @owner, datatable: @datatable, decision: "approved")
+      FactoryGirl.create(:ownership, user: @owner, datatable: @datatable)
+      FactoryGirl.create(:permission,
+                         user: @user,
+                         owner: @owner,
+                         datatable: @datatable,
+                         decision: 'approved')
     end
 
     context '#has_permission_from?' do
@@ -105,7 +106,11 @@ class UserTest < ActiveSupport::TestCase
     context 'another user has been denied acces to use the datatable.' do
       setup do
         @another_user = FactoryGirl.create(:email_confirmed_user)
-        FactoryGirl.create(:permission, :user => @another_user, :owner => @owner, :datatable => @datatable, :decision => 'denied')
+        FactoryGirl.create(:permission,
+                           user: @another_user,
+                           owner: @owner,
+                           datatable: @datatable,
+                           decision: 'denied')
       end
 
       context '#has_permission_from?' do
@@ -119,12 +124,7 @@ class UserTest < ActiveSupport::TestCase
       end
     end
   end
-
 end
-
-
-
-
 
 # == Schema Information
 #

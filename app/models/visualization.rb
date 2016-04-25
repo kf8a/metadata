@@ -2,10 +2,9 @@ class Visualization < ActiveRecord::Base
   belongs_to :datatable
 
   def data
-    ActiveRecord::Base.connection.execute(self.query)
+    ActiveRecord::Base.connection.execute(query)
   end
 end
-
 
 # == Schema Information
 #
@@ -22,4 +21,3 @@ end
 #  x_axis_label :string(255)
 #  y_axis_label :string(255)
 #
-

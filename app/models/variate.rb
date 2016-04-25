@@ -2,7 +2,7 @@ require 'rexml/document'
 include REXML
 
 class Variate < ActiveRecord::Base
-  belongs_to :datatable, :touch => true
+  belongs_to :datatable, touch: true
   belongs_to :unit
 
   scope :valid_for_eml, -> { where("measurement_scale != '' AND description != ''") }
@@ -19,7 +19,9 @@ class Variate < ActiveRecord::Base
   def set_attributes_from_eml(variate_eml)
     self.name              = variate_eml.css('attributeName').text
     self.description       = variate_eml.at_css('attributeDefinition, definition').text
-    self.measurement_scale = variate_eml.at_css('measurementScale').at_css('nominal, ordinal, interval, ratio, dateTime').name
+    self.measurement_scale = variate_eml.at_css('measurementScale')
+                                        .at_css('nominal, ordinal, interval, ratio, dateTime')
+                                        .name
     self.precision         = variate_eml.at_css('precision').try(:text).try(:to_f)
     self.data_type         = variate_eml.at_css('numberType').try(:text)
     self.date_format       = variate_eml.at_css('formatString').try(:text)
@@ -49,16 +51,17 @@ class Variate < ActiveRecord::Base
   end
 
   private
+
   def eml_measurement_scale
     @eml.measurementScale do
       self.measurement_scale = 'dateTime' if measurement_scale == 'datetime'
 
       @eml.tag!(measurement_scale) do
-        case self.measurement_scale
+        case measurement_scale
         when 'interval' then eml_interval
         when 'ratio' then eml_ratio
         when 'ordinal' then
-        when 'nominal'then  eml_nominal
+        when 'nominal'then eml_nominal
         when 'dateTime' then eml_date_time
         end
       end
@@ -76,7 +79,7 @@ class Variate < ActiveRecord::Base
   end
 
   def unit_name
-    self.unit.try(:name)
+    unit.try(:name)
   end
 
   def eml_date_time
@@ -113,11 +116,7 @@ class Variate < ActiveRecord::Base
       @eml.numberType data_type
     end
   end
-
 end
-
-
-
 
 # == Schema Information
 #
@@ -138,4 +137,3 @@ end
 #  precision               :float
 #  query                   :text
 #  variate_theme_id        :integer
-#
