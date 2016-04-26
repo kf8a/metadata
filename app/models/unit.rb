@@ -8,8 +8,8 @@ class Unit < ActiveRecord::Base
   def human_name
     if label
       label.html_safe
-    else 
-      name.gsub(/Per/,'/').downcase
+    else
+      name.gsub(/Per/, '/').downcase
     end
   end
 
@@ -17,15 +17,12 @@ class Unit < ActiveRecord::Base
     # Delayed::Job.enqueue UnitUpdateJob.new(self)
   end
 
-
-
   def update_dictionary
     # Delayed::Job.enqueue UnitDictionaryUpdateJob.new(self)
   end
-
 end
 
-#scenarios
+# scenarios
 # 1) we need a list of available units
 #   Unit.all
 #     return units on hand
@@ -34,10 +31,6 @@ end
 # 2) we need to retrieve a particular unit
 #   Unit.find
 #
-
-
-
-
 
 # == Schema Information
 #
@@ -54,4 +47,3 @@ end
 #  multiplier_to_si       :float
 #  abbreviation           :string(255)
 #
-

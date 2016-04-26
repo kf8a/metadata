@@ -1,6 +1,6 @@
+# A citation representing a thesis or dissertation
 class ThesisCitation < Citation
-
-  def formatted(options={})
+  def formatted(options = {})
     "#{author_and_year(options)} #{title_and_punctuation} #{series_title}, #{publisher}#{address_and_city}."
   end
 
@@ -24,9 +24,6 @@ class ThesisCitation < Citation
     "Thesis\n"
   end
 end
-
-
-
 
 # == Schema Information
 #
@@ -66,4 +63,3 @@ end
 #  open_access             :boolean         default(FALSE)
 #  type                    :string(255)
 #
-

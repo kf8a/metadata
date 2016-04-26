@@ -1,5 +1,5 @@
 class Role < ActiveRecord::Base
-  has_many :people, :through => :affiliations
+  has_many :people, through: :affiliations
   has_many :affiliations
   belongs_to :role_type
 
@@ -8,11 +8,11 @@ class Role < ActiveRecord::Base
   end
 
   def committee?
-    name =~ /Committee/ || name =~/Network Representatives/
+    name =~ /Committee/ || name =~ /Network Representatives/
   end
 
   def self.data_roles
-    self.where(:role_type_id => RoleType.find_by_name('lter_dataset'))
+    self.where(role_type_id: RoleType.find_by_name('lter_dataset'))
   end
 
   def committee_role_name
@@ -20,9 +20,6 @@ class Role < ActiveRecord::Base
   end
 
 end
-
-
-
 
 # == Schema Information
 #
@@ -35,4 +32,3 @@ end
 #  show_in_overview   :boolean         default(TRUE)
 #  show_in_detailview :boolean         default(TRUE)
 #
-
