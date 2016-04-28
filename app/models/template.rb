@@ -1,11 +1,8 @@
-#TODO evaluate if we need this
+# TODO: evaluate if we need this
+# Templates that were designed to that users could change the look and feel of the site
 class Template < ActiveRecord::Base
   belongs_to :website
-
 end
-
-
-
 
 # == Schema Information
 #
@@ -19,4 +16,3 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #
-
