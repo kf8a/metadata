@@ -1,33 +1,32 @@
 require 'eml'
-
+# A protocol describes how the data was collected
 class Protocol < ActiveRecord::Base
-
   acts_as_taggable_on :themes
   belongs_to :dataset
   has_and_belongs_to_many :websites
   has_and_belongs_to_many :datatables
   has_many :scribbles
-  has_many :people, :through => :scribbles
+  has_many :people, through: :scribbles
 
-  versioned :dependent => :tracking
-
+  versioned dependent: :tracking
 
   if Rails.env.production?
     has_attached_file :pdf,
-        :storage => :s3,
-        :bucket => 'metadata-production',
-        :path => "/protocols/pdfs/:id/:style/:basename.:extension",
-        :s3_credentials => File.join(Rails.root, 'config', 's3.yml'),
-        :s3_permissions => 'public-read'
+                      storage: :s3,
+                      bucket: 'metadata-production',
+                      path: '/protocols/pdfs/:id/:style/:basename.:extension',
+                      s3_credentials: File.join(Rails.root, 'config', 's3.yml'),
+                      s3_permissions: 'public-read'
   else
-    has_attached_file :pdf, :url => "/citations/:id/download",
-        :path => ":rails_root/uploads/protocols/:attachment/:id/:style/:basename.:extension"
+    has_attached_file :pdf,
+                      url: '/citations/:id/download',
+                      path: ':rails_root/uploads/protocols/:attachment/:id/:style/:basename.:extension'
   end
 
-  validates_attachment :pdf , content_type: { content_type: ["application/pdf"] }
+  validates_attachment :pdf, content_type: { content_type: ['application/pdf'] }
 
   def to_s
-    "#{self.title}"
+    title
   end
 
   def self.from_eml(protocol_eml)
@@ -51,7 +50,6 @@ class Protocol < ActiveRecord::Base
     @eml.methodStep do
       @eml.description EML.text_sanitize(abstract)
       @eml.protocol 'id' => "protocol_#{id}" do
-
         @eml.title  title
         eml_creator
         @eml.distribution do
@@ -61,7 +59,6 @@ class Protocol < ActiveRecord::Base
           end
         end
       end
-
     end
   end
 
@@ -82,13 +79,12 @@ class Protocol < ActiveRecord::Base
   end
 
   def replaced_by
-    Protocol.where(:deprecates => self.id).first
+    Protocol.where(deprecates: id).first
   end
 
   def dataset_description
-    self.dataset.try(:dataset)
+    dataset.try(:dataset)
   end
-
 
   private
 

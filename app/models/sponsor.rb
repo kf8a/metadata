@@ -1,3 +1,4 @@
+# A sponsor controls the availablity and polcies of a dataset
 class Sponsor < ActiveRecord::Base
   # extend FriendlyId
 
@@ -14,9 +15,6 @@ class Sponsor < ActiveRecord::Base
   end
 end
 
-
-
-
 # == Schema Information
 #
 # Table name: sponsors
@@ -28,4 +26,3 @@ end
 #  data_restricted    :boolean         default(FALSE)
 #  data_use_statement :text
 #
-

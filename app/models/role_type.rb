@@ -1,11 +1,9 @@
+# RoleType differntiates between dataset roles and project roles
 class RoleType < ActiveRecord::Base
   has_many :roles
 
-  validates :name, :presence => true, :uniqueness => true
+  validates :name, presence: true, uniqueness: true
 end
-
-
-
 
 # == Schema Information
 #
@@ -14,4 +12,3 @@ end
 #  id   :integer         not null, primary key
 #  name :string(255)
 #
-
