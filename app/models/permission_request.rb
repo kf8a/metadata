@@ -1,14 +1,11 @@
+# A request to access a datatable
 class PermissionRequest < ActiveRecord::Base
-
   belongs_to :user
   belongs_to :datatable
 
-  validates_presence_of :user, :datatable
-  validates_uniqueness_of :user_id, :scope => :datatable_id
+  validates :user, :datatable, presence: true
+  validates :user_id, scope: :datatable_id, uniqueness: true
 end
-
-
-
 
 # == Schema Information
 #
@@ -20,4 +17,3 @@ end
 #  created_at   :datetime
 #  updated_at   :datetime
 #
-
