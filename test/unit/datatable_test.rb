@@ -1,7 +1,6 @@
-require File.expand_path('../../test_helper',__FILE__)
+require File.expand_path('../../test_helper', __FILE__)
 
 class DatatableTest < ActiveSupport::TestCase
-
   should have_one                 :collection
   should have_and_belong_to_many  :core_areas
   should belong_to                :dataset
@@ -39,15 +38,15 @@ class DatatableTest < ActiveSupport::TestCase
 
     context 'which has datatable personnel' do
       setup do
-        @person1 = FactoryGirl.create(:person, :sur_name => 'Datatableman')
-        @person2 = FactoryGirl.create(:person, :sur_name => 'Datatablewoman')
+        @person1 = FactoryGirl.create(:person, sur_name: 'Datatableman')
+        @person2 = FactoryGirl.create(:person, sur_name: 'Datatablewoman')
         @role = FactoryGirl.create(:role)
-        @datatable.data_contributions << DataContribution.create(person:@person1, role: @role)
+        @datatable.data_contributions << DataContribution.create(person: @person1, role: @role)
         @datatable.data_contributions << DataContribution.create(person: @person2, role: @role)
       end
 
       should 'return those personnel on #personnel' do
-        # TODO change test to reflect current usage
+        # TODO: change test to reflect current usage
         # assert_equal [@person1, @person2], @datatable.personnel
       end
     end
@@ -59,35 +58,41 @@ class DatatableTest < ActiveSupport::TestCase
     should 'respond to study' do
       assert_respond_to @datatable, 'study'
     end
-
   end
 
   context 'datatable personnel' do
     setup do
       dataset = FactoryGirl.build :dataset
-      @datatable = FactoryGirl.build :datatable, :dataset => dataset
+      @datatable = FactoryGirl.build :datatable, dataset: dataset
     end
 
     should 'be able to add contributors' do
       person = FactoryGirl.create(:person)
-      assert @datatable.data_contributions << [FactoryGirl.create(:data_contribution, :datatable => @datatable, :person => person)]
-      different_role = FactoryGirl.create(:role, :name => 'AnotherRole')
-      @datatable.data_contributions << [FactoryGirl.create(:data_contribution, :datatable => @datatable, :person => person, :role => different_role)]
-      another_person = FactoryGirl.create(:person, :sur_name => 'Testerman')
-      @datatable.data_contributions << [FactoryGirl.create(:data_contribution, :datatable => @datatable, :person => another_person)]
+      assert @datatable.data_contributions << [FactoryGirl.create(:data_contribution,
+                                                                  datatable:
+                                                                  @datatable, person: person)]
+      different_role = FactoryGirl.create(:role, name: 'AnotherRole')
+      @datatable.data_contributions << [FactoryGirl.create(:data_contribution,
+                                                           datatable: @datatable,
+                                                           person: person,
+                                                           role: different_role)]
+      another_person = FactoryGirl.create(:person, sur_name: 'Testerman')
+      @datatable.data_contributions << [FactoryGirl.create(:data_contribution,
+                                                           datatable: @datatable,
+                                                           person: another_person)]
       assert_equal 2, @datatable.datatable_personnel[person].count
-      assert_equal ["Emeritus Investigators", "AnotherRole"], @datatable.datatable_personnel[person]
-      assert_equal ["Emeritus Investigators"], @datatable.datatable_personnel[another_person]
+      assert_equal ['Emeritus Investigators', 'AnotherRole'], @datatable.datatable_personnel[person]
+      assert_equal ['Emeritus Investigators'], @datatable.datatable_personnel[another_person]
     end
   end
 
   context 'datatable with and without sponsors' do
     setup do
-      sponsor = FactoryGirl.create :sponsor, :data_use_statement => 'Use it', :name => 'GLBRC'
-      dataset_with_sponsor = FactoryGirl.build :dataset, :sponsor => sponsor
-      dataset_without_sponsor = FactoryGirl.build :dataset, :sponsor => nil
-      @datatable = FactoryGirl.build :datatable, :dataset => dataset_with_sponsor
-      @datatable_without_sponsor = FactoryGirl.build :datatable, :dataset => dataset_without_sponsor
+      sponsor = FactoryGirl.create :sponsor, data_use_statement: 'Use it', name: 'GLBRC'
+      dataset_with_sponsor = FactoryGirl.build :dataset, sponsor: sponsor
+      dataset_without_sponsor = FactoryGirl.build :dataset, sponsor: nil
+      @datatable = FactoryGirl.build :datatable, dataset: dataset_with_sponsor
+      @datatable_without_sponsor = FactoryGirl.build :datatable, dataset: dataset_without_sponsor
     end
 
   end
@@ -95,15 +100,14 @@ class DatatableTest < ActiveSupport::TestCase
   context 'datatable without owners and permissions' do
     setup do
       @anonymous_user     = nil
-      @unauthorized_user  = FactoryGirl.build :user, :email => 'unauthorized@person.com'
-      @admin              = FactoryGirl.build :user, :email => 'admin@person.com', :role => 'admin'
+      @unauthorized_user  = FactoryGirl.build :user, email: 'unauthorized@person.com'
+      @admin              = FactoryGirl.build :user, email: 'admin@person.com', role: 'admin'
 
-      @unrestricted = FactoryGirl.build  :datatable
+      @unrestricted = FactoryGirl.build :datatable
 
-      sponsor = FactoryGirl.build :sponsor, :data_restricted => true
-      dataset = FactoryGirl.build :dataset, :sponsor => sponsor
-      @restricted = FactoryGirl.build :datatable,
-        :dataset    => dataset
+      sponsor = FactoryGirl.build :sponsor, data_restricted: true
+      dataset = FactoryGirl.build :dataset, sponsor: sponsor
+      @restricted = FactoryGirl.build :datatable, dataset: dataset
     end
 
     should 'tell if it needs to be restricted at all' do
@@ -128,48 +132,44 @@ class DatatableTest < ActiveSupport::TestCase
       assert !@restricted.can_be_downloaded_by?(@unauthorized_user)
       assert  @restricted.can_be_downloaded_by?(@admin)
     end
-
   end
 
   context 'using datatable permissions' do
     setup do
-      sponsor = FactoryGirl.create :sponsor, :data_restricted => true
-      dataset = FactoryGirl.create :dataset, :sponsor => sponsor
+      sponsor = FactoryGirl.create :sponsor, data_restricted: true
+      dataset = FactoryGirl.create :dataset, sponsor: sponsor
 
       @anonymous_user     = nil
-      @unauthorized_user  = FactoryGirl.create :user, :email => 'unauthorized@person.com'
-      @authorized_user    = FactoryGirl.create :user, :email => 'authorized@person.com'
-      @owner              = FactoryGirl.create :user, :email => 'owner@person.com'
-      @admin              = FactoryGirl.create :user, :email => 'admin@person.com', :role => 'admin'
-      @member             = FactoryGirl.create :user, :email => 'member@person.com', :sponsors => [sponsor]
-      @denied_user        = FactoryGirl.create :user, :email => 'denied@perso.com'
+      @unauthorized_user  = FactoryGirl.create :user, email: 'unauthorized@person.com'
+      @authorized_user    = FactoryGirl.create :user, email: 'authorized@person.com'
+      @owner              = FactoryGirl.create :user, email: 'owner@person.com'
+      @admin              = FactoryGirl.create :user, email: 'admin@person.com', role: 'admin'
+      @member             = FactoryGirl.create :user, email: 'member@person.com',
+                                                      sponsors: [sponsor]
+      @denied_user        = FactoryGirl.create :user, email: 'denied@perso.com'
 
       @unrestricted = FactoryGirl.create :datatable
 
-      @restricted_to_members = FactoryGirl.create :datatable, :dataset    => dataset
+      @restricted_to_members = FactoryGirl.create :datatable, dataset: dataset
       @restricted_to_members.owners = [@owner]
 
-      @restricted = FactoryGirl.create :datatable, :dataset => dataset, :is_restricted => true
+      @restricted = FactoryGirl.create :datatable, dataset: dataset, is_restricted: true
       @restricted.owners = [@owner]
 
-      FactoryGirl.create :permission,
-        datatable: @restricted_to_members,
-        user: @authorized_user,
-        owner: @owner,
-        decision: "approved"
+      FactoryGirl.create :permission, datatable: @restricted_to_members,
+                                      user: @authorized_user,
+                                      owner: @owner,
+                                      decision: 'approved'
 
-      FactoryGirl.create :permission,
-        :datatable  => @restricted_to_members,
-        :user       => @denied_user,
-        :owner      => @owner,
-        :decision   => 'denied'
+      FactoryGirl.create :permission, datatable: @restricted_to_members,
+                                      user: @denied_user,
+                                      owner: @owner,
+                                      decision: 'denied'
 
-      FactoryGirl.create :permission,
-        datatable: @restricted,
-        user:  @authorized_user,
-        owner: @owner,
-        decision: "approved"
-
+      FactoryGirl.create :permission, datatable: @restricted,
+                                      user:  @authorized_user,
+                                      owner: @owner,
+                                      decision: 'approved'
     end
 
     should 'tell if it needs to be restricted at all' do
@@ -216,20 +216,25 @@ class DatatableTest < ActiveSupport::TestCase
 
   context 'A datatable with permission requests' do
     setup do
-      @owner  = FactoryGirl.create :user, :email => 'owner@person.com'
-      @user   = FactoryGirl.create :user, :email => 'user@person.com'
-      @other  = FactoryGirl.create :user, :email => 'other@person.com'
-      @permitted_user = FactoryGirl.create :user, :email => 'permitted@person.com'
+      @owner  = FactoryGirl.create :user, email: 'owner@person.com'
+      @user   = FactoryGirl.create :user, email: 'user@person.com'
+      @other  = FactoryGirl.create :user, email: 'other@person.com'
+      @permitted_user = FactoryGirl.create :user, email: 'permitted@person.com'
 
-      sponsor     = FactoryGirl.create :sponsor, :data_restricted => true
-      dataset     = FactoryGirl.create :dataset, :sponsor => sponsor
-      @datatable  = FactoryGirl.create :datatable, :dataset => dataset
+      sponsor     = FactoryGirl.create :sponsor, data_restricted: true
+      dataset     = FactoryGirl.create :dataset, sponsor: sponsor
+      @datatable  = FactoryGirl.create :datatable, dataset: dataset
       @datatable.owners = [@owner]
 
-
-      FactoryGirl.create(:permission_request, :user => @user, :datatable => @datatable)
-      FactoryGirl.create(:permission_request, :user => @permitted_user, :datatable => @datatable)
-      FactoryGirl.create(:permission, owner: @owner, datatable: @datatable, user: @permitted_user, decision: "approved")
+      FactoryGirl.create(:permission_request, user: @user,
+                                              datatable: @datatable)
+      FactoryGirl.create(:permission_request, user: @permitted_user,
+                                              datatable: @datatable)
+      FactoryGirl.create(:permission,
+                         owner: @owner,
+                         datatable: @datatable,
+                         user: @permitted_user,
+                         decision: 'approved')
     end
 
     context '#pending_requesters' do
@@ -256,26 +261,24 @@ class DatatableTest < ActiveSupport::TestCase
         assert !@datatable.requested_by?(@other)
       end
     end
-
   end
-
 
   context 'getting unreleased data for qc purposes in the LTER sponsor' do
     setup do
-      sponsor     = FactoryGirl.build :sponsor, :name => 'lter'
-      dataset     = FactoryGirl.build :dataset, :sponsor => sponsor
-      @datatable  = FactoryGirl.build :datatable, :dataset => dataset
+      sponsor     = FactoryGirl.build :sponsor, name: 'lter'
+      dataset     = FactoryGirl.build :dataset, sponsor: sponsor
+      @datatable  = FactoryGirl.build :datatable, dataset: dataset
 
-      restricted_sponsor     = FactoryGirl.build :sponsor, :data_restricted => true
-      restricted_dataset     = FactoryGirl.build :dataset, :sponsor => restricted_sponsor
-      @restricted_datatable  = FactoryGirl.build :datatable, :dataset => restricted_dataset
+      restricted_sponsor     = FactoryGirl.build :sponsor, data_restricted: true
+      restricted_dataset     = FactoryGirl.build :dataset, sponsor: restricted_sponsor
+      @restricted_datatable  = FactoryGirl.build :datatable, dataset: restricted_dataset
 
       @anonymous_user     = nil
-      @admin              = FactoryGirl.build :user, :email => 'admin@person.com', :role => 'admin'
-      @non_member         = FactoryGirl.build :user, :email => 'non_member@person.com'
-      @member             = FactoryGirl.build :user, :email => 'member@person.com', :sponsors => [sponsor]
+      @admin              = FactoryGirl.build :user, email: 'admin@person.com', role: 'admin'
+      @non_member         = FactoryGirl.build :user, email: 'non_member@person.com'
+      @member             = FactoryGirl.build :user, email: 'member@person.com', sponsors: [sponsor]
     end
-    
+
     should 'allow admins' do
       assert @datatable.can_be_qcd_by?(@admin)
     end
@@ -297,54 +300,51 @@ class DatatableTest < ActiveSupport::TestCase
       assert !@restricted_datatable.can_be_qcd_by?(@non_member)
       assert !@restricted_datatable.can_be_qcd_by?(@anonymous_user)
     end
-
   end
 
   context 'datatable with sample_date' do
     setup do
-      @datatable = FactoryGirl.create(:datatable, :object => %q{select now() as sample_date} )
-      @old_data = FactoryGirl.create(:datatable, :object => %q{select now() - interval '3 year' as sample_date})
+      @datatable = FactoryGirl.create(:datatable, object: %q{select now() as sample_date})
+      @old_data = FactoryGirl.create(:datatable, object: %q{select now() - interval '3 year' as sample_date})
     end
 
-
     should 'return true if interval includes today' do
-     assert @datatable.within_interval?(Date.today, Date.today + 1.day)
+      assert @datatable.within_interval?(Time.zone.today, Time.zone.today + 1.day)
     end
 
     should 'return false if the interval is later than the data times' do
-      assert !@datatable.within_interval?(Date.today + 1.day, Date.today + 4.day)
+      assert !@datatable.within_interval?(Time.zone.today + 1.day, Time.zone.today + 4.days)
     end
 
     should 'return false if the interval is earlier than the data times' do
-      assert !@datatable.within_interval?(Date.today - 4.day, Date.today - 2.day)
+      assert !@datatable.within_interval?(Time.zone.today - 4.days, Time.zone.today - 2.days)
     end
-
 
     should 'have the correct temporal extent' do
       dates = @datatable.temporal_extent
-      assert dates[:begin_date] == Date.today
-      assert dates[:end_date] == Date.today
+      assert dates[:begin_date] == Time.zone.today
+      assert dates[:end_date] == Time.zone.today
 
       dates = @old_data.temporal_extent
-      assert dates[:begin_date] == Date.today - 3.years
-      assert dates[:end_date] == Date.today - 3.years
+      assert dates[:begin_date] == Time.zone.today - 3.years
+      assert dates[:end_date] == Time.zone.today - 3.years
     end
 
     should 'cache the temporal extent' do
       assert @datatable.begin_date.nil?
       assert @datatable.end_date.nil?
       @datatable.update_temporal_extent
-      assert @datatable.begin_date == Date.today
-      assert @datatable.end_date == Date.today
+      assert @datatable.begin_date == Time.zone.today
+      assert @datatable.end_date == Time.zone.today
 
       assert @old_data.begin_date.nil?
       assert @old_data.end_date.nil?
       @old_data.update_temporal_extent
-      assert @old_data.begin_date == Date.today - 3.years
-      assert @old_data.end_date == Date.today - 3.years
+      assert @old_data.begin_date == Time.zone.today - 3.years
+      assert @old_data.end_date == Time.zone.today - 3.years
 
-      assert @old_data.dataset.initiated = Date.today - 3.years
-      assert @old_data.dataset.data_end_date = Date.today - 3.years
+      assert @old_data.dataset.initiated = Time.zone.today - 3.years
+      assert @old_data.dataset.data_end_date = Time.zone.today - 3.years
     end
 
     context '#title and years' do
@@ -357,44 +357,49 @@ class DatatableTest < ActiveSupport::TestCase
       should 'include only one year if end and begin are the same' do
         @datatable.begin_date = '2/12/2003'.to_date
         @datatable.end_date = '2/12/2003'.to_date
-        assert_equal "a really cool datatable (2003)", @datatable.title_and_years
+        assert_equal 'a really cool datatable (2003)', @datatable.title_and_years
       end
 
       should 'include both years if end and begin are different' do
         @datatable.begin_date = '2/12/2003'.to_date
         @datatable.end_date = '2/12/2004'.to_date
-        assert_equal "a really cool datatable (2003 to 2004)", @datatable.title_and_years
+        assert_equal 'a really cool datatable (2003 to 2004)',
+          @datatable.title_and_years
       end
 
-      should 'say to present if within the last 2 years' do 
-        started_on = (Time.now() - 1.year).to_date
+      should 'say to present if within the last 2 years' do
+        started_on = (Time.now - 1.year).to_date
         @datatable.begin_date = started_on
-        @datatable.end_date = Time.now().to_date
-        assert_equal "a really cool datatable (#{started_on.year} to present)", @datatable.title_and_years
+        @datatable.end_date = Time.zone.today
+        assert_equal "a really cool datatable (#{started_on.year} to present)",
+                     @datatable.title_and_years
       end
 
       should 'say to present if within 2 years of the expected sample' do
         @datatable.begin_date = '2/12/2003'.to_date
         @datatable.end_date = '2/12/2004'.to_date
-        @datatable.update_frequency_days = 24000
+        @datatable.update_frequency_days = 24_000
 
-        assert_equal "a really cool datatable (2003 to present)", @datatable.title_and_years
+        assert_equal('a really cool datatable (2003 to present)',
+                     @datatable.title_and_years)
       end
 
       should 'give the end date if complted' do
-        started_on = (Time.now() - 1.year).to_date
+        started_on = (Time.zone.today - 1.year).to_date
         @datatable.begin_date = started_on
-        @datatable.end_date = Time.now().to_date
+        @datatable.end_date = Time.zone.today
         @datatable.complete!
 
-        assert_equal "a really cool datatable (#{started_on.year} to #{Time.now().to_date.year})", @datatable.title_and_years
+        assert_equal "a really cool datatable (#{started_on.year} to #{Time.zone.today.year})",
+                     @datatable.title_and_years
       end
     end
   end
 
   context 'datatable with range of dates' do
     setup do
-      @datatable = FactoryGirl.create(:datatable, :object => %q{select current_date + (random() * n)::integer as sample_date from generate_series(0,11) n})
+      @datatable = FactoryGirl.create(:datatable,
+                                      object: %q{select current_date + (random() * n)::integer as sample_date from generate_series(0,11) n})
     end
 
     should 'have the begin_date before the end_date' do
@@ -410,7 +415,8 @@ class DatatableTest < ActiveSupport::TestCase
     end
 
     should 'return false for within_interval?' do
-      assert !@datatable.within_interval?(Date.today + 1.day, Date.today + 4.day)
+      assert !@datatable.within_interval?(Time.zone.today + 1.day,
+                                          Time.zone.today + 4.days)
     end
 
     should 'return nils for temporal_extent' do
@@ -418,93 +424,100 @@ class DatatableTest < ActiveSupport::TestCase
       assert dates[:begin_date].nil?
       assert dates[:end_date].nil?
     end
-
   end
 
   context 'datatable with different date representations' do
     setup do
-      obs_date = FactoryGirl.create(:datatable, :object => %Q{select date '#{Date.today}' as obs_date})
-      datetime = FactoryGirl.create(:datatable, :object => %Q{select date '#{Date.today}'as datetime})
-      date = FactoryGirl.create(:datatable, :object => %Q{select date '#{Date.today}' as date})
+      obs_date = FactoryGirl.create(:datatable,
+                                    object: %(select date '#{Time.zone.today}' as obs_date))
+      datetime = FactoryGirl.create(:datatable,
+                                    object: %(select date '#{Time.zone.today}'as datetime))
+      date = FactoryGirl.create(:datatable,
+                                object: %(select date '#{Time.zone.today}' as date))
       @date_representations = [obs_date, datetime, date]
     end
 
     should 'return true if interval includes today' do
       @date_representations.each do |date_representation|
-        assert date_representation.within_interval?(Date.today, Date.today + 1.day)
+        assert date_representation.within_interval?(Time.zone.today,
+                                                    Time.zone.today + 1.day)
       end
     end
 
     should 'return false if the interval is later than the data times' do
       @date_representations.each do |date_representation|
-        assert !date_representation.within_interval?(Date.today + 1.day, Date.today + 4.day)
+        assert !date_representation.within_interval?(Time.zone.today + 1.day,
+                                                     Time.zone.today + 4.days)
       end
     end
 
     should 'return false if the interval is earlier than the data times' do
       @date_representations.each do |date_representation|
-        assert !date_representation.within_interval?(Date.today - 4.day, Date.today - 2.day)
+        assert !date_representation.within_interval?(Time.zone.today - 4.days,
+                                                     Time.zone.today - 2.days)
       end
     end
-
 
     should 'have the correct temporal extent' do
       @date_representations.each do |date_representation|
         dates = date_representation.temporal_extent
-        assert dates[:begin_date] == Date.today
-        assert dates[:end_date] == Date.today
+        assert dates[:begin_date] == Time.zone.today
+        assert dates[:end_date] == Time.zone.today
       end
     end
 
     should 'cache the temporal extent' do
       @date_representations.each do |date_representation|
         date_representation.update_temporal_extent
-        assert date_representation.begin_date == Date.today
-        assert date_representation.end_date == Date.today
+        assert date_representation.begin_date == Time.zone.today
+        assert date_representation.end_date == Time.zone.today
       end
     end
   end
 
   context 'datatable with year' do
     setup do
-      @year = FactoryGirl.build :datatable, :object => "select #{Time.now.year} as year"
+      @year = FactoryGirl.build(:datatable,
+                                object: "select #{Time.zone.today.year} as year")
     end
 
     should 'return true if interval includes today' do
-      assert @year.within_interval?(Date.today - 1.year, Date.today + 1.day)
+      assert @year.within_interval?(Time.zone.today - 1.year, Time.zone.today + 1.day)
     end
 
     should 'return false if the interval is later than the data times' do
-        assert !@year.within_interval?(Date.today + 1.day, Date.today + 4.day)
+      assert !@year.within_interval?(Time.zone.today + 1.day, Time.zone.today + 4.days)
     end
 
     should 'return false if the interval is earlier than the data times' do
-        assert !@year.within_interval?(Date.today - 4.year, Date.today - 2.year)
+      assert !@year.within_interval?(Time.zone.today - 4.years, Time.zone.today - 2.years)
     end
 
-
     should 'have the correct temporal extent' do
-        dates = @year.temporal_extent
-        assert dates[:begin_date].year == Date.today.year
-        assert dates[:end_date].year == Date.today.year
+      dates = @year.temporal_extent
+      assert dates[:begin_date].year == Time.zone.today.year
+      assert dates[:end_date].year == Time.zone.today.year
     end
 
     should 'cache the temporal extent' do
-        @year.update_temporal_extent
-        assert @year.begin_date.year == Date.today.year
-        assert @year.end_date.year == Date.today.year
+      @year.update_temporal_extent
+      assert @year.begin_date.year == Time.zone.today.year
+      assert @year.end_date.year == Time.zone.today.year
     end
   end
 
   context 'datatable formats' do
     setup do
       dataset = FactoryGirl.create(:dataset)
-      @datatable = FactoryGirl.create(:datatable, :dataset => dataset, :object=>"select now() as a, '1' as b", :number_of_released_records => 1)
-      @datatable.variates << [Variate.new(:name => 'a'), Variate.new(:name => 'b')]
+      @datatable = FactoryGirl.create(:datatable,
+                                      dataset: dataset,
+                                      object: "select now() as a, '1' as b",
+                                      number_of_released_records: 1)
+      @datatable.variates << [Variate.new(name: 'a'), Variate.new(name: 'b')]
     end
 
     context 'eml format' do
-      setup  do
+      setup do
         @datatable.protocols << FactoryGirl.create(:protocol)
         @eml = @datatable.to_eml
       end
@@ -527,7 +540,8 @@ class DatatableTest < ActiveSupport::TestCase
         end
 
         should 'include an entityName element' do
-          assert_equal "Kellogg Biological Station LTER: a really cool datatable (#{@datatable.name})", @to_eml.at_css('dataTable entityName').text
+          assert_equal "Kellogg Biological Station LTER: a really cool datatable (#{@datatable.name})",
+                        @to_eml.at_css('dataTable entityName').text
         end
 
         should 'include an entityDescription element' do
@@ -537,13 +551,11 @@ class DatatableTest < ActiveSupport::TestCase
     end
 
     context 'climbdb format' do
-
       should 'respond to to_climdb' do
         assert @datatable.respond_to?('to_climdb')
       end
 
       context 'return a climdb formatted document' do
-
         setup do
           @doc = CSV.parse(@datatable.to_climdb)
         end
@@ -551,13 +563,10 @@ class DatatableTest < ActiveSupport::TestCase
         should 'have the first line start with a bang !' do
           assert @doc[0].join(',') =~ /^!/
         end
-
       end
-
     end
 
     context 'csv format' do
-
       should 'respond to to_csv' do
         assert @datatable.respond_to?('to_csv')
       end
@@ -568,21 +577,21 @@ class DatatableTest < ActiveSupport::TestCase
 
       should 'return the data in the right order' do
         data = CSV.parse(@datatable.approved_csv)
-        b_column = data[0].index("b")
+        b_column = data[0].index('b')
         assert_equal '1', data[2][b_column]
       end
 
       should 'return data even if the variate names are capitalized' do
-        @datatable.variates = [Variate.new(:name => 'a'), Variate.new(:name => 'B')]
+        @datatable.variates = [Variate.new(name: 'a'), Variate.new(name: 'B')]
         @datatable.save
         data = CSV.parse(@datatable.approved_csv)
-        b_column = data[0].index("B")
+        b_column = data[0].index('B')
         assert_equal '1', data[2][b_column]
       end
 
       should 'return data if the query names are capitalized' do
         @datatable.object = %q{select now() as a, '1' as "B"}
-        @datatable.variates = [Variate.new(:name => 'a'), Variate.new(:name => 'B')]
+        @datatable.variates = [Variate.new(name: 'a'), Variate.new(name: 'B')]
 
         @datatable.save
         data = CSV.parse(@datatable.approved_csv)
@@ -591,19 +600,15 @@ class DatatableTest < ActiveSupport::TestCase
       end
 
       context 'with comment' do
-        setup  {@datatable.comments = "something\nand something else"}
+        setup  { @datatable.comments = 'something\nand something else' }
 
         should 'return a commented out version of the comment' do
-          assert_equal "#\n#        DATATABLE CORRECTIONS AND COMMENTS\n#something\n#and something else\n", @datatable.data_comments
+          assert_equal "#\n#        DATA TABLE CORRECTIONS AND COMMENTS\n#something\n#and something else\n#\n", @datatable.data_comments
         end
       end
     end
-
   end
-
 end
-
-
 
 # == Schema Information
 #

@@ -4,7 +4,7 @@ class PermissionRequest < ActiveRecord::Base
   belongs_to :datatable
 
   validates :user, :datatable, presence: true
-  validates :user_id, scope: :datatable_id, uniqueness: true
+  validates :user_id, uniqueness: { scope: :datatable_id }
 end
 
 # == Schema Information
