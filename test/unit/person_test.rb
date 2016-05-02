@@ -1,12 +1,11 @@
-require File.expand_path('../../test_helper',__FILE__)
+require File.expand_path('../../test_helper', __FILE__)
 
 class PersonTest < ActiveSupport::TestCase
-
   should have_many :datatables
 
   context 'a person' do
     setup do
-      @person = FactoryGirl.create(:person, :street_address=> '34 main st. ', :organization => '')
+      @person = FactoryGirl.create(:person, street_address: '34 main st. ', organization: '')
     end
 
     context 'converted to eml' do
@@ -17,7 +16,7 @@ class PersonTest < ActiveSupport::TestCase
       end
 
       should 'include the person name' do
-        assert_equal 1, @parsed_eml.css("associatedParty").count
+        assert_equal 1, @parsed_eml.css('associatedParty').count
       end
 
       should 'include an individualName element' do
@@ -28,20 +27,19 @@ class PersonTest < ActiveSupport::TestCase
         assert_equal 1, @parsed_eml.css('deliveryPoint').count
       end
     end
-
   end
 
   context 'a person with some lter_roles' do
     setup do
-      @first_role = FactoryGirl.create(:lter_role, :name => 'Creators')
-      @second_role = FactoryGirl.create(:lter_role, :name => 'Owners')
-      @person = FactoryGirl.create(:person, :lter_roles => [@first_role, @second_role])
+      @first_role = FactoryGirl.create(:lter_role, name: 'Creators')
+      @second_role = FactoryGirl.create(:lter_role, name: 'Owners')
+      @person = FactoryGirl.create(:person, lter_roles: [@first_role, @second_role])
     end
 
     context 'some of the roles are committee roles' do
       setup do
-        @first_committee = FactoryGirl.create(:lter_role, :name => 'Committee Members')
-        @second_committee = FactoryGirl.create(:lter_role, :name => 'Network Representatives')
+        @first_committee = FactoryGirl.create(:lter_role, name: 'Committee Members')
+        @second_committee = FactoryGirl.create(:lter_role, name: 'Network Representatives')
         assert @first_committee.committee?
         assert @second_committee.committee?
         @person.lter_roles << @first_committee
@@ -65,7 +63,7 @@ class PersonTest < ActiveSupport::TestCase
 
   context 'an emeritus' do
     setup do
-      @emeritus = FactoryGirl.build(:person, :lter_roles  => [FactoryGirl.build(:role)])
+      @emeritus = FactoryGirl.build(:person, lter_roles: [FactoryGirl.build(:role)])
     end
 
     should 'return true for @emeritus.only_emeritus?' do
@@ -76,7 +74,8 @@ class PersonTest < ActiveSupport::TestCase
   context 'a non emeritus person' do
     setup do
       @person = FactoryGirl.build(:person,
-        :lter_roles => [FactoryGirl.build(:role, :name => 'something else')])
+                                  lter_roles: [FactoryGirl.build(:role,
+                                                                 name: 'something else')])
     end
 
     should 'return false for #only_emeritus?' do
@@ -91,10 +90,13 @@ class PersonTest < ActiveSupport::TestCase
 
   context 'a persons name' do
     setup do
-      @person = FactoryGirl.create(:person, {:given_name => 'howard', :sur_name => 'spencer'})
-      @friendly_person = FactoryGirl.create(:person, {:given_name => 'howard', :sur_name => 'spencer',
-          :friendly_name => 'bops'})
-      @long_name = FactoryGirl.create(:person, :given_name => 'Shankurnarayanan', :sur_name => 'Ramachandranathan')
+      @person = FactoryGirl.create(:person, given_name: 'howard',
+                                            sur_name: 'spencer')
+      @friendly_person = FactoryGirl.create(:person, given_name: 'howard',
+                                                     sur_name: 'spencer',
+                                                     friendly_name: 'bops')
+      @long_name = FactoryGirl.create(:person, given_name: 'Shankurnarayanan',
+                                               sur_name: 'Ramachandranathan')
     end
 
     should 'return first_name last_name in response to full_name' do
@@ -119,19 +121,29 @@ class PersonTest < ActiveSupport::TestCase
 
   context 'dealing with non US address' do
     setup do
-      @implicit_us_address = FactoryGirl.create(:person,
-                                                street_address: '208 Main St.',
-                                                city: 'Anytown',
-                                                locale: 'CA',
-                                                postal_code: '55555')
-      @explicit_us_address = FactoryGirl.create(:person,  {:street_address => '208 Main St.',
-          :city=>'Anytown', :locale => 'CA', :postal_code => '55555', :country=>'USA'} )
-      @less_explicit_us_address = FactoryGirl.create(:person,  {:street_address => '208 Main St.',
-          :city=>'Anytown', :locale => 'CA', :postal_code => '55555', :country=>'US'} )
-      @eu_address = FactoryGirl.create(:person, {:street_address => 'Hanover Strasse 20',
-          :city=>'Hanover', :postal_code=>'242435', :country=>'Germany'})
-      @empty_country_address = FactoryGirl.create(:person, {:street_address => '208 Main St.',
-        :city=>'Anytown', :locale => 'CA', :postal_code => '55555', :country => ''})
+      @implicit_us_address = FactoryGirl.create(:person, street_address: '208 Main St.',
+                                                         city: 'Anytown',
+                                                         locale: 'CA',
+                                                         postal_code: '55555')
+      @explicit_us_address = FactoryGirl.create(:person,  street_address: '208 Main St.',
+                                                          city: 'Anytown',
+                                                          locale:  'CA',
+                                                          postal_code: '55555',
+                                                          country: 'USA')
+      @less_explicit_us_address = FactoryGirl.create(:person,  street_address: '208 Main St.',
+                                                               city: 'Anytown',
+                                                               locale: 'CA',
+                                                               postal_code: '55555',
+                                                               country: 'US')
+      @eu_address = FactoryGirl.create(:person, street_address: 'Hanover Strasse 20',
+                                                city: 'Hanover',
+                                                postal_code: '242435',
+                                                country: 'Germany')
+      @empty_country_address = FactoryGirl.create(:person, street_address: '208 Main St.',
+                                                           city: 'Anytown',
+                                                           locale: 'CA',
+                                                           postal_code: '55555',
+                                                           country: '')
     end
 
     should 'usa_address? should return appropriately' do
@@ -154,20 +166,25 @@ class PersonTest < ActiveSupport::TestCase
 
   context 'incomplete addresses' do
     setup do
-      full_address = {:street_address => '208 Main St.', :city=>'Anytown',
-          :locale => 'CA', :postal_code => '55555', :country=>'USA'}
+      full_address = { street_address: '208 Main St.',
+                       city: 'Anytown',
+                       locale: 'CA',
+                       postal_code: '55555',
+                       country: 'USA' }
       @complete = FactoryGirl.create(:person, full_address)
-      @no_city =  FactoryGirl.create(:person, full_address.merge(:city => nil))
-      @city_blank = FactoryGirl.create(:person, full_address.merge(:city => ' '))
-      @city_empty = FactoryGirl.create(:person, full_address.merge(:city => ''))
-      @no_street_address = FactoryGirl.create(:person, full_address.merge(:street_address => nil))
-      @street_address_blank = FactoryGirl.create(:person, full_address.merge(:street_address => ' '))
-      @no_postal_code = FactoryGirl.create(:person, full_address.merge(:postal_code => nil))
-      @postal_code_blank = FactoryGirl.create(:person, full_address.merge(:postal_code => ' '))
-      @no_locale = FactoryGirl.create(:person, full_address.merge(:locale => nil))
-      @locale_blank = FactoryGirl.create(:person, full_address.merge(:locale => ' '))
-      @eu_address = FactoryGirl.create(:person, {:street_address => 'Hanover Strasse 20',
-                  :city=>'Hanover', :postal_code=>'242435', :country=>'Germany'})
+      @no_city =  FactoryGirl.create(:person, full_address.merge(city: nil))
+      @city_blank = FactoryGirl.create(:person, full_address.merge(city: ' '))
+      @city_empty = FactoryGirl.create(:person, full_address.merge(city: ''))
+      @no_street_address = FactoryGirl.create(:person, full_address.merge(street_address: nil))
+      @street_address_blank = FactoryGirl.create(:person, full_address.merge(street_address: ' '))
+      @no_postal_code = FactoryGirl.create(:person, full_address.merge(postal_code: nil))
+      @postal_code_blank = FactoryGirl.create(:person, full_address.merge(postal_code: ' '))
+      @no_locale = FactoryGirl.create(:person, full_address.merge(locale: nil))
+      @locale_blank = FactoryGirl.create(:person, full_address.merge(locale: ' '))
+      @eu_address = FactoryGirl.create(:person, street_address: 'Hanover Strasse 20',
+                                                city: 'Hanover',
+                                                postal_code: '242435',
+                                                country: 'Germany')
     end
 
     should 'tell the status of the address' do
@@ -194,7 +211,7 @@ class PersonTest < ActiveSupport::TestCase
     end
   end
 
-  #TODO a test needs to be written for find_all_with_dataset
+  # TODO: a test needs to be written for find_all_with_dataset
 
   # personnelDB
   context 'lter_personelDB updates' do
@@ -207,15 +224,9 @@ class PersonTest < ActiveSupport::TestCase
     end
 
     should 'return a basic valid xml structure' do
-
     end
-
   end
 end
-
-
-
-
 
 # == Schema Information
 #
