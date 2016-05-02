@@ -1,22 +1,20 @@
+# A Meeting that was held locally or nationally
 class Meeting < ActiveRecord::Base
-  has_many :abstracts, -> {order :authors}
+  has_many :abstracts, -> { order :authors }
   belongs_to :venue_type
 
-  validates_presence_of :venue_type
+  validates :venue_type, presence: true
 
   def poster_abstracts
-    type = MeetingAbstractType.where(name: "Poster").first
+    type = MeetingAbstractType.find_by(name: 'Poster')
     abstracts.where(meeting_abstract_type_id: type.id)
   end
 
   def presentation_abstracts
-    type = MeetingAbstractType.where(name: "Presentation").first
+    type = MeetingAbstractType.find_by(name: 'Presentation')
     abstracts.where(meeting_abstract_type_id: type.id)
   end
 end
-
-
-
 
 # == Schema Information
 #
@@ -29,4 +27,3 @@ end
 #  venue_type_id :integer
 #  date_to       :date
 #
-
