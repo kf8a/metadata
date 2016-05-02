@@ -87,7 +87,7 @@ class Person < ActiveRecord::Base
   end
 
   def has_dataset?
-    dataset_roles.empty?
+    dataset_roles.size > 0
   end
 
   def to_eml(eml = Builder::XmlMarkup.new, role = 'Investigator')
