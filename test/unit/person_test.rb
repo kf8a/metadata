@@ -119,8 +119,11 @@ class PersonTest < ActiveSupport::TestCase
 
   context 'dealing with non US address' do
     setup do
-      @implicit_us_address = FactoryGirl.create(:person, {:street_address => '208 Main St.',
-        :city=>'Anytown', :locale => 'CA', :postal_code => '55555'})
+      @implicit_us_address = FactoryGirl.create(:person,
+                                                street_address: '208 Main St.',
+                                                city: 'Anytown',
+                                                locale: 'CA',
+                                                postal_code: '55555')
       @explicit_us_address = FactoryGirl.create(:person,  {:street_address => '208 Main St.',
           :city=>'Anytown', :locale => 'CA', :postal_code => '55555', :country=>'USA'} )
       @less_explicit_us_address = FactoryGirl.create(:person,  {:street_address => '208 Main St.',

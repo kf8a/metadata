@@ -1,20 +1,18 @@
 class Person < ActiveRecord::Base
-  has_many :affiliations, :dependent => :destroy
-  has_many :lter_roles, -> { where(['role_type_id = ?', RoleType.where(:name => 'lter').first])} , :source => :role, :through => :affiliations
-  has_many :dataset_roles, -> {where ['role_type_id = ?', RoleType.find_by_name('lter_dataset')] }, :through => :affiliations, :source => :role
-  has_many :roles, :through => :affiliations
-  has_many :datasets, :through => :affiliations,  :source => :dataset
+  has_many :affiliations, dependent: :destroy
+  has_many :lter_roles, -> { where(['role_type_id = ?', RoleType.where(name: 'lter').first])}, source: :role, through: :affiliations
+  has_many :dataset_roles, -> { where ['role_type_id = ?', RoleType.find_by_name('lter_dataset')] }, through: :affiliations, source: :role
+  has_many :roles, through: :affiliations
+  has_many :datasets, through: :affiliations, source: :dataset
   has_many :scribbles
-  has_many :protocols, :through => :scribbles
+  has_many :protocols, through: :scribbles
 
   has_many :data_contributions
-  has_many :datatables, :through => :data_contributions
+  has_many :datatables, through: :data_contributions
 
-  # attr_protected :identity_url
+  accepts_nested_attributes_for :affiliations, allow_destroy: true
 
-  accepts_nested_attributes_for :affiliations, :allow_destroy => true
-
-  scope :by_sur_name, -> {order 'sur_name'}
+  scope :by_sur_name, -> { order 'sur_name' }
   scope :by_sur_name_asc, -> { order 'sur_name ASC' }
 
   def self.from_eml(person_eml)
@@ -38,7 +36,7 @@ class Person < ActiveRecord::Base
   end
 
   def get_committee_role_names
-    affiliations.lter.committees.collect {|affiliation| affiliation.role.committee_role_name }.compact
+    affiliations.lter.committees.collect { |affiliation| affiliation.role.committee_role_name }.compact
   end
 
   def only_emeritus?
@@ -66,12 +64,13 @@ class Person < ActiveRecord::Base
   end
 
   def usa_address?
-    country.blank? || country.downcase == 'usa' || country.downcase == 'us'
+    country.blank? || country.casecmp('usa') == 0 || country.casecmp('us') == 0
   end
 
   def complete_address?
     !usa_address? ||
-        (city.present? && street_address.present? && postal_code.present? && locale.present?)
+      (city.present? && street_address.present? &&
+       postal_code.present? && locale.present?)
   end
 
   def address
@@ -88,10 +87,10 @@ class Person < ActiveRecord::Base
   end
 
   def has_dataset?
-    self.dataset_roles.size > 0
+    dataset_roles.empty?
   end
 
-  def to_eml(eml = Builder::XmlMarkup.new, role= 'Investigator')
+  def to_eml(eml = Builder::XmlMarkup.new, role = 'Investigator')
     eml.associatedParty do
       eml_party(eml)
       eml.role role
@@ -108,13 +107,13 @@ class Person < ActiveRecord::Base
     if fax
       eml.phone fax, 'phonetype' => 'fax'
     end
-    eml.electronicMailAddress email  unless email.blank?
+    eml.electronicMailAddress email unless email.blank?
   end
 
   def eml_address(eml)
-    eml.address  do
-      eml.deliveryPoint street_address  unless street_address.blank?
-      eml.city city  unless city.blank?
+    eml.address do
+      eml.deliveryPoint street_address unless street_address.blank?
+      eml.city city unless city.blank?
       eml.administrativeArea locale unless locale.blank?
       eml.postalCode postal_code unless postal_code.blank?
       eml.country country unless country.blank?
@@ -123,10 +122,10 @@ class Person < ActiveRecord::Base
   end
 
   def to_lter_personneldb
-    #TODO fill this in
+    # TODO: fill this in
   end
 
-private
+  private
 
   def eml
     @eml ||= ::Builder::XmlMarkup.new
@@ -135,13 +134,13 @@ private
   def eml_individual_name(eml)
     eml.individualName do
       eml.givenName given_name unless given_name.blank?
-      eml.surName sur_name  unless sur_name.blank?
+      eml.surName sur_name unless sur_name.blank?
     end
     eml
   end
 
   def basic_attributes_from_eml(person_eml)
-    self.given_name   = person_eml.css('individualName givenName').collect{ |element| element.text }.join(' ')
+    self.given_name   = person_eml.css('individualName givenName').collect { |element| element.text }.join(' ')
     self.sur_name     = person_eml.css('individualName surName').text
     self.organization = person_eml.css('organizationName').text
     self.email        = person_eml.css('electronicMailAddress').text
@@ -149,7 +148,7 @@ private
 
   def role_from_name(role_name)
     role_to_add = Role.find_or_create_by_name(role_name)
-    Affiliation.create!(:person => self, :role => role_to_add) if role_to_add.present?
+    Affiliation.create!(person: self, role: role_to_add) if role_to_add.present?
   end
 
   def address_from_eml(address_eml)
@@ -169,11 +168,7 @@ private
       self.fax = phone_number
     end
   end
-
 end
-
-
-
 
 # == Schema Information
 #
@@ -199,4 +194,3 @@ end
 #  url              :string(255)
 #  deceased         :boolean
 #  open_id          :string(255)
-#
