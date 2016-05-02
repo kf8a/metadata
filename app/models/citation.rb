@@ -498,13 +498,7 @@ class Citation < ActiveRecord::Base
       end
     end
   end
-
-
 end
-
-
-
-
 
 # == Schema Information
 #

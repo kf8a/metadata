@@ -1,8 +1,8 @@
+# Represents membership of a person in an organization
 class Membership < ActiveRecord::Base
   belongs_to :sponsor
   belongs_to :user
 end
-
 
 # == Schema Information
 #
@@ -12,4 +12,3 @@ end
 #  sponsor_id :integer
 #  user_id    :integer
 #
-

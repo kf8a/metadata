@@ -1,3 +1,5 @@
+# A collection as opposed to a datatable
+# a collection is supposed to be browsable
 class Collection < ActiveRecord::Base
   belongs_to :datatable
 
@@ -30,13 +32,7 @@ class Collection < ActiveRecord::Base
   def variates
     self.datatable.variates
   end
-
-  private
-
-
 end
-
-
 
 # == Schema Information
 #
@@ -47,4 +43,3 @@ end
 #  updated_at   :datetime
 #  datatable_id :integer
 #
-

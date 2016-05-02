@@ -1,5 +1,5 @@
+# Citation referring to a conference paper or poster
 class ConferenceCitation < Citation
-
   private
 
   def bibtex_type
@@ -9,11 +9,7 @@ class ConferenceCitation < Citation
   def endnote_type
     "Thesis\n"
   end
-
 end
-
-
-
 
 # == Schema Information
 #
@@ -53,4 +49,3 @@ end
 #  open_access             :boolean         default(FALSE)
 #  type                    :string(255)
 #
-

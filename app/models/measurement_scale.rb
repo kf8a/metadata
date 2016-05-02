@@ -1,8 +1,6 @@
+# Represents the concept of a measurement scale from EML
 class MeasurementScale < ActiveRecord::Base
 end
-
-
-
 
 # == Schema Information
 #
@@ -12,4 +10,3 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #
-

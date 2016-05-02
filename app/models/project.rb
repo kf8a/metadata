@@ -1,9 +1,7 @@
+# Represents a project
 class Project < ActiveRecord::Base
   has_many :datasets
 end
-
-
-
 
 # == Schema Information
 #
@@ -15,4 +13,3 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #
-

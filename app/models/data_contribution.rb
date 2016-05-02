@@ -1,3 +1,4 @@
+# Data contributions link a person to a datatable
 class DataContribution < ActiveRecord::Base
   belongs_to :person
   belongs_to :datatable
@@ -5,9 +6,6 @@ class DataContribution < ActiveRecord::Base
 
   validates_presence_of :role
 end
-
-
-
 
 # == Schema Information
 #
@@ -20,4 +18,3 @@ end
 #  created_at   :datetime
 #  updated_at   :datetime
 #
-

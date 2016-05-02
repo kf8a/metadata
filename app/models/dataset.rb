@@ -274,7 +274,6 @@ class Dataset < ActiveRecord::Base
     end
   end
 
-
   def eml_resource_group
     @eml.title title + " at the Kellogg Biological Station, Hickory Corners, MI " + date_range
     eml_creator
@@ -460,9 +459,6 @@ class Dataset < ActiveRecord::Base
     save
   end
 end
-
-
-
 
 # == Schema Information
 #

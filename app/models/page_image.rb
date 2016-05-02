@@ -1,11 +1,9 @@
+# an embedded image in a page
 class PageImage < ActiveRecord::Base
   belongs_to :page
 
   has_attached_file :image
 end
-
-
-
 
 # == Schema Information
 #
@@ -20,4 +18,3 @@ end
 #  image_file_size    :integer
 #  image_updated_at   :datetime
 #
-
