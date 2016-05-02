@@ -1,8 +1,6 @@
+# Placeholder for taxonomic extents
 class Species < ActiveRecord::Base
 end
-
-
-
 
 # == Schema Information
 #
@@ -18,4 +16,3 @@ end
 #  attribution           :string(255)
 #  woody                 :boolean
 #
-

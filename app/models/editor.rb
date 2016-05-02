@@ -16,8 +16,6 @@ class Editor < ActiveRecord::Base
   end
 end
 
-
-
 # == Schema Information
 #
 # Table name: editors

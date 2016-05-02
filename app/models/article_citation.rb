@@ -1,5 +1,5 @@
+# A peer reviewed article
 class ArticleCitation < Citation
-
   def formatted(options={})
     "#{author_and_year(options)} #{title_and_punctuation} #{journal} #{volume_and_page} #{annotation}".rstrip
   end
@@ -17,10 +17,7 @@ class ArticleCitation < Citation
   def endnote_type
     "Journal Article\n"
   end
-
 end
-
-
 
 # == Schema Information
 #
@@ -60,4 +57,3 @@ end
 #  open_access             :boolean         default(FALSE)
 #  type                    :string(255)
 #
-

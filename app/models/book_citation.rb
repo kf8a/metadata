@@ -1,5 +1,4 @@
 class BookCitation < Citation
-
   def book?
     true
   end
@@ -37,8 +36,6 @@ class BookCitation < Citation
   def publisher_and_punctuation
   end
 end
-
-
 
 # == Schema Information
 #
@@ -78,4 +75,3 @@ end
 #  open_access             :boolean         default(FALSE)
 #  type                    :string(255)
 #
-

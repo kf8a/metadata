@@ -2,9 +2,6 @@ class CitationType < ActiveRecord::Base
   has_many :citations
 end
 
-
-
-
 # == Schema Information
 #
 # Table name: citation_types
@@ -15,4 +12,3 @@ end
 #  created_at   :datetime
 #  updated_at   :datetime
 #
-

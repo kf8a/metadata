@@ -34,9 +34,7 @@ class Datatable < ActiveRecord::Base
   accepts_nested_attributes_for :data_contributions, allow_destroy: true
   accepts_nested_attributes_for :variates, allow_destroy: true
 
-
   scope :by_name, -> {order :name}
-
 
   if Rails.env.production?
     has_attached_file :csv_cache,
@@ -155,7 +153,6 @@ class Datatable < ActiveRecord::Base
     lead_investigator = Role.find_by_name('lead investigator')
     data_contributions.collect { |affiliation| affiliation.person if affiliation.role == lead_investigator }.compact
   end
-
 
   def keyword_names
     keywords.collect {|x| x.name}
@@ -521,7 +518,6 @@ class Datatable < ActiveRecord::Base
   def supercession_candidates
     Datatables.where('id <> ?', id).all
   end
-
 
   ## Utilites
 

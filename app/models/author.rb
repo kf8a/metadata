@@ -14,10 +14,7 @@ class Author < ActiveRecord::Base
   def to_enw
     "\n%A #{formatted}"
   end
-
 end
-
-
 
 # == Schema Information
 #

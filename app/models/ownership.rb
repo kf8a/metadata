@@ -1,3 +1,4 @@
+# Link datatable to data owners
 class Ownership < ActiveRecord::Base
   belongs_to :user
   belongs_to :datatable
@@ -5,18 +6,16 @@ class Ownership < ActiveRecord::Base
   validates_presence_of :user
   validates_presence_of :datatable
 
-  validates_uniqueness_of :user_id, :scope => :datatable_id
+  validates_uniqueness_of :user_id, scope: :datatable_id
 
   def Ownership.create_ownerships(users, datatables, overwrite=false)
-    datatables.each { |datatable| destroy_all(:datatable_id => datatable) } if overwrite
+    datatables.each { |datatable| destroy_all(datatable_id: datatable) } if overwrite
     users.product(datatables).each do |user, table|
-      ownership = Ownership.new(:user_id => user, :datatable_id => table)
+      ownership = Ownership.new(user_id: user, datatable_id: table)
       ownership.save
     end
   end
 end
-
-
 
 # == Schema Information
 #

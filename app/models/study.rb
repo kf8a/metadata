@@ -1,5 +1,5 @@
+# Study is a group of experiments or an experimental location
 class Study < ActiveRecord::Base
-
   has_and_belongs_to_many :datasets
   has_many :datatables
   has_many :treatments
@@ -57,7 +57,6 @@ class Study < ActiveRecord::Base
     self.parent.try(:touch)
   end
 end
-
 
 # == Schema Information
 #

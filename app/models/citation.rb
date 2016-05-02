@@ -22,7 +22,6 @@ class Citation < ActiveRecord::Base
 
   validates_presence_of :authors
 
-
   if Rails.env.production?
     after_commit :check_for_open_access_paper
 
@@ -90,7 +89,6 @@ class Citation < ActiveRecord::Base
     query_date = Date.civil(date['year'].to_i,date['month'].to_i,date['day'].to_i)
     where('updated_at > ?', query_date)
   end
-
 
   def Citation.to_enw(array_of_citations)
     array_of_citations.collect { |citation| citation.to_enw }.join("\n") + "\n"
@@ -180,7 +178,6 @@ class Citation < ActiveRecord::Base
     citation.authors_from_ris_authors(stanza[:authors])
     citation
   end
-
 
   def date_from_ris_date(ris_date)
     if ris_date.to_i != 0 #it is just an integer string
@@ -326,7 +323,6 @@ class Citation < ActiveRecord::Base
       publication.present? ? "\n%J #{publication}" : ""
     end
   end
-
 
   def volume_and_page
     if volume.blank?

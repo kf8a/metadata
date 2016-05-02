@@ -1,5 +1,4 @@
 class BulletinCitation < Citation
-
   def formatted(options={})
     "#{author_and_year(options)} #{title_and_punctuation} #{editor_string}#{publication_string}#{volume_and_page}#{publisher_string}#{address_and_city}."
   end
@@ -32,9 +31,6 @@ class BulletinCitation < Citation
     end
   end
 end
-
-
-
 
 # == Schema Information
 #
@@ -74,4 +70,3 @@ end
 #  open_access             :boolean         default(FALSE)
 #  type                    :string(255)
 #
-
