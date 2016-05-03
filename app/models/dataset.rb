@@ -6,11 +6,11 @@ require 'eml'
 
 class Dataset < ActiveRecord::Base
   has_many                :affiliations, -> { order 'seniority' }
-  has_many                :datatables,   -> { order 'name'} , :dependent => :nullify
-  has_many                :people,       through:    :affiliations
+  has_many                :datatables, -> { order 'name' }, dependent: :nullify
+  has_many                :people, through: :affiliations
   belongs_to              :project
-  has_many                :protocols,    -> {where 'active is true' }
-  has_many                :roles,        -> {uniq() } , through: :affiliations
+  has_many                :protocols, -> { where 'active is true' }
+  has_many                :roles, -> { uniq }, through: :affiliations
   belongs_to              :sponsor
   has_and_belongs_to_many :studies
   has_and_belongs_to_many :themes
@@ -40,7 +40,7 @@ class Dataset < ActiveRecord::Base
     else
       eml_doc = Nokogiri::XML(eml_text)
     end
-    # get_validation_errors(eml_doc).presence || 
+    # get_validation_errors(eml_doc).presence ||
     self.new.from_eml(eml_doc)
   end
 
@@ -99,8 +99,8 @@ class Dataset < ActiveRecord::Base
     datatables.index { |table| table.within_interval?(sdate, edate) }.present?
   end
 
-  #unpack and populate datatables and variates
-  #def from_eml(dataset)
+  # unpack and populate datatables and variates
+  # def from_eml(dataset)
   #  dataset.elements.each do |element|
   #    self.send(element.name, element.value)
   #  end
@@ -109,14 +109,14 @@ class Dataset < ActiveRecord::Base
   #    dtable.from_eml(datatable)
   #    datatables << dtable
   #  end
-  #end
+  # end
 
   def package_id
     "knb-lter-kbs.#{metacat_id || self.id}.#{version}"
   end
 
   def datatable_protocols
-    datatables.where(:on_web => true).collect {|datatable| datatable.protocols}
+    datatables.where(on_web: true).collect { |datatable| datatable.protocols }
   end
 
   def to_eml
@@ -137,13 +137,13 @@ class Dataset < ActiveRecord::Base
 
   def temporal_extent
     begin_date, end_date = nil
-    datatables.where(:on_web => true).each do |datatable |
-      dates = {:begin_date => datatable.begin_date, :end_date => datatable.end_date }
+    datatables.where(on_web: true).each do |datatable|
+      dates = { begin_date: datatable.begin_date, end_date: datatable.end_date }
       next unless dates[:begin_date] && dates[:end_date]
       begin_date = [begin_date, dates[:begin_date]].compact.min
       end_date   = [end_date, dates[:end_date]].compact.max
     end
-    {:begin_date => begin_date, :end_date => end_date}
+    { begin_date: begin_date, end_date: end_date }
   end
 
   def update_temporal_extent
@@ -158,7 +158,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def end_date
-    self.data_end_date || Date.today
+    self.data_end_date || Time.zone.today
   end
 
   # Return the bounding coordinates of all of the datatables in the dataset
@@ -177,8 +177,8 @@ class Dataset < ActiveRecord::Base
   end
 
   def custom_units
-    self.datatables.collect do | datatable |
-      datatable.variates.collect do | variate |
+    self.datatables.collect do |datatable|
+      datatable.variates.collect do |variate|
         next unless variate.unit
         next if variate.unit.in_eml
         variate.unit
@@ -187,15 +187,15 @@ class Dataset < ActiveRecord::Base
   end
 
   def creators
-    datatable_leads = datatables.collect {|x| x.leads}.compact
+    datatable_leads = datatables.collect { |x| x.leads }.compact
     [leads, datatable_leads].flatten.uniq.compact
   end
 
   def core_areas
-    datatables.map {|x| x.core_areas }.flatten.uniq
+    datatables.map { |x| x.core_areas }.flatten.uniq
   end
 
-#private
+  # private
 
   def eml_custom_unit_list
     @eml.additionalMetadata do
@@ -236,7 +236,7 @@ class Dataset < ActiveRecord::Base
       eml_allow('uid=KBS,o=lter,dc=ecoinformatics,dc=org', 'all')
       eml_allow('uid=sbohm,o=lter,dc=ecoinformatics,dc=org', 'all')
       if on_web
-        eml_allow('public','read')
+        eml_allow('public', 'read')
       end
     end
   end
@@ -255,7 +255,7 @@ class Dataset < ActiveRecord::Base
   def eml_methods
     if eml_protocols.size > 0
       @eml.methods do
-        eml_protocols.each do | protocol |
+        eml_protocols.each do |protocol|
           protocol.to_eml(@eml)
         end
       end
@@ -263,7 +263,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_dataset
-    @eml.dataset 'id' => Rails.application.routes.url_helpers.dataset_path(self, :format => 'eml') do
+    @eml.dataset 'id' => Rails.application.routes.url_helpers.dataset_path(self, format: 'eml') do
       eml_resource_group
       contact_info
       @eml.publisher do
@@ -300,7 +300,7 @@ class Dataset < ActiveRecord::Base
     elsif starting
       " (#{starting.year})"
     else
-      ""
+      ''
     end
   end
 
@@ -324,7 +324,7 @@ class Dataset < ActiveRecord::Base
 
   def eml_people
     [people, datatable_people].flatten.uniq.compact.each do |person|
-      role = datatables.collect {|x| x.which_roles(person)}.flatten.compact.first
+      role = datatables.collect { |x| x.which_roles(person) }.flatten.compact.first
       role = which_roles(person).first unless role
       role_name = role.name if role
       person.to_eml(@eml, role_name)
@@ -335,7 +335,7 @@ class Dataset < ActiveRecord::Base
     if abstract
       unless abstract.empty?
         @eml.abstract do
-          @eml.section do 
+          @eml.section do
             @eml.title 'Dataset Abstract'
             @eml.para EML.text_sanitize(textilize(abstract))
             @eml.para "original data source http://lter.kbs.msu.edu/datasets/#{id}"
@@ -397,7 +397,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_coverage
-    @eml.coverage do 
+    @eml.coverage do
       @eml.geographicCoverage do
         @eml.geographicDescription 'The areas around the Kellogg Biological Station in southwest Michigan'
         @eml.boundingCoordinates do
@@ -425,7 +425,7 @@ class Dataset < ActiveRecord::Base
   def self.validation_errors(eml_doc)
     xsd = nil
     Dir.chdir("#{Rails.root}/test/data/eml-2.1.0") do
-      xsd = Nokogiri::XML::Schema(File.read("eml.xsd"))
+      xsd = Nokogiri::XML::Schema(File.read('eml.xsd'))
     end
 
     xsd.validate(eml_doc)
