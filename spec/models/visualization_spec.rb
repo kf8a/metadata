@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 describe Visualization do
-  it {should belong_to :datatable}
+  it { should belong_to :datatable }
 end
-
 
 # == Schema Information
 #
@@ -20,4 +19,3 @@ end
 #  x_axis_label :string(255)
 #  y_axis_label :string(255)
 #
-

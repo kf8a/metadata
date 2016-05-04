@@ -2,29 +2,29 @@ require 'digest/sha1'
 
 class Invite < ActiveRecord::Base
   validates_presence_of :email, message: "can't be blank"
-  validates_uniqueness_of :email, message: "is already registered"
+  validates_uniqueness_of :email, message: 'is already registered'
 
   def self.unsent_invitations
-    self.where(redeemed_at: nil, invite_code: nil)
+    where(redeemed_at: nil, invite_code: nil)
   end
 
   def invited?
-    self.invite_code.present? && self.invited_at.present?
+    invite_code.present? && invited_at.present?
   end
 
   def invite!
-    self.invite_code = Digest::SHA1.hexdigest("--#{Time.now.utc.to_s}--#{self.email}--")
+    self.invite_code = Digest::SHA1.hexdigest("--#{Time.now.utc}--#{email}--")
     self.invited_at = Time.now.utc
-    self.save!
+    save!
   end
 
   def self.find_redeemable(invite_code)
-    self.where(:redeemed_at => nil, :invite_code => invite_code).first
+    find_by(redeemed_at: nil, invite_code: invite_code)
   end
 
   def redeemed!
     self.redeemed_at = Time.now.utc
-    self.save!
+    save!
   end
 end
 

@@ -1,13 +1,12 @@
 require File.expand_path('../../test_helper',__FILE__)
 
 class InviteTest < ActiveSupport::TestCase
-
   setup do
     FactoryGirl.create(:invite)
   end
 
   should validate_presence_of(:email).with_message("can't be blank")
-  should validate_uniqueness_of(:email).with_message("is already registered")
+  should validate_uniqueness_of(:email).with_message('is already registered')
 
   context 'inviting' do
     setup do
@@ -18,13 +17,8 @@ class InviteTest < ActiveSupport::TestCase
       assert @invite.invite!
       assert @invite.invited?
     end
-
   end
 end
-
-
-
-
 
 # == Schema Information
 #
@@ -39,4 +33,3 @@ end
 #  redeemed_at  :datetime
 #  glbrc_member :boolean
 #
-
