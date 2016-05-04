@@ -1,17 +1,18 @@
+# A citation representing a book chapter
 class ChapterCitation < Citation
-  def formatted(options={})
+  def formatted(options = {})
     "#{author_and_year(options)} #{title_and_punctuation} #{volume_and_page} in #{eds}#{book_string}#{publisher}#{address_and_city}."
   end
 
   def volume_and_page
     if volume.blank?
       if page_numbers.blank?
-        ""
+        ''
       else
         "Pages #{page_numbers}"
       end
     elsif page_numbers.blank?
-      "#{volume}"
+      volume.to_s
     else
       "Vol #{volume}, Pages #{page_numbers}"
     end
@@ -20,7 +21,7 @@ class ChapterCitation < Citation
   private
 
   def eds
-    ed = editors.collect {|e| e.formatted(:natural) }.to_sentence
+    ed = editors.collect { |e| e.formatted(:natural) }.to_sentence
     if editors.size == 0
       ''
     elsif editors.size > 1
@@ -37,12 +38,12 @@ class ChapterCitation < Citation
 
   def book_string
     if book.present?
-      book + ". "
+      book + '. '
     end
   end
 
   def address_and_city
-    ", #{address} #{city}" if address.present? or city.present?
+    ", #{address} #{city}" if address.present? || city.present?
   end
 
   def bibtex_type

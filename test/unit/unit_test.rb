@@ -1,44 +1,38 @@
-require File.expand_path('../../test_helper',__FILE__) 
+require File.expand_path('../../test_helper', __FILE__)
 
 class UnitTest < ActiveSupport::TestCase
-
-  context "human_name function" do
-    setup do 
-      @speed = FactoryGirl.build :unit, :name => "Feetpersecond", :label => 'ft/2'
+  context 'human_name function' do
+    setup do
+      @speed = FactoryGirl.build :unit, name: 'Feetpersecond', label: 'ft/2'
     end
 
     should 'use the label if available' do
       assert_equal 'ft/2', @speed.human_name
     end
 
-    context "and a name with one or more Pers in it" do
+    context 'and a name with one or more Pers in it' do
       setup do
-        @speed = FactoryGirl.build :unit, :name => "FeetPerSecond"
-        @acceleration = FactoryGirl.build :unit, :name => "FeetPerSecondPerSecond"
+        @speed = FactoryGirl.build :unit, name: 'FeetPerSecond'
+        @acceleration = FactoryGirl.build :unit, name: 'FeetPerSecondPerSecond'
       end
 
-      should "replace Per with / and reduce capitals" do
-        assert @speed.human_name == "feet/second"
-        assert @acceleration.human_name == "feet/second/second"
+      should 'replace Per with / and reduce capitals' do
+        assert @speed.human_name == 'feet/second'
+        assert @acceleration.human_name == 'feet/second/second'
       end
     end
 
-    context "and a name with no Pers in it" do
+    context 'and a name with no Pers in it' do
       setup do
-        @distance = FactoryGirl.build :unit, :name => "Feet"
+        @distance = FactoryGirl.build :unit, name: 'Feet'
       end
 
-      should "just reduce the capitals" do
-        assert @distance.human_name == "feet"
+      should 'just reduce the capitals' do
+        assert @distance.human_name == 'feet'
       end
     end
-
   end
 end
-
-
-
-
 
 # == Schema Information
 #
@@ -55,4 +49,3 @@ end
 #  multiplier_to_si       :float
 #  abbreviation           :string(255)
 #
-
