@@ -29,7 +29,7 @@ class Datatable < ActiveRecord::Base
 
   validates :title,   presence: true
   validates :dataset, presence: true
-  validates_uniqueness_of :name
+  validates :name, uniqueness: true
 
   accepts_nested_attributes_for :data_contributions, allow_destroy: true
   accepts_nested_attributes_for :variates, allow_destroy: true
@@ -172,7 +172,7 @@ class Datatable < ActiveRecord::Base
   def publish
     begin
       file = Tempfile.new('csv_cache')
-      file << self.approved_csv
+      file << approved_csv
       self.csv_cache = file
       self.csv_cache_file_name = "#{id}.csv"
       self.csv_cache_content_type = 'text/csv'
@@ -203,7 +203,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def pending_requesters
-    requesters.collect { |user| user unless self.permitted?(user) }.compact
+    requesters.collect { |user| user unless permitted?(user) }.compact
   end
 
   def requested_by?(user)
@@ -233,7 +233,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def can_be_downloaded_by?(user)
-    if self.is_restricted?
+    if is_restricted?
       user.try(:admin?) ||
         permitted?(user) ||
         owned_by?(user)
@@ -265,7 +265,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def title_and_years
-    return title if (begin_date.nil? || end_date.nil?)
+    return title if begin_date.nil? || end_date.nil?
     year_end = end_date.year
     year_start = begin_date.year
     years = ''
@@ -278,7 +278,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def ongoing?
-    return false if self.completed?
+    return false if completed?
     next_expected_update = update_frequency_days.present? ? update_frequency_days : 365
     expected_update = end_date.year + next_expected_update / 265 + 2
     expected_update > Time.now.year
@@ -387,7 +387,7 @@ class Datatable < ActiveRecord::Base
 
   def data_comments
     if comments
-      "#\n#        DATA TABLE CORRECTIONS AND COMMENTS\n" + comments.gsub(/^/,'#') + "\n#\n"
+      "#\n#        DATA TABLE CORRECTIONS AND COMMENTS\n" + comments.gsub(/^/, '#') + "\n#\n"
     else
       "\n"
     end
@@ -396,9 +396,9 @@ class Datatable < ActiveRecord::Base
   def data_source
     <<-END
 #
-# Original Data Source: http://#{website_name}.kbs.msu.edu/datatables/#{self.id}
-# The newest version of the data http://#{website_name}.kbs.msu.edu/datatables/#{self.id}.csv
-# Full EML Metadata: http://#{website_name}.kbs.msu.edu/datatables/#{self.dataset.id}.eml
+# Original Data Source: http://#{website_name}.kbs.msu.edu/datatables/#{id}
+# The newest version of the data http://#{website_name}.kbs.msu.edu/datatables/#{id}.csv
+# Full EML Metadata: http://#{website_name}.kbs.msu.edu/datatables/#{dataset.id}.eml
 #
     END
   end
@@ -437,8 +437,8 @@ class Datatable < ActiveRecord::Base
 
   def data_preview
     unless @data_preview
-      limit = self.excerpt_limit || 5
-      query = "#{self.object}  offset #{offset} limit #{limit}"
+      limit = excerpt_limit || 5
+      query = "#{object}  offset #{offset} limit #{limit}"
       @data_preview = ActiveRecord::Base.connection.execute(query)
     end
     @data_preview
@@ -447,7 +447,7 @@ class Datatable < ActiveRecord::Base
   def approved_data_query
     query = object
     if number_of_released_records
-      query = query + " offset #{offset}"
+      query += " offset #{offset}"
     end
     query
   end
@@ -468,7 +468,7 @@ class Datatable < ActiveRecord::Base
 
   def total_records
     unless @total_records
-      query = "select count(*) as count from (#{self.object}) as t1"
+      query = "select count(*) as count from (#{object}) as t1"
       result = ActiveRecord::Base.connection.execute(query).first
       @total_records = result['count'].to_i
     end
@@ -480,16 +480,16 @@ class Datatable < ActiveRecord::Base
   end
 
   def perform_query
-    query = self.object
+    query = object
     ActiveRecord::Base.connection.execute(query)
   end
 
   def related_tables
-    self.dataset.datatables - [self]
+    dataset.datatables - [self]
   end
 
   def related_files
-    self.dataset.dataset_files
+    dataset.dataset_files
   end
 
   def sponsor_name
@@ -509,7 +509,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def values
-    values = self.perform_query if self.is_sql
+    values = perform_query if is_sql
   end
 
   def number_of_header_lines
@@ -575,7 +575,7 @@ class Datatable < ActiveRecord::Base
 
   def eml_physical
     @eml.physical do
-      @eml.objectName title.gsub(/ /, '+')
+      @eml.objectName title.tr(' ', '+')
       @eml.encodingMethod 'None'
       eml_data_format
       @eml.distribution do
