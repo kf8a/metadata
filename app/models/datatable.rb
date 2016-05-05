@@ -24,8 +24,8 @@ class Datatable < ActiveRecord::Base
   has_and_belongs_to_many :protocols
   belongs_to              :study, touch: true
   belongs_to              :theme, touch: true
-  has_many                :variates, -> {order :weight}
-  has_many                :visualizations, -> {order :weight}
+  has_many                :variates, -> { order :weight }
+  has_many                :visualizations, -> { order :weight }
 
   validates :title,   presence: true
   validates :dataset, presence: true
@@ -34,18 +34,19 @@ class Datatable < ActiveRecord::Base
   accepts_nested_attributes_for :data_contributions, allow_destroy: true
   accepts_nested_attributes_for :variates, allow_destroy: true
 
-  scope :by_name, -> {order :name}
+  scope :by_name, -> { order :name }
 
   if Rails.env.production?
     has_attached_file :csv_cache,
-        :storage => :s3,
-        :bucket => 'metadata_production',
-        :path => "/datatables/csv/:id.:extension",
-        :s3_credentials => File.join(Rails.root, 'config', 's3.yml'),
-        :s3_permissions => 'authenticated-read'
+                      storage: :s3,
+                      bucket: 'metadata_production',
+                      path: '/datatables/csv/:id.:extension',
+                      s3_credentials: File.join(Rails.root, 'config', 's3.yml'),
+                      s3_permissions: 'authenticated-read'
   else
-    has_attached_file :csv_cache, :url => "/datatables/:id/download",
-        :path => ":rails_root/uploads/datatables/:attachment/:id.:extension"
+    has_attached_file :csv_cache,
+                      url: '/datatables/:id/download',
+                      path: ':rails_root/uploads/datatables/:attachment/:id.:extension'
   end
 
   validates_attachment_file_name :csv_cache, matches: [/csv\Z/ ]
@@ -74,7 +75,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def complete
-    self.completed_on = Date.today
+    self.completed_on = Time.zone.today
     save
   end
 
@@ -90,7 +91,7 @@ class Datatable < ActiveRecord::Base
     self.description = datatable_eml.css('entityDescription').text
     self.data_url = datatable_eml.css('physical distribution online url').text
     associated_models_from_eml(datatable_eml)
-    self.save
+    save
 
     self
   end
@@ -98,7 +99,7 @@ class Datatable < ActiveRecord::Base
   def associated_models_from_eml(datatable_eml)
     datatable_eml.css('methods methodStep').each do |protocol_eml|
       protocol_id = protocol_eml.css('protocol references').text.gsub('protocol_', '')
-      self.protocols << Protocol.where(:id => protocol_id)
+      self.protocols << Protocol.where(id: protocol_id)
     end
 
     datatable_eml.css('attributeList attribute').each do |variate_eml|
@@ -134,10 +135,10 @@ class Datatable < ActiveRecord::Base
     compile_personnel(dataset.affiliations)
   end
 
-  def compile_personnel(source, personnel={})
+  def compile_personnel(source, personnel = {})
     source.each do |contribution|
       if personnel[contribution.person]
-        personnel[contribution.person].push((contribution.role.try(:name)))
+        personnel[contribution.person].push(contribution.role.try(:name))
       else
         personnel[contribution.person] = [contribution.role.try(:name)].to_a
       end
@@ -146,7 +147,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def which_roles(person)
-    data_contributions.collect {|affiliation | affiliation.role if affiliation.person == person }.compact
+    data_contributions.collect { |affiliation| affiliation.role if affiliation.person == person }.compact
   end
 
   def leads
@@ -155,10 +156,11 @@ class Datatable < ActiveRecord::Base
   end
 
   def keyword_names
-    keywords.collect {|x| x.name}
+    keywords.collect { |x| x.name }
   end
+
   def related_keywords
-    #http://vocab.lternet.edu/webservice/keywordlist.php/all/csv
+    # http://vocab.lternet.edu/webservice/keywordlist.php/all/csv
     agent = Mechanize.new
     keywords.collect do |keyword|
       terms = agent.get("http://vocab.lternet.edu/webservice/keywordlist.php/all/csv/#{keyword}")
@@ -209,7 +211,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def deniers_of(user)
-    permissions.where(:user_id => user, :decision => 'denied').collect(&:owner)
+    permissions.where(user_id: user, decision: 'denied').collect(&:owner)
   end
 
   def sponsor
@@ -233,13 +235,13 @@ class Datatable < ActiveRecord::Base
   def can_be_downloaded_by?(user)
     if self.is_restricted?
       user.try(:admin?) ||
-      permitted?(user) ||
-      owned_by?(user)
+        permitted?(user) ||
+        owned_by?(user)
     elsif restricted_to_members?
       user.try(:admin?) ||
-      permitted?(user) ||
-      owned_by?(user) ||
-      member?(user)
+        permitted?(user) ||
+        owned_by?(user) ||
+        member?(user)
     else
       true
     end
@@ -251,33 +253,34 @@ class Datatable < ActiveRecord::Base
 
   def member?(user)
     sponsors = user.try(:sponsors).to_a
-    sponsors.include?(self.dataset.try(:sponsor))
+    sponsors.include?(dataset.try(:sponsor))
   end
 
   def within_interval?(start_date, end_date)
     extent = temporal_extent
 
     extent[:begin_date] &&
-        extent[:begin_date] >= start_date && extent[:end_date] <= end_date
+      extent[:begin_date] >= start_date &&
+      extent[:end_date] <= end_date
   end
 
   def title_and_years
-    return title if (self.begin_date.nil? or self.end_date.nil?)
+    return title if (begin_date.nil? || end_date.nil?)
     year_end = end_date.year
     year_start = begin_date.year
-    years = ""
+    years = ''
     if year_end == year_start
-        years = " (#{year_start})"
+      years = "(#{year_start})"
     else
-        years = " (#{year_start} to #{ ongoing? ? 'present': year_end})"
+      years = "(#{year_start} to #{ongoing? ? 'present' : year_end})"
     end
-    title + years
+    title + ' ' + years
   end
 
   def ongoing?
     return false if self.completed?
     next_expected_update = update_frequency_days.present? ? update_frequency_days : 365
-    expected_update = end_date.year + next_expected_update/265 + 2
+    expected_update = end_date.year + next_expected_update / 265 + 2
     expected_update > Time.now.year
   end
 
@@ -287,10 +290,10 @@ class Datatable < ActiveRecord::Base
 
   def to_eml(xml = ::Builder::XmlMarkup.new)
     @eml = xml
-    @eml.dataTable 'id' => Rails.application.routes.url_helpers.datatable_path(self) do
+    @eml.dataTable id: Rails.application.routes.url_helpers.datatable_path(self) do
       @eml.entityName "Kellogg Biological Station LTER: #{title} (#{name})"
       if description
-        text =  description.gsub(/<\/?[^>]*>/, "")
+        text = description.gsub(/<\/?[^>]*>/, '')
         @eml.entityDescription EML.text_sanitize(text) unless text.strip.empty?
       end
 #      eml_protocols if non_dataset_protocols.present?
@@ -300,11 +303,11 @@ class Datatable < ActiveRecord::Base
   end
 
   def variate_names
-    variates.collect {|variate| variate.try(:name)}
+    variates.collect { |variate| variate.try(:name) }
   end
 
   def variate_units
-    units = variates.collect {|variate| variate.unit.name if variate.unit }
+    units = variates.collect { |variate| variate.unit.name if variate.unit }
     units[0] = "##{units[0]}"
     units
   end
@@ -323,19 +326,19 @@ class Datatable < ActiveRecord::Base
 
   def csv_headers
     [
-    "# #{title}\n",
-    data_source,
-    terms_of_use,
-    variate_table,
-    data_comments,
-    variate_names.join(",") + "\n",
-    variate_units.join(",") + "\n"
+      "# #{title}\n",
+      data_source,
+      terms_of_use,
+      variate_table,
+      data_comments,
+      variate_names.join(',') + "\n",
+      variate_units.join(',') + "\n"
     ].join
   end
 
   def variate_table
     result = "#     VARIATE TABLE\n"
-    result += variates.collect do |variate| 
+    result += variates.collect do |variate|
       unit = variate.try(:unit)
       "# " + [variate.try(:name), unit.try(:name), variate.try(:description)].join("\t") + "\n"
     end.join
@@ -343,7 +346,7 @@ class Datatable < ActiveRecord::Base
     result
   end
 
-  def raw_csv(units=true)
+  def raw_csv(units = true)
     convert_to_csv(all_data, units)
   end
 
@@ -351,7 +354,7 @@ class Datatable < ActiveRecord::Base
     convert_to_csv(approved_data)
   end
 
-  def convert_to_csv(values, units=true)
+  def convert_to_csv(values, units = true)
     csv_string = CSV.generate do |csv|
       vars = variate_names
       csv << vars
@@ -360,7 +363,7 @@ class Datatable < ActiveRecord::Base
       end
       fields = values.fields
       unless fields.join(' ') =~ /[A-Z]/
-        vars =  variates.collect {|variate| variate.name.downcase }
+        vars = variates.collect { |variate| variate.name.downcase }
       end
       values.each do |row|
         csv << vars.collect { |variate| row[variate] }
@@ -396,19 +399,19 @@ class Datatable < ActiveRecord::Base
 # Original Data Source: http://#{website_name}.kbs.msu.edu/datatables/#{self.id}
 # The newest version of the data http://#{website_name}.kbs.msu.edu/datatables/#{self.id}.csv
 # Full EML Metadata: http://#{website_name}.kbs.msu.edu/datatables/#{self.dataset.id}.eml
-# 
+#
     END
   end
 
   def database_date_field
     values = ActiveRecord::Base.connection.execute(object)
     case
-      when values.fields.member?('sample_date') then 'sample_date'
-      when values.fields.member?('obs_date') then 'obs_date'
-      when values.fields.member?('date') then 'date'
-      when values.fields.member?('datetime') then 'datetime'
-      when values.fields.member?('harvest_date') then 'harvest_date'
-      when values.fields.member?('year') then 'year'
+    when values.fields.member?('sample_date') then 'sample_date'
+    when values.fields.member?('obs_date') then 'obs_date'
+    when values.fields.member?('date') then 'date'
+    when values.fields.member?('datetime') then 'datetime'
+    when values.fields.member?('harvest_date') then 'harvest_date'
+    when values.fields.member?('year') then 'year'
     end
   end
 
@@ -421,7 +424,7 @@ class Datatable < ActiveRecord::Base
         data_start_date, data_end_date = query_datatable_for_temporal_extent(query)
       end
     end
-    {:begin_date => data_start_date,:end_date => data_end_date}
+    { begin_date: data_start_date, end_date: data_end_date }
   end
 
   def update_temporal_extent
@@ -442,8 +445,8 @@ class Datatable < ActiveRecord::Base
   end
 
   def approved_data_query
-    query = self.object
-    if self.number_of_released_records
+    query = object
+    if number_of_released_records
       query = query + " offset #{offset}"
     end
     query
@@ -454,13 +457,13 @@ class Datatable < ActiveRecord::Base
   end
 
   def all_data
-    DataQuery.find(self.object)
+    DataQuery.find(object)
   end
 
   def offset
     self.number_of_released_records ||= total_records
     result = total_records - number_of_released_records
-    result < 0 ? 0 :result
+    result < 0 ? 0 : result
   end
 
   def total_records
@@ -477,7 +480,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def perform_query
-    query =  self.object
+    query = self.object
     ActiveRecord::Base.connection.execute(query)
   end
 
@@ -506,7 +509,6 @@ class Datatable < ActiveRecord::Base
   end
 
   def values
-    values = nil
     values = self.perform_query if self.is_sql
   end
 
@@ -523,7 +525,7 @@ class Datatable < ActiveRecord::Base
 
   def release_all_current_records
     self.number_of_released_records = perform_query.count
-    self.save
+    save # TODO: models should not save themselves
   end
 
   private
@@ -540,7 +542,8 @@ class Datatable < ActiveRecord::Base
   def query_datatable_for_temporal_extent(query)
     values = ActiveRecord::Base.connection.execute(query)
     dates = values[0]
-    min, max = dates['min'], dates['max']
+    min = dates['min']
+    max = dates['max']
     min = convert_year_to_date(min) if is_year?(min)
     max = convert_year_to_date(max) if is_year?(max)
 
