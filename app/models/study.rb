@@ -7,28 +7,28 @@ class Study < ActiveRecord::Base
 
   acts_as_nested_set
 
-  scope :by_weight, -> {order 'weight' }
-  scope :by_id,     -> {order 'id' }
+  scope :by_weight, -> { order 'weight' }
+  scope :by_id,     -> { order 'id' }
 
   before_destroy :check_for_treatments
   after_touch :touch_parent
 
   def study_url(website)
-    self.study_urls.where(:website_id => website.id).first.try(:url)
+    study_urls.find_by(website_id: website.id).try(:url)
   end
 
   def citation_treatments
-    treatments.where(:use_in_citations => true)
+    treatments.where(use_in_citations: true)
   end
 
   # check if there is more than one treatment associated with this study
-  def citation_treatments? 
+  def citation_treatments?
     citation_treatments.size > 1
   end
 
   # returns true if one or more of the tables passed is part of the current study
   def include_datatables?(table_query = [])
-    table_query = table_query.to_a  # thinking sphinks does not return an array
+    table_query = table_query.to_a # thinking sphinks does not return an array
     (self_and_descendants_datatables & table_query).any?
   end
 
@@ -36,14 +36,14 @@ class Study < ActiveRecord::Base
     all.to_a.keep_if { |study| study.include_datatables?(tables) }
   end
 
-  def self.find_all_roots_with_datatables(tables=[])
-    self.roots.order('weight').to_a.keep_if {|study| study.include_datatables?(tables) }
+  def self.find_all_roots_with_datatables(tables = [])
+    roots.order('weight').to_a.keep_if { |study| study.include_datatables?(tables) }
   end
 
   private
 
   def self_and_descendants_datatables
-    descendants.collect {|descendant| descendant.datatables }.flatten + datatables
+    descendants.collect { |descendant| descendant.datatables }.flatten + datatables
   end
 
   def check_for_treatments
@@ -54,7 +54,7 @@ class Study < ActiveRecord::Base
   end
 
   def touch_parent
-    self.parent.try(:touch)
+    parent.try(:touch)
   end
 end
 

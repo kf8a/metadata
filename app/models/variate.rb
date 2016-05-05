@@ -1,6 +1,8 @@
 require 'rexml/document'
 include REXML
 
+# A variate is a variable that is measured or recorded. It represents the
+# column in a datatable.
 class Variate < ActiveRecord::Base
   belongs_to :datatable, touch: true
   belongs_to :unit
