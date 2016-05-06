@@ -3,12 +3,12 @@ class Ownership < ActiveRecord::Base
   belongs_to :user
   belongs_to :datatable
 
-  validates_presence_of :user
-  validates_presence_of :datatable
+  validates :user, presence: true
+  validates :datatable, presence: true
 
-  validates_uniqueness_of :user_id, scope: :datatable_id
+  validates :user_id, uniqueness: { scope: :datatable_id }
 
-  def Ownership.create_ownerships(users, datatables, overwrite=false)
+  def self.create_ownerships(users, datatables, overwrite = false)
     datatables.each { |datatable| destroy_all(datatable_id: datatable) } if overwrite
     users.product(datatables).each do |user, table|
       ownership = Ownership.new(user_id: user, datatable_id: table)

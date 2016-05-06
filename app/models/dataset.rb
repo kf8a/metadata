@@ -4,6 +4,7 @@ require 'open-uri'
 require 'date'
 require 'eml'
 
+# A dataset is the central model datasets hold tables, protocols and contact into
 class Dataset < ActiveRecord::Base
   has_many                :affiliations, -> { order 'seniority' }
   has_many                :datatables, -> { order 'name' }, dependent: :nullify
@@ -26,7 +27,7 @@ class Dataset < ActiveRecord::Base
   acts_as_taggable_on :keywords
 
   after_touch do
-    self.increment_version
+    increment_version
   end
 
   def self.from_eml_file(file)
@@ -68,7 +69,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def increment_version
-    self.version = self.version + 1
+    self.version = version + 1
     save
   end
 
@@ -77,12 +78,12 @@ class Dataset < ActiveRecord::Base
   end
 
   def which_roles(person)
-    affiliations.collect {|affiliation | affiliation.role if affiliation.person == person }.compact
+    affiliations.collect { |affiliation| affiliation.role if affiliation.person == person }.compact
   end
 
   def leads
     lead_investigator = Role.find_by_name('lead investigator')
-    affiliations.collect {|affiliation| affiliation.person if affiliation.role == lead_investigator}.compact
+    affiliations.collect { |affiliation| affiliation.person if affiliation.role == lead_investigator }.compact
   end
 
   def valid_request?(subdomain)
@@ -112,7 +113,7 @@ class Dataset < ActiveRecord::Base
   # end
 
   def package_id
-    "knb-lter-kbs.#{metacat_id || self.id}.#{version}"
+    "knb-lter-kbs.#{metacat_id || id}.#{version}"
   end
 
   def datatable_protocols
@@ -154,11 +155,11 @@ class Dataset < ActiveRecord::Base
   end
 
   def begin_date
-    self.initiated || '1988-1-1'
+    initiated || '1988-1-1'
   end
 
   def end_date
-    self.data_end_date || Time.zone.today
+    data_end_date || Time.zone.today
   end
 
   # Return the bounding coordinates of all of the datatables in the dataset
@@ -177,7 +178,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def custom_units
-    self.datatables.collect do |datatable|
+    datatables.collect do |datatable|
       datatable.variates.collect do |variate|
         next unless variate.unit
         next if variate.unit.in_eml
@@ -207,7 +208,7 @@ class Dataset < ActiveRecord::Base
           logger.info custom_units
           custom_units.each do |unit|
             case unit
-            when unit.multiplier_to_si  && unit.parent_si  &&  unit.unit_type then
+            when unit.multiplier_to_si && unit.parent_si && unit.unit_type then
               @eml.tag!('stmml:unit',
                         id:             unit.name,
                         multiplierToSI: unit.multiplier_to_si,
@@ -288,9 +289,10 @@ class Dataset < ActiveRecord::Base
   def eml_intellectual_rights
     @eml.intellectualRights do
       @eml.para "Data in the KBS LTER core database may not be published without written permission of the lead investigator or project director. These restrictions are intended mainly to preserve the primary investigators' rights to first publication and to ensure that data users are aware of the limitations that may be associated with any specific data set. These restrictions apply to both the baseline data set and to the data sets associated with specific LTER-supported subprojects."
-        @eml.para "All publications of KBS data and images must acknowledge KBS LTER support."
+      @eml.para "All publications of KBS data and images must acknowledge KBS LTER support."
     end
   end
+
   def date_range
     daterange = temporal_extent
     starting = daterange[:begin_date]
@@ -305,16 +307,16 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_creator
-      if creators.empty?
-        @eml.creator do 
-          @eml.positionName 'Data Manager'
+    if creators.empty?
+      @eml.creator do
+        @eml.positionName 'Data Manager'
+      end
+    else
+      creators.each do |person|
+        @eml.creator do
+          person.eml_party(@eml)
         end
-      else
-        creators.each do |person|
-          @eml.creator do
-            person.eml_party(@eml)
-          end
-        end
+      end
     end
   end
 
@@ -346,16 +348,16 @@ class Dataset < ActiveRecord::Base
   end
 
   def place_keyword_set
-    ['LTER','KBS','Kellogg Biological Station', 'Hickory Corners', 'Michigan', 'Great Lakes']
+    ['LTER', 'KBS', 'Kellogg Biological Station', 'Hickory Corners', 'Michigan', 'Great Lakes']
   end
 
   def eml_keyword_sets
     @eml.keywordSet do
-      place_keyword_set.each do| keyword |
+      place_keyword_set.each do |keyword|
         @eml.keyword keyword, keywordType: 'place'
       end
     end
-    datatable_keywords = datatables.collect {|x| x.keyword_names}.flatten.uniq
+    datatable_keywords = datatables.collect { |x| x.keyword_names }.flatten.uniq
     unless datatable_keywords.empty?
       @eml.keywordSet do
         datatable_keywords.each do |keyword|
@@ -384,12 +386,12 @@ class Dataset < ActiveRecord::Base
     @eml.contact do
       @eml.organizationName 'Kellogg Biological Station'
       @eml.positionName 'Data Manager'
-      p = Person.new( organization:   'Kellogg Biological Station',
-                      street_address: '3700 East Gull Lake Drive',
-                      city:           'Hickory Corners',
-                      locale:         'Mi',
-                      postal_code:    '49060',
-                      country:        'USA')
+      p = Person.new(organization:   'Kellogg Biological Station',
+                     street_address: '3700 East Gull Lake Drive',
+                     city:           'Hickory Corners',
+                     locale:         'Mi',
+                     postal_code:    '49060',
+                     country:        'USA')
       p.eml_address(@eml)
       @eml.electronicMailAddress 'lter.data.manager@kbs.msu.edu'
       @eml.onlineUrl 'http://lter.kbs.msu.edu'

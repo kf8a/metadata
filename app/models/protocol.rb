@@ -79,7 +79,7 @@ class Protocol < ActiveRecord::Base
   end
 
   def replaced_by
-    Protocol.where(deprecates: id).first
+    Protocol.find_by(deprecates: id)
   end
 
   def dataset_description

@@ -1,3 +1,4 @@
+# Roles link people and and affiliations
 class Role < ActiveRecord::Base
   has_many :people, through: :affiliations
   has_many :affiliations
@@ -12,13 +13,12 @@ class Role < ActiveRecord::Base
   end
 
   def self.data_roles
-    self.where(role_type_id: RoleType.find_by_name('lter_dataset'))
+    where(role_type_id: RoleType.find_by_name('lter_dataset'))
   end
 
   def committee_role_name
     name.singularize if committee?
   end
-
 end
 
 # == Schema Information

@@ -1,5 +1,6 @@
+# A citation that represents a non peer reviewed report
 class ReportCitation < Citation
-  def formatted(options={})
+  def formatted(options = {})
     "#{author_and_year(options)} #{title_and_punctuation} #{editor_string}#{publication_string}#{volume_and_page}#{publisher_string}#{address_and_city}."
   end
 
@@ -14,21 +15,18 @@ class ReportCitation < Citation
   end
 
   def publisher_string
-    if publisher.present?
-      publisher + ", "
-    end
+    return '' unless publisher.present?
+    publisher + ', '
   end
 
   def publication_string
-    if publication.present?
-      publication + ". "
-    end
+    return '' unless publication.present?
+    publication + '. '
   end
 
   def address_and_city
-    if city.present?
-      city
-    end
+    return '' unless city.present?
+    city
   end
 end
 
