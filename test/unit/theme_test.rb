@@ -1,14 +1,13 @@
-require File.expand_path('../../test_helper',__FILE__) 
+require File.expand_path('../../test_helper', __FILE__)
 
 class ThemeTest < ActiveSupport::TestCase
   should have_and_belong_to_many :datasets
   should have_many :datatables
 
   context 'themes querying for datatables' do
-
-    setup do 
+    setup do
       @study = FactoryGirl.create(:study)
-      @datatable = FactoryGirl.create(:datatable, :study => @study)
+      @datatable = FactoryGirl.create(:datatable, study: @study)
 
       @theme = FactoryGirl.create(:theme)
       @sub_theme = FactoryGirl.create(:theme)
@@ -44,7 +43,7 @@ class ThemeTest < ActiveSupport::TestCase
       assert @theme.datatables?
     end
 
-    should 'return true if a datatable is in the current study' do  
+    should 'return true if a datatable is in the current study' do
       @datatable.theme = @theme
       assert @datatable.save
       assert @theme.datatables?(@study)
@@ -73,7 +72,7 @@ class ThemeTest < ActiveSupport::TestCase
       context 'include_datatables_from_study' do
         setup do
           @datatable.theme = @theme
-          study = FactoryGirl.create(:study)
+          FactoryGirl.create(:study)
           assert @datatable.save
         end
 
@@ -84,49 +83,44 @@ class ThemeTest < ActiveSupport::TestCase
         should 'return false if the datatable is in a different study ' do
           assert !@theme.include_datatables_from_study?([@datatable], @study2)
         end
-        
+
         should 'return false if there is an empty array passed' do
           assert !@theme.include_datatables_from_study?([], @study2)
           assert !@theme.include_datatables_from_study?([], @study)
         end
-        
+
         should 'only return datatables from the offered tables' do
           assert @theme.datatables_in_study(@study) == [@datatable]
         end
       end
     end
 
-    context "datatables_in_study function" do
-      context "and a study with datatables" do
+    context 'datatables_in_study function' do
+      context 'and a study with datatables' do
         setup do
           @datatable.theme = @theme
           assert @datatable.save
-          @datatable2 = FactoryGirl.create(:datatable, :study => @study, :theme => @theme)
-          @outside_datatable = FactoryGirl.create(:datatable, :theme => @theme)
+          @datatable2 = FactoryGirl.create(:datatable, study: @study, theme: @theme)
+          @outside_datatable = FactoryGirl.create(:datatable, theme: @theme)
         end
 
-        should "show all of the datatables in the study" do
+        should 'show all of the datatables in the study' do
           assert @theme.datatables_in_study(@study).include?(@datatable)
           assert @theme.datatables_in_study(@study).include?(@datatable2)
         end
 
-        should "not show datatable outside of the study" do
+        should 'not show datatable outside of the study' do
           assert !@theme.datatables_in_study(@study).include?(@outside_datatable)
         end
 
-        should "show only the datatables selected as test_datatables" do
+        should 'show only the datatables selected as test_datatables' do
           assert @theme.datatables_in_study(@study, [@datatable]).include?(@datatable)
           assert !@theme.datatables_in_study(@study, [@datatable]).include?(@datatable2)
         end
       end
     end
   end
-
 end
-
-
-
-
 
 # == Schema Information
 #
@@ -139,4 +133,3 @@ end
 #  lft       :integer
 #  rgt       :integer
 #
-

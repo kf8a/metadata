@@ -1,8 +1,10 @@
 require 'digest/sha1'
 
+# Keeps track of invites sent out to allow people to register to become members of a group
+# or by allowed to download a dataset
 class Invite < ActiveRecord::Base
-  validates_presence_of :email, message: "can't be blank"
-  validates_uniqueness_of :email, message: 'is already registered'
+  validates :email, presence: { message: "can't be blank" }
+  validates :email, uniqueness: { message: 'is already registered' }
 
   def self.unsent_invitations
     where(redeemed_at: nil, invite_code: nil)
