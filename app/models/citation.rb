@@ -20,60 +20,58 @@ class Citation < ActiveRecord::Base
   accepts_nested_attributes_for :authors
   accepts_nested_attributes_for :editors
 
-  validates_presence_of :authors
+  validates :authors, presence: true
 
   if Rails.env.production?
     after_commit :check_for_open_access_paper
 
     has_attached_file :pdf,
-        :storage => :s3,
-        :bucket => 'metadata-production',
-        :path => "/citations/pdfs/:id/:style/:basename.:extension",
-        :s3_credentials => File.join(Rails.root, 'config', 's3.yml'),
-        :s3_permissions => 'authenticated-read'
+                      storage: :s3,
+                      bucket: 'metadata-production',
+                      path: '/citations/pdfs/:id/:style/:basename.:extension',
+                      s3_credentials: File.join(Rails.root, 'config', 's3.yml'),
+                      s3_permissions: 'authenticated-read'
   else
-    has_attached_file :pdf, :url => "/citations/:id/download",
-        :path => ":rails_root/uploads/citations/:attachment/:id/:style/:basename.:extension"
+    has_attached_file :pdf,
+                       url: '/citations/:id/download',
+                       path: ':rails_root/uploads/citations/:attachment/:id/:style/:basename.:extension'
   end
 
   validates_attachment_file_name :pdf, matches: /pdf/
   # validates_attachment_content_type :pdf, content_type: /pdf/
   before_post_process :transliterate_file_name
 
-  # attr_accessible :Tag, :title, :abstract, 
-  # attr_protected :pdf_file_name, :pdf_content_type, :pdf_size
-
   # the REAL publications not including reports
-  scope :publications, -> { where(%q{type != 'ConferenceCitation'}).where(%q{type != 'BulletinCitation'}) }
+  scope :publications, -> { where("type != 'ConferenceCitation'").where("type != 'BulletinCitation'") }
 
-  scope :bookish, -> { where(%q{type in ('BookCitation', 'ChapterCitation')}) }
+  scope :bookish, -> { where("type in ('BookCitation', 'ChapterCitation')") }
 
-  scope :with_authors_by_sur_name_and_pub_year, -> { joins(:authors).where(:authors => {:seniority => 1}).
-    order('pub_year desc, authors.sur_name') }
+  scope :with_authors_by_sur_name_and_pub_year, -> { joins(:authors).where(authors: { seniority: 1 })
+                                                                    .order('pub_year desc, authors.sur_name') }
 
-  scope :published,   -> { where(:state => 'published').with_authors_by_sur_name_and_pub_year }
-  scope :submitted,   -> { where(:state => 'submitted').with_authors_by_sur_name_and_pub_year }
-  scope :forthcoming, -> { where(:state => 'forthcoming').with_authors_by_sur_name_and_pub_year }
+  scope :published,   -> { where(state: 'published').with_authors_by_sur_name_and_pub_year }
+  scope :submitted,   -> { where(state: 'submitted').with_authors_by_sur_name_and_pub_year }
+  scope :forthcoming, -> { where(state: 'forthcoming').with_authors_by_sur_name_and_pub_year }
 
-  scope :books, -> { where(:type => 'book') }
+  scope :books, -> { where(type: 'book') }
 
-  scope :next, lambda { |p| {:conditions => ["id > ?", p.id], :limit => 1, :order => "id"} }
-  scope :previous, lambda { |p| {:conditions => ["id < ?", p.id], :limit => 1, :order => "id desc"} }
+  scope :next, ->(p) { { conditions: ['id > ?', p.id], limit: 1, order: 'id' } }
+  scope :previous, lambda { |p| { conditions: ['id < ?', p.id], limit: 1, order: 'id desc' } }
 
   workflow do
     state :submitted do
-      event :accept,  :transitions_to => :forthcoming
-      event :draft,   :transitions_to => :draft
-      event :publish, :transitions_to => :published
+      event :accept,  transitions_to: :forthcoming
+      event :draft,   transitions_to: :draft
+      event :publish, transitions_to: :published
     end
     state :draft do
-      event :submit,  :transitions_to => :submitted
+      event :submit,  transitions_to: :submitted
     end
     state :forthcoming do
-      event :publish, :transitions_to => :published
+      event :publish, transitions_to: :published
     end
     state :published do
-      event :accept,  :transitions_to => :forthcoming
+      event :accept,  transitions_to: :forthcoming
     end
   end
 
@@ -86,7 +84,7 @@ class Citation < ActiveRecord::Base
   end
 
   def Citation.by_date(date)
-    query_date = Date.civil(date['year'].to_i,date['month'].to_i,date['day'].to_i)
+    query_date = Date.civil(date['year'].to_i, date['month'].to_i, date['day'].to_i)
     where('updated_at > ?', query_date)
   end
 
@@ -96,19 +94,19 @@ class Citation < ActiveRecord::Base
 
   def Citation.to_bib(array_of_citations)
     bib = BibTeX::Bibliography.new
-    array_of_citations.each {|citation| bib << citation.to_bib}
+    array_of_citations.each { |citation| bib << citation.to_bib }
 
     bib.to_s
   end
 
   def Citation.by_type(type)
-    where(:type => type)
+    where(type: type)
   end
 
   def Citation.sorted_by(sorter)
     sorter.downcase!
-    #Since primary author and date is default, it is already sorted that way
-    unless sorter == "primary author and date(default)"
+    # Since primary author and date is default, it is already sorted that way
+    unless sorter == 'primary author and date(default)'
       order(sorter)
     end
   end
@@ -148,9 +146,9 @@ class Citation < ActiveRecord::Base
     self.ending_page_number = end_page
   end
 
-  def get_attribute_from_ris_stanza(stanza, attribute_name, ris_name=nil)
+  def get_attribute_from_ris_stanza(stanza, attribute_name, ris_name = nil)
     ris_name = attribute_name.to_sym unless ris_name
-    self.send(attribute_name + "=", stanza[ris_name])
+    self.send(attribute_name + '=', stanza[ris_name])
   end
 
   def get_attributes_from_ris_stanza(stanza, attribute_array)
@@ -161,17 +159,11 @@ class Citation < ActiveRecord::Base
 
   def Citation.citation_from_ris_stanza(stanza, pdf_folder)
     citation = type_from_ris_type(stanza[:type]).new
-    same_name_attributes = ['title',
-                            'secondary_title',
-                            'series_title',
-                            'pub_year',
-                            'volume',
-                            'abstract',
-                            'doi']
+    same_name_attributes = %w(title secondary_title series_title pub_year volume abstract doi)
     citation.get_attributes_from_ris_stanza(stanza, same_name_attributes)
     citation.get_attribute_from_ris_stanza(stanza, 'publication', :journal)
     citation.date_from_ris_date(stanza[:primary_date]) if stanza[:primary_date]
-    citation.page_number_from_ris( stanza[:start_page], stanza[:end_page]) 
+    citation.page_number_from_ris(stanza[:start_page], stanza[:end_page])
     citation.pdf_from_ris_pdf(stanza[:pdf], pdf_folder) if pdf_folder && stanza[:pdf]
 
     citation.save
@@ -180,7 +172,7 @@ class Citation < ActiveRecord::Base
   end
 
   def date_from_ris_date(ris_date)
-    if ris_date.to_i != 0 #it is just an integer string
+    if ris_date.to_i != 0 # it is just an integer string
       self.pub_date = Date.new(ris_date.to_i)
     else
       self.pub_date = Date.parse(ris_date)
@@ -195,14 +187,14 @@ class Citation < ActiveRecord::Base
       if File.exist?(real_path)
         self.pdf = File.open(real_path)
       else
-        p "No such file: #{real_path}"
+        logger.info "No such file: #{real_path}"
       end
     end
   end
 
   def authors_from_ris_authors(ris_authors)
     ris_authors.each_with_index do |author_name, index|
-      self.authors.create(:name => author_name, :seniority => index)
+      self.authors.create(name: author_name, seniority: index)
     end
   end
 
@@ -230,14 +222,14 @@ class Citation < ActiveRecord::Base
   end
 
   def file_title
-    "#{self.id}-#{self.title}-#{self.pub_year}"
+    "#{id}-#{title}-#{pub_year}"
   end
 
   def book?
     citation_type.try(:name) == 'book'
   end
 
-  def formatted(options={})
+  def formatted(options = {})
     book? ? formatted_book(options) : formatted_article(options)
   end
 
@@ -252,22 +244,22 @@ class Citation < ActiveRecord::Base
 
   def bib_hash
     hash = {
-      :abstract   => abstract,
-      :author     => authors.collect { |author| author.full_name }.join(' and '),
-      :editor     => editors.collect { |editor| editor.full_name }.join(' and '),
-      :title      => title,
-      :publisher  => publisher,
-      :year       => pub_year.to_s,
-      :address    => address,
-      :note       => notes,
-      :journal    => publication,
-      :pages      => page_numbers,
-      :volume     => volume,
-      :number     => issue,
-      :series     => series_title,
-      :doi        => doi,
-      :isbn       => isbn}
-    hash.delete_if { |key, value| value.blank? }
+      abstract:  abstract,
+      author:    authors.collect { |author| author.full_name }.join(' and '),
+      editor:    editors.collect { |editor| editor.full_name }.join(' and '),
+      title:     title,
+      publisher: publisher,
+      year:      pub_year.to_s,
+      address:   address,
+      note:      notes,
+      journal:   publication,
+      pages:     page_numbers,
+      volume:    volume,
+      number:    issue,
+      series:    series_title,
+      doi:       doi,
+      isbn:      isbn }
+    hash.delete_if { |_, value| value.blank? }
   end
 
   def to_enw
@@ -275,12 +267,12 @@ class Citation < ActiveRecord::Base
     endnote += "#{volume_to_enw}#{page_numbers_to_enw}#{pub_year_to_enw}#{abstract_to_enw}#{doi_to_enw}"
     endnote += "#{publisher_to_enw}#{publisher_url_to_enw}#{isbn_to_enw}#{city_to_enw}"
     endnote += "#{accession_number_to_enw}"
-    endnote +=  "\n"
+    endnote += "\n"
     endnote
   end
 
   def self.select_options
-    classes = descendants.map{ |klass| klass.to_s }.sort
+    classes = descendants.map { |klass| klass.to_s }.sort
     classes.collect { |klass| [klass.gsub(/Citation/,''), klass] }
   end
 
@@ -294,7 +286,7 @@ class Citation < ActiveRecord::Base
     end
   end
 
-  def formatted(options={})
+  def formatted(options = {})
     "#{author_and_year(options)} #{title_and_punctuation} #{publication} #{volume_and_page}".rstrip
   end
 
@@ -326,10 +318,10 @@ class Citation < ActiveRecord::Base
 
   def volume_and_page
     if volume.blank?
-      if self.doi.blank?
-        ""
+      if doi.blank?
+        ''
       else
-        "doi: #{self.doi}"
+        "doi: #{doi}"
       end
     elsif page_numbers.blank?
       "#{volume}."
@@ -366,7 +358,7 @@ class Citation < ActiveRecord::Base
 
   def page_numbers_book
     if page_numbers.blank?
-      ""
+      ''
     elsif page_numbers.include?('-')
       "Pages #{page_numbers}"
     else
@@ -375,11 +367,11 @@ class Citation < ActiveRecord::Base
   end
 
   def page_numbers_to_enw
-    page_numbers.blank? ? "" : "\n%P #{page_numbers}"
+    page_numbers.blank? ? '' : "\n%P #{page_numbers}"
   end
 
   def pub_year_to_enw
-    pub_year? ? "\n%D #{pub_year}" : ""
+    pub_year? ? "\n%D #{pub_year}" : ''
   end
 
   # add Abstract first removing any line endings
@@ -388,23 +380,23 @@ class Citation < ActiveRecord::Base
   end
 
   def doi_to_enw
-    doi? ? "\n%R #{doi}" : ""
+    doi? ? "\n%R #{doi}" : ''
   end
 
   def isbn_to_enw
-    isbn? ? "\n%@ #{isbn}" : ""
+    isbn? ? "\n%@ #{isbn}" : ''
   end
 
   def publisher_to_enw
-    publisher? ? "\n%I #{publisher}" : ""
+    publisher? ? "\n%I #{publisher}" : ''
   end
 
   def publisher_url_to_enw
-    publisher_url? ? "\n%U #{publisher_url}" : ""
+    publisher_url? ? "\n%U #{publisher_url}" : ''
   end
 
   def city_to_enw
-    city? ? "\n%C #{city}" : ""
+    city? ? "\n%C #{city}" : ''
   end
 
   def title_to_enw
@@ -412,25 +404,24 @@ class Citation < ActiveRecord::Base
   end
 
   def pub_year_with_punctuation 
-    pub_year ?  "#{pub_year}." : ""
+    pub_year ?  "#{pub_year}." : ''
   end
 
-  def author_and_year(options={})
+  def author_and_year(options = {})
     if options[:long]
-      authors.empty? ? "#{pub_year_with_punctuation}" : "#{author_string} #{pub_year_with_punctuation}".rstrip
+      authors.empty? ? pub_year_with_punctuation.to_s : "#{author_string} #{pub_year_with_punctuation}".rstrip
     else
-      authors.empty? ? "#{pub_year_with_punctuation}" : "#{short_author_string} #{pub_year_with_punctuation}".rstrip
+      authors.empty? ? pub_year_with_punctuation.to_s : "#{short_author_string} #{pub_year_with_punctuation}".rstrip
     end
   end
 
   # use natural order for second and subsequent authors
-  # 
   def author_string
-    my_authors = self.authors.to_a
+    my_authors = authors.to_a
     if my_authors.length > 1
       last_author = my_authors.pop
       first_author = my_authors.shift
-      author_array = my_authors.collect {|author| "#{author.formatted(:natural)}"}
+      author_array = my_authors.collect { |author| "#{author.formatted(:natural)}" }
       author_array.push("#{last_author.formatted(:natural)}.")
       author_array.unshift("#{first_author.formatted}")
     else
@@ -440,9 +431,9 @@ class Citation < ActiveRecord::Base
   end
 
   def editor_string
-   if editors.present? 
+    if editors.present?
       editor_array = editors.collect { |editor| editor.formatted(:natural) }
-      eds = editor_array.to_sentence(:two_words_connector => ', and ')
+      eds = editor_array.to_sentence(two_words_connector: ', and ')
       " in #{eds}, eds. "
     end
   end
@@ -462,13 +453,13 @@ class Citation < ActiveRecord::Base
   def set_as_block(name_of_class, string_of_names = '')
     table_name = name_of_class.tableize
     self.send(table_name).clear
-    current_seniority = 1   #TODO should this be zero based?
+    current_seniority = 1 # TODO: should this be zero based?
     string_of_names.each_line do |name_string|
       if name_string[0].match('\d')
         treat_as_token_list(name_of_class, name_string)
       else
-        self.send(table_name) << name_of_class.constantize.create(:name      => name_string,
-                                                                  :seniority => current_seniority)
+        self.send(table_name) << name_of_class.constantize.create(name: name_string,
+                                                                  seniority: current_seniority)
       end
 
       current_seniority += 1
@@ -476,7 +467,7 @@ class Citation < ActiveRecord::Base
   end
 
   def transliterate(str)
-    str.gsub(/_/,'-').gsub(/ /,'-')
+    str.tr('_', '-').tr(' ', '-')
   end
 
   def transliterate_file_name

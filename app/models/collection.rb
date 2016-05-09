@@ -3,34 +3,22 @@
 class Collection < ActiveRecord::Base
   belongs_to :datatable
 
-  validates_presence_of :datatable
+  validates :datatable, presence: true
 
-  def dataset
-    self.datatable.dataset
-  end
+  delegate :dataset, to: :datatable
 
-  def keywords
-    self.datatable.keywords
-  end
+  delegate :keywords, to: :datatable
 
-  def perform_query
-    datatable.perform_query
-  end
+  delegate :perform_query, to: :datatable
 
-  def protocols
-    self.dataset.protocols
-  end
+  delegate :protocols, to: :dataset
 
-  def title_and_years
-    self.datatable.title_and_years
-  end
+  delegate :title_and_years, to: :datatable
+
+  delegate :variates, to: :datatable
 
   def values
-    @values ||= self.perform_query
-  end
-
-  def variates
-    self.datatable.variates
+    @values ||= perform_query
   end
 end
 
