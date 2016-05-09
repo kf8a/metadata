@@ -56,7 +56,7 @@ class ScoreCard
       query_result    = db_connection.execute(query)
       approved_result = db_connection.execute(approved_query)
 
-    rescue Exception => e
+    rescue Exception
       query_result = []
       approved_result = []
     end
@@ -96,21 +96,20 @@ class ScoreCard
   # send all of the scores to a csv file
   def self.scores_to_csv
     CSV.open('scores.csv', 'w') do |csv|
-      Datatable.all.each do |datatable|
+      Datatable.find_each do |datatable|
         next unless datatable.dataset.sponsor_id == 1
         next unless datatable.is_sql
         # exclude climdb datatables and archive
         next if [309, 300, 301, 175, 127, 82].include? datatable.id
         s = score(datatable)
-        if s
-          s.each do |a|
-            csv << [datatable.id,
-                    datatable.completed,
-                    datatable.name,
-                    datatable.title,
-                    a[0],
-                    a[1][:score]]
-          end
+        next unless s
+        s.each do |a|
+          csv << [datatable.id,
+                  datatable.completed,
+                  datatable.name,
+                  datatable.title,
+                  a[0],
+                  a[1][:score]]
         end
       end
     end
