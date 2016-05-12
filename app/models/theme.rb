@@ -1,3 +1,4 @@
+# Themes are used to organize datatables in the index page
 class Theme < ActiveRecord::Base
   acts_as_nested_set
 
@@ -38,13 +39,15 @@ class Theme < ActiveRecord::Base
   end
 
   def self_and_descendants_datatables
-    my_datatables = descendants.collect { |descendant| descendant.datatables }.flatten
+    my_datatables = descendants.collect(&:datatables).flatten
     my_datatables + datatables
   end
 
   def datatables_in_study(study, test_datatables = [])
     if test_datatables.any?
-      datatables.collect { |table| table if table.study == study && test_datatables.include?(table) }.compact
+      datatables.collect do |table|
+        table if table.study == study && test_datatables.include?(table)
+      end.compact
     else
       datatables.collect { |table| table if table.study == study }.compact
     end

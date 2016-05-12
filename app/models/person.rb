@@ -1,7 +1,9 @@
 class Person < ActiveRecord::Base
   has_many :affiliations, dependent: :destroy
-  has_many :lter_roles, -> { where(['role_type_id = ?', RoleType.where(name: 'lter').first])}, source: :role, through: :affiliations
-  has_many :dataset_roles, -> { where ['role_type_id = ?', RoleType.find_by_name('lter_dataset')] }, through: :affiliations, source: :role
+  has_many :lter_roles, -> { where(['role_type_id = ?', RoleType.find_by(name: 'lter')]) },
+           source: :role, through: :affiliations
+  has_many :dataset_roles, -> { where ['role_type_id = ?', RoleType.find_by(name: 'lter_dataset')] },
+           through: :affiliations, source: :role
   has_many :roles, through: :affiliations
   has_many :datasets, through: :affiliations, source: :dataset
   has_many :scribbles
@@ -40,7 +42,7 @@ class Person < ActiveRecord::Base
   end
 
   def only_emeritus?
-    lter_roles.all? { |role| role.emeritus? }
+    lter_roles.all?(&:emeritus?)
   end
 
   def expanded_name
@@ -140,7 +142,7 @@ class Person < ActiveRecord::Base
   end
 
   def basic_attributes_from_eml(person_eml)
-    self.given_name   = person_eml.css('individualName givenName').collect { |element| element.text }.join(' ')
+    self.given_name   = person_eml.css('individualName givenName').collect(&:text).join(' ')
     self.sur_name     = person_eml.css('individualName surName').text
     self.organization = person_eml.css('organizationName').text
     self.email        = person_eml.css('electronicMailAddress').text

@@ -49,7 +49,7 @@ class Variate < ActiveRecord::Base
   end
 
   def human_name
-    self.unit.try(:human_name)
+    unit.try(:human_name)
   end
 
   private

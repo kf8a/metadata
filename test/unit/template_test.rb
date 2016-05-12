@@ -1,13 +1,10 @@
-require File.expand_path('../../test_helper',__FILE__) 
+require File.expand_path('../../test_helper', __FILE__)
 
+# Templates were supposed to allow customization of sites
+# TODO: remove the class
 class TemplateTest < ActiveSupport::TestCase
- should belong_to :website
- 
+  should belong_to :website
 end
-
-
-
-
 
 # == Schema Information
 #
@@ -21,4 +18,3 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #
-
