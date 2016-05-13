@@ -1,3 +1,4 @@
+# Represents a person in the system
 class Person < ActiveRecord::Base
   has_many :affiliations, dependent: :destroy
   has_many :lter_roles, -> { where(['role_type_id = ?', RoleType.find_by(name: 'lter')]) },
