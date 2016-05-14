@@ -1,7 +1,7 @@
+# Serves protocols
 class ProtocolsController < ApplicationController
-
-  before_filter :admin?, :except => [:index, :show, :download]  if Rails.env != 'development'
-  before_filter :get_protocol, :only => [:edit, :update, :destroy]
+  before_action :admin?, except: [:index, :show, :download] if Rails.env != 'development'
+  before_action :get_protocol, only: [:edit, :update, :destroy]
 
   # GET /protocols
   # GET /protocols.xml
@@ -10,11 +10,11 @@ class ProtocolsController < ApplicationController
     @website = website
 
     @protocols = website.protocols.where('active is true').order('title')
-    @protocol_themes = website.protocols.all_tag_counts(:on=>:themes).order('name')
-    @experiment_protocols = website.protocols.tagged_with(:experiments).where(:active => true).order('title')
+    @protocol_themes = protocol_themes
+    @experiment_protocols = experiment_protocols
 
+    @untagged_protocols = untagged_protocols
 
-    @untagged_protocols = website.protocols.where(:active=>true).all.collect {|e| e if e.theme_list.blank? }.compact
     @retired_protocols = website.protocols.where('active is false').order('title')
 
     respond_with @protocols
@@ -24,14 +24,14 @@ class ProtocolsController < ApplicationController
   # GET /protocols/1.xml
   def show
     store_location
-    @protocol = website.protocols.where("id = ?", params[:id]).first
+    @protocol = website.protocols.where('id = ?', params[:id]).first
 
     if @protocol
       respond_with @protocol
     else
       respond_to do |format|
-        format.html { redirect_to protocols_url}
-        format.xml  { head :not_found}
+        format.html { redirect_to protocols_url }
+        format.xml  { head :not_found }
       end
     end
   end
@@ -64,7 +64,7 @@ class ProtocolsController < ApplicationController
   # PUT /protocols/1
   # PUT /protocols/1.xml
   def update
-    params[:protocol].merge!({:updated_by => current_user})
+    params[:protocol].merge!(updated_by: current_user)
     get_all_websites
     if params[:new_version]
       old_protocol = Protocol.find(params[:id])
@@ -80,12 +80,14 @@ class ProtocolsController < ApplicationController
   end
 
   def download
-    head(:not_found) and return unless (protocol = Protocol.find_by_id(params[:id]))
+    head(:not_found) && return unless (protocol = Protocol.find_by_id(params[:id]))
     path = protocol.pdf.path(params[:style])
     if Rails.env.production?
-        redirect_to(protocol.pdf.s3_object(params[:style]).url_for(:read ,:secure => true, :expires_in => 10.seconds).to_s)
+      redirect_to(protocol.pdf.s3_object(params[:style]).url_for(:read,
+                                                                 secure: true,
+                                                                 expires_in: 10.seconds).to_s)
     else
-      send_file  path, :type => 'application/pdf', :disposition => 'inline'
+      send_file path, type: 'application/pdf', disposition: 'inline'
     end
   end
 
@@ -109,7 +111,21 @@ class ProtocolsController < ApplicationController
   end
 
   def find_website
+  end
 
+  def protocol_themes
+    website.protocols.all_tag_counts(on: themes).order('name')
+  end
+
+  def experiment_protocols
+    website.protocols.tagged_with(:experiments)
+           .where(active: true).order('title')
+  end
+
+  def untagged_protocols
+    website.protocols.where(active: true)
+           .all.collect { |e| e if e.theme_list.blank? }
+           .compact
   end
 
   def get_protocol
@@ -117,10 +133,10 @@ class ProtocolsController < ApplicationController
   end
 
   def protocol_params
-    params.require(:protocol).permit( :theme_list, :title, :description, :updated_by, :active,
-                                    :body, :abstract, :dataset_id, :in_use_from, :in_use_to, 
-                                    :tag, :website_ids, :name, {person_ids: []}, 
-                                    {website_ids:[]}, {datatable_ids: []},
-                                    :change_summary, :pdf)
+    params.require(:protocol).permit(:theme_list, :title, :description, :updated_by, :active,
+                                     :body, :abstract, :dataset_id, :in_use_from, :in_use_to,
+                                     :tag, :website_ids, :name, { person_ids: [] },
+                                     { website_ids: [] }, { datatable_ids: [] },
+                                     :change_summary, :pdf)
   end
 end

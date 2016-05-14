@@ -1,14 +1,15 @@
 require 'citation_format'
 
+# Represents an author. This should be linked people in a better world
 class Author < ActiveRecord::Base
   include CitationFormat
 
   belongs_to :citation
 
-  validates_presence_of :seniority
+  validates :seniority, presence: true
 
-  def Author.to_enw
-    all.collect { |author| author.to_enw }.join
+  def self.to_enw
+    all.collect(&:to_enw).join
   end
 
   def to_enw

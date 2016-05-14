@@ -1,13 +1,14 @@
 require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 
 describe Variate do
-
-  describe "eml importation" do
+  describe 'eml importation' do
     before(:each) do
-      @variate = FactoryGirl.create(:variate, :name => 'EMLVariate', :description => 'A variate test of eml')
+      @variate = FactoryGirl.create(:variate,
+                                    name: 'EMLVariate',
+                                    description: 'A variate test of eml')
     end
 
-    it "should import variates" do
+    it 'should import variates' do
       eml_content = @variate.to_eml
       eml_element = Nokogiri::XML(eml_content).css('attribute').first
       imported_variate = Variate.from_eml(eml_element)
@@ -18,7 +19,7 @@ describe Variate do
       expect(imported_attributes).to eq variate_attributes
     end
 
-    it "should import new variates" do
+    it 'should import new variates' do
       eml_content = @variate.to_eml
       variate_id = @variate.id
       right_scale = @variate.measurement_scale
@@ -31,6 +32,6 @@ describe Variate do
       expect(imported_variate.measurement_scale).to eq right_scale
     end
 
-    #TODO add tests for all of the different format types converting from EML
+    # TODO: add tests for all of the different format types converting from EML
   end
 end

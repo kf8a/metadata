@@ -6,16 +6,16 @@ class Citation < ActiveRecord::Base
 
   workflow_column :state
 
-  versioned :dependent => :tracking
+  versioned dependent: :tracking
 
-  has_many :authors, -> { order(:seniority)}, dependent: :destroy
-  has_many :editors, -> { order(:seniority)}, dependent: :destroy
+  has_many :authors, -> { order(:seniority) }, dependent: :destroy
+  has_many :editors, -> { order(:seniority) }, dependent: :destroy
 
   belongs_to :citation_type
   belongs_to :website
 
   has_and_belongs_to_many :datatables
-  has_and_belongs_to_many :treatments,  conditions: { use_in_citations: true }
+  has_and_belongs_to_many :treatments, conditions: { use_in_citations: true }
 
   accepts_nested_attributes_for :authors
   accepts_nested_attributes_for :editors
@@ -33,8 +33,8 @@ class Citation < ActiveRecord::Base
                       s3_permissions: 'authenticated-read'
   else
     has_attached_file :pdf,
-                       url: '/citations/:id/download',
-                       path: ':rails_root/uploads/citations/:attachment/:id/:style/:basename.:extension'
+                      url: '/citations/:id/download',
+                      path: ':rails_root/uploads/citations/:attachment/:id/:style/:basename.:extension'
   end
 
   validates_attachment_file_name :pdf, matches: /pdf/
@@ -75,35 +75,35 @@ class Citation < ActiveRecord::Base
     end
   end
 
-  def Citation.by_treatment(treatment)
+  def self.by_treatment(treatment)
     includes(:treatments).references(:treatments).where('treatments.id = ?', treatment)
   end
 
-  def Citation.from_website(website_id)
+  def self.from_website(website_id)
     where(website_id: website_id)
   end
 
-  def Citation.by_date(date)
+  def self.by_date(date)
     query_date = Date.civil(date['year'].to_i, date['month'].to_i, date['day'].to_i)
     where('updated_at > ?', query_date)
   end
 
-  def Citation.to_enw(array_of_citations)
-    array_of_citations.collect { |citation| citation.to_enw }.join("\n") + "\n"
+  def self.to_enw(array_of_citations)
+    array_of_citations.collect(&:to_enw).join("\n") + "\n"
   end
 
-  def Citation.to_bib(array_of_citations)
+  def self.to_bib(array_of_citations)
     bib = BibTeX::Bibliography.new
     array_of_citations.each { |citation| bib << citation.to_bib }
 
     bib.to_s
   end
 
-  def Citation.by_type(type)
+  def self.by_type(type)
     where(type: type)
   end
 
-  def Citation.sorted_by(sorter)
+  def self.sorted_by(sorter)
     sorter.downcase!
     # Since primary author and date is default, it is already sorted that way
     unless sorter == 'primary author and date(default)'
@@ -111,7 +111,7 @@ class Citation < ActiveRecord::Base
     end
   end
 
-  def Citation.type_from_ris_type(type)
+  def self.type_from_ris_type(type)
     case type
     when 'JOUR', 'MGZN'
       ArticleCitation
@@ -130,7 +130,7 @@ class Citation < ActiveRecord::Base
     end
   end
 
-  def Citation.from_ris(ris_text, pdf_folder = nil)
+  def self.from_ris(ris_text, pdf_folder = nil)
     parser = RisParser::RisParser.new
     trans = RisParser::RisParserTransform.new
     parsed_text = trans.apply(parser.parse(ris_text))
@@ -148,7 +148,7 @@ class Citation < ActiveRecord::Base
 
   def get_attribute_from_ris_stanza(stanza, attribute_name, ris_name = nil)
     ris_name = attribute_name.to_sym unless ris_name
-    self.send(attribute_name + '=', stanza[ris_name])
+    send(attribute_name + '=', stanza[ris_name])
   end
 
   def get_attributes_from_ris_stanza(stanza, attribute_array)
@@ -194,7 +194,7 @@ class Citation < ActiveRecord::Base
 
   def authors_from_ris_authors(ris_authors)
     ris_authors.each_with_index do |author_name, index|
-      self.authors.create(name: author_name, seniority: index)
+      authors.create(name: author_name, seniority: index)
     end
   end
 
@@ -208,8 +208,8 @@ class Citation < ActiveRecord::Base
 
   def treat_as_token_list(name_of_class, token_string)
     token_array = token_string.split(',')
-    token_array.each do |token|
-      self.send(name_of_class.tableize) << name_of_class.constantize.find_by_id(author_id)
+    token_array.each do
+      send(name_of_class.tableize) << name_of_class.constantize.find_by_id(author_id)
     end
   end
 
@@ -230,7 +230,7 @@ class Citation < ActiveRecord::Base
   end
 
   def formatted(options = {})
-    book? ? formatted_book(options) : formatted_article(options)
+    "#{author_and_year(options)} #{title_and_punctuation} #{publication} #{volume_and_page}".rstrip
   end
 
   def to_bib
@@ -245,8 +245,8 @@ class Citation < ActiveRecord::Base
   def bib_hash
     hash = {
       abstract:  abstract,
-      author:    authors.collect { |author| author.full_name }.join(' and '),
-      editor:    editors.collect { |editor| editor.full_name }.join(' and '),
+      author:    authors.collect(&:full_name).join(' and '),
+      editor:    editors.collect(&:full_name).join(' and '),
       title:     title,
       publisher: publisher,
       year:      pub_year.to_s,
@@ -273,7 +273,7 @@ class Citation < ActiveRecord::Base
 
   def self.select_options
     classes = descendants.map { |klass| klass.to_s }.sort
-    classes.collect { |klass| [klass.gsub(/Citation/,''), klass] }
+    classes.collect { |klass| [klass.gsub(/Citation/, ''), klass] }
   end
 
   def short_author_string
@@ -284,10 +284,6 @@ class Citation < ActiveRecord::Base
     else
       ''
     end
-  end
-
-  def formatted(options = {})
-    "#{author_and_year(options)} #{title_and_punctuation} #{publication} #{volume_and_page}".rstrip
   end
 
   def make_pdf_public
@@ -312,7 +308,7 @@ class Citation < ActiveRecord::Base
     if book?
       "\n%B #{publication}" + "\n%I #{publisher}" + "\n%C #{address}"
     else
-      publication.present? ? "\n%J #{publication}" : ""
+      publication.present? ? "\n%J #{publication}" : ''
     end
   end
 
@@ -331,7 +327,7 @@ class Citation < ActiveRecord::Base
   end
 
   def volume_to_enw
-    volume.present? ? "\n%V #{volume}" : ""
+    volume.present? ? "\n%V #{volume}" : ''
   end
 
   def accession_number_to_enw
@@ -339,9 +335,9 @@ class Citation < ActiveRecord::Base
   end
 
   def title_and_punctuation
-    return '' if self.title.blank?
-    self.title.rstrip!
-    if (title =~ /[\?\!\.]$/)
+    return '' if title.blank?
+    title.rstrip!
+    if title =~ /[\?\!\.]$/
       title
     else
       title + '.'
@@ -352,7 +348,7 @@ class Citation < ActiveRecord::Base
     if start_page_number.to_i < ending_page_number.to_i
       "#{start_page_number}-#{ending_page_number}"
     else
-      "#{start_page_number}"
+      start_page_number.to_s
     end
   end
 
@@ -376,7 +372,7 @@ class Citation < ActiveRecord::Base
 
   # add Abstract first removing any line endings
   def abstract_to_enw
-    abstract? ? "\n%X #{abstract.delete("\n").delete("\r")}" : ""
+    abstract? ? "\n%X #{abstract.delete("\n").delete("\r")}" : ''
   end
 
   def doi_to_enw
@@ -403,7 +399,7 @@ class Citation < ActiveRecord::Base
     "%T #{title}"
   end
 
-  def pub_year_with_punctuation 
+  def pub_year_with_punctuation
     pub_year ?  "#{pub_year}." : ''
   end
 
@@ -452,14 +448,14 @@ class Citation < ActiveRecord::Base
 
   def set_as_block(name_of_class, string_of_names = '')
     table_name = name_of_class.tableize
-    self.send(table_name).clear
+    send(table_name).clear
     current_seniority = 1 # TODO: should this be zero based?
     string_of_names.each_line do |name_string|
-      if name_string[0].match('\d')
+      if name_string[0] =~ /\d/
         treat_as_token_list(name_of_class, name_string)
       else
-        self.send(table_name) << name_of_class.constantize.create(name: name_string,
-                                                                  seniority: current_seniority)
+        send(table_name) << name_of_class.constantize.create(name: name_string,
+                                                             seniority: current_seniority)
       end
 
       current_seniority += 1
@@ -471,7 +467,7 @@ class Citation < ActiveRecord::Base
   end
 
   def transliterate_file_name
-    self.pdf.instance_write(:file_name, "#{transliterate(pdf_file_name)}")
+    pdf.instance_write(:file_name, "#{transliterate(pdf_file_name)}")
   end
 
   protected
