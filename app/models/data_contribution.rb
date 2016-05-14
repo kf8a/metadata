@@ -4,7 +4,7 @@ class DataContribution < ActiveRecord::Base
   belongs_to :datatable
   belongs_to :role
 
-  validates_presence_of :role
+  validates :role, presence: true
 end
 
 # == Schema Information
