@@ -1,33 +1,33 @@
+# Display units. This is not used much
 class UnitsController < ApplicationController
-  
-  before_filter :admin?, :except => [:index, :show]  if Rails.env == 'production'
-  before_filter :get_unit, :only => [:edit, :update, :show]
-  before_filter :is_custom_unit, :only => ['edit','update']
-  
+  before_action :admin?, except: [:index, :show] if Rails.env == 'production'
+  before_action :unit, only: [:edit, :update, :show]
+  before_action :custom_unit?, only: [:edit, :update]
 
   def index
     @units = Unit.not_in_eml
   end
-  
+
   def edit
   end
-  
+
   def update
     if @unit.update_attributes(params[:unit])
       flash[:notice] = 'Unit was succesfully updated'
     end
     respond_with @unit
   end
-  
+
   def show
   end
-  
-private
-  def get_unit
+
+  private
+
+  def unit
     @unit = Unit.find(params[:id])
   end
 
-  def is_custom_unit
-    return !@unit.in_eml
+  def custom_unit?
+    !@unit.in_eml
   end
 end
