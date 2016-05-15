@@ -1,15 +1,17 @@
+# Display variates, this is not used much and might
+# be deleted
 class VariatesController < ApplicationController
-  before_filter :admin?, :except => [:index, :show]  unless Rails.env == 'development'
-  before_filter :get_variate, :only => [:show, :edit, :update, :destroy]
-  
+  before_action :admin?, except: [:index, :show] unless Rails.env == 'development'
+  before_action :variate, only: [:show, :edit, :update, :destroy]
+
   # GET /variates
   # GET /variates.xml
   def index
     @variates = Variate.all
 
     respond_to do |format|
-      format.html # index.rhtml
-      format.xml  { render :xml => @variates.to_xml }
+      format.html
+      format.xml { render xml: @variates.to_xml }
     end
   end
 
@@ -17,8 +19,8 @@ class VariatesController < ApplicationController
   # GET /variates/1.xml
   def show
     respond_to do |format|
-      format.html # show.rhtml
-      format.xml  { render :xml => @variate.to_xml }
+      format.html
+      format.xml { render xml: @variate.to_xml }
     end
   end
 
@@ -26,8 +28,8 @@ class VariatesController < ApplicationController
   def new
     @variate = Variate.new
     respond_to do |format|
-       format.html
-     end
+      format.html
+    end
   end
 
   # GET /variates/1;edit
@@ -64,10 +66,10 @@ class VariatesController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   private
-  
-  def get_variate
+
+  def variate
     @variate = Variate.find(params[:id])
   end
 end
