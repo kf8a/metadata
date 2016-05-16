@@ -1,14 +1,15 @@
 require 'citation_format'
 
+# a person that has edited a book or article
 class Editor < ActiveRecord::Base
   include CitationFormat
 
   belongs_to :citation
 
-  validates_presence_of :seniority
+  validates :seniority, presence: true
 
-  def Editor.to_enw
-    all.collect { |editor| editor.to_enw }.join
+  def self.to_enw
+    all.collect(&:to_enw).join
   end
 
   def to_enw

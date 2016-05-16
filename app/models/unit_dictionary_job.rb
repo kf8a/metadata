@@ -1,5 +1,6 @@
-#require 'UnitDictionary'
+# require 'UnitDictionary'
 
+# A class to update units based on the LTER Unit dictionary
 class UnitDictionaryJob < Struct.new(:unit)
   def perform
     # #updating units

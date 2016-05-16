@@ -1,3 +1,4 @@
+# Retrieve data for the qc visualizations
 class Visualization < ActiveRecord::Base
   belongs_to :datatable
 

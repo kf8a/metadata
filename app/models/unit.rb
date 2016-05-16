@@ -1,3 +1,4 @@
+# A unit in the EML sense. Connects to variates
 class Unit < ActiveRecord::Base
   has_many :variates
 

@@ -1,6 +1,7 @@
 # encoding: utf-8
 require 'bibtex'
 
+# Reference for a publication of some sort
 class Citation < ActiveRecord::Base
   include Workflow
 
