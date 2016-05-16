@@ -43,7 +43,7 @@ class Study < ActiveRecord::Base
   private
 
   def self_and_descendants_datatables
-    descendants.collect { |descendant| descendant.datatables }.flatten + datatables
+    descendants.collect(&:datatables).flatten + datatables
   end
 
   def check_for_treatments

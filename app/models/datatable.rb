@@ -5,6 +5,8 @@ require 'csv'
 require 'eml'
 include REXML
 
+# A datatable is one of the main objects in the system
+# it represents a table of data generally a view in the database
 class Datatable < ActiveRecord::Base
   attr_accessor :materialized_datatable_id
 
@@ -112,7 +114,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def valid_variates
-    self.variates.valid_for_eml
+    variates.valid_for_eml
   end
 
   def protocols_with_backup
@@ -156,7 +158,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def keyword_names
-    keywords.collect { |x| x.name }
+    keywords.collect(&:name)
   end
 
   def related_keywords
@@ -189,9 +191,7 @@ class Datatable < ActiveRecord::Base
     save
   end
 
-  def restricted_to_members?
-    dataset.restricted_to_members?
-  end
+  delegate :restricted_to_members?, to: :dataset
 
   # checks if the user has the right to perform the action
   # @param user [user] the user object to be queried
@@ -214,9 +214,7 @@ class Datatable < ActiveRecord::Base
     permissions.where(user_id: user, decision: 'denied').collect(&:owner)
   end
 
-  def sponsor
-    dataset.sponsor
-  end
+  delegate :sponsor, to: :dataset
 
   def sponsor_name
     sponsor.name
@@ -281,7 +279,7 @@ class Datatable < ActiveRecord::Base
     return false if completed?
     next_expected_update = update_frequency_days.present? ? update_frequency_days : 365
     expected_update = end_date.year + next_expected_update / 265 + 2
-    expected_update > Time.now.year
+    expected_update > Time.zone.now.year
   end
 
   def non_dataset_protocols
@@ -296,7 +294,7 @@ class Datatable < ActiveRecord::Base
         text = description.gsub(/<\/?[^>]*>/, '')
         @eml.entityDescription EML.text_sanitize(text) unless text.strip.empty?
       end
-#      eml_protocols if non_dataset_protocols.present?
+      #      eml_protocols if non_dataset_protocols.present?
       eml_physical
       eml_attributes
     end
@@ -340,7 +338,7 @@ class Datatable < ActiveRecord::Base
     result = "#     VARIATE TABLE\n"
     result += variates.collect do |variate|
       unit = variate.try(:unit)
-      "# " + [variate.try(:name), unit.try(:name), variate.try(:description)].join("\t") + "\n"
+      '# ' + [variate.try(:name), unit.try(:name), variate.try(:description)].join("\t") + "\n"
     end.join
     result += "#\n"
     result
@@ -547,7 +545,7 @@ class Datatable < ActiveRecord::Base
     min = convert_year_to_date(min) if is_year?(min)
     max = convert_year_to_date(max) if is_year?(max)
 
-    [Time.parse(min).to_date, Time.parse(max).to_date]
+    [Time.zone.parse(min).to_date, Time.zone.parse(max).to_date]
   end
 
   def eml_protocols
