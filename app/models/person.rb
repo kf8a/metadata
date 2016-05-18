@@ -78,11 +78,11 @@ class Person < ActiveRecord::Base
   end
 
   def self.find_all_with_dataset
-    people = Person.order('sur_name').collect { |person| person if person.has_dataset? }
+    people = Person.order('sur_name').collect { |person| person if person.dataset? }
     people.compact
   end
 
-  def has_dataset?
+  def dataset?
     dataset_roles.size > 0
   end
 

@@ -149,7 +149,8 @@ class Datatable < ActiveRecord::Base
   end
 
   def which_roles(person)
-    data_contributions.collect { |affiliation| affiliation.role if affiliation.person == person }.compact
+    data_contributions.collect { |affiliation| affiliation.role if affiliation.person == person }
+                      .compact
   end
 
   def leads

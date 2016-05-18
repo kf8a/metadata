@@ -25,9 +25,9 @@ describe Person do
     end
 
     it "return true for those with dataset roles, false for others" do
-      expect(@dataperson1.has_dataset?).to be_truthy
-      expect(@dataperson2.has_dataset?).to be_truthy
-      expect(!@nodataperson.has_dataset?).to be_truthy
+      expect(@dataperson1.dataset?).to be_truthy
+      expect(@dataperson2.dataset?).to be_truthy
+      expect(!@nodataperson.dataset?).to be_truthy
     end
   end
 
