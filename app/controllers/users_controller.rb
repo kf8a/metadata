@@ -1,18 +1,13 @@
+# handler interaction with the user class
 class UsersController < Clearance::UsersController
-  protect_from_forgery :except => :show
+  protect_from_forgery except: :show
 
   def create
     @user = User.new user_params
     @invite = Invite.find_redeemable(params[:invite_code])
 
     if @user.save
-      if @invite
-        @invite.redeemed!
-        if @invite.glbrc_member?
-          sponsor = Sponsor.find_by_name('glbrc')
-          Membership.create(:user => @user, :sponsor => sponsor)
-        end
-      end
+      redeem if @invite
 
       redirect_to(url_after_create)
     else
@@ -28,9 +23,17 @@ class UsersController < Clearance::UsersController
   def show
   end
 
-  private 
+  private
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
+  end
+
+  def redeem
+    @invite.redeemed!
+    if @invite.glbrc_member?
+      sponsor = Sponsor.find_by_name('glbrc')
+      Membership.create(user: @user, sponsor: sponsor)
+    end
   end
 end

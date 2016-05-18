@@ -1,7 +1,7 @@
-#TODO do we need to keep this
+# TODO: do we need to keep this
 class TemplatesController < ApplicationController
 
-  before_filter :admin?, :except => [:index, :show]  if Rails.env == 'production'
+  before_filter :admin?, except: [:index, :show]  if Rails.env == 'production'
   respond_to :html, :xml, :json
 
   def index
@@ -27,6 +27,7 @@ class TemplatesController < ApplicationController
   end
 
   private
+
   def template_params
     params.require(:template).permit(:website_id, :controller, :action, :layout)
   end

@@ -1,9 +1,9 @@
+# handle the Studies page
 class StudiesController < ApplicationController
+  before_action :admin?, except: [:index, :show] if Rails.env == 'production'
+  before_action :study, only: [:edit, :update]
 
-  before_filter :admin?, :except => [:index, :show]  if Rails.env == 'production'
-  before_filter :get_study, :only => [:edit, :update]
-
-  #GET /studies
+  # GET /studies
   def index
     @study_roots = Study.roots
   end
@@ -12,7 +12,7 @@ class StudiesController < ApplicationController
     study = Study.find(params[:parent_id])
     child = Study.find(params[:id])
     child.move_to_child_of(study) unless child == study
-    render :partial =>'study', :locals => {:study => study}
+    render partial: 'study', locals: { study: study }
   end
 
   def move_before
@@ -21,17 +21,17 @@ class StudiesController < ApplicationController
     father = study.parent
     child.move_to_left_of(study) unless child == study
     if study.root?
-      render :partial => 'study_list', :locals => {:study_roots => Study.roots}
+      render partial: 'study_list', locals: { study_roots: Study.roots }
     else
-      render :partial => 'study', :locals => {:study => father}
+      render partial: 'study', locals: { study: father }
     end
   end
 
-   # GET /studies/1;edit
+  # GET /studies/1;edit
   def edit
   end
 
-   # POST /studies/1
+  # POST /studies/1
   def update
     respond_to do |format|
       if @study.update_attributes(study_params)
@@ -39,19 +39,20 @@ class StudiesController < ApplicationController
         format.html { redirect_to datatables_url }
         format.xml  { head :ok }
       else
-        format.html { render "edit" }
-        format.xml  { render :xml => @study.errors.to_xml }
+        format.html { render 'edit' }
+        format.xml  { render xml: @study.errors.to_xml }
       end
     end
   end
 
   private
 
-  def get_study
+  def study
     @study = Study.find(params[:id])
   end
 
   def study_params
-    params.require(:study).permit(:name, :description, :weight,:synopsis, :url, :code )
+    params.require(:study).permit(:name, :description, :weight,
+                                  :synopsis, :url, :code)
   end
 end
