@@ -95,7 +95,7 @@ class UserTest < ActiveSupport::TestCase
 
     context '#has_permission_from?' do
       setup do
-        @has_permission_from = @user.has_permission_from?(@owner, @datatable)
+        @has_permission_from = @user.permission_from?(@owner, @datatable)
       end
 
       should 'be true' do
@@ -115,7 +115,7 @@ class UserTest < ActiveSupport::TestCase
 
       context '#has_permission_from?' do
         setup do
-          @has_permission_from = @another_user.has_permission_from?(@owner, @datatable)
+          @has_permission_from = @another_user.permission_from?(@owner, @datatable)
         end
 
         should 'be false' do

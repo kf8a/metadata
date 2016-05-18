@@ -198,7 +198,7 @@ class Datatable < ActiveRecord::Base
   # @return true if the action is allowed and false if not
   def permitted?(user)
     user.present? && owners.present? && owners.all? do |owner|
-      user.has_permission_from?(owner, self)
+      user.permission_from?(owner, self)
     end
   end
 

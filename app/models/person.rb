@@ -34,7 +34,7 @@ class Person < ActiveRecord::Base
     person_eml.css('phone').each { |phone_eml| phone_from_eml(phone_eml) }
     role_from_name(person_eml.css('role').text)
   end
-  
+
   def only_emeritus?
     lter_roles.all?(&:emeritus?)
   end

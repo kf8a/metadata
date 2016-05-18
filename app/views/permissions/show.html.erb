@@ -27,7 +27,7 @@
   </p>
   <% @datatable.owners.each do |owner| %>
       <% next if owner == current_user %>
-      <% if user.has_permission_from?(owner, @datatable) %>
+      <% if user.permission_from?(owner, @datatable) %>
         <p><%= user %> has permission from <%= owner %></p>
       <% else %>
         <p><%= user %> still needs permission from <%= owner %></p>
