@@ -16,5 +16,4 @@ module ThemesHelper
 
   ', block.binding)
   end
-
 end

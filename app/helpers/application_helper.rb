@@ -8,11 +8,11 @@ module ApplicationHelper
 
   # use to strip out html tags when using truncate
   def strip_html_tags(string = '')
-    string.gsub(/<\/?[^>]*>/,  "")
+    string.gsub(/<\/?[^>]*>/,  '')
   end
 
   def lter_roles
-    #TODO this is both here and in the person controller
+    # TODO: this is both here and in the person controller
     Role.where(role_type_id: RoleType.where(name: 'lter').first)
   end
 
@@ -28,7 +28,7 @@ module ApplicationHelper
     end
   end
 
-  #TODO do remove in favor of unobtrusive javascript
+  # TODO: do remove in favor of unobtrusive javascript
   def link_to_remove_fields(name, form)
       form.hidden_field(:_destroy) + link_to_function(name, "remove_fields(this)")
   end
@@ -37,12 +37,12 @@ module ApplicationHelper
     new_object = f.object.send(association).klass.new
     id = new_object.object_id
     fields = f.fields_for(association, new_object, child_index: id) do |builder|
-      render(association.to_s.singularize + "_fields", f: builder)
+      render(association.to_s.singularize + '_fields', f: builder)
     end
-    link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
+    link_to(name, '#', class: 'add_fields', data: {id: id, fields: fields.gsub("\n", '')})
   end
 
-  #TODO do remove in favor of unobtrusive javascript
+  # TODO: do remove in favor of unobtrusive javascript
   def link_to_function(name, *args, &block)
     html_options = args.extract_options!.symbolize_keys
 
@@ -50,7 +50,7 @@ module ApplicationHelper
     onclick = "#{"#{html_options[:onclick]}; " if html_options[:onclick]}#{function}; return false;"
     href = html_options[:href] || '#'
 
-    content_tag(:a, name, html_options.merge(:href => href, :onclick => onclick))
+    content_tag(:a, name, html_options.merge(href: href, onclick: onclick))
   end
 end
 
