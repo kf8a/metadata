@@ -45,19 +45,6 @@ class PersonTest < ActiveSupport::TestCase
         @person.lter_roles << @first_committee
         @person.lter_roles << @second_committee
       end
-
-      context '#get_committee_role names' do
-        setup do
-          @result = @person.get_committee_role_names
-        end
-
-        should 'return only the committee role names' do
-          assert @result.include?('Committee Member')
-          assert @result.include?('Network Representative')
-          assert !@result.include?('Creator')
-          assert !@result.include?('Owner')
-        end
-      end
     end
   end
 

@@ -22,6 +22,7 @@ class Person < ActiveRecord::Base
     person = Person.new
     person.from_eml(person_eml)
 
+    # TODO: remove self save
     person.save
 
     person
@@ -33,15 +34,7 @@ class Person < ActiveRecord::Base
     person_eml.css('phone').each { |phone_eml| phone_from_eml(phone_eml) }
     role_from_name(person_eml.css('role').text)
   end
-
-  def get_committee_roles
-    affiliations.lter.committees
-  end
-
-  def get_committee_role_names
-    affiliations.lter.committees.collect { |affiliation| affiliation.role.committee_role_name }.compact
-  end
-
+  
   def only_emeritus?
     lter_roles.all?(&:emeritus?)
   end
