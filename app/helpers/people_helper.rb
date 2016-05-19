@@ -1,6 +1,7 @@
+# Helpers for the people page
 module PeopleHelper
   def contact_link(email)
-    "#{email.gsub(/@/, ' at ')}"
+    email.to_s.gsub(/@/, ' at ')
   end
 
   def parenthize(string)

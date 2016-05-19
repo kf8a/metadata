@@ -30,7 +30,7 @@ module ApplicationHelper
 
   # TODO: do remove in favor of unobtrusive javascript
   def link_to_remove_fields(name, form)
-      form.hidden_field(:_destroy) + link_to_function(name, "remove_fields(this)")
+    form.hidden_field(:_destroy) + link_to_function(name, "remove_fields(this)")
   end
 
   def link_to_add_fields(name, f, association)
@@ -53,5 +53,3 @@ module ApplicationHelper
     content_tag(:a, name, html_options.merge(href: href, onclick: onclick))
   end
 end
-
-
