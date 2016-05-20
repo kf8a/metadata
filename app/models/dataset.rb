@@ -268,7 +268,7 @@ class Dataset < ActiveRecord::Base
       eml_resource_group
       contact_info
       @eml.publisher do
-        @eml.organizationName "KBS LTER"
+        @eml.organizationName 'KBS LTER'
       end
       eml_methods
       datatables.each { |table| table.to_eml(@eml) if table.on_web && table.valid_for_eml? && !table.is_restricted }
@@ -276,7 +276,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_resource_group
-    @eml.title title + " at the Kellogg Biological Station, Hickory Corners, MI " + date_range
+    @eml.title title + ' at the Kellogg Biological Station, Hickory Corners, MI ' + date_range
     eml_creator
     eml_people
     eml_pubdate
@@ -289,7 +289,7 @@ class Dataset < ActiveRecord::Base
   def eml_intellectual_rights
     @eml.intellectualRights do
       @eml.para "Data in the KBS LTER core database may not be published without written permission of the lead investigator or project director. These restrictions are intended mainly to preserve the primary investigators' rights to first publication and to ensure that data users are aware of the limitations that may be associated with any specific data set. These restrictions apply to both the baseline data set and to the data sets associated with specific LTER-supported subprojects."
-      @eml.para "All publications of KBS data and images must acknowledge KBS LTER support."
+      @eml.para 'All publications of KBS data and images must acknowledge KBS LTER support.'
     end
   end
 
@@ -334,14 +334,13 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_abstract
-    if abstract
-      unless abstract.empty?
-        @eml.abstract do
-          @eml.section do
-            @eml.title 'Dataset Abstract'
-            @eml.para EML.text_sanitize(textilize(abstract))
-            @eml.para "original data source http://lter.kbs.msu.edu/datasets/#{id}"
-          end
+    return unless abstract
+    if abstract.present?
+      @eml.abstract do
+        @eml.section do
+          @eml.title 'Dataset Abstract'
+          @eml.para EML.text_sanitize(textilize(abstract))
+          @eml.para "original data source http://lter.kbs.msu.edu/datasets/#{id}"
         end
       end
     end
@@ -352,27 +351,13 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_keyword_sets
-    @eml.keywordSet do
-      place_keyword_set.each do |keyword|
-        @eml.keyword keyword, keywordType: 'place'
-      end
-    end
-    datatable_keywords = datatables.collect { |x| x.keyword_names }.flatten.uniq
-    unless datatable_keywords.empty?
-      @eml.keywordSet do
-        datatable_keywords.each do |keyword|
-          @eml.keyword keyword
-        end
-      end
-    end
-    if core_areas.present?
-      @eml.keywordSet do
-        core_areas.each do |keyword|
-          @eml.keyword  keyword.name
-        end
-        @eml.keywordThesaurus 'LTER Core Research Area'
-      end
-    end
+    eml_place_keywords
+    eml_datatable_keywords
+    eml_core_area_keywords
+    eml_custom_keywords
+  end
+
+  def eml_custom_keywords
     if keyword_list.present?
       @eml.keywordSet do
         keyword_list.each do |keyword_tag|
@@ -381,6 +366,37 @@ class Dataset < ActiveRecord::Base
       end
     end
   end
+
+  def eml_place_keywords
+    @eml.keywordSet do
+      place_keyword_set.each do |keyword|
+        @eml.keyword keyword, keywordType: 'place'
+      end
+    end
+  end
+
+  def eml_core_area_keywords
+    if core_areas.present?
+      @eml.keywordSet do
+        core_areas.each do |keyword|
+          @eml.keyword  keyword.name
+        end
+        @eml.keywordThesaurus 'LTER Core Research Area'
+      end
+    end
+  end
+
+  def eml_datatable_keywords
+    datatable_keywords = datatables.collect(&:keyword_names).flatten.uniq
+    unless datatable_keywords.empty?
+      @eml.keywordSet do
+        datatable_keywords.each do |keyword|
+          @eml.keyword keyword
+        end
+      end
+    end
+  end
+
 
   def contact_info
     @eml.contact do
@@ -400,17 +416,21 @@ class Dataset < ActiveRecord::Base
 
   def eml_coverage
     @eml.coverage do
-      @eml.geographicCoverage do
-        @eml.geographicDescription 'The areas around the Kellogg Biological Station in southwest Michigan'
-        @eml.boundingCoordinates do
-          @eml.westBoundingCoordinate boundingCoordinates[:westBoundingCoordinate]
-          @eml.eastBoundingCoordinate boundingCoordinates[:eastBoundingCoordinate]
-          @eml.northBoundingCoordinate boundingCoordinates[:northBoundingCoordinate]
-          @eml.southBoundingCoordinate boundingCoordinates[:southBoundingCoordinate]
-        end
-      end
+      eml_geographic_coverage
       if initiated.present? && data_end_date.present?
         eml_temporal_coverage
+      end
+    end
+  end
+
+  def eml_geographic_coverage
+    @eml.geographicCoverage do
+      @eml.geographicDescription 'The areas around the Kellogg Biological Station in southwest Michigan'
+      @eml.boundingCoordinates do
+        @eml.westBoundingCoordinate boundingCoordinates[:westBoundingCoordinate]
+        @eml.eastBoundingCoordinate boundingCoordinates[:eastBoundingCoordinate]
+        @eml.northBoundingCoordinate boundingCoordinates[:northBoundingCoordinate]
+        @eml.southBoundingCoordinate boundingCoordinates[:southBoundingCoordinate]
       end
     end
   end
