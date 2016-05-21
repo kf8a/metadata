@@ -23,7 +23,7 @@ class UserTest < ActiveSupport::TestCase
     end
 
     should 'respond to has_permission_from?' do
-      assert @user.respond_to?('has_permission_from?')
+      assert @user.respond_to?('permission_from?')
     end
 
     should 'not be an admin' do
