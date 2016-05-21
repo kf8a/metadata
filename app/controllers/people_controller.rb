@@ -1,15 +1,16 @@
 class PeopleController < ApplicationController
   helper_method :people, :person
-  before_filter :admin?, :except => [:index, :show, :alphabetical, :emeritus] unless Rails.env == 'development'
+  before_action :admin?,
+                except: [:index, :show, :alphabetical, :emeritus] unless Rails.env == 'development'
 
   # GET /people
   # GET /people.xml
   def index
-    # expires_in 6.minutes, :public=>true
-
-    roleType = RoleType.find_by(name: 'lter')
-    if roleType
-      @roles = roleType.roles.order('seniority').where('name not like ?','Emeritus%')
+    role_type = RoleType.find_by(name: 'lter')
+    if role_type
+      @roles = role_type.roles
+                        .order('seniority')
+                        .where('name not like ?', 'Emeritus%')
     end
     respond_to do |format|
       format.html # index.rhtml
@@ -24,7 +25,9 @@ class PeopleController < ApplicationController
   end
 
   def emeritus
-    @roles = RoleType.find_by_name('lter').roles.order('seniority').where('name like ?','Emeritus%')
+    @roles = RoleType.find_by_name('lter')
+                     .roles.order('seniority')
+                     .where('name like ?', 'Emeritus%')
     respond_to do |format|
       format.html # emeritus.rhtml
     end
@@ -42,7 +45,7 @@ class PeopleController < ApplicationController
   # GET /people/new
   def new
     @person = Person.new
-    @roles = lter_roles 
+    @roles = lter_roles
   end
 
   # GET /people/1/edit
@@ -81,9 +84,10 @@ class PeopleController < ApplicationController
     end
   end
 
-  private 
+  private
+
   def set_title
-    if @subdomain_request == "lter"
+    if @subdomain_request == 'lter'
       @title = 'KBS LTER Directory'
     else
       @title = 'GLBRC Directory'
@@ -100,11 +104,12 @@ class PeopleController < ApplicationController
 
   def person_params
     params.require(:person).permit(:sur_name, :given_name, :middle_name, :title, :organization,
-                                   :sub_organization, :street_address, :city, :locale, 
-                                   :country, :postal_code, :phone, :fax, :email, 
+                                   :sub_organization, :street_address, :city, :locale,
+                                   :country, :postal_code, :phone, :fax, :email,
                                    :url, :deceased, :friendly_name,
-                                   {affiliations_attributes: [:role_id, :title, :seniority, :research_interest, 
-                                     :supervisor, :started_on, :left_on, :_destroy, :id]})
+                                   affiliations_attributes:
+                                   [:role_id, :title, :seniority, :research_interest,
+                                    :supervisor, :started_on, :left_on, :_destroy, :id])
   end
 
   def lter_roles
