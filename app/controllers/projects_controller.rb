@@ -1,6 +1,8 @@
+# Handle display of projects
+# TODO: Do we need to keep this since we don't use it
 class ProjectsController < ApplicationController
-  before_filter :admin?, :except => [:index, :show]  if Rails.env == 'production'
-  before_filter :get_project, :only => [:show, :edit, :update, :destroy]
+  before_action :admin?, except: [:index, :show] if Rails.env == 'production'
+  before_action :project, only: [:show, :edit, :update, :destroy]
 
   # GET /projects
   # GET /projects.xml
@@ -9,7 +11,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @projects }
+      format.xml  { render xml: @projects }
     end
   end
 
@@ -18,7 +20,7 @@ class ProjectsController < ApplicationController
   def show
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @project }
+      format.xml  { render xml: @project }
     end
   end
 
@@ -30,7 +32,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @project }
+      format.xml  { render xml: @project }
     end
   end
 
@@ -43,9 +45,7 @@ class ProjectsController < ApplicationController
   # POST /projects.xml
   def create
     @project = Project.new(project_params)
-    if @project.save
-      flash[:notice] = 'Project was successfully created.'
-    end
+    flash[:notice] = 'Project was successfully created.' if @project.save
     respond_with @project
   end
 
@@ -71,7 +71,7 @@ class ProjectsController < ApplicationController
 
   private
 
-  def get_project
+  def project
     @project = Project.find(params[:id])
   end
 
