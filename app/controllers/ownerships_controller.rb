@@ -1,17 +1,23 @@
+# Controller for Ownership interface
 class OwnershipsController < ApplicationController
-
-  before_filter :admin? unless Rails.env == 'development'
+  before_action :admin? unless Rails.env == 'development'
 
   def index
     @datatables = Datatable.by_name
   end
 
   def show
-    get_datatable
+    @datatable = datatable if params[:id]
+    @datatable = Datatable.find_by_id(params[:datatable]) if params[:datatable]
+    unless @datatable
+      flash[:notice] = 'You must select a valid datatable to grant ownerships'
+      redirect_to action: :index
+      return false
+    end
   end
 
   def new
-    @datatable = Datatable.find(params[:datatable]) if params[:datatable]
+    @datatable = datatable if params[:datatable]
     @datatables = Datatable.by_name unless @datatable
     @users = User.by_email
     @ownership = Ownership.new
@@ -21,23 +27,18 @@ class OwnershipsController < ApplicationController
 
   def create
     users = params[:users]
-    @datatable = Datatable.find(params[:datatable]) if params[:datatable]
+    @datatable = datatable if params[:datatable]
     overwrite = @datatable.present?
     datatables = @datatable ? [@datatable.id] : params[:datatables]
     if users.present? && datatables.present?
       Ownership.create_ownerships(users, datatables, overwrite)
       if @datatable
-        redirect_to ownership_path(:id => @datatable.id)
+        redirect_to ownership_path(id: @datatable.id)
       else
         redirect_to ownerships_path
       end
     else
-      @datatables = Datatable.by_name unless @datatable
-      @users = User.by_email
-      @ownership = Ownership.new
-      @user_count = 1
-      @datatable_count = 1 unless @datatable
-      render 'new'
+      new_ownership_form
     end
   end
 
@@ -45,9 +46,7 @@ class OwnershipsController < ApplicationController
     user = User.find(params[:user])
     datatable = Datatable.find(params[:datatable])
     ownerships = Ownership.where(user_id: user, datatable_id: datatable)
-    ownerships.each do |ownership|
-      ownership.destroy
-    end
+    ownerships.each(&:destroy)
 
     respond_to do |format|
       flash[:notice] = 'Ownership has been revoked from ' + user.email
@@ -58,13 +57,16 @@ class OwnershipsController < ApplicationController
 
   private
 
-  def get_datatable
-    @datatable = Datatable.find_by_id(params[:id]) if params[:id]
-    @datatable = Datatable.find_by_id(params[:datatable]) if params[:datatable]
-    unless @datatable
-      flash[:notice] = "You must select a valid datatable to grant ownerships"
-      redirect_to :action => :index
-      return false
-    end
+  def datatable
+    @datatable = Datatable.find(params[:datatable])
+  end
+
+  def new_ownership_form
+    @datatables = Datatable.by_name unless @datatable
+    @users = User.by_email
+    @ownership = Ownership.new
+    @user_count = 1
+    @datatable_count = 1 unless @datatable
+    render 'new'
   end
 end
