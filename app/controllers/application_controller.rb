@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_subdomain_from_request
-    request.host.downcase.include?("glbrc") ? "glbrc" : "lter" 
+    request.host.downcase.include?('glbrc') ? 'glbrc' : 'lter'
     # "glbrc"
   end
 

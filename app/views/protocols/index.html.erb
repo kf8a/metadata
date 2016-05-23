@@ -16,7 +16,7 @@
       <li>
       <%=link_to(raw("#{protocol.title}"), protocol_path(protocol)) %>
       </li>
-    <% end %> 
+    <% end %>
     </ul>
   <% end %>
 
@@ -28,7 +28,7 @@
     <li>
       <%= link_to raw("#{protocol.title}"), protocol_path(protocol) %>
     </li>
-  <% end %> 
+  <% end %>
   </ul>
   <br/>
   <h3>Retired Protocols</h3>
@@ -37,7 +37,7 @@
     <li>
       <%= link_to raw("#{protocol.title}"), protocol_path(protocol) %>
     </li>
-  <% end %> 
+  <% end %>
   </ul>
   <br/>
 <%= link_to 'New protocol', new_protocol_path %>

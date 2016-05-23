@@ -1,4 +1,4 @@
-xml.instruct! :xml, :version => "1.0" 
+xml.instruct! :xml, :version => "1.0"
 xml.rss :version => "2.0" do
   xml.channel do
     xml.title "Area 4 Publications"
@@ -12,7 +12,7 @@ xml.rss :version => "2.0" do
         xml.category citation.state
         xml.pubDate citation.updated_at
         xml.link citation_url(citation)
-        xml.guid citation_url(citation) 
+        xml.guid citation_url(citation)
       end
     end
   end

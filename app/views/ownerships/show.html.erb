@@ -1,6 +1,6 @@
 <h2>Ownerships Management Page for <%= @datatable.name %></h2>
 
-<%= link_to 'Add Owner', new_ownership_path(:datatable => @datatable) %>
+<%= link_to 'Add Owner', new_ownership_path(datatable: @datatable) %>
 
 <h4>Owned by:</h4>
 <ul>
@@ -8,11 +8,11 @@
     <li>
         <%= owner.email %>
         <%= link_to "Revoke ownership from #{owner.email}", {
-          :action => "revoke", 
-          :datatable => @datatable.id, 
-          :user => owner.id }, 
-          :confirm => "Are you sure?", 
-          :method => :delete %>
+                    action: 'revoke',
+                    datatable: @datatable.id,
+                    user: owner.id },
+                    confirm: 'Are you sure?',
+                    method: :delete %>
     </li>
   <% end %>
 </ul>

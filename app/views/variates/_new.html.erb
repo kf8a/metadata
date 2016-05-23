@@ -2,13 +2,13 @@
   <td><%= text_field_tag 'datatable[variates_attributes][][name]' %></td>
   <td><%= text_field_tag 'datatable[variates_attributes][][weight]',nil , {:size => 5} %></td>
   <td><%= text_field_tag 'datatable[variates_attributes][][description]' %></td>
-  <td><%= select_tag 'datatable[variates_attributes][][unit_id]', 
+  <td><%= select_tag 'datatable[variates_attributes][][unit_id]',
     "<option></option>" +
     options_from_collection_for_select(Unit.all, :id, :name)
   %></td>
-  <td><%= select_tag 'datatable[variates_attributes][][measurement_scale]', 
+  <td><%= select_tag 'datatable[variates_attributes][][measurement_scale]',
       options_for_select(['nominal','interval','ratio', 'datetime'])%></td>
-  <td><%= select_tag 'datatable[variates_attributes][][data_type]', 
+  <td><%= select_tag 'datatable[variates_attributes][][data_type]',
       options_for_select(['text','datetime','integer','real'])%></td>
   <td><%= text_field_tag 'datatable[variates_attributes][][max_valid]' %></td>
   <td><%= text_field_tag 'datatable[variates_attributes][][min_valid]' %></td>

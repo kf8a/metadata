@@ -1,5 +1,4 @@
-To confirm your GLBRC Sustainability Data Catalog sign-up, please click here:  
-<%= new_user_confirmation_url(
-      :user_id => @user,
-      :token   => @user.confirmation_token,
-      :encode  => false) %>
+To confirm your GLBRC Sustainability Data Catalog sign-up, please click here:
+<%= new_user_confirmation_url(user_id: @user,
+                              token: @user.confirmation_token,
+                              encode: false) %>

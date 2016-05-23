@@ -1,5 +1,5 @@
 xml.instruct!
-xml.eml(:eml, 
+xml.eml(:eml,
         'xmlns:eml'          => "eml://ecoinformatics.org/eml-2.1.0",
         'xmlns:stmml'        => "http://www.xml-cml.org/schema/stmml-1.1",
         'xmlns:xsi'          =>"http://www.w3.org/2001/XMLSchema-instance",
@@ -43,7 +43,7 @@ xml.eml(:eml,
     end
     xml.keywordSet do
     end
-    xml.intellectualRights do 
+    xml.intellectualRights do
       xml.para "Data in the KBS LTER core database may not be published without written permission of the lead investigator or project director. These restrictions are intended mainly to preserve the primary investigators' rights to first publication and to ensure that data users are aware of the limitations that may be associated with any specific data set. These restrictions apply to both the baseline data set and to the data sets associated with specific LTER-supported subprojects."
     end
     xml.coverage do
@@ -62,7 +62,7 @@ xml.eml(:eml,
             xml.beginDate do
               xml.calendarDate datatable.begin_date
             end
-            xml.endDate do 
+            xml.endDate do
               xml.calendarDate datatable.end_date
             end
           end

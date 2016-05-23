@@ -5,7 +5,7 @@
   :crumbs => [{:name => 'DATATABLES', :url =>  url_for(:controller => 'datatables', :action => 'index')},
     {:name => dataset.title.upcase}] %>
 
-<h1><%= @dataset.dataset %>:<%= @dataset.title %> 
+<h1><%= @dataset.dataset %>:<%= @dataset.title %>
 </h1>
 <div class='description'>
 	<%= textilize @dataset.abstract %>

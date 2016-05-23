@@ -79,13 +79,13 @@ class DatatablesController < ApplicationController
 
   # GET /datatables/new
   def new
-    initialize_instance_variables 
+    initialize_instance_variables
     @datatable = Datatable.new
   end
 
   # GET /datatables/1;edit
   def edit
-   initialize_instance_variables 
+   initialize_instance_variables
   end
 
   # POST /datatables
@@ -101,7 +101,7 @@ class DatatablesController < ApplicationController
 
   # PUT /datatables/1
   def update
-    initialize_instance_variables 
+    initialize_instance_variables
 
     if datatable.update_attributes(datatable_params)
       flash[:notice] = 'Datatable was successfully updated.'

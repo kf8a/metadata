@@ -7,10 +7,10 @@ class AffiliationsController < ApplicationController
   def index
     @affiliations = Affiliation.all
   end
-  
+
   def show
   end
-  
+
   def edit
   end
 
@@ -26,7 +26,7 @@ class AffiliationsController < ApplicationController
     @affiliation = Affiliation.new
     respond_to do |format|
       format.html
-      format.js 
+      format.js
     end
   end
 
@@ -46,7 +46,7 @@ class AffiliationsController < ApplicationController
     redirect_to 'index'
   end
 
-  private ###########################################
+  private
 
   def affiliation
     Affiliation.find(params[:id])
@@ -55,5 +55,4 @@ class AffiliationsController < ApplicationController
   def affiliation_params
     params.require(:affiliation).permit(:person_id, :role_id, :dataset_id, :seniority, :title)
   end
-
 end

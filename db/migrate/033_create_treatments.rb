@@ -5,7 +5,7 @@ class CreateTreatments < ActiveRecord::Migration
       t.column :description, :text
       t.column :study_id, :integer
     end
-    
+
     create_table :publications_treatments, :id => false do |t|
       t.column :treatment_id, :integer
       t.column :publication_id, :integer
@@ -20,7 +20,7 @@ class CreateTreatments < ActiveRecord::Migration
     Treatment.create(:name => '2,4D')
     Treatment.create(:name => 'Biodiversity')
     Treatment.create(:name => 'ECB')
-    
+
   end
 
   def self.down

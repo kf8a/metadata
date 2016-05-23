@@ -20,14 +20,14 @@
 	    <%=raw show_committee('Information Management Committee',role) %>
 	  </ul>
 	<% else %>
-	  <% people = role.people.uniq.sort {|a,b| a.affiliations.find_by_role_id(role).seniority.to_s + a.sur_name <=>  b.affiliations.find_by_role_id(role).seniority.to_s + b.sur_name} 
+	  <% people = role.people.uniq.sort {|a,b| a.affiliations.find_by_role_id(role).seniority.to_s + a.sur_name <=>  b.affiliations.find_by_role_id(role).seniority.to_s + b.sur_name}
 	  %>
     <% people_per_column = people.count/3 + 1 %>
     <div class="first one-third">
       <ul class="person-card">
         <% current_people = people.shift(people_per_column) %>
         <% current_people.each do |person|%>
-          <li><%= link_to "#{person.full_name}", person_path(person) %> 
+          <li><%= link_to "#{person.full_name}", person_path(person) %>
           <%= parenthize person.affiliations.find_by_role_id(role).title %>
           </li>
         <% end %>
@@ -38,7 +38,7 @@
       <ul class="person-card">
         <% current_people = people.shift(people_per_column) %>
         <% current_people.each do |person|%>
-          <li><%= link_to "#{person.full_name}", person_path(person) %> 
+          <li><%= link_to "#{person.full_name}", person_path(person) %>
           <%= parenthize person.affiliations.find_by_role_id(role).title %>
           </li>
         <% end %>
