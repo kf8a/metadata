@@ -16,16 +16,16 @@ class DatatablesController < ApplicationController
     store_location
     retrieve_datatables('keyword_list' =>'')
 
-    if Rails.env == 'production' #and stale? etag: @datatables
+    if Rails.env == 'production' # and stale? etag: @datatables
       respond_with @datatables do |format|
-        format.rss {render rss: @datatables}
+        format.rss { render rss: @datatables }
       end
     end
   end
 
   def search
     @website = website
-    query =  {'keyword_list' => ''}
+    query =  { 'keyword_list' => '' }
     query.merge!(params)
     if query['keyword_list'].empty?
       redirect_to datatables_url
@@ -77,31 +77,20 @@ class DatatablesController < ApplicationController
     render nothing: true
   end
 
-
   # GET /datatables/new
   def new
-    @core_areas = CoreArea.by_name.collect { |area| [area.name, area.id] }
-    @studies = Study.all.collect{ |study| [study.name, study.id] }
-    @people = Person.all
-    @units = Unit.all
+    initialize_instance_variables 
     @datatable = Datatable.new
   end
 
   # GET /datatables/1;edit
   def edit
-    @core_areas = CoreArea.by_name.collect { |area| [area.name, area.id] }
-    @studies = Study.all.collect{ |study| [study.name, study.id] }
-    @people = Person.all
-    # @units = Unit.order(:name).all
+   initialize_instance_variables 
   end
 
   # POST /datatables
-  # POST /datatables.xml
   def create
-    @core_areas = CoreArea.by_name.collect { |area| [area.name, area.id] }
-    @studies = Study.all.collect{ |study| [study.name, study.id] }
-    @people = Person.all
-    @units = Unit.all
+    initialize_instance_variables
 
     if datatable.save
       flash[:notice] = 'Datatable was successfully created.'
@@ -111,12 +100,8 @@ class DatatablesController < ApplicationController
   end
 
   # PUT /datatables/1
-  # PUT /datatables/1.xml
   def update
-    @core_areas = CoreArea.by_name.collect { |area| [area.name, area.id] }
-    @studies = Study.all.collect{ |study| [study.name, study.id] }
-    @people = Person.all
-    @units = Unit.all
+    initialize_instance_variables 
 
     if datatable.update_attributes(datatable_params)
       flash[:notice] = 'Datatable was successfully updated.'
@@ -126,22 +111,25 @@ class DatatablesController < ApplicationController
   end
 
   # DELETE /datatables/1
-  # DELETE /datatables/1.xml
   def destroy
     datatable.destroy
     respond_with datatable
   end
 
-  # TODO only return the ones for the right website
+  # TODO: only return the ones for the right website
   def suggest
     term = params[:term]
 
-    list = ActsAsTaggableOn::Tag.where('lower(name) like ?', term.downcase + '%').select('DISTINCT tags.name')
-    list = list + Person.where('lower(sur_name) like ?', term.downcase + '%').select('DISTINCT sur_name as name')
-    list = list + Theme.where('lower(name) like ?', term.downcase + '%').select('DISTINCT name')
-    list = list + CoreArea.where('lower(name) like ?', term.downcase + '%').select('DISTINCT name')
+    list = ActsAsTaggableOn::Tag.where('lower(name) like ?', term.downcase + '%')
+                                .select('DISTINCT tags.name')
+    list = list + Person.where('lower(sur_name) like ?', term.downcase + '%')
+                        .select('DISTINCT sur_name as name')
+    list = list + Theme.where('lower(name) like ?', term.downcase + '%')
+                       .select('DISTINCT name')
+    list = list + CoreArea.where('lower(name) like ?', term.downcase + '%')
+                          .select('DISTINCT name')
 
-    keywords = list.collect {|x| x.name.downcase }.sort.uniq
+    keywords = list.collect { |x| x.name.downcase }.sort.uniq
     respond_to do |format|
       format.json { render json: keywords }
     end
@@ -150,7 +138,7 @@ class DatatablesController < ApplicationController
   def update_temporal_extent
     datatable.update_temporal_extent
     datatable.save
-    # TODO write test to make sure the js fragment get's rendered
+    # TODO: write test to make sure the js fragment get's rendered
     respond_to do |format|
       format.json
       format.html { render nothing: true }
@@ -184,7 +172,7 @@ class DatatablesController < ApplicationController
 
     return unless params[:id]
 
-    # TODO this next line might not be needed
+    # TODO: this next line might not be needed
     datatable = Datatable.find(params[:id])
 
     if datatable.study
@@ -235,10 +223,12 @@ class DatatablesController < ApplicationController
                                       :description, :begin_date, :end_date, :on_web, :keyword_list,
                                       :theme_id, :weight, :study_id, :deprecation_notice,
                                       :update_frequency_days, :is_secondary, { core_area_ids: [] },
-                                      { variates_attributes: [[:name, :weight, :description, :unit_id,
-                                      :measurement_scale, :data_type, :max_valid,
-                                      :min_valid, :date_format, :precision, :missing_value_indicator, :_destroy, :id]] },
-                                      { data_contributions_attributes: [[:person_id, :role_id, :_destroy, :id]] })
+                                      { variates_attributes: [[:name, :weight, :description,
+                                      :unit_id, :measurement_scale, :data_type, :max_valid,
+                                      :min_valid, :date_format, :precision,
+                                      :missing_value_indicator,
+                                      :_destroy, :id]] }, { data_contributions_attributes:
+                                        [[:person_id, :role_id, :_destroy, :id]] })
   end
 
   private
@@ -260,7 +250,7 @@ class DatatablesController < ApplicationController
   end
 
   def set_file_headers
-    file_name = "#{@datatable.id}-#{@datatable.title.strip.gsub(/\W/,'+').squeeze('+')}.csv"
+    file_name = "#{@datatable.id}-#{@datatable.title.strip.gsub(/\W/, '+').squeeze('+')}.csv"
     headers['Content-Type'] = 'text/csv'
     headers['Content-disposition'] = "attachment; filename=\"#{file_name}\""
   end
@@ -289,4 +279,11 @@ class DatatablesController < ApplicationController
   #     render :status => 404
   #   end
   # end
+
+  def initialize_instance_variables
+    @core_areas = CoreArea.by_name.collect { |area| [area.name, area.id] }
+    @studies = Study.all.collect { |study| [study.name, study.id] }
+    @people = Person.all
+    @units = Unit.all
+  end
 end

@@ -114,7 +114,7 @@ class ProtocolsController < ApplicationController
   end
 
   def protocol_themes
-    website.protocols.all_tag_counts(on: themes).order('name')
+    website.protocols.all_tag_counts(on: 'themes').order('name')
   end
 
   def experiment_protocols

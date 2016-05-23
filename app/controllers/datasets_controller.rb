@@ -1,11 +1,11 @@
 class DatasetsController < ApplicationController
   helper_method :dataset
 
-  before_filter :allow_on_web, :except => [:knb]
-  before_filter :admin?, :except => [:index, :show ] if Rails.env == 'production'
-  before_filter :get_dataset, :only => [:show, :edit, :update, :destroy]
+  before_action :allow_on_web, except: [:knb]
+  before_action :admin?, except: [:index, :show] if Rails.env == 'production'
+  before_action :get_dataset, only: [:show, :edit, :update, :destroy]
 
-  #layout proc {|controller| controller.request.format == :eml ? false : 'application'}
+  # layout proc { |controller| controller.request.format == :eml ? false : 'application' }
 
   # POST /dataset
   def upload
@@ -20,13 +20,13 @@ class DatasetsController < ApplicationController
     @keyword_list   = params['keyword_list']
     @people         = Person.find_all_with_dataset
     @themes         = Theme.by_weight
-    @datasets       = Dataset.where(:on_web => true).where(:website_id => website.id)
+    @datasets       = Dataset.where(on_web: true).where(website_id: website.id)
     @studies        = collect_and_normalize_studies(@datasets)
     @crumbs         = []
     respond_to do |format|
-      format.html {redirect_to datatables_path unless params[:really]}
-      format.xml  { render :xml => @datasets.to_xml }
-      format.eml { render :eml => @datasets }
+      format.html { redirect_to datatables_path unless params[:really] }
+      format.xml  { render xml: @datasets.to_xml }
+      format.eml { render eml: @datasets }
     end
   end
 
@@ -38,8 +38,8 @@ class DatasetsController < ApplicationController
 
     if @dataset.valid_request?(@subdomain_request)
       respond_with @dataset do |format|
-        format.eml { render :xml => @dataset.to_eml }
-        # format.eml { render :eml => @dataset}
+        format.eml { render xml: @dataset.to_eml }
+        # format.eml { render eml: @dataset }
       end
     else
       redirect_to datasets_url
@@ -48,8 +48,8 @@ class DatasetsController < ApplicationController
 
   def knb
     scopre, identifier = params[:id].split(/\./)
-    @dataset = Dataset.where(:metacat_id => identifier).first
-    @dataset = Dataset.where(:id => identifer).first unless @dataset
+    @dataset = Dataset.where(metacat_id: identifier).first
+    @dataset = Dataset.where(id: identifer).first unless @dataset
     redirect_to @dataset
   end
 
@@ -60,12 +60,12 @@ class DatasetsController < ApplicationController
 
   # GET /datasets/1;edit
   def edit
-    @people   = Person.by_sur_name
+    @people = Person.by_sur_name
     @studies = Study.by_weight
     @themes = Theme.by_weight
-    @roles  = dataset_roles 
-    @websites = Website.all.collect {|website| [website.name, website.id]}
-    @sponsors = Sponsor.all.collect {|sponsor| [sponsor.name, sponsor.id]}
+    @roles = dataset_roles
+    @websites = Website.all.collect { |website| [website.name, website.id] }
+    @sponsors = Sponsor.all.collect { |sponsor| [sponsor.name, sponsor.id] }
   end
 
   # POST /dataset/new_affiliation
@@ -79,17 +79,15 @@ class DatasetsController < ApplicationController
       format.js do
         render :update do |page|
           page.insert_html :bottom, 'affiliations',
-            :partial  => "affiliation",
-            :locals   => {:roles        => roles,
-                          :people       => people,
-                          :affiliation  => @affiliation}
+                           partial: 'affiliation',
+                           locals: { roles: roles, people: people,
+                                     affiliation: @affiliation }
         end
       end
     end
   end
 
   # POST /datasets
-  # POST /datasets.xml
   def create
     if params[:eml_link].present?
       @dataset = Dataset.from_eml(params[:eml_link])
@@ -98,8 +96,8 @@ class DatasetsController < ApplicationController
     else
       @dataset = Dataset.new(dataset_params)
     end
-    unless @dataset.class == Dataset #if not a Dataset, it will be an array of errors
-      flash[:notice] = "Eml import had errors: " + @dataset.collect{|error| error.to_s}.join(' ')
+    unless @dataset.class == Dataset # if not a Dataset, it will be an array of errors
+      flash[:notice] = 'Eml import had errors: ' + @dataset.collect(&:to_s).join(' ')
       @dataset = Dataset.new
     end
     if @dataset.save
@@ -109,10 +107,9 @@ class DatasetsController < ApplicationController
   end
 
   # PUT /datasets/1
-  # PUT /datasets/1.xml
   def update
-    @sponsors = Sponsor.all.collect {|sponsor| [sponsor.name, sponsor.id]}
-    @websites = Website.all.collect {|website| [website.name, website.id]}
+    @sponsors = Sponsor.all.collect { |sponsor| [sponsor.name, sponsor.id] }
+    @websites = Website.all.collect { |website| [website.name, website.id] }
     if @dataset.update_attributes(dataset_params)
       flash[:notice] = 'Dataset was successfully updated.'
     end
@@ -130,11 +127,10 @@ class DatasetsController < ApplicationController
     end
   end
 
-
   private
 
   def set_title
-    @title  = 'LTER Datasets'
+    @title = 'LTER Datasets'
   end
 
   def set_crumbs
@@ -162,7 +158,7 @@ class DatasetsController < ApplicationController
     @studies.flatten!
     @studies.compact!
     @studies.uniq!
-    @studies.sort_by! { |study| study.weight }
+    @studies.sort_by!(&:weight)
   end
 
   def dataset
@@ -170,16 +166,17 @@ class DatasetsController < ApplicationController
   end
 
   def get_dataset
-    @dataset  = dataset
+    @dataset = dataset
   end
 
   def dataset_params
-    params.require(:dataset).permit(:dataset, :title, :abstract, :status, :initiated, :completed, :released,
-                                   :on_web, :core_dataset, :project_id, :metacat_id, :sponsor_id, :website_id)
+    params.require(:dataset).permit(:dataset, :title, :abstract, :status,
+                                    :initiated, :completed, :released,
+                                    :on_web, :core_dataset, :project_id,
+                                    :metacat_id, :sponsor_id, :website_id)
   end
 
   def dataset_roles
     Role.where(role_type_id: RoleType.where(name: 'lter_dataset').first)
   end
-
 end
