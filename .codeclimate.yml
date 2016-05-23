@@ -45,4 +45,6 @@ exclude_paths:
 - script/
 - spec/
 - test/
+- doc/
 - vendor/
+- app/assets/
