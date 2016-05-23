@@ -117,7 +117,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def datatable_protocols
-    datatables.where(on_web: true).collect { |datatable| datatable.protocols }
+    datatables.where(on_web: true).collect(&:protocols)
   end
 
   def to_eml
@@ -188,12 +188,12 @@ class Dataset < ActiveRecord::Base
   end
 
   def creators
-    datatable_leads = datatables.collect { |x| x.leads }.compact
+    datatable_leads = datatables.collect(&:leads).compact
     [leads, datatable_leads].flatten.uniq.compact
   end
 
   def core_areas
-    datatables.map { |x| x.core_areas }.flatten.uniq
+    datatables.map(&:core_areas).flatten.uniq
   end
 
   # private
