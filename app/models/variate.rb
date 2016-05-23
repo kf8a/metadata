@@ -59,14 +59,18 @@ class Variate < ActiveRecord::Base
       self.measurement_scale = 'dateTime' if measurement_scale == 'datetime'
 
       @eml.tag!(measurement_scale) do
-        case measurement_scale
-        when 'interval' then eml_interval
-        when 'ratio' then eml_ratio
-        when 'ordinal' then
-        when 'nominal'then eml_nominal
-        when 'dateTime' then eml_date_time
-        end
+        measurement_scale_as_eml(measurement_scale)
       end
+    end
+  end
+
+  def measurement_scale_as_eml(measurement_scale)
+    case measurement_scale
+    when 'interval' then eml_interval
+    when 'ratio' then eml_ratio
+    when 'ordinal' then
+    when 'nominal'then eml_nominal
+    when 'dateTime' then eml_date_time
     end
   end
 
