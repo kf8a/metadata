@@ -1,6 +1,6 @@
 # TODO: do we need to keep this
 class TemplatesController < ApplicationController
-  before_filter :admin?, except: [:index, :show] if Rails.env == 'production'
+  before_action :admin?, except: [:index, :show] if Rails.env == 'production'
   respond_to :html, :xml, :json
 
   def index

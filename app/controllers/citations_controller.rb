@@ -12,27 +12,7 @@ class CitationsController < ApplicationController
 
   def index
     store_location
-    case params[:type]
-    when 'article'
-      citations = [website.article_citations]
-      @type = 'ArticleCitation'
-    when 'book'
-      citations = [website.citations.bookish]
-      @type = 'BookCitation'
-    when 'thesis'
-      citations = [website.thesis_citations]
-      @type = 'ThesisCitation'
-    when 'report'
-      citations = [website.report_citations]
-      @type = 'ReportCitation'
-    when 'bulletin'
-      citations = [website.bulletin_citations]
-      @type = 'BulletinCitation'
-    else
-      @type = nil
-      # citations = [website.article_citations, website.book_citations, website.chapter_citations, website.thesis_citations]
-      citations = [website.citations.publications]
-    end
+    citations = citations_by_type(params[:type])
 
     if params[:treatment]
       @treatment = Treatment.find(params[:treatment])
@@ -151,7 +131,7 @@ class CitationsController < ApplicationController
     if Rails.env.production?
       if citation.open_access
         # TODO: make this work accross domains not just with lter
-        redirect_to('https://lter.kbs.msu.edu/open-access' + citation.pdf.path.gsub(/ /, '+'))
+        redirect_to('https://lter.kbs.msu.edu/open-access' + citation.pdf.path.tr(' ', '+'))
         # redirect_to(citation.pdf.s3_object(params[:style]).public_url.to_s)
       else
         redirect_to(citation.pdf.s3_object(params[:style])
@@ -206,5 +186,30 @@ class CitationsController < ApplicationController
                                      :publisher_url, :website_id, :pdf, :state, :open_access, :type,
                                      :has_lter_acknowledgement, :annotation, :data_url,
                                      datatable_ids: [], treatment_ids: [])
+  end
+
+  def citations_by_type(type)
+    case type
+    when 'article'
+      @type = 'ArticleCitation'
+      [website.article_citations]
+    when 'book'
+      @type = 'BookCitation'
+      [website.citations.bookish]
+    when 'thesis'
+      @type = 'ThesisCitation'
+      [website.thesis_citations]
+    when 'report'
+      @type = 'ReportCitation'
+      [website.report_citations]
+    when 'bulletin'
+      @type = 'BulletinCitation'
+      [website.bulletin_citations]
+    else
+      @type = nil
+      # citations = [website.article_citations, website.book_citations,
+      #              website.chapter_citations, website.thesis_citations]
+      [website.citations.publications]
+    end
   end
 end

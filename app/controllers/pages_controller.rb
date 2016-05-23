@@ -1,10 +1,10 @@
+# Controller for basic html pages. Used on the GLBRC site
 class PagesController < ApplicationController
- 
-  before_filter :admin?, :except => [:show] unless Rails.env == 'development'
+  before_action :admin?, except: [:show] unless Rails.env == 'development'
   helper_method :page
 
   def index
-    return head :bad_request
+    head :bad_request
   end
 
   def show
@@ -19,9 +19,7 @@ class PagesController < ApplicationController
 
   def create
     @page = Page.new(page_params)
-    if @page.save
-      flash[:notice] = 'Page was successfully created.'
-    end
+    flash[:notice] = 'Page was successfully created.' if @page.save
 
     respond_with @page
   end
@@ -38,9 +36,9 @@ class PagesController < ApplicationController
     respond_with page
   end
 
-  def destroy 
+  def destroy
     page.destroy
-    redirect_to :action => 'index'
+    redirect_to action: 'index'
   end
 
   private
@@ -52,5 +50,4 @@ class PagesController < ApplicationController
   def page_params
     params.require(:page).permit(:title, :body, :url)
   end
-
 end

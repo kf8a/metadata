@@ -1,21 +1,13 @@
 # Serves protocols
 class ProtocolsController < ApplicationController
   before_action :admin?, except: [:index, :show, :download] if Rails.env != 'development'
-  before_action :get_protocol, only: [:edit, :update, :destroy]
+  before_action :protocol, only: [:edit, :update, :destroy]
 
   # GET /protocols
   # GET /protocols.xml
   def index
     store_location
-    @website = website
-
-    @protocols = website.protocols.where('active is true').order('title')
-    @protocol_themes = protocol_themes
-    @experiment_protocols = experiment_protocols
-
-    @untagged_protocols = untagged_protocols
-
-    @retired_protocols = website.protocols.where('active is false').order('title')
+    initialize_instance_variables
 
     respond_with @protocols
   end
@@ -40,13 +32,13 @@ class ProtocolsController < ApplicationController
   def new
     @protocol = Protocol.new
     @datasets = Dataset.pluck(:dataset, :id)
-    get_all_websites
+    @websites = Website.all
   end
 
   # GET /protocols/1;edit
   def edit
     @datasets = Dataset.pluck(:dataset, :id)
-    get_all_websites
+    @websites = Website.all
   end
 
   # POST /protocols
@@ -65,7 +57,7 @@ class ProtocolsController < ApplicationController
   # PUT /protocols/1.xml
   def update
     params[:protocol].merge!(updated_by: current_user)
-    get_all_websites
+    @websites = Website.all
     if params[:new_version]
       old_protocol = Protocol.find(params[:id])
       # Creating a new protocol
@@ -106,13 +98,6 @@ class ProtocolsController < ApplicationController
     @crumbs << crumb
   end
 
-  def get_all_websites
-    @websites = Website.all
-  end
-
-  def find_website
-  end
-
   def protocol_themes
     website.protocols.all_tag_counts(on: 'themes').order('name')
   end
@@ -128,7 +113,7 @@ class ProtocolsController < ApplicationController
            .compact
   end
 
-  def get_protocol
+  def protocol
     @protocol = Protocol.find(params[:id])
   end
 
@@ -138,5 +123,17 @@ class ProtocolsController < ApplicationController
                                      :tag, :website_ids, :name, { person_ids: [] },
                                      { website_ids: [] }, { datatable_ids: [] },
                                      :change_summary, :pdf)
+  end
+
+  def initialize_instance_variables
+    @website = website
+
+    @protocols = website.protocols.where('active is true').order('title')
+    @protocol_themes = protocol_themes
+    @experiment_protocols = experiment_protocols
+
+    @untagged_protocols = untagged_protocols
+
+    @retired_protocols = website.protocols.where('active is false').order('title')
   end
 end
