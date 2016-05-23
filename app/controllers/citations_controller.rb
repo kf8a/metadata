@@ -26,7 +26,7 @@ class CitationsController < ApplicationController
     @submitted_citations = citations.collect(&:submitted).flatten
     @forthcoming_citations = citations.collect(&:forthcoming).flatten
     date = params[:date].presence
-    @citations = date ? citations.collect { |c| c.by_date(date) }.flatten : citations.collect { |c| c.published }.flatten
+    @citations = date ? citations.collect { |c| c.by_date(date) }.flatten : citations.collect(&:published).flatten
 
     index_responder
   end
@@ -57,17 +57,14 @@ class CitationsController < ApplicationController
 
   def search
     @word = params[:word]
-    if @word.present?
-      @word.sub!(/\?|~|\\|\*|@|(?:=>)/, '')
-    end
-    if @word.empty?
-      redirect_to citations_url
-    else
-      @citations = Citation.search @word, with: { website_id: website.id },
-                                          order: 'pub_year desc',
-                                          star: true, per_page: 500
-      index_responder
-    end
+    redirect_to citations_url if @word.blank?
+
+    @word = sanitize(@word)
+
+    @citations = Citation.search @word, with: { website_id: website.id },
+                                        order: 'pub_year desc',
+                                        star: true, per_page: 500
+    index_responder
   end
 
   def find_by_doi
@@ -211,5 +208,9 @@ class CitationsController < ApplicationController
       #              website.chapter_citations, website.thesis_citations]
       [website.citations.publications]
     end
+  end
+
+  def sanitize(word)
+    word.sub!(/\?|~|\\|\*|@|(?:=>)/, '')
   end
 end
