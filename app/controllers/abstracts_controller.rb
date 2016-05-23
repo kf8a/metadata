@@ -2,22 +2,23 @@
 class AbstractsController < ApplicationController
   helper_method :abstract
 
-  before_filter :admin?, :except => [:index, :show, :download]  if Rails.env == 'production'
+  before_action :admin?, except: [:index, :show, :download] if Rails.env == 'production'
 
   # GET meeting_abstracts
-  # GET meeting_abstracts.xml
   def index
     @abstracts = Abstract.by_authors
     respond_with @abstracts
   end
 
   def download
-    head(:not_found) and return unless (abstract= Abstract.find_by_id(params[:id]))
-    path = abstract.pdf.path(params[:style])
+    head(:not_found) and return unless (abstract = Abstract.find_by_id(params[:id]))
     if Rails.env.production?
-      redirect_to(abstract.pdf.s3_object(params[:style]).url_for(:read, :secure => true, :expires_in  => 20.seconds).to_s)
+      redirect_to(abstract.pdf.s3_object
+                          .url_for(:read, secure: true, expires_in: 20.seconds)
+                          .to_s)
     else
-      send_file  path, :type => 'application/pdf', :disposition => 'inline'
+      path = abstract.pdf.path
+      send_file  path, type: 'application/pdf', disposition: 'inline'
     end
   end
 
@@ -40,8 +41,8 @@ class AbstractsController < ApplicationController
           format.html { redirect_to meeting_url(abstract.meeting) }
         end
       else
-        format.html { render "new" }
-        format.xml  { render :xml => abstract.errors.to_xml }
+        format.html { render 'new' }
+        format.xml  { render xml: abstract.errors.to_xml }
       end
     end
   end
@@ -72,7 +73,7 @@ class AbstractsController < ApplicationController
       format.html { redirect_to meetings_url }
       format.xml  { head :ok }
       format.js do
-        render :nothing => true
+        render nothing: true
       end
     end
   end
