@@ -217,10 +217,6 @@ class Datatable < ActiveRecord::Base
 
   delegate :sponsor, to: :dataset
 
-  def sponsor_name
-    sponsor.name
-  end
-
   def can_be_qcd_by?(user)
     if sponsor_name == 'lter'
       user.try(:admin?) || member?(user)

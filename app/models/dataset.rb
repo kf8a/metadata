@@ -42,7 +42,7 @@ class Dataset < ActiveRecord::Base
       eml_doc = Nokogiri::XML(eml_text)
     end
     # get_validation_errors(eml_doc).presence ||
-    self.new.from_eml(eml_doc)
+    new.from_eml(eml_doc)
   end
 
   def self.get_validation_errors(eml_doc)
@@ -250,7 +250,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_protocols
-    (protocols + datatable_protocols).flatten.uniq.keep_if { |protocol| protocol.valid_for_eml? }
+    (protocols + datatable_protocols).flatten.uniq.keep_if(&:valid_for_eml?)
   end
 
   def eml_methods
@@ -321,7 +321,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_pubdate
-    @eml.pubDate Date.today
+    @eml.pubDate Time.zone.today
   end
 
   def eml_people
@@ -396,7 +396,6 @@ class Dataset < ActiveRecord::Base
       end
     end
   end
-
 
   def contact_info
     @eml.contact do

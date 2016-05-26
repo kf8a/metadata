@@ -11,7 +11,7 @@ class AbstractsController < ApplicationController
   end
 
   def download
-    head(:not_found) and return unless (abstract = Abstract.find_by_id(params[:id]))
+    head(:not_found) and return unless (abstract = Abstract.find(params[:id]))
     if Rails.env.production?
       redirect_to(abstract.pdf.s3_object
                           .url_for(:read, secure: true, expires_in: 20.seconds)
@@ -48,7 +48,6 @@ class AbstractsController < ApplicationController
   end
 
   # GET meeting_abstracts/1
-  # GET meeting_abstracts/1.xml
   def show
     respond_with abstract
   end
@@ -59,7 +58,6 @@ class AbstractsController < ApplicationController
   end
 
   # PUT /meeting_abstracts/1
-  # PUT /meeting_abstracts/1.xml
   def update
     if abstract.update_attributes(abstract_params)
       flash[:notice] = 'Meeting abstract was successfully updated.'
