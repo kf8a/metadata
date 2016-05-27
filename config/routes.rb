@@ -2,6 +2,9 @@ Metadata::Application.routes.draw do
 
   match '/send_invitation/:id' => 'invites#send_invitation', :as => :send_invitation, via: [:get]
   match '/signup/:invite_code' => 'users#new', :as => :redeem_invitation, via: [:get]
+  get '/pub/:id', to: 'citations#download'
+
+
   resource :session, :controller => 'sessions'
   resource :users
 
