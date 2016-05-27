@@ -4,7 +4,7 @@ class ScoreCardsController < ApplicationController
     website  = params[:website] || 'lter'
     study_id = params[:study_id]
 
-    if website.casecmp('glbrc')
+    if website.casecmp('glbrc') == 0
       @datatables = glbrc_datatables(on_web)
     else
       @datatables = datatables(on_web)
