@@ -1,17 +1,12 @@
 # WARNING this is postgres specific
 
+# find data in batches to allow streaming data delivery
 class DataQuery
   def self.find_in_batches_as_csv(query, options = {})
     options.assert_valid_keys(:start, :batch_size)
-
-    start = options[:start]
     batch_size = options[:batch_size] || 500
 
-    count = ActiveRecord::Base.connection
-                              .execute("Select count(*) as c from (#{query}) as foo")
-                              .values.flatten
-                              .first.to_i
-    (0..count).step(batch_size) do |offset|
+    (0..count(query)).step(batch_size) do |offset|
       batch_query = "Select * from (#{query}) as foo limit #{batch_size} offset #{offset}"
       yield to_csv_rows(find(batch_query))
     end
@@ -25,5 +20,12 @@ class DataQuery
     results.collect do |row|
       CSV::Row.new(row.keys, row.values).to_s
     end.join
+  end
+
+  def self.count(query)
+    ActiveRecord::Base.connection
+                      .execute("Select count(*) as c from (#{query}) as foo")
+                      .values.flatten
+                      .first.to_i
   end
 end

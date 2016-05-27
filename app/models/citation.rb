@@ -158,7 +158,7 @@ class Citation < ActiveRecord::Base
     end
   end
 
-  def Citation.citation_from_ris_stanza(stanza, pdf_folder)
+  def self.citation_from_ris_stanza(stanza, pdf_folder)
     citation = type_from_ris_type(stanza[:type]).new
     same_name_attributes = %w(title secondary_title series_title pub_year volume abstract doi)
     citation.get_attributes_from_ris_stanza(stanza, same_name_attributes)
@@ -259,7 +259,8 @@ class Citation < ActiveRecord::Base
       number:    issue,
       series:    series_title,
       doi:       doi,
-      isbn:      isbn }
+      isbn:      isbn
+    }
     hash.delete_if { |_, value| value.blank? }
   end
 
@@ -273,14 +274,14 @@ class Citation < ActiveRecord::Base
   end
 
   def self.select_options
-    classes = descendants.map { |klass| klass.to_s }.sort
+    classes = descendants.map(&:to_s).sort
     classes.collect { |klass| [klass.gsub(/Citation/, ''), klass] }
   end
 
   def short_author_string
-    if authors.length > 3
-      return authors.first.formatted + ', et.al. '
-    elsif authors.length > 0
+    return authors.first.formatted + ', et.al. ' if authors.length > 3
+
+    if authors.length > 0
       author_string
     else
       ''
@@ -315,15 +316,19 @@ class Citation < ActiveRecord::Base
 
   def volume_and_page
     if volume.blank?
-      if doi.blank?
-        ''
-      else
-        "doi: #{doi}"
-      end
+      doi_citation_part(doi)
     elsif page_numbers.blank?
       "#{volume}."
     else
       "#{volume}:#{page_numbers}."
+    end
+  end
+
+  def doi_citation_part(doi)
+    if doi.blank?
+      ''
+    else
+      "doi: #{doi}"
     end
   end
 
