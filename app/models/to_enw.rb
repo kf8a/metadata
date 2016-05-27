@@ -1,6 +1,6 @@
 # ENW formatter for endnote RIS formatted citations
 class ENW
-  attr_accessor citation
+  attr_accessor :citation
 
   def init(citation)
     @citation = citation
