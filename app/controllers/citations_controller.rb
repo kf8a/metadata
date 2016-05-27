@@ -57,7 +57,7 @@ class CitationsController < ApplicationController
 
   def search
     @word = params[:word]
-    redirect_to citations_url if @word.blank?
+    redirect_to citations_url and return if @word.blank?
 
     @word = sanitize(@word)
 
