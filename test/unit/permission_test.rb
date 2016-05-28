@@ -1,4 +1,4 @@
-require File.expand_path('../../test_helper',__FILE__)
+require File.expand_path('../../test_helper', __FILE__)
 
 class PermissionTest < ActiveSupport::TestCase
   should belong_to :user
@@ -17,15 +17,14 @@ class PermissionTest < ActiveSupport::TestCase
       datatable.owners = [owner]
 
       @permission = FactoryGirl.build :permission,
-        :datatable  => datatable,
-        :user       => user,
-        :owner      => owner
+                                      datatable: datatable,
+                                      user: user,
+                                      owner: owner
     end
 
     should 'be valid' do
       assert @permission.valid?
     end
-
   end
 
   context 'setting permissions' do
@@ -36,7 +35,7 @@ class PermissionTest < ActiveSupport::TestCase
     end
 
     should 'allow the owner to give users permission' do
-      p           = Permission.new({:datatable => @datatable})
+      p           = Permission.new(datatable: @datatable)
       p.owner     = @owner
       p.user      = FactoryGirl.create :user
 
@@ -61,7 +60,6 @@ class PermissionTest < ActiveSupport::TestCase
       p1.owner     = @owner
       p1.user      = user
 
-
       p2           = Permission.new
       p2.datatable = @datatable
       p2.owner     = @owner
@@ -82,17 +80,17 @@ class PermissionTest < ActiveSupport::TestCase
       p1.user      = user
       p1.save
 
-      permission = Permission.find_by_datatable_id_and_owner_id_and_user_id(@datatable, @owner, user)
-      permission.decision = "approved"
+      permission = Permission.find_by_datatable_id_and_owner_id_and_user_id(@datatable,
+                                                                            @owner, user)
+      permission.decision = 'approved'
       assert permission.valid?
       assert permission.save
     end
 
     should 'allow permissions from multiple owners' do
-      user         = FactoryGirl.create :user
-
-      owner2       = FactoryGirl.create :user
-      FactoryGirl.create :ownership, :user => owner2, :datatable => @datatable
+      user = FactoryGirl.create :user
+      owner2 = FactoryGirl.create :user
+      FactoryGirl.create :ownership, user: owner2, datatable: @datatable
       @datatable.reload
       assert_equal [@owner, owner2], @datatable.owners
 
@@ -120,13 +118,16 @@ class PermissionTest < ActiveSupport::TestCase
       user4 = FactoryGirl.create(:user)
       owner1 = FactoryGirl.build :user
       owner2 = FactoryGirl.build :user
-      datatable1  = FactoryGirl.create :datatable
+      datatable1 = FactoryGirl.create :datatable
       datatable1.owners = [owner1]
-      datatable2  = FactoryGirl.create :datatable
+      datatable2 = FactoryGirl.create :datatable
       datatable2.owners = [owner2]
-      FactoryGirl.create(:permission, :owner => owner1, :datatable => datatable1, :user => user1, decision: "approved")
-      FactoryGirl.create(:permission, :owner => owner1, :datatable => datatable1, :user => user2, :decision => 'denied')
-      FactoryGirl.create(:permission, :owner => owner2, :datatable => datatable2, :user => user4, decision: "approved")
+      FactoryGirl.create(:permission, owner: owner1, datatable: datatable1,
+                                      user: user1, decision: 'approved')
+      FactoryGirl.create(:permission, owner: owner1, datatable: datatable1,
+                                      user: user2, decision: 'denied')
+      FactoryGirl.create(:permission, owner: owner2, datatable: datatable2,
+                                      user: user4, decision: 'approved')
 
       assert Permission.permitted_users.include?(user1)
       assert !Permission.permitted_users.include?(user2)
@@ -135,10 +136,6 @@ class PermissionTest < ActiveSupport::TestCase
     end
   end
 end
-
-
-
-
 
 # == Schema Information
 #
@@ -152,4 +149,3 @@ end
 #  owner_id     :integer
 #  decision     :string(255)
 #
-
