@@ -75,7 +75,7 @@ class UserTest < ActiveSupport::TestCase
         end
 
         should 'not own the datatable' do
-          assert ! @nonowner.owns?(@datatable)
+          assert !@nonowner.owns?(@datatable)
         end
       end
     end

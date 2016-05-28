@@ -1,4 +1,4 @@
-require File.expand_path('../../test_helper',__FILE__)
+require File.expand_path('../../test_helper', __FILE__)
 
 class ProtocolTest < ActiveSupport::TestCase
   should have_and_belong_to_many :websites
@@ -19,17 +19,17 @@ class ProtocolTest < ActiveSupport::TestCase
     end
 
     should 'save multiple websites' do
-       @protocol.websites << [@website, @website2 ]
-        assert @protocol.save
+      @protocol.websites << [@website, @website2]
+      assert @protocol.save
 
-        assert @protocol.websites.include?(@website)
-        assert @protocol.websites.include?(@website2)
+      assert @protocol.websites.include?(@website)
+      assert @protocol.websites.include?(@website2)
     end
   end
 
   context 'deprecating a protocol' do
     setup do
-      @protocol = FactoryGirl.create(:protocol, :version_tag => 4)
+      @protocol = FactoryGirl.create(:protocol, version_tag: 4)
       @new_protocol = FactoryGirl.create(:protocol)
       @new_protocol.deprecate!(@protocol)
       @protocol.reload
@@ -55,10 +55,6 @@ class ProtocolTest < ActiveSupport::TestCase
   end
 end
 
-
-
-
-
 # == Schema Information
 #
 # Table name: protocols
@@ -80,4 +76,3 @@ end
 #  active         :boolean         default(TRUE)
 #  deprecates     :integer
 #
-

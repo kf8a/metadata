@@ -1,8 +1,7 @@
-require File.expand_path('../../test_helper',__FILE__)
+require File.expand_path('../../test_helper', __FILE__)
 require 'nokogiri'
 
 class VariateTest < ActiveSupport::TestCase
-
   should belong_to :datatable
   should belong_to :unit
 
