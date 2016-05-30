@@ -1,11 +1,9 @@
-require File.expand_path('../../test_helper',__FILE__)
+require File.expand_path('../../test_helper', __FILE__)
 
 class OwnershipTest < ActiveSupport::TestCase
-
-  def setup 
+  def setup
     User.destroy_all
   end
-
 
   should belong_to :user
   should belong_to :datatable
@@ -23,10 +21,6 @@ class OwnershipTest < ActiveSupport::TestCase
   end
 end
 
-
-
-
-
 # == Schema Information
 #
 # Table name: ownerships
@@ -37,4 +31,3 @@ end
 #  created_at   :datetime
 #  updated_at   :datetime
 #
-

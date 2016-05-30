@@ -1,15 +1,10 @@
-require File.expand_path('../../test_helper',__FILE__) 
+require File.expand_path('../../test_helper', __FILE__)
 
 class PageImageTest < ActiveSupport::TestCase
-
   should belong_to :page
 
   should have_attached_file(:image)
 end
-
-
-
-
 
 # == Schema Information
 #
@@ -24,4 +19,3 @@ end
 #  image_file_size    :integer
 #  image_updated_at   :datetime
 #
-
