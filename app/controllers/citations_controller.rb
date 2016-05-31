@@ -60,6 +60,7 @@ class CitationsController < ApplicationController
 
     @word = sanitize(@word)
 
+    logger.info @word
     @citations = Citation.search @word, with: { website_id: website.id },
                                         order: 'pub_year desc',
                                         star: true, per_page: 500
