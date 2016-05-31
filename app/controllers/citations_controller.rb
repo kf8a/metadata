@@ -211,6 +211,6 @@ class CitationsController < ApplicationController
   end
 
   def sanitize(word)
-    word.sub!(/\?|~|\\|\*|@|(?:=>)/, '')
+    word.sub(/\?|~|\\|\*|@|(?:=>)/, '')
   end
 end
