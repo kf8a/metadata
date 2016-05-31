@@ -473,7 +473,7 @@ class Citation < ActiveRecord::Base
   end
 
   def transliterate_file_name
-    pdf.instance_write(:file_name, "#{transliterate(pdf_file_name)}")
+    pdf.instance_write(:file_name, transliterate(pdf_file_name).to_s)
   end
 
   protected

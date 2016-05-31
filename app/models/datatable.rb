@@ -229,17 +229,23 @@ class Datatable < ActiveRecord::Base
 
   def can_be_downloaded_by?(user)
     if is_restricted?
-      user.try(:admin?) ||
-        permitted?(user) ||
-        owned_by?(user)
+      allowed_for_restricted_download?(user)
     elsif restricted_to_members?
-      user.try(:admin?) ||
-        permitted?(user) ||
-        owned_by?(user) ||
-        member?(user)
+      allowed_for_member_download?(user)
     else
       true
     end
+  end
+
+  def allowed_for_restricted_download?(user)
+    user.try(:admin?) || permitted?(user) || owned_by?(user)
+  end
+
+  def allowed_For_member_download?(user)
+    user.try(:admin?) ||
+      permitted?(user) ||
+      owned_by?(user) ||
+      member?(user)
   end
 
   def owned_by?(user)
@@ -400,13 +406,18 @@ class Datatable < ActiveRecord::Base
 
   def database_date_field
     values = ActiveRecord::Base.connection.execute(object)
-    case
-    when values.fields.member?('sample_date') then 'sample_date'
-    when values.fields.member?('obs_date') then 'obs_date'
-    when values.fields.member?('date') then 'date'
-    when values.fields.member?('datetime') then 'datetime'
-    when values.fields.member?('harvest_date') then 'harvest_date'
-    when values.fields.member?('year') then 'year'
+    if values.fields.member?('sample_date')
+      'sample_date'
+    elsif fvalues.fields.member?('obs_date')
+      'obs_date'
+    elsif values.fields.member?('date')
+      'date'
+    elsif values.fields.member?('datetime')
+      'datetime'
+    elsif values.fields.member?('harvest_date')
+      'harvest_date'
+    elsif values.fields.member?('year')
+      'year'
     end
   end
 
