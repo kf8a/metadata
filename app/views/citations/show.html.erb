@@ -62,6 +62,9 @@
     <% if @citation.pdf.exists? %>
       <% if signed_in? or @citation.open_access %>
         <%=link_to 'Get PDF', publication_url(@citation), :class=>'download-link'%>
+        <p>
+        Direct PDF link: <%= link_to "http://lter.kbs.msu/pub/#{@citation.id}", "http://lter.kbs.msu/pub/#{@citation.id}" %>
+        </p>
       <% else %>
         <%= link_to 'Sign in to download PDF', sign_in_path, :class=>'download-link'  %>
       <% end %>

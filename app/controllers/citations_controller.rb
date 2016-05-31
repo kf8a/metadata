@@ -1,10 +1,9 @@
-# encoding: utf-8
 class CitationsController < ApplicationController
   protect_from_forgery except: :download
 
   respond_to :html, :xml, :json
   layout :site_layout
-  before_action :admin?, only: [:new, :create, :edit, :update, :destroy] unless Rails.env == 'development'
+  before_action :admin?, only: [:new, :create, :edit, :update, :destroy] # unless Rails.env == 'development'
 
   has_scope :by_type,   as: :type
   has_scope :sorted_by, as: :sort_by

@@ -23,23 +23,23 @@ class Citation < ActiveRecord::Base
 
   validates :authors, presence: true
 
-  if Rails.env.production?
-    after_commit :check_for_open_access_paper
+  after_commit :check_for_open_access_paper
 
+  if Rails.env.production?
     has_attached_file :pdf,
                       storage: :s3,
                       bucket: 'metadata-production',
                       path: '/citations/pdfs/:id/:style/:basename.:extension',
                       s3_credentials: File.join(Rails.root, 'config', 's3.yml'),
                       s3_permissions: 'authenticated-read'
+                      # s3_headers: {'Content-Disposition': 'attachment'}
   else
     has_attached_file :pdf,
                       url: '/citations/:id/download',
-                      path: ':rails_root/uploads/citations/:attachment/:id/:style/:basename.:extension'
+                      path: ':rails_root/uploads/protocols/:attachment/:id/:style/:basename.:extension'
   end
 
   validates_attachment_file_name :pdf, matches: /pdf/
-  # validates_attachment_content_type :pdf, content_type: /pdf/
   before_post_process :transliterate_file_name
 
   # the REAL publications not including reports

@@ -25,6 +25,7 @@
           <% if citation.data_url.present? %>
             <%= link_to 'data', citation.data_url %>
           <% end %>
+          <%= "https://lter.kbs.msu.edu/pub/#{citation.id}" %>
         </div>
       <% else %>
         <div class='non-member'>
@@ -38,6 +39,7 @@
           <% if citation.data_url.present? %>
             <%= link_to 'data', citation.data_url %>
           <% end %>
+          <%= "https://lter.kbs.msu.edu/pub/#{citation.id}" %>
         </div>
       <% end %>
     <% end %>
