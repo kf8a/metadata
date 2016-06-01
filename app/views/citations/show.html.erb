@@ -59,11 +59,11 @@
     <%= link_to 'endnote', citation_path(@citation, :format=>'enw') %>
     <%= link_to 'bibtex',  citation_path(@citation, :format=>'bib') %>
     </p>
-    <% if @citation.pdf.exists? %>
+    <% if @citation.pdf.present? %>
       <% if signed_in? or @citation.open_access %>
         <%=link_to 'Get PDF', publication_url(@citation), :class=>'download-link'%>
         <p>
-        Direct PDF link: <%= link_to "http://lter.kbs.msu/pub/#{@citation.id}", "http://lter.kbs.msu/pub/#{@citation.id}" %>
+        Citable PDF link: <%= link_to "https://lter.kbs.msu.edu/pub/#{@citation.id}", "/pub/#{@citation.id}" %>
         </p>
       <% else %>
         <%= link_to 'Sign in to download PDF', sign_in_path, :class=>'download-link'  %>

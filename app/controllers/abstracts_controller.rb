@@ -13,9 +13,9 @@ class AbstractsController < ApplicationController
   def download
     head(:not_found) && return unless (abstract = Abstract.find(params[:id]))
     if Rails.env.production?
-      file_from_s3(abstract)
+      FileSelector.file_from_s3(abstract)
     else
-      file_from_filesystem(abstract)
+      FileSelector.file_from_filesystem(abstract)
     end
   end
 
@@ -80,16 +80,5 @@ class AbstractsController < ApplicationController
 
   def abstract_params
     params.permit(:title, :authors, :abstract, :meeting_id, :pdf_file)
-  end
-
-  def file_from_s3(abstract)
-    redirect_to(abstract.pdf.s3_object
-                        .url_for(:read, secure: true, expires_in: 20.seconds)
-                        .to_s)
-  end
-
-  def file_from_filesystem(abstract)
-    path = abstract.pdf.path
-    send_file path, type: 'application/pdf', disposition: 'inline'
   end
 end

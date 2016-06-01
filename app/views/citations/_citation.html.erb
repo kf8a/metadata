@@ -1,48 +1,39 @@
 <div id=<%= citation.id %> >
   <li class='citation'>
-      <% unless year.nil? %>
-        <% if citation.pub_year.to_i != year  -%>
-            <div class='pub-year'><%= citation.pub_year %></div>
-        <% end %>
-      <% end %>
-      <% cache(citation, action: 'index') do %>
-        <p>
-        <%=citation.formatted(long: true) %>
-        </p>
+  <% unless year.nil? %>
+    <% if citation.pub_year.to_i != year  -%>
+      <div class='pub-year'><%= citation.pub_year %></div>
+    <% end %>
+  <% end %>
+  <% cache(citation, action: 'index') do %>
+    <p>
+    <%=citation.formatted(long: true) %>
+    </p>
 
-      <% if citation.pdf.exists? %>
-        <div class='non-member'>
+    <div>
+      <% if citation.pdf.present? %>
+        <span class='non-member'>
           <%= link_to 'abstract + pdf', citation_path(citation) %>
-
-          <% if citation.data_url.present? %>
-            <%= link_to 'data', citation.data_url %>
-          <% end %>
-        </div>
-        <div class='member-only'>
+        </span>
+        <span class='member-only'>
           <%= link_to 'abstract', citation_path(citation) %>
           <%= link_to 'pdf', publication_url(citation)%>
-
-          <% if citation.data_url.present? %>
-            <%= link_to 'data', citation.data_url %>
-          <% end %>
-          <%= "https://lter.kbs.msu.edu/pub/#{citation.id}" %>
-        </div>
+        </span>
       <% else %>
-        <div class='non-member'>
+        <span class='non-member'>
           <%= link_to 'abstract', citation_path(citation) %>
-          <% if citation.data_url.present? %>
-            <%= link_to 'data', citation.data_url %>
-          <% end %>
-        </div>
-        <div class='member-only'>
+        </span>
+        <span class='member-only'>
           <%= link_to 'abstract', citation_path(citation) %>
-          <% if citation.data_url.present? %>
-            <%= link_to 'data', citation.data_url %>
-          <% end %>
-          <%= "https://lter.kbs.msu.edu/pub/#{citation.id}" %>
-        </div>
+        </span>
       <% end %>
-    <% end %>
+      <% if citation.data_url.present? %>
+        <span>
+          <%= link_to 'data', citation.data_url %>
+        </span>
+      <% end %>
+    </div>
+  <% end %>
 
   </li>
 </div>

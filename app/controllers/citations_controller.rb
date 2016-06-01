@@ -1,9 +1,10 @@
+# display citations and control access to pdfs
 class CitationsController < ApplicationController
   protect_from_forgery except: :download
 
   respond_to :html, :xml, :json
   layout :site_layout
-  before_action :admin?, only: [:new, :create, :edit, :update, :destroy] # unless Rails.env == 'development'
+  before_action :admin?, only: [:new, :create, :edit, :update, :destroy]
 
   has_scope :by_type,   as: :type
   has_scope :sorted_by, as: :sort_by
@@ -56,7 +57,7 @@ class CitationsController < ApplicationController
 
   def search
     @word = params[:word]
-    redirect_to citations_url and return if @word.blank?
+    redirect_to citations_url && return if @word.blank?
 
     @word = SearchInputSanitizer.sanitize(@word)
 
@@ -124,20 +125,7 @@ class CitationsController < ApplicationController
     head(:not_found) && return unless (citation = Citation.find_by_id(params[:id]))
     deny_access && return unless citation.open_access || signed_in?
 
-    path = citation.pdf.path(params[:style])
-    if Rails.env.production?
-      if citation.open_access
-        # TODO: make this work accross domains not just with lter
-        redirect_to('https://lter.kbs.msu.edu/open-access' + citation.pdf.path.tr(' ', '+'))
-        # redirect_to(citation.pdf.s3_object(params[:style]).public_url.to_s)
-      else
-        redirect_to(citation.pdf.s3_object(params[:style])
-                            .url_for(:read, secure: true, expires_in: 10.seconds)
-                            .to_s)
-      end
-    else
-      send_file path, type: 'application/pdf', disposition: 'inline'
-    end
+    send_citation(citation)
   end
 
   def biblio
@@ -156,6 +144,26 @@ class CitationsController < ApplicationController
   end
 
   private
+
+  def send_citation(citation)
+    if citation.open_access
+      from_open_access(citation)
+    else
+      from_standard_access(citation)
+    end
+  end
+
+  def from_open_access(citation)
+    # TODO: make this work accross domains not just with lter
+    redirect_to('https://lter.kbs.msu.edu/open-access' + citation.pdf.path.tr(' ', '+'))
+    # redirect_to(citation.pdf.s3_object(params[:style]).public_url.to_s)
+  end
+
+  def from_standard_access(citation)
+    redirect_to(citation.pdf.s3_object(params[:style])
+                        .url_for(:read, secure: true, expires_in: 10.seconds)
+                        .to_s)
+  end
 
   def set_title
     if @subdomain_request == 'lter'

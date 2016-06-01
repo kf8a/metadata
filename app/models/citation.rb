@@ -25,19 +25,13 @@ class Citation < ActiveRecord::Base
 
   after_commit :check_for_open_access_paper
 
-  if Rails.env.production?
-    has_attached_file :pdf,
-                      storage: :s3,
-                      bucket: 'metadata-production',
-                      path: '/citations/pdfs/:id/:style/:basename.:extension',
-                      s3_credentials: File.join(Rails.root, 'config', 's3.yml'),
-                      s3_permissions: 'authenticated-read'
-                      # s3_headers: {'Content-Disposition': 'attachment'}
-  else
-    has_attached_file :pdf,
-                      url: '/citations/:id/download',
-                      path: ':rails_root/uploads/protocols/:attachment/:id/:style/:basename.:extension'
-  end
+  has_attached_file :pdf,
+                    storage: :s3,
+                    bucket: 'metadata-production',
+                    path: '/citations/pdfs/:id/:style/:basename.:extension',
+                    s3_credentials: File.join(Rails.root, 'config', 's3.yml'),
+                    s3_permissions: 'authenticated-read'
+                    # s3_headers: {'Content-Disposition': 'attachment'}
 
   validates_attachment_file_name :pdf, matches: /pdf/
   before_post_process :transliterate_file_name

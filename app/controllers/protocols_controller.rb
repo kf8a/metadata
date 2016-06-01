@@ -67,25 +67,13 @@ class ProtocolsController < ApplicationController
   def download
     head(:not_found) && return unless (protocol = Protocol.find_by_id(params[:id]))
     if Rails.env.production?
-      file_from_s3(protocol)
+      FileSource.file_from_s3(protocol)
     else
-      file_from_filesystem(protocol)
+      FileSource.file_from_filesystem(protocol)
     end
   end
 
   private
-
-  def file_from_s3(protocol)
-    redirect_to(protocol.pdf.s3_object(params[:style])
-                            .url_for(:read,
-                                     secure: true,
-                                     expires_in: 10.seconds).to_s)
-  end
-
-  def file_from_filesystem(protocol)
-    path = protocol.pdf.path(params[:style])
-    send_file path, type: 'application/pdf', disposition: 'inline'
-  end
 
   def set_title
     @title = 'Protocols'
