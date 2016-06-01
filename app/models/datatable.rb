@@ -241,7 +241,7 @@ class Datatable < ActiveRecord::Base
     user.try(:admin?) || permitted?(user) || owned_by?(user)
   end
 
-  def allowed_For_member_download?(user)
+  def allowed_for_member_download?(user)
     user.try(:admin?) ||
       permitted?(user) ||
       owned_by?(user) ||
