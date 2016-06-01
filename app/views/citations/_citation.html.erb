@@ -32,6 +32,9 @@
           <%= link_to 'data', citation.data_url %>
         </span>
       <% end %>
+      <% if citation.pdf.present? %>
+        <span>(<%= "https://lter.kbs.msu.edu/pub/#{citation.id}" %>)</span>
+      <% end %>
     </div>
   <% end %>
 
