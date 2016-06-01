@@ -1,6 +1,6 @@
-require './lib/file_source.rb'
 # Controls pages dealing with abstracts of meetings
 class AbstractsController < ApplicationController
+  include FileSource
   helper_method :abstract
 
   before_action :admin?, except: [:index, :show, :download] if Rails.env == 'production'
@@ -14,9 +14,9 @@ class AbstractsController < ApplicationController
   def download
     head(:not_found) && return unless (abstract = Abstract.find(params[:id]))
     if Rails.env.production?
-      FileSource.file_from_s3(abstract)
+      file_from_s3(abstract)
     else
-      FileSource.file_from_filesystem(abstract)
+      file_from_filesystem(abstract)
     end
   end
 
