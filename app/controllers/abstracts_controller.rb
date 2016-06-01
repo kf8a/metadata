@@ -1,3 +1,4 @@
+require './lib/file_source.rb'
 # Controls pages dealing with abstracts of meetings
 class AbstractsController < ApplicationController
   helper_method :abstract
