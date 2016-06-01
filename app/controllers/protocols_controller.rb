@@ -4,7 +4,6 @@ class ProtocolsController < ApplicationController
   before_action :protocol, only: [:edit, :update, :destroy]
 
   # GET /protocols
-  # GET /protocols.xml
   def index
     store_location
     initialize_instance_variables
@@ -13,7 +12,6 @@ class ProtocolsController < ApplicationController
   end
 
   # GET /protocols/1
-  # GET /protocols/1.xml
   def show
     store_location
     @protocol = website.protocols.where('id = ?', params[:id]).first
@@ -42,21 +40,16 @@ class ProtocolsController < ApplicationController
   end
 
   # POST /protocols
-  # POST /protocols.xml
   def create
     @protocol = Protocol.new(protocol_params)
-
-    if @protocol.save
-      flash[:notice] = 'Protocol was successfully created.'
-    end
+    flash[:notice] = 'Protocol was successfully created.' if @protocol.save
 
     respond_with @protocol
   end
 
   # PUT /protocols/1
-  # PUT /protocols/1.xml
   def update
-    params[:protocol].merge!(updated_by: current_user)
+    params[:protocol][:updated_by] = current_user
     @websites = Website.all
     if params[:new_version]
       old_protocol = Protocol.find(params[:id])
@@ -73,17 +66,26 @@ class ProtocolsController < ApplicationController
 
   def download
     head(:not_found) && return unless (protocol = Protocol.find_by_id(params[:id]))
-    path = protocol.pdf.path(params[:style])
     if Rails.env.production?
-      redirect_to(protocol.pdf.s3_object(params[:style]).url_for(:read,
-                                                                 secure: true,
-                                                                 expires_in: 10.seconds).to_s)
+      file_from_s3(protocol)
     else
-      send_file path, type: 'application/pdf', disposition: 'inline'
+      file_from_filesystem(protocol)
     end
   end
 
   private
+
+  def file_from_s3(protocol)
+    redirect_to(protocol.pdf.s3_object(params[:style])
+                            .url_for(:read,
+                                     secure: true,
+                                     expires_in: 10.seconds).to_s)
+  end
+
+  def file_from_filesystem(protocol)
+    path = protocol.pdf.path(params[:style])
+    send_file path, type: 'application/pdf', disposition: 'inline'
+  end
 
   def set_title
     @title = 'Protocols'
