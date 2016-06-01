@@ -1,5 +1,6 @@
+# Formatting for bulletins
 class BulletinCitation < Citation
-  def formatted(options={})
+  def formatted(options = {})
     "#{author_and_year(options)} #{title_and_punctuation} #{editor_string}#{publication_string}#{volume_and_page}#{publisher_string}#{address_and_city}."
   end
 
@@ -14,21 +15,15 @@ class BulletinCitation < Citation
   end
 
   def publisher_string
-    if publisher.present?
-      publisher + ", "
-    end
+    publisher + ', ' if publisher.present?
   end
 
   def publication_string
-    if publication.present?
-      publication + ", "
-    end
+    publication + ', ' if publication.present?
   end
 
   def address_and_city
-    if city.present?
-      city
-    end
+    city if city.present?
   end
 end
 
