@@ -187,7 +187,7 @@ class DatatablesController < ApplicationController
     @default_value = 'Search for... '
     @themes = Theme.roots
 
-    @keyword_list = query['keyword_list'].sub(/\?|~|\\|\*|@|(?:=>)/, '')
+    @keyword_list = SearchInputSanitizer.sanitize(query['keyword_list'])
     @keyword_list = nil if @keyword_list.empty? || @keyword_list == @default_value
 
     @datatables =

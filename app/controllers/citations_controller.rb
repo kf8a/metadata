@@ -58,7 +58,7 @@ class CitationsController < ApplicationController
     @word = params[:word]
     redirect_to citations_url and return if @word.blank?
 
-    @word = sanitize(@word)
+    @word = SearchInputSanitizer.sanitize(@word)
 
     logger.info @word
     @citations = Citation.search @word, with: { website_id: website.id },
@@ -208,9 +208,5 @@ class CitationsController < ApplicationController
       #              website.chapter_citations, website.thesis_citations]
       [website.citations.publications]
     end
-  end
-
-  def sanitize(word)
-    word.sub(/\?|~|\\|\*|@|(?:=>)/, '')
   end
 end
