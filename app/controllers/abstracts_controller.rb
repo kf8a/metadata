@@ -13,9 +13,9 @@ class AbstractsController < ApplicationController
   def download
     head(:not_found) && return unless (abstract = Abstract.find(params[:id]))
     if Rails.env.production?
-      FileSelector.file_from_s3(abstract)
+      FileSource.file_from_s3(abstract)
     else
-      FileSelector.file_from_filesystem(abstract)
+      FileSource.file_from_filesystem(abstract)
     end
   end
 
