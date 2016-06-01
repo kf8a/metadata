@@ -68,11 +68,7 @@ class ProtocolsController < ApplicationController
 
   def download
     head(:not_found) && return unless (protocol = Protocol.find_by_id(params[:id]))
-    if Rails.env.production?
-      file_from_s3(protocol)
-    else
-      file_from_filesystem(protocol)
-    end
+    file_from_s3(protocol)
   end
 
   private
