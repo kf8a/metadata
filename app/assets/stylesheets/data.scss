@@ -354,12 +354,7 @@
      border-radius: 25px;
      background: black;
      padding: 20px; 
-    h1 {
-      color: white;
-    }
-    a {
-      color: white;
-    }
+     h1, a, p { color: white; }
   }
   // .tree * {margin:0; padding:0;}
   .tree a { text-decoration: none;}
