@@ -308,15 +308,23 @@ class Dataset < ActiveRecord::Base
 
   def eml_creator
     if creators.empty?
-      @eml.creator do
-        @eml.positionName 'Data Manager'
-      end
+      eml_data_manager
     else
-      creators.each do |person|
-        @eml.creator do
-          person.eml_party(@eml)
-        end
+      eml_creators
+    end
+  end
+
+  def eml_creators
+    creators.each do |person|
+      @eml.creator do
+        person.eml_party(@eml)
       end
+    end
+  end
+
+  def eml_data_manager
+    @eml.creator do
+      @eml.positionName 'Data Manager'
     end
   end
 
@@ -401,16 +409,20 @@ class Dataset < ActiveRecord::Base
     @eml.contact do
       @eml.organizationName 'Kellogg Biological Station'
       @eml.positionName 'Data Manager'
-      p = Person.new(organization:   'Kellogg Biological Station',
-                     street_address: '3700 East Gull Lake Drive',
-                     city:           'Hickory Corners',
-                     locale:         'Mi',
-                     postal_code:    '49060',
-                     country:        'USA')
+      p = eml_kbs_address
       p.eml_address(@eml)
       @eml.electronicMailAddress 'lter.data.manager@kbs.msu.edu'
       @eml.onlineUrl 'http://lter.kbs.msu.edu'
     end
+  end
+
+  def eml_kbs_address
+    Person.new(organization:   'Kellogg Biological Station',
+               street_address: '3700 East Gull Lake Drive',
+               city:           'Hickory Corners',
+               locale:         'Mi',
+               postal_code:    '49060',
+               country:        'USA')
   end
 
   def eml_coverage

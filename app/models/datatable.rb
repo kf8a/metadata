@@ -452,9 +452,7 @@ class Datatable < ActiveRecord::Base
 
   def approved_data_query
     query = object
-    if number_of_released_records
-      query += " offset #{offset}"
-    end
+    query += " offset #{offset}" if number_of_released_records
     query
   end
 
@@ -515,7 +513,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def values
-    values = perform_query if is_sql
+    perform_query if is_sql
   end
 
   def number_of_header_lines
@@ -584,13 +582,17 @@ class Datatable < ActiveRecord::Base
       @eml.objectName title.tr(' ', '+')
       @eml.encodingMethod 'None'
       eml_data_format
-      @eml.distribution do
-        @eml.online do
-          if is_sql
-            @eml.url "http://#{website_name}.kbs.msu.edu/datatables/#{id}.csv"
-          else
-            @eml.url data_url
-          end
+      eml_distribution
+    end
+  end
+
+  def eml_distribution
+    @eml.distribution do
+      @eml.online do
+        if is_sql
+          @eml.url "http://#{website_name}.kbs.msu.edu/datatables/#{id}.csv"
+        else
+          @eml.url data_url
         end
       end
     end
