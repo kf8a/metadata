@@ -143,21 +143,23 @@
 
 <% end %>
 
-<% if datatable.is_sql %>
-  <!--
-  TODO: geographic coverage
-  -->
-  <%= render 'protocols', :datatable => datatable %>
-  <%= render 'download_button', :datatable => datatable, :website => @website %>
-  <%= render 'data_preview',   :datatable => datatable %>
-<% else %>
-  <% if datatable.object? %>
-    <p>
-    <hr/>
-      <%= link_to 'Data (on a different site)', datatable.data_url, class: "download-link" %>
-    </p>
+<% unless datatable.deprecated_in_favor_of.present? %>
+  <% if datatable.is_sql %>
+    <!--
+    TODO: geographic coverage
+    -->
+    <%= render 'protocols', :datatable => datatable %>
+    <%= render 'download_button', :datatable => datatable, :website => @website %>
+    <%= render 'data_preview',   :datatable => datatable %>
   <% else %>
-    <p>Data Embargoed</p>
+    <% if datatable.data_url? %>
+      <p>
+      <hr/>
+      <%= link_to 'Data (on a different site)', datatable.data_url, class: "download-link" %>
+      </p>
+    <% else %>
+      <p>Data Embargoed</p>
+    <% end %>
   <% end %>
 <% end %>
 
