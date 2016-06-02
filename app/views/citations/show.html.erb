@@ -24,7 +24,7 @@
 
     <% if @citation.pdf.present? %>
       <div class='description'
-        <p> Citable PDF link: <%= link_to "https://lter.kbs.msu.edu/pub/#{@citation.id}", "/pub/#{@citation.id}" %> </p>
+      <p> Citable PDF link: https://lter.kbs.msu.edu/pub/<%= @citation.id %></p>
     </div>
     <% end %>
       <p>
