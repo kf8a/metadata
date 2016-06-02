@@ -68,7 +68,7 @@ class ProtocolsController < ApplicationController
 
   def download
     head(:not_found) && return unless (protocol = Protocol.find_by_id(params[:id]))
-    file_from_s3(protocol)
+    pdf_from_s3(protocol)
   end
 
   private
