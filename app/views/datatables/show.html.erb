@@ -7,6 +7,14 @@
       {:name => datatable.study_name },
       {:name => datatable.title.upcase}] %>
 
+  <% if datatable.deprecated_in_favor_of.present? %>
+  <div class="dprecation-warning">
+    <h1>This datatable was deprecated in favor of <%= link_to datatable_url(datatable.deprecated_in_favor_of) %></h1>
+    <p>
+    <%= datatable.deprecation_notice %>
+    </p>
+  </div>
+  <% end %>
   <div class='page type-page hfeed'>
     <h1> <%=raw datatable.title %> </h1>
 

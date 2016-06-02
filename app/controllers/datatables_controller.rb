@@ -1,8 +1,9 @@
+# Control the display of datatables
 class DatatablesController < ApplicationController
   helper_method :datatable
 
-  before_action :admin?, except: [:index, :show, :suggest, :search, :qc] unless Rails.env == 'development'
-  before_action :can_download?, only: :show, if: Proc.new { |controller| controller.request.format.csv? || controller.request.format.fasta? } # run before filter to prevent non-members from downloading
+  before_action :admin?, except: [:index, :show, :suggest, :search, :qc]
+  before_action :can_download?, only: :show, if: proc { |controller| controller.request.format.csv? || controller.request.format.fasta? } # run before filter to prevent non-members from downloading
   # before_filter :reject_robots
 
   helper_method :datatable
@@ -14,12 +15,10 @@ class DatatablesController < ApplicationController
     @website = website
     @area = params[:area]
     store_location
-    retrieve_datatables('keyword_list' =>'')
+    retrieve_datatables('keyword_list' => '')
 
-    if Rails.env == 'production' # and stale? etag: @datatables
-      respond_with @datatables do |format|
-        format.rss { render rss: @datatables }
-      end
+    respond_with @datatables do |format|
+      format.rss { render rss: @datatables }
     end
   end
 
@@ -38,11 +37,10 @@ class DatatablesController < ApplicationController
   # GET /datatables/1.xml
   # GET /datatables/1.csv
   def show
-    expires_in 5.minutes
     @website = website
 
-    store_location #in case we have to log in and come back here
-    if datatable.dataset.valid_request?(@subdomain_request)
+    store_location # in case we have to log in and come back here
+    if valid_dataset_request?(@subdomain_request)
       respond_to do |format|
         format.html
         format.fasta
@@ -63,6 +61,8 @@ class DatatablesController < ApplicationController
           end
         end
       end
+    elsif deprecated?
+      redirect_to datatable_url(datatable.deprecated_in_favor_of)
     else
       redirect_to datatables_url
     end
@@ -85,16 +85,14 @@ class DatatablesController < ApplicationController
 
   # GET /datatables/1;edit
   def edit
-   initialize_instance_variables
+    initialize_instance_variables
   end
 
   # POST /datatables
   def create
     initialize_instance_variables
 
-    if datatable.save
-      flash[:notice] = 'Datatable was successfully created.'
-    end
+    flash[:notice] = 'Datatable was successfully created.' if datatable.save
 
     respond_with datatable
   end
@@ -122,12 +120,12 @@ class DatatablesController < ApplicationController
 
     list = ActsAsTaggableOn::Tag.where('lower(name) like ?', term.downcase + '%')
                                 .select('DISTINCT tags.name')
-    list = list + Person.where('lower(sur_name) like ?', term.downcase + '%')
-                        .select('DISTINCT sur_name as name')
-    list = list + Theme.where('lower(name) like ?', term.downcase + '%')
-                       .select('DISTINCT name')
-    list = list + CoreArea.where('lower(name) like ?', term.downcase + '%')
-                          .select('DISTINCT name')
+    list += Person.where('lower(sur_name) like ?', term.downcase + '%')
+                  .select('DISTINCT sur_name as name')
+    list += Theme.where('lower(name) like ?', term.downcase + '%')
+                 .select('DISTINCT name')
+    list += CoreArea.where('lower(name) like ?', term.downcase + '%')
+                    .select('DISTINCT name')
 
     keywords = list.collect { |x| x.name.downcase }.sort.uniq
     respond_to do |format|
@@ -223,15 +221,16 @@ class DatatablesController < ApplicationController
                                       :description, :begin_date, :end_date, :on_web, :keyword_list,
                                       :theme_id, :weight, :study_id, :deprecation_notice,
                                       :update_frequency_days, :is_secondary, { core_area_ids: [] },
-                                      { variates_attributes: [[:name, :weight, :description,
-                                      :unit_id, :measurement_scale, :data_type, :max_valid,
-                                      :min_valid, :date_format, :precision,
-                                      :missing_value_indicator,
-                                      :_destroy, :id]] }, { data_contributions_attributes:
-                                        [[:person_id, :role_id, :_destroy, :id]] })
+                                      { variates_attributes: [
+                                        [:name, :weight, :description,
+                                         :unit_id, :measurement_scale, :data_type, :max_valid,
+                                         :min_valid, :date_format, :precision,
+                                         :missing_value_indicator,
+                                         :_destroy, :id]
+                                      ] },
+                                      data_contributions_attributes:
+                                        [[:person_id, :role_id, :_destroy, :id]])
   end
-
-  private
 
   def render_csv
     set_file_headers
@@ -285,5 +284,13 @@ class DatatablesController < ApplicationController
     @studies = Study.all.collect { |study| [study.name, study.id] }
     @people = Person.all
     @units = Unit.all
+  end
+
+  def valid_dataset_request?(subdomain)
+    datatable.dataset.valid_request?(subdomain)
+  end
+
+  def deprecated?
+    deprecated_in_favor_of.present?
   end
 end
