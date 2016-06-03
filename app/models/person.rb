@@ -78,7 +78,8 @@ class Person < ActiveRecord::Base
   end
 
   def self.find_all_with_dataset
-    people = Person.order('sur_name').collect { |person| person if person.dataset? }
+    people = Person.order('sur_name')
+                   .collect { |person| person if person.dataset? }
     people.compact
   end
 
@@ -97,12 +98,8 @@ class Person < ActiveRecord::Base
     eml_individual_name(eml)
     eml.organizationName organization unless organization.blank?
     eml_address(eml)
-    if phone
-      eml.phone phone, 'phonetype' => 'phone'
-    end
-    if fax
-      eml.phone fax, 'phonetype' => 'fax'
-    end
+    eml.phone phone, 'phonetype' => 'phone' if phone
+    eml.phone fax, 'phonetype' => 'fax' if fax
     eml.electronicMailAddress email unless email.blank?
   end
 
