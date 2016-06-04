@@ -291,6 +291,6 @@ class DatatablesController < ApplicationController
   end
 
   def deprecated?
-    deprecated_in_favor_of.present?
+    datatable.deprecated_in_favor_of.present?
   end
 end
