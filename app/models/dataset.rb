@@ -65,7 +65,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def to_s
-    "#{dataset}"
+    dataset
   end
 
   def increment_version
@@ -164,7 +164,7 @@ class Dataset < ActiveRecord::Base
 
   # Return the bounding coordinates of all of the datatables in the dataset
   # @return a hash with  {eastBoundingCoordinate:, westBoundingCoordinate: , northBoundingCoordinate:, southBoundingCoordinate:}
-  def boundingCoordinates
+  def bounding_coordinates
     {
       westBoundingCoordinate: -85.404699,
       eastBoundingCoordinate: -85.366857,
@@ -438,10 +438,10 @@ class Dataset < ActiveRecord::Base
     @eml.geographicCoverage do
       @eml.geographicDescription 'The areas around the Kellogg Biological Station in southwest Michigan'
       @eml.boundingCoordinates do
-        @eml.westBoundingCoordinate boundingCoordinates[:westBoundingCoordinate]
-        @eml.eastBoundingCoordinate boundingCoordinates[:eastBoundingCoordinate]
-        @eml.northBoundingCoordinate boundingCoordinates[:northBoundingCoordinate]
-        @eml.southBoundingCoordinate boundingCoordinates[:southBoundingCoordinate]
+        @eml.westBoundingCoordinate bounding_coordinates[:westBoundingCoordinate]
+        @eml.eastBoundingCoordinate bounding_coordinates[:eastBoundingCoordinate]
+        @eml.northBoundingCoordinate bounding_coordinates[:northBoundingCoordinate]
+        @eml.southBoundingCoordinate bounding_coordinates[:southBoundingCoordinate]
       end
     end
   end
