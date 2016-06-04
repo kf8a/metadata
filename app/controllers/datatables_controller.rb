@@ -61,8 +61,6 @@ class DatatablesController < ApplicationController
           end
         end
       end
-    elsif deprecated?
-      redirect_to datatable_url(datatable.deprecated_in_favor_of)
     else
       redirect_to datatables_url
     end
@@ -288,9 +286,5 @@ class DatatablesController < ApplicationController
 
   def valid_dataset_request?(subdomain)
     datatable.dataset.valid_request?(subdomain)
-  end
-
-  def deprecated?
-    datatable.deprecated_in_favor_of.present?
   end
 end
