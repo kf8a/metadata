@@ -96,10 +96,27 @@ class Person < ActiveRecord::Base
 
   def eml_party(eml)
     eml_individual_name(eml)
-    eml.organizationName organization unless organization.blank?
+    eml_organization(eml)
     eml_address(eml)
+    eml_phone(eml)
+    eml_fax(eml)
+    eml_email(eml)
+    eml
+  end
+
+  def eml_organization(eml)
+    eml.organizationName organization unless organization.blank?
+  end
+
+  def eml_phone(eml)
     eml.phone phone, 'phonetype' => 'phone' if phone
+  end
+
+  def eml_fax(eml)
     eml.phone fax, 'phonetype' => 'fax' if fax
+  end
+
+  def eml_email(eml)
     eml.electronicMailAddress email unless email.blank?
   end
 
