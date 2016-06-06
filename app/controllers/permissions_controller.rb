@@ -17,9 +17,7 @@ class PermissionsController < ApplicationController
   def create
     user = User.find_by_email(params[:email])
     flash[:notice] = 'No user with that email' unless user
-    permission = Permission.find_by(user_id: user,
-                                    datatable_id: @datatable,
-                                    owner_id: current_user.id) || Permission.new
+    permission = my_permission(user, current_user, @datatable) || Permission.new
     permission.datatable_id = @datatable.id
     permission.user = user
     permission.owner = current_user
@@ -40,9 +38,7 @@ class PermissionsController < ApplicationController
   def destroy
     user = User.find(params[:user])
     owner = current_user
-    permissions = Permission.where(user_id: user.id,
-                                   datatable_id: @datatable.id,
-                                   owner_id: owner.id)
+    permissions = my_permissions(user, owner, @datatable)
     permissions.each(&:destroy)
 
     respond_to do |format|
@@ -55,16 +51,11 @@ class PermissionsController < ApplicationController
   def deny
     user = User.find_by_email(params[:email])
     owner = current_user
-    permission = Permission.find_by(user_id: user,
-                                    datatable_id: @datatable,
-                                    owner_id: owner)
+    permission = my_permission(user, owner, @datatable)
     if permission
       permission.decision = 'denied'
     else
-      permission = Permission.new(user: user,
-                                  datatable: @datatable,
-                                  owner: owner,
-                                  decision: 'denied')
+      permission = new_denied_permission(user, owner, @datatable)
     end
 
     permission.save
@@ -76,6 +67,25 @@ class PermissionsController < ApplicationController
   end
 
   private
+
+  def my_permissions(user, owner, datatable)
+    Permission.where(user_id: user.id,
+                     datatable_id: datatable.id,
+                     owner_id: owner.id)
+  end
+
+  def my_permission(user, owner, datatable)
+    Permission.find_by(user_id: user,
+                       datatable_id: datatable,
+                       owner_id: owner)
+  end
+
+  def new_denied_permission(user, owner, datatable)
+    Permission.new(user: user,
+                   datatable: datatable,
+                   owner: owner,
+                   decision: 'denied')
+  end
 
   def require_datatable
     @datatable = Datatable.find(params[:id]) if params[:id]

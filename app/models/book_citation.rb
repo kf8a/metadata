@@ -1,9 +1,10 @@
+# A Book citation contains mainly formatting styles
 class BookCitation < Citation
   def book?
     true
   end
 
-  def formatted(options={})
+  def formatted(options = {})
     "#{author_and_year(options)} #{title_and_punctuation} #{page_numbers_book}#{editor_string}#{publication_string}#{publisher}#{address_and_city}"
   end
 
@@ -18,9 +19,7 @@ class BookCitation < Citation
   end
 
   def publication_string
-    if publication.present?
-      "#{publication}. "
-    end
+    "#{publication}. " if publication.present?
   end
 
   def address_and_city
