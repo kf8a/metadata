@@ -31,7 +31,7 @@ class Citation < ActiveRecord::Base
                     path: '/citations/pdfs/:id/:style/:basename.:extension',
                     s3_credentials: File.join(Rails.root, 'config', 's3.yml'),
                     s3_permissions: 'authenticated-read'
-                    # s3_headers: {'Content-Disposition': 'attachment'}
+  #                 s3_headers: { 'Content-Disposition': 'attachment' }
 
   validates_attachment_file_name :pdf, matches: /pdf/
   before_post_process :transliterate_file_name
@@ -41,8 +41,8 @@ class Citation < ActiveRecord::Base
 
   scope :bookish, -> { where("type in ('BookCitation', 'ChapterCitation')") }
 
-  scope :with_authors_by_sur_name_and_pub_year, -> { joins(:authors).where(authors: { seniority: 1 })
-                                                                    .order('pub_year desc, authors.sur_name') }
+  scope :with_authors_by_sur_name_and_pub_year, lambda { joins(:authors).where(authors: { seniority: 1 })
+                                                                        .order('pub_year desc, authors.sur_name') }
 
   scope :published,   -> { where(state: 'published').with_authors_by_sur_name_and_pub_year }
   scope :submitted,   -> { where(state: 'submitted').with_authors_by_sur_name_and_pub_year }
@@ -51,7 +51,7 @@ class Citation < ActiveRecord::Base
   scope :books, -> { where(type: 'book') }
 
   scope :next, ->(p) { { conditions: ['id > ?', p.id], limit: 1, order: 'id' } }
-  scope :previous, lambda { |p| { conditions: ['id < ?', p.id], limit: 1, order: 'id desc' } }
+  scope :previous, ->(p) { { conditions: ['id < ?', p.id], limit: 1, order: 'id desc' } }
 
   workflow do
     state :submitted do
@@ -262,7 +262,7 @@ class Citation < ActiveRecord::Base
     endnote = "%0 #{endnote_type}#{title_to_enw}#{authors.to_enw}#{editors.to_enw}#{endnote_publication_data}"
     endnote += "#{volume_to_enw}#{page_numbers_to_enw}#{pub_year_to_enw}#{abstract_to_enw}#{doi_to_enw}"
     endnote += "#{publisher_to_enw}#{publisher_url_to_enw}#{isbn_to_enw}#{city_to_enw}"
-    endnote += "#{accession_number_to_enw}"
+    endnote += accession_number_to_enw.to_s
     endnote += "\n"
     endnote
   end
@@ -283,11 +283,11 @@ class Citation < ActiveRecord::Base
   end
 
   def make_pdf_public
-    self.pdf.s3_object.acl = :public_read
+    pdf.s3_object.acl = :public_read
   end
 
   def make_pdf_private
-    self.pdf.s3_object.acl = :authenticated_read
+    pdf.s3_object.acl = :authenticated_read
   end
 
   private
@@ -404,11 +404,17 @@ class Citation < ActiveRecord::Base
   end
 
   def author_and_year(options = {})
+    return pub_year_with_punctuation.tos if authors.empty?
+
     if options[:long]
-      authors.empty? ? pub_year_with_punctuation.to_s : "#{author_string} #{pub_year_with_punctuation}".rstrip
+      author_and_pub_year_string(author_string)
     else
-      authors.empty? ? pub_year_with_punctuation.to_s : "#{short_author_string} #{pub_year_with_punctuation}".rstrip
+      author_and_pub_year_string(short_author_string)
     end
+  end
+
+  def author_and_pub_year_string(author_string)
+    "#{author_string} #{pub_year_with_punctuation}".rstrip
   end
 
   # use natural order for second and subsequent authors
@@ -417,9 +423,9 @@ class Citation < ActiveRecord::Base
     if my_authors.length > 1
       last_author = my_authors.pop
       first_author = my_authors.shift
-      author_array = my_authors.collect { |author| "#{author.formatted(:natural)}" }
+      author_array = my_authors.collect { |author| author.formatted(:natural).to_s }
       author_array.push("#{last_author.formatted(:natural)}.")
-      author_array.unshift("#{first_author.formatted}")
+      author_array.unshift(first_author.formatted.to_s)
     else
       author_array = [authors.first.formatted]
     end

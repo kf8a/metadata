@@ -11,10 +11,10 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'Some citations exist at different dates' do
     setup do
-      @oldcitation = FactoryGirl.create(:citation, :title => 'Old Citation')
+      @oldcitation = FactoryGirl.create(:citation, title: 'Old Citation')
       @oldcitation.updated_at = Date.civil(2000, 1, 1)
       @oldcitation.save
-      @newcitation = FactoryGirl.create(:citation, :title => 'New Citation')
+      @newcitation = FactoryGirl.create(:citation, title: 'New Citation')
       @newcitation.updated_at = Date.civil(2002, 1, 1)
       @newcitation.save
     end
@@ -31,9 +31,9 @@ class CitationTest < ActiveSupport::TestCase
       # we are testing the workflow so we need actually create a citation
       @citation = FactoryGirl.create :citation
 
-      @citation.authors = [Author.new(:sur_name => 'Robertson',
-                                      :given_name => 'G', :middle_name => 'P',
-                                      :seniority => 1)]
+      @citation.authors = [Author.new(sur_name: 'Robertson',
+                                      given_name: 'G', middle_name: 'P',
+                                      seniority: 1)]
 
       @citation.title = 'Long-term ecological research: Re-inventing network science'
       @citation.publication = 'Frontiers in Ecology and the Environment'
