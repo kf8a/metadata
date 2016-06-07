@@ -6,11 +6,11 @@ module ThemesHelper
     yield(theme)
     concat('
   <ul id="ul_' + theme.id.to_s + '">', block.binding)
-#    if !theme.leaf?
-      theme.children.each do |child|
-        render_themes(child, &block)
-      end
-#    end
+    # if !theme.leaf?
+    theme.children.each do |child|
+      render_themes(child, &block)
+    end
+    # end
     concat('</li>
   </ul>
 
