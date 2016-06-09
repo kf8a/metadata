@@ -1,3 +1,5 @@
+# Score cards are a way to show how much data is in the system
+# for each year
 class ScoreCardsController < ApplicationController
   def index
     on_web   = params[:on_web] || true
@@ -6,11 +8,10 @@ class ScoreCardsController < ApplicationController
 
     if website.casecmp('glbrc') == 0
       @datatables = glbrc_datatables(on_web)
+    elsif study_id
+      @datatables = @datatables.where(study_id: study_id)
     else
       @datatables = datatables(on_web)
-      if study_id
-        @datatables = @datatables.where(study_id: study_id)
-      end
     end
   end
 
