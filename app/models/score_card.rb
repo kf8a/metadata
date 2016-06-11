@@ -12,9 +12,7 @@ class ScoreCard
   end
 
   def db_connection
-    unless @db_connection
-      @db_connection = ActiveRecord::Base.connection
-    end
+    @db_connection = ActiveRecord::Base.connection unless @db_connection
     @db_connection
   end
 
@@ -30,8 +28,8 @@ class ScoreCard
     if time_key
       result = data(datatable, time_key)
 
-      result = fill_to_present(result, update_frequency_years(datatable)) unless 'completed' == datatable.status
-      result
+      fill_to_present(result,
+                      update_frequency_years(datatable)) unless 'completed' == datatable.status
     else
       []
     end
@@ -46,11 +44,16 @@ class ScoreCard
 
   def data(datatable, time_key)
     if time_key =~ /year/i
-      query = "select #{time_key} as year, count(*) from (#{datatable.object}) as t1 group by #{time_key}"
-      approved_query = "select #{time_key} as year, count(*) from (#{datatable.approved_data_query}) as t1 group by #{time_key}"
+      query = "select #{time_key} as year, count(*) from (#{datatable.object})"\
+              " as t1 group by #{time_key}"
+      approved_query = "select #{time_key} as year, count(*)"\
+                       " from (#{datatable.approved_data_query}) as t1 group by #{time_key}"
     else
-      query = "select date_part('year',#{time_key}) as year, count(*) from (#{datatable.object}) as t1 group by date_part('year',#{time_key})"
-      approved_query = "select date_part('year',#{time_key}) as year, count(*) from (#{datatable.approved_data_query}) as t1 group by date_part('year',#{time_key})"
+      query = "select date_part('year',#{time_key}) as year, count(*)"\
+              " from (#{datatable.object}) as t1 group by date_part('year',#{time_key})"
+      approved_query = "select date_part('year',#{time_key}) as year,"\
+                       " count(*) from (#{datatable.approved_data_query})"\
+                       " as t1 group by date_part('year',#{time_key})"
     end
     begin
       query_result    = db_connection.execute(query)
@@ -77,7 +80,8 @@ class ScoreCard
     max_year_record = data.max { |a, b| a[:year] <=> b[:year] }
     max_year = max_year_record[:year].to_i
     max_year += update_frequency_years
-    add_years = (max_year..current_year).step(update_frequency_years).collect { |year| { year: year, count: 0 } }
+    add_years = (max_year..current_year).step(update_frequency_years)
+                                        .collect { |year| { year: year, count: 0 } }
     add_years + data
   end
 
