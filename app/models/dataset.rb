@@ -288,7 +288,13 @@ class Dataset < ActiveRecord::Base
 
   def eml_intellectual_rights
     @eml.intellectualRights do
-      @eml.para "Data in the KBS LTER core database may not be published without written permission of the lead investigator or project director. These restrictions are intended mainly to preserve the primary investigators' rights to first publication and to ensure that data users are aware of the limitations that may be associated with any specific data set. These restrictions apply to both the baseline data set and to the data sets associated with specific LTER-supported subprojects."
+      @eml.para 'Data in the KBS LTER core database may not be published without written'\
+                ' permission of the lead investigator or project director. These restrictions'\
+                " are intended mainly to preserve the primary investigators' rights to first"\
+                ' publication and to ensure that data users are aware of the limitations'\
+                ' that may be associated with any specific data set. These restrictions apply'\
+                ' to both the baseline data set and to the data sets associated with specific'\
+                ' LTER-supported subprojects.'
       @eml.para 'All publications of KBS data and images must acknowledge KBS LTER support.'
     end
   end
@@ -436,7 +442,8 @@ class Dataset < ActiveRecord::Base
 
   def eml_geographic_coverage
     @eml.geographicCoverage do
-      @eml.geographicDescription 'The areas around the Kellogg Biological Station in southwest Michigan'
+      @eml.geographicDescription 'The areas around the Kellogg Biological Station in'\
+                                 ' southwest Michigan'
       @eml.boundingCoordinates do
         @eml.westBoundingCoordinate bounding_coordinates[:westBoundingCoordinate]
         @eml.eastBoundingCoordinate bounding_coordinates[:eastBoundingCoordinate]
