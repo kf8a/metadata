@@ -7,7 +7,7 @@ class ChapterCitation < Citation
 
   def volume_and_page
     if volume.blank?
-      page_numbers
+      page_number_string
     elsif page_numbers.blank?
       volume.to_s
     else
@@ -15,7 +15,7 @@ class ChapterCitation < Citation
     end
   end
 
-  def page_numbers
+  def page_number_string
     if page_numbers.blank?
       ''
     else
