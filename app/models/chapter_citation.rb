@@ -1,20 +1,25 @@
 # A citation representing a book chapter
 class ChapterCitation < Citation
   def formatted(options = {})
-    "#{author_and_year(options)} #{title_and_punctuation} #{volume_and_page} in #{eds}#{book_string}#{publisher}#{address_and_city}."
+    "#{author_and_year(options)} #{title_and_punctuation} #{volume_and_page}"\
+    " in #{eds}#{book_string}#{publisher}#{address_and_city}."
   end
 
   def volume_and_page
     if volume.blank?
-      if page_numbers.blank?
-        ''
-      else
-        "Pages #{page_numbers}"
-      end
+      page_numbers
     elsif page_numbers.blank?
       volume.to_s
     else
       "Vol #{volume}, Pages #{page_numbers}"
+    end
+  end
+
+  def page_numbers
+    if page_numbers.blank?
+      ''
+    else
+      "Pages #{page_numbers}"
     end
   end
 
@@ -37,9 +42,7 @@ class ChapterCitation < Citation
   end
 
   def book_string
-    if book.present?
-      book + '. '
-    end
+    book + '. ' if book.present?
   end
 
   def address_and_city
