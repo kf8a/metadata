@@ -11,14 +11,14 @@ class Variate < ActiveRecord::Base
 
   def self.from_eml(variate_eml)
     variate = Variate.new
-    variate.set_attributes_from_eml(variate_eml)
-    variate.set_unit_from_eml(variate_eml)
+    variate.attributes_from_eml(variate_eml)
+    variate.unit_from_eml(variate_eml)
     variate.save
 
     variate
   end
 
-  def set_attributes_from_eml(variate_eml)
+  def attributes_from_eml(variate_eml)
     self.name              = variate_eml.css('attributeName').text
     self.description       = variate_eml.at_css('attributeDefinition, definition').text
     self.measurement_scale = variate_eml.at_css('measurementScale')
@@ -29,7 +29,7 @@ class Variate < ActiveRecord::Base
     self.date_format       = variate_eml.at_css('formatString').try(:text)
   end
 
-  def set_unit_from_eml(variate_eml)
+  def unit_from_eml(variate_eml)
     if variate_eml.at_css('standardUnit')
       unit_name = variate_eml.at_css('standardUnit').text
       self.unit = Unit.find_or_create_by_name_and_in_eml(unit_name, true)
