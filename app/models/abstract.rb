@@ -7,18 +7,12 @@ class Abstract < ActiveRecord::Base
 
   self.table_name = 'meeting_abstracts'
 
-  if Rails.env.production?
-    has_attached_file :pdf,
-                      storage: :s3,
-                      bucket: 'metadata_production',
-                      path: '/abstracts/pdfs/:id/:style/:basename.:extension',
-                      s3_credentials: File.join(Rails.root, 'config', 's3.yml'),
-                      s3_permissions: 'authenticated-read'
-  else
-    has_attached_file :pdf,
-                      url: '/abstracts/:id/download',
-                      path: ':rails_root/assets/abstracts/:attachment/:id/:style/:basename.:extension'
-  end
+  has_attached_file :pdf,
+                    storage: :s3,
+                    bucket: 'metadata_production',
+                    path: '/abstracts/pdfs/:id/:style/:basename.:extension',
+                    s3_credentials: File.join(Rails.root, 'config', 's3.yml'),
+                    s3_permissions: 'authenticated-read'
 
   def self.by_authors
     order :authors
