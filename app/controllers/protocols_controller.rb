@@ -16,7 +16,7 @@ class ProtocolsController < ApplicationController
   # GET /protocols/1
   def show
     store_location
-    @protocol = website.protocols.where('id = ?', params[:id]).first
+    @protocol = website.protocols.find(params[:id].to_i)
 
     if @protocol
       respond_with @protocol
