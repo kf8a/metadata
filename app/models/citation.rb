@@ -46,7 +46,7 @@ class Citation < ActiveRecord::Base
 
   scope :with_authors_by_sur_name_and_pub_year, lambda {
     joins(:authors).where(authors: { seniority: 1 })
-      .order('pub_year desc, authors.sur_name')
+                   .order('pub_year desc, authors.sur_name')
   }
 
   scope :published,   -> { where(state: 'published').with_authors_by_sur_name_and_pub_year }
@@ -264,12 +264,12 @@ class Citation < ActiveRecord::Base
   end
 
   def to_enw
-    endnote = "%0 #{endnote_type}#{title_to_enw}#{authors.to_enw}#{editors.to_enw}#{endnote_publication_data}"
-    endnote += "#{volume_to_enw}#{page_numbers_to_enw}#{pub_year_to_enw}#{abstract_to_enw}#{doi_to_enw}"
-    endnote += "#{publisher_to_enw}#{publisher_url_to_enw}#{isbn_to_enw}#{city_to_enw}"
-    endnote += accession_number_to_enw.to_s
-    endnote += "\n"
-    endnote
+    "%0 #{endnote_type}#{title_to_enw}#{authors.to_enw}"\
+    "#{editors.to_enw}#{endnote_publication_data}"\
+    "#{volume_to_enw}#{page_numbers_to_enw}#{pub_year_to_enw}"\
+    "#{abstract_to_enw}#{doi_to_enw}"\
+    "#{publisher_to_enw}#{publisher_url_to_enw}#{isbn_to_enw}#{city_to_enw}"\
+    "#{accession_number_to_enw}\n"
   end
 
   def self.select_options
