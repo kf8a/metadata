@@ -408,7 +408,7 @@ class Datatable < ActiveRecord::Base
     values = ActiveRecord::Base.connection.execute(object)
     if values.fields.member?('sample_date')
       'sample_date'
-    elsif fvalues.fields.member?('obs_date')
+    elsif values.fields.member?('obs_date')
       'obs_date'
     elsif values.fields.member?('date')
       'date'
@@ -538,7 +538,7 @@ class Datatable < ActiveRecord::Base
     year + '-1-1'
   end
 
-  def is_year?(year)
+  def year?(year)
     # assume its a year if there are only 4 characters
     4 == year.length
   end
@@ -548,8 +548,8 @@ class Datatable < ActiveRecord::Base
     dates = values[0]
     min = dates['min']
     max = dates['max']
-    min = convert_year_to_date(min) if is_year?(min)
-    max = convert_year_to_date(max) if is_year?(max)
+    min = convert_year_to_date(min) if year?(min)
+    max = convert_year_to_date(max) if year?(max)
 
     [Time.zone.parse(min).to_date, Time.zone.parse(max).to_date]
   end
@@ -567,13 +567,17 @@ class Datatable < ActiveRecord::Base
         @eml.numFooterLines 1
         @eml.recordDelimiter '\n'
         @eml.attributeOrientation 'column'
-        @eml.simpleDelimited do
-          @eml.fieldDelimiter ','
-          @eml.collapseDelimiters 'no'
-          @eml.quoteCharacter '"'
-          @eml.literalCharacter '\\'
-        end
+        eml_simple_field
       end
+    end
+  end
+
+  def eml_simple_field
+    @eml.simpleDelimited do
+      @eml.fieldDelimiter ','
+      @eml.collapseDelimiters 'no'
+      @eml.quoteCharacter '"'
+      @eml.literalCharacter '\\'
     end
   end
 

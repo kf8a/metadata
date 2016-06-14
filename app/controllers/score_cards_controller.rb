@@ -9,7 +9,7 @@ class ScoreCardsController < ApplicationController
     if website.casecmp('glbrc') == 0
       @datatables = glbrc_datatables(on_web)
     elsif study_id
-      @datatables = @datatables.where(study_id: study_id)
+      @datatables = datatables.where(study_id: study_id)
     else
       @datatables = datatables(on_web)
     end
