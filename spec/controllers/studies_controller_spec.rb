@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-describe StudiesController, type: :controller  do
+describe StudiesController, type: :controller do
   render_views
 
   before(:each) do
-    sign_in_as(FactoryGirl.create :admin_user)
+    sign_in_as(FactoryGirl.create(:admin_user))
     # @controller.current_user = FactoryGirl.create :admin_user
   end
 
@@ -22,10 +22,10 @@ describe StudiesController, type: :controller  do
     before(:each) do
       @study = FactoryGirl.create :study
       @another_study = FactoryGirl.create :study
-      post :move_to, {:id=> @study.id, :parent_id => @another_study.id}
+      post :move_to, id: @study.id, parent_id: @another_study.id
     end
 
-    it "should make the first study a child of the other" do
+    it 'should make the first study a child of the other' do
       @study.reload
       assert @study.parent == @another_study
     end
@@ -35,10 +35,10 @@ describe StudiesController, type: :controller  do
     before(:each) do
       @study = FactoryGirl.create :study
       @another_study = FactoryGirl.create :study
-      post :move_before, {:id=> @study.id, :parent_id => @another_study.id}
+      post :move_before, id: @study.id, parent_id: @another_study.id
     end
 
-    it "should make the first study a sibling of the other" do
+    it 'should make the first study a sibling of the other' do
       @study.reload
       assert @study.siblings.include?(@another_study)
     end

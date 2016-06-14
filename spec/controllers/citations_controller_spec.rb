@@ -1,30 +1,38 @@
 require 'rails_helper'
 
-describe CitationsController, type: :controller  do
+describe CitationsController, type: :controller do
   render_views
 
   describe 'anonymous access' do
     before(:each) do
-        Citation.delete_all  #clear out other citations
-        author1 = FactoryGirl.create(:author, :sur_name => 'Zebedee', :seniority => 1)
-        author2 = FactoryGirl.create(:author, :sur_name => 'Alfred',  :seniority => 1)
-        author3 = FactoryGirl.create(:author, :sur_name => 'Babbit',  :seniority => 1)
-        author4 = FactoryGirl.create(:author, :sur_name => 'Bob',     :seniority => 1)
-        website = Website.find_by_name("lter") || FactoryGirl.create(:website, :name => "lter")
-        @citation1 = FactoryGirl.create(:article_citation, :website => website,
-                                        :authors => [author1], :title => 'citation1', :pub_year => 2010, 
-                                        :state => 'published')
-        @citation2 = FactoryGirl.create(:book_citation, :website => website,
-                                        :authors => [author2], :title => 'citation2', :pub_year => 2010, 
-                                        :state => 'published')
-        @citation3 = FactoryGirl.create(:chapter_citation, :website => website,
-                                        :authors => [author3], :title => 'citation3', :pub_year => 2010,
-                                        :state => 'published' )
-        @citation4 = FactoryGirl.create(:thesis_citation, :website => website,
-                                        :authors => [author4], :title => 'citation4', :pub_year => 2010,
-                                        :state => 'published' )
+      Citation.delete_all # clear out other citations
+      author1 = FactoryGirl.create(:author, sur_name: 'Zebedee', seniority: 1)
+      author2 = FactoryGirl.create(:author, sur_name: 'Alfred',  seniority: 1)
+      author3 = FactoryGirl.create(:author, sur_name: 'Babbit',  seniority: 1)
+      author4 = FactoryGirl.create(:author, sur_name: 'Bob',     seniority: 1)
+      website = Website.find_by_name('lter') || FactoryGirl.create(:website, name: 'lter')
+      @citation1 = FactoryGirl.create(:article_citation, website: website,
+                                                         authors: [author1],
+                                                         title: 'citation1',
+                                                         pub_year: 2010,
+                                                         state: 'published')
+      @citation2 = FactoryGirl.create(:book_citation, website: website,
+                                                      authors: [author2],
+                                                      title: 'citation2',
+                                                      pub_year: 2010,
+                                                      state: 'published')
+      @citation3 = FactoryGirl.create(:chapter_citation, website: website,
+                                                         authors: [author3],
+                                                         title: 'citation3',
+                                                         pub_year: 2010,
+                                                         state: 'published')
+      @citation4 = FactoryGirl.create(:thesis_citation, website: website,
+                                                        authors: [author4],
+                                                        title: 'citation4',
+                                                        pub_year: 2010,
+                                                        state: 'published')
 
-        @test = website
+      @test = website
     end
 
     it 'GET index' do
@@ -62,43 +70,43 @@ describe CitationsController, type: :controller  do
     end
 
     it 'returns citations based on the past dates' do
-      get :index, date: {year: "#{Date.today.year - 1}", month:'4', day: '16'}
+      get :index, date: { year: (Time.zone.today.year - 1).to_s, month: '4', day: '16' }
       expect(response).to have_http_status(:success)
       expect(assigns(:citations).size).to eq 4
     end
 
     it 'does not return citations before the date supplied' do
-      get :index, :date=>{:year=>"#{Date.today.year + 1}", :month=>'4', :day => '16'}
+      get :index, date: { year: (Time.zone.today.year + 1).to_s, month: '4', day: '16' }
       expect(response).to have_http_status(:success)
       expect(assigns(:citations).size).to eq 0
     end
 
     it 'returns articles' do
-      get :index , type: 'article'
+      get :index, type: 'article'
 
       expect(response).to have_http_status(:success)
       citations = assigns(:citations)
-      classes = citations.collect {|x| x.class.name}.sort.uniq.first
+      classes = citations.collect { |x| x.class.name }.sort.uniq.first
       expect(classes).to eq 'ArticleCitation'
     end
 
     it 'returns books' do
-      get :index , type: 'book'
+      get :index, type: 'book'
 
       expect(response).to have_http_status(:success)
       citations = assigns(:citations)
-      classes = citations.collect {|x| x.class.name}.sort.uniq
+      classes = citations.collect { |x| x.class.name }.sort.uniq
       expect(classes).to include 'BookCitation'
       expect(classes).to include 'ChapterCitation'
       expect(classes).to_not include 'ArticleCitation'
     end
 
     it 'returns theses' do
-      get :index , type: 'thesis'
+      get :index, type: 'thesis'
 
       expect(response).to have_http_status(:success)
       citations = assigns(:citations)
-      classes = citations.collect {|x| x.class.name}.sort.uniq
+      classes = citations.collect { |x| x.class.name }.sort.uniq
       expect(classes).to include 'ThesisCitation'
       expect(classes).to_not include 'ChapterCitation'
       expect(classes).to_not include 'ArticleCitation'
@@ -114,46 +122,46 @@ describe CitationsController, type: :controller  do
 
   it 'redirects to sign in when downloading' do
     @citation = FactoryGirl.create :citation
-    get :download, :id => @citation
+    get :download, id: @citation
 
-    expect(response).to redirect_to "/sign_in"
+    expect(response).to redirect_to '/sign_in'
   end
 
   it 'allows access to an open access publication' do
-    @citation= FactoryGirl.create :citation
+    @citation = FactoryGirl.create :citation
     @citation.open_access = true
 
-    get :download, :id => @citation
+    get :download, id: @citation
 
     expect(response).to have_http_status(:redirect)
   end
 
   it 'redirects to sign in on GET: new' do
     get :new
-    expect(response).to redirect_to "/sign_in"
+    expect(response).to redirect_to '/sign_in'
   end
 
   it 'redirects to sign in on POST :create' do
     post :create
-    expect(response).to redirect_to "/sign_in"
+    expect(response).to redirect_to '/sign_in'
   end
 
   it 'redirects to sign in on GET :edit' do
     citation = FactoryGirl.create :citation
     get :edit, id: citation
-    expect(response).to redirect_to "/sign_in"
+    expect(response).to redirect_to '/sign_in'
   end
 
   it 'redirects to sign in on PUT :update' do
     citation = FactoryGirl.create :citation
-    put :update, id: citation, citation: {title: "New title"}
-    expect(response).to redirect_to "/sign_in"
+    put :update, id: citation, citation: { title: 'New title' }
+    expect(response).to redirect_to '/sign_in'
   end
 
   it 'redirects to sign in on DELETE' do
     citation = FactoryGirl.create :citation
     delete :destroy, id: citation
-    expect(response).to redirect_to "/sign_in"
+    expect(response).to redirect_to '/sign_in'
   end
 
   describe 'filtering of citations' do
@@ -161,18 +169,19 @@ describe CitationsController, type: :controller  do
       @website = Website.find_or_create_by(name: 'lter')
       sign_out
 
-      author1 = FactoryGirl.create(:author, :sur_name => 'Zebedee', :seniority => 1)
-      author2 = FactoryGirl.create(:author, :sur_name => 'Alfred',  :seniority => 1)
+      author1 = FactoryGirl.create(:author, sur_name: 'Zebedee', seniority: 1)
+      author2 = FactoryGirl.create(:author, sur_name: 'Alfred',  seniority: 1)
       @citation1 = ArticleCitation.new
-      @citation1.authors << Author.new( :sur_name => 'Loecke',
-                                       :given_name => 'T', :middle_name => 'D',
-                                       :seniority => 1)
+      @citation1.authors << Author.new(sur_name: 'Loecke',
+                                       given_name: 'T', middle_name: 'D',
+                                       seniority: 1)
 
-      @citation1.authors << Author.new(:sur_name => 'Robertson',
-                                       :given_name => 'G', :middle_name => 'P',
-                                       :seniority => 2)
+      @citation1.authors << Author.new(sur_name: 'Robertson',
+                                       given_name: 'G', middle_name: 'P',
+                                       seniority: 2)
 
-      @citation1.title = 'Soil resource heterogeneity in the form of aggregated litter alters maize productivity'
+      @citation1.title = 'Soil resource heterogeneity in the form of aggregated'\
+                         ' litter alters maize productivity'
       @citation1.publication = 'Plant and Soil'
       @citation1.volume = '325'
       @citation1.start_page_number = 231
