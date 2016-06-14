@@ -6,14 +6,10 @@ describe Scribble do
     }
   end
 
-  it "should create a new instance given valid attributes" do
+  it 'should create a new instance given valid attributes' do
     Scribble.create!(@valid_attributes)
   end
 end
-
-
-
-
 
 # == Schema Information
 #
@@ -24,4 +20,3 @@ end
 #  protocol_id :integer
 #  weight      :integer
 #
-

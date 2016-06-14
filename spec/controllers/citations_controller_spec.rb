@@ -192,11 +192,11 @@ describe CitationsController, type: :controller  do
 
     describe 'GET :filtered, sort_by => id' do
       before(:each) do
-        get :filtered, :requested_subdomain => 'lter', :sort_by => 'id'
+        get :filtered, requested_subdomain: 'lter', sort_by: 'id'
       end
 
       it { should render_template('filtered') }
-      it "should order the citations by id" do
+      it 'should order the citations by id' do
         expect(assigns(:website)).to eq @website
         correct_sorting = @website.citations.order('id').published
         expect(correct_sorting).to include @another_citation
@@ -206,10 +206,10 @@ describe CitationsController, type: :controller  do
 
     describe 'GET :filtered, sort_by => pub_year' do
       before(:each) do
-        get :filtered, :requested_subdomain => 'lter', :sort_by => 'pub_year'
+        get :filtered, requested_subdomain: 'lter', sort_by: 'pub_year'
       end
 
-      it "should order the citations by pub_year" do
+      it 'should order the citations by pub_year' do
         correct_sorting = @website.citations.order('pub_year').published
         expect(correct_sorting).to include @another_citation
         expect(assigns(:citations).all).to eq correct_sorting.all
@@ -218,17 +218,16 @@ describe CitationsController, type: :controller  do
 
     describe 'GET :filtered, type => ArticleCitation' do
       before(:each) do
-        get :filtered, :requested_subdomain => 'lter', :type => 'ArticleCitation'
+        get :filtered, requested_subdomain: 'lter', type: 'ArticleCitation'
       end
 
-      it "should only include article citations" do
+      it 'should only include article citations' do
         correct_list = @website.citations.by_type('ArticleCitation').published
         expect(correct_list).to include @citation1
         expect(correct_list).to_not include @another_citation
         expect(assigns(:citations).all).to eq correct_list.all
       end
     end
-
 
     it 'includes submitted citations' do
       @citation1.state = 'submitted'
@@ -257,5 +256,4 @@ describe CitationsController, type: :controller  do
       expect(assigns(:citations)).to include(@citation1)
     end
   end
-
 end

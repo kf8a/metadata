@@ -298,10 +298,9 @@ describe Dataset do
     else
       doc = Nokogiri::XML(eml_content)
     end
-    assert_equal [],  xsd.validate(doc) #we need to make sure the document is valid before trying to import it.
+    assert_equal [], xsd.validate(doc) # make sure the document is valid
   end
 end
-
 
 # == Schema Information
 #

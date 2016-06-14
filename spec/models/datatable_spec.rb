@@ -1,13 +1,11 @@
 require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 
 describe Datatable do
-
   before(:each) do
     @datatable = FactoryGirl.create(:datatable)
   end
 
   describe 'publishing' do
-
     before do
       allow(@datatable).to receive(:approved_csv).and_return('something')
       @datatable.publish
@@ -21,7 +19,6 @@ describe Datatable do
       File.unlink("#{Rails.root}/uploads/datatables/csv_caches/#{@datatable.id}.csv")
     end
   end
-
 
   # describe "eml importation" do
 

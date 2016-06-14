@@ -1,7 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 
 describe Person do
-
   describe 'deleting with affiliations' do
     it 'deletes the affiliations with the person' do
       person      = FactoryGirl.create :person
@@ -17,14 +16,14 @@ describe Person do
   describe 'Some people have a dataset role, others do not. ' do
     before(:each) do
       data_role = FactoryGirl.create(:role)
-      @dataperson1 = FactoryGirl.create(:person, :sur_name => 'Jones')
+      @dataperson1 = FactoryGirl.create(:person, sur_name: 'Jones')
       allow(@dataperson1).to receive(:dataset_roles).and_return([data_role])
-      @dataperson2 = FactoryGirl.create(:person, :sur_name => 'Smith')
+      @dataperson2 = FactoryGirl.create(:person, sur_name: 'Smith')
       allow(@dataperson2).to receive(:dataset_roles).and_return([data_role])
-      @nodataperson = FactoryGirl.create(:person, :sur_name => 'Nodata')
+      @nodataperson = FactoryGirl.create(:person, sur_name: 'Nodata')
     end
 
-    it "return true for those with dataset roles, false for others" do
+    it 'return true for those with dataset roles, false for others' do
       expect(@dataperson1.dataset?).to be_truthy
       expect(@dataperson2.dataset?).to be_truthy
       expect(!@nodataperson.dataset?).to be_truthy
