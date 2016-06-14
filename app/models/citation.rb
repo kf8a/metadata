@@ -37,12 +37,17 @@ class Citation < ActiveRecord::Base
   before_post_process :transliterate_file_name
 
   # the REAL publications not including reports
-  scope :publications, -> { where("type != 'ConferenceCitation'").where("type != 'BulletinCitation'") }
+  scope :publications, lambda {
+    where("type != 'ConferenceCitation'")
+      .where("type != 'BulletinCitation'")
+  }
 
   scope :bookish, -> { where("type in ('BookCitation', 'ChapterCitation')") }
 
-  scope :with_authors_by_sur_name_and_pub_year, lambda { joins(:authors).where(authors: { seniority: 1 })
-                                                                        .order('pub_year desc, authors.sur_name') }
+  scope :with_authors_by_sur_name_and_pub_year, lambda {
+    joins(:authors).where(authors: { seniority: 1 })
+      .order('pub_year desc, authors.sur_name')
+  }
 
   scope :published,   -> { where(state: 'published').with_authors_by_sur_name_and_pub_year }
   scope :submitted,   -> { where(state: 'submitted').with_authors_by_sur_name_and_pub_year }
