@@ -1,4 +1,6 @@
 # TODO: do we need to keep this
+# a controller to manage templates that skin the system
+# we have not used this at all
 class TemplatesController < ApplicationController
   before_action :admin?, except: [:index, :show] if Rails.env == 'production'
   respond_to :html, :xml, :json

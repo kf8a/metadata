@@ -1,3 +1,4 @@
+# Manage People records
 class PeopleController < ApplicationController
   helper_method :people, :person
   before_action :admin?,
@@ -58,9 +59,7 @@ class PeopleController < ApplicationController
   # POST /people.xml
   def create
     @person = Person.new(person_params)
-    if @person.save
-      flash[:notice] = 'Person was successfully created.'
-    end
+    flash[:notice] = 'Person was successfully created.' if @person.save
     respond_with @person
   end
 

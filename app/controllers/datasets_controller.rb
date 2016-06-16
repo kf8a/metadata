@@ -1,3 +1,6 @@
+# Datasets are the core of the system
+# manages the display and editing of the datasets
+# we have not used it to create and delete datasets
 class DatasetsController < ApplicationController
   helper_method :dataset
 
@@ -47,7 +50,7 @@ class DatasetsController < ApplicationController
   end
 
   def knb
-    scopre, identifier = params[:id].split(/\./)
+    _scope, identifier = params[:id].split(/\./)
     @dataset = Dataset.where(metacat_id: identifier).first
     @dataset = Dataset.where(id: identifer).first unless @dataset
     redirect_to @dataset
