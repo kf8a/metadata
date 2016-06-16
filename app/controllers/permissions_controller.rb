@@ -1,3 +1,4 @@
+# add and remove permissions for datatables
 class PermissionsController < ApplicationController
   before_action :require_datatable, :require_owner, except: [:index]
 
@@ -101,7 +102,8 @@ class PermissionsController < ApplicationController
 
   def require_owner
     unless current_user.try(:owns?, @datatable)
-      flash[:notice] = 'You must be signed in as the owner of the datatable in order to access this page'
+      flash[:notice] = 'You must be signed in as the owner of'\
+                       ' the datatable in order to access this page'
       redirect_to action: :index
       return false
     end
