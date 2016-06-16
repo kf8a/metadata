@@ -1,14 +1,14 @@
 require 'subdomain_resolver'
 
 class ApplicationController < ActionController::Base
-   protect_from_forgery :with => :exception
+  protect_from_forgery with: :exception
 
   include Clearance::Controller
-#  include CentralLogger::Filter
+  # include CentralLogger::Filter
 
   layout :site_layout
 
-  before_filter :set_crumbs, :set_subdomain_request, :extra_views, :set_title
+  before_action :set_crumbs, :set_subdomain_request, :extra_views, :set_title
 
   respond_to :html, :xml, :json
 
@@ -20,7 +20,8 @@ class ApplicationController < ActionController::Base
 
   def admin?
     unless current_user.try(:role) == 'admin'
-      flash[:notice] = "You must be signed in as an administrator in order to access this page"
+      flash[:notice] = 'You must be signed in as an administrator'\
+                      ' in order to access this page'
       deny_access
       return false
     end
@@ -35,7 +36,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_title
-     @title = @subdomain_request.upcase
+    @title = @subdomain_request.upcase
   end
 
   def site_layout
@@ -52,7 +53,7 @@ class ApplicationController < ActionController::Base
   end
 
   def valid_subdomain?(subdomain)
-    ['lter','glbrc'].include?(subdomain)
+    %w('lter, glbrc).include?(subdomain)
   end
 
   def website
