@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
                           message: 'Sorry, this email account is already registered.'\
                                    ' Please sign up with a different email'\
                                    " or <a href='/sign_in'>Sign In</a> using this email account" }
-  validates :email, format: %r{\A.+@.+\..+\z}, allow_blank: true
+  validates :email, format: /\A.+@.+\..+\z/, allow_blank: true
 
   validates :password, presence: true, unless: :password_optional?
   validates :password, confirmation: true
