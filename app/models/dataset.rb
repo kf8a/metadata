@@ -163,7 +163,8 @@ class Dataset < ActiveRecord::Base
   end
 
   # Return the bounding coordinates of all of the datatables in the dataset
-  # @return a hash with  {eastBoundingCoordinate:, westBoundingCoordinate: , northBoundingCoordinate:, southBoundingCoordinate:}
+  # @return a hash with  {eastBoundingCoordinate:, westBoundingCoordinate: ,
+  #                       northBoundingCoordinate:, southBoundingCoordinate:}
   def bounding_coordinates
     {
       westBoundingCoordinate: -85.404699,
@@ -236,9 +237,7 @@ class Dataset < ActiveRecord::Base
     @eml.access scope: 'document', order: 'allowFirst', authSystem: 'knb' do
       eml_allow('uid=KBS,o=lter,dc=ecoinformatics,dc=org', 'all')
       eml_allow('uid=sbohm,o=lter,dc=ecoinformatics,dc=org', 'all')
-      if on_web
-        eml_allow('public', 'read')
-      end
+      eml_allow('public', 'read') if on_web
     end
   end
 
