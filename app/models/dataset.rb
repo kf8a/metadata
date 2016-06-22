@@ -270,7 +270,11 @@ class Dataset < ActiveRecord::Base
         @eml.organizationName 'KBS LTER'
       end
       eml_methods
-      datatables.each { |table| table.to_eml(@eml) if table.on_web && table.valid_for_eml? && !table.is_restricted }
+      datatables.each do |table|
+        table.to_eml(@eml) if table.on_web &&
+                              table.valid_for_eml? &&
+                              !table.is_restricted
+      end
     end
   end
 
