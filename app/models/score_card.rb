@@ -20,12 +20,8 @@ class ScoreCard
     # exclude climdb datatables and archive
     return if [309, 300, 301, 175, 127, 82].include? datatable.id
     result = {}
-    time_key = datatable.variate_names.grep(/year/i).first
-    unless time_key
-      time_key = datatable.variate_names.grep(/date/i).first
-    end
 
-    if time_key
+    if time_key(datatable)
       result = data(datatable, time_key)
 
       fill_to_present(result,
@@ -33,6 +29,12 @@ class ScoreCard
     else
       []
     end
+  end
+
+  def time_key(datatable)
+    time_key = datatable.variate_names.grep(/year/i).first
+    time_key = datatable.variate_names.grep(/date/i).first unless time_key
+    time_key
   end
 
   def update_frequency_years(datatable)
