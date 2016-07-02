@@ -22,7 +22,7 @@ class ScoreCard
     result = {}
 
     if time_key(datatable)
-      result = data(datatable, time_key)
+      result = data(datatable, time_key(datatable))
 
       fill_to_present(result,
                       update_frequency_years(datatable)) unless 'completed' == datatable.status
@@ -32,9 +32,9 @@ class ScoreCard
   end
 
   def time_key(datatable)
-    time_key = datatable.variate_names.grep(/year/i).first
-    time_key = datatable.variate_names.grep(/date/i).first unless time_key
-    time_key
+    time_key_value = datatable.variate_names.grep(/year/i).first
+    time_key_value = datatable.variate_names.grep(/date/i).first unless time_key_value
+    time_key_value
   end
 
   def update_frequency_years(datatable)
@@ -111,12 +111,12 @@ class ScoreCard
   # TODO: this should probably be the same as the
   # score method
   def self.score_for_csv(datatable, csv)
-    next unless datatable.dataset.sponsor_id == 1
-    next unless datatable.is_sql
+    return unless datatable.dataset.sponsor_id == 1 &&
+                  datatable.is_sql
     # exclude climdb datatables and archive
-    next if [309, 300, 301, 175, 127, 82].include? datatable.id
+    return if [309, 300, 301, 175, 127, 82].include? datatable.id
     s = score(datatable)
-    next unless s
+    return unless s
     s.each do |a|
       csv << [datatable.id,
               datatable.completed,

@@ -359,9 +359,7 @@ class Datatable < ActiveRecord::Base
     csv_string = CSV.generate do |csv|
       vars = variate_names
       csv << vars
-      if units
-        csv << variate_units
-      end
+      csv << variate_units if units
       fields = values.fields
       unless fields.join(' ') =~ /[A-Z]/
         vars = variates.collect { |variate| variate.name.downcase }
