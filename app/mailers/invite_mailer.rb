@@ -1,6 +1,6 @@
 # emails invites to people purporting to come from suzanne
 class InviteMailer < ActionMailer::Base
-  default from: 'Suzanne Sippel <sippel@kbs.msu.edu>'
+  default from: 'Sven Bohm <bohms@kbs.msu.edu>'
 
   def invitation(invite)
     @invite = invite
