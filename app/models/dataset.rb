@@ -138,7 +138,7 @@ class Dataset < ActiveRecord::Base
 
   def temporal_extent
     begin_date, end_date = nil
-    datatables.find_each(on_web: true) do |datatable|
+    datatables.where(on_web: true).find_each do |datatable|
       dates = { begin_date: datatable.begin_date, end_date: datatable.end_date }
       next unless dates[:begin_date] && dates[:end_date]
       begin_date = [begin_date, dates[:begin_date]].compact.min
