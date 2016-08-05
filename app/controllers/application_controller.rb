@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def admin?
+    logger.info "current user: #{current_user}"
     unless current_user.try(:role) == 'admin'
       flash[:notice] = 'You must be signed in as an administrator'\
                       ' in order to access this page'
