@@ -101,6 +101,7 @@ class Person < ActiveRecord::Base
     eml_phone(eml)
     eml_fax(eml)
     eml_email(eml)
+    eml_user_id(eml)
     eml
   end
 
@@ -129,6 +130,10 @@ class Person < ActiveRecord::Base
       eml.country country unless country.blank?
     end
     eml
+  end
+
+  def eml_user_id(eml)
+    eml.userid orchid_id if orchid_id
   end
 
   def to_lter_personneldb
