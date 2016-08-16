@@ -133,7 +133,7 @@ class Person < ActiveRecord::Base
   end
 
   def eml_user_id(eml)
-    eml.userid orchid_id if orchid_id
+    eml.userid orcid_id if orcid_id
   end
 
   def to_lter_personneldb
