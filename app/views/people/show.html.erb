@@ -26,6 +26,8 @@
     <% if person.email? -%>
       <li class='person-email'><%=contact_link(person.email) %></li>
     <% end -%>
+
+
     <% if person.phone? -%>
       <li>
       	<%= person.phone %>
@@ -38,6 +40,9 @@
       <li><%= link_to "#{person.url.gsub(/http:\/\//,'')}", person.url%></li>
     <% end -%>
 
+    <% if person.orcid_id? -%>
+      <li class='person-email'><%=person.orcid_id %></li>
+    <% end -%>
   </ul>
 
   <div class='committee'>

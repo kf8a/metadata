@@ -105,7 +105,7 @@ class PeopleController < ApplicationController
     params.require(:person).permit(:sur_name, :given_name, :middle_name, :title, :organization,
                                    :sub_organization, :street_address, :city, :locale,
                                    :country, :postal_code, :phone, :fax, :email,
-                                   :url, :deceased, :friendly_name, :orcid,
+                                   :url, :deceased, :friendly_name, :orcid_id,
                                    affiliations_attributes:
                                    [:role_id, :title, :seniority, :research_interest,
                                     :supervisor, :started_on, :left_on, :_destroy, :id])
