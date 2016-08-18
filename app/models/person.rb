@@ -133,7 +133,14 @@ class Person < ActiveRecord::Base
   end
 
   def eml_user_id(eml)
-    eml.userid orcid_id if orcid_id
+   # directory=  id=
+    if orcid_id 
+      unless orcid_id =~ /http/
+        eml.userId 'http://' + orcid_id, directory: 'http://orcid.org'
+      else
+        eml.userId orcid_id, directory: 'http://orcid.org'
+      end
+    end
   end
 
   def to_lter_personneldb
