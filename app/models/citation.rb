@@ -409,7 +409,7 @@ class Citation < ActiveRecord::Base
   end
 
   def author_and_year(options = {})
-    return pub_year_with_punctuation.tos if authors.empty?
+    return pub_year_with_punctuation.to_s if authors.empty?
 
     if options[:long]
       author_and_pub_year_string(author_string)
