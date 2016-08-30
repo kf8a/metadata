@@ -82,7 +82,7 @@ namespace :deploy do
       run_locally "bundle exec rake assets:precompile RAILS_ENV=production"
       run "cd #{current_path} && bundle exec rake assets:precompile RAILS_ENV=production"
       find_servers_for_task(current_task).each do |server|
-        run_locally "rsync -vr --exclude='.DS_Store' public/assets hillsdale.kbs.msu.edu:/var/www/lter/metadata-assets/"
+        run_locally "rsync --delete -vr --exclude='.DS_Store' public/assets hillsdale.kbs.msu.edu:/var/www/lter/metadata-assets/"
       end
     end
   end
