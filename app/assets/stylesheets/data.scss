@@ -15,6 +15,12 @@
     list-style-type: none;
   }
 
+  ul.multicolumn {
+    margin: 0.1em;
+    -moz-column-width: 17em;
+    -webkit-column-width: 17em;
+  }
+
   .committee {
     margin-top: 12px;
     li {
