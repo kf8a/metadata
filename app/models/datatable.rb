@@ -397,7 +397,7 @@ class Datatable < ActiveRecord::Base
 #
 # Original Data Source: http://#{website_name}.kbs.msu.edu/datatables/#{id}
 # The newest version of the data http://#{website_name}.kbs.msu.edu/datatables/#{id}.csv
-# Full EML Metadata: http://#{website_name}.kbs.msu.edu/datatables/#{dataset.id}.eml
+# Full EML Metadata: http://#{website_name}.kbs.msu.edu/datasets/#{dataset.id}.eml
 #
     END
   end
