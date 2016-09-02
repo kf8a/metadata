@@ -1,22 +1,21 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~>4.2.7'
+gem 'rails', '~>4.2'
 
 gem 'activerecord-session_store'
 gem 'responders'
 
+gem 'rake', '< 11.0'
 gem 'capistrano', '~>2'
 gem 'pg'
 gem 'clearance'
 gem 'acts-as-taggable-on'
-gem 'paperclip'
+gem 'paperclip' 
 gem 'nokogiri'
 gem 'RedCloth'
 gem 'formtastic'
 gem 'country_select'
 gem 'cube-ruby'
-
-gem 'awesome_print'
 
 #gem 'doi', :git => 'git://github.com/kf8a/doi.git'
 
@@ -59,19 +58,16 @@ group :production do
  # gem 'newrelic_rpm'
 end
 
-gem 'therubyracer', require: false
+gem 'therubyracer', :require => false
 gem 'less-rails'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
 
-gem 'prometheus-client', require: false #, '~> 0.4.2'
+gem 'prometheus-client' #, '~> 0.4.2'
 gem 'web-console', group: :development
 
 group :development, :test  do
-  gem 'pronto'
-  gem 'pronto-rubocop', require: false
-  gem 'pronto-flay', require: false
   gem "byebug"
   gem "spring"
   gem 'minitest'

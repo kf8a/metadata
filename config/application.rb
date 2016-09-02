@@ -2,6 +2,10 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
+require 'rack'
+require 'prometheus/client/rack/collector'
+require 'prometheus/client/rack/exporter'
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -24,6 +28,8 @@ module Metadata
     config.active_record.raise_in_transactional_callbacks = true
     config.cache_store = :file_store, "tmp/cache"
 
+    config.middleware.use Prometheus::Client::Rack::Collector
+    config.middleware.use Prometheus::Client::Rack::Exporter
   end
 end
 #Maybe these belong here
