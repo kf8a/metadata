@@ -125,6 +125,7 @@ FactoryGirl.define do
 
   factory :dataset do
     title     'KBS001'
+    version   0
     abstract  'some new dataset'
     dataset   { FactoryGirl.generate(:dataset_text) }
     sponsor   { FactoryGirl.create(:sponsor) }
