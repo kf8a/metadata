@@ -18,6 +18,7 @@
 	    <%=raw show_committee('Graduate Student Committee',role) %>
       <%=raw show_committee('Network Information System Advisory Committee',role) %>
 	    <%=raw show_committee('Information Management Committee',role) %>
+	    <%=raw show_committee('LTER Diversity Committee',role) %>
 	  </ul>
 	<% else %>
 	  <% people = role.people.uniq.sort {|a,b| a.affiliations.find_by_role_id(role).seniority.to_s + a.sur_name <=>  b.affiliations.find_by_role_id(role).seniority.to_s + b.sur_name}
