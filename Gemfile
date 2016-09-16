@@ -78,6 +78,7 @@ group :development, :test  do
   gem 'rspec-rails'
   gem 'rspec-its'
   gem "annotate"
+  gem 'awesome_print'
 end
 
 group :test do
