@@ -13,6 +13,9 @@
 <ul>
 	<li>Status: <%= @dataset.status %></li>
 	<li>Temporal Coverage  <%= @dataset.initiated %> to <%= @dataset.data_end_date %></li>
+  <% @dataset.data_versions.each do |version| %>
+    <li> DOI: <%= version.doi %> at <%= version.created_at %>
+  <% end %>
 </ul>
 <% if @dataset.datatables.any? -%>
 <h2>Tables</h2>

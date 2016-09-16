@@ -17,6 +17,7 @@ class Dataset < ActiveRecord::Base
   has_and_belongs_to_many :themes
   belongs_to              :website
   has_many                :dataset_files
+  has_many                :data_versions
 
   validates :abstract, presence:   true
   validates :dataset,  uniqueness: true
