@@ -67,6 +67,8 @@ gem 'uglifier'
 gem 'prometheus-client' #, '~> 0.4.2'
 gem 'web-console', group: :development
 
+gem 'awesome_print'
+
 group :development, :test  do
   gem "byebug"
   gem "spring"
@@ -78,7 +80,6 @@ group :development, :test  do
   gem 'rspec-rails'
   gem 'rspec-its'
   gem "annotate"
-  gem 'awesome_print'
 end
 
 group :test do
