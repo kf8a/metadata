@@ -49,7 +49,7 @@ gem 'ris_parser', :git => 'git://github.com/kf8a/ris_parser.git'
 gem 'thinking-sphinx'
 gem 'mysql2'
 
-gem 'aws-sdk', '< 2.0'
+gem 'aws-sdk' #, '< 2.0'
 
 gem "sitemap_generator"
 group :production do
