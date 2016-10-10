@@ -24,6 +24,6 @@
         </div>
         <% end %>
         <p>Meeting held on: <%= @meeting.date.to_s %></p>
-        <p><%= link_to 'Add abstract', new_abstract_path({:meeting => @meeting.id}) if admin? %></p>
+        <p><%= link_to 'Add abstract', new_abstract_path({meeting_id: @meeting.id}) if admin? %></p>
       </div>
     </div>
