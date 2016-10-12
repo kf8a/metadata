@@ -33,7 +33,7 @@ class Citation < ActiveRecord::Base
                     s3_permissions: 'authenticated-read'
   #                 s3_headers: { 'Content-Disposition': 'attachment' }
 
-  validates_attachment_content_type :pdf, content_type: /\pdf/
+  validates_attachment_content_type :pdf, content_type: /pdf/
   before_post_process :transliterate_file_name
 
   # the REAL publications not including reports

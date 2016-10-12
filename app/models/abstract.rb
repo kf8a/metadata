@@ -14,7 +14,7 @@ class Abstract < ActiveRecord::Base
                     s3_credentials: File.join(Rails.root, 'config', 's3.yml'),
                     s3_permissions: 'authenticated-read'
 
-  validates_attachment_content_type :pdf, content_type: /\pdf/
+  validates_attachment_content_type :pdf, content_type: /pdf/
   before_post_process :transliterate_file_name
 
   def self.by_authors
