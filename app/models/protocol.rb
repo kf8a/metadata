@@ -17,7 +17,7 @@ class Protocol < ActiveRecord::Base
                     s3_credentials: File.join(Rails.root, 'config', 's3.yml'),
                     s3_permissions: 'public-read'
 
-  validates_attachment :pdf, content_type: { content_type: ['application/pdf'] }
+  validates_attachment_content_type :csv_cache, content_type: /csv\Z/
 
   def to_s
     title
