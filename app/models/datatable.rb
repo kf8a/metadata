@@ -51,7 +51,8 @@ class Datatable < ActiveRecord::Base
                       path: ':rails_root/uploads/datatables/:attachment/:id.:extension'
   end
 
-  validates_attachment_file_name :csv_cache, matches: [/csv\Z/ ]
+  # validates_attachment_file_name :csv_cache, matches: [/csv\Z/ ]
+  validates_attachment_content_type :csv_cache, content_type: /csv\Z/
 
   # do_not_validate_attachment_file_type :csv_cache
 
