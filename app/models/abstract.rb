@@ -9,10 +9,12 @@ class Abstract < ActiveRecord::Base
 
   has_attached_file :pdf,
                     storage: :s3,
-                    bucket: 'metadata_production',
+                    bucket: 'metadata-production',
                     path: '/abstracts/pdfs/:id/:style/:basename.:extension',
                     s3_credentials: File.join(Rails.root, 'config', 's3.yml'),
                     s3_permissions: 'authenticated-read'
+
+  validates_attachment_file_name :pdf, matches: /pdf/
 
   def self.by_authors
     order :authors
