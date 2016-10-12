@@ -1,30 +1,30 @@
 <% content_for :head do %>
-  <title>KBS LTER Meeting - <%= abstract.title%></title>
+  <title>KBS LTER Meeting - <%= @abstract.title%></title>
 <% end %>
 <%= render 'shared/breadcrumbs',
   :crumbs => [{:name => "MEETINGS", :url =>  url_for(:controller => 'meetings', :action => 'index')},
-    {:name => "#{abstract.meeting.date.year} #{abstract.meeting.title}", :url => url_for(:controller => 'meetings', :action => 'show', :id=> abstract.meeting.id)},
-    {:name => "#{abstract.authors}"}
+    {:name => "#{@abstract.meeting.date.year} #{@abstract.meeting.title}", :url => url_for(:controller => 'meetings', :action => 'show', :id=> @abstract.meeting.id)},
+    {:name => "#{@abstract.authors}"}
 
 ] %>
   <div class='page type-page hfeed'>
 
-    <h1 class='entry-title'><%= abstract.title %></h1>
+    <h1 class='entry-title'><%= @abstract.title %></h1>
 
     <div class="entry-content">
-      <p><%= abstract.authors %><br/>
-      <%= abstract.author_affiliations %></p>
+      <p><%= @abstract.authors %><br/>
+      <%= @abstract.author_affiliations %></p>
 
-      <p>Presented at the <%= abstract.meeting.title %> (<%= abstract.meeting.date %>
-      <% if abstract.meeting.date_to %>
-        to <%= abstract.meeting.date_to %>
+      <p>Presented at the <%= @abstract.meeting.title %> (<%= @abstract.meeting.date %>
+      <% if @abstract.meeting.date_to %>
+        to <%= @abstract.meeting.date_to %>
       <% end %>
       ) </p>
 
-      <%= textilize(abstract.abstract) %>
+      <%= textilize(@abstract.abstract) %>
 
-      <% if abstract.pdf.exists? %>
-        <%=link_to "Get #{abstract.meeting_abstract_type.name.downcase}", download_abstract_path(abstract) %><br/>
+      <% if @abstract.pdf.exists? %>
+        <%=link_to "Get #{@abstract.meeting_abstract_type.name.downcase}", download_abstract_path(abstract) %><br/>
       <% end %>
 
       <%= render 'navbar', :abstract => @abstract %>

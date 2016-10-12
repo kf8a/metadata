@@ -1,6 +1,6 @@
 <h1>Editing Meeting Abstracts</h1>
-<%= form_for abstract, :html => { :multipart=>true} do |f| %>
-  <%= render "shared/error_messages", :target => abstract %>
+<%= form_for @abstract, :html => { :multipart=>true} do |f| %>
+  <%= render "shared/error_messages", :target => @abstract %>
   <%= render :partial=>'form', :locals => {:f => f } %>
   <p>
     <%= submit_tag "Update" %>
@@ -8,4 +8,4 @@
 <% end %>
 
 
-<%= render :partial => 'navbar', :locals => {:abstract => abstract} %>
+<%= render :partial => 'navbar', :locals => {:abstract => @abstract} %>

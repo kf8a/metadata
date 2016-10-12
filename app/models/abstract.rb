@@ -14,10 +14,19 @@ class Abstract < ActiveRecord::Base
                     s3_credentials: File.join(Rails.root, 'config', 's3.yml'),
                     s3_permissions: 'authenticated-read'
 
-  validates_attachment_file_name :pdf, matches: /pdf/
+  validates_attachment_content_type :pdf, content_type: /\pdf/
+  before_post_process :transliterate_file_name
 
   def self.by_authors
     order :authors
+  end
+
+  def transliterate(str)
+    str.tr('_', '-').tr(' ', '-')
+  end
+
+  def transliterate_file_name
+    pdf.instance_write(:file_name, transliterate(pdf_file_name).to_s)
   end
 end
 

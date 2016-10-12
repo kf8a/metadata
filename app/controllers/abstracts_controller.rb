@@ -1,7 +1,6 @@
 # Controls pages dealing with abstracts of meetings
 class AbstractsController < ApplicationController
   include FileSource
-  helper_method :abstract
 
   before_action :admin?, except: [:index, :show, :download] if Rails.env == 'production'
 
@@ -12,7 +11,7 @@ class AbstractsController < ApplicationController
   end
 
   def download
-    head(:not_found) && return unless (abstract = Abstract.find(params[:id]))
+    head(:not_found) && return unless Abstract.find(params[:id])
     if Rails.env.production?
       pdf_from_s3(abstract)
     else
@@ -23,12 +22,14 @@ class AbstractsController < ApplicationController
   # GET meeting_abstracts/new?meeting=1
   def new
     meeting = Meeting.find(params[:meeting_id])
-    abstract.meeting_id = meeting.id
+    @abstract = Abstract.new
+    @abstract.meeting_id = meeting.id
     @abstract_types = MeetingAbstractType.pluck(:name, :id)
   end
 
   def create
     @abstract_types = MeetingAbstractType.pluck(:name, :id)
+    abstract = Abstract.new(abstract_params)
     respond_to do |format|
       if abstract.save
         flash[:notice] = 'Meeting Abstract was successfully created.'
@@ -46,16 +47,19 @@ class AbstractsController < ApplicationController
 
   # GET meeting_abstracts/1
   def show
-    respond_with abstract
+    @abstract = Abstract.find(params[:id])
+    respond_with @abstract
   end
 
   # GET /meeting_abstract/1/edit
   def edit
     @abstract_types = MeetingAbstractType.all.collect { |type| [type.name, type.id] }
+    @abstract = Abstract.find(params[:id])
   end
 
   # PUT /meeting_abstracts/1
   def update
+    abstract = Abstract.find(params[:id])
     if abstract.update_attributes(abstract_params)
       flash[:notice] = 'Meeting abstract was successfully updated.'
     end
@@ -63,6 +67,7 @@ class AbstractsController < ApplicationController
   end
 
   def destroy
+    abstract = Abstract.find(params[:id])
     abstract.destroy
     respond_to do |format|
       format.html { redirect_to meetings_url }
@@ -75,12 +80,8 @@ class AbstractsController < ApplicationController
 
   private
 
-  def abstract
-    @abstract ||= params[:id] ? Abstract.find(params[:id]) : Abstract.new(abstract_params)
-  end
-
   def abstract_params
-    params.require(:abstract).permit(:title, :authors, :abstract, :meeting_abstract_type_id, 
-                             :author_affiliations, :meeting_id, :pdf)
+    params.fetch(:abstract, {}).permit(:title, :authors, :abstract, :meeting_abstract_type_id,
+                                       :author_affiliations, :meeting_id, :pdf)
   end
 end
