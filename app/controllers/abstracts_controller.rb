@@ -61,6 +61,8 @@ class AbstractsController < ApplicationController
   # PUT /meeting_abstracts/1
   def update
     abstract = Abstract.find(params[:id])
+    logger.info abstract
+    logger.info abstract_params
     if abstract.update_attributes(abstract_params)
       flash[:notice] = 'Meeting abstract was successfully updated.'
     end
@@ -82,7 +84,7 @@ class AbstractsController < ApplicationController
   private
 
   def abstract_params
-    params.fetch(:abstract, {}).permit(:title, :authors, :abstract, :meeting_abstract_type_id,
-                                       :author_affiliations, :meeting_id, :pdf)
+    params.require(:abstract).permit(:title, :authors, :abstract, :meeting_abstract_type_id,
+                                     :author_affiliations, :meeting_id, :pdf)
   end
 end
