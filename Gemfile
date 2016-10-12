@@ -10,7 +10,7 @@ gem 'capistrano', '~>2'
 gem 'pg'
 gem 'clearance'
 gem 'acts-as-taggable-on'
-gem 'paperclip' 
+gem 'paperclip', '~> 4'
 gem 'nokogiri'
 gem 'RedCloth'
 gem 'formtastic'
@@ -36,7 +36,7 @@ gem 'parslet'
 gem 'bibtex-ruby'
 
 # versioning support for protocols
-gem 'vestal_versions', :git => 'git://github.com/R1V3R5/vestal_versions'
+gem 'vestal_versions', :git => 'https://github.com/R1V3R5/vestal_versions'
 
 gem 'dalli'
 
@@ -44,7 +44,7 @@ gem 'dalli'
 
 gem 'has_scope', '<0.6'
 
-gem 'ris_parser', :git => 'git://github.com/kf8a/ris_parser.git'
+gem 'ris_parser', :git => 'https://github.com/kf8a/ris_parser.git'
 
 gem 'thinking-sphinx'
 gem 'mysql2'
@@ -83,7 +83,7 @@ group :development, :test  do
 end
 
 group :test do
-  gem "shoulda", :git => 'git://github.com/thoughtbot/shoulda.git' 
+  gem "shoulda", :git => 'https://github.com/thoughtbot/shoulda.git' 
   gem "shoulda-matchers" # to use rspec like syntax
   gem 'factory_girl_rails'
 

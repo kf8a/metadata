@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/R1V3R5/vestal_versions
+  remote: https://github.com/R1V3R5/vestal_versions
   revision: 616d2d6f250e24616503402b35127f806da9a27c
   specs:
     vestal_versions (2.2.0)
@@ -7,14 +7,14 @@ GIT
       activesupport (>= 3.0.0)
 
 GIT
-  remote: git://github.com/kf8a/ris_parser.git
+  remote: https://github.com/kf8a/ris_parser.git
   revision: 410b27def4835b8b9b697690282ff3df4803ae68
   specs:
     ris_parser (0.0.2)
       parslet
 
 GIT
-  remote: git://github.com/thoughtbot/shoulda.git
+  remote: https://github.com/thoughtbot/shoulda.git
   revision: b411932fc3afd5a3295d7d8318f5b302e45fd312
   specs:
     shoulda (3.5.0)
@@ -175,6 +175,7 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
+    mimemagic (0.3.0)
     mini_portile2 (2.1.0)
     minitest (5.9.1)
     minitest-reporters (1.1.11)
@@ -193,11 +194,12 @@ GEM
       net-ssh (>= 2.6.5)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
-    paperclip (2.8.0)
-      activerecord (>= 2.3.0)
-      activesupport (>= 2.3.2)
-      cocaine (>= 0.0.2)
+    paperclip (4.3.7)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      cocaine (~> 0.5.5)
       mime-types
+      mimemagic (= 0.3.0)
     parslet (1.7.1)
       blankslate (>= 2.0, <= 4.0)
     pg (0.18.4)
@@ -345,7 +347,7 @@ DEPENDENCIES
   minitest-reporters (>= 0.5.0)
   mysql2
   nokogiri
-  paperclip
+  paperclip (~> 4)
   parslet
   pg
   prometheus-client
