@@ -109,7 +109,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
-    commonjs (0.2.7)
     concurrent-ruby (1.0.2)
     countries (1.2.5)
       currencies (~> 0.4.2)
@@ -155,13 +154,6 @@ GEM
     kgio (2.10.0)
     latex-decode (0.2.2)
       unicode (~> 0.4)
-    less (2.6.0)
-      commonjs (~> 0.2.7)
-    less-rails (2.8.0)
-      actionpack (>= 4.0)
-      less (~> 2.6.0)
-      sprockets (> 2, < 4)
-      tilt
     libv8 (3.16.14.15)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -341,7 +333,6 @@ DEPENDENCIES
   formtastic
   has_scope (< 0.6)
   jquery-rails
-  less-rails
   meta_request
   minitest
   minitest-reporters (>= 0.5.0)

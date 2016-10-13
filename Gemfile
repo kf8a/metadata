@@ -59,7 +59,7 @@ group :production do
 end
 
 gem 'therubyracer', :require => false
-gem 'less-rails'
+#gem 'less-rails'
 gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
