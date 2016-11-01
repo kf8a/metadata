@@ -1,3 +1,7 @@
-<%= f.input :name %>
-<%= f.input :data %>
-<%= link_to_remove_fields "Remove", f %>
+<fieldset class='inputs'>
+  <%= f.input :name %>
+  <%= f.input :data  %>
+  <div class='delete_link'>
+    <%= link_to_remove_fields "Remove", f %>
+  </div>
+</fieldset>

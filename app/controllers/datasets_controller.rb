@@ -6,7 +6,7 @@ class DatasetsController < ApplicationController
 
   before_action :allow_on_web, except: [:knb]
   before_action :admin?, except: [:index, :show] if Rails.env == 'production'
-  before_action :get_dataset, only: [:show, :edit, :update, :destroy]
+  # before_action :dataset, only: [:show, :edit, :update, :destroy]
 
   # layout proc { |controller| controller.request.format == :eml ? false : 'application' }
 
@@ -37,12 +37,12 @@ class DatasetsController < ApplicationController
   # GET /datasets/1.xml
   # GET /dataset/1.eml
   def show
-    @title = @dataset.title
+    @title = dataset.title
 
-    if @dataset.valid_request?(@subdomain_request)
-      respond_with @dataset do |format|
-        format.eml { render xml: @dataset.to_eml }
-        # format.eml { render eml: @dataset }
+    if dataset.valid_request?(@subdomain_request)
+      respond_with dataset do |format|
+        format.eml { render xml: dataset.to_eml }
+        # format.eml { render eml:@dataset }
       end
     else
       redirect_to datasets_url
@@ -51,9 +51,9 @@ class DatasetsController < ApplicationController
 
   def knb
     _scope, identifier = params[:id].split(/\./)
-    @dataset = Dataset.where(metacat_id: identifier).first
-    @dataset = Dataset.where(id: identifer).first unless @dataset
-    redirect_to @dataset
+    dataset = Dataset.where(metacat_id: identifier).first
+    dataset = Dataset.where(id: identifer).first unless dataset
+    redirect_to dataset
   end
 
   # GET /datasets/new
@@ -111,12 +111,10 @@ class DatasetsController < ApplicationController
 
   # PUT /datasets/1
   def update
-    @sponsors = Sponsor.all.collect { |sponsor| [sponsor.name, sponsor.id] }
-    @websites = Website.all.collect { |website| [website.name, website.id] }
-    if @dataset.update_attributes(dataset_params)
+    if dataset.update_attributes(dataset_params)
       flash[:notice] = 'Dataset was successfully updated.'
     end
-    respond_with @dataset
+    respond_with dataset
   end
 
   # DELETE /datasets/1
@@ -168,15 +166,12 @@ class DatasetsController < ApplicationController
     Dataset.find(params[:id])
   end
 
-  def get_dataset
-    @dataset = dataset
-  end
-
   def dataset_params
     params.require(:dataset).permit(:dataset, :title, :abstract, :status,
                                     :initiated, :completed, :released,
                                     :on_web, :core_dataset, :project_id,
-                                    :metacat_id, :sponsor_id, :website_id)
+                                    :metacat_id, :sponsor_id, :website_id,
+                                    dataset_files_attributes: [:name, :_destroy, :id])
   end
 
   def dataset_roles

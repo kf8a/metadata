@@ -1,36 +1,36 @@
 <% content_for :head do %>
-  <title>Dataset - <%= @dataset.title %></title>
+  <title>Dataset - <%= dataset.title %></title>
 <% end %>
 <%= render 'shared/breadcrumbs',
   :crumbs => [{:name => 'DATATABLES', :url =>  url_for(:controller => 'datatables', :action => 'index')},
     {:name => dataset.title.upcase}] %>
 
-<h1><%= @dataset.dataset %>:<%= @dataset.title %>
+<h1><%= dataset.dataset %>:<%= dataset.title %>
 </h1>
 <div class='description'>
-	<%= textilize @dataset.abstract %>
+	<%= textilize dataset.abstract %>
 </div>
 <ul>
-	<li>Status: <%= @dataset.status %></li>
-	<li>Temporal Coverage  <%= @dataset.initiated %> to <%= @dataset.data_end_date %></li>
-  <% @dataset.data_versions.each do |version| %>
+	<li>Status: <%= dataset.status %></li>
+	<li>Temporal Coverage  <%= dataset.initiated %> to <%= dataset.data_end_date %></li>
+  <% dataset.data_versions.each do |version| %>
     <li> DOI: <%= version.doi %> at <%= version.created_at %>
   <% end %>
 </ul>
-<% if @dataset.datatables.any? -%>
+<% if dataset.datatables.any? -%>
 <h2>Tables</h2>
 <dl>
-	<% @dataset.datatables.each do |datatable| %>
+	<% dataset.datatables.each do |datatable| %>
 	  <% next unless datatable.on_web %>
 		<dt><%= link_to datatable.name, datatable_path(datatable) %> <%= datatable.title %></dt>
 		<dd><%=raw datatable.description %></dd>
 	<% end %>
 </dl>
 <% end -%>
-<% if @dataset.dataset_files.any? -%>
+<% if dataset.dataset_files.any? -%>
   <h2>Files</h2>
   <dl>
-    <% @dataset.dataset_files.each do |file| -%>
+    <% dataset.dataset_files.each do |file| -%>
       <dt><%= link_to file.data_file_name, dataset_file_path(file) %></dt>
       <dd><%= file.name %></dd>
     <% end -%>
@@ -38,10 +38,10 @@
   <% end -%>
 <h2>Protocols</h2>
 <ul>
-	<% @dataset.protocols.each do |protocol| -%>
+	<% dataset.protocols.each do |protocol| -%>
 	<li><%= link_to "#{protocol.name} #{protocol.version}", protocol_path(protocol) %> <%= protocol.title %></li>
 	<% end -%>
 </ul>
-<%= link_to 'eml', dataset_path(@dataset, :format => :eml) %> |
-<%= link_to 'Edit', edit_dataset_path(@dataset) if signed_in?%> |
+<%= link_to 'eml', dataset_path(dataset, :format => :eml) %> |
+<%= link_to 'Edit', edit_dataset_path(dataset) if signed_in?%> |
 <%= link_to 'Back', datasets_path %>
