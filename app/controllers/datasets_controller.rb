@@ -6,7 +6,6 @@ class DatasetsController < ApplicationController
 
   before_action :allow_on_web, except: [:knb]
   before_action :admin?, except: [:index, :show] if Rails.env == 'production'
-  # before_action :dataset, only: [:show, :edit, :update, :destroy]
 
   # layout proc { |controller| controller.request.format == :eml ? false : 'application' }
 
@@ -104,14 +103,23 @@ class DatasetsController < ApplicationController
       @dataset = Dataset.new
     end
     if @dataset.save
+      # loop over the files.
+      # params[:files].each do |file|
+      #   @dataset.dataset_files.create(data: file)
+      # end
       flash[:notice] = 'Dataset was successfully created.'
     end
+
     respond_with @dataset
   end
 
   # PUT /datasets/1
   def update
     if dataset.update_attributes(dataset_params)
+      # params[:files].each do |file|
+      #   dataset.dataset_files.create(data: file)
+      # end
+
       flash[:notice] = 'Dataset was successfully updated.'
     end
     respond_with dataset
@@ -171,7 +179,8 @@ class DatasetsController < ApplicationController
                                     :initiated, :completed, :released,
                                     :on_web, :core_dataset, :project_id,
                                     :metacat_id, :sponsor_id, :website_id,
-                                    dataset_files_attributes: [:name, :_destroy, :id])
+                                    :keyword_list, affiliations_attributes: [],
+                                    dataset_files_attributes: [:name, :data, :_destroy, :id])
   end
 
   def dataset_roles

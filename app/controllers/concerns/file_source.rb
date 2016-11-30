@@ -13,10 +13,11 @@ module FileSource
     end
 
     def file_from_s3(file)
+      logger.info file
       redirect_to(file.s3_object
-                          .url_for(:read,
+                          .presigned_url(:get,
                                    secure: true,
-                                   expires_in: 20.seconds)
+                                   expires_in: 60.seconds)
                           .to_s)
     end
   end

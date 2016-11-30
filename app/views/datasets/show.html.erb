@@ -31,7 +31,7 @@
   <h2>Files</h2>
   <dl>
     <% dataset.dataset_files.each do |file| -%>
-      <dt><%= link_to file.data_file_name, dataset_file_path(file) %></dt>
+      <dt><%= link_to file.file_name, dataset_file_path(file) %></dt>
       <dd><%= file.name %></dd>
     <% end -%>
   </dl>

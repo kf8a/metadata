@@ -1,5 +1,7 @@
 # display citations and control access to pdfs
 class CitationsController < ApplicationController
+  include FileSource
+
   protect_from_forgery except: :download
 
   respond_to :html, :xml, :json
@@ -160,9 +162,7 @@ class CitationsController < ApplicationController
   end
 
   def from_standard_access(citation)
-    redirect_to(citation.pdf.s3_object(params[:style])
-                        .url_for(:read, secure: true, expires_in: 10.seconds)
-                        .to_s)
+    file_from_s3(citation.pdf)
   end
 
   def set_title

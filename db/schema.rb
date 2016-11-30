@@ -242,7 +242,7 @@ ActiveRecord::Schema.define(version: 20151204212403) do
     t.boolean  "is_utf_8",                               default: false
     t.boolean  "metadata_only",                          default: false
     t.text     "summary_graph"
-    t.integer  "deprecated_in_fovor_of"
+    t.integer  "deprecated_in_favor_of"
     t.text     "deprecation_notice"
     t.integer  "number_of_released_records"
     t.text     "scores"

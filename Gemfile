@@ -10,7 +10,7 @@ gem 'capistrano', '~>2'
 gem 'pg'
 gem 'clearance'
 gem 'acts-as-taggable-on'
-gem 'paperclip', '~> 4'
+gem 'paperclip', '~> 5'
 gem 'nokogiri'
 gem 'RedCloth'
 gem 'formtastic'
@@ -49,7 +49,8 @@ gem 'ris_parser', :git => 'https://github.com/kf8a/ris_parser.git'
 gem 'thinking-sphinx'
 gem 'mysql2'
 
-gem 'aws-sdk' #, '< 2.0'
+gem 'aws-sdk', '~> 2.3.0'
+
 
 gem "sitemap_generator"
 group :production do
