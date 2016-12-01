@@ -11,6 +11,7 @@ class Abstract < ActiveRecord::Base
                     storage: :s3,
                     bucket: 'metadata-production',
                     path: '/abstracts/pdfs/:id/:style/:basename.:extension',
+                    s3_region: 'us-east-1',
                     s3_credentials: File.join(Rails.root, 'config', 's3.yml'),
                     s3_permissions: 'authenticated-read'
 
