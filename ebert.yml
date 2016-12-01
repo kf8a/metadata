@@ -43,4 +43,5 @@ exclude_paths:
 - spec
 - test
 - vendor
-- app/assets/javascript/d3.js
+- app/assets/javascripts/d3.js
+- app/assets/javascripts/protovis-d3.2.js
