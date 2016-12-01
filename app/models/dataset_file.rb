@@ -13,10 +13,6 @@ class DatasetFile < ActiveRecord::Base
   do_not_validate_attachment_file_type :data
 
   def file_name
-    if !name.empty?
-      name
-    else
-      data_file_name
-    end
+    data_file_name
   end
 end
