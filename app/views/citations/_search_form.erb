@@ -1,5 +1,5 @@
 <div id='search-form'>
   <%= form_tag search_citations_path, :method => 'get', :class=>'searchform'%>
-    <%= text_field_tag :word, word, :size => 80 %>
+    <%= text_field_tag :q, word, :size => 80 %>
     <%= submit_tag "Search all citations" %>
 </div>
