@@ -23,7 +23,20 @@
           </ul>
         </div>
         <% end %>
+        <% if admin? %>
+         <% if @meeting.presentation_abstracts.size > 0 %>
+            <h3>Presentations</h3>
+            <div id="abstracts">
+              <ul>
+                <% @meeting.presentation_abstracts.each do | abstract| %>
+                  <%= render partial: 'abstracts', :locals => {abstract: abstract} %>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        <% end %>
         <p>Meeting held on: <%= @meeting.date.to_s %></p>
-        <p><%= link_to 'Add abstract', new_abstract_path({meeting_id: @meeting.id}) if admin? %></p>
+        <!-- <p><%= link_to 'Add abstract', new_abstract_path({meeting_id: @meeting.id}) if admin? %></p> -->
+        <p><%= link_to 'Add abstract', new_abstract_path({meeting_id: @meeting.id}) %></p>
       </div>
     </div>
