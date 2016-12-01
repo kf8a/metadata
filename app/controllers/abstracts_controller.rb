@@ -13,11 +13,7 @@ class AbstractsController < ApplicationController
   def download
     abstract = Abstract.find(params[:id])
     head(:not_found) && return unless abstract
-    if Rails.env.production?
-      pdf_from_s3(abstract)
-    else
-      pdf_from_filesystem(abstract)
-    end
+    pdf_from_s3(abstract)
   end
 
   # GET meeting_abstracts/new?meeting=1
