@@ -86,11 +86,11 @@ class PeopleController < ApplicationController
   private
 
   def set_title
-    if @subdomain_request == 'lter'
-      @title = 'KBS LTER Directory'
-    else
-      @title = 'GLBRC Directory'
-    end
+    @tile = if @subdomain_request == 'lter'
+              'KBS LTER Directory'
+            else
+              'GLBRC Directory'
+            end
   end
 
   def people
