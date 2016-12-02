@@ -6,7 +6,7 @@
 # repository you can go to https://ebertapp.io/docs/config and see the configuration
 # details.
 ---
-styleguide: plataformatec/linters
+styleguide: kf8a/linters
 engines:
   reek:
     enabled: true

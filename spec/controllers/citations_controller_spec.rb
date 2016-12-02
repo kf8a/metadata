@@ -170,7 +170,6 @@ describe CitationsController, type: :controller do
       sign_out
 
       author1 = FactoryGirl.create(:author, sur_name: 'Zebedee', seniority: 1)
-      author2 = FactoryGirl.create(:author, sur_name: 'Alfred',  seniority: 1)
       @citation1 = ArticleCitation.new
       @citation1.authors << Author.new(sur_name: 'Loecke',
                                        given_name: 'T', middle_name: 'D',
@@ -263,6 +262,21 @@ describe CitationsController, type: :controller do
 
       expect(response.code).to eq '200'
       expect(assigns(:citations)).to include(@citation1)
+    end
+  end
+
+  describe 'authenticated ' do
+    before(:each) do
+      sign_in_as(FactoryGirl.create(:admin_user))
+    end
+
+    it 'creates citations from json data' do
+      title = "my title"
+      params = { citation: {title: title, author_block: "Author Be"}}
+      post :create, params, format: :json
+
+      expect(assigns(:citation).title).to eq title
+      expect(response).to be_redirect
     end
   end
 end
