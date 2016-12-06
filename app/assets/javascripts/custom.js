@@ -10,7 +10,7 @@ jQuery(document).ready(function() {
 			//jQuery('#email').empty();
 			jQuery(email).replaceWith("<a id='email' href='mailto:"+email_string+"'>"+email_string+"</a>");
 		}
-	};
+	}
 
 	// truncate long contexts on datatable pages
 	jQuery('.truncate').truncate({max_length: 800});
