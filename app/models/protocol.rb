@@ -13,6 +13,7 @@ class Protocol < ActiveRecord::Base
   has_attached_file :pdf,
                     storage: :s3,
                     bucket: 'metadata-production',
+                    s3_region: 'us-east-1',
                     path: '/protocols/pdfs/:id/:style/:basename.:extension',
                     s3_credentials: File.join(Rails.root, 'config', 's3.yml'),
                     s3_permissions: 'public-read'
