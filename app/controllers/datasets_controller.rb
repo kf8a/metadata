@@ -11,7 +11,6 @@ class DatasetsController < ApplicationController
 
   # POST /dataset
   def upload
-    file = params[:file]
     @dataset = Dataset.new
   end
 
@@ -151,11 +150,12 @@ class DatasetsController < ApplicationController
   end
 
   def allow_on_web
-    return unless params[:id]
-    if params[:id] =~ /KBS\d\d\d/
-      params[:id] = Dataset.find_by_dataset(params[:id])
+    dataset_id = params[:id]
+    return unless dataset_id
+    if dataset_id =~ /KBS\d\d\d/
+      dataset_id = Dataset.find_by(dataset: dataset_id)
     end
-    dataset = Dataset.find(params[:id])
+    dataset = Dataset.find(dataset_id)
     dataset.on_web
   end
 
