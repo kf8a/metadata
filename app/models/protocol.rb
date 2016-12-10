@@ -18,7 +18,7 @@ class Protocol < ActiveRecord::Base
                     s3_credentials: File.join(Rails.root, 'config', 's3.yml'),
                     s3_permissions: 'public-read'
 
-  validates_attachment_content_type :pdf , content_type: /pdf/
+  validates_attachment_content_type :pdf, content_type: /pdf/
 
   def to_s
     title
@@ -26,7 +26,7 @@ class Protocol < ActiveRecord::Base
 
   def self.from_eml(protocol_eml)
     prot_id = protocol_eml.attributes['id'].try(:value).try(:gsub, 'protocol_', '')
-    protocol = find_by_id(prot_id) || new
+    protocol = find_by(id: prot_id) || new
     if protocol.new_record?
       protocol.title = protocol_eml.css('title').text
       protocol.abstract = protocol_eml.parent.css('abstract').text
