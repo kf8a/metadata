@@ -45,3 +45,4 @@ exclude_paths:
 - vendor
 - app/assets/javascripts/d3.js
 - app/assets/javascripts/protovis-d3.2.js
+- app/assets/javascripts/jquery.jstree.js
