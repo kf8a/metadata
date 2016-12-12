@@ -58,6 +58,6 @@ class ApplicationController < ActionController::Base
   end
 
   def website
-    @website ||= Website.find_by_name(@subdomain_request) || Website.first
+    @website ||= Website.find_by(name: @subdomain_request) || Website.first
   end
 end
