@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
   end
 
   def valid_subdomain?(subdomain)
-    %w(lter, glbrc).include?(subdomain)
+    %w(lter glbrc).include?(subdomain)
   end
 
   def website
