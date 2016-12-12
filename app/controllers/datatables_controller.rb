@@ -115,14 +115,16 @@ class DatatablesController < ApplicationController
   # TODO: only return the ones for the right website
   def suggest
     term = params[:term]
+    return unless term
+    term.downcase!
 
-    list = ActsAsTaggableOn::Tag.where('lower(name) like ?', term.downcase + '%')
+    list = ActsAsTaggableOn::Tag.where('lower(name) like ?', term + '%')
                                 .select('DISTINCT tags.name')
-    list += Person.where('lower(sur_name) like ?', term.downcase + '%')
+    list += Person.where('lower(sur_name) like ?', term + '%')
                   .select('DISTINCT sur_name as name')
-    list += Theme.where('lower(name) like ?', term.downcase + '%')
+    list += Theme.where('lower(name) like ?', term + '%')
                  .select('DISTINCT name')
-    list += CoreArea.where('lower(name) like ?', term.downcase + '%')
+    list += CoreArea.where('lower(name) like ?', term + '%')
                     .select('DISTINCT name')
 
     keywords = list.collect { |x| x.name.downcase }.sort.uniq
@@ -209,7 +211,7 @@ class DatatablesController < ApplicationController
   def can_download?
     unless csv_ok
       head :forbidden
-      return false
+      false
     end
   end
 

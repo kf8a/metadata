@@ -16,8 +16,8 @@ module FileSource
       logger.info file
       redirect_to(file.s3_object
                           .presigned_url(:get,
-                                   secure: true,
-                                   expires_in: 60.seconds)
+                                         secure: true,
+                                         expires_in: 60.seconds)
                           .to_s)
     end
   end
