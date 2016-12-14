@@ -48,3 +48,4 @@ exclude_paths:
 - app/assets/javascripts/jquery.jstree.js
 - app/assets/javascripts/jquery.comboselect.js
 - app/assets/javascripts/themes
+- app/assets/javascripts/application.js
