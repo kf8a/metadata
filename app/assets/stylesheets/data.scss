@@ -34,7 +34,7 @@
 
   css.hidden {
     visibility: hidden;
-  height: 0px;
+    height: 0px;
   }
 
   .core-areas {
@@ -62,9 +62,9 @@
   }
 
   .highlight {
-    margin-top: 0.9em;
-    text-align: right;
+    margin-top: .9em;
     font-weight: bold;
+    text-align: right;
   }
 
   h2 {
@@ -105,7 +105,7 @@
   }
 
   .top-level {
-    margin-bottom: 0.4em;
+    margin-bottom: .4em;
   }
 
   .citation {
@@ -116,7 +116,7 @@
     display: block;
   }
 
-  .abstract_body ul{
+  .abstract_body ul {
     list-style-type: disc;
     margin-left: 2em;
   }
@@ -146,11 +146,11 @@
   }
 
   .edit {
-    font-size: 90%;
     float: right;
+    font-size: 90%;
   }
 
-  a.edit:link{
+  a.edit:link {
     color: #7f7f7f;
   }
 
@@ -359,10 +359,10 @@
   }
 
   .deprecation-warning {
-     border-radius: 25px;
-     background: black;
-     padding: 20px; 
-     h1, a, p { color: white; }
+    border-radius: 25px;
+    background: black;
+    padding: 20px; 
+    h1, a, p { color: white; }
   }
   // .tree * {margin:0; padding:0;}
   .tree a { text-decoration: none;}
