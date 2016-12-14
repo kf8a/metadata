@@ -152,11 +152,11 @@ class DatatablesController < ApplicationController
   private
 
   def set_title
-    if @subdomain_request == 'lter'
-      @title = 'LTER Data Catalog'
-    else
-      @title = 'GLBRC Sustainability Data Catalog'
-    end
+    @title = if @subdomain_request == 'lter'
+               'LTER Data Catalog'
+             else
+               'GLBRC Sustainability Data Catalog'
+             end
   end
 
   def set_crumbs

@@ -124,7 +124,7 @@ class CitationsController < ApplicationController
   end
 
   def download
-    head(:not_found) && return unless (citation = Citation.find_by_id(params[:id]))
+    head(:not_found) && return unless (citation = Citation.find_by(id: params[:id]))
     deny_access && return unless citation.open_access || signed_in?
 
     send_citation(citation)
@@ -166,11 +166,11 @@ class CitationsController < ApplicationController
   end
 
   def set_title
-    if @subdomain_request == 'lter'
-      @title = 'LTER Publications'
-    else
-      @title = 'GLBRC Sustainability Publications'
-    end
+    @title = if @subdomain_request == 'lter'
+               'LTER Publications'
+             else
+               'GLBRC Sustainability Publications'
+             end
   end
 
   def index_responder
