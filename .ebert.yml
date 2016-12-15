@@ -53,3 +53,4 @@ exclude_paths:
 - app/assets/javascripts/jquery.selso.js
 - app/assets/stylesheets/token-input.css
 - app/assets/stylesheets/token-input-facebook.css
+- app/assets/stylesheets/token-input-mac.css
