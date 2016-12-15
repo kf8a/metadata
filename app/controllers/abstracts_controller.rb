@@ -30,14 +30,9 @@ class AbstractsController < ApplicationController
     respond_to do |format|
       if abstract.save
         flash[:notice] = 'Meeting Abstract was successfully created.'
-        if abstract.meeting_abstract_type == MeetingAbstractType.where(name: 'Presentation').first
-          format.html { redirect_to abstract_url(abstract) }
-        else
-          format.html { redirect_to meeting_url(abstract.meeting) }
-        end
+        redirect_to_abstract_or_meeting(abstract)
       else
         format.html { render 'new' }
-        format.xml  { render xml: abstract.errors.to_xml }
       end
     end
   end
@@ -82,5 +77,13 @@ class AbstractsController < ApplicationController
   def abstract_params
     params.require(:abstract).permit(:title, :authors, :abstract, :meeting_abstract_type_id,
                                      :author_affiliations, :meeting_id, :pdf)
+  end
+
+  def redirect_to_abstract_or_meeting(abstract)
+    if abstract.meeting_abstract_type == MeetingAbstractType.where(name: 'Presentation').first
+      format.html { redirect_to abstract_url(abstract) }
+    else
+      format.html { redirect_to meeting_url(abstract.meeting) }
+    end
   end
 end
