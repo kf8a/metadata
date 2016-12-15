@@ -366,13 +366,13 @@
   }
   // .tree * {margin:0; padding:0;}
   .tree a { text-decoration: none;}
-  .tree li {list-style:none; padding-left:21px;}
-  .tree li.root {padding-left:0;}
-  .tree li li { background-repeat:no-repeat 17px center; margin-left:10px; padding-left:31px;}
-  .tree li li.root {padding-left:10px; }
+  .tree li {list-style:none; padding-left: 21px;}
+  .tree li.root {padding-left: 0;}
+  .tree li li { background-repeat: no-repeat 17px center; margin-left: 10px; padding-left: 31px;}
+  .tree li li.root {padding-left: 10px; }
   /* .tree li li.root.last {background:none; } */
   .tree li li.last {}
-  .expand {background:url('/metadata-assets/assets/plus_minus.png') no-repeat; padding-left:20px; text-indent:16px;}
+  .expand {background:url('/metadata-assets/assets/plus_minus.png') no-repeat; padding-left: 20px; text-indent: 16px;}
   .contract {background-position:0 -16px;}
-  .expand:hover {cursor:pointer;}
+  .expand:hover {cursor: pointer;}
 }
