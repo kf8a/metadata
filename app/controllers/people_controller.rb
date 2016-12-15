@@ -26,7 +26,7 @@ class PeopleController < ApplicationController
   end
 
   def emeritus
-    @roles = RoleType.find_by_name('lter')
+    @roles = RoleType.find_by(name: 'lter')
                      .roles.order('seniority')
                      .where('name like ?', 'Emeritus%')
     respond_to do |format|
