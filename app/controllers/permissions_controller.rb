@@ -16,7 +16,7 @@ class PermissionsController < ApplicationController
   end
 
   def create
-    user = User.find_by_email(params[:email])
+    user = User.find_by(email: params[:email])
     flash[:notice] = 'No user with that email' unless user
     permission = my_permission(user, current_user, @datatable) || Permission.new
     permission.datatable_id = @datatable.id
@@ -50,7 +50,7 @@ class PermissionsController < ApplicationController
   end
 
   def deny
-    user = User.find_by_email(params[:email])
+    user = User.find_by(email: params[:email])
     owner = current_user
     permission = my_permission(user, owner, @datatable)
     if permission
