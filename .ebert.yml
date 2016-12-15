@@ -55,3 +55,4 @@ exclude_paths:
 - app/assets/stylesheets/token-input.css
 - app/assets/stylesheets/token-input-facebook.css
 - app/assets/stylesheets/token-input-mac.css
+-  app/assets/javascripts/jquery.quickTree.js
