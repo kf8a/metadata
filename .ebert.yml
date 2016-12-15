@@ -51,3 +51,5 @@ exclude_paths:
 - app/assets/javascripts/application.js
 - app/assets/javascripts/jquery.truncator.js
 - app/assets/javascripts/jquery.selso.js
+- app/assets/stylesheets/token-input.css
+- app/assets/stylesheets/token-input-facebook.css
