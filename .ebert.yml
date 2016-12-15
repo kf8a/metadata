@@ -49,4 +49,5 @@ exclude_paths:
 - app/assets/javascripts/jquery.comboselect.js
 - app/assets/javascripts/themes
 - app/assets/javascripts/application.js
--  app/assets/javascripts/jquery.truncator.js
+- app/assets/javascripts/jquery.truncator.js
+- app/assets/javascripts/jquery.selso.js
