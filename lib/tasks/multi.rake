@@ -28,7 +28,7 @@ namespace :multi do
   end
 
   #Example: rake multi:single[datatable]
-  desc 'Runs a specific item's tests/specs; rake multi:single[datatables_c]'
+  desc "Runs a specific item's tests/specs; rake multi:single[datatables_c]"
   task :single, :item_name do |t, args|
     item_name = args.item_name
     Rake::Task["test:#{item_name}"].invoke
