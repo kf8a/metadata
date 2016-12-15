@@ -8,7 +8,7 @@ class OwnershipsController < ApplicationController
 
   def show
     @datatable = datatable if params[:id]
-    @datatable = Datatable.find_by_id(params[:datatable]) if params[:datatable]
+    @datatable = Datatable.find_by(id: params[:datatable]) if params[:datatable]
     unless @datatable
       flash[:notice] = 'You must select a valid datatable to grant ownerships'
       redirect_to action: :index
