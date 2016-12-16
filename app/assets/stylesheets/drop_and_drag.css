@@ -1,7 +1,5 @@
 *[draggable=true] {
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -webkit-user-select: none;
+  -user-select: none;
   -khtml-user-drag: element;
   cursor: move;
 }
