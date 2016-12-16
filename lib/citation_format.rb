@@ -23,14 +23,14 @@ module CitationFormat
   end
 
   def format_as_default
-    given_name_part = has_given_name? ? ", #{first_initial}." : ""
-    middle_name_part = has_middle_name? ? " #{middle_initial}." : ""
+    given_name_part = given_name? ? ", #{first_initial}." : ''
+    middle_name_part = middle_name? ? " #{middle_initial}." : ''
     sur_name.to_s + given_name_part + middle_name_part + suffix_text
   end
 
   def format_as_natural
-    given_name_part = has_given_name? ? "#{first_initial}. " : ""
-    middle_name_part = has_middle_name? ? "#{middle_initial}. " : ""
+    given_name_part = given_name? ? "#{first_initial}. " : ''
+    middle_name_part = middle_name? ? "#{middle_initial}. " : ''
     given_name_part + middle_name_part + sur_name.to_s + suffix_text
   end
 
@@ -87,22 +87,22 @@ module CitationFormat
   private
 
   def given_name_part
-    has_given_name? ? given_name + " " : ""
+    given_name? ? given_name + " " : ''
   end
 
   def middle_name_part
-    has_middle_name? ? middle_name + " " : ""
+    middle_name? ? middle_name + " " : ''
   end
   
   def sur_name_part
-    has_sur_name? ? sur_name : ""
+    has_sur_name? ? sur_name : ''
   end
 
-  def has_given_name?
+  def given_name?
     given_name.present?
   end
 
-  def has_middle_name?
+  def middle_name?
     middle_name.present?
   end
 
