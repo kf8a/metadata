@@ -210,7 +210,7 @@ class Citation < ActiveRecord::Base
   def treat_as_token_list(name_of_class, token_string)
     token_array = token_string.split(',')
     token_array.each do
-      send(name_of_class.tableize) << name_of_class.constantize.find_by_id(author_id)
+      send(name_of_class.tableize) << name_of_class.constantize.find_by(id: author_id)
     end
   end
 
@@ -485,12 +485,11 @@ class Citation < ActiveRecord::Base
   protected
 
   def check_for_open_access_paper
-    if pdf.exists?
-      if open_access
-        make_pdf_public
-      else
-        make_pdf_private
-      end
+    return unless pdf.exists?
+    if open_access
+      make_pdf_public
+    else
+      make_pdf_private
     end
   end
 end
