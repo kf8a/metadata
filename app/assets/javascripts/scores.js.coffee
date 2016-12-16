@@ -69,6 +69,6 @@ class ScoreGraph
       .attr('r', 2)
       .attr('fill', 'grey')
 
-jQuery -> 
+jQuery ->
   graph = new ScoreGraph
   graph.render(score) for score in  $('.score-data')
