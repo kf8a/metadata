@@ -85,7 +85,7 @@ class Datatable < ActiveRecord::Base
   def self.from_eml(datatable_eml)
     url = datatable_eml.css('physical distribution online url').text
     table_id = url.split('/')[-1].to_s.gsub('.csv', '')
-    find_by_id(table_id.to_i) || new.from_eml(datatable_eml)
+    find_by(id: table_id.to_i) || new.from_eml(datatable_eml)
   end
 
   def from_eml(datatable_eml)
@@ -155,7 +155,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def leads
-    lead_investigator = Role.find_by_name('lead investigator')
+    lead_investigator = Role.find_by(name: 'lead investigator')
     data_contributions.collect { |affiliation| affiliation.person if affiliation.role == lead_investigator }.compact
   end
 
@@ -405,19 +405,8 @@ class Datatable < ActiveRecord::Base
 
   def database_date_field
     values = ActiveRecord::Base.connection.execute(object)
-    if values.fields.member?('sample_date')
-      'sample_date'
-    elsif values.fields.member?('obs_date')
-      'obs_date'
-    elsif values.fields.member?('date')
-      'date'
-    elsif values.fields.member?('datetime')
-      'datetime'
-    elsif values.fields.member?('harvest_date')
-      'harvest_date'
-    elsif values.fields.member?('year')
-      'year'
-    end
+    valid_date_names = %w(sample_date obs_date date datetime harvest_date year)
+    values.fields.find {|field| valid_date_names.include?(field)}
   end
 
   def temporal_extent
