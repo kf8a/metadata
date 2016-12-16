@@ -1,6 +1,5 @@
 module CitationFormat
-
-  SUFFICES = ['esq','esquire','jr','sr','clu','chfc','cfp','md','phd']
+  SUFFICES = %w(esq esquire jr sr clu chfc cfp md phd).freeze
 
   def formatted(option = :default)
     if option == :natural
@@ -35,13 +34,13 @@ module CitationFormat
   end
 
   def suffix_text
-    has_suffix? ? suffix : ''
+    suffix? ? suffix : ''
   end
 
   def name
     given  = " #{given_name}".presence
     middle = " #{middle_name}".presence
-    given_and_middle = given || middle ? "," + given.to_s + middle.to_s : ""
+    given_and_middle = given || middle ? ',' + given.to_s + middle.to_s : ''
 
     sur_name.to_s + given_and_middle + suffix_text
   end
@@ -56,8 +55,8 @@ module CitationFormat
     name_array
   end
 
-  def name=(name_string='')
-    if name_string.match(/^_/) 
+  def name=(name_string = '')
+    if name_string.match(/^_/)
       self.sur_name = name_string[1..-1]
     else
       name_array = name_string.split(',')
@@ -71,7 +70,7 @@ module CitationFormat
   end
 
   def treat_as_first_middle_last(name_array)
-    name_array = name_array[0].split.collect {|part| part.split('.') }.flatten
+    name_array = name_array[0].split.collect { |part| part.split('.') }.flatten
     self.given_name = name_array.slice!(0)
     self.sur_name = name_array.slice!(-1)
     self.middle_name = name_array.join(' ')
@@ -79,7 +78,7 @@ module CitationFormat
 
   def treat_as_last_first_middle(name_array)
     self.sur_name = name_array.slice!(0)
-    name_array = name_array[0].split.collect {|part| part.split('.') }.flatten
+    name_array = name_array[0].split.collect { |part| part.split('.') }.flatten
     self.given_name = name_array.slice!(0)
     self.middle_name = name_array.join(' ')
   end
@@ -87,15 +86,15 @@ module CitationFormat
   private
 
   def given_name_part
-    given_name? ? given_name + " " : ''
+    given_name? ? given_name + ' ' : ''
   end
 
   def middle_name_part
-    middle_name? ? middle_name + " " : ''
+    middle_name? ? middle_name + ' ' : ''
   end
-  
+
   def sur_name_part
-    has_sur_name? ? sur_name : ''
+    sur_name? ? sur_name : ''
   end
 
   def given_name?
@@ -106,11 +105,11 @@ module CitationFormat
     middle_name.present?
   end
 
-  def has_sur_name?
+  def sur_name?
     sur_name.present?
   end
 
-  def has_suffix?
+  def suffix?
     respond_to?(:suffix) && suffix.present?
   end
 end
