@@ -406,7 +406,7 @@ class Datatable < ActiveRecord::Base
   def database_date_field
     values = ActiveRecord::Base.connection.execute(object)
     valid_date_names = %w(sample_date obs_date date datetime harvest_date year)
-    values.fields.find {|field| valid_date_names.include?(field)}
+    values.fields.find { |field| valid_date_names.include?(field) }
   end
 
   def temporal_extent
