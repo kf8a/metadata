@@ -289,11 +289,13 @@ class Citation < ActiveRecord::Base
   end
 
   def make_pdf_public
-    pdf.s3_object.acl = :public_read
+    # pdf.s3_object.acl = :public_read
+    pdf.s3_object.acl.put(acl: 'public-read')
   end
 
   def make_pdf_private
-    pdf.s3_object.acl = :authenticated_read
+    # pdf.s3_object.acl = :authenticated_read
+    pdf.s3_object.acl.put(acl: 'authenticated-read')
   end
 
   private
