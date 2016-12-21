@@ -16,13 +16,13 @@ while row = sth.fetch do
   puts row[2], role_id
   puts row[1], dataset_id
 
-  new_table.do("insert into affiliations 
-      (person_id, role_id, dataset_id, seniority)
-      values(?,?,?,?)", 
-      person_id, role_id, dataset_id, row[3])
- end
+  new_table.do("insert into affiliations
+              (person_id, role_id, dataset_id, seniority)
+              values(?,?,?,?)",
+              person_id, role_id, dataset_id, row[3])
+end
 
- t.column 'person_id',  :integer
- t.column 'role_id',    :integer
- t.column 'dataset_id', :integer
- t.column 'seniority',  :integer
+t.column 'person_id',  :integer
+t.column 'role_id',    :integer
+t.column 'dataset_id', :integer
+t.column 'seniority',  :integer
