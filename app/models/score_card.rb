@@ -93,7 +93,7 @@ class ScoreCard
 
   def self.update_all
     score = ScoreCard.new
-    Datatable.find_each(is_sql: true) do |datatable|
+    Datatable.where(is_sql: true).each do |datatable|
       datatable.scores = score.score(datatable).to_json
       datatable.save
     end
