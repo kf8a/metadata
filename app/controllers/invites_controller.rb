@@ -1,6 +1,7 @@
 # Controls the invite interface
 class InvitesController < ApplicationController
-  before_action :admin? unless Rails.env == 'development'
+  before_action :require_login
+  before_action :admin?
   before_action :invite, only: [:show, :edit, :update, :destroy, :send_invitation]
 
   # GET /invites

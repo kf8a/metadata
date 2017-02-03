@@ -1,6 +1,7 @@
 # handle the Studies page
 class StudiesController < ApplicationController
-  before_action :admin?, except: [:index, :show] if Rails.env == 'production'
+  before_action :require_login, except: [:index, :show]
+  before_action :admin?, except: [:index, :show]
   before_action :study, only: [:edit, :update]
 
   # GET /studies

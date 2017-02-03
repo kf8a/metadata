@@ -11,6 +11,7 @@ class SessionsController < Clearance::SessionsController
         params[:session][:email] = 'lter@kbs.edu'
       end
     end
+
     super # let clearance handle it
   end
 

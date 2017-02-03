@@ -1,5 +1,6 @@
 # Meetings are local and national ASM's usually
 class MeetingsController < ApplicationController
+  before_action :require_login, except: [:index, :show]
   before_action :admin?, except: [:index, :show]
   before_action :meeting, only: [:show, :edit, :update, :destroy]
   helper_method :venues

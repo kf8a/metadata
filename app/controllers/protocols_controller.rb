@@ -2,7 +2,8 @@
 class ProtocolsController < ApplicationController
   include FileSource
 
-  before_action :admin?, except: [:index, :show, :download] if Rails.env != 'development'
+  before_action :require_login, except: [:index, :show, :download]
+  before_action :admin?, except: [:index, :show, :download]
   before_action :protocol, only: [:edit, :update, :destroy]
 
   # GET /protocols

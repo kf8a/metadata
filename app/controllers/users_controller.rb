@@ -1,5 +1,6 @@
 # handler interaction with the user class
 class UsersController < Clearance::UsersController
+  before_action :require_login, except: [:index, :show]
   protect_from_forgery except: :show
 
   def create

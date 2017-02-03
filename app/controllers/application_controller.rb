@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   layout :site_layout
 
   before_action :set_crumbs, :set_subdomain_request, :extra_views, :set_title
+  before_action :require_login, except: [:index, :show, :suggest, :search]
 
   respond_to :html, :xml, :json
 

@@ -1,8 +1,8 @@
 # Manage People records
 class PeopleController < ApplicationController
   helper_method :people, :person
-  before_action :admin?,
-                except: [:index, :show, :alphabetical, :emeritus] unless Rails.env == 'development'
+  before_action :require_login, except: [:index, :show, :alphabetical, :emeritus]
+  before_action :admin?, except: [:index, :show, :alphabetical, :emeritus]
 
   # GET /people
   # GET /people.xml

@@ -2,6 +2,7 @@
 class DatatablesController < ApplicationController
   helper_method :datatable
 
+  before_action :require_login, except: [:index, :show, :suggest, :search, :qc]
   before_action :admin?, except: [:index, :show, :suggest, :search, :qc]
   before_action :can_download?, only: :show, if: proc { |controller| controller.request.format.csv? || controller.request.format.fasta? } # run before filter to prevent non-members from downloading
   # before_filter :reject_robots

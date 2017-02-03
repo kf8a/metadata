@@ -1,6 +1,7 @@
 # set and show affiliations
 class AffiliationsController < ApplicationController
-  before_action :admin?, except: [:index, :show] unless Rails.env == 'development'
+  before_action :require_login, except: [:index, :show]
+  before_action :admin?, except: [:index, :show]
   helper_method :affiliation
   # before_filter :get_affiliation, :only => [:show, :edit, :update, :destroy]
 

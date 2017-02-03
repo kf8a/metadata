@@ -1,6 +1,7 @@
 # Display units. This is not used much
 class UnitsController < ApplicationController
-  before_action :admin?, except: [:index, :show] if Rails.env == 'production'
+  before_action :require_login, except: [:index, :show]
+  before_action :admin?, except: [:index, :show]
   before_action :unit, only: [:edit, :update, :show]
   before_action :custom_unit?, only: [:edit, :update]
 

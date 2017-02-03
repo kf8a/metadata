@@ -6,6 +6,7 @@ class CitationsController < ApplicationController
 
   respond_to :html, :xml, :json
   layout :site_layout
+  before_action :require_login, except: [:index, :show, :suggest, :search]
   before_action :admin?, only: [:new, :create, :edit, :update, :destroy]
 
   has_scope :by_type,   as: :type
