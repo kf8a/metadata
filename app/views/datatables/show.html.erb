@@ -42,7 +42,7 @@
     <% end %>
     <% if datatable.begin_date && datatable.end_date %>
       <tr>
-        <td>Temporal Coverage:</td>
+        <td>Data available from:</td>
         <td>
           <% if datatable.begin_date.strftime("%B %Y") == datatable.end_date.strftime('%B %Y') -%>
           <%= datatable.begin_date.strftime("%B %Y") %>
