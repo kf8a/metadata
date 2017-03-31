@@ -292,14 +292,18 @@ class Dataset < ActiveRecord::Base
 
   def eml_intellectual_rights
     @eml.intellectualRights do
-      @eml.para 'Data in the KBS LTER core database may not be published without written'\
-                ' permission of the lead investigator or project director. These restrictions'\
-                " are intended mainly to preserve the primary investigators' rights to first"\
-                ' publication and to ensure that data users are aware of the limitations'\
-                ' that may be associated with any specific data set. These restrictions apply'\
-                ' to both the baseline data set and to the data sets associated with specific'\
-                ' LTER-supported subprojects.'
-      @eml.para 'All publications of KBS data and images must acknowledge KBS LTER support.'
+      if cc0 then
+        @eml.para 'These data are licensed under the Creative Commons CC0 license.'
+      else
+        @eml.para 'Data in the KBS LTER core database may not be published without written'\
+          ' permission of the lead investigator or project director. These restrictions'\
+          " are intended mainly to preserve the primary investigators' rights to first"\
+          ' publication and to ensure that data users are aware of the limitations'\
+          ' that may be associated with any specific data set. These restrictions apply'\
+          ' to both the baseline data set and to the data sets associated with specific'\
+          ' LTER-supported subprojects.'
+        @eml.para 'All publications of KBS data and images must acknowledge KBS LTER support.'
+      end
     end
   end
 
