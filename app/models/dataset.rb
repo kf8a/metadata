@@ -167,6 +167,19 @@ class Dataset < ActiveRecord::Base
   # @return a hash with  {eastBoundingCoordinate:, westBoundingCoordinate: ,
   #                       northBoundingCoordinate:, southBoundingCoordinate:}
   def bounding_coordinates
+    if west_bounding_coordinate
+      {
+        westBoundingCoordinate: west_bounding_coordinate,
+        eastBoundingCoordinate: east_bounding_coordinate,
+        northBoundingCoordinate: north_bounding_coordinate,
+        southBoundingCoordinate: south_bounding_coordinate
+
+      }
+    else
+      default_bounding_coordinates
+    end
+  end
+  def default_bounding_coordinates
     {
       westBoundingCoordinate: -85.404699,
       eastBoundingCoordinate: -85.366857,
