@@ -82,7 +82,7 @@ namespace :deploy do
       run_locally "bundle exec rake assets:precompile RAILS_ENV=production"
       run "cd #{current_path} && bundle exec rake assets:precompile RAILS_ENV=production"
       find_servers_for_task(current_task).each do |server|
-        run_locally "rsync -vr --exclude='.DS_Store' public/assets hillsdale.kbs.msu.edu:/var/www/lter/metadata-assets/"
+        run_locally "rsync -vr --exclude='.DS_Store' public/assets gprpc24.kbs.msu.edu:/var/www/lter/metadata-assets/"
       end
     end
   end
@@ -95,7 +95,7 @@ end
 
 task :oshtemo do
   set :host, 'oshtemo.kbs.msu.edu'
-  set :asset_host, 'hillsdale.kbs.msu.edu'
+  set :asset_host, 'gprpc24.kbs.msu.edu'
   set :asset_path, '/var/www/lter/metadata-assets'
   role :web, "#{host}"
   role :app, "#{host}"
@@ -104,7 +104,7 @@ end
 
 task :kalkaska do
   set :host, 'kalkaska.css.msu.edu'
-  set :asset_host, 'hillsdale.kbs.msu.edu'
+  set :asset_host, 'gprpc24.kbs.msu.edu'
   set :asset_path, '/var/www/lter/metadata-assets'
   role :web, "#{host}"
   role :app, "#{host}"
@@ -113,7 +113,7 @@ end
 
 task :staging do
   set :host, 'houghton.kbs.msu.edu'
-  set :asset_host, 'hillsdale.kbs.msu.edu'
+  set :asset_host, 'gprpc24.kbs.msu.edu'
   set :asset_path, '/var/www/lter/metadata-assets'
   set :public_asset_host, 'lter.kbs.msu.edu'
   role :web, "#{host}"
@@ -140,16 +140,16 @@ end
 
 desc 'update menus, headers and footers'
 task :update_nav do
-  run "cd #{current_path}/public;curl http://lter.kbs.msu.edu/export/nav/ -o nav.html -s"
-  run "cd #{current_path}/public;curl http://lter.kbs.msu.edu/export/footer/ -o footer.html -s"
-  run "cd #{current_path}/public;curl http://lter.kbs.msu.edu/export/header/ -o header.html -s"
+  run "cd #{current_path}/public;curl https://lter.kbs.msu.edu/export/nav/ -o nav.html -s"
+  run "cd #{current_path}/public;curl https://lter.kbs.msu.edu/export/footer/ -o footer.html -s"
+  run "cd #{current_path}/public;curl https://lter.kbs.msu.edu/export/header/ -o header.html -s"
   # run %Q{cd #{release_path}/public; sed -i '' 's/src="http:/src="https:/g' footer.html}
   # run %Q{cd #{release_path}/public; sed -i '' 's/src="http:/src="https:/g' header.html}
 end
 task :create_nav do
-  run "cd #{release_path}/public;curl http://lter.kbs.msu.edu/export/nav/ -o nav.html -s"
-  run "cd #{release_path}/public;curl http://lter.kbs.msu.edu/export/footer/ -o footer.html -s"
-  run "cd #{release_path}/public;curl http://lter.kbs.msu.edu/export/header/ -o header.html -s"
+  run "cd #{release_path}/public;curl https://lter.kbs.msu.edu/export/nav/ -o nav.html -s"
+  run "cd #{release_path}/public;curl https://lter.kbs.msu.edu/export/footer/ -o footer.html -s"
+  run "cd #{release_path}/public;curl https://lter.kbs.msu.edu/export/header/ -o header.html -s"
   run %Q{cd #{release_path}/public; sed -i 's/src="http:/src="https:/g' footer.html}
   run %Q{cd #{release_path}/public; sed -i 's/src="http:/src="https:/g' header.html}
 end
