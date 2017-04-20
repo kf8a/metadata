@@ -22,6 +22,8 @@ class UsersController < Clearance::UsersController
   end
 
   def show
+    return if request.format == :json
+    render :nothing => true, :status => 406
   end
 
   private
