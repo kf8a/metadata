@@ -1,1 +1,1 @@
-ActionMailer::Base.default_url_options[:host] = 'glbrc.kbs.msu.edu'
+ActionMailer::Base.default_url_options[:host] = 'data.sustainability.glbrc.org'
