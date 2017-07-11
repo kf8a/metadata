@@ -22,8 +22,10 @@ class UsersController < Clearance::UsersController
   end
 
   def show
-   logger.info current_user
-   render nothing: true, status: 406 if request.format == :html
+    logger.info "Current user (usercontroller) #{current_user}"
+    if request.format == :html
+      render nothing: true, status: 406
+    end
   end
 
   private
