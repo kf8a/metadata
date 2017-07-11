@@ -6,7 +6,7 @@ class SessionsController < Clearance::SessionsController
     # set the default user if blank or 'lter'
     if params[:session]
       session = params[:session]
-      logger.info session[:email]
+      logger.info "email" session[:email]
       if session[:email].empty? || session[:email].casecmp('lter').zero?
         params[:session][:email] = 'lter@kbs.edu'
       end
