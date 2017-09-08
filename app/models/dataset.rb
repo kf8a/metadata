@@ -113,6 +113,8 @@ class Dataset < ActiveRecord::Base
   #  end
   # end
 
+  delegate :url, to: :website
+
   def package_id
     "knb-lter-kbs.#{metacat_id || id}.#{version}"
   end

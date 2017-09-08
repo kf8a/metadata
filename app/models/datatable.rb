@@ -396,9 +396,9 @@ class Datatable < ActiveRecord::Base
   def data_source
     <<-END
 #
-# Original Data Source: https://#{website_name}.kbs.msu.edu/datatables/#{id}
-# The newest version of the data https://#{website_name}.kbs.msu.edu/datatables/#{id}.csv
-# Full EML Metadata: https://#{website_name}.kbs.msu.edu/datasets/#{dataset.id}.eml
+# Original Data Source: https://#{dataset.url}/datatables/#{id}
+# The newest version of the data https://#{dataset.url}/datatables/#{id}.csv
+# Full EML Metadata: https://#{dataset.url}/datasets/#{dataset.id}.eml
 #
     END
   end
@@ -486,10 +486,6 @@ class Datatable < ActiveRecord::Base
 
   def sponsor_name
     dataset.sponsor.try(:name) || 'lter'
-  end
-
-  def website_name
-    dataset.website.try(:name) || 'lter'
   end
 
   def study_link_for(website)
@@ -582,7 +578,7 @@ class Datatable < ActiveRecord::Base
     @eml.distribution do
       @eml.online do
         if is_sql
-          @eml.url "https://#{website_name}.kbs.msu.edu/datatables/#{id}.csv"
+          @eml.url "https://#{dataset.url}/datatables/#{id}.csv"
         else
           @eml.url data_url
         end
