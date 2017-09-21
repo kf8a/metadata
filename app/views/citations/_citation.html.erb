@@ -29,7 +29,7 @@
       <% end %>
       <% if citation.data_url.present? %>
         <span>
-          <%= link_to 'data', citation.data_url %>
+          <a href="<%= normalize_doi(citation.data_url) %>"> data<a>
         </span>
       <% end %>
       <% if citation.pdf.present? %>

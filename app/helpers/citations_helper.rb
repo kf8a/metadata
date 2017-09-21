@@ -7,6 +7,16 @@ module CitationsHelper
     end
   end
 
+  def normalize_doi(doi)
+    if doi =~ /dx.doi.org/
+      doi
+    elsif doi =~ /^doi.org/
+      'http://' + doi
+    else
+      'http://dx.doi.org/' + doi
+    end
+  end
+
   def humanize_citation_type(type)
     case type
     when 'ThesisCitation' then 'Dissertations only'
