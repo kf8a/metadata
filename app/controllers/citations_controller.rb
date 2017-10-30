@@ -6,8 +6,8 @@ class CitationsController < ApplicationController
 
   respond_to :html, :xml, :json
   layout :site_layout
-  before_action :require_login, except: [:index, :show, :suggest, :search]
-  before_action :admin?, only: [:new, :create, :edit, :update, :destroy]
+  before_action :require_login, except: %i[index show suggest search]
+  before_action :admin?, only: %i[new create edit update destroy]
 
   has_scope :by_type,   as: :type
   has_scope :sorted_by, as: :sort_by
@@ -62,21 +62,14 @@ class CitationsController < ApplicationController
 
   def search
     @word = params[:q]
-    redirect_to citations_url && return if @word.blank?
-
+    (redirect_to citations_url && return) if @word.blank?
     @word = SearchInputSanitizer.sanitize(@word)
+    search_terms = assemble_search_terms(@word)
 
-    # search_term = "^#{@word}$ | #{@word}* | #{@word}"
-
-    terms = @word.split(/ /)
-    search_terms = terms.collect do |term|
-      "(^#{term}$ | #{term} | #{term}*)"
-    end.join(' & ')
-
-    @citations = Citation.search search_terms,
+    @citations = Citation.search(search_terms,
                                  with: { website_id: website.id },
                                  # order: 'pub_year desc',
-                                 per_page: 500
+                                 per_page: 500)
     index_responder
   end
 
@@ -140,8 +133,7 @@ class CitationsController < ApplicationController
     send_citation(citation)
   end
 
-  def biblio
-  end
+  def biblio; end
 
   def bibliography
     date = params[:date].presence
@@ -226,5 +218,12 @@ class CitationsController < ApplicationController
       #              website.chapter_citations, website.thesis_citations]
       [website.citations.publications]
     end
+  end
+
+  def assemble_search_terms(word)
+    terms = word.split(/ /)
+    terms.collect do |term|
+      "(^#{term}$ | #{term} | #{term}*)"
+    end.join(' & ')
   end
 end
