@@ -29,7 +29,7 @@ class Citation < ActiveRecord::Base
                     storage: :s3,
                     bucket: 'metadata-production',
                     path: '/citations/pdfs/:id/:style/:basename.:extension',
-                    s3_credentials: File.root.join(Rails.root, 'config', 's3.yml'),
+                    s3_credentials: File.join(Rails.root, 'config', 's3.yml'),
                     s3_region: 'us-east-1',
                     s3_permissions: 'authenticated-read'
   #                 s3_headers: { 'Content-Disposition': 'attachment' }
