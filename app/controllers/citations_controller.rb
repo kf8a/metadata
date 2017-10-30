@@ -20,9 +20,7 @@ class CitationsController < ApplicationController
     if params[:treatment]
       @treatment = Treatment.find(params[:treatment])
       @study = @treatment.study
-      unless @study.citation_treatments?
-        @treatment = nil
-      end
+      @treatment = nil unless @study.citation_treatments?
       citations = [Citation.from_website(website.id).by_treatment(params[:treatment])]
     end
 
@@ -66,7 +64,7 @@ class CitationsController < ApplicationController
 
     logger.info @word
     @citations = Citation.search @word, with: { website_id: website.id },
-                                        order: 'pub_year desc',
+                                        # order: 'pub_year desc',
                                         star: true, per_page: 500
     index_responder
   end
