@@ -1,12 +1,9 @@
 development:
-  enable_star: 1
-  min_infix_len: 1
+  min_infix_len: 3
 test:
-  enable_star: 1
-  min_infix_len: 1
+  min_infix_len: 3
 production:
-  enable_star: 1
-  min_infix_len: 1
+  min_infix_len: 4
   pid_file: /var/u/apps/metadata/shared/pids/searchd.pid
   searchd_file_path: /var/u/apps/metadata/shared/db/sphinx
   bin_path: /usr/bin/
