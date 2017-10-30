@@ -62,10 +62,13 @@ class CitationsController < ApplicationController
 
     @word = SearchInputSanitizer.sanitize(@word)
 
+    search_term = "^#{@word}$ | #{@word}"
+
     logger.info @word
-    @citations = Citation.search @word, with: { website_id: website.id },
-                                        # order: 'pub_year desc',
-                                        star: true, per_page: 500
+    @citations = Citation.search search_term,
+                                 with: { website_id: website.id },
+                                 # order: 'pub_year desc',
+                                 star: true, per_page: 500
     index_responder
   end
 
