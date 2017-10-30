@@ -48,10 +48,14 @@ class CitationsController < ApplicationController
     end
   end
 
+  def _author_sorter(a, b)
+    a.authors.first.try(:sur_name) <=> b.authors.first.try(:sur_name)
+  end
+
   def index_by_author
     citations = [website.citations.publications]
     @citations = citations.collect { |c| c.includes(:authors).references(:authors).published }
-                          .flatten.sort { |a, b| a.authors.first.try(:sur_name) <=> b.authors.first.try(:sur_name) }
+                          .flatten.sort { |a, b| _author_sorter(a, b) }
 
     index_responder
   end
@@ -62,13 +66,17 @@ class CitationsController < ApplicationController
 
     @word = SearchInputSanitizer.sanitize(@word)
 
-    search_term = "^#{@word}$ | #{@word}"
+    # search_term = "^#{@word}$ | #{@word}* | #{@word}"
 
-    logger.info @word
-    @citations = Citation.search search_term,
+    terms = @word.split(/ /)
+    search_terms = terms.collect do |term|
+      "(^#{term}$ | #{term} | #{term}*)"
+    end.join(' & ')
+
+    @citations = Citation.search search_terms,
                                  with: { website_id: website.id },
                                  # order: 'pub_year desc',
-                                 star: true, per_page: 500
+                                 per_page: 500
     index_responder
   end
 

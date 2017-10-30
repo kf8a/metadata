@@ -4,5 +4,5 @@ ThinkingSphinx::Index.define :citation, with: :active_record do
   indexes publication
   indexes pub_year, sortable: true
   has website_id
-  set_property min_infix_len: 1
+  set_property min_infix_len: 3
 end
