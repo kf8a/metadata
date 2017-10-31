@@ -4,7 +4,7 @@ class CitationsController < ApplicationController
 
   protect_from_forgery except: :download
 
-  respond_to :html, :xml, :json
+  respond_to :html, :json
   layout :site_layout
   before_action :require_login, except: %i[index show suggest search index_by_doi]
   before_action :admin?, only: %i[new create edit update destroy]
