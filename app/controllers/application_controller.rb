@@ -9,9 +9,9 @@ class ApplicationController < ActionController::Base
   layout :site_layout
 
   before_action :set_crumbs, :set_subdomain_request, :extra_views, :set_title
-  before_action :require_login, except: [:index, :show, :suggest, :search]
+  before_action :require_login, except: %i[index show suggest search]
 
-  respond_to :html, :xml, :json
+  respond_to :html, :json
 
   private
 
@@ -46,16 +46,15 @@ class ApplicationController < ActionController::Base
   end
 
   def request_subdomain(requested_subdomain)
-    valid_subdomain?(requested_subdomain) ? requested_subdomain : get_subdomain_from_request
+    valid_subdomain?(requested_subdomain) ? requested_subdomain : subdomain_from_request
   end
 
-  def get_subdomain_from_request
+  def subdomain_from_request
     request.host.downcase.include?('glbrc') ? 'glbrc' : 'lter'
-    # "glbrc"
   end
 
   def valid_subdomain?(subdomain)
-    %w(lter glbrc).include?(subdomain)
+    %w[lter glbrc].include?(subdomain)
   end
 
   def website
