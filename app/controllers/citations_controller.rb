@@ -6,7 +6,7 @@ class CitationsController < ApplicationController
 
   respond_to :html, :xml, :json
   layout :site_layout
-  before_action :require_login, except: %i[index show suggest search]
+  before_action :require_login, except: %i[index show suggest search index_by_doi]
   before_action :admin?, only: %i[new create edit update destroy]
 
   has_scope :by_type,   as: :type
@@ -60,21 +60,25 @@ class CitationsController < ApplicationController
     index_responder
   end
 
+  def index_by_doi
+    @citations = [website.citations.where('doi is not null').publications]
+    index_responder
+  end
+
   def search
     @word = params[:q]
     if @word.blank?
       redirect_to citations_url
-      return
+    else
+      @word = SearchInputSanitizer.sanitize(@word)
+      search_terms = assemble_search_terms(@word)
+
+      @citations = Citation.search(search_terms,
+                                   with: { website_id: website.id },
+                                   # order: 'pub_year desc',
+                                   per_page: 500)
+      index_responder
     end
-
-    @word = SearchInputSanitizer.sanitize(@word)
-    search_terms = assemble_search_terms(@word)
-
-    @citations = Citation.search(search_terms,
-                                 with: { website_id: website.id },
-                                 # order: 'pub_year desc',
-                                 per_page: 500)
-    index_responder
   end
 
   def find_by_doi
@@ -227,7 +231,7 @@ class CitationsController < ApplicationController
   def assemble_search_terms(word)
     terms = word.split(/ /)
     terms.collect do |term|
-      "(^#{term}$ | #{term} | #{term}*)"
+      "( ^#{term}$ | #{term} | #{term}* )"
     end.join(' & ')
   end
 end
