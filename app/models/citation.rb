@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'bibtex'
 
 # Reference for a publication of some sort
@@ -54,6 +53,8 @@ class Citation < ActiveRecord::Base
   scope :submitted,   -> { where(state: 'submitted').with_authors_by_sur_name_and_pub_year }
   scope :forthcoming, -> { where(state: 'forthcoming').with_authors_by_sur_name_and_pub_year }
 
+  scope :with_data, -> { where("data_url <> '' ") }
+
   scope :books, -> { where(type: 'book') }
 
   scope :next, ->(p) { { conditions: ['id > ?', p.id], limit: 1, order: 'id' } }
@@ -107,9 +108,8 @@ class Citation < ActiveRecord::Base
   def self.sorted_by(sorter)
     sorter.downcase!
     # Since primary author and date is default, it is already sorted that way
-    unless sorter == 'primary author and date(default)'
-      order(sorter)
-    end
+    return if sorter == 'primary author and date(default)'
+    order(sorter)
   end
 
   def self.type_from_ris_type(type)
@@ -281,7 +281,7 @@ class Citation < ActiveRecord::Base
   def short_author_string
     return authors.first.formatted + ', et.al. ' if authors.length > 3
 
-    if authors.length > 0
+    if authors.empty?
       author_string
     else
       ''
