@@ -2,8 +2,8 @@
 class AbstractsController < ApplicationController
   include FileSource
 
-  before_action :require_login, except: [:index, :show, :download]
-  before_action :admin?, except: [:index, :show, :download]
+  before_action :require_login, except: %i[index show download]
+  before_action :admin?, except: %i[index show download]
 
   # GET meeting_abstracts
   def index
@@ -28,13 +28,11 @@ class AbstractsController < ApplicationController
   def create
     @abstract_types = MeetingAbstractType.pluck(:name, :id)
     abstract = Abstract.new(abstract_params)
-    respond_to do |format|
-      if abstract.save
-        flash[:notice] = 'Meeting Abstract was successfully created.'
-        redirect_to_abstract_or_meeting(abstract)
-      else
-        format.html { render 'new' }
-      end
+    if abstract.save
+      flash[:notice] = 'Meeting Abstract was successfully created.'
+      redirect_to_abstract_or_meeting(abstract)
+    else
+      render 'new'
     end
   end
 
@@ -81,10 +79,11 @@ class AbstractsController < ApplicationController
   end
 
   def redirect_to_abstract_or_meeting(abstract)
+    logger.info abstract.meeting
     if abstract.meeting_abstract_type == MeetingAbstractType.where(name: 'Presentation').first
-      format.html { redirect_to abstract_url(abstract) }
+      redirect_to abstract_url(abstract)
     else
-      format.html { redirect_to meeting_url(abstract.meeting) }
+      redirect_to meeting_url(abstract.meeting)
     end
   end
 end
