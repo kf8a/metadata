@@ -12,6 +12,8 @@ module CitationsHelper
       doi
     elsif doi =~ /^doi.org/
       'http://' + doi
+    elsif doi =~ /^http/
+      doi
     else
       'http://dx.doi.org/' + doi
     end
