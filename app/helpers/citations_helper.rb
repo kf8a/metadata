@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Helper functions for citation view
 module CitationsHelper
   def publication_url(citation)
     if citation.open_access
