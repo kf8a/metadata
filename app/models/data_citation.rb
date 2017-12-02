@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A data citation
 class DataCitation < Citation
   def formatted(options = {})

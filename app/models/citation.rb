@@ -160,7 +160,7 @@ class Citation < ActiveRecord::Base
 
   def self.citation_from_ris_stanza(stanza, pdf_folder)
     citation = type_from_ris_type(stanza[:type]).new
-    same_name_attributes = %w(title secondary_title series_title pub_year volume abstract doi)
+    same_name_attributes = %w[title secondary_title series_title pub_year volume abstract doi]
     citation.get_attributes_from_ris_stanza(stanza, same_name_attributes)
     citation.get_attribute_from_ris_stanza(stanza, 'publication', :journal)
     citation.date_from_ris_date(stanza[:primary_date]) if stanza[:primary_date]
@@ -173,11 +173,11 @@ class Citation < ActiveRecord::Base
   end
 
   def date_from_ris_date(ris_date)
-    if ris_date.to_i != 0 # it is just an integer string
-      self.pub_date = Date.new(ris_date.to_i)
-    else
-      self.pub_date = Date.parse(ris_date)
-    end
+    self.pub_date = if ris_date.to_i != 0 # it is just an integer string
+                      Date.new(ris_date.to_i)
+                    else
+                      Date.parse(ris_date)
+                    end
   end
 
   def pdf_from_ris_pdf(ris_pdf, pdf_folder)
