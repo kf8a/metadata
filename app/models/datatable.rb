@@ -270,12 +270,11 @@ class Datatable < ActiveRecord::Base
     return title if begin_date.nil? || end_date.nil?
     year_end = end_date.year
     year_start = begin_date.year
-    years = ''
-    if year_end == year_start
-      years = "(#{year_start})"
-    else
-      years = "(#{year_start} to #{ongoing? ? 'present' : year_end})"
-    end
+    years = if year_end == year_start
+              "(#{year_start})"
+            else
+              "(#{year_start} to #{ongoing? ? 'present' : year_end})"
+            end
     title + ' ' + years
   end
 
@@ -524,7 +523,7 @@ class Datatable < ActiveRecord::Base
 
   def year?(year)
     # assume its a year if there are only 4 characters
-    4 == year.length
+    year.length == 4
   end
 
   def query_datatable_for_temporal_extent(query)
