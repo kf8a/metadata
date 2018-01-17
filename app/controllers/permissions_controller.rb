@@ -97,16 +97,16 @@ class PermissionsController < ApplicationController
     unless @datatable
       flash[:notice] = 'You must select a valid datatable to grant permissions'
       redirect_to action: :index
-      return false
+      false
     end
   end
 
   def require_owner
-    unless current_user.try(:owns?, @datatable)
-      flash[:notice] = 'You must be signed in as the owner of'\
-                       ' the datatable in order to access this page'
-      redirect_to action: :index
-      return false
-    end
+    return if current_user.try(:owns?, @datatable)
+
+    flash[:notice] = 'You must be signed in as the owner of'\
+      ' the datatable in order to access this page'
+    redirect_to action: :index
+    false
   end
 end
