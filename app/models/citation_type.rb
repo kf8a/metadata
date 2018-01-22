@@ -1,16 +1,7 @@
+# frozen_string_literal: true
+
 # A class to hold the citation type
 # so that citations can be polymorphic
-class CitationType < ActiveRecord::Base
+class CitationType < ApplicationRecord
   has_many :citations
 end
-
-# == Schema Information
-#
-# Table name: citation_types
-#
-#  id           :integer         not null, primary key
-#  abbreviation :string(255)
-#  name         :string(255)
-#  created_at   :datetime
-#  updated_at   :datetime
-#
