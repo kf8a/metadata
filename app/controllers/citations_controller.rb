@@ -137,7 +137,6 @@ class CitationsController < ApplicationController
 
   def download
     head(:not_found) && return unless (citation = Citation.find_by(id: params[:id]))
-    Logger.info "Signed in #{signed_in?}  and open: #{citation.open_access}"
     deny_access && return unless citation.open_access || signed_in?
 
     send_citation(citation)
