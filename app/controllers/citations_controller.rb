@@ -6,7 +6,8 @@ class CitationsController < ApplicationController
 
   respond_to :html, :json
   layout :site_layout
-  before_action :require_login, except: %i[index show suggest search index_by_doi index_by_treatment]
+  before_action :require_login, except: \
+    %i[index show suggest search index_by_doi index_by_treatment download]
   before_action :admin?, only: %i[new create edit update destroy]
 
   has_scope :by_type,   as: :type
@@ -18,7 +19,7 @@ class CitationsController < ApplicationController
     citations = citations_by_type(params[:type])
 
     if params[:treatment]
-      @treatment = Treatment.find((params[:treatment]).to_i)
+      @treatment = Treatment.find(params[:treatment].to_i)
       @study = @treatment.study
       @treatment = nil unless @study.citation_treatments?
       citations = [Citation.from_website(website.id).by_treatment(params[:treatment])]
@@ -136,6 +137,7 @@ class CitationsController < ApplicationController
 
   def download
     head(:not_found) && return unless (citation = Citation.find_by(id: params[:id]))
+    Logger.info "Signed in #{signed_in?}  and open: #{citation.open_access}"
     deny_access && return unless citation.open_access || signed_in?
 
     send_citation(citation)
