@@ -42,6 +42,7 @@ class Citation < ActiveRecord::Base
   scope :publications, lambda {
     where("type != 'ConferenceCitation'")
       .where("type != 'BulletinCitation'")
+      .where("type != DataCitation")
   }
 
   scope :bookish, -> { where("type in ('BookCitation', 'ChapterCitation')") }
