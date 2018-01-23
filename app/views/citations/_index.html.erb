@@ -1,15 +1,16 @@
 <% if @forthcoming_citations.present? %>
   <ul class='citations'>
-    <%= render :partial => 'citation', :collection => @forthcoming_citations, :locals => {:year => nil} %>
+  <% year = -1 %>
+  <% @forthcoming_citations.each do |citation| %>
+    <%= render 'citation', citation: citation, year: year %>
+    <% year = 0 %>
+  <% end %>
   </ul>
-<% end %>
-<% if @study %>
-  <h1 class='publication-section'>Published <%= humanize_citation_type(@type) %> from the <%= link_to @study.name, @study.url %> <%= @treatment.try(:name) %> (alphabetical by year)</h1>
 <% end %>
 <ul class='citations'>
   <% year = 0 %>
   <% @citations.each do |citation| %>
-    <%= render 'citation', :citation=>citation, :year => year %>
+    <%= render 'citation', citation: citation, year: year %>
     <% year = citation.pub_year.to_i %>
   <% end %>
 </ul>
