@@ -185,12 +185,7 @@ class CitationsController < ApplicationController
   end
 
   def index_responder
-    respond_to do |format|
-      format.html
-      format.enw { send_data Citation.to_enw(@citations), filename: 'glbrc.enw' }
-      format.bib { send_data Citation.to_bib(@citations), filename: 'glbdrc.bib' }
-      format.rss { render layout: false } # index.rss.builder
-    end
+    index_responder_for_type('article')
   end
 
   def index_responder_for_type(type)
@@ -202,14 +197,15 @@ class CitationsController < ApplicationController
     end
   end
 
-  Templates = { 'article'  =>  'citations/article_citations',
-                'book'     =>  'citations/book_citations',
-                'thesis'   =>  'citations/thesis_citations',
-                'report'   =>  'citations/report_citations',
-                'bulletin' =>  'citations/bulletin_citations',
-                'data'     =>  'citations/data_citations' }.freeze
+  Templates = { 'ArticleCitation'  =>  'citations/article_citations',
+                'BookCitation'     =>  'citations/book_citations',
+                'ThesisCitation'   =>  'citations/thesis_citations',
+                'ReportCitation'   =>  'citations/report_citations',
+                'BulletinCitation' =>  'citations/bulletin_citations',
+                'DataCitation'     =>  'citations/data_citations' }.freeze
 
   def template_for_type(type)
+    logger.info "type #{type}"
     Templates.fetch(type, 'citations/article_citations')
   end
 
