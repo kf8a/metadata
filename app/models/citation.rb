@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'bibtex'
 
 # Reference for a publication of some sort
@@ -441,11 +443,11 @@ class Citation < ActiveRecord::Base
   end
 
   def editor_string
-    if editors.present?
-      editor_array = editors.collect { |editor| editor.formatted(:natural) }
-      eds = editor_array.to_sentence(two_words_connector: ', and ')
-      " in #{eds}, eds. "
-    end
+    return if editors.blank?
+
+    editor_array = editors.collect { |editor| editor.formatted(:natural) }
+    eds = editor_array.to_sentence(two_words_connector: ', and ')
+    " in #{eds}, eds. "
   end
 
   def block(collection)
