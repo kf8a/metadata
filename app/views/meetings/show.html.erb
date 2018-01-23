@@ -1,20 +1,23 @@
 <% content_for :head do %>
   <title>KBS LTER Meeting - <%= @meeting.title %></title>
 <% end %>
-<%= render 'shared/breadcrumbs',
-  :crumbs => [{:name => controller_name.upcase, :url =>  url_for(:controller => controller_name, :action => 'index')},
-    {:name => "#{@meeting.date.year} #{@meeting.title}"}] %>
-    <div class='page type-page hfeed'>
-      <h1 class='entry-title'><%= @meeting.date.year %> <%= @meeting.title %></h1>
+<%= render 'shared/breadcrumbs', crumbs: [{name: controller_name.upcase,
+                                           url: url_for(controller: controller_name,
+                                                        action: 'index')},
+                                                       {name: "#{@meeting.date.year} #{@meeting.title}"}] %>
 
-      <div class="entry-content">
-        <% if @meeting.announcement %>
-          <%= textilize(@meeting.announcement) %>
-        <% end %>
+<div class='page type-page hfeed'>
+  <h1 class='entry-title'><%= @meeting.date.year %> <%= @meeting.title %></h1>
+
+  <div class="entry-content">
+    <% if @meeting.announcement %>
+      <%= textilize(@meeting.announcement) %>
+    <% end %>
 
 
-        <% if @meeting.poster_abstracts.size > 0 %>
-          <h3>Posters</h3>
+    <% if admin? %>
+      <% if @meeting.poster_abstracts.size > 0 %>
+        <h3>Posters</h3>
         <div id="abstracts">
           <ul>
             <% @meeting.poster_abstracts.each do | abstract| %>
@@ -22,21 +25,21 @@
             <% end %>
           </ul>
         </div>
-        <% end %>
-        <% if admin? %>
-         <% if @meeting.presentation_abstracts.size > 0 %>
-            <h3>Presentations</h3>
-            <div id="abstracts">
-              <ul>
-                <% @meeting.presentation_abstracts.each do | abstract| %>
-                  <%= render partial: 'abstracts', :locals => {abstract: abstract} %>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
-        <% end %>
-        <p>Meeting held on: <%= @meeting.date.to_s %></p>
-        <!-- <p><%= link_to 'Add abstract', new_abstract_path({meeting_id: @meeting.id}) if admin? %></p> -->
-        <p><%= link_to 'Add abstract', new_abstract_path({meeting_id: @meeting.id}) %></p>
-      </div>
-    </div>
+      <% end %>
+      <% if @meeting.presentation_abstracts.size > 0 %>
+        <h3>Presentations</h3>
+        <div id="abstracts">
+          <ul>
+            <% @meeting.presentation_abstracts.each do | abstract| %>
+              <%= render partial: 'abstracts', :locals => {abstract: abstract} %>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    <% end %>
+    <p>Meeting held on: <%= @meeting.date.to_s %></p>
+    <% if admin? %>
+      <p><%= link_to 'Add abstract', new_abstract_path({meeting_id: @meeting.id}) %></p>
+    <% end %>
+  </div>
+</div>
