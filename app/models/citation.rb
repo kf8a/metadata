@@ -30,7 +30,7 @@ class Citation < ActiveRecord::Base
                     storage: :s3,
                     bucket: 'metadata-production',
                     path: '/citations/pdfs/:id/:style/:basename.:extension',
-                    s3_credentials: File.join(Rails.root, 'config', 's3.yml'),
+                    s3_credentials: Rails.root.join('config', 's3.yml'),
                     s3_region: 'us-east-1',
                     s3_permissions: 'authenticated-read'
   #                 s3_headers: { 'Content-Disposition': 'attachment' }
@@ -42,7 +42,7 @@ class Citation < ActiveRecord::Base
   scope :publications, lambda {
     where("type != 'ConferenceCitation'")
       .where("type != 'BulletinCitation'")
-      .where("type != DataCitation")
+      .where("type != 'DataCitation'")
   }
 
   scope :bookish, -> { where("type in ('BookCitation', 'ChapterCitation')") }
