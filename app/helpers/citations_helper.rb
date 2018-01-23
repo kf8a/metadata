@@ -21,15 +21,4 @@ module CitationsHelper
       'http://dx.doi.org/' + doi
     end
   end
-
-  def humanize_citation_type(type)
-    case type
-    when 'ThesisCitation' then 'Dissertations only'
-    when 'BulletinCitation' then 'Extension Bulletins only'
-    when 'ReportCitation' then 'Reports'
-    when 'BookCitation' then 'Books and Book chapters'
-    when 'ArticleCitation' then 'Journal Articles'
-    else 'Publications'
-    end
-  end
 end
