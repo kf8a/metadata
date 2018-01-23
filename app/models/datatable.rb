@@ -308,7 +308,7 @@ class Datatable < ActiveRecord::Base
   end
 
   def variate_units
-    units = variates.collect { |variate| variate.unit.name if variate.unit }
+    units = variates.collect { |variate| variate.unit&.name }
     units[0] = "##{units[0]}"
     units
   end
@@ -376,12 +376,12 @@ class Datatable < ActiveRecord::Base
   end
 
   def terms_of_use
-    <<-END
-# These Data are copyrighted and use in a publication requires permission
-# as detailed in our Terms of use:  https://lter.kbs.msu.edu/data/terms-of-use/
-# Use of the data constitutes acceptance of the terms.
-#
-  END
+    <<~HEREDOC
+      # These Data are copyrighted and use in a publication requires permission
+      # as detailed in our Terms of use:  https://lter.kbs.msu.edu/data/terms-of-use/
+      # Use of the data constitutes acceptance of the terms.
+      #
+    HEREDOC
   end
 
   def data_comments
@@ -393,18 +393,18 @@ class Datatable < ActiveRecord::Base
   end
 
   def data_source
-    <<-END
-#
-# Original Data Source: https://#{dataset.url}/datatables/#{id}
-# The newest version of the data https://#{dataset.url}/datatables/#{id}.csv
-# Full EML Metadata: https://#{dataset.url}/datasets/#{dataset.id}.eml
-#
-    END
+    <<~HEREDOC
+      #
+      # Original Data Source: https://#{dataset.url}/datatables/#{id}
+      # The newest version of the data https://#{dataset.url}/datatables/#{id}.csv
+      # Full EML Metadata: https://#{dataset.url}/datasets/#{dataset.id}.eml
+      #
+    HEREDOC
   end
 
   def database_date_field
     values = ActiveRecord::Base.connection.execute(object)
-    valid_date_names = %w(sample_date obs_date date datetime harvest_date year)
+    valid_date_names = %w[sample_date obs_date date datetime harvest_date year]
     values.fields.find { |field| valid_date_names.include?(field) }
   end
 
