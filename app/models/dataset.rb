@@ -18,6 +18,7 @@ class Dataset < ActiveRecord::Base
   belongs_to              :website
   has_many                :dataset_files
   has_many                :data_versions
+  has_many                :dois
 
   validates :abstract, presence:   true
   validates :dataset,  uniqueness: true
