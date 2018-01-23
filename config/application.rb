@@ -32,5 +32,6 @@ module Metadata
     config.middleware.use Prometheus::Client::Rack::Exporter
   end
 end
-#Maybe these belong here
+
+# Maybe these belong here
 Struct.new('Crumb', :url, :name)
