@@ -1,7 +1,7 @@
 <div id=<%= citation.id %> >
   <li class='citation'>
   <% unless year.nil? %>
-    <% if citation.pub_year.to_i != year  -%>
+    <% if citation.pub_year.to_i != year  %>
       <div class='pub-year'><%= citation.pub_year %></div>
     <% end %>
   <% end %>

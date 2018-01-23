@@ -1,0 +1,13 @@
+<% content_for :head do %>
+  <title>Thesis and Dissertations<title>
+<% end %>
+<h1>KBS LTER Dissertations</h1>
+
+<p>
+  Theses and dissertations associated with KBS LTER. Click on the pdf link to
+  get open access versions or to <a href='/sign_in'>sign-in</a> (free and immediate) to get others.
+  For published papers of dissertation chapters <a href='/citations'>click here</a>
+</p>
+<%= render 'search_form', :word => @word, :type => @type, :sort_by => @sort_by %>
+
+<%= render partial: 'index' %>

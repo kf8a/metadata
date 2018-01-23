@@ -30,7 +30,7 @@ class CitationsController < ApplicationController
     date = params[:date].presence
     @citations = date ? citations.collect { |c| c.by_date(date) }.flatten : citations.collect(&:published).flatten
 
-    index_responder
+    index_responder_for_type(@type)
   end
 
   def submitted
@@ -193,6 +193,26 @@ class CitationsController < ApplicationController
     end
   end
 
+  def index_responder_for_type(type)
+    respond_to do |format|
+      format.html { render template: template_for_type(type) }
+      format.enw { send_data Citation.to_enw(@citations), filename: 'glbrc.enw' }
+      format.bib { send_data Citation.to_bib(@citations), filename: 'glbdrc.bib' }
+      format.rss { render layout: false } # index.rss.builder
+    end
+  end
+
+  Templates = { 'article'  =>  'citations/article_citations',
+                'book'     =>  'citations/book_citations',
+                'thesis'   =>  'citations/thesis_citations',
+                'report'   =>  'citations/report_citations',
+                'bulletin' =>  'citations/bulletin_citations',
+                'data'     =>  'citations/data_citations' }.freeze
+
+  def template_for_type(type)
+    Templates.fetch(type, 'citations/article_citations')
+  end
+
   def citation_params
     params.require(:citation).permit(:title, :abstract, :pub_date, :pub_year, :author_block,
                                      :citation_type_id, :address, :notes, :publication,
@@ -221,6 +241,9 @@ class CitationsController < ApplicationController
     when 'bulletin'
       @type = 'BulletinCitation'
       [website.bulletin_citations]
+    when 'data'
+      @type = 'DataCitation'
+      [website.data_citations]
     else
       @type = nil
       # citations = [website.article_citations, website.book_citations,

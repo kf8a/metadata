@@ -1,0 +1,13 @@
+<% content_for :head do %>
+  <title>KBS LTER Publications</title>
+<% end %>
+<h1>KBS LTER Publications</h1>
+<p>
+  Publications associated with KBS LTER. Click on the pdf link to get open access papers
+  or to <a href='/sign_in'>sign-in</a> (free and immediate) to get other papers. Click on the data link to get
+  formally published datasets (other datasets available as noted within the publications)
+</p>
+
+<%= render 'search_form', :word => @word, :type => @type, :sort_by => @sort_by %>
+
+<%= render partial: 'index' %>

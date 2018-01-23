@@ -14,10 +14,10 @@ class DataCitation < Citation
   end
 
   def bibtex_type
-    :article
+    :data
   end
 
   def endnote_type
-    "Journal Article\n"
+    "Data Publication\n"
   end
 end

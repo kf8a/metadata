@@ -1,0 +1,11 @@
+<% content_for :head do %>
+  <title>Extension Bulletins<title>
+<% end %>
+<h1>KBS LTER Extension Bulletins</h1>
+
+<p>
+  MSU extension bulletins led by or associated with the  KBS LTER program
+</p>
+<%= render 'search_form', :word => @word, :type => @type, :sort_by => @sort_by %>
+
+<%= render partial: 'index' %>

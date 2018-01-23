@@ -1,10 +1,3 @@
-<% content_for :head do %>
-  <title>Publications <%= humanize_citation_type(@type)%></title>
-<% end %>
-<h1>KBS LTER <%= humanize_citation_type(@type) %></h1>
-<p><%=raw synopsis_for_citation_type(@type) %></p>
-<%= render 'search_form', :word => @word, :type => @type, :sort_by => @sort_by %>
-
 <% if @forthcoming_citations.present? %>
   <% if @study %>
     <h1 class='publication-section'>Forthcoming <%= humanize_citation_type(@type)%> from the <%= @study.name %></h1>
