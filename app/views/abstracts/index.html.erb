@@ -18,7 +18,9 @@
               <p>
               <%= abstract.authors %> <%= meeting.date.year %> <%= abstract.title %>
               <% if abstract.pdf.exists? %>
-                <%=link_to "#{abstract.meeting_abstract_type.name.downcase}", download_abstract_path(abstract) %>
+                <div>
+                  <%=link_to "#{abstract.meeting_abstract_type.name.downcase}", download_abstract_path(abstract) %>
+                </div>
               </p>
               <% end %>
             </li>
