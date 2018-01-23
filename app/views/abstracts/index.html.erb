@@ -1,12 +1,31 @@
 <% content_for :head do %>
   <title>KBS LTER Abstracts</title>
 <% end %>
-<h3>Meeting Abstracts</h3>
+<h1>KBS LTER Meeting Abstracts</h1>
+<p>Abstracts from KBS LTER All Scientists Meetings and KBS contributions to the National LTER All Scientists meetings. </p>
 
-<ul class ="abstract_list">
-  <% @abstracts.each do |abstract| %>
+<ul class ="citations">
+  <% @meetings.each do |meeting| %>
     <li>
-      <%= link_to abstract.title, abstract %> by <%= abstract.authors %> &nbsp;
+      <div class='pub-year'>
+        <%= meeting.date.year %> <%= meeting.title %>
+      </div>
+      <ul class='citation'>
+        <% meeting.abstracts.each do |abstract | %>
+          <% cache(abstract, action: 'index') do %>
+            <div id=<%=abstract.id %>
+            <li>
+              <p>
+              <%= abstract.authors %> <%= meeting.date.year %> <%= abstract.title %>
+              <% if abstract.pdf.exists? %>
+                <%=link_to "#{abstract.meeting_abstract_type.name.downcase}", download_abstract_path(abstract) %>
+              </p>
+              <% end %>
+            </li>
+          </div>
+        <% end %>
+      <% end %>
+      </ul>
     </li>
   <% end %>
 </ul>

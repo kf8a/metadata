@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Controls pages dealing with abstracts of meetings
 class AbstractsController < ApplicationController
   include FileSource
@@ -7,8 +9,8 @@ class AbstractsController < ApplicationController
 
   # GET meeting_abstracts
   def index
-    @abstracts = Abstract.by_authors
-    respond_with @abstracts
+    @meetings = Meeting.all.order(date: :desc)
+    respond_with @meetings
   end
 
   def download
