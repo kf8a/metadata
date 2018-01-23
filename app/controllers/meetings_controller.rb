@@ -27,7 +27,7 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.new
   end
 
-  def edit: end
+  def edit; end
 
   def create
     @meeting = Meeting.new(meeting_params)
