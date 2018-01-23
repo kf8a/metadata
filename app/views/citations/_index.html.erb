@@ -1,10 +1,4 @@
 <% if @forthcoming_citations.present? %>
-  <% if @study %>
-    <h1 class='publication-section'>Forthcoming <%= humanize_citation_type(@type)%> from the <%= @study.name %></h1>
-  <% else %>
-    <h1 class='publication-section'>Forthcoming <%= humanize_citation_type(@type)%> </h1>
-  <% end %>
-  <p class='synopsis indent'>Papers accepted but not yet published.</p>
   <ul class='citations'>
     <%= render :partial => 'citation', :collection => @forthcoming_citations, :locals => {:year => nil} %>
   </ul>

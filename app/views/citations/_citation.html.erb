@@ -1,6 +1,13 @@
 <div id=<%= citation.id %> >
   <li class='citation'>
-  <% unless year.nil? %>
+  <% if year.nil? %>
+
+  <% if @study %>
+    <div class='pub-year'>Forthcoming <%= humanize_citation_type(@type)%> from the <%= @study.name %></div>
+  <% else %>
+    <div class='pub-year'>Forthcoming <%= humanize_citation_type(@type) %></div>
+  <% end %>
+  <% else %>
     <% if citation.pub_year.to_i != year  %>
       <div class='pub-year'><%= citation.pub_year %></div>
     <% end %>
