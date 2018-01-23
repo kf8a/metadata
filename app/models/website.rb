@@ -12,6 +12,7 @@ class Website < ActiveRecord::Base
   has_many :thesis_citations
   has_many :report_citations
   has_many :bulletin_citations
+  has_many :data_citations
 
   validates :name, uniqueness: true
   validates :name, presence: true
@@ -21,14 +22,3 @@ class Website < ActiveRecord::Base
   #   Liquid::Template.parse(template.layout) if template
   # end
 end
-
-# == Schema Information
-#
-# Table name: websites
-#
-#  id                 :integer         not null, primary key
-#  name               :string(255)
-#  created_at         :datetime
-#  updated_at         :datetime
-#  data_catalog_intro :text
-#
