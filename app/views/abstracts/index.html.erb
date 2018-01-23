@@ -11,23 +11,26 @@
         <%= meeting.date.year %> <%= meeting.title %>
       </div>
       <ul class='citation'>
-        <% meeting.abstracts.each do |abstract | %>
+        <% meeting.posters_and_presentations.each do |abstract | %>
           <% cache(abstract, action: 'index') do %>
             <div id=<%=abstract.id %>
             <li>
               <p>
-              <%= abstract.authors %> <%= meeting.date.year %> <%= abstract.title %>
-              <% if abstract.pdf.exists? %>
-                <div>
-                  <%=link_to "#{abstract.meeting_abstract_type.name.downcase}", download_abstract_path(abstract) %>
-                </div>
-              </p>
-              <% end %>
-            </li>
-          </div>
+                <%= abstract.authors %> <%= meeting.date.year %> <%= abstract.title %>
+                <% if abstract.pdf.exists? %>
+                  <div>
+                    <%=link_to "#{abstract.meeting_abstract_type.name.downcase}", download_abstract_path(abstract) %>
+                  </div>
+                </p>
+              </li>
+            </div>
+          <% end %>
+            <%= link_to 'Edit', edit_abstract_path(abstract) %>
+            <%= link_to image_tag('trash.gif'), abstract_path(abstract),
+              confirm: 'Are you sure?', class: 'deleter' %>
         <% end %>
       <% end %>
-      </ul>
-    </li>
-  <% end %>
+    </ul>
+  </li>
+<% end %>
 </ul>

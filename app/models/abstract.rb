@@ -12,7 +12,7 @@ class Abstract < ActiveRecord::Base
                     bucket: 'metadata-production',
                     path: '/abstracts/pdfs/:id/:style/:basename.:extension',
                     s3_region: 'us-east-1',
-                    s3_credentials: File.join(Rails.root, 'config', 's3.yml'),
+                    s3_credentials: Rails.root.join('config', 's3.yml'),
                     s3_permissions: 'authenticated-read'
 
   validates_attachment_content_type :pdf, content_type: /pdf/
@@ -30,18 +30,3 @@ class Abstract < ActiveRecord::Base
     pdf.instance_write(:file_name, transliterate(pdf_file_name).to_s)
   end
 end
-
-# == Schema Information
-#
-# Table name: meeting_abstracts
-#
-#  id               :integer         not null, primary key
-#  title            :text
-#  authors          :text
-#  abstract         :text
-#  meeting_id       :integer
-#  pdf_file_name    :string(255)
-#  pdf_content_type :string(255)
-#  pdf_file_size    :integer
-#  pdf_updated_at   :datetime
-#

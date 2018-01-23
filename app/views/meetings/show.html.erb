@@ -36,6 +36,16 @@
           </ul>
         </div>
       <% end %>
+      <% if @meeting.handouts.size > 0 %>
+        <h3>Presentations</h3>
+        <div id="abstracts">
+          <ul>
+            <% @meeting.handouts.each do | abstract| %>
+              <%= render partial: 'abstracts', :locals => {abstract: abstract} %>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
     <% end %>
     <p>Meeting held on: <%= @meeting.date.to_s %></p>
     <% if admin? %>
