@@ -21,15 +21,13 @@ class MeetingsController < ApplicationController
   end
 
   # GET /meeting/1
-  def show
-  end
+  def show; end
 
   def new
     @meeting = Meeting.new
   end
 
-  def edit
-  end
+  def edit: end
 
   def create
     @meeting = Meeting.new(meeting_params)
