@@ -1,6 +1,10 @@
 <%= render 'shared/breadcrumbs', :crumbs => [{:name => controller_name.upcase}] %>
-<h2>Publications by Experiment</h2>
-<p>Please click on an experiment or treatment name to list LTER articles that  have reported results from that site.</p>
+<h1>Publications by Experiment</h1>
+<div>
+<p>
+  Publications from different KBS LTER experiments, field sites, and MCSE treatments is available by clicking on the experiment or treatment name below
+</p>
+</div>
 <ul>
   <% @studies.each do |study| -%>
     <% next unless Citation.from_website(1).by_treatment(study.treatments.first).all.size > 0 -%>
