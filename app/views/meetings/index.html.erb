@@ -9,8 +9,11 @@
     <div class="one-half first">
       <h1 class='entry-title'>LOCAL MEETINGS</h1>
       <p><%= @local_venue.description %></p>
-      <p>Abstracts from past and current meetings are available below:</p>
-        </div>
+      <p>
+        Details of past and current meetings are below.
+        Abstracts from these meetings are at: <%= link_to 'https://lter.kbs.msu.edu/abstracts', abstracts_path() %>
+      </p>
+    </div>
     <div class="one-half">
       <h1 class='entry-title'>NATIONAL MEETINGS</h1>
       <p><%= @national_venue.description %></p>
