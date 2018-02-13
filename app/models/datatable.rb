@@ -156,8 +156,14 @@ class Datatable < ActiveRecord::Base
   end
 
   def leads
-    lead_investigator = Role.find_by(name: 'lead investigator')
-    data_contributions.collect { |affiliation| affiliation.person if affiliation.role == lead_investigator }.compact
+    lead_investigators = collect_roles('lead investigator')
+    investigators = collect_roles('investigator')
+    [lead_investigators, investigators].flatten
+  end
+
+  def collect_roles(name)
+    role = Role.find_by(name: name)
+    data_contributions.collect { |affiliation| affiliation.person if affiliation.role == role }.compact
   end
 
   def keyword_names

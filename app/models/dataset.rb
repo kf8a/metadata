@@ -37,12 +37,11 @@ class Dataset < ActiveRecord::Base
   end
 
   def self.from_eml(eml_text)
-    eml_doc = nil
-    if eml_text.start_with?('http://')
-      eml_doc = Nokogiri::XML(open(eml_text))
-    else
-      eml_doc = Nokogiri::XML(eml_text)
-    end
+    eml_doc = if eml_text.start_with?('http://')
+                Nokogiri::XML(open(eml_text))
+              else
+                Nokogiri::XML(eml_text)
+              end
     # get_validation_errors(eml_doc).presence ||
     new.from_eml(eml_doc)
   end
@@ -84,8 +83,14 @@ class Dataset < ActiveRecord::Base
   end
 
   def leads
-    lead_investigator = Role.find_by_name('lead investigator')
-    affiliations.collect { |affiliation| affiliation.person if affiliation.role == lead_investigator }.compact
+    lead_investigators = collect_roles('lead investigator')
+    investigators = collect_roles('investigator')
+    [lead_investigators, investigators].flatten
+  end
+
+  def collect_roles(name)
+    role = Role.find_by(name: name)
+    affiliations.collect { |affiliation| affiliation.person if affiliation.role == role }.compact
   end
 
   def valid_request?(subdomain)
@@ -223,7 +228,6 @@ class Dataset < ActiveRecord::Base
                   'xmlns:stmml'        => 'http://www.xml-cml.org/schema/stmml-1.1',
                   'xmlns'              => 'http://www.xml-cml.org/schema/stmml',
                   'xsi:schemaLocation' => 'http://www.xml-cml.org/schema/stmml-1.1 http://nis.lternet.edu/schemas/EML/eml-2.1.0/stmml.xsd') do
-          logger.info custom_units
           custom_units.each do |unit|
             case unit
             when unit.multiplier_to_si && unit.parent_si && unit.unit_type then
@@ -366,7 +370,8 @@ class Dataset < ActiveRecord::Base
     [people, datatable_people].flatten.uniq.compact.each do |person|
       role = datatables.collect { |x| x.which_roles(person) }.flatten.compact.first
       role = which_roles(person).first unless role
-      role_name = role.name if role
+      role_name = role.try(:name)
+      next if ['investigator', 'lead investigator'].include?(role_name)
       person.to_eml(@eml, role_name)
     end
   end
