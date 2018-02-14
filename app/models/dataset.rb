@@ -333,7 +333,7 @@ class Dataset < ActiveRecord::Base
     ending   = daterange[:end_date]
     if starting && ending
       " (#{starting.year} to #{ending.year})"
-    elsif starting
+    elsif starting || starting == ending
       " (#{starting.year})"
     else
       ''
