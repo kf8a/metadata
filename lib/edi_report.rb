@@ -9,15 +9,25 @@ require 'nokogiri'
 # Usage:
 #
 #      report = EdiReport.new(scope, identifier, revision)
+#      report.load
 #      report.table_row(n)
 class EdiReport
-  attr_reader :url_fragment, :doc, :spacing
+  attr_reader :url_fragment, :doc, :Spacing
+  Spacing = ' | '
 
   def initialize(scope, identifier, revision)
     @url_fragment = "/#{scope}/#{identifier}/#{revision}"
+  end
+
+  def load
     doc_url = 'https://pasta.lternet.edu/package/metadata/eml'
-    @doc = Nokogiri::XML(open(doc_url + url_fragment))
-    @spacing = ' | '
+    begin
+      response = open(doc_url + url_fragment)
+    rescue OpenURI::HTTPError => _error
+      return nil
+    end
+
+    @doc = Nokogiri::XML(response)
   end
 
   ##
@@ -50,17 +60,17 @@ class EdiReport
   # Creates a markdown table row
 
   def table_row(row_number)
-    spacing +
-      row_number.to_s + spacing +
-      citation + spacing +
-      core_area_dots.join(spacing) +
-      spacing
+    Spacing +
+      row_number.to_s + Spacing +
+      citation + Spacing +
+      core_area_dots.join(Spacing) +
+      Spacing
   end
 
   private
 
   def core_area_dots
-    return unless dataset_id_attribute
+    return [] unless dataset_id_attribute
     core_area_used(core_areas).collect { |x| x ? '*' : ' ' }
   end
 

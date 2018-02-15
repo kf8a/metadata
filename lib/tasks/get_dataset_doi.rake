@@ -21,6 +21,7 @@ namespace :dois do
       _s, identifier, revision = package_id.split(/\./)
 
       report = EdiReport.new(scope, identifier, revision)
+      next unless report.load
 
       i += 1
       puts "#{report.table_row(i)}\n"
