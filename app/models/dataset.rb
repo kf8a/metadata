@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 require 'builder'
 require 'nokogiri'
 require 'open-uri'
 require 'date'
 require 'eml'
+require 'date_range_formatter.rb'
 
 # A dataset is the central model datasets hold tables, protocols and contact into
 class Dataset < ActiveRecord::Base
@@ -300,7 +303,8 @@ class Dataset < ActiveRecord::Base
   end
 
   def eml_resource_group
-    @eml.title title + ' at the Kellogg Biological Station, Hickory Corners, MI ' + date_range
+    @eml.title title + ' at the Kellogg Biological Station, Hickory Corners, MI ' +
+      DateRangeFormatter.year_range(temporal_extent)
     eml_creator
     eml_people
     eml_pubdate
@@ -324,27 +328,6 @@ class Dataset < ActiveRecord::Base
           ' LTER-supported subprojects.'
         @eml.para 'All publications of KBS data and images must acknowledge KBS LTER support.'
       end
-    end
-  end
-
-  def date_range
-    daterange = temporal_extent
-    starting = daterange[:begin_date]
-    ending   = daterange[:end_date]
-    if starting && ending
-      format_date_range(starting.year, ending.year)
-    elsif starting
-      " (#{starting.year})"
-    else
-      ''
-    end
-  end
-
-  def format_date_range(start_year, end_year)
-    if start_year == end_year
-      " (#{start_year})"
-    else
-      " (#{start_year} to #{end_year})"
     end
   end
 
