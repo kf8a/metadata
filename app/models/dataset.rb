@@ -332,11 +332,19 @@ class Dataset < ActiveRecord::Base
     starting = daterange[:begin_date]
     ending   = daterange[:end_date]
     if starting && ending
-      " (#{starting.year} to #{ending.year})"
-    elsif starting || starting.year == ending.year
+      format_date_range(starting.year, ending.year)
+    elsif starting
       " (#{starting.year})"
     else
       ''
+    end
+  end
+
+  def format_date_range(start_year, end_year)
+    if start_year == end_year
+      " (#{start_year})"
+    else
+      " (#{start_year} to #{end_year})"
     end
   end
 
