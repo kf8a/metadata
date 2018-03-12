@@ -10,10 +10,10 @@ gem 'responders'
 gem 'acts-as-taggable-on'
 gem 'capistrano', '~>2'
 gem 'clearance'
-gem 'country_select'
+# gem 'country_select'
 gem 'formtastic'
 gem 'nokogiri'
-gem 'paperclip', '~> 5'
+gem 'paperclip', '~> 5.2'
 gem 'pg'
 gem 'rake', '< 11.0'
 gem 'RedCloth'
@@ -30,9 +30,6 @@ gem 'workflow'
 
 gem 'parslet'
 
-# for spreadsheet downloads
-# gem 'spreadsheet'
-
 # for creating bibtex formatted citations
 gem 'bibtex-ruby'
 
@@ -40,8 +37,6 @@ gem 'bibtex-ruby'
 gem 'vestal_versions', git: 'https://github.com/R1V3R5/vestal_versions'
 
 gem 'dalli'
-
-# gem 'central_logger'
 
 gem 'has_scope', '<0.6'
 
@@ -70,6 +65,12 @@ gem 'prometheus-client' # , '~> 0.4.2'
 gem 'web-console', group: :development
 
 gem 'awesome_print'
+
+group :development do
+  gem 'bcrypt_pbkdf'
+  gem 'rbnacl', '< 5.0'
+  gem 'rbnacl-libsodium'
+end
 
 group :development, :test do
   gem 'byebug'
