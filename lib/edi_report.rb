@@ -12,8 +12,8 @@ require 'nokogiri'
 #      report.load
 #      report.table_row(n)
 class EdiReport
-  attr_reader :url_fragment, :doc, :Spacing
-  Spacing = ' | '
+  attr_reader :url_fragment, :doc, :SPACER
+  SPACER = ' | '
 
   def initialize(scope, identifier, revision)
     @url_fragment = "/#{scope}/#{identifier}/#{revision}"
@@ -28,13 +28,14 @@ class EdiReport
     end
 
     @doc = Nokogiri::XML(response)
+    self
   end
 
   ##
   # Creates the citation
 
   def citation
-    authors + ' ' + publication_year + '. ' +
+    Author.authors(doc) + ' ' + publication_year + '. ' +
       title + '. Environmental Data Initiative. ' +
       doi
   end
@@ -46,7 +47,7 @@ class EdiReport
     ' | row  | citation | production' \
       ' | population | organic' \
       ' | inorganic  | disturbance' \
-      ' | ' + "\n"
+      ' | supplemental information | top 10 paper |' + "\n"
   end
 
   ##
@@ -60,18 +61,23 @@ class EdiReport
   # Creates a markdown table row
 
   def table_row(row_number)
-    Spacing +
-      row_number.to_s + Spacing +
-      citation + Spacing +
-      core_area_dots.join(Spacing) +
-      Spacing
+    SPACER +
+      row_number.to_s + SPACER +
+      citation + SPACER +
+      core_area_dots.join(SPACER) +
+      SPACER + ' ' + SPACER + ' '
+  end
+
+  def first_author_name
+    first_author = Author.all_authors(doc).shift
+    Author.first_author_name(first_author)
   end
 
   private
 
   def core_area_dots
     return [] unless dataset_id_attribute
-    core_area_used(core_areas).collect { |x| x ? '*' : ' ' }
+    core_area_used(core_areas).collect { |x| x ? "\uF0B7" : ' ' }
   end
 
   def core_area_used(areas)
@@ -98,35 +104,6 @@ class EdiReport
     doc.xpath('//dataset').attribute('id').try(:value)
   end
 
-  def authors
-    creators = doc.xpath('//dataset/creator/individualName')
-    first_author = creators.shift
-
-    return 'Data Manager' if first_author.nil?
-
-    first = first_author_name(first_author)
-    rest = creators.collect do |author|
-      subsequent_author_name(author)
-    end
-    [first, rest].flatten.join(', ')
-  end
-
-  def first_author_name(xml)
-    sur_name, given_name = extract_author_names(xml)
-    "#{sur_name}, #{given_name.first}."
-  end
-
-  def subsequent_author_name(xml)
-    sur_name, given_name = extract_author_names(xml)
-    "#{given_name.first}. #{sur_name}"
-  end
-
-  def extract_author_names(xml)
-    sur_name = xml.xpath('surName').text
-    given_name = xml.xpath('givenName').text
-    [sur_name, given_name]
-  end
-
   def pubdate
     doc.xpath('//dataset/pubDate').text
   end
@@ -144,5 +121,42 @@ class EdiReport
 
   def title
     doc.xpath('//dataset/title').text
+  end
+end
+
+##
+# Helper for parsing authors
+class Author
+  def self.authors(doc)
+    creators = all_authors(doc)
+    first_author = creators.shift
+
+    first = first_author_name(first_author)
+    rest = creators.collect do |author|
+      subsequent_author_name(author)
+    end
+    [first, rest].flatten.join(', ')
+  end
+
+  def self.first_author_name(xml)
+    return 'Data Manager' unless xml
+
+    sur_name, given_name = extract_author_names(xml)
+    "#{sur_name}, #{given_name.first}."
+  end
+
+  def self.subsequent_author_name(xml)
+    sur_name, given_name = extract_author_names(xml)
+    "#{given_name.first}. #{sur_name}"
+  end
+
+  def self.all_authors(doc)
+    doc.xpath('//dataset/creator/individualName')
+  end
+
+  def self.extract_author_names(xml)
+    sur_name = xml.xpath('surName').text
+    given_name = xml.xpath('givenName').text
+    [sur_name, given_name]
   end
 end
