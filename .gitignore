@@ -33,3 +33,4 @@ public/metadata-assets/
 assets
 private
 .idea
+.shared/*
