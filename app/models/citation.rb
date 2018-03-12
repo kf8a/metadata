@@ -45,6 +45,8 @@ class Citation < ActiveRecord::Base
       .where("type != 'DataCitation'")
   }
 
+  scope :data_citations, -> { where("type = 'DataCitation'") }
+
   scope :bookish, -> { where("type in ('BookCitation', 'ChapterCitation')") }
 
   scope :with_authors_by_sur_name_and_pub_year, lambda {

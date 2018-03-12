@@ -28,7 +28,8 @@ class CitationsController < ApplicationController
     @submitted_citations = citations.collect(&:submitted).flatten
     @forthcoming_citations = citations.collect(&:forthcoming).flatten
     date = params[:date].presence
-    @citations = date ? citations.collect { |c| c.by_date(date) }.flatten : citations.collect(&:published).flatten
+    @citations = date ? citations.collect { |c| c.by_date(date) } : citations.collect(&:published)
+    @citations.flatten!
 
     index_responder_for_type(@type)
   end
@@ -68,18 +69,15 @@ class CitationsController < ApplicationController
 
   def search
     @word = params[:q]
-    if @word.blank?
-      redirect_to citations_url
-    else
-      @word = SearchInputSanitizer.sanitize(@word)
-      search_terms = assemble_search_terms(@word)
+    redirect_to citations_url if @word.blank?
 
-      @citations = Citation.search(search_terms,
-                                   with: { website_id: website.id },
-                                   # order: 'pub_year desc',
-                                   per_page: 500)
-      index_responder
-    end
+    @word = SearchInputSanitizer.sanitize(@word)
+    search_terms = assemble_search_terms(@word)
+
+    @citations = Citation.search(search_terms, with: { website_id: website.id },
+                                               order: 'pub_year desc',
+                                               per_page: 500)
+    index_responder
   end
 
   def find_by_doi
@@ -242,8 +240,6 @@ class CitationsController < ApplicationController
       [website.data_citations]
     else
       @type = nil
-      # citations = [website.article_citations, website.book_citations,
-      #              website.chapter_citations, website.thesis_citations]
       [website.citations.publications]
     end
   end
@@ -251,7 +247,7 @@ class CitationsController < ApplicationController
   def assemble_search_terms(word)
     terms = word.split(/ /)
     terms.collect do |term|
-      "( ^#{term}$ | #{term} | #{term}* )"
+      "( ^#{term}$ | #{term} )"
     end.join(' & ')
   end
 end
