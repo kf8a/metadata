@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'citation_format'
 
 # Represents an author. This should be linked people in a better world
@@ -16,19 +18,3 @@ class Author < ActiveRecord::Base
     "\n%A #{formatted}"
   end
 end
-
-# == Schema Information
-#
-# Table name: authors
-#
-#  id          :integer         not null, primary key
-#  sur_name    :string(255)
-#  given_name  :string(255)
-#  middle_name :string(255)
-#  seniority   :integer
-#  person_id   :integer
-#  citation_id :integer
-#  created_at  :datetime
-#  updated_at  :datetime
-#  suffix      :string(255)
-#

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ThinkingSphinx::Index.define :citation, with: :active_record do
   indexes title
   indexes authors.sur_name, as: :authors, sortable: true
