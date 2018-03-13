@@ -60,7 +60,7 @@ class Person < ActiveRecord::Base
   end
 
   def usa_address?
-    country.blank? || country.casecmp('usa') == 0 || country.casecmp('us') == 0
+    country.blank? || country.casecmp('usa').zero? || country.casecmp('us').zero?
   end
 
   def complete_address?
@@ -106,7 +106,7 @@ class Person < ActiveRecord::Base
   end
 
   def eml_organization(eml)
-    eml.organizationName organization unless organization.blank?
+    eml.organizationName organization if organization.present?
   end
 
   def eml_phone(eml)
@@ -118,28 +118,27 @@ class Person < ActiveRecord::Base
   end
 
   def eml_email(eml)
-    eml.electronicMailAddress email unless email.blank?
+    eml.electronicMailAddress email if email.present?
   end
 
   def eml_address(eml)
     eml.address do
-      eml.deliveryPoint street_address unless street_address.blank?
-      eml.city city unless city.blank?
-      eml.administrativeArea locale unless locale.blank?
-      eml.postalCode postal_code unless postal_code.blank?
-      eml.country country unless country.blank?
+      eml.deliveryPoint street_address if street_address.present?
+      eml.city city if city.present?
+      eml.administrativeArea locale if locale.present?
+      eml.postalCode postal_code if postal_code.present?
+      eml.country country if country.present?
     end
     eml
   end
 
   def eml_user_id(eml)
-   # directory=  id=
-    if orcid_id 
-      unless orcid_id =~ /http/
-        eml.userId 'http://' + orcid_id, directory: 'http://orcid.org'
-      else
-        eml.userId orcid_id, directory: 'http://orcid.org'
-      end
+    # directory=  id=
+    return unless orcid_id
+    if orcid_id =~ /http/
+      eml.userId orcid_id, directory: 'http://orcid.org'
+    else
+      eml.userId 'http://' + orcid_id, directory: 'http://orcid.org'
     end
   end
 
@@ -155,8 +154,8 @@ class Person < ActiveRecord::Base
 
   def eml_individual_name(eml)
     eml.individualName do
-      eml.givenName given_name unless given_name.blank?
-      eml.surName sur_name unless sur_name.blank?
+      eml.givenName given_name if given_name.present?
+      eml.surName sur_name if sur_name.present?
     end
     eml
   end
