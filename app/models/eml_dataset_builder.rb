@@ -169,7 +169,8 @@ class EmlDatasetBuilder
   def eml_creators
     dataset.creators.each do |person|
       @eml.creator do
-        person.eml_party(@eml)
+        builder = EmlPersonBuilder.new(person)
+        builder.eml_party(@eml)
       end
     end
   end
@@ -262,8 +263,6 @@ class EmlDatasetBuilder
     @eml.contact do
       @eml.organizationName 'Kellogg Biological Station'
       @eml.positionName 'Data Manager'
-      p = eml_kbs_address
-      p.eml_address(@eml)
       @eml.electronicMailAddress 'lter.data.manager@kbs.msu.edu'
       @eml.onlineUrl 'http://lter.kbs.msu.edu'
     end
