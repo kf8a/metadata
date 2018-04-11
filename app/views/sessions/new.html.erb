@@ -7,11 +7,6 @@
   For access to the publication, enter the username "lter@kbs" and the password "lter".
 </div>
 
-<div class='sign-up'>
-   <p>To create a new account:</p>
-   <%= link_to "Sign up", sign_up_path %>
-</div>
-
 <%= semantic_form_for :session, :url => session_path do |form| %>
   <%= form.inputs do %>
 
@@ -20,7 +15,6 @@
 
   <% end %>
   <%= form.button :submit, :label => "Sign in" %>
-
 
 <% end %>
 
