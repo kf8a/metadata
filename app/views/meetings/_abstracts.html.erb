@@ -1,15 +1,14 @@
 <li id="abstract_<%= abstract.id %>" class = 'citation'>
-<%= truncate(abstract.authors, length: 80) %>
-<%= abstract.title %>
-<%= link_to "abstract", abstract_path(abstract) %>
-<% if abstract.pdf.exists? %>
-  <%=link_to abstract.meeting_abstract_type.name.downcase , download_abstract_path(abstract) %>
-<% end %>
-
-<% if admin? %>
-  <%= link_to 'Edit', edit_abstract_path(abstract) %>
-  <%= link_to image_tag('trash.gif'), abstract_path(abstract),
-    :confirm => 'Are you sure?',
-    :class => 'deleter' %>
+  <%= truncate(abstract.authors, length: 80) %>
+  <%= abstract.title %>
+  <%= link_to "abstract", abstract_path(abstract) %>
+  <% if abstract.pdf.exists? %>
+    <%=link_to abstract.meeting_abstract_type.name.downcase , download_abstract_path(abstract) %>
   <% end %>
-  </li>
+
+  <% if admin? %>
+    <%= link_to 'Edit', edit_abstract_path(abstract) %>
+    <%= link_to image_tag('trash.gif'), abstract_path(abstract),
+      confirm: 'Are you sure?', class: 'deleter' %>
+  <% end %>
+</li>
