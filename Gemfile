@@ -7,6 +7,8 @@ gem 'rails', '~>5.2'
 gem 'activerecord-session_store'
 gem 'responders'
 
+gem 'bootsnap', '>= 1.1.0', require: false
+
 gem 'acts-as-taggable-on'
 gem 'capistrano', '~>2'
 gem 'clearance'
