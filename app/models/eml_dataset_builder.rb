@@ -114,19 +114,31 @@ class EmlDatasetBuilder
   end
 
   def eml_dataset
-    @eml.dataset('id': dataset_id) do
+    @eml.dataset('id' => dataset_id) do
       eml_resource_group
       contact_info
       @eml.publisher do
         @eml.organizationName 'KBS LTER'
       end
       eml_methods
+      # eml_project
       dataset.datatables.each do |table|
         table.to_eml(@eml) if table.on_web &&
                               table.valid_for_eml? &&
                               !table.is_restricted
       end
     end
+  end
+
+  def eml_project
+    @eml.project do
+      @eml.title 'KBS LTER project'
+      @eml.personnel
+      @eml.funding 'NSF DEB 1637653'
+    end
+  end
+
+  def project_party
   end
 
   def eml_resource_group

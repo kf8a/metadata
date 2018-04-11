@@ -1,5 +1,5 @@
 # Themes are used to organize datatables in the index page
-class Theme < ActiveRecord::Base
+class Theme < ApplicationRecord
   acts_as_nested_set
 
   has_and_belongs_to_many :datasets
@@ -59,15 +59,3 @@ class Theme < ActiveRecord::Base
     parent.try(:touch)
   end
 end
-
-# == Schema Information
-#
-# Table name: themes
-#
-#  id        :integer         not null, primary key
-#  name      :string(255)
-#  weight    :integer
-#  parent_id :integer
-#  lft       :integer
-#  rgt       :integer
-#

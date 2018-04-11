@@ -3,7 +3,7 @@
 require 'bibtex'
 
 # Reference for a publication of some sort
-class Citation < ActiveRecord::Base
+class Citation < ApplicationRecord
   include Workflow
 
   workflow_column :state

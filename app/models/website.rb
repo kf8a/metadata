@@ -1,5 +1,5 @@
 # GLBRC and LTER have different information; Website is used to separate it.
-class Website < ActiveRecord::Base
+class Website < ApplicationRecord
   has_many :datasets
   has_many :templates
   has_and_belongs_to_many :protocols

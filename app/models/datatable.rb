@@ -7,7 +7,7 @@ include REXML
 
 # A datatable is one of the main objects in the system
 # it represents a table of data generally a view in the database
-class Datatable < ActiveRecord::Base
+class Datatable < ApplicationRecord
   attr_accessor :materialized_datatable_id
 
   acts_as_taggable_on :keywords

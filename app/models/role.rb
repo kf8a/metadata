@@ -1,5 +1,5 @@
 # Roles link people and and affiliations
-class Role < ActiveRecord::Base
+class Role < ApplicationRecord
   has_many :affiliations, dependent: :destroy
   has_many :people, through: :affiliations
   belongs_to :role_type

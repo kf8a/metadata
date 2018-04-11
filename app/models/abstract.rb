@@ -1,5 +1,5 @@
 # A meeting abstract
-class Abstract < ActiveRecord::Base
+class Abstract < ApplicationRecord
   belongs_to :meeting_abstract_type
   belongs_to :meeting
 

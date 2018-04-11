@@ -1,5 +1,5 @@
 # The LTER core areas are managed by this class
-class CoreArea < ActiveRecord::Base
+class CoreArea < ApplicationRecord
   has_and_belongs_to_many :datatables
   # has_many :datatables, through: :core_areas_datatables
 

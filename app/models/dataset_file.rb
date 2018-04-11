@@ -1,5 +1,5 @@
 # A file associated with a dataset
-class DatasetFile < ActiveRecord::Base
+class DatasetFile < ApplicationRecord
   belongs_to :dataset
 
   has_attached_file :data,

@@ -1,6 +1,6 @@
 # A collection as opposed to a datatable
 # a collection is supposed to be browsable
-class Collection < ActiveRecord::Base
+class Collection < ApplicationRecord
   belongs_to :datatable
 
   validates :datatable, presence: true

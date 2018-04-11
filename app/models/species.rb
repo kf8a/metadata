@@ -1,18 +1,3 @@
 # Placeholder for taxonomic extents
-class Species < ActiveRecord::Base
+class Species < ApplicationRecord
 end
-
-# == Schema Information
-#
-# Table name: species
-#
-#  id                    :integer         not null, primary key
-#  species               :string(255)
-#  genus                 :string(255)
-#  family                :string(255)
-#  code                  :string(255)
-#  common_name           :string(255)
-#  alternate_common_name :string(255)
-#  attribution           :string(255)
-#  woody                 :boolean
-#

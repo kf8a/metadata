@@ -1,5 +1,5 @@
 # A unit in the EML sense. Connects to variates
-class Unit < ActiveRecord::Base
+class Unit < ApplicationRecord
   has_many :variates
 
   after_find :update_job
@@ -31,20 +31,4 @@ end
 
 # 2) we need to retrieve a particular unit
 #   Unit.find
-#
-
-# == Schema Information
-#
-# Table name: units
-#
-#  id                     :integer         not null, primary key
-#  name                   :string(255)
-#  description            :text
-#  in_eml                 :boolean         default(FALSE)
-#  definition             :text
-#  deprecated_in_favor_of :integer
-#  unit_type              :string(255)
-#  parent_si              :string(255)
-#  multiplier_to_si       :float
-#  abbreviation           :string(255)
 #

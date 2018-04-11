@@ -2,6 +2,6 @@
 
 # A class to hold the citation type
 # so that citations can be polymorphic
-class CitationType < ActiveRecord::Base
+class CitationType < ApplicationRecord
   has_many :citations
 end

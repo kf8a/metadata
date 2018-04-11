@@ -1,5 +1,5 @@
 # A Meeting that was held locally or nationally
-class Meeting < ActiveRecord::Base
+class Meeting < ApplicationRecord
   has_many :abstracts, -> { order :authors }
   belongs_to :venue_type
 

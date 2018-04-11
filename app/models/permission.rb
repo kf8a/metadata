@@ -1,5 +1,5 @@
 # Permissions to download data
-class Permission < ActiveRecord::Base
+class Permission < ApplicationRecord
   belongs_to :user
   belongs_to :datatable
   belongs_to :owner, class_name: 'User'
@@ -39,16 +39,3 @@ class Permission < ActiveRecord::Base
     errors[:base] << 'datatable must exist'
   end
 end
-
-# == Schema Information
-#
-# Table name: permissions
-#
-#  id           :integer         not null, primary key
-#  user_id      :integer
-#  datatable_id :integer
-#  created_at   :datetime
-#  updated_at   :datetime
-#  owner_id     :integer
-#  decision     :string(255)
-#

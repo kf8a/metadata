@@ -1,2 +1,2 @@
-class DatatablesVariates < ActiveRecord::Base
+class DatatablesVariates < ApplicationRecord
 end

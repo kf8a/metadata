@@ -4,7 +4,6 @@ require 'citation_format'
 
 # Represents an author. This should be linked people in a better world
 class Author < ApplicationRecord
-  # ActiveRecord::Base
   include CitationFormat
 
   belongs_to :citation

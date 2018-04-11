@@ -1,5 +1,5 @@
 # an affiliation links a person with a role and a dataset
-class Affiliation < ActiveRecord::Base
+class Affiliation < ApplicationRecord
   belongs_to :role
   belongs_to :person
   belongs_to :dataset
@@ -14,15 +14,3 @@ class Affiliation < ActiveRecord::Base
       .order('seniority')
   end
 end
-
-# == Schema Information
-#
-# Table name: affiliations
-#
-#  id         :integer         not null, primary key
-#  person_id  :integer
-#  role_id    :integer
-#  dataset_id :integer
-#  seniority  :integer
-#  title      :string(255)
-#

@@ -1,5 +1,5 @@
 # Study is a group of experiments or an experimental location
-class Study < ActiveRecord::Base
+class Study < ApplicationRecord
   has_and_belongs_to_many :datasets
   has_many :datatables
   has_many :treatments
@@ -57,19 +57,3 @@ class Study < ActiveRecord::Base
     parent.try(:touch)
   end
 end
-
-# == Schema Information
-#
-# Table name: studies
-#
-#  id          :integer         not null, primary key
-#  name        :string(255)
-#  description :text
-#  weight      :integer
-#  parent_id   :integer
-#  lft         :integer
-#  rgt         :integer
-#  synopsis    :text
-#  url         :string(255)
-#  code        :string(255)
-#

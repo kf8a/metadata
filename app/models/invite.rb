@@ -2,7 +2,7 @@ require 'digest/sha1'
 
 # Keeps track of invites sent out to allow people to register to become members of a group
 # or by allowed to download a dataset
-class Invite < ActiveRecord::Base
+class Invite < ApplicationRecord
   validates :email, presence: { message: "can't be blank" }
   validates :email, uniqueness: { message: 'is already registered' }
 

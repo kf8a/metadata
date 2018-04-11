@@ -1,7 +1,7 @@
 require 'citation_format'
 
 # a person that has edited a book or article
-class Editor < ActiveRecord::Base
+class Editor < ApplicationRecord
   include CitationFormat
 
   belongs_to :citation
