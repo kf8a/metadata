@@ -27,14 +27,14 @@ class ChapterCitation < Citation
 
   def eds
     ed = editors.collect { |e| e.formatted(:natural) }.to_sentence
-    if editors.size == 0
-      ''
-    elsif editors.size > 1
-      ed << ', eds. '
-    else
-      ed << ', ed. '
-    end
-    ed
+    postfix = if editors.empty?
+                ''
+              elsif editors.size > 1
+                ', eds. '
+              else
+                ', ed. '
+              end
+    ed + postfix
   end
 
   def book

@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~>4.2'
+gem 'rails', '~>5.2'
 
 gem 'activerecord-session_store'
 gem 'responders'
@@ -34,7 +34,7 @@ gem 'parslet'
 gem 'bibtex-ruby'
 
 # versioning support for protocols
-gem 'vestal_versions', git: 'https://github.com/R1V3R5/vestal_versions'
+gem 'vestal_versions', git: 'https://github.com/RoleModel/vestal_versions.git' # 'https://github.com/R1V3R5/vestal_versions'
 
 gem 'dalli'
 
