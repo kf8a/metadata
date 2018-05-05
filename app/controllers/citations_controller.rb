@@ -7,7 +7,7 @@ class CitationsController < ApplicationController
   respond_to :html, :json
   layout :site_layout
   before_action :require_login, except: \
-    %i[index show suggest search index_by_doi index_by_treatment download]
+    %i[index show search index_by_doi index_by_treatment download]
   before_action :admin?, only: %i[new create edit update destroy]
 
   has_scope :by_type,   as: :type
@@ -16,7 +16,8 @@ class CitationsController < ApplicationController
 
   def index
     store_location
-    citations = citations_by_type(params[:type])
+    # Try to remove extra null bytes from user submitted strings
+    citations = citations_by_type(params[:type].delete("\u0000"))
 
     if params[:treatment]
       @treatment = Treatment.find(params[:treatment].to_i)
@@ -50,8 +51,8 @@ class CitationsController < ApplicationController
     end
   end
 
-  def _author_sorter(a, b)
-    a.authors.first.try(:sur_name) <=> b.authors.first.try(:sur_name)
+  def _author_sorter(first, second)
+    first.authors.first.try(:sur_name) <=> second.authors.first.try(:sur_name)
   end
 
   def index_by_author
