@@ -17,7 +17,7 @@ class CitationsController < ApplicationController
   def index
     store_location
     # Try to remove extra null bytes from user submitted strings
-    citations = citations_by_type(params[:type].delete("\u0000"))
+    citations = citations_by_type(params[:type])
 
     if params[:treatment]
       @treatment = Treatment.find(params[:treatment].to_i)
