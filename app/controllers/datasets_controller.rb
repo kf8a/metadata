@@ -4,9 +4,9 @@
 class DatasetsController < ApplicationController
   helper_method :dataset
 
-  before_action :require_login, except: [:index, :show]
-  before_action :allow_on_web, except: [:knb]
-  before_action :admin?, except: [:index, :show]
+  before_action :require_login, except: %i[index show]
+  before_action :allow_on_web, except: %i[knb]
+  before_action :admin?, except: %i[index show]
 
   # layout proc { |controller| controller.request.format == :eml ? false : 'application' }
 
