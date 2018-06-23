@@ -16,7 +16,7 @@ class DatatablesController < ApplicationController
     @website = website
     @area = params[:area]
     store_location
-    retrieve_datatables('keyword_list' => '')
+    retrieve_datatables('')
 
     respond_with @datatables do |format|
       format.rss { render rss: @datatables }
@@ -25,10 +25,11 @@ class DatatablesController < ApplicationController
 
   def search
     @website = website
-    if params['keyword_list'].nil?
+    query = params['keyword_list']
+    if query.blank?
       redirect_to datatables_url
     else
-      retrieve_datatables(params['keyword_list'])
+      retrieve_datatables(query)
     end
   end
 
