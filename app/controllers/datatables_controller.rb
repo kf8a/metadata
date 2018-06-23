@@ -67,8 +67,7 @@ class DatatablesController < ApplicationController
     end
   end
 
-  def qc
-  end
+  def qc; end
 
   # PUT publish
   def publish
