@@ -1,7 +1,9 @@
 # handler interaction with the user class
 class UsersController < Clearance::UsersController
-  before_action :require_login, except: [:index, :show]
+  before_action :require_login, except: %i[index show]
   protect_from_forgery except: :show
+
+  def index; end
 
   def create
     @user = User.new user_params
@@ -23,9 +25,7 @@ class UsersController < Clearance::UsersController
 
   def show
     logger.info "Current user (usercontroller) #{current_user}"
-    if request.format == :html
-      render nothing: true, status: 406
-    end
+    render head: :not_acceptable if request.format == :html
   end
 
   private
