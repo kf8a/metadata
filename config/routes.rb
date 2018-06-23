@@ -4,8 +4,7 @@ Metadata::Application.routes.draw do
   match '/signup/:invite_code' => 'users#new', :as => :redeem_invitation, via: [:get]
   get '/pub/:id', to: 'citations#download'
 
-
-  resource :session, :controller => 'sessions'
+  resource :session, controller: 'sessions'
   resource :users
 
   resources :abstracts do
@@ -27,18 +26,18 @@ Metadata::Application.routes.draw do
       get :filtered
       get :submitted
       get :index_by_treatment
-      get 'index_by_treatment/:treatment', :action => :index
+      get 'index_by_treatment/:treatment', action: :index
       get :index_by_author
       get :index_by_type
-      get 'index_by_type/:type', :action => :index
+      get 'index_by_type/:type', action: :index
     end
   end
 
-  resources :climdb, :only=> :index  # since climdb can only handle one url per site
+  resources :climdb, only: :index # since climdb can only handle one url per site
   resources :authors
   resources :collections
   resources :data_contributions
-  resources :dataset_files, :only => :show
+  resources :dataset_files, only: :show
   resources :datasets do
     collection do
       post :set_affiliation_for
@@ -72,6 +71,7 @@ Metadata::Application.routes.draw do
       get :alphabetical
       get :emeritus
       get :show_all
+      get :lno
     end
   end
   resources :permissions do
@@ -79,7 +79,7 @@ Metadata::Application.routes.draw do
       put :deny
     end
   end
-  resources :permission_requests, :only => :create
+  resources :permission_requests, only: :create
   resources :projects
   resources :protocols do
     member do
@@ -87,8 +87,8 @@ Metadata::Application.routes.draw do
     end
   end
 
-  resources :sponsors, :as => 'termsofuse'
-  match '/termsofuse/:id' => "sponsors#show", via: [:get]
+  resources :sponsors, as: 'termsofuse'
+  match '/termsofuse/:id' => 'sponsors#show', via: [:get]
   match '/termsofuse' => 'sponsors#index', via: [:get]
 
   post '/studies/:id/move_to/:parent_id' => 'studies#move_to'
@@ -103,12 +103,12 @@ Metadata::Application.routes.draw do
   resources :uploads
   resources :variates
 
-  resources :visualizations, :only => 'show'
-  resources :score_cards, :only => ['index', 'show']
+  resources :visualizations, only: 'show'
+  resources :score_cards, only: %w[index show]
 
-  root :to => 'datatables#index'
+  root to: 'datatables#index'
 
-  if Rails.env == 'test'
+  if Rails.env.test?
     match 'application_controller_test/foo/testadmin' => 'application_controller_test/foo#testadmin', via: [:get]
     match 'application_controller_test/foo/testpagechoose' => 'application_controller_test/foo#testpagechoose', via: [:get]
     match 'application_controller_test/foo/alphabetical' => 'application_controller_test/foo#alphabetical', via: [:get]

@@ -1,8 +1,12 @@
+require 'csv'
+
 # Manage People records
 class PeopleController < ApplicationController
+  open_actions = %i[index show alphabetical emeritus lno]
+
   helper_method :people, :person
-  before_action :require_login, except: [:index, :show, :alphabetical, :emeritus]
-  before_action :admin?, except: [:index, :show, :alphabetical, :emeritus]
+  before_action :require_login, except: open_actions
+  before_action :admin?, except: open_actions
 
   # GET /people
   # GET /people.xml
@@ -15,6 +19,7 @@ class PeopleController < ApplicationController
     end
     respond_to do |format|
       format.html # index.rhtml
+      format.csv { send_data csv(@roles), filename: "users-#{Time.zone.today}.csv" }
     end
   end
 
@@ -34,8 +39,20 @@ class PeopleController < ApplicationController
     end
   end
 
-  def show_all
+  def lno
+    role_type = RoleType.find_by(name: 'lno')
+    roles = role_type.roles
+
+    @active = roles.flat_map(&:people).uniq
+    all_lter = Person.where('lno_name is not null').all
+    @inactive = all_lter - @active
+    respond_to do |format|
+      format.html
+      format.csv { send_data lno_csv(@active, @inactive), filename: "users-#{Time.zone.now}.csv" }
+    end
   end
+
+  def show_all; end
 
   # GET /people/1
   # GET /people/1.xml
@@ -66,9 +83,7 @@ class PeopleController < ApplicationController
   # PUT /people/1
   # PUT /people/1.xml
   def update
-    if person.update_attributes(person_params)
-      flash[:notice] = 'Person was successfully updated.'
-    end
+    flash[:notice] = 'Person was successfully updated.' if person.update(person_params)
     respond_with person
   end
 
@@ -107,11 +122,28 @@ class PeopleController < ApplicationController
                                    :country, :postal_code, :phone, :fax, :email,
                                    :url, :deceased, :friendly_name, :orcid_id,
                                    affiliations_attributes:
-                                   [:role_id, :title, :seniority, :research_interest,
-                                    :supervisor, :started_on, :left_on, :_destroy, :id])
+                                   %i[role_id title seniority research_interest
+                                      supervisor started_on left_on _destroy id])
   end
 
   def lter_roles
     Role.where(role_type_id: RoleType.where(name: 'lter').first)
+  end
+
+  def csv(roles)
+    roles.flat_map do |r|
+      r.people.collect { |p| p.to_csv << r.name }
+    end
+  end
+
+  def lno_csv(active, inactive)
+    CSV.generate do |csv|
+      active.each do |person|
+        csv << person.to_lno_active
+      end
+      inactive.each do |person|
+        csv << person.to_lno_inactive
+      end
+    end
   end
 end

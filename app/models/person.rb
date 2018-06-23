@@ -5,6 +5,8 @@ class Person < ApplicationRecord
   has_many :affiliations, dependent: :destroy
   has_many :lter_roles, -> { where(['role_type_id = ?', RoleType.find_by(name: 'lter')]) },
            source: :role, through: :affiliations
+  has_many :lno_roles, -> { where(['role_type_id = ?', RoleType.find_by(name: 'lno')]) },
+           source: :role, through: :affiliations
   has_many :dataset_roles, -> { where ['role_type_id = ?', RoleType.find_by(name: 'lter_dataset')] },
            through: :affiliations, source: :role
   has_many :roles, through: :affiliations
@@ -98,8 +100,18 @@ class Person < ApplicationRecord
     role_from_name(person_eml.css('role').text)
   end
 
-  def to_csv
-    [full_name, email]
+  def to_lno_active
+    ['LTER', 'KBS', lno_name,
+     given_name, sur_name,
+     full_name, email, lno_roles.map(&:name).flatten.join('|'),
+     orcid_id, 'urn:lter:lterCurrentMember', '']
+  end
+
+  def to_lno_inactive
+    ['LTER', 'KBS', lno_name,
+     given_name, sur_name,
+     full_name, email, lno_roles.map(&:name).flatten.join('|'),
+     orcid_id, '', '']
   end
 
   private
