@@ -164,7 +164,7 @@ class DatasetsController < ApplicationController
   def collect_and_normalize_studies(datasets)
     @studies = datasets.collect do |dataset|
       next unless dataset.on_web
-      dataset.studies.flatten
+      dataset.studies
     end
     @studies.flatten!
     @studies.compact!
