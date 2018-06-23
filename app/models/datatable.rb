@@ -17,8 +17,8 @@ class Datatable < ApplicationRecord
   has_and_belongs_to_many :core_areas
   belongs_to              :dataset, touch: true
   has_many                :data_contributions
-  has_many                :owners, through: :ownerships, source: :user
   has_many                :ownerships
+  has_many                :owners, through: :ownerships, source: :user
   has_many                :people, through: :data_contributions
   has_many                :permission_requests
   has_many                :permissions
