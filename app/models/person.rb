@@ -71,7 +71,7 @@ class Person < ApplicationRecord
   end
 
   def dataset?
-    dataset_roles.!empty?
+    !dataset_roles.empty?
   end
 
   def to_lter_personneldb
