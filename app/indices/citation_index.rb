@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-ThinkingSphinx::Index.define :citation, with: :active_record do
+ThinkingSphinx::Index.define :citation, with: :real_time do
   indexes title
-  indexes authors.sur_name, as: :authors, sortable: true
+  # indexes authors.sur_name, as: :authors, sortable: true, tye: :string
   indexes publication
   indexes pub_year, sortable: true
   has website_id
-  set_property min_infix_len: 3
 end
