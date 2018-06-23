@@ -26,11 +26,9 @@ class DatatablesController < ApplicationController
   def search
     @website = website
     query = params['keyword_list']
-    if query.blank?
-      redirect_to datatables_url
-    else
-      retrieve_datatables(query)
-    end
+    redirect_to datatables_url if query.blank?
+
+    retrieve_datatables(query)
   end
 
   # GET /datatables/1
