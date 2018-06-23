@@ -2,13 +2,13 @@
 class DatatablesController < ApplicationController
   helper_method :datatable
 
-  before_action :require_login, except: [:index, :show, :suggest, :search, :qc]
-  before_action :admin?, except: [:index, :show, :suggest, :search, :qc]
+  before_action :require_login, except: %i[index show suggest search qc]
+  before_action :admin?, except: %i[index show suggest search qc]
   before_action :can_download?, only: :show, if: proc { |controller| controller.request.format.csv? || controller.request.format.fasta? } # run before filter to prevent non-members from downloading
   # before_filter :reject_robots
 
   helper_method :datatable
-  protect_from_forgery except: [:index, :show, :search]
+  protect_from_forgery except: %i[index show search]
 
   # GET /datatables
   # GET /datatables.xml
@@ -25,12 +25,10 @@ class DatatablesController < ApplicationController
 
   def search
     @website = website
-    query =  { 'keyword_list' => '' }
-    query.merge!(params)
-    if query['keyword_list'].empty?
+    if params['keyword_list'].nil?
       redirect_to datatables_url
     else
-      retrieve_datatables(query)
+      retrieve_datatables(params['keyword_list'])
     end
   end
 
@@ -185,7 +183,8 @@ class DatatablesController < ApplicationController
     @default_value = 'Search for... '
     @themes = Theme.roots
 
-    @keyword_list = SearchInputSanitizer.sanitize(query['keyword_list'])
+    logger.info "query: #{query}"
+    @keyword_list = SearchInputSanitizer.sanitize(query)
     @keyword_list = nil if @keyword_list.empty? || @keyword_list == @default_value
 
     @datatables =
