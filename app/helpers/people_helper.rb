@@ -11,7 +11,12 @@ module PeopleHelper
   end
 
   def committee_affiliations(committee, role)
-    affiliations = role.people.collect { |x| x.affiliations.where(role_id: role).where(title: committee) }
+    affiliations = role.people.collect do |x|
+      x.affiliations
+       .where(role_id: role)
+       .where(title: committee)
+       .where('left_on is null')
+    end
     affiliations.flatten.uniq # .sort {|a,b| a.seniority <=> b.seniority }
   end
 
