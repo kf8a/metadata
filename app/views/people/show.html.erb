@@ -22,7 +22,7 @@
     <% if person.complete_address? %>
       <li class='address'><%= person.address %></li>
     <% end -%>
-	
+
     <% if person.email? -%>
       <li class='person-email'><%=contact_link(person.email) %></li>
     <% end -%>
@@ -46,7 +46,7 @@
   </ul>
 
   <div class='committee'>
-    <% committees = person.affiliations.lter.committees -%>
+    <% committees = person.affiliations.lter.committees.where('left_on is null') -%>
     <% if committees.present? %>
       <ul class='person-card'>
         Committees:
@@ -57,7 +57,7 @@
     <% end %>
   </div>
 <% end %>
-	
+
 <%= link_to 'Edit', edit_person_path(person) if signed_in? %>
 <%= link_to 'Delete', person_path(person), :method => 'delete', :confirm => 'Are you sure?' if signed_in? %>
 <%= link_to 'Back', people_path %>
