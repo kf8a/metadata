@@ -10,8 +10,8 @@ class Citation < ApplicationRecord
 
   versioned dependent: :tracking
 
-  has_many :authors, -> { order(:seniority) }, dependent: :destroy
-  has_many :editors, -> { order(:seniority) }, dependent: :destroy
+  has_many :authors, -> { order(:seniority) }, dependent: :destroy, inverse_of: :citation
+  has_many :editors, -> { order(:seniority) }, dependent: :destroy, inverse_of: :citation
 
   belongs_to :citation_type
   belongs_to :website

@@ -3,9 +3,8 @@ require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 describe Variate do
   describe 'eml importation' do
     before(:each) do
-      @variate = FactoryGirl.create(:variate,
-                                    name: 'EMLVariate',
-                                    description: 'A variate test of eml')
+      @variate = FactoryBot.create(:variate, name: 'EMLVariate',
+                                             description: 'A variate test of eml')
     end
 
     it 'should import variates' do

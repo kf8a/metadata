@@ -34,7 +34,7 @@ class User < ApplicationRecord
   end
 
   def admin?
-    'admin' == role
+    role == 'admin'
   end
 
   def permission_from?(owner, datatable)

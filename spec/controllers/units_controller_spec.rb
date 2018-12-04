@@ -4,7 +4,7 @@ describe UnitsController, type: :controller  do
 
   before do
     user = User.new
-    allow(user).to receive(:admin?).and_return(:true)
+    allow(user).to receive(:admin?).and_return(true)
     sign_in_as(user)
 
     @unit = Unit.new
@@ -17,32 +17,32 @@ describe UnitsController, type: :controller  do
     before do
       get :index
     end
-    it {should respond_with :success }
-    it {assigns(:units) }
+    it { should respond_with :success }
+    it { assigns(:units) }
   end
 
   context 'GET :edit' do
     before do
-      get :edit, :id => @unit
+      get :edit, params: { id: @unit }
     end
-    it {should respond_with :success }
-    it {assigns(:unit) }
+    it { should respond_with :success }
+    it { assigns(:unit) }
   end
 
   context 'PUT :update' do
     before do
       allow(@unit).to receive(:update_attributes).and_return(true)
-      put :update, :id=>1
+      put :update, params: { id: 1 }
     end
-    it {should redirect_to units_url }
-    it {assigns(:unit) }
+    it { should redirect_to units_url }
+    it { assigns(:unit) }
   end
 
   context 'GET :show' do
     before do
-      get :show, :id=>@unit
+      get :show, params: { id: @unit }
     end
-    it {should respond_with :success }
-    it {assigns(:unit) }
+    it { should respond_with :success }
+    it { assigns(:unit) }
   end
 end

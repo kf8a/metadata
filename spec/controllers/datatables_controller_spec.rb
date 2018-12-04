@@ -2,31 +2,30 @@ require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 
 describe DatatablesController, type: :controller  do
 
-  def mock_datatable(stubs={})
+  def mock_datatable(_stubs={})
     @mock_datatable ||= double(Datatable).as_null_object
     allow(@mock_datatable).to receive(:dataset).at_least(1).and_return(mock_dataset)
-    allow(@mock_datatable).to receive(:is_sql).and_return(:true)
-    allow(@mock_datatable).to receive(:is_restricted).and_return(:false)
-    allow(@mock_datatable).to receive(:object).and_return("select * from datatables")
+    allow(@mock_datatable).to receive(:is_sql).and_return(true)
+    allow(@mock_datatable).to receive(:is_restricted).and_return(false)
+    allow(@mock_datatable).to receive(:object).and_return('select * from datatables')
     allow(@mock_datatable).to receive(:study)
     allow(@mock_dataset).to receive(:title).and_return('title')
     @mock_datatable
   end
 
-  def mock_dataset(stubs={})
+  def mock_dataset(_stubs = {})
     @mock_dataset ||= double(Dataset).as_null_object
   end
 
   before do
-    @user = FactoryGirl.build(:admin_user)
+    @user = FactoryBot.build(:admin_user)
     sign_in_as @user
   end
 
-  describe "responding to GET index" do
-
-    it "should return an empty array" do
+  describe 'responding to GET index' do
+    it 'should return an empty array' do
       get :index
-      expect(assigns[:datatables]).to  eq []
+      expect(assigns[:datatables]).to eq []
     end
   end
 
@@ -36,16 +35,15 @@ describe DatatablesController, type: :controller  do
       allow(datatable).to receive(:object).and_return('select now() as sample_date')
       allow(datatable).to receive(:save!).and_return(true)
       expect(Datatable).to receive(:find).with('1').at_least(1).and_return(datatable)
-      put :publish, :id => "1"
-      expect(response.code).to eq "200"
+      put :publish, params: { id: '1' }
+      expect(response.code).to eq '200'
     end
   end
 
-  describe "responding to GET show" do
-
-    it "should expose the requested datatable as @datatable" do
-      allow(Datatable).to receive(:find).with("37").at_least(1).and_return(mock_datatable)
-      get :show, :id => "37"
+  describe 'responding to GET show' do
+    it 'should expose the requested datatable as @datatable' do
+      allow(Datatable).to receive(:find).with('37').at_least(1).and_return(mock_datatable)
+      get :show, params: { id: '37' }
       expect(assigns[:datatable]).to eq(mock_datatable)
     end
 
@@ -73,14 +71,12 @@ describe DatatablesController, type: :controller  do
 
   # end
 
-  describe "responding to GET new" do
-
-    it "should expose a new datatable as @datatable" do
+  describe 'responding to GET new' do
+    it 'should expose a new datatable as @datatable' do
       allow(Datatable).to receive(:new).and_return(mock_datatable)
       get :new
       expect(assigns[:datatable]).to eq(mock_datatable)
     end
-
   end
 
   # describe "responding to GET edit" do

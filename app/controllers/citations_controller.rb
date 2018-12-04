@@ -76,8 +76,9 @@ class CitationsController < ApplicationController
     search_terms = assemble_search_terms(@word)
 
     @citations = Citation.search(search_terms, with: { website_id: website.id },
-                                               order: 'pub_year',
-                                               per_page: 500)
+                                 order: 'pub_year ASC',
+                                 per_page: 500)
+    logger.info Citation.search(search_terms)
     index_responder
   end
 

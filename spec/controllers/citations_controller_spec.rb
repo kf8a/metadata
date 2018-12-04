@@ -6,31 +6,31 @@ describe CitationsController, type: :controller do
   describe 'anonymous access' do
     before(:each) do
       Citation.delete_all # clear out other citations
-      author1 = FactoryGirl.create(:author, sur_name: 'Zebedee', seniority: 1)
-      author2 = FactoryGirl.create(:author, sur_name: 'Alfred',  seniority: 1)
-      author3 = FactoryGirl.create(:author, sur_name: 'Babbit',  seniority: 1)
-      author4 = FactoryGirl.create(:author, sur_name: 'Bob',     seniority: 1)
-      website = Website.find_by_name('lter') || FactoryGirl.create(:website, name: 'lter')
-      @citation1 = FactoryGirl.create(:article_citation, website: website,
-                                                         authors: [author1],
-                                                         title: 'citation1',
-                                                         pub_year: 2010,
-                                                         state: 'published')
-      @citation2 = FactoryGirl.create(:book_citation, website: website,
-                                                      authors: [author2],
-                                                      title: 'citation2',
-                                                      pub_year: 2010,
-                                                      state: 'published')
-      @citation3 = FactoryGirl.create(:chapter_citation, website: website,
-                                                         authors: [author3],
-                                                         title: 'citation3',
-                                                         pub_year: 2010,
-                                                         state: 'published')
-      @citation4 = FactoryGirl.create(:thesis_citation, website: website,
-                                                        authors: [author4],
-                                                        title: 'citation4',
+      author1 = FactoryBot.create(:author, sur_name: 'Zebedee', seniority: 1)
+      author2 = FactoryBot.create(:author, sur_name: 'Alfred',  seniority: 1)
+      author3 = FactoryBot.create(:author, sur_name: 'Babbit',  seniority: 1)
+      author4 = FactoryBot.create(:author, sur_name: 'Bob',     seniority: 1)
+      website = Website.find_by(name: 'lter') || FactoryBot.create(:website, name: 'lter')
+      @citation1 = FactoryBot.create(:article_citation, website: website,
+                                                        authors: [author1],
+                                                        title: 'citation1',
                                                         pub_year: 2010,
                                                         state: 'published')
+      @citation2 = FactoryBot.create(:book_citation, website: website,
+                                                     authors: [author2],
+                                                     title: 'citation2',
+                                                     pub_year: 2010,
+                                                     state: 'published')
+      @citation3 = FactoryBot.create(:chapter_citation, website: website,
+                                                        authors: [author3],
+                                                        title: 'citation3',
+                                                        pub_year: 2010,
+                                                        state: 'published')
+      @citation4 = FactoryBot.create(:thesis_citation, website: website,
+                                                       authors: [author4],
+                                                       title: 'citation4',
+                                                       pub_year: 2010,
+                                                       state: 'published')
 
       @test = website
     end
@@ -52,37 +52,37 @@ describe CitationsController, type: :controller do
     end
 
     it 'returns citations in endnote format' do
-      get :index, format: :enw
+      get :index, params: { format: :enw }
 
       expect(response).to have_http_status(:success)
     end
 
     it 'returns citations in bibtext format' do
-      get :index, format: :bib
+      get :index, params: { format: :bib }
 
       expect(response).to have_http_status(:success)
     end
 
     it 'returns citations as rss feed' do
-      get :index, format: :rss
+      get :index, params: { format: :rss }
 
       expect(response).to have_http_status(:success)
     end
 
     it 'returns citations based on the past dates' do
-      get :index, date: { year: (Time.zone.today.year - 1).to_s, month: '4', day: '16' }
+      get :index, params: { date: { year: (Time.zone.today.year - 1).to_s, month: '4', day: '16' } }
       expect(response).to have_http_status(:success)
       expect(assigns(:citations).size).to eq 4
     end
 
     it 'does not return citations before the date supplied' do
-      get :index, date: { year: (Time.zone.today.year + 1).to_s, month: '4', day: '16' }
+      get :index, params: { date: { year: (Time.zone.today.year + 1).to_s, month: '4', day: '16' } }
       expect(response).to have_http_status(:success)
       expect(assigns(:citations).size).to eq 0
     end
 
     it 'returns articles' do
-      get :index, type: 'article'
+      get :index, params: { type: 'article' }
 
       expect(response).to have_http_status(:success)
       citations = assigns(:citations)
@@ -91,7 +91,7 @@ describe CitationsController, type: :controller do
     end
 
     it 'returns books' do
-      get :index, type: 'book'
+      get :index, params: { type: 'book' }
 
       expect(response).to have_http_status(:success)
       citations = assigns(:citations)
@@ -102,7 +102,7 @@ describe CitationsController, type: :controller do
     end
 
     it 'returns theses' do
-      get :index, type: 'thesis'
+      get :index, params: { type: 'thesis' }
 
       expect(response).to have_http_status(:success)
       citations = assigns(:citations)
@@ -114,24 +114,24 @@ describe CitationsController, type: :controller do
   end
 
   it 'is uses the GLBRC layout if requested ' do
-    get :index, requested_subdomain: 'glbrc'
+    get :index, params: { requested_subdomain: 'glbrc' }
 
     expect(response).to have_http_status(:success)
     expect(response).to render_with_layout('glbrc')
   end
 
   it 'redirects to sign in when downloading' do
-    @citation = FactoryGirl.create :citation
-    get :download, id: @citation
+    @citation = FactoryBot.create :citation
+    get :download, params: { id: @citation }
 
     expect(response).to redirect_to '/sign_in'
   end
 
   it 'allows access to an open access publication' do
-    @citation = FactoryGirl.create :citation
+    @citation = FactoryBot.create :citation
     @citation.open_access = true
 
-    get :download, id: @citation
+    get :download, params: { id: @citation }
 
     expect(response).to have_http_status(:redirect)
   end
@@ -147,20 +147,20 @@ describe CitationsController, type: :controller do
   end
 
   it 'redirects to sign in on GET :edit' do
-    citation = FactoryGirl.create :citation
-    get :edit, id: citation
+    citation = FactoryBot.create :citation
+    get :edit, params: { id: citation }
     expect(response).to redirect_to '/sign_in'
   end
 
   it 'redirects to sign in on PUT :update' do
-    citation = FactoryGirl.create :citation
-    put :update, id: citation, citation: { title: 'New title' }
+    citation = FactoryBot.create :citation
+    put :update, params: { id: citation, citation: { title: 'New title' } }
     expect(response).to redirect_to '/sign_in'
   end
 
   it 'redirects to sign in on DELETE' do
-    citation = FactoryGirl.create :citation
-    delete :destroy, id: citation
+    citation = FactoryBot.create :citation
+    delete :destroy, params: { id: citation }
     expect(response).to redirect_to '/sign_in'
   end
 
@@ -169,7 +169,7 @@ describe CitationsController, type: :controller do
       @website = Website.find_or_create_by(name: 'lter')
       sign_out
 
-      author1 = FactoryGirl.create(:author, sur_name: 'Zebedee', seniority: 1)
+      author1 = FactoryBot.create(:author, sur_name: 'Zebedee', seniority: 1)
       @citation1 = ArticleCitation.new
       @citation1.authors << Author.new(sur_name: 'Loecke',
                                        given_name: 'T', middle_name: 'D',
@@ -198,9 +198,9 @@ describe CitationsController, type: :controller do
       @another_citation.publish!
     end
 
-    describe 'GET :filtered, sort_by => id' do
+    describe 'GET :filtered, sort_by: id' do
       before(:each) do
-        get :filtered, requested_subdomain: 'lter', sort_by: 'id'
+        get :filtered, params: { requested_subdomain: 'lter', sort_by: 'id' }
       end
 
       it { should render_template('filtered') }
@@ -212,9 +212,9 @@ describe CitationsController, type: :controller do
       end
     end
 
-    describe 'GET :filtered, sort_by => pub_year' do
+    describe 'GET :filtered, sort_by: pub_year' do
       before(:each) do
-        get :filtered, requested_subdomain: 'lter', sort_by: 'pub_year'
+        get :filtered, params: { requested_subdomain: 'lter', sort_by: 'pub_year' }
       end
 
       it 'should order the citations by pub_year' do
@@ -226,7 +226,7 @@ describe CitationsController, type: :controller do
 
     describe 'GET :filtered, type => ArticleCitation' do
       before(:each) do
-        get :filtered, requested_subdomain: 'lter', type: 'ArticleCitation'
+        get :filtered, params: { requested_subdomain: 'lter', type: 'ArticleCitation' }
       end
 
       it 'should only include article citations' do
@@ -267,13 +267,13 @@ describe CitationsController, type: :controller do
 
   describe 'authenticated ' do
     before(:each) do
-      sign_in_as(FactoryGirl.create(:admin_user))
+      sign_in_as(FactoryBot.create(:admin_user))
     end
 
     it 'creates citations from json data' do
-      title = "my title"
-      params = { citation: {title: title, author_block: "Author Be"}}
-      post :create, params, format: :json
+      title = 'my title'
+      params = { citation: { title: title, author_block: 'Author Be' }, format: :json }
+      post :create, params:  params
 
       expect(assigns(:citation).title).to eq title
       expect(response).to be_redirect

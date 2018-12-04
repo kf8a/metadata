@@ -63,13 +63,13 @@ class PeopleController < ApplicationController
   # GET /people/new
   def new
     @person = Person.new
-    @roles = lter_roles
+    @roles = lter_roles #+ lno_roles
   end
 
   # GET /people/1/edit
   def edit
     @title = 'Edit ' + person.full_name
-    @roles = lter_roles
+    @roles = lter_roles #+ lno_roles
   end
 
   # POST /people
@@ -127,7 +127,15 @@ class PeopleController < ApplicationController
   end
 
   def lter_roles
-    Role.where(role_type_id: RoleType.where(name: 'lter').first)
+    specific_roles('lter')
+  end
+
+  def lno_roles
+    specific_roles('lno')
+  end
+
+  def specific_roles(name)
+    Role.where(role_type_id: RoleType.where(name: name).first)
   end
 
   def csv(roles)

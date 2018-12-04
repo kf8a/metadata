@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Protocol do
   describe 'eml importation' do
     before(:each) do
-      @protocol = FactoryGirl.create(:protocol)
+      @protocol = FactoryBot.create(:protocol)
     end
 
     it 'should import protocols' do

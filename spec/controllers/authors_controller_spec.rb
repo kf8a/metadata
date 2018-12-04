@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe AuthorsController, type: :controller  do
+describe AuthorsController, type: :controller do
   render_views
 
   before(:each) do
@@ -9,8 +9,8 @@ describe AuthorsController, type: :controller  do
 
   describe 'GET :index, :format => :json' do
     before(:each) do
-      @author = FactoryGirl.create :author
-      get :index, :format => :json
+      @author = FactoryBot.create :author
+      get :index, format: :json
     end
 
     it { expect(response.status).to eq 200 }

@@ -3,8 +3,8 @@ require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 describe Person do
   describe 'deleting with affiliations' do
     it 'deletes the affiliations with the person' do
-      person      = FactoryGirl.create :person
-      affiliation = FactoryGirl.create :affiliation
+      person      = FactoryBot.create :person
+      affiliation = FactoryBot.create :affiliation
       affiliation.person = person
       affiliation.save
       expect(person.affiliations.size).to eq 1
@@ -15,12 +15,12 @@ describe Person do
 
   describe 'Some people have a dataset role, others do not. ' do
     before(:each) do
-      data_role = FactoryGirl.create(:role)
-      @dataperson1 = FactoryGirl.create(:person, sur_name: 'Jones')
+      data_role = FactoryBot.create(:role)
+      @dataperson1 = FactoryBot.create(:person, sur_name: 'Jones')
       allow(@dataperson1).to receive(:dataset_roles).and_return([data_role])
-      @dataperson2 = FactoryGirl.create(:person, sur_name: 'Smith')
+      @dataperson2 = FactoryBot.create(:person, sur_name: 'Smith')
       allow(@dataperson2).to receive(:dataset_roles).and_return([data_role])
-      @nodataperson = FactoryGirl.create(:person, sur_name: 'Nodata')
+      @nodataperson = FactoryBot.create(:person, sur_name: 'Nodata')
     end
 
     it 'return true for those with dataset roles, false for others' do
@@ -32,7 +32,7 @@ describe Person do
 
   # describe "eml importation" do
   #   before(:each) do
-  #     @person = FactoryGirl.create(:person)
+  #     @person = FactoryBot.create(:person)
   #   end
 
   #   it "should import people" do
@@ -54,7 +54,7 @@ describe Person do
   #     @person.fax = "666-666-6666"
   #     @person.email = "not_unusual@tobeloved.com"
   #     role_to_add = RoleType.find_by_name('lter').roles.first
-  #     #role_to_add = Role.first || FactoryGirl.create(:role)
+  #     #role_to_add = Role.first || FactoryBot.create(:role)
   #     Affiliation.create!(:person => @person, :role => role_to_add)
   #     #@person.lter_roles << role_to_add
   #     @person.save

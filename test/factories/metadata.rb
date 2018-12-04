@@ -1,19 +1,19 @@
-FactoryGirl.define do
-  #Independent factories#########
+FactoryBot.define do
+  # Independent factories#########
   factory :affiliation do
   end
 
   factory :author do
-    seniority  1
+    seniority { 1 }
   end
 
   factory :editor do
-    seniority  1
+    seniority  { 1 }
   end
 
   factory :citation do
-    website  Website.find_by(name: 'lter')
-    authors  [FactoryGirl.build(:author)]
+    website  { Website.find_by(name: 'lter') }
+    authors  { [FactoryBot.build(:author)] }
   end
 
   factory :article_citation do
@@ -32,7 +32,7 @@ FactoryGirl.define do
   end
 
   factory :invite do
-    sequence(:email) {|n| "person#{n}@example.com" }
+    sequence(:email) { |n| "person#{n}@example.com" }
   end
 
   factory :page do
@@ -45,9 +45,9 @@ FactoryGirl.define do
   end
 
   factory :person do
-    sur_name    'bauer'
-    given_name  'bill'
-    city        'hickory corners'
+    sur_name { 'bauer' }
+    given_name { 'bill' }
+    city { 'hickory corners' }
   end
 
   factory :project do
@@ -60,15 +60,15 @@ FactoryGirl.define do
   end
 
   factory :sponsor do
-    name    'LTER'
+    name { 'LTER' }
 
     factory :restricted_sponsor do
-      data_restricted   true
+      data_restricted { true }
     end
   end
 
   factory :study do
-    name    'LTER'
+    name { 'LTER' }
   end
 
   factory :study_url do
@@ -87,35 +87,35 @@ FactoryGirl.define do
   end
 
   factory :theme do
-    name  'Agronomic'
+    name  { 'Agronomic' }
   end
 
   factory :variate do
-    name              'date'
-    description       'generic variate'
-    measurement_scale 'dateTime'
-    date_format       'YYYY-MM-DD'
+    name  { 'date' }
+    description { 'generic variate' }
+    measurement_scale { 'dateTime' }
+    date_format { 'YYYY-MM-DD' }
   end
 
   factory :venue_type do
-    name  'Venue Name'
+    name  { 'Venue Name' }
   end
 
   factory :visualization do
-    query        "select 1 as sample_date"
+    query  { 'select 1 as sample_date' }
   end
 
   factory :website do
-    name 'Name'
+    name { 'Name' }
   end
 
-  #Dependent factories##########
+  # Dependent factories##########
 
   factory :role do
-    name 'Emeritus Investigators'
+    name { 'Emeritus Investigators' }
 
     factory :lter_role do
-      role_type    { RoleType.find_by_name('lter') || FactoryGirl.create(:role_type, :name => 'lter') }
+      role_type    { RoleType.find_by_name('lter') || FactoryBot.create(:role_type, :name => 'lter') }
     end
   end
 
@@ -124,21 +124,21 @@ FactoryGirl.define do
   end
 
   factory :dataset do
-    title     'KBS001'
-    version   0
-    abstract  'some new dataset'
-    dataset   { FactoryGirl.generate(:dataset_text) }
-    sponsor   { FactoryGirl.create(:sponsor) }
+    title     { 'KBS001' }
+    version   { 0 }
+    abstract  { 'some new dataset' }
+    dataset   { FactoryBot.generate(:dataset_text) }
+    sponsor   { FactoryBot.create(:sponsor) }
 
-    factory :restricted_dataset do |dataset|
+    factory :restricted_dataset do | dataset |
       association :sponsor, :factory => :restricted_sponsor
     end
   end
 
   factory :protocol do
-    name          'Proto1'
-    version_tag   0
-    dataset       { FactoryGirl.create(:dataset) }
+    name          { 'Proto1' }
+    version_tag   { 0 }
+    dataset       { FactoryBot.create(:dataset) }
   end
 
   sequence :name do |n|
@@ -147,24 +147,24 @@ FactoryGirl.define do
 
   factory :datatable do
     name
-    title         'a really cool datatable'
-    object        "select now() as sample_date"
-    is_sql         true
-    description   'This is a datatable'
-    weight        100
-    theme_id      [FactoryGirl.create(:theme)]
+    title { 'a really cool datatable' }
+    object { 'select now() as sample_date' }
+    is_sql { true }
+    description { 'This is a datatable' }
+    weight { 100 }
+    theme_id { [FactoryBot.create(:theme)] }
     dataset
-    variates      [FactoryGirl.create(:variate)]
+    variates { [FactoryBot.create(:variate)] }
 
     factory :public_datatable do
     end
 
     factory :protected_datatable do
-      association :dataset, :factory => :restricted_dataset
+      association :dataset, factory: :restricted_dataset
     end
 
     factory :old_datatable do
-      object   %q{select now() - interval '3 year' as sample_date}
+      object { %{select now() - interval '3 year' as sample_date} }
     end
   end
 
@@ -180,8 +180,8 @@ FactoryGirl.define do
   end
 
   factory :meeting do
-    venue_type_id   1
-    date Date.today
+    venue_type_id { 1 }
+    date { Time.zone.today }
   end
 
   factory :collection do
@@ -189,7 +189,7 @@ FactoryGirl.define do
   end
 
   factory :abstract do
-    abstract  'A quick little discussion of the meeting.'
+    abstract { 'A quick little discussion of the meeting.' }
     meeting
   end
 end

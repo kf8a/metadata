@@ -4,13 +4,13 @@ describe StudiesController, type: :controller do
   render_views
 
   before(:each) do
-    sign_in_as(FactoryGirl.create(:admin_user))
-    # @controller.current_user = FactoryGirl.create :admin_user
+    sign_in_as(FactoryBot.create(:admin_user))
+    # @controller.current_user = FactoryBot.create :admin_user
   end
 
   describe 'GET :index' do
     before(:each) do
-      @study = FactoryGirl.create :study
+      @study = FactoryBot.create :study
       get :index
     end
 
@@ -20,9 +20,9 @@ describe StudiesController, type: :controller do
 
   describe 'POST :move_to' do
     before(:each) do
-      @study = FactoryGirl.create :study
-      @another_study = FactoryGirl.create :study
-      post :move_to, id: @study.id, parent_id: @another_study.id
+      @study = FactoryBot.create :study
+      @another_study = FactoryBot.create :study
+      post :move_to, params: { id: @study.id, parent_id: @another_study.id }
     end
 
     it 'should make the first study a child of the other' do
@@ -33,9 +33,9 @@ describe StudiesController, type: :controller do
 
   describe 'POST :move_before' do
     before(:each) do
-      @study = FactoryGirl.create :study
-      @another_study = FactoryGirl.create :study
-      post :move_before, id: @study.id, parent_id: @another_study.id
+      @study = FactoryBot.create :study
+      @another_study = FactoryBot.create :study
+      post :move_before, params: { id: @study.id, parent_id: @another_study.id }
     end
 
     it 'should make the first study a sibling of the other' do

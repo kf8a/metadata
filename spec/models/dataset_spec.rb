@@ -20,8 +20,8 @@ describe Dataset do
 
   describe "eml importation" do
     before(:each) do
-      dataset = FactoryGirl.create(:dataset, :initiated => Date.today, :completed => Date.today)
-      datatable = FactoryGirl.create(:datatable)
+      dataset = FactoryBot.create(:dataset, :initiated => Date.today, :completed => Date.today)
+      datatable = FactoryBot.create(:datatable)
       @dataset_with_datatable = datatable.dataset
       assert datatable.valid_for_eml?
     end
@@ -33,7 +33,7 @@ describe Dataset do
     end
 
     it "should import protocols" do
-      new_protocol = FactoryGirl.create(:protocol, :title => 'EML Protocol')
+      new_protocol = FactoryBot.create(:protocol, :title => 'EML Protocol')
       @dataset_with_datatable.protocols << new_protocol
       @dataset_with_datatable.website = Website.first
       @dataset_with_datatable.save
@@ -56,9 +56,9 @@ describe Dataset do
       expect(imported_dataset.abstract).to match /The right abstract/ #it will be textilized
     end
 
-    it "should import the right dates" do
-      @dataset_with_datatable.initiated = Date.parse("1-2-1988")
-      @dataset_with_datatable.completed = Date.parse("3-4-1990")
+    it 'should import the right dates' do
+      @dataset_with_datatable.initiated = Date.parse('1-2-1988')
+      @dataset_with_datatable.completed = Date.parse('3-4-1990')
       eml_content = @dataset_with_datatable.to_eml
       imported_dataset = Dataset.from_eml(eml_content)
       expect(imported_dataset.initiated).to eq @dataset_with_datatable.initiated
@@ -66,8 +66,8 @@ describe Dataset do
     end
 
     it "should import the right people" do
-      role = FactoryGirl.create(:role, name: 'tester')
-      jon = FactoryGirl.create(:person, :given_name => 'jon')
+      role = FactoryBot.create(:role, name: 'tester')
+      jon = FactoryBot.create(:person, :given_name => 'jon')
       jon.roles << role
       expect(jon).to be_valid
 

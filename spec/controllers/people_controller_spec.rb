@@ -12,7 +12,7 @@ describe PeopleController, type: :controller  do
     end
 
     it 'renders the glbrc index' do
-      get :index, :requested_subdomain => 'glbrc'
+      get :index, params: { requested_subdomain: 'glbrc' }
 
       expect(response.code).to eq('200')
     end
@@ -37,30 +37,30 @@ describe PeopleController, type: :controller  do
     end
 
     it 'GET edit' do
-      get :edit, id: 1
+      get :edit, params: { id: 1 }
 
       expect(response).to redirect_to('/sign_in')
     end
 
-    it 'DESTROY' do 
-      delete :destroy, id: 1
+    it 'DESTROY' do
+      delete :destroy, params: { id: 1 }
 
       expect(response).to redirect_to('/sign_in')
     end
 
     it 'POST: update' do
-          put :update, :id => '107', :person=>{"city"=>"Hickory Corners", "postal_code"=>"49060", "title"=>"", "lter_role_ids"=>["15"], "country"=>"USA", "sur_name"=>"Grillo (REU)", "url"=>"", "street_address"=>"", "given_name"=>"Michael", "sub_organization"=>"Kellogg Biological Station", "fax"=>"", "phone"=>"", "organization"=>"Michigan State University", "locale"=>"MI", "friendly_name"=>"Mike", "middle_name"=>"", "email"=>"grillom1@msu.edu"}
+          put :update, params:  {id: '107', person:{"city"=>"Hickory Corners", "postal_code"=>"49060", "title"=>"", "lter_role_ids"=>["15"], "country"=>"USA", "sur_name"=>"Grillo (REU)", "url"=>"", "street_address"=>"", "given_name"=>"Michael", "sub_organization"=>"Kellogg Biological Station", "fax"=>"", "phone"=>"", "organization"=>"Michigan State University", "locale"=>"MI", "friendly_name"=>"Mike", "middle_name"=>"", "email"=>"grillom1@msu.edu"} }
           expect(response).to redirect_to('/sign_in')
     end
 
     context 'GET: show' do
-      before do 
-        @person = FactoryGirl.create(:person)
+      before do
+        @person = FactoryBot.create(:person)
       end
 
       context 'for default' do
         before do
-          get :show, :id => @person
+          get :show, params: { id: @person }
         end
 
         it 'uses the lter template' do
@@ -68,18 +68,17 @@ describe PeopleController, type: :controller  do
         end
       end
 
-
-      context "for subdomain glbrc" do
+      context 'for subdomain glbrc' do
         before do
-          get :show, :id => @person, :requested_subdomain => 'glbrc'
+          get :show, params: { id: @person, requested_subdomain: 'glbrc' }
         end
 
         it 'is successful' do
-          expect(response.code).to eq("200")
+          expect(response.code).to eq('200')
         end
 
         it 'renders show' do
-          expect(response).to render_template("glbrc_show")
+          expect(response).to render_template('glbrc_show')
         end
 
         it 'uses the glbrc template' do
@@ -89,15 +88,15 @@ describe PeopleController, type: :controller  do
 
       context 'for subdomain lter' do
         before do
-          get :show, :id => @person, :requested_subdomain => 'lter'
+          get :show, params: { id: @person, requested_subdomain: 'lter' }
         end
 
         it 'is successful' do
-          expect(response.code).to eq("200")
+          expect(response.code).to eq('200')
         end
 
         it 'renders show' do
-          expect(response).to render_template("show")
+          expect(response).to render_template('show')
         end
 
         it 'uses the lter template' do
@@ -105,7 +104,6 @@ describe PeopleController, type: :controller  do
         end
       end
     end
-
   end
 
   # context 'signed in as admin' do
@@ -136,7 +134,7 @@ describe PeopleController, type: :controller  do
   #
   #   it 'PUT update' do
   #     put :update, {:id => 107, person: {city: "Hickory Corners", postal_code: "49060", title: "", lter_role_ids: ["15"],
-  #       country: "USA", sur_name: "Grillo (REU)", url: "", street_address: "", given_name: "Michael", sub_organization:"Kellogg Biological Station", 
+  #       country: "USA", sur_name: "Grillo (REU)", url: "", street_address: "", given_name: "Michael", sub_organization:"Kellogg Biological Station",
   #       fax:"", phone:"", organization:"Michigan State University", locale:"MI", friendly_name:"Mike", middle_name:"", email: "grillom1@msu.edu"}}
   #
   #     expect(response).to redirect_to('/people/107')
