@@ -31,11 +31,12 @@ class PeopleController < ApplicationController
   end
 
   def emeritus
-    @roles = RoleType.find_by(name: 'lter')
-                     .roles.order('seniority')
-                     .where('name like ?', 'Emeritus%')
+    role_type = RoleType.find_by(name: 'lter')
+    @roles = if role_type then
+               role_type.roles.order('seniority').where('name like ?', 'Emeritus%')
+             end
     respond_to do |format|
-      format.html # emeritus.rhtml
+      format.html
     end
   end
 
