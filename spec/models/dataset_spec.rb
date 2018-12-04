@@ -301,27 +301,3 @@ describe Dataset do
     assert_equal [], xsd.validate(doc) # make sure the document is valid
   end
 end
-
-# == Schema Information
-#
-# Table name: datasets
-#
-#  id           :integer         not null, primary key
-#  dataset      :string(255)
-#  title        :string(255)
-#  abstract     :text
-#  old_keywords :string(255)
-#  status       :string(255)
-#  initiated    :date
-#  completed    :date
-#  released     :date
-#  on_web       :boolean         default(TRUE)
-#  version      :integer         default(1)
-#  core_dataset :boolean         default(FALSE)
-#  project_id   :integer
-#  metacat_id   :integer
-#  created_at   :datetime
-#  updated_at   :datetime
-#  sponsor_id   :integer
-#  website_id   :integer
-#
