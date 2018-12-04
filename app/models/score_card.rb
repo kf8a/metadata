@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'csv'
 
 # scores = Array of structs each an datatable_id, array of scores
@@ -19,13 +21,17 @@ class ScoreCard
   def score(datatable)
     # exclude climdb datatables and archive
     return if [309, 300, 301, 175, 127, 82].include? datatable.id
+
     result = {}
 
     if time_key(datatable)
       result = data(datatable, time_key(datatable))
 
-      fill_to_present(result,
-                      update_frequency_years(datatable)) unless 'completed' == datatable.status
+      if datatable.status == 'completed'
+        result
+      else
+        fill_to_present(result, update_frequency_years(datatable))
+      end
     else
       []
     end
@@ -40,7 +46,7 @@ class ScoreCard
   def update_frequency_years(datatable)
     update_frequency = datatable.update_frequency_days || 365
     update_frequency /= 365
-    update_frequency = 1 if 0 == update_frequency
+    update_frequency = 1 if update_frequency.zero?
     update_frequency
   end
 
@@ -60,7 +66,6 @@ class ScoreCard
     begin
       query_result    = db_connection.execute(query)
       approved_result = db_connection.execute(approved_query)
-
     rescue Exception
       query_result = []
       approved_result = []
@@ -79,7 +84,8 @@ class ScoreCard
 
   def fill_to_present(data, update_frequency_years = 1)
     return if data.empty?
-    max_year_record = data.max { |a, b| a[:year] <=> b[:year] }
+
+    max_year_record = data.max_by { |a| a[:year] }
     max_year = max_year_record[:year].to_i
     max_year += update_frequency_years
     add_years = (max_year..current_year).step(update_frequency_years)
@@ -115,8 +121,10 @@ class ScoreCard
                   datatable.is_sql
     # exclude climdb datatables and archive
     return if [309, 300, 301, 175, 127, 82].include? datatable.id
+
     s = score(datatable)
     return unless s
+
     s.each do |a|
       csv << [datatable.id,
               datatable.completed,
