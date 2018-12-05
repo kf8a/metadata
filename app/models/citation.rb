@@ -114,6 +114,7 @@ class Citation < ApplicationRecord
     sorter.downcase!
     # Since primary author and date is default, it is already sorted that way
     return if sorter == 'primary author and date(default)'
+
     order(sorter)
   end
 
@@ -249,23 +250,21 @@ class Citation < ApplicationRecord
   end
 
   def bib_hash
-    hash = {
-      abstract:  abstract,
-      author:    authors.collect(&:full_name).join(' and '),
-      editor:    editors.collect(&:full_name).join(' and '),
-      title:     title,
-      publisher: publisher,
-      year:      pub_year.to_s,
-      address:   address,
-      note:      notes,
-      journal:   publication,
-      pages:     page_numbers,
-      volume:    volume,
-      number:    issue,
-      series:    series_title,
-      doi:       doi,
-      isbn:      isbn
-    }
+    hash = {  abstract: abstract,
+              author: authors.collect(&:full_name).join(' and '),
+              editor: editors.collect(&:full_name).join(' and '),
+              title: title,
+              publisher: publisher,
+              year: pub_year.to_s,
+              address: address,
+              note: notes,
+              journal: publication,
+              pages: page_numbers,
+              volume: volume,
+              number: issue,
+              series: series_title,
+              doi: doi,
+              isbn: isbn }
     hash.delete_if { |_, value| value.blank? }
   end
 
@@ -289,7 +288,7 @@ class Citation < ApplicationRecord
     if authors.empty?
       author_string
     else
-      ''
+      authors.first.formatted + ' and ' + authors.last.formatted(:natural) + '.'
     end
   end
 
@@ -349,8 +348,9 @@ class Citation < ApplicationRecord
 
   def title_and_punctuation
     return '' if title.blank?
+
     title.rstrip!
-    if title =~ /[\?\!\.]$/
+    if title.match?(/[\?\!\.]$/)
       title
     else
       title + '.'
@@ -470,7 +470,7 @@ class Citation < ApplicationRecord
     send(table_name).clear
     current_seniority = 1 # TODO: should this be zero based?
     string_of_names.each_line do |name_string|
-      if name_string[0] =~ /\d/
+      if name_string[0].match?(/\d/)
         treat_as_token_list(name_of_class, name_string)
       else
         send(table_name) << name_of_class.constantize.create(name: name_string,
@@ -493,6 +493,7 @@ class Citation < ApplicationRecord
 
   def check_for_open_access_paper
     return unless pdf.exists?
+
     if open_access
       make_pdf_public
     else

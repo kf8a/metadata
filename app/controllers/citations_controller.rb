@@ -7,7 +7,7 @@ class CitationsController < ApplicationController
   respond_to :html, :json
   layout :site_layout
   before_action :require_login, except: \
-    %i[index show search index_by_doi index_by_treatment download]
+    %i[index show search index_by_doi index_by_treatment download filtered]
   before_action :admin?, only: %i[new create edit update destroy]
 
   has_scope :by_type,   as: :type
@@ -76,8 +76,8 @@ class CitationsController < ApplicationController
     search_terms = assemble_search_terms(@word)
 
     @citations = Citation.search(search_terms, with: { website_id: website.id },
-                                 order: 'pub_year ASC',
-                                 per_page: 500)
+                                               order: 'pub_year ASC',
+                                               per_page: 500)
     logger.info Citation.search(search_terms)
     index_responder
   end
