@@ -17,9 +17,6 @@
       <% end -%>
     <% end -%>
   </p>
-  <% if @protocol.deprecates -%>
-    <p>Replaces <%= link_to "#{Protocol.find(@protocol.deprecates)}", protocol_path(@protocol.deprecates) %></p>
-  <% end -%>
   <p>
   <%= "In use from " if @protocol.in_use_from? %><%= @protocol.in_use_from %>
   <%= " to " if @protocol.in_use_to? %><%= @protocol.in_use_to %>
@@ -29,6 +26,8 @@
     <h2>Abstract</h2>
     <%=raw textilize(@protocol.abstract) if @protocol.abstract%>
   <% end -%>
+
+
   <h2>Protocol</h2>
   <% if @protocol.body.present? %>
     <div class='abstract_body'>
@@ -51,6 +50,14 @@
     <li><%= link_to raw(datatable.to_label), datatable_url(datatable, :host => datatable.dataset.website.url) %></li>
   <% end -%>
   </ol>
+
+  <% if @protocol.deprecates -%>
+    <p>Replaces <%= link_to "#{Protocol.find(@protocol.deprecates)}", protocol_path(@protocol.deprecates) %></p>
+  <% end -%>
+
+  <% if @protocol.change_summary.present? -%>
+    <p> <%= raw textilize(*@protocol.change_summary) %> </p>
+  <% end -%>
 
   <p>
   <%= link_to 'Edit', edit_protocol_path(@protocol) %> |
