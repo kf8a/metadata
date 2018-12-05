@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 # Handle display of projects
 # TODO: Do we need to keep this since we don't use it
 class ProjectsController < ApplicationController
-  before_action :require_login, except: [:index, :show]
-  before_action :admin?, except: [:index, :show]
-  before_action :project, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, except: %i[index show]
+  before_action :admin?, except: %i[index show]
+  before_action :project, only: %i[show edit update destroy]
 
   # GET /projects
   # GET /projects.xml
