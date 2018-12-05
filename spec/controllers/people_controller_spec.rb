@@ -49,7 +49,7 @@ describe PeopleController, type: :controller  do
     end
 
     it 'POST: update' do
-          put :update, params:  {id: '107', person:{"city"=>"Hickory Corners", "postal_code"=>"49060", "title"=>"", "lter_role_ids"=>["15"], "country"=>"USA", "sur_name"=>"Grillo (REU)", "url"=>"", "street_address"=>"", "given_name"=>"Michael", "sub_organization"=>"Kellogg Biological Station", "fax"=>"", "phone"=>"", "organization"=>"Michigan State University", "locale"=>"MI", "friendly_name"=>"Mike", "middle_name"=>"", "email"=>"grillom1@msu.edu"} }
+      put :update, params:  {id: '107', person:{"city"=>"Hickory Corners", "postal_code"=>"49060", "title"=>"", "lter_role_ids"=>["15"], "country"=>"USA", "sur_name"=>"Grillo (REU)", "url"=>"", "street_address"=>"", "given_name"=>"Michael", "sub_organization"=>"Kellogg Biological Station", "fax"=>"", "phone"=>"", "organization"=>"Michigan State University", "locale"=>"MI", "friendly_name"=>"Mike", "middle_name"=>"", "email"=>"grillom1@msu.edu"} }
           expect(response).to redirect_to('/sign_in')
     end
 

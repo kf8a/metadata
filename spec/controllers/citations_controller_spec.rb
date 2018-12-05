@@ -203,7 +203,6 @@ describe CitationsController, type: :controller do
         get :filtered, params: { requested_subdomain: 'lter', sort_by: 'id' }
       end
 
-      it { should render_template('filtered') }
       it 'should order the citations by id' do
         expect(assigns(:website)).to eq @website
         correct_sorting = @website.citations.order('id').published
@@ -224,7 +223,7 @@ describe CitationsController, type: :controller do
       end
     end
 
-    describe 'GET :filtered, type => ArticleCitation' do
+    describe 'GET :filtered, type: ArticleCitation' do
       before(:each) do
         get :filtered, params: { requested_subdomain: 'lter', type: 'ArticleCitation' }
       end
@@ -233,7 +232,8 @@ describe CitationsController, type: :controller do
         correct_list = @website.citations.by_type('ArticleCitation').published
         expect(correct_list).to include @citation1
         expect(correct_list).to_not include @another_citation
-        expect(assigns(:citations).all).to eq correct_list.all
+        my_list = correct_list.all
+        expect(assigns(:citations).all).to eq my_list
       end
     end
 

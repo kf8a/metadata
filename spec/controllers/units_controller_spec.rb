@@ -1,7 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 
 describe UnitsController, type: :controller  do
-
   before do
     user = User.new
     allow(user).to receive(:admin?).and_return(true)
