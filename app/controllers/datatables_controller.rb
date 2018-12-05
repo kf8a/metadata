@@ -4,7 +4,9 @@ class DatatablesController < ApplicationController
 
   before_action :require_login, except: %i[index show suggest search qc]
   before_action :admin?, except: %i[index show suggest search qc]
-  before_action :can_download?, only: :show, if: proc { |controller| controller.request.format.csv? || controller.request.format.fasta? } # run before filter to prevent non-members from downloading
+  # run before filter to prevent non-members from downloading
+  before_action :can_download?, only: :show,
+                                if: proc { |controller| controller.request.format.csv? || controller.request.format.fasta? }
   # before_filter :reject_robots
 
   helper_method :datatable
@@ -113,6 +115,7 @@ class DatatablesController < ApplicationController
   def suggest
     term = params[:term]
     return unless term
+
     term.downcase!
 
     list = ActsAsTaggableOn::Tag.where('lower(name) like ?', term + '%')
@@ -220,14 +223,12 @@ class DatatablesController < ApplicationController
                                       :theme_id, :weight, :study_id, :deprecation_notice,
                                       :update_frequency_days, :is_secondary, { core_area_ids: [] },
                                       { variates_attributes: [
-                                        [:name, :weight, :description,
-                                         :unit_id, :measurement_scale, :data_type, :max_valid,
-                                         :min_valid, :date_format, :precision,
-                                         :missing_value_indicator,
-                                         :_destroy, :id]
+                                        %i[name weight description unit_id measurement_scale
+                                           data_type:max_valid min_valid date_format
+                                           precision missing_value_indicator _destroy id]
                                       ] },
                                       data_contributions_attributes:
-                                        [[:person_id, :role_id, :_destroy, :id]])
+                                        [%i[person_id role_id _destroy id]])
   end
 
   def render_csv
