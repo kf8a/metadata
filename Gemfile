@@ -10,9 +10,7 @@ gem 'responders'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'acts-as-taggable-on'
-gem 'capistrano', '~>2'
 gem 'clearance'
-# gem 'country_select'
 gem 'formtastic'
 gem 'nokogiri'
 gem 'paperclip', '~> 5.2'
@@ -25,8 +23,6 @@ gem 'RedCloth'
 gem 'awesome_nested_set'
 
 gem 'jquery-rails'
-
-# gem 'net-ssh'
 
 gem 'workflow'
 
@@ -44,7 +40,7 @@ gem 'has_scope', '<0.6'
 
 gem 'ris_parser', git: 'https://github.com/kf8a/ris_parser.git'
 
-gem 'mysql2'
+gem 'mysql2', platform: :ruby
 gem 'thinking-sphinx'
 
 gem 'aws-sdk', '~> 2.3.0'
@@ -54,10 +50,8 @@ gem 'sitemap_generator'
 group :production do
   gem 'exception_notification'
   gem 'unicorn'
-  # gem 'newrelic_rpm'
 end
 
-# gem 'less-rails'
 gem 'coffee-rails'
 gem 'sass-rails'
 gem 'therubyracer', require: false
@@ -70,6 +64,9 @@ gem 'awesome_print'
 
 group :development do
   gem 'bcrypt_pbkdf'
+  # gem  'bcrypt_pbkdf' # (>= 1.0, < 2.0)
+  gem 'capistrano', '~>2'
+  gem 'ed25519'
   gem 'rbnacl', '< 5.0'
   gem 'rbnacl-libsodium'
 end
@@ -88,8 +85,9 @@ group :development, :test do
 end
 
 group :test do
-  gem 'factory_girl_rails'
-  gem 'shoulda', git: 'https://github.com/thoughtbot/shoulda.git'
+  gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
+  gem 'shoulda' # , git: 'https://github.com/thoughtbot/shoulda.git'
   gem 'shoulda-matchers' # to use rspec like syntax
 
   # Cucumber stuff
