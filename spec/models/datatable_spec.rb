@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 
 describe Datatable do
   before(:each) do
-    @datatable = FactoryGirl.create(:datatable)
+    @datatable = FactoryBot.create(:datatable)
   end
 
   describe 'publishing' do
@@ -33,9 +33,9 @@ describe Datatable do
   #     @datatable.name = 'EML Datatable'
   #     @datatable.title = 'EML Datatable Title'
   #     @datatable.description = 'EML description'
-  #     protocol = FactoryGirl.create(:protocol)
+  #     protocol = FactoryBot.create(:protocol)
   #     @datatable.protocols << protocol
-  #     variate = FactoryGirl.create(:variate, :name => 'EML_variate')
+  #     variate = FactoryBot.create(:variate, :name => 'EML_variate')
   #     @datatable.variates << variate
   #     @datatable.save
 
@@ -44,7 +44,7 @@ describe Datatable do
   #     @datatable.destroy
   #     assert !Datatable.exists?(datatable_id)
   #     eml_element = Nokogiri::XML(eml_content).css('dataTable').first
-  #     dataset = FactoryGirl.create(:dataset, :title => 'Datatablespec dataset')
+  #     dataset = FactoryBot.create(:dataset, :title => 'Datatablespec dataset')
   #     imported_datatable = dataset.datatables.new
   #     imported_datatable = imported_datatable.from_eml(eml_element)
   #     imported_datatable.name.should == 'EML Datatable'
