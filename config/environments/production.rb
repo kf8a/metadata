@@ -80,6 +80,8 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :sendmail
   Rails.application.config.middleware.use ExceptionNotification::Rack,
                                           email: { email_prefix: '[METADATA] ',
-                                                   sender_address: %("notifier" <notifier@oshtemo.kbs.msu.edu>),
-                                                   exception_recipients: %w[bohms@fastmail.com] }
+                                                   sender_address:
+                                                   %("notifier" <notifier@oshtemo.kbs.msu.edu>),
+                                                   exception_recipients:
+                                                   %w[bohms@fastmail.com hsiehhs7@msu.edu] }
 end
