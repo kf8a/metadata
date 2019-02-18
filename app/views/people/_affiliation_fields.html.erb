@@ -5,7 +5,7 @@
   <th>Research Interest</th>
 </tr>
 <tr>
-  <td><%= f.select :role_id, lter_roles.map {|x| [x.name[0..30], x.id] }, include_blank: true %></td>
+  <td><%= f.select :role_id, lter_roles, include_blank: true %></td>
   <td><%= f.text_field :title %></td>
   <td><%= f.text_field :seniority%></td>
   <td><%= f.text_field :research_interest %></td>

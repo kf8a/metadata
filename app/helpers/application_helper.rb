@@ -14,7 +14,8 @@ module ApplicationHelper
   def lter_roles
     # TODO: this is both here and in the person controller
     # Role.where(role_type_id: RoleType.where(name: 'lter').first)
-    Role.where('role_type_id = 2 or role_type_id = 4')
+    roles = Role.where('role_type_id = 2 or role_type_id = 4')
+    roles.map { |x| [augment_name(x.name[0..30], x.role_type_id), x.id] }
   end
 
   def admin?
@@ -52,5 +53,13 @@ module ApplicationHelper
     href = html_options[:href] || '#'
 
     content_tag(:a, name, html_options.merge(href: href, onclick: onclick))
+  end
+
+  private
+
+  def augment_name(name, role_type_id)
+    return name if role_type_id != 4
+
+    name + ' - lno role'
   end
 end
