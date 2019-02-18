@@ -13,7 +13,8 @@ module ApplicationHelper
 
   def lter_roles
     # TODO: this is both here and in the person controller
-    Role.where(role_type_id: RoleType.where(name: 'lter').first)
+    # Role.where(role_type_id: RoleType.where(name: 'lter').first)
+    Role.where('role_type_id = 2 or role_type_id = 4')
   end
 
   def admin?
