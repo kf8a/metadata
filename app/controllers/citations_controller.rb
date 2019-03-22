@@ -130,7 +130,7 @@ class CitationsController < ApplicationController
   def update
     @citation = Citation.find(params[:id])
     @citation.type = params[:citation].try(:delete, 'type')
-    @citation.update_attributes(citation_params)
+    @citation.update(citation_params)
     @citation.touch
     respond_with @citation, location: citation_url
   end
@@ -212,6 +212,7 @@ class CitationsController < ApplicationController
   def citation_params
     params.require(:citation).permit(:title, :abstract, :pub_date, :pub_year, :author_block,
                                      :citation_type_id, :address, :notes, :publication,
+                                     :editor_block,
                                      :start_page_number, :ending_page_number, :periodical_full_name,
                                      :periodical_abbreviation, :volume, :issue, :city, :publisher,
                                      :secondary_title, :series_title, :isbn, :doi, :full_text,
