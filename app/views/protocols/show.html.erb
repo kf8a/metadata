@@ -5,7 +5,8 @@
   :crumbs => [{:name => controller_name.upcase, :url =>  url_for(:controller => controller_name, :action => 'index')},
     {:name => @protocol.title}] %>
 <% cache(@protocol) do %>
-  <h1><%= link_to "#{@protocol.dataset}: ", @protocol.dataset if @protocol.dataset %><%=raw @protocol.title %></h1>
+  <div id="protocol-show">
+  <h1><%=raw @protocol.title %></h1>
   <p class='notice'>
     <% if @protocol.active? -%>
       Active
@@ -38,6 +39,13 @@
     <%=link_to 'Get PDF', download_protocol_path(@protocol), :class=>'download-link'%>
   <% end %>
 
+  <% if @protocol.updated_at %>
+    <div class='updated_at'>
+      <p>Date modified: <%= @protocol.updated_at.strftime('%A, %b %d %Y') %>
+      </p>
+    </div>
+  <% end %>
+
 <% if @protocol.people.size > 1 %>Authors: <% else %>Author: <% end %>
   <ul class='bulleted'>
     <% @protocol.people.each do |person| %>
@@ -63,4 +71,5 @@
   <%= link_to 'Edit', edit_protocol_path(@protocol) %> |
   <%= link_to 'Back', protocols_path %>
   </p>
+  </div>
 <% end -%>

@@ -73,7 +73,7 @@
 
   h2 {
     clear: both;
-    padding-top: 1em;
+    padding-top: 3em;
     margin-bottom: 0px;
   }
 
@@ -169,6 +169,11 @@
   #network-databases h2 {
     font-size: small;
     margin-bottom: 0.5em;
+  }
+
+  .updated_at {
+    margin-top: 2em;
+    margin-bottom: 3em;
   }
 
   .no-data {
