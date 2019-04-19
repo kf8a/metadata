@@ -35,7 +35,7 @@ class EdiReport
   # Creates the citation
 
   def citation
-    Author.authors(doc) + ' ' + publication_year + '. ' +
+    ReportAuthor.authors(doc) + ' ' + publication_year + '. ' +
       title + '. Environmental Data Initiative. ' +
       doi
   end
@@ -65,12 +65,12 @@ class EdiReport
       row_number.to_s + SPACER +
       citation + SPACER +
       core_area_dots.join(SPACER) +
-      SPACER + ' ' + SPACER + ' '
+      SPACER + ' ' + SPACER
   end
 
   def first_author_name
-    first_author = Author.all_authors(doc).shift
-    Author.first_author_name(first_author)
+    first_author = ReportAuthor.all_authors(doc).shift
+    ReportAuthor.first_author_name(first_author)
   end
 
   private
@@ -126,7 +126,7 @@ end
 
 ##
 # Helper for parsing authors
-class Author
+class ReportAuthor
   def self.authors(doc)
     creators = all_authors(doc)
     first_author = creators.shift
