@@ -17,6 +17,9 @@ gem 'paperclip', '~> 5.2'
 gem 'pg'
 gem 'rake', '< 11.0'
 gem 'RedCloth'
+gem 'kramdown', '~> 2.1'
+
+gem 'country_select', '~> 4.0'
 
 # gem 'doi', :git => 'git://github.com/kf8a/doi.git'
 
@@ -53,7 +56,7 @@ group :production do
 end
 
 gem 'coffee-rails'
-gem 'sass-rails'
+gem 'sassc-rails'
 gem 'therubyracer', require: false
 gem 'uglifier'
 
@@ -77,8 +80,6 @@ group :development, :test do
   gem 'minitest-reporters', '>= 0.5.0'
   gem 'spring'
 
-  gem 'annotate'
-  gem 'meta_request'
   gem 'rspec-its'
   gem 'rspec-rails'
   gem 'test-unit'
