@@ -253,7 +253,7 @@ class EmlDatasetBuilder
     return unless dataset.core_areas.empty?
 
     @eml.keywordSet do
-      core_areas.each do |keyword|
+      dataset.core_areas.each do |keyword|
         @eml.keyword  keyword.name
       end
       @eml.keywordThesaurus 'LTER Core Research Area'
