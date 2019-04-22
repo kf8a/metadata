@@ -1,7 +1,7 @@
   .gsc-control-cse {
     font-family: Arial, sans-serif;
-    border-color: #FFFFFF;
-    background-color: #FFFFFF;
+    border-color: $157242;
+    background-color: $157242;
   }
   input.gsc-input {
     border-color: #777777;
@@ -95,11 +95,9 @@
     color: #00CC00;
   }
 
-	
 	dialog{ font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
 	ul#icons {margin: 0; padding: 0;}
 	ul#icons li {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;}
 	ul#icons span.ui-icon {float: left; margin: 0 4px;}
 
 #overlay{ position: absolute; top: 0; left: 0; z-index: 90; width: 100%; height: 100%; visibility: hidden; background-color: #333333; }
-

@@ -101,17 +101,31 @@ class Person < ApplicationRecord
   end
 
   def to_lno_active
-    ['LTER', 'KBS', lno_name,
-     given_name, sur_name,
-     full_name, email, lno_roles.map(&:name).flatten.join('|'),
-     orcid_id, 'urn:lter:lterCurrentMember', '']
+    support = lter_awards.present? ? 'true' : ''
+    thesis = lter_thesis ? 'true' : ''
+    [
+      '', lno_name,
+      'LTER', 'KBS',
+      given_name, sur_name,
+      full_name, email, lno_roles.map(&:name).flatten.join('|'),
+      orcid_id, 'urn:lter:lterCurrentMember', '',
+      graduation_year, support, thesis, organization,
+      id
+    ]
   end
 
   def to_lno_inactive
-    ['LTER', 'KBS', lno_name,
-     given_name, sur_name,
-     full_name, email, lno_roles.map(&:name).flatten.join('|'),
-     orcid_id, '', '']
+    support = lter_awards.present? ? 'true' : ''
+    thesis = lter_thesis ? 'true' : ''
+    [
+      '', lno_name,
+      'LTER', 'KBS',
+      given_name, sur_name,
+      full_name, email, lno_roles.map(&:name).flatten.join('|'),
+      orcid_id, '', '',
+      graduation_year, support, thesis, organization,
+      id
+    ]
   end
 
   private
