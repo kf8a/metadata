@@ -200,15 +200,16 @@ class EmlDatasetBuilder
   def eml_people
     [dataset.people, dataset.datatable_people].flatten.uniq.compact.each do |person|
       role = dataset.datatables.collect { |x| x.which_roles(person) }.flatten.compact.first
-      role = which_roles(person).first unless role
+      role = dataset.which_roles(person).first unless role
       role_name = role.try(:name)
       next if ['investigator', 'lead investigator'].include?(role_name)
+
       person.to_eml(@eml, role_name)
     end
   end
 
   def eml_abstract
-    return if dataset.abstract.blank?
+    return if dataset.abstract?
     return if dataset.abstract.empty?
 
     @eml.abstract do
