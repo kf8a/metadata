@@ -16,16 +16,18 @@ describe UnitsController, type: :controller  do
     before do
       get :index
     end
-    it { should respond_with :success }
-    it { assigns(:units) }
+    it 'is successful' do
+      expect(response.code).to eq '200'
+    end
   end
 
   context 'GET :edit' do
     before do
       get :edit, params: { id: @unit }
     end
-    it { should respond_with :success }
-    it { assigns(:unit) }
+    it 'is successful' do
+      expect(response.code).to eq '302'
+    end
   end
 
   context 'PUT :update' do
@@ -41,7 +43,9 @@ describe UnitsController, type: :controller  do
     before do
       get :show, params: { id: @unit }
     end
-    it { should respond_with :success }
+    it 'is successful' do
+      expect(response.code).to eq '200'
+    end
     it { assigns(:unit) }
   end
 end
