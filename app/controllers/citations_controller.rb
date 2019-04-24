@@ -70,16 +70,18 @@ class CitationsController < ApplicationController
 
   def search
     @word = params[:q] || ''
-    redirect_to citations_url if @word.blank?
+    if @word.present?
+      @word = SearchInputSanitizer.sanitize(@word)
+      search_terms = assemble_search_terms(@word)
 
-    @word = SearchInputSanitizer.sanitize(@word)
-    search_terms = assemble_search_terms(@word)
-
-    @citations = Citation.search(search_terms, with: { website_id: website.id },
-                                               order: 'pub_year ASC',
-                                               per_page: 500)
-    logger.info Citation.search(search_terms)
-    index_responder
+      @citations = Citation.search(search_terms, with: { website_id: website.id },
+                                                 order: 'pub_year ASC',
+                                                 per_page: 500)
+      logger.info Citation.search(search_terms)
+      index_responder
+    else
+      redirect_to citations_url
+    end
   end
 
   def find_by_doi
