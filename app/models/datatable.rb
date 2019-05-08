@@ -530,6 +530,8 @@ class Datatable < ApplicationRecord
 
   def year?(year)
     # assume its a year if there are only 4 characters
+    return true if year.is_a?(Numeric)
+
     year.length == 4
   end
 
