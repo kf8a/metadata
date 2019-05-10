@@ -4,7 +4,7 @@
 class DataQuery
   def self.find_in_batches_as_csv(query, options = {})
     options.assert_valid_keys(:start, :batch_size)
-    batch_size = options[:batch_size] || 500
+    batch_size = options[:batch_size] || 50000
 
     (0..count(query)).step(batch_size) do |offset|
       batch_query = "Select * from (#{query}) as foo limit #{batch_size} offset #{offset}"
