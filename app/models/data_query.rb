@@ -1,6 +1,13 @@
 # WARNING this is postgres specific
 
 # find data in batches to allow streaming data delivery
+#
+# WARNING: the offset and limit clauses interact with order.
+# From the postgresql docs
+#
+#The query optimizer takes LIMIT into account when generating query plans, so you are very likely to get different plans (yielding different row orders) depending on what you give for LIMIT and OFFSET. Thus, using different LIMIT/OFFSET values to select different subsets of a query result will give inconsistent results unless you enforce a predictable result ordering with ORDER BY. This is not a bug; it is an inherent consequence of the fact that SQL does not promise to deliver the results of a query in any particular order unless ORDER BY is used to constrain the order.
+
+
 class DataQuery
   def self.find_in_batches_as_csv(query, options = {})
     options.assert_valid_keys(:start, :batch_size)
