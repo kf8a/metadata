@@ -1,12 +1,8 @@
 <div id='download'>
   <% unless datatable.metadata_only? %>
     <% if datatable.can_be_downloaded_by?(current_user) %>
-      <%= link_to 'Download complete data table',
-                datatable_path(datatable,:format => :csv),
-                :class => 'download-link'%>
-      <%= link_to 'Download data as spreadsheet',
-                datatable_path(datatable,:format => :ods),
-                :class => 'download-link' if false %>
+      <%= link_to 'Download complete data table', datatable_path(datatable,:format => :csv),
+                :class => 'download-link',  data: { disable_with: "Please wait (downloading)..." } %>
       <%= link_to 'View as a Collection',
                 collection_path(datatable.collection) if datatable.collection %>
       The <%=link_to 'standard data use policy applies to the this dataset' , datatable.dataset.sponsor.terms_of_use_path%>
