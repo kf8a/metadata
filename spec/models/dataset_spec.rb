@@ -3,37 +3,41 @@ require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 describe Dataset do
   before(:each) do
     @valid_attributes = {
-      :title => 'KBS004',
-      :abstract => 'the main lter experiment'
+      title: 'KBS004',
+      abstract: 'the main lter experiment'
     }
   end
 
-  it "should create a new instance given valid attributes" do
+  it 'should create a new instance given valid attributes' do
     Dataset.create!(@valid_attributes)
   end
 
-  it "should belong to a project" do
+  it 'should belong to a project' do
     dataset = Dataset.create!(@valid_attributes)
     dataset.project = Project.new
     dataset.save
   end
 
-  describe "eml importation" do
+  describe 'eml importation' do
     before(:each) do
-      dataset = FactoryBot.create(:dataset, :initiated => Date.today, :completed => Date.today)
+      website = FactoryBot.create(:website)
       datatable = FactoryBot.create(:datatable)
+      datatable.dataset = FactoryBot.create(:dataset,
+                                            website_id: website.id,
+                                            initiated: Time.zone.today,
+                                            completed: Time.zone.today)
       @dataset_with_datatable = datatable.dataset
       assert datatable.valid_for_eml?
     end
 
-    it "should create a dataset from eml" do
+    it 'should create a dataset from eml' do
       eml_content = @dataset_with_datatable.to_eml
       imported_dataset = Dataset.from_eml(eml_content)
       expect(imported_dataset).to be_a Dataset
     end
 
-    it "should import protocols" do
-      new_protocol = FactoryBot.create(:protocol, :title => 'EML Protocol')
+    it 'should import protocols' do
+      new_protocol = FactoryBot.create(:protocol, title: 'EML Protocol')
       @dataset_with_datatable.protocols << new_protocol
       @dataset_with_datatable.website = Website.first
       @dataset_with_datatable.save
@@ -42,15 +46,15 @@ describe Dataset do
       expect(imported_dataset.protocols).to include(new_protocol)
     end
 
-    it "should import the right title" do
-      @dataset_with_datatable.title = "The right title"
+    it 'should import the right title' do
+      @dataset_with_datatable.title = 'The right title'
       eml_content = @dataset_with_datatable.to_eml
       imported_dataset = Dataset.from_eml(eml_content)
-      expect(imported_dataset.title).to eq "The right title at the Kellogg Biological Station, Hickory Corners, MI "
+      expect(imported_dataset.title).to eq 'The right title at the Kellogg Biological Station, Hickory Corners, MI '
     end
 
-    it "should import the right abstract" do
-      @dataset_with_datatable.abstract = "The right abstract"
+    it 'should import the right abstract' do
+      @dataset_with_datatable.abstract = 'The right abstract'
       eml_content = @dataset_with_datatable.to_eml
       imported_dataset = Dataset.from_eml(eml_content)
       expect(imported_dataset.abstract).to match /The right abstract/ #it will be textilized
@@ -65,9 +69,9 @@ describe Dataset do
       expect(imported_dataset.completed).to eq @dataset_with_datatable.completed
     end
 
-    it "should import the right people" do
+    it 'should import the right people' do
       role = FactoryBot.create(:role, name: 'tester')
-      jon = FactoryBot.create(:person, :given_name => 'jon')
+      jon = FactoryBot.create(:person, given_name: 'jon')
       jon.roles << role
       expect(jon).to be_valid
 
@@ -76,10 +80,10 @@ describe Dataset do
       assert @dataset_with_datatable.save
       eml_content = @dataset_with_datatable.to_eml
       imported_dataset = Dataset.from_eml(eml_content)
-      expect(imported_dataset.people.where(:given_name => 'jon')).to_not be_empty
+      expect(imported_dataset.people.where(given_name: 'jon')).to_not be_empty
     end
 
-    it "should import the right datatable" do
+    it 'should import the right datatable' do
       expect(@dataset_with_datatable.datatables.collect{ |table| table.valid_for_eml? }).to eq [true]
       eml_content = @dataset_with_datatable.to_eml
       old_datatable_attributes = @dataset_with_datatable.datatables.first.attributes
@@ -95,7 +99,7 @@ describe Dataset do
       expect(new_datatable_attributes).to eq old_datatable_attributes
     end
 
-    # it "should import a dataset from a website" do
+    # it 'should import a dataset from a website' do
     #   uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-gce.113.13'
     #   valid_eml_doc?(uri)
     #   imported_dataset = Dataset.from_eml(uri)
