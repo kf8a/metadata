@@ -39,7 +39,7 @@
 <h2>Protocols</h2>
 <ul>
 	<% dataset.protocols.each do |protocol| -%>
-	<li><%= link_to "#{protocol.name} #{protocol.version}", protocol_path(protocol) %> <%= protocol.title %></li>
+	<li><%= link_to "#{protocol.name}", protocol_path(protocol) %> <%= protocol.title %></li>
 	<% end -%>
 </ul>
 <%= link_to 'eml', dataset_path(dataset, :format => :eml) %> |
