@@ -8,8 +8,6 @@ class Protocol < ApplicationRecord
   has_many :scribbles
   has_many :people, through: :scribbles
 
-  versioned dependent: :tracking
-
   has_attached_file :pdf,
                     storage: :s3,
                     bucket: 'metadata-production',

@@ -12,12 +12,12 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'acts-as-taggable-on'
 gem 'clearance'
 gem 'formtastic'
+gem 'kramdown', '~> 2.1'
 gem 'nokogiri'
 gem 'paperclip', '~> 5.2'
 gem 'pg'
 gem 'rake', '< 11.0'
 gem 'RedCloth'
-gem 'kramdown', '~> 2.1'
 
 gem 'country_select', '~> 4.0'
 
@@ -33,9 +33,6 @@ gem 'parslet'
 
 # for creating bibtex formatted citations
 gem 'bibtex-ruby'
-
-# versioning support for protocols
-gem 'vestal_versions', git: 'https://github.com/RoleModel/vestal_versions.git' # 'https://github.com/R1V3R5/vestal_versions'
 
 gem 'dalli'
 

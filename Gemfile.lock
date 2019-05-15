@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/RoleModel/vestal_versions.git
-  revision: af7e00969e4271eb8ff3e6a5752ee0e01013afb1
-  specs:
-    vestal_versions (2.1.0)
-      activerecord (>= 4, < 6)
-      activesupport (>= 4, < 6)
-
-GIT
   remote: https://github.com/kf8a/ris_parser.git
   revision: 410b27def4835b8b9b697690282ff3df4803ae68
   specs:
@@ -378,7 +370,6 @@ DEPENDENCIES
   thinking-sphinx
   uglifier
   unicorn
-  vestal_versions!
   web-console
   workflow
 
