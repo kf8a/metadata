@@ -384,7 +384,7 @@ class Datatable < ApplicationRecord
 
   def terms_of_use
     <<~HEREDOC
-      # These Data are copyrighted and use in a publication requires permission
+      # These Data are copyrighted and use in a publication requires written permission
       # as detailed in our Terms of use:  https://lter.kbs.msu.edu/data/terms-of-use/
       # Use of the data constitutes acceptance of the terms.
       #
