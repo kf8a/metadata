@@ -7,7 +7,8 @@
 </div>
 <ul>
   <% @studies.each do |study| -%>
-    <% next unless Citation.from_website(1).by_treatment(study.treatments.first).all.size > 0 -%>
+    <% citation_treatment = study.treatments.where(use_in_citations: true).first %>
+    <% next unless Citation.from_website(1).by_treatment(citation_treatment).all.size > 0 -%>
     <li class='top-level'>
     <% if study.citation_treatments? %>
         <%= study.name %>
@@ -19,7 +20,7 @@
           <% end -%>
         </ul>
       <% else -%>
-          <%= link_to study.name,  {:action => :index, :treatment => study.treatments.first} %>
+          <%= link_to study.name,  {:action => :index, :treatment => study.treatments.by_use_in_citations.first} %>
       <% end -%>
     </li>
   <% end -%>

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # display citations and control access to pdfs
 class CitationsController < ApplicationController
   include FileSource
@@ -42,7 +44,7 @@ class CitationsController < ApplicationController
   end
 
   def index_by_treatment
-    @studies = Study.by_id
+    @studies = Study.by_weight.by_id
 
     # @treatments  = Treatment.find(:all, order: 'priority')
     respond_to do |format|

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Study is a group of experiments or an experimental location
 class Study < ApplicationRecord
   has_and_belongs_to_many :datasets
@@ -18,7 +20,7 @@ class Study < ApplicationRecord
   end
 
   def citation_treatments
-    treatments.where(use_in_citations: true)
+    treatments.by_use_in_citations
   end
 
   # check if there is more than one treatment associated with this study
