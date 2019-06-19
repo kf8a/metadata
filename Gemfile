@@ -10,7 +10,7 @@ gem 'responders'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'acts-as-taggable-on'
-gem 'clearance'
+gem 'devise'
 gem 'formtastic'
 gem 'kramdown', '~> 2.1'
 gem 'nokogiri'
