@@ -1,4 +1,4 @@
-class AddTimestampsToStudiesAndThemes < ActiveRecord::Migration
+class AddTimestampsToStudiesAndThemes < ActiveRecord::Migration[4.2]
   def change
     add_column :studies, :updated_at, :datetime
     add_column :studies, :created_at, :datetime

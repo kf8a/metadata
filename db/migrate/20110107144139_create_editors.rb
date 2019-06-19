@@ -1,4 +1,4 @@
-class CreateEditors < ActiveRecord::Migration
+class CreateEditors < ActiveRecord::Migration[4.2]
   def self.up
     create_table :editors do |t|
       t.string :sur_name

@@ -1,4 +1,4 @@
-class AddStudyDescription < ActiveRecord::Migration
+class AddStudyDescription < ActiveRecord::Migration[4.2]
   def self.up
     add_column :studies, :description, :text
     add_column :studies, :seniority, :integer

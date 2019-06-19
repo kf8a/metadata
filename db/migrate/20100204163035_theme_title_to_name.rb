@@ -1,4 +1,4 @@
-class ThemeTitleToName < ActiveRecord::Migration
+class ThemeTitleToName < ActiveRecord::Migration[4.2]
   def self.up
     rename_column :themes, :title, :name
   end

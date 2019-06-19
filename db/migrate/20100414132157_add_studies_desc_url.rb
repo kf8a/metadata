@@ -1,4 +1,4 @@
-class AddStudiesDescUrl < ActiveRecord::Migration
+class AddStudiesDescUrl < ActiveRecord::Migration[4.2]
   def self.up
     add_column :studies, :url, :string
   end

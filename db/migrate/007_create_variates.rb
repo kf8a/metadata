@@ -1,4 +1,4 @@
-class CreateVariates < ActiveRecord::Migration
+class CreateVariates < ActiveRecord::Migration[4.2]
   def self.up
     create_table :variates do |t|
       t.column :name, :string

@@ -1,4 +1,4 @@
-class StudyToNestedSet < ActiveRecord::Migration
+class StudyToNestedSet < ActiveRecord::Migration[4.2]
   def self.up
     add_column :studies, :parent_id, :integer
     add_column :studies, :lft, :integer

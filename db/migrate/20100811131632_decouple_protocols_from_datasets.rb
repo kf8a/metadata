@@ -1,4 +1,4 @@
-class DecoupleProtocolsFromDatasets < ActiveRecord::Migration
+class DecoupleProtocolsFromDatasets < ActiveRecord::Migration[4.2]
   def self.up
     create_table :protocols_websites, :id => false, :force => true do |t|
       t.integer :protocol_id

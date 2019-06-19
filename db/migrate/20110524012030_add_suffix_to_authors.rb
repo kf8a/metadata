@@ -1,4 +1,4 @@
-class AddSuffixToAuthors < ActiveRecord::Migration
+class AddSuffixToAuthors < ActiveRecord::Migration[4.2]
 def self.up
     add_column :authors, :suffix, :string
   end

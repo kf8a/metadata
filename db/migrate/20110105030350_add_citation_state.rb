@@ -1,4 +1,4 @@
-class AddCitationState < ActiveRecord::Migration
+class AddCitationState < ActiveRecord::Migration[4.2]
   def self.up
     add_column :citations, :state, :string
   end

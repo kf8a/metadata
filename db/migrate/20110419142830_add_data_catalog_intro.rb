@@ -1,4 +1,4 @@
-class AddDataCatalogIntro < ActiveRecord::Migration
+class AddDataCatalogIntro < ActiveRecord::Migration[4.2]
   def self.up
     add_column :websites, :data_catalog_intro, :text
   end

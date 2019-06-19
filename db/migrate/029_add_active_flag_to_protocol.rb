@@ -1,4 +1,4 @@
-class AddActiveFlagToProtocol < ActiveRecord::Migration
+class AddActiveFlagToProtocol < ActiveRecord::Migration[4.2]
   def self.up
     add_column "protocols", "active", :boolean, :default=>true
   end

@@ -1,4 +1,4 @@
-class CreateTemplates < ActiveRecord::Migration
+class CreateTemplates < ActiveRecord::Migration[4.2]
   def self.up
     create_table :templates do |t|
       t.integer :website_id

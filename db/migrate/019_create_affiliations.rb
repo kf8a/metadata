@@ -1,4 +1,4 @@
-class CreateAffiliations < ActiveRecord::Migration
+class CreateAffiliations < ActiveRecord::Migration[4.2]
   def self.up
     create_table :affiliations do |t|
       t.column :person_id, :int

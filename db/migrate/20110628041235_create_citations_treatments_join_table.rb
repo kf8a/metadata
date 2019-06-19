@@ -1,4 +1,4 @@
-class CreateCitationsTreatmentsJoinTable < ActiveRecord::Migration
+class CreateCitationsTreatmentsJoinTable < ActiveRecord::Migration[4.2]
   def self.up
     create_table :citations_treatments, :id => false do |t|
       t.integer :citation_id

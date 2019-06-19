@@ -1,4 +1,4 @@
-class CreateDataContributions < ActiveRecord::Migration
+class CreateDataContributions < ActiveRecord::Migration[4.2]
   def self.up
     create_table :data_contributions do |t|
       t.integer :person_id

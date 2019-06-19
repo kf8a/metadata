@@ -1,4 +1,4 @@
-class AddDatatableDeprecation < ActiveRecord::Migration
+class AddDatatableDeprecation < ActiveRecord::Migration[4.2]
   def self.up
     add_column :datatables, :deprecated_in_fovor_of, :integer
     add_column :datatables, :deprecation_notice, :text

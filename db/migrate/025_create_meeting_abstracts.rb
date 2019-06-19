@@ -1,4 +1,4 @@
-class CreateMeetingAbstracts < ActiveRecord::Migration
+class CreateMeetingAbstracts < ActiveRecord::Migration[4.2]
   def self.up
     create_table :meeting_abstracts do |t|
       t.column :title, :text

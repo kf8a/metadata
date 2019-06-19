@@ -1,7 +1,7 @@
-class ExtractExcerptLimit < ActiveRecord::Migration
+class ExtractExcerptLimit < ActiveRecord::Migration[4.2]
   def self.up
     add_column :datatables, :excerpt_limit, :integer
-    
+
     Datatable.reset_column_information
     Datatable.all.each do | table |
       table.excerpt_limit = 50

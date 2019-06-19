@@ -1,4 +1,4 @@
-class AddLotsOfIndexes < ActiveRecord::Migration
+class AddLotsOfIndexes < ActiveRecord::Migration[4.2]
   def self.up
     add_index :affiliations,            :person_id
     add_index :affiliations,            :role_id

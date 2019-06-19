@@ -1,4 +1,4 @@
-class VisualizationOrder < ActiveRecord::Migration
+class VisualizationOrder < ActiveRecord::Migration[4.2]
   def self.up
     add_column :visualizations, :weight, :integer
   end

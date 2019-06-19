@@ -1,4 +1,4 @@
-class CreateEmlDocs < ActiveRecord::Migration
+class CreateEmlDocs < ActiveRecord::Migration[4.2]
   def self.up
     create_table :eml_docs do |t|
     end

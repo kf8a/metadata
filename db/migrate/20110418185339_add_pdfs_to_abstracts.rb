@@ -1,4 +1,4 @@
-class AddPdfsToAbstracts < ActiveRecord::Migration
+class AddPdfsToAbstracts < ActiveRecord::Migration[4.2]
   def self.up
     add_column :meeting_abstracts, :pdf_file_name,    :string
     add_column :meeting_abstracts, :pdf_content_type, :string

@@ -1,4 +1,4 @@
-class CreateCitationTypes < ActiveRecord::Migration
+class CreateCitationTypes < ActiveRecord::Migration[4.2]
   def self.up
     create_table :citation_types do |t|
       t.string :abbreviation

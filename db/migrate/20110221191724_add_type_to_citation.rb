@@ -1,4 +1,4 @@
-class AddTypeToCitation < ActiveRecord::Migration
+class AddTypeToCitation < ActiveRecord::Migration[4.2]
   def self.up
     add_column :citations, :type, :string
   end

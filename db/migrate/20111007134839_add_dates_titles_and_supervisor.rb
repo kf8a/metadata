@@ -1,4 +1,4 @@
-class AddDatesTitlesAndSupervisor < ActiveRecord::Migration
+class AddDatesTitlesAndSupervisor < ActiveRecord::Migration[4.2]
   def self.up
     add_column :affiliations, :supervisor, :string
     add_column :affiliations, :started_on, :date

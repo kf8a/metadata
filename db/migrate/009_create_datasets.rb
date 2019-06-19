@@ -1,4 +1,4 @@
-class CreateDatasets < ActiveRecord::Migration
+class CreateDatasets < ActiveRecord::Migration[4.2]
   def self.up
     create_table :datasets do |t|
       t.column :dataset, :string
@@ -9,10 +9,10 @@ class CreateDatasets < ActiveRecord::Migration
       t.column :initiated, :date
       t.column :completed, :date
       t.column :released, :date
-      t.column :on_web, :boolean, :default => true  
+      t.column :on_web, :boolean, :default => true
       t.column :version, :int
     end
-    
+
     create_table "protocols", :force => true do |t|
        t.string  "name"
        t.string  "title"

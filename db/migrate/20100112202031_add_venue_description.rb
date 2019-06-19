@@ -1,4 +1,4 @@
-class AddVenueDescription < ActiveRecord::Migration
+class AddVenueDescription < ActiveRecord::Migration[4.2]
   def self.up
     add_column :venue_types, :description, :text
   end

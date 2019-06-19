@@ -1,4 +1,4 @@
-class AddDecisionToPermission < ActiveRecord::Migration
+class AddDecisionToPermission < ActiveRecord::Migration[4.2]
   def self.up
     add_column :permissions, :decision, :string
   end

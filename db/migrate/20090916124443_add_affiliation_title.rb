@@ -1,4 +1,4 @@
-class AddAffiliationTitle < ActiveRecord::Migration
+class AddAffiliationTitle < ActiveRecord::Migration[4.2]
   def self.up
     add_column :affiliations, :title, :string
   end

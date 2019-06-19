@@ -1,4 +1,4 @@
-class CreateScribbles < ActiveRecord::Migration
+class CreateScribbles < ActiveRecord::Migration[4.2]
   def self.up
     create_table :scribbles do |t|
       t.integer :person_id
@@ -8,7 +8,7 @@ class CreateScribbles < ActiveRecord::Migration
     Scribble.reset_column_information
     protocols = Protocol.all
     protocols.each do |protocol|
-      Scribble.create({:protocol_id => protocol.id, 
+      Scribble.create({:protocol_id => protocol.id,
           :person_id => protocol.person_id, :order => 1})
     end
   end

@@ -1,4 +1,4 @@
-class ConvertCitationsToType < ActiveRecord::Migration
+class ConvertCitationsToType < ActiveRecord::Migration[4.2]
   def self.up
     book_type = CitationType.find_by_name('book')
     Citation.all.each do |citation|

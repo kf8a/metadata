@@ -1,4 +1,4 @@
-class DatasetsThemes < ActiveRecord::Migration
+class DatasetsThemes < ActiveRecord::Migration[4.2]
   def self.up
     create_table :datasets_themes, :id => false do  |t|
       t.column :theme_id, :int

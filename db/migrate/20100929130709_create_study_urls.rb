@@ -1,4 +1,4 @@
-class CreateStudyUrls < ActiveRecord::Migration
+class CreateStudyUrls < ActiveRecord::Migration[4.2]
   def self.up
     create_table :study_urls do |t|
       t.integer :website_id

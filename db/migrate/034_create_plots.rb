@@ -1,4 +1,4 @@
-class CreatePlots < ActiveRecord::Migration
+class CreatePlots < ActiveRecord::Migration[4.2]
   def self.up
     create_table :plots do |t|
       t.column :name, :string

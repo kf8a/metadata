@@ -1,4 +1,4 @@
-class StudyHasManyDatasets < ActiveRecord::Migration
+class StudyHasManyDatasets < ActiveRecord::Migration[4.2]
   def self.up
     add_column :datasets, :study_id, :integer
   end

@@ -1,4 +1,4 @@
-class AddMeetingAbstractType < ActiveRecord::Migration
+class AddMeetingAbstractType < ActiveRecord::Migration[4.2]
   def up
     add_column :meeting_abstracts, :meeting_abstract_type_id, :integer
     create_table :meeting_abstract_types do |t|

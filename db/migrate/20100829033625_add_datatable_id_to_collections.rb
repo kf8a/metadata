@@ -1,4 +1,4 @@
-class AddDatatableIdToCollections < ActiveRecord::Migration
+class AddDatatableIdToCollections < ActiveRecord::Migration[4.2]
   def self.up
     add_column :collections, :datatable_id, :integer
   end

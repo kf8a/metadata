@@ -1,4 +1,4 @@
-class CreateCitations < ActiveRecord::Migration
+class CreateCitations < ActiveRecord::Migration[4.2]
   def self.up
     create_table :citations do |t|
       t.text :title

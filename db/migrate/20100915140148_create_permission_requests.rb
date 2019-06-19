@@ -1,4 +1,4 @@
-class CreatePermissionRequests < ActiveRecord::Migration
+class CreatePermissionRequests < ActiveRecord::Migration[4.2]
   def self.up
     create_table :permission_requests do |t|
       t.integer :datatable_id

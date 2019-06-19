@@ -1,4 +1,4 @@
-class CreateThemes < ActiveRecord::Migration
+class CreateThemes < ActiveRecord::Migration[4.2]
   def self.up
     create_table :themes do |t|
       t.column :title, :string

@@ -1,15 +1,15 @@
-class AddSourcesToPublications < ActiveRecord::Migration
+class AddSourcesToPublications < ActiveRecord::Migration[4.2]
   def self.up
     add_column :publications, :source_id, :integer
     add_column :publications, :parent_id, :integer
-    
+
     # Paperclip
     add_column :publications, :content_type, :string
     add_column :publications, :filename, :string
     add_column :publications, :size, :integer
     add_column :publications, :width, :integer
     add_column :publications, :height, :integer
-    
+
     create_table :sources do |t|
         t.column :title, :string
     end

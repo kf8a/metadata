@@ -1,4 +1,4 @@
-class AddSuffixToEditors < ActiveRecord::Migration
+class AddSuffixToEditors < ActiveRecord::Migration[4.2]
   def self.up
     add_column :editors, :suffix, :string
   end
