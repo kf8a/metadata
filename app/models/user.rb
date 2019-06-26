@@ -1,26 +1,19 @@
+# frozen_string_literal: true
+
 # Members who are able to log in and do things on the site.
 class User < ApplicationRecord
-  include Clearance::User
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable,
+         :recoverable, :rememberable, :validatable
 
-  ROLES = %w(admin editor uploader).freeze
+  ROLES = %w[admin editor uploader].freeze
 
-  validates :email, presence: true, unless: :email_optional?
-  validates :email,
-            allow_blank: true,
-            uniqueness: { case_sensitive: false,
-                          message: 'Sorry, this email account is already registered.'\
-                                   ' Please sign up with a different email'\
-                                   " or <a href='/sign_in'>Sign In</a> using this email account" }
-  validates :email, format: /\A.+@.+\..+\z/, allow_blank: true
-
-  validates :password, presence: true, unless: :password_optional?
-  validates :password, confirmation: true
-
-  has_many :permissions
-  has_many :ownerships
+  has_many :permissions, dependent: :destroy
+  has_many :memberships, dependent: :destroy
   has_many :datatables, through: :ownerships
 
-  has_many :memberships
+  has_many :ownerships, dependent: :destroy
   has_many :sponsors, through: :memberships
 
   scope :by_email, -> { order 'email' }
