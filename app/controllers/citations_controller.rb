@@ -8,7 +8,7 @@ class CitationsController < ApplicationController
 
   respond_to :html, :json
   layout :site_layout
-  before_action :require_login, except: \
+  before_action :authenticate_user!, except: \
     %i[index show search index_by_doi index_by_treatment download filtered]
   before_action :admin?, only: %i[new create edit update destroy]
 
@@ -17,7 +17,7 @@ class CitationsController < ApplicationController
   has_scope :by_date,   as: :date
 
   def index
-    store_location
+    store_location_for(:user, citations_path
     # Try to remove extra null bytes from user submitted strings
     citations = citations_by_type(params[:type])
 
@@ -104,7 +104,7 @@ class CitationsController < ApplicationController
   def show
     @citation = Citation.find(params[:id].to_i)
     @website = website
-    store_location
+    store_location_for(:user, params[:id].to_i)
     file_title = @citation.file_title
     respond_to do |format|
       format.html

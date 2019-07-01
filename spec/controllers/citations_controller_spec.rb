@@ -167,7 +167,6 @@ describe CitationsController, type: :controller do
   describe 'filtering of citations' do
     before(:each) do
       @website = Website.find_or_create_by(name: 'lter')
-      sign_out
 
       author1 = FactoryBot.create(:author, sur_name: 'Zebedee', seniority: 1)
       @citation1 = ArticleCitation.new

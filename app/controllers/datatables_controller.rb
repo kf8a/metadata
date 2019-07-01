@@ -17,7 +17,7 @@ class DatatablesController < ApplicationController
   def index
     @website = website
     @area = params[:area]
-    store_location
+    store_location_for(:user, datatables_path)
     retrieve_datatables('')
 
     respond_with @datatables do |format|
@@ -39,7 +39,8 @@ class DatatablesController < ApplicationController
   def show
     @website = website
 
-    store_location # in case we have to log in and come back here
+    store_location_for(:user, citations_path(params[:id].to_i))
+
     if valid_dataset_request?(@subdomain_request)
       respond_to do |format|
         format.html
