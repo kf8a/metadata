@@ -4,7 +4,7 @@
 class AbstractsController < ApplicationController
   include FileSource
 
-  before_action :require_login, except: %i[index show download]
+  before_action :authenticate_user!, except: %i[index show download]
   before_action :admin?, except: %i[index show download]
 
   # GET meeting_abstracts

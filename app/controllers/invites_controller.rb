@@ -1,6 +1,6 @@
 # Controls the invite interface
 class InvitesController < ApplicationController
-  before_action :require_login
+  before_action :authenticate_user!
   before_action :admin?
   before_action :invite, only: [:show, :edit, :update, :destroy, :send_invitation]
 
