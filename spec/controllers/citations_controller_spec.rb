@@ -140,30 +140,30 @@ describe CitationsController, type: :controller do
 
   it 'redirects to sign in on GET: new' do
     get :new
-    expect(response).to redirect_to '/sign_in'
+    expect(response).to redirect_to '/users/sign_in'
   end
 
   it 'redirects to sign in on POST :create' do
     post :create
-    expect(response).to redirect_to '/sign_in'
+    expect(response).to redirect_to '/users/sign_in'
   end
 
   it 'redirects to sign in on GET :edit' do
     citation = FactoryBot.create :citation
     get :edit, params: { id: citation }
-    expect(response).to redirect_to '/sign_in'
+    expect(response).to redirect_to '/users/sign_in'
   end
 
   it 'redirects to sign in on PUT :update' do
     citation = FactoryBot.create :citation
     put :update, params: { id: citation, citation: { title: 'New title' } }
-    expect(response).to redirect_to '/sign_in'
+    expect(response).to redirect_to '/users/sign_in'
   end
 
   it 'redirects to sign in on DELETE' do
     citation = FactoryBot.create :citation
     delete :destroy, params: { id: citation }
-    expect(response).to redirect_to '/sign_in'
+    expect(response).to redirect_to '/users/sign_in'
   end
 
   describe 'filtering of citations' do
