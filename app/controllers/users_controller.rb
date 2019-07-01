@@ -1,6 +1,6 @@
 # handler interaction with the user class
 class UsersController < Clearance::UsersController
-  before_action :require_login, except: %i[index show]
+  before_action :authenticate_user!, except: %i[index show]
   protect_from_forgery except: :show
 
   def index; end

@@ -2,7 +2,7 @@
 class ProtocolsController < ApplicationController
   include FileSource
 
-  before_action :require_login, except: [:index, :show, :download]
+  before_action :authenticate_user!, except: [:index, :show, :download]
   before_action :admin?, except: [:index, :show, :download]
   before_action :protocol, only: [:edit, :update, :destroy]
 

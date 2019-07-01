@@ -2,7 +2,7 @@
 class DatatablesController < ApplicationController
   helper_method :datatable
 
-  before_action :require_login, except: %i[index show suggest search qc]
+  before_action :authenticate_user!, except: %i[index show suggest search qc]
   before_action :admin?, except: %i[index show suggest search qc]
   # run before filter to prevent non-members from downloading
   before_action :can_download?, only: :show,

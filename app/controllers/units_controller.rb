@@ -2,7 +2,6 @@
 
 # Display units. This is not used much
 class UnitsController < ApplicationController
-  before_action :require_login, except: %i[index show]
   before_action :admin?, except: %i[index show]
   before_action :unit, only: %i[edit update show]
   before_action :custom_unit?, only: %i[edit update]

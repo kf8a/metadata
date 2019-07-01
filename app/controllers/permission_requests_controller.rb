@@ -1,6 +1,6 @@
 # Controller for permissions, creates a new permission entry
 class PermissionRequestsController < ApplicationController
-  before_action :require_login
+  before_action :authenticate_user!
 
   respond_to :js
 

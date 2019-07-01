@@ -2,8 +2,8 @@
 # a controller to manage templates that skin the system
 # we have not used this at all
 class TemplatesController < ApplicationController
-  before_action :require_login, except: [:index, :show]
-  before_action :admin?, except: [:index, :show]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :admin?, except: %i[index show]
   respond_to :html, :xml, :json
 
   def index

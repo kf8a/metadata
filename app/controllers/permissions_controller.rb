@@ -1,6 +1,6 @@
 # add and remove permissions for datatables
 class PermissionsController < ApplicationController
-  before_action :require_login, except: [:index]
+  before_action :authenticate_user!, except: [:index]
   before_action :require_datatable, :require_owner, except: [:index]
 
   def index

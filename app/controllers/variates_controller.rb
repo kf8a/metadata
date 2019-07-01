@@ -1,9 +1,11 @@
+# frozen_string_literal: true%i
+
 # Display variates, this is not used much and might
 # be deleted
 class VariatesController < ApplicationController
-  before_action :require_login, except: [:index, :show]
-  before_action :admin?, except: [:index, :show]
-  before_action :variate, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :admin?, except: %i[index show]
+  before_action :variate, only: %i[show edit update destroy]
 
   # GET /variates
   # GET /variates.xml
