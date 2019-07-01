@@ -75,7 +75,6 @@ group :development, :test do
   gem 'byebug'
   gem 'minitest'
   gem 'minitest-reporters', '>= 0.5.0'
-  gem 'spring'
 
   gem 'rspec-its'
   gem 'rspec-rails'
@@ -85,13 +84,8 @@ end
 group :test do
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
-  gem 'shoulda' # , git: 'https://github.com/thoughtbot/shoulda.git'
+  gem 'shoulda'
   gem 'shoulda-matchers' # to use rspec like syntax
 
-  # Cucumber stuff
-  # gem 'capybara'
-  # gem 'cucumber-rails' , :require => false
-  # gem 'pickle'
-  # gem 'selenium-webdriver'
   gem 'database_cleaner'
 end
