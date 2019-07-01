@@ -17,7 +17,7 @@ class CitationsController < ApplicationController
   has_scope :by_date,   as: :date
 
   def index
-    store_location_for(:user, citations_path
+    store_location_for(:user, citations_path)
     # Try to remove extra null bytes from user submitted strings
     citations = citations_by_type(params[:type])
 

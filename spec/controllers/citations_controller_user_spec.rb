@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe CitationsController, type: :controller  do
+describe CitationsController, type: :controller do
   render_views
 
   describe 'signed in user' do
