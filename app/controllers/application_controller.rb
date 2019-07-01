@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   layout :site_layout
 
   before_action :set_crumbs, :set_subdomain_request, :extra_views, :set_title
-  before_action :require_login, except: %i[index show suggest search]
+  before_action :authenticate_user!, except: %i[index show suggest search]
 
   respond_to :html, :json
 

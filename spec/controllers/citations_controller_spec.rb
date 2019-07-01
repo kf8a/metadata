@@ -267,7 +267,7 @@ describe CitationsController, type: :controller do
 
   describe 'authenticated ' do
     before(:each) do
-      sign_in_as(FactoryBot.create(:admin_user))
+      sign_in(FactoryBot.create(:admin_user))
     end
 
     it 'creates citations from json data' do

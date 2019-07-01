@@ -4,7 +4,7 @@ describe StudiesController, type: :controller do
   render_views
 
   before(:each) do
-    sign_in_as(FactoryBot.create(:admin_user))
+    sign_in(FactoryBot.create(:admin_user))
     # @controller.current_user = FactoryBot.create :admin_user
   end
 

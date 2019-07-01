@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
@@ -30,6 +32,9 @@ require 'paperclip/matchers'
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  config.include Devise::Test::IntegrationHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -52,14 +57,4 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
-end
-
-def signed_in_as_admin
-  admin = User.where(email: 'admin@example.com').first || FactoryBot.create(:admin_user, email: 'admin@example.com')
-  sign_in_as(admin)
-end
-
-def signed_in_as_normal_user
-  user = User.where(email: 'normal_user@example.com').first || FactoryBot.create(:user, email: 'normal_user@example.com')
-  sign_in_as(user)
 end
