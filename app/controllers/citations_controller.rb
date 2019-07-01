@@ -141,9 +141,11 @@ class CitationsController < ApplicationController
 
   def download
     head(:not_found) && return unless (citation = Citation.find_by(id: params[:id]))
-    deny_access && return unless citation.open_access || signed_in?
-
-    send_citation(citation)
+    if citation.open_access || user_signed_in?
+      send_citation(citation)
+    else
+      redirect_to new_user_session_url
+    end
   end
 
   def biblio; end

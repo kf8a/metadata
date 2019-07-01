@@ -126,7 +126,7 @@ describe CitationsController, type: :controller do
     @citation = FactoryBot.create :citation
     get :download, params: { id: @citation }
 
-    expect(response).to redirect_to '/sign_in'
+    expect(response).to redirect_to '/users/sign_in'
   end
 
   it 'allows access to an open access publication' do
