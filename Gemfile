@@ -14,7 +14,7 @@ gem 'devise'
 gem 'formtastic'
 gem 'kramdown', '~> 2.1'
 gem 'nokogiri'
-gem 'paperclip', '~> 5.2'
+gem 'paperclip' #, '~> 5.2'
 gem 'pg'
 gem 'rake', '< 11.0'
 gem 'RedCloth'
@@ -43,7 +43,7 @@ gem 'ris_parser', git: 'https://github.com/kf8a/ris_parser.git'
 gem 'mysql2', platform: :ruby
 gem 'thinking-sphinx'
 
-gem 'aws-sdk', '~> 2.3.0'
+gem 'aws-sdk-s3' , '~> 1'
 
 gem 'sitemap_generator'
 
@@ -64,15 +64,13 @@ gem 'awesome_print'
 
 group :development do
   gem 'bcrypt_pbkdf'
-  # gem  'bcrypt_pbkdf' # (>= 1.0, < 2.0)
   gem 'capistrano', '~>2'
   gem 'ed25519'
-  gem 'rbnacl', '< 5.0'
+  gem 'rbnacl' # , '< 5.0'
   gem 'rbnacl-libsodium'
 end
 
 group :development, :test do
-  gem 'byebug'
   gem 'minitest'
   gem 'minitest-reporters', '>= 0.5.0'
 
@@ -84,7 +82,7 @@ end
 group :test do
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
-  gem 'shoulda'
+  gem 'shoulda', '>= 3.0'
   gem 'shoulda-matchers' # to use rspec like syntax
 
   gem 'database_cleaner'
