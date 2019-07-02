@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe DataQuery do
@@ -9,7 +11,7 @@ describe DataQuery do
     it 'yields several times' do
       query = 'select * from datatables'
       i = 0
-      DataQuery.find_in_batches_as_csv(query, {batch_size: 8}) do |a|
+      DataQuery.find_in_batches_as_csv(query, batch_size: 8) do
         i += 1
       end
       assert i == 7
