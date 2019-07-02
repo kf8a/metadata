@@ -1,9 +1,14 @@
+# frozen_string_literal: true
+
 require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 
 describe UnitsController, type: :controller  do
   before do
     user = User.new
     allow(user).to receive(:admin?).and_return(true)
+    # allow(request.env['warden']).to receive(:authenticate!).and_return(user)
+    # allow(controller).to receive(:current_user).and_return(user)
+
     sign_in user
 
     @unit = Unit.new
