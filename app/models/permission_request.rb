@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A request to access a datatable
 class PermissionRequest < ApplicationRecord
   belongs_to :user

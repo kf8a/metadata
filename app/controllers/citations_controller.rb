@@ -93,14 +93,11 @@ class CitationsController < ApplicationController
   def filtered
     @type = params[:type]
     @sort_by = params[:sort_by]
-    p website.citations
 
     @citations = apply_scopes(website.citations)
     @submitted_citations = @citations.submitted
     @forthcoming_citations = @citations.forthcoming
     @citations = @citations.published
-
-    p @citations
 
     index_responder
   end

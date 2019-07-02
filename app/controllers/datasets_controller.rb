@@ -116,7 +116,7 @@ class DatasetsController < ApplicationController
 
   # PUT /datasets/1
   def update
-    if dataset.update_attributes(dataset_params)
+    if dataset.update(dataset_params)
       # params[:files].each do |file|
       #   dataset.dataset_files.create(data: file)
       # end
@@ -154,6 +154,7 @@ class DatasetsController < ApplicationController
   def allow_on_web
     dataset_id = params[:id]
     return unless dataset_id
+
     if dataset_id =~ /KBS\d\d\d/
       dataset_id = Dataset.find_by(dataset: dataset_id)
     end
@@ -164,6 +165,7 @@ class DatasetsController < ApplicationController
   def collect_and_normalize_studies(datasets)
     @studies = datasets.collect do |dataset|
       next unless dataset.on_web
+
       dataset.studies
     end
     @studies.flatten!
@@ -181,8 +183,9 @@ class DatasetsController < ApplicationController
                                     :initiated, :completed, :released,
                                     :on_web, :core_dataset, :project_id,
                                     :metacat_id, :sponsor_id, :website_id,
-                                    :keyword_list, affiliations_attributes: [],
-                                    dataset_files_attributes: [:name, :data, :_destroy, :id])
+                                    :keyword_list,
+                                    affiliations_attributes: [],
+                                    dataset_files_attributes: %i[name data _destroy id])
   end
 
   def dataset_roles

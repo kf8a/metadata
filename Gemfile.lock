@@ -325,6 +325,9 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
     workflow (2.0.2)
+    workflow-activerecord (4.1.7)
+      activerecord (>= 3.0, < 6.1)
+      workflow (~> 2.0)
 
 PLATFORMS
   ruby
@@ -380,6 +383,7 @@ DEPENDENCIES
   unicorn
   web-console
   workflow
+  workflow-activerecord
 
 BUNDLED WITH
    1.17.2

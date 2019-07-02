@@ -28,6 +28,7 @@ gem 'awesome_nested_set'
 gem 'jquery-rails'
 
 gem 'workflow'
+gem 'workflow-activerecord'
 
 gem 'parslet'
 
