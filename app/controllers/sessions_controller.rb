@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 # create new session for logging in
-class SessionsController < Clearance::SessionsController
+class SessionsController < Devise::SessionsController
   def new; end
 
   def create
@@ -12,7 +14,7 @@ class SessionsController < Clearance::SessionsController
       end
     end
 
-    super # let clearance handle it
+    super # let devise handle it
   end
 
   private
