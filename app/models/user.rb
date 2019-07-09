@@ -5,15 +5,16 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :trackable, :timeoutable
 
   ROLES = %w[admin editor uploader].freeze
 
   has_many :permissions, dependent: :destroy
   has_many :memberships, dependent: :destroy
+  has_many :ownerships, dependent: :destroy
+
   has_many :datatables, through: :ownerships
 
-  has_many :ownerships, dependent: :destroy
   has_many :sponsors, through: :memberships
 
   scope :by_email, -> { order 'email' }
