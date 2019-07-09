@@ -5,8 +5,8 @@
 
 <p>
   Reports associated with KBS LTER. Click on the pdf link to get open access papers
-  or to <%= link_to new_user_session_path, "sign-in"%> (free and immediate) to get other reports.
+  or to <%= link_to 'sign-in', new_user_session_path %> (free and immediate) to get other reports.
 </p>
-<%= render 'search_form', :word => @word, :type => @type, :sort_by => @sort_by %>
+<%= render 'search_form', word: @word, type: @type, sort_by: @sort_by %>
 
 <%= render partial: 'index' %>
