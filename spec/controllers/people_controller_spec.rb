@@ -33,19 +33,19 @@ describe PeopleController, type: :controller  do
 
     it 'GET new' do
       get :new
-      expect(response).to redirect_to('/users/sign_in')
+      expect(response).to redirect_to('/user/sign_in')
     end
 
     it 'GET edit' do
       get :edit, params: { id: 1 }
 
-      expect(response).to redirect_to('/users/sign_in')
+      expect(response).to redirect_to('/user/sign_in')
     end
 
     it 'DESTROY' do
       delete :destroy, params: { id: 1 }
 
-      expect(response).to redirect_to('/users/sign_in')
+      expect(response).to redirect_to('/user/sign_in')
     end
 
     it 'POST: update' do
@@ -66,7 +66,7 @@ describe PeopleController, type: :controller  do
                                                   'friendly_name' => 'Mike',
                                                   'middle_name' => '',
                                                   'email' => 'grillom1@msu.edu' } }
-      expect(response).to redirect_to('/users/sign_in')
+      expect(response).to redirect_to('/user/sign_in')
     end
 
     context 'GET: show' do
