@@ -1,4 +1,4 @@
-class DatasetsStudies < ActiveRecord::Migration
+class DatasetsStudies < ActiveRecord::Migration[4.2]
   def self.up
     create_table :datasets_studies, :id => false do |t|
       t.integer :dataset_id

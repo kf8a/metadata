@@ -1,4 +1,4 @@
-class CreateMeasurementScales < ActiveRecord::Migration
+class CreateMeasurementScales < ActiveRecord::Migration[4.2]
   def self.up
     create_table :measurement_scales do |t|
 

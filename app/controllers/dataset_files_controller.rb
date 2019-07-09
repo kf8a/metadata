@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DatasetFilesController < ApplicationController
   include FileSource
   def show

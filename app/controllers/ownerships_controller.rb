@@ -1,7 +1,6 @@
 # Controller for Ownership interface
 class OwnershipsController < ApplicationController
-  before_action :require_login
-  before_action :admin? 
+  before_action :admin?
 
   def index
     @datatables = Datatable.by_name

@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 Metadata::Application.routes.draw do
+  devise_for :user
 
   match '/send_invitation/:id' => 'invites#send_invitation', :as => :send_invitation, via: [:get]
   match '/signup/:invite_code' => 'users#new', :as => :redeem_invitation, via: [:get]
   get '/pub/:id', to: 'citations#download'
 
-  resource :session, controller: 'sessions'
   resource :users
 
   resources :abstracts do
@@ -91,14 +93,8 @@ Metadata::Application.routes.draw do
   match '/termsofuse/:id' => 'sponsors#show', via: [:get]
   match '/termsofuse' => 'sponsors#index', via: [:get]
 
-  post '/studies/:id/move_to/:parent_id' => 'studies#move_to'
-  post '/studies/:id/move_before/:parent_id' => 'studies#move_before'
   resources :studies
-  resources :templates
 
-  post '/themes/:id/move_to/:parent_id' => 'themes#move_to'
-  post '/themes/:id/move_before/:parent_id' => 'themes#move_before'
-  resources :themes
   resources :units
   resources :uploads
   resources :variates

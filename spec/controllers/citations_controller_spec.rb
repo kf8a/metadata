@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe CitationsController, type: :controller do
@@ -124,7 +126,7 @@ describe CitationsController, type: :controller do
     @citation = FactoryBot.create :citation
     get :download, params: { id: @citation }
 
-    expect(response).to redirect_to '/sign_in'
+    expect(response).to redirect_to '/user/sign_in'
   end
 
   it 'allows access to an open access publication' do
@@ -138,36 +140,35 @@ describe CitationsController, type: :controller do
 
   it 'redirects to sign in on GET: new' do
     get :new
-    expect(response).to redirect_to '/sign_in'
+    expect(response).to redirect_to '/user/sign_in'
   end
 
   it 'redirects to sign in on POST :create' do
     post :create
-    expect(response).to redirect_to '/sign_in'
+    expect(response).to redirect_to '/user/sign_in'
   end
 
   it 'redirects to sign in on GET :edit' do
     citation = FactoryBot.create :citation
     get :edit, params: { id: citation }
-    expect(response).to redirect_to '/sign_in'
+    expect(response).to redirect_to '/user/sign_in'
   end
 
   it 'redirects to sign in on PUT :update' do
     citation = FactoryBot.create :citation
     put :update, params: { id: citation, citation: { title: 'New title' } }
-    expect(response).to redirect_to '/sign_in'
+    expect(response).to redirect_to '/user/sign_in'
   end
 
   it 'redirects to sign in on DELETE' do
     citation = FactoryBot.create :citation
     delete :destroy, params: { id: citation }
-    expect(response).to redirect_to '/sign_in'
+    expect(response).to redirect_to '/user/sign_in'
   end
 
   describe 'filtering of citations' do
     before(:each) do
       @website = Website.find_or_create_by(name: 'lter')
-      sign_out
 
       author1 = FactoryBot.create(:author, sur_name: 'Zebedee', seniority: 1)
       @citation1 = ArticleCitation.new
@@ -267,7 +268,7 @@ describe CitationsController, type: :controller do
 
   describe 'authenticated ' do
     before(:each) do
-      sign_in_as(FactoryBot.create(:admin_user))
+      sign_in(FactoryBot.create(:admin_user))
     end
 
     it 'creates citations from json data' do

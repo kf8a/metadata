@@ -5,7 +5,7 @@ class PeopleController < ApplicationController
   open_actions = %i[index show alphabetical emeritus lno]
 
   helper_method :people, :person
-  before_action :require_login, except: open_actions
+  before_action :authenticate_user!, except: open_actions
   before_action :admin?, except: open_actions
 
   # GET /people

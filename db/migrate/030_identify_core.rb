@@ -1,4 +1,4 @@
-class IdentifyCore < ActiveRecord::Migration
+class IdentifyCore < ActiveRecord::Migration[4.2]
   def self.up
     add_column "datasets", "core_dataset", :boolean, :default => false
   end

@@ -3,7 +3,7 @@
 # Handle display of projects
 # TODO: Do we need to keep this since we don't use it
 class ProjectsController < ApplicationController
-  before_action :require_login, except: %i[index show]
+  before_action :authenticate_user!, except: %i[index show]
   before_action :admin?, except: %i[index show]
   before_action :project, only: %i[show edit update destroy]
 

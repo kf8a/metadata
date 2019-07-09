@@ -1,4 +1,4 @@
-class AddTemporalExtentToDatatable < ActiveRecord::Migration
+class AddTemporalExtentToDatatable < ActiveRecord::Migration[4.2]
   def self.up
     add_column :datatables, :begin_date, :date
     add_column :datatables, :end_date, :date

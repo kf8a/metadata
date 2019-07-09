@@ -19,85 +19,85 @@ describe Dataset do
   end
 
   describe 'eml importation' do
-    before(:each) do
-      website = FactoryBot.create(:website)
-      datatable = FactoryBot.create(:datatable)
-      datatable.dataset = FactoryBot.create(:dataset,
-                                            website_id: website.id,
-                                            initiated: Time.zone.today,
-                                            completed: Time.zone.today)
-      @dataset_with_datatable = datatable.dataset
-      assert datatable.valid_for_eml?
-    end
-
-    it 'should create a dataset from eml' do
-      eml_content = @dataset_with_datatable.to_eml
-      imported_dataset = Dataset.from_eml(eml_content)
-      expect(imported_dataset).to be_a Dataset
-    end
-
-    it 'should import protocols' do
-      new_protocol = FactoryBot.create(:protocol, title: 'EML Protocol')
-      @dataset_with_datatable.protocols << new_protocol
-      @dataset_with_datatable.website = Website.first
-      @dataset_with_datatable.save
-      eml_content = @dataset_with_datatable.to_eml
-      imported_dataset = Dataset.from_eml(eml_content)
-      expect(imported_dataset.protocols).to include(new_protocol)
-    end
-
-    it 'should import the right title' do
-      @dataset_with_datatable.title = 'The right title'
-      eml_content = @dataset_with_datatable.to_eml
-      imported_dataset = Dataset.from_eml(eml_content)
-      expect(imported_dataset.title).to eq 'The right title at the Kellogg Biological Station, Hickory Corners, MI '
-    end
-
-    it 'should import the right abstract' do
-      @dataset_with_datatable.abstract = 'The right abstract'
-      eml_content = @dataset_with_datatable.to_eml
-      imported_dataset = Dataset.from_eml(eml_content)
-      expect(imported_dataset.abstract).to match /The right abstract/ #it will be textilized
-    end
-
-    it 'should import the right dates' do
-      @dataset_with_datatable.initiated = Date.parse('1-2-1988')
-      @dataset_with_datatable.completed = Date.parse('3-4-1990')
-      eml_content = @dataset_with_datatable.to_eml
-      imported_dataset = Dataset.from_eml(eml_content)
-      expect(imported_dataset.initiated).to eq @dataset_with_datatable.initiated
-      expect(imported_dataset.completed).to eq @dataset_with_datatable.completed
-    end
-
-    it 'should import the right people' do
-      role = FactoryBot.create(:role, name: 'tester')
-      jon = FactoryBot.create(:person, given_name: 'jon')
-      jon.roles << role
-      expect(jon).to be_valid
-
-      @dataset_with_datatable.datatables.first.people << jon
-
-      assert @dataset_with_datatable.save
-      eml_content = @dataset_with_datatable.to_eml
-      imported_dataset = Dataset.from_eml(eml_content)
-      expect(imported_dataset.people.where(given_name: 'jon')).to_not be_empty
-    end
-
-    it 'should import the right datatable' do
-      expect(@dataset_with_datatable.datatables.collect{ |table| table.valid_for_eml? }).to eq [true]
-      eml_content = @dataset_with_datatable.to_eml
-      old_datatable_attributes = @dataset_with_datatable.datatables.first.attributes
-      @dataset_with_datatable.datatables.each {|table| table.variates.each {|var| var.destroy }}
-      @dataset_with_datatable.datatables.each {|table| table.destroy}
-      @dataset_with_datatable.destroy
-      imported_dataset = Dataset.from_eml(eml_content)
-      expect(imported_dataset).to be_valid
-      new_datatable_attributes = imported_dataset.datatables.first.attributes
-      keys_to_ignore = ['title','id', 'is_sql', 'data_url', 'dataset_id', 'object', 'theme_id', 'created_at', 'updated_at', 'name']
-      new_datatable_attributes.delete_if {|key, value| keys_to_ignore.include?(key) }
-      old_datatable_attributes.delete_if {|key, value| keys_to_ignore.include?(key) }
-      expect(new_datatable_attributes).to eq old_datatable_attributes
-    end
+    # before(:each) do
+    #   website = FactoryBot.create(:website)
+    #   datatable = FactoryBot.create(:datatable)
+    #   datatable.dataset = FactoryBot.create(:dataset,
+    #                                         website_id: website.id,
+    #                                         initiated: Time.zone.today,
+    #                                         completed: Time.zone.today)
+    #   @dataset_with_datatable = datatable.dataset
+    #   assert datatable.valid_for_eml?
+    # end
+    #
+    # it 'should create a dataset from eml' do
+    #   eml_content = @dataset_with_datatable.to_eml
+    #   imported_dataset = Dataset.from_eml(eml_content)
+    #   expect(imported_dataset).to be_a Dataset
+    # end
+    #
+    # it 'should import protocols' do
+    #   new_protocol = FactoryBot.create(:protocol, title: 'EML Protocol')
+    #   @dataset_with_datatable.protocols << new_protocol
+    #   @dataset_with_datatable.website = Website.first
+    #   @dataset_with_datatable.save
+    #   eml_content = @dataset_with_datatable.to_eml
+    #   imported_dataset = Dataset.from_eml(eml_content)
+    #   expect(imported_dataset.protocols).to include(new_protocol)
+    # end
+    #
+    # it 'should import the right title' do
+    #   @dataset_with_datatable.title = 'The right title'
+    #   eml_content = @dataset_with_datatable.to_eml
+    #   imported_dataset = Dataset.from_eml(eml_content)
+    #   expect(imported_dataset.title).to eq 'The right title at the Kellogg Biological Station, Hickory Corners, MI '
+    # end
+    #
+    # it 'should import the right abstract' do
+    #   @dataset_with_datatable.abstract = 'The right abstract'
+    #   eml_content = @dataset_with_datatable.to_eml
+    #   imported_dataset = Dataset.from_eml(eml_content)
+    #   expect(imported_dataset.abstract).to match /The right abstract/ #it will be textilized
+    # end
+    #
+    # it 'should import the right dates' do
+    #   @dataset_with_datatable.initiated = Date.parse('1-2-1988')
+    #   @dataset_with_datatable.completed = Date.parse('3-4-1990')
+    #   eml_content = @dataset_with_datatable.to_eml
+    #   imported_dataset = Dataset.from_eml(eml_content)
+    #   expect(imported_dataset.initiated).to eq @dataset_with_datatable.initiated
+    #   expect(imported_dataset.completed).to eq @dataset_with_datatable.completed
+    # end
+    #
+    # it 'should import the right people' do
+    #   role = FactoryBot.create(:role, name: 'tester')
+    #   jon = FactoryBot.create(:person, given_name: 'jon')
+    #   jon.roles << role
+    #   expect(jon).to be_valid
+    #
+    #   @dataset_with_datatable.datatables.first.people << jon
+    #
+    #   assert @dataset_with_datatable.save
+    #   eml_content = @dataset_with_datatable.to_eml
+    #   imported_dataset = Dataset.from_eml(eml_content)
+    #   expect(imported_dataset.people.where(given_name: 'jon')).to_not be_empty
+    # end
+    #
+    # it 'should import the right datatable' do
+    #   expect(@dataset_with_datatable.datatables.collect{ |table| table.valid_for_eml? }).to eq [true]
+    #   eml_content = @dataset_with_datatable.to_eml
+    #   old_datatable_attributes = @dataset_with_datatable.datatables.first.attributes
+    #   @dataset_with_datatable.datatables.each {|table| table.variates.each {|var| var.destroy }}
+    #   @dataset_with_datatable.datatables.each {|table| table.destroy}
+    #   @dataset_with_datatable.destroy
+    #   imported_dataset = Dataset.from_eml(eml_content)
+    #   expect(imported_dataset).to be_valid
+    #   new_datatable_attributes = imported_dataset.datatables.first.attributes
+    #   keys_to_ignore = ['title','id', 'is_sql', 'data_url', 'dataset_id', 'object', 'theme_id', 'created_at', 'updated_at', 'name']
+    #   new_datatable_attributes.delete_if {|key, value| keys_to_ignore.include?(key) }
+    #   old_datatable_attributes.delete_if {|key, value| keys_to_ignore.include?(key) }
+    #   expect(new_datatable_attributes).to eq old_datatable_attributes
+    # end
 
     # it 'should import a dataset from a website' do
     #   uri = 'http://metacat.lternet.edu:8080/knb/metacat?action=read&qformat=xml&docid=knb-lter-gce.113.13'

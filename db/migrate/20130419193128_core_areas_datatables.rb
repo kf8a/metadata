@@ -1,4 +1,4 @@
-class CoreAreasDatatables < ActiveRecord::Migration
+class CoreAreasDatatables < ActiveRecord::Migration[4.2]
   def up
     create_table :core_areas_datatables do |t|
       t.integer :core_area_id

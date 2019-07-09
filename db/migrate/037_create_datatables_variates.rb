@@ -1,4 +1,4 @@
-class CreateDatatablesVariates < ActiveRecord::Migration
+class CreateDatatablesVariates < ActiveRecord::Migration[4.2]
   def self.up
     create_table :datatables_variates do |t|
     end

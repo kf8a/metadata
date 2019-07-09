@@ -1,4 +1,4 @@
-class AddSecondaryTable < ActiveRecord::Migration
+class AddSecondaryTable < ActiveRecord::Migration[4.2]
   def self.up
     add_column :datatables, :is_secondary, :boolean, :default => false
     

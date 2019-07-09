@@ -1,4 +1,4 @@
-class DatatableToStudy < ActiveRecord::Migration
+class DatatableToStudy < ActiveRecord::Migration[4.2]
   def self.up
     add_column :datatables, :study_id, :integer
     

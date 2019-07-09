@@ -1,4 +1,4 @@
-class CreatePublications < ActiveRecord::Migration
+class CreatePublications < ActiveRecord::Migration[4.2]
   def self.up
     create_table :publications do |t|
       t.column :publication_type_id, :integer

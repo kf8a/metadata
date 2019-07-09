@@ -1,4 +1,4 @@
-class AddDatatableOrder < ActiveRecord::Migration
+class AddDatatableOrder < ActiveRecord::Migration[4.2]
   def self.up
     add_column :datatables, :weight, :integer, :default => 100
     rename_column :treatments, :priority, :weight

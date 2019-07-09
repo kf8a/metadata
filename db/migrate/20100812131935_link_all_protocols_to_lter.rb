@@ -1,4 +1,4 @@
-class LinkAllProtocolsToLter < ActiveRecord::Migration
+class LinkAllProtocolsToLter < ActiveRecord::Migration[4.2]
   def self.up
     website = Website.first
     if website

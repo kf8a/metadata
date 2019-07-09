@@ -4,7 +4,7 @@ require 'bibtex'
 
 # Reference for a publication of some sort
 class Citation < ApplicationRecord
-  include Workflow
+  include WorkflowActiverecord
 
   workflow_column :state
 

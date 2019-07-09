@@ -1,4 +1,4 @@
-class AddPdfToProtocols < ActiveRecord::Migration
+class AddPdfToProtocols < ActiveRecord::Migration[4.2]
   def change
     add_column :protocols, :pdf_file_name, :string
     add_column :protocols, :pdf_content_type, :string

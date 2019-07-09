@@ -1,4 +1,4 @@
-class DropUploadsTable < ActiveRecord::Migration
+class DropUploadsTable < ActiveRecord::Migration[4.2]
   def change
     drop_table :uploads
   end

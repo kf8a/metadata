@@ -33,24 +33,40 @@ describe PeopleController, type: :controller  do
 
     it 'GET new' do
       get :new
-      expect(response).to redirect_to('/sign_in')
+      expect(response).to redirect_to('/user/sign_in')
     end
 
     it 'GET edit' do
       get :edit, params: { id: 1 }
 
-      expect(response).to redirect_to('/sign_in')
+      expect(response).to redirect_to('/user/sign_in')
     end
 
     it 'DESTROY' do
       delete :destroy, params: { id: 1 }
 
-      expect(response).to redirect_to('/sign_in')
+      expect(response).to redirect_to('/user/sign_in')
     end
 
     it 'POST: update' do
-      put :update, params:  {id: '107', person:{"city"=>"Hickory Corners", "postal_code"=>"49060", "title"=>"", "lter_role_ids"=>["15"], "country"=>"USA", "sur_name"=>"Grillo (REU)", "url"=>"", "street_address"=>"", "given_name"=>"Michael", "sub_organization"=>"Kellogg Biological Station", "fax"=>"", "phone"=>"", "organization"=>"Michigan State University", "locale"=>"MI", "friendly_name"=>"Mike", "middle_name"=>"", "email"=>"grillom1@msu.edu"} }
-          expect(response).to redirect_to('/sign_in')
+      put :update, params: { id: '107', person: { 'city' => 'Hickory Corners',
+                                                  'postal_code' => '49060',
+                                                  'title' => '',
+                                                  'lter_role_ids' => ['15'],
+                                                  'country' => 'USA',
+                                                  'sur_name' => 'Grillo (REU)',
+                                                  'url' => '',
+                                                  'street_address' => '',
+                                                  'given_name' => 'Michael',
+                                                  'sub_organization' => 'Kellogg Biological Station',
+                                                  'fax' => '',
+                                                  'phone' => '',
+                                                  'organization' => 'Michigan State University',
+                                                  'locale' => 'MI',
+                                                  'friendly_name' => 'Mike',
+                                                  'middle_name' => '',
+                                                  'email' => 'grillom1@msu.edu' } }
+      expect(response).to redirect_to('/user/sign_in')
     end
 
     context 'GET: show' do

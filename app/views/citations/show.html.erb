@@ -69,7 +69,7 @@
       <% if signed_in? or @citation.open_access %>
         <%=link_to 'Get PDF', publication_url(@citation), :class=>'download-link'%>
       <% else %>
-        <%= link_to 'Sign in to download PDF', sign_in_path, :class=>'download-link'  %>
+        <%= link_to 'Sign in to download PDF', new_user_session_path, :class=>'download-link'  %>
       <% end %>
     <% end %>
 

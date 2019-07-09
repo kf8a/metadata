@@ -5,13 +5,12 @@ require 'subdomain_resolver'
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  include Clearance::Controller
   # include CentralLogger::Filter
 
   layout :site_layout
 
   before_action :set_crumbs, :set_subdomain_request, :extra_views, :set_title
-  before_action :require_login, except: %i[index show suggest search]
+  before_action :authenticate_user!, except: %i[index show suggest search]
 
   respond_to :html, :json
 

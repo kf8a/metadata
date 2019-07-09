@@ -1,4 +1,4 @@
-class AddMetadataId < ActiveRecord::Migration
+class AddMetadataId < ActiveRecord::Migration[4.2]
   def self.up
     add_column :datasets, :metacat_id, :integer
   end

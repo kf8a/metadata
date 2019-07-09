@@ -1,4 +1,4 @@
-class IsUtf8 < ActiveRecord::Migration
+class IsUtf8 < ActiveRecord::Migration[4.2]
   def self.up
     add_column :datatables, :is_utf_8, :boolean, :default=>false
   end

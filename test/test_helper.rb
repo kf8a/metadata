@@ -1,39 +1,25 @@
-ENV["RAILS_ENV"] = "test"
-require File.expand_path(File.dirname(__FILE__) + "../../config/environment")
+ENV['RAILS_ENV'] = 'test'
+require File.expand_path(File.dirname(__FILE__) + '../../config/environment')
 require 'rails/test_help'
 require 'shoulda'
-require 'factory_girl'
-#require 'clearance/testing'
-require 'clearance/test_unit'
-require "paperclip/matchers"
+require 'factory_bot'
+require 'paperclip/matchers'
 
-FactoryGirl.reload
+FactoryBot.reload
 
 require "#{Rails.root}/db/seeds.rb"
 
 class ActiveSupport::TestCase
-  # Every Active Record database supports transactions except MyISAM tables
-  # in MySQL.  Turn off transactional fixtures in this case; however, if you
-  # don't care one way or the other, switching from MyISAM to InnoDB tables
-  # is recommended.
-  self.use_transactional_fixtures = true
-
-  # Instantiated fixtures are slow, but give you @david where otherwise you
-  # would need people(:david).  If you don't want to migrate your existing
-  # test cases which use the @david style and don't mind the speed hit (each
-  # instantiated fixtures translates to a database query per test method),
-  # then set this back to true.
-  self.use_instantiated_fixtures  = false
 
   # Add more helper methods to be used by all tests here...
 
   def signed_in_as_admin
-    admin = User.find_by_role('admin') || FactoryGirl.create(:admin_user, :email => 'admin@example.com')
+    admin = User.find_by_role('admin') || FactoryBot.create(:admin_user, :email => 'admin@example.com')
     sign_in_as(admin)
   end
 
   def signed_in_as_normal_user
-    user = User.find_by_role('') || FactoryGirl.create(:user, :email => 'normal_user@example.com')
+    user = User.find_by_role('') || FactoryBot.create(:user, :email => 'normal_user@example.com')
     sign_in_as(user)
   end
 

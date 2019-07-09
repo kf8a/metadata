@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Permissions to download data
 class Permission < ApplicationRecord
   belongs_to :user
@@ -26,16 +28,19 @@ class Permission < ApplicationRecord
 
   def user_exists?
     return if user && User.find(user.id)
+
     errors[:base] << 'user must exist'
   end
 
   def owner_exists?
     return if owner && User.find(owner.id)
+
     errors[:base] << 'owner must exist'
   end
 
   def datatable_exists?
     return if datatable && Datatable.find(datatable.id)
+
     errors[:base] << 'datatable must exist'
   end
 end

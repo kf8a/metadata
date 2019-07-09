@@ -19,7 +19,7 @@ describe DatatablesController, type: :controller  do
 
   before do
     @user = FactoryBot.build(:admin_user)
-    sign_in_as @user
+    sign_in @user
   end
 
   describe 'responding to GET index' do

@@ -1,7 +1,7 @@
 # set and show affiliations
 class AffiliationsController < ApplicationController
-  before_action :require_login, except: [:index, :show]
-  before_action :admin?, except: [:index, :show]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :admin?, except: %i[index show]
   helper_method :affiliation
   # before_filter :get_affiliation, :only => [:show, :edit, :update, :destroy]
 

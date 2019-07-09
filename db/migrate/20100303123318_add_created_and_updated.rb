@@ -1,4 +1,4 @@
-class AddCreatedAndUpdated < ActiveRecord::Migration
+class AddCreatedAndUpdated < ActiveRecord::Migration[4.2]
   def self.up
     add_column :datatables, :created_at, :datetime
     add_column :datatables, :updated_at, :datetime

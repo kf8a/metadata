@@ -1,4 +1,4 @@
-class AddDescriptionToDatatable < ActiveRecord::Migration
+class AddDescriptionToDatatable < ActiveRecord::Migration[4.2]
   def self.up
     add_column "datatables", "description", :text
   end

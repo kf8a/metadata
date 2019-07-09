@@ -1,4 +1,4 @@
-class MetadataOnly < ActiveRecord::Migration
+class MetadataOnly < ActiveRecord::Migration[4.2]
   def self.up
     add_column :datatables, :metadata_only, :boolean, :default=>false
 

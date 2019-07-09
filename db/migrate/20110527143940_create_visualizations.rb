@@ -1,4 +1,4 @@
-class CreateVisualizations < ActiveRecord::Migration
+class CreateVisualizations < ActiveRecord::Migration[4.2]
   def self.up
     create_table :visualizations do |t|
       t.integer      :datatable_id

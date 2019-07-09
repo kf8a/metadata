@@ -1,4 +1,4 @@
-class CreateDataVersions < ActiveRecord::Migration
+class CreateDataVersions < ActiveRecord::Migration[4.2]
   def change
     create_table :data_versions do |t|
       t.integer :dataset_id

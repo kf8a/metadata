@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 # handler interaction with the user class
-class UsersController < Clearance::UsersController
-  before_action :require_login, except: %i[index show]
+class UsersController < ApplicationController
+  before_action :authenticate_user!, except: %i[index show]
   protect_from_forgery except: :show
 
   def index; end
@@ -36,9 +38,9 @@ class UsersController < Clearance::UsersController
 
   def redeem
     @invite.redeemed!
-    if @invite.glbrc_member?
-      sponsor = Sponsor.find_by_name('glbrc')
-      Membership.create(user: @user, sponsor: sponsor)
-    end
+    return unless @invite.glbrc_member?
+
+    sponsor = Sponsor.find_by(name: 'glbrc')
+    Membership.create(user: @user, sponsor: sponsor)
   end
 end

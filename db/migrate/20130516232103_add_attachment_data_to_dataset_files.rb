@@ -1,4 +1,4 @@
-class AddAttachmentDataToDatasetFiles < ActiveRecord::Migration
+class AddAttachmentDataToDatasetFiles < ActiveRecord::Migration[4.2]
   def self.up
     change_table :dataset_files do |t|
       t.attachment :data

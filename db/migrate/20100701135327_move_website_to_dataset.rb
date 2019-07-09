@@ -1,4 +1,4 @@
-class MoveWebsiteToDataset < ActiveRecord::Migration
+class MoveWebsiteToDataset < ActiveRecord::Migration[4.2]
   def self.up
     add_column :datasets, :website_id, :integer
     add_column :websites, :dataset_id, :integer

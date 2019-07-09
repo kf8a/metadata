@@ -1,4 +1,4 @@
-class RenameCitationUrl < ActiveRecord::Migration
+class RenameCitationUrl < ActiveRecord::Migration[4.2]
   def self.up
     rename_column :citations, :url, :publisher_url
   end

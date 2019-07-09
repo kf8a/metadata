@@ -1,4 +1,4 @@
-class AddLinksToPdf < ActiveRecord::Migration
+class AddLinksToPdf < ActiveRecord::Migration[4.2]
   def self.up
     add_column :publications, :file_url, :string
   end

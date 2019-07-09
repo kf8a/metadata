@@ -1,4 +1,4 @@
-class AddRoleVisibility < ActiveRecord::Migration
+class AddRoleVisibility < ActiveRecord::Migration[4.2]
   def self.up
     add_column :roles, :show_in_overview, :boolean, :default => true
     add_column :roles, :show_in_detailview, :boolean, :default => true
