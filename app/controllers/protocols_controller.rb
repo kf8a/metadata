@@ -2,9 +2,9 @@
 class ProtocolsController < ApplicationController
   include FileSource
 
-  before_action :authenticate_user!, except: [:index, :show, :download]
-  before_action :admin?, except: [:index, :show, :download]
-  before_action :protocol, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, except: %i[index show download]
+  before_action :admin?, except: %i[index show download]
+  before_action :protocol, only: %i[edit update]
 
   # GET /protocols
   def index
@@ -16,7 +16,7 @@ class ProtocolsController < ApplicationController
 
   # GET /protocols/1
   def show
-    store_location_for(:user, protocols_path(params[:id].to_i)
+    store_location_for(:user, protocols_path(params[:id].to_i))
     @protocol = website.protocols.find(params[:id].to_i)
 
     if @protocol
