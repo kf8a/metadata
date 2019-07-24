@@ -9,19 +9,19 @@ require 'date_range_formatter.rb'
 
 # A dataset is the central model datasets hold tables, protocols and contact into
 class Dataset < ApplicationRecord
-  has_many                :affiliations, -> { order 'seniority' }
+  has_many                :affiliations, -> { order 'seniority' }, dependent: :destroy
   has_many                :datatables, -> { order 'name' }, dependent: :nullify
   has_many                :people, through: :affiliations
   belongs_to              :project
-  has_many                :protocols, -> { where 'active is true' }
+  has_many                :protocols, -> { where 'active is true' }, dependent: :nullify
   has_many                :roles, -> { uniq }, through: :affiliations
   belongs_to              :sponsor
   has_and_belongs_to_many :studies
   has_and_belongs_to_many :themes
   belongs_to              :website
-  has_many                :dataset_files
-  has_many                :data_versions
-  has_many                :dois
+  has_many                :dataset_files, dependent: :nullify
+  has_many                :data_versions, dependent: :destroy
+  has_many                :dois, dependent: :destroy
 
   validates :abstract, presence:   true
   validates :dataset,  uniqueness: true
@@ -137,6 +137,7 @@ class Dataset < ApplicationRecord
     datatables.where(on_web: true).find_each do |datatable|
       dates = { begin_date: datatable.begin_date, end_date: datatable.end_date }
       next unless dates[:begin_date] && dates[:end_date]
+
       begin_date = [begin_date, dates[:begin_date]].compact.min
       end_date   = [end_date, dates[:end_date]].compact.max
     end
@@ -202,6 +203,7 @@ class Dataset < ApplicationRecord
       datatable.variates.collect do |variate|
         next unless variate.unit
         next if variate.unit.in_eml
+
         variate.unit
       end
     end.flatten.compact.uniq
