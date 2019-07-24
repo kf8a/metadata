@@ -19,32 +19,32 @@ class EmlDatasetBuilder
               'xsi:schemaLocation'  => 'eml://ecoinformatics.org/eml-2.1.1 http://lter.kbs.msu.edu/docs/eml/eml.xsd',
               'packageId'           => dataset.package_id,
               'system'              => 'KBS LTER') do
-      eml_access
-      eml_dataset
-      eml_custom_unit_list if dataset.custom_units.present?
-    end
+                eml_access
+                eml_dataset
+                eml_custom_unit_list if dataset.custom_units.present?
+              end
   end
 
   def custom_unit_fully_specified(unit)
     @eml.tag!('stmml:unit',
-              id:             unit.name,
+              id: unit.name,
               multiplierToSI: unit.multiplier_to_si,
-              parentSI:       unit.parent_si,
-              unitType:       unit.unit_type,
-              name:           unit.name)
+              parentSI: unit.parent_si,
+              unitType: unit.unit_type,
+              name: unit.name)
   end
 
   def custom_unit_partially_specified(unit)
     @eml.tag!('stmml:unit',
-              id:             unit.name,
+              id: unit.name,
               multiplierToSI: unit.multiplier_to_si,
-              parentSI:       unit.parent_si,
-              name:           unit.name)
+              parentSI: unit.parent_si,
+              name: unit.name)
   end
 
   def custom_unit_minimual(unit)
     @eml.tag!('stmml:unit',
-              id:   unit.name,
+              id: unit.name,
               name: unit.name)
   end
 
@@ -126,6 +126,31 @@ class EmlDatasetBuilder
         table.to_eml(@eml) if table.on_web &&
                               table.valid_for_eml? &&
                               !table.is_restricted
+      end
+      eml_files
+    end
+  end
+
+  def eml_files
+    return if dataset.dataset_files.empty?
+
+    dataset.dataset_files.each do |file|
+      @eml.otherEntity do
+        @eml.entityName file.name
+        @eml.physical do
+          @eml.objectName file.name
+          @eml.dataFormat do
+            @eml.externallyDefinedFormat do
+              @eml.formatName 'csv'
+            end
+          end
+          @eml.distribution do
+            @eml.online do
+              @eml.url "https://lter.kbs.msu.edu/datset_files/#{file.id}"
+            end
+          end
+        end
+        @eml.entityType 'File'
       end
     end
   end
@@ -251,7 +276,7 @@ class EmlDatasetBuilder
   end
 
   def eml_core_area_keywords
-    return unless dataset.core_areas.empty?
+    return if dataset.core_areas.empty?
 
     @eml.keywordSet do
       dataset.core_areas.each do |keyword|
