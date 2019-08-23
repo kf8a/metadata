@@ -156,7 +156,7 @@ class Dataset < ApplicationRecord
   end
 
   def end_date
-    data_end_date || Time.zone.today
+    data_end_date || completed
   end
 
   # Return the bounding coordinates of all of the datatables in the dataset
