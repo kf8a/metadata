@@ -42,7 +42,7 @@ class EmlDatasetBuilder
               name: unit.name)
   end
 
-  def custom_unit_minimual(unit)
+  def custom_unit_minimum(unit)
     @eml.tag!('stmml:unit',
               id: unit.name,
               name: unit.name)
@@ -59,21 +59,21 @@ class EmlDatasetBuilder
     end
   end
 
-  def header
+  def custom_unit_list
     @eml.tag!('stmml:unitList',
               'xmlns:stmml': 'http://www.xml-cml.org/schema/stmml-1.1',
               'xmlns': 'http://www.xml-cml.org/schema/stmml',
-              'xsi:schemaLocation': 'http://www.xml-cml.org/schema/stmml-1.1 http://nis.lternet.edu/schemas/EML/eml-2.1.0/stmml.xsd')
+              'xsi:schemaLocation': 'http://www.xml-cml.org/schema/stmml-1.1 http://nis.lternet.edu/schemas/EML/eml-2.1.0/stmml.xsd') do
+                dataset.custom_units.each do |unit|
+                  build_custom_unit(unit)
+                end
+              end
   end
 
   def eml_custom_unit_list
     @eml.additionalMetadata do
       @eml.metadata do
-        header do
-          dataset.custom_units.each do |unit|
-            build_custom_unit(unit)
-          end
-        end
+        custom_unit_list
       end
     end
   end

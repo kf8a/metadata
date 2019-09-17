@@ -470,7 +470,7 @@ class Citation < ApplicationRecord
     send(table_name).clear
     current_seniority = 1 # TODO: should this be zero based?
     string_of_names.each_line do |name_string|
-      if name_string[0].match?(/\d/)
+      if name_string[0].match(/\d/)
         treat_as_token_list(name_of_class, name_string)
       else
         send(table_name) << name_of_class.constantize.create(name: name_string,
