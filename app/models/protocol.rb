@@ -12,6 +12,7 @@ class Protocol < ApplicationRecord
                     storage: :s3,
                     bucket: 'metadata-production',
                     s3_region: 'us-east-1',
+                    s3_host_name: 's3.us-east-1.amazonaws.com',
                     path: '/protocols/pdfs/:id/:style/:basename.:extension',
                     s3_credentials: File.join(Rails.root, 'config', 's3.yml'),
                     s3_permissions: 'public-read'

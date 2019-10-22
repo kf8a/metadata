@@ -26,7 +26,7 @@ set :unicorn_config, "#{current_path}/config/unicorn.rb"
 set :unicorn_pid, '/var/u/apps/metadata/shared/pids/unicorn.pid'
 
 def remote_file_exists?(full_path)
-  'true' ==  capture("if [ -e #{full_path} ]; then echo 'true'; fi").strip
+  'true' == capture("if [ -e #{full_path} ]; then echo 'true'; fi").strip
 end
 
 before :deploy do
@@ -46,9 +46,7 @@ namespace :deploy do
   end
   desc 'gracefully stop unicorn appserver'
   task :graceful_stop, roles: :app, except: { no_release: true } do
-    if remote_file_exists?(unicorn_pid)
-      run "#{try_sudo} kill -s QUIT `cat #{unicorn_pid}`"
-    end
+    run "#{try_sudo} kill -s QUIT `cat #{unicorn_pid}`" if remote_file_exists?(unicorn_pid)
   end
   desc 'reload unicorn appserver'
   task :reload, roles: :app, except: { no_release: true } do
@@ -122,7 +120,6 @@ task :staging do
   role :app, host.to_s
   role :db, host.to_s, primary: true
 end
-
 
 namespace :sphinx do
   desc 'Symlink Sphinx indexes'
