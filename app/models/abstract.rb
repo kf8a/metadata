@@ -11,7 +11,6 @@ class Abstract < ApplicationRecord
                     storage: :s3,
                     bucket: 'metadata-production',
                     path: '/abstracts/pdfs/:id/:style/:basename.:extension',
-                    s3_host_name: 's3.us-east-1.amazonaws.com',
                     s3_region: 'us-east-1',
                     s3_credentials: Rails.root.join('config', 's3.yml'),
                     s3_permissions: 'authenticated-read'

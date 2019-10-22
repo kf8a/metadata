@@ -6,7 +6,6 @@ class DatasetFile < ApplicationRecord
                     storage: :s3,
                     bucket: 'metadata-production',
                     path: '/dataset_files/:id.:extension',
-                    s3_host_name: 's3.us-east-1.amazonaws.com',
                     s3_credentials: Rails.root.join('config', 's3.yml'),
                     s3_region: 'us-east-1',
                     s3_permissions: 'authenticated-read',
