@@ -65,6 +65,14 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+
+  config.action_mailer.delivery_method = :sendmail
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+                                          email: { email_prefix: '[METADATA] ',
+                                                   sender_address:
+                                                   %("notifier" <notifier@oshtemo.kbs.msu.edu>),
+                                                   exception_recipients:
+                                                   %w[bohms@fastmail.com hsiehhs7@msu.edu] }
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
@@ -91,4 +99,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Enable serving of images, stylesheets, and JavaScripts from an asset server.
+  config.action_controller.asset_host = 'https://lter.kbs.msu.edu/metadata-assets/'
 end
