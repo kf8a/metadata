@@ -67,6 +67,7 @@ group :development do
   gem 'bcrypt_pbkdf'
   gem 'capistrano', '~>2'
   gem 'ed25519'
+  gem 'listen'
   gem 'rbnacl' # , '< 5.0'
   gem 'rbnacl-libsodium'
 end

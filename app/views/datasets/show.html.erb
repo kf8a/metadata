@@ -12,9 +12,19 @@
 </div>
 <ul>
 	<li>Status: <%= dataset.status %></li>
-	<li>Temporal Coverage  <%= dataset.initiated %> to <%= dataset.data_end_date %></li>
+  <li>Temporal Coverage  <%= dataset.initiated %> to <%= dataset.data_end_date || dataset.end_date  %></li>
   <% dataset.data_versions.each do |version| %>
     <li> DOI: <%= version.doi %> at <%= version.created_at %>
+  <% end %>
+</ul>
+
+<h2>Personnel</h2>
+<ul>
+  <% personnel = dataset.datatable_people -%>
+  <% personnel.each do |person| -%>
+    <li>
+      <%= link_to person.full_name, person %>
+    </li>
   <% end %>
 </ul>
 <% if dataset.datatables.any? -%>

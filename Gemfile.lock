@@ -152,6 +152,9 @@ GEM
     kramdown (2.1.0)
     latex-decode (0.3.1)
     libv8 (3.16.14.19)
+    listen (3.2.0)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
     loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -232,6 +235,9 @@ GEM
       thor (>= 0.19.0, < 2.0)
     raindrops (0.19.0)
     rake (10.5.0)
+    rb-fsevent (0.10.3)
+    rb-inotify (0.10.0)
+      ffi (~> 1.0)
     rbnacl (7.0.0)
       ffi
     rbnacl-libsodium (1.0.16)
@@ -355,6 +361,7 @@ DEPENDENCIES
   has_scope (< 0.6)
   jquery-rails
   kramdown (~> 2.1)
+  listen
   minitest
   minitest-reporters (>= 0.5.0)
   mysql2

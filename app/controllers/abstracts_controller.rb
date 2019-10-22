@@ -34,7 +34,7 @@ class AbstractsController < ApplicationController
       flash[:notice] = 'Meeting Abstract was successfully created.'
       redirect_to_abstract_or_meeting(abstract)
     else
-      render 'new'
+      redirect_to 'new'
     end
   end
 
