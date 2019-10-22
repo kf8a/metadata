@@ -8,10 +8,10 @@ describe CitationsController, type: :controller do
   describe 'anonymous access' do
     before(:each) do
       Citation.delete_all # clear out other citations
-      author1 = FactoryBot.create(:author, sur_name: 'Zebedee', seniority: 1)
-      author2 = FactoryBot.create(:author, sur_name: 'Alfred',  seniority: 1)
-      author3 = FactoryBot.create(:author, sur_name: 'Babbit',  seniority: 1)
-      author4 = FactoryBot.create(:author, sur_name: 'Bob',     seniority: 1)
+      author1 = FactoryBot.build(:author, sur_name: 'Zebedee', seniority: 1)
+      author2 = FactoryBot.build(:author, sur_name: 'Alfred',  seniority: 1)
+      author3 = FactoryBot.build(:author, sur_name: 'Babbit',  seniority: 1)
+      author4 = FactoryBot.build(:author, sur_name: 'Bob',     seniority: 1)
       website = Website.find_by(name: 'lter') || FactoryBot.create(:website, name: 'lter')
       @citation1 = FactoryBot.create(:article_citation, website: website,
                                                         authors: [author1],
@@ -170,7 +170,7 @@ describe CitationsController, type: :controller do
     before(:each) do
       @website = Website.find_or_create_by(name: 'lter')
 
-      author1 = FactoryBot.create(:author, sur_name: 'Zebedee', seniority: 1)
+      author1 = FactoryBot.build :author, sur_name: 'Zebedee', seniority: 1
       @citation1 = ArticleCitation.new
       @citation1.authors << Author.new(sur_name: 'Loecke',
                                        given_name: 'T', middle_name: 'D',
@@ -189,12 +189,14 @@ describe CitationsController, type: :controller do
       @citation1.pub_year = 2008
       @citation1.abstract = 'An abstract of the article.'
       @citation1.website = @website
+      @citation1.citation_type = FactoryBot.build :citation_type
       @citation1.save
       @citation1.publish!
 
       @another_citation = @website.citations.new
       @another_citation.authors << author1
       @another_citation.pub_year = 2007
+      @another_citation.citation_type = FactoryBot.build :citation_type
       @another_citation.save
       @another_citation.publish!
     end

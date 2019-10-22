@@ -7,6 +7,9 @@ FactoryBot.define do
     seniority { 1 }
   end
 
+  factory :citation_type do
+  end
+
   factory :editor do
     seniority  { 1 }
   end
@@ -14,21 +17,31 @@ FactoryBot.define do
   factory :citation do
     website  { Website.find_by(name: 'lter') }
     authors  { [FactoryBot.build(:author)] }
+    citation_type
   end
 
   factory :article_citation do
+    website  { Website.find_by(name: 'lter') }
+    authors  { [FactoryBot.build(:author)] }
+    citation_type
   end
 
   factory :book_citation do
+    website  { Website.find_by(name: 'lter') }
+    authors  { [FactoryBot.build(:author)] }
+    citation_type
   end
 
   factory :chapter_citation do
+    website  { Website.find_by(name: 'lter') }
+    authors  { [FactoryBot.build(:author)] }
+    citation_type
   end
 
   factory :thesis_citation do
-  end
-
-  factory :citation_type do
+    website  { Website.find_by(name: 'lter') }
+    authors  { [FactoryBot.build(:author)] }
+    citation_type
   end
 
   factory :invite do
