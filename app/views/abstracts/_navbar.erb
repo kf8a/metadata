@@ -4,4 +4,4 @@
   <%= link_to_unless_current 'Edit', edit_abstract_path(abstract) %> |
   <%= link_to 'Destroy', abstract, :method => 'delete', :confirm => 'Are you sure?' %> |
 <% end %>
-<%= link_to 'log out', sign_out_path if signed_in? %>
+<%= link_to 'log out', destroy_user_session_path method: :delete if signed_in? %>
