@@ -1,6 +1,6 @@
 # Removed unsafe characters from the search input
 class SearchInputSanitizer
   def self.sanitize(word)
-    word.gsub(/\?|~|\\|@|&|(?:=>)/, '').squeeze(' ')
+    word.tr('^A-Za-z0-9', ' ').squeeze(' ').squeeze(' ')
   end
 end
