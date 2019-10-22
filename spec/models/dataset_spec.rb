@@ -1,10 +1,15 @@
+# frozen_string_literal: true
+
 require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 
 describe Dataset do
   before(:each) do
     @valid_attributes = {
       title: 'KBS004',
-      abstract: 'the main lter experiment'
+      abstract: 'the main lter experiment',
+      sponsor: FactoryBot.build(:sponsor),
+      website: FactoryBot.build(:website),
+      project: FactoryBot.build(:project)
     }
   end
 
