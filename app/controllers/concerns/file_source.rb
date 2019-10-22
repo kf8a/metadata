@@ -17,7 +17,7 @@ module FileSource
       redirect_to(file.s3_object
                           .presigned_url(:get,
                                          secure: true,
-                                         expires_in: 60.seconds)
+                                         expires_in: 60)
                           .to_s)
     end
   end
