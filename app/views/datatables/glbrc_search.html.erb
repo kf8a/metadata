@@ -24,5 +24,3 @@
 <ul class='quickTree'>
   <%= render :partial => 'datatable', :collection => @datatables.sort {|x,y| x.title <=> y.title} %>
 </ul>
-
-<%= link_to 'login', new_session_path %>
