@@ -30,7 +30,7 @@
           <p class='highlight'>GLBRC data is not yet publicly available.</p>
         <% end %>
         <%= link_to 'Sign in to request the data',
-                  new_user_session_path, :class => 'download-link' %>
+                  new_user_session_path, :class => 'download-link', rel: 'nofollow' %>
       <% end %>
     <% end %>
   <% end %>
