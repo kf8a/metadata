@@ -1,9 +1,9 @@
 <div id="sign-in-wrapper">
   <div id='sign-in' class='bottom-rounded-corners'>
     <% if signed_in? %>
-      <%= link_to 'Sign Out', destroy_user_session_url, class: 'bottom-rounded-corners', method: :delete %>
+      <%= link_to 'Sign Out', destroy_user_session_url, class: 'bottom-rounded-corners', method: :delete, rel: 'nofollow' %>
     <% else %>
-      <%= link_to 'Sign In', new_user_session_url, class: 'bottom-rounded-corners' %>
+      <%= link_to 'Sign In', new_user_session_url, class: 'bottom-rounded-corners', rel: 'nofollow' %>
     <% end %>
   </div>
 </div>
