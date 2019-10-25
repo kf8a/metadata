@@ -4,7 +4,7 @@ describe Person do
   describe 'deleting with affiliations' do
     it 'deletes the affiliations with the person' do
       person      = FactoryBot.create :person
-      affiliation = FactoryBot.create :affiliation
+      affiliation = FactoryBot.build :affiliation
       affiliation.person = person
       affiliation.save
       expect(person.affiliations.size).to eq 1
@@ -15,7 +15,7 @@ describe Person do
 
   describe 'Some people have a dataset role, others do not. ' do
     before(:each) do
-      data_role = FactoryBot.create(:role)
+      data_role = FactoryBot.build(:role)
       @dataperson1 = FactoryBot.create(:person, sur_name: 'Jones')
       allow(@dataperson1).to receive(:dataset_roles).and_return([data_role])
       @dataperson2 = FactoryBot.create(:person, sur_name: 'Smith')

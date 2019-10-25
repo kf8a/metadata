@@ -1,6 +1,7 @@
 FactoryBot.define do
   # Independent factories#########
   factory :affiliation do
+    role
   end
 
   factory :author do
@@ -151,7 +152,9 @@ FactoryBot.define do
   factory :protocol do
     name          { 'Proto1' }
     version_tag   { 0 }
-    dataset       { FactoryBot.create(:dataset) }
+    dataset       { FactoryBot.build(:dataset) }
+    # project { FactoryBot.build(:project) }
+    # website { FactoryBot.build(:website) }
   end
 
   sequence :name do |n|
