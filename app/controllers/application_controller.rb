@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   layout :site_layout
 
   before_action :set_crumbs, :set_subdomain_request, :extra_views, :set_title
+  before_action :store_user_location!, if: :storable_location?
   before_action :authenticate_user!, except: %i[index show suggest search]
 
   respond_to :html, :json
@@ -60,5 +61,18 @@ class ApplicationController < ActionController::Base
 
   def website
     @website ||= Website.find_by(name: @subdomain_request) || Website.first
+  end
+
+  def storable_location?
+    request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
+  end
+
+  def store_user_location!
+    # :user is the scope we are authenticating
+    store_location_for(:user, request.fullpath)
+  end
+
+  def after_sign_in_path_for(resource_or_scope)
+    stored_location_for(resource_or_scope) || super
   end
 end
