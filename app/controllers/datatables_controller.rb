@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Control the display of datatables
 class DatatablesController < ApplicationController
   helper_method :datatable
@@ -7,7 +9,6 @@ class DatatablesController < ApplicationController
   # run before filter to prevent non-members from downloading
   before_action :can_download?, only: :show,
                                 if: proc { |controller| controller.request.format.csv? || controller.request.format.fasta? }
-  # before_filter :reject_robots
 
   helper_method :datatable
   protect_from_forgery except: %i[index show search]
@@ -57,9 +58,7 @@ class DatatablesController < ApplicationController
           end
         end
         format.climdb do
-          unless csv_ok
-            redirect_to datatable_url(datatable)
-          end
+          redirect_to datatable_url(datatable) unless csv_ok
         end
       end
     else
@@ -99,7 +98,7 @@ class DatatablesController < ApplicationController
   def update
     initialize_instance_variables
 
-    if datatable.update_attributes(datatable_params)
+    if datatable.update(datatable_params)
       flash[:notice] = 'Datatable was successfully updated.'
     end
 
@@ -174,12 +173,12 @@ class DatatablesController < ApplicationController
     # TODO: this next line might not be needed
     datatable = Datatable.find(params[:id])
 
-    if datatable.study
-      study = datatable.study
-      # crumb.url = study_path(study)
-      crumb.name = study.name
-      @crumbs << crumb
-    end
+    return unless datatable.study
+
+    study = datatable.study
+    # crumb.url = study_path(study)
+    crumb.name = study.name
+    @crumbs << crumb
   end
 
   def retrieve_datatables(query)
@@ -211,10 +210,10 @@ class DatatablesController < ApplicationController
   end
 
   def can_download?
-    unless csv_ok
-      head :forbidden
-      false
-    end
+    return true if csv_ok
+
+    head :forbidden
+    false
   end
 
   def datatable_params
@@ -272,12 +271,6 @@ class DatatablesController < ApplicationController
       end
     end
   end
-
-  # def reject_robots
-  #   if params[:id] == 'robots'
-  #     render :status => 404
-  #   end
-  # end
 
   def initialize_instance_variables
     @core_areas = CoreArea.by_name.collect { |area| [area.name, area.id] }
