@@ -3,19 +3,15 @@
 # Helper functions for citation view
 module CitationsHelper
   def publication_url(citation)
-    if citation.open_access
-      download_citation_url(citation) #+ "/#{citation.pdf_file_name}"
-    else
-      download_citation_url(citation)
-    end
+    download_citation_url(citation)
   end
 
   def normalize_doi(doi)
-    if doi =~ /dx.doi.org/
+    if doi.match?(/dx.doi.org/)
       doi
-    elsif doi =~ /^doi.org/
+    elsif doi.match?(/^doi.org/)
       'http://' + doi
-    elsif doi =~ /^http/
+    elsif doi.match?(/^http/)
       doi
     else
       'http://dx.doi.org/' + doi
