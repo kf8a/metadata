@@ -10,8 +10,6 @@ class DatasetsController < ApplicationController
   before_action :allow_on_web, except: %i[knb]
   before_action :admin?, except: %i[index show]
 
-  has_many_attached :files
-
   # layout proc { |controller| controller.request.format == :eml ? false : 'application' }
 
   # POST /dataset
