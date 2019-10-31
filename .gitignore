@@ -36,6 +36,6 @@ private
 shared/*
 
 # Ignore master key for decrypting credentials and more.
-/config/master.key
+config/master.key
+config/storage.yml
 storage/
-
