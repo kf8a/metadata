@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 
 describe Variate do
   describe 'eml importation' do
     before(:each) do
-      @variate = FactoryBot.create(:variate, name: 'EMLVariate',
+      @variate = FactoryBot.build(:variate, name: 'EMLVariate',
                                              description: 'A variate test of eml')
     end
 

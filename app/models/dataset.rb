@@ -12,13 +12,13 @@ class Dataset < ApplicationRecord
   has_many                :affiliations, -> { order 'seniority' }, dependent: :destroy
   has_many                :datatables, -> { order 'name' }, dependent: :nullify
   has_many                :people, through: :affiliations
-  belongs_to              :project
+  belongs_to              :project, optional: true
   has_many                :protocols, -> { where 'active is true' }, dependent: :nullify
   has_many                :roles, -> { uniq }, through: :affiliations
   belongs_to              :sponsor
   has_and_belongs_to_many :studies
   has_and_belongs_to_many :themes
-  belongs_to              :website
+  belongs_to              :website, optional: true
   has_many                :data_versions, dependent: :destroy
   has_many                :dois, dependent: :destroy
 

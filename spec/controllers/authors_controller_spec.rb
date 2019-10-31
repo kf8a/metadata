@@ -9,7 +9,7 @@ describe AuthorsController, type: :controller do
 
   describe 'GET :index, :format => :json' do
     before(:each) do
-      @author = FactoryBot.create :author
+      @author = FactoryBot.build :author
       get :index, format: :json
     end
 
