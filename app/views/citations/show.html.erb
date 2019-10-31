@@ -22,7 +22,7 @@
       {:name => @citation.short_author_string.upcase}] %>
       <h3><%= raw @citation.formatted(:long=>true)  %></h3>
 
-    <% if @citation.pdf.present? %>
+    <% if @citation.pdf.attached? %>
       <div class='description'
       <p> Citable PDF link: https://lter.kbs.msu.edu/pub/<%= @citation.id %></p>
     </div>
@@ -65,7 +65,7 @@
     <%= link_to 'endnote', citation_path(@citation, :format=>'enw') %>
     <%= link_to 'bibtex',  citation_path(@citation, :format=>'bib') %>
     </p>
-    <% if @citation.pdf.present? %>
+    <% if @citation.pdf.attached? %>
       <% if signed_in? or @citation.open_access %>
         <%=link_to 'Get PDF', publication_url(@citation), :class=>'download-link'%>
       <% else %>

@@ -19,7 +19,7 @@
       </p>
 
       <div>
-        <% if citation.pdf.present? %>
+        <% if citation.pdf.attached? %>
           <span class='non-member'>
             <%= link_to 'abstract + pdf', citation_path(citation) %>
           </span>
@@ -40,7 +40,7 @@
             <a href="<%= normalize_doi(citation.data_url) %>"> data</a>
           </span>
         <% end %>
-        <% if citation.pdf.present? %>
+        <% if citation.pdf.attached? %>
           <span>(<%= "https://lter.kbs.msu.edu/pub/#{citation.id}" %>)</span>
         <% end %>
       </div>
