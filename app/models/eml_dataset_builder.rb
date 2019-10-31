@@ -132,9 +132,9 @@ class EmlDatasetBuilder
   end
 
   def eml_files
-    return if dataset.dataset_files.empty?
+    return unless dataset.files.attached?
 
-    dataset.dataset_files.each do |file|
+    dataset.files.each do |file|
       @eml.otherEntity do
         @eml.entityName file.name
         @eml.physical do
@@ -146,7 +146,7 @@ class EmlDatasetBuilder
           end
           @eml.distribution do
             @eml.online do
-              @eml.url "https://lter.kbs.msu.edu/datset_files/#{file.id}"
+              @eml.url Rails.application.routes.url_helpers.rails_blob_path(file)
             end
           end
         end
