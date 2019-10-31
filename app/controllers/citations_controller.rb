@@ -2,7 +2,6 @@
 
 # display citations and control access to pdfs
 class CitationsController < ApplicationController
-  include FileSource
 
   protect_from_forgery except: :download
 
@@ -173,10 +172,6 @@ class CitationsController < ApplicationController
   #   # TODO: make this work accross domains not just with lter
   #   redirect_to('https://lter.kbs.msu.edu/open-access' + citation.pdf.path.tr(' ', '+'))
   #   # redirect_to(citation.pdf.s3_object(params[:style]).public_url.to_s)
-  # end
-
-  # def from_standard_access(citation)
-  #   file_from_s3(citation.pdf)
   # end
 
   def set_title

@@ -2,7 +2,6 @@
 
 # Serves protocols
 class ProtocolsController < ApplicationController
-  include FileSource
 
   before_action :authenticate_user!, except: %i[index show download]
   before_action :admin?, except: %i[index show download]

@@ -37,15 +37,14 @@
 	<% end %>
 </dl>
 <% end -%>
-<% if dataset.dataset_files.any? -%>
+<% if dataset.files.attached? -%>
   <h2>Files</h2>
-  <dl>
-    <% dataset.dataset_files.each do |file| -%>
-      <dt><%= link_to file.file_name, dataset_file_path(file) %></dt>
-      <dd><%= file.name %></dd>
-    <% end -%>
-  </dl>
-  <% end -%>
+  <ul>
+  <% dataset.files.each do |file| %>
+    <li><%= link_to file.filename, url_for(file) %></li>
+   <% end %>
+  </ul>
+<% end -%>
 <h2>Protocols</h2>
 <ul>
 	<% dataset.protocols.each do |protocol| -%>

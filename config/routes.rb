@@ -39,7 +39,6 @@ Metadata::Application.routes.draw do
   resources :authors
   resources :collections
   resources :data_contributions
-  resources :dataset_files, only: :show
   resources :datasets do
     collection do
       post :set_affiliation_for
