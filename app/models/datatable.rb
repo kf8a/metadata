@@ -485,7 +485,7 @@ class Datatable < ApplicationRecord
   end
 
   def related_files
-    dataset.dataset_files
+    dataset.files
   end
 
   def sponsor_name

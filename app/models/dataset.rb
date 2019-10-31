@@ -19,7 +19,6 @@ class Dataset < ApplicationRecord
   has_and_belongs_to_many :studies
   has_and_belongs_to_many :themes
   belongs_to              :website
-  has_many                :dataset_files, dependent: :nullify
   has_many                :data_versions, dependent: :destroy
   has_many                :dois, dependent: :destroy
 
@@ -27,7 +26,6 @@ class Dataset < ApplicationRecord
   validates :dataset,  uniqueness: true
 
   accepts_nested_attributes_for :affiliations, allow_destroy: true
-  accepts_nested_attributes_for :dataset_files, allow_destroy: true
 
   acts_as_taggable_on :keywords
 
