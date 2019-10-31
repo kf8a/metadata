@@ -2,5 +2,7 @@
 class PageImage < ApplicationRecord
   belongs_to :page
 
-  has_attached_file :image
+  has_one_attached :image
+
+  # has_attached_file :image
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true`
+
 # Datasets are the core of the system
 # manages the display and editing of the datasets
 # we have not used it to create and delete datasets
@@ -7,6 +9,8 @@ class DatasetsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :allow_on_web, except: %i[knb]
   before_action :admin?, except: %i[index show]
+
+  has_many_attached :files
 
   # layout proc { |controller| controller.request.format == :eml ? false : 'application' }
 

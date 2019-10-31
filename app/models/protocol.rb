@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'eml'
 # A protocol describes how the data was collected
 class Protocol < ApplicationRecord
@@ -8,16 +10,18 @@ class Protocol < ApplicationRecord
   has_many :scribbles
   has_many :people, through: :scribbles
 
-  has_attached_file :pdf,
-                    storage: :s3,
-                    bucket: 'metadata-production',
-                    s3_region: 'us-east-1',
-                    s3_host_name: 's3.us-east-1.amazonaws.com',
-                    path: '/protocols/pdfs/:id/:style/:basename.:extension',
-                    s3_credentials: File.join(Rails.root, 'config', 's3.yml'),
-                    s3_permissions: 'public-read'
+  has_one_attached :pdf
 
-  validates_attachment_content_type :pdf, content_type: /pdf/
+  # has_attached_file :pdf,
+  #                   storage: :s3,
+  #                   bucket: 'metadata-production',
+  #                   s3_region: 'us-east-1',
+  #                   s3_host_name: 's3.us-east-1.amazonaws.com',
+  #                   path: '/protocols/pdfs/:id/:style/:basename.:extension',
+  #                   s3_credentials: File.join(Rails.root, 'config', 's3.yml'),
+  #                   s3_permissions: 'public-read'
+
+  # validates_attachment_content_type :pdf, content_type: /pdf/
 
   def to_s
     title

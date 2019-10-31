@@ -31,6 +31,8 @@ class Dataset < ApplicationRecord
 
   acts_as_taggable_on :keywords
 
+  has_many_attached :files
+
   after_touch do
     increment_version
   end

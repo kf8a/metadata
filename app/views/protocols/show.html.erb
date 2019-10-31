@@ -35,8 +35,8 @@
       <%=raw textilize(@protocol.body) if @protocol.body %>
     </div>
   <% end %>
-  <% if @protocol.pdf.exists? %>
-    <%=link_to 'Get PDF', download_protocol_path(@protocol), :class=>'download-link'%>
+  <% if @protocol.pdf.attached? %>
+    <%=link_to 'Get PDF', url_for(@protocol.pdf), class:'download-link'%>
   <% end %>
 
   <% if @protocol.updated_at %>

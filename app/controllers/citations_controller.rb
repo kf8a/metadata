@@ -166,22 +166,18 @@ class CitationsController < ApplicationController
   private
 
   def send_citation(citation)
-    if citation.open_access
-      from_open_access(citation)
-    else
-      from_standard_access(citation)
-    end
+    redirect_to url_for(citation.pdf)
   end
 
-  def from_open_access(citation)
-    # TODO: make this work accross domains not just with lter
-    redirect_to('https://lter.kbs.msu.edu/open-access' + citation.pdf.path.tr(' ', '+'))
-    # redirect_to(citation.pdf.s3_object(params[:style]).public_url.to_s)
-  end
+  # def from_open_access(citation)
+  #   # TODO: make this work accross domains not just with lter
+  #   redirect_to('https://lter.kbs.msu.edu/open-access' + citation.pdf.path.tr(' ', '+'))
+  #   # redirect_to(citation.pdf.s3_object(params[:style]).public_url.to_s)
+  # end
 
-  def from_standard_access(citation)
-    file_from_s3(citation.pdf)
-  end
+  # def from_standard_access(citation)
+  #   file_from_s3(citation.pdf)
+  # end
 
   def set_title
     @title = if @subdomain_request == 'lter'

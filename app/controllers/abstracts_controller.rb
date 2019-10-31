@@ -2,21 +2,13 @@
 
 # Controls pages dealing with abstracts of meetings
 class AbstractsController < ApplicationController
-  include FileSource
-
-  before_action :authenticate_user!, except: %i[index show download]
-  before_action :admin?, except: %i[index show download]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :admin?, except: %i[index show]
 
   # GET meeting_abstracts
   def index
     @meetings = Meeting.all.order(date: :desc)
     respond_with @meetings
-  end
-
-  def download
-    abstract = Abstract.find(params[:id])
-    head(:not_found) && return unless abstract
-    pdf_from_s3(abstract)
   end
 
   # GET meeting_abstracts/new?meeting=1
@@ -55,7 +47,7 @@ class AbstractsController < ApplicationController
     abstract = Abstract.find(params[:id])
     logger.info abstract
     logger.info abstract_params
-    if abstract.update_attributes(abstract_params)
+    if abstract.update(abstract_params)
       flash[:notice] = 'Meeting abstract was successfully updated.'
     end
     respond_with abstract

@@ -23,8 +23,8 @@
 
       <%= textilize(@abstract.abstract) %>
 
-      <% if @abstract.pdf.exists? %>
-        <%=link_to "Get #{@abstract.meeting_abstract_type.name.downcase}", download_abstract_path(@abstract) %><br/>
+      <% if @abstract.pdf.attached? %>
+        <%=link_to "Get #{@abstract.meeting_abstract_type.name.downcase}", url_for(@abstract.pdf) %><br/>
       <% end %>
 
       <%= render 'navbar', :abstract => @abstract %>

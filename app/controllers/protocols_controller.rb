@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Serves protocols
 class ProtocolsController < ApplicationController
   include FileSource
@@ -24,7 +26,6 @@ class ProtocolsController < ApplicationController
     else
       respond_to do |format|
         format.html { redirect_to protocols_url }
-        format.xml  { head :not_found }
       end
     end
   end
@@ -60,16 +61,14 @@ class ProtocolsController < ApplicationController
       @protocol = Protocol.new(protocol_params)
       @protocol.deprecate!(old_protocol)
     end
-    if @protocol.update_attributes(protocol_params)
-      flash[:notice] = 'Protocol was successfully updated.'
-    end
+    flash[:notice] = 'Protocol was successfully updated.' if @protocol.update(protocol_params)
 
     respond_with @protocol
   end
 
   def download
-    head(:not_found) && return unless (protocol = Protocol.find_by_id(params[:id]))
-    pdf_from_s3(protocol)
+    head(:not_found) && return unless (protocol = Protocol.find_by(:id, params[:id]))
+    redirect_to(url_for(protocol.pdf))
   end
 
   private
@@ -82,6 +81,7 @@ class ProtocolsController < ApplicationController
     crumb = Struct::Crumb.new
     @crumbs = []
     return unless params[:id]
+
     crumb.url = protocols_path
     crumb.name = 'Data Catalog: Protocols'
     @crumbs << crumb

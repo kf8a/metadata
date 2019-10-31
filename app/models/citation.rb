@@ -24,19 +24,22 @@ class Citation < ApplicationRecord
 
   validates :authors, presence: true
 
-  after_commit :check_for_open_access_paper
+  #TODO: update for active record
+  # after_commit :check_for_open_access_paper
 
-  has_attached_file :pdf,
-                    storage: :s3,
-                    bucket: 'metadata-production',
-                    path: '/citations/pdfs/:id/:style/:basename.:extension',
-                    s3_credentials: Rails.root.join('config', 's3.yml'),
-                    s3_region: 'us-east-1',
-                    s3_permissions: 'authenticated-read'
-  #                 s3_headers: { 'Content-Disposition': 'attachment' }
+  has_one_attached :pdf
 
-  validates_attachment_content_type :pdf, content_type: /pdf/
-  before_post_process :transliterate_file_name
+  # has_attached_file :pdf,
+  #                   storage: :s3,
+  #                   bucket: 'metadata-production',
+  #                   path: '/citations/pdfs/:id/:style/:basename.:extension',
+  #                   s3_credentials: Rails.root.join('config', 's3.yml'),
+  #                   s3_region: 'us-east-1',
+  #                   s3_permissions: 'authenticated-read'
+  # #                 s3_headers: { 'Content-Disposition': 'attachment' }
+
+  # TODO: update validations for active storage
+  # validates_attachment_content_type :pdf, content_type: /pdf/
 
   # the REAL publications not including reports
   scope :publications, lambda {
@@ -481,18 +484,10 @@ class Citation < ApplicationRecord
     end
   end
 
-  def transliterate(str)
-    str.tr('_', '-').tr(' ', '-')
-  end
-
-  def transliterate_file_name
-    pdf.instance_write(:file_name, transliterate(pdf_file_name).to_s)
-  end
-
   protected
 
   def check_for_open_access_paper
-    return unless pdf.exists?
+    return unless pdf.attached?
 
     if open_access
       make_pdf_public
