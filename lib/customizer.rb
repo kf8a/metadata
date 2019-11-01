@@ -5,7 +5,7 @@ class Customizer
     @values = values
   end
 
-  #Class Methods#
+  # Class Methods#
 
   def self.normalize(array)
     array.compact!
@@ -13,25 +13,25 @@ class Customizer
     array.sort!
   end
 
-  #Instance Methods#
+  # Instance Methods#
 
   def accepts?(row)
-    value = row[self.limitby]
+    value = row[limitby]
     self.accepts_by_contains?(value) &&
-        self.accepts_by_max(value) &&
-        self.accepts_by_min(value) rescue true
+      self.accepts_by_max(value) &&
+      self.accepts_by_min(value) rescue true
   end
 
   def accepts_by_contains?(value)
-    self.contains.blank? || value.casecmp(self.contains) == 0
+    contains.blank? || value.casecmp(self.contains) == 0
   end
 
   def accepts_by_max(value)
-    self.limit_max.blank? || value.casecmp(self.limit_max) <= 0
+    limit_max.blank? || value.casecmp(self.limit_max) <= 0
   end
 
   def accepts_by_min(value)
-    self.limit_min.blank? || value.casecmp(self.limit_min) >= 0
+    limit_min.blank? || value.casecmp(self.limit_min) >= 0
   end
 
   def customize
@@ -43,15 +43,16 @@ class Customizer
   end
 
   def limitoptions
-    @limitoptions ||= self.setlimitoptions
+    @limitoptions ||= setlimitoptions
   end
 
   def setlimitoptions
     limitoptions = @values.fields.collect do |field|
-      next if field == "id"
+      next if field == 'id'
+
       [field.titleize, field]
     end
-    limitoptions = Customizer.normalize(limitoptions)
+    Customizer.normalize(limitoptions)
   end
 
   def limit_min

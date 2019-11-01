@@ -46,7 +46,7 @@ describe UnitsController, type: :controller  do
 
   context 'GET :show' do
     before do
-      get :show, params: { id: @unit }
+      get :show, {params: { id: @unit } }
     end
     it 'is successful' do
       expect(response.code).to eq '200'

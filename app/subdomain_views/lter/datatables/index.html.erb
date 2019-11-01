@@ -1,0 +1,47 @@
+<% content_for :head do %>
+  <title>KBS LTER Datacatalog</title>
+<% end %>
+
+  <%= render 'shared/breadcrumbs', :crumbs => [{:name => 'Data Catalog'}] %>
+  <div class='page type-page hfeed'>
+    <h1>KBS LTER Data Catalog</h1>
+
+    <p id='datatable-intro'>
+      <%=raw  @website.data_catalog_intro %>
+    </p>
+
+    <%= render 'search_form' %>
+    <% if @area %>
+
+      <ul class='quickTree'>
+        <% @studies.each do |study| %>
+          <% next unless study.include_datatables?(@datatables)%>
+
+          <%= render 'study', :study => study, :themes => @themes, :datatables => @datatables %>
+        <% end %>
+      </ul>
+    </div>
+  <% else %>
+
+    <% cache([@studies, @website]) do %>
+      <ul class='quickTree'>
+        <% @studies.each do |study| %>
+          <% next unless study.include_datatables?(@datatables)%>
+
+          <%= render 'study', study: study, themes: @themes, datatables: @datatables, website: @website %>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+<% end %>
+
+<% if admin? %>
+  <h3>Datatables</h3>
+  <ul>
+    <% @datatables.each do |datatable| %>
+      <% next if datatable.theme_id %>
+      <li><%= link_to datatable.title_and_years, datatable_path(datatable)%> <%=link_to "edit", edit_datatable_path(datatable)%>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

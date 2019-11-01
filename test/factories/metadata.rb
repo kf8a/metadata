@@ -109,6 +109,7 @@ FactoryBot.define do
     description { 'generic variate' }
     measurement_scale { 'dateTime' }
     date_format { 'YYYY-MM-DD' }
+    unit
   end
 
   factory :venue_type do
@@ -129,7 +130,7 @@ FactoryBot.define do
     name { 'Emeritus Investigators' }
 
     factory :lter_role do
-      role_type    { RoleType.find_by_name('lter') || FactoryBot.create(:role_type, :name => 'lter') }
+      role_type { RoleType.find_by(:name, 'lter') || FactoryBot.create(:role_type, name: 'lter') }
     end
   end
 
@@ -144,8 +145,8 @@ FactoryBot.define do
     dataset   { FactoryBot.generate(:dataset_text) }
     sponsor   { FactoryBot.create(:sponsor) }
 
-    factory :restricted_dataset do | dataset |
-      association :sponsor, :factory => :restricted_sponsor
+    factory :restricted_dataset do |_dataset|
+      association :sponsor, factory: :restricted_sponsor
     end
   end
 

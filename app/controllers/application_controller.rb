@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
-require 'subdomain_resolver'
-
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-
-  # include CentralLogger::Filter
 
   layout :site_layout
 
@@ -18,17 +14,17 @@ class ApplicationController < ActionController::Base
   private
 
   def extra_views
-    prepend_view_path SubdomainResolver.new(@subdomain_request)
+    prepend_view_path "app/subdomain_views/#{@subdomain_request}"
   end
 
   def admin?
     logger.info "current user: #{current_user}"
-    unless current_user.try(:role) == 'admin'
-      flash[:notice] = 'You must be signed in as an administrator'\
-                      ' in order to access this page'
-      deny_access
-      return false
-    end
+    return if current_user.try(:role) == 'admin'
+
+    flash[:notice] = 'You must be signed in as an administrator'\
+      ' in order to access this page'
+    deny_access
+    false
   end
 
   def set_crumbs

@@ -38,8 +38,8 @@
       </head>
       <body class="page page-template page-template-page_gallery-php header-image full-width-content">
         <div id="wrap">
-          <%= render :file => "#{Rails.root}/public/header", :formats => [:html] %>
-          <%= render :file => "#{Rails.root}/public/nav", :formats => [:html] %>
+          <%= render file: "#{Rails.root}/public/header", formats: [:html] %>
+          <%= render file: "#{Rails.root}/public/nav", formats: [:html] %>
           <div id="inner" class="metadata <%= controller.controller_name.gsub(/_/,'-') %> <%= controller.action_name%>">
             <div class="wrap">
               <div id="content">
@@ -52,7 +52,7 @@
             </div><!-- end .wrap -->
           </div><!-- end #inner -->
         </div><!-- end #wrap -->
-        <%= render :file => "#{Rails.root}/public/footer", :formats => [:html] %>
+        <%= render file: "#{Rails.root}/public/footer", :formats => [:html] %>
         <%= render 'layouts/sign_in' %>
         <%= javascript_include_tag "application" %>
         <script async type='text/javascript' src='/wp-content/themes/genesis/lib/js/menu/superfish.js?ver=1.4.8'></script>
