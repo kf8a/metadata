@@ -30,7 +30,6 @@ uploaded_files
 uploads/*
 sandi_meter
 public/metadata-assets/
-assets
 private
 .idea
 shared/*
