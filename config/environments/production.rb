@@ -99,4 +99,6 @@ Rails.application.configure do
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   config.action_controller.asset_host = 'https://lter.kbs.msu.edu/metadata-assets/'
+
+  config.action_mailer.default_url_options = { host: 'lter.kbs.msu.edu' }
 end
