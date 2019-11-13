@@ -66,7 +66,7 @@ class ProtocolsController < ApplicationController
   end
 
   def download
-    head(:not_found) && return unless (protocol = Protocol.find_by(:id, params[:id]))
+    head(:not_found) && return unless (protocol = Protocol.find(params[:id]))
     redirect_to(url_for(protocol.pdf))
   end
 

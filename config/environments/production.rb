@@ -102,3 +102,5 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'lter.kbs.msu.edu' }
 end
+
+Rails.application.routes.default_url_options[:host] = 'lter.kbs.msu.edu'
