@@ -85,7 +85,8 @@
         <td>
           <ul>
             <% datatable.related_files.each do |file| -%>
-              <li><%= link_to file.data_file_name, dataset_file_path(file) %></li>
+              <!-- TODO: figure out how to show related files here -->
+              <!-- <li><%= link_to file.file_name, url_for(file) %></li> -->
             <% end -%>
           </ul>
         </td>
