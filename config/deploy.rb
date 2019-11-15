@@ -10,7 +10,6 @@ set :repository, 'git@github.com:kf8a/metadata.git'
 # If you aren't deploying to /u/apps/#{application} on the target
 # servers (which is the default), you can specify the actual location
 # via the :deploy_to variable:
-# set :deploy_to, "/var/www/#{application}"
 set :deploy_to, "/var/u/apps/#{application}"
 
 set :user, 'deploy'
@@ -18,6 +17,8 @@ set :use_sudo, false
 
 set :branch, 'master'
 set :deploy_via, :remote_cache
+
+set :keep_releases, 20
 
 ssh_options[:forward_agent] = true
 
@@ -54,7 +55,6 @@ namespace :deploy do
   end
   desc 'restart unicorn appserver'
   task :restart, roles: :app, except: { no_release: true } do
-    # update_nav
     stop
     sleep(2) # to allow the unicorn to die
     start
@@ -64,28 +64,27 @@ namespace :deploy do
   after 'deploy:finalize_update', :link_production_db
   after 'deploy:finalize_update', :link_unicorn
   after 'deploy:finalize_update', :link_site_keys
-  after 'deploy:finalize_update', :link_new_relic
+  # after 'deploy:finalize_update', :link_new_relic
   after 'deploy:finalize_update', :link_s3
   after 'deploy', 'thinking_sphinx:rebuild'
 
-  # after 'deploy:finalize_update', :update_asset_host
   # after 'deploy', :lock_sphinks
 
   before 'deploy:update_code', 'thinking_sphinx:stop'
   after 'deploy:finalize_update', 'thinking_sphinx:start'
   after 'deploy:finalize_update', 'sphinx:symlink_indexes'
 
-  namespace :assets do
-    desc 'Precompile assets on local machine and upload them to the server.'
-    task :precompile, roles: :web, except: { no_release: true } do
-      run_locally 'bundle exec rake assets:clobber'
-      run_locally 'bundle exec rake assets:precompile RAILS_ENV=production'
-      # run "cd #{current_path} && bundle exec rake assets:precompile RAILS_ENV=production"
-      find_servers_for_task(current_task).each do |_server|
-        run_locally "rsync -vr --exclude='.DS_Store' public/assets gprpc24.kbs.msu.edu:/var/www/lter/metadata-assets/"
-      end
-    end
-  end
+  # namespace :assets do
+  #   desc 'Precompile assets on local machine and upload them to the server.'
+  #   task :precompile, roles: :web, except: { no_release: true } do
+  #     run_locally 'bundle exec rake assets:clobber'
+  #     run_locally 'bundle exec rake assets:precompile RAILS_ENV=production'
+  #     # run "cd #{current_path} && bundle exec rake assets:precompile RAILS_ENV=production"
+  #     find_servers_for_task(current_task).each do |_server|
+  #       run_locally "rsync -vr --exclude='.DS_Store' public/assets gprpc24.kbs.msu.edu:/var/www/lter/metadata-assets/"
+  #     end
+  #   end
+  # end
 
   desc 'upload configs'
   task :upload_configs do
@@ -132,21 +131,12 @@ task :lock_sphinks do
   run "cd #{current_path};chmod go-r config/production.sphinx.conf"
 end
 
-desc 'update menus, headers and footers'
-task :update_nav do
-  run "cd #{current_path}/public;curl https://lter.kbs.msu.edu/export/nav/ -o nav.html -s"
-  run "cd #{current_path}/public;curl https://lter.kbs.msu.edu/export/footer/ -o footer.html -s"
-  run "cd #{current_path}/public;curl https://lter.kbs.msu.edu/export/header/ -o header.html -s"
-  # run %Q{cd #{release_path}/public; sed -i '' 's/src="http:/src="https:/g' footer.html}
-  # run %Q{cd #{release_path}/public; sed -i '' 's/src="http:/src="https:/g' header.html}
-end
-
 task :create_nav do
-  run "cd #{release_path}/public;curl https://lter.kbs.msu.edu/export/nav/ -o nav.html -s"
-  run "cd #{release_path}/public;curl https://lter.kbs.msu.edu/export/footer/ -o footer.html -s"
-  run "cd #{release_path}/public;curl https://lter.kbs.msu.edu/export/header/ -o header.html -s"
-  run %(cd #{release_path}/public; sed -i 's/src="http:/src="https:/g' footer.html)
-  run %(cd #{release_path}/public; sed -i 's/src="http:/src="https:/g' header.html)
+  run "curl https://lter.kbs.msu.edu/export/nav/ -o #{release_path}/app/views/shared/_nav.html.erb -s"
+  run "curl https://lter.kbs.msu.edu/export/footer/ -o #{release_path}/app/views/shared/_footer.html.erb -s"
+  run "curl https://lter.kbs.msu.edu/export/header/ -o #{release_path}/app/views/shared/_header.html.erb -s"
+  run %(cd #{release_path}/app/views/shared; sed -i 's/src="http:/src="https:/g' _footer.html.erb)
+  run %(cd #{release_path}/app/views/shared; sed -i 's/src="http:/src="https:/g' _header.html.erb)
 end
 
 desc 'Link in the production database.yml'
@@ -160,31 +150,21 @@ task :link_site_keys do
   run "ln -nfs #{deploy_to}/shared/config/secret_token.rb #{release_path}/config/initializers/secret_token.rb"
 end
 
-desc 'Link in the new relic monitoring'
-task :link_new_relic do
-  run "ln -nfs #{deploy_to}/shared/config/newrelic.yml #{release_path}/config/newrelic.yml"
-end
+# desc 'Link in the new relic monitoring'
+# task :link_new_relic do
+#   run "ln -nfs #{deploy_to}/shared/config/newrelic.yml #{release_path}/config/newrelic.yml"
+# end
 
 desc 'Link in the s3 credentials'
 task :link_s3 do
-  run "ln -nfs #{deploy_to}/shared/config/s3.yml #{release_path}/config/s3.yml"
+  # run "ln -nfs #{deploy_to}/shared/config/s3.yml #{release_path}/config/s3.yml"
+  run "ln -nfs #{deploy_to}/shared/config/storage.yml #{release_path}/config/storage.yml"
 end
 
 desc 'link unicorn.rb'
 task :link_unicorn do
   # run "ln -nfs /etc/unicorn/#{application} #{release_path}/config/unicorn.rb"
   run "ln -nfs #{deploy_to}/shared/config/unicorn.rb #{release_path}/config/unicorn.rb"
-end
-
-# desc 'set asset host on production'
-# task :update_asset_host do
-#   # run "sed -i %Q{s/# config.action_controller.asset_host = 'http:\/\/assets.example.com'/config.action_controller.asset_host=/http://#{public_asset_host}} #{release_path}/config/environments/production.rb"
-#   run "sed -i  %Q{s/# config.action_controller.asset_host = 'http:\/\/assets.example.com'/config.action_controller.asset_host = 'http:\/\/lter.kbs.msu.edu\/metadata-assets\/'/}  #{release_path}/config/environments/production.rb"
-# end
-
-desc 'link asset directory'
-task :link_assets do
-  run "ln -nfs #{deploy_to}/shared/assets #{release_path}"
 end
 
 desc 'push secrets'
