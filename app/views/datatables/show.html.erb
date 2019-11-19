@@ -26,7 +26,8 @@
 
     <% part_of_text = "This datatable is part of the " + link_to(datatable.dataset.title, dataset_path(datatable.dataset.id)) +  " dataset. " %>
     <div class='truncate'>
-      <%=raw textilize( part_of_text + datatable.dataset.try(:abstract)) %>
+      <% dataset_abstract = datatable.dataset.try(:abstract) || '' %>
+      <%=raw textilize( part_of_text + dataset_abstract) %>
     </div>
     <% unless datatable.study.try(:warning).try(:empty?) %>
       <h4>Note<h4>
