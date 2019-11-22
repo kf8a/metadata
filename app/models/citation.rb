@@ -13,7 +13,7 @@ class Citation < ApplicationRecord
   has_many :authors, -> { order(:seniority) }, dependent: :destroy, inverse_of: :citation
   has_many :editors, -> { order(:seniority) }, dependent: :destroy, inverse_of: :citation
 
-  belongs_to :citation_type
+  belongs_to :citation_type, optional: true
   belongs_to :website, optional: true
 
   has_and_belongs_to_many :datatables, optional: true
