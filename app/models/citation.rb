@@ -14,10 +14,10 @@ class Citation < ApplicationRecord
   has_many :editors, -> { order(:seniority) }, dependent: :destroy, inverse_of: :citation
 
   belongs_to :citation_type
-  belongs_to :website
+  belongs_to :website, optional: true
 
-  has_and_belongs_to_many :datatables
-  has_and_belongs_to_many :treatments, conditions: { use_in_citations: true }
+  has_and_belongs_to_many :datatables, optional: true
+  has_and_belongs_to_many :treatments, conditions: { use_in_citations: true }, optional: true
 
   accepts_nested_attributes_for :authors
   accepts_nested_attributes_for :editors
