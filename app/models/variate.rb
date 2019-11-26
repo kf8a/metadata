@@ -5,7 +5,7 @@ include REXML
 # column in a datatable.
 class Variate < ApplicationRecord
   belongs_to :datatable, touch: true
-  belongs_to :unit
+  belongs_to :unit, optional: true
 
   scope :valid_for_eml, -> { where("measurement_scale != '' AND description != ''") }
 
