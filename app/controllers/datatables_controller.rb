@@ -202,7 +202,7 @@ class DatatablesController < ApplicationController
         Datatable.search @keyword_list, with: { website: website.id }
       else
         Datatable.where(on_web: true)
-                 .includes(:dataset).references(:dataset)
+                 .joins(:dataset)
                  .where('is_secondary is false and website_id = ?', website.id)
       end
 
@@ -222,9 +222,9 @@ class DatatablesController < ApplicationController
         Datatable.search @keyword_list, with: { website: website.id }
       else
         Datatable.where(on_web: true)
-                 .includes(:dataset).references(:dataset)
-                 .where('data_restricted is FALSE')
+                 .joins(dataset: :sponsor)
                  .where('is_secondary is false and website_id = ?', website.id)
+                 .where('sponsors.data_restricted is false')
       end
 
     @studies = Study.find_all_roots_with_datatables(@datatables)
