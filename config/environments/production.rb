@@ -65,11 +65,11 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :sendmail
   Rails.application.config.middleware.use ExceptionNotification::Rack,
-                                          email: { email_prefix: '[METADATA] ',
-                                                   sender_address:
-                                                   %("notifier" <notifier@oshtemo.kbs.msu.edu>),
-                                                   exception_recipients:
-                                                   %w[bohms@fastmail.com hsiehhs7@msu.edu] }
+            ignore_exceptions: ['ActionView::TemplateError'] + ExceptionNotifier.ignored_exceptions,
+            email: { email_prefix: '[METADATA] ',
+                     sender_address: %("notifier" <notifier@oshtemo.kbs.msu.edu>),
+                     exception_recipients: %w[bohms@fastmail.com hsiehhs7@msu.edu] }
+
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
