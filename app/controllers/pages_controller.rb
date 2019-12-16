@@ -30,9 +30,7 @@ class PagesController < ApplicationController
   end
 
   def update
-    if page.update_attributes(page_params)
-      flash[:notice] = 'Page was successfully updated.'
-    end
+    flash[:notice] = 'Page was successfully updated.' if page.update(page_params)
 
     respond_with page
   end
@@ -45,7 +43,7 @@ class PagesController < ApplicationController
   private
 
   def page
-    Page.find(params[:id])
+    Page.find(params[:id].to_i)
   end
 
   def page_params
