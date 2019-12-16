@@ -14,12 +14,16 @@ class DatatablesController < ApplicationController
   protect_from_forgery except: %i[index show search]
 
   # GET /datatables
-  # GET /datatables.xml
+  # GET /datatables?public=true
   def index
     @website = website
     @area = params[:area]
     store_location_for(:user, datatables_path)
-    retrieve_datatables('')
+    if params[:public]
+      retrieve_public_datatables('')
+    else
+      retrieve_datatables('')
+    end
 
     respond_with @datatables do |format|
       format.rss { render rss: @datatables }
@@ -31,7 +35,11 @@ class DatatablesController < ApplicationController
     query = params['keyword_list']
     redirect_to datatables_url if query.blank?
 
-    retrieve_datatables(query)
+    if params[:public]
+      retrieve_public_datatables(query)
+    else
+      retrieve_datatables(query)
+    end
   end
 
   # GET /datatables/1
@@ -200,6 +208,28 @@ class DatatablesController < ApplicationController
 
     @studies = Study.find_all_roots_with_datatables(@datatables)
   end
+
+  def retrieve_public_datatables(query)
+    @default_value = 'Search for... '
+    @themes = Theme.roots
+
+    logger.info "query: #{query}"
+    @keyword_list = SearchInputSanitizer.sanitize(query)
+    @keyword_list = nil if @keyword_list.empty? || @keyword_list == @default_value
+
+    @datatables =
+      if @keyword_list
+        Datatable.search @keyword_list, with: { website: website.id }
+      else
+        Datatable.where(on_web: true)
+                 .includes(:dataset).references(:dataset)
+                 .where('data_restricted is FALSE')
+                 .where('is_secondary is false and website_id = ?', website.id)
+      end
+
+    @studies = Study.find_all_roots_with_datatables(@datatables)
+  end
+
 
   def datatable
     @datatable ||= params[:id] ? Datatable.find(params[:id]) : Datatable.new(datatable_params)
