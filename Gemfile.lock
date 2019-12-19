@@ -217,7 +217,7 @@ GEM
     pg (1.1.4)
     power_assert (1.1.5)
     prometheus-client (0.10.0)
-    rack (2.0.7)
+    rack (2.0.8)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.0.0)
