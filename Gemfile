@@ -43,7 +43,7 @@ gem 'ris_parser', git: 'https://github.com/kf8a/ris_parser.git'
 gem 'mysql2', platform: :ruby
 gem 'thinking-sphinx'
 
-gem 'aws-sdk-s3' , '~> 1'
+gem 'aws-sdk-s3', '~> 1'
 
 gem 'sitemap_generator'
 
@@ -77,7 +77,7 @@ group :development, :test do
 
   gem 'rspec-its'
   # TODO: go back to standard gem once 4.0 has been released
-  gem 'rspec-rails', git: 'https://github.com/rspec/rspec-rails', tag: 'v4.0.0.beta3'
+  gem 'rspec-rails', git: 'https://github.com/rspec/rspec-rails', tag: 'v4.0.0.beta4'
 
   # gem 'rspec-rails'
 
