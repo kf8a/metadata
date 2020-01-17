@@ -14,12 +14,8 @@
 
 <%= form.inputs do %>
 <div id = 'files'>
-  <%= form.semantic_fields_for :files do |f| %>
-          <%# <%= file_field_tag "files[]", type: :file, multiple: true %>
-    <%= render :partial => 'file_fields', :locals => {:f => f} %>
-  <% end %>
+  <%= form.file_field :files, multiple: true %>
 </div>
-<%= link_to_add_fields "Add File", form, :dataset_files %>
 <% end %>
 
 <%= form.inputs do %>
