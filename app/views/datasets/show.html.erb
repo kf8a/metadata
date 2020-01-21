@@ -18,15 +18,6 @@
   <% end %>
 </ul>
 
-<h2>Personnel</h2>
-<ul>
-  <% personnel = dataset.datatable_people -%>
-  <% personnel.each do |person| -%>
-    <li>
-      <%= link_to person.full_name, person %>
-    </li>
-  <% end %>
-</ul>
 <% if dataset.datatables.any? -%>
 <h2>Tables</h2>
 <dl>
