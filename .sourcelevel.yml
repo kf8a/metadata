@@ -20,6 +20,7 @@ engines:
     enabled: true
   brakeman:
     enabled: true
+    channel: latest
   scss-lint:
     enabled: true
   coffeelint:
@@ -52,7 +53,4 @@ exclude_paths:
 - app/assets/javascripts/application.js
 - app/assets/javascripts/jquery.truncator.js
 - app/assets/javascripts/jquery.selso.js
-- app/assets/stylesheets/token-input.css
-- app/assets/stylesheets/token-input-facebook.css
-- app/assets/stylesheets/token-input-mac.css
 -  app/assets/javascripts/jquery.quickTree.js
