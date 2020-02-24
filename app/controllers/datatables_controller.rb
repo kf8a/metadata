@@ -190,12 +190,11 @@ class DatatablesController < ApplicationController
   end
 
   def retrieve_datatables(query)
-    @default_value = 'Search for... '
     @themes = Theme.roots
 
     logger.info "query: #{query}"
     @keyword_list = SearchInputSanitizer.sanitize(query)
-    @keyword_list = nil if @keyword_list.empty? || @keyword_list == @default_value
+    @keyword_list = nil if @keyword_list.empty? || @keyword_list == ''
 
     @datatables =
       if @keyword_list
