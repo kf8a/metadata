@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require 'rexml/document'
+# require 'rexml/document'
 require 'csv'
 require 'eml'
-include REXML
 
 # A datatable is one of the main objects in the system
 # it represents a table of data generally a view in the database
 class Datatable < ApplicationRecord
+  # include REXML
   attr_accessor :materialized_datatable_id
 
   acts_as_taggable_on :keywords
@@ -273,6 +273,7 @@ class Datatable < ApplicationRecord
 
   def title_and_years
     return title if begin_date.nil? || end_date.nil?
+
     year_end = end_date.year
     year_start = begin_date.year
     years = if year_end == year_start
@@ -285,6 +286,7 @@ class Datatable < ApplicationRecord
 
   def ongoing?
     return false if completed?
+
     next_expected_update = update_frequency_days.present? ? update_frequency_days : 365
     expected_update = end_date.year + next_expected_update / 265 + 2
     expected_update > Time.zone.now.year
@@ -459,7 +461,7 @@ class Datatable < ApplicationRecord
   def offset
     self.number_of_released_records ||= total_records
     result = total_records - number_of_released_records
-    result < 0 ? 0 : result
+    result.negative? ? 0 : result
   end
 
   def total_records
