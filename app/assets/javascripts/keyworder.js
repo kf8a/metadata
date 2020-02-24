@@ -1,4 +1,4 @@
-$(function() {
+jQuery(function() {
   const default_text = 'Search for core areas, keywords or people';
 
   $('#keyworder').focus(function() {
