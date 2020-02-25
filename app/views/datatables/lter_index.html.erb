@@ -11,8 +11,8 @@
     </p>
 
     <%= render 'search_form' %>
-    <% if @area %>
 
+    <% if @area %>
       <ul class='quickTree'>
         <% @studies.each do |study| %>
           <% next unless study.include_datatables?(@datatables)%>
