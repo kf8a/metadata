@@ -70,6 +70,18 @@
         <td>Core Areas</td>
         <td><%= datatable.core_areas.all.collect {|x| x.name }.join(',') %></td>
     <% end %>
+    <% unless datatable.dataset.dataset_dois.empty? %>
+      <tr>
+        <td>Repoistory DOI's:</td>
+        <td>
+          <ul>
+            <% datatable.dataset.dataset_dois.each do |doi| %>
+              <li><%= link_to "Version: #{doi.version}", "https://doi.org/" + doi.doi %></li>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+    <% end %>
     <% if datatable.related_tables.any? %>
       <tr>
         <td>Related Tables:</td>
