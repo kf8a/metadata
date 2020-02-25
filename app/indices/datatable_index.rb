@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ThinkingSphinx::Index.define :datatable, with: :active_record do
   indexes title
   indexes description
@@ -10,6 +12,7 @@ ThinkingSphinx::Index.define :datatable, with: :active_record do
   indexes dataset.title, as: :dataset_title
   indexes dataset.dataset, as: :dataset_identifier
   indexes core_areas.name, as: :core_area
+  indexes dataset.dataset_dois.doi, as: :dataset_doi
   indexes name
   has dataset.website_id, as: :website
   where 'datatables.on_web is true and datasets.on_web'
