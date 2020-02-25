@@ -20,7 +20,7 @@ class Dataset < ApplicationRecord
   has_and_belongs_to_many :themes
   belongs_to              :website, optional: true
   has_many                :data_versions, dependent: :destroy
-  has_many                :dois, dependent: :destroy
+  has_many                :dataset_dois, dependent: :destroy
 
   validates :abstract, presence:   true
   validates :dataset,  uniqueness: true
@@ -70,6 +70,10 @@ class Dataset < ApplicationRecord
 
   def to_s
     dataset
+  end
+
+  def current_doi
+    dataset_dois.order('version desc').first
   end
 
   def increment_version
