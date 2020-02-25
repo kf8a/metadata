@@ -72,13 +72,10 @@
     <% end %>
     <% unless datatable.dataset.dataset_dois.empty? %>
       <tr>
-        <td>Repoistory DOI's:</td>
+        <td>Repository link:</td>
         <td>
-          <ul>
-            <% datatable.dataset.dataset_dois.each do |doi| %>
-              <li><%= link_to "Version: #{doi.version}", "https://doi.org/" + doi.doi %></li>
-            <% end %>
-          </ul>
+            <% doi = datatable.dataset.current_doi %>
+              <%= link_to "http://doi.org/#{doi.doi}", "https://doi.org/" + doi.doi %>
         </td>
       </tr>
     <% end %>
