@@ -70,15 +70,15 @@
         <td>Core Areas</td>
         <td><%= datatable.core_areas.all.collect {|x| x.name }.join(',') %></td>
     <% end %>
-    <% unless datatable.dataset.dataset_dois.empty? %>
       <tr>
         <td>Repository link:</td>
         <td>
+          <% if datatable.dataset.current_doi %>
             <% doi = datatable.dataset.current_doi %>
-              <%= link_to "http://doi.org/#{doi.doi}", "https://doi.org/" + doi.doi %>
+            <%= link_to "http://doi.org/#{doi.doi}" %>
+          <% end %>
         </td>
       </tr>
-    <% end %>
     <% if datatable.related_tables.any? %>
       <tr>
         <td>Related Tables:</td>

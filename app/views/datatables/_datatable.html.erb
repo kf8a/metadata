@@ -3,6 +3,10 @@
     <i class="fas fa-lock"></i>
   <% end %>
   <%=link_to raw(datatable.title_and_years), datatable_path(datatable) %>
+  <% unless datatable.dataset.current_doi %>
+    <i class="fa fa-fire" aria-hidden="true"></i>
+  <% end %>
+
   <% if @area %>
     <span class='core-areas'>
       (<%= datatable.id %>)
