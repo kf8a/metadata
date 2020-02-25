@@ -280,7 +280,7 @@ class EmlDatasetBuilder
 
     @eml.keywordSet do
       dataset.core_areas.each do |keyword|
-        @eml.keyword  keyword.name
+        @eml.keyword keyword.name
       end
       @eml.keywordThesaurus 'LTER Core Research Area'
     end
