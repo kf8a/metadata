@@ -9,18 +9,20 @@ namespace :dois do
     scope = 'knb-lter-kbs'
     p Dataset.where('website_id = 1 and sponsor_id = 1').first
     Dataset.where('website_id = 1 and sponsor_id = 1').find_each do |dataset|
-      p dataset
       identifier = dataset.metacat_id || dataset.id
       url = "https://pasta.lternet.edu/package/eml/#{scope}/#{identifier}"
       response = Faraday.get url
       if response.status == 200
         response.body.each_line do |revision|
-          revision = revision.to_i
+          revision = revision.chomp.to_i
           url = "https://pasta.lternet.edu/package/doi/eml/#{scope}/#{identifier}/#{revision}"
           response = Faraday.get url
           next unless response.body =~ /doi/
 
-          doi = DatasetDoi.new(doi: response.body, version: revision)
+          data = response.body.sub(/doi:/, '')
+          next if dataset.dataset_dois.where(version: revision).first
+
+          doi = DatasetDoi.new(doi: data, version: revision)
 
           dataset.dataset_dois << doi
           p [dataset.id, dataset.title, doi]
