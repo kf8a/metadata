@@ -60,12 +60,14 @@ gem 'uglifier'
 gem 'prometheus-client' # , '~> 0.4.2'
 gem 'web-console', group: :development
 
-gem 'awesome_print'
+gem 'faraday'
 
 group :development do
+  gem 'awesome_print'
   gem 'bcrypt_pbkdf'
   gem 'capistrano', '~>2'
   gem 'ed25519'
+
   gem 'listen'
   gem 'rbnacl' # , '< 5.0'
   gem 'rbnacl-libsodium'
