@@ -175,7 +175,18 @@
   <% end %>
 <% end %>
 
-<%= link_to 'Back to Data Catalog', datatables_path() %>&nbsp;&nbsp;
-<%= link_to 'Edit', edit_datatable_path(datatable) if admin? %>
-<%= link_to 'EML formatted metadata', dataset_path(datatable.dataset,:format => :eml) %>
+<% if admin? %>
+  <div>
+    <% if datatable.csv_file.attached? %>
+      <%= link_to 'Un Cache', retract_datatable_path(datatable) %>
+    <% else %>
+      <%= link_to 'Cache', publish_datatable_path(datatable) %>
+    <% end %>
+    <%= link_to 'Edit', edit_datatable_path(datatable) %>
+  </div>
+<% end %>
+
+<div>
+  <%= link_to 'Back to Data Catalog', datatables_path() %>&nbsp;&nbsp;
+  <%= link_to 'EML formatted metadata', dataset_path(datatable.dataset,:format => :eml) %>
 </div>

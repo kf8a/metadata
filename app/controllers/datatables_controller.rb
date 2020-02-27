@@ -80,7 +80,14 @@ class DatatablesController < ApplicationController
 
   # PUT publish
   def publish
+    initialize_instance_variables
     datatable.publish
+    render nothing: true
+  end
+
+  def retract
+    initialize_instance_variables
+    datatable.retract
     render nothing: true
   end
 
@@ -118,7 +125,7 @@ class DatatablesController < ApplicationController
   # DELETE /datatables/1
   def destroy
     datatable.destroy
-    respond_with datatable
+    redirect_to :index
   end
 
   # TODO: only return the ones for the right website
