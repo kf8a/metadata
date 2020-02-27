@@ -40,20 +40,6 @@ class Datatable < ApplicationRecord
 
   has_one_attached :csv_file
 
-  # if Rails.env.production?
-  #   has_attached_file :csv_cache,
-  #                     storage: :s3,
-  #                     bucket: 'metadata_production',
-  #                     path: '/datatables/csv/:id.:extension',
-  #                     s3_credentials: Rails.root.join('config', 's3.yml'),
-  #                     s3_region: 'us-east-1',
-  #                     s3_permissions: 'authenticated-read'
-  # else
-  #   has_attached_file :csv_cache,
-  #                     url: '/datatables/:id/download',
-  #                     path: ':rails_root/uploads/datatables/:attachment/:id.:extension'
-  # end
-
   # validates_attachment_file_name :csv_cache, matches: [/csv\Z/ ]
   # validates_attachment_content_type :csv_cache, content_type: /csv\Z/
 
