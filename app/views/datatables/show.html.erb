@@ -178,11 +178,11 @@
 <% if admin? %>
   <div>
     <% if datatable.csv_file.attached? %>
-      <%= link_to 'Un Cache', retract_datatable_path(datatable) %>
+      <%= link_to 'Un Cache', retract_datatable_path(datatable), method: :put %>
     <% else %>
-      <%= link_to 'Cache', publish_datatable_path(datatable) %>
+      <%= link_to 'Cache', publish_datatable_path(datatable), method: :put %>
     <% end %>
-    <%= link_to 'Edit', edit_datatable_path(datatable) %>
+    <%= link_to 'Edit', edit_datatable_path(datatable)  %>
   </div>
 <% end %>
 
