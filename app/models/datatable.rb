@@ -38,6 +38,8 @@ class Datatable < ApplicationRecord
 
   scope :by_name, -> { order :name }
 
+  has_one_attached :csv_file
+
   # if Rails.env.production?
   #   has_attached_file :csv_cache,
   #                     storage: :s3,
@@ -179,23 +181,17 @@ class Datatable < ApplicationRecord
 
   # publish a dataset to S3 for caching
   def publish
-    begin
-      file = Tempfile.new('csv_cache')
-      file << approved_csv
-      self.csv_cache = file
-      self.csv_cache_file_name = "#{id}.csv"
-      self.csv_cache_content_type = 'text/csv'
-      save!
-    ensure
-      file.close
-      file.unlink
-    end
+    file = Tempfile.new('csv_cache')
+    file << approved_csv
+    file.close
+    csv_file.attach(io: File.open(file), filename: "#{id}-#{title.tr(' ','-')}.csv", content_type: 'text/csv')
+    save!
+    file.unlink
   end
 
   # remove a dataset from S3 caching
   def retract
-    csv_cache.destroy
-    save
+    csv_file.purge
   end
 
   delegate :restricted_to_members?, to: :dataset
