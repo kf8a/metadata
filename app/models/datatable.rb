@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
-# require 'rexml/document'
 require 'csv'
 require 'eml'
 
 # A datatable is one of the main objects in the system
 # it represents a table of data generally a view in the database
 class Datatable < ApplicationRecord
-  # include REXML
   attr_accessor :materialized_datatable_id
 
   acts_as_taggable_on :keywords
@@ -16,12 +14,12 @@ class Datatable < ApplicationRecord
   has_one                 :collection
   has_and_belongs_to_many :core_areas
   belongs_to              :dataset, touch: true
-  has_many                :data_contributions
-  has_many                :ownerships
+  has_many                :data_contributions, dependent: :destroy
+  has_many                :ownerships, dependent: :destroy
   has_many                :owners, through: :ownerships, source: :user
   has_many                :people, through: :data_contributions
-  has_many                :permission_requests
-  has_many                :permissions
+  has_many                :permission_requests, dependent: :destroy
+  has_many                :permissions, dependent: :destroy
   has_many                :requesters, through: :permission_requests, source: :user
   has_and_belongs_to_many :protocols
   belongs_to              :study, touch: true
@@ -149,7 +147,9 @@ class Datatable < ApplicationRecord
 
   def collect_roles(name)
     role = Role.find_by(name: name)
-    data_contributions.collect { |affiliation| affiliation.person if affiliation.role == role }.compact
+    data_contributions.collect do |affiliation|
+      affiliation.person if affiliation.role == role
+    end.compact
   end
 
   def keyword_names
@@ -170,7 +170,9 @@ class Datatable < ApplicationRecord
     file = Tempfile.new('csv_cache')
     file << approved_csv
     file.close
-    csv_file.attach(io: File.open(file), filename: "#{id}-#{title.tr(' ','-')}.csv", content_type: 'text/csv')
+    csv_file.attach(io: File.open(file),
+                    filename: "#{id}-#{title.tr(' ', '-')}.csv",
+                    content_type: 'text/csv')
     save!
     file.unlink
   end
@@ -269,7 +271,7 @@ class Datatable < ApplicationRecord
   def ongoing?
     return false if completed?
 
-    next_expected_update = update_frequency_days.present? ? update_frequency_days : 365
+    next_expected_update = update_frequency_days.presence || 365
     expected_update = end_date.year + next_expected_update / 265 + 2
     expected_update > Time.zone.now.year
   end
@@ -307,11 +309,7 @@ class Datatable < ApplicationRecord
   end
 
   def status
-    if workflow_state
-      workflow_state
-    else
-      dataset.try(:status)
-    end
+    workflow_state || dataset.try(:status)
   end
 
   def csv_headers
@@ -350,9 +348,7 @@ class Datatable < ApplicationRecord
       csv << vars
       csv << variate_units if units
       fields = values.fields
-      unless fields.join(' ') =~ /[A-Z]/
-        vars = variates.collect { |variate| variate.name.downcase }
-      end
+      vars = variates.collect { |variate| variate.name.downcase } unless fields.join(' ') =~ /[A-Z]/
       values.each do |row|
         csv << vars.collect { |variate| row[variate] }
       end
