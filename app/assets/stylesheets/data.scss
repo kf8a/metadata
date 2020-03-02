@@ -6,6 +6,7 @@
   background: none;
   background-color: white;
 }
+
 #metadata {
   padding-right: 10px;
 }
@@ -15,9 +16,15 @@
 }
 
 .metadata {
-  .fa, .fab, .fad, .fal, .far, .fas  {
+  .fa,
+  .fab,
+  .fad,
+  .fal,
+  .far,
+  .fas {
     font-size: 6pt;
   }
+
   ul.person-card {
     list-style-type: none;
   }
@@ -69,15 +76,15 @@
   }
 
   .highlight {
-    margin-top: .9em;
     font-weight: bold;
+    margin-top: .9em;
     text-align: right;
   }
 
   h2 {
     clear: both;
-    padding-top: 3em;
     margin-bottom: 0px;
+    padding-top: 3em;
   }
 
   h4 {
@@ -88,7 +95,9 @@
     p {
       margin: 1em 0;
     }
-    ol, ul {
+
+    ol,
+    ul {
       margin: 5px;
       padding-left: 3em;
     }
@@ -99,7 +108,9 @@
     font-weight: bold;
   }
 
-  ul, li, ol {
+  ul,
+  li,
+  ol {
     margin-left: 10px;
   }
 
@@ -138,18 +149,18 @@
   }
 
   .pub-year {
-    font-weight: bold;
-    font-size: 1.1em;
-    margin-bottom: 1.4em;
-    text-align: right;
     border-bottom-style: solid;
     border-bottom-width: 2px;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 1.4em;
     padding-right: 10px;
+    text-align: right;
   }
 
   li ul li {
-    padding-left: 1.5em;
     margin-bottom: .1em;
+    padding-left: 1.5em;
   }
 
   .edit {
@@ -196,11 +207,11 @@
     margin-bottom: 10px;
 
     input {
-      padding: 5px 5px 4px 5px;
-      margin-right: 10px;
       border: solid;
       border-width: 1px;
       font-size: 18px;
+      margin-right: 10px;
+      padding: 5px 5px 4px 5px;
     }
   }
 
@@ -221,10 +232,10 @@
   }
 
   #search-submit {
-    text-align: right;
-    float: none;
     display: inline;
+    float: none;
     margin-left: 10px;
+    text-align: right;
   }
 
   #keyword-search {
@@ -232,23 +243,23 @@
   }
 
   a.download-link {
-    display: block;
-    padding: 10px;
-    margin-top: 20px;
-    margin-right: 30px;
-    margin-bottom: 20px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
     border-style: outset;
-    font-variant: small-caps;
-    text-align: center;
+    display: block;
     font-size: medium;
+    font-variant: small-caps;
+    margin-bottom: 20px;
+    margin-right: 30px;
+    margin-top: 20px;
+    padding: 10px;
+    text-align: center;
   }
 
   a.download-link:hover {
-    text-decoration: none;
     border-style: inset;
+    text-decoration: none;
   }
 
   li.study-index p {
@@ -258,12 +269,12 @@
   }
 
   li.study-title {
+    font-size: 14px;
     margin: 2px;
-    padding-top: 1px;
     padding-bottom: 1px;
     padding-right: 1px;
+    padding-top: 1px;
     padding: 1px;
-    font-size: 14px;
   }
 
   .study-title > .expanded {
@@ -280,9 +291,9 @@
 
   li.study-title ul {
     font-weight: normal;
-    position: relative;
     left: 1px;
     margin-right: 1px;
+    position: relative;
   }
 
   li.study-title li {
@@ -324,10 +335,10 @@
   }
 
   .data-description li {
-      margin-left: 0px;
+    margin-left: 0;
   }
 
-  .data-description tr td:first-child{
+  .data-description tr td:first-child {
     width: 12em;
     font-weight: bold;
     vertical-align: top;
@@ -345,7 +356,7 @@
     padding-bottom: 1em;
   }
 
-  div.collapsable h2{
+  div.collapsable h2 {
     font-size: small;
     font-style: normal;
     font-weight: normal;
@@ -369,7 +380,6 @@
   }
 
   #protocols {
-    display: inline-block;
     float: left;
     width: 300px;
   }
@@ -378,18 +388,48 @@
     border-radius: 25px;
     background: black;
     padding: 20px;
-    h1, a, p { color: white; }
+    h1,
+    a,
+    p {
+      color: white;
+    }
   }
 
   // .tree * {margin:0; padding:0;}
-  .tree a { text-decoration: none;}
-  .tree li {list-style:none; padding-left: 21px;}
-  .tree li.root {padding-left: 0;}
-  .tree li li { background-repeat: no-repeat 17px center; margin-left: 10px; padding-left: 31px;}
-  .tree li li.root {padding-left: 10px; }
-  // .tree li li.root.last {background:none; }
-  .tree li li.last {}
-  .expand {background:url('/metadata-assets/assets/plus_minus.png') no-repeat; padding-left: 20px; text-indent: 16px;}
-  .contract {background-position: 0 -16px;}
-  .expand:hover {cursor: pointer;}
+  .tree a {
+    text-decoration: none;
+  }
+
+  .tree li {
+    padding-left: 21px;
+    list-style: none;
+  }
+
+  .tree li.root {
+    padding-left: 0;
+  }
+
+  .tree li li {
+    background-repeat: no-repeat 17px center;
+    margin-left: 10px;
+    padding-left: 31px;
+  }
+
+  .tree li li.root {
+    padding-left: 10px;
+  }
+
+  .expand {
+    background: url('/metadata-assets/assets/plus_minus.png') no-repeat;
+    padding-left: 20px;
+    text-indent: 16px;
+  }
+
+  .contract {
+    background-position: 0 -16px;
+  }
+
+  .expand:hover {
+    cursor: pointer;
+  }
 }
