@@ -30,9 +30,9 @@
   }
 
   ul.multicolumn {
-    margin: .1em;
     -moz-column-width: 17em;
     -webkit-column-width: 17em;
+    margin: .1em;
   }
 
   .committee {
@@ -186,8 +186,8 @@
   }
 
   .updated_at {
-    margin-top: 2em;
     margin-bottom: 3em;
+    margin-top: 2em;
   }
 
   .no-data {
@@ -203,8 +203,8 @@
   }
 
   #search-form {
-    padding-top: 36px;
     margin-bottom: 10px;
+    padding-top: 36px;
 
     input {
       border: solid;
@@ -325,9 +325,9 @@
   }
 
   table.data-description {
-    width: 100%;
     border-top-style: solid;
     border-top-width: 1px;
+    width: 100%;
 
     ul {
       list-style-type: none;
@@ -339,9 +339,9 @@
   }
 
   .data-description tr td:first-child {
-    width: 12em;
     font-weight: bold;
     vertical-align: top;
+    width: 12em;
   }
 
   table.variate_table tbody tr th {
@@ -388,6 +388,7 @@
     border-radius: 25px;
     background: black;
     padding: 20px;
+
     h1,
     a,
     p {
@@ -401,8 +402,8 @@
   }
 
   .tree li {
-    padding-left: 21px;
     list-style: none;
+    padding-left: 21px;
   }
 
   .tree li.root {
