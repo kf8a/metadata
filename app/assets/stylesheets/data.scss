@@ -51,15 +51,15 @@
   }
 
   .core-areas {
-    font-family: monospace;
     float: right;
+    font-family: monospace;
     padding-right: 10px;
   }
 
   .bulleted {
+    list-style-position: inside;
     list-style-type: circle;
     text-indent: 1em;
-    list-style-position: inside;
   }
 
   .citation-hint {
@@ -82,7 +82,7 @@
 
   h2 {
     clear: both;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     padding-top: 3em;
   }
 
@@ -180,10 +180,11 @@
 
   #network-databases h2 {
     font-size: small;
-    margin-bottom: 0.5em;
+    margin-bottom: .5em;
   }
 
   .updated_at {
+    font-size: .5em;
     margin-bottom: 3em;
     margin-top: 2em;
   }
@@ -259,18 +260,18 @@
   }
 
   li.study-index p {
-    font-weight: normal;
     font-size: .7em;
+    font-weight: normal;
     margin-left: 4em;
   }
 
   li.study-title {
     font-size: 14px;
     margin: 2px;
+    padding: 1px;
     padding-bottom: 1px;
     padding-right: 1px;
     padding-top: 1px;
-    padding: 1px;
   }
 
   .study-title > .expanded {
@@ -356,10 +357,6 @@
     font-size: small;
     font-style: normal;
     font-weight: normal;
-  }
-
-  .updated_at {
-    font-size: .5em;
   }
 
   .space-after {
