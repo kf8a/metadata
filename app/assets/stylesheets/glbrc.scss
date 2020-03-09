@@ -11,17 +11,11 @@ $menu-width: 10em;
 
 .rounded-corners {
 	border-radius: 10px;
-	-moz-border-radius:10px;
-	-webkit-border-radius:10px;
 }
 
 .bottom-rounded-corners {
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
-	-moz-border-bottom-left-radius: 10px;
-	-moz-border-bottom-right-radius: 10px;
-	-webkit-border-bottom-left-radius: 10px;
-	-webkit-border-bottom-right-radius: 10px;
 }
 
 .image_caption_right {
@@ -316,14 +310,12 @@ $menu-width: 10em;
 		}
 
 		ul.multicolumn {
-			-moz-column-width: 17em;
-			-webkit-column-width: 17em;
+			column-width: 17em;
 			margin: 0.1em;
 		}
 
 		.twocolumn {
-			-moz-column-width: 20em;
-			-webkit-column-width: 20em;
+			column-width: 20em;
 		}
 
 		.right {
@@ -472,6 +464,7 @@ $menu-width: 10em;
 	#point-to-sign-in {
 		background-color:#EDEDED;
 	  border: 2px solid #666666;
+	  box-shadow:0 0 5px #888888;
 	  font-size: 15px;
 		left: 600px;
 	  line-height:1.3em;
@@ -483,8 +476,6 @@ $menu-width: 10em;
 		top: 30px;
 	  width:200px;
 		z-index: 100;
-	  -moz-box-shadow:0 0 5px #888888;
-	  -webkit-box-shadow:0 0 5px #888888;
 	}
 	#sign-in-arrow-border {
 		border-color: transparent transparent #666666   transparent;

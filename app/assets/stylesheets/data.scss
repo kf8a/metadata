@@ -30,8 +30,7 @@
   }
 
   ul.multicolumn {
-    -moz-column-width: 17em;
-    -webkit-column-width: 17em;
+    column-width: 17em;
     margin: .1em;
   }
 
@@ -140,8 +139,7 @@
   }
 
   .twocolumn {
-    -moz-column-width: 20em;
-    -webkit-column-width: 20em;
+    column-width: 20em;
   }
 
   ul.citations {
@@ -243,8 +241,6 @@
   }
 
   a.download-link {
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
     border-radius: 10px;
     border-style: outset;
     display: block;
