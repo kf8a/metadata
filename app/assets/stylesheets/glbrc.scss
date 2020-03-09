@@ -153,8 +153,8 @@ $menu-width: 10em;
 			a {
 				display: block;
 				height: $menu-height;
-				width: $menu-width;
         text-decoration: none;
+				width: $menu-width;
       }
       :hover {
         background-color: $light-blue;
@@ -471,26 +471,26 @@ $menu-width: 10em;
 
 	#point-to-sign-in {
 		background-color:#EDEDED;
+	  border: 2px solid #666666;
+	  font-size: 15px;
 		left: 600px;
-		opacity:0.6;
-		top:30px;
-		z-index:100;
-	  border:2px solid #666666;
-	  font-size:15px;
 	  line-height:1.3em;
 	  margin:10px auto;
+		opacity: 0.6;
 	  padding:10px;
 	  position:absolute;
 	  text-align:center;
+		top: 30px;
 	  width:200px;
+		z-index: 100;
 	  -moz-box-shadow:0 0 5px #888888;
 	  -webkit-box-shadow:0 0 5px #888888;
 	}
 	#sign-in-arrow-border {
 		border-color: transparent transparent #666666   transparent;
-		bottom: 0px;
 	  border-style: solid;
 	  border-width: 10px;
+		bottom: 0px;
 	  height:0;
 	  left:60px;
 	  position:absolute;
@@ -500,9 +500,9 @@ $menu-width: 10em;
 
 	#sign-in-arrow {
 		border-color: transparent transparent #EDEDED transparent;
-		bottom: 0px;
 	  border-style: solid;
 	  border-width: 10px;
+		bottom: 0px;
 	  height:0;
 	  left:60px;
 	  position:absolute;
