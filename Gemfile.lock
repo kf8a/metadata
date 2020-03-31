@@ -254,7 +254,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.20.3, < 2.0)
     raindrops (0.19.1)
-    rake (10.5.0)
+    rake (12.3.3)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -382,7 +382,7 @@ DEPENDENCIES
   prometheus-client
   rails (~> 6.0)
   rails-controller-testing
-  rake (< 11.0)
+  rake (< 13.0)
   rbnacl
   rbnacl-libsodium
   responders
