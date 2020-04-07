@@ -75,7 +75,7 @@
         <td>
           <% if datatable.dataset.current_doi %>
             <% doi = datatable.dataset.current_doi %>
-            <%= link_to "http://doi.org/#{doi.doi}" %>
+            <%= link_to "http://doi.org/#{doi.doi}", "https://doi.org/#{doi.doi}" %>
           <% end %>
         </td>
       </tr>
