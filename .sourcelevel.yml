@@ -1,10 +1,3 @@
-# This configuration was used Ebert to review the kf8a/metadata repository
-# on 4d4145b19225f529208caeca832004bb1d22f51e.
-# You can make this the default configuration for future reviews by moving this
-# file to your repository as `.ebert.yml` and pushing it to GitHub, and tweak
-# it as you wish - To know more on how to change this file to better review your
-# repository you can go to https://ebertapp.io/docs/config and see the configuration
-# details.
 ---
 styleguide: kf8a/linters
 engines:
@@ -53,4 +46,4 @@ exclude_paths:
 - app/assets/javascripts/application.js
 - app/assets/javascripts/jquery.truncator.js
 - app/assets/javascripts/jquery.selso.js
--  app/assets/javascripts/jquery.quickTree.js
+- app/assets/javascripts/jquery.quickTree.js
