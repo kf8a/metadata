@@ -9,11 +9,9 @@ class AffiliationsController < ApplicationController
     @affiliations = Affiliation.all
   end
 
-  def show
-  end
+  def show; end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if affiliation.update_attributes(affiliation_params)
