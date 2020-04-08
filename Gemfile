@@ -15,7 +15,6 @@ gem 'formtastic'
 gem 'kramdown', '~> 2.1'
 gem 'nokogiri'
 gem 'pg'
-gem 'rake'
 gem 'RedCloth'
 
 gem 'country_select', '~> 4.0'
