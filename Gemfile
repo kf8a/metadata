@@ -44,7 +44,7 @@ gem 'thinking-sphinx'
 
 gem 'aws-sdk-s3', '~> 1'
 
-gem 'rake'
+gem 'rake', ">= 12.3.3"
 
 gem 'sitemap_generator'
 
