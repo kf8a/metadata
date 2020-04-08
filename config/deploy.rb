@@ -18,7 +18,7 @@ set :deploy_to, '/var/u/apps/metadata'
 # set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, "config/database.yml", '.env', "config/site_keys.rb", "config/secret_token.rb", "config/storage.yml", "config/unicorn/production.rb"
+append :linked_files, "config/database.yml", "config/site_keys.rb", "config/secret_token.rb", "config/storage.yml", "config/unicorn/production.rb"
 
 # Default value for linked_dirs is []
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
