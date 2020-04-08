@@ -42,3 +42,7 @@ storage/
 app/views/shared/_footer.html.erb
 app/views/shared/_header.html.erb
 app/views/shared/_nav.html.erb
+
+/config/credentials/staging.key
+
+/config/credentials/production.key

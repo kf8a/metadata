@@ -21,7 +21,7 @@ set :deploy_to, '/var/u/apps/metadata'
 append :linked_files, "config/database.yml", "config/site_keys.rb", "config/secret_token.rb", "config/storage.yml", "config/unicorn/production.rb"
 
 # Default value for linked_dirs is []
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "config/credentials"
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -30,7 +30,7 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 # set :local_user, -> { `git config user.name`.chomp }
 
 # Default value for keep_releases is 5
-set :keep_releases, 20
+set :keep_releases, 50
 
 set :keep_assets, 2
 
@@ -47,7 +47,6 @@ after 'deploy', 'thinking_sphinx:index'
 after 'deploy', 'thinking_sphinx:start'
 
 before 'deploy:updated', 'thinking_sphinx:stop'
-# after 'deploy:updated', 'sphinx:symlink_indexes'
 
 namespace :deploy do
   desc 'Run rake yarn install'
@@ -72,13 +71,6 @@ namespace :assets do
   end
 end
 
-namespace :sphinx do
-  desc 'Symlink Sphinx indexes'
-  task :symlink_indexes do
-    run "ln -nfs #{shared_path}/db/sphinx #{release_path}/db/sphinx"
-  end
-end
-
 task :create_nav do
   on roles(:app) do
     execute "curl https://lter.kbs.msu.edu/export/nav/ -o #{release_path}/app/views/shared/_nav.html.erb -s"
@@ -88,7 +80,6 @@ task :create_nav do
     execute %(cd #{release_path}/app/views/shared; sed -i 's/src="http:/src="https:/g' _header.html.erb)
   end
 end
-
 
 desc 'push secrets'
 task :push_secrets do
