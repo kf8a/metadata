@@ -262,7 +262,7 @@ class DatatablesController < ApplicationController
                                       :update_frequency_days, :is_secondary, { core_area_ids: [] },
                                       { variates_attributes: [
                                         %i[name weight description unit_id measurement_scale
-                                           data_type:max_valid min_valid date_format
+                                           data_type max_valid min_valid date_format
                                            precision missing_value_indicator _destroy id]
                                       ] },
                                       data_contributions_attributes:
