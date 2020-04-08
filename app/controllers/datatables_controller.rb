@@ -48,7 +48,7 @@ class DatatablesController < ApplicationController
   def show
     @website = website
 
-    store_location_for(:user, citations_path(params[:id].to_i))
+    store_location_for(:user, datatables_path(params[:id].to_i))
 
     if valid_dataset_request?(@subdomain_request)
       respond_to do |format|
