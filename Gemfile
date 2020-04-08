@@ -46,7 +46,7 @@ gem 'aws-sdk-s3', '~> 1'
 
 gem 'sitemap_generator'
 
-group :production do
+group :production, :staging do
   gem 'exception_notification'
   gem 'unicorn'
 end
