@@ -65,7 +65,10 @@ gem 'faraday'
 group :development do
   gem 'awesome_print'
   gem 'bcrypt_pbkdf'
-  gem 'capistrano', '~>2'
+  gem 'capistrano', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails'
+  gem 'capistrano3-unicorn'
   gem 'ed25519'
 
   gem 'listen'
