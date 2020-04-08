@@ -396,6 +396,7 @@ DEPENDENCIES
   prometheus-client
   rails (~> 6.0)
   rails-controller-testing
+  rake
   rbnacl
   rbnacl-libsodium
   responders

@@ -44,6 +44,8 @@ gem 'thinking-sphinx'
 
 gem 'aws-sdk-s3', '~> 1'
 
+gem 'rake'
+
 gem 'sitemap_generator'
 
 group :production, :staging do
