@@ -61,6 +61,8 @@ gem 'web-console', group: :development
 
 gem 'faraday'
 
+gem 'dotenv-rails'
+
 group :development do
   gem 'awesome_print'
   gem 'bcrypt_pbkdf'
