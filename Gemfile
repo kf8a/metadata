@@ -58,7 +58,7 @@ gem 'sassc-rails'
 gem 'therubyracer', require: false
 gem 'uglifier'
 
-gem 'prometheus-client' # , '~> 0.4.2'
+gem 'prometheus-client'
 gem 'web-console', group: :development
 
 gem 'faraday'
@@ -73,7 +73,7 @@ group :development do
   gem 'ed25519'
 
   gem 'listen'
-  gem 'rbnacl' # , '< 5.0'
+  gem 'rbnacl'
   gem 'rbnacl-libsodium'
 end
 
