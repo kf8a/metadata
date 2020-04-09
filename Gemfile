@@ -63,6 +63,8 @@ gem 'web-console', group: :development
 
 gem 'faraday'
 
+gem 'glbrc_auth_helper', path: '../glbrc_auth_helper'
+
 group :development do
   gem 'awesome_print'
   gem 'bcrypt_pbkdf'
