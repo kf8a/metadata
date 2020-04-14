@@ -503,12 +503,14 @@ class Datatable < ApplicationRecord
   private
 
   def convert_year_to_date(year)
-    year + '-1-1'
+    year.to_s + '-1-1'
   end
 
   def year?(year)
     # assume its a year if there are only 4 characters
     return true if year.is_a?(Numeric)
+    return false  unless year
+    return false if year.is_a?(Time)
 
     year.length == 4
   end
@@ -516,12 +518,25 @@ class Datatable < ApplicationRecord
   def query_datatable_for_temporal_extent(query)
     values = ActiveRecord::Base.connection.execute(query)
     dates = values[0]
+    p dates
+
     min = dates['min']
     max = dates['max']
-    min = convert_year_to_date(min) if year?(min)
-    max = convert_year_to_date(max) if year?(max)
-
-    [Time.zone.parse(min).to_date, Time.zone.parse(max).to_date]
+    # TODO case date, year, time
+    results = case
+              when year?(min)
+                min = convert_year_to_date(min) if year?(min)
+                max = convert_year_to_date(max) if year?(max)
+                [Time.zone.parse(min).to_date, Time.zone.parse(max).to_date]
+              when min.is_a?(String)
+                [Time.zone.parse(min).to_date, Time.zone.parse(max).to_date]
+              when min.is_a?(Time)
+                [min.to_date, max.to_date]
+              when min.is_a?(Date)
+                [min,max]
+              end
+    p results
+    results
   end
 
   def eml_protocols
