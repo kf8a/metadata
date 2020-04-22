@@ -2,7 +2,7 @@
   <%= truncate(abstract.authors, length: 80) %>
   <%= abstract.title %>
   <%= link_to "abstract", abstract_path(abstract) %>
-  <% if abstract.pdf.exists? %>
+  <% if abstract.pdf.attached? %>
     <%=link_to abstract.meeting_abstract_type.name.downcase , download_abstract_path(abstract) %>
   <% end %>
 
