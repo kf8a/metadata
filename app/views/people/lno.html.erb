@@ -1,8 +1,8 @@
 <% @active.each do | person| %>
   <%= person.lno_name %>, 'LTER', 'KBS', <%= person.given_name %>, <%= person.sur_name %>,
-<%= person.full_name %>, <%= person.email %>, <%= person.lno_roles.map(&:name).flatten.join('|') %>, <%= person.orcid_id %> , urn:lter:lterCurrentMember, <br/>
+<%= person.full_name %>, <%= person.email %>, <%= person.lno_roles.map(&:name).flatten.join('|') %>, <%= person.orcid_id %> , urn:lter:lterCurrentMember <br/>
 <% end %>
 <% @inactive.each do | person| %>
   'LTER', 'KBS', <%= person.lno_name %>, <%= person.given_name %>, <%= person.sur_name %>,
-<%= person.full_name %>, <%= person.email %>, <%= person.lno_roles.map(&:name).flatten.join('|') %>, <%= person.orcid_id %> , ,<br/>
+<%= person.full_name %>, <%= person.email %>, <%= person.lno_roles.map(&:name).flatten.join('|') %>, <%= person.orcid_id %> , urn:lter:lterFormerMember<br/>
 <% end %>

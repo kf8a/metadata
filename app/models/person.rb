@@ -108,9 +108,7 @@ class Person < ApplicationRecord
       'LTER', 'KBS',
       given_name, sur_name,
       full_name, email, lno_roles.map(&:name).flatten.join('|'),
-      orcid_id, 'urn:lter:lterCurrentMember', '',
-      graduation_year, support, thesis, organization,
-      id
+      orcid_id, 'urn:lter:lterCurrentMember'
     ]
   end
 
@@ -122,9 +120,7 @@ class Person < ApplicationRecord
       'LTER', 'KBS',
       given_name, sur_name,
       full_name, email, lno_roles.map(&:name).flatten.join('|'),
-      orcid_id, '', '',
-      graduation_year, support, thesis, organization,
-      id
+      orcid_id, 'urn:lter:lterFormerMember'
     ]
   end
 
