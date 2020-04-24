@@ -104,7 +104,7 @@ class Person < ApplicationRecord
     support = lter_awards.present? ? 'true' : ''
     thesis = lter_thesis ? 'true' : ''
     [
-      '', lno_name,
+      lno_name,
       'LTER', 'KBS',
       given_name, sur_name,
       full_name, email, lno_roles.map(&:name).flatten.join('|'),

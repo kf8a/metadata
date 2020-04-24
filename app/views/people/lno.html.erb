@@ -1,5 +1,5 @@
 <% @active.each do | person| %>
-  'LTER', 'KBS', <%= person.lno_name %>, <%= person.given_name %>, <%= person.sur_name %>,
+  <%= person.lno_name %>, 'LTER', 'KBS', <%= person.given_name %>, <%= person.sur_name %>,
 <%= person.full_name %>, <%= person.email %>, <%= person.lno_roles.map(&:name).flatten.join('|') %>, <%= person.orcid_id %> , urn:lter:lterCurrentMember, <br/>
 <% end %>
 <% @inactive.each do | person| %>
