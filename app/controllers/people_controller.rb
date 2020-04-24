@@ -49,7 +49,7 @@ class PeopleController < ApplicationController
     @inactive = all_lter - @active
     respond_to do |format|
       format.html
-      format.csv { send_data lno_csv(@active, @inactive), filename: "users-#{Time.zone.now}.csv" }
+      format.csv { send_data lno_csv(@active, @inactive), filename: "KBS-#{Time.zone.now}.csv" }
     end
   end
 
