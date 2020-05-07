@@ -13,6 +13,8 @@ class Person < ApplicationRecord
   has_many :datasets, through: :affiliations, source: :dataset
   has_many :scribbles
   has_many :protocols, through: :scribbles
+  has_many :person_projects
+  has_many :people, through: :person_projects
 
   has_many :data_contributions
   has_many :datatables, through: :data_contributions

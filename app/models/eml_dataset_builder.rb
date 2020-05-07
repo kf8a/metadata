@@ -13,10 +13,10 @@ class EmlDatasetBuilder
     @eml.instruct! :xml, version: '1.0'
 
     @eml.tag!('eml:eml',
-              'xmlns:eml'           => 'eml://ecoinformatics.org/eml-2.1.1',
+              'xmlns:eml'           => 'https://eml.ecoinformatics.org/eml-2.2.0',
               'xmlns:stmml'         => 'http://www.xml-cml.org/schema/stmml-1.1',
               'xmlns:xsi'           => 'http://www.w3.org/2001/XMLSchema-instance',
-              'xsi:schemaLocation'  => 'eml://ecoinformatics.org/eml-2.1.1 http://lter.kbs.msu.edu/docs/eml/eml.xsd',
+              'xsi:schemaLocation'  => 'https://eml.ecoinformatics.org/eml-2.2.0 https://lter.kbs.msu.edu/docs/eml-2.2.0/eml.xsd',
               'packageId'           => dataset.package_id,
               'system'              => 'KBS LTER') do
                 eml_access
@@ -121,7 +121,7 @@ class EmlDatasetBuilder
         @eml.organizationName 'KBS LTER'
       end
       eml_methods
-      # eml_project
+      eml_project
       dataset.datatables.each do |table|
         table.to_eml(@eml) if table.on_web &&
                               table.valid_for_eml? &&
@@ -158,9 +158,25 @@ class EmlDatasetBuilder
   def eml_project
     @eml.project do
       @eml.title 'KBS LTER project'
-      @eml.personnel
-      @eml.funding 'NSF DEB 1637653'
+      dataset.project.person_projects.each do |person_project|
+        @eml.personnel  do
+          builder = EmlPersonBuilder.new(person_project.person)
+          builder.eml_party(@eml)
+          @eml.role person_project.role.name
+        end
+      end
+      eml_award(dataset.project)
     end
+  end
+
+  def eml_award(project)
+      @eml.award do |award|
+        award.funderName project.funder_name
+        award.funderIdentifier project.funder_identifier
+        award.awardNumber project.award_number
+        award.title project.title
+        award.awardUrl project.award_url
+      end
   end
 
   def project_party
