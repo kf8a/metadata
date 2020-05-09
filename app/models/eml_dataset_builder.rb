@@ -121,7 +121,7 @@ class EmlDatasetBuilder
         @eml.organizationName 'KBS LTER'
       end
       eml_methods
-      eml_project
+      eml_project if dataset.project
       dataset.datatables.each do |table|
         table.to_eml(@eml) if table.on_web &&
                               table.valid_for_eml? &&
