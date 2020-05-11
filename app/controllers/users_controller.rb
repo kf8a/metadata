@@ -27,7 +27,8 @@ class UsersController < ApplicationController
 
   def show
     logger.info "Current user (usercontroller) #{current_user}"
-    render head: :not_acceptable if request.format == :html
+    logger.info request.format
+    head :bad_request unless request.format == 'text/javascript'
   end
 
   private
