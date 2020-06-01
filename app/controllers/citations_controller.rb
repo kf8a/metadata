@@ -165,7 +165,11 @@ class CitationsController < ApplicationController
   private
 
   def send_citation(citation)
-    redirect_to url_for(citation.pdf)
+    if citation.pdf
+      redirect_to url_for(citation.pdf)
+    else
+      head 400
+    end
   end
 
   # def from_open_access(citation)
