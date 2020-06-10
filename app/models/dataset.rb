@@ -89,12 +89,6 @@ class Dataset < ApplicationRecord
     affiliations.collect { |affiliation| affiliation.role if affiliation.person == person }.compact
   end
 
-  def leads
-    lead_investigators = collect_roles('lead investigator')
-    investigators = collect_roles('investigator')
-    [lead_investigators, investigators].flatten
-  end
-
   def collect_roles(name)
     role = Role.find_by(name: name)
     affiliations.collect { |affiliation| affiliation.person if affiliation.role == role }.compact
@@ -185,8 +179,7 @@ class Dataset < ApplicationRecord
   end
 
   def creators
-    datatable_leads = datatables.collect(&:leads).compact
-    [leads, datatable_leads].flatten.uniq.compact
+    datatables.collect(&:leads).uniq.compact
   end
 
   def core_areas
