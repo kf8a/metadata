@@ -17,7 +17,7 @@
     <li> DOI: <%= version.doi %> at <%= version.created_at %>
   <% end %>
   <% if dataset.current_doi %>
-    <li>Repository Link <%= link_to "https://doi.org/#{dataset.current_doi.try(:doi)}" %></li>
+    <li>Repository Link <%= link_to "https://doi.org/#{dataset.current_doi.try(:doi)}", "https://doi.org/#{dataset.current_doi.try(:doi)}" %></li>
   <% end %>
 </ul>
 
