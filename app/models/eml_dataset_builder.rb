@@ -250,7 +250,7 @@ class EmlDatasetBuilder
   end
 
   def eml_abstract
-    return if dataset.abstract?
+    return unless dataset.abstract?
     return if dataset.abstract.empty?
 
     @eml.abstract do
