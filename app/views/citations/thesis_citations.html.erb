@@ -5,7 +5,7 @@
 
 <p>
   Theses and dissertations associated with KBS LTER. Click on the pdf link to
-  get open access versions or to <%= link_to new_user_session_path, "sign-in"%>  (free and immediate) to get others.
+  get open access versions or to <%= link_to 'sign in', new_user_session_url %>  (free and immediate) to get others.
   For published papers of dissertation chapters <a href='/citations'>click here</a>
 </p>
 <%= render 'search_form', word: @word, type: @type, sort_by: @sort_by %>
