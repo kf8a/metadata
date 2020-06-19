@@ -179,7 +179,7 @@ class Dataset < ApplicationRecord
   end
 
   def creators
-    datatables.collect(&:leads).uniq.compact
+    datatables.collect(&:leads).flatten.uniq.compact
   end
 
   def core_areas
