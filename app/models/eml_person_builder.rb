@@ -77,6 +77,7 @@ class EmlPersonBuilder
   def eml_user_id(eml)
     # directory=  id=
     return unless person.orcid_id
+    return if person.orcid_id.empty?
     if person.orcid_id =~ /http/
       eml.userId person.orcid_id, directory: 'http://orcid.org'
     else
