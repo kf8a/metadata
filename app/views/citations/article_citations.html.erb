@@ -12,6 +12,4 @@
 
 <%= render 'search_form', word: @word, type: @type, sort_by: @sort_by %>
 
-<% cache([@submitted_citations, @forthcoming_citations, @citation]) do %>
   <%= render partial: 'index' %>
-<% end %>
