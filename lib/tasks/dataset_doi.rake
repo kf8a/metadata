@@ -55,6 +55,60 @@ namespace :dois do
     reports.sort! { |a, b| a.first_author_name <=> b.first_author_name }
 
     reports.each do |report|
+      sleep(1)
+      i += 1
+      puts "#{report.table_row(i)}\n"
+    end
+  end
+
+  desc "get datasets that have not been updated in 2 years"
+  task old_edi: :environment do
+    scope = 'knb-lter-kbs'
+    max_rows = 1000
+    url =
+      "https://pasta.lternet.edu/package/search/eml?defType=edismax&q=*&fq=scope:#{scope}&rows=#{max_rows}&fl=packageid"
+
+    datasets = Nokogiri::XML(open(url))
+
+    i = 0
+    reports = datasets.xpath('//document').collect do |doc|
+      package_id = doc.xpath('packageid').text
+      _s, identifier, revision = package_id.split(/\./)
+
+      EdiReport.new(scope, identifier, revision).load
+    end.compact
+
+    reports.sort! { |a, b| a.first_author_name <=> b.first_author_name }
+
+    reports.each do |report|
+      next if report.publication_year.to_i > Date.today().year() - 2
+      next if report.dataset.try(:completed?)
+      i += 1
+      puts "#{report.table_row(i)}\n"
+    end
+  end
+
+  desc "get datasets that have been updated in 2 years"
+  task new_edi: :environment do
+    scope = 'knb-lter-kbs'
+    max_rows = 1000
+    url =
+      "https://pasta.lternet.edu/package/search/eml?defType=edismax&q=*&fq=scope:#{scope}&rows=#{max_rows}&fl=packageid"
+
+    datasets = Nokogiri::XML(open(url))
+
+    i = 0
+    reports = datasets.xpath('//document').collect do |doc|
+      package_id = doc.xpath('packageid').text
+      _s, identifier, revision = package_id.split(/\./)
+
+      EdiReport.new(scope, identifier, revision).load
+    end.compact
+
+    reports.sort! { |a, b| a.first_author_name <=> b.first_author_name }
+
+    reports.each do |report|
+      next if report.publication_year.to_i < Date.today().year() - 2
       i += 1
       puts "#{report.table_row(i)}\n"
     end
