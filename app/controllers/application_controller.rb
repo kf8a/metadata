@@ -23,8 +23,8 @@ class ApplicationController < ActionController::Base
 
     flash[:notice] = 'You must be signed in as an administrator'\
       ' in order to access this page'
-    deny_access
-    false
+    redirect_to new_user_session_url
+    throw(:abort)
   end
 
   def set_crumbs
