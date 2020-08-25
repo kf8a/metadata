@@ -1,4 +1,4 @@
-# frozen_string_literal: true%i
+# frozen_string_literal: true
 
 # Display variates, this is not used much and might
 # be deleted
@@ -36,8 +36,7 @@ class VariatesController < ApplicationController
   end
 
   # GET /variates/1;edit
-  def edit
-  end
+  def edit; end
 
   # POST /variates
   # POST /variates.xml
@@ -53,7 +52,7 @@ class VariatesController < ApplicationController
   # PUT /variates/1
   # PUT /variates/1.xml
   def update
-    if @variate.update_attributes(params[:variate])
+    if @variate.update(params[:variate])
       flash[:notice] = 'Variate was successfully updated.'
     end
     respond_with @variate

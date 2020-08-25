@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# show visualizations for protovis or other javascript graphs
 class VisualizationsController < ApplicationController
   respond_to :json
 

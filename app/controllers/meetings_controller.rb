@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Meetings are local and national ASM's usually
 class MeetingsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
@@ -43,7 +45,7 @@ class MeetingsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @meeting.update_attributes(meeting_params)
+      if @meeting.update(meeting_params)
         flash[:notice] = 'Meetings was successfully updated.'
         format.html { redirect_to meeting_url(@meeting) }
       else
@@ -67,12 +69,13 @@ class MeetingsController < ApplicationController
     crumb = Struct::Crumb.new
     @crumbs = []
     return unless params[:id]
+
     meeting = Meeting.find(params[:id])
     venue = meeting.venue_type
 
     crumb.url = "/meetings/?location=#{venue.name}"
 
-    crumb.name = venue.name.capitalize + ' Meeting'
+    crumb.name = "#{venue.name.capitalize}  Meeting"
     @crumbs << crumb
   end
 

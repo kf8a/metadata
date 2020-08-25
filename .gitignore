@@ -46,3 +46,6 @@ app/views/shared/_nav.html.erb
 /config/credentials/staging.key
 
 /config/credentials/production.key
+
+.env
+

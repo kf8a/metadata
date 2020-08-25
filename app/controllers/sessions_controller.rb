@@ -6,16 +6,21 @@ class SessionsController < Devise::SessionsController
   def new; end
 
   def create
-    # set the default user if blank or 'lter'
-    if params[:session]
-      session = params[:session]
-      logger.info "email #{session[:email]}"
-      if session[:email].empty? || session[:email].casecmp('lter').zero?
-        params[:session][:email] = 'lter@kbs.edu'
-      end
-    end
+    if @subdomain_request == 'glbrc'
+      # auth against glbrc
+    else
 
-    super # let devise handle it
+      # set the default user if blank or 'lter'
+      if params[:session]
+        session = params[:session]
+        logger.info "email #{session[:email]}"
+        if session[:email].empty? || session[:email].casecmp('lter').zero?
+          params[:session][:email] = 'lter@kbs.edu'
+        end
+      end
+
+      super # let devise handle it
+    end
   end
 
   private

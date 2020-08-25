@@ -35,34 +35,34 @@ class Dataset < ApplicationRecord
     increment_version
   end
 
-  def self.from_eml_file(file)
-    from_eml(file.read)
-  end
+  # def self.from_eml_file(file)
+  #   from_eml(file.read)
+  # end
+  #
+  # def self.from_eml(eml_text)
+  #   eml_doc = if eml_text.start_with?('http://')
+  #               Nokogiri::XML(open(eml_text))
+  #             else
+  #               Nokogiri::XML(eml_text)
+  #             end
+  #   # get_validation_errors(eml_doc).presence ||
+  #   new.from_eml(eml_doc)
+  # end
 
-  def self.from_eml(eml_text)
-    eml_doc = if eml_text.start_with?('http://')
-                Nokogiri::XML(open(eml_text))
-              else
-                Nokogiri::XML(eml_text)
-              end
-    # get_validation_errors(eml_doc).presence ||
-    new.from_eml(eml_doc)
-  end
+  # def self.get_validation_errors(eml_doc)
+  #   xsd = nil
+  #   Dir.chdir("#{Rails.root}/test/data/eml-2.1.0") do
+  #     xsd = Nokogiri::XML::Schema(File.read('eml.xsd'))
+  #   end
+  #   xsd.validate(eml_doc)
+  # end
 
-  def self.get_validation_errors(eml_doc)
-    xsd = nil
-    Dir.chdir("#{Rails.root}/test/data/eml-2.1.0") do
-      xsd = Nokogiri::XML::Schema(File.read('eml.xsd'))
-    end
-    xsd.validate(eml_doc)
-  end
-
-  def from_eml(eml_doc)
-    dataset_eml = eml_doc.css('dataset').first
-    basic_attributes_from_eml(dataset_eml)
-    associated_models_from_eml(dataset_eml)
-    self
-  end
+  # def from_eml(eml_doc)
+  #   dataset_eml = eml_doc.css('dataset').first
+  #   basic_attributes_from_eml(dataset_eml)
+  #   associated_models_from_eml(dataset_eml)
+  #   self
+  # end
 
   def to_label
     "#{title} (#{dataset})"

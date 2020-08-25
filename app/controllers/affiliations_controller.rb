@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # set and show affiliations
 class AffiliationsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
@@ -14,7 +16,7 @@ class AffiliationsController < ApplicationController
   def edit; end
 
   def update
-    if affiliation.update_attributes(affiliation_params)
+    if affiliation.update(affiliation_params)
       flash[:notice] = 'Affiliation was successfully updated.'
     end
     respond_with affiliation
@@ -32,9 +34,7 @@ class AffiliationsController < ApplicationController
   def create
     @affiliation = Affiliation.new(affiliation_params)
 
-    if @affiliation.save
-      flash[:notice] = 'Affiliation was successfully created.'
-    end
+    flash[:notice] = 'Affiliation was successfully created.' if @affiliation.save
 
     respond_with @affiliation
   end
