@@ -14,7 +14,7 @@ class Website < ApplicationRecord
   has_many :thesis_citations, dependent: :nullify
   has_many :report_citations, dependent: :nullify
   has_many :bulletin_citations, dependent: :nullify
-  has_many :data_citations, dependent: nullify
+  has_many :data_citations, dependent: :nullify
 
   validates :name, uniqueness: true
   validates :name, presence: true
