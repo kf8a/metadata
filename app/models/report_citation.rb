@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A citation that represents a non peer reviewed report
 class ReportCitation < Citation
   def formatted(options = {})
@@ -16,16 +18,19 @@ class ReportCitation < Citation
 
   def publisher_string
     return '' if publisher.blank?
+
     publisher + ', '
   end
 
   def publication_string
     return '' if publication.blank?
+
     publication + '. '
   end
 
   def address_and_city
     return '' if city.blank?
+
     city
   end
 end

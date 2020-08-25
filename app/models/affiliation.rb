@@ -6,6 +6,10 @@ class Affiliation < ApplicationRecord
   belongs_to :person
   belongs_to :dataset, optional: true
 
+  def self.current
+    where(left_on < Time.zone.today)
+  end
+
   def self.lter
     joins(:role).where('role_type_id = ?', RoleType.find_by(name: 'lter'))
   end

@@ -238,7 +238,6 @@ class DatatablesController < ApplicationController
     @studies = Study.find_all_roots_with_datatables(@datatables)
   end
 
-
   def datatable
     @datatable ||= params[:id] ? Datatable.find(params[:id]) : Datatable.new(datatable_params)
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Controller for basic html pages. Used on the GLBRC site
 class PagesController < ApplicationController
   before_action :authenticate_user!, except: [:show]

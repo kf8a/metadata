@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'rexml/document'
-include REXML
 
 # A variate is a variable that is measured or recorded. It represents the
 # column in a datatable.
 class Variate < ApplicationRecord
+  include REXML
   belongs_to :datatable, touch: true
   belongs_to :unit, optional: true
 
@@ -68,7 +70,7 @@ class Variate < ApplicationRecord
     case measurement_scale
     when 'interval' then eml_interval
     when 'ratio' then eml_ratio
-    when 'ordinal' then
+    when 'ordinal' then nil
     when 'nominal'then eml_nominal
     when 'dateTime' then eml_date_time
     end

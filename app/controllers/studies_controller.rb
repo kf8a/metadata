@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 # handle the Studies page
 class StudiesController < ApplicationController
-  before_action :admin?, except: [:index, :show]
-  before_action :study, only: [:edit, :update]
+  before_action :admin?, except: %i[index show]
+  before_action :study, only: %i[edit update]
 
   # GET /studies
   def index
@@ -9,13 +11,12 @@ class StudiesController < ApplicationController
   end
 
   # GET /studies/1;edit
-  def edit
-  end
+  def edit; end
 
   # POST /studies/1
   def update
     respond_to do |format|
-      if @study.update_attributes(study_params)
+      if @study.update(study_params)
         flash[:notice] = 'Study was successfully updated.'
         format.html { redirect_to datatables_url }
         format.xml  { head :ok }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # GLBRC and LTER have different information; Website is used to separate it.
 class Website < ApplicationRecord
   has_many :datasets
