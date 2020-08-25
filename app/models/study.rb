@@ -3,9 +3,9 @@
 # Study is a group of experiments or an experimental location
 class Study < ApplicationRecord
   has_and_belongs_to_many :datasets
-  has_many :datatables
-  has_many :treatments
-  has_many :study_urls
+  has_many :datatables, dependent: :nullify
+  has_many :treatments, dependent: :nullify
+  has_many :study_urls, dependent: :nullify
 
   acts_as_nested_set
 

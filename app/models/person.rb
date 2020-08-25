@@ -11,12 +11,12 @@ class Person < ApplicationRecord
            through: :affiliations, source: :role
   has_many :roles, through: :affiliations
   has_many :datasets, through: :affiliations, source: :dataset
-  has_many :scribbles
+  has_many :scribbles, dependent: :destroy
   has_many :protocols, through: :scribbles
-  has_many :person_projects
+  has_many :person_projects, dependent: :destroy
   has_many :people, through: :person_projects
 
-  has_many :data_contributions
+  has_many :data_contributions, dependent: :destroy
   has_many :datatables, through: :data_contributions
 
   accepts_nested_attributes_for :affiliations, allow_destroy: true
@@ -41,7 +41,7 @@ class Person < ApplicationRecord
   end
 
   def last_name_first
-    sur_name + ', ' + normal_given_name
+    "#{sur_name}, #{normal_given_name}"
   end
 
   def short_full_name
@@ -85,26 +85,24 @@ class Person < ApplicationRecord
     builder.to_eml(eml, role)
   end
 
-  def self.from_eml(person_eml)
-    person = Person.new
-    person.from_eml(person_eml)
-
-    # TODO: remove self save
-    person.save
-
-    person
-  end
-
-  def from_eml(person_eml)
-    basic_attributes_from_eml(person_eml)
-    address_from_eml(person_eml.css('address'))
-    person_eml.css('phone').each { |phone_eml| phone_from_eml(phone_eml) }
-    role_from_name(person_eml.css('role').text)
-  end
-
+  # def self.from_eml(person_eml)
+  #   person = Person.new
+  #   person.from_eml(person_eml)
+  #
+  #   # TODO: remove self save
+  #   person.save
+  #
+  #   person
+  # end
+  #
+  # def from_eml(person_eml)
+  #   basic_attributes_from_eml(person_eml)
+  #   address_from_eml(person_eml.css('address'))
+  #   person_eml.css('phone').each { |phone_eml| phone_from_eml(phone_eml) }
+  #   role_from_name(person_eml.css('role').text)
+  # end
+  #
   def to_lno_active
-    support = lter_awards.present? ? 'true' : ''
-    thesis = lter_thesis ? 'true' : ''
     [
       lno_name,
       'LTER', 'KBS',
@@ -115,8 +113,6 @@ class Person < ApplicationRecord
   end
 
   def to_lno_inactive
-    support = lter_awards.present? ? 'true' : ''
-    thesis = lter_thesis ? 'true' : ''
     [
       '', lno_name,
       'LTER', 'KBS',

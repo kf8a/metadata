@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 # A unit in the EML sense. Connects to variates
 class Unit < ApplicationRecord
-  has_many :variates
+  has_many :variates, dependent: :nullify
 
   after_find :update_job
   #  after_find :update_dictionary

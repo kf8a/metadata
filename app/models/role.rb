@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Roles link people and and affiliations
 class Role < ApplicationRecord
   has_many :affiliations, dependent: :destroy

@@ -12,47 +12,49 @@ class EmlDatasetBuilder
     @eml = ::Builder::XmlMarkup.new
     @eml.instruct! :xml, version: '1.0'
 
-    @eml.tag!('eml:eml',
-              'xmlns:eml'           => 'https://eml.ecoinformatics.org/eml-2.2.0',
-              'xmlns:stmml'         => 'http://www.xml-cml.org/schema/stmml-1.1',
-              'xmlns:xsi'           => 'http://www.w3.org/2001/XMLSchema-instance',
-              'xsi:schemaLocation'  => 'https://eml.ecoinformatics.org/eml-2.2.0 https://lter.kbs.msu.edu/docs/eml-2.2.0/eml.xsd',
-              'packageId'           => dataset.package_id,
-              'system'              => 'KBS LTER') do
-                eml_access
-                eml_dataset
-                eml_custom_unit_list if dataset.custom_units.present?
-              end
+    @eml.tag!(
+      'eml:eml',
+      'xmlns:eml' => 'https://eml.ecoinformatics.org/eml-2.2.0',
+      'xmlns:stmml' => 'http://www.xml-cml.org/schema/stmml-1.1',
+      'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
+      'xsi:schemaLocation' =>
+        'https://eml.ecoinformatics.org/eml-2.2.0 https://lter.kbs.msu.edu/docs/eml-2.2.0/eml.xsd',
+      'packageId' => dataset.package_id,
+      'system' => 'KBS LTER'
+    ) do
+      eml_access
+      eml_dataset
+      eml_custom_unit_list if dataset.custom_units.present?
+    end
   end
 
   def custom_unit_fully_specified(unit)
-    @eml.tag!('stmml:unit',
-              id: unit.name,
-              multiplierToSI: unit.multiplier_to_si,
-              parentSI: unit.parent_si,
-              unitType: unit.unit_type,
-              name: unit.name)
+    @eml.tag!(
+      'stmml:unit',
+      id: unit.name,
+      multiplierToSI: unit.multiplier_to_si,
+      parentSI: unit.parent_si,
+      unitType: unit.unit_type,
+      name: unit.name
+    )
   end
 
   def custom_unit_partially_specified(unit)
-    @eml.tag!('stmml:unit',
-              id: unit.name,
-              multiplierToSI: unit.multiplier_to_si,
-              parentSI: unit.parent_si,
-              name: unit.name)
+    @eml.tag!(
+      'stmml:unit',
+      id: unit.name, multiplierToSI: unit.multiplier_to_si, parentSI: unit.parent_si, name: unit.name
+    )
   end
 
   def custom_unit_minimum(unit)
-    @eml.tag!('stmml:unit',
-              id: unit.name,
-              name: unit.name)
+    @eml.tag!('stmml:unit', id: unit.name, name: unit.name)
   end
 
   def build_custom_unit(unit)
     case unit
-    when unit.multiplier_to_si && unit.parent_si && unit.unit_type then
+    when unit.multiplier_to_si && unit.parent_si && unit.unit_type
       custom_unit_fully_specified(unit)
-    when unit.multiplier_to_si && unit.parent_si then
+    when unit.multiplier_to_si && unit.parent_si
       custom_unit_partially_specified(unit)
     else
       custom_unit_minimum(unit)
@@ -60,22 +62,17 @@ class EmlDatasetBuilder
   end
 
   def custom_unit_list
-    @eml.tag!('stmml:unitList',
-              'xmlns:stmml': 'http://www.xml-cml.org/schema/stmml-1.1',
-              'xmlns': 'http://www.xml-cml.org/schema/stmml',
-              'xsi:schemaLocation': 'http://www.xml-cml.org/schema/stmml-1.1 http://nis.lternet.edu/schemas/EML/eml-2.1.0/stmml.xsd') do
-                dataset.custom_units.each do |unit|
-                  build_custom_unit(unit)
-                end
-              end
+    @eml.tag!(
+      'stmml:unitList',
+      'xmlns:stmml': 'http://www.xml-cml.org/schema/stmml-1.1',
+      'xmlns': 'http://www.xml-cml.org/schema/stmml',
+      'xsi:schemaLocation':
+        'http://www.xml-cml.org/schema/stmml-1.1 http://nis.lternet.edu/schemas/EML/eml-2.1.0/stmml.xsd'
+    ) { dataset.custom_units.each { |unit| build_custom_unit(unit) } }
   end
 
   def eml_custom_unit_list
-    @eml.additionalMetadata do
-      @eml.metadata do
-        custom_unit_list
-      end
-    end
+    @eml.additionalMetadata { @eml.metadata { custom_unit_list } }
   end
 
   def eml_access
@@ -100,32 +97,25 @@ class EmlDatasetBuilder
   def eml_methods
     return if eml_protocols.empty?
 
-    @eml.methods do
-      eml_protocols.each do |protocol|
-        protocol.to_eml(@eml)
-      end
-    end
+    @eml.methods { eml_protocols.each { |protocol| protocol.to_eml(@eml) } }
   end
 
   def dataset_id
-    Rails.application.routes.url_helpers.dataset_url(dataset, format: 'eml',
-                                                              host: 'lter.kbs.msu.edu',
-                                                              protocol: 'https')
+    Rails.application.routes.url_helpers.dataset_url(
+      dataset,
+      format: 'eml', host: 'lter.kbs.msu.edu', protocol: 'https'
+    )
   end
 
   def eml_dataset
     @eml.dataset('id' => dataset_id) do
       eml_resource_group
       contact_info
-      @eml.publisher do
-        @eml.organizationName 'KBS LTER'
-      end
+      @eml.publisher { @eml.organizationName 'KBS LTER' }
       eml_methods
       eml_project if dataset.project
       dataset.datatables.each do |table|
-        table.to_eml(@eml) if table.on_web &&
-                              table.valid_for_eml? &&
-                              !table.is_restricted
+        table.to_eml(@eml) if table.on_web && table.valid_for_eml? && !table.is_restricted
       end
       eml_files
     end
@@ -139,16 +129,8 @@ class EmlDatasetBuilder
         @eml.entityName file.name
         @eml.physical do
           @eml.objectName file.name
-          @eml.dataFormat do
-            @eml.externallyDefinedFormat do
-              @eml.formatName 'csv'
-            end
-          end
-          @eml.distribution do
-            @eml.online do
-              @eml.url Rails.application.routes.url_helpers.rails_blob_path(file)
-            end
-          end
+          @eml.dataFormat { @eml.externallyDefinedFormat { @eml.formatName 'csv' } }
+          @eml.distribution { @eml.online { @eml.url Rails.application.routes.url_helpers.rails_blob_path(file) } }
         end
         @eml.entityType 'File'
       end
@@ -159,7 +141,7 @@ class EmlDatasetBuilder
     @eml.project do
       @eml.title 'KBS LTER project'
       dataset.project.person_projects.each do |person_project|
-        @eml.personnel  do
+        @eml.personnel do
           builder = EmlPersonBuilder.new(person_project.person)
           builder.eml_party(@eml)
           @eml.role person_project.role.name
@@ -170,21 +152,20 @@ class EmlDatasetBuilder
   end
 
   def eml_award(project)
-      @eml.award do |award|
-        award.funderName project.funder_name
-        award.funderIdentifier project.funder_identifier
-        award.awardNumber project.award_number
-        award.title project.title
-        award.awardUrl project.award_url
-      end
+    @eml.award do |award|
+      award.funderName project.funder_name
+      award.funderIdentifier project.funder_identifier
+      award.awardNumber project.award_number
+      award.title project.title
+      award.awardUrl project.award_url
+    end
   end
 
-  def project_party
-  end
+  def project_party; end
 
   def eml_resource_group
-    @eml.title dataset.title + ' at the Kellogg Biological Station, Hickory Corners, MI ' \
-      + DateRangeFormatter.year_range(dataset.temporal_extent)
+    @eml.title "#{dataset.title} at the Kellogg Biological Station, Hickory Corners, MI " +
+                 DateRangeFormatter.year_range(dataset.temporal_extent)
     eml_creator
     eml_people
     eml_pubdate
@@ -199,24 +180,20 @@ class EmlDatasetBuilder
       if dataset.cc0
         @eml.para 'These data are licensed under the Creative Commons CC0 license.'
       else
-        @eml.para 'Data in the KBS LTER core database may not be published without written'\
-          ' permission of the lead investigator or project director. These restrictions'\
-          " are intended mainly to preserve the primary investigators' rights to first"\
-          ' publication and to ensure that data users are aware of the limitations'\
-          ' that may be associated with any specific data set. These restrictions apply'\
-          ' to both the baseline data set and to the data sets associated with specific'\
-          ' LTER-supported subprojects.'
+        @eml.para 'Data in the KBS LTER core database may not be published without written' \
+                    ' permission of the lead investigator or project director. These restrictions' \
+                    " are intended mainly to preserve the primary investigators' rights to first" \
+                    ' publication and to ensure that data users are aware of the limitations' \
+                    ' that may be associated with any specific data set. These restrictions apply' \
+                    ' to both the baseline data set and to the data sets associated with specific' \
+                    ' LTER-supported subprojects.'
         @eml.para 'All publications of KBS data and images must acknowledge KBS LTER support.'
       end
     end
   end
 
   def eml_creator
-    if dataset.creators.empty?
-      eml_data_manager
-    else
-      eml_creators
-    end
+    dataset.creators.empty? ? eml_data_manager : eml_creators
   end
 
   def eml_creators
@@ -229,9 +206,7 @@ class EmlDatasetBuilder
   end
 
   def eml_data_manager
-    @eml.creator do
-      @eml.positionName 'Data Manager'
-    end
+    @eml.creator { @eml.positionName 'Data Manager' }
   end
 
   def eml_pubdate
@@ -241,7 +216,7 @@ class EmlDatasetBuilder
   def eml_people
     [dataset.people, dataset.datatable_people].flatten.uniq.compact.each do |person|
       role = dataset.datatables.collect { |x| x.which_roles(person) }.flatten.compact.first
-      role = dataset.which_roles(person).first unless role
+      role ||= dataset.which_roles(person).first
       role_name = role.try(:name)
       next if ['investigator', 'lead investigator'].include?(role_name)
 
@@ -276,28 +251,18 @@ class EmlDatasetBuilder
   def eml_custom_keywords
     return if dataset.keyword_list.empty?
 
-    @eml.keywordSet do
-      dataset.keyword_list.each do |keyword_tag|
-        @eml.keyword keyword_tag.to_s
-      end
-    end
+    @eml.keywordSet { dataset.keyword_list.each { |keyword_tag| @eml.keyword keyword_tag.to_s } }
   end
 
   def eml_place_keywords
-    @eml.keywordSet do
-      place_keyword_set.each do |keyword|
-        @eml.keyword keyword, keywordType: 'place'
-      end
-    end
+    @eml.keywordSet { place_keyword_set.each { |keyword| @eml.keyword keyword, keywordType: 'place' } }
   end
 
   def eml_core_area_keywords
     return if dataset.core_areas.empty?
 
     @eml.keywordSet do
-      dataset.core_areas.each do |keyword|
-        @eml.keyword keyword.name
-      end
+      dataset.core_areas.each { |keyword| @eml.keyword keyword.name }
       @eml.keywordThesaurus 'LTER Core Research Area'
     end
   end
@@ -306,11 +271,7 @@ class EmlDatasetBuilder
     datatable_keywords = dataset.datatables.collect(&:keyword_names).flatten.uniq
     return if datatable_keywords.empty?
 
-    @eml.keywordSet do
-      datatable_keywords.each do |keyword|
-        @eml.keyword keyword
-      end
-    end
+    @eml.keywordSet { datatable_keywords.each { |keyword| @eml.keyword keyword } }
   end
 
   def contact_info
@@ -323,12 +284,14 @@ class EmlDatasetBuilder
   end
 
   def eml_kbs_address
-    Person.new(organization:   'Kellogg Biological Station',
-               street_address: '3700 East Gull Lake Drive',
-               city:           'Hickory Corners',
-               locale:         'Mi',
-               postal_code:    '49060',
-               country:        'USA')
+    Person.new(
+      organization: 'Kellogg Biological Station',
+      street_address: '3700 East Gull Lake Drive',
+      city: 'Hickory Corners',
+      locale: 'Mi',
+      postal_code: '49060',
+      country: 'USA'
+    )
   end
 
   def eml_coverage
@@ -341,7 +304,7 @@ class EmlDatasetBuilder
   def eml_geographic_coverage
     @eml.geographicCoverage do
       @eml.geographicDescription 'The areas around the Kellogg Biological Station in' \
-                                 ' southwest Michigan'
+                                   ' southwest Michigan'
       eml_bounding_coordinates
     end
   end
@@ -359,7 +322,7 @@ class EmlDatasetBuilder
     @eml.temporalCoverage do
       @eml.rangeOfDates do
         @eml.beginDate { @eml.calendarDate dataset.initiated.to_s }
-        @eml.endDate   { @eml.calendarDate dataset.data_end_date.to_s }
+        @eml.endDate { @eml.calendarDate dataset.data_end_date.to_s }
       end
     end
   end

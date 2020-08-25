@@ -19,13 +19,13 @@ class ReportCitation < Citation
   def publisher_string
     return '' if publisher.blank?
 
-    publisher + ', '
+    "#{publisher}, "
   end
 
   def publication_string
     return '' if publication.blank?
 
-    publication + '. '
+    "#{publication}. "
   end
 
   def address_and_city

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A Book citation contains mainly formatting styles
 class BookCitation < Citation
   def book?

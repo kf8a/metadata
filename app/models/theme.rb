@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 # Themes are used to organize datatables in the index page
 class Theme < ApplicationRecord
   acts_as_nested_set
 
   has_and_belongs_to_many :datasets
-  has_many :datatables
+  has_many :datatables, dependent: :nullify
 
   scope :by_weight, -> { order :weight }
   scope :by_name, -> { order 'name' }

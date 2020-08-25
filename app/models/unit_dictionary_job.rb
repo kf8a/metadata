@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # require 'UnitDictionary'
 
 # A class to update units based on the LTER Unit dictionary

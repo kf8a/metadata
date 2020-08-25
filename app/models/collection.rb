@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A collection as opposed to a datatable
 # a collection is supposed to be browsable
 class Collection < ApplicationRecord
@@ -21,13 +23,3 @@ class Collection < ApplicationRecord
     @values ||= perform_query
   end
 end
-
-# == Schema Information
-#
-# Table name: collections
-#
-#  id           :integer         not null, primary key
-#  created_at   :datetime
-#  updated_at   :datetime
-#  datatable_id :integer
-#

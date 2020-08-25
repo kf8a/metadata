@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Link datatable to data owners
 class Ownership < ApplicationRecord
   belongs_to :user

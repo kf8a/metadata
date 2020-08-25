@@ -5,16 +5,16 @@ require 'nokogiri'
 require 'open-uri'
 require 'date'
 require 'eml'
-require 'date_range_formatter.rb'
+require 'date_range_formatter'
 
 # A dataset is the central model datasets hold tables, protocols and contact into
 class Dataset < ApplicationRecord
-  has_many                :affiliations, -> { order 'seniority' }, dependent: :destroy
-  has_many                :datatables, -> { order 'name' }, dependent: :nullify
-  has_many                :people, through: :affiliations
-  belongs_to              :project, optional: true
-  has_many                :protocols, -> { where 'active is true' }, dependent: :nullify
-  has_many                :roles, -> { uniq }, through: :affiliations
+  has_many :affiliations, -> { order 'seniority' }, dependent: :destroy
+  has_many :datatables, -> { order 'name' }, dependent: :nullify, inverse_of: :datatable
+  has_many :people, through: :affiliations
+  belongs_to :project, optional: true
+  has_many :protocols, -> { where 'active is true' }, dependent: :nullify
+  has_many :roles, -> { uniq }, through: :affiliations
   belongs_to              :sponsor
   has_and_belongs_to_many :studies
   has_and_belongs_to_many :themes
@@ -213,40 +213,40 @@ class Dataset < ApplicationRecord
 
   # private
 
-  def self.validation_errors(eml_doc)
-    xsd = nil
-    Dir.chdir("#{Rails.root}/test/data/eml-2.1.0") do
-      xsd = Nokogiri::XML::Schema(File.read('eml.xsd'))
-    end
-
-    xsd.validate(eml_doc)
-  end
-
-  def basic_attributes_from_eml(dataset_eml)
-    self.title = dataset_eml.at_css('title').text
-    self.abstract = dataset_eml.css('abstract para').text
-    self.initiated = dataset_eml.css('temporalCoverage rangeOfDates beginDate calendarDate').text
-    self.completed = dataset_eml.css('temporalCoverage rangeOfDates endDate calendarDate').text
-    save
-  end
-
-  def associated_models_from_eml(dataset_eml)
-    dataset_eml.parent.css('methods methodStep protocol').each do |protocol_eml|
-      protocols << Protocol.from_eml(protocol_eml)
-    end
-
-    dataset_eml.css('associatedParty').each do |person_eml|
-      people << Person.from_eml(person_eml)
-    end
-
-    dataset_eml.css('dataTable').each do |datatable_eml|
-      datatables.new.from_eml(datatable_eml)
-    end
-
-    dataset_eml.css('keywordSet keyword').each do |keyword_eml|
-      keyword_list << keyword_eml.text
-    end
-
-    save
-  end
+  # def self.validation_errors(eml_doc)
+  #   xsd = nil
+  #   Dir.chdir("#{Rails.root}/test/data/eml-2.1.0") do
+  #     xsd = Nokogiri::XML::Schema(File.read('eml.xsd'))
+  #   end
+  #
+  #   xsd.validate(eml_doc)
+  # end
+  #
+  # def basic_attributes_from_eml(dataset_eml)
+  #   self.title = dataset_eml.at_css('title').text
+  #   self.abstract = dataset_eml.css('abstract para').text
+  #   self.initiated = dataset_eml.css('temporalCoverage rangeOfDates beginDate calendarDate').text
+  #   self.completed = dataset_eml.css('temporalCoverage rangeOfDates endDate calendarDate').text
+  #   save
+  # end
+  #
+  # def associated_models_from_eml(dataset_eml)
+  #   dataset_eml.parent.css('methods methodStep protocol').each do |protocol_eml|
+  #     protocols << Protocol.from_eml(protocol_eml)
+  #   end
+  #
+  #   dataset_eml.css('associatedParty').each do |person_eml|
+  #     people << Person.from_eml(person_eml)
+  #   end
+  #
+  #   dataset_eml.css('dataTable').each do |datatable_eml|
+  #     datatables.new.from_eml(datatable_eml)
+  #   end
+  #
+  #   dataset_eml.css('keywordSet keyword').each do |keyword_eml|
+  #     keyword_list << keyword_eml.text
+  #   end
+  #
+  #   save
+  # end
 end

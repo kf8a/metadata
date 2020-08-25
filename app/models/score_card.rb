@@ -7,14 +7,12 @@ class ScoreCard
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_reader :db_connection
-
   def persisted?
     false
   end
 
   def db_connection
-    @db_connection = ActiveRecord::Base.connection unless @db_connection
+    @db_connection ||= ActiveRecord::Base.connection
     @db_connection
   end
 
@@ -39,7 +37,7 @@ class ScoreCard
 
   def time_key(datatable)
     time_key_value = datatable.variate_names.grep(/year/i).first
-    time_key_value = datatable.variate_names.grep(/date/i).first unless time_key_value
+    time_key_value ||= datatable.variate_names.grep(/date/i).first
     time_key_value
   end
 

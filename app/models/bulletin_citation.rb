@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Formatting for bulletins
 class BulletinCitation < Citation
   def formatted(options = {})
@@ -16,14 +18,14 @@ class BulletinCitation < Citation
   end
 
   def publisher_string
-    publisher + ', ' if publisher.present?
+    "#{publisher}, " if publisher.present?
   end
 
   def publication_string
-    publication + ', ' if publication.present?
+    "#{publication}, " if publication.present?
   end
 
   def address_and_city
-    city if city.present?
+    city if city.presence
   end
 end

@@ -24,7 +24,7 @@ class Citation < ApplicationRecord
 
   validates :authors, presence: true
 
-  #TODO: update for active record
+  # TODO: update for active record
   # after_commit :check_for_open_access_paper
 
   has_one_attached :pdf
@@ -99,7 +99,7 @@ class Citation < ApplicationRecord
   end
 
   def self.to_enw(array_of_citations)
-    array_of_citations.collect(&:to_enw).join("\n") + "\n"
+    %(#{array_of_citations.collect(&:to_enw).join("\n")}\n)
   end
 
   def self.to_bib(array_of_citations)
@@ -157,8 +157,8 @@ class Citation < ApplicationRecord
   end
 
   def get_attribute_from_ris_stanza(stanza, attribute_name, ris_name = nil)
-    ris_name = attribute_name.to_sym unless ris_name
-    send(attribute_name + '=', stanza[ris_name])
+    ris_name ||= attribute_name.to_sym
+    send("#{attribute_name}=", stanza[ris_name])
   end
 
   def get_attributes_from_ris_stanza(stanza, attribute_array)
@@ -193,7 +193,7 @@ class Citation < ApplicationRecord
     ris_pdf.each_line do |line|
       not_internal_path = line.sub('internal-pdf://', '')
       not_internal_path.strip!
-      real_path = Rails.root.to_s + '/' + pdf_folder + '/' + not_internal_path
+      real_path = "#{Rails.root}/#{pdf_folder}/#{not_internal_path}"
       if File.exist?(real_path)
         self.pdf = File.open(real_path)
       else
@@ -291,7 +291,7 @@ class Citation < ApplicationRecord
     if authors.empty?
       author_string
     else
-      authors.first.formatted + ' and ' + authors.last.formatted(:natural) + '.'
+      "#{authors.first.formatted} and #{authors.last.formatted(:natural)}."
     end
   end
 
@@ -356,7 +356,7 @@ class Citation < ApplicationRecord
     if title.match?(/[\?\!\.]$/)
       title
     else
-      title + '.'
+      "#{title}."
     end
   end
 

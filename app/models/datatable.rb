@@ -11,7 +11,7 @@ class Datatable < ApplicationRecord
   acts_as_taggable_on :keywords
 
   has_and_belongs_to_many :citations
-  has_one                 :collection
+  has_one                 :collection, dependent: :destroy
   has_and_belongs_to_many :core_areas
   belongs_to              :dataset, touch: true
   has_many                :data_contributions, dependent: :destroy
@@ -87,11 +87,11 @@ class Datatable < ApplicationRecord
   def associated_models_from_eml(datatable_eml)
     datatable_eml.css('methods methodStep').each do |protocol_eml|
       protocol_id = protocol_eml.css('protocol references').text.gsub('protocol_', '')
-      self.protocols << Protocol.where(id: protocol_id)
+      protocols << Protocol.where(id: protocol_id)
     end
 
     datatable_eml.css('attributeList attribute').each do |variate_eml|
-      self.variates << Variate.from_eml(variate_eml)
+      variates << Variate.from_eml(variate_eml)
     end
   end
 
@@ -208,9 +208,10 @@ class Datatable < ApplicationRecord
   delegate :sponsor, to: :dataset
 
   def can_be_qcd_by?(user)
-    if sponsor_name == 'lter'
+    case sponsor_name
+    when 'lter'
       user.try(:admin?) || member?(user)
-    elsif sponsor_name == 'glbrc'
+    when 'glbrc'
       user.try(:admin?) || owned_by?(user)
     else
       false
@@ -265,7 +266,7 @@ class Datatable < ApplicationRecord
             else
               "(#{year_start} to #{ongoing? ? 'present' : year_end})"
             end
-    title + ' ' + years
+    "#{title} #{years}"
   end
 
   def ongoing?
@@ -319,8 +320,8 @@ class Datatable < ApplicationRecord
       terms_of_use,
       variate_table,
       data_comments,
-      variate_names.join(',') + "\n",
-      variate_units.join(',') + "\n"
+      "#{variate_names.join(',')}\n",
+      "#{variate_units.join(',')}\n"
     ].join
   end
 
@@ -328,13 +329,13 @@ class Datatable < ApplicationRecord
     result = "#     VARIATE TABLE\n"
     result += variates.collect do |variate|
       unit = variate.try(:unit)
-      '# ' + [variate.try(:name), unit.try(:name), variate.try(:description)].join("\t") + "\n"
+      %(# #{[variate.try(:name), unit.try(:name), variate.try(:description)].join("\t")}\n)
     end.join
     result += "#\n"
     result
   end
 
-  def raw_csv(units = true)
+  def raw_csv(units: true)
     convert_to_csv(all_data, units)
   end
 
@@ -342,8 +343,8 @@ class Datatable < ApplicationRecord
     convert_to_csv(approved_data)
   end
 
-  def convert_to_csv(values, units = true)
-    csv_string = CSV.generate do |csv|
+  def convert_to_csv(values, units: true)
+    CSV.generate do |csv|
       vars = variate_names
       csv << vars
       csv << variate_units if units
@@ -353,7 +354,6 @@ class Datatable < ApplicationRecord
         csv << vars.collect { |variate| row[variate] }
       end
     end
-    csv_string
   end
 
   def to_climdb
@@ -371,7 +371,7 @@ class Datatable < ApplicationRecord
 
   def data_comments
     if comments
-      "#\n#        DATA TABLE CORRECTIONS AND COMMENTS\n" + comments.gsub(/^/, '#') + "\n#\n"
+      "#\n#        DATA TABLE CORRECTIONS AND COMMENTS\n #{comments.gsub(/^/, '#')}\n#\n"
     else
       "\n"
     end
@@ -503,13 +503,13 @@ class Datatable < ApplicationRecord
   private
 
   def convert_year_to_date(year)
-    year.to_s + '-1-1'
+    "#{year}-1-1"
   end
 
   def year?(year)
     # assume its a year if there are only 4 characters
     return true if year.is_a?(Numeric)
-    return false  unless year
+    return false unless year
     return false if year.is_a?(Time)
 
     year.length == 4
@@ -518,25 +518,21 @@ class Datatable < ApplicationRecord
   def query_datatable_for_temporal_extent(query)
     values = ActiveRecord::Base.connection.execute(query)
     dates = values[0]
-    p dates
 
     min = dates['min']
     max = dates['max']
-    # TODO case date, year, time
-    results = case
-              when year?(min)
-                min = convert_year_to_date(min) if year?(min)
-                max = convert_year_to_date(max) if year?(max)
-                [Time.zone.parse(min).to_date, Time.zone.parse(max).to_date]
-              when min.is_a?(String)
-                [Time.zone.parse(min).to_date, Time.zone.parse(max).to_date]
-              when min.is_a?(Time)
-                [min.to_date, max.to_date]
-              when min.is_a?(Date)
-                [min,max]
-              end
-    p results
-    results
+    # TODO: case date, year, time
+    if year?(min)
+      min = convert_year_to_date(min) if year?(min)
+      max = convert_year_to_date(max) if year?(max)
+      [Time.zone.parse(min).to_date, Time.zone.parse(max).to_date]
+    elsif min.is_a?(String)
+      [Time.zone.parse(min).to_date, Time.zone.parse(max).to_date]
+    elsif min.is_a?(Time)
+      [min.to_date, max.to_date]
+    elsif min.is_a?(Date)
+      [min, max]
+    end
   end
 
   def eml_protocols
