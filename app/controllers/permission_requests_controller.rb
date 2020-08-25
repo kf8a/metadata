@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Controller for permissions, creates a new permission entry
 class PermissionRequestsController < ApplicationController
   before_action :authenticate_user!

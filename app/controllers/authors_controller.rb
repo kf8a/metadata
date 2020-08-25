@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # list all of the authors as a debugging aid
 class AuthorsController < ApplicationController
   def index

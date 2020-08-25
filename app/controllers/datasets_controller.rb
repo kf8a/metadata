@@ -53,7 +53,7 @@ class DatasetsController < ApplicationController
   def knb
     _scope, identifier = params[:id].split(/\./)
     dataset = Dataset.where(metacat_id: identifier).first
-    dataset = Dataset.where(id: identifer).first unless dataset
+    dataset ||= Dataset.where(id: identifer).first
     redirect_to dataset
   end
 
@@ -102,7 +102,7 @@ class DatasetsController < ApplicationController
       end
 
     unless @dataset.class == Dataset # if not a Dataset, it will be an array of errors
-      flash[:notice] = 'Eml import had errors: ' + @dataset.collect(&:to_s).join(' ')
+      flash[:notice] = "Eml import had errors: #{@dataset.collect(&:to_s).join(' ')}"
       @dataset = Dataset.new
     end
     if @dataset.save

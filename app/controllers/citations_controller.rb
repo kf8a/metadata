@@ -139,6 +139,7 @@ class CitationsController < ApplicationController
 
   def download
     head(:not_found) && return unless (citation = Citation.find_by(id: params[:id]))
+
     if citation.open_access || user_signed_in?
       send_citation(citation)
     else
@@ -193,7 +194,7 @@ class CitationsController < ApplicationController
     end
   end
 
-  Templates = {
+  TEMPLATES = {
     'ArticleCitation' => 'citations/article_citations',
     'BookCitation' => 'citations/book_citations',
     'ThesisCitation' => 'citations/thesis_citations',
@@ -204,7 +205,7 @@ class CitationsController < ApplicationController
 
   def template_for_type(type)
     logger.info "type #{type}"
-    Templates.fetch(type, 'citations/article_citations')
+    TEMPLATES.fetch(type, 'citations/article_citations')
   end
 
   def citation_params

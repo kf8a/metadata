@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This controller is here because climdb only allows one url
 # per site, so i needed some way to aggreagte the different
 # weather datasets on this side.

@@ -55,7 +55,7 @@ class ProjectsController < ApplicationController
   # PUT /projects/1
   # PUT /projects/1.xml
   def update
-    flash[:notice] = 'Project was successfully updated.' if @project.update_attributes(project_params)
+    flash[:notice] = 'Project was successfully updated.' if @project.update(project_params)
     respond_with @project
   end
 

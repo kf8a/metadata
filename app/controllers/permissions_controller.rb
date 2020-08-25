@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # add and remove permissions for datatables
 class PermissionsController < ApplicationController
   before_action :authenticate_user!, except: %i[index]
@@ -43,7 +45,7 @@ class PermissionsController < ApplicationController
     permissions.each(&:destroy)
 
     respond_to do |format|
-      flash[:notice] = 'Permission has been revoked from ' + user.email
+      flash[:notice] = "Permission has been revoked from #{user.email}"
       format.html { redirect_to permission_path(@datatable) }
       format.xml { head :ok }
     end
@@ -61,7 +63,7 @@ class PermissionsController < ApplicationController
 
     permission.save
     respond_to do |format|
-      flash[:notice] = 'Permission has been denied for ' + user.email
+      flash[:notice] = "Permission has been denied for #{user.email}"
       format.html { redirect_to permission_path(@datatable) }
       format.xml { head :ok }
     end

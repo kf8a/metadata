@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Controls the invite interface
 class InvitesController < ApplicationController
   before_action :authenticate_user!
@@ -58,7 +60,7 @@ class InvitesController < ApplicationController
   # PUT /invites/1.xml
   def update
     respond_to do |format|
-      if @invite.update_attributes(invite_params)
+      if @invite.update(invite_params)
         format.html { redirect_to(@invite, notice: 'Invite was successfully updated.') }
         format.xml { head :ok }
       else

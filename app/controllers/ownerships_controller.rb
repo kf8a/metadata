@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Controller for Ownership interface
 class OwnershipsController < ApplicationController
   before_action :admin?
@@ -12,7 +14,7 @@ class OwnershipsController < ApplicationController
     unless @datatable
       flash[:notice] = 'You must select a valid datatable to grant ownerships'
       redirect_to action: :index
-      return false
+      false
     end
   end
 
@@ -49,7 +51,7 @@ class OwnershipsController < ApplicationController
     ownerships.each(&:destroy)
 
     respond_to do |format|
-      flash[:notice] = 'Ownership has been revoked from ' + user.email
+      flash[:notice] = "Ownership has been revoked from #{user.email}"
       format.html { redirect_to ownership_path(datatable) }
       format.xml { head :ok }
     end

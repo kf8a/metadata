@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'csv'
 
 # Manage People records
@@ -59,7 +61,7 @@ class PeopleController < ApplicationController
 
   # GET /people/1/edit
   def edit
-    @title = 'Edit ' + person.full_name
+    @title = "Edit #{person.full_name}"
     @roles = lter_roles #+ lno_roles
   end
 
