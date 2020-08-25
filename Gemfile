@@ -77,6 +77,9 @@ group :development do
   gem 'listen'
   gem 'rbnacl'
   gem 'rbnacl-libsodium'
+  gem 'rubocop', require: false
+  gem 'rubocop-rails'
+  gem 'rubocop-thread_safety'
 end
 
 group :development, :test do
