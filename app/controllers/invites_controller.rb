@@ -2,7 +2,7 @@
 class InvitesController < ApplicationController
   before_action :authenticate_user!
   before_action :admin?
-  before_action :invite, only: [:show, :edit, :update, :destroy, :send_invitation]
+  before_action :invite, only: %i[show edit update destroy send_invitation]
 
   # GET /invites
   # GET /invites.xml
@@ -36,8 +36,7 @@ class InvitesController < ApplicationController
   end
 
   # GET /invites/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /invites
   # POST /invites.xml
@@ -47,10 +46,10 @@ class InvitesController < ApplicationController
     respond_to do |format|
       if @invite.save
         format.html { redirect_to(@invite, notice: 'Invite was successfully created.') }
-        format.xml  { render xml: @invite, status: :created, location: @invite }
+        format.xml { render xml: @invite, status: :created, location: @invite }
       else
         format.html { render 'new' }
-        format.xml  { render xml: @invite.errors, status: :unprocessable_entity }
+        format.xml { render xml: @invite.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -61,10 +60,10 @@ class InvitesController < ApplicationController
     respond_to do |format|
       if @invite.update_attributes(invite_params)
         format.html { redirect_to(@invite, notice: 'Invite was successfully updated.') }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
         format.html { render 'edit' }
-        format.xml  { render xml: @invite.errors, status: :unprocessable_entity }
+        format.xml { render xml: @invite.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -76,7 +75,7 @@ class InvitesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(invites_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 

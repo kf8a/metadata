@@ -5,7 +5,7 @@ class ClimdbController < ApplicationController
   def index
     lterws = Datatable.find(175)
     coopws = Datatable.find(300)
-    kzoo   = Datatable.find(301)
+    kzoo = Datatable.find(301)
     @data = lterws.to_climdb + coopws.to_climdb + kzoo.to_climdb
     @data.delete("\n\n")
   end

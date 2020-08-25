@@ -16,9 +16,7 @@ class AffiliationsController < ApplicationController
   def edit; end
 
   def update
-    if affiliation.update(affiliation_params)
-      flash[:notice] = 'Affiliation was successfully updated.'
-    end
+    flash[:notice] = 'Affiliation was successfully updated.' if affiliation.update(affiliation_params)
     respond_with affiliation
   end
 

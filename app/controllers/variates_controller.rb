@@ -30,9 +30,7 @@ class VariatesController < ApplicationController
   # GET /variates/new
   def new
     @variate = Variate.new
-    respond_to do |format|
-      format.html
-    end
+    respond_to(&:html)
   end
 
   # GET /variates/1;edit
@@ -43,18 +41,14 @@ class VariatesController < ApplicationController
   def create
     @variate = Variate.new(params[:variate])
 
-    if @variate.save
-      flash[:notice] = 'Variate was successfully created.'
-    end
+    flash[:notice] = 'Variate was successfully created.' if @variate.save
     respond_with @variate
   end
 
   # PUT /variates/1
   # PUT /variates/1.xml
   def update
-    if @variate.update(params[:variate])
-      flash[:notice] = 'Variate was successfully updated.'
-    end
+    flash[:notice] = 'Variate was successfully updated.' if @variate.update(params[:variate])
     respond_with @variate
   end
 
@@ -65,7 +59,7 @@ class VariatesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to variates_url }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 

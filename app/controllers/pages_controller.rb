@@ -2,8 +2,8 @@
 
 # Controller for basic html pages. Used on the GLBRC site
 class PagesController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
-  before_action :admin?, except: [:show]
+  before_action :authenticate_user!, except: %i[show]
+  before_action :admin?, except: %i[show]
   helper_method :page
 
   def index

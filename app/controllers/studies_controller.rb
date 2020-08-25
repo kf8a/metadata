@@ -19,10 +19,10 @@ class StudiesController < ApplicationController
       if @study.update(study_params)
         flash[:notice] = 'Study was successfully updated.'
         format.html { redirect_to datatables_url }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
         format.html { render 'edit' }
-        format.xml  { render xml: @study.errors.to_xml }
+        format.xml { render xml: @study.errors.to_xml }
       end
     end
   end
@@ -34,7 +34,6 @@ class StudiesController < ApplicationController
   end
 
   def study_params
-    params.require(:study).permit(:name, :description, :weight,
-                                  :synopsis, :url, :code)
+    params.require(:study).permit(:name, :description, :weight, :synopsis, :url, :code)
   end
 end

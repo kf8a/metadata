@@ -13,8 +13,8 @@ class ProjectsController < ApplicationController
     @projects = Project.all
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render xml: @projects }
+      format.html
+      format.xml { render xml: @projects } # index.html.erb
     end
   end
 
@@ -22,8 +22,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1.xml
   def show
     respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render xml: @project }
+      format.html
+      format.xml { render xml: @project } # show.html.erb
     end
   end
 
@@ -34,8 +34,8 @@ class ProjectsController < ApplicationController
     @datasets = Dataset.all
 
     respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render xml: @project }
+      format.html
+      format.xml { render xml: @project } # new.html.erb
     end
   end
 
@@ -55,9 +55,7 @@ class ProjectsController < ApplicationController
   # PUT /projects/1
   # PUT /projects/1.xml
   def update
-    if @project.update_attributes(project_params)
-      flash[:notice] = 'Project was successfully updated.'
-    end
+    flash[:notice] = 'Project was successfully updated.' if @project.update_attributes(project_params)
     respond_with @project
   end
 
@@ -68,7 +66,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(projects_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 

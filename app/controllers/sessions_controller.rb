@@ -9,14 +9,11 @@ class SessionsController < Devise::SessionsController
     if @subdomain_request == 'glbrc'
       # auth against glbrc
     else
-
       # set the default user if blank or 'lter'
       if params[:session]
         session = params[:session]
         logger.info "email #{session[:email]}"
-        if session[:email].empty? || session[:email].casecmp('lter').zero?
-          params[:session][:email] = 'lter@kbs.edu'
-        end
+        params[:session][:email] = 'lter@kbs.edu' if session[:email].empty? || session[:email].casecmp('lter').zero?
       end
 
       super # let devise handle it

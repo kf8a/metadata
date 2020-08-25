@@ -12,32 +12,22 @@ class PeopleController < ApplicationController
   # GET /people.xml
   def index
     role_type = RoleType.find_by(name: 'lter')
-    if role_type
-      @roles = role_type.roles
-                        .order('seniority')
-                        .where('name not like ?', 'Emeritus%')
-    end
+    @roles = role_type.roles.order('seniority').where('name not like ?', 'Emeritus%') if role_type
     respond_to do |format|
-      format.html # index.rhtml
-      format.csv { send_data csv(@roles), filename: "users-#{Time.zone.today}.csv" }
+      format.html
+      format.csv { send_data csv(@roles), filename: "users-#{Time.zone.today}.csv" } # index.rhtml
     end
   end
 
   def alphabetical
     @title = 'KBS LTER Directory (alphabetical)'
-    respond_to do |format|
-      format.html # index.rhtml
-    end
+    respond_to(&:html)
   end
 
   def emeritus
     role_type = RoleType.find_by(name: 'lter')
-    @roles = if role_type
-               role_type.roles.order('seniority').where('name like ?', 'Emeritus%')
-             end
-    respond_to do |format|
-      format.html
-    end
+    @roles = (role_type.roles.order('seniority').where('name like ?', 'Emeritus%') if role_type)
+    respond_to(&:html)
   end
 
   def lno
@@ -95,18 +85,14 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to people_url }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 
   private
 
   def set_title
-    @tile = if @subdomain_request == 'lter'
-              'KBS LTER Directory'
-            else
-              'GLBRC Directory'
-            end
+    @tile = @subdomain_request == 'lter' ? 'KBS LTER Directory' : 'GLBRC Directory'
   end
 
   def people
@@ -118,13 +104,27 @@ class PeopleController < ApplicationController
   end
 
   def person_params
-    params.require(:person).permit(:sur_name, :given_name, :middle_name, :title, :organization,
-                                   :sub_organization, :street_address, :city, :locale,
-                                   :country, :postal_code, :phone, :fax, :email,
-                                   :url, :deceased, :friendly_name, :orcid_id,
-                                   affiliations_attributes:
-                                   %i[role_id title seniority research_interest
-                                      supervisor started_on left_on _destroy id])
+    params.require(:person).permit(
+      :sur_name,
+      :given_name,
+      :middle_name,
+      :title,
+      :organization,
+      :sub_organization,
+      :street_address,
+      :city,
+      :locale,
+      :country,
+      :postal_code,
+      :phone,
+      :fax,
+      :email,
+      :url,
+      :deceased,
+      :friendly_name,
+      :orcid_id,
+      affiliations_attributes: %i[role_id title seniority research_interest supervisor started_on left_on _destroy id]
+    )
   end
 
   def lter_roles
@@ -140,19 +140,13 @@ class PeopleController < ApplicationController
   end
 
   def csv(roles)
-    roles.flat_map do |r|
-      r.people.collect { |p| p.to_csv << r.name }
-    end
+    roles.flat_map { |r| r.people.collect { |p| p.to_csv << r.name } }
   end
 
   def lno_csv(active, inactive)
     CSV.generate do |csv|
-      active.each do |person|
-        csv << person.to_lno_active
-      end
-      inactive.each do |person|
-        csv << person.to_lno_inactive
-      end
+      active.each { |person| csv << person.to_lno_active }
+      inactive.each { |person| csv << person.to_lno_inactive }
     end
   end
 end

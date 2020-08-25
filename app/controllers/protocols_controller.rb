@@ -2,7 +2,6 @@
 
 # Serves protocols
 class ProtocolsController < ApplicationController
-
   before_action :authenticate_user!, except: %i[index show download]
   before_action :admin?, except: %i[index show download]
   before_action :protocol, only: %i[edit update]
@@ -23,9 +22,7 @@ class ProtocolsController < ApplicationController
     if @protocol
       respond_with @protocol
     else
-      respond_to do |format|
-        format.html { redirect_to protocols_url }
-      end
+      respond_to { |format| format.html { redirect_to protocols_url } }
     end
   end
 
@@ -92,14 +89,11 @@ class ProtocolsController < ApplicationController
   end
 
   def experiment_protocols
-    website.protocols.tagged_with(:experiments)
-           .where(active: true).order('title')
+    website.protocols.tagged_with(:experiments).where(active: true).order('title')
   end
 
   def untagged_protocols
-    website.protocols.where(active: true)
-           .all.collect { |e| e if e.theme_list.blank? }
-           .compact
+    website.protocols.where(active: true).all.collect { |e| e if e.theme_list.blank? }.compact
   end
 
   def protocol
@@ -107,11 +101,26 @@ class ProtocolsController < ApplicationController
   end
 
   def protocol_params
-    params.require(:protocol).permit(:theme_list, :title, :description, :updated_by, :active,
-                                     :body, :abstract, :dataset_id, :in_use_from, :in_use_to,
-                                     :tag, :website_ids, :name, { person_ids: [] },
-                                     { website_ids: [] }, { datatable_ids: [] },
-                                     :change_summary, :pdf)
+    params.require(:protocol).permit(
+      :theme_list,
+      :title,
+      :description,
+      :updated_by,
+      :active,
+      :body,
+      :abstract,
+      :dataset_id,
+      :in_use_from,
+      :in_use_to,
+      :tag,
+      :website_ids,
+      :name,
+      { person_ids: [] },
+      { website_ids: [] },
+      { datatable_ids: [] },
+      :change_summary,
+      :pdf
+    )
   end
 
   def initialize_instance_variables

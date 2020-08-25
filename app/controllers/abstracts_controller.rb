@@ -47,9 +47,7 @@ class AbstractsController < ApplicationController
     abstract = Abstract.find(params[:id])
     logger.info abstract
     logger.info abstract_params
-    if abstract.update(abstract_params)
-      flash[:notice] = 'Meeting abstract was successfully updated.'
-    end
+    flash[:notice] = 'Meeting abstract was successfully updated.' if abstract.update(abstract_params)
     respond_with abstract
   end
 
@@ -58,18 +56,23 @@ class AbstractsController < ApplicationController
     abstract.destroy
     respond_to do |format|
       format.html { redirect_to meetings_url }
-      format.xml  { head :ok }
-      format.js do
-        render nothing: true
-      end
+      format.xml { head :ok }
+      format.js { render nothing: true }
     end
   end
 
   private
 
   def abstract_params
-    params.require(:abstract).permit(:title, :authors, :abstract, :meeting_abstract_type_id,
-                                     :author_affiliations, :meeting_id, :pdf)
+    params.require(:abstract).permit(
+      :title,
+      :authors,
+      :abstract,
+      :meeting_abstract_type_id,
+      :author_affiliations,
+      :meeting_id,
+      :pdf
+    )
   end
 
   def redirect_to_abstract_or_meeting(abstract)

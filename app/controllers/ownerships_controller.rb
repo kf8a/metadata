@@ -51,7 +51,7 @@ class OwnershipsController < ApplicationController
     respond_to do |format|
       flash[:notice] = 'Ownership has been revoked from ' + user.email
       format.html { redirect_to ownership_path(datatable) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 

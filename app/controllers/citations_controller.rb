@@ -2,18 +2,16 @@
 
 # display citations and control access to pdfs
 class CitationsController < ApplicationController
-
   protect_from_forgery except: :download
 
   respond_to :html, :json
   layout :site_layout
-  before_action :authenticate_user!, except: \
-    %i[index show search index_by_doi index_by_treatment download filtered]
+  before_action :authenticate_user!, except: %i[index show search index_by_doi index_by_treatment download filtered]
   before_action :admin?, only: %i[new create edit update destroy]
 
-  has_scope :by_type,   as: :type
+  has_scope :by_type, as: :type
   has_scope :sorted_by, as: :sort_by
-  has_scope :by_date,   as: :date
+  has_scope :by_date, as: :date
 
   def index
     store_location_for(:user, citations_path)
@@ -58,8 +56,10 @@ class CitationsController < ApplicationController
 
   def index_by_author
     citations = [website.citations.publications]
-    @citations = citations.collect { |c| c.includes(:authors).references(:authors).published }
-                          .flatten.sort { |a, b| _author_sorter(a, b) }
+    @citations =
+      citations.collect { |c| c.includes(:authors).references(:authors).published }.flatten.sort do |a, b|
+        _author_sorter(a, b)
+      end
 
     index_responder
   end
@@ -75,9 +75,7 @@ class CitationsController < ApplicationController
       @word = SearchInputSanitizer.sanitize(@word)
       search_terms = assemble_search_terms(@word)
 
-      @citations = Citation.search(search_terms, with: { website_id: website.id },
-                                                 order: 'pub_year ASC',
-                                                 per_page: 500)
+      @citations = Citation.search(search_terms, with: { website_id: website.id }, order: 'pub_year ASC', per_page: 500)
       logger.info Citation.search(search_terms)
       index_responder
     else
@@ -179,11 +177,7 @@ class CitationsController < ApplicationController
   # end
 
   def set_title
-    @title = if @subdomain_request == 'lter'
-               'LTER Publications'
-             else
-               'GLBRC Sustainability Publications'
-             end
+    @title = @subdomain_request == 'lter' ? 'LTER Publications' : 'GLBRC Sustainability Publications'
   end
 
   def index_responder
@@ -199,12 +193,14 @@ class CitationsController < ApplicationController
     end
   end
 
-  Templates = { 'ArticleCitation'  =>  'citations/article_citations',
-                'BookCitation'     =>  'citations/book_citations',
-                'ThesisCitation'   =>  'citations/thesis_citations',
-                'ReportCitation'   =>  'citations/report_citations',
-                'BulletinCitation' =>  'citations/bulletin_citations',
-                'DataCitation'     =>  'citations/data_citations' }.freeze
+  Templates = {
+    'ArticleCitation' => 'citations/article_citations',
+    'BookCitation' => 'citations/book_citations',
+    'ThesisCitation' => 'citations/thesis_citations',
+    'ReportCitation' => 'citations/report_citations',
+    'BulletinCitation' => 'citations/bulletin_citations',
+    'DataCitation' => 'citations/data_citations'
+  }.freeze
 
   def template_for_type(type)
     logger.info "type #{type}"
@@ -212,15 +208,41 @@ class CitationsController < ApplicationController
   end
 
   def citation_params
-    params.require(:citation).permit(:title, :abstract, :pub_date, :pub_year, :author_block,
-                                     :citation_type_id, :address, :notes, :publication,
-                                     :editor_block,
-                                     :start_page_number, :ending_page_number, :periodical_full_name,
-                                     :periodical_abbreviation, :volume, :issue, :city, :publisher,
-                                     :secondary_title, :series_title, :isbn, :doi, :full_text,
-                                     :publisher_url, :website_id, :pdf, :state, :open_access, :type,
-                                     :has_lter_acknowledgement, :annotation, :data_url,
-                                     datatable_ids: [], treatment_ids: [])
+    params.require(:citation).permit(
+      :title,
+      :abstract,
+      :pub_date,
+      :pub_year,
+      :author_block,
+      :citation_type_id,
+      :address,
+      :notes,
+      :publication,
+      :editor_block,
+      :start_page_number,
+      :ending_page_number,
+      :periodical_full_name,
+      :periodical_abbreviation,
+      :volume,
+      :issue,
+      :city,
+      :publisher,
+      :secondary_title,
+      :series_title,
+      :isbn,
+      :doi,
+      :full_text,
+      :publisher_url,
+      :website_id,
+      :pdf,
+      :state,
+      :open_access,
+      :type,
+      :has_lter_acknowledgement,
+      :annotation,
+      :data_url,
+      datatable_ids: [], treatment_ids: []
+    )
   end
 
   def citations_by_type(type)
@@ -251,8 +273,6 @@ class CitationsController < ApplicationController
 
   def assemble_search_terms(word)
     terms = word.split(/ /)
-    terms.collect do |term|
-      "( ^#{term}$ | #{term} )"
-    end.join(' & ')
+    terms.collect { |term| "( ^#{term}$ | #{term} )" }.join(' & ')
   end
 end

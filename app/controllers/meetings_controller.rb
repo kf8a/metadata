@@ -17,9 +17,7 @@ class MeetingsController < ApplicationController
     @national_venue = VenueType.find(2)
     @national_meetings = @national_venue.meetings
 
-    respond_to do |format|
-      format.html
-    end
+    respond_to(&:html)
   end
 
   # GET /meeting/1
@@ -59,7 +57,7 @@ class MeetingsController < ApplicationController
     @meeting.destroy
     respond_to do |format|
       format.html { redirect_to meetings_url }
-      format.js   { render nothing: true }
+      format.js { render nothing: true }
     end
   end
 
@@ -88,7 +86,6 @@ class MeetingsController < ApplicationController
   end
 
   def meeting_params
-    params.require(:meeting).permit(:date, :title, :announcement,
-                                    :venue_type_id, :date_to)
+    params.require(:meeting).permit(:date, :title, :announcement, :venue_type_id, :date_to)
   end
 end

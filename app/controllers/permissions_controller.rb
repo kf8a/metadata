@@ -1,7 +1,7 @@
 # add and remove permissions for datatables
 class PermissionsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
-  before_action :require_datatable, :require_owner, except: [:index]
+  before_action :authenticate_user!, except: %i[index]
+  before_action :require_datatable, :require_owner, except: %i[index]
 
   def index
     @datatables = current_user.try(:datatables)
@@ -13,8 +13,7 @@ class PermissionsController < ApplicationController
     @permitted_users = @permissions.permitted_users
   end
 
-  def new
-  end
+  def new; end
 
   def create
     user = User.find_by(email: params[:email])
@@ -29,10 +28,10 @@ class PermissionsController < ApplicationController
       if permission.save
         flash[:notice] = "Permission has been granted to #{user}"
         format.html { redirect_to permission_path(@datatable.id) }
-        format.xml  { head :created, location: permission_path(@datatable.id) }
+        format.xml { head :created, location: permission_path(@datatable.id) }
       else
         format.html { render 'new' }
-        format.xml  { render xml: permission.errors.to_xml }
+        format.xml { render xml: permission.errors.to_xml }
       end
     end
   end
@@ -46,7 +45,7 @@ class PermissionsController < ApplicationController
     respond_to do |format|
       flash[:notice] = 'Permission has been revoked from ' + user.email
       format.html { redirect_to permission_path(@datatable) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 
@@ -71,29 +70,20 @@ class PermissionsController < ApplicationController
   private
 
   def my_permissions(user, owner, datatable)
-    Permission.where(user_id: user.id,
-                     datatable_id: datatable.id,
-                     owner_id: owner.id)
+    Permission.where(user_id: user.id, datatable_id: datatable.id, owner_id: owner.id)
   end
 
   def my_permission(user, owner, datatable)
-    Permission.find_by(user_id: user,
-                       datatable_id: datatable,
-                       owner_id: owner)
+    Permission.find_by(user_id: user, datatable_id: datatable, owner_id: owner)
   end
 
   def new_denied_permission(user, owner, datatable)
-    Permission.new(user: user,
-                   datatable: datatable,
-                   owner: owner,
-                   decision: 'denied')
+    Permission.new(user: user, datatable: datatable, owner: owner, decision: 'denied')
   end
 
   def require_datatable
     @datatable = Datatable.find(params[:id]) if params[:id]
-    unless @datatable
-      @datatable = Datatable.find(params[:datatable]) if params[:datatable]
-    end
+    @datatable = Datatable.find(params[:datatable]) if params[:datatable] unless @datatable
     unless @datatable
       flash[:notice] = 'You must select a valid datatable to grant permissions'
       redirect_to action: :index
@@ -104,8 +94,9 @@ class PermissionsController < ApplicationController
   def require_owner
     return if current_user.try(:owns?, @datatable)
 
-    flash[:notice] = 'You must be signed in as the owner of'\
-      ' the datatable in order to access this page'
+    flash[:notice] =
+      'You must be signed in as the owner of' \
+        ' the datatable in order to access this page'
     redirect_to action: :index
     false
   end

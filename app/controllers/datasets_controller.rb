@@ -20,16 +20,16 @@ class DatasetsController < ApplicationController
   # GET /datasets
   # GET /datasets.xml
   def index
-    request.format  = :eml if params[:Dataset]
-    @keyword_list   = params['keyword_list']
-    @people         = Person.find_all_with_dataset
-    @themes         = Theme.by_weight
-    @datasets       = Dataset.where(on_web: true).where(website_id: website.id)
-    @studies        = collect_and_normalize_studies(@datasets)
-    @crumbs         = []
+    request.format = :eml if params[:Dataset]
+    @keyword_list = params['keyword_list']
+    @people = Person.find_all_with_dataset
+    @themes = Theme.by_weight
+    @datasets = Dataset.where(on_web: true).where(website_id: website.id)
+    @studies = collect_and_normalize_studies(@datasets)
+    @crumbs = []
     respond_to do |format|
       format.html { redirect_to datatables_path unless params[:really] }
-      format.xml  { render xml: @datasets.to_xml }
+      format.xml { render xml: @datasets.to_xml }
       format.eml { render eml: @datasets }
     end
   end
@@ -82,10 +82,9 @@ class DatasetsController < ApplicationController
       format.html
       format.js do
         render :update do |page|
-          page.insert_html :bottom, 'affiliations',
-                           partial: 'affiliation',
-                           locals: { roles: roles, people: people,
-                                     affiliation: @affiliation }
+          page.insert_html :bottom,
+                           'affiliations',
+                           partial: 'affiliation', locals: { roles: roles, people: people, affiliation: @affiliation }
         end
       end
     end
@@ -93,13 +92,14 @@ class DatasetsController < ApplicationController
 
   # POST /datasets
   def create
-    @dataset = if params[:eml_link].present?
-                 Dataset.from_eml(params[:eml_link])
-               elsif params[:dataset][:eml_file].present?
-                 Dataset.from_eml_file(params[:dataset][:eml_file])
-               else
-                 Dataset.new(dataset_params)
-               end
+    @dataset =
+      if params[:eml_link].present?
+        Dataset.from_eml(params[:eml_link])
+      elsif params[:dataset][:eml_file].present?
+        Dataset.from_eml_file(params[:dataset][:eml_file])
+      else
+        Dataset.new(dataset_params)
+      end
 
     unless @dataset.class == Dataset # if not a Dataset, it will be an array of errors
       flash[:notice] = 'Eml import had errors: ' + @dataset.collect(&:to_s).join(' ')
@@ -135,7 +135,7 @@ class DatasetsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to datasets_url }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 
@@ -157,19 +157,18 @@ class DatasetsController < ApplicationController
     dataset_id = params[:id]
     return unless dataset_id
 
-    if dataset_id =~ /KBS\d\d\d/
-      dataset_id = Dataset.find_by(dataset: dataset_id)
-    end
+    dataset_id = Dataset.find_by(dataset: dataset_id) if dataset_id =~ /KBS\d\d\d/
     dataset = Dataset.find(dataset_id)
     dataset.on_web
   end
 
   def collect_and_normalize_studies(datasets)
-    @studies = datasets.collect do |dataset|
-      next unless dataset.on_web
+    @studies =
+      datasets.collect do |dataset|
+        next unless dataset.on_web
 
-      dataset.studies
-    end
+        dataset.studies
+      end
     @studies.flatten!
     @studies.compact!
     @studies.uniq!
@@ -181,13 +180,23 @@ class DatasetsController < ApplicationController
   end
 
   def dataset_params
-    params.require(:dataset).permit(:dataset, :title, :abstract, :status,
-                                    :initiated, :completed, :released,
-                                    :on_web, :core_dataset, :project_id,
-                                    :metacat_id, :sponsor_id, :website_id,
-                                    :keyword_list,
-                                    affiliations_attributes: [],
-                                    dataset_files_attributes: %i[name data _destroy id])
+    params.require(:dataset).permit(
+      :dataset,
+      :title,
+      :abstract,
+      :status,
+      :initiated,
+      :completed,
+      :released,
+      :on_web,
+      :core_dataset,
+      :project_id,
+      :metacat_id,
+      :sponsor_id,
+      :website_id,
+      :keyword_list,
+      affiliations_attributes: [], dataset_files_attributes: %i[name data _destroy id]
+    )
   end
 
   def dataset_roles
