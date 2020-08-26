@@ -335,7 +335,7 @@ class Datatable < ApplicationRecord
     result
   end
 
-  def raw_csv(units: true)
+  def raw_csv(units = true)
     convert_to_csv(all_data, units)
   end
 
@@ -343,7 +343,7 @@ class Datatable < ApplicationRecord
     convert_to_csv(approved_data)
   end
 
-  def convert_to_csv(values, units: true)
+  def convert_to_csv(values, units = true)
     CSV.generate do |csv|
       vars = variate_names
       csv << vars

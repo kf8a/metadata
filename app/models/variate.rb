@@ -6,7 +6,7 @@ require 'rexml/document'
 # column in a datatable.
 class Variate < ApplicationRecord
   include REXML
-  belongs_to :datatable, touch: true
+  belongs_to :datatable, touch: true, optional: true
   belongs_to :unit, optional: true
 
   scope :valid_for_eml, -> { where("measurement_scale != '' AND description != ''") }

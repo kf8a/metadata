@@ -9,14 +9,6 @@ class Abstract < ApplicationRecord
 
   self.table_name = 'meeting_abstracts'
 
-  # has_attached_file :pdf,
-  #                   storage: :s3,
-  #                   bucket: 'metadata-production',
-  #                   path: '/abstracts/pdfs/:id/:style/:basename.:extension',
-  #                   s3_region: 'us-east-1',
-  #                   s3_credentials: Rails.root.join('config', 's3.yml'),
-  #                   s3_permissions: 'authenticated-read'
-
   has_one_attached :pdf
 
   # TODO: update validation for active storage

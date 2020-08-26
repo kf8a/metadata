@@ -18,9 +18,4 @@ class Website < ApplicationRecord
 
   validates :name, uniqueness: true
   validates :name, presence: true
-
-  # def layout(controller, action)
-  #   template = self.templates.where(controller: controller, action: action)
-  #   Liquid::Template.parse(template.layout) if template
-  # end
 end

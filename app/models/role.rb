@@ -5,7 +5,7 @@ class Role < ApplicationRecord
   has_many :affiliations, dependent: :destroy
   has_many :people, through: :affiliations
   belongs_to :role_type
-  has_many :person_projects
+  has_many :person_projects, dependent: :nullify
 
   def emeritus?
     name =~ /^Emeritus/

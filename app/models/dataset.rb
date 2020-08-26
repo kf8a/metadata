@@ -10,7 +10,7 @@ require 'date_range_formatter'
 # A dataset is the central model datasets hold tables, protocols and contact into
 class Dataset < ApplicationRecord
   has_many :affiliations, -> { order 'seniority' }, dependent: :destroy
-  has_many :datatables, -> { order 'name' }, dependent: :nullify, inverse_of: :datatable
+  has_many :datatables, -> { order 'name' }, dependent: :nullify
   has_many :people, through: :affiliations
   belongs_to :project, optional: true
   has_many :protocols, -> { where 'active is true' }, dependent: :nullify

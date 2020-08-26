@@ -11,7 +11,7 @@ class UnitDictionaryJob < Struct.new(:unit)
     #    u = DictionaryUnit.find(unit.name)
     #  end
     #  # if u
-    #  #   unit.update_attributes :description => u.description,
+    #  #   unit.update description: u.description,
     #  #                          :name        =>  u.name
     #  #                          :deprecated_in_favor_of => u.deprecated_in_favor_of
     #  #

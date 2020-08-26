@@ -286,10 +286,12 @@ class Citation < ApplicationRecord
   end
 
   def short_author_string
-    return authors.first.formatted + ', et.al. ' if authors.length > 3
+    return "#{authors.first.formatted}, et.al. " if authors.length > 3
 
     if authors.empty?
       author_string
+    elsif authors.length == 1
+      "#{authors.first.formatted}"
     else
       "#{authors.first.formatted} and #{authors.last.formatted(:natural)}."
     end

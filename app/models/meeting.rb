@@ -2,7 +2,7 @@
 
 # A Meeting that was held locally or nationally
 class Meeting < ApplicationRecord
-  has_many :abstracts, -> { order :authors }, dependent: :nullify, inverse_of: :abstract
+  has_many :abstracts, -> { order :authors }, dependent: :nullify
   belongs_to :venue_type
 
   validates :venue_type, presence: true
