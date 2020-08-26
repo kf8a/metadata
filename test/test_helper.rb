@@ -11,14 +11,17 @@ require "#{Rails.root}/db/seeds.rb"
 class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 
+  # config.include Devise::Test::IntegrationHelpers, type: :controller
+  # config.include Devise::Test::ControllerHelpers, type: :controller
+
   def signed_in_as_admin
     admin = User.find_by(role: 'admin') || FactoryBot.create(:admin_user, email: 'admin@example.com')
-    sign_in_as(admin)
+    sign_in(admin)
   end
 
   def signed_in_as_normal_user
-    user = User.find_by(:role, '') || FactoryBot.create(:user, email: 'normal_user@example.com')
-    sign_in_as(user)
+    user = FactoryBot.create(:user, email: 'normal_user@example.com')
+    sign_in(user)
   end
 
   def self.should_accept_nested_attributes_for(*associations)
@@ -42,3 +45,16 @@ class ActiveSupport::TestCase
   #   end
   # end
 end
+
+class ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+end
+
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :minitest
+    with.library :rails
+  end
+end
+

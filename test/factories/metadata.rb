@@ -2,6 +2,7 @@ FactoryBot.define do
   # Independent factories#########
   factory :affiliation do
     role
+    association :person
   end
 
   factory :author do
@@ -58,8 +59,12 @@ FactoryBot.define do
   factory :permission_request do
   end
 
+  sequence :person_sur_name do |n|
+    "bauer #{n}"
+  end
+
   factory :person do
-    sur_name { 'bauer' }
+    sur_name { FactoryBot.generate(:person_sur_name) }
     given_name { 'bill' }
     city { 'hickory corners' }
   end
@@ -67,7 +72,12 @@ FactoryBot.define do
   factory :project do
   end
 
+  sequence :role_type_name do |n|
+    "role #{n}"
+  end
+
   factory :role_type do
+    name { FactoryBot.generate(:role_type_name) }
   end
 
   factory :species do
@@ -81,14 +91,21 @@ FactoryBot.define do
     end
   end
 
+  sequence :study_name do |n|
+    "Study #{n}"
+  end
+
   factory :study do
-    name { 'LTER' }
+    name { FactoryBot.generate(:study_name) }
   end
 
   factory :study_url do
+    association :study
+    association :website
   end
 
   factory :treatment do
+    association :study
   end
 
   factory :unit do
@@ -120,14 +137,19 @@ FactoryBot.define do
     query  { 'select 1 as sample_date' }
   end
 
+  sequence :website_name do |n|
+    "website #{n}"
+  end
+
   factory :website do
-    name { 'Name' }
+    name { FactoryBot.generate(:website_name) }
   end
 
   # Dependent factories##########
 
   factory :role do
-    name { 'Emeritus Investigators' }
+    name { "Emeritus Investigators" }
+    association :role_type
 
     factory :lter_role do
       role_type { RoleType.find_by(:name, 'lter') || FactoryBot.create(:role_type, name: 'lter') }
@@ -143,7 +165,7 @@ FactoryBot.define do
     version   { 0 }
     abstract  { 'some new dataset' }
     dataset   { FactoryBot.generate(:dataset_text) }
-    sponsor   { FactoryBot.create(:sponsor) }
+    sponsor   { FactoryBot.build(:sponsor) }
 
     factory :restricted_dataset do |_dataset|
       association :sponsor, factory: :restricted_sponsor
@@ -169,7 +191,8 @@ FactoryBot.define do
     is_sql { true }
     description { 'This is a datatable' }
     weight { 100 }
-    theme_id { [FactoryBot.create(:theme)] }
+    association :theme
+    association :study
     dataset
     variates { [FactoryBot.create(:variate)] }
 
@@ -205,8 +228,12 @@ FactoryBot.define do
     datatable
   end
 
+  factory :meeting_abstract_type do
+  end
+
   factory :abstract do
     abstract { 'A quick little discussion of the meeting.' }
     meeting
+    association :meeting_abstract_type
   end
 end
