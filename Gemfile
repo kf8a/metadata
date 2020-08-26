@@ -44,7 +44,7 @@ gem 'thinking-sphinx'
 
 gem 'aws-sdk-s3', '~> 1'
 
-gem 'rake', ">= 12.3.3"
+gem 'rake', '>= 12.3.3'
 
 gem 'sitemap_generator'
 
@@ -69,9 +69,9 @@ group :development do
   gem 'awesome_print'
   gem 'bcrypt_pbkdf'
   gem 'capistrano', require: false
+  gem 'capistrano3-unicorn'
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails'
-  gem 'capistrano3-unicorn'
   gem 'ed25519'
 
   gem 'listen'
@@ -88,9 +88,9 @@ group :development, :test do
 
   gem 'rspec-its'
   # TODO: go back to standard gem once 4.0 has been released
-  gem 'rspec-rails', git: 'https://github.com/rspec/rspec-rails', tag: 'v4.0.0.beta4'
+  # gem 'rspec-rails', git: 'https://github.com/rspec/rspec-rails', tag: 'v4.0.0.beta4'
 
-  # gem 'rspec-rails'
+  gem 'rspec-rails'
 
   gem 'test-unit'
 end
