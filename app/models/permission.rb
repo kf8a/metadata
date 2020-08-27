@@ -8,7 +8,7 @@ class Permission < ApplicationRecord
 
   validates :user, :datatable, :owner, presence: true
 
-  validates :user_id, uniqueness: true, scope: %i[datatable_id owner_id]
+  validates :user_id, uniqueness: { scope: %i[datatable_id owner_id] }
   validate :only_owners_can_set_permissions
   validate :user_exists?
   validate :datatable_exists?
