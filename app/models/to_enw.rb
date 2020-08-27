@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # ENW formatter for endnote RIS formatted citations
 class ENW
   attr_accessor :citation

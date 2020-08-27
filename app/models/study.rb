@@ -49,10 +49,10 @@ class Study < ApplicationRecord
   end
 
   def check_for_treatments
-    if treatments.count > 0
-      errors.add(:base, 'Can not delete studies with active treatments')
-      false
-    end
+    return if treatments.count.zero?
+
+    errors.add(:base, 'Can not delete studies with active treatments')
+    false
   end
 
   def touch_parent

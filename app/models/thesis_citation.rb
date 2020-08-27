@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A citation representing a thesis or dissertation
 class ThesisCitation < Citation
   def formatted(options = {})

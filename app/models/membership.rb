@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Represents membership of a person in an organization
 class Membership < ApplicationRecord
   belongs_to :sponsor
