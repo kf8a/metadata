@@ -1,4 +1,4 @@
-# frozen_string_literal: true`
+# frozen_string_literal: true
 
 # Datasets are the core of the system
 # manages the display and editing of the datasets

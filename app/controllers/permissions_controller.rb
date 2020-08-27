@@ -86,11 +86,11 @@ class PermissionsController < ApplicationController
   def require_datatable
     @datatable = Datatable.find(params[:id]) if params[:id]
     @datatable = Datatable.find(params[:datatable]) if params[:datatable] unless @datatable
-    unless @datatable
-      flash[:notice] = 'You must select a valid datatable to grant permissions'
-      redirect_to action: :index
-      false
-    end
+    return if @datatable
+
+    flash[:notice] = 'You must select a valid datatable to grant permissions'
+    redirect_to action: :index
+    false
   end
 
   def require_owner

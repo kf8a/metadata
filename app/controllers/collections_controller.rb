@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'customizer'
 
 # This controller allows searching and sorting of a datatable's data through

@@ -1,5 +1,7 @@
-# emails invites to people purporting to come from suzanne
-class InviteMailer < ActionMailer::Base
+# frozen_string_literal: true
+
+# emails invites to people purporting to come from sven
+class InviteMailer < ApplicationMailer
   default from: 'Sven Bohm <bohms@kbs.msu.edu>'
 
   def invitation(invite)
