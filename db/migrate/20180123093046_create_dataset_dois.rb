@@ -3,6 +3,7 @@ class CreateDatasetDois < ActiveRecord::Migration[4.2]
     create_table :dataset_dois do |t|
       t.integer :dataset_id
       t.string :doi
+      t.integer :version
 
       t.timestamps null: false
     end

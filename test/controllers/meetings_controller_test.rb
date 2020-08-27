@@ -27,6 +27,9 @@ class MeetingsControllerTest < ActionController::TestCase
 
   context "on GET to :show for a meeting" do
     setup do
+      FactoryBot.create :meeting_abstract_type, name: "Poster"
+      FactoryBot.create :meeting_abstract_type, name: "Presentation"
+      FactoryBot.create :meeting_abstract_type, name: "Handout"
       @meeting = FactoryBot.create :meeting
       get :show, params: { id: @meeting }
     end
@@ -100,7 +103,7 @@ class MeetingsControllerTest < ActionController::TestCase
 
     context "DELETE :destroy abstract, js format" do
       setup do
-        post :delete, xhr: true, params: { id: @meeting, destroy: true }
+        delete :destroy, xhr: true, params: { id: @meeting }
       end
 
       should_not render_with_layout
