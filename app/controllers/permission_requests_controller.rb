@@ -12,6 +12,6 @@ class PermissionRequestsController < ApplicationController
     flash[:notice] = 'Invalid user' unless user
     permission_request = PermissionRequest.new(user: user, datatable: @datatable)
     permission_request.save
-    render nothing: true
+    head :ok
   end
 end

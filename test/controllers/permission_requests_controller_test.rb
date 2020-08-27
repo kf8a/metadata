@@ -17,7 +17,7 @@ class PermissionRequestsControllerTest < ActionController::TestCase
         end
 
         should "not create a permission request" do
-          assert_nil PermissionRequest.find_by(datatable_id: @datatable.id, user_id: @user.id)
+          assert_nil PermissionRequest.find_by(datatable_id: @datatable.id, user_id: @owner.id)
         end
       end
     end

@@ -112,7 +112,7 @@ class DatatablesController < ApplicationController
   # DELETE /datatables/1
   def destroy
     datatable.destroy
-    redirect_to :index
+    redirect_to datatables_url
   end
 
   # TODO: only return the ones for the right website

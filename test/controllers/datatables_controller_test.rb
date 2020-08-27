@@ -56,24 +56,37 @@ class DatatablesControllerTest < ActionController::TestCase
 
     context 'GET :show with version' do
       setup do
-        @sponsor = FactoryBot.create :sponsor, data_use_statement: 'smoke em if you got em'
-        dataset = FactoryBot.create :dataset, sponsor: @sponsor
-        @datatable = FactoryBot.create :datatable, dataset: dataset
+        sponsor = FactoryBot.create :sponsor, data_use_statement: 'smoke em if you got em'
+        dataset = FactoryBot.create :dataset, sponsor: sponsor
+        datatable = FactoryBot.create :datatable, dataset: dataset
 
-        get :show, params: { id: @datatable, version: 0 }
+        get :show, params: { id: datatable, version: 0 }
       end
 
       should respond_with :success
     end
 
     context 'GET :edit' do
-      setup { get :edit, params: { id: @datatable } }
+      setup do
+        sponsor = FactoryBot.create :sponsor, name: 'glbrc', data_use_statement: 'smoke em if you got em'
+        dataset = FactoryBot.create :dataset, sponsor: sponsor
+        datatable = FactoryBot.create :datatable, dataset: dataset
+
+        get :edit, params: { id: datatable }
+      end
       should respond_with :redirect
       should redirect_to('the sign in page') { new_user_session_path }
     end
 
     context 'POST :update' do
-      setup { post :update, params: { id: @datatable } }
+      setup do
+        sponsor = FactoryBot.create :sponsor, data_use_statement: 'smoke em if you got em'
+        dataset = FactoryBot.create :dataset, sponsor: sponsor
+        datatable = FactoryBot.create :datatable, dataset: dataset
+        new_table = FactoryBot.build :datatable
+
+        post :update, params: { id: datatable, datatable: new_table }
+      end
 
       should respond_with :redirect
       should redirect_to('the sign in page') { new_user_session_path }

@@ -109,6 +109,8 @@ FactoryBot.define do
   end
 
   factory :unit do
+    name { 'per something' }
+    label { 'something' }
   end
 
   factory :upload do
@@ -134,7 +136,7 @@ FactoryBot.define do
   end
 
   factory :visualization do
-    query  { 'select 1 as sample_date' }
+    query { 'select 1 as sample_date' }
   end
 
   sequence :website_name do |n|
