@@ -27,7 +27,7 @@ class ProtocolsControllerTest < ActionController::TestCase
 
     context 'POST: create' do
       setup do
-        post :create, params: { protocol: { dataset_id: 35 } }
+        put :create, params: { protocol: { dataset_id: 35 } }
       end
       should redirect_to('the protocol show page') { protocol_path(assigns(:protocol)) }
     end
@@ -58,7 +58,7 @@ class ProtocolsControllerTest < ActionController::TestCase
 
     context 'POST: update with version' do
       setup do
-        put :update, params: { id: @protocol, protocol: { title: 'new protocol'}, new_version: "1" }
+        put :update, params: { id: @protocol, protocol: { title: 'new protocol' }, new_version: "1" }
       end
 
       should 'create a new protocol' do
@@ -159,9 +159,11 @@ class ProtocolsControllerTest < ActionController::TestCase
     @website = Website.find_by(name: 'lter')
     @protocol = FactoryBot.create(:protocol, title: 'lter_protocol')
     @website.protocols << @protocol
+    @protocol.save
 
     @glbrc_website = Website.find_by(name: 'glbrc')
     @glbrc_protocol = FactoryBot.create(:protocol, title: 'glbrc protocol')
     @glbrc_website.protocols << @glbrc_protocol
+    @glbrc_protocol.save
   end
 end
