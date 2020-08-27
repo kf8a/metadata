@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 set :application, 'metadata'
 set :repo_url, 'git@github.com:kf8a/metadata.git'
 
@@ -18,10 +20,10 @@ set :deploy_to, '/var/u/apps/metadata'
 # set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, "config/database.yml", "config/site_keys.rb", "config/secret_token.rb", "config/storage.yml", "config/unicorn/production.rb"
+append :linked_files, %w[config/database.yml config/site_keys.rb config/secret_token.rb config/storage.yml]
 
 # Default value for linked_dirs is []
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "config/credentials"
+append :linked_dirs, %w["og tmp/pids tmp/cache tmp/sockets public/system public/uploads config/credentials]
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -34,10 +36,12 @@ set :keep_releases, 50
 
 set :keep_assets, 2
 
+set :puma_init_active_record, true
+
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
 
-after 'deploy:publishing', 'unicorn:restart'
+# after 'deploy:publishing', 'unicorn:reload'
 
 before 'deploy:assets:precompile', 'deploy:yarn_install'
 
@@ -61,7 +65,7 @@ end
 
 namespace :assets do
   desc 'Precompile assets on local machine and upload them to the server.'
-  task :precompile do #, roles: :web, except: { no_release: true } do
+  task :precompile do # , roles: :web, except: { no_release: true } do
     run_locally 'bundle exec rake assets:clobber'
     run_locally 'bundle exec rake assets:precompile RAILS_ENV=production'
     # run "cd #{current_path} && bundle exec rake assets:precompile RAILS_ENV=production"
@@ -73,9 +77,9 @@ end
 
 task :create_nav do
   on roles(:app) do
-    execute "curl https://lter.kbs.msu.edu/export/nav/ -o #{release_path}/app/views/shared/_nav.html.erb -s"
-    execute "curl https://lter.kbs.msu.edu/export/footer/ -o #{release_path}/app/views/shared/_footer.html.erb -s"
-    execute "curl https://lter.kbs.msu.edu/export/header/ -o #{release_path}/app/views/shared/_header.html.erb -s"
+    execute "curl https://lter.kbs.msu.edu/export/nav/ -k -o #{release_path}/app/views/shared/_nav.html.erb -s"
+    execute "curl https://lter.kbs.msu.edu/export/footer/ -k -o #{release_path}/app/views/shared/_footer.html.erb -s"
+    execute "curl https://lter.kbs.msu.edu/export/header/ -k -o #{release_path}/app/views/shared/_header.html.erb -s"
     execute %(cd #{release_path}/app/views/shared; sed -i 's/src="http:/src="https:/g' _footer.html.erb)
     execute %(cd #{release_path}/app/views/shared; sed -i 's/src="http:/src="https:/g' _header.html.erb)
   end
@@ -95,7 +99,9 @@ end
 
 desc 'update date ranges'
 task :update_date_range do
-  run "cd #{current_path};bundle exec rake scores:update_date_range RAILS_ENV=production"
+  on roles(:app) do
+    execute "cd #{current_path};bundle exec rake scores:update_date_range RAILS_ENV=production"
+  end
 end
 
 desc 'update sitemap'

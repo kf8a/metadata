@@ -12,7 +12,6 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'acts-as-taggable-on'
 gem 'devise'
 gem 'formtastic'
-gem 'kramdown', '~> 2.1'
 gem 'nokogiri'
 gem 'pg'
 gem 'RedCloth'
@@ -35,7 +34,7 @@ gem 'bibtex-ruby'
 
 gem 'dalli'
 
-gem 'has_scope', '<0.6'
+gem 'has_scope' # , '<0.6'
 
 gem 'ris_parser', git: 'https://github.com/kf8a/ris_parser.git'
 
@@ -48,9 +47,11 @@ gem 'rake', '>= 12.3.3'
 
 gem 'sitemap_generator'
 
+gem 'puma'
+
 group :production, :staging do
   gem 'exception_notification'
-  gem 'unicorn'
+  # gem 'unicorn'
 end
 
 gem 'coffee-rails'
@@ -69,7 +70,8 @@ group :development do
   gem 'awesome_print'
   gem 'bcrypt_pbkdf'
   gem 'capistrano', require: false
-  gem 'capistrano3-unicorn'
+  gem 'capistrano3-puma'
+  # gem 'capistrano3-unicorn'
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails'
   gem 'ed25519'
