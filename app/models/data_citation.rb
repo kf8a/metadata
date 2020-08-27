@@ -10,7 +10,7 @@ class DataCitation < Citation
   private
 
   def journal
-    publication.blank? ? secondary_title : publication
+    publication.presence || secondary_title
   end
 
   def bibtex_type
