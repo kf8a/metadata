@@ -78,10 +78,11 @@ class EmlPersonBuilder
     # directory=  id=
     return unless person.orcid_id
     return if person.orcid_id.empty?
+
     if person.orcid_id =~ /http/
       eml.userId person.orcid_id, directory: 'http://orcid.org'
     else
-      eml.userId 'http://' + person.orcid_id, directory: 'http://orcid.org'
+      eml.userId "http://#{person.orcid_id}", directory: 'http://orcid.org'
     end
   end
 
