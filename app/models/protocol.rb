@@ -4,28 +4,16 @@ require 'eml'
 # A protocol describes how the data was collected
 class Protocol < ApplicationRecord
   acts_as_taggable_on :themes
-  belongs_to :dataset
+  belongs_to :dataset, optional: true
   has_and_belongs_to_many :websites
   has_and_belongs_to_many :datatables
-  has_many :scribbles
+  has_many :scribbles, dependent: :destroy
   has_many :people, through: :scribbles
 
   has_one_attached :pdf
 
   def to_s
     title
-  end
-
-  def self.from_eml(protocol_eml)
-    prot_id = protocol_eml.attributes['id'].try(:value).try(:gsub, 'protocol_', '')
-    protocol = find_by(id: prot_id) || new
-    if protocol.new_record?
-      protocol.title = protocol_eml.css('title').text
-      protocol.abstract = protocol_eml.parent.css('abstract').text
-      protocol.save
-    end
-
-    protocol
   end
 
   def valid_for_eml?
