@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Helpers for the people page
 module PeopleHelper
   def contact_link(email)
@@ -7,7 +9,8 @@ module PeopleHelper
   def parenthize(string)
     return string if string.nil?
     return string if string.strip == ''
-    '(' + string + ')'
+
+    "(#{string})"
   end
 
   def committee_affiliations(committee, role)
@@ -26,14 +29,12 @@ module PeopleHelper
     committee_people = committee_affiliations(committee, role).collect(&:person)
     committee_people.each do |person|
       if first_one
-        html += link_to person.full_name.to_s, person_path(person)
         first_one = false
       else
         html += ', '
-        html += link_to person.full_name.to_s, person_path(person)
       end
+      html += link_to person.full_name.to_s, person_path(person)
     end
-    html += '</li>'
-    html
+    "#{html}</li>"
   end
 end

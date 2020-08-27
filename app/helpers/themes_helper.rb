@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Help to render theme containers
 module ThemesHelper
   def render_themes(theme, &block)
