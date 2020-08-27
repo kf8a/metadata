@@ -1,4 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
+# frozen_string_literal: true
+
+require File.expand_path("#{File.dirname(__FILE__)}/../rails_helper")
 
 describe Sponsor do
   it 'returns the right terms_of_use_url if it exists' do

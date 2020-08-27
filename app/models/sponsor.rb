@@ -7,10 +7,6 @@ class Sponsor < ApplicationRecord
 
   # friendly_id :name
   def terms_of_use_path
-    if terms_of_use_url.present?
-      "/sponsors/#{id}"
-    else
-      terms_of_use_url
-    end
+    terms_of_use_url.presence || "/sponsors/#{id}"
   end
 end
