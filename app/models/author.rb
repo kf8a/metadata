@@ -6,7 +6,7 @@ require 'citation_format'
 class Author < ApplicationRecord
   include CitationFormat
 
-  belongs_to :citation, optional: true
+  belongs_to :citation
 
   validates :seniority, presence: true
 

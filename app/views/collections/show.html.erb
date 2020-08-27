@@ -97,7 +97,7 @@
               <% row.keys.sort.each do |key| %>
                 <% next unless row[key] %>
                 <% next if key == "id" %>
-                <%= key.titleize + ": " + row[key].to_s %><br />
+                <%= key.titleize + ": " + row[key] %><br />
               <% end %>
             </td>
             <td>

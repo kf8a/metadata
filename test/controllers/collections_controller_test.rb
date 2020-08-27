@@ -1,9 +1,7 @@
-# frozen_string_literal: true
+require File.expand_path('../../test_helper',__FILE__) 
 
-require File.expand_path('../test_helper', __dir__)
-
-# show collections
 class CollectionsControllerTest < ActionController::TestCase
+
   context "GET :index" do
     setup do
       get :index
@@ -15,7 +13,7 @@ class CollectionsControllerTest < ActionController::TestCase
   context "GET :show" do
     setup do
       @collection = FactoryBot.create(:collection)
-      get :show, params: { id: @collection }
+      get :show, :id => @collection
     end
 
     should respond_with :success

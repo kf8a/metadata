@@ -1,8 +1,5 @@
-# frozen_string_literal: true
-
-# TODO: do we still support this?
-xml.instruct! :xml, version: "1.0"
-xml.rss version: "2.0" do
+xml.instruct! :xml, :version => "1.0"
+xml.rss :version => "2.0" do
   xml.channel do
     xml.title "Area 4 Publications"
     xml.description "Area 4 publications"
