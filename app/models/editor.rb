@@ -6,7 +6,7 @@ require 'citation_format'
 class Editor < ApplicationRecord
   include CitationFormat
 
-  belongs_to :citation
+  belongs_to :citation, optional: true
 
   validates :seniority, presence: true
 
