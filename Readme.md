@@ -23,6 +23,8 @@ The system is modeled loosely on the [EML schema](https://knb.ecoinformatics.org
 
   A datatable has many variates and a variate has a unit.
 
+  The ``/datasets.xml` endpoint generates a [metacat style harvest list](http://databits.lternet.edu/spring-2005/eml-harvesting-ii-preparing-site-metadata-and-harvest-lists) of the public datasets that are marked "pasta ready" in dataset table.
+
 - Protocol
 
   A protocol is linked to datatables,they can also be linked to datasets but that usage is deprecated. For datasets the protocols of the datatables are collected and presented as a group.
