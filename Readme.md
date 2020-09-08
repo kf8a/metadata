@@ -17,11 +17,11 @@ The system is modeled loosely on the [EML schema](https://knb.ecoinformatics.org
 
   Datasets are the container of multiple datatables. This component groups datatables together, the datatables in the dataset are listed under "Related Tables" on the show page for the datatable. A dataset can be converted to an eml document by sending the `to_eml` message.
 
-  The ``/datasets.xml` endpoint generates a [metacat style harvest list](http://databits.lternet.edu/spring-2005/eml-harvesting-ii-preparing-site-metadata-and-harvest-lists) of the public datasets that are marked "pasta ready" in dataset table.
-
 - Datatable
 
   Datatables present one table of data to the user. They can be backed by a database table or view or a data url that points elsewhere.  Datatables describe the location of the data and how to retrieve it as well as a connection point for the list of variates associated with the table.
+
+  A datatable has many variates and a variate has a unit.
 
 - Protocol
 

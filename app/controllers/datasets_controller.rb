@@ -19,6 +19,7 @@ class DatasetsController < ApplicationController
 
   # GET /datasets
   # GET /datasets.xml
+  # The .xml path renders a metadata harvest list.
   def index
     request.format = :eml if params[:Dataset]
     @keyword_list = params['keyword_list']
