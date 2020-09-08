@@ -2,7 +2,8 @@
 
 require 'bibtex'
 
-# Reference for a publication of some sort
+# Reference for a publication of some sort. Base class that other publication
+# types derive from and implement their own formatting routines.
 class Citation < ApplicationRecord
   include WorkflowActiverecord
 
@@ -28,15 +29,6 @@ class Citation < ApplicationRecord
   # after_commit :check_for_open_access_paper
 
   has_one_attached :pdf
-
-  # has_attached_file :pdf,
-  #                   storage: :s3,
-  #                   bucket: 'metadata-production',
-  #                   path: '/citations/pdfs/:id/:style/:basename.:extension',
-  #                   s3_credentials: Rails.root.join('config', 's3.yml'),
-  #                   s3_region: 'us-east-1',
-  #                   s3_permissions: 'authenticated-read'
-  # #                 s3_headers: { 'Content-Disposition': 'attachment' }
 
   # TODO: update validations for active storage
   # validates_attachment_content_type :pdf, content_type: /pdf/
