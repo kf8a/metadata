@@ -21,7 +21,9 @@ class Dataset < ApplicationRecord
   belongs_to              :website, optional: true
   has_many                :data_versions, dependent: :destroy
   has_many                :dataset_dois, dependent: :destroy
-
+  # has_many :data_usages, dependent: :destroy
+  # has_many :citations, through: data_usages
+  #
   validates :abstract, presence:   true
   validates :dataset,  uniqueness: true
 
@@ -34,35 +36,6 @@ class Dataset < ApplicationRecord
   after_touch do
     increment_version
   end
-
-  # def self.from_eml_file(file)
-  #   from_eml(file.read)
-  # end
-  #
-  # def self.from_eml(eml_text)
-  #   eml_doc = if eml_text.start_with?('http://')
-  #               Nokogiri::XML(open(eml_text))
-  #             else
-  #               Nokogiri::XML(eml_text)
-  #             end
-  #   # get_validation_errors(eml_doc).presence ||
-  #   new.from_eml(eml_doc)
-  # end
-
-  # def self.get_validation_errors(eml_doc)
-  #   xsd = nil
-  #   Dir.chdir("#{Rails.root}/test/data/eml-2.1.0") do
-  #     xsd = Nokogiri::XML::Schema(File.read('eml.xsd'))
-  #   end
-  #   xsd.validate(eml_doc)
-  # end
-
-  # def from_eml(eml_doc)
-  #   dataset_eml = eml_doc.css('dataset').first
-  #   basic_attributes_from_eml(dataset_eml)
-  #   associated_models_from_eml(dataset_eml)
-  #   self
-  # end
 
   def to_label
     "#{title} (#{dataset})"
@@ -210,43 +183,4 @@ class Dataset < ApplicationRecord
     builder = EmlDatasetBuilder.new(self)
     builder.to_eml
   end
-
-  # private
-
-  # def self.validation_errors(eml_doc)
-  #   xsd = nil
-  #   Dir.chdir("#{Rails.root}/test/data/eml-2.1.0") do
-  #     xsd = Nokogiri::XML::Schema(File.read('eml.xsd'))
-  #   end
-  #
-  #   xsd.validate(eml_doc)
-  # end
-  #
-  # def basic_attributes_from_eml(dataset_eml)
-  #   self.title = dataset_eml.at_css('title').text
-  #   self.abstract = dataset_eml.css('abstract para').text
-  #   self.initiated = dataset_eml.css('temporalCoverage rangeOfDates beginDate calendarDate').text
-  #   self.completed = dataset_eml.css('temporalCoverage rangeOfDates endDate calendarDate').text
-  #   save
-  # end
-  #
-  # def associated_models_from_eml(dataset_eml)
-  #   dataset_eml.parent.css('methods methodStep protocol').each do |protocol_eml|
-  #     protocols << Protocol.from_eml(protocol_eml)
-  #   end
-  #
-  #   dataset_eml.css('associatedParty').each do |person_eml|
-  #     people << Person.from_eml(person_eml)
-  #   end
-  #
-  #   dataset_eml.css('dataTable').each do |datatable_eml|
-  #     datatables.new.from_eml(datatable_eml)
-  #   end
-  #
-  #   dataset_eml.css('keywordSet keyword').each do |keyword_eml|
-  #     keyword_list << keyword_eml.text
-  #   end
-  #
-  #   save
-  # end
 end
