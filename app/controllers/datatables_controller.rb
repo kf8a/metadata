@@ -59,7 +59,6 @@ class DatatablesController < ApplicationController
             render_csv
           end
         end
-        format.climdb { redirect_to datatable_url(datatable) unless csv_ok }
       end
     else
       redirect_to datatables_url

@@ -336,14 +336,6 @@ class Datatable < ApplicationRecord
     result
   end
 
-  def raw_csv(units = true)
-    convert_to_csv(all_data, units)
-  end
-
-  def approved_csv
-    convert_to_csv(approved_data)
-  end
-
   def convert_to_csv(values, units: true)
     CSV.generate do |csv|
       vars = variate_names
@@ -355,10 +347,6 @@ class Datatable < ApplicationRecord
         csv << vars.collect { |variate| row[variate] }
       end
     end
-  end
-
-  def to_climdb
-    "!#{raw_csv(false)}" # no units
   end
 
   def terms_of_use
@@ -455,14 +443,6 @@ class Datatable < ApplicationRecord
     query = object
     query += " offset #{offset}" if number_of_released_records
     query
-  end
-
-  def approved_data
-    DataQuery.find(approved_data_query)
-  end
-
-  def all_data
-    DataQuery.find(object)
   end
 
   def offset
