@@ -6,6 +6,7 @@ require 'eml'
 # A datatable is one of the main objects in the system
 # it represents a table of data generally a view in the database
 class Datatable < ApplicationRecord
+  include GenerateCsvData
   attr_accessor :materialized_datatable_id
 
   acts_as_taggable_on :keywords
@@ -24,7 +25,7 @@ class Datatable < ApplicationRecord
   has_and_belongs_to_many :protocols
   belongs_to              :study, touch: true
   belongs_to              :theme, touch: true
-  has_many                :variates, -> { order :weight }
+  has_many                :variates, -> { order :weight }, inverse_of: :datatable, dependent: :destroy
   has_many                :visualizations, -> { order :weight }
 
   validates :title,   presence: true
@@ -411,6 +412,34 @@ class Datatable < ApplicationRecord
     self.end_date = dates[:end_date] if dates[:end_date]
     save
     dataset.update_temporal_extent
+  end
+
+  def column_names_and_types
+    result = ActiveRecord::Base.connection.execute("#{object} limit 1")
+    data = result.fields.each_with_index.map do |k, v|
+      { k => ActiveRecord::Base
+        .connection
+        .execute("select format_type(#{result.ftype(v)}, #{result.fmod(v)})")
+        .first["format_type"] }
+    end
+    data.reduce({}, :merge)
+  end
+
+  def generate_variates
+    i = -1
+    column_names_and_types.collect do |key, value|
+      i += 1
+      case value
+      when 'date'
+        Variate.new(name: key, weight: i, data_type: 'datetime', measurement_scale: 'datetime',
+                    date_format: 'YYYY-MM-DD')
+      when 'datetime'
+        Variate.new(name: key, weight: i, data_type: 'datetime', measurement_scale: 'datetime',
+                    date_format: 'YYYY-MM-DD hh:mm:ss')
+      else
+        Variate.new(name: key, weight: i, measurement_scale: 'nominal', data_type: 'text')
+      end
+    end
   end
 
   def data_preview

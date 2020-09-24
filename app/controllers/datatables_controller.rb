@@ -2,6 +2,7 @@
 
 # Control the display of datatables
 class DatatablesController < ApplicationController
+  include StreamFile
   helper_method :datatable
 
   before_action :authenticate_user!, except: %i[index show suggest search qc]
@@ -272,43 +273,30 @@ class DatatablesController < ApplicationController
     )
   end
 
+  # TODO: grab approved sql from model
   def render_csv
-    set_file_headers
-    set_streaming_headers
-
-    response.status = 200
-    self.response_body = csv_data
+    stream_file(file_name, "csv") do |stream|
+      Datatable.stream_query_rows(@datatable.approved_data_query) do |row_from_db|
+        stream.write row_from_db
+      end
+    end
   end
 
   def render_admin_csv
-    set_file_headers
-    set_streaming_headers
-
-    response.status = 200
-    self.response_body = csv_data(@datatable.object)
+    stream_file(file_name, "csv") do |stream|
+      Datatable.stream_quey_rows(@datatable.object) do |row_from_db|
+        stream.write row_from_db
+      end
+    end
   end
 
   def set_file_headers
-    file_name = "#{@datatable.id}-#{@datatable.title.downcase.strip.gsub(/\W/, '+').squeeze('+')}.csv"
     headers['Content-Type'] = 'text/csv'
-    headers['Content-disposition'] = "attachment; filename=\"#{file_name}\""
+    headers['Content-disposition'] = "attachment; filename=\"#{file_name}.csv\""
   end
 
-  def set_streaming_headers
-    # nginx doc: Setting this to "no" will allow unbuffered responses
-    # suitable for Comet and HTTP streaming applications
-    headers['X-Accel-Buffering'] = 'no'
-
-    headers['Cache-Control'] ||= 'no-cache'
-    headers.delete('Content-Length')
-  end
-
-  def csv_data(query = @datatable.approved_data_query)
-    Enumerator.new do |line|
-      line << @datatable.csv_headers.to_s
-
-      DataQuery.find_in_batches_as_csv(query) { |data| line << data.to_s }
-    end
+  def file_name
+    "#{@datatable.id}-#{@datatable.title.downcase.strip.gsub(/\W/, '+').squeeze('+')}"
   end
 
   def initialize_instance_variables
