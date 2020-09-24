@@ -77,6 +77,7 @@ group :development do
   gem 'ed25519'
 
   gem 'listen'
+  gem 'railroady'
   gem 'rbnacl'
   gem 'rbnacl-libsodium'
   gem 'rubocop', require: false
