@@ -51,7 +51,7 @@ gem 'puma'
 
 group :production, :staging do
   gem 'exception_notification'
-  gem 'unicorn'
+  # gem 'unicorn'
 end
 
 gem 'coffee-rails'
@@ -71,7 +71,7 @@ group :development do
   gem 'bcrypt_pbkdf'
   gem 'capistrano', require: false
   gem 'capistrano3-puma'
-  gem 'capistrano3-unicorn'
+  # gem 'capistrano3-unicorn'
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails'
   gem 'ed25519'
