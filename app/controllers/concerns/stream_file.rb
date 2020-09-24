@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# from https://dev.to/faisalshaikh8433/streaming-csv-files-in-ruby-on-rails-2oda
 # streaming for csv data
 module StreamFile
   extend ActiveSupport::Concern

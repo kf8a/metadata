@@ -4,7 +4,8 @@
 module GenerateCsvData
   extend ActiveSupport::Concern
   class_methods do
-    def stream_query_rows(sql_query, options = "WITH CSV HEADER")
+    # options = "WITH CSV HEADER"
+    def stream_query_rows(sql_query, options = "WITH CSV")
       conn = ActiveRecord::Base.connection.raw_connection
       conn.copy_data "COPY (#{sql_query}) TO STDOUT #{options};" do
         while (row = conn.get_copy_data)
