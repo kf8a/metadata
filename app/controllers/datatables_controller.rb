@@ -297,7 +297,7 @@ class DatatablesController < ApplicationController
   end
 
   def name_of_file
-    "#{@datatable.id}-#{@datatable.title.downcase.strip.gsub(/\W/, '+').squeeze('+')}"
+    "#{@datatable.id}-#{@datatable.title.downcase.squeeze.strip.gsub(/\W/, '+')}"
   end
 
   def file_name
