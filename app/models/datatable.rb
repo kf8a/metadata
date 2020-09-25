@@ -360,7 +360,7 @@ class Datatable < ApplicationRecord
 
   def data_comments
     if comments
-      "#\n#        DATA TABLE CORRECTIONS AND COMMENTS\n #{comments.gsub(/^/, '#')}\n#\n"
+      "#\n#        DATA TABLE CORRECTIONS AND COMMENTS\n#{comments.gsub(/^/, '#')}\n#\n"
     else
       "\n"
     end
