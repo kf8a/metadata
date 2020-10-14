@@ -12,12 +12,15 @@ The following style may be *conditionally* included for improved support on olde
 form.formtastic fieldset ol li fieldset legend { margin-left: -6px;}
 
 --------------------------------------------------------------------------------------------------*/
-form.formtastic fieldset {
-  overflow: hidden;
-}
-form.formtastic fieldset>ol>li fieldset ol li {
-  padding: 0;
-  border: 0;
-  padding-top: 10px;
-}
+/* form.formtastic fieldset { */
+/*   overflow: hidden; */
+/* } */
+/* form.formtastic fieldset>ol>li fieldset ol li { */
+/*   padding: 0; */
+/*   border: 0; */
+/*   padding-top: 10px; */
+/* } */
 
+form.formtastic fieldset > ol > li.text textarea {
+	width: 50%;
+}
