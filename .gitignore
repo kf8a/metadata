@@ -33,6 +33,7 @@ public/metadata-assets/
 private
 .idea
 shared/*
+assets/*
 
 # Ignore master key for decrypting credentials and more.
 config/master.key

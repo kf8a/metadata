@@ -17,15 +17,6 @@ input, #myselect, #myotherselect {
 	clear: right;
 }
 
-form.new_ownership > input[type="submit"], #go {
-	font-family: verdana, arial, sans-serif;
-	font-size: 10px;
-	width: auto;
-	clear: left;
-	margin-left: 120px;
-}
-
-
 fieldset.comboselect {
 	font-family: verdana, arial, sans-serif;
 	font-size: 10px;
