@@ -47,7 +47,7 @@ gem 'rake', '>= 12.3.3'
 
 gem 'sitemap_generator'
 
-gem 'puma'
+gem 'puma', '<5.0'
 
 group :production, :staging do
   gem 'exception_notification'
@@ -70,7 +70,7 @@ group :development do
   gem 'awesome_print'
   gem 'bcrypt_pbkdf'
   gem 'capistrano', require: false
-  gem 'capistrano3-puma'
+  gem 'capistrano3-puma', github: "seuros/capistrano-puma"
   # gem 'capistrano3-unicorn'
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails'
