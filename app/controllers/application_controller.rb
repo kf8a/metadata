@@ -25,7 +25,6 @@ class ApplicationController < ActionController::Base
       'You must be signed in as an administrator' \
         ' in order to access this page'
     redirect_to new_user_session_url
-    throw(:abort)
   end
 
   def set_crumbs
