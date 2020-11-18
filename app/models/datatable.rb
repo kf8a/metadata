@@ -573,7 +573,7 @@ class Datatable < ApplicationRecord
 
   def eml_physical
     @eml.physical do
-      @eml.objectName title.tr(' ', '+')
+      @eml.objectName "#{title.strip.squeeze.tr(' ', '+')}.csv"
       @eml.encodingMethod 'None'
       eml_data_format
       eml_distribution
