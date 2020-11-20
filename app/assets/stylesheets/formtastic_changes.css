@@ -23,4 +23,8 @@ form.formtastic fieldset ol li fieldset legend { margin-left: -6px;}
 
 form.formtastic fieldset > ol > li.text textarea {
 	width: 50%;
+  max-width: 52%;
 }
+/* form.formtastic fieldset > ol > li.text textarea[cols] { */
+/*   ma */
+/* } */
