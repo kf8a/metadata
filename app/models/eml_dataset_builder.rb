@@ -176,17 +176,21 @@ class EmlDatasetBuilder
   end
 
   def eml_intellectual_rights
-    @eml.intellectualRights do
-      if dataset.cc0
-        @eml.para 'These data are licensed under the Creative Commons CC0 license.'
-      else
+    if dataset.cc0
+      @eml.license do
+        @eml.licenseName "CC0"
+        @eml.url "https://creativecommons.org/publicdomain/zero/1.0/"
+        @eml.identifier "CC0-1.0"
+      end
+    else
+      @eml.intellectualRights do
         @eml.para 'Data in the KBS LTER core database may not be published without written' \
-                    ' permission of the lead investigator or project director. These restrictions' \
-                    " are intended mainly to preserve the primary investigators' rights to first" \
-                    ' publication and to ensure that data users are aware of the limitations' \
-                    ' that may be associated with any specific data set. These restrictions apply' \
-                    ' to both the baseline data set and to the data sets associated with specific' \
-                    ' LTER-supported subprojects.'
+          ' permission of the lead investigator or project director. These restrictions' \
+          " are intended mainly to preserve the primary investigators' rights to first" \
+          ' publication and to ensure that data users are aware of the limitations' \
+          ' that may be associated with any specific data set. These restrictions apply' \
+          ' to both the baseline data set and to the data sets associated with specific' \
+          ' LTER-supported subprojects.'
         @eml.para 'All publications of KBS data and images must acknowledge KBS LTER support.'
       end
     end
@@ -251,7 +255,7 @@ class EmlDatasetBuilder
 
   def eml_iso_19115_keywords
     @eml.keywordSet do
-      %w[farming biota].each { |keyword| @eml.keyword keyword, keywordType: 'iso_19115_category' }
+      %w[farming biota].each { |keyword| @eml.keyword keyword, keywordType: 'theme' }
       @eml.keywordThesaurus "https://apps.usgs.gov/thesaurus/thesaurus-full.php?thcode=15"
     end
   end
@@ -280,7 +284,7 @@ class EmlDatasetBuilder
     return if datatable_keywords.empty?
 
     @eml.keywordSet do
-      datatable_keywords.split(/ /).each { |keyword| @eml.keyword keyword, keywordType: 'local' }
+      datatable_keywords.split(/ /).each { |keyword| @eml.keyword keyword, keywordType: 'theme' }
     end
   end
 
