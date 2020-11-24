@@ -177,10 +177,13 @@ class EmlDatasetBuilder
 
   def eml_intellectual_rights
     if dataset.cc0
+      @eml.intellectualRights do
+        @eml.para %q{This information is released under the Creative Commons license - Attribution - CC BY (https://creativecommons.org/licenses/by/4.0/). The consumer of these data ("Data User" herein) is required to cite it appropriately in any publication that results from its use. The Data User should realize that these data may be actively used by others for ongoing research and that coordination may be necessary to prevent duplicate publication. The Data User is urged to contact the authors of these data if any questions about methodology or results occur. Where appropriate, the Data User is encouraged to consider collaboration or co-authorship with the authors. The Data User should realize that misinterpretation of data may occur if used out of context of the original study. While substantial efforts are made to ensure the accuracy of data and associated documentation, complete accuracy of data sets cannot be guaranteed. All data are made available "as is." The Data User should be aware, however, that data are updated periodically and it is the responsibility of the Data User to check for new versions of the data. The data authors and the repository where these data were obtained shall not be liable for damages resulting from any use or misinterpretation of the data. Thank you.}
+      end
       @eml.licensed do
-        @eml.licenseName "CC0"
-        @eml.url "https://creativecommons.org/publicdomain/zero/1.0/"
-        @eml.identifier "CC0-1.0"
+        @eml.licenseName "Creative Commons Attribution 4.0 International"
+        @eml.url "https://creativecommons.org/licenses/by/4.0/"
+        @eml.identifier "CC-BY-4.0"
       end
     else
       @eml.intellectualRights do
