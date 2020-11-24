@@ -251,7 +251,8 @@ class EmlDatasetBuilder
 
   def eml_iso_19115_keywords
     @eml.keywordSet do
-      %w[farming biota].each { |keyword| @eml.keyword keyword, keywordType: 'iso_19115_category'}
+      %w[farming biota].each { |keyword| @eml.keyword keyword, keywordType: 'iso_19115_category' }
+      @eml.keywordThesaurus "https://apps.usgs.gov/thesaurus/thesaurus-full.php?thcode=15"
     end
   end
 
