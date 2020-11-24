@@ -281,6 +281,7 @@ class EmlDatasetBuilder
 
   def eml_datatable_keywords
     datatable_keywords = dataset.datatables.collect(&:keyword_names).flatten.uniq.first
+    return unless datatable_keywords
     return if datatable_keywords.empty?
 
     @eml.keywordSet do
