@@ -177,7 +177,7 @@ class EmlDatasetBuilder
 
   def eml_intellectual_rights
     if dataset.cc0
-      @eml.license do
+      @eml.licensed do
         @eml.licenseName "CC0"
         @eml.url "https://creativecommons.org/publicdomain/zero/1.0/"
         @eml.identifier "CC0-1.0"
