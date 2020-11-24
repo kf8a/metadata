@@ -246,6 +246,13 @@ class EmlDatasetBuilder
     eml_datatable_keywords
     eml_core_area_keywords
     eml_custom_keywords
+    eml_iso_19115_keywords
+  end
+
+  def eml_iso_19115_keywords
+    @eml.keywordSet do
+      %w[farming biota].each { |keyword| @eml.keyword keyword, keywordType: 'iso_19115_category'}
+    end
   end
 
   def eml_custom_keywords
@@ -268,10 +275,12 @@ class EmlDatasetBuilder
   end
 
   def eml_datatable_keywords
-    datatable_keywords = dataset.datatables.collect(&:keyword_names).flatten.uniq
+    datatable_keywords = dataset.datatables.collect(&:keyword_names).flatten.uniq.first
     return if datatable_keywords.empty?
 
-    @eml.keywordSet { datatable_keywords.each { |keyword| @eml.keyword keyword } }
+    @eml.keywordSet do
+      datatable_keywords.split(/ /).each { |keyword| @eml.keyword keyword, keywordType: 'local' }
+    end
   end
 
   def contact_info
