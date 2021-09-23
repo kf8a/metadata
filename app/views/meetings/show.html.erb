@@ -15,7 +15,6 @@
     <% end %>
 
 
-    <% if admin? %>
       <% if @meeting.poster_abstracts.size > 0 %>
         <h3>Posters</h3>
         <div id="abstracts">
@@ -46,7 +45,6 @@
           </ul>
         </div>
       <% end %>
-    <% end %>
     <p>Meeting held on: <%= @meeting.date.to_s %></p>
     <% if admin? %>
       <p><%= link_to 'Add abstract', new_abstract_path({meeting_id: @meeting.id}) %></p>
