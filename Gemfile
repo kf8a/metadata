@@ -90,11 +90,7 @@ group :development, :test do
   gem 'minitest-reporters', '>= 0.5.0'
 
   gem 'rspec-its'
-  # TODO: go back to standard gem once 4.0 has been released
-  # gem 'rspec-rails', git: 'https://github.com/rspec/rspec-rails', tag: 'v4.0.0.beta4'
-
   gem 'rspec-rails'
-
   gem 'test-unit'
 end
 
