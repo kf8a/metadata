@@ -40,7 +40,7 @@ jQuery(document).ready(function() {
 
 
     //This sends a delete request and hides the containing element
-    jQuery('.deleter').live('click', function(e) {
+    jQuery('.deleter').on('click', function(e) {
         e.preventDefault();
         path = jQuery(this).attr('href');
         jQuery(this).parent().hide('slow');
