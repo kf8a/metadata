@@ -6,7 +6,8 @@
 
   <%= stylesheet_link_tag :application %>
   <%= javascript_include_tag :application %>
-  <script   src="https://code.jquery.com/jquery-3.6.0.min.js"   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="   crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.js" integrity="sha256-e9gNBsAcA0DBuRWbm0oZfbiCyhjLrI6bmqAl5o+ZjUA=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-migrate-1.4.1.js" integrity="sha256-xoqICUSqAwguiLvmx993R+5F9Qb6d352+0FwmgulqTU=" crossorigin="anonymous"></script>
   <%= yield :head %>
   <%= csrf_meta_tag unless response.cache_control[:public] %>
 </head>
