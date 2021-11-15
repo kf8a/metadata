@@ -292,7 +292,7 @@ class Datatable < ApplicationRecord
   def to_eml(xml = ::Builder::XmlMarkup.new)
     @eml = xml
     @eml.dataTable do
-      @eml.alternateIdentifier datatable_id
+      @eml.alternateIdentifier datatable_id, system: 'lter.kbs.msu.edu'
       @eml.entityName "Kellogg Biological Station LTER: #{title} (#{name})"
       if description
         text = description.gsub(%r{</?[^>]*>}, '')
