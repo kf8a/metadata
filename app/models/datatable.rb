@@ -282,12 +282,20 @@ class Datatable < ApplicationRecord
     protocols.reject { |protocol| dataset.protocols.include?(protocol) }.compact
   end
 
+  def datatable_id
+    Rails.application.routes
+         .url_helpers.datatable_url(id,
+                                    host: 'lter.kbs.msu.edu',
+                                    protocol: 'https')
+  end
+
   def to_eml(xml = ::Builder::XmlMarkup.new)
     @eml = xml
-    @eml.dataTable id: Rails.application.routes.url_helpers.datatable_path(self) do
+    @eml.dataTable do
+      @eml.alternateIdentifier datatable_id
       @eml.entityName "Kellogg Biological Station LTER: #{title} (#{name})"
       if description
-        text = description.gsub(%r{<\/?[^>]*>}, '')
+        text = description.gsub(%r{</?[^>]*>}, '')
         @eml.entityDescription EML.text_sanitize(text) unless text.strip.empty?
       end
       #      eml_protocols if non_dataset_protocols.present?

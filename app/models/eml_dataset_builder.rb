@@ -64,9 +64,9 @@ class EmlDatasetBuilder
   def custom_unit_list
     @eml.tag!(
       'stmml:unitList',
-      'xmlns:stmml': 'http://www.xml-cml.org/schema/stmml-1.1',
-      'xmlns': 'http://www.xml-cml.org/schema/stmml',
-      'xsi:schemaLocation':
+      'xmlns:stmml' => 'http://www.xml-cml.org/schema/stmml-1.1',
+      'xmlns' => 'http://www.xml-cml.org/schema/stmml',
+      'xsi:schemaLocation' =>
         'http://www.xml-cml.org/schema/stmml-1.1 http://nis.lternet.edu/schemas/EML/eml-2.1.0/stmml.xsd'
     ) { dataset.custom_units.each { |unit| build_custom_unit(unit) } }
   end
@@ -108,7 +108,7 @@ class EmlDatasetBuilder
   end
 
   def eml_dataset
-    @eml.dataset('id' => dataset_id) do
+    @eml.dataset() do
       eml_resource_group
       contact_info
       @eml.publisher { @eml.organizationName 'KBS LTER' }
@@ -164,6 +164,7 @@ class EmlDatasetBuilder
   def project_party; end
 
   def eml_resource_group
+    @eml.alternateIdentifier dataset_id
     @eml.title "#{dataset.title} at the Kellogg Biological Station, Hickory Corners, MI " +
                  DateRangeFormatter.year_range(dataset.temporal_extent)
     eml_creator
