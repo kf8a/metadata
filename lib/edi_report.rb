@@ -23,7 +23,7 @@ class EdiReport
     doc_url = 'https://pasta.lternet.edu/package/metadata/eml'
     begin
       response = open(doc_url + url_fragment)
-    rescue OpenURI::HTTPError => _error
+    rescue OpenURI::HTTPError => _e
       return nil
     end
 
@@ -61,11 +61,7 @@ class EdiReport
   # Creates a markdown table row
 
   def table_row(row_number)
-    SPACER +
-      row_number.to_s + SPACER +
-      citation + SPACER +
-      core_area_dots.join(SPACER) +
-      SPACER + ' ' + SPACER
+    row_number.to_s + SPACER + citation
   end
 
   def first_author_name
@@ -73,10 +69,24 @@ class EdiReport
     ReportAuthor.first_author_name(first_author)
   end
 
+  def publication_year
+    date = Date.parse(pubdate)
+    date.year.to_s
+  end
+
+  def dataset
+    id = dataset_id_attribute
+    return nil unless id
+
+    dataset_id, = id.split('/').last.split('.')
+    Dataset.find(dataset_id)
+  end
+
   private
 
   def core_area_dots
     return [] unless dataset_id_attribute
+
     core_area_used(core_areas).collect { |x| x ? "\uF0B7" : ' ' }
   end
 
@@ -94,12 +104,6 @@ class EdiReport
     dataset.core_areas.collect(&:name)
   end
 
-  def dataset
-    id = dataset_id_attribute
-    dataset_id, = id.split('/').last.split('.')
-    Dataset.find(dataset_id)
-  end
-
   def dataset_id_attribute
     doc.xpath('//dataset').attribute('id').try(:value)
   end
@@ -108,13 +112,8 @@ class EdiReport
     doc.xpath('//dataset/pubDate').text
   end
 
-  def publication_year
-    date = Date.parse(pubdate)
-    date.year.to_s
-  end
-
   def doi
-    doi_url = 'https://pasta.lternet.edu/package/doi/eml' + url_fragment
+    doi_url = "https://pasta.lternet.edu/package/doi/eml#{url_fragment}"
     doi_string = open(doi_url).read
     doi_string.sub(/doi:/, 'https://doi.org/')
   end
