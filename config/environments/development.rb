@@ -59,4 +59,11 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # OAuth configuration
+  config.x.oauth.client_id = "my-client-id"
+  config.x.oauth.client_secret = "my-super-secret-oauth-secret"
+  config.x.oauth.idp_url = "https://login.glbrc.org/"
+  config.x.oauth.redirect_uri = "http://localhost:3000/oauth2-callback"
+  config.x.oauth.hmac = ENV['HMAC_SECRET']
 end
