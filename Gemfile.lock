@@ -261,6 +261,9 @@ GEM
     omniauth-oauth2 (1.7.2)
       oauth2 (~> 1.4)
       omniauth (>= 1.9, < 3)
+    omniauth-rails_csrf_protection (0.1.2)
+      actionpack (>= 4.2)
+      omniauth (>= 1.3.1)
     orm_adapter (0.5.0)
     parallel (1.21.0)
     parser (3.0.3.1)
@@ -462,6 +465,7 @@ DEPENDENCIES
   nokogiri
   omniauth
   omniauth-glbrc!
+  omniauth-rails_csrf_protection
   parslet
   pg
   prometheus-client

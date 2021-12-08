@@ -66,6 +66,8 @@ gem 'faraday'
 
 gem 'omniauth'
 gem 'omniauth-glbrc', git: "git@github.com:kf8a/omniauth-glbrc.git"
+gem 'omniauth-rails_csrf_protection'
+
 
 group :development do
   gem 'awesome_print'
