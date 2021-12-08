@@ -1,13 +1,4 @@
 GIT
-  remote: git@github.com:kf8a/glbrc_auth_helper.git
-  revision: bc117c10b65aee9e2ca55f42983ea77c9566c8cd
-  specs:
-    glbrc_auth_helper (0.2.2)
-      jwt (~> 2.2)
-      oauth2 (~> 1.4)
-      rest-client (~> 2.0)
-
-GIT
   remote: https://github.com/kf8a/ris_parser.git
   revision: 410b27def4835b8b9b697690282ff3df4803ae68
   specs:
@@ -22,6 +13,14 @@ GIT
       capistrano (~> 3.7)
       capistrano-bundler
       puma (>= 4.0, < 6.0)
+
+PATH
+  remote: ../omniauth-glbrc
+  specs:
+    omniauth-glbrc (0.6.0)
+      multi_json (~> 1.7)
+      omniauth (~> 1.1)
+      omniauth-oauth2 (~> 1.1)
 
 GEM
   remote: https://rubygems.org/
@@ -94,7 +93,6 @@ GEM
       zeitwerk (~> 2.3)
     acts-as-taggable-on (8.1.0)
       activerecord (>= 5.0, < 6.2)
-    aes_key_wrap (1.1.0)
     airbrussh (1.4.0)
       sshkit (>= 1.6.1, != 1.7.0)
     ansi (1.5.0)
@@ -103,16 +101,16 @@ GEM
       activerecord (>= 4.0.0, < 7.0)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.529.0)
-    aws-sdk-core (3.122.1)
+    aws-partitions (1.539.0)
+    aws-sdk-core (3.124.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.51.0)
+    aws-sdk-kms (1.52.0)
       aws-sdk-core (~> 3, >= 3.122.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.105.1)
+    aws-sdk-s3 (1.109.0)
       aws-sdk-core (~> 3, >= 3.122.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.4)
@@ -122,9 +120,8 @@ GEM
     bcrypt_pbkdf (1.1.0)
     bibtex-ruby (6.0.0)
       latex-decode (~> 0.0)
-    bindata (2.4.10)
     bindex (0.8.1)
-    bootsnap (1.9.1)
+    bootsnap (1.9.3)
       msgpack (~> 1.0)
     builder (3.2.4)
     capistrano (3.16.0)
@@ -153,7 +150,7 @@ GEM
       countries (~> 3.0)
       sort_alphabetical (~> 1.0)
     crass (1.0.6)
-    dalli (3.0.4)
+    dalli (3.1.0)
     database_cleaner (2.0.1)
       database_cleaner-active_record (~> 2.0.0)
     database_cleaner-active_record (2.0.1)
@@ -167,8 +164,6 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.4.4)
-    domain_name (0.5.20190701)
-      unf (>= 0.0.5, < 1.0.0)
     ed25519 (1.2.4)
     erubi (1.10.0)
     exception_notification (4.4.3)
@@ -202,14 +197,12 @@ GEM
     ffi (1.15.4)
     formtastic (4.0.0)
       actionpack (>= 5.2.0)
-    globalid (0.5.2)
+    globalid (1.0.0)
       activesupport (>= 5.0)
     has_scope (0.8.0)
       actionpack (>= 5.2)
       activesupport (>= 5.2)
-    http-accept (1.7.0)
-    http-cookie (1.0.4)
-      domain_name (~> 0.5)
+    hashie (5.0.0)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     i18n_data (0.11.0)
@@ -221,10 +214,6 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    json-jwt (1.13.0)
-      activesupport (>= 4.2)
-      aes_key_wrap
-      bindata
     jwt (2.3.0)
     latex-decode (0.3.2)
     libv8 (3.16.14.19)
@@ -239,9 +228,6 @@ GEM
     marcel (1.0.2)
     method_source (1.0.0)
     middleware (0.1.0)
-    mime-types (3.4.1)
-      mime-types-data (~> 3.2015)
-    mime-types-data (3.2021.1115)
     mini_mime (1.1.2)
     mini_portile2 (2.6.1)
     minitest (5.14.4)
@@ -258,7 +244,6 @@ GEM
     net-scp (3.0.0)
       net-ssh (>= 2.6.5, < 7.0.0)
     net-ssh (6.1.0)
-    netrc (0.11.0)
     nio4r (2.5.8)
     nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
@@ -269,9 +254,15 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
+    omniauth (1.9.1)
+      hashie (>= 3.4.6)
+      rack (>= 1.6.2, < 3)
+    omniauth-oauth2 (1.7.2)
+      oauth2 (~> 1.4)
+      omniauth (>= 1.9, < 3)
     orm_adapter (0.5.0)
     parallel (1.21.0)
-    parser (3.0.2.0)
+    parser (3.0.3.1)
       ast (~> 2.4.1)
     parslet (2.0.0)
     pg (1.2.3)
@@ -324,15 +315,10 @@ GEM
     rbnacl-libsodium (1.0.16)
       rbnacl (>= 3.0.1)
     ref (2.0.0)
-    regexp_parser (2.1.1)
+    regexp_parser (2.2.0)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    rest-client (2.1.0)
-      http-accept (>= 1.7.0, < 2.0)
-      http-cookie (>= 1.0.2, < 2.0)
-      mime-types (>= 1.16, < 4.0)
-      netrc (~> 0.8)
     rexml (3.2.5)
     riddle (2.4.2)
     rspec-core (3.10.1)
@@ -364,7 +350,7 @@ GEM
       rubocop-ast (>= 1.12.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.13.0)
+    rubocop-ast (1.14.0)
       parser (>= 3.0.1.1)
     rubocop-rails (2.12.4)
       activesupport (>= 4.2.0)
@@ -396,7 +382,7 @@ GEM
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
-    sprockets-rails (3.4.0)
+    sprockets-rails (3.4.1)
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
@@ -421,14 +407,11 @@ GEM
       concurrent-ruby (~> 1.0)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
-    unf (0.1.4)
-      unf_ext
-    unf_ext (0.0.8)
     unicode-display_width (2.1.0)
     unicode_utils (1.4.0)
     warden (1.2.9)
       rack (>= 2.0.9)
-    web-console (4.1.0)
+    web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
@@ -469,17 +452,15 @@ DEPENDENCIES
   factory_bot_rails
   faraday
   formtastic
-  glbrc_auth_helper!
   has_scope
   jquery-rails
-  json-jwt (~> 1.13)
-  jwt
   listen
   minitest
   minitest-reporters (>= 0.5.0)
   mysql2
   nokogiri
-  oauth2
+  omniauth
+  omniauth-glbrc!
   parslet
   pg
   prometheus-client

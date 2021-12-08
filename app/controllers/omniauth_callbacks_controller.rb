@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
+require 'logger'
+
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def glbrc
-    Logger.info "in glbrc"
-    Logger.info request.env
-    Logger.info "---"
     if (@user = User.from_omniauth(request.env["omniauth.auth"]))
       sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
       set_flash_message(:notice, :success, kind: "GLBRC") if is_navigational_format?

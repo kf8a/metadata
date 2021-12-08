@@ -64,10 +64,8 @@ gem 'web-console', group: :development
 
 gem 'faraday'
 
-gem 'glbrc_auth_helper', git: "git@github.com:kf8a/glbrc_auth_helper.git"
-gem 'jwt'
-gem 'json-jwt', '~> 1.13'
-gem 'oauth2'
+gem 'omniauth'
+gem 'omniauth-glbrc', path: '../omniauth-glbrc'
 
 group :development do
   gem 'awesome_print'
