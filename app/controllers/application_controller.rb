@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 
     flash[:notice] =
       'You must be signed in as an administrator' \
-        ' in order to access this page'
+      ' in order to access this page'
     redirect_to new_user_session_url
   end
 

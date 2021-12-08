@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Metadata::Application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'user/omniauth_callbacks' }, skip: [:session]
+  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' } # , skip: [:session]
   get 'auth/failure', to: redirect('/')
 
   # devise_scope :user do
