@@ -31,11 +31,12 @@ class User < ApplicationRecord
         old_user.uid = auth.uid
         old_user.save
       else
+        # group is aim-7 = member
+        if auth.info.id_token.groups.contains("glbrc.org\\AIM07")
+          s = Sponsor.find_by(name: 'glbrc')
+          user.sponsors=[s]
+        end
         user.save
-        # TODO: group is aim-7 = member
-        # if auth.info.id_token.groups.contains("glbrc.org\\AIM07")
-        #   # make glbrc member if not
-        # end
       end
     end
   end
