@@ -65,7 +65,7 @@ gem 'web-console', group: :development
 gem 'faraday'
 
 gem 'omniauth'
-gem 'omniauth-glbrc', path: '../omniauth-glbrc'
+gem 'omniauth-glbrc', git: "git@github.com:kf8a/omniauth-glbrc.git"
 
 group :development do
   gem 'awesome_print'

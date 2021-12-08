@@ -1,4 +1,13 @@
 GIT
+  remote: git@github.com:kf8a/omniauth-glbrc.git
+  revision: 10f4f3c759ab7d419324fc5421efa42038a28635
+  specs:
+    omniauth-glbrc (0.6.0)
+      multi_json (~> 1.7)
+      omniauth (~> 1.1)
+      omniauth-oauth2 (~> 1.1)
+
+GIT
   remote: https://github.com/kf8a/ris_parser.git
   revision: 410b27def4835b8b9b697690282ff3df4803ae68
   specs:
@@ -13,14 +22,6 @@ GIT
       capistrano (~> 3.7)
       capistrano-bundler
       puma (>= 4.0, < 6.0)
-
-PATH
-  remote: ../omniauth-glbrc
-  specs:
-    omniauth-glbrc (0.6.0)
-      multi_json (~> 1.7)
-      omniauth (~> 1.1)
-      omniauth-oauth2 (~> 1.1)
 
 GEM
   remote: https://rubygems.org/
