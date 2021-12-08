@@ -1,10 +1,18 @@
 # frozen_string_literal: true
 
 Metadata::Application.routes.draw do
-  devise_for :user
+  devise_for :users, controllers: { omniauth_callbacks: 'user/omniauth_callbacks' }, skip: [:session]
+  get 'auth/failure', to: redirect('/')
 
-  match '/send_invitation/:id' => 'invites#send_invitation', :as => :send_invitation, via: [:get]
-  match '/signup/:invite_code' => 'users#new', :as => :redeem_invitation, via: [:get]
+  # devise_scope :user do
+  #   get 'sign_in', to: 'sessions#new', as: :new_user_session # redirect('/users/auth/glbrc'), as: :new_user_session
+  #   delete 'sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
+  # end
+
+  # devise_for :user, controllers: { sessions: 'sessions' }
+
+  get '/send_invitation/:id' => 'invites#send_invitation', :as => :send_invitation, via: [:get]
+  get '/signup/:invite_code' => 'users#new', :as => :redeem_invitation, via: [:get]
   get '/pub/:id', to: 'citations#download'
 
   resource :users
@@ -90,8 +98,8 @@ Metadata::Application.routes.draw do
   end
 
   resources :sponsors, as: 'termsofuse'
-  match '/termsofuse/:id' => 'sponsors#show', via: [:get]
-  match '/termsofuse' => 'sponsors#index', via: [:get]
+  get '/termsofuse/:id' => 'sponsors#show', via: [:get]
+  get '/termsofuse' => 'sponsors#index', via: [:get]
 
   resources :studies
 

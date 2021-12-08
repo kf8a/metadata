@@ -5,7 +5,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
-         :recoverable, :rememberable, :trackable, :timeoutable
+         :recoverable, :rememberable, :trackable, :timeoutable,
+         :omniauthable, omniauth_providers: [:glbrc]
 
   ROLES = %w[admin editor uploader].freeze
 
@@ -18,6 +19,19 @@ class User < ApplicationRecord
   has_many :sponsors, through: :memberships
 
   scope :by_email, -> { order 'email' }
+
+  def self.from_omniauth(auth)
+    logger.info "AUTH: #{auth}"
+    where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
+      user.email = auth.info.id_token.email
+      user.password = Devise.friendly_token[0, 20]
+      user.username = auth.info.id_token.winaccountname
+      user.first_name = auth.info.id_token.first_name
+      user.last_name = auth.info.id_token.last_name
+      user.display_name = auth.info.id_token.display_name
+      user.save
+    end
+  end
 
   def to_s
     email
