@@ -21,17 +21,9 @@ class User < ApplicationRecord
   scope :by_email, -> { order 'email' }
 
   def self.from_omniauth(auth)
-    logger.info "AUTH: #{auth}"
-
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
       user.email = auth.info.id_token.email
       user.password = Devise.friendly_token[0, 20]
-      # user.username = auth.info.id_token.winaccountname
-      # user.first_name = auth.info.id_token.first_name
-      # user.last_name = auth.info.id_token.last_name
-      # user.display_name = auth.info.id_token.display_name
-      #
-      # TODO: if group is aim-7 then make a member
 
       old_user = User.where(email: user.email).first
       if old_user
@@ -40,6 +32,10 @@ class User < ApplicationRecord
         old_user.save
       else
         user.save
+        # TODO: group is aim-7 = member
+        # if auth.info.id_token.groups.contains("glbrc.org\\AIM07")
+        #   # make glbrc member if not
+        # end
       end
     end
   end
