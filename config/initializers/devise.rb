@@ -298,5 +298,5 @@ Devise.setup do |config|
   # config.sign_in_after_change_password = true
 
   # OAuth configuration
-  config.omniauth :glbrc, ENV["GLBRC_CLIENT_ID"], ENV["GLBRC_CLIENT_SECRET"]
+  config.omniauth :glbrc, Rails.application.credentials.glbrc[:client_id], Rails.application.credentials.glbrc[:client_secret]
 end
