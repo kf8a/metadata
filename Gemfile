@@ -56,7 +56,7 @@ end
 
 gem 'coffee-rails'
 gem 'sassc-rails'
-gem 'therubyracer', require: false
+# gem 'therubyracer', require: false
 gem 'uglifier'
 
 gem 'prometheus-client'

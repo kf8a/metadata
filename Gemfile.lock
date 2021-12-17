@@ -217,11 +217,10 @@ GEM
       thor (>= 0.14, < 2.0)
     jwt (2.3.0)
     latex-decode (0.3.2)
-    libv8 (3.16.14.19)
     listen (3.7.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    loofah (2.12.0)
+    loofah (2.13.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -231,7 +230,7 @@ GEM
     middleware (0.1.0)
     mini_mime (1.1.2)
     mini_portile2 (2.6.1)
-    minitest (5.14.4)
+    minitest (5.15.0)
     minitest-reporters (1.4.3)
       ansi
       builder
@@ -318,7 +317,6 @@ GEM
       ffi
     rbnacl-libsodium (1.0.16)
       rbnacl (>= 3.0.1)
-    ref (2.0.0)
     regexp_parser (2.2.0)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -395,9 +393,6 @@ GEM
       net-ssh (>= 2.8.0)
     test-unit (3.5.1)
       power_assert
-    therubyracer (0.12.3)
-      libv8 (~> 3.16.14.15)
-      ref
     thinking-sphinx (5.3.0)
       activerecord (>= 4.2.0)
       builder (>= 2.1.2)
@@ -488,7 +483,6 @@ DEPENDENCIES
   shoulda-matchers
   sitemap_generator
   test-unit
-  therubyracer
   thinking-sphinx
   uglifier
   web-console
@@ -496,4 +490,4 @@ DEPENDENCIES
   workflow-activerecord
 
 BUNDLED WITH
-   2.2.26
+   2.2.33
