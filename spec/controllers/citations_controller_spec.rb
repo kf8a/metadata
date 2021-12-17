@@ -7,6 +7,8 @@ describe CitationsController, type: :controller do
 
   describe 'anonymous access' do
     before(:each) do
+      Author.delete_all
+      Editor.delete_all
       Citation.delete_all # clear out other citations
       author1 = FactoryBot.build(:author, sur_name: 'Zebedee', seniority: 1)
       author2 = FactoryBot.build(:author, sur_name: 'Alfred',  seniority: 1)
@@ -126,7 +128,7 @@ describe CitationsController, type: :controller do
     @citation = FactoryBot.create :citation
     get :download, params: { id: @citation }
 
-    expect(response).to redirect_to '/user/sign_in'
+    expect(response).to redirect_to '/users/sign_in'
   end
 
   it 'allows access to an open access publication' do
@@ -140,30 +142,30 @@ describe CitationsController, type: :controller do
 
   it 'redirects to sign in on GET: new' do
     get :new
-    expect(response).to redirect_to '/user/sign_in'
+    expect(response).to redirect_to '/users/sign_in'
   end
 
   it 'redirects to sign in on POST :create' do
     post :create
-    expect(response).to redirect_to '/user/sign_in'
+    expect(response).to redirect_to '/users/sign_in'
   end
 
   it 'redirects to sign in on GET :edit' do
     citation = FactoryBot.create :citation
     get :edit, params: { id: citation }
-    expect(response).to redirect_to '/user/sign_in'
+    expect(response).to redirect_to '/users/sign_in'
   end
 
   it 'redirects to sign in on PUT :update' do
     citation = FactoryBot.create :citation
     put :update, params: { id: citation, citation: { title: 'New title' } }
-    expect(response).to redirect_to '/user/sign_in'
+    expect(response).to redirect_to '/users/sign_in'
   end
 
   it 'redirects to sign in on DELETE' do
     citation = FactoryBot.create :citation
     delete :destroy, params: { id: citation }
-    expect(response).to redirect_to '/user/sign_in'
+    expect(response).to redirect_to '/users/sign_in'
   end
 
   describe 'filtering of citations' do

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
+require 'rails_helper'
 
 describe UnitsController, type: :controller  do
   before do
@@ -46,7 +46,7 @@ describe UnitsController, type: :controller  do
 
   context 'GET :show' do
     before do
-      get :show, {params: { id: @unit } }
+      get :show, params: { id: @unit }
     end
     it 'is successful' do
       expect(response.code).to eq '200'
