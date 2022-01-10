@@ -368,9 +368,22 @@ class Datatable < ApplicationRecord
 
   def data_comments
     if comments
-      "#\n#        DATA TABLE CORRECTIONS AND COMMENTS\n#{comments.gsub(/^/, '#').gsub(/\r\n?/, "\n")}#\n"
+      "#\n#        DATA TABLE CORRECTIONS AND COMMENTS\n#{insert_comment_chars(comments)}#\n"
     else
       "\n"
+    end
+  end
+
+  def insert_comment_chars(comment)
+    comment = maybe_append_line_ending(comment)
+    comment.gsub(/^/, '#').gsub(/\r\n?/,"\n")
+  end
+
+  def maybe_append_line_ending(comment)
+    if comment[-1] != "\n"
+      comment + "\n"
+    else
+      comment
     end
   end
 
