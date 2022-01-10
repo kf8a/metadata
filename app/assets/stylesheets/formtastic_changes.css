@@ -25,6 +25,15 @@ form.formtastic fieldset > ol > li.text textarea {
 	width: 50%;
   max-width: 52%;
 }
+
+form.formtastic fieldset > ol > li.text textarea[cols] {
+	width: 50%;
+  max-width: 52%;
+}
+
+form.formtastic fieldset > ol > li.string input {
+	width: 50%;
+}
 /* form.formtastic fieldset > ol > li.text textarea[cols] { */
 /*   ma */
 /* } */
