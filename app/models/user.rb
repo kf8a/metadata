@@ -31,7 +31,7 @@ class User < ApplicationRecord
         user.email = auth.info.id_token.email
         user.password = Devise.friendly_token[0, 20]
         # group is aim-7 = member
-        if auth.info.id_token.groups.contains("glbrc.org\\AIM07")
+        if !auth.info.id_tokens.groups.nil? && auth.info.id_token.groups.contains("glbrc.org\\AIM07")
           s = Sponsor.find_by(name: 'glbrc')
           user.sponsors=[s]
         end
