@@ -15,6 +15,16 @@
   padding-top: 3em;
 }
 
+.ui-autocomplete {
+  background: white;
+  padding-bottom: 3em;
+  width: 80%;
+}
+
+.ui-autocomplete > .ui-menu-item {
+  list-style: none;
+}
+
 .metadata {
   .fa,
   .fab,
@@ -24,6 +34,7 @@
   .fas {
     font-size: 6pt;
   }
+
 
   ul.person-card {
     list-style-type: none;
