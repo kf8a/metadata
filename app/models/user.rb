@@ -23,6 +23,7 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
       old_user = User.where(email:auth.info.id_token.email).first
+      Logger.info "Auth info comming back #{auth}"
       if old_user
         old_user.provider = auth.provider
         old_user.uid = auth.uid
@@ -31,7 +32,6 @@ class User < ApplicationRecord
         user.email = auth.info.id_token.email
         user.password = Devise.friendly_token[0, 20]
         # group is aim-7 = member
-        Logger.info "Auth info comming back #{auth}"
         if !auth.info.id_tokens.nil? && auth.info.id_token.groups.contains("glbrc.org\\AIM07")
           s = Sponsor.find_by(name: 'glbrc')
           user.sponsors=[s]
