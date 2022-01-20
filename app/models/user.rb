@@ -20,6 +20,8 @@ class User < ApplicationRecord
 
   scope :by_email, -> { order 'email' }
 
+  ALLOWED = %w["gblrc.org\\AIM07" "glbrc.org\\AIM-InformationServices"]
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
       old_user = User.where(email:auth.info.id_token.email).first
@@ -32,7 +34,7 @@ class User < ApplicationRecord
         user.email = auth.info.id_token.email
         user.password = Devise.friendly_token[0, 20]
         # group is aim-7 = member
-        if !auth.info.id_tokens.nil? && auth.info.id_token.groups.contains("glbrc.org\\AIM07")
+        if !auth.info.id_tokens.nil? && allowed_group(auth.info.id_token.groups)
           s = Sponsor.find_by(name: 'glbrc')
           user.sponsors=[s]
         end
@@ -56,5 +58,14 @@ class User < ApplicationRecord
   def permission_from?(owner, datatable)
     permission = permissions.find_by(owner_id: owner, datatable_id: datatable)
     permission && !permission.denied?
+  end
+
+  private
+
+  def allowed_group(groups)
+    result = eLLOWED.map do | allowed_group |
+      groups.contains(allowed_group)
+    end
+    result.any?(true)
   end
 end
