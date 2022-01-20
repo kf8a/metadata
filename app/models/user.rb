@@ -25,7 +25,7 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
       old_user = User.where(email:auth.info.id_token.email).first
-      logger.info "Auth info comming back #{auth}"
+      # logger.info "Auth info comming back #{auth}"
       if old_user
         old_user.provider = auth.provider
         old_user.uid = auth.uid
