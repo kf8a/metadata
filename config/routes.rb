@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Metadata::Application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' } # , skip: [:session]
+  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' , sessions: 'sessions' }
   get 'auth/failure', to: redirect('/')
 
   # devise_scope :user do
@@ -9,7 +9,6 @@ Metadata::Application.routes.draw do
   #   delete 'sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
   # end
 
-  # devise_for :user, controllers: { sessions: 'sessions' }
 
   get '/send_invitation/:id' => 'invites#send_invitation', :as => :send_invitation, via: [:get]
   get '/signup/:invite_code' => 'users#new', :as => :redeem_invitation, via: [:get]
