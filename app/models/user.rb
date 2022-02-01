@@ -37,6 +37,7 @@ class User < ApplicationRecord
         if !auth.info.id_tokens.nil? && allowed_group(auth.info.id_token.groups)
           s = Sponsor.find_by(name: 'glbrc')
           user.sponsors=[s]
+          user.save
         end
         user.save
       end

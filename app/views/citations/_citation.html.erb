@@ -44,6 +44,11 @@
           <span>(<%= "https://lter.kbs.msu.edu/pub/#{citation.id}" %>)</span>
         <% end %>
       </div>
+      <%- if citation.is_referenced_by_count > 0 %>
+        <div class="citation_count">
+          Cited by: <%= citation.is_referenced_by_count %>
+        </div>
+      <% end %>
     <% end %>
 
   </li>
