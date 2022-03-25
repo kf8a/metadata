@@ -274,7 +274,7 @@ class DatatablesController < ApplicationController
 
   # TODO: grab approved sql from model
   def render_csv
-    stream_file(name_of_file, "csv") do |stream|
+    stream_file(file_name, "csv") do |stream|
       stream.write @datatable.csv_headers
       Datatable.stream_query_rows(@datatable.approved_data_query) do |row_from_db|
         stream.write row_from_db
@@ -283,7 +283,7 @@ class DatatablesController < ApplicationController
   end
 
   def render_admin_csv
-    stream_file(name_of_file, "csv") do |stream|
+    stream_file(file_name, "csv") do |stream|
       stream.write @datatable.csv_headers
       Datatable.stream_query_rows(@datatable.object) do |row_from_db|
         stream.write row_from_db
@@ -294,10 +294,6 @@ class DatatablesController < ApplicationController
   def set_file_headers
     headers['Content-Type'] = 'text/csv'
     headers['Content-disposition'] = "attachment; filename=\"#{file_name}.csv\""
-  end
-
-  def name_of_file
-    "#{@datatable.id}-#{@datatable.title.downcase.squeeze.strip.gsub(/\W/, '+')}"
   end
 
   def file_name
