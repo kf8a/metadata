@@ -8,9 +8,16 @@ $text-color: black;
 $menu-height: 3em;
 $menu-width: 10em;
 
-
-.rounded-corners {
-	border-radius: 10px;
+.sign-in-button {
+  background-color: #4e4ef7;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  margin: 5em;
+  padding: 2em;
+  .rounded-corners {
+    border-radius: 10px;
+  }
 }
 
 .bottom-rounded-corners {
