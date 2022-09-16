@@ -1,5 +1,5 @@
 <%= f.inputs do %>
   <%= f.input :person, collection: Person.order(:sur_name, :given_name).all.map {|x| [x.full_name, x.id]} %>
-  <%= f.input :role %>
+  <%= f.input :role, collection: Role.where(role_type_id: 1).all.map { | x | [x.name, x.id] } %>
   <%= link_to_remove_fields "Remove", f %>
 <% end %>
