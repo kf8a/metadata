@@ -299,6 +299,7 @@ class EmlDatasetBuilder
       @eml.positionName 'Data Manager'
       @eml.electronicMailAddress 'lter.data.manager@kbs.msu.edu'
       @eml.onlineUrl 'http://lter.kbs.msu.edu'
+      @eml.userId "02vkce854", directory: "https://ror.org/"
     end
   end
 
