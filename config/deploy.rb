@@ -18,12 +18,16 @@ set :deploy_to, '/var/u/apps/metadata'
 
 # Default value for :pty is false
 # set :pty, true
+#
+# set :ssh_options, { forward_agent: true }
+
+#
+# Default value for linked_dirs is []
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'public/uploads' #, 'config/unicorn'
 
 # Default value for :linked_files is []
-append :linked_files, %w[config/database.yml config/site_keys.rb config/secret_token.rb config/storage.yml]
-
-# Default value for linked_dirs is []
-append :linked_dirs, %w["og tmp/pids tmp/cache tmp/sockets public/system public/uploads config/credentials]
+append :linked_files, 'config/database.yml', 'config/site_keys.rb',
+  'config/secret_token.rb', 'config/storage.yml', 'config/master.key'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -38,14 +42,16 @@ set :keep_assets, 2
 
 set :puma_init_active_record, true
 
+set :pty, true
+
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
 
-# after 'deploy:publishing', 'unicorn:reload'
-
 before 'deploy:assets:precompile', 'deploy:yarn_install'
+# after 'deploy:assets:precompile', 'assets:update_asset_server'
 
 after 'deploy:updated', :create_nav
+after 'deploy:updated', :update_asset_server
 after 'deploy', 'thinking_sphinx:configure'
 after 'deploy', 'thinking_sphinx:index'
 after 'deploy', 'thinking_sphinx:start'
@@ -63,15 +69,14 @@ namespace :deploy do
   end
 end
 
-namespace :assets do
-  desc 'Precompile assets on local machine and upload them to the server.'
-  task :precompile do # , roles: :web, except: { no_release: true } do
-    run_locally 'bundle exec rake assets:clobber'
-    run_locally 'bundle exec rake assets:precompile RAILS_ENV=production'
+desc 'Precompile assets on local machine and upload them to the server.'
+task :update_asset_server do
+  run_locally do
+    execute 'rake assets:clobber'
+    execute 'RAILS_ENV=production rake assets:precompile'
     # run "cd #{current_path} && bundle exec rake assets:precompile RAILS_ENV=production"
     # find_servers_for_task(current_task).each do |_server|
-    run_locally "rsync -vr --exclude='.DS_Store' public/assets root@159.203.110.7:/var/www/lter/metadata-assets/"
-    # end
+    execute "rsync -vr --exclude='.DS_Store' public/assets gprpc32.kbs.msu.edu:/var/www/lter/metadata-assets/"
   end
 end
 
