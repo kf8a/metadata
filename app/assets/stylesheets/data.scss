@@ -15,6 +15,21 @@
   padding-top: 3em;
 }
 
+.citation-footer {
+  display: flex;
+}
+
+.citation-footer > .member-oly,
+.citation-footer > .non-member {
+  flex: 1;
+}
+
+.citation_count {
+  align-self: end;
+  flex: 6;
+  text-align: right;
+}
+
 .ui-autocomplete {
   background: white;
   padding-bottom: 3em;
