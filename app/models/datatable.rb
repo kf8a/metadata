@@ -491,7 +491,7 @@ class Datatable < ApplicationRecord
   end
 
   def related_tables
-    dataset.datatables - [self]
+    dataset.datatables.where("deprecated_in_favor_of is null") - [self]
   end
 
   def related_files
