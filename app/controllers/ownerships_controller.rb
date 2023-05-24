@@ -9,8 +9,8 @@ class OwnershipsController < ApplicationController
   end
 
   def show
-    @datatable = datatable if params[:id]
-    @datatable = Datatable.find_by(id: params[:datatable]) if params[:datatable]
+    @datatable = datatable(params) if params[:id]
+    # @datatable = Datatable.find_by(id: params[:datatable]) if params[:datatable]
     return if @datatable
 
     flash[:notice] = 'You must select a valid datatable to grant ownerships'
@@ -59,8 +59,8 @@ class OwnershipsController < ApplicationController
 
   private
 
-  def datatable
-    @datatable = Datatable.find(params[:datatable])
+  def datatable(params)
+    @datatable = Datatable.find(params[:id])
   end
 
   def new_ownership_form
