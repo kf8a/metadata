@@ -326,7 +326,7 @@ class Datatable < ApplicationRecord
     [
       "# #{title}\n",
       data_source,
-      dataset.doi,
+      "# {dataset.doi}",
       terms_of_use,
       variate_table,
       data_comments,
