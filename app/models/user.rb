@@ -20,7 +20,7 @@ class User < ApplicationRecord
 
   scope :by_email, -> { order 'email' }
 
-  ALLOWED = %w["glbrc.org/GLBRC/GLBRC Groups/Y16-20/Sustainable_Bioenergy_Cropping_Systems/SEP" "glbrc.org\\AIM-InformationServices"]
+  ALLOWED = %w["glbrc.org/GLBRC/GLBRC Groups/Y16-20/Sustainable_Bioenergy_Cropping_Systems/SEP" "glbrc.org\\AIM-InformationServices"].freeze
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
@@ -64,7 +64,7 @@ class User < ApplicationRecord
   private
 
   def allowed_group(groups)
-    result = eLLOWED.map do | allowed_group |
+    result = ALLOWED.map do | allowed_group |
       groups.contains(allowed_group)
     end
     result.any?(true)
