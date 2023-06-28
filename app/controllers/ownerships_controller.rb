@@ -19,7 +19,7 @@ class OwnershipsController < ApplicationController
   end
 
   def new
-    @datatable = datatable if params[:datatable]
+    @datatable = datatable(params) if params[:datatable]
     @datatables = Datatable.by_name unless @datatable
     @users = User.by_email
     @ownership = Ownership.new
