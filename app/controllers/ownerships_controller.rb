@@ -29,7 +29,7 @@ class OwnershipsController < ApplicationController
 
   def create
     users = params[:users]
-    @datatable = datatable if params[:datatable]
+    @datatable = Datatable.find(params[:datatable] if params[:datatable]
     overwrite = @datatable.present?
     datatables = @datatable ? [@datatable.id] : params[:datatables]
     if users.present? && datatables.present?
