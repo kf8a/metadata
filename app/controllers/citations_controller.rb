@@ -164,7 +164,7 @@ class CitationsController < ApplicationController
   private
 
   def send_citation(citation)
-    if citation.pdf
+    if citation.pdf.persisted?
       redirect_to url_for(citation.pdf)
     else
       head 400
@@ -268,7 +268,7 @@ class CitationsController < ApplicationController
       [website.data_citations]
     else
       @type = nil
-      [website.citations.publications]
+      [website.citations.try(:publications)]
     end
   end
 
