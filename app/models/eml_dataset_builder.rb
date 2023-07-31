@@ -139,13 +139,10 @@ class EmlDatasetBuilder
 
   def eml_project
     @eml.project do
-      @eml.title 'KBS LTER project'
-      dataset.project.person_projects.each do |person_project|
-        @eml.personnel do
-          builder = EmlPersonBuilder.new(person_project.person)
-          builder.eml_party(@eml)
-          @eml.role person_project.role.name
-        end
+      @eml.title dataset.project.title
+      @ml.personnel do
+        @eml.organziationName dataset.project.organizationName
+        @eml.role "program"
       end
       eml_award(dataset.project)
     end
