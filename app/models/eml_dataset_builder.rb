@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'erb'
+
 # Build an eml dataset
 class EmlDatasetBuilder
   attr_reader :dataset
@@ -154,7 +156,7 @@ class EmlDatasetBuilder
       award.funderIdentifier project.funder_identifier
       award.awardNumber project.award_number
       award.title project.title
-      award.awardUrl project.award_url
+      award.awardUrl ERB::Util.url_encode(project.award_url)
     end
   end
 
