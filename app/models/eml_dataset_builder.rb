@@ -140,7 +140,7 @@ class EmlDatasetBuilder
   def eml_project
     @eml.project do
       @eml.title dataset.project.title
-      @ml.personnel do
+      @eml.personnel do
         @eml.organziationName dataset.project.organizationName
         @eml.role "program"
       end
