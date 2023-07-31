@@ -232,7 +232,7 @@ class Citation < ApplicationRecord
   end
 
   def formatted(options = {})
-    "#{author_and_year(options)} #{title_and_punctuation} #{publication} #{volume_and_page}".rstrip
+    "#{author_and_year(options)} #{title_and_punctuation} #{publication} #{volume_and_page}, #{doi}".rstrip
   end
 
   def to_bib
@@ -240,6 +240,15 @@ class Citation < ApplicationRecord
     entry.type = bibtex_type.to_s
     entry.key = "citation_#{id}"
     entry << bib_hash
+
+    entry
+  end
+
+  def to_citation_only_bib
+    entry = BibTeX::Entry.new
+    entry.type = bibtex_type.to_s
+    entry.key = "citation_#{id}"
+    entry << bib_citation_only_hash
 
     entry
   end
@@ -253,6 +262,23 @@ class Citation < ApplicationRecord
               year: pub_year.to_s,
               address: address,
               note: notes,
+              journal: publication,
+              pages: page_numbers,
+              volume: volume,
+              number: issue,
+              series: series_title,
+              doi: doi,
+              isbn: isbn }
+    hash.delete_if { |_, value| value.blank? }
+  end
+
+  def bib_citation_only_hash
+    hash = {  author: authors.collect(&:full_name).join(' and '),
+              editor: editors.collect(&:full_name).join(' and '),
+              title: title,
+              publisher: publisher,
+              year: pub_year.to_s,
+              address: address,
               journal: publication,
               pages: page_numbers,
               volume: volume,

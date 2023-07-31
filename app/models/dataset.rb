@@ -179,6 +179,12 @@ class Dataset < ApplicationRecord
     end.flatten.compact.uniq
   end
 
+  def has_citations?
+    datatables.collect do | datatable|
+      !datatable.citations.empty?
+    end.include?(true)
+  end
+
   def to_eml
     builder = EmlDatasetBuilder.new(self)
     builder.to_eml

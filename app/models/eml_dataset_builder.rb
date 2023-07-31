@@ -120,6 +120,19 @@ class EmlDatasetBuilder
         table.to_eml(@eml) if table.on_web && table.valid_for_eml? && !table.is_restricted
       end
       eml_files
+      eml_useage_citation if dataset.has_citations?
+    end
+  end
+
+  def eml_useage_citation
+    return unless dataset.has_citations?
+
+    dataset.datatables.each do |table|
+      table.citations.each do |citation|
+        @eml.usageCitation do
+          @eml.bibtex citation.to_citation_only_bib
+        end
+      end
     end
   end
 
