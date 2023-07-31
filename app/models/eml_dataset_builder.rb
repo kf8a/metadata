@@ -141,7 +141,7 @@ class EmlDatasetBuilder
     @eml.project do
       @eml.title dataset.project.title
       @eml.personnel do
-        @eml.organziationName dataset.project.organizationName
+        @eml.organizationName dataset.project.organizationName
         @eml.role "program"
       end
       eml_award(dataset.project)
