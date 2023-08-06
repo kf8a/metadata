@@ -48,6 +48,7 @@ gem 'rake', '>= 12.3.3'
 gem 'sitemap_generator'
 
 gem 'puma'
+gem 'rexml'
 
 group :production, :staging do
   gem 'exception_notification'
