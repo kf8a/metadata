@@ -9,6 +9,8 @@
 <%= form.input :core_areas, :label => 'LTER Core Areas', :input_html => {:size => '5'} %>
 <%= form.input :deprecation_notice, :input_html => {:size => '150x2'} %>
 <%# <%= form.input :deprecated_in_favor_of, :collection => @datatable.supercession_candiates%>
+<%= form.input :protocols, collection: Protocol.order(:title).pluck(Arel.sql("concat(in_use_from, ' - ', in_use_to, ' --- ', title)"), :id),
+  input_html: { size: '10'}, include_blank: true %>
 <% end %>
 
 <%= form.inputs do %>
@@ -19,6 +21,7 @@
 </div>
 <%= link_to_add_fields "Add Person", form, :data_contributions %>
 <% end %>
+
 
 <%= form.inputs name: "Temporal Coverage" do %>
   <%= form.input :begin_date, :label => 'from:', :end_year => Time.now.year, :start_year => 1887, as: :date_picker %>

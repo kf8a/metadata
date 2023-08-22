@@ -247,6 +247,7 @@ class DatatablesController < ApplicationController
       :study_id,
       :deprecation_notice,
       :update_frequency_days,
+      { protocol_ids: []},
       :is_secondary,
       { core_area_ids: [] },
       {
@@ -305,6 +306,7 @@ class DatatablesController < ApplicationController
     @studies = Study.all.collect { |study| [study.name, study.id] }
     @people = Person.all
     @units = Unit.all
+    @protocols = Protocol.all
   end
 
   def valid_dataset_request?(subdomain)
