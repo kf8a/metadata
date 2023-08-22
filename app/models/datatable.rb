@@ -105,7 +105,7 @@ class Datatable < ApplicationRecord
   end
 
   def protocols_with_backup
-    protocols.presence || dataset.protocols.presence
+    [protocols, dataset.protocols].flatten
   end
 
   def to_label

@@ -133,5 +133,6 @@ class ProtocolsController < ApplicationController
     @untagged_protocols = untagged_protocols
 
     @retired_protocols = website.protocols.where('active is false').order('title')
+    @datatable = Datatable.all
   end
 end
