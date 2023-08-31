@@ -9,11 +9,7 @@ class Unit < ApplicationRecord
   scope :not_in_eml, -> { where 'in_eml is false' }
 
   def human_name
-    if label
-      label.html_safe
-    else
-      name.gsub(/Per/, '/').downcase
-    end
+    label.html_safe
   end
 
   def update_job
