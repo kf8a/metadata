@@ -5,8 +5,7 @@
         "name" : "<%= datatable.title %>",
         "description" : "<%= datatable.description %>",
         "url" : "<%= datatable_url(datatable) %>",
-        "datePublished" : "<%= datatable.dataset.begin_date.strftime('%Y-%m-%d') %>",
-        "dateModified" : "<%= datatable.dataset.end_date.strftime('%Y-%m-%d') %>",
+        "dateModified" : "<%= datatable.pub_date %>",
         "creator" : [
           <% datatable.personnel.each do |person, roles| %>
             {
