@@ -104,6 +104,14 @@ class Datatable < ApplicationRecord
     variates.valid_for_eml
   end
 
+  def pub_date
+    if updated_at
+      updated_at.strftime("%Y-%m-%d")
+    else
+      Time.zone.now.strftime("%Y-%m-%d")
+    end
+  end
+
   def protocols_with_backup
     [protocols, dataset.protocols].flatten
   end

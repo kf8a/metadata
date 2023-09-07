@@ -9,7 +9,7 @@ class Unit < ApplicationRecord
   scope :not_in_eml, -> { where 'in_eml is false' }
 
   def human_name
-    label.html_safe
+    label.try(:html_safe)
   end
 
   def update_job
