@@ -1,4 +1,46 @@
 <% content_for :head do %>
+      <script type="application/ld+json">
+        {
+        "@type" : "Dataset",
+        "name" : "<%= datatable.title %>",
+        "description" : "<%= datatable.description %>",
+        "url" : "<%= datatable_url(datatable) %>",
+        "datePublished" : "<%= datatable.dataset.begin_date.strftime('%Y-%m-%d') %>",
+        "dateModified" : "<%= datatable.dataset.end_date.strftime('%Y-%m-%d') %>",
+        "creator" : [
+          <% datatable.personnel.each do |person, roles| %>
+            {
+              "@type" : "Person",
+              "name" : "<%= person.full_name %>",
+              "affiliation" : "<%= person.affiliation %>"
+            },
+          <% end %>
+        ],
+        "includedInDataCatalog" : {
+          "@type" : "DataCatalog",
+          "name" : "KBS LTER Datatable Catalog",
+          "url" : "https://lter.kbs.msu.edu/datatables"
+        },
+        "keywords" : [
+          <% datatable.keywords.each do |keyword| %>
+            "<%= keyword %>",
+          <% end %>
+        ],
+        "license" : "https://lter.kbs.msu.edu/data/terms-of-use/",
+        "variableMeasured" : [
+          <% datatable.variates.each do |variate| %>
+            {
+              "@type" : "Property",
+              "name" : "<%= variate.name %>",
+              "description" : "<%= variate.description %>",
+              "unitText" : "<%= variate.unit.human_name %>"
+            },
+          <% end %>
+        ],
+        }
+
+
+      </script>
   <title>KBS LTER Datatable - <%= datatable.title %></title>
 <% end %>
 <% cache([datatable, datatable.dataset]) do %>
