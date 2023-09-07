@@ -12,7 +12,7 @@
             {
               "@type" : "Person",
               "name" : "<%= person.full_name %>",
-              "affiliation" : "<%= person.affiliation %>"
+              "affiliation" : "<%= person.organization %>"
             },
           <% end %>
         ],
@@ -33,7 +33,6 @@
               "@type" : "Property",
               "name" : "<%= variate.name %>",
               "description" : "<%= variate.description %>",
-              "unitText" : "<%= variate.unit.human_name %>"
             },
           <% end %>
         ],
