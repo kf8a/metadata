@@ -1,7 +1,7 @@
 <% content_for :head do %>
-      <script type="application/ld+json">
-        <%= raw datatable.ld_json %>
-      </script>
+  <script type="application/ld+json">
+    <%= raw datatable.ld_json.to_json %>
+  </script>
   <title>KBS LTER Datatable - <%= datatable.title %></title>
 <% end %>
 <% cache([datatable, datatable.dataset]) do %>

@@ -61,11 +61,19 @@ class Protocol < ApplicationRecord
     dataset.try(:dataset)
   end
 
+  def ld_json
+    { "@context": "http://schema.org",
+      "@type": "HowTo",
+      "name": title,
+      "url": "http://lter.kbs.msu.edu/protocols/#{id}",
+    }
+  end
+
   private
 
   def eml_creator
     @eml.creator do
-      @eml.positionName 'Data Manager'
+      @eml.positionName "Data Manager"
     end
   end
 end

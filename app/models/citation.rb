@@ -325,6 +325,16 @@ class Citation < ApplicationRecord
     pdf.s3_object.acl.put(acl: 'authenticated-read')
   end
 
+  def ld_json
+    { "@context" => "https://schema.org/",
+      "@type" => "ScholarlyArticle",
+      "headline" => title,
+      "author" => authors.collect(&:ld_json),
+      "datePublished" => pub_year,
+      "publisher" => publisher
+    }
+  end
+
   private
 
   def bibtex_type

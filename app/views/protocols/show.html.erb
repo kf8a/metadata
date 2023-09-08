@@ -1,4 +1,7 @@
 <% content_for :head do %>
+  <script type=application/ld+json>
+    <%= raw @protocol.ld_json.to_json %>
+  </script>
   <title>Protocol - <%= @protocol.title %></title>
 <% end %>
 <%= render 'shared/breadcrumbs',

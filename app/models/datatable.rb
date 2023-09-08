@@ -104,6 +104,20 @@ class Datatable < ApplicationRecord
     variates.valid_for_eml
   end
 
+  def ld_json
+    { "@context" => "https://schema.org/",
+      "@type" => "Dataset",
+      name: title,
+      url: "https://lter.kbs.msu.edu/datatables/#{id}",
+      dateModified: pub_date,
+      creator: personnel.collect { |person, roles| { "@type" => "Person", name: person.full_name, affiliation: person.organization } },
+      includedInDataCatalog: { "@type" => "DataCatalog", name: "KBS LTER Datatable Catalog", url: "https://lter.kbs.msu.edu/datatables" },
+      keywords: keyword_names,
+      license: "https://lter.kbs.msu.edu/data/terms-of-use/",
+      variableMeasured: variates.collect { |variate| { "@type" => "Property", name: variate.name, description: variate.description } }
+    }
+  end
+
   def pub_date
     if updated_at
       updated_at.strftime("%Y-%m-%d")

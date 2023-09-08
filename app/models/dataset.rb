@@ -45,6 +45,20 @@ class Dataset < ApplicationRecord
     dataset
   end
 
+  def ld_json
+    { "@context": "http://schema.org",
+      "@type": "Dataset",
+      "name": title,
+      "url": "https://lter.kbs.msu.edu/datasets/#{id}",
+      "sameAs": "https://doi.org/#{current_doi.to_s}",
+      "includedInDataCatalog": {
+        "@type" => "DataCatalog",
+        name: "KBS LTER Datatable Catalog",
+        url: "https://lter.kbs.msu.edu/datatables"
+      }
+    }
+  end
+
   def current_doi
     dataset_dois.order('version desc').first
   end

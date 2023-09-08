@@ -1,18 +1,6 @@
 <% content_for :head do %>
   <script type="application/ld+json">
-    { "@context": "https://schema.org/",
-    "@type": "ScholarlyArticle",
-    "headline": "<%=@citation.title%>",
-    "author": [
-      <% @citation.authors.each do |author| %>
-        {
-          "@type": "Person",
-          "name": "<%=author.name%>"
-        },
-      <% end %>
-   ],
-   "datePublished": "<%=@citation.pub_year%>",
-    }
+    <%= raw @citation.ld_json.to_json %>
   </script>
   <meta name="citation_title" content="<%=@citation.title%>">
   <% @citation.authors.each do |author| %>

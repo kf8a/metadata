@@ -1,16 +1,6 @@
 <% content_for :head do %>
       <script type="application/ld+json">
-        {
-        "@type": "Dataset",
-        "name": "<%= dataset.title %>",
-        "url": "<%= dataset_url(dataset) %>",
-        "sameAs": "https://doi.org/<%= dataset.current_doi.to_s %>",
-        "includedInDataCatalog": {
-          "@type": "DataCatalog",
-          "name": "KBS LTER Datatable Catalog",
-          "url": "https://lter.kbs.msu.edu/datatables"
-        },
-        }
+        <%= raw dataset.ld_json.to_json %>
       </script>
   <title>Dataset - <%= dataset.title %></title>
 <% end %>

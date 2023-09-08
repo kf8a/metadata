@@ -17,4 +17,10 @@ class Author < ApplicationRecord
   def to_enw
     "\n%A #{formatted}"
   end
+
+  def ld_json
+    { "@type": "Person",
+      "name": name,
+    }
+  end
 end
