@@ -1,42 +1,6 @@
 <% content_for :head do %>
       <script type="application/ld+json">
-        {
-        "@type" : "Dataset",
-        "name" : "<%= datatable.title %>",
-        "url" : "<%= datatable_url(datatable) %>",
-        "dateModified" : "<%= datatable.pub_date %>",
-        "creator" : [
-          <% datatable.personnel.each do |person, roles| %>
-            {
-              "@type" : "Person",
-              "name" : "<%= person.full_name %>",
-              "affiliation" : "<%= person.organization %>"
-            },
-          <% end %>
-        ],
-        "includedInDataCatalog" : {
-          "@type" : "DataCatalog",
-          "name" : "KBS LTER Datatable Catalog",
-          "url" : "https://lter.kbs.msu.edu/datatables"
-        },
-        "keywords" : [
-          <% datatable.keywords.each do |keyword| %>
-            "<%= keyword %>",
-          <% end %>
-        ],
-        "license" : "https://lter.kbs.msu.edu/data/terms-of-use/",
-        "variableMeasured" : [
-          <% datatable.variates.each do |variate| %>
-            {
-              "@type" : "Property",
-              "name" : "<%= variate.name %>",
-              "description" : "<%= variate.description %>",
-            },
-          <% end %>
-        ],
-        }
-
-
+        <%= raw datatable.ld_json %>
       </script>
   <title>KBS LTER Datatable - <%= datatable.title %></title>
 <% end %>
