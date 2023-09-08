@@ -108,6 +108,7 @@ class Datatable < ApplicationRecord
     { "@context" => "https://schema.org/",
       "@type" => "Dataset",
       name: title,
+      description: short_description,
       url: "https://lter.kbs.msu.edu/datatables/#{id}",
       dateModified: pub_date,
       creator: personnel.collect { |person, roles| { "@type" => "Person", name: person.full_name, affiliation: person.organization } },
@@ -186,6 +187,10 @@ class Datatable < ApplicationRecord
       terms = agent.get("http://vocab.lternet.edu/webservice/keywordlist.php/all/csv/#{keyword}")
       CSV.parse(terms)
     end.flatten.sort.uniq
+  end
+
+  def short_description
+    description.truncate(100, separator: ' ')
   end
 
   # publish a dataset to S3 for caching

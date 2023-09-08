@@ -49,6 +49,7 @@ class Dataset < ApplicationRecord
     { "@context": "http://schema.org",
       "@type": "Dataset",
       "name": title,
+      description: short_abstract,
       "url": "https://lter.kbs.msu.edu/datasets/#{id}",
       "sameAs": "https://doi.org/#{current_doi.to_s}",
       "includedInDataCatalog": {
@@ -57,6 +58,10 @@ class Dataset < ApplicationRecord
         url: "https://lter.kbs.msu.edu/datatables"
       }
     }
+  end
+
+  def short_abstract
+    abstract.truncate(100, separator: ' ')
   end
 
   def current_doi

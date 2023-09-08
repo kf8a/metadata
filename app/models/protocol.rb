@@ -63,7 +63,7 @@ class Protocol < ApplicationRecord
 
   def ld_json
     { "@context": "http://schema.org",
-      "@type": "HowTo",
+      "@type": "Article",
       "name": title,
       "url": "http://lter.kbs.msu.edu/protocols/#{id}",
     }
