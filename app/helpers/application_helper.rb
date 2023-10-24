@@ -6,8 +6,7 @@ require 'commonmarker'
 module ApplicationHelper
 
   def markdown_to_html(text)
-    html = CommonMarker.render_html(text, :DEFAULT)
-    raw(html)
+    raw(CommonMarker.render_html(text, :UNSAFE))
   end
 
   # use to strip out html tags when using truncate

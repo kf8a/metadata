@@ -31,7 +31,7 @@
     </div>
     <% end %>
       <p>
-      <%=raw markdown_to_html(@citation.abstract) %></p>
+      <%= markdown_to_html @citation.abstract %></p>
       <% if @citation.doi.present? %>
         <p>DOI: <a href="http://dx.doi.org/<%= @citation.doi %>"><%= @citation.doi %></a></p>
       <% end %>
