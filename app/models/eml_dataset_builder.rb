@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'erb'
+require 'commonmarker'
 
 # Build an eml dataset
 class EmlDatasetBuilder
@@ -251,7 +252,7 @@ class EmlDatasetBuilder
     @eml.abstract do
       @eml.section do
         @eml.title 'Dataset Abstract'
-        @eml.para EML.text_sanitize(markdown_to_html(dataset.abstract))
+        @eml.para EML.text_sanitize(CommonMarker.render_html(dataset.abstract, :UNSAFE))
         @eml.para "original data source http://lter.kbs.msu.edu/datasets/#{dataset.id}"
       end
     end
