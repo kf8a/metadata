@@ -16,7 +16,6 @@ gem 'devise'
 gem 'formtastic'
 gem 'nokogiri'
 gem 'pg'
-gem 'RedCloth'
 
 gem 'country_select', '~> 4.0'
 

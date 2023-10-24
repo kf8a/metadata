@@ -26,7 +26,6 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    RedCloth (4.3.2)
     actioncable (6.1.7.6)
       actionpack (= 6.1.7.6)
       activesupport (= 6.1.7.6)
@@ -444,7 +443,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  RedCloth
   activerecord-session_store
   acts-as-taggable-on
   awesome_nested_set
