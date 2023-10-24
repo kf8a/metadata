@@ -4,6 +4,10 @@ source 'https://rubygems.org'
 
 gem 'rails', '~>6.0'
 
+gem 'pandoc-ruby'
+
+gem 'commonmarker'
+
 gem 'activerecord-session_store'
 gem 'responders'
 

@@ -1,9 +1,26 @@
+# frozen_string_literal: true
+
 # Methods added to this helper will be available to all templates in the application.
 require 'redcloth'
+require 'commonmarker'
 
 module ApplicationHelper
-  def textilize(text)
+
+  def textilize(text, markdown=false)
+    if markdown
+      markdown_to_html(text)
+    else
+      textilize_to_html(text)
+    end
+  end
+
+  def textilize_to_html(text)
     raw(RedCloth.new(text.to_s).to_html)
+  end
+
+  def markdown_to_html(text)
+    html = CommonMarker.render_html(text, :DEFAULT)
+    raw(html)
   end
 
   # use to strip out html tags when using truncate
