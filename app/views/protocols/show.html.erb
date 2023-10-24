@@ -25,17 +25,17 @@
   <%= "In use from " if @protocol.in_use_from? %><%= @protocol.in_use_from %>
   <%= " to " if @protocol.in_use_to? %><%= @protocol.in_use_to %>
   </p>
-  <%=raw textilize(@protocol.description) if @protocol.description %>
+  <%=raw markdown_to_html(@protocol.description) if @protocol.description %>
   <% if @protocol.abstract.present? -%>
     <h2>Abstract</h2>
-    <%=raw textilize(@protocol.abstract) if @protocol.abstract%>
+    <%=raw markdown_to_html(@protocol.abstract) if @protocol.abstract%>
   <% end -%>
 
 
   <h2>Protocol</h2>
   <% if @protocol.body.present? %>
     <div class='abstract_body'>
-      <%=raw textilize(@protocol.body) if @protocol.body %>
+      <%=raw markdown_to_html(@protocol.body) if @protocol.body %>
     </div>
   <% end %>
   <% if @protocol.pdf.attached? %>
@@ -67,7 +67,7 @@
   <% end -%>
 
   <% if @protocol.change_summary.present? -%>
-    <p> <%= raw textilize(*@protocol.change_summary) %> </p>
+    <p> <%= raw markdown_to_html(*@protocol.change_summary) %> </p>
   <% end -%>
 
   <p>

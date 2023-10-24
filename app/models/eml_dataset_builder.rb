@@ -251,7 +251,7 @@ class EmlDatasetBuilder
     @eml.abstract do
       @eml.section do
         @eml.title 'Dataset Abstract'
-        @eml.para EML.text_sanitize(textilize(dataset.abstract))
+        @eml.para EML.text_sanitize(markdown_to_html(dataset.abstract))
         @eml.para "original data source http://lter.kbs.msu.edu/datasets/#{dataset.id}"
       end
     end

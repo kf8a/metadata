@@ -11,7 +11,7 @@
 <h1><%= dataset.dataset %>:<%= dataset.title %>
 </h1>
 <div class='description'>
-	<%= textilize dataset.abstract %>
+	<%= markdown_to_html dataset.abstract %>
 </div>
 <ul>
 	<li>Status: <%= dataset.status %></li>

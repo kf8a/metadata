@@ -14,7 +14,7 @@
     <%= link_to "#{dataset.dataset}: #{dataset.title}" , dataset_path(dataset) %></dt>
     <dl>
       <p>
-      <%= textilize(dataset.abstract) %>
+      <%= markdown_to_html(dataset.abstract) %>
       </p>
       <ul>
         <% dataset.creators.each do |creator| %>

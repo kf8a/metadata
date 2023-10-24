@@ -11,7 +11,7 @@ xml.rss version: "2.0" do
     [@submitted_citations, @forthcoming_citations, @citations].flatten.each do |citation|
       xml.item do
         xml.title citation.formatted
-        xml.description textilize(citation.abstract)
+        xml.description markdown_to_html(citation.abstract)
         xml.category citation.state
         xml.pubDate citation.updated_at
         xml.link citation_url(citation)

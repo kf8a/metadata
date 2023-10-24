@@ -2,7 +2,7 @@
   <p id='datatable-intro'>
     <%=raw  @website.data_catalog_intro %>
   </p>
- <%= textilize @sponsor.data_use_statement if @sponsor %>
+ <%= markdown_to_html @sponsor.data_use_statement if @sponsor %>
 
 <div id='glbrc-search-form'>
   <%= form_tag ('/datatables/search') do %>

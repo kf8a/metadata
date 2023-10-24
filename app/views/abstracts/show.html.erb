@@ -21,7 +21,7 @@
       <% end %>
       ) </p>
 
-      <%= textilize(@abstract.abstract) %>
+      <%= markdown_to_html(@abstract.abstract) %>
 
       <% if @abstract.pdf.attached? %>
         <%=link_to "Get #{@abstract.meeting_abstract_type.name.downcase}", url_for(@abstract.pdf) %><br/>
