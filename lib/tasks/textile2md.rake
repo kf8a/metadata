@@ -1,5 +1,3 @@
-require 'pandoc-ruby'
-
 namespace :textile2md do
   desc 'update html'
   task :to_markdown => :environment  do
