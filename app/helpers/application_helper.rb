@@ -6,6 +6,8 @@ require 'commonmarker'
 module ApplicationHelper
 
   def markdown_to_html(text)
+    return nil if text.empty?
+
     raw(CommonMarker.render_html(text, :UNSAFE))
   end
 
