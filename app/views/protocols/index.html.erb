@@ -10,6 +10,7 @@
   </ul>
   <% @protocol_themes.each do |theme| %>
     <% next if theme.name == 'experiments' %>
+    <% next if @website.protocols.tagged_with(theme).order(:title).where(:active=>true).empty? %>
     <h2><%= theme.name.humanize %></h2>
     <ul>
     <% @website.protocols.tagged_with(theme).order(:title).where(:active=>true).each do | protocol| %>
