@@ -8,7 +8,7 @@ module ApplicationHelper
   def markdown_to_html(text)
     return nil if text.blank?
 
-    raw(CommonMarker.render_html(text, :UNSAFE))
+    raw(Commonmarker.to_html(text))
   end
 
   # use to strip out html tags when using truncate

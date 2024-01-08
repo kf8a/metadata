@@ -66,8 +66,10 @@ gem 'web-console', group: :development
 
 gem 'faraday'
 
-gem 'omniauth'
+# gem 'omniauth'
 gem 'omniauth-glbrc', git: "git@github.com:kf8a/omniauth-glbrc.git"
+# try to update to omniauth 2.0
+# gem 'omniauth-glbrc', path: "../omniauth-glbrc"
 gem 'omniauth-rails_csrf_protection'
 
 
