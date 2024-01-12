@@ -81,6 +81,10 @@ class Citation < ApplicationRecord
     includes(:treatments).references(:treatments).where('treatments.id = ?', treatment)
   end
 
+  def self.by_treatments(treatment_array)
+    includes(:treatments).references(:treatments).where('treatments.id in (?)', treatment_array)
+  end
+
   def self.from_website(website_id)
     where(website_id: website_id)
   end
