@@ -8,7 +8,7 @@
 <ul>
   <% @studies.each do |study| -%>
     <% citation_treatments = study.treatments.where(use_in_citations: true).select(:id) %>
-    <% next unless Citation.from_website(1).by_treatments(citation_treatments).size > 0 -%>
+    <% next unless Citation.from_website(1).by_treatments(citation_treatments).all.size > 0 -%>
     <li class='top-level'>
     <% if study.citation_treatments? %>
         <%= study.name %>
