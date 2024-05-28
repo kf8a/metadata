@@ -226,7 +226,7 @@ GEM
     method_source (1.0.0)
     middleware (0.1.0)
     mini_mime (1.1.5)
-    mini_portile2 (2.8.5)
+    mini_portile2 (2.8.6)
     minitest (5.22.2)
     minitest-reporters (1.6.1)
       ansi
@@ -255,7 +255,7 @@ GEM
       net-protocol
     net-ssh (7.2.1)
     nio4r (2.7.0)
-    nokogiri (1.16.3)
+    nokogiri (1.16.5)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     oauth2 (2.0.9)
@@ -285,7 +285,7 @@ GEM
     prometheus-client (4.2.2)
     puma (6.4.2)
       nio4r (~> 2.0)
-    racc (1.7.3)
+    racc (1.8.0)
     rack (2.2.8.1)
     rack-test (2.1.0)
       rack (>= 1.3)

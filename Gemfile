@@ -15,8 +15,9 @@ gem 'acts-as-taggable-on'
 gem 'devise'
 gem 'formtastic'
 gem 'nokogiri'
-gem 'pg'
 
+
+gem 'pg'
 gem 'country_select', '~> 4.0'
 
 # gem 'doi', :git => 'git://github.com/kf8a/doi.git'
@@ -39,7 +40,7 @@ gem 'has_scope' # , '<0.6'
 
 gem 'ris_parser', git: 'https://github.com/kf8a/ris_parser.git'
 
-gem 'mysql2', platform: :ruby
+gem 'mysql2'
 gem 'thinking-sphinx'
 
 gem 'aws-sdk-s3', '~> 1'
