@@ -336,7 +336,8 @@ GEM
     responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
-    rexml (3.2.6)
+    rexml (3.2.8)
+      strscan (>= 3.0.9)
     riddle (2.4.3)
     rspec-core (3.13.0)
       rspec-support (~> 3.13.0)
@@ -413,6 +414,7 @@ GEM
       net-scp (>= 1.1.2)
       net-sftp (>= 2.1.2)
       net-ssh (>= 2.8.0)
+    strscan (3.1.0)
     test-unit (3.6.2)
       power_assert
     thinking-sphinx (5.5.1)
