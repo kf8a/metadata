@@ -50,4 +50,6 @@ app/views/shared/_nav.html.erb
 
 .env
 
+doc/
+
 /node_modules/
