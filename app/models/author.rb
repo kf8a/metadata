@@ -18,6 +18,7 @@ class Author < ApplicationRecord
     "\n%A #{formatted}"
   end
 
+  # TOOD if we connect this to person we could show Orchids
   def ld_json
     { "@type": "Person",
       "name": name,
