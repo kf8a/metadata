@@ -68,6 +68,19 @@ class Datatable < ApplicationRecord
     save
   end
 
+  def clone_into(dataset)
+    new_datatable = dup
+    new_datatable.variates = variates.collect(&:dup)
+    new_datatable.protocols = protocols
+    new_datatable.people = people
+    new_datatable.dataset = dataset
+    new_datatable.title = "#{title}-copy"
+    datatable_number = dataset.datatables.count + 1
+    new_datatable.name = "#{dataset.dataset}-#{"%03d" % datatable_number}"
+    new_datatable.on_web = false
+    new_datatable
+  end
+
   def self.from_eml(datatable_eml)
     url = datatable_eml.css('physical distribution online url').text
     table_id = url.split('/')[-1].to_s.gsub('.csv', '')
