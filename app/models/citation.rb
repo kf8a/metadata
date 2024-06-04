@@ -236,7 +236,7 @@ class Citation < ApplicationRecord
   end
 
   def formatted(options = {})
-    "#{author_and_year(options)} #{title_and_punctuation} #{publication} #{volume_and_page}, #{doi}".rstrip
+    "#{author_and_year(options)} #{title_and_punctuation} #{publication} #{volume_and_page}, #{doi}".rstrip.gsub(/,$/,'')
   end
 
   def to_bib
