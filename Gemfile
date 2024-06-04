@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~>7.0'
+gem 'rails', '~>7.0.0'
 
 gem 'activerecord-session_store'
 gem 'responders'
@@ -90,7 +90,7 @@ end
 
 group :development, :test do
   gem 'minitest'
-  gem 'minitest-reporters', '>= 0.5.0'
+  # gem 'minitest-reporters', '>= 0.5.0'
 
   gem 'rspec-its'
   gem 'rspec-rails'
