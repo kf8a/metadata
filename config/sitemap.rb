@@ -26,7 +26,7 @@ SitemapGenerator::Sitemap.create do
   #   end
   website = Website.where(name: 'lter').first
   add datatables_path, :priority => 0.9, :changefreq => 'daily'
-  add datasets_path 
+  add datasets_path
   website.datasets.each do |dataset|
     add dataset_path(dataset), lastmod: dataset.updated_at
     dataset.datatables.each do |datatable|
