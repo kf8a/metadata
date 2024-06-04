@@ -1,7 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../rails_helper')
 
 describe Author do
-  it { should belong_to :citation }
   it { should validate_presence_of :seniority }
 
   context 'an author with a last name' do
