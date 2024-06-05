@@ -8,6 +8,13 @@ GIT
       omniauth-oauth2 (~> 1.1)
 
 GIT
+  remote: https://github.com/kf8a/commonmarker.git
+  revision: a7ec3ca60dfb36c74ffbed9ac5249745ec06bc99
+  specs:
+    commonmarker (1.1.4)
+      rb_sys (~> 0.9)
+
+GIT
   remote: https://github.com/kf8a/ris_parser.git
   revision: 410b27def4835b8b9b697690282ff3df4803ae68
   specs:
@@ -162,10 +169,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    commonmarker (1.1.4-aarch64-linux)
-    commonmarker (1.1.4-arm64-darwin)
-    commonmarker (1.1.4-x86_64-darwin)
-    commonmarker (1.1.4-x86_64-linux)
     concurrent-ruby (1.3.1)
     connection_pool (2.4.1)
     countries (3.1.0)
@@ -364,6 +367,7 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.11.1)
       ffi (~> 1.0)
+    rb_sys (0.9.97)
     rbnacl (7.1.1)
       ffi
     rbnacl-libsodium (1.0.16)
@@ -518,7 +522,7 @@ DEPENDENCIES
   capistrano-rails
   capistrano3-puma!
   coffee-rails
-  commonmarker
+  commonmarker!
   country_select (~> 4.0)
   dalli
   database_cleaner
