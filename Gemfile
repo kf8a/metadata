@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '~>7.0'
 
-gem 'commonmarker'
+gem 'commonmarker', '<=1.1.3'
 
 gem 'activerecord-session_store'
 gem 'responders'
