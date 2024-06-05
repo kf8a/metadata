@@ -60,7 +60,7 @@ gem 'sassc-rails'
 # gem 'therubyracer', require: false
 # gem 'uglifier'
 
-#gem 'prometheus-client'
+gem 'prometheus-client'
 gem 'web-console', group: :development
 
 gem 'faraday'
