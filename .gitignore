@@ -52,4 +52,9 @@ app/views/shared/_nav.html.erb
 
 doc/
 
+LTERHub_Personnel_list_to_CSV/
+
+master.key
+oauth.txt
+
 /node_modules/
