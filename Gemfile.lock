@@ -149,6 +149,9 @@ GEM
       i18n
       rake (>= 10.0.0)
       sshkit (>= 1.9.0)
+    capistrano-asdf (1.1.1)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
     capistrano-bundler (2.1.0)
       capistrano (~> 3.1)
     capistrano-rails (1.6.3)
@@ -190,7 +193,6 @@ GEM
     exception_notification (4.5.0)
       actionmailer (>= 5.2, < 8)
       activesupport (>= 5.2, < 8)
-    execjs (2.9.1)
     factory_bot (6.4.6)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.4.3)
@@ -463,8 +465,6 @@ GEM
     timeout (0.4.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    uglifier (4.2.0)
-      execjs (>= 0.3.0, < 3)
     unicode-display_width (2.5.0)
     unicode_utils (1.4.0)
     uri (0.13.0)
@@ -506,6 +506,7 @@ DEPENDENCIES
   bibtex-ruby
   bootsnap (>= 1.1.0)
   capistrano
+  capistrano-asdf
   capistrano-bundler
   capistrano-rails
   capistrano3-puma!
@@ -550,7 +551,6 @@ DEPENDENCIES
   sitemap_generator
   test-unit
   thinking-sphinx
-  uglifier
   web-console
   workflow
   workflow-activerecord

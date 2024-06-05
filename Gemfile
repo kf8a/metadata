@@ -58,7 +58,7 @@ end
 
 gem 'sassc-rails'
 # gem 'therubyracer', require: false
-gem 'uglifier'
+# gem 'uglifier'
 
 #gem 'prometheus-client'
 gem 'web-console', group: :development
@@ -80,6 +80,7 @@ group :development do
   # gem 'capistrano3-unicorn'
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails'
+  gem 'capistrano-asdf'
   gem 'ed25519'
 
   gem 'listen'
