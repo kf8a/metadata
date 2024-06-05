@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # ENW formatter for endnote RIS formatted citations
-class ENW
+class Enw
   attr_accessor :citation
 
   def init(citation)
