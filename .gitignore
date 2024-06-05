@@ -58,3 +58,4 @@ master.key
 oauth.txt
 
 /node_modules/
+/config/puma.rb
