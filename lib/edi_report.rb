@@ -22,7 +22,7 @@ class EdiReport
   def load
     doc_url = 'https://pasta.lternet.edu/package/metadata/eml'
     begin
-      response = open(doc_url + url_fragment)
+      response = URI.open(doc_url + url_fragment)
     rescue OpenURI::HTTPError => _e
       return nil
     end
@@ -35,9 +35,7 @@ class EdiReport
   # Creates the citation
 
   def citation
-    ReportAuthor.authors(doc) + ' ' + publication_year + '. ' +
-      title + '. Environmental Data Initiative. ' +
-      doi
+    "#{ReportAuthor.authors(doc)} #{publication_year}. #{title.delete("\n")}. Environmental Data Initiative. #{doi}"
   end
 
   ##
@@ -61,7 +59,10 @@ class EdiReport
   # Creates a markdown table row
 
   def table_row(row_number)
-    row_number.to_s + SPACER + citation
+    dots = core_area_dots.each do |dot|
+      dot
+    end.join(SPACER)
+    row_number.to_s + SPACER + citation + SPACER + dots
   end
 
   def first_author_name
@@ -114,7 +115,7 @@ class EdiReport
 
   def doi
     doi_url = "https://pasta.lternet.edu/package/doi/eml#{url_fragment}"
-    doi_string = open(doi_url).read
+    doi_string = URI.open(doi_url).read
     doi_string.sub(/doi:/, 'https://doi.org/')
   end
 

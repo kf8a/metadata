@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'score_card.rb'
+# require 'app/models/score_card.rb'
 
 describe ScoreCard do
   let(:score_card) { ScoreCard.new }

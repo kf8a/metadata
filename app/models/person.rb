@@ -28,6 +28,18 @@ class Person < ApplicationRecord
     lter_roles.all?(&:emeritus?)
   end
 
+  def no_current_lno_role?
+    lno_roles.first.nil? || !lno_roles.first.try(:left_on).nil?
+  end
+
+  def lno_affiliations
+    Affiliation.joins(
+      "join people on affiliations.person_id = people.id
+      join roles on roles.id = affiliations.role_id
+      join role_types on roles.role_type_id = role_types.id").
+      where(person_id: self.id).where(role_types: {name: "lno"})
+  end
+
   def expanded_name
     "#{given_name} #{middle_name} #{sur_name}"
   end

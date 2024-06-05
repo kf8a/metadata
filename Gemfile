@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'rails', '~>6.0'
+gem 'rails', '~>7.0'
 
 gem 'commonmarker'
 
@@ -54,7 +54,6 @@ gem 'rexml'
 
 group :production, :staging do
   gem 'exception_notification'
-  # gem 'unicorn'
 end
 
 gem 'coffee-rails'
@@ -95,7 +94,7 @@ end
 
 group :development, :test do
   gem 'minitest'
-  gem 'minitest-reporters', '>= 0.5.0'
+  # gem 'minitest-reporters', '>= 0.5.0'
 
   gem 'rspec-its'
   gem 'rspec-rails'
