@@ -51,7 +51,6 @@ gem 'puma'
 
 group :production, :staging do
   gem 'exception_notification'
-  # gem 'unicorn'
 end
 
 gem 'coffee-rails'
