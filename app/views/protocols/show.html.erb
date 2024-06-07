@@ -9,7 +9,7 @@
     {:name => @protocol.title}] %>
 <% cache(@protocol) do %>
   <div id="protocol-show">
-  <h1><%=raw @protocol.title %></h1>
+  <h1><%=@protocol.title %></h1>
   <p class='notice'>
     <% if @protocol.active? -%>
       Active
