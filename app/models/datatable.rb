@@ -335,7 +335,8 @@ class Datatable < ApplicationRecord
       @eml.alternateIdentifier datatable_id, system: 'lter.kbs.msu.edu'
       @eml.entityName "Kellogg Biological Station LTER: #{title} (#{name})"
       if description
-        text = ActionView.SanitizeHelper.sanitize(description)
+        full_sanitizer = Rails::HTML5::FullSanitizer.new
+        text = full_sanitizer.sanitize(description)
         @eml.entityDescription EML.text_sanitize(text) unless text.strip.empty?
       end
       #      eml_protocols if non_dataset_protocols.present?
