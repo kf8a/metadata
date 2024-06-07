@@ -3,7 +3,7 @@
 # handler interaction with the user class
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: %i[show]
-  protect_from_forgery except: :show
+  # protect_from_forgery except: :show
 
   def index; end
 
