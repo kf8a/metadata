@@ -13,7 +13,7 @@ class DatatablesController < ApplicationController
                 if: proc { |controller| controller.request.format.csv? || controller.request.format.fasta? }
 
   helper_method :datatable
-  protect_from_forgery except: %i[index show search]
+  # protect_from_forgery except: %i[index show search]
 
   # GET /datatables
   # GET /datatables?public=true

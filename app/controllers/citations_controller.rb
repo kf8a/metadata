@@ -2,7 +2,7 @@
 
 # display citations and control access to pdfs
 class CitationsController < ApplicationController
-  protect_from_forgery except: :download
+  # protect_from_forgery except: :download
 
   respond_to :html, :json
   layout :site_layout
