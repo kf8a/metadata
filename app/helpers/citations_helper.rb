@@ -7,9 +7,9 @@ module CitationsHelper
   end
 
   def normalize_doi(doi)
-    if doi.match?(/dx.doi.org/)
+    if doi.match?(/dx\.doi\.org/)
       doi
-    elsif doi.match?(/^doi.org/)
+    elsif doi.match?(/^doi\.org/)
       'http://' + doi
     elsif doi.match?(/^http/)
       doi
