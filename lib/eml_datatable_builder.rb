@@ -6,7 +6,8 @@ class EmlDatatableBuilder
     @eml.dataTable 'id' => Rails.application.routes.url_helpers.datatable_path(datatable.id) do
       @eml.entityName "Kellogg Biological Station LTER: #{datatable.title}"
       if datatable.description.present?
-        text =  datatable.description.gsub(/<\/?[^>]*>/, "")
+        full_sanitizer = Rails::HTML5::FullSanitizer.new
+        text = full_sanitizer.sanitize(description)
         @eml.entityDescription EML.text_sanitize(text) unless text.strip.empty?
       end
 #      eml_protocols if non_dataset_protocols.present?
