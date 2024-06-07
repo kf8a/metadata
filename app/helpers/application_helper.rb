@@ -11,11 +11,6 @@ module ApplicationHelper
     raw(Commonmarker.to_html(text, options: {render: {unsafe: true}}))
   end
 
-  # use to strip out html tags when using truncate
-  def strip_html_tags(string = '')
-    string.gsub(/<\/?[^>]*>/,  '')
-  end
-
   def lter_roles
     # TODO: this is both here and in the person controller
     # Role.where(role_type_id: RoleType.where(name: 'lter').first)
