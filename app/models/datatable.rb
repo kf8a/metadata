@@ -335,7 +335,7 @@ class Datatable < ApplicationRecord
       @eml.alternateIdentifier datatable_id, system: 'lter.kbs.msu.edu'
       @eml.entityName "Kellogg Biological Station LTER: #{title} (#{name})"
       if description
-        text = SanitizeHelper.sanitize(description)
+        text = ActionView.SanitizeHelper.sanitize(description)
         @eml.entityDescription EML.text_sanitize(text) unless text.strip.empty?
       end
       #      eml_protocols if non_dataset_protocols.present?
