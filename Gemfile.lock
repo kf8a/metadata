@@ -1,10 +1,10 @@
 GIT
   remote: git@github.com:kf8a/omniauth-glbrc.git
-  revision: 77d7dc732039646c858cbc2b61b546f58fda8b57
+  revision: 1eb60e1d0d5e164612263bb8d9eb8c69ac689838
   specs:
     omniauth-glbrc (0.6.0)
       multi_json (~> 1.7)
-      omniauth (~> 2.0)
+      omniauth (~> 1.9)
       omniauth-oauth2 (~> 1.1)
 
 GIT
@@ -289,13 +289,12 @@ GEM
       rack (>= 1.2, < 4)
       snaky_hash (~> 2.0)
       version_gem (~> 1.1)
-    omniauth (2.1.2)
+    omniauth (1.9.2)
       hashie (>= 3.4.6)
-      rack (>= 2.2.3)
-      rack-protection
-    omniauth-oauth2 (1.8.0)
+      rack (>= 1.6.2, < 3)
+    omniauth-oauth2 (1.7.3)
       oauth2 (>= 1.4, < 3)
-      omniauth (~> 2.0)
+      omniauth (>= 1.9, < 3)
     omniauth-rails_csrf_protection (0.1.2)
       actionpack (>= 4.2)
       omniauth (>= 1.3.1)
@@ -314,9 +313,6 @@ GEM
       nio4r (~> 2.0)
     racc (1.8.0)
     rack (2.2.9)
-    rack-protection (3.2.0)
-      base64 (>= 0.1.0)
-      rack (~> 2.2, >= 2.2.4)
     rack-session (1.0.2)
       rack (< 3)
     rack-test (2.1.0)
