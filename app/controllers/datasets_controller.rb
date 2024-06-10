@@ -47,7 +47,7 @@ class DatasetsController < ApplicationController
         # format.eml { render eml:@dataset }
       end
     else
-      redirect_to datasets_url
+      redirect_to datasets_url, allow_other_host: true
     end
   end
 
@@ -119,12 +119,17 @@ class DatasetsController < ApplicationController
 
   # PUT /datasets/1
   def update
-    if dataset.update(dataset_params)
-      # params[:files].each do |file|
-      #   dataset.dataset_files.create(data: file)
-      # end
 
+    if dataset.update(dataset_params)
+      params[:files].each do |file|
+        dataset.dataset_files.create(data: file)
+      end
+
+      puts 'Dataset was successfully updated.'
       flash[:notice] = 'Dataset was successfully updated.'
+    else
+      puts "Dataset was not updated. #{dataset.errors}"
+      flash[:notice] = 'Dataset was not updated.'
     end
     respond_with dataset
   end
@@ -188,15 +193,15 @@ class DatasetsController < ApplicationController
       :status,
       :initiated,
       :completed,
-      :released,
+      # :released,
       :on_web,
       :core_dataset,
-      :project_id,
-      :metacat_id,
+      # :project_id,
+      # :metacat_id,
       :sponsor_id,
       :website_id,
       :keyword_list,
-      affiliations_attributes: [], dataset_files_attributes: %i[name data _destroy id]
+      # affiliations_attributes: [], dataset_files_attributes: %i[name data _destroy id]
     )
   end
 
