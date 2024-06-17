@@ -302,9 +302,31 @@ class Citation < ApplicationRecord
     "#{accession_number_to_enw}\n"
   end
 
+
   def self.select_options
-    classes = descendants.map(&:to_s).sort
-    classes.collect { |klass| [klass.gsub(/Citation/, ''), klass] }
+    names = %w[Article
+       Book
+       Bulletin
+       Chapter
+       Conference
+       Data
+       Ebook
+       Report
+       Thesis
+    ]
+    types = %w[ArticleCitation
+       BookCitation
+       BulletinCitation
+       ChapterCitation
+       ConferenceCitation
+       DataCitation
+       EbookCitation
+       ReportCitation
+       ThesisCitation
+    ]
+    names.zip(types)
+    # classes = descendants.map(&:to_s).sort
+    # classes.collect { |klass| [klass.gsub(/Citation/, ''), klass] }
   end
 
   def short_author_string

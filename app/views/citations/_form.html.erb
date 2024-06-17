@@ -1,5 +1,5 @@
 <%= form.inputs do %>
-  <%= form.input :type, as: :select, collection: Citation.select_options %>
+  <%= form.input :type, as: :select, include_blank: false, collection: Citation.select_options %>
   <%= form.input :doi %>
   <%= form.input :state, :collection => ['draft', 'submitted','forthcoming','published'] %>
 <% end %>
@@ -49,6 +49,6 @@
 <% end %>
 <%= form.inputs name: "Treatment Areas" do %>
 <div id='treatments'>
-    <%= form.input :treatments, :input_html => { :class => 'myselect' } %>
+    <%= form.input :treatments, as: :select, collection: Treatment.select_options, :input_html => { :class => 'myselect' } %>
 </div>
 <% end %>
