@@ -16,6 +16,7 @@ gem 'devise'
 gem 'formtastic'
 gem 'nokogiri'
 
+gem 'sprockets', '~> 4.0'
 
 gem 'pg'
 gem 'country_select', '~> 4.0'
@@ -56,7 +57,7 @@ group :production, :staging do
   gem 'exception_notification'
 end
 
-gem 'sassc-rails'
+gem 'sass-rails', '>= 5'
 # gem 'therubyracer', require: false
 # gem 'uglifier'
 

@@ -415,6 +415,8 @@ GEM
     rubocop-thread_safety (0.5.1)
       rubocop (>= 0.90.0)
     ruby-progressbar (1.13.0)
+    sass-rails (6.0.0)
+      sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -555,10 +557,11 @@ DEPENDENCIES
   rubocop
   rubocop-rails
   rubocop-thread_safety
-  sassc-rails
+  sass-rails (>= 5)
   shoulda (>= 3.0)
   shoulda-matchers
   sitemap_generator
+  sprockets (~> 4.0)
   tailwindcss-rails (~> 2.6)
   test-unit
   thinking-sphinx
