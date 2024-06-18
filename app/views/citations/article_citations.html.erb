@@ -1,7 +1,17 @@
 <% content_for :head do %>
   <title>KBS LTER Publications</title>
 <% end %>
-<h1>KBS LTER Publications</h1>
+<% if @treatment %>
+  <% content_for :head do %>
+    <title>KBS LTER Publications for <%= @treatment.study.name %> <%= @treatment.name %> - <%= @treatment.description %></title>
+  <% end %>
+  <h1>KBS LTER Publications for <%= @treatment.study.name %> <%= @treatment.name %> - <%= @treatment.description %></h1>
+<% else %>
+  <% content_for :head do %>
+    <title>KBS LTER Publications</title>
+  <% end %>
+<h1>KBS LTER Publications<h1>
+<% end %>
 <p>
   Publications associated with KBS LTER. Click on the pdf link to get open access papers
   or to <%= link_to 'sign-in', new_user_session_path %> (free and immediate) to get other papers. Click on the data link to get
