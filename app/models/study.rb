@@ -4,8 +4,8 @@
 class Study < ApplicationRecord
   has_and_belongs_to_many :datasets
   has_many :datatables, dependent: :nullify
-  has_many :treatments, dependent: :nullify
   has_many :study_urls, dependent: :nullify
+  has_many :treatments, -> { order "lft asc" }, dependent: :nullify
 
   acts_as_nested_set
 
