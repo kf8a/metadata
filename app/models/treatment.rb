@@ -22,4 +22,13 @@ class Treatment < ApplicationRecord
   def self.select_options_by_study(study_id)
     Treatment.where(study_id: study_id).map { |t| ["#{t.name} #{t.description}", t.id] }
   end
+
+  def has_citations?
+    # if the treatment or it's children have citations return true
+    return true if citations.any?
+    children.each do |child|
+      return true if child.has_citations?
+    end
+    false
+  end
 end

@@ -14,7 +14,7 @@
         <%= study.name %>
         <ul>
           <% study.citation_treatments.each  do |treatment| -%>
-            <% next unless treatment.citations.size > 0 -%>
+            <% next unless treatment.has_citations? -%>
             <li>
               <%= link_to "#{treatment.name} #{treatment.description}", {:action => :index, :treatment => treatment} %>
             </li>
