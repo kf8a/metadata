@@ -561,7 +561,7 @@ DEPENDENCIES
   shoulda (>= 3.0)
   shoulda-matchers
   sitemap_generator
-  sprockets (~> 4.0)
+  sprockets-rails
   tailwindcss-rails (~> 2.6)
   test-unit
   thinking-sphinx

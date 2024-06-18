@@ -16,7 +16,7 @@ gem 'devise'
 gem 'formtastic'
 gem 'nokogiri'
 
-gem 'sprockets', '~> 4.0'
+gem "sprockets-rails"
 
 gem 'pg'
 gem 'country_select', '~> 4.0'
