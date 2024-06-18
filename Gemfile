@@ -24,7 +24,6 @@ gem 'country_select', '~> 4.0'
 
 gem 'awesome_nested_set'
 
-gem 'coffee-rails'
 gem 'jquery-rails'
 
 gem 'workflow'
