@@ -13,12 +13,20 @@
     <% if study.citation_treatments? %>
         <%= study.name %>
         <ul>
-          <% study.citation_treatments.each  do |treatment| -%>
+          <% study.citation_treatments.roots.each do |treatment| -%>
             <% next unless treatment.has_citations? -%>
             <li>
               <%= link_to "#{treatment.name} #{treatment.description}", {:action => :index, :treatment => treatment} %>
+              <% treatment.children.each do |child| -%>
+                <% next unless child.has_citations? -%>
+                <ul>
+                  <li>
+                    <%= link_to "#{child.name} #{child.description}", {:action => :index, :treatment => child} %>
+                  </li>
+                </ul>
+                <% end %>
             </li>
-          <% end -%>
+          <% end %>
         </ul>
       <% else -%>
           <%= link_to study.name,  {:action => :index, :treatment => study.treatments.by_use_in_citations.first} %>
