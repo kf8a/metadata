@@ -20,7 +20,7 @@ class Study < ApplicationRecord
   end
 
   def citation_treatments
-    treatments.by_use_in_citations
+    treatments.by_use_in_citations.with_tree_order
   end
 
   # check if there is more than one treatment associated with this study

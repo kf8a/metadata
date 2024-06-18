@@ -9,6 +9,7 @@ class Treatment < ApplicationRecord
   has_and_belongs_to_many :citations
 
   scope :by_use_in_citations, -> { where(use_in_citations: true) }
+  scope :with_tree_order, -> {order(:lft)}
 
   def self.select_options
     Treatment.all.map { |t| ["#{t.name} #{t.description}", t.id] }
