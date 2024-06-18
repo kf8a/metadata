@@ -78,7 +78,11 @@ class Citation < ApplicationRecord
   end
 
   def self.by_treatment(treatment)
-    includes(:treatments).references(:treatments).where('treatments.id = ?', treatment)
+    # get the citations with the treatment and all of the child treatments
+    trt = Treatment.find(treatment)
+    child_ids = trt.children.map { |sib| sib.id }
+    ids = child_ids.push(trt.id)
+    includes(:treatments).references(:treatments).where('treatments.id in (?)', ids)
   end
 
   def self.by_treatments(treatment_array)
