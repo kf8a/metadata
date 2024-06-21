@@ -18,7 +18,8 @@
         <%=citation.formatted(long: true) %>
       </p>
 
-      <div class="citation-footer">
+      <div>
+      <p class="citation-footer">
         <% if citation.pdf.attached? %>
           <span class='non-member'>
             <%= link_to 'abstract + pdf', citation_path(citation) %>
@@ -43,6 +44,7 @@
         <% if citation.pdf.attached? %>
           <span>(<%= "https://lter.kbs.msu.edu/pub/#{citation.id}" %>)</span>
         <% end %>
+      </p>
       </div>
     <% end %>
 
