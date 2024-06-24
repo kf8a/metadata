@@ -15,12 +15,16 @@
     <% end %>
     <% cache(citation, action: 'index') do %>
       <div>
-        <p><%=citation.formatted(long: true) %></p>
+        <p><%=citation.formatted(long: true) %>
+         <% if citation.doi.present? %>
+           <span> <em>DOI: <%= citation.doi %></em></span>
+      <% end %>
+        </p>
         <div>
           <div class="citation-footer">
             <div>
               <% if citation.open_access && citation.doi.present? %>
-                <span><%= link_to "doi: #{citation.doi}", normalize_doi(citation.doi) %> </span>
+                <span><%= link_to "DOI: #{citation.doi}", normalize_doi(citation.doi) %> </span>
                 <% if citation.data_url.present? %>
                   <span> <a href="<%= normalize_doi(citation.data_url) %>">data</a> </span>
                 <% end %>
@@ -52,7 +56,7 @@
               <% end %>
             </div>
             <% if citation.pdf.attached? && !citation.doi.present? %>
-              <span> (<%= "https://lter.kbs.msu.edu/pub/#{citation.id}" %>)</span>
+              <span>&nbsp;(<%= "https://lter.kbs.msu.edu/pub/#{citation.id}" %>)</span>
             <% end %>
           </div>
         </div>
