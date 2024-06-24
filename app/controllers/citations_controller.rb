@@ -79,7 +79,7 @@ class CitationsController < ApplicationController
       logger.info Citation.search(search_terms)
       index_responder
     else
-      redirect_to citations_url
+      redirect_to citations_url, allow_other_host: true
     end
   end
 
@@ -143,7 +143,7 @@ class CitationsController < ApplicationController
     if citation.open_access || user_signed_in?
       send_citation(citation)
     else
-      redirect_to new_user_session_url
+      redirect_to new_user_session_url, allow_other_host: true
     end
   end
 
