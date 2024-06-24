@@ -16,12 +16,15 @@
 }
 
 .citation-footer {
+  margin: 0.5rem;
   display: flex;
+  font-size: 12px;
+  margin-top: -3px;
 }
 
 .citation-footer > .member-oly,
 .citation-footer > .non-member {
-  flex: 1;
+  flex: 2;
 }
 
 .citation_count {
@@ -151,9 +154,9 @@
     background-color: #f8ffd6;
   }
 
-  .citation p {
-    display: inline;
-  }
+  // .citation p {
+  //   text-indent: 2 em hanging;
+  // }
 
   .top-level {
     margin-bottom: .4em;
