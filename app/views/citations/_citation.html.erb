@@ -26,10 +26,12 @@
               <% if citation.pdf.attached? && citation.open_access %>
                 <span class='non-member'>
                   <%= link_to 'abstract', citation_path(citation) %>
+                  &nbsp;&nbsp;
                   <%= link_to 'pdf', publication_url(citation)%>
                 </span>
                 <span class='member-only'>
                   <%= link_to 'abstract', citation_path(citation) %>
+                  &nbsp;&nbsp;
                   <%= link_to 'pdf', publication_url(citation)%>
                 </span>
               <% elsif citation.pdf.attached? %>
@@ -38,6 +40,7 @@
                 </span>
                 <span class='member-only'>
                   <%= link_to 'abstract', citation_path(citation) %>
+                  &nbsp;&nbsp;
                   <%= link_to 'pdf', publication_url(citation)%>
                 </span>
               <% else %>
