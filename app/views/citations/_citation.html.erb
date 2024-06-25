@@ -16,54 +16,53 @@
     <% cache(citation, action: 'index') do %>
       <div>
         <p><%=citation.formatted(long: true) %>
-         <% if citation.doi.present? %>
-           <span> <em>DOI: <%= citation.doi %></em></span>
+      <% if citation.doi.present? %>
+        <span> <em>DOI: <%= link_to citation.doi, normalize_doi(citation.doi) %></em></span>
       <% end %>
         </p>
         <div>
           <div class="citation-footer">
             <div>
-              <% if citation.open_access && citation.doi.present? %>
-                <span><%= link_to "DOI: #{citation.doi}", normalize_doi(citation.doi) %> </span>
-                <% if citation.data_url.present? %>
-                  <span> <a href="<%= normalize_doi(citation.data_url) %>">data</a> </span>
-                <% end %>
+              <% if citation.pdf.attached? && citation.open_access %>
+                <span class='non-member'>
+                  <%= link_to 'abstract', citation_path(citation) %>
+                  <%= link_to 'pdf', publication_url(citation)%>
+                </span>
+                <span class='member-only'>
+                  <%= link_to 'abstract', citation_path(citation) %>
+                  <%= link_to 'pdf', publication_url(citation)%>
+                </span>
+              <% elsif citation.pdf.attached? %>
+                <span class='non-member'>
+                  <%= link_to 'abstract + pdf', citation_path(citation) %>
+                </span>
+                <span class='member-only'>
+                  <%= link_to 'abstract', citation_path(citation) %>
+                  <%= link_to 'pdf', publication_url(citation)%>
+                </span>
               <% else %>
-                <% if citation.pdf.attached? %>
-                  <span class='non-member'>
-                    <%= link_to 'abstract + pdf', citation_path(citation) %>
-                  </span>
-                  <span class='member-only'>
-                    <%= link_to 'abstract', citation_path(citation) %>
-                    <%= link_to 'pdf', publication_url(citation)%>
-                  </span>
-                <% else %>
-                  <span class='non-member'>
-                    <%= link_to 'abstract', citation_path(citation) %>
-                  </span>
-                  <span class='member-only'>
-                    <%= link_to 'abstract', citation_path(citation) %>
-                  </span>
-                <% end %>
-                <% if citation.data_url.present? %>
-                  <span> <a href="<%= normalize_doi(citation.data_url) %>">data</a> </span>
-                <% end %>
-                <% if citation.doi.present? %>
-                  <span>
-                    <a href="<%= normalize_doi(citation.doi) %>"> <%=normalize_doi(citation.doi)%> </a>
-                  </span>
-                <% end %>
+                <span class='non-member'>
+                  <%= link_to 'abstract', citation_path(citation) %>
+                </span>
+                <span class='member-only'>
+                  <%= link_to 'abstract', citation_path(citation) %>
+                </span>
+              <% end %>
+              <span>&nbsp;</span>
+              <% if citation.data_url.present? %>
+                <span>&nbsp;<a href="<%= normalize_doi(citation.data_url) %>">data</a>&nbsp;</span>
+              <% else %>
+                <span>&nbsp;</span>
               <% end %>
             </div>
-            <% if citation.pdf.attached? && !citation.doi.present? %>
+            <% if citation.doi.present? %>
+                <span>&nbsp;(<%=normalize_doi(citation.doi)%>)</span>
+              <% else %>
               <span>&nbsp;(<%= "https://lter.kbs.msu.edu/pub/#{citation.id}" %>)</span>
             <% end %>
           </div>
         </div>
       </div>
-    <% end %>
-    <% if signed_in? and current_user.role == 'admin' or Rails.env == 'development' -%>
-      <p> <%= link_to 'show', citation_path(citation) %> </p>
     <% end %>
   </li>
 </div>
