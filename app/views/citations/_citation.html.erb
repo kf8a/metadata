@@ -58,6 +58,11 @@
             <% if citation.pdf.attached? && !citation.doi.present? %>
               <span>&nbsp;(<%= "https://lter.kbs.msu.edu/pub/#{citation.id}" %>)</span>
             <% end %>
+            <% if signed_in? and current_user.role == 'admin' or Rails.env == 'development' -%>
+              <span> <%= button_to 'Edit', edit_citation_path(citation) %> </span>
+              <%= button_to 'Delete', { :action => "destroy", :id => citation.id },
+                :confirm => "Are you sure?", :method => :delete  %>
+            <% end %>
           </div>
         </div>
       </div>
