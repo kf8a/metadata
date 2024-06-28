@@ -61,7 +61,7 @@ class DatatablesController < ApplicationController
         end
       end
     else
-      redirect_to datatables_url
+      redirect_to datatables_url, allow_other_hosts: true
     end
   end
 
