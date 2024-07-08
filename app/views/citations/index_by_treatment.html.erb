@@ -11,11 +11,8 @@
     <% next unless Citation.from_website(1).by_treatments(citation_treatments).all.size > 0 -%>
     <li class='top-level'>
     <% if study.citation_treatments? %>
-        <%= study.name %>
-        <ul>
           <% study.citation_treatments.roots.each do |treatment| -%>
             <% next unless treatment.has_citations? -%>
-            <li>
               <%= link_to "#{treatment.name} #{treatment.description}", {:action => :index, :treatment => treatment} %>
               <% treatment.children.each do |child| -%>
                 <% next unless child.has_citations? -%>
@@ -25,9 +22,7 @@
                   </li>
                 </ul>
                 <% end %>
-            </li>
           <% end %>
-        </ul>
       <% else -%>
           <%= link_to study.name,  {:action => :index, :treatment => study.treatments.by_use_in_citations.first} %>
       <% end -%>
