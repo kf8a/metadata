@@ -454,14 +454,6 @@ GEM
       net-ssh (>= 2.8.0)
     stringio (3.1.1)
     strscan (3.1.0)
-    tailwindcss-rails (2.6.1-aarch64-linux)
-      railties (>= 7.0.0)
-    tailwindcss-rails (2.6.1-arm64-darwin)
-      railties (>= 7.0.0)
-    tailwindcss-rails (2.6.1-x86_64-darwin)
-      railties (>= 7.0.0)
-    tailwindcss-rails (2.6.1-x86_64-linux)
-      railties (>= 7.0.0)
     test-unit (3.6.2)
       power_assert
     thinking-sphinx (5.5.1)
@@ -562,7 +554,6 @@ DEPENDENCIES
   shoulda-matchers
   sitemap_generator
   sprockets-rails
-  tailwindcss-rails (~> 2.6)
   test-unit
   thinking-sphinx
   web-console
