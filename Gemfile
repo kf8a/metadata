@@ -19,7 +19,7 @@ gem 'nokogiri'
 gem "sprockets-rails"
 
 gem 'pg'
-gem 'country_select', '~> 4.0'
+gem 'country_select', '~> 9.0'
 
 # gem 'doi', :git => 'git://github.com/kf8a/doi.git'
 
