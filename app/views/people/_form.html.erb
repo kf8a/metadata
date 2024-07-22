@@ -17,7 +17,7 @@
     <%= f.input :street_address %>
     <%= f.input :city %>
     <%= f.input :locale %>
-    <%= f.input :country, priority_countries: ["US", "GB", "AU"]   %>
+    <%= f.input :country, as: :custom_country, priority_countries: ["US", "GB", "AU"]   %>
     <%= f.input :postal_code %>
     <%= f.input :phone, :label => 'Phone Number' %>
     <%= f.input :fax, :label  => 'Fax Number' %>
