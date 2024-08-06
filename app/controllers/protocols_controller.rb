@@ -59,7 +59,7 @@ class ProtocolsController < ApplicationController
     end
     flash[:notice] = 'Protocol was successfully updated.' if @protocol.update(protocol_params)
 
-    respond_with @protocol
+    respond_with @protocol, allow_other_host: true
   end
 
   def download
