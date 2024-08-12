@@ -31,4 +31,8 @@ class Treatment < ApplicationRecord
     end
     false
   end
+
+  def display_name
+    self.parent ? "#{self.parent.description} > #{self.name} #{self.description}" : "#{self.name} #{self.description}"
+  end
 end

@@ -365,6 +365,26 @@ class Citation < ApplicationRecord
     }
   end
 
+  def author_and_year(options = {})
+    return pub_year_with_punctuation.to_s if authors.empty?
+
+    if options[:long]
+      author_and_pub_year_string(author_string)
+    else
+      author_and_pub_year_string(short_author_string)
+    end
+  end
+
+  def volume_and_page
+    if volume.blank?
+      doi_citation_part(doi)
+    elsif page_numbers.blank?
+      "#{volume}."
+    else
+      "#{volume}:#{page_numbers}."
+    end
+  end
+
   private
 
   def bibtex_type
@@ -380,16 +400,6 @@ class Citation < ApplicationRecord
       "\n%B #{publication}" + "\n%I #{publisher}" + "\n%C #{address}"
     else
       publication.present? ? "\n%J #{publication}" : ''
-    end
-  end
-
-  def volume_and_page
-    if volume.blank?
-      doi_citation_part(doi)
-    elsif page_numbers.blank?
-      "#{volume}."
-    else
-      "#{volume}:#{page_numbers}."
     end
   end
 
@@ -477,16 +487,6 @@ class Citation < ApplicationRecord
 
   def pub_year_with_punctuation
     pub_year ?  "#{pub_year}." : ''
-  end
-
-  def author_and_year(options = {})
-    return pub_year_with_punctuation.to_s if authors.empty?
-
-    if options[:long]
-      author_and_pub_year_string(author_string)
-    else
-      author_and_pub_year_string(short_author_string)
-    end
   end
 
   def author_and_pub_year_string(author_string)

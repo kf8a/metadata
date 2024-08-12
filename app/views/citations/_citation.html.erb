@@ -15,7 +15,7 @@
     <% end %>
     <% cache(citation, action: 'index') do %>
       <div>
-        <p><%=citation.formatted(long: true) %>
+        <p><%=citation.author_and_year(long: true) %><em><%= citation.title %></em>. <%= citation.publication %> <%= citation.volume_and_page %>,
       <% if citation.doi.present? %>
         <span> <em>DOI: <%= link_to citation.doi, normalize_doi(citation.doi) %></em></span>
       <% end %>
