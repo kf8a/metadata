@@ -1,8 +1,8 @@
 <% if @treatment %>
   <% content_for :head do %>
-    <title>Publications for <%= @treatment.study.name %> <%= @treatment.name %> - <%= @treatment.description %></title>
+    <title>Publications for the <%= @treatment.name %></title>
   <% end %>
-  <h1>Publications for <%= @treatment.study.name %> <%= @treatment.name %> - <%= @treatment.description %></h1>
+  <h1>Publications for the <%= @treatment.display_name %></h1>
 <% else %>
   <% content_for :head do %>
     <title>KBS LTER, GLBRC and LTAR Publications</title>

@@ -21,7 +21,7 @@ class CitationsController < ApplicationController
     if params[:treatment]
       @treatment = Treatment.find(params[:treatment].to_i)
       @study = @treatment.study
-      @treatment = nil unless @study.citation_treatments?
+#      @treatment = nil unless @study.citation_treatments?
       citations = [Citation.from_website(website.id).by_treatment(params[:treatment])]
     end
 
