@@ -1,7 +1,7 @@
 <ul>
   <li class='person-name'><%= person.given_name %> <%= person.middle_name %>  <%= person.sur_name %></li>
-  <% if person.lter_roles.present? -%>
-    <li class='person_title'><%= person.lter_roles[0].name.singularize %></li>
+  <% if person.lter_affiliations.present? -%>
+    <li class='person_title'><%= person.lter_affiliations[0].name.singularize %></li>
   <% end -%>
   <% if person.email.present? -%>
     <li class='person-email'><%= contact_link(person.email) %></li>
