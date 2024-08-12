@@ -26,7 +26,7 @@ class Person < ApplicationRecord
   scope :by_sur_name_asc, -> { order 'sur_name ASC' }
 
   def only_emeritus?
-    lter_roles.all?(&:emeritus?)
+    lter_affiliations.all?(&:emeritus?)
   end
 
   def no_current_lno_role?
