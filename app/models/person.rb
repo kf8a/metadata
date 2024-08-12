@@ -3,7 +3,7 @@
 # Represents a person in the system
 class Person < ApplicationRecord
   has_many :affiliations, dependent: :destroy
-  has_many :lter_affiliations, -> { where(['role_type_id = ?', RoleType.find_by(name: 'lter')]) },
+  has_many :lter_roles, -> { where(['role_type_id = ?', RoleType.find_by(name: 'lter')]) },
            source: :role, through: :affiliations
   has_many :lno_roles, -> { where(['role_type_id = ?', RoleType.find_by(name: 'lno')]) },
            source: :role, through: :affiliations
@@ -20,13 +20,13 @@ class Person < ApplicationRecord
   has_many :datatables, through: :data_contributions
 
   accepts_nested_attributes_for :affiliations, allow_destroy: true
-  accepts_nested_attributes_for :lter_affiliations, allow_destroy: true
+  accepts_nested_attributes_for :lter_roles, allow_destroy: true
 
   scope :by_sur_name, -> { order 'sur_name' }
   scope :by_sur_name_asc, -> { order 'sur_name ASC' }
 
   def only_emeritus?
-    lter_affiliations.all?(&:emeritus?)
+    lter_roles.all?(&:emeritus?)
   end
 
   def no_current_lno_role?
