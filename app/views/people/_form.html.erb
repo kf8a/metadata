@@ -17,7 +17,7 @@
     <%= f.input :street_address %>
     <%= f.input :city %>
     <%= f.input :locale %>
-    <%= f.input :country, as: :custom_country, priority_countries: ["US", "GB", "AU"]   %>
+    <%= f.input :country, as: :custom_country, priority_countries: ["AU", "GB", "US"], include_blank: true   %>
     <%= f.input :postal_code %>
     <%= f.input :phone, :label => 'Phone Number' %>
     <%= f.input :fax, :label  => 'Fax Number' %>
@@ -28,7 +28,7 @@
 
 <div class='row clear'>
 <table id='affiliations'>
-  <%= f.semantic_fields_for :affiliations do |builder| %>
+  <%= f.semantic_fields_for :lter_affilications do |builder| %>
     <%= render 'affiliation_fields', f: builder %>
   <% end%>
 </table>
