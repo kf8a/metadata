@@ -19,9 +19,6 @@
       <% if citation.doi.present? %>
         <span> <em>DOI: <%= link_to citation.doi, normalize_doi(citation.doi) %></em></span>
       <% end %>
-      <% if citation.has_lter_acknowledgement == true %>
-        <span class="lterack">LTER</span>
-      <% end %>
         </p>
         <div>
           <div class="citation-footer">
@@ -64,7 +61,10 @@
             <% if citation.doi.present? %>
                 <span>&nbsp;(<%=normalize_doi(citation.doi)%>)</span>
               <% else %>
-              <span>&nbsp;(<%= "https://lter.kbs.msu.edu/pub/#{citation.id}" %>)</span>
+              <span>&nbsp;<%= "https://lter.kbs.msu.edu/pub/#{citation.id}" %></span>
+            <% end %>
+            <% if citation.has_lter_acknowledgement == true %>
+              <span class="lterack">LTER</span>
             <% end %>
           </div>
         </div>
