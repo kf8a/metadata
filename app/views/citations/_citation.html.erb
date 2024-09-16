@@ -19,6 +19,9 @@
       <% if citation.doi.present? %>
         <span> <em>DOI: <%= link_to citation.doi, normalize_doi(citation.doi) %></em></span>
       <% end %>
+      <% if citation.has_lter_acknowledgement == true %>
+        <span class="lterack">LTER</span>
+      <% end %>
         </p>
         <div>
           <div class="citation-footer">
