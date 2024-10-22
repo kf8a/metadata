@@ -9,7 +9,7 @@ gem 'commonmarker'
 gem 'activerecord-session_store'
 gem 'responders'
 
-gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootsnap', require: false
 
 gem 'acts-as-taggable-on'
 gem 'devise'
@@ -26,6 +26,17 @@ gem 'country_select', '~> 9.0'
 gem 'awesome_nested_set'
 
 gem 'jquery-rails'
+# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
+gem "importmap-rails"
+
+# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+gem "turbo-rails"
+
+# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+gem "stimulus-rails"
+
+# Build JSON APIs with ease [https://github.com/rails/jbuilder]
+# gem "jbuilder"
 
 gem 'workflow'
 gem 'workflow-activerecord'
@@ -62,7 +73,7 @@ gem 'sass-rails', '>= 5'
 # gem 'uglifier'
 
 gem 'prometheus-client'
-gem 'web-console', group: :development
+# gem 'web-console', group: :development
 
 gem 'faraday'
 
@@ -78,14 +89,14 @@ group :development do
   gem 'bcrypt_pbkdf'
   gem 'capistrano', require: false
   gem 'capistrano3-puma', github: "seuros/capistrano-puma"
-  # gem 'capistrano3-unicorn'
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails'
   gem 'capistrano-asdf'
   gem 'ed25519'
 
   gem 'listen'
-  gem 'railroady'
+  # gem 'railroady'
+  gem 'rails-erd'
   gem 'rbnacl'
   gem 'rbnacl-libsodium'
   gem 'rubocop', require: false
@@ -111,4 +122,4 @@ group :test do
   gem 'database_cleaner'
 end
 
-# gem "tailwindcss-rails", "~> 2.6"
+# gem "tailwindcss-rails"
