@@ -201,6 +201,7 @@ class DatasetsController < ApplicationController
       :sponsor_id,
       :website_id,
       :keyword_list,
+      :files,
       # affiliations_attributes: [], dataset_files_attributes: %i[name data _destroy id]
     )
   end
