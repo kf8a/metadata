@@ -121,9 +121,6 @@ class DatasetsController < ApplicationController
   def update
 
     if dataset.update(dataset_params)
-      params[:files].each do |file|
-        dataset.dataset_files.create(data: file)
-      end
 
       puts 'Dataset was successfully updated.'
       flash[:notice] = 'Dataset was successfully updated.'
@@ -201,7 +198,7 @@ class DatasetsController < ApplicationController
       :sponsor_id,
       :website_id,
       :keyword_list,
-      :files,
+      files: [],
       # affiliations_attributes: [], dataset_files_attributes: %i[name data _destroy id]
     )
   end
