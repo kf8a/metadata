@@ -11,7 +11,7 @@ class EmlDatasetBuilder
     @dataset = dataset
   end
 
-  def to_eml
+  def to_eml(file_integrity_check: true)
     @eml = ::Builder::XmlMarkup.new
     @eml.instruct! :xml, version: '1.0'
 
@@ -26,7 +26,7 @@ class EmlDatasetBuilder
       'system' => 'KBS LTER'
     ) do
       eml_access
-      eml_dataset
+      eml_dataset(file_integrity_check: file_integrity_check)
       eml_custom_unit_list if dataset.custom_units.present?
     end
   end
@@ -110,7 +110,7 @@ class EmlDatasetBuilder
     )
   end
 
-  def eml_dataset
+  def eml_dataset(file_integrity_check)
     @eml.dataset do
       eml_resource_group
       contact_info
@@ -118,9 +118,11 @@ class EmlDatasetBuilder
       eml_methods
       eml_project if dataset.project
       dataset.datatables.each do |table|
-        table.to_eml(@eml) if table.on_web && table.valid_for_eml? && !table.is_restricted
+        if table.on_web && table.valid_for_eml? && !table.is_restricted
+          EmlDatatableBuilder.new(table).build(@eml)
+        end
       end
-      eml_files
+      eml_files(file_integrity_check)
       eml_useage_citation if dataset.has_citations?
     end
   end
@@ -137,14 +139,19 @@ class EmlDatasetBuilder
     end
   end
 
-  def eml_files
+  def eml_files(file_integrity_check)
     return unless dataset.files.attached?
 
     dataset.files.each do |file|
+      # download the file into a temp file and compute the md5sum
+      checksum, size = compute_file_integrity_check(file) if file_integrity_check
+
       @eml.otherEntity do
         @eml.entityName file.filename
         @eml.physical do
           @eml.objectName file.filename
+          @eml.size size if size
+          @eml.authentication checksum if checksum
           @eml.dataFormat { @eml.externallyDefinedFormat { @eml.formatName file.filename.extension } }
           @eml.distribution {
             @eml.online {
@@ -155,6 +162,23 @@ class EmlDatasetBuilder
         @eml.entityType 'File'
       end
     end
+  end
+
+  def compute_file_integrity_check(file)
+    url = Rails.application.routes.url_helpers.rails_blob_url(file, host: 'lter.kbs.msu.edu', protocol: 'https')
+    response = Faraday.get(url)
+    p "url: #{url}"
+    p "response: #{response.status}"
+    return [nil, nil] if response.status != 200
+
+    p "computing checksum for #{url}"
+    temp_file = Tempfile.new
+    temp_file.write(response)
+    temp_file.rewind
+    checksum = Digest::SHA256.hexdigest(temp_file.read)
+    size = file.download.size
+    temp_file.close
+    [checksum, size]
   end
 
   def eml_project

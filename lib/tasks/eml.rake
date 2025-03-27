@@ -11,7 +11,7 @@ namespace :eml do
       begin
         dataset = Dataset.find(dataset_id)
         builder = EmlDatasetBuilder.new(dataset)
-        eml_output = builder.to_eml
+        eml_output = builder.to_eml(file_integrity_check: true)
 
         puts eml_output
       rescue ActiveRecord::RecordNotFound
