@@ -9,17 +9,15 @@ namespace :eml do
       end
 
       begin
-        dataset = Dataset.find(dataset_id)
-        builder = EmlDatasetBuilder.new(dataset)
-        eml_output = builder.to_eml(file_integrity_check: true)
-
-        puts eml_output
-      rescue ActiveRecord::RecordNotFound
-        warn "Dataset with ID #{dataset_id} not found"
-        exit 1
-      rescue => e
-        warn "Error generating EML: #{e.message}"
-        warn e.backtrace
+        url = "https://lter.kbs.msu.edu/datasets/#{dataset_id}.eml"
+        response= Faraday.get(url)
+        if response.status == 200
+          EmlFileIntegrity.generate(response.body)
+        else
+          puts "Error: #{response.status} #{response.body}"
+        end
+      rescue Faraday::ConnectionFailed => e
+        puts "Error: #{e.message}"
         exit 1
       end
     end

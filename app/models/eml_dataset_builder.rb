@@ -11,7 +11,7 @@ class EmlDatasetBuilder
     @dataset = dataset
   end
 
-  def to_eml(file_integrity_check: true)
+  def to_eml()
     @eml = ::Builder::XmlMarkup.new
     @eml.instruct! :xml, version: '1.0'
 
@@ -26,7 +26,7 @@ class EmlDatasetBuilder
       'system' => 'KBS LTER'
     ) do
       eml_access
-      eml_dataset(file_integrity_check: file_integrity_check)
+      eml_dataset()
       eml_custom_unit_list if dataset.custom_units.present?
     end
   end
@@ -110,7 +110,7 @@ class EmlDatasetBuilder
     )
   end
 
-  def eml_dataset(file_integrity_check)
+  def eml_dataset()
     @eml.dataset do
       eml_resource_group
       contact_info
@@ -122,7 +122,7 @@ class EmlDatasetBuilder
           EmlDatatableBuilder.new(table).build(@eml)
         end
       end
-      eml_files(file_integrity_check)
+      eml_files()
       eml_useage_citation if dataset.has_citations?
     end
   end
@@ -139,19 +139,15 @@ class EmlDatasetBuilder
     end
   end
 
-  def eml_files(file_integrity_check)
+  def eml_files()
     return unless dataset.files.attached?
 
     dataset.files.each do |file|
       # download the file into a temp file and compute the md5sum
-      checksum, size = compute_file_integrity_check(file) if file_integrity_check
-
       @eml.otherEntity do
         @eml.entityName file.filename
         @eml.physical do
           @eml.objectName file.filename
-          @eml.size size if size
-          @eml.authentication checksum if checksum
           @eml.dataFormat { @eml.externallyDefinedFormat { @eml.formatName file.filename.extension } }
           @eml.distribution {
             @eml.online {

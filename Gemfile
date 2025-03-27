@@ -76,6 +76,7 @@ gem 'prometheus-client'
 # gem 'web-console', group: :development
 
 gem 'faraday'
+gem 'faraday-follow_redirects'
 
 # gem 'omniauth'
 gem 'omniauth-glbrc', git: "git@github.com:kf8a/omniauth-glbrc.git"
