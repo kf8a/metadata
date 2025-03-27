@@ -147,6 +147,13 @@
         </td>
         <td class='space-after'>
           <%= variate.description %>
+          <% if variate.enumerated_values.any? %>
+            <ul>
+              <% variate.enumerated_values.each do |enumerated_value| %>
+                <li><%= enumerated_value.code %> - <%= enumerated_value.description %></li>
+              <% end %>
+            </ul>
+          <% end %>
         </td>
         <td>
           <%= variate.unit.human_name if variate.unit %>
