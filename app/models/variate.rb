@@ -8,6 +8,7 @@ class Variate < ApplicationRecord
   include REXML
   belongs_to :datatable, touch: true, optional: true
   belongs_to :unit, optional: true
+  has_many :ordinal_values, dependent: :destroy
 
   scope :valid_for_eml, -> { where("measurement_scale != '' AND description != ''") }
 
@@ -42,6 +43,7 @@ class Variate < ApplicationRecord
     when 'ratio' then eml_ratio
     when 'ordinal' then nil
     when 'nominal'then eml_nominal
+    when 'nonNumeric' then eml_non_numeric
     when 'dateTime' then eml_date_time
     end
   end
@@ -72,9 +74,20 @@ class Variate < ApplicationRecord
 
   def eml_nominal
     @eml.nonNumericDomain do
-      @eml.textDomain do
-        @eml.definition description
+      if ordinal_values.any?
+        @eml.enumeratedDomain do
+            ordinal_values.each do |ordinal_value|
+          @eml.codeDefinition do
+              @eml.code ordinal_value.code
+              @eml.definition ordinal_value.description
+            end
+          end
+        end
+      else
+        @eml.textDomain do
+          @eml.definition description
       end
+    end
     end
   end
 

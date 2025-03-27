@@ -146,7 +146,11 @@ class EmlDatasetBuilder
         @eml.physical do
           @eml.objectName file.name
           @eml.dataFormat { @eml.externallyDefinedFormat { @eml.formatName 'csv' } }
-          @eml.distribution { @eml.online { @eml.url Rails.application.routes.url_helpers.rails_blob_path(file) } }
+          @eml.distribution {
+            @eml.online {
+              @eml.url Rails.application.routes.url_helpers.rails_blob_url(file, host: 'lter.kbs.msu.edu', protocol: 'https')
+               }
+              }
         end
         @eml.entityType 'File'
       end
