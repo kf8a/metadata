@@ -330,19 +330,7 @@ class Datatable < ApplicationRecord
   end
 
   def to_eml(xml = ::Builder::XmlMarkup.new)
-    @eml = xml
-    @eml.dataTable do
-      @eml.alternateIdentifier datatable_id, system: 'lter.kbs.msu.edu'
-      @eml.entityName "Kellogg Biological Station LTER: #{title} (#{name})"
-      if description
-        full_sanitizer = Rails::HTML5::FullSanitizer.new
-        text = full_sanitizer.sanitize(description)
-        @eml.entityDescription EML.text_sanitize(text) unless text.strip.empty?
-      end
-      #      eml_protocols if non_dataset_protocols.present?
-      eml_physical
-      eml_attributes
-    end
+    EmlDatatableBuilder.new(self).build(xml)
   end
 
   def variate_names
@@ -604,62 +592,6 @@ class Datatable < ApplicationRecord
       [min.to_date, max.to_date]
     elsif min.is_a?(Date)
       [min, max]
-    end
-  end
-
-  def eml_protocols
-    # @eml.methods do
-    #   non_dataset_protocols.each { |protocol| protocol.to_eml_ref(@eml) }
-    # end
-  end
-
-  def eml_data_format
-    @eml.dataFormat do
-      @eml.textFormat do
-        @eml.numHeaderLines number_of_header_lines.to_s
-        @eml.numFooterLines 1
-        @eml.recordDelimiter '\n'
-        @eml.attributeOrientation 'column'
-        eml_simple_field
-      end
-    end
-  end
-
-  def eml_simple_field
-    @eml.simpleDelimited do
-      @eml.fieldDelimiter ','
-      @eml.collapseDelimiters 'no'
-      @eml.quoteCharacter '"'
-      @eml.literalCharacter '\\'
-    end
-  end
-
-  def eml_physical
-    @eml.physical do
-      @eml.objectName "#{title.strip.squeeze.tr(' ', '+')}.csv"
-      @eml.encodingMethod 'None'
-      eml_data_format
-      eml_distribution
-    end
-  end
-
-  def eml_distribution
-    @eml.distribution do
-      @eml.online do
-        if is_sql
-          @eml.url "https://#{dataset.url}/datatables/#{id}.csv"
-        else
-          @eml.url data_url
-        end
-      end
-    end
-  end
-
-  def eml_attributes
-    @eml.attributeList do
-      valid_variates.each do |variate|
-        variate.to_eml(@eml)
-      end
     end
   end
 end
