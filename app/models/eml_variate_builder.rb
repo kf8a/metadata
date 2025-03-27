@@ -68,12 +68,12 @@ class EmlVariateBuilder
 
   def eml_nominal
     @eml.nonNumericDomain do
-      if @variate.ordinal_values.any?
+      if @variate.enumerated_values.any?
         @eml.enumeratedDomain do
-          @variate.ordinal_values.each do |ordinal_value|
+          @variate.enumerated_values.each do |enumerated_value|
             @eml.codeDefinition do
-              @eml.code ordinal_value.code
-              @eml.definition ordinal_value.description
+              @eml.code enumerated_value.code
+              @eml.definition enumerated_value.description
             end
           end
         end

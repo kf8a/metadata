@@ -7,7 +7,7 @@ require 'rexml/document'
 class Variate < ApplicationRecord
   belongs_to :datatable, touch: true, optional: true
   belongs_to :unit, optional: true
-  has_many :ordinal_values, dependent: :destroy
+  has_many :enumerated_values, dependent: :destroy
 
   scope :valid_for_eml, -> { where("measurement_scale != '' AND description != ''") }
 

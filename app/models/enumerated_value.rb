@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class OrdinalValue < ApplicationRecord
+class EnumeratedValue < ApplicationRecord
     belongs_to :variate
 end
