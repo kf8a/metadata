@@ -160,23 +160,6 @@ class EmlDatasetBuilder
     end
   end
 
-  def compute_file_integrity_check(file)
-    url = Rails.application.routes.url_helpers.rails_blob_url(file, host: 'lter.kbs.msu.edu', protocol: 'https')
-    response = Faraday.get(url)
-    p "url: #{url}"
-    p "response: #{response.status}"
-    return [nil, nil] if response.status != 200
-
-    p "computing checksum for #{url}"
-    temp_file = Tempfile.new
-    temp_file.write(response)
-    temp_file.rewind
-    checksum = Digest::SHA256.hexdigest(temp_file.read)
-    size = file.download.size
-    temp_file.close
-    [checksum, size]
-  end
-
   def eml_project
     @eml.project do
       @eml.title dataset.project.title
@@ -265,7 +248,8 @@ class EmlDatasetBuilder
       role_name = role.try(:name)
       next if ['investigator', 'lead investigator'].include?(role_name)
 
-      person.to_eml(@eml, role_name)
+      # person.to_eml(@eml, role_name)
+      builder = EmlPersonBuilder.new(person).to_eml(@eml, role_name)
     end
   end
 

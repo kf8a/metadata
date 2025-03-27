@@ -72,7 +72,8 @@ class EmlDatatableBuilder
     def build_attributes
       @eml.attributeList do
         @datatable.valid_variates.each do |variate|
-          variate.to_eml(@eml)
+          EmlVariateBuilder.new(variate).build(@eml)
+          # variate.to_eml(@eml)
         end
       end
     end
