@@ -12,15 +12,24 @@ class Treatment < ApplicationRecord
   scope :with_tree_order, -> {order(:lft)}
 
   def self.select_options
-    Treatment.all.map { |t| ["#{t.name} #{t.description}", t.id] }
+    Treatment.all.map { |t| option_for(t)}
   end
 
   def self.select_options_by_use_in_citations
-    Treatment.by_use_in_citations.map { |t| ["#{t.name} #{t.description}", t.id] }
+    Treatment.by_use_in_citations.map { |t| option_for(t)}
   end
 
   def self.select_options_by_study(study_id)
-    Treatment.where(study_id: study_id).map { |t| ["#{t.name} #{t.description}", t.id] }
+    Treatment.where(study_id: study_id).map { |t| option_for(t)}
+  end
+
+  def self.option_for(treatment)
+    display_name = if treatment.name == treatment.description
+        treatment.name
+      else
+        "#{treatment.name} #{treatment.description}"
+      end
+      [display_name, treatment.id]
   end
 
   def has_citations?
