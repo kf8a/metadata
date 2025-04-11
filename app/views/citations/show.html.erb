@@ -50,7 +50,12 @@
         <p>Associated Datatables: </p>
         <ol>
           <% @citation.datatables.each do |datatable| %>
-            <li><%= link_to datatable.title, datatable %></li>
+            <!-- The link to the datatable depends on website that is hosting the datatable -->
+            <% if datatable.dataset.website.name == 'glbrc' %>
+              <li><%= link_to datatable.title, "https://data.sustainability.msu.edu/dataset/#{datatable.dataset.id}" %></li>
+            <% else %>
+              <li><%= link_to datatable.title, datatable %></li>
+            <% end %>
           <% end %>
         </ol>
       <% end %>
