@@ -51,7 +51,11 @@
         <ol>
           <% @citation.datatables.each do |datatable| %>
             <!-- The link to the datatable depends on website that is hosting the datatable -->
+            <% if datatable.website.name == 'glbrc' %>
               <li><%= link_to datatable.title, "#{datatable.webisite.url}/datatables/#{datatable.id}" %></li>
+            <% else %>
+              <li><%= link_to datatable.title, datatable %></li>
+            <% end %>
           <% end %>
         </ol>
       <% end %>
