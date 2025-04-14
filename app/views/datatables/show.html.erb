@@ -2,7 +2,7 @@
   <script type="application/ld+json">
     <%= raw datatable.ld_json.to_json %>
   </script>
-  <title>KBS LTER Datatable - <%= datatable.title %></title>
+  <title>KBS <%= @subdomain_request.upcase %> Datatable - <%= datatable.title %></title>
 <% end %>
 <% cache([datatable, datatable.dataset]) do %>
   <%= render 'shared/breadcrumbs',
