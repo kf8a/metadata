@@ -36,7 +36,7 @@ class EmlVariateBuilder
     case measurement_scale
     when 'interval' then eml_interval
     when 'ratio' then eml_ratio
-    when 'ordinal' then nil
+    when 'ordinal' then eml_ordinal
     when 'nominal'then eml_nominal
     when 'dateTime' then eml_date_time
     end
@@ -80,6 +80,19 @@ class EmlVariateBuilder
       else
         @eml.textDomain do
           @eml.definition @variate.description
+        end
+      end
+    end
+  end
+
+  def eml_ordinal
+    @eml.nonNumericDomain do
+      @eml.enumeratedDomain do
+        @variate.enumerated_values.each do |enumerated_value|
+          @eml.codeDefinition do
+            @eml.code enumerated_value.code
+            @eml.definition enumerated_value.description
+          end
         end
       end
     end
