@@ -87,6 +87,7 @@ gem 'omniauth-rails_csrf_protection'
 
 group :development do
   gem 'awesome_print'
+  gem "tidewave"
   gem 'bcrypt_pbkdf'
   gem 'capistrano', require: false
   gem 'capistrano3-puma', github: "seuros/capistrano-puma"
@@ -96,7 +97,6 @@ group :development do
   gem 'ed25519'
 
   gem 'listen'
-  # gem 'railroady'
   gem 'rails-erd'
   gem 'rbnacl'
   gem 'rbnacl-libsodium'
