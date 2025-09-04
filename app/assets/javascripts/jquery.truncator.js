@@ -2,15 +2,15 @@
 // by Henrik Nyh <http://henrik.nyh.se> 2008-02-28.
 // Free to modify and redistribute with credit.
 
-(function($) {
+(function ($) {
 
   var trailing_whitespace = true;
 
-  $.fn.truncate = function(options) {
+  $.fn.truncate = function (options) {
 
     var opts = $.extend({}, $.fn.truncate.defaults, options);
-    
-    $(this).each(function() {
+
+    $(this).each(function () {
 
       var content_length = $.trim(squeeze($(this).text())).length;
       if (content_length <= opts.max_length)
@@ -22,13 +22,13 @@
 
       truncated_node.insertAfter(full_node);
 
-      findNodeForMore(truncated_node).append(' (<a href="#show more content">'+opts.more+'</a>)');
-      findNodeForLess(full_node).append(' (<a href="#show less content">'+opts.less+'</a>)');
+      findNodeForMore(truncated_node).append(' (<a href="#show more content">' + '...more' + '</a>)');
+      findNodeForLess(full_node).append(' (<a href="#show less content">' + ' less' + '</a>)');
 
-      truncated_node.find('a:last').click(function() {
+      truncated_node.find('a:last').click(function () {
         truncated_node.hide(); full_node.show(); return false;
       });
-      full_node.find('a:last').click(function() {
+      full_node.find('a:last').click(function () {
         truncated_node.show(); full_node.hide(); return false;
       });
 
@@ -51,7 +51,7 @@
     var node = $(node);
     var new_node = node.clone().empty();
     var truncatedChild;
-    node.contents().each(function() {
+    node.contents().each(function () {
       var remaining_length = max_length - new_node.text().length;
       if (remaining_length == 0) return;  // breaks the loop
       truncatedChild = recursivelyTruncate(this, remaining_length);
@@ -76,14 +76,14 @@
   function squeeze(string) {
     return string.replace(/\s+/g, ' ');
   }
-  
+
   // Finds the last, innermost block-level element
   function findNodeForMore(node) {
     var $node = $(node);
     var last_child = $node.children(":last");
     if (!last_child) return node;
     var display = last_child.css('display');
-    if (!display || display=='inline') return $node;
+    if (!display || display == 'inline') return $node;
     return findNodeForMore(last_child);
   };
 
