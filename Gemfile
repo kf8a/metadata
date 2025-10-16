@@ -68,6 +68,7 @@ group :production, :staging do
   gem 'exception_notification'
 end
 
+gem 'csv'
 gem 'sass-rails', '>= 5'
 # gem 'therubyracer', require: false
 # gem 'uglifier'
