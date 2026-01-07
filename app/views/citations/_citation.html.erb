@@ -15,7 +15,7 @@
     <% end %>
     <% cache(citation, action: 'index') do %>
       <div>
-       <p><%= citation.author_and_year(long: true) %><em><%= citation.title %></em>.
+       <p><%= citation.author_and_year(long: true) %><em> <%= citation.title %></em>.
        <% if citation.series_title.present? %> <%= citation.series_title %>, <% end %>
        <%= citation.publication %> <%= citation.volume_and_page %>
        <%= citation.publisher %> <%= citation.city %>
