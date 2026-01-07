@@ -18,8 +18,8 @@ gem 'nokogiri'
 
 gem "sprockets-rails"
 
-gem 'pg'
 gem 'country_select', '~> 9.0'
+gem 'pg'
 
 # gem 'doi', :git => 'git://github.com/kf8a/doi.git'
 
@@ -46,7 +46,10 @@ gem 'parslet'
 # for creating bibtex formatted citations
 gem 'bibtex-ruby'
 
+gem "connection_pool", "<3.0"
 gem 'dalli'
+
+gem 'ostruct'
 
 gem 'has_scope' # , '<0.6'
 
@@ -70,8 +73,6 @@ end
 
 gem 'csv'
 gem 'sass-rails', '>= 5'
-# gem 'therubyracer', require: false
-# gem 'uglifier'
 
 gem 'prometheus-client'
 # gem 'web-console', group: :development
@@ -90,7 +91,7 @@ group :development do
   gem 'bcrypt_pbkdf'
   gem 'capistrano', require: false
   gem 'capistrano3-puma' # , github: "seuros/capistrano-puma"
-  gem 'capistrano-asdf' #, github: "codeur/capistrano-asdf"
+  gem 'capistrano-asdf' # , github: "codeur/capistrano-asdf"
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails'
   gem 'ed25519'
