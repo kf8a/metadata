@@ -85,16 +85,14 @@ gem 'omniauth-glbrc', git: "git@github.com:kf8a/omniauth-glbrc.git"
 # gem 'omniauth-glbrc', path: "../omniauth-glbrc"
 gem 'omniauth-rails_csrf_protection'
 
-
 group :development do
   gem 'awesome_print'
-  gem "tidewave"
   gem 'bcrypt_pbkdf'
   gem 'capistrano', require: false
-  gem 'capistrano3-puma', github: "seuros/capistrano-puma"
+  gem 'capistrano3-puma' # , github: "seuros/capistrano-puma"
+  gem 'capistrano-asdf' #, github: "codeur/capistrano-asdf"
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails'
-  gem 'capistrano-asdf'
   gem 'ed25519'
 
   gem 'listen'
@@ -104,6 +102,7 @@ group :development do
   gem 'rubocop', require: false
   gem 'rubocop-rails'
   gem 'rubocop-thread_safety'
+  gem "tidewave"
 end
 
 group :development, :test do
