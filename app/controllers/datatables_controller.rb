@@ -3,6 +3,7 @@
 # Control the display of datatables
 class DatatablesController < ApplicationController
   include StreamFile
+
   helper_method :datatable
 
   before_action :authenticate_user!, except: %i[index show suggest search qc]
@@ -246,7 +247,7 @@ class DatatablesController < ApplicationController
       :study_id,
       :deprecation_notice,
       :update_frequency_days,
-      { protocol_ids: []},
+      { protocol_ids: [] },
       :is_secondary,
       { core_area_ids: [] },
       {
