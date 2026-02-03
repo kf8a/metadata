@@ -7,6 +7,7 @@ require 'eml'
 # it represents a table of data generally a view in the database
 class Datatable < ApplicationRecord
   include GenerateCsvData
+
   attr_accessor :materialized_datatable_id
 
   acts_as_taggable_on :keywords
@@ -76,7 +77,7 @@ class Datatable < ApplicationRecord
     new_datatable.dataset = dataset
     new_datatable.title = "#{title}-copy"
     datatable_number = dataset.datatables.count + 1
-    new_datatable.name = "#{dataset.dataset}-#{"%03d" % datatable_number}"
+    new_datatable.name = "#{dataset.dataset}-#{'%03d' % datatable_number}"
     new_datatable.on_web = false
     new_datatable
   end
@@ -124,12 +125,16 @@ class Datatable < ApplicationRecord
       description: short_description,
       url: "https://lter.kbs.msu.edu/datatables/#{id}",
       dateModified: pub_date,
-      creator: personnel.collect { |person, roles| { "@type" => "Person", name: person.full_name, affiliation: person.organization } },
-      includedInDataCatalog: { "@type" => "DataCatalog", name: "KBS LTER Datatable Catalog", url: "https://lter.kbs.msu.edu/datatables" },
+      creator: personnel.collect do |person, roles|
+        { "@type" => "Person", name: person.full_name, affiliation: person.organization }
+      end,
+      includedInDataCatalog: { "@type" => "DataCatalog", name: "KBS LTER Datatable Catalog",
+                               url: "https://lter.kbs.msu.edu/datatables" },
       keywords: keyword_names,
       license: "https://lter.kbs.msu.edu/data/terms-of-use/",
-      variableMeasured: variates.collect { |variate| { "@type" => "Property", name: variate.name, description: variate.description } }
-    }
+      variableMeasured: variates.collect do |variate|
+        { "@type" => "Property", name: variate.name, description: variate.description }
+      end }
   end
 
   def pub_date
@@ -165,7 +170,7 @@ class Datatable < ApplicationRecord
       if personnel[contribution.person]
         personnel[contribution.person].push(contribution.role.try(:name))
       else
-        personnel[contribution.person] = [contribution.role.try(:name)].to_a
+        personnel[contribution.person] = [contribution.role.try(:name)]
       end
     end
     personnel
@@ -314,7 +319,7 @@ class Datatable < ApplicationRecord
     return false if completed?
 
     next_expected_update = update_frequency_days.presence || 365
-    expected_update = end_date.year + next_expected_update / 265 + 2
+    expected_update = end_date.year + (next_expected_update / 265) + 2
     expected_update > Time.zone.now.year
   end
 
@@ -406,14 +411,14 @@ class Datatable < ApplicationRecord
 
   def insert_comment_chars(comment)
     comment = maybe_append_line_ending(comment)
-    comment.gsub(/^/, '#').gsub(/\r\n?/,"\n")
+    comment.gsub(/^/, '#').gsub(/\r\n?/, "\n")
   end
 
   def maybe_append_line_ending(comment)
-    if comment[-1] != "\n"
-      comment + "\n"
-    else
+    if comment[-1] == "\n"
       comment
+    else
+      comment + "\n"
     end
   end
 
@@ -429,7 +434,7 @@ class Datatable < ApplicationRecord
 
   def database_date_field
     values = ActiveRecord::Base.connection.execute(object)
-    valid_date_names = %w[sample_date obs_date date datetime harvest_date year]
+    valid_date_names = %w[sample_date obs_date date datetime harvest_date]
     values.fields.find { |field| valid_date_names.include?(field) }
   end
 
@@ -550,7 +555,7 @@ class Datatable < ApplicationRecord
 
   # a datatable should not be superceded by itself
   def supercession_candidates
-    Datatables.where('id <> ?', id).all
+    Datatables.where.not(id: id).all
   end
 
   ## Utilites

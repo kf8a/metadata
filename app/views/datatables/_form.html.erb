@@ -23,12 +23,14 @@
 <% end %>
 
 
-<%= form.inputs name: "Temporal Coverage" do %>
-  <%= form.input :begin_date, :label => 'from:', :end_year => Time.now.year, :start_year => 1887, as: :date_picker %>
-  <%= form.input :end_date, :label => 'to', :end_year => Time.now.year, :start_year => 1887, as: :date_picker  %>
+<%= turbo_frame_tag "temporal_coverage" do %>
+  <%= form.inputs name: "Temporal Coverage" do %>
+    <%= form.input :begin_date, :label => 'from:', :end_year => Time.now.year, :start_year => 1887, as: :date_picker %>
+    <%= form.input :end_date, :label => 'to', :end_year => Time.now.year, :start_year => 1887, as: :date_picker  %>
 <% unless datatable.new_record? %>
-  <%= link_to "Update Temporal Coverage", update_temporal_extent_datatable_path(datatable), :remote => true %>
+    <%= link_to "Update Temporal Coverage", update_temporal_extent_datatable_path(datatable), data: { turbo_frame: "temporal_coverage" } %>
 <% end %>
+  <% end %>
 <% end %>
 
 <%= form.inputs do %>
