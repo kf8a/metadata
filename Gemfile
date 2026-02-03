@@ -91,7 +91,6 @@ group :development do
   gem 'bcrypt_pbkdf'
   gem 'capistrano', require: false
   gem 'capistrano3-puma' # , github: "seuros/capistrano-puma"
-  gem 'capistrano-asdf' # , github: "codeur/capistrano-asdf"
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails'
   gem 'ed25519'

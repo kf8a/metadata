@@ -12,6 +12,8 @@ set :deploy_to, '/var/u/apps/metadata'
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
 
+# Mise uses .tool-versions from the repo; ensure mise is on PATH on the server.
+
 # You can configure the Airbrussh format using :format_options.
 # These are the defaults.
 # set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
@@ -23,11 +25,13 @@ set :deploy_to, '/var/u/apps/metadata'
 
 #
 # Default value for linked_dirs is []
-append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'public/uploads' #, 'config/unicorn'
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'public/uploads'
+
+append :linked_dirs, '.bundle'
 
 # Default value for :linked_files is []
-append :linked_files, 'config/database.yml', 'config/site_keys.rb',
-  'config/secret_token.rb', 'config/storage.yml', 'config/master.key'
+append :linked_files, 'config/database.yml', 'config/site_keys.rb', 'config/secret_token.rb', 'config/storage.yml',
+       'config/master.key'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -36,7 +40,7 @@ append :linked_files, 'config/database.yml', 'config/site_keys.rb',
 # set :local_user, -> { `git config user.name`.chomp }
 
 # Default value for keep_releases is 5
-set :keep_releases, 50
+set :keep_releases, 30
 
 set :keep_assets, 2
 
@@ -56,14 +60,14 @@ after 'deploy', 'thinking_sphinx:configure'
 after 'deploy', 'thinking_sphinx:index'
 after 'deploy', 'thinking_sphinx:start'
 
-before 'deploy:updated', 'thinking_sphinx:stop'
+after 'deploy:updated', 'thinking_sphinx:stop'
 
 namespace :deploy do
   desc 'Run rake yarn install'
   task :yarn_install do
     on roles(:web) do
       within release_path do
-        execute("cd #{release_path} && yarn install --silent --no-progress --no-audit --no-optional")
+        execute("cd #{release_path} && mise exec -- yarn install --silent --no-progress --no-audit --no-optional")
       end
     end
   end
@@ -76,7 +80,7 @@ task :update_asset_server do
     execute 'RAILS_ENV=production rake assets:precompile'
     # run "cd #{current_path} && bundle exec rake assets:precompile RAILS_ENV=production"
     # find_servers_for_task(current_task).each do |_server|
-    execute "rsync -vr --exclude='.DS_Store' public/assets gprpc32.kbs.msu.edu:/var/www/lter/metadata-assets/"
+    execute "rsync -vr --exclude='.DS_Store' public/assets kalkaska.kbs.msu.edu:/var/www/lter/metadata-assets/"
   end
 end
 
