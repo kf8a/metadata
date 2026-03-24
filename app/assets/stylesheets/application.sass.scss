@@ -1,0 +1,16 @@
+// Entry point for your Sass build
+@use 'glbrc' as *;
+@use 'data' as *;
+@use 'score_card' as *;
+@use 'lter_supplemental' as *;
+
+// Use url("...") so Propshaft can rewrite these to digested /assets/... paths.
+// Bare @import 'file.css' is left as-is and the browser requests undigested names → 404 in Propshaft dev.
+@import url('scaffold.css');
+@import url('formtastic.css');
+@import url('formtastic_changes.css');
+@import url('drop_and_drag.css');
+@import url('gsc.css');
+@import url('jquery.comboselect.css');
+@import url('ie7-and-down.css');
+@import url('print.css');

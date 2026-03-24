@@ -19,6 +19,7 @@
           <script src="https://kit.fontawesome.com/760310d83b.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag "application", :media => 'all'%>
     <%= csrf_meta_tag unless response.cache_control[:public] %>
+    <%= javascript_importmap_tags %>
 
     <script async type="text/javascript">
       jQuery(document).ready(function() {
@@ -55,7 +56,6 @@
         </div><!-- end #wrap -->
         <%= render "shared/footer" %>
         <%= render 'layouts/sign_in' %>
-        <%= javascript_include_tag "application" %>
         <script async type='text/javascript' src='/wp-content/themes/genesis/lib/js/menu/superfish.js?ver=1.4.8'></script>
         <script async type='text/javascript' src='/wp-content/themes/genesis/lib/js/menu/superfish.args.js?ver=1.8.1'></script>
         <!-- Google Analytics -->

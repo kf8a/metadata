@@ -1,0 +1,11 @@
+{
+  "name": "app",
+  "private": true,
+  "scripts": {
+    "build": "node -e \"console.log('yarn build: skipped (JavaScript uses importmap; see app/javascript/application.js).')\"",
+    "build:css": "sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css --no-source-map --load-path=app/assets/stylesheets --load-path=node_modules"
+  },
+  "dependencies": {
+    "sass": "^1.98.0"
+  }
+}

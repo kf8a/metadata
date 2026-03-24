@@ -463,7 +463,8 @@
   }
 
   .expand {
-    background: url('/assets/plus_minus.png') no-repeat;
+    // Logical path under app/assets/images (Propshaft rewrites to digested /assets/plus_minus-….png)
+    background: url('plus_minus.png') no-repeat;
     padding-left: 20px;
     text-indent: 16px;
   }

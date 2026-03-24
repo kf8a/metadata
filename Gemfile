@@ -16,8 +16,6 @@ gem 'devise'
 gem 'formtastic'
 gem 'nokogiri'
 
-gem "sprockets-rails"
-
 gem 'country_select', '~> 9.0'
 gem 'pg'
 
@@ -28,6 +26,7 @@ gem 'awesome_nested_set'
 gem 'jquery-rails'
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
+gem 'propshaft'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
@@ -72,7 +71,8 @@ group :production, :staging do
 end
 
 gem 'csv'
-gem 'sass-rails', '>= 5'
+gem 'cssbundling-rails'
+# gem 'sass-rails', '>= 5'
 
 gem 'prometheus-client'
 # gem 'web-console', group: :development
@@ -123,4 +123,4 @@ group :test do
   gem 'database_cleaner'
 end
 
-# gem "tailwindcss-rails"
+gem "tailwindcss-rails"
