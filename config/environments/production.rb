@@ -96,8 +96,8 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  config.action_controller.asset_host = 'https://lter.kbs.msu.edu/metadata-assets/'
-  # config.assets.prefix = '/metadata-assets'
+  config.action_controller.asset_host = 'https://lter.kbs.msu.edu'
+  config.assets.prefix = '/metadata-assets'
 
   config.action_mailer.default_url_options = { host: 'lter.kbs.msu.edu' }
 end
