@@ -70,8 +70,8 @@ group :production, :staging do
   gem 'exception_notification'
 end
 
-gem 'csv'
 gem 'cssbundling-rails'
+gem 'csv'
 # gem 'sass-rails', '>= 5'
 
 gem 'prometheus-client'
@@ -123,4 +123,4 @@ group :test do
   gem 'database_cleaner'
 end
 
-gem "tailwindcss-rails"
+# gem "tailwindcss-rails"
