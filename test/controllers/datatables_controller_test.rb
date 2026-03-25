@@ -35,7 +35,9 @@ class DatatablesControllerTest < ActionController::TestCase
     # we need a mock here so we don't need to start thinking_sphinks.
     context 'GET :search' do
       setup { get :search, params: { keyword_list: 'test' } }
-      should respond_with :success
+
+      should respond_with :redirect
+      should redirect_to('datatables index with keyword') { datatables_path(keyword_list: 'test') }
     end
 
     context 'GET :show' do

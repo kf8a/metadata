@@ -18,23 +18,31 @@ class DatatablesController < ApplicationController
 
   # GET /datatables
   # GET /datatables?public=true
+  # GET /datatables?keyword_list=... (search results; set after POST /datatables/search redirect)
   def index
     @website = website
     @area = params[:area]
     store_location_for(:user, datatables_path)
-    params[:public] ? retrieve_public_datatables('') : retrieve_datatables('')
+    query = params[:keyword_list].to_s
+    params[:public] ? retrieve_public_datatables(query) : retrieve_datatables(query)
 
     respond_with @datatables do |format|
+      format.html { render(@keyword_list.present? ? :search : :index) }
       format.rss { render rss: @datatables }
     end
   end
 
+  # POST /datatables/search — must redirect (Turbo requires non-GET form submissions to redirect).
   def search
-    @website = website
     query = params['keyword_list']
-    redirect_to datatables_url if query.blank?
-
-    params[:public] ? retrieve_public_datatables(query) : retrieve_datatables(query)
+    if query.blank?
+      redirect_to datatables_url
+    else
+      redirect_params = { keyword_list: query }
+      redirect_params[:public] = params[:public] if params[:public].present?
+      redirect_params[:area] = params[:area] if params[:area].present?
+      redirect_to datatables_path(redirect_params)
+    end
   end
 
   # GET /datatables/1
