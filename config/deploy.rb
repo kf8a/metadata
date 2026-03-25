@@ -27,7 +27,7 @@ set :deploy_to, '/var/u/apps/metadata'
 # Default value for linked_dirs is []
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'public/uploads'
 
-append :linked_dirs, '.bundle'
+# append :linked_dirs, '.bundle'
 
 # Default value for :linked_files is []
 append :linked_files, 'config/database.yml', 'config/site_keys.rb', 'config/secret_token.rb', 'config/storage.yml',
@@ -48,11 +48,13 @@ set :puma_init_active_record, true
 
 set :pty, true
 
+# Configuration variables
+set :mise_map_bins, %w[rake ruby bundle gem rails node npm yarn]
+
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
 
 before 'deploy:assets:precompile', 'deploy:yarn_install'
-# after 'deploy:assets:precompile', 'assets:update_asset_server'
 
 after 'deploy:updated', :create_nav
 after 'deploy:updated', :update_asset_server
@@ -63,6 +65,15 @@ after 'deploy', 'thinking_sphinx:start'
 after 'deploy:updated', 'thinking_sphinx:stop'
 
 namespace :deploy do
+  desc 'show ruby version'
+  task :show_ruby_version do
+    on roles(:web) do
+      within release_path do
+        execute("cd #{release_path} && ruby --version")
+        execute("cd #{release_path} && export")
+      end
+    end
+  end
   desc 'Run rake yarn install'
   task :yarn_install do
     on roles(:web) do
@@ -76,11 +87,11 @@ end
 desc 'Precompile assets on local machine and upload them to the server.'
 task :update_asset_server do
   run_locally do
-    execute 'rake assets:clobber'
-    execute 'RAILS_ENV=production rake assets:precompile'
+    execute 'mise exec -- rake assets:clobber'
+    execute 'RAILS_ENV=production mise exec -- rake assets:precompile'
     # run "cd #{current_path} && bundle exec rake assets:precompile RAILS_ENV=production"
     # find_servers_for_task(current_task).each do |_server|
-    execute "rsync -vr --exclude='.DS_Store' public/assets kalkaska.kbs.msu.edu:/var/www/lter/metadata-assets/"
+    execute "rsync -vr --exclude='.DS_Store' public/metadata-assets/* kalkaska.kbs.msu.edu:/var/www/lter/metadata-assets/"
   end
 end
 
@@ -120,3 +131,20 @@ task :update_sitemap do
   run_locally "scp sitemap.xml.gz #{asset_host}:#{asset_path}/rails-sitemap.xml.gz"
   # run "cd #{current_path};bundle exec rake sitemap:refresh RAILS_ENV=production"
 end
+
+
+namespace :mise do
+  task :setup do
+    on roles(:all) do
+      # Configure command map to use mise exec for specified binaries
+      mise_bins = fetch(:mise_map_bins, %w[rake ruby bundle gem rails])
+      mise_bins.each do |bin|
+        SSHKit.config.command_map.prefix[bin.to_sym].clear
+        SSHKit.config.command_map.prefix[bin.to_sym].unshift("mise exec --")
+      end
+    end
+  end
+end
+
+# Hook into the deployment process
+# before 'deploy:starting', 'mise:setup'
