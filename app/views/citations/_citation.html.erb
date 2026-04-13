@@ -1,5 +1,4 @@
-<div id=<%= citation.id %> >
-  <li class='citation'>
+  <li id=<%= citation.id %> class='citation'>
     <% if year < 0 %>
       <% if citation.pub_year.to_i != year  %>
         <% if @study %>
@@ -71,4 +70,3 @@
       </div>
     <% end %>
   </li>
-</div>
