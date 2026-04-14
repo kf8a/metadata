@@ -3,18 +3,18 @@
 <% end %>
 <%= render 'shared/breadcrumbs', :crumbs => [{:name => controller_name.upcase}] %>
   <h2>Experiment Protocols</h2>
-  <ul>
+  <ul class="protocol-list">
   <% @experiment_protocols.each do |protocol| %>
-    <li><%= link_to "#{protocol.title}", protocol_path(protocol) %> </li>
+    <li class="protocol-list-entry"><%= link_to "#{protocol.title}", protocol_path(protocol) %> </li>
   <% end %>
   </ul>
   <% @protocol_themes.each do |theme| %>
     <% next if theme.name == 'experiments' %>
     <% next if @website.protocols.tagged_with(theme).order(:title).where(:active=>true).empty? %>
     <h2><%= theme.name.humanize %></h2>
-    <ul>
+    <ul class="protocol-list">
     <% @website.protocols.tagged_with(theme).order(:title).where(:active=>true).each do | protocol| %>
-      <li>
+      <li class="protocol-list-entry">
       <%=link_to(raw("#{protocol.title}"), protocol_path(protocol)) %>
       </li>
     <% end %>
@@ -24,18 +24,18 @@
   <% if admin? %>
   <br/><hr/>
   <h3>Untagged Protocols</h3>
-  <ul>
+  <ul class="protocol-list">
   <% @untagged_protocols.each do |protocol| %>
-    <li>
+    <li class="protocol-list-entry">
       <%= link_to raw("#{protocol.title}"), protocol_path(protocol) %>
     </li>
   <% end %>
   </ul>
   <br/>
   <h3>Retired Protocols</h3>
-  <ul>
+  <ul class="protocol-list">
   <% @retired_protocols.each do |protocol| %>
-    <li>
+    <li class="protocol-list-entry">
       <%= link_to raw("#{protocol.title}"), protocol_path(protocol) %>
     </li>
   <% end %>
