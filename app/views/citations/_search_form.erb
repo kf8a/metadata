@@ -1,5 +1,7 @@
 <div id='search-form'>
-  <%= form_tag search_citations_path, :method => 'get', :class=>'searchform'%>
-    <%= text_field_tag :q, word, size: 80, placehoder: 'Search...' %>
-    <%= submit_tag "Search all citations" %>
+  <%= form_tag(search_citations_path, method: :get, class: 'searchform') do %>
+    <%= label_tag(:q, 'Search citations', class: 'sr-only') %>
+    <%= text_field_tag(:q, word, size: 80, placeholder: 'Search...') %>
+    <%= submit_tag 'Search all citations' %>
+  <% end %>
 </div>
