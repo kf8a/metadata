@@ -69,9 +69,19 @@ class Datatable < ApplicationRecord
     save
   end
 
+  # Copies variates from another datatable onto this one (in memory).
+  # Returns the newly copied variates. Caller must save the datatable to persist.
+  def copy_variates_from(source_datatable)
+    source_datatable.variates.map do |variate|
+      duped = variate.dup
+      variates << duped
+      duped
+    end
+  end
+
   def clone_into(dataset)
     new_datatable = dup
-    new_datatable.variates = variates.collect(&:dup)
+    new_datatable.copy_variates_from(self)
     new_datatable.protocols = protocols
     new_datatable.people = people
     new_datatable.dataset = dataset
