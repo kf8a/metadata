@@ -2,7 +2,7 @@
   <title>Protocols</title>
 <% end %>
 <%= render 'shared/breadcrumbs', :crumbs => [{:name => controller_name.upcase}] %>
-  <h2>Experiment Protocols</h2>
+  <h1>Experiment Protocols</h1>
   <ul class="protocol-list">
   <% @experiment_protocols.each do |protocol| %>
     <li class="protocol-list-entry"><%= link_to "#{protocol.title}", protocol_path(protocol) %> </li>

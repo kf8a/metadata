@@ -3,7 +3,7 @@
 <% end %>
 <%= render 'shared/breadcrumbs', :crumbs => [{:name => controller_name.upcase}] %>
 <p>categorical <%= link_to 'alphabetical', {:action => :alphabetical} %></p>
-
+<h1>Personnel Directory</h1>
 <% @roles.each do |role| -%>
 	<h2><%= role.name %></h2>
 	<% if role.id == 23 then %>
