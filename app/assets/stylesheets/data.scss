@@ -351,8 +351,9 @@
   }
 
   .protocol-list-entry {
-    margin-top: 0.3em;
-    margin-bottom: 0.3em;
+    margin-bottom: 0.7em;
+    margin-right: 1em;
+    overflow-wrap: break-word;
   }
 
   table.protocols-table {
