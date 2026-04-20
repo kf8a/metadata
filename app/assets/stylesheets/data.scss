@@ -350,6 +350,10 @@
     padding-top: 3px;
   }
 
+  li.study-title a {
+    overflow-wrap: break-word;
+  }
+
   .protocol-list-entry {
     margin-bottom: 0.7em;
     margin-right: 1em;
