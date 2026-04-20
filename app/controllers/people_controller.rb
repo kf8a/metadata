@@ -10,6 +10,8 @@ class PeopleController < ApplicationController
   before_action :authenticate_user!, except: open_actions
   before_action :admin?, except: open_actions
 
+  before_action :require_lter_host!, except: show
+
   # GET /people
   # GET /people.xml
   def index
@@ -37,7 +39,7 @@ class PeopleController < ApplicationController
     roles = role_type.roles
 
     @active = roles.flat_map(&:people).uniq
-    all_lter = Person.where('lno_name is not null').all
+    all_lter = Person.where.not(lno_name: nil).all
     @inactive = all_lter - @active
     respond_to do |format|
       format.html
@@ -56,13 +58,13 @@ class PeopleController < ApplicationController
   # GET /people/new
   def new
     @person = Person.new
-    @roles = lter_roles #+ lno_roles
+    @roles = lter_roles # + lno_roles
   end
 
   # GET /people/1/edit
   def edit
     @title = "Edit #{person.full_name}"
-    @roles = lter_roles #+ lno_roles
+    @roles = lter_roles # + lno_roles
   end
 
   # POST /people
@@ -150,5 +152,12 @@ class PeopleController < ApplicationController
       active.each { |person| csv << person.to_lno_active }
       inactive.each { |person| csv << person.to_lno_inactive }
     end
+  end
+
+  def require_lter_host!
+    return if Rails.env.local? # if you want to allow local dev
+
+    lter_hosts = ["lter.kbs.msu.edu"] # adjust to your real canonical host(s)
+    raise ActionController::RoutingError, "Not Found" unless lter_hosts.include?(request.host.downcase)
   end
 end
