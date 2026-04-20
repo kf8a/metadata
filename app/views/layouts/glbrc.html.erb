@@ -16,7 +16,9 @@
     </div>
     <div id='content'>
       <p style="color: green"><%= flash[:notice] %></p>
-      <%= yield  %>
+      <div class="metadata-yield<%= ' devise' if controller.devise_controller? %>">
+        <%= yield  %>
+      </div>
     </div>
     <div id='navigation'>
       <ul>

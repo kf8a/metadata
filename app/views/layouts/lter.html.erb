@@ -47,7 +47,7 @@
             <div class="wrap">
               <div id="content">
                 <div id="content-sidebar-wrap">
-                  <article id='metadata' class='hfeed'>
+                  <article id='metadata' class='hfeed<%= ' devise' if controller.devise_controller? %>'>
                   <%= yield %>
                   </article>
                 </div><!-- end #content-sidebar-wrap -->
