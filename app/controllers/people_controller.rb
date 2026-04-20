@@ -10,8 +10,6 @@ class PeopleController < ApplicationController
   before_action :authenticate_user!, except: open_actions
   before_action :admin?, except: open_actions
 
-  before_action :require_lter_host!, except: show
-
   # GET /people
   # GET /people.xml
   def index
@@ -152,12 +150,5 @@ class PeopleController < ApplicationController
       active.each { |person| csv << person.to_lno_active }
       inactive.each { |person| csv << person.to_lno_inactive }
     end
-  end
-
-  def require_lter_host!
-    return if Rails.env.local? # if you want to allow local dev
-
-    lter_hosts = ["lter.kbs.msu.edu"] # adjust to your real canonical host(s)
-    raise ActionController::RoutingError, "Not Found" unless lter_hosts.include?(request.host.downcase)
   end
 end
