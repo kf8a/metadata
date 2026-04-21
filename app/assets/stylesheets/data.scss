@@ -247,6 +247,21 @@
     width: 200px;
   }
 
+  #bottom-line-search {
+    display: flex;
+    flex-direction: row;
+    align-items: right;
+    gap: 24px;
+
+    @media (max-width: 640px) {
+    flex-wrap: wrap;
+    }
+  }
+
+  .search-button {
+    width: 14rem;
+  }
+
   #search-form {
     margin-bottom: 10px;
     padding-top: 36px;
@@ -265,7 +280,7 @@
   }
 
   #keyworder {
-    width: 60%;
+    width: 100%;
   }
 
   .default {
@@ -281,10 +296,15 @@
     float: none;
     margin-left: 10px;
     text-align: right;
+
+    @media (max-width: 640px) {
+      margin-top: 0.5rem;
+    }
   }
 
   #keyword-search {
     display: inline;
+    width: 80%;
   }
 
   a.download-link {
