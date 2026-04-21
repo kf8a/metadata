@@ -8,25 +8,27 @@
 <% content_for :content do %>
   <div id='glbrc' class='metadata'>
     <%= render 'layouts/sign_in' %>
-    <div id='branding'>
-      <a id='glbrc-logo' href="http://glbrc.org">
-        <%= image_tag 'common/glbrc_small.jpg', alt: 'Great Lakes Bioenergy Consortium' %>
-      </a>
-      <h1><%= @title %></h1>
-    </div>
-    <div id='content'>
-      <p style="color: green"><%= flash[:notice] %></p>
-      <div class="metadata-yield<%= ' devise' if controller.devise_controller? %>">
-        <%= yield  %>
+    <div class='glbrc-body'>
+      <div id='navigation'>
+        <ul>
+          <li class="<%=current_controller?('datatables')%>"><a href='/datatables' class='rounded-corners'>Data Catalog</a></li>
+          <li class="<%=current_controller?('protocols')%>"><a href='/protocols' class='rounded-corners'>Protocols</a></li>
+          <li class="<%=current_controller?('pages')%>"><a href='/pages/1' class='rounded-corners'>Experimental Layouts</a></li>
+          <li class="<%=current_controller?('publications')%>"><a href='/citations' class='rounded-corners'>Publications</a></li>
+        </ul>
       </div>
-    </div>
-    <div id='navigation'>
-      <ul>
-        <li class="<%=current_controller?('datatables')%>"><a href='/datatables' class='rounded-corners'>Data Catalog</a></li>
-        <li class="<%=current_controller?('protocols')%>"><a href='/protocols' class='rounded-corners'>Protocols</a></li>
-        <li class="<%=current_controller?('pages')%>"><a href='/pages/1' class='rounded-corners'>Experimental Layouts</a></li>
-        <li class="<%=current_controller?('publications')%>"><a href='/citations' class='rounded-corners'>Publications</a></li>
-      </ul>
+      <div id='branding'>
+        <a id='glbrc-logo' href="http://glbrc.org">
+          <%= image_tag 'common/glbrc_small.jpg', alt: 'Great Lakes Bioenergy Consortium' %>
+        </a>
+        <h1><%= @title %></h1>
+      </div>
+      <div id='content'>
+        <p style="color: green"><%= flash[:notice] %></p>
+        <div class="metadata-yield<%= ' devise' if controller.devise_controller? %>">
+          <%= yield  %>
+        </div>
+      </div>
     </div>
   </div>
 <% end %>
