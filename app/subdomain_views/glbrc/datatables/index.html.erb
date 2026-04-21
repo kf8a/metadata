@@ -15,7 +15,7 @@
     <% end %>
   </div>
   <% cache([@website,@studies]) do %>
-  <div>
+  <div class='quickTree-container'>
     <h1 class='right'>Data</h1>
     <ul class='quickTree'>
         <%= render_study(code:'AGRIC')%>
@@ -34,6 +34,7 @@
         <%= render_study(code: 'GSORGV')%>
         <%= render_study(code: 'SOF') %>
     </ul>
+  </div>
   </div>
   <% end %>
 
