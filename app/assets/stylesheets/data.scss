@@ -16,15 +16,20 @@
 }
 
 .citation-footer {
-  margin: 0.5rem;
+  margin-top: 0.8rem;
+  padding-right: 0.5rem;
   display: flex;
-  font-size: 12px;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+  row-gap: 12px;
   // margin-top: -3px;
 }
 
 .citation-footer > .member-oly,
 .citation-footer > .non-member {
   flex: 2;
+  min-width: 24px;
+  min-height: 24px;
 }
 
 .citation_count {
