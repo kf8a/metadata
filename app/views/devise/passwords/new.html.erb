@@ -1,3 +1,7 @@
+<% content_for :head do %>
+  <title>Reset password</title>
+<% end %>
+
 <h1>Forgot your password?</h1>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
