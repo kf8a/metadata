@@ -103,7 +103,7 @@ Metadata::Application.routes.draw do
   resources :studies
 
   resources :units
-  resources :uploads
+  # resources :uploads
   resources :variates
 
   resources :visualizations, only: 'show'
