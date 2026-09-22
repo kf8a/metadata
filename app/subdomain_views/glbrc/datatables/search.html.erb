@@ -6,7 +6,8 @@
   <div id='glbrc-search-form' class= 'rounded-corners'>
     <%= form_tag '/datatables/search' do %>
       <div id='keyword-search'>
-        <%= text_field_tag :keyword_list, @keyword_list || @default_value , {:id => 'keyworder'}  %>
+        <%= label_tag 'keyworder', 'Search data tables' %>
+        <%= text_field_tag :keyword_list, @keyword_list || @default_value, id: 'keyworder' %>
       </div>
       <div id='search-submit'>
         <%= submit_tag "Search Datacatalog"%>
