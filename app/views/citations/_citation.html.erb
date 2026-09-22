@@ -62,9 +62,9 @@
               <% end %>
             </div>
             <% if citation.doi.present? %>
-                <span>&nbsp;(<%=normalize_doi(citation.doi)%>)</span>
+                <span class='doi-reference'><%=normalize_doi(citation.doi)%></span>
               <% else %>
-              <span>&nbsp;<%= "https://lter.kbs.msu.edu/pub/#{citation.id}" %></span>
+              <span class='doi-reference'><%= "https://lter.kbs.msu.edu/pub/#{citation.id}" %></span>
             <% end %>
           </div>
         </div>
