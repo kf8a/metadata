@@ -1,26 +1,26 @@
 <h1>Table of Contents</h1>
-  <p id='datatable-intro'>
-    <%=raw  @website.data_catalog_intro %>
+  <p id="datatable-intro">
+    <%= raw  @website.data_catalog_intro %>
   </p>
  <%= markdown_to_html @sponsor.data_use_statement if @sponsor %>
 
-<div id='glbrc-search-form'>
+<div id="glbrc-search-form">
   <%= form_tag ('/datatables/search') do %>
 
-      <div id='bottom-line-search'>
+      <div id="bottom-line-search">
 
-        <div id='keyword-search'>
-          <%= text_field_tag :keyword_list, @keyword_list || @default_value , {:id => 'keyworder'}  %>
+        <div id="keyword-search">
+          <%= label_tag 'keyworder', 'Search data tables' %>
+          <%= text_field_tag :keyword_list, @keyword_list || @default_value, id: 'keyworder' %>
         </div>
-        <div id='search-submit'>
-          <%= submit_tag "Search Datacatalog"%>
+        <div id="search-submit">
+          <%= submit_tag "Search Datacatalog" %>
         </div>
       </div>
   <% end %>
 </div>
 
 
-
-<ul class='quickTree'>
+<ul class="quickTree">
   <%= render :partial => 'datatable', :collection => @datatables.sort {|x,y| x.title <=> y.title} %>
 </ul>
