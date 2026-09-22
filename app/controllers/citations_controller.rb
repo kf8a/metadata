@@ -4,8 +4,11 @@
 class CitationsController < ApplicationController
   # protect_from_forgery except: :download
 
+  GLBRC_PUBLICATIONS_URL = 'https://www.glbrc.org/publications?combine=&name=1'
+
   respond_to :html, :json
   layout :site_layout
+  before_action :redirect_or_reject_glbrc_citations
   before_action :authenticate_user!, except: %i[index show search index_by_doi index_by_treatment download filtered]
   before_action :admin?, only: %i[new create edit update destroy]
 
@@ -162,6 +165,16 @@ class CitationsController < ApplicationController
   end
 
   private
+
+  def redirect_or_reject_glbrc_citations
+    return unless @subdomain_request == 'glbrc'
+
+    if action_name == 'index'
+      redirect_to GLBRC_PUBLICATIONS_URL, status: :moved_permanently, allow_other_host: true
+    else
+      raise ActionController::RoutingError, 'Not Found'
+    end
+  end
 
   def send_citation(citation)
     if citation.pdf.persisted?
