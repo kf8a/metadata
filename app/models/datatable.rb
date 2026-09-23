@@ -322,7 +322,7 @@ class Datatable < ApplicationRecord
             else
               "(#{year_start} to #{ongoing? ? 'present' : year_end})"
             end
-    "#{title} #{years} #{maybe_short_name}"
+    "#{title} #{years} #{maybe_study()}"
   end
 
   def maybe_study
