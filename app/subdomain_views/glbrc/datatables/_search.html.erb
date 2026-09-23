@@ -10,7 +10,7 @@
       <div id="bottom-line-search">
 
         <div id="keyword-search">
-          <%= label_tag 'keyworder', 'Search data tables', :id => "keyworder-label" %>
+          <%= label_tag 'keyworder', 'Search data tables', class: "keyworder-label" %>
           <%= text_field_tag :keyword_list, @keyword_list || @default_value, id: 'keyworder' %>
         </div>
         <div id="search-submit">

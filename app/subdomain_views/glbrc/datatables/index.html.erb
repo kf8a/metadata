@@ -1,42 +1,42 @@
   <h1>GLBRC Sustainability Research Data Catalog</h1>
-  <p id='datatable-intro'>
-    <%=raw  @website.data_catalog_intro %>
+  <p id="datatable-intro">
+    <%= raw  @website.data_catalog_intro %>
   </p>
   <%= markdown @sponsor.data_use_statement if @sponsor %>
 
-  <div id='glbrc-search-form' class= 'rounded-corners'>
+  <div id="glbrc-search-form" class="rounded-corners">
     <%= form_tag '/datatables/search' do %>
-      <div id='keyword-search'>
-        <%= label_tag 'keyworder', 'Search data tables' %>
+      <div id="keyword-search">
+        <%= label_tag 'keyworder', 'Search data tables', class: "keyworder-label" %>
         <%= text_field_tag :keyword_list, @keyword_list || @default_value, id: 'keyworder' %>
       </div>
-      <div id='search-submit'>
-        <%= submit_tag "Search Datacatalog"%>
+      <div id="search-submit">
+        <%= submit_tag "Search Datacatalog" %>
       </div>
     <% end %>
   </div>
   <% cache([@website,@studies]) do %>
-  <div class='quickTree-container'>
-    <h1 class='right'>Data</h1>
-    <ul class='quickTree'>
-        <%= render_study(code:'AGRIC')%>
-        <%= render_study(code: 'GIBC')%>
-        <%= render_study(code: 'GSCALE')%>
-        <%= render_study(code: 'GEXT')%>
-        <%= render_study(code: 'GSWITCH')%>
-        <%= render_study(code: 'GMARG')%>
-        <%= render_study(code: 'GDRY')%>
-        <%= render_study(code: 'GPROD')%>
-        <%= render_study(code: 'GVAR')%>
-        <%= render_study(code: 'GEBI')%>
-        <%= render_study(code: 'GVAR2')%>
-        <%= render_study(code: 'GSORGV')%>
+  <div class="quickTree-container">
+    <h1 class="right">Data</h1>
+    <ul class="quickTree">
+        <%= render_study(code:'AGRIC') %>
+        <%= render_study(code: 'GIBC') %>
+        <%= render_study(code: 'GSCALE') %>
+        <%= render_study(code: 'GEXT') %>
+        <%= render_study(code: 'GSWITCH') %>
+        <%= render_study(code: 'GMARG') %>
+        <%= render_study(code: 'GDRY') %>
+        <%= render_study(code: 'GPROD') %>
+        <%= render_study(code: 'GVAR') %>
+        <%= render_study(code: 'GEBI') %>
+        <%= render_study(code: 'GVAR2') %>
+        <%= render_study(code: 'GSORGV') %>
         <%= render_study(code: 'SOF') %>
         <%= render_study(code: 'SPK') %>
         <%= render_study(code: 'SFT') %>
         <%= render_study(code: 'MNS') %>
-        <%= render_study(code: 'GWOOD')%>
-        <%= render_study(code: 'GRIMA')%>
+        <%= render_study(code: 'GWOOD') %>
+        <%= render_study(code: 'GRIMA') %>
 
     </ul>
   </div>
