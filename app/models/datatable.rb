@@ -326,8 +326,8 @@ class Datatable < ApplicationRecord
   end
 
   def maybe_study
-   if short_name
-     "(#{short_name})"
+   if studies.short_name
+     "(#{studies.short_name})"
    else
      ""
    end
