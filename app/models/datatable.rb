@@ -135,7 +135,7 @@ class Datatable < ApplicationRecord
       description: short_description,
       url: "https://lter.kbs.msu.edu/datatables/#{id}",
       dateModified: pub_date,
-      creator: personnel.collect do |person, roles|
+      creator: personnel.collect do |person, _roles|
         { "@type" => "Person", name: person.full_name, affiliation: person.organization }
       end,
       includedInDataCatalog: { "@type" => "DataCatalog", name: "KBS LTER Datatable Catalog",
@@ -322,8 +322,16 @@ class Datatable < ApplicationRecord
             else
               "(#{year_start} to #{ongoing? ? 'present' : year_end})"
             end
-    "#{title} #{years}"
+    "#{title} #{years} #{maybe_short_name}"
   end
+
+  defp maybe_study
+   if short_name
+     "(#{short_name})"
+   else
+     ""
+   end
+ end
 
   def ongoing?
     return false if completed?
