@@ -1,23 +1,23 @@
 <h1>Table of Contents</h1>
-<p id='datatable-intro'>
-    <%=raw  @website.data_catalog_intro %>
+<p id="datatable-intro">
+    <%= raw  @website.data_catalog_intro %>
 </p>
 
-  <div id='glbrc-search-form' class= 'rounded-corners'>
+  <div id="glbrc-search-form" class="rounded-corners">
     <%= form_tag '/datatables/search' do %>
-      <div id='keyword-search'>
-        <%= label_tag 'keyworder', 'Search data tables' %>
+      <div id="keyword-search">
+        <%= label_tag 'keyworder', 'Search data tables', id => "keyworder-label" %>
         <%= text_field_tag :keyword_list, @keyword_list || @default_value, id: 'keyworder' %>
       </div>
-      <div id='search-submit'>
-        <%= submit_tag "Search Datacatalog"%>
+      <div id="search-submit">
+        <%= submit_tag "Search Datacatalog" %>
       </div>
     <% end %>
   </div>
 
-<ul class='tree'>
+<ul class="tree">
   <% @studies.each do |study| -%>
-    <% next unless study.include_datatables?(@datatables)%>
+    <% next unless study.include_datatables?(@datatables) %>
 
     <%= render 'study_no_cache', study: study, themes: @themes, datatables: @datatables, website: @website %>
   <% end -%>
@@ -28,8 +28,8 @@
   <ul>
     <% @datatables.each do |datatable| %>
       <% next if datatable.theme_id %>
-      <li><%= link_to datatable.title_and_years, datatable_path(datatable)%> <%=link_to "edit", edit_datatable_path(datatable)%>
-        <span class='updated_at'>
+      <li><%= link_to datatable.title_and_years, datatable_path(datatable) %> <%= link_to "edit", edit_datatable_path(datatable) %>
+        <span class="updated_at">
           <%= datatable.updated_at.to_date if datatable.updated_at %>
         </span>
       </li>

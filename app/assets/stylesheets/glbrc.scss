@@ -88,6 +88,11 @@ $menu-width: 10em;
     display: none;
   }
 
+  #keyworder-label {
+    margin-bottom: 10px;
+    color: white;
+  }
+
 	#sign-in {
 		position: fixed;
 		top: max(0px, env(safe-area-inset-top, 0px));
