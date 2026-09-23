@@ -325,7 +325,7 @@ class Datatable < ApplicationRecord
     "#{title} #{years} #{maybe_short_name}"
   end
 
-  defp maybe_study
+  def maybe_study
    if short_name
      "(#{short_name})"
    else
