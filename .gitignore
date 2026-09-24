@@ -1,66 +1,62 @@
-*emfile.lock
-db/meta_*
-.yardoc
-.bin/
-db/*.sqlite3
-db/sphinx
-log/
-metadata.sql
-public/datatables
-public/*.html
-public/assets
-.DStore
+# OS / editor
 .DS_Store
-tmp/
-config/database.yml
-config/s3.yml
-config/newrelic.yml
-rcov/
-nbproject/
-config/development.sphinx.conf
-coverage/
-.bundle
 *.swp
-lib/tasks/move_to_s3.rake
-.autotest
+.idea
+nbproject/
+
+# Secrets, credentials, local env
+.env
+master.key
+config/master.key
+/config/credentials/staging.key
+/config/credentials/production.key
+config/database.yml
 config/initializers/secret_token.rb
 config/initializers/site_keys.rb
-.sass-cache/
+oauth.txt
+private
+
+# Ruby / Bundler / tests
+.bundle
+.yardoc
+.autotest
+coverage/
+rcov/
+doc/
+
+# Rails runtitme
+log/
+tmp/
+storage/
 uploaded_files
 uploads/*
-sandi_meter
-public/metadata-assets/
-private
-.idea
 shared/*
 assets/*
 
-# Ignore master key for decrypting credentials and more.
-config/master.key
-config/storage.yml
-storage/
+# Local / host-specific config
+config/deploy
+config/development.sphinx.conf
+/config/puma.rb
 
+# Database / search indexes
+db/*.sqlite3
+db/meta_*
+db/sphinx
+metadata.sql
+
+# Assets / JavaScript
+.sass-cache/
+/node_modules/
+/app/assets/builds/*
+!/app/assets/builds/.keep
+public/assets
+public/datatables
+public/*.html
+public/metadata-assets/
+
+# App-specific ignores
 app/views/shared/_footer.html.erb
 app/views/shared/_header.html.erb
 app/views/shared/_nav.html.erb
-
-/config/credentials/staging.key
-
-/config/credentials/production.key
-
-.env
-
-doc/
-
+lib/tasks/move_to_s3.rake
 LTERHub_Personnel_list_to_CSV/
-
-master.key
-oauth.txt
-
-/node_modules/
-/config/puma.rb
-
-/app/assets/builds/*
-!/app/assets/builds/.keep
-
-/node_modules
