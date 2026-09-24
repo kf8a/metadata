@@ -4,11 +4,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '~>8.0'
 
-# json 3.0 changed JSON.parse to keyword-only options; ActiveSupport 8.1.3.1 still
-# passes a positional hash, breaking signed cookies and Active Storage redirects.
-# Remove when a Rails release includes https://github.com/rails/rails/pull/58601
-# It looks like 8.1.4 includes the fix
-gem 'json' # , '~> 2.13'
+gem 'json'
 
 gem 'commonmarker'
 
