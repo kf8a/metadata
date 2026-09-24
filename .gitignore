@@ -45,6 +45,9 @@ db/sphinx
 metadata.sql
 
 # Assets / JavaScript
+yarn.lock
+.yarn
+.yarnrc.yml
 .sass-cache/
 /node_modules/
 /app/assets/builds/*
