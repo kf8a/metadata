@@ -581,7 +581,7 @@ DEPENDENCIES
   has_scope
   importmap-rails
   jquery-rails
-  json (~> 2.13)
+  json
   listen
   minitest
   mysql2
