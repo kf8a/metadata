@@ -84,8 +84,11 @@ $menu-width: 10em;
     margin-block: 2.75rem;
 
     > li {
-      flex: 1 1 300px;
-      min-width: 0;
+      // 300px basis + 44px gap exceeded #content (~635px); size for 2-up
+      flex: 1 1 calc(50% - 1.375rem);
+      min-width: min(100%, 16rem);
+      max-width: 100%;
+      box-sizing: border-box;
 
       > a {
         display: block;
