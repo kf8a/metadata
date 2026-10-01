@@ -72,23 +72,31 @@ $menu-width: 10em;
   }
 
 
-  .map-row {
+  // Expect: <ul class="map-row|image-row"><li><a><img></a></li></ul>
+  .map-row,
+  .image-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 2.75rem; // 44px — WCAG 2.5.5 AAA target spacing between items
     align-items: center;
+    list-style: none;
+    // Keep links outside the row from sitting too close to items inside
+    margin-block: 2.75rem;
 
-    a {
+    > li {
       flex: 1 1 300px;
-      /* the link is now the flex item */
-      display: block;
+      min-width: 0;
 
-      img {
+      > a {
         display: block;
-        width: 100%;
-        /* fill the link, which fills its flex slot */
-        height: auto;
-        object-fit: contain;
+
+        img {
+          display: block;
+          width: 100%;
+          max-width: 100%;
+          height: auto;
+          object-fit: contain;
+        }
       }
     }
   }
@@ -110,27 +118,6 @@ $menu-width: 10em;
       margin-inline: 0.3em;
       max-width: 18rem;
     }
-  }
-
-
-  .image-row {
-    display: flex;
-    flex-wrap: wrap;
-    /* allows stacking when needed */
-    gap: 2.75rem; // 44px — WCAG 2.5.5 AAA target spacing between items
-    align-items: center;
-    // Keep links outside the row from sitting too close to items inside
-    margin-block: 2.75rem;
-  }
-
-  .image-row img {
-    flex: 1 1 300px;
-    /* grow, shrink, base width 300px */
-    max-width: 100%;
-    /* never overflow the screen */
-    height: auto;
-    /* keep aspect ratio */
-    object-fit: contain;
   }
 
 
