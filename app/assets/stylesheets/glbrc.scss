@@ -71,6 +71,10 @@ $menu-width: 10em;
     box-sizing: border-box;
   }
 
+  .nav-links {
+    list-style: none;
+    margin: 2.75rem;
+  }
 
   // Expect: <ul class="map-row|image-row"><li><a><img></a></li></ul>
   .map-row,
@@ -88,11 +92,11 @@ $menu-width: 10em;
       grid-template-columns: 1fr;
     }
 
-    > li {
+    >li {
       min-width: 0;
       max-width: 100%;
 
-      > a {
+      >a {
         display: block;
 
         img {
