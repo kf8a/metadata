@@ -93,6 +93,25 @@ $menu-width: 10em;
     }
   }
 
+  // Float beside text on large screens; stack + capped scale on small.
+  // Use on map <img>s in page HTML (does not replace .ImageLeft / .ImageRight).
+  .map-float {
+    box-sizing: border-box;
+    display: block;
+    width: auto;
+    max-width: min(20rem, 100%);
+    height: auto;
+    margin-block: 0.3em;
+    margin-inline: auto;
+    object-fit: contain;
+
+    @media (min-width: 640px) {
+      float: right;
+      margin-inline: 0.3em;
+      max-width: 20rem;
+    }
+  }
+
 
   .image-row {
     display: flex;
