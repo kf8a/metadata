@@ -117,9 +117,10 @@ $menu-width: 10em;
     display: flex;
     flex-wrap: wrap;
     /* allows stacking when needed */
-    gap: 10px;
-    /* spacing between images */
+    gap: 2.75rem; // 44px — WCAG 2.5.5 AAA target spacing between items
     align-items: center;
+    // Keep links outside the row from sitting too close to items inside
+    margin-block: 2.75rem;
   }
 
   .image-row img {
