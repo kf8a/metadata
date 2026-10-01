@@ -75,20 +75,22 @@ $menu-width: 10em;
   // Expect: <ul class="map-row|image-row"><li><a><img></a></li></ul>
   .map-row,
   .image-row {
-    display: flex;
-    flex-wrap: wrap;
+    // Grid avoids flex wrap when 50%+50%+gap equals #content width exactly
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 2.75rem; // 44px — WCAG 2.5.5 AAA target spacing between items
     align-items: center;
     list-style: none;
     // Keep links outside the row from sitting too close to items inside
     margin-block: 2.75rem;
 
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+    }
+
     > li {
-      // 300px basis + 44px gap exceeded #content (~635px); size for 2-up
-      flex: 1 1 calc(50% - 1.375rem);
-      min-width: min(100%, 16rem);
+      min-width: 0;
       max-width: 100%;
-      box-sizing: border-box;
 
       > a {
         display: block;
