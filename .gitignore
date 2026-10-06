@@ -37,6 +37,7 @@ assets/*
 config/deploy
 config/development.sphinx.conf
 /config/puma.rb
+structure.sql
 
 # Database / search indexes
 db/*.sqlite3

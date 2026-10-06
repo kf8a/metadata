@@ -152,7 +152,11 @@ class Citation < ApplicationRecord
   end
 
   def search_indexable?
-    state == 'published'
+    state == 'published' && lter_site?
+  end
+
+  def search_website_name
+    website&.name
   end
 
   def search_document

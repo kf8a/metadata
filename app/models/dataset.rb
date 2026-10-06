@@ -8,9 +8,7 @@ require 'eml'
 require 'date_range_formatter'
 
 # A dataset is the central model datasets hold tables, protocols and contact into
-class Dataset < ApplicationRecord
-  include Searchable
-
+class Dataset < ApplicationRecord,
   has_many :affiliations, -> { order 'seniority' }, dependent: :destroy
   has_many :datatables, -> { order 'name' }, dependent: :nullify
   has_many :people, through: :affiliations
@@ -59,24 +57,6 @@ class Dataset < ApplicationRecord
         name: "KBS LTER Datatable Catalog",
         url: "https://lter.kbs.msu.edu/datatables"
       }
-    }
-  end
-
-  def search_indexable?
-    dataset.on_web?
-  end
-
-  def search_document
-    {
-      id: search_id, source: 'rails', type: 'dataset',
-      title: title,
-      headings: "",
-      body: ActionController::Base.helpers.strip_tags(abstract.to_s).squish.truncate(24_000, omission: ''),
-      tags: tags.pluck(:name),
-      updated_at: updated_at.to_i,
-      priority: 0,
-      url: Rails.application.routes.url_helpers.article_url(self),
-      excerpt: summary.to_s.truncate(200)
     }
   end
 

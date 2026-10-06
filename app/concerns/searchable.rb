@@ -21,6 +21,15 @@ module Searchable
   def search_indexable?
     true
   end
+
+  def lter_site?
+    name = search_website_name
+    name.blank? || name == 'lter'
+  end
+
+  def search_website_name
+    nil
+  end
 end
 
 # app/jobs/site_search_sync_job.rb

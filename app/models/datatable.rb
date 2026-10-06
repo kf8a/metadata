@@ -130,7 +130,11 @@ class Datatable < ApplicationRecord
   end
 
   def search_indexable?
-    on_web?
+    on_web? && lter_site?
+  end
+
+  def search_website_name
+    dataset&.website&.name
   end
 
   def search_document
