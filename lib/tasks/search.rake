@@ -1,13 +1,40 @@
-# lib/tasks/search.rake
+# frozen_string_literal: true
+
 namespace :search do
   desc 'Import all Rails content (default target: the live alias)'
   task :import_rails, [:collection] => :environment do |_t, args|
     target = args[:collection] || SiteSearch::ALIAS
-    [Citation].each do |model|
-      model.find_each.each_slice(200) do |batch|
+
+    models = {
+      Citation => [:authors, :website],
+      Datatable => [
+        :theme,
+        :study,
+        :variates,
+        :keywords,
+        { dataset: :website },
+        { data_contributions: %i[person role] }
+      ]
+    }
+
+    models.each do |model, includes|
+      indexed = 0
+      skipped = 0
+
+      puts "Importing #{model.name} into #{target}..."
+
+      model.includes(includes).find_each.each_slice(200) do |batch|
         docs = batch.select(&:search_indexable?).map(&:search_document)
-        SiteSearch.bulk_upsert(docs, collection: target) if docs.any?
+        skipped += batch.size - docs.size
+
+        next if docs.empty?
+
+        SiteSearch.bulk_upsert(docs, collection: target)
+        indexed += docs.size
+        puts "  #{model.name}: indexed #{indexed} (skipped #{skipped})"
       end
+
+      puts "  #{model.name}: done — indexed #{indexed}, skipped #{skipped}"
     end
   end
 end
