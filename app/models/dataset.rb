@@ -8,7 +8,7 @@ require 'eml'
 require 'date_range_formatter'
 
 # A dataset is the central model datasets hold tables, protocols and contact into
-class Dataset < ApplicationRecord,
+class Dataset < ApplicationRecord
   has_many :affiliations, -> { order 'seniority' }, dependent: :destroy
   has_many :datatables, -> { order 'name' }, dependent: :nullify
   has_many :people, through: :affiliations
