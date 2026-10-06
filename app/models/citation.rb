@@ -152,7 +152,7 @@ class Citation < ApplicationRecord
   end
 
   def search_indexable?
-    state == 'published' && lter_site?
+    state == 'published'
   end
 
   def search_website_name
@@ -401,7 +401,7 @@ class Citation < ApplicationRecord
 
   def volume_and_page
     if volume.blank?
-      doi_citation_part(doi)
+      ''
     elsif page_numbers.blank?
       "#{volume}."
     else
@@ -410,6 +410,10 @@ class Citation < ApplicationRecord
   end
 
   private
+
+  def search_tags
+    treatments.map { |treatment| Treatment.option_for(treatment).first }
+  end
 
   def search_tags
     treatments.map { |treatment| Treatment.option_for(treatment).first }
