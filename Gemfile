@@ -21,6 +21,8 @@ gem 'nokogiri'
 gem 'country_select', '~> 9.0'
 gem 'pg'
 
+gem 'typesense', '>= 5.0'# Typesense server 30+ requires typesense-ruby 5.0 or later
+
 # gem 'doi', :git => 'git://github.com/kf8a/doi.git'
 
 gem 'awesome_nested_set'

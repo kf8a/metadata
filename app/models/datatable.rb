@@ -7,6 +7,7 @@ require 'eml'
 # it represents a table of data generally a view in the database
 class Datatable < ApplicationRecord
   include GenerateCsvData
+  include Searchable
 
   attr_accessor :materialized_datatable_id
 
@@ -126,6 +127,29 @@ class Datatable < ApplicationRecord
 
   def valid_variates
     variates.valid_for_eml
+  end
+
+  def search_indexable?
+    on_web?
+  end
+
+  def search_document
+    plain_description = ActionController::Base.helpers.strip_tags(description.to_s).squish
+
+    {
+      id: search_id,
+      source: 'rails',
+      type: 'datatable',
+      title: title,
+      headings: theme&.name.to_s,
+      variates: variate_names.compact,
+      body: plain_description.truncate(24_000, omission: ''),
+      tags: search_tags,
+      updated_at: updated_at.to_i,
+      priority: 0,
+      url: datatable_id,
+      excerpt: plain_description.truncate(200)
+    }
   end
 
   def ld_json
@@ -584,6 +608,10 @@ class Datatable < ApplicationRecord
   end
 
   private
+
+  def search_tags
+    (keyword_names + [study&.name] + leads.map(&:full_name)).compact_blank.uniq
+  end
 
   def convert_year_to_date(year)
     "#{year}-1-1"

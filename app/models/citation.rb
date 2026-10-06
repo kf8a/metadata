@@ -6,6 +6,7 @@ require 'bibtex'
 # types derive from and implement their own formatting routines.
 class Citation < ApplicationRecord
   include WorkflowActiverecord
+  include Searchable
 
   workflow_column :state
 
@@ -67,13 +68,13 @@ class Citation < ApplicationRecord
       event :publish, transitions_to: :published
     end
     state :draft do
-      event :submit,  transitions_to: :submitted
+      event :submit, transitions_to: :submitted
     end
     state :forthcoming do
       event :publish, transitions_to: :published
     end
     state :published do
-      event :accept,  transitions_to: :forthcoming
+      event :accept, transitions_to: :forthcoming
     end
   end
 
@@ -150,6 +151,29 @@ class Citation < ApplicationRecord
     end
   end
 
+  def search_indexable?
+    state == 'published'
+  end
+
+  def search_document
+    plain_abstract = ActionController::Base.helpers.strip_tags(abstract.to_s).squish
+
+    {
+      id: search_id,
+      source: 'rails',
+      type: search_document_type,
+      title: title,
+      headings: author_and_year,
+      variates: [],
+      body: plain_abstract.truncate(24_000, omission: ''),
+      tags: [],
+      updated_at: updated_at.to_i,
+      priority: 0,
+      url: Rails.application.routes.url_helpers.citation_url(self),
+      excerpt: plain_abstract.truncate(200)
+    }
+  end
+
   # don't even try to parse the page number
   def page_number_from_ris(start_page, end_page)
     self.start_page_number = start_page
@@ -182,10 +206,10 @@ class Citation < ApplicationRecord
   end
 
   def date_from_ris_date(ris_date)
-    self.pub_date = if ris_date.to_i != 0 # it is just an integer string
-                      Date.new(ris_date.to_i)
-                    else
+    self.pub_date = if ris_date.to_i == 0
                       Date.parse(ris_date)
+                    else # it is just an integer string
+                      Date.new(ris_date.to_i)
                     end
   end
 
@@ -193,7 +217,7 @@ class Citation < ApplicationRecord
     ris_pdf.each_line do |line|
       not_internal_path = line.sub('internal-pdf://', '')
       not_internal_path.strip!
-      real_path = "#{Rails.root}/#{pdf_folder}/#{not_internal_path}"
+      real_path = "#{Rails.root.join("#{pdf_folder}/#{not_internal_path}")}"
       if File.exist?(real_path)
         self.pdf = File.open(real_path)
       else
@@ -240,7 +264,8 @@ class Citation < ApplicationRecord
   end
 
   def formatted(options = {})
-    "#{author_and_year(options)} #{title_and_punctuation} #{publication} #{volume_and_page}, #{doi}".rstrip.gsub(/,$/,'')
+    "#{author_and_year(options)} #{title_and_punctuation} #{publication} #{volume_and_page}, #{doi}".rstrip.gsub(/,$/,
+                                                                                                                 '')
   end
 
   def to_bib
@@ -262,72 +287,69 @@ class Citation < ApplicationRecord
   end
 
   def bib_hash
-    hash = {  abstract: abstract,
-              author: authors.collect(&:full_name).join(' and '),
-              editor: editors.collect(&:full_name).join(' and '),
-              title: title,
-              publisher: publisher,
-              year: pub_year.to_s,
-              address: address,
-              note: notes,
-              journal: publication,
-              pages: page_numbers,
-              volume: volume,
-              number: issue,
-              series: series_title,
-              doi: doi,
-              isbn: isbn }
+    hash = { abstract: abstract,
+             author: authors.collect(&:full_name).join(' and '),
+             editor: editors.collect(&:full_name).join(' and '),
+             title: title,
+             publisher: publisher,
+             year: pub_year.to_s,
+             address: address,
+             note: notes,
+             journal: publication,
+             pages: page_numbers,
+             volume: volume,
+             number: issue,
+             series: series_title,
+             doi: doi,
+             isbn: isbn }
     hash.delete_if { |_, value| value.blank? }
   end
 
   def bib_citation_only_hash
-    hash = {  author: authors.collect(&:full_name).join(' and '),
-              editor: editors.collect(&:full_name).join(' and '),
-              title: title,
-              publisher: publisher,
-              year: pub_year.to_s,
-              address: address,
-              journal: publication,
-              pages: page_numbers,
-              volume: volume,
-              number: issue,
-              series: series_title,
-              doi: doi,
-              isbn: isbn }
+    hash = { author: authors.collect(&:full_name).join(' and '),
+             editor: editors.collect(&:full_name).join(' and '),
+             title: title,
+             publisher: publisher,
+             year: pub_year.to_s,
+             address: address,
+             journal: publication,
+             pages: page_numbers,
+             volume: volume,
+             number: issue,
+             series: series_title,
+             doi: doi,
+             isbn: isbn }
     hash.delete_if { |_, value| value.blank? }
   end
 
   def to_enw
-    "%0 #{endnote_type}#{title_to_enw}#{authors.to_enw}"\
-    "#{editors.to_enw}#{endnote_publication_data}"\
-    "#{volume_to_enw}#{page_numbers_to_enw}#{pub_year_to_enw}"\
-    "#{abstract_to_enw}#{doi_to_enw}"\
-    "#{publisher_to_enw}#{publisher_url_to_enw}#{isbn_to_enw}#{city_to_enw}"\
-    "#{accession_number_to_enw}\n"
+    "%0 #{endnote_type}#{title_to_enw}#{authors.to_enw}" \
+      "#{editors.to_enw}#{endnote_publication_data}" \
+      "#{volume_to_enw}#{page_numbers_to_enw}#{pub_year_to_enw}" \
+      "#{abstract_to_enw}#{doi_to_enw}" \
+      "#{publisher_to_enw}#{publisher_url_to_enw}#{isbn_to_enw}#{city_to_enw}" \
+      "#{accession_number_to_enw}\n"
   end
-
 
   def self.select_options
     names = %w[Article
-       Book
-       Bulletin
-       Chapter
-       Conference
-       Data
-       Ebook
-       Report
-       Thesis
-    ]
+               Book
+               Bulletin
+               Chapter
+               Conference
+               Data
+               Ebook
+               Report
+               Thesis]
     types = %w[ArticleCitation
-       BookCitation
-       BulletinCitation
-       ChapterCitation
-       ConferenceCitation
-       DataCitation
-       EbookCitation
-       ReportCitation
-       ThesisCitation
-    ]
+               BookCitation
+               BulletinCitation
+               ChapterCitation
+               ConferenceCitation
+               DataCitation
+               EbookCitation
+               ReportCitation
+               ThesisCitation]
     names.zip(types)
     # classes = descendants.map(&:to_s).sort
     # classes.collect { |klass| [klass.gsub(/Citation/, ''), klass] }
@@ -361,8 +383,7 @@ class Citation < ApplicationRecord
       "headline" => title,
       "author" => authors.collect(&:ld_json),
       "datePublished" => pub_year,
-      "publisher" => publisher
-    }
+      "publisher" => publisher }
   end
 
   def author_and_year(options = {})
@@ -386,6 +407,10 @@ class Citation < ApplicationRecord
   end
 
   private
+
+  def search_document_type
+    self.class.name.delete_suffix('Citation').underscore.presence || 'article'
+  end
 
   def bibtex_type
     :misc
@@ -423,7 +448,7 @@ class Citation < ApplicationRecord
     return '' if title.blank?
 
     title.rstrip!
-    if title.match?(/[\?\!\.]$/)
+    if title.match?(/[?!.]$/)
       title
     else
       "#{title}."
@@ -486,7 +511,7 @@ class Citation < ApplicationRecord
   end
 
   def pub_year_with_punctuation
-    pub_year ?  "#{pub_year}." : ''
+    pub_year ? "#{pub_year}." : ''
   end
 
   def author_and_pub_year_string(author_string)
