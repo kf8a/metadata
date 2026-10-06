@@ -166,11 +166,11 @@ class Citation < ApplicationRecord
       id: search_id,
       source: 'rails',
       type: search_document_type,
-      title: title,
-      headings: author_and_year,
+      title: formatted(long: true),
+      headings: publication.to_s,
       variates: [],
       body: plain_abstract.truncate(24_000, omission: ''),
-      tags: [],
+      tags: search_tags,
       updated_at: updated_at.to_i,
       priority: 0,
       url: Rails.application.routes.url_helpers.citation_url(self),
@@ -411,6 +411,10 @@ class Citation < ApplicationRecord
   end
 
   private
+
+  def search_tags
+    treatments.map { |treatment| Treatment.option_for(treatment).first }
+  end
 
   def search_document_type
     self.class.name.delete_suffix('Citation').underscore.presence || 'article'
