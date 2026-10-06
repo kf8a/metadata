@@ -23,7 +23,12 @@
   <%= render 'shared/breadcrumbs',
     :crumbs => [{:name => controller_name.upcase, :url =>  url_for(:controller => controller_name, :action => 'index')},
       {:name => @citation.short_author_string.upcase}] %>
-  <h2><%= raw @citation.formatted(:long=>true) %></h2>
+  <h2>
+    <%= raw @citation.formatted(long: true) %>
+    <% if @citation.doi.present? %>
+      <span>DOI: <%= link_to @citation.doi, normalize_doi(@citation.doi) %></span>
+    <% end %>
+  </h2>
 
   <% if @citation.pdf.attached? %>
     <div class="description">
@@ -32,9 +37,6 @@
   <% end %>
   <p>
     <%= markdown_to_html @citation.abstract %></p>
-  <% if @citation.doi.present? %>
-    <p>DOI: <a href="http://dx.doi.org/<%= @citation.doi %>"><%= @citation.doi %></a></p>
-  <% end %>
   <% unless @citation.publisher_url.try(:empty?) %>
     <p><%= link_to "vist the Publishers website", @citation.publisher_url %></p>
   <% end %>

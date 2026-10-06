@@ -47,23 +47,52 @@ RSpec.describe Citation, '#search_document' do
 
   describe '#search_document' do
     it 'returns a Typesense document for a published article' do
-      citation = published_citation
+      study = FactoryBot.create(:study)
+      treatment = FactoryBot.create(
+        :treatment,
+        study: study,
+        name: 'T1',
+        description: 'conventional',
+        use_in_citations: true
+      )
+      citation = published_citation(publication: 'Ecology')
+      citation.treatments << treatment
+
       doc = citation.search_document
 
       expect(doc).to eq(
         id: citation.search_id,
         source: 'rails',
         type: 'article',
-        title: 'A study of soil carbon',
-        headings: citation.author_and_year,
+        title: citation.formatted,
+        headings: 'Ecology',
         variates: [],
         body: 'An abstract of the article.',
-        tags: [],
+        tags: ['T1 conventional'],
         updated_at: citation.updated_at.to_i,
         priority: 0,
         url: Rails.application.routes.url_helpers.citation_url(citation),
         excerpt: 'An abstract of the article.'
       )
+    end
+
+    it 'uses treatment name alone when name equals description' do
+      study = FactoryBot.create(:study)
+      treatment = FactoryBot.create(
+        :treatment,
+        study: study,
+        name: 'Control',
+        description: 'Control',
+        use_in_citations: true
+      )
+      citation = published_citation
+      citation.treatments << treatment
+
+      expect(citation.search_document[:tags]).to eq(['Control'])
+    end
+
+    it 'uses an empty headings string when publication is blank' do
+      expect(published_citation(publication: nil).search_document[:headings]).to eq('')
     end
 
     it 'maps STI classes to type' do

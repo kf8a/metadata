@@ -166,7 +166,7 @@ class Citation < ApplicationRecord
       id: search_id,
       source: 'rails',
       type: search_document_type,
-      title: formatted(long: true),
+      title: formatted,
       headings: publication.to_s,
       variates: [],
       body: plain_abstract.truncate(24_000, omission: ''),
@@ -268,8 +268,7 @@ class Citation < ApplicationRecord
   end
 
   def formatted(options = {})
-    "#{author_and_year(options)} #{title_and_punctuation} #{publication} #{volume_and_page}, #{doi}".rstrip.gsub(/,$/,
-                                                                                                                 '')
+    "#{author_and_year(options)} #{title_and_punctuation} #{publication} #{volume_and_page}".rstrip.gsub(/,$/, '')
   end
 
   def to_bib
