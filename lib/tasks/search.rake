@@ -6,7 +6,7 @@ namespace :search do
     target = args[:collection] || SiteSearch::ALIAS
 
     models = {
-      Citation => [:authors, :website],
+      Citation => [:authors, :website, :treatments],
       Datatable => [
         :theme,
         :study,
@@ -24,9 +24,15 @@ namespace :search do
       puts "Importing #{model.name} into #{target}..."
 
       model.includes(includes).find_each.each_slice(200) do |batch|
-        docs = batch.select(&:search_indexable?).map(&:search_document)
-        skipped += batch.size - docs.size
+        indexable, not_indexable = batch.partition(&:search_indexable?)
+        skipped_ids = not_indexable.map(&:id)
+        skipped += skipped_ids.size
 
+        if skipped_ids.any?
+          puts "  #{model.name}: skipped ids #{skipped_ids.join(', ')}"
+        end
+
+        docs = indexable.map(&:search_document)
         next if docs.empty?
 
         SiteSearch.bulk_upsert(docs, collection: target)
