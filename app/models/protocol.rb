@@ -3,6 +3,8 @@
 require 'eml'
 # A protocol describes how the data was collected
 class Protocol < ApplicationRecord
+  include Searchable
+
   acts_as_taggable_on :themes
   belongs_to :dataset, optional: true
   has_and_belongs_to_many :websites
@@ -18,6 +20,35 @@ class Protocol < ApplicationRecord
 
   def valid_for_eml?
     title.present?
+  end
+
+  def search_indexable?
+    active? && lter_site?
+  end
+
+  # Protocols can belong to both LTER and GLBRC; index if blank or any site is LTER.
+  def lter_site?
+    names = (websites.map(&:name) + [dataset&.website&.name]).compact_blank
+    names.empty? || names.include?('lter')
+  end
+
+  def search_document
+    plain_text = ActionController::Base.helpers.strip_tags([abstract, body].join(' ')).squish
+
+    {
+      id: search_id,
+      source: 'rails',
+      type: 'protocol',
+      title: title,
+      headings: datatables.map(&:title).compact_blank.join('. '),
+      variates: [],
+      body: plain_text.truncate(24_000, omission: ''),
+      tags: search_tags,
+      updated_at: updated_at.to_i,
+      priority: 0,
+      url: Rails.application.routes.url_helpers.protocol_url(self),
+      excerpt: plain_text.truncate(200)
+    }
   end
 
   def to_eml(xml = ::Builder::XmlMarkup.new)
@@ -70,6 +101,10 @@ class Protocol < ApplicationRecord
   end
 
   private
+
+  def search_tags
+    (themes.map(&:name) + people.map(&:full_name)).compact_blank.uniq
+  end
 
   def eml_creator
     @eml.creator do

@@ -14,6 +14,13 @@ namespace :search do
         :keywords,
         { dataset: :website },
         { data_contributions: %i[person role] }
+      ],
+      Protocol => [
+        :websites,
+        :themes,
+        :datatables,
+        :people,
+        { dataset: :website }
       ]
     }
 

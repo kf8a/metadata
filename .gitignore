@@ -64,3 +64,4 @@ app/views/shared/_header.html.erb
 app/views/shared/_nav.html.erb
 lib/tasks/move_to_s3.rake
 LTERHub_Personnel_list_to_CSV/
+mise.toml
