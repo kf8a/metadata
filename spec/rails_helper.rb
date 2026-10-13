@@ -31,8 +31,8 @@ ActionController::Base.append_view_path Rails.root.join('spec/support/views')
 # Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 # Checks for pending migrations before tests are run.
-# Disabled: local meta_test is loaded from structure.sql; schema.rb cannot load cleanly.
-# ActiveRecord::Migration.maintain_test_schema!
+# If you are not using ActiveRecord, you can remove this line.
+ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :controller

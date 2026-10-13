@@ -154,7 +154,7 @@ FactoryBot.define do
     association :role_type
 
     factory :lter_role do
-      role_type { RoleType.find_by(:name, 'lter') || FactoryBot.create(:role_type, name: 'lter') }
+      role_type { RoleType.find_by(name: 'lter') || FactoryBot.create(:role_type, name: 'lter') }
     end
   end
 

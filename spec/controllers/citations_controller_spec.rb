@@ -272,6 +272,7 @@ describe CitationsController, type: :controller do
 
   describe 'authenticated ' do
     before(:each) do
+      FactoryBot.create(:website, name: 'lter')
       sign_in(FactoryBot.create(:admin_user))
     end
 
