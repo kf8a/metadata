@@ -11,6 +11,10 @@ require 'factory_bot'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
+# The shared header/nav/footer partials are gitignored and only downloaded from the
+# LTER site at deploy time. Fall back to empty stubs so layouts render in tests.
+ActionController::Base.append_view_path Rails.root.join('spec/support/views')
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end

@@ -10,10 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_08_002722) do
-
+ActiveRecord::Schema[8.1].define(version: 2025_03_27_123702) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension "pg_catalog.plpgsql"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -158,8 +157,8 @@ ActiveRecord::Schema.define(version: 2021_12_08_002722) do
   create_table "data_usages", force: :cascade do |t|
     t.integer "dataset_id"
     t.integer "citation_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "data_versions", id: :serial, force: :cascade do |t|
@@ -309,6 +308,15 @@ ActiveRecord::Schema.define(version: 2021_12_08_002722) do
   create_table "eml_docs", id: :serial, force: :cascade do |t|
   end
 
+  create_table "enumerated_values", force: :cascade do |t|
+    t.bigint "variate_id", null: false
+    t.string "code", null: false
+    t.string "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["variate_id"], name: "index_enumerated_values_on_variate_id"
+  end
+
   create_table "invites", id: :serial, force: :cascade do |t|
     t.string "firstname"
     t.string "lastname"
@@ -455,8 +463,8 @@ ActiveRecord::Schema.define(version: 2021_12_08_002722) do
     t.integer "person_id"
     t.integer "project_id"
     t.integer "role_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "plots", id: :serial, force: :cascade do |t|
@@ -671,6 +679,9 @@ ActiveRecord::Schema.define(version: 2021_12_08_002722) do
     t.integer "study_id"
     t.integer "weight"
     t.boolean "use_in_citations", default: true
+    t.integer "parent_id"
+    t.integer "rgt"
+    t.integer "lft"
     t.index ["study_id"], name: "index_treatments_on_study_id"
   end
 

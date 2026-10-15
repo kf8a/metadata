@@ -18,7 +18,7 @@ describe DatatablesController, type: :controller  do
   end
 
   before do
-    @user = FactoryBot.build(:admin_user)
+    @user = FactoryBot.create(:admin_user)
     sign_in @user
   end
 
