@@ -7,10 +7,10 @@ module CitationsHelper
   end
 
   def normalize_doi(doi)
-    if doi.match?(%r{doi\.org/})
-      "https://#{doi}"
-    elsif doi.match?(%r{^https?://})
+    if doi.match?(%r{\Ahttps?://})
       doi
+    elsif doi.match?(%r{doi\.org/})
+      "https://#{doi}"
     else
       "https://doi.org/#{doi}"
     end
