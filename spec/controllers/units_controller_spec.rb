@@ -4,12 +4,7 @@ require 'rails_helper'
 
 describe UnitsController, type: :controller  do
   before do
-    user = User.new
-    allow(user).to receive(:admin?).and_return(true)
-    # allow(request.env['warden']).to receive(:authenticate!).and_return(user)
-    # allow(controller).to receive(:current_user).and_return(user)
-
-    sign_in user
+    sign_in FactoryBot.create(:admin_user)
 
     @unit = Unit.new
     allow(@unit).to receive(:id).and_return(1)
@@ -31,13 +26,13 @@ describe UnitsController, type: :controller  do
       get :edit, params: { id: @unit }
     end
     it 'is successful' do
-      expect(response.code).to eq '302'
+      expect(response.code).to eq '200'
     end
   end
 
   context 'PUT :update' do
     before do
-      allow(@unit).to receive(:update_attributes).and_return(true)
+      allow(@unit).to receive(:update).and_return(true)
       put :update, params: { id: 1 }
     end
     it { should redirect_to units_url }
