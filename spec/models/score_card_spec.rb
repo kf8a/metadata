@@ -15,6 +15,19 @@ describe ScoreCard do
     allow(score_card).to receive('current_year').and_return(2013)
   end
 
+  it 'returns no scores when the datatable query is invalid' do
+    allow(@datatable).to receive('object').and_return('select missing_column from no_such_table')
+
+    expect(score_card.data(@datatable, 'sample_date')).to eq []
+  end
+
+  it 'does not hide errors that are not database errors' do
+    allow(@datatable).to receive('object').and_return("select '2013-1-1'::date as sample_date")
+    allow(score_card.db_connection).to receive(:execute).and_raise(NoMethodError)
+
+    expect { score_card.data(@datatable, 'sample_date') }.to raise_error(NoMethodError)
+  end
+
   it 'returns scores for years' do
     allow(@datatable).to receive('object').and_return('select 2013 as year')
     allow(@datatable).to receive('approved_data_query').and_return('select 2013 as year')

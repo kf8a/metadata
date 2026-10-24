@@ -30,6 +30,32 @@ describe DatatablesController, type: :controller  do
     end
   end
 
+  describe 'GET show as csv for a members-only datatable' do
+    it 'is forbidden when not signed in' do
+      sign_out @user
+      datatable = FactoryBot.create(:protected_datatable)
+
+      get :show, params: { id: datatable.id }, format: :csv
+
+      expect(response).to have_http_status(:forbidden)
+    end
+  end
+
+  describe 'GET show as csv for a public datatable' do
+    it 'streams the csv when not signed in' do
+      sign_out @user
+      website = Website.find_by(name: 'lter')
+      website.update!(url: 'lter.kbs.msu.edu')
+      datatable = FactoryBot.create(:public_datatable, dataset: FactoryBot.create(:dataset, website: website),
+                                                       object: "select '2020-01-01'::date as sample_date")
+
+      get :show, params: { id: datatable.id }, format: :csv
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to eq(datatable.csv_headers + "2020-01-01\n")
+    end
+  end
+
   describe 'responding to publish request' do
     it 'should publish' do
       website = Website.find_by(name: 'lter')

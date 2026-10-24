@@ -16,7 +16,7 @@ class Dataset < ApplicationRecord
   has_many :people, through: :affiliations
   belongs_to :project, optional: true
   has_many :protocols, -> { where 'active is true' }, dependent: :nullify
-  has_many :roles, -> { uniq }, through: :affiliations
+  has_many :roles, -> { distinct }, through: :affiliations
   belongs_to              :sponsor
   has_and_belongs_to_many :studies
   has_and_belongs_to_many :themes
