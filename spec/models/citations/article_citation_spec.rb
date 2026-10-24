@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe ArticleCitation do
-
   it 'should format correctly with 2 authors' do
     citation = ArticleCitation.new
     citation.authors << Author.new(sur_name: 'Loecke',
@@ -52,5 +53,13 @@ describe ArticleCitation do
     short_result = 'Loecke, T. D., et.al.  2008. Soil resource heterogeneity in the form of aggregated litter alters maize productivity. Plant and Soil 325:231-241.'
     expect(citation.formatted).to eq short_result
     expect(citation.formatted(long: true)).to eq result
+  end
+
+  it 'does not change the title when formatting' do
+    citation = FactoryBot.create(:article_citation, title: 'Trailing space ')
+
+    expect(citation.formatted).to include('Trailing space.')
+    expect(citation.title).to eq 'Trailing space '
+    expect(citation).not_to be_changed
   end
 end

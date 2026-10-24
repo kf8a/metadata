@@ -93,11 +93,10 @@ class Protocol < ApplicationRecord
   end
 
   def ld_json
-    { "@context": "http://schema.org",
-      "@type": "Article",
-      "name": title,
-      "url": "http://lter.kbs.msu.edu/protocols/#{id}",
-    }
+    { '@context': "http://schema.org",
+      '@type': "Article",
+      name: title,
+      url: "http://lter.kbs.msu.edu/protocols/#{id}" }
   end
 
   private

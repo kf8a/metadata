@@ -1,15 +1,17 @@
-When /^I fill in "([^"]*)" with "([^"]*)""$/ do |arg1, arg2|
-  fail
+# frozen_string_literal: true
+
+When(/^I fill in "([^"]*)" with "([^"]*)""$/) do |_arg1, _arg2|
+  raise
 end
 
-Given /^I am signed up and confirmed as "([^"]*)"\/"([^"]*)"$/ do |arg1, arg2|
-  fail
+Given(%r{^I am signed up and confirmed as "([^"]*)"/"([^"]*)"$}) do |_arg1, _arg2|
+  raise
 end
 
-Given /^I am signed up as "([^"]*)"\/"([^"]*)"$/ do |arg1, arg2|
-  fail
+Given(%r{^I am signed up as "([^"]*)"/"([^"]*)"$}) do |_arg1, _arg2|
+  raise
 end
 
-Then /^a confirmation message should be sent to "([^"]*)"$/ do |arg1|
-  fail
+Then(/^a confirmation message should be sent to "([^"]*)"$/) do |_arg1|
+  raise
 end

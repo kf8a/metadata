@@ -1,13 +1,12 @@
 xml.instruct!
 xml.eml(:eml,
-        'xmlns:eml'          => "eml://ecoinformatics.org/eml-2.1.0",
-        'xmlns:stmml'        => "http://www.xml-cml.org/schema/stmml-1.1",
-        'xmlns:xsi'          =>"http://www.w3.org/2001/XMLSchema-instance",
-        'xsi:schemaLocation' =>"eml://ecoinformatics.org/eml-2.1.0 http://nis.lternet.edu/schemas/EML/eml-2.1.0/eml.xsd",
-        :packageId           => "knb-lter-kbs-100#{datatable.id}.#{datatable.dataset.version}",
-        :system              =>"KBS LTER")  do
-
-  xml.access(:scope => 'document', :order => 'allowFirst', :authSystem => 'knb') do
+        'xmlns:eml' => "eml://ecoinformatics.org/eml-2.1.0",
+        'xmlns:stmml' => "http://www.xml-cml.org/schema/stmml-1.1",
+        'xmlns:xsi' => "http://www.w3.org/2001/XMLSchema-instance",
+        'xsi:schemaLocation' => "eml://ecoinformatics.org/eml-2.1.0 http://nis.lternet.edu/schemas/EML/eml-2.1.0/eml.xsd",
+        :packageId => "knb-lter-kbs-100#{datatable.id}.#{datatable.dataset.version}",
+        :system => "KBS LTER") do
+  xml.access(scope: 'document', order: 'allowFirst', authSystem: 'knb') do
     xml.allow do
       xml.principal "uid=KBS,o=lter,dc=ecoinformatics,dc=org"
       xml.permission "all"
@@ -50,8 +49,8 @@ xml.eml(:eml,
       xml.geographicCoverage do
         xml.geographicDescription "The areas around the Kellog Biological Station in southwest Michigan"
         xml.boundingCoordinates do
-          xml.westBoundingCoordinate -85.404699
-          xml.eastBoundingCoordinate -85.366857
+          xml.westBoundingCoordinate(-85.404699)
+          xml.eastBoundingCoordinate(-85.366857)
           xml.northBoundingCoordinate 42.420265
           xml.southBoundingCoordinate 42.391019
         end

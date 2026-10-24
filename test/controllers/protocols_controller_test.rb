@@ -1,7 +1,8 @@
-require File.expand_path('../../test_helper',__FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('../test_helper', __dir__)
 
 class ProtocolsControllerTest < ActionController::TestCase
-
   context 'an admin user' do
     setup do
       generate_websites_and_protocols
@@ -125,7 +126,7 @@ class ProtocolsControllerTest < ActionController::TestCase
         post :create, params: { protocol: { dataset_id: 35 } }
       end
 
-      should redirect_to('the sign in page') { new_user_session_path}
+      should redirect_to('the sign in page') { new_user_session_path }
     end
 
     context 'GET: new' do
@@ -133,7 +134,7 @@ class ProtocolsControllerTest < ActionController::TestCase
         get :new
       end
 
-      should redirect_to('the sign in page') { new_user_session_path}
+      should redirect_to('the sign in page') { new_user_session_path }
     end
 
     context 'GET: show' do

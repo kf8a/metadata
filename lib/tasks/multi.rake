@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 desc 'Run all tests and specs, but not features'
 task multi: 'multi:no_cuke'
 

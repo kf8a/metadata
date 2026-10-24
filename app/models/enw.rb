@@ -9,12 +9,12 @@ class Enw
   end
 
   def to_enw
-    "%0 #{endnote_type}#{title_to_enw}#{authors.to_enw}"\
-    "#{editors.to_enw}#{endnote_publication_data}"\
-    "#{volume}#{page_numbers_to_enw}#{pub_year_to_enw}"\
-    "#{abstract_to_enw}#{doi_to_enw}"\
-    "#{publisher_to_enw}#{publisher_url_to_enw}#{isbn_to_enw}#{city_to_enw}"\
-    "#{accession_number}\n"
+    "%0 #{endnote_type}#{title_to_enw}#{authors.to_enw}" \
+      "#{editors.to_enw}#{endnote_publication_data}" \
+      "#{volume}#{page_numbers_to_enw}#{pub_year_to_enw}" \
+      "#{abstract_to_enw}#{doi_to_enw}" \
+      "#{publisher_to_enw}#{publisher_url_to_enw}#{isbn_to_enw}#{city_to_enw}" \
+      "#{accession_number}\n"
   end
 
   private

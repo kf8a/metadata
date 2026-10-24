@@ -1,4 +1,6 @@
-Given /^the datatable has a collection$/ do
+# frozen_string_literal: true
+
+Given(/^the datatable has a collection$/) do
   datatable = Datatable.last
-  collection = Factory.create(:collection, :datatable => datatable)
+  Factory.create(:collection, datatable: datatable)
 end

@@ -1,4 +1,6 @@
-require File.expand_path('../../test_helper', __FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('../test_helper', __dir__)
 
 class PermissionTest < ActiveSupport::TestCase
   should belong_to :user
@@ -17,9 +19,9 @@ class PermissionTest < ActiveSupport::TestCase
       datatable.owners = [owner]
 
       @permission = FactoryBot.build :permission,
-                                      datatable: datatable,
-                                      user: user,
-                                      owner: owner
+                                     datatable: datatable,
+                                     user: user,
+                                     owner: owner
     end
 
     should 'be valid' do
@@ -48,7 +50,7 @@ class PermissionTest < ActiveSupport::TestCase
       p.owner     = FactoryBot.create(:user)
       p.user      = FactoryBot.create(:user)
 
-      assert !p.valid?
+      assert_not p.valid?
       assert_equal ['owners only'], p.errors[:base]
     end
 
@@ -67,7 +69,7 @@ class PermissionTest < ActiveSupport::TestCase
 
       assert p1.valid?
       assert p1.save
-      refute p2.valid?
+      assert_not p2.valid?
       assert p1.valid?
     end
 
@@ -123,15 +125,15 @@ class PermissionTest < ActiveSupport::TestCase
       datatable2 = FactoryBot.create :datatable
       datatable2.owners = [owner2]
       FactoryBot.create(:permission, owner: owner1, datatable: datatable1,
-                                      user: user1, decision: 'approved')
+                                     user: user1, decision: 'approved')
       FactoryBot.create(:permission, owner: owner1, datatable: datatable1,
-                                      user: user2, decision: 'denied')
+                                     user: user2, decision: 'denied')
       FactoryBot.create(:permission, owner: owner2, datatable: datatable2,
-                                      user: user4, decision: 'approved')
+                                     user: user4, decision: 'approved')
 
       assert Permission.permitted_users.include?(user1)
-      assert !Permission.permitted_users.include?(user2)
-      assert !Permission.permitted_users.include?(user3)
+      assert_not Permission.permitted_users.include?(user2)
+      assert_not Permission.permitted_users.include?(user3)
       assert Permission.permitted_users.include?(user4)
     end
   end

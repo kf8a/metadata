@@ -22,8 +22,8 @@ class ApplicationController < ActionController::Base
     return if current_user.try(:role) == 'admin'
 
     flash[:notice] =
-      'You must be signed in as an administrator' \
-      ' in order to access this page'
+      'You must be signed in as an administrator ' \
+      'in order to access this page'
     redirect_to new_user_session_url
   end
 

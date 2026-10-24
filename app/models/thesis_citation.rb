@@ -3,8 +3,8 @@
 # A citation representing a thesis or dissertation
 class ThesisCitation < Citation
   def formatted(options = {})
-    "#{author_and_year(options)} #{title_and_punctuation}"\
-    " #{series_title}, #{publisher}#{address_and_city}."
+    "#{author_and_year(options)} #{title_and_punctuation} " \
+      "#{series_title}, #{publisher}#{address_and_city}."
   end
 
   private

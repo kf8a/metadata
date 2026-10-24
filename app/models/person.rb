@@ -37,8 +37,9 @@ class Person < ApplicationRecord
     Affiliation.joins(
       "join people on affiliations.person_id = people.id
       join roles on roles.id = affiliations.role_id
-      join role_types on roles.role_type_id = role_types.id").
-      where(person_id: self.id).where(role_types: {name: "lno"})
+      join role_types on roles.role_type_id = role_types.id"
+    )
+               .where(person_id: id).where(role_types: { name: "lno" })
   end
 
   def expanded_name

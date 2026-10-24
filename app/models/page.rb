@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Represents a page for non structured data
 class Page < ApplicationRecord
   has_many :page_images

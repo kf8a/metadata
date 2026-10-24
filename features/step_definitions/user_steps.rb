@@ -1,31 +1,34 @@
-Given /^a user exists and is confirmed with an email of "([^"]*)"$/ do |email|
-  FactoryGirl.create :email_confirmed_user, :email => email
+# frozen_string_literal: true
+
+Given(/^a user exists and is confirmed with an email of "([^"]*)"$/) do |email|
+  FactoryGirl.create :email_confirmed_user, email: email
 end
 
-Given /^I am signed in as a normal user$/ do
-  @user = FactoryGirl.create :email_confirmed_user, :email => "normal@person.com"
+Given(/^I am signed in as a normal user$/) do
+  @user = FactoryGirl.create :email_confirmed_user, email: "normal@person.com"
   @user.role = "normal"
-  step %{I sign in as "normal@person.com/password"}
+  step %(I sign in as "normal@person.com/password")
 end
 
-Given /^I am signed in as an administrator$/ do
-  @user = User.find_by_email('admin@person.com') || FactoryGirl.create(:admin_user, :email => "admin@person.com")
-  step %{I sign in as "admin@person.com/password"}
+Given(/^I am signed in as an administrator$/) do
+  @user = User.find_by_email('admin@person.com') || FactoryGirl.create(:admin_user, email: "admin@person.com")
+  step %(I sign in as "admin@person.com/password")
 end
 
-Given /^I am signed in as an uploader$/ do
-  @user = User.find_by_email('uploader@person.com') || FactoryGirl.create(:email_confirmed_user, :email => "uploader@person.com")
+Given(/^I am signed in as an uploader$/) do
+  @user = User.find_by_email('uploader@person.com') || FactoryGirl.create(:email_confirmed_user,
+                                                                          email: "uploader@person.com")
   @user.role = "uploader"
-  step %{I sign in as "uploader@person.com/password"}
+  step %(I sign in as "uploader@person.com/password")
 end
 
-Given /^"([^"]*)" is a "([^"]*)" member$/ do |email, sponsor_name|
+Given(/^"([^"]*)" is a "([^"]*)" member$/) do |email, sponsor_name|
   user = User.find_by_email(email)
-  sponsor = FactoryGirl.create :sponsor, :name => sponsor_name
+  sponsor = FactoryGirl.create :sponsor, name: sponsor_name
   user.sponsors << sponsor
 end
 
-Then /^"([^"]*)" should be a "([^"]*)" member$/ do |email, sponsor_name|
+Then(/^"([^"]*)" should be a "([^"]*)" member$/) do |email, sponsor_name|
   user = User.find_by_email(email)
   sponsor = Sponsor.find_by_name(sponsor_name)
   assert sponsor.present?
@@ -35,6 +38,6 @@ Then /^"([^"]*)" should be a "([^"]*)" member$/ do |email, sponsor_name|
   assert user.sponsors.include?(sponsor)
 end
 
-Given /^I am signed out$/ do
-  Given %{I am on the sign out page}
+Given(/^I am signed out$/) do
+  Given %(I am on the sign out page)
 end

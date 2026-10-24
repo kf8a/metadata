@@ -11,7 +11,7 @@ class EmlDatasetBuilder
     @dataset = dataset
   end
 
-  def to_eml()
+  def to_eml
     @eml = ::Builder::XmlMarkup.new
     @eml.instruct! :xml, version: '1.0'
 
@@ -26,7 +26,7 @@ class EmlDatasetBuilder
       'system' => 'KBS LTER'
     ) do
       eml_access
-      eml_dataset()
+      eml_dataset
       eml_custom_unit_list if dataset.custom_units.present?
     end
   end
@@ -110,7 +110,7 @@ class EmlDatasetBuilder
     )
   end
 
-  def eml_dataset()
+  def eml_dataset
     @eml.dataset do
       eml_resource_group
       contact_info
@@ -118,11 +118,9 @@ class EmlDatasetBuilder
       eml_methods
       eml_project if dataset.project
       dataset.datatables.each do |table|
-        if table.on_web && table.valid_for_eml? && !table.is_restricted
-          EmlDatatableBuilder.new(table).build(@eml)
-        end
+        EmlDatatableBuilder.new(table).build(@eml) if table.on_web && table.valid_for_eml? && !table.is_restricted
       end
-      eml_files()
+      eml_files
       eml_useage_citation if dataset.has_citations?
     end
   end
@@ -139,7 +137,7 @@ class EmlDatasetBuilder
     end
   end
 
-  def eml_files()
+  def eml_files
     return unless dataset.files.attached?
 
     dataset.files.each do |file|
@@ -149,11 +147,12 @@ class EmlDatasetBuilder
         @eml.physical do
           @eml.objectName file.filename
           @eml.dataFormat { @eml.externallyDefinedFormat { @eml.formatName file.filename.extension } }
-          @eml.distribution {
-            @eml.online {
-              @eml.url Rails.application.routes.url_helpers.rails_blob_url(file, host: 'lter.kbs.msu.edu', protocol: 'https')
-               }
-              }
+          @eml.distribution do
+            @eml.online do
+              @eml.url Rails.application.routes.url_helpers.rails_blob_url(file, host: 'lter.kbs.msu.edu',
+                                                                                 protocol: 'https')
+            end
+          end
         end
         @eml.entityType 'File'
       end
@@ -208,13 +207,13 @@ class EmlDatasetBuilder
       end
     else
       @eml.intellectualRights do
-        @eml.para 'Data in the KBS LTER core database may not be published without written' \
-          ' permission of the lead investigator or project director. These restrictions' \
-          " are intended mainly to preserve the primary investigators' rights to first" \
-          ' publication and to ensure that data users are aware of the limitations' \
-          ' that may be associated with any specific data set. These restrictions apply' \
-          ' to both the baseline data set and to the data sets associated with specific' \
-          ' LTER-supported subprojects.'
+        @eml.para 'Data in the KBS LTER core database may not be published without written ' \
+                  'permission of the lead investigator or project director. These restrictions ' \
+                  "are intended mainly to preserve the primary investigators' rights to first " \
+                  'publication and to ensure that data users are aware of the limitations ' \
+                  'that may be associated with any specific data set. These restrictions apply ' \
+                  'to both the baseline data set and to the data sets associated with specific ' \
+                  'LTER-supported subprojects.'
         @eml.para 'All publications of KBS data and images must acknowledge KBS LTER support.'
       end
     end
@@ -249,7 +248,7 @@ class EmlDatasetBuilder
       next if ['investigator', 'lead investigator'].include?(role_name)
 
       # person.to_eml(@eml, role_name)
-      builder = EmlPersonBuilder.new(person).to_eml(@eml, role_name)
+      EmlPersonBuilder.new(person).to_eml(@eml, role_name)
     end
   end
 
@@ -344,8 +343,8 @@ class EmlDatasetBuilder
 
   def eml_geographic_coverage
     @eml.geographicCoverage do
-      @eml.geographicDescription 'The areas around the Kellogg Biological Station in' \
-                                   ' southwest Michigan'
+      @eml.geographicDescription 'The areas around the Kellogg Biological Station in ' \
+                                 'southwest Michigan'
       eml_bounding_coordinates
     end
   end

@@ -10,14 +10,13 @@ class UnitsController < ApplicationController
     @units = Unit.not_in_eml
   end
 
+  def show; end
   def edit; end
 
   def update
     flash[:notice] = 'Unit was succesfully updated' if @unit.update(unit_params)
     respond_with @unit
   end
-
-  def show; end
 
   private
 

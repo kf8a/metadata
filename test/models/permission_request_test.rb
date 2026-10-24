@@ -1,4 +1,6 @@
-require File.expand_path('../../test_helper', __FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('../test_helper', __dir__)
 
 class PermissionRequestTest < ActiveSupport::TestCase
   should belong_to :user
@@ -17,7 +19,7 @@ class PermissionRequestTest < ActiveSupport::TestCase
 
     should 'not allow a second request for the same user and datatable' do
       request2 = FactoryBot.build(:permission_request, user: @user, datatable: @datatable)
-      assert !request2.save
+      assert_not request2.save
     end
 
     should 'allow a second request for the same user different datatable' do

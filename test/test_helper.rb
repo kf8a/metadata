@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ENV['RAILS_ENV'] = 'test'
 require File.expand_path(File.dirname(__FILE__) + '../../config/environment')
 require 'rails/test_help'
@@ -6,7 +8,7 @@ require 'factory_bot'
 
 FactoryBot.reload
 
-require "#{Rails.root}/db/seeds.rb"
+require "#{Rails.root.join('db/seeds.rb')}"
 
 class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
@@ -29,7 +31,8 @@ class ActiveSupport::TestCase
 
     associations.each do |association|
       should "accept nested attributes for #{association}" do
-        assert klass.new.respond_to?("#{association}_attributes="), "#{klass} does not accept nested attributes for association: #{association}"
+        assert klass.new.respond_to?("#{association}_attributes="),
+               "#{klass} does not accept nested attributes for association: #{association}"
       end
     end
   end
@@ -50,11 +53,9 @@ class ActionController::TestCase
   include Devise::Test::ControllerHelpers
 end
 
-
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :minitest
     with.library :rails
   end
 end
-

@@ -309,14 +309,14 @@ describe Dataset do
 
   def valid_eml_doc?(eml_content)
     xsd = nil
-    Dir.chdir("#{Rails.root}/test/data/eml-2.1.0") do
+    Dir.chdir("#{Rails.root.join('test/data/eml-2.1.0')}") do
       xsd = Nokogiri::XML::Schema(File.read("eml.xsd"))
     end
-    if eml_content.start_with?('http://')
-      doc = Nokogiri::XML(open(eml_content))
-    else
-      doc = Nokogiri::XML(eml_content)
-    end
+    doc = if eml_content.start_with?('http://')
+            Nokogiri::XML(open(eml_content))
+          else
+            Nokogiri::XML(eml_content)
+          end
     assert_equal [], xsd.validate(doc) # make sure the document is valid
   end
 end

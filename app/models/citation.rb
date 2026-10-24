@@ -446,12 +446,8 @@ class Citation < ApplicationRecord
   def title_and_punctuation
     return '' if title.blank?
 
-    title.rstrip!
-    if title.match?(/[?!.]$/)
-      title
-    else
-      "#{title}."
-    end
+    stripped = title.rstrip
+    stripped.match?(/[?!.]$/) ? stripped : "#{stripped}."
   end
 
   def page_numbers

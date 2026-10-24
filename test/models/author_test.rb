@@ -1,13 +1,13 @@
-require File.expand_path('../../test_helper',__FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('../test_helper', __dir__)
 
 class AuthorTest < ActiveSupport::TestCase
-
   context 'parsing an author string' do
     setup do
       @author = Author.new
     end
     context 'parsing reverse names' do
-
       should 'parse Jones, Johnathon' do
         @author.name = 'Jones, Johnathon'
         assert_equal 'Jones', @author.sur_name
@@ -20,21 +20,21 @@ class AuthorTest < ActiveSupport::TestCase
       end
 
       should 'parse McDonalds, R. J.' do
-        @author.name = 'McDonalds, R. J.' 
+        @author.name = 'McDonalds, R. J.'
         assert_equal 'McDonalds', @author.sur_name
         assert_equal 'R', @author.given_name
         assert_equal 'J', @author.middle_name
       end
 
       should 'parse McDondalds, R.J.' do
-        @author.name = 'McDonalds, R.J.' 
+        @author.name = 'McDonalds, R.J.'
         assert_equal 'McDonalds', @author.sur_name
         assert_equal 'R', @author.given_name
         assert_equal 'J', @author.middle_name
       end
 
       should 'parse McDonads, Rob John Paul' do
-        @author.name = 'McDonalds, Rob John Paul' 
+        @author.name = 'McDonalds, Rob John Paul'
         assert_equal 'McDonalds', @author.sur_name
         assert_equal 'Rob', @author.given_name
         assert_equal 'John Paul', @author.middle_name
@@ -71,7 +71,7 @@ class AuthorTest < ActiveSupport::TestCase
       end
 
       should 'parse R. J. S. Paulson' do
-        @author.name = 'R. J. S. Paulson' 
+        @author.name = 'R. J. S. Paulson'
         assert_equal 'Paulson', @author.sur_name
         assert_equal 'R', @author.given_name
         assert_equal 'J S', @author.middle_name
@@ -86,9 +86,6 @@ class AuthorTest < ActiveSupport::TestCase
     end
   end
 end
-
-
-
 
 # == Schema Information
 #
@@ -105,4 +102,3 @@ end
 #  updated_at  :datetime
 #  suffix      :string(255)
 #
-

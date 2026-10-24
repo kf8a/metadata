@@ -1,4 +1,6 @@
-require File.expand_path('../../test_helper', __FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('../test_helper', __dir__)
 
 class StudyTest < ActiveSupport::TestCase
   should have_many :datatables
@@ -21,7 +23,7 @@ class StudyTest < ActiveSupport::TestCase
     end
 
     should 'return false if queried for a non affiliated datatable' do
-      assert !@study.include_datatables?([FactoryBot.create(:datatable)])
+      assert_not @study.include_datatables?([FactoryBot.create(:datatable)])
     end
 
     should 'find only the studies that include the datatable' do

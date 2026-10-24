@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe UnitsController, type: :controller  do
+describe UnitsController, type: :controller do
   before do
     sign_in FactoryBot.create(:admin_user)
 

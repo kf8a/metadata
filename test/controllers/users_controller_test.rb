@@ -1,4 +1,6 @@
-require File.expand_path('../test_helper',__dir__)
+# frozen_string_literal: true
+
+require File.expand_path('../test_helper', __dir__)
 
 class UsersControllerTest < ActionController::TestCase
   context 'sign_up with invite' do

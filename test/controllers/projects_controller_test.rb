@@ -1,7 +1,8 @@
-require File.expand_path('../../test_helper',__FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('../test_helper', __dir__)
 
 class ProjectsControllerTest < ActionController::TestCase
-
   def setup
     # TODO: test with non admin users
     signed_in_as_admin
@@ -50,7 +51,7 @@ class ProjectsControllerTest < ActionController::TestCase
       post :create, params: { project: { title: 'New project' } }
     end
 
-    should redirect_to("the project's page") { project_url(assigns(:project))}
+    should redirect_to("the project's page") { project_url(assigns(:project)) }
     should set_flash
   end
 

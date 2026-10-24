@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
 Metadata::Application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' , sessions: 'sessions' }
+  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks', sessions: 'sessions' }
   get 'auth/failure', to: redirect('/')
 
   # devise_scope :user do
   #   get 'sign_in', to: 'sessions#new', as: :new_user_session # redirect('/users/auth/glbrc'), as: :new_user_session
   #   delete 'sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
   # end
-
 
   get '/send_invitation/:id' => 'invites#send_invitation', :as => :send_invitation, via: [:get]
   get '/signup/:invite_code' => 'users#new', :as => :redeem_invitation, via: [:get]
@@ -51,7 +50,7 @@ Metadata::Application.routes.draw do
       post :set_affiliation_for
     end
   end
-  match 'knb/*id' => 'datasets#knb', via: [:get]
+  get 'knb/*id' => 'datasets#knb'
 
   resources :datatables do
     collection do
@@ -112,9 +111,9 @@ Metadata::Application.routes.draw do
   root to: 'datatables#index'
 
   if Rails.env.test?
-    match 'application_controller_test/foo/testadmin' => 'application_controller_test/foo#testadmin', via: [:get]
-    match 'application_controller_test/foo/testpagechoose' => 'application_controller_test/foo#testpagechoose', via: [:get]
-    match 'application_controller_test/foo/alphabetical' => 'application_controller_test/foo#alphabetical', via: [:get]
-    match 'application_controller_test/foo/emeritus' => 'application_controller_test/foo#emeritus', via: [:get]
+    get 'application_controller_test/foo/testadmin' => 'application_controller_test/foo#testadmin'
+    get 'application_controller_test/foo/testpagechoose' => 'application_controller_test/foo#testpagechoose'
+    get 'application_controller_test/foo/alphabetical' => 'application_controller_test/foo#alphabetical'
+    get 'application_controller_test/foo/emeritus' => 'application_controller_test/foo#emeritus'
   end
 end

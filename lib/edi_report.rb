@@ -13,6 +13,7 @@ require 'nokogiri'
 #      report.table_row(n)
 class EdiReport
   attr_reader :url_fragment, :doc, :SPACER
+
   SPACER = ' | '
 
   def initialize(scope, identifier, revision)
@@ -42,17 +43,17 @@ class EdiReport
   # Creates the markdown table header
 
   def self.table_header
-    ' | row  | citation | production' \
-      ' | population | organic' \
-      ' | inorganic  | disturbance' \
-      ' | supplemental information | top 10 paper |' + "\n"
+    ' | row  | citation | production ' \
+    '| population | organic ' \
+    '| inorganic  | disturbance ' \
+    '| supplemental information | top 10 paper |' + "\n"
   end
 
   ##
   # Creates the markdown table separator
 
   def self.table_spacer
-    '|----' * 8 + '|' + "\n"
+    ('|----' * 8) + '|' + "\n"
   end
 
   ##
@@ -116,7 +117,7 @@ class EdiReport
   def doi
     doi_url = "https://pasta.lternet.edu/package/doi/eml#{url_fragment}"
     doi_string = URI.open(doi_url).read
-    doi_string.sub(/doi:/, 'https://doi.org/')
+    doi_string.sub('doi:', 'https://doi.org/')
   end
 
   def title

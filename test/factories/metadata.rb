@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   # Independent factories#########
   factory :affiliation do
@@ -13,7 +15,7 @@ FactoryBot.define do
   end
 
   factory :editor do
-    seniority  { 1 }
+    seniority { 1 }
   end
 
   factory :citation do

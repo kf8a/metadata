@@ -1,4 +1,6 @@
-require File.expand_path('../../test_helper', __FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('../test_helper', __dir__)
 
 class PersonTest < ActiveSupport::TestCase
   should have_many :datatables
@@ -61,29 +63,29 @@ class PersonTest < ActiveSupport::TestCase
   context 'a non emeritus person' do
     setup do
       @person = FactoryBot.build(:person,
-                                  lter_roles: [FactoryBot.build(:role,
-                                                                 name: 'something else')])
+                                 lter_roles: [FactoryBot.build(:role,
+                                                               name: 'something else')])
     end
 
     should 'return false for #only_emeritus?' do
-      assert !@person.only_emeritus?
+      assert_not @person.only_emeritus?
     end
 
     should 'return false for #only_emeritus? if one role is non emeritus' do
       @person.lter_roles << FactoryBot.build(:role)
-      assert !@person.only_emeritus?
+      assert_not @person.only_emeritus?
     end
   end
 
   context 'a persons name' do
     setup do
       @person = FactoryBot.create(:person, given_name: 'howard',
-                                            sur_name: 'spencer')
+                                           sur_name: 'spencer')
       @friendly_person = FactoryBot.create(:person, given_name: 'howard',
-                                                     sur_name: 'spencer',
-                                                     friendly_name: 'bops')
+                                                    sur_name: 'spencer',
+                                                    friendly_name: 'bops')
       @long_name = FactoryBot.create(:person, given_name: 'Shankurnarayanan',
-                                               sur_name: 'Ramachandranathan')
+                                              sur_name: 'Ramachandranathan')
     end
 
     should 'return first_name last_name in response to full_name' do
@@ -109,35 +111,35 @@ class PersonTest < ActiveSupport::TestCase
   context 'dealing with non US address' do
     setup do
       @implicit_us_address = FactoryBot.create(:person, street_address: '208 Main St.',
+                                                        city: 'Anytown',
+                                                        locale: 'CA',
+                                                        postal_code: '55555')
+      @explicit_us_address = FactoryBot.create(:person,  street_address: '208 Main St.',
                                                          city: 'Anytown',
                                                          locale: 'CA',
-                                                         postal_code: '55555')
-      @explicit_us_address = FactoryBot.create(:person,  street_address: '208 Main St.',
-                                                          city: 'Anytown',
-                                                          locale:  'CA',
-                                                          postal_code: '55555',
-                                                          country: 'USA')
-      @less_explicit_us_address = FactoryBot.create(:person,  street_address: '208 Main St.',
-                                                               city: 'Anytown',
-                                                               locale: 'CA',
-                                                               postal_code: '55555',
-                                                               country: 'US')
+                                                         postal_code: '55555',
+                                                         country: 'USA')
+      @less_explicit_us_address = FactoryBot.create(:person, street_address: '208 Main St.',
+                                                             city: 'Anytown',
+                                                             locale: 'CA',
+                                                             postal_code: '55555',
+                                                             country: 'US')
       @eu_address = FactoryBot.create(:person, street_address: 'Hanover Strasse 20',
-                                                city: 'Hanover',
-                                                postal_code: '242435',
-                                                country: 'Germany')
+                                               city: 'Hanover',
+                                               postal_code: '242435',
+                                               country: 'Germany')
       @empty_country_address = FactoryBot.create(:person, street_address: '208 Main St.',
-                                                           city: 'Anytown',
-                                                           locale: 'CA',
-                                                           postal_code: '55555',
-                                                           country: '')
+                                                          city: 'Anytown',
+                                                          locale: 'CA',
+                                                          postal_code: '55555',
+                                                          country: '')
     end
 
     should 'usa_address? should return appropriately' do
       assert @implicit_us_address.usa_address?
       assert @explicit_us_address.usa_address?
       assert @less_explicit_us_address.usa_address?
-      assert !@eu_address.usa_address?
+      assert_not @eu_address.usa_address?
       assert @empty_country_address.usa_address?
     end
 
@@ -169,22 +171,22 @@ class PersonTest < ActiveSupport::TestCase
       @no_locale = FactoryBot.create(:person, full_address.merge(locale: nil))
       @locale_blank = FactoryBot.create(:person, full_address.merge(locale: ' '))
       @eu_address = FactoryBot.create(:person, street_address: 'Hanover Strasse 20',
-                                                city: 'Hanover',
-                                                postal_code: '242435',
-                                                country: 'Germany')
+                                               city: 'Hanover',
+                                               postal_code: '242435',
+                                               country: 'Germany')
     end
 
     should 'tell the status of the address' do
       assert @complete.complete_address?
-      assert !@no_city.complete_address?
-      assert !@city_empty.complete_address?
-      assert !@city_blank.complete_address?
-      assert !@no_street_address.complete_address?
-      assert !@street_address_blank.complete_address?
-      assert !@no_postal_code.complete_address?
-      assert !@postal_code_blank.complete_address?
-      assert !@no_locale.complete_address?
-      assert !@locale_blank.complete_address?
+      assert_not @no_city.complete_address?
+      assert_not @city_empty.complete_address?
+      assert_not @city_blank.complete_address?
+      assert_not @no_street_address.complete_address?
+      assert_not @street_address_blank.complete_address?
+      assert_not @no_postal_code.complete_address?
+      assert_not @postal_code_blank.complete_address?
+      assert_not @no_locale.complete_address?
+      assert_not @locale_blank.complete_address?
       assert @eu_address.complete_address?
     end
 

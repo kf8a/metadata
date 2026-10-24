@@ -4,11 +4,10 @@
 require 'commonmarker'
 
 module ApplicationHelper
-
   def markdown_to_html(text)
     return nil if text.blank?
 
-    raw(Commonmarker.to_html(text, options: {render: {unsafe: true}}))
+    raw(Commonmarker.to_html(text, options: { render: { unsafe: true } }))
   end
 
   def lter_roles
@@ -45,10 +44,10 @@ module ApplicationHelper
   end
 
   # TODO: do remove in favor of unobtrusive javascript
-  def link_to_function(name, *args, &block)
+  def link_to_function(name, *args, &)
     html_options = args.extract_options!.symbolize_keys
 
-    function = block_given? ? update_page(&block) : args[0] || ''
+    function = block_given? ? update_page(&) : args[0] || ''
     onclick = "#{"#{html_options[:onclick]}; " if html_options[:onclick]}#{function}; return false;"
     href = html_options[:href] || '#'
 
