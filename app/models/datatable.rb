@@ -251,14 +251,22 @@ class Datatable < ApplicationRecord
 
   # publish a dataset to S3 for caching
   def publish
-    file = Tempfile.new('csv_cache')
-    file << approved_csv
-    file.close
-    csv_file.attach(io: File.open(file),
-                    filename: "#{id}-#{title.tr(' ', '-')}.csv",
-                    content_type: 'text/csv')
-    save!
-    file.unlink
+    Tempfile.create(['csv_cache', '.csv']) do |file|
+      write_approved_csv(file)
+      file.rewind
+      # upload now, while the tempfile still exists
+      blob = ActiveStorage::Blob.create_and_upload!(io: file,
+                                                    filename: "#{id}-#{title.tr(' ', '-')}.csv",
+                                                    content_type: 'text/csv')
+      csv_file.attach(blob)
+      save!
+    end
+  end
+
+  # Writes the public CSV download (headers plus approved rows) to io
+  def write_approved_csv(io)
+    io.write csv_headers
+    self.class.stream_query_rows(approved_data_query) { |row| io.write row }
   end
 
   # remove a dataset from S3 caching
@@ -406,13 +414,18 @@ class Datatable < ApplicationRecord
     [
       "# #{title}\n",
       data_source,
-      "# #{dataset.doi}\n",
+      doi_header,
       terms_of_use,
       variate_table,
       data_comments,
       "#{variate_names.join(',')}\n",
       "#{variate_units.join(',')}\n"
     ].join
+  end
+
+  def doi_header
+    doi = dataset.current_doi&.doi
+    doi.present? ? "# https://doi.org/#{doi}\n" : ''
   end
 
   def variate_table

@@ -32,12 +32,17 @@ describe DatatablesController, type: :controller  do
 
   describe 'responding to publish request' do
     it 'should publish' do
-      datatable = Datatable.new
-      allow(datatable).to receive(:object).and_return('select now() as sample_date')
-      allow(datatable).to receive(:save!).and_return(true)
-      expect(Datatable).to receive(:find).with('1').at_least(1).and_return(datatable)
-      put :publish, params: { id: '1' }
+      website = Website.find_by(name: 'lter')
+      website.update!(url: 'lter.kbs.msu.edu')
+      dataset = FactoryBot.create(:dataset, website: website)
+      datatable = FactoryBot.create(:datatable, dataset: dataset,
+                                                object: "select '2020-01-01'::date as sample_date")
+
+      put :publish, params: { id: datatable.id }
+
       expect(response.code).to eq '200'
+      expect(datatable.reload.csv_file).to be_attached
+      expect(datatable.csv_file.download).to eq(datatable.csv_headers + "2020-01-01\n")
     end
   end
 
