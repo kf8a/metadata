@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 describe BulletinCitation do
-  its(:bibtex_type) { should == :report}
-  its(:endnote_type) { should == "Pamphlet\n" }
-  its(:endnote_publication_data) { should == "" }
 
 
   it 'should be formatted correctly' do

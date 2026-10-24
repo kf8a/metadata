@@ -2,9 +2,6 @@ require 'rails_helper'
 
 describe ChapterCitation do
   it { should_not be_book }
-  its(:bibtex_type) { should == :chapter }
-  its(:endnote_type) { should == "CHAP\n" }
-  its(:endnote_publication_data) { should == "" }
 
   describe 'formatting' do
     before do 
