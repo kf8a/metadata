@@ -64,7 +64,7 @@ class ScoreCard
     begin
       query_result    = db_connection.execute(query)
       approved_result = db_connection.execute(approved_query)
-    rescue Exception
+    rescue ActiveRecord::StatementInvalid
       query_result = []
       approved_result = []
     end
