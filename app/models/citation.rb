@@ -415,10 +415,6 @@ class Citation < ApplicationRecord
     treatments.map { |treatment| Treatment.option_for(treatment).first }
   end
 
-  def search_tags
-    treatments.map { |treatment| Treatment.option_for(treatment).first }
-  end
-
   def search_document_type
     self.class.name.delete_suffix('Citation').underscore.presence || 'article'
   end
