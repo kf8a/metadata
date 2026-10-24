@@ -20,7 +20,11 @@ class User < ApplicationRecord
 
   scope :by_email, -> { order 'email' }
 
-  ALLOWED = %w["glbrc.org/GLBRC/GLBRC Groups/Y16-20/Sustainable_Bioenergy_Cropping_Systems/SEP" "glbrc.org\\AIM-InformationServices"].freeze
+  # Identity provider groups whose members get GLBRC data access on first sign-in
+  ALLOWED = [
+    'glbrc.org/GLBRC/GLBRC Groups/Y16-20/Sustainable_Bioenergy_Cropping_Systems/SEP',
+    'glbrc.org\\AIM-InformationServices'
+  ].freeze
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
@@ -34,10 +38,9 @@ class User < ApplicationRecord
         user.email = auth.info.id_token.email
         user.password = Devise.friendly_token[0, 20]
         # group is aim-7 = member
-        if !auth.info.id_tokens.nil? && allowed_group(auth.info.id_token.groups)
-          s = Sponsor.find_by(name: 'glbrc')
-          user.sponsors=[s]
-          user.save
+        if allowed_group?(auth.info.id_token.groups)
+          glbrc = Sponsor.find_by(name: 'glbrc')
+          user.sponsors = [glbrc] if glbrc
         end
         user.save
       end
@@ -61,12 +64,8 @@ class User < ApplicationRecord
     permission && !permission.denied?
   end
 
-  private
-
-  def allowed_group(groups)
-    result = ALLOWED.map do | allowed_group |
-      groups.contains(allowed_group)
-    end
-    result.any?(true)
+  def self.allowed_group?(groups)
+    Array(groups).intersect?(ALLOWED)
   end
+  private_class_method :allowed_group?
 end
