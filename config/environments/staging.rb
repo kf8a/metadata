@@ -52,7 +52,7 @@ Rails.application.configure do
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -65,11 +65,12 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :sendmail
   Rails.application.config.middleware.use ExceptionNotification::Rack,
-            ignore_exceptions: ['Mime::Type::InvalidMimeType','ActionView::TemplateError'] + ExceptionNotifier.ignored_exceptions,
-            email: { email_prefix: '[METADATA] ',
-                     sender_address: %("notifier" <notifier@oshtemo.kbs.msu.edu>),
-                     exception_recipients: %w[bohms@fastmail.com hsiehhs7@msu.edu] },
-            error_grouping: true
+                                          ignore_exceptions: ['Mime::Type::InvalidMimeType',
+                                                              'ActionView::TemplateError'] + ExceptionNotifier.ignored_exceptions,
+                                          email: { email_prefix: '[METADATA] ',
+                                                   sender_address: %("notifier" <notifier@oshtemo.kbs.msu.edu>),
+                                                   exception_recipients: %w[bohms@fastmail.com hsiehhs7@msu.edu] },
+                                          error_grouping: true
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -83,7 +84,7 @@ Rails.application.configure do
   config.active_support.deprecation = :notify
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
+  config.log_formatter = Logger::Formatter.new
 
   # Use a different logger for distributed setups.
   # require 'syslog/logger'

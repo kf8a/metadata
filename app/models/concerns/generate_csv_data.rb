@@ -3,6 +3,7 @@
 # generate csv for downloads
 module GenerateCsvData
   extend ActiveSupport::Concern
+
   class_methods do
     # options = "WITH CSV HEADER"
     def stream_query_rows(sql_query, options = "WITH CSV")

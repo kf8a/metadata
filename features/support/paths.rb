@@ -25,16 +25,16 @@ module NavigationHelpers
       edit_datatable_path(Datatable.order('created_at').last)
 
     when /the datatable download page/
-      datatable_path(Datatable.order('created_at').last, :format => 'csv')
+      datatable_path(Datatable.order('created_at').last, format: 'csv')
 
     when /the datatable download page for "(.*)"/
-      datatable_path(Datatable.find_by_name($1), :format => 'csv')
+      datatable_path(Datatable.find_by_name(::Regexp.last_match(1)), format: 'csv')
 
     when /the datatable show page for "(.*)"/
-      datatable_path(Datatable.find_by_name($1))
+      datatable_path(Datatable.find_by_name(::Regexp.last_match(1)))
 
     when /the quality control page for "(.*)"/
-      qc_datatable_path(Datatable.find_by_name($1))
+      qc_datatable_path(Datatable.find_by_name(::Regexp.last_match(1)))
 
     when /LTER datatables/
       datatables_path
@@ -57,16 +57,16 @@ module NavigationHelpers
     # the following are examples using path_to_pickle
 
     when /^#{capture_model}(?:'s)? page$/                           # eg. the forum's page
-      path_to_pickle $1
+      path_to_pickle ::Regexp.last_match(1)
 
     when /^#{capture_model}(?:'s)? #{capture_model}(?:'s)? page$/   # eg. the forum's post's page
-      path_to_pickle $1, $2
+      path_to_pickle ::Regexp.last_match(1), ::Regexp.last_match(2)
 
     when /^#{capture_model}(?:'s)? #{capture_model}'s (.+?) page$/  # eg. the forum's post's comments page
-      path_to_pickle $1, $2, :extra => $3                           #  or the forum's post's edit page
+      path_to_pickle ::Regexp.last_match(1), ::Regexp.last_match(2), extra: ::Regexp.last_match(3) #  or the forum's post's edit page
 
-    when /the #{capture_model}(?:'s)? (.+?) page/ 
-        polymorphic_path [$2.to_sym, model!($1)] 
+    when /the #{capture_model}(?:'s)? (.+?) page/
+      polymorphic_path [::Regexp.last_match(2).to_sym, model!(::Regexp.last_match(1))]
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
@@ -77,9 +77,9 @@ module NavigationHelpers
     else
       begin
         page_name =~ /the (.*) page/
-        path_components = $1.split(/\s+/)
-        self.send(path_components.push('path').join('_').to_sym)
-      rescue Object => e
+        path_components = ::Regexp.last_match(1).split(/\s+/)
+        send(path_components.push('path').join('_').to_sym)
+      rescue Object
         raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
           "Now, go and add a mapping in #{__FILE__}"
       end

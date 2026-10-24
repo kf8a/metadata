@@ -1,5 +1,9 @@
-Given /^the local venue type exists$/ do
-  ven = VenueType.find(1) rescue nil
+Given(/^the local venue type exists$/) do
+  ven = begin
+    VenueType.find(1)
+  rescue StandardError
+    nil
+  end
   unless ven
     ven = VenueType.new
     ven.id = 1

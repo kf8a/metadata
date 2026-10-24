@@ -1,4 +1,4 @@
-require File.expand_path('../../test_helper', __FILE__)
+require File.expand_path('../test_helper', __dir__)
 
 class ThemeTest < ActiveSupport::TestCase
   should have_and_belong_to_many :datasets
@@ -28,7 +28,7 @@ class ThemeTest < ActiveSupport::TestCase
     end
 
     should 'return false if @theme does not have a datatable' do
-      assert !@theme.datatables?
+      assert_not @theme.datatables?
     end
 
     should 'return true if the subtheme has a datatable' do
@@ -53,13 +53,13 @@ class ThemeTest < ActiveSupport::TestCase
       @datatable.theme = @theme
       assert @datatable.save
       study = FactoryBot.create(:study)
-      assert !@theme.datatables?(study)
+      assert_not @theme.datatables?(study)
     end
 
     context 'include_datatables?' do
       should 'return false if the datatable is not in the current theme' do
         datatable = FactoryBot.create(:datatable)
-        assert !@theme.include_datatables?([datatable])
+        assert_not @theme.include_datatables?([datatable])
       end
 
       should 'return true if the datatable is in the current theme' do
@@ -81,12 +81,12 @@ class ThemeTest < ActiveSupport::TestCase
         end
 
         should 'return false if the datatable is in a different study ' do
-          assert !@theme.include_datatables_from_study?([@datatable], @study2)
+          assert_not @theme.include_datatables_from_study?([@datatable], @study2)
         end
 
         should 'return false if there is an empty array passed' do
-          assert !@theme.include_datatables_from_study?([], @study2)
-          assert !@theme.include_datatables_from_study?([], @study)
+          assert_not @theme.include_datatables_from_study?([], @study2)
+          assert_not @theme.include_datatables_from_study?([], @study)
         end
 
         should 'only return datatables from the offered tables' do
@@ -110,12 +110,12 @@ class ThemeTest < ActiveSupport::TestCase
         end
 
         should 'not show datatable outside of the study' do
-          assert !@theme.datatables_in_study(@study).include?(@outside_datatable)
+          assert_not @theme.datatables_in_study(@study).include?(@outside_datatable)
         end
 
         should 'show only the datatables selected as test_datatables' do
           assert @theme.datatables_in_study(@study, [@datatable]).include?(@datatable)
-          assert !@theme.datatables_in_study(@study, [@datatable]).include?(@datatable2)
+          assert_not @theme.datatables_in_study(@study, [@datatable]).include?(@datatable2)
         end
       end
     end

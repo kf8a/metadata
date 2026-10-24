@@ -1,3 +1,3 @@
-Given /^(\d+) is published$/ do |id|
+Given(/^(\d+) is published$/) do |id|
   Citation.find(id).publish!
 end

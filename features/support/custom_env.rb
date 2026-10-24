@@ -1,2 +1,2 @@
 require 'capybara/cucumber'
-require "#{Rails.root}/db/seeds.rb"
+require "#{Rails.root.join('db/seeds.rb')}"

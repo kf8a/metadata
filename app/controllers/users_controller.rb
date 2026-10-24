@@ -7,6 +7,17 @@ class UsersController < ApplicationController
 
   def index; end
 
+  def show
+    logger.info "Current user (usercontroller) #{current_user}"
+    logger.info request.format
+    head :bad_request unless request.format == 'text/javascript'
+  end
+
+  def new
+    @invite_code = params[:invite_code]
+    super
+  end
+
   def create
     @user = User.new user_params
     @invite = Invite.find_redeemable(params[:invite_code])
@@ -18,17 +29,6 @@ class UsersController < ApplicationController
     else
       render :new
     end
-  end
-
-  def new
-    @invite_code = params[:invite_code]
-    super
-  end
-
-  def show
-    logger.info "Current user (usercontroller) #{current_user}"
-    logger.info request.format
-    head :bad_request unless request.format == 'text/javascript'
   end
 
   private

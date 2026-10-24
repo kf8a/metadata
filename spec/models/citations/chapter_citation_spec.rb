@@ -4,7 +4,7 @@ describe ChapterCitation do
   it { should_not be_book }
 
   describe 'formatting' do
-    before do 
+    before do
       @chapter = ChapterCitation.new
       allow(@chapter).to receive(:author_and_year).and_return 'Jones 1981.'
 
@@ -34,7 +34,7 @@ describe ChapterCitation do
   #   # chapter.stub(:author_and_year) {"Pryor, S. C., D. Scavia, C. Downer, M. Gaden, L. Iverson, R. Nordstrom, J. Patz, and G. P. Robertson. 2014."}
   #   # chapter.stub(:publication) {"Climate change impacts in the United States: The Third National Climate Assessment"}
   #   # chapter.stub(:doi) {"10.7930/J0J1012N"}
-  #   # chapter.stub(:eds) {"J. M. Melillo, T. C. Richmond, and G. W. Yohe eds."} 
+  #   # chapter.stub(:eds) {"J. M. Melillo, T. C. Richmond, and G. W. Yohe eds."}
   #   # chapter.formatted.should == "Pryor, S. C., D. Scavia, C. Downer, M. Gaden, L. Iverson, R. Nordstrom, J. Patz, and G. P. Robertson. 2014. Chapter 18: Midwest. Pages 418-440 in J. M. Melillo, T. C. Richmond, and G. W. Yohe, eds. Climate change impacts in the United States: The Third National Climate Assessment. U.S. Global Change Research Program, doi:10.7930/J0J1012N"
   # end
 end

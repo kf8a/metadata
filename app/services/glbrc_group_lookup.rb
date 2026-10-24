@@ -15,4 +15,3 @@ class GlbrcGroupLookup
 
   attr_reader :user
 end
-

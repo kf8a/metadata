@@ -1,5 +1,9 @@
-Given /^the journal articles publication type exists$/ do
-  pub = PublicationType.find(1) rescue nil
+Given(/^the journal articles publication type exists$/) do
+  pub = begin
+    PublicationType.find(1)
+  rescue StandardError
+    nil
+  end
   unless pub
     pub = PublicationType.new
     pub.id = 1

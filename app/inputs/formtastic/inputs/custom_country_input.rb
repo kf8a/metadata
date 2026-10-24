@@ -3,10 +3,14 @@ module Formtastic
     class CustomCountryInput
       include Base
 
-      CountrySelectPluginMissing = Class.new(StandardError)
+      class CountrySelectPluginMissing < StandardError
+      end
 
       def to_html
-        raise CountrySelectPluginMissing, 'To use the :country input, please install a country_select plugin, like this one: https://github.com/stefanpenner/country_select' unless builder.respond_to?(:country_select)
+        unless builder.respond_to?(:country_select)
+          raise CountrySelectPluginMissing,
+                'To use the :country input, please install a country_select plugin, like this one: https://github.com/stefanpenner/country_select'
+        end
 
         input_wrapping do
           label_html <<

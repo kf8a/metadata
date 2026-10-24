@@ -1,4 +1,4 @@
-require File.expand_path('../../test_helper', __FILE__)
+require File.expand_path('../test_helper', __dir__)
 
 class WebsiteTest < ActiveSupport::TestCase
   should have_many :datasets

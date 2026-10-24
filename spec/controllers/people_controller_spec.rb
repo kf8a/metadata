@@ -1,9 +1,7 @@
 require 'rails_helper'
 
-describe PeopleController, type: :controller  do
-
+describe PeopleController, type: :controller do
   context 'not signed in' do
-
     it 'GET: index' do
       get :index
 
@@ -151,13 +149,13 @@ describe PeopleController, type: :controller  do
     it 'PUT update' do
       lter_role = FactoryBot.create(:lter_role)
       put :update, params: { id: @person.id, person: { city: "Hickory Corners", postal_code: "49060", title: "",
-                                                lter_role_ids: [lter_role.id.to_s],
-                                                country: "USA", sur_name: "Grillo (REU)", url: "",
-                                                street_address: "", given_name: "Michael",
-                                                sub_organization: "Kellogg Biological Station",
-                                                fax: "", phone: "", organization: "Michigan State University",
-                                                locale: "MI", friendly_name: "Mike",
-                                                middle_name: "", email: "grillom1@msu.edu" } }
+                                                       lter_role_ids: [lter_role.id.to_s],
+                                                       country: "USA", sur_name: "Grillo (REU)", url: "",
+                                                       street_address: "", given_name: "Michael",
+                                                       sub_organization: "Kellogg Biological Station",
+                                                       fax: "", phone: "", organization: "Michigan State University",
+                                                       locale: "MI", friendly_name: "Mike",
+                                                       middle_name: "", email: "grillom1@msu.edu" } }
 
       expect(response).to redirect_to("/people/#{@person.id}")
     end

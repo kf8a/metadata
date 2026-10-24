@@ -1,4 +1,4 @@
-require File.expand_path('../../test_helper',__FILE__)
+require File.expand_path('../test_helper', __dir__)
 require 'bibtex'
 
 class CitationTest < ActiveSupport::TestCase
@@ -15,9 +15,9 @@ class CitationTest < ActiveSupport::TestCase
     end
 
     should 'Citation.by_date(date) should only include citations after date' do
-      date = {'year' => '2001', 'month' => '10', 'day' => '21'}
+      date = { 'year' => '2001', 'month' => '10', 'day' => '21' }
       assert_includes Citation.by_date(date), @newcitation
-      refute_includes Citation.by_date(date), @oldcitation
+      assert_not_includes Citation.by_date(date), @oldcitation
     end
   end
 
@@ -60,13 +60,13 @@ class CitationTest < ActiveSupport::TestCase
   context 'a citation object with out a pub year' do
     setup do
       @citation = ArticleCitation.new
-      @citation.authors << Author.new( :sur_name => 'Loecke',
-                                       :given_name => 'T', :middle_name => 'D',
-                                       :seniority => 1)
+      @citation.authors << Author.new(sur_name: 'Loecke',
+                                      given_name: 'T', middle_name: 'D',
+                                      seniority: 1)
 
-      @citation.authors << Author.new(:sur_name => 'Robertson',
-                                      :given_name => 'G', :middle_name => 'P',
-                                      :seniority => 2)
+      @citation.authors << Author.new(sur_name: 'Robertson',
+                                      given_name: 'G', middle_name: 'P',
+                                      seniority: 2)
 
       @citation.title = 'Soil resource heterogeneity in the form of aggregated litter alters maize productivity'
       @citation.publication = 'Plant and Soil'
@@ -87,20 +87,20 @@ class CitationTest < ActiveSupport::TestCase
 %P 231-241
 %X An abstract of the article.
 %M KBS.#{@citation.id}\n"
-    assert_equal result, @citation.to_enw
+      assert_equal result, @citation.to_enw
     end
   end
 
   context 'a citation object with multiple authors' do
     setup do
       @citation = ArticleCitation.new
-      @citation.authors << Author.new( :sur_name => 'Loecke',
-                                       :given_name => 'T', :middle_name => 'D',
-                                       :seniority => 1)
+      @citation.authors << Author.new(sur_name: 'Loecke',
+                                      given_name: 'T', middle_name: 'D',
+                                      seniority: 1)
 
-      @citation.authors << Author.new(:sur_name => 'Robertson',
-                                      :given_name => 'G', :middle_name => 'P',
-                                      :seniority => 2)
+      @citation.authors << Author.new(sur_name: 'Robertson',
+                                      given_name: 'G', middle_name: 'P',
+                                      seniority: 2)
 
       @citation.title = 'Soil resource heterogeneity in the form of aggregated litter alters maize productivity'
       @citation.publication = 'Plant and Soil'
@@ -128,7 +128,7 @@ class CitationTest < ActiveSupport::TestCase
 %D 2008
 %X An abstract of the article.
 %M KBS.#{@citation.id}\n"
-    assert_equal result, @citation.to_enw
+      assert_equal result, @citation.to_enw
     end
 
     context 'as bibtex' do
@@ -141,7 +141,8 @@ class CitationTest < ActiveSupport::TestCase
       end
 
       should 'have right title' do
-        assert_equal 'Soil resource heterogeneity in the form of aggregated litter alters maize productivity', @entry.title
+        assert_equal 'Soil resource heterogeneity in the form of aggregated litter alters maize productivity',
+                     @entry.title
       end
 
       should 'have right publication year' do
@@ -166,32 +167,32 @@ class CitationTest < ActiveSupport::TestCase
     setup do
       @citation = BookCitation.new
 
-      @citation.authors << Author.new(:sur_name => 'Robertson',
-                                      :given_name => 'G', :middle_name => 'P',
-                                      :seniority => 1)
+      @citation.authors << Author.new(sur_name: 'Robertson',
+                                      given_name: 'G', middle_name: 'P',
+                                      seniority: 1)
 
-      @citation.authors << Author.new(:sur_name => 'Grandy',
-                                      :given_name => 'A', :middle_name => 'S',
-                                      :seniority => 2)
+      @citation.authors << Author.new(sur_name: 'Grandy',
+                                      given_name: 'A', middle_name: 'S',
+                                      seniority: 2)
       @citation.pub_year = 2006
       @citation.title    = 'Soil system management in temperate regions'
       @citation.start_page_number = 27
       @citation.ending_page_number = 39
-      @citation.editors << Editor.new(:sur_name => 'Uphoff',
-                                     :given_name => 'N',
-                                     :seniority => 1)
-     @citation.editors << Editor.new(:sur_name => 'Ball',
-                                     :given_name => 'A',
-                                     :middle_name => 'S',
-                                     :seniority => 2)
-     @citation.editors << Editor.new(:sur_name => 'Thies',
-                                     :given_name => 'J',
-                                     :seniority => 3)
+      @citation.editors << Editor.new(sur_name: 'Uphoff',
+                                      given_name: 'N',
+                                      seniority: 1)
+      @citation.editors << Editor.new(sur_name: 'Ball',
+                                      given_name: 'A',
+                                      middle_name: 'S',
+                                      seniority: 2)
+      @citation.editors << Editor.new(sur_name: 'Thies',
+                                      given_name: 'J',
+                                      seniority: 3)
 
-     @citation.publication = 'Biological Approaches to Sustainable Soil Systems'
-     @citation.publisher = 'CRC Press, Taylor and Francis Group'
-     @citation.address = 'Boca Raton, Florida, USA'
-     @citation.save
+      @citation.publication = 'Biological Approaches to Sustainable Soil Systems'
+      @citation.publisher = 'CRC Press, Taylor and Francis Group'
+      @citation.address = 'Boca Raton, Florida, USA'
+      @citation.save
     end
 
     should 'be formatted correctly' do
@@ -222,10 +223,10 @@ class CitationTest < ActiveSupport::TestCase
   context 'formatting a submitted citation' do
     setup do
       @citation = Citation.new
-      @citation.authors << Author.new(:sur_name => 'Kaufman',
-                                      :given_name => 'A',
-                                      :middle_name => 'S',
-                                      :seniority => 1)
+      @citation.authors << Author.new(sur_name: 'Kaufman',
+                                      given_name: 'A',
+                                      middle_name: 'S',
+                                      seniority: 1)
       @citation.title = 'Implications of LCA accounting methods in a corn and corn stover to ethanol system'
       @citation.pub_year = 2009
       @citation.volume = ''
@@ -275,20 +276,20 @@ class CitationTest < ActiveSupport::TestCase
 %D 2009
 %M KBS.#{@citation.id}\n"
 
-    assert_equal result, @citation.to_enw
+      assert_equal result, @citation.to_enw
     end
   end
 
   context 'a citation object with no ending page number' do
     setup do
       @citation = ArticleCitation.new
-      @citation.authors << Author.new( :sur_name => 'Loecke',
-                                       :given_name => 'T', :middle_name => 'D',
-                                       :seniority => 1)
+      @citation.authors << Author.new(sur_name: 'Loecke',
+                                      given_name: 'T', middle_name: 'D',
+                                      seniority: 1)
 
-      @citation.authors << Author.new(:sur_name => 'Robertson',
-                                      :given_name => 'G', :middle_name => 'P',
-                                      :seniority => 2)
+      @citation.authors << Author.new(sur_name: 'Robertson',
+                                      given_name: 'G', middle_name: 'P',
+                                      seniority: 2)
 
       @citation.title = 'Soil resource heterogeneity in the form of aggregated litter alters maize productivity'
       @citation.publication = 'Plant and Soil'
@@ -303,19 +304,18 @@ class CitationTest < ActiveSupport::TestCase
     should 'be formatted correctly' do
       assert @citation.formatted.end_with?('Plant and Soil 325:231.')
     end
-
   end
 
   context 'a citation object with no start page' do
     setup do
       @citation = ArticleCitation.new
-      @citation.authors << Author.new( :sur_name => 'Loecke',
-                                       :given_name => 'T', :middle_name => 'D',
-                                       :seniority => 1)
+      @citation.authors << Author.new(sur_name: 'Loecke',
+                                      given_name: 'T', middle_name: 'D',
+                                      seniority: 1)
 
-      @citation.authors << Author.new(:sur_name => 'Robertson',
-                                      :given_name => 'G', :middle_name => 'P',
-                                      :seniority => 2)
+      @citation.authors << Author.new(sur_name: 'Robertson',
+                                      given_name: 'G', middle_name: 'P',
+                                      seniority: 2)
 
       @citation.title = 'Soil resource heterogeneity in the form of aggregated litter alters maize productivity'
       @citation.publication = 'Plant and Soil'
@@ -330,30 +330,29 @@ class CitationTest < ActiveSupport::TestCase
     should 'be formatted correctly' do
       assert @citation.formatted.end_with?('Plant and Soil 325.')
     end
-
   end
 
   context 'a citation object with two editors' do
     setup do
       @citation = BookCitation.new
-      @citation.authors << Author.new(:sur_name => 'Robertson',
-                                      :given_name => 'G', :middle_name => 'P',
-                                      :seniority => 1)
+      @citation.authors << Author.new(sur_name: 'Robertson',
+                                      given_name: 'G', middle_name: 'P',
+                                      seniority: 1)
 
-      @citation.authors << Author.new(:sur_name => 'Grandy',
-                                      :given_name => 'A', :middle_name => 'S',
-                                      :seniority => 2)
+      @citation.authors << Author.new(sur_name: 'Grandy',
+                                      given_name: 'A', middle_name: 'S',
+                                      seniority: 2)
       @citation.pub_year = 2006
       @citation.title    = 'Soil system management in temperate regions'
       @citation.start_page_number = 27
       @citation.ending_page_number = 39
-      @citation.editors << Editor.new(:sur_name => 'Uphoff',
-                                     :given_name => 'N',
-                                     :seniority => 1)
-      @citation.editors << Editor.new(:sur_name => 'Ball',
-                                     :given_name => 'A',
-                                     :middle_name => 'S',
-                                     :seniority => 2)
+      @citation.editors << Editor.new(sur_name: 'Uphoff',
+                                      given_name: 'N',
+                                      seniority: 1)
+      @citation.editors << Editor.new(sur_name: 'Ball',
+                                      given_name: 'A',
+                                      middle_name: 'S',
+                                      seniority: 2)
 
       @citation.publication = 'Biological Approaches to Sustainable Soil Systems'
       @citation.publisher = 'CRC Press, Taylor and Francis Group'
@@ -391,24 +390,22 @@ class CitationTest < ActiveSupport::TestCase
         assert_equal :book, @entry.type
       end
     end
-
   end
-
 
   context 'a citation with a doi but no volume' do
     setup do
-      @cite = FactoryBot.build :citation, :doi => 'my_doi_string'
+      @cite = FactoryBot.build :citation, doi: 'my_doi_string'
     end
 
     should 'display the doi in the formatted citation' do
-      assert_match /my_doi_string/, @cite.formatted
+      assert_match(/my_doi_string/, @cite.formatted)
     end
   end
 
   context 'a citation with no pub year' do
     setup do
-      auth  = FactoryBot.build :author, :sur_name=>'Babbit', :given_name=>'Bob'
-      @cite = FactoryBot.build :citation, :title => 'A title', :authors => [auth]
+      auth  = FactoryBot.build :author, sur_name: 'Babbit', given_name: 'Bob'
+      @cite = FactoryBot.build :citation, title: 'A title', authors: [auth]
     end
 
     should 'not have a dot after the pub year' do
@@ -418,7 +415,7 @@ class CitationTest < ActiveSupport::TestCase
 
   context 'a citation object with an author' do
     setup do
-      @auth = FactoryBot.build :author, :sur_name=>'Babbit', :given_name=>'Bob'
+      @auth = FactoryBot.build :author, sur_name: 'Babbit', given_name: 'Bob'
       @cite = FactoryBot.build :citation
       @cite.authors << @auth
     end
@@ -426,7 +423,7 @@ class CitationTest < ActiveSupport::TestCase
     should 'not have the author anymore after author_block= is called' do
       assert @cite.authors.include?(@auth)
       @cite.author_block = "Another Author"
-      refute @cite.authors.include?(@auth)
+      assert_not @cite.authors.include?(@auth)
     end
 
     should 'parse authors with double last names' do
@@ -445,7 +442,7 @@ class CitationTest < ActiveSupport::TestCase
       assert_equal "Jones", @cite.authors[0].sur_name
     end
 
-    #TODO: figure out a way to keep the id's with the authors so they can be just updated and do not need
+    # TODO: figure out a way to keep the id's with the authors so they can be just updated and do not need
     # to be replaced.
     # should 'keep the same author record when updating' do
     #   @cite.author_block = 'Babbit, Bob'
@@ -465,28 +462,24 @@ class CitationTest < ActiveSupport::TestCase
       @cite = FactoryBot.create(:citation)
       @cite.authors = []
       4.times do
-        @cite.authors << FactoryBot.build(:author, :given_name=>'Jon', :sur_name => 'Jones')
+        @cite.authors << FactoryBot.build(:author, given_name: 'Jon', sur_name: 'Jones')
       end
       @cite.save
     end
 
     should 'use et. al. in the style' do
-      assert_match( /, et\.al\./, @cite.formatted)
+      assert_match(/, et\.al\./, @cite.formatted)
     end
 
     should 'use all authors if called with long_formatted' do
-      refute_match(/et\.al/, @cite.formatted(:long=>true))
+      assert_no_match(/et\.al/, @cite.formatted(long: true))
     end
 
     should 'use natural order for second and subsequent authors in long format' do
-      assert_match /Jones, J., J. Jones, J. Jones/, @cite.formatted(:long=>true)
+      assert_match(/Jones, J., J. Jones, J. Jones/, @cite.formatted(long: true))
     end
-
   end
 end
-
-
-
 
 # == Schema Information
 #
@@ -526,4 +519,3 @@ end
 #  open_access             :boolean         default(FALSE)
 #  type                    :string(255)
 #
-

@@ -24,7 +24,7 @@ class CitationsController < ApplicationController
     if params[:treatment]
       @treatment = Treatment.find(params[:treatment].to_i)
       @study = @treatment.study
-#      @treatment = nil unless @study.citation_treatments?
+      #      @treatment = nil unless @study.citation_treatments?
       citations = [Citation.from_website(website.id).by_treatment(params[:treatment])]
     end
 
@@ -68,7 +68,7 @@ class CitationsController < ApplicationController
   end
 
   def index_by_doi
-    @citations = [website.citations.where('doi is not null').publications]
+    @citations = [website.citations.where.not(doi: nil).publications]
     index_responder
   end
 
@@ -119,6 +119,10 @@ class CitationsController < ApplicationController
     @citation.type = 'ArticleCitation'
   end
 
+  def edit
+    @citation = Citation.find(params[:id])
+  end
+
   def create
     citation_class = params[:citation].try(:delete, :type)
     @citation = website.citations.new(citation_params)
@@ -126,10 +130,6 @@ class CitationsController < ApplicationController
     flash[:notice] = 'Citation was successfully created.' if @citation.save
 
     respond_with @citation
-  end
-
-  def edit
-    @citation = Citation.find(params[:id])
   end
 
   def update
@@ -169,18 +169,16 @@ class CitationsController < ApplicationController
   def redirect_or_reject_glbrc_citations
     return unless @subdomain_request == 'glbrc'
 
-    if action_name == 'index'
-      redirect_to GLBRC_PUBLICATIONS_URL, status: :moved_permanently, allow_other_host: true
-    else
-      raise ActionController::RoutingError, 'Not Found'
-    end
+    raise ActionController::RoutingError, 'Not Found' unless action_name == 'index'
+
+    redirect_to GLBRC_PUBLICATIONS_URL, status: :moved_permanently, allow_other_host: true
   end
 
   def send_citation(citation)
     if citation.pdf.persisted?
       redirect_to(url_for(citation.pdf), allow_other_host: true)
     else
-      head 400
+      head :bad_request
     end
   end
 

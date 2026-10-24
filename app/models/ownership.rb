@@ -10,7 +10,7 @@ class Ownership < ApplicationRecord
 
   validates :user_id, uniqueness: { scope: :datatable_id }
 
-  def self.create_ownerships(users, datatables, overwrite = false)
+  def self.create_ownerships(users, datatables, _overwrite = false)
     # datatables.each { |datatable| self.destroy_all(datatable_id: datatable) } if overwrite
     users.product(datatables).each do |user, table|
       p "user: #{user}, table: #{table}"

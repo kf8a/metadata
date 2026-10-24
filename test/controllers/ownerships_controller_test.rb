@@ -1,7 +1,6 @@
-require File.expand_path('../../test_helper',__FILE__)
+require File.expand_path('../test_helper', __dir__)
 
 class OwnershipsControllerTest < ActionController::TestCase
-
   context "a protected and owned datatable" do
     setup do
       @datatable = FactoryBot.create(:protected_datatable)

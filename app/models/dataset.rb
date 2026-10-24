@@ -48,18 +48,17 @@ class Dataset < ApplicationRecord
   end
 
   def ld_json
-    { "@context": "http://schema.org",
-      "@type": "Dataset",
-      "name": title,
+    { '@context': "http://schema.org",
+      '@type': "Dataset",
+      name: title,
       description: short_abstract,
-      "url": "https://lter.kbs.msu.edu/datasets/#{id}",
-      "sameAs": "https://doi.org/#{current_doi.to_s}",
-      "includedInDataCatalog": {
+      url: "https://lter.kbs.msu.edu/datasets/#{id}",
+      sameAs: "https://doi.org/#{current_doi}",
+      includedInDataCatalog: {
         "@type" => "DataCatalog",
         name: "KBS LTER Datatable Catalog",
         url: "https://lter.kbs.msu.edu/datatables"
-      }
-    }
+      } }
   end
 
   def short_abstract
@@ -229,7 +228,7 @@ class Dataset < ApplicationRecord
   end
 
   def has_citations?
-    datatables.collect do | datatable|
+    datatables.collect do |datatable|
       !datatable.citations.empty?
     end.include?(true)
   end

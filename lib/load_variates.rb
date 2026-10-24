@@ -8,7 +8,7 @@ ActiveRecord::Base.establish_connection(
   username: 'bohms',
   database: 'meta_development'
 )
-  
+
 class Datatable < ActiveRecord::Base
 end
 

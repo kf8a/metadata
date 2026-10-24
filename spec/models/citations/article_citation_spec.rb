@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe ArticleCitation do
-
   it 'should format correctly with 2 authors' do
     citation = ArticleCitation.new
     citation.authors << Author.new(sur_name: 'Loecke',

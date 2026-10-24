@@ -10,7 +10,7 @@ class ElementHandler
     elsif node.is_a? REXML::Element
       handle_element node
     else
-      return # ignore comments and processing instructions
+      nil # ignore comments and processing instructions
     end
   end
 

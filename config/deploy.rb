@@ -132,7 +132,6 @@ task :update_sitemap do
   # run "cd #{current_path};bundle exec rake sitemap:refresh RAILS_ENV=production"
 end
 
-
 namespace :mise do
   task :setup do
     on roles(:all) do

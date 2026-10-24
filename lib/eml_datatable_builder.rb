@@ -1,8 +1,7 @@
 class EmlDatatableBuilder
-  attr_accessor :datatable
-  attr_accessor :eml
+  attr_accessor :datatable, :eml
 
-  def build(eml)
+  def build(_eml)
     @eml.dataTable 'id' => Rails.application.routes.url_helpers.datatable_path(datatable.id) do
       @eml.entityName "Kellogg Biological Station LTER: #{datatable.title}"
       if datatable.description.present?
@@ -10,7 +9,7 @@ class EmlDatatableBuilder
         text = full_sanitizer.sanitize(description)
         @eml.entityDescription EML.text_sanitize(text) unless text.strip.empty?
       end
-#      eml_protocols if non_dataset_protocols.present?
+      #      eml_protocols if non_dataset_protocols.present?
       eml_physical
       eml_attributes
     end
@@ -47,7 +46,7 @@ class EmlDatatableBuilder
       @eml.distribution do
         @eml.online do
           if is_sql
-            @eml.url "http://#{website_name}.kbs.msu.edu/datatables/#{self.id}.csv"
+            @eml.url "http://#{website_name}.kbs.msu.edu/datatables/#{id}.csv"
           else
             @eml.url data_url
           end

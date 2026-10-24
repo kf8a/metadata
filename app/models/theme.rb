@@ -13,7 +13,7 @@ class Theme < ApplicationRecord
   after_touch :update_parent
 
   def nested_name
-    '-' * level + name
+    ('-' * level) + name
   end
 
   def datatables?(study = nil)

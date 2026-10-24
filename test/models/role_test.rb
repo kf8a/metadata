@@ -1,4 +1,4 @@
-require File.expand_path('../../test_helper', __FILE__)
+require File.expand_path('../test_helper', __dir__)
 
 class RoleTest < ActiveSupport::TestCase
   context 'evaluating a role' do
@@ -14,7 +14,7 @@ class RoleTest < ActiveSupport::TestCase
     end
 
     should 'return false for non-emeritus role' do
-      assert !@non_emeritus.emeritus?
+      assert_not @non_emeritus.emeritus?
     end
   end
 
@@ -34,7 +34,7 @@ class RoleTest < ActiveSupport::TestCase
     end
 
     should 'return false for non-committee role' do
-      assert !@non_committee.committee?
+      assert_not @non_committee.committee?
     end
   end
 

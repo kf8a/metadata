@@ -6,8 +6,8 @@ namespace :search do
     target = args[:collection] || SiteSearch::ALIAS
 
     models = {
-      Citation => [:authors, :website, :treatments],
-      Dataset => [:website, :keywords],
+      Citation => %i[authors website treatments],
+      Dataset => %i[website keywords],
       Datatable => [
         :theme,
         :study,
@@ -36,9 +36,7 @@ namespace :search do
         skipped_ids = not_indexable.map(&:id)
         skipped += skipped_ids.size
 
-        if skipped_ids.any?
-          puts "  #{model.name}: skipped ids #{skipped_ids.join(', ')}"
-        end
+        puts "  #{model.name}: skipped ids #{skipped_ids.join(', ')}" if skipped_ids.any?
 
         docs = indexable.map(&:search_document)
         next if docs.empty?

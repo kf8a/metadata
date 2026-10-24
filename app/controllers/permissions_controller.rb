@@ -85,7 +85,7 @@ class PermissionsController < ApplicationController
 
   def require_datatable
     @datatable = Datatable.find(params[:id]) if params[:id]
-    @datatable = Datatable.find(params[:datatable]) if params[:datatable] unless @datatable
+    @datatable = Datatable.find(params[:datatable]) if !@datatable && params[:datatable]
     return if @datatable
 
     flash[:notice] = 'You must select a valid datatable to grant permissions'
@@ -97,8 +97,8 @@ class PermissionsController < ApplicationController
     return if current_user.try(:owns?, @datatable)
 
     flash[:notice] =
-      'You must be signed in as the owner of' \
-        ' the datatable in order to access this page'
+      'You must be signed in as the owner of ' \
+      'the datatable in order to access this page'
     redirect_to action: :index
     false
   end

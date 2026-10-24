@@ -1,5 +1,5 @@
 module CitationFormat
-  SUFFICES = %w(esq esquire jr sr clu chfc cfp md phd).freeze
+  SUFFICES = %w[esq esquire jr sr clu chfc cfp md phd].freeze
 
   def formatted(option = :default)
     if option == :natural

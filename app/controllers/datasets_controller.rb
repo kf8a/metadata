@@ -52,7 +52,7 @@ class DatasetsController < ApplicationController
   end
 
   def knb
-    _scope, identifier = params[:id].split(/\./)
+    _scope, identifier = params[:id].split('.')
     dataset = Dataset.where(metacat_id: identifier).first
     dataset ||= Dataset.where(id: identifer).first
     redirect_to dataset
@@ -119,7 +119,6 @@ class DatasetsController < ApplicationController
 
   # PUT /datasets/1
   def update
-
     if dataset.update(dataset_params)
 
       puts 'Dataset was successfully updated.'
@@ -198,7 +197,7 @@ class DatasetsController < ApplicationController
       :sponsor_id,
       :website_id,
       :keyword_list,
-      files: [],
+      files: []
       # affiliations_attributes: [], dataset_files_attributes: %i[name data _destroy id]
     )
   end

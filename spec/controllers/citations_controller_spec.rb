@@ -182,8 +182,8 @@ describe CitationsController, type: :controller do
                                        given_name: 'G', middle_name: 'P',
                                        seniority: 2)
 
-      @citation1.title = 'Soil resource heterogeneity in the form of aggregated'\
-                         ' litter alters maize productivity'
+      @citation1.title = 'Soil resource heterogeneity in the form of aggregated ' \
+                         'litter alters maize productivity'
       @citation1.publication = 'Plant and Soil'
       @citation1.volume = '325'
       @citation1.start_page_number = 231

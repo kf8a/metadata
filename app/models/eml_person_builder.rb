@@ -81,7 +81,7 @@ class EmlPersonBuilder
 
     # if the orcid_id is a url we will strip the host
     if person.orcid_id =~ /http/
-      orcid_id = person.orcid_id.gsub(/https?:\/\/orcid\.org\//, '')
+      orcid_id = person.orcid_id.gsub(%r{https?://orcid\.org/}, '')
       eml.userId orcid_id, directory: 'http://orcid.org'
     else
       eml.userId person.orcid_id, directory: 'http://orcid.org'

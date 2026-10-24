@@ -59,5 +59,5 @@ Then(/^#{capture_email} should link to (.+)$/) do |email_ref, page|
 end
 
 Then(/^show me the emails?$/) do
-   save_and_open_emails
+  save_and_open_emails
 end

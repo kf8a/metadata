@@ -1,18 +1,12 @@
-require File.expand_path('../../test_helper',__FILE__) 
+require File.expand_path('../test_helper', __dir__)
 
 class DataContributionTest < ActiveSupport::TestCase
-
   should belong_to :person
   should belong_to :datatable
   should belong_to :role
-  
+
   should validate_presence_of :role
-  
 end
-
-
-
-
 
 # == Schema Information
 #
@@ -25,4 +19,3 @@ end
 #  created_at   :datetime
 #  updated_at   :datetime
 #
-

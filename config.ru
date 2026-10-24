@@ -4,9 +4,8 @@ require 'rack'
 
 require 'prometheus/middleware/collector'
 require 'prometheus/middleware/exporter'
-#
 use Prometheus::Middleware::Collector
 use Prometheus::Middleware::Exporter
 
-require ::File.expand_path('../config/environment',  __FILE__)
+require File.expand_path('config/environment', __dir__)
 run Metadata::Application

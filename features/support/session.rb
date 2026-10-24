@@ -1,13 +1,13 @@
-#This allows Capybara to have multiple sessions, which is required in order to
-#switch subdomains
+# This allows Capybara to have multiple sessions, which is required in order to
+# switch subdomains
 
 module Capybara
   module Driver
     module Sessions
       def set_session(id)
         Capybara.instance_variable_set('@session_pool', {
-         "#{Capybara.current_driver}#{Capybara.app.object_id}" => $sessions[id]
-        })
+                                         "#{Capybara.current_driver}#{Capybara.app.object_id}" => $sessions[id]
+                                       })
       end
 
       def switch_session(id)
@@ -17,7 +17,7 @@ module Capybara
         set_session(id)
       end
 
-      def in_session(id, &block)
+      def in_session(id, &)
         switch_session(id)
         yield
         set_session(:default)

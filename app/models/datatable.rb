@@ -56,7 +56,7 @@ class Datatable < ApplicationRecord
       event :mark_deleted,  transitions_to: :deleted
     end
     state :deleted do
-      event :revert,        transitions_to: :active
+      event :revert, transitions_to: :active
     end
   end
 
@@ -358,16 +358,16 @@ class Datatable < ApplicationRecord
             else
               "(#{year_start} to #{ongoing? ? 'present' : year_end})"
             end
-    "#{title} #{years} #{maybe_study()}"
+    "#{title} #{years} #{maybe_study}"
   end
 
   def maybe_study
-   if study.short_name
-     "(#{study.short_name})"
-   else
-     ""
-   end
- end
+    if study.short_name
+      "(#{study.short_name})"
+    else
+      ""
+    end
+  end
 
   def ongoing?
     return false if completed?
@@ -521,9 +521,9 @@ class Datatable < ApplicationRecord
     result = ActiveRecord::Base.connection.execute("#{object} limit 1")
     data = result.fields.each_with_index.map do |k, v|
       { k => ActiveRecord::Base
-        .connection
-        .execute("select format_type(#{result.ftype(v)}, #{result.fmod(v)})")
-        .first["format_type"] }
+             .connection
+             .execute("select format_type(#{result.ftype(v)}, #{result.fmod(v)})")
+             .first["format_type"] }
     end
     data.reduce({}, :merge)
   end

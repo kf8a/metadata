@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe DatasetsController, type: :controller  do
+describe DatasetsController, type: :controller do
   render_views
 
   # describe 'POST :create with an eml_link' do

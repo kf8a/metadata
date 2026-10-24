@@ -25,24 +25,24 @@ SitemapGenerator::Sitemap.create do
   #     add article_path(article), :lastmod => article.updated_at
   #   end
   website = Website.where(name: 'lter').first
-  add datatables_path, :priority => 0.9, :changefreq => 'daily'
+  add datatables_path, priority: 0.9, changefreq: 'daily'
   add datasets_path
   website.datasets.each do |dataset|
     add dataset_path(dataset), lastmod: dataset.updated_at
     dataset.datatables.each do |datatable|
-      add datatable_path(datatable), :lastmod => datatable.updated_at
+      add datatable_path(datatable), lastmod: datatable.updated_at
     end
   end
-  add people_path, :priority => 0.7
+  add people_path, priority: 0.7
   Person.find_each do |person|
-    add person_path(person), :lastmod => person.updated_at
+    add person_path(person), lastmod: person.updated_at
   end
-  add citations_path :priority => 0.7
+  add citations_path priority: 0.7
   website.citations.each do |citation|
-    add citation_path(citation), :lastmod => citation.updated_at
+    add citation_path(citation), lastmod: citation.updated_at
   end
-  add protocols_path, :priority => 0.7
+  add protocols_path, priority: 0.7
   website.protocols.each do |protocol|
-    add protocol_path(protocol), :lastmod => protocol.updated_on
+    add protocol_path(protocol), lastmod: protocol.updated_on
   end
 end

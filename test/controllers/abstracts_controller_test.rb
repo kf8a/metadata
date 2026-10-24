@@ -1,4 +1,4 @@
-require File.expand_path('../../test_helper', __FILE__)
+require File.expand_path('../test_helper', __dir__)
 # require 'abstracts_controller'
 
 class AbstractsControllerTest < ActionController::TestCase

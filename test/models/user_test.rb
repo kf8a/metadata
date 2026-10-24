@@ -1,4 +1,4 @@
-require File.expand_path('../../test_helper', __FILE__)
+require File.expand_path('../test_helper', __dir__)
 
 class UserTest < ActiveSupport::TestCase
   setup do
@@ -27,7 +27,7 @@ class UserTest < ActiveSupport::TestCase
     end
 
     should 'not be an admin' do
-      assert !@user.admin?
+      assert_not @user.admin?
     end
   end
 
@@ -75,7 +75,7 @@ class UserTest < ActiveSupport::TestCase
         end
 
         should 'not own the datatable' do
-          assert !@nonowner.owns?(@datatable)
+          assert_not @nonowner.owns?(@datatable)
         end
       end
     end
@@ -87,10 +87,10 @@ class UserTest < ActiveSupport::TestCase
       @owner = FactoryBot.create(:email_confirmed_user)
       FactoryBot.create(:ownership, user: @owner, datatable: @datatable)
       FactoryBot.create(:permission,
-                         user: @user,
-                         owner: @owner,
-                         datatable: @datatable,
-                         decision: 'approved')
+                        user: @user,
+                        owner: @owner,
+                        datatable: @datatable,
+                        decision: 'approved')
     end
 
     context '#has_permission_from?' do
@@ -107,10 +107,10 @@ class UserTest < ActiveSupport::TestCase
       setup do
         @another_user = FactoryBot.create(:email_confirmed_user)
         FactoryBot.create(:permission,
-                           user: @another_user,
-                           owner: @owner,
-                           datatable: @datatable,
-                           decision: 'denied')
+                          user: @another_user,
+                          owner: @owner,
+                          datatable: @datatable,
+                          decision: 'denied')
       end
 
       context '#has_permission_from?' do
@@ -119,7 +119,7 @@ class UserTest < ActiveSupport::TestCase
         end
 
         should 'be false' do
-          assert !@has_permission_from
+          assert_not @has_permission_from
         end
       end
     end

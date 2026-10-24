@@ -1,4 +1,4 @@
-require File.expand_path('../../test_helper', __FILE__)
+require File.expand_path('../test_helper', __dir__)
 
 class DatatableTest < ActiveSupport::TestCase
   should have_one                 :collection
@@ -69,17 +69,17 @@ class DatatableTest < ActiveSupport::TestCase
     should 'be able to add contributors' do
       person = FactoryBot.create(:person)
       assert @datatable.data_contributions << [FactoryBot.create(:data_contribution,
-                                                                  datatable:
-                                                                  @datatable, person: person)]
+                                                                 datatable:
+                                                                 @datatable, person: person)]
       different_role = FactoryBot.create(:role, name: 'AnotherRole')
       @datatable.data_contributions << [FactoryBot.create(:data_contribution,
-                                                           datatable: @datatable,
-                                                           person: person,
-                                                           role: different_role)]
+                                                          datatable: @datatable,
+                                                          person: person,
+                                                          role: different_role)]
       another_person = FactoryBot.create(:person, sur_name: 'Testerman')
       @datatable.data_contributions << [FactoryBot.create(:data_contribution,
-                                                           datatable: @datatable,
-                                                           person: another_person)]
+                                                          datatable: @datatable,
+                                                          person: another_person)]
       assert_equal 2, @datatable.datatable_personnel[person].count
       assert_equal ['Emeritus Investigators', 'AnotherRole'], @datatable.datatable_personnel[person]
       assert_equal ['Emeritus Investigators'], @datatable.datatable_personnel[another_person]
@@ -94,7 +94,6 @@ class DatatableTest < ActiveSupport::TestCase
       @datatable = FactoryBot.build :datatable, dataset: dataset_with_sponsor
       @datatable_without_sponsor = FactoryBot.build :datatable, dataset: dataset_without_sponsor
     end
-
   end
 
   context 'datatable without owners and permissions' do
@@ -111,14 +110,14 @@ class DatatableTest < ActiveSupport::TestCase
     end
 
     should 'tell if it needs to be restricted at all' do
-      assert !@unrestricted.restricted_to_members?
-      assert  @restricted.restricted_to_members?
+      assert_not @unrestricted.restricted_to_members?
+      assert @restricted.restricted_to_members?
     end
 
     should 'allow restrict datatables to be permitted' do
-      assert !@restricted.permitted?(@anonymous_user)
-      assert !@restricted.permitted?(@unauthorized_user)
-      assert !@restricted.permitted?(@admin)
+      assert_not @restricted.permitted?(@anonymous_user)
+      assert_not @restricted.permitted?(@unauthorized_user)
+      assert_not @restricted.permitted?(@admin)
     end
 
     should 'allow anyone to download unrestricted datatables' do
@@ -128,9 +127,9 @@ class DatatableTest < ActiveSupport::TestCase
     end
 
     should 'only allow authorized users to download restricted datatables' do
-      assert !@restricted.can_be_downloaded_by?(@anonymous_user)
-      assert !@restricted.can_be_downloaded_by?(@unauthorized_user)
-      assert  @restricted.can_be_downloaded_by?(@admin)
+      assert_not @restricted.can_be_downloaded_by?(@anonymous_user)
+      assert_not @restricted.can_be_downloaded_by?(@unauthorized_user)
+      assert @restricted.can_be_downloaded_by?(@admin)
     end
   end
 
@@ -145,7 +144,7 @@ class DatatableTest < ActiveSupport::TestCase
       @owner              = FactoryBot.create :user, email: 'owner@person.com'
       @admin              = FactoryBot.create :user, email: 'admin@person.com', role: 'admin'
       @member             = FactoryBot.create :user, email: 'member@person.com',
-                                                      sponsors: [sponsor]
+                                                     sponsors: [sponsor]
       @denied_user        = FactoryBot.create :user, email: 'denied@perso.com'
 
       @unrestricted = FactoryBot.create :datatable
@@ -157,23 +156,23 @@ class DatatableTest < ActiveSupport::TestCase
       @restricted.owners = [@owner]
 
       FactoryBot.create :permission, datatable: @restricted_to_members,
-                                      user: @authorized_user,
-                                      owner: @owner,
-                                      decision: 'approved'
+                                     user: @authorized_user,
+                                     owner: @owner,
+                                     decision: 'approved'
 
       FactoryBot.create :permission, datatable: @restricted_to_members,
-                                      user: @denied_user,
-                                      owner: @owner,
-                                      decision: 'denied'
+                                     user: @denied_user,
+                                     owner: @owner,
+                                     decision: 'denied'
 
       FactoryBot.create :permission, datatable: @restricted,
-                                      user:  @authorized_user,
-                                      owner: @owner,
-                                      decision: 'approved'
+                                     user: @authorized_user,
+                                     owner: @owner,
+                                     decision: 'approved'
     end
 
     should 'tell if it needs to be restricted at all' do
-      assert !@unrestricted.restricted_to_members?
+      assert_not @unrestricted.restricted_to_members?
       assert @restricted_to_members.restricted_to_members?
     end
 
@@ -187,20 +186,20 @@ class DatatableTest < ActiveSupport::TestCase
     end
 
     should 'only allow authorized users to download restricted datatables' do
-      assert !@restricted_to_members.can_be_downloaded_by?(@anonymous_user)
-      assert !@restricted_to_members.can_be_downloaded_by?(@unauthorized_user)
-      assert  @restricted_to_members.can_be_downloaded_by?(@authorized_user)
-      assert  @restricted_to_members.can_be_downloaded_by?(@admin)
-      assert  @restricted_to_members.can_be_downloaded_by?(@member)
-      assert  @restricted_to_members.can_be_downloaded_by?(@owner)
-      assert !@restricted_to_members.can_be_downloaded_by?(@denied_user)
+      assert_not @restricted_to_members.can_be_downloaded_by?(@anonymous_user)
+      assert_not @restricted_to_members.can_be_downloaded_by?(@unauthorized_user)
+      assert @restricted_to_members.can_be_downloaded_by?(@authorized_user)
+      assert @restricted_to_members.can_be_downloaded_by?(@admin)
+      assert @restricted_to_members.can_be_downloaded_by?(@member)
+      assert @restricted_to_members.can_be_downloaded_by?(@owner)
+      assert_not @restricted_to_members.can_be_downloaded_by?(@denied_user)
 
-      assert !@restricted.can_be_downloaded_by?(@anonoymous_user)
-      assert !@restricted.can_be_downloaded_by?(@member)
-      assert !@restricted.can_be_downloaded_by?(@denied_user)
-      assert  @restricted.can_be_downloaded_by?(@admin)
-      assert  @restricted.can_be_downloaded_by?(@owner)
-      assert  @restricted.can_be_downloaded_by?(@authorized_user)
+      assert_not @restricted.can_be_downloaded_by?(@anonoymous_user)
+      assert_not @restricted.can_be_downloaded_by?(@member)
+      assert_not @restricted.can_be_downloaded_by?(@denied_user)
+      assert @restricted.can_be_downloaded_by?(@admin)
+      assert @restricted.can_be_downloaded_by?(@owner)
+      assert @restricted.can_be_downloaded_by?(@authorized_user)
     end
 
     should 'return the owner that denied user on #deniers_of' do
@@ -227,14 +226,14 @@ class DatatableTest < ActiveSupport::TestCase
       @datatable.owners = [@owner]
 
       FactoryBot.create(:permission_request, user: @user,
-                                              datatable: @datatable)
+                                             datatable: @datatable)
       FactoryBot.create(:permission_request, user: @permitted_user,
-                                              datatable: @datatable)
+                                             datatable: @datatable)
       FactoryBot.create(:permission,
-                         owner: @owner,
-                         datatable: @datatable,
-                         user: @permitted_user,
-                         decision: 'approved')
+                        owner: @owner,
+                        datatable: @datatable,
+                        user: @permitted_user,
+                        decision: 'approved')
     end
 
     context '#pending_requesters' do
@@ -247,7 +246,7 @@ class DatatableTest < ActiveSupport::TestCase
       end
 
       should 'not include users who are already permitted' do
-        assert !@result.include?(@permitted_user)
+        assert_not @result.include?(@permitted_user)
       end
     end
 
@@ -258,7 +257,7 @@ class DatatableTest < ActiveSupport::TestCase
       end
 
       should 'be false for others' do
-        assert !@datatable.requested_by?(@other)
+        assert_not @datatable.requested_by?(@other)
       end
     end
   end
@@ -288,24 +287,24 @@ class DatatableTest < ActiveSupport::TestCase
     end
 
     should 'not allow anonymous users' do
-      assert !@datatable.can_be_qcd_by?(@anonymous_user)
+      assert_not @datatable.can_be_qcd_by?(@anonymous_user)
     end
 
     should 'not allow non members' do
-      assert !@datatable.can_be_qcd_by?(@non_member)
+      assert_not @datatable.can_be_qcd_by?(@non_member)
     end
 
     should 'not allow outside datatables' do
-      assert !@restricted_datatable.can_be_qcd_by?(@member)
-      assert !@restricted_datatable.can_be_qcd_by?(@non_member)
-      assert !@restricted_datatable.can_be_qcd_by?(@anonymous_user)
+      assert_not @restricted_datatable.can_be_qcd_by?(@member)
+      assert_not @restricted_datatable.can_be_qcd_by?(@non_member)
+      assert_not @restricted_datatable.can_be_qcd_by?(@anonymous_user)
     end
   end
 
   context 'datatable with sample_date' do
     setup do
-      @datatable = FactoryBot.create(:datatable, object: %q{select now() as sample_date})
-      @old_data = FactoryBot.create(:datatable, object: %q{select now() - interval '3 year' as sample_date})
+      @datatable = FactoryBot.create(:datatable, object: 'select now() as sample_date')
+      @old_data = FactoryBot.create(:datatable, object: "select now() - interval '3 year' as sample_date")
     end
 
     should 'return true if interval includes today' do
@@ -313,11 +312,11 @@ class DatatableTest < ActiveSupport::TestCase
     end
 
     should 'return false if the interval is later than the data times' do
-      assert !@datatable.within_interval?(Time.zone.today + 1.day, Time.zone.today + 4.days)
+      assert_not @datatable.within_interval?(Time.zone.today + 1.day, Time.zone.today + 4.days)
     end
 
     should 'return false if the interval is earlier than the data times' do
-      assert !@datatable.within_interval?(Time.zone.today - 4.days, Time.zone.today - 2.days)
+      assert_not @datatable.within_interval?(Time.zone.today - 4.days, Time.zone.today - 2.days)
     end
 
     should 'have the correct temporal extent' do
@@ -364,7 +363,7 @@ class DatatableTest < ActiveSupport::TestCase
         @datatable.begin_date = '2/12/2003'.to_date
         @datatable.end_date = '2/12/2004'.to_date
         assert_equal 'a really cool datatable (2003 to 2004)',
-          @datatable.title_and_years
+                     @datatable.title_and_years
       end
 
       should 'say to present if within the last 2 years' do
@@ -399,7 +398,7 @@ class DatatableTest < ActiveSupport::TestCase
   context 'datatable with range of dates' do
     setup do
       @datatable = FactoryBot.create(:datatable,
-                                      object: %q{select current_date + (random() * n)::integer as sample_date from generate_series(0,11) n})
+                                     object: 'select current_date + (random() * n)::integer as sample_date from generate_series(0,11) n')
     end
 
     should 'have the begin_date before the end_date' do
@@ -415,8 +414,8 @@ class DatatableTest < ActiveSupport::TestCase
     end
 
     should 'return false for within_interval?' do
-      assert !@datatable.within_interval?(Time.zone.today + 1.day,
-                                          Time.zone.today + 4.days)
+      assert_not @datatable.within_interval?(Time.zone.today + 1.day,
+                                             Time.zone.today + 4.days)
     end
 
     should 'return nils for temporal_extent' do
@@ -429,11 +428,11 @@ class DatatableTest < ActiveSupport::TestCase
   context 'datatable with different date representations' do
     setup do
       obs_date = FactoryBot.create(:datatable,
-                                    object: %(select date '#{Time.zone.today}' as obs_date))
+                                   object: %(select date '#{Time.zone.today}' as obs_date))
       datetime = FactoryBot.create(:datatable,
-                                    object: %(select date '#{Time.zone.today}'as datetime))
+                                   object: %(select date '#{Time.zone.today}'as datetime))
       date = FactoryBot.create(:datatable,
-                                object: %(select date '#{Time.zone.today}' as date))
+                               object: %(select date '#{Time.zone.today}' as date))
       @date_representations = [obs_date, datetime, date]
     end
 
@@ -446,15 +445,15 @@ class DatatableTest < ActiveSupport::TestCase
 
     should 'return false if the interval is later than the data times' do
       @date_representations.each do |date_representation|
-        assert !date_representation.within_interval?(Time.zone.today + 1.day,
-                                                     Time.zone.today + 4.days)
+        assert_not date_representation.within_interval?(Time.zone.today + 1.day,
+                                                        Time.zone.today + 4.days)
       end
     end
 
     should 'return false if the interval is earlier than the data times' do
       @date_representations.each do |date_representation|
-        assert !date_representation.within_interval?(Time.zone.today - 4.days,
-                                                     Time.zone.today - 2.days)
+        assert_not date_representation.within_interval?(Time.zone.today - 4.days,
+                                                        Time.zone.today - 2.days)
       end
     end
 
@@ -478,7 +477,7 @@ class DatatableTest < ActiveSupport::TestCase
   context 'datatable with year' do
     setup do
       @year = FactoryBot.build(:datatable,
-                                object: "select #{Time.zone.today.year} as year")
+                               object: "select #{Time.zone.today.year} as year")
     end
 
     should 'return true if interval includes today' do
@@ -486,11 +485,11 @@ class DatatableTest < ActiveSupport::TestCase
     end
 
     should 'return false if the interval is later than the data times' do
-      assert !@year.within_interval?(Time.zone.today + 1.day, Time.zone.today + 4.days)
+      assert_not @year.within_interval?(Time.zone.today + 1.day, Time.zone.today + 4.days)
     end
 
     should 'return false if the interval is earlier than the data times' do
-      assert !@year.within_interval?(Time.zone.today - 4.years, Time.zone.today - 2.years)
+      assert_not @year.within_interval?(Time.zone.today - 4.years, Time.zone.today - 2.years)
     end
 
     should 'have the correct temporal extent' do
@@ -541,7 +540,7 @@ class DatatableTest < ActiveSupport::TestCase
 
         should 'include an entityName element' do
           assert_equal "Kellogg Biological Station LTER: a really cool datatable (#{@datatable.name})",
-                        @to_eml.at_css('dataTable entityName').text
+                       @to_eml.at_css('dataTable entityName').text
         end
 
         should 'include an entityDescription element' do
@@ -603,7 +602,8 @@ class DatatableTest < ActiveSupport::TestCase
         setup  { @datatable.comments = 'something\nand something else' }
 
         should 'return a commented out version of the comment' do
-          assert_equal "#\n#        DATA TABLE CORRECTIONS AND COMMENTS\n#something\n#and something else\n#\n", @datatable.data_comments
+          assert_equal "#\n#        DATA TABLE CORRECTIONS AND COMMENTS\n#something\n#and something else\n#\n",
+                       @datatable.data_comments
         end
       end
     end
