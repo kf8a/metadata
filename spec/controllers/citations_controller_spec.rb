@@ -203,31 +203,6 @@ describe CitationsController, type: :controller do
       @another_citation.publish!
     end
 
-    describe 'GET :filtered, sort_by: id' do
-      before(:each) do
-        get :filtered, params: { requested_subdomain: 'lter', sort_by: 'id' }
-      end
-
-      it 'should order the citations by id' do
-        expect(assigns(:website)).to eq @website
-        correct_sorting = @website.citations.order('id').published
-        expect(correct_sorting).to include @another_citation
-        expect(assigns(:citations).all).to eq correct_sorting.all
-      end
-    end
-
-    describe 'GET :filtered, sort_by: pub_year' do
-      before(:each) do
-        get :filtered, params: { requested_subdomain: 'lter', sort_by: 'pub_year' }
-      end
-
-      it 'should order the citations by pub_year' do
-        correct_sorting = @website.citations.order('pub_year').published
-        expect(correct_sorting).to include @another_citation
-        expect(assigns(:citations).all).to eq correct_sorting.all
-      end
-    end
-
     describe 'GET :filtered, type: ArticleCitation' do
       before(:each) do
         get :filtered, params: { requested_subdomain: 'lter', type: 'ArticleCitation' }

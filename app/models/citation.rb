@@ -114,14 +114,6 @@ class Citation < ApplicationRecord
     where(type: type)
   end
 
-  def self.sorted_by(sorter)
-    sorter.downcase!
-    # Since primary author and date is default, it is already sorted that way
-    return if sorter == 'primary author and date(default)'
-
-    order(sorter)
-  end
-
   def self.type_from_ris_type(type)
     case type
     when 'JOUR', 'MGZN'
