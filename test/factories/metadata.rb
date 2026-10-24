@@ -222,7 +222,7 @@ FactoryBot.define do
   end
 
   factory :meeting do
-    venue_type_id { 1 }
+    venue_type
     date { Time.zone.today }
   end
 
