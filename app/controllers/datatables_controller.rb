@@ -58,19 +58,17 @@ class DatatablesController < ApplicationController
         format.html
         format.fasta
         format.csv do
-          render text: 'You do not have permission to download this datatable' unless csv_ok
-
           if current_user.try(:role) == 'admin'
             render_admin_csv
           elsif @datatable.csv_file.attached?
-            redirect_to url_for(@datatable.csv_file), allow_other_hosts: true
+            redirect_to url_for(@datatable.csv_file)
           else
             render_csv
           end
         end
       end
     else
-      redirect_to datatables_url, allow_other_hosts: true
+      redirect_to datatables_url
     end
   end
 
