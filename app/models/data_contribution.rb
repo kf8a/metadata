@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Data contributions link a person to a datatable
 class DataContribution < ApplicationRecord
   belongs_to :person

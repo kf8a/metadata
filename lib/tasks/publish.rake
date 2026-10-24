@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :publish do
   desc 'publish new datatables'
   task datatables: :environment do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 When(/^I fill in "([^"]*)" with "([^"]*)""$/) do |_arg1, _arg2|
   raise
 end

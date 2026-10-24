@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given(/^"([^"]*)" owns the datatable named "([^"]*)"$/) do |email, name|
   owner = User.find_by_email(email)
   datatable = Datatable.find_by_name(name)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Existing users
 
 Given(/^(?:I am|I have|I) signed up (?:as|with) "(.*)"$/) do |email|

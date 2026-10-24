@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module EML
   def self.text_sanitize(text)
     doc = Nokogiri::HTML(text)

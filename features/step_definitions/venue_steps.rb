@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given(/^the local venue type exists$/) do
   ven = begin
     VenueType.find(1)

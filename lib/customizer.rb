@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Allows customization of search results without using javascript
 class Customizer
   def initialize(params, values)

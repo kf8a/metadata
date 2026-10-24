@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given(/^JS I am signed in as an administrator$/) do
   @user = FactoryGirl :admin_user, email: "admin@person.com"
   When %(I sign in as "admin@person.com"/"password")

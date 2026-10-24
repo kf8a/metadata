@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Email
 
 Then(/^an invite message should be sent to "([^"]*)"$/) do |email|

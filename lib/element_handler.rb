@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Handle elememnts when parsing eml documents
 class ElementHandler
   def apply(element)

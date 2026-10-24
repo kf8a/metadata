@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given(/^"([^"]*)" has permission to download the datatable$/) do |email|
   user = User.find_by_email(email)
   owner = FactoryGirl.create(:email_confirmed_user, email: 'permission_owner@example.com')

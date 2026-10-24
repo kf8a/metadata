@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given(/^the journal articles publication type exists$/) do
   pub = begin
     PublicationType.find(1)

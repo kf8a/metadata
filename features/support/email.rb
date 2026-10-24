@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module EmailHelpers
   # Maps a name to an email address. Used by email_steps
 

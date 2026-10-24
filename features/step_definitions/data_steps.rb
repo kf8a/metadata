@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given(/^a public lter datatable exists with a title of "([^"]*)"$/) do |title|
   website = Website.find_by_name("lter") || FactoryGirl.create(:website, name: "lter")
   study = Study.find_by_name("Awesome Study") || FactoryGirl.create(:study)

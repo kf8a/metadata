@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # The LTER core areas are managed by this class
 class CoreArea < ApplicationRecord
   has_and_belongs_to_many :datatables

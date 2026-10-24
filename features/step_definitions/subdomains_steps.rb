@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given(/^I am in the (.*) subdomain$/) do |subdomain|
   subdomain = subdomain.downcase
   Capybara.default_host = "#{subdomain}.lvh.me"

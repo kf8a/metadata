@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'polyglot'
 require 'treetop'
 require 'active_record'

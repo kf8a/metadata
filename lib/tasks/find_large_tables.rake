@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :db do
   desc 'find large tables that should not have ordering'
   task large_tables: :environment do

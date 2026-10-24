@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GlbrcGroupLookup
   def self.call(user)
     new(user).call

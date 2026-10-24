@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :citation do
   desc 'load ris citation file'
   task :load, [:file] => [:environment] do |_t, args|

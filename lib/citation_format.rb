@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module CitationFormat
   SUFFICES = %w[esq esquire jr sr clu chfc cfp md phd].freeze
 

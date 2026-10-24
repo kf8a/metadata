@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :eml do
   desc "Generate EML for a dataset and print to stdout (specify id with DATASET_ID=x)"
   task generate: :environment do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given(/^the cache is clear$/) do
   Rails.cache.clear
 end

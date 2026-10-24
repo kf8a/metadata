@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given(/^a user exists and is confirmed with an email of "([^"]*)"$/) do |email|
   FactoryGirl.create :email_confirmed_user, email: email
 end

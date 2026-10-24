@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This allows Capybara to have multiple sessions, which is required in order to
 # switch subdomains
 

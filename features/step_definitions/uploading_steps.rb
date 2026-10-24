@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 When(/^I attach the SingingSoil test file$/) do
   path_to_test_file = Rails.root.join("test/data/SingingSongtestfile.txt").to_s
   attach_file("File", path_to_test_file)

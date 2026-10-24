@@ -23,3 +23,7 @@ Style/StringLiterals:
   Enabled: false
 Rails:
   Enabled: true
+Style/FrozenStringLiteralComment:
+  # ActionView compiles templates into methods, so the magic comment has no effect there
+  Exclude:
+    - 'app/views/**/*.builder'
