@@ -23,6 +23,16 @@ describe Dataset do
     dataset.save
   end
 
+  describe '#roles' do
+    it 'lists each role once, however many people hold it' do
+      dataset = Dataset.create!(@valid_attributes)
+      role = FactoryBot.create(:role)
+      2.times { FactoryBot.create(:affiliation, dataset: dataset, role: role) }
+
+      expect(dataset.roles).to eq [role]
+    end
+  end
+
   describe 'eml importation' do
     # before(:each) do
     #   website = FactoryBot.create(:website)
