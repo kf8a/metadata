@@ -2,6 +2,7 @@
 
 require 'edi_report.rb'
 require 'faraday'
+require 'open-uri'
 
 namespace :dois do
   desc 'update dois from edi'
@@ -39,7 +40,7 @@ namespace :dois do
     url =
       "https://pasta.lternet.edu/package/search/eml?defType=edismax&q=*&fq=scope:#{scope}&rows=#{max_rows}&fl=packageid"
 
-    datasets = Nokogiri::XML(open(url))
+    datasets = Nokogiri::XML(URI.open(url))
 
     puts EdiReport.table_header
     puts EdiReport.table_spacer
@@ -68,7 +69,7 @@ namespace :dois do
     url =
       "https://pasta.lternet.edu/package/search/eml?defType=edismax&q=*&fq=scope:#{scope}&rows=#{max_rows}&fl=packageid"
 
-    datasets = Nokogiri::XML(open(url))
+    datasets = Nokogiri::XML(URI.open(url))
 
     i = 0
     reports = datasets.xpath('//document').collect do |doc|
@@ -95,7 +96,7 @@ namespace :dois do
     url =
       "https://pasta.lternet.edu/package/search/eml?defType=edismax&q=*&fq=scope:#{scope}&rows=#{max_rows}&fl=packageid"
 
-    datasets = Nokogiri::XML(open(url))
+    datasets = Nokogiri::XML(URI.open(url))
 
     i = 0
     reports = datasets.xpath('//document').collect do |doc|
