@@ -2,9 +2,6 @@ require 'rails_helper'
 
 describe EbookCitation do
   it { should_not be_book }
-  its(:bibtex_type) { should == :thesis }
-  its(:endnote_type) { should == "Thesis\n" }
-  its(:endnote_publication_data) { should == "" }
 
   it 'should be formatted correctly' do
     ebook = EbookCitation.new

@@ -7,6 +7,7 @@ namespace :search do
 
     models = {
       Citation => [:authors, :website, :treatments],
+      Dataset => [:website, :keywords],
       Datatable => [
         :theme,
         :study,

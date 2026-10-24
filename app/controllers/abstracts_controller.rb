@@ -57,7 +57,7 @@ class AbstractsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to meetings_url }
       format.xml { head :ok }
-      format.js { render nothing: true }
+      format.js { head :ok }
     end
   end
 

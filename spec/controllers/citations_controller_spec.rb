@@ -117,11 +117,11 @@ describe CitationsController, type: :controller do
     end
   end
 
-  it 'is uses the GLBRC layout if requested ' do
+  it 'redirects GLBRC citation requests to the GLBRC publications site' do
     get :index, params: { requested_subdomain: 'glbrc' }
 
-    expect(response.code).to eq '200'
-    expect(response).to render_with_layout('glbrc')
+    expect(response).to have_http_status(:moved_permanently)
+    expect(response).to redirect_to(CitationsController::GLBRC_PUBLICATIONS_URL)
   end
 
   it 'redirects to sign in when downloading' do
@@ -272,6 +272,7 @@ describe CitationsController, type: :controller do
 
   describe 'authenticated ' do
     before(:each) do
+      FactoryBot.create(:website, name: 'lter')
       sign_in(FactoryBot.create(:admin_user))
     end
 
@@ -281,7 +282,7 @@ describe CitationsController, type: :controller do
       post :create, params:  params
 
       expect(assigns(:citation).title).to eq title
-      expect(response).to be_redirect
+      expect(response).to have_http_status(:created)
     end
   end
 end

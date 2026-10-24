@@ -126,6 +126,7 @@ describe PeopleController, type: :controller  do
     before do
       user = FactoryBot.create(:admin_user)
       sign_in user
+      @person = FactoryBot.create(:person)
     end
 
     it 'GET new' do
@@ -135,7 +136,7 @@ describe PeopleController, type: :controller  do
       expect(response).to render_template('new')
     end
     it 'GET edit' do
-      get :edit, params: { id: 1 }
+      get :edit, params: { id: @person.id }
       expect(response.code).to eq '200'
       expect(response).to render_template('edit')
     end
@@ -148,8 +149,9 @@ describe PeopleController, type: :controller  do
     # TODO: Trying to update a person with invalid parameters should be tested once any parameters count as invalid.
 
     it 'PUT update' do
-      put :update, params: { id: 107, person: { city: "Hickory Corners", postal_code: "49060", title: "",
-                                                lter_role_ids: ["15"],
+      lter_role = FactoryBot.create(:lter_role)
+      put :update, params: { id: @person.id, person: { city: "Hickory Corners", postal_code: "49060", title: "",
+                                                lter_role_ids: [lter_role.id.to_s],
                                                 country: "USA", sur_name: "Grillo (REU)", url: "",
                                                 street_address: "", given_name: "Michael",
                                                 sub_organization: "Kellogg Biological Station",
@@ -157,11 +159,11 @@ describe PeopleController, type: :controller  do
                                                 locale: "MI", friendly_name: "Mike",
                                                 middle_name: "", email: "grillom1@msu.edu" } }
 
-      expect(response).to redirect_to('/people/107')
+      expect(response).to redirect_to("/people/#{@person.id}")
     end
 
     it 'DESTROY' do
-      delete :destroy, params: { id: 1 }
+      delete :destroy, params: { id: @person.id }
       expect(response).to redirect_to('/people')
     end
   end

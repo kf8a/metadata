@@ -80,13 +80,13 @@ class DatatablesController < ApplicationController
   def publish
     initialize_instance_variables
     datatable.publish
-    render nothing: true
+    head :ok
   end
 
   def retract
     initialize_instance_variables
     datatable.retract
-    render nothing: true
+    head :ok
   end
 
   # GET /datatables/new

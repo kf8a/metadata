@@ -9,6 +9,8 @@ require 'date_range_formatter'
 
 # A dataset is the central model datasets hold tables, protocols and contact into
 class Dataset < ApplicationRecord
+  include Searchable
+
   has_many :affiliations, -> { order 'seniority' }, dependent: :destroy
   has_many :datatables, -> { order 'name' }, dependent: :nullify
   has_many :people, through: :affiliations
@@ -92,6 +94,34 @@ class Dataset < ApplicationRecord
 
   def website_name
     website.try(:name)
+  end
+
+  # Index every dataset shown on the web, whatever the website (like citations).
+  def search_indexable?
+    on_web?
+  end
+
+  def search_website_name
+    website_name
+  end
+
+  def search_document
+    plain_abstract = ActionController::Base.helpers.strip_tags(abstract.to_s).squish
+
+    {
+      id: search_id,
+      source: 'rails',
+      type: 'dataset',
+      title: title,
+      headings: '',
+      variates: [],
+      body: plain_abstract.truncate(24_000, omission: ''),
+      tags: keywords.map(&:name),
+      updated_at: updated_at.to_i,
+      priority: 0,
+      url: Rails.application.routes.url_helpers.dataset_url(self),
+      excerpt: plain_abstract.truncate(200)
+    }
   end
 
   def within_interval?(start_date, end_date)
