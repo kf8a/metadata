@@ -7,7 +7,7 @@
   <%= link_to 'sign-in',  new_user_session_path %>
 <% end %>
 </p>
-<%= render 'search_form', :word => @word, :type => @type, :sort_by => @sort_by %>
+<%= render 'search_form', :word => @word, :type => @type %>
 <% cache([@submitted_citations, @forthcoming_citations, @citation]) do %>
   <h1 class='publication-section'>Submitted</h1>
   <p class='synopsis indent'>Papers still in review; contact the first author for further information.</p>

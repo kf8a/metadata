@@ -13,7 +13,6 @@ class CitationsController < ApplicationController
   before_action :admin?, only: %i[new create edit update destroy]
 
   has_scope :by_type, as: :type
-  has_scope :sorted_by, as: :sort_by
   has_scope :by_date, as: :date
 
   def index
@@ -92,7 +91,6 @@ class CitationsController < ApplicationController
 
   def filtered
     @type = params[:type]
-    @sort_by = params[:sort_by]
 
     @citations = apply_scopes(website.citations)
     @submitted_citations = @citations.submitted

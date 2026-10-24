@@ -1,7 +1,7 @@
 <p>To download copies of listed articles you must first
   <%= link_to_unless signed_in?, 'sign-in', new_user_session_path %>
 </p>
-<%= render 'search_form', word:  @word, type: @type, sort_by: @sort_by %>
+<%= render 'search_form', word:  @word, type: @type %>
 <h1 class='publication-section'>Submitted</h1>
 <p class='synopsis indent'>Papers still in review; contact the first author for further information.</p>
 <ul>
