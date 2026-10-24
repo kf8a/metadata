@@ -1,11 +1,16 @@
-require:
+plugins:
   - rubocop-thread_safety
   - rubocop-rails
 
 AllCops:
   Exclude:
-    - 'db/schema.rb'
-  TargetRubyVersion: 2.5
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'node_modules/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+  # Rails 8.1 requires Ruby 3.2 or newer
+  TargetRubyVersion: 3.2
   NewCops: enable
 
 Layout/LineLength:
