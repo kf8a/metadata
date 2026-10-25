@@ -2,9 +2,8 @@
 
 # Members who are able to log in and do things on the site.
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable,
+  # Include default devise modules. Others available are: :confirmable
+  devise :database_authenticatable, :lockable, :validatable,
          :recoverable, :rememberable, :trackable, :timeoutable,
          :omniauthable, omniauth_providers: [:glbrc]
 
