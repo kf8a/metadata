@@ -10,7 +10,7 @@ namespace :dois do
     p Dataset.where('website_id = 1 and sponsor_id = 1').first
     Dataset.where('website_id = 1 and sponsor_id = 1').find_each do |dataset|
       identifier = dataset.metacat_id || dataset.id
-      url = "https://pasta.lternet.edu/package/eml/#{scope}/#{identifier}"
+      url = "https://pasta.edirepository.org/package/eml/#{scope}/#{identifier}"
       response = Faraday.get url
       if response.status == 200
         response.body.each_line do |revision|
@@ -39,7 +39,7 @@ namespace :dois do
     url =
       "https://pasta.lternet.edu/package/search/eml?defType=edismax&q=*&fq=scope:#{scope}&rows=#{max_rows}&fl=packageid"
 
-    datasets = Nokogiri::XML(open(url))
+    datasets = Nokogiri::XML(URI.open(url))
 
     puts EdiReport.table_header
     puts EdiReport.table_spacer
@@ -55,7 +55,6 @@ namespace :dois do
     reports.sort! { |a, b| a.first_author_name <=> b.first_author_name }
 
     reports.each do |report|
-      sleep(1)
       i += 1
       puts "#{report.table_row(i)}\n"
     end
@@ -81,21 +80,22 @@ namespace :dois do
     reports.sort! { |a, b| a.first_author_name <=> b.first_author_name }
 
     reports.each do |report|
-      next if report.publication_year.to_i > Date.today().year() - 2
+      next if report.publication_year.to_i > Time.zone.today.year - 2
       next if report.dataset.try(:completed?)
+
       i += 1
       puts "#{report.table_row(i)}\n"
     end
   end
 
-  desc "get datasets that have been updated in 2 years"
+  desc "get datasets that have been updated last year"
   task new_edi: :environment do
     scope = 'knb-lter-kbs'
     max_rows = 1000
     url =
       "https://pasta.lternet.edu/package/search/eml?defType=edismax&q=*&fq=scope:#{scope}&rows=#{max_rows}&fl=packageid"
 
-    datasets = Nokogiri::XML(open(url))
+    datasets = Nokogiri::XML(URI.open(url))
 
     i = 0
     reports = datasets.xpath('//document').collect do |doc|
@@ -107,8 +107,11 @@ namespace :dois do
 
     reports.sort! { |a, b| a.first_author_name <=> b.first_author_name }
 
+    puts "#{EdiReport.table_header}\n"
+    puts "#{EdiReport.table_spacer}\n"
     reports.each do |report|
-      next if report.publication_year.to_i < Date.today().year() - 2
+      next if report.publication_year.to_i < Time.zone.today.year - 1
+
       i += 1
       puts "#{report.table_row(i)}\n"
     end
@@ -117,7 +120,10 @@ namespace :dois do
   desc 'get dryad dois'
   task dryad: :environment do
     Citation.data_citations.all.each do |pub|
-      CSV { |csv_out| csv_out << [pub.formatted(long: true), "https://lter.kbs.msu.edu/citations/#{pub.id}"] }
+      next if pub.updated_at.year.to_i < Time.zone.today.year - 1
+
+      puts "x | #{pub.formatted(long: true)}, https://lter.kbs.msu.edu/citations/#{pub.id}"
+      # CSV { |csv_out| csv_out << [pub.formatted(long: true), "https://lter.kbs.msu.edu/citations/#{pub.id}"] }
     end
   end
 end
