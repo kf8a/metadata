@@ -9,7 +9,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       set_flash_message(:notice, :success, kind: "GLBRC") if is_navigational_format?
     else
       set_flash_message(:error, :failure, kind: "GLBRC", reason: "you have not been granted access.")
-      session["devise.glbrc_data"] = request.env["omniauth.auth"]
       redirect_to '/'
     end
   end

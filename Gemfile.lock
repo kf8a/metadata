@@ -170,11 +170,11 @@ GEM
       unaccent (~> 0.3)
     country_select (9.0.0)
       countries (> 5.0, < 7.0)
-    crass (1.0.7)
+    crass (1.0.8)
     cssbundling-rails (1.4.3)
       railties (>= 6.0.0)
     csv (3.3.6)
-    dalli (5.1.1)
+    dalli (5.2.2)
       logger
     database_cleaner (2.1.0)
       database_cleaner-active_record (>= 2, < 3)

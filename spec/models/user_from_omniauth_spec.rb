@@ -11,6 +11,7 @@ RSpec.describe User, '.from_omniauth' do
     OmniAuth::AuthHash.new(
       provider: 'glbrc',
       uid: 'uid-123',
+      credentials: { token: 'secret-access-token', refresh_token: 'secret-refresh-token' },
       info: { id_token: { email: email, groups: groups } }
     )
   end
@@ -41,6 +42,18 @@ RSpec.describe User, '.from_omniauth' do
 
     expect(user).to be_persisted
     expect(user.sponsors).to be_empty
+  end
+
+  it 'does not write the identity provider response, tokens included, to the log' do
+    log = StringIO.new
+    allow(User).to receive(:logger).and_return(Logger.new(log))
+
+    User.from_omniauth(auth(groups: ['glbrc.org\AIM-InformationServices']))
+    User.from_omniauth(auth(email: 'new.user@glbrc.org'))
+
+    expect(log.string).not_to include('secret-access-token')
+    expect(log.string).not_to include('secret-refresh-token')
+    expect(log.string).not_to include('AIM-InformationServices')
   end
 
   it 'links an existing user by email without changing their sponsors' do
