@@ -492,7 +492,7 @@ class Datatable < ApplicationRecord
   end
 
   def database_date_field
-    values = ActiveRecord::Base.connection.execute(object)
+    values = ActiveRecord::Base.connection.execute(rows_query(limit: 0))
     valid_date_names = %w[sample_date obs_date date datetime harvest_date]
     values.fields.find { |field| valid_date_names.include?(field) }
   end
@@ -502,7 +502,7 @@ class Datatable < ApplicationRecord
     if is_sql
       date_field = database_date_field
       if date_field
-        query = "select max(#{date_field}), min(#{date_field}) from (#{object}) as t1"
+        query = "select max(#{date_field}), min(#{date_field}) from (\n#{object_sql}\n) as t1"
         data_start_date, data_end_date = query_datatable_for_temporal_extent(query)
       end
     end
@@ -518,7 +518,7 @@ class Datatable < ApplicationRecord
   end
 
   def column_names_and_types
-    result = ActiveRecord::Base.connection.execute("#{object} limit 1")
+    result = ActiveRecord::Base.connection.execute(rows_query(limit: 1))
     data = result.fields.each_with_index.map do |k, v|
       { k => ActiveRecord::Base
              .connection

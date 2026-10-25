@@ -55,6 +55,19 @@ describe Datatable do
       end
     end
 
+    it 'finds the temporal extent' do
+      @datatable.update!(object: "select d::date as sample_date from generate_series('2001-01-01'::date, " \
+                                 "'2003-06-01'::date, '1 month') d;")
+
+      expect(@datatable.temporal_extent).to eq(begin_date: Date.new(2001, 1, 1), end_date: Date.new(2003, 6, 1))
+    end
+
+    it 'reads column names and types' do
+      @datatable.update!(object: 'select 1::integer as n, now()::date as sample_date;')
+
+      expect(@datatable.column_names_and_types).to eq('n' => 'integer', 'sample_date' => 'date')
+    end
+
     it 'treats every row as released when the count is not set' do
       @datatable.update!(object: 'select g as n from generate_series(1, 20) g order by g desc;',
                          number_of_released_records: nil)

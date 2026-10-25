@@ -38,6 +38,12 @@ describe ScoreCard do
     expect(score_card.score(@datatable)).to eq [{ year: 2013, count: 1, approved: 1.0 }]
   end
 
+  it 'returns scores when the stored query ends in a semicolon' do
+    allow(@datatable).to receive('object').and_return("select '2013-1-1'::date as sample_date;\n")
+
+    expect(score_card.score(@datatable)).to eq [{ year: 2013, count: 1, approved: 1.0 }]
+  end
+
   it 'returns scores for sample_dates' do
     allow(@datatable).to receive('object').and_return("select '2013-1-1'::date as sample_date")
 
