@@ -1,4 +1,7 @@
 jQuery(document).ready(function () {
+  // Rails rejects non-GET requests without the CSRF token; rails-ujs used to add it
+  jQuery.ajaxSetup({ headers: { "X-CSRF-Token": jQuery('meta[name="csrf-token"]').attr("content") } });
+
   function geo_decode() {
     var email = jQuery(".person-email").get(0);
     if (email !== undefined) {
@@ -36,17 +39,6 @@ jQuery(document).ready(function () {
       jQuery(this).text("[Expand All]");
     },
   );
-
-  //This sends a delete request and hides the containing element
-  jQuery(".deleter").on("click", function (e) {
-    e.preventDefault();
-    var path = jQuery(this).attr("href");
-    jQuery(this).parent().hide("slow");
-    jQuery.ajax({
-      type: "DELETE",
-      url: path,
-    });
-  });
 
   // Make member-only content visible and adjust the sign-in indicator if necessary
   // append a random number so that IE7 will actually make the call and not return a cached value

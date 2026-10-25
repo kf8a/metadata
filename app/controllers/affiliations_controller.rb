@@ -40,7 +40,7 @@ class AffiliationsController < ApplicationController
   def destroy
     affiliation.destroy
     flash[:notice] = 'Affiliation was successfully destroyed.'
-    redirect_to 'index'
+    redirect_to affiliations_path, status: :see_other
   end
 
   private

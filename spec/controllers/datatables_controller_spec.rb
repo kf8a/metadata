@@ -82,9 +82,15 @@ describe DatatablesController, type: :controller  do
 
       put :publish, params: { id: datatable.id }
 
-      expect(response.code).to eq '200'
+      expect(response).to redirect_to(datatable_path(datatable))
+      expect(response).to have_http_status(:see_other)
       expect(datatable.reload.csv_file).to be_attached
       expect(datatable.csv_file.download).to eq(datatable.csv_headers + "2020-01-01\n")
+
+      put :retract, params: { id: datatable.id }
+
+      expect(response).to redirect_to(datatable_path(datatable))
+      expect(datatable.reload.csv_file).not_to be_attached
     end
   end
 

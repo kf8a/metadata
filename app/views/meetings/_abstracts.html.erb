@@ -8,7 +8,7 @@
 
   <% if admin? %>
     <%= link_to 'Edit', edit_abstract_path(abstract) %>
-    <%= link_to image_tag('trash.gif'), abstract_path(abstract),
-      confirm: 'Are you sure?', class: 'deleter' %>
+    <%= link_to image_tag('trash.gif', alt: 'Delete'), abstract_path(abstract),
+      data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
   <% end %>
 </li>

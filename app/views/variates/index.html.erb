@@ -8,7 +8,7 @@
   <tr>
     <td><%= link_to 'Show', variate_path(variate) %></td>
     <td><%= link_to 'Edit', edit_variate_path(variate) %></td>
-    <td><%= link_to 'Destroy', variate_path(variate), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', variate_path(variate), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

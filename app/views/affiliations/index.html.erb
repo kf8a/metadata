@@ -9,7 +9,7 @@
       <td><%= affiliation.title %></td>
       <td><%= link_to 'Show', affiliation_path(affiliation) %></td>
       <td><%= link_to 'Edit', edit_affiliation_path(affiliation) %></td>
-      <td><%= link_to 'Destroy', affiliation_path(affiliation), :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to 'Destroy', affiliation_path(affiliation), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
 </table>

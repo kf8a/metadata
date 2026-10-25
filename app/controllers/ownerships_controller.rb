@@ -69,6 +69,6 @@ class OwnershipsController < ApplicationController
     @ownership = Ownership.new
     @user_count = 1
     @datatable_count = 1 unless @datatable
-    render 'new'
+    render 'new', status: :unprocessable_content
   end
 end

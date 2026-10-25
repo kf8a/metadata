@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 
       redirect_to(url_after_create)
     else
-      render :new
+      render :new, status: :unprocessable_content
     end
   end
 

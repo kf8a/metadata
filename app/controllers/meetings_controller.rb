@@ -36,7 +36,7 @@ class MeetingsController < ApplicationController
         flash[:notice] = 'Meeting was successfully created.'
         format.html { redirect_to meetings_url }
       else
-        format.html { render 'new' }
+        format.html { render 'new', status: :unprocessable_content }
       end
     end
   end
@@ -48,7 +48,7 @@ class MeetingsController < ApplicationController
         format.html { redirect_to meeting_url(@meeting) }
       else
         @venues = VenueType.find(:all).collect { |type| [type.name, type.id] }
-        format.html { render 'edit' }
+        format.html { render 'edit', status: :unprocessable_content }
       end
     end
   end

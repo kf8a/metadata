@@ -32,7 +32,7 @@ class PermissionsController < ApplicationController
         format.html { redirect_to permission_path(@datatable.id) }
         format.xml { head :created, location: permission_path(@datatable.id) }
       else
-        format.html { render 'new' }
+        format.html { render 'new', status: :unprocessable_content }
         format.xml { render xml: permission.errors.to_xml }
       end
     end

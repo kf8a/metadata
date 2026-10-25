@@ -7,10 +7,10 @@
 <% @invites.each do |invite| %>
   <tr>
     <td><%= "#{invite.firstname} #{invite.lastname}"%></td>
-    <td><%= link_to 'Send Invite', send_invitation_path(invite), :confirm => 'Send invitation?' %></td>
+    <td><%= link_to 'Send Invite', send_invitation_path(invite), data: { turbo_confirm: 'Send invitation?' } %></td>
     <td><%= link_to 'Show', invite %></td>
     <td><%= link_to 'Edit', edit_invite_path(invite) %></td>
-    <td><%= link_to 'Destroy', invite, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', invite, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>

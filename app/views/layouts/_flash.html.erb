@@ -1,0 +1,6 @@
+<% if flash[:notice].present? %>
+  <p class="flash flash-notice" role="status"><%= flash[:notice] %></p>
+<% end %>
+<% [flash[:alert], flash[:error]].compact_blank.each do |message| %>
+  <p class="flash flash-alert" role="alert"><%= message %></p>
+<% end %>
