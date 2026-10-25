@@ -27,6 +27,10 @@ module Metadata
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.cache_store = :file_store, 'tmp/cache'
+
+    # Turbo only renders form replies that are redirects or 4xx/5xx errors
+    config.responders.error_status = :unprocessable_content
+    config.responders.redirect_status = :see_other
   end
 end
 
