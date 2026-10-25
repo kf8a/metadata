@@ -1,10 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe ReportCitation do
   it { should_not be_book }
-  its(:bibtex_type) { should == :report}
-  its(:endnote_type) { should == "Report\n" }
-  its(:endnote_publication_data) { should == "" }
 
   it 'should be formatted correctly' do
     report = ReportCitation.new

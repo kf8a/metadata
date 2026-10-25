@@ -32,9 +32,9 @@ RSpec.describe Citation, '#search_document' do
       expect(published_citation(website: nil)).to be_search_indexable
     end
 
-    it 'is false when published on a glbrc website' do
+    it 'is true when published on a glbrc website' do
       glbrc = Website.find_or_create_by!(name: 'glbrc')
-      expect(published_citation(website: glbrc)).not_to be_search_indexable
+      expect(published_citation(website: glbrc)).to be_search_indexable
     end
 
     it 'is false when not published' do

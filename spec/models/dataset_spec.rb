@@ -23,6 +23,16 @@ describe Dataset do
     dataset.save
   end
 
+  describe '#roles' do
+    it 'lists each role once, however many people hold it' do
+      dataset = Dataset.create!(@valid_attributes)
+      role = FactoryBot.create(:role)
+      2.times { FactoryBot.create(:affiliation, dataset: dataset, role: role) }
+
+      expect(dataset.roles).to eq [role]
+    end
+  end
+
   describe 'eml importation' do
     # before(:each) do
     #   website = FactoryBot.create(:website)
@@ -299,14 +309,14 @@ describe Dataset do
 
   def valid_eml_doc?(eml_content)
     xsd = nil
-    Dir.chdir("#{Rails.root}/test/data/eml-2.1.0") do
+    Dir.chdir("#{Rails.root.join('test/data/eml-2.1.0')}") do
       xsd = Nokogiri::XML::Schema(File.read("eml.xsd"))
     end
-    if eml_content.start_with?('http://')
-      doc = Nokogiri::XML(open(eml_content))
-    else
-      doc = Nokogiri::XML(eml_content)
-    end
+    doc = if eml_content.start_with?('http://')
+            Nokogiri::XML(open(eml_content))
+          else
+            Nokogiri::XML(eml_content)
+          end
     assert_equal [], xsd.validate(doc) # make sure the document is valid
   end
 end

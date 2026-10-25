@@ -4,7 +4,7 @@
   <%= link_to 'sign-in',  new_user_session_path%>
 <% end -%>
 </p>
-<%= render 'search_form', :word => @word, :type => @type, :sort_by => @sort_by %>
+<%= render 'search_form', :word => @word, :type => @type %>
   <h1 class='publication-section'>Submitted(alphabetical by year)</h1>
   <ul class='citations'>
     <% year = 0 -%>

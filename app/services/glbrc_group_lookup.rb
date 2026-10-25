@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GlbrcGroupLookup
   def self.call(user)
     new(user).call
@@ -15,4 +17,3 @@ class GlbrcGroupLookup
 
   attr_reader :user
 end
-

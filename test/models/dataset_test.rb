@@ -1,15 +1,15 @@
-require File.expand_path('../../test_helper',__FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('../test_helper', __dir__)
 require 'nokogiri'
 
 class DatasetTest < ActiveSupport::TestCase
-
   should have_many :datatables
   should have_many :affiliations
   should belong_to :website
 
   should have_and_belong_to_many :themes
   should have_and_belong_to_many :studies
-
 
   context 'dataset' do
     setup do
@@ -27,29 +27,28 @@ class DatasetTest < ActiveSupport::TestCase
 
   context 'to_label function' do
     setup do
-      @dataset = FactoryBot.create(:dataset, :title => 'LabelTitle', :dataset => 'Label Dataset')
+      @dataset = FactoryBot.create(:dataset, title: 'LabelTitle', dataset: 'Label Dataset')
     end
 
     should 'provide the title and dataset' do
       assert_equal "LabelTitle (Label Dataset)", @dataset.to_label
     end
-
   end
 
   context 'datatable_people function' do
     context 'for a dataset with datatables and people' do
       setup do
         @dataset = FactoryBot.create(:dataset)
-        datatable1 = FactoryBot.create(:datatable, :dataset => @dataset)
+        datatable1 = FactoryBot.create(:datatable, dataset: @dataset)
         @dataset.reload
-        datatable2 = FactoryBot.create(:datatable, :dataset => @dataset)
+        datatable2 = FactoryBot.create(:datatable, dataset: @dataset)
         @dataset.reload
-        @person1 = FactoryBot.create(:person, :given_name => "Angela")
-        @person2 = FactoryBot.create(:person, :given_name => "Bob")
-        assert DataContribution.create(:datatable => datatable1, :person => @person1, :role => FactoryBot.create(:role))
+        @person1 = FactoryBot.create(:person, given_name: "Angela")
+        @person2 = FactoryBot.create(:person, given_name: "Bob")
+        assert DataContribution.create(datatable: datatable1, person: @person1, role: FactoryBot.create(:role))
         datatable1.reload
         @dataset.reload
-        assert DataContribution.create(:datatable => datatable2, :person => @person2, :role => FactoryBot.create(:role))
+        assert DataContribution.create(datatable: datatable2, person: @person2, role: FactoryBot.create(:role))
         datatable2.reload
         @dataset.reload
       end
@@ -65,7 +64,7 @@ class DatasetTest < ActiveSupport::TestCase
   context 'valid_request function' do
     context 'for a dataset with no website' do
       setup do
-        @dataset = FactoryBot.create(:dataset, :website => nil)
+        @dataset = FactoryBot.create(:dataset, website: nil)
       end
 
       should 'be true for any subdomain' do
@@ -77,13 +76,13 @@ class DatasetTest < ActiveSupport::TestCase
 
     context 'for a dataset with a website' do
       setup do
-        @website = FactoryBot.create(:website, :name => 'cool_website')
-        @dataset = FactoryBot.create(:dataset, :website => @website)
+        @website = FactoryBot.create(:website, name: 'cool_website')
+        @dataset = FactoryBot.create(:dataset, website: @website)
       end
 
       should 'only be true for that website as subdomain' do
-        refute @dataset.valid_request?('glbrc')
-        refute @dataset.valid_request?('lter')
+        assert_not @dataset.valid_request?('glbrc')
+        assert_not @dataset.valid_request?('lter')
         assert @dataset.valid_request?('cool_website')
       end
     end
@@ -91,8 +90,8 @@ class DatasetTest < ActiveSupport::TestCase
 
   context 'no temporal extent' do
     setup do
-      @dataset = FactoryBot.create(:dataset, :initiated => '2000-1-1',
-        :datatables => [FactoryBot.create(:datatable, :object => 'select 1')])
+      @dataset = FactoryBot.create(:dataset, initiated: '2000-1-1',
+                                             datatables: [FactoryBot.create(:datatable, object: 'select 1')])
     end
 
     should 'not update temporal extent if extent is missing' do
@@ -105,26 +104,28 @@ class DatasetTest < ActiveSupport::TestCase
   context 'Current Temporal Extent' do
     setup do
       @dataset = FactoryBot.create(:dataset,
-        :datatables  => [FactoryBot.create(:datatable, :object => 'select 1'),
-          FactoryBot.create(:datatable, :begin_date => Date.today, :end_date => Date.today),
-          FactoryBot.create(:datatable, :begin_date => '2000-1-1', :end_date => Date.today)])
+                                   datatables: [FactoryBot.create(:datatable, object: 'select 1'),
+                                                FactoryBot.create(:datatable, begin_date: Date.today,
+                                                                              end_date: Date.today),
+                                                FactoryBot.create(:datatable, begin_date: '2000-1-1',
+                                                                              end_date: Date.today)])
     end
 
     should 'update temporal extent to today' do
       @dataset.update_temporal_extent
-      assert_equal Date.new(2000,1,1), @dataset.initiated
+      assert_equal Date.new(2000, 1, 1), @dataset.initiated
       assert_equal Date.today, @dataset.data_end_date
     end
-
   end
 
   context 'past temporal extent' do
     setup do
       @dataset = FactoryBot.create(:dataset,
-                                    :datatables  => [
-                                      FactoryBot.create(:datatable, :begin_date => Date.today, :end_date=> Date.today),
-                                      FactoryBot.create(:datatable, :begin_date => Date.today - 1.year, :end_date => Date.today - 1.month)
-      ])
+                                   datatables: [
+                                     FactoryBot.create(:datatable, begin_date: Date.today, end_date: Date.today),
+                                     FactoryBot.create(:datatable, begin_date: Date.today - 1.year,
+                                                                   end_date: Date.today - 1.month)
+                                   ])
     end
 
     should 'be today to a year ago' do
@@ -136,7 +137,7 @@ class DatasetTest < ActiveSupport::TestCase
 
   context 'eml generatation' do
     setup do
-      @dataset = FactoryBot.create(:dataset, :initiated => Date.today, :completed => Date.today)
+      @dataset = FactoryBot.create(:dataset, initiated: Date.today, completed: Date.today)
       @datatable = FactoryBot.create(:datatable)
       @dataset_with_datatable = @datatable.dataset = @dataset
       assert @datatable.valid_for_eml?
@@ -149,11 +150,11 @@ class DatasetTest < ActiveSupport::TestCase
 
     should 'follow the eml schema' do
       xsd = nil
-      Dir.chdir("#{Rails.root}/test/data/eml-2.1.0") do
+      Dir.chdir("#{Rails.root.join('test/data/eml-2.1.0')}") do
         xsd = Nokogiri::XML::Schema(File.read("eml.xsd"))
       end
       doc = Nokogiri::XML(@dataset.to_eml)
-      assert_equal [],  xsd.validate(doc)
+      assert_equal [], xsd.validate(doc)
     end
 
     should 'have a dataset element' do
@@ -177,8 +178,8 @@ class DatasetTest < ActiveSupport::TestCase
 
     context 'dataset with protocols in the datatables' do
       setup do
-        website = FactoryBot.create(:website, :name => 'cool_website')
-        @protocol = FactoryBot.create(:protocol, :dataset => @dataset, :title => 'cool protocol')
+        website = FactoryBot.create(:website, name: 'cool_website')
+        @protocol = FactoryBot.create(:protocol, dataset: @dataset, title: 'cool protocol')
         @dataset.protocols << @protocol
         @dataset.website = website
         @protocol2 = FactoryBot.create(:protocol)
@@ -209,10 +210,10 @@ class DatasetTest < ActiveSupport::TestCase
     end
 
     should 'be able to add a affiliation when none exists' do
-      params = { :dataset=>{"title"=>"Trace Gas Fluxes on the Main Cropping System Experiment",
-       "abstract"=>"Trace gases (methane,
+      params = { :dataset => { "title" => "Trace Gas Fluxes on the Main Cropping System Experiment",
+                               "abstract" => "Trace gases (methane,
        carbon dioxide and nitrous oxide) have been measured on the LTER main experimental site since 1991 and on the successional and forested sites since 1993.  The trace gas fluxes are analyzed twice monthly or monthly until the ground freezes.  Samples are collected from permanently-installed in-situ static chambers. CH<sub>4</sub> and N<sub>2</sub>O are analyzed using gas-chromatography and CO<sub>2</sub> is measured with an infrared gas analyzer. Soil moisture and temperature are measured at the same time the gas samples are collected.",
-       "keyword_list"=>"CO2,
+                               "keyword_list" => "CO2,
        flux,
        N2O,
        CH4,
@@ -223,19 +224,19 @@ class DatasetTest < ActiveSupport::TestCase
        gases,
        agriculture,
        trace gases",
-       "website_id"=>"1",
-       "sponsor_id"=>"1",
-       "status"=>"active",
-       "initiated(1i)"=>"1991",
-       "initiated(2i)"=>"6",
-       "initiated(3i)"=>"12",
-       "completed(1i)"=>"2009",
-       "completed(2i)"=>"10",
-       "completed(3i)"=>"9",
-       "core_dataset"=>"1",
-       "affiliations_attributes"=>[{"person_id"=>@person.id, "seniority"=>"1"}]},
-       "commit"=>"Update",
-       "id"=>"16"}
+                               "website_id" => "1",
+                               "sponsor_id" => "1",
+                               "status" => "active",
+                               "initiated(1i)" => "1991",
+                               "initiated(2i)" => "6",
+                               "initiated(3i)" => "12",
+                               "completed(1i)" => "2009",
+                               "completed(2i)" => "10",
+                               "completed(3i)" => "9",
+                               "core_dataset" => "1",
+                               "affiliations_attributes" => [{ "person_id" => @person.id, "seniority" => "1" }] },
+                 "commit" => "Update",
+                 "id" => "16" }
 
       assert @dataset.update(params[:dataset])
     end
@@ -248,12 +249,12 @@ class DatasetTest < ActiveSupport::TestCase
 
     context "and two datatables" do
       setup do
-        FactoryBot.create(:datatable, :dataset => @dataset,
-          :object => 'select now() as sample_date',
-          :begin_date => (Date.today - 7),   :end_date => (Date.today - 4))
-        FactoryBot.create(:datatable, :dataset => @dataset,
-          :object => %q{select now() - interval '1 year' as sample_date},
-          :begin_date => (Date.today - 365), :end_date => (Date.today - 364))
+        FactoryBot.create(:datatable, dataset: @dataset,
+                                      object: 'select now() as sample_date',
+                                      begin_date: (Date.today - 7), end_date: (Date.today - 4))
+        FactoryBot.create(:datatable, dataset: @dataset,
+                                      object: "select now() - interval '1 year' as sample_date",
+                                      begin_date: (Date.today - 365), end_date: (Date.today - 364))
       end
 
       should "return true for dates which include a datatable" do
@@ -261,7 +262,7 @@ class DatasetTest < ActiveSupport::TestCase
       end
 
       should "return false for dates which do not include a datatable" do
-        refute @dataset.within_interval?(Date.today - 500, Date.today - 400)
+        assert_not @dataset.within_interval?(Date.today - 500, Date.today - 400)
       end
     end
   end

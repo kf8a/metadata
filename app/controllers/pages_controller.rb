@@ -20,15 +20,15 @@ class PagesController < ApplicationController
     @page.page_images << PageImage.new
   end
 
+  def edit
+    @page = page
+  end
+
   def create
     @page = Page.new(page_params)
     flash[:notice] = 'Page was successfully created.' if @page.save
 
     respond_with @page
-  end
-
-  def edit
-    @page = page
   end
 
   def update

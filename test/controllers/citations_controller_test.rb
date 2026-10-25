@@ -3,7 +3,6 @@
 require File.expand_path('../test_helper', __dir__)
 
 class CitationsControllerTest < ActionController::TestCase
-
   context 'signed in as an normal user' do
     setup do
       @website = Website.where(name: 'lter').first_or_create
@@ -119,7 +118,7 @@ class CitationsControllerTest < ActionController::TestCase
                                             type: 'ArticleCitation' } }
       end
 
-      should redirect_to('the citation show page') {citation_url(assigns(:citation))}
+      should redirect_to('the citation show page') { citation_url(assigns(:citation)) }
 
       should 'assign a type of ArticleCitation' do
         assert_equal 'ArticleCitation', assigns(:citation).type
@@ -136,7 +135,7 @@ class CitationsControllerTest < ActionController::TestCase
         post :destroy, params: { id: @citation }
       end
 
-      should redirect_to('the citation index page') {citations_url() }
+      should redirect_to('the citation index page') { citations_url }
     end
   end
 end

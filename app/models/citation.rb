@@ -114,14 +114,6 @@ class Citation < ApplicationRecord
     where(type: type)
   end
 
-  def self.sorted_by(sorter)
-    sorter.downcase!
-    # Since primary author and date is default, it is already sorted that way
-    return if sorter == 'primary author and date(default)'
-
-    order(sorter)
-  end
-
   def self.type_from_ris_type(type)
     case type
     when 'JOUR', 'MGZN'
@@ -415,10 +407,6 @@ class Citation < ApplicationRecord
     treatments.map { |treatment| Treatment.option_for(treatment).first }
   end
 
-  def search_tags
-    treatments.map { |treatment| Treatment.option_for(treatment).first }
-  end
-
   def search_document_type
     self.class.name.delete_suffix('Citation').underscore.presence || 'article'
   end
@@ -458,12 +446,8 @@ class Citation < ApplicationRecord
   def title_and_punctuation
     return '' if title.blank?
 
-    title.rstrip!
-    if title.match?(/[?!.]$/)
-      title
-    else
-      "#{title}."
-    end
+    stripped = title.rstrip
+    stripped.match?(/[?!.]$/) ? stripped : "#{stripped}."
   end
 
   def page_numbers

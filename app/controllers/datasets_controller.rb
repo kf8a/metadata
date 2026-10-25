@@ -7,7 +7,6 @@ class DatasetsController < ApplicationController
   helper_method :dataset
 
   before_action :authenticate_user!, except: %i[index show]
-  before_action :allow_on_web, except: %i[knb]
   before_action :admin?, except: %i[index show]
 
   # layout proc { |controller| controller.request.format == :eml ? false : 'application' }
@@ -52,7 +51,7 @@ class DatasetsController < ApplicationController
   end
 
   def knb
-    _scope, identifier = params[:id].split(/\./)
+    _scope, identifier = params[:id].split('.')
     dataset = Dataset.where(metacat_id: identifier).first
     dataset ||= Dataset.where(id: identifer).first
     redirect_to dataset
@@ -119,7 +118,6 @@ class DatasetsController < ApplicationController
 
   # PUT /datasets/1
   def update
-
     if dataset.update(dataset_params)
 
       puts 'Dataset was successfully updated.'
@@ -156,15 +154,6 @@ class DatasetsController < ApplicationController
     @crumbs << crumb
   end
 
-  def allow_on_web
-    dataset_id = params[:id]
-    return unless dataset_id
-
-    dataset_id = Dataset.find_by(dataset: dataset_id) if dataset_id =~ /KBS\d\d\d/
-    dataset = Dataset.find(dataset_id)
-    dataset.on_web
-  end
-
   def collect_and_normalize_studies(datasets)
     @studies =
       datasets.collect do |dataset|
@@ -198,7 +187,7 @@ class DatasetsController < ApplicationController
       :sponsor_id,
       :website_id,
       :keyword_list,
-      files: [],
+      files: []
       # affiliations_attributes: [], dataset_files_attributes: %i[name data _destroy id]
     )
   end

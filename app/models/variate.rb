@@ -24,5 +24,4 @@ class Variate < ApplicationRecord
   def unit_name
     unit.try(:name)
   end
-
 end

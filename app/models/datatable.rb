@@ -56,7 +56,7 @@ class Datatable < ApplicationRecord
       event :mark_deleted,  transitions_to: :deleted
     end
     state :deleted do
-      event :revert,        transitions_to: :active
+      event :revert, transitions_to: :active
     end
   end
 
@@ -251,14 +251,22 @@ class Datatable < ApplicationRecord
 
   # publish a dataset to S3 for caching
   def publish
-    file = Tempfile.new('csv_cache')
-    file << approved_csv
-    file.close
-    csv_file.attach(io: File.open(file),
-                    filename: "#{id}-#{title.tr(' ', '-')}.csv",
-                    content_type: 'text/csv')
-    save!
-    file.unlink
+    Tempfile.create(['csv_cache', '.csv']) do |file|
+      write_approved_csv(file)
+      file.rewind
+      # upload now, while the tempfile still exists
+      blob = ActiveStorage::Blob.create_and_upload!(io: file,
+                                                    filename: "#{id}-#{title.tr(' ', '-')}.csv",
+                                                    content_type: 'text/csv')
+      csv_file.attach(blob)
+      save!
+    end
+  end
+
+  # Writes the public CSV download (headers plus approved rows) to io
+  def write_approved_csv(io)
+    io.write csv_headers
+    self.class.stream_query_rows(approved_data_query) { |row| io.write row }
   end
 
   # remove a dataset from S3 caching
@@ -350,16 +358,16 @@ class Datatable < ApplicationRecord
             else
               "(#{year_start} to #{ongoing? ? 'present' : year_end})"
             end
-    "#{title} #{years} #{maybe_study()}"
+    "#{title} #{years} #{maybe_study}"
   end
 
   def maybe_study
-   if study.short_name
-     "(#{study.short_name})"
-   else
-     ""
-   end
- end
+    if study.short_name
+      "(#{study.short_name})"
+    else
+      ""
+    end
+  end
 
   def ongoing?
     return false if completed?
@@ -406,13 +414,18 @@ class Datatable < ApplicationRecord
     [
       "# #{title}\n",
       data_source,
-      "# #{dataset.doi}\n",
+      doi_header,
       terms_of_use,
       variate_table,
       data_comments,
       "#{variate_names.join(',')}\n",
       "#{variate_units.join(',')}\n"
     ].join
+  end
+
+  def doi_header
+    doi = dataset.current_doi&.doi
+    doi.present? ? "# https://doi.org/#{doi}\n" : ''
   end
 
   def variate_table
@@ -479,7 +492,7 @@ class Datatable < ApplicationRecord
   end
 
   def database_date_field
-    values = ActiveRecord::Base.connection.execute(object)
+    values = ActiveRecord::Base.connection.execute(rows_query(limit: 0))
     valid_date_names = %w[sample_date obs_date date datetime harvest_date]
     values.fields.find { |field| valid_date_names.include?(field) }
   end
@@ -489,7 +502,7 @@ class Datatable < ApplicationRecord
     if is_sql
       date_field = database_date_field
       if date_field
-        query = "select max(#{date_field}), min(#{date_field}) from (#{object}) as t1"
+        query = "select max(#{date_field}), min(#{date_field}) from (\n#{object_sql}\n) as t1"
         data_start_date, data_end_date = query_datatable_for_temporal_extent(query)
       end
     end
@@ -505,12 +518,12 @@ class Datatable < ApplicationRecord
   end
 
   def column_names_and_types
-    result = ActiveRecord::Base.connection.execute("#{object} limit 1")
+    result = ActiveRecord::Base.connection.execute(rows_query(limit: 1))
     data = result.fields.each_with_index.map do |k, v|
       { k => ActiveRecord::Base
-        .connection
-        .execute("select format_type(#{result.ftype(v)}, #{result.fmod(v)})")
-        .first["format_type"] }
+             .connection
+             .execute("select format_type(#{result.ftype(v)}, #{result.fmod(v)})")
+             .first["format_type"] }
     end
     data.reduce({}, :merge)
   end
@@ -533,18 +546,22 @@ class Datatable < ApplicationRecord
   end
 
   def data_preview
-    unless @data_preview
-      limit = excerpt_limit || 5
-      query = "#{object}  offset #{offset} limit #{limit}"
-      @data_preview = ActiveRecord::Base.connection.execute(query)
-    end
-    @data_preview
+    @data_preview ||= ActiveRecord::Base.connection.execute(rows_query(offset: offset, limit: excerpt_limit || 5))
   end
 
+  # The released rows: the public download
   def approved_data_query
-    query = object
-    query += " offset #{offset}" if number_of_released_records
-    query
+    rows_query(offset: (offset if number_of_released_records))
+  end
+
+  # Every row: the admin download
+  def full_data_query
+    rows_query
+  end
+
+  # The stored query without trailing semicolons or whitespace, so it can be nested in another query
+  def object_sql
+    object.to_s.strip.sub(/[;\s]+\z/, '')
   end
 
   def offset
@@ -555,7 +572,7 @@ class Datatable < ApplicationRecord
 
   def total_records
     unless @total_records
-      query = "select count(*) as count from (#{object}) as t1"
+      query = "select count(*) as count from (\n#{object_sql}\n) as t1"
       result = ActiveRecord::Base.connection.execute(query).first
       @total_records = result['count'].to_i
     end
@@ -612,6 +629,16 @@ class Datatable < ApplicationRecord
   end
 
   private
+
+  # Nests the stored query as a subquery and pages it, rather than appending SQL to it.
+  # The closing parenthesis goes on its own line so a trailing -- comment can't swallow it.
+  def rows_query(offset: nil, limit: nil)
+    rows = Arel::Nodes::TableAlias.new(Arel::Nodes::Grouping.new(Arel.sql("\n#{object_sql}\n")), 'datatable_rows')
+    query = Arel::SelectManager.new.project(Arel.star).from(rows)
+    query.skip(offset) if offset&.positive?
+    query.take(limit) if limit
+    query.to_sql
+  end
 
   def search_tags
     (keyword_names + [study&.name] + leads.map(&:full_name)).compact_blank.uniq

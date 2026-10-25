@@ -58,19 +58,17 @@ class DatatablesController < ApplicationController
         format.html
         format.fasta
         format.csv do
-          render text: 'You do not have permission to download this datatable' unless csv_ok
-
           if current_user.try(:role) == 'admin'
             render_admin_csv
           elsif @datatable.csv_file.attached?
-            redirect_to url_for(@datatable.csv_file), allow_other_hosts: true
+            redirect_to url_for(@datatable.csv_file)
           else
             render_csv
           end
         end
       end
     else
-      redirect_to datatables_url, allow_other_hosts: true
+      redirect_to datatables_url
     end
   end
 
@@ -80,13 +78,13 @@ class DatatablesController < ApplicationController
   def publish
     initialize_instance_variables
     datatable.publish
-    render nothing: true
+    head :ok
   end
 
   def retract
     initialize_instance_variables
     datatable.retract
-    render nothing: true
+    head :ok
   end
 
   # GET /datatables/new
@@ -294,7 +292,7 @@ class DatatablesController < ApplicationController
   def render_admin_csv
     stream_file(file_name, "csv") do |stream|
       stream.write @datatable.csv_headers
-      Datatable.stream_query_rows(@datatable.object) do |row_from_db|
+      Datatable.stream_query_rows(@datatable.full_data_query) do |row_from_db|
         stream.write row_from_db
       end
     end

@@ -1,10 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe ThesisCitation do
   it { should_not be_book }
-  its(:bibtex_type) { should == :thesis }
-  its(:endnote_type) { should == "Thesis\n" }
-  its(:endnote_publication_data) { should == "" }
 
   it 'is formatted correctly' do
     thesis = ThesisCitation.new

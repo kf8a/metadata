@@ -9,12 +9,14 @@ require 'date_range_formatter'
 
 # A dataset is the central model datasets hold tables, protocols and contact into
 class Dataset < ApplicationRecord
+  include Searchable
+
   has_many :affiliations, -> { order 'seniority' }, dependent: :destroy
   has_many :datatables, -> { order 'name' }, dependent: :nullify
   has_many :people, through: :affiliations
   belongs_to :project, optional: true
   has_many :protocols, -> { where 'active is true' }, dependent: :nullify
-  has_many :roles, -> { uniq }, through: :affiliations
+  has_many :roles, -> { distinct }, through: :affiliations
   belongs_to              :sponsor
   has_and_belongs_to_many :studies
   has_and_belongs_to_many :themes
@@ -46,18 +48,17 @@ class Dataset < ApplicationRecord
   end
 
   def ld_json
-    { "@context": "http://schema.org",
-      "@type": "Dataset",
-      "name": title,
+    { '@context': "http://schema.org",
+      '@type': "Dataset",
+      name: title,
       description: short_abstract,
-      "url": "https://lter.kbs.msu.edu/datasets/#{id}",
-      "sameAs": "https://doi.org/#{current_doi.to_s}",
-      "includedInDataCatalog": {
+      url: "https://lter.kbs.msu.edu/datasets/#{id}",
+      sameAs: "https://doi.org/#{current_doi}",
+      includedInDataCatalog: {
         "@type" => "DataCatalog",
         name: "KBS LTER Datatable Catalog",
         url: "https://lter.kbs.msu.edu/datatables"
-      }
-    }
+      } }
   end
 
   def short_abstract
@@ -92,6 +93,34 @@ class Dataset < ApplicationRecord
 
   def website_name
     website.try(:name)
+  end
+
+  # Index every dataset shown on the web, whatever the website (like citations).
+  def search_indexable?
+    on_web?
+  end
+
+  def search_website_name
+    website_name
+  end
+
+  def search_document
+    plain_abstract = ActionController::Base.helpers.strip_tags(abstract.to_s).squish
+
+    {
+      id: search_id,
+      source: 'rails',
+      type: 'dataset',
+      title: title,
+      headings: '',
+      variates: [],
+      body: plain_abstract.truncate(24_000, omission: ''),
+      tags: keywords.map(&:name),
+      updated_at: updated_at.to_i,
+      priority: 0,
+      url: Rails.application.routes.url_helpers.dataset_url(self),
+      excerpt: plain_abstract.truncate(200)
+    }
   end
 
   def within_interval?(start_date, end_date)
@@ -199,7 +228,7 @@ class Dataset < ApplicationRecord
   end
 
   def has_citations?
-    datatables.collect do | datatable|
+    datatables.collect do |datatable|
       !datatable.citations.empty?
     end.include?(true)
   end

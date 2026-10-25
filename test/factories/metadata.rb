@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   # Independent factories#########
   factory :affiliation do
@@ -13,7 +15,7 @@ FactoryBot.define do
   end
 
   factory :editor do
-    seniority  { 1 }
+    seniority { 1 }
   end
 
   factory :citation do
@@ -154,7 +156,7 @@ FactoryBot.define do
     association :role_type
 
     factory :lter_role do
-      role_type { RoleType.find_by(:name, 'lter') || FactoryBot.create(:role_type, name: 'lter') }
+      role_type { RoleType.find_by(name: 'lter') || FactoryBot.create(:role_type, name: 'lter') }
     end
   end
 
@@ -222,7 +224,7 @@ FactoryBot.define do
   end
 
   factory :meeting do
-    venue_type_id { 1 }
+    venue_type
     date { Time.zone.today }
   end
 

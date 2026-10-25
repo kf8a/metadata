@@ -13,13 +13,6 @@ class AffiliationsController < ApplicationController
 
   def show; end
 
-  def edit; end
-
-  def update
-    flash[:notice] = 'Affiliation was successfully updated.' if affiliation.update(affiliation_params)
-    respond_with affiliation
-  end
-
   # GET /affiliations/new
   def new
     @affiliation = Affiliation.new
@@ -29,12 +22,19 @@ class AffiliationsController < ApplicationController
     end
   end
 
+  def edit; end
+
   def create
     @affiliation = Affiliation.new(affiliation_params)
 
     flash[:notice] = 'Affiliation was successfully created.' if @affiliation.save
 
     respond_with @affiliation
+  end
+
+  def update
+    flash[:notice] = 'Affiliation was successfully updated.' if affiliation.update(affiliation_params)
+    respond_with affiliation
   end
 
   def destroy

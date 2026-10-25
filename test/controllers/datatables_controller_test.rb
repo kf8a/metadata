@@ -1,4 +1,6 @@
-require File.expand_path('../../test_helper', __FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('../test_helper', __dir__)
 
 class DatatablesControllerTest < ActionController::TestCase
   def setup
@@ -52,7 +54,7 @@ class DatatablesControllerTest < ActionController::TestCase
       should respond_with :success
 
       should 'include the link to the sponsors data use statement' do
-        assert_select "a[href$=\/sponsors\\/#{@sponsor.id}]"
+        assert_select "a[href$=/sponsors\\/#{@sponsor.id}]"
       end
     end
 
@@ -162,7 +164,7 @@ class DatatablesControllerTest < ActionController::TestCase
         assert_select 'p', 'This is the first abstract'
       end
 
-      #TODO figure out what fails here
+      # TODO: figure out what fails here
       # context 'changing the description' do
       #   setup do
       #     put :update, :id => @datatable, :datatable => {:description => 'This is a new abstract'}

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rubygems'
 gem 'postgres'
 require 'dbi'
@@ -7,7 +9,7 @@ new_table = DBI.connect('DBI:pg:meta_development:localhost')
 
 sth = old_table.prepare('select * from "DatasetAffiliations"')
 sth.execute
-while row = sth.fetch do
+while row = sth.fetch
 
   dataset_id = new_table.select_one('select id from datasets where dataset like ?', row[1])
   person_id = new_table.select_one('select id from people where person like ?', row[0])
@@ -19,7 +21,7 @@ while row = sth.fetch do
   new_table.do("insert into affiliations
               (person_id, role_id, dataset_id, seniority)
               values(?,?,?,?)",
-              person_id, role_id, dataset_id, row[3])
+               person_id, role_id, dataset_id, row[3])
 end
 
 t.column 'person_id',  :integer

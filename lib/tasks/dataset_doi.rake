@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-require 'edi_report.rb'
+require 'edi_report'
 require 'faraday'
+require 'open-uri'
 
 namespace :dois do
   desc 'update dois from edi'
@@ -19,7 +20,7 @@ namespace :dois do
           response = Faraday.get url
           next unless response.body =~ /doi/
 
-          data = response.body.sub(/doi:/, '')
+          data = response.body.sub('doi:', '')
           next if dataset.dataset_dois.where(version: revision).first
 
           doi = DatasetDoi.new(doi: data, version: revision)
@@ -47,7 +48,7 @@ namespace :dois do
     i = 0
     reports = datasets.xpath('//document').collect do |doc|
       package_id = doc.xpath('packageid').text
-      _s, identifier, revision = package_id.split(/\./)
+      _s, identifier, revision = package_id.split('.')
 
       EdiReport.new(scope, identifier, revision).load
     end.compact
@@ -67,12 +68,12 @@ namespace :dois do
     url =
       "https://pasta.lternet.edu/package/search/eml?defType=edismax&q=*&fq=scope:#{scope}&rows=#{max_rows}&fl=packageid"
 
-    datasets = Nokogiri::XML(open(url))
+    datasets = Nokogiri::XML(URI.open(url))
 
     i = 0
     reports = datasets.xpath('//document').collect do |doc|
       package_id = doc.xpath('packageid').text
-      _s, identifier, revision = package_id.split(/\./)
+      _s, identifier, revision = package_id.split('.')
 
       EdiReport.new(scope, identifier, revision).load
     end.compact
@@ -80,7 +81,7 @@ namespace :dois do
     reports.sort! { |a, b| a.first_author_name <=> b.first_author_name }
 
     reports.each do |report|
-      next if report.publication_year.to_i > Time.zone.today.year - 2
+      next if report.publication_year.to_i > Date.today.year - 2
       next if report.dataset.try(:completed?)
 
       i += 1
@@ -100,7 +101,7 @@ namespace :dois do
     i = 0
     reports = datasets.xpath('//document').collect do |doc|
       package_id = doc.xpath('packageid').text
-      _s, identifier, revision = package_id.split(/\./)
+      _s, identifier, revision = package_id.split('.')
 
       EdiReport.new(scope, identifier, revision).load
     end.compact
@@ -110,7 +111,7 @@ namespace :dois do
     puts "#{EdiReport.table_header}\n"
     puts "#{EdiReport.table_spacer}\n"
     reports.each do |report|
-      next if report.publication_year.to_i < Time.zone.today.year - 1
+      next if report.publication_year.to_i < Date.today.year - 2
 
       i += 1
       puts "#{report.table_row(i)}\n"

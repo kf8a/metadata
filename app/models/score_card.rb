@@ -50,21 +50,21 @@ class ScoreCard
 
   def data(datatable, time_key)
     if time_key =~ /year/i
-      query = "select #{time_key} as year, count(*) from (#{datatable.object})"\
-              " as t1 group by #{time_key}"
-      approved_query = "select #{time_key} as year, count(*)"\
-                       " from (#{datatable.approved_data_query}) as t1 group by #{time_key}"
+      query = "select #{time_key} as year, count(*) from (\n#{datatable.object_sql}\n) " \
+              "as t1 group by #{time_key}"
+      approved_query = "select #{time_key} as year, count(*) " \
+                       "from (#{datatable.approved_data_query}) as t1 group by #{time_key}"
     else
-      query = "select date_part('year',#{time_key}) as year, count(*)"\
-              " from (#{datatable.object}) as t1 group by date_part('year',#{time_key})"
-      approved_query = "select date_part('year',#{time_key}) as year,"\
-                       " count(*) from (#{datatable.approved_data_query})"\
-                       " as t1 group by date_part('year',#{time_key})"
+      query = "select date_part('year',#{time_key}) as year, count(*) " \
+              "from (\n#{datatable.object_sql}\n) as t1 group by date_part('year',#{time_key})"
+      approved_query = "select date_part('year',#{time_key}) as year, " \
+                       "count(*) from (#{datatable.approved_data_query}) " \
+                       "as t1 group by date_part('year',#{time_key})"
     end
     begin
       query_result    = db_connection.execute(query)
       approved_result = db_connection.execute(approved_query)
-    rescue Exception
+    rescue ActiveRecord::StatementInvalid
       query_result = []
       approved_result = []
     end

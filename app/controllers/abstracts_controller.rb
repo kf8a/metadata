@@ -11,12 +11,24 @@ class AbstractsController < ApplicationController
     respond_with @meetings
   end
 
+  # GET meeting_abstracts/1
+  def show
+    @abstract = Abstract.find(params[:id])
+    respond_with @abstract
+  end
+
   # GET meeting_abstracts/new?meeting=1
   def new
     meeting = Meeting.find(params[:meeting_id])
     @abstract = Abstract.new
     @abstract.meeting_id = meeting.id
     @abstract_types = MeetingAbstractType.pluck(:name, :id)
+  end
+
+  # GET /meeting_abstract/1/edit
+  def edit
+    @abstract_types = MeetingAbstractType.all.collect { |type| [type.name, type.id] }
+    @abstract = Abstract.find(params[:id])
   end
 
   def create
@@ -28,18 +40,6 @@ class AbstractsController < ApplicationController
     else
       redirect_to 'new'
     end
-  end
-
-  # GET meeting_abstracts/1
-  def show
-    @abstract = Abstract.find(params[:id])
-    respond_with @abstract
-  end
-
-  # GET /meeting_abstract/1/edit
-  def edit
-    @abstract_types = MeetingAbstractType.all.collect { |type| [type.name, type.id] }
-    @abstract = Abstract.find(params[:id])
   end
 
   # PUT /meeting_abstracts/1
@@ -57,7 +57,7 @@ class AbstractsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to meetings_url }
       format.xml { head :ok }
-      format.js { render nothing: true }
+      format.js { head :ok }
     end
   end
 

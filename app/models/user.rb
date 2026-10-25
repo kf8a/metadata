@@ -2,9 +2,8 @@
 
 # Members who are able to log in and do things on the site.
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable,
+  # Include default devise modules. Others available are: :confirmable
+  devise :database_authenticatable, :lockable, :validatable,
          :recoverable, :rememberable, :trackable, :timeoutable,
          :omniauthable, omniauth_providers: [:glbrc]
 
@@ -28,7 +27,6 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
-      groups = Array(auth.info.id_token&.groups).compact
       old_user = User.where(email: auth.info.id_token.email).first
       logger.info "Auth info comming back #{auth}"
       if old_user
@@ -41,10 +39,9 @@ class User < ApplicationRecord
         user.password = Devise.friendly_token[0, 20]
         user.last_glbrc_groups = groups if groups.any?
         # group is aim-7 = member
-        if groups.any? && allowed_group(groups)
-          s = Sponsor.find_by(name: 'glbrc')
-          user.sponsors = [s]
-          user.save
+        if allowed_group?(auth.info.id_token.groups)
+          glbrc = Sponsor.find_by(name: 'glbrc')
+          user.sponsors = [glbrc] if glbrc
         end
         user.save
       end
@@ -68,12 +65,8 @@ class User < ApplicationRecord
     permission && !permission.denied?
   end
 
-  private
-
-  def allowed_group(groups)
-    result = ALLOWED.map do |allowed_group|
-      groups.include?(allowed_group)
-    end
-    result.any?(true)
+  def self.allowed_group?(groups)
+    Array(groups).intersect?(ALLOWED)
   end
+  private_class_method :allowed_group?
 end

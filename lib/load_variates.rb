@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'csv'
 require 'rubygems'
 require 'active_record'
@@ -8,7 +10,7 @@ ActiveRecord::Base.establish_connection(
   username: 'bohms',
   database: 'meta_development'
 )
-  
+
 class Datatable < ActiveRecord::Base
 end
 

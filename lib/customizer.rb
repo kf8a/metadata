@@ -1,4 +1,6 @@
-#Allows customization of search results without using javascript
+# frozen_string_literal: true
+
+# Allows customization of search results without using javascript
 class Customizer
   def initialize(params, values)
     @params = params
@@ -17,21 +19,25 @@ class Customizer
 
   def accepts?(row)
     value = row[limitby]
-    self.accepts_by_contains?(value) &&
-      self.accepts_by_max(value) &&
-      self.accepts_by_min(value) rescue true
+    begin
+      accepts_by_contains?(value) &&
+      accepts_by_max(value) &&
+      accepts_by_min(value)
+    rescue StandardError
+      true
+    end
   end
 
   def accepts_by_contains?(value)
-    contains.blank? || value.casecmp(self.contains) == 0
+    contains.blank? || value.casecmp(contains) == 0
   end
 
   def accepts_by_max(value)
-    limit_max.blank? || value.casecmp(self.limit_max) <= 0
+    limit_max.blank? || value.casecmp(limit_max) <= 0
   end
 
   def accepts_by_min(value)
-    limit_min.blank? || value.casecmp(self.limit_min) >= 0
+    limit_min.blank? || value.casecmp(limit_min) >= 0
   end
 
   def customize
@@ -56,32 +62,32 @@ class Customizer
   end
 
   def limit_min
-    @params[:limit_min] unless self.new_limitby?
+    @params[:limit_min] unless new_limitby?
   end
 
   def limit_max
-    @params[:limit_max] unless self.new_limitby?
+    @params[:limit_max] unless new_limitby?
   end
 
   def limitrange
-    @limitrange ||= self.setlimitrange
+    @limitrange ||= setlimitrange
   end
 
   def setlimitrange
-    limitrange = @values.collect {|row| row[self.limitby]}
-    limitrange = Customizer.normalize(limitrange)
+    limitrange = @values.collect { |row| row[limitby] }
+    Customizer.normalize(limitrange)
   end
 
   def contains
-    @params[:contains] unless self.new_limitby?
+    @params[:contains] unless new_limitby?
   end
 
   def oldlimitby
-    @params[:oldlimitby] || self.limitby
+    @params[:oldlimitby] || limitby
   end
 
   def new_limitby?
-    self.limitby != self.oldlimitby
+    limitby != oldlimitby
   end
 
   def sortby
@@ -93,7 +99,11 @@ class Customizer
   end
 
   def sorted_values
-    values = @values.sort {|firstrow, secondrow| firstrow[self.sortby]<=>secondrow[self.sortby] rescue 0}
-    self.sort_direction == "Descending" ? values.reverse : values
+    values = @values.sort do |firstrow, secondrow|
+      firstrow[sortby] <=> secondrow[sortby]
+    rescue StandardError
+      0
+    end
+    sort_direction == "Descending" ? values.reverse : values
   end
 end

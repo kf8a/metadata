@@ -1,7 +1,8 @@
-require File.expand_path('../../test_helper',__FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('../test_helper', __dir__)
 
 class PermissionsControllerTest < ActionController::TestCase
-
   context "a protected and owned datatable" do
     setup do
       @datatable = FactoryBot.create(:protected_datatable)
@@ -25,7 +26,7 @@ class PermissionsControllerTest < ActionController::TestCase
         end
 
         should_not respond_with :success
-        should redirect_to("the permissions index") {permissions_path}
+        should redirect_to("the permissions index") { permissions_path }
       end
     end
 
@@ -41,7 +42,7 @@ class PermissionsControllerTest < ActionController::TestCase
         end
 
         should_not respond_with :success
-        should redirect_to("the permissions index") {permissions_path}
+        should redirect_to("the permissions index") { permissions_path }
       end
 
       context "and GET :show the datatable's permissions" do
@@ -50,7 +51,7 @@ class PermissionsControllerTest < ActionController::TestCase
         end
 
         should_not respond_with :success
-        should redirect_to("the permissions index") {permissions_path}
+        should redirect_to("the permissions index") { permissions_path }
       end
 
       context "and DELETE :destroy the datatable's permissions" do
@@ -59,7 +60,7 @@ class PermissionsControllerTest < ActionController::TestCase
         end
 
         should_not respond_with :success
-        should redirect_to("the permissions index") {permissions_path}
+        should redirect_to("the permissions index") { permissions_path }
       end
     end
 
@@ -110,7 +111,7 @@ class PermissionsControllerTest < ActionController::TestCase
         end
 
         should_not respond_with :success
-        should redirect_to("the permissions index") {permissions_path}
+        should redirect_to("the permissions index") { permissions_path }
       end
 
       context "and POST :create with a valid user email address" do
@@ -119,8 +120,7 @@ class PermissionsControllerTest < ActionController::TestCase
           post :create, params: { datatable: @datatable, email: @user.email }
         end
 
-
-        should redirect_to("the datatable permission page") {permission_path(@datatable.id)}
+        should redirect_to("the datatable permission page") { permission_path(@datatable.id) }
       end
 
       context "and POST :create with an invalid user email address" do
@@ -141,7 +141,6 @@ class PermissionsControllerTest < ActionController::TestCase
           assert_not @datatable.can_be_downloaded_by?(@user)
         end
       end
-
 
       context "and a user has permission from the owner" do
         setup do
@@ -193,5 +192,4 @@ class PermissionsControllerTest < ActionController::TestCase
       end
     end
   end
-
 end
