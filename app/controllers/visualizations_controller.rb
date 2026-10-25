@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# show visualizations for protovis or other javascript graphs
+# Serves the data behind the d3 QC graphs on a datatable's QC page
 class VisualizationsController < ApplicationController
   respond_to :json
 

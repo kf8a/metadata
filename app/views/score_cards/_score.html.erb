@@ -4,6 +4,6 @@
       <%= link_to "#{score.study.try(:name)} : #{raw(score.title)}", datatable_path(score) %>
     </h2>
   </div>
-  <div class='score-data' data-scores= <%= score.scores %>></div>
+  <div class='score-data' data-controller='score-card' data-score-card-scores-value='<%= score.scores.presence || '[]' %>'></div>
 <div class='clear-line'></div>
 </div>
