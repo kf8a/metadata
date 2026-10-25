@@ -27,6 +27,7 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
+      groups = Array(auth.info.id_token&.groups).compact
       old_user = User.where(email: auth.info.id_token.email).first
       if old_user
         old_user.provider = auth.provider
@@ -38,7 +39,7 @@ class User < ApplicationRecord
         user.password = Devise.friendly_token[0, 20]
         user.last_glbrc_groups = groups if groups.any?
         # group is aim-7 = member
-        if allowed_group?(auth.info.id_token.groups)
+        if allowed_group?(groups)
           glbrc = Sponsor.find_by(name: 'glbrc')
           user.sponsors = [glbrc] if glbrc
         end

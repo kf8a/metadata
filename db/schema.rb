@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_25_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_25_130000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -721,6 +721,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_25_120000) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
+    t.string "last_glbrc_groups", default: [], null: false, array: true
     t.index ["email"], name: "index_users_on_email"
     t.index ["id", "confirmation_token"], name: "index_users_on_id_and_confirmation_token"
     t.index ["identity_url"], name: "index_users_on_identity_url", unique: true

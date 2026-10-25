@@ -30,6 +30,27 @@ RSpec.describe User, '.from_omniauth' do
     expect(user.sponsors).to eq [@glbrc]
   end
 
+  it 'gives a new user in the SEP group the glbrc sponsor' do
+    user = User.from_omniauth(auth(groups: ['glbrc.org\SEP']))
+
+    expect(user.sponsors).to eq [@glbrc]
+  end
+
+  it "records a new user's groups" do
+    user = User.from_omniauth(auth(groups: %w[group-a group-b]))
+
+    expect(user.reload.last_glbrc_groups).to eq %w[group-a group-b]
+  end
+
+  it "updates an existing user's groups and keeps them when a later token has none" do
+    existing = FactoryBot.create(:user, email: 'old.user@glbrc.org')
+    User.from_omniauth(auth(email: 'old.user@glbrc.org', groups: %w[group-a]))
+    expect(existing.reload.last_glbrc_groups).to eq %w[group-a]
+
+    User.from_omniauth(auth(email: 'old.user@glbrc.org', groups: nil))
+    expect(existing.reload.last_glbrc_groups).to eq %w[group-a]
+  end
+
   it 'creates a new user outside the allowed groups without the sponsor' do
     user = User.from_omniauth(auth(groups: ['other-group']))
 
