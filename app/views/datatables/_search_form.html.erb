@@ -2,11 +2,13 @@
   <%= form_tag('/datatables/search') do %>
 
       <div id='bottom-line-search'>
-        <div id='keyword-search'>
+        <div id='keyword-search' data-controller='autocomplete' data-autocomplete-url-value='<%= suggest_datatables_path %>'>
           <%= label_tag 'keyworder', 'Search data tables', class: 'sr-only' %>
-          <%= text_field_tag :keyword_list, @keyword_list || @default_value,
-          {:id => 'keyworder',
-          placeholder: "Search for core areas, keywords, people, or doi's"} %>
+          <%= text_field_tag :keyword_list, @keyword_list,
+                             id: 'keyworder', list: 'keyword-suggestions', autocomplete: 'off',
+                             placeholder: "Search for core areas, keywords, people, or doi's",
+                             data: { autocomplete_target: 'input', action: 'input->autocomplete#suggest' } %>
+          <datalist id='keyword-suggestions' data-autocomplete-target='list'></datalist>
         </div>
           <%= submit_tag "Search Data Tables", class: 'search-button' %>
       </div>

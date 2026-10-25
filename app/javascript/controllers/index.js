@@ -1,6 +1,13 @@
 import { application } from 'controllers/application'
 
-// Register controllers with application.register("name", Controller)
-// or run: bin/rails stimulus:manifest:update
+import AutocompleteController from 'controllers/autocomplete_controller'
+import NestedFieldsController from 'controllers/nested_fields_controller'
+import ObfuscatedEmailController from 'controllers/obfuscated_email_controller'
+import PermissionRequestController from 'controllers/permission_request_controller'
+
+application.register('autocomplete', AutocompleteController)
+application.register('nested-fields', NestedFieldsController)
+application.register('obfuscated-email', ObfuscatedEmailController)
+application.register('permission-request', PermissionRequestController)
 
 export { application }
