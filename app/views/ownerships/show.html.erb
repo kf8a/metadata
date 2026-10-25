@@ -11,8 +11,7 @@
                     action: 'revoke',
                     datatable: @datatable.id,
                     user: owner.id },
-                    confirm: 'Are you sure?',
-                    method: :delete %>
+                    data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
     </li>
   <% end %>
 </ul>

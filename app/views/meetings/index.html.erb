@@ -25,9 +25,8 @@
           <li id="meeting_<%=meeting.id%>"><%=link_to "#{meeting.date.year} #{meeting.title}", meeting_path(meeting) %>
           <% if signed_in? %>
             <%= link_to 'edit', edit_meeting_path(meeting), {:class => 'edit'} %>
-            <%= link_to image_tag("trash.gif"), meeting,
-              :confirm => 'Are you sure you want to delete this meeting?',
-              :class => 'deleter' %>
+            <%= link_to image_tag('trash.gif', alt: 'Delete'), meeting,
+              data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to delete this meeting?' } %>
           <% end %>
           </li>
         <% end %>
@@ -41,9 +40,8 @@
           <li id="meeting_<%=meeting.id%>"><%=link_to "#{meeting.date.year} #{meeting.title}", meeting_path(meeting) %>
           <% if signed_in? %>
             <%= link_to 'edit', edit_meeting_path(meeting), {:class => 'edit'} %>
-            <%= link_to image_tag("trash.gif"), meeting,
-              :confirm => 'Are you sure you want to delete this meeting?',
-              :class => 'deleter' %>
+            <%= link_to image_tag('trash.gif', alt: 'Delete'), meeting,
+              data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to delete this meeting?' } %>
             <% end %>
             </li>
           <% end %>

@@ -98,5 +98,5 @@
     <%= link_to 'Next', citation_path(@website.citations.next(@citation).first) %>
   <% end -%>
   <%= button_to 'Delete', { :action => "destroy", :id => @citation.id },
-        :confirm => "Are you sure?", :method => :delete  %>
+        method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } } %>
 <% end %>

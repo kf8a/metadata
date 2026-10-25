@@ -78,13 +78,13 @@ class DatatablesController < ApplicationController
   def publish
     initialize_instance_variables
     datatable.publish
-    head :ok
+    redirect_to datatable_path(datatable), notice: 'Data table cached.', status: :see_other
   end
 
   def retract
     initialize_instance_variables
     datatable.retract
-    head :ok
+    redirect_to datatable_path(datatable), notice: 'Data table cache removed.', status: :see_other
   end
 
   # GET /datatables/new

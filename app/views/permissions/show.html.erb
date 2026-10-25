@@ -37,7 +37,7 @@
         :action => "destroy",
         :id => @datatable.id,
         :user => user.id },
-        :confirm => "Are you sure?",
-        :method => :delete %>
+        :method => :delete,
+        form: { data: { turbo_confirm: 'Are you sure?' } } %>
 
 <% end %>
