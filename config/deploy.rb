@@ -3,6 +3,14 @@
 set :application, 'metadata'
 set :repo_url, 'git@github.com:kf8a/metadata.git'
 
+SSHKit.config.default_env[:path] = "$HOME/.local/share/mise/shims:$HOME/.local/bin:$PATH"
+
+# Prefix every Ruby-related binary with `mise exec --`
+# so the correct version is activated on every remote command
+%w[ruby gem bundle rake rails].each do |cmd|
+  SSHKit.config.command_map.prefix[cmd.to_sym].unshift("mise exec --")
+end
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
@@ -30,7 +38,8 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/syst
 # append :linked_dirs, '.bundle'
 
 # Default value for :linked_files is []
-append :linked_files, 'config/database.yml', 'config/site_keys.rb', 'config/secret_token.rb', 'config/storage.yml',
+# storage.yml ships in the repo and reads AWS_* from the environment (no shared copy).
+append :linked_files, 'config/database.yml', 'config/site_keys.rb', 'config/secret_token.rb',
        'config/master.key'
 
 # Default value for default_env is {}
@@ -40,13 +49,13 @@ append :linked_files, 'config/database.yml', 'config/site_keys.rb', 'config/secr
 # set :local_user, -> { `git config user.name`.chomp }
 
 # Default value for keep_releases is 5
-set :keep_releases, 30
+set :keep_releases, 50
 
-set :keep_assets, 2
+set :keep_assets, 10
 
 set :puma_init_active_record, true
 
-set :pty, true
+# set :pty, true
 
 # Configuration variables
 set :mise_map_bins, %w[rake ruby bundle gem rails node npm yarn]
@@ -78,7 +87,7 @@ namespace :deploy do
   task :yarn_install do
     on roles(:web) do
       within release_path do
-        execute("cd #{release_path} && mise exec -- yarn install --silent --no-progress --no-audit --no-optional")
+        execute("cd #{release_path} && mise exec -- yarn install --silent")
       end
     end
   end
@@ -91,7 +100,7 @@ task :update_asset_server do
     execute 'RAILS_ENV=production mise exec -- rake assets:precompile'
     # run "cd #{current_path} && bundle exec rake assets:precompile RAILS_ENV=production"
     # find_servers_for_task(current_task).each do |_server|
-    execute "rsync -vr --exclude='.DS_Store' public/metadata-assets/* kalkaska.kbs.msu.edu:/var/www/lter/metadata-assets/"
+    execute "rsync -avr --exclude='.DS_Store' public/metadata-assets/\* kalkaska.kbs.msu.edu:/var/www/lter/metadata-assets/"
   end
 end
 
@@ -131,7 +140,6 @@ task :update_sitemap do
   run_locally "scp sitemap.xml.gz #{asset_host}:#{asset_path}/rails-sitemap.xml.gz"
   # run "cd #{current_path};bundle exec rake sitemap:refresh RAILS_ENV=production"
 end
-
 
 namespace :mise do
   task :setup do
