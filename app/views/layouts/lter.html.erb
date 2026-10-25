@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="https://lter.kbs.msu.edu/wp-content/themes/msu-kbs/lib/css/normalize.css" type="text/css" />
     <link rel="stylesheet" href="https://lter.kbs.msu.edu/wp-content/themes/msu-kbs/style.css" type="text/css" />
     <script src="https://code.jquery.com/jquery-1.9.1.js" integrity="sha256-e9gNBsAcA0DBuRWbm0oZfbiCyhjLrI6bmqAl5o+ZjUA=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js" integrity="sha256-xH4q8N0pEzrZMaRmd7gQVcTZiFei+HfRTBPJ1OGXC0k=" crossorigin="anonymous"></script>
     <script   src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"   integrity="sha256-SOuLUArmo4YXtXONKz+uxIGSKneCJG4x0nVcA0pFzV0="   crossorigin="anonymous"></script>
           <script type="text/javascript" src="https://lter.kbs.msu.edu/wp-content/plugins/wp-google-search/assets/js/google_cse_v2.js?ver=1"></script>
           <script src="https://kit.fontawesome.com/760310d83b.js" crossorigin="anonymous"></script>
@@ -21,24 +20,8 @@
     <%= csrf_meta_tag unless response.cache_control[:public] %>
     <%= javascript_importmap_tags %>
 
-    <script async type="text/javascript">
-      jQuery(document).ready(function() {
-          jQuery.fn.cleardefault = function() {
-          return this.focus(function() {
-            if( this.value == this.defaultValue ) {
-            this.value = "";
-            }
-            }).blur(function() {
-              if( !this.value.length ) {
-              this.value = this.defaultValue;
-              }
-              });
-          };
-          jQuery(".clearit input, .clearit textarea").cleardefault();
-          });
-        </script>
       </head>
-      <body class="page page-template page-template-page_gallery-php header-image full-width-content">
+      <body class="page page-template page-template-page_gallery-php header-image full-width-content<%= ' signed-in' if user_signed_in? %>">
         <a href="#content" class="skip-to-main-content-link">Skip to main content</a>
         <div id="wrap">
           <%= render "shared/header" %>

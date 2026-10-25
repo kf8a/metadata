@@ -10,11 +10,11 @@
   <%= label_tag 'users', nil, :class => 'combo_select_label' %>
   <% if @datatable %>
     <%= hidden_field_tag 'datatable', @datatable.id %>
-    <%= select_tag 'users', options_from_collection_for_select(@users, 'id', 'email', @datatable.owner_ids), :class => 'myselect', :multiple => true %>
+    <%= select_tag 'users', options_from_collection_for_select(@users, 'id', 'email', @datatable.owner_ids), size: 12, :multiple => true %>
   <% else %>
-    <%= select_tag 'users', options_from_collection_for_select(@users, 'id', 'email'), :class => 'myselect', :multiple => true %>
+    <%= select_tag 'users', options_from_collection_for_select(@users, 'id', 'email'), size: 12, :multiple => true %>
     <%= label_tag 'datatables', nil, :class => 'combo_select_label' %>
-    <%= select_tag 'datatables', options_from_collection_for_select(@datatables, 'id', 'name'), :class => 'myselect', :multiple => true %>
+    <%= select_tag 'datatables', options_from_collection_for_select(@datatables, 'id', 'name'), size: 12, :multiple => true %>
   <% end %>
   <%= submit_tag 'Add Owners' %>
 <% end %>

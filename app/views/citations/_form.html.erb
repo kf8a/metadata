@@ -44,11 +44,11 @@
 
 <%= form.inputs name: "Datatables" do %>
 <div id='datatables'>
-    <%= form.input :datatables, :input_html => { :class => 'myselect myselect-wide' } %>
+    <%= form.input :datatables, :input_html => { size: 12 } %>
 </div>
 <% end %>
 <%= form.inputs name: "Treatment Areas" do %>
 <div id='treatments'>
-    <%= form.input :treatments, as: :select, collection: Treatment.select_options, :input_html => { :class => 'myselect' } %>
+    <%= form.input :treatments, as: :select, collection: Treatment.select_options, :input_html => { multiple: true, size: 8 } %>
 </div>
 <% end %>
