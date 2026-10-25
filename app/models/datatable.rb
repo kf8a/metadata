@@ -492,7 +492,7 @@ class Datatable < ApplicationRecord
   end
 
   def database_date_field
-    values = ActiveRecord::Base.connection.execute(object)
+    values = ActiveRecord::Base.connection.execute(rows_query(limit: 0))
     valid_date_names = %w[sample_date obs_date date datetime harvest_date]
     values.fields.find { |field| valid_date_names.include?(field) }
   end
@@ -502,7 +502,7 @@ class Datatable < ApplicationRecord
     if is_sql
       date_field = database_date_field
       if date_field
-        query = "select max(#{date_field}), min(#{date_field}) from (#{object}) as t1"
+        query = "select max(#{date_field}), min(#{date_field}) from (\n#{object_sql}\n) as t1"
         data_start_date, data_end_date = query_datatable_for_temporal_extent(query)
       end
     end
@@ -518,7 +518,7 @@ class Datatable < ApplicationRecord
   end
 
   def column_names_and_types
-    result = ActiveRecord::Base.connection.execute("#{object} limit 1")
+    result = ActiveRecord::Base.connection.execute(rows_query(limit: 1))
     data = result.fields.each_with_index.map do |k, v|
       { k => ActiveRecord::Base
              .connection
@@ -546,18 +546,22 @@ class Datatable < ApplicationRecord
   end
 
   def data_preview
-    unless @data_preview
-      limit = excerpt_limit || 5
-      query = "#{object}  offset #{offset} limit #{limit}"
-      @data_preview = ActiveRecord::Base.connection.execute(query)
-    end
-    @data_preview
+    @data_preview ||= ActiveRecord::Base.connection.execute(rows_query(offset: offset, limit: excerpt_limit || 5))
   end
 
+  # The released rows: the public download
   def approved_data_query
-    query = object
-    query += " offset #{offset}" if number_of_released_records
-    query
+    rows_query(offset: (offset if number_of_released_records))
+  end
+
+  # Every row: the admin download
+  def full_data_query
+    rows_query
+  end
+
+  # The stored query without trailing semicolons or whitespace, so it can be nested in another query
+  def object_sql
+    object.to_s.strip.sub(/[;\s]+\z/, '')
   end
 
   def offset
@@ -568,7 +572,7 @@ class Datatable < ApplicationRecord
 
   def total_records
     unless @total_records
-      query = "select count(*) as count from (#{object}) as t1"
+      query = "select count(*) as count from (\n#{object_sql}\n) as t1"
       result = ActiveRecord::Base.connection.execute(query).first
       @total_records = result['count'].to_i
     end
@@ -625,6 +629,16 @@ class Datatable < ApplicationRecord
   end
 
   private
+
+  # Nests the stored query as a subquery and pages it, rather than appending SQL to it.
+  # The closing parenthesis goes on its own line so a trailing -- comment can't swallow it.
+  def rows_query(offset: nil, limit: nil)
+    rows = Arel::Nodes::TableAlias.new(Arel::Nodes::Grouping.new(Arel.sql("\n#{object_sql}\n")), 'datatable_rows')
+    query = Arel::SelectManager.new.project(Arel.star).from(rows)
+    query.skip(offset) if offset&.positive?
+    query.take(limit) if limit
+    query.to_sql
+  end
 
   def search_tags
     (keyword_names + [study&.name] + leads.map(&:full_name)).compact_blank.uniq

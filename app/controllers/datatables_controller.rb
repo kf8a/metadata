@@ -292,7 +292,7 @@ class DatatablesController < ApplicationController
   def render_admin_csv
     stream_file(file_name, "csv") do |stream|
       stream.write @datatable.csv_headers
-      Datatable.stream_query_rows(@datatable.object) do |row_from_db|
+      Datatable.stream_query_rows(@datatable.full_data_query) do |row_from_db|
         stream.write row_from_db
       end
     end

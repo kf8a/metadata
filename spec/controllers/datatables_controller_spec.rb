@@ -57,6 +57,21 @@ describe DatatablesController, type: :controller  do
     end
   end
 
+  describe 'GET show as csv for an admin' do
+    it 'streams every row when the stored query ends in a semicolon' do
+      website = Website.find_by(name: 'lter')
+      website.update!(url: 'lter.kbs.msu.edu')
+      datatable = FactoryBot.create(:datatable, dataset: FactoryBot.create(:dataset, website: website),
+                                                number_of_released_records: 1,
+                                                object: 'select g as n from generate_series(1, 3) g order by g desc;')
+
+      get :show, params: { id: datatable.id }, format: :csv
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to eq(datatable.csv_headers + "3\n2\n1\n")
+    end
+  end
+
   describe 'responding to publish request' do
     it 'should publish' do
       website = Website.find_by(name: 'lter')
