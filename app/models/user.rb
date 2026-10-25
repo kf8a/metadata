@@ -20,23 +20,30 @@ class User < ApplicationRecord
 
   scope :by_email, -> { order 'email' }
 
-  ALLOWED = %w["glbrc.org/GLBRC/GLBRC Groups/Y16-20/Sustainable_Bioenergy_Cropping_Systems/SEP" "glbrc.org\\AIM-InformationServices"].freeze
+  ALLOWED = [
+    "glbrc.org/GLBRC/GLBRC Groups/Y16-20/Sustainable_Bioenergy_Cropping_Systems/SEP",
+    "glbrc.org\\SEP",
+    "glbrc.org\\AIM-InformationServices"
+  ].freeze
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
-      old_user = User.where(email:auth.info.id_token.email).first
+      groups = Array(auth.info.id_token&.groups).compact
+      old_user = User.where(email: auth.info.id_token.email).first
       logger.info "Auth info comming back #{auth}"
       if old_user
         old_user.provider = auth.provider
         old_user.uid = auth.uid
+        old_user.last_glbrc_groups = groups if groups.any?
         old_user.save
       else
         user.email = auth.info.id_token.email
         user.password = Devise.friendly_token[0, 20]
+        user.last_glbrc_groups = groups if groups.any?
         # group is aim-7 = member
-        if !auth.info.id_tokens.nil? && allowed_group(auth.info.id_token.groups)
+        if groups.any? && allowed_group(groups)
           s = Sponsor.find_by(name: 'glbrc')
-          user.sponsors=[s]
+          user.sponsors = [s]
           user.save
         end
         user.save
@@ -64,8 +71,8 @@ class User < ApplicationRecord
   private
 
   def allowed_group(groups)
-    result = ALLOWED.map do | allowed_group |
-      groups.contains(allowed_group)
+    result = ALLOWED.map do |allowed_group|
+      groups.include?(allowed_group)
     end
     result.any?(true)
   end

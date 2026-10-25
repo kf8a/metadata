@@ -23,24 +23,24 @@ class Permission < ApplicationRecord
   end
 
   def only_owners_can_set_permissions
-    errors[:base] << 'owners only' unless owner.try(:owns?, datatable)
+    errors.add(:base, 'owners only') unless owner.try(:owns?, datatable)
   end
 
   def user_exists?
-    return if user && User.find(user.id)
+    return true if user && User.find(user.id)
 
-    errors[:base] << 'user must exist'
+    errors.add(:base, 'user must exist')
   end
 
   def owner_exists?
-    return if owner && User.find(owner.id)
+    return true if owner && User.find(owner.id)
 
-    errors[:base] << 'owner must exist'
+    errors.add(:base, 'owner must exist')
   end
 
   def datatable_exists?
-    return if datatable && Datatable.find(datatable.id)
+    return true if datatable && Datatable.find(datatable.id)
 
-    errors[:base] << 'datatable must exist'
+    errors.add(:base, 'datatable must exist')
   end
 end
