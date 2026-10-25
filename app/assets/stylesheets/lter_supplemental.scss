@@ -15,3 +15,23 @@ table.data-excerpt {
 p {
   margin: 0.5rem;
 }
+
+// Flash messages (layouts/_flash)
+.flash {
+  margin: 0 0 1em;
+  padding: 0.5em 0.75em;
+  border: 1px solid;
+  border-radius: 3px;
+}
+
+.flash-notice {
+  color: #1e5e20;
+  background: #e8f5e9;
+  border-color: #a5d6a7;
+}
+
+.flash-alert {
+  color: #8a1c1c;
+  background: #fdecea;
+  border-color: #f5c2c0;
+}

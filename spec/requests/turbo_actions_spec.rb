@@ -25,6 +25,8 @@ RSpec.describe 'Turbo-driven actions', type: :request do
       post destroy_user_session_path, params: { _method: 'delete' }, headers: turbo_headers
 
       expect(response).to have_http_status(:see_other)
+      follow_redirect!
+      expect(response.body).to include('role="status">Signed out successfully.</p>')
       get new_project_path
       expect(response).to redirect_to(new_user_session_path)
     end
@@ -38,7 +40,17 @@ RSpec.describe 'Turbo-driven actions', type: :request do
 
     expect(response).to have_http_status(:unprocessable_content)
     expect(response.body).to include('Forgot your password?')
-    expect(flash[:alert]).to eq 'Invalid email or password.'
+    expect(response.body).to include('<p class="flash flash-alert" role="alert">Invalid email or password.</p>')
+  end
+
+  it 'shows the sign-in error on the GLBRC site too' do
+    FactoryBot.create(:user, email: 'member@example.com')
+
+    post user_session_path(requested_subdomain: 'glbrc'),
+         params: { user: { email: 'member@example.com', password: 'wrong-password' } }, headers: turbo_headers
+
+    expect(response.body).to include('id="glbrc"')
+    expect(response.body).to include('role="alert">Invalid email or password.</p>')
   end
 
   it 'destroys a record from a Turbo DELETE link' do
