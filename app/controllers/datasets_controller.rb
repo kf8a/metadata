@@ -7,7 +7,6 @@ class DatasetsController < ApplicationController
   helper_method :dataset
 
   before_action :authenticate_user!, except: %i[index show]
-  before_action :allow_on_web, except: %i[knb]
   before_action :admin?, except: %i[index show]
 
   # layout proc { |controller| controller.request.format == :eml ? false : 'application' }
@@ -153,15 +152,6 @@ class DatasetsController < ApplicationController
     crumb.url = datasets_path
     crumb.name = 'Data Catalog: Datasets'
     @crumbs << crumb
-  end
-
-  def allow_on_web
-    dataset_id = params[:id]
-    return unless dataset_id
-
-    dataset_id = Dataset.find_by(dataset: dataset_id) if dataset_id =~ /KBS\d\d\d/
-    dataset = Dataset.find(dataset_id)
-    dataset.on_web
   end
 
   def collect_and_normalize_studies(datasets)
