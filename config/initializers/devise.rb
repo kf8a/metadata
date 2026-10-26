@@ -152,7 +152,9 @@ Devise.setup do |config|
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
-  # config.remember_for = 2.weeks
+  # "Remember me" signs the user back in after an inactivity timeout (see :timeoutable below),
+  # so this is the longest a signed-in browser can stay signed in. It is not extended by use.
+  config.remember_for = 1.week
 
   # Invalidates all the remember me tokens when the user signs out.
   config.expire_all_remember_me_on_sign_out = true
@@ -176,7 +178,9 @@ Devise.setup do |config|
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
   # time the user will be asked for credentials again. Default is 30 minutes.
-  config.timeout_in = 3.days
+  # This is the longest timeout (admins); User#timeout_in shortens it for everyone else.
+  # Sessions idle longer than this (plus a day) are removed by `rake sessions:trim`.
+  config.timeout_in = 2.days
 
   # ==> Configuration for :lockable
   # Defines which strategy will be used to lock an account.
