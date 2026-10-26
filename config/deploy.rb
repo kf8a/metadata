@@ -149,6 +149,13 @@ task :update_date_range do
   end
 end
 
+desc 'trim idle sessions'
+task :trim_sessions do
+  on roles(:app) do
+    execute "cd #{current_path};bundle exec rake sessions:trim RAILS_ENV=production"
+  end
+end
+
 desc 'update sitemap'
 task :update_sitemap do
   run "cd #{current_path};bundle exec rake sitemap:create RAILS_ENV=production"
