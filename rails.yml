@@ -39,7 +39,6 @@
       - { file: "database.yml" }
       - { file: "secret_token.rb" }
       - { file: "site_keys.rb" }
-      - { file: "unicorn.rb" }
 
 
   - apt: pkg=nginx-full state=latest
