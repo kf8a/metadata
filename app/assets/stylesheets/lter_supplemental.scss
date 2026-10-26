@@ -35,3 +35,42 @@ p {
   background: #fdecea;
   border-color: #f5c2c0;
 }
+
+// Sign in/out button at the bottom of the LTER layout (layouts/_sign_in).
+// GLBRC pins the same partial to the top inside #glbrc, so only match when it sits directly in <body>.
+body > #sign-in-wrapper {
+  #sign-in {
+    position: fixed;
+    bottom: max(0px, env(safe-area-inset-bottom, 0px));
+    inset-inline-end: max(0.75rem, env(safe-area-inset-right, 0px));
+    z-index: 100;
+    background-color: #18453b;
+    opacity: 0.8;
+    border-radius: 10px 10px 0 0;
+    font-size: 0.8rem;
+    text-align: center;
+
+    &:hover,
+    &:focus-within {
+      opacity: 1;
+    }
+
+    a {
+      display: inline-block;
+      padding: 0.3rem 0.9rem;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px 10px 0 0;
+
+      &:hover,
+      &:focus-visible {
+        background-color: #f7941e;
+        color: #000;
+      }
+    }
+  }
+
+  @media print {
+    display: none;
+  }
+}
