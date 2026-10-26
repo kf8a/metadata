@@ -1,0 +1,33 @@
+# systemd unit for the background job process (Solid Queue, started by bin/jobs).
+# Copy it next to the Puma unit and edit it to match: User, WorkingDirectory and the command
+# prefix (mise) should be the same as in the Puma unit's ExecStart.
+#
+#   sudo cp config/metadata-jobs.service.example /etc/systemd/system/metadata-jobs.service
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now metadata-jobs
+#
+# Restart it after every deploy so it runs the new code (the Puma unit is restarted by Capistrano):
+#   sudo systemctl restart metadata-jobs
+# Logs: journalctl -u metadata-jobs -f
+# Run it on one server, or on several: jobs are claimed from the database and recurring jobs run once.
+[Unit]
+Description=metadata background jobs (Solid Queue)
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=deploy
+Group=deploy
+WorkingDirectory=/var/u/apps/metadata/current
+Environment=RAILS_ENV=production
+# Workers per process are set in config/queue.yml; JOB_CONCURRENCY sets the number of worker processes
+# Environment=JOB_CONCURRENCY=1
+ExecStart=/usr/bin/env mise exec -- bundle exec bin/jobs
+Restart=on-failure
+RestartSec=5
+# Solid Queue finishes the jobs it is running on SIGTERM; give them time before systemd kills it
+KillSignal=SIGTERM
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target

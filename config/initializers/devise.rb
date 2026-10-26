@@ -179,7 +179,7 @@ Devise.setup do |config|
   # The time you want to timeout the user session without activity. After this
   # time the user will be asked for credentials again. Default is 30 minutes.
   # This is the longest timeout (admins); User#timeout_in shortens it for everyone else.
-  # Sessions idle longer than this (plus a day) are removed by `rake sessions:trim`.
+  # Sessions idle longer than this (plus a day) are removed daily by SessionsTrimJob.
   config.timeout_in = 2.days
 
   # ==> Configuration for :lockable
