@@ -21,7 +21,7 @@ class CitationsController < ApplicationController
     citations = citations_by_type(params[:type])
 
     if params[:treatment]
-      @treatment = Treatment.find(params[:treatment].to_i)
+      @treatment = Treatment.find(params.expect(:treatment).to_i)
       @study = @treatment.study
       #      @treatment = nil unless @study.citation_treatments?
       citations = [Citation.from_website(website.id).by_treatment(params[:treatment])]
@@ -101,7 +101,7 @@ class CitationsController < ApplicationController
   end
 
   def show
-    @citation = Citation.find(params[:id].to_i)
+    @citation = Citation.find(params.expect(:id).to_i)
     @website = website
     store_location_for(:user, params[:id].to_i)
     file_title = @citation.file_title
@@ -118,7 +118,7 @@ class CitationsController < ApplicationController
   end
 
   def edit
-    @citation = Citation.find(params[:id])
+    @citation = Citation.find(params.expect(:id))
   end
 
   def create
@@ -131,7 +131,7 @@ class CitationsController < ApplicationController
   end
 
   def update
-    @citation = Citation.find(params[:id])
+    @citation = Citation.find(params.expect(:id))
     @citation.type = params[:citation].try(:delete, 'type')
     @citation.update(citation_params)
     @citation.touch
@@ -156,7 +156,7 @@ class CitationsController < ApplicationController
   end
 
   def destroy
-    @citation = Citation.find(params[:id])
+    @citation = Citation.find(params.expect(:id))
     @citation.destroy
 
     respond_with @citation, location: citations_url
@@ -218,40 +218,42 @@ class CitationsController < ApplicationController
   end
 
   def citation_params
-    params.require(:citation).permit(
-      :title,
-      :abstract,
-      :pub_date,
-      :pub_year,
-      :author_block,
-      :citation_type_id,
-      :address,
-      :notes,
-      :publication,
-      :editor_block,
-      :start_page_number,
-      :ending_page_number,
-      :periodical_full_name,
-      :periodical_abbreviation,
-      :volume,
-      :issue,
-      :city,
-      :publisher,
-      :secondary_title,
-      :series_title,
-      :isbn,
-      :doi,
-      :full_text,
-      :publisher_url,
-      :website_id,
-      :pdf,
-      :state,
-      :open_access,
-      :type,
-      :has_lter_acknowledgement,
-      :annotation,
-      :data_url,
-      datatable_ids: [], treatment_ids: []
+    params.expect(
+      citation: [
+        :title,
+        :abstract,
+        :pub_date,
+        :pub_year,
+        :author_block,
+        :citation_type_id,
+        :address,
+        :notes,
+        :publication,
+        :editor_block,
+        :start_page_number,
+        :ending_page_number,
+        :periodical_full_name,
+        :periodical_abbreviation,
+        :volume,
+        :issue,
+        :city,
+        :publisher,
+        :secondary_title,
+        :series_title,
+        :isbn,
+        :doi,
+        :full_text,
+        :publisher_url,
+        :website_id,
+        :pdf,
+        :state,
+        :open_access,
+        :type,
+        :has_lter_acknowledgement,
+        :annotation,
+        :data_url,
+        { datatable_ids: [], treatment_ids: [] }
+      ]
     )
   end
 

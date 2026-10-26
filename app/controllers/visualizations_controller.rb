@@ -5,7 +5,7 @@ class VisualizationsController < ApplicationController
   respond_to :json
 
   def show
-    visualization = Visualization.find(params[:id])
+    visualization = Visualization.find(params.expect(:id))
     respond_with visualization.data
   end
 end

@@ -39,7 +39,7 @@ class PermissionsController < ApplicationController
   end
 
   def destroy
-    user = User.find(params[:user])
+    user = User.find(params.expect(:user))
     owner = current_user
     permissions = my_permissions(user, owner, @datatable)
     permissions.each(&:destroy)
@@ -84,8 +84,8 @@ class PermissionsController < ApplicationController
   end
 
   def require_datatable
-    @datatable = Datatable.find(params[:id]) if params[:id]
-    @datatable = Datatable.find(params[:datatable]) if !@datatable && params[:datatable]
+    @datatable = Datatable.find(params.expect(:id)) if params[:id]
+    @datatable = Datatable.find(params.expect(:datatable)) if !@datatable && params[:datatable]
     return if @datatable
 
     flash[:notice] = 'You must select a valid datatable to grant permissions'

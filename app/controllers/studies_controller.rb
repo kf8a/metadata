@@ -30,10 +30,10 @@ class StudiesController < ApplicationController
   private
 
   def study
-    @study = Study.find(params[:id])
+    @study = Study.find(params.expect(:id))
   end
 
   def study_params
-    params.require(:study).permit(:name, :description, :weight, :synopsis, :url, :code)
+    params.expect(study: %i[name description weight synopsis url code])
   end
 end

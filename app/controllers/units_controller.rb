@@ -21,11 +21,11 @@ class UnitsController < ApplicationController
   private
 
   def unit
-    @unit = Unit.find(params[:id])
+    @unit = Unit.find(params.expect(:id))
   end
 
   def unit_params
-    params.require(:unit).permit(:name, :description, :definition)
+    params.expect(unit: %i[name description definition])
   end
 
   # Units defined by EML are standard and can't be changed here
