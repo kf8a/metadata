@@ -9,16 +9,16 @@ RSpec.describe 'Sign in/out button on the LTER layout', type: :request do
   before { Website.create!(name: 'lter', url: 'lter.kbs.msu.edu') }
 
   def button
-    response.parsed_body.at('body > #sign-in-wrapper #sign-in a')
+    response.parsed_body.at('#wrap > #sign-in-wrapper #sign-in a')
   end
 
-  it 'offers Sign In to visitors, after the page content' do
+  it 'offers Sign In to visitors, right after the main content' do
     get datatables_path
 
     expect(button.text).to eq 'Sign In'
     expect(button['href']).to end_with(new_user_session_path)
-    ids = response.parsed_body.at('body').element_children.pluck('id')
-    expect(ids.index('sign-in-wrapper')).to be > ids.index('wrap')
+    wrapper = response.parsed_body.at('#wrap > #sign-in-wrapper')
+    expect(wrapper.previous_element['class']).to include('site-inner')
   end
 
   it 'offers Sign Out to signed-in users as a Turbo DELETE' do
@@ -38,6 +38,6 @@ RSpec.describe 'Sign in/out button on the LTER layout', type: :request do
 
     expect(response).to have_http_status(:see_other)
     follow_redirect!
-    expect(response.parsed_body.at('body > #sign-in-wrapper #sign-in a').text).to eq 'Sign In'
+    expect(response.parsed_body.at('#wrap > #sign-in-wrapper #sign-in a').text).to eq 'Sign In'
   end
 end
