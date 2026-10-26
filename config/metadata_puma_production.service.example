@@ -1,0 +1,35 @@
+# This file tells systemd how to run Puma as a 24/7 long-running daemon.
+#
+# Customize this file based on your bundler location, app directory, etc.
+# Customize and copy this into /usr/lib/systemd/system (CentOS) or /lib/systemd/system (Ubuntu).
+# Then run:
+#   - systemctl enable metadata_puma_production
+#   - systemctl {start,stop,restart} metadata_puma_production
+#
+#
+# Use `journalctl -u metadata_puma_production -rn 100` to view the last 100 lines of log output.
+#
+[Unit]
+Description=Puma HTTP Server for metadata (production)
+
+After=syslog.target network.target
+
+[Service]
+Type=simple
+WatchdogSec=60
+
+WorkingDirectory=/var/u/apps/metadata/current
+#ExecStart=/usr/bin/env bundle exec puma -e production
+ExecStart=/usr/bin/mise exec -- bundle exec puma -e production  -b unix:///var/u/apps/metadata/shared/tmp/sockets/puma.sock
+ExecReload=/bin/kill -USR1 $MAINPID
+
+# if we crash, restart
+RestartSec=1
+Restart=on-failure
+
+StandardOutput=append:/var/u/apps/metadata/shared/log/puma.log
+StandardError=append:/var/u/apps/metadata/shared/log/puma.log
+
+SyslogIdentifier=metadata_puma_production
+[Install]
+WantedBy=default.target
