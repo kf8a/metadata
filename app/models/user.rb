@@ -8,6 +8,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:glbrc]
 
   ROLES = %w[admin editor uploader].freeze
+  MEMBER_TIMEOUT = 4.hours
 
   has_many :permissions, dependent: :destroy
   has_many :memberships, dependent: :destroy
@@ -58,6 +59,12 @@ class User < ApplicationRecord
 
   def admin?
     role == 'admin'
+  end
+
+  # Devise :timeoutable. Admins get the configured timeout (Devise.timeout_in); everyone else
+  # is signed out sooner.
+  def timeout_in
+    admin? ? super : MEMBER_TIMEOUT
   end
 
   def permission_from?(owner, datatable)
