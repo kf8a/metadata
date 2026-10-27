@@ -24,7 +24,7 @@
     <% end -%>
 
     <% if person.email? -%>
-      <li class='person-email'><%=contact_link(person.email) %></li>
+      <li class='person-email' data-controller='obfuscated-email'><%=contact_link(person.email) %></li>
     <% end -%>
 
 

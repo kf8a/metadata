@@ -28,9 +28,9 @@
     <%= datatable.access_statement %>
 
     <% part_of_text = "This datatable is part of the " + link_to(datatable.dataset.title, dataset_path(datatable.dataset.id)) +  " dataset. " %>
-    <div class='truncate'>
+    <div class='dataset-abstract'>
       <% dataset_abstract = datatable.dataset.try(:abstract) || '' %>
-      <%=raw markdown_to_html( part_of_text + dataset_abstract) %>
+      <%= expandable_html(markdown_to_html(part_of_text + dataset_abstract)) %>
     </div>
     <% unless datatable.study.try(:warning).try(:empty?) %>
       <h4>Note<h4>

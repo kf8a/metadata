@@ -21,7 +21,9 @@
                     :subject => 'GLBRC data request',
                     :encode => 'hex',
                     :class => 'download-link',
-                    :data => {:datatableid => datatable.id},
+                    :data => { controller: 'permission-request', action: 'permission-request#record',
+                               permission_request_url_value: permission_requests_path,
+                               permission_request_datatable_value: datatable.id },
                     :id => 'permission-request'%>
                     <%# remote_function(:url => {:controller => 'permission_requests', :action => 'create', :datatable => datatable.id}) %1> %>
         <% end %>

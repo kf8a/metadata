@@ -26,7 +26,7 @@
   // margin-top: -3px;
 }
 
-.citation-footer > .member-oly,
+.citation-footer > .member-only,
 .citation-footer > .non-member {
   flex: 2;
   min-width: 24px;
@@ -55,16 +55,6 @@
   color: white;
 }
 
-
-.ui-autocomplete {
-  background: white;
-  padding-bottom: 3em;
-  width: 80%;
-}
-
-.ui-autocomplete > .ui-menu-item {
-  list-style: none;
-}
 
 .metadata {
   .fa,
@@ -529,4 +519,35 @@
   clip: rect(0, 0, 0, 0) !important;
   white-space: nowrap !important; /* prevent line breaks */
   border: 0 !important;
+}
+
+// Member-only links: both variants are in the cached citation HTML; the layout's
+// body class (rendered per request) decides which one shows.
+body.signed-in .member-only {
+  display: inline;
+}
+
+body.signed-in .non-member {
+  display: none;
+}
+
+// Long text that expands in place (DatatablesHelper#expandable_html)
+details.expandable > summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+details.expandable > summary::-webkit-details-marker {
+  display: none;
+}
+
+details.expandable .expand-more,
+details.expandable .expand-less {
+  text-decoration: underline;
+}
+
+details.expandable[open] .excerpt,
+details.expandable[open] .expand-more,
+details.expandable:not([open]) .expand-less {
+  display: none;
 }

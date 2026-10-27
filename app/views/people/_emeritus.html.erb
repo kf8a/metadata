@@ -4,6 +4,6 @@
     <li class='person_title'><%= person.lter_roles[0].name.singularize %></li>
   <% end -%>
   <% if person.email.present? -%>
-    <li class='person-email'><%= contact_link(person.email) %></li>
+    <li class='person-email' data-controller='obfuscated-email'><%= contact_link(person.email) %></li>
   <% end -%>
 </ul>
