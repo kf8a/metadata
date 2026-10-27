@@ -21,6 +21,6 @@
 </div>
 
 
-<ul class="quickTree">
+<ul class="tree">
   <%= render :partial => 'datatable', :collection => @datatables.sort {|x,y| x.title <=> y.title} %>
 </ul>

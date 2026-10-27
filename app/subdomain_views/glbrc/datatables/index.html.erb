@@ -16,9 +16,10 @@
     <% end %>
   </div>
   <% cache([@website,@studies]) do %>
-  <div class="quickTree-container">
+  <div class="tree-container" data-controller="tree">
     <h1 class="right">Data</h1>
-    <ul class="quickTree">
+    <%= render 'expand_all' %>
+    <ul class="tree" data-tree-target="list">
         <%= render_study(code:'AGRIC') %>
         <%= render_study(code: 'GIBC') %>
         <%= render_study(code: 'GSCALE') %>

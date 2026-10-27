@@ -1,0 +1,5 @@
+<ul>
+  <% @specimens.each do |specimen| -%>
+    <%= render :partial => '_specimen', :locals => {:specimen => specimen}%>
+  <% end %>
+</ul>
