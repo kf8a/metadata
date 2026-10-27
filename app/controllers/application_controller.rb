@@ -11,7 +11,18 @@ class ApplicationController < ActionController::Base
 
   respond_to :html, :json
 
+  # How long the link to a protected file keeps working. It is only followed straight away, by the
+  # redirect that hands it out.
+  PROTECTED_FILE_LINK_LIFETIME = 1.minute
+
   private
+
+  # Active Storage's default link to a file (url_for(attachment)) never expires, so anyone who has seen it
+  # once, for example in a signed-in browser's network log, can keep downloading without signing in.
+  # Restricted CSVs and citation PDFs are handed out through a link that expires instead.
+  def protected_file_url(attachment)
+    rails_storage_redirect_url(attachment, expires_in: PROTECTED_FILE_LINK_LIFETIME)
+  end
 
   def extra_views
     prepend_view_path "app/subdomain_views/#{@subdomain_request}"
