@@ -32,13 +32,11 @@
       - { dir: "bundle" }
       - { dir: "cached-copy" }
 
+  # Active Storage S3 config lives in the app's config/storage.yml and reads the AWS keys
+  # from the Rails credentials (s3.yml is obsolete).
   - copy: src=private/config/{{item.file }} dest=/var/u/apps/metadata/shared/config/{{item.file }} owner=deploy group=deploy mode=600
     with_items:
       - { file: "database.yml" }
-      - { file: "s3.yml" }
-      - { file: "secret_token.rb" }
-      - { file: "site_keys.rb" }
-      - { file: "unicorn.rb" }
 
 
   - apt: pkg=nginx-full state=latest

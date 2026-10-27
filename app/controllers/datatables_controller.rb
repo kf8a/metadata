@@ -61,7 +61,7 @@ class DatatablesController < ApplicationController
           if current_user.try(:role) == 'admin'
             render_admin_csv
           elsif @datatable.csv_file.attached?
-            redirect_to url_for(@datatable.csv_file)
+            redirect_to protected_file_url(@datatable.csv_file)
           else
             render_csv
           end

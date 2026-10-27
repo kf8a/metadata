@@ -71,6 +71,9 @@ gem 'rake', '>= 12.3.3'
 gem 'sitemap_generator'
 
 gem 'puma'
+
+gem 'solid_queue' # Active Job backend and recurring jobs, run by bin/jobs
+
 gem 'rexml'
 
 group :production, :staging do

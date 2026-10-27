@@ -174,7 +174,7 @@ class CitationsController < ApplicationController
 
   def send_citation(citation)
     if citation.pdf.persisted?
-      redirect_to(url_for(citation.pdf), allow_other_host: true)
+      redirect_to(protected_file_url(citation.pdf), allow_other_host: true)
     else
       head :bad_request
     end

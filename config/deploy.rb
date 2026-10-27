@@ -38,9 +38,9 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/syst
 # append :linked_dirs, '.bundle'
 
 # Default value for :linked_files is []
-# storage.yml ships in the repo and reads AWS_* from the environment (no shared copy).
-append :linked_files, 'config/database.yml', 'config/site_keys.rb', 'config/secret_token.rb',
-       'config/master.key'
+# storage.yml ships in the repo and reads the AWS keys from the credentials, decrypted with
+# config/master.key (no shared copy).
+append :linked_files, 'config/database.yml', 'config/master.key'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -71,7 +71,23 @@ after 'deploy', 'thinking_sphinx:configure'
 after 'deploy', 'thinking_sphinx:index'
 after 'deploy', 'thinking_sphinx:start'
 
-after 'deploy:updated', 'thinking_sphinx:stop'
+# Gem's thinking_sphinx:stop uses current_path, which still points at the old
+# release during deploy:updated. After a Gemfile.lock bump, shared/bundle may
+# already match the new lockfile, so bundle exec from current fails. Stop via
+# the new release instead (bundle install has already run there).
+namespace :thinking_sphinx do
+  desc 'Stop Sphinx using the new release (safe across Gemfile.lock bumps)'
+  task :stop_release do
+    on roles(fetch(:thinking_sphinx_roles)) do
+      within release_path do
+        with rails_env: fetch(:thinking_sphinx_rails_env) do
+          execute :rake, 'ts:stop'
+        end
+      end
+    end
+  end
+end
+after 'deploy:updated', 'thinking_sphinx:stop_release'
 
 namespace :deploy do
   desc 'show ruby version'
@@ -114,31 +130,11 @@ task :create_nav do
   end
 end
 
-desc 'push secrets'
-task :push_secrets do
-  find_servers_for_task(current_task).each do |server|
-    run_locally "rsync -vr --exclude='.DS_Store' shared/config #{user}@#{server.host}:#{shared_path}"
-  end
-end
-
-desc 'update scores'
-task :update_scores do
-  run "cd #{current_path};bundle exec rake scores:update RAILS_ENV=production"
-end
-
 desc 'update date ranges'
 task :update_date_range do
   on roles(:app) do
     execute "cd #{current_path};bundle exec rake scores:update_date_range RAILS_ENV=production"
   end
-end
-
-desc 'update sitemap'
-task :update_sitemap do
-  run "cd #{current_path};bundle exec rake sitemap:create RAILS_ENV=production"
-  run_locally "scp #{user}@#{server.host}:#{current_path}/public/sitemap.xml.gz ."
-  run_locally "scp sitemap.xml.gz #{asset_host}:#{asset_path}/rails-sitemap.xml.gz"
-  # run "cd #{current_path};bundle exec rake sitemap:refresh RAILS_ENV=production"
 end
 
 namespace :mise do
