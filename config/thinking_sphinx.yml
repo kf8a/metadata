@@ -7,4 +7,7 @@ production:
   min_infix_len: 3
   pid_file: /var/u/apps/metadata/shared/pids/searchd.pid
   searchd_file_path: /var/u/apps/metadata/shared/db/sphinx
+  # Release-local config/production.sphinx.conf is missing on a new release
+  # until after deploy; keep it in shared so ts:stop from release_path works.
+  configuration_file: /var/u/apps/metadata/shared/config/production.sphinx.conf
   bin_path: /usr/bin/
