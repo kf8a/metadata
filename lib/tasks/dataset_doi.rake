@@ -81,7 +81,7 @@ namespace :dois do
     reports.sort! { |a, b| a.first_author_name <=> b.first_author_name }
 
     reports.each do |report|
-      next if report.publication_year.to_i > Date.today.year - 2
+      next if report.publication_year.to_i > Date.current.year - 2
       next if report.dataset.try(:completed?)
 
       i += 1
@@ -111,7 +111,7 @@ namespace :dois do
     puts "#{EdiReport.table_header}\n"
     puts "#{EdiReport.table_spacer}\n"
     reports.each do |report|
-      next if report.publication_year.to_i < Date.today.year - 2
+      next if report.publication_year.to_i < Date.current.year - 2
 
       i += 1
       puts "#{report.table_row(i)}\n"
@@ -121,7 +121,7 @@ namespace :dois do
   desc 'get dryad dois'
   task dryad: :environment do
     Citation.data_citations.all.each do |pub|
-      next if pub.updated_at.year.to_i < Time.zone.today.year - 1
+      next if pub.updated_at.year.to_i < Date.current.year - 1
 
       puts "x | #{pub.formatted(long: true)}, https://lter.kbs.msu.edu/citations/#{pub.id}"
       # CSV { |csv_out| csv_out << [pub.formatted(long: true), "https://lter.kbs.msu.edu/citations/#{pub.id}"] }

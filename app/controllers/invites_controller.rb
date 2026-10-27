@@ -91,10 +91,10 @@ class InvitesController < ApplicationController
   private
 
   def invite
-    @invite = Invite.find(params[:id])
+    @invite = Invite.find(params.expect(:id))
   end
 
   def invite_params
-    params.require(:invite).permit(:firstname, :lastname, :email)
+    params.expect(invite: %i[firstname lastname email])
   end
 end

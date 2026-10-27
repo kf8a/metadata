@@ -171,7 +171,7 @@ class DatatablesController < ApplicationController
     return unless params[:id]
 
     # TODO: this next line might not be needed
-    datatable = Datatable.find(params[:id])
+    datatable = Datatable.find(params.expect(:id))
 
     return unless datatable.study
 
@@ -220,7 +220,7 @@ class DatatablesController < ApplicationController
   end
 
   def datatable
-    @datatable ||= params[:id] ? Datatable.find(params[:id]) : Datatable.new(datatable_params)
+    @datatable ||= params[:id] ? Datatable.find(params.expect(:id)) : Datatable.new(datatable_params)
   end
 
   def csv_ok
@@ -235,47 +235,49 @@ class DatatablesController < ApplicationController
   end
 
   def datatable_params
-    params.require(:datatable).permit(
-      :name,
-      :title,
-      :comments,
-      :dataset_id,
-      :data_url,
-      :is_restricted,
-      :is_secondary,
-      :description,
-      :begin_date,
-      :end_date,
-      :on_web,
-      :keyword_list,
-      :theme_id,
-      :weight,
-      :study_id,
-      :deprecation_notice,
-      :update_frequency_days,
-      { protocol_ids: [] },
-      :is_secondary,
-      { core_area_ids: [] },
-      {
-        variates_attributes: [
-          %i[
-            name
-            weight
-            description
-            unit_id
-            measurement_scale
-            data_type
-            max_valid
-            min_valid
-            date_format
-            precision
-            missing_value_indicator
-            _destroy
-            id
+    params.expect(
+      datatable: [
+        :name,
+        :title,
+        :comments,
+        :dataset_id,
+        :data_url,
+        :is_restricted,
+        :is_secondary,
+        :description,
+        :begin_date,
+        :end_date,
+        :on_web,
+        :keyword_list,
+        :theme_id,
+        :weight,
+        :study_id,
+        :deprecation_notice,
+        :update_frequency_days,
+        { protocol_ids: [] },
+        :is_secondary,
+        { core_area_ids: [] },
+        {
+          variates_attributes: [
+            %i[
+              name
+              weight
+              description
+              unit_id
+              measurement_scale
+              data_type
+              max_valid
+              min_valid
+              date_format
+              precision
+              missing_value_indicator
+              _destroy
+              id
+            ]
           ]
-        ]
-      },
-      data_contributions_attributes: [%i[person_id role_id _destroy id]]
+        },
+        data_contributions_attributes: [%i[person_id role_id _destroy id]]
+      ]
     )
   end
 

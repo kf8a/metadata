@@ -45,10 +45,10 @@ class PagesController < ApplicationController
   private
 
   def page
-    Page.find(params[:id].to_i)
+    Page.find(params.expect(:id).to_i)
   end
 
   def page_params
-    params.require(:page).permit(:title, :body, :url)
+    params.expect(page: %i[title body url])
   end
 end

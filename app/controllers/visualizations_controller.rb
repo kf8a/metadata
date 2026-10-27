@@ -6,7 +6,7 @@ class VisualizationsController < ApplicationController
   respond_to :json
 
   def show
-    visualization = Visualization.find(params[:id])
+    visualization = Visualization.find(params.expect(:id))
     return head(:forbidden) unless visualization.viewable_by?(current_user)
 
     respond_with visualization.data

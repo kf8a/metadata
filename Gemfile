@@ -2,6 +2,9 @@
 
 source 'https://rubygems.org'
 
+# Production runs Ruby 3.4 and 4.0
+ruby '>= 3.4'
+
 gem 'rails', '~>8.0'
 
 gem 'json'

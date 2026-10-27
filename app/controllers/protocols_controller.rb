@@ -17,7 +17,7 @@ class ProtocolsController < ApplicationController
   # GET /protocols/1
   def show
     store_location_for(:user, protocols_path(params[:id].to_i))
-    @protocol = website.protocols.find(params[:id].to_i)
+    @protocol = website.protocols.find(params.expect(:id).to_i)
 
     if @protocol
       respond_with @protocol
@@ -49,10 +49,9 @@ class ProtocolsController < ApplicationController
 
   # PUT /protocols/1
   def update
-    params[:protocol][:updated_by] = current_user
     @websites = Website.all
     if params[:new_version]
-      old_protocol = Protocol.find(params[:id])
+      old_protocol = Protocol.find(params.expect(:id))
       # Creating a new protocol
       @protocol = Protocol.new(protocol_params)
       @protocol.deprecate!(old_protocol)
@@ -63,7 +62,7 @@ class ProtocolsController < ApplicationController
   end
 
   def download
-    head(:not_found) && return unless (protocol = Protocol.find(params[:id]))
+    head(:not_found) && return unless (protocol = Protocol.find(params.expect(:id)))
 
     redirect_to(url_for(protocol.pdf), allow_other_host: true)
   end
@@ -97,29 +96,30 @@ class ProtocolsController < ApplicationController
   end
 
   def protocol
-    @protocol = Protocol.find(params[:id])
+    @protocol = Protocol.find(params.expect(:id))
   end
 
   def protocol_params
-    params.require(:protocol).permit(
-      :theme_list,
-      :title,
-      :description,
-      :updated_by,
-      :active,
-      :body,
-      :abstract,
-      :dataset_id,
-      :in_use_from,
-      :in_use_to,
-      :tag,
-      :website_ids,
-      :name,
-      { person_ids: [] },
-      { website_ids: [] },
-      { datatable_ids: [] },
-      :change_summary,
-      :pdf
+    params.expect(
+      protocol: [
+        :theme_list,
+        :title,
+        :description,
+        :active,
+        :body,
+        :abstract,
+        :dataset_id,
+        :in_use_from,
+        :in_use_to,
+        :tag,
+        :website_ids,
+        :name,
+        { person_ids: [] },
+        { website_ids: [] },
+        { datatable_ids: [] },
+        :change_summary,
+        :pdf
+      ]
     )
   end
 
