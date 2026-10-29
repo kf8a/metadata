@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_27_000000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_29_000000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -454,9 +454,21 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_000000) do
     t.datetime "updated_at"
     t.integer "owner_id"
     t.string "decision"
+    t.date "expires_on"
     t.index ["datatable_id"], name: "index_permissions_on_datatable_id"
     t.index ["owner_id"], name: "index_permissions_on_owner_id"
+    t.index ["user_id", "datatable_id"], name: "index_permissions_on_user_id_and_datatable_id", unique: true
     t.index ["user_id"], name: "index_permissions_on_user_id"
+  end
+
+  create_table "permissions_legacy", id: false, force: :cascade do |t|
+    t.integer "id"
+    t.integer "user_id"
+    t.integer "datatable_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer "owner_id"
+    t.string "decision"
   end
 
   create_table "person_projects", force: :cascade do |t|

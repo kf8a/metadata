@@ -1,9 +1,17 @@
-<p>Use this page to give permission to someone to download
-    <%= @datatable.name %>
-</p>
-<%= form_tag '/permissions' do %>
-  <%= label_tag 'email' %>
-  <%= text_field_tag 'email' %>
-  <%= hidden_field_tag 'datatable', @datatable.id %>
-  <%= submit_tag 'Grant Permission' %>
+<h2>Grant permission to download <%= @datatable.name %></h2>
+<p><%= link_to @datatable.title, datatable_path(@datatable) %></p>
+
+<%= form_with url: permissions_path do |form| %>
+  <%= hidden_field_tag :datatable, @datatable.id %>
+  <p>
+    <%= form.label :email, 'Email of the account' %>
+    <%= form.email_field :email, value: params[:email], required: true %>
+  </p>
+  <p>
+    <%= form.label :expires_in, 'Access for' %>
+    <%= form.select :expires_in, Permission::LIFETIME_CHOICES,
+                    selected: params[:expires_in] || Permission::DEFAULT_LIFETIME.in_days.to_i.to_s %>
+  </p>
+  <p>Granting again later extends the access from that day.</p>
+  <%= form.submit 'Grant permission' %>
 <% end %>

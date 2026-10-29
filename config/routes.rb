@@ -82,9 +82,9 @@ Metadata::Application.routes.draw do
       get :lno
     end
   end
-  resources :permissions do
-    collection do
-      put :deny
+  resources :permissions, only: %i[index show new create destroy] do
+    member do
+      delete :dismiss
     end
   end
   resources :permission_requests, only: :create

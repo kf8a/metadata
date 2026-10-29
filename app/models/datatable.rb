@@ -276,13 +276,13 @@ class Datatable < ApplicationRecord
 
   delegate :restricted_to_members?, to: :dataset
 
-  # checks if the user has the right to perform the action
-  # @param user [user] the user object to be queried
-  # @return true if the action is allowed and false if not
+  # Whether an admin has granted the user permission to download this datatable, and it has not expired
   def permitted?(user)
-    user.present? && owners.present? && owners.all? do |owner|
-      user.permission_from?(owner, self)
-    end
+    user.present? && permissions.active.exists?(user_id: user.id)
+  end
+
+  def permission_for(user)
+    permissions.find_by(user_id: user.id) if user
   end
 
   def pending_requesters
@@ -291,10 +291,6 @@ class Datatable < ApplicationRecord
 
   def requested_by?(user)
     requesters.include?(user)
-  end
-
-  def deniers_of(user)
-    permissions.where(user_id: user, decision: 'denied').collect(&:owner)
   end
 
   delegate :sponsor, to: :dataset

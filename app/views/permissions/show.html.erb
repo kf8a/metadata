@@ -1,43 +1,54 @@
 <h2>Permissions for <%= @datatable.name %></h2>
+<p><%= link_to @datatable.title, datatable_path(@datatable) %></p>
+<p><%= link_to 'Grant permission to someone', new_permission_path(datatable: @datatable) %></p>
 
-<%= link_to 'Add Permissions', new_permission_path(:datatable => @datatable) %>
-
-<% @datatable.pending_requesters.each do |requester| %>
-  <p>
-    <%= requester %> has requested permission
-    <% if @datatable.deniers_of(requester).present? %>
-      but it has been denied by: <%= @datatable.deniers_of(requester).join(', ') %>
-    <% end %>
-    .
-  </p>
-  <%= button_to "Grant permission to #{requester}", {
-      :action => "create",
-      :id => @datatable.id,
-      :email => requester.email },
-      :method => :post %>
-  <%= button_to "Deny request for #{requester}", {
-      :action => "deny",
-      :id => @datatable.id,
-      :email => requester.email },
-      :method => :put %>
+<h3>Requests</h3>
+<% if @requesters.empty? %>
+  <p>No pending requests.</p>
 <% end %>
-<% @permitted_users.each do |user| %>
-  <p>
-    <%= user %> has permission from you.
-  </p>
-  <% @datatable.owners.each do |owner| %>
-      <% next if owner == current_user %>
-      <% if user.permission_from?(owner, @datatable) %>
-        <p><%= user %> has permission from <%= owner %></p>
-      <% else %>
-        <p><%= user %> still needs permission from <%= owner %></p>
-      <% end %>
-  <% end %>
-  <%= button_to "Revoke permission from #{user}", {
-        :action => "destroy",
-        :id => @datatable.id,
-        :user => user.id },
-        :method => :delete,
-        form: { data: { turbo_confirm: 'Are you sure?' } } %>
+<% @requesters.each do |requester| %>
+  <div class='permission-request'>
+    <%= requester.email %> has asked to download this datatable.
+    <%= button_to "Grant for #{Permission::DEFAULT_LIFETIME.in_days.to_i} days", permissions_path,
+                  params: { datatable: @datatable.id, email: requester.email } %>
+    <%= button_to 'Dismiss', dismiss_permission_path(@datatable), method: :delete,
+                  params: { user: requester.id },
+                  form: { data: { turbo_confirm: "Dismiss the request from #{requester.email}?" } } %>
+  </div>
+<% end %>
 
+<h3>People with access</h3>
+<% if @permissions.empty? %>
+  <p>Nobody has been granted access.</p>
+<% else %>
+  <table class='permissions'>
+    <tr>
+      <th>Account</th>
+      <th>Granted by</th>
+      <th>Access until</th>
+      <th></th>
+    </tr>
+    <% @permissions.each do |permission| %>
+      <tr class='<%= 'expired' unless permission.active? %>'>
+        <td><%= permission.user.email %></td>
+        <td><%= permission.granted_by&.email %></td>
+        <td>
+          <% if permission.expires_on.nil? %>
+            No expiry
+          <% elsif permission.active? %>
+            <%= permission.expires_on.to_fs(:long) %>
+          <% else %>
+            Expired on <%= permission.expires_on.to_fs(:long) %>
+          <% end %>
+        </td>
+        <td>
+          <%= button_to "Extend #{Permission::DEFAULT_LIFETIME.in_days.to_i} days from today", permissions_path,
+                        params: { datatable: @datatable.id, email: permission.user.email } %>
+          <%= button_to 'Revoke', permission_path(@datatable), method: :delete,
+                        params: { user: permission.user_id },
+                        form: { data: { turbo_confirm: "Revoke access for #{permission.user.email}?" } } %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 <% end %>

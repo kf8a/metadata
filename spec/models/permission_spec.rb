@@ -3,33 +3,101 @@
 require 'rails_helper'
 
 describe Permission do
-  before(:each) do
-    @permission = Permission.new
+  include ActiveSupport::Testing::TimeHelpers
+
+  let(:datatable) { FactoryBot.create(:datatable, is_restricted: true) }
+  let(:admin) { FactoryBot.create(:admin_user) }
+  let(:user) { FactoryBot.create(:user) }
+
+  def grant(expires_on: nil, granted_by: admin, to: user)
+    Permission.create(datatable:, user: to, granted_by:, expires_on:)
   end
 
-  it { should validate_presence_of :user }
-  it { should validate_presence_of :datatable }
-  it { should validate_presence_of :owner }
-
-  describe 'only owners can set permissions' do
-    before do
-      @datatable = FactoryBot.create(:datatable)
-      @owner = FactoryBot.create(:user)
-      Ownership.create!(user: @owner, datatable: @datatable)
-      @user = FactoryBot.create(:user)
+  describe 'granting' do
+    it 'is valid when an admin grants it' do
+      expect(grant).to be_persisted
     end
 
-    it 'is valid when the owner grants it' do
-      permission = Permission.new(datatable: @datatable, owner: @owner, user: @user)
-      expect(permission).to be_valid
+    it 'is refused when someone who is not an admin grants it, even an owner' do
+      owner = FactoryBot.create(:user)
+      Ownership.create!(user: owner, datatable:)
+
+      permission = grant(granted_by: owner)
+
+      expect(permission).not_to be_persisted
+      expect(permission.errors[:granted_by]).to include('must be an admin')
     end
 
-    it 'is invalid when a non-owner grants it' do
-      non_owner = FactoryBot.create(:user)
-      permission = Permission.new(datatable: @datatable, owner: non_owner, user: @user)
+    it 'allows one permission per user and datatable' do
+      grant
 
-      expect(permission).not_to be_valid
-      expect(permission.errors[:base]).to include('owners only')
+      expect(grant(granted_by: FactoryBot.create(:admin_user))).not_to be_persisted
+    end
+
+    it 'keeps a permission carried over from an owner approval valid when it is changed later' do
+      owner = FactoryBot.create(:user)
+      carried_over = grant
+      carried_over.update_column(:owner_id, owner.id) # rubocop:disable Rails/SkipsModelValidations -- as the migration leaves it
+
+      expect(carried_over.reload.update(expires_on: Date.current + 30)).to be true
+    end
+  end
+
+  describe 'expiry' do
+    it 'turns an expiry choice into a date, with 90 days by default' do
+      travel_to Date.new(2026, 1, 1) do
+        expect(Permission.expiry_for('30')).to eq Date.new(2026, 1, 31)
+        expect(Permission.expiry_for(nil)).to eq Date.new(2026, 4, 1)
+        expect(Permission.expiry_for('12345')).to eq Date.new(2026, 4, 1)
+        expect(Permission.expiry_for('never')).to be_nil
+      end
+    end
+
+    it 'counts a permission as active through its last day, and without an expiry' do
+      travel_to Date.new(2026, 1, 10) do
+        expect(grant(to: FactoryBot.create(:user), expires_on: Date.new(2026, 1, 10))).to be_active
+        expect(grant(to: FactoryBot.create(:user), expires_on: nil)).to be_active
+        expect(grant(to: FactoryBot.create(:user), expires_on: Date.new(2026, 1, 9))).not_to be_active
+        expect(Permission.active.count).to eq 2
+      end
+    end
+  end
+
+  describe 'Datatable#permitted? and downloading' do
+    it 'lets a user with an active permission download a restricted datatable' do
+      grant(expires_on: Date.current + 1)
+
+      expect(datatable.permitted?(user)).to be true
+      expect(datatable.can_be_downloaded_by?(user)).to be true
+    end
+
+    it 'stops once the permission has expired' do
+      grant(expires_on: Date.current - 1)
+
+      expect(datatable.permitted?(user)).to be false
+      expect(datatable.can_be_downloaded_by?(user)).to be false
+    end
+
+    it 'works for a datatable that has no owners' do
+      expect(datatable.owners).to be_empty
+      grant
+
+      expect(datatable.can_be_downloaded_by?(user)).to be true
+    end
+
+    it 'opens a members-only datatable to someone who is not a member' do
+      members_only = FactoryBot.create(:protected_datatable)
+      expect(members_only.can_be_downloaded_by?(user)).to be false
+
+      Permission.create!(datatable: members_only, user:, granted_by: admin)
+
+      expect(members_only.can_be_downloaded_by?(user)).to be true
+    end
+
+    it 'does not carry over to another datatable' do
+      grant
+
+      expect(FactoryBot.create(:datatable, is_restricted: true).permitted?(user)).to be false
     end
   end
 end

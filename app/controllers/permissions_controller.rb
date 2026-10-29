@@ -1,86 +1,65 @@
 # frozen_string_literal: true
 
-# add and remove permissions for datatables
+# Admins grant, extend and revoke permission to download restricted and members-only datatables.
+# The owners agree to a request by email; an admin then grants it here.
 class PermissionsController < ApplicationController
-  before_action :authenticate_user!, except: %i[index]
-  before_action :require_datatable, :require_owner, except: %i[index]
+  before_action :authenticate_user!
+  before_action :admin?
+  before_action :require_datatable, except: :index
 
   def index
-    @datatables = current_user.try(:datatables)
+    datatables = Datatable.joins(dataset: :sponsor)
+    @datatables = datatables.where(is_restricted: true)
+                            .or(datatables.where(sponsors: { data_restricted: true }))
+                            .by_name
   end
 
   def show
-    owner = current_user
-    @permissions = Permission.where(owner_id: owner.id, datatable_id: @datatable.id)
-    @permitted_users = @permissions.permitted_users
+    @requesters = @datatable.pending_requesters
+    @permissions = @datatable.permissions.includes(:user, :granted_by).order(:expires_on)
   end
 
   def new; end
 
+  # Grants permission, or extends it when the user already has one
   def create
-    user = User.find_by(email: params[:email])
-    flash[:notice] = 'No user with that email' unless user
-    permission = my_permission(user, current_user, @datatable) || Permission.new
-    permission.datatable_id = @datatable.id
-    permission.user = user
-    permission.owner = current_user
-    permission.decision = 'approved'
+    user = User.find_by(email: params[:email].to_s.strip.downcase)
+    return refuse("No account has the email #{params[:email]}") unless user
 
-    respond_to do |format|
-      if permission.save
-        flash[:notice] = "Permission has been granted to #{user}"
-        format.html { redirect_to permission_path(@datatable.id) }
-        format.xml { head :created, location: permission_path(@datatable.id) }
-      else
-        format.html { render 'new', status: :unprocessable_content }
-        format.xml { render xml: permission.errors.to_xml }
-      end
-    end
+    permission = @datatable.permissions.find_or_initialize_by(user:)
+    permission.granted_by = current_user
+    permission.expires_on = Permission.expiry_for(params[:expires_in])
+    return refuse(permission.errors.full_messages.to_sentence) unless permission.save
+
+    @datatable.permission_requests.where(user:).delete_all
+    notice = "#{user.email} may download #{@datatable.name} #{until_text(permission)}."
+    redirect_to permission_path(@datatable), status: :see_other, notice:
   end
 
   def destroy
-    user = User.find(params.expect(:user))
-    owner = current_user
-    permissions = my_permissions(user, owner, @datatable)
-    permissions.each(&:destroy)
-
-    respond_to do |format|
-      flash[:notice] = "Permission has been revoked from #{user.email}"
-      format.html { redirect_to permission_path(@datatable) }
-      format.xml { head :ok }
-    end
+    permission = @datatable.permissions.find_by!(user_id: params.expect(:user))
+    permission.destroy
+    redirect_to permission_path(@datatable), status: :see_other,
+                                             notice: "Permission revoked from #{permission.user.email}."
   end
 
-  def deny
-    user = User.find_by(email: params[:email])
-    owner = current_user
-    permission = my_permission(user, owner, @datatable)
-    if permission
-      permission.decision = 'denied'
-    else
-      permission = new_denied_permission(user, owner, @datatable)
-    end
-
-    permission.save
-    respond_to do |format|
-      flash[:notice] = "Permission has been denied for #{user.email}"
-      format.html { redirect_to permission_path(@datatable) }
-      format.xml { head :ok }
-    end
+  # Removes a request without granting it
+  def dismiss
+    request = @datatable.permission_requests.find_by!(user_id: params.expect(:user))
+    request.destroy
+    redirect_to permission_path(@datatable), status: :see_other,
+                                             notice: "Request from #{request.user.email} dismissed."
   end
 
   private
 
-  def my_permissions(user, owner, datatable)
-    Permission.where(user_id: user.id, datatable_id: datatable.id, owner_id: owner.id)
+  def refuse(message)
+    flash.now[:alert] = message
+    render :new, status: :unprocessable_content
   end
 
-  def my_permission(user, owner, datatable)
-    Permission.find_by(user_id: user, datatable_id: datatable, owner_id: owner)
-  end
-
-  def new_denied_permission(user, owner, datatable)
-    Permission.new(user: user, datatable: datatable, owner: owner, decision: 'denied')
+  def until_text(permission)
+    permission.expires_on ? "until #{permission.expires_on.to_fs(:long)}" : 'with no expiry'
   end
 
   def require_datatable
@@ -88,18 +67,6 @@ class PermissionsController < ApplicationController
     @datatable = Datatable.find(params.expect(:datatable)) if !@datatable && params[:datatable]
     return if @datatable
 
-    flash[:notice] = 'You must select a valid datatable to grant permissions'
-    redirect_to action: :index
-    false
-  end
-
-  def require_owner
-    return if current_user.try(:owns?, @datatable)
-
-    flash[:notice] =
-      'You must be signed in as the owner of ' \
-      'the datatable in order to access this page'
-    redirect_to action: :index
-    false
+    redirect_to permissions_path, alert: 'Choose a datatable to manage its permissions.'
   end
 end
