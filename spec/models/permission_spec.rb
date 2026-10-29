@@ -63,6 +63,46 @@ describe Permission do
     end
   end
 
+  describe 'when users or datatables are deleted' do
+    # delete skips Rails callbacks, so these show the database's foreign keys at work
+    it 'drops the permissions and requests of a deleted user' do
+      grant
+      PermissionRequest.create!(user:, datatable:)
+
+      user.delete
+
+      expect(Permission.count).to eq 0
+      expect(PermissionRequest.count).to eq 0
+    end
+
+    it 'keeps a permission when the admin who granted it is deleted' do
+      permission = grant
+
+      admin.delete
+
+      expect(permission.reload.granted_by).to be_nil
+      expect(datatable.permitted?(user)).to be true
+    end
+
+    it 'drops the permissions and requests of a deleted datatable' do
+      grant
+      PermissionRequest.create!(user:, datatable:)
+
+      datatable.delete
+
+      expect(Permission.count).to eq 0
+      expect(PermissionRequest.count).to eq 0
+    end
+
+    it 'does the same when a user is destroyed through Rails' do
+      grant
+
+      user.destroy
+
+      expect(Permission.count).to eq 0
+    end
+  end
+
   describe 'Datatable#permitted? and downloading' do
     it 'lets a user with an active permission download a restricted datatable' do
       grant(expires_on: Date.current + 1)

@@ -13,8 +13,9 @@ class Permission < ApplicationRecord
 
   belongs_to :user
   belongs_to :datatable
-  # The admin who granted or last extended it; permissions carried over from owner approvals name the owner
-  belongs_to :granted_by, class_name: 'User', foreign_key: :owner_id, inverse_of: false
+  # The admin who granted or last extended it; permissions carried over from owner approvals name the owner.
+  # Empty once that user is deleted: the permission stays.
+  belongs_to :granted_by, class_name: 'User', foreign_key: :owner_id, inverse_of: false, optional: true
 
   validates :user_id, uniqueness: { scope: :datatable_id }
   validate :granted_by_an_admin, on: :create
