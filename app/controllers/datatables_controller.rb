@@ -57,15 +57,7 @@ class DatatablesController < ApplicationController
       respond_to do |format|
         format.html
         format.fasta
-        format.csv do
-          if current_user.try(:role) == 'admin'
-            render_admin_csv
-          elsif @datatable.csv_file.attached?
-            redirect_to protected_file_url(@datatable.csv_file)
-          else
-            render_csv
-          end
-        end
+        format.csv { send_csv }
       end
     else
       redirect_to datatables_url
@@ -279,6 +271,20 @@ class DatatablesController < ApplicationController
         data_contributions_attributes: [%i[person_id role_id _destroy id]]
       ]
     )
+  end
+
+  # The CSV is the result of the datatable's stored query, so only an SQL datatable has one. For data
+  # hosted elsewhere or embargoed, the page links to it (or says it is embargoed) and there is no query to run.
+  def send_csv
+    return head(:not_found) unless @datatable.is_sql
+
+    if current_user.try(:role) == 'admin'
+      render_admin_csv
+    elsif @datatable.csv_file.attached?
+      redirect_to protected_file_url(@datatable.csv_file)
+    else
+      render_csv
+    end
   end
 
   # TODO: grab approved sql from model
