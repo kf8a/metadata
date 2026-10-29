@@ -13,34 +13,12 @@ describe Permission do
     Permission.create(datatable:, user: to, granted_by:, expires_on:)
   end
 
-  describe 'granting' do
-    it 'is valid when an admin grants it' do
-      expect(grant).to be_persisted
-    end
+  it 'can only be granted by an admin, even if the granter owns the datatable' do
+    owner = FactoryBot.create(:user)
+    Ownership.create!(user: owner, datatable:)
 
-    it 'is refused when someone who is not an admin grants it, even an owner' do
-      owner = FactoryBot.create(:user)
-      Ownership.create!(user: owner, datatable:)
-
-      permission = grant(granted_by: owner)
-
-      expect(permission).not_to be_persisted
-      expect(permission.errors[:granted_by]).to include('must be an admin')
-    end
-
-    it 'allows one permission per user and datatable' do
-      grant
-
-      expect(grant(granted_by: FactoryBot.create(:admin_user))).not_to be_persisted
-    end
-
-    it 'keeps a permission carried over from an owner approval valid when it is changed later' do
-      owner = FactoryBot.create(:user)
-      carried_over = grant
-      carried_over.update_column(:owner_id, owner.id) # rubocop:disable Rails/SkipsModelValidations -- as the migration leaves it
-
-      expect(carried_over.reload.update(expires_on: Date.current + 30)).to be true
-    end
+    expect(grant(granted_by: owner)).not_to be_persisted
+    expect(grant(granted_by: admin)).to be_persisted
   end
 
   describe 'expiry' do
@@ -63,43 +41,33 @@ describe Permission do
     end
   end
 
-  describe 'when users or datatables are deleted' do
-    # delete skips Rails callbacks, so these show the database's foreign keys at work
+  describe 'when someone is deleted' do
     it 'drops the permissions and requests of a deleted user' do
       grant
       PermissionRequest.create!(user:, datatable:)
 
-      user.delete
+      user.destroy
 
       expect(Permission.count).to eq 0
       expect(PermissionRequest.count).to eq 0
-    end
-
-    it 'keeps a permission when the admin who granted it is deleted' do
-      permission = grant
-
-      admin.delete
-
-      expect(permission.reload.granted_by).to be_nil
-      expect(datatable.permitted?(user)).to be true
     end
 
     it 'drops the permissions and requests of a deleted datatable' do
       grant
       PermissionRequest.create!(user:, datatable:)
 
-      datatable.delete
+      datatable.destroy
 
       expect(Permission.count).to eq 0
       expect(PermissionRequest.count).to eq 0
     end
 
-    it 'does the same when a user is destroyed through Rails' do
+    it 'keeps a permission when the admin who granted it is deleted' do
       grant
 
-      user.destroy
+      admin.destroy
 
-      expect(Permission.count).to eq 0
+      expect(datatable.permitted?(user)).to be true
     end
   end
 

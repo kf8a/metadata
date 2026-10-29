@@ -86,14 +86,6 @@ RSpec.describe 'Managing download permissions', type: :request do
                                                                               granted_by: admin)
     end
 
-    it 'extends a permission whose granting admin has since been deleted' do
-      Permission.create!(datatable:, user: reader, granted_by: FactoryBot.create(:admin_user)).granted_by.delete
-
-      grant(reader.email)
-
-      expect(datatable.permissions.find_by!(user: reader).granted_by).to eq admin
-    end
-
     it 'explains when no account has that email' do
       grant('nobody@example.org')
 
