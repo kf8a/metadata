@@ -21,20 +21,21 @@ class PermissionsController < ApplicationController
 
   def new; end
 
-  # Grants permission, or extends it when the user already has one
+  # Grants permission, or extends it when the user already has one. An email without an account brings
+  # the form back to ask for the person's name and institution; with those the account is created, and the
+  # person is emailed a link to set a password (sent again whenever access is granted before they do).
   def create
-    user = User.find_by(email: params[:email].to_s.strip.downcase)
-    return refuse("No account has the email #{params[:email]}") unless user
+    @email = params[:email].to_s.strip.downcase
+    user = User.find_by(email: @email) || new_reader
+    return ask_for_reader_details(user) if user.new_record? && !user.valid?(:invite_reader)
 
-    permission = @datatable.permissions.find_or_initialize_by(user:)
-    permission.granted_by = current_user
-    permission.expires_on = Permission.expiry_for(params[:expires_in])
-    return refuse(permission.errors.full_messages.to_sentence) unless permission.save
-
+    permission = grant_to(user)
     @datatable.permission_requests.where(user:).delete_all
-    PermissionMailer.granted(permission).deliver_later
+    send_grant_email(permission, user)
     notice = "#{user.email} may download #{@datatable.name} #{until_text(permission)}."
     redirect_to permission_path(@datatable), status: :see_other, notice:
+  rescue ActiveRecord::RecordInvalid => e
+    refuse(e.record.errors.full_messages.to_sentence)
   end
 
   def destroy
@@ -53,6 +54,51 @@ class PermissionsController < ApplicationController
   end
 
   private
+
+  def new_reader
+    User.new(email: @email, first_name: params[:first_name].to_s.strip, last_name: params[:last_name].to_s.strip,
+             institution: params[:institution].to_s.strip)
+  end
+
+  def ask_for_reader_details(user)
+    @new_reader = user
+    details_given = [user.first_name, user.last_name, user.institution].any?(&:present?)
+    message = if details_given || user.errors.include?(:email)
+                user.errors.full_messages.to_sentence
+              else
+                "No account has the email #{@email}. Give the person's name and institution to create one."
+              end
+    refuse(message)
+  end
+
+  # Creates the account (or a fresh link for one never set up) and the permission together
+  def grant_to(user)
+    Permission.transaction do
+      invite(user) if user.new_record? || user.invited_to_sign_up?
+      permission = @datatable.permissions.find_or_initialize_by(user:)
+      permission.granted_by = current_user
+      permission.expires_on = Permission.expiry_for(params[:expires_in])
+      permission.intended_use = params[:intended_use].presence || permission.intended_use
+      permission.save!
+      permission
+    end
+  end
+
+  # devise_invitable makes the token; PermissionMailer#welcome sends it with the rest of the news
+  def invite(user)
+    user.invite!(current_user) { |invited| invited.skip_invitation = true }
+  end
+
+  # The link to set a password is sent straight away rather than through the job queue, so the token is
+  # not stored in the queue's table. The token is only on the user just invited, not on permission.user.
+  def send_grant_email(permission, user)
+    if user.raw_invitation_token
+      PermissionMailer.welcome(permission, user.raw_invitation_token).deliver_now
+      user.update!(invitation_sent_at: Time.current)
+    else
+      PermissionMailer.granted(permission).deliver_later
+    end
+  end
 
   def refuse(message)
     flash.now[:alert] = message
