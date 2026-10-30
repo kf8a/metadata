@@ -32,6 +32,7 @@ class PermissionsController < ApplicationController
     return refuse(permission.errors.full_messages.to_sentence) unless permission.save
 
     @datatable.permission_requests.where(user:).delete_all
+    PermissionMailer.granted(permission).deliver_later
     notice = "#{user.email} may download #{@datatable.name} #{until_text(permission)}."
     redirect_to permission_path(@datatable), status: :see_other, notice:
   end

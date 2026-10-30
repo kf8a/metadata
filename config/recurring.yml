@@ -14,3 +14,8 @@ production:
   permission_cleanup:
     class: PermissionCleanupJob
     schedule: every day at 3:15am
+
+  # Emails users a week before their download permission ends (see PermissionExpiryReminderJob)
+  permission_expiry_reminders:
+    class: PermissionExpiryReminderJob
+    schedule: every day at 8am
