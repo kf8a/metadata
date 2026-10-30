@@ -1,13 +1,17 @@
-<% if signed_in? %>
-  <h2>Permissions Management for Datatables Owned by <%= current_user.email %></h2>
+<h2>Download permissions</h2>
+<p>Restricted and members-only datatables. The owners agree to a request by email; grant it here.</p>
 
+<table class='permissions'>
+  <tr>
+    <th>Datatable</th>
+    <th>Pending requests</th>
+    <th>People with access</th>
+  </tr>
   <% @datatables.each do |datatable| %>
-    <h4><%= datatable.name %>:</h4>
-    <ul>
-      <li><%= link_to "Modify Permissions for #{datatable.name}", permission_path(datatable) %></li>
-      <li><%= link_to "View #{datatable.name}", datatable_path(datatable) %></li>
-    </ul>
+    <tr>
+      <td><%= link_to datatable.name, permission_path(datatable) %> <%= datatable.title %></td>
+      <td><%= datatable.pending_requesters.size %></td>
+      <td><%= datatable.permissions.active.count %></td>
+    </tr>
   <% end %>
-<% else %>
-  <%= link_to 'Sign in to manage permissions for your datatables', new_user_session_path%>
-<% end %>
+</table>

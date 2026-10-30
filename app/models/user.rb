@@ -67,11 +67,6 @@ class User < ApplicationRecord
     admin? ? super : MEMBER_TIMEOUT
   end
 
-  def permission_from?(owner, datatable)
-    permission = permissions.find_by(owner_id: owner, datatable_id: datatable)
-    permission && !permission.denied?
-  end
-
   def self.allowed_group?(groups)
     Array(groups).intersect?(ALLOWED)
   end

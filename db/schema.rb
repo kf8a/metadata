@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_27_000000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_29_000001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -439,8 +439,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_000000) do
   end
 
   create_table "permission_requests", id: :serial, force: :cascade do |t|
-    t.integer "datatable_id"
-    t.integer "user_id"
+    t.integer "datatable_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["datatable_id"], name: "index_permission_requests_on_datatable_id"
@@ -448,15 +448,27 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_000000) do
   end
 
   create_table "permissions", id: :serial, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "datatable_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer "owner_id"
+    t.string "decision"
+    t.date "expires_on"
+    t.index ["datatable_id"], name: "index_permissions_on_datatable_id"
+    t.index ["owner_id"], name: "index_permissions_on_owner_id"
+    t.index ["user_id", "datatable_id"], name: "index_permissions_on_user_id_and_datatable_id", unique: true
+    t.index ["user_id"], name: "index_permissions_on_user_id"
+  end
+
+  create_table "permissions_legacy", id: false, force: :cascade do |t|
+    t.integer "id"
     t.integer "user_id"
     t.integer "datatable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "owner_id"
     t.string "decision"
-    t.index ["datatable_id"], name: "index_permissions_on_datatable_id"
-    t.index ["owner_id"], name: "index_permissions_on_owner_id"
-    t.index ["user_id"], name: "index_permissions_on_user_id"
   end
 
   create_table "person_projects", force: :cascade do |t|
@@ -946,6 +958,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_27_000000) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "authors", "citations"
   add_foreign_key "editors", "citations"
+  add_foreign_key "permission_requests", "datatables", on_delete: :cascade
+  add_foreign_key "permission_requests", "users", on_delete: :cascade
+  add_foreign_key "permissions", "datatables", on_delete: :cascade
+  add_foreign_key "permissions", "users", column: "owner_id", on_delete: :nullify
+  add_foreign_key "permissions", "users", on_delete: :cascade
   add_foreign_key "solid_queue_batch_executions", "solid_queue_batches", column: "batch_id", on_delete: :cascade
   add_foreign_key "solid_queue_batch_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
