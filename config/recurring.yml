@@ -9,3 +9,8 @@ production:
   sessions_trim:
     class: SessionsTrimJob
     schedule: every day at 3am
+
+  # Deletes download permissions 30 days after they expire (see PermissionCleanupJob)
+  permission_cleanup:
+    class: PermissionCleanupJob
+    schedule: every day at 3:15am

@@ -8,6 +8,9 @@ class Permission < ApplicationRecord
 
   DEFAULT_LIFETIME = 90.days
 
+  # How long an expired permission stays listed (and can be extended) before PermissionCleanupJob deletes it
+  KEEP_EXPIRED_FOR = 30.days
+
   # Label => days, or 'never'
   LIFETIME_CHOICES = { '30 days' => '30', '90 days' => '90', '1 year' => '365', 'No expiry' => 'never' }.freeze
 

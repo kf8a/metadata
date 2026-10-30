@@ -51,4 +51,5 @@
       </tr>
     <% end %>
   </table>
+  <p>Expired permissions are removed <%= Permission::KEEP_EXPIRED_FOR.in_days.to_i %> days after they expire.</p>
 <% end %>
