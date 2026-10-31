@@ -43,4 +43,13 @@ RSpec.describe PermissionExpiryReminderJob do
 
     expect(sent_to).to eq ['soon@example.org', 'soon@example.org']
   end
+
+  it 'links to the site the permission was granted from' do
+    grant('soon@example.org', Date.current + 7).update!(site: 'glbrc')
+
+    described_class.perform_now
+
+    expect(ActionMailer::Base.deliveries.last.body.to_s)
+      .to include("https://data.sustainability.glbrc.org/datatables/#{datatable.id}")
+  end
 end
