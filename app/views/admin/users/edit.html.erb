@@ -1,0 +1,15 @@
+<h2><%= @user.email %></h2>
+<p><%= user_status(@user) %></p>
+<% if @user.invitation_pending? %>
+  <%= button_to 'Send a new link to set a password', resend_invitation_admin_user_path(@user) %>
+<% end %>
+
+<%= render 'form', user: @user %>
+
+<% unless @user == current_user %>
+  <h3>Remove</h3>
+  <p>Their download permissions and memberships are deleted too.</p>
+  <%= button_to 'Remove this user', admin_user_path(@user), method: :delete,
+                form: { data: { turbo_confirm: "Remove #{@user.email}? Their download permissions go too." } } %>
+<% end %>
+<p><%= link_to 'Back to users', admin_users_path %></p>
