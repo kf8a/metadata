@@ -99,6 +99,6 @@ RSpec.describe User, '.from_omniauth' do
     user = User.from_omniauth(auth(email: 'invited@glbrc.org'))
 
     expect(user).to eq invited
-    expect(user.reload.invited_to_sign_up?).to be false
+    expect(user.reload.invitation_pending?).to be false
   end
 end

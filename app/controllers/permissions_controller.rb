@@ -74,7 +74,7 @@ class PermissionsController < ApplicationController
   # Creates the account (or a fresh link for one never set up) and the permission together
   def grant_to(user)
     Permission.transaction do
-      invite(user) if user.new_record? || user.invited_to_sign_up?
+      invite(user) if user.new_record? || user.invitation_pending?
       permission = @datatable.permissions.find_or_initialize_by(user:)
       permission.granted_by = current_user
       permission.expires_on = Permission.expiry_for(params[:expires_in])
@@ -94,7 +94,7 @@ class PermissionsController < ApplicationController
   def send_grant_email(permission, user)
     if user.raw_invitation_token
       PermissionMailer.welcome(permission, user.raw_invitation_token).deliver_now
-      user.update!(invitation_sent_at: Time.current)
+      user.current_invitation.update!(invitation_sent_at: Time.current) # the link's validity starts now
     else
       PermissionMailer.granted(permission).deliver_later
     end

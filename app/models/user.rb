@@ -5,7 +5,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are: :confirmable
   devise :database_authenticatable, :lockable, :validatable,
          :recoverable, :rememberable, :trackable, :timeoutable, :invitable,
-         :omniauthable, omniauth_providers: [:glbrc]
+         :omniauthable, omniauth_providers: [:glbrc], create_resource_on_invitation: true
 
   # An admin creating an account for a new reader gives their name and institution (PermissionsController)
   validates :first_name, :last_name, :institution, presence: true, on: :invite_reader
@@ -21,6 +21,9 @@ class User < ApplicationRecord
 
   has_many :sponsors, through: :memberships
 
+  # devise_invitable only detaches a deleted user's invitations, which would keep their email address
+  before_destroy -> { devise_invitations.delete_all(:delete_all) }, prepend: true
+
   scope :by_email, -> { order 'email' }
 
   ALLOWED = [
@@ -35,7 +38,7 @@ class User < ApplicationRecord
       old_user = User.where(email: auth.info.id_token.email).first
       if old_user
         # Signing in with GLBRC proves the address, so it completes an account an admin created for them
-        if old_user.invited_to_sign_up?
+        if old_user.invitation_pending?
           old_user.password = Devise.friendly_token[0, 20]
           old_user.accept_invitation!
         end
@@ -91,4 +94,14 @@ class User < ApplicationRecord
     Array(groups).intersect?(ALLOWED)
   end
   private_class_method :allowed_group?
+
+  private
+
+  # devise_invitable 3.0.2 checks that a new token is unused by looking for it in users.invitation_token,
+  # a column 3.x no longer has; look in the invitations table, where the tokens are kept
+  def generate_invitation_token
+    raw, enc = Devise.token_generator.generate(DeviseInvitable::Invitation, :invitation_token)
+    @raw_invitation_token = raw
+    current_invitation.invitation_token = enc
+  end
 end

@@ -18,7 +18,7 @@ gem 'bootsnap', require: false
 
 gem 'acts-as-taggable-on'
 gem 'devise'
-gem 'devise_invitable', '~> 2.0' # admins create accounts for new readers; see PermissionsController
+gem 'devise_invitable', '~> 3.0' # admins create accounts for new readers; see PermissionsController
 gem 'formtastic'
 gem 'nokogiri'
 

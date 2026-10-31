@@ -6,6 +6,7 @@ require 'rails_helper'
 # from the emailed link and can then download.
 RSpec.describe 'Granting access to someone without an account', type: :request do
   include Devise::Test::IntegrationHelpers
+  include ActiveSupport::Testing::TimeHelpers
 
   let(:website) { Website.find_by(name: 'lter') || Website.create!(name: 'lter', url: 'lter.kbs.msu.edu') }
   let(:datatable) do
@@ -66,6 +67,22 @@ RSpec.describe 'Granting access to someone without an account', type: :request d
 
     get datatable_path(datatable, format: :csv)
     expect(response).to have_http_status(:ok)
+  end
+
+  it 'stops the link working once it is older than two weeks' do
+    grant(details)
+    link = link_in(mails.last)
+    reset!
+
+    travel_to(15.days.from_now) { get link.request_uri }
+    expect(response).to redirect_to(root_path)
+  end
+
+  it "forgets the invitation's email address when the account is deleted" do
+    grant(details)
+
+    User.find_by!(email: 'new.reader@example.org').destroy!
+    expect(DeviseInvitable::Invitation.count).to eq 0
   end
 
   it 'sends a fresh link when access is granted again before the password is set' do
