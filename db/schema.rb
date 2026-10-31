@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_30_000000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_30_000001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -293,6 +293,29 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_30_000000) do
     t.datetime "updated_at"
   end
 
+  create_table "devise_invitations", force: :cascade do |t|
+    t.string "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.datetime "superseded_at"
+    t.string "superseded_reason"
+    t.datetime "revoked_at"
+    t.datetime "resource_created_at"
+    t.json "invite_key", default: {}, null: false
+    t.string "invite_key_digest", null: false
+    t.string "invitable_type"
+    t.bigint "invitable_id"
+    t.string "invited_by_type"
+    t.bigint "invited_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invitable_type", "invitable_id"], name: "index_devise_invitations_on_invitable"
+    t.index ["invitable_type", "invite_key_digest"], name: "index_devise_invitations_on_type_and_invite_key"
+    t.index ["invitation_token"], name: "index_devise_invitations_on_invitation_token", unique: true
+    t.index ["invited_by_type", "invited_by_id"], name: "index_devise_invitations_on_invited_by"
+  end
+
   create_table "editors", id: :serial, force: :cascade do |t|
     t.string "sur_name"
     t.string "given_name"
@@ -456,6 +479,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_30_000000) do
     t.string "decision"
     t.date "expires_on"
     t.datetime "expiry_reminder_sent_at"
+    t.text "intended_use"
     t.index ["datatable_id"], name: "index_permissions_on_datatable_id"
     t.index ["owner_id"], name: "index_permissions_on_owner_id"
     t.index ["user_id", "datatable_id"], name: "index_permissions_on_user_id_and_datatable_id", unique: true
@@ -885,6 +909,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_30_000000) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.string "last_glbrc_groups", default: [], null: false, array: true
+    t.string "first_name"
+    t.string "last_name"
+    t.string "institution"
     t.index ["email"], name: "index_users_on_email"
     t.index ["id", "confirmation_token"], name: "index_users_on_id_and_confirmation_token"
     t.index ["identity_url"], name: "index_users_on_identity_url", unique: true

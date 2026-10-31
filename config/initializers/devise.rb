@@ -308,4 +308,9 @@ Devise.setup do |config|
   # OAuth configuration
   config.omniauth :glbrc, Rails.application.credentials.dig(:glbrc, :client_id),
                   Rails.application.credentials.dig(:glbrc, :client_secret)
+
+  # ==> Configuration for :invitable (devise_invitable)
+  # Admins create accounts for new readers from the grant form (PermissionsController); the person sets
+  # a password from the emailed link, which works for this long after it is sent.
+  config.invite_for = 14.days
 end

@@ -7,6 +7,31 @@
     <%= form.label :email, 'Email of the account' %>
     <%= form.email_field :email, value: params[:email], required: true %>
   </p>
+  <% if @new_reader %>
+    <fieldset>
+      <legend>New account for <%= @email %></legend>
+      <p>
+        The person gets an email with a link to set a password, which works for
+        <%= Devise.invite_for.in_days.to_i %> days.
+      </p>
+      <p>
+        <%= form.label :first_name, 'First name' %>
+        <%= form.text_field :first_name, value: @new_reader.first_name, required: true %>
+      </p>
+      <p>
+        <%= form.label :last_name, 'Last name' %>
+        <%= form.text_field :last_name, value: @new_reader.last_name, required: true %>
+      </p>
+      <p>
+        <%= form.label :institution %>
+        <%= form.text_field :institution, value: @new_reader.institution, required: true %>
+      </p>
+    </fieldset>
+  <% end %>
+  <p>
+    <%= form.label :intended_use, 'Intended use (optional, seen only by admins)' %>
+    <%= form.text_area :intended_use, value: params[:intended_use], rows: 3 %>
+  </p>
   <p>
     <%= form.label :expires_in, 'Access for' %>
     <%= form.select :expires_in, Permission::LIFETIME_CHOICES,

@@ -24,13 +24,19 @@
   <table class='permissions'>
     <tr>
       <th>Account</th>
+      <th>Intended use</th>
       <th>Granted by</th>
       <th>Access until</th>
       <th></th>
     </tr>
     <% @permissions.each do |permission| %>
       <tr class='<%= 'expired' unless permission.active? %>'>
-        <td><%= permission.user.email %></td>
+        <td>
+          <%= permission.user.email %>
+          <% if permission.user.name %><br><%= permission.user.name %>, <%= permission.user.institution %><% end %>
+          <% if permission.user.invited_to_sign_up? %><br><em>Has not set a password yet; extending resends the link</em><% end %>
+        </td>
+        <td><%= permission.intended_use %></td>
         <td><%= permission.granted_by&.email %></td>
         <td>
           <% if permission.expires_on.nil? %>
