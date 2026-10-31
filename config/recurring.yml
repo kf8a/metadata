@@ -15,6 +15,11 @@ production:
     class: PermissionCleanupJob
     schedule: every day at 3:15am
 
+  # Deletes accounts created for new readers who never set a password (see UnusedInvitationCleanupJob)
+  unused_invitation_cleanup:
+    class: UnusedInvitationCleanupJob
+    schedule: every day at 3:30am
+
   # Emails users a week before their download permission ends (see PermissionExpiryReminderJob)
   permission_expiry_reminders:
     class: PermissionExpiryReminderJob
