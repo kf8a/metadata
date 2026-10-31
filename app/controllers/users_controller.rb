@@ -3,45 +3,10 @@
 # handler interaction with the user class
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: %i[show]
-  # protect_from_forgery except: :show
-
-  def index; end
 
   def show
     logger.info "Current user (usercontroller) #{current_user}"
     logger.info request.format
     head :bad_request unless request.format == 'text/javascript'
-  end
-
-  def new
-    @invite_code = params[:invite_code]
-    super
-  end
-
-  def create
-    @user = User.new user_params
-    @invite = Invite.find_redeemable(params[:invite_code])
-
-    if @user.save
-      redeem if @invite
-
-      redirect_to(url_after_create)
-    else
-      render :new, status: :unprocessable_content
-    end
-  end
-
-  private
-
-  def user_params
-    params.expect(user: %i[email password password_confirmation])
-  end
-
-  def redeem
-    @invite.redeemed!
-    return unless @invite.glbrc_member?
-
-    sponsor = Sponsor.find_by(name: 'glbrc')
-    Membership.create(user: @user, sponsor: sponsor)
   end
 end
