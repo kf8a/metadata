@@ -6,6 +6,7 @@ require 'rails_helper'
 RSpec.describe 'Managing download permissions', type: :request do
   include Devise::Test::IntegrationHelpers
   include ActiveSupport::Testing::TimeHelpers
+  include ActiveJob::TestHelper
 
   let(:website) { Website.find_by(name: 'lter') || Website.create!(name: 'lter', url: 'lter.kbs.msu.edu') }
   let(:datatable) do
@@ -84,6 +85,20 @@ RSpec.describe 'Managing download permissions', type: :request do
       expect(datatable.permissions.where(user: reader).count).to eq 1
       expect(datatable.permissions.find_by!(user: reader)).to have_attributes(expires_on: Date.current + 30,
                                                                               granted_by: admin)
+    end
+
+    it 'emails the reader when access is granted, and again when it is extended' do
+      ActionMailer::Base.deliveries.clear
+      perform_enqueued_jobs(only: ActionMailer::MailDeliveryJob) do
+        grant(reader.email, expires_in: '30')
+        grant(reader.email, expires_in: '365')
+      end
+
+      mails = ActionMailer::Base.deliveries.select { |mail| mail.to == [reader.email] }
+      expect(mails.map(&:subject)).to eq ["You can download #{datatable.name}"] * 2
+      expect(mails.last.body.to_s).to include((Date.current + 365).to_fs(:long),
+                                              "https://lter.kbs.msu.edu/datatables/#{datatable.id}")
+      expect(mails.last.reply_to).to eq [admin.email]
     end
 
     it 'explains when no account has that email' do

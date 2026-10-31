@@ -8,6 +8,9 @@ class Permission < ApplicationRecord
 
   DEFAULT_LIFETIME = 90.days
 
+  # How long before the expiry date the reminder email goes out
+  REMIND_BEFORE = 7.days
+
   # How long an expired permission stays listed (and can be extended) before PermissionCleanupJob deletes it
   KEEP_EXPIRED_FOR = 30.days
 
@@ -24,6 +27,13 @@ class Permission < ApplicationRecord
   validate :granted_by_an_admin, on: :create
 
   scope :active, -> { where(expires_on: nil).or(where(expires_on: Date.current..)) }
+  # Active permissions ending within REMIND_BEFORE whose reminder has not been sent yet
+  scope :due_for_expiry_reminder, lambda {
+    active.where(expires_on: ..(Date.current + REMIND_BEFORE), expiry_reminder_sent_at: nil)
+  }
+
+  # A new expiry date gets its own reminder
+  before_save -> { self.expiry_reminder_sent_at = nil }, if: :will_save_change_to_expires_on?
 
   # The expiry date for one of LIFETIME_CHOICES; anything else gets the default
   def self.expiry_for(choice)

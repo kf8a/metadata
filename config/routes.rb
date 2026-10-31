@@ -1,7 +1,13 @@
 # frozen_string_literal: true
 
 Metadata::Application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks', sessions: 'sessions' }
+  # devise_invitable's own pages for sending invitations stay closed: admins invite from the grant form
+  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks', sessions: 'sessions' },
+                     skip: :invitations
+  devise_scope :user do
+    get 'users/invitation/accept', to: 'devise/invitations#edit', as: :accept_user_invitation
+    match 'users/invitation', to: 'devise/invitations#update', as: :user_invitation, via: %i[put patch]
+  end
   get 'auth/failure', to: redirect('/')
 
   # devise_scope :user do
@@ -9,11 +15,9 @@ Metadata::Application.routes.draw do
   #   delete 'sign_out', to: 'devise/sessions#destroy', as: :destroy_user_session
   # end
 
-  get '/send_invitation/:id' => 'invites#send_invitation', :as => :send_invitation, via: [:get]
-  get '/signup/:invite_code' => 'users#new', :as => :redeem_invitation, via: [:get]
   get '/pub/:id', to: 'citations#download'
 
-  resource :users
+  resource :users, only: :show
 
   resources :abstracts do
     member do
@@ -66,7 +70,6 @@ Metadata::Application.routes.draw do
       put :retract
     end
   end
-  resources :invites
   resources :meetings
   resources :ownerships do
     collection do
