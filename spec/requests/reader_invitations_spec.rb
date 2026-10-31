@@ -93,12 +93,15 @@ RSpec.describe 'Granting access to someone without an account', type: :request d
     expect(link_in(mails.first)).not_to eq link_in(mails.last)
   end
 
-  it 'mentions GLBRC sign-in for GLBRC data' do
+  it 'links to the GLBRC site and mentions GLBRC sign-in for GLBRC data' do
     glbrc_dataset = FactoryBot.create(:dataset, website:, sponsor: Sponsor.create!(name: 'glbrc'))
     glbrc_table = FactoryBot.create(:datatable, is_restricted: true, dataset: glbrc_dataset)
     grant(details, table: glbrc_table)
 
-    expect(mails.last.body.to_s).to include('sign in with your GLBRC account instead')
+    body = mails.last.body.to_s
+    expect(body).to include("https://data.sustainability.glbrc.org/datatables/#{glbrc_table.id}")
+    expect(body).to include('sign in with your GLBRC account instead')
+    expect(link_in(mails.last).host).to eq 'data.sustainability.glbrc.org'
   end
 
   it "keeps devise_invitable's own pages for sending invitations closed" do
