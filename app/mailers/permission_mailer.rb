@@ -5,9 +5,6 @@
 class PermissionMailer < ActionMailer::Base
   default from: -> { Devise.mailer_sender }
 
-  # Each site's address. Links go to the site the permission was granted from (Permission#site).
-  SITE_HOSTS = { 'glbrc' => 'data.sustainability.glbrc.org', 'lter' => 'lter.kbs.msu.edu' }.freeze
-
   def granted(permission)
     prepare(permission)
     mail(to: @user.email, subject: "You can download #{@datatable.name}", **reply_to)
@@ -33,9 +30,9 @@ class PermissionMailer < ActionMailer::Base
     @datatable = permission.datatable
     @expires_on = permission.expires_on&.to_fs(:long)
     @granted_by = permission.granted_by
-    # Permissions granted before the site was recorded go to LTER
+    # Links go to the site the permission was granted from (Permission#site)
     @glbrc = permission.site == 'glbrc'
-    @host = SITE_HOSTS.fetch(permission.site.to_s, SITE_HOSTS['lter'])
+    @host = Site.host(permission.site)
     @link = "https://#{@host}/datatables/#{@datatable.id}"
   end
 
