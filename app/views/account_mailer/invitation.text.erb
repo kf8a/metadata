@@ -1,0 +1,13 @@
+Hello <%= @user.first_name.presence || @user.email %>,
+
+<%= @invited_by.name || @invited_by.email %> has created an account for you on <%= @host %>.
+
+To start, set your password (this link works for <%= @link_valid_days %> days):
+
+<%= @accept_link %>
+<% if @glbrc -%>
+
+If you work at GLBRC, you can skip the password and sign in with your GLBRC account instead.
+<% end -%>
+
+If the link has stopped working, reply to this email.

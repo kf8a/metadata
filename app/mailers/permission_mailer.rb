@@ -15,7 +15,6 @@ class PermissionMailer < ActionMailer::Base
     prepare(permission)
     @accept_link = accept_user_invitation_url(invitation_token:, host: @host, protocol: 'https')
     @link_valid_days = Devise.invite_for.in_days.to_i
-    @glbrc = @datatable.dataset&.sponsor&.name == 'glbrc'
     mail(to: @user.email, subject: "An account to download #{@datatable.name}", **reply_to)
   end
 
@@ -31,8 +30,9 @@ class PermissionMailer < ActionMailer::Base
     @datatable = permission.datatable
     @expires_on = permission.expires_on&.to_fs(:long)
     @granted_by = permission.granted_by
-    # The datatable's own site (LTER or GLBRC), not the mailer's single default host
-    @host = @datatable.dataset&.url.presence || default_url_options[:host]
+    # Links go to the site the permission was granted from (Permission#site)
+    @glbrc = permission.site == 'glbrc'
+    @host = Site.host(permission.site)
     @link = "https://#{@host}/datatables/#{@datatable.id}"
   end
 

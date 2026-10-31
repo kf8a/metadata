@@ -79,6 +79,7 @@ class PermissionsController < ApplicationController
       permission.granted_by = current_user
       permission.expires_on = Permission.expiry_for(params[:expires_in])
       permission.intended_use = params[:intended_use].presence || permission.intended_use
+      permission.site = subdomain_from_request # the emails link back to the site the admin is on
       permission.save!
       permission
     end

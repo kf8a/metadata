@@ -19,6 +19,12 @@ Metadata::Application.routes.draw do
 
   resource :users, only: :show
 
+  namespace :admin do
+    resources :users, except: :show do
+      post :resend_invitation, on: :member
+    end
+  end
+
   resources :abstracts do
     member do
       get :download
