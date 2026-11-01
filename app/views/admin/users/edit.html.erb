@@ -1,6 +1,6 @@
 <h2><%= @user.email %></h2>
 <p>
-  <% if @user.created_at %>Member since <%= admin_date(@user.created_at) %>. <% end %>
+  <% if @user.created_at %>Member for <%= membership_length(@user) %>. <% end %>
   <%= user_status(@user) %>
 </p>
 <% if @user.invitation_pending? %>
