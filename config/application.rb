@@ -31,6 +31,12 @@ module Metadata
     # Turbo only renders form replies that are redirects or 4xx/5xx errors
     config.responders.error_status = :unprocessable_content
     config.responders.redirect_status = :see_other
+
+    # The database has things schema.rb can't describe (extensions, the topology schema, and functions
+    # such as nanoid() used in column defaults), so it is dumped as SQL to db/structure.sql. Every schema
+    # is dumped, not only those on the search path, so the extensions' own schemas come along.
+    config.active_record.schema_format = :sql
+    config.active_record.dump_schemas = :all
   end
 end
 
