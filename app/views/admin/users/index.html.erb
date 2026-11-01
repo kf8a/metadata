@@ -17,6 +17,7 @@
     <th>Institution</th>
     <th>Role</th>
     <th>Memberships</th>
+    <th>Member since</th>
     <th>Status</th>
   </tr>
   <% @users.each do |user| %>
@@ -26,6 +27,7 @@
       <td><%= user.institution %></td>
       <td><%= user.role %></td>
       <td><%= user.sponsors.map(&:name).sort.join(', ') %></td>
+      <td><%= admin_date(user.created_at) %></td>
       <td><%= user_status(user) %></td>
     </tr>
   <% end %>

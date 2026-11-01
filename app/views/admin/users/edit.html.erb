@@ -1,5 +1,8 @@
 <h2><%= @user.email %></h2>
-<p><%= user_status(@user) %></p>
+<p>
+  <% if @user.created_at %>Member since <%= admin_date(@user.created_at) %>. <% end %>
+  <%= user_status(@user) %>
+</p>
 <% if @user.invitation_pending? %>
   <%= button_to 'Send a new link to set a password', resend_invitation_admin_user_path(@user) %>
 <% end %>
