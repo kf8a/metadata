@@ -28,10 +28,11 @@ RSpec.describe 'Managing users', type: :request do
   end
 
   it 'lists users, and finds them by name' do
-    FactoryBot.create(:user, email: 'someone@example.org', first_name: 'Grace', sponsors: [glbrc])
+    FactoryBot.create(:user, email: 'someone@example.org', first_name: 'Grace', sponsors: [glbrc],
+                             created_at: 26.months.ago)
 
     get admin_users_path(q: 'grace')
-    expect(response.body).to include('someone@example.org', 'glbrc')
+    expect(response.body).to include('someone@example.org', 'glbrc', '2 years')
     expect(response.body).not_to include('admin@example.org</a>')
   end
 
