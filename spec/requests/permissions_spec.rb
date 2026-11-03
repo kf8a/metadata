@@ -148,6 +148,8 @@ RSpec.describe 'Managing download permissions', type: :request do
       get permission_path(datatable)
 
       assert_dom '.permission-request', text: /asker@example.org has asked/
+      assert_dom '.permission-request a[href=?]', edit_admin_user_path(User.find_by!(email: 'asker@example.org')),
+                 text: 'asker@example.org'
       assert_dom '.permission-request time', text: '14 days ago'
       assert_dom 'table.permissions', text: /reader@example.org/
       assert_dom 'table.permissions', text: /May 01, 2030/
