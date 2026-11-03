@@ -2,6 +2,14 @@
 
 # datatable view helpers
 module DatatablesHelper
+  # Inline formatting a title may carry (N<sub>2</sub>O, m<sup>2</sup>); anything else is removed, and no
+  # tag keeps its attributes
+  TITLE_TAGS = %w[sub sup em i strong b].freeze
+
+  def sanitized_title(title)
+    sanitize(title.to_s, tags: TITLE_TAGS, attributes: [])
+  end
+
   # Long HTML collapses to a plain-text excerpt that expands to the full text (no JavaScript)
   def expandable_html(html, length: 800)
     text = strip_tags(html).squish
