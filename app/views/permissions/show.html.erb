@@ -3,17 +3,23 @@
 <p><%= link_to 'Grant permission to someone', new_permission_path(datatable: @datatable) %></p>
 
 <h3>Requests</h3>
-<% if @requesters.empty? %>
+<% if @pending_requests.empty? %>
   <p>No pending requests.</p>
 <% end %>
-<% @requesters.each do |requester| %>
+<% @pending_requests.each do |request| %>
   <div class='permission-request'>
-    <%= requester.email %> has asked to download this datatable.
+    <%= request.user.email %> has asked to download this datatable
+    <% if request.created_at %>
+      <time datetime='<%= request.created_at.iso8601 %>' title='<%= request.created_at.to_date.to_fs(:long) %>'>
+        <%= time_ago_in_words(request.created_at) %> ago
+      </time>.
+    <% else %>.
+    <% end %>
     <%= button_to "Grant for #{Permission::DEFAULT_LIFETIME.in_days.to_i} days", permissions_path,
-                  params: { datatable: @datatable.id, email: requester.email } %>
+                  params: { datatable: @datatable.id, email: request.user.email } %>
     <%= button_to 'Dismiss', dismiss_permission_path(@datatable), method: :delete,
-                  params: { user: requester.id },
-                  form: { data: { turbo_confirm: "Dismiss the request from #{requester.email}?" } } %>
+                  params: { user: request.user_id },
+                  form: { data: { turbo_confirm: "Dismiss the request from #{request.user.email}?" } } %>
   </div>
 <% end %>
 

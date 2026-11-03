@@ -11,11 +11,11 @@ class PermissionsController < ApplicationController
     datatables = Datatable.joins(dataset: :sponsor)
     @datatables = datatables.where(is_restricted: true)
                             .or(datatables.where(sponsors: { data_restricted: true }))
-                            .by_name
+                            .with_permission_index_stats
   end
 
   def show
-    @requesters = @datatable.pending_requesters
+    @pending_requests = @datatable.pending_requests
     @permissions = @datatable.permissions.includes(:user, :granted_by).order(:expires_on)
   end
 

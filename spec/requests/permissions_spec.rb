@@ -50,6 +50,36 @@ RSpec.describe 'Managing download permissions', type: :request do
       expect(response.body).to include('RESTRICTED-1', members_only.name)
       expect(response.body).not_to include(open_table.name)
     end
+
+    it 'lists datatables with pending requests first, by most recent request, then by name' do
+      older = FactoryBot.create(:datatable, name: 'AAA-OLD-PENDING', is_restricted: true,
+                                           dataset: FactoryBot.create(:dataset, website:))
+      newer = FactoryBot.create(:datatable, name: 'ZZZ-NEW-PENDING', is_restricted: true,
+                                           dataset: FactoryBot.create(:dataset, website:))
+      none = FactoryBot.create(:datatable, name: 'MMM-NONE', is_restricted: true,
+                                          dataset: FactoryBot.create(:dataset, website:))
+      granted_only = FactoryBot.create(:datatable, name: 'BBB-GRANTED', is_restricted: true,
+                                                  dataset: FactoryBot.create(:dataset, website:))
+      asker = FactoryBot.create(:user)
+      PermissionRequest.create!(user: asker, datatable: older, created_at: 2.weeks.ago)
+      PermissionRequest.create!(user: FactoryBot.create(:user), datatable: newer, created_at: 1.day.ago)
+      PermissionRequest.create!(user: asker, datatable: granted_only)
+      Permission.create!(datatable: granted_only, user: asker, granted_by: admin, expires_on: Date.current + 30)
+      datatable.update!(name: 'CCC-BASE')
+      sign_in admin
+
+      get permissions_path
+
+      names = css_select('table.permissions td a').map { |link| link.text.strip }
+      expect(names).to eq %w[ZZZ-NEW-PENDING AAA-OLD-PENDING BBB-GRANTED CCC-BASE MMM-NONE]
+      assert_dom 'table.permissions tr', text: /ZZZ-NEW-PENDING/ do
+        assert_dom 'td', text: '1'
+      end
+      assert_dom 'table.permissions tr', text: /BBB-GRANTED/ do
+        assert_dom 'td', text: '0'
+        assert_dom 'td', text: '1'
+      end
+    end
   end
 
   describe 'granting' do
@@ -110,14 +140,18 @@ RSpec.describe 'Managing download permissions', type: :request do
     end
 
     it 'shows requests and grants on the datatable page' do
-      PermissionRequest.create!(user: FactoryBot.create(:user, email: 'asker@example.org'), datatable:)
+      PermissionRequest.create!(user: FactoryBot.create(:user, email: 'asker@example.org'), datatable:,
+                                created_at: 2.weeks.ago)
       Permission.create!(datatable:, user: reader, granted_by: admin, expires_on: Date.new(2030, 5, 1),
                          created_at: 3.months.ago)
 
       get permission_path(datatable)
 
-      expect(response.body).to include('asker@example.org has asked', 'reader@example.org', 'May 01, 2030',
-                                       '3 months ago')
+      assert_dom '.permission-request', text: /asker@example.org has asked/
+      assert_dom '.permission-request time', text: '14 days ago'
+      assert_dom 'table.permissions', text: /reader@example.org/
+      assert_dom 'table.permissions', text: /May 01, 2030/
+      assert_dom 'table.permissions time', text: '3 months ago'
     end
   end
 

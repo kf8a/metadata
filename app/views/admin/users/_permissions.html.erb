@@ -7,7 +7,13 @@
 <% else %>
   <% pending_requests.each do |request| %>
     <div class='permission-request'>
-      Asked to download <%= link_to request.datatable.name, permission_path(request.datatable) %>.
+      Asked to download <%= link_to request.datatable.name, permission_path(request.datatable) %>
+      <% if request.created_at %>
+        <time datetime='<%= request.created_at.iso8601 %>' title='<%= request.created_at.to_date.to_fs(:long) %>'>
+          <%= time_ago_in_words(request.created_at) %> ago
+        </time>.
+      <% else %>.
+      <% end %>
       <%= button_to "Grant for #{lifetime} days", permissions_path,
                     params: { datatable: request.datatable_id, email: user.email, return_to: } %>
       <%= button_to 'Dismiss', dismiss_permission_path(request.datatable), method: :delete,

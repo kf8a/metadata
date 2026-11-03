@@ -39,6 +39,51 @@ class Datatable < ApplicationRecord
 
   scope :by_name, -> { order :name }
 
+  # Pending-request and active-permission counts for the permissions index, ordered with pending
+  # datatables first (latest request first), then by name. Counts use the same “pending” rule as
+  # #pending_requests: a request whose user has no active permission on this datatable.
+  scope :with_permission_index_stats, lambda {
+    dt = arel_table
+    requests = PermissionRequest.arel_table
+    permissions = Permission.arel_table
+
+    granted = Permission.active.where(
+      permissions[:user_id].eq(requests[:user_id])
+        .and(permissions[:datatable_id].eq(requests[:datatable_id]))
+    )
+    pending_stats = PermissionRequest.where.not(granted.arel.exists)
+                                     .group(requests[:datatable_id])
+                                     .select(
+                                       requests[:datatable_id],
+                                       requests[:id].count.as('pending_request_count'),
+                                       requests[:created_at].maximum.as('latest_pending_at')
+                                     )
+    active_stats = Permission.active.group(permissions[:datatable_id])
+                                    .select(
+                                      permissions[:datatable_id],
+                                      permissions[:id].count.as('active_permission_count')
+                                    )
+
+    pending = Arel::Table.new('pending_stats')
+    actives = Arel::Table.new('active_stats')
+    zero = Arel::Nodes.build_quoted(0)
+
+    select(
+      dt[Arel.star],
+      Arel::Nodes::NamedFunction.new('COALESCE', [pending[:pending_request_count], zero])
+                               .as('pending_request_count'),
+      pending[:latest_pending_at],
+      Arel::Nodes::NamedFunction.new('COALESCE', [actives[:active_permission_count], zero])
+                               .as('active_permission_count')
+    ).joins(
+      dt.join(Arel::Nodes::TableAlias.new(pending_stats.arel, 'pending_stats'), Arel::Nodes::OuterJoin)
+        .on(dt[:id].eq(pending[:datatable_id]))
+        .join(Arel::Nodes::TableAlias.new(active_stats.arel, 'active_stats'), Arel::Nodes::OuterJoin)
+        .on(dt[:id].eq(actives[:datatable_id]))
+        .join_sources
+    ).order(pending[:latest_pending_at].desc.nulls_last, dt[:name].asc)
+  }
+
   has_one_attached :csv_file
 
   # validates_attachment_file_name :csv_cache, matches: [/csv\Z/ ]
@@ -285,8 +330,13 @@ class Datatable < ApplicationRecord
     permissions.find_by(user_id: user.id) if user
   end
 
+  # Requests that have not been granted yet (an expired grant still counts as pending)
+  def pending_requests
+    permission_requests.includes(:user).reject { |request| permitted?(request.user) }
+  end
+
   def pending_requesters
-    requesters.collect { |user| user unless permitted?(user) }.compact
+    pending_requests.map(&:user)
   end
 
   def requested_by?(user)

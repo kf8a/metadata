@@ -11,8 +11,8 @@
   <% @datatables.each do |datatable| %>
     <tr>
       <td><%= link_to datatable.name, permission_path(datatable) %> <%= datatable.title %></td>
-      <td><%= datatable.pending_requesters.size %></td>
-      <td><%= datatable.permissions.active.count %></td>
+      <td><%= datatable.pending_request_count %></td>
+      <td><%= datatable.active_permission_count %></td>
     </tr>
   <% end %>
 </table>

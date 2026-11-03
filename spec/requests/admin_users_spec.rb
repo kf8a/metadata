@@ -107,7 +107,7 @@ RSpec.describe 'Managing users', type: :request do
     active_table = FactoryBot.create(:datatable, name: 'ACTIVE-DT', is_restricted: true)
     expired_table = FactoryBot.create(:datatable, name: 'EXPIRED-DT', is_restricted: true)
     already_granted = FactoryBot.create(:datatable, name: 'ALREADY-DT', is_restricted: true)
-    PermissionRequest.create!(user:, datatable: pending_table)
+    PermissionRequest.create!(user:, datatable: pending_table, created_at: 3.weeks.ago)
     PermissionRequest.create!(user:, datatable: already_granted)
     Permission.create!(datatable: active_table, user:, granted_by: admin, expires_on: Date.current + 30)
     Permission.create!(datatable: already_granted, user:, granted_by: admin, expires_on: Date.current + 30)
@@ -116,6 +116,7 @@ RSpec.describe 'Managing users', type: :request do
     get edit_admin_user_path(user)
 
     assert_dom '.permission-request a', text: 'PENDING-DT'
+    assert_dom '.permission-request time', text: '21 days ago'
     assert_dom '.permission-request a', text: 'ALREADY-DT', count: 0
     assert_dom 'table.permissions a', text: 'ACTIVE-DT'
     assert_dom 'table.permissions a', text: 'ALREADY-DT'
