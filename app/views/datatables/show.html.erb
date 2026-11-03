@@ -87,7 +87,7 @@
         <td>Related Tables:</td>
         <td><ul>
           <% datatable.related_tables.each do |table| %>
-            <li><%=link_to raw(table.title) , datatable_path(table) %></li>
+            <li><%=link_to sanitized_title(table.title), datatable_path(table) %></li>
           <% end %>
         </ul></td>
       </tr>

@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-# A datatable's title and its study's name may carry simple formatting; anything that could run in the page
-# is removed.
+# A datatable's title, its study's name and the titles of its related tables may carry simple formatting;
+# anything that could run in the page is removed.
 RSpec.describe 'Datatable title on its page', type: :request do
   before { Website.create!(name: 'lter', url: 'lter.kbs.msu.edu') }
 
@@ -25,6 +25,17 @@ RSpec.describe 'Datatable title on its page', type: :request do
     heading = response.parsed_body.at('h1')
     expect(heading.inner_html).to include('Soil <sub>2</sub>', '<b>study</b>')
     expect(heading.css('script, [onclick]')).to be_empty
+  end
+
+  it 'sanitizes the titles of related tables, which stay links' do
+    datatable = FactoryBot.create(:datatable)
+    title = 'CO<sub>2</sub> <script>alert(1)</script><i onmouseover="x()">flux</i>'
+    related = FactoryBot.create(:datatable, dataset: datatable.dataset, study: datatable.study, title:)
+
+    get datatable_path(datatable)
+
+    link = response.parsed_body.at("a[href='#{datatable_path(related)}']")
+    expect(link.inner_html).to eq 'CO<sub>2</sub> alert(1)<i>flux</i>'
   end
 
   it 'removes scripts, event handlers and links' do
