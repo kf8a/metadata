@@ -4,8 +4,11 @@
   <% datatable.visualizations.each do |visualization| %>
     <h2><%= visualization.title %></h2>
     <p><%= visualization.body %></p>
-    <div class = "<%=visualization.graph_type%>" id = "<%=visualization.id%>" data-ylabel="<%=visualization.y_axis_label%>">
-    </div>
+    <div class="qc-graph <%= visualization.graph_type %>" id="<%= visualization.id %>"
+         data-controller="qc-graph"
+         data-qc-graph-url-value="<%= visualization_path(visualization, format: :json) %>"
+         data-qc-graph-type-value="<%= visualization.graph_type %>"
+         data-qc-graph-y-label-value="<%= visualization.y_axis_label %>"></div>
   <% end %>
   <%= link_to 'More', datatable_path(datatable) %>
 </div>
