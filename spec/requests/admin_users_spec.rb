@@ -100,4 +100,40 @@ RSpec.describe 'Managing users', type: :request do
     expect(mails.size).to eq 2
     expect(mails.map { |mail| mail.body.to_s[/invitation_token=\S+/] }.uniq.size).to eq 2
   end
+
+  it 'shows pending requests and active grants on the edit page, not expired ones' do
+    user = FactoryBot.create(:user)
+    pending_table = FactoryBot.create(:datatable, name: 'PENDING-DT', is_restricted: true)
+    active_table = FactoryBot.create(:datatable, name: 'ACTIVE-DT', is_restricted: true)
+    expired_table = FactoryBot.create(:datatable, name: 'EXPIRED-DT', is_restricted: true)
+    already_granted = FactoryBot.create(:datatable, name: 'ALREADY-DT', is_restricted: true)
+    PermissionRequest.create!(user:, datatable: pending_table)
+    PermissionRequest.create!(user:, datatable: already_granted)
+    Permission.create!(datatable: active_table, user:, granted_by: admin, expires_on: Date.current + 30)
+    Permission.create!(datatable: already_granted, user:, granted_by: admin, expires_on: Date.current + 30)
+    Permission.create!(datatable: expired_table, user:, granted_by: admin, expires_on: Date.current - 1)
+
+    get edit_admin_user_path(user)
+
+    assert_dom '.permission-request a', text: 'PENDING-DT'
+    assert_dom '.permission-request a', text: 'ALREADY-DT', count: 0
+    assert_dom 'table.permissions a', text: 'ACTIVE-DT'
+    assert_dom 'table.permissions a', text: 'ALREADY-DT'
+    assert_dom 'table.permissions a', text: 'EXPIRED-DT', count: 0
+    assert_dom 'input.button-large[value=Save]'
+    assert_dom 'button.button-large.button-warning', text: 'Remove this user'
+  end
+
+  it 'grants a pending request from the edit page and returns there' do
+    user = FactoryBot.create(:user)
+    datatable = FactoryBot.create(:datatable, name: 'GRANT-ME', is_restricted: true)
+    PermissionRequest.create!(user:, datatable:)
+
+    post permissions_path, params: { datatable: datatable.id, email: user.email,
+                                     return_to: edit_admin_user_path(user) }
+
+    expect(response).to redirect_to(edit_admin_user_path(user))
+    expect(datatable.permitted?(user)).to be true
+    expect(PermissionRequest.where(user:, datatable:)).to be_empty
+  end
 end

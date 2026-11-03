@@ -33,7 +33,7 @@ class PermissionsController < ApplicationController
     @datatable.permission_requests.where(user:).delete_all
     send_grant_email(permission, user)
     notice = "#{user.email} may download #{@datatable.name} #{until_text(permission)}."
-    redirect_to permission_path(@datatable), status: :see_other, notice:
+    redirect_after_change(notice)
   rescue ActiveRecord::RecordInvalid => e
     refuse(e.record.errors.full_messages.to_sentence)
   end
@@ -41,16 +41,14 @@ class PermissionsController < ApplicationController
   def destroy
     permission = @datatable.permissions.find_by!(user_id: params.expect(:user))
     permission.destroy
-    redirect_to permission_path(@datatable), status: :see_other,
-                                             notice: "Permission revoked from #{permission.user.email}."
+    redirect_after_change("Permission revoked from #{permission.user.email}.")
   end
 
   # Removes a request without granting it
   def dismiss
     request = @datatable.permission_requests.find_by!(user_id: params.expect(:user))
     request.destroy
-    redirect_to permission_path(@datatable), status: :see_other,
-                                             notice: "Request from #{request.user.email} dismissed."
+    redirect_after_change("Request from #{request.user.email} dismissed.")
   end
 
   private
@@ -108,6 +106,11 @@ class PermissionsController < ApplicationController
 
   def until_text(permission)
     permission.expires_on ? "until #{permission.expires_on.to_fs(:long)}" : 'with no expiry'
+  end
+
+  # return_to must be a same-origin path (url_from); otherwise stay on the datatable page
+  def redirect_after_change(notice)
+    redirect_to url_from(params[:return_to]) || permission_path(@datatable), status: :see_other, notice:
   end
 
   def require_datatable

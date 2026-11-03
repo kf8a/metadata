@@ -141,6 +141,20 @@ RSpec.describe 'Managing download permissions', type: :request do
       expect(PermissionRequest.where(user: reader)).to be_empty
       expect(datatable.permitted?(reader)).to be false
     end
+
+    it 'returns to return_to when dismissing or revoking, and ignores an off-site one' do
+      PermissionRequest.create!(user: reader, datatable:)
+      Permission.create!(datatable:, user: FactoryBot.create(:user, email: 'other@example.org'),
+                         granted_by: admin)
+      back = edit_admin_user_path(reader)
+
+      delete dismiss_permission_path(datatable), params: { user: reader.id, return_to: back }
+      expect(response).to redirect_to(back)
+
+      delete permission_path(datatable),
+             params: { user: User.find_by!(email: 'other@example.org').id, return_to: 'https://evil.example/' }
+      expect(response).to redirect_to(permission_path(datatable))
+    end
   end
 
   describe 'what the reader can do' do

@@ -19,7 +19,9 @@ module Admin
       @user = User.new
     end
 
-    def edit; end
+    def edit
+      load_grants
+    end
 
     def create
       @user = User.new(user_params)
@@ -35,9 +37,13 @@ module Admin
       @user.assign_attributes(user_params)
       if @user == current_user && !@user.admin?
         @user.errors.add(:role, "can't be taken from your own account")
+        load_grants
         return render :edit, status: :unprocessable_content
       end
-      return render :edit, status: :unprocessable_content unless @user.save
+      unless @user.save
+        load_grants
+        return render :edit, status: :unprocessable_content
+      end
 
       redirect_to admin_users_path, status: :see_other, notice: "Saved #{@user.email}."
     end
@@ -64,6 +70,14 @@ module Admin
 
     def find_user
       @user = User.find(params.expect(:id))
+    end
+
+    def load_grants
+      active = @user.permissions.active
+      granted_ids = active.pluck(:datatable_id)
+      @pending_requests = @user.permission_requests.includes(:datatable)
+                               .reject { |request| granted_ids.include?(request.datatable_id) }
+      @permissions = active.includes(:datatable, :granted_by).order(:expires_on)
     end
 
     def user_params

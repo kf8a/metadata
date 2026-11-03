@@ -14,6 +14,7 @@ class User < ApplicationRecord
   MEMBER_TIMEOUT = 4.hours
 
   has_many :permissions, dependent: :destroy
+  has_many :permission_requests, dependent: :destroy
   has_many :memberships, dependent: :destroy
   has_many :ownerships, dependent: :destroy
 

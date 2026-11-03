@@ -36,6 +36,28 @@ p {
   border-color: #f5c2c0;
 }
 
+// Admin user edit: larger primary actions; muted solid warning for remove
+.admin-user-edit {
+  .button-large {
+    box-sizing: border-box;
+    min-height: 2.75rem;
+    padding: 0.65rem 1.5rem;
+    font-size: 1.05rem;
+  }
+
+  .button-warning {
+    background-color: #a86b66;
+    color: #fff;
+    border: 1px solid #8f5752;
+
+    &:hover,
+    &:focus-visible {
+      background-color: #965f5a;
+      color: #fff;
+    }
+  }
+}
+
 // Sign in/out button after the main content of the LTER layout (layouts/_sign_in).
 // GLBRC pins the same partial to the top inside #glbrc, so only match when it sits directly in #wrap.
 #wrap > #sign-in-wrapper {

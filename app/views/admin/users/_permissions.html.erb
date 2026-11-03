@@ -1,0 +1,62 @@
+<% return_to = edit_admin_user_path(user) %>
+<% lifetime = Permission::DEFAULT_LIFETIME.in_days.to_i %>
+
+<h3>Pending requests</h3>
+<% if pending_requests.empty? %>
+  <p>No pending requests.</p>
+<% else %>
+  <% pending_requests.each do |request| %>
+    <div class='permission-request'>
+      Asked to download <%= link_to request.datatable.name, permission_path(request.datatable) %>.
+      <%= button_to "Grant for #{lifetime} days", permissions_path,
+                    params: { datatable: request.datatable_id, email: user.email, return_to: } %>
+      <%= button_to 'Dismiss', dismiss_permission_path(request.datatable), method: :delete,
+                    params: { user: user.id, return_to: },
+                    form: { data: { turbo_confirm: "Dismiss the request for #{request.datatable.name}?" } } %>
+    </div>
+  <% end %>
+<% end %>
+
+<h3>Active grants</h3>
+<% if permissions.empty? %>
+  <p>No active download permissions.</p>
+<% else %>
+  <table class='permissions'>
+    <tr>
+      <th>Datatable</th>
+      <th>Intended use</th>
+      <th>Granted by</th>
+      <th>First granted</th>
+      <th>Access until</th>
+      <th></th>
+    </tr>
+    <% permissions.each do |permission| %>
+      <tr>
+        <td><%= link_to permission.datatable.name, permission_path(permission.datatable) %></td>
+        <td><%= permission.intended_use %></td>
+        <td><%= permission.granted_by&.email %></td>
+        <td>
+          <% if permission.created_at %>
+            <time datetime='<%= permission.created_at.iso8601 %>' title='<%= permission.created_at.to_date.to_fs(:long) %>'>
+              <%= time_ago_in_words(permission.created_at) %> ago
+            </time>
+          <% end %>
+        </td>
+        <td>
+          <% if permission.expires_on.nil? %>
+            No expiry
+          <% else %>
+            <%= permission.expires_on.to_fs(:long) %>
+          <% end %>
+        </td>
+        <td>
+          <%= button_to "Extend #{lifetime} days from today", permissions_path,
+                        params: { datatable: permission.datatable_id, email: user.email, return_to: } %>
+          <%= button_to 'Revoke', permission_path(permission.datatable), method: :delete,
+                        params: { user: user.id, return_to: },
+                        form: { data: { turbo_confirm: "Revoke access to #{permission.datatable.name}?" } } %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

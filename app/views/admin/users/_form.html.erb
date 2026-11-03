@@ -29,5 +29,6 @@
       <p><%= box.check_box %> <%= box.label %></p>
     <% end %>
   </fieldset>
-  <%= form.submit user.new_record? ? 'Add user and send a link to set a password' : 'Save' %>
+  <%= form.submit user.new_record? ? 'Add user and send a link to set a password' : 'Save',
+                  class: 'button-large' %>
 <% end %>
