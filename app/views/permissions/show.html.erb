@@ -26,6 +26,7 @@
       <th>Account</th>
       <th>Intended use</th>
       <th>Granted by</th>
+      <th>First granted</th>
       <th>Access until</th>
       <th></th>
     </tr>
@@ -38,6 +39,13 @@
         </td>
         <td><%= permission.intended_use %></td>
         <td><%= permission.granted_by&.email %></td>
+        <td>
+          <% if permission.created_at %>
+            <time datetime='<%= permission.created_at.iso8601 %>' title='<%= permission.created_at.to_date.to_fs(:long) %>'>
+              <%= time_ago_in_words(permission.created_at) %> ago
+            </time>
+          <% end %>
+        </td>
         <td>
           <% if permission.expires_on.nil? %>
             No expiry

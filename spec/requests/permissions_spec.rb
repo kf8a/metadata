@@ -111,11 +111,13 @@ RSpec.describe 'Managing download permissions', type: :request do
 
     it 'shows requests and grants on the datatable page' do
       PermissionRequest.create!(user: FactoryBot.create(:user, email: 'asker@example.org'), datatable:)
-      Permission.create!(datatable:, user: reader, granted_by: admin, expires_on: Date.new(2030, 5, 1))
+      Permission.create!(datatable:, user: reader, granted_by: admin, expires_on: Date.new(2030, 5, 1),
+                         created_at: 3.months.ago)
 
       get permission_path(datatable)
 
-      expect(response.body).to include('asker@example.org has asked', 'reader@example.org', 'May 01, 2030')
+      expect(response.body).to include('asker@example.org has asked', 'reader@example.org', 'May 01, 2030',
+                                       '3 months ago')
     end
   end
 
