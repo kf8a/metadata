@@ -36,7 +36,7 @@ module Metadata
     # such as nanoid() used in column defaults), so it is dumped as SQL to db/structure.sql. Every schema
     # is dumped, not only those on the search path, so the extensions' own schemas come along.
     config.active_record.schema_format = :sql
-    config.active_record.dump_schemas = :all
+    config.active_record.dump_schemas = 'public'
   end
 end
 
