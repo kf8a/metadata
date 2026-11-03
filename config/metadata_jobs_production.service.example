@@ -1,0 +1,41 @@
+# systemd user unit for the background job process (Solid Queue, started by bin/jobs).
+# It runs next to metadata_puma_production, as the same kind of (user) service, and Capistrano
+# restarts it after every deploy (lib/capistrano/tasks/jobs.rake).
+#
+# Install it once on the server, as the deploy user:
+#   cp metadata_jobs_production.service.example ~/.config/systemd/user/metadata_jobs_production.service
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now metadata_jobs_production
+# (lingering is already on for Puma, so it keeps running after the deploy user logs out)
+#
+# Use `journalctl --user -u metadata_jobs_production -rn 100` or shared/log/jobs.log for output.
+#
+# Jobs are claimed from the database, so this can run on more than one server; recurring jobs run once.
+[Unit]
+Description=Solid Queue background jobs for metadata (production)
+
+After=syslog.target network.target
+
+[Service]
+Type=simple
+
+WorkingDirectory=/var/u/apps/metadata/current
+Environment=RAILS_ENV=production
+# Worker threads are set in config/queue.yml; JOB_CONCURRENCY sets the number of worker processes
+#Environment=JOB_CONCURRENCY=1
+ExecStart=/usr/bin/mise exec -- bundle exec bin/jobs
+
+# if we crash, restart
+RestartSec=5
+Restart=on-failure
+
+# Solid Queue finishes the jobs it is running on SIGTERM; give them time before systemd kills it
+KillSignal=SIGTERM
+TimeoutStopSec=30
+
+StandardOutput=append:/var/u/apps/metadata/shared/log/jobs.log
+StandardError=append:/var/u/apps/metadata/shared/log/jobs.log
+
+SyslogIdentifier=metadata_jobs_production
+[Install]
+WantedBy=default.target

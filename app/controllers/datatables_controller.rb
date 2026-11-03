@@ -57,15 +57,7 @@ class DatatablesController < ApplicationController
       respond_to do |format|
         format.html
         format.fasta
-        format.csv do
-          if current_user.try(:role) == 'admin'
-            render_admin_csv
-          elsif @datatable.csv_file.attached?
-            redirect_to url_for(@datatable.csv_file)
-          else
-            render_csv
-          end
-        end
+        format.csv { send_csv }
       end
     else
       redirect_to datatables_url
@@ -171,7 +163,7 @@ class DatatablesController < ApplicationController
     return unless params[:id]
 
     # TODO: this next line might not be needed
-    datatable = Datatable.find(params[:id])
+    datatable = Datatable.find(params.expect(:id))
 
     return unless datatable.study
 
@@ -220,7 +212,7 @@ class DatatablesController < ApplicationController
   end
 
   def datatable
-    @datatable ||= params[:id] ? Datatable.find(params[:id]) : Datatable.new(datatable_params)
+    @datatable ||= params[:id] ? Datatable.find(params.expect(:id)) : Datatable.new(datatable_params)
   end
 
   def csv_ok
@@ -235,48 +227,64 @@ class DatatablesController < ApplicationController
   end
 
   def datatable_params
-    params.require(:datatable).permit(
-      :name,
-      :title,
-      :comments,
-      :dataset_id,
-      :data_url,
-      :is_restricted,
-      :is_secondary,
-      :description,
-      :begin_date,
-      :end_date,
-      :on_web,
-      :keyword_list,
-      :theme_id,
-      :weight,
-      :study_id,
-      :deprecation_notice,
-      :update_frequency_days,
-      { protocol_ids: [] },
-      :is_secondary,
-      { core_area_ids: [] },
-      {
-        variates_attributes: [
-          %i[
-            name
-            weight
-            description
-            unit_id
-            measurement_scale
-            data_type
-            max_valid
-            min_valid
-            date_format
-            precision
-            missing_value_indicator
-            _destroy
-            id
+    params.expect(
+      datatable: [
+        :name,
+        :title,
+        :comments,
+        :dataset_id,
+        :data_url,
+        :is_restricted,
+        :is_secondary,
+        :description,
+        :begin_date,
+        :end_date,
+        :on_web,
+        :keyword_list,
+        :theme_id,
+        :weight,
+        :study_id,
+        :deprecation_notice,
+        :update_frequency_days,
+        { protocol_ids: [] },
+        :is_secondary,
+        { core_area_ids: [] },
+        {
+          variates_attributes: [
+            %i[
+              name
+              weight
+              description
+              unit_id
+              measurement_scale
+              data_type
+              max_valid
+              min_valid
+              date_format
+              precision
+              missing_value_indicator
+              _destroy
+              id
+            ]
           ]
-        ]
-      },
-      data_contributions_attributes: [%i[person_id role_id _destroy id]]
+        },
+        data_contributions_attributes: [%i[person_id role_id _destroy id]]
+      ]
     )
+  end
+
+  # The CSV is the result of the datatable's stored query, so only an SQL datatable has one. For data
+  # hosted elsewhere or embargoed, the page links to it (or says it is embargoed) and there is no query to run.
+  def send_csv
+    return head(:not_found) unless @datatable.is_sql
+
+    if current_user.try(:role) == 'admin'
+      render_admin_csv
+    elsif @datatable.csv_file.attached?
+      redirect_to protected_file_url(@datatable.csv_file)
+    else
+      render_csv
+    end
   end
 
   # TODO: grab approved sql from model

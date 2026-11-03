@@ -27,36 +27,35 @@
             <div>
               <% if citation.pdf.attached? && citation.open_access %>
                 <span class='non-member'>
-                  <%= link_to 'abstract', citation_path(citation),
-                  aria: { label: "view abstract from #{citation.title} by #{citation.author_and_year()}" } %>
+                  <%= link_to 'abstract', citation_path(citation), aria: { label: citation_link_label(citation, 'Abstract') } %>
                   &nbsp;&nbsp;
-                  <%= link_to 'pdf', publication_url(citation), aria: { label: "view pdf for #{citation.title} by #{citation.author_and_year()}" } %>
+                  <%= link_to 'pdf', publication_url(citation), aria: { label: citation_link_label(citation, 'PDF') } %>
                 </span>
                 <span class='member-only'>
-                  <%= link_to 'abstract', citation_path(citation), aria: { label: "view abstract from #{citation.title} by #{citation.author_and_year()}" } %>
+                  <%= link_to 'abstract', citation_path(citation), aria: { label: citation_link_label(citation, 'Abstract') } %>
                   &nbsp;&nbsp;
-                  <%= link_to 'pdf', publication_url(citation), aria: { label: "view pdf for #{citation.title} by #{citation.author_and_year()}" } %>
+                  <%= link_to 'pdf', publication_url(citation), aria: { label: citation_link_label(citation, 'PDF') } %>
                 </span>
               <% elsif citation.pdf.attached? %>
                 <span class='non-member'>
-                  <%= link_to 'abstract + pdf', citation_path(citation), aria: { label: "view abstract and pdf for #{citation.title} by #{citation.author_and_year()}" } %>
+                  <%= link_to 'abstract + pdf', citation_path(citation), aria: { label: citation_link_label(citation, 'Abstract and PDF') } %>
                 </span>
                 <span class='member-only'>
-                  <%= link_to 'abstract', citation_path(citation), aria: { label: "view abstract from #{citation.title} by #{citation.author_and_year()}" } %>
+                  <%= link_to 'abstract', citation_path(citation), aria: { label: citation_link_label(citation, 'Abstract') } %>
                   &nbsp;&nbsp;
-                  <%= link_to 'pdf', publication_url(citation), aria: { label: "view pdf for #{citation.title} from #{citation.author_and_year()}}" } %>
+                  <%= link_to 'pdf', publication_url(citation), aria: { label: citation_link_label(citation, 'PDF') } %>
                 </span>
               <% else %>
                 <span class='non-member'>
-                  <%= link_to 'abstract', citation_path(citation), aria: { label: "view abstract from #{citation.title} by #{citation.author_and_year()}" } %>
+                  <%= link_to 'abstract', citation_path(citation), aria: { label: citation_link_label(citation, 'Abstract') } %>
                 </span>
                 <span class='member-only'>
-                  <%= link_to 'abstract', citation_path(citation), aria: { label: "view abstract from #{citation.title} by #{citation.author_and_year()}" } %>
+                  <%= link_to 'abstract', citation_path(citation), aria: { label: citation_link_label(citation, 'Abstract') } %>
                 </span>
               <% end %>
               <span>&nbsp;</span>
               <% if citation.data_url.present? %>
-                <span>&nbsp;<a href="<%= normalize_doi(citation.data_url) %>" aria-label="view data for <%= citation.title %> by #{citation.author_and_year()}">data</a>&nbsp;</span>
+                <span>&nbsp;<%= link_to 'data', normalize_doi(citation.data_url), aria: { label: citation_link_label(citation, 'Data') } %>&nbsp;</span>
               <% else %>
                 <span>&nbsp;</span>
               <% end %>

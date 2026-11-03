@@ -6,8 +6,10 @@
       <%= link_to 'View as a Collection',
                 collection_path(datatable.collection) if datatable.collection %>
       The <%=link_to 'standard data use policy applies to the this dataset' , datatable.dataset.sponsor.terms_of_use_path%>
-      <%= link_to 'Permissions Management',
-                permission_path(datatable) if current_user.try(:owns?, datatable)%>
+      <% if (expires_on = datatable.permission_for(current_user)&.expires_on) %>
+        <p>Your permission to download this datatable ends on <%= expires_on.to_fs(:long) %>.</p>
+      <% end %>
+      <%= link_to 'Permissions Management', permission_path(datatable) if admin? %>
       <%= link_to 'Owners Management',
                 ownership_path(datatable) if admin? %>
     <% else %>

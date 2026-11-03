@@ -6,6 +6,7 @@ import ObfuscatedEmailController from 'controllers/obfuscated_email_controller'
 import PermissionRequestController from 'controllers/permission_request_controller'
 import QcGraphController from 'controllers/qc_graph_controller'
 import ScoreCardController from 'controllers/score_card_controller'
+import TreeController from 'controllers/tree_controller'
 
 application.register('autocomplete', AutocompleteController)
 application.register('nested-fields', NestedFieldsController)
@@ -13,5 +14,6 @@ application.register('obfuscated-email', ObfuscatedEmailController)
 application.register('permission-request', PermissionRequestController)
 application.register('qc-graph', QcGraphController)
 application.register('score-card', ScoreCardController)
+application.register('tree', TreeController)
 
 export { application }

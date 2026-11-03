@@ -1,0 +1,21 @@
+Hello <%= @user.first_name.presence || @user.email %>,
+
+<%= @granted_by&.name || @granted_by&.email || 'An administrator' %> has created an account for you to download
+<%= @datatable.name %>, <%= @datatable.title %>, <%= @expires_on ? "until #{@expires_on}" : 'with no end date' %>:
+
+<%= @link %>
+
+To start, set your password (this link works for <%= @link_valid_days %> days):
+
+<%= @accept_link %>
+<% if @glbrc -%>
+
+If you work at GLBRC, you can skip the password and sign in with your GLBRC account instead.
+<% end -%>
+<% if @expires_on -%>
+
+We will remind you a week before your access ends.
+<% end -%>
+<% if @granted_by -%>
+If you need it for longer, or the link has stopped working, reply to this email.
+<% end -%>

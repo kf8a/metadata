@@ -32,5 +32,5 @@
 
 	
 <%= link_to 'Edit', edit_person_path(person) if signed_in? %> |
-<%= link_to 'Delete', person_path(person), :method => 'post', :confirm => 'Are you sure?' if signed_in? %>
+<%= link_to 'Delete', person_path(person), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } if signed_in? %>
 <%= link_to 'Back', people_path %>

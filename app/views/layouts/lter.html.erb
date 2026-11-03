@@ -22,7 +22,6 @@
 
       </head>
       <body class="page page-template page-template-page_gallery-php header-image full-width-content<%= ' signed-in' if user_signed_in? %>">
-        <a href="#content" class="skip-to-main-content-link">Skip to main content</a>
         <div id="wrap">
           <%= render "shared/header" %>
           <%= render "shared/nav" %>
@@ -38,9 +37,9 @@
               </div>
             </div><!-- end .wrap -->
           </div><!-- end #inner -->
+          <%= render 'layouts/sign_in' %>
         </div><!-- end #wrap -->
         <%= render "shared/footer" %>
-        <%= render 'layouts/sign_in' %>
         <script async type='text/javascript' src='/wp-content/themes/genesis/lib/js/menu/superfish.js?ver=1.4.8'></script>
         <script async type='text/javascript' src='/wp-content/themes/genesis/lib/js/menu/superfish.args.js?ver=1.8.1'></script>
         <!-- Google Analytics -->

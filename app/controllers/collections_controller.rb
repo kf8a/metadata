@@ -10,7 +10,7 @@ class CollectionsController < ApplicationController
   end
 
   def show
-    @collection = Collection.find(params[:id])
+    @collection = Collection.find(params.expect(:id))
     @customizer = Customizer.new(params, @collection.values)
   end
 end

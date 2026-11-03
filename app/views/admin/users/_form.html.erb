@@ -1,0 +1,33 @@
+<%= form_with model: [:admin, user] do |form| %>
+  <% if user.errors.any? %>
+    <div class='alert' role='alert'><%= user.errors.full_messages.to_sentence %></div>
+  <% end %>
+  <p>
+    <%= form.label :email %>
+    <%= form.email_field :email, required: true %>
+  </p>
+  <p>
+    <%= form.label :first_name, 'First name' %>
+    <%= form.text_field :first_name, required: user.new_record? %>
+  </p>
+  <p>
+    <%= form.label :last_name, 'Last name' %>
+    <%= form.text_field :last_name, required: user.new_record? %>
+  </p>
+  <p>
+    <%= form.label :institution %>
+    <%= form.text_field :institution, required: user.new_record? %>
+  </p>
+  <p>
+    <%= form.label :role %>
+    <%= form.select :role, User::ROLES, include_blank: '(none)' %>
+  </p>
+  <fieldset>
+    <legend>Member of</legend>
+    <p>Members can download their sponsor's members-only data.</p>
+    <%= form.collection_check_boxes :sponsor_ids, Sponsor.order(:name), :id, :name do |box| %>
+      <p><%= box.check_box %> <%= box.label %></p>
+    <% end %>
+  </fieldset>
+  <%= form.submit user.new_record? ? 'Add user and send a link to set a password' : 'Save' %>
+<% end %>

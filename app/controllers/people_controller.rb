@@ -104,30 +104,36 @@ class PeopleController < ApplicationController
   end
 
   def person
-    Person.find(params[:id])
+    Person.find(params.expect(:id))
   end
 
   def person_params
-    params.require(:person).permit(
-      :sur_name,
-      :given_name,
-      :middle_name,
-      :title,
-      :organization,
-      :sub_organization,
-      :street_address,
-      :city,
-      :locale,
-      :country,
-      :postal_code,
-      :phone,
-      :fax,
-      :email,
-      :url,
-      :deceased,
-      :friendly_name,
-      :orcid_id,
-      affiliations_attributes: %i[role_id title seniority research_interest supervisor started_on left_on _destroy id]
+    params.expect(
+      person: [
+        :sur_name,
+        :given_name,
+        :middle_name,
+        :title,
+        :organization,
+        :sub_organization,
+        :street_address,
+        :city,
+        :locale,
+        :country,
+        :postal_code,
+        :phone,
+        :fax,
+        :email,
+        :url,
+        :deceased,
+        :friendly_name,
+        :orcid_id,
+        {
+          affiliations_attributes: [
+            %i[role_id title seniority research_interest supervisor started_on left_on _destroy id]
+          ]
+        }
+      ]
     )
   end
 

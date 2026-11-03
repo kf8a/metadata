@@ -72,6 +72,40 @@ describe DatatablesController, type: :controller  do
     end
   end
 
+  describe 'GET show as csv for a datatable that is not SQL' do
+    let(:datatable) do
+      website = Website.find_by(name: 'lter')
+      website.update!(url: 'lter.kbs.msu.edu')
+      # The stored text is not a query (a name, or blank), as for data hosted elsewhere
+      FactoryBot.create(:public_datatable, dataset: FactoryBot.create(:dataset, website: website),
+                                           is_sql: false, object: 'KBS001-001', data_url: 'https://example.org/data')
+    end
+
+    it 'is not found for a visitor, without running the stored text as a query' do
+      sign_out @user
+      expect(Datatable).not_to receive(:stream_query_rows)
+
+      get :show, params: { id: datatable.id }, format: :csv
+
+      expect(response).to have_http_status(:not_found)
+      expect(response.body).to be_empty
+    end
+
+    it 'is not found for an admin either' do
+      expect(Datatable).not_to receive(:stream_query_rows)
+
+      get :show, params: { id: datatable.id }, format: :csv
+
+      expect(response).to have_http_status(:not_found)
+    end
+
+    it 'still shows the page, which links to the data elsewhere' do
+      get :show, params: { id: datatable.id }
+
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
   describe 'responding to publish request' do
     it 'should publish' do
       website = Website.find_by(name: 'lter')

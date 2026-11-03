@@ -13,8 +13,9 @@
     <%= render 'search_form' %>
     <% if @area %>
 
-    <div class='quickTree-container'>
-      <ul class='quickTree'>
+    <div class='tree-container' data-controller='tree'>
+      <%= render 'expand_all' %>
+      <ul class='tree' data-tree-target='list'>
         <% @studies.each do |study| %>
           <% next unless study.include_datatables?(@datatables)%>
 
@@ -26,8 +27,9 @@
   <% else %>
 
     <% cache([@studies, @website]) do %>
-      <div class='quickTree-container'>
-      <ul class='quickTree'>
+      <div class='tree-container' data-controller='tree'>
+      <%= render 'expand_all' %>
+      <ul class='tree' data-tree-target='list'>
         <% @studies.each do |study| %>
           <% next unless study.include_datatables?(@datatables)%>
 

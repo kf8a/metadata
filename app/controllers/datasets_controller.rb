@@ -51,7 +51,7 @@ class DatasetsController < ApplicationController
   end
 
   def knb
-    _scope, identifier = params[:id].split('.')
+    _scope, identifier = params.expect(:id).split('.')
     dataset = Dataset.where(metacat_id: identifier).first
     dataset ||= Dataset.where(id: identifer).first
     redirect_to dataset
@@ -168,27 +168,29 @@ class DatasetsController < ApplicationController
   end
 
   def dataset
-    Dataset.find(params[:id])
+    Dataset.find(params.expect(:id))
   end
 
   def dataset_params
-    params.require(:dataset).permit(
-      :dataset,
-      :title,
-      :abstract,
-      :status,
-      :initiated,
-      :completed,
-      # :released,
-      :on_web,
-      :core_dataset,
-      # :project_id,
-      # :metacat_id,
-      :sponsor_id,
-      :website_id,
-      :keyword_list,
-      files: []
-      # affiliations_attributes: [], dataset_files_attributes: %i[name data _destroy id]
+    params.expect(
+      dataset: [
+        :dataset,
+        :title,
+        :abstract,
+        :status,
+        :initiated,
+        :completed,
+        # :released,
+        :on_web,
+        :core_dataset,
+        # :project_id,
+        # :metacat_id,
+        :sponsor_id,
+        :website_id,
+        :keyword_list,
+        { files: [] }
+        # affiliations_attributes: [], dataset_files_attributes: %i[name data _destroy id]
+      ]
     )
   end
 

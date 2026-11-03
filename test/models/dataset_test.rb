@@ -105,16 +105,16 @@ class DatasetTest < ActiveSupport::TestCase
     setup do
       @dataset = FactoryBot.create(:dataset,
                                    datatables: [FactoryBot.create(:datatable, object: 'select 1'),
-                                                FactoryBot.create(:datatable, begin_date: Date.today,
-                                                                              end_date: Date.today),
+                                                FactoryBot.create(:datatable, begin_date: Date.current,
+                                                                              end_date: Date.current),
                                                 FactoryBot.create(:datatable, begin_date: '2000-1-1',
-                                                                              end_date: Date.today)])
+                                                                              end_date: Date.current)])
     end
 
     should 'update temporal extent to today' do
       @dataset.update_temporal_extent
       assert_equal Date.new(2000, 1, 1), @dataset.initiated
-      assert_equal Date.today, @dataset.data_end_date
+      assert_equal Date.current, @dataset.data_end_date
     end
   end
 
@@ -122,22 +122,22 @@ class DatasetTest < ActiveSupport::TestCase
     setup do
       @dataset = FactoryBot.create(:dataset,
                                    datatables: [
-                                     FactoryBot.create(:datatable, begin_date: Date.today, end_date: Date.today),
-                                     FactoryBot.create(:datatable, begin_date: Date.today - 1.year,
-                                                                   end_date: Date.today - 1.month)
+                                     FactoryBot.create(:datatable, begin_date: Date.current, end_date: Date.current),
+                                     FactoryBot.create(:datatable, begin_date: Date.current - 1.year,
+                                                                   end_date: Date.current - 1.month)
                                    ])
     end
 
     should 'be today to a year ago' do
       dates = @dataset.temporal_extent
-      assert_equal Date.today - 1.year, dates[:begin_date]
-      assert_equal Date.today, dates[:end_date]
+      assert_equal Date.current - 1.year, dates[:begin_date]
+      assert_equal Date.current, dates[:end_date]
     end
   end
 
   context 'eml generatation' do
     setup do
-      @dataset = FactoryBot.create(:dataset, initiated: Date.today, completed: Date.today)
+      @dataset = FactoryBot.create(:dataset, initiated: Date.current, completed: Date.current)
       @datatable = FactoryBot.create(:datatable)
       @dataset_with_datatable = @datatable.dataset = @dataset
       assert @datatable.valid_for_eml?
@@ -170,8 +170,8 @@ class DatasetTest < ActiveSupport::TestCase
     end
 
     should 'have a temporal coverage element within coverage' do
-      @dataset.initiated = Date.today - 1.year
-      @dataset.data_end_date = Date.today
+      @dataset.initiated = Date.current - 1.year
+      @dataset.data_end_date = Date.current
       eml_doc = Nokogiri::XML(@dataset.to_eml)
       assert_equal 1, eml_doc.css('coverage temporalCoverage').count
     end
@@ -251,18 +251,18 @@ class DatasetTest < ActiveSupport::TestCase
       setup do
         FactoryBot.create(:datatable, dataset: @dataset,
                                       object: 'select now() as sample_date',
-                                      begin_date: (Date.today - 7), end_date: (Date.today - 4))
+                                      begin_date: (Date.current - 7), end_date: (Date.current - 4))
         FactoryBot.create(:datatable, dataset: @dataset,
                                       object: "select now() - interval '1 year' as sample_date",
-                                      begin_date: (Date.today - 365), end_date: (Date.today - 364))
+                                      begin_date: (Date.current - 365), end_date: (Date.current - 364))
       end
 
       should "return true for dates which include a datatable" do
-        assert @dataset.within_interval?(Date.today - 10, Date.today)
+        assert @dataset.within_interval?(Date.current - 10, Date.current)
       end
 
       should "return false for dates which do not include a datatable" do
-        assert_not @dataset.within_interval?(Date.today - 500, Date.today - 400)
+        assert_not @dataset.within_interval?(Date.current - 500, Date.current - 400)
       end
     end
   end

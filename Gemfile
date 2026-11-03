@@ -2,6 +2,9 @@
 
 source 'https://rubygems.org'
 
+# Production runs Ruby 3.4 and 4.0
+ruby '>= 3.4'
+
 gem 'rails', '~>8.0'
 
 gem 'json'
@@ -15,6 +18,7 @@ gem 'bootsnap', require: false
 
 gem 'acts-as-taggable-on'
 gem 'devise'
+gem 'devise_invitable', '~> 3.0' # admins create accounts for new readers; see PermissionsController
 gem 'formtastic'
 gem 'nokogiri'
 
@@ -68,6 +72,9 @@ gem 'rake', '>= 12.3.3'
 gem 'sitemap_generator'
 
 gem 'puma'
+
+gem 'solid_queue' # Active Job backend and recurring jobs, run by bin/jobs
+
 gem 'rexml'
 
 group :production, :staging do

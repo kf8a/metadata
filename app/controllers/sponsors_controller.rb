@@ -7,6 +7,6 @@ class SponsorsController < ApplicationController
   end
 
   def show
-    @sponsor = Sponsor.find(params[:id])
+    @sponsor = Sponsor.find(params.expect(:id))
   end
 end

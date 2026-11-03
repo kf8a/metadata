@@ -18,7 +18,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'do-not-reply@oshtemo.kbs.msu.edu'
+  config.mailer_sender = 'do-not-reply@kalkaska.kbs.msu.edu'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -81,7 +81,7 @@ Devise.setup do |config|
   # It will change confirmation, password recovery and other workflows
   # to behave the same regardless if the e-mail provided was right or wrong.
   # Does not affect registerable.
-  # config.paranoid = true
+  config.paranoid = true
 
   # By default Devise will store the user in session. You can skip storage for
   # particular strategies by setting this option.
@@ -152,7 +152,9 @@ Devise.setup do |config|
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
-  # config.remember_for = 2.weeks
+  # "Remember me" signs the user back in after an inactivity timeout (see :timeoutable below),
+  # so this is the longest a signed-in browser can stay signed in. It is not extended by use.
+  config.remember_for = 1.week
 
   # Invalidates all the remember me tokens when the user signs out.
   config.expire_all_remember_me_on_sign_out = true
@@ -176,7 +178,9 @@ Devise.setup do |config|
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
   # time the user will be asked for credentials again. Default is 30 minutes.
-  config.timeout_in = 3.days
+  # This is the longest timeout (admins); User#timeout_in shortens it for everyone else.
+  # Sessions idle longer than this (plus a day) are removed daily by SessionsTrimJob.
+  config.timeout_in = 2.days
 
   # ==> Configuration for :lockable
   # Defines which strategy will be used to lock an account.
@@ -304,4 +308,9 @@ Devise.setup do |config|
   # OAuth configuration
   config.omniauth :glbrc, Rails.application.credentials.dig(:glbrc, :client_id),
                   Rails.application.credentials.dig(:glbrc, :client_secret)
+
+  # ==> Configuration for :invitable (devise_invitable)
+  # Admins create accounts for new readers from the grant form (PermissionsController); the person sets
+  # a password from the emailed link, which works for this long after it is sent.
+  config.invite_for = 14.days
 end

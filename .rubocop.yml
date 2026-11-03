@@ -9,8 +9,8 @@ AllCops:
     - 'node_modules/**/*'
     - 'tmp/**/*'
     - 'vendor/**/*'
-  # Rails 8.1 requires Ruby 3.2 or newer
-  TargetRubyVersion: 3.2
+  # The oldest Ruby in production (see the ruby line in the Gemfile)
+  TargetRubyVersion: 3.4
   NewCops: enable
 
 Layout/LineLength:

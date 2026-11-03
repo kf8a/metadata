@@ -68,7 +68,7 @@ class MeetingsController < ApplicationController
     @crumbs = []
     return unless params[:id]
 
-    meeting = Meeting.find(params[:id])
+    meeting = Meeting.find(params.expect(:id))
     venue = meeting.venue_type
 
     crumb.url = "/meetings/?location=#{venue.name}"
@@ -78,7 +78,7 @@ class MeetingsController < ApplicationController
   end
 
   def meeting
-    @meeting = Meeting.find(params[:id])
+    @meeting = Meeting.find(params.expect(:id))
   end
 
   def venues
@@ -86,6 +86,6 @@ class MeetingsController < ApplicationController
   end
 
   def meeting_params
-    params.require(:meeting).permit(:date, :title, :announcement, :venue_type_id, :date_to)
+    params.expect(meeting: %i[date title announcement venue_type_id date_to])
   end
 end

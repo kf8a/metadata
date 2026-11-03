@@ -6,6 +6,12 @@ module CitationsHelper
     download_citation_url(citation)
   end
 
+  # Names a citation's abstract, pdf or data link for screen readers: the link text alone
+  # ("abstract", "pdf") is the same for every citation on the page
+  def citation_link_label(citation, link)
+    "#{link}: #{strip_tags(citation.title.to_s).squish}, #{citation.author_and_year.to_s.squish.delete_suffix('.')}"
+  end
+
   def normalize_doi(doi)
     if doi.match?(%r{\Ahttps?://})
       doi

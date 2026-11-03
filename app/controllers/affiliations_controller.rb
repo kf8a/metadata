@@ -46,10 +46,10 @@ class AffiliationsController < ApplicationController
   private
 
   def affiliation
-    Affiliation.find(params[:id])
+    Affiliation.find(params.expect(:id))
   end
 
   def affiliation_params
-    params.require(:affiliation).permit(:person_id, :role_id, :dataset_id, :seniority, :title)
+    params.expect(affiliation: %i[person_id role_id dataset_id seniority title])
   end
 end

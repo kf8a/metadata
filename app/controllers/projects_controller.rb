@@ -73,10 +73,10 @@ class ProjectsController < ApplicationController
   private
 
   def project
-    @project = Project.find(params[:id])
+    @project = Project.find(params.expect(:id))
   end
 
   def project_params
-    params.require(:project).permit(:title, :abstract)
+    params.expect(project: %i[title abstract])
   end
 end

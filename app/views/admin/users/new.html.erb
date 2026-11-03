@@ -1,0 +1,4 @@
+<h2>Add a user</h2>
+<p>The person gets an email with a link to set a password, which works for <%= Devise.invite_for.in_days.to_i %> days.</p>
+<%= render 'form', user: @user %>
+<p><%= link_to 'Back to users', admin_users_path %></p>

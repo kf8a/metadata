@@ -85,4 +85,20 @@ RSpec.describe User, '.from_omniauth' do
     expect(existing.uid).to eq 'uid-123'
     expect(existing.sponsors).to be_empty
   end
+
+  it 'signs in the existing account it links by email' do
+    existing = FactoryBot.create(:user, email: 'old.user@glbrc.org')
+
+    expect(User.from_omniauth(auth(email: 'old.user@glbrc.org'))).to eq existing
+  end
+
+  it 'signs in an account an admin created and marks it set up, without a password' do
+    invited = User.new(email: 'invited@glbrc.org', first_name: 'Ada', last_name: 'Reader', institution: 'GLBRC')
+    invited.invite!(FactoryBot.create(:admin_user)) { |user| user.skip_invitation = true }
+
+    user = User.from_omniauth(auth(email: 'invited@glbrc.org'))
+
+    expect(user).to eq invited
+    expect(user.reload.invitation_pending?).to be false
+  end
 end

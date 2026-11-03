@@ -8,7 +8,7 @@ class PermissionRequestsController < ApplicationController
 
   def create
     user = current_user
-    @datatable = Datatable.find(params[:datatable])
+    @datatable = Datatable.find(params.expect(:datatable))
     flash[:notice] = 'Invalid user' unless user
     permission_request = PermissionRequest.new(user: user, datatable: @datatable)
     permission_request.save

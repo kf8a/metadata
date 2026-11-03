@@ -19,7 +19,7 @@ class OwnershipsController < ApplicationController
   end
 
   def new
-    @datatable = Datatable.find(params[:datatable]) if params[:datatable]
+    @datatable = Datatable.find(params.expect(:datatable)) if params[:datatable]
     @datatables = Datatable.by_name unless @datatable
     @users = User.by_email
     @ownership = Ownership.new
@@ -29,7 +29,7 @@ class OwnershipsController < ApplicationController
 
   def create
     users = params[:users]
-    @datatable = Datatable.find(params[:datatable]) if params[:datatable]
+    @datatable = Datatable.find(params.expect(:datatable)) if params[:datatable]
     overwrite = @datatable.present?
     datatables = @datatable ? [@datatable.id] : params[:datatables]
     if users.present? && datatables.present?
@@ -45,8 +45,8 @@ class OwnershipsController < ApplicationController
   end
 
   def revoke
-    user = User.find(params[:user])
-    datatable = Datatable.find(params[:datatable])
+    user = User.find(params.expect(:user))
+    datatable = Datatable.find(params.expect(:datatable))
     ownerships = Ownership.where(user_id: user, datatable_id: datatable)
     ownerships.each(&:destroy)
 

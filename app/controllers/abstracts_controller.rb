@@ -13,13 +13,13 @@ class AbstractsController < ApplicationController
 
   # GET meeting_abstracts/1
   def show
-    @abstract = Abstract.find(params[:id])
+    @abstract = Abstract.find(params.expect(:id))
     respond_with @abstract
   end
 
   # GET meeting_abstracts/new?meeting=1
   def new
-    meeting = Meeting.find(params[:meeting_id])
+    meeting = Meeting.find(params.expect(:meeting_id))
     @abstract = Abstract.new
     @abstract.meeting_id = meeting.id
     @abstract_types = MeetingAbstractType.pluck(:name, :id)
@@ -28,7 +28,7 @@ class AbstractsController < ApplicationController
   # GET /meeting_abstract/1/edit
   def edit
     @abstract_types = MeetingAbstractType.all.collect { |type| [type.name, type.id] }
-    @abstract = Abstract.find(params[:id])
+    @abstract = Abstract.find(params.expect(:id))
   end
 
   def create
@@ -44,7 +44,7 @@ class AbstractsController < ApplicationController
 
   # PUT /meeting_abstracts/1
   def update
-    abstract = Abstract.find(params[:id])
+    abstract = Abstract.find(params.expect(:id))
     logger.info abstract
     logger.info abstract_params
     flash[:notice] = 'Meeting abstract was successfully updated.' if abstract.update(abstract_params)
@@ -52,7 +52,7 @@ class AbstractsController < ApplicationController
   end
 
   def destroy
-    abstract = Abstract.find(params[:id])
+    abstract = Abstract.find(params.expect(:id))
     abstract.destroy
     respond_to do |format|
       format.html { redirect_to meetings_url }
@@ -64,14 +64,16 @@ class AbstractsController < ApplicationController
   private
 
   def abstract_params
-    params.require(:abstract).permit(
-      :title,
-      :authors,
-      :abstract,
-      :meeting_abstract_type_id,
-      :author_affiliations,
-      :meeting_id,
-      :pdf
+    params.expect(
+      abstract: %i[
+        title
+        authors
+        abstract
+        meeting_abstract_type_id
+        author_affiliations
+        meeting_id
+        pdf
+      ]
     )
   end
 

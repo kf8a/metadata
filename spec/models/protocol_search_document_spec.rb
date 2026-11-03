@@ -4,7 +4,6 @@ require 'rails_helper'
 
 RSpec.describe Protocol, '#search_document' do
   before do
-    Searchable # ensure SiteSearchSyncJob is loaded
     allow(SiteSearchSyncJob).to receive(:perform_later)
     Rails.application.routes.default_url_options[:host] ||= 'example.com'
     @lter = Website.find_or_create_by!(name: 'lter')

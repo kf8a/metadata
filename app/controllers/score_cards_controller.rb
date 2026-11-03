@@ -19,7 +19,7 @@ class ScoreCardsController < ApplicationController
   end
 
   def show
-    @datatable = Datatable.find(params[:id])
+    @datatable = Datatable.find(params.expect(:id))
   end
 
   private

@@ -23,6 +23,14 @@ RSpec.describe 'Pages without the legacy jQuery plugins', type: :request do
     expect(page.at('datalist#keyword-suggestions')).to be_present
   end
 
+  it 'renders the data catalog tree for the Stimulus controller' do
+    get datatables_path
+
+    tree = page.at('[data-controller="tree"]')
+    expect(tree.at('ul.tree[data-tree-target="list"]')).to be_present
+    expect(tree.at('a[data-action="tree#toggleAll"][data-tree-target="toggleAll"]')).to be_present
+  end
+
   it 'marks the body for signed-in users only, outside any cached fragment' do
     get datatables_path
     expect(page.at('body')['class'].to_s.split).not_to include('signed-in')

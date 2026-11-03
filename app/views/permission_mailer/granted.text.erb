@@ -1,0 +1,14 @@
+Hello,
+
+You can now download <%= @datatable.name %>, <%= @datatable.title %>,
+<%= @expires_on ? "until #{@expires_on}" : 'with no end date' %>:
+
+<%= @link %>
+
+Sign in as <%= @user.email %> to download it.
+<% if @expires_on -%>
+We will remind you a week before your access ends.
+<% end -%>
+<% if @granted_by -%>
+If you need it for longer, reply to this email.
+<% end -%>

@@ -66,6 +66,6 @@ class VariatesController < ApplicationController
   private
 
   def variate
-    @variate = Variate.find(params[:id])
+    @variate = Variate.find(params.expect(:id))
   end
 end
