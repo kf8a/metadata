@@ -55,6 +55,7 @@ gem 'bibtex-ruby'
 
 gem "connection_pool", "<3.0"
 gem 'dalli'
+gem 'rack-attack' # per-IP request limits, in config/initializers/rack_attack.rb
 
 gem 'ostruct'
 
