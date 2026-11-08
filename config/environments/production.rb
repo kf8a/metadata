@@ -55,7 +55,9 @@ Rails.application.configure do
   config.log_tags = [:request_id]
 
   # Use a different cache store in production.
-  config.cache_store = :mem_cache_store
+  # The memcached instance is shared with other apps, so every key (page fragments and the rate-limit
+  # counters in config/initializers/rack_attack.rb) starts with the app's name
+  config.cache_store = :mem_cache_store, { namespace: 'metadata' }
 
   # Jobs run in the bin/jobs process (Solid Queue; tables are in the main database)
   config.active_job.queue_adapter = :solid_queue
