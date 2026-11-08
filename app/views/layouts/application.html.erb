@@ -11,7 +11,7 @@
   <%= csrf_meta_tag unless response.cache_control[:public] %>
     <%= javascript_importmap_tags %>
 </head>
-<body class="<%= 'signed-in' if user_signed_in? %>">
+<body>
   <a href="#content" class="skip-to-main-content-link">Skip to main content</a>
   <%= yield :content %>
 

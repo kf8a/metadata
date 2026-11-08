@@ -1,72 +1,55 @@
-  <li id=<%= citation.id %> class='citation'>
-    <% if year < 0 %>
-      <% if citation.pub_year.to_i != year  %>
-        <% if @study %>
-          <div class='pub-year'>Forthcoming <%= humanize_citation_type(@type)%> from the <%= @study.name %></div>
-        <% else %>
-          <div class='pub-year'>Forthcoming <%= humanize_citation_type(@type) %></div>
-        <% end %>
-      <% end %>
-    <% else %>
-      <% if citation.pub_year.to_i != year  %>
-        <div class='pub-year'><%= citation.pub_year %></div>
+<li id=<%= citation.id %> class='citation'>
+  <% if year < 0 %>
+    <% if citation.pub_year.to_i != year  %>
+      <% if @study %>
+        <div class='pub-year'>Forthcoming <%= humanize_citation_type(@type)%> from the <%= @study.name %></div>
+      <% else %>
+        <div class='pub-year'>Forthcoming <%= humanize_citation_type(@type) %></div>
       <% end %>
     <% end %>
+  <% else %>
+    <% if citation.pub_year.to_i != year  %>
+      <div class='pub-year'><%= citation.pub_year %></div>
+    <% end %>
+  <% end %>
+  <div>
     <% cache(citation, action: 'index') do %>
-      <div>
-       <p><%= citation.author_and_year(long: true) %><em> <%= citation.title %></em>.
-       <% if citation.series_title.present? %> <%= citation.series_title %>, <% end %>
-       <%= citation.publication %> <%= citation.volume_and_page %>
-       <%= citation.publisher %> <%= citation.city %>
+      <p><%= citation.author_and_year(long: true) %><em> <%= citation.title %></em>.
+      <% if citation.series_title.present? %> <%= citation.series_title %>, <% end %>
+      <%= citation.publication %> <%= citation.volume_and_page %>
+      <%= citation.publisher %> <%= citation.city %>
       <% if citation.doi.present? %>
         <span> <em>DOI: <%= link_to citation.doi, normalize_doi(citation.doi) %></em></span>
       <% end %>
-        </p>
-        <div>
-          <div class="citation-footer">
-            <div>
-              <% if citation.pdf.attached? && citation.open_access %>
-                <span class='non-member'>
-                  <%= link_to 'abstract', citation_path(citation), aria: { label: citation_link_label(citation, 'Abstract') } %>
-                  &nbsp;&nbsp;
-                  <%= link_to 'pdf', publication_url(citation), aria: { label: citation_link_label(citation, 'PDF') } %>
-                </span>
-                <span class='member-only'>
-                  <%= link_to 'abstract', citation_path(citation), aria: { label: citation_link_label(citation, 'Abstract') } %>
-                  &nbsp;&nbsp;
-                  <%= link_to 'pdf', publication_url(citation), aria: { label: citation_link_label(citation, 'PDF') } %>
-                </span>
-              <% elsif citation.pdf.attached? %>
-                <span class='non-member'>
-                  <%= link_to 'abstract + pdf', citation_path(citation), aria: { label: citation_link_label(citation, 'Abstract and PDF') } %>
-                </span>
-                <span class='member-only'>
-                  <%= link_to 'abstract', citation_path(citation), aria: { label: citation_link_label(citation, 'Abstract') } %>
-                  &nbsp;&nbsp;
-                  <%= link_to 'pdf', publication_url(citation), aria: { label: citation_link_label(citation, 'PDF') } %>
-                </span>
-              <% else %>
-                <span class='non-member'>
-                  <%= link_to 'abstract', citation_path(citation), aria: { label: citation_link_label(citation, 'Abstract') } %>
-                </span>
-                <span class='member-only'>
-                  <%= link_to 'abstract', citation_path(citation), aria: { label: citation_link_label(citation, 'Abstract') } %>
-                </span>
-              <% end %>
-              <span>&nbsp;</span>
-              <% if citation.data_url.present? %>
-                <span>&nbsp;<%= link_to 'data', normalize_doi(citation.data_url), aria: { label: citation_link_label(citation, 'Data') } %>&nbsp;</span>
-              <% else %>
-                <span>&nbsp;</span>
-              <% end %>
-            </div>
-            <% if citation.doi.present? %>
-                <span class='doi-reference'><%=normalize_doi(citation.doi)%></span>
-              <% else %>
-              <span class='doi-reference'><%= "https://lter.kbs.msu.edu/pub/#{citation.id}" %></span>
-            <% end %>
-          </div>
-        </div>
-      </div>
+      </p>
     <% end %>
-  </li>
+    <div>
+      <div class="citation-footer">
+        <div>
+          <% cache([citation, user_signed_in? ? :member : :guest], action: 'index-links') do %>
+            <% if citation.pdf.attached? && (citation.open_access || user_signed_in?) %>
+              <%= link_to 'abstract', citation_path(citation), aria: { label: citation_link_label(citation, 'Abstract') } %>
+              &nbsp;&nbsp;
+              <%= link_to 'pdf', publication_url(citation), aria: { label: citation_link_label(citation, 'PDF') } %>
+            <% elsif citation.pdf.attached? %>
+              <%= link_to 'abstract + pdf', citation_path(citation), aria: { label: citation_link_label(citation, 'Abstract and PDF') } %>
+            <% else %>
+              <%= link_to 'abstract', citation_path(citation), aria: { label: citation_link_label(citation, 'Abstract') } %>
+            <% end %>
+          <% end %>
+          <span>&nbsp;</span>
+          <% if citation.data_url.present? %>
+            <span>&nbsp;<%= link_to 'data', normalize_doi(citation.data_url), aria: { label: citation_link_label(citation, 'Data') } %>&nbsp;</span>
+          <% else %>
+            <span>&nbsp;</span>
+          <% end %>
+        </div>
+        <% if citation.doi.present? %>
+          <span class='doi-reference'><%=normalize_doi(citation.doi)%></span>
+        <% else %>
+          <span class='doi-reference'><%= "https://lter.kbs.msu.edu/pub/#{citation.id}" %></span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</li>

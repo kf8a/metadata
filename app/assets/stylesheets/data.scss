@@ -26,8 +26,7 @@
   // margin-top: -3px;
 }
 
-.citation-footer > .member-only,
-.citation-footer > .non-member {
+.citation-footer > div:first-child {
   flex: 2;
   min-width: 24px;
   min-height: 24px;
@@ -107,10 +106,6 @@
 
   .citation-hint {
     margin: 10px;
-  }
-
-  .member-only {
-    display: none;
   }
 
   .highlight {
@@ -519,16 +514,6 @@
   clip: rect(0, 0, 0, 0) !important;
   white-space: nowrap !important; /* prevent line breaks */
   border: 0 !important;
-}
-
-// Member-only links: both variants are in the cached citation HTML; the layout's
-// body class (rendered per request) decides which one shows.
-body.signed-in .member-only {
-  display: inline;
-}
-
-body.signed-in .non-member {
-  display: none;
 }
 
 // Long text that expands in place (DatatablesHelper#expandable_html)

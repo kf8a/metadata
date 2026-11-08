@@ -31,15 +31,6 @@ RSpec.describe 'Pages without the legacy jQuery plugins', type: :request do
     expect(tree.at('a[data-action="tree#toggleAll"][data-tree-target="toggleAll"]')).to be_present
   end
 
-  it 'marks the body for signed-in users only, outside any cached fragment' do
-    get datatables_path
-    expect(page.at('body')['class'].to_s.split).not_to include('signed-in')
-
-    sign_in FactoryBot.create(:user)
-    get datatables_path
-    expect(page.at('body')['class'].split).to include('signed-in')
-  end
-
   it 'decodes person emails with a Stimulus controller' do
     person = FactoryBot.create(:person, email: 'jane@example.org')
 
