@@ -1,0 +1,129 @@
+#!/bin/sh
+#
+# An example hook script to verify what is about to be committed.
+# Called by git-commit with no arguments.  The hook should
+# exit with non-zero status after issuing an appropriate message if
+# it wants to stop the commit.
+#
+# To enable this hook, make this file executable.
+
+# This is slightly modified from Andrew Morton's Perfect Patch.
+# Lines you introduce should not have trailing whitespace.
+# Also check for an indentation that has SP before a TAB.
+
+if git-rev-parse --verify HEAD 2>/dev/null
+then
+	git-diff-index -p -M --cached HEAD --
+else
+	# NEEDSWORK: we should produce a diff with an empty tree here
+	# if we want to do the same verification for the initial import.
+	:
+fi |
+perl -e '
+    my $found_bad = 0;
+    my $filename;
+    my $reported_filename = "";
+    my $lineno;
+    sub bad_line {
+	my ($why, $line) = @_;
+	if (!$found_bad) {
+	    print STDERR "*\n";
+	    print STDERR "* You have some suspicious patch lines:\n";
+	    print STDERR "*\n";
+	    $found_bad = 1;
+	}
+	if ($reported_filename ne $filename) {
+	    print STDERR "* In $filename\n";
+	    $reported_filename = $filename;
+	}
+	print STDERR "* $why (line $lineno)\n";
+	print STDERR "$filename:$lineno:$line\n";
+    }
+    while (<>) {
+	if (m|^diff --git a/(.*) b/\1$|) {
+	    $filename = $1;
+	    next;
+	}
+	if (/^@@ -\S+ \+(\d+)/) {
+	    $lineno = $1 - 1;
+	    next;
+	}
+	if (/^ /) {
+	    $lineno++;
+	    next;
+	}
+	if (s/^\+//) {
+	    $lineno++;
+	    chomp;
+	    if (/\s$/) {
+		bad_line("trailing whitespace", $_);
+	    }
+	    if (/^\s* \t/) {
+		bad_line("indent SP followed by a TAB", $_);
+	    }
+	    if (/^([<>])\1{6} |^={7}$/) {
+		bad_line("unresolved merge conflict", $_);
+	    }
+	}
+    }
+    exit($found_bad);
+'
+
+# --- BEGIN BEADS INTEGRATION v1.3.4 ---
+# This section is managed by beads. Do not remove these markers.
+if command -v bd >/dev/null 2>&1; then
+  export BD_GIT_HOOK=1
+  _bd_timeout=${BEADS_HOOK_TIMEOUT:-300}
+  case "$_bd_timeout" in
+    *[!0-9]*|'') _bd_timeout_invalid=1 ;;
+    *[1-9]*) _bd_timeout_invalid=0 ;;
+    *) _bd_timeout_invalid=1 ;;
+  esac
+  if [ "$_bd_timeout_invalid" -eq 1 ]; then
+    echo >&2 "beads: invalid BEADS_HOOK_TIMEOUT; using 300 seconds"
+    _bd_timeout=300
+  fi
+  _bd_timeout_backend=none
+  _bd_timeout_command=
+  for _bd_timeout_candidate in timeout gtimeout; do
+    if command -v "$_bd_timeout_candidate" >/dev/null 2>&1; then
+      if _bd_timeout_version="$("$_bd_timeout_candidate" --version 2>/dev/null)"; then
+        case "$_bd_timeout_version" in
+          "timeout (GNU coreutils) "*) _bd_timeout_command=$_bd_timeout_candidate; break ;;
+        esac
+      fi
+    fi
+  done
+  if [ -n "$_bd_timeout_command" ]; then
+    _bd_timeout_backend=coreutils
+    if "$_bd_timeout_command" -- "$_bd_timeout" bd hooks run pre-commit "$@"; then
+      _bd_exit=0
+    else
+      _bd_exit=$?
+    fi
+  elif command -v perl >/dev/null 2>&1; then
+    _bd_timeout_backend=perl
+    if perl -e 'alarm shift; exec @ARGV' -- "$_bd_timeout" bd hooks run pre-commit "$@"; then
+      _bd_exit=0
+    else
+      _bd_exit=$?
+    fi
+  else
+    echo >&2 "beads: hook 'pre-commit' running without timeout; install coreutils or perl to enable BEADS_HOOK_TIMEOUT"
+    if bd hooks run pre-commit "$@"; then
+      _bd_exit=0
+    else
+      _bd_exit=$?
+    fi
+  fi
+  if { [ "$_bd_timeout_backend" = coreutils ] && [ "$_bd_exit" -eq 124 ]; } || { [ "$_bd_timeout_backend" = perl ] && [ "$_bd_exit" -eq 142 ]; }; then
+    echo >&2 "beads: hook 'pre-commit' timed out after ${_bd_timeout}s — continuing without beads"
+    _bd_exit=0
+  fi
+  if [ "$_bd_exit" -eq 3 ]; then
+    echo >&2 "beads: database not initialized — skipping hook 'pre-commit'"
+    _bd_exit=0
+  fi
+  if [ "$_bd_exit" -ne 0 ]; then exit "$_bd_exit"; fi
+fi
+# --- END BEADS INTEGRATION v1.3.4 ---

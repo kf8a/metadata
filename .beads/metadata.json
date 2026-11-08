@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "metadata_rails",
+  "project_id": "e5e575e8-97b6-44e4-923d-dac179d35dcf"
+}

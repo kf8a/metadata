@@ -64,3 +64,10 @@ app/views/shared/_nav.html.erb
 lib/tasks/move_to_s3.rake
 LTERHub_Personnel_list_to_CSV/
 mise.toml
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key
+.beads/proxieddb/
+*.gate.lock*
