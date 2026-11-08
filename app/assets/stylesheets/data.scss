@@ -21,15 +21,103 @@
   padding-right: 0.5rem;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   font-size: 0.8rem;
   row-gap: 12px;
-  // margin-top: -3px;
 }
 
-.citation-footer > div:first-child {
+// WCAG 2.5.8 AA target size / spacing (24×24 CSS px)
+.citation-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
   flex: 2;
   min-width: 24px;
+
+  > li {
+    margin: 0;
+    padding: 0; // undo metadata `li ul li { padding-left: 1.5em }`
+  }
+}
+
+.citation-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 24px;
   min-height: 24px;
+  padding: 0.2rem 0.65rem;
+  border: 1px solid;
+  border-radius: 4px;
+  background: transparent;
+  text-decoration: none;
+  line-height: 1.2;
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+}
+
+.citation-link--abstract {
+  color: #4a5568;
+  border-color: #718096;
+
+  &:visited {
+    color: #4a5568;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background-color: rgba(74, 85, 104, 0.08);
+    color: #2d3748;
+  }
+}
+
+.citation-link--pdf,
+.citation-link--abstract-pdf {
+  color: #18453b;
+  border-color: #18453b;
+
+  &:visited {
+    color: #18453b;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background-color: rgba(24, 69, 59, 0.1);
+    color: #0f2e28;
+  }
+}
+
+.citation-link--abstract-pdf {
+  // same green family as pdf; slightly softer border so combined action reads quieter
+  border-color: #2f6f5e;
+  color: #2f6f5e;
+
+  &:visited {
+    color: #2f6f5e;
+  }
+}
+
+.citation-link--data {
+  color: #2b6cb0;
+  border-color: #2b6cb0;
+
+  &:visited {
+    color: #2b6cb0;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background-color: rgba(43, 108, 176, 0.1);
+    color: #1a4f86;
+  }
 }
 
 .citation_count {

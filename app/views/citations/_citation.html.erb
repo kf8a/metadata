@@ -25,25 +25,31 @@
     <% end %>
     <div>
       <div class="citation-footer">
-        <div>
+        <ul class="citation-links">
           <% cache([citation, user_signed_in? ? :member : :guest], action: 'index-links') do %>
             <% if citation.pdf.attached? && (citation.open_access || user_signed_in?) %>
-              <%= link_to 'abstract', citation_path(citation), aria: { label: citation_link_label(citation, 'Abstract') } %>
-              &nbsp;&nbsp;
-              <%= link_to 'pdf', publication_url(citation), aria: { label: citation_link_label(citation, 'PDF') } %>
+              <li><%= link_to 'abstract', citation_path(citation),
+                              class: 'citation-link citation-link--abstract',
+                              aria: { label: citation_link_label(citation, 'Abstract') } %></li>
+              <li><%= link_to 'pdf', publication_url(citation),
+                              class: 'citation-link citation-link--pdf',
+                              aria: { label: citation_link_label(citation, 'PDF') } %></li>
             <% elsif citation.pdf.attached? %>
-              <%= link_to 'abstract + pdf', citation_path(citation), aria: { label: citation_link_label(citation, 'Abstract and PDF') } %>
+              <li><%= link_to 'abstract + pdf', citation_path(citation),
+                              class: 'citation-link citation-link--abstract-pdf',
+                              aria: { label: citation_link_label(citation, 'Abstract and PDF') } %></li>
             <% else %>
-              <%= link_to 'abstract', citation_path(citation), aria: { label: citation_link_label(citation, 'Abstract') } %>
+              <li><%= link_to 'abstract', citation_path(citation),
+                              class: 'citation-link citation-link--abstract',
+                              aria: { label: citation_link_label(citation, 'Abstract') } %></li>
             <% end %>
           <% end %>
-          <span>&nbsp;</span>
           <% if citation.data_url.present? %>
-            <span>&nbsp;<%= link_to 'data', normalize_doi(citation.data_url), aria: { label: citation_link_label(citation, 'Data') } %>&nbsp;</span>
-          <% else %>
-            <span>&nbsp;</span>
+            <li><%= link_to 'data', normalize_doi(citation.data_url),
+                            class: 'citation-link citation-link--data',
+                            aria: { label: citation_link_label(citation, 'Data') } %></li>
           <% end %>
-        </div>
+        </ul>
         <% if citation.doi.present? %>
           <span class='doi-reference'><%=normalize_doi(citation.doi)%></span>
         <% else %>

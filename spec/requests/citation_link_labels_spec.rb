@@ -25,12 +25,12 @@ RSpec.describe 'Citation link labels', type: :request do
             &.at('.citation-footer')
   end
 
-  def link_texts(title)
-    citation_footer_by_title(title).css('a').map { |a| a.text.strip }
+  def listed_link_texts(title)
+    citation_footer_by_title(title).css('ul.citation-links > li > a').map { |a| a.text.strip }
   end
 
   def pdf_href(title)
-    citation_footer_by_title(title).css('a').find { |a| a.text.strip == 'pdf' }&.[]('href')
+    citation_footer_by_title(title).css('ul.citation-links > li > a').find { |a| a.text.strip == 'pdf' }&.[]('href')
   end
 
   before do
@@ -48,11 +48,19 @@ RSpec.describe 'Citation link labels', type: :request do
                               'Data: Nitrous oxide, Jones, J. 2020',
                               'Abstract: Soil carbon, Smith, J. 2020',
                               'PDF: Soil carbon, Smith, J. 2020')
-    expect(link_texts('Nitrous oxide')).to include('abstract + pdf', 'data')
-    expect(link_texts('Nitrous oxide')).not_to include('pdf')
-    expect(link_texts('Soil carbon')).to include('abstract', 'pdf')
+    expect(listed_link_texts('Nitrous oxide')).to eq(['abstract + pdf', 'data'])
+    expect(listed_link_texts('Soil carbon')).to eq(%w[abstract pdf])
+    expect(listed_link_texts('Cover crops')).to eq(%w[abstract])
     expect(response.body).not_to include('member-only', 'non-member')
+
+    nitrous = citation_footer_by_title('Nitrous oxide')
+    expect(nitrous.at('a.citation-link--abstract-pdf')['class']).to include('citation-link')
+    expect(nitrous.at('a.citation-link--data')).to be_present
+    soil = citation_footer_by_title('Soil carbon')
+    expect(soil.at('a.citation-link--abstract')).to be_present
+    expect(soil.at('a.citation-link--pdf')).to be_present
   end
+
 
   it 'gives members separate abstract and pdf links for non-open-access PDFs' do
     sign_in FactoryBot.create(:user)
@@ -63,8 +71,7 @@ RSpec.describe 'Citation link labels', type: :request do
                               'Abstract: Nitrous oxide, Jones, J. 2020',
                               'Data: Nitrous oxide, Jones, J. 2020')
     expect(labels).not_to include('Abstract and PDF: Nitrous oxide, Jones, J. 2020')
-    expect(link_texts('Nitrous oxide')).to include('abstract', 'pdf', 'data')
-    expect(link_texts('Nitrous oxide')).not_to include('abstract + pdf')
+    expect(listed_link_texts('Nitrous oxide')).to eq(%w[abstract pdf data])
     expect(pdf_href('Nitrous oxide')).to include(download_citation_path(@members_only_pdf))
   end
 
@@ -76,12 +83,11 @@ RSpec.describe 'Citation link labels', type: :request do
     Rails.cache = ActiveSupport::Cache::MemoryStore.new
 
     get citations_path
-    expect(link_texts('Nitrous oxide')).to include('abstract + pdf')
+    expect(listed_link_texts('Nitrous oxide')).to eq(['abstract + pdf', 'data'])
 
     sign_in FactoryBot.create(:user)
     get citations_path
-    expect(link_texts('Nitrous oxide')).to include('abstract', 'pdf')
-    expect(link_texts('Nitrous oxide')).not_to include('abstract + pdf')
+    expect(listed_link_texts('Nitrous oxide')).to eq(%w[abstract pdf data])
   ensure
     ActionController::Base.perform_caching = previous
     Rails.cache = previous_store
