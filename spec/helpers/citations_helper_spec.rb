@@ -3,6 +3,18 @@
 require 'rails_helper'
 
 RSpec.describe CitationsHelper, type: :helper do
+  describe '#web_url' do
+    it 'keeps web addresses' do
+      expect(helper.web_url('https://example.com/paper')).to eq 'https://example.com/paper'
+      expect(helper.web_url(' http://example.com ')).to eq 'http://example.com'
+    end
+
+    it 'drops anything else, and blanks' do
+      urls = ['javascript:alert(1)', 'JaVaScRiPt:alert(1)', 'data:text/html,<script>', '//example.com', 'example.com']
+      (urls + ['', ' ', nil]).each { |url| expect(helper.web_url(url)).to be_nil }
+    end
+  end
+
   describe '#normalize_doi' do
     it 'prefixes https:// when the value starts with doi.org/' do
       expect(helper.normalize_doi('doi.org/10.1234/foo')).to eq('https://doi.org/10.1234/foo')
