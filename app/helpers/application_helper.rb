@@ -4,6 +4,14 @@
 require 'commonmarker'
 
 module ApplicationHelper
+  # Inline formatting a title or citation may carry (N<sub>2</sub>O, <i>Zea mays</i>); anything else is
+  # removed, and no tag keeps its attributes
+  TITLE_TAGS = %w[sub sup em i strong b].freeze
+
+  def sanitized_title(title)
+    sanitize(title.to_s, tags: TITLE_TAGS, attributes: [])
+  end
+
   def markdown_to_html(text)
     return nil if text.blank?
 

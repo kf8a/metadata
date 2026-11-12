@@ -23,18 +23,11 @@ module PeopleHelper
     affiliations.flatten.uniq # .sort {|a,b| a.seniority <=> b.seniority }
   end
 
+  # <li>Committee: Name, Name</li>, each name linking to the person's page. Built as safe HTML, so the names
+  # are escaped and the view needs no raw.
   def show_committee(committee, role)
-    first_one = true
-    html = "<li>#{committee}:  "
-    committee_people = committee_affiliations(committee, role).collect(&:person)
-    committee_people.each do |person|
-      if first_one
-        first_one = false
-      else
-        html += ', '
-      end
-      html += link_to person.full_name.to_s, person_path(person)
-    end
-    "#{html}</li>"
+    people = committee_affiliations(committee, role).collect(&:person)
+    links = people.collect { |person| link_to(person.full_name.to_s, person_path(person)) }
+    tag.li(safe_join(["#{committee}:  ", safe_join(links, ', ')]))
   end
 end
