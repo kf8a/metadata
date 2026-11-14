@@ -110,8 +110,12 @@ FactoryBot.define do
     association :study
   end
 
+  sequence :unit_name do |n|
+    "per something #{n}"
+  end
+
   factory :unit do
-    name { 'per something' }
+    name { FactoryBot.generate(:unit_name) }
     label { 'something' }
   end
 
@@ -170,6 +174,8 @@ FactoryBot.define do
     abstract  { 'some new dataset' }
     dataset   { FactoryBot.generate(:dataset_text) }
     sponsor   { FactoryBot.build(:sponsor) }
+    # datasets.website_id is a foreign key that defaults to 1, so a dataset needs a real website to be saved
+    website   { Website.find_or_create_by!(name: 'lter') { |site| site.url = 'lter.kbs.msu.edu' } }
 
     factory :restricted_dataset do |_dataset|
       association :sponsor, factory: :restricted_sponsor
