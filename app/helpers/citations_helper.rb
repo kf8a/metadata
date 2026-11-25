@@ -12,6 +12,11 @@ module CitationsHelper
     "#{link}: #{strip_tags(citation.title.to_s).squish}, #{citation.author_and_year.to_s.squish.delete_suffix('.')}"
   end
 
+  # A link taken from a citation's record: only web addresses, never javascript: or data: URLs
+  def web_url(url)
+    url.to_s.strip.presence&.then { |address| address if address.match?(%r{\Ahttps?://}i) }
+  end
+
   def normalize_doi(doi)
     if doi.match?(%r{\Ahttps?://})
       doi

@@ -24,7 +24,7 @@
     :crumbs => [{:name => controller_name.upcase, :url =>  url_for(:controller => controller_name, :action => 'index')},
       {:name => @citation.short_author_string.upcase}] %>
   <h2>
-    <%= raw @citation.formatted(long: true) %>
+    <%= sanitized_title(@citation.formatted(long: true)) %>
     <% if @citation.doi.present? %>
       <span>DOI: <%= link_to @citation.doi, normalize_doi(@citation.doi) %></span>
     <% end %>
@@ -37,8 +37,8 @@
   <% end %>
   <p>
     <%= markdown_to_html @citation.abstract %></p>
-  <% unless @citation.publisher_url.try(:empty?) %>
-    <p><%= link_to "vist the Publishers website", @citation.publisher_url %></p>
+  <% if (publisher_url = web_url(@citation.publisher_url)) %>
+    <p><%= link_to "vist the Publishers website", publisher_url %></p>
   <% end %>
 
   <% if @citation.data_url.present? %>
